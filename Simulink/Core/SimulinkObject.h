@@ -15,11 +15,11 @@
 #ifndef SIMULINKOBJECT_H
 #define SIMULINKOBJECT_H
 
-#include "slxABINamespace.h"
-#include "slxErrorCode.h"
 #include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
+#include "slxABINamespace.h"
+#include "slxErrorCode.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN

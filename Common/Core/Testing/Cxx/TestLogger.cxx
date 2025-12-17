@@ -39,7 +39,7 @@ TEST_CASE("slxLogger file logging Test") {
   strcat(buffer, "/test.txt");
 
   slxLogger.logToFile(slxLogger::Verbosity::VERBOSITY_1, buffer, 1,
-                   "slxLogger file logging Test :: Hello Message");
+                      "slxLogger file logging Test :: Hello Message");
 
   std::ifstream f(buffer);
   CHECK(f.good());
@@ -51,7 +51,7 @@ TEST_CASE("slxLogger random file logging Test") {
   slxLogger.setInternalFileMode(File::Mode::Append);
   slxLogger::ErrorCode status_t =
       slxLogger.logToFile(slxLogger::Verbosity::VERBOSITY_1,
-                       "slxLogger file logging Test :: Hello Message");
+                          "slxLogger file logging Test :: Hello Message");
   CHECK(status_t == slxLogger::ErrorCode::Ok);
 }
 

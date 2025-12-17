@@ -15,8 +15,8 @@
 #ifndef SIMULINKSUBSYSTEM_H
 #define SIMULINKSUBSYSTEM_H
 
-#include "slxABINamespace.h"
 #include "SimulinkElementBase.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 
 SLXIO_NAMESPACE_BEGIN

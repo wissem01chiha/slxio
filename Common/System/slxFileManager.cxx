@@ -121,8 +121,8 @@ Index slxFileManager::getOpenedCount() {
 }
 
 wchar_t **slxFileManager::getTypesAsString() {
-     Index iFileIndex = 0;
-    wchar_t **pstTypes = nullptr;
+  Index iFileIndex = 0;
+  wchar_t **pstTypes = nullptr;
 
   //   pstTypes = new wchar_t *[getOpenedCount()];
   //   for (Index i = 0; i < static_cast<Index>(fileList.size()); i++) {
@@ -131,12 +131,12 @@ wchar_t **slxFileManager::getTypesAsString() {
   //     }
   //   }
 
-     return pstTypes;
+  return pstTypes;
 }
 
 wchar_t **slxFileManager::getFilenames() {
-   Index iFileIndex = 0;
-   wchar_t **pstFilenames = nullptr;
+  Index iFileIndex = 0;
+  wchar_t **pstFilenames = nullptr;
 
   // pstFilenames = (char **)malloc(getOpenedCount() * sizeof(char *));
   // for (Index i = 0; i < static_cast<Index>(fileList.size()); ++i) {
@@ -147,8 +147,7 @@ wchar_t **slxFileManager::getFilenames() {
   //     }
   // }
 
-   return pstFilenames;
-
+  return pstFilenames;
 }
 
 Float *slxFileManager::getModes() {

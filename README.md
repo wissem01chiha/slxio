@@ -1,9 +1,6 @@
 <p align="center">
   <img src="Documentation/logo/logo.png" alt="Project Logo" style="width:35%; height:auto;">
 </p>
-<p align="center">
-  <em>SIMULINK SLX File I/O Library</em>
-</p>
 
 <p align="center">
   <a href="https://github.com/wissem01chiha/syslink/actions/workflows/ubuntu.yml">
@@ -22,7 +19,6 @@
     <img src="https://github.com/wissem01chiha/syslink/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Status"/>
   </a>
 </p>
-
 
 <!-- omit in toc -->
 ## Table of Contents

@@ -15,8 +15,8 @@
 #ifndef MODELWORKSPACE_H
 #define MODELWORKSPACE_H
 
-#include "slxABINamespace.h"
 #include "DataSourceType.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <optional>
 #include <string>

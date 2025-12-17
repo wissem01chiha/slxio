@@ -15,8 +15,8 @@
 #ifndef SLXLOGGER_H
 #define SLXLOGGER_H
 
-#include "slxABINamespace.h"
 #include "File.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <ostream>
 

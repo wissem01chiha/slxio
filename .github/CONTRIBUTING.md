@@ -133,7 +133,7 @@ for more information : https://www.geeksforgeeks.org/git/branching-strategies-in
 runing clang format:
 dos2unix clang-format.sh
 
-C:\cygwin64\bin\bash.exe -l -c "/cygdrive/c/Users/chiha/OneDrive/Documents/github/syslink/Development/clang-format.sh"
+C:\cygwin64\bin\bash.exe -l -c "/cygdrive/c/Users/chiha/OneDrive/Documents/github/slxio/Development/clang-format.sh"
 
 ### Releases
 

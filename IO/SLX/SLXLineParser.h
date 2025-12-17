@@ -15,10 +15,10 @@
 #ifndef SLXLINEPARSER_H
 #define SLXLINEPARSER_H
 
-#include "slxABINamespace.h"
 #include "SLXParameterParser.h"
 #include "SLXParser.h"
 #include "SimulinkLine.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

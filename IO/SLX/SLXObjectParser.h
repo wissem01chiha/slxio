@@ -15,9 +15,9 @@
 #ifndef SLXOBJECTPARSER_H
 #define SLXOBJECTPARSER_H
 
-#include "slxABINamespace.h"
 #include "SLXParser.h"
 #include "SimulinkObject.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

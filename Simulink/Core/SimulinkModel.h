@@ -15,7 +15,6 @@
 #ifndef SIMULINKMODEL_H
 #define SIMULINKMODEL_H
 
-#include "slxABINamespace.h"
 #include "ModelWorkspace.h"
 #include "SimulationSettings.h"
 #include "SimulinkArray.h"
@@ -27,6 +26,7 @@
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPort.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

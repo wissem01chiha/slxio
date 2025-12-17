@@ -87,7 +87,9 @@ void slxLogger::Log(Verbosity level, const char *message) {
 #endif
 }
 
-void slxLogger::Log(const char *message) { Log(internalVerbosityLevel, message); }
+void slxLogger::Log(const char *message) {
+  Log(internalVerbosityLevel, message);
+}
 
 slxLogger &slxLogger::getInstance() {
   static slxLogger instance;
@@ -171,7 +173,8 @@ void slxLogger::setInternalFileMode(File::Mode mode) { filemode = mode; }
 void slxLogger::print(const char *message, std::ostream &os) { os << message; }
 
 slxLogger::ErrorCode slxLogger::logToFile(Verbosity verbosity, const char *path,
-                                    unsigned int linenum, const char *message) {
+                                          unsigned int linenum,
+                                          const char *message) {
 #ifdef LOGGER_USE_LOGURU
 
   loguru::add_file(path, static_cast<loguru::Mode>(filemode),
@@ -192,7 +195,8 @@ slxLogger::ErrorCode slxLogger::logToFile(Verbosity verbosity, const char *path,
 
 #elif defined(LOGGER_USE_SPDLOG)
 
-  auto slxLogger = spdlog::rotating_logger_mt("file_logger", path, 1048576 * 5, 3);
+  auto slxLogger =
+      spdlog::rotating_logger_mt("file_logger", path, 1048576 * 5, 3);
   auto slxLogger = spdlog::get("file_logger");
   return Ok;
 
@@ -206,7 +210,8 @@ slxLogger::ErrorCode slxLogger::logToFile(Verbosity verbosity, const char *path,
 #endif
 }
 
-slxLogger::ErrorCode slxLogger::logToFile(Verbosity verbosity, const char *message) {
+slxLogger::ErrorCode slxLogger::logToFile(Verbosity verbosity,
+                                          const char *message) {
 
   const size_t size = 1024;
   char buffer[size];

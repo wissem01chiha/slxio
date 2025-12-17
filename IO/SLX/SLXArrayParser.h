@@ -15,9 +15,9 @@
 #ifndef SLXARRAYPARSER_H
 #define SLXARRAYPARSER_H
 
-#include "slxABINamespace.h"
 #include "Parser.h"
 #include "SimulinkArray.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

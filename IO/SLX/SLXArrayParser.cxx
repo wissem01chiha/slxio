@@ -40,7 +40,8 @@ SLXArrayParser::SLXArrayParser() {
 //        nodePtr_ = nodePtr_->next) {
 
 //     if (nodePtr_->type == XML_ELEMENT_NODE &&
-//         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array) ==
+//         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array)
+//         ==
 //             0) {
 //       SLXArrayParser *subArrBuilderPtr = new SLXArrayParser();
 //       SimulinkErrorType status = subArrBuilderPtr->build(nodePtr_);

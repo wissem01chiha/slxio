@@ -15,8 +15,8 @@
 #ifndef SIMULINKPARAMETER_H
 #define SIMULINKPARAMETER_H
 
-#include "slxABINamespace.h"
 #include "CoderInfo.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <string>
 #include <vector>

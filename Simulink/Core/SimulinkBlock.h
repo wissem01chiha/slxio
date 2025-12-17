@@ -15,11 +15,11 @@
 #ifndef SIMULINKBLOCK_H
 #define SIMULINKBLOCK_H
 
-#include "slxABINamespace.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPortType.h"
+#include "slxABINamespace.h"
 #include <map>
 #include <memory>
 

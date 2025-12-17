@@ -27,7 +27,6 @@
  */
 class SLXEXPORT File {
 public:
-
   enum Type { Unknown = 0, Regular, Directory, Symlink };
 
   enum Mode { Truncate, Append, Read, Write };

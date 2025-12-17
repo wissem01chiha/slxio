@@ -24,7 +24,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class slxVersion {
 public:
-
   static uint32 getMajorVersion();
   static uint32 getMinorVersion();
   static uint32 getPatchVersion();

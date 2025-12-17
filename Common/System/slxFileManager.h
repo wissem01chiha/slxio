@@ -15,9 +15,9 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include "File.h"
 #include "slxAPIExport.h"
 #include "slxErrorCode.h"
-#include "File.h"
 #include "slxType.h"
 #include <list>
 #include <string>

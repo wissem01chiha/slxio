@@ -1,10 +1,10 @@
 #ifndef PORTLAYOUTDATA_H
 #define PORTLAYOUTDATA_H
 
-#include "slxABINamespace.h"
 #include "Color.h"
 #include "Point.h"
 #include "SlxioConfig.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN

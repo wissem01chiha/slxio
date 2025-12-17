@@ -15,10 +15,10 @@
 #ifndef LAYOUTDATA_H
 #define LAYOUTDATA_H
 
-#include "slxABINamespace.h"
 #include "Color.h"
 #include "RectangleLayoutDataBase.h"
 #include "RectangleType.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -30,9 +30,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class LayoutData : public RectangleTypeLayoutDataBase {
 public:
- LayoutData(const RectangleType &position,
-                       const Color &foregroundColor,
-                       const Color &backgroundColor, bool borderVisible)
+  LayoutData(const RectangleType &position, const Color &foregroundColor,
+             const Color &backgroundColor, bool borderVisible)
       : RectangleTypeLayoutDataBase(position, foregroundColor, backgroundColor),
         borderVisible_(borderVisible) {}
 

@@ -22,5 +22,4 @@ protected:
   Color backgroundColor_;
 };
 
-
 #endif // RectangleTypeLAYOUTDATABASE_H

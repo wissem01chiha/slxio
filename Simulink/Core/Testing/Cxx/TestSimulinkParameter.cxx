@@ -1,5 +1,5 @@
-#include "SimulinkParameter.h"
 #include "Doctest.h"
+#include "SimulinkParameter.h"
 
 class SimulinkParameterTestFixture {
 public:

@@ -15,10 +15,10 @@
 #ifndef SIMULINKPORT_H
 #define SIMULINKPORT_H
 
-#include "slxABINamespace.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

@@ -6,8 +6,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 slxErrorBuffer::slxErrorBuffer() {}
 
-void slxErrorBuffer::push_back(const slxErrorCode &code, const std::string &message) {
-}
+void slxErrorBuffer::push_back(const slxErrorCode &code,
+                               const std::string &message) {}
 
 uint32 slxErrorBuffer::getSize() const { return this->size; }
 

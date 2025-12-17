@@ -15,9 +15,9 @@
 #ifndef SLXERRORCODE_H
 #define SLXERRORCODE_H
 
-#include "slxType.h"
 #include "slxAPIExport.h"
 #include "slxErrorId.h"
+#include "slxType.h"
 
 /**
  * @class slxErrorCode

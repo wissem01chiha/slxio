@@ -15,8 +15,8 @@
 #ifndef SIMULINKELEMENTBASE_H
 #define SIMULINKELEMENTBASE_H
 
-#include "slxABINamespace.h"
 #include "SimulinkElementType.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <memory>
 #include <string>

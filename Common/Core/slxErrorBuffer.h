@@ -32,7 +32,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 // buffer.addError(slxErrorCode::ErrorId ::SLX_ERR_OPEN, "failed to open file");
 // buffer.addError(slxErrorCode::ErrorId ::SLX_ERR_INVALID_XML, "invalid xml
 // format"); uint32 errorCount = buffer.getSize(); / get the buffre size to
-// check if an error exist in the buffer if(buffer.contains(slxErrorCode::ErrorId
+// check if an error exist in the buffer
+// if(buffer.contains(slxErrorCode::ErrorId
 // ::SLX_ERR_OPEN)) { ... }
 //
 // how to use the buffer
@@ -51,8 +52,8 @@ public:
   ~slxErrorBuffer();
 
 private:
- // ErrorNode *head;
- // ErrorNode *tail;
+  // ErrorNode *head;
+  // ErrorNode *tail;
   uint32 size;
 };
 

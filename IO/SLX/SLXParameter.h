@@ -15,9 +15,9 @@
 #ifndef SLXPARAMETER_H
 #define SLXPARAMETER_H
 
-#include "slxABINamespace.h"
 #include "SLXConstant.h"
 #include "SLXElementBase.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <string>
 #include <vector>

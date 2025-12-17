@@ -15,9 +15,9 @@
 #ifndef SLXPARSER_H
 #define SLXPARSER_H
 
-#include "slxABINamespace.h"
 #include "LibXML2.h"
 #include "Parser.h"
+#include "slxABINamespace.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN

@@ -15,8 +15,8 @@
 #ifndef SIMULINKSIGNAL_H
 #define SIMULINKSIGNAL_H
 
-#include "slxABINamespace.h"
 #include "CoderInfo.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <vector>
 

@@ -1,5 +1,5 @@
-#include "SimulinkArray.h"
 #include "Doctest.h"
+#include "SimulinkArray.h"
 
 class SimulinkObjectTestFixture {
 public:

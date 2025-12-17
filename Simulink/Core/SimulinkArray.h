@@ -15,9 +15,9 @@
 #ifndef SIMULINKARRAY_H
 #define SIMULINKARRAY_H
 
-#include "slxABINamespace.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
+#include "slxABINamespace.h"
 #include "slxType.h"
 #include <memory>
 

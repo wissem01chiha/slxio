@@ -15,8 +15,8 @@
 #ifndef SDXMATRIX_H
 #define SDXMATRIX_H
 
-#include "slxAPIExport.h"
 #include "slxABINamespace.h"
+#include "slxAPIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

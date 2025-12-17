@@ -15,8 +15,8 @@
 #ifndef STATEFLOWELEMENTBASE_H
 #define STATEFLOWELEMENTBASE_H
 
-#include "slxABINamespace.h"
 #include "SimulinkElementBase.h"
+#include "slxABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

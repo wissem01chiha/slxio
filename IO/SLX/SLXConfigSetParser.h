@@ -15,10 +15,10 @@
 #ifndef SLXCONFIGSETPARSER_H
 #define SLXCONFIGSETPARSER_H
 
-#include "slxABINamespace.h"
 #include "LibXML2.h"
 #include "Parser.h"
 #include "SimulinkConfigSet.h"
+#include "slxABINamespace.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

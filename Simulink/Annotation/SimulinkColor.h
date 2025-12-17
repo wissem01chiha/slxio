@@ -26,5 +26,4 @@ Color vectToColor(std::vector<uint32> vec);
 
 std::vector<uint32> ColorToVec(Color p);
 
-
 #endif // SimulinkColor_H
