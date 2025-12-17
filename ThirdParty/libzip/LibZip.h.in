@@ -17,10 +17,10 @@
 
 #cmakedefine USE_EXTERNAL_LIBZIP
 
-#if defined(USE_EXTERNAL_LIBZIP)
-#include <zip.h>
+#ifdef USE_EXTERNAL_LIBZIP
+#include <libzip/zip.h>
 #else
-#include <src/zip.h>
+#include <src/lib/zip.h>
 #endif 
 
 #endif //  LIBZIP_H

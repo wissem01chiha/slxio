@@ -113,7 +113,7 @@ endfunction()
 #[==[.rst:
 .. cmake:function:: add_submodules(<directory>)
 
-  a wrapper around ``add_subdirectory`` to add multiple submodules.
+  A wrapper around ``add_subdirectory`` to add multiple submodules.
   .. code-block::cmake
 
     add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
@@ -132,9 +132,6 @@ endfunction()
 
   scan submodules to build a topological sorted structure for the
   ``add_submodules`` utility function
-  Note: External *r vendored modules as supposed to be standlone and they are not manged 
-  by this function , any remianing module taht relay on extranl identied third part is $
-  conisded as solved
 
   .. code-block::cmake
 
@@ -146,88 +143,77 @@ function(scan_submodules _sorted_list _modules_dir_list)
   set(_buffer ${_modules_dir_list})
 
   foreach(_mod_dir IN LISTS _buffer)
-
     scan_module_file(_module "${_mod_dir}/Module.txt")
     split_module_name(${_module_name} _module_prefix)
     set(_module_id "${_module_prefix_NAMESPACE}_${_module_prefix_MODULE_NAME}")
 
-    get_submodule_dependency("${_mod_dir}" _deps)
-    set(_deps_map_${_module_id} "${_deps}")
+    get_submodule_dependency("${_mod_dir}" _deps_raw)
 
-    set(_dir_map_${_module_id} "${_mod_dir}") 
+    set(_deps_ids "")
+    foreach(_d IN LISTS _deps_raw)
+      split_module_name(${_d} _dep_prefix)
+      set(_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
+      list(APPEND _deps_ids "${_dep_id}")
+    endforeach()
+
+    set(_dir_to_id_${_mod_dir} "${_module_id}")
+    set(_deps_map_${_module_id} "${_deps_ids}")
 
   endforeach()
 
-  while(_buffer)
-    set(_progress FALSE)
-    foreach(_mod_dir IN LISTS _buffer)
-
-      scan_module_file(_module "${_mod_dir}/Module.txt")
-      split_module_name(${_module_name} _module_prefix)
-      set(_module_id "${_module_prefix_NAMESPACE}_${_module_prefix_MODULE_NAME}")
-      
-      set(_deps "${_deps_map_${_module_id}}")
-      set(_deps_filter "")
-      foreach(_d IN LISTS _deps)
-        if(NOT _d MATCHES "^ThirdParty::")
-          list(APPEND _deps_filter "${_d}")
-        endif()
-      endforeach()
-
-      if("${_deps_filter}" STREQUAL "")
-
-        list(APPEND _tmp_sorted ${_mod_dir})
-        list(REMOVE_ITEM _buffer ${_mod_dir})
-        set(_progress TRUE)
-
-        foreach(_other_dir IN LISTS _buffer)
-          
-          scan_module_file(_other_module "${_other_dir}/Module.txt")
-          split_module_name(${_other_module_name} _other_module_prefix)
-          set(_other_id "${_other_module_prefix_NAMESPACE}_${_other_module_prefix_MODULE_NAME}")
-
-          set(_other_deps "${_deps_map_${_other_id}}")
-          list(REMOVE_ITEM _other_deps "${_module_name}")
-          set(_deps_map_${_other_id} "${_other_deps}")
-
-        endforeach()
-      endif()
-    endforeach()
-
-   if(NOT _progress)
-
-      foreach(_mod_dir IN LISTS _buffer)
-        set(_module_id "${_dir_to_id_${_mod_dir}}")
-        set(_module_name "${_dir_to_name_${_mod_dir}}")
-        set(_deps "${_deps_map_${_module_id}}")
-
-        set(_deps_blocking "")
-        foreach(_d IN LISTS _deps)
-          list(FIND _managed_names "${_d}" _idx)
-          if(NOT _idx EQUAL -1)
-            list(APPEND _deps_blocking "${_d}")
-          endif()
-        endforeach()
-
-      foreach(_mod_dir IN LISTS _buffer)
-        set(_module_id "${_dir_to_id_${_mod_dir}}")
-        set(_module_name "${_dir_to_name_${_mod_dir}}")
-        set(_deps "${_deps_map_${_module_id}}")
-      endforeach()
-
-      endforeach()
-      message(FATAL_ERROR "scan_submodules: cyclic or unresolved module dependencies.")
+  set(_queue)
+  foreach(_mod_dir IN LISTS _buffer)
+    set(_module_id "${_dir_to_id_${_mod_dir}}")
+    if("${_deps_map_${_module_id}}" STREQUAL "")
+      list(APPEND _queue "${_mod_dir}")
     endif()
+  endforeach()
+
+  while(_queue)
+
+    list(GET _queue 0 _mod_dir)
+    list(REMOVE_AT _queue 0)
+
+    set(_module_id "${_dir_to_id_${_mod_dir}}")
+
+    list(APPEND _tmp_sorted "${_mod_dir}")
+    list(REMOVE_ITEM _buffer "${_mod_dir}")
+
+    foreach(_other_dir IN LISTS _buffer)
+      set(_other_id "${_dir_to_id_${_other_dir}}")
+      set(_other_deps "${_deps_map_${_other_id}}")
+
+      list(REMOVE_ITEM _other_deps "${_module_id}")
+      set(_deps_map_${_other_id} "${_other_deps}")
+
+      if("${_other_deps}" STREQUAL "")
+        list(FIND _queue "${_other_dir}" _inq)
+        if(_inq EQUAL -1)
+          list(APPEND _queue "${_other_dir}")
+        endif()
+      endif()
+
+    endforeach()
   endwhile()
+
+  # unresolved modules
+  if(_buffer)
+    foreach(_mod_dir IN LISTS _buffer)
+      set(_module_id "${_dir_to_id_${_mod_dir}}")
+      message("Module ${_module_id} still depends on: ${_deps_map_${_module_id}}")
+    endforeach()
+    message(FATAL_ERROR "scan_submodules: cyclic or unresolved module dependencies.")
+  endif()
 
   set(${_sorted_list} ${_tmp_sorted} PARENT_SCOPE)
 endfunction()
+
 
 #[==[.rst:
 .. cmake:function:: get_submodule_dependency(<module_directory> <list>)
 
   scan the Module.txt file found in the <module_directory> variable
-  and set them in an ouput list
+  and fetch set them in an ouput list
 
   .. code-block::cmake
 
@@ -251,10 +237,9 @@ function(get_submodule_dependency module_dir dep_list)
   if(NOT "${_module_private_depends}" STREQUAL "")
     list(APPEND _deps ${_module_private_depends})
   endif()
-  set(${dep_list} "${_deps}" PARENT_SCOPE)
+  set(${dep_list} ${_deps} PARENT_SCOPE)
 
 endfunction()
-
 
 #[==[.rst:
 .. cmake:function:: configure_module([<input>...] <directory>)
@@ -463,6 +448,7 @@ endfunction()
 
 #[==[.rst:
   .. cmake:function:: add_module_dependencies(<module>)
+
     A wrapper around ``add_dependencies`` that works for modules.
     This function ensures that the given module depends on all its 
     declared public and private dependencies.
@@ -488,6 +474,7 @@ endfunction()
 
 #[==[.rst:
   .. cmake:function:: module_sources(<module> [<source>...])
+
     A wrapper around ``target_sources`` that works for modules.
 
     .. code-block:: cmake
@@ -505,6 +492,7 @@ endfunction()
 
 #[==[.rst:
   .. cmake:function:: module_classes(<module> [<class>...])
+
     A wrapper around ``target_sources`` that works only for module 
     classes.Classes are source files with `.cxx` extension.
 
@@ -524,6 +512,7 @@ endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_include_directories(<target_name> <prefix>)
+
   A wrapper around ``target_include_directories`` that works for modules.
   Note: as per cmake default behavior this function do not include nested files
   inside the module folder, so all nested headers within any subdir insid ethe module
@@ -582,6 +571,7 @@ endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_link_libraries(<module>)
+
   A wrapper around ``target_link_libraries`` that works for modules.
 
   .. code-block:: cmake
@@ -614,6 +604,7 @@ endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_add_compile_defintions(<module>)
+
   A wrapper around ``target_compile_definitions`` that works for modules.
 
   .. code-block:: cmake
@@ -630,6 +621,7 @@ endfunction()
 
 #[==[.rst:
 .. cmake:function:: add_module(<module_name>)
+
   Main wrapper for module declarations.
 
   ... code-block:: cmake
@@ -709,6 +701,7 @@ endfunction()
 
 #[==[.rst:
 .. cmake:function:: test_link_libraries(<test_target>)
+
   A wrapper around ``target_link_libraries`` that works for module test dependencies.
 
   test_link_libraries(Common)

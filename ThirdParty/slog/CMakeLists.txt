@@ -1,1 +1,1 @@
-add_module(ThirdParty::sLog)
+add_module(ThirdParty::slog)

@@ -57,13 +57,10 @@ mark_as_advanced(ENABLE_AVX)
 
 
 include(FindPythonModule)
-include(FindJavaModule)
-include(FindOctave)
 include(CheckCompilerSupport)
 include(CompilerFlags)
 include(CheckIncludes)
 include(CompilerWarningFlags)
-include(CheckLatexSupport)
 include(ABINamespace)
 include(Binding)
 include(ModuleRemote)

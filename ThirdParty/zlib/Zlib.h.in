@@ -12,12 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ZLIB_H
-#define ZLIB_H
+#ifndef _ZLIB_H_
+#define _ZLIB_H_
 
 #cmakedefine01 USE_EXTERNAL_ZLIB
 
-#if defined(USE_EXTERNAL_ZLIB)
+#ifdef USE_EXTERNAL_ZLIB
 #include <zconf.h>
 #include <zlib.h>
 #else
@@ -25,4 +25,4 @@
 #include <src/zlib.h>
 #endif
 
-#endif // ZLIB_H
+#endif // _ZLIB_H_
