@@ -1,0 +1,47 @@
+NAME
+  Common::Core
+DESCRIPTION
+  Core Common Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem CHIHA
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  TRUE
+ENABLE_DOC
+  FALSE
+ENABLE_BINDING
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
+CLASSES
+  slxVersion
+  slxTimer
+  slxLogger
+  slxErrorBuffer
+SOURCES
+HEADERS
+  slxLogger.h
+  slxErrorBuffer.h
+CONFIG_HEADERS
+  slxVersionMacro.h.in
+  slxABINamespace.h.in
+PUBLIC_DEPENDS
+  Common::System
+  ThirdParty::loguru
+  ThirdParty::sLog
+PRIVATE_DEPENDS
+PRIVATE_COMPILE_DEFINITIONS
+PUBLIC_COMPILE_DEFINITIONS
+TEST_DEPENDS
+  ThirdParty::doctest
+TEST_OPTIONAL_DEPENDS
+BINDING_DEPENDS
+BINDING_OPTIONAL_DEPENDS
+  

@@ -1,0 +1,10 @@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: SysDK
+Description: System Design and Verification Toolkit
+Version: @PROJECT_VERSION@
+Libs: -L${libdir} -lSDK
+Cflags: -I${includedir}

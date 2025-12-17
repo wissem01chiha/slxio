@@ -1,0 +1,48 @@
+// Copyright 2024-2026 Wissem Chiha
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef SIMULINKSIGNAL_H
+#define SIMULINKSIGNAL_H
+
+#include "slxABINamespace.h"
+#include "CoderInfo.h"
+#include "slxType.h"
+#include <vector>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class SimulinkSignal {
+public:
+  enum ErrorCode { Ok };
+  SimulinkSignal();
+
+private:
+  const char *InitialValue;
+  const char *DataType;
+  const char *Description;
+  const char *Unit;
+  const char *Complexity;
+  const char *DimensionsMode;
+  std::vector<uint16> Dimensions;
+  std::vector<Float> SampleTime;
+  Float Min;
+  Float Max;
+  CoderInfo coder;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKSIGNAL_H

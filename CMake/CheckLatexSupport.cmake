@@ -1,0 +1,7 @@
+message(STATUS "Checking if Latex is available")
+find_program(LATEX latex)
+if(LATEX)
+    message(STATUS "Checking if Latex is available - Success")
+else()
+    message(STATUS "Checking if Latex is available - Failure")
+endif()

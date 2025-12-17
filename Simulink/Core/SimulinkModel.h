@@ -1,0 +1,70 @@
+// Copyright 2024-2026 Wissem Chiha
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef SIMULINKMODEL_H
+#define SIMULINKMODEL_H
+
+#include "slxABINamespace.h"
+#include "ModelWorkspace.h"
+#include "SimulationSettings.h"
+#include "SimulinkArray.h"
+#include "SimulinkBlock.h"
+#include "SimulinkConfigSetManager.h"
+#include "SimulinkElementBase.h"
+#include "SimulinkLine.h"
+#include "SimulinkModelType.h"
+#include "SimulinkObject.h"
+#include "SimulinkParameter.h"
+#include "SimulinkPort.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+/** @brief A Simulink model  */
+class SimulinkModel : public SimulinkElementBase {
+public:
+  SimulinkModel();
+  SimulinkModel(SimulinkModelType Type);
+  SimulinkModel(const SimulinkModel &other);
+  SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
+  SimulinkElementType getType() const override;
+  uint32 getID() const override;
+  std::string toString() const override;
+  SimulinkErrorType remove(std::shared_ptr<SimulinkElementBase> element);
+  SimulinkErrorType add(std::shared_ptr<SimulinkElementBase> element);
+
+  SimulinkBlock getBlock(uint32 blockIdx);
+  SimulinkModelType getModelType();
+  std::shared_ptr<SimulinkConfigSetManager> getConfigurationManager();
+  std::shared_ptr<SimulationSettings> getSimulationSettings();
+  std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
+  uint32 getVersion();
+  bool contains(uint32 id) const override;
+
+private:
+  SimulinkModelType type;
+  uint32 modelId;
+  uint32 modelVersion;
+  ModelWorkspace workspace;
+  std::shared_ptr<SimulinkConfigSetManager> modelConfigSetMgr;
+  std::shared_ptr<SimulationSettings> modelSimSet;
+  std::vector<std::shared_ptr<SimulinkBlock>> blocks;
+  std::vector<std::shared_ptr<SimulinkLine>> lines;
+  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKMODEL_H

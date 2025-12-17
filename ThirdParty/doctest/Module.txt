@@ -1,0 +1,40 @@
+NAME
+  ThirdParty::doctest
+DESCRIPTION
+  Syslink Doctest Third Party Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem CHIHA
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  TRUE
+ENABLE_BUILD
+  TRUE
+ENABLE_DOCUMENTATION
+  FALSE
+ENABLE_BINDING
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
+CLASSES
+SOURCES
+  src/parts/doctest.cpp
+HEADERS
+  src/doctest.h
+  src/parts/doctest_fwd.h
+  src/extensions/doctest_mpi.h
+  src/extensions/doctest_util.h
+  src/extensions/mpi_reporter.h
+  src/extensions/mpi_sub_comm.h
+CONFIG_HEADERS
+  Doctest.h.in
+PUBLIC_DEPENDS
+PRIVATE_DEPENDS
+TEST_DEPENDS
+TEST_OPTIONAL_DEPENDS

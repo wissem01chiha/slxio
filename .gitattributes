@@ -1,0 +1,13 @@
+Testing/Data/** linguist-vendored
+Development/cinclude2dot.pl linguist-vendored
+
+ThirdParty/json-c/src/** linguist-vendored
+ThirdParty/libxml2/src/** linguist-vendored
+ThirdParty/slog/src/*** linguist-vendored
+ThirdParty/zlib/src/*** linguist-vendored
+ThirdParty/libzip/src/*** linguist-vendored
+ThirdParty/zlib/src/*.c linguist-vendored
+ThirdParty/zlib/src/*.h linguist-vendored
+ThirdParty/zlib/src/*.cmake linguist-vendored
+ThirdParty/libzip/src/*.c linguist-vendored
+ThirdParty/libzip/src/*.h linguist-vendored

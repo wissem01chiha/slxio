@@ -1,0 +1,38 @@
+// Copyright 2024-2026 Wissem Chiha
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+#ifndef LIBXML2_H
+#define LIBXML2_H
+
+#cmakedefine01 USE_EXTERNAL_LIBXML2
+
+#if USE_EXTERNAL_LIBXML2
+    #include <libxml/parser.h>
+    #include <libxml/tree.h>
+    #include <libxml/xmlerror.h>
+    #include <libxml/xpath.h>
+    #include <libxml/xpathInternals.h>
+    #include <libxml/xmlmemory.h>
+    #include <libxml/xmlstring.h>
+#else
+    #include <src/include/libxml/parser.h>
+    #include <src/include/libxml/tree.h>
+    #include <src/include/libxml/xmlerror.h>
+    #include <src/include/libxml/xpath.h>
+    #include <src/include/libxml/xpathInternals.h>
+    #include <src/include/libxml/xmlmemory.h>
+    #include <src/include/libxml/xmlstring.h>
+#endif
+
+#endif // LIBXML2_H

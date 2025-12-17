@@ -1,0 +1,81 @@
+# Copyright 2024-2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+#---------------------------------------------------------------------------
+# Project related configuration options
+#---------------------------------------------------------------------------
+DOXYFILE_ENCODING       = UTF-8
+PROJECT_NAME            = @PROJECT_NAME@
+PROJECT_NUMBER          = @PROJECT_VERSION@
+PROJECT_BRIEF           = 
+PROJECT_LOGO           =  
+PROJECT_ICON            =  
+OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
+OUTPUT_LANGUAGE         = English
+MARKDOWN_SUPPORT        = YES
+SHOW_NAMESPACES         = YES
+SEARCHENGINE            = YES
+RTF_HYPERLINKS          = YES
+FULL_SIDEBAR            = YES
+DISABLE_INDEX           = YES
+GENERATE_TREEVIEW       = YES
+HTML_COLORSTYLE         = 
+HTML_EXTRA_STYLESHEET   = ../doc/_assets/stylesheet.css 
+LAYOUT_FILE             = ../doc/_layouts/DoxygenLayout.xml
+#---------------------------------------------------------------------------
+# Build related configuration options
+#---------------------------------------------------------------------------
+EXTRACT_ALL             = YES
+RECURSIVE               = YES
+GENERATE_HTML           = YES
+GENERATE_LATEX          = NO
+
+#---------------------------------------------------------------------------
+# Configuration options related to the input files
+#---------------------------------------------------------------------------
+INPUT                  =  @DOXYGEN_INPUT@
+
+INPUT_ENCODING         = UTF-8
+FILE_PATTERNS          = *.c \
+                         *.cc \
+                         *.cpp \
+                         *.h \
+                         *.hpp \
+                         *.md \
+                         *.txt \
+                         *.dox 
+#---------------------------------------------------------------------------
+# configuration options for main page of the documentation
+#---------------------------------------------------------------------------
+#USE_MDFILE_AS_MAINPAGE = @MAINPAGE@
+HAVE_DOT               = YES
+INTERACTIVE_SVG        = YES
+DOT_IMAGE_FORMAT     = svg
+DOT_GRAPH_MAX_NODES  = 100
+CLASS_GRAPH          = YES
+COLLABORATION_GRAPH  = NO
+HIDE_UNDOC_RELATIONS = NO
+TEMPLATE_RELATIONS   = YES
+TOC_EXPAND           = YES
+INCLUDE_GRAPH        = YES
+INCLUDED_BY_GRAPH    = YES
+GENERATE_LEGEND      = NO
+GRAPHICAL_HIERARCHY  = YES        
+MAX_DOT_GRAPH_DEPTH  = 100
+USE_MATHJAX          = YES
+GENERATE_BUGLIST     = YES
+SHOW_INCLUDE_FILES   = YES
+HTML_COPY_CLIPBOARD  = YES
+

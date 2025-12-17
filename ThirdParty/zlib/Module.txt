@@ -1,0 +1,63 @@
+NAME
+  ThirdParty::zlib
+DESCRIPTION
+  Zlib Library Third Party Module
+LICENSE
+  Zlib-License
+VERSION
+  1.2.8
+MAINTAINER
+  Jean-loup Gailly and Mark Adler
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  TRUE
+ENABLE_BUILD
+  TRUE
+ENABLE_DOC
+  FALSE
+ENABLE_BINDING
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  FALSE
+CLASSES
+SOURCES
+  src/adler32.c
+  src/compress.c
+  src/crc32.c
+  src/deflate.c
+  src/gzclose.c
+  src/gzlib.c
+  src/gzread.c
+  src/gzwrite.c
+  src/inflate.c
+  src/infback.c
+  src/inftrees.c
+  src/inffast.c
+  src/trees.c
+  src/uncompr.c
+  src/zutil.c
+HEADERS
+  src/zconf.h
+  src/zlib.h
+  src/crc32.h
+  src/deflate.h
+  src/gzguts.h
+  src/inffast.h
+  src/inffixed.h
+  src/inflate.h
+  src/inftrees.h
+  src/trees.h
+  src/zutil.h
+CONFIG_HEADERS
+  Zlib.h.in
+PRIVATE_COMPILE_DEFINITIONS
+  _LARGEFILE_SOURCE
+PUBLIC_COMPILE_DEFINITIONS
+PUBLIC_DEPENDS
+PRIVATE_DEPENDS
+TEST_DEPENDS
+TEST_OPTIONAL_DEPENDS
+  

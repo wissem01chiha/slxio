@@ -1,0 +1,47 @@
+NAME 
+  Simulink::Library
+DESCRIPTION  
+  Syslink Core Common Module 
+LICENSE   
+  Apache-2.0 
+VERSION 
+  0.1.0 
+MAINTAINER 
+  Wissem CHIHA 
+ENABLE_BUILD 
+  TRUE 
+ENABLE_TESTING 
+  TRUE 
+ENABLE_BINDING 
+  TRUE 
+ENABLE_DOCUMENTATION 
+  FALSE 
+INSTALL_HEADERS 
+  TRUE 
+INSTALL_TARGETS 
+  TRUE 
+CLASSES
+  MtkVersion 
+  MtkErrorCode 
+  MtkLogger 
+SOURCES
+  src1.cxx
+PUBLIC_HEADERS
+  MtkErrorCode.h 
+  MtkCompiler.h 
+  MtkLogger.h 
+PRIVATE_HEADERS 
+  P4.h
+PUBLIC_CONFIG_HEADERS
+  MtkABINamespace.h.in 
+  MtkOptions.h.in 
+PRIVATE_CONFIG_HEADERS
+  MtkVersionMacros.h.in 
+PUBLIC_DEPENDS 
+
+PRIVATE_DEPENDS 
+
+TEST_DEPENDS 
+ Modulet1
+TEST_OPTIONAL_DEPENDS 
+
