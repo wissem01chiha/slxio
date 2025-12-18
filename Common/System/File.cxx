@@ -212,7 +212,7 @@ ErrorCode File::read(size_t buffsize) {
     if (!buffer)
       return ErrorCode::NoSpace;
   }
-  //size_t toRead = std::min(buffsize_, fsize_ - readOffset_);
+  size_t toRead = std::min(buffsize_, fsize_ - readOffset_);
 
 #ifdef _MSC_VER
   if (hFileMap_ == nullptr || lpMapAddress == nullptr || buffer == nullptr) {
