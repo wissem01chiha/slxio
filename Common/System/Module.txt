@@ -24,23 +24,23 @@ INSTALL_TARGETS
   TRUE
 CLASSES
   File
-  slxErrorCode
-  slxDirectory
-  slxMemory
-  slxFileManager
+  Error
+  Directory
+  Memory
+  FileManager
 SOURCES
 HEADERS
-  slxCompiler.h
-  slxPlatform.h
-  slxAPIExport.h
-  slxErrorId.h
-  slxErrorCode.h
-  slxType.h
+  Compiler.h
+  Platform.h
+  APIExport.h
+  ErrorCode.h
+  Error.h
+  Type.h
   File.h
-  slxDirectory.h
-  slxFileManager.h
+  Directory.h
+  FileManager.h
 CONFIG_HEADERS
-  slxOption.h.in
+  Option.h.in
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
 TEST_DEPENDS

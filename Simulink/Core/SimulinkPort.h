@@ -18,7 +18,9 @@
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -26,9 +28,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Base class for Simulink ports.
  */
-class SimulinkPort : public SimulinkElementBase {
+class APIEXPORT SimulinkPort : public SimulinkElementBase {
 public:
-  enum ErrorCode2 { Ok = 0, NotConnected };
   SimulinkPort();
   SimulinkPort(const SimulinkPort &other);
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);

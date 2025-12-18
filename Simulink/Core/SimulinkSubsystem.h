@@ -16,15 +16,16 @@
 #define SIMULINKSUBSYSTEM_H
 
 #include "SimulinkElementBase.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "ErrorCode.h"
+#include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkSubsystem {
+class APIEXPORT SimulinkSubsystem {
 public:
-  enum ErrorCode { Ok };
   SimulinkSubsystem();
   ~SimulinkSubsystem();
 

@@ -27,12 +27,12 @@ SimulinkElementType SimulinkLine::getType() const {
   return SimulinkElementType::Line;
 }
 
-SimulinkErrorType
+ErrorCode
 SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    slog_warn("Cannot remove a null Simulink element.");
-    return SimulinkErrorType::SLX_ERR_NULL_PTR;
+    //slog_warn("Cannot remove a null Simulink element.");
+    return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
   if (sourcePort != nullptr) {
@@ -44,15 +44,15 @@ SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
     destPort->remove(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return SimulinkErrorType::SLX_OK;
+  return ErrorCode::Ok;
 }
 
-SimulinkErrorType
+ErrorCode
 SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    slog_warn("Cannot add a null Simulink element.");
-    return SimulinkErrorType::SLX_ERR_NULL_PTR;
+    //slog_warn("Cannot add a null Simulink element.");
+    return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
   if (sourcePort != nullptr) {
@@ -64,7 +64,7 @@ SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
     destPort->add(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return SimulinkErrorType::SLX_OK;
+  return ErrorCode::Ok;
 }
 
 uint32 SimulinkLine::getID() const { return lineId; }

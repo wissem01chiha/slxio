@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "StateflowNodeBase.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

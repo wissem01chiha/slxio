@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "slxErrorBuffer.h"
+#include "ErrorBuffer.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

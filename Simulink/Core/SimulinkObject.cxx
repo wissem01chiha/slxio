@@ -1,5 +1,5 @@
 #include "SimulinkObject.h"
-#include "slxLogger.h"
+#include "Logger.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -68,7 +68,7 @@ std::string SimulinkObject::toString() const {
   return oss.str();
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
@@ -83,10 +83,10 @@ SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element) {
   //   //     "or Object to a SimulinkObject");
   //   return SimulinkErrorType::SLX_ERR_TYPE_MISMATCH;
   // }
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
@@ -129,7 +129,7 @@ SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element) {
         std::dynamic_pointer_cast<SimulinkArray>(element);
     this->arrays.push_back(arrayPtr);
   }
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
 bool SimulinkObject::contains(Index id) const {

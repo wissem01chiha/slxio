@@ -1,5 +1,5 @@
 #include "SimulinkArray.h"
-#include "slxLogger.h"
+#include "Logger.h"
 #include <algorithm>
 #include <sstream>
 
@@ -57,12 +57,12 @@ std::string SimulinkArray::toString() const {
   return oss.str();
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
 
   if (elment == nullptr) {
     // slog_warn("Cannot add a null Simulink element.");
-    return SimulinkElementBase::ErrorCode::ElementNotFound;
+    return ErrorCode::ElementNotFound;
   }
 
   if (elment->getType() == SimulinkElementType::Array) {
@@ -85,7 +85,7 @@ SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
         // slog_warn("SimulinkArray::subObject already exsists in the Base
         // array, "
         // "abort");
-        return SimulinkElementBase::ErrorCode::Ok;
+        return ErrorCode::Ok;
       }
     }
 
@@ -96,23 +96,23 @@ SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
     std::shared_ptr<SimulinkParameter> param =
         std::dynamic_pointer_cast<SimulinkParameter>(elment);
     parameters.push_back(param);
-    return SimulinkElementBase::ErrorCode::Ok;
+    return ErrorCode::Ok;
   } else {
     // slog_error("Cannot add a Simulink element of a different type than Array
     // "
     //            "or Object to a SimulinkObject");
-    return SimulinkElementBase::ErrorCode::InvalidElementType;
+    return ErrorCode::InvalidElementType;
   }
 
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
 
   if (elment == nullptr) {
     // slog_warn("Cannot remove a null Simulink element.");
-    return SimulinkElementBase::ErrorCode::ElementNotFound;
+    return ErrorCode::ElementNotFound;
   }
 
   if (elment->getType() == SimulinkElementType::Array) {
@@ -142,10 +142,10 @@ SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
     // slog_error(
     //     "Cannot remove a Simulink element of a different type than Array "
     //     "or Object to a SimulinkObject");
-    return SimulinkElementBase::ErrorCode::InvalidElementType;
+    return ErrorCode::InvalidElementType;
   }
 
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
 uint32 SimulinkArray::getID() const {

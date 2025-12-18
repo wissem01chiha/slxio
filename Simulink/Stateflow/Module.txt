@@ -1,7 +1,7 @@
 NAME 
   Simulink::Stateflow
 DESCRIPTION  
-  Syslink Core Common Module 
+  Simulink Stateflow Support Module 
 LICENSE   
   Apache-2.0 
 VERSION 
@@ -26,6 +26,7 @@ HEADERS
 CONFIG_HEADERS
 PUBLIC_DEPENDS 
 PRIVATE_DEPENDS 
+  Simulink::Core
 TEST_DEPENDS 
 TEST_OPTIONAL_DEPENDS 
 

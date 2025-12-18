@@ -16,7 +16,8 @@
 #define SIMULINKBLOCKTYPE_H
 
 #include "SimulinkElementType.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -24,7 +25,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Enumeration of Simulink block types.
  */
-class SimulinkBlockType final : public SimulinkElementType {
+class APIEXPORT SimulinkBlockType final : public SimulinkElementType {
 public:
   enum Type {
     DigitalClock,

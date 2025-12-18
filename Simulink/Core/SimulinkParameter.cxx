@@ -113,12 +113,12 @@ const char *SimulinkParameter::toString(ValueType vtype) {
 
 const char *SimulinkParameter::getName() { return Name; }
 
-SimulinkParameter::ErrorCode SimulinkParameter::setName(const char *name) {
+ErrorCode SimulinkParameter::setName(const char *name) {
   if (strcmp(name, "")) {
-    return InvalidArgument;
+    return ErrorCode::InvalidArgument;
   }
   Name = name;
-  return Ok;
+  return ErrorCode::Ok;
 }
 
 SLXIO_ABI_NAMESPACE_END

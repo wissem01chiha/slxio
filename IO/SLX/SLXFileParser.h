@@ -18,7 +18,7 @@
 #include "File.h"
 #include "Parser.h"
 #include "SLXFile.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 class SLXFileParser : public Parser {
 public:

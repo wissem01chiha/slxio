@@ -20,7 +20,10 @@ set(PROJECT_LOGO_PATH ${CMAKE_CURRENT_SOURCE_DIR}/logo/logo.png)
 set(DOXYGEN_LAYOUT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/layouts/DoxygenLayout.xml)
 
 set(DOXYGEN_INPUT "${PROJECT_SOURCE_DIR}/Common \
-                ${PROJECT_SOURCE_DIR}/Simulink/Core ${PROJECT_SOURCE_DIR}/README.md \
+                ${PROJECT_SOURCE_DIR}/IO \
+                ${PROJECT_SOURCE_DIR}/Simulink/Core \
+                ${PROJECT_SOURCE_DIR}/Simulink/Configuration \
+                 ${PROJECT_SOURCE_DIR}/README.md \
                 ${PROJECT_SOURCE_DIR}/Documentation ")
 
 set(MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
@@ -31,5 +34,3 @@ add_custom_target(documents ALL
     COMMENT "Generating ${PROJECT_NAME} API documentation with Doxygen"
     VERBATIM
 )
-
-#add_dependencies(documents ${PROJECT_NAME})

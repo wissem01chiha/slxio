@@ -15,13 +15,15 @@
 #ifndef SIMULINKELEMENTTYPE_H
 #define SIMULINKELEMENTTYPE_H
 
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkElementType {
+class APIEXPORT SimulinkElementType {
 public:
   enum Type {
     Base = 0,

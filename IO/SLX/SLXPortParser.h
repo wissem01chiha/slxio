@@ -17,7 +17,7 @@
 
 #include "SLXParser.h"
 #include "SimulinkPort.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 /**
  * @brief This class is responsible for building the ports of Simulink blocks as

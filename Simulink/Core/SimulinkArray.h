@@ -17,8 +17,8 @@
 
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -30,7 +30,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * SimulinkObject class. For object references, it maintains a list of object
  * IDs to avoid mutable inclusion, forward declarations, and compiler conflicts.
  */
-class SimulinkArray : public SimulinkElementBase {
+class APIEXPORT SimulinkArray final : public SimulinkElementBase {
 public:
   SimulinkArray();
   SimulinkArray(std::string type, std::string name, std::string dimension);
@@ -38,9 +38,9 @@ public:
   SimulinkArray &operator=(const SimulinkArray &) = delete;
   SimulinkElementType getType() const override;
   std::string toString() const override;
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   add(std::shared_ptr<SimulinkElementBase> elment) override;
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   remove(std::shared_ptr<SimulinkElementBase> elment) override;
   Index getID() const override;
   std::string getName();

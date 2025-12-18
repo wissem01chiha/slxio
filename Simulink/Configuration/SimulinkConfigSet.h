@@ -15,8 +15,9 @@
 #ifndef SIMULINKCONFIGSET_H
 #define SIMULINKCONFIGSET_H
 
-#include "slxABINamespace.h"
-#include "slxPlatform.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <memory>
 
 class SimulinkSolver;
@@ -30,7 +31,7 @@ class SimulinkRTW;
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkConfigSet {
+class APIEXPORT SimulinkConfigSet final {
 public:
   SimulinkConfigSet() = default;
   ~SimulinkConfigSet() = default;

@@ -15,8 +15,8 @@
 #ifndef SIMULINKPORTTYPE_H
 #define SIMULINKPORTTYPE_H
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -44,8 +44,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class SimulinkPortType {
 public:
-  enum ErrorCode { Ok = 0, InvalIndex, TypeMismatch };
-
   enum Type {
     INPORT = 0,
     OUTPORT = 1,

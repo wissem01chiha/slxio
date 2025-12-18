@@ -15,8 +15,9 @@
 #ifndef CODERINFO_H
 #define CODERINFO_H
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 
 /**
  * @class CoderInfo
@@ -27,10 +28,11 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class CoderInfo {
+class APIEXPORT CoderInfo final {
 public:
   CoderInfo();
   ~CoderInfo() = default;
+  const char *getStorageClass() const;
 
 private:
   const char *StorageClass;

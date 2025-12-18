@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "slxDirectory.h"
+#include "Directory.h"
 
 class sdxDirectoryTestFixture {
 public:

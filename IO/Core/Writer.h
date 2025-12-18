@@ -15,8 +15,8 @@
 #ifndef WRITER_H
 #define WRITER_H
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN

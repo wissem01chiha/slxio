@@ -16,8 +16,9 @@
 #define MODELWORKSPACE_H
 
 #include "DataSourceType.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -30,16 +31,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
  */
-class ModelWorkspace {
-
-  DataSourceType dataSource = DataSourceType::ModelFile;
-  std::string fileName = "";
-  std::string matlabCode = "";
-  std::unordered_map<std::string,
-                     std::variant<Float, uint32, bool, std::string>>
-      variables;
-
-  bool hasVariable(const std::string &name);
+class APIEXPORT ModelWorkspace final {
+public:
+  ModelWorkspace();
+  ~ModelWorkspace() = default;
 
   std::optional<std::variant<Float, uint32, bool, std::string>>
   getVariable(const std::string &name) const;
@@ -50,6 +45,13 @@ class ModelWorkspace {
   void clearVariable(const std::string &name);
 
   void clearAll();
+private:
+  DataSourceType dataSource = DataSourceType::ModelFile;
+  std::string fileName = "";
+  std::string matlabCode = "";
+  std::unordered_map<std::string,
+                     std::variant<Float, uint32, bool, std::string>>
+      variables;
 };
 
 SLXIO_ABI_NAMESPACE_END

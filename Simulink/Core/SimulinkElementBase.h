@@ -16,8 +16,10 @@
 #define SIMULINKELEMENTBASE_H
 
 #include "SimulinkElementType.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
+#include "Type.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -39,25 +41,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * should not inherit from this class.
  * @todo Separate base interfaces for concrete Simulink model elements and
  * implementation-specific elements.
- * @note this file do not provide implementation
+ * @note this file do not provide any implementation
  */
-class SimulinkElementBase {
+class APIEXPORT SimulinkElementBase {
 public:
-  /**
-   * @enum Generic error codes available to all elements inheriting from this
-   * class. Child classes may freely use these codes for common operations. For
-   * element-specific errors, subclasses should define their own local
-   * enumeration type to extend or refine the available error codes.
-   */
-  enum ErrorCode {
-    Ok = 0,
-    InvalidElementType,
-    InvalidElementID,
-    ElementNotFound,
-  };
   virtual ~SimulinkElementBase() = default;
   SimulinkElementBase(const SimulinkElementBase &) = delete;
   SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
+  
   virtual SimulinkElementType getType() const = 0;
   virtual Index getID() const = 0;
   virtual std::string toString() const = 0;
@@ -65,9 +56,9 @@ public:
 
 protected:
   SimulinkElementBase() = default;
-  virtual SimulinkElementBase::ErrorCode
+  virtual ErrorCode
   remove(const std::shared_ptr<SimulinkElementBase> element) = 0;
-  virtual SimulinkElementBase::ErrorCode
+  virtual ErrorCode
   add(const std::shared_ptr<SimulinkElementBase> element) = 0;
 };
 

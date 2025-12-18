@@ -16,17 +16,18 @@
 #define SIMULINKSIGNAL_H
 
 #include "CoderInfo.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkSignal {
+class APIEXPORT SimulinkSignal {
 public:
-  enum ErrorCode { Ok };
   SimulinkSignal();
+  ~SimulinkSignal() = default;
 
 private:
   const char *InitialValue;

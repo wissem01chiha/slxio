@@ -16,8 +16,10 @@
 #define SIMULINKPARAMETER_H
 
 #include "CoderInfo.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <string>
 #include <vector>
 
@@ -26,7 +28,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkParameter {
 public:
-  enum ErrorCode { Ok = 0, InvalidArgument };
   enum ValueType { Int, Double, String, Vector, Char };
 
   SimulinkParameter() = default;

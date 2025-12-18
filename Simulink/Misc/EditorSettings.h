@@ -15,13 +15,14 @@
 #ifndef EDITORSETTINGS_H
 #define EDITORSETTINGS_H
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class EditorSettings {
+class APIEXPORT EditorSettings final {
 public:
   EditorSettings();
 
@@ -52,7 +53,7 @@ private:
   bool ShowLinearizationAnnotations;
   bool ShowVisualizeInsertedRTB;
   bool ShowMarkup;
-  boolean BlockNameDataTip;
+  bool BlockNameDataTip;
   bool BlockParametersDataTip;
   bool BlockDescriptionStringDataTip;
   bool BlockVariantConditionDataTip;

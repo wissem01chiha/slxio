@@ -1,5 +1,5 @@
-# SysDK API getting started guide
+## Getting Started 
 
-## Prerequisites
+### Prerequisites
 
 Before you begin, ensure you:

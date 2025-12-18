@@ -12,12 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#ifndef SIMULINKDEBUGGING_H
+#define SIMULINKDEBUGGING_H
 
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
+
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkDebugging {
+class APIEXPORT SimulinkDebugging final {
 public:
   SimulinkDebugging();
 
@@ -135,3 +140,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKDEBUGGING_H

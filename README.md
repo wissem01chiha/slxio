@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Documentation/logo/logo.png" alt="Project Logo" style="width:45%; height:auto;">
+  <img src="Documentation/Doxygen/logo/logo.png" alt="Project Logo" style="width:45%; height:auto;">
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@
   - [2.1 Dependencies](#21-dependencies)
     - [2.1.1 zlib](#211-zlib)
     - [2.1.1 HDF5](#211-hdf5)
-  - [2.2 Building slxio](#22-building-slxio)
+  - [2.2 Building SLXIO](#22-building-slxio)
     - [2.2.1 Quick Build Guide](#221-quick-build-guide)
     - [2.2.2 Configure Options](#222-configure-options)
   - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
@@ -107,7 +107,10 @@ Support for compressed [SLX](), [JSON](), [MAT](), and [h5]() file formats requi
 
 Support for MATLAB [MAT](https://www.mathworks.com/help/pdf_doc/matlab/matfile_format.pdf) files, used for reading Simulink-related data structures, is provided through [matio](https://github.com/tbeu/matio), which itself requires the HDF5 library. Additionally, for serializing SLX files into standard `.h5` data files, SLXIO depends on the HDF5 library. If the library is not found, it is automatically fetched and built via CPM. However, it is recommended to use a prebuilt binary, as this significantly reduces the build and compilation time.
 
-### 2.2 Building slxio
+### 2.2 Building SLXIO 
+
+Building the library from source can be time‑consuming depending on your system configuration and setup.
+For a quicker installation, we recommend using the binary distribution for each platform
 
 #### 2.2.1 Quick Build Guide
 

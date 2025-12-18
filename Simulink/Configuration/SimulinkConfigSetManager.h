@@ -15,8 +15,8 @@
 #ifndef CONFIGSETMANAGER_H
 #define CONFIGSETMANAGER_H
 
-#include "slxABINamespace.h"
-#include "slxErrorCode.h"
+#include "ABINamespace.h"
+#include "ErrorCode.h"
 #include <memory>
 #include <vector>
 

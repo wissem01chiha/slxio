@@ -42,5 +42,4 @@ std::string SimulinkElementType::toString() {
 }
 
 SLXIO_ABI_NAMESPACE_END
-
 SLXIO_NAMESPACE_END

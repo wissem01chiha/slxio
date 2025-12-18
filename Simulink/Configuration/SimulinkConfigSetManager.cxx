@@ -11,7 +11,7 @@ SyslinkErrorCode
 SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
 
   this->configurations.push_back(cfg);
-  return SyslinkErrorCode::ErrorId::SLX_OK;
+  return SyslinkErrorCode::ErrorCode::SLX_OK;
 }
 
 SyslinkErrorCode

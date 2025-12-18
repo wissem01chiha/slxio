@@ -21,17 +21,17 @@ INSTALL_HEADERS
 INSTALL_TARGETS
   TRUE
 CLASSES
-  slxVersion
-  slxTimer
-  slxLogger
-  slxErrorBuffer
+  Version
+  Timer
+  Logger
+  ErrorBuffer
 SOURCES
 HEADERS
-  slxLogger.h
-  slxErrorBuffer.h
+  Logger.h
+  ErrorBuffer.h
 CONFIG_HEADERS
-  slxVersionMacro.h.in
-  slxABINamespace.h.in
+  VersionMacro.h.in
+  ABINamespace.h.in
 PUBLIC_DEPENDS
   Common::System
   ThirdParty::loguru

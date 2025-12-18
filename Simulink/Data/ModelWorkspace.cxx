@@ -1,0 +1,11 @@
+#include "ModelWorkspace.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+ModelWorkspace::ModelWorkspace() {}
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+

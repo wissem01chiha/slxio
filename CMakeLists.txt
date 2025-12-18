@@ -21,7 +21,8 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 #-----------------------------------------------------------------------------
-option(ENABLE_DOCUMENTATION "Enable documentation generation" ON)
+option(ENABLE_DOCUMENTATION "Enable documentation generation" OFF)
+mark_as_advanced(ENABLE_DOCUMENTATION)
 
 #-----------------------------------------------------------------------------
 option(TOP_LEVEL_BUILD "Enable top-level build" ${_is_top_level})

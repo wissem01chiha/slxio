@@ -15,8 +15,8 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <vector>
 
 SLXIO_ABI_NAMESPACE_BEGIN

@@ -4,8 +4,8 @@
 #include "Color.h"
 #include "Point.h"
 #include "SlxioConfig.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

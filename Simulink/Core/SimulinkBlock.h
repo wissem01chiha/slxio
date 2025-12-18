@@ -19,7 +19,9 @@
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPortType.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <map>
 #include <memory>
 
@@ -27,7 +29,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Simulink block */
-class SimulinkBlock : public SimulinkElementBase {
+class APIEXPORT SimulinkBlock final : public SimulinkElementBase {
 public:
   SimulinkBlock();
   ~SimulinkBlock() override;
@@ -38,9 +40,9 @@ public:
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
 
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   add(std::shared_ptr<SimulinkElementBase> element) override;
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   remove(std::shared_ptr<SimulinkElementBase> element) override;
   std::string toString() const override;
   SimulinkElementType getType() const override;

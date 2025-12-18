@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #include "File.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 #include <memory>
 #include <string>
 

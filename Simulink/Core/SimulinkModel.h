@@ -16,17 +16,19 @@
 #define SIMULINKMODEL_H
 
 #include "ModelWorkspace.h"
-#include "SimulationSettings.h"
 #include "SimulinkArray.h"
 #include "SimulinkBlock.h"
-#include "SimulinkConfigSetManager.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkLine.h"
 #include "SimulinkModelType.h"
+#include "SimulationSettings.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPort.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
+#include <memory>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -41,12 +43,12 @@ public:
   SimulinkElementType getType() const override;
   uint32 getID() const override;
   std::string toString() const override;
-  SimulinkErrorType remove(std::shared_ptr<SimulinkElementBase> element);
-  SimulinkErrorType add(std::shared_ptr<SimulinkElementBase> element);
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element);
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element);
 
   SimulinkBlock getBlock(uint32 blockIdx);
   SimulinkModelType getModelType();
-  std::shared_ptr<SimulinkConfigSetManager> getConfigurationManager();
+  //std::shared_ptr<SimulinkConfigSetManager> getConfigurationManager();
   std::shared_ptr<SimulationSettings> getSimulationSettings();
   std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
   uint32 getVersion();
@@ -57,7 +59,7 @@ private:
   uint32 modelId;
   uint32 modelVersion;
   ModelWorkspace workspace;
-  std::shared_ptr<SimulinkConfigSetManager> modelConfigSetMgr;
+  //std::shared_ptr<SimulinkConfigSetManager> modelConfigSetMgr;
   std::shared_ptr<SimulationSettings> modelSimSet;
   std::vector<std::shared_ptr<SimulinkBlock>> blocks;
   std::vector<std::shared_ptr<SimulinkLine>> lines;

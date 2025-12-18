@@ -1,6 +1,7 @@
 #include "SimulinkConfigSet.h"
 #include "SimulinkParameter.h"
-#include "slxLogger.h"
+#include "SimulinkObject.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

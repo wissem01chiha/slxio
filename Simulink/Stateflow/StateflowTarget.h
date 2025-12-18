@@ -16,7 +16,7 @@
 #define STATEFLOWTARGET_H
 
 #include "StateflowElementBase.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

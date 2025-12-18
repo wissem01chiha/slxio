@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "slxAPIExport.h"
-#include "slxCompiler.h"
-#include "slxErrorCode.h"
-#include "slxPlatform.h"
-#include "slxType.h"
+#include "APIExport.h"
+#include "Compiler.h"
+#include "ErrorCode.h"
+#include "Platform.h"
+#include "Type.h"
 #include <fstream>
 #include <string>
 
@@ -24,10 +24,12 @@
  * @brief Cross-platform File abstraction.
  * Provides basic file operations: open, read, write, map/unmap, rename, move.
  * Supports both stream-based and memory-mapped I/O.
+ * @todo this will be crefactored to Apache Portable Runtime (APR) file API library
  */
-class SLXEXPORT File {
+class APIEXPORT File {
 public:
-  enum Type { Unknown = 0, Regular, Directory, Symlink };
+  enum Type { Unknown = 0, Regular, Directory, Symlink, BlockDevice,
+              CharacterDevice, FIFO, Socket };
 
   enum Mode { Truncate, Append, Read, Write };
   File() = default;
@@ -42,14 +44,11 @@ public:
   File(File &&other) = delete;
 
   /// @brief move it into the internal stream_ member.
-  slxErrorId setInputStream(std::fstream &stream);
-
-  /// @brief Get the singleton instance
-  static File &getInstance();
+  ErrorCode setInputStream(std::fstream &stream);
 
   /// @brief Open the specified file with given mode
   /// @note set the internal mode and file size
-  slxErrorId open(File::Mode mode);
+  ErrorCode open(File::Mode mode);
 
   /**
    * @brief Lazy file reader routine.
@@ -62,20 +61,20 @@ public:
    * @note  This method does not automatically check or enforce full file size
    * coverage.
    */
-  slxErrorId read(size_t buffsize = 65536);
+  ErrorCode read(size_t buffsize = 65536);
 
   /// @brief Write data to the specified file region
   /// fsize_
-  slxErrorId write(const char *message);
+  ErrorCode write(const char *message);
 
   /// @brief Close specified file.
-  slxErrorId close();
+  ErrorCode close();
 
   /// @brief Copy the specified file to another file.
-  slxErrorId copy();
+  ErrorCode copy();
 
   /// @brief Append the specified file to another file.
-  slxErrorId append();
+  ErrorCode append();
 
   /**
    * @brief Rename the specified file.
@@ -83,7 +82,7 @@ public:
    * @example path_ = "rootdir/filename.txt" -> path_ =
    * "rootdir/newfilename.csv"
    */
-  slxErrorId rename(const char *filename);
+  ErrorCode rename(const char *filename);
 
   /// @brief Get the file name
   const std::string getFilename();
@@ -107,10 +106,10 @@ public:
   const char *getData();
 
   /// @brief Number of bytes actually read or written
-  size_t File::getNBytes() const;
+  size_t getNBytes() const;
 
   /// @brief Swap tow File objects
-  slxErrorId swap(File &other) noexcept;
+  ErrorCode swap(File &other) noexcept;
 
   /// @brief for compatibilty
   Float getFileSwap() const;
@@ -125,18 +124,18 @@ public:
   /// @brief move the file to other directory
   /// @details update path_ attribute
   /// @todo add a check if the given directory is fine
-  /// and the file exsits in it-> add spec slxErrorId
-  slxErrorId move(const char *dirpath);
+  /// and the file exsits in it-> add spec ErrorCode
+  ErrorCode move(const char *dirpath);
 
   /// @brief Cast file extension to a given one
   /// @note if it the same return an AlreadyExists
-  slxErrorId castFileExtension(const char *ext);
+  ErrorCode castFileExtension(const char *ext);
 
   /// @brief Get file size on disc in bytes
   size_t size() const;
 
   /// @brief Add the file to a given zip archive
-  slxErrorId toZip();
+  ErrorCode toZip();
 
   ~File() = default;
 
@@ -146,10 +145,10 @@ private:
    * @param writable Indicates whether the file should be mapped
    * as read‑only (false) or read‑write (true).
    */
-  slxErrorId map(bool writable = false);
+  ErrorCode map(bool writable = false);
 
   /// @brief Delete file mapping
-  slxErrorId unmap();
+  ErrorCode unmap();
 
   File::Mode mode_;
   File::Type type_;
@@ -166,10 +165,10 @@ private:
   size_t nbytes_;
   void *lpMapAddress = nullptr;
   size_t fsize_;
-#ifdef PLATFORM_WINDOWS
+#ifdef _MSC_VER
   HANDLE hFile_ = nullptr;
   HANDLE hFileMap_ = nullptr;
-  /// @brief for EOF immitataion on mapped file
+  /// @brief for EOF imitation on mapped file
   size_t readOffset_ = 0;
 #else
   uint8 fd_ = -1;

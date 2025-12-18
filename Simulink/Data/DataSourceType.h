@@ -15,14 +15,15 @@
 #ifndef DATASOURCETYPE_H
 #define DATASOURCETYPE_H
 
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-enum class DataSourceType { ModelFile, MatFile, MatlabCode, MatlabFile };
+enum class APIEXPORT DataSourceType { ModelFile, MatFile, MatlabCode, MatlabFile };
 
 SLXIO_ABI_NAMESPACE_END
-} // namespace syslink
+SLXIO_NAMESPACE_END
 
 #endif // DATASOURCETYPE_H

@@ -21,27 +21,39 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  SimulinkElementType
-  SimulinkSubsystem
+  SimulinkElementBase
+  SimulinkArray
+  SimulinkBlock
   SimulinkBlockType
+  SimulinkElementType
+  SimulinkLine
+  SimulinkModel
+  SimulinkModelType
+  SimulinkSubsystem
   SimulinkSignal
   SimulinkParameter  
-  SimulinkSubsystem 
-  SimulinkArray
   SimulinkPortType
   SimulinkPort
-  SimulinkBlock
   SimulinkObject
   SimulinkRoot
 SOURCES
 HEADERS
   SimulinkElementBase.h
+  SimulinkArray.h
+  SimulinkBlock.h
+  SimulinkBlockType.h
+  SimulinkModelType.h
+  SimulinkParameter.h
+  SimulinkPortType.h
+  SimulinkLine.h
 CONFIG_HEADERS
 PUBLIC_DEPENDS 
 PRIVATE_DEPENDS
   Common::Core
   Common::System
   Simulink::Misc
+  Simulink::Data
+  Simulink::Configuration
   ThirdParty::loguru
 TEST_DEPENDS 
   ThirdParty::doctest

@@ -18,8 +18,10 @@
 #include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "slxABINamespace.h"
-#include "slxErrorCode.h"
+#include "ABINamespace.h"
+#include "ErrorCode.h"
+#include "Type.h"
+#include "APIExport.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -29,15 +31,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Class for Simulink objects, which are a construct for structured
  * storage of meta-data in the model.
  */
-class SimulinkObject : public SimulinkElementBase {
+class APIEXPORT SimulinkObject : public SimulinkElementBase {
 public:
-  enum ErrorCode {
-    Ok = 0,
-    NullObjectPtr,
-    ObjectNotFound,
-    InvalidObjectType,
-    DuplicateObject
-  };
   SimulinkObject();
   virtual ~SimulinkObject() = default;
   SimulinkObject(const SimulinkObject &other);
@@ -49,9 +44,9 @@ public:
   SimulinkElementType getType() const override;
   Index getID() const override;
   std::string toString() const override;
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   remove(std::shared_ptr<SimulinkElementBase> element) override;
-  SimulinkElementBase::ErrorCode
+  ErrorCode
   add(std::shared_ptr<SimulinkElementBase> element) override;
   bool contains(Index id) const override;
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);

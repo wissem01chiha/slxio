@@ -1923,7 +1923,7 @@ const char *XMLDocument::_errorNames[XML_ERROR_COUNT] = {
 
 XMLDocument::XMLDocument(bool processEntities, Whitespace whitespaceMode)
     : XMLNode(0), _writeBOM(false), _processEntities(processEntities),
-      _errorID(XML_SUCCESS), _whitespaceMode(whitespaceMode), _errorStr(),
+      _ErrorCode(XML_SUCCESS), _whitespaceMode(whitespaceMode), _errorStr(),
       _errorLineNum(0), _charBuffer(0), _parseCurLineNum(0), _parsingDepth(0),
       _unlinked(), _elementPool(), _attributePool(), _textPool(),
       _commentPool() {
@@ -2056,18 +2056,18 @@ XMLError XMLDocument::LoadFile(const char *filename) {
   if (!filename) {
     TIXMLASSERT(false);
     SetError(XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=<null>");
-    return _errorID;
+    return _ErrorCode;
   }
 
   Clear();
   FILE *fp = callfopen(filename, "rb");
   if (!fp) {
     SetError(XML_ERROR_FILE_NOT_FOUND, 0, "filename=%s", filename);
-    return _errorID;
+    return _ErrorCode;
   }
   LoadFile(fp);
   fclose(fp);
-  return _errorID;
+  return _ErrorCode;
 }
 
 XMLError XMLDocument::LoadFile(FILE *fp) {
@@ -2076,7 +2076,7 @@ XMLError XMLDocument::LoadFile(FILE *fp) {
   TIXML_FSEEK(fp, 0, SEEK_SET);
   if (fgetc(fp) == EOF && ferror(fp) != 0) {
     SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
-    return _errorID;
+    return _ErrorCode;
   }
 
   TIXML_FSEEK(fp, 0, SEEK_END);
@@ -2087,7 +2087,7 @@ XMLError XMLDocument::LoadFile(FILE *fp) {
     TIXML_FSEEK(fp, 0, SEEK_SET);
     if (fileLengthSigned == -1L) {
       SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
-      return _errorID;
+      return _ErrorCode;
     }
     TIXMLASSERT(fileLengthSigned >= 0);
     filelength = static_cast<unsigned long long>(fileLengthSigned);
@@ -2100,12 +2100,12 @@ XMLError XMLDocument::LoadFile(FILE *fp) {
     // Cannot handle files which won't fit in buffer together with null
     // terminator
     SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
-    return _errorID;
+    return _ErrorCode;
   }
 
   if (filelength == 0) {
     SetError(XML_ERROR_EMPTY_DOCUMENT, 0, 0);
-    return _errorID;
+    return _ErrorCode;
   }
 
   const size_t size = static_cast<size_t>(filelength);
@@ -2114,30 +2114,30 @@ XMLError XMLDocument::LoadFile(FILE *fp) {
   const size_t read = fread(_charBuffer, 1, size, fp);
   if (read != size) {
     SetError(XML_ERROR_FILE_READ_ERROR, 0, 0);
-    return _errorID;
+    return _ErrorCode;
   }
 
   _charBuffer[size] = 0;
 
   Parse();
-  return _errorID;
+  return _ErrorCode;
 }
 
 XMLError XMLDocument::SaveFile(const char *filename, bool compact) {
   if (!filename) {
     TIXMLASSERT(false);
     SetError(XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=<null>");
-    return _errorID;
+    return _ErrorCode;
   }
 
   FILE *fp = callfopen(filename, "w");
   if (!fp) {
     SetError(XML_ERROR_FILE_COULD_NOT_BE_OPENED, 0, "filename=%s", filename);
-    return _errorID;
+    return _ErrorCode;
   }
   SaveFile(fp, compact);
   fclose(fp);
-  return _errorID;
+  return _ErrorCode;
 }
 
 XMLError XMLDocument::SaveFile(FILE *fp, bool compact) {
@@ -2146,7 +2146,7 @@ XMLError XMLDocument::SaveFile(FILE *fp, bool compact) {
   ClearError();
   XMLPrinter stream(fp, compact);
   Print(&stream);
-  return _errorID;
+  return _ErrorCode;
 }
 
 XMLError XMLDocument::Parse(const char *xml, size_t nBytes) {
@@ -2154,7 +2154,7 @@ XMLError XMLDocument::Parse(const char *xml, size_t nBytes) {
 
   if (nBytes == 0 || !xml || !*xml) {
     SetError(XML_ERROR_EMPTY_DOCUMENT, 0, 0);
-    return _errorID;
+    return _ErrorCode;
   }
   if (nBytes == static_cast<size_t>(-1)) {
     nBytes = strlen(xml);
@@ -2175,7 +2175,7 @@ XMLError XMLDocument::Parse(const char *xml, size_t nBytes) {
     _textPool.Clear();
     _commentPool.Clear();
   }
-  return _errorID;
+  return _ErrorCode;
 }
 
 void XMLDocument::Print(XMLPrinter *streamer) const {
@@ -2188,7 +2188,7 @@ void XMLDocument::Print(XMLPrinter *streamer) const {
 }
 
 void XMLDocument::ClearError() {
-  _errorID = XML_SUCCESS;
+  _ErrorCode = XML_SUCCESS;
   _errorLineNum = 0;
   _errorStr.Reset();
 }
@@ -2196,7 +2196,7 @@ void XMLDocument::ClearError() {
 void XMLDocument::SetError(XMLError error, int lineNum, const char *format,
                            ...) {
   TIXMLASSERT(error >= 0 && error < XML_ERROR_COUNT);
-  _errorID = error;
+  _ErrorCode = error;
   _errorLineNum = lineNum;
   _errorStr.Reset();
 
@@ -2205,8 +2205,8 @@ void XMLDocument::SetError(XMLError error, int lineNum, const char *format,
 
   TIXMLASSERT(sizeof(error) <= sizeof(int));
   TIXML_SNPRINTF(buffer, BUFFER_SIZE,
-                 "Error=%s ErrorID=%d (0x%x) Line number=%d",
-                 ErrorIDToName(error), static_cast<int>(error),
+                 "Error=%s ErrorCode=%d (0x%x) Line number=%d",
+                 ErrorCodeToName(error), static_cast<int>(error),
                  static_cast<unsigned int>(error), lineNum);
 
   if (format) {
@@ -2223,9 +2223,9 @@ void XMLDocument::SetError(XMLError error, int lineNum, const char *format,
   delete[] buffer;
 }
 
-/*static*/ const char *XMLDocument::ErrorIDToName(XMLError errorID) {
-  TIXMLASSERT(errorID >= 0 && errorID < XML_ERROR_COUNT);
-  const char *errorName = _errorNames[errorID];
+/*static*/ const char *XMLDocument::ErrorCodeToName(XMLError ErrorCode) {
+  TIXMLASSERT(ErrorCode >= 0 && ErrorCode < XML_ERROR_COUNT);
+  const char *errorName = _errorNames[ErrorCode];
   TIXMLASSERT(errorName && errorName[0]);
   return errorName;
 }
@@ -2236,7 +2236,7 @@ const char *XMLDocument::ErrorStr() const {
 
 void XMLDocument::PrintError() const { printf("%s\n", ErrorStr()); }
 
-const char *XMLDocument::ErrorName() const { return ErrorIDToName(_errorID); }
+const char *XMLDocument::ErrorName() const { return ErrorCodeToName(_ErrorCode); }
 
 void XMLDocument::Parse() {
   TIXMLASSERT(NoChildren()); // Clear() must have been called previously

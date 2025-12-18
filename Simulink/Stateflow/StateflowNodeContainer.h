@@ -15,7 +15,7 @@
 #ifndef ISTATEFLOWNODECONTAINER_H
 #define ISTATEFLOWNODECONTAINER_H
 
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 /**

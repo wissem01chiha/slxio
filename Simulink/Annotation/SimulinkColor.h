@@ -15,7 +15,7 @@
 #ifndef SimulinkColor_H
 #define SimulinkColor_H
 
-#include "slxPlatform.h"
+#include "Platform.h"
 #include <vector>
 
 typedef struct {

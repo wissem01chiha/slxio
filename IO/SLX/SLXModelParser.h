@@ -23,7 +23,7 @@
 #include "SimulinkObjectBuilder.h"
 #include "SimulinkParameterBuilder.h"
 #include "SimulinkPortBuilder.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

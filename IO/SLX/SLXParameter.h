@@ -17,8 +17,8 @@
 
 #include "SLXConstant.h"
 #include "SLXElementBase.h"
-#include "slxABINamespace.h"
-#include "slxType.h"
+#include "ABINamespace.h"
+#include "Type.h"
 #include <string>
 #include <vector>
 

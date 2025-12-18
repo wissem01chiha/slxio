@@ -1,6 +1,7 @@
 #include "SimulinkModel.h"
-#include "SyslinkLogger.h"
+#include "Logger.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModel::SimulinkModel() {}
@@ -10,7 +11,7 @@ SimulinkModel::SimulinkModel(SimulinkModelType Type) : type(Type) {}
 SimulinkModel::SimulinkModel(const SimulinkModel &other) {
 
   this->lines = other.lines;
-  this->modelConfigSetMgr = other.modelConfigSetMgr;
+  //this->modelConfigSetMgr = other.modelConfigSetMgr;
   this->modelId = other.modelId;
   this->modelSimSet = other.modelSimSet;
   this->modelVersion = other.modelVersion;
@@ -31,17 +32,17 @@ SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx) {
       return *blk;
     }
   }
-  slog_warn("Block (Index) %d not found in model (Index) %s", blockIdx,
-            modelId);
+  // slog_warn("Block (Index) %d not found in model (Index) %s", blockIdx,
+  //           modelId);
   return SimulinkBlock();
 }
 
 SimulinkModelType SimulinkModel::getModelType() { return type; }
 
-std::shared_ptr<SimulinkConfigSetManager>
-SimulinkModel::getConfigurationManager() {
-  return modelConfigSetMgr;
-}
+// std::shared_ptr<SimulinkConfigSetManager>
+// SimulinkModel::getConfigurationManager() {
+//   return modelConfigSetMgr;
+// }
 
 std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings() {
   return modelSimSet;
@@ -56,3 +57,4 @@ uint32 SimulinkModel::getVersion() { return modelVersion; }
 bool SimulinkModel::contains(uint32 id) const { return bool(); }
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

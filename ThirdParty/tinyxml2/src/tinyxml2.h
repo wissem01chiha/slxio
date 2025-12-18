@@ -1643,7 +1643,7 @@ public:
   /**
       Parse an XML file from a character string.
       Returns XML_SUCCESS (0) on success, or
-      an errorID.
+      an ErrorCode.
 
       You may optionally pass in the 'nBytes', which is
       the number of bytes which will be parsed. If not
@@ -1655,7 +1655,7 @@ public:
   /**
       Load an XML file from disk.
       Returns XML_SUCCESS (0) on success, or
-      an errorID.
+      an ErrorCode.
   */
   XMLError LoadFile(const char *filename);
 
@@ -1668,14 +1668,14 @@ public:
       do newline normalization.
 
       Returns XML_SUCCESS (0) on success, or
-      an errorID.
+      an ErrorCode.
   */
   XMLError LoadFile(FILE *);
 
   /**
       Save the XML file to disk.
       Returns XML_SUCCESS (0) on success, or
-      an errorID.
+      an ErrorCode.
   */
   XMLError SaveFile(const char *filename, bool compact = false);
 
@@ -1684,7 +1684,7 @@ public:
       for providing and closing the FILE*.
 
       Returns XML_SUCCESS (0) on success, or
-      an errorID.
+      an ErrorCode.
   */
   XMLError SaveFile(FILE *fp, bool compact = false);
 
@@ -1769,11 +1769,11 @@ public:
   void ClearError();
 
   /// Return true if there was an error parsing the document.
-  bool Error() const { return _errorID != XML_SUCCESS; }
-  /// Return the errorID.
-  XMLError ErrorID() const { return _errorID; }
+  bool Error() const { return _ErrorCode != XML_SUCCESS; }
+  /// Return the ErrorCode.
+  XMLError ErrorCode() const { return _ErrorCode; }
   const char *ErrorName() const;
-  static const char *ErrorIDToName(XMLError errorID);
+  static const char *ErrorCodeToName(XMLError ErrorCode);
 
   /** Returns a "long form" error description. A hopefully helpful
       diagnostic with location, line number, and/or additional info.
@@ -1817,7 +1817,7 @@ private:
 
   bool _writeBOM;
   bool _processEntities;
-  XMLError _errorID;
+  XMLError _ErrorCode;
   Whitespace _whitespaceMode;
   mutable StrPair _errorStr;
   int _errorLineNum;

@@ -1,5 +1,5 @@
 #include "SimulinkPort.h"
-#include "slxLogger.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -22,14 +22,14 @@ std::string SimulinkPort::toString() const {
   return std::string("OK");
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkPort::remove(std::shared_ptr<SimulinkElementBase> elment) {
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
-SimulinkElementBase::ErrorCode
+ErrorCode
 SimulinkPort::add(std::shared_ptr<SimulinkElementBase> elment) {
-  return SimulinkElementBase::ErrorCode::Ok;
+  return ErrorCode::Ok;
 }
 
 bool SimulinkPort::isConnected() { return true; }

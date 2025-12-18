@@ -15,15 +15,21 @@
 #ifndef SIMULINKMODELTYPE_H
 #define SIMULINKMODELTYPE_H
 
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 #include <string>
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-enum class SimulinkModelType { Library, Model };
-
-std::string toString(SimulinkModelType type);
+/**
+ * @brief Represents the type of a Simulink model.
+ */
+class APIEXPORT SimulinkModelType { 
+public:
+    enum Type {Library, Model };
+    static std::string toString(SimulinkModelType::Type type);
+};
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

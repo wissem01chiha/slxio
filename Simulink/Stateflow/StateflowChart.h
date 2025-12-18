@@ -19,7 +19,7 @@
 #include "StateflowElementBase.h"
 #include "StateflowMachine.h"
 #include "StateflowNodeBase.h"
-#include "slxABINamespace.h"
+#include "ABINamespace.h"
 #include <vector>
 
 SLXIO_ABI_NAMESPACE_BEGIN

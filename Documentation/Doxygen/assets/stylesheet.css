@@ -690,14 +690,14 @@ HEADER
   margin: 0;
 }
 
-.drake-logo {
+/* .drake-logo {
   margin: 0 0 5px;
   padding: 0 2.4em;
 }
 
 .drake-logo img {
   width: 200px;
-}
+} */
 
 .site-menu ul {
   display: flex;
@@ -814,7 +814,7 @@ HEADER
     max-width: none;
   }
 
-  .drake-logo {
+  /* .drake-logo {
     position: relative;
     z-index: 2;
   }
@@ -822,7 +822,7 @@ HEADER
   .drake-logo img {
     width: 175px;
     max-width: 40vw;
-  }
+  } */
 
   .site-menu {
     opacity: 0;
