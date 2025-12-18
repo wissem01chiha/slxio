@@ -1,4 +1,4 @@
-// Copyright 2024-2026 Wissem Chiha
+// Copyright 2025-2026 Wissem Chiha
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef LIBZIP_H
-#define LIBZIP_H
+#ifndef _LIBZIP_H_
+#define _LIBZIP_H_
 
 #cmakedefine USE_EXTERNAL_LIBZIP
 
@@ -23,4 +23,4 @@
 #include <src/lib/zip.h>
 #endif 
 
-#endif //  LIBZIP_H
+#endif //  _LIBZIP_H_

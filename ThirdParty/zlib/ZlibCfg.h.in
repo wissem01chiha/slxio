@@ -1,4 +1,4 @@
-// Copyright 2024-2026 Wissem Chiha
+// Copyright 2025-2026 Wissem Chiha
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef _ZLIB_H_
-#define _ZLIB_H_
+#ifndef ZLIBCFG_H
+#define ZLIBCFG_H
 
 #cmakedefine01 USE_EXTERNAL_ZLIB
 
@@ -25,4 +25,4 @@
 #include <src/zlib.h>
 #endif
 
-#endif // _ZLIB_H_
+#endif // ZLIBCFG_H

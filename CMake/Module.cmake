@@ -620,6 +620,56 @@ function(module_add_compile_defintions module)
 endfunction()
 
 #[==[.rst:
+.. cmake:function:: module_add_cmake_modules ()
+
+  A wrapper around ``add_cmake_modules`` that works for modules.
+  This function let modules register their cmake modules to be
+  available globally, cmake local module folder are list in Module.txt
+  under CMAKE_MODULES_DIRS key, this function shoule be invoked before
+  add_submodules to make sure all modules cmake modules are available
+  return a list of all cmake modules paths to added to CMAKE_MODULE_PATH
+  in the parent scope.
+
+  Example:  
+    CMAKE_MODULES_DIRS
+      cmake/
+      cmake-compact/
+
+  .. code-block:: cmake
+
+    module_add_cmake_modules(${CMAKE_CURRENT_SOURCE_DIR})
+  
+  sets in parent scope:
+   - MODULES_CMAKE_DIRS
+#]==]
+function(module_add_cmake_modules directory)
+
+  find_modules(_submodules_directory_list ${directory} _module_cmake_paths)
+  foreach(_submodule_directory IN LISTS _submodules_directory_list)
+    scan_module_file(MODULE "${_submodule_directory}/Module.txt")
+    if(DEFINED MODULE_cmake_modules_dirs AND NOT "${MODULE_cmake_modules_dirs}" STREQUAL "")
+      foreach(module_cmake_dir IN LISTS MODULE_cmake_modules_dirs)
+        # check if the path is a valid directory
+        if(NOT IS_DIRECTORY "${_submodule_directory}/${module_cmake_dir}")
+          message(FATAL_ERROR "CMake module dir not found: ${_submodule_directory}/${module_cmake_dir}")  
+        else()
+          list(APPEND _module_cmake_paths
+            "${_submodule_directory}/${module_cmake_dir}")
+            set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};
+              ${_submodule_directory}/${module_cmake_dir}" PARENT_SCOPE
+            )
+        endif()
+        # reset the MODULE_cmake_modules_dirs variable to avoid re-adding paths
+        set(MODULE_cmake_modules_dirs "")
+        set(MODULES_CMAKE_DIRS "${_module_cmake_paths}" PARENT_SCOPE)
+      endforeach()
+    endif() 
+  endforeach()
+
+endfunction()
+
+
+#[==[.rst:
 .. cmake:function:: add_module(<module_name>)
 
   Main wrapper for module declarations.

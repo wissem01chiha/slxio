@@ -1,4 +1,4 @@
-// Copyright 2024-2026 Wissem Chiha
+// Copyright 2025-2026 Wissem Chiha
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,21 +18,17 @@
 #cmakedefine USE_EXTERNAL_APR
 
 #ifdef USE_EXTERNAL_APR
-
 #include <apr_general.h>   
 #include <apr_pools.h>   
 #include <apr_errno.h>    
 #include <apr_file_io.h>    
 #include <apr_strings.h>   
-
 #else
-
 #include <src/include/apr_general.h>   
 #include <src/include/apr_pools.h>   
 #include <src/include/apr_errno.h>    
 #include <src/include/apr_file_io.h>    
 #include <src/include/apr_strings.h> 
-
 #endif 
 
 #endif //  APR_H

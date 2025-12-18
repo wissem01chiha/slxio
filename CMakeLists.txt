@@ -21,6 +21,9 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
 endif()
 
 #-----------------------------------------------------------------------------
+option(ENABLE_DOCUMENTATION "Enable documentation generation" ON)
+
+#-----------------------------------------------------------------------------
 option(TOP_LEVEL_BUILD "Enable top-level build" ${_is_top_level})
 mark_as_advanced(TOP_LEVEL_BUILD)
 
@@ -75,6 +78,11 @@ if(ENABLE_AVX)
     avx_compile_options(AVX_COMPILE_OPTIONS) #for testing
 endif()
 
+# Add cmake modules from all submodules 
+module_add_cmake_modules(${CMAKE_CURRENT_SOURCE_DIR})
+list(APPEND CMAKE_MODULE_PATH ${MODULES_CMAKE_DIRS})
+
+# Add all submodules
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 include(Testing)

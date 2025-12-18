@@ -71,7 +71,7 @@ void _zip_string_free(zip_string_t *s) {
 
 const zip_uint8_t *_zip_string_get(zip_string_t *string, zip_uint32_t *lenp,
                                    zip_flags_t flags, zip_error_t *error) {
-  static const zip_uint8_t empty[1] = "";
+  static const zip_uint8_t empty[1] = {0};
 
   if (string == NULL) {
     if (lenp)

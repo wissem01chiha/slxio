@@ -10,6 +10,7 @@ option("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE"
 "Use vendored third party libraries in ${PROJECT_NAME}" ON)
 mark_as_advanced("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE")
 
+
 function (use_if_available module)
     find_package(${module} QUIET)
     if(NOT ${module}_FOUND)

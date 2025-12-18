@@ -1,4 +1,4 @@
-// Copyright 2024-2026 Wissem Chiha
+// Copyright 2025-2026 Wissem Chiha
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/// @brief  Manage the version of the library.
 class slxVersion {
 public:
   static uint32 getMajorVersion();

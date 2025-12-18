@@ -142,6 +142,9 @@ CONFIG_HEADERS
   src/zipconf.h.in
   src/config.h.in
   LibZip.h.in
+CMAKE_MODULES_DIRS
+  src/cmake
+  src/cmake-compat
 PRIVATE_COMPILE_DEFINITIONS
   _LARGEFILE_SOURCE
 PUBLIC_COMPILE_DEFINITIONS

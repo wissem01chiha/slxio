@@ -1,4 +1,4 @@
-# Copyright 2024-2026 Wissem Chiha
+# Copyright 2025-2026 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ DOXYFILE_ENCODING       = UTF-8
 PROJECT_NAME            = @PROJECT_NAME@
 PROJECT_NUMBER          = @PROJECT_VERSION@
 PROJECT_BRIEF           = 
-PROJECT_LOGO           =  
+PROJECT_LOGO            = @PROJECT_LOGO_PATH@
 PROJECT_ICON            =  
 OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
 OUTPUT_LANGUAGE         = English
@@ -32,8 +32,9 @@ FULL_SIDEBAR            = YES
 DISABLE_INDEX           = YES
 GENERATE_TREEVIEW       = YES
 HTML_COLORSTYLE         = 
-HTML_EXTRA_STYLESHEET   = ../doc/_assets/stylesheet.css 
-LAYOUT_FILE             = ../doc/_layouts/DoxygenLayout.xml
+HTML_EXTRA_STYLESHEET   = @DOXYGEN_EXTRA_STYLESHEET@
+LAYOUT_FILE             = @DOXYGEN_LAYOUT_FILE@
+
 #---------------------------------------------------------------------------
 # Build related configuration options
 #---------------------------------------------------------------------------
@@ -48,7 +49,7 @@ GENERATE_LATEX          = NO
 INPUT                  =  @DOXYGEN_INPUT@
 
 INPUT_ENCODING         = UTF-8
-FILE_PATTERNS          = *.c \
+FILE_PATTERNS          = *.cxx \
                          *.cc \
                          *.cpp \
                          *.h \
@@ -56,26 +57,27 @@ FILE_PATTERNS          = *.c \
                          *.md \
                          *.txt \
                          *.dox 
+
 #---------------------------------------------------------------------------
 # configuration options for main page of the documentation
 #---------------------------------------------------------------------------
 #USE_MDFILE_AS_MAINPAGE = @MAINPAGE@
 HAVE_DOT               = YES
 INTERACTIVE_SVG        = YES
-DOT_IMAGE_FORMAT     = svg
-DOT_GRAPH_MAX_NODES  = 100
-CLASS_GRAPH          = YES
-COLLABORATION_GRAPH  = NO
-HIDE_UNDOC_RELATIONS = NO
-TEMPLATE_RELATIONS   = YES
-TOC_EXPAND           = YES
-INCLUDE_GRAPH        = YES
-INCLUDED_BY_GRAPH    = YES
-GENERATE_LEGEND      = NO
-GRAPHICAL_HIERARCHY  = YES        
-MAX_DOT_GRAPH_DEPTH  = 100
-USE_MATHJAX          = YES
-GENERATE_BUGLIST     = YES
-SHOW_INCLUDE_FILES   = YES
-HTML_COPY_CLIPBOARD  = YES
+DOT_IMAGE_FORMAT       = svg
+DOT_GRAPH_MAX_NODES    = 100
+CLASS_GRAPH            = YES
+COLLABORATION_GRAPH    = NO
+HIDE_UNDOC_RELATIONS   = NO
+TEMPLATE_RELATIONS     = YES
+TOC_EXPAND             = YES
+INCLUDE_GRAPH          = YES
+INCLUDED_BY_GRAPH      = YES
+GENERATE_LEGEND        = NO
+GRAPHICAL_HIERARCHY    = YES        
+MAX_DOT_GRAPH_DEPTH    = 100
+USE_MATHJAX            = YES
+GENERATE_BUGLIST       = YES
+SHOW_INCLUDE_FILES     = YES
+HTML_COPY_CLIPBOARD    = YES
 
