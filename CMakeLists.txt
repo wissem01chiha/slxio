@@ -22,7 +22,6 @@ endif()
 
 #-----------------------------------------------------------------------------
 option(ENABLE_DOCUMENTATION "Enable documentation generation" OFF)
-mark_as_advanced(ENABLE_DOCUMENTATION)
 
 #-----------------------------------------------------------------------------
 option(TOP_LEVEL_BUILD "Enable top-level build" ${_is_top_level})
@@ -47,9 +46,9 @@ mark_as_advanced(ENABLE_SANITIZER)
 #-----------------------------------------------------------------------------
 option(ENABLE_FUZZING "Enable fuzzing support" OFF)
 mark_as_advanced(ENABLE_FUZZING)
+
 #-----------------------------------------------------------------------------
 option(BUILD_SHARED_LIBS "Build as shared libraries" OFF)
-mark_as_advanced(BUILD_SHARED_LIBS)
 
 #-----------------------------------------------------------------------------
 option(ENABLE_PKGCONFIG "Generate pkg-config file" ON)
@@ -58,7 +57,6 @@ mark_as_advanced(ENABLE_PKGCONFIG)
 #-----------------------------------------------------------------------------
 option(ENABLE_AVX "Enable AVX optimizations where available" ON)
 mark_as_advanced(ENABLE_AVX)
-
 
 include(FindPythonModule)
 include(CheckCompilerSupport)
@@ -74,28 +72,26 @@ include(CppCheck)
 include(Sanitizer)
 include(Module)
 
-
 if(ENABLE_AVX) 
     avx_compile_options(AVX_COMPILE_OPTIONS) #for testing
 endif()
 
-# Add cmake modules from all submodules 
 module_add_cmake_modules(${CMAKE_CURRENT_SOURCE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${MODULES_CMAKE_DIRS})
 
-# Add all submodules
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 include(Testing)
 
 if(ENABLE_PKGCONFIG)
     set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
-    mark_as_advanced(PKGCONFIG_INSTALL_DIR)
+
+    string(TOLOWER "${PROJECT_NAME}" LOWERCASE_PROJECT_NAME)
     install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ DESTINATION ${PKGCONFIG_INSTALL_DIR}
-        FILES_MATCHING PATTERN "${PROJECT_NAME}.pc")
+        FILES_MATCHING PATTERN "${LOWERCASE_PROJECT_NAME}.pc")
     configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc.in
-        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc
+        ${CMAKE_CURRENT_BINARY_DIR}/${LOWERCASE_PROJECT_NAME}.pc
         @ONLY
     )
 endif()

@@ -12,27 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMULINKCOLOR_H
-#define SIMULINKCOLOR_H
+#ifndef COLOR_H
+#define COLOR_H
 
-#include "APIExport.h"
 #include "ABINamespace.h"
-#include "Type.h"
-#include "Color.h"
+#include "APIExport.h"
 #include <vector>
-#include <string>
+#include <cstdint>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class APIEXPORT Color {
+public:
+    uint32_t r;
+    uint32_t g;
+    uint32_t b;
+    uint32_t a;
 
-class APIEXPORT SimulinkColor {
-  public:
-  std::string name;
-  std::string hexValue;
+    Color();
+    Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha = 255);
+    ~Color() = default;
+    Color(const Color &other) = default;
+    Color &operator=(const Color &other) = default;
+    bool operator==(const Color &other) const;
+    bool operator!=(const Color &other) const;
+
+    static Color fromVector(const std::vector<uint32_t>& vec);
+    std::vector<uint32_t> toVector() const; 
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKCOLOR_H
+#endif // COLOR_H

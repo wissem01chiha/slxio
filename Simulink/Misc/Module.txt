@@ -31,6 +31,7 @@ HEADERS
   CoderInfo
   SimulationSettings
 CONFIG_HEADERS
+CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   Common::System
   Common::Core

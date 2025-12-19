@@ -27,12 +27,21 @@ CLASSES
   SimulinkRTW
   SimulinkModelReference
   SimulinkSFSim
+  SimulinkConfigSet
+  SimulinkConfigSetManager
 SOURCES
 HEADERS
+  SimulinkConfigSet.h
+  SimulinkConfigSetManager.h
 CONFIG_HEADERS
+CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   Common::Core
 PRIVATE_DEPENDS
+  Simulink::Core
+  Simulink::Misc
+  Simulink::Data
 TEST_DEPENDS 
-TEST_OPTIONAL_DEPENDS 
+TEST_OPTIONAL_DEPENDS
+ 
 

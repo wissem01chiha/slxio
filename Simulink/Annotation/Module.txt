@@ -1,7 +1,7 @@
 NAME 
-  IO::Core
+  Simulink::Annotation
 DESCRIPTION  
-  Core Input/Output Module 
+  Simulink Annotation Module 
 LICENSE   
   Apache-2.0 
 VERSION 
@@ -14,23 +14,29 @@ ENABLE_TEST
   TRUE 
 ENABLE_BINDING 
   TRUE 
-ENABLE_DOC 
+ENABLE_DOC
   FALSE 
 INSTALL_HEADERS 
   TRUE 
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  Parser
-  Writer
+  Color
+  SimulinkColor
 SOURCES
 HEADERS
+  Color.h
+  SimulinkColor.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
-PUBLIC_DEPENDS 
-PRIVATE_DEPENDS
-  Common::System 
+PUBLIC_DEPENDS
   Common::Core
+  Common::System
+PRIVATE_DEPENDS
+  Simulink::Misc
+  Simulink::Data
+  ThirdParty::loguru
 TEST_DEPENDS 
+  ThirdParty::doctest
 TEST_OPTIONAL_DEPENDS 
 

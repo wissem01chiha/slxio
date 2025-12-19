@@ -321,6 +321,8 @@ Template of Module.txt file:
   CONFIG_HEADERS
     ConfigA.h.in
     ConfigB.h.in
+  CMAKE_MODULES_DIRS
+    cmake/
   PUBLIC_DEPENDS
     ModuleA::SubModule1
     ModuleB::SubModule2
@@ -622,7 +624,6 @@ endfunction()
 #[==[.rst:
 .. cmake:function:: module_add_cmake_modules ()
 
-  A wrapper around ``add_cmake_modules`` that works for modules.
   This function let modules register their cmake modules to be
   available globally, cmake local module folder are list in Module.txt
   under CMAKE_MODULES_DIRS key, this function shoule be invoked before

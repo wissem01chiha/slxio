@@ -29,7 +29,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Simulink block */
-class APIEXPORT SimulinkBlock final : public SimulinkElementBase {
+class APIEXPORT SimulinkBlock : public SimulinkElementBase {
 public:
   SimulinkBlock();
   ~SimulinkBlock() override;

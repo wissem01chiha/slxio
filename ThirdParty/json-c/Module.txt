@@ -44,6 +44,7 @@ CONFIG_HEADERS
   Json-c.h.in
   src/config.h.in
   src/json_config.h.in
+CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
 TEST_DEPENDS

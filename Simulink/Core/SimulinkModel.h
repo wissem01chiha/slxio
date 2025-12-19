@@ -48,7 +48,6 @@ public:
 
   SimulinkBlock getBlock(uint32 blockIdx);
   SimulinkModelType getModelType();
-  //std::shared_ptr<SimulinkConfigSetManager> getConfigurationManager();
   std::shared_ptr<SimulationSettings> getSimulationSettings();
   std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
   uint32 getVersion();
@@ -59,7 +58,6 @@ private:
   uint32 modelId;
   uint32 modelVersion;
   ModelWorkspace workspace;
-  //std::shared_ptr<SimulinkConfigSetManager> modelConfigSetMgr;
   std::shared_ptr<SimulationSettings> modelSimSet;
   std::vector<std::shared_ptr<SimulinkBlock>> blocks;
   std::vector<std::shared_ptr<SimulinkLine>> lines;

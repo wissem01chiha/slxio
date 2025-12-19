@@ -1,7 +1,7 @@
 NAME 
   Simulink::Stateflow
 DESCRIPTION  
-  Simulink Stateflow Support Module 
+  Simulink Stateflow Module 
 LICENSE   
   Apache-2.0 
 VERSION 
@@ -10,7 +10,7 @@ MAINTAINER
   Wissem CHIHA 
 ENABLE_BUILD 
   TRUE 
-ENABLE_TESTING 
+ENABLE_TEST
   TRUE 
 ENABLE_BINDING 
   TRUE 
@@ -21,12 +21,20 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
+  StateflowElementBase
 SOURCES
 HEADERS
+  StateflowElementBase.h
 CONFIG_HEADERS
-PUBLIC_DEPENDS 
-PRIVATE_DEPENDS 
+CMAKE_MODULES_DIRS
+PUBLIC_DEPENDS
+  Common::Core
+  Common::System
+PRIVATE_DEPENDS
   Simulink::Core
+  Simulink::Misc
+  Simulink::Data
+  ThirdParty::loguru
 TEST_DEPENDS 
+  ThirdParty::doctest
 TEST_OPTIONAL_DEPENDS 
-

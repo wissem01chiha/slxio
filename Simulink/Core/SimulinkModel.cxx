@@ -11,7 +11,6 @@ SimulinkModel::SimulinkModel(SimulinkModelType Type) : type(Type) {}
 SimulinkModel::SimulinkModel(const SimulinkModel &other) {
 
   this->lines = other.lines;
-  //this->modelConfigSetMgr = other.modelConfigSetMgr;
   this->modelId = other.modelId;
   this->modelSimSet = other.modelSimSet;
   this->modelVersion = other.modelVersion;
@@ -38,11 +37,6 @@ SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx) {
 }
 
 SimulinkModelType SimulinkModel::getModelType() { return type; }
-
-// std::shared_ptr<SimulinkConfigSetManager>
-// SimulinkModel::getConfigurationManager() {
-//   return modelConfigSetMgr;
-// }
 
 std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings() {
   return modelSimSet;

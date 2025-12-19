@@ -17,15 +17,19 @@
 
 #include "SimulinkElementBase.h"
 #include "ABINamespace.h"
+#include "APIExport.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief Base class for all Stateflow elements.*/
 class StateflowElementBase : public SimulinkElementBase {
 public:
   StateflowElementBase() {}
-  StateflowElementBase(const StateflowElementBase &orig){};
-
+  StateflowElementBase(const StateflowElementBase &orig);
+  virtual ~StateflowElementBase() = default;
+  StateflowElementBase &operator=(const StateflowElementBase &) = delete;
+  
 protected:
   void setParent(std::shared_ptr<SimulinkElementBase> parent);
   virtual std::shared_ptr<StateflowElementBase> getParent() const = 0;
@@ -33,4 +37,6 @@ protected:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
 #endif // STATEFLOWELEMENTBASE_H

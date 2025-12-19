@@ -22,6 +22,7 @@
 #include "ABINamespace.h"
 #include <vector>
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -31,8 +32,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class StateflowChart : public StateflowElementBase {
 public:
-  StateflowChart() {}
-  StateflowChart(StateflowChart &origChart);
+  StateflowChart();
+  StateflowChart(StateflowChart &origChart) = delete;
 
   void addNode(StateflowNodeBase node) {
     // nodes.add(node);
@@ -101,5 +102,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // STATEFLOWCHART_H

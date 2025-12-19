@@ -28,6 +28,7 @@ HEADERS
   ModelWorkspace.h
   DataSourceType.h
 CONFIG_HEADERS
+CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS 
 PRIVATE_DEPENDS 
   Common::Core

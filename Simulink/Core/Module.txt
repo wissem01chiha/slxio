@@ -14,7 +14,7 @@ ENABLE_TEST
   TRUE 
 ENABLE_BINDING 
   TRUE 
-ENABLE_DOCUMENTATION 
+ENABLE_DOC
   FALSE 
 INSTALL_HEADERS 
   TRUE 
@@ -47,13 +47,13 @@ HEADERS
   SimulinkPortType.h
   SimulinkLine.h
 CONFIG_HEADERS
+CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS 
 PRIVATE_DEPENDS
   Common::Core
   Common::System
   Simulink::Misc
   Simulink::Data
-  Simulink::Configuration
   ThirdParty::loguru
 TEST_DEPENDS 
   ThirdParty::doctest

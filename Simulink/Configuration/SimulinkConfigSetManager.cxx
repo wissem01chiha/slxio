@@ -1,37 +1,46 @@
 #include "SimulinkConfigSetManager.h"
-#include "SyslinkLogger.h"
+#include "SimulinkConfigSet.h"
+#include "Logger.h"
 #include <algorithm>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSetManager::SimulinkConfigSetManager() {}
-
-SyslinkErrorCode
-SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
-
-  this->configurations.push_back(cfg);
-  return SyslinkErrorCode::ErrorCode::SLX_OK;
+SimulinkConfigSetManager::SimulinkConfigSetManager() {
+  this->cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-SyslinkErrorCode
-SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
+ErrorCode
+SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
 
-  const auto it = std::find(configurations.begin(), configurations.end(), cfg);
-  if (it != configurations.end()) {
-    configurations.erase(it);
+  this->cfgs.push_back(cfg);
+  return ErrorCode::Ok;
+}
+
+ErrorCode SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
+
+  auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
+  if (it != cfgs.end()) {
+    cfgs.erase(it);
+    return ErrorCode::Ok;
   }
-  return SyslinkErrorCode::SLX_OK;
+  return ErrorCode::ObjectNotFound;
 }
 
 std::shared_ptr<SimulinkConfigSet>
 SimulinkConfigSetManager::getActiveConfiguration() {
 
-  for (const auto &cfg : configurations) {
+  for (const auto &cfg : cfgs) {
     if (cfg->isActive()) {
       return cfg;
-    }
+     }
   }
+  return nullptr;
+}
+
+bool SimulinkConfigSetManager::hasConfigurationSet(
+    const std::shared_ptr<SimulinkConfigSet> &cfg) const {
+  return std::find(cfgs.begin(), cfgs.end(), cfg) != cfgs.end();
 }
 
 SLXIO_ABI_NAMESPACE_END
