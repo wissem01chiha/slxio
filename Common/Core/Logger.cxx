@@ -87,9 +87,7 @@ void Logger::Log(Verbosity level, const char *message) {
 #endif
 }
 
-void Logger::Log(const char *message) {
-  Log(internalVerbosityLevel, message);
-}
+void Logger::Log(const char *message) { Log(internalVerbosityLevel, message); }
 
 Logger &Logger::getInstance() {
   static Logger instance;
@@ -173,8 +171,7 @@ void Logger::setInternalFileMode(File::Mode mode) { filemode = mode; }
 void Logger::print(const char *message, std::ostream &os) { os << message; }
 
 ErrorCode Logger::logToFile(Verbosity verbosity, const char *path,
-                                          unsigned int linenum,
-                                          const char *message) {
+                            unsigned int linenum, const char *message) {
 #ifdef LOGGER_USE_LOGURU
 
   loguru::add_file(path, static_cast<loguru::Mode>(filemode),

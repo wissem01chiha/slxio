@@ -21,7 +21,12 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-enum class APIEXPORT DataSourceType { ModelFile, MatFile, MatlabCode, MatlabFile };
+enum class APIEXPORT DataSourceType {
+  ModelFile,
+  MatFile,
+  MatlabCode,
+  MatlabFile
+};
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -15,19 +15,18 @@
 #ifndef SIMULINKCOLOR_H
 #define SIMULINKCOLOR_H
 
-#include "APIExport.h"
 #include "ABINamespace.h"
-#include "Type.h"
+#include "APIExport.h"
 #include "Color.h"
-#include <vector>
+#include "Type.h"
 #include <string>
+#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-
 class APIEXPORT SimulinkColor {
-  public:
+public:
   std::string name;
   std::string hexValue;
 };

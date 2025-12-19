@@ -16,8 +16,8 @@
 #define SIMULATIONSETTINGS_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -25,10 +25,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /** @brief Simulation settings for a Simulink model. */
 class APIEXPORT SimulationSettings {
 public:
-   SimulationSettings();
-    ~SimulationSettings();
-private:
+  SimulationSettings();
+  ~SimulationSettings();
 
+private:
   char SolverType[32];
   char SolverName[64];
   Float FixedStepSize;

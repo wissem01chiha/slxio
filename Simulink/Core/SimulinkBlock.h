@@ -15,13 +15,13 @@
 #ifndef SIMULINKBLOCK_H
 #define SIMULINKBLOCK_H
 
+#include "ABINamespace.h"
+#include "APIExport.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPortType.h"
-#include "ABINamespace.h"
 #include "Type.h"
-#include "APIExport.h"
 #include <map>
 #include <memory>
 
@@ -40,10 +40,8 @@ public:
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
 
-  ErrorCode
-  add(std::shared_ptr<SimulinkElementBase> element) override;
-  ErrorCode
-  remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   std::string toString() const override;
   SimulinkElementType getType() const override;
   uint32 getID() const override;

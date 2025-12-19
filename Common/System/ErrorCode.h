@@ -18,8 +18,8 @@
 #include "APIExport.h"
 
 /**
- * @brief container for all low level error codes used 
- * across the project 
+ * @brief container for all low level error codes used
+ * across the project
  */
 enum class APIEXPORT ErrorCode {
 
@@ -42,7 +42,8 @@ enum class APIEXPORT ErrorCode {
   SLX_ERR_EXTENSION_NOT_SUPPORTED,
   InvalidArgument,
   FileNotFound,
-  GetCwdFailed, LongFilePath,
+  GetCwdFailed,
+  LongFilePath,
   NotOpen,
   IOError,
   EndOfFile,
@@ -55,12 +56,16 @@ enum class APIEXPORT ErrorCode {
   IsDirectory,
   FileExists,
   PathNotFound,
-      InvalidElementType,
-    InvalidElementID,
-    ElementNotFound,    NullObjectPtr,
-    ObjectNotFound,
-    InvalidObjectType,
-    DuplicateObject,NotConnected, InvalIndex, TypeMismatch
+  InvalidElementType,
+  InvalidElementID,
+  ElementNotFound,
+  NullObjectPtr,
+  ObjectNotFound,
+  InvalidObjectType,
+  DuplicateObject,
+  NotConnected,
+  InvalIndex,
+  TypeMismatch
 };
 
 #endif // ERRORCODE_H

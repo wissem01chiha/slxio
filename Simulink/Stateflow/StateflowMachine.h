@@ -15,11 +15,11 @@
 #ifndef STATEFLOWMACHINE_H
 #define STATEFLOWMACHINE_H
 
+#include "ABINamespace.h"
 #include "SimulinkModel.h"
 #include "StateflowChart.h"
 #include "StateflowElementBase.h"
 #include "StateflowTarget.h"
-#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

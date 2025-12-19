@@ -15,6 +15,5 @@ TEST_CASE("toString Test") {
 
   CHECK(std::string(Error::toString(ErrorCode::SLX_ERR_DECOMPRESS)) ==
         "SLX_ERR_DECOMPRESS");
-  CHECK(std::string(Error::toString(ErrorCode::Ok)) ==
-        std::string("OK"));
+  CHECK(std::string(Error::toString(ErrorCode::Ok)) == std::string("OK"));
 }

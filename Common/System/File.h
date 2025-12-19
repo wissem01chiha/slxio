@@ -24,12 +24,21 @@
  * @brief Cross-platform File abstraction.
  * Provides basic file operations: open, read, write, map/unmap, rename, move.
  * Supports both stream-based and memory-mapped I/O.
- * @todo this will be crefactored to Apache Portable Runtime (APR) file API library
+ * @todo this will be crefactored to Apache Portable Runtime (APR) file API
+ * library
  */
 class APIEXPORT File {
 public:
-  enum Type { Unknown = 0, Regular, Directory, Symlink, BlockDevice,
-              CharacterDevice, FIFO, Socket };
+  enum Type {
+    Unknown = 0,
+    Regular,
+    Directory,
+    Symlink,
+    BlockDevice,
+    CharacterDevice,
+    FIFO,
+    Socket
+  };
 
   enum Mode { Truncate, Append, Read, Write };
   File() = default;

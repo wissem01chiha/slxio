@@ -15,10 +15,10 @@
 #ifndef SIMULINKPARAMETER_H
 #define SIMULINKPARAMETER_H
 
-#include "CoderInfo.h"
-#include "APIExport.h"
-#include "ErrorCode.h"
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "CoderInfo.h"
+#include "ErrorCode.h"
 #include "Type.h"
 #include <string>
 #include <vector>

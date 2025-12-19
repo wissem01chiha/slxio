@@ -15,10 +15,10 @@
 #ifndef SIMULINKELEMENTBASE_H
 #define SIMULINKELEMENTBASE_H
 
-#include "SimulinkElementType.h"
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "SimulinkElementType.h"
 #include "Type.h"
 #include <memory>
 #include <string>
@@ -48,7 +48,7 @@ public:
   virtual ~SimulinkElementBase() = default;
   SimulinkElementBase(const SimulinkElementBase &) = delete;
   SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
-  
+
   virtual SimulinkElementType getType() const = 0;
   virtual Index getID() const = 0;
   virtual std::string toString() const = 0;
@@ -58,8 +58,7 @@ protected:
   SimulinkElementBase() = default;
   virtual ErrorCode
   remove(const std::shared_ptr<SimulinkElementBase> element) = 0;
-  virtual ErrorCode
-  add(const std::shared_ptr<SimulinkElementBase> element) = 0;
+  virtual ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -15,9 +15,9 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include "File.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "File.h"
 #include "Type.h"
 #include <list>
 #include <string>
@@ -57,7 +57,6 @@ public:
   Index getCurrentFile();
 
   static bool isOpened(const std::string &_stFilename);
-  
 
   Index push_back(File *_file);
   void remove(Index _iID);

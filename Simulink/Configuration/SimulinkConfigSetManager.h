@@ -38,7 +38,8 @@ public:
   SimulinkConfigSetManager(const SimulinkConfigSetManager &) = delete;
 
   /// @brief Assignment operator
-  SimulinkConfigSetManager &operator=(const SimulinkConfigSetManager &) = delete;
+  SimulinkConfigSetManager &
+  operator=(const SimulinkConfigSetManager &) = delete;
 
   /// @brief Adds a configuration set to the manager.
   ErrorCode add(std::shared_ptr<SimulinkConfigSet> cfg);
@@ -51,7 +52,7 @@ public:
   std::shared_ptr<SimulinkConfigSet> getActiveConfiguration();
 
   /// @brief Checks if a configuration set exists in the manager.
-  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet>& cfg) const;
+  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet> &cfg) const;
 
 private:
   std::vector<std::shared_ptr<SimulinkConfigSet>> cfgs;

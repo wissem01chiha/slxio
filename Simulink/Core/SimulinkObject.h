@@ -15,13 +15,13 @@
 #ifndef SIMULINKOBJECT_H
 #define SIMULINKOBJECT_H
 
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
 #include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "ABINamespace.h"
-#include "ErrorCode.h"
 #include "Type.h"
-#include "APIExport.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -44,10 +44,8 @@ public:
   SimulinkElementType getType() const override;
   Index getID() const override;
   std::string toString() const override;
-  ErrorCode
-  remove(std::shared_ptr<SimulinkElementBase> element) override;
-  ErrorCode
-  add(std::shared_ptr<SimulinkElementBase> element) override;
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   bool contains(Index id) const override;
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
   std::string getName();

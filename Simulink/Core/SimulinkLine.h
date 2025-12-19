@@ -15,12 +15,12 @@
 #ifndef SIMULINKLINE_H
 #define SIMULINKLINE_H
 
-#include "SimulinkPort.h"
+#include "ABINamespace.h"
+#include "APIExport.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"
-#include "ABINamespace.h"
+#include "SimulinkPort.h"
 #include "Type.h"
-#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

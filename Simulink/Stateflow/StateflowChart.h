@@ -15,11 +15,11 @@
 #ifndef STATEFLOWCHART_H
 #define STATEFLOWCHART_H
 
+#include "ABINamespace.h"
 #include "StateflowBlock.h"
 #include "StateflowElementBase.h"
 #include "StateflowMachine.h"
 #include "StateflowNodeBase.h"
-#include "ABINamespace.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN

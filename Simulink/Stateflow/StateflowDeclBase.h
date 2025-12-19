@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "ABINamespace.h"
 #include "SimulinkConstant.h"
 #include "StateflowDeclContainerBase.h"
 #include "StateflowElementBase.h"
-#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

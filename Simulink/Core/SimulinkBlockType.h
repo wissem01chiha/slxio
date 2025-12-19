@@ -15,9 +15,9 @@
 #ifndef SIMULINKBLOCKTYPE_H
 #define SIMULINKBLOCKTYPE_H
 
-#include "SimulinkElementType.h"
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "SimulinkElementType.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

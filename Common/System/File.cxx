@@ -312,7 +312,7 @@ ErrorCode File::write(const char *message) {
 
 ErrorCode File::close() {
 
-#ifdef _MSC_VER 
+#ifdef _MSC_VER
   if (hFileMap_)
     CloseHandle(hFileMap_);
   if (hFile_)

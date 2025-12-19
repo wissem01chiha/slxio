@@ -17,8 +17,7 @@ SimulinkBlock::SimulinkBlock(const SimulinkBlock &origBlock) {
   this->blockId = origBlock.blockId;
 }
 
-ErrorCode
-SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
+ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
     // slog_error("Cannot add a null Simulink element.");
@@ -81,8 +80,7 @@ SimulinkElementType SimulinkBlock::getType() const {
 
 uint32 SimulinkBlock::getID() const { return blockId; }
 
-ErrorCode
-SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element) {
+ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
     // slog_warn("Removing a null Simulink element pointer from subelement");

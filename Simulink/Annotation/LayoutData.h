@@ -15,10 +15,10 @@
 #ifndef LAYOUTDATA_H
 #define LAYOUTDATA_H
 
+#include "ABINamespace.h"
 #include "Color.h"
 #include "RectangleLayoutDataBase.h"
 #include "RectangleType.h"
-#include "ABINamespace.h"
 #include "Type.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN

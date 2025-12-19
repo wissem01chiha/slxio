@@ -15,8 +15,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "File.h"
 #include "ABINamespace.h"
+#include "File.h"
 #include "Type.h"
 #include <ostream>
 

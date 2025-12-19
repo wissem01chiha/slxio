@@ -22,13 +22,11 @@ std::string SimulinkPort::toString() const {
   return std::string("OK");
 }
 
-ErrorCode
-SimulinkPort::remove(std::shared_ptr<SimulinkElementBase> elment) {
+ErrorCode SimulinkPort::remove(std::shared_ptr<SimulinkElementBase> elment) {
   return ErrorCode::Ok;
 }
 
-ErrorCode
-SimulinkPort::add(std::shared_ptr<SimulinkElementBase> elment) {
+ErrorCode SimulinkPort::add(std::shared_ptr<SimulinkElementBase> elment) {
   return ErrorCode::Ok;
 }
 

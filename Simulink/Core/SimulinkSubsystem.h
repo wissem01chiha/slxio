@@ -15,10 +15,10 @@
 #ifndef SIMULINKSUBSYSTEM_H
 #define SIMULINKSUBSYSTEM_H
 
-#include "SimulinkElementBase.h"
 #include "ABINamespace.h"
-#include "ErrorCode.h"
 #include "APIExport.h"
+#include "ErrorCode.h"
+#include "SimulinkElementBase.h"
 #include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN

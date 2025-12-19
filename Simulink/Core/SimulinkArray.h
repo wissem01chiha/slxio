@@ -15,9 +15,9 @@
 #ifndef SIMULINKARRAY_H
 #define SIMULINKARRAY_H
 
+#include "ABINamespace.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "ABINamespace.h"
 #include "Type.h"
 #include <memory>
 
@@ -38,10 +38,8 @@ public:
   SimulinkArray &operator=(const SimulinkArray &) = delete;
   SimulinkElementType getType() const override;
   std::string toString() const override;
-  ErrorCode
-  add(std::shared_ptr<SimulinkElementBase> elment) override;
-  ErrorCode
-  remove(std::shared_ptr<SimulinkElementBase> elment) override;
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> elment) override;
   Index getID() const override;
   std::string getName();
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);

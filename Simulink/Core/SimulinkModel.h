@@ -15,19 +15,19 @@
 #ifndef SIMULINKMODEL_H
 #define SIMULINKMODEL_H
 
+#include "ABINamespace.h"
+#include "APIExport.h"
 #include "ModelWorkspace.h"
+#include "SimulationSettings.h"
 #include "SimulinkArray.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkLine.h"
 #include "SimulinkModelType.h"
-#include "SimulationSettings.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
 #include "SimulinkPort.h"
-#include "ABINamespace.h"
 #include "Type.h"
-#include "APIExport.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN

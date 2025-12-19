@@ -15,10 +15,10 @@
 #ifndef MODELWORKSPACE_H
 #define MODELWORKSPACE_H
 
-#include "DataSourceType.h"
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "DataSourceType.h"
+#include "Type.h"
 #include <optional>
 #include <string>
 #include <unordered_map>
@@ -45,6 +45,7 @@ public:
   void clearVariable(const std::string &name);
 
   void clearAll();
+
 private:
   DataSourceType dataSource = DataSourceType::ModelFile;
   std::string fileName = "";

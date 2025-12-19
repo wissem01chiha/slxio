@@ -45,7 +45,7 @@ public:
   const File &getFile(Index index) const;
 
   /// @brief Get file at index as string
-  std::string const& getFileName(Index index) const;
+  std::string const &getFileName(Index index) const;
 
   /// @brief Get the current working directory
   static const char *getCurrentDirectory();

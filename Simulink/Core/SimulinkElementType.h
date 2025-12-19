@@ -16,8 +16,8 @@
 #define SIMULINKELEMENTTYPE_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN

@@ -9,5 +9,3 @@ const char *CoderInfo::getStorageClass() const { return StorageClass; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

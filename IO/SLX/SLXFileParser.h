@@ -15,10 +15,10 @@
 #ifndef SLXFILEPARSER_H
 #define SLXFILEPARSER_H
 
+#include "ABINamespace.h"
 #include "File.h"
 #include "Parser.h"
 #include "SLXFile.h"
-#include "ABINamespace.h"
 
 class SLXFileParser : public Parser {
 public:

@@ -15,6 +15,7 @@
 #ifndef SIMUMINKMODELBUILDER_H
 #define SIMUMINKMODELBUILDER_H
 
+#include "ABINamespace.h"
 #include "SLXParser.h"
 #include "SimulinkBlockBuilder.h"
 #include "SimulinkFile.h"
@@ -23,7 +24,6 @@
 #include "SimulinkObjectBuilder.h"
 #include "SimulinkParameterBuilder.h"
 #include "SimulinkPortBuilder.h"
-#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

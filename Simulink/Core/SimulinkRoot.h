@@ -15,11 +15,11 @@
 #ifndef SIMULINKROOT_H
 #define SIMULINKROOT_H
 
+#include "ABINamespace.h"
+#include "APIExport.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
-#include "ABINamespace.h"
 #include "Type.h"
-#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -32,6 +32,7 @@ public:
   void resetModel();
   SimulinkArray &getSubsystems();
   SimulinkArray &getConfigSets();
+
 private:
   SimulinkArray subsystems;
   SimulinkArray configSets;

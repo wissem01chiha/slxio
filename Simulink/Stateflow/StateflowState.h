@@ -15,9 +15,9 @@
 #ifndef STATEFLOWSTATE_H
 #define STATEFLOWSTATE_H
 
+#include "ABINamespace.h"
 #include "StateflowElementBase.h"
 #include "StateflowNodeBase.h"
-#include "ABINamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

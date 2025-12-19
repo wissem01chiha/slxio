@@ -57,8 +57,7 @@ std::string SimulinkArray::toString() const {
   return oss.str();
 }
 
-ErrorCode
-SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
+ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
 
   if (elment == nullptr) {
     // slog_warn("Cannot add a null Simulink element.");
@@ -107,8 +106,7 @@ SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
   return ErrorCode::Ok;
 }
 
-ErrorCode
-SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
+ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
 
   if (elment == nullptr) {
     // slog_warn("Cannot remove a null Simulink element.");

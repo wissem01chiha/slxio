@@ -27,11 +27,10 @@ SimulinkElementType SimulinkLine::getType() const {
   return SimulinkElementType::Line;
 }
 
-ErrorCode
-SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
+ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    //slog_warn("Cannot remove a null Simulink element.");
+    // slog_warn("Cannot remove a null Simulink element.");
     return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
@@ -47,11 +46,10 @@ SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
   return ErrorCode::Ok;
 }
 
-ErrorCode
-SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
+ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    //slog_warn("Cannot add a null Simulink element.");
+    // slog_warn("Cannot add a null Simulink element.");
     return ErrorCode::SLX_ERR_NULL_PTR;
   }
 

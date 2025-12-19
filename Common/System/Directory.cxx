@@ -13,8 +13,8 @@ const File &Directory::getFile(Index index) const {
 
 std::string const &Directory::getFileName(Index index) const {
   // TODO: insert return statement here
-    static std::string filename;
-    return filename;
+  static std::string filename;
+  return filename;
 }
 
 const char *Directory::getCurrentDirectory() { return nullptr; }

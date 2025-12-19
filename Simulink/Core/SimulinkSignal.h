@@ -15,10 +15,10 @@
 #ifndef SIMULINKSIGNAL_H
 #define SIMULINKSIGNAL_H
 
-#include "CoderInfo.h"
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "CoderInfo.h"
+#include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN

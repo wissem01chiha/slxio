@@ -1,6 +1,6 @@
 #include "SimulinkConfigSetManager.h"
-#include "SimulinkConfigSet.h"
 #include "Logger.h"
+#include "SimulinkConfigSet.h"
 #include <algorithm>
 
 SLXIO_NAMESPACE_BEGIN
@@ -17,7 +17,8 @@ SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
   return ErrorCode::Ok;
 }
 
-ErrorCode SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
+ErrorCode
+SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
 
   auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
   if (it != cfgs.end()) {
@@ -33,7 +34,7 @@ SimulinkConfigSetManager::getActiveConfiguration() {
   for (const auto &cfg : cfgs) {
     if (cfg->isActive()) {
       return cfg;
-     }
+    }
   }
   return nullptr;
 }
