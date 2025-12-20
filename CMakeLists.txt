@@ -58,6 +58,17 @@ mark_as_advanced(ENABLE_PKGCONFIG)
 option(ENABLE_AVX "Enable AVX optimizations where available" ON)
 mark_as_advanced(ENABLE_AVX)
 
+#-----------------------------------------------------------------------------
+option(${PROJECT_NAME}_ENABLE_TESTING "build tests" ON)
+mark_as_advanced(${PROJECT_NAME}_ENABLE_TESTING)
+
+option(${PROJECT_NAME}_ENABLE_COVERAGE "enable code coverage" OFF)
+mark_as_advanced(${PROJECT_NAME}_ENABLE_COVERAGE)
+
+option(${PROJECT_NAME}_ENABLE_BINDING_TEST "build binding interface tests" ON)
+mark_as_advanced(${PROJECT_NAME}_ENABLE_BINDING_TEST)
+#-----------------------------------------------------------------------------
+
 include(FindPythonModule)
 include(CheckCompilerSupport)
 include(CompilerFlags)

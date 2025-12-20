@@ -3,28 +3,33 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/wissem01chiha/syslink/actions/workflows/ubuntu.yml">
-    <img src="https://github.com/wissem01chiha/syslink/actions/workflows/ubuntu.yml/badge.svg?branch=develop" alt="Ubuntu Build Status"/>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg" alt="Windows Build Status"/>
   </a>
-  <a href="https://github.com/wissem01chiha/syslink/actions/workflows/windows.yml">
-    <img src="https://github.com/wissem01chiha/syslink/actions/workflows/windows.yml/badge.svg?branch=develop" alt="Windows Build Status"/>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg" alt="Ubuntu Build Status"/>
   </a>
-    <a href="https://github.com/wissem01chiha/syslink/actions/workflows/mingw.yml">
-    <img src="https://github.com/wissem01chiha/syslink/actions/workflows/mingw.yml/badge.svg?branch=develop" alt="MinGW Build Status"/>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg" alt="MinGW Build Status"/>
   </a>
-  <a href="https://github.com/wissem01chiha/syslink/actions/workflows/macos.yml">
-    <img src="https://github.com/wissem01chiha/syslink/actions/workflows/macos.yml/badge.svg?branch=develop" alt="MacOS Build Status"/>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg" alt="MacOS Build Status"/>
   </a>
-    <a href="https://github.com/wissem01chiha/syslink/actions/workflows/codeql.yml">
-    <img src="https://github.com/wissem01chiha/syslink/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Status"/>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Status"/>
+  </a>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg" alt="Doc Status"/>
+  </a>
+  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/release.yml">
+    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg" alt="Release Status"/>
   </a>
 </p>
 
 <!-- omit in toc -->
 ## Table of Contents
 - [1.0 Introduction](#10-introduction)
-  - [1.1 Features](#11-features)
-  - [1.2 MATLAB Support](#12-matlab-support)
+  - [1.2 Supported MATLAB Versions](#12-supported-matlab-versions)
   - [1.3 Contact](#13-contact)
   - [1.4 Contributing](#14-contributing)
 - [2.0 Building](#20-building)
@@ -51,23 +56,16 @@ This library is designed for use by projects that do not have access or do not w
 
 This project is originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project ([ConQAT site](https://teamscale.com/blog/en/news/blog/conqat-end-of-life)).
 
-### 1.1 Features
 
-- Fast model parsing  
-- Full access to read model parameters and configurations  
-- Convert model metadata into a structured dataset for optimal storage of large models  
-- Integrated command-line interface  
-- Construct a graph-based structure from nested models  
-- Enable diff and merge operations between models  
-- Serialize and deserialize Simulink data to/from JSON files
-
-### 1.2 MATLAB Support
+### 1.2 Supported MATLAB Versions
 
 The primary supported MATLAB version is **R2019a**. However, other versions later than R2019a may be compatible, provided the Simulink XML schema has not changed significantly between releases.
 
 Currently, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project is based on reverse engineering and interpretation of actual SLX files.
 
-To ensure compatibility when using SLXIO with other Simulink versions, we recommend exporting models to R2019a before reading them. This process may require a valid MATLAB license.
+To ensure compatibility when using SLXIO with other Simulink versions, we recommend exporting models to R2019a before reading them. This process may require a valid MATLAB license. for more information see [link](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html)
+
+
 
 ### 1.3 Contact
 

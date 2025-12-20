@@ -24,7 +24,7 @@ INSTALL_TARGETS
   TRUE
 CLASSES
   File
-  Error
+  Status
   Directory
   Memory
   FileManager
@@ -34,7 +34,7 @@ HEADERS
   Platform.h
   APIExport.h
   ErrorCode.h
-  Error.h
+  Status.h
   Type.h
   File.h
   Directory.h

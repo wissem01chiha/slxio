@@ -34,7 +34,7 @@ void Logger::init(int argc, char **argv) {
 #endif
 }
 
-void Logger::Log(Verbosity level, const char *message) {
+void Logger::log(Verbosity level, const char *message) {
 #ifdef LOGGER_USE_LOGURU
   switch (level) {
   case V_ERROR:
@@ -87,7 +87,7 @@ void Logger::Log(Verbosity level, const char *message) {
 #endif
 }
 
-void Logger::Log(const char *message) { Log(internalVerbosityLevel, message); }
+void Logger::log(const char *message) { log(internalVerbosityLevel, message); }
 
 Logger &Logger::getInstance() {
   static Logger instance;

@@ -68,10 +68,10 @@ public:
   /// @brief main logging routine, call with a message and a verbosity level,
   /// 2 overrides if not verbosity is specified Logger will internal level
   /// until an explict setting is done with setInternalVerbosity.
-  void Log(Verbosity level, const char *message);
+  void log(Verbosity level, const char *message);
 
   /// @brief log a message given the default set verbosity level
-  void Log(const char *message);
+  void log(const char *message);
 
   /// @brief get the singleton instance of the Logger
   static Logger &getInstance();

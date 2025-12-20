@@ -15,10 +15,10 @@ TEST_CASE("Logger Verbosity Test") {
   Logger &Logger = Logger::getInstance();
 
   Logger.setInternalVerbosity(Logger::V_ERROR);
-  Logger.Log("default internal Error message.");
+  Logger.log("default internal Error message.");
 
-  Logger.Log(Logger::VERBOSITY_2, "verbosity 2 message.");
-  Logger.Log(Logger::VERBOSITY_4, "verbosity 4 message.");
+  Logger.log(Logger::V_INFO, "verbosity 2 message.");
+  Logger.log(Logger::V_INFO, "verbosity 4 message.");
 }
 
 TEST_CASE("Logger Enabled Test ") {

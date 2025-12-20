@@ -18,10 +18,10 @@
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING       = UTF-8
 PROJECT_NAME            = @PROJECT_NAME@
-PROJECT_NUMBER          = @PROJECT_VERSION@
+PROJECT_NUMBER          = @TARGET_VERSION@
 PROJECT_BRIEF           = 
-PROJECT_LOGO            = @PROJECT_LOGO_PATH@
-PROJECT_ICON            = @PROJECT_LOGO_PATH@ 
+PROJECT_LOGO            = 
+PROJECT_ICON            = 
 OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
 OUTPUT_LANGUAGE         = English
 MARKDOWN_SUPPORT        = YES
@@ -34,6 +34,9 @@ GENERATE_TREEVIEW       = YES
 HTML_COLORSTYLE         = 
 HTML_EXTRA_STYLESHEET   = @DOXYGEN_EXTRA_STYLESHEET@
 LAYOUT_FILE             = @DOXYGEN_LAYOUT_FILE@
+HTML_HEADER            =  @DOXYGEN_HTML_HEADER@
+HTML_FOOTER            =  @DOXYGEN_HTML_FOOTER@
+HTML_STYLESHEET        =  @DOXYGEN_STYLESHEET@
 
 #---------------------------------------------------------------------------
 # Build related configuration options
@@ -63,6 +66,7 @@ FILE_PATTERNS          = *.cxx \
 #---------------------------------------------------------------------------
 #USE_MDFILE_AS_MAINPAGE = @MAINPAGE@
 HAVE_DOT               = YES
+DOT_NUM_THREADS        = 3
 INTERACTIVE_SVG        = YES
 DOT_IMAGE_FORMAT       = svg
 DOT_GRAPH_MAX_NODES    = 100

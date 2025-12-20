@@ -12,24 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef STATEFLOWEVENT_H
+#define STATEFLOWEVENT_H
+
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
 #include "StateflowElementBase.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Stateflow event object.*/
 class StateflowEvent : public StateflowElementBase {
 public:
   StateflowEvent();
+  StateflowEvent(StateflowEvent &orig);
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:
-  StateflowEvent(StateflowEvent &orig);
-  SimulinkErrorType
-  remove(std::shared_ptr<SimulinkElementBase> element) override {
-    // CCSMPre.isFalse(getParent() == null,
-    //                 "Event has no parent to be removed from.");
-    // getParent().removeEvent(this);
-  }
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // STATEFLOWEVENT_H

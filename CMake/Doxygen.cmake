@@ -1,7 +1,8 @@
 #[=======================================================================[.rst:
-Doxygen Configuration
+Doxygen 
 ---------------------
 #]=======================================================================]
+
 if(NOT ENABLE_DOCUMENTATION)
     return()    
 endif()
@@ -13,11 +14,16 @@ if(NOT DOXYGEN_FOUND)
     message(WARNING "Doxygen not found, documentation will not be generated")
     return()
 endif()
+message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
+
 
 set(DOXYGEN_OUTPUT_DIR "${CMAKE_CURRENT_BINARY_DIR}")
-set(DOXYGEN_EXTRA_STYLESHEET ${CMAKE_CURRENT_SOURCE_DIR}/assets/stylesheet.css)
-set(PROJECT_LOGO_PATH ${CMAKE_CURRENT_SOURCE_DIR}/logo/logo.png)
+set(DOXYGEN_HTML_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/assets/doxy_header.html)
 set(DOXYGEN_LAYOUT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/layouts/DoxygenLayout.xml)
+set(PROJECT_LOGO_PATH ${CMAKE_CURRENT_SOURCE_DIR}/logo/logo.png)
+set(DOXYGEN_EXTRA_STYLESHEET "")
+set(DOXYGEN_HTML_FOOTER      "")
+
 
 set(DOXYGEN_INPUT "${PROJECT_SOURCE_DIR}/Common \
                 ${PROJECT_SOURCE_DIR}/IO \
@@ -28,8 +34,15 @@ set(DOXYGEN_INPUT "${PROJECT_SOURCE_DIR}/Common \
 
 set(MAINPAGE "${PROJECT_SOURCE_DIR}/README.md")
 
-add_custom_target(documents ALL
-    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile.h
+# A workaround for configure_module function that generates DoxyFile.h
+# while Doxygen needs Doxyfile to run properly, both files still beeing 
+# generated
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in 
+ ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY
+)
+
+add_custom_target(documentation ALL
+    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     COMMENT "Generating ${PROJECT_NAME} API documentation with Doxygen"
     VERBATIM

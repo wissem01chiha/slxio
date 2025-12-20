@@ -1,5 +1,5 @@
 add_test_sources(Common::System
   TestFile.cxx
-  TestError.cxx
+  TestStatus.cxx
   TestDirectory.cxx
 )

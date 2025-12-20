@@ -22,9 +22,13 @@ INSTALL_TARGETS
   TRUE 
 CLASSES
   StateflowElementBase
+  StateflowEvent
+  StateflowTarget
 SOURCES
 HEADERS
   StateflowElementBase.h
+  StateflowEvent.h
+  StateflowTarget.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS

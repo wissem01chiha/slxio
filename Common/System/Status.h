@@ -12,33 +12,46 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef STATUS_H
+#define STATUS_H
 
 #include "APIExport.h"
 #include "ErrorCode.h"
 #include "Type.h"
+#include <string>
 
 /**
- * @class Error
- * This class contian all the error codes used across the library/and modules
+ * @class Status
+ * A wrapper class for handling error codes within the system.
  * naming of module related code gnerally is : <MODULE_NAME>_ERR_<DESCRIPTION>
  * eg; SLX_ERR_OPEN, SYSTEM_ERR_TIMEOUT, ....
  * this class contain general error codes and each module canadd it own errors
- * @example return an error code from a function
+ * @note This class was renamed from "Error" class name for MSBuild compatibility (MSB8066)
+ * and issue with doxygen documentation generation. for more information see:
+ * https://developercommunity.visualstudio.com/t/MSBuild:-error:-output-of-custom-build/10554390?sort=newest
+ * https://stackoverflow.com/questions/78622876/visual-studio-msbuild-error-msb8066-custom-build
  */
-class APIEXPORT Error {
+class APIEXPORT Status {
 public:
-  Error();
-  Error(ErrorCode id);
-  static const char *toString(ErrorCode type);
+  Status();
+  Status(ErrorCode id);
+  Status(ErrorCode id, const std::string &message);
+
+  /// @brief Convert an explict ErrorCode to a string.
+  static const char* toString(ErrorCode type);
+
+  /// @brief Convert the current Error object's code to a string.
   const char *toString() const;
+
   static ErrorCode toErrorCode(uint32 value);
   bool isA(ErrorCode type) const;
-  ~Error() = default;
+  bool isA(Status& type) const;
+  
+  ~Status() = default;
 
 private:
   ErrorCode errno_;
+  std::string message_;
 };
 
-#endif // ERROR_H
+#endif // STATUS_H

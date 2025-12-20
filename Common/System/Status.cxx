@@ -1,8 +1,9 @@
-#include "Error.h"
+#include "Status.h"
 
-Error::Error() { errno_ = ErrorCode::Ok; }
+Status::Status() { errno_ = ErrorCode::Ok;
+message_ = std::string("");  }
 
-const char *Error::toString(ErrorCode type) {
+const char *Status::toString(ErrorCode type) {
 
   switch (type) {
   case ErrorCode::Ok:
@@ -44,12 +45,20 @@ const char *Error::toString(ErrorCode type) {
   }
 }
 
-const char *Error::toString() const { return toString(this->errno_); }
+const char *Status::toString() const { return toString(this->errno_); }
 
-ErrorCode Error::toErrorCode(uint32 value) {
+ErrorCode Status::toErrorCode(uint32 value) {
   return static_cast<ErrorCode>(value);
 }
 
-bool Error::isA(ErrorCode type) const { return errno_ == type; }
+bool Status::isA(ErrorCode type) const { return errno_ == type; }
 
-Error::Error(ErrorCode id) { errno_ = id; }
+bool Status::isA(Status &type) const { return errno_ == type.errno_ && message_ == type.message_; }
+
+
+Status::Status(ErrorCode id) { errno_ = id; }
+
+Status::Status(ErrorCode id, const std::string &message) {
+  errno_ = id;
+  message_ = message;
+}

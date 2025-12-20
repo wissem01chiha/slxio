@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "StateflowElementBase.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -29,13 +30,10 @@ public:
   StateflowTarget();
   StateflowTarget(StateflowTarget &orig);
 
-  void remove() {
-    // CCSMPre.isFalse(getParent() == null,
-    //                "Target has no parent to be removed from.");
-    // getParent().removeTarget(this);
-  }
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override ;
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // STATEFLOWTARGET_H
