@@ -1,30 +1,12 @@
-<p align="center">
-  <img src="Documentation/Doxygen/logo/logo.png" alt="Project Logo" style="width:45%; height:auto;">
-</p>
+# SLXIO
 
-<p align="center">
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg" alt="Windows Build Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg" alt="Ubuntu Build Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg" alt="MinGW Build Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg" alt="MacOS Build Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg" alt="CodeQL Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg" alt="Doc Status"/>
-  </a>
-  <a href="https://github.com/wissem01chiha/slxio/actions/workflows/release.yml">
-    <img src="https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg" alt="Release Status"/>
-  </a>
-</p>
+[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
+[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)
+[![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
+[![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
+[![Docs](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml)
+[![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
+[![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 
 <!-- omit in toc -->
 ## Table of Contents
