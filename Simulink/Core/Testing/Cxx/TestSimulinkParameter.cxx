@@ -1,6 +1,9 @@
 #include "Doctest.h"
 #include "SimulinkParameter.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
 class SimulinkParameterTestFixture {
 public:
 protected:
@@ -8,19 +11,13 @@ protected:
 
 TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "ConstructTest") {
 
-  // SimulinkParameter *ParameterPtr = new SimulinkParameter("NAME", "10");
-  // ASSERT_EQ(ParameterPtr->getName(), "NAME");
-  // ASSERT_EQ(ParameterPtr->getValue(), "10");
-  // delete ParameterPtr;
+  SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
+  CHECK(ParameterPtr->setName("NAME")== ErrorCode::Ok );
+  CHECK(ParameterPtr->getName()== "NAME");
+  CHECK(ParameterPtr->getValueAsChar()== "10");
+  delete ParameterPtr;
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "StaticCastValueTest") {
-
-  // SimulinkParameter *ParameterPtr =
-  //     new SimulinkParameter("NAME", "10.025", "double");
-  // float64 val = ParameterPtr->static_cast_value<float64>();
-  // EXPECT_DOUBLE_EQ(val, 10.025);
-}
 
 TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "SetAndCastValueTest") {
 
@@ -41,3 +38,6 @@ TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "StaticCastVectorTest") {
   // EXPECT_NEAR(val[1], 10.2, 1e-6);
   // EXPECT_NEAR(val[2], 4.5, 1e-6);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

@@ -114,7 +114,11 @@ const char *SimulinkParameter::toString(ValueType vtype) {
 const char *SimulinkParameter::getName() { return Name; }
 
 ErrorCode SimulinkParameter::setName(const char *name) {
-  if (strcmp(name, "")) {
+  
+  if(name == nullptr || strcmp(name, "")==0){
+    return ErrorCode:: SLX_ERR_NULL_PTR;
+  }
+  if (!strcmp(name, "")) {
     return ErrorCode::InvalidArgument;
   }
   Name = name;

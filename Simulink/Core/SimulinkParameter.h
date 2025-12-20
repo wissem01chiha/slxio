@@ -26,6 +26,9 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief A Simulink parameter object.
+ */
 class SimulinkParameter {
 public:
   enum ValueType { Int, Double, String, Vector, Char };

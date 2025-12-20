@@ -1,5 +1,7 @@
 #include "SimulinkPort.h"
-#include "SlxioTestConfig.h"
-#include <gtest/gtest.h>
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-using namespace slxio;
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

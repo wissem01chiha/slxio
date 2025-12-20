@@ -1,11 +1,19 @@
+#include "Doctest.h"
 #include "SimulinkLine.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkLineTestFixture {
 protected:
-  void SetUp() override {
-    slog_init("logfile", SLOG_FLAGS_ALL, 0);
-    slog_disable(SLOG_TRACE);
-  }
-
-  void TearDown() override { slog_destroy(); }
+  
 };
+
+TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test") {
+
+  SimulinkLine line;
+}
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+

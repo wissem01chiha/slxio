@@ -3,8 +3,8 @@ exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
 
-Name: SysDK
-Description: System Design and Verification Toolkit
+Name: SLXIO
+SIMULINK SLX File I/O Library
 Version: @PROJECT_VERSION@
-Libs: -L${libdir} -lSDK
+Libs: -L${libdir} -lSLXIO
 Cflags: -I${includedir}
