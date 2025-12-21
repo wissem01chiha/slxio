@@ -16,7 +16,7 @@ BASE=$(git rev-parse --show-toplevel)
 ALLFILES=$(git ls-tree --full-tree --name-only -r HEAD \
     | grep -E ".*\.(c|cpp|cxx|h|hpp)$" \
     | grep -v "^ThirdParty/" \
-    | grep -v "^Library/" \
+    | grep -v "^Documentation/" 
 )
 for FILE in $ALLFILES; do
     "$STYLE" -i "$BASE/$FILE"

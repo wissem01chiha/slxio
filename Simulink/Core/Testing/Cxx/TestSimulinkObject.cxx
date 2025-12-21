@@ -1,15 +1,19 @@
 #include "Doctest.h"
-#include "SimulinkArray.h"
+#include "SimulinkObject.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObjectTestFixture {
 public:
 protected:
+SimulinkObject obj;
 };
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddNullParameterTest") {
 
-  // SimulinkErrorType status = obj.add(nullptr);
-  // EXPECT_EQ(status, SimulinkErrorType::SLX_ERR_NULL_PTR);
+  ErrorCode status = obj.add(nullptr);
+  CHECK(status== ErrorCode::SLX_ERR_NULL_PTR);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest") {
@@ -46,3 +50,6 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "ContainsObjectTest") {
   // ASSERT_EQ(obj.contains(1), 1);
   // ASSERT_NE(obj.contains(1), 0);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

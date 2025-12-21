@@ -13,10 +13,10 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
-#include "SimulinkConstant.h"
 #include "StateflowDeclContainerBase.h"
 #include "StateflowElementBase.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -31,7 +31,7 @@ public:
 protected:
   StateflowDeclBase(StateflowDeclBase &orig);
 
-  std::string getName() { return std::string(SimulinkConstant::PARAM_name); }
+  //std::string getName() { return std::string(SimulinkConstant::PARAM_name); }
 
   std::string toString() const override {
     // return getName() + " [" + getStateflowId() + "]";
@@ -39,3 +39,4 @@ protected:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

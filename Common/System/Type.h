@@ -68,7 +68,7 @@ using uint16l = std::uint_least16_t;
 using sint32l = std::int_least32_t;
 using uint32l = std::uint_least32_t;
 
-#define AssertTypeEqual(var, var2)                                             \
+#define AssertTypeEqual(var1, var2)                                            \
   static_assert(std::is_same<decltype(var1), decltype(var2)>::value)
 
 template <template <typename> class T, typename First, typename... Rest>

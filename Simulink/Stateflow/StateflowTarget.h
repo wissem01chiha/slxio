@@ -30,7 +30,7 @@ public:
   StateflowTarget();
   StateflowTarget(StateflowTarget &orig);
 
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override ;
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 };
 
 SLXIO_ABI_NAMESPACE_END

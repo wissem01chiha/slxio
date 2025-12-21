@@ -2,7 +2,6 @@
 Testing
 -----------------
 #]=======================================================================]
-
 include(CTest)
 include(Module)
 
@@ -15,7 +14,6 @@ if(${PROJECT_NAME}_ENABLE_BINDING_TEST AND NOT ${PROJECT_NAME}_ENABLE_TESTING)
 endif()
 
 if(${PROJECT_NAME}_ENABLE_TESTING)
-
     enable_testing()
     find_modules(_module_dirs ${CMAKE_CURRENT_SOURCE_DIR})
     foreach(_module_dir IN  LISTS _module_dirs)
@@ -24,7 +22,6 @@ if(${PROJECT_NAME}_ENABLE_TESTING)
             add_subdirectory(${_module_test_dir})
         endif()
     endforeach()
-
     if(${PROJECT_NAME}_ENABLE_COVERAGE)
         if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
             add_compile_options(--coverage)

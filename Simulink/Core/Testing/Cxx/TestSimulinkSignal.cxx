@@ -1,10 +1,10 @@
 #include "Doctest.h"
-#include "SimulinkPort.h"
+#include "SimulinkSignal.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkPortTestFixture {
+class SimulinkSignalTestFixture {
 protected:
 };
 

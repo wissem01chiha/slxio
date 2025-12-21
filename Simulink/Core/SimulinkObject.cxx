@@ -5,7 +5,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkObject::SimulinkObject() {}
+SimulinkObject::SimulinkObject() { propName = std::string(""); }
 
 SimulinkObject::SimulinkObject(Index id, std::string name,
                                std::string className)
@@ -70,26 +70,28 @@ std::string SimulinkObject::toString() const {
 
 ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element) {
 
+  Logger &l = Logger::getInstance();
   if (element == nullptr) {
-    // slog_warn("Cannot remove a null Simulink element.");
-    // return ErrorCode::SLX_ERR_NULL_PTR;
+    l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
-  // if (element->getType() != SimulinkElementType::Array &&
-  //     element->getType() != SimulinkElementType::Object) {
-  //   // slog_error(
-  //   //     "Cannot remove a Simulink element of a different type than Array "
-  //   //     "or Object to a SimulinkObject");
-  //   return SimulinkErrorType::SLX_ERR_TYPE_MISMATCH;
-  // }
+  if (element->getType().isA(SimulinkElementType::Array) ||
+      element->getType().isA(SimulinkElementType::Object)) {
+    l.log(Logger::V_ERROR, "Cannot remove a Simulink element of a different "
+                           "type than Array or Object to a SimulinkObject");
+    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+  }
   return ErrorCode::Ok;
 }
 
 ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element) {
 
+  Logger &l = Logger::getInstance();
   if (element == nullptr) {
-    // slog_warn("SimulinkObject::Cannot add a null Simulink element.");
-    // return ErrorCode::SLX_ERR_NULL_PTR;
+    l.log(Logger::V_WARNING,
+          "SimulinkObject::Cannot add a null Simulink element.");
+    return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
   // if (element->getType() != SimulinkElementType::Array &&

@@ -1,31 +1,49 @@
-
-
+#[=======================================================================[.rst:
+Summery
+-----------------
+#]=======================================================================]
 message("")  
 message("***************  ${PROJECT_NAME} Build Configuration Summary *******************")
 
-slxio_config_entry("Platform"           "${CMAKE_SYSTEM_NAME}")
-slxio_config_entry("Architecture"       "${CMAKE_SYSTEM_PROCESSOR}")
-slxio_config_entry("Compiler"           "${CMAKE_CXX_COMPILER_ID}")
-slxio_config_entry("Compiler Version"   "${CMAKE_CXX_COMPILER_VERSION}")
-slxio_config_entry("Build Type"         "${CMAKE_BUILD_TYPE}")
-slxio_config_entry("Shared Libs"        "${SLXIO_BUILD_SHARED_LIBS}")
-slxio_config_entry("Version"            "${PROJECT_VERSION}")
-slxio_config_entry("Top Level Build"    "${SLXIO_TOP_LEVEL_BUILD}")
-slxio_config_entry("Install prefix"     "${CMAKE_INSTALL_PREFIX}")
-slxio_config_entry("HDF5"               "${SLXIO_HDF5}")
-slxio_config_entry("OpenMP"             "${SLXIO_OPENMP}")
-slxio_config_entry("AVX"                "${SLXIO_AVX}")
-slxio_config_entry("OpenMP Version"     "${OpenMP_C_VERSION}")
-slxio_config_entry("Testing"            "${SLXIO_BUILD_TESTS}")
-slxio_config_entry("JSON"               "${SLXIO_JSON}")
-slxio_config_entry("Logging"            "${SLXIO_DEBUG_LOGGING}")
-slxio_config_entry("CLI"                "${SLXIO_CLI}")
-slxio_config_entry("Examples"           "${SLXIO_BUILD_EXAMPLES}")
-slxio_config_entry("Building doc"       "${SLXIO_BUILD_DOCUMENTATION}")
-slxio_config_entry("Clang-tidy"         "${SLXIO_ENABLE_CLANG_TIDY}")
-slxio_config_entry("Cppcheck"           "${SLXIO_ENABLE_CPPCHECK}")
-slxio_config_entry("Sanitizers"         "${SLXIO_ENABLE_ASAN}")
-slxio_config_entry("Build libcpp"       "${SLXIO_LIBCPP}")
-slxio_config_entry("CCache executable"  "${CCACHE}")
+message( STATUS "Platform            : ${CMAKE_SYSTEM_NAME}")
+message( STATUS "Architecture        : ${CMAKE_SYSTEM_PROCESSOR}")
+message( STATUS "Compiler            : ${CMAKE_CXX_COMPILER_ID}")
+message( STATUS "Compiler Version    : ${CMAKE_CXX_COMPILER_VERSION}")
 
+message( STATUS "Build Type          : ${CMAKE_BUILD_TYPE}")
+message( STATUS "Shared Libs         : ${BUILD_SHARED_LIBS}")
+message( STATUS "Top Level Build     : ${TOP_LEVEL_BUILD}")
+
+message( STATUS "Version             : ${PROJECT_VERSION}")
+
+message( STATUS "Namespace Name      : ${NAMESPACE_NAME}")
+message(STATUS  "ABI Namespace Name  : ${ABI_NAMESPACE_NAME}")
+
+message(STATUS  "Install             : ${ENABLE_INSTALL}")
+message( STATUS "Install prefix      : ${CMAKE_INSTALL_PREFIX}")
+message( STATUS "Package Config      : ${ENABLE_PKGCONFIG}")
+
+message( STATUS "HDF5                : ${ENABLE_HDF5}")
+
+message( STATUS "OpenMP              : ${ENABLE_OPENMP}")
+message( STATUS "OpenMP Version      : ${OpenMP_C_VERSION}")
+message( STATUS "AVX                 : ${ENABLE_AVX}")
+
+message( STATUS "Testing             : ${${PROJECT_NAME}_ENABLE_TESTING}")
+message( STATUS "Coverage            : ${${PROJECT_NAME}_ENABLE_COVERAGE}")
+message( STATUS "Fuzzing             : ${ENABLE_FUZZING}")
+
+message(STATUS  "Python Binding      : ${ENABLE_PYTHON_BINDING}")
+message(STATUS  "Python Version      : ${Python_VERSION}")
+message( STATUS "Binding Tests       : ${${PROJECT_NAME}_ENABLE_BINDING_TEST}")
+
+message( STATUS "Examples            : ${BUILD_EXAMPLES}")
+
+message( STATUS "Building doc        : ${ENABLE_DOCUMENTATION}")
+
+message( STATUS "Clang-tidy          : ${ENABLE_CLANG_TIDY}")
+message(STATUS  "Clang-format        : ${USE_CLANG_FORMAT}")
+message(STATUS  "Clang-Version       : ${CLANGFORMAT_EXECUTABLE}")
+message( STATUS "Cppcheck            : ${ENABLE_CPPCHECK}")
+message( STATUS "Sanitizers          : ${ENABLE_SANITIZER}")
 message("")  

@@ -1,3 +1,4 @@
+#include "Doctest.h"
 #include "SimulinkBlock.h"
 
 class SimulinkBlockTestFixture : public ::testing::Test {

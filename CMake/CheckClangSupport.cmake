@@ -23,11 +23,6 @@ Import Behavior
 # or builidng becuse thay are too big to include as part of the repo
 
 #]=======================================================================]
-
-set(USE_CLANG_FORMAT "WANTED" CACHE STRING "Clang-Format support mode")
-set_property(CACHE USE_CLANG_FORMAT PROPERTY STRINGS WANTED REQUIRED DISABLED)
-mark_as_advanced(USE_CLANG_FORMAT)
-
 if(ENABLE_CLANG_TIDY)
     message(STATUS "Checking if Clang-Tidy is available")
     find_program(CLANGTIDY clang-tidy)

@@ -16,24 +16,24 @@
 #define SIMULINKSIGNAL_H
 
 #include "ABINamespace.h"
-#include "SimulinkDataType.h"
 #include "APIExport.h"
-#include "ErrorCode.h"
 #include "CoderInfo.h"
+#include "ErrorCode.h"
+#include "SimulinkDataType.h"
 #include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief A SimulinkSignal Object
+ */
 class APIEXPORT SimulinkSignal {
 public:
-enum ComplexityType { Auto, Real, Complex };
-
   SimulinkSignal();
   ~SimulinkSignal() = default;
   ErrorCode setDataType(SimulinkDataType dt);
-  ErrorCode setComplexity(ComplexityType ct);
 
   /// @brief Mimics MatWorks API for setting data type from char
   ErrorCode setDataType(const char *dt);
@@ -42,9 +42,11 @@ enum ComplexityType { Auto, Real, Complex };
 private:
   const char *InitialValue;
   SimulinkDataType DataType;
+
   const char *Description;
   const char *Unit;
-  ComplexityType Complexity;
+  const char *Complexity = "real";
+
   const char *DimensionsMode;
   std::vector<uint16> Dimensions;
   std::vector<Float> SampleTime;

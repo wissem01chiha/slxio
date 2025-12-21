@@ -1,35 +1,24 @@
 #[=======================================================================[.rst:
-ABINamespace
+Namespace
 ------------
-
+Define project namespace and ABI namespace if enabled.
+sets :
+  NAMESPACE_BEGIN, NAMESPACE_END, 
+  SLXIO_ABI_NAMESPACE_BEGIN, SLXIO_ABI_NAMESPACE_END
 #]=======================================================================]
-include(CMakeDependentOption)
 include(Version)
-
-option(ENABLE_NAMESPACE "Enable global namespace" TRUE)
-mark_as_advanced(ENABLE_NAMESPACE)
-
-cmake_dependent_option(
-  ENABLE_ABI_NAMESPACE
-  "Enable ABI namespace" ON
-  "ENABLE_NAMESPACE" OFF
-)
-mark_as_advanced(ENABLE_ABI_NAMESPACE)
+include(CMakeDependentOption)
 
 if(ENABLE_NAMESPACE)
-
     set(NAMESPACE_NAME ${PROJECT_NAME})
-    message(STATUS "using namespace: ${NAMESPACE_NAME}")
     set(NAMESPACE_BEGIN "namespace ${NAMESPACE_NAME} {")
     set(NAMESPACE_END   "}; // namespace ${NAMESPACE_NAME}")
 
     if(ENABLE_ABI_NAMESPACE)
         set(ABI_NAMESPACE_NAME 
-        "v${VERSION_MAJOR}${VERSION_MINOR}${VERSION_PATCH}"
+        "v${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}"
         )
-        message(STATUS "using ABI namespace: ${ABI_NAMESPACE_NAME}")
         set(SLXIO_ABI_NAMESPACE_BEGIN "namespace ${ABI_NAMESPACE_NAME} {")
         set(SLXIO_ABI_NAMESPACE_END   "}; // namespace ${ABI_NAMESPACE_NAME}")
     endif()
-
 endif()

@@ -9,11 +9,11 @@ StateflowTarget::StateflowTarget(StateflowTarget &orig)
 
 ErrorCode
 StateflowTarget::remove(std::shared_ptr<SimulinkElementBase> element) {
-    // CCSMPre.isFalse(getParent() == null,
-    //                "Target has no parent to be removed from.");
-    // getParent().removeTarget(this);
-    return ErrorCode::Ok;
-  }
+  // CCSMPre.isFalse(getParent() == null,
+  //                "Target has no parent to be removed from.");
+  // getParent().removeTarget(this);
+  return ErrorCode::Ok;
+}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

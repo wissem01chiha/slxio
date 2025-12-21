@@ -17,6 +17,8 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Type.h"
+#include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -24,23 +26,42 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @enum SimulinkDataType
  * @brief Simulink Supported data types.
- * @see https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
+ * @see
+ * https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
  */
-enum class SimulinkDataType {
-    Auto = 0,
-    Double,
-    Single,
-    Int8,
-    UInt8,
-    Int16,
-    UInt16,
-    UInt64,
-    Int32,
-    UInt32,
-    Boolean,
-    Half,
-    String
+enum class APIEXPORT SimulinkDataType {
+  Auto = 0,
+  Double,
+  Single,
+  Int8,
+  UInt8,
+  Int16,
+  UInt16,
+  UInt64,
+  Int32,
+  UInt32,
+  Boolean,
+  Half,
+  String
 };
+
+SimulinkDataType toSimulinkDataType(bool);
+
+SimulinkDataType toSimulinkDataType(Float);
+
+SimulinkDataType toSimulinkDataType(sint8);
+SimulinkDataType toSimulinkDataType(sint16);
+SimulinkDataType toSimulinkDataType(sint32);
+
+SimulinkDataType toSimulinkDataType(uint8);
+SimulinkDataType toSimulinkDataType(uint16);
+SimulinkDataType toSimulinkDataType(uint32);
+SimulinkDataType toSimulinkDataType(uint64);
+
+SimulinkDataType toSimulinkDataType(const std::string &);
+
+SimulinkDataType toSimulinkDataType(const char *sldt);
+const char *toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

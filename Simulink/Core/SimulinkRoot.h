@@ -24,6 +24,10 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief A Mimic for SimulinkRoot Object
+ * @see 
+ */
 class APIEXPORT SimulinkRoot {
 public:
   SimulinkRoot();

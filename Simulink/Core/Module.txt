@@ -21,6 +21,7 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
+  SimulinkDataType
   SimulinkElementBase
   SimulinkArray
   SimulinkBlock
@@ -46,6 +47,7 @@ HEADERS
   SimulinkParameter.h
   SimulinkPortType.h
   SimulinkLine.h
+  SimulinkDataType.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS 

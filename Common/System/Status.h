@@ -26,8 +26,9 @@
  * naming of module related code gnerally is : <MODULE_NAME>_ERR_<DESCRIPTION>
  * eg; SLX_ERR_OPEN, SYSTEM_ERR_TIMEOUT, ....
  * this class contain general error codes and each module canadd it own errors
- * @note This class was renamed from "Error" class name for MSBuild compatibility (MSB8066)
- * and issue with doxygen documentation generation. for more information see:
+ * @note This class was renamed from "Error" class name for MSBuild
+ * compatibility (MSB8066) and issue with doxygen documentation generation. for
+ * more information see:
  * https://developercommunity.visualstudio.com/t/MSBuild:-error:-output-of-custom-build/10554390?sort=newest
  * https://stackoverflow.com/questions/78622876/visual-studio-msbuild-error-msb8066-custom-build
  */
@@ -38,15 +39,15 @@ public:
   Status(ErrorCode id, const std::string &message);
 
   /// @brief Convert an explict ErrorCode to a string.
-  static const char* toString(ErrorCode type);
+  static const char *toString(ErrorCode type);
 
   /// @brief Convert the current Error object's code to a string.
   const char *toString() const;
 
   static ErrorCode toErrorCode(uint32 value);
   bool isA(ErrorCode type) const;
-  bool isA(Status& type) const;
-  
+  bool isA(Status &type) const;
+
   ~Status() = default;
 
 private:

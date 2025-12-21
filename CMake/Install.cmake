@@ -1,16 +1,13 @@
 #[=======================================================================[.rst:
 Install
 -----------------
-Provides installation rules for the project.
 #]=======================================================================]
-
 if (CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
     set(CMAKE_INSTALL_PREFIX "${CMAKE_BINARY_DIR}/install" CACHE PATH "Default install path" FORCE)
 endif()
 
-if(MTK_TOP_LEVEL_BUILD)
+if(TOP_LEVEL_BUILD)
 
-    # ---[ Install 
     install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/slxio DESTINATION include
     FILES_MATCHING PATTERN "*.h" 
     )

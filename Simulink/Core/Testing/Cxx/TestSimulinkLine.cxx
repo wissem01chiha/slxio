@@ -6,7 +6,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkLineTestFixture {
 protected:
-  
 };
 
 TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test") {
@@ -16,4 +15,3 @@ TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test") {
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-

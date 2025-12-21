@@ -1,4 +1,8 @@
+#include "Doctest.h"
 #include "SimulinkArray.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkArrayTestFixture {
 protected:
@@ -78,3 +82,6 @@ TEST_F(SimulinkArrayTestFixture, ConatinsArrayTest) {
   ASSERT_EQ(array->contains(1), 1);
   ASSERT_NE(array->contains(1), 0);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

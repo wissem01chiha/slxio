@@ -4,39 +4,43 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkParameterTestFixture {
-public:
-protected:
-};
-
-TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "ConstructTest") {
+TEST_CASE("SimulinkParameter") {
 
   SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
-  CHECK(ParameterPtr->setName("NAME")== ErrorCode::Ok );
-  CHECK(ParameterPtr->getName()== "NAME");
-  CHECK(ParameterPtr->getValueAsChar()== "10");
+  CHECK(ParameterPtr->setName("NAME") == ErrorCode::Ok);
+  CHECK(std::strcmp(ParameterPtr->getName(), "NAME") == 0);
+  CHECK(ParameterPtr->getValueAsString() == "10");
   delete ParameterPtr;
 }
 
+TEST_CASE("SimulinkParameter") {
 
-TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "SetAndCastValueTest") {
-
-  // SimulinkParameter *ParameterPtr = new SimulinkParameter();
-  // SimulinkErrorType status = ParameterPtr->setValue("10.25");
-  // ASSERT_EQ(status, SimulinkErrorType::SLX_OK);
-
-  // float64 val = ParameterPtr->static_cast_value<float64>();
-  // EXPECT_TRUE(std::isnan(val));
+  SimulinkParameter *ParameterPtr = new SimulinkParameter("10.0");
+  AssertTypeEqual((Float)10.0, ParameterPtr->getValueAsDouble());
+  CHECK(ParameterPtr->getValueAsDouble() == (Float)10.0);
+  delete ParameterPtr;
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterTestFixture, "StaticCastVectorTest") {
+TEST_CASE("SimulinkParameter") {
 
-  // SimulinkParameter *ParameterPtr =
-  //     new SimulinkParameter("NAME", "[10.025, 10.2, 4.5]", "double");
-  // std::vector<float64> val = ParameterPtr->static_cast_vector<float64>();
-  // EXPECT_NEAR(val[0], 10.025, 1e-6);
-  // EXPECT_NEAR(val[1], 10.2, 1e-6);
-  // EXPECT_NEAR(val[2], 4.5, 1e-6);
+  SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
+  AssertTypeEqual((uint8)10, ParameterPtr->getValueAsUInt8());
+  CHECK(ParameterPtr->getValueAsUInt8() == (uint8)10);
+  delete ParameterPtr;
+}
+
+TEST_CASE("SimulinkParameter") {
+
+  SimulinkParameter *ParameterPtr =
+      new SimulinkParameter("[10.025, 10.2, 4.5]");
+  const std::vector<Float> vec = {10.025, 10.2, 4.5};
+  const std::vector<Float> arr = ParameterPtr->getValueAsArray();
+  AssertTypeEqual(vec, arr);
+
+  CHECK(arr[0] == doctest::Approx(10.025).epsilon(FloatEps));
+  CHECK(arr[1] == doctest::Approx(10.2).epsilon(FloatEps));
+  CHECK(arr[2] == doctest::Approx(4.5).epsilon(FloatEps));
+  delete ParameterPtr;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -10,43 +10,124 @@
 
 <!-- omit in toc -->
 ## Table of Contents
-- [1.0 Introduction](#10-introduction)
-  - [1.2 Supported MATLAB Versions](#12-supported-matlab-versions)
-  - [1.3 Contact](#13-contact)
-  - [1.4 Contributing](#14-contributing)
-- [2.0 Building](#20-building)
-  - [2.1 Dependencies](#21-dependencies)
-    - [2.1.1 zlib](#211-zlib)
-    - [2.1.1 HDF5](#211-hdf5)
-  - [2.2 Building SLXIO](#22-building-slxio)
-    - [2.2.1 Quick Build Guide](#221-quick-build-guide)
-    - [2.2.2 Configure Options](#222-configure-options)
-  - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
-- [3.0 Testing](#30-testing)
-- [4.0 Examples](#40-examples)
-  - [4.1 Integrate in Other Porjects](#41-integrate-in-other-porjects)
-  - [4.1.1 Integrate using CPM](#411-integrate-using-cpm)
-  - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
-  - [4.2 Reading an slx file](#42-reading-an-slx-file)
-- [5.0 Developer-Notes](#50-developer-notes)
-- [6.0 License](#60-license)
+- [SLXIO](#slxio)
+  - [1.0 Overview](#10-overview)
+    - [1.2 Supported MATLAB](#12-supported-matlab)
+      - [1.2.1 Supported Simulink Blocks](#121-supported-simulink-blocks)
+      - [1.2.2 Supported MATLAB Releases](#122-supported-matlab-releases)
+    - [1.3 Contact](#13-contact)
+    - [1.4 Contributing](#14-contributing)
+  - [2.0 Building](#20-building)
+    - [2.1 Dependencies](#21-dependencies)
+      - [2.1.1 zlib](#211-zlib)
+      - [2.1.1 HDF5](#211-hdf5)
+    - [2.2 Building SLXIO](#22-building-slxio)
+      - [2.2.1 Quick Build Guide](#221-quick-build-guide)
+      - [2.2.2 Configure Options](#222-configure-options)
+    - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
+  - [3.0 Testing](#30-testing)
+  - [4.0 Examples](#40-examples)
+    - [4.1 Integrate in Other Porjects](#41-integrate-in-other-porjects)
+    - [4.1.1 Integrate using CPM](#411-integrate-using-cpm)
+    - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
+    - [4.2 Reading an slx file](#42-reading-an-slx-file)
+  - [5.0 Developer-Notes](#50-developer-notes)
+  - [6.0 License](#60-license)
 
-## 1.0 Introduction
-SLXIO is an open-source C++17 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files. 
+## 1.0 Overview
 
-This library is designed for use by projects that do not have access or do not want to rely on MATLAB's libraries.
+**slxio** is an open-source C++11 library for reading and writing  
+[Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
-This project is originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project ([ConQAT site](https://teamscale.com/blog/en/news/blog/conqat-end-of-life)).
+This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
+
+The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here:  
+[SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).  
+It has since been ported to C++ and refactored into a highly modular architecture.
+
+**slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
+
+The project is actively under development, and contributions are very welcome. See the [Developer Guide](developers_guide) page for more information.
+
+To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases).  
+For building the library from source, see the same page for detailed instructions.
+
+Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [Feature Overview](feature) page.
+
+**Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
 
 
-### 1.2 Supported MATLAB Versions
+### 1.2 Supported MATLAB  
 
-The primary supported MATLAB version is **R2019a**. However, other versions later than R2019a may be compatible, provided the Simulink XML schema has not changed significantly between releases.
+The primary supported MATLAB version is **R2019a**. Other versions later than R2019a may also be compatible, provided the Simulink XML schema has not changed significantly between releases.  
 
-Currently, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project is based on reverse engineering and interpretation of actual SLX files.
+Currently, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual SLX files.
 
-To ensure compatibility when using SLXIO with other Simulink versions, we recommend exporting models to R2019a before reading them. This process may require a valid MATLAB license. for more information see [link](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html)
+To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. For more information, see:  
+[Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
+---
+
+#### 1.2.1 Supported Simulink Blocks
+
+The following table lists the Simulink blocks that are currently supported for reading by **slxio**.  
+
+> **Note:** Reading or Writing block parameter support is currently not implemented for any blocks.
+
+| Block Name          | Supported Since | Read | Write | Parameters |
+|---------------------|-----------------|------|-------|------------|
+| Gain                |                 | ❌   | ❌    | ❌        |
+| Sum                 |                 | ❌   | ❌    | ❌        |
+| Constant            |                 | ❌   | ❌    | ❌        |
+| Product             |                 | ❌   | ❌    | ❌        |
+| Subsystem           |                 | ❌   | ❌    | ❌        |
+| Stateflow Chart     |                 | ❌   | ❌    | ❌        |
+| Inport              |                 | ❌   | ❌    | ❌        |
+| Outport             |                 | ❌   | ❌    | ❌        |
+| Scope               |                 | ❌   | ❌    | ❌        |
+| Mux                 |                 | ❌   | ❌    | ❌        |
+| Demux               |                 | ❌   | ❌    | ❌        |
+| Enabled Subsystem   |                 | ❌   | ❌    | ❌        |
+| Triggered Subsystem |                 | ❌   | ❌    | ❌        |
+| Delay               |                 | ❌   | ❌    | ❌        |
+| Unit Delay          |                 | ❌   | ❌    | ❌        |
+| Memory              |                 | ❌   | ❌    | ❌        |
+| Data Store Read     |                 | ❌   | ❌    | ❌        |
+| Data Store Write    |                 | ❌   | ❌    | ❌        |
+| MATLAB Function     |                 | ❌   | ❌    | ❌        |
+| If Action Subsystem |                 | ❌   | ❌    | ❌        |
+| Switch              |                 | ❌   | ❌    | ❌        |
+| Multiport Switch    |                 | ❌   | ❌    | ❌        |
+| Merge               |                 | ❌   | ❌    | ❌        |
+| Chart               |                 | ❌   | ❌    | ❌        |
+| State               |                 | ❌   | ❌    | ❌        |
+| Transition          |                 | ❌   | ❌    | ❌        |
+| Event               |                 | ❌   | ❌    | ❌        |
+| Function            |                 | ❌   | ❌    | ❌        |
+| Junction            |                 | ❌   | ❌    | ❌        |
+| Action              |                 | ❌   | ❌    | ❌        |
+| Condition           |                 | ❌   | ❌    | ❌        |
+
+---
+
+#### 1.2.2 Supported MATLAB Releases
+
+| MATLAB Release | Supported Since | Read | Write | C++ | Python |
+|----------------|-----------------|------|-------|-----|--------|
+| R2019a         | 0.1.0           | ✅   | ❌    | ✅  | ❌    |
+| R2019b         | 0.1.0           | ✅   | ❌    | ✅  | ❌    |
+| R2020a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2020b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2021a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2021b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2022a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2022b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2023a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2023b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2024a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2024b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2025a         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2025b         |                 | ❌   | ❌    | ❌  | ❌    |
 
 
 ### 1.3 Contact

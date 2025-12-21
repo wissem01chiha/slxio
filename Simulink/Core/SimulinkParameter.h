@@ -19,6 +19,7 @@
 #include "APIExport.h"
 #include "CoderInfo.h"
 #include "ErrorCode.h"
+#include "SimulinkDataType.h"
 #include "Type.h"
 #include <string>
 #include <vector>
@@ -28,45 +29,62 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief A Simulink parameter object.
+ * @see https://www.mathworks.com/help/simulink/slref/simulink.parameter.html
  */
-class SimulinkParameter {
+class APIEXPORT SimulinkParameter {
 public:
-  enum ValueType { Int, Double, String, Vector, Char };
+  /// @brief Default constructor
+  SimulinkParameter();
 
-  SimulinkParameter() = default;
+  /// @brief Explicit constructor.
+  /// Accepts values provided as string literals, such as:
+  /// - Numeric literals: "10.0", "1", "true"
+  /// - Arrays: "[1,2,3]"
+  /// - Complex values: "2+2i"
+  /// Other types are treated as strings and mapped to
+  /// SimulinkDataType::String. Expressions and structs are not supported.
+  /// @note No public data type setting is exposed.
+  /// Resolution from const char* to SimulinkDataType is handled internally
+  /// by the class. Complexity defaults to "real" and is also resolved
+  /// internally.
+  SimulinkParameter(const char *val);
 
-  SimulinkParameter(uint32 val);
-  SimulinkParameter(Float val);
-  SimulinkParameter(const std::string &val);
-  SimulinkParameter(char *val);
-  SimulinkParameter(const std::vector<Float> &val);
+  /// @brief get the resolved parameter SimulinkDataType
+  SimulinkDataType getDataType();
 
-  Float getValueAsFloat();
-  uint32 getValueAsInt();
-  const char *getValueAsChar();
+  /// @brief Returns the default type representation of the parameter value.
+  /// This provides the raw value as stored internally, without conversion
+  /// to another data type.
+  const char *getValue();
+
+  /// @brief Function overloading cannot be done by return type alone,
+  /// so a variant is used instead.
+  /// @brief Resolves the const char* value and maps it to the requested
+  /// implementation data type.
+  Float getValueAsDouble();
+  Float getValueAsSingle();
+  uint8 getValueAsUInt8();
+  uint16 getValueAsUInt16();
+  const std::vector<Float> getValueAsArray();
   std::string getValueAsString();
-  const std::vector<Float> getValueAsVector();
-  CoderInfo getCoderInfo();
 
   std::vector<uint16> getDimensions();
   std::string toString();
-  static const char *toString(ValueType vtype);
+
   const char *getName();
   ErrorCode setName(const char *name);
 
+  CoderInfo getCoderInfo();
+
 private:
   const char *Name;
-  ValueType DataType;
-
-  uint32 intValue;
-  Float doubleValue;
-  char *charValue;
-  std::vector<Float> vectorValue;
-  std::string stringValue;
+  const char *Value;
+  SimulinkDataType DataType;
 
   const char *Unit;
   const char *Description;
-  const char *Complexity;
+  const char *Complexity = "real";
+
   Float Min;
   Float Max;
   std::vector<uint16> Dimensions;
@@ -76,4 +94,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // PARAMETER_H
+#endif // SIMULINKPARAMETER_H
