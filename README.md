@@ -12,6 +12,7 @@
 ## Table of Contents
 - [SLXIO](#slxio)
   - [1.0 Overview](#10-overview)
+    - [1.1 Features](#11-features)
     - [1.2 Supported MATLAB](#12-supported-matlab)
       - [1.2.1 Supported Simulink Blocks](#121-supported-simulink-blocks)
       - [1.2.2 Supported MATLAB Releases](#122-supported-matlab-releases)
@@ -26,23 +27,25 @@
       - [2.2.2 Configure Options](#222-configure-options)
     - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
   - [3.0 Testing](#30-testing)
+    - [3.1 Running Tests](#31-running-tests)
+    - [3.2 Debugging Test Failures](#32-debugging-test-failures)
   - [4.0 Examples](#40-examples)
-    - [4.1 Integrate in Other Porjects](#41-integrate-in-other-porjects)
-    - [4.1.1 Integrate using CPM](#411-integrate-using-cpm)
+    - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
+      - [4.1.1 Using CPM](#411-using-cpm)
     - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
-    - [4.2 Reading an slx file](#42-reading-an-slx-file)
-  - [5.0 Developer-Notes](#50-developer-notes)
-  - [6.0 License](#60-license)
+    - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
+    - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
+      - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
+      - [4.2.2 Access Model Block data](#422-access-model-block-data)
+  - [5.0 License](#50-license)
 
 ## 1.0 Overview
 
-**slxio** is an open-source C++11 library for reading and writing  
-[Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**slxio** is an open-source C++11 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here:  
-[SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).  
+The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here: [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).  
 It has since been ported to C++ and refactored into a highly modular architecture.
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
@@ -56,6 +59,8 @@ Examples and tutorials for beginners are hosted with the project and can be foun
 
 **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
 
+### 1.1 Features
+
 
 ### 1.2 Supported MATLAB  
 
@@ -63,10 +68,8 @@ The primary supported MATLAB version is **R2019a**. Other versions later than R2
 
 Currently, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual SLX files.
 
-To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. For more information, see:  
-[Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
-
----
+To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. 
+For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
 #### 1.2.1 Supported Simulink Blocks
 
@@ -74,60 +77,16 @@ The following table lists the Simulink blocks that are currently supported for r
 
 > **Note:** Reading or Writing block parameter support is currently not implemented for any blocks.
 
-| Block Name          | Supported Since | Read | Write | Parameters |
-|---------------------|-----------------|------|-------|------------|
-| Gain                |                 | ❌   | ❌    | ❌        |
-| Sum                 |                 | ❌   | ❌    | ❌        |
-| Constant            |                 | ❌   | ❌    | ❌        |
-| Product             |                 | ❌   | ❌    | ❌        |
-| Subsystem           |                 | ❌   | ❌    | ❌        |
-| Stateflow Chart     |                 | ❌   | ❌    | ❌        |
-| Inport              |                 | ❌   | ❌    | ❌        |
-| Outport             |                 | ❌   | ❌    | ❌        |
-| Scope               |                 | ❌   | ❌    | ❌        |
-| Mux                 |                 | ❌   | ❌    | ❌        |
-| Demux               |                 | ❌   | ❌    | ❌        |
-| Enabled Subsystem   |                 | ❌   | ❌    | ❌        |
-| Triggered Subsystem |                 | ❌   | ❌    | ❌        |
-| Delay               |                 | ❌   | ❌    | ❌        |
-| Unit Delay          |                 | ❌   | ❌    | ❌        |
-| Memory              |                 | ❌   | ❌    | ❌        |
-| Data Store Read     |                 | ❌   | ❌    | ❌        |
-| Data Store Write    |                 | ❌   | ❌    | ❌        |
-| MATLAB Function     |                 | ❌   | ❌    | ❌        |
-| If Action Subsystem |                 | ❌   | ❌    | ❌        |
-| Switch              |                 | ❌   | ❌    | ❌        |
-| Multiport Switch    |                 | ❌   | ❌    | ❌        |
-| Merge               |                 | ❌   | ❌    | ❌        |
-| Chart               |                 | ❌   | ❌    | ❌        |
-| State               |                 | ❌   | ❌    | ❌        |
-| Transition          |                 | ❌   | ❌    | ❌        |
-| Event               |                 | ❌   | ❌    | ❌        |
-| Function            |                 | ❌   | ❌    | ❌        |
-| Junction            |                 | ❌   | ❌    | ❌        |
-| Action              |                 | ❌   | ❌    | ❌        |
-| Condition           |                 | ❌   | ❌    | ❌        |
+| Block Name          | Supported Since | Read | Write |
+|---------------------|-----------------|------|-------|
+| Gain                |    0.1.0        | ✅   | ❌   |
 
----
 
 #### 1.2.2 Supported MATLAB Releases
 
 | MATLAB Release | Supported Since | Read | Write | C++ | Python |
 |----------------|-----------------|------|-------|-----|--------|
-| R2019a         | 0.1.0           | ✅   | ❌    | ✅  | ❌    |
-| R2019b         | 0.1.0           | ✅   | ❌    | ✅  | ❌    |
-| R2020a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2020b         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2021a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2021b         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2022a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2022b         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2023a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2023b         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2024a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2024b         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2025a         |                 | ❌   | ❌    | ❌  | ❌    |
-| R2025b         |                 | ❌   | ❌    | ❌  | ❌    |
+| R2019a         | 0.1.0           | ✅   | ❌    | ✅  | ❌   |
 
 
 ### 1.3 Contact
@@ -136,7 +95,8 @@ You can contact the maintainer through email at [mail](mailto:chihawissem08@gmai
 
 ### 1.4 Contributing
 
-If you are interested in collaborations, contact the maintainer via email (see section [1.2](#12-contact)).
+If you are interested in collaborations, see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide here or contact the maintainer via email (see section [1.2](#12-contact)).
+
 
 ## 2.0 Building
 
@@ -183,62 +143,127 @@ cmake --install .
 ```
 #### 2.2.2 Configure Options
 
-| Option                        | Description                                                       | Default | Supported Since |
-|------------------------------|-------------------------------------------------------------------|---------|-----------------|
-| SLXIO_OPENMP                 | Enable compiling with OpenMP support                              | TRUE    | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
-| SLXIO_AVX                 | Enable compiling with AVX/AVX2 support                              | TRUE    |  |
-| SLXIO_HDF5                   | Enable HDF5 support                                               | FALSE   | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
-| SLXIO_BUILD_TESTS            | Enable building C++ unit tests                                    | FALSE   | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
-| SLXIO_BUILD_DOCS             | Enable documentation generation                                   | FALSE   | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
-| SLXIO_BUILD_EXAMPLES         | Enable building example programs                                  | FALSE   | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
-| SLXIO_JSON                   | Enable building C++ tool scripts with JSON support                | FALSE   |       |
-| SLXIO_SIMPLE_BUILD           | Build the project as minimally as possible                        | FALSE   |       |
-| SLXIO_ONLY_COVERAGE          | Build only tests necessary for coverage                           | FALSE   |       |
-| SLXIO_LIBCPP                 | Build with libc++                                                 | FALSE   |       |
-| SLXIO_ENABLE_COVERAGE        | Enable coverage reporting for GCC/Clang                           | FALSE   |       |
-| SLXIO_ENABLE_ASAN            | Enable address sanitizer                                          | FALSE   |       |
-| SLXIO_BUILD_SHARED_LIBS      | Enable compilation of shared libraries                            | FALSE   |       |
-| SLXIO_ENABLE_CLANG_TIDY      | Enable static analysis with clang-tidy                            | FALSE   |       |
-| SLXIO_ENABLE_CPPCHECK        | Enable static analysis with cppcheck                              | FALSE   |       |
-| SLXIO_FORCE_COLORED_OUTPUT   | Always produce ANSI-colored output (GNU/Clang only)               | TRUE    |       |
-| SLXIO_DEBUG_LOGGING          | Enable debug logging                                              | TRUE    |       |
-| CMAKE_INSTALL_PREFIX         | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases)           |
+
+| Option                          | Description                                                       | Default | Supported Since |
+|---------------------------------|-------------------------------------------------------------------|---------|-----------------|
+| ENABLE_DOCUMENTATION            | Enable documentation generation                                   | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| TOP_LEVEL_BUILD                 | Enable top-level build                                            | auto    |                 |
+| ENABLE_PYTHON_BINDING           | Enable building Python interface                                  | ON      |                 |
+| ENABLE_CLANG_TIDY               | Enable static analysis with clang-tidy                            | OFF     |                 |
+| ENABLE_CPPCHECK                 | Enable static analysis with cppcheck                              | OFF     |                 |
+| ENABLE_LOGGING                  | Enable logging                                                    | ON      |                 |
+| ENABLE_SANITIZER                | Enable sanitizers (ASan/UBSan/etc.)                               | OFF     |                 |
+| ENABLE_FUZZING                  | Enable fuzzing support                                            | OFF     |                 |
+| BUILD_SHARED_LIBS               | Build as shared libraries                                         | OFF     |                 |
+| ENABLE_PKGCONFIG                | Generate pkg-config file                                          | ON      |                 |
+| ENABLE_AVX                      | Enable AVX/AVX2 optimizations where available                     | ON      |                 |
+| ENABLE_HDF5                     | Enable HDF5 support                                               | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| ENABLE_OPENMP                   | Enable compiling with OpenMP support                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| BUILD_EXAMPLES                  | Build example applications                                        | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| SLXIO_ENABLE_TESTING            | Build C++ unit tests                                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| SLXIO_ENABLE_COVERAGE           | Enable code coverage reporting (GCC/Clang)                        | OFF     |                 |
+| SLXIO_ENABLE_BINDING_TEST       | Build binding interface tests                                     | ON      |                 |
+| ENABLE_NAMESPACE                | Enable global namespace                                           | TRUE    |                 |
+| CMAKE_INSTALL_PREFIX            | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
 
 
 ### 2.3 Platform & Compiler Support
 
+| **OS**                | **Compiler** | **Version(s)**                          | **Status**             |
+|------------------------|--------------|-----------------------------------------|------------------------|
+| Windows 11             | MSVC         | 19.43 (Visual Studio 2022 v17.13)       | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)           |
+| Windows 11             | MinGW-w64    | GCC 11.2.0 , 15.2.0                             | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |
+| Ubuntu 22.04 LTS       | GNU GCC      | 11.2.0, 13.3.0                          | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |
+| Ubuntu 22.04 LTS       | Clang        | 14.0, 15.0                              | N/A        |
+| MacOS | Apple Clang | 14.0, 15.0                              | N/A |
 
-| **OS**     | **Compiler** | **Version**                          |
-|--------------------------|--------------|----------------------------------------|
-| Windows 11               | MSVC         | 19.43 (Visual Studio 2022 v17.13)      |
-| Ubuntu 22.04 LTS         | GNU GCC      | 11.2.0, 13.3.0                          |
-| macOS *(unsupported)*    | —            | May encounter build errors             |
 
 
+## 3.0 Testing
 
-## 3.0 Testing 
+Project tests are controlled via the CMake option `SLXIO_ENABLE_TESTING`.
+
+### 3.1 Running Tests
+To run all unit tests after building, use:
+
+```bash
+ctest -C Debug --output-on-failure
+```
+This will execute all project unit tests by default.
+
+
+> **Note:** Code coverage is not yet supported.
+
+### 3.2 Debugging Test Failures
 
 If a test fails, check `Testing/Temporary/LastTest.log`,
 `test/testSubDir/${testname}/${testname}.vg.out`, and other similar files.
 
 ## 4.0 Examples
 
-### 4.1 Integrate in Other Porjects 
-### 4.1.1 Integrate using CPM 
+### 4.1 Integrating in CMake Projects
+
+#### 4.1.1 Using [CPM](https://github.com/cpm-cmake/CPM.cmake)
+
+```cmake
+CPMAddPackage(
+  NAME slxio
+  GITHUB_REPOSITORY wissem01chiha/slxio
+  VERSION 0.1.0
+)
+
+add_executable(target main.cpp)
+target_link_libraries(target PRIVATE SLXIO)
+```
+
 ### 4.1.2 Integrate using vcpckg
 
+> **Note:** slxio not yet available on vcpkg 
 
+```bash
+vcpkg install slxio
+```
 
-### 4.2 Reading an slx file
+then in your CMakeLists.txt 
+
+```cmake
+find_package(slxio CONFIG REQUIRED)
+add_executable(my_app main.cpp)
+target_link_libraries(my_app PRIVATE slxio::slxio)
+```
+
+### 4.1.2 Integrate using [Conan](https://github.com/conan-io/conan)
+
+> **Note:** slxio not yet available on conan package manager
+> 
+### 4.2 Manipulating SLX Files
+
+#### 4.2.1 Reading Simulink Model MetaData
+
 ```cpp
-#include "SLXIO.h"
+#include "Slxio.h"
 
 int main() {
-    slxio::SLXModel model = slxio::read("example_model.slx");
 
-    std::cout << "Version: " << model.version() << std::endl;
-    std::cout << "Name: " << model.name() << std::endl;
+    SimulinkModelParser& mdlpptr = new SimulinkModelParser();
+    mdlpptr.setsetInputData("../FullBridgeAcDcConv.slx");
+    if(mdlpptr.parse()== ErrorCode::Ok){
 
+      SimulinkModel* mdl = mdlpptr.get();
+    }else {
+      std::throw_exception 
+    }
+
+    SimulinkModelType mdl->getModelType();
+    uint32  mdlver  =  mdl->getVersion();
+    const char* mdlname = mdl->getName();
+
+    return 0;
+}
+```
+#### 4.2.2 Access Model Block data 
+
+```cpp
     for (const auto& block : model.blocks()) {
         std::cout << block.name() << " [" << block.type() << "] at "
                   << block.position().x() << "," << block.position().y() << std::endl;
@@ -251,17 +276,9 @@ int main() {
                       << " if \"" << t.condition() << "\"" << std::endl;
         }
     }
-
-    return 0;
-}
 ```
 
-
-## 5.0 Developer-Notes
-
-see [dev-notes](docs/_pages/developers.md) for more information.
-
-## 6.0 License
+## 5.0 License
 
 All material is provided under an Apache LLicense unless otherwise specified.
 

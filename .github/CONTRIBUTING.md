@@ -1,8 +1,8 @@
 <!-- omit in toc -->
-# SystemDK Contributing Guide 
+# SLXIO Contributing Guide 
 
 - [Welcome](#welcome)
-- [SystemDK overview](#systemdk-overview)
+- [SLXIO overview](#slxio-overview)
 - [Ground rules](#ground-rules)
 - [Community engagement](#community-engagement)
 - [Share ideas](#share-ideas)
@@ -40,7 +40,8 @@ However, at this time, we do not accept the following contributions:
 * {Contribution type 2}
 * {Contribution type 3}
 
-## SystemDK overview
+## SLXIO overview
+  see [README](../README.md) for generale project overview 
 
 ## Ground rules
 

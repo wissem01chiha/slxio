@@ -1,11 +1,16 @@
 #include "File.h"
 #include <cstring>
 
-#ifndef PLATFORM_WINDOWS
+#ifdef PLATFORM_WINDOWS
+#include <io.h>
+#include <fcntl.h>
+#else
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #endif
+
 
 File::File(const std::string &path, Mode mode) {
 
@@ -34,7 +39,7 @@ ErrorCode File::setInputStream(std::fstream &stream) {
 ErrorCode File::open(File::Mode mode) {
 
   mode_ = mode;
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   DWORD access = 0;
   DWORD creation = OPEN_EXISTING;
 
@@ -146,7 +151,7 @@ ErrorCode File::open(File::Mode mode) {
 
 ErrorCode File::map(bool writable) {
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   if (hFile_ == nullptr || hFile_ == INVALID_HANDLE_VALUE) {
     return ErrorCode::NotOpen;
   }
@@ -180,9 +185,9 @@ ErrorCode File::map(bool writable) {
   }
   fsize_ = static_cast<size_t>(st.st_size);
 
-  int prot = writable ? (PROT_READ | PROT_WRITE) : PROT_READ;
-  lpMapAddress = map(nullptr, fsize_, prot, MAP_SHARED, fd_, 0);
-  if (lpMapAddress == MAP_FAILED) {
+  int prot = writable ? (OF_READ | OF_WRITE) : OF_READ;
+  lpMapAddress = ::mmap(nullptr, fsize_, prot, LR_SHARED, fd_, 0);
+  if (lpMapAddress == WAIT_FAILED) {
     lpMapAddress = nullptr;
     ::close(fd_);
     return ErrorCode::IOError;
@@ -214,7 +219,7 @@ ErrorCode File::read(size_t buffsize) {
   }
   size_t toRead = std::min(buffsize_, fsize_ - readOffset_);
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   if (hFileMap_ == nullptr || lpMapAddress == nullptr || buffer == nullptr) {
     return ErrorCode::NotOpen;
   }
@@ -222,15 +227,31 @@ ErrorCode File::read(size_t buffsize) {
     return ErrorCode::EndOfFile;
   }
 
-  __try {
+#ifdef _MSC_VER
+    __try {
+        std::memcpy(buffer, lpMapAddress, toRead);
+        nbytes_ = toRead;
+        readOffset_ += toRead;
+    }
+    __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
+                  ? EXCEPTION_EXECUTE_HANDLER
+                  : EXCEPTION_CONTINUE_SEARCH) {
+        return ErrorCode::IOError;
+    }
+    return ErrorCode::Ok;
+#else
+    if (lpMapAddress == nullptr) {
+        return ErrorCode::NotOpen;
+    }
+    if (readOffset_ + toRead > fsize_) {
+        return ErrorCode::IOError;
+    }
     std::memcpy(buffer, lpMapAddress, toRead);
     nbytes_ = toRead;
     readOffset_ += toRead;
-  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
-                  ? EXCEPTION_EXECUTE_HANDLER
-                  : EXCEPTION_CONTINUE_SEARCH) {
-    return ErrorCode::IOError;
-  }
+    return ErrorCode::Ok;
+#endif
+
   if (readOffset_ >= fsize_) {
     return ErrorCode::EndOfFile;
   }
@@ -272,19 +293,35 @@ ErrorCode File::write(const char *message) {
     return map_stat;
   }
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   if (lpMapAddress == nullptr) {
     return ErrorCode::NotOpen;
   }
 
-  __try {
-    std::memcpy(lpMapAddress, message, msglen);
-    nbytes_ = msglen;
-  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
+#if defined(_MSC_VER)
+    __try {
+        std::memcpy(lpMapAddress, message, msglen);
+        nbytes_ = msglen;
+    }
+    __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
                   ? EXCEPTION_EXECUTE_HANDLER
                   : EXCEPTION_CONTINUE_SEARCH) {
-    return ErrorCode::IOError;
-  }
+        return ErrorCode::IOError;
+    }
+    return ErrorCode::Ok;
+#else
+    if (lpMapAddress == nullptr) {
+        return ErrorCode::NotOpen;
+    }
+    if (msglen > fsize_ - readOffset_) {
+        return ErrorCode::IOError;
+    }
+
+    std::memcpy(lpMapAddress, message, msglen);
+    nbytes_ = msglen;
+    return ErrorCode::Ok;
+#endif
+
 
   if (!FlushViewOfFile(lpMapAddress, msglen)) {
     return ErrorCode::IOError;
@@ -312,7 +349,7 @@ ErrorCode File::write(const char *message) {
 
 ErrorCode File::close() {
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   if (hFileMap_)
     CloseHandle(hFileMap_);
   if (hFile_)
@@ -332,7 +369,7 @@ ErrorCode File::close() {
 
 ErrorCode File::unmap() {
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   bool unmap_status_t = UnmapViewOfFile(lpMapAddress);
   if (unmap_status_t) {
     return ErrorCode::Ok;
@@ -340,7 +377,7 @@ ErrorCode File::unmap() {
   return ErrorCode::IOError;
 #else
   if (lpMapAddress) {
-    munmap(lpMapAddress, fsize_);
+    unmap(lpMapAddress, fsize_);
     lpMapAddress = nullptr;
   }
   if (fd_ >= 0) {
@@ -352,7 +389,7 @@ ErrorCode File::unmap() {
 }
 
 bool File::eof() {
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   return readOffset_ >= fsize_;
 #else
   return stream_.eof();
@@ -402,7 +439,7 @@ ErrorCode File::move(const char *dirpath) {
   std::string lpExistingFileName = getFilename();
   std::string lpNewFileName = std::string(dirpath);
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   if (lpNewFileName.back() != '\\')
     lpNewFileName += '\\';
 #else
@@ -412,9 +449,9 @@ ErrorCode File::move(const char *dirpath) {
 
   lpNewFileName += lpExistingFileName;
 
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
 
-  if (_mkdir(dirpath) == -1 && errno != EEXIST) {
+  if (mkdir(dirpath) == -1 && errno != EEXIST) {
     return ErrorCode::IOError;
   }
   if (!MoveFileA(path_.c_str(), lpNewFileName.c_str())) {

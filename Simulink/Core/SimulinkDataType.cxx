@@ -1,4 +1,5 @@
 #include "SimulinkDataType.h"
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -35,18 +36,18 @@ SimulinkDataType toSimulinkDataType(sint32) { return SimulinkDataType::Int32; }
 
          SimulinkDataType toSimulinkDataType(const char* sldt) { 
             if (!sldt) return SimulinkDataType::Auto; 
-            if (std::strcmp(sldt, "double") == 0) return SimulinkDataType::Double;
-             if (std::strcmp(sldt, "single") == 0) return SimulinkDataType::Single; 
-             if (std::strcmp(sldt, "half") == 0) return SimulinkDataType::Half; 
-             if (std::strcmp(sldt, "int8") == 0) return SimulinkDataType::Int8;
-             if (std::strcmp(sldt, "uint8") == 0) return SimulinkDataType::UInt8;
-              if (std::strcmp(sldt, "int16") == 0) return SimulinkDataType::Int16; 
-              if (std::strcmp(sldt, "uint16") == 0) return SimulinkDataType::UInt16;
-               if (std::strcmp(sldt, "int32") == 0) return SimulinkDataType::Int32;
-                if (std::strcmp(sldt, "uint32") == 0) return SimulinkDataType::UInt32;
-                 if (std::strcmp(sldt, "uint64") == 0) return SimulinkDataType::UInt64;
-                  if (std::strcmp(sldt, "boolean") == 0) return SimulinkDataType::Boolean;
-                   if (std::strcmp(sldt, "string") == 0)
+            if (strcmp(sldt, "double") == 0) return SimulinkDataType::Double;
+             if (strcmp(sldt, "single") == 0) return SimulinkDataType::Single; 
+             if (strcmp(sldt, "half") == 0) return SimulinkDataType::Half; 
+             if (strcmp(sldt, "int8") == 0) return SimulinkDataType::Int8;
+             if (strcmp(sldt, "uint8") == 0) return SimulinkDataType::UInt8;
+              if (strcmp(sldt, "int16") == 0) return SimulinkDataType::Int16; 
+              if (strcmp(sldt, "uint16") == 0) return SimulinkDataType::UInt16;
+               if (strcmp(sldt, "int32") == 0) return SimulinkDataType::Int32;
+                if (strcmp(sldt, "uint32") == 0) return SimulinkDataType::UInt32;
+                 if (strcmp(sldt, "uint64") == 0) return SimulinkDataType::UInt64;
+                  if (strcmp(sldt, "boolean") == 0) return SimulinkDataType::Boolean;
+                   if (strcmp(sldt, "string") == 0)
              return SimulinkDataType::String; 
              return SimulinkDataType::Auto;  
             }

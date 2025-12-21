@@ -26,7 +26,7 @@
 /**
  * @brief FileManager class
  * @details
- * A singleton class that manages multiple files in the system.
+ * A singleton class that manages multiple files in the system, usful for manging I/O from multiple files
  * original version from :
  * https://github.com/scilab/scilab/blob/master/scilab/modules/fileio/includes/filemanager.hxx
  */

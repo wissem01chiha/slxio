@@ -19,6 +19,10 @@
 #include "Type.h"
 #include <fstream>
 #include <string>
+#include <memory>
+#ifdef PLATFORM_WINDOWS
+#include <windows.h>
+#endif
 
 /**
  * @brief Cross-platform File abstraction.
@@ -174,7 +178,7 @@ private:
   size_t nbytes_;
   void *lpMapAddress = nullptr;
   size_t fsize_;
-#ifdef _MSC_VER
+#ifdef PLATFORM_WINDOWS
   HANDLE hFile_ = nullptr;
   HANDLE hFileMap_ = nullptr;
   /// @brief for EOF imitation on mapped file

@@ -1,5 +1,6 @@
 #include "SLXParameter.h"
 #include "Logger.h"
+#include <limits>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

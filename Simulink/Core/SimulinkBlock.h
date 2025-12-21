@@ -52,7 +52,7 @@ public:
   SimulinkBlockType getBlockType();
 
   std::shared_ptr<SimulinkBlock> getParent();
-  SimulinkBlock::ErrorCode addPort(SimulinkPortType portType);
+  ErrorCode addPort(SimulinkPortType portType);
 
 private:
   bool contains(Index id) const override;
