@@ -17,6 +17,7 @@
 
 #include "ABINamespace.h"
 #include "File.h"
+#include <vector>
 #include "Type.h"
 #include <ostream>
 
@@ -72,6 +73,10 @@ public:
 
   /// @brief log a message given the default set verbosity level
   void log(const char *message);
+
+  /// @brief for formatted fprintf style
+  /// @todo Implement using ossstreams
+  void log(const char *message, std::vector<const char*> args);
 
   /// @brief get the singleton instance of the Logger
   static Logger &getInstance();

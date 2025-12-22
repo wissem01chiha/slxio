@@ -52,3 +52,7 @@ function(avx_compile_options OUTPUT_VAR)
     set("${OUTPUT_VAR}" PARENT_SCOPE)
   endif()
 endfunction()
+
+if(ENABLE_AVX) 
+    avx_compile_options(AVX_COMPILE_OPTIONS) #for testing
+endif()

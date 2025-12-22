@@ -18,18 +18,16 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddNullParameterTest") {
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest") {
 
-  // SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  // auto param = std::make_shared<SimulinkParameter>(
-  //     "DefaultTransition", "Ensure deterministic transfer");
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  //auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
 
-  // SimulinkErrorType status = obj.add(param);
+  //ErrorCode status = obj.add(param);
   // EXPECT_EQ(status, SimulinkErrorType::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest") {
 
   // SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-
   // auto subArray =
   //     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 

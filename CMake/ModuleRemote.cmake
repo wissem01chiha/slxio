@@ -2,6 +2,7 @@
 # this file define utilities for fecthing remote modules/third party libraries
 # either using CPM or git submodules
 
+find_package(Git QUIET) #not used 
 include(CMakeDependentOption)
 
 set(SYSLINK_FORCE_LOCAL_MODULES OFF CACHE BOOL "Force using local modules even if remote is available")

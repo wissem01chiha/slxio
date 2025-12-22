@@ -5,11 +5,15 @@
 # if "FORCE_VENDORED" is OFF, and "FORCE_LOCAL" is OFF, it will use vendored modules only if not available locally
 # and use the avliable ones locally, this is the default behavior
 #]=======================================================================]
-include(CMakeDependentOption)
-option("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE" 
-"Use vendored third party libraries in ${PROJECT_NAME}" ON)
-mark_as_advanced("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE")
 
+include(ModuleRemote)
+find_package(JSON-C)
+find_package(LibXml2)
+find_package(Slog)
+find_package(Loguru)
+find_package(Doctest)
+find_package(Matlab)
+find_package(Hdf5)
 
 function (use_if_available module)
     find_package(${module} QUIET)

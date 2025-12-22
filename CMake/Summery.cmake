@@ -23,27 +23,38 @@ message(STATUS  "Install             : ${ENABLE_INSTALL}")
 message( STATUS "Install prefix      : ${CMAKE_INSTALL_PREFIX}")
 message( STATUS "Package Config      : ${ENABLE_PKGCONFIG}")
 
-message( STATUS "HDF5                : ${ENABLE_HDF5}")
+message( STATUS "HDF5 Enabled        : ${ENABLE_HDF5}")
+message( STATUS "HDF5 Found          : ${HDF5_FOUND}")
+message( STATUS "HDF5 Version        : ${Hdf5_VERSION}")
 
-message( STATUS "OpenMP              : ${ENABLE_OPENMP}")
+message(STATUS  "Matlab Enabled      : ${ENABLE_MATLAB}")
+message(STATUS  "Matlab Found        : ${Matlab_FOUND}")
+message(STATUS  "Matlab Version      : ${Matlab_VERSION}")
+
+message( STATUS "OpenMP Enabled      : ${ENABLE_OPENMP}")
+message( STATUS "OpenMP Found        : ${OpenMP_FOUND}")
 message( STATUS "OpenMP Version      : ${OpenMP_C_VERSION}")
-message( STATUS "AVX                 : ${ENABLE_AVX}")
 
-message( STATUS "Testing             : ${${PROJECT_NAME}_ENABLE_TESTING}")
-message( STATUS "Coverage            : ${${PROJECT_NAME}_ENABLE_COVERAGE}")
-message( STATUS "Fuzzing             : ${ENABLE_FUZZING}")
+message( STATUS "AVX Enabled         : ${ENABLE_AVX}")
 
-message(STATUS  "Python Binding      : ${ENABLE_PYTHON_BINDING}")
+message( STATUS "Testing Enabled     : ${${PROJECT_NAME}_ENABLE_TESTING}")
+message( STATUS "Coverage Enabled    : ${${PROJECT_NAME}_ENABLE_COVERAGE}")
+message( STATUS "Fuzzing Enabled     : ${ENABLE_FUZZING}")
+
+message(STATUS  "Python Found        : ${Python_FOUND}")
 message(STATUS  "Python Version      : ${Python_VERSION}")
+message(STATUS  "Python Enabled      : ${ENABLE_PYTHON_BINDING}")
+
 message( STATUS "Binding Tests       : ${${PROJECT_NAME}_ENABLE_BINDING_TEST}")
 
-message( STATUS "Examples            : ${BUILD_EXAMPLES}")
+message( STATUS "Building Examples   : ${BUILD_EXAMPLES}")
 
-message( STATUS "Building doc        : ${ENABLE_DOCUMENTATION}")
+message( STATUS "Building Docs       : ${ENABLE_DOCUMENTATION}")
 
 message( STATUS "Clang-tidy          : ${ENABLE_CLANG_TIDY}")
 message(STATUS  "Clang-format        : ${USE_CLANG_FORMAT}")
 message(STATUS  "Clang-Version       : ${CLANGFORMAT_EXECUTABLE}")
+
 message( STATUS "Cppcheck            : ${ENABLE_CPPCHECK}")
 message( STATUS "Sanitizers          : ${ENABLE_SANITIZER}")
 message("")  

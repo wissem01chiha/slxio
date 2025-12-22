@@ -1,12 +1,9 @@
 #[=======================================================================[.rst:
 CheckExternalInclude
 --------------------
-
 Checks routines for all external library header files.  
 Used as a compatibility layer for old vendored third‑party libraries, 
 or non‑vendored (locally installed) ones.  
-Provides helper macros for other Find<Package> CMake modules to locate all 
-local library source files.
 #]=======================================================================]
 
 include(CheckIncludeFiles)
@@ -27,3 +24,6 @@ check_include_files("sys/stat.h" HAVE_SYS_STAT_H)
 check_include_files("sys/types.h" HAVE_SYS_TYPES_H)
 check_include_files("unistd.h" HAVE_UNISTD_H)
 check_include_files("stdbool.h" HAVE_STDBOOL_H)
+
+find_package(OpenMP QUIET)
+check_include_files("omp.h" HAVE_OMP_H)

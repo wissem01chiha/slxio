@@ -1,19 +1,12 @@
 cmake_minimum_required(VERSION 3.12...3.26 FATAL_ERROR)
 
-project(SLXIO)
-
-if(WIN32)
-    cmake_policy(SET CMP0135 NEW)
-endif()
+project(Slxio)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
-if(APPLE)
-    # MACOS Realated stuff 
-endif()
-
-find_package(Git QUIET) #not used 
 include(Version)
+include(Apple)
+include(Windows)
 include(CMakeDependentOption)
 
 set(_is_top_level FALSE)
@@ -77,25 +70,34 @@ option(BUILD_EXAMPLES "Build example applications" OFF)
 option(${PROJECT_NAME}_ENABLE_TESTING "build tests" ON)
 mark_as_advanced(${PROJECT_NAME}_ENABLE_TESTING)
 
+#-----------------------------------------------------------------------------
 option(${PROJECT_NAME}_ENABLE_COVERAGE "enable code coverage" OFF)
 mark_as_advanced(${PROJECT_NAME}_ENABLE_COVERAGE)
 
+#-----------------------------------------------------------------------------
 option(${PROJECT_NAME}_ENABLE_BINDING_TEST "build binding interface tests" ON)
 mark_as_advanced(${PROJECT_NAME}_ENABLE_BINDING_TEST)
+
 #-----------------------------------------------------------------------------
 option(ENABLE_NAMESPACE "Enable global namespace" TRUE)
 mark_as_advanced(ENABLE_NAMESPACE)
 
-cmake_dependent_option(
-  ENABLE_ABI_NAMESPACE
+#-----------------------------------------------------------------------------
+cmake_dependent_option(ENABLE_ABI_NAMESPACE
   "Enable ABI namespace" ON
   "ENABLE_NAMESPACE" OFF
 )
 mark_as_advanced(ENABLE_ABI_NAMESPACE)
 
+#-----------------------------------------------------------------------------
 set(USE_CLANG_FORMAT "WANTED" CACHE STRING "Clang-Format support mode")
 set_property(CACHE USE_CLANG_FORMAT PROPERTY STRINGS WANTED REQUIRED DISABLED)
 mark_as_advanced(USE_CLANG_FORMAT)
+
+#-----------------------------------------------------------------------------
+option("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE" 
+"Use vendored third party libraries in ${PROJECT_NAME}" ON)
+mark_as_advanced("${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE")
 
 
 include(FindPythonModule)
@@ -103,18 +105,15 @@ include(CheckCompilerSupport)
 include(CompilerFlags)
 include(CheckExternalInclude)
 include(CompilerWarningFlags)
-include(Namespace)
+include(GenerateNamespace)
+include(GenerateSingleInclude)
 include(Binding)
-include(ModuleRemote)
+include(ModuleVendoring)
 include(CheckAvxSupport)
 include(CheckClangSupport)
 include(CppCheck)
 include(Sanitizer)
 include(Module)
-
-if(ENABLE_AVX) 
-    avx_compile_options(AVX_COMPILE_OPTIONS) #for testing
-endif()
 
 module_add_cmake_modules(${CMAKE_CURRENT_SOURCE_DIR})
 list(APPEND CMAKE_MODULE_PATH ${MODULES_CMAKE_DIRS})
@@ -128,10 +127,10 @@ if(ENABLE_PKGCONFIG)
     set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
 
     install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/ DESTINATION ${PKGCONFIG_INSTALL_DIR}
-        FILES_MATCHING PATTERN "slxio.pc")
+        FILES_MATCHING PATTERN "${PROJECT_NAME}.pc")
     configure_file(
-        ${CMAKE_CURRENT_SOURCE_DIR}/slxio.pc.in
-        ${CMAKE_CURRENT_BINARY_DIR}/slxio.pc
+        ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_NAME}.pc.in
+        ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc
         @ONLY
     )
 endif()

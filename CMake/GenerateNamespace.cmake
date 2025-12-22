@@ -1,5 +1,5 @@
 #[=======================================================================[.rst:
-Namespace
+GenerateNamespace
 ------------
 Define project namespace and ABI namespace if enabled.
 sets :

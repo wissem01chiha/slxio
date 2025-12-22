@@ -13,17 +13,11 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
-#include "slxCompiler.h"
+#include "Compiler.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-#ifdef SDX_USE_BLAS
-// #include <cblas.h>
-#elifdef SDX_USE_EIGEN3
-//#include "Eigen.h"
-#elifndef SDX_USE_MKL
-#endif
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
