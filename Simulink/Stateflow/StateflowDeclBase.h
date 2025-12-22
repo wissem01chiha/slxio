@@ -31,7 +31,7 @@ public:
 protected:
   StateflowDeclBase(StateflowDeclBase &orig);
 
-  //std::string getName() { return std::string(SimulinkConstant::PARAM_name); }
+  // std::string getName() { return std::string(SimulinkConstant::PARAM_name); }
 
   std::string toString() const override {
     // return getName() + " [" + getStateflowId() + "]";

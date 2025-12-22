@@ -18,8 +18,8 @@
 #include "Platform.h"
 #include "Type.h"
 #include <fstream>
-#include <string>
 #include <memory>
+#include <string>
 #ifdef PLATFORM_WINDOWS
 #include <windows.h>
 #endif

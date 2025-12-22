@@ -6,7 +6,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlock::SimulinkBlock() {}
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType Type) : type(Type) {}
+SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type Type) {
+  this->type = SimulinkBlockType(Type);
+}
 
 SimulinkBlock::SimulinkBlock(SimulinkBlockType *Type) : type(*Type) {}
 
@@ -15,6 +17,11 @@ SimulinkBlock::SimulinkBlock(const SimulinkBlock &origBlock) {
   this->subBlocks = origBlock.subBlocks;
   this->blockName = origBlock.blockName;
   this->blockId = origBlock.blockId;
+}
+
+SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type type_, const char *name_,
+                             Index id_) {
+  this->blockId = id_;
 }
 
 ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
@@ -54,7 +61,8 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::getSubBlock(std::string name) {
       return blk;
     }
   }
-  // slog_error("No Sublock named %s found in Block %s", name, blockName);
+  // Logger::getInstance().log(Logger::Verbosity::V_ERROR,"No Sublock named %s
+  // found in Block %s", name, blockName);
   return std::shared_ptr<SimulinkBlock>();
 }
 
@@ -125,10 +133,10 @@ ErrorCode SimulinkBlock::addPort(SimulinkPortType portType) {
 bool SimulinkBlock::contains(uint32 id) const {
   for (const auto &block : subBlocks) {
     if (block && block->getID() == id) {
-      return 1;
+      return true;
     }
   }
-  return 0;
+  return false;
 }
 
 std::shared_ptr<SimulinkBlock> SimulinkBlock::getParent() {

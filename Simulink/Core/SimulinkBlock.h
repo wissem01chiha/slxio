@@ -34,11 +34,14 @@ public:
   SimulinkBlock();
   ~SimulinkBlock() override;
 
-  SimulinkBlock(SimulinkBlockType Type);
+  SimulinkBlock(SimulinkBlockType::Type Type);
   SimulinkBlock(SimulinkBlockType *Type);
 
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
+
+  /// @brief explict constructor
+  SimulinkBlock(SimulinkBlockType::Type type_, const char *name_, Index id_);
 
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;

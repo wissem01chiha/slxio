@@ -2,15 +2,14 @@
 #include <cstring>
 
 #ifdef PLATFORM_WINDOWS
-#include <io.h>
 #include <fcntl.h>
+#include <io.h>
 #else
 #include <fcntl.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
 #include <unistd.h>
 #endif
-
 
 File::File(const std::string &path, Mode mode) {
 
@@ -228,28 +227,27 @@ ErrorCode File::read(size_t buffsize) {
   }
 
 #ifdef _MSC_VER
-    __try {
-        std::memcpy(buffer, lpMapAddress, toRead);
-        nbytes_ = toRead;
-        readOffset_ += toRead;
-    }
-    __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
-                  ? EXCEPTION_EXECUTE_HANDLER
-                  : EXCEPTION_CONTINUE_SEARCH) {
-        return ErrorCode::IOError;
-    }
-    return ErrorCode::Ok;
-#else
-    if (lpMapAddress == nullptr) {
-        return ErrorCode::NotOpen;
-    }
-    if (readOffset_ + toRead > fsize_) {
-        return ErrorCode::IOError;
-    }
+  __try {
     std::memcpy(buffer, lpMapAddress, toRead);
     nbytes_ = toRead;
     readOffset_ += toRead;
-    return ErrorCode::Ok;
+  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
+                  ? EXCEPTION_EXECUTE_HANDLER
+                  : EXCEPTION_CONTINUE_SEARCH) {
+    return ErrorCode::IOError;
+  }
+  return ErrorCode::Ok;
+#else
+  if (lpMapAddress == nullptr) {
+    return ErrorCode::NotOpen;
+  }
+  if (readOffset_ + toRead > fsize_) {
+    return ErrorCode::IOError;
+  }
+  std::memcpy(buffer, lpMapAddress, toRead);
+  nbytes_ = toRead;
+  readOffset_ += toRead;
+  return ErrorCode::Ok;
 #endif
 
   if (readOffset_ >= fsize_) {
@@ -299,29 +297,27 @@ ErrorCode File::write(const char *message) {
   }
 
 #if defined(_MSC_VER)
-    __try {
-        std::memcpy(lpMapAddress, message, msglen);
-        nbytes_ = msglen;
-    }
-    __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
-                  ? EXCEPTION_EXECUTE_HANDLER
-                  : EXCEPTION_CONTINUE_SEARCH) {
-        return ErrorCode::IOError;
-    }
-    return ErrorCode::Ok;
-#else
-    if (lpMapAddress == nullptr) {
-        return ErrorCode::NotOpen;
-    }
-    if (msglen > fsize_ - readOffset_) {
-        return ErrorCode::IOError;
-    }
-
+  __try {
     std::memcpy(lpMapAddress, message, msglen);
     nbytes_ = msglen;
-    return ErrorCode::Ok;
-#endif
+  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
+                  ? EXCEPTION_EXECUTE_HANDLER
+                  : EXCEPTION_CONTINUE_SEARCH) {
+    return ErrorCode::IOError;
+  }
+  return ErrorCode::Ok;
+#else
+  if (lpMapAddress == nullptr) {
+    return ErrorCode::NotOpen;
+  }
+  if (msglen > fsize_ - readOffset_) {
+    return ErrorCode::IOError;
+  }
 
+  std::memcpy(lpMapAddress, message, msglen);
+  nbytes_ = msglen;
+  return ErrorCode::Ok;
+#endif
 
   if (!FlushViewOfFile(lpMapAddress, msglen)) {
     return ErrorCode::IOError;

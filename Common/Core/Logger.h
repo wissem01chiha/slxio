@@ -17,9 +17,9 @@
 
 #include "ABINamespace.h"
 #include "File.h"
-#include <vector>
 #include "Type.h"
 #include <ostream>
+#include <vector>
 
 /**
  * it can use multiple verbosity levels and log to file, for dipslaying message
@@ -76,7 +76,7 @@ public:
 
   /// @brief for formatted fprintf style
   /// @todo Implement using ossstreams
-  void log(const char *message, std::vector<const char*> args);
+  void log(const char *message, std::vector<const char *> args);
 
   /// @brief get the singleton instance of the Logger
   static Logger &getInstance();

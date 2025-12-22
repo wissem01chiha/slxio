@@ -11,11 +11,11 @@ StateflowEvent::StateflowEvent() : StateflowElementBase() {
 
 ErrorCode StateflowEvent::remove(std::shared_ptr<SimulinkElementBase> element) {
   Logger &l = Logger::getInstance();
-  if(getParent() == nullptr){
+  if (getParent() == nullptr) {
     l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
     return ErrorCode::NullObjectPtr;
   }
-  //getParent().removeEvent(this);
+  // getParent().removeEvent(this);
   return ErrorCode::Ok;
 }
 

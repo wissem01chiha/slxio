@@ -12,7 +12,9 @@ bool SimulinkElementType::isA(const SimulinkElementType::Type &type) {
   return this->type_ == type;
 }
 
-SimulinkElementType::SimulinkElementType(SimulinkElementType::Type typeName) {}
+SimulinkElementType::SimulinkElementType(SimulinkElementType::Type typeName) {
+  this->type_ = typeName;
+}
 
 SimulinkElementType &SimulinkElementType::getInstance() {
   static SimulinkElementType instance;

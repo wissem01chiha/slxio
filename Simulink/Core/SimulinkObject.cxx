@@ -94,23 +94,26 @@ ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element) {
     return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
-   if (!(element->getType().isA(SimulinkElementType::Array) ||
-       element->getType().isA(SimulinkElementType::Object) ||
-       element->getType().isA(SimulinkElementType::Parameter))) {
-     l.log(Logger::V_ERROR,"Cannot add a Simulink element of a different type than Array or Object or a Parameter to a SimulinkObject");
-     return ErrorCode::SLX_ERR_TYPE_MISMATCH;
- }
+  if (!(element->getType().isA(SimulinkElementType::Array) ||
+        element->getType().isA(SimulinkElementType::Object) ||
+        element->getType().isA(SimulinkElementType::Parameter))) {
+    l.log(Logger::V_ERROR,
+          "Cannot add a Simulink element of a different type than Array or "
+          "Object or a Parameter to a SimulinkObject");
+    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+  }
 
   if (element->getType().isA(SimulinkElementType::Parameter)) {
-     std::shared_ptr<SimulinkParameter> paramPtr =
-         std::dynamic_pointer_cast<SimulinkParameter>(element);
-     if (!paramPtr) {
-   l.log(Logger::V_ERROR,"SimulinkObject: Failed to cast SimulinkElementBase to "
-           "SimulinkParameter");
-       return ErrorCode::SLX_ERR_TYPE_MISMATCH;
-     }
+    std::shared_ptr<SimulinkParameter> paramPtr =
+        std::dynamic_pointer_cast<SimulinkParameter>(element);
+    if (!paramPtr) {
+      l.log(Logger::V_ERROR,
+            "SimulinkObject: Failed to cast SimulinkElementBase to "
+            "SimulinkParameter");
+      return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    }
     this->parameters.push_back(paramPtr);
-   }
+  }
 
   if (element->getType() == SimulinkElementType::Object) {
 
@@ -186,8 +189,9 @@ SimulinkObject::getParameter(std::string name) {
       }
     }
   }
-  std::ostringstream oss; oss << "SimulinkObject:: Parameter '" << name << "' not found.";
-  l.log(Logger::V_WARNING,oss.str().c_str());
+  std::ostringstream oss;
+  oss << "SimulinkObject:: Parameter '" << name << "' not found.";
+  l.log(Logger::V_WARNING, oss.str().c_str());
   return nullptr;
 }
 

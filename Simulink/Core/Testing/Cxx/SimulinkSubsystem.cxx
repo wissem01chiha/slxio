@@ -1,5 +1,5 @@
-#include "Doctest.h"
 #include "SimulinkSubsystem.h"
+#include "Doctest.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

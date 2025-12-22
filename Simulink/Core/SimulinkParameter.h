@@ -20,6 +20,7 @@
 #include "CoderInfo.h"
 #include "ErrorCode.h"
 #include "SimulinkDataType.h"
+#include "SimulinkElementBase.h"
 #include "Type.h"
 #include <string>
 #include <vector>
@@ -28,10 +29,10 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief A Simulink parameter object.
+ * @brief A Simulink Parameter object.
  * @see https://www.mathworks.com/help/simulink/slref/simulink.parameter.html
  */
-class APIEXPORT SimulinkParameter {
+class APIEXPORT SimulinkParameter : public SimulinkElementBase {
 public:
   /// @brief Default constructor
   SimulinkParameter();
@@ -57,23 +58,51 @@ public:
   /// to another data type.
   const char *getValue();
 
-  /// @brief Function overloading cannot be done by return type alone,
-  /// so a variant is used instead.
-  /// @brief Resolves the const char* value and maps it to the requested
-  /// implementation data type.
-  Float getValueAsDouble();
-  Float getValueAsSingle();
-  uint8 getValueAsUInt8();
-  uint16 getValueAsUInt16();
-  const std::vector<Float> getValueAsArray();
-  std::string getValueAsString();
+  /// @brief Attempts to resolve the value as double.
+  ErrorCode getValueAsDouble(Float &fval);
+
+  /// @brief Attempts to resolve the value as Single if enbaled.
+  ErrorCode getValueAsSingle(Float &sval);
+
+  /// @brief Resolves the parameter value as an unsigned 8-bit integer.
+  /// @param[out] u8val Parsed value.
+  ErrorCode getValueAsUInt8(uint8 &u8val);
+
+  /// @brief Resolves the parameter value as an unsigned 16-bit integer.
+  /// @param[out] u16val Parsed value.
+  ErrorCode getValueAsUInt16(uint16 &u16val);
+
+  /// @brief Resolves the parameter value as an array of floats.
+  /// @param[out] vecval Parsed array.
+  ErrorCode getValueAsArray(std::vector<Float> &vecval);
+
+  /// @brief Resolves the parameter value as a string.
+  /// @param[out] strval Parsed string.
+  ErrorCode getValueAsString(std::string &strval);
 
   std::vector<uint16> getDimensions();
-  std::string toString();
 
   const char *getName();
   ErrorCode setName(const char *name);
 
+  SimulinkElementType getType() const override;
+
+  /// @brief by default parameter do not have ids
+  /// when called dipslay a waring , fallback to 0
+  Index getID() const override;
+  /// same
+  bool contains(Index id) const override;
+
+  std::string toString() const override;
+
+  /// @brief Parameters cannot remove child elements. Returns
+  /// SLX_ERR_UNSUPPORTED.
+  ErrorCode remove(const std::shared_ptr<SimulinkElementBase> element) override;
+
+  /// @brief Parameters cannot add child elements. Returns SLX_ERR_UNSUPPORTED.
+  ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) override;
+
+  /// @brief get code genertion metadata
   CoderInfo getCoderInfo();
 
 private:

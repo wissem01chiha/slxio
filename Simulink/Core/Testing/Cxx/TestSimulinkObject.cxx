@@ -7,46 +7,45 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkObjectTestFixture {
 public:
 protected:
-SimulinkObject obj;
+  SimulinkObject obj;
 };
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddNullParameterTest") {
 
   ErrorCode status = obj.add(nullptr);
-  CHECK(status== ErrorCode::SLX_ERR_NULL_PTR);
+  CHECK(status == ErrorCode::SLX_ERR_NULL_PTR);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest") {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  //auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
+  auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
 
-  //ErrorCode status = obj.add(param);
-  // EXPECT_EQ(status, SimulinkErrorType::SLX_OK);
+  ErrorCode status = obj.add(param);
+  CHECK(status == ErrorCode::Ok);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest") {
 
-  // SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  // auto subArray =
-  //     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subArray =
+      std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
-  // SimulinkErrorType status = obj.add(subArray);
-  // ASSERT_EQ(status, SimulinkErrorType::SLX_OK);
+  ErrorCode status = obj.add(subArray);
+  CHECK(status == ErrorCode::Ok);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "ContainsObjectTest") {
 
-  // SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  // auto subObject = std::make_shared<SimulinkObject>(
-  //     1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject = std::make_shared<SimulinkObject>(
+      1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  // SimulinkErrorType status = obj.add(subObject);
-  // ASSERT_EQ(status, SimulinkErrorType::SLX_OK);
+  ErrorCode status = obj.add(subObject);
+  CHECK(status == ErrorCode::Ok);
 
-  // ASSERT_EQ(obj.contains(1), 1);
-  // ASSERT_NE(obj.contains(1), 0);
+  CHECK(obj.contains(1));
 }
 
 SLXIO_ABI_NAMESPACE_END

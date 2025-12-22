@@ -2,8 +2,11 @@
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
-
 SLXIO_ABI_NAMESPACE_BEGIN
+
+SimulinkBlockType::SimulinkBlockType(SimulinkBlockType::Type type_) {
+  this->type_ = type_;
+}
 
 SimulinkBlockType::Type SimulinkBlockType::toType(const char *typeName) {
 
@@ -151,6 +154,14 @@ const char *SimulinkBlockType::toString(SimulinkBlockType::Type type) {
   default:
     return "Unknown";
   }
+}
+
+bool SimulinkBlockType::isA(const SimulinkBlockType &typeObj) {
+  return this->type_ == typeObj.type_;
+}
+
+bool SimulinkBlockType::isA(const SimulinkBlockType::Type &type) {
+  return this->type_ == type;
 }
 
 std::string SimulinkBlockType::toString() {
