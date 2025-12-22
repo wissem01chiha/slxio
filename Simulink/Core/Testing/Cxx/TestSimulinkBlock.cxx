@@ -13,6 +13,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest") {
 
   SimulinkBlock *block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
   CHECK(block->getBlockType().isA(SimulinkBlockType::Type::Constant));
+  CHECK(block->getType().isA(SimulinkElementType::Type::Block));
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest") {
@@ -21,8 +22,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest") {
       new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
   SimulinkBlock *block = new SimulinkBlock(*pblockPtr);
 
-  // ASSERT_EQ(block->getBlockType(), SimulinkBlockType::Constant);
-  // ASSERT_EQ(block->getID(), 10);
+  CHECK(block->getID()== 10);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest") {
@@ -31,11 +31,11 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest") {
       new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
   std::shared_ptr<SimulinkBlock> childblockPtr =
-      std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock",
+      std::make_shared<SimulinkBlock>(SimulinkBlockType::Type::Clock, "ClockBlock",
                                       20);
 
-  // ErrorCode status = parentblockPtr->add(childblockPtr);
-  // ASSERT_EQ(status, ErrorCode::SLX_OK);
+  ErrorCode status = parentblockPtr->add(childblockPtr);
+  CHECK(status== ErrorCode::Ok);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest") {
@@ -47,11 +47,11 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest") {
       std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock",
                                       20);
 
-  // ErrorCode addStatus = parentblockPtr->add(childblockPtr);
-  // ASSERT_EQ(addStatus, ErrorCode::SLX_OK);
+  ErrorCode addStatus = parentblockPtr->add(childblockPtr);
+  CHECK(addStatus== ErrorCode::Ok);
 
-  // ErrorCode RemoveStatus = parentblockPtr->remove(childblockPtr);
-  // ASSERT_EQ(RemoveStatus, ErrorCode::SLX_OK);
+  ErrorCode RemoveStatus = parentblockPtr->remove(childblockPtr);
+ CHECK(RemoveStatus == ErrorCode::Ok);
 }
 
 SLXIO_ABI_NAMESPACE_END

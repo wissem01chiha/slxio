@@ -25,8 +25,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief A Mimic for SimulinkRoot Object
- * @see 
+ * @brief A Mimic for SimulinkRoot Object given by sfroot function
+ * @see https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
  */
 class APIEXPORT SimulinkRoot final {
 public:
