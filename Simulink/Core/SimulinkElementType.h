@@ -45,8 +45,8 @@ public:
                          const SimulinkElementType &rhs);
   SimulinkElementType(SimulinkElementType::Type typeName);
   static SimulinkElementType &getInstance();
-  static Type toType(const char *typeName);
-  static const char *toString(Type type);
+  static SimulinkElementType::Type toType(const char *typeName);
+  static const char *toString(SimulinkElementType::Type type);
   std::string toString();
 
 private:

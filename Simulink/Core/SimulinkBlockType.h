@@ -62,12 +62,11 @@ public:
     numOutPorts
   };
   SimulinkBlockType() = default;
-  SimulinkBlockType(SimulinkBlockType::Type type_);
+  SimulinkBlockType(Type type_);
   ~SimulinkBlockType() = default;
-  static Type toType(const char *typeName);
+  static SimulinkBlockType::Type toType(const char *typeName);
   static const char *toString(Type type);
-  bool isA(const Si &typeObj);
-  bool isA(const SimulinkBlockType::Type &type);
+  bool isA(SimulinkBlockType::Type type);
   std::string toString();
 
 private:

@@ -6,11 +6,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlock::SimulinkBlock() {}
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type Type) {
-  this->type = SimulinkBlockType(Type);
-}
+SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type type) : type(type) {}
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType *Type) : type(*Type) {}
+SimulinkBlock::SimulinkBlock(SimulinkBlockType* typeObj) : type(*typeObj) {}
+
+SimulinkBlockType SimulinkBlock::getBlockType() { return type; }
+
 
 SimulinkBlock::SimulinkBlock(const SimulinkBlock &origBlock) {
 
@@ -22,6 +23,8 @@ SimulinkBlock::SimulinkBlock(const SimulinkBlock &origBlock) {
 SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type type_, const char *name_,
                              Index id_) {
   this->blockId = id_;
+  this->type = type_;
+  this->blockName = std::string(name_);
 }
 
 ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
@@ -79,8 +82,6 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::getSubBlock(uint32 sid) {
   // log_warn("sublock given id [sid] not found");
   return nullptr;
 }
-
-SimulinkBlockType SimulinkBlock::getBlockType() { return type; }
 
 SimulinkElementType SimulinkBlock::getType() const {
   return SimulinkElementType::Block;

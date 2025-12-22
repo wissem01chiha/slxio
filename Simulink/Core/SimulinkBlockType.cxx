@@ -4,7 +4,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockType::SimulinkBlockType(SimulinkBlockType::Type type_) {
+SimulinkBlockType::SimulinkBlockType(Type type_) {
   this->type_ = type_;
 }
 
@@ -84,7 +84,7 @@ SimulinkBlockType::Type SimulinkBlockType::toType(const char *typeName) {
     return SimulinkBlockType::Stop;
 }
 
-const char *SimulinkBlockType::toString(SimulinkBlockType::Type type) {
+const char *SimulinkBlockType::toString(Type type) {
 
   switch (type) {
   case SimulinkBlockType::DigitalClock:
@@ -156,13 +156,9 @@ const char *SimulinkBlockType::toString(SimulinkBlockType::Type type) {
   }
 }
 
-bool SimulinkBlockType::isA(const SimulinkBlockType &typeObj) {
-  return this->type_ == typeObj.type_;
-}
-
-bool SimulinkBlockType::isA(const SimulinkBlockType::Type &type) {
-  return this->type_ == type;
-}
+ bool SimulinkBlockType::isA(SimulinkBlockType::Type type) {
+   return this->type_ == type;
+ }
 
 std::string SimulinkBlockType::toString() {
   return std::string(this->toString(type_));

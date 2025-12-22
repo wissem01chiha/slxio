@@ -32,7 +32,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkBlock : public SimulinkElementBase {
 public:
   SimulinkBlock();
-  ~SimulinkBlock() override;
+  ~SimulinkBlock() =default;
 
   SimulinkBlock(SimulinkBlockType::Type Type);
   SimulinkBlock(SimulinkBlockType *Type);
@@ -48,6 +48,7 @@ public:
   std::string toString() const override;
   SimulinkElementType getType() const override;
   uint32 getID() const override;
+  bool contains(Index id) const override;
 
   std::shared_ptr<SimulinkBlock> getSubBlock(std::string name);
   std::shared_ptr<SimulinkBlock> getSubBlock(Index blockId);
@@ -58,7 +59,6 @@ public:
   ErrorCode addPort(SimulinkPortType portType);
 
 private:
-  bool contains(Index id) const override;
 
   SimulinkBlockType type;
   std::string blockName;
