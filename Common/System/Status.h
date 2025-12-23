@@ -23,7 +23,7 @@
 /**
  * @class Status
  * A wrapper class for handling error codes within the system.
- * naming of module related code gnerally is : <MODULE_NAME>_ERR_<DESCRIPTION>
+ * naming of module related code generally is : <MODULE_NAME>_ERR_<DESCRIPTION>
  * eg; SLX_ERR_OPEN, SYSTEM_ERR_TIMEOUT, ....
  * this class contain general error codes and each module canadd it own errors
  * @note This class was renamed from "Error" class name for MSBuild
@@ -31,6 +31,7 @@
  * more information see:
  * https://developercommunity.visualstudio.com/t/MSBuild:-error:-output-of-custom-build/10554390?sort=newest
  * https://stackoverflow.com/questions/78622876/visual-studio-msbuild-error-msb8066-custom-build
+ * @warning this class not yet used all methods fallback to ErrorCode instead
  */
 class APIEXPORT Status {
 public:

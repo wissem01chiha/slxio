@@ -43,7 +43,7 @@ public:
   Index getID() const override;
   std::string getName();
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
-  bool contains(uint32 id) const override;
+  bool contains(const Index &id) const override;
 
 private:
   Index arrayId;

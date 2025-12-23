@@ -25,8 +25,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /** @brief Simulation settings for a Simulink model. */
 class APIEXPORT SimulationSettings {
 public:
-  SimulationSettings();
+  SimulationSettings() = default;
   ~SimulationSettings();
+
+  char *getSolverName();
+  char *getSolverType();
+  Float getFixedStepSize();
 
 private:
   char SolverType[32];

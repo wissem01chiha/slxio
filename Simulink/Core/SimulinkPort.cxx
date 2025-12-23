@@ -11,7 +11,7 @@ SimulinkPort::SimulinkPort(const SimulinkPort &other) {}
 SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> block,
                            SimulinkPortType pType) {}
 
-SimulinkPortType SimulinkPort::getPortType() { return type; }
+SimulinkPortType SimulinkPort::getPortType() { return portType; }
 
 SimulinkElementType SimulinkPort::getType() const {
   return SimulinkElementType::Port;
@@ -32,9 +32,11 @@ ErrorCode SimulinkPort::add(std::shared_ptr<SimulinkElementBase> elment) {
 
 bool SimulinkPort::isConnected() { return true; }
 
-uint32 SimulinkPort::getID() const { return 1; }
+Index SimulinkPort::getID() const { return portBlockId; }
 
-bool SimulinkPort::contains(uint32 id) const { return true; }
+bool SimulinkPort::contains(const Index &id) const { return true; }
+
+std::shared_ptr<SimulinkBlock> SimulinkPort::getBlock() { return portBlock; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

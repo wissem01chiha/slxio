@@ -6,49 +6,80 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSet::SimulinkConfigSet() { this->status = false; }
+SimulinkConfigSet::SimulinkConfigSet() : status(false) {}
+
+ErrorCode SimulinkConfigSet::saveToFile(const char *path) {
+  return ErrorCode::Ok;
+}
 
 std::string SimulinkConfigSet::toString() const {
   return this->object->toString();
 }
 
-// std::string SimulinkConfigSet::getParameter(std::string name) {
+const char *SimulinkConfigSet::getParameter(const char *name) {
 
-//   auto param = object->getParameter(name);
-//   if (param) {
-//     return param->getValue();
-//   }
-//   slog_warn("SimulinkConfigSet Parameter '%s' not found in configuration
-//   set.",
-//             name.c_str());
-//   return std::string("");
-// }
+  if (name == nullptr) {
+    Logger::getInstance().log(Logger::V_ERROR,
+                              "SimulinkConfigSet parameter name null");
+    return "";
+  }
+  std::shared_ptr<SimulinkParameter> cfgParam =
+      getParameterObject(std::string(name));
+  return cfgParam->getValue();
+}
 
-// SimulinkErrorType SimulinkConfigSet::setParameter(std::string name,
-//                                                   std::string value) {
+std::shared_ptr<SimulinkParameter>
+SimulinkConfigSet::getParameterObject(const std::string &name) {
 
-//   auto param = object->getParameter(name);
-//   if (param) {
-//     param->setValue(value);
-//     return SimulinkErrorType::SLX_OK;
-//   }
+  auto param = object->getParameter(name);
+  if (param) {
+    return param;
+  }
+  Logger::getInstance().log(Logger::V_WARNING, "SimulinkConfigSet Parameter ",
+                            name, " not found in configuration set.");
+  return nullptr;
+}
 
-//   return SimulinkErrorType::SLX_ERR_ER_NOENT;
-// }
+ErrorCode SimulinkConfigSet::setParameter(const char *name, const char *value) {
 
-// SimulinkErrorType SimulinkConfigSet::addParameter(std::string name,
-//                                                   std::string value) {
+  auto param = object->getParameter(std::string(name));
+  if (param) {
+    // param->setValue(value); -> not implnetd yet
+    return ErrorCode::Ok;
+  }
 
-//   std::shared_ptr<SimulinkParameter> paramPtr =
-//       std::make_shared<SimulinkParameter>(name, value);
-//   return object->add(paramPtr);
-// }
+  return ErrorCode::SLX_ERR_ER_NOENT;
+}
+
+ErrorCode SimulinkConfigSet::copy() { return ErrorCode::Ok; }
+
+ErrorCode SimulinkConfigSet::clone() { return ErrorCode::Ok; }
+
+ErrorCode SimulinkConfigSet::remove() { return ErrorCode::Ok; }
+
+ErrorCode SimulinkConfigSet::attach(SimulinkModel &model) {
+  return ErrorCode::Ok;
+}
+
+ErrorCode SimulinkConfigSet::detach(SimulinkModel &model) {
+  return ErrorCode::Ok;
+}
 
 std::string SimulinkConfigSet::getName() { return object->getName(); }
 
+ErrorCode SimulinkConfigSet::loadFromFile(const char *path) {
+  return ErrorCode::Ok;
+}
+
+SimulinkConfigSet SimulinkConfigSet::fromFile(const char *path) {
+  return SimulinkConfigSet();
+}
+
 ErrorCode SimulinkConfigSet::activate() {
   if (status) {
-    // slog_info("Activating Simulink configuration set %s", object->getName());
+    Logger::getInstance().log(Logger::V_INFO,
+                              "Activating Simulink configuration set ",
+                              object->getName());
   }
   status = true;
   return ErrorCode::Ok;

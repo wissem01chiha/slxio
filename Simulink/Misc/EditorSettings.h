@@ -22,9 +22,14 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief Base Class for MATLAB editor settings
+ */
 class APIEXPORT EditorSettings final {
 public:
-  EditorSettings();
+  EditorSettings() = default;
+  bool getShowPortDataTypes();
+  bool getSampleTimeColors();
 
 private:
   const char *LibraryLinkDisplay;

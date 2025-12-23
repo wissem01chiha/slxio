@@ -19,28 +19,30 @@
 #include "File.h"
 #include "Type.h"
 #include <ostream>
+#include <sstream>
 #include <vector>
 
-/**
- * it can use multiple verbosity levels and log to file, for dipslaying message
- * we can alternate between many third party utils, syslink support many logging
- * libraries, all othe rthem are enbaled/disbaled via preprocessor directives at
- * compile time, eg: SYSLINK_USE_SPDLOG, SYSLINK_USE_GLOG, SYSLINK_USE_LOG4CXX,
- * SYSLINK_USE_BOOSTLOG if none of these are defined, a basic Logger is used
- * that log to stderr and/or to a file. these are use in order to ease the
- * integration of syslink in existing projects, that use already these lib as
- * default logging utilities, note that one and only one logging library can be
- * used at a time.
- * to make modules inetgation easy, each module can use it spec logging librray
- * all of them can share the same API and define their owen flag
- * support logging in ostream logs SYslinkLogger::LOG << and as fprintf style
- * // todo add a check if the developer try to enable multiple loggers at once
- */
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 #define LOGGER_USE_SLOG
 
+/**
+ * @class Logger
+ * @brief Main Logging handler class for the librray
+ * it can use multiple verbosity levels and log to file, for dipslaying message
+ * we can alternate between many third party utils, slxio support many logging
+ * libraries, all othe rthem are enbaled/disbaled via preprocessor directives at
+ * compile time, eg: USE_LOGURU, SE_SLOG, if none of these are defined, a basic
+ * Logger is used that log to stderr and/or to a file. these are use in order to
+ * ease the integration of the librray in existing projects, that use already
+ * these lib as default logging utilities, note that one and only one logging
+ * library can be used at a time. to make modules inetgation easy, each module
+ * can use it spec logging librray all of them can share the same API and define
+ * their owen flag support logging in ostream logs Logger::LOG << and as fprintf
+ * style todo add a check if the developer try to enable multiple loggers at
+ * once
+ */
 class Logger {
 public:
   enum Verbosity {
@@ -74,10 +76,14 @@ public:
   /// @brief log a message given the default set verbosity level
   void log(const char *message);
 
-  /// @brief for formatted fprintf style
-  /// @todo Implement using ossstreams
-  void log(const char *message, std::vector<const char *> args);
-
+  /// @brief Log a formatted message with a given verbosity level.
+  template <typename... Args> void log(Verbosity level, Args &&...args) {
+    if (!IsEnabled())
+      return;
+    std::ostringstream oss;
+    (oss << ... << args);
+    this->log(level, oss.str().c_str());
+  }
   /// @brief get the singleton instance of the Logger
   static Logger &getInstance();
 

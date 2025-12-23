@@ -33,13 +33,13 @@ public:
   SimulinkLine(std::shared_ptr<SimulinkPort> pOut,
                std::shared_ptr<SimulinkPort> pIn);
   SimulinkLine &operator=(const SimulinkLine &) = delete;
-  SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort);
+  SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_);
   SimulinkElementType getType() const override;
   std::string toString() const override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   Index getID() const override;
-  bool contains(uint32 id) const override;
+  bool contains(const Index &id) const override;
 
 private:
   Index lineId;

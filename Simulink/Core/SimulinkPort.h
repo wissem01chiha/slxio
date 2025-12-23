@@ -39,13 +39,15 @@ public:
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> elment) override;
   ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
   bool isConnected();
-  uint32 getID() const override;
-  bool contains(uint32 id) const override;
+  /// @brief return the id of the linked block
+  Index getID() const override;
+  bool contains(const Index &id) const override;
+  std::shared_ptr<SimulinkBlock> getBlock();
 
 private:
-  uint32 blockId;
-  SimulinkPortType type;
-  std::shared_ptr<SimulinkBlock> block;
+  Index portBlockId;
+  SimulinkPortType portType;
+  std::shared_ptr<SimulinkBlock> portBlock;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -19,25 +19,31 @@
 #include "APIExport.h"
 #include "Type.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
 /**
  * @class CoderInfo
  * @brief This class holds information about code generation for a specific
  * variable or signal.
- * @see https://www.mathworks.com/help/simulink/slref/coderinfo.html
+ * @see
+ * https://www.mathworks.com/help/simulink/slref/simulink.coderinfo.html?s_tid=srchtitle_support_results_1_coderinfo
+ * @note StorageClass= 'Custom' not supported along with the CustomAttribute
  */
-SLXIO_NAMESPACE_BEGIN
-SLXIO_ABI_NAMESPACE_BEGIN
-
 class APIEXPORT CoderInfo final {
 public:
   CoderInfo();
   ~CoderInfo() = default;
   const char *getStorageClass() const;
+  bool isTunable();
+  const char *getIdentifier();
 
 private:
+  const char *Identifier;
+  uint32 Alignment;
   const char *StorageClass;
-  bool Tunable = 1;
-  bool ExportedGlobal = 0;
+  bool Tunable = true;
+  bool ExportedGlobal = false;
 };
 
 SLXIO_ABI_NAMESPACE_END

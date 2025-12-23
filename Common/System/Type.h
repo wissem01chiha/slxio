@@ -18,6 +18,7 @@
 #include "Option.h"
 #include "Platform.h"
 #include <cstdint>
+#include <limits>
 
 #ifdef USE_FLOAT16
 using Float = _Float16;
@@ -45,6 +46,12 @@ using Index = std::uint32_t;
 
 /// @brief smalest number to avoid dividing by zero
 #define FloatEps static_cast<Float>(1e-6)
+
+/// @brief minimum representable value for Float
+#define FloatMin std::numeric_limits<Float>::lowest()
+
+/// @brief maximum representable value for Float
+#define FloatMax std::numeric_limits<Float>::max()
 
 #ifndef __cplusplus
 #if HAVE_STDBOOL_H

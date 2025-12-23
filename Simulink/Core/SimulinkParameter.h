@@ -91,7 +91,7 @@ public:
   /// when called dipslay a waring , fallback to 0
   Index getID() const override;
   /// same
-  bool contains(Index id) const override;
+  bool contains(const Index &id) const override;
 
   std::string toString() const override;
 

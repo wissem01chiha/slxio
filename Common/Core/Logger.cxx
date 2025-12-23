@@ -94,8 +94,6 @@ Logger &Logger::getInstance() {
   return instance;
 }
 
-void Logger::log(const char *message, std::vector<const char *> args) {}
-
 void Logger::setStderrVerbosity(Verbosity level) {
 #ifdef LOGGER_USE_LOGURU
 

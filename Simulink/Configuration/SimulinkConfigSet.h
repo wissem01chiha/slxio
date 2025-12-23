@@ -36,6 +36,9 @@ class SimulinkRTW;
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief
+ */
 class APIEXPORT SimulinkConfigSet final {
 public:
   SimulinkConfigSet();
@@ -51,7 +54,8 @@ public:
   const char *getParameter(const char *name);
 
   /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameter> getParameterObject(const char *name);
+  std::shared_ptr<SimulinkParameter>
+  getParameterObject(const std::string &name);
 
   /// @brief Sets a parameter value by name.
   ErrorCode setParameter(const char *name, const char *value);

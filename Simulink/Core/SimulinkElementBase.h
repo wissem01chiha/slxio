@@ -46,16 +46,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkElementBase {
 public:
   virtual ~SimulinkElementBase() = default;
-  SimulinkElementBase(const SimulinkElementBase &) = delete;
   SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
-
   virtual SimulinkElementType getType() const = 0;
   virtual Index getID() const = 0;
   virtual std::string toString() const = 0;
-  virtual bool contains(Index id) const = 0;
+  virtual bool contains(const Index &id) const = 0;
 
 protected:
   SimulinkElementBase() = default;
+  SimulinkElementBase(const SimulinkElementBase &) = delete;
   virtual ErrorCode
   remove(const std::shared_ptr<SimulinkElementBase> element) = 0;
   virtual ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) = 0;

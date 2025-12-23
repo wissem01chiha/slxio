@@ -46,8 +46,8 @@ public:
   std::string toString() const override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
-  bool contains(Index id) const override;
-  std::shared_ptr<SimulinkParameter> getParameter(std::string name);
+  bool contains(const Index &id) const override;
+  std::shared_ptr<SimulinkParameter> getParameter(const std::string &name);
   std::string getName();
 
 protected:

@@ -35,9 +35,19 @@ public:
   ~SimulinkSignal() = default;
   ErrorCode setDataType(SimulinkDataType dt);
 
+  /// @brief return the underlying Simulink data type of the signal
+  SimulinkDataType getDataType();
+
   /// @brief Mimics MatWorks API for setting data type from char
   ErrorCode setDataType(const char *dt);
+
   ErrorCode setComplexityType(const char *ct);
+  const char *getComplexity();
+
+  std::vector<uint16> getDimensions();
+
+  /// @brief get code generation metadata
+  CoderInfo getCoderInfo();
 
 private:
   const char *InitialValue;

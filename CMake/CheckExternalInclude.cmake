@@ -25,5 +25,4 @@ check_include_files("sys/types.h" HAVE_SYS_TYPES_H)
 check_include_files("unistd.h" HAVE_UNISTD_H)
 check_include_files("stdbool.h" HAVE_STDBOOL_H)
 
-find_package(OpenMP QUIET)
 check_include_files("omp.h" HAVE_OMP_H)

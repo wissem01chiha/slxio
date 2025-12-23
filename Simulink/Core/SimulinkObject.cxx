@@ -132,7 +132,7 @@ ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element) {
   return ErrorCode::Ok;
 }
 
-bool SimulinkObject::contains(Index id) const {
+bool SimulinkObject::contains(const Index &id) const {
 
   if (objectId == id) {
     return 1;
@@ -161,7 +161,7 @@ bool SimulinkObject::contains(Index id) const {
 }
 
 std::shared_ptr<SimulinkParameter>
-SimulinkObject::getParameter(std::string name) {
+SimulinkObject::getParameter(const std::string &name) {
 
   Logger &l = Logger::getInstance();
 

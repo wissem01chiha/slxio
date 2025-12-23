@@ -14,6 +14,7 @@ find_package(Loguru)
 find_package(Doctest)
 find_package(Matlab)
 find_package(Hdf5)
+find_package(OpenMP)
 
 function (use_if_available module)
     find_package(${module} QUIET)

@@ -41,7 +41,7 @@ public:
   SimulinkModel(const SimulinkModel &other);
   SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
   SimulinkElementType getType() const override;
-  uint32 getID() const override;
+  Index getID() const override;
   std::string toString() const override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element);
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element);
@@ -51,17 +51,19 @@ public:
   std::shared_ptr<SimulationSettings> getSimulationSettings();
   std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
   uint32 getVersion();
-  bool contains(uint32 id) const override;
+  bool contains(const Index &id) const override;
+
+  std::shared_ptr<ModelWorkspace> getWorkspace();
 
 private:
-  SimulinkModelType type;
-  uint32 modelId;
+  SimulinkModelType modelType;
+  Index modelId;
   uint32 modelVersion;
-  ModelWorkspace workspace;
+  std::shared_ptr<ModelWorkspace> modelWorkspace;
   std::shared_ptr<SimulationSettings> modelSimSet;
-  std::vector<std::shared_ptr<SimulinkBlock>> blocks;
-  std::vector<std::shared_ptr<SimulinkLine>> lines;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  std::vector<std::shared_ptr<SimulinkBlock>> modelBlocks;
+  std::vector<std::shared_ptr<SimulinkLine>> modelLines;
+  std::vector<std::shared_ptr<SimulinkParameter>> modelParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

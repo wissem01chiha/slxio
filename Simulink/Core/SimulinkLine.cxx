@@ -1,4 +1,5 @@
 #include "SimulinkLine.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -14,13 +15,10 @@ SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkPort> pOut,
                            std::shared_ptr<SimulinkPort> pIn)
     : destPort(pIn), sourcePort(pOut) {}
 
-SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort) {
+SimulinkLine::SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_) {
 
-  this->sourcePort = std::make_shared<SimulinkPort>(sourcePort);
-  this->sourcePort->add(std::make_shared<SimulinkLine>(*this));
-
-  this->destPort = std::make_shared<SimulinkPort>(destPort);
-  this->destPort->add(std::make_shared<SimulinkLine>(*this));
+  sourcePort = std::make_shared<SimulinkPort>(sourcePort_);
+  destPort = std::make_shared<SimulinkPort>(destPort_);
 }
 
 SimulinkElementType SimulinkLine::getType() const {
@@ -30,7 +28,8 @@ SimulinkElementType SimulinkLine::getType() const {
 ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    // slog_warn("Cannot remove a null Simulink element.");
+    Logger::getInstance().log(Logger::V_WARNING,
+                              "Cannot remove a null Simulink element.");
     return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
@@ -49,7 +48,8 @@ ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
 ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
 
   if (element == nullptr) {
-    // slog_warn("Cannot add a null Simulink element.");
+    Logger::getInstance().log(Logger::V_WARNING,
+                              "Cannot add a null Simulink element.");
     return ErrorCode::SLX_ERR_NULL_PTR;
   }
 
@@ -65,9 +65,9 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
   return ErrorCode::Ok;
 }
 
-uint32 SimulinkLine::getID() const { return lineId; }
+Index SimulinkLine::getID() const { return lineId; }
 
-bool SimulinkLine::contains(uint32 id) const { return bool(); }
+bool SimulinkLine::contains(const Index &id) const { return true; }
 
 std::string SimulinkLine::toString() const {
   return sourcePort->toString() + " -> " + destPort->toString();

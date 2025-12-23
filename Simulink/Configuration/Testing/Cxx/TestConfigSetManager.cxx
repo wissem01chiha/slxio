@@ -1,9 +1,4 @@
 #include "SimulinkConfigSetManager.h"
-#include "SlxioTestConfig.h"
-#include "SyslinkLogger.h"
-#include <gtest/gtest.h>
-
-using namespace slxio;
 
 class SimulinkConfigSetManagerTestFixture : public ::testing::Test {
 protected:

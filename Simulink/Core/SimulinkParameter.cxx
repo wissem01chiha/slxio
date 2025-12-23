@@ -7,7 +7,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkParameter::SimulinkParameter() {
+SimulinkParameter::SimulinkParameter() : Min(FloatMin), Max(FloatMax) {
 
   DataType = SimulinkDataType::Auto;
   Complexity = "real";
@@ -15,20 +15,17 @@ SimulinkParameter::SimulinkParameter() {
   Name = nullptr;
   Description = "";
   Unit = "";
-  Min = 0;
-  Max = 1;
   Dimensions.clear();
 }
 
-SimulinkParameter::SimulinkParameter(const char *val) {
+SimulinkParameter::SimulinkParameter(const char *val)
+    : Min(FloatMin), Max(FloatMax) {
 
   Value = val;
   Name = nullptr;
   Description = "";
   Unit = "";
   Complexity = "real";
-  Min = 0;
-  Max = 1;
   Dimensions.clear();
   coder = CoderInfo();
 
@@ -113,6 +110,7 @@ ErrorCode SimulinkParameter::getValueAsString(std::string &strval) {
 }
 
 ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float> &vecval) {
+
   vecval.clear();
   if (!Value) {
     return ErrorCode::SLX_ERR_NULL_PTR;
@@ -122,10 +120,8 @@ ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float> &vecval) {
   }
 
   std::string s(Value);
-  // remove  '['
   s.erase(0, 1);
   if (!s.empty() && s.back() == ']') {
-    // remove  ']'
     s.pop_back();
   }
 
@@ -185,7 +181,7 @@ Index SimulinkParameter::getID() const {
   return (Index)0;
 }
 
-bool SimulinkParameter::contains(Index id) const {
+bool SimulinkParameter::contains(const Index &id) const {
   Logger::getInstance().log(
       Logger::V_WARNING,
       "SimulinkParameter::contains called on unsupported element.");

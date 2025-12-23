@@ -4,15 +4,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkSignal::SimulinkSignal() {
-  DataType = SimulinkDataType::Auto;
-  Complexity = "auto";
-}
+SimulinkSignal::SimulinkSignal()
+    : Description(""), Complexity("auto"), DataType(SimulinkDataType::Auto),
+      Min(FloatMin), Max(FloatMax) {}
 
 ErrorCode SimulinkSignal::setDataType(SimulinkDataType dt) {
   DataType = dt;
   return ErrorCode::Ok;
 }
+
+SimulinkDataType SimulinkSignal::getDataType() { return DataType; }
 
 ErrorCode SimulinkSignal::setDataType(const char *dt) {
 
@@ -59,6 +60,12 @@ ErrorCode SimulinkSignal::setComplexityType(const char *ct) {
   }
   return ErrorCode::Ok;
 }
+
+const char *SimulinkSignal::getComplexity() { return Complexity; }
+
+std::vector<uint16> SimulinkSignal::getDimensions() { return Dimensions; }
+
+CoderInfo SimulinkSignal::getCoderInfo() { return coder; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

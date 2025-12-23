@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "Type.h"
 
@@ -33,6 +34,7 @@ public:
   ~SimulinkSubsystem();
 
 private:
+  std::vector<SimulinkBlock> SubsystemBlocks;
 };
 
 SLXIO_ABI_NAMESPACE_END

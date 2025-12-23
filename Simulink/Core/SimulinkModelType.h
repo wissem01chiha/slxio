@@ -28,7 +28,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkModelType {
 public:
   enum Type { Library, Model };
+  SimulinkModelType() = default;
   static std::string toString(SimulinkModelType::Type type);
+
+private:
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -32,41 +32,46 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkBlock : public SimulinkElementBase {
 public:
   SimulinkBlock();
-  ~SimulinkBlock() =default;
+  ~SimulinkBlock() = default;
 
-  SimulinkBlock(SimulinkBlockType::Type Type);
-  SimulinkBlock(SimulinkBlockType *Type);
+  SimulinkBlock(SimulinkBlockType::Type blockType_);
+  SimulinkBlock(SimulinkBlockType *blockType_);
 
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
 
-  /// @brief explict constructor
-  SimulinkBlock(SimulinkBlockType::Type type_, const char *name_, Index id_);
+  SimulinkBlock(SimulinkBlockType::Type blockType_, const char *blockName_,
+                const Index &blockId_);
 
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   std::string toString() const override;
   SimulinkElementType getType() const override;
-  uint32 getID() const override;
-  bool contains(Index id) const override;
 
-  std::shared_ptr<SimulinkBlock> getSubBlock(std::string name);
-  std::shared_ptr<SimulinkBlock> getSubBlock(Index blockId);
+  Index getID() const override;
+  bool contains(const Index &blockId_) const override;
+
+  std::shared_ptr<SimulinkBlock> getSubBlock(const std::string &blockName_);
+  std::shared_ptr<SimulinkBlock> getSubBlock(const Index &blockId_);
 
   SimulinkBlockType getBlockType();
 
   std::shared_ptr<SimulinkBlock> getParent();
-  ErrorCode addPort(SimulinkPortType portType);
+  ErrorCode addPort(SimulinkPortType portType_);
+
+  /// @brief return a pointer to a given parameter by name, if not found a
+  /// or the bclok has not paramters a nullptr retuened
+  std::shared_ptr<SimulinkParameter>
+  getParameter(const char *blockParameterName_);
 
 private:
-
-  SimulinkBlockType type;
+  SimulinkBlockType blockType;
   std::string blockName;
   Index blockId;
   std::map<SimulinkPortType, Index> blockPorts;
   std::vector<std::shared_ptr<SimulinkBlock>> subBlocks;
   std::shared_ptr<SimulinkBlock> blockParent = nullptr;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  std::vector<std::shared_ptr<SimulinkParameter>> blockParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END
