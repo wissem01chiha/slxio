@@ -86,6 +86,7 @@ ErrorCode SimulinkParameter::getValueAsUInt8(uint8 &u8val) {
 }
 
 ErrorCode SimulinkParameter::getValueAsUInt16(uint16 &u16val) {
+
   if (!Value) {
     u16val = 0;
     return ErrorCode::SLX_ERR_NULL_PTR;
@@ -101,6 +102,7 @@ ErrorCode SimulinkParameter::getValueAsUInt16(uint16 &u16val) {
 }
 
 ErrorCode SimulinkParameter::getValueAsString(std::string &strval) {
+
   if (!Value) {
     strval.clear();
     return ErrorCode::SLX_ERR_NULL_PTR;
@@ -200,6 +202,14 @@ SimulinkParameter::add(const std::shared_ptr<SimulinkElementBase> element) {
   Logger::getInstance().log(Logger::V_ERROR,
                             "SimulinkParameter::add is not supported.");
   return ErrorCode::SLX_ERR_UNSUPPORTED;
+}
+
+Float SimulinkParameter::getMin(){
+  return Min;
+}
+
+Float SimulinkParameter::getMax(){
+  return Max;
 }
 
 SLXIO_ABI_NAMESPACE_END

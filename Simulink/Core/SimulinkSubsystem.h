@@ -18,23 +18,31 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "SimulinkPort.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "Type.h"
+#include <memory>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief A SimulinkSubsystem Object
+ * @note this struct do not map to a concrete Simulink object in MATLAB API
+ * rather then an extension for hiracical blcoks or models manipulatoation 
+ * added as a feature in the librray 
  */
 class APIEXPORT SimulinkSubsystem {
 public:
   SimulinkSubsystem();
-  ~SimulinkSubsystem();
+  ~SimulinkSubsystem() =default;
+  std::vector<std::shared_ptr<SimulinkBlock>> getBlocks();
+  std::vector<std::shared_ptr<SimulinkBlock>> getPorts();
 
 private:
-  std::vector<SimulinkBlock> SubsystemBlocks;
+  std::vector<std::shared_ptr<SimulinkBlock>> subsystemBlocks;
+  std::vector<std::shared_ptr<SimulinkBlock>> subsystemPorts;
 };
 
 SLXIO_ABI_NAMESPACE_END

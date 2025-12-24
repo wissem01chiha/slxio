@@ -5,7 +5,6 @@ Checks routines for all external library header files.
 Used as a compatibility layer for old vendored third‑party libraries, 
 or non‑vendored (locally installed) ones.  
 #]=======================================================================]
-
 include(CheckIncludeFiles)
 
 check_include_files("limits.h" HAVE_LIMITS_H)

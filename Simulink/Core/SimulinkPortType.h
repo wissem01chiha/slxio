@@ -16,6 +16,7 @@
 #define SIMULINKPORTTYPE_H
 
 #include "ABINamespace.h"
+#include "SimulinkElementType.h"
 #include "Type.h"
 #include <string>
 
@@ -42,7 +43,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 6 : RConn
  * 7 : ifaction
  */
-class SimulinkPortType {
+class SimulinkPortType  : public SimulinkElementType {
 public:
   enum Type {
     INPORT = 0,

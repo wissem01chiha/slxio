@@ -16,6 +16,10 @@ std::string SimulinkConfigSet::toString() const {
   return this->object->toString();
 }
 
+std::shared_ptr<SimulinkSolver> SimulinkConfigSet::getSolver() {
+  return solver;
+}
+
 const char *SimulinkConfigSet::getParameter(const char *name) {
 
   if (name == nullptr) {

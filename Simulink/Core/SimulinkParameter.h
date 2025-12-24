@@ -80,9 +80,13 @@ public:
   /// @param[out] strval Parsed string.
   ErrorCode getValueAsString(std::string &strval);
 
+  /// @brief get parameter dimensions
   std::vector<uint16> getDimensions();
 
+  /// @brief return current parameter name 
   const char *getName();
+
+  /// @brief modify parameter name, no backup used 
   ErrorCode setName(const char *name);
 
   SimulinkElementType getType() const override;
@@ -90,7 +94,8 @@ public:
   /// @brief by default parameter do not have ids
   /// when called dipslay a waring , fallback to 0
   Index getID() const override;
-  /// same
+
+  /// @brief no logic return always true, an a warning message
   bool contains(const Index &id) const override;
 
   std::string toString() const override;
@@ -102,8 +107,14 @@ public:
   /// @brief Parameters cannot add child elements. Returns SLX_ERR_UNSUPPORTED.
   ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) override;
 
-  /// @brief get code genertion metadata
+  /// @brief get code generation data struct
   CoderInfo getCoderInfo();
+
+  /// @brief Parameter minumin value 
+  Float getMin();
+
+  /// @brief Parameter maxiumum value 
+  Float getMax();
 
 private:
   const char *Name;

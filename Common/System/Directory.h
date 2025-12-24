@@ -28,9 +28,9 @@ public:
   /// @brief Default constructor
   Directory() = default;
 
-  Directory(std::string path);
-  Directory(const char *path);
-  Directory(const wchar_t *path);
+  explicit Directory(const std::string& path);
+  explicit Directory(const char *path);
+  explicit Directory(const wchar_t *path);
 
   Directory(const Directory &) = delete;
   Directory &operator=(const Directory &) = delete;

@@ -49,7 +49,9 @@ public:
   SimulinkBlock getBlock(uint32 blockIdx);
   SimulinkModelType getModelType();
   std::shared_ptr<SimulationSettings> getSimulationSettings();
+  
   std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
+
   uint32 getVersion();
   bool contains(const Index &id) const override;
 

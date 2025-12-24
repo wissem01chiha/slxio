@@ -28,14 +28,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief A Simulink block */
+/** 
+ * @brief A Simulink Block 
+ */
 class APIEXPORT SimulinkBlock : public SimulinkElementBase {
 public:
   SimulinkBlock();
   ~SimulinkBlock() = default;
 
-  SimulinkBlock(SimulinkBlockType::Type blockType_);
-  SimulinkBlock(SimulinkBlockType *blockType_);
+  explicit  SimulinkBlock(SimulinkBlockType::Type blockType_);
+  explicit  SimulinkBlock(SimulinkBlockType *blockType_);
 
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
@@ -46,7 +48,7 @@ public:
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   std::string toString() const override;
-  SimulinkElementType getType() const override;
+  
 
   Index getID() const override;
   bool contains(const Index &blockId_) const override;
@@ -55,14 +57,17 @@ public:
   std::shared_ptr<SimulinkBlock> getSubBlock(const Index &blockId_);
 
   SimulinkBlockType getBlockType();
+  SimulinkElementType getType() const override;
 
   std::shared_ptr<SimulinkBlock> getParent();
   ErrorCode addPort(SimulinkPortType portType_);
 
   /// @brief return a pointer to a given parameter by name, if not found a
-  /// or the bclok has not paramters a nullptr retuened
+  /// or the blcok has not paramters a nullptr returned
   std::shared_ptr<SimulinkParameter>
   getParameter(const char *blockParameterName_);
+
+  std::string getName();
 
 private:
   SimulinkBlockType blockType;

@@ -43,7 +43,7 @@ std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings() {
 }
 
 std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::getParameters() {
-  return std::vector<std::shared_ptr<SimulinkParameter>>();
+  return modelParameters;
 }
 
 uint32 SimulinkModel::getVersion() { return modelVersion; }

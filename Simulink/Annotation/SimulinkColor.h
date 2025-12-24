@@ -25,7 +25,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT SimulinkColor {
+class APIEXPORT SimulinkColor final {
 public:
   std::string name;
   std::string hexValue;

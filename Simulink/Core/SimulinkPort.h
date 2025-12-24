@@ -30,18 +30,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class APIEXPORT SimulinkPort : public SimulinkElementBase {
 public:
-  SimulinkPort();
+  SimulinkPort() =default;
   SimulinkPort(const SimulinkPort &other);
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
+
   SimulinkPortType getPortType();
   SimulinkElementType getType() const override;
   std::string toString() const override;
+
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> elment) override;
   ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
+
+  /// @brief Check if the port is connect to a line 
   bool isConnected();
+
   /// @brief return the id of the linked block
   Index getID() const override;
+
+  /// @brief 
   bool contains(const Index &id) const override;
+
+  /// @brief 
   std::shared_ptr<SimulinkBlock> getBlock();
 
 private:

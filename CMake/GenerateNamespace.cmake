@@ -1,10 +1,16 @@
 #[=======================================================================[.rst:
 GenerateNamespace
-------------
-Define project namespace and ABI namespace if enabled.
-sets :
-  NAMESPACE_BEGIN, NAMESPACE_END, 
-  SLXIO_ABI_NAMESPACE_BEGIN, SLXIO_ABI_NAMESPACE_END
+-----------------
+
+Define the project namespace and (optionally) the ABI namespace if enabled.
+
+Sets the following definitions:
+
+- ``NAMESPACE_BEGIN`` / ``NAMESPACE_END``  
+  Project namespace.
+
+- ``SLXIO_ABI_NAMESPACE_BEGIN`` / ``SLXIO_ABI_NAMESPACE_END``  
+  ABI namespace when enabled.
 #]=======================================================================]
 include(Version)
 include(CMakeDependentOption)

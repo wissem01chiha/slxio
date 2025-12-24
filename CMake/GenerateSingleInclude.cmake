@@ -1,10 +1,11 @@
 #[=======================================================================[.rst:
 GenerateSingleInclude
 -------------------- 
-Gnerate a Single include to group all mdoules headers declared
-under HEADERS file for using the librray with one include, 
-experimental version for now 
-the heder genrted with name ${PROJECT_NAME}.h
+
+Generate a single include file that groups all module headers declared
+under the **HEADERS** file. This allows using the library with one
+convenient include directive.
+The generated header file will be named: ``${PROJECT_NAME}.h``
 
 #]=======================================================================]
 set(SINGLE_INCLUDE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.h")
@@ -22,7 +23,6 @@ file(APPEND "${SINGLE_INCLUDE}"
 file(APPEND "${SINGLE_INCLUDE}" "\n")
 file(GLOB_RECURSE PROJECT_HEADERS *.h)
 
-# exclude third party and Docs includes
 foreach(hdr IN LISTS PROJECT_HEADERS) 
     if(NOT hdr MATCHES "ThirdParty" AND NOT hdr MATCHES "Documentation")
         file(APPEND "${SINGLE_INCLUDE}" "#include \"${hdr}\"\n") 

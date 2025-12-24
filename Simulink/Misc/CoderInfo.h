@@ -37,6 +37,7 @@ public:
   const char *getStorageClass() const;
   bool isTunable();
   const char *getIdentifier();
+  uint32 getAlignment();
 
 private:
   const char *Identifier;

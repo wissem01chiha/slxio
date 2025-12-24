@@ -12,10 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SIMULINKHARDWARE_H
+#define SIMULINKHARDWARE_H
+
 #include "ABINamespace.h"
 #include "Type.h"
+#include "APIExport.h"
 
-class SimulinkHardware {
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class APIEXPORT SimulinkHardware final {
+public:
+  SimulinkHardware() =default;
 
   const char *DisabledProps;
   const char *Description;
@@ -64,3 +73,8 @@ class SimulinkHardware {
   const char *UseSimulinkCoderFeatures;
   const char *HardwareBoardFeatureSet;
 };
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKHARDWARE_H

@@ -28,6 +28,12 @@ enum class APIEXPORT DataSourceType {
   MatlabFile
 };
 
+/// @brief Convert a C-string to a DataSourceType enum
+DataSourceType toDataSourceType(const char *sldt);
+
+/// @brief Convert a DataSourceType enum to its string representation
+const char *toChar(DataSourceType sldst);
+
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 

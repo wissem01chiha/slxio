@@ -23,7 +23,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Color {
+class APIEXPORT Color final {
 public:
   uint32_t r;
   uint32_t g;

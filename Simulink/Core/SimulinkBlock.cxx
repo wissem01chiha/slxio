@@ -4,7 +4,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlock::SimulinkBlock() {}
+SimulinkBlock::SimulinkBlock() : blockName(std::string("")) {}
 
 SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType_)
     : blockType(blockType_) {}
@@ -156,6 +156,8 @@ SimulinkBlock::getParameter(const char *blockParameterName_) {
   }
   return nullptr;
 }
+
+std::string SimulinkBlock::getName() { return blockName; }
 
 bool SimulinkBlock::contains(const Index &blockId_) const {
   for (const auto &block : subBlocks) {

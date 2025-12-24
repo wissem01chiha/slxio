@@ -67,5 +67,22 @@ std::vector<uint16> SimulinkSignal::getDimensions() { return Dimensions; }
 
 CoderInfo SimulinkSignal::getCoderInfo() { return coder; }
 
+const char *SimulinkSignal::getInitialValue() { return InitialValue; }
+
+const char *SimulinkSignal::getDescription() { return Description; }
+
+const char *SimulinkSignal::getDimensionsMode() { return DimensionsMode; }
+
+const char *SimulinkSignal::getUnit() { return Unit; }
+
+std::vector<Float> SimulinkSignal::getSampleTime() {
+  return SampleTime;
+}
+
+ErrorCode SimulinkSignal::setRange(Float min, Float max) { 
+  Min =min;
+  Max =max;
+  return ErrorCode::Ok; }
+
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

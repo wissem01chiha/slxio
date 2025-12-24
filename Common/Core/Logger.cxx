@@ -16,9 +16,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Logger::Logger() {
-  internalVerbosityLevel = Logger::Verbosity::V_INFO;
-  filemode = File::Mode::Append;
+Logger::Logger() : internalVerbosityLevel(Logger::Verbosity::V_INFO), filemode(File::Mode::Append){
 }
 
 void Logger::init(int argc, char **argv) {
@@ -245,8 +243,7 @@ Logger::Verbosity Logger::toVerbosity(const char *text) {
 }
 
 bool Logger::IsEnabled() {
-#if defined(LOGGER_USE_LOGURU) || defined(LOGGER_USE_GLOG) ||                  \
-    defined(LOGGER_USE_SPDLOG) || defined(LOGGER_USE_SLOG)
+#if defined(LOGGER_USE_SLOG) ||  defined(LOGGER_USE_LOGURU)
   return true;
 #else
   return false;

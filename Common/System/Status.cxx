@@ -1,8 +1,6 @@
 #include "Status.h"
 
-Status::Status() {
-  errno_ = ErrorCode::Ok;
-  message_ = std::string("");
+Status::Status() : errno_(ErrorCode::Ok), message_(std::string("")) {
 }
 
 const char *Status::toString(ErrorCode type) {
@@ -59,9 +57,7 @@ bool Status::isA(Status &type) const {
   return errno_ == type.errno_ && message_ == type.message_;
 }
 
-Status::Status(ErrorCode id) { errno_ = id; }
+Status::Status(ErrorCode id) : errno_(id) { }
 
-Status::Status(ErrorCode id, const std::string &message) {
-  errno_ = id;
-  message_ = message;
+Status::Status(ErrorCode id, const std::string &message) : errno_(id), message_(message) {
 }

@@ -27,7 +27,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class Timer {
 public:
-  Timer() = default;
   virtual ~Timer();
 
   /// @brief Call Start every time to reset the timer to zero.
@@ -39,6 +38,8 @@ public:
   /// @brief Obtains a timer measurement in seconds.
   /// @return The amount of time since the timer started.
   virtual Float time() = 0;
+protected:
+  Timer() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

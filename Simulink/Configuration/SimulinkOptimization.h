@@ -12,13 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SIMULINKOPTIMISATION_H
+#define SIMULINKOPTIMISATION_H
+
 #include "ABINamespace.h"
 #include "Type.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkOptimization {
+/**
+ * @brief 
+ */
+class APIEXPORT SimulinkOptimization final {
 public:
   SimulinkOptimization();
 
@@ -83,3 +90,5 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+#endif // SIMULINKOPTIMISATION_H

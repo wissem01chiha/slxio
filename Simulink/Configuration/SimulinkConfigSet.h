@@ -98,6 +98,9 @@ public:
   /// @brief Converts to a string representation.
   std::string toString() const;
 
+  /// @brief Get a Pointer to Solver Configuration struct
+  std::shared_ptr<SimulinkSolver> getSolver();
+
 private:
   bool status = false;
   std::shared_ptr<SimulinkObject> object;

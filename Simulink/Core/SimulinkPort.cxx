@@ -4,9 +4,11 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkPort::SimulinkPort() {}
-
-SimulinkPort::SimulinkPort(const SimulinkPort &other) {}
+SimulinkPort::SimulinkPort(const SimulinkPort &other) {
+  this->portBlockId = other.portBlockId;
+  this->portBlock = other.portBlock;
+  this->portType = other.portType;
+}
 
 SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> block,
                            SimulinkPortType pType) {}

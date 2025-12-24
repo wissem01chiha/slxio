@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef CONFIGSETMANAGER_H
-#define CONFIGSETMANAGER_H
+#ifndef SIMULINKCONFIGSETMANAGER_H
+#define SIMULINKCONFIGSETMANAGER_H
 
 #include "ABINamespace.h"
 #include "ErrorCode.h"
+#include "APIExport.h"
 #include <memory>
 #include <vector>
 
@@ -29,7 +30,7 @@ class SimulinkConfigSet;
  * @brief Manages a collection of Simulink configuration sets.
  * of type SimulinkConfigSet.
  */
-class SimulinkConfigSetManager final {
+class APIEXPORT SimulinkConfigSetManager final {
 public:
   SimulinkConfigSetManager();
   ~SimulinkConfigSetManager() = default;

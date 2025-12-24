@@ -29,7 +29,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
+ * @brief Mimic Matlab ModelWorkspace 
+ * @see https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
  */
 class APIEXPORT ModelWorkspace final {
 public:
@@ -45,6 +46,10 @@ public:
   void clearVariable(const std::string &name);
 
   void clearAll();
+
+  DataSourceType getDataSource();
+  const char* getFilename();
+  std::string getMatlabCode();
 
 private:
   DataSourceType dataSource = DataSourceType::ModelFile;

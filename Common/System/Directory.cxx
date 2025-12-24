@@ -1,18 +1,18 @@
 #include "Directory.h"
 
-Directory::Directory(std::string path) { path_ = path; }
+Directory::Directory(const std::string& path): path_(path) {  }
 
 Directory::Directory(Directory &&other) {}
 
 uint64 Directory::getNumberOfFiles() const { return uint64(); }
 
 const File &Directory::getFile(Index index) const {
-  // TODO: insert return statement here
+
   return *(new File());
 }
 
 std::string const &Directory::getFileName(Index index) const {
-  // TODO: insert return statement here
+
   static std::string filename;
   return filename;
 }

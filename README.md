@@ -45,8 +45,7 @@
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here: [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).  
-It has since been ported to C++ and refactored into a highly modular architecture.
+The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here: [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 

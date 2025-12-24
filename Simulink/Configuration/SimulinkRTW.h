@@ -12,13 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SIMULINKRTW_H
+#define SIMULINKRTW_H
+
 #include "ABINamespace.h"
 #include "Type.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkRTW {
+/**
+ * @brief 
+ */
+class SimulinkRTW final {
 public:
   SimulinkRTW();
 
@@ -29,3 +36,5 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+#endif // SIMULINKRTW_H

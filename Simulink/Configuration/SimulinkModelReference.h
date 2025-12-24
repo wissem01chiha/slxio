@@ -12,11 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ABINamespace.h"
+#ifndef SIMULINKMODELREFRENCE_H
+#define SIMULINKMODELREFRENCE_H
 
+#include "ABINamespace.h"
+#include "Type.h"
+#include "APIExport.h"
+
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkModelReference {
+/**
+ * @brief 
+ */
+class APIEXPORT SimulinkModelReference  final {
+public:
+  SimulinkModelReference() =default;
 
   const char **DisabledProps;
   const char *Description;
@@ -37,3 +48,6 @@ class SimulinkModelReference {
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKMODELREFRENCE_H

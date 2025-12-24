@@ -22,15 +22,18 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief Base class for all Stateflow elements.*/
+/** 
+ * @brief Base class for all Stateflow elements.
+ */
 class StateflowElementBase : public SimulinkElementBase {
 public:
-  StateflowElementBase() {}
-  StateflowElementBase(const StateflowElementBase &orig);
   virtual ~StateflowElementBase() = default;
   StateflowElementBase &operator=(const StateflowElementBase &) = delete;
 
 protected:
+  StateflowElementBase() {}
+  StateflowElementBase(const StateflowElementBase &orig);
+
   void setParent(std::shared_ptr<SimulinkElementBase> parent);
   virtual std::shared_ptr<StateflowElementBase> getParent() const = 0;
   std::shared_ptr<SimulinkElementBase> parent;

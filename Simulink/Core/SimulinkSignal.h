@@ -29,25 +29,52 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A SimulinkSignal Object
  */
-class APIEXPORT SimulinkSignal {
+class APIEXPORT SimulinkSignal final {
 public:
+  /// @brief Construct a new SimulinkSignal object
   SimulinkSignal();
-  ~SimulinkSignal() = default;
-  ErrorCode setDataType(SimulinkDataType dt);
 
-  /// @brief return the underlying Simulink data type of the signal
+  /// @brief Destroy the SimulinkSignal object
+  ~SimulinkSignal() = default;
+
+  /// @brief Return the underlying Simulink data type of the signal
   SimulinkDataType getDataType();
 
-  /// @brief Mimics MatWorks API for setting data type from char
+  /// @brief Set the data type of the signal
+  ErrorCode setDataType(SimulinkDataType dt);
+
+  /// @brief Set the data type of the signal from a string (MatWorks API style)
   ErrorCode setDataType(const char *dt);
 
+  /// @brief Set the complexity type of the signal from a string
   ErrorCode setComplexityType(const char *ct);
+
+  /// @brief Get the complexity type of the signal
   const char *getComplexity();
 
+  /// @brief Get the dimensions of the signal
   std::vector<uint16> getDimensions();
 
-  /// @brief get code generation metadata
+  /// @brief Get code generation metadata for the signal
   CoderInfo getCoderInfo();
+
+  /// @brief Get the initial value of the signal
+  const char* getInitialValue();
+
+  /// @brief Get the description of the signal
+  const char* getDescription();
+
+  /// @brief Get the dimensions mode of the signal
+  const char* getDimensionsMode();
+
+  /// @brief Get the unit of the signal
+  const char* getUnit();
+
+  /// @brief Get the sample time values of the signal
+  std::vector<Float> getSampleTime();
+
+  /// @brief Set the valid range (minimum and maximum) for the signal
+  ErrorCode setRange(Float min, Float max);
 
 private:
   const char *InitialValue;
@@ -60,8 +87,10 @@ private:
   const char *DimensionsMode;
   std::vector<uint16> Dimensions;
   std::vector<Float> SampleTime;
+
   Float Min;
   Float Max;
+  
   CoderInfo coder;
 };
 
