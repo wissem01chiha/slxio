@@ -1,24 +1,27 @@
 #[=======================================================================[.rst:
-# Verdoring options : ${PROJECT_NAME}_USE_VENDORED_EXTERNAL_MODULE has 3 values
-# if FORCE_LOCAL is ON, it will always use local modules
-# if "FORCE_VENDORED" is ON, it will always use vendored modules for all 3party libs
-# if "FORCE_VENDORED" is OFF, and "FORCE_LOCAL" is OFF, it will use vendored modules only if not available locally
-# and use the avliable ones locally, this is the default behavior
+# ModuleVendoring
+-----------------
 #]=======================================================================]
 
-include(ModuleRemote)
-find_package(JSON-C)
-find_package(LibXml2)
-find_package(Slog)
-find_package(Loguru)
-find_package(Doctest)
-find_package(Matlab)
-find_package(Hdf5)
-find_package(OpenMP)
+#[==[.rst:
+.. cmake:function:: configure_vendored_module(<module_name>)
 
-function (use_if_available module)
-    find_package(${module} QUIET)
-    if(NOT ${module}_FOUND)
-        add_subdirectory(ThirdParty/${module})
+  A helper function to configure vendored or locally installed modules.
+
+  .. code-block:: cmake
+
+    configure_vendored_module(ZLIB)
+
+#]==]
+function(configure_vendored_module module_name)
+
+    find_package(${module_name})
+    if(${module_name}_FOUND)
+        if(USE_LOCAL_LIBS)
+            string(TOUPPER ${module_name} MODULE_NAME_UPPER)
+            set(USE_EXTERNAL_${MODULE_NAME_UPPER} ON CACHE BOOL
+                "Use external ${module_name} instead of vendored version")
+        endif()
     endif()
+
 endfunction()

@@ -3,6 +3,7 @@ Development/cinclude2dot.pl linguist-vendored
 Development/codeviz.py linguist-vendored
 
 CMake/FindMatlab.cmake linguist-vendored
+CMake/CPM.cmake linguist-vendored
 CMake/FindLibXml2.cmake linguist-vendored
 CMake/FindJsonC.cmake linguist-vendored
 

@@ -18,9 +18,9 @@
 #cmakedefine USE_EXTERNAL_JSON_C
 
 #ifdef USE_EXTERNAL_JSON_C
-    #include <json-c/json.h>
+#include <json.h>
 #else
-    #include <src/json.h>
+#include <json.h>
 #endif 
 
 #endif //  JSON_C_H

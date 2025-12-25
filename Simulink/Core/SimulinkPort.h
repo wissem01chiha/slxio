@@ -25,10 +25,12 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class SimulinkLine;
+
 /**
  * @brief Base class for Simulink ports.
  */
-class APIEXPORT SimulinkPort : public SimulinkElementBase {
+class APIEXPORT SimulinkPort final : public SimulinkElementBase {
 public:
   SimulinkPort() =default;
   SimulinkPort(const SimulinkPort &other);
@@ -36,27 +38,51 @@ public:
 
   SimulinkPortType getPortType();
   SimulinkElementType getType() const override;
+
+  /// @brief Get a string representation of this port.
   std::string toString() const override;
 
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> elment) override;
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
+  /** 
+   * @brief Remove a line from this port. 
+   * @param element The element to remove (must be a SimulinkLine). 
+   * @return ErrorCode indicating success or failure. 
+   */
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
-  /// @brief Check if the port is connect to a line 
-  bool isConnected();
+/** 
+ * @brief Add a line to this port. 
+ *  @details Only SimulinkLine elements are supported for add/remove operations. 
+ * @param element The element to add (must be a SimulinkLine). 
+ * @return ErrorCode indicating success or failure. 
+ */
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
-  /// @brief return the id of the linked block
+  /// @brief Get the ID of the linked block.
   Index getID() const override;
 
-  /// @brief 
+  /** 
+   *  @brief Compare the given ID with this port's ID. 
+   *  @note A port can only be connected to one and only one block. 
+   *  @param id The identifier to compare against. 
+   * @return True if the IDs match, false otherwise.
+    */
   bool contains(const Index &id) const override;
 
-  /// @brief 
+  /// @brief Get the parent block of this port.
   std::shared_ptr<SimulinkBlock> getBlock();
+
+  /// @brief Get all line handlers connected to this port.
+  std::vector<std::shared_ptr<SimulinkLine>> getLines();
+
+  /// @brief Get a specific line by its ID.
+  /// @note Each line should have a unique identifier. 
+  std::shared_ptr<SimulinkLine> getLine(const Index& lineId_);
 
 private:
   Index portBlockId;
   SimulinkPortType portType;
   std::shared_ptr<SimulinkBlock> portBlock;
+  std::vector<std::shared_ptr<SimulinkLine>> portLines;
 };
 
 SLXIO_ABI_NAMESPACE_END

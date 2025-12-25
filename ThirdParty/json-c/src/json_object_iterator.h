@@ -39,8 +39,9 @@ struct json_object_iter_info_;
  * The opaque iterator that references a name/value pair within
  * a JSON Object instance or the "end" iterator value.
  */
-struct json_object_iterator {
-  const void *opaque_;
+struct json_object_iterator
+{
+	const void *opaque_;
 };
 
 /**
@@ -103,8 +104,7 @@ JSON_EXPORT struct json_object_iterator json_object_iter_init_default(void);
  *
  * @endcode
  */
-JSON_EXPORT struct json_object_iterator
-json_object_iter_begin(struct json_object *obj);
+JSON_EXPORT struct json_object_iterator json_object_iter_begin(struct json_object *obj);
 
 /** Retrieves the iterator that represents the position beyond the
  *  last pair of the given JSON Object instance.
@@ -134,8 +134,7 @@ json_object_iter_begin(struct json_object *obj);
  *              (i.e., NOT the last pair, but "beyond the last
  *              pair" value)
  */
-JSON_EXPORT struct json_object_iterator
-json_object_iter_end(const struct json_object *obj);
+JSON_EXPORT struct json_object_iterator json_object_iter_end(const struct json_object *obj);
 
 /** Returns an iterator to the next pair, if any
  *
@@ -169,8 +168,7 @@ JSON_EXPORT void json_object_iter_next(struct json_object_iterator *iter);
  *         deleted or modified, and MUST NOT be modified or
  *         freed by the user.
  */
-JSON_EXPORT const char *
-json_object_iter_peek_name(const struct json_object_iterator *iter);
+JSON_EXPORT const char *json_object_iter_peek_name(const struct json_object_iterator *iter);
 
 /** Returns a pointer to the json-c instance representing the
  *  value of the referenced name/value pair, without altering
@@ -220,9 +218,8 @@ json_object_iter_peek_value(const struct json_object_iterator *iter);
  *         reference the same name/value pair or are both at
  *         "end"); zero if they are not equal.
  */
-JSON_EXPORT json_bool
-json_object_iter_equal(const struct json_object_iterator *iter1,
-                       const struct json_object_iterator *iter2);
+JSON_EXPORT json_bool json_object_iter_equal(const struct json_object_iterator *iter1,
+                                             const struct json_object_iterator *iter2);
 
 #ifdef __cplusplus
 }

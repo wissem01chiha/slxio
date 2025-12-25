@@ -12,66 +12,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "ABINamespace.h"
+#ifndef STATEFLOWTRANSITION_H
+#define STATEFLOWTRANSITION_H
 
+#include "ABINamespace.h"
+#include <string>
+#include "APIExport.h"
+#include <memory>
+
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** A Stateflow transition.*/
-class StateflowTransition {
+class StateflowNodeBase;
+
+/**
+ * @brief A Stateflow transition.
+ */
+class APIEXPORT StateflowTransition final {
+public:
+    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);
+    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src,
+                        const std::shared_ptr<StateflowNodeBase>& dst);
+
+    std::shared_ptr<StateflowNodeBase> getSrc() const;
+    std::shared_ptr<StateflowNodeBase> getDst() const;
+
+    std::string getLabel() const; 
+    void remove();
+
+    std::string toString() const;
+
 private:
-  StateflowNodeBase src;
-
-  /** Destination node. */
-  StateflowNodeBase dst;
-
-  /** Create new default transition. */
-  StateflowTransition(StateflowNodeBase dst) {
-    CCSMPre.isTrue(dst != null, "Destination may not be null.");
-    this.dst = dst;
-    src = null;
-    this.dst.addInTransition(this);
-  }
-
-  /** Create new transition. */
-  StateflowTransition(StateflowNodeBase src, StateflowNodeBase dst) {
-    // CCSMPre.isTrue(src != null && dst != null,
-                   "Neither src nor dst may be null.");
-                   // this.src = src;
-                   // this.dst = dst;
-                   // this.src.addOutTransition(this);
-                   // this.dst.addInTransition(this);
-  }
-
-  /** Get destination node. */
-public
-  StateflowNodeBase getDst() { return dst; }
-
-  /** Get label. */
-public
-  String getLabel() { return getParameter(SimulinkConstant.PARAM_labelString); }
-
-  /** Get source node. This may be null to indicate default transitions. */
-public
-  StateflowNodeBase getSrc() { return src; }
-
-  /** Remove this transition from the model. */
-public
-  void remove() {
-    if (src != null) {
-      src.removeOutTransition(this);
-      src = null;
-    }
-    dst.removeInTransition(this);
-    dst = null;
-  }
-
-  /** toString() includes source and destination. */
-  @Override public String toString() {
-    if (src == null) {
-      return "-> " + dst;
-    }
-    return src + " -> " + dst;
-  }
+    std::shared_ptr<StateflowNodeBase> src;
+    std::shared_ptr<StateflowNodeBase> dst;
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // STATEFLOWTRANSITION_H

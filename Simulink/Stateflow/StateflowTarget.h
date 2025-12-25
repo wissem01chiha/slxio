@@ -25,12 +25,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief A Stateflow target object. Stateflow uses targets for generating
  * C-Code which is used for simulation.
  */
-class StateflowTarget : public StateflowElementBase {
+class APIEXPORT StateflowTarget  final : public StateflowElementBase {
 public:
   StateflowTarget();
   StateflowTarget(StateflowTarget &orig);
 
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+
+  std::string toString() const override;
+  Index getID() const override;
+  
+private:
 };
 
 SLXIO_ABI_NAMESPACE_END

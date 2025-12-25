@@ -14,6 +14,9 @@ ENABLE_TEST
   TRUE
 ENABLE_BUILD
   TRUE
+EXTERNAL_BUILD
+  FALSE
+EXTERNAL_SOURCE_DIR
 ENABLE_DOC
   FALSE
 ENABLE_BINDING
@@ -40,11 +43,23 @@ SOURCES
 HEADERS
   src/debug.h
   src/json_c_version.h
+  src/json_object_iterator.h
+  src/json_object.h
+  src/json_patch.h
+  src/json_pointer.h
+  src/json_tokener.h
+  src/json_util.h
+  src/libjson.h
+  src/printbuf.h
+  src/random_seed.h
+  src/strerror_override.h
 CONFIG_HEADERS
   Json-c.h.in
-  src/config.h.in
-  src/json_config.h.in
+  src/cmake/config.h.in
+  src/cmake/json_config.h.in
+  src/json_config.h.win32
 CMAKE_MODULES_DIRS
+  src/cmake
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
 TEST_DEPENDS

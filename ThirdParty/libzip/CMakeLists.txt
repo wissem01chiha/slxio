@@ -1,13 +1,6 @@
 #[=======================================================================[.rst:
 # Based on the original libzip CMake:
 # https://github.com/nih-at/libzip/blob/main/CMakeLists.txt
-#
-# Refactored for the slxio library.
-#
-# Notes:
-# - BUILD_SHARED_LIBS has been removed, as it is set globally by the project options.
-# - Documentation, tools, examples, tests, and install rules are disabled,
-#   since they are managed by the project's main wrappers.
 #]=======================================================================]
 if(NOT libzip_VERSION_PATCH)
   set(libzip_VERSION_PATCH 0)
@@ -511,5 +504,4 @@ if(LIBZIP_DO_INSTALL)
   endif()
 endif()
 
-# 
 add_module(ThirdParty::libzip)

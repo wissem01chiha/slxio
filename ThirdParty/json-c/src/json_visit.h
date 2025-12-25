@@ -12,9 +12,8 @@
 extern "C" {
 #endif
 
-typedef int(json_c_visit_userfunc)(json_object *jso, int flags,
-                                   json_object *parent_jso, const char *jso_key,
-                                   size_t *jso_index, void *userarg);
+typedef int(json_c_visit_userfunc)(json_object *jso, int flags, json_object *parent_jso,
+                                   const char *jso_key, size_t *jso_index, void *userarg);
 
 /**
  * Visit each object in the JSON hierarchy starting at jso.
@@ -35,8 +34,8 @@ typedef int(json_c_visit_userfunc)(json_object *jso, int flags,
  * Returns <0 if an error occurred during iteration, including if
  *  userfunc returned JSON_C_VISIT_RETURN_ERROR.
  */
-JSON_EXPORT int json_c_visit(json_object *jso, int future_flags,
-                             json_c_visit_userfunc *userfunc, void *userarg);
+JSON_EXPORT int json_c_visit(json_object *jso, int future_flags, json_c_visit_userfunc *userfunc,
+                             void *userarg);
 
 /**
  * Passed to json_c_visit_userfunc as one of the flags values to indicate

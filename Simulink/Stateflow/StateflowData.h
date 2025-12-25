@@ -13,11 +13,13 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "Type.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Stateflow data object.*/
-class StateflowData : public StateflowDeclBase {
+class APIEXPORT StateflowData : public StateflowDeclBase {
 public:
   StateflowData() {}
   StateflowData(StateflowData &stateflowData) {}

@@ -23,70 +23,70 @@
 extern "C" {
 #endif
 
-enum json_tokener_error {
-  json_tokener_success,
-  json_tokener_continue,
-  json_tokener_error_depth,
-  json_tokener_error_parse_eof,
-  json_tokener_error_parse_unexpected,
-  json_tokener_error_parse_null,
-  json_tokener_error_parse_boolean,
-  json_tokener_error_parse_number,
-  json_tokener_error_parse_array,
-  json_tokener_error_parse_object_key_name,
-  json_tokener_error_parse_object_key_sep,
-  json_tokener_error_parse_object_value_sep,
-  json_tokener_error_parse_string,
-  json_tokener_error_parse_comment,
-  json_tokener_error_parse_utf8_string,
-  json_tokener_error_size, /* A string longer than INT32_MAX was passed as input
-                            */
-  json_tokener_error_memory /* Failed to allocate memory */
+enum json_tokener_error
+{
+	json_tokener_success,
+	json_tokener_continue,
+	json_tokener_error_depth,
+	json_tokener_error_parse_eof,
+	json_tokener_error_parse_unexpected,
+	json_tokener_error_parse_null,
+	json_tokener_error_parse_boolean,
+	json_tokener_error_parse_number,
+	json_tokener_error_parse_array,
+	json_tokener_error_parse_object_key_name,
+	json_tokener_error_parse_object_key_sep,
+	json_tokener_error_parse_object_value_sep,
+	json_tokener_error_parse_string,
+	json_tokener_error_parse_comment,
+	json_tokener_error_parse_utf8_string,
+	json_tokener_error_size,   /* A string longer than INT32_MAX was passed as input */
+	json_tokener_error_memory  /* Failed to allocate memory */
 };
 
 /**
- * @deprecated Don't use this outside of json_tokener.c, it will be made private
- * in a future release.
+ * @deprecated Don't use this outside of json_tokener.c, it will be made private in a future release.
  */
-enum json_tokener_state {
-  json_tokener_state_eatws,
-  json_tokener_state_start,
-  json_tokener_state_finish,
-  json_tokener_state_null,
-  json_tokener_state_comment_start,
-  json_tokener_state_comment,
-  json_tokener_state_comment_eol,
-  json_tokener_state_comment_end,
-  json_tokener_state_string,
-  json_tokener_state_string_escape,
-  json_tokener_state_escape_unicode,
-  json_tokener_state_escape_unicode_need_escape,
-  json_tokener_state_escape_unicode_need_u,
-  json_tokener_state_boolean,
-  json_tokener_state_number,
-  json_tokener_state_array,
-  json_tokener_state_array_add,
-  json_tokener_state_array_sep,
-  json_tokener_state_object_field_start,
-  json_tokener_state_object_field,
-  json_tokener_state_object_field_end,
-  json_tokener_state_object_value,
-  json_tokener_state_object_value_add,
-  json_tokener_state_object_sep,
-  json_tokener_state_array_after_sep,
-  json_tokener_state_object_field_start_after_sep,
-  json_tokener_state_inf
+enum json_tokener_state
+{
+	json_tokener_state_eatws,
+	json_tokener_state_start,
+	json_tokener_state_finish,
+	json_tokener_state_null,
+	json_tokener_state_comment_start,
+	json_tokener_state_comment,
+	json_tokener_state_comment_eol,
+	json_tokener_state_comment_end,
+	json_tokener_state_string,
+	json_tokener_state_string_escape,
+	json_tokener_state_escape_unicode,
+	json_tokener_state_escape_unicode_need_escape,
+	json_tokener_state_escape_unicode_need_u,
+	json_tokener_state_boolean,
+	json_tokener_state_number,
+	json_tokener_state_array,
+	json_tokener_state_array_add,
+	json_tokener_state_array_sep,
+	json_tokener_state_object_field_start,
+	json_tokener_state_object_field,
+	json_tokener_state_object_field_end,
+	json_tokener_state_object_value,
+	json_tokener_state_object_value_add,
+	json_tokener_state_object_sep,
+	json_tokener_state_array_after_sep,
+	json_tokener_state_object_field_start_after_sep,
+	json_tokener_state_inf
 };
 
 /**
- * @deprecated Don't use this outside of json_tokener.c, it will be made private
- * in a future release.
+ * @deprecated Don't use this outside of json_tokener.c, it will be made private in a future release.
  */
-struct json_tokener_srec {
-  enum json_tokener_state state, saved_state;
-  struct json_object *obj;
-  struct json_object *current;
-  char *obj_field_name;
+struct json_tokener_srec
+{
+	enum json_tokener_state state, saved_state;
+	struct json_object *obj;
+	struct json_object *current;
+	char *obj_field_name;
 };
 
 #define JSON_TOKENER_DEFAULT_DEPTH 32
@@ -98,25 +98,26 @@ struct json_tokener_srec {
  * in the json tokener API, and will be changed to be an opaque
  * type in the future.
  */
-struct json_tokener {
-  /**
-   * @deprecated Do not access any of these fields outside of json_tokener.c
-   */
-  char *str;
-  struct printbuf *pb;
-  int max_depth, depth, is_double, st_pos;
-  /**
-   * @deprecated See json_tokener_get_parse_end() instead.
-   */
-  int char_offset;
-  /**
-   * @deprecated See json_tokener_get_error() instead.
-   */
-  enum json_tokener_error err;
-  unsigned int ucs_char, high_surrogate;
-  char quote_char;
-  struct json_tokener_srec *stack;
-  int flags;
+struct json_tokener
+{
+	/**
+	 * @deprecated Do not access any of these fields outside of json_tokener.c
+	 */
+	char *str;
+	struct printbuf *pb;
+	int max_depth, depth, is_double, st_pos;
+	/**
+	 * @deprecated See json_tokener_get_parse_end() instead.
+	 */
+	int char_offset;
+	/**
+	 * @deprecated See json_tokener_get_error() instead.
+	 */
+	enum json_tokener_error err;
+	unsigned int ucs_char, high_surrogate;
+	char quote_char;
+	struct json_tokener_srec *stack;
+	int flags;
 };
 
 /**
@@ -181,8 +182,7 @@ typedef struct json_tokener json_tokener;
  * Given an error previously returned by json_tokener_get_error(),
  * return a human readable description of the error.
  *
- * @return a generic error message is returned if an invalid error value is
- * provided.
+ * @return a generic error message is returned if an invalid error value is provided.
  */
 JSON_EXPORT const char *json_tokener_error_desc(enum json_tokener_error jerr);
 
@@ -195,8 +195,7 @@ JSON_EXPORT const char *json_tokener_error_desc(enum json_tokener_error jerr);
  *
  * @see json_tokener_error_desc().
  */
-JSON_EXPORT enum json_tokener_error
-json_tokener_get_error(struct json_tokener *tok);
+JSON_EXPORT enum json_tokener_error json_tokener_get_error(struct json_tokener *tok);
 
 /**
  * Allocate a new json_tokener.
@@ -218,7 +217,7 @@ JSON_EXPORT struct json_tokener *json_tokener_new_ex(int depth);
 JSON_EXPORT void json_tokener_free(struct json_tokener *tok);
 
 /**
- * Reset the state of a json_tokener, to prepare to parse a
+ * Reset the state of a json_tokener, to prepare to parse a 
  * brand new JSON object.
  */
 JSON_EXPORT void json_tokener_reset(struct json_tokener *tok);
@@ -237,8 +236,8 @@ JSON_EXPORT struct json_object *json_tokener_parse(const char *str);
  * @see json_tokener_parse()
  * @see json_tokener_parse_ex()
  */
-JSON_EXPORT struct json_object *
-json_tokener_parse_verbose(const char *str, enum json_tokener_error *error);
+JSON_EXPORT struct json_object *json_tokener_parse_verbose(const char *str,
+                                                           enum json_tokener_error *error);
 
 /**
  * Set flags that control how parsing will be done.
@@ -282,7 +281,7 @@ JSON_EXPORT void json_tokener_set_flags(struct json_tokener *tok, int flags);
  * the length of the last len parameter passed in.
  *
  * The tokener does \b not maintain an internal buffer so the caller is
- * responsible for a subsequent call to json_tokener_parse_ex with an
+ * responsible for a subsequent call to json_tokener_parse_ex with an 
  * appropriate str parameter starting with the extra characters.
  *
  * This interface is presently not 64-bit clean due to the int len argument
@@ -297,33 +296,32 @@ const char *mystring = NULL;
 int stringlen = 0;
 enum json_tokener_error jerr;
 do {
-        mystring = ...  // get JSON string, e.g. read from file, etc...
-        stringlen = strlen(mystring);
-        if (end_of_input)
-                stringlen++;  // Include the '\0' if we know we're at the end of
-input jobj = json_tokener_parse_ex(tok, mystring, stringlen); } while ((jerr =
-json_tokener_get_error(tok)) == json_tokener_continue); if (jerr !=
-json_tokener_success)
+	mystring = ...  // get JSON string, e.g. read from file, etc...
+	stringlen = strlen(mystring);
+	if (end_of_input)
+		stringlen++;  // Include the '\0' if we know we're at the end of input
+	jobj = json_tokener_parse_ex(tok, mystring, stringlen);
+} while ((jerr = json_tokener_get_error(tok)) == json_tokener_continue);
+if (jerr != json_tokener_success)
 {
-        fprintf(stderr, "Error: %s\n", json_tokener_error_desc(jerr));
-        // Handle errors, as appropriate for your application.
+	fprintf(stderr, "Error: %s\n", json_tokener_error_desc(jerr));
+	// Handle errors, as appropriate for your application.
 }
 if (json_tokener_get_parse_end(tok) < stringlen)
 {
-        // Handle extra characters after parsed object as desired.
-        // e.g. issue an error, parse another object from that point, etc...
+	// Handle extra characters after parsed object as desired.
+	// e.g. issue an error, parse another object from that point, etc...
 }
 // Success, use jobj here.
 
 @endcode
  *
  * @param tok a json_tokener previously allocated with json_tokener_new()
- * @param str an string with any valid JSON expression, or portion of.  This
-does not need to be null terminated.
+ * @param str an string with any valid JSON expression, or portion of.  This does not need to be null terminated.
  * @param len the length of str
  */
-JSON_EXPORT struct json_object *json_tokener_parse_ex(struct json_tokener *tok,
-                                                      const char *str, int len);
+JSON_EXPORT struct json_object *json_tokener_parse_ex(struct json_tokener *tok, const char *str,
+                                                      int len);
 
 #ifdef __cplusplus
 }

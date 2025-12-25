@@ -1,10 +1,11 @@
 #include "SimulinkLine.h"
 #include "Logger.h"
+#include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkLine::SimulinkLine() {}
+SimulinkLine::SimulinkLine() : destPort(nullptr), sourcePort(nullptr) {}
 
 SimulinkLine::SimulinkLine(const SimulinkLine &other) {
   this->destPort = other.destPort;
@@ -67,10 +68,18 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
 
 Index SimulinkLine::getID() const { return lineId; }
 
-bool SimulinkLine::contains(const Index &id) const { return true; }
+bool SimulinkLine::contains(const Index &id) const { return lineId == id; }
+
+bool SimulinkLine::isConnected() { return (sourcePort != nullptr && destPort != nullptr); }
 
 std::string SimulinkLine::toString() const {
-  return sourcePort->toString() + " -> " + destPort->toString();
+
+    std::ostringstream oss; 
+  oss << "SimulinkLine[ID=" << lineId;
+  oss << ", Source=  "  << sourcePort->toString();
+  oss << ", Destination=  "  << destPort->toString();
+  oss << "]";
+  return  oss.str();
 }
 
 SLXIO_ABI_NAMESPACE_END

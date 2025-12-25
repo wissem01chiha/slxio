@@ -13,8 +13,8 @@
 /**
  * @file
  * @brief Internal methods for working with json_type_object objects.  Although
- *        this is exposed by the json_object_get_object() function and within
- * the json_object_iter type, it is not recommended for direct use.
+ *        this is exposed by the json_object_get_object() function and within the
+ *        json_object_iter type, it is not recommended for direct use.
  */
 #ifndef _json_c_linkhash_h_
 #define _json_c_linkhash_h_
@@ -82,101 +82,100 @@ typedef int(lh_equal_fn)(const void *k1, const void *k2);
 /**
  * An entry in the hash table.  Outside of linkhash.c, treat this as opaque.
  */
-struct lh_entry {
-  /**
-   * The key.
-   * @deprecated Use lh_entry_k() instead of accessing this directly.
-   */
-  const void *k;
-  /**
-   * A flag for users of linkhash to know whether or not they
-   * need to free k.
-   * @deprecated use lh_entry_k_is_constant() instead.
-   */
-  int k_is_constant;
-  /**
-   * The value.
-   * @deprecated Use lh_entry_v() instead of accessing this directly.
-   */
-  const void *v;
-  /**
-   * The next entry.
-   * @deprecated Use lh_entry_next() instead of accessing this directly.
-   */
-  struct lh_entry *next;
-  /**
-   * The previous entry.
-   * @deprecated Use lh_entry_prev() instead of accessing this directly.
-   */
-  struct lh_entry *prev;
+struct lh_entry
+{
+	/**
+	 * The key.
+	 * @deprecated Use lh_entry_k() instead of accessing this directly.
+	 */
+	const void *k;
+	/**
+	 * A flag for users of linkhash to know whether or not they
+	 * need to free k.
+	 * @deprecated use lh_entry_k_is_constant() instead.
+	 */
+	int k_is_constant;
+	/**
+	 * The value.
+	 * @deprecated Use lh_entry_v() instead of accessing this directly.
+	 */
+	const void *v;
+	/**
+	 * The next entry.
+	 * @deprecated Use lh_entry_next() instead of accessing this directly.
+	 */
+	struct lh_entry *next;
+	/**
+	 * The previous entry.
+	 * @deprecated Use lh_entry_prev() instead of accessing this directly.
+	 */
+	struct lh_entry *prev;
 };
 
 /**
  * The hash table structure.  Outside of linkhash.c, treat this as opaque.
  */
-struct lh_table {
-  /**
-   * Size of our hash.
-   * @deprecated do not use outside of linkhash.c
-   */
-  int size;
-  /**
-   * Numbers of entries.
-   * @deprecated Use lh_table_length() instead.
-   */
-  int count;
+struct lh_table
+{
+	/**
+	 * Size of our hash.
+	 * @deprecated do not use outside of linkhash.c
+	 */
+	int size;
+	/**
+	 * Numbers of entries.
+	 * @deprecated Use lh_table_length() instead.
+	 */
+	int count;
 
-  /**
-   * The first entry.
-   * @deprecated Use lh_table_head() instead.
-   */
-  struct lh_entry *head;
+	/**
+	 * The first entry.
+	 * @deprecated Use lh_table_head() instead.
+	 */
+	struct lh_entry *head;
 
-  /**
-   * The last entry.
-   * @deprecated Do not use, may be removed in a future release.
-   */
-  struct lh_entry *tail;
+	/**
+	 * The last entry.
+	 * @deprecated Do not use, may be removed in a future release.
+	 */
+	struct lh_entry *tail;
 
-  /**
-   * Internal storage of the actual table of entries.
-   * @deprecated do not use outside of linkhash.c
-   */
-  struct lh_entry *table;
+	/**
+	 * Internal storage of the actual table of entries.
+	 * @deprecated do not use outside of linkhash.c
+	 */
+	struct lh_entry *table;
 
-  /**
-   * A pointer to the function responsible for freeing an entry.
-   * @deprecated do not use outside of linkhash.c
-   */
-  lh_entry_free_fn *free_fn;
-  /**
-   * @deprecated do not use outside of linkhash.c
-   */
-  lh_hash_fn *hash_fn;
-  /**
-   * @deprecated do not use outside of linkhash.c
-   */
-  lh_equal_fn *equal_fn;
+	/**
+	 * A pointer to the function responsible for freeing an entry.
+	 * @deprecated do not use outside of linkhash.c
+	 */
+	lh_entry_free_fn *free_fn;
+	/**
+	 * @deprecated do not use outside of linkhash.c
+	 */
+	lh_hash_fn *hash_fn;
+	/**
+	 * @deprecated do not use outside of linkhash.c
+	 */
+	lh_equal_fn *equal_fn;
 };
 typedef struct lh_table lh_table;
 
 /**
  * Convenience list iterator.
  */
-#define lh_foreach(table, entry)                                               \
-  for (entry = lh_table_head(table); entry; entry = lh_entry_next(entry))
+#define lh_foreach(table, entry) for (entry = lh_table_head(table); entry; entry = lh_entry_next(entry))
 
 /**
  * lh_foreach_safe allows calling of deletion routine while iterating.
  *
  * @param table a struct lh_table * to iterate over
  * @param entry a struct lh_entry * variable to hold each element
- * @param tmp a struct lh_entry * variable to hold a temporary pointer to the
- * next element
+ * @param tmp a struct lh_entry * variable to hold a temporary pointer to the next element
  */
-#define lh_foreach_safe(table, entry, tmp)                                     \
-  for (entry = lh_table_head(table);                                           \
-       entry && ((tmp = lh_entry_next(entry)) || 1); entry = tmp)
+#define lh_foreach_safe(table, entry, tmp) \
+	for (entry = lh_table_head(table); entry && ((tmp = lh_entry_next(entry)) || 1); entry = tmp)
 
 /**
  * Create a new linkhash table.
@@ -196,8 +195,7 @@ typedef struct lh_table lh_table;
  * @return On success, a pointer to the new linkhash table is returned.
  * 	On error, a null pointer is returned.
  */
-extern struct lh_table *lh_table_new(int size, lh_entry_free_fn *free_fn,
-                                     lh_hash_fn *hash_fn,
+extern struct lh_table *lh_table_new(int size, lh_entry_free_fn *free_fn, lh_hash_fn *hash_fn,
                                      lh_equal_fn *equal_fn);
 
 /**
@@ -245,47 +243,42 @@ extern int lh_table_insert(struct lh_table *t, const void *k, const void *v);
 /**
  * Insert a record into the table using a precalculated key hash.
  *
- * The hash h, which should be calculated with lh_get_hash() on k, is provided
- * by the caller, to allow for optimization when multiple operations with the
- * same key are known to be needed.
+ * The hash h, which should be calculated with lh_get_hash() on k, is provided by
+ *  the caller, to allow for optimization when multiple operations with the same
+ *  key are known to be needed.
  *
  * @param t the table to insert into.
  * @param k a pointer to the key to insert.
  * @param v a pointer to the value to insert.
  * @param h hash value of the key to insert
- * @param opts if set to JSON_C_OBJECT_ADD_CONSTANT_KEY, sets
- * lh_entry.k_is_constant so t's free function knows to avoid freeing the key.
+ * @param opts if set to JSON_C_OBJECT_ADD_CONSTANT_KEY, sets lh_entry.k_is_constant
+ *             so t's free function knows to avoid freeing the key.
  */
-extern int lh_table_insert_w_hash(struct lh_table *t, const void *k,
-                                  const void *v, const unsigned long h,
-                                  const unsigned opts);
+extern int lh_table_insert_w_hash(struct lh_table *t, const void *k, const void *v,
+                                  const unsigned long h, const unsigned opts);
 
 /**
  * Lookup a record in the table.
  *
  * @param t the table to lookup
  * @param k a pointer to the key to lookup
- * @return a pointer to the record structure of the value or NULL if it does not
- * exist.
+ * @return a pointer to the record structure of the value or NULL if it does not exist.
  */
-extern struct lh_entry *lh_table_lookup_entry(struct lh_table *t,
-                                              const void *k);
+extern struct lh_entry *lh_table_lookup_entry(struct lh_table *t, const void *k);
 
 /**
  * Lookup a record in the table using a precalculated key hash.
  *
- * The hash h, which should be calculated with lh_get_hash() on k, is provided
- * by the caller, to allow for optimization when multiple operations with the
- * same key are known to be needed.
+ * The hash h, which should be calculated with lh_get_hash() on k, is provided by
+ *  the caller, to allow for optimization when multiple operations with the same
+ *  key are known to be needed.
  *
  * @param t the table to lookup
  * @param k a pointer to the key to lookup
  * @param h hash value of the key to lookup
- * @return a pointer to the record structure of the value or NULL if it does not
- * exist.
+ * @return a pointer to the record structure of the value or NULL if it does not exist.
  */
-extern struct lh_entry *lh_table_lookup_entry_w_hash(struct lh_table *t,
-                                                     const void *k,
+extern struct lh_entry *lh_table_lookup_entry_w_hash(struct lh_table *t, const void *k,
                                                      const unsigned long h);
 
 /**
@@ -293,12 +286,10 @@ extern struct lh_entry *lh_table_lookup_entry_w_hash(struct lh_table *t,
  *
  * @param t the table to lookup
  * @param k a pointer to the key to lookup
- * @param v a pointer to a where to store the found value (set to NULL if it
- * doesn't exist).
+ * @param v a pointer to a where to store the found value (set to NULL if it doesn't exist).
  * @return whether or not the key was found
  */
-extern json_bool lh_table_lookup_ex(struct lh_table *t, const void *k,
-                                    void **v);
+extern json_bool lh_table_lookup_ex(struct lh_table *t, const void *k, void **v);
 
 /**
  * Delete a record from the table.
@@ -343,7 +334,7 @@ int lh_table_resize(struct lh_table *t, int new_size);
 /**
  * @deprecated Don't use this outside of linkhash.h:
  */
-#if !defined(__STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
+#if !defined (__STDC_VERSION__) || (__STDC_VERSION__ < 199901L)
 /* C89 compilers like VS2010 can't handle inline funcs, so skip it there,
    note: this also applies to -std=c89 in GCC! */
 #define _LH_INLINE
@@ -355,8 +346,9 @@ int lh_table_resize(struct lh_table *t, int new_size);
  * Return the first entry in the lh_table.
  * @see lh_entry_next()
  */
-static _LH_INLINE struct lh_entry *lh_table_head(const lh_table *t) {
-  return t->head;
+static _LH_INLINE struct lh_entry *lh_table_head(const lh_table *t)
+{
+	return t->head;
 }
 
 /**
@@ -370,10 +362,11 @@ static _LH_INLINE struct lh_entry *lh_table_head(const lh_table *t) {
  * @param k a pointer to the key to lookup
  * @return the key's hash
  */
-static _LH_INLINE unsigned long lh_get_hash(const struct lh_table *t,
-                                            const void *k) {
-  return t->hash_fn(k);
+static _LH_INLINE unsigned long lh_get_hash(const struct lh_table *t, const void *k)
+{
+	return t->hash_fn(k);
 }
+
 
 /**
  * @deprecated Don't use this outside of linkhash.h:
@@ -387,12 +380,13 @@ static _LH_INLINE unsigned long lh_get_hash(const struct lh_table *t,
 /**
  * Return a non-const version of lh_entry.k.
  *
- * lh_entry.k is const to indicate and help ensure that linkhash itself doesn't
- * modify it, but callers are allowed to do what they want with it.
+ * lh_entry.k is const to indicate and help ensure that linkhash itself doesn't modify
+ * it, but callers are allowed to do what they want with it.
  * @see lh_entry_k_is_constant()
  */
-static _LH_INLINE void *lh_entry_k(const struct lh_entry *e) {
-  return _LH_UNCONST(e->k);
+static _LH_INLINE void *lh_entry_k(const struct lh_entry *e)
+{
+	return _LH_UNCONST(e->k);
 }
 
 /**
@@ -400,8 +394,9 @@ static _LH_INLINE void *lh_entry_k(const struct lh_entry *e) {
  *  does not need to be freed when the lh_entry is freed.
  * @see lh_table_insert_w_hash()
  */
-static _LH_INLINE int lh_entry_k_is_constant(const struct lh_entry *e) {
-  return e->k_is_constant;
+static _LH_INLINE int lh_entry_k_is_constant(const struct lh_entry *e)
+{
+	return e->k_is_constant;
 }
 
 /**
@@ -410,16 +405,18 @@ static _LH_INLINE int lh_entry_k_is_constant(const struct lh_entry *e) {
  * v is const to indicate and help ensure that linkhash itself doesn't modify
  * it, but callers are allowed to do what they want with it.
  */
-static _LH_INLINE void *lh_entry_v(const struct lh_entry *e) {
-  return _LH_UNCONST(e->v);
+static _LH_INLINE void *lh_entry_v(const struct lh_entry *e)
+{
+	return _LH_UNCONST(e->v);
 }
 
 /**
  * Change the value for an entry.  The caller is responsible for freeing
  *  the previous value.
  */
-static _LH_INLINE void lh_entry_set_val(struct lh_entry *e, void *newval) {
-  e->v = newval;
+static _LH_INLINE void lh_entry_set_val(struct lh_entry *e, void *newval)
+{
+	e->v = newval;
 }
 
 /**
@@ -427,8 +424,9 @@ static _LH_INLINE void lh_entry_set_val(struct lh_entry *e, void *newval) {
  * @see lh_table_head()
  * @see lh_entry_prev()
  */
-static _LH_INLINE struct lh_entry *lh_entry_next(const struct lh_entry *e) {
-  return e->next;
+static _LH_INLINE struct lh_entry *lh_entry_next(const struct lh_entry *e)
+{
+	return e->next;
 }
 
 /**
@@ -436,8 +434,9 @@ static _LH_INLINE struct lh_entry *lh_entry_next(const struct lh_entry *e) {
  * @see lh_table_head()
  * @see lh_entry_next()
  */
-static _LH_INLINE struct lh_entry *lh_entry_prev(const struct lh_entry *e) {
-  return e->prev;
+static _LH_INLINE struct lh_entry *lh_entry_prev(const struct lh_entry *e)
+{
+	return e->prev;
 }
 
 #undef _LH_INLINE

@@ -123,6 +123,7 @@ function(add_submodules directory)
   find_modules(_submodules_directory_list ${directory})
   scan_submodules(_sorted_list "${_submodules_directory_list}")
   foreach(_submodule_directory IN LISTS _sorted_list)
+    message(STATUS "Adding Module ${_submodule_directory} ...")
     add_subdirectory(${_submodule_directory})
   endforeach()
 endfunction()
@@ -151,9 +152,13 @@ function(scan_submodules _sorted_list _modules_dir_list)
 
     set(_deps_ids "")
     foreach(_d IN LISTS _deps_raw)
-      split_module_name(${_d} _dep_prefix)
-      set(_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
-      list(APPEND _deps_ids "${_dep_id}")
+      if(_d MATCHES "::")
+        split_module_name(${_d} _dep_prefix)
+        set(_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
+        list(APPEND _deps_ids "${_dep_id}")
+      else()
+        message(FATAL_ERROR "Module name should be Namespace::Identifier")
+      endif()
     endforeach()
 
     set(_dir_to_id_${_mod_dir} "${_module_id}")
@@ -236,6 +241,9 @@ function(get_submodule_dependency module_dir dep_list)
   endif()
   if(NOT "${_module_private_depends}" STREQUAL "")
     list(APPEND _deps ${_module_private_depends})
+  endif()
+  if(NOT "${_module_external_depends}" STREQUAL "")
+    list(APPEND _deps ${_module_external_depends})
   endif()
   set(${dep_list} ${_deps} PARENT_SCOPE)
 
@@ -409,6 +417,11 @@ endfunction()
 
 #]==]
 function(is_module_target prefix)
+
+  if("${${prefix}_external_build}" STREQUAL "TRUE")
+    set("${prefix}_IS_MODULE_TARGET" TRUE PARENT_SCOPE)
+    return()
+  endif()
   if(NOT "${${prefix}_classes}" STREQUAL "" OR
      NOT "${${prefix}_sources}" STREQUAL "")
     set("${prefix}_IS_MODULE_TARGET" TRUE PARENT_SCOPE)
@@ -680,6 +693,7 @@ endfunction()
     add_module(Common::Core)
 #]==]
 function(add_module module_name)
+
   scan_module_file(MODULE)
   if(${MODULE_enable_build} STREQUAL "FALSE")
     message(STATUS "Module ${module_name} build is disabled.")
@@ -698,6 +712,14 @@ function(add_module module_name)
   configure_module("${MODULE_config_headers}" 
     "${CMAKE_CURRENT_BINARY_DIR}"
   )
+
+  # Fallback for custom modules that want to specify their own build rules
+  # e.g. vendored third‑party or externally fetched modules
+  if(${MODULE_external_build} STREQUAL "TRUE")
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_external_source_dir}")
+    return()
+  endif()
+
   module_target_name(${module_name} _module)
   add_library(${_module_TARGET_NAME})
   add_module_dependencies(${_module_TARGET_NAME} MODULE)
@@ -706,6 +728,7 @@ function(add_module module_name)
   module_include_directories(${_module_TARGET_NAME} MODULE)  
   module_link_libraries(${module_name})
   module_add_compile_defintions(${module_name})
+
 endfunction()
 
 #[==[.rst:
@@ -727,6 +750,7 @@ function(add_test_sources module)
     test_link_libraries(${test_name} ${module})
     add_test(NAME ${test_name} COMMAND ${test_name})
   endforeach()
+
 endfunction()
 
 #[==[.rst:
@@ -748,6 +772,7 @@ function(add_test_dependencies test_target module)
   if(MODULE_test_dep_targets)
     add_dependencies(${test_target} ${MODULE_test_dep_targets})
   endif()
+
 endfunction()
 
 #[==[.rst:
@@ -777,6 +802,7 @@ function(test_link_libraries test_target module)
   if(_module_libs)
     target_link_libraries(${test_target} PRIVATE ${_module_libs})
   endif()
+
 endfunction()
 
 #[==[.rst:
@@ -825,6 +851,7 @@ function(test_include_directory test_target module)
       target_include_directories(${test_target} PRIVATE "${_opt_dep_mod_inc_dirs}")
     endforeach()
   endif()
+
 endfunction()
 
 #[==[.rst:
@@ -860,10 +887,12 @@ endfunction()
     DOC_MODULES - list of modules to gnerat to the document&ion to 
 #]==]
 function(add_module_documentation module)
+
   if(${module}_ENABLE_DOCUMENTATION)
     list(APPEND DOC_MODULES ${module})
     set(DOC_MODULES ${DOC_MODULES} PARENT_SCOPE)
   endif()
+
 endfunction()
 
 

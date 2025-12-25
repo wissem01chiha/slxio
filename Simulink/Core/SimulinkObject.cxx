@@ -79,9 +79,60 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element) {
   if (element->getType().isA(SimulinkElementType::Array) ||
       element->getType().isA(SimulinkElementType::Object)) {
     l.log(Logger::V_ERROR, "Cannot remove a Simulink element of a different "
-                           "type than Array or Object to a SimulinkObject");
+                           "type than Array or Object from a SimulinkObject");
     return ErrorCode::SLX_ERR_TYPE_MISMATCH;
   }
+
+  if (element->getType().isA(SimulinkElementType::Parameter)) {
+
+    std::shared_ptr<SimulinkParameter> paramPtr =
+        std::dynamic_pointer_cast<SimulinkParameter>(element);
+    if (!paramPtr) {
+      l.log(Logger::V_ERROR,
+            "SimulinkObject: Failed to cast SimulinkElementBase to "
+            "SimulinkParameter");
+      return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    }
+
+    for (const auto &param : parameters) {
+
+      if (strcmp(param->getName(),paramPtr->getName())==0) {
+        parameters.erase(std::remove(parameters.begin(), parameters.end(), param ),
+                        parameters.end());
+      }
+    }
+  }
+
+  if (element->getType() == SimulinkElementType::Object) {
+
+        std::shared_ptr<SimulinkObject> objPtr =
+        std::dynamic_pointer_cast<SimulinkObject>(element);
+        
+    for (const auto &obj : objects) {
+      if (element->getID() == obj->getID()) {
+        objects.erase(std::remove(objects.begin(), objects.end(), obj),
+                      objects.end());
+      }
+    }
+
+  }
+
+  if (element->getType() == SimulinkElementType::Array) {
+
+    
+    std::shared_ptr<SimulinkArray> arrayPtr =
+        std::dynamic_pointer_cast<SimulinkArray>(element);
+
+    for (const auto &arr : arrays) {
+
+      if (arr->getName() == arrayPtr->getName()) {
+        arrays.erase(std::remove(arrays.begin(), arrays.end(), arr),
+                        arrays.end());
+      }
+      //arr->remove(element);
+    }
+  }
+
   return ErrorCode::Ok;
 }
 

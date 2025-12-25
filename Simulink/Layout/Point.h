@@ -17,11 +17,13 @@
 
 #include "ABINamespace.h"
 #include "Type.h"
+#include "APIExport.h"
 #include <vector>
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Point {
+class APIEXPORT Point {
 public:
   Point();
   Point(uint32 x, uint32 y, uint32 width, uint32 height);
@@ -35,5 +37,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // POINT_H

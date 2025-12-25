@@ -49,10 +49,9 @@ The project was originally derived from the Java-based Simulink parser of the Co
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
-The project is actively under development, and contributions are very welcome. See the [Developer Guide](developers_guide) page for more information.
+The project is actively under development, and contributions are very welcome. See the [CONTRIBUTING](.github/CONTRIBUTING.md)page for more information.
 
-To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases).  
-For building the library from source, see the same page for detailed instructions.
+To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [Feature Overview](feature) page.
 

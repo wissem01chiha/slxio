@@ -19,9 +19,8 @@ extern "C" {
 #define JSON_C_MAJOR_VERSION 0
 #define JSON_C_MINOR_VERSION 18
 #define JSON_C_MICRO_VERSION 99
-#define JSON_C_VERSION_NUM                                                     \
-  ((JSON_C_MAJOR_VERSION << 16) | (JSON_C_MINOR_VERSION << 8) |                \
-   JSON_C_MICRO_VERSION)
+#define JSON_C_VERSION_NUM \
+	((JSON_C_MAJOR_VERSION << 16) | (JSON_C_MINOR_VERSION << 8) | JSON_C_MICRO_VERSION)
 #define JSON_C_VERSION "0.18.99"
 
 #ifndef JSON_EXPORT

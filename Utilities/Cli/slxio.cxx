@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "SLXIO.h"
-#include "SlxioCxxopts.h"
-#include "SlxioVersion.h"
+#include "Cxxopts.h"
+#include "Version.h"
 #include <iostream>
 
 void banner() {
@@ -28,7 +27,7 @@ void banner() {
                              )"
             << std::endl;
 
-  std::cout << "    Version:      " << SLXIO_VERSION_STRING << "\n";
+  //std::cout << "    Version:      " << SLXIO_VERSION_STRING << "\n";
   std::cout << "    Developer:    "
             << "Wissem Chiha"
             << "\n";

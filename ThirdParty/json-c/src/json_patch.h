@@ -23,28 +23,28 @@ extern "C" {
  * Details of an error that occurred during json_patch_apply()
  */
 struct json_patch_error {
-  /**
-   * An errno value indicating what kind of error occurred.
-   * Possible values include:
-   * - ENOENT - A path referenced in the operation does not exist.
-   * - EINVAL - An invalid operation or with invalid path was attempted
-   * - ENOMEM - Unable to allocate memory
-   * - EFAULT - Invalid arguments were passed to json_patch_apply()
-   *             (i.e. a C API error, vs. a data error like EINVAL)
-   */
-  int errno_code;
+	/**
+	 * An errno value indicating what kind of error occurred.
+	 * Possible values include:
+	 * - ENOENT - A path referenced in the operation does not exist.
+	 * - EINVAL - An invalid operation or with invalid path was attempted
+	 * - ENOMEM - Unable to allocate memory
+	 * - EFAULT - Invalid arguments were passed to json_patch_apply()
+	 *             (i.e. a C API error, vs. a data error like EINVAL)
+	 */
+	int errno_code;
 
-  /**
-   * The index into the patch array of the operation that failed,
-   * or SIZE_T_MAX for overall errors.
-   */
-  size_t patch_failure_idx;
+	/**
+	 * The index into the patch array of the operation that failed,
+	 * or SIZE_T_MAX for overall errors.
+	 */
+	size_t patch_failure_idx;
 
-  /**
-   * A human readable error message.
-   * Allocated from static storage, does not need to be freed.
-   */
-  const char *errmsg;
+	/**
+	 * A human readable error message.
+	 * Allocated from static storage, does not need to be freed.
+	 */
+	const char *errmsg;
 };
 
 /**
@@ -57,7 +57,7 @@ struct json_patch_error {
  * The json_object at *base will be modified in place.
  * Exactly one of *base or copy_from must be non-NULL.
  * If *base is NULL, a new copy of copy_from will allocated and populated
- * using json_object_deep_copy().  In this case json_object_put() _must_ be
+ * using json_object_deep_copy().  In this case json_object_put() _must_ be 
  * used to free *base even if the overall patching operation fails.
  *
  * If anything fails during patching a negative value will be returned,
@@ -70,10 +70,8 @@ struct json_patch_error {
  *
  * @return negative if an error (or not found), or 0 if patch completely applied
  */
-JSON_EXPORT int json_patch_apply(struct json_object *copy_from,
-                                 struct json_object *patch,
-                                 struct json_object **base,
-                                 struct json_patch_error *patch_error);
+JSON_EXPORT int json_patch_apply(struct json_object *copy_from, struct json_object *patch,
+                                 struct json_object **base, struct json_patch_error *patch_error);
 
 #ifdef __cplusplus
 }

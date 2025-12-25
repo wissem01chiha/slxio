@@ -28,11 +28,12 @@ extern "C" {
 
 typedef void(array_list_free_fn)(void *data);
 
-struct array_list {
-  void **array;
-  size_t length;
-  size_t size;
-  array_list_free_fn *free_fn;
+struct array_list
+{
+	void **array;
+	size_t length;
+	size_t size;
+	array_list_free_fn *free_fn;
 };
 typedef struct array_list array_list;
 
@@ -55,8 +56,7 @@ extern struct array_list *array_list_new(array_list_free_fn *free_fn);
  *
  * @see array_list_shrink
  */
-extern struct array_list *array_list_new2(array_list_free_fn *free_fn,
-                                          int initial_size);
+extern struct array_list *array_list_new2(array_list_free_fn *free_fn, int initial_size);
 
 extern void array_list_free(struct array_list *al);
 
@@ -70,8 +70,7 @@ extern int array_list_add(struct array_list *al, void *data);
 
 extern size_t array_list_length(struct array_list *al);
 
-extern void array_list_sort(struct array_list *arr,
-                            int (*compar)(const void *, const void *));
+extern void array_list_sort(struct array_list *arr, int (*compar)(const void *, const void *));
 
 extern void *array_list_bsearch(const void **key, struct array_list *arr,
                                 int (*compar)(const void *, const void *));

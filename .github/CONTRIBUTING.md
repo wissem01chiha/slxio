@@ -2,10 +2,7 @@
 # SLXIO Contributing Guide 
 
 - [Welcome](#welcome)
-- [SLXIO overview](#slxio-overview)
-- [Ground rules](#ground-rules)
-- [Community engagement](#community-engagement)
-- [Share ideas](#share-ideas)
+- [Project overview](#project-overview)
 - [Before you start](#before-you-start)
 - [Environment setup](#environment-setup)
   - [Troubleshoot](#troubleshoot)
@@ -22,7 +19,7 @@
 
 ## Welcome
 
-Welcome to the SystemDK Contributing Guide, and thank you for your interest.
+Welcome to the slxio Contributing Guide, and thank you for your interest.
 If you would like to contribute to a specific part of the project, check out the following list of contributions that we accept and their corresponding sections that are within this guide:
 
 * {Contribution type 1}
@@ -40,28 +37,8 @@ However, at this time, we do not accept the following contributions:
 * {Contribution type 2}
 * {Contribution type 3}
 
-## SLXIO overview
+## Project overview
   see [README](../README.md) for generale project overview 
-
-## Ground rules
-
-Before contributing, read our {link to the Code of Conduct} to learn more about our community guidelines and expectations.
-
-## Community engagement
-
-Refer to the following channels to connect with fellow contributors or to stay up-to-date with news about the {Project Name}:
-
-* Join our project contributors on {name and link to online chat}.
-* Participate in our project meetings on {specify the day of the week and cadence} at {specify time and timezone}, where you can provide a status update or raise questions and concerns about your contributions. Use the following link to join: {link to online meeting space}
-* Stay updated on the latest news and changes to the project by signing up to receive our newsletter. Sign up with the following link: {link to the sign-up page for the newsletter}
-
-## Share ideas
-
-To share your new ideas for the project, perform the following actions:
-
-1. {Step 1}
-2. {Step 2}
-3. {Step 3}
 
 ## Before you start
 
@@ -107,7 +84,7 @@ Read our {name and link to your style guide} to understand our guidelines for wr
 
 - Make sure that you are using the latest release version.
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/wissem01chiha/slxio/issues).
-- 
+- for nwo there are ready-to-go templates for bug reporting and faeture request, if your rleated request do not fit into theose templates to add other templates open an github request 
 
 ### Issue management
 
@@ -115,15 +92,17 @@ Read our {name and link to your style guide} to understand our guidelines for wr
 
 ### Commit messages
 
-{Provide instructions on how to format commit messages.}
+for now there is not any restriction about commit message format, use the format you want 
 
 ### Branch creation
 
-The project uses the  Git branching system with the following main branches:
+The project uses the Git branching system with the following main branches:
 
 - `master` – stable, production-ready code  
 - `develop` – active development and integration  
 - `hotfix` – urgent fixes applied directly to `master`
+
+fature branches are created upon the approval of of a new fature 
 
 for more information : https://www.geeksforgeeks.org/git/branching-strategies-in-git/
 
@@ -136,6 +115,48 @@ dos2unix clang-format.sh
 
 C:\cygwin64\bin\bash.exe -l -c "/cygdrive/c/Users/chiha/OneDrive/Documents/github/slxio/Development/clang-format.sh"
 
+#  To‑Do List
+
+These are the main features and issues planned to be added or fixed:
+
+- Python bindings for modules 
+  - All related module bindings should be placed into:  
+    ```
+    /<module-namespace>/<module_name>/Binding/Python
+    ```  
+  - Other language bindings should follow the same pattern, e.g.:  
+    ```
+    /<module-namespace>/<module_name>/Binding/Rust
+    ```  
+  - Each module manages its own bindings.  
+  - Project‑root bindings should be placed into the main [Binding](https://github.com/wissem01chiha/slxio/tree/master/Binding) folder, named by language.
+
+- JSON serializer module  
+  - Start implementation in [IO‑Json](https://github.com/wissem01chiha/slxio/tree/master/IO).
+
+- CMake tooling fixes  
+  - Fix `clang-format` and `cppcheck` CMake target construction in:  
+    - [CppCheck.cmake](https://github.com/wissem01chiha/slxio/blob/master/CMake/CppCheck.cmake)  
+    - [CheckClangSupport.cmake](https://github.com/wissem01chiha/slxio/blob/master/CMake/CheckClangSupport.cmake)
+
+- Compiler flag helpers  
+  - Add a CMake module file providing helper macros for compiler flag support.
+
+- Compile definitions  
+  - Fix compile definitions in the main `module.cmake` (`PUBLIC_COMPILE_DEFINITIONS`) and private compiler definition functions.  
+  - Ensure support for module‑specific compile‑time flags.
+
+- Matlab script parsing  
+  - Add source files for parsing Matlab scripts into an AST (Abstract Syntax Tree) in the [Matlab Utilities module](https://github.com/wissem01chiha/slxio/tree/master/Utilities/Matlab).  
+  - Support parsing of Matlab function blocks.  
+  - Tools like ANTLR can be used to assist.
+
+- Test coverage 
+  - Fix and add coverage generation for tests.
+
+- Fuzzing support 
+  - Add fuzzing support in the [Fuzzing](https://github.com/wissem01chiha/slxio/tree/master/Fuzzing) module.
+ 
 ### Releases
 
 {Provide a description of the release process and cadence for the project, such as the source code.}

@@ -33,45 +33,64 @@
 static int _syslog = 0;
 static int _debug = 0;
 
-void mc_set_debug(int debug) { _debug = debug; }
-int mc_get_debug(void) { return _debug; }
-
-extern void mc_set_syslog(int syslog) { _syslog = syslog; }
-
-void mc_debug(const char *msg, ...) {
-  va_list ap;
-  if (_debug) {
-    va_start(ap, msg);
-#if HAVE_VSYSLOG
-    if (_syslog) {
-      vsyslog(LOG_DEBUG, msg, ap);
-    } else
-#endif
-      vprintf(msg, ap);
-    va_end(ap);
-  }
+void mc_set_debug(int debug)
+{
+	_debug = debug;
+}
+int mc_get_debug(void)
+{
+	return _debug;
 }
 
-void mc_error(const char *msg, ...) {
-  va_list ap;
-  va_start(ap, msg);
-#if HAVE_VSYSLOG
-  if (_syslog) {
-    vsyslog(LOG_ERR, msg, ap);
-  } else
-#endif
-    vfprintf(stderr, msg, ap);
-  va_end(ap);
+extern void mc_set_syslog(int syslog)
+{
+	_syslog = syslog;
 }
 
-void mc_info(const char *msg, ...) {
-  va_list ap;
-  va_start(ap, msg);
+void mc_debug(const char *msg, ...)
+{
+	va_list ap;
+	if (_debug)
+	{
+		va_start(ap, msg);
 #if HAVE_VSYSLOG
-  if (_syslog) {
-    vsyslog(LOG_INFO, msg, ap);
-  } else
+		if (_syslog)
+		{
+			vsyslog(LOG_DEBUG, msg, ap);
+		}
+		else
 #endif
-    vfprintf(stderr, msg, ap);
-  va_end(ap);
+			vprintf(msg, ap);
+		va_end(ap);
+	}
+}
+
+void mc_error(const char *msg, ...)
+{
+	va_list ap;
+	va_start(ap, msg);
+#if HAVE_VSYSLOG
+	if (_syslog)
+	{
+		vsyslog(LOG_ERR, msg, ap);
+	}
+	else
+#endif
+		vfprintf(stderr, msg, ap);
+	va_end(ap);
+}
+
+void mc_info(const char *msg, ...)
+{
+	va_list ap;
+	va_start(ap, msg);
+#if HAVE_VSYSLOG
+	if (_syslog)
+	{
+		vsyslog(LOG_INFO, msg, ap);
+	}
+	else
+#endif
+		vfprintf(stderr, msg, ap);
+	va_end(ap);
 }

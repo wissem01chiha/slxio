@@ -9,7 +9,10 @@ VERSION
 MAINTAINER 
   Wissem CHIHA 
 ENABLE_BUILD 
-  TRUE 
+  TRUE
+EXTERNAL_BUILD
+  FALSE
+EXTERNAL_SOURCE_DIR 
 ENABLE_TEST
   TRUE 
 ENABLE_BINDING 
@@ -22,11 +25,15 @@ INSTALL_TARGETS
   TRUE 
 CLASSES
   StateflowElementBase
+  StateflowTransition
+  StateflowNodeBase
   StateflowEvent
   StateflowTarget
 SOURCES
 HEADERS
   StateflowElementBase.h
+  StateflowTransition.h
+  StateflowNodeBase.h
   StateflowEvent.h
   StateflowTarget.h
 CONFIG_HEADERS

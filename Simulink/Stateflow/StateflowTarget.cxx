@@ -1,9 +1,11 @@
 #include "StateflowTarget.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowTarget::StateflowTarget() : StateflowElementBase() {}
+
 StateflowTarget::StateflowTarget(StateflowTarget &orig)
     : StateflowElementBase(orig) {}
 
@@ -14,6 +16,14 @@ StateflowTarget::remove(std::shared_ptr<SimulinkElementBase> element) {
   // getParent().removeTarget(this);
   return ErrorCode::Ok;
 }
+
+ErrorCode StateflowTarget::add(std::shared_ptr<SimulinkElementBase> element) {
+  return ErrorCode::Ok;
+}
+
+std::string StateflowTarget::toString() const { return std::string(""); }
+
+Index StateflowTarget::getID() const { return (Index)0; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
