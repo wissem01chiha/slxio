@@ -171,7 +171,7 @@ std::vector<Float> FileManager::getSwaps() {
 
   for (Index i = 0; i < static_cast<Index>(fileList.size()); ++i) {
     if (fileList[i] != nullptr) {
-      swaps.push_back(static_cast<Float>(fileList[i]->getFileSwap()));
+      // swaps.push_back(static_cast<Float>(fileList[i]->getFileSwap()));
     }
   }
 
@@ -224,7 +224,7 @@ ErrorCode FileManager::clear() {
   }
 
   fileList.clear();
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 FileManager::FileManager(std::vector<File *> files) {}

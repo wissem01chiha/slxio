@@ -57,7 +57,6 @@ CONFIG_HEADERS
   Json-c.h.in
   src/cmake/config.h.in
   src/cmake/json_config.h.in
-  src/json_config.h.win32
 CMAKE_MODULES_DIRS
   src/cmake
 PUBLIC_DEPENDS

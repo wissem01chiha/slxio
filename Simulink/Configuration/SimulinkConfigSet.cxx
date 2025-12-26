@@ -9,7 +9,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 SimulinkConfigSet::SimulinkConfigSet() : status(false) {}
 
 ErrorCode SimulinkConfigSet::saveToFile(const char *path) {
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::string SimulinkConfigSet::toString() const {
@@ -49,30 +49,30 @@ ErrorCode SimulinkConfigSet::setParameter(const char *name, const char *value) {
   auto param = object->getParameter(std::string(name));
   if (param) {
     // param->setValue(value); -> not implnetd yet
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
-  return ErrorCode::SLX_ERR_ER_NOENT;
+  return ErrorCode::SLX_ENOENT;
 }
 
-ErrorCode SimulinkConfigSet::copy() { return ErrorCode::Ok; }
+ErrorCode SimulinkConfigSet::copy() { return ErrorCode::SLX_OK; }
 
-ErrorCode SimulinkConfigSet::clone() { return ErrorCode::Ok; }
+ErrorCode SimulinkConfigSet::clone() { return ErrorCode::SLX_OK; }
 
-ErrorCode SimulinkConfigSet::remove() { return ErrorCode::Ok; }
+ErrorCode SimulinkConfigSet::remove() { return ErrorCode::SLX_OK; }
 
 ErrorCode SimulinkConfigSet::attach(SimulinkModel &model) {
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkConfigSet::detach(SimulinkModel &model) {
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::string SimulinkConfigSet::getName() { return object->getName(); }
 
 ErrorCode SimulinkConfigSet::loadFromFile(const char *path) {
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 SimulinkConfigSet SimulinkConfigSet::fromFile(const char *path) {
@@ -86,12 +86,12 @@ ErrorCode SimulinkConfigSet::activate() {
                               object->getName());
   }
   status = true;
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkConfigSet::deactivate() {
   status = false;
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 bool SimulinkConfigSet::isActive() const { return status; }

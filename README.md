@@ -45,17 +45,17 @@
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the ConQAT Project. Find the original source code here: [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
+The project was originally derived from the Java-based Simulink parser of the [ConQAT]() Project. Find the original source code here:  [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
-The project is actively under development, and contributions are very welcome. See the [CONTRIBUTING](.github/CONTRIBUTING.md)page for more information.
-
 To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
-Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [Feature Overview](feature) page.
+Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
-**Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+The project is actively under development, and contributions are very welcome. See the [CONTRIBUTING](.github/CONTRIBUTING.md) page for more information.
+
+>> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
 
 ### 1.1 Features
 

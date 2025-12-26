@@ -14,7 +14,7 @@ ErrorCode
 SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
 
   this->cfgs.push_back(cfg);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode
@@ -23,9 +23,9 @@ SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
   auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
   if (it != cfgs.end()) {
     cfgs.erase(it);
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
-  return ErrorCode::ObjectNotFound;
+  return ErrorCode::SLX_ENOENT;
 }
 
 std::shared_ptr<SimulinkConfigSet>

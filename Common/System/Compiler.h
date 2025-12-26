@@ -32,7 +32,7 @@
 #include <io.h>
 #endif
 #if HAVE_WINDOWS_H
-#include <windows.h>
+//#include <windows.h>
 #endif
 #define finite(x) _finite(x)
 #else

@@ -12,12 +12,28 @@ public:
     getcwd(cwdbuffer, sizeof(cwdbuffer));
   }
 
+  /// @brief Create a temporary directory and return its path.
   std::string tempdir() {
 
     std::string tempDir = std::string(cwdbuffer);
     if (tempDir.back() != '\\')
       tempDir += '\\';
     tempDir += "tempdir";
+
+    uv_fs_t req;
+    uv_loop_t *loop = uv_default_loop();
+
+    int r = uv_fs_mkdir(loop, &req, tempDir.c_str(), 0755, nullptr);
+    uv_fs_req_cleanup(&req);
+
+    if (r < 0) {
+      if (r == UV_EEXIST) {
+        std::cout << "directory already exists: " << tempDir << std::endl;
+      } else {
+        std::cerr << "failed to create directory: " << uv_err_name(r) << " - "
+                  << uv_strerror(r) << std::endl;
+      }
+    }
     return tempDir;
   }
 
@@ -36,35 +52,35 @@ TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test") {
 TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test") {
 
   File f(TEST_FILE, File::Read);
-  CHECK(f.open(File::Read) == ErrorCode::Ok);
-  CHECK(f.close() == ErrorCode::Ok);
+  CHECK(f.open() == ErrorCode::SLX_OK);
+  CHECK(f.close() == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents") {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open(File::Read) == ErrorCode::Ok);
-  auto rc = f.read(64);
-  CHECK_UNARY(rc == ErrorCode::Ok || rc == ErrorCode::EndOfFile);
+  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  auto rc = f.read();
+  CHECK_UNARY(rc == ErrorCode::SLX_OK || rc == ErrorCode::SLX_EEOF);
   CHECK(f.size() > 0);
-  const char *data = f.getData();
-  std::cout << std::string(data, f.getNBytes()) << std::endl;
+  std::vector<char> data = f.getBuffer();
+  CHECK(!data.empty());
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Write to File Test") {
 
   File f(TEST_FILE, File::Write);
-  REQUIRE(f.open(File::Write) == ErrorCode::Ok);
-  CHECK(f.write("New content") == ErrorCode::Ok);
+  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  CHECK(f.write("New content") == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test") {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open(File::Read) == ErrorCode::Ok);
+  REQUIRE(f.open() == ErrorCode::SLX_OK);
 
   const char *newName = "renamed.txt";
-  CHECK(f.rename(newName) == ErrorCode::Ok);
+  CHECK(f.rename(newName) == ErrorCode::SLX_OK);
   CHECK(f.getFilename() == "renamed.txt");
   std::remove(newName);
 }
@@ -74,29 +90,26 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test") {
   std::string TEST_FILE_PATH = std::string(cwdbuffer) + "\\" + TEST_FILE;
   File f(TEST_FILE_PATH.c_str(), File::Read);
 
-  REQUIRE(f.open(File::Read) == ErrorCode::Ok);
-  REQUIRE(f.close() == ErrorCode::Ok);
+  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  REQUIRE(f.close() == ErrorCode::SLX_OK);
 
-  std::string destDir = tempdir();
-  std::string destFile = destDir + "\\" + TEST_FILE;
-  std::remove(destFile.c_str());
-
-  CHECK(f.move(destDir.c_str()) == ErrorCode::Ok);
+  std::cout << "this is the tempory dir path " << tempdir() << std::endl;
+  CHECK(f.move(tempdir().c_str()) == ErrorCode::SLX_OK);
   CHECK(f.getFileDirectory().find(cwdbuffer) != std::string::npos);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Cast File Extension Test") {
 
   File f("example.txt", File::Read);
-  CHECK(f.castFileExtension("md") == ErrorCode::Ok);
+  CHECK(f.setFileExtension("md") == ErrorCode::SLX_OK);
   CHECK(std::string(f.getFileExtension()) == "md");
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test") {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open(File::Read) == ErrorCode::Ok);
-  f.read(64);
+  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  f.read();
   CHECK(f.eof() == true);
   CHECK(f.size() > 0);
 }

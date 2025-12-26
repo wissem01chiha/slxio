@@ -62,7 +62,7 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
   if (elment == nullptr) {
     l.log(Logger::V_WARNING,
           "SimulinkArray::Cannot add a null Simulink element.");
-    return ErrorCode::ElementNotFound;
+    return ErrorCode::SLX_ENOENT;
   }
 
   if (elment->getType() == SimulinkElementType::Array) {
@@ -85,7 +85,7 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
         l.log(
             Logger::V_WARNING,
             "SimulinkArray::subObject already exsists in the Base array abort");
-        return ErrorCode::Ok;
+        return ErrorCode::SLX_OK;
       }
     }
 
@@ -96,14 +96,14 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment) {
     std::shared_ptr<SimulinkParameter> param =
         std::dynamic_pointer_cast<SimulinkParameter>(elment);
     parameters.push_back(param);
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   } else {
     l.log(Logger::V_ERROR, "Cannot add a Simulink element of a different type "
                            "than Array or Object to a SimulinkObject");
-    return ErrorCode::InvalidElementType;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
@@ -112,7 +112,7 @@ ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
   if (elment == nullptr) {
     l.log(Logger::V_WARNING,
           "SimulinkArray::Cannot remove a null Simulink element.");
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
 
   if (elment->getType() == SimulinkElementType::Array) {
@@ -142,10 +142,10 @@ ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment) {
     l.log(Logger::V_WARNING,
           "SimulinkArray::Cannot remove a Simulink element of a different type "
           "than Array or Object to a SimulinkObject");
-    return ErrorCode::InvalidElementType;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 Index SimulinkArray::getID() const {

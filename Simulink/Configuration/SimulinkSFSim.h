@@ -16,16 +16,16 @@
 #define SIMULINKSFSIM_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief 
+ * @brief
  */
-class SimulinkSFSim final{
+class SimulinkSFSim final {
 public:
   SimulinkSFSim();
 

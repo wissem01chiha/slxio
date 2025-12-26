@@ -38,6 +38,7 @@ public:
   /// @brief Obtains a timer measurement in seconds.
   /// @return The amount of time since the timer started.
   virtual Float time() = 0;
+
 protected:
   Timer() = default;
 };

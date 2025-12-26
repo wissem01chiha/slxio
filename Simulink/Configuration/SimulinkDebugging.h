@@ -23,7 +23,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief 
+ * @brief
  */
 class APIEXPORT SimulinkDebugging final {
 public:

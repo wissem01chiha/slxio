@@ -28,16 +28,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** 
- * @brief A Simulink Block 
+/**
+ * @brief A Simulink Block
  */
 class APIEXPORT SimulinkBlock : public SimulinkElementBase {
 public:
   SimulinkBlock();
   ~SimulinkBlock() = default;
 
-  explicit  SimulinkBlock(SimulinkBlockType::Type blockType_);
-  explicit  SimulinkBlock(SimulinkBlockType *blockType_);
+  explicit SimulinkBlock(SimulinkBlockType::Type blockType_);
+  explicit SimulinkBlock(SimulinkBlockType *blockType_);
 
   SimulinkBlock(const SimulinkBlock &origBlock);
   SimulinkBlock &operator=(const SimulinkBlock &) = delete;
@@ -48,7 +48,6 @@ public:
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
   std::string toString() const override;
-  
 
   Index getID() const override;
   bool contains(const Index &blockId_) const override;

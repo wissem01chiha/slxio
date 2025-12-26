@@ -31,7 +31,7 @@ ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
   if (element == nullptr) {
     Logger::getInstance().log(Logger::V_WARNING,
                               "Cannot remove a null Simulink element.");
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
 
   if (sourcePort != nullptr) {
@@ -43,7 +43,7 @@ ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element) {
     destPort->remove(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
@@ -51,7 +51,7 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
   if (element == nullptr) {
     Logger::getInstance().log(Logger::V_WARNING,
                               "Cannot add a null Simulink element.");
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
 
   if (sourcePort != nullptr) {
@@ -63,23 +63,25 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element) {
     destPort->add(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 Index SimulinkLine::getID() const { return lineId; }
 
 bool SimulinkLine::contains(const Index &id) const { return lineId == id; }
 
-bool SimulinkLine::isConnected() { return (sourcePort != nullptr && destPort != nullptr); }
+bool SimulinkLine::isConnected() {
+  return (sourcePort != nullptr && destPort != nullptr);
+}
 
 std::string SimulinkLine::toString() const {
 
-    std::ostringstream oss; 
+  std::ostringstream oss;
   oss << "SimulinkLine[ID=" << lineId;
-  oss << ", Source=  "  << sourcePort->toString();
-  oss << ", Destination=  "  << destPort->toString();
+  oss << ", Source=  " << sourcePort->toString();
+  oss << ", Destination=  " << destPort->toString();
   oss << "]";
-  return  oss.str();
+  return oss.str();
 }
 
 SLXIO_ABI_NAMESPACE_END

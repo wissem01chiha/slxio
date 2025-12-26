@@ -59,16 +59,16 @@ public:
   CoderInfo getCoderInfo();
 
   /// @brief Get the initial value of the signal
-  const char* getInitialValue();
+  const char *getInitialValue();
 
   /// @brief Get the description of the signal
-  const char* getDescription();
+  const char *getDescription();
 
   /// @brief Get the dimensions mode of the signal
-  const char* getDimensionsMode();
+  const char *getDimensionsMode();
 
   /// @brief Get the unit of the signal
-  const char* getUnit();
+  const char *getUnit();
 
   /// @brief Get the sample time values of the signal
   std::vector<Float> getSampleTime();
@@ -90,7 +90,7 @@ private:
 
   Float Min;
   Float Max;
-  
+
   CoderInfo coder;
 };
 

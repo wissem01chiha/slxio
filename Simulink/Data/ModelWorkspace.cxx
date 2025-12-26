@@ -8,7 +8,7 @@ ModelWorkspace::ModelWorkspace() {}
 
 DataSourceType ModelWorkspace::getDataSource() { return dataSource; }
 
-const char* ModelWorkspace::getFilename() { return fileName.c_str(); }
+const char *ModelWorkspace::getFilename() { return fileName.c_str(); }
 
 std::string ModelWorkspace::getMatlabCode() { return matlabCode; }
 

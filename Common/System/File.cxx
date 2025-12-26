@@ -1,409 +1,191 @@
 #include "File.h"
 #include <cstring>
 
-#ifdef PLATFORM_WINDOWS
-#include <fcntl.h>
-#include <io.h>
-#else
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#endif
+File::File(const std::string &path, Mode mode) : mode_(mode), path_(path) {}
 
-File::File(const std::string &path, Mode mode) {
-
-  mode_ = mode;
-  path_ = path;
-  buffer = nullptr;
-}
-
-File::File(const char *path, Mode mode) {
-
-  mode_ = mode;
+File::File(const char *path, Mode mode) : mode_(mode) {
   path_ = std::string(path);
-  buffer = nullptr;
 }
 
-ErrorCode File::setInputStream(std::fstream &stream) {
+File::File(const File &fs)
+    : path_(fs.path_), mode_(fs.mode_), fd_(fs.fd_), buffer_(fs.buffer_),
+      nbytes_(fs.nbytes_) {}
 
-  if (!stream.is_open()) {
-    return ErrorCode::IOError;
+File &File::operator=(const File &other) noexcept {
+  if (this != &other) {
+    path_ = other.path_;
+    mode_ = other.mode_;
+    fd_ = other.fd_;
+    buffer_ = other.buffer_;
+    nbytes_ = other.nbytes_;
   }
-  stream_ = std::move(stream);
-  buffer = nullptr;
-  return ErrorCode::Ok;
+  return *this;
 }
 
-ErrorCode File::open(File::Mode mode) {
+File &File::operator=(File &&other) noexcept {
+  if (this != &other) {
 
-  mode_ = mode;
-#ifdef PLATFORM_WINDOWS
-  DWORD access = 0;
-  DWORD creation = OPEN_EXISTING;
+    path_ = std::move(other.path_);
+    mode_ = other.mode_;
+    fd_ = other.fd_;
+    buffer_ = std::move(other.buffer_);
+    nbytes_ = other.nbytes_;
+
+    other.fd_ = -1;
+    other.nbytes_ = 0;
+    other.mode_ = Mode::Read;
+    other.path_.clear();
+    other.buffer_.clear();
+  }
+  return *this;
+}
+
+File::File(File &&other) noexcept
+    : path_(std::move(other.path_)), mode_(other.mode_), fd_(other.fd_),
+      buffer_(std::move(other.buffer_)), nbytes_(other.nbytes_) {
+
+  other.fd_ = -1;
+  other.nbytes_ = 0;
+  other.mode_ = Mode{};
+  other.path_.clear();
+  other.buffer_.clear();
+}
+
+ErrorCode File::open() {
+
+  uv_fs_t req;
+  uint32_t flags = 0;
 
   switch (mode_) {
-  case Mode::Read:
-    access = GENERIC_READ;
-    creation = OPEN_EXISTING;
+  case Read:
+    flags = O_RDONLY;
     break;
-  case Mode::Write:
-    access = GENERIC_READ | GENERIC_WRITE;
-    creation = OPEN_ALWAYS;
+  case Write:
+    flags = O_WRONLY | O_CREAT;
     break;
-  case Mode::Truncate:
-    access = GENERIC_READ | GENERIC_WRITE;
-    creation = CREATE_ALWAYS;
+  case Truncate:
+    flags = O_WRONLY | O_CREAT | O_TRUNC;
     break;
-  case Mode::Append:
-    access = GENERIC_READ | GENERIC_WRITE;
-    creation = OPEN_ALWAYS;
+  case Append:
+    flags = O_WRONLY | O_CREAT | O_APPEND;
     break;
-  default:
-    return ErrorCode::NotImplemented;
   }
 
-  hFile_ = CreateFileA(path_.c_str(), access,
-                       FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
-                       NULL, creation, FILE_ATTRIBUTE_NORMAL, NULL);
+  int err =
+      uv_fs_open(uv_default_loop(), &req, path_.c_str(), flags, 0, nullptr);
+  uv_fs_req_cleanup(&req);
 
-  if (hFile_ == INVALID_HANDLE_VALUE) {
-    hFile_ = nullptr;
-    return ErrorCode::FileNotFound;
+  if (err < 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : \n", err_str);
+    return static_cast<ErrorCode>(-err);
   }
-
-  LARGE_INTEGER size;
-  if (!GetFileSizeEx(hFile_, &size)) {
-    CloseHandle(hFile_);
-    hFile_ = nullptr;
-    return ErrorCode::IOError;
-  }
-  fsize_ = static_cast<size_t>(size.QuadPart);
-
-  DWORD attr = GetFileAttributesA(path_.c_str());
-  if (attr == INVALID_FILE_ATTRIBUTES) {
-    type_ = Unknown;
-  } else if (attr & FILE_ATTRIBUTE_DIRECTORY) {
-    type_ = Directory;
-  } else if (attr & FILE_ATTRIBUTE_REPARSE_POINT) {
-    type_ = Symlink;
-  } else {
-    type_ = Regular;
-  }
-
-  return ErrorCode::Ok;
-
-#else
-  std::ios_base::openmode flags = std::ios::binary;
-  switch (mode_) {
-  case Mode::Read:
-    flags |= std::ios::in;
-    break;
-  case Mode::Write:
-    flags |= std::ios::out;
-    break;
-  case Mode::Truncate:
-    flags |= std::ios::out | std::ios::trunc;
-    break;
-  case Mode::Append:
-    flags |= std::ios::out | std::ios::app;
-    break;
-  default:
-    return ErrorCode::NotImplemented;
-  }
-
-  stream_.open(path_, flags);
-  if (!stream_.is_open()) {
-    return ErrorCode::FileNotFound;
-  }
-  if (stream_.fail()) {
-    return ErrorCode::IOError;
-  }
-
-  struct stat st;
-  ::fstat(fd_, &st);
-  fsize_ = static_cast<size_t>(st.st_size);
-
-  if (stat(path_.c_str(), &st) != 0) {
-    type_ = Unknown;
-  }
-  if (S_ISREG(st.st_mode)) {
-    type_ = Regular;
-  }
-  if (S_ISDIR(st.st_mode)) {
-    type_ = Directory;
-  }
-  if (S_ISCHR(st.st_mode)) {
-    type_ = CharacterDevice;
-  }
-  if (S_ISBLK(st.st_mode)) {
-    type_ = BlockDevice;
-  }
-  if (S_ISFIFO(st.st_mode)) {
-    type_ = FIFO;
-  }
-  type_ = Unknown;
-
-  return ErrorCode::Ok;
-#endif
+  fd_ = err;
+  return ErrorCode::SLX_OK;
 }
 
-ErrorCode File::map(bool writable) {
+ErrorCode File::read() {
 
-#ifdef PLATFORM_WINDOWS
-  if (hFile_ == nullptr || hFile_ == INVALID_HANDLE_VALUE) {
-    return ErrorCode::NotOpen;
+  if (mode_ != Read) {
+    return ErrorCode::SLX_EIOERR;
   }
 
-  DWORD protect = writable ? PAGE_READWRITE : PAGE_READONLY;
-  DWORD access = writable ? (FILE_MAP_WRITE | FILE_MAP_READ) : FILE_MAP_READ;
+  buffer_.resize(4096);
+  uv_fs_t req;
+  uv_buf_t iov =
+      uv_buf_init(buffer_.data(), static_cast<unsigned int>(buffer_.size()));
 
-  hFileMap_ = CreateFileMapping(hFile_, NULL, protect, 0, 0, NULL);
-  if (hFileMap_ == nullptr) {
-    return ErrorCode::IOError;
+  int err = uv_fs_read(uv_default_loop(), &req, fd_, &iov, 1, -1, nullptr);
+  uv_fs_req_cleanup(&req);
+
+  if (err < 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : \n", err_str);
+    return static_cast<ErrorCode>(-err);
   }
-
-  lpMapAddress = MapViewOfFile(hFileMap_, access, 0, 0, 0);
-  if (lpMapAddress == nullptr) {
-    CloseHandle(hFileMap_);
-    hFileMap_ = nullptr;
-    return ErrorCode::IOError;
-  }
-
-  return ErrorCode::Ok;
-#else
-  int flags = writable ? O_RDWR : O_RDONLY;
-  fd_ = ::open(path_.c_str(), flags);
-  if (fd_ < 0)
-    return ErrorCode::FileNotFound;
-
-  struct stat st;
-  if (::fstat(fd_, &st) < 0) {
-    ::close(fd_);
-    return ErrorCode::IOError;
-  }
-  fsize_ = static_cast<size_t>(st.st_size);
-
-  int prot = writable ? (OF_READ | OF_WRITE) : OF_READ;
-  lpMapAddress = ::mmap(nullptr, fsize_, prot, LR_SHARED, fd_, 0);
-  if (lpMapAddress == WAIT_FAILED) {
-    lpMapAddress = nullptr;
-    ::close(fd_);
-    return ErrorCode::IOError;
-  }
-  return ErrorCode::Ok;
-#endif
-}
-
-ErrorCode File::read(size_t buffsize) {
-
-  if (buffsize > maxbuffsize_) {
-    return ErrorCode::InvalidArgument;
+  if (err == 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : \n", err_str);
+    return ErrorCode::SLX_EEOF;
   }
 
-  bool writable = (mode_ == Mode::Write || mode_ == Mode::Append ||
-                   mode_ == Mode::Truncate);
-
-  ErrorCode map_stat = map(writable);
-  if (map_stat != ErrorCode::Ok) {
-    return map_stat;
-  }
-
-  if (!buffer) {
-    free(buffer);
-    buffer = malloc(buffsize);
-    buffsize_ = buffsize;
-    if (!buffer)
-      return ErrorCode::NoSpace;
-  }
-  size_t toRead = std::min(buffsize_, fsize_ - readOffset_);
-
-#ifdef PLATFORM_WINDOWS
-  if (hFileMap_ == nullptr || lpMapAddress == nullptr || buffer == nullptr) {
-    return ErrorCode::NotOpen;
-  }
-  if (fsize_ == 0) {
-    return ErrorCode::EndOfFile;
-  }
-
-#ifdef _MSC_VER
-  __try {
-    std::memcpy(buffer, lpMapAddress, toRead);
-    nbytes_ = toRead;
-    readOffset_ += toRead;
-  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
-                  ? EXCEPTION_EXECUTE_HANDLER
-                  : EXCEPTION_CONTINUE_SEARCH) {
-    return ErrorCode::IOError;
-  }
-  return ErrorCode::Ok;
-#else
-  if (lpMapAddress == nullptr) {
-    return ErrorCode::NotOpen;
-  }
-  if (readOffset_ + toRead > fsize_) {
-    return ErrorCode::IOError;
-  }
-  std::memcpy(buffer, lpMapAddress, toRead);
-  nbytes_ = toRead;
-  readOffset_ += toRead;
-  return ErrorCode::Ok;
-#endif
-
-  if (readOffset_ >= fsize_) {
-    return ErrorCode::EndOfFile;
-  }
-  return ErrorCode::Ok;
-#else
-  if (lpMapAddress) {
-    std::memcpy(buffer, lpMapAddress, toRead);
-    nbytes_ = toRead;
-    return ErrorCode::Ok;
-  }
-  if (!stream_.is_open())
-    return ErrorCode::NotOpen;
-  stream_.read(reinterpret_cast<char *>(buffer), buffsize_);
-  if (stream_.fail() && !stream_.eof()) {
-    return ErrorCode::IOError;
-  }
-  nbytes_ = static_cast<size_t>(stream_.gcount());
-  if (stream_.eof())
-    return ErrorCode::EndOfFile;
-
-  return ErrorCode::Ok;
-#endif
+  nbytes_ = static_cast<size_t>(err);
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode File::write(const char *message) {
 
-  size_t msglen = std::strlen(message);
-  if (msglen > fsize_) {
-    return ErrorCode::NoSpace;
-  }
-  bool writable = (mode_ == Mode::Write || mode_ == Mode::Append ||
-                   mode_ == Mode::Truncate);
-  if (!writable) {
-    return ErrorCode::ReadOnly;
+  if (mode_ == Read) {
+    return ErrorCode::SLX_EIOERR;
   }
 
-  ErrorCode map_stat = map(true);
-  if (map_stat != ErrorCode::Ok) {
-    return map_stat;
+  uv_fs_t req;
+  size_t len = strlen(message);
+  uv_buf_t iov =
+      uv_buf_init(const_cast<char *>(message), static_cast<unsigned int>(len));
+
+  int err = uv_fs_write(uv_default_loop(), &req, fd_, &iov, 1, -1, nullptr);
+  uv_fs_req_cleanup(&req);
+
+  if (err < 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : \n", err_str);
+    return static_cast<ErrorCode>(-err);
   }
-
-#ifdef PLATFORM_WINDOWS
-  if (lpMapAddress == nullptr) {
-    return ErrorCode::NotOpen;
-  }
-
-#if defined(_MSC_VER)
-  __try {
-    std::memcpy(lpMapAddress, message, msglen);
-    nbytes_ = msglen;
-  } __except (GetExceptionCode() == EXCEPTION_IN_PAGE_ERROR
-                  ? EXCEPTION_EXECUTE_HANDLER
-                  : EXCEPTION_CONTINUE_SEARCH) {
-    return ErrorCode::IOError;
-  }
-  return ErrorCode::Ok;
-#else
-  if (lpMapAddress == nullptr) {
-    return ErrorCode::NotOpen;
-  }
-  if (msglen > fsize_ - readOffset_) {
-    return ErrorCode::IOError;
-  }
-
-  std::memcpy(lpMapAddress, message, msglen);
-  nbytes_ = msglen;
-  return ErrorCode::Ok;
-#endif
-
-  if (!FlushViewOfFile(lpMapAddress, msglen)) {
-    return ErrorCode::IOError;
-  }
-
-  return ErrorCode::Ok;
-
-#else
-  if (lpMapAddress) {
-
-    std::memcpy(lpMapAddress, message, msglen);
-    return ErrorCode::Ok;
-  }
-
-  if (!stream_.is_open())
-    return ErrorCode::NotOpen;
-
-  stream_.write(message, std::strlen(message));
-  if (stream_.fail())
-    return ErrorCode::IOError;
-
-  return ErrorCode::Ok;
-#endif
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode File::close() {
+  if (fd_ < 0) {
+    return ErrorCode::SLX_ENOENT;
+  }
 
-#ifdef PLATFORM_WINDOWS
-  if (hFileMap_)
-    CloseHandle(hFileMap_);
-  if (hFile_)
-    CloseHandle(hFile_);
-  hFileMap_ = nullptr;
-  hFile_ = nullptr;
-  return ErrorCode::Ok;
-  hFileMap_ = nullptr;
-  hFile_ = nullptr;
-  return ErrorCode::Ok;
-#endif
-  if (stream_.is_open()) {
-    stream_.close();
-  }
-  return ErrorCode::Ok;
-}
+  uv_fs_t req;
+  int err = uv_fs_close(uv_default_loop(), &req, fd_, nullptr);
+  uv_fs_req_cleanup(&req);
 
-ErrorCode File::unmap() {
+  if (err < 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : \n", err_str);
+    return static_cast<ErrorCode>(-err);
+  }
 
-#ifdef PLATFORM_WINDOWS
-  bool unmap_status_t = UnmapViewOfFile(lpMapAddress);
-  if (unmap_status_t) {
-    return ErrorCode::Ok;
-  }
-  return ErrorCode::IOError;
-#else
-  if (lpMapAddress) {
-    unmap(lpMapAddress, fsize_);
-    lpMapAddress = nullptr;
-  }
-  if (fd_ >= 0) {
-    ::close(fd_);
-    fd_ = -1;
-  }
-  return ErrorCode::Ok;
-#endif
+  fd_ = -1;
+  return ErrorCode::SLX_OK;
 }
 
 bool File::eof() {
-#ifdef PLATFORM_WINDOWS
-  return readOffset_ >= fsize_;
-#else
-  return stream_.eof();
-#endif
+
+  if (fd_ < 0 || mode_ != Read) {
+    return false;
+  }
+
+  uv_fs_t req;
+  int result = uv_fs_fstat(uv_default_loop(), &req, fd_, nullptr);
+  if (result < 0) {
+    uv_fs_req_cleanup(&req);
+    return false;
+  }
+
+  uv_stat_t *statbuf = static_cast<uv_stat_t *>(req.ptr);
+  size_t size_ = statbuf->st_size;
+  uv_fs_req_cleanup(&req);
+
+  return nbytes_ >= size_;
 }
 
-const char *File::getData() { return static_cast<const char *>(buffer); }
+std::vector<char> File::getBuffer() { return buffer_; }
 
 size_t File::getNBytes() const { return nbytes_; }
 
-ErrorCode File::swap(File &other) noexcept {
+std::string File::getFileDirectory() {
 
-  std::swap(stream_, other.stream_);
-  std::swap(path_, other.path_);
-  return ErrorCode::Ok;
+  size_t pos = path_.find_last_of("/\\");
+  if (pos == std::string::npos) {
+    return std::string("");
+  }
+  return path_.substr(0, pos + 1);
 }
-
-Float File::getFileSwap() const { return Float(10); }
 
 const char *File::getFileExtension() const {
 
@@ -417,92 +199,41 @@ const char *File::getFileExtension() const {
   return dot + 1;
 }
 
-std::string File::getFileDirectory() {
-
-  size_t pos = path_.find_last_of("/\\");
-  if (pos == std::string::npos) {
-    return std::string("");
-  }
-  return path_.substr(0, pos + 1);
-}
-
 ErrorCode File::move(const char *dirpath) {
 
   if (dirpath == nullptr) {
-    return ErrorCode::InvalidArgument;
+    return ErrorCode::SLX_ENULLPTR;
   }
 
-  std::string lpExistingFileName = getFilename();
-  std::string lpNewFileName = std::string(dirpath);
-
-#ifdef PLATFORM_WINDOWS
-  if (lpNewFileName.back() != '\\')
-    lpNewFileName += '\\';
-#else
-  if (lpNewFileName.back() != '/')
-    lpNewFileName += '/';
-#endif
-
-  lpNewFileName += lpExistingFileName;
-
-#ifdef PLATFORM_WINDOWS
-
-  if (mkdir(dirpath) == -1 && errno != EEXIST) {
-    return ErrorCode::IOError;
+  std::string newPath = std::string(dirpath);
+  if (!newPath.empty() && newPath.back() != '/' && newPath.back() != '\\') {
+    newPath += '\\';
   }
-  if (!MoveFileA(path_.c_str(), lpNewFileName.c_str())) {
-    DWORD err = GetLastError();
-    switch (err) {
-    case ERROR_FILE_NOT_FOUND:
-    case ERROR_PATH_NOT_FOUND:
-      return ErrorCode::FileNotFound;
-    case ERROR_ALREADY_EXISTS:
-    case ERROR_FILE_EXISTS:
-      return ErrorCode::FileExists;
-    case ERROR_ACCESS_DENIED:
-    case ERROR_SHARING_VIOLATION:
-      return ErrorCode::PermissionDenied;
-    case ERROR_NOT_SAME_DEVICE:
-      return ErrorCode::CrossDeviceMove;
-    case ERROR_DIRECTORY:
-      return ErrorCode::IsDirectory;
-    case ERROR_INVALID_PARAMETER:
-      return ErrorCode::InvalidArgument;
-    default:
-      return ErrorCode::IOError;
-    }
+  newPath += getFilename();
+
+  uv_fs_t req;
+  int err = uv_fs_rename(uv_default_loop(), &req, path_.c_str(),
+                         newPath.c_str(), nullptr);
+  uv_fs_req_cleanup(&req);
+
+  if (err < 0) {
+    const char *err_str = uv_strerror(err);
+    fprintf(stderr, "%s : %s \n", err_str, newPath.c_str());
+    return static_cast<ErrorCode>(-err);
   }
 
-#else
-#ifdef PLATFORM_WINDOWS
-  if (mkdir(dirpath) == -1 && errno != EEXIST) {
-    return ErrorCode::IOError;
-  }
-#else
-  if (mkdir(dirpath, 0755) == -1 && errno != EEXIST) {
-    return ErrorCode::IOError;
-  }
-#endif
-  if (::rename(path_.c_str(), lpNewFileName.c_str()) != 0) {
-    return ErrorCode::IOError;
-  }
-
-#endif
-
-  path_ = lpNewFileName;
-  return ErrorCode::Ok;
+  path_ = newPath;
+  return ErrorCode::SLX_OK;
 }
 
-ErrorCode File::copy() { return ErrorCode::NotImplemented; }
-
-ErrorCode File::append() { return ErrorCode::NotImplemented; }
+ErrorCode File::copy(File &ofile) { return ErrorCode::SLX_ENOTIMPL; }
 
 ErrorCode File::rename(const char *filename) {
 
   if (!filename || *filename == '\0')
-    return ErrorCode::InvalidArgument;
+    return ErrorCode::SLX_EINVAR;
   path_ = std::string(filename);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 const std::string File::getFilename() {
@@ -516,44 +247,60 @@ const std::string File::getFilename() {
 
 const Index File::getFileMode() { return (Index)mode_; }
 
-std::string File::getFileType() {
+const char *File::getFileModeAsChar() {
 
-  switch (type_) {
-  case Unknown:
-    return "Unknown";
-  case Regular:
-    return "Regular";
-  case Directory:
-    return "Directory";
-  case Symlink:
-    return "Symlink";
+  switch (mode_) {
+  case File::Mode::Read:
+    return "Read";
+  case File::Mode::Write:
+    return "Write";
+  case File::Mode::Append:
+    return "Append";
+  case File::Mode::Truncate:
+    return "Truncate";
   default:
-    return "InvalidType";
-  }
+    "";
+  };
 }
 
-const char *File::getFileTypeAsChar() { return getFileType().c_str(); }
-
-ErrorCode File::castFileExtension(const char *ext) {
+ErrorCode File::setFileExtension(const char *ext) {
 
   if (!ext || *ext == '\0')
-    return ErrorCode::InvalidArgument;
+    return ErrorCode::SLX_EINVAR;
 
   size_t pos = path_.find_last_of('.');
   if (pos == std::string::npos) {
     path_ += ".";
     path_ += ext;
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   std::string iext = path_.substr(pos + 1);
   if (iext == ext)
-    return ErrorCode::AlreadyExists;
+    return ErrorCode::SLX_EDUPOBJ;
 
   path_.replace(pos + 1, iext.size(), ext);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
-size_t File::size() const { return fsize_; }
+size_t File::size() const {
 
-ErrorCode File::toZip() { return ErrorCode::NotImplemented; }
+  if (fd_ < 0) {
+    return -1;
+  }
+
+  uv_fs_t req;
+  int result = uv_fs_fstat(uv_default_loop(), &req, fd_, nullptr);
+  if (result < 0) {
+    uv_fs_req_cleanup(&req);
+    return 0;
+  }
+
+  uv_stat_t *statbuf = static_cast<uv_stat_t *>(req.ptr);
+  size_t size_ = statbuf->st_size;
+  uv_fs_req_cleanup(&req);
+
+  return size_;
+}
+
+ErrorCode File::toZip() { return ErrorCode::SLX_ENOTIMPL; }

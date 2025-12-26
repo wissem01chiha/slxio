@@ -47,78 +47,78 @@ const char *SimulinkParameter::getValue() { return Value; }
 ErrorCode SimulinkParameter::getValueAsDouble(Float &fval) {
   if (!Value) {
     fval = 0.0;
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   char *endptr = nullptr;
   fval = std::strtod(Value, &endptr);
   if (endptr == Value) {
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkParameter::getValueAsSingle(Float &sval) {
   if (!Value) {
     sval = 0.0;
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   char *endptr = nullptr;
   sval = std::strtof(Value, &endptr);
   if (endptr == Value) {
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkParameter::getValueAsUInt8(uint8 &u8val) {
   if (!Value) {
     u8val = 0;
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   char *endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
   if (endptr == Value) {
     u8val = 0;
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
   u8val = static_cast<uint8>(parsed);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkParameter::getValueAsUInt16(uint16 &u16val) {
 
   if (!Value) {
     u16val = 0;
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   char *endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
   if (endptr == Value) {
     u16val = 0;
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
   u16val = static_cast<uint16>(parsed);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkParameter::getValueAsString(std::string &strval) {
 
   if (!Value) {
     strval.clear();
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   strval = std::string(Value);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float> &vecval) {
 
   vecval.clear();
   if (!Value) {
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   if (Value[0] != '[') {
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
   std::string s(Value);
@@ -133,11 +133,11 @@ ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float> &vecval) {
     char *endptr = nullptr;
     double parsed = std::strtod(token.c_str(), &endptr);
     if (endptr == token.c_str()) {
-      return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+      return ErrorCode::SLX_ETYPEMISMATCH;
     }
     vecval.push_back(static_cast<Float>(parsed));
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 CoderInfo SimulinkParameter::getCoderInfo() { return coder; }
@@ -163,13 +163,13 @@ const char *SimulinkParameter::getName() { return Name; }
 ErrorCode SimulinkParameter::setName(const char *name) {
 
   if (name == nullptr) {
-    return ErrorCode::SLX_ERR_NULL_PTR;
+    return ErrorCode::SLX_ENULLPTR;
   }
   if (strcmp(name, "") == 0) {
-    return ErrorCode::InvalidArgument;
+    return ErrorCode::SLX_EINVAR;
   }
   Name = name;
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 SimulinkElementType SimulinkParameter::getType() const {
@@ -194,23 +194,19 @@ ErrorCode
 SimulinkParameter::remove(const std::shared_ptr<SimulinkElementBase> element) {
   Logger::getInstance().log(Logger::V_ERROR,
                             "SimulinkParameter::remove is not supported.");
-  return ErrorCode::SLX_ERR_UNSUPPORTED;
+  return ErrorCode::SLX_ENOTIMPL;
 }
 
 ErrorCode
 SimulinkParameter::add(const std::shared_ptr<SimulinkElementBase> element) {
   Logger::getInstance().log(Logger::V_ERROR,
                             "SimulinkParameter::add is not supported.");
-  return ErrorCode::SLX_ERR_UNSUPPORTED;
+  return ErrorCode::SLX_ENOTIMPL;
 }
 
-Float SimulinkParameter::getMin(){
-  return Min;
-}
+Float SimulinkParameter::getMin() { return Min; }
 
-Float SimulinkParameter::getMax(){
-  return Max;
-}
+Float SimulinkParameter::getMax() { return Max; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

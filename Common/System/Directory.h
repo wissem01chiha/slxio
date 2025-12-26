@@ -17,60 +17,78 @@
 
 #include "APIExport.h"
 #include "File.h"
+#include "Libuv.h"
+#include <map>
 #include <vector>
 
 /**
  * @brief Directory class
  * Cross-platform Directory abstraction.
  */
-class APIEXPORT Directory {
+class APIEXPORT Directory final {
 public:
   /// @brief Default constructor
   Directory() = default;
 
-  explicit Directory(const std::string& path);
+  explicit Directory(const std::string &path);
+  explicit Directory(const std::wstring &path);
   explicit Directory(const char *path);
-  explicit Directory(const wchar_t *path);
 
-  Directory(const Directory &) = delete;
-  Directory &operator=(const Directory &) = delete;
+  /// @brief support wide char -> convert to implict
+  /// std::string inetranl reprsenation contin UTF8, UTF16 chars
+  explicit Directory(const wchar_t *wpath);
+
+  Directory(const Directory &dir);
+  Directory &operator=(const Directory &);
 
   Directory(Directory &&other);
-  Directory &operator=(Directory &&other) = delete;
+  Directory &operator=(Directory &&other) noexcept;
+
+  ///@brief open the directory and init memeber varaibles
+  /// fils filemap and filelist  attributes
+  ErrorCode open();
 
   /// @brief Get the number of files in the directory
-  uint64 getNumberOfFiles() const;
+  /// in failed to open the directory retuen -1
+  sint32 getNumberOfFiles() const;
 
-  /// @brief Get file at index
-  const File &getFile(Index index) const;
+  /// @brief Get file at index, file index is the
+  /// the as the file
+  const File *getFile(const size_t &index) const;
 
-  /// @brief Get file at index as string
-  std::string const &getFileName(Index index) const;
+  /// @brief Get spefic file by name
+  const File *getFile(const std::string &filename) const;
 
   /// @brief Get the current working directory
   static const char *getCurrentDirectory();
 
-  /// @brief Get the file path at index
-  std::string getFilePath(Index index) const;
-
   /// @brief Check if the path is a directory
   static bool isDirectory(const char *path);
 
+  /// @brief varient with modern string
   static bool isDirectory(const std::string &path);
 
   /// @brief Get sub-directories in the current directory
   std::vector<Directory> getSubDirectories();
 
-  /// @brief Get directory name
+  /// @brief Get directory name from full path
   std::string getDirectoryName();
 
   /// @brief Check if the directory is empty
   bool empty();
 
+  /// @brief Compress the directory content in zip format
+  /// output dirname.zip
+  ErrorCode toZip();
+
   ~Directory() = default;
 
 private:
   std::string path_;
+  std::vector<File> filelist;
+  std::vector<Directory> subdirlist_;
+  std::map<std::string, File> filemap;
+  std::map<std::string, Directory> subdirs_;
 };
 
 #endif // DIRECTORY_H

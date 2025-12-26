@@ -16,14 +16,14 @@
 #define SIMULINKRTW_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief 
+ * @brief
  */
 class SimulinkRTW final {
 public:

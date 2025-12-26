@@ -5,6 +5,11 @@ Testing
 include(CTest)
 include(Module)
 
+# Tests are disabled by default in Release builds with MSVC
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    return()
+endif()
+
 if(${PROJECT_NAME}_ENABLE_COVERAGE AND NOT ${PROJECT_NAME}_ENABLE_TESTING)
   message(FATAL_ERROR "coverage requires testing to be enabled")
 endif()

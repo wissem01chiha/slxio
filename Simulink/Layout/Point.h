@@ -16,8 +16,8 @@
 #define POINT_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN

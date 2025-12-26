@@ -29,12 +29,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 // strut
 // example how to buffer errors
 // ErrorBuffer buffer;
-// buffer.addError(ErrorCode::ErrorCode ::SLX_ERR_OPEN, "failed to open file");
+// buffer.addError(ErrorCode::ErrorCode ::SLX_EIOERR, "failed to open file");
 // buffer.addError(ErrorCode::ErrorCode ::SLX_ERR_INVALID_XML, "invalid xml
 // format"); uint32 errorCount = buffer.getSize(); / get the buffre size to
 // check if an error exist in the buffer
 // if(buffer.contains(ErrorCode::ErrorCode
-// ::SLX_ERR_OPEN)) { ... }
+// ::SLX_EIOERR)) { ... }
 //
 // how to use the buffer
 // for depth profiling a function chain or mulitpel process

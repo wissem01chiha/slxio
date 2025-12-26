@@ -16,18 +16,18 @@
 #define SIMULINKMODELREFRENCE_H
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief 
+ * @brief
  */
-class APIEXPORT SimulinkModelReference  final {
+class APIEXPORT SimulinkModelReference final {
 public:
-  SimulinkModelReference() =default;
+  SimulinkModelReference() = default;
 
   const char **DisabledProps;
   const char *Description;

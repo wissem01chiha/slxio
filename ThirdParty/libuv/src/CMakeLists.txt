@@ -828,10 +828,18 @@ endif()
 
 #add_library(libuv::libuv ALIAS ${LIB_SELECTED})
 add_library(ThirdPartylibuv ALIAS ${LIB_SELECTED})
-set_target_properties(${LIB_SELECTED} PROPERTIES
-  target_src_include_dir ${CMAKE_CURRENT_SOURCE_DIR}
-  target_bin_include_dir ${CMAKE_CURRENT_BINARY_DIR}
+
+get_filename_component(LIBUV_PARENT_SOURCE_DIR 
+  ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY
 )
+get_filename_component(LIBUV_PARENT_BINARY_DIR 
+  ${CMAKE_CURRENT_BINARY_DIR} DIRECTORY
+)
+set_target_properties(${LIB_SELECTED} PROPERTIES
+  target_src_include_dir ${LIBUV_PARENT_SOURCE_DIR}
+  target_bin_include_dir ${LIBUV_PARENT_BINARY_DIR}
+)
+
 
 #message(STATUS "summary of build options:
 #     Install prefix:  ${CMAKE_INSTALL_PREFIX}

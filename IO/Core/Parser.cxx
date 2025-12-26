@@ -5,15 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 Parser::ErrorCode Parser::setInputData(void *data) {
   input_ = data;
-  return Ok;
+  return SLX_OK;
 }
 
 Parser::ErrorCode Parser::getLastError() const { return lastError_; }
 
 const char *Parser::toString(ErrorCode code) {
   switch (code) {
-  case Ok:
-    return "Ok";
+  case SLX_OK:
+    return "SLX_OK";
   case InvalidFormat:
     return "Invalid Format";
   case FormatNotSupported:
@@ -23,7 +23,7 @@ const char *Parser::toString(ErrorCode code) {
   }
 }
 
-Parser::Parser() : lastError_(Ok) {}
+Parser::Parser() : lastError_(SLX_OK) {}
 
 void Parser::setError(ErrorCode code) { lastError_ = code; }
 

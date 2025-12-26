@@ -34,13 +34,13 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
   Logger &l = Logger::getInstance();
   if (element == nullptr) {
     l.log(Logger::Verbosity::V_ERROR, "Cannot add a null Simulink element.");
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   if (!(element->getType().isA(SimulinkElementType::Type::Block))) {
     l.log(Logger::Verbosity::V_ERROR,
           "Cannot add a Simulink element of a different blockType than Block.");
-    return ErrorCode::SLX_ERR_TYPE_MISMATCH;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
   std::shared_ptr<SimulinkBlock> subblock =
@@ -48,19 +48,19 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element) {
   if (subblock == nullptr) {
     l.log(Logger::Verbosity::V_ERROR,
           "Failed to cast SimulinkElementBase to SimulinkBlock.");
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   if (subblock->getParent() != nullptr) {
     l.log(Logger::Verbosity::V_ERROR,
           "Cannot add block that already has a parent.");
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   if (contains(subblock->getID())) {
     blockParent = std::make_shared<SimulinkBlock>(*subblock);
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::shared_ptr<SimulinkBlock>
@@ -106,14 +106,14 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element) {
   if (element == nullptr) {
     l.log(Logger::V_WARNING,
           "Removing a null Simulink element pointer from subelement");
-    return ErrorCode::ElementNotFound;
+    return ErrorCode::SLX_ENOENT;
   }
   SimulinkElementType element_t = element->getType();
 
   if (!(element_t.isA(SimulinkElementType::Type::Block))) {
     l.log(Logger::V_ERROR, "Cannot remove a Simulink element of a different "
                            "blockType than Block.");
-    return ErrorCode::InvalidElementType;
+    return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
   std::shared_ptr<SimulinkBlock> subblock =
@@ -121,17 +121,17 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element) {
   if (subblock == nullptr) {
     l.log(Logger::V_ERROR,
           "Failed to cast SimulinkElementBase to SimulinkBlock.");
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   if (subBlocks.empty()) {
-    return ErrorCode::Ok;
+    return ErrorCode::SLX_OK;
   }
 
   for (const auto &subBlock : subBlocks) {
     subBlock->remove(subblock);
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::string SimulinkBlock::toString() const {
@@ -141,7 +141,7 @@ std::string SimulinkBlock::toString() const {
 
 ErrorCode SimulinkBlock::addPort(SimulinkPortType portType_) {
   // blockPorts[portType] += (uint32)1;
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::shared_ptr<SimulinkParameter>

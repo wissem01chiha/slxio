@@ -83,10 +83,10 @@ public:
   /// @brief get parameter dimensions
   std::vector<uint16> getDimensions();
 
-  /// @brief return current parameter name 
+  /// @brief return current parameter name
   const char *getName();
 
-  /// @brief modify parameter name, no backup used 
+  /// @brief modify parameter name, no backup used
   ErrorCode setName(const char *name);
 
   SimulinkElementType getType() const override;
@@ -101,19 +101,19 @@ public:
   std::string toString() const override;
 
   /// @brief Parameters cannot remove child elements. Returns
-  /// SLX_ERR_UNSUPPORTED.
+  /// SLX_ENOTIMPL.
   ErrorCode remove(const std::shared_ptr<SimulinkElementBase> element) override;
 
-  /// @brief Parameters cannot add child elements. Returns SLX_ERR_UNSUPPORTED.
+  /// @brief Parameters cannot add child elements. Returns SLX_ENOTIMPL.
   ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief get code generation data struct
   CoderInfo getCoderInfo();
 
-  /// @brief Parameter minumin value 
+  /// @brief Parameter minumin value
   Float getMin();
 
-  /// @brief Parameter maxiumum value 
+  /// @brief Parameter maxiumum value
   Float getMax();
 
 private:

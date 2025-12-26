@@ -13,8 +13,8 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
-#include "Type.h"
 #include "APIExport.h"
+#include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

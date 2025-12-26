@@ -15,11 +15,11 @@
 #define STATEFLOWNODEBASE_H
 
 #include "ABINamespace.h"
-#include "StateflowElementBase.h"
-#include <vector>
-#include <memory>
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "StateflowElementBase.h"
+#include <memory>
+#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -27,28 +27,34 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class StateflowTransition;
 
 /**
- * @brief Base class for Stateflow nodes (elements that can be connected by transitions).
+ * @brief Base class for Stateflow nodes (elements that can be connected by
+ * transitions).
  */
 class APIEXPORT StateflowNodeBase : public StateflowElementBase {
 public:
-    virtual ~StateflowNodeBase() = default;
+  virtual ~StateflowNodeBase() = default;
 
-    void addInTransition(const std::shared_ptr<StateflowTransition>& transition);
-    void addOutTransition(const std::shared_ptr<StateflowTransition>& transition);
+  void addInTransition(const std::shared_ptr<StateflowTransition> &transition);
+  void addOutTransition(const std::shared_ptr<StateflowTransition> &transition);
 
-    const std::vector<std::shared_ptr<StateflowTransition>>& getInTransitions() const;
-    const std::vector<std::shared_ptr<StateflowTransition>>& getOutTransitions() const;
+  const std::vector<std::shared_ptr<StateflowTransition>> &
+  getInTransitions() const;
+  const std::vector<std::shared_ptr<StateflowTransition>> &
+  getOutTransitions() const;
 
-    void remove();
-    void removeInTransition(const std::shared_ptr<StateflowTransition>& transition);
-    void removeOutTransition(const std::shared_ptr<StateflowTransition>& transition);
+  void remove();
+  void
+  removeInTransition(const std::shared_ptr<StateflowTransition> &transition);
+  void
+  removeOutTransition(const std::shared_ptr<StateflowTransition> &transition);
+
 protected:
-    StateflowNodeBase() = default;
-    StateflowNodeBase(const StateflowNodeBase&) = default;
+  StateflowNodeBase() = default;
+  StateflowNodeBase(const StateflowNodeBase &) = default;
 
 private:
-    std::vector<std::shared_ptr<StateflowTransition>> inTransitions;
-    std::vector<std::shared_ptr<StateflowTransition>> outTransitions;
+  std::vector<std::shared_ptr<StateflowTransition>> inTransitions;
+  std::vector<std::shared_ptr<StateflowTransition>> outTransitions;
 };
 
 SLXIO_ABI_NAMESPACE_END

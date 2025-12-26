@@ -22,7 +22,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** 
+/**
  * @brief Base class for all Stateflow elements.
  */
 class StateflowElementBase : public SimulinkElementBase {

@@ -25,7 +25,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** 
+/**
  * @brief A Simulink line.
  */
 class APIEXPORT SimulinkLine final : public SimulinkElementBase {
@@ -42,25 +42,25 @@ public:
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   Index getID() const override;
 
-  /**  
-   * @brief Check if the line ID matches the given identifier. 
-   * @param id The identifier to compare against. 
-   * @return True if the line ID equals the given id, false otherwise. 
+  /**
+   * @brief Check if the line ID matches the given identifier.
+   * @param id The identifier to compare against.
+   * @return True if the line ID equals the given id, false otherwise.
    */
   bool contains(const Index &id) const override;
-  
-/** 
- * @brief Check if the line is connected to both source and destination ports. 
- * @details A line is considered connected if both the source and destination 
- * ports are non-null (set during creation). 
- * @return True if both ports are valid, false otherwise. 
- */
+
+  /**
+   * @brief Check if the line is connected to both source and destination ports.
+   * @details A line is considered connected if both the source and destination
+   * ports are non-null (set during creation).
+   * @return True if both ports are valid, false otherwise.
+   */
   bool isConnected();
 
 private:
   Index lineId;
-  std::shared_ptr<SimulinkPort> sourcePort =nullptr;
-  std::shared_ptr<SimulinkPort> destPort =nullptr;
+  std::shared_ptr<SimulinkPort> sourcePort = nullptr;
+  std::shared_ptr<SimulinkPort> destPort = nullptr;
 };
 
 SLXIO_ABI_NAMESPACE_END

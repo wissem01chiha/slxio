@@ -2,6 +2,7 @@
 #include "Compiler.h"
 #include "Platform.h"
 #include <cstring>
+#include <fstream>
 #include <random>
 #include <sstream>
 
@@ -16,8 +17,9 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Logger::Logger() : internalVerbosityLevel(Logger::Verbosity::V_INFO), filemode(File::Mode::Append){
-}
+Logger::Logger()
+    : internalVerbosityLevel(Logger::Verbosity::V_INFO),
+      filemode(File::Mode::Append) {}
 
 void Logger::init(int argc, char **argv) {
 #ifdef LOGGER_USE_LOGURU
@@ -177,7 +179,7 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char *path,
   loguru::log(static_cast<loguru::Verbosity>(verbosity), path, linenum,
               message);
   loguru::flush();
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 
 #elif defined(LOGGER_USE_SLOG)
 
@@ -186,7 +188,7 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char *path,
     out << "[" << static_cast<int>(verbosity) << "] " << path << ":" << linenum
         << " " << message << std::endl;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 #endif
 }
 
@@ -195,7 +197,7 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char *message) {
   const size_t size = 1024;
   char buffer[size];
   if (getcwd(buffer, size) == nullptr) {
-    return ErrorCode::GetCwdFailed;
+    return ErrorCode::SLX_EGETCWD;
   }
 
   std::random_device rand_dev;
@@ -209,13 +211,13 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char *message) {
   if (strlen(buffer) + strlen(path) < size) {
     strcat(buffer, path);
     ErrorCode errno_ = logToFile(verbosity, path, 1, message);
-    if (errno_ != ErrorCode::Ok) {
+    if (errno_ != ErrorCode::SLX_OK) {
       return errno_;
     }
   } else {
-    return ErrorCode::LongFilePath;
+    return ErrorCode::SLX_ELONGPATH;
   }
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 Logger::Verbosity Logger::toVerbosity(uint8 value) {
@@ -243,7 +245,7 @@ Logger::Verbosity Logger::toVerbosity(const char *text) {
 }
 
 bool Logger::IsEnabled() {
-#if defined(LOGGER_USE_SLOG) ||  defined(LOGGER_USE_LOGURU)
+#if defined(LOGGER_USE_SLOG) || defined(LOGGER_USE_LOGURU)
   return true;
 #else
   return false;

@@ -43,7 +43,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 6 : RConn
  * 7 : ifaction
  */
-class SimulinkPortType  : public SimulinkElementType {
+class SimulinkPortType : public SimulinkElementType {
 public:
   enum Type {
     INPORT = 0,

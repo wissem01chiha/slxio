@@ -34,11 +34,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class Parser {
 public:
   enum ErrorCode {
-    Ok = 0,
+    SLX_OK = 0,
     InvalidFormat,
     FormatNotSupported,
-    NotImplemented,
-    InvalidArgument
+    SLX_ENOTIMPL,
+    SLX_EINVAR
   };
   virtual ~Parser() = default;
 

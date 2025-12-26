@@ -24,7 +24,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class Writer {
 public:
-  enum ErrorCode { Ok = 0, InvalidData, NotImplemented };
+  enum ErrorCode { SLX_OK = 0, InvalidData, SLX_ENOTIMPL };
 
   virtual ~Writer() = default;
 

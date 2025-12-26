@@ -16,9 +16,9 @@
 #define STATEFLOWTRANSITION_H
 
 #include "ABINamespace.h"
-#include <string>
 #include "APIExport.h"
 #include <memory>
+#include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -30,21 +30,21 @@ class StateflowNodeBase;
  */
 class APIEXPORT StateflowTransition final {
 public:
-    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);
-    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src,
-                        const std::shared_ptr<StateflowNodeBase>& dst);
+  StateflowTransition(const std::shared_ptr<StateflowNodeBase> &dst);
+  StateflowTransition(const std::shared_ptr<StateflowNodeBase> &src,
+                      const std::shared_ptr<StateflowNodeBase> &dst);
 
-    std::shared_ptr<StateflowNodeBase> getSrc() const;
-    std::shared_ptr<StateflowNodeBase> getDst() const;
+  std::shared_ptr<StateflowNodeBase> getSrc() const;
+  std::shared_ptr<StateflowNodeBase> getDst() const;
 
-    std::string getLabel() const; 
-    void remove();
+  std::string getLabel() const;
+  void remove();
 
-    std::string toString() const;
+  std::string toString() const;
 
 private:
-    std::shared_ptr<StateflowNodeBase> src;
-    std::shared_ptr<StateflowNodeBase> dst;
+  std::shared_ptr<StateflowNodeBase> src;
+  std::shared_ptr<StateflowNodeBase> dst;
 };
 
 SLXIO_ABI_NAMESPACE_END

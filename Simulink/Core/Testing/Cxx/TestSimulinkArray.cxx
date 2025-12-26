@@ -17,7 +17,7 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "CopyConstructorTest") {
 
   ErrorCode status = original->add(param);
   CHECK_MESSAGE(
-      status == ErrorCode::Ok,
+      status == ErrorCode::SLX_OK,
       "Fail to add Parameter to Simulink Array - ErrorCode: ", status);
   //   SimulinkArray copy(*original);
 
@@ -34,7 +34,7 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "AddArrayTest") {
       std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->add(subArray);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
   delete array;
 }
 
@@ -45,10 +45,10 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveArrayTest") {
       std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode AddStatus = array->add(subArray);
-  CHECK(AddStatus == ErrorCode::Ok);
+  CHECK(AddStatus == ErrorCode::SLX_OK);
 
   ErrorCode RemoveStatus = array->remove(subArray);
-  CHECK(RemoveStatus == ErrorCode::Ok);
+  CHECK(RemoveStatus == ErrorCode::SLX_OK);
   delete array;
 }
 
@@ -56,7 +56,7 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveNullptrArrayTest") {
 
   SimulinkArray *array = new SimulinkArray();
   ErrorCode status = array->remove(nullptr);
-  CHECK(status == ErrorCode::SLX_ERR_NULL_PTR);
+  CHECK(status == ErrorCode::SLX_ENULLPTR);
   delete array;
 }
 
@@ -67,7 +67,7 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveNotElementArrayTest") {
       std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->remove(subArray);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
   delete array;
 }
 
@@ -78,7 +78,7 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "ConatinsArrayTest") {
       1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = array->add(subObject);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
   CHECK(array->contains(1));
   delete array;
 }

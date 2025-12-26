@@ -35,7 +35,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest") {
                                       "ClockBlock", 20);
 
   ErrorCode status = parentblockPtr->add(childblockPtr);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest") {
@@ -48,10 +48,10 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest") {
                                       20);
 
   ErrorCode addStatus = parentblockPtr->add(childblockPtr);
-  CHECK(addStatus == ErrorCode::Ok);
+  CHECK(addStatus == ErrorCode::SLX_OK);
 
   ErrorCode RemoveStatus = parentblockPtr->remove(childblockPtr);
-  CHECK(RemoveStatus == ErrorCode::Ok);
+  CHECK(RemoveStatus == ErrorCode::SLX_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

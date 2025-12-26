@@ -15,7 +15,7 @@ protected:
 
 TEST_CASE_FIXTURE(ModelWorkspaceTestFixture,
                   "ModelWorkspace Constructor Test") {
-  //CHECK(workspace.hasVariable("non_existent_variable") == false);
+  // CHECK(workspace.hasVariable("non_existent_variable") == false);
   CHECK(1 == 1);
 }
 

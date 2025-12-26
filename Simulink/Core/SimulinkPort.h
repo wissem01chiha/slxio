@@ -32,7 +32,7 @@ class SimulinkLine;
  */
 class APIEXPORT SimulinkPort final : public SimulinkElementBase {
 public:
-  SimulinkPort() =default;
+  SimulinkPort() = default;
   SimulinkPort(const SimulinkPort &other);
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
@@ -42,30 +42,31 @@ public:
   /// @brief Get a string representation of this port.
   std::string toString() const override;
 
-  /** 
-   * @brief Remove a line from this port. 
-   * @param element The element to remove (must be a SimulinkLine). 
-   * @return ErrorCode indicating success or failure. 
+  /**
+   * @brief Remove a line from this port.
+   * @param element The element to remove (must be a SimulinkLine).
+   * @return ErrorCode indicating success or failure.
    */
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
-/** 
- * @brief Add a line to this port. 
- *  @details Only SimulinkLine elements are supported for add/remove operations. 
- * @param element The element to add (must be a SimulinkLine). 
- * @return ErrorCode indicating success or failure. 
- */
+  /**
+   * @brief Add a line to this port.
+   *  @details Only SimulinkLine elements are supported for add/remove
+   * operations.
+   * @param element The element to add (must be a SimulinkLine).
+   * @return ErrorCode indicating success or failure.
+   */
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get the ID of the linked block.
   Index getID() const override;
 
-  /** 
-   *  @brief Compare the given ID with this port's ID. 
-   *  @note A port can only be connected to one and only one block. 
-   *  @param id The identifier to compare against. 
+  /**
+   *  @brief Compare the given ID with this port's ID.
+   *  @note A port can only be connected to one and only one block.
+   *  @param id The identifier to compare against.
    * @return True if the IDs match, false otherwise.
-    */
+   */
   bool contains(const Index &id) const override;
 
   /// @brief Get the parent block of this port.
@@ -75,8 +76,8 @@ public:
   std::vector<std::shared_ptr<SimulinkLine>> getLines();
 
   /// @brief Get a specific line by its ID.
-  /// @note Each line should have a unique identifier. 
-  std::shared_ptr<SimulinkLine> getLine(const Index& lineId_);
+  /// @note Each line should have a unique identifier.
+  std::shared_ptr<SimulinkLine> getLine(const Index &lineId_);
 
 private:
   Index portBlockId;

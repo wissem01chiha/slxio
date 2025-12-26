@@ -14,11 +14,11 @@ StateflowTarget::remove(std::shared_ptr<SimulinkElementBase> element) {
   // CCSMPre.isFalse(getParent() == null,
   //                "Target has no parent to be removed from.");
   // getParent().removeTarget(this);
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 ErrorCode StateflowTarget::add(std::shared_ptr<SimulinkElementBase> element) {
-  return ErrorCode::Ok;
+  return ErrorCode::SLX_OK;
 }
 
 std::string StateflowTarget::toString() const { return std::string(""); }

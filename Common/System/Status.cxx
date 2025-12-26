@@ -1,63 +1,39 @@
 #include "Status.h"
 
-Status::Status() : errno_(ErrorCode::Ok), message_(std::string("")) {
+Status::Status() : errno_(ErrorCode::SLX_OK), strerror_(std::string("")) {}
+
+const char* Status::toString(ErrorCode type) {
+    for (const auto& entry : ErrMap) {
+        if (entry.err == type) {
+            return entry.strerr;
+        }
+    }
+    return "";
 }
 
-const char *Status::toString(ErrorCode type) {
-
-  switch (type) {
-  case ErrorCode::Ok:
-    return "OK";
-  case ErrorCode::SLX_ERR_OPEN:
-    return "SLX_ERR_OPEN";
-  case ErrorCode::SLX_ERR_DECOMPRESS:
-    return "SLX_ERR_DECOMPRESS";
-  case ErrorCode::SLX_ERR_ER_NOENT:
-    return "SLX_ERR_ER_NOENT";
-  case ErrorCode::SLX_ERR_ER_NOTEMPTY:
-    return "SLX_ERR_ER_NOTEMPTY";
-  case ErrorCode::SLX_ERR_ER_COPY_FAIL:
-    return "SLX_ERR_ER_COPY_FAIL";
-  case ErrorCode::SLX_ERR_NULL_PTR:
-    return "SLX_ERR_NULL_PTR";
-  case ErrorCode::SLX_ERR_ADD_FAIL:
-    return "SLX_ERR_ADD_FAIL";
-  case ErrorCode::SLX_ERR_FILE_DELETE:
-    return "SLX_ERR_FILE_DELETE";
-  case ErrorCode::SLX_ERR_MEMORY_ALLOC:
-    return "SLX_ERR_MEMORY_ALLOC";
-  case ErrorCode::SLX_ERR_DENIED:
-    return "SLX_ERR_DENIED";
-  case ErrorCode::SLX_ERR_TYPE_MISMATCH:
-    return "SLX_ERR_TYPE_MISMATCH";
-  case ErrorCode::SLX_ERR_CAST_FAIL:
-    return "SLX_ERR_CAST_FAIL";
-  case ErrorCode::SLX_ERR_INVALID_XML:
-    return "SLX_ERR_INVALID_XML";
-  case ErrorCode::SLX_ERR_UNKNOWN:
-    return "SLX_ERR_UNKNOWN";
-  case ErrorCode::SLX_ERR_INVALID_EXTENSION:
-    return "SLX_ERR_INVALID_EXTENSION";
-  case ErrorCode::SLX_ERR_EXTENSION_NOT_SUPPORTED:
-    return "SLX_ERR_EXTENSION_NOT_SUPPORTED";
-  default:
-    return "UNRECOGNIZED_ERROR_CODE";
-  }
+const char* Status::toString() const {
+    return toString(errno_);
 }
 
-const char *Status::toString() const { return toString(this->errno_); }
+void Status::log(ErrorCode err) {
+    fprintf(stderr, "[Error %d] %s\n",
+            static_cast<int>(err),
+            toString(err));
+}
 
-ErrorCode Status::toErrorCode(uint32 value) {
-  return static_cast<ErrorCode>(value);
+ErrorCode Status::toErrorCode(uint32 err) {
+  return static_cast<ErrorCode>(err);
 }
 
 bool Status::isA(ErrorCode type) const { return errno_ == type; }
 
 bool Status::isA(Status &type) const {
-  return errno_ == type.errno_ && message_ == type.message_;
+  return errno_ == type.errno_ && strerror_ == type.strerror_;
 }
 
-Status::Status(ErrorCode id) : errno_(id) { }
+Status::Status(ErrorCode id) : errno_(id) {}
 
-Status::Status(ErrorCode id, const std::string &message) : errno_(id), message_(message) {
-}
+Status::Status(ErrorCode id, const std::string &message)
+    : errno_(id), strerror_(message) {}
+
+Status::Status(sint32 err, const std::string &str) {}

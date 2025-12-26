@@ -7,10 +7,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 TEST_CASE("SimulinkParameter") {
 
   SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
-  CHECK(ParameterPtr->setName("NAME") == ErrorCode::Ok);
+  CHECK(ParameterPtr->setName("NAME") == ErrorCode::SLX_OK);
   CHECK(std::strcmp(ParameterPtr->getName(), "NAME") == 0);
   std::string strval;
-  CHECK(ParameterPtr->getValueAsString(strval) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsString(strval) == ErrorCode::SLX_OK);
   CHECK(strval == "10");
   delete ParameterPtr;
 }
@@ -27,19 +27,19 @@ TEST_CASE("SimulinkParameter") {
   SimulinkParameter *ParameterPtr = new SimulinkParameter("10.0");
 
   Float dblVal = 0.0;
-  CHECK(ParameterPtr->getValueAsDouble(dblVal) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsDouble(dblVal) == ErrorCode::SLX_OK);
   CHECK(dblVal == (Float)10.0);
 
   Float sngVal = 0.0;
-  CHECK(ParameterPtr->getValueAsSingle(sngVal) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsSingle(sngVal) == ErrorCode::SLX_OK);
   CHECK(sngVal == (Float)10.0f);
 
   uint8 u8Val = 0;
-  CHECK(ParameterPtr->getValueAsUInt8(u8Val) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsUInt8(u8Val) == ErrorCode::SLX_OK);
   CHECK(u8Val == (uint8)10);
 
   uint16 u16Val = 0;
-  CHECK(ParameterPtr->getValueAsUInt16(u16Val) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsUInt16(u16Val) == ErrorCode::SLX_OK);
   CHECK(u16Val == (uint16)10);
 
   delete ParameterPtr;
@@ -53,7 +53,7 @@ TEST_CASE("SimulinkParameter") {
   const std::vector<Float> expected = {10.025f, 10.2f, 4.5f};
 
   std::vector<Float> arr;
-  CHECK(ParameterPtr->getValueAsArray(arr) == ErrorCode::Ok);
+  CHECK(ParameterPtr->getValueAsArray(arr) == ErrorCode::SLX_OK);
 
   CHECK(arr[0] == doctest::Approx(10.025).epsilon(FloatEps));
   CHECK(arr[1] == doctest::Approx(10.2).epsilon(FloatEps));

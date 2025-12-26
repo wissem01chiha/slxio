@@ -13,7 +13,7 @@ protected:
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddNullParameterTest") {
 
   ErrorCode status = obj.add(nullptr);
-  CHECK(status == ErrorCode::SLX_ERR_NULL_PTR);
+  CHECK(status == ErrorCode::SLX_ENULLPTR);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest") {
@@ -22,7 +22,7 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest") {
   auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
 
   ErrorCode status = obj.add(param);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest") {
@@ -32,7 +32,7 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest") {
       std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = obj.add(subArray);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "ContainsObjectTest") {
@@ -43,7 +43,7 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "ContainsObjectTest") {
       1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = obj.add(subObject);
-  CHECK(status == ErrorCode::Ok);
+  CHECK(status == ErrorCode::SLX_OK);
 
   CHECK(obj.contains(1));
 }
