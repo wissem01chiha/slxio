@@ -52,7 +52,7 @@ void ErrorBuffer::print(std::ostream& os) const {
 
 void ErrorBuffer::log() const {
     for (const auto& code : errlist) {
-        Status::log((int)&code); 
+       Status::log(static_cast<int>(code));
     }
 }
 
