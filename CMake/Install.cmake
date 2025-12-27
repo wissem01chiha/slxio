@@ -2,8 +2,6 @@
 Install
 -----------------
 #]=======================================================================]
-
-
 if(ENABLE_PKGCONFIG)
     set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
 

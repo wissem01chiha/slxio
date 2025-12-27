@@ -1,7 +1,3 @@
-#[=======================================================================[.rst:
-Testing
------------------
-#]=======================================================================]
 include(CTest)
 include(Module)
 
@@ -11,7 +7,6 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 # CTest Based Configuration 
-# fallback if --output-on-failure not passed to Ctest
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
 
 if(${PROJECT_NAME}_ENABLE_COVERAGE AND NOT ${PROJECT_NAME}_ENABLE_TESTING)
