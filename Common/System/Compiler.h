@@ -46,15 +46,8 @@
 #endif
 #ifdef __cplusplus
 #include <cmath>
-inline bool finite(double x) noexcept {
-    return std::isfinite(x);
-}
-inline bool finite(float x) noexcept {
-    return std::isfinite(x);
-}
-inline bool finite(long double x) noexcept {
-    return std::isfinite(x);
-}
+#ifndef finite
+#define finite(x) std::isfinite(x)
 #endif
 #endif
 
