@@ -34,7 +34,6 @@
 #if HAVE_WINDOWS_H
 //#include <windows.h>
 #endif
-#define finite(x) _finite(x)
 #else
 #if HAVE_SYS_STAT_H
 #include <sys/stat.h>
@@ -46,7 +45,16 @@
 #include <unistd.h>
 #endif
 #ifdef __cplusplus
-#define finite(x) std::isfinite(x)
+#include <cmath>
+inline bool finite(double x) noexcept {
+    return std::isfinite(x);
+}
+inline bool finite(float x) noexcept {
+    return std::isfinite(x);
+}
+inline bool finite(long double x) noexcept {
+    return std::isfinite(x);
+}
 #endif
 #endif
 
