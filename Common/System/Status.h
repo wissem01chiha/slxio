@@ -17,6 +17,7 @@
 
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "Libuv.h"
 #include "Type.h"
 #include <string>
 
@@ -24,12 +25,14 @@
  * @class Status
  * @brief Wrapper class for handling error codes within the system.
  * @details Provides general error codes; each module can add its own.
- * Naming convention: <MODULE>_ERR_<DESCRIPTION> (e.g., SLX_EIOERR, SYSTEM_ERR_TIMEOUT).
- * @note Renamed from "Error" for MSBuild compatibility (MSB8066) and Doxygen issues.
+ * Naming convention: <MODULE>_ERR_<DESCRIPTION> (e.g., SLX_EIOERR,
+ * SYSTEM_ERR_TIMEOUT).
+ * @note Renamed from "Error" for MSBuild compatibility (MSB8066) and Doxygen
+ * issues.
  * @warning Not yet fully used; most methods fallback to ErrorCode.
  * @example Status s(ErrorCode::SLX_EIOERR);
- *  fprintf(stdout, "Error: %s\n", s.toString());  
- *  Status::log(ErrorCode::SLX_ENOENT); 
+ *  fprintf(stdout, "Error: %s\n", s.toString());
+ *  Status::log(ErrorCode::SLX_ENOENT);
  */
 class APIEXPORT Status {
 public:
@@ -45,17 +48,21 @@ public:
   /// @brief Construct from raw integer error and message string.
   Status(sint32 err, const std::string &str);
 
+  /// @brief Generic convertion to a char take into account
+  /// libuv error negatives, replacement of uv_strerror
+  static const char *toString(int err);
+
   /// @brief Convert an explicit ErrorCode to a string message.
-  static const char* toString(ErrorCode err);
+  static const char *toString(ErrorCode err);
 
   /// @brief Log an ErrorCode and its message to stderr.
-  static void log(ErrorCode err);
+  static void log(int err);
 
   /// @brief Convert raw integer to ErrorCode.
   static ErrorCode toErrorCode(uint32 err);
 
   /// @brief Convert current Status object to a string message.
-  const char* toString() const;
+  const char *toString() const;
 
   /// @brief Check if current Status matches given ErrorCode.
   bool isA(ErrorCode err) const;
@@ -66,9 +73,8 @@ public:
   ~Status() = default;
 
 private:
-  ErrorCode errno_;          ///< Stored error code
-  std::string strerror_;     ///< Optional error message
+  ErrorCode errno_;      ///< Stored error code
+  std::string strerror_; ///< Optional error message
 };
-
 
 #endif // STATUS_H

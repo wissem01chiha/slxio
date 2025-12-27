@@ -16,88 +16,68 @@
 #define STATEFLOWCHART_H
 
 #include "ABINamespace.h"
-#include "StateflowBlock.h"
+#include "APIExport.h"
+#include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
-#include "StateflowMachine.h"
 #include "StateflowNodeBase.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class StateflowBlock;
+class StateflowMachine;
+
 /**
  * @brief This class represents Stateflow charts.
  * There is a one-to-one association between StateflowBlock
  * and StateflowChart.
  */
-class StateflowChart : public StateflowElementBase {
+class APIEXPORT StateflowChart final : public StateflowElementBase {
 public:
-  StateflowChart();
+  StateflowChart() = default;
   StateflowChart(StateflowChart &origChart) = delete;
 
-  void addNode(StateflowNodeBase node) {
-    // nodes.add(node);
-    // node.setParent(this);
-  }
+  /// @brief Add a StateflowNodeBase object
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
-  /** Get the Stateflow machine this chart belongs to. */
+  /// @brief Remove a StateflowNodeBase object
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+
+  /// @brief Get Chat Parent
+  std::shared_ptr<StateflowElementBase> getParent() const override;
+
+  /// @brief Return SimulinkElementType::Chart
+  SimulinkElementType getType() const override;
+
+  /** @brief Returns the name of the chart. */
+  std::string getName();
+
+  /** @brief Returns the nodes of this chart. */
+  std::vector<StateflowNodeBase> getNodes();
+
+  /** @brief Get Stateflow block this chart belongs to. */
+  std::shared_ptr<StateflowBlock> getStateflowBlock();
+
+  /**  @brief Returns the name of the chart. */
+  std::string toString() const override;
+
+  /** @brief Set Stateflow block this chart belongs to. */
+  ErrorCode setStateflowBlock(StateflowBlock stateflowBlock);
+
+  /** @brief Get the Stateflow machine this chart belongs to. */
   // StateflowMachine getMachine() {
   // return getParent();
   //}
 
-  /** Returns the name of the chart. */
-  std::string getName() {
-    // return getParameter(SimulinkConstant.PARAM_name);
-  }
+  /// @brief Id is not supported for StateflowChart, fallback to 0
+  Index getID() const override;
 
-  /** Returns the nodes of this chart. */
-  std::vector<StateflowNodeBase> getNodes() {
-    // return CollectionUtils.asUnmodifiable(nodes);
-  }
-
-  /** Get Stateflow block this chart belongs to. */
-  StateflowBlock getStateflowBlock(){
-      // return stateflowBlock;
-  };
-
-  /**
-   * This method throws an {@link UnsupportedOperationException}. You must
-   * remove the associated {@link StateflowBlock} to remove a chart.
-   */
-  void remove() {
-    // throw new UnsupportedOperationException(
-    //    "Cannot remove chart without removing Stateflow block!");
-  }
-
-  /** Returns the name of the chart. */
-  std::string toString() const override {
-    // return getName();
-  }
-
-  void removeNodes() {
-    // for (StateflowNodeBase node : new ArrayList<StateflowNodeBase>(nodes)) {
-    //   node.remove();
-    // }
-  }
-
-  // void removeNode(StateflowNodeBase node) {
-  //   CCSMPre.isTrue(node.getParent() == this,
-  //                  "Node does not belong to this chart.");
-  //   nodes.remove(node);
-  //   node.setParent(null);
-  // }
-
-  /** Set Stateflow block this chart belongs to. */
-  void setStateflowBlock(StateflowBlock stateflowBlock) {
-    // if (stateflowBlock != null) {
-    //   CCSMPre.isTrue(this.stateflowBlock == null,
-    //                  "Cannot set new Stateflow block.");
-    // }
-    // this.stateflowBlock = stateflowBlock;
-  }
+  /// @brief Id is not supported for StateflowChart, fallback to 0
+  bool contains(const Index &id) const override;
 
 private:
-  StateflowBlock stateflowBlock;
+  std::shared_ptr<StateflowBlock> stateflowBlock;
   std::vector<StateflowNodeBase> nodes;
 };
 

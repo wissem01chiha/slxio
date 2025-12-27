@@ -1,9 +1,9 @@
-#include "SLXElementBase.h"
+#include "SlxElementBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SLXElementBase::SLXElementBase() {}
+SlxElementBase::SlxElementBase() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -16,6 +16,8 @@
 #define PARSER_H
 
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
 #include "Type.h"
 #include <string>
 #include <vector>
@@ -31,15 +33,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * internally and after parsing/building return a smart pointer
  * refrence to it
  */
-class Parser {
+class APIEXPORT Parser {
 public:
-  enum ErrorCode {
-    SLX_OK = 0,
-    InvalidFormat,
-    FormatNotSupported,
-    SLX_ENOTIMPL,
-    SLX_EINVAR
-  };
   virtual ~Parser() = default;
 
   virtual ErrorCode setInputData(void *data);

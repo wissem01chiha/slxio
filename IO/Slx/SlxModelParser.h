@@ -12,33 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMUMINKMODELBUILDER_H
-#define SIMUMINKMODELBUILDER_H
+#ifndef SIMUMINKMODELParser_H
+#define SIMUMINKMODELParser_H
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 #include "SLXParser.h"
-#include "SimulinkBlockBuilder.h"
+#include "SimulinkBlockParser.h"
 #include "SimulinkFile.h"
-#include "SimulinkLineBuilder.h"
+#include "SimulinkLineParser.h"
 #include "SimulinkModel.h"
-#include "SimulinkObjectBuilder.h"
-#include "SimulinkParameterBuilder.h"
-#include "SimulinkPortBuilder.h"
+#include "SimulinkObjectParser.h"
+#include "SimulinkParameterParser.h"
+#include "SimulinkPortParser.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief model builder class.
+ * @brief model Parser class.
  * This class is responsible for constructing the complete model representation,
  * including Simulink components, Stateflow charts, configuration sets, model
  * libraries (if present), and the data dictionary. It serves as the top-level
  * orchestrator for assembling all model elements from external sources such as
  * XML, JSON, or other supported formats.
  */
-class SimulinkModelBuilder : public SLXParser<SimulinkModel> {
+class SimulinkModelParser : public SLXParser<SimulinkModel> {
 public:
-  SimulinkModelBuilder();
-  SimulinkModelBuilder(SimulinkFile *File);
+  SimulinkModelParser();
+  SimulinkModelParser(SimulinkFile *File);
   SimulinkErrorType build() override;
   std::shared_ptr<SimulinkModel> get() override;
 
@@ -49,4 +50,4 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 
-#endif // SIMUMINKMODELBUILDER_H
+#endif // SIMUMINKMODELParser_H

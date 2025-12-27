@@ -19,10 +19,8 @@
 #include "APIExport.h"
 #include "DataSourceType.h"
 #include "Type.h"
-#include <optional>
 #include <string>
 #include <unordered_map>
-#include <variant>
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
@@ -37,27 +35,32 @@ public:
   ModelWorkspace();
   ~ModelWorkspace() = default;
 
-  std::optional<std::variant<Float, uint32, bool, std::string>>
-  getVariable(const std::string &name) const;
+  /// @brief
+  std::string getVariable(const std::string &name) const;
 
-  void assignVariable(const std::string &name,
-                      std::variant<Float, uint32, bool, std::string> value);
+  /// @brief
+  void assignVariable(const std::string &name, const std::string &value);
 
-  void clearVariable(const std::string &name);
+  /// @brief
+  void clear(const std::string &name);
 
+  /// @brief
   void clearAll();
 
+  /// @brief
   DataSourceType getDataSource();
+
+  /// @brief
   const char *getFilename();
+
+  /// @brief
   std::string getMatlabCode();
 
 private:
   DataSourceType dataSource = DataSourceType::ModelFile;
   std::string fileName = "";
   std::string matlabCode = "";
-  std::unordered_map<std::string,
-                     std::variant<Float, uint32, bool, std::string>>
-      variables;
+  std::unordered_map<std::string, std::string> variables;
 };
 
 SLXIO_ABI_NAMESPACE_END

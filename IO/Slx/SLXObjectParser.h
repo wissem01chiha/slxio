@@ -16,6 +16,7 @@
 #define SLXOBJECTPARSER_H
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 #include "SLXParser.h"
 #include "SimulinkObject.h"
 
@@ -23,7 +24,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Builder for SimulinkObject
+ * @brief Parser for SimulinkObject
  * @code{.xml}
  * <Object ObjectID="2" Version="19.0.0" ClassName="Simulink.SolverCC">
         <P Name="DisabledProps">[]</P>

@@ -31,174 +31,92 @@
  */
 class APIEXPORT File final {
 public:
-  /**
-   * @brief File access modes.
-   */
+  /// @brief File access modes.
   enum Mode { Truncate, Append, Read, Write };
 
-  /**
-   * @brief Default constructor. Creates an empty File object.
-   */
+  /// @brief Default constructor. Creates an empty File object.
   File() = default;
 
-  /**
-   * @brief Construct a File object from a path string.
-   * @param path Path to the file.
-   * @param mode Access mode (default: Read).
-   */
+  /// @brief Construct a File object from a path string.
   File(const std::string &path, Mode mode = Read);
 
-  /**
-   * @brief Construct a File object from a C‑string path.
-   * @param path Path to the file.
-   * @param mode Access mode (default: Read).
-   */
+  /// @brief Construct a File object from a C‑string path.
   File(const char *path, Mode mode = Read);
 
-  /**
-   * @brief Copy constructor.
-   * @param fs Source File object.
-   */
+  /// @brief Copy constructor.
   File(const File &fs);
 
-  /**
-   * @brief Copy assignment operator.
-   * @return Reference to this File.
-   */
+  /// @brief Copy assignment operator.
   File &operator=(const File &other) noexcept;
 
-  /**
-   * @brief Move assignment operator.
-   * @return Reference to this File.
-   */
+  /// @brief Move assignment operator.
   File &operator=(File &&other) noexcept;
 
-  /**
-   * @brief Move constructor.
-   */
+  /// @brief Move constructor.
   File(File &&other) noexcept;
 
-  /**
-   * @brief Open the file with the initialized mode.
-   * @return ErrorCode indicating success or failure.
-   */
+  /// @brief Open the file with the initialized mode.
   ErrorCode open();
 
-  /**
-   * @brief Read data from the file into the internal buffer.
-   * @return ErrorCode indicating success or failure.
-   */
+  /// @brief Read data from the file into the internal buffer.
   ErrorCode read();
 
-  /**
-   * @brief Write data to the file.
-   * @param message Null‑terminated string to write.
-   * @return ErrorCode indicating success or failure.
-   */
+  /// @brief Write data to the file.
   ErrorCode write(const char *message);
 
-  /**
-   * @brief Close the file descriptor.
-   * @return ErrorCode indicating success or failure.
-   */
+  /// @brief Close the file descriptor.
   ErrorCode close();
 
-  /**
-   * @brief Copy the current file content to another file.
-   * @param ofile Destination File object.
-   * @return ErrorCode indicating success or failure.
-   * @note If the destination file is not open, it will be opened automatically.
-   */
+  /// @brief Copy the current file content to another file.
+  /// @note If the destination file is not open, it will be opened
+  /// automatically.
   ErrorCode copy(File &ofile);
 
-  /**
-   * @brief Rename the file.
-   * @param filename New filename.
-   * @return ErrorCode indicating success or failure.
-   * @warning The old name will be lost with no backup.
-   */
+  /// @brief Rename the file.
+  /// @warning The old name will be lost with no backup.
   ErrorCode rename(const char *filename);
 
-  /**
-   * @brief Get the filename component of the path.
-   * @return Filename as a string.
-   */
+  /// @brief Get the filename component of the path.
   const std::string getFilename();
 
-  /**
-   * @brief Get the file access mode as an index type.
-   * @return Mode index.
-   */
+  /// @brief Get the file access mode as an index type.
   const Index getFileMode();
 
-  /**
-   * @brief Get the file access mode as a human‑readable string.
-   * @return Mode string.
-   */
+  /// @brief Get the file access mode as a human‑readable string.
   const char *getFileModeAsChar();
 
-  /**
-   * @brief Check if the end of file has been reached.
-   * @return True if EOF, false otherwise.
-   */
+  /// @brief Check if the end of file has been reached.
   bool eof();
 
-  /**
-   * @brief Get the internal data buffer.
-   * @return Vector of bytes.
-   */
+  /// @brief Get the internal data buffer.
   std::vector<char> getBuffer();
 
-  /**
-   * @brief Get the number of bytes read or written.
-   * @return Byte count.
-   */
+  /// @brief Get the number of bytes read or written.
   size_t getNBytes() const;
 
-  /**
-   * @brief Move the file to another directory.
-   * @param dirpath Target directory path.
-   * @return ErrorCode indicating success or failure.
-   * @details Updates the internal path_ attribute.
-   */
+  /// @brief Move the file to another directory.
+  /// @details Updates the internal path_ attribute.
   ErrorCode move(const char *dirpath);
 
-  /**
-   * @brief Get the parent directory path.
-   * @return Directory path as a string.
-   * @example "rootdir/filename.txt" -> "rootdir/"
-   */
+  /// @brief Get the parent directory path.
+  /// @example "rootdir/filename.txt" -> "rootdir/"
   std::string getFileDirectory();
 
-  /**
-   * @brief Get the file extension.
-   * @return Extension string.
-   */
+  /// @brief Get the file extension.
   const char *getFileExtension() const;
 
-  /**
-   * @brief Set the file extension.
-   * @param ext New extension.
-   * @return ErrorCode indicating success or failure.
-   * @note If the extension is unchanged, returns ASLX_EDUPOBJ.
-   */
+  /// @brief Set the file extension.
+  /// @note If the extension is unchanged, returns ASLX_EDUPOBJ.
   ErrorCode setFileExtension(const char *ext);
 
-  /**
-   * @brief Add the file to a zip archive.
-   * @return ErrorCode indicating success or failure.
-   */
+  /// @brief Add the file to a zip archive.
   ErrorCode toZip();
 
-  /**
-   * @brief Get the file size on disk.
-   * @return File size in bytes, or -1 if not opened.
-   */
+  /// @brief Get the file size on disk.
+  /// @return File size in bytes, or -1 if not opened.
   size_t size() const;
 
-  /**
-   * @brief Destructor.
-   */
+  /// @brief Destructor.
   ~File() = default;
 
 private:

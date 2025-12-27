@@ -37,7 +37,36 @@ bool operator==(const SimulinkElementType &lhs,
   return lhs.type_ == rhs.type_;
 };
 
-const char *SimulinkElementType::toString(Type type) { return nullptr; }
+const char *SimulinkElementType::toString(SimulinkElementType::Type type) {
+  switch (type) {
+  case Base:
+    return "Base";
+  case Object:
+    return "Object";
+  case Block:
+    return "Block";
+  case Port:
+    return "Port";
+  case Line:
+    return "Line";
+  case Model:
+    return "Model";
+  case Annotation:
+    return "Annotation";
+  case Array:
+    return "Array";
+  case Parameter:
+    return "Parameter";
+  case ConfigSet:
+    return "ConfigSet";
+  case Chart:
+    return "Chart";
+  case Unkown:
+    return "Unknown";
+  default:
+    return "Invalid";
+  }
+}
 
 std::string SimulinkElementType::toString() {
   return std::string(this->toString(type_));

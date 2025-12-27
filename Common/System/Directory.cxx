@@ -1,4 +1,5 @@
 #include "Directory.h"
+#include "Status.h"
 #include <codecvt>
 #include <locale>
 
@@ -14,6 +15,7 @@ Directory::Directory(const std::wstring &path) {
   std::string str(buffer);
   this->path_ = str;
   filelist.clear();
+  delete buffer;
 }
 
 Directory::Directory(const char *path) { this->path_ = std::string(path); }
@@ -43,6 +45,11 @@ Directory &Directory::operator=(const Directory &other) {
   return *this;
 }
 
+Directory::Directory(Directory &&other) noexcept
+    : path_(std::move(other.path_)), filelist(std::move(other.filelist)),
+      subdirlist_(std::move(other.subdirlist_)),
+      filemap(std::move(other.filemap)), subdirs_(std::move(other.subdirs_)) {}
+
 Directory &Directory::operator=(Directory &&other) noexcept {
   if (this != &other) {
 
@@ -63,22 +70,32 @@ Directory &Directory::operator=(Directory &&other) noexcept {
 
 ErrorCode Directory::open() {
 
+  if (path_.empty()) {
+    Status::log(static_cast<int>(ErrorCode::SLX_EIOERR));
+    return ErrorCode::SLX_EIOERR;
+  }
+
   uv_fs_t req;
   int err = uv_fs_opendir(uv_default_loop(), &req, path_.c_str(), nullptr);
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     uv_fs_req_cleanup(&req);
     return ErrorCode::SLX_EIOERR;
   }
+
   uv_dir_t *dir = static_cast<uv_dir_t *>(req.ptr);
 
-  int32_t count = 0;
+  std::vector<uv_dirent_t> ents(64);
+
   while (true) {
+    dir->dirents = ents.data();
+    dir->nentries = static_cast<unsigned>(ents.size());
+
     uv_fs_t readdir_req;
     int r = uv_fs_readdir(uv_default_loop(), &readdir_req, dir, nullptr);
+
     if (r < 0) {
-      fprintf(stderr, "%s\n", uv_strerror(r));
+      Status::log(r);
       uv_fs_req_cleanup(&readdir_req);
       break;
     }
@@ -88,20 +105,32 @@ ErrorCode Directory::open() {
     }
 
     for (unsigned i = 0; i < dir->nentries; ++i) {
-      uv_dirent_t &ent = dir->dirents[i];
-      std::string name(ent.name);
+      const uv_dirent_t &ent = dir->dirents[i];
+      if (!ent.name) {
+        continue;
+      }
+      const std::string name(ent.name);
+#ifdef _WIN32
+      const char sep = '\\';
+#else
+      const char sep = '/';
+#endif
+      std::string full = path_;
+      if (!full.empty() && full.back() != sep)
+        full.push_back(sep);
+      full += name;
+
       if (ent.type == UV_DIRENT_FILE) {
-        File f_(name);
+        File f_(full);
         filelist.push_back(f_);
         filemap[name] = f_;
       } else if (ent.type == UV_DIRENT_DIR) {
-        Directory d_(name);
+        Directory d_(full);
         subdirlist_.push_back(d_);
         subdirs_[name] = d_;
       }
     }
 
-    count += r;
     uv_fs_req_cleanup(&readdir_req);
   }
 
@@ -109,42 +138,11 @@ ErrorCode Directory::open() {
   uv_fs_closedir(uv_default_loop(), &closedir_req, dir, nullptr);
   uv_fs_req_cleanup(&closedir_req);
   uv_fs_req_cleanup(&req);
+
   return ErrorCode::SLX_OK;
 }
 
-sint32 Directory::getNumberOfFiles() const {
-
-  uv_fs_t req;
-  int err = uv_fs_opendir(uv_default_loop(), &req, path_.c_str(), nullptr);
-  if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
-    uv_fs_req_cleanup(&req);
-    return -1;
-  }
-  uv_dir_t *dir = static_cast<uv_dir_t *>(req.ptr);
-
-  int32_t count = 0;
-  while (true) {
-    uv_fs_t readdir_req;
-    int r = uv_fs_readdir(uv_default_loop(), &readdir_req, dir, nullptr);
-    if (r < 0) {
-      fprintf(stderr, "%s\n", uv_strerror(r));
-      uv_fs_req_cleanup(&readdir_req);
-      break;
-    }
-    if (r == 0) {
-      uv_fs_req_cleanup(&readdir_req);
-      break;
-    }
-    count += r;
-    uv_fs_req_cleanup(&readdir_req);
-  }
-  uv_fs_closedir(uv_default_loop(), &req, dir, nullptr);
-  uv_fs_req_cleanup(&req);
-
-  return count;
-}
+size_t Directory::getNumberOfFiles() const { return filelist.size(); }
 
 const File *Directory::getFile(const size_t &index) const {
   if (index >= filelist.size()) {
@@ -169,7 +167,7 @@ const char *Directory::getCurrentDirectory() {
 
   int r = uv_cwd(buffer, &size);
   if (r < 0) {
-    fprintf(stderr, "%s\n", uv_strerror(r));
+    Status::log(r);
     return nullptr;
   }
   return buffer;
@@ -179,7 +177,7 @@ bool Directory::isDirectory(const char *path) {
   uv_fs_t req;
   int r = uv_fs_stat(uv_default_loop(), &req, path, nullptr);
   if (r < 0) {
-    fprintf(stderr, "%s\n", uv_strerror(r));
+    Status::log(r);
     uv_fs_req_cleanup(&req);
     return false;
   }

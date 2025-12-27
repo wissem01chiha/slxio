@@ -23,64 +23,80 @@
 
 /**
  * @brief Directory class
- * Cross-platform Directory abstraction.
+ * @details Cross-platform Directory abstraction.
  */
 class APIEXPORT Directory final {
 public:
-  /// @brief Default constructor
+  /// @brief Default constructor.
   Directory() = default;
 
+  /// @brief Construct a Directory object from a UTF‑8 path string.
   explicit Directory(const std::string &path);
+
+  /// @brief Construct a Directory object from a wide string path.
   explicit Directory(const std::wstring &path);
+
+  /// @brief Construct a Directory object from a C‑string path.
   explicit Directory(const char *path);
 
-  /// @brief support wide char -> convert to implict
-  /// std::string inetranl reprsenation contin UTF8, UTF16 chars
+  /// @brief Construct a Directory object from a wide‑character C‑string path.
+  /// @details Internally converted to std::string representation (UTF‑8/UTF‑16
+  /// supported).
   explicit Directory(const wchar_t *wpath);
 
+  /// @brief Copy constructor.
   Directory(const Directory &dir);
+
+  /// @brief Copy assignment operator.
   Directory &operator=(const Directory &);
 
-  Directory(Directory &&other);
+  /// @brief Move constructor.
+  Directory(Directory &&other) noexcept;
+
+  /// @brief Move assignment operator.
   Directory &operator=(Directory &&other) noexcept;
 
-  ///@brief open the directory and init memeber varaibles
-  /// fils filemap and filelist  attributes
+  /// @brief Open the directory and initialize member variables.
+  /// @details Populates the file map and file list attributes.
   ErrorCode open();
 
-  /// @brief Get the number of files in the directory
-  /// in failed to open the directory retuen -1
-  sint32 getNumberOfFiles() const;
+  /// @brief Get the number of files in the directory.
+  /// @return Number of files, or -1 if the directory could not be opened.
+  size_t getNumberOfFiles() const;
 
-  /// @brief Get file at index, file index is the
-  /// the as the file
+  /// @brief Get a file by index.
+  /// @param index Position of the file in the list.
+  /// @return Pointer to the File object at the given index.
   const File *getFile(const size_t &index) const;
 
-  /// @brief Get spefic file by name
+  /// @brief Get a specific file by name.
+  /// @param filename Name of the file to retrieve.
+  /// @return Pointer to the File object if found, otherwise nullptr.
   const File *getFile(const std::string &filename) const;
 
-  /// @brief Get the current working directory
+  /// @brief Get the current working directory.
   static const char *getCurrentDirectory();
 
-  /// @brief Check if the path is a directory
+  /// @brief Check if the given path is a directory.
   static bool isDirectory(const char *path);
 
-  /// @brief varient with modern string
+  /// @brief Check if the given path is a directory (std::string variant).
   static bool isDirectory(const std::string &path);
 
-  /// @brief Get sub-directories in the current directory
+  /// @brief Get subdirectories in the current directory.
   std::vector<Directory> getSubDirectories();
 
-  /// @brief Get directory name from full path
+  /// @brief Get the directory name from the full path.
   std::string getDirectoryName();
 
-  /// @brief Check if the directory is empty
+  /// @brief Check if the directory is empty.
   bool empty();
 
-  /// @brief Compress the directory content in zip format
-  /// output dirname.zip
+  /// @brief Compress the directory content into a ZIP archive.
+  /// @details Output file will be named <dirname>.zip.
   ErrorCode toZip();
 
+  /// @brief Destructor.
   ~Directory() = default;
 
 private:

@@ -1,17 +1,17 @@
-#include "SLXArrayParser.h"
+#include "SlxArrayParser.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SLXArrayParser::SLXArrayParser() {
+SlxArrayParser ::SlxArrayParser() {
   this->ptr_ = std::make_shared<SimulinkArray>();
 }
 
-// SimulinkErrorType SLXArrayParser::build(xmlNodePtr nodePtr) {
+// SimulinkErrorType SlxArrayParser ::build(xmlNodePtr nodePtr) {
 
 //   if (nodePtr == nullptr) {
 //     slog_fatal(
-//         "SLXArrayParser::build failed: null node pointer received");
+//         "SlxArrayParser ::build failed: null node pointer received");
 //     return SimulinkErrorType::SLX_ENULLPTR;
 //   }
 //   uint32 id = 0;
@@ -43,20 +43,20 @@ SLXArrayParser::SLXArrayParser() {
 //         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array)
 //         ==
 //             0) {
-//       SLXArrayParser *subArrBuilderPtr = new SLXArrayParser();
-//       SimulinkErrorType status = subArrBuilderPtr->build(nodePtr_);
+//       SlxArrayParser  *subArrParserPtr = new SlxArrayParser ();
+//       SimulinkErrorType status = subArrParserPtr->build(nodePtr_);
 //       if (status != SimulinkErrorType::SLX_OK) {
-//         slog_fatal("SLXArrayParser::build failed: fail to build "
+//         slog_fatal("SlxArrayParser ::build failed: fail to build "
 //                    "sub Array elment");
 //         return status;
 //       }
-//       p_->add(subArrBuilderPtr->get());
+//       p_->add(subArrParserPtr->get());
 //     }
 //   }
 //   return SimulinkErrorType::SLX_OK;
 // }
 
-// std::shared_ptr<SimulinkArray> SLXArrayParser::get() {
+// std::shared_ptr<SimulinkArray> SlxArrayParser ::get() {
 //   return std::shared_ptr<SimulinkArray>(std::move(p_));
 // }
 

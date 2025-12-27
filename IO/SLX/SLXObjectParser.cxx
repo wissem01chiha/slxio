@@ -1,17 +1,17 @@
 #include "SLXObjectParser.h"
-#include "SLXArrayParser.h"
-#include "SLXConstant.h"
-#include "SLXParameterParser.h"
+#include "SlxArrayParser.h"
+#include "SlxConstant.h"
+#include "SlxParameterParser.h"
 
-SimulinkObjectBuilder::SimulinkObjectBuilder() {
+SimulinkObjectParser::SimulinkObjectParser() {
   this->p_ = std::make_unique<SimulinkObject>();
 }
 
-SimulinkErrorType SimulinkObjectBuilder::build(xmlNodePtr nodePtr) {
+SimulinkErrorType SimulinkObjectParser::build(xmlNodePtr nodePtr) {
 
   if (nodePtr == nullptr) {
     slog_fatal(
-        "SimulinkObjectBuilder::build failed: null node pointer received");
+        "SimulinkObjectParser::build failed: null node pointer received");
     return SimulinkErrorType::SLX_ENULLPTR;
   }
 
@@ -39,48 +39,47 @@ SimulinkErrorType SimulinkObjectBuilder::build(xmlNodePtr nodePtr) {
         xmlStrcmp(nodePtr_->name,
                   BAD_CAST SimulinkConstant::SECTION_Parameter) == 0) {
 
-      SimulinkParameterBuilder *paramBuilderPtr =
-          new SimulinkParameterBuilder();
-      SimulinkErrorType status = paramBuilderPtr->build(nodePtr_);
+      SimulinkParameterParser *paramParserPtr = new SimulinkParameterParser();
+      SimulinkErrorType status = paramParserPtr->build(nodePtr_);
       if (status != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectBuilder::build failed: fail to build object "
+        slog_fatal("SimulinkObjectParser::build failed: fail to build object "
                    "Parameter");
         return status;
       }
-      p_->add(paramBuilderPtr->get());
+      p_->add(paramParserPtr->get());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Object) ==
             0) {
 
-      SimulinkObjectBuilder *objBuilderPtr = new SimulinkObjectBuilder();
-      SimulinkErrorType subObjStat = objBuilderPtr->build(nodePtr_);
+      SimulinkObjectParser *objParserPtr = new SimulinkObjectParser();
+      SimulinkErrorType subObjStat = objParserPtr->build(nodePtr_);
       if (subObjStat != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectBuilder::build failed: fail to build "
+        slog_fatal("SimulinkObjectParser::build failed: fail to build "
                    "subobject elment");
         return subObjStat;
       }
-      p_->add(objBuilderPtr->get());
+      p_->add(objParserPtr->get());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array) ==
             0) {
-      SimulinkArrayBuilder *arrBuilderPtr = new SimulinkArrayBuilder();
-      SimulinkErrorType subArrStat = arrBuilderPtr->build(nodePtr_);
+      SimulinkArrayParser *arrParserPtr = new SimulinkArrayParser();
+      SimulinkErrorType subArrStat = arrParserPtr->build(nodePtr_);
       if (subArrStat != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectBuilder::build failed: fail to build "
+        slog_fatal("SimulinkObjectParser::build failed: fail to build "
                    "subArray elment");
         return subArrStat;
       }
-      p_->add(arrBuilderPtr->get());
+      p_->add(arrParserPtr->get());
     }
   }
   return SimulinkErrorType::SLX_OK;
 }
 
-std::shared_ptr<SimulinkObject> SimulinkObjectBuilder::get() {
+std::shared_ptr<SimulinkObject> SimulinkObjectParser::get() {
   return std::shared_ptr<SimulinkObject>(std::move(p_));
 }
 

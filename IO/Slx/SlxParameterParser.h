@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXPARAMETERPARSER_H
-#define SLXPARAMETERPARSER_H
+#ifndef SlxParameterParser_H
+#define SlxParameterParser_H
 
 #include "ABINamespace.h"
 #include "LibXML2.h"
@@ -25,7 +25,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Builder for SimulinkParameter class
+ * @brief Parser for SimulinkParameter class
  * @example Definition of multiple parameter in slx file
  *  @code{.xml}
  * <P Name="LibraryLinkDisplay">disabled</P>
@@ -36,17 +36,17 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * <P Name="OverrideMode" Class="uint32">0U</P>
  * @endcode
  */
-class SLXParameterParser : public Parser {
+class SlxParameterParser final : public Parser {
 public:
-  SLXParameterParser();
+  SlxParameterParser();
 
-  Parser::ErrorCode setInputData(xmlNodePtr data);
-  Parser::ErrorCode parse() override;
+  ErrorCode setInputData(xmlNodePtr data);
+  ErrorCode parse() override;
 
   std::string toString() override;
   std::shared_ptr<SimulinkParameter> getData();
 
-  ~SLXParameterParser();
+  ~SlxParameterParser();
 
 private:
   std::shared_ptr<SimulinkParameter> ptr_;
@@ -56,4 +56,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SLXPARAMETERPARSER_H
+#endif // SlxParameterParser_H

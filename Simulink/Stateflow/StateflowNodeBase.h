@@ -50,7 +50,7 @@ public:
 
 protected:
   StateflowNodeBase() = default;
-  StateflowNodeBase(const StateflowNodeBase &) = default;
+  StateflowNodeBase(const StateflowNodeBase &origNode) = default;
 
 private:
   std::vector<std::shared_ptr<StateflowTransition>> inTransitions;

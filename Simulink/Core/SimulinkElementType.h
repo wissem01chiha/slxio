@@ -23,6 +23,9 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @brief
+ */
 class APIEXPORT SimulinkElementType {
 public:
   enum Type {
@@ -36,7 +39,8 @@ public:
     Array = 7,
     Parameter = 8,
     ConfigSet = 9,
-    Unkown = 10
+    Chart = 10,
+    Unkown = 11
   };
   SimulinkElementType() = default;
   bool isA(const SimulinkElementType &typeObj);

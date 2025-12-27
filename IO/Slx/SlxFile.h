@@ -21,21 +21,21 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief SLXFile is an general low level representation of
+ * @brief SlxFile is an general low level representation of
  * a Simulink .slx file data information, for now we support
  * only one configuration set file (for model attached multiple configs
  * more then 1 xml file is present)
  */
-class SLXFile {
+class SlxFile {
 public:
-  SLXFile(std::string path);
-  ~SLXFile() = default;
+  SlxFile(std::string path);
+  ~SlxFile() = default;
   File *loadblockDiagram();
   File *loadConfigSet();
   File *loadDataDictionary();
 
 private:
-  SLXFile() = delete;
+  SlxFile() = delete;
   std::string filepath_;
   std::string filename_;
   uint32_t size_;

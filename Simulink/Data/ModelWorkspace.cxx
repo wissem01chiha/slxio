@@ -4,7 +4,18 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ModelWorkspace::ModelWorkspace() {}
+ModelWorkspace::ModelWorkspace() : dataSource(DataSourceType::ModelFile) {}
+
+std::string ModelWorkspace::getVariable(const std::string &name) const {
+  return std::string("");
+}
+
+void ModelWorkspace::assignVariable(const std::string &name,
+                                    const std::string &value) {}
+
+void ModelWorkspace::clear(const std::string &name) {}
+
+void ModelWorkspace::clearAll() {}
 
 DataSourceType ModelWorkspace::getDataSource() { return dataSource; }
 

@@ -9,8 +9,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 void StateflowNodeBase::addInTransition(
     const std::shared_ptr<StateflowTransition> &transition) {
-  assert(transition->getDst().get() == this &&
-         "Transition destination does not match this node");
+  if (transition->getDst().get() == this) {
+    Logger::getInstance().log(
+        Logger::V_ERROR, "Transition destination does not match this node");
+    return;
+  }
   inTransitions.push_back(transition);
 }
 

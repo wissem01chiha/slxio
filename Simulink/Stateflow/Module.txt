@@ -29,6 +29,9 @@ CLASSES
   StateflowNodeBase
   StateflowEvent
   StateflowTarget
+  StateflowChart
+  StateflowBlock
+  StateflowState
 SOURCES
 HEADERS
   StateflowElementBase.h
@@ -36,6 +39,9 @@ HEADERS
   StateflowNodeBase.h
   StateflowEvent.h
   StateflowTarget.h
+  StateflowChart.h
+  StateflowBlock.h
+  StateflowState.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS

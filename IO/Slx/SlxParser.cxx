@@ -1,4 +1,4 @@
-#include "SLXParser.h"
+#include "SlxParser.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

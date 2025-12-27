@@ -12,23 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXFILEPARSER_H
-#define SLXFILEPARSER_H
+#ifndef SlxFilePARSER_H
+#define SlxFilePARSER_H
 
 #include "ABINamespace.h"
+#include "ErrorCode.h"
 #include "File.h"
+#include "LibXML2.h"
 #include "Parser.h"
-#include "SLXFile.h"
+#include "SlxFile.h"
 
-class SLXFileParser : public Parser {
+/**
+ * @brief to replat the SLXParser by this class
+ */
+class SlxFileParser : public Parser {
 public:
-  enum ErrorCode { SLX_OK, UnsupportedExtension, ArchiveCorrupt };
-  SLXFileParser(const File &path);
-  SLXFileParser(const char *path);
-  SLXFileParser(const SLXFileParser &other);
-  SLXFileParser &operator=(const SLXFileParser &) = delete;
+  SlxFileParser(const File &path);
+  SlxFileParser(const char *path);
+  SlxFileParser(const SlxFileParser &other);
+  SlxFileParser &operator=(const SlxFileParser &) = delete;
 
-  ~SLXFileParser();
+  ~SlxFileParser();
   // SimulinkErrorType open();
   // SimulinkErrorType close();
   bool isEOF() const;
@@ -60,4 +64,4 @@ private:
   ErrorCode extract_to(const char *dir);
 };
 
-#endif // SLXFILEPARSER_H
+#endif // SlxFilePARSER_H

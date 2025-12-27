@@ -13,13 +13,14 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 
 SLXIO_ABI_NAMESPACE_END
 
 /**
  * This class builds the Stateflow part of the Simulink models.
  */
-class StateflowBuilder final {
+class StateflowParser final {
 
   /** Maps from id to Statflow elements. */
   std::map<std::string, StateflowElementBase> elements;
@@ -28,12 +29,12 @@ class StateflowBuilder final {
   SimulinkModel model;
 
   /**
-   * Create new Stateflow builder.
+   * Create new Stateflow Parser.
    *
    * @param model
    *            model the parsed Stateflow parts belong to.
    */
-  StateflowBuilder(SimulinkModel model) { this.model = model; }
+  StateflowParser(SimulinkModel model) { this.model = model; }
 
   /**
    * Build Stateflow parts based on Stateflow section from MDL file.

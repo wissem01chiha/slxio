@@ -1,25 +1,25 @@
-#include "SLXParameterParser.h"
-#include "SLXConstant.h"
+#include "SlxParameterParser.h"
+#include "SlxConstant.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SLXParameterParser::SLXParameterParser() {
+SlxParameterParser::SlxParameterParser() {
   ptr_ = std::make_shared<SimulinkParameter>();
 }
 
-Parser::ErrorCode SLXParameterParser::setInputData(xmlNodePtr data) {
+ErrorCode SlxParameterParser::setInputData(xmlNodePtr data) {
 
   if (data == nullptr) {
     // slog_fatal(
-    //     "SLXParameterParser::build failed: null node pointer received");
-    setError(SLX_EINVAR);
-    return SLX_EINVAR;
+    //     "SlxParameterParser::build failed: null node pointer received");
+    // setError(ErrorCode::SLX_EINVAR);
+    return ErrorCode::SLX_EINVAR;
   }
-  return SLX_OK;
+  return ErrorCode::SLX_OK;
 }
 
-Parser::ErrorCode SLXParameterParser::parse() {
+ErrorCode SlxParameterParser::parse() {
 
   // std::string parameterClass, parameterName, parameterValue;
 
@@ -27,7 +27,7 @@ Parser::ErrorCode SLXParameterParser::parse() {
 
   //   std::string name = reinterpret_cast<const char *>(attr->name);
 
-  //   if (name == std::string(SLXConstant::PARAM_Class)) {
+  //   if (name == std::string(SlxConstant::PARAM_Class)) {
   //     std::string classValue =
   //         reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
   //     parameterClass = classValue;
@@ -47,12 +47,12 @@ Parser::ErrorCode SLXParameterParser::parse() {
   // }
   // ptr_ = std::make_unique<SimulinkParameter>(parameterName, parameterValue,
   //                                          parameterClass);
-  return SLX_OK;
+  return ErrorCode::SLX_OK;
 }
 
-std::string SLXParameterParser::toString() { return std::string(); }
+std::string SlxParameterParser::toString() { return std::string(); }
 
-std::shared_ptr<SimulinkParameter> SLXParameterParser::getData() {
+std::shared_ptr<SimulinkParameter> SlxParameterParser::getData() {
   return ptr_;
 }
 

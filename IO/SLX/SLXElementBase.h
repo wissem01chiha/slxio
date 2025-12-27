@@ -19,10 +19,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 // base class for any XML elmented encoded in SLX all must inshrti from this
 // like the SimulinkElmenetBase but for Low level SLX elements
-class SLXElementBase {
+class SlxElementBase {
 public:
-  SLXElementBase();
-  ~SLXElementBase();
+  SlxElementBase();
+  ~SlxElementBase();
 
 private:
 };

@@ -16,6 +16,7 @@
 #define SLXPARSER_H
 
 #include "ABINamespace.h"
+#include "ErrorCode.h"
 #include "LibXML2.h"
 #include "Parser.h"
 #include <memory>
@@ -30,7 +31,7 @@ template <typename T> class SLXParser : public Parser {
 public:
   enum ErrorCode { SLX_OK, SLX_ENULLPTR, SLX_ERR_INVALID_XML };
   ~SLXParser() override = default;
-  Parser::ErrorCode parseNextChunk() override;
+  ErrorCode parseNextChunk() override;
 
 protected:
   virtual ErrorCode parse(xmlNodePtr node);

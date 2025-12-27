@@ -23,7 +23,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief Main Model Configuration Set builder class */
+/** @brief Main Model Configuration Set Parser class */
 class SLXConfigSetParser : public Parser {
 public:
   SLXConfigSetParser();

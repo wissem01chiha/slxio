@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXARRAYPARSER_H
-#define SLXARRAYPARSER_H
+#ifndef SlxArrayParser_H
+#define SlxArrayParser_H
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 #include "Parser.h"
 #include "SimulinkArray.h"
 
@@ -23,16 +24,16 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Builder for Simulink Array
+ * @brief Parser for Simulink Array
  * @code{.xml}
  * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
  *   <Cell Class="double">[]</Cell>
  * </Array>
  * @endcode
  */
-class SLXArrayParser : public Parser {
+class SlxArrayParser : public Parser {
 public:
-  SLXArrayParser();
+  SlxArrayParser();
 
 private:
   std::shared_ptr<SimulinkArray> ptr_;
@@ -41,4 +42,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SLXARRAYPARSER_H
+#endif // SlxArrayParser_H

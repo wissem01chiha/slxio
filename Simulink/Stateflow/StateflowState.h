@@ -16,44 +16,54 @@
 #define STATEFLOWSTATE_H
 
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
+#include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
-#include "StateflowNodeBase.h"
+#include "Type.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief This class represents Stateflow states.*/
-class StateflowState : public StateflowElementBase {
+class StateflowNodeBase;
+
+/**
+ * @brief This class represents Stateflow states.
+ */
+class APIEXPORT StateflowState final : public StateflowElementBase {
 public:
-  StateflowState();
+  StateflowState() = default;
   StateflowState(StateflowState &orig);
 
-  void addNode(StateflowNodeBase node) {
-    // nodes.add(node);
-    // node.setParent(this);
-  }
+  /// @brief Add a StateflowNodeBase object
+  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
-  std::string getLabel() {
-    // return getParameter(SimulinkConstant.PARAM_labelString);
-  }
+  /// @brief Remove a StateflowNodeBase object
+  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
-  /** Get child nodes. */
-  // UnmodifiableSet<StateflowNodeBase> getNodes() {
-  //   return CollectionUtils.asUnmodifiable(nodes);
-  //}
+  /// @brief Get Chat Parent of this StateflowTranstion
+  std::shared_ptr<StateflowElementBase> getParent() const override;
 
-  void removeNode(StateflowNodeBase node) {
-    // CCSMPre.isTrue(node.getParent() == this,
-    //          "Node does not belong to this chart.");
-    // nodes.remove(node);
-    // node.setParent(null);
-  }
+  /** @brief Get Refrence to child nodes. */
+  const std::vector<StateflowNodeBase> &getNodes() const;
 
+  /// @brief Return SimulinkElementType::Chart
+  SimulinkElementType getType() const override;
+
+  /// @brief get a String Reprsenation of the transistion
   std::string toString() const override;
+
+  /// @brief Id is not supported for StateflowState, fallback to 0
+  Index getID() const override;
+
+  /// @brief Id is not supported for StateflowState, fallback to 0
+  bool contains(const Index &id) const override;
 
 private:
   std::vector<StateflowNodeBase> nodes;
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // STATEFLOWSTATE_H

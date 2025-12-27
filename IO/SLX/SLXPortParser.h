@@ -16,6 +16,7 @@
 #define SLXPORTPARSER_H
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 #include "SLXParser.h"
 #include "SimulinkPort.h"
 
@@ -23,7 +24,7 @@
  * @brief This class is responsible for building the ports of Simulink blocks as
  * defined in the SLX file, i.e. add the ports to a partially constructed model.
  * This class does not maintain state but is implemented in a non-static way to
- * match the implementation of  SimulinkLineBuilder.
+ * match the implementation of  SimulinkLineParser.
  */
 class SLXPortParser : public SLXParser<SimulinkPort> {
 public:
@@ -34,4 +35,4 @@ private:
   std::unique_ptr<SimulinkPort> p_;
 };
 
-#endif // SLKPORTBUILDER_H
+#endif // SLKPORTParser_H

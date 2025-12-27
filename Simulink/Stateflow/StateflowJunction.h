@@ -13,14 +13,20 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
+#include "APIExport.h"
+#include "SimulinkElementType.h"
 #include "StateflowNodeBase.h"
+#include "Type.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief This class represents Stateflow junctions.*/
-class StateflowJunction : public StateflowNodeBase {
+/**
+ * @brief This class represents Stateflow junctions.
+ */
+class StateflowJunction final : public StateflowNodeBase {
 public:
-  StateflowJunction() {}
+  StateflowJunction() = default;
 
 private:
   StateflowJunction(StateflowJunction &orig) {
@@ -33,14 +39,12 @@ private:
     //}
   }
 
-  SimulinkElementType getType() const override {
-    // return getParameter(SimulinkConstant.PARAM_type);
-  }
+  /// @brief
+  SimulinkElementType getType() const override;
 
-  /** @brief Returns junction type and id. */
-  std::string toString() const override {
-    // return getType() + " (" + getStateflowId() + ")";
-  }
+  /// @brief Return
+  std::string toString() const override;
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

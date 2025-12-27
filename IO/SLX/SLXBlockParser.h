@@ -12,20 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMULINKBLOCKBUILDER_H
-#define SIMULINKBLOCKBUILDER_H
+#ifndef SIMULINKBLOCKParser_H
+#define SIMULINKBLOCKParser_H
 
+#include "LibXML2.h"
 #include "SLXParser.h"
-#include "SimulinkArrayBuilder.h"
+#include "SimulinkArrayParser.h"
 #include "SimulinkBlock.h"
-#include "SimulinkObjectBuilder.h"
-#include "SimulinkParameterBuilder.h"
+#include "SimulinkObjectParser.h"
+#include "SimulinkParameterParser.h"
 #include "SlxioNamespace.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief  Builder for Simulink blocks
+ * @brief  Parser for Simulink blocks
  * @code{.xml}
  *<Block BlockType="Scope" Name="Scope" SID="2">
     <P Name="Ports">[1]</P>
@@ -37,9 +38,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
   </Block>
  * @endcode
  */
-class SimulinkBlockBuilder : public SLXParser<SimulinkBlock> {
+class SimulinkBlockParser : public SLXParser<SimulinkBlock> {
 public:
-  SimulinkBlockBuilder();
+  SimulinkBlockParser();
   SimulinkErrorType build(xmlNodePtr node) override;
   std::shared_ptr<SimulinkBlock> get() override;
 
@@ -49,4 +50,4 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 
-#endif // SIMULINKBLOCKBUILDER_H
+#endif // SIMULINKBLOCKParser_H
