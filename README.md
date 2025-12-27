@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Documentation/Doxygen/logo/logo.png" alt="Project Logo" style="width:40%; height:auto;">
+  <img src="Documentation/Doxygen/logo/logo.png" alt="Project Logo" style="width:60%; height:auto;">
 </p>
 
 [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
