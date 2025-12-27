@@ -53,8 +53,6 @@ public:
    * @brief Add a line to this port.
    *  @details Only SimulinkLine elements are supported for add/remove
    * operations.
-   * @param element The element to add (must be a SimulinkLine).
-   * @return ErrorCode indicating success or failure.
    */
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
@@ -64,8 +62,6 @@ public:
   /**
    *  @brief Compare the given ID with this port's ID.
    *  @note A port can only be connected to one and only one block.
-   *  @param id The identifier to compare against.
-   * @return True if the IDs match, false otherwise.
    */
   bool contains(const Index &id) const override;
 

@@ -16,12 +16,15 @@
 #define STATEFLOWMACHINE_H
 
 #include "ABINamespace.h"
-#include "SimulinkModel.h"
+#include "APIExport.h"
 #include "StateflowChart.h"
 #include "StateflowElementBase.h"
 #include "StateflowTarget.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class SimulinkModel;
 
 /**
  * @brief The Stateflow machine is the container element of all Stateflow
@@ -130,5 +133,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // STATEFLOWMACHINE_H

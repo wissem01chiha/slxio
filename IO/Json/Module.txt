@@ -1,7 +1,7 @@
 NAME 
-  Simulink::Library
+  IO::Json
 DESCRIPTION  
-  Simulink Library Block Module 
+  SLX Json Converter Module 
 LICENSE   
   Apache-2.0 
 VERSION 
@@ -24,18 +24,21 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  DataStore
+  JsonParameterWriter 
 SOURCES
 HEADERS
-  DataStore.h
+ JsonParameterWriter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
-  Common::System
-  Common::Core
+  ThirdParty::loguru
+  ThirdParty::json-c
 PRIVATE_DEPENDS
+  IO::Core
+  Common::Core
   Simulink::Core
   Simulink::Misc
+  Simulink::Data
 TEST_DEPENDS 
   ThirdParty::doctest
 TEST_OPTIONAL_DEPENDS 

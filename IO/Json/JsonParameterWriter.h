@@ -11,3 +11,31 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+#ifndef JSONPARAMETERWRITER_H
+#define JSONPARAMETERWRITER_H
+
+#include "ABINamespace.h"
+#include "Parser.h"
+#include "Json-c.h"
+#include "APIExport.h"
+#include "SimulinkParameter.h"
+#include <memory>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class APIEXPORT JsonParameterWriter final 
+{
+public:
+    JsonParameterWriter();
+    ~JsonParameterWriter();
+private:
+};
+
+
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // JSONPARAMETERWRITER_H
