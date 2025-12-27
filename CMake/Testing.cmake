@@ -10,6 +10,10 @@ if(CMAKE_BUILD_TYPE STREQUAL "Release")
     return()
 endif()
 
+# CTest Based Configuration 
+# fallback if --output-on-failure not passed to Ctest
+set(CTEST_OUTPUT_ON_FAILURE TRUE)
+
 if(${PROJECT_NAME}_ENABLE_COVERAGE AND NOT ${PROJECT_NAME}_ENABLE_TESTING)
   message(FATAL_ERROR "coverage requires testing to be enabled")
 endif()
