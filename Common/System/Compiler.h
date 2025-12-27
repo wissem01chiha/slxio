@@ -50,6 +50,7 @@
 #define finite(x) std::isfinite(x)
 #endif
 #endif
+#endif
 
 #if defined(_MSC_VER)
 #define ISNAN(x) _isnan(x)
