@@ -1,4 +1,5 @@
 #include "File.h"
+#include "Status.h"
 #include <cstring>
 
 File::File(const std::string &path, Mode mode) : mode_(mode), path_(path) {}
@@ -76,8 +77,7 @@ ErrorCode File::open() {
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     return static_cast<ErrorCode>(-err);
   }
   fd_ = err;
@@ -99,8 +99,7 @@ ErrorCode File::read() {
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     return static_cast<ErrorCode>(-err);
   }
   if (err == 0) {
@@ -128,8 +127,7 @@ ErrorCode File::write(const char *message) {
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     return static_cast<ErrorCode>(-err);
   }
   return ErrorCode::SLX_OK;
@@ -145,8 +143,7 @@ ErrorCode File::close() {
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     return static_cast<ErrorCode>(-err);
   }
 
@@ -180,9 +177,9 @@ size_t File::getNBytes() const { return nbytes_; }
 
 std::string File::getFileDirectory() {
 
-  size_t pos = path_.find_last_of("/\\");
+  size_t pos = path_.find_last_of(PATH_SEP);
   if (pos == std::string::npos) {
-    return std::string("");
+    return std::string(".");
   }
   return path_.substr(0, pos + 1);
 }
@@ -207,7 +204,7 @@ ErrorCode File::move(const char *dirpath) {
 
   std::string newPath = std::string(dirpath);
   if (!newPath.empty() && newPath.back() != '/' && newPath.back() != '\\') {
-    newPath += '\\';
+      newPath += PATH_SEP;
   }
   newPath += getFilename();
 
@@ -217,8 +214,7 @@ ErrorCode File::move(const char *dirpath) {
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : %s \n", err_str, newPath.c_str());
+    Status::log(err);
     return static_cast<ErrorCode>(-err);
   }
 
@@ -238,7 +234,7 @@ ErrorCode File::rename(const char *filename) {
 
 const std::string File::getFilename() {
 
-  size_t pos = path_.find_last_of("/\\");
+  size_t pos = path_.find_last_of(PATH_SEP);
   if (pos == std::string::npos) {
     return std::string(path_.begin(), path_.end());
   }
@@ -261,6 +257,7 @@ const char *File::getFileModeAsChar() {
   default:
     "";
   };
+  return "Unvalid";
 }
 
 ErrorCode File::setFileExtension(const char *ext) {
@@ -295,7 +292,6 @@ size_t File::size() const {
     uv_fs_req_cleanup(&req);
     return 0;
   }
-
   uv_stat_t *statbuf = static_cast<uv_stat_t *>(req.ptr);
   size_t size_ = statbuf->st_size;
   uv_fs_req_cleanup(&req);

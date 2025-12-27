@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "Parser.h"
+#include "SimulinkParserBase.h"
 
 class TestParserFixture {
 public:

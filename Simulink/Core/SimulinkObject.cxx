@@ -130,7 +130,6 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element) {
         arrays.erase(std::remove(arrays.begin(), arrays.end(), arr),
                      arrays.end());
       }
-      // arr->remove(element);
     }
   }
 
@@ -241,9 +240,7 @@ SimulinkObject::getParameter(const std::string &name) {
       }
     }
   }
-  std::ostringstream oss;
-  oss << "SimulinkObject:: Parameter '" << name << "' not found.";
-  l.log(Logger::V_WARNING, oss.str().c_str());
+  l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ",name,"' not found.");
   return nullptr;
 }
 

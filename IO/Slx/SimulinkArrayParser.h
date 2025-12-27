@@ -12,30 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXCONFIGSETPARSER_H
-#define SLXCONFIGSETPARSER_H
+#ifndef SLXARRAYPARSER_H
+#define SLXARRAYPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
-#include "Parser.h"
-#include "SimulinkConfigSet.h"
+#include "SimulinkParserBase.h"
+#include "SimulinkArray.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief Main Model Configuration Set Parser class */
-class SLXConfigSetParser : public Parser {
+/**
+ * @brief Parser for Simulink Array
+ * @code{.xml}
+ * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
+ *   <Cell Class="double">[]</Cell>
+ * </Array>
+ * @endcode
+ */
+class APIEXPORT SimulinkArrayParser final : public SimulinkParserBase {
 public:
-  SLXConfigSetParser();
-  SLXParser::ErrorCode parse(xmlNodePtr nodePtr) override;
-  std::shared_ptr<SimulinkConfigSet> getOuput();
+  SimulinkArrayParser();
+  ErrorCode setInputData(void* data) override;
+  std::shared_ptr<SimulinkElementBase> getDataObject() const override;
+  ErrorCode parse() override;
+  ~SimulinkArrayParser() =default;
 
 private:
-  std::shared_ptr<SimulinkConfigSet> ptr_;
-  xmlNodePtr input_;
+  std::shared_ptr<SimulinkArray> ptr_;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SLXCONFIGSETPARSER_H
+#endif // SLXARRAYPARSER_H

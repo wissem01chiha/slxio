@@ -16,7 +16,7 @@
 #define JSONPARAMETERWRITER_H
 
 #include "ABINamespace.h"
-#include "Parser.h"
+#include "SimulinkParserBase.h"
 #include "Json-c.h"
 #include "APIExport.h"
 #include "SimulinkParameter.h"

@@ -18,6 +18,7 @@
 #include "APIExport.h"
 #include "File.h"
 #include "Libuv.h"
+#include "Platform.h"
 #include <map>
 #include <vector>
 

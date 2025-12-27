@@ -35,4 +35,10 @@
 #define PLATFORM_UNKNOWN
 #endif
 
+#ifdef PLATFORM_WINDOWS
+#define PATH_SEP "\\"
+#else
+#define PATH_SEP "/"
+#endif
+
 #endif // PLATFORM_H

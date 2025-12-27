@@ -19,7 +19,7 @@
 #include "ErrorCode.h"
 #include "File.h"
 #include "LibXML2.h"
-#include "Parser.h"
+#include "SimulinkParserBase.h"
 #include "SlxFile.h"
 
 /**

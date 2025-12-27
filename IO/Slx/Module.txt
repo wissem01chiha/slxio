@@ -24,17 +24,13 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  SlxElementBase
-  SlxConstant
-  SlxParameterParser
-  SlxFile
-  SlxParser   
+  SimulinkParameterParser
+  SimulinkArrayParser  
 SOURCES
 HEADERS
-  SlxElementBase.h
-  SlxConstant.h
-  SlxFile.h
-  SlxParser.h
+  SimulinkParameterParser.h
+  SimulinkArrayParser.h
+  SlxParameter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS

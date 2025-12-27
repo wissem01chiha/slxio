@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SlxConstant_H
-#define SlxConstant_H
+#ifndef SLXCONSTANT_H
+#define SLXCONSTANT_H
 
 #include "ABINamespace.h"
 #include "Type.h"
@@ -22,13 +22,13 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- *  @brief This class contains constants used by the Simulink model Parser.
+ * @brief This class contains constants used by the Simulink model Parser.
  * These constants are section and parameter names that refer to the SLX file.
  * Section and parameters are distinguished by the prefix of the constants
  * (SECTION vs PARAM). The remainder of the constant is just like the name in
  * the SLX file. We use mixed case here to express the case differences found in
  * the SLX file, e.g. 'Name' vs 'name'.
- * @todo
+ * @note this file do not provide any related cxx implementation 
  */
 class SlxConstant {
 public:
@@ -685,4 +685,4 @@ public:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SlxConstant_H
+#endif // SLXCONSTANT_H

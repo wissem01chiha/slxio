@@ -18,6 +18,7 @@
 #include "Libuv.h"
 #include "Type.h"
 #include <memory>
+#include "Platform.h"
 #include <string>
 #include <vector>
 
@@ -100,6 +101,8 @@ public:
 
   /// @brief Get the parent directory path.
   /// @example "rootdir/filename.txt" -> "rootdir/"
+  /// @note if no parent directory found eg "filename.txt"
+  /// return "." 
   std::string getFileDirectory();
 
   /// @brief Get the file extension.

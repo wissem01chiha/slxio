@@ -16,8 +16,8 @@ public:
   std::string tempdir() {
 
     std::string tempDir = std::string(cwdbuffer);
-    if (tempDir.back() != '\\')
-      tempDir += '\\';
+    if (tempDir.back() != PATH_SEP[0])
+      tempDir += PATH_SEP;
     tempDir += "tempdir";
 
     uv_fs_t req;
@@ -87,13 +87,13 @@ TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test") {
 
 TEST_CASE_FIXTURE(FileTestFixture, "Move File Test") {
 
-  std::string TEST_FILE_PATH = std::string(cwdbuffer) + "\\" + TEST_FILE;
+  std::string TEST_FILE_PATH = std::string(cwdbuffer) + PATH_SEP + TEST_FILE;
   File f(TEST_FILE_PATH.c_str(), File::Read);
 
   REQUIRE(f.open() == ErrorCode::SLX_OK);
   REQUIRE(f.close() == ErrorCode::SLX_OK);
 
-  std::cout << "this is the tempory dir path " << tempdir() << std::endl;
+  std::cout << "This is the tempory dir path " << tempdir() << std::endl;
   CHECK(f.move(tempdir().c_str()) == ErrorCode::SLX_OK);
   CHECK(f.getFileDirectory().find(cwdbuffer) != std::string::npos);
 }

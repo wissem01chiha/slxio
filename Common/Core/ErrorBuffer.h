@@ -17,44 +17,55 @@
 
 #include "ABINamespace.h"
 #include "ErrorCode.h"
+#include <vector>
 #include "Logger.h"
+#include "APIExport.h"
 #include "Type.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/// for a lined-list like buffer of error , to enable depper profiling
-// of error and expcetions or behvaur logs
-// an error buffer holds multiple error codes and messages in  a linked list
-// strut
-// example how to buffer errors
-// ErrorBuffer buffer;
-// buffer.addError(ErrorCode::ErrorCode ::SLX_EIOERR, "failed to open file");
-// buffer.addError(ErrorCode::ErrorCode ::SLX_ERR_INVALID_XML, "invalid xml
-// format"); uint32 errorCount = buffer.getSize(); / get the buffre size to
-// check if an error exist in the buffer
-// if(buffer.contains(ErrorCode::ErrorCode
-// ::SLX_EIOERR)) { ... }
-//
-// how to use the buffer
-// for depth profiling a function chain or mulitpel process
-// allocate a buffer with given size ErrorBuffer(size)
-class ErrorBuffer {
+/// @class ErrorBuffer
+/// @brief A buffer for storing multiple error codes to enable deeper profiling
+/// of errors, exceptions, and behavior logs.
+/// Example
+/// @code
+/// ErrorBuffer buffer;
+/// buffer.push_back(ErrorCode::SLX_EIOERR);
+/// if (buffer.contains(ErrorCode::SLX_EIOERR)) {
+///    ...
+/// }
+/// @endcode
+/// allocate a buffer with a given maximum size:
+/// @code
+/// ErrorBuffer buffer(128); 
+/// @endcode
+class APIEXPORT ErrorBuffer final {
 public:
-  ErrorBuffer();
-  void push_back(const ErrorCode &code, const std::string &message);
-  uint32 getSize() const;
-  void clear();
-  bool isEmpty() const;
-  bool contains(const ErrorCode &code) const;
-  void print(std::ostream &os) const;
-  void log() const;
-  ~ErrorBuffer();
+    explicit ErrorBuffer(size_t maxSize = 100);
+
+    void push_back(const ErrorCode& code);
+
+    /// @brief merge a subbuffer elements to this buffer
+    /// @note if the resulting buffer excceds the max size trim the subbuffer 
+    void push_back(const ErrorBuffer& buffer);
+
+    void clear();
+    size_t size() const;
+    bool empty() const;
+    bool contains(const ErrorCode& code) const;
+
+    void print(std::ostream& os) const;
+    void log() const;
+
+    ErrorCode& operator[](size_t index);
+    const ErrorCode& operator[](size_t index) const;
+
+    ~ErrorBuffer();
 
 private:
-  // ErrorNode *head;
-  // ErrorNode *tail;
-  uint32 size;
+    std::vector<ErrorCode> errlist;
+    size_t maxSize_;
 };
 
 SLXIO_ABI_NAMESPACE_END

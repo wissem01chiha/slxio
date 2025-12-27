@@ -1,25 +1,31 @@
-#include "SlxParameterParser.h"
-#include "SlxConstant.h"
+#include "SimulinkParameterParser.h"
+#include "SlxParameter.h"
+#include "LibXML2.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SlxParameterParser::SlxParameterParser() {
+SimulinkParameterParser::SimulinkParameterParser() {
   ptr_ = std::make_shared<SimulinkParameter>();
 }
 
-ErrorCode SlxParameterParser::setInputData(xmlNodePtr data) {
+ErrorCode SimulinkParameterParser::setInputData(void* data) {
 
   if (data == nullptr) {
     // slog_fatal(
-    //     "SlxParameterParser::build failed: null node pointer received");
+    //     "SimulinkParameterParser::build failed: null node pointer received");
     // setError(ErrorCode::SLX_EINVAR);
     return ErrorCode::SLX_EINVAR;
   }
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SlxParameterParser::parse() {
+std::shared_ptr<SimulinkElementBase>
+SimulinkParameterParser::getDataObject() const {
+  return ptr_;
+}
+
+ErrorCode SimulinkParameterParser::parse() {
 
   // std::string parameterClass, parameterName, parameterValue;
 
@@ -50,11 +56,6 @@ ErrorCode SlxParameterParser::parse() {
   return ErrorCode::SLX_OK;
 }
 
-std::string SlxParameterParser::toString() { return std::string(); }
-
-std::shared_ptr<SimulinkParameter> SlxParameterParser::getData() {
-  return ptr_;
-}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

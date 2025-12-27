@@ -12,20 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SLXCONFIGSETPARSER_H
+#define SLXCONFIGSETPARSER_H
+
 #include "ABINamespace.h"
+#include "LibXML2.h"
+#include "SimulinkParserBase.h"
+#include "SimulinkConfigSet.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-// base class for any XML elmented encoded in SLX all must inshrti from this
-// like the SimulinkElmenetBase but for Low level SLX elements
-class SlxElementBase {
+/** @brief Main Model Configuration Set Parser class */
+class SLXConfigSetParser : public Parser {
 public:
-  SlxElementBase();
-  ~SlxElementBase();
+  SLXConfigSetParser();
+  SLXParser::ErrorCode parse(xmlNodePtr nodePtr) override;
+  std::shared_ptr<SimulinkConfigSet> getOuput();
 
 private:
+  std::shared_ptr<SimulinkConfigSet> ptr_;
+  xmlNodePtr input_;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+#endif // SLXCONFIGSETPARSER_H

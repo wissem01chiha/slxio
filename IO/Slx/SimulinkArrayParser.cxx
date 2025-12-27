@@ -1,17 +1,28 @@
-#include "SlxArrayParser.h"
+#include "SimulinkArrayParser.h"
+#include "LibXML2.h"
+#include "SlxParameter.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SlxArrayParser ::SlxArrayParser() {
+SimulinkArrayParser ::SimulinkArrayParser() {
   this->ptr_ = std::make_shared<SimulinkArray>();
 }
 
-// SimulinkErrorType SlxArrayParser ::build(xmlNodePtr nodePtr) {
+ErrorCode SimulinkArrayParser::setInputData(void *data) { return ErrorCode(); }
+
+std::shared_ptr<SimulinkElementBase>
+SimulinkArrayParser::getDataObject() const {
+  return ptr_;
+}
+
+ErrorCode SimulinkArrayParser::parse() { return ErrorCode::SLX_OK; }
+
+// SimulinkErrorType SimulinkArrayParser ::build(xmlNodePtr nodePtr) {
 
 //   if (nodePtr == nullptr) {
 //     slog_fatal(
-//         "SlxArrayParser ::build failed: null node pointer received");
+//         "SimulinkArrayParser ::build failed: null node pointer received");
 //     return SimulinkErrorType::SLX_ENULLPTR;
 //   }
 //   uint32 id = 0;
@@ -43,10 +54,10 @@ SlxArrayParser ::SlxArrayParser() {
 //         xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array)
 //         ==
 //             0) {
-//       SlxArrayParser  *subArrParserPtr = new SlxArrayParser ();
+//       SimulinkArrayParser  *subArrParserPtr = new SimulinkArrayParser ();
 //       SimulinkErrorType status = subArrParserPtr->build(nodePtr_);
 //       if (status != SimulinkErrorType::SLX_OK) {
-//         slog_fatal("SlxArrayParser ::build failed: fail to build "
+//         slog_fatal("SimulinkArrayParser ::build failed: fail to build "
 //                    "sub Array elment");
 //         return status;
 //       }
@@ -56,9 +67,11 @@ SlxArrayParser ::SlxArrayParser() {
 //   return SimulinkErrorType::SLX_OK;
 // }
 
-// std::shared_ptr<SimulinkArray> SlxArrayParser ::get() {
+// std::shared_ptr<SimulinkArray> SimulinkArrayParser ::get() {
 //   return std::shared_ptr<SimulinkArray>(std::move(p_));
 // }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+

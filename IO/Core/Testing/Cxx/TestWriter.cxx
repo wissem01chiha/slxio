@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "Writer.h"
+#include "SimulinkWriterBase.h"
 
 class TestWriterFixture {
 public:

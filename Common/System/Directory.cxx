@@ -21,6 +21,7 @@ Directory::Directory(const std::wstring &path) {
 Directory::Directory(const char *path) { this->path_ = std::string(path); }
 
 Directory::Directory(const wchar_t *wpath) {
+  
   std::wstring ws(wpath);
   std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> conv;
   path_ = conv.to_bytes(ws);

@@ -1,48 +1,72 @@
 #include "ErrorBuffer.h"
-#include <iostream>
+#include <algorithm>
+#include "Status.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorBuffer::ErrorBuffer() {}
+ErrorBuffer::ErrorBuffer(size_t maxSize) : maxSize_(maxSize) {}
 
-void ErrorBuffer::push_back(const ErrorCode &code, const std::string &message) {
+void ErrorBuffer::push_back(const ErrorCode& code) {
+    if (errlist.size() >= maxSize_) {
+        errlist.erase(errlist.begin()); 
+    }
+    errlist.push_back(code);
 }
 
-uint32 ErrorBuffer::getSize() const { return this->size; }
+void ErrorBuffer::push_back(const ErrorBuffer &buffer) {
+  if(buffer.empty()){
+    return;
+  }
+  if(buffer.size() + this->size() > maxSize_){
+    Logger::getInstance().log(Logger::VERBOSITY_0, "Failed to merge error buffer: maximum size exceeded");
+    return ;
+  }
+  for (size_t i=0;i<maxSize_; i++)
+  { 
+    this->push_back(buffer[i]);
+  }
+  
+}
 
-// void ErrorBuffer::clear() {
-//   while (head != nullptr) {
-//     ErrorNode *temp = head;
-//     head = head->getNext();
-//     delete temp;
-//   }
-//   tail = nullptr;
-//   this->size = 0;
-// }
+void ErrorBuffer::clear() { errlist.clear(); }
 
-bool ErrorBuffer::isEmpty() const { return this->size == 0; }
+size_t ErrorBuffer::size() const {
+  return errlist.size();
+}
 
-bool ErrorBuffer::contains(const ErrorCode &code) const { return false; }
+bool ErrorBuffer::empty() const {
+    return errlist.empty();
+}
 
-void ErrorBuffer::print(std::ostream &os) const {
-  // ErrorNode *current = head;
-  // while (current != nullptr) {
-  //   os << current->toString() << std::endl;
-  //   current = current->getNext();
-  // }
+bool ErrorBuffer::contains(const ErrorCode& code) const {
+    return std::find(errlist.begin(), errlist.end(), code) != errlist.end();
+}
+
+void ErrorBuffer::print(std::ostream& os) const {
+    for (const auto& code : errlist) {
+        os << Status::toString(code) << std::endl; 
+    }
 }
 
 void ErrorBuffer::log() const {
-  // ErrorNode *current = head;
-  // while (current != nullptr) {
-  //   Logger::getInstance().Log(Logger::Verbosity::V_ERROR,
-  //                             current->toString().c_str());
-  //   current = current->getNext();
-  // }
+    for (const auto& code : errlist) {
+        Status::log((int)&code); 
+    }
 }
 
-ErrorBuffer::~ErrorBuffer() { clear(); }
+ErrorCode &ErrorBuffer::operator[](size_t index) {
+return errlist[index];
+}
+
+const ErrorCode &ErrorBuffer::operator[](size_t index) const {
+return errlist[index];
+}
+
+ErrorBuffer::~ErrorBuffer() {
+    clear();
+}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
