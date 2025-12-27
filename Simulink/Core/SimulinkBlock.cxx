@@ -1,5 +1,6 @@
 #include "SimulinkBlock.h"
 #include "Logger.h"
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
