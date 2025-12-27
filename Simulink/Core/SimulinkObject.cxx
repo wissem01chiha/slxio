@@ -2,6 +2,7 @@
 #include "Logger.h"
 #include <algorithm>
 #include <sstream>
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
