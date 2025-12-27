@@ -1,4 +1,5 @@
 #include "Doctest.h"
+#include "Platform.h"
 #include "Status.h"
 
 TEST_CASE("Default constructor Test SLX_OK") {
@@ -44,7 +45,11 @@ TEST_CASE("Status::log prints libuv error") {
   std::cerr.rdbuf(old_buf);
 
   std::string output = oss.str();
+  #ifdef PLATFORM_WINDOWS
   CHECK(output == "[ErrorCode -4071] invalid argument\n");
+  #else
+  CHECK(output == "[ErrorCode -22] invalid argument\n");
+  #endif 
 }
 
 TEST_CASE("Status::log prints custom error") {
