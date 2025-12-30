@@ -42,7 +42,6 @@
 
 # build folders
 build/
-out/
 
-# Visual Studio Files
+# Visual Studio files
 .vs/
