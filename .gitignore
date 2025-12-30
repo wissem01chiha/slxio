@@ -43,5 +43,6 @@
 # build folders
 build/
 
-# Visual Studio files
+# Visual Studio folders
+out/ 
 .vs/
