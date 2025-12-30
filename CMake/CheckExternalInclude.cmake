@@ -7,7 +7,6 @@ check_include_files("stdlib.h" HAVE_STDLIB_H)
 check_include_files("float.h" HAVE_FLOAT_H)
 check_include_files("direct.h" HAVE_DIRECT_H)
 check_include_files("io.h" HAVE_IO_H)
-check_include_files("windows.h" HAVE_WINDOWS_H)
 check_include_files("intrin.h" HAVE_INTRIN_H)
 
 check_include_files("cpuid.h" HAVE_CPUID_H)

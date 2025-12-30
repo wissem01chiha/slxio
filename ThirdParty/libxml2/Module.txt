@@ -46,6 +46,25 @@ SOURCES
     src/xmlIO.c
     src/xmlmemory.c
     src/xmlstring.c
+    src/xpath.c
+    src/xpointer.c
+    src/c14n.c
+    src/debugXML.c
+    src/HTMLparser.c
+    src/HTMLtree.c
+    src/nanohttp.c
+    src/pattern.c
+    src/relaxng.c
+    src/schematron.c
+    src/xmlmodule.c
+    src/xmlreader.c
+    src/xmlregexp.c
+    src/xmlsave.c
+    src/xmlschemas.c
+    src/xmlschemastypes.c
+    src/xmlwriter.c
+    src/xinclude.c
+    src/xlink.c
 HEADERS
     src/include/libxml/c14n.h
     src/include/libxml/catalog.h
@@ -94,6 +113,9 @@ HEADERS
     src/include/libxml/xpointer.h
 CONFIG_HEADERS
   LibXML2.h.in
+  src/config.h.cmake.in
+  src/libxml2-config.cmake.in
+  src/libxml2-config.cmake.cmake.in
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS

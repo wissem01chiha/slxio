@@ -736,6 +736,11 @@ endfunction()
 
   A wrapper around ``target_sources`` that works for module test sources.
 
+  Example:
+    add_test_sources(Common::Core
+        TestErrorBuffer.cxx
+    )
+
 #]==]
 function(add_test_sources module)
 
@@ -780,7 +785,7 @@ endfunction()
 
   A wrapper around ``target_link_libraries`` that works for module test dependencies.
 
-  test_link_libraries(Common)
+  test_link_libraries(IOSlxTestParameterParser ThirdParty::libxml2)
 #]==]
 function(test_link_libraries test_target module)
 
@@ -790,10 +795,12 @@ function(test_link_libraries test_target module)
   )
 
   set(MODULE_test_dep_targets "")
+
   foreach(test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
     module_target_name(${test_dep} dep_tmp)
     list(APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
   endforeach()
+
   if(MODULE_test_dep_targets)
     target_link_libraries(${test_target} PRIVATE ${MODULE_test_dep_targets})
   endif()

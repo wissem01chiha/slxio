@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # SLXIO
 
 [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
@@ -44,7 +45,7 @@
 
 ## 1.0 Overview
 
-**slxio** is an open-source C++11 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**Slxio** is an open-source C++11 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
@@ -72,22 +73,6 @@ Currently, there is no official documentation from MathWorks regarding the SLX d
 To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. 
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
-#### 1.2.1 Supported Simulink Blocks
-
-The following table lists the Simulink blocks that are currently supported for reading by **slxio**.  
-
-> **Note:** Reading or Writing block parameter support is currently not implemented for any blocks.
-
-| Block Name          | Supported Since | Read | Write |
-|---------------------|-----------------|------|-------|
-| Gain                |    0.1.0        | ✅   | ❌   |
-
-
-#### 1.2.2 Supported MATLAB Releases
-
-| MATLAB Release | Supported Since | Read | Write | C++ | Python |
-|----------------|-----------------|------|-------|-----|--------|
-| R2019a         | 0.1.0           | ✅   | ❌    | ✅  | ❌   |
 
 
 ### 1.3 Contact
@@ -168,21 +153,25 @@ cmake --install .
 | CMAKE_INSTALL_PREFIX            | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
 
 
-### 2.3 Platform & Compiler Support
+### 2.3 Platform Support
 
-| **OS**                | **Compiler** | **Version(s)**                          | **Status**             |
-|------------------------|--------------|-----------------------------------------|------------------------|
-| Windows 11             | MSVC         | 19.43 (Visual Studio 2022 v17.13)       | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)           |
-| Windows 11             | MinGW-w64    | GCC 11.2.0 , 15.2.0                             | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |
-| Ubuntu 22.04 LTS       | GNU GCC      | 11.2.0, 13.3.0                          | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |
-| Ubuntu 22.04 LTS       | Clang        | 14.0, 15.0                              | N/A        |
-| MacOS | Apple Clang | 14.0, 15.0                              | N/A |
+
+| OS          | Compiler | Version                                     |            SDK              | Arch            | C++ Standards              | Status |
+|-------------|----------|----------------------------------------------|----------------------------|-----------------|---------------------------|--------|
+| Windows 11  | MSVC     | 19.1x (VS 2017 v15.x, toolset v141)          | Windows SDK 10.0.x         | x64, Win32      | C++14, C++17              | NA  | 
+| Windows 11  | MSVC     | 19.2x (VS 2019 v16.x, toolset v142)          | Windows SDK 10.0.x         | x64, Win32, ARM64 | C++17, C++20            |  NA | 
+| Windows 11  | MSVC     | 19.43 (VS 2022 v17.13, toolset v143)         | Windows SDK 10.0.26100.0   | x64, Win32, ARM64 | C++17, C++20,C++23      | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)     | 
+| Windows 11  | MSVC     | 19.50 (VS 2026 v18.0, toolset v180)          | Windows SDK 10.0.26200.0   | x64, ARM64      | C++17, C++20, C++23       |  NA | 
+| Windows 11  | MinGW‑w64 | GCC 11.2.0, 15.2.0                          | N/A                        | x64             | C++17, C++20              | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |  NA |       
+| Ubuntu 22.04| GCC      | 11.2.0, 13.3.0                               | glibc 2.35                 | x64             | C++17, C++20, C++23       | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |       
+| Ubuntu 22.04| Clang    | 14.0, 15.0                                   | LLVM libc++                | x64             | C++17, C++20              |  NA  |       
+| macOS 14    | Apple Clang | 14.0, 15.0                                | Xcode toolchain            | arm64, x64      | C++17, C++20              | NA  |       
 
 
 
 ## 3.0 Testing
 
-Project tests are controlled via the CMake option `SLXIO_ENABLE_TESTING`.
+Project tests are controlled via the CMake option `ENABLE_TESTING`.
 
 ### 3.1 Running Tests
 To run all unit tests after building, use:

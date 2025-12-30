@@ -33,14 +33,15 @@ HEADERS
   SlxParameter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
-PUBLIC_DEPENDS
+PUBLIC_DEPENDS 
   ThirdParty::loguru
   ThirdParty::libxml2
-PRIVATE_DEPENDS
+PRIVATE_DEPENDS 
   IO::Core
   Common::Core
   Simulink::Core
   Simulink::Misc
+  ThirdParty::libxml2
 TEST_DEPENDS 
   ThirdParty::doctest
 TEST_OPTIONAL_DEPENDS 

@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXARRAYPARSER_H
-#define SLXARRAYPARSER_H
+#ifndef SIMULINKARRAYPARSER_H
+#define SIMULINKARRAYPARSER_H
 
 #include "ABINamespace.h"
+#include "LibXML2.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkArray.h"
 #include "APIExport.h"
@@ -31,19 +32,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * </Array>
  * @endcode
  */
-class APIEXPORT SimulinkArrayParser final : public SimulinkParserBase {
+class APIEXPORT SimulinkArrayParser final : public SimulinkParserBase<xmlNodePtr> {
 public:
   SimulinkArrayParser();
-  ErrorCode setInputData(void* data) override;
+  ErrorCode setInputData(const xmlNodePtr data) override;
   std::shared_ptr<SimulinkElementBase> getDataObject() const override;
   ErrorCode parse() override;
   ~SimulinkArrayParser() =default;
 
 private:
   std::shared_ptr<SimulinkArray> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SLXARRAYPARSER_H
+#endif // SIMULINKARRAYPARSER_H

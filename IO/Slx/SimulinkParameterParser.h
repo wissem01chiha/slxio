@@ -15,11 +15,11 @@
 #ifndef SIMULINKPARAMETERPARSER_H
 #define SIMULINKPARAMETERPARSER_H
 
+#include "LibXML2.h"
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkParameter.h"
-#include <memory>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -36,16 +36,21 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * <P Name="OverrideMode" Class="uint32">0U</P>
  * @endcode
  */
-class APIEXPORT  SimulinkParameterParser final : public SimulinkParserBase {
+class APIEXPORT SimulinkParameterParser final
+    : public SimulinkParserBase <xmlNodePtr> {
 public:
   SimulinkParameterParser();
-  ErrorCode setInputData(void* data) override;
+  /// @note Check if the related node name attribute is empty.
+  /// If so, it returns an error since a parameter cannot be built without a
+  /// name.
+  ErrorCode setInputData(const xmlNodePtr data) override;
   std::shared_ptr<SimulinkElementBase> getDataObject() const override;
   ErrorCode parse() override;
   ~SimulinkParameterParser() =default;
 
 private:
   std::shared_ptr<SimulinkParameter> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

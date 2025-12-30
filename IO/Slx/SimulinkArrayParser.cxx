@@ -7,9 +7,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArrayParser ::SimulinkArrayParser() {
   this->ptr_ = std::make_shared<SimulinkArray>();
+  this->dataObject = nullptr;
 }
 
-ErrorCode SimulinkArrayParser::setInputData(void *data) { return ErrorCode(); }
+ErrorCode SimulinkArrayParser::setInputData(const xmlNodePtr data) {
+
+  Logger &l = Logger::getInstance();
+  if (data == nullptr) {
+    l.log(Logger::V_ERROR,
+          "SimulinkParameterParser:: null node pointer received");
+    return ErrorCode::SLX_ENULLPTR;
+  }
+
+  if (data->name == nullptr) {
+    l.log(Logger::V_ERROR,
+          "SimulinkParameterParser:: invalid xmlNodePtr received");
+    return ErrorCode::SLX_EINVAR;
+  }
+
+  this->dataObject = data;
+  return ErrorCode::SLX_OK;
+}
 
 std::shared_ptr<SimulinkElementBase>
 SimulinkArrayParser::getDataObject() const {
@@ -67,11 +85,5 @@ ErrorCode SimulinkArrayParser::parse() { return ErrorCode::SLX_OK; }
 //   return SimulinkErrorType::SLX_OK;
 // }
 
-// std::shared_ptr<SimulinkArray> SimulinkArrayParser ::get() {
-//   return std::shared_ptr<SimulinkArray>(std::move(p_));
-// }
-
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

@@ -42,6 +42,10 @@ SimulinkParameter::SimulinkParameter(const char *val)
 
 SimulinkDataType SimulinkParameter::getDataType() { return DataType; }
 
+void SimulinkParameter::setDataType(SimulinkDataType DataType_) {
+  this->DataType = DataType_;
+}
+
 const char *SimulinkParameter::getValue() { return Value; }
 
 ErrorCode SimulinkParameter::getValueAsDouble(Float &fval) {

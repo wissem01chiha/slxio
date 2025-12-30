@@ -25,7 +25,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Base class for SLX Array.
+ * @brief Base class for Simulink Array.
  * An SLX Array can contain nested arrays as well as objects derived from the
  * SimulinkObject class. For object references, it maintains a list of object
  * IDs to avoid mutable inclusion, forward declarations, and compiler conflicts.

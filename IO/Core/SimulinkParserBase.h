@@ -39,25 +39,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This class is designed so that each parser may call sub-parser objects.
  * Child classes should also add any errors thrown during parsing to the
  * internal error buffer for profiling and diagnostics.
+ * @tparam T 
  * Example
-* @code
-ErrorCode ParentParser::parse() { 
-  // call sub-parser 
-  SubParser sub;
-  sub.setInputData(...); 
-  ErrorCode ec = sub.parse(); 
-  // merge sub-parser errors into parent buffer 
-  buffer_.push_back(sub.getErrorBuffer()); 
-  return ec;
- }
+ * @code
+	ErrorCode ParentParser::parse() { 
+	  // call sub-parser 
+	  SubParser sub;
+	  sub.setInputData(...); 
+	  ErrorCode ec = sub.parse(); 
+	  // merge sub-parser errors into parent buffer 
+	  buffer_.push_back(sub.getErrorBuffer()); 
+	  return ec;
+	 }
   *@endcode
  */
+template <typename T>
 class APIEXPORT SimulinkParserBase {
 public:
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual ErrorCode setInputData(void* data) = 0;
+  virtual ErrorCode setInputData(const T data) = 0;
 
   /// @brief Retrieve the parsed SimulinkElementBase object.
   virtual std::shared_ptr<SimulinkElementBase> getDataObject() const = 0;
@@ -68,10 +70,10 @@ public:
   /// @brief Return the accumulated error buffer.
   /// This includes errors collected from all sub-parsers invoked
   /// during the parse method.
-  ErrorBuffer& getErrorBuffer();
+  ErrorBuffer &getErrorBuffer() { return buffer_; }
 
   /// @brief toget subparser buffer and merge it with the parent 
-  const ErrorBuffer& getErrorBuffer() const;
+  const ErrorBuffer &getErrorBuffer() const { return buffer_; }
 
 protected:
   SimulinkParserBase() = default;

@@ -1,11 +1,14 @@
-#include "SLXObjectParser.h"
-#include "SlxArrayParser.h"
-#include "SlxConstant.h"
-#include "SlxParameterParser.h"
+#include "SimulinkObjectParser.h"
+#include "SimulinkArrayParser.h"
+#include "LibXML2.h"
+#include "Logger.h"
+#include "SlxParameter.h"
 
 SimulinkObjectParser::SimulinkObjectParser() {
-  this->p_ = std::make_unique<SimulinkObject>();
+  this->ptr_ = std::make_unique<SimulinkObject>();
 }
+
+ErrorCode SimulinkObjectParser::setInputData(void *data) { return ErrorCode::SLX_OK; }
 
 SimulinkErrorType SimulinkObjectParser::build(xmlNodePtr nodePtr) {
 
@@ -79,8 +82,6 @@ SimulinkErrorType SimulinkObjectParser::build(xmlNodePtr nodePtr) {
   return SimulinkErrorType::SLX_OK;
 }
 
-std::shared_ptr<SimulinkObject> SimulinkObjectParser::get() {
-  return std::shared_ptr<SimulinkObject>(std::move(p_));
+std::shared_ptr<SimulinkObject> SimulinkObjectParser::getDataObject() {
+  return ptr_;
 }
-
-} // namespace slxio

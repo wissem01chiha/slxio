@@ -12,17 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMULINKBLOCKParser_H
-#define SIMULINKBLOCKParser_H
+#ifndef SIMULINKBLOCKPARSER_H
+#define SIMULINKBLOCKPARSER_H
 
-#include "LibXML2.h"
-#include "SLXParser.h"
-#include "SimulinkArrayParser.h"
+
+#include "ABINamespace.h"
+#include "APIExport.h"
 #include "SimulinkBlock.h"
-#include "SimulinkObjectParser.h"
-#include "SimulinkParameterParser.h"
-#include "SlxioNamespace.h"
+#include "SimulinkParserBase.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -38,16 +37,19 @@ SLXIO_ABI_NAMESPACE_BEGIN
   </Block>
  * @endcode
  */
-class SimulinkBlockParser : public SLXParser<SimulinkBlock> {
+class APIEXPORT SimulinkBlockParser final : public SimulinkParserBase {
 public:
   SimulinkBlockParser();
-  SimulinkErrorType build(xmlNodePtr node) override;
-  std::shared_ptr<SimulinkBlock> get() override;
+  ErrorCode setInputData(void *data) override;
+  std::shared_ptr<SimulinkElementBase> getDataObject() const override;
+  ErrorCode parse() override;
+  ~SimulinkBlockParser() = default;
 
 private:
-  std::shared_ptr<SimulinkBlock> p_;
+  std::shared_ptr<SimulinkBlock> ptr_;
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END 
 
-#endif // SIMULINKBLOCKParser_H
+#endif // SIMULINKBLOCKPARSER_H

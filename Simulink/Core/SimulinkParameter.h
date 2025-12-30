@@ -53,6 +53,12 @@ public:
   /// @brief get the resolved parameter SimulinkDataType
   SimulinkDataType getDataType();
 
+  /// @brief set the parameter data type
+  /// @warning this function overrites the default Min, Max values based on 
+  /// new type 
+  /// @note not implemented the automatic range override
+  void setDataType(SimulinkDataType DataType_);
+
   /// @brief Returns the default type representation of the parameter value.
   /// This provides the raw value as stored internally, without conversion
   /// to another data type.
