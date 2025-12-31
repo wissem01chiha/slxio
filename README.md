@@ -54,7 +54,9 @@ To install the prebuilt binary of the library, refer to the [Installation](#20-b
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
-The project is actively under development, and contributions are very welcome. See the [CONTRIBUTING](.github/CONTRIBUTING.md) page for more information.
+The project is under active development, and contributions are highly encouraged.  
+- For newcomers or junior developers, see the [Contributing](.github/CONTRIBUTING.md) guide to get started with the basics of Git, CMake, C++, and the workflow.  
+- For experienced developers, refer to the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
 >> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
 
