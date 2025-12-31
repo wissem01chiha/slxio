@@ -18,6 +18,8 @@
 #include "ABINamespace.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkObject.h"
+#include "LibXML2.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -31,7 +33,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
     </Object>
  * @endcode
  */
-class SimulinkObjectParser final : public SimulinkParserBase {
+class APIEXPORT SimulinkObjectParser final : public SimulinkParserBase<xmlNodePtr> {
 public:
   SimulinkObjectParser();
   ErrorCode setInputData(void *data) override;

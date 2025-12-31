@@ -157,7 +157,7 @@ function(scan_submodules _sorted_list _modules_dir_list)
         set(_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
         list(APPEND _deps_ids "${_dep_id}")
       else()
-        message(FATAL_ERROR "Module name should be Namespace::Identifier")
+        message(FATAL_ERROR "Module name should be Namespace::Identifier  ${_d}")
       endif()
     endforeach()
 
@@ -615,6 +615,15 @@ function(module_link_libraries module)
      message(FATAL_ERROR "MODULE_private_depends not defined")
   endif()
 
+  # Add system wise libraries if declared for each platform
+  # Window platform 
+  if(DEFINED MODULE_windows_depends)
+     foreach(sysdep IN LISTS MODULE_windows_depends)
+      target_link_libraries(${tmp_TARGET_NAME} PRIVATE ${sysdep})
+    endforeach()
+  endif()
+
+  # Posix Platforms : To-be Added -> Module.txt
 endfunction()
 
 #[==[.rst:
@@ -731,176 +740,6 @@ function(add_module module_name)
 
 endfunction()
 
-#[==[.rst:
-.. cmake:function:: add_test_sources(<module> [<source>...])
-
-  A wrapper around ``target_sources`` that works for module test sources.
-
-  Example:
-    add_test_sources(Common::Core
-        TestErrorBuffer.cxx
-    )
-
-#]==]
-function(add_test_sources module)
-
-  module_target_name(${module} tmp)
-  foreach(filename IN LISTS ARGN)
-    get_filename_component(test_name "${filename}" NAME_WE)
-    split_module_name(${module} tmp)
-    set(test_name "${tmp_NAMESPACE}${tmp_MODULE_NAME}${test_name}")
-    add_executable(${test_name} ${filename})
-    add_test_dependencies(${test_name} ${module})
-    test_include_directory(${test_name} ${module}) 
-    test_link_libraries(${test_name} ${module})
-    add_test(NAME ${test_name} COMMAND ${test_name})
-  endforeach()
-
-endfunction()
-
-#[==[.rst:
-.. cmake:function:: add_test_dependencies(<test_target> <module>)
-
-  A wrapper around ``add_dependencies`` that works for module test dependencies.
-  fetch all required and optional dependencies for the module tests targets
-
-#]==]
-function(add_test_dependencies test_target module)
-
-  module_target_name(${module} tmp)
-  add_dependencies(${test_target} ${tmp_TARGET_NAME})
-  set(MODULE_test_dep_targets "")
-  foreach(test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
-    module_target_name(${test_dep} dep_tmp)
-    list(APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME}) 
-  endforeach()
-  if(MODULE_test_dep_targets)
-    add_dependencies(${test_target} ${MODULE_test_dep_targets})
-  endif()
-
-endfunction()
-
-#[==[.rst:
-.. cmake:function:: test_link_libraries(<test_target>)
-
-  A wrapper around ``target_link_libraries`` that works for module test dependencies.
-
-  test_link_libraries(IOSlxTestParameterParser ThirdParty::libxml2)
-#]==]
-function(test_link_libraries test_target module)
-
-  module_target_name(${module} tmp)
-  target_link_libraries(${test_target}
-    PRIVATE ${tmp_TARGET_NAME}
-  )
-
-  set(MODULE_test_dep_targets "")
-
-  foreach(test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
-    module_target_name(${test_dep} dep_tmp)
-    list(APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
-  endforeach()
-
-  if(MODULE_test_dep_targets)
-    target_link_libraries(${test_target} PRIVATE ${MODULE_test_dep_targets})
-  endif()
-
-  get_target_property(_module_libs ${tmp_TARGET_NAME} LINK_LIBRARIES)
-  if(_module_libs)
-    target_link_libraries(${test_target} PRIVATE ${_module_libs})
-  endif()
-
-endfunction()
-
-#[==[.rst:
-  ..  cmake_function:test_include_directory(<test_target>)
-
-  A wrapper around target include directory but for modules test dependency
-
-#]==]
-function(test_include_directory test_target module)
-
-  module_target_name(${module} prefix)
-  get_target_property(_module_include_dirs ${prefix_TARGET_NAME} 
-    INCLUDE_DIRECTORIES
-  )
-
-  target_include_directories(${test_target} PUBLIC 
-      "${_module_include_dirs}" 
-      "${CMAKE_CURRENT_BINARY_DIR}" 
-      "${CMAKE_CURRENT_SOURCE_DIR}"
-  )
-
-  get_filename_component(_module_test_dir 
-    "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY
-  )
-  get_filename_component(_parent_dir "${_module_test_dir}" DIRECTORY)
-  get_filename_component(_module_dir "${_parent_dir}" DIRECTORY)
-
-  scan_module_file(_module  "${_module_dir}/Module.txt")
-
-  if(DEFINED _module_test_depends AND NOT "${_module_test_depends}" STREQUAL "")
-    foreach(test_dep IN LISTS _module_test_depends)
-      module_target_name(${test_dep} _dep_prefix)
-      get_target_property(_dep_mod_inc_dirs ${_dep_prefix_TARGET_NAME} 
-        INCLUDE_DIRECTORIES
-      )
-      target_include_directories(${test_target} PRIVATE "${_dep_mod_inc_dirs}")
-    endforeach()
-  endif()
-
-  if(DEFINED _module_test_optional_depends AND NOT "${_module_test_optional_depends}" STREQUAL "")
-    foreach(test_opt_dep IN LISTS  _module_test_optional_depends)
-      module_target_name(${test_opt_dep} _opt_dep_prefix)
-      get_target_property(_opt_dep_mod_inc_dirs ${_opt_dep_prefix_TARGET_NAME} 
-        INCLUDE_DIRECTORIES
-      )
-      target_include_directories(${test_target} PRIVATE "${_opt_dep_mod_inc_dirs}")
-    endforeach()
-  endif()
-
-endfunction()
-
-#[==[.rst:
-.. : cmake_function::add_module_binding(<module>)
-
-  if one module at least enable python binding, 
-    enable the global python binding support 
-    a flag to enable/disable extra depenacy for python binding for the module
-    set the var :
-      <module>_ENABLE_BINDING - to TRUE/FALSE
-      by defult all the binding folder is placed by langauge spec under /Binding/<LANG>
-      NOTE: if global binding enabled via ENABLE_BINDING and at leats one module
-      has local BINDING build enabled -> thirdpart deps like pybind, JNI, .. are fetched and 
-      propagrted, global flags to be throwen are :
-      
-      ``PYTHON_BINDING``
-      ``JAVA_BINDING``
-      ``LUA_BINDING``
-      ``WASM_BINDING``
-      ``OCTAVE_BINDING``
-#]==]
-function(add_module_binding module)
-
-endfunction()
-
-#[==[.rst:
-  helper to generate documentaion for a spec module based on enabled flag
-  if at least on module will genrte documentaion and doxygen not valiabl
-  invoke a fuction to install it
-  this  fuction will add the trqured files of the module to a global var 
-  to feed it to doxygen to gete the docmetnion 
-  set the vars :
-    DOC_MODULES - list of modules to gnerat to the document&ion to 
-#]==]
-function(add_module_documentation module)
-
-  if(${module}_ENABLE_DOCUMENTATION)
-    list(APPEND DOC_MODULES ${module})
-    set(DOC_MODULES ${DOC_MODULES} PARENT_SCOPE)
-  endif()
-
-endfunction()
 
 
 

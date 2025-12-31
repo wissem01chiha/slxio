@@ -15,7 +15,6 @@
 #ifndef SIMULINKBLOCKPARSER_H
 #define SIMULINKBLOCKPARSER_H
 
-
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "SimulinkBlock.h"

@@ -12,30 +12,37 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef JSONPARAMETERWRITER_H
-#define JSONPARAMETERWRITER_H
+#ifndef SIMULINKPARAMETERWRITER_H
+#define SIMULINKPARAMETERWRITER_H
 
 #include "ABINamespace.h"
 #include "SimulinkParserBase.h"
 #include "Json-c.h"
 #include "APIExport.h"
 #include "SimulinkParameter.h"
-#include <memory>
+#include "SimulinkWriterBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT JsonParameterWriter final 
-{
+/**
+ * @brief write a Simulink Parameter data object to a json element
+ */
+class APIEXPORT SimulinkParameterWriter final
+    : public SimulinkWriterBase<json_object*> {
 public:
-    JsonParameterWriter();
-    ~JsonParameterWriter();
-private:
-};
+  SimulinkParameterWriter();
 
+  ErrorCode Write() override;
+  void setOutputData(json_object* data) override;
+
+  ~SimulinkParameterWriter() =default;
+private:
+  json_object* dataObject;
+};
 
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // JSONPARAMETERWRITER_H
+#endif // SIMULINKPARAMETERWRITER_H

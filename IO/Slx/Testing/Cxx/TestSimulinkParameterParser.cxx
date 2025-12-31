@@ -11,23 +11,17 @@ protected:
       : parserPtr(nullptr), doc(nullptr){
   }
 
-  /// @brief get an input data object for the parser from a data file
-  /// @param xmlfilename name of the file from the loacl "Data/" directory
-  /// @return xmlNodePtr object
   xmlNodePtr getXmlNodePtr(const char* xmlfilename) {
-    /*
+  
     char xmlfilepath[512];
     snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
              PROJECT_ROOT_DIR, xmlfilename);
-
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
     if (!doc) {
       throw std::runtime_error("failed to read XML file");
     }
-
-    //xmlNodePtr root = xmlDocGetRootElement(doc);
- 
-    return root;*/
+    xmlNodePtr root = xmlDocGetRootElement(doc);
+    return root;
   
   }
   
@@ -38,7 +32,7 @@ protected:
       parserPtr = nullptr;
     }
     if (doc) {
-     xmlFreeDoc(doc);
+      xmlFreeDoc(doc);
     }
   }
     
@@ -49,9 +43,9 @@ protected:
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest") {
 
-  //xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
-  //ErrorCode status = parserPtr->setInputData(nodePtr);
-  //CHECK(status == ErrorCode::SLX_OK);
+  xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
+  ErrorCode status = parserPtr->setInputData(nodePtr);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,

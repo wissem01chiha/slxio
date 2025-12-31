@@ -1,3 +1,5 @@
+include(ModuleSummery)
+
 message("")  
 message("***************  ${PROJECT_NAME} Build Configuration Summary *******************")
 

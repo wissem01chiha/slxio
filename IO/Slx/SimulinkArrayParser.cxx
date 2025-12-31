@@ -1,5 +1,4 @@
 #include "SimulinkArrayParser.h"
-#include "LibXML2.h"
 #include "SlxParameter.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -15,13 +14,13 @@ ErrorCode SimulinkArrayParser::setInputData(const xmlNodePtr data) {
   Logger &l = Logger::getInstance();
   if (data == nullptr) {
     l.log(Logger::V_ERROR,
-          "SimulinkParameterParser:: null node pointer received");
+          "SimulinkArrayParser:: null node pointer received");
     return ErrorCode::SLX_ENULLPTR;
   }
 
   if (data->name == nullptr) {
     l.log(Logger::V_ERROR,
-          "SimulinkParameterParser:: invalid xmlNodePtr received");
+          "SimulinkArrayParser:: invalid xmlNodePtr received");
     return ErrorCode::SLX_EINVAR;
   }
 

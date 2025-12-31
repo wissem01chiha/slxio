@@ -14,46 +14,43 @@
 
 <!-- omit in toc -->
 ## Table of Contents
-- [SLXIO](#slxio)
-  - [1.0 Overview](#10-overview)
-    - [1.1 Features](#11-features)
-    - [1.2 Supported MATLAB](#12-supported-matlab)
-      - [1.2.1 Supported Simulink Blocks](#121-supported-simulink-blocks)
-      - [1.2.2 Supported MATLAB Releases](#122-supported-matlab-releases)
-    - [1.3 Contact](#13-contact)
-    - [1.4 Contributing](#14-contributing)
-  - [2.0 Building](#20-building)
-    - [2.1 Dependencies](#21-dependencies)
-      - [2.1.1 zlib](#211-zlib)
-      - [2.1.1 HDF5](#211-hdf5)
-    - [2.2 Building SLXIO](#22-building-slxio)
-      - [2.2.1 Quick Build Guide](#221-quick-build-guide)
-      - [2.2.2 Configure Options](#222-configure-options)
-    - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
-  - [3.0 Testing](#30-testing)
-    - [3.1 Running Tests](#31-running-tests)
-    - [3.2 Debugging Test Failures](#32-debugging-test-failures)
-  - [4.0 Examples](#40-examples)
-    - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
-      - [4.1.1 Using CPM](#411-using-cpm)
-    - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
-    - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
-    - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
-      - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
-      - [4.2.2 Access Model Block data](#422-access-model-block-data)
-  - [5.0 License](#50-license)
+- [1.0 Overview](#10-overview)
+  - [1.1 Features](#11-features)
+  - [1.2 Supported MATLAB](#12-supported-matlab)
+  - [1.3 Contact](#13-contact)
+  - [1.4 Contributing](#14-contributing)
+- [2.0 Building](#20-building)
+  - [2.1 Dependencies](#21-dependencies)
+    - [2.1.1 zlib](#211-zlib)
+    - [2.1.1 HDF5](#211-hdf5)
+  - [2.2 Building SLXIO](#22-building-slxio)
+    - [2.2.1 Quick Build Guide](#221-quick-build-guide)
+    - [2.2.2 Configure Options](#222-configure-options)
+  - [2.3 Platform Support](#23-platform-support)
+- [3.0 Testing](#30-testing)
+  - [3.1 Running Tests](#31-running-tests)
+  - [3.2 Debugging Test Failures](#32-debugging-test-failures)
+- [4.0 Examples](#40-examples)
+  - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
+    - [4.1.1 Using CPM](#411-using-cpm)
+  - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
+  - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
+  - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
+    - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
+    - [4.2.2 Access Model Block data](#422-access-model-block-data)
+- [5.0 License](#50-license)
 
 ## 1.0 Overview
 
-**Slxio** is an open-source C++11 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**Slxio** is an open-source C++11 library for reading and writing [simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the [ConQAT]() Project. Find the original source code here:  [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
+The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
-To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
+To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
@@ -171,7 +168,8 @@ cmake --install .
 
 ## 3.0 Testing
 
-Project tests are controlled via the CMake option `ENABLE_TESTING`.
+Project tests are enbaled via the CMake option `ENABLE_TESTING`.
+note that building test are only supported in debug build type by default, 
 
 ### 3.1 Running Tests
 To run all unit tests after building, use:
