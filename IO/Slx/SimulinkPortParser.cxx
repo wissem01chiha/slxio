@@ -5,15 +5,21 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-
-SimulinkErrorType SimulinkPortParser::build(xmlNodePtr nodePtr) {
-  return SimulinkErrorType::SLX_OK;
+SimulinkPortParser::SimulinkPortParser() {
+  ptr_ = std::make_shared<SimulinkPort>();
 }
 
-std::shared_ptr<SimulinkPort> SimulinkPortParser::get() {
-  return std::shared_ptr<SimulinkPort>(std::move(p_));
+ErrorCode SimulinkPortParser::setInputData(const xmlNodePtr data) {
+  return ErrorCode::SLX_OK;
 }
 
+std::shared_ptr<SimulinkPort> SimulinkPortParser::getDataObject() const {
+  return ptr_;
+}
+
+ErrorCode SimulinkPortParser::parse() { return ErrorCode::SLX_OK; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+

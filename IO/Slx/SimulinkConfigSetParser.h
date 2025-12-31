@@ -24,13 +24,17 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief Main Model Configuration Set Parser class */
-class SimulinkConfigSetParser final : public SimulinkParserBase<xmlNodePtr> {
+/**
+ * @brief Main Model Configuration Set Parser class.
+ */
+class APIEXPORT SimulinkConfigSetParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet> {
 public:
   SimulinkConfigSetParser();
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkElementBase> getDataObject() const override;
+  std::shared_ptr<SimulinkConfigSet> getDataObject() const override;
   ErrorCode parse() override;
+
   ~SimulinkConfigSetParser() =default;
 
 private:

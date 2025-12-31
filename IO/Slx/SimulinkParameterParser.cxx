@@ -1,6 +1,4 @@
 #include "SimulinkParameterParser.h"
-#include "Logger.h"
-#include "SimulinkDataType.h"
 #include "SlxParameter.h"
 #include <cstring>
 
@@ -9,7 +7,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkParameterParser::SimulinkParameterParser() {
   ptr_ = std::make_shared<SimulinkParameter>();
-  dataObject = nullptr;
 }
 
 ErrorCode SimulinkParameterParser::setInputData(const xmlNodePtr data) {
@@ -19,6 +16,12 @@ ErrorCode SimulinkParameterParser::setInputData(const xmlNodePtr data) {
     l.log(Logger::V_ERROR,
           "SimulinkParameterParser:: null node pointer received");
     return ErrorCode::SLX_ENULLPTR;
+  }
+
+  if (data->type != XML_ELEMENT_NODE) {
+    l.log(Logger::V_ERROR,
+          "SimulinkParameterParser:: non-element node received");
+    return ErrorCode::SLX_EINVAR;
   }
 
   if (data->name == nullptr) {
@@ -31,7 +34,7 @@ ErrorCode SimulinkParameterParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkElementBase>
+std::shared_ptr<SimulinkParameter>
 SimulinkParameterParser::getDataObject() const {
   return ptr_;
 }
@@ -39,52 +42,72 @@ SimulinkParameterParser::getDataObject() const {
 ErrorCode SimulinkParameterParser::parse() {
 
   Logger &l = Logger::getInstance();
+
   const char *paramClassStr = nullptr;
   const char *paramNameStr = nullptr;
   const char *paramValStr = nullptr;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next) {
-
     const char *attrName = reinterpret_cast<const char *>(attr->name);
 
+    xmlChar *content = xmlNodeGetContent(attr->children);
+    if (!content)
+      continue;
+
     if (strcmp(attrName, SlxParameter::PARAM_Class) == 0) {
-      paramClassStr =
-          reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
+      paramClassStr = strdup(reinterpret_cast<const char *>(content));
+    } else if (strcmp(attrName, SlxParameter::PARAM_Name) == 0) {
+      paramNameStr = strdup(reinterpret_cast<const char *>(content));
     }
-
-    if (strcmp(attrName, SlxParameter::PARAM_Name) == 0) {
-      paramNameStr =
-          reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
-    }
-    paramValStr =
-        reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
-    paramValStr = reinterpret_cast<const char *>(xmlNodeGetContent(dataObject));
+    xmlFree(content);
   }
 
-  ptr_ = std::make_shared<SimulinkParameter>(paramValStr);
-  ptr_->setName(paramNameStr);
-
-  if (paramClassStr!=nullptr && strcmp(paramClassStr, "double") == 0) {
-    ptr_->setDataType(SimulinkDataType::Double);
-  } else if (paramClassStr && strcmp(paramClassStr, "logical") == 0) {
-    ptr_->setDataType(SimulinkDataType::Boolean);
-  } else if (paramClassStr && strcmp(paramClassStr, "uint32") == 0) {
-    ptr_->setDataType(SimulinkDataType::UInt32);
-  } else if (paramClassStr && strcmp(paramClassStr, "int16") == 0) {
-    ptr_->setDataType(SimulinkDataType::Int16);
-  } else if (paramClassStr && strcmp(paramClassStr, "uint64") == 0) {
-    ptr_->setDataType(SimulinkDataType::UInt64);
-  } else if (paramClassStr && strcmp(paramClassStr, "string") == 0) {
-    ptr_->setDataType(SimulinkDataType::String);
-  } else if (paramClassStr && strcmp(paramClassStr, "int8") == 0) {
-    ptr_->setDataType(SimulinkDataType::Int8);
-  } else {
-    l.log(Logger::V_WARNING,
-          "Unrecognized parameter data type; defaulting to 'Auto'.");
-    ptr_->setDataType(SimulinkDataType::Auto);
+  xmlChar *nodeContent = xmlNodeGetContent(dataObject);
+  if (nodeContent) {
+    paramValStr = strdup(reinterpret_cast<const char *>(nodeContent));
   }
+
+  ptr_ = std::make_shared<SimulinkParameter>(paramValStr ? paramValStr : "");
+  if (paramNameStr) {
+    ptr_->setName(paramNameStr);
+  }
+
+  if (nodeContent) {
+    xmlFree(nodeContent);
+  }
+  ptr_->setDataType(getDataType(paramClassStr, l));
 
   return ErrorCode::SLX_OK;
+}
+
+SimulinkDataType SimulinkParameterParser::getDataType(const char *paramClassStr
+                                                      , Logger &l) {
+    if (!paramClassStr) {
+      l.log(Logger::V_WARNING,
+            "Null parameter class string; defaulting to 'Auto'.");
+      return SimulinkDataType::Auto;
+    }
+
+    if (strcmp(paramClassStr, "double") == 0) {
+      return SimulinkDataType::Double;
+    } else if (strcmp(paramClassStr, "logical") == 0) {
+      return SimulinkDataType::Boolean;
+    } else if (strcmp(paramClassStr, "uint32") == 0) {
+      return SimulinkDataType::UInt32;
+    } else if (strcmp(paramClassStr, "int16") == 0) {
+      return SimulinkDataType::Int16;
+    } else if (strcmp(paramClassStr, "uint64") == 0) {
+      return SimulinkDataType::UInt64;
+    } else if (strcmp(paramClassStr, "string") == 0) {
+      return SimulinkDataType::String;
+    } else if (strcmp(paramClassStr, "int8") == 0) {
+      return SimulinkDataType::Int8;
+    }
+
+    l.log(Logger::V_WARNING,
+          "Unrecognized parameter data type: ", paramClassStr,
+          " defaulting to 'Auto'.");
+    return SimulinkDataType::Auto;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -39,9 +39,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkBlockParser final : public SimulinkParserBase {
 public:
   SimulinkBlockParser();
+
   ErrorCode setInputData(void *data) override;
-  std::shared_ptr<SimulinkElementBase> getDataObject() const override;
+  std::shared_ptr<SimulinkBlock> getDataObject() const override;
   ErrorCode parse() override;
+
   ~SimulinkBlockParser() = default;
 
 private:

@@ -30,13 +30,19 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This class does not maintain state but is implemented in a non-static way to
  * match the implementation of  SimulinkLineParser.
  */
-class APIEXPORT SimulinkPortParser : public SimulinkParserBase<xmlNodePtr> {
+class APIEXPORT SimulinkPortParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkPort> {
 public:
-  SimulinkErrorType build(xmlNodePtr nodePtr) override;
-  std::shared_ptr<SimulinkPort> get() override;
+  SimulinkPortParser();
+
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkPort> getDataObject() const override;
+  ErrorCode parse() override;
+
+  ~SimulinkPortParser() =default;
 
 private:
-  std::unique_ptr<SimulinkPort> ptr_;
+  std::shared_ptr<SimulinkPort> ptr_;
   xmlNodePtr dataObject;
 };
 

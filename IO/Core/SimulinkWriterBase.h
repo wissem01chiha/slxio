@@ -22,7 +22,12 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-template<typename T>
+/**
+ * @brief base class for all exporters
+ * @tparam object data type to write to 
+ * @tparam P object
+ */
+template <typename T, typename P> 
 class SimulinkWriterBase {
 public:
   virtual ~SimulinkWriterBase() = default;
@@ -31,7 +36,11 @@ public:
   virtual ErrorCode Write() = 0;
 
   /// @brief Set input data for writing
-  virtual void setOutputData(const T data) = 0;
+  virtual ErrorCode setInputData(const T data) = 0;
+
+  /// @brief Set ouput data for writing
+  /// can be stream, string (eg toString()), custom struct
+  virtual ErrorCode setOutputData(const P data) = 0;
 
    /// @brief Return the accumulated error buffer.
   /// This includes errors collected from all sub-writers invoked

@@ -28,8 +28,7 @@ ErrorCode SimulinkArrayParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkElementBase>
-SimulinkArrayParser::getDataObject() const {
+std::shared_ptr<SimulinkArray> SimulinkArrayParser::getDataObject() const {
   return ptr_;
 }
 

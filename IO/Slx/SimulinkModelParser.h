@@ -17,7 +17,6 @@
 
 #include "ABINamespace.h"
 #include "LibXML2.h"
-#include "SLXParser.h"
 #include "SimulinkBlockParser.h"
 #include "SimulinkFile.h"
 #include "SimulinkLineParser.h"

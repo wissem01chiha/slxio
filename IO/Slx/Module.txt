@@ -25,11 +25,19 @@ INSTALL_TARGETS
   TRUE 
 CLASSES
   SimulinkParameterParser
-  SimulinkArrayParser  
+  SimulinkArrayParser 
+  SimulinkObjectParser
+  SimulinkPortParser
+  SimulinkConfigSetParser
+  SimulinkLineParser
 SOURCES
 HEADERS
   SimulinkParameterParser.h
   SimulinkArrayParser.h
+  SimulinkObjectParser.h
+  SimulinkPortParser.h
+  SimulinkConfigSetParser.h
+  SimulinkLineParser.h
   SlxParameter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
@@ -40,7 +48,9 @@ PRIVATE_DEPENDS
   IO::Core
   Common::Core
   Simulink::Core
+  Simulink::Configuration
   Simulink::Misc
+  Simulink::Data
   ThirdParty::libxml2
 TEST_DEPENDS 
   ThirdParty::doctest

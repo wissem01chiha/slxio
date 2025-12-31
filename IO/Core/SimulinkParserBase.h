@@ -18,10 +18,6 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorBuffer.h"
-#include "SimulinkElementBase.h"
-#include "Type.h"
-#include <string>
-#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -39,7 +35,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This class is designed so that each parser may call sub-parser objects.
  * Child classes should also add any errors thrown during parsing to the
  * internal error buffer for profiling and diagnostics.
- * @tparam T 
+ * @tparam T the input data object to read from 
+ * @tparam P the retrun type object beeing constructed 
  * Example
  * @code
 	ErrorCode ParentParser::parse() { 
@@ -52,8 +49,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 	  return ec;
 	 }
   *@endcode
+  * @note this class do not provide any implenation or provide a dummy cxx file
  */
-template <typename T>
+template <typename T, typename P>
 class APIEXPORT SimulinkParserBase {
 public:
   virtual ~SimulinkParserBase() = default;
@@ -62,7 +60,7 @@ public:
   virtual ErrorCode setInputData(const T data) = 0;
 
   /// @brief Retrieve the parsed SimulinkElementBase object.
-  virtual std::shared_ptr<SimulinkElementBase> getDataObject() const = 0;
+  virtual std::shared_ptr<P> getDataObject() const = 0;
 
   /// @brief parsing process.
   virtual ErrorCode parse() = 0;

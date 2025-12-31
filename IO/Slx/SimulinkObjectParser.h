@@ -33,16 +33,19 @@ SLXIO_ABI_NAMESPACE_BEGIN
     </Object>
  * @endcode
  */
-class APIEXPORT SimulinkObjectParser final : public SimulinkParserBase<xmlNodePtr> {
+class APIEXPORT SimulinkObjectParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkObject> {
 public:
   SimulinkObjectParser();
-  ErrorCode setInputData(void *data) override;
-  std::shared_ptr<SimulinkElementBase> getDataObject() const override;
+
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkObject> getDataObject() const override;
   ErrorCode parse() override;
   ~SimulinkObjectParser() =default;
 
 private:
   std::shared_ptr<SimulinkObject> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

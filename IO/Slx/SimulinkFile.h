@@ -13,9 +13,9 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
+#include "SimulinkFileBase.h"
 #include "File.h"
-#include <memory>
-#include <string>
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -26,9 +26,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * only one configuration set file (for model attached multiple configs
  * more then 1 xml file is present)
  */
-class SlxFile {
+class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
-  SlxFile(std::string path);
+  SimulinkFile(std::string path);
   ~SlxFile() = default;
   File *loadblockDiagram();
   File *loadConfigSet();

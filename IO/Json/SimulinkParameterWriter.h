@@ -29,15 +29,17 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief write a Simulink Parameter data object to a json element
  */
 class APIEXPORT SimulinkParameterWriter final
-    : public SimulinkWriterBase<json_object*> {
+    : public SimulinkWriterBase<SimulinkParameter, json_object*> {
 public:
   SimulinkParameterWriter();
 
   ErrorCode Write() override;
-  void setOutputData(json_object* data) override;
+  ErrorCode setInputData(const SimulinkParameter data) override;
+  ErrorCode setOutputData(json_object* data) override;
 
   ~SimulinkParameterWriter() =default;
 private:
+  std::shared_ptr<SimulinkParameter> ptr_;
   json_object* dataObject;
 };
 
