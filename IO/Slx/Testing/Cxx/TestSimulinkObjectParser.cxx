@@ -1,11 +1,11 @@
-#include "SimulinkObjectBuilder.h"
-#include "SlxioTestConfig.h"
-#include <gtest/gtest.h>
-#include <slog.h>
+#include "SimulinkObjectParser.h"
+#include "SlxConfig.h"
+#include "Doctest.h"
 
-using namespace slxio;
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkObjectBuilderTestFixture : public ::testing::Test {
+class SimulinkObjectParserTestFixture  {
 protected:
   SimulinkObjectBuilder *builderPtr;
   xmlNodePtr xmlNodePtrTest;
@@ -28,9 +28,12 @@ protected:
   void TearDown() override { slog_destroy(); }
 };
 
-TEST_F(SimulinkObjectBuilderTestFixture, BuildTest) {
+TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "BuildTest") {
 
   std::shared_ptr<SimulinkObject> obj = builderPtr->get();
   ASSERT_EQ(obj->getID(), 8);
   ASSERT_EQ(obj->getType(), SimulinkElementType::Object);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

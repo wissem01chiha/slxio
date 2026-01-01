@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "SimulinkArrayBuilder.h"
+#include "SimulinkArrayParser.h"
 #include "SlxConfig.h"
 
 SLXIO_NAMESPACE_BEGIN

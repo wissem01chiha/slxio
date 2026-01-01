@@ -69,7 +69,7 @@ Slxio uses a **module‑based build system** inspired by [VTK](https://vtk.org).
   - Bindings
   - Documentation pages
 
-See the [Module.txt](/Development/Module.txt) for configuration details.
+See the [Module.txt](/Development/ModuleTemplate.txt) for configuration details.
 
 ## 4.0 Build Automation 
 

@@ -39,7 +39,6 @@ protected:
   xmlDocPtr doc;
 };
 
-
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
@@ -67,7 +66,6 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
 
   std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
 }
-
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest") {
 

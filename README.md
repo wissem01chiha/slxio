@@ -73,7 +73,6 @@ To ensure compatibility when using **slxio** with other unsupported Simulink ver
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
 
-
 ### 1.3 Contact
 
 You can contact the maintainer through email at [mail](mailto:chihawissem08@gmail.com)
@@ -89,8 +88,8 @@ This section describes how to build slxio, see  [2.1](#21-dependencies) describe
 
 ### 2.1 Dependencies
 
-SLXIO dependencies are fetched automatically during build time. If not found, 
-they will be built from the bundled files included with the project. For external dependencies, SLXIO uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
+SLxio dependencies are fetched automatically during build time. If not found, 
+they will be built from the bundled files included with the project. For external dependencies, Slxio uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
 
 | Library | Version | Introduced In | Depends On | Notes |
 |--------|---------|----------------|------------|-------|
@@ -157,10 +156,10 @@ cmake --install .
 
 | OS          | Compiler | Version                                     |            SDK              | Arch            | C++ Standards              | Status |
 |-------------|----------|----------------------------------------------|----------------------------|-----------------|---------------------------|--------|
-| Windows 11  | MSVC     | 19.1x (VS 2017 v15.x, toolset v141)          | Windows SDK 10.0.x         | x64, Win32      | C++14, C++17              | NA  | 
-| Windows 11  | MSVC     | 19.2x (VS 2019 v16.x, toolset v142)          | Windows SDK 10.0.x         | x64, Win32, ARM64 | C++17, C++20            |  NA | 
-| Windows 11  | MSVC     | 19.43 (VS 2022 v17.13, toolset v143)         | Windows SDK 10.0.26100.0   | x64, Win32, ARM64 | C++17, C++20,C++23      | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)     | 
-| Windows 11  | MSVC     | 19.50 (VS 2026 v18.0, toolset v180)          | Windows SDK 10.0.26200.0   | x64, ARM64      | C++17, C++20, C++23       |  NA | 
+| Windows 11  | MSVC     | 19.1x (VS 2017 v15.x,  v141)          | Windows SDK 10.0.x         | x64, Win32      | C++14, C++17              | NA  | 
+| Windows 11  | MSVC     | 19.2x (VS 2019 v16.x,  v142)          | Windows SDK 10.0.x         | x64, Win32, ARM64 | C++17, C++20            |  NA | 
+| Windows 11  | MSVC     | 19.43 (VS 2022 v17.13,  v143)         | Windows SDK 10.0.26100.0   | x64, Win32, ARM64 | C++17, C++20,C++23      | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)     | 
+| Windows 11  | MSVC     | 19.50 (VS 2026 v18.0,  v180)          | Windows SDK 10.0.26200.0   | x64, ARM64      | C++17, C++20, C++23       |  NA | 
 | Windows 11  | MinGW‑w64 | GCC 11.2.0, 15.2.0                          | N/A                        | x64             | C++17, C++20              | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |  NA |       
 | Ubuntu 22.04| GCC      | 11.2.0, 13.3.0                               | glibc 2.35                 | x64             | C++17, C++20, C++23       | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |       
 | Ubuntu 22.04| Clang    | 14.0, 15.0                                   | LLVM libc++                | x64             | C++17, C++20              |  NA  |       

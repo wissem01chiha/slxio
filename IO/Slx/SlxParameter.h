@@ -17,6 +17,7 @@
 
 #include "ABINamespace.h"
 #include "Type.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

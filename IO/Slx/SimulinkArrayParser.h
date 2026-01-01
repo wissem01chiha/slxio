@@ -16,10 +16,10 @@
 #define SIMULINKARRAYPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
-#include "SimulinkParserBase.h"
-#include "SimulinkArray.h"
 #include "APIExport.h"
+#include "LibXML2.h"
+#include "SimulinkArray.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -32,13 +32,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * </Array>
  * @endcode
  */
-class APIEXPORT SimulinkArrayParser final : public SimulinkParserBase<xmlNodePtr, SimulinkArray> {
+class APIEXPORT SimulinkArrayParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkArray> {
 public:
   SimulinkArrayParser();
   ErrorCode setInputData(const xmlNodePtr data) override;
   std::shared_ptr<SimulinkArray> getDataObject() const override;
   ErrorCode parse() override;
-  ~SimulinkArrayParser() =default;
+  ~SimulinkArrayParser() = default;
 
 private:
   std::shared_ptr<SimulinkArray> ptr_;
