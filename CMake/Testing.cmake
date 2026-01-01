@@ -41,7 +41,7 @@ if(ENABLE_TESTING)
 
         if(ENABLE_COVERAGE AND MSVC)
             add_compile_options(/Zi)
-            add_link_options(/DEBUG /PROFILE)
+            add_link_options(/DEBUG)
         endif()
 
     endif()

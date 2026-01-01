@@ -28,7 +28,7 @@ option(ENABLE_SANITIZER "Enable sanitizers" OFF)
 option(ENABLE_CLANG_TIDY "Enable Clang-Tidy format" OFF)
 option(ENABLE_CPPCHECK "Enable CppCheck static analysis" OFF)
 set(USE_CLANG_FORMAT "WANTED" CACHE STRING "Clang-Format support mode")
-option(ENABLE_COVERAGE "Enable code coverage" ON)
+option(ENABLE_COVERAGE "Enable code coverage" OFF)
 option(ENABLE_FUZZING "Enable fuzzing support" OFF)
 
 option(ENABLE_DOCUMENTATION "Enable documentation generation" OFF)
