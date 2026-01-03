@@ -1,3 +1,4 @@
+<!-- omit in toc -->
 # SLXIO
 
 [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
@@ -13,50 +14,49 @@
 
 <!-- omit in toc -->
 ## Table of Contents
-- [SLXIO](#slxio)
-  - [1.0 Overview](#10-overview)
-    - [1.1 Features](#11-features)
-    - [1.2 Supported MATLAB](#12-supported-matlab)
-      - [1.2.1 Supported Simulink Blocks](#121-supported-simulink-blocks)
-      - [1.2.2 Supported MATLAB Releases](#122-supported-matlab-releases)
-    - [1.3 Contact](#13-contact)
-    - [1.4 Contributing](#14-contributing)
-  - [2.0 Building](#20-building)
-    - [2.1 Dependencies](#21-dependencies)
-      - [2.1.1 zlib](#211-zlib)
-      - [2.1.1 HDF5](#211-hdf5)
-    - [2.2 Building SLXIO](#22-building-slxio)
-      - [2.2.1 Quick Build Guide](#221-quick-build-guide)
-      - [2.2.2 Configure Options](#222-configure-options)
-    - [2.3 Platform \& Compiler Support](#23-platform--compiler-support)
-  - [3.0 Testing](#30-testing)
-    - [3.1 Running Tests](#31-running-tests)
-    - [3.2 Debugging Test Failures](#32-debugging-test-failures)
-  - [4.0 Examples](#40-examples)
-    - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
-      - [4.1.1 Using CPM](#411-using-cpm)
-    - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
-    - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
-    - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
-      - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
-      - [4.2.2 Access Model Block data](#422-access-model-block-data)
-  - [5.0 License](#50-license)
+- [1.0 Overview](#10-overview)
+  - [1.1 Features](#11-features)
+  - [1.2 Supported MATLAB](#12-supported-matlab)
+  - [1.3 Contact](#13-contact)
+  - [1.4 Contributing](#14-contributing)
+- [2.0 Building](#20-building)
+  - [2.1 Dependencies](#21-dependencies)
+    - [2.1.1 zlib](#211-zlib)
+    - [2.1.1 HDF5](#211-hdf5)
+  - [2.2 Building SLXIO](#22-building-slxio)
+    - [2.2.1 Quick Build Guide](#221-quick-build-guide)
+    - [2.2.2 Configure Options](#222-configure-options)
+  - [2.3 Platform Support](#23-platform-support)
+- [3.0 Testing](#30-testing)
+  - [3.1 Running Tests](#31-running-tests)
+  - [3.2 Debugging Test Failures](#32-debugging-test-failures)
+- [4.0 Examples](#40-examples)
+  - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
+    - [4.1.1 Using CPM](#411-using-cpm)
+  - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
+  - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
+  - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
+    - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
+    - [4.2.2 Access Model Block data](#422-access-model-block-data)
+- [5.0 License](#50-license)
 
 ## 1.0 Overview
 
-**slxio** is an open-source C++11 library for reading and writing [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**Slxio** is an open-source C++11 library for reading and writing [simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the [ConQAT]() Project. Find the original source code here:  [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
+The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
 
 **slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
-To install the prebuilt binary of the library, refer to the [Installation](installation) page and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
+To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
-The project is actively under development, and contributions are very welcome. See the [CONTRIBUTING](.github/CONTRIBUTING.md) page for more information.
+The project is under active development, and contributions are highly encouraged.  
+- For newcomers or junior developers, see the [Contributing](.github/CONTRIBUTING.md) guide to get started with the basics of Git, CMake, C++, and the workflow.  
+- For experienced developers, refer to the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
 >> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
 
@@ -71,23 +71,6 @@ Currently, there is no official documentation from MathWorks regarding the SLX d
 
 To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. 
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
-
-#### 1.2.1 Supported Simulink Blocks
-
-The following table lists the Simulink blocks that are currently supported for reading by **slxio**.  
-
-> **Note:** Reading or Writing block parameter support is currently not implemented for any blocks.
-
-| Block Name          | Supported Since | Read | Write |
-|---------------------|-----------------|------|-------|
-| Gain                |    0.1.0        | ✅   | ❌   |
-
-
-#### 1.2.2 Supported MATLAB Releases
-
-| MATLAB Release | Supported Since | Read | Write | C++ | Python |
-|----------------|-----------------|------|-------|-----|--------|
-| R2019a         | 0.1.0           | ✅   | ❌    | ✅  | ❌   |
 
 
 ### 1.3 Contact
@@ -105,8 +88,8 @@ This section describes how to build slxio, see  [2.1](#21-dependencies) describe
 
 ### 2.1 Dependencies
 
-SLXIO dependencies are fetched automatically during build time. If not found, 
-they will be built from the bundled files included with the project. For external dependencies, SLXIO uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
+SLxio dependencies are fetched automatically during build time. If not found, 
+they will be built from the bundled files included with the project. For external dependencies, Slxio uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
 
 | Library | Version | Introduced In | Depends On | Notes |
 |--------|---------|----------------|------------|-------|
@@ -168,21 +151,26 @@ cmake --install .
 | CMAKE_INSTALL_PREFIX            | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
 
 
-### 2.3 Platform & Compiler Support
+### 2.3 Platform Support
 
-| **OS**                | **Compiler** | **Version(s)**                          | **Status**             |
-|------------------------|--------------|-----------------------------------------|------------------------|
-| Windows 11             | MSVC         | 19.43 (Visual Studio 2022 v17.13)       | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)           |
-| Windows 11             | MinGW-w64    | GCC 11.2.0 , 15.2.0                             | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |
-| Ubuntu 22.04 LTS       | GNU GCC      | 11.2.0, 13.3.0                          | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |
-| Ubuntu 22.04 LTS       | Clang        | 14.0, 15.0                              | N/A        |
-| MacOS | Apple Clang | 14.0, 15.0                              | N/A |
+
+| OS          | Compiler | Version                                     |            SDK              | Arch            | C++ Standards              | Status |
+|-------------|----------|----------------------------------------------|----------------------------|-----------------|---------------------------|--------|
+| Windows 11  | MSVC     | 19.1x (VS 2017 v15.x,  v141)          | Windows SDK 10.0.x         | x64, Win32      | C++14, C++17              | NA  | 
+| Windows 11  | MSVC     | 19.2x (VS 2019 v16.x,  v142)          | Windows SDK 10.0.x         | x64, Win32, ARM64 | C++17, C++20            |  NA | 
+| Windows 11  | MSVC     | 19.43 (VS 2022 v17.13,  v143)         | Windows SDK 10.0.26100.0   | x64, Win32, ARM64 | C++17, C++20,C++23      | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)     | 
+| Windows 11  | MSVC     | 19.50 (VS 2026 v18.0,  v180)          | Windows SDK 10.0.26200.0   | x64, ARM64      | C++17, C++20, C++23       |  NA | 
+| Windows 11  | MinGW‑w64 | GCC 11.2.0, 15.2.0                          | N/A                        | x64             | C++17, C++20              | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |  NA |       
+| Ubuntu 22.04| GCC      | 11.2.0, 13.3.0                               | glibc 2.35                 | x64             | C++17, C++20, C++23       | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |       
+| Ubuntu 22.04| Clang    | 14.0, 15.0                                   | LLVM libc++                | x64             | C++17, C++20              |  NA  |       
+| macOS 14    | Apple Clang | 14.0, 15.0                                | Xcode toolchain            | arm64, x64      | C++17, C++20              | NA  |       
 
 
 
 ## 3.0 Testing
 
-Project tests are controlled via the CMake option `SLXIO_ENABLE_TESTING`.
+Project tests are enbaled via the CMake option `ENABLE_TESTING`.
+note that building test are only supported in debug build type by default, 
 
 ### 3.1 Running Tests
 To run all unit tests after building, use:

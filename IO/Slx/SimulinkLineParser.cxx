@@ -1,23 +1,31 @@
 #include "SimulinkLineParser.h"
-#include <slog.h>
+#include "SimulinkParameterParser.h"
 
-namespace slxio {
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkLineParser::SimulinkLineParser() {
-  this->p_ = std::make_unique<SimulinkLine>();
+SimulinkLineParser::SimulinkLineParser() : dataObject(nullptr) {
+  this->ptr_ = std::make_shared<SimulinkLine>();
 }
 
-SimulinkErrorType SimulinkLineParser::build(xmlNodePtr nodePtr) {
-
-  if (nodePtr == nullptr) {
-    slog_fatal("SimulinkLineParser::build failed: null node pointer received");
-    return SimulinkErrorType::SLX_ENULLPTR;
+ErrorCode SimulinkLineParser::setInputData(const xmlNodePtr data) {
+  
+  if (!data) {
+    //    slog_fatal("SimulinkLineParser::build failed: null node pointer
+    //    received"); 
+    return ErrorCode::SLX_ENULLPTR;
   }
-  return SimulinkErrorType::SLX_OK;
+  return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkLine> SimulinkLineParser::get() {
-  return std::shared_ptr<SimulinkLine>(std::move(p_));
+std::shared_ptr<SimulinkLine> SimulinkLineParser::getDataObject() const {
+  return ptr_;
 }
 
-}; // namespace slxio
+ErrorCode SimulinkLineParser::parse() { return ErrorCode::SLX_OK; }
+
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+

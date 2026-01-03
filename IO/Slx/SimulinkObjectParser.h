@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXOBJECTPARSER_H
-#define SLXOBJECTPARSER_H
+#ifndef SIMULINKOBJECTPARSER_H
+#define SIMULINKOBJECTPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
-#include "SLXParser.h"
+#include "SimulinkParserBase.h"
 #include "SimulinkObject.h"
+#include "LibXML2.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -32,17 +33,22 @@ SLXIO_ABI_NAMESPACE_BEGIN
     </Object>
  * @endcode
  */
-class SLXObjectParser : public Parser {
+class APIEXPORT SimulinkObjectParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkObject> {
 public:
-  SLXObjectParser();
-  SimulinkErrorType build(xmlNodePtr node) override;
-  std::shared_ptr<SimulinkObject> getData() override;
+  SimulinkObjectParser();
+
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkObject> getDataObject() const override;
+  ErrorCode parse() override;
+  ~SimulinkObjectParser() =default;
 
 private:
   std::shared_ptr<SimulinkObject> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SLXOBJECTPARSER_H
+#endif // SIMULINKOBJECTPARSER_H

@@ -133,7 +133,7 @@
 #define LIBXML_C14N_ENABLED
 #endif
 
-#if 1
+#if 0
 /**
  * Whether the Catalog support is configured in
  */
@@ -202,7 +202,7 @@
 #define LIBXML_REGEXP_ENABLED
 #endif
 
-#if 1
+#if 0
 /**
  * Whether the automata interfaces are compiled in
  */

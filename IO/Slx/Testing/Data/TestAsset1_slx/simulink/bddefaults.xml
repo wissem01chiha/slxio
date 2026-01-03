@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BlockDiagramDefaults>
+  <SystemDefaults>
+    <P Name="PaperOrientation">landscape</P>
+    <P Name="PaperPositionMode">auto</P>
+    <P Name="PaperType">usletter</P>
+    <P Name="PaperUnits">inches</P>
+    <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+    <P Name="TiledPageScale">1</P>
+    <P Name="ShowPageBoundaries">off</P>
+    <P Name="ModelBrowserVisibility">on</P>
+    <P Name="ModelBrowserWidth">200</P>
+    <P Name="ScreenColor">white</P>
+    <P Name="ZoomFactor">100</P>
+    <P Name="PortBlocksUseCompactNotation">off</P>
+    <P Name="Open">off</P>
+  </SystemDefaults>
+  <BlockDefaults>
+    <P Name="ForegroundColor">black</P>
+    <P Name="BackgroundColor">white</P>
+    <P Name="DropShadow">off</P>
+    <P Name="NamePlacement">normal</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">10</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="ShowName">on</P>
+    <P Name="HideAutomaticName">on</P>
+    <P Name="BlockRotation">0</P>
+    <P Name="BlockMirror">off</P>
+  </BlockDefaults>
+  <AnnotationDefaults>
+    <P Name="HorizontalAlignment">left</P>
+    <P Name="VerticalAlignment">top</P>
+    <P Name="ForegroundColor">black</P>
+    <P Name="BackgroundColor">white</P>
+    <P Name="DropShadow">off</P>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">10</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+    <P Name="MarkupType">model</P>
+    <P Name="UseDisplayTextAsClickCallback">off</P>
+    <P Name="AnnotationType">note_annotation</P>
+    <P Name="FixedHeight">off</P>
+    <P Name="FixedWidth">off</P>
+    <P Name="Interpreter">off</P>
+  </AnnotationDefaults>
+  <LineDefaults>
+    <P Name="FontName">Helvetica</P>
+    <P Name="FontSize">9</P>
+    <P Name="FontWeight">normal</P>
+    <P Name="FontAngle">normal</P>
+  </LineDefaults>
+  <MaskDefaults SelfModifiable="off">
+    <Display IconFrame="on" IconOpaque="opaque" RunInitForIconRedraw="analyze" IconRotate="none" PortRotate="default" IconUnits="autoscale"/>
+    <MaskParameter Evaluate="on" Tunable="on" NeverSave="off" Internal="off" ReadOnly="off" Enabled="on" Visible="on" ToolTip="on"/>
+    <DialogControl>
+      <ControlOptions Visible="on" Enabled="on" Row="new" HorizontalStretch="on" PromptLocation="top" Orientation="horizontal" Scale="linear" TextType="Plain Text" Expand="off" ShowFilter="on" ShowParameterName="on" WordWrap="on" AlignPrompts="off"/>
+    </DialogControl>
+  </MaskDefaults>
+  <BlockParameterDefaults>
+    <Block BlockType="Constant">
+      <P Name="Value">1</P>
+      <P Name="VectorParams1D">on</P>
+      <P Name="SamplingMode">Sample based</P>
+      <P Name="OutMin">[]</P>
+      <P Name="OutMax">[]</P>
+      <P Name="OutDataTypeStr">Inherit: Inherit from &apos;Constant value&apos;</P>
+      <P Name="LockScale">off</P>
+      <P Name="SampleTime">inf</P>
+      <P Name="FramePeriod">inf</P>
+      <P Name="PreserveConstantTs">off</P>
+    </Block>
+    <Block BlockType="Scope">
+      <P Name="DefaultConfigurationName">Simulink.scopes.TimeScopeBlockCfg</P>
+    </Block>
+  </BlockParameterDefaults>
+</BlockDiagramDefaults>

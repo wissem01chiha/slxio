@@ -1,7 +1,11 @@
-#include "SimulinkArrayBuilder.h"
+#include "Doctest.h"
+#include "SimulinkArrayParser.h"
+#include "SlxConfig.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkArrayBuilderTestFixture : public ::testing::Test {
+class SimulinkArrayBuilderTestFixture {
 protected:
   SimulinkArrayBuilder *builderPtr;
   xmlNodePtr xmlNodePtrTest;
@@ -27,3 +31,7 @@ TEST_F(SimulinkArrayBuilderTestFixture, BuildTest) {
   std::shared_ptr<SimulinkArray> obj = builderPtr->get();
   ASSERT_EQ(obj->getType(), SimulinkElementType::Array);
 }
+
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

@@ -1,0 +1,27 @@
+﻿{
+  "configurations": [
+    {
+      "buildCommandArgs": "",
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "cmakeCommandArgs": "",
+      "configurationType": "Debug",
+      "ctestCommandArgs": "--output-on-failure",
+      "generator": "Ninja",
+      "inheritEnvironments": [ "msvc_x64" ],
+      "installRoot": "${projectDir}\\install\\${name}",
+      "name": "x64-Debug",
+      "intelliSenseMode": "windows-msvc-x64"
+    },
+    {
+      "name": "x64-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\build\\${name}",
+      "installRoot": "${projectDir}\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x64_x64" ]
+    }
+  ]
+}

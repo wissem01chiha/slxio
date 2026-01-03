@@ -1,86 +1,125 @@
-#include "SLXObjectParser.h"
-#include "SlxArrayParser.h"
-#include "SlxConstant.h"
-#include "SlxParameterParser.h"
+#include "SimulinkObjectParser.h"
+#include "Logger.h"
+#include "SimulinkArrayParser.h"
+#include "SimulinkParameterParser.h"
+#include "SlxParameter.h"
 
-SimulinkObjectParser::SimulinkObjectParser() {
-  this->p_ = std::make_unique<SimulinkObject>();
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+SimulinkObjectParser::SimulinkObjectParser() : dataObject(nullptr) {
+  ptr_ = std::make_shared<SimulinkObject>();
 }
 
-SimulinkErrorType SimulinkObjectParser::build(xmlNodePtr nodePtr) {
+ErrorCode SimulinkObjectParser::setInputData(const xmlNodePtr data) {
 
-  if (nodePtr == nullptr) {
-    slog_fatal(
-        "SimulinkObjectParser::build failed: null node pointer received");
-    return SimulinkErrorType::SLX_ENULLPTR;
+  Logger &l = Logger::getInstance();
+
+  if (data == nullptr) {
+    l.log(Logger::V_ERROR, "SimulinkObjectParser:: null node pointer received");
+    buffer_.push_back(ErrorCode::SLX_ENULLPTR);
+    return ErrorCode::SLX_ENULLPTR;
   }
 
-  uint32 id = 0;
+  dataObject = data;
+  return ErrorCode::SLX_OK;
+}
+
+std::shared_ptr<SimulinkObject> SimulinkObjectParser::getDataObject() const {
+  return ptr_;
+}
+
+ErrorCode SimulinkObjectParser::parse() {
+
+  Logger &l = Logger::getInstance();
+
+  Index id = (Index)0;
   std::string name, className;
 
-  for (xmlAttrPtr attr = nodePtr->properties; attr; attr = attr->next) {
+  for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next) {
+
     std::string attrName = reinterpret_cast<const char *>(attr->name);
     std::string attrValue =
         reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
-    if (attrName == SimulinkConstant::PARAM_ObjectID) {
-      id = static_cast<uint32>(std::stoul(attrValue));
-    } else if (attrName == SimulinkConstant::PARAM_ClassName) {
+    if (attrName == SlxParameter::PARAM_ObjectID) {
+      id = static_cast<Index>(std::stoul(attrValue));
+    } else if (attrName == SlxParameter::PARAM_ClassName) {
       className = attrValue;
-    } else if (attrName == SimulinkConstant::PARAM_PropName) {
+    } else if (attrName == SlxParameter::PARAM_PropName) {
       name = attrValue;
     }
   }
-  this->p_ = std::make_unique<SimulinkObject>(id, name, className);
+  ptr_ = std::make_shared<SimulinkObject>(id, name, className);
 
-  for (xmlNodePtr nodePtr_ = nodePtr->children; nodePtr_ != nullptr;
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
        nodePtr_ = nodePtr_->next) {
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
-        xmlStrcmp(nodePtr_->name,
-                  BAD_CAST SimulinkConstant::SECTION_Parameter) == 0) {
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) ==
+            0) {
 
       SimulinkParameterParser *paramParserPtr = new SimulinkParameterParser();
-      SimulinkErrorType status = paramParserPtr->build(nodePtr_);
-      if (status != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectParser::build failed: fail to build object "
-                   "Parameter");
-        return status;
+      ErrorCode subInputStatus = paramParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != ErrorCode::SLX_OK) {
+        buffer_.push_back(subInputStatus);
+        return subInputStatus;
       }
-      p_->add(paramParserPtr->get());
+
+      ErrorCode paramParseStatus = paramParserPtr->parse();
+      if (paramParseStatus != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR, "SimulinkObjectParser::build failed: fail to "
+                               "build object Parameter");
+        buffer_.push_back(paramParseStatus);
+        return paramParseStatus;
+      }
+      ptr_->add(paramParserPtr->getDataObject());
+      delete paramParserPtr;
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
-        xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Object) ==
-            0) {
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0) {
 
-      SimulinkObjectParser *objParserPtr = new SimulinkObjectParser();
-      SimulinkErrorType subObjStat = objParserPtr->build(nodePtr_);
-      if (subObjStat != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectParser::build failed: fail to build "
-                   "subobject elment");
+      SimulinkObjectParser *subObjParserPtr = new SimulinkObjectParser();
+      ErrorCode subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      if (subObjInputStatus != ErrorCode::SLX_OK) {
+        buffer_.push_back(subObjInputStatus);
+        return subObjInputStatus;
+      }
+
+      ErrorCode subObjStat = subObjParserPtr->parse();
+      if (subObjStat != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR,
+              "SimulinkObjectParser::build failed: fail to build "
+              "subobject elment");
+        buffer_.push_back(subObjStat);
         return subObjStat;
       }
-      p_->add(objParserPtr->get());
+      ptr_->add(subObjParserPtr->getDataObject());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
-        xmlStrcmp(nodePtr_->name, BAD_CAST SimulinkConstant::SECTION_Array) ==
-            0) {
-      SimulinkArrayParser *arrParserPtr = new SimulinkArrayParser();
-      SimulinkErrorType subArrStat = arrParserPtr->build(nodePtr_);
-      if (subArrStat != SimulinkErrorType::SLX_OK) {
-        slog_fatal("SimulinkObjectParser::build failed: fail to build "
-                   "subArray elment");
-        return subArrStat;
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0) {
+      SimulinkArrayParser *subArrParserPtr = new SimulinkArrayParser();
+      ErrorCode subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      if (subArrInputStatus != ErrorCode::SLX_OK) {
+        buffer_.push_back(subArrInputStatus);
+        return subArrInputStatus;
       }
-      p_->add(arrParserPtr->get());
+
+      ErrorCode subArrParseStat = subArrParserPtr->parse();
+      if (subArrParseStat != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR,
+              "SimulinkObjectParser::build failed: fail to build "
+              "subArray elment");
+        buffer_.push_back(subArrParserPtr->getErrorBuffer());
+        return subArrParseStat;
+      }
+      ptr_->add(subArrParserPtr->getDataObject());
+      delete subArrParserPtr;
     }
   }
-  return SimulinkErrorType::SLX_OK;
+  return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkObject> SimulinkObjectParser::get() {
-  return std::shared_ptr<SimulinkObject>(std::move(p_));
-}
-
-} // namespace slxio
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

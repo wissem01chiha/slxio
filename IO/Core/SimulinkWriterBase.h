@@ -12,45 +12,52 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef WRITER_H
-#define WRITER_H
+#ifndef SIMULINKWRITERBASE_H
+#define SIMULINKWRITERBASE_H
 
 #include "ABINamespace.h"
-#include "Type.h"
-#include <string>
+#include "ErrorBuffer.h"
+#include "ErrorCode.h"
+#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Writer {
+/**
+ * @brief base class for all exporters
+ * @tparam object data type to write to 
+ * @tparam P object
+ */
+template <typename T, typename P> 
+class SimulinkWriterBase {
 public:
-  enum ErrorCode { SLX_OK = 0, InvalidData, SLX_ENOTIMPL };
-
-  virtual ~Writer() = default;
+  virtual ~SimulinkWriterBase() = default;
 
   /// @brief Write data to output
   virtual ErrorCode Write() = 0;
 
   /// @brief Set input data for writing
-  virtual void setInputData(const void *data, size_t size) = 0;
+  virtual ErrorCode setInputData(const T data) = 0;
 
-  /// @brief Set input data by index
-  virtual void setInputData(Index index, const void *data, size_t size) = 0;
+  /// @brief Set ouput data for writing
+  /// can be stream, string (eg toString()), custom struct
+  virtual ErrorCode setOutputData(const P data) = 0;
 
-  virtual std::string toString() = 0;
-  static const char *toString(ErrorCode code);
+   /// @brief Return the accumulated error buffer.
+  /// This includes errors collected from all sub-writers invoked
+  /// during the parse method.
+  ErrorBuffer &getErrorBuffer() { return buffer_; }
+
+  /// @brief toget subwriter buffer and merge it with the parent
+  const ErrorBuffer &getErrorBuffer() const { return buffer_; }
 
 protected:
-  Writer() = default;
-  void setError(ErrorCode code);
+  SimulinkWriterBase() = default;
 
-private:
-  Writer(const Writer &) = delete;
-  Writer &operator=(const Writer &) = delete;
-
-  ErrorCode lastError_;
+/// @brief Internal error buffer
+  ErrorBuffer buffer_;
 };
 SLXIO_NAMESPACE_END
 SLXIO_ABI_NAMESPACE_END
 
-#endif // WRITER_H
+#endif // SIMULINKWRITERBASE_H

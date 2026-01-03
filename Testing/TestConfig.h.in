@@ -15,6 +15,6 @@
 #ifndef TESTCONFIG_H
 #define TESTCONFIG_H
 
-#define PROJECT_ROOT "@PROJECT_ROOT@"
+#define PROJECT_ROOT_DIR "@PROJECT_ROOT@"
 
 #endif // TESTCONFIG_H

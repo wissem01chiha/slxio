@@ -24,8 +24,8 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  SimulinkParserBase
-  SimulinkWriterBase
+	SimulinkParserBase
+	SimulinkWriterBase
 SOURCES
 HEADERS
   SimulinkParserBase.h

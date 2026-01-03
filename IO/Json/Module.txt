@@ -24,10 +24,10 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  JsonParameterWriter 
+  SimulinkParameterWriter 
 SOURCES
 HEADERS
- JsonParameterWriter.h
+ SimulinkParameterWriter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS

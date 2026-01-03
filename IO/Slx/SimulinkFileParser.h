@@ -12,56 +12,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SlxFilePARSER_H
-#define SlxFilePARSER_H
+#ifndef SIMULINKFILEPARSER_H
+#define SIMULINKFILEPARSER_H
 
 #include "ABINamespace.h"
 #include "ErrorCode.h"
 #include "File.h"
 #include "LibXML2.h"
+#include "APIExport.h"
 #include "SimulinkParserBase.h"
-#include "SlxFile.h"
+#include "SimulinkFile.h"
 
-/**
- * @brief to replat the SLXParser by this class
- */
-class SlxFileParser : public Parser {
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+/// @brief Main Simulink File Parser class 
+/// @note this is an internal API, a user friendly API will 
+/// be implemented to simplify access of canonical elments 
+/// without need to pass with this class 
+class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile> { 
 public:
-  SlxFileParser(const File &path);
-  SlxFileParser(const char *path);
-  SlxFileParser(const SlxFileParser &other);
-  SlxFileParser &operator=(const SlxFileParser &) = delete;
+  SimulinkFileParser();
 
-  ~SlxFileParser();
-  // SimulinkErrorType open();
-  // SimulinkErrorType close();
-  bool isEOF() const;
+  ErrorCode setInputData(const File& fs) override;
+  std::shared_ptr<SimulinkFile> getDataObject() const override;
+  ErrorCode parse() override;
 
-  // SimulinkErrorType load(const std::string &name, void *buffer, size_t size);
-  // SimulinkErrorType load();
-  // SimulinkErrorType copy(SimulinkFile &destFile) const;
-  // const char *get_extension() const;
-  // SimulinkErrorType cast_extension();
-  ErrorCode extract();
-  void info();
+  ~SimulinkFileParser() =default;
 
 private:
-  std::vector<char> buffer_;
-  bool isZip = 0;
-  bool isSLX = 0;
-  bool isMDL = 0;
-  bool isOpen;
-  bool isClose;
-  std::time_t date = 0;
-  uint32 filecount;
-#ifdef PLATFORM_WIN32
-  WIN32_FIND_DATAW entry;
-#endif
-  uint32 validentry;
-  uint32 get_file_count();
-  ErrorCode check_extension();
-  const char *get_extension(const char *fPath) const;
-  ErrorCode extract_to(const char *dir);
+  std::shared_ptr<SimulinkFile> ptr_;
+  File fs_;
 };
 
-#endif // SlxFilePARSER_H
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKFILEPARSER_H

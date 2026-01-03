@@ -1,13 +1,18 @@
-#include "SlxFileParser.h"
-#include <chrono>
-#include <ctime>
-#include <slog.h>
+#include "SimulinkFileParser.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <vector>
 #include <zip.h>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+SimulinkFileParser::SimulinkFileParser() {
+  ptr_ = std::make_shared<SimulinkFile>();
+}
 
 SimulinkFile::SimulinkFile(const File &path) {
 
@@ -242,5 +247,8 @@ const char *SimulinkFile::get_extension(const char *fPath) const {
 
   return dot + 1;
 }
-}
-; // namespace slxio
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+

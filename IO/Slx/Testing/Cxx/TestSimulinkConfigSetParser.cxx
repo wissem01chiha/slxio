@@ -1,9 +1,6 @@
-#include "SimulinkConfigSetBuilder.h"
-#include "SlxioTestConfig.h"
-#include <gtest/gtest.h>
-#include <slog.h>
+#include "SimulinkConfigSetParser.h"
+#include "SlxConfig.h"
 
-using namespace slxio;
 
 class SimulinkConfigSetBuilderTestFixture : public ::testing::Test {
 protected:

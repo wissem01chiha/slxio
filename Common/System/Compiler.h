@@ -31,9 +31,6 @@
 #if HAVE_IO_H
 #include <io.h>
 #endif
-#if HAVE_WINDOWS_H
-//#include <windows.h>
-#endif
 #else
 #if HAVE_SYS_STAT_H
 #include <sys/stat.h>

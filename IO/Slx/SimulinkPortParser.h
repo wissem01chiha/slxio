@@ -12,13 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLXPORTPARSER_H
-#define SLXPORTPARSER_H
+#ifndef SIMULINKPORTPARSER_H
+#define SIMULINKPORTPARSER_H
 
 #include "ABINamespace.h"
 #include "LibXML2.h"
-#include "SLXParser.h"
+#include "APIExport.h"
+#include "SimulinkParserBase.h"
 #include "SimulinkPort.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief This class is responsible for building the ports of Simulink blocks as
@@ -26,13 +30,23 @@
  * This class does not maintain state but is implemented in a non-static way to
  * match the implementation of  SimulinkLineParser.
  */
-class SLXPortParser : public SLXParser<SimulinkPort> {
+class APIEXPORT SimulinkPortParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkPort> {
 public:
-  SimulinkErrorType build(xmlNodePtr nodePtr) override;
-  std::shared_ptr<SimulinkPort> get() override;
+  SimulinkPortParser();
+
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkPort> getDataObject() const override;
+  ErrorCode parse() override;
+
+  ~SimulinkPortParser() =default;
 
 private:
-  std::unique_ptr<SimulinkPort> p_;
+  std::shared_ptr<SimulinkPort> ptr_;
+  xmlNodePtr dataObject;
 };
 
-#endif // SLKPORTParser_H
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKPORTPARSER_H

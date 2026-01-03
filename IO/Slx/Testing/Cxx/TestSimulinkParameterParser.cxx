@@ -1,46 +1,82 @@
-#include "SimulinkParameterBuilder.h"
+#include "Doctest.h"
+#include "SimulinkParameterParser.h"
+#include "SlxConfig.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-using namespace slxio;
-
-class SimulinkParameterBuilderTestFixture : public ::testing::Test {
+class SimulinkParameterParserTestFixture {
 protected:
-  SimulinkParameterBuilder *builderPtr;
-  xmlNodePtr xmlNodePtrTest;
-  char path_xml[512];
+  SimulinkParameterParserTestFixture()
+      : parserPtr(new SimulinkParameterParser()), doc(nullptr) {}
 
-  void SetUp() override {
-
-    slog_init("logfile", SLOG_FLAGS_ALL, 0);
-    slog_disable(SLOG_TRACE);
-
-    snprintf(path_xml, sizeof(path_xml), "%s/test/assets/parameter.xml",
-             PROJECT_ROOT);
-
-    builderPtr = new SimulinkParameterBuilder();
-
-    xmlDocPtr doc;
-    doc = xmlReadFile(path_xml, NULL, 0);
-    xmlNodePtrTest = xmlDocGetRootElement(doc);
-
-    builderPtr->build(xmlNodePtrTest);
+  xmlNodePtr getXmlNodePtr(const char* xmlfilename) {
+  
+    char xmlfilepath[512];
+    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
+             PROJECT_ROOT_DIR, xmlfilename);
+    doc = xmlReadFile(xmlfilepath, nullptr, 0);
+    if (!doc) {
+      throw std::runtime_error("failed to read XML file");
+    }
+    xmlNodePtr root = xmlDocGetRootElement(doc);
+    return root;
+  
   }
+  
+  ~SimulinkParameterParserTestFixture() {
+   
+    if (parserPtr) {
+      delete parserPtr;
+      parserPtr = nullptr;
+    }
+    if (doc) {
+      xmlFreeDoc(doc);
+    }
+  }
+    
+  SimulinkParameterParser *parserPtr;
+  xmlDocPtr doc;
 };
 
-TEST_F(SimulinkParameterBuilderTestFixture, GlobalBuildTest) {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest") {
 
-  std::shared_ptr<SimulinkParameter> parameter = builderPtr->get();
-  ASSERT_EQ(parameter->getName(), "SavedCharacterEncoding");
+  xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
+  ErrorCode status = parserPtr->setInputData(nodePtr);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
-TEST_F(SimulinkParameterBuilderTestFixture, GetParameterValueTest) {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "GetParameterNotNullPtrTest") {
 
-  std::shared_ptr<SimulinkParameter> parameter = builderPtr->get();
-  ASSERT_EQ(parameter->getValue(), "windows-1252");
+  xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
+  ErrorCode status = parserPtr->setInputData(nodePtr);
+  std::shared_ptr<SimulinkParameter> dataObj = parserPtr->getDataObject();
+  
+  CHECK(dataObj != nullptr);
 }
 
-TEST_F(SimulinkParameterBuilderTestFixture, GetParameterClassTest) {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "ParameterParserTest") {
 
-  std::shared_ptr<SimulinkParameter> parameter = builderPtr->get();
-  ASSERT_EQ(parameter->getClass(), "double");
+  xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
+  parserPtr->setInputData(nodePtr);
+  ErrorCode status = parserPtr->parse();
+  CHECK(status == ErrorCode::SLX_OK);
+
+  std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
 }
+
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest") {
+
+  xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
+  parserPtr->setInputData(nodePtr);
+  parserPtr->parse();
+  std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
+
+  CHECK(strcmp(parameter->getValue(), "windows-1252") == 0);
+  CHECK(parameter->getDataType()==SimulinkDataType::Double);
+}
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
