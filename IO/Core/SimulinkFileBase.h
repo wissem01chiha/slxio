@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SIMULINKFILEBASE_H
+#define SIMULINKFILEBASE_H
+
 #include "ABINamespace.h"
-#include "File.h"
 #include "APIExport.h"
-#include <memory>
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -39,25 +40,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class APIEXPORT SimulinkFileBase {
 public:
-  SimulinkFileBase(std::string path);
   ~SimulinkFileBase() = default;
-  File *loadblockDiagram();
-  File *loadConfigSet();
-  File *loadDataDictionary();
 
-private:
-  SimulinkFileBase() = delete;
-  std::string filepath_;
-  std::string filename_;
-  uint32_t size_;
-  std::string tempdir_;
-  std::string version_;
-  std::string author;
-  std::string lastUpdate_;
-  std::unique_ptr<File> blockDiagram;
-  std::unique_ptr<File> configSet;
-  std::unique_ptr<File> dataDictionary;
+  std::string toString() const;
+
+protected:
+  SimulinkFileBase() = default;
+
+  std::string category; 
+  std::string creator; 
+  std::string lastModifiedBy; 
+  std::string revision; 
+  std::string version;
+
+  std::string contentType; 
+  std::string contentTypeFriendlyName;  
+  std::string matlabRelease;
+
+  std::string matlabVersion; ///< eg "9.6.0.1063848"
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+#endif // SIMULINKFILEBASE_H

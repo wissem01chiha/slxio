@@ -1,5 +1,4 @@
 #include "SimulinkDataType.h"
-#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -31,36 +30,6 @@ SimulinkDataType toSimulinkDataType(uint64) { return SimulinkDataType::UInt64; }
 
 SimulinkDataType toSimulinkDataType(const std::string &) {
   return SimulinkDataType::String;
-}
-
-SimulinkDataType toSimulinkDataType(const char *sldt) {
-  if (!sldt)
-    return SimulinkDataType::Auto;
-  if (strcmp(sldt, "double") == 0)
-    return SimulinkDataType::Double;
-  if (strcmp(sldt, "single") == 0)
-    return SimulinkDataType::Single;
-  if (strcmp(sldt, "half") == 0)
-    return SimulinkDataType::Half;
-  if (strcmp(sldt, "int8") == 0)
-    return SimulinkDataType::Int8;
-  if (strcmp(sldt, "uint8") == 0)
-    return SimulinkDataType::UInt8;
-  if (strcmp(sldt, "int16") == 0)
-    return SimulinkDataType::Int16;
-  if (strcmp(sldt, "uint16") == 0)
-    return SimulinkDataType::UInt16;
-  if (strcmp(sldt, "int32") == 0)
-    return SimulinkDataType::Int32;
-  if (strcmp(sldt, "uint32") == 0)
-    return SimulinkDataType::UInt32;
-  if (strcmp(sldt, "uint64") == 0)
-    return SimulinkDataType::UInt64;
-  if (strcmp(sldt, "boolean") == 0)
-    return SimulinkDataType::Boolean;
-  if (strcmp(sldt, "string") == 0)
-    return SimulinkDataType::String;
-  return SimulinkDataType::Auto;
 }
 
 const char *toChar(SimulinkDataType sldt) {

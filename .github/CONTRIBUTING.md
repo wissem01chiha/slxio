@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# SLXIO Contributing Guide 
+# Contributing Guide 
 
 - [Welcome](#welcome)
 - [Project overview](#project-overview)

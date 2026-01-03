@@ -95,7 +95,8 @@ public:
 
   /// @brief Compress the directory content into a ZIP archive.
   /// @details Output file will be named <dirname>.zip.
-  ErrorCode toZip();
+  /// if the new archive name is given it will assume same as parent directory 
+  ErrorCode zip(const char *dir = "");
 
   /// @brief Destructor.
   ~Directory() = default;

@@ -616,14 +616,14 @@ function(module_link_libraries module)
   endif()
 
   # Add system wise libraries if declared for each platform
-  # Window platform 
-  if(DEFINED MODULE_windows_depends)
-     foreach(sysdep IN LISTS MODULE_windows_depends)
-      target_link_libraries(${tmp_TARGET_NAME} PRIVATE ${sysdep})
-    endforeach()
+  if(WIN32)
+      if(DEFINED MODULE_windows_depends)
+         foreach(sysdep IN LISTS MODULE_windows_depends)
+          target_link_libraries(${tmp_TARGET_NAME} PRIVATE ${sysdep})
+        endforeach()
+      endif()
   endif()
-
-  # Posix Platforms : To-be Added -> Module.txt
+ 
 endfunction()
 
 #[==[.rst:
@@ -733,6 +733,10 @@ function(add_module module_name)
   add_library(${_module_TARGET_NAME})
   add_module_dependencies(${_module_TARGET_NAME} MODULE)
   module_sources(${module_name} ${MODULE_sources})
+  # Add platform depend module sources
+  if(WIN32)
+    module_sources(${module_name} ${MODULE_windows_sources})
+  endif()
   module_classes(${module_name} ${MODULE_classes})
   module_include_directories(${_module_TARGET_NAME} MODULE)  
   module_link_libraries(${module_name})

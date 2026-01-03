@@ -1,19 +1,20 @@
-#include "SlxFile.h"
+#include "SimulinkFile.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SlxFile::SlxFile(std::string path) {
-  if (path != "") {
-    filepath_ = path;
-  }
-}
+SimulinkFile::SimulinkFile()
+    : blockdiagram(nullptr), modelDictionary(nullptr), configSetInfo(nullptr),
+      bddefaults(nullptr), ScheduleEditor(nullptr), ScheduleCore(nullptr),
+      graphicalInterface(nullptr) {}
 
-File *SlxFile::loadblockDiagram() { return nullptr; }
+xmlDocPtr SimulinkFile::getBlockdiagram() { return blockdiagram; }
 
-File *SlxFile::loadConfigSet() { return nullptr; }
+xmlDocPtr SimulinkFile::getConfigSetInfo() { return configSetInfo; }
 
-File *SlxFile::loadDataDictionary() { return nullptr; }
+xmlDocPtr SimulinkFile::getModelDictionary() { return modelDictionary; }
+
+xmlDocPtr SimulinkFile::getConfigSet(Index &icfg) { return configSets[icfg]; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

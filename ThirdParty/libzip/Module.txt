@@ -139,6 +139,13 @@ SOURCES
   src/lib/zip_unchange_data.c
   src/lib/zip_utf-8.c
   src/lib/zip_err_str.c
+WINDOWS_SOURCES
+  src/lib/zip_source_file_win32.c
+  src/lib/zip_source_file_win32_named.c
+  src/lib/zip_source_file_win32_utf16.c
+  src/lib/zip_source_file_win32_utf8.c
+  src/lib/zip_source_file_win32_ansi.c
+  src/lib/zip_random_win32.c
 HEADERS
   src/zconf.h
 CONFIG_HEADERS
@@ -154,6 +161,8 @@ PUBLIC_COMPILE_DEFINITIONS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
   ThirdParty::zlib
+WINDOWS_DEPENDS
+  bcrypt
 TEST_DEPENDS
 TEST_OPTIONAL_DEPENDS
   

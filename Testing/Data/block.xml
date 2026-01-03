@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Block BlockType="Constant" Name="Constant" SID="1">
-    <P Name="Position">[240, 100, 270, 130]</P>
-    <P Name="ZOrder">1</P>
-    <P Name="Value">0</P>
-</Block>

@@ -1,6 +1,9 @@
+#include "Doctest.h"
 #include "SimulinkConfigSetParser.h"
 #include "SlxConfig.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkConfigSetBuilderTestFixture : public ::testing::Test {
 protected:
@@ -38,3 +41,6 @@ TEST_F(SimulinkConfigSetBuilderTestFixture, BuildTest) {
   std::shared_ptr<SimulinkConfigSet> obj = builderPtr->get();
   // ASSERT_EQ(obj->getType(), SimulinkElementType::ConfigSet);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

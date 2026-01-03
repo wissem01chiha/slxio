@@ -47,6 +47,7 @@ CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   ThirdParty::libuv
+  ThirdParty::libzip
 PRIVATE_DEPENDS
 TEST_DEPENDS
   ThirdParty::doctest

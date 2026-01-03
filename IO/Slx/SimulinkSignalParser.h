@@ -39,7 +39,6 @@ public:
 private:
   std::shared_ptr<SimulinkSignal> ptr_;
   xmlNodePtr dataObject;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

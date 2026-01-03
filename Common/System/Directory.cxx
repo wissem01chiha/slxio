@@ -52,8 +52,8 @@ Directory::Directory(Directory &&other) noexcept
       filemap(std::move(other.filemap)), subdirs_(std::move(other.subdirs_)) {}
 
 Directory &Directory::operator=(Directory &&other) noexcept {
-  if (this != &other) {
 
+  if (this != &other) {
     path_ = std::move(other.path_);
     filelist = std::move(other.filelist);
     subdirlist_ = std::move(other.subdirlist_);
@@ -209,4 +209,4 @@ std::string Directory::getDirectoryName() {
 
 bool Directory::empty() { return filelist.empty(); }
 
-ErrorCode Directory::toZip() { return ErrorCode::SLX_OK; }
+ErrorCode Directory::zip(const char *dir) { return ErrorCode::SLX_OK; }

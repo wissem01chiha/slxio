@@ -32,6 +32,7 @@ CLASSES
   SimulinkLineParser
   SimulinkDataTypeParser
   SimulinkSignalParser
+  SimulinkFile
 SOURCES
 HEADERS
   SimulinkParameterParser.h
@@ -42,6 +43,7 @@ HEADERS
   SimulinkLineParser.h
   SimulinkDataTypeParser.h
   SimulinkSignalParser.h
+  SimulinkFile.h
   SlxParameter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS

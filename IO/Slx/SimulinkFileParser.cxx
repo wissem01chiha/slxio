@@ -1,18 +1,18 @@
 #include "SimulinkFileParser.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <vector>
-#include <zip.h>
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkFileParser::SimulinkFileParser() {
   ptr_ = std::make_shared<SimulinkFile>();
+  fs_ = File();
 }
+
+
+
+
+
 
 SimulinkFile::SimulinkFile(const File &path) {
 
@@ -78,13 +78,6 @@ SimulinkErrorType SimulinkFile::open() {
   this->isOpen = 1;
   return SimulinkErrorType::SLX_OK;
 }
-
-SimulinkErrorType SimulinkFile::close() {
-  isOpen = 0;
-  isClose = 1;
-};
-
-bool SimulinkFile::isEOF() const {}
 
 SimulinkErrorType SimulinkFile::load(const std::string &name, void *buffer,
                                      size_t size) {

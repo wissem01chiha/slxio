@@ -13,39 +13,46 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
-#include "SimulinkFileBase.h"
-#include "File.h"
 #include "APIExport.h"
+#include "LibXML2.h"
+#include "SimulinkFileBase.h"
+#include "Type.h"
+#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief SlxFile is an general low level representation of
- * a Simulink .slx file data information, for now we support
- * only one configuration set file (for model attached multiple configs
- * more then 1 xml file is present)
+ * @brief SimulinkFile is a general low-level representation of
+ * a Simulink .slx file’s metadata and contents.
+ * Currently, only a single configuration set file is supported.
+ * (If a model has multiple configuration sets, more than one XML file
+ * will be present.)
+ * This class contains only the necessary pointers to Simulink subfiles
+ * required to construct the canonical core objects, along with some
+ * additional layout or settings information.
  */
 class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
-  SimulinkFile(std::string path);
-  ~SlxFile() = default;
-  File *loadblockDiagram();
-  File *loadConfigSet();
-  File *loadDataDictionary();
+  SimulinkFile();
+
+  xmlDocPtr getBlockdiagram();
+  xmlDocPtr getConfigSetInfo();
+  xmlDocPtr getModelDictionary();
+  xmlDocPtr getConfigSet(Index & icfg);
+
+  ~SimulinkFile() = default;
 
 private:
-  SlxFile() = delete;
-  std::string filepath_;
-  std::string filename_;
-  uint32_t size_;
-  std::string tempdir_;
-  std::string version_;
-  std::string author;
-  std::string lastUpdate_;
-  std::unique_ptr<File> blockDiagram;
-  std::unique_ptr<File> configSet;
-  std::unique_ptr<File> dataDictionary;
+  xmlDocPtr blockdiagram;
+  xmlDocPtr modelDictionary;
+  xmlDocPtr configSetInfo;
+  xmlDocPtr bddefaults;
+  xmlDocPtr ScheduleEditor;
+  xmlDocPtr ScheduleCore;
+  xmlDocPtr graphicalInterface;
+
+  std::vector<xmlDocPtr> configSets;
 };
 
 SLXIO_ABI_NAMESPACE_END

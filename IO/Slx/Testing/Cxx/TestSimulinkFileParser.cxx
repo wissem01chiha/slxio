@@ -1,8 +1,11 @@
-#include "SimulinkFileParser.h"
 #include "Doctest.h"
+#include "SimulinkFileParser.h"
 #include "SlxConfig.h"
 
-class SimulinkFileTestFixture : public ::testing::Test {
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class SimulinkFileTestFixture {
 protected:
   SimulinkFile *slxfs;
   SimulinkFile *slxfs_zip;
@@ -11,13 +14,6 @@ protected:
   char path_zip[512];
 
   void SetUp() override {
-
-    slog_config_t slgCfg;
-    slog_config_get(&slgCfg);
-    slgCfg.nIndent = 0;
-    // slgCfg.eColorFormat = SLOG_COLORING_FULL;
-    slog_config_set(&slgCfg);
-    slog_init("logfile", SLOG_FLAGS_ALL, 1);
 
     snprintf(path_slx, sizeof(path_slx), "%s/test/assets/TestAsset1.slx",
              PROJECT_ROOT);
@@ -70,3 +66,6 @@ TEST_F(SimulinkFileTestFixture, LoadTest) {
       << "Failed to Eextract ZIP archive to location . slx_error code = "
       << c_str(err);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
