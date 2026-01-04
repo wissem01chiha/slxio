@@ -1,10 +1,6 @@
 include(CTest)
 include(ModuleTesting)
 
-# Tests are disabled by default in Release builds with MSVC
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    return()
-endif()
 
 # CTest Based Configuration 
 set(CTEST_OUTPUT_ON_FAILURE TRUE)
