@@ -16,33 +16,37 @@
 #define SIMULINKFILEPARSER_H
 
 #include "ABINamespace.h"
+#include "APIExport.h"
 #include "ErrorCode.h"
 #include "File.h"
 #include "LibXML2.h"
-#include "APIExport.h"
-#include "SimulinkParserBase.h"
 #include "SimulinkFile.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/// @brief Main Simulink File Parser class 
-/// @note this is an internal API, a user friendly API will 
-/// be implemented to simplify access of canonical elments 
-/// without need to pass with this class 
-class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile> { 
+/// @class SimulinkFileParser
+/// @brief Parses and constructs a SimulinkFile instance from an input file.
+/// This class is responsible for reading a Simulink file and building both
+/// its metadata (as defined in SimulinkFileBase) and its content
+/// representation. Parsing of the file’s internal subdocuments is delegated to
+/// SimulinkContentParser, which extracts and organizes the relevant data.
+/// The builder then fills the metadata fields and content pointers required
+/// to produce a complete SimulinkFile object.
+class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile> {
 public:
   SimulinkFileParser();
 
-  ErrorCode setInputData(const File& fs) override;
+  ErrorCode setInputData(const File fs) override;
   std::shared_ptr<SimulinkFile> getDataObject() const override;
   ErrorCode parse() override;
 
-  ~SimulinkFileParser() =default;
+  ~SimulinkFileParser() = default;
 
 private:
   std::shared_ptr<SimulinkFile> ptr_;
-  File fs_;
+  File dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

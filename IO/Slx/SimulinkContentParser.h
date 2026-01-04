@@ -12,30 +12,30 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef SIMULINKCONTENTPARSER_H
+#define SIMULINKCONTENTPARSER_H
+
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "ErrorCode.h"
+#include "File.h"
+#include "LibXML2.h"
 #include "SimulinkContent.h"
-#include "SimulinkFileBase.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/*
- * @brief SimulinkFile is a façade combining metadata and content
- * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
- * while file contents are delegated to SimulinkContent.
- */
-class APIEXPORT SimulinkFile final : public SimulinkFileBase {
+class APIEXPORT SimulinkContentParser
+    : public SimulinkParserBase<File, SimulinkContent> {
 public:
-  SimulinkFile();
-
-  const SimulinkContent &getContent() const;
-
-  ~SimulinkFile() = default;
+  SimulinkContentParser();
+  ~SimulinkContentParser() = default;
 
 private:
-  SimulinkContent content;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+#endif // !SIMULINKCONTENTPARSER_H

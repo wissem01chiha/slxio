@@ -21,13 +21,11 @@
 #define NOMINMAX
 #endif
 
-#if defined(_MSC_VER)
+#ifdef _MSC_VER
 #if HAVE_FLOAT_H
 #include <float.h>
 #endif
-#if HAVE_DIRECT_H
-#include <direct.h>
-#endif
+
 #if HAVE_IO_H
 #include <io.h>
 #endif
@@ -48,9 +46,7 @@
 #if HAVE_SYS_TYPES_H
 #include <sys/types.h>
 #endif
-#if HAVE_UNISTD_H
-#include <unistd.h>
-#endif
+
 #ifdef __cplusplus
 #include <cmath>
 #ifndef finite
@@ -59,13 +55,13 @@
 #endif
 #endif
 
-#if defined(_MSC_VER)
+#ifdef _MSC_VER
 #define ISNAN(x) _isnan(x)
 #else
 #define ISNAN(x) isnan(x)
 #endif
 
-#if defined(_MSC_VER)
+#ifdef _MSC_VER
 #define FORCE_INLINE __forceinline
 #elif defined(__GNUC__) || defined(__clang__)
 #define FORCE_INLINE inline __attribute__((always_inline))
@@ -73,7 +69,7 @@
 #define FORCE_INLINE inline
 #endif
 
-#if defined(_MSC_VER)
+#ifdef _MSC_VER
 #if HAVE_INTRIN_H
 #include <intrin.h>
 #endif

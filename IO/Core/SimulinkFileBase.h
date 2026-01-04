@@ -23,41 +23,34 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief SimulinkFileBase is an general high level representation of
- * a Simulink  file data information and file oegnisation, 
- * for each IO submodule, they should implenat  their clocal mappig
- * rules based on this abstarct inetrface under the name "SimulinkFile.h" 
- * this class is a entry point to provide abstraction layer between canocanicl
- * Simulink data struct and their location in definction in the extrcated archive
- * @example Simulink R2019a stores configsets in fils named :  
- * @note for now we support configSet.xml, configSet0.xml, ...
- * given a SimulinkConfigSet typename, this class return list of files containg
- * configs, repsenation type (JSON for reeadering from exporter ouput), XML(
- * REALTED XML methda data ),...this 
- * class acts like "XSD SCHEMA VALIDATAION BUT FOR SIMULINK FILE hairachy tree"
- * only one configuration set file (for model attached multiple configs
- * more then 1 xml file is present)
+ * @class SimulinkFileBase
+ * @brief Base class for all lower-level readers/writers of Simulink file data.
+ * Provides a common metadata grouping that describes essential information
+ * about a Simulink file, this class is intended to be subclassed by specific
+ * file readers/writers that need consistent metadata handling.
  */
 class APIEXPORT SimulinkFileBase {
 public:
-  ~SimulinkFileBase() = default;
-
+  /// @brief Convert metadata fields to a human-readable string.
   std::string toString() const;
+
+  /// @brief Default destructor.
+  ~SimulinkFileBase() = default;
 
 protected:
   SimulinkFileBase() = default;
 
-  std::string category; 
-  std::string creator; 
-  std::string lastModifiedBy; 
-  std::string revision; 
+  std::string category;
+  std::string creator;
+  std::string lastModifiedBy;
+  std::string revision;
   std::string version;
 
-  std::string contentType; 
-  std::string contentTypeFriendlyName;  
+  std::string contentType;
+  std::string contentTypeFriendlyName;
   std::string matlabRelease;
 
-  std::string matlabVersion; ///< eg "9.6.0.1063848"
+  std::string matlabVersion;
 };
 
 SLXIO_ABI_NAMESPACE_END

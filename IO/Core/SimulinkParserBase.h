@@ -37,7 +37,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * internal error buffer for profiling and diagnostics.
  * @tparam T the input data object to read from 
  * @tparam P the retrun type object beeing constructed 
- * Example
+ * @example
  * @code
 	ErrorCode ParentParser::parse() { 
 	  // call sub-parser 

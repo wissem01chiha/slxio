@@ -11,7 +11,7 @@
 #elif defined(LOGGER_USE_LOGURU)
 #include "Loguru.h"
 #else
-#error "no logging utils is enbaled "
+#error "No logging utility is enbaled"
 #endif
 
 SLXIO_NAMESPACE_BEGIN

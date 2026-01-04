@@ -1,20 +1,14 @@
 #include "SimulinkFile.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkFile::SimulinkFile()
-    : blockdiagram(nullptr), modelDictionary(nullptr), configSetInfo(nullptr),
-      bddefaults(nullptr), ScheduleEditor(nullptr), ScheduleCore(nullptr),
-      graphicalInterface(nullptr) {}
+SimulinkFile::SimulinkFile() {}
 
-xmlDocPtr SimulinkFile::getBlockdiagram() { return blockdiagram; }
-
-xmlDocPtr SimulinkFile::getConfigSetInfo() { return configSetInfo; }
-
-xmlDocPtr SimulinkFile::getModelDictionary() { return modelDictionary; }
-
-xmlDocPtr SimulinkFile::getConfigSet(Index &icfg) { return configSets[icfg]; }
+const SimulinkContent &SimulinkFile::getContent() const { return content; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
+
+

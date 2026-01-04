@@ -21,7 +21,7 @@ public:
   std::string tempdir() {
 
     std::string tempDir = std::string(cwdbuffer);
-    if (tempDir.back() != PATH_SEP[0])
+    if (tempDir.back() != PATH_SEP)
       tempDir += PATH_SEP;
     tempDir += "tempdir";
 

@@ -1,6 +1,7 @@
 #include "Doctest.h"
 #include "Directory.h"
 #include "Compiler.h"
+#include "Platform.h"
 #include <chrono>
 #include <random>
 
@@ -13,13 +14,8 @@ public:
   /// based on function timestamp call, to make it unique per call
   std::string testDirectoryEmptyRandDir() {
     std::string tempDir = std::string(cwdbuffer);
-#ifdef _WIN32
-    if (tempDir.back() != '\\')
-      tempDir += '\\';
-#else
-    if (tempDir.back() != '/')
-      tempDir += '/';
-#endif
+    if (tempDir.back() != PATH_SEP)
+      tempDir += PATH_SEP;
     auto now = std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 rng(static_cast<unsigned>(now));
     std::uniform_int_distribution<int> dist(1000, 9999);

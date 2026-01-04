@@ -36,10 +36,15 @@
 #endif
 
 #ifdef PLATFORM_WINDOWS
-#define PATH_SEP "\\"
+#define PATH_SEP '\\'
 #else
-#define PATH_SEP "/"
+#define PATH_SEP '/'
 #endif
 
+#ifdef PLATFORM_WINDOWS
+#include <direct.h> 
+#else
+#include <unistd.h> 
+#endif
 
 #endif // PLATFORM_H
