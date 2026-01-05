@@ -1,3 +1,4 @@
+# Based on :  https://github.com/cloudshark/cshark/blob/master/build/modules/FindJSON-C.cmake
 #[=======================================================================[.rst:
 FindJSON-C
 -----------
@@ -52,8 +53,6 @@ Notes
 * The search looks for headers such as ``json.h`` in common suffixes like
   ``json-c`` and ``json``.
 * The library is typically named ``json-c`` or ``libjson-c``.
-
-# Taken from :  https://github.com/cloudshark/cshark/blob/master/build/modules/FindJSON-C.cmake
 #]=======================================================================]
 
 include(FindPackageHandleStandardArgs)

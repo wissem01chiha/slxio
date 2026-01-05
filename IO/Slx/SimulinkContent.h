@@ -47,7 +47,6 @@ public:
   xmlNodePtr getConfigSetNodePtr(Index &idx) const;
 
 private:
-
   xmlDocPtr blockdiagram = nullptr;
   xmlDocPtr modelDictionary = nullptr;
   xmlDocPtr configSetInfo = nullptr;

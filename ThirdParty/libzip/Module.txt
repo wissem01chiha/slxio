@@ -146,6 +146,10 @@ WINDOWS_SOURCES
   src/lib/zip_source_file_win32_utf8.c
   src/lib/zip_source_file_win32_ansi.c
   src/lib/zip_random_win32.c
+UNIX_SOURCES
+  src/lib/zip_source_file_stdio_named.c
+  src/lib/zip_random_unix.c
+  src/lib/zip_algorithm_zstd.c
 HEADERS
   src/zconf.h
 CONFIG_HEADERS

@@ -12,13 +12,13 @@ option(ENABLE_MBEDTLS "Enable use of mbed TLS" ON)
 option(ENABLE_OPENSSL "Enable use of OpenSSL" ON)
 option(ENABLE_WINDOWS_CRYPTO "Enable use of Windows cryptography libraries" OFF)
 
-option(ENABLE_BZIP2 "Enable use of BZip2" ON)
-option(ENABLE_LZMA "Enable use of LZMA" ON)
-option(ENABLE_ZSTD "Enable use of Zstandard" ON)
+option(ENABLE_BZIP2 "Enable use of BZip2" OFF)
+option(ENABLE_LZMA "Enable use of LZMA" OFF)
+option(ENABLE_ZSTD "Enable use of Zstandard" OFF)
 
 option(ENABLE_FDOPEN "Enable zip_fdopen, which is not allowed in Microsoft CRT secure libraries" ON)
 
-option(ENABLE_COVERAGE "Enable code coverage reporting of test suite" OFF)
+#option(ENABLE_COVERAGE "Enable code coverage reporting of test suite" OFF)
 
 # option(BUILD_TOOLS "Build tools in the src directory (zipcmp, zipmerge, ziptool)" ON)
 option(BUILD_REGRESS "Build regression tests" OFF)
@@ -290,10 +290,10 @@ endif()
 # for code completion frameworks
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(ENABLE_COVERAGE)
-  find_program(LCOV lcov REQUIRED)
-  find_program(GENHTML genhtml REQUIRED)
-endif()
+# if(ENABLE_COVERAGE)
+#   find_program(LCOV lcov REQUIRED)
+#   find_program(GENHTML genhtml REQUIRED)
+# endif()
 
 # Testing
 # ENABLE_TESTING()

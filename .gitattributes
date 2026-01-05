@@ -2,7 +2,8 @@ Testing/Data/** linguist-vendored
 Development/cinclude2dot.pl linguist-vendored
 Development/codeviz.py linguist-vendored
 CMake/FindMatlab.cmake linguist-vendored
-CMake/CPM.cmake linguist-vendored
+CMake/FindHDF5.cmake linguist-vendored
+CMake/Findcppcheck.cmake linguist-vendored
 CMake/FindLibXml2.cmake linguist-vendored
 CMake/FindJsonC.cmake linguist-vendored
 ThirdParty/json-c/src/** linguist-vendored
