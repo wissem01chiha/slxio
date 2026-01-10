@@ -29,6 +29,8 @@ class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
   SimulinkFile();
 
+  /// @brief 
+  /// @return 
   const SimulinkContent &getContent() const;
 
   ~SimulinkFile() = default;

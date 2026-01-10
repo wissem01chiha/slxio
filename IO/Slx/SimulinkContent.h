@@ -33,6 +33,7 @@ class SimulinkContentParser;
 /// This class stores the subfiles of a Simulink .slx file as libxml
 /// document pointers and provides accessor methods for parsers to
 /// retrieve the corresponding XML nodes as input data.
+/// @todo Add validation routines in each getter
 class APIEXPORT SimulinkContent final {
 public:
   friend class SimulinkContentParser;
@@ -40,11 +41,12 @@ public:
   SimulinkContent() = default;
   ~SimulinkContent() = default;
 
-  xmlNodePtr getBlockdiagramNodePtr() const;
-  xmlNodePtr getPropertiesNodePtr() const;
-  xmlNodePtr getMwPropertiesNodePtr() const;
-  xmlNodePtr getConfigSetInfoNodePtr() const;
-  xmlNodePtr getConfigSetNodePtr(Index &idx) const;
+  ErrorCode getBlockdiagramNodePtr(xmlNodePtr nodePtr) const;
+  ErrorCode getPropertiesNodePtr(xmlNodePtr nodePtr) const;
+  ErrorCode getMwPropertiesNodePtr(xmlNodePtr nodePtr) const;
+  ErrorCode getConfigSetInfoNodePtr(xmlNodePtr nodePtr) const;
+  ErrorCode getConfigSetNodePtr(Index &idx, xmlNodePtr nodePtr) const;
+  ErrorCode getModelDictionary(xmlNodePtr nodePtr) const;
 
 private:
   xmlDocPtr blockdiagram = nullptr;

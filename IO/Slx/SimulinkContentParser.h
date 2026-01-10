@@ -19,23 +19,30 @@
 #include "APIExport.h"
 #include "ErrorCode.h"
 #include "File.h"
-#include "LibXML2.h"
 #include "SimulinkContent.h"
 #include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/// @brief 
 class APIEXPORT SimulinkContentParser
     : public SimulinkParserBase<File, SimulinkContent> {
 public:
   SimulinkContentParser();
+
+  ErrorCode setInputData(const File fs) override;
+  std::shared_ptr<SimulinkContent> getDataObject() const override;
+  ErrorCode parse() override;
+
   ~SimulinkContentParser() = default;
 
 private:
+  std::shared_ptr<SimulinkContent> ptr_;
+  File dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKCONTENTPARSER_H
+#endif // SIMULINKCONTENTPARSER_H
