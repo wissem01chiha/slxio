@@ -76,6 +76,8 @@ bool File::isFile(const char *path) {
 
 bool File::isFile() { return isFile(path_); }
 
+bool File::isFile() const { return isFile(path_); }
+
 ErrorCode File::open() {
 
   uv_fs_t req;

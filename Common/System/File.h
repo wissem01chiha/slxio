@@ -66,6 +66,9 @@ public:
   /// @brief Member function version of isFile
   bool isFile();
 
+  /// @brief Const Member function version of isFile
+  bool isFile() const;
+
   /// @brief Open the file with the initialized mode.
   ErrorCode open();
 

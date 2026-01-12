@@ -28,7 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /// @brief base parser for encoded data type strings
 class APIEXPORT SimulinkDataTypeParser final
     : public SimulinkParserBase<std::string, SimulinkDataType> {
-
+public:
   SimulinkDataTypeParser();
 
   ErrorCode setInputData(const std::string data) override;
@@ -47,4 +47,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKDATATYPEPARSER_H
+#endif // SIMULINKDATATYPEPARSER_H

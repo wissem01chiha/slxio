@@ -4,6 +4,13 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+SimulinkDataTypeParser::SimulinkDataTypeParser() {
+
+  ptr_ = std::make_shared<SimulinkDataType>();
+  dataObject =std::string("");
+}
+
+
 ErrorCode SimulinkDataTypeParser::setInputData(const std::string data) {
 
   if (data.empty()) {
