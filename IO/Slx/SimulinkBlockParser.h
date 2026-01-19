@@ -19,6 +19,7 @@
 #include "APIExport.h"
 #include "SimulinkBlock.h"
 #include "SimulinkParserBase.h"
+#include "LibXML2.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -36,11 +37,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
   </Block>
  * @endcode
  */
-class APIEXPORT SimulinkBlockParser final : public SimulinkParserBase {
+class APIEXPORT SimulinkBlockParser final 
+  : public SimulinkParserBase<xmlNodePtr, SimulinkBlock> {
 public:
   SimulinkBlockParser();
 
-  ErrorCode setInputData(void *data) override;
+  ErrorCode setInputData(const xmlNodePtr data) override;
   std::shared_ptr<SimulinkBlock> getDataObject() const override;
   ErrorCode parse() override;
 
@@ -48,6 +50,7 @@ public:
 
 private:
   std::shared_ptr<SimulinkBlock> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

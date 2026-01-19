@@ -8,7 +8,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetParser::SimulinkConfigSetParser() : datObject(nullptr) { 
   ptr_ = std::make_shared<SimulinkConfigSet>();
-  
 }
 
 ErrorCode SimulinkConfigSetParser::setInputData(const xmlNodePtr data) {

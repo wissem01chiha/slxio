@@ -21,16 +21,14 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /*
- * @brief SimulinkFile is a façade combining metadata and content
+ * @brief SimulinkFile is a faï¿½ade combining metadata and content
  * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
  * while file contents are delegated to SimulinkContent.
  */
 class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
   SimulinkFile();
-
-  /// @brief 
-  /// @return 
+  
   const SimulinkContent &getContent() const;
 
   ~SimulinkFile() = default;

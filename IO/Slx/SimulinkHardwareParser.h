@@ -11,3 +11,35 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
+#ifndef SIMULINKHARDWAREPARSER_H
+#define SIMULINKHARDWAREPARSER_H
+
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
+#include "LibXML2.h"
+#include "SimulinkHardware.h"
+#include "SimulinkParserBase.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+/// @brief Parser for SimulinkHardware
+class APIEXPORT SimulinkHardwareParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkHardware> {
+public:
+  SimulinkHardwareParser();
+    ErrorCode setInputData(const xmlNodePtr data) override;
+    std::shared_ptr<SimulinkHardware> getDataObject() const override;
+    ErrorCode parse() override;
+    ~SimulinkHardwareParser() = default;
+private:
+    std::shared_ptr<SimulinkHardware> ptr_;
+    xmlNodePtr dataObject;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKHARDWAREPARSER_H

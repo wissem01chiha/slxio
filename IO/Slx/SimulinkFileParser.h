@@ -30,7 +30,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /// @brief Parses and constructs a SimulinkFile instance from an input file.
 /// This class is responsible for reading a Simulink file and building both
 /// its metadata (as defined in SimulinkFileBase) and its content
-/// representation. Parsing of the file’s internal subdocuments is delegated to
+/// representation. Parsing of the files internal subdocuments is delegated to
 /// SimulinkContentParser, which extracts and organizes the relevant data.
 /// The builder then fills the metadata fields and content pointers required
 /// to produce a complete SimulinkFile object.

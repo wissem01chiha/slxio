@@ -1,10 +1,11 @@
 #include "SimulinkFile.h"
-#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkFile::SimulinkFile() {}
+SimulinkFile::SimulinkFile() {
+    content = SimulinkContent();
+}
 
 const SimulinkContent &SimulinkFile::getContent() const { return content; }
 

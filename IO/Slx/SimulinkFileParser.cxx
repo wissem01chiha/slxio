@@ -1,4 +1,5 @@
 #include "SimulinkFileParser.h"
+#include "SimulinkContentParser.h"
 #include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
