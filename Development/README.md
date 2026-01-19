@@ -8,7 +8,7 @@
   - [2.3 Coverage Tools](#23-coverage-tools)
   - [2.4 Perl](#24-perl)
   - [2.5 Profiling Tools](#25-profiling-tools)
-  - [2.6 Fuzzing and Benchmarking Tools](#26-fuzzing-and-benchmarking-tools)
+  - [2.6 Fuzzing Tools](#26-fuzzing-tools)
 - [3.0 Build System](#30-build-system)
 - [4.0 Build Automation](#40-build-automation)
 - [5.0 Code Style](#50-code-style)
@@ -52,10 +52,9 @@ Install via system package manager.
 
 ### 2.5 Profiling Tools 
 
-### 2.6 Fuzzing and Benchmarking Tools
+### 2.6 Fuzzing Tools
 
 
---- 
 
 ## 3.0 Build System
 

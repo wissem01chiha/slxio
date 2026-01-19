@@ -1,4 +1,4 @@
-#!bas/bin/python
+#!bash/bin/python
 """
 List all .c and .cpp files in the given directory.
 
@@ -6,6 +6,9 @@ List all .c and .cpp files in the given directory.
 :return: List of file paths
 to be refactored to genrte the "Module.txt"
  file later on 
+Example :
+ scan --module ThirdParty::zip -r -*/c
+display genela infos
  """
 from pathlib import Path
 
@@ -19,7 +22,7 @@ def find_source_files(directory: str):
     return files
 
 if __name__ == "__main__":
-    directory = "C:/Users/chiha.000/Documents/github/slxio/ThirdParty/libxml2/src"
+    directory = "C:/Users/chiha.000/Documents/github/slxio/ThirdParty/libzip/src/lib"
     c_cpp_files = find_source_files(directory)
     print("found source files:")
     for f in c_cpp_files:

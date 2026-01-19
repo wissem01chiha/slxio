@@ -13,39 +13,28 @@
 // limitations under the License.
 
 #include "ABINamespace.h"
-#include "SimulinkFileBase.h"
-#include "File.h"
 #include "APIExport.h"
+#include "SimulinkContent.h"
+#include "SimulinkFileBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief SlxFile is an general low level representation of
- * a Simulink .slx file data information, for now we support
- * only one configuration set file (for model attached multiple configs
- * more then 1 xml file is present)
+/*
+ * @brief SimulinkFile is a fa�ade combining metadata and content
+ * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
+ * while file contents are delegated to SimulinkContent.
  */
 class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
-  SimulinkFile(std::string path);
-  ~SlxFile() = default;
-  File *loadblockDiagram();
-  File *loadConfigSet();
-  File *loadDataDictionary();
+  SimulinkFile();
+  
+  const SimulinkContent &getContent() const;
+
+  ~SimulinkFile() = default;
 
 private:
-  SlxFile() = delete;
-  std::string filepath_;
-  std::string filename_;
-  uint32_t size_;
-  std::string tempdir_;
-  std::string version_;
-  std::string author;
-  std::string lastUpdate_;
-  std::unique_ptr<File> blockDiagram;
-  std::unique_ptr<File> configSet;
-  std::unique_ptr<File> dataDictionary;
+  SimulinkContent content;
 };
 
 SLXIO_ABI_NAMESPACE_END

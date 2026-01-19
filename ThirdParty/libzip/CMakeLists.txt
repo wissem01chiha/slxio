@@ -6,19 +6,19 @@ if(NOT libzip_VERSION_PATCH)
   set(libzip_VERSION_PATCH 0)
 endif()
 
-option(ENABLE_COMMONCRYPTO "Enable use of CommonCrypto" ON)
+option(ENABLE_COMMONCRYPTO "Enable use of CommonCrypto" OFF)
 option(ENABLE_GNUTLS "Enable use of GnuTLS" ON)
 option(ENABLE_MBEDTLS "Enable use of mbed TLS" ON)
 option(ENABLE_OPENSSL "Enable use of OpenSSL" ON)
-option(ENABLE_WINDOWS_CRYPTO "Enable use of Windows cryptography libraries" ON)
+option(ENABLE_WINDOWS_CRYPTO "Enable use of Windows cryptography libraries" OFF)
 
-option(ENABLE_BZIP2 "Enable use of BZip2" ON)
-option(ENABLE_LZMA "Enable use of LZMA" ON)
-option(ENABLE_ZSTD "Enable use of Zstandard" ON)
+option(ENABLE_BZIP2 "Enable use of BZip2" OFF)
+option(ENABLE_LZMA "Enable use of LZMA" OFF)
+option(ENABLE_ZSTD "Enable use of Zstandard" OFF)
 
 option(ENABLE_FDOPEN "Enable zip_fdopen, which is not allowed in Microsoft CRT secure libraries" ON)
 
-option(ENABLE_COVERAGE "Enable code coverage reporting of test suite" OFF)
+#option(ENABLE_COVERAGE "Enable code coverage reporting of test suite" OFF)
 
 # option(BUILD_TOOLS "Build tools in the src directory (zipcmp, zipmerge, ziptool)" ON)
 option(BUILD_REGRESS "Build regression tests" OFF)
@@ -76,10 +76,6 @@ endif()
 include(Dist)
 Dist(${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
 
-#ADD_CUSTOM_TARGET(uninstall
-#  COMMAND cat ${PROJECT_BINARY_DIR}/install_manifest.txt | xargs rm
-#  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#  )
 
 if(BUILD_SHARED_LIBS)
   set(HAVE_SHARED TRUE)
@@ -254,19 +250,19 @@ if(ENABLE_ZSTD)
 endif(ENABLE_ZSTD)
 
 if (COMMONCRYPTO_FOUND)
-  set(HAVE_CRYPTO 1)
+  #set(HAVE_CRYPTO 1)
   set(HAVE_COMMONCRYPTO 1)
 elseif (WINDOWS_CRYPTO_FOUND)
-  set(HAVE_CRYPTO 1)
+  #set(HAVE_CRYPTO 1)
   set(HAVE_WINDOWS_CRYPTO 1)
 elseif (OPENSSL_FOUND)
-  set(HAVE_CRYPTO 1)
+  #set(HAVE_CRYPTO 1)
   set(HAVE_OPENSSL 1)
 elseif (GNUTLS_FOUND AND NETTLE_FOUND)
-  set(HAVE_CRYPTO 1)
+  #set(HAVE_CRYPTO 1)
   set(HAVE_GNUTLS 1)
 elseif (MbedTLS_FOUND)
-  set(HAVE_CRYPTO 1)
+  #set(HAVE_CRYPTO 1)
   set(HAVE_MBEDTLS 1)
 endif()
 
@@ -294,10 +290,10 @@ endif()
 # for code completion frameworks
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(ENABLE_COVERAGE)
-  find_program(LCOV lcov REQUIRED)
-  find_program(GENHTML genhtml REQUIRED)
-endif()
+# if(ENABLE_COVERAGE)
+#   find_program(LCOV lcov REQUIRED)
+#   find_program(GENHTML genhtml REQUIRED)
+# endif()
 
 # Testing
 # ENABLE_TESTING()

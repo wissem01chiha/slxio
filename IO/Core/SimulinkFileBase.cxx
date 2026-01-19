@@ -1,19 +1,24 @@
 #include "SimulinkFileBase.h"
+#include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkFileBase::SimulinkFileBase(std::string path) {
-  if (path != "") {
-    filepath_ = path;
-  }
+std::string SimulinkFileBase::toString() const {
+  std::ostringstream oss;
+  oss << "SimulinkFileBase { "
+      << "category=\"" << category << "\", "
+      << "creator=\"" << creator << "\", "
+      << "lastModifiedBy=\"" << lastModifiedBy << "\", "
+      << "revision=\"" << revision << "\", "
+      << "version=\"" << version << "\", "
+      << "contentType=\"" << contentType << "\", "
+      << "contentTypeFriendlyName=\"" << contentTypeFriendlyName << "\", "
+      << "matlabRelease=\"" << matlabRelease << "\", "
+      << "matlabVersion=\"" << matlabVersion << "\""
+      << " }";
+  return oss.str();
 }
-
-File *SimulinkFileBase::loadblockDiagram() { return nullptr; }
-
-File *SimulinkFileBase::loadConfigSet() { return nullptr; }
-
-File *SimulinkFileBase::loadDataDictionary() { return nullptr; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

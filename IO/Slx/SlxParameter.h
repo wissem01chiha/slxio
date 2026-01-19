@@ -25,14 +25,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SlxParameter
  * @brief This class contains constants used by the Simulink model Parser.
- * These constants are section and parameter names that refer to the SLX file.
+ * These constants are section and parameter names that refer to the Slx file.
  * Section and parameters are distinguished by the prefix of the constants
  * (SECTION vs PARAM). The remainder of the constant is just like the name in
- * the SLX file. We use mixed case here to express the case differences found in
- * the SLX file, e.g. 'Name' vs 'name'.
- * @note this file do not provide any related cxx implementation 
+ * the slx file. We use mixed case here to express the case differences found in
+ * the slx file, e.g. 'Name' vs 'name'.
+ * @warning Do not include this file in a header (*.h, *.hpp, *.hxx).
+ *          It is intended for use only in source files (*.cxx, *.cpp, *.c).
+ * @note this file do not provide any related cxx implementation
  */
-class SlxParameter {
+class APIEXPORT SlxParameter {
 public:
   /** @brief  Color code red. */
   static inline const char *COLOR_Red = "red";

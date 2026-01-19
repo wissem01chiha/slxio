@@ -1,20 +1,29 @@
 #include "SimulinkModelParser.h"
+#include "Logger.h"
 
-namespace slxio {
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModelParser::SimulinkModelParser() {
-  this->p_ = std::make_unique<SimulinkModel>();
+  ptr_ = std::make_shared<SimulinkModel>();
+  dataObject = nullptr;
 }
 
-SimulinkModelParser::SimulinkModelParser(SimulinkFile *File) {
-  this->File_ = std::make_shared<SimulinkFile>(*File);
-  this->p_ = std::make_unique<SimulinkModel>();
+ErrorCode SimulinkModelParser::setInputData(const xmlNodePtr data) {
+
+  Logger& l= Logger::getInstance();
+  if(data == nullptr){
+    l.log(Logger::V_ERROR,"SimulinkModelParser:: null pointer received");
+    return ErrorCode::SLX_EINVAR;
+  }
+  dataObject = data;
+  return ErrorCode::SLX_OK;
 }
 
-SimulinkErrorType SimulinkModelParser::build() { return SimulinkErrorType(); }
-
-std::shared_ptr<SimulinkModel> SimulinkModelParser::get() {
-  return std::shared_ptr<SimulinkModel>(std::move(p_));
+std::shared_ptr<SimulinkModel>
+SimulinkModelParser::getDataObject() const {
+  return ptr_;
 }
 
-}; // namespace slxio
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

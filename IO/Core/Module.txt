@@ -26,10 +26,12 @@ INSTALL_TARGETS
 CLASSES
 	SimulinkParserBase
 	SimulinkWriterBase
+	SimulinkFileBase
 SOURCES
 HEADERS
   SimulinkParserBase.h
   SimulinkWriterBase.h
+  SimulinkFileBase.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS 

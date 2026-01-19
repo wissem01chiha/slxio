@@ -16,40 +16,35 @@
 #define SIMULINKDATATYPEPARSER_H
 
 #include "ABINamespace.h"
+#include "APIExport.h"
 #include "ErrorCode.h"
-#include "APIExport.h"
-#include "SimulinkParserBase.h"
-#include "APIExport.h"
 #include "SimulinkDataType.h"
+#include "SimulinkParserBase.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/// @brief Base Parser for encoded parameter, data type 
-/// litteral string 
-/// currently support mapping 
-/// 
+/// @brief base parser for encoded data type strings
 class APIEXPORT SimulinkDataTypeParser final
-    : public SimulinkParserBase<std::string, SimulinkDataType>  {
-
+    : public SimulinkParserBase<std::string, SimulinkDataType> {
+public:
   SimulinkDataTypeParser();
 
   ErrorCode setInputData(const std::string data) override;
-  ErrorCode setInputData(const char* data);
+  ErrorCode setInputData(const char *data);
 
   std::shared_ptr<SimulinkDataType> getDataObject() const override;
   ErrorCode parse() override;
 
-  ~SimulinkDataTypeParser() =default;
+  ~SimulinkDataTypeParser() = default;
 
 private:
   std::shared_ptr<SimulinkDataType> ptr_;
   std::string dataObject;
 };
 
-
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKDATATYPEPARSER_H
+#endif // SIMULINKDATATYPEPARSER_H

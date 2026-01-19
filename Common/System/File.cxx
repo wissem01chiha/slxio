@@ -1,6 +1,11 @@
 #include "File.h"
+#include "Compiler.h"
+#include "LibZip.h"
+#include "Libuv.h"
+#include "Platform.h"
 #include "Status.h"
 #include <cstring>
+#include <iostream>
 
 File::File(const std::string &path, Mode mode) : mode_(mode), path_(path) {}
 
@@ -52,28 +57,33 @@ File::File(File &&other) noexcept
   other.buffer_.clear();
 }
 
+bool File::isFile(const std::string &path) { return isFile(path.c_str()); }
+
+bool File::isFile(const char *path) {
+
+  uv_fs_t req;
+  int r = uv_fs_stat(uv_default_loop(), &req, path, nullptr);
+  if (r < 0) {
+    Status::log(r);
+    uv_fs_req_cleanup(&req);
+    return false;
+  }
+  bool result = S_ISREG(req.statbuf.st_mode);
+
+  uv_fs_req_cleanup(&req);
+  return result;
+}
+
+bool File::isFile() { return isFile(path_); }
+
+bool File::isFile() const { return isFile(path_); }
+
 ErrorCode File::open() {
 
   uv_fs_t req;
-  uint32_t flags = 0;
 
-  switch (mode_) {
-  case Read:
-    flags = O_RDONLY;
-    break;
-  case Write:
-    flags = O_WRONLY | O_CREAT;
-    break;
-  case Truncate:
-    flags = O_WRONLY | O_CREAT | O_TRUNC;
-    break;
-  case Append:
-    flags = O_WRONLY | O_CREAT | O_APPEND;
-    break;
-  }
-
-  int err =
-      uv_fs_open(uv_default_loop(), &req, path_.c_str(), flags, 0, nullptr);
+  int err = uv_fs_open(uv_default_loop(), &req, path_.c_str(), getFileMode(), 0,
+                       nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0) {
@@ -103,8 +113,7 @@ ErrorCode File::read() {
     return static_cast<ErrorCode>(-err);
   }
   if (err == 0) {
-    const char *err_str = uv_strerror(err);
-    fprintf(stderr, "%s : \n", err_str);
+    Status::log(err);
     return ErrorCode::SLX_EEOF;
   }
 
@@ -151,7 +160,7 @@ ErrorCode File::close() {
   return ErrorCode::SLX_OK;
 }
 
-bool File::eof() {
+bool File::eof() const {
 
   if (fd_ < 0 || mode_ != Read) {
     return false;
@@ -196,6 +205,26 @@ const char *File::getFileExtension() const {
   return dot + 1;
 }
 
+ErrorCode File::setFileExtension(const char *ext) {
+
+  if (!ext || *ext == '\0')
+    return ErrorCode::SLX_EINVAR;
+
+  size_t pos = path_.find_last_of('.');
+  if (pos == std::string::npos) {
+    path_ += ".";
+    path_ += ext;
+    return ErrorCode::SLX_OK;
+  }
+
+  std::string iext = path_.substr(pos + 1);
+  if (iext == ext)
+    return ErrorCode::SLX_EDUPOBJ;
+
+  path_.replace(pos + 1, iext.size(), ext);
+  return ErrorCode::SLX_OK;
+}
+
 ErrorCode File::move(const char *dirpath) {
 
   if (dirpath == nullptr) {
@@ -204,7 +233,7 @@ ErrorCode File::move(const char *dirpath) {
 
   std::string newPath = std::string(dirpath);
   if (!newPath.empty() && newPath.back() != '/' && newPath.back() != '\\') {
-      newPath += PATH_SEP;
+    newPath += PATH_SEP;
   }
   newPath += getFilename();
 
@@ -241,7 +270,27 @@ const std::string File::getFilename() {
   return std::string(path_.begin() + pos + 1, path_.end());
 }
 
-const Index File::getFileMode() { return (Index)mode_; }
+const int File::getFileMode() {
+
+  int flags = 0;
+
+  switch (mode_) {
+  case Read:
+    flags = O_RDONLY;
+    break;
+  case Write:
+    flags = O_WRONLY | O_CREAT;
+    break;
+  case Truncate:
+    flags = O_WRONLY | O_CREAT | O_TRUNC;
+    break;
+  case Append:
+    flags = O_WRONLY | O_CREAT | O_APPEND;
+    break;
+  }
+
+  return flags;
+}
 
 const char *File::getFileModeAsChar() {
 
@@ -258,26 +307,6 @@ const char *File::getFileModeAsChar() {
     "";
   };
   return "Unvalid";
-}
-
-ErrorCode File::setFileExtension(const char *ext) {
-
-  if (!ext || *ext == '\0')
-    return ErrorCode::SLX_EINVAR;
-
-  size_t pos = path_.find_last_of('.');
-  if (pos == std::string::npos) {
-    path_ += ".";
-    path_ += ext;
-    return ErrorCode::SLX_OK;
-  }
-
-  std::string iext = path_.substr(pos + 1);
-  if (iext == ext)
-    return ErrorCode::SLX_EDUPOBJ;
-
-  path_.replace(pos + 1, iext.size(), ext);
-  return ErrorCode::SLX_OK;
 }
 
 size_t File::size() const {
@@ -299,4 +328,99 @@ size_t File::size() const {
   return size_;
 }
 
-ErrorCode File::toZip() { return ErrorCode::SLX_ENOTIMPL; }
+ErrorCode File::unzip(const char *dir) {
+
+  int err = 0;
+  uv_fs_t req;
+
+  zip_t *archive = zip_open(path_.c_str(), ZIP_RDONLY, &err);
+  if (!archive) {
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  zip_int64_t num_entries = zip_get_num_entries(archive, 0);
+  for (zip_uint64_t i = 0; i < num_entries; ++i) {
+
+    const char *name = zip_get_name(archive, i, 0);
+    if (!name) {
+      continue;
+    }
+
+    char full_path[1024];
+    snprintf(full_path, sizeof(full_path), "%s/%s", dir, name);
+    if (name[strlen(name) - 1] == '/') {
+
+      int r = uv_fs_mkdir(uv_default_loop(), &req, full_path, 0755, NULL);
+      if (r < 0) {
+        Status::log(r);
+        return static_cast<ErrorCode>(-r);
+      }
+
+      continue;
+    }
+
+    zip_file_t *zf = zip_fopen_index(archive, i, 0);
+    if (!zf) {
+      continue;
+    }
+
+    FILE *out = fopen(full_path, "wb");
+    if (!out) {
+      zip_fclose(zf);
+      continue;
+    }
+
+    char buffer[4096];
+    zip_int64_t bytes;
+    while ((bytes = zip_fread(zf, buffer, sizeof(buffer))) > 0) {
+      fwrite(buffer, 1, bytes, out);
+    }
+
+    fclose(out);
+    zip_fclose(zf);
+  }
+
+  return ErrorCode::SLX_OK;
+}
+
+ErrorCode File::zip(const char *zfilepath, const char *zname) {
+
+  zip_t *za;
+  int err;
+
+  if ((za = zip_open(zfilepath, ZIP_CREATE, &err)) == NULL) {
+    zip_error_t error;
+    zip_error_init_with_code(&error, err);
+    fprintf(stderr, "cannot open zip archive '%s': %s\n", zfilepath,
+            zip_error_strerror(&error));
+    zip_error_fini(&error);
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  zip_int64_t idx = zip_name_locate(za, zname, 0);
+  if (idx < 0) {
+    fprintf(stderr, "archive entry not found: %s\n", zname);
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  zip_source_t *source = zip_source_file(za, path_.c_str(), 0, -1);
+  if (source == nullptr) {
+    fprintf(stderr, "zip source file failed: %s\n", zip_strerror(za));
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  if (zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8) < 0) {
+    fprintf(stderr, "zip file replace failed: %s\n", zip_strerror(za));
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  if (idx < 0) {
+    fprintf(stderr, "zip file add failed: %s\n", zip_strerror(za));
+    return ErrorCode::SLX_EIOERR;
+  }
+  if (zip_close(za) < 0) {
+    fprintf(stderr, "cannot close archive: %s\n", zip_strerror(za));
+  }
+
+  return ErrorCode::SLX_OK;
+}

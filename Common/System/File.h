@@ -12,23 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#ifndef FILE_H
+#define FILE_H
+
 #include "APIExport.h"
-#include "Compiler.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
 #include "Type.h"
 #include <memory>
-#include "Platform.h"
 #include <string>
 #include <vector>
 
 /**
- * @brief Cross‑platform File abstraction.
+ * @brief Cross‑platform file abstraction.
  * @details Provides a modern C++ interface over libuv routines with additional
  * file manipulation helpers. Designed as a lightweight alternative to the
- * C++17 <filesystem> utilities.
- * Supports basic file operations such as open, read, write, rename, move, and
- * close. Also provides helpers for stream‑based and memory‑mapped I/O.
+ * C++17 <filesystem> utilities for compilers or platforms that do not support,
+ * or prefer not to rely on, C++17 or third‑party dependencies (e.g.,
+ * Boost::filesystem), which can be heavy to integrate or vendor. Supports basic
+ * file operations such as open, read, write, rename, move, and close.
  */
 class APIEXPORT File final {
 public:
@@ -56,6 +57,18 @@ public:
   /// @brief Move constructor.
   File(File &&other) noexcept;
 
+  /// @brief Check if the given path is an exsiting file.
+  static bool isFile(const char *path);
+
+  /// @brief Check if the given path is an exsiting file.
+  static bool isFile(const std::string &path);
+
+  /// @brief Member function version of isFile
+  bool isFile();
+
+  /// @brief Const Member function version of isFile
+  bool isFile() const;
+
   /// @brief Open the file with the initialized mode.
   ErrorCode open();
 
@@ -80,14 +93,16 @@ public:
   /// @brief Get the filename component of the path.
   const std::string getFilename();
 
-  /// @brief Get the file access mode as an index type.
-  const Index getFileMode();
+  /// @brief Get the file access mode as an integer type.
+  /// as defined in "fcntl.h" standard header, not as the
+  /// File::Mode data type
+  const int getFileMode();
 
   /// @brief Get the file access mode as a human‑readable string.
   const char *getFileModeAsChar();
 
   /// @brief Check if the end of file has been reached.
-  bool eof();
+  bool eof() const;
 
   /// @brief Get the internal data buffer.
   std::vector<char> getBuffer();
@@ -102,7 +117,7 @@ public:
   /// @brief Get the parent directory path.
   /// @example "rootdir/filename.txt" -> "rootdir/"
   /// @note if no parent directory found eg "filename.txt"
-  /// return "." 
+  /// return "."
   std::string getFileDirectory();
 
   /// @brief Get the file extension.
@@ -110,13 +125,43 @@ public:
 
   /// @brief Set the file extension.
   /// @note If the extension is unchanged, returns ASLX_EDUPOBJ.
+  /// @warning this function cast the extension on the local
+  /// path_ refrence, without touching the filesystem, so
+  /// we can run on dangling refrence to the file --> will be decapreed
+  /// in new versions, DO NOT USE it only for libzip compatibilty
   ErrorCode setFileExtension(const char *ext);
 
-  /// @brief Add the file to a zip archive.
-  ErrorCode toZip();
+  /// @brief for zip archives (e.g., ".zip" file extensions),
+  /// extracts the current file to the given directory path.
+  /// @note Checks whether the provided path is a valid directory
+  ///       using the Directory class utility.
+  /// @note this function right now do not check the validity of the
+  /// given path as a system directory
+  ErrorCode unzip(const char *dir);
 
-  /// @brief Get the file size on disk.
-  /// @return File size in bytes, or -1 if not opened.
+  /// @brief Replace the current file in a compressed ZIP archive
+  ///        (e.g., "archive.zip").
+  /// @param file Path to the target ZIP archive file.
+  /// @param zname Logical entry name inside the archive to be replaced
+  ///        (e.g., "simulink/blockdiagram.xml").
+  /// @return ErrorCode::SLX_OK on success, or an appropriate error code
+  ///         if the operation fails.
+  /// @note The archive must be a valid ZIP file. It will be opened
+  ///       internally by this function; the caller does not need to
+  ///       open it beforehand.
+  /// @note If the specified entry name @p zname does not exist in the
+  ///       archive, an error is returned.
+  /// @example
+  /// Replace the block diagram in an SLX file with a new one:
+  /// @code
+  /// File f(".../path/to/new/blockdiagram.xml");
+  /// f.zip("../full/path/to/archive.zip", "simulink/blockdiagram.xml");
+  /// @endcode
+  ErrorCode zip(const char *file, const char *zname);
+
+  /// @brief Retrieve the size of the current file on disk.
+  /// @return The file size in bytes if the file is open and valid,
+  ///         or -1 if the file has not been opened.
   size_t size() const;
 
   /// @brief Destructor.
@@ -129,3 +174,5 @@ private:
   std::vector<char> buffer_;
   size_t nbytes_ = 0;
 };
+
+#endif // !FILE_H

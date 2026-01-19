@@ -1,6 +1,10 @@
-cmake_minimum_required(VERSION 3.12...3.26 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.29 FATAL_ERROR)
 
 project(Slxio)
+
+cmake_policy(SET CMP0048 NEW)
+cmake_policy(SET CMP0007 NEW)
+cmake_policy(SET CMP0012 NEW)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
@@ -21,20 +25,22 @@ option(USE_LOCAL_LIBS "Enable Using local installed libraries" ON)
 option(ENABLE_OPENMP "Enable OpenMP support" ON)
 option(ENABLE_AVX "Enable AVX optimizations where available" ON)
 option(ENABLE_HDF5 "Enable HDF5 support" ON)
+option(ENABLE_MATLAB "Enable Matlab support" OFF)
+
 option(ENABLE_PKGCONFIG "Generate pkg-config file" ON)
-option(TOP_LEVEL_BUILD "Enable top-level build" ON)
+option(ENABLE_INSTALL "Enable installtion after build" OFF)
 
 option(ENABLE_SANITIZER "Enable sanitizers" OFF)
 option(ENABLE_CLANG_TIDY "Enable Clang-Tidy format" OFF)
-option(ENABLE_CPPCHECK "Enable CppCheck static analysis" OFF)
-set(USE_CLANG_FORMAT "WANTED" CACHE STRING "Clang-Format support mode")
+option(ENABLE_CPPCHECK "Enable CppCheck static analysis" ON)
+option(ENABLE_CLANG_FORMAT  "Clang-Format support mode" ON)
 option(ENABLE_COVERAGE "Enable code coverage" OFF)
 option(ENABLE_FUZZING "Enable fuzzing support" OFF)
+
 
 option(ENABLE_DOCUMENTATION "Enable documentation generation" OFF)
 option(BUILD_EXAMPLES "Build example applications" OFF)
 
-include(FindPythonModule)
 include(CheckCompilerSupport)
 include(CompilerFlags)
 include(CheckExternalInclude)
@@ -44,7 +50,6 @@ include(GenerateSingleInclude)
 include(ModuleExternal)
 include(CheckAvxSupport)
 include(CheckClangSupport)
-include(CppCheck)
 include(ModuleSanitizer)
 include(Module)
 
@@ -54,5 +59,6 @@ list(APPEND CMAKE_MODULE_PATH ${MODULES_CMAKE_DIRS})
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 include(Testing)
+include(Coverage)
 include(Summery)
 include(Install)

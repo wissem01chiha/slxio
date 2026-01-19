@@ -12,19 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMUMINKMODELParser_H
-#define SIMUMINKMODELParser_H
+#ifndef SIMUMINKMODELPARSER_H
+#define SIMUMINKMODELPARSER_H
 
 #include "ABINamespace.h"
 #include "LibXML2.h"
-#include "SimulinkBlockParser.h"
-#include "SimulinkFile.h"
-#include "SimulinkLineParser.h"
+#include "APIExport.h"
+#include "ErrorCode.h"
 #include "SimulinkModel.h"
-#include "SimulinkObjectParser.h"
-#include "SimulinkParameterParser.h"
-#include "SimulinkPortParser.h"
+#include "SimulinkParserBase.h"
 
+SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -35,18 +33,23 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * orchestrator for assembling all model elements from external sources such as
  * XML, JSON, or other supported formats.
  */
-class SimulinkModelParser : public SLXParser<SimulinkModel> {
+class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel> {
 public:
   SimulinkModelParser();
-  SimulinkModelParser(SimulinkFile *File);
-  SimulinkErrorType build() override;
-  std::shared_ptr<SimulinkModel> get() override;
+
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkModel> getDataObject() const override;
+  ErrorCode parse() override;
+
+  ~SimulinkModelParser() = default;
 
 private:
-  std::unique_ptr<SimulinkModel> p_;
-  std::shared_ptr<SimulinkFile> File_;
+  std::shared_ptr<SimulinkModel> ptr_;
+  xmlNodePtr dataObject;
+ 
 };
 
 SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
-#endif // SIMUMINKMODELParser_H
+#endif // SIMUMINKMODELPARSER_H

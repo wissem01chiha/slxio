@@ -7,7 +7,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObjectParserTestFixture  {
 protected:
-  SimulinkObjectBuilder *builderPtr;
+  SimulinkObjectParser *builderPtr;
   xmlNodePtr xmlNodePtrTest;
   char path_xml[512];
 

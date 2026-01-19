@@ -45,6 +45,21 @@ enum class APIEXPORT SimulinkDataType {
   String
 };
 
+#define SIMULINKDATATYPE_MAP(XX)                                               \
+  XX(SimulinkDataType::Double, "double")                                       \
+  XX(SimulinkDataType::Single, "single")                                       \
+  XX(SimulinkDataType::Half, "half")                                           \
+  XX(SimulinkDataType::Int8, "int8")                                           \
+  XX(SimulinkDataType::UInt8, "uint8")                                         \
+  XX(SimulinkDataType::Int16, "int16")                                         \
+  XX(SimulinkDataType::UInt16, "uint16")                                       \
+  XX(SimulinkDataType::Int32, "int32")                                         \
+  XX(SimulinkDataType::UInt32, "uint32")                                       \
+  XX(SimulinkDataType::UInt64, "uint64")                                       \
+  XX(SimulinkDataType::Boolean, "boolean")                                     \
+  XX(SimulinkDataType::String, "string")                                       \
+  XX(SimulinkDataType::Auto, "auto")
+
 SimulinkDataType toSimulinkDataType(bool);
 
 SimulinkDataType toSimulinkDataType(Float);
@@ -59,11 +74,9 @@ SimulinkDataType toSimulinkDataType(uint32);
 SimulinkDataType toSimulinkDataType(uint64);
 
 SimulinkDataType toSimulinkDataType(const std::string &);
-
-SimulinkDataType toSimulinkDataType(const char *sldt);
 const char *toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKDATATYPE_H
+#endif // !SIMULINKDATATYPE_H

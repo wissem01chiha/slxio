@@ -28,20 +28,36 @@ CLASSES
   SimulinkArrayParser 
   SimulinkObjectParser
   SimulinkPortParser
+  SimulinkPortTypeParser
   SimulinkConfigSetParser
   SimulinkLineParser
   SimulinkDataTypeParser
   SimulinkSignalParser
+  SimulinkFileParser
+  SimulinkContent
+  SimulinkContentParser
+  SimulinkBlockParser
+  SimulinkHardwareParser
+  SimulinkModelParser
+  SimulinkFile
 SOURCES
 HEADERS
   SimulinkParameterParser.h
   SimulinkArrayParser.h
   SimulinkObjectParser.h
   SimulinkPortParser.h
+  SimulinkPortTypeParser.h
   SimulinkConfigSetParser.h
   SimulinkLineParser.h
   SimulinkDataTypeParser.h
   SimulinkSignalParser.h
+  SimulinkFileParser.h
+  SimulinkFile.h
+  SimulinkContent.h
+  SimulinkContentParser.h
+  SimulinkBlockParser.h
+  SimulinkHardwareParser.h
+  SimulinkModelParser.h
   SlxParameter.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS

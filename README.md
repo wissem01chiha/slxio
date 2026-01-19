@@ -38,7 +38,8 @@
   - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
     - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
     - [4.2.2 Access Model Block data](#422-access-model-block-data)
-- [5.0 License](#50-license)
+- [5.0 References](#50-references)
+- [6.0 License](#60-license)
 
 ## 1.0 Overview
 
@@ -48,7 +49,7 @@ This library is designed for use in projects that either lack access to MATLAB's
 
 The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
 
-**slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
+**Slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
 To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
@@ -88,7 +89,7 @@ This section describes how to build slxio, see  [2.1](#21-dependencies) describe
 
 ### 2.1 Dependencies
 
-SLxio dependencies are fetched automatically during build time. If not found, 
+Slxio dependencies are fetched automatically during build time. If not found, 
 they will be built from the bundled files included with the project. For external dependencies, Slxio uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
 
 | Library | Version | Introduced In | Depends On | Notes |
@@ -171,6 +172,7 @@ cmake --install .
 
 Project tests are enbaled via the CMake option `ENABLE_TESTING`.
 note that building test are only supported in debug build type by default, 
+
 
 ### 3.1 Running Tests
 To run all unit tests after building, use:
@@ -267,7 +269,14 @@ int main() {
     }
 ```
 
-## 5.0 License
+## 5.0 References
+
+> Shrestha, S. L., Chowdhury, S. A., & Csallner, C. (2022).  
+> *SLNET: A Redistributable Corpus of 3rd-party Simulink Models (v2.0)*.  
+> Zenodo. https://doi.org/10.5281/zenodo.5259648
+
+
+## 6.0 License
 
 All material is provided under an Apache LLicense unless otherwise specified.
 
