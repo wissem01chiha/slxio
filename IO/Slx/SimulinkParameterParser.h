@@ -15,13 +15,13 @@
 #ifndef SIMULINKPARAMETERPARSER_H
 #define SIMULINKPARAMETERPARSER_H
 
-#include "LibXML2.h"
-#include "Logger.h"
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "LibXML2.h"
+#include "Logger.h"
 #include "SimulinkDataType.h"
-#include "SimulinkParserBase.h"
 #include "SimulinkParameter.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -39,7 +39,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class APIEXPORT SimulinkParameterParser final
-    : public SimulinkParserBase <xmlNodePtr, SimulinkParameter> {
+    : public SimulinkParserBase<xmlNodePtr, SimulinkParameter> {
 public:
   SimulinkParameterParser();
   /// @note Check if the related node name attribute is empty.
@@ -49,7 +49,7 @@ public:
   std::shared_ptr<SimulinkParameter> getDataObject() const override;
   ErrorCode parse() override;
 
-  ~SimulinkParameterParser() =default;
+  ~SimulinkParameterParser() = default;
 
 private:
   /// @brief maps an explicit string data type to SimulinkDataType

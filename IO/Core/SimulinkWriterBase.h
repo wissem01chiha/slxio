@@ -16,20 +16,19 @@
 #define SIMULINKWRITERBASE_H
 
 #include "ABINamespace.h"
+#include "APIExport.h"
 #include "ErrorBuffer.h"
 #include "ErrorCode.h"
-#include "APIExport.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief base class for all exporters
- * @tparam object data type to write to 
+ * @tparam object data type to write to
  * @tparam P object
  */
-template <typename T, typename P> 
-class SimulinkWriterBase {
+template <typename T, typename P> class SimulinkWriterBase {
 public:
   virtual ~SimulinkWriterBase() = default;
 
@@ -43,7 +42,7 @@ public:
   /// can be stream, string (eg toString()), custom struct
   virtual ErrorCode setOutputData(const P data) = 0;
 
-   /// @brief Return the accumulated error buffer.
+  /// @brief Return the accumulated error buffer.
   /// This includes errors collected from all sub-writers invoked
   /// during the parse method.
   ErrorBuffer &getErrorBuffer() { return buffer_; }
@@ -54,7 +53,7 @@ public:
 protected:
   SimulinkWriterBase() = default;
 
-/// @brief Internal error buffer
+  /// @brief Internal error buffer
   ErrorBuffer buffer_;
 };
 SLXIO_NAMESPACE_END

@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMULINKPORTTYPEPARSER_H 
+#ifndef SIMULINKPORTTYPEPARSER_H
 #define SIMULINKPORTTYPEPARSER_H
 
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
-#include "SimulinkPortType.h"
 #include "SimulinkParserBase.h"
+#include "SimulinkPortType.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -29,17 +29,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkPortTypeParser final
     : public SimulinkParserBase<std::string, SimulinkPortType> {
 public:
-    SimulinkPortTypeParser();
-    ErrorCode setInputData(const std::string data) override;
-    ErrorCode setInputData(const char* data);
-    std::shared_ptr<SimulinkPortType> getDataObject() const override;
-    ErrorCode parse() override;
-    ~SimulinkPortTypeParser() = default;
+  SimulinkPortTypeParser();
+  ErrorCode setInputData(const std::string data) override;
+  ErrorCode setInputData(const char *data);
+  std::shared_ptr<SimulinkPortType> getDataObject() const override;
+  ErrorCode parse() override;
+  ~SimulinkPortTypeParser() = default;
+
 private:
-    std::shared_ptr<SimulinkPortType> ptr_;
-    std::string dataObject;
+  std::shared_ptr<SimulinkPortType> ptr_;
+  std::string dataObject;
 };
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKPORTTYPEPARSER_H 
+#endif // !SIMULINKPORTTYPEPARSER_H

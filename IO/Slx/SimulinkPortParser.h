@@ -16,8 +16,8 @@
 #define SIMULINKPORTPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
 #include "APIExport.h"
+#include "LibXML2.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkPort.h"
 
@@ -39,7 +39,7 @@ public:
   std::shared_ptr<SimulinkPort> getDataObject() const override;
   ErrorCode parse() override;
 
-  ~SimulinkPortParser() =default;
+  ~SimulinkPortParser() = default;
 
 private:
   std::shared_ptr<SimulinkPort> ptr_;

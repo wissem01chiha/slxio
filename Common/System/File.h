@@ -86,12 +86,24 @@ public:
   /// automatically.
   ErrorCode copy(File &ofile);
 
+  /// @brief Copy the current file content to another directory.
+  /// @note The destination file will have the same filename as the current
+  /// file.
+  /// @warning If a file with the same name exists in the destination directory,
+  /// it will be overwritten.
+  /// @warning the fuction does not check the validity of the given
+  /// destination directory path, use with caution
+  ErrorCode copy(const char *destdir);
+
   /// @brief Rename the file.
   /// @warning The old name will be lost with no backup.
   ErrorCode rename(const char *filename);
 
   /// @brief Get the filename component of the path.
   const std::string getFilename();
+
+  /// @brief Get the file path
+  const std::string &getFilepath() const;
 
   /// @brief Get the file access mode as an integer type.
   /// as defined in "fcntl.h" standard header, not as the
@@ -124,11 +136,12 @@ public:
   const char *getFileExtension() const;
 
   /// @brief Set the file extension.
-  /// @note If the extension is unchanged, returns ASLX_EDUPOBJ.
-  /// @warning this function cast the extension on the local
-  /// path_ refrence, without touching the filesystem, so
-  /// we can run on dangling refrence to the file --> will be decapreed
-  /// in new versions, DO NOT USE it only for libzip compatibilty
+  /// @note If the extension is unchanged, returns SLX_EDUPOBJ.
+  /// @warning this function cast the extension of the physical file on disk
+  /// and not only the internal path_ attribute
+  /// @note the given extension should not contain the dot character '.'
+  /// @warning if the file is not valid or not opened
+  /// the function will return SLX_EINVAR
   ErrorCode setFileExtension(const char *ext);
 
   /// @brief for zip archives (e.g., ".zip" file extensions),

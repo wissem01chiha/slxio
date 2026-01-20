@@ -12,21 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SIMULINKSIGNALPARSER_H 
+#ifndef SIMULINKSIGNALPARSER_H
 #define SIMULINKSIGNALPARSER_H
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "LibXML2.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkSignal.h"
-#include "LibXML2.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkSignal data object
 class APIEXPORT SimulinkSignalParser final
-    : public SimulinkParserBase <xmlNodePtr, SimulinkSignal> {
+    : public SimulinkParserBase<xmlNodePtr, SimulinkSignal> {
 public:
   SimulinkSignalParser();
 
@@ -34,7 +34,7 @@ public:
   std::shared_ptr<SimulinkSignal> getDataObject() const override;
   ErrorCode parse() override;
 
-  ~SimulinkSignalParser() =default;
+  ~SimulinkSignalParser() = default;
 
 private:
   std::shared_ptr<SimulinkSignal> ptr_;
@@ -44,4 +44,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKSIGNALPARSER_H 
+#endif // !SIMULINKSIGNALPARSER_H

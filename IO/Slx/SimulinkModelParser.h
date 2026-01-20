@@ -16,9 +16,9 @@
 #define SIMUMINKMODELPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "LibXML2.h"
 #include "SimulinkModel.h"
 #include "SimulinkParserBase.h"
 
@@ -33,7 +33,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * orchestrator for assembling all model elements from external sources such as
  * XML, JSON, or other supported formats.
  */
-class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel> {
+class SimulinkModelParser
+    : public SimulinkParserBase<xmlNodePtr, SimulinkModel> {
 public:
   SimulinkModelParser();
 
@@ -46,7 +47,6 @@ public:
 private:
   std::shared_ptr<SimulinkModel> ptr_;
   xmlNodePtr dataObject;
- 
 };
 
 SLXIO_ABI_NAMESPACE_END

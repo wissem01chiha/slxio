@@ -32,6 +32,5 @@ TEST_F(SimulinkArrayBuilderTestFixture, BuildTest) {
   ASSERT_EQ(obj->getType(), SimulinkElementType::Array);
 }
 
-
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -16,10 +16,10 @@
 #define SIMULINKLINEPARSER_H
 
 #include "ABINamespace.h"
-#include "LibXML2.h"
-#include "SimulinkParserBase.h"
-#include "SimulinkLine.h"
 #include "APIExport.h"
+#include "LibXML2.h"
+#include "SimulinkLine.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

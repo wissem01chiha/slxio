@@ -18,7 +18,6 @@
 #include "APIExport.h"
 #include "File.h"
 #include "Libuv.h"
-#include "Platform.h"
 #include <map>
 #include <vector>
 
@@ -78,6 +77,14 @@ public:
   /// @brief Get the current working directory.
   static const char *getCurrentDirectory();
 
+  /// @brief Get the system temporary directory.
+  /// create and return a system unique temporary directory name
+  /// prefix is optional, if given the temporary directory
+  /// will start with the given prefix
+  /// returns nullptr on failure
+  /// @note only relative directory name is computed
+  static const char *getTemporaryDirectory(const char *prefix = "");
+
   /// @brief Check if the given path is a directory.
   static bool isDirectory(const char *path);
 
@@ -95,7 +102,7 @@ public:
 
   /// @brief Compress the directory content into a ZIP archive.
   /// @details Output file will be named <dirname>.zip.
-  /// if the new archive name is given it will assume same as parent directory 
+  /// if the new archive name is given it will assume same as parent directory
   ErrorCode zip(const char *dir = "");
 
   /// @brief Destructor.

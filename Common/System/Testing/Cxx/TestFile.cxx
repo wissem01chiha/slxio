@@ -1,5 +1,5 @@
-#include "Doctest.h"
 #include "Compiler.h"
+#include "Doctest.h"
 #include "File.h"
 #include "Libuv.h"
 #include "SlxConfig.h"
@@ -42,7 +42,7 @@ public:
     return tempDir;
   }
 
-  const char *getZipPath(const char* filename) {
+  const char *getZipPath(const char *filename) {
 
     static char zipFilePath[512];
     snprintf(zipFilePath, sizeof(zipFilePath),
@@ -142,11 +142,17 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test") {
   CHECK(f.getFileDirectory().find(cwdbuffer) != std::string::npos);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Cast File Extension Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test") {
 
-  std::string EXAMPLE_FILE_PATH =
-      std::string(cwdbuffer) + PATH_SEP + "example.txt";
-  File f(EXAMPLE_FILE_PATH);
+  std::string TEMP_FILE_PATH =
+      std::string(cwdbuffer) + PATH_SEP + "testfile.txt";
+  {
+    std::ofstream ofs(TEMP_FILE_PATH);
+    ofs << "temporary file content for casting extension test";
+    ofs.close();
+  }
+
+  File f(TEMP_FILE_PATH.c_str(), File::Read);
   CHECK(f.setFileExtension("md") == ErrorCode::SLX_OK);
   CHECK(std::string(f.getFileExtension()) == "md");
 }
@@ -160,21 +166,21 @@ TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test") {
   CHECK(f.size() > 0);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test") { 
-    
-    File f(getZipPath("Asset1.zip"));
-    CHECK(f.isFile() == true);
-    CHECK(f.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
+TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test") {
+
+  File f(getZipPath("Asset1.zip"));
+  CHECK(f.isFile() == true);
+  CHECK(f.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test") {
 
-    File f(getZipPath("blockdiagram.xml"));
-  std::cout << "getZipPath('blockdiagram.xml ') = " << getZipPath(
-                   "blockdiagram.xml")
+  File f(getZipPath("blockdiagram.xml"));
+  std::cout << "getZipPath('blockdiagram.xml ') = "
+            << getZipPath("blockdiagram.xml") << std::endl;
+  std::cout << "getZipPath(' Asset2.zip ') " << getZipPath("Asset2.zip")
             << std::endl;
-    std::cout << "getZipPath(' Asset2.zip ') " << getZipPath("Asset2.zip")
-              << std::endl;
-    CHECK(f.isFile() == true);
-    CHECK(f.zip(getZipPath("Asset2.zip"), "simulink/blockdiagram.xml") == ErrorCode::SLX_OK);
+  CHECK(f.isFile() == true);
+  CHECK(f.zip(getZipPath("Asset2.zip"), "simulink/blockdiagram.xml") ==
+        ErrorCode::SLX_OK);
 }

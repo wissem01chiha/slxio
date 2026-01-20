@@ -1,11 +1,11 @@
+#include "Doctest.h"
 #include "SimulinkObjectParser.h"
 #include "SlxConfig.h"
-#include "Doctest.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkObjectParserTestFixture  {
+class SimulinkObjectParserTestFixture {
 protected:
   SimulinkObjectParser *builderPtr;
   xmlNodePtr xmlNodePtrTest;

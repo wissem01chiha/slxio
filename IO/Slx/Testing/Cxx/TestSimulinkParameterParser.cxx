@@ -10,8 +10,8 @@ protected:
   SimulinkParameterParserTestFixture()
       : parserPtr(new SimulinkParameterParser()), doc(nullptr) {}
 
-  xmlNodePtr getXmlNodePtr(const char* xmlfilename) {
-  
+  xmlNodePtr getXmlNodePtr(const char *xmlfilename) {
+
     char xmlfilepath[512];
     snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
              PROJECT_ROOT_DIR, xmlfilename);
@@ -21,11 +21,10 @@ protected:
     }
     xmlNodePtr root = xmlDocGetRootElement(doc);
     return root;
-  
   }
-  
+
   ~SimulinkParameterParserTestFixture() {
-   
+
     if (parserPtr) {
       delete parserPtr;
       parserPtr = nullptr;
@@ -34,12 +33,13 @@ protected:
       xmlFreeDoc(doc);
     }
   }
-    
+
   SimulinkParameterParser *parserPtr;
   xmlDocPtr doc;
 };
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest") {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "ParserSetInputDataTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
@@ -52,12 +52,11 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
   std::shared_ptr<SimulinkParameter> dataObj = parserPtr->getDataObject();
-  
+
   CHECK(dataObj != nullptr);
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
-                  "ParameterParserTest") {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
@@ -67,7 +66,8 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
   std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest") {
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "ParameterValidDataTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
@@ -75,7 +75,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest") 
   std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
 
   CHECK(strcmp(parameter->getValue(), "windows-1252") == 0);
-  CHECK(parameter->getDataType()==SimulinkDataType::Double);
+  CHECK(parameter->getDataType() == SimulinkDataType::Double);
 }
 
 SLXIO_ABI_NAMESPACE_END

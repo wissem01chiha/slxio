@@ -28,7 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
   SimulinkFile();
-  
+
   const SimulinkContent &getContent() const;
 
   ~SimulinkFile() = default;

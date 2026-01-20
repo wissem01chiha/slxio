@@ -1,8 +1,8 @@
 #include "SimulinkObject.h"
 #include "Logger.h"
 #include <algorithm>
-#include <sstream>
 #include <cstring>
+#include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -240,7 +240,7 @@ SimulinkObject::getParameter(const std::string &name) {
       }
     }
   }
-  l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ",name,"' not found.");
+  l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, "' not found.");
   return nullptr;
 }
 

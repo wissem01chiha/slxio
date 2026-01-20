@@ -17,9 +17,9 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "LibXML2.h"
 #include "SimulinkBlock.h"
 #include "SimulinkParserBase.h"
-#include "LibXML2.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -37,8 +37,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
   </Block>
  * @endcode
  */
-class APIEXPORT SimulinkBlockParser final 
-  : public SimulinkParserBase<xmlNodePtr, SimulinkBlock> {
+class APIEXPORT SimulinkBlockParser final
+    : public SimulinkParserBase<xmlNodePtr, SimulinkBlock> {
 public:
   SimulinkBlockParser();
 
@@ -54,6 +54,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END 
+SLXIO_NAMESPACE_END
 
 #endif // SIMULINKBLOCKPARSER_H

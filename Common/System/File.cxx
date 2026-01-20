@@ -5,6 +5,7 @@
 #include "Platform.h"
 #include "Status.h"
 #include <cstring>
+#include <fstream>
 #include <iostream>
 
 File::File(const std::string &path, Mode mode) : mode_(mode), path_(path) {}
@@ -64,7 +65,6 @@ bool File::isFile(const char *path) {
   uv_fs_t req;
   int r = uv_fs_stat(uv_default_loop(), &req, path, nullptr);
   if (r < 0) {
-    Status::log(r);
     uv_fs_req_cleanup(&req);
     return false;
   }
@@ -205,23 +205,54 @@ const char *File::getFileExtension() const {
   return dot + 1;
 }
 
-ErrorCode File::setFileExtension(const char *ext) {
+ErrorCode File::setFileExtension(const char *ext_) {
 
-  if (!ext || *ext == '\0')
+  if (!ext_ || *ext_ == '\0') {
     return ErrorCode::SLX_EINVAR;
+  }
+
+  if (path_.size() < 1) {
+    return ErrorCode::SLX_EINVAR;
+  }
+  const char *ext = getFileExtension();
+  const char *des = path_.c_str();
+  size_t len = ext - path_.c_str();
+  char *dest = (char *)malloc(len + 5);
+  strncpy(dest, path_.c_str(), len);
+  dest[len] = '\0';
+  strcat(dest, ext_);
+
+  FILE *src = fopen(path_.c_str(), "rb");
+  if (!src) {
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  FILE *dst = fopen(dest, "wb");
+  if (!dst) {
+    return ErrorCode::SLX_EIOERR;
+  }
+  char buffer[4096];
+  size_t bytes;
+  while ((bytes = fread(buffer, 1, sizeof(buffer), src)) > 0) {
+    fwrite(buffer, 1, bytes, dst);
+  }
+  fclose(src);
+  fclose(dst);
+  free(dest);
 
   size_t pos = path_.find_last_of('.');
   if (pos == std::string::npos) {
     path_ += ".";
-    path_ += ext;
+    path_ += ext_;
     return ErrorCode::SLX_OK;
   }
 
   std::string iext = path_.substr(pos + 1);
-  if (iext == ext)
+  if (iext == ext_)
     return ErrorCode::SLX_EDUPOBJ;
 
-  path_.replace(pos + 1, iext.size(), ext);
+  path_.replace(pos + 1, iext.size(), ext_);
+
   return ErrorCode::SLX_OK;
 }
 
@@ -253,6 +284,29 @@ ErrorCode File::move(const char *dirpath) {
 
 ErrorCode File::copy(File &ofile) { return ErrorCode::SLX_ENOTIMPL; }
 
+ErrorCode File::copy(const char *destdir) {
+
+  if (!destdir)
+    return ErrorCode::SLX_EINVAR;
+
+  std::string destpath = std::string(destdir);
+  if (!destpath.empty() && destpath.back() != PATH_SEP)
+    destpath += PATH_SEP;
+  destpath += getFilename();
+
+  std::ifstream src(path_, std::ios::binary);
+  if (!src)
+    return ErrorCode::SLX_ENOENT;
+
+  std::ofstream dst(destpath, std::ios::binary);
+  if (!dst)
+    return ErrorCode::SLX_EIOERR;
+
+  dst << src.rdbuf();
+
+  return ErrorCode::SLX_OK;
+}
+
 ErrorCode File::rename(const char *filename) {
 
   if (!filename || *filename == '\0')
@@ -269,6 +323,8 @@ const std::string File::getFilename() {
   }
   return std::string(path_.begin() + pos + 1, path_.end());
 }
+
+const std::string &File::getFilepath() const { return path_; }
 
 const int File::getFileMode() {
 

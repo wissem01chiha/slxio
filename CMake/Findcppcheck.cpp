@@ -14,8 +14,4 @@
 // http://www.boost.org/LICENSE_1_0.txt)
 // SPDX-License-Identifier: BSL-1.0
 
-
-
-int main(int argc, char* argv[]) {
-	return 0;
-}
+int main(int argc, char *argv[]) { return 0; }
