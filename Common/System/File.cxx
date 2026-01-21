@@ -290,19 +290,21 @@ ErrorCode File::copy(const char *destdir) {
     return ErrorCode::SLX_EINVAR;
 
   std::string destpath = std::string(destdir);
-  if (!destpath.empty() && destpath.back() != PATH_SEP)
+  if (!destpath.empty() && destpath.back() != PATH_SEP) {
     destpath += PATH_SEP;
+  }
   destpath += getFilename();
 
   std::ifstream src(path_, std::ios::binary);
-  if (!src)
+  if (!src){
     return ErrorCode::SLX_ENOENT;
-
+  }
   std::ofstream dst(destpath, std::ios::binary);
-  if (!dst)
+  if (!dst){
     return ErrorCode::SLX_EIOERR;
-
+  }
   dst << src.rdbuf();
+  dst.flush();
 
   return ErrorCode::SLX_OK;
 }
