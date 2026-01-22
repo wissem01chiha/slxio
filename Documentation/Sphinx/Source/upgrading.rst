@@ -1,0 +1,4 @@
+.. _upgrading:
+
+Upgrading
+=========
