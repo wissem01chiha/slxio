@@ -48,3 +48,5 @@ out/
 .vs/
 /CMake/ConfigVersion.cmake.in
 /CMake/Config.cmake.in
+/IO/Slx/Testing/Data/TestAsset1.slx
+/IO/Slx/Testing/Data/TestAsset12.slx
