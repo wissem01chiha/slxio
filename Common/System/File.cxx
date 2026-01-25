@@ -249,7 +249,6 @@ ErrorCode File::setFileExtension(const char *newExt) {
   return ErrorCode::SLX_OK;
 }
 
-
 ErrorCode File::move(const char *dirpath) {
 
   if (dirpath == nullptr) {

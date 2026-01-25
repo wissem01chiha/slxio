@@ -150,7 +150,7 @@ SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
 
   Logger &l = Logger::getInstance();
 
-  XmlTarget targets[] = {
+XmlTarget targets[] = {
       {"/simulink/blockdiagram.xml", &ptr_->blockdiagram},
       {"/simulink/modelDictionary.xml", &ptr_->modelDictionary},
       {"/simulink/configSetInfo.xml", &ptr_->configSetInfo},
@@ -162,6 +162,7 @@ SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
       {"/metadata/mwcoreProperties.xml", &ptr_->mwcoreProperties},
       {"/metadata/mwcorePropertiesExtension.xml",
        &ptr_->mwcorePropertiesExtension}};
+
 
   for (auto &t : targets) {
     std::string fullPath = tempdirfullpath + t.path;

@@ -179,6 +179,10 @@ TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test") {
   File f(getZipPath("Asset1.zip"));
   CHECK(f.isFile() == true);
   CHECK(f.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
+
+  File f_(getZipPath("TestAsset1.zip"));
+  CHECK(f_.isFile() == true);
+  CHECK(f_.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test") {
