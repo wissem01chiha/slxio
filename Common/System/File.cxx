@@ -387,6 +387,7 @@ ErrorCode File::unzip(const char *dir) {
 
   zip_t *archive = zip_open(path_.c_str(), ZIP_RDONLY, &err);
   if (!archive) {
+    fprintf(stdout, "attempt to unzip: %s\n", path_.c_str());
     Status::log((int)ErrorCode::SLX_EIOERR);
     return ErrorCode::SLX_EIOERR;
   }
