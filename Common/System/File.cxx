@@ -279,29 +279,37 @@ ErrorCode File::move(const char *dirpath) {
 ErrorCode File::copy(File &ofile) { return ErrorCode::SLX_ENOTIMPL; }
 
 ErrorCode File::copy(const char *destdir) {
-
   if (!destdir)
     return ErrorCode::SLX_EINVAR;
 
-  std::string destpath = std::string(destdir);
+  std::string destpath(destdir);
   if (!destpath.empty() && destpath.back() != PATH_SEP) {
     destpath += PATH_SEP;
   }
   destpath += getFilename();
 
   std::ifstream src(path_, std::ios::binary);
-  if (!src) {
+  if (!src.is_open()) {
+    Status::log((int)ErrorCode::SLX_ENOENT);
     return ErrorCode::SLX_ENOENT;
   }
+
   std::ofstream dst(destpath, std::ios::binary);
-  if (!dst) {
+  if (!dst.is_open()) {
+    Status::log((int)ErrorCode::SLX_EIOERR);
     return ErrorCode::SLX_EIOERR;
   }
+
   dst << src.rdbuf();
-  dst.flush();
+
+  if (!dst.good()) {
+    Status::log((int)ErrorCode::SLX_EIOERR);
+    return ErrorCode::SLX_EIOERR;
+  }
 
   return ErrorCode::SLX_OK;
 }
+
 
 ErrorCode File::rename(const char *filename) {
 
