@@ -307,6 +307,10 @@ ErrorCode File::copy(const char *destdir) {
     return ErrorCode::SLX_EIOERR;
   }
 
+  if (dst.tellp() == 0) {
+    return ErrorCode::SLX_EIOERR;  
+  }
+
   return ErrorCode::SLX_OK;
 }
 
