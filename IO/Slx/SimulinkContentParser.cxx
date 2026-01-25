@@ -70,9 +70,10 @@ ErrorCode SimulinkContentParser::parse() {
     return status;
   }
 
-  ErrorCode unzip_status = dataObject.unzip(tmpdir);
+  ErrorCode unzip_status = dataObject.unzip(tempdirfullpath.c_str());
   if (unzip_status != ErrorCode::SLX_OK) {
-    l.log(Logger::V_ERROR, "failed to unzip the slx file to : ", tmpdir);
+    l.log(Logger::V_ERROR,
+          "failed to unzip the slx file to : ", tempdirfullpath.c_str());
     return unzip_status;
   }
 
