@@ -49,7 +49,8 @@ ErrorCode SimulinkContentParser::parse() {
   const char *tmpdir = Directory::getTemporaryDirectory(tempdirname.c_str());
 
   if (tmpdir == nullptr) {
-    l.log(Logger::V_ERROR, "failed to create temporary directory with prefix : ",
+    l.log(Logger::V_ERROR,
+          "failed to create temporary directory with prefix : ",
           tempdirname.c_str());
     return ErrorCode::SLX_EIOERR;
   }
@@ -59,18 +60,27 @@ ErrorCode SimulinkContentParser::parse() {
 
   ErrorCode mv_status = dataObject.copy(tempdirfullpath.c_str());
   if (mv_status != ErrorCode::SLX_OK) {
-    l.log(Logger::V_ERROR, "failed to copy slx file to temporary directory");
+    l.log(Logger::V_ERROR, "failed to copy slx file to temporary directory : ",
+          tempdirfullpath.c_str());
     return mv_status;
   }
 
-  ErrorCode status = dataObject.setFileExtension("zip");
+  // Build the full path to the temporary copy of the SLX file.
+  // Create a new File object using this path as the working baseline,
+  // ensuring the original user file remains untouched.
+  std::string tempfilefullpath =
+      tempdirfullpath + PATH_SEP + dataObject.getFilename();
+
+  File fileDataObject(tempfilefullpath, File::Read);
+
+  ErrorCode status = fileDataObject.setFileExtension("zip");
 
   if (status != ErrorCode::SLX_OK) {
     l.log(Logger::VERBOSITY_0, "failed to set file extension to zip");
     return status;
   }
 
-  ErrorCode unzip_status = dataObject.unzip(tempdirfullpath.c_str());
+  ErrorCode unzip_status = fileDataObject.unzip(tempdirfullpath.c_str());
   if (unzip_status != ErrorCode::SLX_OK) {
     l.log(Logger::V_ERROR,
           "failed to unzip the slx file to : ", tempdirfullpath.c_str());
