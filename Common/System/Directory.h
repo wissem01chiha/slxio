@@ -59,6 +59,9 @@ public:
   /// @brief Open the directory and initialize member variables.
   /// @details Populates the file map and file list attributes.
   ErrorCode open();
+  
+  /// @brief Remove the directory and its contents recursively.
+  ErrorCode remove();
 
   /// @brief Get the number of files in the directory.
   /// @return Number of files, or -1 if the directory could not be opened.
@@ -96,6 +99,9 @@ public:
 
   /// @brief Get the directory name from the full path.
   std::string getDirectoryName();
+
+  /// @brief Get the directory path.
+  const std::string &getDirectoryPath() const;
 
   /// @brief Check if the directory is empty.
   bool empty();

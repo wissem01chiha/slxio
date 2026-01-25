@@ -141,6 +141,12 @@ ErrorCode Directory::open() {
   return ErrorCode::SLX_OK;
 }
 
+ErrorCode Directory::remove() { 
+  
+  
+  return ErrorCode::SLX_OK;
+ }
+
 size_t Directory::getNumberOfFiles() const { return filelist.size(); }
 
 const File *Directory::getFile(const size_t &index) const {
@@ -231,6 +237,10 @@ std::string Directory::getDirectoryName() {
     return path_;
   }
   return path_.substr(pos + 1);
+}
+
+const std::string &Directory::getDirectoryPath() const {
+  return path_;
 }
 
 bool Directory::empty() { return filelist.empty(); }

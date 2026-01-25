@@ -29,11 +29,43 @@ ErrorCode SimulinkContentParser::setInputData(const File fs) {
   return ErrorCode::SLX_OK;
 }
 
+ErrorCode SimulinkContentParser::parse() {
+
+  Logger &l = Logger::getInstance();
+
+  ErrorCode init_status = initTempDirectory();
+  if (init_status != ErrorCode::SLX_OK) {
+    buffer_.push_back(init_status);
+    return init_status;
+  }
+
+  ErrorCode unzip_status = unzip();
+  if (unzip_status != ErrorCode::SLX_OK) {
+    buffer_.push_back(unzip_status);
+    return unzip_status;
+  }
+
+  ErrorCode load_status = loadXmlTargets(
+      tempDirectory.getDirectoryPath());
+  if (load_status != ErrorCode::SLX_OK) {
+    buffer_.push_back(load_status);
+    return load_status;
+  }
+
+  ErrorCode clear_status = clearTempDirectory();
+  if (clear_status != ErrorCode::SLX_OK) {
+    buffer_.push_back(clear_status);
+    return clear_status;
+  }
+  
+  return ErrorCode::SLX_OK;
+}
+
 std::shared_ptr<SimulinkContent> SimulinkContentParser::getDataObject() const {
   return ptr_;
 }
 
-ErrorCode SimulinkContentParser::parse() {
+ErrorCode SimulinkContentParser::initTempDirectory() {
 
   Logger &l = Logger::getInstance();
 
@@ -55,8 +87,27 @@ ErrorCode SimulinkContentParser::parse() {
     return ErrorCode::SLX_EIOERR;
   }
 
-  std::string tempdirfullpath = std::string(Directory::getCurrentDirectory()) +
-                                PATH_SEP + std::string(tmpdir);
+  std::string tempDirectoryPath =
+      std::string(Directory::getCurrentDirectory()) + PATH_SEP +
+      std::string(tmpdir);
+
+  if (Directory::isDirectory(tempDirectoryPath)) {
+    tempDirectory = Directory(tempDirectoryPath);
+  } else {
+    l.log(Logger::V_ERROR, "temporary directory path is not valid : ",
+          tempDirectoryPath.c_str());
+    return ErrorCode::SLX_EIOERR;
+  }
+
+  return ErrorCode::SLX_OK;
+}
+
+ErrorCode SimulinkContentParser::unzip() {
+
+  Logger &l = Logger::getInstance();
+
+  const char* tmpdir = tempDirectory.getDirectoryPath().c_str();
+  std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
   ErrorCode mv_status = dataObject.copy(tempdirfullpath.c_str());
   if (mv_status != ErrorCode::SLX_OK) {
@@ -87,101 +138,52 @@ ErrorCode SimulinkContentParser::parse() {
   ErrorCode unzip_status = fileDataObject.unzip(tmpdir);
   if (unzip_status != ErrorCode::SLX_OK) {
     l.log(Logger::V_ERROR, "failed to unzip ",
-          fileDataObject.getFilepath().c_str(),
-          " in directory : ",
-          tmpdir);
+          fileDataObject.getFilepath().c_str(), " in directory : ", tmpdir);
     return unzip_status;
   }
 
-  std::string blockdiagramPath =
-      std::string(std::string(tempdirfullpath) + "/simulink/blockdiagram.xml");
-  ptr_->blockdiagram = xmlReadFile(blockdiagramPath.c_str(), nullptr, 0);
-  if (ptr_->blockdiagram == nullptr) {
-    l.log(Logger::VERBOSITY_0,
-          "failed to read blockdiagram.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
+  return ErrorCode::SLX_OK;
+}
+
+ErrorCode
+SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
+
+  Logger &l = Logger::getInstance();
+
+  XmlTarget targets[] = {
+      {"/simulink/blockdiagram.xml", &ptr_->blockdiagram},
+      {"/simulink/modelDictionary.xml", &ptr_->modelDictionary},
+      {"/simulink/configSetInfo.xml", &ptr_->configSetInfo},
+      {"/simulink/bddefaults.xml", &ptr_->bddefaults},
+      {"/simulink/graphicalInterface.xml", &ptr_->graphicalInterface},
+      {"/simulink/ScheduleEditor.xml", &ptr_->scheduleEditor},
+      {"/simulink/ScheduleCore.xml", &ptr_->scheduleCore},
+      {"/metadata/coreProperties.xml", &ptr_->coreProperties},
+      {"/metadata/mwcoreProperties.xml", &ptr_->mwcoreProperties},
+      {"/metadata/mwcorePropertiesExtension.xml",
+       &ptr_->mwcorePropertiesExtension}};
+
+  for (auto &t : targets) {
+    std::string fullPath = tempdirfullpath + t.path;
+    *t.target = xmlReadFile(fullPath.c_str(), nullptr, 0);
+    if (*t.target == nullptr) {
+      l.log(Logger::V_ERROR, "failed to read ", fullPath.c_str(),
+            " from the slx content");
+      return ErrorCode::SLX_EIOERR;
+    }
   }
 
-  std::string modelDictionaryPath = std::string(
-      std::string(tempdirfullpath) + "/simulink/modelDictionary.xml");
-  ptr_->modelDictionary = xmlReadFile(modelDictionaryPath.c_str(), nullptr, 0);
-  if (ptr_->modelDictionary == nullptr) {
-    l.log(Logger::VERBOSITY_0,
-          "failed to read modelDictionary.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
+  return ErrorCode::SLX_OK;
+}
 
-  std::string configSetInfoPath =
-      std::string(std::string(tempdirfullpath) + "/simulink/configSetInfo.xml");
-  ptr_->configSetInfo = xmlReadFile(configSetInfoPath.c_str(), nullptr, 0);
-  if (ptr_->configSetInfo == nullptr) {
-    l.log(Logger::VERBOSITY_0,
-          "failed to read configSetInfo.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
+ErrorCode SimulinkContentParser::clearTempDirectory() {
+  Logger &l = Logger::getInstance();
+  ErrorCode status = tempDirectory.remove();
+  if (status != ErrorCode::SLX_OK) {
+    l.log(Logger::V_ERROR, "failed to remove temporary directory : ",
+          tempDirectory.getDirectoryPath().c_str());
+    return status;
   }
-
-  std::string bddefaultsPath =
-      std::string(std::string(tempdirfullpath) + "/simulink/bddefaults.xml");
-  ptr_->bddefaults = xmlReadFile(bddefaultsPath.c_str(), nullptr, 0);
-  if (ptr_->bddefaults == nullptr) {
-    l.log(Logger::VERBOSITY_0,
-          "failed to read bddefaults.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-
-  std::string graphicalInterfacePath = std::string(
-      std::string(tempdirfullpath) + "/simulink/graphicalInterface.xml");
-  ptr_->graphicalInterface =
-      xmlReadFile(graphicalInterfacePath.c_str(), nullptr, 0);
-  if (ptr_->graphicalInterface == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read graphicalInterface.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-
-  std::string scheduleEditorPath = std::string(std::string(tempdirfullpath) +
-                                               "/simulink/ScheduleEditor.xml");
-  ptr_->scheduleEditor = xmlReadFile(scheduleEditorPath.c_str(), nullptr, 0);
-  if (ptr_->scheduleEditor == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read ScheduleEditor.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-  std::string scheduleCorePath =
-      std::string(std::string(tempdirfullpath) + "/simulink/ScheduleCore.xml");
-  ptr_->scheduleCore = xmlReadFile(scheduleCorePath.c_str(), nullptr, 0);
-  if (ptr_->scheduleCore == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read ScheduleCore.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-  std::string corePropertiesPath = std::string(std::string(tempdirfullpath) +
-                                               "/metadata/coreProperties.xml");
-  ptr_->coreProperties = xmlReadFile(corePropertiesPath.c_str(), nullptr, 0);
-  if (ptr_->coreProperties == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read coreProperties.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-  std::string mwcorePropertiesPath = std::string(
-      std::string(tempdirfullpath) + "/metadata/mwcoreProperties.xml");
-  ptr_->mwcoreProperties =
-      xmlReadFile(mwcorePropertiesPath.c_str(), nullptr, 0);
-  if (ptr_->mwcoreProperties == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read mwcoreProperties.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-  std::string mwcorePropertiesExtensionPath = std::string(
-      std::string(tempdirfullpath) + "/metadata/mwcorePropertiesExtension.xml");
-  ptr_->mwcorePropertiesExtension =
-      xmlReadFile(mwcorePropertiesExtensionPath.c_str(), nullptr, 0);
-  if (ptr_->mwcorePropertiesExtension == nullptr) {
-    l.log(Logger::V_ERROR,
-          "failed to read mwcorePropertiesExtension.xml from the slx content");
-    return ErrorCode::SLX_EIOERR;
-  }
-
   return ErrorCode::SLX_OK;
 }
 
