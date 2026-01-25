@@ -15,7 +15,7 @@ protected:
 
   File getTestFileAsset(const char *assetName) {
 
-    char path_slx[512];
+    static char path_slx[512];
 
     snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
              PROJECT_ROOT_DIR, assetName);

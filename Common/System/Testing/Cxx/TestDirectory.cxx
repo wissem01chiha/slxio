@@ -97,3 +97,11 @@ TEST_CASE("Test Static getTemporaryDirectory") {
   CHECK(tmpdir != nullptr);
   CHECK(Directory::isDirectory(tmpdir));
 }
+
+TEST_CASE("Test Prefixed getTemporaryDirectory") {
+
+  const char *tmpdir = Directory::getTemporaryDirectory("Test_Temp_Prefix");
+  CHECK(tmpdir != nullptr);
+  CHECK(Directory::isDirectory(tmpdir));
+
+}

@@ -20,7 +20,7 @@ ErrorCode SimulinkContentParser::setInputData(const File fs) {
     buffer_.push_back(ErrorCode::SLX_EINVAR);
     return ErrorCode::SLX_EINVAR;
   }
-  if (!strcmp(fs.getFileExtension(), "slx") == 0) {
+  if (~strcmp(fs.getFileExtension(), "slx") == 0) {
     l.log(Logger::V_ERROR,
           "Only slx file extension are supported in this version");
     return ErrorCode::SLX_EINVAR;
@@ -36,6 +36,7 @@ std::shared_ptr<SimulinkContent> SimulinkContentParser::getDataObject() const {
 ErrorCode SimulinkContentParser::parse() {
 
   Logger &l = Logger::getInstance();
+
   /// replace "." with "_" for temporary directory name
   /// to be removed and implemented in Directory class
   std::string tempdirname = dataObject.getFilename();
@@ -48,7 +49,8 @@ ErrorCode SimulinkContentParser::parse() {
   const char *tmpdir = Directory::getTemporaryDirectory(tempdirname.c_str());
 
   if (tmpdir == nullptr) {
-    l.log(Logger::V_ERROR, "failed to create temporary directory");
+    l.log(Logger::V_ERROR, "failed to create temporary directory with prefix : ",
+          tempdirname.c_str());
     return ErrorCode::SLX_EIOERR;
   }
 

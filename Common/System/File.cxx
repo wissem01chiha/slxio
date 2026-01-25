@@ -296,11 +296,11 @@ ErrorCode File::copy(const char *destdir) {
   destpath += getFilename();
 
   std::ifstream src(path_, std::ios::binary);
-  if (!src){
+  if (!src) {
     return ErrorCode::SLX_ENOENT;
   }
   std::ofstream dst(destpath, std::ios::binary);
-  if (!dst){
+  if (!dst) {
     return ErrorCode::SLX_EIOERR;
   }
   dst << src.rdbuf();
@@ -319,7 +319,7 @@ ErrorCode File::rename(const char *filename) {
 
 const std::string File::getFilename() {
 
-  size_t pos = path_.find_last_of(PATH_SEP);
+  size_t pos = path_.find_last_of("/\\");
   if (pos == std::string::npos) {
     return std::string(path_.begin(), path_.end());
   }

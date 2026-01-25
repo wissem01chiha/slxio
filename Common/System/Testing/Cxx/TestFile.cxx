@@ -51,14 +51,12 @@ public:
   }
 
   std::string testFileEmptyRandDir() {
+
     std::string tempDir = std::string(cwdbuffer);
-#ifdef _WIN32
-    if (tempDir.back() != '\\')
-      tempDir += '\\';
-#else
-    if (tempDir.back() != '/')
-      tempDir += '/';
-#endif
+    if (tempDir.back() != PATH_SEP) {
+      tempDir += PATH_SEP;
+    }
+
     auto now = std::chrono::system_clock::now().time_since_epoch().count();
     std::mt19937 rng(static_cast<unsigned>(now));
     std::uniform_int_distribution<int> dist(1000, 9999);
@@ -89,6 +87,16 @@ TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test") {
 
   File f(TEST_FILE, File::Read);
   CHECK(f.isFile() == true);
+  CHECK(f.getFilename() == "testfile.txt");
+}
+
+TEST_CASE_FIXTURE(FileTestFixture, "Get Filename Test") {
+
+  static char TEST_FILE_FULL_PATH[512];
+  snprintf(TEST_FILE_FULL_PATH, sizeof(TEST_FILE_FULL_PATH),
+           "%s/Common/System/Testing/Data/testfile.txt", PROJECT_ROOT_DIR);
+
+  File f(TEST_FILE_FULL_PATH, File::Read);
   CHECK(f.getFilename() == "testfile.txt");
 }
 
