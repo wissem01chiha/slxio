@@ -1,4 +1,4 @@
-#include "File.h"
+﻿#include "File.h"
 #include "Compiler.h"
 #include "LibZip.h"
 #include "Libuv.h"
@@ -205,56 +205,50 @@ const char *File::getFileExtension() const {
   return dot + 1;
 }
 
-ErrorCode File::setFileExtension(const char *ext_) {
+ErrorCode File::setFileExtension(const char *newExt) {
 
-  if (!ext_ || *ext_ == '\0') {
+  if (!newExt || *newExt == '\0') {
+    return ErrorCode::SLX_EINVAR;
+  }
+  if (path_.empty()) {
     return ErrorCode::SLX_EINVAR;
   }
 
-  if (path_.size() < 1) {
-    return ErrorCode::SLX_EINVAR;
+  size_t pos = path_.find_last_of('.');
+  std::string base;
+  if (pos == std::string::npos) {
+    base = path_;
+  } else {
+    base = path_.substr(0, pos);
   }
-  const char *ext = getFileExtension();
-  const char *des = path_.c_str();
-  size_t len = ext - path_.c_str();
-  char *dest = (char *)malloc(len + 5);
-  strncpy(dest, path_.c_str(), len);
-  dest[len] = '\0';
-  strcat(dest, ext_);
+
+  std::string dest = base + "." + newExt;
 
   FILE *src = fopen(path_.c_str(), "rb");
   if (!src) {
     return ErrorCode::SLX_EIOERR;
   }
 
-  FILE *dst = fopen(dest, "wb");
+  FILE *dst = fopen(dest.c_str(), "wb");
   if (!dst) {
+    fclose(src);
     return ErrorCode::SLX_EIOERR;
   }
+
   char buffer[4096];
   size_t bytes;
   while ((bytes = fread(buffer, 1, sizeof(buffer), src)) > 0) {
     fwrite(buffer, 1, bytes, dst);
   }
+
   fclose(src);
   fclose(dst);
-  free(dest);
 
-  size_t pos = path_.find_last_of('.');
-  if (pos == std::string::npos) {
-    path_ += ".";
-    path_ += ext_;
-    return ErrorCode::SLX_OK;
-  }
-
-  std::string iext = path_.substr(pos + 1);
-  if (iext == ext_)
-    return ErrorCode::SLX_EDUPOBJ;
-
-  path_.replace(pos + 1, iext.size(), ext_);
+  path_ = dest;
 
   return ErrorCode::SLX_OK;
 }
+
 
 ErrorCode File::move(const char *dirpath) {
 
@@ -393,6 +387,7 @@ ErrorCode File::unzip(const char *dir) {
 
   zip_t *archive = zip_open(path_.c_str(), ZIP_RDONLY, &err);
   if (!archive) {
+    printf("attemp to unzip :", path_.c_str());
     Status::log((int)ErrorCode::SLX_EIOERR);
     return ErrorCode::SLX_EIOERR;
   }
