@@ -72,11 +72,15 @@ ErrorCode SimulinkContentParser::parse() {
       tempdirfullpath + PATH_SEP + dataObject.getFilename();
 
   File fileDataObject(tempfilefullpath, File::Read);
-
+  if (!fileDataObject.isFile()) {
+    l.log(Logger::V_ERROR, "tempfilefullpath is not a valid file ",
+          tempfilefullpath);
+    return ErrorCode::SLX_EIOERR;
+  }
   ErrorCode status = fileDataObject.setFileExtension("zip");
 
   if (status != ErrorCode::SLX_OK) {
-    l.log(Logger::VERBOSITY_0, "failed to set file extension to zip");
+    l.log(Logger::V_ERROR, "failed to set file extension to zip");
     return status;
   }
 
