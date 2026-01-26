@@ -35,11 +35,9 @@
     - [4.1.1 Using CPM](#411-using-cpm)
   - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
   - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
-  - [4.2 Manipulating SLX Files](#42-manipulating-slx-files)
-    - [4.2.1 Reading Simulink Model MetaData](#421-reading-simulink-model-metadata)
-    - [4.2.2 Access Model Block data](#422-access-model-block-data)
-- [5.0 References](#50-references)
-- [6.0 License](#60-license)
+- [5.0 API Documentation](#50-api-documentation)
+- [6.0 References](#60-references)
+- [7.0 License](#70-license)
 
 ## 1.0 Overview
 
@@ -55,11 +53,10 @@ To install the prebuilt binary of the library, refer to the [Installation](#20-b
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
-The project is under active development, and contributions are highly encouraged.  
-- For newcomers or junior developers, see the [Contributing](.github/CONTRIBUTING.md) guide to get started with the basics of Git, CMake, C++, and the workflow.  
-- For experienced developers, refer to the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
+The project is under active development, and contributions are highly encouraged. See the [Contributing](.github/CONTRIBUTING.md) guide for basics on Git, CMake, C++, and workflow, and the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
->> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+
 
 ### 1.1 Features
 
@@ -76,21 +73,24 @@ For more information, see: [Simulink Export to Version](https://www.mathworks.co
 
 ### 1.3 Contact
 
-You can contact the maintainer through email at [mail](mailto:chihawissem08@gmail.com)
+Feel free to  contact the maintainer through email at [mail](mailto:chihawissem08@gmail.com)
 
 ### 1.4 Contributing
 
-If you are interested in collaborations, see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide here or contact the maintainer via email (see section [1.2](#12-contact)).
+If you are interested in collaborating, please see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).  
+Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
 
 
-## 2.0 Building
+## 2.0 Building 
 
 This section describes how to build slxio, see  [2.1](#21-dependencies) describes the dependencies,
 
 ### 2.1 Dependencies
 
-Slxio dependencies are fetched automatically during build time. If not found, 
-they will be built from the bundled files included with the project. For external dependencies, Slxio uses [CPM](https://github.com/cpm-cmake/CPM.cmake) to fetch and install them. Note that developer tools may require additional dependencies.For more information, refer to [Developer Notes](#40-developer-notes).
+Slxio has its own modular build wrapper, written on top of CMake, similar to many open‑source projects.  
+All core dependencies are vendored with the source code in the `ThirdParty` directory to maximize platform compatibility and reduce reliance on external build/fetch rules.  
+Optional dependencies may either use system‑wide installations or be fetched externally depending on configuration options, via CMake package managers or other internal helpers.
+
 
 | Library | Version | Introduced In | Depends On | Notes |
 |--------|---------|----------------|------------|-------|
@@ -128,50 +128,52 @@ cmake --install .
 ```
 #### 2.2.2 Configure Options
 
+| Option               | Description                                                       | Default | Supported Since |
+|----------------------|-------------------------------------------------------------------|---------|-----------------|
+| BUILD_SHARED_LIBS    | Build as shared libraries                                         | OFF     |                 |
+| ENABLE_PYTHON_BINDING| Enable building Python interface                                  | ON      |                 |
+| ENABLE_TESTING       | Build C++ unit tests                                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| ENABLE_BINDING_TEST  | Build binding interface tests                                     | ON      |                 |
+| ENABLE_NAMESPACE     | Enable global namespace                                           | TRUE    |                 |
+| ENABLE_ABI_NAMESPACE | Enable ABI namespace (requires ENABLE_NAMESPACE=ON)               | ON      |                 |
+| USE_LOCAL_LIBS       | Use locally installed libraries                                   | ON      |                 |
+| ENABLE_OPENMP        | Enable compiling with OpenMP support                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| ENABLE_AVX           | Enable AVX optimizations where available                          | ON      |                 |
+| ENABLE_HDF5          | Enable HDF5 support                                               | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| ENABLE_MATLAB        | Enable MATLAB support                                             | OFF     |                 |
+| ENABLE_PKGCONFIG     | Generate pkg-config file                                          | ON      |                 |
+| ENABLE_INSTALL       | Enable installation after build                                   | OFF     |                 |
+| ENABLE_SANITIZER     | Enable sanitizers (ASan/UBSan/etc.)                               | OFF     |                 |
+| ENABLE_CLANG_TIDY    | Enable static analysis with clang-tidy                            | OFF     |                 |
+| ENABLE_CPPCHECK      | Enable static analysis with cppcheck                              | ON      |                 |
+| ENABLE_CLANG_FORMAT  | Enable Clang-Format support mode                                  | ON      |                 |
+| ENABLE_COVERAGE      | Enable code coverage reporting (GCC/Clang)                        | OFF     |                 |
+| ENABLE_FUZZING       | Enable fuzzing support                                            | OFF     |                 |
+| ENABLE_DOCUMENTATION | Enable documentation generation                                   | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| BUILD_EXAMPLES       | Build example applications                                        | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
+| CMAKE_INSTALL_PREFIX | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
 
-| Option                          | Description                                                       | Default | Supported Since |
-|---------------------------------|-------------------------------------------------------------------|---------|-----------------|
-| ENABLE_DOCUMENTATION            | Enable documentation generation                                   | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| TOP_LEVEL_BUILD                 | Enable top-level build                                            | auto    |                 |
-| ENABLE_PYTHON_BINDING           | Enable building Python interface                                  | ON      |                 |
-| ENABLE_CLANG_TIDY               | Enable static analysis with clang-tidy                            | OFF     |                 |
-| ENABLE_CPPCHECK                 | Enable static analysis with cppcheck                              | OFF     |                 |
-| ENABLE_LOGGING                  | Enable logging                                                    | ON      |                 |
-| ENABLE_SANITIZER                | Enable sanitizers (ASan/UBSan/etc.)                               | OFF     |                 |
-| ENABLE_FUZZING                  | Enable fuzzing support                                            | OFF     |                 |
-| BUILD_SHARED_LIBS               | Build as shared libraries                                         | OFF     |                 |
-| ENABLE_PKGCONFIG                | Generate pkg-config file                                          | ON      |                 |
-| ENABLE_AVX                      | Enable AVX/AVX2 optimizations where available                     | ON      |                 |
-| ENABLE_HDF5                     | Enable HDF5 support                                               | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_OPENMP                   | Enable compiling with OpenMP support                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| BUILD_EXAMPLES                  | Build example applications                                        | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| SLXIO_ENABLE_TESTING            | Build C++ unit tests                                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| SLXIO_ENABLE_COVERAGE           | Enable code coverage reporting (GCC/Clang)                        | OFF     |                 |
-| SLXIO_ENABLE_BINDING_TEST       | Build binding interface tests                                     | ON      |                 |
-| ENABLE_NAMESPACE                | Enable global namespace                                           | TRUE    |                 |
-| CMAKE_INSTALL_PREFIX            | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
 
 
 ### 2.3 Platform Support
 
-
-| OS          | Compiler | Version                                     |            SDK              | Arch            | C++ Standards              | Status |
-|-------------|----------|----------------------------------------------|----------------------------|-----------------|---------------------------|--------|
-| Windows 11  | MSVC     | 19.1x (VS 2017 v15.x,  v141)          | Windows SDK 10.0.x         | x64, Win32      | C++14, C++17              | NA  | 
-| Windows 11  | MSVC     | 19.2x (VS 2019 v16.x,  v142)          | Windows SDK 10.0.x         | x64, Win32, ARM64 | C++17, C++20            |  NA | 
-| Windows 11  | MSVC     | 19.43 (VS 2022 v17.13,  v143)         | Windows SDK 10.0.26100.0   | x64, Win32, ARM64 | C++17, C++20,C++23      | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)     | 
-| Windows 11  | MSVC     | 19.50 (VS 2026 v18.0,  v180)          | Windows SDK 10.0.26200.0   | x64, ARM64      | C++17, C++20, C++23       |  NA | 
-| Windows 11  | MinGW‑w64 | GCC 11.2.0, 15.2.0                          | N/A                        | x64             | C++17, C++20              | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)        |  NA |       
-| Ubuntu 22.04| GCC      | 11.2.0, 13.3.0                               | glibc 2.35                 | x64             | C++17, C++20, C++23       | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |       
-| Ubuntu 22.04| Clang    | 14.0, 15.0                                   | LLVM libc++                | x64             | C++17, C++20              |  NA  |       
-| macOS 14    | Apple Clang | 14.0, 15.0                                | Xcode toolchain            | arm64, x64      | C++17, C++20              | NA  |       
+| OS          | Compiler    | Version              | Arch              | C++ Standards        | Status |
+|-------------|-------------|----------------------|-------------------|----------------------|--------|
+| Windows 11  | MSVC        | 19.1x                | x64, Win32        | C++14, C++17         | NA     | 
+| Windows 11  | MSVC        | 19.2x                | x64, Win32, ARM64 | C++17, C++20         | NA     | 
+| Windows 11  | MSVC        | 19.43                | x64, Win32, ARM64 | C++17, C++20, C++23  | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml) | 
+| Windows 11  | MSVC        | 19.50                | x64, ARM64        | C++17, C++20, C++23  | NA     | 
+| Windows 11  | MinGW‑w64   | GCC 11.2.0, 15.2.0   | x64               | C++17, C++20         | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml) | NA |       
+| Ubuntu 22.04| GCC         | 11.2.0, 13.3.0       | x64               | C++17, C++20, C++23  | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml) |       
+| Ubuntu 22.04| Clang       | 14.0, 15.0           | x64               | C++17, C++20         | NA     |       
+| macOS 14    | Apple Clang | 14.0, 15.0           | arm64, x64        | C++17, C++20         | NA     |
 
 
 
 ## 3.0 Testing
 
-Project tests are enbaled via the CMake option `ENABLE_TESTING`.
-note that building test are only supported in debug build type by default, 
+Slxio has moved from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight and efficient testing since version 0.1.0.  
+Testing is enabled via the CMake option `ENABLE_TESTING`.
 
 
 ### 3.1 Running Tests
@@ -226,57 +228,22 @@ target_link_libraries(my_app PRIVATE slxio::slxio)
 ### 4.1.2 Integrate using [Conan](https://github.com/conan-io/conan)
 
 > **Note:** slxio not yet available on conan package manager
-> 
-### 4.2 Manipulating SLX Files
 
-#### 4.2.1 Reading Simulink Model MetaData
 
-```cpp
-#include "Slxio.h"
+## 5.0 API Documentation
 
-int main() {
+Since version 0.1.0, Slxio has used Sphinx for documentation.  
+However, for detailed implementation documentation, Slxio includes integrated support for Doxygen, which can be enabled via the `ENABLE_DOCUMENTATION` CMake option.
 
-    SimulinkModelParser& mdlpptr = new SimulinkModelParser();
-    mdlpptr.setsetInputData("../FullBridgeAcDcConv.slx");
-    if(mdlpptr.parse()== ErrorCode::Ok){
 
-      SimulinkModel* mdl = mdlpptr.get();
-    }else {
-      std::throw_exception 
-    }
-
-    SimulinkModelType mdl->getModelType();
-    uint32  mdlver  =  mdl->getVersion();
-    const char* mdlname = mdl->getName();
-
-    return 0;
-}
-```
-#### 4.2.2 Access Model Block data 
-
-```cpp
-    for (const auto& block : model.blocks()) {
-        std::cout << block.name() << " [" << block.type() << "] at "
-                  << block.position().x() << "," << block.position().y() << std::endl;
-    }
-
-    for (const auto& chart : model.stateflow().charts()) {
-        std::cout << "Chart: " << chart.name() << std::endl;
-        for (const auto& t : chart.transitions()) {
-            std::cout << "  " << t.source() << " -> " << t.target()
-                      << " if \"" << t.condition() << "\"" << std::endl;
-        }
-    }
-```
-
-## 5.0 References
+## 6.0 References
 
 > Shrestha, S. L., Chowdhury, S. A., & Csallner, C. (2022).  
 > *SLNET: A Redistributable Corpus of 3rd-party Simulink Models (v2.0)*.  
 > Zenodo. https://doi.org/10.5281/zenodo.5259648
 
 
-## 6.0 License
+## 7.0 License
 
 All material is provided under an Apache LLicense unless otherwise specified.
 
