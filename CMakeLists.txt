@@ -11,6 +11,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 include(Version)
 include(Apple)
 include(Windows)
+include(CI)
 
 include(CMakeDependentOption)
 

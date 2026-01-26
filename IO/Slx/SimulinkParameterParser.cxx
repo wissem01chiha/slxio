@@ -84,34 +84,33 @@ ErrorCode SimulinkParameterParser::parse() {
   return ErrorCode::SLX_OK;
 }
 
-SimulinkDataType SimulinkParameterParser::getDataType(const char *paramClassStr
-                                                      , Logger &l) {
-    if (!paramClassStr) {
-      l.log(Logger::V_WARNING,
-            "Null parameter class string; defaulting to 'Auto'.");
-      return SimulinkDataType::Auto;
-    }
-
-    if (strcmp(paramClassStr, "double") == 0) {
-      return SimulinkDataType::Double;
-    } else if (strcmp(paramClassStr, "logical") == 0) {
-      return SimulinkDataType::Boolean;
-    } else if (strcmp(paramClassStr, "uint32") == 0) {
-      return SimulinkDataType::UInt32;
-    } else if (strcmp(paramClassStr, "int16") == 0) {
-      return SimulinkDataType::Int16;
-    } else if (strcmp(paramClassStr, "uint64") == 0) {
-      return SimulinkDataType::UInt64;
-    } else if (strcmp(paramClassStr, "string") == 0) {
-      return SimulinkDataType::String;
-    } else if (strcmp(paramClassStr, "int8") == 0) {
-      return SimulinkDataType::Int8;
-    }
-
+SimulinkDataType SimulinkParameterParser::getDataType(const char *paramClassStr,
+                                                      Logger &l) {
+  if (!paramClassStr) {
     l.log(Logger::V_WARNING,
-          "Unrecognized parameter data type: ", paramClassStr,
-          " defaulting to 'Auto'.");
+          "Null parameter class string; defaulting to 'Auto'.");
     return SimulinkDataType::Auto;
+  }
+
+  if (strcmp(paramClassStr, "double") == 0) {
+    return SimulinkDataType::Double;
+  } else if (strcmp(paramClassStr, "logical") == 0) {
+    return SimulinkDataType::Boolean;
+  } else if (strcmp(paramClassStr, "uint32") == 0) {
+    return SimulinkDataType::UInt32;
+  } else if (strcmp(paramClassStr, "int16") == 0) {
+    return SimulinkDataType::Int16;
+  } else if (strcmp(paramClassStr, "uint64") == 0) {
+    return SimulinkDataType::UInt64;
+  } else if (strcmp(paramClassStr, "string") == 0) {
+    return SimulinkDataType::String;
+  } else if (strcmp(paramClassStr, "int8") == 0) {
+    return SimulinkDataType::Int8;
+  }
+
+  l.log(Logger::V_WARNING, "Unrecognized parameter data type: ", paramClassStr,
+        " defaulting to 'Auto'.");
+  return SimulinkDataType::Auto;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,6 +1,6 @@
+#include "Compiler.h"
 #include "Doctest.h"
 #include "Logger.h"
-#include "Compiler.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

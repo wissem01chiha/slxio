@@ -16,11 +16,11 @@
 #define ERRORBUFFER_H
 
 #include "ABINamespace.h"
-#include "ErrorCode.h"
-#include <vector>
-#include "Logger.h"
 #include "APIExport.h"
+#include "ErrorCode.h"
+#include "Logger.h"
 #include "Type.h"
+#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -38,34 +38,34 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /// @endcode
 /// allocate a buffer with a given maximum size:
 /// @code
-/// ErrorBuffer buffer(128); 
+/// ErrorBuffer buffer(128);
 /// @endcode
 class APIEXPORT ErrorBuffer final {
 public:
-    explicit ErrorBuffer(size_t maxSize = 100);
+  explicit ErrorBuffer(size_t maxSize = 100);
 
-    void push_back(const ErrorCode& code);
+  void push_back(const ErrorCode &code);
 
-    /// @brief merge a subbuffer elements to this buffer
-    /// @note if the resulting buffer excceds the max size trim the subbuffer 
-    void push_back(const ErrorBuffer& buffer);
+  /// @brief merge a subbuffer elements to this buffer
+  /// @note if the resulting buffer excceds the max size trim the subbuffer
+  void push_back(const ErrorBuffer &buffer);
 
-    void clear();
-    size_t size() const;
-    bool empty() const;
-    bool contains(const ErrorCode& code) const;
+  void clear();
+  size_t size() const;
+  bool empty() const;
+  bool contains(const ErrorCode &code) const;
 
-    void print(std::ostream& os) const;
-    void log() const;
+  void print(std::ostream &os) const;
+  void log() const;
 
-    ErrorCode& operator[](size_t index);
-    const ErrorCode& operator[](size_t index) const;
+  ErrorCode &operator[](size_t index);
+  const ErrorCode &operator[](size_t index) const;
 
-    ~ErrorBuffer();
+  ~ErrorBuffer();
 
 private:
-    std::vector<ErrorCode> errlist;
-    size_t maxSize_;
+  std::vector<ErrorCode> errlist;
+  size_t maxSize_;
 };
 
 SLXIO_ABI_NAMESPACE_END

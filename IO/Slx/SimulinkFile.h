@@ -20,6 +20,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class SimulinkFileParser;
+
 /*
  * @brief SimulinkFile is a fa�ade combining metadata and content
  * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
@@ -27,8 +29,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 class APIEXPORT SimulinkFile final : public SimulinkFileBase {
 public:
+  friend class SimulinkFileParser;
+
   SimulinkFile();
-  
+
   const SimulinkContent &getContent() const;
 
   ~SimulinkFile() = default;

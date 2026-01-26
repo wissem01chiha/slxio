@@ -18,7 +18,6 @@
 #include "APIExport.h"
 #include "File.h"
 #include "Libuv.h"
-#include "Platform.h"
 #include <map>
 #include <vector>
 
@@ -61,6 +60,9 @@ public:
   /// @details Populates the file map and file list attributes.
   ErrorCode open();
 
+  /// @brief Remove the directory and its contents recursively.
+  ErrorCode remove();
+
   /// @brief Get the number of files in the directory.
   /// @return Number of files, or -1 if the directory could not be opened.
   size_t getNumberOfFiles() const;
@@ -78,6 +80,14 @@ public:
   /// @brief Get the current working directory.
   static const char *getCurrentDirectory();
 
+  /// @brief Get the system temporary directory.
+  /// create and return a system unique temporary directory name
+  /// prefix is optional, if given the temporary directory
+  /// will start with the given prefix
+  /// returns nullptr on failure
+  /// @note only relative directory name is computed
+  static const char *getTemporaryDirectory(const char *prefix = "");
+
   /// @brief Check if the given path is a directory.
   static bool isDirectory(const char *path);
 
@@ -90,13 +100,27 @@ public:
   /// @brief Get the directory name from the full path.
   std::string getDirectoryName();
 
+  /// @brief Get the directory path.
+  const std::string &getDirectoryPath() const;
+
   /// @brief Check if the directory is empty.
   bool empty();
 
   /// @brief Compress the directory content into a ZIP archive.
   /// @details Output file will be named <dirname>.zip.
-  /// if the new archive name is given it will assume same as parent directory 
+  /// if the new archive name is given it will assume same as parent directory
   ErrorCode zip(const char *dir = "");
+
+  /// @brief Creates the directory structure for a given entry name.
+  /// The entry name can be in one of the following formats:
+  /// - "simulink/plugin/rels/" (a directory path)
+  /// - "simulink/blockdiagram.xml" (a file path)
+  /// This function ensures that the directory structure is created up to the
+  /// specified root folder (`dir`). It is mainly used as a helper for unzip and
+  /// zip utilities in newer versions.
+  /// @note This function does not validate whether the `dir` parameter is an
+  /// existing directory; it is the responsibility of the caller to ensure that.
+  static ErrorCode mkdir(const char *dir);
 
   /// @brief Destructor.
   ~Directory() = default;

@@ -46,5 +46,5 @@ build/
 # Visual Studio folders
 out/ 
 .vs/
-/CMake/ConfigVersion.cmake.in
-/CMake/Config.cmake.in
+
+

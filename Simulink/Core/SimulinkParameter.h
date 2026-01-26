@@ -54,8 +54,8 @@ public:
   SimulinkDataType getDataType();
 
   /// @brief set the parameter data type
-  /// @warning this function overrites the default Min, Max values based on 
-  /// new type 
+  /// @warning this function overrites the default Min, Max values based on
+  /// new type
   /// @note not implemented the automatic range override
   void setDataType(SimulinkDataType DataType_);
 

@@ -30,7 +30,7 @@
  * manging I/O from multiple files original version from :
  * https://github.com/scilab/scilab/blob/master/scilab/modules/fileio/includes/filemanager.hxx
  */
-class APIEXPORT FileManager {
+class APIEXPORT FileManager final {
 public:
   FileManager();
   ~FileManager() = default;
@@ -44,8 +44,8 @@ public:
   FileManager(std::vector<File *> files);
   FileManager(std::list<File *> files);
 
-  FileManager &operator=(std::vector<File *> files);
-  FileManager &operator=(std::list<File *> files);
+  FileManager &operator=(std::vector<File *> files) = delete;
+  FileManager &operator=(std::list<File *> files) = delete;
 
   FileManager(std::vector<std::shared_ptr<File>> files);
 

@@ -35,24 +35,23 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This class is designed so that each parser may call sub-parser objects.
  * Child classes should also add any errors thrown during parsing to the
  * internal error buffer for profiling and diagnostics.
- * @tparam T the input data object to read from 
- * @tparam P the retrun type object beeing constructed 
+ * @tparam T the input data object to read from
+ * @tparam P the retrun type object beeing constructed
  * @example
  * @code
-	ErrorCode ParentParser::parse() { 
-	  // call sub-parser 
-	  SubParser sub;
-	  sub.setInputData(...); 
-	  ErrorCode ec = sub.parse(); 
-	  // merge sub-parser errors into parent buffer 
-	  buffer_.push_back(sub.getErrorBuffer()); 
-	  return ec;
-	 }
+        ErrorCode ParentParser::parse() {
+          // call sub-parser
+          SubParser sub;
+          sub.setInputData(...);
+          ErrorCode ec = sub.parse();
+          // merge sub-parser errors into parent buffer
+          buffer_.push_back(sub.getErrorBuffer());
+          return ec;
+         }
   *@endcode
   * @note this class do not provide any implenation or provide a dummy cxx file
  */
-template <typename T, typename P>
-class APIEXPORT SimulinkParserBase {
+template <typename T, typename P> class APIEXPORT SimulinkParserBase {
 public:
   virtual ~SimulinkParserBase() = default;
 
@@ -70,13 +69,13 @@ public:
   /// during the parse method.
   ErrorBuffer &getErrorBuffer() { return buffer_; }
 
-  /// @brief toget subparser buffer and merge it with the parent 
+  /// @brief toget subparser buffer and merge it with the parent
   const ErrorBuffer &getErrorBuffer() const { return buffer_; }
 
 protected:
   SimulinkParserBase() = default;
 
-  /// @brief Internal error buffer 
+  /// @brief Internal error buffer
   ErrorBuffer buffer_;
 };
 

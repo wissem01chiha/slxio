@@ -30,13 +30,14 @@ class APIEXPORT SimulinkHardwareParser final
     : public SimulinkParserBase<xmlNodePtr, SimulinkHardware> {
 public:
   SimulinkHardwareParser();
-    ErrorCode setInputData(const xmlNodePtr data) override;
-    std::shared_ptr<SimulinkHardware> getDataObject() const override;
-    ErrorCode parse() override;
-    ~SimulinkHardwareParser() = default;
+  ErrorCode setInputData(const xmlNodePtr data) override;
+  std::shared_ptr<SimulinkHardware> getDataObject() const override;
+  ErrorCode parse() override;
+  ~SimulinkHardwareParser() = default;
+
 private:
-    std::shared_ptr<SimulinkHardware> ptr_;
-    xmlNodePtr dataObject;
+  std::shared_ptr<SimulinkHardware> ptr_;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

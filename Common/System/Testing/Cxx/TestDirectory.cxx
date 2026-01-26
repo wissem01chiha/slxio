@@ -1,6 +1,6 @@
-#include "Doctest.h"
-#include "Directory.h"
 #include "Compiler.h"
+#include "Directory.h"
+#include "Doctest.h"
 #include "Platform.h"
 #include <chrono>
 #include <random>
@@ -10,8 +10,8 @@ public:
   DirectoryTestFixture() { getcwd(cwdbuffer, sizeof(cwdbuffer)); }
 
   /// @brief Create a temporary empty directory and return its path.
-  /// default name is "testDirectoryEmptyRandDir_XXXXX",with "XXXX" a random id generated
-  /// based on function timestamp call, to make it unique per call
+  /// default name is "testDirectoryEmptyRandDir_XXXXX",with "XXXX" a random id
+  /// generated based on function timestamp call, to make it unique per call
   std::string testDirectoryEmptyRandDir() {
     std::string tempDir = std::string(cwdbuffer);
     if (tempDir.back() != PATH_SEP)
@@ -64,7 +64,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory") {
   std::string path = testDirectoryEmptyRandDir();
   Directory d(path);
   ErrorCode ec = d.open();
-  CHECK(ErrorCode::SLX_OK == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::SLX_OK);
   CHECK(d.getNumberOfFiles() == 0);
   CHECK(d.empty());
 }
@@ -89,4 +89,29 @@ TEST_CASE("Test Static getCurrentDirectory") {
   const char *cwd = Directory::getCurrentDirectory();
   CHECK(cwd != nullptr);
   CHECK(Directory::isDirectory(cwd));
+}
+
+TEST_CASE("Test Static getTemporaryDirectory") {
+
+  const char *tmpdir = Directory::getTemporaryDirectory();
+  CHECK(tmpdir != nullptr);
+  CHECK(Directory::isDirectory(tmpdir));
+}
+
+TEST_CASE("Test Prefixed getTemporaryDirectory") {
+
+  const char *tmpdir = Directory::getTemporaryDirectory("Test_Temp_Prefix");
+  CHECK(tmpdir != nullptr);
+  CHECK(Directory::isDirectory(tmpdir));
+}
+
+TEST_CASE("Test Mkdir Directory Utility") {
+
+  const char *cwd = Directory::getCurrentDirectory();
+  char subdirpath[1024];
+  snprintf(subdirpath, sizeof(subdirpath), "%s/%s", cwd,
+           "simulink/plugin/rels/");
+  ErrorCode ec = Directory::mkdir(subdirpath);
+
+  CHECK(ec == ErrorCode::SLX_OK);
 }

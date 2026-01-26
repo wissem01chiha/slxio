@@ -1,4 +1,2 @@
-#include <Doctest.h>
 #include "SimulinkParameterWriter.h"
-
-
+#include <Doctest.h>

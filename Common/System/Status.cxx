@@ -43,5 +43,5 @@ Status::Status(ErrorCode id, const std::string &message)
     : errno_(id), strerror_(message) {}
 
 Status::Status(sint32 err, const std::string &str) : strerror_(str) {
- errno_ = static_cast<ErrorCode>(err);
+  errno_ = static_cast<ErrorCode>(err);
 }

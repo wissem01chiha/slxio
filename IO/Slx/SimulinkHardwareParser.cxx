@@ -11,9 +11,9 @@ SimulinkHardwareParser::SimulinkHardwareParser() {
 
 ErrorCode SimulinkHardwareParser::setInputData(const xmlNodePtr data) {
 
-  Logger& l= Logger::getInstance();
-  if(data == nullptr){
-    l.log(Logger::V_ERROR,"SimulinkHardwareParser:: null pointer received");
+  Logger &l = Logger::getInstance();
+  if (data == nullptr) {
+    l.log(Logger::V_ERROR, "SimulinkHardwareParser:: null pointer received");
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = data;

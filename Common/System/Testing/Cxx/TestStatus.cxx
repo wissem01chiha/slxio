@@ -45,11 +45,11 @@ TEST_CASE("Status::log prints libuv error") {
   std::cerr.rdbuf(old_buf);
 
   std::string output = oss.str();
-  #ifdef PLATFORM_WINDOWS
+#ifdef PLATFORM_WINDOWS
   CHECK(output == "[ErrorCode -4071] invalid argument\n");
-  #else
+#else
   CHECK(output == "[ErrorCode -22] invalid argument\n");
-  #endif 
+#endif
 }
 
 TEST_CASE("Status::log prints custom error") {

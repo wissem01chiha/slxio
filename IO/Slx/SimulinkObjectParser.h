@@ -16,10 +16,10 @@
 #define SIMULINKOBJECTPARSER_H
 
 #include "ABINamespace.h"
-#include "SimulinkParserBase.h"
-#include "SimulinkObject.h"
-#include "LibXML2.h"
 #include "APIExport.h"
+#include "LibXML2.h"
+#include "SimulinkObject.h"
+#include "SimulinkParserBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -41,7 +41,7 @@ public:
   ErrorCode setInputData(const xmlNodePtr data) override;
   std::shared_ptr<SimulinkObject> getDataObject() const override;
   ErrorCode parse() override;
-  ~SimulinkObjectParser() =default;
+  ~SimulinkObjectParser() = default;
 
 private:
   std::shared_ptr<SimulinkObject> ptr_;

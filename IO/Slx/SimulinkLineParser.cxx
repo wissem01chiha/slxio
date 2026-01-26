@@ -9,10 +9,10 @@ SimulinkLineParser::SimulinkLineParser() : dataObject(nullptr) {
 }
 
 ErrorCode SimulinkLineParser::setInputData(const xmlNodePtr data) {
-  
+
   if (!data) {
     //    slog_fatal("SimulinkLineParser::build failed: null node pointer
-    //    received"); 
+    //    received");
     return ErrorCode::SLX_ENULLPTR;
   }
   return ErrorCode::SLX_OK;
@@ -24,8 +24,5 @@ std::shared_ptr<SimulinkLine> SimulinkLineParser::getDataObject() const {
 
 ErrorCode SimulinkLineParser::parse() { return ErrorCode::SLX_OK; }
 
-
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

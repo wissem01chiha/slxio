@@ -19,7 +19,6 @@
 #include "APIExport.h"
 #include "ErrorCode.h"
 #include "File.h"
-#include "LibXML2.h"
 #include "SimulinkFile.h"
 #include "SimulinkParserBase.h"
 

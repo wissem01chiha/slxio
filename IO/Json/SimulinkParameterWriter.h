@@ -16,10 +16,10 @@
 #define SIMULINKPARAMETERWRITER_H
 
 #include "ABINamespace.h"
-#include "SimulinkParserBase.h"
-#include "Json-c.h"
 #include "APIExport.h"
+#include "Json-c.h"
 #include "SimulinkParameter.h"
+#include "SimulinkParserBase.h"
 #include "SimulinkWriterBase.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -29,20 +29,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief write a Simulink Parameter data object to a json element
  */
 class APIEXPORT SimulinkParameterWriter final
-    : public SimulinkWriterBase<SimulinkParameter, json_object*> {
+    : public SimulinkWriterBase<SimulinkParameter, json_object *> {
 public:
   SimulinkParameterWriter();
 
   ErrorCode Write() override;
   ErrorCode setInputData(const SimulinkParameter data) override;
-  ErrorCode setOutputData(json_object* data) override;
+  ErrorCode setOutputData(json_object *data) override;
 
-  ~SimulinkParameterWriter() =default;
+  ~SimulinkParameterWriter() = default;
+
 private:
   std::shared_ptr<SimulinkParameter> ptr_;
-  json_object* dataObject;
+  json_object *dataObject;
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -42,9 +42,9 @@
 #endif
 
 #ifdef PLATFORM_WINDOWS
-#include <direct.h> 
+#include <direct.h>
 #else
-#include <unistd.h> 
+#include <unistd.h>
 #endif
 
 #endif // PLATFORM_H
