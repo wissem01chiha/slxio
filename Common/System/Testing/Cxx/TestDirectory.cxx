@@ -64,7 +64,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory") {
   std::string path = testDirectoryEmptyRandDir();
   Directory d(path);
   ErrorCode ec = d.open();
-  CHECK(ErrorCode::SLX_OK == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::SLX_OK);
   CHECK(d.getNumberOfFiles() == 0);
   CHECK(d.empty());
 }
@@ -103,5 +103,15 @@ TEST_CASE("Test Prefixed getTemporaryDirectory") {
   const char *tmpdir = Directory::getTemporaryDirectory("Test_Temp_Prefix");
   CHECK(tmpdir != nullptr);
   CHECK(Directory::isDirectory(tmpdir));
+}
 
+TEST_CASE("Test Mkdir Directory Utility") {
+
+  const char *cwd = Directory::getCurrentDirectory();
+  char subdirpath[1024];
+  snprintf(subdirpath, sizeof(subdirpath), "%s/%s", cwd,
+           "simulink/plugin/rels/");
+  ErrorCode ec = Directory::mkdir(subdirpath);
+
+  CHECK(ec == ErrorCode::SLX_OK);
 }

@@ -5,6 +5,7 @@
 #include "Platform.h"
 #include "Status.h"
 #include <cstring>
+#include "Directory.h"
 #include <fstream>
 #include <iostream>
 
@@ -403,6 +404,7 @@ ErrorCode File::unzip(const char *dir) {
   }
 
   zip_int64_t num_entries = zip_get_num_entries(archive, 0);
+
   for (zip_uint64_t i = 0; i < num_entries; ++i) {
 
     const char *name = zip_get_name(archive, i, 0);
@@ -410,25 +412,22 @@ ErrorCode File::unzip(const char *dir) {
       continue;
     }
 
-    char full_path[1024];
-    snprintf(full_path, sizeof(full_path), "%s/%s", dir, name);
-    if (name[strlen(name) - 1] == '/') {
+    char entrydirpath[1024];
+    snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", dir, name);
 
-      int r = uv_fs_mkdir(uv_default_loop(), &req, full_path, 0755, NULL);
-      if (r < 0) {
-        Status::log(r);
-        return static_cast<ErrorCode>(-r);
-      }
-
-      continue;
+    ErrorCode ec = Directory::mkdir(entrydirpath);
+    if (ec != ErrorCode::SLX_OK) {
+      Status::log((int)ec);
+      return ec;
     }
+    
 
     zip_file_t *zf = zip_fopen_index(archive, i, 0);
     if (!zf) {
       continue;
     }
 
-    FILE *out = fopen(full_path, "wb");
+    FILE *out = fopen(entrydirpath, "wb");
     if (!out) {
       zip_fclose(zf);
       continue;

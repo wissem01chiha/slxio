@@ -156,8 +156,6 @@ XmlTarget targets[] = {
       {"/simulink/configSetInfo.xml", &ptr_->configSetInfo},
       {"/simulink/bddefaults.xml", &ptr_->bddefaults},
       {"/simulink/graphicalInterface.xml", &ptr_->graphicalInterface},
-      {"/simulink/ScheduleEditor.xml", &ptr_->scheduleEditor},
-      {"/simulink/ScheduleCore.xml", &ptr_->scheduleCore},
       {"/metadata/coreProperties.xml", &ptr_->coreProperties},
       {"/metadata/mwcoreProperties.xml", &ptr_->mwcoreProperties},
       {"/metadata/mwcorePropertiesExtension.xml",

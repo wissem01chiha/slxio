@@ -1,4 +1,4 @@
-#include "Directory.h"
+﻿#include "Directory.h"
 #include "Platform.h"
 #include "Status.h"
 #include <codecvt>
@@ -141,11 +141,7 @@ ErrorCode Directory::open() {
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode Directory::remove() { 
-  
-  
-  return ErrorCode::SLX_OK;
- }
+ErrorCode Directory::remove() { return ErrorCode::SLX_OK; }
 
 size_t Directory::getNumberOfFiles() const { return filelist.size(); }
 
@@ -239,10 +235,53 @@ std::string Directory::getDirectoryName() {
   return path_.substr(pos + 1);
 }
 
-const std::string &Directory::getDirectoryPath() const {
-  return path_;
-}
+const std::string &Directory::getDirectoryPath() const { return path_; }
 
 bool Directory::empty() { return filelist.empty(); }
 
 ErrorCode Directory::zip(const char *dir) { return ErrorCode::SLX_ENOTIMPL; }
+
+ErrorCode Directory::mkdir(const char *path) {
+
+if (path == nullptr) {
+    return ErrorCode::SLX_ENULLPTR;
+  }
+
+  char *path_ = (char *)malloc(strlen(path) + 1);
+  strcpy(path_, path);
+
+  if (path[strlen(path) - 1] != '/') {
+
+    char *last_slash = strrchr(path_, '/');
+    if (last_slash) {
+      *(last_slash + 1) = '\0'; 
+    } else {
+      path_[0] = '\0';
+    }
+  }
+    
+  uv_fs_t req;
+  char temp[1024];
+  strncpy(temp, path_, sizeof(temp));
+  temp[sizeof(temp) - 1] = '\0';
+
+  for (char *p = temp + 1; *p; p++) {
+    if (*p == '/') {
+      *p = '\0';
+      int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+      if (r < 0 && r != UV_EEXIST) {
+        Status::log(r);
+        return static_cast<ErrorCode>(-r);
+      }
+      *p = '/';
+    }
+  }
+
+  int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+  if (r < 0 && r != UV_EEXIST) {
+    Status::log(r);
+    return static_cast<ErrorCode>(-r);
+  }
+
+  return ErrorCode::SLX_OK;
+}

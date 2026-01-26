@@ -59,7 +59,7 @@ public:
   /// @brief Open the directory and initialize member variables.
   /// @details Populates the file map and file list attributes.
   ErrorCode open();
-  
+
   /// @brief Remove the directory and its contents recursively.
   ErrorCode remove();
 
@@ -110,6 +110,17 @@ public:
   /// @details Output file will be named <dirname>.zip.
   /// if the new archive name is given it will assume same as parent directory
   ErrorCode zip(const char *dir = "");
+
+  /// @brief Creates the directory structure for a given entry name.
+  /// The entry name can be in one of the following formats:
+  /// - "simulink/plugin/rels/" (a directory path)
+  /// - "simulink/blockdiagram.xml" (a file path)
+  /// This function ensures that the directory structure is created up to the
+  /// specified root folder (`dir`). It is mainly used as a helper for unzip and
+  /// zip utilities in newer versions.
+  /// @note This function does not validate whether the `dir` parameter is an
+  /// existing directory; it is the responsibility of the caller to ensure that.
+  static ErrorCode mkdir(const char *dir);
 
   /// @brief Destructor.
   ~Directory() = default;
