@@ -62,13 +62,13 @@ The project is under active development, and contributions are highly encouraged
 
 - Parse and extract SLX files into C++ structures  
 - Serialize SLX data into JSON format  
-- Modify metadata or parameters and write them back to the SLX file  
+- Edit metadata or parameters and save changes back to the SLX file  
 
 ### 1.2 Supported MATLAB  
 
 SLXIO aims to support MATLAB releases from **R2018a** to **R2025a**. Currently, the primary supported versions are **R2019a** and **R2018a**. Additional versions will be progressively supported in future project releases.  
 
-Note: Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by MathWorks may not be available, as the project focuses on core model/library block diagram data.  
+> **Note:** Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by MathWorks may not be available, as the project focuses on core model/library block diagram data.  
 
 MDL files are out of scope. For certain specific releases they may be partially compatible, but no support or fixes are planned for MDL file compatibility.  
 
