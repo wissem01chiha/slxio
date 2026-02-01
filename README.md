@@ -33,7 +33,7 @@
 - [4.0 Examples](#40-examples)
   - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
     - [4.1.1 Using CPM](#411-using-cpm)
-  - [4.1.2 Integrate using vcpckg](#412-integrate-using-vcpckg)
+  - [4.1.2 Integrate using vcpkg](#412-integrate-using-vcpkg)
   - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
 - [5.0 API Documentation](#50-api-documentation)
 - [6.0 References](#60-references)
@@ -60,14 +60,21 @@ The project is under active development, and contributions are highly encouraged
 
 ### 1.1 Features
 
+- Parse and extract SLX files into C++ structures  
+- Serialize SLX data into JSON format  
+- Modify metadata or parameters and write them back to the SLX file  
 
 ### 1.2 Supported MATLAB  
 
-The primary supported MATLAB version is **R2019a**. Other versions later than R2019a may also be compatible, provided the Simulink XML schema has not changed significantly between releases.  
+SLXIO aims to support MATLAB releases from **R2018a** to **R2025a**. Currently, the primary supported versions are **R2019a** and **R2018a**. Additional versions will be progressively supported in future project releases.  
 
-Currently, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual SLX files.
+Note: Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by MathWorks may not be available, as the project focuses on core model/library block diagram data.  
 
-To ensure compatibility when using **slxio** with other unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license. 
+MDL files are out of scope. For certain specific releases they may be partially compatible, but no support or fixes are planned for MDL file compatibility.  
+
+At present, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed SLX files.  
+
+To ensure compatibility when using SLXIO with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.  
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
 
@@ -209,7 +216,7 @@ add_executable(target main.cpp)
 target_link_libraries(target PRIVATE SLXIO)
 ```
 
-### 4.1.2 Integrate using vcpckg
+### 4.1.2 Integrate using vcpkg
 
 > **Note:** slxio not yet available on vcpkg 
 

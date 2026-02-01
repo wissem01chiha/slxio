@@ -40,13 +40,23 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid") {
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile") {
 
-  ErrorCode status =
+  ErrorCode in_status =
       parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::SLX_OK);
-  status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(in_status == ErrorCode::SLX_OK);
+  ErrorCode parseStatus = parserPtr->parse();
+  CHECK(parseStatus == ErrorCode::SLX_OK);
+
 };
 
+TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile") {
+
+  parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  parserPtr->parse();
+  auto file = parserPtr->getDataObject();
+  std::string outStr = file->toString();
+  std::cout << outStr << std::endl;
+  CHECK(!outStr.empty());
+}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

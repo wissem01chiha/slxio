@@ -33,13 +33,13 @@ ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const {
     return ErrorCode::SLX_EINVAR;
   }
 
-  if (coreProperties) {
+  if (coreProperties == nullptr) {
     l.log(Logger::V_ERROR,
-          "coreProperties XML document is not loaded in the SimulinkContent");
+          "coreProperties XML document is not loaded in SimulinkContent");
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(coreProperties);
-  if (root) {
+  if (root==NULL) {
     l.log(Logger::V_ERROR,
           "failed to get root element from coreProperties XML document");
     return ErrorCode::SLX_ENULLPTR;
@@ -50,11 +50,11 @@ ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const {
 
 ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const {
 
-  if (mwcoreProperties) {
+  if (mwcoreProperties ==nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(mwcoreProperties);
-  if (root) {
+  if (root==NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
@@ -63,11 +63,11 @@ ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const {
 
 ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const {
 
-  if (configSetInfo) {
+  if (configSetInfo == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSetInfo);
-  if (root) {
+  if (root==NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
@@ -80,11 +80,11 @@ ErrorCode SimulinkContent::getConfigSetNodePtr(Index &idx,
   if (idx > configSets.size()) {
     return ErrorCode::SLX_EEOF;
   }
-  if (configSets[idx]) {
+  if (configSets[idx] == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSets[idx]);
-  if (root) {
+  if (root==NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
@@ -93,11 +93,11 @@ ErrorCode SimulinkContent::getConfigSetNodePtr(Index &idx,
 
 ErrorCode SimulinkContent::getModelDictionary(xmlNodePtr& nodePtr) const {
 
-  if (modelDictionary) {
+  if (modelDictionary==nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(modelDictionary);
-  if (root) {
+  if (root==NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
