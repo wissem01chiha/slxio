@@ -8,9 +8,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockParser::SimulinkBlockParser() {
+SimulinkBlockParser::SimulinkBlockParser(): dataObject(nullptr) {
   ptr_ = std::make_shared<SimulinkBlock>();
-  dataObject = nullptr;
 }
 
 ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data) {

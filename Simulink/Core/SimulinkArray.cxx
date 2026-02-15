@@ -201,5 +201,9 @@ SimulinkArray::getParameter(std::string name) {
 
 std::string SimulinkArray::getName() { return arrayName; }
 
+std::string SimulinkArray::getDimension() { return arrayDimension; }
+
+std::string SimulinkArray::getArrayType() { return arrayType; }
+
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

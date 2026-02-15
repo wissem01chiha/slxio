@@ -62,8 +62,6 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest") {
   parserPtr->setInputData(nodePtr);
   ErrorCode status = parserPtr->parse();
   CHECK(status == ErrorCode::SLX_OK);
-
-  std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
 }
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,

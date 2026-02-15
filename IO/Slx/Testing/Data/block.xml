@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Block BlockType="Reference" Name="Driving Cycle" SID="6">
+    <P Name="Tag">cycle</P>
+    <P Name="Ports">[0, 5]</P>
+    <P Name="Position">[365, 262, 455, 408]</P>
+    <P Name="ZOrder">34</P>
+    <P Name="BackgroundColor">green</P>
+    <P Name="LibraryVersion">1.254</P>
+    <P Name="SourceBlock">qss_tb_library/Driving Cycle/Driving Cycle</P>
+<P Name="SourceType">Driving Cycle</P>
+<InstanceData>
+    <P Name="ContentPreviewEnabled">off</P>
+    <P Name="cyclename1">NEDC</P>
+    <P Name="stepsize">1</P>
+    <P Name="autostop">on</P>
+</InstanceData>
+</Block>
