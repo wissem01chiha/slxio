@@ -5,7 +5,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkConfigSetBuilderTestFixture : public ::testing::Test {
+class SimulinkConfigSetParserTestFixture {
 protected:
   SimulinkConfigSetBuilder *builderPtr;
   xmlNodePtr xmlNodePtrTest;

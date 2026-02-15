@@ -23,7 +23,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkFileParser;
 
 /*
- * @brief SimulinkFile is a fa�ade combining metadata and content
+ * @brief SimulinkFile is a facade combining metadata and content
  * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
  * while file contents are delegated to SimulinkContent.
  */
