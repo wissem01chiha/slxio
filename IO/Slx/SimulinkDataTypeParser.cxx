@@ -1,6 +1,7 @@
 #include "SimulinkDataTypeParser.h"
 #include "Logger.h"
 #include <unordered_map>
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
