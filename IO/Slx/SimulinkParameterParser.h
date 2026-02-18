@@ -52,9 +52,6 @@ public:
   ~SimulinkParameterParser() = default;
 
 private:
-  /// @brief maps an explicit string data type to SimulinkDataType
-  SimulinkDataType getDataType(const char *paramClassStr, Logger &l);
-
   std::shared_ptr<SimulinkParameter> ptr_;
   xmlNodePtr dataObject;
 };

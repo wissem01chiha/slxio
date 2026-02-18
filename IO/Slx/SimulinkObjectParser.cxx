@@ -67,8 +67,7 @@ ErrorCode SimulinkObjectParser::parse() {
 
       ErrorCode paramParseStatus = paramParserPtr->parse();
       if (paramParseStatus != ErrorCode::SLX_OK) {
-        l.log(Logger::V_ERROR, "SimulinkObjectParser::build failed: fail to "
-                               "build object Parameter");
+        l.log(Logger::V_ERROR, "SimulinkObjectParser:: fail to build object Parameter");
         buffer_.push_back(paramParseStatus);
         return paramParseStatus;
       }
@@ -89,8 +88,7 @@ ErrorCode SimulinkObjectParser::parse() {
       ErrorCode subObjStat = subObjParserPtr->parse();
       if (subObjStat != ErrorCode::SLX_OK) {
         l.log(Logger::V_ERROR,
-              "SimulinkObjectParser::build failed: fail to build "
-              "subobject elment");
+              "SimulinkObjectParser:: fail to build subobject element");
         buffer_.push_back(subObjStat);
         return subObjStat;
       }
@@ -109,8 +107,7 @@ ErrorCode SimulinkObjectParser::parse() {
       ErrorCode subArrParseStat = subArrParserPtr->parse();
       if (subArrParseStat != ErrorCode::SLX_OK) {
         l.log(Logger::V_ERROR,
-              "SimulinkObjectParser::build failed: fail to build "
-              "subArray elment");
+              "SimulinkObjectParser:: fail to build subArray element");
         buffer_.push_back(subArrParserPtr->getErrorBuffer());
         return subArrParseStat;
       }

@@ -32,6 +32,11 @@ SimulinkDataType toSimulinkDataType(const std::string &) {
   return SimulinkDataType::String;
 }
 
+SimulinkDataType toSimulinkDataType(const char *cstr) {
+  std::string str(cstr);
+  return toSimulinkDataType(str);
+}
+
 const char *toChar(SimulinkDataType sldt) {
   switch (sldt) {
   case SimulinkDataType::Auto:

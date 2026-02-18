@@ -9,6 +9,10 @@ class SimulinkBlockParserTestFixture {
 protected:
   SimulinkBlockParserTestFixture(){}
 
+  ~SimulinkBlockParserTestFixture(){};
+
+  SimulinkBlockParser *parserPtr;
+  xmlDocPtr doc;
 };
 
 SLXIO_ABI_NAMESPACE_END

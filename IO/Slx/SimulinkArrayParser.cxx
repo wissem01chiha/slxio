@@ -1,4 +1,6 @@
 #include "SimulinkArrayParser.h"
+#include "Logger.h"
+#include "SimulinkObjectParser.h"
 #include "SlxParameter.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -28,62 +30,76 @@ ErrorCode SimulinkArrayParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkArray> SimulinkArrayParser::getDataObject() const {
-  return ptr_;
-}
-
 ErrorCode SimulinkArrayParser::parse() {
-
   Logger &l = Logger::getInstance();
 
-  Index id = (Index)0;
   std::string name, dimension, type;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next) {
-
     std::string attrName = reinterpret_cast<const char *>(attr->name);
     std::string attrValue =
         reinterpret_cast<const char *>(xmlNodeGetContent(attr->children));
 
     if (attrName == SlxParameter::PARAM_PropName) {
       name = attrValue;
-    }
-
-    if (attrName == SlxParameter::PARAM_Type) {
+    } else if (attrName == SlxParameter::PARAM_Type) {
       type = attrValue;
-    }
-
-    if (attrName == SlxParameter::PARAM_Dimension) {
+    } else if (attrName == SlxParameter::PARAM_Dimension) {
       dimension = attrValue;
     }
+  }
 
-    this->ptr_ = std::make_shared<SimulinkArray>(type, name, dimension);
+  this->ptr_ = std::make_shared<SimulinkArray>(type, name, dimension);
 
-    for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
-         nodePtr_ = nodePtr_->next) {
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+       nodePtr_ = nodePtr_->next) {
 
-      if (nodePtr_->type == XML_ELEMENT_NODE &&
-          xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) ==
-              0) {
-        SimulinkArrayParser *subArrParserPtr = new SimulinkArrayParser();
-        ErrorCode subInputStatus = subArrParserPtr->setInputData(nodePtr_);
-        if (subInputStatus != ErrorCode::SLX_OK) {
-          buffer_.push_back(subInputStatus);
-          return subInputStatus;
-        }
-        ErrorCode subArrParseStatus = subArrParserPtr->parse();
-        if (subArrParseStatus != ErrorCode::SLX_OK) {
-          l.log(Logger::V_ERROR, "SimulinkArrayParser :: fail to "
-                                 "build sub Array element");
-          buffer_.push_back(subArrParserPtr->getErrorBuffer());
-          return subArrParseStatus;
-        }
-        ptr_->add(subArrParserPtr->getDataObject());
-        delete subArrParserPtr;
+    if (nodePtr_->type == XML_ELEMENT_NODE &&
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0) {
+
+      std::unique_ptr<SimulinkObjectParser> subObjParserPtr(
+          new SimulinkObjectParser());
+      ErrorCode subInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != ErrorCode::SLX_OK) {
+        buffer_.push_back(subInputStatus);
+        return subInputStatus;
       }
+      ErrorCode subObjParseStatus = subObjParserPtr->parse();
+      if (subObjParseStatus != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR,
+              "SimulinkArrayParser :: fail to build subObject element");
+        buffer_.push_back(subObjParseStatus);
+        return subObjParseStatus;
+      }
+      ptr_->add(subObjParserPtr->getDataObject());
+    }
+
+    if (nodePtr_->type == XML_ELEMENT_NODE &&
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0) {
+
+      std::unique_ptr<SimulinkArrayParser> subArrParserPtr(
+          new SimulinkArrayParser());
+      ErrorCode subInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != ErrorCode::SLX_OK) {
+        buffer_.push_back(subInputStatus);
+        return subInputStatus;
+      }
+      ErrorCode subArrParseStatus = subArrParserPtr->parse();
+      if (subArrParseStatus != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR,
+              "SimulinkArrayParser :: fail to build subArray element");
+        buffer_.push_back(subArrParseStatus);
+        return subArrParseStatus;
+      }
+      ptr_->add(subArrParserPtr->getDataObject());
     }
   }
+
   return ErrorCode::SLX_OK;
+}
+
+std::shared_ptr<SimulinkArray> SimulinkArrayParser::getDataObject() const {
+  return ptr_;
 }
 
 SLXIO_ABI_NAMESPACE_END

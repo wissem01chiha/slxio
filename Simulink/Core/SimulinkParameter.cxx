@@ -43,6 +43,14 @@ SimulinkParameter::SimulinkParameter(const char *val)
 SimulinkDataType SimulinkParameter::getDataType() { return DataType; }
 
 void SimulinkParameter::setDataType(SimulinkDataType DataType_) {
+
+  if (DataType_ == DataType) {
+    Logger::getInstance().log(Logger::V_WARNING,
+                              "SimulinkParameter::setDataType called with same "
+                              "data type. No changes made.");
+    return;
+  }
+
   this->DataType = DataType_;
 }
 

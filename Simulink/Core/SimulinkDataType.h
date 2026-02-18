@@ -42,7 +42,8 @@ enum class APIEXPORT SimulinkDataType {
   UInt32,
   Boolean,
   Half,
-  String
+  String,
+  Char
 };
 
 #define SIMULINKDATATYPE_MAP(XX)                                               \
@@ -57,7 +58,9 @@ enum class APIEXPORT SimulinkDataType {
   XX(SimulinkDataType::UInt32, "uint32")                                       \
   XX(SimulinkDataType::UInt64, "uint64")                                       \
   XX(SimulinkDataType::Boolean, "boolean")                                     \
+  XX(SimulinkDataType::Boolean, "logical")                                     \
   XX(SimulinkDataType::String, "string")                                       \
+  XX(SimulinkDataType::Char, "char")                                           \
   XX(SimulinkDataType::Auto, "auto")
 
 SimulinkDataType toSimulinkDataType(bool);
@@ -74,6 +77,8 @@ SimulinkDataType toSimulinkDataType(uint32);
 SimulinkDataType toSimulinkDataType(uint64);
 
 SimulinkDataType toSimulinkDataType(const std::string &);
+SimulinkDataType toSimulinkDataType(const char *);
+
 const char *toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END

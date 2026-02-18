@@ -11,10 +11,26 @@ TEST_CASE("Test Parser Set Empty String Input Data") {
   delete sdtpPtr;
 }
 
+TEST_CASE("Test Parser Set Null String Input Data") {
+
+  SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
+  CHECK(sdtpPtr->setInputData((const char *)nullptr) == ErrorCode::SLX_EINVAR);
+  delete sdtpPtr;
+}
+
 TEST_CASE("Test Parser Parse Double String Input") {
 
   SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
   CHECK(sdtpPtr->setInputData(std::string("double")) == ErrorCode::SLX_OK);
+  CHECK(sdtpPtr->parse() == ErrorCode::SLX_OK);
+  CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::Double);
+  delete sdtpPtr;
+}
+
+TEST_CASE("Test Parser Parse Valid Double Char String Input") {
+
+  SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
+  CHECK(sdtpPtr->setInputData("double") == ErrorCode::SLX_OK);
   CHECK(sdtpPtr->parse() == ErrorCode::SLX_OK);
   CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::Double);
   delete sdtpPtr;

@@ -1,4 +1,5 @@
 #include "SimulinkDataTypeParser.h"
+#include "Logger.h"
 #include <unordered_map>
 
 SLXIO_NAMESPACE_BEGIN
@@ -13,6 +14,8 @@ SimulinkDataTypeParser::SimulinkDataTypeParser() {
 ErrorCode SimulinkDataTypeParser::setInputData(const std::string data) {
 
   if (data.empty()) {
+    Logger &l = Logger::getInstance();
+    l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
     buffer_.push_back(ErrorCode::SLX_EINVAR);
     return ErrorCode::SLX_EINVAR;
   }
@@ -21,6 +24,14 @@ ErrorCode SimulinkDataTypeParser::setInputData(const std::string data) {
 }
 
 ErrorCode SimulinkDataTypeParser::setInputData(const char *data) {
+
+  if (data == nullptr || strlen(data) == 0) {
+    Logger &l = Logger::getInstance();
+    l.log(Logger::V_ERROR,
+          "SimulinkDataTypeParser:: null or empty data string");
+    buffer_.push_back(ErrorCode::SLX_EINVAR);
+    return ErrorCode::SLX_EINVAR;
+  }
   dataObject = std::string(data);
   return ErrorCode::SLX_OK;
 }
@@ -43,7 +54,10 @@ ErrorCode SimulinkDataTypeParser::parse() {
     ptr_ = std::make_shared<SimulinkDataType>(it->second);
     return ErrorCode::SLX_OK;
   }
-
+  Logger &l = Logger::getInstance();
+  l.log(Logger::V_ERROR,
+        "SimulinkDataTypeParser:: unrecognized data type string: " +
+            dataObject);
   ptr_ = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
   buffer_.push_back(ErrorCode::SLX_EINVAR);
   return ErrorCode::SLX_EINVAR;
