@@ -17,13 +17,14 @@
 - [1.0 Overview](#10-overview)
   - [1.1 Features](#11-features)
   - [1.2 Supported MATLAB](#12-supported-matlab)
+      - [1.2.1 MATLAB Regression Testing Matrix](#121-matlab-regression-testing-matrix)
   - [1.3 Contact](#13-contact)
   - [1.4 Contributing](#14-contributing)
 - [2.0 Building](#20-building)
   - [2.1 Dependencies](#21-dependencies)
     - [2.1.1 zlib](#211-zlib)
     - [2.1.1 HDF5](#211-hdf5)
-  - [2.2 Building SLXIO](#22-building-slxio)
+  - [2.2 Building Slxio](#22-building-slxio)
     - [2.2.1 Quick Build Guide](#221-quick-build-guide)
     - [2.2.2 Configure Options](#222-configure-options)
   - [2.3 Platform Support](#23-platform-support)
@@ -60,23 +61,43 @@ The project is under active development, and contributions are highly encouraged
 
 ### 1.1 Features
 
-- Parse and extract SLX files into C++ structures  
-- Serialize SLX data into JSON format  
-- Edit metadata or parameters and save changes back to the SLX file  
+- Parse and extract slx files into c++ structures  
+- Serialize slx data into json format  
+- Edit metadata or parameters and save changes back to the slx file  
 
 ### 1.2 Supported MATLAB  
 
-SLXIO aims to support MATLAB releases from **R2018a** to **R2025a**. Currently, the primary supported versions are **R2019a** and **R2018a**. Additional versions will be progressively supported in future project releases.  
+**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.  
 
-> **Note:** Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by MathWorks may not be available, as the project focuses on core model/library block diagram data.  
+> **Note:** Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.  
 
-MDL files are out of scope. For certain specific releases they may be partially compatible, but no support or fixes are planned for MDL file compatibility.  
+[*.mdl](https://amazingalgorithms.com/file-extensions/mdl/) files are out of scope, for certain specific releases they may be partially compatible, but no support or fixes are planned for mdl file compatibility.  
 
-At present, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed SLX files.  
+At present, there is no official documentation from MathWorks regarding the slx data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed slx files.  
 
-To ensure compatibility when using SLXIO with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.  
+To ensure compatibility when using slxio with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.  
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
+#### 1.2.1 MATLAB Regression Testing Matrix
+
+| Release | Status | Comment | Release Notes                                                                                                                             |
+|---------|--------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| R2018a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018a/r2018a-update-2-release-notes.pdf)|
+| R2018b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018b/r2018b-updates-release-notes.pdf) |
+| R2019a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019a/r2019a-updates-release-notes.pdf) |
+| R2019b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019b/r2019b-updates-release-notes.pdf) |
+| R2020a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020a/r2020a-updates-release-notes.pdf) |
+| R2020b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020b/r2020b-updates-release-notes.pdf) |
+| R2021a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021a/r2021a-updates-release-notes.pdf) |
+| R2021b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021b/r2021b-updates-release-notes.pdf) |
+| R2022a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022a/r2022a-updates-release-notes.pdf) |
+| R2022b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022b/r2022b-updates-release-notes.pdf) |
+| R2023a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023a/r2023a-updates-release-notes.pdf) |
+| R2023b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023b/r2023b-updates-release-notes.pdf) |
+| R2024a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2024a/r2024a-updates-release-notes.pdf) |
+| R2024b  |        |        | [Release Notes](https://www.mathworks.com/matlabcentral/discussions/uploaded_files/35746/Whats_New_In_MATLAB_R2024b%202.pdf)               |
+| R2025a  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
+| R2025b  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
 
 ### 1.3 Contact
 
@@ -95,21 +116,23 @@ This section describes how to build slxio, see  [2.1](#21-dependencies) describe
 ### 2.1 Dependencies
 
 Slxio has its own modular build wrapper, written on top of CMake, similar to many open‑source projects.  
-All core dependencies are vendored with the source code in the `ThirdParty` directory to maximize platform compatibility and reduce reliance on external build/fetch rules.  
+All core dependencies are vendored with the source code in the [ThirdParty](/ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build/fetch rules.  
 Optional dependencies may either use system‑wide installations or be fetched externally depending on configuration options, via CMake package managers or other internal helpers.
 
 
-| Library | Version | Introduced In | Depends On | Notes |
-|--------|---------|----------------|------------|-------|
-| [slog](https://github.com/kala13x/slog) | Latest | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [json-c](https://github.com/json-c/json-c) *(optional)* | Latest | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [zlib](https://github.com/madler/zlib) | 1.2.8 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [libzip](https://github.com/nih-at/libzip) | 1.11.4 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib) |  |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.14.5 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib) |  |
-| [HDF5](https://github.com/HDFGroup/hdf5) *(optional)* | 1.14.1 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), pthread |  experimental |
-| [matio](https://github.com/tbeu/matio) *(optional)* | 1.5.28 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
-| [cxxopts](https://github.com/jarro2783/cxxopts) *(optional)* | 3.3.1 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |  | experimental |
-| [googletest](https://github.com/google/googletest) *(optional)* | 1.14.0 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
+| Library                                            | Version | Introduced In                                             | Depends On                            | Notes                                   |
+|----------------------------------------------------|---------|-----------------------------------------------------------|---------------------------------------|-----------------------------------------|
+| [slog](https://github.com/kala13x/slog)            | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [json-c](https://github.com/json-c/json-c)         | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [zlib](https://github.com/madler/zlib)             | 1.2.8   | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [libzip](https://github.com/nih-at/libzip)         | 1.11.4  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)|                                         |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2)  | 2.14.5  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [TinyXML2](https://github.com/leethomason/tinyxml2)|         | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       | Not yet used                            |
+| [HDF5](https://github.com/HDFGroup/hdf5)           | 1.14.1  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)| experimental                            |
+| [matio](https://github.com/tbeu/matio)             | 1.5.28  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
+| [cxxopts](https://github.com/jarro2783/cxxopts)    | 3.3.1   | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       | experimental                             |
+| [doctest](https://github.com/doctest/doctest)      | 1.14.0  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
+| [libuv](https://github.com/libuv/libuv)            |         | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
 
   
 #### 2.1.1 zlib
@@ -120,7 +143,7 @@ Support for compressed [SLX](), [JSON](), [MAT](), and [h5]() file formats requi
 
 Support for MATLAB [MAT](https://www.mathworks.com/help/pdf_doc/matlab/matfile_format.pdf) files, used for reading Simulink-related data structures, is provided through [matio](https://github.com/tbeu/matio), which itself requires the HDF5 library. Additionally, for serializing SLX files into standard `.h5` data files, SLXIO depends on the HDF5 library. If the library is not found, it is automatically fetched and built via CPM. However, it is recommended to use a prebuilt binary, as this significantly reduces the build and compilation time.
 
-### 2.2 Building SLXIO 
+### 2.2 Building Slxio 
 
 Building the library from source can be time‑consuming depending on your system configuration and setup.
 For a quicker installation, we recommend using the binary distribution for each platform
