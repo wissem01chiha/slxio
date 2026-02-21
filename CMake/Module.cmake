@@ -336,17 +336,17 @@ Template of Module.txt file:
   INSTALL_TARGETS
     TRUE/FALSE
   CLASSES
-    ClassA
-    ClassB
+    classA
+    classB
   SOURCES
-    SourceA.cxx
-    SourceB.cxx
+    sourceA.cxx
+    sourceB.cxx
   HEADERS
-    HeaderA.h
-    HeaderB.h
+    headerA.h
+    headerB.h
   CONFIG_HEADERS
-    ConfigA.h.in
-    ConfigB.h.in
+    configA.h.in
+    configB.h.in
   CMAKE_MODULES_DIRS
     cmake/
   PUBLIC_DEPENDS

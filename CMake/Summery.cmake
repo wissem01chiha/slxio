@@ -1,3 +1,8 @@
+#[=======================================================================[.rst:
+ModuleSummery.cmake
+----------------
+Provides a summary of the configured modules and options for the project build.
+#]=======================================================================]
 include (ModuleSummery)
 
 message ("")

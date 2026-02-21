@@ -1,6 +1,6 @@
 #[=======================================================================[.rst:
-ModuleSummery.cmake
-----------------
-Provides a summary of the configured module and options for the project build.
+Sanitizer.cmake
+-----------
+Provides options to enable sanitizers for the build.
 #]=======================================================================]
-include (Module)
+include (ModuleSanitizer)

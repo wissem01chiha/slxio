@@ -6,7 +6,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSetParser::SimulinkConfigSetParser() : datObject(nullptr) {
+SimulinkConfigSetParser::SimulinkConfigSetParser() : dataObject(nullptr) {
   ptr_ = std::make_shared<SimulinkConfigSet>();
 }
 
@@ -22,10 +22,11 @@ ErrorCode SimulinkConfigSetParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkConfigSetParser::parse() { return ErrorCode::SLX_OK; }
+ErrorCode SimulinkConfigSetParser::parse() {
+  Logger &l = Logger::getInstance();
 
-/// SLXParser<SimulinkConfigSet>::ErrorCode
-/// SLXConfigSetParser::parse() {
+  return ErrorCode::SLX_OK; 
+}
 
 /// if (xmlStrcmp(nodePtr->name, BAD_CAST SimulinkConstant::SECTION_ConfigSet)
 /// !=

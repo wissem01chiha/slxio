@@ -1,3 +1,9 @@
+#[=======================================================================[.rst:
+Documentation.cmake
+----------------
+Configure documentation generation settings for the project build
+#]=======================================================================]
+
 if (NOT ENABLE_DOCUMENTATION)
   return ()
 endif ()

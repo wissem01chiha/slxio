@@ -39,7 +39,7 @@ public:
 
 private:
   std::shared_ptr<SimulinkConfigSet> ptr_;
-  xmlNodePtr datObject;
+  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

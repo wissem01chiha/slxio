@@ -1,5 +1,5 @@
 #[=======================================================================[.rst:
-ModuleDebugging
+ModuleDebugging.cmake
 -----------------
 Provides utilities to debug module parsing and configuration.
 #]=======================================================================]

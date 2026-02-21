@@ -1,3 +1,8 @@
+#[=======================================================================[.rst:
+ModuleExternal.cmake
+----------------
+Configure external dependencies for the project build
+#]=======================================================================]
 include (ModuleRemote)
 include (FindPythonModule)
 

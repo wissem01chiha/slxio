@@ -1,5 +1,4 @@
 set (CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1)
-
 if (MSVC)
   add_compile_options (
     /wd4244

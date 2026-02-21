@@ -101,9 +101,15 @@ SimulinkElementType SimulinkBlock::getType() const {
 
 Index SimulinkBlock::getID() const { return blockId; }
 
-void SimulinkBlock::set(const Index &blockId_) { blockId = blockId_; }
+void SimulinkBlock::setID(const Index &blockId_) { blockId = blockId_; }
 
-void SimulinkBlock::setName(const std::string &blockName_) { blockName = blockName_; }
+void SimulinkBlock::setName(const std::string &blockName_) {
+  blockName = blockName_;
+}
+
+void SimulinkBlock::setBlockType(SimulinkBlockType::Type blockType_) {
+  blockType = blockType_;
+}
 
 ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element) {
 

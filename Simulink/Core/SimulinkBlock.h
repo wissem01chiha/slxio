@@ -47,20 +47,22 @@ public:
 
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+
   std::string toString() const override;
 
   Index getID() const override;
-
-  void set(const Index &blockId_);
-  void setName(const std::string &blockName_);
-
-  bool contains(const Index &blockId_) const override;
+  SimulinkElementType getType() const override;
+  SimulinkBlockType getBlockType();
+  std::string getName();
 
   std::shared_ptr<SimulinkBlock> getSubBlock(const std::string &blockName_);
   std::shared_ptr<SimulinkBlock> getSubBlock(const Index &blockId_);
 
-  SimulinkBlockType getBlockType();
-  SimulinkElementType getType() const override;
+  void setID(const Index &blockId_);
+  void setName(const std::string &blockName_);
+  void setBlockType(SimulinkBlockType::Type blockType_);
+
+  bool contains(const Index &blockId_) const override;
 
   std::shared_ptr<SimulinkBlock> getParent();
   ErrorCode addPort(SimulinkPortType portType_);
@@ -70,12 +72,10 @@ public:
   std::shared_ptr<SimulinkParameter>
   getParameter(const char *blockParameterName_);
 
-  std::string getName();
-
 private:
-  SimulinkBlockType blockType;
-  std::string blockName;
   Index blockId;
+  std::string blockName;
+  SimulinkBlockType blockType;
   std::map<SimulinkPortType, Index> blockPorts;
   std::vector<std::shared_ptr<SimulinkBlock>> subBlocks;
   std::shared_ptr<SimulinkBlock> blockParent = nullptr;

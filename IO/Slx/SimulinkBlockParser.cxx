@@ -23,7 +23,7 @@ ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkBlockParser::parse() { 
+ErrorCode SimulinkBlockParser::parse() {
 
   Logger &l = Logger::getInstance();
 
@@ -38,12 +38,32 @@ ErrorCode SimulinkBlockParser::parse() {
       id = static_cast<Index>(std::stoul(attrValue));
     } else if (attrName == SlxParameter::PARAM_Name) {
       name = attrValue;
+    } else if (attrName == SlxParameter::PARAM_BlockType) {
+      SimulinkBlockType::Type blockType =
+          SimulinkBlockType::toType(attrValue.c_str());
+      ptr_->setBlockType(blockType);
+    } else {
+      l.log(Logger::V_WARNING, "unexpected attribute '", attrName,
+            "' found in simulink block node.");
     }
   }
-  ptr_->set(id);
+  ptr_->setID(id);
   ptr_->setName(name);
 
-  return ErrorCode::SLX_OK; 
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+       nodePtr_ = nodePtr_->next) {
+
+    if (nodePtr_->type == XML_ELEMENT_NODE &&
+        xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) ==
+            0) {
+      SimulinkParameterParser parser;
+      parser.setInputData(nodePtr_);
+      parser.parse();
+      ptr_->add(parser.getDataObject());
+    }
+  }
+
+  return ErrorCode::SLX_OK;
 }
 
 std::shared_ptr<SimulinkBlock> SimulinkBlockParser::getDataObject() const {
