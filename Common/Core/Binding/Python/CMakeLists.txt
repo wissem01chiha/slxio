@@ -1,3 +1,1 @@
-mtk_add_python_bindings(
- 
-)
+mtk_add_python_bindings ()

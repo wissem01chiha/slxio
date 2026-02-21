@@ -45,8 +45,7 @@ ErrorCode SimulinkContentParser::parse() {
     return unzip_status;
   }
 
-  ErrorCode load_status = loadXmlTargets(
-      tempDirectory.getDirectoryPath());
+  ErrorCode load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
   if (load_status != ErrorCode::SLX_OK) {
     buffer_.push_back(load_status);
     return load_status;
@@ -57,7 +56,7 @@ ErrorCode SimulinkContentParser::parse() {
     buffer_.push_back(clear_status);
     return clear_status;
   }
-  
+
   return ErrorCode::SLX_OK;
 }
 
@@ -106,7 +105,7 @@ ErrorCode SimulinkContentParser::unzip() {
 
   Logger &l = Logger::getInstance();
 
-  const char* tmpdir = tempDirectory.getDirectoryPath().c_str();
+  const char *tmpdir = tempDirectory.getDirectoryPath().c_str();
   std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
   ErrorCode mv_status = dataObject.copy(tempdirfullpath.c_str());
@@ -150,7 +149,7 @@ SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
 
   Logger &l = Logger::getInstance();
 
-XmlTarget targets[] = {
+  XmlTarget targets[] = {
       {"/simulink/blockdiagram.xml", &ptr_->blockdiagram},
       {"/simulink/modelDictionary.xml", &ptr_->modelDictionary},
       {"/simulink/configSetInfo.xml", &ptr_->configSetInfo},
@@ -160,7 +159,6 @@ XmlTarget targets[] = {
       {"/metadata/mwcoreProperties.xml", &ptr_->mwcoreProperties},
       {"/metadata/mwcorePropertiesExtension.xml",
        &ptr_->mwcorePropertiesExtension}};
-
 
   for (auto &t : targets) {
     std::string fullPath = tempdirfullpath + t.path;

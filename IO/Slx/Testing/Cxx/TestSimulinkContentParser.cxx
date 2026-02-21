@@ -47,8 +47,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest") {
   CHECK(status == ErrorCode::SLX_OK);
 };
 
-TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
-                          "ParserGetDataObjectTest") {
+TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest") {
 
   ErrorCode status =
       parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
@@ -56,13 +55,12 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
   status = parserPtr->parse();
   CHECK(status == ErrorCode::SLX_OK);
 
-  std::shared_ptr<SimulinkContent> contentPtr =
-      parserPtr->getDataObject();
+  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getDataObject();
   CHECK(contentPtr != nullptr);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
-                          "ParserInvalidInputDataTest") {
+                  "ParserInvalidInputDataTest") {
 
   ErrorCode status =
       parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
@@ -70,14 +68,13 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
-                          "ParserDataObjectValidAttributeTest") {
+                  "ParserDataObjectValidAttributeTest") {
 
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   parserPtr->parse();
-  std::shared_ptr<SimulinkContent> contentPtr =
-      parserPtr->getDataObject();
+  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getDataObject();
   CHECK(contentPtr != nullptr);
-   
+
   xmlNodePtr nodePtrNull = nullptr;
   ErrorCode status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
   CHECK(status == ErrorCode::SLX_OK);
@@ -88,16 +85,17 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
   status = contentPtr->getBlockdiagramNodePtr(nodePtr);
   CHECK(status == ErrorCode::SLX_OK);
   CHECK(nodePtr != nullptr);
-  
+
   const xmlChar *name = nodePtr->name;
   CHECK(name != nullptr);
   printf("Blockdiagram root node name: %s\n", name);
 
-  const xmlChar* content = nodePtr->content;
+  const xmlChar *content = nodePtr->content;
   CHECK(content == nullptr);
 
-  const xmlAttr* properties = nodePtr->properties;
-  printf("Blockdiagram root node properties: %s\n", (const char*)properties->name);
+  const xmlAttr *properties = nodePtr->properties;
+  printf("Blockdiagram root node properties: %s\n",
+         (const char *)properties->name);
   CHECK(properties != nullptr);
 };
 

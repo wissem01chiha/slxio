@@ -10,4 +10,4 @@ This module defines the following cache variables:
 ``ENABLE_THREAD_SANITIZER``
     Enable Thread Sanitizer support
 #]=======================================================================]
-include(Module)
+include (Module)

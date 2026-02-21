@@ -7,9 +7,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkBlockParserTestFixture {
 protected:
-  SimulinkBlockParserTestFixture(){}
+  SimulinkBlockParserTestFixture() {}
 
-  ~SimulinkBlockParserTestFixture(){};
+  ~SimulinkBlockParserTestFixture() {};
 
   SimulinkBlockParser *parserPtr;
   xmlDocPtr doc;

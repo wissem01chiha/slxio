@@ -33,9 +33,9 @@ class SimulinkModel;
  */
 class StateflowMachine : public StateflowElementBase {
 public:
-  StateflowMachine(SimulinkModel &model){
-      // this->model = model;
-      // model.setStateflowMachine(this);
+  StateflowMachine(SimulinkModel &model) {
+    // this->model = model;
+    // model.setStateflowMachine(this);
   };
 
   /**

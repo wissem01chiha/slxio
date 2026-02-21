@@ -6,5 +6,3 @@ This file defines utilities for fetching remote modules or third‑party librari
 using git.
 this module is used by ModuleExternal.cmake script
 #]=======================================================================]
-
-

@@ -243,7 +243,7 @@ ErrorCode Directory::zip(const char *dir) { return ErrorCode::SLX_ENOTIMPL; }
 
 ErrorCode Directory::mkdir(const char *path) {
 
-if (path == nullptr) {
+  if (path == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
 
@@ -254,12 +254,12 @@ if (path == nullptr) {
 
     char *last_slash = strrchr(path_, '/');
     if (last_slash) {
-      *(last_slash + 1) = '\0'; 
+      *(last_slash + 1) = '\0';
     } else {
       path_[0] = '\0';
     }
   }
-    
+
   uv_fs_t req;
   char temp[1024];
   strncpy(temp, path_, sizeof(temp));

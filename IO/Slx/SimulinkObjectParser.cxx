@@ -67,7 +67,8 @@ ErrorCode SimulinkObjectParser::parse() {
 
       ErrorCode paramParseStatus = paramParserPtr->parse();
       if (paramParseStatus != ErrorCode::SLX_OK) {
-        l.log(Logger::V_ERROR, "SimulinkObjectParser:: fail to build object Parameter");
+        l.log(Logger::V_ERROR,
+              "SimulinkObjectParser:: fail to build object Parameter");
         buffer_.push_back(paramParseStatus);
         return paramParseStatus;
       }

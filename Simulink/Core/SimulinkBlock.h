@@ -50,6 +50,10 @@ public:
   std::string toString() const override;
 
   Index getID() const override;
+
+  void set(const Index &blockId_);
+  void setName(const std::string &blockName_);
+
   bool contains(const Index &blockId_) const override;
 
   std::shared_ptr<SimulinkBlock> getSubBlock(const std::string &blockName_);

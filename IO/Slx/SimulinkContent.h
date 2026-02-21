@@ -41,12 +41,12 @@ public:
   SimulinkContent() = default;
   ~SimulinkContent() = default;
 
-  ErrorCode getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const;
-  ErrorCode getPropertiesNodePtr(xmlNodePtr& nodePtr) const;
-  ErrorCode getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const;
-  ErrorCode getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const;
-  ErrorCode getConfigSetNodePtr(Index &idx, xmlNodePtr& nodePtr) const;
-  ErrorCode getModelDictionary(xmlNodePtr& nodePtr) const;
+  ErrorCode getBlockdiagramNodePtr(xmlNodePtr &nodePtr) const;
+  ErrorCode getPropertiesNodePtr(xmlNodePtr &nodePtr) const;
+  ErrorCode getMwPropertiesNodePtr(xmlNodePtr &nodePtr) const;
+  ErrorCode getConfigSetInfoNodePtr(xmlNodePtr &nodePtr) const;
+  ErrorCode getConfigSetNodePtr(Index &idx, xmlNodePtr &nodePtr) const;
+  ErrorCode getModelDictionary(xmlNodePtr &nodePtr) const;
 
 private:
   xmlDocPtr blockdiagram = nullptr;

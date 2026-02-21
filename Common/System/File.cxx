@@ -1,11 +1,11 @@
 ﻿#include "File.h"
 #include "Compiler.h"
+#include "Directory.h"
 #include "LibZip.h"
 #include "Libuv.h"
 #include "Platform.h"
 #include "Status.h"
 #include <cstring>
-#include "Directory.h"
 #include <fstream>
 #include <iostream>
 
@@ -308,12 +308,11 @@ ErrorCode File::copy(const char *destdir) {
   }
 
   if (dst.tellp() == 0) {
-    return ErrorCode::SLX_EIOERR;  
+    return ErrorCode::SLX_EIOERR;
   }
 
   return ErrorCode::SLX_OK;
 }
-
 
 ErrorCode File::rename(const char *filename) {
 
@@ -420,7 +419,6 @@ ErrorCode File::unzip(const char *dir) {
       Status::log((int)ec);
       return ec;
     }
-    
 
     zip_file_t *zf = zip_fopen_index(archive, i, 0);
     if (!zf) {

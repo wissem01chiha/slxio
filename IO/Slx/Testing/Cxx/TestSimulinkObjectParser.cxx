@@ -7,7 +7,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObjectParserTestFixture {
 protected:
-  SimulinkObjectParserTestFixture() : parserPtr(new SimulinkObjectParser()), doc(nullptr) {}
+  SimulinkObjectParserTestFixture()
+      : parserPtr(new SimulinkObjectParser()), doc(nullptr) {}
 
   xmlNodePtr getXmlNodePtr(const char *xmlfilename) {
 
@@ -23,7 +24,7 @@ protected:
   }
 
   ~SimulinkObjectParserTestFixture() {
-      
+
     if (parserPtr) {
       delete parserPtr;
     }

@@ -14,7 +14,7 @@ ErrorCode SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr &nodePtr) const {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(blockdiagram);
-  if (root== nullptr) {
+  if (root == nullptr) {
     l.log(Logger::V_ERROR,
           "failed to get root element from blockdiagram XML document");
     return ErrorCode::SLX_ENULLPTR;
@@ -23,13 +23,12 @@ ErrorCode SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr &nodePtr) const {
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const {
+ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr &nodePtr) const {
 
   Logger &l = Logger::getInstance();
 
-  if(nodePtr == nullptr) {
-    l.log(Logger::V_ERROR,
-          "provided nodePtr is a null pointer");
+  if (nodePtr == nullptr) {
+    l.log(Logger::V_ERROR, "provided nodePtr is a null pointer");
     return ErrorCode::SLX_EINVAR;
   }
 
@@ -39,7 +38,7 @@ ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(coreProperties);
-  if (root==NULL) {
+  if (root == NULL) {
     l.log(Logger::V_ERROR,
           "failed to get root element from coreProperties XML document");
     return ErrorCode::SLX_ENULLPTR;
@@ -48,26 +47,26 @@ ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const {
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const {
+ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr &nodePtr) const {
 
-  if (mwcoreProperties ==nullptr) {
+  if (mwcoreProperties == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(mwcoreProperties);
-  if (root==NULL) {
+  if (root == NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const {
+ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr &nodePtr) const {
 
   if (configSetInfo == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSetInfo);
-  if (root==NULL) {
+  if (root == NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
@@ -75,7 +74,7 @@ ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const {
 }
 
 ErrorCode SimulinkContent::getConfigSetNodePtr(Index &idx,
-                                               xmlNodePtr& nodePtr) const {
+                                               xmlNodePtr &nodePtr) const {
 
   if (idx > configSets.size()) {
     return ErrorCode::SLX_EEOF;
@@ -84,20 +83,20 @@ ErrorCode SimulinkContent::getConfigSetNodePtr(Index &idx,
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSets[idx]);
-  if (root==NULL) {
+  if (root == NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode SimulinkContent::getModelDictionary(xmlNodePtr& nodePtr) const {
+ErrorCode SimulinkContent::getModelDictionary(xmlNodePtr &nodePtr) const {
 
-  if (modelDictionary==nullptr) {
+  if (modelDictionary == nullptr) {
     return ErrorCode::SLX_ENULLPTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(modelDictionary);
-  if (root==NULL) {
+  if (root == NULL) {
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;

@@ -9,9 +9,7 @@ class SimulinkFileTestFixture {
 protected:
   SimulinkFileParser *parserPtr;
 
-  SimulinkFileTestFixture(){
-    parserPtr = new SimulinkFileParser();
-  }
+  SimulinkFileTestFixture() { parserPtr = new SimulinkFileParser(); }
 
   File getTestFileAsset(const char *assetName) {
 
@@ -23,7 +21,7 @@ protected:
     return File(path_slx);
   }
 
-  ~SimulinkFileTestFixture(){
+  ~SimulinkFileTestFixture() {
     if (parserPtr) {
       delete parserPtr;
       parserPtr = nullptr;
@@ -45,7 +43,6 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile") {
   CHECK(in_status == ErrorCode::SLX_OK);
   ErrorCode parseStatus = parserPtr->parse();
   CHECK(parseStatus == ErrorCode::SLX_OK);
-
 };
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile") {

@@ -1,8 +1,8 @@
-add_test_sources(IO::Slx
+add_test_sources (
+  IO::Slx
   TestSimulinkParameterParser.cxx
   TestSimulinkDataTypeParser.cxx
   TestSimulinkContentParser.cxx
   TestSimulinkFileParser.cxx
   TestSimulinkArrayParser.cxx
-  TestSimulinkObjectParser.cxx
-)
+  TestSimulinkObjectParser.cxx)
