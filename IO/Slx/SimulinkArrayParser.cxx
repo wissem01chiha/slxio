@@ -71,7 +71,7 @@ ErrorCode SimulinkArrayParser::parse() {
         buffer_.push_back(subObjParseStatus);
         return subObjParseStatus;
       }
-      ptr_->add(subObjParserPtr->getDataObject());
+      ptr_->add(subObjParserPtr->getOutputData());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
@@ -91,14 +91,14 @@ ErrorCode SimulinkArrayParser::parse() {
         buffer_.push_back(subArrParseStatus);
         return subArrParseStatus;
       }
-      ptr_->add(subArrParserPtr->getDataObject());
+      ptr_->add(subArrParserPtr->getOutputData());
     }
   }
 
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkArray> SimulinkArrayParser::getDataObject() const {
+std::shared_ptr<SimulinkArray> SimulinkArrayParser::getOutputData() const {
   return ptr_;
 }
 

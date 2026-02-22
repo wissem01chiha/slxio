@@ -19,45 +19,46 @@ ErrorCode SimulinkConfigSetParser::setInputData(const xmlNodePtr data) {
     return ErrorCode::SLX_ENULLPTR;
   }
 
+  if (xmlStrcmp(data->name, BAD_CAST SlxParameter::SECTION_ConfigSet) != 0) {
+    l.log(Logger::V_ERROR,
+          "SimulinkConfigSetParser::setInputData failed: expected node "
+          "<ConfigSet>, but got <%s>",
+          data->name);
+    return ErrorCode::SLX_EINVAR;
+  }
+
   return ErrorCode::SLX_OK;
 }
 
 ErrorCode SimulinkConfigSetParser::parse() {
   Logger &l = Logger::getInstance();
 
-  return ErrorCode::SLX_OK; 
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+       nodePtr_ = nodePtr_->next) {
+
+    std::unique_ptr<SimulinkObjectParser> objParserPtr =
+        std::make_unique<SimulinkObjectParser>();
+    ErrorCode objInputStatus = objParserPtr->setInputData(nodePtr_);
+    if (objInputStatus != ErrorCode::SLX_OK) {
+      l.log(Logger::V_ERROR, "SimulinkConfigSetParser:: failed to set input "
+                             "data for object parser");
+      return objInputStatus;
+    }
+
+    auto cfgPtr = std::dynamic_pointer_cast<SimulinkConfigSet>(
+        objParserPtr->getOutputData());
+    if (!cfgPtr) {
+      l.log(Logger::V_ERROR, "SimulinkConfigSetParser:: failed to cast parsed "
+                             "object to SimulinkConfigSet");
+      return ErrorCode::SLX_ECASTFAIL;
+    }
+    ptr_ = cfgPtr;
+  }
+  return ErrorCode::SLX_OK;
 }
 
-/// if (xmlStrcmp(nodePtr->name, BAD_CAST SimulinkConstant::SECTION_ConfigSet)
-/// !=
-///    0) {
-// slog_fatal("SLXConfigSetParser::build failed: Expected node "
-//            "<ConfigSet>, but got <%s>",
-//            nodePtr->name);
-///   return SLX_ERR_INVALID_XML;
-/// }
-
-/// for (xmlNodePtr nodePtr_ = nodePtr->children; nodePtr_ != nullptr;
-///  nodePtr_ = nodePtr_->next) {
-///   SimulinkObjectParser *objParserPtr = new SimulinkObjectParser();
-///  SimulinkErrorType status = objParserPtr->build(nodePtr_);
-/// if (status != SLX_OK) {
-///    slog_fatal("SLXConfigSetParser::build failed: fail to build
-///    object "
-///              "%s",
-///              SimulinkConstant::SECTION_ConfigSet);
-///  return status;
-/// }
-
-/// auto cfgPtr =
-///     std::dynamic_pointer_cast<SimulinkConfigSet>(objParserPtr->get());
-/// this->p_ = std::make_unique<SimulinkConfigSet>(*cfgPtr);
-///}
-/// return SLXParser::ErrorCode::SLX_OK;
-///     }
-
 std::shared_ptr<SimulinkConfigSet>
-SimulinkConfigSetParser::getDataObject() const {
+SimulinkConfigSetParser::getOutputData() const {
   return ptr_;
 }
 

@@ -60,7 +60,7 @@ ErrorCode SimulinkContentParser::parse() {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkContent> SimulinkContentParser::getDataObject() const {
+std::shared_ptr<SimulinkContent> SimulinkContentParser::getOutputData() const {
   return ptr_;
 }
 

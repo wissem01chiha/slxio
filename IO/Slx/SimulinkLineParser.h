@@ -44,7 +44,7 @@ public:
   SimulinkLineParser();
 
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkLine> getDataObject() const override;
+  std::shared_ptr<SimulinkLine> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkLineParser() = default;

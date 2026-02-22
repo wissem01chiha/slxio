@@ -39,7 +39,7 @@ public:
   SimulinkObjectParser();
 
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkObject> getDataObject() const override;
+  std::shared_ptr<SimulinkObject> getOutputData() const override;
   ErrorCode parse() override;
   ~SimulinkObjectParser() = default;
 

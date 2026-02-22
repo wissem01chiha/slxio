@@ -59,7 +59,7 @@ public:
   virtual ErrorCode setInputData(const T data) = 0;
 
   /// @brief Retrieve the parsed SimulinkElementBase object.
-  virtual std::shared_ptr<P> getDataObject() const = 0;
+  virtual std::shared_ptr<P> getOutputData() const = 0;
 
   /// @brief parsing process.
   virtual ErrorCode parse() = 0;

@@ -46,7 +46,7 @@ public:
   /// If so, it returns an error since a parameter cannot be built without a
   /// name.
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkParameter> getDataObject() const override;
+  std::shared_ptr<SimulinkParameter> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkParameterParser() = default;

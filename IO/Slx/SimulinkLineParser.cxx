@@ -18,7 +18,7 @@ ErrorCode SimulinkLineParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkLine> SimulinkLineParser::getDataObject() const {
+std::shared_ptr<SimulinkLine> SimulinkLineParser::getOutputData() const {
   return ptr_;
 }
 

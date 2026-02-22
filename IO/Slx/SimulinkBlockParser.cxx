@@ -17,6 +17,7 @@ ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data) {
   Logger &l = Logger::getInstance();
   if (data == nullptr) {
     l.log(Logger::V_ERROR, "SimulinkBlockParser:: null pointer received");
+    buffer_.push_back(ErrorCode::SLX_ENULLPTR);
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = data;
@@ -56,17 +57,29 @@ ErrorCode SimulinkBlockParser::parse() {
     if (nodePtr_->type == XML_ELEMENT_NODE &&
         xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) ==
             0) {
-      SimulinkParameterParser parser;
-      parser.setInputData(nodePtr_);
-      parser.parse();
-      ptr_->add(parser.getDataObject());
+      std::unique_ptr<SimulinkParameterParser> parser(
+          new SimulinkParameterParser());
+      ErrorCode status = parser->setInputData(nodePtr_);
+      if (status != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR, "SimulinkBlockParser:: failed to set input data "
+                               "for SimulinkParameterParser");
+        continue;
+      }
+      ErrorCode parserStatus = parser->parse();
+      if (parserStatus != ErrorCode::SLX_OK) {
+        l.log(Logger::V_ERROR,
+              "SimulinkBlockParser:: failed to parse SimulinkParameterParser");
+        buffer_.push_back(parserStatus);
+        continue;
+      }
+      ptr_->add(parser->getOutputData());
     }
   }
 
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkBlock> SimulinkBlockParser::getDataObject() const {
+std::shared_ptr<SimulinkBlock> SimulinkBlockParser::getOutputData() const {
   return ptr_;
 }
 

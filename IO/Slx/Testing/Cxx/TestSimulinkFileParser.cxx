@@ -49,7 +49,7 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile") {
 
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   parserPtr->parse();
-  auto file = parserPtr->getDataObject();
+  auto file = parserPtr->getOutputData();
   std::string outStr = file->toString();
   std::cout << outStr << std::endl;
   CHECK(!outStr.empty());

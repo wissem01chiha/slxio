@@ -20,12 +20,12 @@ ErrorCode SimulinkHardwareParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
+ErrorCode SimulinkHardwareParser::parse() { return ErrorCode::SLX_OK; }
+
 std::shared_ptr<SimulinkHardware>
-SimulinkHardwareParser::getDataObject() const {
+SimulinkHardwareParser::getOutputData() const {
   return ptr_;
 }
-
-ErrorCode SimulinkHardwareParser::parse() { return ErrorCode::SLX_OK; }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -36,7 +36,7 @@ public:
   SimulinkPortParser();
 
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkPort> getDataObject() const override;
+  std::shared_ptr<SimulinkPort> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkPortParser() = default;

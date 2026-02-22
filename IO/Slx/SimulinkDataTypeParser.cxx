@@ -29,17 +29,12 @@ ErrorCode SimulinkDataTypeParser::setInputData(const char *data) {
   if (data == nullptr || strlen(data) == 0) {
     Logger &l = Logger::getInstance();
     l.log(Logger::V_ERROR,
-          "SimulinkDataTypeParser:: null or empty data string");
+          "SimulinkDataTypeParser:: null or empty input data received");
     buffer_.push_back(ErrorCode::SLX_EINVAR);
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = std::string(data);
   return ErrorCode::SLX_OK;
-}
-
-std::shared_ptr<SimulinkDataType>
-SimulinkDataTypeParser::getDataObject() const {
-  return ptr_;
 }
 
 ErrorCode SimulinkDataTypeParser::parse() {
@@ -62,6 +57,11 @@ ErrorCode SimulinkDataTypeParser::parse() {
   ptr_ = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
   buffer_.push_back(ErrorCode::SLX_EINVAR);
   return ErrorCode::SLX_EINVAR;
+}
+
+std::shared_ptr<SimulinkDataType>
+SimulinkDataTypeParser::getOutputData() const {
+  return ptr_;
 }
 
 SLXIO_ABI_NAMESPACE_END

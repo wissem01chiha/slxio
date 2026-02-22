@@ -80,31 +80,31 @@ ErrorCode SimulinkParameterParser::parse() {
 
   std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
       std::make_unique<SimulinkDataTypeParser>();
+
   ErrorCode dataTypeInputStatus =
       dataTypeParserPtr->setInputData(paramClassStr);
+
   if (dataTypeInputStatus != ErrorCode::SLX_OK) {
     l.log(Logger::V_ERROR,
           "SimulinkParameterParser:: failed to set input data for data type "
           "parser");
-    buffer_.push_back(dataTypeInputStatus);
-    return dataTypeInputStatus;
   }
   ErrorCode dataTypeParseStatus = dataTypeParserPtr->parse();
   if (dataTypeParseStatus != ErrorCode::SLX_OK) {
     l.log(Logger::V_ERROR,
           "SimulinkParameterParser:: failed to parse data type string");
-    buffer_.push_back(dataTypeParseStatus);
-    return dataTypeParseStatus;
   }
   std::shared_ptr<SimulinkDataType> dataTypePtr =
-      dataTypeParserPtr->getDataObject();
-  ptr_->setDataType(*dataTypePtr);
+      dataTypeParserPtr->getOutputData();
+  if (dataTypePtr != nullptr) {
+    ptr_->setDataType(*dataTypePtr);
+  }
 
   return ErrorCode::SLX_OK;
 }
 
 std::shared_ptr<SimulinkParameter>
-SimulinkParameterParser::getDataObject() const {
+SimulinkParameterParser::getOutputData() const {
   return ptr_;
 }
 

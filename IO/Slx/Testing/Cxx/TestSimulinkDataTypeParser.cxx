@@ -23,7 +23,7 @@ TEST_CASE("Test Parser Parse Double String Input") {
   SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
   CHECK(sdtpPtr->setInputData(std::string("double")) == ErrorCode::SLX_OK);
   CHECK(sdtpPtr->parse() == ErrorCode::SLX_OK);
-  CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::Double);
+  CHECK(*sdtpPtr->getOutputData().get() == SimulinkDataType::Double);
   delete sdtpPtr;
 }
 
@@ -32,7 +32,7 @@ TEST_CASE("Test Parser Parse Valid Double Char String Input") {
   SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
   CHECK(sdtpPtr->setInputData("double") == ErrorCode::SLX_OK);
   CHECK(sdtpPtr->parse() == ErrorCode::SLX_OK);
-  CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::Double);
+  CHECK(*sdtpPtr->getOutputData().get() == SimulinkDataType::Double);
   delete sdtpPtr;
 }
 
@@ -41,7 +41,7 @@ TEST_CASE("Test Parser Parse Invalid Double String Input") {
   SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
   CHECK(sdtpPtr->setInputData(std::string("Double")) == ErrorCode::SLX_OK);
   CHECK(sdtpPtr->parse() == ErrorCode::SLX_EINVAR);
-  CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::Auto);
+  CHECK(*sdtpPtr->getOutputData().get() == SimulinkDataType::Auto);
   CHECK(!sdtpPtr->getErrorBuffer().empty());
   sdtpPtr->getErrorBuffer().log();
   delete sdtpPtr;
@@ -52,7 +52,7 @@ TEST_CASE("Test Parser Parse Valid Uint32 String Input") {
   SimulinkDataTypeParser *sdtpPtr = new SimulinkDataTypeParser();
   CHECK(sdtpPtr->setInputData(std::string("uint32")) == ErrorCode::SLX_OK);
   CHECK(sdtpPtr->parse() == ErrorCode::SLX_OK);
-  CHECK(*sdtpPtr->getDataObject().get() == SimulinkDataType::UInt32);
+  CHECK(*sdtpPtr->getOutputData().get() == SimulinkDataType::UInt32);
   delete sdtpPtr;
 }
 

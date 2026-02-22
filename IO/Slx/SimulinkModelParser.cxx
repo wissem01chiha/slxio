@@ -20,7 +20,7 @@ ErrorCode SimulinkModelParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkModel> SimulinkModelParser::getDataObject() const {
+std::shared_ptr<SimulinkModel> SimulinkModelParser::getOutputData() const {
   return ptr_;
 }
 

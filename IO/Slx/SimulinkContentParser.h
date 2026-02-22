@@ -33,7 +33,7 @@ public:
   SimulinkContentParser();
 
   ErrorCode setInputData(const File fs) override;
-  std::shared_ptr<SimulinkContent> getDataObject() const override;
+  std::shared_ptr<SimulinkContent> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkContentParser() = default;

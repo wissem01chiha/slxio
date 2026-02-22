@@ -1,6 +1,7 @@
 #include "Doctest.h"
 #include "SimulinkArrayParser.h"
 #include "SlxConfig.h"
+#include <iostream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -49,7 +50,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  std::shared_ptr<SimulinkArray> dataObj = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkArray> dataObj = parserPtr->getOutputData();
 
   CHECK(dataObj != nullptr);
 }
@@ -67,7 +68,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayValidDataTest") {
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   parserPtr->setInputData(nodePtr);
   parserPtr->parse();
-  std::shared_ptr<SimulinkArray> array = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkArray> array = parserPtr->getOutputData();
   std::cout << array->toString();
   CHECK(strcmp(array->getName().c_str(), "logAsSpecifiedByModelsSSIDs_") == 0);
   CHECK(strcmp(array->getDimension().c_str(), "1*1") == 0);
@@ -80,7 +81,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest") {
   parserPtr->setInputData(nodePtr);
   ErrorCode status = parserPtr->parse();
   CHECK(status == ErrorCode::SLX_OK);
-  std::shared_ptr<SimulinkArray> array = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkArray> array = parserPtr->getOutputData();
   std::cout << array->toString();
   CHECK(array->contains(6));
 }

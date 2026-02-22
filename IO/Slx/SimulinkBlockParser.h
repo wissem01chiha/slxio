@@ -43,7 +43,7 @@ public:
   SimulinkBlockParser();
 
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkBlock> getDataObject() const override;
+  std::shared_ptr<SimulinkBlock> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkBlockParser() = default;

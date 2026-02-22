@@ -158,8 +158,8 @@ bool SimulinkBlockType::isA(SimulinkBlockType::Type type) {
   return this->type_ == type;
 }
 
-std::string SimulinkBlockType::toString() {
-  return std::string(this->toString(type_));
+std::string SimulinkBlockType::toString() const {
+  return std::string(toString(type_));
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -51,7 +51,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  std::shared_ptr<SimulinkParameter> dataObj = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkParameter> dataObj = parserPtr->getOutputData();
 
   CHECK(dataObj != nullptr);
 }
@@ -70,7 +70,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
   parserPtr->parse();
-  std::shared_ptr<SimulinkParameter> parameter = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkParameter> parameter = parserPtr->getOutputData();
 
   CHECK(strcmp(parameter->getValue(), "windows-1252") == 0);
   CHECK(parameter->getDataType() == SimulinkDataType::Double);

@@ -45,7 +45,11 @@ public:
   SimulinkBlock(SimulinkBlockType::Type blockType_, const char *blockName_,
                 const Index &blockId_);
 
+  ///@brief Support adding Only SimulinkBlock and SimulinkParameter Object Types
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+
+  ///@brief Support Removing Only SimulinkBlock and SimulinkParameter Object
+  /// Types
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
   std::string toString() const override;

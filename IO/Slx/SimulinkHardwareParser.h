@@ -26,13 +26,16 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkHardware
+/// @note SimulinkHardware is a subset of SimulinkObject element in slx file
 class APIEXPORT SimulinkHardwareParser final
     : public SimulinkParserBase<xmlNodePtr, SimulinkHardware> {
 public:
   SimulinkHardwareParser();
+
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkHardware> getDataObject() const override;
+  std::shared_ptr<SimulinkHardware> getOutputData() const override;
   ErrorCode parse() override;
+
   ~SimulinkHardwareParser() = default;
 
 private:

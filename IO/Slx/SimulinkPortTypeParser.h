@@ -32,7 +32,7 @@ public:
   SimulinkPortTypeParser();
   ErrorCode setInputData(const std::string data) override;
   ErrorCode setInputData(const char *data);
-  std::shared_ptr<SimulinkPortType> getDataObject() const override;
+  std::shared_ptr<SimulinkPortType> getOutputData() const override;
   ErrorCode parse() override;
   ~SimulinkPortTypeParser() = default;
 

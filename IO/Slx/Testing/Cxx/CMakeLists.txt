@@ -5,4 +5,5 @@ add_test_sources (
   TestSimulinkContentParser.cxx
   TestSimulinkFileParser.cxx
   TestSimulinkArrayParser.cxx
-  TestSimulinkObjectParser.cxx)
+  TestSimulinkObjectParser.cxx
+  TestSimulinkBlockParser.cxx)

@@ -31,8 +31,9 @@ class APIEXPORT SimulinkConfigSetParser final
     : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet> {
 public:
   SimulinkConfigSetParser();
+
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkConfigSet> getDataObject() const override;
+  std::shared_ptr<SimulinkConfigSet> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkConfigSetParser() = default;

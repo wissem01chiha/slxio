@@ -28,7 +28,7 @@ ErrorCode SimulinkFileParser::parse() {
     buffer_.push_back(status);
     return status;
   }
-  std::shared_ptr<SimulinkContent> content_ = contentParser.getDataObject();
+  std::shared_ptr<SimulinkContent> content_ = contentParser.getOutputData();
   ptr_->content = *(content_.get());
 
   xmlNodePtr propertiesNodePtr = new xmlNode();
@@ -59,7 +59,7 @@ ErrorCode SimulinkFileParser::parse() {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkFile> SimulinkFileParser::getDataObject() const {
+std::shared_ptr<SimulinkFile> SimulinkFileParser::getOutputData() const {
   return ptr_;
 }
 

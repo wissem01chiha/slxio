@@ -25,7 +25,7 @@ ErrorCode SimulinkObjectParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkObject> SimulinkObjectParser::getDataObject() const {
+std::shared_ptr<SimulinkObject> SimulinkObjectParser::getOutputData() const {
   return ptr_;
 }
 
@@ -61,7 +61,6 @@ ErrorCode SimulinkObjectParser::parse() {
       SimulinkParameterParser *paramParserPtr = new SimulinkParameterParser();
       ErrorCode subInputStatus = paramParserPtr->setInputData(nodePtr_);
       if (subInputStatus != ErrorCode::SLX_OK) {
-        buffer_.push_back(subInputStatus);
         return subInputStatus;
       }
 
@@ -69,10 +68,9 @@ ErrorCode SimulinkObjectParser::parse() {
       if (paramParseStatus != ErrorCode::SLX_OK) {
         l.log(Logger::V_ERROR,
               "SimulinkObjectParser:: fail to build object Parameter");
-        buffer_.push_back(paramParseStatus);
         return paramParseStatus;
       }
-      ptr_->add(paramParserPtr->getDataObject());
+      ptr_->add(paramParserPtr->getOutputData());
       delete paramParserPtr;
     }
 
@@ -82,7 +80,6 @@ ErrorCode SimulinkObjectParser::parse() {
       SimulinkObjectParser *subObjParserPtr = new SimulinkObjectParser();
       ErrorCode subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subObjInputStatus != ErrorCode::SLX_OK) {
-        buffer_.push_back(subObjInputStatus);
         return subObjInputStatus;
       }
 
@@ -90,10 +87,9 @@ ErrorCode SimulinkObjectParser::parse() {
       if (subObjStat != ErrorCode::SLX_OK) {
         l.log(Logger::V_ERROR,
               "SimulinkObjectParser:: fail to build subobject element");
-        buffer_.push_back(subObjStat);
         return subObjStat;
       }
-      ptr_->add(subObjParserPtr->getDataObject());
+      ptr_->add(subObjParserPtr->getOutputData());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
@@ -101,7 +97,6 @@ ErrorCode SimulinkObjectParser::parse() {
       SimulinkArrayParser *subArrParserPtr = new SimulinkArrayParser();
       ErrorCode subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subArrInputStatus != ErrorCode::SLX_OK) {
-        buffer_.push_back(subArrInputStatus);
         return subArrInputStatus;
       }
 
@@ -109,10 +104,9 @@ ErrorCode SimulinkObjectParser::parse() {
       if (subArrParseStat != ErrorCode::SLX_OK) {
         l.log(Logger::V_ERROR,
               "SimulinkObjectParser:: fail to build subArray element");
-        buffer_.push_back(subArrParserPtr->getErrorBuffer());
         return subArrParseStat;
       }
-      ptr_->add(subArrParserPtr->getDataObject());
+      ptr_->add(subArrParserPtr->getOutputData());
       delete subArrParserPtr;
     }
   }

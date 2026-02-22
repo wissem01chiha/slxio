@@ -67,7 +67,7 @@ public:
   static SimulinkBlockType::Type toType(const char *typeName);
   static const char *toString(Type type);
   bool isA(SimulinkBlockType::Type type);
-  std::string toString();
+  std::string toString() const;
 
 private:
   SimulinkBlockType::Type type_;

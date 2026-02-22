@@ -12,7 +12,7 @@ ErrorCode SimulinkSignalParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkSignal> SimulinkSignalParser::getDataObject() const {
+std::shared_ptr<SimulinkSignal> SimulinkSignalParser::getOutputData() const {
   return ptr_;
 }
 

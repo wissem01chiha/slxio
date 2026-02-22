@@ -22,6 +22,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/// @brief Base Conainer for Simulink Hardware Configuration
 class APIEXPORT SimulinkHardware final {
 public:
   SimulinkHardware() = default;

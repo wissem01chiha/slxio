@@ -34,7 +34,7 @@ public:
   ErrorCode setInputData(const std::string data) override;
   ErrorCode setInputData(const char *data);
 
-  std::shared_ptr<SimulinkDataType> getDataObject() const override;
+  std::shared_ptr<SimulinkDataType> getOutputData() const override;
   ErrorCode parse() override;
 
   ~SimulinkDataTypeParser() = default;

@@ -55,7 +55,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest") {
   status = parserPtr->parse();
   CHECK(status == ErrorCode::SLX_OK);
 
-  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getOutputData();
   CHECK(contentPtr != nullptr);
 };
 
@@ -72,7 +72,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture,
 
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   parserPtr->parse();
-  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getDataObject();
+  std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getOutputData();
   CHECK(contentPtr != nullptr);
 
   xmlNodePtr nodePtrNull = nullptr;

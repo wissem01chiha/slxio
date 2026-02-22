@@ -37,7 +37,7 @@ class APIEXPORT SimulinkArrayParser final
 public:
   SimulinkArrayParser();
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkArray> getDataObject() const override;
+  std::shared_ptr<SimulinkArray> getOutputData() const override;
   ErrorCode parse() override;
   ~SimulinkArrayParser() = default;
 
