@@ -43,7 +43,6 @@ HEADERS
   FileManager.h
 CONFIG_HEADERS
   Option.h.in
-  SlxConfig.h.in
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   ThirdParty::libuv

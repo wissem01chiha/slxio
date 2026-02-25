@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKMODEL_H
 #define SIMULINKMODEL_H
@@ -34,12 +34,13 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Simulink model  */
-class SimulinkModel : public SimulinkElementBase {
+class SimulinkModel : public SimulinkElementBase
+{
 public:
   SimulinkModel();
   SimulinkModel(SimulinkModelType Type);
-  SimulinkModel(const SimulinkModel &other);
-  SimulinkElementBase &operator=(const SimulinkElementBase &) = delete;
+  SimulinkModel(const SimulinkModel& other);
+  SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
   SimulinkElementType getType() const override;
   Index getID() const override;
   std::string toString() const override;
@@ -53,7 +54,7 @@ public:
   std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
 
   uint32 getVersion();
-  bool contains(const Index &id) const override;
+  bool contains(const Index& id) const override;
 
   std::shared_ptr<ModelWorkspace> getWorkspace();
 

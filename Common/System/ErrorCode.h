@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef ERRORCODE_H
 #define ERRORCODE_H
@@ -50,9 +50,11 @@
  * across the project.
  * @todo Add remaining error codes from all third-party dependencies.
  *       Add more SLX writing-related errors.
- *       Expand this list if required and add a message in the error mapping.
+ *       Expand this list if required and add a message in the error
+ * mapping.
  */
-enum class APIEXPORT ErrorCode {
+enum class APIEXPORT ErrorCode
+{
 #define XX(name, code, msg) name = code,
   SLX_ERROR_MAP(XX)
 #undef XX

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef ISTATEFLOWNODECONTAINER_H
 #define ISTATEFLOWNODECONTAINER_H
@@ -22,7 +22,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This interface describes entities that contain
  * @param Type of the parent of this node.
  */
-class IStateflowNodeContainer {
+class IStateflowNodeContainer
+{
 public:
   IStateflowNodeContainer();
 

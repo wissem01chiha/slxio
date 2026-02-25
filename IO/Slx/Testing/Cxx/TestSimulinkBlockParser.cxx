@@ -6,46 +6,57 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkBlockParserTestFixture {
+class SimulinkBlockParserTestFixture
+{
 protected:
   SimulinkBlockParserTestFixture()
-      : parserPtr(new SimulinkBlockParser()), doc(nullptr) {}
+    : parserPtr(new SimulinkBlockParser())
+    , doc(nullptr)
+  {
+  }
 
-  xmlNodePtr getXmlNodePtr(const char *xmlfilename) {
+  xmlNodePtr getXmlNodePtr(const char* xmlfilename)
+  {
 
     char xmlfilepath[512];
     snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-             PROJECT_ROOT_DIR, xmlfilename);
+      PROJECT_ROOT_DIR, xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
-    if (!doc) {
+    if (!doc)
+    {
       throw std::runtime_error("failed to read XML file");
     }
     xmlNodePtr root = xmlDocGetRootElement(doc);
     return root;
   }
 
-  ~SimulinkBlockParserTestFixture() {
-    if (parserPtr) {
+  ~SimulinkBlockParserTestFixture()
+  {
+    if (parserPtr)
+    {
       delete parserPtr;
       parserPtr = nullptr;
     }
-    if (doc) {
+    if (doc)
+    {
       xmlFreeDoc(doc);
     }
   }
 
-  SimulinkBlockParser *parserPtr;
+  SimulinkBlockParser* parserPtr;
   xmlDocPtr doc;
 };
 
-TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "ParserSetInputDataTest") {
+TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "ParserSetInputDataTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
   CHECK(status == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest") {
+TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
@@ -54,7 +65,8 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest") {
   CHECK(dataObj != nullptr);
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest") {
+TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
@@ -73,8 +85,9 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest") {
   CHECK(blockType.isA(SimulinkBlockType::Type::FromWorkspace));
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture,
-                  "BlockParamtersValidationTest") {
+TEST_CASE_FIXTURE(
+  SimulinkBlockParserTestFixture, "BlockParamtersValidationTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   parserPtr->setInputData(nodePtr);

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKHARDWARE_H
 #define SIMULINKHARDWARE_H
@@ -23,13 +23,15 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base Conainer for Simulink Hardware Configuration
-class APIEXPORT SimulinkHardware final {
+class APIEXPORT SimulinkHardware final
+{
 public:
   SimulinkHardware() = default;
+  ~SimulinkHardware() = default;
 
-  const char *DisabledProps;
-  const char *Description;
-  const char *Components;
+  const char* DisabledProps;
+  const char* Description;
+  const char* Components;
   uint16 ProdBitPerChar;
   uint16 ProdBitPerShort;
   uint16 ProdBitPeruint16;
@@ -40,14 +42,14 @@ public:
   uint16 ProdBitPerPouint16er;
   uint16 ProdBitPerSizeT;
   uint16 ProdBitPerPtrDiffT;
-  const char *ProdLargestAtomicuint16eger;
-  const char *ProdLargestAtomicFloat;
-  const char *Produint16DivRoundTo;
-  const char *ProdEndianess;
+  const char* ProdLargestAtomicuint16eger;
+  const char* ProdLargestAtomicFloat;
+  const char* Produint16DivRoundTo;
+  const char* ProdEndianess;
   uint16 ProdWordSize;
-  const char *ProdShiftRightuint16Arith;
-  const char *ProdLongLongMode;
-  const char *ProdHWDeviceType;
+  const char* ProdShiftRightuint16Arith;
+  const char* ProdLongLongMode;
+  const char* ProdHWDeviceType;
   uint16 TargetBitPerChar;
   uint16 TargetBitPerShort;
   uint16 TargetBitPeruint16;
@@ -58,21 +60,21 @@ public:
   uint16 TargetBitPerPouint16er;
   uint16 TargetBitPerSizeT;
   uint16 TargetBitPerPtrDiffT;
-  const char *TargetLargestAtomicuint16eger;
-  const char *TargetLargestAtomicFloat;
-  const char *TargetShiftRightuint16Arith;
-  const char *TargetLongLongMode;
-  const char *Targetuint16DivRoundTo;
-  const char *TargetEndianess;
+  const char* TargetLargestAtomicuint16eger;
+  const char* TargetLargestAtomicFloat;
+  const char* TargetShiftRightuint16Arith;
+  const char* TargetLongLongMode;
+  const char* Targetuint16DivRoundTo;
+  const char* TargetEndianess;
   uint16 TargetWordSize;
   uint16 TargetPreprocMaxBitsSuint16;
   uint16 TargetPreprocMaxBitsUuint16;
-  const char *TargetHWDeviceType;
-  const char *TargetUnknown;
-  const char *ProdEqTarget;
-  const char *UseEmbeddedCoderFeatures;
-  const char *UseSimulinkCoderFeatures;
-  const char *HardwareBoardFeatureSet;
+  const char* TargetHWDeviceType;
+  const char* TargetUnknown;
+  const char* ProdEqTarget;
+  const char* UseEmbeddedCoderFeatures;
+  const char* UseSimulinkCoderFeatures;
+  const char* HardwareBoardFeatureSet;
 };
 
 SLXIO_ABI_NAMESPACE_END

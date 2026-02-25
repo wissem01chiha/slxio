@@ -1,6 +1,5 @@
 #include "Doctest.h"
 #include "SimulinkModelParser.h"
-#include "SlxConfig.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

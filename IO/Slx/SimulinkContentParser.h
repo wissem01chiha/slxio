@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKCONTENTPARSER_H
 #define SIMULINKCONTENTPARSER_H
@@ -28,33 +28,29 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkContent
 class APIEXPORT SimulinkContentParser
-    : public SimulinkParserBase<File, SimulinkContent> {
+  : public SimulinkParserBase<File, SimulinkContent>
+{
 public:
-  SimulinkContentParser();
-
+  SimulinkContentParser() = default;
   ErrorCode setInputData(const File fs) override;
-  std::shared_ptr<SimulinkContent> getOutputData() const override;
   ErrorCode parse() override;
-
   ~SimulinkContentParser() = default;
 
 private:
-  std::shared_ptr<SimulinkContent> ptr_;
-  File dataObject;
-
   /// @brief Temporary directory used for all operations.
   Directory tempDirectory;
 
   /// @brief Structure to map XML file paths to their corresponding
   /// xmlDocPtr targets in SimulinkContent, mapping is provided in
   /// implementation file.
-  struct XmlTarget {
-    const char *path;
-    xmlDocPtr *target;
+  struct XmlTarget
+  {
+    const char* path;
+    xmlDocPtr* target;
   };
 
-  /// @brief Initialize the temporary directory, creates unique paths for
-  /// the directory and the copied slx file into it.
+  /// @brief Initialize the temporary directory, creates unique paths
+  /// for the directory and the copied slx file into it.
   ErrorCode initTempDirectory();
 
   /// @brief Unzip the slx file into the temporary directory.
@@ -63,7 +59,7 @@ private:
 
   /// @brief Load XML documents from the extracted slx files into the
   /// SimulinkContent object.
-  ErrorCode loadXmlTargets(const std::string &tempdirfullpath);
+  ErrorCode loadXmlTargets(const std::string& tempdirfullpath);
 
   /// @brief delete the temporary directory and its contents,
   /// this is called at the end of the parsing process if successful

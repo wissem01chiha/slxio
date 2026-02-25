@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKDATATYPE_H
 #define SIMULINKDATATYPE_H
@@ -29,7 +29,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @see
  * https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
  */
-enum class APIEXPORT SimulinkDataType {
+enum class APIEXPORT SimulinkDataType
+{
   Auto = 0,
   Double,
   Single,
@@ -76,10 +77,10 @@ SimulinkDataType toSimulinkDataType(uint16);
 SimulinkDataType toSimulinkDataType(uint32);
 SimulinkDataType toSimulinkDataType(uint64);
 
-SimulinkDataType toSimulinkDataType(const std::string &);
-SimulinkDataType toSimulinkDataType(const char *);
+SimulinkDataType toSimulinkDataType(const std::string&);
+SimulinkDataType toSimulinkDataType(const char*);
 
-const char *toChar(SimulinkDataType sldt);
+const char* toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -1,8 +1,10 @@
 #include "SimulinkConfigSetManager.h"
 
-class SimulinkConfigSetManagerTestFixture : public ::testing::Test {
+class SimulinkConfigSetManagerTestFixture : public ::testing::Test
+{
 protected:
-  void SetUp() override {
+  void SetUp() override
+  {
     slog_init("logfile", SLOG_FLAGS_ALL, 0);
     slog_disable(SLOG_TRACE);
   }

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef MODELWORKSPACE_H
 #define MODELWORKSPACE_H
@@ -28,21 +28,23 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Mimic Matlab ModelWorkspace
- * @see https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
+ * @see
+ * https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
  */
-class APIEXPORT ModelWorkspace final {
+class APIEXPORT ModelWorkspace final
+{
 public:
   ModelWorkspace();
   ~ModelWorkspace() = default;
 
   /// @brief
-  std::string getVariable(const std::string &name) const;
+  std::string getVariable(const std::string& name) const;
 
   /// @brief
-  void assignVariable(const std::string &name, const std::string &value);
+  void assignVariable(const std::string& name, const std::string& value);
 
   /// @brief
-  void clear(const std::string &name);
+  void clear(const std::string& name);
 
   /// @brief
   void clearAll();
@@ -51,7 +53,7 @@ public:
   DataSourceType getDataSource();
 
   /// @brief
-  const char *getFilename();
+  const char* getFilename();
 
   /// @brief
   std::string getMatlabCode();

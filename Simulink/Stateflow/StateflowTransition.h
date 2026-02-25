@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef STATEFLOWTRANSITION_H
 #define STATEFLOWTRANSITION_H
@@ -28,11 +28,12 @@ class StateflowNodeBase;
 /**
  * @brief A Stateflow transition.
  */
-class APIEXPORT StateflowTransition final {
+class APIEXPORT StateflowTransition final
+{
 public:
-  StateflowTransition(const std::shared_ptr<StateflowNodeBase> &dst);
-  StateflowTransition(const std::shared_ptr<StateflowNodeBase> &src,
-                      const std::shared_ptr<StateflowNodeBase> &dst);
+  StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);
+  StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src,
+    const std::shared_ptr<StateflowNodeBase>& dst);
 
   std::shared_ptr<StateflowNodeBase> getSrc() const;
   std::shared_ptr<StateflowNodeBase> getDst() const;

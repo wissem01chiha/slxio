@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKWRITERBASE_H
 #define SIMULINKWRITERBASE_H
@@ -24,38 +24,37 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief base class for all exporters
- * @tparam object data type to write to
- * @tparam P object
+ * @brief Base class for all exporters
+ * @tparam T the input type, usually a SimulinkElementBase or derived class
+ * @tparam P the output type, can be a stream, string, pointer,...
  */
-template <typename T, typename P> class SimulinkWriterBase {
+template <typename T, typename P>
+class SimulinkWriterBase
+{
 public:
   virtual ~SimulinkWriterBase() = default;
-
-  /// @brief Write data to output
-  virtual ErrorCode Write() = 0;
 
   /// @brief Set input data for writing
   virtual ErrorCode setInputData(const T data) = 0;
 
+  virtual ErrorCode setInputData(const T& data) { return ErrorCode::SLX_OK; };
+
   /// @brief Set ouput data for writing
   /// can be stream, string (eg toString()), custom struct
-  virtual ErrorCode setOutputData(const P data) = 0;
+  P getOutputData() const { return dataObject; }
 
-  /// @brief Return the accumulated error buffer.
-  /// This includes errors collected from all sub-writers invoked
-  /// during the parse method.
-  ErrorBuffer &getErrorBuffer() { return buffer_; }
-
-  /// @brief toget subwriter buffer and merge it with the parent
-  const ErrorBuffer &getErrorBuffer() const { return buffer_; }
+  /// @brief Write data to output
+  virtual ErrorCode Write() = 0;
 
 protected:
-  SimulinkWriterBase() = default;
-
-  /// @brief Internal error buffer
-  ErrorBuffer buffer_;
+  SimulinkWriterBase(Logger& logger)
+    : l(logger)
+    , dataObject(P()) ptr(std::shared_ptr<T>()) {};
+  std::shared_ptr<T> ptr;
+  P dataObject;
+  Logger& l;
 };
+
 SLXIO_NAMESPACE_END
 SLXIO_ABI_NAMESPACE_END
 

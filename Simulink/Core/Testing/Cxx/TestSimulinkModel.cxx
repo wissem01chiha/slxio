@@ -4,7 +4,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkModelTestFixture {
+class SimulinkModelTestFixture
+{
 protected:
 };
 

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKBLOCK_H
 #define SIMULINKBLOCK_H
@@ -31,24 +31,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A Simulink Block
  */
-class APIEXPORT SimulinkBlock : public SimulinkElementBase {
+class APIEXPORT SimulinkBlock : public SimulinkElementBase
+{
 public:
   SimulinkBlock();
   ~SimulinkBlock() = default;
 
   explicit SimulinkBlock(SimulinkBlockType::Type blockType_);
-  explicit SimulinkBlock(SimulinkBlockType *blockType_);
+  explicit SimulinkBlock(SimulinkBlockType* blockType_);
 
-  SimulinkBlock(const SimulinkBlock &origBlock);
-  SimulinkBlock &operator=(const SimulinkBlock &) = delete;
+  SimulinkBlock(const SimulinkBlock& origBlock);
+  SimulinkBlock& operator=(const SimulinkBlock&) = delete;
 
-  SimulinkBlock(SimulinkBlockType::Type blockType_, const char *blockName_,
-                const Index &blockId_);
+  SimulinkBlock(SimulinkBlockType::Type blockType_, const char* blockName_,
+    const Index& blockId_);
 
-  ///@brief Support adding Only SimulinkBlock and SimulinkParameter Object Types
+  ///@brief Support adding Only SimulinkBlock and SimulinkParameter
+  /// Object Types
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
 
-  ///@brief Support Removing Only SimulinkBlock and SimulinkParameter Object
+  ///@brief Support Removing Only SimulinkBlock and SimulinkParameter
+  /// Object
   /// Types
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
@@ -59,22 +62,22 @@ public:
   SimulinkBlockType getBlockType();
   std::string getName();
 
-  std::shared_ptr<SimulinkBlock> getSubBlock(const std::string &blockName_);
-  std::shared_ptr<SimulinkBlock> getSubBlock(const Index &blockId_);
+  std::shared_ptr<SimulinkBlock> getSubBlock(const std::string& blockName_);
+  std::shared_ptr<SimulinkBlock> getSubBlock(const Index& blockId_);
 
-  void setID(const Index &blockId_);
-  void setName(const std::string &blockName_);
+  void setID(const Index& blockId_);
+  void setName(const std::string& blockName_);
   void setBlockType(SimulinkBlockType::Type blockType_);
 
-  bool contains(const Index &blockId_) const override;
+  bool contains(const Index& blockId_) const override;
 
   std::shared_ptr<SimulinkBlock> getParent();
   ErrorCode addPort(SimulinkPortType portType_);
 
-  /// @brief return a pointer to a given parameter by name, if not found a
-  /// or the blcok has not paramters a nullptr returned
-  std::shared_ptr<SimulinkParameter>
-  getParameter(const char *blockParameterName_);
+  /// @brief return a pointer to a given parameter by name, if not
+  /// found a or the blcok has not paramters a nullptr returned
+  std::shared_ptr<SimulinkParameter> getParameter(
+    const char* blockParameterName_);
 
 private:
   Index blockId;

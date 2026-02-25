@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef STATEFLOWSTATE_H
 #define STATEFLOWSTATE_H
@@ -30,10 +30,11 @@ class StateflowNodeBase;
 /**
  * @brief This class represents Stateflow states.
  */
-class APIEXPORT StateflowState final : public StateflowElementBase {
+class APIEXPORT StateflowState final : public StateflowElementBase
+{
 public:
   StateflowState() = default;
-  StateflowState(StateflowState &orig);
+  StateflowState(StateflowState& orig);
 
   /// @brief Add a StateflowNodeBase object
   ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
@@ -45,7 +46,7 @@ public:
   std::shared_ptr<StateflowElementBase> getParent() const override;
 
   /** @brief Get Refrence to child nodes. */
-  const std::vector<StateflowNodeBase> &getNodes() const;
+  const std::vector<StateflowNodeBase>& getNodes() const;
 
   /// @brief Return SimulinkElementType::Chart
   SimulinkElementType getType() const override;
@@ -57,7 +58,7 @@ public:
   Index getID() const override;
 
   /// @brief Id is not supported for StateflowState, fallback to 0
-  bool contains(const Index &id) const override;
+  bool contains(const Index& id) const override;
 
 private:
   std::vector<StateflowNodeBase> nodes;

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKARRAY_H
 #define SIMULINKARRAY_H
@@ -26,16 +26,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Base class for Simulink Array.
- * An SLX Array can contain nested arrays as well as objects derived from the
- * SimulinkObject class. For object references, it maintains a list of object
- * IDs to avoid mutable inclusion, forward declarations, and compiler conflicts.
+ * An SLX Array can contain nested arrays as well as objects derived
+ * from the SimulinkObject class. For object references, it maintains
+ * a list of object IDs to avoid mutable inclusion, forward
+ * declarations, and compiler conflicts.
  */
-class APIEXPORT SimulinkArray final : public SimulinkElementBase {
+class APIEXPORT SimulinkArray final : public SimulinkElementBase
+{
 public:
   SimulinkArray();
   SimulinkArray(std::string type, std::string name, std::string dimension);
-  SimulinkArray(const SimulinkArray &other);
-  SimulinkArray &operator=(const SimulinkArray &) = delete;
+  SimulinkArray(const SimulinkArray& other);
+  SimulinkArray& operator=(const SimulinkArray&) = delete;
   SimulinkElementType getType() const override;
   std::string toString() const override;
   ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
@@ -45,7 +47,7 @@ public:
   std::string getDimension();
   std::string getArrayType();
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
-  bool contains(const Index &id) const override;
+  bool contains(const Index& id) const override;
 
 private:
   Index arrayId;

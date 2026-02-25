@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef STATEFLOWMACHINE_H
 #define STATEFLOWMACHINE_H
@@ -27,24 +27,26 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkModel;
 
 /**
- * @brief The Stateflow machine is the container element of all Stateflow
- * elements of a Simulink model. There is only one machine per model and
- * Stateflow machines do not have a parent element.
+ * @brief The Stateflow machine is the container element of all
+ * Stateflow elements of a Simulink model. There is only one machine
+ * per model and Stateflow machines do not have a parent element.
  */
-class StateflowMachine : public StateflowElementBase {
+class StateflowMachine : public StateflowElementBase
+{
 public:
-  StateflowMachine(SimulinkModel &model) {
+  StateflowMachine(SimulinkModel& model) {
     // this->model = model;
     // model.setStateflowMachine(this);
   };
 
   /**
-   * @brief Copy constructor. This does not clone the charts as these are cloned
-   * via the StateflowBlock they belong to.
+   * @brief Copy constructor. This does not clone the charts as these
+   * are cloned via the StateflowBlock they belong to.
    * @param orig original machine
    * @param model model the clone belongs to.
    */
-  StateflowMachine(StateflowMachine orig, SimulinkModel model) {
+  StateflowMachine(StateflowMachine orig, SimulinkModel model)
+  {
 
     // model = model;
     // model.setStateflowMachine(this);
@@ -56,30 +58,33 @@ public:
 
   /**
    * @brief Add chart to the machine.
-   * @param fqName full qualified name of the Stateflow block this chart belongs
-   * to.
+   * @param fqName full qualified name of the Stateflow block this
+   * chart belongs to.
    * @param chart the chart.
    */
-  void addChart(std::string fqName, StateflowChart chart) {
+  void addChart(std::string fqName, StateflowChart chart)
+  {
     // charts.put(fqName, chart);
     // chart.setParent(this);
   }
 
-  void addTarget(StateflowTarget target) {
+  void addTarget(StateflowTarget target)
+  {
     // targets.add(target);
     // target.setParent(this);
   }
 
   /**
-   * @brief Get chart for full qualified name of the Stateflow block the chart
-   * belongs to.
+   * @brief Get chart for full qualified name of the Stateflow block
+   * the chart belongs to.
    */
   // StateflowChart getChart(std::string fqName) {
   // return charts.get(fqName);
   //  }
 
   /** Get charts of this machine. */
-  std::vector<StateflowChart> getCharts() {
+  std::vector<StateflowChart> getCharts()
+  {
     //   return CollectionUtils.asUnmodifiable(charts.values());
   }
 
@@ -87,29 +92,36 @@ public:
   SimulinkModel getModel() { return model; }
 
   /** @brief Get targets of this machine. */
-  std::vector<StateflowTarget> getTargets() {
+  std::vector<StateflowTarget> getTargets()
+  {
     //   return CollectionUtils.asUnmodifiable(targets);
   }
 
   /**
-   * @brief Removes the machine from the model. The Machine can be removed from
-   * the model only after all {@link StateflowBlock}s were removed.
+   * @brief Removes the machine from the model. The Machine can be
+   * removed from the model only after all {@link StateflowBlock}s
+   * were removed.
    */
-  void remove() {
-    // CCSMPre.isTrue(charts.isEmpty(), "All charts must be removed first (via "
+  void remove()
+  {
+    // CCSMPre.isTrue(charts.isEmpty(), "All charts must be removed
+    // first (via "
     //              "removing the Stateflow blocks).");
     // model.setStateflowMachine(null);
     // model = null;
 
-    // for (StateflowTarget target : new ArrayList<StateflowTarget>(targets)) {
+    // for (StateflowTarget target : new
+    // ArrayList<StateflowTarget>(targets)) {
     //   target.remove();
     // }
   }
 
   /** @brief Remove chart. */
-  void removeChart(StateflowChart chart) {
+  void removeChart(StateflowChart chart)
+  {
     // CCSMPre.isTrue(chart.getMachine() == this,
-    //               "Machine does not contain chart with name " + chart);
+    //               "Machine does not contain chart with name " +
+    //               chart);
 
     // String fqName = chart.getStateflowBlock().getId();
     // CCSMAssert.isTrue(charts.get(fqName) == chart, "Error in chart
@@ -121,7 +133,8 @@ public:
     // chart.setParent(null);
   }
 
-  void removeTarget(StateflowTarget target) {
+  void removeTarget(StateflowTarget target)
+  {
     // targets.remove(target);
     // target.setParent(null);
   }

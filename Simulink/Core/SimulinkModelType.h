@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKMODELTYPE_H
 #define SIMULINKMODELTYPE_H
@@ -25,9 +25,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Represents the type of a Simulink model.
  */
-class APIEXPORT SimulinkModelType {
+class APIEXPORT SimulinkModelType
+{
 public:
-  enum Type { Library, Model };
+  enum Type
+  {
+    Library,
+    Model
+  };
   SimulinkModelType() = default;
   static std::string toString(SimulinkModelType::Type type);
 

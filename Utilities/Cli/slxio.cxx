@@ -8,17 +8,18 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #include "Cxxopts.h"
 #include "Version.h"
 #include <iostream>
 
-void banner() {
+void banner()
+{
   std::cout <<
-      R"(
+    R"(
    _____ __   _  __ ________ 
   / ___// /  | |/ //  _/ __ \
   \__ \/ /   |   / / // / / /
@@ -27,7 +28,8 @@ void banner() {
                              )"
             << std::endl;
 
-  // std::cout << "    Version:      " << SLXIO_VERSION_STRING << "\n";
+  // std::cout << "    Version:      " << SLXIO_VERSION_STRING <<
+  // "\n";
   std::cout << "    Developer:    "
             << "Wissem Chiha"
             << "\n";
@@ -39,12 +41,14 @@ void banner() {
             << "\n\n";
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
   banner();
   cxxopts::Options options("SLXIO");
   options.add_options()("h,help", "Show help");
   auto result = options.parse(argc, argv);
-  if (result.count("help")) {
+  if (result.count("help"))
+  {
     std::cout << options.help() << std::endl;
     return 0;
   }

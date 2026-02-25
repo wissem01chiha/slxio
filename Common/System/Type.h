@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either tempclassress or
-// implied. See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either tempclassress
+// or implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef TYPE_H
 #define TYPE_H
@@ -79,7 +79,8 @@ using uint32l = std::uint_least32_t;
   static_assert(std::is_same<decltype(var1), decltype(var2)>::value)
 
 template <template <typename> class T, typename First, typename... Rest>
-struct InstantiateTemplates {
+struct InstantiateTemplates
+{
   using FirstType = T<First>;
   using RestTypes = InstantiateTemplates<T, Rest...>;
 };

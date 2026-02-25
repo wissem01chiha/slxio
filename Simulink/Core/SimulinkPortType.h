@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKPORTTYPE_H
 #define SIMULINKPORTTYPE_H
@@ -25,11 +25,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Enumeration of port types found in Simulink models.
- * The SLX file uses a rather intransparent way of specifying the ports of
- * block: The parameter 'Ports' points to array that has 0-8 elements. Each
- * array entry specifies the number of ports of a certain type. This
- * enumeration is meant to make this more explicit and to prevent an
- * implementation with a heavy if/then/else-density.
+ * The SLX file uses a rather intransparent way of specifying the
+ * ports of block: The parameter 'Ports' points to array that has 0-8
+ * elements. Each array entry specifies the number of ports of a
+ * certain type. This enumeration is meant to make this more explicit
+ * and to prevent an implementation with a heavy if/then/else-density.
  * @code{.xml}
  * <P Name="Ports">[0, 0, 0, 0, 0, 1, 1]</P>
  * @endcode
@@ -43,9 +43,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 6 : RConn
  * 7 : ifaction
  */
-class SimulinkPortType : public SimulinkElementType {
+class SimulinkPortType : public SimulinkElementType
+{
 public:
-  enum Type {
+  enum Type
+  {
     INPORT = 0,
     OUTPORT = 1,
     ENABLE = 2,
@@ -56,9 +58,9 @@ public:
     IFACTION = 7,
   };
   SimulinkPortType() = default;
-  bool isA(const SimulinkPortType &typeObj);
-  friend bool operator==(const SimulinkPortType &lhs,
-                         const SimulinkPortType &rhs);
+  bool isA(const SimulinkPortType& typeObj);
+  friend bool operator==(
+    const SimulinkPortType& lhs, const SimulinkPortType& rhs);
   std::string toString() const;
   ~SimulinkPortType() = default;
 

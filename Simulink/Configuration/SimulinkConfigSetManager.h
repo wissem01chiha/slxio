@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKCONFIGSETMANAGER_H
 #define SIMULINKCONFIGSETMANAGER_H
@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "Logger.h"
 #include <memory>
 #include <vector>
 
@@ -29,18 +30,20 @@ class SimulinkConfigSet;
 /**
  * @brief Manages a collection of Simulink configuration sets.
  * of type SimulinkConfigSet.
+ * @note This is not a part of Simulink API, but a utility added to slxio
+ * to manage multiple configuration sets
  */
-class APIEXPORT SimulinkConfigSetManager final {
+class APIEXPORT SimulinkConfigSetManager final
+{
 public:
   SimulinkConfigSetManager();
   ~SimulinkConfigSetManager() = default;
 
   /// @brief Copy constructor
-  SimulinkConfigSetManager(const SimulinkConfigSetManager &) = delete;
+  SimulinkConfigSetManager(const SimulinkConfigSetManager&) = delete;
 
   /// @brief Assignment operator
-  SimulinkConfigSetManager &
-  operator=(const SimulinkConfigSetManager &) = delete;
+  SimulinkConfigSetManager& operator=(const SimulinkConfigSetManager&) = delete;
 
   /// @brief Adds a configuration set to the manager.
   ErrorCode add(std::shared_ptr<SimulinkConfigSet> cfg);
@@ -53,9 +56,10 @@ public:
   std::shared_ptr<SimulinkConfigSet> getActiveConfiguration();
 
   /// @brief Checks if a configuration set exists in the manager.
-  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet> &cfg) const;
+  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet>& cfg) const;
 
 private:
+  Logger& l;
   std::vector<std::shared_ptr<SimulinkConfigSet>> cfgs;
 };
 

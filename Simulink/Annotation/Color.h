@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef COLOR_H
 #define COLOR_H
@@ -23,7 +23,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Color final {
+class APIEXPORT Color final
+{
 public:
   uint32_t r;
   uint32_t g;
@@ -33,12 +34,12 @@ public:
   Color();
   Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha = 255);
   ~Color() = default;
-  Color(const Color &other) = default;
-  Color &operator=(const Color &other) = default;
-  bool operator==(const Color &other) const;
-  bool operator!=(const Color &other) const;
+  Color(const Color& other) = default;
+  Color& operator=(const Color& other) = default;
+  bool operator==(const Color& other) const;
+  bool operator!=(const Color& other) const;
 
-  static Color fromVector(const std::vector<uint32_t> &vec);
+  static Color fromVector(const std::vector<uint32_t>& vec);
   std::vector<uint32_t> toVector() const;
 };
 

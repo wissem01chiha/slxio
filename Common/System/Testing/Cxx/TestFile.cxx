@@ -6,11 +6,13 @@
 #include <chrono>
 #include <random>
 
-class FileTestFixture {
+class FileTestFixture
+{
 public:
-  static constexpr const char *TEST_FILE = "testfile.txt";
+  static constexpr const char* TEST_FILE = "testfile.txt";
 
-  FileTestFixture() {
+  FileTestFixture()
+  {
     std::ofstream ofs(TEST_FILE);
     ofs << "Hello World From TestFile.cxx";
     ofs.close();
@@ -18,7 +20,8 @@ public:
   }
 
   /// @brief Create a temporary directory and return its path.
-  std::string tempdir() {
+  std::string tempdir()
+  {
 
     std::string tempDir = std::string(cwdbuffer);
     if (tempDir.back() != PATH_SEP)
@@ -26,15 +29,19 @@ public:
     tempDir += "tempdir";
 
     uv_fs_t req;
-    uv_loop_t *loop = uv_default_loop();
+    uv_loop_t* loop = uv_default_loop();
 
     int r = uv_fs_mkdir(loop, &req, tempDir.c_str(), 0755, nullptr);
     uv_fs_req_cleanup(&req);
 
-    if (r < 0) {
-      if (r == UV_EEXIST) {
+    if (r < 0)
+    {
+      if (r == UV_EEXIST)
+      {
         std::cout << "directory already exists: " << tempDir << std::endl;
-      } else {
+      }
+      else
+      {
         std::cerr << "failed to create directory: " << uv_err_name(r) << " - "
                   << uv_strerror(r) << std::endl;
       }
@@ -42,18 +49,21 @@ public:
     return tempDir;
   }
 
-  const char *getZipPath(const char *filename) {
+  const char* getZipPath(const char* filename)
+  {
 
     static char zipFilePath[512];
     snprintf(zipFilePath, sizeof(zipFilePath),
-             "%s/Common/System/Testing/Data/%s", PROJECT_ROOT_DIR, filename);
+      "%s/Common/System/Testing/Data/%s", PROJECT_ROOT_DIR, filename);
     return zipFilePath;
   }
 
-  std::string testFileEmptyRandDir() {
+  std::string testFileEmptyRandDir()
+  {
 
     std::string tempDir = std::string(cwdbuffer);
-    if (tempDir.back() != PATH_SEP) {
+    if (tempDir.back() != PATH_SEP)
+    {
       tempDir += PATH_SEP;
     }
 
@@ -65,12 +75,13 @@ public:
     tempDir += "TestFileEmptyRandDir_" + std::to_string(uniqueId);
 
     uv_fs_t req;
-    uv_loop_t *loop = uv_default_loop();
+    uv_loop_t* loop = uv_default_loop();
 
     int r = uv_fs_mkdir(loop, &req, tempDir.c_str(), 0755, nullptr);
     uv_fs_req_cleanup(&req);
 
-    if (r < 0 && r != UV_EEXIST) {
+    if (r < 0 && r != UV_EEXIST)
+    {
       std::cerr << "failed to create directory: " << uv_err_name(r) << " - "
                 << uv_strerror(r) << std::endl;
     }
@@ -83,31 +94,35 @@ protected:
   char cwdbuffer[1024];
 };
 
-TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test")
+{
 
   File f(TEST_FILE, File::Read);
   CHECK(f.isFile() == true);
   CHECK(f.getFilename() == "testfile.txt");
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Get Filename Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Get Filename Test")
+{
 
   static char TEST_FILE_FULL_PATH[512];
   snprintf(TEST_FILE_FULL_PATH, sizeof(TEST_FILE_FULL_PATH),
-           "%s/Common/System/Testing/Data/testfile.txt", PROJECT_ROOT_DIR);
+    "%s/Common/System/Testing/Data/testfile.txt", PROJECT_ROOT_DIR);
 
   File f(TEST_FILE_FULL_PATH, File::Read);
   CHECK(f.getFilename() == "testfile.txt");
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test")
+{
 
   File f(TEST_FILE, File::Read);
   CHECK(f.open() == ErrorCode::SLX_OK);
   CHECK(f.close() == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents") {
+TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents")
+{
 
   File f(TEST_FILE, File::Read);
   REQUIRE(f.open() == ErrorCode::SLX_OK);
@@ -118,26 +133,29 @@ TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents") {
   CHECK(!data.empty());
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Write to File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Write to File Test")
+{
 
   File f(TEST_FILE, File::Write);
   REQUIRE(f.open() == ErrorCode::SLX_OK);
   CHECK(f.write("New content") == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test")
+{
 
   File f(TEST_FILE, File::Read);
   REQUIRE(f.open() == ErrorCode::SLX_OK);
   REQUIRE(f.isFile() == true);
 
-  const char *newName = "renamed.txt";
+  const char* newName = "renamed.txt";
   CHECK(f.rename(newName) == ErrorCode::SLX_OK);
   CHECK(f.getFilename() == "renamed.txt");
   std::remove(newName);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Move File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
+{
 
   std::string TEST_FILE_PATH = std::string(cwdbuffer) + PATH_SEP + TEST_FILE;
   File f(TEST_FILE_PATH.c_str(), File::Read);
@@ -150,10 +168,11 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test") {
   CHECK(f.getFileDirectory().find(cwdbuffer) != std::string::npos);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test")
+{
 
   std::string TEMP_FILE_PATH =
-      std::string(cwdbuffer) + PATH_SEP + "testfile.txt";
+    std::string(cwdbuffer) + PATH_SEP + "testfile.txt";
   {
     std::ofstream ofs(TEMP_FILE_PATH);
     ofs << "temporary file content for casting extension test";
@@ -165,7 +184,8 @@ TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test") {
   CHECK(std::string(f.getFileExtension()) == "md");
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test")
+{
 
   File f(TEST_FILE, File::Read);
   REQUIRE(f.open() == ErrorCode::SLX_OK);
@@ -174,7 +194,8 @@ TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test") {
   CHECK(f.size() > 0);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test")
+{
 
   File f(getZipPath("Asset1.zip"));
   CHECK(f.isFile() == true);
@@ -185,7 +206,8 @@ TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test") {
   CHECK(f_.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test") {
+TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test")
+{
 
   File f(getZipPath("blockdiagram.xml"));
   std::cout << "getZipPath('blockdiagram.xml ') = "
@@ -194,5 +216,5 @@ TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test") {
             << std::endl;
   CHECK(f.isFile() == true);
   CHECK(f.zip(getZipPath("Asset2.zip"), "simulink/blockdiagram.xml") ==
-        ErrorCode::SLX_OK);
+    ErrorCode::SLX_OK);
 }

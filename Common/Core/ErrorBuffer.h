@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef ERRORBUFFER_H
 #define ERRORBUFFER_H
@@ -26,9 +26,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @class ErrorBuffer
-/// @brief A buffer for storing multiple error codes to enable deeper profiling
-/// of errors, exceptions, and behavior logs.
-/// Example
+/// @brief A buffer for storing multiple error codes to enable deeper
+/// profiling of errors, exceptions, and behavior logs. Example
 /// @code
 /// ErrorBuffer buffer;
 /// buffer.push_back(ErrorCode::SLX_EIOERR);
@@ -40,26 +39,28 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /// @code
 /// ErrorBuffer buffer(128);
 /// @endcode
-class APIEXPORT ErrorBuffer final {
+class APIEXPORT ErrorBuffer final
+{
 public:
   explicit ErrorBuffer(size_t maxSize = 100);
 
-  void push_back(const ErrorCode &code);
+  void push_back(const ErrorCode& code);
 
   /// @brief merge a subbuffer elements to this buffer
-  /// @note if the resulting buffer excceds the max size trim the subbuffer
-  void push_back(const ErrorBuffer &buffer);
+  /// @note if the resulting buffer excceds the max size trim the
+  /// subbuffer
+  void push_back(const ErrorBuffer& buffer);
 
   void clear();
   size_t size() const;
   bool empty() const;
-  bool contains(const ErrorCode &code) const;
+  bool contains(const ErrorCode& code) const;
 
-  void print(std::ostream &os) const;
+  void print(std::ostream& os) const;
   void log() const;
 
-  ErrorCode &operator[](size_t index);
-  const ErrorCode &operator[](size_t index) const;
+  ErrorCode& operator[](size_t index);
+  const ErrorCode& operator[](size_t index) const;
 
   ~ErrorBuffer();
 

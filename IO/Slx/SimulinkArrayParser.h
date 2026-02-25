@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKARRAYPARSER_H
 #define SIMULINKARRAYPARSER_H
@@ -27,23 +27,19 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Parser for Simulink Array
  * @code{.xml}
- * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
- *   <Cell Class="double">[]</Cell>
+ * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell"
+ * Dimension="1*1"> <Cell Class="double">[]</Cell>
  * </Array>
  * @endcode
  */
 class APIEXPORT SimulinkArrayParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkArray> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkArray>
+{
 public:
-  SimulinkArrayParser();
+  SimulinkArrayParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkArray> getOutputData() const override;
   ErrorCode parse() override;
   ~SimulinkArrayParser() = default;
-
-private:
-  std::shared_ptr<SimulinkArray> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

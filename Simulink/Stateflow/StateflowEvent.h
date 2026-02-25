@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef STATEFLOWEVENT_H
 #define STATEFLOWEVENT_H
@@ -26,10 +26,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A Stateflow event object.
  */
-class APIEXPORT StateflowEvent : public StateflowElementBase {
+class APIEXPORT StateflowEvent : public StateflowElementBase
+{
 public:
   StateflowEvent();
-  StateflowEvent(StateflowEvent &orig);
+  StateflowEvent(StateflowEvent& orig);
   ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:

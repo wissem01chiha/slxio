@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 #ifndef STATEFLOWNODEBASE_H
 #define STATEFLOWNODEBASE_H
 
@@ -27,30 +27,31 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class StateflowTransition;
 
 /**
- * @brief Base class for Stateflow nodes (elements that can be connected by
- * transitions).
+ * @brief Base class for Stateflow nodes (elements that can be
+ * connected by transitions).
  */
-class APIEXPORT StateflowNodeBase : public StateflowElementBase {
+class APIEXPORT StateflowNodeBase : public StateflowElementBase
+{
 public:
   virtual ~StateflowNodeBase() = default;
 
-  void addInTransition(const std::shared_ptr<StateflowTransition> &transition);
-  void addOutTransition(const std::shared_ptr<StateflowTransition> &transition);
+  void addInTransition(const std::shared_ptr<StateflowTransition>& transition);
+  void addOutTransition(const std::shared_ptr<StateflowTransition>& transition);
 
-  const std::vector<std::shared_ptr<StateflowTransition>> &
-  getInTransitions() const;
-  const std::vector<std::shared_ptr<StateflowTransition>> &
-  getOutTransitions() const;
+  const std::vector<std::shared_ptr<StateflowTransition>>& getInTransitions()
+    const;
+  const std::vector<std::shared_ptr<StateflowTransition>>& getOutTransitions()
+    const;
 
   void remove();
-  void
-  removeInTransition(const std::shared_ptr<StateflowTransition> &transition);
-  void
-  removeOutTransition(const std::shared_ptr<StateflowTransition> &transition);
+  void removeInTransition(
+    const std::shared_ptr<StateflowTransition>& transition);
+  void removeOutTransition(
+    const std::shared_ptr<StateflowTransition>& transition);
 
 protected:
   StateflowNodeBase() = default;
-  StateflowNodeBase(const StateflowNodeBase &origNode) = default;
+  StateflowNodeBase(const StateflowNodeBase& origNode) = default;
 
 private:
   std::vector<std::shared_ptr<StateflowTransition>> inTransitions;

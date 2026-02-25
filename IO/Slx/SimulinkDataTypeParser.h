@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKDATATYPEPARSER_H
 #define SIMULINKDATATYPEPARSER_H
@@ -27,21 +27,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief base parser for encoded data type strings
 class APIEXPORT SimulinkDataTypeParser final
-    : public SimulinkParserBase<std::string, SimulinkDataType> {
+  : public SimulinkParserBase<std::string, SimulinkDataType>
+{
 public:
-  SimulinkDataTypeParser();
-
+  SimulinkDataTypeParser() = default;
   ErrorCode setInputData(const std::string data) override;
-  ErrorCode setInputData(const char *data);
-
-  std::shared_ptr<SimulinkDataType> getOutputData() const override;
+  ErrorCode setInputData(const char* data);
   ErrorCode parse() override;
-
   ~SimulinkDataTypeParser() = default;
-
-private:
-  std::shared_ptr<SimulinkDataType> ptr_;
-  std::string dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

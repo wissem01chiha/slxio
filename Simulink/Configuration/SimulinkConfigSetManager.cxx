@@ -1,27 +1,30 @@
 #include "SimulinkConfigSetManager.h"
-#include "Logger.h"
 #include "SimulinkConfigSet.h"
 #include <algorithm>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSetManager::SimulinkConfigSetManager() {
-  this->cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
+SimulinkConfigSetManager::SimulinkConfigSetManager()
+  : l(Logger::getInstance())
+{
+  cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-ErrorCode
-SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg) {
+ErrorCode SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg)
+{
 
-  this->cfgs.push_back(cfg);
+  cfgs.push_back(cfg);
   return ErrorCode::SLX_OK;
 }
 
-ErrorCode
-SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
+ErrorCode SimulinkConfigSetManager::remove(
+  std::shared_ptr<SimulinkConfigSet> cfg)
+{
 
   auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
-  if (it != cfgs.end()) {
+  if (it != cfgs.end())
+  {
     cfgs.erase(it);
     return ErrorCode::SLX_OK;
   }
@@ -29,10 +32,13 @@ SimulinkConfigSetManager::remove(std::shared_ptr<SimulinkConfigSet> cfg) {
 }
 
 std::shared_ptr<SimulinkConfigSet>
-SimulinkConfigSetManager::getActiveConfiguration() {
+SimulinkConfigSetManager::getActiveConfiguration()
+{
 
-  for (const auto &cfg : cfgs) {
-    if (cfg->isActive()) {
+  for (const auto& cfg : cfgs)
+  {
+    if (cfg->isActive())
+    {
       return cfg;
     }
   }
@@ -40,7 +46,8 @@ SimulinkConfigSetManager::getActiveConfiguration() {
 }
 
 bool SimulinkConfigSetManager::hasConfigurationSet(
-    const std::shared_ptr<SimulinkConfigSet> &cfg) const {
+  const std::shared_ptr<SimulinkConfigSet>& cfg) const
+{
   return std::find(cfgs.begin(), cfgs.end(), cfg) != cfgs.end();
 }
 

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKSUBSYSTEM_H
 #define SIMULINKSUBSYSTEM_H
@@ -29,11 +29,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief A SimulinkSubsystem Object
- * @note this struct do not map to a concrete Simulink object in MATLAB API
- * rather then an extension for hiracical blcoks or models manipulatoation
- * added as a feature in the librray
+ * @note this struct do not map to a concrete Simulink object in
+ * MATLAB API rather then an extension for hiracical blcoks or models
+ * manipulatoation added as a feature in the librray
  */
-class APIEXPORT SimulinkSubsystem {
+class APIEXPORT SimulinkSubsystem
+{
 public:
   SimulinkSubsystem();
   ~SimulinkSubsystem() = default;

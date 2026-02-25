@@ -47,4 +47,6 @@
 
 #cmakedefine BUILD_SHARED_LIBS
 
+#define PROJECT_ROOT_DIR "${CMAKE_SOURCE_DIR}"
+
 #endif // OPTION_H

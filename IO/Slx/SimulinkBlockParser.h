@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKBLOCKPARSER_H
 #define SIMULINKBLOCKPARSER_H
@@ -38,19 +38,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class APIEXPORT SimulinkBlockParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkBlock> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkBlock>
+{
 public:
-  SimulinkBlockParser();
-
+  SimulinkBlockParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkBlock> getOutputData() const override;
   ErrorCode parse() override;
-
   ~SimulinkBlockParser() = default;
-
-private:
-  std::shared_ptr<SimulinkBlock> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

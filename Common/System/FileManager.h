@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
@@ -26,51 +26,52 @@
 /**
  * @brief FileManager class
  * @details
- * A singleton class that manages multiple files in the system, usful for
- * manging I/O from multiple files original version from :
+ * A singleton class that manages multiple files in the system, usful
+ * for manging I/O from multiple files original version from :
  * https://github.com/scilab/scilab/blob/master/scilab/modules/fileio/includes/filemanager.hxx
  */
-class APIEXPORT FileManager final {
+class APIEXPORT FileManager final
+{
 public:
   FileManager();
   ~FileManager() = default;
 
-  FileManager(const FileManager &) = delete;
-  FileManager &operator=(const FileManager &) = delete;
+  FileManager(const FileManager&) = delete;
+  FileManager& operator=(const FileManager&) = delete;
 
-  FileManager(FileManager &&other) = delete;
-  FileManager &operator=(FileManager &&other) = delete;
+  FileManager(FileManager&& other) = delete;
+  FileManager& operator=(FileManager&& other) = delete;
 
-  FileManager(std::vector<File *> files);
-  FileManager(std::list<File *> files);
+  FileManager(std::vector<File*> files);
+  FileManager(std::list<File*> files);
 
-  FileManager &operator=(std::vector<File *> files) = delete;
-  FileManager &operator=(std::list<File *> files) = delete;
+  FileManager& operator=(std::vector<File*> files) = delete;
+  FileManager& operator=(std::list<File*> files) = delete;
 
   FileManager(std::vector<std::shared_ptr<File>> files);
 
   Index getFileMaxID();
-  Index getFileID(const std::string &_stFilename);
+  Index getFileID(const std::string& _stFilename);
   Index getFirstFreeFileID();
 
-  File *getFile(Index _iID);
+  File* getFile(Index _iID);
   Index getCurrentFile();
 
-  static bool isOpened(const std::string &_stFilename);
+  static bool isOpened(const std::string& _stFilename);
 
-  Index push_back(File *_file);
+  Index push_back(File* _file);
   void remove(Index _iID);
   ErrorCode clear();
 
   Index getOpenedCount();
-  wchar_t **getTypesAsString();
-  wchar_t **getFilenames();
-  Float *getModes();
+  wchar_t** getTypesAsString();
+  wchar_t** getFilenames();
+  Float* getModes();
   std::vector<Float> getSwaps();
-  Index *getIDs();
+  Index* getIDs();
 
 private:
-  typedef std::vector<File *> vectFile;
+  typedef std::vector<File*> vectFile;
   static vectFile fileList;
   static Index file;
 };
