@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKELEMENTTYPE_H
 #define SIMULINKELEMENTTYPE_H
@@ -23,12 +23,11 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief
- */
-class APIEXPORT SimulinkElementType {
+class APIEXPORT SimulinkElementType
+{
 public:
-  enum Type {
+  enum Type
+  {
     Base = 0,
     Object = 1,
     Block = 2,
@@ -43,14 +42,14 @@ public:
     Unkown = 11
   };
   SimulinkElementType() = default;
-  bool isA(const SimulinkElementType &typeObj);
-  bool isA(const SimulinkElementType::Type &type);
-  friend bool operator==(const SimulinkElementType &lhs,
-                         const SimulinkElementType &rhs);
-  SimulinkElementType(SimulinkElementType::Type typeName);
-  static SimulinkElementType &getInstance();
-  static SimulinkElementType::Type toType(const char *typeName);
-  static const char *toString(SimulinkElementType::Type type);
+  bool isA(const SimulinkElementType& typeObj);
+  bool isA(const SimulinkElementType::Type& type);
+  friend bool operator==(
+    const SimulinkElementType& lhs, const SimulinkElementType& rhs);
+  explicit SimulinkElementType(SimulinkElementType::Type typeName);
+  static SimulinkElementType& getInstance();
+  static SimulinkElementType::Type toType(const char* typeName);
+  static const char* toString(SimulinkElementType::Type type);
   std::string toString();
 
 private:

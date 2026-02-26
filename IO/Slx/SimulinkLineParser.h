@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKLINEPARSER_H
 #define SIMULINKLINEPARSER_H
@@ -25,7 +25,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief This class is responsible for building the lines between Simulink
+ * @brief This class is responsible for building the lines between
+ Simulink
  * blocks as defined in the SLX file.
  * @code{.xml}
  * <Line>
@@ -39,19 +40,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 36#in:1: Block ID 36, input port 1
  */
 class APIEXPORT SimulinkLineParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkLine> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkLine>
+{
 public:
-  SimulinkLineParser();
-
+  SimulinkLineParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkLine> getDataObject() const override;
   ErrorCode parse() override;
-
   ~SimulinkLineParser() = default;
-
-private:
-  std::shared_ptr<SimulinkLine> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,5 +1,4 @@
 #include "SimulinkBlockParser.h"
-#include "Logger.h"
 #include "SimulinkArrayParser.h"
 #include "SimulinkObjectParser.h"
 #include "SimulinkParameterParser.h"
@@ -8,14 +7,10 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockParser::SimulinkBlockParser(): dataObject(nullptr) {
-  ptr_ = std::make_shared<SimulinkBlock>();
-}
-
-ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data) {
-
-  Logger &l = Logger::getInstance();
-  if (data == nullptr) {
+ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data)
+{
+  if (data == nullptr)
+  {
     l.log(Logger::V_ERROR, "SimulinkBlockParser:: null pointer received");
     return ErrorCode::SLX_EINVAR;
   }
@@ -23,11 +18,70 @@ ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data) {
   return ErrorCode::SLX_OK;
 }
 
-std::shared_ptr<SimulinkBlock> SimulinkBlockParser::getDataObject() const {
-  return ptr_;
-}
+ErrorCode SimulinkBlockParser::parse()
+{
+  Index id = (Index)0;
+  std::string name;
 
-ErrorCode SimulinkBlockParser::parse() { return ErrorCode::SLX_OK; }
+  for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
+  {
+    std::string attrName = reinterpret_cast<const char*>(attr->name);
+    std::string attrValue =
+      reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
+    if (attrName == SlxParameter::PARAM_SID)
+    {
+      id = static_cast<Index>(std::stoul(attrValue));
+    }
+    else if (attrName == SlxParameter::PARAM_Name)
+    {
+      name = attrValue;
+    }
+    else if (attrName == SlxParameter::PARAM_BlockType)
+    {
+      SimulinkBlockType::Type blockType =
+        SimulinkBlockType::toType(attrValue.c_str());
+      ptr->setBlockType(blockType);
+    }
+    else
+    {
+      l.log(Logger::V_WARNING, "unexpected attribute '", attrName,
+        "' found in simulink block node.");
+    }
+  }
+  ptr->setID(id);
+  ptr->setName(name);
+
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+    nodePtr_ = nodePtr_->next)
+  {
+
+    if (nodePtr_->type == XML_ELEMENT_NODE &&
+      xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) == 0)
+    {
+      std::unique_ptr<SimulinkParameterParser> parser(
+        new SimulinkParameterParser());
+      ErrorCode status = parser->setInputData(nodePtr_);
+      if (status != ErrorCode::SLX_OK)
+      {
+        l.log(Logger::V_ERROR,
+          "SimulinkBlockParser:: failed to set input data "
+          "for SimulinkParameterParser");
+        continue;
+      }
+      ErrorCode parserStatus = parser->parse();
+      if (parserStatus != ErrorCode::SLX_OK)
+      {
+        l.log(Logger::V_ERROR,
+          "SimulinkBlockParser:: failed to parse "
+          "SimulinkParameterParser");
+        continue;
+      }
+      ptr->add(parser->getOutputData());
+    }
+  }
+
+  return ErrorCode::SLX_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

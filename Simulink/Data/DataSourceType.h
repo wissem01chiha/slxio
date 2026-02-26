@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef DATASOURCETYPE_H
 #define DATASOURCETYPE_H
@@ -21,7 +21,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-enum class APIEXPORT DataSourceType {
+enum class APIEXPORT DataSourceType
+{
   ModelFile,
   MatFile,
   MatlabCode,
@@ -29,10 +30,10 @@ enum class APIEXPORT DataSourceType {
 };
 
 /// @brief Convert a C-string to a DataSourceType enum
-DataSourceType toDataSourceType(const char *sldt);
+DataSourceType toDataSourceType(const char* sldt);
 
 /// @brief Convert a DataSourceType enum to its string representation
-const char *toChar(DataSourceType sldst);
+const char* toChar(DataSourceType sldst);
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

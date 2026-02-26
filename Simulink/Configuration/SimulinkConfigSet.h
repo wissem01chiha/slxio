@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKCONFIGSET_H
 #define SIMULINKCONFIGSET_H
@@ -18,12 +18,14 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "Logger.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
 #include "Type.h"
 #include <memory>
 #include <string>
+#include <vector>
 
 class SimulinkSolver;
 class SimulinkOptimization;
@@ -37,28 +39,36 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief
+ * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
-class APIEXPORT SimulinkConfigSet final {
+class APIEXPORT SimulinkConfigSet final
+{
 public:
   SimulinkConfigSet();
+
   ~SimulinkConfigSet() = default;
 
   /// @brief disbale copy constructor
-  SimulinkConfigSet(const SimulinkConfigSet &) = delete;
+  /// @note instead use clone to create a copy of the configuration set
+  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
+
+  /// @brief Contructor from SimulinkObject, this is used internally to
+  /// fill a SimulinkConfigSet from low level Slx Representation, not
+  /// recommended for public use !!!
+  explicit SimulinkConfigSet(const SimulinkObject& obj);
 
   /// @brief checks if this configuration set is active
   bool isActive() const;
 
   /// @brief Gets a parameter value by name.
-  const char *getParameter(const char *name);
+  const char* getParameter(const char* name);
 
   /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameter>
-  getParameterObject(const std::string &name);
+  std::shared_ptr<SimulinkParameter> getParameterObject(
+    const std::string& name);
 
   /// @brief Sets a parameter value by name.
-  ErrorCode setParameter(const char *name, const char *value);
+  ErrorCode setParameter(const char* name, const char* value);
 
   /// @brief Creates a copy of this configuration set.
   ErrorCode copy();
@@ -70,30 +80,37 @@ public:
   ErrorCode remove();
 
   /// @brief Attaches this configuration set to a Simulink model.
-  ErrorCode attach(SimulinkModel &model);
+  ErrorCode attach(SimulinkModel& model);
 
   /// @brief Detaches this configuration set from a Simulink model.
-  ErrorCode detach(SimulinkModel &model);
+  ErrorCode detach(SimulinkModel& model);
 
   /// @brief Activates this configuration set.
-  ErrorCode activate();
+  void activate();
 
   /// @brief Deactivates this configuration set.
-  ErrorCode deactivate();
+  void deactivate();
 
   /// @brief Retrieves the name of the configuration set.
   std::string getName();
 
+  /// @brief  Retrive the underlying SimulinkObject representing this
+  /// configuration set.
+  std::shared_ptr<SimulinkObject> getObject() const;
+
+  /// @brief  forward to underlying SimulinkObject getID
+  Index getID() const;
+
   /// @brief Loads the configuration set from a file.
-  ErrorCode loadFromFile(const char *path);
+  ErrorCode loadFromFile(const char* path);
 
   /// @brief Creates a configuration set from a file.
   /// Supported formats: .m, .mat(planned)
-  static SimulinkConfigSet fromFile(const char *path);
+  static SimulinkConfigSet fromFile(const char* path);
 
   /// @brief Saves the configuration set to a file.
   /// @brief Supported formats: .m, .mat(planned)
-  ErrorCode saveToFile(const char *path);
+  ErrorCode saveToFile(const char* path);
 
   /// @brief Converts to a string representation.
   std::string toString() const;
@@ -102,9 +119,9 @@ public:
   std::shared_ptr<SimulinkSolver> getSolver();
 
 private:
+  Logger& l;
   bool status = false;
   std::shared_ptr<SimulinkObject> object;
-
   std::shared_ptr<SimulinkSolver> solver;
   std::shared_ptr<SimulinkOptimization> optimization;
   std::shared_ptr<SimulinkSFSim> sfSim;

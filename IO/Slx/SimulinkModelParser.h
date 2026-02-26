@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMUMINKMODELPARSER_H
 #define SIMUMINKMODELPARSER_H
@@ -27,26 +27,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief model Parser class.
- * This class is responsible for constructing the complete model representation,
- * including Simulink components, Stateflow charts, configuration sets, model
- * libraries (if present), and the data dictionary. It serves as the top-level
- * orchestrator for assembling all model elements from external sources such as
- * XML, JSON, or other supported formats.
+ * This class is responsible for constructing the complete model
+ * representation, including Simulink components, Stateflow charts,
+ * configuration sets, model libraries (if present), and the data
+ * dictionary. It serves as the top-level orchestrator for assembling
+ * all model elements from external sources such as XML, JSON, or
+ * other supported formats.
  */
-class SimulinkModelParser
-    : public SimulinkParserBase<xmlNodePtr, SimulinkModel> {
+class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel>
+{
 public:
-  SimulinkModelParser();
-
+  SimulinkModelParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkModel> getDataObject() const override;
   ErrorCode parse() override;
-
   ~SimulinkModelParser() = default;
-
-private:
-  std::shared_ptr<SimulinkModel> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

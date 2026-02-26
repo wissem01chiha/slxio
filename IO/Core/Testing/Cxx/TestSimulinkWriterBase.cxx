@@ -1,7 +1,8 @@
 #include "Doctest.h"
 #include "SimulinkWriterBase.h"
 
-class TestWriterFixture {
+class TestWriterFixture
+{
 public:
 private:
 };

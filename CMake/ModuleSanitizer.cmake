@@ -1,7 +1,7 @@
 #[=======================================================================[.rst:
-Sanitizer
+ModuleSanitizer.cmake
 -----------
-Provides options to enable sanitizers for the build.
+Provides options to enable sanitizers for the project build.
 This module defines the following cache variables:
 
 ``ENABLE_ADDRESS_SANITIZER``
@@ -10,4 +10,4 @@ This module defines the following cache variables:
 ``ENABLE_THREAD_SANITIZER``
     Enable Thread Sanitizer support
 #]=======================================================================]
-include(Module)
+include (Module)

@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKDATATYPE_H
 #define SIMULINKDATATYPE_H
@@ -25,11 +25,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @enum SimulinkDataType
- * @brief Simulink Supported data types.
+ * @brief Simulink Supported Data Types.
  * @see
  * https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
  */
-enum class APIEXPORT SimulinkDataType {
+enum class APIEXPORT SimulinkDataType
+{
   Auto = 0,
   Double,
   Single,
@@ -42,7 +43,8 @@ enum class APIEXPORT SimulinkDataType {
   UInt32,
   Boolean,
   Half,
-  String
+  String,
+  Char
 };
 
 #define SIMULINKDATATYPE_MAP(XX)                                               \
@@ -57,26 +59,27 @@ enum class APIEXPORT SimulinkDataType {
   XX(SimulinkDataType::UInt32, "uint32")                                       \
   XX(SimulinkDataType::UInt64, "uint64")                                       \
   XX(SimulinkDataType::Boolean, "boolean")                                     \
+  XX(SimulinkDataType::Boolean, "logical")                                     \
   XX(SimulinkDataType::String, "string")                                       \
+  XX(SimulinkDataType::Char, "char")                                           \
   XX(SimulinkDataType::Auto, "auto")
 
 SimulinkDataType toSimulinkDataType(bool);
-
 SimulinkDataType toSimulinkDataType(Float);
-
 SimulinkDataType toSimulinkDataType(sint8);
 SimulinkDataType toSimulinkDataType(sint16);
 SimulinkDataType toSimulinkDataType(sint32);
-
 SimulinkDataType toSimulinkDataType(uint8);
 SimulinkDataType toSimulinkDataType(uint16);
 SimulinkDataType toSimulinkDataType(uint32);
 SimulinkDataType toSimulinkDataType(uint64);
 
-SimulinkDataType toSimulinkDataType(const std::string &);
-const char *toChar(SimulinkDataType sldt);
+SimulinkDataType toSimulinkDataType(const std::string&);
+SimulinkDataType toSimulinkDataType(const char*);
+
+const char* toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKDATATYPE_H
+#endif // SIMULINKDATATYPE_H

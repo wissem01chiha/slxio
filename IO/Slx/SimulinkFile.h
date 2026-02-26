@@ -8,12 +8,13 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "SimulinkContent.h"
 #include "SimulinkFileBase.h"
 
@@ -24,20 +25,25 @@ class SimulinkFileParser;
 
 /*
  * @brief SimulinkFile is a facade combining metadata and content
- * for a Simulink .slx file. Metadata is inherited from SimulinkFileBase,
- * while file contents are delegated to SimulinkContent.
+ * for a Simulink .slx file. Metadata is inherited from
+ * SimulinkFileBase, while file contents are delegated to
+ * SimulinkContent.
  */
-class APIEXPORT SimulinkFile final : public SimulinkFileBase {
+class APIEXPORT SimulinkFile final : public SimulinkFileBase
+{
 public:
   friend class SimulinkFileParser;
 
   SimulinkFile();
 
-  const SimulinkContent &getContent() const;
+  /// @brief  Retrieve the content of the Simulink file as a SimulinkContent
+  /// object.
+  const SimulinkContent& getContent() const;
 
   ~SimulinkFile() = default;
 
 private:
+  Logger& l;
   SimulinkContent content;
 };
 

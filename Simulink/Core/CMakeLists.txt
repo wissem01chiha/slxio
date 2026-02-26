@@ -1,1 +1,1 @@
-add_module(Simulink::Core)
+add_module (Simulink::Core)

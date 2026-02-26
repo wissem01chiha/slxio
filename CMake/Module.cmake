@@ -1,7 +1,7 @@
 #[==[.rst:
 .. cmake:function:: find_modules(<output> [<directory>...])
 
-  find all modules in the given directories and subdirectories and 
+  find all modules in the given directories and subdirectories and
   add them to the output variable.
 
    .. code-block:: cmake
@@ -10,20 +10,22 @@
       ${CMAKE_CURRENT_SOURCE_DIR}/Common
       ${CMAKE_CURRENT_SOURCE_DIR}/ThirdParty
     )
-       
+
 #]==]
-function(find_modules output)
-  set(_modules_all)
-  foreach(_find_modules_directory IN LISTS ARGN)
-    file(GLOB_RECURSE _found_modules
-      "${_find_modules_directory}/Module.txt")
-    foreach(_module_file IN LISTS _found_modules)
-      get_filename_component(_module_directory "${_module_file}" DIRECTORY)
-      list(APPEND _modules_all ${_module_directory})
-    endforeach()
-  endforeach()
-  set(${output} ${_modules_all} PARENT_SCOPE)
-endfunction()
+function (find_modules output)
+  set (_modules_all)
+  foreach (_find_modules_directory IN LISTS ARGN)
+    file (GLOB_RECURSE _found_modules "${_find_modules_directory}/Module.txt")
+    foreach (_module_file IN LISTS _found_modules)
+      get_filename_component (_module_directory "${_module_file}" DIRECTORY)
+      list (APPEND _modules_all ${_module_directory})
+    endforeach ()
+  endforeach ()
+  set (
+    ${output}
+    ${_modules_all}
+    PARENT_SCOPE)
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: split_module_name(<name> <prefix>)
@@ -42,19 +44,25 @@ endfunction()
     #   _module_MODULE_NAME = "Core"
 
 #]==]
-function(split_module_name name prefix)
-  string(FIND "${name}" "::" namespace_pos)
+function (split_module_name name prefix)
+  string (FIND "${name}" "::" namespace_pos)
   if (namespace_pos EQUAL -1)
-    set(namespace "")
-    set(module_name "${name}")
+    set (namespace "")
+    set (module_name "${name}")
   else ()
-    string(SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
-    math(EXPR name_pos "${namespace_pos} + 2")
-    string(SUBSTRING "${name}" "${name_pos}" -1 module_name)
+    string (SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
+    math (EXPR name_pos "${namespace_pos} + 2")
+    string (SUBSTRING "${name}" "${name_pos}" -1 module_name)
   endif ()
-  set("${prefix}_NAMESPACE" "${namespace}" PARENT_SCOPE)
-  set("${prefix}_MODULE_NAME" "${module_name}" PARENT_SCOPE)
-endfunction()
+  set (
+    "${prefix}_NAMESPACE"
+    "${namespace}"
+    PARENT_SCOPE)
+  set (
+    "${prefix}_MODULE_NAME"
+    "${module_name}"
+    PARENT_SCOPE)
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_target_name(<module_name> <prefix>)
@@ -70,18 +78,21 @@ endfunction()
     # Sets:
     #   _module_TARGET_NAME = "CommonCore"
 #]==]
-function(module_target_name module_name prefix)
-  split_module_name(${module_name} TMP)
-  set(target_name "${TMP_NAMESPACE}${TMP_MODULE_NAME}")
-  set("${prefix}_TARGET_NAME" "${target_name}" PARENT_SCOPE)
-endfunction()
+function (module_target_name module_name prefix)
+  split_module_name (${module_name} TMP)
+  set (target_name "${TMP_NAMESPACE}${TMP_MODULE_NAME}")
+  set (
+    "${prefix}_TARGET_NAME"
+    "${target_name}"
+    PARENT_SCOPE)
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: get_module_component(<qualified_name> <prefix>)
 
-  extracts the namespace and target name from a qualified module name and 
+  extracts the namespace and target name from a qualified module name and
   set the following variables in the parent scope:
-   - <prefix>_NAMESPACE 
+   - <prefix>_NAMESPACE
    - <prefix>_TARGET_NAME
 
   .. code-block:: cmake
@@ -92,23 +103,25 @@ endfunction()
     #   _module_TARGET_NAME = "CommonCore"
 
 #]==]
-function(get_module_component name prefix)
-  string(FIND "${name}" "::" namespace_pos)
+function (get_module_component name prefix)
+  string (FIND "${name}" "::" namespace_pos)
   if (namespace_pos EQUAL -1)
-    set(namespace "")
-    set(target_name "${name}")
+    set (namespace "")
+    set (target_name "${name}")
   else ()
-    string(SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
-    math(EXPR name_pos "${namespace_pos} + 2")
-    string(SUBSTRING "${name}" "${name_pos}" -1 target_name)
+    string (SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
+    math (EXPR name_pos "${namespace_pos} + 2")
+    string (SUBSTRING "${name}" "${name_pos}" -1 target_name)
   endif ()
-  set("${prefix}_NAMESPACE"
+  set (
+    "${prefix}_NAMESPACE"
     "${namespace}"
     PARENT_SCOPE)
-  set("${prefix}_TARGET_NAME"
+  set (
+    "${prefix}_TARGET_NAME"
     "${namespace}${target_name}"
     PARENT_SCOPE)
-endfunction()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: add_submodules(<directory>)
@@ -119,14 +132,14 @@ endfunction()
     add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 #]==]
-function(add_submodules directory)
-  find_modules(_submodules_directory_list ${directory})
-  scan_submodules(_sorted_list "${_submodules_directory_list}")
-  foreach(_submodule_directory IN LISTS _sorted_list)
-    message(STATUS "Adding Module ${_submodule_directory} ...")
-    add_subdirectory(${_submodule_directory})
-  endforeach()
-endfunction()
+function (add_submodules directory)
+  find_modules (_submodules_directory_list ${directory})
+  scan_submodules (_sorted_list "${_submodules_directory_list}")
+  foreach (_submodule_directory IN LISTS _sorted_list)
+    message (STATUS "Adding Module ${_submodule_directory} ...")
+    add_subdirectory (${_submodule_directory})
+  endforeach ()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: scan_submodules(<directory_list>)
@@ -138,81 +151,83 @@ endfunction()
 
     scan_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 #]==]
-function(scan_submodules _sorted_list _modules_dir_list)
+function (scan_submodules _sorted_list _modules_dir_list)
 
-  set(_tmp_sorted)
-  set(_buffer ${_modules_dir_list})
+  set (_tmp_sorted)
+  set (_buffer ${_modules_dir_list})
 
-  foreach(_mod_dir IN LISTS _buffer)
-    scan_module_file(_module "${_mod_dir}/Module.txt")
-    split_module_name(${_module_name} _module_prefix)
-    set(_module_id "${_module_prefix_NAMESPACE}_${_module_prefix_MODULE_NAME}")
+  foreach (_mod_dir IN LISTS _buffer)
+    scan_module_file (_module "${_mod_dir}/Module.txt")
+    split_module_name (${_module_name} _module_prefix)
+    set (_module_id "${_module_prefix_NAMESPACE}_${_module_prefix_MODULE_NAME}")
 
-    get_submodule_dependency("${_mod_dir}" _deps_raw)
+    get_submodule_dependency ("${_mod_dir}" _deps_raw)
 
-    set(_deps_ids "")
-    foreach(_d IN LISTS _deps_raw)
-      if(_d MATCHES "::")
-        split_module_name(${_d} _dep_prefix)
-        set(_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
-        list(APPEND _deps_ids "${_dep_id}")
-      else()
-        message(FATAL_ERROR "Module name should be Namespace::Identifier  ${_d}")
-      endif()
-    endforeach()
+    set (_deps_ids "")
+    foreach (_d IN LISTS _deps_raw)
+      if (_d MATCHES "::")
+        split_module_name (${_d} _dep_prefix)
+        set (_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
+        list (APPEND _deps_ids "${_dep_id}")
+      else ()
+        message (FATAL_ERROR "Module name should be Namespace::Identifier  ${_d}")
+      endif ()
+    endforeach ()
 
-    set(_dir_to_id_${_mod_dir} "${_module_id}")
-    set(_deps_map_${_module_id} "${_deps_ids}")
+    set (_dir_to_id_${_mod_dir} "${_module_id}")
+    set (_deps_map_${_module_id} "${_deps_ids}")
 
-  endforeach()
+  endforeach ()
 
-  set(_queue)
-  foreach(_mod_dir IN LISTS _buffer)
-    set(_module_id "${_dir_to_id_${_mod_dir}}")
-    if("${_deps_map_${_module_id}}" STREQUAL "")
-      list(APPEND _queue "${_mod_dir}")
-    endif()
-  endforeach()
+  set (_queue)
+  foreach (_mod_dir IN LISTS _buffer)
+    set (_module_id "${_dir_to_id_${_mod_dir}}")
+    if ("${_deps_map_${_module_id}}" STREQUAL "")
+      list (APPEND _queue "${_mod_dir}")
+    endif ()
+  endforeach ()
 
-  while(_queue)
+  while (_queue)
 
-    list(GET _queue 0 _mod_dir)
-    list(REMOVE_AT _queue 0)
+    list (GET _queue 0 _mod_dir)
+    list (REMOVE_AT _queue 0)
 
-    set(_module_id "${_dir_to_id_${_mod_dir}}")
+    set (_module_id "${_dir_to_id_${_mod_dir}}")
 
-    list(APPEND _tmp_sorted "${_mod_dir}")
-    list(REMOVE_ITEM _buffer "${_mod_dir}")
+    list (APPEND _tmp_sorted "${_mod_dir}")
+    list (REMOVE_ITEM _buffer "${_mod_dir}")
 
-    foreach(_other_dir IN LISTS _buffer)
-      set(_other_id "${_dir_to_id_${_other_dir}}")
-      set(_other_deps "${_deps_map_${_other_id}}")
+    foreach (_other_dir IN LISTS _buffer)
+      set (_other_id "${_dir_to_id_${_other_dir}}")
+      set (_other_deps "${_deps_map_${_other_id}}")
 
-      list(REMOVE_ITEM _other_deps "${_module_id}")
-      set(_deps_map_${_other_id} "${_other_deps}")
+      list (REMOVE_ITEM _other_deps "${_module_id}")
+      set (_deps_map_${_other_id} "${_other_deps}")
 
-      if("${_other_deps}" STREQUAL "")
-        list(FIND _queue "${_other_dir}" _inq)
-        if(_inq EQUAL -1)
-          list(APPEND _queue "${_other_dir}")
-        endif()
-      endif()
+      if ("${_other_deps}" STREQUAL "")
+        list (FIND _queue "${_other_dir}" _inq)
+        if (_inq EQUAL -1)
+          list (APPEND _queue "${_other_dir}")
+        endif ()
+      endif ()
 
-    endforeach()
-  endwhile()
+    endforeach ()
+  endwhile ()
 
   # unresolved modules
-  if(_buffer)
-    foreach(_mod_dir IN LISTS _buffer)
-      set(_module_id "${_dir_to_id_${_mod_dir}}")
-      message("Module ${_module_id} still depends on: ${_deps_map_${_module_id}}")
-    endforeach()
-    message(FATAL_ERROR "scan_submodules: cyclic or unresolved module dependencies.")
-  endif()
+  if (_buffer)
+    foreach (_mod_dir IN LISTS _buffer)
+      set (_module_id "${_dir_to_id_${_mod_dir}}")
+      message ("Module ${_module_id} still depends on: ${_deps_map_${_module_id}}")
+    endforeach ()
+    message (FATAL_ERROR "scan_submodules: cyclic or unresolved module dependencies.")
+  endif ()
 
-  set(${_sorted_list} ${_tmp_sorted} PARENT_SCOPE)
-endfunction()
-
+  set (
+    ${_sorted_list}
+    ${_tmp_sorted}
+    PARENT_SCOPE)
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: get_submodule_dependency(<module_directory> <list>)
@@ -224,30 +239,33 @@ endfunction()
 
     get_submodule_dependency(${CMAKE_CURRENT_SOURCE_DIR} dependency_map)
 #]==]
-function(get_submodule_dependency module_dir dep_list)
+function (get_submodule_dependency module_dir dep_list)
 
-  if(NOT IS_DIRECTORY "${module_dir}")
-    message(FATAL_ERROR "'${module_dir}' is not a valid directory")
-  endif()
-  set(_module_file "${module_dir}/Module.txt")
-  if(NOT EXISTS "${_module_file}")
-    message(FATAL_ERROR "Missing Module.txt in '${module_dir}'")
-  endif()
-  scan_module_file(_module "${_module_file}")
+  if (NOT IS_DIRECTORY "${module_dir}")
+    message (FATAL_ERROR "'${module_dir}' is not a valid directory")
+  endif ()
+  set (_module_file "${module_dir}/Module.txt")
+  if (NOT EXISTS "${_module_file}")
+    message (FATAL_ERROR "Missing Module.txt in '${module_dir}'")
+  endif ()
+  scan_module_file (_module "${_module_file}")
 
-  set(_deps "")
-  if(NOT "${_module_public_depends}" STREQUAL "")
-    list(APPEND _deps ${_module_public_depends})
-  endif()
-  if(NOT "${_module_private_depends}" STREQUAL "")
-    list(APPEND _deps ${_module_private_depends})
-  endif()
-  if(NOT "${_module_external_depends}" STREQUAL "")
-    list(APPEND _deps ${_module_external_depends})
-  endif()
-  set(${dep_list} ${_deps} PARENT_SCOPE)
+  set (_deps "")
+  if (NOT "${_module_public_depends}" STREQUAL "")
+    list (APPEND _deps ${_module_public_depends})
+  endif ()
+  if (NOT "${_module_private_depends}" STREQUAL "")
+    list (APPEND _deps ${_module_private_depends})
+  endif ()
+  if (NOT "${_module_external_depends}" STREQUAL "")
+    list (APPEND _deps ${_module_external_depends})
+  endif ()
+  set (
+    ${dep_list}
+    ${_deps}
+    PARENT_SCOPE)
 
-endfunction()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: configure_module([<input>...] <directory>)
@@ -262,13 +280,13 @@ endfunction()
     )
 
 #]==]
-function(configure_module input directory)
-  foreach(infile IN LISTS input)
-    get_filename_component(filename "${infile}" NAME_WE)
-    set(outfile "${directory}/${filename}.h")
-    configure_file("${infile}" "${outfile}")
-  endforeach()
-endfunction()
+function (configure_module input directory)
+  foreach (infile IN LISTS input)
+    get_filename_component (filename "${infile}" NAME_WE)
+    set (outfile "${directory}/${filename}.h")
+    configure_file ("${infile}" "${outfile}")
+  endforeach ()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: scan_module_file(<prefix> <file_path>)
@@ -280,7 +298,7 @@ The Module.txt is parsed and used as input to the CMake build system
 Uppercase keys are used to define various properties of the module.
 any uppercase key is considered a valid key except the values TRUE/FALSE
 Uppercase values are not allowed as they will be considered as keys
-This function sets pattern for module metadata in parent scope as 
+This function sets pattern for module metadata in parent scope as
   <prefix>_<key>
 if <file_path> not given, the default is the value of the variable
   ${CMAKE_CURRENT_SOURCE_DIR}/Module.txt
@@ -289,7 +307,7 @@ Example:
   scan_module_file(MODULE)
   # Sets
     MODULE_name
-    MODULE_version 
+    MODULE_version
     ....
 
 Template of Module.txt file:
@@ -318,17 +336,17 @@ Template of Module.txt file:
   INSTALL_TARGETS
     TRUE/FALSE
   CLASSES
-    ClassA
-    ClassB
+    classA
+    classB
   SOURCES
-    SourceA.cxx
-    SourceB.cxx
+    sourceA.cxx
+    sourceB.cxx
   HEADERS
-    HeaderA.h
-    HeaderB.h
+    headerA.h
+    headerB.h
   CONFIG_HEADERS
-    ConfigA.h.in
-    ConfigB.h.in
+    configA.h.in
+    configB.h.in
   CMAKE_MODULES_DIRS
     cmake/
   PUBLIC_DEPENDS
@@ -350,56 +368,64 @@ Template of Module.txt file:
   BINDING_OPTIONAL_DEPENDS
     ModuleG::SubModule7
 #]==]
-function(scan_module_file prefix)
+function (scan_module_file prefix)
 
-  if(ARGC GREATER 1)
-    set(_module_path "${ARGV1}")
-  else()
-    set(_module_path "${CMAKE_CURRENT_SOURCE_DIR}/Module.txt")
-  endif()
-  if(NOT EXISTS "${_module_path}")
-    message(FATAL_ERROR "Module.txt not found at: ${_module_path}")
-    return()
-  endif()
+  if (ARGC GREATER 1)
+    set (_module_path "${ARGV1}")
+  else ()
+    set (_module_path "${CMAKE_CURRENT_SOURCE_DIR}/Module.txt")
+  endif ()
+  if (NOT EXISTS "${_module_path}")
+    message (FATAL_ERROR "Module.txt not found at: ${_module_path}")
+    return ()
+  endif ()
 
-  file(READ ${_module_path} contents)
-  string(REPLACE "\r" "" contents "${contents}")
-  string(REPLACE "\t" " " contents "${contents}")  
-  string(REPLACE "\n" ";" contents "${contents}")
-  string(REPLACE "  " " " contents "${contents}")  
-  string(REPLACE "  " " " contents "${contents}")
-  string(REPLACE "  " " " contents "${contents}")
+  file (READ ${_module_path} contents)
+  string (REPLACE "\r" "" contents "${contents}")
+  string (REPLACE "\t" " " contents "${contents}")
+  string (REPLACE "\n" ";" contents "${contents}")
+  string (REPLACE "  " " " contents "${contents}")
+  string (REPLACE "  " " " contents "${contents}")
+  string (REPLACE "  " " " contents "${contents}")
 
-  list(LENGTH contents line_count)
-  math(EXPR last_index "${line_count} - 1")
+  list (LENGTH contents line_count)
+  math (EXPR last_index "${line_count} - 1")
 
-  set(current_key "")
-  set(current_values "")
+  set (current_key "")
+  set (current_values "")
 
-  foreach(i RANGE 0 ${last_index})
-    list(GET contents ${i} line)
-    string(STRIP "${line}" strip_line)
+  foreach (i RANGE 0 ${last_index})
+    list (GET contents ${i} line)
+    string (STRIP "${line}" strip_line)
 
-    if(strip_line STREQUAL "")
-      continue()
-    endif()
-    string(REGEX MATCH "^[A-Z_]+$" is_key "${strip_line}")
-    if(is_key AND NOT strip_line STREQUAL "TRUE" AND NOT strip_line STREQUAL "FALSE")
-      if(current_key)
-        string(TOLOWER "${current_key}" key_lower)
-        set("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
-      endif()
-      set(current_key "${strip_line}")
-      set(current_values "")
-    else()
-      list(APPEND current_values "${strip_line}")
-    endif()
-  endforeach()
-  if(current_key)
-    string(TOLOWER "${current_key}" key_lower)
-    set("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
-  endif()
-endfunction()
+    if (strip_line STREQUAL "")
+      continue ()
+    endif ()
+    string (REGEX MATCH "^[A-Z_]+$" is_key "${strip_line}")
+    if (is_key
+        AND NOT strip_line STREQUAL "TRUE"
+        AND NOT strip_line STREQUAL "FALSE")
+      if (current_key)
+        string (TOLOWER "${current_key}" key_lower)
+        set (
+          "${prefix}_${key_lower}"
+          "${current_values}"
+          PARENT_SCOPE)
+      endif ()
+      set (current_key "${strip_line}")
+      set (current_values "")
+    else ()
+      list (APPEND current_values "${strip_line}")
+    endif ()
+  endforeach ()
+  if (current_key)
+    string (TOLOWER "${current_key}" key_lower)
+    set (
+      "${prefix}_${key_lower}"
+      "${current_values}"
+      PARENT_SCOPE)
+  endif ()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: is_module_target(<prefix>)
@@ -416,19 +442,27 @@ endfunction()
     ``<prefix>_IS_MODULE_TARGET``
 
 #]==]
-function(is_module_target prefix)
+function (is_module_target prefix)
 
-  if("${${prefix}_external_build}" STREQUAL "TRUE")
-    set("${prefix}_IS_MODULE_TARGET" TRUE PARENT_SCOPE)
-    return()
-  endif()
-  if(NOT "${${prefix}_classes}" STREQUAL "" OR
-     NOT "${${prefix}_sources}" STREQUAL "")
-    set("${prefix}_IS_MODULE_TARGET" TRUE PARENT_SCOPE)
-  else()
-    set("${prefix}_IS_MODULE_TARGET" FALSE PARENT_SCOPE)
-  endif()
-endfunction()
+  if ("${${prefix}_external_build}" STREQUAL "TRUE")
+    set (
+      "${prefix}_IS_MODULE_TARGET"
+      TRUE
+      PARENT_SCOPE)
+    return ()
+  endif ()
+  if (NOT "${${prefix}_classes}" STREQUAL "" OR NOT "${${prefix}_sources}" STREQUAL "")
+    set (
+      "${prefix}_IS_MODULE_TARGET"
+      TRUE
+      PARENT_SCOPE)
+  else ()
+    set (
+      "${prefix}_IS_MODULE_TARGET"
+      FALSE
+      PARENT_SCOPE)
+  endif ()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_verify_status(<module>)
@@ -448,44 +482,42 @@ endfunction()
     module_verify_status(Common::Core)
 
 #]==]
-function(module_verify_status module)
-  if(NOT ${module}_enable_building)
-    return()
-  endif()
-  foreach(dep IN LISTS ${module}_public_depends
-      ${module}_private_depends)
-    if(NOT ${dep}_enable_building)
-      message(FATAL_ERROR "Module ${module} depends on ${dep}, 
+function (module_verify_status module)
+  if (NOT ${module}_enable_building)
+    return ()
+  endif ()
+  foreach (dep IN LISTS ${module}_public_depends ${module}_private_depends)
+    if (NOT ${dep}_enable_building)
+      message (FATAL_ERROR "Module ${module} depends on ${dep},
         which is not enabled.")
-    endif()
-  endforeach()
-endfunction()
+    endif ()
+  endforeach ()
+endfunction ()
 
 #[==[.rst:
   .. cmake:function:: add_module_dependencies(<module>)
 
     A wrapper around ``add_dependencies`` that works for modules.
-    This function ensures that the given module depends on all its 
+    This function ensures that the given module depends on all its
     declared public and private dependencies.
 
     .. code-block:: cmake
 
       add_module_dependencies(CommonCore)
 #]==]
-function(add_module_dependencies _module_target prefix)
+function (add_module_dependencies _module_target prefix)
 
-  set(dep_targets "")
-  foreach(dep IN LISTS ${prefix}_public_depends 
-      ${prefix}_private_depends)
-    module_target_name(${dep} _dep)
-    list(APPEND dep_targets ${_dep_TARGET_NAME})
-  endforeach()
+  set (dep_targets "")
+  foreach (dep IN LISTS ${prefix}_public_depends ${prefix}_private_depends)
+    module_target_name (${dep} _dep)
+    list (APPEND dep_targets ${_dep_TARGET_NAME})
+  endforeach ()
 
-  if(dep_targets)
-    add_dependencies(${_module_target} ${dep_targets})
-  endif()
+  if (dep_targets)
+    add_dependencies (${_module_target} ${dep_targets})
+  endif ()
 
-endfunction()
+endfunction ()
 
 #[==[.rst:
   .. cmake:function:: module_sources(<module> [<source>...])
@@ -496,34 +528,33 @@ endfunction()
 
       module_sources(Common::Core FileA.cxx FileB.cxx)
 #]==]
-function(module_sources module)
-  set(srcs "")
-  foreach(name IN LISTS ARGN)
-    list(APPEND srcs "${name}")
-  endforeach()
-  module_target_name(${module} tmp)
-  target_sources(${tmp_TARGET_NAME} PRIVATE ${srcs})
-endfunction()
+function (module_sources module)
+  set (srcs "")
+  foreach (name IN LISTS ARGN)
+    list (APPEND srcs "${name}")
+  endforeach ()
+  module_target_name (${module} tmp)
+  target_sources (${tmp_TARGET_NAME} PRIVATE ${srcs})
+endfunction ()
 
 #[==[.rst:
   .. cmake:function:: module_classes(<module> [<class>...])
 
-    A wrapper around ``target_sources`` that works only for module 
+    A wrapper around ``target_sources`` that works only for module
     classes.Classes are source files with `.cxx` extension.
 
     .. code-block:: cmake
 
       module_classes(Common::Core ClassA ClassB)
 #]==]
-function(module_classes module)
-  set(classes "")
-  foreach(name IN LISTS ARGN)
-    list(APPEND classes "${name}.cxx")
-  endforeach()
-  module_target_name(${module} tmp)
-  target_sources(${tmp_TARGET_NAME} PRIVATE ${classes})
-endfunction()
-
+function (module_classes module)
+  set (classes "")
+  foreach (name IN LISTS ARGN)
+    list (APPEND classes "${name}.cxx")
+  endforeach ()
+  module_target_name (${module} tmp)
+  target_sources (${tmp_TARGET_NAME} PRIVATE ${classes})
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_include_directories(<target_name> <prefix>)
@@ -532,7 +563,7 @@ endfunction()
   Note: as per cmake default behavior this function do not include nested files
   inside the module folder, so all nested headers within any subdir insid ethe module
   shouled have been include at top level, all *.h files should have absolute includes
-  eg: LibXML2 verdored package, ... 
+  eg: LibXML2 verdored package, ...
   .. code-block:: cmake
 
     module_include_directories(CommonCore MAIN)
@@ -542,47 +573,42 @@ endfunction()
         public or private for the dependecies modules via
         PUBLIC_HEADERS or PRIVATE_HEADERS in Module.txt declration file
 #]==]
-function(module_include_directories target_name prefix)
+function (module_include_directories target_name prefix)
 
-  get_filename_component(_module_directory 
-    "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY
-  )
-  target_include_directories(${target_name}
-    PUBLIC  "${_module_directory}" "${CMAKE_CURRENT_BINARY_DIR}"  
-  )
+  get_filename_component (_module_directory "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
+  target_include_directories (${target_name} PUBLIC "${_module_directory}"
+                                                    "${CMAKE_CURRENT_BINARY_DIR}")
   # For vendored / third‑party modules
-  target_include_directories(${target_name}
-    PUBLIC   "${_module_directory}/src"
-  )
+  target_include_directories (${target_name} PUBLIC "${_module_directory}/src")
 
-  # For each module, set the source and binary include directories so they can be
-  # consumed by higher-level modules built on top. We avoid using a global cache
-  # registry to manage inter-module exchange, and instead attach these paths as
-  # properties on the target itself.
-  set_target_properties(${target_name} PROPERTIES
-    target_src_include_dir ${_module_directory}
-    target_bin_include_dir ${CMAKE_CURRENT_BINARY_DIR}
-  )
+  # For each module, set the source and binary include directories so they can be consumed
+  # by higher-level modules built on top. We avoid using a global cache registry to manage
+  # inter-module exchange, and instead attach these paths as properties on the target
+  # itself.
+  set_target_properties (
+    ${target_name} PROPERTIES target_src_include_dir ${_module_directory}
+                              target_bin_include_dir ${CMAKE_CURRENT_BINARY_DIR})
 
-  if(DEFINED ${prefix}_public_depends AND NOT "${${prefix}_public_depends}" STREQUAL "")
-    foreach(dep IN LISTS ${prefix}_public_depends)
-      module_target_name(${dep} _dep_module)
-      get_target_property(pub_src ${_dep_module_TARGET_NAME} target_src_include_dir)
-      get_target_property(pub_bin ${_dep_module_TARGET_NAME} target_bin_include_dir)
-      target_include_directories(${target_name} PUBLIC "${pub_bin}" "${pub_src}")
-    endforeach()
-  endif()
+  if (DEFINED ${prefix}_public_depends AND NOT "${${prefix}_public_depends}" STREQUAL "")
+    foreach (dep IN LISTS ${prefix}_public_depends)
+      module_target_name (${dep} _dep_module)
+      get_target_property (pub_src ${_dep_module_TARGET_NAME} target_src_include_dir)
+      get_target_property (pub_bin ${_dep_module_TARGET_NAME} target_bin_include_dir)
+      target_include_directories (${target_name} PUBLIC "${pub_bin}" "${pub_src}")
+    endforeach ()
+  endif ()
 
-  if(DEFINED ${prefix}_private_depends AND NOT "${${prefix}_private_depends}" STREQUAL "")
-    foreach(dep IN LISTS ${prefix}_private_depends)
-      module_target_name(${dep} _dep_module)
-      get_target_property(priv_src ${_dep_module_TARGET_NAME} target_src_include_dir)
-      get_target_property(priv_bin ${_dep_module_TARGET_NAME} target_bin_include_dir)
-      target_include_directories(${target_name} PRIVATE "${priv_bin}" "${priv_src}")
-    endforeach()
-  endif()
+  if (DEFINED ${prefix}_private_depends AND NOT "${${prefix}_private_depends}" STREQUAL
+                                            "")
+    foreach (dep IN LISTS ${prefix}_private_depends)
+      module_target_name (${dep} _dep_module)
+      get_target_property (priv_src ${_dep_module_TARGET_NAME} target_src_include_dir)
+      get_target_property (priv_bin ${_dep_module_TARGET_NAME} target_bin_include_dir)
+      target_include_directories (${target_name} PRIVATE "${priv_bin}" "${priv_src}")
+    endforeach ()
+  endif ()
 
-endfunction()
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_link_libraries(<module>)
@@ -593,38 +619,38 @@ endfunction()
 
     module_link_libraries(Common::Core)
 #]==]
-function(module_link_libraries module)
+function (module_link_libraries module)
 
-  module_target_name(${module} tmp)
+  module_target_name (${module} tmp)
 
-  if(DEFINED MODULE_public_depends)
-    foreach(dep IN LISTS MODULE_public_depends)
-      module_target_name(${dep} dep_tmp)
-      target_link_libraries(${tmp_TARGET_NAME} PUBLIC ${dep_tmp_TARGET_NAME})
-    endforeach()
-  else()
-    message(FATAL_ERROR "MODULE_public_depends not defined")
-  endif()
+  if (DEFINED MODULE_public_depends)
+    foreach (dep IN LISTS MODULE_public_depends)
+      module_target_name (${dep} dep_tmp)
+      target_link_libraries (${tmp_TARGET_NAME} PUBLIC ${dep_tmp_TARGET_NAME})
+    endforeach ()
+  else ()
+    message (FATAL_ERROR "MODULE_public_depends not defined")
+  endif ()
 
-  if(DEFINED MODULE_private_depends)
-    foreach(dep IN LISTS MODULE_private_depends)
-      module_target_name(${dep} dep_tmp)
-      target_link_libraries(${tmp_TARGET_NAME} PRIVATE ${dep_tmp_TARGET_NAME})
-    endforeach()
-  else()
-     message(FATAL_ERROR "MODULE_private_depends not defined")
-  endif()
+  if (DEFINED MODULE_private_depends)
+    foreach (dep IN LISTS MODULE_private_depends)
+      module_target_name (${dep} dep_tmp)
+      target_link_libraries (${tmp_TARGET_NAME} PRIVATE ${dep_tmp_TARGET_NAME})
+    endforeach ()
+  else ()
+    message (FATAL_ERROR "MODULE_private_depends not defined")
+  endif ()
 
   # Add system wise libraries if declared for each platform
-  if(WIN32)
-      if(DEFINED MODULE_windows_depends)
-         foreach(sysdep IN LISTS MODULE_windows_depends)
-          target_link_libraries(${tmp_TARGET_NAME} PRIVATE ${sysdep})
-        endforeach()
-      endif()
-  endif()
- 
-endfunction()
+  if (WIN32)
+    if (DEFINED MODULE_windows_depends)
+      foreach (sysdep IN LISTS MODULE_windows_depends)
+        target_link_libraries (${tmp_TARGET_NAME} PRIVATE ${sysdep})
+      endforeach ()
+    endif ()
+  endif ()
+
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_add_compile_defintions(<module>)
@@ -635,13 +661,11 @@ endfunction()
 
     module_add_compile_defintions(Common::Core)
 #]==]
-function(module_add_compile_defintions module)
-  module_target_name(${module} tmp)
-  # target_compile_definitions(${tmp_TARGET_NAME}
-  #   PUBLIC ${module}_public_compile_definitions
-  #   PRIVATE ${module}_private_compile_definitions
-  # )
-endfunction()
+function (module_add_compile_defintions module)
+  module_target_name (${module} tmp)
+  # target_compile_definitions(${tmp_TARGET_NAME} PUBLIC
+  # ${module}_public_compile_definitions PRIVATE ${module}_private_compile_definitions )
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: module_add_cmake_modules ()
@@ -653,7 +677,7 @@ endfunction()
   return a list of all cmake modules paths to added to CMAKE_MODULE_PATH
   in the parent scope.
 
-  Example:  
+  Example:
     CMAKE_MODULES_DIRS
       cmake/
       cmake-compact/
@@ -661,36 +685,42 @@ endfunction()
   .. code-block:: cmake
 
     module_add_cmake_modules(${CMAKE_CURRENT_SOURCE_DIR})
-  
+
   sets in parent scope:
    - MODULES_CMAKE_DIRS
 #]==]
-function(module_add_cmake_modules directory)
+function (module_add_cmake_modules directory)
 
-  find_modules(_submodules_directory_list ${directory} _module_cmake_paths)
-  foreach(_submodule_directory IN LISTS _submodules_directory_list)
-    scan_module_file(MODULE "${_submodule_directory}/Module.txt")
-    if(DEFINED MODULE_cmake_modules_dirs AND NOT "${MODULE_cmake_modules_dirs}" STREQUAL "")
-      foreach(module_cmake_dir IN LISTS MODULE_cmake_modules_dirs)
+  find_modules (_submodules_directory_list ${directory} _module_cmake_paths)
+  foreach (_submodule_directory IN LISTS _submodules_directory_list)
+    scan_module_file (MODULE "${_submodule_directory}/Module.txt")
+    if (DEFINED MODULE_cmake_modules_dirs AND NOT "${MODULE_cmake_modules_dirs}" STREQUAL
+                                              "")
+      foreach (module_cmake_dir IN LISTS MODULE_cmake_modules_dirs)
         # check if the path is a valid directory
-        if(NOT IS_DIRECTORY "${_submodule_directory}/${module_cmake_dir}")
-          message(FATAL_ERROR "CMake module dir not found: ${_submodule_directory}/${module_cmake_dir}")  
-        else()
-          list(APPEND _module_cmake_paths
-            "${_submodule_directory}/${module_cmake_dir}")
-            set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};
-              ${_submodule_directory}/${module_cmake_dir}" PARENT_SCOPE
-            )
-        endif()
+        if (NOT IS_DIRECTORY "${_submodule_directory}/${module_cmake_dir}")
+          message (
+            FATAL_ERROR
+              "CMake module dir not found: ${_submodule_directory}/${module_cmake_dir}")
+        else ()
+          list (APPEND _module_cmake_paths "${_submodule_directory}/${module_cmake_dir}")
+          set (
+            CMAKE_MODULE_PATH
+            "${CMAKE_MODULE_PATH};
+              ${_submodule_directory}/${module_cmake_dir}"
+            PARENT_SCOPE)
+        endif ()
         # reset the MODULE_cmake_modules_dirs variable to avoid re-adding paths
-        set(MODULE_cmake_modules_dirs "")
-        set(MODULES_CMAKE_DIRS "${_module_cmake_paths}" PARENT_SCOPE)
-      endforeach()
-    endif() 
-  endforeach()
+        set (MODULE_cmake_modules_dirs "")
+        set (
+          MODULES_CMAKE_DIRS
+          "${_module_cmake_paths}"
+          PARENT_SCOPE)
+      endforeach ()
+    endif ()
+  endforeach ()
 
-endfunction()
-
+endfunction ()
 
 #[==[.rst:
 .. cmake:function:: add_module(<module_name>)
@@ -701,64 +731,47 @@ endfunction()
 
     add_module(Common::Core)
 #]==]
-function(add_module module_name)
+function (add_module module_name)
 
-  scan_module_file(MODULE)
-  if(${MODULE_enable_build} STREQUAL "FALSE")
-    message(STATUS "Module ${module_name} build is disabled.")
-    set(${module_name}_enable_building FALSE PARENT_SCOPE)
-    return()
-  endif()
-  is_module_target(MODULE)
-  if(NOT ${MODULE_IS_MODULE_TARGET})
-    # for modules which have only config file or header files 
-    # used by other modules targets and third party modules
-    configure_module("${MODULE_config_headers}" 
-      "${CMAKE_CURRENT_BINARY_DIR}"
-    )
-    return()
-  endif()
-  configure_module("${MODULE_config_headers}" 
-    "${CMAKE_CURRENT_BINARY_DIR}"
-  )
+  scan_module_file (MODULE)
+  if (${MODULE_enable_build} STREQUAL "FALSE")
+    message (STATUS "Module ${module_name} build is disabled.")
+    set (
+      ${module_name}_enable_building
+      FALSE
+      PARENT_SCOPE)
+    return ()
+  endif ()
+  is_module_target (MODULE)
+  if (NOT ${MODULE_IS_MODULE_TARGET})
+    # for modules which have only config file or header files used by other modules
+    # targets and third party modules
+    configure_module ("${MODULE_config_headers}" "${CMAKE_CURRENT_BINARY_DIR}")
+    return ()
+  endif ()
+  configure_module ("${MODULE_config_headers}" "${CMAKE_CURRENT_BINARY_DIR}")
 
-  # Fallback for custom modules that want to specify their own build rules
-  # e.g. vendored third‑party or externally fetched modules
-  if(${MODULE_external_build} STREQUAL "TRUE")
-    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_external_source_dir}")
-    return()
-  endif()
+  # Fallback for custom modules that want to specify their own build rules e.g. vendored
+  # third‑party or externally fetched modules
+  if (${MODULE_external_build} STREQUAL "TRUE")
+    add_subdirectory ("${CMAKE_CURRENT_SOURCE_DIR}/${MODULE_external_source_dir}")
+    return ()
+  endif ()
 
-  module_target_name(${module_name} _module)
-  add_library(${_module_TARGET_NAME})
-  add_module_dependencies(${_module_TARGET_NAME} MODULE)
-  module_sources(${module_name} ${MODULE_sources})
+  module_target_name (${module_name} _module)
+  add_library (${_module_TARGET_NAME})
+  add_module_dependencies (${_module_TARGET_NAME} MODULE)
+  module_sources (${module_name} ${MODULE_sources})
   # Add platform depend module sources
-  if(WIN32)
-    module_sources(${module_name} ${MODULE_windows_sources})
-  endif()
-  if(UNIX)
-    module_sources(${module_name} ${MODULE_unix_sources})
-  endif()
-  module_classes(${module_name} ${MODULE_classes})
-  module_include_directories(${_module_TARGET_NAME} MODULE)  
-  module_link_libraries(${module_name})
-  module_add_compile_defintions(${module_name})
+  if (WIN32)
+    module_sources (${module_name} ${MODULE_windows_sources})
+  endif ()
+  if (UNIX)
+    module_sources (${module_name} ${MODULE_unix_sources})
+  endif ()
+  module_classes (${module_name} ${MODULE_classes})
+  module_include_directories (${_module_TARGET_NAME} MODULE)
+  module_link_libraries (${module_name})
+  module_add_compile_defintions (${module_name})
 
-endfunction()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+endfunction ()

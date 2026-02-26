@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef EDITORSETTINGS_H
 #define EDITORSETTINGS_H
@@ -25,15 +25,37 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Base Class for MATLAB editor settings
  */
-class APIEXPORT EditorSettings final {
+class APIEXPORT EditorSettings final
+{
 public:
   EditorSettings() = default;
+  ~EditorSettings() = default;
+
   bool getShowPortDataTypes();
   bool getSampleTimeColors();
+  bool getShowLineDimensions();
+  bool getShowPortUnits();
+  bool getShowLoopsOnError();
+  bool getShowStorageClass();
+  bool getShowTestPointIcons();
+  bool getShowSignalResolutionIcons();
+  bool getShowViewerIcons();
+  bool getShowVisualizeInsertedRTB();
+  bool getShowMarkup();
+  bool getBlockNameDataTip();
+  bool getBlockParametersDataTip();
+  bool getBlockDescriptionStringDataTip();
+  bool getBlockVariantConditionDataTip();
+  bool getToolBar();
+  bool getStatusBar();
+  bool getBrowserShowLibraryLinks();
+  bool getFunctionConnectors();
+  bool getBrowserLookUnderMasks();
+  bool getMultiThreadCoSim();
 
 private:
-  const char *LibraryLinkDisplay;
-  const char *PortDataTypeDisplayFormat;
+  const char* LibraryLinkDisplay;
+  const char* PortDataTypeDisplayFormat;
   bool SampleTimeColors;
   bool SampleTimeAnnotations;
   bool WideLines;

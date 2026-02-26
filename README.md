@@ -17,27 +17,28 @@
 - [1.0 Overview](#10-overview)
   - [1.1 Features](#11-features)
   - [1.2 Supported MATLAB](#12-supported-matlab)
+    - [1.2.1 MATLAB Regression Testing Matrix](#121-matlab-regression-testing-matrix)
   - [1.3 Contact](#13-contact)
   - [1.4 Contributing](#14-contributing)
-- [2.0 Building](#20-building)
-  - [2.1 Dependencies](#21-dependencies)
-    - [2.1.1 zlib](#211-zlib)
-    - [2.1.1 HDF5](#211-hdf5)
-  - [2.2 Building SLXIO](#22-building-slxio)
-    - [2.2.1 Quick Build Guide](#221-quick-build-guide)
-    - [2.2.2 Configure Options](#222-configure-options)
-  - [2.3 Platform Support](#23-platform-support)
-- [3.0 Testing](#30-testing)
-  - [3.1 Running Tests](#31-running-tests)
-  - [3.2 Debugging Test Failures](#32-debugging-test-failures)
-- [4.0 Examples](#40-examples)
-  - [4.1 Integrating in CMake Projects](#41-integrating-in-cmake-projects)
-    - [4.1.1 Using CPM](#411-using-cpm)
-  - [4.1.2 Integrate using vcpkg](#412-integrate-using-vcpkg)
-  - [4.1.2 Integrate using Conan](#412-integrate-using-conan)
-- [5.0 API Documentation](#50-api-documentation)
-- [6.0 References](#60-references)
-- [7.0 License](#70-license)
+  - [2.0 Installation](#20-installation)
+    - [2.1 Binary Release](#21-binary-release)
+    - [2.2 vcpkg](#22-vcpkg)
+    - [2.3 Conan Recipe](#23-conan-recipe)
+- [3.0 Building from Source](#30-building-from-source)
+  - [3.1 Dependencies](#31-dependencies)
+    - [3.1.1 zlib](#311-zlib)
+    - [3.1.1 HDF5](#311-hdf5)
+  - [3.2 Building Slxio](#32-building-slxio)
+    - [3.2.1 Quick Build Guide](#321-quick-build-guide)
+    - [3.2.2 Configure Options](#322-configure-options)
+  - [3.3 Platform Support](#33-platform-support)
+- [4.0 Testing](#40-testing)
+  - [4.1 Running Tests](#41-running-tests)
+  - [4.2 Debugging Test Failures](#42-debugging-test-failures)
+- [5.0 Use in Other Projects](#50-use-in-other-projects)
+- [6.0 API Documentation](#60-api-documentation)
+- [7.0 References](#70-references)
+- [8.0 License](#80-license)
 
 ## 1.0 Overview
 
@@ -55,28 +56,51 @@ Examples and tutorials for beginners are hosted with the project and can be foun
 
 The project is under active development, and contributions are highly encouraged. See the [Contributing](.github/CONTRIBUTING.md) guide for basics on Git, CMake, C++, and workflow, and the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
-> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+> [!NOTE] 
+>  This project is still in an experimental phase. It is not yet ready for production use, 
+>  and no stable release has been published.
 
 
 ### 1.1 Features
 
-- Parse and extract SLX files into C++ structures  
-- Serialize SLX data into JSON format  
-- Edit metadata or parameters and save changes back to the SLX file  
+- Parse and extract slx files into c++ structures  
+- Serialize slx data into json format  
+- Edit metadata or parameters and save changes back to the slx file  
 
 ### 1.2 Supported MATLAB  
 
-SLXIO aims to support MATLAB releases from **R2018a** to **R2025a**. Currently, the primary supported versions are **R2019a** and **R2018a**. Additional versions will be progressively supported in future project releases.  
+**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.  
 
-> **Note:** Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by MathWorks may not be available, as the project focuses on core model/library block diagram data.  
+> [!NOTE] 
+> Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.  
 
-MDL files are out of scope. For certain specific releases they may be partially compatible, but no support or fixes are planned for MDL file compatibility.  
+[*.mdl](https://amazingalgorithms.com/file-extensions/mdl/) files are out of scope, for certain specific releases they may be partially compatible, but no support or fixes are planned for mdl file compatibility.  
 
-At present, there is no official documentation from MathWorks regarding the SLX data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed SLX files.  
+At present, there is no official documentation from MathWorks regarding the slx data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed slx files.  
 
-To ensure compatibility when using SLXIO with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.  
+To ensure compatibility when using slxio with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.  
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
+#### 1.2.1 MATLAB Regression Testing Matrix
+
+| Release | Status | Comment | Release Notes                                                                                                                             |
+|---------|--------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| R2018a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018a/r2018a-update-2-release-notes.pdf)|
+| R2018b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018b/r2018b-updates-release-notes.pdf) |
+| R2019a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019a/r2019a-updates-release-notes.pdf) |
+| R2019b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019b/r2019b-updates-release-notes.pdf) |
+| R2020a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020a/r2020a-updates-release-notes.pdf) |
+| R2020b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020b/r2020b-updates-release-notes.pdf) |
+| R2021a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021a/r2021a-updates-release-notes.pdf) |
+| R2021b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021b/r2021b-updates-release-notes.pdf) |
+| R2022a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022a/r2022a-updates-release-notes.pdf) |
+| R2022b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022b/r2022b-updates-release-notes.pdf) |
+| R2023a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023a/r2023a-updates-release-notes.pdf) |
+| R2023b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023b/r2023b-updates-release-notes.pdf) |
+| R2024a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2024a/r2024a-updates-release-notes.pdf) |
+| R2024b  |        |        | [Release Notes](https://www.mathworks.com/matlabcentral/discussions/uploaded_files/35746/Whats_New_In_MATLAB_R2024b%202.pdf)               |
+| R2025a  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
+| R2025b  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
 
 ### 1.3 Contact
 
@@ -87,45 +111,69 @@ Feel free to  contact the maintainer through email at [mail](mailto:chihawissem0
 If you are interested in collaborating, please see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).  
 Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
 
+### 2.0 Installation
 
-## 2.0 Building 
+#### 2.1 Binary Release
+
+The easiest way to install is to visit the [Releases page](https://github.com/wissem01chiha/slxio/releases) and download the latest release for your platform.
+
+#### 2.2 vcpkg
+
+> [!NOTE]  
+> `slxio` is not yet available on [vcpkg](https://github.com/microsoft/vcpkg), once it is published, you will be able to install it using:
+>
+> ```bash
+> vcpkg install slxio
+> ```
+
+#### 2.3 Conan Recipe
+
+See [Conan](https://github.com/conan-io/conan).
+
+> [!NOTE]  
+> `slxio` is not yet available on the Conan package manager, once it is published, you will be able to add it to your project using a Conan recipe.
+
+
+## 3.0 Building from Source
 
 This section describes how to build slxio, see  [2.1](#21-dependencies) describes the dependencies,
 
-### 2.1 Dependencies
+### 3.1 Dependencies
 
 Slxio has its own modular build wrapper, written on top of CMake, similar to many open‑source projects.  
-All core dependencies are vendored with the source code in the `ThirdParty` directory to maximize platform compatibility and reduce reliance on external build/fetch rules.  
+All core dependencies are vendored with the source code in the [ThirdParty](/ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build/fetch rules.  
 Optional dependencies may either use system‑wide installations or be fetched externally depending on configuration options, via CMake package managers or other internal helpers.
 
 
-| Library | Version | Introduced In | Depends On | Notes |
-|--------|---------|----------------|------------|-------|
-| [slog](https://github.com/kala13x/slog) | Latest | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [json-c](https://github.com/json-c/json-c) *(optional)* | Latest | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [zlib](https://github.com/madler/zlib) | 1.2.8 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
-| [libzip](https://github.com/nih-at/libzip) | 1.11.4 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib) |  |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2) | 2.14.5 | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib) |  |
-| [HDF5](https://github.com/HDFGroup/hdf5) *(optional)* | 1.14.1 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), pthread |  experimental |
-| [matio](https://github.com/tbeu/matio) *(optional)* | 1.5.28 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
-| [cxxopts](https://github.com/jarro2783/cxxopts) *(optional)* | 3.3.1 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |  | experimental |
-| [googletest](https://github.com/google/googletest) *(optional)* | 1.14.0 | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |  |  |
+| Library                                            | Version | Introduced In                                             | Depends On                            | Notes                                   |
+|----------------------------------------------------|---------|-----------------------------------------------------------|---------------------------------------|-----------------------------------------|
+| [slog](https://github.com/kala13x/slog)            | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [json-c](https://github.com/json-c/json-c)         | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [zlib](https://github.com/madler/zlib)             | 1.2.8   | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [libzip](https://github.com/nih-at/libzip)         | 1.11.4  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)|                                         |
+| [libxml2](https://gitlab.gnome.org/GNOME/libxml2)  | 2.14.5  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
+| [TinyXML2](https://github.com/leethomason/tinyxml2)|         | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       | Not yet used                            |
+| [HDF5](https://github.com/HDFGroup/hdf5)           | 1.14.1  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)| experimental                            |
+| [matio](https://github.com/tbeu/matio)             | 1.5.28  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
+| [cxxopts](https://github.com/jarro2783/cxxopts)    | 3.3.1   | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       | experimental                             |
+| [doctest](https://github.com/doctest/doctest)      | 1.14.0  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
+| [libuv](https://github.com/libuv/libuv)            |         | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
 
   
-#### 2.1.1 zlib
+#### 3.1.1 zlib
 
 Support for compressed [SLX](), [JSON](), [MAT](), and [h5]() file formats requires the zlib library. Version 1.2.8 of zlib is bundled with the code and will be built automatically if not found by [CMake]() in the system path. Other versions are not officially supported.
 
-#### 2.1.1 HDF5
+#### 3.1.1 HDF5
 
 Support for MATLAB [MAT](https://www.mathworks.com/help/pdf_doc/matlab/matfile_format.pdf) files, used for reading Simulink-related data structures, is provided through [matio](https://github.com/tbeu/matio), which itself requires the HDF5 library. Additionally, for serializing SLX files into standard `.h5` data files, SLXIO depends on the HDF5 library. If the library is not found, it is automatically fetched and built via CPM. However, it is recommended to use a prebuilt binary, as this significantly reduces the build and compilation time.
 
-### 2.2 Building SLXIO 
+### 3.2 Building Slxio 
 
 Building the library from source can be time‑consuming depending on your system configuration and setup.
 For a quicker installation, we recommend using the binary distribution for each platform
 
-#### 2.2.1 Quick Build Guide
+#### 3.2.1 Quick Build Guide
 
 ```shell
 mkdir build && cd build
@@ -133,7 +181,7 @@ cmake -G "MinGW Makefiles" ..
 cmake --build .
 cmake --install .
 ```
-#### 2.2.2 Configure Options
+#### 3.2.2 Configure Options
 
 | Option               | Description                                                       | Default | Supported Since |
 |----------------------|-------------------------------------------------------------------|---------|-----------------|
@@ -162,28 +210,28 @@ cmake --install .
 
 
 
-### 2.3 Platform Support
+### 3.3 Platform Support
 
-| OS          | Compiler    | Version              | Arch              | C++ Standards        | Status |
-|-------------|-------------|----------------------|-------------------|----------------------|--------|
-| Windows 11  | MSVC        | 19.1x                | x64, Win32        | C++14, C++17         | NA     | 
-| Windows 11  | MSVC        | 19.2x                | x64, Win32, ARM64 | C++17, C++20         | NA     | 
-| Windows 11  | MSVC        | 19.43                | x64, Win32, ARM64 | C++17, C++20, C++23  | [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml) | 
-| Windows 11  | MSVC        | 19.50                | x64, ARM64        | C++17, C++20, C++23  | NA     | 
-| Windows 11  | MinGW‑w64   | GCC 11.2.0, 15.2.0   | x64               | C++17, C++20         | [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml) | NA |       
-| Ubuntu 22.04| GCC         | 11.2.0, 13.3.0       | x64               | C++17, C++20, C++23  | [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml) |       
-| Ubuntu 22.04| Clang       | 14.0, 15.0           | x64               | C++17, C++20         | NA     |       
-| macOS 14    | Apple Clang | 14.0, 15.0           | arm64, x64        | C++17, C++20         | NA     |
+| OS          | Compiler    | Version              | Arch              |  Status |
+|-------------|-------------|----------------------|-------------------|--------|
+| Windows 11  | MSVC        | 19.1x                | x64, Win32        |  NA     | 
+| Windows 11  | MSVC        | 19.2x                | x64, Win32, ARM64 |  NA     | 
+| Windows 11  | MSVC        | 19.43                | x64, Win32, ARM64 |  [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml) | 
+| Windows 11  | MSVC        | 19.50                | x64, ARM64        |  NA     | 
+| Windows 11  | MinGW‑w64   | GCC 11.2.0, 15.2.0   | x64               |  [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml) | NA |       
+| Ubuntu 22.04| GCC         | 11.2.0, 13.3.0       | x64               |  [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml) |       
+| Ubuntu 22.04| Clang       | 14.0, 15.0           | x64               | NA     |       
+| macOS 14    | Apple Clang | 14.0, 15.0           | arm64, x64        |  [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)     |
 
 
 
-## 3.0 Testing
+## 4.0 Testing
 
 Slxio has moved from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight and efficient testing since version 0.1.0.  
 Testing is enabled via the CMake option `ENABLE_TESTING`.
 
 
-### 3.1 Running Tests
+### 4.1 Running Tests
 To run all unit tests after building, use:
 
 ```bash
@@ -194,66 +242,98 @@ This will execute all project unit tests by default.
 
 > **Note:** Code coverage is not yet supported.
 
-### 3.2 Debugging Test Failures
+### 4.2 Debugging Test Failures
 
 If a test fails, check `Testing/Temporary/LastTest.log`,
 `test/testSubDir/${testname}/${testname}.vg.out`, and other similar files.
 
-## 4.0 Examples
+## 5.0 Use in Other Projects
 
-### 4.1 Integrating in CMake Projects
+Currently, the only supported build system is CMake. Other build systems are not planned at the moment, though they may be considered in future discussions.  
+Below are several ways to integrate `slxio` into your project:
 
-#### 4.1.1 Using [CPM](https://github.com/cpm-cmake/CPM.cmake)
+- 1. Using FetchContent (built-in CMake module)
 
-```cmake
-CPMAddPackage(
-  NAME slxio
-  GITHUB_REPOSITORY wissem01chiha/slxio
-  VERSION 0.1.0
-)
+The simplest way is to use CMake’s built-in [`FetchContent`](https://cmake.org/cmake/help/latest/module/FetchContent.html) to add `slxio` as an external dependency.  
+This will automatically download, configure, and build the library alongside your application.
 
-add_executable(target main.cpp)
-target_link_libraries(target PRIVATE SLXIO)
-```
+  ```cmake
+  include(FetchContent)
 
-### 4.1.2 Integrate using vcpkg
+  FetchContent_Declare(
+    slxio
+    GIT_REPOSITORY https://github.com/wissem01chiha/slxio.git
+    GIT_TAG master
+  )
+  FetchContent_MakeAvailable(slxio)
 
-> **Note:** slxio not yet available on vcpkg 
+  add_executable(app main.cpp)
+  target_link_libraries(app PRIVATE SLXIO::SLXIO)
+  ```
+- 2. Using CPM.cmake (CMake Package Manager)
+  
+  If you prefer a package manager approach, you can use [CPM.cmake]() to fetch and integrate slxio
 
-```bash
-vcpkg install slxio
-```
+ ```cmake
+  CPMAddPackage(
+    NAME slxio
+    GITHUB_REPOSITORY wissem01chiha/slxio
+    VERSION 0.1.0
+  )
 
-then in your CMakeLists.txt 
+  add_executable(app main.cpp)
+  target_link_libraries(app PRIVATE SLXIO::SLXIO)
+  ```
 
-```cmake
-find_package(slxio CONFIG REQUIRED)
-add_executable(my_app main.cpp)
-target_link_libraries(my_app PRIVATE slxio::slxio)
-```
+- 3. Using ExternalProject
 
-### 4.1.2 Integrate using [Conan](https://github.com/conan-io/conan)
+For more control, you can use  [ExternalProject](https://cmake.org/cmake/help/latest/module/ExternalProject.html)  to build slxio separately and then link it:
 
-> **Note:** slxio not yet available on conan package manager
+  ```cmake
+  include(ExternalProject)
+
+  ExternalProject_Add(
+    slxio
+    GIT_REPOSITORY https://github.com/wissem01chiha/slxio.git
+    GIT_TAG master
+    UPDATE_DISCONNECTED 1
+    PREFIX ${CMAKE_BINARY_DIR}/slxio
+    INSTALL_COMMAND ""
+  )
+
+  add_executable(app main.cpp)
+  add_dependencies(app slxio)
+  target_link_libraries(app PRIVATE SLXIO::SLXIO)
+  ```
+
+- 4. Using find_package
+
+Once slxio provides proper CMake configuration files, you’ll be able to integrate it like any other modern CMake package:
+
+  ```cmake
+  find_package(slxio CONFIG REQUIRED)
+
+  add_executable(app main.cpp)
+  target_link_libraries(app PRIVATE SLXIO::SLXIO)
+  ```
+
+## 6.0 API Documentation
+
+Since version 0.1.0, Slxio has used [Sphinx](https://www.sphinx-doc.org/en/master/index.html) for documentation.  
+However, for detailed implementation documentation, Slxio includes integrated support for [Doxygen](https://www.doxygen.nl/index.html), which can be enabled via the `ENABLE_DOCUMENTATION` cmake option.
 
 
-## 5.0 API Documentation
-
-Since version 0.1.0, Slxio has used Sphinx for documentation.  
-However, for detailed implementation documentation, Slxio includes integrated support for Doxygen, which can be enabled via the `ENABLE_DOCUMENTATION` CMake option.
-
-
-## 6.0 References
+## 7.0 References
 
 > Shrestha, S. L., Chowdhury, S. A., & Csallner, C. (2022).  
 > *SLNET: A Redistributable Corpus of 3rd-party Simulink Models (v2.0)*.  
 > Zenodo. https://doi.org/10.5281/zenodo.5259648
 
 
-## 7.0 License
+## 8.0 License
 
-All material is provided under an Apache LLicense unless otherwise specified.
+All material is provided under an Apache License unless otherwise specified.
 
-see the [`LICENSE`](./LICENSE) file.
+see the [`LICENSE`](./LICENSE) file for more details
 
 

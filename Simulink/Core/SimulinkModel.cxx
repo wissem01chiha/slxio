@@ -1,57 +1,89 @@
 #include "SimulinkModel.h"
-#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkModel::SimulinkModel() {}
-
-SimulinkModel::SimulinkModel(SimulinkModelType Type) : modelType(Type) {}
-
-SimulinkModel::SimulinkModel(const SimulinkModel &other) {
-
-  this->modelLines = other.modelLines;
-  this->modelId = other.modelId;
-  this->modelSimSet = other.modelSimSet;
-  this->modelVersion = other.modelVersion;
+SimulinkModel::SimulinkModel()
+  : l(Logger::getInstance())
+{
+  type = SimulinkModelType(SimulinkModelType::Model);
 }
 
-SimulinkElementType SimulinkModel::getType() const {
-  return SimulinkElementType::Model;
+SimulinkModel::SimulinkModel(SimulinkModelType Type)
+  : type(Type)
+  , l(Logger::getInstance())
+{
 }
 
-Index SimulinkModel::getID() const { return modelId; }
+SimulinkModel::SimulinkModel(const SimulinkModel& other)
+  : l(Logger::getInstance())
+{
 
-std::string SimulinkModel::toString() const { return std::string(); }
+  this->lines = other.lines;
+  this->id = other.id;
+  this->simSet = other.simSet;
+  this->version = other.version;
+}
 
-SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx) {
+SimulinkElementType SimulinkModel::getType() const
+{
+  return SimulinkElementType(SimulinkElementType::Type::Model);
+}
 
-  for (const auto &blk : modelBlocks) {
-    if (blk->getID() == blockIdx) {
+Index SimulinkModel::getID() const
+{
+  return id;
+}
+
+std::string SimulinkModel::toString() const
+{
+  return std::string();
+}
+
+SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
+{
+
+  for (const auto& blk : blocks)
+  {
+    if (blk->getID() == blockIdx)
+    {
       return *blk;
     }
   }
-  // slog_warn("Block (Index) %d not found in model (Index) %s", blockIdx,
-  //           modelId);
+  // slog_warn("Block (Index) %d not found in model (Index) %s",
+  // blockIdx,
+  //           id);
   return SimulinkBlock();
 }
 
-SimulinkModelType SimulinkModel::getModelType() { return modelType; }
-
-std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings() {
-  return modelSimSet;
+SimulinkModelType SimulinkModel::getModelType()
+{
+  return type;
 }
 
-std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::getParameters() {
-  return modelParameters;
+std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings()
+{
+  return simSet;
 }
 
-uint32 SimulinkModel::getVersion() { return modelVersion; }
+std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::getParameters()
+{
+  return parameters;
+}
 
-bool SimulinkModel::contains(const Index &id) const { return true; }
+uint32 SimulinkModel::getVersion()
+{
+  return version;
+}
 
-std::shared_ptr<ModelWorkspace> SimulinkModel::getWorkspace() {
-  return modelWorkspace;
+bool SimulinkModel::contains(const Index& id) const
+{
+  return false;
+}
+
+std::shared_ptr<ModelWorkspace> SimulinkModel::getWorkspace()
+{
+  return workspace;
 }
 
 SLXIO_ABI_NAMESPACE_END

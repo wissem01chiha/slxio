@@ -1,11 +1,42 @@
+#include "Doctest.h"
+#include "SimulinkConfigSet.h"
 #include "SimulinkConfigSetManager.h"
 
-class SimulinkConfigSetManagerTestFixture : public ::testing::Test {
-protected:
-  void SetUp() override {
-    slog_init("logfile", SLOG_FLAGS_ALL, 0);
-    slog_disable(SLOG_TRACE);
-  }
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
-  void TearDown() override { slog_destroy(); }
-};
+TEST_CASE("AddConfigurationSetTest")
+{
+  SimulinkConfigSetManager manager;
+  auto configSet = std::make_shared<SimulinkConfigSet>();
+  ErrorCode status = manager.add(configSet);
+  CHECK(status == ErrorCode::SLX_OK);
+}
+
+TEST_CASE("RemoveConfigurationSetTest")
+{
+  SimulinkConfigSetManager manager;
+  auto configSet = std::make_shared<SimulinkConfigSet>();
+  manager.add(configSet);
+  ErrorCode status = manager.remove(configSet);
+  CHECK(status == ErrorCode::SLX_OK);
+}
+
+TEST_CASE("GetActiveConfigurationSetTest")
+{
+  SimulinkConfigSetManager manager;
+  auto configSet1 = std::make_shared<SimulinkConfigSet>();
+  auto configSet2 = std::make_shared<SimulinkConfigSet>();
+
+  manager.add(configSet1);
+  manager.add(configSet2);
+
+  configSet1->activate();
+
+  std::shared_ptr<SimulinkConfigSet> activeConfig =
+    manager.getActiveConfiguration();
+  CHECK(activeConfig == configSet1);
+}
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

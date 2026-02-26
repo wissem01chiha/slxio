@@ -3,9 +3,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkFile::SimulinkFile() { content = SimulinkContent(); }
+SimulinkFile::SimulinkFile()
+  : l(Logger::getInstance())
+{
+  content = SimulinkContent();
+}
 
-const SimulinkContent &SimulinkFile::getContent() const { return content; }
+const SimulinkContent& SimulinkFile::getContent() const
+{
+  return content;
+}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

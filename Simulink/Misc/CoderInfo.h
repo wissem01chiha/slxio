@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef CODERINFO_H
 #define CODERINFO_H
@@ -24,25 +24,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class CoderInfo
- * @brief This class holds information about code generation for a specific
- * variable or signal.
+ * @brief This class holds information about code generation for a
+ * specific variable or signal.
  * @see
  * https://www.mathworks.com/help/simulink/slref/simulink.coderinfo.html?s_tid=srchtitle_support_results_1_coderinfo
- * @note StorageClass= 'Custom' not supported along with the CustomAttribute
+ * @note StorageClass= 'Custom' not supported along with the
+ * CustomAttribute
  */
-class APIEXPORT CoderInfo final {
+class APIEXPORT CoderInfo final
+{
 public:
   CoderInfo();
   ~CoderInfo() = default;
-  const char *getStorageClass() const;
+  const char* getStorageClass() const;
   bool isTunable();
-  const char *getIdentifier();
+  const char* getIdentifier();
   uint32 getAlignment();
 
 private:
-  const char *Identifier;
+  const char* Identifier;
   uint32 Alignment;
-  const char *StorageClass;
+  const char* StorageClass;
   bool Tunable = true;
   bool ExportedGlobal = false;
 };

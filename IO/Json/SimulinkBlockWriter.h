@@ -8,6 +8,31 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
+
+#ifndef SIMULINKBLOCKWRITER_H
+#define SIMULINKBLOCKWRITER_H
+
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "Json-c.h"
+#include "SimulinkBlock.h"
+#include "SimulinkWriterBase.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class APIEXPORT SimulinkBlockWriter
+  : public SimulinkWriterBase<SimulinkBlock, json_object*>
+{
+public:
+  SimulinkBlockWriter() = default;
+  ~SimulinkBlockWriter() = default;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKBLOCKWRITER_H

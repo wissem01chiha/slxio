@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef MODELWORKSPACE_H
 #define MODELWORKSPACE_H
@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "DataSourceType.h"
+#include "Logger.h"
 #include "Type.h"
 #include <string>
 #include <unordered_map>
@@ -28,38 +29,41 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Mimic Matlab ModelWorkspace
- * @see https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
+ * @see
+ * https://www.mathworks.com/help/simulink/ug/using-model-workspaces.html
  */
-class APIEXPORT ModelWorkspace final {
+class APIEXPORT ModelWorkspace final
+{
 public:
   ModelWorkspace();
   ~ModelWorkspace() = default;
 
-  /// @brief
-  std::string getVariable(const std::string &name) const;
+  /// @brief Get the value of a variable in the model workspace.
+  std::string getVariable(const std::string& name) const;
 
-  /// @brief
-  void assignVariable(const std::string &name, const std::string &value);
+  /// @brief Assign a value to a variable in the model workspace.
+  void assignVariable(const std::string& name, const std::string& value);
 
-  /// @brief
-  void clear(const std::string &name);
+  /// @brief Clear a variable from the model workspace.
+  void clear(const std::string& name);
 
-  /// @brief
+  /// @brief Clear all variables from the model workspace.
   void clearAll();
 
-  /// @brief
+  /// @brief Get the data source type for this model workspace.
   DataSourceType getDataSource();
 
-  /// @brief
-  const char *getFilename();
+  /// @brief Get the filename associated with this model workspace
+  const char* getFilename();
 
-  /// @brief
+  /// @brief Get the MATLAB code associated with this model workspace
   std::string getMatlabCode();
 
 private:
-  DataSourceType dataSource = DataSourceType::ModelFile;
+  Logger& l;
   std::string fileName = "";
   std::string matlabCode = "";
+  DataSourceType dataSource;
   std::unordered_map<std::string, std::string> variables;
 };
 

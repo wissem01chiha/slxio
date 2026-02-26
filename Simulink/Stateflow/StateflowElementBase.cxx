@@ -4,12 +4,14 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StateflowElementBase::StateflowElementBase(const StateflowElementBase &orig) {
+StateflowElementBase::StateflowElementBase(const StateflowElementBase& orig)
+{
   this->parent = orig.parent;
 }
 
 void StateflowElementBase::setParent(
-    std::shared_ptr<SimulinkElementBase> parent) {
+  std::shared_ptr<SimulinkElementBase> parent)
+{
   this->parent = parent;
 }
 

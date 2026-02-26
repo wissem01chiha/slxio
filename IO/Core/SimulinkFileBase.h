@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKFILEBASE_H
 #define SIMULINKFILEBASE_H
@@ -24,12 +24,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkFileBase
- * @brief Base class for all lower-level readers/writers of Simulink file data.
- * Provides a common metadata grouping that describes essential information
- * about a Simulink file, this class is intended to be subclassed by specific
- * file readers/writers that need consistent metadata handling.
+ * @brief Base class for all lower-level readers/writers of Simulink
+ * file data. Provides a common metadata grouping that describes
+ * essential information about a Simulink file, this class is intended
+ * to be subclassed by specific file readers/writers that need
+ * consistent metadata handling.
  */
-class APIEXPORT SimulinkFileBase {
+class APIEXPORT SimulinkFileBase
+{
 public:
   /// @brief Convert metadata fields to a human-readable string.
   std::string toString() const;

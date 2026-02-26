@@ -1,1 +1,2 @@
-## SLXIO Examples
+<!-- omit in toc -->
+# Slxio Examples Kit 

@@ -8,28 +8,32 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef POINT_H
 #define POINT_H
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Point {
+class APIEXPORT Point final
+{
 public:
   Point();
   Point(uint32 x, uint32 y, uint32 width, uint32 height);
-  Point(const std::vector<uint32> &vec);
+  Point(const std::vector<uint32>& vec);
   std::vector<uint32> toVector() const;
 
+private:
+  Logger& l;
   uint32 x;
   uint32 y;
   uint32 width;

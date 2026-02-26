@@ -1,7 +1,8 @@
 #include "Doctest.h"
 #include "FileManager.h"
 
-class FileManagerTestFixture {
+class FileManagerTestFixture
+{
 public:
 private:
 };

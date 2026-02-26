@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULATIONSETTINGS_H
 #define SIMULATIONSETTINGS_H
@@ -23,13 +23,14 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief Simulation settings for a Simulink model. */
-class APIEXPORT SimulationSettings {
+class APIEXPORT SimulationSettings
+{
 public:
   SimulationSettings() = default;
   ~SimulationSettings();
 
-  char *getSolverName();
-  char *getSolverType();
+  char* getSolverName();
+  char* getSolverType();
   Float getFixedStepSize();
 
 private:

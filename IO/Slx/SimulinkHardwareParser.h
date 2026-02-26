@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKHARDWAREPARSER_H
 #define SIMULINKHARDWAREPARSER_H
@@ -26,18 +26,16 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkHardware
+/// @note SimulinkHardware is a subset of SimulinkObject element in
+/// slx file
 class APIEXPORT SimulinkHardwareParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkHardware> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkHardware>
+{
 public:
-  SimulinkHardwareParser();
+  SimulinkHardwareParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkHardware> getDataObject() const override;
   ErrorCode parse() override;
   ~SimulinkHardwareParser() = default;
-
-private:
-  std::shared_ptr<SimulinkHardware> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

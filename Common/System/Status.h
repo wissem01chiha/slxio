@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef STATUS_H
 #define STATUS_H
@@ -27,14 +27,15 @@
  * @details Provides general error codes; each module can add its own.
  * Naming convention: <MODULE>_ERR_<DESCRIPTION> (e.g., SLX_EIOERR,
  * SYSTEM_ERR_TIMEOUT).
- * @note Renamed from "Error" for MSBuild compatibility (MSB8066) and Doxygen
- * issues.
+ * @note Renamed from "Error" for MSBuild compatibility (MSB8066) and
+ * Doxygen issues.
  * @warning Not yet fully used; most methods fallback to ErrorCode.
  * @example Status s(ErrorCode::SLX_EIOERR);
  *  fprintf(stdout, "Error: %s\n", s.toString());
  *  Status::log(ErrorCode::SLX_ENOENT);
  */
-class APIEXPORT Status {
+class APIEXPORT Status
+{
 public:
   /// @brief Default constructor, initializes with SLX_OK.
   Status();
@@ -43,17 +44,17 @@ public:
   Status(ErrorCode err);
 
   /// @brief Construct from an ErrorCode and message string.
-  Status(ErrorCode err, const std::string &str);
+  Status(ErrorCode err, const std::string& str);
 
   /// @brief Construct from raw integer error and message string.
-  Status(sint32 err, const std::string &str);
+  Status(sint32 err, const std::string& str);
 
   /// @brief Generic convertion to a char take into account
   /// libuv error negatives, replacement of uv_strerror
-  static const char *toString(int err);
+  static const char* toString(int err);
 
   /// @brief Convert an explicit ErrorCode to a string message.
-  static const char *toString(ErrorCode err);
+  static const char* toString(ErrorCode err);
 
   /// @brief Log an ErrorCode and its message to stderr.
   static void log(int err);
@@ -62,13 +63,13 @@ public:
   static ErrorCode toErrorCode(uint32 err);
 
   /// @brief Convert current Status object to a string message.
-  const char *toString() const;
+  const char* toString() const;
 
   /// @brief Check if current Status matches given ErrorCode.
   bool isA(ErrorCode err) const;
 
   /// @brief Check if current Status matches another Status.
-  bool isA(Status &err) const;
+  bool isA(Status& err) const;
 
   ~Status() = default;
 

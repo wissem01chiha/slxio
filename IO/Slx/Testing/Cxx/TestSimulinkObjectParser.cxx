@@ -1,38 +1,56 @@
 #include "Doctest.h"
 #include "SimulinkObjectParser.h"
-#include "SlxConfig.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkObjectParserTestFixture {
+class SimulinkObjectParserTestFixture
+{
 protected:
-  SimulinkObjectParser *builderPtr;
-  xmlNodePtr xmlNodePtrTest;
-  char path_xml[512];
-
-  void SetUp() override {
-    slog_init("logfile", SLOG_FLAGS_ALL, 0);
-    slog_disable(SLOG_TRACE);
-
-    snprintf(path_xml, sizeof(path_xml), "%s/test/assets/object.xml",
-             PROJECT_ROOT);
-
-    builderPtr = new SimulinkObjectBuilder();
-
-    xmlDocPtr doc;
-    doc = xmlReadFile(path_xml, NULL, 0);
-    xmlNodePtrTest = xmlDocGetRootElement(doc);
-    builderPtr->build(xmlNodePtrTest);
+  SimulinkObjectParserTestFixture()
+    : parserPtr(new SimulinkObjectParser())
+    , doc(nullptr)
+  {
   }
-  void TearDown() override { slog_destroy(); }
+
+  xmlNodePtr getXmlNodePtr(const char* xmlfilename)
+  {
+
+    char xmlfilepath[512];
+    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
+      PROJECT_ROOT_DIR, xmlfilename);
+    doc = xmlReadFile(xmlfilepath, nullptr, 0);
+    if (!doc)
+    {
+      throw std::runtime_error("failed to read XML file");
+    }
+    xmlNodePtr root = xmlDocGetRootElement(doc);
+    return root;
+  }
+
+  ~SimulinkObjectParserTestFixture()
+  {
+
+    if (parserPtr)
+    {
+      delete parserPtr;
+    }
+    if (doc)
+    {
+      xmlFreeDoc(doc);
+    }
+  }
+
+  SimulinkObjectParser* parserPtr;
+  xmlDocPtr doc;
 };
 
-TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "BuildTest") {
+TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
+{
 
-  std::shared_ptr<SimulinkObject> obj = builderPtr->get();
-  ASSERT_EQ(obj->getID(), 8);
-  ASSERT_EQ(obj->getType(), SimulinkElementType::Object);
+  xmlNodePtr nodePtr = getXmlNodePtr("object.xml");
+  ErrorCode status = parserPtr->setInputData(nodePtr);
+  CHECK(status == ErrorCode::SLX_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

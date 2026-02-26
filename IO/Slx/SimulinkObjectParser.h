@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKOBJECTPARSER_H
 #define SIMULINKOBJECTPARSER_H
@@ -27,25 +27,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Parser for SimulinkObject
  * @code{.xml}
- * <Object ObjectID="2" Version="19.0.0" ClassName="Simulink.SolverCC">
-        <P Name="DisabledProps">[]</P>
-        <P Name="Description"/>
+ * <Object ObjectID="2" Version="19.0.0"
+ ClassName="Simulink.SolverCC"> <P Name="DisabledProps">[]</P> <P
+ Name="Description"/>
     </Object>
  * @endcode
  */
 class APIEXPORT SimulinkObjectParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkObject> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkObject>
+{
 public:
-  SimulinkObjectParser();
-
+  SimulinkObjectParser() = default;
   ErrorCode setInputData(const xmlNodePtr data) override;
-  std::shared_ptr<SimulinkObject> getDataObject() const override;
   ErrorCode parse() override;
   ~SimulinkObjectParser() = default;
-
-private:
-  std::shared_ptr<SimulinkObject> ptr_;
-  xmlNodePtr dataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

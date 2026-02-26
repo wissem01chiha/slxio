@@ -8,12 +8,12 @@
  * @brief Encapsulates all information required for layouting
  * a rectangular element.
  */
-class RectangleTypeLayoutDataBase {
+class RectangleTypeLayoutDataBase
+{
 public:
   RectangleTypeLayoutDataBase();
-  RectangleTypeLayoutDataBase(const RectangleType &position,
-                              const Color &foregroundColor,
-                              const Color &backgroundColor);
+  RectangleTypeLayoutDataBase(const RectangleType& position,
+    const Color& foregroundColor, const Color& backgroundColor);
   virtual ~RectangleTypeLayoutDataBase() = default;
 
 protected:

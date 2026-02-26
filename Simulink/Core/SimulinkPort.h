@@ -8,15 +8,16 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKPORT_H
 #define SIMULINKPORT_H
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
@@ -30,10 +31,11 @@ class SimulinkLine;
 /**
  * @brief Base class for Simulink ports.
  */
-class APIEXPORT SimulinkPort final : public SimulinkElementBase {
+class APIEXPORT SimulinkPort final : public SimulinkElementBase
+{
 public:
   SimulinkPort() = default;
-  SimulinkPort(const SimulinkPort &other);
+  SimulinkPort(const SimulinkPort& other);
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
   SimulinkPortType getPortType();
@@ -63,7 +65,7 @@ public:
    *  @brief Compare the given ID with this port's ID.
    *  @note A port can only be connected to one and only one block.
    */
-  bool contains(const Index &id) const override;
+  bool contains(const Index& id) const override;
 
   /// @brief Get the parent block of this port.
   std::shared_ptr<SimulinkBlock> getBlock();
@@ -73,13 +75,14 @@ public:
 
   /// @brief Get a specific line by its ID.
   /// @note Each line should have a unique identifier.
-  std::shared_ptr<SimulinkLine> getLine(const Index &lineId_);
+  std::shared_ptr<SimulinkLine> getLine(const Index& lineId);
 
 private:
-  Index portBlockId;
-  SimulinkPortType portType;
-  std::shared_ptr<SimulinkBlock> portBlock;
-  std::vector<std::shared_ptr<SimulinkLine>> portLines;
+  Logger& l;
+  Index blockId;
+  SimulinkPortType type;
+  std::shared_ptr<SimulinkBlock> block;
+  std::vector<std::shared_ptr<SimulinkLine>> lines;
 };
 
 SLXIO_ABI_NAMESPACE_END

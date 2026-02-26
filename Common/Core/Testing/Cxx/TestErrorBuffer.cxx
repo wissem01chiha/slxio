@@ -4,7 +4,8 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Simple Test") {
+TEST_CASE("Simple Test")
+{
 
   CHECK(1 != 0);
   CHECK(2 != 3);

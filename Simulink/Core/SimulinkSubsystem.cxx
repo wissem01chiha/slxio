@@ -6,11 +6,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkSubsystem::SimulinkSubsystem() {}
 
-std::vector<std::shared_ptr<SimulinkBlock>> SimulinkSubsystem::getBlocks() {
+std::vector<std::shared_ptr<SimulinkBlock>> SimulinkSubsystem::getBlocks()
+{
   return subsystemBlocks;
 }
 
-std::vector<std::shared_ptr<SimulinkBlock>> SimulinkSubsystem::getPorts() {
+std::vector<std::shared_ptr<SimulinkBlock>> SimulinkSubsystem::getPorts()
+{
   return subsystemPorts;
 }
 

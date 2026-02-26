@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKBLOCKTYPE_H
 #define SIMULINKBLOCKTYPE_H
@@ -25,9 +25,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Enumeration of Simulink block types.
  */
-class APIEXPORT SimulinkBlockType final : public SimulinkElementType {
+class APIEXPORT SimulinkBlockType final : public SimulinkElementType
+{
 public:
-  enum Type {
+  enum Type
+  {
     DigitalClock,
     Clock,
     FromWorkspace,
@@ -64,10 +66,10 @@ public:
   SimulinkBlockType() = default;
   SimulinkBlockType(Type type_);
   ~SimulinkBlockType() = default;
-  static SimulinkBlockType::Type toType(const char *typeName);
-  static const char *toString(Type type);
+  static SimulinkBlockType::Type toType(const char* typeName);
+  static const char* toString(Type type);
   bool isA(SimulinkBlockType::Type type);
-  std::string toString();
+  std::string toString() const;
 
 private:
   SimulinkBlockType::Type type_;

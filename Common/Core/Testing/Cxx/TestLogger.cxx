@@ -5,15 +5,17 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Logger Constructor Test") {
+TEST_CASE("Logger Constructor Test")
+{
 
-  Logger &Logger = Logger::getInstance();
+  Logger& Logger = Logger::getInstance();
   CHECK(&Logger != nullptr);
 }
 
-TEST_CASE("Logger Verbosity Test") {
+TEST_CASE("Logger Verbosity Test")
+{
 
-  Logger &Logger = Logger::getInstance();
+  Logger& Logger = Logger::getInstance();
 
   Logger.setInternalVerbosity(Logger::V_ERROR);
   Logger.log("default internal Error message.");
@@ -22,15 +24,17 @@ TEST_CASE("Logger Verbosity Test") {
   Logger.log(Logger::V_INFO, "verbosity 4 message.");
 }
 
-TEST_CASE("Logger Enabled Test ") {
+TEST_CASE("Logger Enabled Test ")
+{
 
-  Logger &Logger = Logger::getInstance();
+  Logger& Logger = Logger::getInstance();
   CHECK(Logger.IsEnabled());
 }
 
-TEST_CASE("Logger file logging Test") {
+TEST_CASE("Logger file logging Test")
+{
 
-  Logger &Logger = Logger::getInstance();
+  Logger& Logger = Logger::getInstance();
   Logger.setInternalFileMode(File::Mode::Append);
 
   const size_t size = 1024;
@@ -40,19 +44,19 @@ TEST_CASE("Logger file logging Test") {
   strcat(buffer, "/test.txt");
 
   Logger.logToFile(Logger::Verbosity::VERBOSITY_1, buffer, 1,
-                   "Logger file logging Test :: Hello Message");
+    "Logger file logging Test :: Hello Message");
 
   std::ifstream f(buffer);
   CHECK(f.good());
 }
 
-TEST_CASE("Logger random file logging Test") {
+TEST_CASE("Logger random file logging Test")
+{
 
-  Logger &Logger = Logger::getInstance();
+  Logger& Logger = Logger::getInstance();
   Logger.setInternalFileMode(File::Mode::Append);
-  ErrorCode status_t =
-      Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
-                       "Logger file logging Test :: Hello Message");
+  ErrorCode status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
+    "Logger file logging Test :: Hello Message");
   CHECK(status_t == ErrorCode::SLX_OK);
 }
 

@@ -1,2 +1,2 @@
-include(Documentation)
-add_module(Documentation::Doxygen)
+include (Documentation)
+add_module (Documentation::Doxygen)

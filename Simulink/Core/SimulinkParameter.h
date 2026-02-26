@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKPARAMETER_H
 #define SIMULINKPARAMETER_H
@@ -30,9 +30,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief A Simulink Parameter object.
- * @see https://www.mathworks.com/help/simulink/slref/simulink.parameter.html
+ * @see
+ * https://www.mathworks.com/help/simulink/slref/simulink.parameter.html
  */
-class APIEXPORT SimulinkParameter : public SimulinkElementBase {
+class APIEXPORT SimulinkParameter : public SimulinkElementBase
+{
 public:
   /// @brief Default constructor
   SimulinkParameter();
@@ -43,57 +45,64 @@ public:
   /// - Arrays: "[1,2,3]"
   /// - Complex values: "2+2i"
   /// Other types are treated as strings and mapped to
-  /// SimulinkDataType::String. Expressions and structs are not supported.
+  /// SimulinkDataType::String. Expressions and structs are not
+  /// supported.
   /// @note No public data type setting is exposed.
-  /// Resolution from const char* to SimulinkDataType is handled internally
-  /// by the class. Complexity defaults to "real" and is also resolved
-  /// internally.
-  SimulinkParameter(const char *val);
+  /// Resolution from const char* to SimulinkDataType is handled
+  /// internally by the class. Complexity defaults to "real" and is
+  /// also resolved internally.
+  explicit SimulinkParameter(const char* val);
 
   /// @brief get the resolved parameter SimulinkDataType
   SimulinkDataType getDataType();
 
   /// @brief set the parameter data type
-  /// @warning this function overrites the default Min, Max values based on
-  /// new type
+  /// @warning this function overrites the default Min, Max values
+  /// based on new type
   /// @note not implemented the automatic range override
   void setDataType(SimulinkDataType DataType_);
 
-  /// @brief Returns the default type representation of the parameter value.
-  /// This provides the raw value as stored internally, without conversion
-  /// to another data type.
-  const char *getValue();
+  /// @brief Returns the default type representation of the parameter
+  /// value. This provides the raw value as stored internally, without
+  /// conversion to another data type.
+  const char* getValue();
+
+  /// @brief Provide a way to modify the parameter value, mimicking the Matlab
+  /// API.
+  void setValue(const char* value);
 
   /// @brief Attempts to resolve the value as double.
-  ErrorCode getValueAsDouble(Float &fval);
+  ErrorCode getValueAsDouble(Float& fval);
 
   /// @brief Attempts to resolve the value as Single if enbaled.
-  ErrorCode getValueAsSingle(Float &sval);
+  ErrorCode getValueAsSingle(Float& sval);
 
-  /// @brief Resolves the parameter value as an unsigned 8-bit integer.
+  /// @brief Resolves the parameter value as an unsigned 8-bit
+  /// integer.
   /// @param[out] u8val Parsed value.
-  ErrorCode getValueAsUInt8(uint8 &u8val);
+  ErrorCode getValueAsUInt8(uint8& u8val);
 
-  /// @brief Resolves the parameter value as an unsigned 16-bit integer.
+  /// @brief Resolves the parameter value as an unsigned 16-bit
+  /// integer.
   /// @param[out] u16val Parsed value.
-  ErrorCode getValueAsUInt16(uint16 &u16val);
+  ErrorCode getValueAsUInt16(uint16& u16val);
 
   /// @brief Resolves the parameter value as an array of floats.
   /// @param[out] vecval Parsed array.
-  ErrorCode getValueAsArray(std::vector<Float> &vecval);
+  ErrorCode getValueAsArray(std::vector<Float>& vecval);
 
   /// @brief Resolves the parameter value as a string.
   /// @param[out] strval Parsed string.
-  ErrorCode getValueAsString(std::string &strval);
+  ErrorCode getValueAsString(std::string& strval);
 
   /// @brief get parameter dimensions
   std::vector<uint16> getDimensions();
 
   /// @brief return current parameter name
-  const char *getName();
+  const char* getName();
 
   /// @brief modify parameter name, no backup used
-  ErrorCode setName(const char *name);
+  ErrorCode setName(const char* name);
 
   SimulinkElementType getType() const override;
 
@@ -102,7 +111,7 @@ public:
   Index getID() const override;
 
   /// @brief no logic return always true, an a warning message
-  bool contains(const Index &id) const override;
+  bool contains(const Index& id) const override;
 
   std::string toString() const override;
 
@@ -110,7 +119,8 @@ public:
   /// SLX_ENOTIMPL.
   ErrorCode remove(const std::shared_ptr<SimulinkElementBase> element) override;
 
-  /// @brief Parameters cannot add child elements. Returns SLX_ENOTIMPL.
+  /// @brief Parameters cannot add child elements. Returns
+  /// SLX_ENOTIMPL.
   ErrorCode add(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief get code generation data struct
@@ -123,13 +133,13 @@ public:
   Float getMax();
 
 private:
-  const char *Name;
-  const char *Value;
+  const char* Name;
+  const char* Value;
   SimulinkDataType DataType;
 
-  const char *Unit;
-  const char *Description;
-  const char *Complexity = "real";
+  const char* Unit;
+  const char* Description;
+  const char* Complexity = "real";
 
   Float Min;
   Float Max;

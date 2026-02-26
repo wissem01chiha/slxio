@@ -8,9 +8,9 @@
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+// implied. See the License for the specific language governing
+// permissions and limitations under the License.
 
 #ifndef SIMULINKMODELREFRENCE_H
 #define SIMULINKMODELREFRENCE_H
@@ -23,28 +23,30 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief
+ * @brief SimulinkModelReference represents the model reference settings
  */
-class APIEXPORT SimulinkModelReference final {
+class APIEXPORT SimulinkModelReference final
+{
 public:
   SimulinkModelReference() = default;
+  ~SimulinkModelReference() = default;
 
-  const char **DisabledProps;
-  const char *Description;
-  const char **Components;
-  const char *UpdateModelReferenceTargets;
-  const char *EnableRefExpFcnMdlSchedulingChecks;
-  const char *CheckModelReferenceTargetMessage;
-  const char *EnableParallelModelReferenceBuilds;
-  const char *ParallelModelReferenceErrorOnInvalidPool;
-  const char *ParallelModelReferenceMATLABWorkerInit;
-  const char *ModelReferenceNumInstancesAllowed;
-  const char *PropagateVarSize;
-  const char *ModelDependencies;
-  const char *ModelReferencePassRootInputsByReference;
-  const char *ModelReferenceMinAlgLoopOccurrences;
-  const char *PropagateSignalLabelsOutOfModel;
-  const char *SupportModelReferenceSimTargetCustomCode;
+  const char** DisabledProps;
+  const char* Description;
+  const char** Components;
+  const char* UpdateModelReferenceTargets;
+  const char* EnableRefExpFcnMdlSchedulingChecks;
+  const char* CheckModelReferenceTargetMessage;
+  const char* EnableParallelModelReferenceBuilds;
+  const char* ParallelModelReferenceErrorOnInvalidPool;
+  const char* ParallelModelReferenceMATLABWorkerInit;
+  const char* ModelReferenceNumInstancesAllowed;
+  const char* PropagateVarSize;
+  const char* ModelDependencies;
+  const char* ModelReferencePassRootInputsByReference;
+  const char* ModelReferenceMinAlgLoopOccurrences;
+  const char* PropagateSignalLabelsOutOfModel;
+  const char* SupportModelReferenceSimTargetCustomCode;
 };
 
 SLXIO_ABI_NAMESPACE_END
