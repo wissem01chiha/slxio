@@ -21,9 +21,9 @@
   - [1.3 Contact](#13-contact)
   - [1.4 Contributing](#14-contributing)
   - [2.0 Installation](#20-installation)
-  - [2.1](#21)
-  - [2.2 vcpkg](#22-vcpkg)
-  - [2.3 Conan Recipe](#23-conan-recipe)
+    - [2.1 Binary Release](#21-binary-release)
+    - [2.2 vcpkg](#22-vcpkg)
+    - [2.3 Conan Recipe](#23-conan-recipe)
 - [3.0 Building from Source](#30-building-from-source)
   - [3.1 Dependencies](#31-dependencies)
     - [3.1.1 zlib](#311-zlib)
@@ -56,7 +56,9 @@ Examples and tutorials for beginners are hosted with the project and can be foun
 
 The project is under active development, and contributions are highly encouraged. See the [Contributing](.github/CONTRIBUTING.md) guide for basics on Git, CMake, C++, and workflow, and the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
-> **Note:** This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+> [!NOTE] 
+>  This project is still in an experimental phase. It is not yet ready for production use, 
+>  and no stable release has been published.
 
 
 ### 1.1 Features
@@ -69,7 +71,8 @@ The project is under active development, and contributions are highly encouraged
 
 **Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.  
 
-> **Note:** Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.  
+> [!NOTE] 
+> Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.  
 
 [*.mdl](https://amazingalgorithms.com/file-extensions/mdl/) files are out of scope, for certain specific releases they may be partially compatible, but no support or fixes are planned for mdl file compatibility.  
 
@@ -108,29 +111,27 @@ Feel free to  contact the maintainer through email at [mail](mailto:chihawissem0
 If you are interested in collaborating, please see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).  
 Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
 
-### 2.0 Installation 
+### 2.0 Installation
 
-### 2.1 
+#### 2.1 Binary Release
 
-the easyes way is to refer to release page and dowload the last release that  your platform 
+The easiest way to install is to visit the [Releases page](https://github.com/wissem01chiha/slxio/releases) and download the latest release for your platform.
 
-### 2.2 vcpkg
+#### 2.2 vcpkg
 
 > [!NOTE]  
-> `slxio` is not yet available on [vcpkg](https://github.com/microsoft/vcpkg).  
-> Once it is published, you will be able to install it using:
+> `slxio` is not yet available on [vcpkg](https://github.com/microsoft/vcpkg), once it is published, you will be able to install it using:
 >
 > ```bash
 > vcpkg install slxio
 > ```
 
-### 2.3 Conan Recipe
+#### 2.3 Conan Recipe
 
 See [Conan](https://github.com/conan-io/conan).
 
 > [!NOTE]  
-> `slxio` is not yet available on the Conan package manager.  
-> Once it is published, you will be able to add it to your project using a Conan recipe.
+> `slxio` is not yet available on the Conan package manager, once it is published, you will be able to add it to your project using a Conan recipe.
 
 
 ## 3.0 Building from Source
