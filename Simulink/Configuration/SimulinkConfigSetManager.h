@@ -53,6 +53,12 @@ public:
 
   /// @brief Retrieves the active configuration set.
   /// @note Only one configuration set can be active at a time.
+  /// @warning by design only one configuration set can be active at a time,
+  /// activating a configuration set does not automatically deactivate the
+  /// previously active one, it is the responsibility of the caller to ensure
+  /// that only one configuration set is active at a time.
+  /// @return nullptr if no active configuration set is found, otherwise a
+  /// pointer to the active configuration set.
   std::shared_ptr<SimulinkConfigSet> getActiveConfiguration();
 
   /// @brief Checks if a configuration set exists in the manager.

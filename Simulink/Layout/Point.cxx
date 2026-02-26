@@ -1,14 +1,14 @@
 #include "Point.h"
-#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Point::Point(const std::vector<uint32_t>& vec)
+  : l(Logger::getInstance())
 {
   if (vec.size() < 4)
   {
-    Logger::getInstance().log(Logger::V_ERROR,
+    l.log(Logger::V_ERROR,
       "Point constructor: vector too small to initialize Point!");
     x = y = width = height = 0;
   }

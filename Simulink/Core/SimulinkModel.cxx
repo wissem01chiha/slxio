@@ -1,33 +1,38 @@
 #include "SimulinkModel.h"
-#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkModel::SimulinkModel() {}
+SimulinkModel::SimulinkModel()
+  : l(Logger::getInstance())
+{
+  type = SimulinkModelType(SimulinkModelType::Model);
+}
 
 SimulinkModel::SimulinkModel(SimulinkModelType Type)
-  : modelType(Type)
+  : type(Type)
+  , l(Logger::getInstance())
 {
 }
 
 SimulinkModel::SimulinkModel(const SimulinkModel& other)
+  : l(Logger::getInstance())
 {
 
-  this->modelLines = other.modelLines;
-  this->modelId = other.modelId;
-  this->modelSimSet = other.modelSimSet;
-  this->modelVersion = other.modelVersion;
+  this->lines = other.lines;
+  this->id = other.id;
+  this->simSet = other.simSet;
+  this->version = other.version;
 }
 
 SimulinkElementType SimulinkModel::getType() const
 {
-  return SimulinkElementType::Model;
+  return SimulinkElementType(SimulinkElementType::Type::Model);
 }
 
 Index SimulinkModel::getID() const
 {
-  return modelId;
+  return id;
 }
 
 std::string SimulinkModel::toString() const
@@ -38,7 +43,7 @@ std::string SimulinkModel::toString() const
 SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
 {
 
-  for (const auto& blk : modelBlocks)
+  for (const auto& blk : blocks)
   {
     if (blk->getID() == blockIdx)
     {
@@ -47,38 +52,38 @@ SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
   }
   // slog_warn("Block (Index) %d not found in model (Index) %s",
   // blockIdx,
-  //           modelId);
+  //           id);
   return SimulinkBlock();
 }
 
 SimulinkModelType SimulinkModel::getModelType()
 {
-  return modelType;
+  return type;
 }
 
 std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings()
 {
-  return modelSimSet;
+  return simSet;
 }
 
 std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::getParameters()
 {
-  return modelParameters;
+  return parameters;
 }
 
 uint32 SimulinkModel::getVersion()
 {
-  return modelVersion;
+  return version;
 }
 
 bool SimulinkModel::contains(const Index& id) const
 {
-  return true;
+  return false;
 }
 
 std::shared_ptr<ModelWorkspace> SimulinkModel::getWorkspace()
 {
-  return modelWorkspace;
+  return workspace;
 }
 
 SLXIO_ABI_NAMESPACE_END

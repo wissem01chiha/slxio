@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "ErrorCode.h"
+#include "Logger.h"
 #include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
@@ -52,11 +53,11 @@ public:
   std::string getName();
 
 protected:
-  Index objectId;
-  std::string objectVersion;
+  Logger& l;
+  Index id;
+  std::string version;
   std::string propName;
   std::string className;
-
   std::vector<std::shared_ptr<SimulinkObject>> objects;
   std::vector<std::shared_ptr<SimulinkArray>> arrays;
   std::vector<std::shared_ptr<SimulinkParameter>> parameters;

@@ -1,5 +1,6 @@
 #include "Logger.h"
 #include "Compiler.h"
+#include "Option.h"
 #include "Platform.h"
 #include <cstring>
 #include <fstream>
@@ -11,7 +12,7 @@
 #elif defined(LOGGER_USE_LOGURU)
 #include "Loguru.h"
 #else
-#error "No logging utility is enbaled"
+#error "No logging Utility is Enbaled"
 #endif
 
 SLXIO_NAMESPACE_BEGIN

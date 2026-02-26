@@ -25,7 +25,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @enum SimulinkDataType
- * @brief Simulink Supported data types.
+ * @brief Simulink Supported Data Types.
  * @see
  * https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
  */
@@ -65,13 +65,10 @@ enum class APIEXPORT SimulinkDataType
   XX(SimulinkDataType::Auto, "auto")
 
 SimulinkDataType toSimulinkDataType(bool);
-
 SimulinkDataType toSimulinkDataType(Float);
-
 SimulinkDataType toSimulinkDataType(sint8);
 SimulinkDataType toSimulinkDataType(sint16);
 SimulinkDataType toSimulinkDataType(sint32);
-
 SimulinkDataType toSimulinkDataType(uint8);
 SimulinkDataType toSimulinkDataType(uint16);
 SimulinkDataType toSimulinkDataType(uint32);
@@ -85,4 +82,4 @@ const char* toChar(SimulinkDataType sldt);
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // !SIMULINKDATATYPE_H
+#endif // SIMULINKDATATYPE_H

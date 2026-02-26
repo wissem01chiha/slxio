@@ -49,7 +49,8 @@ public:
 protected:
   SimulinkWriterBase(Logger& logger)
     : l(logger)
-    , dataObject(P()), ptr(std::shared_ptr<T>()) {};
+    , dataObject(P())
+    , ptr(std::shared_ptr<T>()) {};
   std::shared_ptr<T> ptr;
   P dataObject;
   Logger& l;

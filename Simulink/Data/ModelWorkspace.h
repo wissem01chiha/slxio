@@ -18,6 +18,7 @@
 #include "ABINamespace.h"
 #include "APIExport.h"
 #include "DataSourceType.h"
+#include "Logger.h"
 #include "Type.h"
 #include <string>
 #include <unordered_map>
@@ -37,31 +38,32 @@ public:
   ModelWorkspace();
   ~ModelWorkspace() = default;
 
-  /// @brief
+  /// @brief Get the value of a variable in the model workspace.
   std::string getVariable(const std::string& name) const;
 
-  /// @brief
+  /// @brief Assign a value to a variable in the model workspace.
   void assignVariable(const std::string& name, const std::string& value);
 
-  /// @brief
+  /// @brief Clear a variable from the model workspace.
   void clear(const std::string& name);
 
-  /// @brief
+  /// @brief Clear all variables from the model workspace.
   void clearAll();
 
-  /// @brief
+  /// @brief Get the data source type for this model workspace.
   DataSourceType getDataSource();
 
-  /// @brief
+  /// @brief Get the filename associated with this model workspace
   const char* getFilename();
 
-  /// @brief
+  /// @brief Get the MATLAB code associated with this model workspace
   std::string getMatlabCode();
 
 private:
-  DataSourceType dataSource = DataSourceType::ModelFile;
+  Logger& l;
   std::string fileName = "";
   std::string matlabCode = "";
+  DataSourceType dataSource;
   std::unordered_map<std::string, std::string> variables;
 };
 

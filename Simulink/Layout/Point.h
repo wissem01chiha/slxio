@@ -17,13 +17,14 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Point
+class APIEXPORT Point final
 {
 public:
   Point();
@@ -31,6 +32,8 @@ public:
   Point(const std::vector<uint32>& vec);
   std::vector<uint32> toVector() const;
 
+private:
+  Logger& l;
   uint32 x;
   uint32 y;
   uint32 width;

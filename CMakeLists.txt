@@ -42,6 +42,9 @@ option (ENABLE_FUZZING "Enable fuzzing support" OFF)
 option (ENABLE_DOCUMENTATION "Enable documentation generation" OFF)
 option (BUILD_EXAMPLES "Build example applications" OFF)
 
+set(LOGGER_USE_SLOG  TRUE)
+set(LOGGER_USE_LOGURU  FALSE)
+
 include (CheckCompilerSupport)
 include (CompilerFlags)
 include (CheckExternalInclude)

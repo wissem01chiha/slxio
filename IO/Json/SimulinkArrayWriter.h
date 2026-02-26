@@ -11,3 +11,28 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 // implied. See the License for the specific language governing
 // permissions and limitations under the License.
+
+#ifndef SIMULINKARRAYWRITER_H
+#define SIMULINKARRAYWRITER_H
+
+#include "ABINamespace.h"
+#include "APIExport.h"
+#include "Json-c.h"
+#include "SimulinkArray.h"
+#include "SimulinkWriterBase.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class APIEXPORT SimulinkArrayWriter
+  : public SimulinkWriterBase<SimulinkArray, json_object*>
+{
+public:
+  SimulinkArrayWriter() = default;
+  ~SimulinkArrayWriter() = default;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIMULINKARRAYWRITER_H

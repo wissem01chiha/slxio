@@ -17,6 +17,7 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"
 #include "SimulinkPort.h"
@@ -60,9 +61,10 @@ public:
   bool isConnected();
 
 private:
-  Index lineId;
-  std::shared_ptr<SimulinkPort> sourcePort = nullptr;
-  std::shared_ptr<SimulinkPort> destPort = nullptr;
+  Logger& l;
+  Index id;
+  std::shared_ptr<SimulinkPort> sourcePort;
+  std::shared_ptr<SimulinkPort> destPort;
 };
 
 SLXIO_ABI_NAMESPACE_END

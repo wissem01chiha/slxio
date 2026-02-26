@@ -25,7 +25,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Represents the type of a Simulink model.
  */
-class APIEXPORT SimulinkModelType
+class APIEXPORT SimulinkModelType final
 {
 public:
   enum Type
@@ -34,9 +34,12 @@ public:
     Model
   };
   SimulinkModelType() = default;
+  explicit SimulinkModelType(SimulinkModelType::Type type);
   static std::string toString(SimulinkModelType::Type type);
+  Type getType() const;
 
 private:
+  Type type;
 };
 
 SLXIO_ABI_NAMESPACE_END

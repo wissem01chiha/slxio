@@ -1,51 +1,57 @@
 #include "SimulinkBlock.h"
-#include "Logger.h"
 #include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlock::SimulinkBlock()
-  : blockName(std::string(""))
+  : name(std::string(""))
+  , l(Logger::getInstance())
 {
 }
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType_)
-  : blockType(blockType_)
+SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType)
+  : type(blockType)
+  , l(Logger::getInstance())
 {
 }
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType* blockType_)
-  : blockType(*blockType_)
+SimulinkBlock::SimulinkBlock(SimulinkBlockType* blockType)
+  : type(*blockType)
+  , l(Logger::getInstance())
 {
 }
 
 SimulinkBlockType SimulinkBlock::getBlockType()
 {
-  return blockType;
+  return type;
 }
 
 SimulinkBlock::SimulinkBlock(const SimulinkBlock& origBlock)
+  : l(Logger::getInstance())
 {
 
-  this->subBlocks = origBlock.subBlocks;
-  this->blockName = origBlock.blockName;
-  this->blockId = origBlock.blockId;
-  this->blockType = origBlock.blockType;
+  this->blocks = origBlock.blocks;
+  this->name = origBlock.name;
+  this->id = origBlock.id;
+  this->type = origBlock.type;
+  this->ports = origBlock.ports;
+  this->parent = origBlock.parent;
+  this->parameters = origBlock.parameters;
 }
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType_,
-  const char* blockName_, const Index& blockId_)
+SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
+  const char* blockName, const Index& blockId)
+  : type(blockType)
+  , name(std::string(blockName))
+  , id(blockId)
+  , l(Logger::getInstance())
 {
-  this->blockId = blockId_;
-  this->blockType = blockType_;
-  this->blockName = std::string(blockName_);
 }
 
 ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
 {
 
-  Logger& l = Logger::getInstance();
   if (element == nullptr)
   {
     l.log(Logger::Verbosity::V_ERROR,
@@ -75,7 +81,7 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
 
     if (contains(subblock->getID()))
     {
-      blockParent = std::make_shared<SimulinkBlock>(*subblock);
+      parent = std::make_shared<SimulinkBlock>(*subblock);
     }
     return ErrorCode::SLX_OK;
   }
@@ -90,7 +96,7 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
         "SimulinkParameter.");
       return ErrorCode::SLX_ECASTFAIL;
     }
-    blockParameters.push_back(parameter);
+    parameters.push_back(parameter);
     return ErrorCode::SLX_OK;
   }
   else
@@ -104,41 +110,44 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
   return ErrorCode::SLX_OK;
 }
 
+void SimulinkBlock::add(SimulinkPortType portType)
+{
+  // ports[portType] += (Index)1;
+}
+
 std::shared_ptr<SimulinkBlock> SimulinkBlock::getSubBlock(
-  const std::string& blockName_)
+  const std::string& blockName)
 {
 
-  for (const auto& blk : subBlocks)
+  for (const auto& blk : blocks)
   {
-    if (blk->blockName == blockName_)
+    if (blk->name == blockName)
     {
       return blk;
     }
   }
-  Logger::getInstance().log(Logger::V_WARNING, "No Sublock named ", blockName_,
-    "' found in Block ", blockName);
+  l.log(Logger::V_WARNING, "No Sublock named ", blockName, "' found in Block ",
+    name);
   return std::shared_ptr<SimulinkBlock>();
 }
 
-std::shared_ptr<SimulinkBlock> SimulinkBlock::getSubBlock(const Index& blockId_)
+std::shared_ptr<SimulinkBlock> SimulinkBlock::getSubBlock(const Index& blockId)
 {
-
-  Logger& l = Logger::getInstance();
-  if (blockId_ == 0)
+  if (blockId == 0)
   {
     l.log(Logger::V_ERROR, "SimulinkBlock:: block Id passed cannot be 0");
-    return nullptr;
+    return std::shared_ptr<SimulinkBlock>();
   }
-  for (const auto& sublock : subBlocks)
+  for (const auto& sublock : blocks)
   {
-    if (sublock->getID() == blockId_)
+    if (sublock->getID() == blockId)
     {
       return sublock;
     }
   }
   l.log(Logger::V_WARNING, "SimulinkBlock:: sublock given Id ",
-    std::to_string(blockId_), " not found");
-  return nullptr;
+    std::to_string(blockId), " not found");
+  return std::shared_ptr<SimulinkBlock>();
 }
 
 SimulinkElementType SimulinkBlock::getType() const
@@ -148,32 +157,30 @@ SimulinkElementType SimulinkBlock::getType() const
 
 Index SimulinkBlock::getID() const
 {
-  return blockId;
+  return id;
 }
 
-void SimulinkBlock::setID(const Index& blockId_)
+void SimulinkBlock::setID(const Index& blockId)
 {
-  blockId = blockId_;
+  id = blockId;
 }
 
-void SimulinkBlock::setName(const std::string& blockName_)
+void SimulinkBlock::setName(const std::string& blockName)
 {
-  blockName = blockName_;
+  name = blockName;
 }
 
-void SimulinkBlock::setBlockType(SimulinkBlockType::Type blockType_)
+void SimulinkBlock::setBlockType(SimulinkBlockType::Type blockType)
 {
-  blockType = blockType_;
+  type = blockType;
 }
 
 ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
 {
-
-  Logger& l = Logger::getInstance();
   if (element == nullptr)
   {
     l.log(Logger::V_WARNING,
-      "SimulinkBlock:: Removing a null Simulink element "
+      "SimulinkBlock:: removing a null Simulink element "
       "pointer from subelement");
     return ErrorCode::SLX_ENOENT;
   }
@@ -182,9 +189,9 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
   if (!(element_t.isA(SimulinkElementType::Type::Block)))
   {
     l.log(Logger::V_ERROR,
-      "SimulinkBlock:: Cannot remove a Simulink element of a "
+      "SimulinkBlock:: cannot remove a Simulink element of a "
       "different "
-      "blockType than Block.");
+      "type than Block.");
     return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
@@ -193,17 +200,17 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
   if (subblock == nullptr)
   {
     l.log(Logger::V_ERROR,
-      "SimulinkBlock:: Failed to cast SimulinkElementBase to "
+      "SimulinkBlock:: failed to cast SimulinkElementBase to "
       "SimulinkBlock.");
-    return ErrorCode::SLX_OK;
+    return ErrorCode::SLX_ECASTFAIL;
   }
 
-  if (subBlocks.empty())
+  if (blocks.empty())
   {
     return ErrorCode::SLX_OK;
   }
 
-  for (const auto& subBlock : subBlocks)
+  for (const auto& subBlock : blocks)
   {
     subBlock->remove(subblock);
   }
@@ -215,34 +222,26 @@ std::string SimulinkBlock::toString() const
   std::ostringstream oss;
 
   oss << "SimulinkBlock {\n";
-  oss << "  Name: " << blockName << "\n";
-  oss << "  ID: " << blockId << "\n";
-  oss << "  Type: " << blockType.toString() << "\n";
-  oss << "  Ports: " << blockPorts.size() << "\n";
-  oss << "  SubBlocks: " << subBlocks.size() << "\n";
-  oss << "  Parameters: " << blockParameters.size() << "\n";
+  oss << "  Name: " << name << "\n";
+  oss << "  ID: " << id << "\n";
+  oss << "  Type: " << type.toString() << "\n";
+  oss << "  Ports: " << ports.size() << "\n";
+  oss << "  SubBlocks: " << blocks.size() << "\n";
+  oss << "  Parameters: " << parameters.size() << "\n";
   oss << "}\n";
   return oss.str();
 }
 
-ErrorCode SimulinkBlock::addPort(SimulinkPortType portType_)
-{
-  // blockPorts[portType] += (uint32)1;
-  return ErrorCode::SLX_OK;
-}
-
 std::shared_ptr<SimulinkParameter> SimulinkBlock::getParameter(
-  const char* blockParameterName_)
+  const char* parameterName)
 {
-
-  Logger& l = Logger::getInstance();
-  if (blockParameterName_ == nullptr)
+  if (parameterName == nullptr)
   {
     l.log(Logger::V_WARNING,
       "SimulinkBlock:: getParameter called with null parameter name");
     return nullptr;
   }
-  if (blockParameters.empty())
+  if (parameters.empty())
   {
     l.log(Logger::V_WARNING,
       "SimulinkBlock:: getParameter called but block has no "
@@ -250,27 +249,27 @@ std::shared_ptr<SimulinkParameter> SimulinkBlock::getParameter(
     return nullptr;
   }
 
-  for (const auto& blockParameter_ : blockParameters)
+  for (const auto& blockParameter : parameters)
   {
-    const char* value = blockParameter_->getName();
-    if (value != nullptr && strcmp(value, blockParameterName_) == 0)
+    const char* value = blockParameter->getName();
+    if (value != nullptr && strcmp(value, parameterName) == 0)
     {
-      return blockParameter_;
+      return blockParameter;
     }
   }
-  return nullptr;
+  return std::make_shared<SimulinkParameter>();
 }
 
 std::string SimulinkBlock::getName()
 {
-  return blockName;
+  return name;
 }
 
-bool SimulinkBlock::contains(const Index& blockId_) const
+bool SimulinkBlock::contains(const Index& blockId) const
 {
-  for (const auto& block : subBlocks)
+  for (const auto& block : blocks)
   {
-    if (block && block->getID() == blockId_)
+    if (block && block->getID() == blockId)
     {
       return true;
     }
@@ -280,7 +279,7 @@ bool SimulinkBlock::contains(const Index& blockId_) const
 
 std::shared_ptr<SimulinkBlock> SimulinkBlock::getParent()
 {
-  return blockParent;
+  return parent;
 }
 
 SLXIO_ABI_NAMESPACE_END

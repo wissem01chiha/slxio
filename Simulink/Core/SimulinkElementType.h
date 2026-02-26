@@ -23,9 +23,6 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief
- */
 class APIEXPORT SimulinkElementType
 {
 public:
@@ -49,7 +46,7 @@ public:
   bool isA(const SimulinkElementType::Type& type);
   friend bool operator==(
     const SimulinkElementType& lhs, const SimulinkElementType& rhs);
-  SimulinkElementType(SimulinkElementType::Type typeName);
+  explicit SimulinkElementType(SimulinkElementType::Type typeName);
   static SimulinkElementType& getInstance();
   static SimulinkElementType::Type toType(const char* typeName);
   static const char* toString(SimulinkElementType::Type type);

@@ -25,9 +25,6 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-#define LOGGER_USE_SLOG
-// #define LOGGER_USE_LOGURU
-
 /**
  * @class Logger
  * @brief Main Logging handler class for the librray
@@ -128,7 +125,6 @@ protected:
 private:
   Logger();
   Logger(const Logger&) = delete;
-  Logger& operator=(const Logger&) = delete;
   Logger::Verbosity internalVerbosityLevel;
   File::Mode filemode;
 };

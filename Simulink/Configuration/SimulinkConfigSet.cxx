@@ -68,7 +68,8 @@ ErrorCode SimulinkConfigSet::setParameter(const char* name, const char* value)
     param->setValue(value);
     return ErrorCode::SLX_OK;
   }
-
+  l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+    " not found in configuration set. Cannot set value.");
   return ErrorCode::SLX_ENOENT;
 }
 
@@ -139,6 +140,11 @@ void SimulinkConfigSet::activate()
 
 void SimulinkConfigSet::deactivate()
 {
+  if (!status)
+  {
+    l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
+      object->getName());
+  }
   status = false;
 }
 

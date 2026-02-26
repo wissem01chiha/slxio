@@ -3,17 +3,27 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+SimulinkModelType::SimulinkModelType(SimulinkModelType::Type type)
+  : type(type)
+{
+}
+
 std::string SimulinkModelType::toString(SimulinkModelType::Type type)
 {
   switch (type)
   {
     case SimulinkModelType::Library:
-      return "Library";
+      return std::string("Library");
     case SimulinkModelType::Model:
-      return "Model";
+      return std::string("Model");
     default:
-      return "Unknown";
+      return std::string("");
   }
+}
+
+SimulinkModelType::Type SimulinkModelType::getType() const
+{
+  return type;
 }
 
 SLXIO_ABI_NAMESPACE_END

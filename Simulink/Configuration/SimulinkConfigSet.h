@@ -120,9 +120,7 @@ public:
 
 private:
   Logger& l;
-
   bool status = false;
-
   std::shared_ptr<SimulinkObject> object;
   std::shared_ptr<SimulinkSolver> solver;
   std::shared_ptr<SimulinkOptimization> optimization;

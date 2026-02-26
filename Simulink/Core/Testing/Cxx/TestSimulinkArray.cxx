@@ -5,45 +5,38 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkArrayTestFixture
+TEST_CASE("CopyConstructorTest")
 {
-public:
-protected:
-};
-
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "CopyConstructorTest")
-{
-
-  SimulinkArray* original = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> original = std::make_shared<SimulinkArray>();
   auto param = std::make_shared<SimulinkParameter>("5");
 
   ErrorCode status = original->add(param);
+
   CHECK_MESSAGE(status == ErrorCode::SLX_OK,
     "Fail to add Parameter to Simulink Array - ErrorCode: ", status);
-  //   SimulinkArray copy(*original);
 
-  //  CHECK(copy.getType()== original->getType());
-  //   CHECK(copy.toString()== original->toString());
-  //   CHECK(copy.getID()==original->getID());
-  delete original;
+  SimulinkArray copy(*original);
+
+  CHECK(copy.getType() == original->getType());
+  CHECK(copy.toString() == original->toString());
+  CHECK(copy.getID() == original->getID());
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "AddArrayTest")
+TEST_CASE("AddArrayTest")
 {
 
-  SimulinkArray* array = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   auto subArray =
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->add(subArray);
   CHECK(status == ErrorCode::SLX_OK);
-  delete array;
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveArrayTest")
+TEST_CASE("RemoveArrayTest")
 {
 
-  SimulinkArray* array = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   auto subArray =
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
@@ -52,41 +45,35 @@ TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveArrayTest")
 
   ErrorCode RemoveStatus = array->remove(subArray);
   CHECK(RemoveStatus == ErrorCode::SLX_OK);
-  delete array;
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveNullptrArrayTest")
+TEST_CASE("RemoveNullptrArrayTest")
 {
-
-  SimulinkArray* array = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   ErrorCode status = array->remove(nullptr);
   CHECK(status == ErrorCode::SLX_ENULLPTR);
-  delete array;
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "RemoveNotElementArrayTest")
+TEST_CASE("RemoveNotElementArrayTest")
 {
 
-  SimulinkArray* array = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   auto subArray =
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->remove(subArray);
   CHECK(status == ErrorCode::SLX_OK);
-  delete array;
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayTestFixture, "ConatinsArrayTest")
+TEST_CASE("ContainsArrayTest")
 {
-
-  SimulinkArray* array = new SimulinkArray();
+  std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   auto subObject = std::make_shared<SimulinkObject>(
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = array->add(subObject);
   CHECK(status == ErrorCode::SLX_OK);
   CHECK(array->contains(1));
-  delete array;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -29,8 +29,29 @@ class APIEXPORT EditorSettings final
 {
 public:
   EditorSettings() = default;
+  ~EditorSettings() = default;
+
   bool getShowPortDataTypes();
   bool getSampleTimeColors();
+  bool getShowLineDimensions();
+  bool getShowPortUnits();
+  bool getShowLoopsOnError();
+  bool getShowStorageClass();
+  bool getShowTestPointIcons();
+  bool getShowSignalResolutionIcons();
+  bool getShowViewerIcons();
+  bool getShowVisualizeInsertedRTB();
+  bool getShowMarkup();
+  bool getBlockNameDataTip();
+  bool getBlockParametersDataTip();
+  bool getBlockDescriptionStringDataTip();
+  bool getBlockVariantConditionDataTip();
+  bool getToolBar();
+  bool getStatusBar();
+  bool getBrowserShowLibraryLinks();
+  bool getFunctionConnectors();
+  bool getBrowserLookUnderMasks();
+  bool getMultiThreadCoSim();
 
 private:
   const char* LibraryLinkDisplay;

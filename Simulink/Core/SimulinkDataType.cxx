@@ -95,7 +95,7 @@ const char* toChar(SimulinkDataType sldt)
     case SimulinkDataType::String:
       return "string";
     default:
-      return "unknown";
+      return "";
   }
 }
 

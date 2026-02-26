@@ -17,6 +17,7 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
@@ -74,13 +75,14 @@ public:
 
   /// @brief Get a specific line by its ID.
   /// @note Each line should have a unique identifier.
-  std::shared_ptr<SimulinkLine> getLine(const Index& lineId_);
+  std::shared_ptr<SimulinkLine> getLine(const Index& lineId);
 
 private:
-  Index portBlockId;
-  SimulinkPortType portType;
-  std::shared_ptr<SimulinkBlock> portBlock;
-  std::vector<std::shared_ptr<SimulinkLine>> portLines;
+  Logger& l;
+  Index blockId;
+  SimulinkPortType type;
+  std::shared_ptr<SimulinkBlock> block;
+  std::vector<std::shared_ptr<SimulinkLine>> lines;
 };
 
 SLXIO_ABI_NAMESPACE_END

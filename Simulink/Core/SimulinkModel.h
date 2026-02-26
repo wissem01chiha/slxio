@@ -17,6 +17,7 @@
 
 #include "ABINamespace.h"
 #include "APIExport.h"
+#include "Logger.h"
 #include "ModelWorkspace.h"
 #include "SimulationSettings.h"
 #include "SimulinkArray.h"
@@ -34,7 +35,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Simulink model  */
-class SimulinkModel : public SimulinkElementBase
+class APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
 public:
   SimulinkModel();
@@ -59,14 +60,15 @@ public:
   std::shared_ptr<ModelWorkspace> getWorkspace();
 
 private:
-  SimulinkModelType modelType;
-  Index modelId;
-  uint32 modelVersion;
-  std::shared_ptr<ModelWorkspace> modelWorkspace;
-  std::shared_ptr<SimulationSettings> modelSimSet;
-  std::vector<std::shared_ptr<SimulinkBlock>> modelBlocks;
-  std::vector<std::shared_ptr<SimulinkLine>> modelLines;
-  std::vector<std::shared_ptr<SimulinkParameter>> modelParameters;
+  Logger& l;
+  Index id;
+  uint32 version;
+  SimulinkModelType type;
+  std::shared_ptr<ModelWorkspace> workspace;
+  std::shared_ptr<SimulationSettings> simSet;
+  std::vector<std::shared_ptr<SimulinkBlock>> blocks;
+  std::vector<std::shared_ptr<SimulinkLine>> lines;
+  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

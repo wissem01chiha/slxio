@@ -4,20 +4,26 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class ModelWorkspaceTestFixture
+TEST_CASE("ModelWorkspaceVariableTest")
 {
-public:
-  ModelWorkspaceTestFixture() {}
-  ~ModelWorkspaceTestFixture() {}
-
-protected:
   ModelWorkspace workspace;
-};
+  workspace.assignVariable("var1", "value1");
+  CHECK(workspace.getVariable("var1") == "value1");
 
-TEST_CASE_FIXTURE(ModelWorkspaceTestFixture, "ModelWorkspace Constructor Test")
+  workspace.assignVariable("var2", "value2");
+  CHECK(workspace.getVariable("var2") == "value2");
+
+  workspace.clear("var1");
+  CHECK(workspace.getVariable("var1") == "");
+
+  workspace.clearAll();
+  CHECK(workspace.getVariable("var2") == "");
+}
+
+TEST_CASE("ModelWorkspaceDataSourceTest")
 {
-  // CHECK(workspace.hasVariable("non_existent_variable") == false);
-  CHECK(1 == 1);
+  ModelWorkspace workspace;
+  CHECK(workspace.getDataSource() == DataSourceType::ModelFile);
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -16,6 +16,7 @@
 #define SIMULINKARRAY_H
 
 #include "ABINamespace.h"
+#include "Logger.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
 #include "Type.h"
@@ -26,8 +27,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Base class for Simulink Array.
- * An SLX Array can contain nested arrays as well as objects derived
- * from the SimulinkObject class. For object references, it maintains
+ * An slx Array can contain nested arrays as well as objects derived
+ * from the SimulinkObject class. for object references, it maintains
  * a list of object IDs to avoid mutable inclusion, forward
  * declarations, and compiler conflicts.
  */
@@ -50,10 +51,11 @@ public:
   bool contains(const Index& id) const override;
 
 private:
-  Index arrayId;
-  std::string arrayType;
-  std::string arrayName;
-  std::string arrayDimension;
+  Index id;
+  Logger& l;
+  std::string type;
+  std::string name;
+  std::string dimension;
   std::vector<uint32> objects;
   std::vector<std::shared_ptr<SimulinkArray>> subArrays;
   std::vector<std::shared_ptr<SimulinkParameter>> parameters;

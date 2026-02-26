@@ -1,5 +1,4 @@
 #include "SimulinkLine.h"
-#include "Logger.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -8,10 +7,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 SimulinkLine::SimulinkLine()
   : destPort(nullptr)
   , sourcePort(nullptr)
+  , l(Logger::getInstance())
 {
 }
 
 SimulinkLine::SimulinkLine(const SimulinkLine& other)
+  : l(Logger::getInstance())
 {
   this->destPort = other.destPort;
   this->sourcePort = other.sourcePort;
@@ -21,10 +22,12 @@ SimulinkLine::SimulinkLine(
   std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
   : destPort(pIn)
   , sourcePort(pOut)
+  , l(Logger::getInstance())
 {
 }
 
 SimulinkLine::SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_)
+  : l(Logger::getInstance())
 {
 
   sourcePort = std::make_shared<SimulinkPort>(sourcePort_);
@@ -33,7 +36,7 @@ SimulinkLine::SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_)
 
 SimulinkElementType SimulinkLine::getType() const
 {
-  return SimulinkElementType::Line;
+  return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
 ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element)
@@ -41,8 +44,7 @@ ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element)
 
   if (element == nullptr)
   {
-    Logger::getInstance().log(
-      Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
     return ErrorCode::SLX_ENULLPTR;
   }
 
@@ -65,8 +67,7 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element)
 
   if (element == nullptr)
   {
-    Logger::getInstance().log(
-      Logger::V_WARNING, "Cannot add a null Simulink element.");
+    l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
     return ErrorCode::SLX_ENULLPTR;
   }
 
@@ -86,12 +87,12 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element)
 
 Index SimulinkLine::getID() const
 {
-  return lineId;
+  return id;
 }
 
 bool SimulinkLine::contains(const Index& id) const
 {
-  return lineId == id;
+  return this->id == id;
 }
 
 bool SimulinkLine::isConnected()
@@ -103,7 +104,7 @@ std::string SimulinkLine::toString() const
 {
 
   std::ostringstream oss;
-  oss << "SimulinkLine[ID=" << lineId;
+  oss << "SimulinkLine[ID=" << id;
   oss << ", Source=  " << sourcePort->toString();
   oss << ", Destination=  " << destPort->toString();
   oss << "]";

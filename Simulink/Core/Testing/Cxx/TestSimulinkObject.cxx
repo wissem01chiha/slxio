@@ -4,21 +4,14 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkObjectTestFixture
+TEST_CASE("AddNullParameterTest")
 {
-public:
-protected:
-  SimulinkObject obj;
-};
-
-TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddNullParameterTest")
-{
-
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
   ErrorCode status = obj.add(nullptr);
   CHECK(status == ErrorCode::SLX_ENULLPTR);
 }
 
-TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest")
+TEST_CASE("AddSimulinkParameterTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
@@ -28,7 +21,35 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddSimulinkParameterTest")
   CHECK(status == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest")
+TEST_CASE("AddSubObjectTest")
+{
+
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject = std::make_shared<SimulinkObject>(
+    1, "DataTransfer", "Simulink.GlobalDataTransfer");
+
+  ErrorCode status = obj.add(subObject);
+  CHECK(status == ErrorCode::SLX_OK);
+}
+
+TEST_CASE("GetParameterTest")
+{
+
+  SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto param = std::make_shared<SimulinkParameter>();
+  param->setName("Solver");
+  param->setValue("ode45");
+
+  ErrorCode status = obj.add(param);
+  CHECK(status == ErrorCode::SLX_OK);
+
+  std::shared_ptr<SimulinkParameter> retrievedParam =
+    obj.getParameter("Solver");
+  CHECK(retrievedParam != nullptr);
+  CHECK(std::string(retrievedParam->getValue()) == "ode45");
+}
+
+TEST_CASE("AddArrayTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
@@ -39,7 +60,7 @@ TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "AddArrayTest")
   CHECK(status == ErrorCode::SLX_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkObjectTestFixture, "ContainsObjectTest")
+TEST_CASE("ContainsObjectTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
