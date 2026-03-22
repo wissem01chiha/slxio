@@ -28,6 +28,10 @@ struct json_object;
 #include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 
+#ifdef _MSC_VER
+#include <BaseTsd.h>
+typedef SSIZE_T ssize_t;
+#endif
 
 /* json object int type, support extension*/
 typedef enum json_object_int_type

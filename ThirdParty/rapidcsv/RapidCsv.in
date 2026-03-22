@@ -12,15 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SLOG_H
-#define SLOG_H
+#ifndef __RAPIDCSV_H__
+#define __RAPIDCSV_H__
 
-#cmakedefine USE_EXTERNAL_SLOG
+#cmakedefine USE_EXTERNAL_RAPIDCSV
 
-#ifdef USE_EXTERNAL_SLOG
+#ifdef USE_EXTERNAL_RAPIDCSV
 #include <slog.h>
 #else
 #include <src/slog.h>
 #endif 
 
-#endif //  SLOG_H
+#endif //  __RAPIDCSV_H__

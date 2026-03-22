@@ -1,1 +1,1 @@
-add_module(ThirdParty::capidcsv)
+add_module(ThirdParty::rapidcsv)

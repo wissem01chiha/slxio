@@ -12,8 +12,6 @@ Documentation can be found at https://emilk.github.io/loguru/index.html.
 ## License
 This software is in the public domain. Where that dedication is not recognized, you are granted a perpetual, irrevocable license to copy, modify and distribute it as you see fit.
 
-Loguru is also available under [The Unlicense](https://choosealicense.com/licenses/unlicense/).
-
 That being said, I would appreciate credit!
 If you find Loguru useful, tweet me at @ernerfeldt mail me at emil.ernerfeldt@gmail.com.
 
@@ -82,22 +80,11 @@ In particular, I want logging that produces logs that are both human-readable an
 	* Each line has all the info you need (e.g. date).
 	* You can easily filter out high verbosity levels after the fact.
 
-
 ## Compiling
 
 Just include <loguru.hpp> where you want to use Loguru.
 Then either compile and link with `loguru.cpp` or in one .cpp file: `#include <loguru.cpp>`
 Make sure you compile with `-std=c++11 -lpthread -ldl` on relevant environments.
-
-## CMake Instructions
-
-Loguru can be added to an existing CMake project in three ways
-
-1. `add_subdirectory()`
-2. `FetchContent()`
-3. `find_package()`
-
-See [CMake example](./loguru_cmake_example/CMakeLists.txt) for a demonstration.
 
 ## Usage
 

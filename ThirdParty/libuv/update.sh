@@ -1,19 +1,56 @@
-#=============================================================================
-# Copyright 2025-2026 Wissem Chiha
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http:#www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-# implied. See the License for the specific language governing
-# permissions and limitations under the License.
-#=============================================================================
-
 #!/bin/bash
 
+# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
 set -e
+
+name="libuv"
+repository="https://github.com/libuv/libuv"
+subtree="$name/src"
+version="1.52.1"
+tag=""
+files=(
+    "AUTHORS"
+    "LICENSE"
+    "LICENSE-docs"
+    "LICENSE-extra"
+    "README.md"
+    "include/uv.h"
+    "include/uv/aix.h"
+    "include/uv/bsd.h"
+    "include/uv/darwin.h"
+    "include/uv/errno.h"
+    "include/uv/linux.h"
+    "include/uv/os390.h"
+    "include/uv/posix.h"
+    "include/uv/sunos.h"
+    "include/uv/threadpool.h"
+    "include/uv/tree.h"
+    "include/uv/unix.h"
+    "include/uv/version.h"
+    "include/uv/win.h"
+    "src/fs-poll.c"
+    "src/heap-inl.h"
+    "src/idna.c"
+    "src/idna.h"
+    "src/inet.c"
+    "src/queue.h"
+    "src/random.c"
+    "src/strscpy.c"
+    "src/strscpy.h"
+    "src/strtok.c"
+    "src/strtok.h"
+    "src/thread-common.c"
+    "src/threadpool.c"
+    "src/timer.c"
+    "src/uv-common.c"
+    "src/uv-common.h"
+    "src/uv-data-getter-setters.c"
+    "src/version.c"
+    "src/unix/aix-common.c"
+    "src/unix/aix.c"
+    "src/unix/async.c"
+    "src/unix/bsd-ifaddrs.c"
+    "src/unix/bsd-proctitle.c"
+)

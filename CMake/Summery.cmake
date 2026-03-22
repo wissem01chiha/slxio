@@ -26,14 +26,6 @@ message (STATUS "Install             : ${ENABLE_INSTALL}")
 message (STATUS "Install prefix      : ${CMAKE_INSTALL_PREFIX}")
 message (STATUS "Package Config      : ${ENABLE_PKGCONFIG}")
 
-message (STATUS "HDF5 Enabled        : ${ENABLE_HDF5}")
-message (STATUS "HDF5 Found          : ${HDF5_FOUND}")
-message (STATUS "HDF5 Version        : ${HDF5_VERSION}")
-
-message (STATUS "Matlab Enabled      : ${ENABLE_MATLAB}")
-message (STATUS "Matlab Found        : ${Matlab_FOUND}")
-message (STATUS "Matlab Version      : ${Matlab_VERSION}")
-
 message (STATUS "OpenMP Enabled      : ${ENABLE_OPENMP}")
 message (STATUS "OpenMP Found        : ${OpenMP_FOUND}")
 message (STATUS "OpenMP Version      : ${OpenMP_C_VERSION}")

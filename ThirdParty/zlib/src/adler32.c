@@ -57,19 +57,10 @@
 #  define MOD63(a) a %= BASE
 #endif
 
-#if defined(ADLER32_SIMD_NEON) || defined (ADLER32_SIMD_SSSE3)
-#include "adler32_simd.h"
-#endif
-
 /* ========================================================================= */
 uLong ZEXPORT adler32_z(uLong adler, const Bytef *buf, z_size_t len) {
     unsigned long sum2;
     unsigned n;
-
-#if defined(ADLER32_SIMD_NEON) || defined(ADLER32_SIMD_SSSE3)
-    if (buf && len >= 64)
-        return adler32_simd_(adler, buf, len);
-#endif
 
     /* split Adler-32 into component sums */
     sum2 = (adler >> 16) & 0xffff;

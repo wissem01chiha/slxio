@@ -90,8 +90,7 @@ typedef char bool;
 #if defined(HAVE__DUP)
 #define dup _dup
 #endif
-/* crashes reported when using fdopen instead of _fdopen on Windows/Visual
- * Studio 10/Win64 */
+/* crashes reported when using fdopen instead of _fdopen on Windows/Visual Studio 10/Win64 */
 #if defined(HAVE__FDOPEN)
 #define fdopen _fdopen
 #endif
@@ -102,8 +101,7 @@ typedef char bool;
 #define snprintf _snprintf
 #endif
 #if !defined(HAVE__SNWPRINTF_S)
-#define _snwprintf_s(buf, bufsz, len, fmt, ...)                                \
-  (_snwprintf((buf), (len), (fmt), __VA_ARGS__))
+#define _snwprintf_s(buf, bufsz, len, fmt, ...) (_snwprintf((buf), (len), (fmt), __VA_ARGS__))
 #endif
 #if defined(HAVE__STRDUP)
 #if !defined(HAVE_STRDUP) || defined(_WIN32)
@@ -124,6 +122,7 @@ typedef char bool;
 #define unlink _unlink
 #endif
 #endif
+
 
 #if defined(HAVE__FSEEKI64) && defined(HAVE__FSTAT64) && defined(HAVE__SEEK64)
 /* Windows API using int64 */
@@ -181,6 +180,7 @@ typedef long zip_off_t;
 #define ftello(s) ((long)ftell((s)))
 #endif
 
+
 #ifdef HAVE_LOCALTIME_S
 #ifdef _WIN32
 /* Windows is incompatible to the C11 standard, hurray! */
@@ -197,14 +197,12 @@ typedef long zip_off_t;
 #endif
 
 #ifndef HAVE_MEMCPY_S
-#define memcpy_s(dest, destsz, src, count)                                     \
-  (memcpy((dest), (src), (count)) == NULL)
+#define memcpy_s(dest, destsz, src, count) (memcpy((dest), (src), (count)) == NULL)
 #endif
 
 #ifndef HAVE_SNPRINTF_S
 #ifdef HAVE__SNPRINTF_S
-#define snprintf_s(buf, bufsz, fmt, ...)                                       \
-  (_snprintf_s((buf), (bufsz), (bufsz), (fmt), __VA_ARGS__))
+#define snprintf_s(buf, bufsz, fmt, ...) (_snprintf_s((buf), (bufsz), (bufsz), (fmt), __VA_ARGS__))
 #else
 #define snprintf_s snprintf
 #endif
@@ -224,14 +222,13 @@ typedef long zip_off_t;
 
 #ifndef HAVE_STRERROR_S
 #define strerrorlen_s(errnum) (strlen(strerror(errnum)))
-#define strerror_s(buf, bufsz, errnum)                                         \
-  ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)),                 \
-   (buf)[(bufsz)-1] = '\0', strerrorlen_s(errnum) >= (bufsz))
+#define strerror_s(buf, bufsz, errnum) ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)), (buf)[(bufsz)-1] = '\0', strerrorlen_s(errnum) >= (bufsz))
 #else
 #ifndef HAVE_STRERRORLEN_S
-#define strerrorlen_s(errnum) 8192
+#define strerrorlen_s(errnum)   8192
 #endif
 #endif
+
 
 #ifndef SIZE_MAX
 #if SIZEOF_SIZE_T == 8

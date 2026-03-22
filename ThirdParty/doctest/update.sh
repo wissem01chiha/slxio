@@ -1,19 +1,23 @@
-#=============================================================================
-# Copyright 2025-2026 Wissem Chiha
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http:#www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-# implied. See the License for the specific language governing
-# permissions and limitations under the License.
-#=============================================================================
-
 #!/bin/bash
 
+# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
 set -e
+
+name="doctest"
+repository="https://github.com/doctest/doctest"
+subtree="$name/src"
+version="2.4.12"
+tag=""
+files=(
+    "doctest/doctest.h"
+    "doctest/extensions/doctest_mpi.h"
+    "doctest/extensions/doctest_util.h"
+    "doctest/extensions/mpi_reporter.h"
+    "doctest/extensions/mpi_sub_comm.h"
+    "doctest/parts/doctest.cpp" 
+    "doctest/parts/doctest_fwd.h"
+    "LICENSE.txt" 
+    "README.md"
+)

@@ -776,14 +776,14 @@ foreach(lib IN LISTS uv_libraries)
 endforeach()
 string(REPLACE ";" " " LIBS "${LIBS}")
 # Consider setting project version via project() call?
-file(STRINGS configure.ac configure_ac REGEX ^AC_INIT)
+#file(STRINGS configure.ac configure_ac REGEX ^AC_INIT)
 string(REGEX MATCH "([0-9]+)[.][0-9]+[.][0-9]+" PACKAGE_VERSION "${configure_ac}")
 set(UV_VERSION_MAJOR "${CMAKE_MATCH_1}")
 
 set(includedir ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_INCLUDEDIR})
 set(libdir ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 set(prefix ${CMAKE_INSTALL_PREFIX})
-configure_file(libuv-static.pc.in libuv-static.pc @ONLY)
+#configure_file(libuv-static.pc.in libuv-static.pc @ONLY)
 
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DOCDIR})
@@ -840,11 +840,3 @@ set_target_properties(${LIB_SELECTED} PROPERTIES
   target_bin_include_dir ${LIBUV_PARENT_BINARY_DIR}
 )
 
-
-#message(STATUS "summary of build options:
-#     Install prefix:  ${CMAKE_INSTALL_PREFIX}
-#     Target system:   ${CMAKE_SYSTEM_NAME}
-#     Compiler:
-#       C compiler:    ${CMAKE_C_COMPILER} (${CMAKE_C_COMPILER_ID})
-#       CFLAGS:        ${CMAKE_C_FLAGS_${_build_type}} ${CMAKE_C_FLAGS}
-# ")

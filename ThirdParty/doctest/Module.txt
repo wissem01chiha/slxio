@@ -1,13 +1,22 @@
 NAME
   ThirdParty::doctest
-DESCRIPTION
-  Syslink Doctest Third Party Module
-LICENSE
+LIBRARY_NAME
+  ThirdPartydoctest
+SPDX_LICENSE_IDENTIFIER
   Apache-2.0
+SPDX_COPYRIGHT_TEXT
+  Copyright (c) 2016-2023 Viktor Kirilov
+SPDX_CUSTOM_LICENSE_FILE
+  src/LICENSE.txt
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/LICENSE.txt
+DESCRIPTION
+  The fastest feature-rich C++11/14/17/20/23 single-header testing framework
 VERSION
-  0.1.0
+  2.4.12
 MAINTAINER
-  Wissem CHIHA
+  Viktor Kirilov <vik.kirilov@gmail.com>
 ENABLE_BUILD
   TRUE
 EXTERNAL_BUILD
@@ -17,28 +26,25 @@ ENABLE_TEST
   TRUE
 ENABLE_BUILD
   TRUE
-ENABLE_DOCU
-  FALSE
-ENABLE_BINDING
-  FALSE
 INSTALL_HEADERS
   TRUE
 INSTALL_TARGETS
   TRUE
 CLASSES
 SOURCES
-  src/parts/doctest.cpp
+  src/doctest/parts/doctest.cpp
 HEADERS
-  src/doctest.h
-  src/parts/doctest_fwd.h
-  src/extensions/doctest_mpi.h
-  src/extensions/doctest_util.h
-  src/extensions/mpi_reporter.h
-  src/extensions/mpi_sub_comm.h
+  src/doctest/doctest.h
+  src/doctest/parts/doctest_fwd.h
+  src/doctest/extensions/doctest_mpi.h
+  src/doctest/extensions/doctest_util.h
+  src/doctest/extensions/mpi_reporter.h
+  src/doctest/extensions/mpi_sub_comm.h
 CONFIG_HEADERS
   Doctest.h.in
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
+WINDOWS_DEPENDS
 TEST_DEPENDS
 TEST_OPTIONAL_DEPENDS

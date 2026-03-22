@@ -1,13 +1,22 @@
 NAME
   ThirdParty::cxxopts
+LIBRARY_NAME
+  ThirdPartycxxopts
+SPDX_LICENSE_IDENTIFIER
+  MIT
+SPDX_COPYRIGHT_TEXT
+  Copyright (c) Jarryd Beck
+SPDX_CUSTOM_LICENSE_FILE
+  src/LICENSE
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/LICENSE
 DESCRIPTION
-  Cxxopts Third Party Library
-LICENSE
-  MIT-license
+  Lightweight C++ command line option parser
 VERSION
   3.3.1
 MAINTAINER
-  Jarryd Beck
+  Jarryd Beck <https://github.com/jarro2783>
 ENABLE_BUILD
   TRUE
 EXTERNAL_BUILD
@@ -17,24 +26,21 @@ ENABLE_TEST
   TRUE
 ENABLE_BUILD
   TRUE
-ENABLE_DOC
-  FALSE
-ENABLE_BINDING
-  FALSE
 INSTALL_HEADERS
   TRUE
 INSTALL_TARGETS
   FALSE
 CLASSES
 SOURCES
-    src/cxxopts.cpp
+  src/cxxopts.cxx
 HEADERS
-    src/cxxopts.hpp
+  src/include/cxxopts.hpp
 CONFIG_HEADERS
   Cxxopts.h.in
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
+WINDOWS_DEPENDS
 TEST_DEPENDS
 TEST_OPTIONAL_DEPENDS
   
