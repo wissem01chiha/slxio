@@ -1056,6 +1056,39 @@ int uv__io_active(const uv__io_t* w, unsigned int events) {
 }
 
 
+void uv__io_poll_prepare(uv_loop_t* loop, sigset_t* pset, int timeout) {
+  uv__loop_internal_fields_t* lfields;
+
+  /* Only need to set the provider_entry_time if timeout != 0. The function
+   * will return early if the loop isn't configured with UV_METRICS_IDLE_TIME.
+   */
+  if (timeout != 0)
+    uv__metrics_set_provider_entry_time(loop);
+
+  /* Store the current timeout in a location that's globally accessible so
+   * other locations like uv__work_done() can determine whether the queue
+   * of events in the callback were waiting when poll was called.
+   */
+  lfields = uv__get_internal_fields(loop);
+  lfields->current_timeout = timeout;
+
+  if (pset != NULL)
+    if (pthread_sigmask(SIG_BLOCK, pset, NULL))
+      abort();
+}
+
+void uv__io_poll_check(uv_loop_t* loop, sigset_t* pset) {
+  if (pset != NULL)
+    if (pthread_sigmask(SIG_UNBLOCK, pset, NULL))
+      abort();
+
+  /* Update loop->time unconditionally. It's tempting to skip the update when
+   * timeout == 0 (i.e. non-blocking poll) but there is no guarantee that the
+   * operating system didn't reschedule our process while in the syscall.
+   */
+  SAVE_ERRNO(uv__update_time(loop));
+}
+
 int uv__fd_exists(uv_loop_t* loop, int fd) {
   return (unsigned) fd < loop->nwatchers && loop->watchers[fd] != NULL;
 }
@@ -2148,4 +2181,28 @@ int uv__sock_reuseport(int fd) {
 #endif
 
   return 0;
+}
+
+/* Check if rlimit has any expressed restrictions on usable memory. */
+uint64_t uv__get_rlimit_max_memory(void) {
+  struct rlimit rl;
+  uint64_t result = 0;
+  uint64_t rlimit_value;
+
+#if defined(RLIMIT_AS)
+  if (getrlimit(RLIMIT_AS, &rl) == 0 && rl.rlim_cur != RLIM_INFINITY) {
+    rlimit_value = rl.rlim_cur;
+    result = rlimit_value;
+  }
+#endif
+
+#if defined(RLIMIT_DATA)
+  if (getrlimit(RLIMIT_DATA, &rl) == 0 && rl.rlim_cur != RLIM_INFINITY) {
+    rlimit_value = rl.rlim_cur;
+    if (result == 0 || rlimit_value < result)
+      result = rlimit_value;
+  }
+#endif
+
+  return result;
 }
