@@ -1,10 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __LIBXML2_H__
-#define __LIBXML2_H__
-
-#cmakedefine01 USE_EXTERNAL_LIBXML2
+#ifndef __LibXML2_h__
+#define __LibXML2_h__
 
 #if USE_EXTERNAL_LIBXML2
     #include <libxml/parser.h>
@@ -24,4 +22,4 @@
     #include <src/include/libxml/xmlstring.h>
 #endif
 
-#endif // __LIBXML2_H__
+#endif // __LibXML2_h__

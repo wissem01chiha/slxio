@@ -16,84 +16,90 @@
 
 set -e
 
+########################################################################
+# Script for updating third party packages.
+# 
+# Example :
+#   Update all Json-C files vendored 
+#
+#       set -e
+#       name="json-c"
+#       repository="https://github.com/json-c/json-c"
+#       subtree="$name/src"
+#       version=""
+#       tag="json-c-0.18"
+#       files=($(find ./src -maxdepth 1 -type f -printf "%f\n"))
+# 
+# to get the defulat list of files :
+#  >> find . -type f -printf '    "%P"\n' | sort
+########################################################################
+
+
+########################################################################
+# Global variables and macros
+########################################################################
 COLOR_OFF="\033[0m"
 RED="\033[0;31m"
 GREEN="\033[0;32m"
 YELLOW="\033[1;33m"
 
-die() {
-    echo -e >&2 "${RED}[FATAL] : $@${COLOR_OFF}"
+CYGWIN=0
+CURDIR=""
+
+########################################################################
+# Logging utilities
+########################################################################
+fatal() {
+    echo -e >&2 "${RED}[FATAL] : $*${COLOR_OFF}"
     exit 1
 }
 
 warn() {
-    echo -e >&2 "${YELLOW}[WARNING] : $@${COLOR_OFF}"
+    echo -e >&2 "${YELLOW}[WARNING] : $*${COLOR_OFF}"
 }
 
 info() {
-    echo -e >&2 "[INFO] : $@"
+    echo -e >&2 "[INFO] : $*"
 }
 
-ok() {
-    echo -e >&2 "[INFO] : $@ ${GREEN}OK${COLOR_OFF}"
+success() {
+    echo -e >&2 "[INFO] : $* ${GREEN}OK${COLOR_OFF}"
 }
 
 ########################################################################
-# Cygwin workaround on Windows platform
+# Environment setup utilities
 ########################################################################
-CYGWIN=0
-CURDIR=""
+detect_platform() {
+    for arg in "$@"; do
+        case "$arg" in
+            --cygwin) CYGWIN=1 ;;
+            /cygdrive/*) CURDIR="$arg" ;;
+        esac
+    done
 
-for arg in "$@"; do
-  case "$arg" in
-    --cygwin)
-      CYGWIN=1
-      ;;
-    /cygdrive/*)
-      CURDIR="$arg"
-      ;;
-  esac
-done
-
-# root directory
-if [ "$CYGWIN" -eq 1 ]; then
-  CURDIR="$CURDIR"
-else
-  CURDIR=$(pwd)
-fi
-
-echo "=================================================================="
-echo " Updating Submodules ... "
-echo " Root directory : $CURDIR"
-echo " Git version    : $(git --version)"
-echo "=================================================================="
-
-########################################################################
-
-# Git checks
-if ! command -v git >/dev/null 2>&1; then
-    die "Git is not installed. 
-    Updates require Git to be installed and properly configured."
-fi
-
-# disbale git detached Head warning when cloning release/tags branchs
-git config --global advice.detachedHead false
-
-# initialization routines
-init_submodule() {
-    unset name
-    unset repository
-    unset subtree
-    unset version
-    unset files
-    unset branch
-    unset tmpdir
+    if [ "$CYGWIN" -eq 1 ]; then
+        CURDIR="$CURDIR"
+    else
+        CURDIR=$(pwd)
+    fi
 }
 
-# synchronize files from the local Git temporary directory
-# into the main subtree, preserving directory structure
-sync_submodule_file() {
-    info "Updating files ..."
+check_git() {
+    if ! command -v git >/dev/null 2>&1; then
+        fatal "Git is not installed. Updates require Git to be installed and properly configured."
+    fi
+    git config --global advice.detachedHead false
+}
+
+########################################################################
+# Submodule 
+########################################################################
+init_submodule_vars() {
+    unset name repository subtree version files branch tmpdir tag
+}
+
+sync_files_subtree() {
+    info "Synchronizing files ..."
     local updated=0
     for f in "${files[@]}"; do
         if [ "$CYGWIN" -eq 1 ]; then
@@ -107,63 +113,73 @@ sync_submodule_file() {
         cp "$src" "$dst"
         updated=$((updated + 1))
     done
-    ok "Updated $updated files for $name ..."
+    success "Updated $updated files for $name ..."
 }
 
-# main utility for updating a submodule
-# try to use the branch name (version) first, if that's not set, 
-# fall back to a tag at least one reference (branch or tag) must be provided
-update_submodule() {
-    local tmpdir
+clone_update_submodule() {
     tmpdir=$(mktemp -d)
 
     if [ -z "$version" ] && [ -z "$tag" ]; then
-        die "neither 'version' nor 'tag' is set in $d/update.sh"
+        fatal "Neither 'version' nor 'tag' is set in $d/update.sh"
     fi
 
     if [ -n "$version" ]; then
         info "Cloning branch $version ..."
         git clone --depth=1 --branch "v$version" --single-branch "$repository" "$tmpdir" >/dev/null 2>&1 \
-        || die "failed to clone $repository"
-        ok "Cloning branch $version ..."
+            || fatal "Failed to clone $repository"
+        success "Cloning branch $version ..."
     else
         info "Cloning tag $tag ..."
         git clone --depth=1 --branch "$tag" --single-branch "$repository" "$tmpdir" >/dev/null 2>&1 \
-        || die "failed to clone $repository"
-        ok "Cloning tag $tag ..."
+            || fatal "Failed to clone $repository"
+        success "Cloning tag $tag ..."
     fi
-    sync_submodule_file
+
+    sync_files_subtree
+
     if [ "$CYGWIN" -eq 1 ]; then
         rm -rf "/cygdrive/C/$tmpdir"
     else
         rm -rf "$tmpdir"
     fi
-    ok "Updating $name ..."
+    success "Updated $name ..."
 }
 
-dirs=$(ls -d "$CURDIR"/*/)
-count=0
+########################################################################
+# Main 
+########################################################################
+main() {
+    detect_platform "$@"
+    check_git
 
-for d in $dirs; do
-   info "Updating submodule $d ..."
-   cd "$d"
-   if [ "$CYGWIN" -eq 1 ]; then
-     dos2unix ./update.sh
-   fi
-   init_submodule
-   . ./update.sh
-   # Sanity checks
-   [ -n "$name" ] || die "'name' is empty in $d/update.sh"
-   [ -n "$subtree" ] || die "'subtree' is empty in $d/update.sh"
-   [ -n "$repository" ] || die "'repository' is empty in $d/update.sh"
+    dirs=$(ls -d "$CURDIR"/*/)
+    count=0
 
-   update_submodule
-   count=$((count + 1))
-done
+    for d in $dirs; do
+        info "Processing submodule $d ..."
+        cd "$d"
 
-info "--------------------------------------------"
-info " Successfully updated $count submodules"
-info "--------------------------------------------"
+        if [ "$CYGWIN" -eq 1 ]; then
+            dos2unix ./update.sh
+        fi
 
-# reset git config 
-git config --global advice.detachedHead true
+        init_submodule_vars
+        . ./update.sh
+
+        # Sanity checks
+        [ -n "$name" ] || fatal "'name' is empty in $d/update.sh"
+        [ -n "$subtree" ] || fatal "'subtree' is empty in $d/update.sh"
+        [ -n "$repository" ] || fatal "'repository' is empty in $d/update.sh"
+
+        clone_update_submodule
+        count=$((count + 1))
+    done
+
+    info "--------------------------------------------"
+    info " Successfully updated $count submodules"
+    info "--------------------------------------------"
+
+    git config --global advice.detachedHead true
+}
+
+main "$@"

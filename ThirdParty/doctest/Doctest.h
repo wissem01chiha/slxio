@@ -1,10 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __DOCTEST_H__
-#define __DOCTEST_H__
-
-#cmakedefine USE_EXTERNAL_DOCTEST
+#ifndef __Doctest_h__
+#define __Doctest_h__
 
 #ifdef USE_EXTERNAL_DOCTEST
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
@@ -14,4 +12,4 @@
 #include <src/doctest/doctest.h>
 #endif 
 
-#endif //  __DOCTEST_Hçç
+#endif //  __Doctest_h__

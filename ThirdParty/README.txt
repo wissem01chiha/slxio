@@ -1,3 +1,2 @@
-The `ThirdParty` sub-directory contains software that is housed alongside
-the project, but was not authored by the developer.  It typically has
+The `ThirdParty` sub-directory contains software that is housed alongside the project, but was not authored by the developer. It typically has
 different copyright ownership and licensing terms than the rest of the sofwtare.

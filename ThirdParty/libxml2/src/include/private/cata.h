@@ -3,8 +3,10 @@
 
 #ifdef LIBXML_CATALOG_ENABLED
 
-XML_HIDDEN void xmlInitCatalogInternal(void);
-XML_HIDDEN void xmlCleanupCatalogInternal(void);
+XML_HIDDEN void
+xmlInitCatalogInternal(void);
+XML_HIDDEN void
+xmlCleanupCatalogInternal(void);
 
 #endif /* LIBXML_CATALOG_ENABLED */
 

@@ -22,8 +22,6 @@ ENABLE_BUILD
   TRUE
 ENABLE_TEST
   TRUE
-ENABLE_BUILD
-  TRUE
 EXTERNAL_BUILD
   FALSE
 EXTERNAL_SOURCE_DIR
@@ -60,11 +58,7 @@ HEADERS
   src/random_seed.h
   src/strerror_override.h
 CONFIG_HEADERS
-  Json-c.h.in
-  src/cmake/config.h.in
-  src/cmake/json_config.h.in
 CMAKE_MODULES_DIRS
-  src/cmake
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
 WINDOWS_DEPENDS

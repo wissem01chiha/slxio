@@ -14,7 +14,7 @@
 #ifndef __XML_MODULE_H__
 #define __XML_MODULE_H__
 
-#include <include/libxml/xmlversion.h>
+#include <libxml/xmlversion.h>
 
 #ifdef LIBXML_MODULES_ENABLED
 
@@ -32,22 +32,24 @@ typedef xmlModule *xmlModulePtr;
  * enumeration of options that can be passed down to #xmlModuleOpen
  */
 typedef enum {
-  XML_MODULE_LAZY = 1, /* lazy binding */
-  XML_MODULE_LOCAL = 2 /* local binding */
+    XML_MODULE_LAZY = 1,	/* lazy binding */
+    XML_MODULE_LOCAL= 2		/* local binding */
 } xmlModuleOption;
 
 XML_DEPRECATED
-XMLPUBFUN xmlModule *xmlModuleOpen(const char *filename, int options);
+XMLPUBFUN xmlModule *xmlModuleOpen	(const char *filename,
+						 int options);
 
 XML_DEPRECATED
-XMLPUBFUN int xmlModuleSymbol(xmlModule *module, const char *name,
-                              void **result);
+XMLPUBFUN int xmlModuleSymbol		(xmlModule *module,
+						 const char* name,
+						 void **result);
 
 XML_DEPRECATED
-XMLPUBFUN int xmlModuleClose(xmlModule *module);
+XMLPUBFUN int xmlModuleClose		(xmlModule *module);
 
 XML_DEPRECATED
-XMLPUBFUN int xmlModuleFree(xmlModule *module);
+XMLPUBFUN int xmlModuleFree		(xmlModule *module);
 
 #ifdef __cplusplus
 }

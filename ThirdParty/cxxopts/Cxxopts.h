@@ -1,10 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __CXXOPTS_H__
-#define __CXXOPTS_H__
-
-#cmakedefine USE_EXTERNAL_CXXOPTS
+#ifndef __Cxxopts_h__
+#define __Cxxopts_h__
 
 #ifdef USE_EXTERNAL_CXXOPTS
 #include <cxxopts.hpp>
@@ -12,4 +10,4 @@
 #include <src/include/cxxopts.hpp>
 #endif 
 
-#endif // __CXXOPTS_H__
+#endif // __Cxxopts_h__

@@ -30,22 +30,22 @@
  *       parent is the entity declaration, not the ref.
  */
 
-#include <include/libxml/parserInternals.h>
-#include <include/libxml/uri.h>
-#include <include/libxml/xmlerror.h>
-#include <include/libxml/xmlmemory.h>
-#include <include/libxml/xpath.h>
-#include <include/libxml/xpathInternals.h>
-#include <include/libxml/xpointer.h>
 #include <string.h>
+#include <libxml/xpointer.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/parserInternals.h>
+#include <libxml/uri.h>
+#include <libxml/xpath.h>
+#include <libxml/xpathInternals.h>
+#include <libxml/xmlerror.h>
 
 #ifdef LIBXML_XPTR_ENABLED
 
 /* Add support of the xmlns() xpointer scheme to initialize the namespaces */
 #define XPTR_XMLNS_SCHEME
 
-#include "include/private/error.h"
-#include "include/private/xpath.h"
+#include "private/error.h"
+#include "private/xpath.h"
 
 /************************************************************************
  *									*
@@ -61,50 +61,52 @@
  * @param msg  error message
  * @param extra  extra information
  */
-static void LIBXML_ATTR_FORMAT(3, 0)
-    xmlXPtrErr(xmlXPathParserContextPtr ctxt, int code, const char *msg,
-               const xmlChar *extra) {
-  xmlStructuredErrorFunc serror = NULL;
-  void *data = NULL;
-  xmlNodePtr node = NULL;
-  int res;
+static void LIBXML_ATTR_FORMAT(3,0)
+xmlXPtrErr(xmlXPathParserContextPtr ctxt, int code,
+           const char * msg, const xmlChar *extra)
+{
+    xmlStructuredErrorFunc serror = NULL;
+    void *data = NULL;
+    xmlNodePtr node = NULL;
+    int res;
 
-  if (ctxt == NULL)
-    return;
-  /* Only report the first error */
-  if (ctxt->error != 0)
-    return;
+    if (ctxt == NULL)
+        return;
+    /* Only report the first error */
+    if (ctxt->error != 0)
+        return;
 
-  ctxt->error = code;
+    ctxt->error = code;
 
-  if (ctxt->context != NULL) {
-    xmlErrorPtr err = &ctxt->context->lastError;
+    if (ctxt->context != NULL) {
+        xmlErrorPtr err = &ctxt->context->lastError;
 
-    /* cleanup current last error */
-    xmlResetError(err);
+        /* cleanup current last error */
+        xmlResetError(err);
 
-    err->domain = XML_FROM_XPOINTER;
-    err->code = code;
-    err->level = XML_ERR_ERROR;
-    err->str1 = (char *)xmlStrdup(ctxt->base);
-    if (err->str1 == NULL) {
-      xmlXPathPErrMemory(ctxt);
-      return;
+        err->domain = XML_FROM_XPOINTER;
+        err->code = code;
+        err->level = XML_ERR_ERROR;
+        err->str1 = (char *) xmlStrdup(ctxt->base);
+        if (err->str1 == NULL) {
+            xmlXPathPErrMemory(ctxt);
+            return;
+        }
+        err->int1 = ctxt->cur - ctxt->base;
+        err->node = ctxt->context->debugNode;
+
+        serror = ctxt->context->error;
+        data = ctxt->context->userData;
+        node = ctxt->context->debugNode;
     }
-    err->int1 = ctxt->cur - ctxt->base;
-    err->node = ctxt->context->debugNode;
 
-    serror = ctxt->context->error;
-    data = ctxt->context->userData;
-    node = ctxt->context->debugNode;
-  }
-
-  res = xmlRaiseError(serror, NULL, data, NULL, node, XML_FROM_XPOINTER, code,
-                      XML_ERR_ERROR, NULL, 0, (const char *)extra,
-                      (const char *)ctxt->base, NULL, ctxt->cur - ctxt->base, 0,
-                      msg, extra);
-  if (res < 0)
-    xmlXPathPErrMemory(ctxt);
+    res = xmlRaiseError(serror, NULL, data, NULL, node,
+                        XML_FROM_XPOINTER, code, XML_ERR_ERROR, NULL, 0,
+                        (const char *) extra, (const char *) ctxt->base,
+                        NULL, ctxt->cur - ctxt->base, 0,
+                        msg, extra);
+    if (res < 0)
+        xmlXPathPErrMemory(ctxt);
 }
 
 /************************************************************************
@@ -118,22 +120,24 @@ static void LIBXML_ATTR_FORMAT(3, 0)
  * @param no  the child number
  * @returns the `no`'th element child of `cur` or NULL
  */
-static xmlNodePtr xmlXPtrGetNthChild(xmlNodePtr cur, int no) {
-  int i;
-  if ((cur == NULL) || (cur->type == XML_NAMESPACE_DECL))
-    return (cur);
-  cur = cur->children;
-  for (i = 0; i <= no; cur = cur->next) {
-    if (cur == NULL)
-      return (cur);
-    if ((cur->type == XML_ELEMENT_NODE) || (cur->type == XML_DOCUMENT_NODE) ||
-        (cur->type == XML_HTML_DOCUMENT_NODE)) {
-      i++;
-      if (i == no)
-        break;
+static xmlNodePtr
+xmlXPtrGetNthChild(xmlNodePtr cur, int no) {
+    int i;
+    if ((cur == NULL) || (cur->type == XML_NAMESPACE_DECL))
+	return(cur);
+    cur = cur->children;
+    for (i = 0;i <= no;cur = cur->next) {
+	if (cur == NULL)
+	    return(cur);
+	if ((cur->type == XML_ELEMENT_NODE) ||
+	    (cur->type == XML_DOCUMENT_NODE) ||
+	    (cur->type == XML_HTML_DOCUMENT_NODE)) {
+	    i++;
+	    if (i == no)
+		break;
+	}
     }
-  }
-  return (cur);
+    return(cur);
 }
 
 /************************************************************************
@@ -170,12 +174,11 @@ static void xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name);
 #define SKIP(val) ctxt->cur += (val)
 #define NXT(val) ctxt->cur[(val)]
 
-#define SKIP_BLANKS                                                            \
-  while (IS_BLANK_CH(*(ctxt->cur)))                                            \
-  NEXT
+#define SKIP_BLANKS							\
+    while (IS_BLANK_CH(*(ctxt->cur))) NEXT
 
 #define CURRENT (*ctxt->cur)
-#define NEXT ((*ctxt->cur) ? ctxt->cur++ : ctxt->cur)
+#define NEXT ((*ctxt->cur) ?  ctxt->cur++: ctxt->cur)
 
 /*
  * @param ctxt  the XPointer Parser context
@@ -184,27 +187,28 @@ static void xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name);
  * Move the current node of the nodeset on the stack to the
  * given child if found
  */
-static void xmlXPtrGetChildNo(xmlXPathParserContextPtr ctxt, int indx) {
-  xmlNodePtr cur = NULL;
-  xmlXPathObjectPtr obj;
-  xmlNodeSetPtr oldset;
+static void
+xmlXPtrGetChildNo(xmlXPathParserContextPtr ctxt, int indx) {
+    xmlNodePtr cur = NULL;
+    xmlXPathObjectPtr obj;
+    xmlNodeSetPtr oldset;
 
-  CHECK_TYPE(XPATH_NODESET);
-  obj = xmlXPathValuePop(ctxt);
-  oldset = obj->nodesetval;
-  if ((indx <= 0) || (oldset == NULL) || (oldset->nodeNr != 1)) {
-    xmlXPathFreeObject(obj);
-    xmlXPathValuePush(ctxt, xmlXPathNewNodeSet(NULL));
-    return;
-  }
-  cur = xmlXPtrGetNthChild(oldset->nodeTab[0], indx);
-  if (cur == NULL) {
-    xmlXPathFreeObject(obj);
-    xmlXPathValuePush(ctxt, xmlXPathNewNodeSet(NULL));
-    return;
-  }
-  oldset->nodeTab[0] = cur;
-  xmlXPathValuePush(ctxt, obj);
+    CHECK_TYPE(XPATH_NODESET);
+    obj = xmlXPathValuePop(ctxt);
+    oldset = obj->nodesetval;
+    if ((indx <= 0) || (oldset == NULL) || (oldset->nodeNr != 1)) {
+	xmlXPathFreeObject(obj);
+	xmlXPathValuePush(ctxt, xmlXPathNewNodeSet(NULL));
+	return;
+    }
+    cur = xmlXPtrGetNthChild(oldset->nodeTab[0], indx);
+    if (cur == NULL) {
+	xmlXPathFreeObject(obj);
+	xmlXPathValuePush(ctxt, xmlXPathNewNodeSet(NULL));
+	return;
+    }
+    oldset->nodeTab[0] = cur;
+    xmlXPathValuePush(ctxt, obj);
 }
 
 /**
@@ -240,137 +244,138 @@ static void xmlXPtrGetChildNo(xmlXPathParserContextPtr ctxt, int indx) {
  * @param name  the preparsed Scheme for the XPtrPart
  */
 
-static void xmlXPtrEvalXPtrPart(xmlXPathParserContextPtr ctxt, xmlChar *name) {
-  xmlChar *buffer, *cur;
-  int len;
-  int level;
+static void
+xmlXPtrEvalXPtrPart(xmlXPathParserContextPtr ctxt, xmlChar *name) {
+    xmlChar *buffer, *cur;
+    int len;
+    int level;
 
-  if (name == NULL)
+    if (name == NULL)
     name = xmlXPathParseName(ctxt);
-  if (name == NULL)
-    XP_ERROR(XPATH_EXPR_ERROR);
+    if (name == NULL)
+	XP_ERROR(XPATH_EXPR_ERROR);
 
-  if (CUR != '(') {
-    xmlFree(name);
-    XP_ERROR(XPATH_EXPR_ERROR);
-  }
-  NEXT;
-  level = 1;
-
-  len = xmlStrlen(ctxt->cur);
-  len++;
-  buffer = xmlMalloc(len);
-  if (buffer == NULL) {
-    xmlXPathPErrMemory(ctxt);
-    xmlFree(name);
-    return;
-  }
-
-  cur = buffer;
-  while (CUR != 0) {
-    if (CUR == ')') {
-      level--;
-      if (level == 0) {
-        NEXT;
-        break;
-      }
-    } else if (CUR == '(') {
-      level++;
-    } else if (CUR == '^') {
-      if ((NXT(1) == ')') || (NXT(1) == '(') || (NXT(1) == '^')) {
-        NEXT;
-      }
+    if (CUR != '(') {
+        xmlFree(name);
+	XP_ERROR(XPATH_EXPR_ERROR);
     }
-    *cur++ = CUR;
     NEXT;
-  }
-  *cur = 0;
+    level = 1;
 
-  if ((level != 0) && (CUR == 0)) {
-    xmlFree(name);
-    xmlFree(buffer);
-    XP_ERROR(XPTR_SYNTAX_ERROR);
-  }
+    len = xmlStrlen(ctxt->cur);
+    len++;
+    buffer = xmlMalloc(len);
+    if (buffer == NULL) {
+        xmlXPathPErrMemory(ctxt);
+        xmlFree(name);
+	return;
+    }
 
-  if (xmlStrEqual(name, (xmlChar *)"xpointer") ||
-      xmlStrEqual(name, (xmlChar *)"xpath1")) {
-    const xmlChar *oldBase = ctxt->base;
-    const xmlChar *oldCur = ctxt->cur;
+    cur = buffer;
+    while (CUR != 0) {
+	if (CUR == ')') {
+	    level--;
+	    if (level == 0) {
+		NEXT;
+		break;
+	    }
+	} else if (CUR == '(') {
+	    level++;
+	} else if (CUR == '^') {
+            if ((NXT(1) == ')') || (NXT(1) == '(') || (NXT(1) == '^')) {
+                NEXT;
+            }
+	}
+        *cur++ = CUR;
+	NEXT;
+    }
+    *cur = 0;
 
-    ctxt->cur = ctxt->base = buffer;
-    /*
-     * To evaluate an xpointer scheme element (4.3) we need:
-     *   context initialized to the root
-     *   context position initialized to 1
-     *   context size initialized to 1
-     */
-    ctxt->context->node = (xmlNodePtr)ctxt->context->doc;
-    ctxt->context->proximityPosition = 1;
-    ctxt->context->contextSize = 1;
-    xmlXPathEvalExpr(ctxt);
-    ctxt->base = oldBase;
-    ctxt->cur = oldCur;
-  } else if (xmlStrEqual(name, (xmlChar *)"element")) {
-    const xmlChar *oldBase = ctxt->base;
-    const xmlChar *oldCur = ctxt->cur;
-    xmlChar *name2;
+    if ((level != 0) && (CUR == 0)) {
+        xmlFree(name);
+	xmlFree(buffer);
+	XP_ERROR(XPTR_SYNTAX_ERROR);
+    }
 
-    ctxt->cur = ctxt->base = buffer;
-    if (buffer[0] == '/') {
-      xmlXPathRoot(ctxt);
-      xmlXPtrEvalChildSeq(ctxt, NULL);
-    } else {
-      name2 = xmlXPathParseName(ctxt);
-      if (name2 == NULL) {
+    if (xmlStrEqual(name, (xmlChar *) "xpointer") ||
+        xmlStrEqual(name, (xmlChar *) "xpath1")) {
+	const xmlChar *oldBase = ctxt->base;
+	const xmlChar *oldCur = ctxt->cur;
+
+	ctxt->cur = ctxt->base = buffer;
+	/*
+	 * To evaluate an xpointer scheme element (4.3) we need:
+	 *   context initialized to the root
+	 *   context position initialized to 1
+	 *   context size initialized to 1
+	 */
+	ctxt->context->node = (xmlNodePtr)ctxt->context->doc;
+	ctxt->context->proximityPosition = 1;
+	ctxt->context->contextSize = 1;
+	xmlXPathEvalExpr(ctxt);
+	ctxt->base = oldBase;
+        ctxt->cur = oldCur;
+    } else if (xmlStrEqual(name, (xmlChar *) "element")) {
+	const xmlChar *oldBase = ctxt->base;
+	const xmlChar *oldCur = ctxt->cur;
+	xmlChar *name2;
+
+	ctxt->cur = ctxt->base = buffer;
+	if (buffer[0] == '/') {
+	    xmlXPathRoot(ctxt);
+	    xmlXPtrEvalChildSeq(ctxt, NULL);
+	} else {
+	    name2 = xmlXPathParseName(ctxt);
+	    if (name2 == NULL) {
+                ctxt->base = oldBase;
+                ctxt->cur = oldCur;
+		xmlFree(buffer);
+                xmlFree(name);
+		XP_ERROR(XPATH_EXPR_ERROR);
+	    }
+	    xmlXPtrEvalChildSeq(ctxt, name2);
+	}
+	ctxt->base = oldBase;
+        ctxt->cur = oldCur;
+#ifdef XPTR_XMLNS_SCHEME
+    } else if (xmlStrEqual(name, (xmlChar *) "xmlns")) {
+	const xmlChar *oldBase = ctxt->base;
+	const xmlChar *oldCur = ctxt->cur;
+	xmlChar *prefix;
+
+	ctxt->cur = ctxt->base = buffer;
+        prefix = xmlXPathParseNCName(ctxt);
+	if (prefix == NULL) {
+            ctxt->base = oldBase;
+            ctxt->cur = oldCur;
+	    xmlFree(buffer);
+	    xmlFree(name);
+	    XP_ERROR(XPTR_SYNTAX_ERROR);
+	}
+	SKIP_BLANKS;
+	if (CUR != '=') {
+            ctxt->base = oldBase;
+            ctxt->cur = oldCur;
+	    xmlFree(prefix);
+	    xmlFree(buffer);
+	    xmlFree(name);
+	    XP_ERROR(XPTR_SYNTAX_ERROR);
+	}
+	NEXT;
+	SKIP_BLANKS;
+
+	if (xmlXPathRegisterNs(ctxt->context, prefix, ctxt->cur) < 0)
+            xmlXPathPErrMemory(ctxt);
         ctxt->base = oldBase;
         ctxt->cur = oldCur;
-        xmlFree(buffer);
-        xmlFree(name);
-        XP_ERROR(XPATH_EXPR_ERROR);
-      }
-      xmlXPtrEvalChildSeq(ctxt, name2);
-    }
-    ctxt->base = oldBase;
-    ctxt->cur = oldCur;
-#ifdef XPTR_XMLNS_SCHEME
-  } else if (xmlStrEqual(name, (xmlChar *)"xmlns")) {
-    const xmlChar *oldBase = ctxt->base;
-    const xmlChar *oldCur = ctxt->cur;
-    xmlChar *prefix;
-
-    ctxt->cur = ctxt->base = buffer;
-    prefix = xmlXPathParseNCName(ctxt);
-    if (prefix == NULL) {
-      ctxt->base = oldBase;
-      ctxt->cur = oldCur;
-      xmlFree(buffer);
-      xmlFree(name);
-      XP_ERROR(XPTR_SYNTAX_ERROR);
-    }
-    SKIP_BLANKS;
-    if (CUR != '=') {
-      ctxt->base = oldBase;
-      ctxt->cur = oldCur;
-      xmlFree(prefix);
-      xmlFree(buffer);
-      xmlFree(name);
-      XP_ERROR(XPTR_SYNTAX_ERROR);
-    }
-    NEXT;
-    SKIP_BLANKS;
-
-    if (xmlXPathRegisterNs(ctxt->context, prefix, ctxt->cur) < 0)
-      xmlXPathPErrMemory(ctxt);
-    ctxt->base = oldBase;
-    ctxt->cur = oldCur;
-    xmlFree(prefix);
+	xmlFree(prefix);
 #endif /* XPTR_XMLNS_SCHEME */
-  } else {
-    xmlXPtrErr(ctxt, XML_XPTR_UNKNOWN_SCHEME, "unsupported scheme '%s'\n",
-               name);
-  }
-  xmlFree(buffer);
-  xmlFree(name);
+    } else {
+        xmlXPtrErr(ctxt, XML_XPTR_UNKNOWN_SCHEME,
+		   "unsupported scheme '%s'\n", name);
+    }
+    xmlFree(buffer);
+    xmlFree(name);
 }
 
 /**
@@ -399,56 +404,57 @@ static void xmlXPtrEvalXPtrPart(xmlXPathParserContextPtr ctxt, xmlChar *name) {
  * @param ctxt  the XPointer Parser context
  * @param name  the preparsed Scheme for the first XPtrPart
  */
-static void xmlXPtrEvalFullXPtr(xmlXPathParserContextPtr ctxt, xmlChar *name) {
-  if (name == NULL)
+static void
+xmlXPtrEvalFullXPtr(xmlXPathParserContextPtr ctxt, xmlChar *name) {
+    if (name == NULL)
     name = xmlXPathParseName(ctxt);
-  if (name == NULL)
-    XP_ERROR(XPATH_EXPR_ERROR);
-  while (name != NULL) {
-    ctxt->error = XPATH_EXPRESSION_OK;
-    xmlXPtrEvalXPtrPart(ctxt, name);
+    if (name == NULL)
+	XP_ERROR(XPATH_EXPR_ERROR);
+    while (name != NULL) {
+	ctxt->error = XPATH_EXPRESSION_OK;
+	xmlXPtrEvalXPtrPart(ctxt, name);
 
-    /* in case of syntax error, break here */
-    if ((ctxt->error != XPATH_EXPRESSION_OK) &&
-        (ctxt->error != XML_XPTR_UNKNOWN_SCHEME))
-      return;
+	/* in case of syntax error, break here */
+	if ((ctxt->error != XPATH_EXPRESSION_OK) &&
+            (ctxt->error != XML_XPTR_UNKNOWN_SCHEME))
+	    return;
 
-    /*
-     * If the returned value is a non-empty nodeset
-     * or location set, return here.
-     */
-    if (ctxt->value != NULL) {
-      xmlXPathObjectPtr obj = ctxt->value;
+	/*
+	 * If the returned value is a non-empty nodeset
+	 * or location set, return here.
+	 */
+	if (ctxt->value != NULL) {
+	    xmlXPathObjectPtr obj = ctxt->value;
 
-      switch (obj->type) {
-      case XPATH_NODESET: {
-        xmlNodeSetPtr loc = ctxt->value->nodesetval;
-        if ((loc != NULL) && (loc->nodeNr > 0))
-          return;
-        break;
-      }
-      default:
-        break;
-      }
+	    switch (obj->type) {
+		case XPATH_NODESET: {
+		    xmlNodeSetPtr loc = ctxt->value->nodesetval;
+		    if ((loc != NULL) && (loc->nodeNr > 0))
+			return;
+		    break;
+		}
+		default:
+		    break;
+	    }
 
-      /*
-       * Evaluating to improper values is equivalent to
-       * a sub-resource error, clean-up the stack
-       */
-      do {
-        obj = xmlXPathValuePop(ctxt);
-        if (obj != NULL) {
-          xmlXPathFreeObject(obj);
-        }
-      } while (obj != NULL);
+	    /*
+	     * Evaluating to improper values is equivalent to
+	     * a sub-resource error, clean-up the stack
+	     */
+	    do {
+		obj = xmlXPathValuePop(ctxt);
+		if (obj != NULL) {
+		    xmlXPathFreeObject(obj);
+		}
+	    } while (obj != NULL);
+	}
+
+	/*
+	 * Is there another XPointer part.
+	 */
+	SKIP_BLANKS;
+	name = xmlXPathParseName(ctxt);
     }
-
-    /*
-     * Is there another XPointer part.
-     */
-    SKIP_BLANKS;
-    name = xmlXPathParseName(ctxt);
-  }
 }
 
 /**
@@ -461,44 +467,46 @@ static void xmlXPtrEvalFullXPtr(xmlXPathParserContextPtr ctxt, xmlChar *name) {
  * @param ctxt  the XPointer Parser context
  * @param name  a possible ID name of the child sequence
  */
-static void xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name) {
-  /*
-   * XPointer don't allow by syntax to address in multirooted trees
-   * this might prove useful in some cases, warn about it.
-   */
-  if ((name == NULL) && (CUR == '/') && (NXT(1) != '1')) {
-    xmlXPtrErr(ctxt, XML_XPTR_CHILDSEQ_START,
-               "warning: ChildSeq not starting by /1\n", NULL);
-  }
-
-  if (name != NULL) {
-    xmlXPathValuePush(ctxt, xmlXPathNewString(name));
-    xmlFree(name);
-    xmlXPathIdFunction(ctxt, 1);
-    CHECK_ERROR;
-  }
-
-  while (CUR == '/') {
-    int child = 0, overflow = 0;
-    NEXT;
-
-    while ((CUR >= '0') && (CUR <= '9')) {
-      int d = CUR - '0';
-      if (child > INT_MAX / 10)
-        overflow = 1;
-      else
-        child *= 10;
-      if (child > INT_MAX - d)
-        overflow = 1;
-      else
-        child += d;
-      NEXT;
+static void
+xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name) {
+    /*
+     * XPointer don't allow by syntax to address in multirooted trees
+     * this might prove useful in some cases, warn about it.
+     */
+    if ((name == NULL) && (CUR == '/') && (NXT(1) != '1')) {
+        xmlXPtrErr(ctxt, XML_XPTR_CHILDSEQ_START,
+		   "warning: ChildSeq not starting by /1\n", NULL);
     }
-    if (overflow)
-      child = 0;
-    xmlXPtrGetChildNo(ctxt, child);
-  }
+
+    if (name != NULL) {
+	xmlXPathValuePush(ctxt, xmlXPathNewString(name));
+	xmlFree(name);
+	xmlXPathIdFunction(ctxt, 1);
+	CHECK_ERROR;
+    }
+
+    while (CUR == '/') {
+	int child = 0, overflow = 0;
+	NEXT;
+
+	while ((CUR >= '0') && (CUR <= '9')) {
+            int d = CUR - '0';
+            if (child > INT_MAX / 10)
+                overflow = 1;
+            else
+                child *= 10;
+            if (child > INT_MAX - d)
+                overflow = 1;
+            else
+                child += d;
+	    NEXT;
+	}
+        if (overflow)
+            child = 0;
+	xmlXPtrGetChildNo(ctxt, child);
+    }
 }
+
 
 /**
  *  XPointer ::= Name
@@ -509,42 +517,44 @@ static void xmlXPtrEvalChildSeq(xmlXPathParserContextPtr ctxt, xmlChar *name) {
  *
  * @param ctxt  the XPointer Parser context
  */
-static void xmlXPtrEvalXPointer(xmlXPathParserContextPtr ctxt) {
-  if (ctxt->valueTab == NULL) {
-    /* Allocate the value stack */
-    ctxt->valueTab =
-        (xmlXPathObjectPtr *)xmlMalloc(10 * sizeof(xmlXPathObjectPtr));
+static void
+xmlXPtrEvalXPointer(xmlXPathParserContextPtr ctxt) {
     if (ctxt->valueTab == NULL) {
-      xmlXPathPErrMemory(ctxt);
-      return;
+	/* Allocate the value stack */
+	ctxt->valueTab = (xmlXPathObjectPtr *)
+			 xmlMalloc(10 * sizeof(xmlXPathObjectPtr));
+	if (ctxt->valueTab == NULL) {
+	    xmlXPathPErrMemory(ctxt);
+	    return;
+	}
+	ctxt->valueNr = 0;
+	ctxt->valueMax = 10;
+	ctxt->value = NULL;
     }
-    ctxt->valueNr = 0;
-    ctxt->valueMax = 10;
-    ctxt->value = NULL;
-  }
-  SKIP_BLANKS;
-  if (CUR == '/') {
-    xmlXPathRoot(ctxt);
-    xmlXPtrEvalChildSeq(ctxt, NULL);
-  } else {
-    xmlChar *name;
-
-    name = xmlXPathParseName(ctxt);
-    if (name == NULL)
-      XP_ERROR(XPATH_EXPR_ERROR);
-    if (CUR == '(') {
-      xmlXPtrEvalFullXPtr(ctxt, name);
-      /* Short evaluation */
-      return;
+    SKIP_BLANKS;
+    if (CUR == '/') {
+	xmlXPathRoot(ctxt);
+        xmlXPtrEvalChildSeq(ctxt, NULL);
     } else {
-      /* this handle both Bare Names and Child Sequences */
-      xmlXPtrEvalChildSeq(ctxt, name);
+	xmlChar *name;
+
+	name = xmlXPathParseName(ctxt);
+	if (name == NULL)
+	    XP_ERROR(XPATH_EXPR_ERROR);
+	if (CUR == '(') {
+	    xmlXPtrEvalFullXPtr(ctxt, name);
+	    /* Short evaluation */
+	    return;
+	} else {
+	    /* this handle both Bare Names and Child Sequences */
+	    xmlXPtrEvalChildSeq(ctxt, name);
+	}
     }
-  }
-  SKIP_BLANKS;
-  if (CUR != 0)
-    XP_ERROR(XPATH_EXPR_ERROR);
+    SKIP_BLANKS;
+    if (CUR != 0)
+	XP_ERROR(XPATH_EXPR_ERROR);
 }
+
 
 /************************************************************************
  *									*
@@ -562,17 +572,17 @@ static void xmlXPtrEvalXPointer(xmlXPathParserContextPtr ctxt) {
  * @param origin  unused
  * @returns the xmlXPathContext just allocated.
  */
-xmlXPathContext *xmlXPtrNewContext(xmlDoc *doc, xmlNode *here,
-                                   xmlNode *origin) {
-  xmlXPathContextPtr ret;
-  (void)here;
-  (void)origin;
+xmlXPathContext *
+xmlXPtrNewContext(xmlDoc *doc, xmlNode *here, xmlNode *origin) {
+    xmlXPathContextPtr ret;
+    (void) here;
+    (void) origin;
 
-  ret = xmlXPathNewContext(doc);
-  if (ret == NULL)
-    return (ret);
+    ret = xmlXPathNewContext(doc);
+    if (ret == NULL)
+	return(ret);
 
-  return (ret);
+    return(ret);
 }
 
 /**
@@ -586,66 +596,71 @@ xmlXPathContext *xmlXPtrNewContext(xmlDoc *doc, xmlNode *here,
  * @returns the xmlXPathObject resulting from the evaluation or NULL
  * in case of error.
  */
-xmlXPathObject *xmlXPtrEval(const xmlChar *str, xmlXPathContext *ctx) {
-  xmlXPathParserContextPtr ctxt;
-  xmlXPathObjectPtr res = NULL, tmp;
-  xmlXPathObjectPtr init = NULL;
-  int stack = 0;
+xmlXPathObject *
+xmlXPtrEval(const xmlChar *str, xmlXPathContext *ctx) {
+    xmlXPathParserContextPtr ctxt;
+    xmlXPathObjectPtr res = NULL, tmp;
+    xmlXPathObjectPtr init = NULL;
+    int stack = 0;
 
-  xmlInitParser();
+    xmlInitParser();
 
-  if ((ctx == NULL) || (str == NULL))
-    return (NULL);
+    if ((ctx == NULL) || (str == NULL))
+	return(NULL);
 
-  xmlResetError(&ctx->lastError);
+    xmlResetError(&ctx->lastError);
 
-  ctxt = xmlXPathNewParserContext(str, ctx);
-  if (ctxt == NULL) {
-    xmlXPathErrMemory(ctx);
-    return (NULL);
-  }
-  xmlXPtrEvalXPointer(ctxt);
-  if (ctx->lastError.code != XML_ERR_OK)
-    goto error;
-
-  if ((ctxt->value != NULL) && (ctxt->value->type != XPATH_NODESET)) {
-    xmlXPtrErr(ctxt, XML_XPTR_EVAL_FAILED,
-               "xmlXPtrEval: evaluation failed to return a node set\n", NULL);
-  } else {
-    res = xmlXPathValuePop(ctxt);
-  }
-
-  do {
-    tmp = xmlXPathValuePop(ctxt);
-    if (tmp != NULL) {
-      if (tmp != init) {
-        if (tmp->type == XPATH_NODESET) {
-          /*
-           * Evaluation may push a root nodeset which is unused
-           */
-          xmlNodeSetPtr set;
-          set = tmp->nodesetval;
-          if ((set == NULL) || (set->nodeNr != 1) ||
-              (set->nodeTab[0] != (xmlNodePtr)ctx->doc))
-            stack++;
-        } else
-          stack++;
-      }
-      xmlXPathFreeObject(tmp);
+    ctxt = xmlXPathNewParserContext(str, ctx);
+    if (ctxt == NULL) {
+        xmlXPathErrMemory(ctx);
+	return(NULL);
     }
-  } while (tmp != NULL);
-  if (stack != 0) {
-    xmlXPtrErr(ctxt, XML_XPTR_EXTRA_OBJECTS,
-               "xmlXPtrEval: object(s) left on the eval stack\n", NULL);
-  }
-  if (ctx->lastError.code != XML_ERR_OK) {
-    xmlXPathFreeObject(res);
-    res = NULL;
-  }
+    xmlXPtrEvalXPointer(ctxt);
+    if (ctx->lastError.code != XML_ERR_OK)
+        goto error;
+
+    if ((ctxt->value != NULL) &&
+	(ctxt->value->type != XPATH_NODESET)) {
+        xmlXPtrErr(ctxt, XML_XPTR_EVAL_FAILED,
+		"xmlXPtrEval: evaluation failed to return a node set\n",
+		   NULL);
+    } else {
+	res = xmlXPathValuePop(ctxt);
+    }
+
+    do {
+        tmp = xmlXPathValuePop(ctxt);
+	if (tmp != NULL) {
+	    if (tmp != init) {
+		if (tmp->type == XPATH_NODESET) {
+		    /*
+		     * Evaluation may push a root nodeset which is unused
+		     */
+		    xmlNodeSetPtr set;
+		    set = tmp->nodesetval;
+		    if ((set == NULL) || (set->nodeNr != 1) ||
+			(set->nodeTab[0] != (xmlNodePtr) ctx->doc))
+			stack++;
+		} else
+		    stack++;
+	    }
+	    xmlXPathFreeObject(tmp);
+        }
+    } while (tmp != NULL);
+    if (stack != 0) {
+        xmlXPtrErr(ctxt, XML_XPTR_EXTRA_OBJECTS,
+		   "xmlXPtrEval: object(s) left on the eval stack\n",
+		   NULL);
+    }
+    if (ctx->lastError.code != XML_ERR_OK) {
+	xmlXPathFreeObject(res);
+	res = NULL;
+    }
 
 error:
-  xmlXPathFreeParserContext(ctxt);
-  return (res);
+    xmlXPathFreeParserContext(ctxt);
+    return(res);
 }
 
 #endif
+
