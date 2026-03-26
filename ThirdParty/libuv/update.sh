@@ -9,8 +9,6 @@ version="1.52.1"
 tag=""
 files=(
     "AUTHORS"
-    #"CMakeLists.txt"
-    #"cmake-toolchains/cross-mingw32.cmake"
     "include/uv/aix.h"
     "include/uv/bsd.h"
     "include/uv/darwin.h"

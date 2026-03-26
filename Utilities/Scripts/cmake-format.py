@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #=============================================================================
 # Copyright 2025-2026 Wissem Chiha
 #
@@ -13,8 +14,6 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 #=============================================================================
-
-#!/usr/bin/env python3
 
 import os
 import subprocess

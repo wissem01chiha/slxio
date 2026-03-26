@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
 set -e
 
 name="loguru"
@@ -13,7 +10,6 @@ tag=""
 files=(
     "loguru.hpp"
     "loguru.cpp"
-    # "LICENSE"
     "README.md"
 )
 

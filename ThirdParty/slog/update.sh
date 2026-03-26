@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
 set -e
 
 name="slog"
@@ -13,6 +10,5 @@ tag=""
 files=(
     "src/slog.h"
     "src/slog.c"
-    # "LICENSE"
     "README.md"
 )

@@ -1,0 +1,18 @@
+{
+    "name":        "tinyurdf",
+    "version":     "1.0.0",
+    "homepage":    "https://github.com/wissem01chiha/tinyurdf",
+    "license":     "MIT",
+    "description": "a modern, fast C++17 library for processing urdf model files with python bindings",
+    "dependencies": [
+        {
+            "name" : "vcpkg-cmake",
+            "host" : true
+        },
+        {
+            "name" : "vcpkg-cmake-config",
+            "host" : true
+        },
+        "eigen3"
+    ]
+}

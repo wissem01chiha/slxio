@@ -26,12 +26,6 @@ message (STATUS "Install             : ${ENABLE_INSTALL}")
 message (STATUS "Install prefix      : ${CMAKE_INSTALL_PREFIX}")
 message (STATUS "Package Config      : ${ENABLE_PKGCONFIG}")
 
-message (STATUS "OpenMP Enabled      : ${ENABLE_OPENMP}")
-message (STATUS "OpenMP Found        : ${OpenMP_FOUND}")
-message (STATUS "OpenMP Version      : ${OpenMP_C_VERSION}")
-
-message (STATUS "AVX Enabled         : ${ENABLE_AVX}")
-
 message (STATUS "Testing Enabled     : ${ENABLE_TESTING}")
 message (STATUS "Coverage Enabled    : ${ENABLE_COVERAGE}")
 message (STATUS "Fuzzing Enabled     : ${ENABLE_FUZZING}")
