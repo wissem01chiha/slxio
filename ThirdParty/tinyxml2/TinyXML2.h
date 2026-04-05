@@ -10,4 +10,4 @@
 #include <src/tinyxml2.h>
 #endif 
 
-#endif //  __TinyXML2_h__
+#endif /* __TinyXML2_h__ */

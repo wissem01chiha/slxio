@@ -17,4 +17,4 @@
 #include "src/linkhash.h"
 #endif 
 
-#endif //  __Json_c_h__
+#endif /* __Json_c_h__ */

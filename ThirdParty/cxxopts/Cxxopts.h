@@ -10,4 +10,4 @@
 #include <src/include/cxxopts.hpp>
 #endif 
 
-#endif // __Cxxopts_h__
+#endif /* __Cxxopts_h__ */

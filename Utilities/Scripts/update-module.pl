@@ -1,3 +1,11 @@
+#!/usr/bin/perl -w
+
+sub help()
+{
+
+}
+
+
 #!bash/bin/python
 """
 List all .c and .cpp files in the given directory.

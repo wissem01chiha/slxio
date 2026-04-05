@@ -10,4 +10,4 @@
 #include <src/src/rapidcsv.h>
 #endif 
 
-#endif //  __Rapidcsv_H__
+#endif /* __Rapidcsv_h__ */

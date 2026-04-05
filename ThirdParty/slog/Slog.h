@@ -10,4 +10,4 @@
 #include <src/slog.h>
 #endif 
 
-#endif //  __Slog_h__
+#endif /* __Slog_h__ */

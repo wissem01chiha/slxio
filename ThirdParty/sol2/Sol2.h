@@ -10,4 +10,4 @@
 
 #endif 
 
-#endif //  __Sol2_h__
+#endif /* __Sol2_h__ */

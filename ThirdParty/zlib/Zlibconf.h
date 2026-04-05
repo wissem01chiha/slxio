@@ -12,4 +12,4 @@
 #include <src/zlib.h>
 #endif
 
-#endif // __Zlibconf_h__
+#endif /* __Zlibconf_h__ */

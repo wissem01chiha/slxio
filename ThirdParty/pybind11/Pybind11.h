@@ -10,4 +10,4 @@
 
 #endif 
 
-#endif //  __Pybind11_h__
+#endif /* __Pybind11_h__ */

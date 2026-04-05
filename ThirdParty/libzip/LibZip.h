@@ -10,4 +10,4 @@
 #include <src/lib/zip.h>
 #endif 
 
-#endif //  __Libzip_h__
+#endif /* __Libzip_h__ */

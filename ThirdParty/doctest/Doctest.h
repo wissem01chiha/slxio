@@ -12,4 +12,4 @@
 #include <src/doctest/doctest.h>
 #endif 
 
-#endif //  __Doctest_h__
+#endif /* __Doctest_h__ */

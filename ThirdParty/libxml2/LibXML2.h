@@ -22,4 +22,4 @@
     #include <src/include/libxml/xmlstring.h>
 #endif
 
-#endif // __LibXML2_h__
+#endif /* __LibXML2_h__ */

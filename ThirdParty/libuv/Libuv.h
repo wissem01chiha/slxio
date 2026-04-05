@@ -10,4 +10,4 @@
 #include <src/include/uv.h>
 #endif
 
-#endif // __Libuv_h__
+#endif /* __Libuv_h__ */

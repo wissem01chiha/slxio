@@ -10,4 +10,4 @@
 #include <src/loguru.hpp>
 #endif 
 
-#endif //  __Loguru_h__
+#endif /* __Loguru_h__ */

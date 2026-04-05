@@ -10,4 +10,4 @@
 #include "src/png.h"
 #endif 
 
-#endif //  __Libpng_h__
+#endif /* __Libpng_h__ */
