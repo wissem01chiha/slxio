@@ -1,0 +1,9 @@
+NAME
+  UV_ERR
+
+SUMMARY
+  Libuv Error Code Enumeration Mapping 
+
+VALUES
+  0   SLX_OK                Success
+
