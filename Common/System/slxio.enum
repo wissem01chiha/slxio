@@ -1,10 +1,8 @@
-NAME
-  ErrorCode
-
-SUMMARY
-  Container for all error codes used across the project.
-
-VALUES
+NAME 
+  System
+GROUP
+  Common
+ENUMERATION
   0   SLX_OK                Success
   1   SLX_ENOENT            Element not found
   2   SLX_EINVAR            Invalid argument
