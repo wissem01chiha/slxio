@@ -3,7 +3,6 @@ ModuleExternal.cmake
 ----------------
 Configure external dependencies for the project build
 #]=======================================================================]
-include (ModuleRemote)
 include (FindPythonModule)
 
 if (ENABLE_COVERAGE)

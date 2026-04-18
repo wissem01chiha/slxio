@@ -47,12 +47,6 @@ UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
-  Compiler.h
-  Platform.h
-  APIExport.h
-  ErrorCode.h
-  Status.h
-  Type.h
   File.h
   Directory.h
   FileManager.h
@@ -61,7 +55,6 @@ UNIX_HEADERS
 ANDROID_HEADERS
 WASM_HEADERS
 CONFIG_HEADERS
-  Option.h.in
 PUBLIC_DEPENDS
   ThirdParty::libuv
   ThirdParty::libzip

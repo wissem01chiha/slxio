@@ -1,29 +1,27 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef __Logger_h__
+#define __Logger_h__
 
 #include "ABINamespace.h"
-#include "File.h"
-#include "Type.h"
+#include "PlatformTypes.h"
+#include "ErrorTypes.h"
+#include "Config.h"
 #include <ostream>
 #include <sstream>
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
+
+#if defined(LOGGER_USE_SLOG) && defined(LOGGER_USE_LOGURU)
+#error "More than one logging utility is enabled!"
+#endif
+
+#if !defined(LOGGER_USE_SLOG) && !defined(LOGGER_USE_LOGURU)
+#error "No logging utility is enabled!"
+#endif
 
 /**
  * @class Logger
@@ -42,7 +40,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * logging in ostream logs Logger::LOG << and as fprintf style todo
  * add a check if the developer try to enable multiple loggers at once
  */
-class Logger
+class Logger final 
 {
 public:
   enum Verbosity
@@ -65,22 +63,31 @@ public:
     V_TRACE = 9
   };
 
+  /// @brief File access modes.
+  enum Mode
+  {
+    Truncate,
+    Append,
+    Read,
+    Write
+  };
+
   /// @brief initialize the Logger with command line arguments, for
   /// old style compatibility third party logging libs
-  static void init(int argc, char** argv);
+  static void Init(int argc, char** argv);
 
   /// @brief main logging routine, call with a message and a verbosity
   /// level, 2 overrides if not verbosity is specified Logger will
   /// internal level until an explict setting is done with
   /// setInternalVerbosity.
-  void log(Verbosity level, const char* message);
+  void Log(Verbosity level, const char* message);
 
   /// @brief log a message given the default set verbosity level
-  void log(const char* message);
+  void Log(const char* message);
 
   /// @brief Log a formatted message with a given verbosity level.
   template <typename... Args>
-  void log(Verbosity level, Args&&... args)
+  void Log(Verbosity level, Args&&... args)
   {
     if (!IsEnabled())
       return;
@@ -89,32 +96,32 @@ public:
     this->log(level, oss.str().c_str());
   }
   /// @brief get the singleton instance of the Logger
-  static Logger& getInstance();
+  static Logger& GetInstance();
 
   /// @brief set the verbosity level for stderr output
   /// everything below this level will not be printed to stderr
-  void setStderrVerbosity(Verbosity level);
+  void SetStderrVerbosity(Verbosity level);
 
   /// @brief set the default internal verbosity level
-  void setInternalVerbosity(Verbosity level);
+  void SetInternalVerbosity(Verbosity level);
 
   /// @brief set the defual file logging mode
-  void setInternalFileMode(File::Mode mode);
+  void SetInternalFileMode(Mode mode);
 
   /// @brief appen the given message to the given output stream
-  void print(const char* message, std::ostream& os);
+  void Print(const char* message, std::ostream& os);
 
   /// @brief log to a file with a specific verbosity level
-  ErrorCode logToFile(Verbosity verbosity, const char* path,
+  uint32 LogToFile(Verbosity verbosity, const char* path,
     unsigned int linenum, const char* message);
 
   /// @brief log to a random file generated in the current working
   /// directory
-  ErrorCode logToFile(Verbosity verbosity, const char* message);
+  uint32 LogToFile(Verbosity verbosity, const char* message);
 
-  static Verbosity toVerbosity(uint8 value);
+  static Verbosity ToVerbosity(uint8 value);
 
-  static Verbosity toVerbosity(const char* text);
+  static Verbosity ToVerbosity(const char* text);
 
   /// @brief check if logging is enabled, at runtime
   bool IsEnabled();
@@ -125,8 +132,8 @@ protected:
 private:
   Logger();
   Logger(const Logger&) = delete;
-  Logger::Verbosity internalVerbosityLevel;
-  File::Mode filemode;
+  Logger::Verbosity InternalVerbosityLevel;
+  Mode FileMode;
 };
 
 SLXIO_ABI_NAMESPACE_END

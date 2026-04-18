@@ -1,3 +1,12 @@
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+#[=======================================================================[.rst:
+Module.cmake
+----------------
+
+#]=======================================================================]
+
+
 #[==[.rst:
 .. cmake:function:: find_modules(<output> [<directory>...])
 
@@ -13,9 +22,9 @@
 
 #]==]
 function (find_modules output)
-  set (_modules_all)
+  set(_modules_all)
   foreach (_find_modules_directory IN LISTS ARGN)
-    file (GLOB_RECURSE _found_modules "${_find_modules_directory}/Module.txt")
+    file (GLOB_RECURSE _found_modules "${_find_modules_directory}/slxio.module")
     foreach (_module_file IN LISTS _found_modules)
       get_filename_component (_module_directory "${_module_file}" DIRECTORY)
       list (APPEND _modules_all ${_module_directory})
@@ -157,17 +166,17 @@ function (scan_submodules _sorted_list _modules_dir_list)
   set (_buffer ${_modules_dir_list})
 
   foreach (_mod_dir IN LISTS _buffer)
-    scan_module_file (_module "${_mod_dir}/Module.txt")
-    split_module_name (${_module_name} _module_prefix)
-    set (_module_id "${_module_prefix_NAMESPACE}_${_module_prefix_MODULE_NAME}")
+    scan_module_file(_module "${_mod_dir}/slxio.module")
+    #split_module_name (${_module_name} _module_prefix)
+    set (_module_id "${_module_prefix_GROUP}_${_module_prefix_MODULE_NAME}")
 
     get_submodule_dependency ("${_mod_dir}" _deps_raw)
 
     set (_deps_ids "")
     foreach (_d IN LISTS _deps_raw)
       if (_d MATCHES "::")
-        split_module_name (${_d} _dep_prefix)
-        set (_dep_id "${_dep_prefix_NAMESPACE}_${_dep_prefix_MODULE_NAME}")
+        #split_module_name (${_d} _dep_prefix)
+        set (_dep_id "${_dep_prefix_GROUP}_${_dep_prefix_MODULE_NAME}")
         list (APPEND _deps_ids "${_dep_id}")
       else ()
         message (FATAL_ERROR "Module name should be Namespace::Identifier  ${_d}")
@@ -232,7 +241,7 @@ endfunction ()
 #[==[.rst:
 .. cmake:function:: get_submodule_dependency(<module_directory> <list>)
 
-  scan the Module.txt file found in the <module_directory> variable
+  scan the slxio.module file found in the <module_directory> variable
   and fetch set them in an ouput list
 
   .. code-block::cmake
@@ -244,11 +253,11 @@ function (get_submodule_dependency module_dir dep_list)
   if (NOT IS_DIRECTORY "${module_dir}")
     message (FATAL_ERROR "'${module_dir}' is not a valid directory")
   endif ()
-  set (_module_file "${module_dir}/Module.txt")
+  set (_module_file "${module_dir}/slxio.module")
   if (NOT EXISTS "${_module_file}")
-    message (FATAL_ERROR "Missing Module.txt in '${module_dir}'")
+    message (FATAL_ERROR "Missing slxio.module in '${module_dir}'")
   endif ()
-  scan_module_file (_module "${_module_file}")
+  scan_module_file(_module "${_module_file}")
 
   set (_deps "")
   if (NOT "${_module_public_depends}" STREQUAL "")
@@ -291,17 +300,17 @@ endfunction ()
 #[==[.rst:
 .. cmake:function:: scan_module_file(<prefix> <file_path>)
 
-Module.txt file contents
-========================
+slxio.module file contents
+=========================
 
-The Module.txt is parsed and used as input to the CMake build system
+The slxio.module is parsed and used as input to the CMake build system
 Uppercase keys are used to define various properties of the module.
 any uppercase key is considered a valid key except the values TRUE/FALSE
 Uppercase values are not allowed as they will be considered as keys
 This function sets pattern for module metadata in parent scope as
   <prefix>_<key>
 if <file_path> not given, the default is the value of the variable
-  ${CMAKE_CURRENT_SOURCE_DIR}/Module.txt
+  ${CMAKE_CURRENT_SOURCE_DIR}/slxio.module
 
 Example:
   scan_module_file(MODULE)
@@ -310,73 +319,88 @@ Example:
     MODULE_version
     ....
 
-Template of Module.txt file:
+Template of slxio.module file:
 
 .. code-block:: text
   NAME
-    <namespace>::<module_name>
-  DESCRIPTION
-    <module_description>
-  LICENSE
-    <license_type>
-  VERSION
-     <module_version>
-  MAINTAINER
-    <maintainer_contact>
-  ENABLE_BUILD
+    <module_name>
+  GROUP
+    <namespace>
+  LIBRARY_NAME
+    CommonCore
+  SPDX_LICENSE_IDENTIFIER
+    <SPDX license identifier>
+  SPDX_COPYRIGHT_TEXT
+    <SPDX copyright text>
+  SPDX_CUSTOM_LICENSE_FILE
+  SPDX_CUSTOM_LICENSE_NAME
+  LICENSE_FILES
+  DESCRIPTION  
+    <module description>
+  VERSION 
+    <module version> 
+  MAINTAINER 
+    <module maintainer>
+  ENABLE_BUILD 
+    TRUE/FALSE
+  ENABLE_SOURCE_TARGETS
+    FALSE/TRUE
+  INCLUDE_IN_GROUP
     TRUE/FALSE
   ENABLE_TEST
     TRUE/FALSE
-  ENABLE_DOC
+  ENABLE_COVERAGE
     TRUE/FALSE
-  ENABLE_BINDING
+  INSTALL_HEADERS 
+    TRUE/FALSE 
+  INSTALL_TARGETS 
     TRUE/FALSE
-  INSTALL_HEADERS
-    TRUE/FALSE
-  INSTALL_TARGETS
+  INSTALL_LICENSES
     TRUE/FALSE
   CLASSES
-    classA
-    classB
+    <class_name>
+  WINDOWS_CLASSES
+  UNIX_CLASSES
+  MACOS_CLASSES
   SOURCES
-    sourceA.cxx
-    sourceB.cxx
+  WINDOWS_SOURCES
+  UNIX_SOURCES
+  ANDROID_SOURCES
+  WASM_SOURCES
   HEADERS
-    headerA.h
-    headerB.h
+    <header_name>
+  WINDOWS_HEADERS
+  UNIX_HEADERS
+  ANDROID_HEADERS
+  WASM_HEADERS
   CONFIG_HEADERS
-    configA.h.in
-    configB.h.in
-  CMAKE_MODULES_DIRS
-    cmake/
   PUBLIC_DEPENDS
-    ModuleA::SubModule1
-    ModuleB::SubModule2
+    <dependency_name>
   PRIVATE_DEPENDS
-    ModuleC::SubModule3
-  PRIVATE_COMPILE_DEFINITIONS
-    DEFINE_A
-    DEFINE_B
-  PUBLIC_COMPILE_DEFINITIONS
-    DEFINE_C
-  TEST_DEPENDS
-    ModuleD::SubModule4
-  TEST_OPTIONAL_DEPENDS
-    ModuleE::SubModule5
-  BINDING_DEPENDS
-    ModuleF::SubModule6
-  BINDING_OPTIONAL_DEPENDS
-    ModuleG::SubModule7
+  WINDOWS_DEPENDS
+  UNIX_DEPENDS
+  MACOS_DEPENDS
+  ANDROID_DEPENDS
+  WASM_DEPENDS
+  COMPILE_FLAGS
+  WINDOWS_COMPILE_FLAGS
+  UNIX_COMPILE_FLAGS
+  MACOS_COMPILE_FLAGS
+  ANDROID_COMPILE_FLAGS
+  TEST_DEPENDS 
+    <dependency_name>
+  TEST_OPTIONAL_DEPENDS 
+
 #]==]
 function (scan_module_file prefix)
 
   if (ARGC GREATER 1)
     set (_module_path "${ARGV1}")
   else ()
-    set (_module_path "${CMAKE_CURRENT_SOURCE_DIR}/Module.txt")
+    set (_module_path "${CMAKE_CURRENT_SOURCE_DIR}/slxio.module")
   endif ()
   if (NOT EXISTS "${_module_path}")
-    message (FATAL_ERROR "Module.txt not found at: ${_module_path}")
+    message (FATAL_ERROR "slxio.module not found at: ${_module_path}")
     return ()
   endif ()
 
@@ -393,7 +417,7 @@ function (scan_module_file prefix)
 
   set (current_key "")
   set (current_values "")
-
+  message(STATUS "Scanning module file :${_module_path}")
   foreach (i RANGE 0 ${last_index})
     list (GET contents ${i} line)
     string (STRIP "${line}" strip_line)
@@ -432,7 +456,7 @@ endfunction ()
 
   Check whether a module can be built as a CMake target.
 
-  This function scans the ``Module.txt`` file for the given ``<module>`` and
+  This function scans the ``slxio.module`` file for the given ``<module>`` and
   checks whether the module defines any classes or sources. If either
   ``<module>_classes`` or ``<module>_sources`` is non-empty, the module is
   considered buildable and can be wrapped as a target.
@@ -571,7 +595,7 @@ endfunction ()
   TODO: add support for adding include dirs from depandecies also
         and specify for each module what headers to include either
         public or private for the dependecies modules via
-        PUBLIC_HEADERS or PRIVATE_HEADERS in Module.txt declration file
+        PUBLIC_HEADERS or PRIVATE_HEADERS in slxio.module declration file
 #]==]
 function (module_include_directories target_name prefix)
 
@@ -671,7 +695,7 @@ endfunction ()
 .. cmake:function:: module_add_cmake_modules ()
 
   This function let modules register their cmake modules to be
-  available globally, cmake local module folder are list in Module.txt
+  available globally, cmake local module folder are list in slxio.module
   under CMAKE_MODULES_DIRS key, this function shoule be invoked before
   add_submodules to make sure all modules cmake modules are available
   return a list of all cmake modules paths to added to CMAKE_MODULE_PATH
@@ -693,7 +717,7 @@ function (module_add_cmake_modules directory)
 
   find_modules (_submodules_directory_list ${directory} _module_cmake_paths)
   foreach (_submodule_directory IN LISTS _submodules_directory_list)
-    scan_module_file (MODULE "${_submodule_directory}/Module.txt")
+    scan_module_file (MODULE "${_submodule_directory}/slxio.module")
     if (DEFINED MODULE_cmake_modules_dirs AND NOT "${MODULE_cmake_modules_dirs}" STREQUAL
                                               "")
       foreach (module_cmake_dir IN LISTS MODULE_cmake_modules_dirs)
@@ -774,4 +798,179 @@ function (add_module module_name)
   module_link_libraries (${module_name})
   module_add_compile_defintions (${module_name})
 
+endfunction ()
+
+#[==[.rst:
+.. cmake:function:: add_test_sources(<module> [<source>...])
+
+  A wrapper around ``target_sources`` that works for module test sources.
+
+  Example:
+    add_test_sources(Common::Core
+        TestErrorBuffer.cxx
+    )
+
+#]==]
+function (add_test_sources module)
+
+  module_target_name (${module} tmp)
+  foreach (filename IN LISTS ARGN)
+    get_filename_component (test_name "${filename}" NAME_WE)
+    split_module_name (${module} tmp)
+    set (test_name "${tmp_NAMESPACE}${tmp_MODULE_NAME}${test_name}")
+    add_executable (${test_name} ${filename})
+    add_test_dependencies (${test_name} ${module})
+    test_include_directory (${test_name} ${module})
+    test_link_libraries (${test_name} ${module})
+    add_test (NAME ${test_name} COMMAND ${test_name})
+  endforeach ()
+
+endfunction ()
+
+#[==[.rst:
+.. cmake:function:: add_test_dependencies(<test_target> <module>)
+
+  A wrapper around ``add_dependencies`` that works for module test dependencies.
+  fetch all required and optional dependencies for the module tests targets
+
+#]==]
+function (add_test_dependencies test_target module)
+
+  module_target_name (${module} tmp)
+  add_dependencies (${test_target} ${tmp_TARGET_NAME})
+  set (MODULE_test_dep_targets "")
+  foreach (test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
+    module_target_name (${test_dep} dep_tmp)
+    list (APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
+  endforeach ()
+  if (MODULE_test_dep_targets)
+    add_dependencies (${test_target} ${MODULE_test_dep_targets})
+  endif ()
+
+endfunction ()
+
+#[==[.rst:
+.. cmake:function:: test_link_libraries(<test_target>)
+
+  A wrapper around ``target_link_libraries`` that works for module test dependencies.
+
+  test_link_libraries(IOSlxTestParameterParser ThirdParty::libxml2)
+#]==]
+function (test_link_libraries test_target module)
+
+  module_target_name (${module} tmp)
+  target_link_libraries (${test_target} PRIVATE ${tmp_TARGET_NAME})
+
+  set (MODULE_test_dep_targets "")
+
+  foreach (test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
+    module_target_name (${test_dep} dep_tmp)
+    list (APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
+  endforeach ()
+
+  if (MODULE_test_dep_targets)
+    target_link_libraries (${test_target} PRIVATE ${MODULE_test_dep_targets})
+  endif ()
+
+  get_target_property (_module_libs ${tmp_TARGET_NAME} LINK_LIBRARIES)
+  if (_module_libs)
+    target_link_libraries (${test_target} PRIVATE ${_module_libs})
+  endif ()
+
+endfunction ()
+
+#[==[.rst:
+  ..  cmake_function:test_include_directory(<test_target>)
+
+  A wrapper around target include directory but for modules test dependency
+
+#]==]
+function (test_include_directory test_target module)
+
+  module_target_name (${module} prefix)
+  get_target_property (_module_include_dirs ${prefix_TARGET_NAME} INCLUDE_DIRECTORIES)
+
+  target_include_directories (
+    ${test_target} PUBLIC "${_module_include_dirs}" "${CMAKE_CURRENT_BINARY_DIR}"
+                          "${CMAKE_CURRENT_SOURCE_DIR}")
+
+  get_filename_component (_module_test_dir "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
+  get_filename_component (_parent_dir "${_module_test_dir}" DIRECTORY)
+  get_filename_component (_module_dir "${_parent_dir}" DIRECTORY)
+
+  scan_module_file (_module "${_module_dir}/slxio.module")
+
+  if (DEFINED _module_test_depends AND NOT "${_module_test_depends}" STREQUAL "")
+    foreach (test_dep IN LISTS _module_test_depends)
+      module_target_name (${test_dep} _dep_prefix)
+      get_target_property (_dep_mod_inc_dirs ${_dep_prefix_TARGET_NAME}
+                           INCLUDE_DIRECTORIES)
+      target_include_directories (${test_target} PRIVATE "${_dep_mod_inc_dirs}")
+    endforeach ()
+  endif ()
+
+  if (DEFINED _module_test_optional_depends AND NOT "${_module_test_optional_depends}"
+                                                STREQUAL "")
+    foreach (test_opt_dep IN LISTS _module_test_optional_depends)
+      module_target_name (${test_opt_dep} _opt_dep_prefix)
+      get_target_property (_opt_dep_mod_inc_dirs ${_opt_dep_prefix_TARGET_NAME}
+                           INCLUDE_DIRECTORIES)
+      target_include_directories (${test_target} PRIVATE "${_opt_dep_mod_inc_dirs}")
+    endforeach ()
+  endif ()
+
+endfunction ()
+
+#[=======================================================================[.rst:
+ModuleDebugging.cmake
+-----------------
+Provides utilities to debug module parsing and configuration.
+#]=======================================================================]
+
+option ("${PROJECT_NAME}_DEBUG_MODULE" "Debug module logic in ${PROJECT_NAME}" OFF)
+mark_as_advanced ("${PROJECT_NAME}_DEBUG_MODULE")
+
+include (CMakeDependentOption)
+
+#[==[.rst:
+.. cmake:function:: module_debug(<module>)
+  Debugging function to print all parsed variables of a module.
+  this function is only when module level debugging var is enabled
+  it will print all the global variables set after parsing the slxio.module file
+  for the given module
+
+  .. code-block:: cmake
+
+    module_debug(Common::Core)
+
+  TODO: Improve the output formatting for better readability,
+  for now set the global debug flag manully before invoking the function
+#]==]
+function (module_debug module)
+  if (NOT MODULE_DEBUG)
+    return ()
+  endif ()
+  scan_module_file (tmp)
+  message (STATUS "---- Debugging  global variables for ${module} ----")
+  message (STATUS "MODULE_IS_MODULE_TARGET  = ${MODULE_IS_MODULE_TARGET}")
+  message (STATUS "MODULE_name              = ${tmp_name}")
+  message (STATUS "MODULE_description       = ${tmp_description}")
+  message (STATUS "MODULE_license           = ${tmp_license}")
+  message (STATUS "MODULE_version           = ${tmp_version}")
+  message (STATUS "MODULE_maintainer        = ${tmp_maintainer}")
+  message (STATUS "MODULE_enable_build      = ${tmp_enable_build}")
+  message (STATUS "MODULE_enable_test       = ${tmp_enable_test}")
+  message (STATUS "MODULE_enable_binding    = ${tmp_enable_binding}")
+  message (STATUS "MODULE_enable_documentation = ${tmp_enable_documentation}")
+  message (STATUS "MODULE_install_headers   = ${tmp_install_headers}")
+  message (STATUS "MODULE_install_targets   = ${tmp_install_targets}")
+  message (STATUS "MODULE_classes           = ${tmp_classes}")
+  message (STATUS "MODULE_sources           = ${tmp_sources}")
+  message (STATUS "MODULE_headers           = ${tmp_headers}")
+  message (STATUS "MODULE_config_headers    = ${tmp_config_headers}")
+  message (STATUS "MODULE_public_depends    = ${tmp_public_depends}")
+  message (STATUS "MODULE_private_depends   = ${tmp_private_depends}")
+  message (STATUS "MODULE_test_depends      = ${tmp_test_depends}")
+  message (STATUS "MODULE_test_optional_depends = ${tmp_test_optional_depends}")
+  message (STATUS "----------------------------------------------------------")
 endfunction ()

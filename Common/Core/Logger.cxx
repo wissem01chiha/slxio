@@ -1,7 +1,8 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
 #include "Logger.h"
 #include "Compiler.h"
-#include "Option.h"
-#include "Platform.h"
 #include <cstring>
 #include <fstream>
 #include <random>
@@ -11,20 +12,17 @@
 #include "Slog.h"
 #elif defined(LOGGER_USE_LOGURU)
 #include "Loguru.h"
-#else
-#error "No logging Utility is Enbaled"
 #endif
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
-  : internalVerbosityLevel(Logger::Verbosity::V_INFO)
-  , filemode(File::Mode::Append)
+  : InternalVerbosityLevel(Logger::Verbosity::V_INFO)
 {
 }
 
-void Logger::init(int argc, char** argv)
+void Logger::Init(int argc, char** argv)
 {
 #ifdef LOGGER_USE_LOGURU
   loguru::init(argc, argv);
@@ -38,7 +36,7 @@ void Logger::init(int argc, char** argv)
 #endif
 }
 
-void Logger::log(Verbosity level, const char* message)
+void Logger::Log(Verbosity level, const char* message)
 {
 #ifdef LOGGER_USE_LOGURU
   switch (level)
@@ -94,18 +92,18 @@ void Logger::log(Verbosity level, const char* message)
 #endif
 }
 
-void Logger::log(const char* message)
+void Logger::Log(const char* message)
 {
-  log(internalVerbosityLevel, message);
+  Log(InternalVerbosityLevel, message);
 }
 
-Logger& Logger::getInstance()
+Logger& Logger::GetInstance()
 {
   static Logger instance;
   return instance;
 }
 
-void Logger::setStderrVerbosity(Verbosity level)
+void Logger::SetStderrVerbosity(Verbosity level)
 {
 #ifdef LOGGER_USE_LOGURU
 
@@ -171,27 +169,27 @@ void Logger::setStderrVerbosity(Verbosity level)
   google::LogToStderr();
 
 #else
-  (void*)internalVerbosityLevel;
+  (void*)InternalVerbosityLevel;
 #endif
-  internalVerbosityLevel = level;
+  InternalVerbosityLevel = level;
 }
 
-void Logger::setInternalVerbosity(Verbosity level)
+void Logger::SetInternalVerbosity(Verbosity level)
 {
-  internalVerbosityLevel = level;
+  InternalVerbosityLevel = level;
 }
 
-void Logger::setInternalFileMode(File::Mode mode)
+void Logger::SetInternalFileMode(Mode mode)
 {
-  filemode = mode;
+  FileMode = mode;
 }
 
-void Logger::print(const char* message, std::ostream& os)
+void Logger::Print(const char* message, std::ostream& os)
 {
   os << message;
 }
 
-ErrorCode Logger::logToFile(Verbosity verbosity, const char* path,
+uint32 Logger::LogToFile(Verbosity verbosity, const char* path,
   unsigned int linenum, const char* message)
 {
 #ifdef LOGGER_USE_LOGURU
@@ -211,18 +209,18 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char* path,
     out << "[" << static_cast<int>(verbosity) << "] " << path << ":" << linenum
         << " " << message << std::endl;
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 #endif
 }
 
-ErrorCode Logger::logToFile(Verbosity verbosity, const char* message)
+uint32 Logger::LogToFile(Verbosity verbosity, const char* message)
 {
 
   const size_t size = 1024;
   char buffer[size];
   if (getcwd(buffer, size) == nullptr)
   {
-    return ErrorCode::SLX_EGETCWD;
+    return SLX_EGETCWD;
   }
 
   std::random_device rand_dev;
@@ -236,25 +234,25 @@ ErrorCode Logger::logToFile(Verbosity verbosity, const char* message)
   if (strlen(buffer) + strlen(path) < size)
   {
     strcat(buffer, path);
-    ErrorCode errno_ = logToFile(verbosity, path, 1, message);
-    if (errno_ != ErrorCode::SLX_OK)
+    uint32 errno_ = LogToFile(verbosity, path, 1, message);
+    if (errno_ != SLX_OK)
     {
       return errno_;
     }
   }
   else
   {
-    return ErrorCode::SLX_ELONGPATH;
+    return SLX_ELONGPATH;
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-Logger::Verbosity Logger::toVerbosity(uint8 value)
+Logger::Verbosity Logger::ToVerbosity(uint8 value)
 {
   return static_cast<Logger::Verbosity>(value);
 }
 
-Logger::Verbosity Logger::toVerbosity(const char* text)
+Logger::Verbosity Logger::ToVerbosity(const char* text)
 {
 
   if (text != nullptr && *text)

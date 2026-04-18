@@ -4,6 +4,22 @@
 #ifndef __Config_h__
 #define __Config_h__
 
+#include "PlatformMacro.h"
+
+#ifdef PLATFORM_WINDOWS
+#define PATH_SEP '\\'
+#else
+#define PATH_SEP '/'
+#endif
+
+#ifdef PLATFORM_WINDOWS
+#include <direct.h>
+#else
+#include <unistd.h>
+#endif
+
+#define LOGGER_USE_SLOG
+
 #ifdef __Cxxopts_h__
 #error "Cxxopts.h should not be included before Config.h"
 #endif

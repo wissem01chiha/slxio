@@ -5,21 +5,23 @@
 #define __VersionMacro_h__
 
 #ifdef SLXIO_VERSION_MAJOR
-#error "SLXIO_VERSION_MAJOR is defined"
+#error "SLXIO_VERSION_MAJOR is already defined !"
 #else
 #define SLXIO_VERSION_MAJOR 0
 #endif
 
 #ifdef SLXIO_VERSION_MINOR
-#error "SLXIO_VERSION_MINOR is defined"
+#error "SLXIO_VERSION_MINOR is already defined !"
 #else
 #define SLXIO_VERSION_MINOR 1
 #endif
 
 #ifdef SLXIO_VERSION_PATCH
-#error "SLXIO_VERSION_PATCH is defined"
+#error "SLXIO_VERSION_PATCH is already defined !"
 #else
 #define SLXIO_VERSION_PATCH 0
 #endif
+
+#define SLXIO_VERSION_STRING "v0.1.0"
 
 #endif /* __VersionMacro_h__ */

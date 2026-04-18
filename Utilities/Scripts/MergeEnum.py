@@ -1,27 +1,31 @@
-#!/usr/bin/env python3 
+#!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 # SPDX-License-Identifier: Apache-2.0
 #
-# enumeration editor tool 
-# this tool  is develloped in order to help me mangaing large 
-# project enumetaions defintion across modules and parts of the sowfatere in a clean 
-# configurable way, build around slxio.enum file
-# the idea was somhwo inspired from Chronioum historgram enumartion xml 
-# and the autosar worflows 
+# Enumeration Merge Tool
+# This tool is developed to help manage large project enumeration
+# definitions across modules and parts of the software in a clean,
+# configurable way. It is built around the slxio.enum file.
+# The idea was inspired by Chromium histogram enumeration XML
+# and the AUTOSAR workflows.
+#
+# How to use:
+#   >> python3 MergeEnum.py --enum-map-file 'path/to/enum.map' --root-dir 
+#       'path/to/slxio/root' --output-file 'path/to/output/header.h'
+#
+# By default, it will update and generate the slxio.enum file in the root
+# directory with the merged enumeration definitions.
+# It parses all slxio.enum files for all modules. For each enum value,
+# it computes a unique identifier within the project.
 
-
-# hwo to use :
-# MergeEnumMap --enum-map-file 'path/to/enum.map' -root-dir 'path/to/slxio/root' -ouput-file 'path/to/ouput/header.h'
-# by default it will update and gnerte the slxio.enium file in the root dir with the merged enumeration definitions
-# parse all slxio.enum files for all modules, for each enum value compute a unique identifer 
-# within the project 
-
+import datetime
 import os
 
-# parse the enum map file to get the mapping between module id and module name, 
-# and group id and group name
 def parse_enum_map_file(filename):
-
+    """
+    Parse the enum map file to get the mapping between module 
+    id and module name and group id and group name.s
+    """
     names = {}
     groups = {}
     current_section = None
@@ -48,8 +52,10 @@ def parse_enum_map_file(filename):
 
     return names, groups
 
-# read metada fro mslxio.module to get name and groupe name 
 def parse_module_file(filename):
+    """
+    Read metada fro mslxio.module to get name and groupe name 
+    """
     print(f"Parsing module file: {filename}")
     module_name = None
     group_name = None
@@ -74,10 +80,11 @@ def parse_module_file(filename):
                 current_section = None
 
     return module_name, group_name
-
-# read a given enumeration file 
-# return tuple
+ 
 def parse_enum_file(path):
+    """
+    Read a given enumeration file, return tuple 
+    """
     enums = []
     with open(path, "r", encoding="utf-8") as f:
         for line in f:
@@ -90,11 +97,12 @@ def parse_enum_file(path):
                 enums.append((int(code), ident))  
     return enums
 
-
-# this function will generate the final enumeration definitions 
-# by merging the enums with the names and groups 
-# and return a list of enumeration definitions 
 def merge_enum_definitions(enums, names, groups):
+    """
+    This function will generate the final enumeration definitions
+    by merging the enums with the names and groups
+    and return a list of enumeration definitions 
+    """
     enum_definitions = []
     
     names_rev = {v: k for k, v in names.items()}
@@ -119,17 +127,21 @@ def merge_enum_definitions(enums, names, groups):
 
     return enum_definitions
 
-# by default all error code are 32 bist signed integres, 
-# 8 most sig bist for Group id 
-# 8 bits for module id 
-# 16 bits for error code
 def get_enum_global_id(group_id, module_id, error_code):
+    """
+    by default all error code are 32 bist signed integres, 
+    8 most sig bist for Group id
+    8 bits for module id
+    16 bits for error code 
+    """
     error_val = abs(error_code) & 0xFFFF
     return (group_id << 24) | (module_id << 16) | error_val
+        
 
-
-# by default it genrate a C99 header file 
 def generate_enum_header(enum_definitions, output_file):
+    """
+    by default it genrate a C99 header file 
+    """
     with open(output_file, "w", encoding="utf-8") as f:
         f.write("// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha\n")
         f.write("// SPDX-License-Identifier: Apache-2.0\n")
@@ -139,17 +151,26 @@ def generate_enum_header(enum_definitions, output_file):
         f.write("//===============================================================\n")
         f.write("\n")
 
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        f.write(f"// Generated on {timestamp}\n")
+
+        f.write("\n")
         f.write("#ifndef __ErrorTypes_h__\n")
         f.write("#define __ErrorTypes_h__\n\n")
 
+        f.write("#ifdef __cplusplus\n")
+        f.write('extern "C" {\n')
+        f.write("#endif\n")
+
         for ident, gid in enum_definitions.items():
             f.write("\n")
-            f.write(f"#ifdef {ident}\n")
-            f.write(f"#undef {ident}\n")
-            f.write(f"#endif\n")
             f.write(f"#define {ident}  0x{gid:08X}\n")
 
         f.write("\n")
+        f.write("#ifdef __cplusplus\n")
+        f.write("} /*__cplusplus */ \n")
+        f.write("#endif\n\n")
+        
         f.write("#endif /* __ErrorTypes_h__*/ \n")
 
 
@@ -183,6 +204,6 @@ def main(root_dir, mapping_file, output_header):
 
 if __name__ == "__main__":
     main("C:/Users/chiha.000/Documents/github/slxio",
-        "C:/Users/chiha.000/Documents/github/slxio/Utilities/Scripts/enum.map",
+        "C:/Users/chiha.000/Documents/github/slxio/Common/Core/enum.map",
         "C:/Users/chiha.000/Documents/github/slxio/Common/Core/ErrorTypes.h")
 

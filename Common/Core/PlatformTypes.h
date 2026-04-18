@@ -1,13 +1,11 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __PlatformType_h__
-#define __PlatformType_h__
+#ifndef __PlatformTypes_h__
+#define __PlatformTypes_h__
 
-#include "Option.h"
-#include "Platform.h"
-#include <cstdint>
-#include <limits>
+#include "Config.h"
+#include "Compiler.h"
 
 #ifdef USE_FLOAT16
 using Float = _Float16;
@@ -74,4 +72,4 @@ struct InstantiateTemplates
   using RestTypes = InstantiateTemplates<T, Rest...>;
 };
 
-#endif /* __PlatformType_h__ */
+#endif /* __PlatformTypes_h__ */

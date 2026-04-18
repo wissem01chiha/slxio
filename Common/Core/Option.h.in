@@ -1,19 +1,8 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
-#ifndef OPTION_H
-#define OPTION_H
+#ifndef __Option_h__
+#define __Option_h__
 
 #cmakedefine USE_64BIT_INDEX
 #cmakedefine USE_32BIT_INDEX
@@ -36,7 +25,6 @@
 #cmakedefine01 HAVE_WINDOWS_H 
 #cmakedefine01 HAVE_INTRIN_H 
 
-#cmakedefine01 HAVE_CPUID_H 
 
 #cmakedefine01 HAVE_SYS_STAT_H
 #cmakedefine01 HAVE_SYS_TYPES_H 
@@ -50,6 +38,4 @@
 #cmakedefine LOGGER_USE_SLOG
 #cmakedefine LOGGER_USE_LOGURU
 
-#define PROJECT_ROOT_DIR "${CMAKE_SOURCE_DIR}"
-
-#endif // OPTION_H
+#endif /* __Option_h__ */

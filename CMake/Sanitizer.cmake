@@ -3,4 +3,3 @@ Sanitizer.cmake
 -----------
 Provides options to enable sanitizers for the build.
 #]=======================================================================]
-include (ModuleSanitizer)
