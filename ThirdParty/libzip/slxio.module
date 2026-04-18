@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::libzip
+  libzip
+GROUP
+  ThirdParty
 DESCRIPTION
   Libzip Library Third Party Module
 LICENSE

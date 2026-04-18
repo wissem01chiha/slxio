@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Data
+  Data
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Data Support Module 
 LICENSE   

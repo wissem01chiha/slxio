@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::zlib
+  zlib
+GROUP
+  ThirdParty
 DESCRIPTION
   A massively spiffy yet delicately unobtrusive compression library.
 LICENSE

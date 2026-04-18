@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::slog
+  slog
+GROUP
+  ThirdParty
 DESCRIPTION
   Slog Logging Third Party Module
 LICENSE

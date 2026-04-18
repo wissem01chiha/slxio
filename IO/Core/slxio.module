@@ -1,5 +1,7 @@
 NAME 
-  IO::Core
+  Core
+GROUP
+  IO
 DESCRIPTION  
   File Readers and Writers Core Module 
 LICENSE   

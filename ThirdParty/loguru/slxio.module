@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::loguru
+  loguru
+GROUP
+  ThirdParty
 LIBRARY_NAME
   ThirdPartyloguru
 SPDX_LICENSE_IDENTIFIER

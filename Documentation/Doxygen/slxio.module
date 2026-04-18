@@ -1,5 +1,7 @@
 NAME 
-  Documentation::Doxygen
+  Doxygen
+GROUP
+  Documentation
 DESCRIPTION  
   Doxygen API Documentation Module 
 LICENSE   

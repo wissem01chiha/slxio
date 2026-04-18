@@ -1,5 +1,7 @@
 NAME 
-  IO::Slx
+  Slx
+GROUP
+  IO
 DESCRIPTION  
   SLX IO Module 
 LICENSE   

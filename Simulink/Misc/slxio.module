@@ -1,5 +1,7 @@
-NAME
-  Simulink::Misc
+NAME 
+  Misc
+GROUP
+  Simulink
 DESCRIPTION
   Simulink Misc Support Module
 LICENSE

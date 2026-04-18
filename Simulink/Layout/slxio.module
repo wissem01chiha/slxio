@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Layout
+  Layout
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Layout Support Module 
 LICENSE

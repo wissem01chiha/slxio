@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Stateflow
+  Stateflow
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Stateflow Module 
 LICENSE   

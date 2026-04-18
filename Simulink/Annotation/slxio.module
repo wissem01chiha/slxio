@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Annotation
+  Annotation
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Annotation Module 
 LICENSE   

@@ -1,5 +1,7 @@
 NAME 
-  IO::Json
+  Json
+GROUP
+  IO
 DESCRIPTION  
   SLX Json Converter Module 
 LICENSE   

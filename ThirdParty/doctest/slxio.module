@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::doctest
+  doctest
+GROUP
+  ThirdParty
 LIBRARY_NAME
   ThirdPartydoctest
 SPDX_LICENSE_IDENTIFIER

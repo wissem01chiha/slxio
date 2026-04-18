@@ -1,5 +1,7 @@
 NAME
-  Utilities::Cli
+  Cli
+GROUP
+  Utilities
 DESCRIPTION
   Cli Utility Module
 LICENSE

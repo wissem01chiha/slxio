@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Library
+  Library
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Library Block Module 
 LICENSE   

@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::tinyxml2
+  tinyxml2
+GROUP
+  ThirdParty
 LIBRARY_NAME
   ThirdPartytinyxml2
 SPDX_LICENSE_IDENTIFIER

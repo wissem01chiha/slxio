@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::json-c
+  json-c
+GROUP
+  ThirdParty
 LIBRARY_NAME
   ThirdPartyjson-c
 SPDX_LICENSE_IDENTIFIER

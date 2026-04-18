@@ -3,26 +3,26 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-uint32 Version::getMajorVersion()
+uint32 Version::GetMajorVersion()
 {
   return (uint32)SLXIO_VERSION_MAJOR;
 }
 
-uint32 Version::getMinorVersion()
+uint32 Version::GetMinorVersion()
 {
   return (uint32)SLXIO_VERSION_MINOR;
 }
 
-uint32 Version::getPatchVersion()
+uint32 Version::GetPatchVersion()
 {
   return (uint32)SLXIO_VERSION_PATCH;
 }
-bool Version::isMajorVersionLessThan(uint32 version)
+bool Version::IsMajorVersionLessThan(uint32 version)
 {
   return SLXIO_VERSION_MAJOR < version;
 }
 
-bool Version::isMinorVersionLessThan(uint32 version)
+bool Version::IsMinorVersionLessThan(uint32 version)
 {
   return SLXIO_VERSION_MINOR < version;
 }

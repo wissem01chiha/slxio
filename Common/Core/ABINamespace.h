@@ -15,8 +15,8 @@
 #ifndef ABINAMESPACE_H
 #define ABINAMESPACE_H
 
-#cmakedefine01 ENABLE_NAMESPACE
-#cmakedefine01 ENABLE_ABI_NAMESPACE
+//#define ENABLE_NAMESPACE 0
+//#define ENABLE_ABI_NAMESPACE 0 
 
 #if ENABLE_NAMESPACE
   #if defined(__cplusplus)

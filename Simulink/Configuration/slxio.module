@@ -1,5 +1,7 @@
 NAME 
-  Simulink::Configuration
+  Configuration
+GROUP
+  Simulink
 DESCRIPTION  
   Simulink Configuration Support Module 
 LICENSE   

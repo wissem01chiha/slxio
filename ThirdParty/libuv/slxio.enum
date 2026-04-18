@@ -1,8 +1,3 @@
-NAME
-  libuv
-GROUP
-  ThirdParty
-ENUMERATION
   -4095   UV__EOF
   -4094   UV__UNKNOWN
   -3000   UV__EAI_ADDRFAMILY

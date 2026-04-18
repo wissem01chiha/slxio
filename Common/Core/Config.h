@@ -64,11 +64,6 @@
 #endif
 #undef USE_EXTERNAL_SOL2
 
-#ifdef __Spdlog_h__
-#error "Spdlog.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_SPDLOG
-
 #ifdef __TinyXML2_h__
 #error "TinyXML2.h should not be included before Config.h"
 #endif

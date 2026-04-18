@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::libxml2
+  libxml2
+GROUP
+  ThirdParty
 DESCRIPTION
   Libxml2 Third Party Library
 LICENSE

@@ -1,5 +1,7 @@
 NAME
-  Common::Core
+  Core
+GROUP
+  Common
 DESCRIPTION
   Core Common Module
 LICENSE

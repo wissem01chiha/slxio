@@ -1,5 +1,7 @@
 NAME
-  ThirdParty::cxxopts
+  cxxopts
+GROUP
+  ThirdParty
 LIBRARY_NAME
   ThirdPartycxxopts
 SPDX_LICENSE_IDENTIFIER
