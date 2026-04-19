@@ -2,3 +2,5 @@ NAME
   rapidcsv
 GROUP
   ThirdParty
+LIBRARY_NAME
+  ThirdPartyrapidcsv

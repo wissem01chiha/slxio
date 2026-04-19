@@ -2,3 +2,5 @@ NAME
   sol2
 GROUP
   ThirdParty
+LIBRARY_NAME
+  ThirdPartysol2

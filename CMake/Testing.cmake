@@ -4,9 +4,7 @@ Testing
 Configure testing settings for the project build
 #]=======================================================================]
 include (CTest)
-include (ModuleTesting)
 
-set (CTEST_OUTPUT_ON_FAILURE TRUE)
 
 if (ENABLE_TESTING)
   enable_testing ()

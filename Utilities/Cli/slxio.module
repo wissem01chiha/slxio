@@ -2,6 +2,8 @@ NAME
   Cli
 GROUP
   Utilities
+LIBRARY_NAME
+  UtilitiesCli
 DESCRIPTION
   Cli Utility Module
 LICENSE

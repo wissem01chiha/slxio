@@ -1,7 +1,9 @@
 NAME 
   Slx
 GROUP
-  IO
+  Io
+LIBRARY_NAME
+  IoSlx
 DESCRIPTION  
   SLX IO Module 
 LICENSE   
@@ -73,7 +75,7 @@ PUBLIC_DEPENDS
   ThirdParty::loguru
   ThirdParty::libxml2
 PRIVATE_DEPENDS 
-  IO::Core
+  Io::Core
   Common::Core
   Simulink::Core
   Simulink::Configuration

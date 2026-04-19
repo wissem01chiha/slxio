@@ -2,6 +2,8 @@ NAME
   libxml2
 GROUP
   ThirdParty
+LIBRARY_NAME
+  ThirdPartylibxml2
 DESCRIPTION
   Libxml2 Third Party Library
 LICENSE
@@ -71,7 +73,6 @@ SOURCES
     src/xmlschemastypes.c
     src/xmlwriter.c
     src/xpointer.c
-    src/xzlib.c
 HEADERS
     src/include/libxml/c14n.h
     src/include/libxml/catalog.h

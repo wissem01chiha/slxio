@@ -2,3 +2,5 @@ NAME
   Sphinx
 GROUP 
   Utilities
+LIBRARY_NAME
+  UtilitiesSphnix

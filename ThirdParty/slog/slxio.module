@@ -2,6 +2,8 @@ NAME
   slog
 GROUP
   ThirdParty
+LIBRARY_NAME
+  ThirdPartyslog
 DESCRIPTION
   Slog Logging Third Party Module
 LICENSE
@@ -33,7 +35,6 @@ SOURCES
 HEADERS
   src/slog.h
 CONFIG_HEADERS
-  Slog.h.in
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS
 TEST_DEPENDS

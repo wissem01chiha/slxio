@@ -2,6 +2,8 @@ NAME
   zlib
 GROUP
   ThirdParty
+LIBRARY_NAME
+  ThirdPartyzlib
 DESCRIPTION
   A massively spiffy yet delicately unobtrusive compression library.
 LICENSE

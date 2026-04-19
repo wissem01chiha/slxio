@@ -2,6 +2,8 @@ NAME
   Misc
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkMisc
 DESCRIPTION
   Simulink Misc Support Module
 LICENSE

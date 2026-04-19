@@ -1,7 +1,9 @@
 NAME 
   Core
 GROUP
-  IO
+  Io
+LIBRARY_NAME
+  IoCore
 DESCRIPTION  
   File Readers and Writers Core Module 
 LICENSE   

@@ -1,7 +1,9 @@
 NAME 
   Json
 GROUP
-  IO
+  Io
+LIBRARY_NAME
+  IoJson
 DESCRIPTION  
   SLX Json Converter Module 
 LICENSE   
@@ -36,7 +38,7 @@ PUBLIC_DEPENDS
   ThirdParty::loguru
   ThirdParty::json-c
 PRIVATE_DEPENDS
-  IO::Core
+  Io::Core
   Common::Core
   Simulink::Core
   Simulink::Misc

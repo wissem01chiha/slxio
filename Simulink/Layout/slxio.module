@@ -2,6 +2,8 @@ NAME
   Layout
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkLayout
 DESCRIPTION  
   Simulink Layout Support Module 
 LICENSE

@@ -2,6 +2,8 @@ NAME
   Library
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkLibrary
 DESCRIPTION  
   Simulink Library Block Module 
 LICENSE   

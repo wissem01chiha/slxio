@@ -1,7 +1,3 @@
-#[=======================================================================[.rst:
-Configure code coverage settings for the project build
-#]=======================================================================]
-
 if (ENABLE_COVERAGE AND NOT ENABLE_TESTING)
   message (FATAL_ERROR "coverage requires testing to be enabled")
 endif ()

@@ -2,6 +2,8 @@ NAME
   Data
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkData
 DESCRIPTION  
   Simulink Data Support Module 
 LICENSE   

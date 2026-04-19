@@ -2,6 +2,8 @@ NAME
   Configuration
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkConfiguration
 DESCRIPTION  
   Simulink Configuration Support Module 
 LICENSE   

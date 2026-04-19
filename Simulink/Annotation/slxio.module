@@ -2,6 +2,8 @@ NAME
   Annotation
 GROUP
   Simulink
+LIBRARY_NAME
+  SimulinkAnnotation
 DESCRIPTION  
   Simulink Annotation Module 
 LICENSE   
