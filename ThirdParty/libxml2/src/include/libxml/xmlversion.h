@@ -255,6 +255,6 @@
 #define LIBXML_LZMA_ENABLED
 #endif
 
-#include <include/libxml/xmlexports.h>
+#include <libxml/xmlexports.h>
 
 #endif

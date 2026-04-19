@@ -6,18 +6,12 @@
 
 #ifdef _MSC_VER
 #define NOMINMAX
-#endif
-
-#ifdef _MSC_VER
 #include <float.h>
 #include <io.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <limits.h>
 #include <stdlib.h>
-#endif // _MSC_VER
-
-#ifdef _MSC_VER
 
 #ifndef S_ISDIR
 #define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)
@@ -26,9 +20,7 @@
 #ifndef S_ISREG
 #define S_ISREG(mode) (((mode) & S_IFMT) == S_IFREG)
 #endif
-
 #endif // _MSC_VER
-
 
 #ifdef __cplusplus
 #include <cmath>
@@ -36,7 +28,6 @@
 #define finite(x) std::isfinite(x)
 #endif 
 #endif // __cplusplus
-#endif // __MSC_VER__
 
 #ifdef _MSC_VER
 #define ISNAN(x) _isnan(x)

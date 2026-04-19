@@ -189,9 +189,6 @@ endfunction ()
 function (add_module module_name)
 
   scan_module_file (_module)
-  if(SLXIO_MODULE_DEBUG)
-    module_print (_module)
-  endif()
   
   if (${_module_enable_build} STREQUAL "FALSE")
   if(SLXIO_MODULE_DEBUG)
@@ -201,7 +198,7 @@ function (add_module module_name)
   endif ()
 
   configure_module ("${_module_config_headers}" 
-    "${CMAKE_CURRENT_BINARY_DIR}")
+    "${CMAKE_CURRENT_SOURCE_DIR}")
   
   add_library (${_module_library_name})
   if(SLXIO_BUILD_SHARED)
@@ -246,7 +243,7 @@ endfunction ()
 
     configure_module( ${CMAKE_CURRENT_SOURCE_DIR}/config1.h.in
       ${CMAKE_CURRENT_SOURCE_DIR}/config2.h.in
-      ${CMAKE_CURRENT_BINARY_DIR}
+      ${CMAKE_CURRENT_SOURCE_DIR}
     )
 #]==]
 function (configure_module input directory)
@@ -1007,21 +1004,10 @@ function (module_print module_prefix)
   message (STATUS "-------------------------------------------------------------------")
   message (STATUS "module_name                   = ${${module_prefix}_name}")
   message (STATUS "module_group                  = ${${module_prefix}_group}")
-  message (STATUS "module_library_name           = ${${module_prefix}_library_name}")
   message (STATUS "module_version                = ${${module_prefix}_version}")
   message (STATUS "module_description            = ${${module_prefix}_description}")
   message (STATUS "module_maintainer             = ${${module_prefix}_maintainer}")
-  message (STATUS "module_enable_build           = ${${module_prefix}_enable_building}")
-  message (STATUS "module_public_depends         = ${${module_prefix}_public_depends}")
-  message (STATUS "module_private_depends        = ${${module_prefix}_private_depends}")
-  message (STATUS "module_windows_depends        = ${${module_prefix}_windows_depends}")
-  message (STATUS "module_unix_depends           = ${${module_prefix}_unix_depends}")
-  message (STATUS "module_android_depends        = ${${module_prefix}_android_depends}")
-  message (STATUS "module_wasm_depends           = ${${module_prefix}_wasm_depends}")
-  message (STATUS "module_windows_compile_flags  = ${${module_prefix}_windows_compile_flags}")
-  message (STATUS "module_unix_compile_flags     = ${${module_prefix}_unix_compile_flags}")
-  message (STATUS "module_android_compile_flags  = ${${module_prefix}_android_compile_flags}")
-  message (STATUS "module_wasm_compile_flags     = ${${module_prefix}_wasm_compile_flags}")
+  message (STATUS "module_license                = ${${module_prefix}_license}")
   message (STATUS "-------------------------------------------------------------------")
 
 endfunction ()

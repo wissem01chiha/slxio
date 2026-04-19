@@ -44,6 +44,7 @@ option (SLXIO_ENABLE_CLANG_TIDY     "Enable clang-tidy static analysis" OFF)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMake")
 
 include(CheckCompilerSupport)
+include(CheckPlatformSupport)
 include(CompilerFlags)
 include(CompilerWarningFlags)
 include(ModuleExternal)

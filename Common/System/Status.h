@@ -15,10 +15,10 @@
 #ifndef STATUS_H
 #define STATUS_H
 
-#include "APIExport.h"
+#include "APIExportMacro.h"
 #include "ErrorCode.h"
 #include "Libuv.h"
-#include "Type.h"
+#include "PlatformTypes.h"
 #include <string>
 
 /**

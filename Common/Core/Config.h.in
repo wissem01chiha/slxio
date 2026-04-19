@@ -6,7 +6,7 @@
 
 #include "PlatformMacro.h"
 
-#define SLXIO_BUILD_SHARED 0
+#cmakedefine01 SLXIO_BUILD_SHARED
 
 #ifdef PLATFORM_WINDOWS
 #define PATH_SEP '\\'

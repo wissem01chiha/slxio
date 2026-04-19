@@ -59,8 +59,8 @@ UNIX_HEADERS
 ANDROID_HEADERS
 WASM_HEADERS
 CONFIG_HEADERS
+  Config.h.in
 PUBLIC_DEPENDS
-  Common::System
   ThirdParty::loguru
   ThirdParty::slog
 PRIVATE_DEPENDS

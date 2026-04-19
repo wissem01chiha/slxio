@@ -60,6 +60,8 @@ HEADERS
   src/random_seed.h
   src/strerror_override.h
 CONFIG_HEADERS
+  src/cmake/config.h.in
+  src/json.h.cmakein
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS

@@ -56,6 +56,7 @@ ANDROID_HEADERS
 WASM_HEADERS
 CONFIG_HEADERS
 PUBLIC_DEPENDS
+  Common::Core
   ThirdParty::libuv
   ThirdParty::libzip
 PRIVATE_DEPENDS

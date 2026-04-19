@@ -48,4 +48,5 @@ files=(
     "strerror_override.c"
     "strerror_override.h"
     "vasprintf_compat.h"
+    "cmake/config.h.in"
 )

@@ -15,7 +15,7 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "APIExport.h"
+#include "APIExportMacro.h"
 #include "ErrorCode.h"
 #include "Type.h"
 #include <memory>
