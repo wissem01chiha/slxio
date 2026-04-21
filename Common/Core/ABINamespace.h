@@ -6,7 +6,7 @@
 
 #include "VersionMacro.h"
 
-#if ENABLE_NAMESPACE && defined(__cplusplus)
+#if ENABLE_NAMESPACE 
     #define SLXIO_NAMESPACE_BEGIN namespace slxio {
     #define SLXIO_NAMESPACE_END   };
 #else
@@ -14,7 +14,7 @@
     #define SLXIO_NAMESPACE_END
 #endif
 
-#ifdef ENABLE_ABI_NAMESPACE && defined(__cplusplus)
+#ifdef ENABLE_ABI_NAMESPACE 
     #define SLXIO_ABI_NAMESPACE_BEGIN namespace SLXIO_VERSION_STRING {
     #define SLXIO_ABI_NAMESPACE_END   };
 #else

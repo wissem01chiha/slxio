@@ -46,14 +46,16 @@ UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
+  ABINamespace.h
+  APIExportMacro.h
+  Compiler.h 
+  Config.h
   ErrorTypes.h 
   PlatformTypes.h 
   Logger.h
-  Compiler.h 
-  Config.h 
-  APIExport.h
   Version.h 
   VersionMacro.h
+  Timer.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

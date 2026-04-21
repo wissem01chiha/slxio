@@ -1,26 +1,19 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
-#ifndef FILE_H
-#define FILE_H
+#ifndef __File_h__
+#define __File_h__
 
 #include "APIExportMacro.h"
-#include "ErrorCode.h"
-#include "Type.h"
+#include "ABINamespace.h"
+#include "ErrorTypes.h"
+#include "PlatformTypes.h"
 #include <memory>
 #include <string>
 #include <vector>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Cross‑platform file abstraction.
@@ -78,21 +71,21 @@ public:
   bool isFile() const;
 
   /// @brief Open the file with the initialized mode.
-  ErrorCode open();
+  int open();
 
   /// @brief Read data from the file into the internal buffer.
-  ErrorCode read();
+  int read();
 
   /// @brief Write data to the file.
-  ErrorCode write(const char* message);
+  int write(const char* message);
 
   /// @brief Close the file descriptor.
-  ErrorCode close();
+  int close();
 
   /// @brief Copy the current file content to another file.
   /// @note If the destination file is not open, it will be opened
   /// automatically.
-  ErrorCode copy(File& ofile);
+  int copy(File& ofile);
 
   /// @brief Copy the current file content to another directory.
   /// @note The destination file will have the same filename as the
@@ -101,11 +94,11 @@ public:
   /// directory, it will be overwritten.
   /// @warning the fuction does not check the validity of the given
   /// destination directory path, use with caution
-  ErrorCode copy(const char* destdir);
+  int copy(const char* destdir);
 
   /// @brief Rename the file.
   /// @warning The old name will be lost with no backup.
-  ErrorCode rename(const char* filename);
+  int rename(const char* filename);
 
   /// @brief Get the filename component of the path.
   const std::string getFilename();
@@ -132,7 +125,7 @@ public:
 
   /// @brief Move the file to another directory.
   /// @details Updates the internal path_ attribute.
-  ErrorCode move(const char* dirpath);
+  int move(const char* dirpath);
 
   /// @brief Get the parent directory path.
   /// @example "rootdir/filename.txt" -> "rootdir/"
@@ -151,7 +144,7 @@ public:
   /// '.'
   /// @warning if the file is not valid or not opened
   /// the function will return SLX_EINVAR
-  ErrorCode setFileExtension(const char* ext);
+  int setFileExtension(const char* ext);
 
   /// @brief for zip archives (e.g., ".zip" file extensions),
   /// extracts the current file to the given directory path.
@@ -159,7 +152,7 @@ public:
   ///       using the Directory class utility.
   /// @note this function right now do not check the validity of the
   /// given path as a system directory
-  ErrorCode unzip(const char* dir);
+  int unzip(const char* dir);
 
   /// @brief Replace the current file in a compressed ZIP archive
   ///        (e.g., "archive.zip").
@@ -167,7 +160,7 @@ public:
   /// @param zname Logical entry name inside the archive to be
   /// replaced
   ///        (e.g., "simulink/blockdiagram.xml").
-  /// @return ErrorCode::SLX_OK on success, or an appropriate error
+  /// @return int::SLX_OK on success, or an appropriate error
   /// code
   ///         if the operation fails.
   /// @note The archive must be a valid ZIP file. It will be opened
@@ -182,7 +175,7 @@ public:
   /// f.zip("../full/path/to/archive.zip",
   /// "simulink/blockdiagram.xml");
   /// @endcode
-  ErrorCode zip(const char* file, const char* zname);
+  int zip(const char* file, const char* zname);
 
   /// @brief Retrieve the size of the current file on disk.
   /// @return The file size in bytes if the file is open and valid,
@@ -200,4 +193,7 @@ private:
   size_t nbytes_ = 0;
 };
 
-#endif // !FILE_H
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif /* __File_h__ */

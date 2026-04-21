@@ -15,16 +15,19 @@
 
 /* #undef ZIP_STATIC */
 
+#if !defined(__STDC_FORMAT_MACROS)
+ #define __STDC_FORMAT_MACROS 1
+ #endif
+ #include <inttypes.h>
 
-
-typedef  zip_int8_t;
-typedef  zip_uint8_t;
-typedef  zip_int16_t;
-typedef  zip_uint16_t;
-typedef  zip_int32_t;
-typedef  zip_uint32_t;
-typedef  zip_int64_t;
-typedef  zip_uint64_t;
+typedef int8_t zip_int8_t;
+typedef uint8_t zip_uint8_t;
+typedef int16_t zip_int16_t;
+typedef uint16_t zip_uint16_t;
+typedef int32_t zip_int32_t;
+typedef uint32_t zip_uint32_t;
+typedef long long zip_int64_t;
+typedef unsigned long long zip_uint64_t;
 
 #define ZIP_INT8_MIN	 (-ZIP_INT8_MAX-1)
 #define ZIP_INT8_MAX	 0x7f

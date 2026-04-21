@@ -1,13 +1,14 @@
 ﻿#include "File.h"
+#include "LibZip.h"
 #include "Compiler.h"
 #include "Directory.h"
-#include "LibZip.h"
 #include "Libuv.h"
-#include "Platform.h"
-#include "Status.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 File::File(const std::string& path, Mode mode)
   : mode_(mode)
@@ -109,7 +110,7 @@ bool File::isFile() const
   return isFile(path_);
 }
 
-ErrorCode File::open()
+int File::open()
 {
 
   uv_fs_t req;
@@ -120,19 +121,19 @@ ErrorCode File::open()
 
   if (err < 0)
   {
-    Status::log(err);
-    return static_cast<ErrorCode>(-err);
+    //Status::log(err);
+    return static_cast<int>(-err);
   }
   fd_ = err;
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::read()
+int File::read()
 {
 
   if (mode_ != Read)
   {
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   buffer_.resize(4096);
@@ -145,25 +146,25 @@ ErrorCode File::read()
 
   if (err < 0)
   {
-    Status::log(err);
-    return static_cast<ErrorCode>(-err);
+    //Status::log(err);
+    return static_cast<int>(-err);
   }
   if (err == 0)
   {
-    Status::log(err);
-    return ErrorCode::SLX_EEOF;
+    //Status::log(err);
+    return SLX_EEOF;
   }
 
   nbytes_ = static_cast<size_t>(err);
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::write(const char* message)
+int File::write(const char* message)
 {
 
   if (mode_ == Read)
   {
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   uv_fs_t req;
@@ -176,17 +177,17 @@ ErrorCode File::write(const char* message)
 
   if (err < 0)
   {
-    Status::log(err);
-    return static_cast<ErrorCode>(-err);
+    //Status::log(err);
+    return static_cast<int>(-err);
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::close()
+int File::close()
 {
   if (fd_ < 0)
   {
-    return ErrorCode::SLX_ENOENT;
+    return SLX_ENOENT;
   }
 
   uv_fs_t req;
@@ -195,12 +196,12 @@ ErrorCode File::close()
 
   if (err < 0)
   {
-    Status::log(err);
-    return static_cast<ErrorCode>(-err);
+    //Status::log(err);
+    return static_cast<int>(-err);
   }
 
   fd_ = -1;
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 bool File::eof() const
@@ -260,16 +261,16 @@ const char* File::getFileExtension() const
   return dot + 1;
 }
 
-ErrorCode File::setFileExtension(const char* newExt)
+int File::setFileExtension(const char* newExt)
 {
 
   if (!newExt || *newExt == '\0')
   {
-    return ErrorCode::SLX_EINVAR;
+    return SLX_EINVAR;
   }
   if (path_.empty())
   {
-    return ErrorCode::SLX_EINVAR;
+    return SLX_EINVAR;
   }
 
   size_t pos = path_.find_last_of('.');
@@ -288,14 +289,14 @@ ErrorCode File::setFileExtension(const char* newExt)
   FILE* src = fopen(path_.c_str(), "rb");
   if (!src)
   {
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   FILE* dst = fopen(dest.c_str(), "wb");
   if (!dst)
   {
     fclose(src);
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   char buffer[4096];
@@ -310,15 +311,15 @@ ErrorCode File::setFileExtension(const char* newExt)
 
   path_ = dest;
 
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::move(const char* dirpath)
+int File::move(const char* dirpath)
 {
 
   if (dirpath == nullptr)
   {
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
 
   std::string newPath = std::string(dirpath);
@@ -335,23 +336,23 @@ ErrorCode File::move(const char* dirpath)
 
   if (err < 0)
   {
-    Status::log(err);
-    return static_cast<ErrorCode>(-err);
+    //Status::log(err);
+    return static_cast<int>(-err);
   }
 
   path_ = newPath;
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::copy(File& ofile)
+int File::copy(File& ofile)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return SLX_ENOTIMPL;
 }
 
-ErrorCode File::copy(const char* destdir)
+int File::copy(const char* destdir)
 {
   if (!destdir)
-    return ErrorCode::SLX_EINVAR;
+    return SLX_EINVAR;
 
   std::string destpath(destdir);
   if (!destpath.empty() && destpath.back() != PATH_SEP)
@@ -363,40 +364,40 @@ ErrorCode File::copy(const char* destdir)
   std::ifstream src(path_, std::ios::binary);
   if (!src.is_open())
   {
-    Status::log((int)ErrorCode::SLX_ENOENT);
-    return ErrorCode::SLX_ENOENT;
+    //Status::log((int)SLX_ENOENT);
+    return SLX_ENOENT;
   }
 
   std::ofstream dst(destpath, std::ios::binary);
   if (!dst.is_open())
   {
-    Status::log((int)ErrorCode::SLX_EIOERR);
-    return ErrorCode::SLX_EIOERR;
+    //Status::log((int)SLX_EIOERR);
+    return SLX_EIOERR;
   }
 
   dst << src.rdbuf();
 
   if (!dst.good())
   {
-    Status::log((int)ErrorCode::SLX_EIOERR);
-    return ErrorCode::SLX_EIOERR;
+    //Status::log((int)SLX_EIOERR);
+    return SLX_EIOERR;
   }
 
   if (dst.tellp() == 0)
   {
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::rename(const char* filename)
+int File::rename(const char* filename)
 {
 
   if (!filename || *filename == '\0')
-    return ErrorCode::SLX_EINVAR;
+    return SLX_EINVAR;
   path_ = std::string(filename);
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 const std::string File::getFilename()
@@ -480,7 +481,7 @@ size_t File::size() const
   return size_;
 }
 
-ErrorCode File::unzip(const char* dir)
+int File::unzip(const char* dir)
 {
 
   int err = 0;
@@ -489,8 +490,8 @@ ErrorCode File::unzip(const char* dir)
   zip_t* archive = zip_open(path_.c_str(), ZIP_RDONLY, &err);
   if (!archive)
   {
-    Status::log((int)ErrorCode::SLX_EIOERR);
-    return ErrorCode::SLX_EIOERR;
+    //Status::log((int)SLX_EIOERR);
+    return SLX_EIOERR;
   }
 
   zip_int64_t num_entries = zip_get_num_entries(archive, 0);
@@ -507,10 +508,10 @@ ErrorCode File::unzip(const char* dir)
     char entrydirpath[1024];
     snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", dir, name);
 
-    ErrorCode ec = Directory::mkdir(entrydirpath);
-    if (ec != ErrorCode::SLX_OK)
+    int ec = Directory::mkdir(entrydirpath);
+    if (ec != SLX_OK)
     {
-      Status::log((int)ec);
+      //Status::log((int)ec);
       return ec;
     }
 
@@ -538,10 +539,10 @@ ErrorCode File::unzip(const char* dir)
     zip_fclose(zf);
   }
 
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode File::zip(const char* zfilepath, const char* zname)
+int File::zip(const char* zfilepath, const char* zname)
 {
 
   zip_t* za;
@@ -554,38 +555,41 @@ ErrorCode File::zip(const char* zfilepath, const char* zname)
     fprintf(stderr, "cannot open zip archive '%s': %s\n", zfilepath,
       zip_error_strerror(&error));
     zip_error_fini(&error);
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   zip_int64_t idx = zip_name_locate(za, zname, 0);
   if (idx < 0)
   {
     fprintf(stderr, "archive entry not found: %s\n", zname);
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   zip_source_t* source = zip_source_file(za, path_.c_str(), 0, -1);
   if (source == nullptr)
   {
     fprintf(stderr, "zip source file failed: %s\n", zip_strerror(za));
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   if (zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8) < 0)
   {
     fprintf(stderr, "zip file replace failed: %s\n", zip_strerror(za));
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
 
   if (idx < 0)
   {
     fprintf(stderr, "zip file add failed: %s\n", zip_strerror(za));
-    return ErrorCode::SLX_EIOERR;
+    return SLX_EIOERR;
   }
   if (zip_close(za) < 0)
   {
     fprintf(stderr, "cannot close archive: %s\n", zip_strerror(za));
   }
 
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

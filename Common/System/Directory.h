@@ -15,9 +15,11 @@
 #ifndef DIRECTORY_H
 #define DIRECTORY_H
 
-#include "APIExport.h"
+#include "APIExportMacro.h"
 #include "File.h"
 #include "Libuv.h"
+#include "PlatformTypes.h"
+#include "ErrorTypes.h"
 #include <map>
 #include <vector>
 
@@ -60,10 +62,10 @@ public:
 
   /// @brief Open the directory and initialize member variables.
   /// @details Populates the file map and file list attributes.
-  ErrorCode open();
+  int open();
 
   /// @brief Remove the directory and its contents recursively.
-  ErrorCode remove();
+  int remove();
 
   /// @brief Get the number of files in the directory.
   /// @return Number of files, or -1 if the directory could not be
@@ -114,7 +116,7 @@ public:
   /// @details Output file will be named <dirname>.zip.
   /// if the new archive name is given it will assume same as parent
   /// directory
-  ErrorCode zip(const char* dir = "");
+  int zip(const char* dir = "");
 
   /// @brief Creates the directory structure for a given entry name.
   /// The entry name can be in one of the following formats:
@@ -126,7 +128,7 @@ public:
   /// @note This function does not validate whether the `dir`
   /// parameter is an existing directory; it is the responsibility of
   /// the caller to ensure that.
-  static ErrorCode mkdir(const char* dir);
+  static int mkdir(const char* dir);
 
   /// @brief Destructor.
   ~Directory() = default;
