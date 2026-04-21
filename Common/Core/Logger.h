@@ -93,7 +93,7 @@ public:
       return;
     std::ostringstream oss;
     (oss << ... << args);
-    this->log(level, oss.str().c_str());
+    //this->Log(level, oss.str().c_str());
   }
   /// @brief get the singleton instance of the Logger
   static Logger& GetInstance();

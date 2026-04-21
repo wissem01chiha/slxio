@@ -8,6 +8,47 @@
 
 #define SLXIO_BUILD_SHARED 0
 
+#define HAVE_STDBOOL_H  1
+
+/* #undef USE_64BIT_INDEX */
+
+/* #undef USE_32BIT_INDEX */
+
+/* #undef USE_16BIT_INDEX */
+
+/* #undef USE_8BIT_INDEX */
+
+/* #undef USE_FLOAT32 */
+
+/* #undef USE_FLOAT16 */
+
+/* #undef USE_FLOAT128 */
+
+/* #undef USE_FLOAT64 */
+
+#define HAVE_LIMITS_H 1
+
+#define HAVE_VALUES_H  0
+
+#define HAVE_STDLIB_H 0
+
+#define HAVE_FLOAT_H  0
+
+#define HAVE_DIRECT_H  0
+
+#define HAVE_IO_H  0
+
+#define HAVE_WINDOWS_H  0
+
+#define HAVE_INTRIN_H  0
+
+
+#define HAVE_SYS_STAT_H 0
+
+#define HAVE_SYS_TYPES_H  1
+
+#define HAVE_UNISTD_H  1
+
 #ifdef PLATFORM_WINDOWS
 #define PATH_SEP '\\'
 #else

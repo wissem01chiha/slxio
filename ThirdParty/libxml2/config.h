@@ -1,17 +1,17 @@
 /* Define to 1 if you have the declaration of 'getentropy', and to 0 if you
    don't. */
-#define HAVE_DECL_GETENTROPY 0
+#define HAVE_DECL_GETENTROPY 1
 
 /* Define to 1 if you have the declaration of 'glob', and to 0 if you don't.
    */
-#define HAVE_DECL_GLOB 0
+#define HAVE_DECL_GLOB 1
 
 /* Define to 1 if you have the declaration of 'mmap', and to 0 if you don't.
    */
-#define HAVE_DECL_MMAP 0
+#define HAVE_DECL_MMAP 1
 
 /* Define if __attribute__((destructor)) is accepted */
-/* #undef HAVE_FUNC_ATTRIBUTE_DESTRUCTOR */
+#define HAVE_FUNC_ATTRIBUTE_DESTRUCTOR 1
 
 /* Have dlopen based dso */
 /* #undef HAVE_DLOPEN */

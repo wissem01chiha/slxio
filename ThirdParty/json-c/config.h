@@ -24,7 +24,7 @@
 #define HAVE_INTTYPES_H
 
 /* Define to 1 if you have the <limits.h> header file. */
-/* #undef HAVE_LIMITS_H */
+#define HAVE_LIMITS_H
 
 /* Define to 1 if you have the <locale.h> header file. */
 /* #undef HAVE_LOCALE_H */
@@ -42,13 +42,13 @@
 /* #undef HAVE_STDLIB_H */
 
 /* Define to 1 if you have the <strings.h> header file. */
-/* #undef HAVE_STRINGS_H */
+#define HAVE_STRINGS_H
 
 /* Define to 1 if you have the <string.h> header file. */
 #define HAVE_STRING_H
 
 /* Define to 1 if you have the <syslog.h> header file. */
-/* #undef HAVE_SYSLOG_H */
+#define HAVE_SYSLOG_H 1
 
 /* Define to 1 if you have the <sys/cdefs.h> header file. */
 /* #undef HAVE_SYS_CDEFS_H */
@@ -69,7 +69,7 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <unistd.h> header file. */
-/* #undef HAVE_UNISTD_H */
+#define HAVE_UNISTD_H 1
 
 /* Define to 1 if you have the <xlocale.h> header file. */
 /* #undef HAVE_XLOCALE_H */
@@ -88,15 +88,15 @@
 
 /* Define to 1 if you have the declaration of `INFINITY', and to 0 if you
    don't. */
-/* #undef HAVE_DECL_INFINITY */
+#define HAVE_DECL_INFINITY
 
 /* Define to 1 if you have the declaration of `isinf', and to 0 if you don't.
    */
-/* #undef HAVE_DECL_ISINF */
+#define HAVE_DECL_ISINF
 
 /* Define to 1 if you have the declaration of `isnan', and to 0 if you don't.
    */
-/* #undef HAVE_DECL_ISNAN */
+#define HAVE_DECL_ISNAN
 
 /* Define to 1 if you have the declaration of `nan', and to 0 if you don't. */
 /* #undef HAVE_DECL_NAN */
@@ -123,7 +123,7 @@
 
 
 /* Define to 1 if you have the `strcasecmp' function. */
-/* #undef HAVE_STRCASECMP */
+#define HAVE_STRCASECMP 1
 
 /* Define to 1 if you have the `strdup' function. */
 #define HAVE_STRDUP
@@ -132,7 +132,7 @@
 /* #undef HAVE_STRERROR */
 
 /* Define to 1 if you have the `strncasecmp' function. */
-/* #undef HAVE_STRNCASECMP */
+#define HAVE_STRNCASECMP 1
 
 /* Define to 1 if you have the `uselocale' function. */
 /* #undef HAVE_USELOCALE */
@@ -207,7 +207,7 @@
 #define SIZEOF_INT64_T 8
 
 /* The number of bytes in type long */
-#define SIZEOF_LONG 4
+#define SIZEOF_LONG 8
 
 /* The number of bytes in type long long */
 #define SIZEOF_LONG_LONG 8

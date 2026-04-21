@@ -8,6 +8,47 @@
 
 #cmakedefine01 SLXIO_BUILD_SHARED
 
+#cmakedefine01 HAVE_STDBOOL_H 
+
+#cmakedefine USE_64BIT_INDEX
+
+#cmakedefine USE_32BIT_INDEX
+
+#cmakedefine USE_16BIT_INDEX
+
+#cmakedefine USE_8BIT_INDEX
+
+#cmakedefine USE_FLOAT32
+
+#cmakedefine USE_FLOAT16
+
+#cmakedefine USE_FLOAT128
+
+#cmakedefine USE_FLOAT64
+
+#cmakedefine01 HAVE_LIMITS_H
+
+#cmakedefine01 HAVE_VALUES_H 
+
+#cmakedefine01 HAVE_STDLIB_H
+
+#cmakedefine01 HAVE_FLOAT_H 
+
+#cmakedefine01 HAVE_DIRECT_H 
+
+#cmakedefine01 HAVE_IO_H 
+
+#cmakedefine01 HAVE_WINDOWS_H 
+
+#cmakedefine01 HAVE_INTRIN_H 
+
+
+#cmakedefine01 HAVE_SYS_STAT_H
+
+#cmakedefine01 HAVE_SYS_TYPES_H 
+
+#cmakedefine01 HAVE_UNISTD_H 
+
 #ifdef PLATFORM_WINDOWS
 #define PATH_SEP '\\'
 #else

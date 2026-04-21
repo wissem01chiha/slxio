@@ -6,6 +6,9 @@
 
 #include "Config.h"
 #include "Compiler.h"
+#include <cstdint>
+#include <cstddef>
+#include <limits>
 
 #ifdef USE_FLOAT16
 using Float = _Float16;
@@ -40,10 +43,8 @@ using Index = std::uint32_t;
 /// @brief maximum representable value for Float
 #define FloatMax std::numeric_limits<Float>::max()
 
-#ifndef __cplusplus
-#if HAVE_STDBOOL_H
+#ifdef HAVE_STDBOOL_H
 #include "stdbool.h"
-#endif
 #endif
 
 using sint8 = std::int8_t;

@@ -1,10 +1,4 @@
-#[=======================================================================[.rst:
-Testing
--------
-Configure testing settings for the project build
-#]=======================================================================]
 include (CTest)
-
 
 if (ENABLE_TESTING)
   enable_testing ()

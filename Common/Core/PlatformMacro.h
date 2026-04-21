@@ -20,6 +20,10 @@
 #define PLATFORM_ANDROID
 #elif defined(__FreeBSD__)
 #define PLATFORM_FREEBSD
+#elif defined(__OpenBSD__)
+#define PLATFORM_OPENBSD
+#elif defined(__NetBSD__)
+#define PLATFORM_NETBSD
 #else
 #define PLATFORM_UNKNOWN
 #endif

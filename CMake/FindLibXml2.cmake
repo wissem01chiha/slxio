@@ -97,13 +97,10 @@ Finding the libxml2 library and linking it to a project target:
 #]=======================================================================]
 
 cmake_policy (PUSH)
-cmake_policy (SET CMP0159 NEW) # file(STRINGS) with REGEX updates CMAKE_MATCH_<n>
 
-# use pkg-config to get the directories and then use these values in the find_path() and
-# find_library() calls
 find_package (PkgConfig QUIET)
 if (PkgConfig_FOUND)
-  pkg_check_modules (PC_LIBXML QUIET libxml-2.0)
+  pkg_check_modules(PC_LIBXML QUIET libxml-2.0)
 endif ()
 
 find_path (

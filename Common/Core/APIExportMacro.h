@@ -4,7 +4,7 @@
 #ifndef __APIExportMacro_h__
 #define __APIExportMacro_h__
 
-#include "Option.h"
+#include "Config.h"
 #include "PlatformMacro.h"
 
 #ifdef PLATFORM_WINDOWS

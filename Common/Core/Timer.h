@@ -11,8 +11,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Base Class for All Implemented Timers
- * @note Not Yet Used
+ * @class Timer
+ * @brief 
  */
 class Timer 
 {
