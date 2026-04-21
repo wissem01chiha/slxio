@@ -147,10 +147,10 @@
 /* #undef HAVE_VASPRINTF */
 
 /* Define to 1 if you have the `vprintf' function. */
-/* #undef HAVE_VPRINTF */
+#define HAVE_VPRINTF
 
 /* Define to 1 if you have the `vsnprintf' function. */
-/* #undef HAVE_VSNPRINTF */
+#define HAVE_VSNPRINTF
 
 /* Define to 1 if you have the `vsyslog' function. */
 /* #undef HAVE_VSYSLOG */

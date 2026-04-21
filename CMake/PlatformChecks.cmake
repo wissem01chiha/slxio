@@ -113,6 +113,15 @@ if ((MSVC AND NOT (MSVC_VERSION LESS 1800)) OR MINGW OR CYGWIN OR UNIX OR AMIGA 
     check_symbol_exists(nan         "math.h" HAVE_DECL_NAN)
 endif()
 
+check_symbol_exists(_doprnt         "stdio.h" HAVE_DOPRNT)
+if (UNIX OR MINGW OR CYGWIN OR AMIGA)
+    check_symbol_exists(snprintf    "stdio.h" HAVE_SNPRINTF)
+endif()
+check_symbol_exists(vasprintf       "stdio.h" HAVE_VASPRINTF)
+check_symbol_exists(vsnprintf       "stdio.h" HAVE_VSNPRINTF)
+check_symbol_exists(vprintf         "stdio.h" HAVE_VPRINTF)
+
+
 check_type_size (__int8 __INT8_LIBZIP)
 check_type_size (int8_t INT8_T_LIBZIP)
 check_type_size (uint8_t UINT8_T_LIBZIP)
