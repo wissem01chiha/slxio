@@ -1,34 +1,25 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
-#ifndef FILEMANAGER_H
-#define FILEMANAGER_H
+#ifndef __FileManager_h__
+#define __FileManager_h__
 
-#include "APIExport.h"
-#include "ErrorCode.h"
-#include "File.h"
-#include "Type.h"
+#include "APIExportMacro.h"
+#include "PlatformTypes.h"
+#include "ABINamespaceMacro.h"
 #include <list>
 #include <string>
+#include <memory>
 #include <vector>
 
+class File;
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
 /**
- * @brief FileManager class
- * @details
- * A singleton class that manages multiple files in the system, usful
- * for manging I/O from multiple files original version from :
- * https://github.com/scilab/scilab/blob/master/scilab/modules/fileio/includes/filemanager.hxx
+ * @class FileManager 
+ * @brief A singleton class that manages multiple files in the software
  */
 class APIEXPORT FileManager final
 {
@@ -48,32 +39,35 @@ public:
   FileManager& operator=(std::vector<File*> files) = delete;
   FileManager& operator=(std::list<File*> files) = delete;
 
-  FileManager(std::vector<std::shared_ptr<File>> files);
+  FileManager(std::vector<std::shared_ptr<File*>> files);
 
-  Index getFileMaxID();
-  Index getFileID(const std::string& _stFilename);
-  Index getFirstFreeFileID();
+  UInt32 GetFileMaxID();
+  UInt32 GetFileID(const std::string& _stFilename);
+  UInt32 GetFirstFreeFileID();
 
-  File* getFile(Index _iID);
-  Index getCurrentFile();
+  File* GetFile(UInt32 _iID);
+  UInt32 GetCurrentFile();
 
-  static bool isOpened(const std::string& _stFilename);
+  static bool IsOpened(const std::string& _stFilename);
 
-  Index push_back(File* _file);
-  void remove(Index _iID);
-  ErrorCode clear();
+  UInt32 PushBack(File* _file);
+  void Remove(UInt32 _iID);
+  UInt32 Clear();
 
-  Index getOpenedCount();
-  wchar_t** getTypesAsString();
-  wchar_t** getFilenames();
-  Float* getModes();
-  std::vector<Float> getSwaps();
-  Index* getIDs();
+  UInt32 GetOpenedCount();
+  wchar_t** GetTypesAsString();
+  wchar_t** GetFilenames();
+  Float32* GetModes();
+  std::vector<Float32> GetSwaps();
+  UInt32* GetIDs();
 
 private:
   typedef std::vector<File*> vectFile;
   static vectFile fileList;
-  static Index file;
+  static UInt32 file;
 };
 
-#endif // FILEMANAGER_H
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif /* __FileManager_h__*/

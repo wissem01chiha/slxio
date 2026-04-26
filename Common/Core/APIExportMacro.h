@@ -8,7 +8,7 @@
 #include "PlatformMacro.h"
 
 #ifdef PLATFORM_WINDOWS
-#ifdef BUILD_SHARED_LIBS
+#if BUILD_SHARED_LIBS
 #define APIEXPORT __declspec(dllexport)
 #else
 #define APIEXPORT

@@ -8,11 +8,11 @@
 #include <random>
 #include <sstream>
 
-#ifdef LOGGER_USE_SLOG
+#if SLXIO_SLOG
 #include "Slog.h"
-#elif defined(LOGGER_USE_LOGURU)
+#elif SLXIO_LOGURU
 #include "Loguru.h"
-#endif
+#endif 
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -24,21 +24,16 @@ Logger::Logger()
 
 void Logger::Init(int argc, char** argv)
 {
-#ifdef LOGGER_USE_LOGURU
+#if SLXIO_LOGURU
   loguru::init(argc, argv);
-#elif defined(LOGGER_USE_SLOG)
+#elif SLXIO_SLOG
   slog_init("logfile.log", SLOG_FLAGS_ALL, 0);
-#elif defined(LOGGER_USE_SPDLOG)
-  spdlog::info("Spdlog initialized");
-#elif defined(LOGGER_USE_GLOG)
-  google::InitGoogleLogging("Logger");
-  google::LogToStderr();
 #endif
 }
 
 void Logger::Log(Verbosity level, const char* message)
 {
-#ifdef LOGGER_USE_LOGURU
+#if SLXIO_LOGURU
   switch (level)
   {
     case V_ERROR:
@@ -54,7 +49,7 @@ void Logger::Log(Verbosity level, const char* message)
       LOG_F(INFO, "%s", message);
       break;
   }
-#elif defined(LOGGER_USE_SLOG)
+#elif SLXIO_SLOG
 
   slog_config_t cfg;
   slog_config_get(&cfg);
@@ -79,14 +74,6 @@ void Logger::Log(Verbosity level, const char* message)
   };
   slog_destroy();
 
-#elif defined(LOGGER_USE_SPDLOG)
-
-  spdlog::log(spdlog::level::info, "%s", message);
-
-#elif defined(LOGGER_USE_GLOG)
-
-  LOG(INFO) << message;
-
 #else
   (void*)message;
 #endif
@@ -105,14 +92,14 @@ Logger& Logger::GetInstance()
 
 void Logger::SetStderrVerbosity(Verbosity level)
 {
-#ifdef LOGGER_USE_LOGURU
+#if SLXIO_LOGURU
 
   loguru::g_stderr_verbosity = static_cast<loguru::Verbosity>(level);
 
-#elif defined(LOGGER_USE_SLOG)
+#elif SLXIO_SLOG
 
   slog_config_t slgCfg;
-  uint16 nEnabledLevels;
+  int nEnabledLevels;
   switch (level)
   {
     case Verbosity::V_INVALID:
@@ -136,40 +123,6 @@ void Logger::SetStderrVerbosity(Verbosity level)
   }
   slgCfg.nFlags = nEnabledLevels;
   slog_config_set(&slgCfg);
-
-#elif defined(LOGGER_USE_SPDLOG)
-
-  spdlog::level::level_enum severity;
-  switch (level)
-  {
-    case Verbosity::OFF:
-      severity = spdlog::level::off;
-      break;
-    case Verbosity::ERROR:
-      severity = spdlog::level::err;
-      break;
-    case Verbosity::WARNING:
-      severity = spdlog::level::warn;
-      break;
-    case Verbosity::INFO:
-      severity = spdlog::level::info;
-      break;
-    case Verbosity::TRACE:
-      severity = spdlog::level::trace;
-      break;
-    default:
-      severity = spdlog::level::info;
-      break;
-  }
-  spdlog::set_level(severity);
-
-#elif defined(LOGGER_USE_GLOG)
-
-  google::SetStderrLogging(severity);
-  google::LogToStderr();
-
-#else
-  (void*)InternalVerbosityLevel;
 #endif
   InternalVerbosityLevel = level;
 }
@@ -189,10 +142,10 @@ void Logger::Print(const char* message, std::ostream& os)
   os << message;
 }
 
-uint32 Logger::LogToFile(Verbosity verbosity, const char* path,
+UInt32 Logger::LogToFile(Verbosity verbosity, const char* path,
   unsigned int linenum, const char* message)
 {
-#ifdef LOGGER_USE_LOGURU
+#if SLXIO_LOGURU
 
   loguru::add_file(path, static_cast<loguru::Mode>(filemode),
     static_cast<loguru::Verbosity>(verbosity));
@@ -201,7 +154,7 @@ uint32 Logger::LogToFile(Verbosity verbosity, const char* path,
   loguru::flush();
   return ErrorCode::SLX_OK;
 
-#elif defined(LOGGER_USE_SLOG)
+#elif SLXIO_SLOG
 
   std::ofstream out(path, std::ios::app);
   if (out.is_open())
@@ -211,9 +164,10 @@ uint32 Logger::LogToFile(Verbosity verbosity, const char* path,
   }
   return SLX_OK;
 #endif
+  return SLX_OK;
 }
 
-uint32 Logger::LogToFile(Verbosity verbosity, const char* message)
+UInt32 Logger::LogToFile(Verbosity verbosity, const char* message)
 {
 
   const size_t size = 1024;
@@ -225,7 +179,7 @@ uint32 Logger::LogToFile(Verbosity verbosity, const char* message)
 
   std::random_device rand_dev;
   std::mt19937 generator(rand_dev());
-  std::uniform_int_distribution<uint32> distr(10000, 999999);
+  std::uniform_int_distribution<UInt32> distr(10000, 999999);
   std::ostringstream oss;
   oss << distr(generator) << ".log";
   std::string filename = oss.str();
@@ -234,7 +188,7 @@ uint32 Logger::LogToFile(Verbosity verbosity, const char* message)
   if (strlen(buffer) + strlen(path) < size)
   {
     strcat(buffer, path);
-    uint32 errno_ = LogToFile(verbosity, path, 1, message);
+    UInt32 errno_ = LogToFile(verbosity, path, 1, message);
     if (errno_ != SLX_OK)
     {
       return errno_;
@@ -247,7 +201,7 @@ uint32 Logger::LogToFile(Verbosity verbosity, const char* message)
   return SLX_OK;
 }
 
-Logger::Verbosity Logger::ToVerbosity(uint8 value)
+Logger::Verbosity Logger::ToVerbosity(UInt8 value)
 {
   return static_cast<Logger::Verbosity>(value);
 }
@@ -287,7 +241,7 @@ Logger::Verbosity Logger::ToVerbosity(const char* text)
 
 bool Logger::IsEnabled()
 {
-#if defined(LOGGER_USE_SLOG) || defined(LOGGER_USE_LOGURU)
+#if SLXIO_LOGURU || SLXIO_SLOG
   return true;
 #else
   return false;

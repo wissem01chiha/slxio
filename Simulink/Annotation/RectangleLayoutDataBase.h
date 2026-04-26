@@ -1,5 +1,8 @@
-#ifndef RectangleTypeLAYOUTDATABASE_H
-#define RectangleTypeLAYOUTDATABASE_H
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef __RectangleLAYOUTDATABASE_H__
+#define __RectangleTypeLAYOUTDATABASE_H__
 
 #include "Color.h"
 #include "RectangleType.h"
@@ -8,13 +11,13 @@
  * @brief Encapsulates all information required for layouting
  * a rectangular element.
  */
-class RectangleTypeLayoutDataBase
+class RectangleLayoutDataBase
 {
 public:
-  RectangleTypeLayoutDataBase();
-  RectangleTypeLayoutDataBase(const RectangleType& position,
+  RectangleLayoutDataBase();
+  RectangleLayoutDataBase(const RectangleType& position,
     const Color& foregroundColor, const Color& backgroundColor);
-  virtual ~RectangleTypeLayoutDataBase() = default;
+  virtual ~RectangleLayoutDataBase() = default;
 
 protected:
   RectangleType position_;

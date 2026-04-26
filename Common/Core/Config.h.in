@@ -4,27 +4,7 @@
 #ifndef __Config_h__
 #define __Config_h__
 
-#include "PlatformMacro.h"
-
-#cmakedefine01 SLXIO_BUILD_SHARED
-
-#cmakedefine01 HAVE_STDBOOL_H 
-
-#cmakedefine USE_64BIT_INDEX
-
-#cmakedefine USE_32BIT_INDEX
-
-#cmakedefine USE_16BIT_INDEX
-
-#cmakedefine USE_8BIT_INDEX
-
-#cmakedefine USE_FLOAT32
-
-#cmakedefine USE_FLOAT16
-
-#cmakedefine USE_FLOAT128
-
-#cmakedefine USE_FLOAT64
+#cmakedefine01 HAVE_STDBOOL_H
 
 #cmakedefine01 HAVE_LIMITS_H
 
@@ -36,12 +16,13 @@
 
 #cmakedefine01 HAVE_DIRECT_H 
 
+#cmakedefine01 HAVE_UNISTD_H
+
 #cmakedefine01 HAVE_IO_H 
 
 #cmakedefine01 HAVE_WINDOWS_H 
 
 #cmakedefine01 HAVE_INTRIN_H 
-
 
 #cmakedefine01 HAVE_SYS_STAT_H
 
@@ -49,88 +30,70 @@
 
 #cmakedefine01 HAVE_UNISTD_H 
 
-#ifdef PLATFORM_WINDOWS
-#define PATH_SEP '\\'
-#else
-#define PATH_SEP '/'
-#endif
+#cmakedefine01 HAVE_STDINT_H
 
-#ifdef PLATFORM_WINDOWS
-#include <direct.h>
-#else
-#include <unistd.h>
-#endif
+#cmakedefine01 SLXIO_BUILD_SHARED
 
-#define LOGGER_USE_SLOG
+#cmakedefine01 SLXIO_NAMESPACE
 
-#ifdef __Cxxopts_h__
-#error "Cxxopts.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_CXXOPTS
+#cmakedefine01 SLXIO_ABI_NAMESPACE
 
-#ifdef __Doctest_h__
-#error "Doctest.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_DOCTEST
+#cmakedefine01 SLXIO_LOGURU
 
-#ifdef __Json_c_h__
-#error "Json-c.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_JSON_C
+#cmakedefine01 SLXIO_SLOG
 
-#ifdef __Libpng_h__
-#error "Libpng.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBPNG
+#cmakedefine SLXIO_ABI_SIZEOF_CHAR ${SLXIO_ABI_SIZEOF_CHAR}
 
-#ifdef __Libuv_h__
-#error "Libuv.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBUV
+#cmakedefine SLXIO_ABI_SIZEOF_INT ${SLXIO_ABI_SIZEOF_INT}
 
-#ifdef __LibXML2_h__
-#error "LibXML2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBXML2
+#cmakedefine SLXIO_ABI_SIZEOF_SIZE_T ${SLXIO_ABI_SIZEOF_SIZE_T}
 
-#ifdef __Libzip_h__
-#error "Libzip.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBZIP
+#cmakedefine SLXIO_ABI_SIZEOF_DOUBLE ${SLXIO_ABI_SIZEOF_DOUBLE}
 
-#ifdef __Loguru_h__
-#error "Loguru.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LOGURU
+#cmakedefine SLXIO_ABI_SIZEOF_FLOAT ${SLXIO_ABI_SIZEOF_FLOAT}
 
-#ifdef __Pybind11_h__
-#error "Pybind11.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_PYBIND11
+#cmakedefine SLXIO_ABI_SIZEOF_SHORT ${SLXIO_ABI_SIZEOF_SHORT}
 
-#ifdef __Rapidcsv_h__
-#error "Rapidcsv.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_RAPIDCSV
+#cmakedefine SLXIO_ABI_SIZEOF_LONG_LONG ${SLXIO_ABI_SIZEOF_LONG_LONG}
 
-#ifdef __Slog_h__
-#error "Slog.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_SLOG
+#cmakedefine SLXIO_ABI_SIZEOF_LONG ${SLXIO_ABI_SIZEOF_LONG}
 
-#ifdef __Sol2_h__
-#error "Sol2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_SOL2
+#cmakedefine SLXIO_ABI_SIZEOF_UINT8_T ${SLXIO_ABI_SIZEOF_UINT8_T}
 
-#ifdef __TinyXML2_h__
-#error "TinyXML2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_TINYXML2
+#cmakedefine SLXIO_ABI_SIZEOF_UINT16_T ${SLXIO_ABI_SIZEOF_UINT16_T}
 
-#ifdef __Zlibconf_h__
-#error "Zlibconf.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_ZLIB
+#cmakedefine SLXIO_ABI_SIZEOF_UINT32_T ${SLXIO_ABI_SIZEOF_UINT32_T}
+
+#cmakedefine SLXIO_SIMULINK_VERSION ${SLXIO_SIMULINK_VERSION}
+
+#cmakedefine SLXIO_64BIT_IDS ${SLXIO_64BIT_IDS}
+
+#cmakedefine USE_EXTERNAL_CXXOPTS
+
+#cmakedefine USE_EXTERNAL_DOCTEST
+
+#cmakedefine USE_EXTERNAL_JSON_C
+
+#cmakedefine USE_EXTERNAL_LIBPNG
+
+#cmakedefine USE_EXTERNAL_LIBUV
+
+#cmakedefine USE_EXTERNAL_LIBXML2
+
+#cmakedefine USE_EXTERNAL_LIBZIP
+
+#cmakedefine USE_EXTERNAL_LOGURU
+
+#cmakedefine USE_EXTERNAL_PYBIND11
+
+#cmakedefine USE_EXTERNAL_RAPIDCSV
+
+#cmakedefine USE_EXTERNAL_SLOG
+
+#cmakedefine USE_EXTERNAL_SOL2
+
+#cmakedefine USE_EXTERNAL_TINYXML2
+
+#cmakedefine USE_EXTERNAL_ZLIB
 
 #endif /* __Config_h__ */

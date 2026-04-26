@@ -1,275 +1,276 @@
 #include "FileManager.h"
+#include "File.h"
 
-Index FileManager::getFileID(const std::string& _stFilename)
-{
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
-    {
-      return i;
-    }
-  }
-  return -1;
-}
+// UInt32 FileManager::GetFileID(const std::string& _stFilename)
+// {
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
+//     {
+//       return i;
+//     }
+//   }
+//   return -1;
+// }
 
-Index FileManager::getFileMaxID()
-{
-  return static_cast<Index>(fileList.size());
-}
+// UInt32 FileManager::GetFileMaxID()
+// {
+//   return static_cast<UInt32>(fileList.size());
+// }
 
-bool FileManager::isOpened(const std::string& _stFilename)
-{
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
-    {
-      return true;
-    }
-  }
-  return false;
-}
+// bool FileManager::IsOpened(const std::string& _stFilename)
+// {
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
+//     {
+//       return true;
+//     }
+//   }
+//   return false;
+// }
 
-File* FileManager::getFile(Index _iID)
-{
-  if (_iID == -1 && file == -1)
-  {
-    return nullptr;
-  }
+// File* FileManager::GetFile(UInt32 _iID)
+// {
+//   if (_iID == -1 && file == -1)
+//   {
+//     return nullptr;
+//   }
 
-  if (_iID == -1 && file != -1)
-  {
-    return fileList[file];
-  }
+//   if (_iID == -1 && file != -1)
+//   {
+//     return fileList[file];
+//   }
 
-  if (_iID < static_cast<Index>(fileList.size()))
-  {
-    return fileList[_iID];
-  }
+//   if (_iID < static_cast<UInt32>(fileList.size()))
+//   {
+//     return fileList[_iID];
+//   }
 
-  return nullptr;
-}
+//   return nullptr;
+// }
 
-Index FileManager::push_back(File* _file)
-{
-  // if already opened, return previous ID
-  // if(isOpened(_file->getFilename()) == true)
-  //{
-  //    Index iFile = getFileID(_file->getFilename());
-  //        _file->getReal()[0] = iFile;
-  //    return iFile;
-  //}
+// UInt32 FileManager::PushBack(File* _file)
+// {
+//   // if already opened, return previous ID
+//   // if(isOpened(_file->getFilename()) == true)
+//   //{
+//   //    UInt32 iFile = getFileID(_file->getFilename());
+//   //        _file->getReal()[0] = iFile;
+//   //    return iFile;
+//   //}
 
-  // find first free space
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] == nullptr)
-    {
-      fileList[i] = _file;
-      file = i;
-      return i;
-    }
-  }
+//   // find first free space
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] == nullptr)
+//     {
+//       fileList[i] = _file;
+//       file = i;
+//       return i;
+//     }
+//   }
 
-  // no free space, add at the end
-  Index iNewId = static_cast<Index>(fileList.size());
-  fileList.push_back(_file);
-  file = iNewId;
-  return iNewId;
-}
+//   // no free space, add at the end
+//   UInt32 iNewId = static_cast<UInt32>(fileList.size());
+//   fileList.push_back(_file);
+//   file = iNewId;
+//   return iNewId;
+// }
 
-Index FileManager::getFirstFreeFileID()
-{
-  // find first free space
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] == nullptr)
-    {
-      file = i;
-      return i;
-    }
-  }
+// UInt32 FileManager::GetFirstFreeFileID()
+// {
+//   // find first free space
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] == nullptr)
+//     {
+//       file = i;
+//       return i;
+//     }
+//   }
 
-  // no free space, add at the end
-  Index iNewId = static_cast<Index>(fileList.size());
-  fileList.push_back(nullptr);
-  file = iNewId;
-  return iNewId;
-}
+//   // no free space, add at the end
+//   UInt32 iNewId = static_cast<UInt32>(fileList.size());
+//   fileList.push_back(nullptr);
+//   file = iNewId;
+//   return iNewId;
+// }
 
-void FileManager::remove(Index _iID)
-{
-  if (0 < _iID && _iID < static_cast<Index>(fileList.size()))
-  {
-    delete fileList[_iID];
-    fileList[_iID] = nullptr;
-    if (file == _iID)
-    {
-      file = -1;
-    }
-  }
+// void FileManager::Remove(UInt32 _iID)
+// {
+//   if (0 < _iID && _iID < static_cast<UInt32>(fileList.size()))
+//   {
+//     delete fileList[_iID];
+//     fileList[_iID] = nullptr;
+//     if (file == _iID)
+//     {
+//       file = -1;
+//     }
+//   }
 
-  // to clean end of list and remove empty spaces
-  while (fileList.size() != 0 && fileList.back() == nullptr)
-  {
-    fileList.pop_back();
-  }
-}
+//   // to clean end of list and remove empty spaces
+//   while (fileList.size() != 0 && fileList.back() == nullptr)
+//   {
+//     fileList.pop_back();
+//   }
+// }
 
-Index FileManager::getCurrentFile()
-{
-  return file;
-}
+// UInt32 FileManager::GetCurrentFile()
+// {
+//   return file;
+// }
 
-Index* FileManager::getIDs()
-{
-  Index iFileIndex = 0;
-  Index* piIds = nullptr;
+// UInt32* FileManager::GetIDs()
+// {
+//   UInt32 iFileUInt32 = 0;
+//   UInt32* piIds = nullptr;
 
-  piIds = new Index[getOpenedCount()];
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr)
-    {
-      piIds[iFileIndex++] = i;
-    }
-  }
+//   piIds = new UInt32[GetOpenedCount()];
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr)
+//     {
+//       piIds[iFileUInt32++] = i;
+//     }
+//   }
 
-  return piIds;
-}
+//   return piIds;
+// }
 
-Index FileManager::getOpenedCount()
-{
-  Index iCount = 0;
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr)
-    {
-      iCount++;
-    }
-  }
-  return iCount;
-}
+// UInt32 FileManager::GetOpenedCount()
+// {
+//   UInt32 iCount = 0;
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr)
+//     {
+//       iCount++;
+//     }
+//   }
+//   return iCount;
+// }
 
-wchar_t** FileManager::getTypesAsString()
-{
-  Index iFileIndex = 0;
-  wchar_t** pstTypes = nullptr;
+// wchar_t** FileManager::GetTypesAsString()
+// {
+//   UInt32 iFileUInt32 = 0;
+//   wchar_t** pstTypes = nullptr;
 
-  //   pstTypes = new wchar_t *[getOpenedCount()];
-  //   for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  //   {
-  //     if (fileList[i] != nullptr) {
-  //       pstTypes[iFileIndex++] =
-  //       _wcsdup(fileList[i]->getFileTypeAsChar());
-  //     }
-  //   }
+//   //   pstTypes = new wchar_t *[getOpenedCount()];
+//   //   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   //   {
+//   //     if (fileList[i] != nullptr) {
+//   //       pstTypes[iFileUInt32++] =
+//   //       _wcsdup(fileList[i]->getFileTypeAsChar());
+//   //     }
+//   //   }
 
-  return pstTypes;
-}
+//   return pstTypes;
+// }
 
-wchar_t** FileManager::getFilenames()
-{
-  Index iFileIndex = 0;
-  wchar_t** pstFilenames = nullptr;
+// wchar_t** FileManager::GetFilenames()
+// {
+//   UInt32 iFileUInt32 = 0;
+//   wchar_t** pstFilenames = nullptr;
 
-  // pstFilenames = (char **)malloc(getOpenedCount() * sizeof(char
-  // *)); for (Index i = 0; i < static_cast<Index>(fileList.size());
-  // ++i) {
-  //     if (fileList[i] != nullptr) {
-  //         // getFilename() must return std::wstring
-  //         pstFilenames[iFileIndex++] =
-  //         strdup(fileList[i]->getFilename().c_str());
-  //     }
-  // }
+//   // pstFilenames = (char **)malloc(getOpenedCount() * sizeof(char
+//   // *)); for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size());
+//   // ++i) {
+//   //     if (fileList[i] != nullptr) {
+//   //         // getFilename() must return std::wstring
+//   //         pstFilenames[iFileUInt32++] =
+//   //         strdup(fileList[i]->getFilename().c_str());
+//   //     }
+//   // }
 
-  return pstFilenames;
-}
+//   return pstFilenames;
+// }
 
-Float* FileManager::getModes()
-{
-  Index iFileIndex = 0;
-  Float* pdblModes = nullptr;
+// Float32* FileManager::GetModes()
+// {
+//   UInt32 iFileUInt32 = 0;
+//   Float32* pdblModes = nullptr;
 
-  pdblModes = new Float[getOpenedCount()];
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr)
-    {
-      pdblModes[iFileIndex++] = (Float)(fileList[i]->getFileMode());
-    }
-  }
+//   pdblModes = new Float32[GetOpenedCount()];
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr)
+//     {
+//       pdblModes[iFileUInt32++] = (Float32)(fileList[i]->getFileMode());
+//     }
+//   }
 
-  return pdblModes;
-}
+//   return pdblModes;
+// }
 
-std::vector<Float> FileManager::getSwaps()
-{
+// std::vector<Float32> FileManager::GetSwaps()
+// {
 
-  std::vector<Float> swaps;
-  swaps.reserve(getOpenedCount());
+//   std::vector<Float32> swaps;
+//   swaps.reserve(GetOpenedCount());
 
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); ++i)
-  {
-    if (fileList[i] != nullptr)
-    {
-      // swaps.push_back(static_cast<Float>(fileList[i]->getFileSwap()));
-    }
-  }
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); ++i)
+//   {
+//     if (fileList[i] != nullptr)
+//     {
+//       // swaps.push_back(static_cast<Float>(fileList[i]->getFileSwap()));
+//     }
+//   }
 
-  return swaps;
-}
+//   return swaps;
+// }
 
-FileManager::FileManager()
-{
-  File* pErr = new File();
-  // pErr->setFileMode(L"wb");
-  // pErr->setFileDesc(stderr);
-  // pErr->setFileSwap(0);
-  // pErr->setFileType(3);
-  // pErr->setFilename(L"stderr");
+// FileManager::FileManager()
+// {
+//   File* pErr = new File();
+//   // pErr->setFileMode(L"wb");
+//   // pErr->setFileDesc(stderr);
+//   // pErr->setFileSwap(0);
+//   // pErr->setFileType(3);
+//   // pErr->setFilename(L"stderr");
 
-  File* pIn = new File();
-  // pIn->setFileMode(L"rb");
-  // pIn->setFileDesc(stdin);
-  // pIn->setFileSwap(0);
-  // pIn->setFileType(3);
-  // pIn->setFilename(L"stdin");
+//   File* pIn = new File();
+//   // pIn->setFileMode(L"rb");
+//   // pIn->setFileDesc(stdin);
+//   // pIn->setFileSwap(0);
+//   // pIn->setFileType(3);
+//   // pIn->setFilename(L"stdin");
 
-  File* pOut = new File();
-  // pOut->setFileMode(L"wb");
-  // pOut->setFileDesc(stdout);
-  // pOut->setFileSwap(0);
-  // pOut->setFileType(3);
-  // pOut->setFilename(L"stdout");
+//   File* pOut = new File();
+//   // pOut->setFileMode(L"wb");
+//   // pOut->setFileDesc(stdout);
+//   // pOut->setFileSwap(0);
+//   // pOut->setFileType(3);
+//   // pOut->setFilename(L"stdout");
 
-  // put pErr at position 0
-  fileList.push_back(pErr);
+//   // put pErr at position 0
+//   fileList.push_back(pErr);
 
-  // insert free space
-  fileList.push_back(nullptr);
-  fileList.push_back(nullptr);
-  fileList.push_back(nullptr);
-  fileList.push_back(nullptr);
+//   // insert free space
+//   fileList.push_back(nullptr);
+//   fileList.push_back(nullptr);
+//   fileList.push_back(nullptr);
+//   fileList.push_back(nullptr);
 
-  // put pIn at position 5
-  fileList.push_back(pIn);
-  // put pOut at position 6
-  fileList.push_back(pOut);
-  file = -1;
-}
+//   // put pIn at position 5
+//   fileList.push_back(pIn);
+//   // put pOut at position 6
+//   fileList.push_back(pOut);
+//   file = -1;
+// }
 
-ErrorCode FileManager::clear()
-{
-  for (Index i = 0; i < static_cast<Index>(fileList.size()); i++)
-  {
-    if (fileList[i] != nullptr)
-    {
-      delete fileList[i];
-    }
-  }
+// UInt32 FileManager::Clear()
+// {
+//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
+//   {
+//     if (fileList[i] != nullptr)
+//     {
+//       delete fileList[i];
+//     }
+//   }
 
-  fileList.clear();
-  return ErrorCode::SLX_OK;
-}
+//   fileList.clear();
+//   return SLX_OK;
+// }
 
-FileManager::FileManager(std::vector<File*> files) {}
+// FileManager::FileManager(std::vector<File*> files) {}

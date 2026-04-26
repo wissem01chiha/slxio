@@ -16,8 +16,8 @@
 #ifndef SIMULINKCONFIGSETWRITER_H
 #define SIMULINKCONFIGSETWRITER_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Json-c.h"
 #include "SimulinkConfigSet.h"
 #include "SimulinkWriterBase.h"

@@ -1,27 +1,20 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
-#ifndef DIRECTORY_H
-#define DIRECTORY_H
+#ifndef Directory_h__
+#define Directory_h__
 
 #include "APIExportMacro.h"
-#include "File.h"
-#include "Libuv.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
-#include "ErrorTypes.h"
+
 #include <map>
 #include <vector>
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class File;
 
 /**
  * @brief Directory class
@@ -62,28 +55,28 @@ public:
 
   /// @brief Open the directory and initialize member variables.
   /// @details Populates the file map and file list attributes.
-  int open();
+  int Open();
 
   /// @brief Remove the directory and its contents recursively.
-  int remove();
+  int Remove();
 
   /// @brief Get the number of files in the directory.
   /// @return Number of files, or -1 if the directory could not be
   /// opened.
-  size_t getNumberOfFiles() const;
+  size_t GetNumberOfFiles() const;
 
   /// @brief Get a file by index.
   /// @param index Position of the file in the list.
   /// @return Pointer to the File object at the given index.
-  const File* getFile(const size_t& index) const;
+  const File* GetFile(const size_t& index) const;
 
   /// @brief Get a specific file by name.
   /// @param filename Name of the file to retrieve.
   /// @return Pointer to the File object if found, otherwise nullptr.
-  const File* getFile(const std::string& filename) const;
+  const File* GetFile(const std::string& filename) const;
 
   /// @brief Get the current working directory.
-  static const char* getCurrentDirectory();
+  static const char* GetCurrentDirectory();
 
   /// @brief Get the system temporary directory.
   /// create and return a system unique temporary directory name
@@ -91,32 +84,32 @@ public:
   /// will start with the given prefix
   /// returns nullptr on failure
   /// @note only relative directory name is computed
-  static const char* getTemporaryDirectory(const char* prefix = "");
+  static const char* GetTemporaryDirectory(const char* prefix = "");
 
   /// @brief Check if the given path is a directory.
-  static bool isDirectory(const char* path);
+  static bool IsDirectory(const char* path);
 
   /// @brief Check if the given path is a directory (std::string
   /// variant).
-  static bool isDirectory(const std::string& path);
+  static bool IsDirectory(const std::string& path);
 
   /// @brief Get subdirectories in the current directory.
   std::vector<Directory> getSubDirectories();
 
   /// @brief Get the directory name from the full path.
-  std::string getDirectoryName();
+  std::string GetDirectoryName();
 
   /// @brief Get the directory path.
-  const std::string& getDirectoryPath() const;
+  const std::string& GetDirectoryPath() const;
 
   /// @brief Check if the directory is empty.
-  bool empty();
+  bool Empty();
 
   /// @brief Compress the directory content into a ZIP archive.
   /// @details Output file will be named <dirname>.zip.
   /// if the new archive name is given it will assume same as parent
   /// directory
-  int zip(const char* dir = "");
+  UInt32 Zip(const char* dir = "");
 
   /// @brief Creates the directory structure for a given entry name.
   /// The entry name can be in one of the following formats:
@@ -128,7 +121,7 @@ public:
   /// @note This function does not validate whether the `dir`
   /// parameter is an existing directory; it is the responsibility of
   /// the caller to ensure that.
-  static int mkdir(const char* dir);
+  static UInt32 Mkdir(const char* dir);
 
   /// @brief Destructor.
   ~Directory() = default;
@@ -141,4 +134,8 @@ private:
   std::map<std::string, Directory> subdirs_;
 };
 
-#endif // DIRECTORY_H
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif /* Directory_h__ */

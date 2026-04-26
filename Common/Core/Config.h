@@ -4,133 +4,96 @@
 #ifndef __Config_h__
 #define __Config_h__
 
-#include "PlatformMacro.h"
-
-#define SLXIO_BUILD_SHARED 0
-
-#define HAVE_STDBOOL_H  1
-
-/* #undef USE_64BIT_INDEX */
-
-/* #undef USE_32BIT_INDEX */
-
-/* #undef USE_16BIT_INDEX */
-
-/* #undef USE_8BIT_INDEX */
-
-/* #undef USE_FLOAT32 */
-
-/* #undef USE_FLOAT16 */
-
-/* #undef USE_FLOAT128 */
-
-/* #undef USE_FLOAT64 */
+#define HAVE_STDBOOL_H 1
 
 #define HAVE_LIMITS_H 1
 
 #define HAVE_VALUES_H  0
 
-#define HAVE_STDLIB_H 0
+#define HAVE_STDLIB_H 1
 
-#define HAVE_FLOAT_H  0
+#define HAVE_FLOAT_H  1
 
-#define HAVE_DIRECT_H  0
+#define HAVE_DIRECT_H  1
 
-#define HAVE_IO_H  0
+#define HAVE_UNISTD_H 0
 
-#define HAVE_WINDOWS_H  0
+#define HAVE_IO_H  1
+
+#define HAVE_WINDOWS_H  1
 
 #define HAVE_INTRIN_H  0
-
 
 #define HAVE_SYS_STAT_H 0
 
 #define HAVE_SYS_TYPES_H  1
 
-#define HAVE_UNISTD_H  1
+#define HAVE_UNISTD_H  0
 
-#ifdef PLATFORM_WINDOWS
-#define PATH_SEP '\\'
-#else
-#define PATH_SEP '/'
-#endif
+#define HAVE_STDINT_H 1
 
-#ifdef PLATFORM_WINDOWS
-#include <direct.h>
-#else
-#include <unistd.h>
-#endif
+#define SLXIO_BUILD_SHARED 0
 
-#define LOGGER_USE_SLOG
+#define SLXIO_NAMESPACE 0
 
-#ifdef __Cxxopts_h__
-#error "Cxxopts.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_CXXOPTS
+#define SLXIO_ABI_NAMESPACE 0
 
-#ifdef __Doctest_h__
-#error "Doctest.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_DOCTEST
+#define SLXIO_LOGURU 0
 
-#ifdef __Json_c_h__
-#error "Json-c.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_JSON_C
+#define SLXIO_SLOG 1
 
-#ifdef __Libpng_h__
-#error "Libpng.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBPNG
+#define SLXIO_ABI_SIZEOF_CHAR 1
 
-#ifdef __Libuv_h__
-#error "Libuv.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBUV
+#define SLXIO_ABI_SIZEOF_INT 4
 
-#ifdef __LibXML2_h__
-#error "LibXML2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBXML2
+#define SLXIO_ABI_SIZEOF_SIZE_T 8
 
-#ifdef __Libzip_h__
-#error "Libzip.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LIBZIP
+#define SLXIO_ABI_SIZEOF_DOUBLE 8
 
-#ifdef __Loguru_h__
-#error "Loguru.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_LOGURU
+#define SLXIO_ABI_SIZEOF_FLOAT 4
 
-#ifdef __Pybind11_h__
-#error "Pybind11.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_PYBIND11
+#define SLXIO_ABI_SIZEOF_SHORT 2
 
-#ifdef __Rapidcsv_h__
-#error "Rapidcsv.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_RAPIDCSV
+#define SLXIO_ABI_SIZEOF_LONG_LONG 8
 
-#ifdef __Slog_h__
-#error "Slog.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_SLOG
+#define SLXIO_ABI_SIZEOF_LONG 4
 
-#ifdef __Sol2_h__
-#error "Sol2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_SOL2
+#define SLXIO_ABI_SIZEOF_UINT8_T 1
 
-#ifdef __TinyXML2_h__
-#error "TinyXML2.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_TINYXML2
+#define SLXIO_ABI_SIZEOF_UINT16_T 2
 
-#ifdef __Zlibconf_h__
-#error "Zlibconf.h should not be included before Config.h"
-#endif
-#undef USE_EXTERNAL_ZLIB
+#define SLXIO_ABI_SIZEOF_UINT32_T 4
+
+#define SLXIO_SIMULINK_VERSION R2018b
+
+#define SLXIO_64BIT_IDS 1
+
+/* #undef USE_EXTERNAL_CXXOPTS */
+
+/* #undef USE_EXTERNAL_DOCTEST */
+
+/* #undef USE_EXTERNAL_JSON_C */
+
+/* #undef USE_EXTERNAL_LIBPNG */
+
+/* #undef USE_EXTERNAL_LIBUV */
+
+/* #undef USE_EXTERNAL_LIBXML2 */
+
+/* #undef USE_EXTERNAL_LIBZIP */
+
+/* #undef USE_EXTERNAL_LOGURU */
+
+/* #undef USE_EXTERNAL_PYBIND11 */
+
+/* #undef USE_EXTERNAL_RAPIDCSV */
+
+/* #undef USE_EXTERNAL_SLOG */
+
+/* #undef USE_EXTERNAL_SOL2 */
+
+/* #undef USE_EXTERNAL_TINYXML2 */
+
+/* #undef USE_EXTERNAL_ZLIB */
 
 #endif /* __Config_h__ */

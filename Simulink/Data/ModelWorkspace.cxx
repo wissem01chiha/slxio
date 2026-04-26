@@ -5,7 +5,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 ModelWorkspace::ModelWorkspace()
   : dataSource(DataSourceType::ModelFile)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
@@ -17,7 +17,7 @@ std::string ModelWorkspace::getVariable(const std::string& name) const
   {
     return it->second;
   }
-  l.log(Logger::V_WARNING, "ModelWorkspace variable ", name, " not found.");
+  l.Log(Logger::V_WARNING, "ModelWorkspace variable ", name, " not found.");
   return std::string("");
 }
 
@@ -36,7 +36,7 @@ void ModelWorkspace::clear(const std::string& name)
   }
   else
   {
-    l.log(Logger::V_WARNING, "ModelWorkspace variable ", name,
+    l.Log(Logger::V_WARNING, "ModelWorkspace variable ", name,
       " not found. Cannot clear.");
   }
 }
@@ -44,7 +44,7 @@ void ModelWorkspace::clear(const std::string& name)
 void ModelWorkspace::clearAll()
 {
   variables.clear();
-  l.log(Logger::V_INFO, "All variables cleared from ModelWorkspace.");
+  l.Log(Logger::V_INFO, "All variables cleared from ModelWorkspace.");
 }
 
 DataSourceType ModelWorkspace::getDataSource()

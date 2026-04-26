@@ -8,6 +8,7 @@ Released under the terms of the Apache-2.0 license. <chihawissem08@gmail.com>
 Provide utility functions for managing project modules build.
 #]=======================================================================]
 
+include(ModuleDebugging)
 
 #[==[.rst:
 .. cmake:function:: add_submodules(<directory>)
@@ -986,28 +987,3 @@ endfunction ()
 
 
 
-#[==[.rst:
-.. cmake:function:: module_print(<prefix>)
-
-  Debugging function to print all parsed variables of a module.
-  this function is only when module level debugging var is enabled
-  it will print all the global variables set after parsing the 'slxio.module' file
-  for the given module
-  Note: this function should be called after calling ``scan_module_file``.
-
-  .. code-block:: cmake
-
-    module_print(_module)
-#]==]
-function (module_print module_prefix)
-  
-  message (STATUS "-------------------------------------------------------------------")
-  message (STATUS "module_name                   = ${${module_prefix}_name}")
-  message (STATUS "module_group                  = ${${module_prefix}_group}")
-  message (STATUS "module_version                = ${${module_prefix}_version}")
-  message (STATUS "module_description            = ${${module_prefix}_description}")
-  message (STATUS "module_maintainer             = ${${module_prefix}_maintainer}")
-  message (STATUS "module_license                = ${${module_prefix}_license}")
-  message (STATUS "-------------------------------------------------------------------")
-
-endfunction ()

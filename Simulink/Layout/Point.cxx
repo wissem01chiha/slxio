@@ -3,12 +3,12 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Point::Point(const std::vector<uint32_t>& vec)
-  : l(Logger::getInstance())
+Point::Point(const std::vector<UInt32>& vec)
+  : l(Logger::GetInstance())
 {
   if (vec.size() < 4)
   {
-    l.log(Logger::V_ERROR,
+    l.Log(Logger::V_ERROR,
       "Point constructor: vector too small to initialize Point!");
     x = y = width = height = 0;
   }
@@ -21,7 +21,7 @@ Point::Point(const std::vector<uint32_t>& vec)
   }
 }
 
-std::vector<uint32_t> Point::toVector() const
+std::vector<UInt32> Point::toVector() const
 {
   return { x, y, width, height };
 }

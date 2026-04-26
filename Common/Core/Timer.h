@@ -4,7 +4,7 @@
 #ifndef __Timer_h__
 #define __Timer_h__
 
-#include "ABINamespace.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -12,7 +12,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Timer
- * @brief 
  */
 class Timer 
 {
@@ -20,14 +19,14 @@ public:
   virtual ~Timer();
 
   /// @brief Call Start every time to reset the timer to zero.
-  virtual void start() = 0;
-  virtual void stop() = 0;
-  virtual void reset() = 0;
-  virtual bool is_running() const = 0;
-  virtual Float precision() const = 0;
+  virtual void Start() = 0;
+  virtual void Stop() = 0;
+  virtual void Reset() = 0;
+  virtual bool IsRunning() const = 0;
+  virtual Float32 Precision() const = 0;
   /// @brief Obtains a timer measurement in seconds.
   /// @return The amount of time since the timer started.
-  virtual Float time() = 0;
+  virtual Float32 Time() = 0;
 
 protected:
   Timer() = default;

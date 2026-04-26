@@ -8,7 +8,7 @@ SimulinkDataType toSimulinkDataType(bool)
   return SimulinkDataType::Boolean;
 }
 
-SimulinkDataType toSimulinkDataType(Float)
+SimulinkDataType toSimulinkDataType(Float32)
 {
 #ifdef USE_FLOAT16
   return SimulinkDataType::Half;
@@ -23,32 +23,20 @@ SimulinkDataType toSimulinkDataType(Float)
 #endif
 }
 
-SimulinkDataType toSimulinkDataType(sint8)
-{
-  return SimulinkDataType::Int8;
-}
-SimulinkDataType toSimulinkDataType(sint16)
-{
-  return SimulinkDataType::Int16;
-}
-SimulinkDataType toSimulinkDataType(sint32)
-{
-  return SimulinkDataType::Int32;
-}
 
-SimulinkDataType toSimulinkDataType(uint8)
+SimulinkDataType toSimulinkDataType(UInt8)
 {
   return SimulinkDataType::UInt8;
 }
-SimulinkDataType toSimulinkDataType(uint16)
+SimulinkDataType toSimulinkDataType(UInt16)
 {
   return SimulinkDataType::UInt16;
 }
-SimulinkDataType toSimulinkDataType(uint32)
+SimulinkDataType toSimulinkDataType(UInt32)
 {
   return SimulinkDataType::UInt32;
 }
-SimulinkDataType toSimulinkDataType(uint64)
+SimulinkDataType toSimulinkDataType(UInt64)
 {
   return SimulinkDataType::UInt64;
 }

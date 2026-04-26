@@ -35,8 +35,6 @@ INSTALL_LICENSES
   TRUE
 CLASSES
   File
-  Status
-  Directory
   FileManager
 WINDOWS_CLASSES
 UNIX_CLASSES

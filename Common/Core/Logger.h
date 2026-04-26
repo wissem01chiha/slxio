@@ -4,7 +4,7 @@
 #ifndef __Logger_h__
 #define __Logger_h__
 
-#include "ABINamespace.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "ErrorTypes.h"
 #include "Config.h"
@@ -14,14 +14,6 @@
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
-
-#if defined(LOGGER_USE_SLOG) && defined(LOGGER_USE_LOGURU)
-#error "More than one logging utility is enabled!"
-#endif
-
-#if !defined(LOGGER_USE_SLOG) && !defined(LOGGER_USE_LOGURU)
-#error "No logging utility is enabled!"
-#endif
 
 /**
  * @class Logger
@@ -50,16 +42,6 @@ public:
     V_ERROR = -2,
     V_WARNING = -1,
     V_INFO = 0,
-    VERBOSITY_0 = 0,
-    VERBOSITY_1 = 1,
-    VERBOSITY_2 = 2,
-    VERBOSITY_3 = 3,
-    VERBOSITY_4 = 4,
-    VERBOSITY_5 = 5,
-    VERBOSITY_6 = 6,
-    VERBOSITY_7 = 7,
-    VERBOSITY_8 = 8,
-    VERBOSITY_9 = 9,
     V_TRACE = 9
   };
 
@@ -95,6 +77,7 @@ public:
     (oss << ... << args);
     //this->Log(level, oss.str().c_str());
   }
+
   /// @brief get the singleton instance of the Logger
   static Logger& GetInstance();
 
@@ -112,14 +95,14 @@ public:
   void Print(const char* message, std::ostream& os);
 
   /// @brief log to a file with a specific verbosity level
-  uint32 LogToFile(Verbosity verbosity, const char* path,
+  UInt32 LogToFile(Verbosity verbosity, const char* path,
     unsigned int linenum, const char* message);
 
   /// @brief log to a random file generated in the current working
   /// directory
-  uint32 LogToFile(Verbosity verbosity, const char* message);
+  UInt32 LogToFile(Verbosity verbosity, const char* message);
 
-  static Verbosity ToVerbosity(uint8 value);
+  static Verbosity ToVerbosity(UInt8 value);
 
   static Verbosity ToVerbosity(const char* text);
 

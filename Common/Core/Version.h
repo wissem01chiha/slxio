@@ -4,7 +4,7 @@
 #ifndef __Version_h__
 #define __Version_h__
 
-#include "ABINamespace.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "VersionMacro.h"
 
@@ -15,11 +15,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class Version final 
 {
 public:
-  static uint32 GetMajorVersion();
-  static uint32 GetMinorVersion();
-  static uint32 GetPatchVersion();
-  bool IsMajorVersionLessThan(uint32 version);
-  bool IsMinorVersionLessThan(uint32 version);
+  static UInt32 GetMajorVersion();
+  static UInt32 GetMinorVersion();
+  static UInt32 GetPatchVersion();
+  bool IsMajorVersionLessThan(UInt32 version);
+  bool IsMinorVersionLessThan(UInt32 version);
 
 private:
   Version() = default;

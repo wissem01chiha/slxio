@@ -4,14 +4,51 @@
 #ifndef __Compiler_h__
 #define __Compiler_h__
 
+#include "Config.h"
+
 #ifdef _MSC_VER
+
 #define NOMINMAX
-#include <float.h>
-#include <io.h>
-#include <sys/stat.h>
-#include <sys/types.h>
+
+#ifdef HAVE_STDBOOL_H
+#include "stdbool.h"
+#endif
+
+#if HAVE_LIMITS_H
 #include <limits.h>
+#endif
+
+#if HAVE_VALUES_H
+#include <values.h>
+#endif
+
+#if HAVE_STDLIB_H
 #include <stdlib.h>
+#endif
+
+#if HAVE_FLOAT_H
+#include <float.h>
+#endif
+
+#if HAVE_DIRECT_H
+#include <direct.h>
+#endif
+
+#if HAVE_IO_H
+#include <io.h>
+#endif
+
+#if HAVE_SYS_STAT_H
+#include <sys/stat.h>
+#endif
+
+#if HAVE_SYS_TYPES_H
+#include <sys/types.h>
+#endif
+
+#if HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 
 #ifndef S_ISDIR
 #define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)

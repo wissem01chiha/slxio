@@ -1,24 +1,27 @@
 cmake_minimum_required(VERSION 3.12...3.21 FATAL_ERROR)
 
-project (slxio)
+project(slxio)
 
 set(slxio_cmake_dir "${PROJECT_SOURCE_DIR}/CMake")
 list(INSERT CMAKE_MODULE_PATH 0 "${slxio_cmake_dir}")
 include(CI)
 
-if (APPLE)
+if(APPLE)
   include(Apple)
-endif ()
+endif()
 
 if(WIN32)
   include(Windows)
 endif()
 
-option(SLXIO_BUILD_SHARED "Build as shared libraries" OFF)
+set(SLXIO_SIMULINK_VERSION "R2018b")
+set(SLXIO_64BIT_IDS  1)
+
+option(SLXIO_BUILD_SHARED "Build as shared library" OFF)
 option(SLXIO_BUILD_TESTS "Build library tests" ON)
 option(SLXIO_COVERAGE "Enable code coverage" OFF)
-option(SLXIO_LOGURU "Use Loguru librray for logging" OFF)
-option(SLXIO_SLOG  "Use slog librray for logging" OFF)
+option(SLXIO_LOGURU "Use Loguru librray for logging" FALSE)
+option(SLXIO_SLOG  "Use slog librray for logging" TRUE)
 option(SLXIO_ASAN "Enable AddressSanitizer (ASan)" OFF)
 option(SLXIO_MSAN "Enable MemorySanitizer (MSan)" OFF)
 option(SLXIO_TSAN "Enable ThreadSanitizer (TSan)" OFF)
@@ -35,7 +38,7 @@ option(SLXIO_BUILD_PYTHON_TESTS "Build binding interface tests" ON)
 option(SLXIO_FORCE_LOCAL_MODULES "Enable Using local installed modules" ON)
 option(SLXIO_ENABLE_WERROR "Enable treating warnings as errors" OFF)
 option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
-option(SLXIO_MODULE_DEBUG "Enable Debugging module during build" ON)
+option(SLXIO_MODULE_DEBUG "Enable Debugging module during build" OFF)
 option(SLXIO_ENABLE_CPPCHECK "Enable cppcheck static analysis" OFF)
 option(SLXIO_ENABLE_CLANG_TIDY "Enable clang-tidy static analysis" OFF)
 
@@ -57,6 +60,5 @@ include(Install)
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 
-include (Summery)
-
+Summary()
 

@@ -18,7 +18,7 @@
 #   LIBXML2_MODULES            - whether libxml2 has dso support
 #   LIBXML2_XMLLINT_EXECUTABLE - path to the XML checking tool xmllint coming with LibXml2
 
-include("/home/wissem/slxio/ThirdParty/libxml2/libxml2-export.cmake")
+include("C:/Users/chiha.000/Documents/github/slxio/ThirdParty/libxml2/libxml2-export.cmake")
 
 
 
@@ -86,8 +86,8 @@ select_library_location(LibXml2::LibXml2 LIBXML2)
 select_executable_location(LibXml2::xmlcatalog LIBXML2_XMLCATALOG)
 select_executable_location(LibXml2::xmllint LIBXML2_XMLLINT)
 
-set(LIBXML2_LIBRARIES /usr/lib/x86_64-linux-gnu/libxml2.so)
-set(LIBXML2_INCLUDE_DIRS /usr/include/libxml2)
+set(LIBXML2_LIBRARIES LIBXML2_LIBRARY-NOTFOUND)
+set(LIBXML2_INCLUDE_DIRS LIBXML2_INCLUDE_DIR-NOTFOUND)
 
 include(CMakeFindDependencyMacro)
 

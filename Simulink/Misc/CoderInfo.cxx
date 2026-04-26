@@ -24,7 +24,7 @@ const char* CoderInfo::getIdentifier()
   return Identifier;
 }
 
-uint32 CoderInfo::getAlignment()
+UInt32 CoderInfo::getAlignment()
 {
   return Alignment;
 }

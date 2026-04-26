@@ -1,8 +1,10 @@
 ﻿#include "File.h"
-#include "LibZip.h"
 #include "Compiler.h"
 #include "Directory.h"
+#include "LibZip.h"
 #include "Libuv.h"
+#include "ErrorTypes.h"
+#include "ErrorMap.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -11,20 +13,20 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 File::File(const std::string& path, Mode mode)
-  : mode_(mode)
-  , path_(path)
+  : FileMode(mode)
+  , FilePath(path)
 {
 }
 
 File::File(const char* path, Mode mode)
-  : mode_(mode)
+  : FileMode(mode)
 {
-  path_ = std::string(path);
+  FilePath = std::string(path);
 }
 
 File::File(const File& fs)
-  : path_(fs.path_)
-  , mode_(fs.mode_)
+  : FilePath(fs.FilePath)
+  , FileMode(fs.FileMode)
   , fd_(fs.fd_)
   , buffer_(fs.buffer_)
   , nbytes_(fs.nbytes_)
@@ -35,8 +37,8 @@ File& File::operator=(const File& other) noexcept
 {
   if (this != &other)
   {
-    path_ = other.path_;
-    mode_ = other.mode_;
+    FilePath = other.FilePath;
+    FileMode = other.FileMode;
     fd_ = other.fd_;
     buffer_ = other.buffer_;
     nbytes_ = other.nbytes_;
@@ -49,24 +51,24 @@ File& File::operator=(File&& other) noexcept
   if (this != &other)
   {
 
-    path_ = std::move(other.path_);
-    mode_ = other.mode_;
+    FilePath = std::move(other.FilePath);
+    FileMode = other.FileMode;
     fd_ = other.fd_;
     buffer_ = std::move(other.buffer_);
     nbytes_ = other.nbytes_;
 
     other.fd_ = -1;
     other.nbytes_ = 0;
-    other.mode_ = Mode::Read;
-    other.path_.clear();
+    other.FileMode = Mode::READ;
+    other.FilePath.clear();
     other.buffer_.clear();
   }
   return *this;
 }
 
 File::File(File&& other) noexcept
-  : path_(std::move(other.path_))
-  , mode_(other.mode_)
+  : FilePath(std::move(other.FilePath))
+  , FileMode(other.FileMode)
   , fd_(other.fd_)
   , buffer_(std::move(other.buffer_))
   , nbytes_(other.nbytes_)
@@ -74,17 +76,17 @@ File::File(File&& other) noexcept
 
   other.fd_ = -1;
   other.nbytes_ = 0;
-  other.mode_ = Mode{};
-  other.path_.clear();
+  other.FileMode = Mode{};
+  other.FilePath.clear();
   other.buffer_.clear();
 }
 
-bool File::isFile(const std::string& path)
+bool File::IsFile(const std::string& path)
 {
-  return isFile(path.c_str());
+  return IsFile(path.c_str());
 }
 
-bool File::isFile(const char* path)
+bool File::IsFile(const char* path)
 {
 
   uv_fs_t req;
@@ -100,38 +102,38 @@ bool File::isFile(const char* path)
   return result;
 }
 
-bool File::isFile()
+bool File::IsFile()
 {
-  return isFile(path_);
+  return this->IsFile(FilePath);
 }
 
-bool File::isFile() const
+bool File::IsFile() const
 {
-  return isFile(path_);
+  return IsFile(FilePath);
 }
 
-int File::open()
+UInt32 File::Open()
 {
 
   uv_fs_t req;
 
   int err = uv_fs_open(
-    uv_default_loop(), &req, path_.c_str(), getFileMode(), 0, nullptr);
+    uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return static_cast<int>(-err);
   }
   fd_ = err;
   return SLX_OK;
 }
 
-int File::read()
+UInt32 File::Read()
 {
 
-  if (mode_ != Read)
+  if (FileMode != READ)
   {
     return SLX_EIOERR;
   }
@@ -146,12 +148,12 @@ int File::read()
 
   if (err < 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return static_cast<int>(-err);
   }
   if (err == 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return SLX_EEOF;
   }
 
@@ -159,10 +161,10 @@ int File::read()
   return SLX_OK;
 }
 
-int File::write(const char* message)
+UInt32 File::Write(const char* message)
 {
 
-  if (mode_ == Read)
+  if (FileMode == READ)
   {
     return SLX_EIOERR;
   }
@@ -177,13 +179,13 @@ int File::write(const char* message)
 
   if (err < 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return static_cast<int>(-err);
   }
   return SLX_OK;
 }
 
-int File::close()
+UInt32 File::Close()
 {
   if (fd_ < 0)
   {
@@ -196,7 +198,7 @@ int File::close()
 
   if (err < 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return static_cast<int>(-err);
   }
 
@@ -204,10 +206,10 @@ int File::close()
   return SLX_OK;
 }
 
-bool File::eof() const
+bool File::Eof() const
 {
 
-  if (fd_ < 0 || mode_ != Read)
+  if (fd_ < 0 || FileMode != READ)
   {
     return false;
   }
@@ -227,66 +229,66 @@ bool File::eof() const
   return nbytes_ >= size_;
 }
 
-std::vector<char> File::getBuffer()
+std::vector<char> File::GetBuffer()
 {
   return buffer_;
 }
 
-size_t File::getNBytes() const
+size_t File::GetNBytes() const
 {
   return nbytes_;
 }
 
-std::string File::getFileDirectory()
+std::string File::GetFileDirectory()
 {
 
-  size_t pos = path_.find_last_of(PATH_SEP);
+  size_t pos = FilePath.find_last_of(PATH_SEP);
   if (pos == std::string::npos)
   {
     return std::string(".");
   }
-  return path_.substr(0, pos + 1);
+  return FilePath.substr(0, pos + 1);
 }
 
-const char* File::getFileExtension() const
+const char* File::GetFileExtension() const
 {
 
-  if (path_ == "")
+  if (FilePath == "")
     return nullptr;
 
-  const char* dot = strrchr(path_.c_str(), '.');
-  if (!dot || dot == path_)
+  const char* dot = strrchr(FilePath.c_str(), '.');
+  if (!dot || dot == FilePath)
     return nullptr;
 
   return dot + 1;
 }
 
-int File::setFileExtension(const char* newExt)
+UInt32 File::SetFileExtension(const char* newExt)
 {
 
   if (!newExt || *newExt == '\0')
   {
     return SLX_EINVAR;
   }
-  if (path_.empty())
+  if (FilePath.empty())
   {
     return SLX_EINVAR;
   }
 
-  size_t pos = path_.find_last_of('.');
+  size_t pos = FilePath.find_last_of('.');
   std::string base;
   if (pos == std::string::npos)
   {
-    base = path_;
+    base = FilePath;
   }
   else
   {
-    base = path_.substr(0, pos);
+    base = FilePath.substr(0, pos);
   }
 
   std::string dest = base + "." + newExt;
 
-  FILE* src = fopen(path_.c_str(), "rb");
+  FILE* src = fopen(FilePath.c_str(), "rb");
   if (!src)
   {
     return SLX_EIOERR;
@@ -309,12 +311,12 @@ int File::setFileExtension(const char* newExt)
   fclose(src);
   fclose(dst);
 
-  path_ = dest;
+  FilePath = dest;
 
   return SLX_OK;
 }
 
-int File::move(const char* dirpath)
+UInt32 File::Move(const char* dirpath)
 {
 
   if (dirpath == nullptr)
@@ -327,29 +329,29 @@ int File::move(const char* dirpath)
   {
     newPath += PATH_SEP;
   }
-  newPath += getFilename();
+  newPath += GetFileName();
 
   uv_fs_t req;
   int err = uv_fs_rename(
-    uv_default_loop(), &req, path_.c_str(), newPath.c_str(), nullptr);
+    uv_default_loop(), &req, FilePath.c_str(), newPath.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
   {
-    //Status::log(err);
+    PrintError(err);
     return static_cast<int>(-err);
   }
 
-  path_ = newPath;
+  FilePath = newPath;
   return SLX_OK;
 }
 
-int File::copy(File& ofile)
+UInt32 File::Copy(File& ofile)
 {
   return SLX_ENOTIMPL;
 }
 
-int File::copy(const char* destdir)
+UInt32 File::Copy(const char* destdir)
 {
   if (!destdir)
     return SLX_EINVAR;
@@ -359,19 +361,19 @@ int File::copy(const char* destdir)
   {
     destpath += PATH_SEP;
   }
-  destpath += getFilename();
+  destpath += GetFileName();
 
-  std::ifstream src(path_, std::ios::binary);
+  std::ifstream src(FilePath, std::ios::binary);
   if (!src.is_open())
   {
-    //Status::log((int)SLX_ENOENT);
+    PrintError(SLX_ENOENT);
     return SLX_ENOENT;
   }
 
   std::ofstream dst(destpath, std::ios::binary);
   if (!dst.is_open())
   {
-    //Status::log((int)SLX_EIOERR);
+    PrintError(SLX_EIOERR);
     return SLX_EIOERR;
   }
 
@@ -379,7 +381,7 @@ int File::copy(const char* destdir)
 
   if (!dst.good())
   {
-    //Status::log((int)SLX_EIOERR);
+    PrintError(SLX_EIOERR);
     return SLX_EIOERR;
   }
 
@@ -389,50 +391,47 @@ int File::copy(const char* destdir)
   }
 
   return SLX_OK;
-}
+};
 
-int File::rename(const char* filename)
+UInt32 File::Rename(const char* filename)
 {
-
   if (!filename || *filename == '\0')
     return SLX_EINVAR;
-  path_ = std::string(filename);
+  FilePath = std::string(filename);
   return SLX_OK;
 }
 
-const std::string File::getFilename()
+const std::string File::GetFileName()
 {
-
-  size_t pos = path_.find_last_of("/\\");
+  size_t pos = FilePath.find_last_of("/\\");
   if (pos == std::string::npos)
   {
-    return std::string(path_.begin(), path_.end());
+    return std::string(FilePath.begin(), FilePath.end());
   }
-  return std::string(path_.begin() + pos + 1, path_.end());
+  return std::string(FilePath.begin() + pos + 1, FilePath.end());
 }
 
-const std::string& File::getFilepath() const
+const std::string& File::GetFilePath() const
 {
-  return path_;
+  return FilePath;
 }
 
-const int File::getFileMode()
+const int File::GetFileMode()
 {
-
   int flags = 0;
 
-  switch (mode_)
+  switch (FileMode)
   {
-    case Read:
+    case READ:
       flags = O_RDONLY;
       break;
-    case Write:
+    case WRITE:
       flags = O_WRONLY | O_CREAT;
       break;
-    case Truncate:
+    case TRUNCATE:
       flags = O_WRONLY | O_CREAT | O_TRUNC;
       break;
-    case Append:
+    case APPEND:
       flags = O_WRONLY | O_CREAT | O_APPEND;
       break;
   }
@@ -440,26 +439,26 @@ const int File::getFileMode()
   return flags;
 }
 
-const char* File::getFileModeAsChar()
+const char* File::GetFileModeAsChar()
 {
 
-  switch (mode_)
+  switch (FileMode)
   {
-    case File::Mode::Read:
+    case File::Mode::READ:
       return "Read";
-    case File::Mode::Write:
+    case File::Mode::WRITE:
       return "Write";
-    case File::Mode::Append:
+    case File::Mode::APPEND:
       return "Append";
-    case File::Mode::Truncate:
+    case File::Mode::TRUNCATE:
       return "Truncate";
     default:
       "";
   };
-  return "Unvalid";
+  return "";
 }
 
-size_t File::size() const
+size_t File::Size() const
 {
 
   if (fd_ < 0)
@@ -481,16 +480,16 @@ size_t File::size() const
   return size_;
 }
 
-int File::unzip(const char* dir)
+UInt32 File::Unzip(const char* dir)
 {
 
   int err = 0;
   uv_fs_t req;
 
-  zip_t* archive = zip_open(path_.c_str(), ZIP_RDONLY, &err);
+  zip_t* archive = zip_open(FilePath.c_str(), ZIP_RDONLY, &err);
   if (!archive)
   {
-    //Status::log((int)SLX_EIOERR);
+    PrintError(SLX_EIOERR);
     return SLX_EIOERR;
   }
 
@@ -508,10 +507,10 @@ int File::unzip(const char* dir)
     char entrydirpath[1024];
     snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", dir, name);
 
-    int ec = Directory::mkdir(entrydirpath);
+    int ec = Directory::Mkdir(entrydirpath);
     if (ec != SLX_OK)
     {
-      //Status::log((int)ec);
+      PrintError(ec);
       return ec;
     }
 
@@ -542,7 +541,7 @@ int File::unzip(const char* dir)
   return SLX_OK;
 }
 
-int File::zip(const char* zfilepath, const char* zname)
+UInt32 File::Zip(const char* zfilepath, const char* zname)
 {
 
   zip_t* za;
@@ -565,7 +564,7 @@ int File::zip(const char* zfilepath, const char* zname)
     return SLX_EIOERR;
   }
 
-  zip_source_t* source = zip_source_file(za, path_.c_str(), 0, -1);
+  zip_source_t* source = zip_source_file(za, FilePath.c_str(), 0, -1);
   if (source == nullptr)
   {
     fprintf(stderr, "zip source file failed: %s\n", zip_strerror(za));
@@ -589,7 +588,7 @@ int File::zip(const char* zfilepath, const char* zname)
   }
 
   return SLX_OK;
-}
+};
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
