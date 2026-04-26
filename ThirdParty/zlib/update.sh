@@ -32,7 +32,6 @@ files=(
     "trees.h"
     "uncompr.c"
     "zconf.h"
-    "zconf.h.in"
     "zlib.3"
     "zlib.3.pdf"
     "zlib.h"

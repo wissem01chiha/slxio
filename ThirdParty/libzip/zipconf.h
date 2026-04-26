@@ -16,9 +16,9 @@
 /* #undef ZIP_STATIC */
 
 #if !defined(__STDC_FORMAT_MACROS)
- #define __STDC_FORMAT_MACROS 1
- #endif
- #include <inttypes.h>
+#define __STDC_FORMAT_MACROS 1
+#endif
+#include <inttypes.h>
 
 typedef int8_t zip_int8_t;
 typedef uint8_t zip_uint8_t;

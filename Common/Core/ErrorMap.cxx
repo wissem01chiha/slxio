@@ -66,6 +66,10 @@ static const char* GetErrorAsChar(UInt32 code)
   return buffer;
 }
 
+static const char* GetLastErrorMessage(void){
+  return "";
+}
+
 void PrintfError(const char* format, UInt32 code)
 {
   printf(format, GetErrorAsChar(code));

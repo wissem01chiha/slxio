@@ -92,6 +92,9 @@ static const char* GetErrorMessage(UInt32 code);
 /* thread-unsafe, but simple */
 static const char* GetErrorAsChar(UInt32 code);
 
+/* overloaded, not yet implemented */
+static const char* GetLastErrorMessage(void);
+
 /* Define helper function to debug error codes */
 void PrintfError(const char* format, UInt32 code);
 

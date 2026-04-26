@@ -49,14 +49,14 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 {
 }
 
-ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
+UInt32 SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
     l.log(Logger::Verbosity::V_ERROR,
       "SimulinkBlock:: Cannot add a null Simulink element.");
-    return ErrorCode::SLX_OK;
+    return SLX_OK;
   }
 
   if (element->getType().isA(SimulinkElementType::Type::Block))
@@ -68,7 +68,7 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
       l.log(Logger::Verbosity::V_ERROR,
         "SimulinkBlock:: failed to cast SimulinkElementBase to "
         "SimulinkBlock.");
-      return ErrorCode::SLX_ECASTFAIL;
+      return SLX_ECASTFAIL;
     }
 
     if (subblock->getParent() != nullptr)
@@ -76,14 +76,14 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
       l.log(Logger::Verbosity::V_ERROR,
         "SimulinkBlock:: Cannot add block that already has a "
         "parent.");
-      return ErrorCode::SLX_OK;
+      return SLX_OK;
     }
 
     if (contains(subblock->getID()))
     {
       parent = std::make_shared<SimulinkBlock>(*subblock);
     }
-    return ErrorCode::SLX_OK;
+    return SLX_OK;
   }
   else if (element->getType().isA(SimulinkElementType::Type::Parameter))
   {
@@ -94,20 +94,20 @@ ErrorCode SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
       l.log(Logger::Verbosity::V_ERROR,
         "SimulinkBlock:: failed to cast SimulinkElementBase to "
         "SimulinkParameter.");
-      return ErrorCode::SLX_ECASTFAIL;
+      return SLX_ECASTFAIL;
     }
     parameters.push_back(parameter);
-    return ErrorCode::SLX_OK;
+    return SLX_OK;
   }
   else
   {
     l.log(Logger::Verbosity::V_ERROR,
       "SimulinkBlock:: Cannot add a Simulink element of a different "
       "type than Block or Parameter.");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 void SimulinkBlock::add(SimulinkPortType portType)
@@ -175,14 +175,14 @@ void SimulinkBlock::setBlockType(SimulinkBlockType::Type blockType)
   type = blockType;
 }
 
-ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
+UInt32 SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
     l.log(Logger::V_WARNING,
       "SimulinkBlock:: removing a null Simulink element "
       "pointer from subelement");
-    return ErrorCode::SLX_ENOENT;
+    return SLX_ENOENT;
   }
   SimulinkElementType element_t = element->getType();
 
@@ -192,7 +192,7 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
       "SimulinkBlock:: cannot remove a Simulink element of a "
       "different "
       "type than Block.");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
   std::shared_ptr<SimulinkBlock> subblock =
@@ -202,19 +202,19 @@ ErrorCode SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
     l.log(Logger::V_ERROR,
       "SimulinkBlock:: failed to cast SimulinkElementBase to "
       "SimulinkBlock.");
-    return ErrorCode::SLX_ECASTFAIL;
+    return SLX_ECASTFAIL;
   }
 
   if (blocks.empty())
   {
-    return ErrorCode::SLX_OK;
+    return SLX_OK;
   }
 
   for (const auto& subBlock : blocks)
   {
     subBlock->remove(subblock);
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 std::string SimulinkBlock::toString() const

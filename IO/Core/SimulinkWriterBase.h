@@ -7,7 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "ErrorBuffer.h"
-#include "ErrorCode.h"
+#include "ErrorTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

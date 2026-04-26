@@ -6,7 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorCode.h"
+#include "ErrorTypes.h"
 #include "LibXML2.h"
 #include "SimulinkHardware.h"
 #include "SimulinkParserBase.h"

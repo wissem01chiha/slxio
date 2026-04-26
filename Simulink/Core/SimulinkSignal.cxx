@@ -139,7 +139,7 @@ const char* SimulinkSignal::getUnit()
   return Unit;
 }
 
-std::vector<Float> SimulinkSignal::getSampleTime()
+std::vector<Float32> SimulinkSignal::getSampleTime()
 {
   return SampleTime;
 }

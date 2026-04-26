@@ -233,15 +233,22 @@ set(ZIP_UINT64_T "unsigned __int64")
 set(ZIP_UINT64_T "unsigned long")
 set(ZIP_UINT64_T "unsigned long long")
 
- if(HAVE_INTTYPES_H)
-   set(
-     LIBZIP_TYPES_INCLUDE
-     "#if !defined(__STDC_FORMAT_MACROS)
- #define __STDC_FORMAT_MACROS 1
- #endif
- #include <inttypes.h>")
- elseif(HAVE_STDINT_H)
-   set(LIBZIP_TYPES_INCLUDE "include <stdint.h>")
- elseif(HAVE_SYS_TYPES_H)
-   set(LIBZIP_TYPES_INCLUDE "include <sys/types.h>")
- endif()
+if(HAVE_INTTYPES_H)
+  set(
+    LIBZIP_TYPES_INCLUDE
+    "#if !defined(__STDC_FORMAT_MACROS)
+#define __STDC_FORMAT_MACROS 1
+#endif
+#include <inttypes.h>")
+elseif(HAVE_STDINT_H)
+  set(LIBZIP_TYPES_INCLUDE "include <stdint.h>")
+elseif(HAVE_SYS_TYPES_H)
+  set(LIBZIP_TYPES_INCLUDE "include <sys/types.h>")
+endif()
+
+ #
+# Check to see if we have large file support
+#
+set(CMAKE_REQUIRED_DEFINITIONS -D_LARGEFILE64_SOURCE=1)
+check_type_size(off64_t OFF64_T)
+unset(CMAKE_REQUIRED_DEFINITIONS)  

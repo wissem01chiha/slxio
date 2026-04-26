@@ -53,6 +53,8 @@ HEADERS
   src/trees.h
   src/zutil.h
 CONFIG_HEADERS
+  src/zconf.h.cmakein
+  src/zlibConfig.cmake.in
 PRIVATE_COMPILE_DEFINITIONS
   _LARGEFILE_SOURCE
 PUBLIC_COMPILE_DEFINITIONS

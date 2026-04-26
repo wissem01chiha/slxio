@@ -4,8 +4,9 @@
 #ifndef __RectangleLAYOUTDATABASE_H__
 #define __RectangleTypeLAYOUTDATABASE_H__
 
-#include "Color.h"
 #include "RectangleType.h"
+
+class Color;
 
 /**
  * @brief Encapsulates all information required for layouting
@@ -20,9 +21,9 @@ public:
   virtual ~RectangleLayoutDataBase() = default;
 
 protected:
-  RectangleType position_;
-  Color foregroundColor_;
-  Color backgroundColor_;
+  Rectangle Position;
+  std::shared_ptr<Color> foregroundColor_;
+  std::shared_ptr<Color> backgroundColor_;
 };
 
 #endif // RectangleTypeLAYOUTDATABASE_H

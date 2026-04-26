@@ -76,98 +76,98 @@ void SimulinkParameter::setValue(const char* value)
   Value = value;
 }
 
-ErrorCode SimulinkParameter::getValueAsDouble(Float& fval)
+UInt32 SimulinkParameter::getValueAsDouble(Float& fval)
 {
   if (!Value)
   {
     fval = 0.0;
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   char* endptr = nullptr;
   fval = std::strtod(Value, &endptr);
   if (endptr == Value)
   {
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode SimulinkParameter::getValueAsSingle(Float& sval)
+UInt32 SimulinkParameter::getValueAsSingle(Float& sval)
 {
   if (!Value)
   {
     sval = 0.0;
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   char* endptr = nullptr;
   sval = std::strtof(Value, &endptr);
   if (endptr == Value)
   {
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode SimulinkParameter::getValueAsUInt8(uint8& u8val)
+UInt32 SimulinkParameter::getValueAsUInt8(uint8& u8val)
 {
   if (!Value)
   {
     u8val = 0;
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
   if (endptr == Value)
   {
     u8val = 0;
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
   u8val = static_cast<uint8>(parsed);
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode SimulinkParameter::getValueAsUInt16(uint16& u16val)
+UInt32 SimulinkParameter::getValueAsUInt16(uint16& u16val)
 {
 
   if (!Value)
   {
     u16val = 0;
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
   if (endptr == Value)
   {
     u16val = 0;
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
   u16val = static_cast<uint16>(parsed);
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode SimulinkParameter::getValueAsString(std::string& strval)
+UInt32 SimulinkParameter::getValueAsString(std::string& strval)
 {
 
   if (!Value)
   {
     strval.clear();
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   strval = std::string(Value);
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
-ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
+UInt32 SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
 {
 
   vecval.clear();
   if (!Value)
   {
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   if (Value[0] != '[')
   {
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
   std::string s(Value);
@@ -185,11 +185,11 @@ ErrorCode SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
     double parsed = std::strtod(token.c_str(), &endptr);
     if (endptr == token.c_str())
     {
-      return ErrorCode::SLX_ETYPEMISMATCH;
+      return SLX_ETYPEMISMATCH;
     }
     vecval.push_back(static_cast<Float>(parsed));
   }
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 CoderInfo SimulinkParameter::getCoderInfo()
@@ -222,19 +222,19 @@ const char* SimulinkParameter::getName()
   return Name;
 }
 
-ErrorCode SimulinkParameter::setName(const char* name)
+UInt32 SimulinkParameter::setName(const char* name)
 {
 
   if (name == nullptr)
   {
-    return ErrorCode::SLX_ENULLPTR;
+    return SLX_ENULLPTR;
   }
   if (strcmp(name, "") == 0)
   {
-    return ErrorCode::SLX_EINVAR;
+    return SLX_EINVAR;
   }
   Name = name;
-  return ErrorCode::SLX_OK;
+  return SLX_OK;
 }
 
 SimulinkElementType SimulinkParameter::getType() const
@@ -257,20 +257,20 @@ bool SimulinkParameter::contains(const Index& id) const
   return false;
 }
 
-ErrorCode SimulinkParameter::remove(
+UInt32 SimulinkParameter::remove(
   const std::shared_ptr<SimulinkElementBase> element)
 {
   Logger::getInstance().log(
     Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
-  return ErrorCode::SLX_ENOTIMPL;
+  return SLX_ENOTIMPL;
 }
 
-ErrorCode SimulinkParameter::add(
+UInt32 SimulinkParameter::add(
   const std::shared_ptr<SimulinkElementBase> element)
 {
   Logger::getInstance().log(
     Logger::V_ERROR, "SimulinkParameter::add is not supported.");
-  return ErrorCode::SLX_ENOTIMPL;
+  return SLX_ENOTIMPL;
 }
 
 Float SimulinkParameter::getMin()

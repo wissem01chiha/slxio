@@ -3,7 +3,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-std::vector<uint32_t> Color::toVector() const
+std::vector<UInt32> Color::toVector() const
 {
   return { r, g, b, a };
 }
@@ -14,7 +14,7 @@ Color::Color()
   , a(255)
 {
 }
-Color::Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha)
+Color::Color(UInt32 red, UInt32 green, UInt32 blue, UInt32 alpha)
   : r(red)
   , g(green)
   , b(blue)
@@ -29,7 +29,7 @@ bool Color::operator!=(const Color& other) const
 {
   return !(*this == other);
 }
-Color Color::fromVector(const std::vector<uint32_t>& vec)
+Color Color::fromVector(const std::vector<UInt32>& vec)
 {
   if (vec.size() < 4)
   {
