@@ -13,7 +13,7 @@ ErrorCode SimulinkDataTypeParser::setInputData(const std::string data)
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkDataTypeParser::setInputData(const char* data)
@@ -26,7 +26,7 @@ ErrorCode SimulinkDataTypeParser::setInputData(const char* data)
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = std::string(data);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkDataTypeParser::parse()
@@ -42,7 +42,7 @@ ErrorCode SimulinkDataTypeParser::parse()
   if (it != sldtMap.end())
   {
     ptr = std::make_shared<SimulinkDataType>(it->second);
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   }
   l.log(Logger::V_ERROR,
     "SimulinkDataTypeParser:: unrecognized data type string: " + dataObject);

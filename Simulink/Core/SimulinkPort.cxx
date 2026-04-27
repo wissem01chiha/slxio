@@ -72,7 +72,7 @@ ErrorCode SimulinkPort::remove(std::shared_ptr<SimulinkElementBase> element)
     // portLines.push_back(linePtr);
     l.log(Logger::VERBOSITY_0, "Removed line from port");
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkPort::add(std::shared_ptr<SimulinkElementBase> element)
@@ -100,7 +100,7 @@ ErrorCode SimulinkPort::add(std::shared_ptr<SimulinkElementBase> element)
     lines.push_back(linePtr);
     l.log(Logger::VERBOSITY_0, "Added line to port");
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 Index SimulinkPort::getID() const

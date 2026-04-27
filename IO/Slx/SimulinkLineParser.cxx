@@ -13,12 +13,12 @@ ErrorCode SimulinkLineParser::setInputData(const xmlNodePtr data)
     return ErrorCode::SLX_ENULLPTR;
   }
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkLineParser::parse()
 {
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

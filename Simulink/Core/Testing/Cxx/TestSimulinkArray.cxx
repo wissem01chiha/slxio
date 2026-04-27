@@ -12,7 +12,7 @@ TEST_CASE("CopyConstructorTest")
 
   ErrorCode status = original->add(param);
 
-  CHECK_MESSAGE(status == ErrorCode::SLX_OK,
+  CHECK_MESSAGE(status == ErrorCode::E_OK,
     "Fail to add Parameter to Simulink Array - ErrorCode: ", status);
 
   SimulinkArray copy(*original);
@@ -30,7 +30,7 @@ TEST_CASE("AddArrayTest")
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->add(subArray);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("RemoveArrayTest")
@@ -41,10 +41,10 @@ TEST_CASE("RemoveArrayTest")
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode AddStatus = array->add(subArray);
-  CHECK(AddStatus == ErrorCode::SLX_OK);
+  CHECK(AddStatus == ErrorCode::E_OK);
 
   ErrorCode RemoveStatus = array->remove(subArray);
-  CHECK(RemoveStatus == ErrorCode::SLX_OK);
+  CHECK(RemoveStatus == ErrorCode::E_OK);
 }
 
 TEST_CASE("RemoveNullptrArrayTest")
@@ -62,7 +62,7 @@ TEST_CASE("RemoveNotElementArrayTest")
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = array->remove(subArray);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("ContainsArrayTest")
@@ -72,7 +72,7 @@ TEST_CASE("ContainsArrayTest")
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = array->add(subObject);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   CHECK(array->contains(1));
 }
 

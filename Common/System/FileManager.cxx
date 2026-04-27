@@ -270,7 +270,7 @@
 //   }
 
 //   fileList.clear();
-//   return SLX_OK;
+//   return E_OK;
 // }
 
 // FileManager::FileManager(std::vector<File*> files) {}

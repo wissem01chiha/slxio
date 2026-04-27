@@ -8,6 +8,9 @@ else()
   set(SLXIO_SLOG 0)
 endif()
 
+find_package(JSON-C)
+find_package(LibXml2)
+
 if(SLXIO_BUILD_PYTHON)
   find_package(Python COMPONENTS Interpreter Development)
 endif ()
@@ -22,5 +25,3 @@ if (SLXIO_OPENMP)
   find_package(OpenMP)
 endif ()
 
-find_package(JSON-C)
-find_package(LibXml2)

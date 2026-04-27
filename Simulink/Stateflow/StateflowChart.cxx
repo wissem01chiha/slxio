@@ -9,14 +9,14 @@ ErrorCode StateflowChart::add(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.add(node);
   // node.setParent(this);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode StateflowChart::remove(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.add(node);
   // node.setParent(this);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 std::shared_ptr<StateflowElementBase> StateflowChart::getParent() const
@@ -56,7 +56,7 @@ ErrorCode StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
   //                  "Cannot set new Stateflow block.");
   // }
   // this.stateflowBlock = stateflowBlock;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 Index StateflowChart::getID() const

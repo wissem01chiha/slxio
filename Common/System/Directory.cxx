@@ -166,12 +166,12 @@ UInt32 Directory::Open()
   uv_fs_req_cleanup(&closedir_req);
   uv_fs_req_cleanup(&req);
 
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 Directory::Remove()
 {
-  return SLX_OK;
+  return E_OK;
 }
 
 size_t Directory::GetNumberOfFiles() const
@@ -353,5 +353,5 @@ UInt32 Directory::Mkdir(const char* path)
     return static_cast<UInt32>(-r);
   }
 
-  return SLX_OK;
+  return E_OK;
 }

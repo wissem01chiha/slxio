@@ -66,7 +66,7 @@ ErrorCode SimulinkConfigSet::setParameter(const char* name, const char* value)
   if (param)
   {
     param->setValue(value);
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   }
   l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
     " not found in configuration set. Cannot set value.");

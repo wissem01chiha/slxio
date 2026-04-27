@@ -72,7 +72,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory")
   std::string path = testDirectoryEmptyRandDir();
   Directory d(path);
   ErrorCode ec = d.open();
-  CHECK(ec == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::E_OK);
   CHECK(d.getNumberOfFiles() == 0);
   CHECK(d.empty());
 }
@@ -83,7 +83,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open directory with files")
   std::string path = tempDirFiles();
   Directory d(path);
   ErrorCode ec = d.open();
-  CHECK(ec == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::E_OK);
   CHECK(d.getNumberOfFiles() == 2);
 
   const File* f1 = d.getFile("file1.txt");
@@ -126,5 +126,5 @@ TEST_CASE("Test Mkdir Directory Utility")
     subdirpath, sizeof(subdirpath), "%s/%s", cwd, "simulink/plugin/rels/");
   ErrorCode ec = Directory::mkdir(subdirpath);
 
-  CHECK(ec == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::E_OK);
 }

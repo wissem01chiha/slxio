@@ -16,7 +16,7 @@ SimulinkSignal::SimulinkSignal()
 ErrorCode SimulinkSignal::setDataType(SimulinkDataType dt)
 {
   DataType = dt;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SimulinkDataType SimulinkSignal::getDataType()
@@ -80,7 +80,7 @@ ErrorCode SimulinkSignal::setDataType(const char* dt)
     return ErrorCode::SLX_EINVAR;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 ErrorCode SimulinkSignal::setComplexityType(const char* ct)
 {
@@ -101,7 +101,7 @@ ErrorCode SimulinkSignal::setComplexityType(const char* ct)
   {
     return ErrorCode::SLX_EINVAR;
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 const char* SimulinkSignal::getComplexity()
@@ -148,7 +148,7 @@ ErrorCode SimulinkSignal::setRange(Float min, Float max)
 {
   Min = min;
   Max = max;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

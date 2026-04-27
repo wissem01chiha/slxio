@@ -11,7 +11,7 @@ ErrorCode StateflowState::add(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.add(node);
   // node.setParent(this);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode StateflowState::remove(std::shared_ptr<SimulinkElementBase> element)
@@ -20,7 +20,7 @@ ErrorCode StateflowState::remove(std::shared_ptr<SimulinkElementBase> element)
   //          "Node does not belong to this chart.");
   // nodes.remove(node);
   // node.setParent(null);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 std::shared_ptr<StateflowElementBase> StateflowState::getParent() const

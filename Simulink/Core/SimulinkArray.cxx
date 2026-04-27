@@ -111,7 +111,7 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment)
         l.log(Logger::V_WARNING,
           "SimulinkArray::subObject already exsists in the base "
           "array");
-        return ErrorCode::SLX_OK;
+        return ErrorCode::E_OK;
       }
     }
 
@@ -123,7 +123,7 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment)
     std::shared_ptr<SimulinkParameter> param =
       std::dynamic_pointer_cast<SimulinkParameter>(elment);
     parameters.push_back(param);
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   }
   else
   {
@@ -133,7 +133,7 @@ ErrorCode SimulinkArray::add(std::shared_ptr<SimulinkElementBase> elment)
     return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment)
@@ -183,7 +183,7 @@ ErrorCode SimulinkArray::remove(std::shared_ptr<SimulinkElementBase> elment)
     return ErrorCode::SLX_ETYPEMISMATCH;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 Index SimulinkArray::getID() const

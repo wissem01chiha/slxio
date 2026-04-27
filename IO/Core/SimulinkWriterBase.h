@@ -6,7 +6,6 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorBuffer.h"
 #include "ErrorTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -24,9 +23,9 @@ public:
   virtual ~SimulinkWriterBase() = default;
 
   /// @brief Set input data for writing
-  virtual ErrorCode setInputData(const T data) = 0;
+  virtual  setInputData(const T data) = 0;
 
-  virtual ErrorCode setInputData(const T& data) { return ErrorCode::SLX_OK; };
+  virtual ErrorCode setInputData(const T& data) { return ErrorCode::E_OK; };
 
   /// @brief Set ouput data for writing
   /// can be stream, string (eg toString()), custom struct

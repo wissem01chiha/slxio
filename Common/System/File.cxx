@@ -127,7 +127,7 @@ UInt32 File::Open()
     return static_cast<int>(-err);
   }
   fd_ = err;
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Read()
@@ -158,7 +158,7 @@ UInt32 File::Read()
   }
 
   nbytes_ = static_cast<size_t>(err);
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Write(const char* message)
@@ -182,7 +182,7 @@ UInt32 File::Write(const char* message)
     PrintError(err);
     return static_cast<int>(-err);
   }
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Close()
@@ -203,7 +203,7 @@ UInt32 File::Close()
   }
 
   fd_ = -1;
-  return SLX_OK;
+  return E_OK;
 }
 
 bool File::Eof() const
@@ -313,7 +313,7 @@ UInt32 File::SetFileExtension(const char* newExt)
 
   FilePath = dest;
 
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Move(const char* dirpath)
@@ -343,7 +343,7 @@ UInt32 File::Move(const char* dirpath)
   }
 
   FilePath = newPath;
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Copy(File& ofile)
@@ -390,7 +390,7 @@ UInt32 File::Copy(const char* destdir)
     return SLX_EIOERR;
   }
 
-  return SLX_OK;
+  return E_OK;
 };
 
 UInt32 File::Rename(const char* filename)
@@ -398,7 +398,7 @@ UInt32 File::Rename(const char* filename)
   if (!filename || *filename == '\0')
     return SLX_EINVAR;
   FilePath = std::string(filename);
-  return SLX_OK;
+  return E_OK;
 }
 
 const std::string File::GetFileName()
@@ -508,7 +508,7 @@ UInt32 File::Unzip(const char* dir)
     snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", dir, name);
 
     int ec = Directory::Mkdir(entrydirpath);
-    if (ec != SLX_OK)
+    if (ec != E_OK)
     {
       PrintError(ec);
       return ec;
@@ -538,7 +538,7 @@ UInt32 File::Unzip(const char* dir)
     zip_fclose(zf);
   }
 
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 File::Zip(const char* zfilepath, const char* zname)
@@ -587,7 +587,7 @@ UInt32 File::Zip(const char* zfilepath, const char* zname)
     fprintf(stderr, "cannot close archive: %s\n", zip_strerror(za));
   }
 
-  return SLX_OK;
+  return E_OK;
 };
 
 SLXIO_ABI_NAMESPACE_END

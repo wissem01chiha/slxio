@@ -10,7 +10,7 @@ TEST_CASE("AddConfigurationSetTest")
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
   ErrorCode status = manager.add(configSet);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("RemoveConfigurationSetTest")
@@ -19,7 +19,7 @@ TEST_CASE("RemoveConfigurationSetTest")
   auto configSet = std::make_shared<SimulinkConfigSet>();
   manager.add(configSet);
   ErrorCode status = manager.remove(configSet);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("GetActiveConfigurationSetTest")

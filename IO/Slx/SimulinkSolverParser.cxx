@@ -22,12 +22,12 @@ ErrorCode SimulinkSolverParser::setInputData(const xmlNodePtr data)
   }
 
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkSolverParser::parse()
 {
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

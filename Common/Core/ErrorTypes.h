@@ -25,6 +25,7 @@ extern "C"
 #define ThirdParty 106
 #define Utilities 107
 #define Visualization 108
+#define Interaction 109
 
 /* Define a unique id for each module */
 #define Core 1000
@@ -39,7 +40,7 @@ extern "C"
 #define Library 1009
 #define Misc 1010
 #define Stateflow 1011
-#define Cli 1012
+#define Console 1012
 #define Python 1013
 #define Sphnix 1014
 #define Java 1015
@@ -58,8 +59,13 @@ extern "C"
 #define tinyxml2 1028
 #define zlib 1029
 
+/* Define global error code identifiers */
+#define E_OK SLXIO_ERROR_CODE(0x00, 0x00, 0x00)
+
 /* Define full error unique identifiers */
-#define SLX_OK SLXIO_ERROR_CODE(Common, Core, 0x00)
+#define E_MSG_TOO_LARGE SLXIO_ERROR_CODE(Common, Core, 0x00)
+#define E_PATH_TOO_LONG SLXIO_ERROR_CODE(Common, Core, 0x0C)
+
 #define SLX_ENOENT SLXIO_ERROR_CODE(Common, Core, 0x01)
 #define SLX_EINVAR SLXIO_ERROR_CODE(Common, Core, 0x02)
 #define SLX_ETYPEMISMATCH SLXIO_ERROR_CODE(Common, Core, 0x03)
@@ -71,7 +77,7 @@ extern "C"
 #define SLX_EIOERR SLXIO_ERROR_CODE(Common, Core, 0x09)
 #define SLX_EEOF SLXIO_ERROR_CODE(Common, Core, 0x0A)
 #define SLX_EGETCWD SLXIO_ERROR_CODE(Common, Core, 0x0B)
-#define SLX_ELONGPATH SLXIO_ERROR_CODE(Common, Core, 0x0C)
+
 #define SLX_ECASTFAIL SLXIO_ERROR_CODE(Common, Core, 0x0D)
 #define SLX_EMEMALLOC SLXIO_ERROR_CODE(Common, Core, 0x0E)
 #define SLX_ENOTCONN SLXIO_ERROR_CODE(Common, Core, 0x0F)
@@ -86,7 +92,7 @@ extern "C"
 #define SLX_EUNRESOLVED SLXIO_ERROR_CODE(Common, Core, 0x18)
 #define SLX_EUNKNOWN SLXIO_ERROR_CODE(Common, Core, 0x19)
 
-#define CONFIG_ACTIVE SLXIO_ERROR_CODE(Simulink, Configuration, 0x01)
+#define CONFIG_ACTIVE SLXIO_ERROR_CODE(Simulink, Configuration, 0x00)
 
 #define UV__EOF SLXIO_ERROR_CODE(ThirdParty, libuv, UV__EOF)
 #define UV__UNKNOWN SLXIO_ERROR_CODE(ThirdParty, libuv, UV__UNKNOWN)

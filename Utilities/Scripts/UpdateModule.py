@@ -1,9 +1,5 @@
 #!/usr/bin/perl -w
 
-sub help()
-{
-
-}
 
 
 #!bash/bin/python

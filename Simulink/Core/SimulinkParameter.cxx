@@ -89,7 +89,7 @@ UInt32 SimulinkParameter::getValueAsDouble(Float& fval)
   {
     return SLX_ETYPEMISMATCH;
   }
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 SimulinkParameter::getValueAsSingle(Float& sval)
@@ -105,7 +105,7 @@ UInt32 SimulinkParameter::getValueAsSingle(Float& sval)
   {
     return SLX_ETYPEMISMATCH;
   }
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 SimulinkParameter::getValueAsUInt8(uint8& u8val)
@@ -123,7 +123,7 @@ UInt32 SimulinkParameter::getValueAsUInt8(uint8& u8val)
     return SLX_ETYPEMISMATCH;
   }
   u8val = static_cast<uint8>(parsed);
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 SimulinkParameter::getValueAsUInt16(uint16& u16val)
@@ -142,7 +142,7 @@ UInt32 SimulinkParameter::getValueAsUInt16(uint16& u16val)
     return SLX_ETYPEMISMATCH;
   }
   u16val = static_cast<uint16>(parsed);
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 SimulinkParameter::getValueAsString(std::string& strval)
@@ -154,7 +154,7 @@ UInt32 SimulinkParameter::getValueAsString(std::string& strval)
     return SLX_ENULLPTR;
   }
   strval = std::string(Value);
-  return SLX_OK;
+  return E_OK;
 }
 
 UInt32 SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
@@ -189,7 +189,7 @@ UInt32 SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
     }
     vecval.push_back(static_cast<Float>(parsed));
   }
-  return SLX_OK;
+  return E_OK;
 }
 
 CoderInfo SimulinkParameter::getCoderInfo()
@@ -234,7 +234,7 @@ UInt32 SimulinkParameter::setName(const char* name)
     return SLX_EINVAR;
   }
   Name = name;
-  return SLX_OK;
+  return E_OK;
 }
 
 SimulinkElementType SimulinkParameter::getType() const

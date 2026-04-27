@@ -181,7 +181,7 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element)
     }
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element)
@@ -236,7 +236,7 @@ ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element)
       std::dynamic_pointer_cast<SimulinkArray>(element);
     arrays.push_back(arrayPtr);
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 bool SimulinkObject::contains(const Index& id) const

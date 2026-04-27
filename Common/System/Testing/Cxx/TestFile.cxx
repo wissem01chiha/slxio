@@ -116,17 +116,17 @@ TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test")
 {
 
   File f(TEST_FILE, File::Read);
-  CHECK(f.open() == ErrorCode::SLX_OK);
-  CHECK(f.close() == ErrorCode::SLX_OK);
+  CHECK(f.open() == ErrorCode::E_OK);
+  CHECK(f.close() == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents")
 {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  REQUIRE(f.open() == ErrorCode::E_OK);
   auto rc = f.read();
-  CHECK_UNARY(rc == ErrorCode::SLX_OK || rc == ErrorCode::SLX_EEOF);
+  CHECK_UNARY(rc == ErrorCode::E_OK || rc == ErrorCode::SLX_EEOF);
   CHECK(f.size() > 0);
   std::vector<char> data = f.getBuffer();
   CHECK(!data.empty());
@@ -136,19 +136,19 @@ TEST_CASE_FIXTURE(FileTestFixture, "Write to File Test")
 {
 
   File f(TEST_FILE, File::Write);
-  REQUIRE(f.open() == ErrorCode::SLX_OK);
-  CHECK(f.write("New content") == ErrorCode::SLX_OK);
+  REQUIRE(f.open() == ErrorCode::E_OK);
+  CHECK(f.write("New content") == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test")
 {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  REQUIRE(f.open() == ErrorCode::E_OK);
   REQUIRE(f.isFile() == true);
 
   const char* newName = "renamed.txt";
-  CHECK(f.rename(newName) == ErrorCode::SLX_OK);
+  CHECK(f.rename(newName) == ErrorCode::E_OK);
   CHECK(f.getFilename() == "renamed.txt");
   std::remove(newName);
 }
@@ -159,11 +159,11 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
   std::string TEST_FILE_PATH = std::string(cwdbuffer) + PATH_SEP + TEST_FILE;
   File f(TEST_FILE_PATH.c_str(), File::Read);
 
-  REQUIRE(f.open() == ErrorCode::SLX_OK);
-  REQUIRE(f.close() == ErrorCode::SLX_OK);
+  REQUIRE(f.open() == ErrorCode::E_OK);
+  REQUIRE(f.close() == ErrorCode::E_OK);
 
   std::cout << "This is the tempory dir path " << tempdir() << std::endl;
-  CHECK(f.move(tempdir().c_str()) == ErrorCode::SLX_OK);
+  CHECK(f.move(tempdir().c_str()) == ErrorCode::E_OK);
   CHECK(f.getFileDirectory().find(cwdbuffer) != std::string::npos);
 }
 
@@ -179,7 +179,7 @@ TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test")
   }
 
   File f(TEMP_FILE_PATH.c_str(), File::Read);
-  CHECK(f.setFileExtension("md") == ErrorCode::SLX_OK);
+  CHECK(f.setFileExtension("md") == ErrorCode::E_OK);
   CHECK(std::string(f.getFileExtension()) == "md");
 }
 
@@ -187,7 +187,7 @@ TEST_CASE_FIXTURE(FileTestFixture, "End of File Check Test")
 {
 
   File f(TEST_FILE, File::Read);
-  REQUIRE(f.open() == ErrorCode::SLX_OK);
+  REQUIRE(f.open() == ErrorCode::E_OK);
   f.read();
   CHECK(f.eof() == true);
   CHECK(f.size() > 0);
@@ -198,11 +198,11 @@ TEST_CASE_FIXTURE(FileTestFixture, "Unzip File Test")
 
   File f(getZipPath("Asset1.zip"));
   CHECK(f.isFile() == true);
-  CHECK(f.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
+  CHECK(f.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::E_OK);
 
   File f_(getZipPath("TestAsset1.zip"));
   CHECK(f_.isFile() == true);
-  CHECK(f_.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::SLX_OK);
+  CHECK(f_.unzip(testFileEmptyRandDir().c_str()) == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test")
@@ -215,5 +215,5 @@ TEST_CASE_FIXTURE(FileTestFixture, "Zip File Test")
             << std::endl;
   CHECK(f.isFile() == true);
   CHECK(f.zip(getZipPath("Asset2.zip"), "simulink/blockdiagram.xml") ==
-    ErrorCode::SLX_OK);
+    ErrorCode::E_OK);
 }

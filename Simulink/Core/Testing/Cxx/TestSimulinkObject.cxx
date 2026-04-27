@@ -18,7 +18,7 @@ TEST_CASE("AddSimulinkParameterTest")
   auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
 
   ErrorCode status = obj.add(param);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("AddSubObjectTest")
@@ -29,7 +29,7 @@ TEST_CASE("AddSubObjectTest")
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = obj.add(subObject);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("GetParameterTest")
@@ -41,7 +41,7 @@ TEST_CASE("GetParameterTest")
   param->setValue("ode45");
 
   ErrorCode status = obj.add(param);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 
   std::shared_ptr<SimulinkParameter> retrievedParam =
     obj.getParameter("Solver");
@@ -57,7 +57,7 @@ TEST_CASE("AddArrayTest")
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ErrorCode status = obj.add(subArray);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE("ContainsObjectTest")
@@ -69,7 +69,7 @@ TEST_CASE("ContainsObjectTest")
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ErrorCode status = obj.add(subObject);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 
   CHECK(obj.contains(1));
 }

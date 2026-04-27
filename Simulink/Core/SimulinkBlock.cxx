@@ -56,7 +56,7 @@ UInt32 SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
   {
     l.log(Logger::Verbosity::V_ERROR,
       "SimulinkBlock:: Cannot add a null Simulink element.");
-    return SLX_OK;
+    return E_OK;
   }
 
   if (element->getType().isA(SimulinkElementType::Type::Block))
@@ -76,14 +76,14 @@ UInt32 SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
       l.log(Logger::Verbosity::V_ERROR,
         "SimulinkBlock:: Cannot add block that already has a "
         "parent.");
-      return SLX_OK;
+      return E_OK;
     }
 
     if (contains(subblock->getID()))
     {
       parent = std::make_shared<SimulinkBlock>(*subblock);
     }
-    return SLX_OK;
+    return E_OK;
   }
   else if (element->getType().isA(SimulinkElementType::Type::Parameter))
   {
@@ -97,7 +97,7 @@ UInt32 SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
       return SLX_ECASTFAIL;
     }
     parameters.push_back(parameter);
-    return SLX_OK;
+    return E_OK;
   }
   else
   {
@@ -107,7 +107,7 @@ UInt32 SimulinkBlock::add(std::shared_ptr<SimulinkElementBase> element)
     return SLX_ETYPEMISMATCH;
   }
 
-  return SLX_OK;
+  return E_OK;
 }
 
 void SimulinkBlock::add(SimulinkPortType portType)
@@ -207,14 +207,14 @@ UInt32 SimulinkBlock::remove(std::shared_ptr<SimulinkElementBase> element)
 
   if (blocks.empty())
   {
-    return SLX_OK;
+    return E_OK;
   }
 
   for (const auto& subBlock : blocks)
   {
     subBlock->remove(subblock);
   }
-  return SLX_OK;
+  return E_OK;
 }
 
 std::string SimulinkBlock::toString() const

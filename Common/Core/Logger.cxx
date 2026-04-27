@@ -3,11 +3,12 @@
 
 #include "Logger.h"
 #include "Compiler.h"
+#include "ErrorTypes.h"
+#include "Config.h"
 #include <cstring>
 #include <fstream>
 #include <random>
 #include <sstream>
-
 #if SLXIO_SLOG
 #include "Slog.h"
 #elif SLXIO_LOGURU
@@ -18,7 +19,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
-  : InternalVerbosityLevel(Logger::Verbosity::V_INFO)
+  : InternalVerbosityLevel(Logger::MessageLogLevelType::LOG_INFO)
 {
 }
 
@@ -31,7 +32,7 @@ void Logger::Init(int argc, char** argv)
 #endif
 }
 
-void Logger::Log(Verbosity level, const char* message)
+void Logger::Log(Logger::MessageLogLevelType level, const char* message)
 {
 #if SLXIO_LOGURU
   switch (level)
@@ -59,13 +60,13 @@ void Logger::Log(Verbosity level, const char* message)
 
   switch (level)
   {
-    case V_ERROR:
+    case LOG_ERROR:
       slog_error("%s", message);
       break;
-    case V_WARNING:
+    case LOG_WARN:
       slog_warn("%s", message);
       break;
-    case V_INFO:
+    case LOG_INFO:
       slog_info(message);
       break;
     default:
@@ -90,51 +91,24 @@ Logger& Logger::GetInstance()
   return instance;
 }
 
-void Logger::SetStderrVerbosity(Verbosity level)
-{
-#if SLXIO_LOGURU
-
-  loguru::g_stderr_verbosity = static_cast<loguru::Verbosity>(level);
-
-#elif SLXIO_SLOG
-
-  slog_config_t slgCfg;
-  int nEnabledLevels;
-  switch (level)
-  {
-    case Verbosity::V_INVALID:
-      nEnabledLevels = SLOG_NOTAG;
-      break;
-    case Verbosity::V_ERROR:
-      nEnabledLevels = SLOG_ERROR;
-      break;
-    case Verbosity::V_WARNING:
-      nEnabledLevels = SLOG_WARN;
-      break;
-    case Verbosity::V_INFO:
-      nEnabledLevels = SLOG_INFO;
-      break;
-    case Verbosity::V_TRACE:
-      nEnabledLevels = SLOG_TRACE;
-      break;
-    default:
-      nEnabledLevels = SLOG_INFO;
-      break;
-  }
-  slgCfg.nFlags = nEnabledLevels;
-  slog_config_set(&slgCfg);
-#endif
-  InternalVerbosityLevel = level;
-}
-
-void Logger::SetInternalVerbosity(Verbosity level)
+void Logger::SetLogLevel(Logger::MessageLogLevelType level)
 {
   InternalVerbosityLevel = level;
 }
 
-void Logger::SetInternalFileMode(Mode mode)
+Logger::MessageLogLevelType Logger::GetLogLevel(void)
 {
-  FileMode = mode;
+  return InternalVerbosityLevel;
+}
+
+void Logger::SetLogFileMode(Logger::LogFileModeType mode)
+{
+  FileModeType = mode;
+}
+
+Logger::LogFileModeType Logger::GetDefaultLogFileMode()
+{
+  return LogFileModeType();
 }
 
 void Logger::Print(const char* message, std::ostream& os)
@@ -142,7 +116,7 @@ void Logger::Print(const char* message, std::ostream& os)
   os << message;
 }
 
-UInt32 Logger::LogToFile(Verbosity verbosity, const char* path,
+UInt32 Logger::LogToFile(Logger::MessageLogLevelType verbosity, const char* path,
   unsigned int linenum, const char* message)
 {
 #if SLXIO_LOGURU
@@ -152,7 +126,7 @@ UInt32 Logger::LogToFile(Verbosity verbosity, const char* path,
   loguru::log(
     static_cast<loguru::Verbosity>(verbosity), path, linenum, message);
   loguru::flush();
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 
 #elif SLXIO_SLOG
 
@@ -162,12 +136,12 @@ UInt32 Logger::LogToFile(Verbosity verbosity, const char* path,
     out << "[" << static_cast<int>(verbosity) << "] " << path << ":" << linenum
         << " " << message << std::endl;
   }
-  return SLX_OK;
+  return E_OK;
 #endif
-  return SLX_OK;
+  return E_OK;
 }
 
-UInt32 Logger::LogToFile(Verbosity verbosity, const char* message)
+UInt32 Logger::LogToFile(Logger::MessageLogLevelType verbosity, const char* message)
 {
 
   const size_t size = 1024;
@@ -189,7 +163,7 @@ UInt32 Logger::LogToFile(Verbosity verbosity, const char* message)
   {
     strcat(buffer, path);
     UInt32 errno_ = LogToFile(verbosity, path, 1, message);
-    if (errno_ != SLX_OK)
+    if (errno_ != E_OK)
     {
       return errno_;
     }
@@ -198,45 +172,12 @@ UInt32 Logger::LogToFile(Verbosity verbosity, const char* message)
   {
     return SLX_ELONGPATH;
   }
-  return SLX_OK;
+  return E_OK;
 }
 
-Logger::Verbosity Logger::ToVerbosity(UInt8 value)
+Logger::MessageLogLevelType Logger::ToMessageLogLevelType(UInt8 value)
 {
-  return static_cast<Logger::Verbosity>(value);
-}
-
-Logger::Verbosity Logger::ToVerbosity(const char* text)
-{
-
-  if (text != nullptr && *text)
-  {
-    if (strcmp(text, "INVALID"))
-    {
-      return Verbosity::V_INVALID;
-    }
-    else if (strcmp(text, "OFF"))
-    {
-      return Verbosity::V_OFF;
-    }
-    else if (strcmp(text, "ERROR"))
-    {
-      return Verbosity::V_ERROR;
-    }
-    else if (strcmp(text, "WARNING"))
-    {
-      return Verbosity::V_WARNING;
-    }
-    else if (strcmp(text, "INFO"))
-    {
-      return Verbosity::V_INFO;
-    }
-    else if (strcmp(text, "TRACE"))
-    {
-      return Verbosity::V_TRACE;
-    }
-  }
-  return Verbosity::V_INVALID;
+  return static_cast<Logger::MessageLogLevelType>(value);
 }
 
 bool Logger::IsEnabled()

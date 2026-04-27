@@ -30,11 +30,11 @@ TEST_CASE("SetParameterTest")
   param->setName("Solver");
   param->setValue("Discrete");
   ErrorCode ec = object.add(param);
-  CHECK(ec == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::E_OK);
 
   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
   ErrorCode status = configCst->setParameter("Solver", "ode45");
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   std::cout << configCst->toString() << std::endl;
   CHECK(strcmp(configCst->getParameter("Solver"), "ode45") == 0);
   delete configCst;
@@ -49,12 +49,12 @@ TEST_CASE("AddAndGetParameterTest")
   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
 
   ErrorCode ec = object.add(param);
-  CHECK(ec == ErrorCode::SLX_OK);
+  CHECK(ec == ErrorCode::E_OK);
   std::cout << object.toString() << std::endl;
 
   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
   ErrorCode status = configCst->setParameter("Solver", "Discrete");
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   CHECK(strcmp(configCst->getParameter("Solver"), "Discrete") == 0);
   delete configCst;
 }

@@ -37,7 +37,7 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 
   ErrorCode status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
@@ -45,9 +45,9 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 
   ErrorCode in_status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(in_status == ErrorCode::SLX_OK);
+  CHECK(in_status == ErrorCode::E_OK);
   ErrorCode parseStatus = parserPtr->parse();
-  CHECK(parseStatus == ErrorCode::SLX_OK);
+  CHECK(parseStatus == ErrorCode::E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile")

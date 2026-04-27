@@ -31,7 +31,7 @@ ErrorCode SimulinkParameterParser::setInputData(const xmlNodePtr data)
   }
 
   this->dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkParameterParser::parse()
@@ -85,7 +85,7 @@ ErrorCode SimulinkParameterParser::parse()
   ErrorCode dataTypeInputStatus =
     dataTypeParserPtr->setInputData(paramClassStr);
 
-  if (dataTypeInputStatus != ErrorCode::SLX_OK)
+  if (dataTypeInputStatus != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to set input data for data "
@@ -93,7 +93,7 @@ ErrorCode SimulinkParameterParser::parse()
       "parser");
   }
   ErrorCode dataTypeParseStatus = dataTypeParserPtr->parse();
-  if (dataTypeParseStatus != ErrorCode::SLX_OK)
+  if (dataTypeParseStatus != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to parse data type string");
@@ -105,7 +105,7 @@ ErrorCode SimulinkParameterParser::parse()
     ptr->setDataType(*dataTypePtr);
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

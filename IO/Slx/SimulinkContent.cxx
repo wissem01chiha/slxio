@@ -52,7 +52,7 @@ ErrorCode SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
@@ -77,7 +77,7 @@ ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
@@ -97,7 +97,7 @@ ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
@@ -116,7 +116,7 @@ ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContent::getConfigSetNodePtr(
@@ -141,7 +141,7 @@ ErrorCode SimulinkContent::getConfigSetNodePtr(
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
@@ -161,7 +161,7 @@ ErrorCode SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
     return ErrorCode::SLX_ENULLPTR;
   }
   nodePtr = root;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

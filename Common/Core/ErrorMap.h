@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __ErrorMapTypes_h__
-#define __ErrorMapTypes_h__
+#ifndef __ErrorMap_h__
+#define __ErrorMap_h__
 
 #include "ErrorTypes.h"
 
@@ -33,7 +33,8 @@ extern "C"
   XX(Library, "Library")                                                       \
   XX(Misc, "Misc")                                                             \
   XX(Stateflow, "Stateflow")                                                   \
-  XX(Cli, "Cli")                                                               \
+  XX(Console, "Console")                                                       \
+  XX(Interaction, "Interaction")                                               \
   XX(Python, "Python")                                                         \
   XX(Sphnix, "Sphnix")                                                         \
   XX(Java, "Java")                                                             \
@@ -53,7 +54,7 @@ extern "C"
   XX(zlib, "zlib")
 
 #define SLXIO_ERROR_MAP(XX)                                                    \
-  XX(SLX_OK, "Success")                                                        \
+  XX(E_OK, "OK")                                                        \
   XX(SLX_ENOENT, "Element not found")                                          \
   XX(SLX_EINVAR, "Invalid argument")                                           \
   XX(SLX_ETYPEMISMATCH, "Type mismatch")                                       \
@@ -65,7 +66,7 @@ extern "C"
   XX(SLX_EIOERR, "I/O error")                                                  \
   XX(SLX_EEOF, "End of file")                                                  \
   XX(SLX_EGETCWD, "Failed to get current directory")                           \
-  XX(SLX_ELONGPATH, "Path too long")                                           \
+  XX(E_PATH_TOO_LONG, "Path too long")                                          \
   XX(SLX_ECASTFAIL, "Cast failure")                                            \
   XX(SLX_EMEMALLOC, "Memory allocation failure")                               \
   XX(SLX_ENOTCONN, "Not connected")                                            \
@@ -80,28 +81,8 @@ extern "C"
   XX(SLX_EUNRESOLVED, "Unresolved reference")                                  \
   XX(SLX_EUNKNOWN, "Unknown error")
 
-/* Service to get errors named group */
-static const char* GetErrorGroupName(UInt32 code);
-
-/* Service to get errors named module */
-static const char* GetErrorModuleName(UInt32 code);
-
-/* Service to decode error explict message */
-static const char* GetErrorMessage(UInt32 code);
-
-/* thread-unsafe, but simple */
-static const char* GetErrorAsChar(UInt32 code);
-
-/* overloaded, not yet implemented */
-static const char* GetLastErrorMessage(void);
-
-/* Define helper function to debug error codes */
-void PrintfError(const char* format, UInt32 code);
-
-void PrintError(UInt32 code);
-
 #ifdef __cplusplus
 }; /*__cplusplus */
 #endif
 
-#endif /* __ErrorMapTypes_h__ */
+#endif /* __ErrorMap_h__ */

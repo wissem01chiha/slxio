@@ -1,4 +1,0 @@
-Slxio provides CMake targets:
-
-find_package(Slxio CONFIG REQUIRED)
-target_link_libraries(main PRIVATE  Slxio::Slxio)

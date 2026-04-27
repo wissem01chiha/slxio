@@ -19,36 +19,36 @@ ErrorCode SimulinkContentParser::setInputData(const File fs)
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = fs;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContentParser::parse()
 {
   ErrorCode init_status = initTempDirectory();
-  if (init_status != ErrorCode::SLX_OK)
+  if (init_status != ErrorCode::E_OK)
   {
     return init_status;
   }
 
   ErrorCode unzip_status = unzip();
-  if (unzip_status != ErrorCode::SLX_OK)
+  if (unzip_status != ErrorCode::E_OK)
   {
     return unzip_status;
   }
 
   ErrorCode load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
-  if (load_status != ErrorCode::SLX_OK)
+  if (load_status != ErrorCode::E_OK)
   {
     return load_status;
   }
 
   ErrorCode clear_status = clearTempDirectory();
-  if (clear_status != ErrorCode::SLX_OK)
+  if (clear_status != ErrorCode::E_OK)
   {
     return clear_status;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContentParser::initTempDirectory()
@@ -88,7 +88,7 @@ ErrorCode SimulinkContentParser::initTempDirectory()
     return ErrorCode::SLX_EIOERR;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContentParser::unzip()
@@ -97,7 +97,7 @@ ErrorCode SimulinkContentParser::unzip()
   std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
   ErrorCode mv_status = dataObject.copy(tempdirfullpath.c_str());
-  if (mv_status != ErrorCode::SLX_OK)
+  if (mv_status != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR, "failed to copy slx file to temporary directory : ",
       tempdirfullpath.c_str());
@@ -119,21 +119,21 @@ ErrorCode SimulinkContentParser::unzip()
   }
   ErrorCode status = fileDataObject.setFileExtension("zip");
 
-  if (status != ErrorCode::SLX_OK)
+  if (status != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR, "failed to set file extension to zip");
     return status;
   }
 
   ErrorCode unzip_status = fileDataObject.unzip(tmpdir);
-  if (unzip_status != ErrorCode::SLX_OK)
+  if (unzip_status != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR, "failed to unzip ",
       fileDataObject.getFilepath().c_str(), " in directory : ", tmpdir);
     return unzip_status;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContentParser::loadXmlTargets(
@@ -162,19 +162,19 @@ ErrorCode SimulinkContentParser::loadXmlTargets(
     }
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkContentParser::clearTempDirectory()
 {
   ErrorCode status = tempDirectory.remove();
-  if (status != ErrorCode::SLX_OK)
+  if (status != ErrorCode::E_OK)
   {
     l.log(Logger::V_ERROR, "failed to remove temporary directory : ",
       tempDirectory.getDirectoryPath().c_str());
     return status;
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

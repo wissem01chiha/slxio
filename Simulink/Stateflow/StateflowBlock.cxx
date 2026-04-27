@@ -22,7 +22,7 @@ std::shared_ptr<StateflowChart> StateflowBlock::getChart()
 
 ErrorCode StateflowBlock::remove()
 {
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

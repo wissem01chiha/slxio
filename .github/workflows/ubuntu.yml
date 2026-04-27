@@ -1,28 +1,85 @@
 name: Ubuntu
-
-on:
-  push:
-    branches: [ "master", "develop" ]
-  pull_request:
-    branches: [ "master", "develop" ]
-
-env:
-  BUILD_TYPE: Debug
-
+on: [push, pull_request]
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  cmake:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 80
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Ubuntu GCC
+            os: ubuntu-latest
+            compiler: gcc
+            cflags: -Wall -Wextra
+            pkgtgt: package package_source
+            cmake-args:
+
+          - name: Ubuntu Clang
+            os: ubuntu-latest
+            compiler: clang
+            cflags: -Wall -Wextra
+            pkgtgt: package package_source
+            cmake-args:
+
+          - name: Ubuntu GCC C11
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=11
+
+          - name: Ubuntu GCC C17
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=17
+
+          - name: Ubuntu GCC C23
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=23
+
+          - name: Ubuntu Clang C++11
+            os: ubuntu-latest
+            compiler: clang-15
+            cxx-compiler: clang++-15
+            cmake-args: -DCMAKE_CXX_STANDARD=11
+            packages: clang-15 llvm-15 llvm-15-tools
+
+          - name: Ubuntu Clang C17
+            os: ubuntu-latest
+            compiler: clang-15
+            cxx-compiler: clang++-15
+            cmake-args: -DCMAKE_CXX_STANDARD=17
+            packages: clang-15 llvm-15 llvm-15-tools
+
+          - name: Ubuntu Clang C23
+            os: ubuntu-latest
+            compiler: clang-18
+            cxx-compiler: clang++-18
+            cmake-args: -DCMAKE_CXX_STANDARD=23
+            packages: clang-18 llvm-18 llvm-18-tools
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v6
+    
+    - name: Install packages
+      if: ${{ matrix.packages }}
+      run: sudo apt-get update && sudo apt-get install -y ${{ join(matrix.packages, ' ') }}
 
-    - name: Configure CMake
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}  
+    - name: Configure
+      run: cmake -S . -B build ${{ matrix.cmake-args }}
+      env:
+          CC: ${{ matrix.compiler }}
+          CXX: ${{ matrix.cxx-compiler }}
+          CFLAGS: ${{ matrix.cflags }}
 
-    - name: Build with GCC
-      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
+    - name: Build
+      run: cmake --build build
 
     - name: Test
-      working-directory: ${{github.workspace}}/build
-      run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure
-
+      run: ctest --output-on-failure --max-width 120
+      working-directory: build

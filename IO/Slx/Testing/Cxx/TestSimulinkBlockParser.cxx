@@ -51,7 +51,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "ParserSetInputDataTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest")
@@ -69,10 +69,10 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 
   std::shared_ptr<SimulinkBlock> blockObj = parserPtr->getOutputData();
   CHECK(blockObj->getID() == 6);

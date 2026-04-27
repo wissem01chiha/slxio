@@ -23,7 +23,7 @@ ErrorCode SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
     return ErrorCode::SLX_EINVAR;
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkConfigSetParser::parse()
@@ -35,7 +35,7 @@ ErrorCode SimulinkConfigSetParser::parse()
     std::unique_ptr<SimulinkObjectParser> objParserPtr =
       std::make_unique<SimulinkObjectParser>();
     ErrorCode objInputStatus = objParserPtr->setInputData(nodePtr_);
-    if (objInputStatus != ErrorCode::SLX_OK)
+    if (objInputStatus != ErrorCode::E_OK)
     {
       l.log(Logger::V_ERROR,
         "SimulinkConfigSetParser:: failed to set input "
@@ -54,7 +54,7 @@ ErrorCode SimulinkConfigSetParser::parse()
     }
     ptr = cfgPtr;
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

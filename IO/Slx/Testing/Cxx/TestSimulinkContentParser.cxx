@@ -40,7 +40,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserSetInputDataTest")
 
   ErrorCode status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
@@ -48,9 +48,9 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 
   ErrorCode status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
@@ -58,9 +58,9 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
 
   ErrorCode status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 
   std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getOutputData();
   CHECK(contentPtr != nullptr);
@@ -86,13 +86,13 @@ TEST_CASE_FIXTURE(
 
   xmlNodePtr nodePtrNull = nullptr;
   ErrorCode status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   CHECK(nodePtrNull != nullptr);
 
   xmlNodePtr nodePtr = new xmlNode();
   CHECK(nodePtr != nullptr);
   status = contentPtr->getBlockdiagramNodePtr(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   CHECK(nodePtr != nullptr);
 
   const xmlChar* name = nodePtr->name;

@@ -159,7 +159,7 @@ UInt32 Unzip(const char* dir);
 /// @param zname Logical entry name inside the archive to be
 /// replaced
 ///     (e.g., "simulink/blockdiagram.xml").
-/// @return int::SLX_OK on success, or an appropriate error
+/// @return int::E_OK on success, or an appropriate error
 /// code if the operation fails.
 /// @note The archive must be a valid ZIP file. It will be opened
 ///    internally by this function; the caller does not need to

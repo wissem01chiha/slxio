@@ -20,7 +20,7 @@ ErrorCode SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg)
     return ErrorCode::SLX_ENULLPTR;
   }
   cfgs.push_back(cfg);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkConfigSetManager::remove(
@@ -37,7 +37,7 @@ ErrorCode SimulinkConfigSetManager::remove(
   if (it != cfgs.end())
   {
     cfgs.erase(it);
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   }
   return ErrorCode::SLX_ENOENT;
 }

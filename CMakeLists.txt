@@ -58,7 +58,5 @@ include(Coverage)
 include(Install)
 
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
-
-
-Summary()
+summary()
 

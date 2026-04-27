@@ -20,7 +20,7 @@ ErrorCode StateflowEvent::remove(std::shared_ptr<SimulinkElementBase> element)
     return ErrorCode::SLX_ENULLPTR;
   }
   // getParent().removeEvent(this);
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -15,7 +15,7 @@ ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data)
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkBlockParser::parse()
@@ -61,7 +61,7 @@ ErrorCode SimulinkBlockParser::parse()
       std::unique_ptr<SimulinkParameterParser> parser(
         new SimulinkParameterParser());
       ErrorCode status = parser->setInputData(nodePtr_);
-      if (status != ErrorCode::SLX_OK)
+      if (status != ErrorCode::E_OK)
       {
         l.log(Logger::V_ERROR,
           "SimulinkBlockParser:: failed to set input data "
@@ -69,7 +69,7 @@ ErrorCode SimulinkBlockParser::parse()
         continue;
       }
       ErrorCode parserStatus = parser->parse();
-      if (parserStatus != ErrorCode::SLX_OK)
+      if (parserStatus != ErrorCode::E_OK)
       {
         l.log(Logger::V_ERROR,
           "SimulinkBlockParser:: failed to parse "
@@ -80,7 +80,7 @@ ErrorCode SimulinkBlockParser::parse()
     }
   }
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

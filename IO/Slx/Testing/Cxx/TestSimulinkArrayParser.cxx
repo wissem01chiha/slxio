@@ -52,7 +52,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ParserSetInputDataTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest")
@@ -71,7 +71,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayParserTest")
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   parserPtr->setInputData(nodePtr);
   ErrorCode status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayValidDataTest")
@@ -93,7 +93,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest")
   xmlNodePtr nodePtr = getXmlNodePtr("arrayobject.xml");
   parserPtr->setInputData(nodePtr);
   ErrorCode status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
   std::shared_ptr<SimulinkArray> array = parserPtr->getOutputData();
   std::cout << array->toString();
   CHECK(array->contains(6));

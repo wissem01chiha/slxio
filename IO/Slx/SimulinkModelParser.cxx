@@ -11,7 +11,7 @@ ErrorCode SimulinkModelParser::setInputData(const xmlNodePtr data)
     return ErrorCode::SLX_EINVAR;
   }
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

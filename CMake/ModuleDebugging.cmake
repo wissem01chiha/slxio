@@ -1,11 +1,13 @@
 #[==[.rst:
 .. cmake:function:: module_print(<prefix>)
 
-  Debugging function to print all parsed variables of a module.
-  this function is only when module level debugging var is enabled
-  it will print all the global variables set after parsing the 'slxio.module' file
-  for the given module
-  Note: This function should be called after calling ``scan_module_file``.
+  Debugging function to print the key parsed variables of a module.
+  This function is only used when module-level debugging is enabled.
+  It will print the module variables (name, group, version, description,
+  maintainer, license) that are set after parsing the 'slxio.module' file
+  for the given module.
+
+  Note: This function should be called after ''scan_module_file''.
 
   .. code-block:: cmake
 
@@ -24,7 +26,7 @@ function (module_print module_prefix)
 
 endfunction ()
 
-function (Summary)
+function (summary)
 
     message (STATUS "")
     message (STATUS "***************  Slxio Build Configuration Summary *******************")

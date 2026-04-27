@@ -88,10 +88,10 @@
 #define SLXIO_DOUBLE_MIN SLXIO_TYPE_CAST(double, -1.0e+299)
 #define SLXIO_DOUBLE_MAX SLXIO_TYPE_CAST(double, 1.0e+299)
 
-/* smalest number to avoid dividing by zero */
+/* Smalest number to avoid dividing by zero */
 #define SLXIO_FLOAT_EPS SLXIO_TYPE_CAST(float, 1e-6)
 
-/* select implementaation data types.  */
+/* Select implementation data types.  */
 
 #if SLXIO_SIZEOF_CHAR == 1
   using UInt8 = unsigned char;

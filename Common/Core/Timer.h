@@ -12,20 +12,41 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Timer
+ * @brief  Abstract class for all Timers
  */
 class Timer 
 {
 public:
   virtual ~Timer();
 
-  /// @brief Call Start every time to reset the timer to zero.
+  /** 
+   * Call Start every time to reset the timer to zero.
+   */
   virtual void Start() = 0;
+
+  /**
+   *  
+   */
   virtual void Stop() = 0;
+
+  /**
+   * 
+   */
   virtual void Reset() = 0;
+
+  /**
+   * 
+   */
   virtual bool IsRunning() const = 0;
+
+  /**
+   * 
+   */
   virtual Float32 Precision() const = 0;
-  /// @brief Obtains a timer measurement in seconds.
-  /// @return The amount of time since the timer started.
+
+  /**
+   * Obtains a timer measurement in seconds.
+   */ 
   virtual Float32 Time() = 0;
 
 protected:

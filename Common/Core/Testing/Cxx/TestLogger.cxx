@@ -57,7 +57,7 @@ TEST_CASE("Logger random file logging Test")
   Logger.setInternalFileMode(File::Mode::Append);
   ErrorCode status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
     "Logger file logging Test :: Hello Message");
-  CHECK(status_t == ErrorCode::SLX_OK);
+  CHECK(status_t == ErrorCode::E_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

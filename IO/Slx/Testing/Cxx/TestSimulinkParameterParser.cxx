@@ -51,7 +51,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(
@@ -71,7 +71,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest")
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
   ErrorCode status = parserPtr->parse();
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest")

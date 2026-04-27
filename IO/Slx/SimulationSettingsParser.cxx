@@ -22,13 +22,13 @@ ErrorCode SimulationSettingsParser::setInputData(const xmlNodePtr data)
   }
 
   dataObject = data;
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulationSettingsParser::parse()
 {
 
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

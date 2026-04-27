@@ -50,7 +50,7 @@ TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("object.xml");
   ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::SLX_OK);
+  CHECK(status == ErrorCode::E_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

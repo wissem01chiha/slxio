@@ -6,12 +6,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 ErrorCode SimulinkPortParser::setInputData(const xmlNodePtr data)
 {
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkPortParser::parse()
 {
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

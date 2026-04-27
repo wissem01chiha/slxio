@@ -59,7 +59,7 @@ ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element)
     destPort->remove(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element)
@@ -82,7 +82,7 @@ ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element)
     destPort->add(std::make_shared<SimulinkLine>(*this));
     destPort = nullptr;
   }
-  return ErrorCode::SLX_OK;
+  return ErrorCode::E_OK;
 }
 
 Index SimulinkLine::getID() const

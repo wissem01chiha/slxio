@@ -40,7 +40,7 @@ public:
   virtual ErrorCode setInputData(const T data)
   {
     dataObject = data;
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   };
 
   /// @brief Set the input data for the parser.
@@ -50,7 +50,7 @@ public:
   virtual ErrorCode setInputData(const T& data)
   {
     dataObject = data;
-    return ErrorCode::SLX_OK;
+    return ErrorCode::E_OK;
   };
 
   /// @brief Retrieve the parsed SimulinkElementBase object.

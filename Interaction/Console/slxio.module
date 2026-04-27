@@ -1,9 +1,9 @@
 NAME
-  Core
+  Console
 GROUP
-  Common
+  Interaction
 LIBRARY_NAME
-  CommonCore
+  InteractionConsole
 SPDX_LICENSE_IDENTIFIER
   Apache-2.0
 SPDX_COPYRIGHT_TEXT
@@ -11,12 +11,12 @@ SPDX_COPYRIGHT_TEXT
 SPDX_CUSTOM_LICENSE_FILE
 SPDX_CUSTOM_LICENSE_NAME
 LICENSE_FILES
-DESCRIPTION  
-  Core Common Module
+DESCRIPTION
+  Command-line Interaction Module 
 VERSION 
   0.1.0 
 MAINTAINER 
-  Wissem CHIHA
+  Wissem Chiha 
 ENABLE_BUILD 
   TRUE
 ENABLE_SOURCE_TARGETS
@@ -24,7 +24,7 @@ ENABLE_SOURCE_TARGETS
 INCLUDE_IN_GROUP
   TRUE
 ENABLE_TEST
-  TRUE 
+  FALSE 
 ENABLE_COVERAGE
   TRUE
 INSTALL_HEADERS 
@@ -34,41 +34,26 @@ INSTALL_TARGETS
 INSTALL_LICENSES
   TRUE
 CLASSES
-  Version
-  Timer
-  Logger
-  ErrorManager
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
 SOURCES
+  slxio.cxx
 WINDOWS_SOURCES
 UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
-  ABINamespace.h
-  APIExportMacro.h
-  Compiler.h 
-  Config.h
-  ErrorTypes.h 
-  PlatformTypes.h 
-  Logger.h
-  Version.h 
-  VersionMacro.h
-  Timer.h
-  ErrorMap.h
-  ErrorManager.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
 WASM_HEADERS
 CONFIG_HEADERS
-  Config.h.in
-PUBLIC_DEPENDS
-  ThirdParty::loguru
-  ThirdParty::slog
+PUBLIC_DEPENDS 
 PRIVATE_DEPENDS
+  Common::System
+  Common::Core
+  ThirdParty::cxxopts
 WINDOWS_DEPENDS
 UNIX_DEPENDS
 MACOS_DEPENDS
@@ -82,4 +67,3 @@ ANDROID_COMPILE_FLAGS
 TEST_DEPENDS 
   ThirdParty::doctest
 TEST_OPTIONAL_DEPENDS 
-

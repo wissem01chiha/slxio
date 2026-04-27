@@ -1,8 +1,11 @@
-#include "ErrorMap.h"
+#include "ErrorManager.h"
+#include <cassert>
 #include <cstdio>
-#include <cassert>   
 
-static const char* GetErrorGroupName(UInt32 code)
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+const char* ErrorManager::GetErrorGroupName(UInt32 code)
 {
   SLXIO_ASSERT_TYPE_EQUAL(code, (UInt32)1);
   assert(code >= 100 && code <= 199);
@@ -18,7 +21,7 @@ static const char* GetErrorGroupName(UInt32 code)
   }
 }
 
-static const char* GetErrorModuleName(UInt32 code)
+const char* ErrorManager::GetErrorModuleName(UInt32 code)
 {
   SLXIO_ASSERT_TYPE_EQUAL(code, (UInt32)1);
   assert(code >= 1000 && code <= 1999);
@@ -34,7 +37,7 @@ static const char* GetErrorModuleName(UInt32 code)
   }
 }
 
-static const char* GetErrorMessage(UInt32 code)
+const char* ErrorManager::GetErrorMessage(UInt32 code)
 {
   SLXIO_ASSERT_TYPE_EQUAL(code, (UInt32)1);
   switch (code)
@@ -49,7 +52,7 @@ static const char* GetErrorMessage(UInt32 code)
   }
 }
 
-static const char* GetErrorAsChar(UInt32 code)
+const char* ErrorManager::GetErrorAsChar(UInt32 code)
 {
 
   SLXIO_ASSERT_TYPE_EQUAL(code, (UInt32)1);
@@ -59,23 +62,27 @@ static const char* GetErrorAsChar(UInt32 code)
   UInt32 module = (code >> 16) & 0xFF;
   UInt32 error = code & 0xFFFF;
 
-  snprintf(buffer, sizeof(buffer), "ERROR [group:%s module:%s code:%u] %s",
+  snprintf(buffer, sizeof(buffer), "Error [group:%s module:%s code:%u] %s",
     GetErrorGroupName(group), GetErrorModuleName(module), error,
     GetErrorMessage(error));
 
   return buffer;
 }
 
-static const char* GetLastErrorMessage(void){
-  return "";
+const char* ErrorManager::GetLastErrorMessage(void)
+{
+  return nullptr;
 }
 
-void PrintfError(const char* format, UInt32 code)
+void ErrorManager::PrintfError(const char* format, UInt32 code)
 {
   printf(format, GetErrorAsChar(code));
 }
 
-void PrintError(UInt32 code)
+void ErrorManager::PrintError(UInt32 code)
 {
   printf("%s", GetErrorAsChar(code));
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
