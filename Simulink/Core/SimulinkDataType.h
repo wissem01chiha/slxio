@@ -43,7 +43,7 @@ enum class APIEXPORT SimulinkDataType
   XX(SimulinkDataType::Int8, "int8")                                           \
   XX(SimulinkDataType::UInt8, "uint8")                                         \
   XX(SimulinkDataType::Int16, "int16")                                         \
-  XX(SimulinkDataType::UInt16, "uint16")                                       \
+  XX(SimulinkDataType::UInt16, "UInt16")                                       \
   XX(SimulinkDataType::Int32, "int32")                                         \
   XX(SimulinkDataType::UInt32, "uint32")                                       \
   XX(SimulinkDataType::UInt64, "uint64")                                       \

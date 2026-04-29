@@ -21,7 +21,7 @@ public:
 
 private:
   const char** DisabledProps;
-  uint16 DisabledPropsCount;
+  UInt16 DisabledPropsCount;
 };
 
 SLXIO_ABI_NAMESPACE_END

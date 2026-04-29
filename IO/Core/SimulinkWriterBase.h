@@ -6,7 +6,10 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "PlatformTypes.h"
 #include "ErrorTypes.h"
+#include "Logger.h"
+#include <memory>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -23,7 +26,7 @@ public:
   virtual ~SimulinkWriterBase() = default;
 
   /// @brief Set input data for writing
-  virtual  setInputData(const T data) = 0;
+  virtual ReturnType setInputData(const T data) = 0;
 
   virtual ReturnType setInputData(const T& data) { return E_OK; };
 

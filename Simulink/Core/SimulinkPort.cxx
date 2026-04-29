@@ -6,7 +6,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkPort::SimulinkPort(const SimulinkPort& other)
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
   this->blockId = other.blockId;
   this->block = other.block;
@@ -17,7 +17,7 @@ SimulinkPort::SimulinkPort(
   std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType)
   : type(pType)
   , block(block)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
@@ -47,20 +47,20 @@ std::string SimulinkPort::ToString() const
 ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
-  Logger& l = Logger::getInstance();
+  Logger& l = Logger::GetInstance();
   if (element == nullptr)
   {
     //l.log(Logger::V_WARNING,
-      "SimulinkPort::Cannot remove a null Simulink element.");
+    //  "SimulinkPort::Cannot remove a null Simulink element.");
     return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
     //l.log(Logger::V_ERROR,
-      "Cannot remove a Simulink element of a different "
-      "type than Line from a SimulinkPort");
-    return SLX_ETYPEMISMATCH;
+    //  "Cannot remove a Simulink element of a different "
+     //"type than Line from a SimulinkPort");
+    return E_OK;
   }
 
   if (element->GetElementType().isA(SimulinkElementType::Line))
@@ -80,16 +80,16 @@ ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element
   if (element == nullptr)
   {
     //l.log(
-      Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink element.");
+   //   Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink element.");
     return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
     //l.log(Logger::V_ERROR,
-      "Cannot add a Simulink element of a different "
-      "type than Line to a SimulinkPort");
-    return SLX_ETYPEMISMATCH;
+     // "Cannot add a Simulink element of a different "
+     // "type than Line to a SimulinkPort");
+    return E_OK;
   }
   if (element->GetElementType().isA(SimulinkElementType::Line))
   {

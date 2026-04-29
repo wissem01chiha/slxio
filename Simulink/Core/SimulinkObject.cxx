@@ -7,7 +7,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::SimulinkObject()
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
   propName = std::string("");
   className = std::string("");
@@ -20,7 +20,7 @@ SimulinkObject::SimulinkObject(
   : id(id)
   , propName(name)
   , className(className)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
@@ -30,19 +30,19 @@ SimulinkObject::SimulinkObject(
   , version(version)
   , propName(name)
   , className(className)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
 SimulinkObject::SimulinkObject(std::string version, std::string className)
   : version(version)
   , className(className)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
 SimulinkObject::SimulinkObject(const SimulinkObject& other)
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
   this->className = other.className;
   this->id = other.id;
@@ -118,9 +118,9 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
     element->GetElementType().isA(SimulinkElementType::Object))
   {
     //l.log(Logger::V_ERROR,
-      "Cannot remove a Simulink element of a different "
-      "type than Array or Object from a SimulinkObject");
-    return SLX_ETYPEMISMATCH;
+    //  "Cannot remove a Simulink element of a different "
+     // "type than Array or Object from a SimulinkObject");
+    return E_OK;
   }
 
   if (element->GetElementType().isA(SimulinkElementType::Parameter))
@@ -131,9 +131,9 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
     if (!paramPtr)
     {
       //l.log(Logger::V_ERROR,
-        "SimulinkObject: Failed to cast SimulinkElementBase to "
-        "SimulinkParameter");
-      return SLX_ETYPEMISMATCH;
+       // "SimulinkObject: Failed to cast SimulinkElementBase to "
+        //"SimulinkParameter");
+      return E_OK;
     }
 
     for (const auto& param : parameters)
@@ -142,7 +142,7 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
       if (strcmp(param->getName(), paramPtr->getName()) == 0)
       {
         parameters.erase(
-          std::RemoveElement(parameters.begin(), parameters.end(), param),
+          std::remove(parameters.begin(), parameters.end(), param),
           parameters.end());
       }
     }
@@ -159,7 +159,7 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
       if (element->GetElementId() == obj->GetElementId())
       {
         objects.erase(
-          std::RemoveElement(objects.begin(), objects.end(), obj), objects.end());
+          std::remove(objects.begin(), objects.end(), obj), objects.end());
       }
     }
   }
@@ -176,7 +176,7 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
       if (arr->getName() == arrayPtr->getName())
       {
         arrays.erase(
-          std::RemoveElement(arrays.begin(), arrays.end(), arr), arrays.end());
+          std::remove(arrays.begin(), arrays.end(), arr), arrays.end());
       }
     }
   }
@@ -190,7 +190,7 @@ ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> eleme
   if (element == nullptr)
   {
     //l.log(
-      Logger::V_ERROR, "SimulinkObject:: Cannot add a null Simulink element.");
+      //Logger::V_ERROR, "SimulinkObject:: Cannot add a null Simulink element.");
     return E_FUNC_PARAM_NULL_PTR;
   }
 
@@ -199,11 +199,11 @@ ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> eleme
         element->GetElementType().isA(SimulinkElementType::Parameter)))
   {
     //l.log(Logger::V_ERROR,
-      "SimulinkObject: cannot add a Simulink element of a different type than "
-      "Array "
-      "or "
-      "Object or a Parameter to a SimulinkObject");
-    return SLX_ETYPEMISMATCH;
+     // "SimulinkObject: cannot add a Simulink element of a different type than "
+     // "Array "
+     // "or "
+     // "Object or a Parameter to a SimulinkObject");
+    return E_OK;
   }
 
   if (element->GetElementType().isA(SimulinkElementType::Parameter))
@@ -213,9 +213,9 @@ ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> eleme
     if (!paramPtr)
     {
       //l.log(Logger::V_ERROR,
-        "SimulinkObject: failed to cast SimulinkElementBase to "
-        "SimulinkParameter");
-      return SLX_ECASTFAIL;
+       // "SimulinkObject: failed to cast SimulinkElementBase to "
+       // "SimulinkParameter");
+      return E_OK;
     }
     parameters.push_back(paramPtr);
   }

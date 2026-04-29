@@ -41,9 +41,9 @@ TEST_CASE("SimulinkParameter")
   CHECK(ParameterPtr->getValueAsUInt8(u8Val) == E_OK);
   CHECK(u8Val == (uint8)10);
 
-  uint16 u16Val = 0;
+  UInt16 u16Val = 0;
   CHECK(ParameterPtr->getValueAsUInt16(u16Val) == E_OK);
-  CHECK(u16Val == (uint16)10);
+  CHECK(u16Val == (UInt16)10);
 
   delete ParameterPtr;
 }

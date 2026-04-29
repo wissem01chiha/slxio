@@ -131,7 +131,7 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
     //l.log(Logger::V_ERROR,
       //"Cannot add a Simulink element of a different type "
      // "than Array or Object to a SimulinkObject");
-    return SLX_ETYPEMISMATCH;
+    return E_OK;
   }
 
   return E_OK;
@@ -181,7 +181,7 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
      // "SimulinkArray::Cannot remove a Simulink element of a "
      // "different type "
       //"than Array or Object to a SimulinkObject");
-    return SLX_ETYPEMISMATCH;
+    return E_OK;
   }
 
   return E_OK;

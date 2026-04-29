@@ -67,7 +67,7 @@ protected:
   SimulinkParserBase()
     : ptr(std::make_shared<P>())
     , dataObject()
-    , l(Logger::getInstance()) {};
+    , l(Logger::GetInstance()) {};
   std::shared_ptr<P> ptr;
   T dataObject;
   Logger& l;

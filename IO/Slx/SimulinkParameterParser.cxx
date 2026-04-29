@@ -37,7 +37,7 @@ ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
 ReturnType SimulinkParameterParser::parse()
 {
 
-  Logger& l = Logger::getInstance();
+  Logger& l = Logger::GetInstance();
 
   const char* paramClassStr = nullptr;
   const char* paramNameStr = nullptr;

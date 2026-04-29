@@ -39,7 +39,7 @@ public:
 
   /// @brief disbale copy constructor
   /// @note instead use clone to create a copy of the configuration set
-  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
+  SimulinkConfigSet(const SimulinkConfigSet&);
 
   /// @brief Contructor from SimulinkObject, this is used internally to
   /// fill a SimulinkConfigSet from low level Slx Representation, not

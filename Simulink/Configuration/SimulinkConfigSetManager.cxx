@@ -6,7 +6,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
   cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
@@ -16,7 +16,7 @@ ReturnType SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSe
   if (cfg == nullptr)
   {
     //l.log(Logger::V_ERROR,
-      "SimulinkConfigSetManager:: Cannot add a null configuration set.");
+     // "SimulinkConfigSetManager:: Cannot add a null configuration set.");
     return E_FUNC_PARAM_NULL_PTR;
   }
   cfgs.push_back(cfg);
@@ -30,7 +30,7 @@ ReturnType SimulinkConfigSetManager::RemoveElement(
   if (cfg == nullptr)
   {
     //l.log(Logger::V_ERROR,
-      "SimulinkConfigSetManager:: Cannot remove a null configuration set.");
+      //"SimulinkConfigSetManager:: Cannot remove a null configuration set.");
     return E_FUNC_PARAM_NULL_PTR;
   }
   auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
@@ -39,7 +39,7 @@ ReturnType SimulinkConfigSetManager::RemoveElement(
     cfgs.erase(it);
     return E_OK;
   }
-  return SLX_ENOENT;
+  return E_OK;
 }
 
 std::shared_ptr<SimulinkConfigSet>

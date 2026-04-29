@@ -7,19 +7,19 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModel::SimulinkModel()
-  : l(Logger::getInstance())
+  : logger(Logger::GetInstance())
 {
   type = SimulinkModelType(SimulinkModelType::Model);
 }
 
 SimulinkModel::SimulinkModel(SimulinkModelType Type)
   : type(Type)
-  , l(Logger::getInstance())
+  , logger(Logger::GetInstance())
 {
 }
 
 SimulinkModel::SimulinkModel(const SimulinkModel& other)
-  : l(Logger::getInstance())
+  : logger(Logger::GetInstance())
 {
 
   this->lines = other.lines;
@@ -43,7 +43,7 @@ std::string SimulinkModel::ToString() const
   return std::string();
 }
 
-SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
+SimulinkBlock& SimulinkModel::GetBlock(IdType blockIdx)
 {
 
   for (const auto& blk : blocks)
@@ -59,22 +59,22 @@ SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
   return SimulinkBlock();
 }
 
-SimulinkModelType SimulinkModel::getModelType()
+SimulinkModelType SimulinkModel::GetModelType()
 {
   return type;
 }
 
-std::shared_ptr<SimulationSettings> SimulinkModel::getSimulationSettings()
+std::shared_ptr<SimulationSettings> SimulinkModel::GetSimulationSettings()
 {
   return simSet;
 }
 
-std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::getParameters()
+std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::GetParameters()
 {
   return parameters;
 }
 
-uint32 SimulinkModel::getVersion()
+UInt32 SimulinkModel::GetModelVersion()
 {
   return version;
 }
@@ -84,9 +84,14 @@ bool SimulinkModel::Contains(const IdType& id) const
   return false;
 }
 
-std::shared_ptr<ModelWorkspace> SimulinkModel::getWorkspace()
+std::shared_ptr<ModelWorkspace> SimulinkModel::GetModelWorkspace()
 {
   return workspace;
+}
+
+Logger& SimulinkModel::GetLogger()
+{
+  return logger;
 }
 
 SLXIO_ABI_NAMESPACE_END

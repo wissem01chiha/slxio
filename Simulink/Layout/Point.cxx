@@ -8,8 +8,8 @@ Point::Point(const std::vector<UInt32>& vec)
 {
   if (vec.size() < 4)
   {
-    l.Log(Logger::V_ERROR,
-      "Point constructor: vector too small to initialize Point!");
+    //l.Log(Logger::V_ERROR,
+     // "Point constructor: vector too small to initialize Point!");
     x = y = width = height = 0;
   }
   else

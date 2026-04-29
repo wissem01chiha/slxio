@@ -71,7 +71,7 @@ const char* toChar(SimulinkDataType sldt)
     case SimulinkDataType::Int16:
       return "int16";
     case SimulinkDataType::UInt16:
-      return "uint16";
+      return "UInt16";
     case SimulinkDataType::Int32:
       return "int32";
     case SimulinkDataType::UInt32:

@@ -8,8 +8,8 @@
 #include "APIExportMacro.h"
 #include "CoderInfo.h"
 #include "ErrorTypes.h"
-#include "SimulinkDataType.h"
 #include "PlatformTypes.h"
+#include "SimulinkDataType.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
@@ -21,20 +21,29 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SimulinkSignal final
 {
 public:
-  /// @brief Construct a new SimulinkSignal object
+  /**
+   * Construct a new SimulinkSignal object.
+   */
   SimulinkSignal();
 
-  /// @brief Destroy the SimulinkSignal object
+  /**
+   * Destroy the SimulinkSignal object.
+   */
   ~SimulinkSignal() = default;
 
-  /// @brief Return the underlying Simulink data type of the signal
+  /**
+   * Return the underlying Simulink data type of the signal.
+   */
   SimulinkDataType getDataType();
 
-  /// @brief Set the data type of the signal
+  /**
+   * Set the data type of the signal.
+   */
   ReturnType setDataType(SimulinkDataType dt);
 
-  /// @brief Set the data type of the signal from a string (MatWorks
-  /// API style)
+  /**
+   * Set the data type of the signal from a string (MatWorks API style).
+   */
   ReturnType setDataType(const char* dt);
 
   /// @brief Set the complexity type of the signal from a string
@@ -44,7 +53,7 @@ public:
   const char* getComplexity();
 
   /// @brief Get the dimensions of the signal
-  std::vector<uint16> getDimensions();
+  std::vector<UInt16> getDimensions();
 
   /// @brief Get code generation metadata for the signal
   CoderInfo getCoderInfo();
@@ -62,10 +71,10 @@ public:
   const char* getUnit();
 
   /// @brief Get the sample time values of the signal
-  std::vector<Float> getSampleTime();
+  std::vector<Float32> getSampleTime();
 
   /// @brief Set the valid range (minimum and maximum) for the signal
-  ReturnType setRange(Float min, Float max);
+  ReturnType setRange(Float32 min, Float32 max);
 
 private:
   const char* InitialValue;
@@ -76,11 +85,11 @@ private:
   const char* Complexity = "real";
 
   const char* DimensionsMode;
-  std::vector<uint16> Dimensions;
-  std::vector<Float> SampleTime;
+  std::vector<UInt16> Dimensions;
+  std::vector<Float32> SampleTime;
 
-  Float Min;
-  Float Max;
+  Float32 Min;
+  Float32 Max;
 
   CoderInfo coder;
 };
@@ -88,4 +97,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKSIGNAL_H
+#endif /* SIMULINKSIGNAL_H */

@@ -21,7 +21,7 @@ public:
   ~SimulinkDebugging() = default;
 
   const char** DisabledProps;
-  uint16 DisabledPropsCount;
+  UInt16 DisabledPropsCount;
   const char* Description;
   const char* Components;
   const char* RTPrefix;

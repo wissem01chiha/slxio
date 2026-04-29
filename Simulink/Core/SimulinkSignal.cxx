@@ -8,8 +8,8 @@ SimulinkSignal::SimulinkSignal()
   : Description("")
   , Complexity("auto")
   , DataType(SimulinkDataType::Auto)
-  , Min(FloatMin)
-  , Max(FloatMax)
+  , Min(SLXIO_FLOAT_MIN)
+  , Max(SLXIO_FLOAT_MAX)
 {
 }
 
@@ -51,7 +51,7 @@ ReturnType SimulinkSignal::setDataType(const char* dt)
   {
     DataType = SimulinkDataType::Int16;
   }
-  else if (strcmp(dt, "uint16") == 0)
+  else if (strcmp(dt, "UInt16") == 0)
   {
     DataType = SimulinkDataType::UInt16;
   }
@@ -109,7 +109,7 @@ const char* SimulinkSignal::getComplexity()
   return Complexity;
 }
 
-std::vector<uint16> SimulinkSignal::getDimensions()
+std::vector<UInt16> SimulinkSignal::getDimensions()
 {
   return Dimensions;
 }
@@ -144,7 +144,7 @@ std::vector<Float32> SimulinkSignal::getSampleTime()
   return SampleTime;
 }
 
-ReturnType SimulinkSignal::setRange(Float min, Float max)
+ReturnType SimulinkSignal::setRange(Float32 min, Float32 max)
 {
   Min = min;
   Max = max;

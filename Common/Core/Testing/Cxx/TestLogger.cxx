@@ -26,14 +26,14 @@ TEST_CASE("Logger Verbosity Test")
 TEST_CASE("Logger Enabled Test ")
 {
 
-  Logger& Logger = Logger::getInstance();
+  Logger& Logger = Logger::GetInstance();
   CHECK(Logger.IsEnabled());
 }
 
 TEST_CASE("Logger file logging Test")
 {
 
-  Logger& Logger = Logger::getInstance();
+  Logger& Logger = Logger::GetInstance();
   Logger.setInternalFileMode(File::Mode::Append);
 
   const size_t size = 1024;
@@ -52,7 +52,7 @@ TEST_CASE("Logger file logging Test")
 TEST_CASE("Logger random file logging Test")
 {
 
-  Logger& Logger = Logger::getInstance();
+  Logger& Logger = Logger::GetInstance();
   Logger.setInternalFileMode(File::Mode::Append);
   ReturnType status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
     "Logger file logging Test :: Hello Message");

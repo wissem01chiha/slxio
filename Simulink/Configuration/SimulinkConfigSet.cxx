@@ -14,15 +14,16 @@ SimulinkConfigSet::SimulinkConfigSet()
   , hardware(nullptr)
   , modelReference(nullptr)
   , rtw(nullptr)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
 SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
   : object(std::make_shared<SimulinkObject>(obj))
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
+
 
 std::string SimulinkConfigSet::ToString() const
 {
@@ -56,7 +57,7 @@ std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(
     return param;
   }
   //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-    " not found in configuration set.");
+   // " not found in configuration set.");
   return nullptr;
 }
 
@@ -69,8 +70,8 @@ ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
     return E_OK;
   }
   //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-    " not found in configuration set. Cannot set value.");
-  return SLX_ENOENT;
+    //" not found in configuration set. Cannot set value.");
+  return E_OK;
 }
 
 ReturnType SimulinkConfigSet::copy()
@@ -133,7 +134,7 @@ void SimulinkConfigSet::activate()
   if (status)
   {
     //l.log(Logger::V_INFO, "Activating Simulink configuration set ",
-      object->getName());
+    //  object->getName());
   }
   status = true;
 }
@@ -143,7 +144,7 @@ void SimulinkConfigSet::deactivate()
   if (!status)
   {
     //l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
-      object->getName());
+     // object->getName());
   }
   status = false;
 }

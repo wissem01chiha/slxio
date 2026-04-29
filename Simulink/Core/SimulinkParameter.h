@@ -20,13 +20,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SimulinkParameter
  * @brief A Simulink Parameter object.
- * @see
- * https://www.mathworks.com/help/simulink/slref/simulink.parameter.html
  */
 class APIEXPORT SimulinkParameter : public SimulinkElementBase
 {
 public:
-  /// @brief Default constructor
+  /**
+   * Default constructor
+   */
   SimulinkParameter();
 
   /// @brief Explicit constructor.
@@ -70,12 +70,12 @@ public:
   /// @brief Resolves the parameter value as an unsigned 8-bit
   /// integer.
   /// @param[out] u8val Parsed value.
-  UInt32 getValueAsUInt8(uint8& u8val);
+  UInt32 getValueAsUInt8(UInt8& u8val);
 
   /// @brief Resolves the parameter value as an unsigned 16-bit
   /// integer.
   /// @param[out] u16val Parsed value.
-  UInt32 getValueAsUInt16(uint16& u16val);
+  UInt32 getValueAsUInt16(UInt16& u16val);
 
   /// @brief Resolves the parameter value as an array of floats.
   /// @param[out] vecval Parsed array.
@@ -86,7 +86,7 @@ public:
   UInt32 getValueAsString(std::string& strval);
 
   /// @brief get parameter dimensions
-  std::vector<uint16> getDimensions();
+  std::vector<UInt16> getDimensions();
 
   /// @brief return current parameter name
   const char* getName();
@@ -129,7 +129,7 @@ private:
 
   const char* Unit;
   const char* Description;
-  const char* Complexity = "real";
+  const char* Complexity;
 
   Float32 Min;
   Float32 Max;
@@ -140,4 +140,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKPARAMETER_H
+#endif /* SIMULINKPARAMETER_H */ 

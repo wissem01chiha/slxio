@@ -43,10 +43,10 @@ private:
   const char* SimBuildMode;
   const char* SimGenImportedTypeDefs;
   const char* ModelFunctionsGlobalVisibility;
-  uint16 CompileTimeRecursionLimit;
+  UInt16 CompileTimeRecursionLimit;
   const char* EnableRuntimeRecursion;
   const char* MATLABDynamicMemAlloc;
-  uint16 MATLABDynamicMemAllocThreshold;
+  UInt16 MATLABDynamicMemAllocThreshold;
   const char** CustomCodeFunctionArrayLayout;
   const char* DefaultCustomCodeFunctionArrayLayout;
 };
