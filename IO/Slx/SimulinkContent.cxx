@@ -35,133 +35,133 @@ SimulinkContent& SimulinkContent::operator=(const SimulinkContent& other)
   return *this;
 }
 
-ErrorCode SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
 {
   if (blockdiagram == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "blockdiagram xml document is not loaded in the "
       "SimulinkContent");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(blockdiagram);
   if (root == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from blockdiagram XML document");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
 {
   if (nodePtr == nullptr)
   {
-    l.log(Logger::V_ERROR, "provided nodePtr is a null pointer");
-    return ErrorCode::SLX_EINVAR;
+    //l.log(Logger::V_ERROR, "provided nodePtr is a null pointer");
+    return E_WRNG_FUNC_PARAM;
   }
 
   if (coreProperties == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "coreProperties xml document is not loaded in SimulinkContent");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(coreProperties);
   if (root == NULL)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from coreProperties XML document");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
 {
   if (mwcoreProperties == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "mwcoreProperties xml document is not loaded in SimulinkContent");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(mwcoreProperties);
   if (root == NULL)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from mwcoreProperties xml "
       "document");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
 {
   if (configSetInfo == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "configSetInfo xml document is not loaded in SimulinkContent");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSetInfo);
   if (root == NULL)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from configSetInfo xml document");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkContent::getConfigSetNodePtr(
-  Index& idx, xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getConfigSetNodePtr(
+  IdType& idx, xmlNodePtr& nodePtr) const
 {
   if (idx > configSets.size())
   {
-    return ErrorCode::SLX_EEOF;
+    return E_EOF;
   }
   if (configSets[idx] == nullptr)
   {
-    l.log(Logger::V_ERROR, "configSet at index %d is a null pointer", idx);
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR, "configSet at index %d is a null pointer", idx);
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(configSets[idx]);
   if (root == NULL)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from configSet xml document at "
       "index %d",
       idx);
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
+ReturnType SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
 {
   if (modelDictionary == nullptr)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "modelDictionary XML document is not loaded in "
       "SimulinkContent");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   xmlNodePtr root = xmlDocGetRootElement(modelDictionary);
   if (root == NULL)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get root element from modelDictionary xml document");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   nodePtr = root;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

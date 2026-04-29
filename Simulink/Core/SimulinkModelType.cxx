@@ -8,7 +8,7 @@ SimulinkModelType::SimulinkModelType(SimulinkModelType::Type type)
 {
 }
 
-std::string SimulinkModelType::toString(SimulinkModelType::Type type)
+std::string SimulinkModelType::ToString(SimulinkModelType::Type type)
 {
   switch (type)
   {
@@ -21,7 +21,7 @@ std::string SimulinkModelType::toString(SimulinkModelType::Type type)
   }
 }
 
-SimulinkModelType::Type SimulinkModelType::getType() const
+SimulinkModelType::Type SimulinkModelType::GetElementType() const
 {
   return type;
 }

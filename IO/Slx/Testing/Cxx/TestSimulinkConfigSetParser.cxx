@@ -43,7 +43,7 @@ TEST_F(SimulinkConfigSetBuilderTestFixture, BuildTest)
 {
 
   std::shared_ptr<SimulinkConfigSet> obj = builderPtr->get();
-  // ASSERT_EQ(obj->getType(), SimulinkElementType::ConfigSet);
+  // ASSERT_EQ(obj->GetElementType(), SimulinkElementType::ConfigSet);
 }
 
 SLXIO_ABI_NAMESPACE_END

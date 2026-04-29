@@ -6,22 +6,22 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkObjectParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkObjectParser:: null node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR, "SimulinkObjectParser:: null node pointer received");
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkObjectParser::parse()
+ReturnType SimulinkObjectParser::parse()
 {
-  Index id = (Index)0;
+  IdType id = (IdType)0;
   std::string name, className;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
@@ -32,7 +32,7 @@ ErrorCode SimulinkObjectParser::parse()
       reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_ObjectID)
     {
-      id = static_cast<Index>(std::stoul(attrValue));
+      id = static_cast<IdType>(std::stoul(attrValue));
     }
     else if (attrName == SlxParameter::PARAM_ClassName)
     {
@@ -54,20 +54,20 @@ ErrorCode SimulinkObjectParser::parse()
     {
 
       SimulinkParameterParser* paramParserPtr = new SimulinkParameterParser();
-      ErrorCode subInputStatus = paramParserPtr->setInputData(nodePtr_);
-      if (subInputStatus != ErrorCode::E_OK)
+      ReturnType subInputStatus = paramParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
 
-      ErrorCode paramParseStatus = paramParserPtr->parse();
-      if (paramParseStatus != ErrorCode::E_OK)
+      ReturnType paramParseStatus = paramParserPtr->parse();
+      if (paramParseStatus != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build object Parameter");
         return paramParseStatus;
       }
-      ptr->add(paramParserPtr->getOutputData());
+      ptr->AddElement(paramParserPtr->getOutputData());
       delete paramParserPtr;
     }
 
@@ -76,44 +76,44 @@ ErrorCode SimulinkObjectParser::parse()
     {
 
       SimulinkObjectParser* subObjParserPtr = new SimulinkObjectParser();
-      ErrorCode subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
-      if (subObjInputStatus != ErrorCode::E_OK)
+      ReturnType subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      if (subObjInputStatus != E_OK)
       {
         return subObjInputStatus;
       }
 
-      ErrorCode subObjStat = subObjParserPtr->parse();
-      if (subObjStat != ErrorCode::E_OK)
+      ReturnType subObjStat = subObjParserPtr->parse();
+      if (subObjStat != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build subobject element");
         return subObjStat;
       }
-      ptr->add(subObjParserPtr->getOutputData());
+      ptr->AddElement(subObjParserPtr->getOutputData());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
     {
       SimulinkArrayParser* subArrParserPtr = new SimulinkArrayParser();
-      ErrorCode subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
-      if (subArrInputStatus != ErrorCode::E_OK)
+      ReturnType subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      if (subArrInputStatus != E_OK)
       {
         return subArrInputStatus;
       }
 
-      ErrorCode subArrParseStat = subArrParserPtr->parse();
-      if (subArrParseStat != ErrorCode::E_OK)
+      ReturnType subArrParseStat = subArrParserPtr->parse();
+      if (subArrParseStat != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build subArray element");
         return subArrParseStat;
       }
-      ptr->add(subArrParserPtr->getOutputData());
+      ptr->AddElement(subArrParserPtr->getOutputData());
       delete subArrParserPtr;
     }
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

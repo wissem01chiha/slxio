@@ -1,13 +1,14 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Logger_h__
-#define __Logger_h__
+#ifndef Logger_h
+#define Logger_h
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <ostream>
+#include <vector>
+#include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -22,7 +23,7 @@ public:
   /**
    * Logging Verbosity Levels
    */
-  enum MessageLogLevelType : UInt8
+  enum MessageLevelType : UInt8
   {
     LOG_OFF = 0x00,
     LOG_FATAL = 0x01,
@@ -36,7 +37,6 @@ public:
   /**
    * This type describes the type of the message.
    * either a standard logging message or trace message
-   * (flow, begin, end, marker, etc.)
    */
   enum MessageType : UInt8
   {
@@ -45,19 +45,18 @@ public:
   };
 
   /**
-   * File access modes.
+   * File logging access modes.
    */
   enum LogFileModeType
   {
-    LOG_FILE_TRUNCATE,
-    LOG_FILE_APPEND,
-    LOG_FILE_READ,
-    LOG_FILE_WRITE
+    TRUNCATE,
+    APPEND,
+    READ,
+    WRITE
   };
 
   /**
-   * Information about Applications/User regsirted classes/function
-   * genarl external code
+   * Information about Applications/User  classes/functions
    */
   typedef struct
   {
@@ -66,22 +65,21 @@ public:
   } ApplicationIdInfoType;
 
   /**
+   * Container data struct about a logging message
+   */
+  typedef struct
+  {
+    MessageType type;
+    MessageLevelType logLevel;
+    ApplicationIdInfoType appId;
+    UInt8 argCount;
+  } MessageInfoType;
+
+  /**
    * Initialize the Logger with command line arguments,
    * for old style compatibility with third party logging libs.
    */
-  static void Init(int argc, char** argv);
-
-  /**
-   * Main logging routine. Call with a message and a MessageLogLevelType level.
-   * If no MessageLogLevelType is specified, Logger will use its internal level
-   * until explicitly set with setInternalMessageLogLevelType.
-   */
-  void Log(MessageLogLevelType level, const char* message);
-
-  /**
-   * Log a message using the default MessageLogLevelType level.
-   */
-  void Log(const char* message);
+  static ReturnType Init(int argc, char** argv);
 
   /**
    * Get the singleton instance of the Logger.
@@ -89,14 +87,48 @@ public:
   static Logger& GetInstance();
 
   /**
-   * Set the default internal MessageLogLevelType level.
+   * Main logging routine call with a MessageInfoType metadata struct and
+   * a list of message strings. Each entry in logData represents one argument
+   * or message fragment (e.g., a plain text message, a numeric value converted
+   * to string, or a key/value pair).
+   * if no MessageLevelType is specified in logInfo, Logger will use its
+   * internal level until explicitly set with SetInternalMessageLogLevelType.
    */
-  void SetLogLevel(MessageLogLevelType level);
+  ReturnType SendMessage(
+    const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /**
-   * Set the default internal MessageLogLevelType level.
+   * Print all logging messages to stdio.
+   * currently it prints all messages without filtring, this will be enhnaced
+   * future version of the librray 
    */
-  MessageLogLevelType GetLogLevel(void);
+  void Print();
+  
+  /**
+   * Write logging messages to a given file, if the file path 
+   * is not valid an error is returned  
+   */
+  ReturnType WriteToFile(const std::string& path);
+  
+  /**
+   * oveloded of WriteToFile for compatbaily with old style
+   */
+  ReturnType WriteToFile(const char* path);
+  
+  /**
+   * will write logging information to a random genarted file
+   */
+  ReturnType WriteToFile();
+
+  /**
+   * Set the default internal MessageLevelType level.
+   */
+  void SetLogLevel(MessageLevelType newLogLevel);
+
+  /**
+   * Set the default internal MessageLevelType level.
+   */
+  MessageLevelType GetLogLevel(void);
 
   /**
    * Set the default file logging mode.
@@ -107,43 +139,40 @@ public:
    * Get the default file logging mode
    */
   LogFileModeType GetDefaultLogFileMode();
-
+  
   /**
-   * Append the given message to the given output stream.
+   * Rest logging level to default one 
    */
-  void Print(const char* message, std::ostream& os);
-
-  /**
-   * Log to a file with a specific MessageLogLevelType level.
-   */
-  UInt32 LogToFile(MessageLogLevelType MessageLogLevelType, const char* path,
-    unsigned int linenum, const char* message);
-
-  /**
-   * Log to a random file generated in the current working directory.
-   */
-  UInt32 LogToFile(
-    MessageLogLevelType MessageLogLevelType, const char* message);
-
-  /**
-   * Convert a numeric value to a MessageLogLevelType level.
-   */
-  static MessageLogLevelType ToMessageLogLevelType(UInt8 value);
+  void ResetLogLevelType();
 
   /**
    * Check if logging is enabled at runtime.
    */
   bool IsEnabled();
 
+  /**
+   * Clear all buffered log messages.
+   */
+  void ClearBuffer();
+
 private:
+  struct LogMessage
+  {
+    MessageInfoType info;
+    std::vector<std::string> messages;
+  };
+
   Logger();
   Logger(const Logger&) = delete;
   ~Logger() = default;
-  Logger::MessageLogLevelType InternalVerbosityLevel;
+  Logger::MessageLevelType InternalVerbosityLevel;
+  Logger::MessageLevelType DefaultInternalVerbosityLevel;
   Logger::LogFileModeType FileModeType;
+  Logger::LogFileModeType DefaultFileModeType;
+  std::vector<LogMessage> LogBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* __Logger_h__*/
+#endif /* Logger_h*/

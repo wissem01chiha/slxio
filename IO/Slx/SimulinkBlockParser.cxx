@@ -7,20 +7,20 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkBlockParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkBlockParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkBlockParser:: null pointer received");
-    return ErrorCode::SLX_EINVAR;
+    //l.log(Logger::V_ERROR, "SimulinkBlockParser:: null pointer received");
+    return E_WRNG_FUNC_PARAM;
   }
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkBlockParser::parse()
+ReturnType SimulinkBlockParser::parse()
 {
-  Index id = (Index)0;
+  IdType id = (IdType)0;
   std::string name;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
@@ -30,7 +30,7 @@ ErrorCode SimulinkBlockParser::parse()
       reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_SID)
     {
-      id = static_cast<Index>(std::stoul(attrValue));
+      id = static_cast<IdType>(std::stoul(attrValue));
     }
     else if (attrName == SlxParameter::PARAM_Name)
     {
@@ -44,7 +44,7 @@ ErrorCode SimulinkBlockParser::parse()
     }
     else
     {
-      l.log(Logger::V_WARNING, "unexpected attribute '", attrName,
+      //l.log(Logger::V_WARNING, "unexpected attribute '", attrName,
         "' found in simulink block node.");
     }
   }
@@ -60,27 +60,27 @@ ErrorCode SimulinkBlockParser::parse()
     {
       std::unique_ptr<SimulinkParameterParser> parser(
         new SimulinkParameterParser());
-      ErrorCode status = parser->setInputData(nodePtr_);
-      if (status != ErrorCode::E_OK)
+      ReturnType status = parser->setInputData(nodePtr_);
+      if (status != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkBlockParser:: failed to set input data "
           "for SimulinkParameterParser");
         continue;
       }
-      ErrorCode parserStatus = parser->parse();
-      if (parserStatus != ErrorCode::E_OK)
+      ReturnType parserStatus = parser->parse();
+      if (parserStatus != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkBlockParser:: failed to parse "
           "SimulinkParameterParser");
         continue;
       }
-      ptr->add(parser->getOutputData());
+      ptr->AddElement(parser->getOutputData());
     }
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

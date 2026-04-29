@@ -27,8 +27,8 @@ class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile>
 {
 public:
   SimulinkFileParser() = default;
-  ErrorCode setInputData(const File fs) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const File fs) override;
+  ReturnType parse() override;
   ~SimulinkFileParser() = default;
 };
 

@@ -29,16 +29,16 @@ public:
   StateflowChart(StateflowChart& origChart) = delete;
 
   /// @brief Add a StateflowNodeBase object
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent
   std::shared_ptr<StateflowElementBase> getParent() const override;
 
   /// @brief Return SimulinkElementType::Chart
-  SimulinkElementType getType() const override;
+  SimulinkElementType GetElementType() const override;
 
   /** @brief Returns the name of the chart. */
   std::string getName();
@@ -50,10 +50,10 @@ public:
   std::shared_ptr<StateflowBlock> getStateflowBlock();
 
   /**  @brief Returns the name of the chart. */
-  std::string toString() const override;
+  std::string ToString() const override;
 
   /** @brief Set Stateflow block this chart belongs to. */
-  ErrorCode setStateflowBlock(StateflowBlock stateflowBlock);
+  ReturnType setStateflowBlock(StateflowBlock stateflowBlock);
 
   /** @brief Get the Stateflow machine this chart belongs to. */
   // StateflowMachine getMachine() {
@@ -61,10 +61,10 @@ public:
   //}
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  Index getID() const override;
+  IdType GetElementId() const override;
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  bool contains(const Index& id) const override;
+  bool Contains(const IdType& id) const override;
 
 private:
   std::shared_ptr<StateflowBlock> stateflowBlock;

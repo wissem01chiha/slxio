@@ -1,13 +1,12 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __File_h__
-#define __File_h__
+#ifndef FILE_H
+#define FILE_H
 
-#include "APIExportMacro.h"
 #include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <memory>
 #include <string>
 #include <vector>
 
@@ -17,181 +16,132 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class Cross‑platform file abstraction.
- * @brief Provides a modern C++ interface over libuv routines with
- * additional file manipulation helpers. Designed as a lightweight
- * alternative to the C++17 <filesystem> utilities for compilers or
- * platforms that do not support, or prefer not to rely on, C++17 or
- * third‑party dependencies (e.g., Boost::filesystem), which can be
- * heavy to integrate or vendor. Supports basic file operations such
- * as open, read, write, rename, move, and close.
+ * @class File - Cross‑platform file system abstraction.
+ * @brief Provides a unified interface for file operations such as open, read,
+ * write, copy, move, rename, and compression.
  */
 class APIEXPORT File final
 {
 public:
-
-  enum Mode {
+  /**
+   * File access modes.
+   */
+  enum Mode
+  {
     TRUNCATE,
     APPEND,
     READ,
     WRITE
   };
 
+  /** Default constructor. */
   File() = default;
 
-  /// @brief Construct a File object from a path string.
+  /** Construct a File object from a path string and explicit mode */
   File(const std::string& path, Mode mode);
 
-  /// @brief Construct a File object from a C‑string path.
+  /** Construct a File object from a path string */
+  File(const std::string& path);
+
+  /** Construct a File object from a C‑string path. */
   File(const char* path, Mode mode);
 
-  /// @brief Copy constructor.
-  File(const File& fs);
+  /** Copy constructor. */
+  File(const File& other);
 
-  /// @brief Copy assignment operator.
+  /** Copy assignment operator. */
   File& operator=(const File& other) noexcept;
 
- /// @brief Move assignment operator.
+  /** Move constructor. */
+  File(File&& other) noexcept;
+
+  /** Move assignment operator. */
   File& operator=(File&& other) noexcept;
 
-   /// @brief Move constructor.
-   File(File&& other) noexcept;
+  /** Check if the given path is an existing file. */
+  static bool IsFile(const char* path);
 
-   /// @brief Check if the given path is an exsiting file.
-   static bool IsFile(const char* path);
+  /** Check if the given path is an existing file. */
+  static bool IsFile(const std::string& path);
 
-   /// @brief Check if the given path is an exsiting file.
-   static bool IsFile(const std::string& path);
+  /** Member function version of IsFile. */
+  bool IsFile();
 
-   /// @brief Member function version of isFile
-   bool IsFile();
+  /** Const member function version of IsFile. */
+  bool IsFile() const;
 
-   /// @brief Const Member function version of isFile
-   bool IsFile() const;
+  /** Open the file with the initialized mode. */
+  UInt32 Open();
 
-  /// @brief Open the file with the initialized mode.
-   UInt32 Open();
+  /** Read data from the file into the internal buffer. */
+  UInt32 Read();
 
-   /// @brief Read data from the file into the internal buffer.
-   UInt32 Read();
+  /** Write data to the file. */
+  UInt32 Write(const char* message);
 
-   /// @brief Write data to the file.
-   UInt32 Write(const char* message);
+  /** Close the file descriptor. */
+  UInt32 Close();
 
-   /// @brief Close the file descriptor.
-   UInt32 Close();
+  /** Copy the current file content to another file. */
+  UInt32 Copy(File& otherFile);
 
-   /// @brief Copy the current file content to another file.
-   /// @note If the destination file is not open, it will be opened
-   /// automatically.
-   UInt32 Copy(File& ofile);
+  /** Copy the current file content to another directory. */
+  UInt32 Copy(const char* destDir);
 
-   /// @brief Copy the current file content to another directory.
-   /// @note The destination file will have the same filename as the
-   /// current file.
-   /// @warning If a file with the same name exists in the destination
-   /// directory, it will be overwritten.
-   /// @warning the fuction does not check the validity of the given
-   /// destination directory path, use with caution
-   UInt32 Copy(const char* destdir);
+  /** Rename the file. */
+  UInt32 Rename(const char* filename);
 
-   /// @brief Rename the file.
-   /// @warning The old name will be lost with no backup.
-   UInt32 Rename(const char* filename);
+  /** Get the filename component of the path. */
+  const std::string GetFileName();
 
-   /// @brief Get the filename component of the path.
-   const std::string GetFileName();
+  /** Get the full file path. */
+  const std::string& GetFilePath() const;
 
-   /// @brief Get the file path
-   const std::string& GetFilePath() const;
+  /** Get the file access mode as an integer (fcntl.h style). */
+  const int GetFileMode();
 
-   /// @brief Get the file access mode as an integer type.
-   /// as defined in "fcntl.h" standard header, not as the
-   /// File::Mode data type
-   const int GetFileMode();
+  /** Check if the end of file has been reached. */
+  bool Eof() const;
 
-   /// @brief Get the file access mode as a human‑readable string.
-   const char* GetFileModeAsChar();
+  /** Get the internal data buffer. */
+  std::vector<char> GetInternalBuffer();
 
-   /// @brief Check if the end of file has been reached.
-   bool Eof() const;
+  /** Get the number of bytes read or written. */
+  size_t GetNumberOfBytes() const;
 
-   /// @brief Get the internal data buffer.
-   std::vector<char> GetBuffer();
+  /** Move the file to another directory. */
+  UInt32 Move(const char* dirPath);
 
-   /// @brief Get the number of bytes read or written.
-   size_t GetNBytes() const;
+  /** Get the parent directory path. */
+  std::string GetFileDirectory();
 
-   /// @brief Move the file to another directory.
-   /// @details Updates the internal path_ attribute.
-   UInt32 Move(const char* dirpath);
+  /** Get the file extension. */
+  const char* GetFileExtension() const;
 
-   /// @brief Get the parent directory path.
-   /// @example "rootdir/filename.txt" -> "rootdir/"
-   /// @note if no parent directory found eg "filename.txt"
-   /// return "."
-   std::string GetFileDirectory();
+  /** Set the file extension. */
+  UInt32 SetFileExtension(const char* ext);
 
-/// @brief Get the file extension.
-const char* GetFileExtension() const;
+  /** Extract the current file if it is a ZIP archive. */
+  UInt32 Unzip(const char* dir);
 
-/// @brief Set the file extension.
-/// @note If the extension is unchanged, returns SLX_EDUPOBJ.
-/// @warning this function cast the extension of the physical file
-/// on disk and not only the internal path_ attribute
-/// @note the given extension should not contain the dot character
-/// '.'
-/// @warning if the file is not valid or not opened
-/// the function will return SLX_EINVAR
-UInt32 SetFileExtension(const char* ext);
+  /** Replace the current file in a compressed ZIP archive. */
+  UInt32 Zip(const char* file, const char* entryName);
 
-/// @brief for zip archives (e.g., ".zip" file extensions),
-/// extracts the current file to the given directory path.
-/// @note Checks whether the provided path is a valid directory
-///    using the Directory class utility.
-/// @note this function right now do not check the validity of the
-/// given path as a system directory
-UInt32 Unzip(const char* dir);
+  /** Retrieve the size of the current file on disk. */
+  size_t Size() const;
 
-/// @brief Replace the current file in a compressed ZIP archive
-///     (e.g., "archive.zip").
-/// @param file Path to the target ZIP archive file.
-/// @param zname Logical entry name inside the archive to be
-/// replaced
-///     (e.g., "simulink/blockdiagram.xml").
-/// @return int::E_OK on success, or an appropriate error
-/// code if the operation fails.
-/// @note The archive must be a valid ZIP file. It will be opened
-///    internally by this function; the caller does not need to
-///    open it beforehand.
-/// @note If the specified entry name @p zname does not exist in the
-///    archive, an error is returned.
-/// @example
-/// Replace the block diagram in an SLX file with a new one:
-/// @code
-/// File f(".../path/to/new/blockdiagram.xml");
-/// f.zip("../full/path/to/archive.zip",
-/// "simulink/blockdiagram.xml");
-/// @endcode
-UInt32 Zip(const char* file, const char* zname);
-
-/// @brief Retrieve the size of the current file on disk.
-/// @return The file size in bytes if the file is open and valid,
-///      or -1 if the file has not been opened.
-size_t Size() const;
-
-/// @brief Destructor.
-~File() = default;
+  /** Destructor. */
+  ~File() = default;
 
 private:
   std::string FilePath;
   Mode FileMode;
-int fd_;
-std::vector<char> buffer_;
-size_t nbytes_ = 0;
+  int FileDescriptor;
+  std::vector<char> InternalBuffer;
+  size_t NumberOfBytes = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* __File_h__ */
+#endif /* FILE_H */

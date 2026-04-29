@@ -31,15 +31,37 @@ public:
     Unkown = 11
   };
   SimulinkElementType() = default;
+
+  /**
+   * 
+   */
   bool isA(const SimulinkElementType& typeObj);
+
+  /**
+   * 
+   */
   bool isA(const SimulinkElementType::Type& type);
-  bool operator==(
-    const SimulinkElementType& lhs, const SimulinkElementType& rhs);
+
+  /**
+   * 
+   */
   explicit SimulinkElementType(SimulinkElementType::Type typeName);
+
+  /**
+   * 
+   */
   static SimulinkElementType& getInstance();
+
+  /**
+   * 
+   */
   static SimulinkElementType::Type toType(const char* typeName);
-  static const char* toString(SimulinkElementType::Type type);
-  std::string toString();
+
+  /**
+   * 
+   */
+  static const char* ToString(SimulinkElementType::Type type);
+  std::string ToString();
 
 private:
   SimulinkElementType::Type type_;

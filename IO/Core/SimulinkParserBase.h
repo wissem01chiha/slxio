@@ -37,20 +37,20 @@ public:
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual ErrorCode setInputData(const T data)
+  virtual ReturnType setInputData(const T data)
   {
     dataObject = data;
-    return ErrorCode::E_OK;
+    return E_OK;
   };
 
   /// @brief Set the input data for the parser.
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual ErrorCode setInputData(const T& data)
+  virtual ReturnType setInputData(const T& data)
   {
     dataObject = data;
-    return ErrorCode::E_OK;
+    return E_OK;
   };
 
   /// @brief Retrieve the parsed SimulinkElementBase object.
@@ -60,7 +60,7 @@ public:
   T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
-  virtual ErrorCode parse() = 0;
+  virtual ReturnType parse() = 0;
 
 protected:
   /// @brief Default constructor

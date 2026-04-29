@@ -3,14 +3,14 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkParameterWriter::Write()
+ReturnType SimulinkParameterWriter::Write()
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkParameterWriter::setInputData(const SimulinkParameter data)
+ReturnType SimulinkParameterWriter::setInputData(const SimulinkParameter data)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
 SLXIO_ABI_NAMESPACE_END

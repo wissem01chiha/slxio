@@ -38,29 +38,29 @@ protected:
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserSetInputDataTest")
 {
 
-  ErrorCode status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 {
 
-  ErrorCode status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
 {
 
-  ErrorCode status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
 
   std::shared_ptr<SimulinkContent> contentPtr = parserPtr->getOutputData();
   CHECK(contentPtr != nullptr);
@@ -70,9 +70,9 @@ TEST_CASE_FIXTURE(
   SimulinkContentParserTestFixture, "ParserInvalidInputDataTest")
 {
 
-  ErrorCode status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
-  CHECK(status == ErrorCode::SLX_EINVAR);
+  CHECK(status == E_WRNG_FUNC_PARAM);
 };
 
 TEST_CASE_FIXTURE(
@@ -85,14 +85,14 @@ TEST_CASE_FIXTURE(
   CHECK(contentPtr != nullptr);
 
   xmlNodePtr nodePtrNull = nullptr;
-  ErrorCode status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
-  CHECK(status == ErrorCode::E_OK);
+  ReturnType status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
+  CHECK(status == E_OK);
   CHECK(nodePtrNull != nullptr);
 
   xmlNodePtr nodePtr = new xmlNode();
   CHECK(nodePtr != nullptr);
   status = contentPtr->getBlockdiagramNodePtr(nodePtr);
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
   CHECK(nodePtr != nullptr);
 
   const xmlChar* name = nodePtr->name;

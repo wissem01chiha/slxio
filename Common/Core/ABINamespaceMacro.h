@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __ABINamespaceMacro_h__
-#define __ABINamespaceMacro_h__
+#ifndef ABINamespaceMacro_h
+#define ABINamespaceMacro_h
 
 #include "Config.h"
 #include "VersionMacro.h"
@@ -23,4 +23,4 @@
     #define SLXIO_ABI_NAMESPACE_END
 #endif 
 
-#endif /* __ABINamespaceMacro_h__ */
+#endif /* ABINamespaceMacro_h */

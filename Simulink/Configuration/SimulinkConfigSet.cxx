@@ -24,9 +24,9 @@ SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
 {
 }
 
-std::string SimulinkConfigSet::toString() const
+std::string SimulinkConfigSet::ToString() const
 {
-  return object->toString();
+  return object->ToString();
 }
 
 std::shared_ptr<SimulinkSolver> SimulinkConfigSet::getSolver()
@@ -39,7 +39,7 @@ const char* SimulinkConfigSet::getParameter(const char* name)
 
   if (name == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
+    //l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
   std::shared_ptr<SimulinkParameter> cfgParam =
@@ -55,47 +55,47 @@ std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(
   {
     return param;
   }
-  l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
     " not found in configuration set.");
   return nullptr;
 }
 
-ErrorCode SimulinkConfigSet::setParameter(const char* name, const char* value)
+ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
 {
   auto param = object->getParameter(std::string(name));
   if (param)
   {
     param->setValue(value);
-    return ErrorCode::E_OK;
+    return E_OK;
   }
-  l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
     " not found in configuration set. Cannot set value.");
-  return ErrorCode::SLX_ENOENT;
+  return SLX_ENOENT;
 }
 
-ErrorCode SimulinkConfigSet::copy()
+ReturnType SimulinkConfigSet::copy()
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkConfigSet::clone()
+ReturnType SimulinkConfigSet::clone()
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkConfigSet::remove()
+ReturnType SimulinkConfigSet::RemoveElement()
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkConfigSet::attach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::attach(SimulinkModel& model)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkConfigSet::detach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::detach(SimulinkModel& model)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
 std::string SimulinkConfigSet::getName()
@@ -108,19 +108,19 @@ std::shared_ptr<SimulinkObject> SimulinkConfigSet::getObject() const
   return object;
 }
 
-Index SimulinkConfigSet::getID() const
+IdType SimulinkConfigSet::GetElementId() const
 {
-  return object->getID();
+  return object->GetElementId();
 }
 
-ErrorCode SimulinkConfigSet::saveToFile(const char* path)
+ReturnType SimulinkConfigSet::saveToFile(const char* path)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-ErrorCode SimulinkConfigSet::loadFromFile(const char* path)
+ReturnType SimulinkConfigSet::loadFromFile(const char* path)
 {
-  return ErrorCode::SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
 SimulinkConfigSet SimulinkConfigSet::fromFile(const char* path)
@@ -132,7 +132,7 @@ void SimulinkConfigSet::activate()
 {
   if (status)
   {
-    l.log(Logger::V_INFO, "Activating Simulink configuration set ",
+    //l.log(Logger::V_INFO, "Activating Simulink configuration set ",
       object->getName());
   }
   status = true;
@@ -142,7 +142,7 @@ void SimulinkConfigSet::deactivate()
 {
   if (!status)
   {
-    l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
+    //l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
       object->getName());
   }
   status = false;

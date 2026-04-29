@@ -4,7 +4,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-std::string SimulinkFileBase::toString() const
+std::string SimulinkFileBase::ToString() const
 {
   std::ostringstream oss;
   oss << "SimulinkFileBase { "

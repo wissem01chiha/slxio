@@ -13,7 +13,7 @@ bool operator==(const SimulinkPortType& lhs, const SimulinkPortType& rhs)
   return lhs.type_ == rhs.type_;
 }
 
-std::string SimulinkPortType::toString() const
+std::string SimulinkPortType::ToString() const
 {
   switch (type_)
   {

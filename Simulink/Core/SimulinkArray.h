@@ -15,6 +15,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
+ * @class SimulinkArray
  * @brief Base class for Simulink Array.
  * An slx Array can contain nested arrays as well as objects derived
  * from the SimulinkObject class. for object references, it maintains
@@ -25,27 +26,78 @@ class APIEXPORT SimulinkArray final : public SimulinkElementBase
 {
 public:
   SimulinkArray();
+
+  /**
+   * 
+   */
   SimulinkArray(std::string type, std::string name, std::string dimension);
+
+  /**
+   * 
+   */
   SimulinkArray(const SimulinkArray& other);
+
   SimulinkArray& operator=(const SimulinkArray&) = delete;
-  SimulinkElementType getType() const override;
-  std::string toString() const override;
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> elment) override;
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> elment) override;
-  Index getID() const override;
+  
+  /**
+   * 
+   */
+  SimulinkElementType GetElementType() const override;
+
+  std::string ToString() const override;
+
+  /**
+   * 
+   */
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
+
+  /**
+   * 
+   */
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
+
+  /**
+   * 
+   */
+  IdType GetElementId() const override;
+
+  /**
+   * 
+   */
   std::string getName();
+
+  /**
+   * 
+   */
   std::string getDimension();
+
+  /**
+   * 
+   */
   std::string getArrayType();
+
+  /**
+   * 
+   */
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
-  bool contains(const Index& id) const override;
+
+  /**
+   * 
+   */
+  bool Contains(const IdType& id) const override;
+
+  /**
+   * 
+   */
+  Logger& GetLogger();
 
 private:
-  Index id;
-  Logger& l;
+  IdType id;
+  Logger& logger;
   std::string type;
   std::string name;
   std::string dimension;
-  std::vector<uint32> objects;
+  std::vector<IdType> objects;
   std::vector<std::shared_ptr<SimulinkArray>> subArrays;
   std::vector<std::shared_ptr<SimulinkParameter>> parameters;
 };

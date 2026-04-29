@@ -8,10 +8,10 @@ TEST_CASE("SimulinkParameter")
 {
 
   SimulinkParameter* ParameterPtr = new SimulinkParameter("10");
-  CHECK(ParameterPtr->setName("NAME") == ErrorCode::E_OK);
+  CHECK(ParameterPtr->setName("NAME") == E_OK);
   CHECK(std::strcmp(ParameterPtr->getName(), "NAME") == 0);
   std::string strval;
-  CHECK(ParameterPtr->getValueAsString(strval) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsString(strval) == E_OK);
   CHECK(strval == "10");
   delete ParameterPtr;
 }
@@ -20,7 +20,7 @@ TEST_CASE("SimulinkParameter")
 {
 
   SimulinkParameter* ParameterPtr = new SimulinkParameter("10");
-  CHECK(ParameterPtr->getType().isA(SimulinkElementType::Parameter));
+  CHECK(ParameterPtr->GetElementType().isA(SimulinkElementType::Parameter));
   delete ParameterPtr;
 }
 
@@ -30,19 +30,19 @@ TEST_CASE("SimulinkParameter")
   SimulinkParameter* ParameterPtr = new SimulinkParameter("10.0");
 
   Float dblVal = 0.0;
-  CHECK(ParameterPtr->getValueAsDouble(dblVal) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsDouble(dblVal) == E_OK);
   CHECK(dblVal == (Float)10.0);
 
   Float sngVal = 0.0;
-  CHECK(ParameterPtr->getValueAsSingle(sngVal) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsSingle(sngVal) == E_OK);
   CHECK(sngVal == (Float)10.0f);
 
   uint8 u8Val = 0;
-  CHECK(ParameterPtr->getValueAsUInt8(u8Val) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsUInt8(u8Val) == E_OK);
   CHECK(u8Val == (uint8)10);
 
   uint16 u16Val = 0;
-  CHECK(ParameterPtr->getValueAsUInt16(u16Val) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsUInt16(u16Val) == E_OK);
   CHECK(u16Val == (uint16)10);
 
   delete ParameterPtr;
@@ -57,7 +57,7 @@ TEST_CASE("SimulinkParameter")
   const std::vector<Float> expected = { 10.025f, 10.2f, 4.5f };
 
   std::vector<Float> arr;
-  CHECK(ParameterPtr->getValueAsArray(arr) == ErrorCode::E_OK);
+  CHECK(ParameterPtr->getValueAsArray(arr) == E_OK);
 
   CHECK(arr[0] == doctest::Approx(10.025).epsilon(FloatEps));
   CHECK(arr[1] == doctest::Approx(10.2).epsilon(FloatEps));

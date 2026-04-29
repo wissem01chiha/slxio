@@ -35,19 +35,19 @@ protected:
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
 
-  ErrorCode status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
 
-  ErrorCode in_status =
+  ReturnType in_status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
-  CHECK(in_status == ErrorCode::E_OK);
-  ErrorCode parseStatus = parserPtr->parse();
-  CHECK(parseStatus == ErrorCode::E_OK);
+  CHECK(in_status == E_OK);
+  ReturnType parseStatus = parserPtr->parse();
+  CHECK(parseStatus == E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile")
@@ -56,7 +56,7 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile")
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   parserPtr->parse();
   auto file = parserPtr->getOutputData();
-  std::string outStr = file->toString();
+  std::string outStr = file->ToString();
   std::cout << outStr << std::endl;
   CHECK(!outStr.empty());
 }

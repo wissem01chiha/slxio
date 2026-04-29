@@ -31,8 +31,8 @@ class APIEXPORT SimulinkBlockParser final
 {
 public:
   SimulinkBlockParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkBlockParser() = default;
 };
 

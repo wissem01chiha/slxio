@@ -43,7 +43,7 @@ std::string StateflowTransition::getLabel() const
   return "labelString";
 }
 
-void StateflowTransition::remove()
+void StateflowTransition::RemoveElement()
 {
   if (src)
   {
@@ -59,7 +59,7 @@ void StateflowTransition::remove()
   }
 }
 
-std::string StateflowTransition::toString() const
+std::string StateflowTransition::ToString() const
 {
   if (!src)
   {

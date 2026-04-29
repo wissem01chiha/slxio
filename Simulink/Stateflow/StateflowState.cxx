@@ -7,20 +7,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowState::StateflowState(StateflowState& orig) {}
 
-ErrorCode StateflowState::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowState::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  // nodes.add(node);
+  // nodes.AddElement(node);
   // node.setParent(this);
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode StateflowState::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowState::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isTrue(node.getParent() == this,
   //          "Node does not belong to this chart.");
-  // nodes.remove(node);
+  // nodes.RemoveElement(node);
   // node.setParent(null);
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 std::shared_ptr<StateflowElementBase> StateflowState::getParent() const
@@ -33,22 +33,22 @@ const std::vector<StateflowNodeBase>& StateflowState::getNodes() const
   return nodes;
 }
 
-SimulinkElementType StateflowState::getType() const
+SimulinkElementType StateflowState::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Unkown);
 }
 
-std::string StateflowState::toString() const
+std::string StateflowState::ToString() const
 {
   return std::string("");
 }
 
-Index StateflowState::getID() const
+IdType StateflowState::GetElementId() const
 {
-  return (Index)0;
+  return (IdType)0;
 }
 
-bool StateflowState::contains(const Index& id) const
+bool StateflowState::Contains(const IdType& id) const
 {
   return false;
 }

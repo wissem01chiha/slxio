@@ -12,7 +12,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class Constant
 {
-  Float value;
+  Float32 value;
 };
 
 SLXIO_ABI_NAMESPACE_END

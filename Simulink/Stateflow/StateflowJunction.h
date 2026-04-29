@@ -32,10 +32,10 @@ private:
   }
 
   /// @brief
-  SimulinkElementType getType() const override;
+  SimulinkElementType GetElementType() const override;
 
   /// @brief Return
-  std::string toString() const override;
+  std::string ToString() const override;
 };
 
 SLXIO_ABI_NAMESPACE_END

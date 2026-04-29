@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __SimulinkVersionMacro_h__
-#define __SimulinkVersionMacro_h__
+#ifndef SimulinkVersion_h
+#define SimulinkVersion_h
 
 #include "Config.h"
 
@@ -58,4 +58,4 @@
 #error "Simulink Version is not set or unsupported !"
 #endif
 
-#endif /*__SimulinkVersionMacro_h__ */
+#endif /* SimulinkVersion_h */

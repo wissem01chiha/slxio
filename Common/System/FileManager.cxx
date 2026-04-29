@@ -1,5 +1,6 @@
 #include "FileManager.h"
 #include "File.h"
+#include "ErrorTypes.h"
 
 // UInt32 FileManager::GetFileID(const std::string& _stFilename)
 // {

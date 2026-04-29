@@ -3,10 +3,10 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkPortTypeParser::setInputData(const std::string data)
+ReturnType SimulinkPortTypeParser::setInputData(const std::string data)
 {
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

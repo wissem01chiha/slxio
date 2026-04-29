@@ -3,20 +3,20 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkHardwareParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkHardwareParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkHardwareParser:: null pointer received");
-    return ErrorCode::SLX_EINVAR;
+    //l.log(Logger::V_ERROR, "SimulinkHardwareParser:: null pointer received");
+    return E_WRNG_FUNC_PARAM;
   }
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkHardwareParser::parse()
+ReturnType SimulinkHardwareParser::parse()
 {
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -94,24 +94,24 @@ public:
   /// @brief modify parameter name, no backup used
   UInt32 setName(const char* name);
 
-  SimulinkElementType getType() const override;
+  SimulinkElementType GetElementType() const override;
 
   /// @brief by default parameter do not have ids
   /// when called dipslay a waring , fallback to 0
-  IdType getID() const override;
+  IdType GetElementId() const override;
 
   /// @brief no logic return always true, an a warning message
-  bool contains(const Index& id) const override;
+  bool Contains(const IdType& id) const override;
 
-  std::string toString() const override;
+  std::string ToString() const override;
 
   /// @brief Parameters cannot remove child elements. Returns
-  /// SLX_ENOTIMPL.
-  UInt32 remove(const std::shared_ptr<SimulinkElementBase> element) override;
+  /// E_NOT_IMPL.
+  UInt32 RemoveElement(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Parameters cannot add child elements. Returns
-  /// SLX_ENOTIMPL.
-  UInt32 add(const std::shared_ptr<SimulinkElementBase> element) override;
+  /// E_NOT_IMPL.
+  UInt32 AddElement(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief get code generation data struct
   CoderInfo getCoderInfo();

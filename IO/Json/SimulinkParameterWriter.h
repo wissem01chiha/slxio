@@ -33,8 +33,8 @@ class APIEXPORT SimulinkParameterWriter final
 {
 public:
   SimulinkParameterWriter() = default;
-  ErrorCode Write() override;
-  ErrorCode setInputData(const SimulinkParameter data) override;
+  ReturnType Write() override;
+  ReturnType setInputData(const SimulinkParameter data) override;
   ~SimulinkParameterWriter() = default;
 };
 

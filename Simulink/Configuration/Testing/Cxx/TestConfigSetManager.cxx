@@ -9,17 +9,17 @@ TEST_CASE("AddConfigurationSetTest")
 {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
-  ErrorCode status = manager.add(configSet);
-  CHECK(status == ErrorCode::E_OK);
+  ReturnType status = manager.AddElement(configSet);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE("RemoveConfigurationSetTest")
 {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
-  manager.add(configSet);
-  ErrorCode status = manager.remove(configSet);
-  CHECK(status == ErrorCode::E_OK);
+  manager.AddElement(configSet);
+  ReturnType status = manager.RemoveElement(configSet);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE("GetActiveConfigurationSetTest")
@@ -28,8 +28,8 @@ TEST_CASE("GetActiveConfigurationSetTest")
   auto configSet1 = std::make_shared<SimulinkConfigSet>();
   auto configSet2 = std::make_shared<SimulinkConfigSet>();
 
-  manager.add(configSet1);
-  manager.add(configSet2);
+  manager.AddElement(configSet1);
+  manager.AddElement(configSet2);
 
   configSet1->activate();
 

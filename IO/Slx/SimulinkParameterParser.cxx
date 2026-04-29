@@ -7,34 +7,34 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkParameterParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    l.log(
+    //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: null node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (data->type != XML_ELEMENT_NODE)
   {
-    l.log(
+    //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: non-element node received");
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
 
   if (data->name == nullptr)
   {
-    l.log(
+    //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: invalid xmlNodePtr received");
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
 
   this->dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkParameterParser::parse()
+ReturnType SimulinkParameterParser::parse()
 {
 
   Logger& l = Logger::getInstance();
@@ -82,20 +82,20 @@ ErrorCode SimulinkParameterParser::parse()
   std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
     std::make_unique<SimulinkDataTypeParser>();
 
-  ErrorCode dataTypeInputStatus =
+  ReturnType dataTypeInputStatus =
     dataTypeParserPtr->setInputData(paramClassStr);
 
-  if (dataTypeInputStatus != ErrorCode::E_OK)
+  if (dataTypeInputStatus != E_OK)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to set input data for data "
       "type "
       "parser");
   }
-  ErrorCode dataTypeParseStatus = dataTypeParserPtr->parse();
-  if (dataTypeParseStatus != ErrorCode::E_OK)
+  ReturnType dataTypeParseStatus = dataTypeParserPtr->parse();
+  if (dataTypeParseStatus != E_OK)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to parse data type string");
   }
   std::shared_ptr<SimulinkDataType> dataTypePtr =
@@ -105,7 +105,7 @@ ErrorCode SimulinkParameterParser::parse()
     ptr->setDataType(*dataTypePtr);
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

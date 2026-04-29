@@ -25,14 +25,14 @@ public:
   /// @brief Set input data for writing
   virtual  setInputData(const T data) = 0;
 
-  virtual ErrorCode setInputData(const T& data) { return ErrorCode::E_OK; };
+  virtual ReturnType setInputData(const T& data) { return E_OK; };
 
   /// @brief Set ouput data for writing
-  /// can be stream, string (eg toString()), custom struct
+  /// can be stream, string (eg ToString()), custom struct
   P getOutputData() const { return dataObject; }
 
   /// @brief Write data to output
-  virtual ErrorCode Write() = 0;
+  virtual ReturnType Write() = 0;
 
 protected:
   SimulinkWriterBase(Logger& logger)

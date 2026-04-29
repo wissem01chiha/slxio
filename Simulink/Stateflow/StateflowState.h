@@ -26,10 +26,10 @@ public:
   StateflowState(StateflowState& orig);
 
   /// @brief Add a StateflowNodeBase object
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent of this StateflowTranstion
   std::shared_ptr<StateflowElementBase> getParent() const override;
@@ -38,16 +38,16 @@ public:
   const std::vector<StateflowNodeBase>& getNodes() const;
 
   /// @brief Return SimulinkElementType::Chart
-  SimulinkElementType getType() const override;
+  SimulinkElementType GetElementType() const override;
 
   /// @brief get a String Reprsenation of the transistion
-  std::string toString() const override;
+  std::string ToString() const override;
 
   /// @brief Id is not supported for StateflowState, fallback to 0
-  Index getID() const override;
+  IdType GetElementId() const override;
 
   /// @brief Id is not supported for StateflowState, fallback to 0
-  bool contains(const Index& id) const override;
+  bool Contains(const IdType& id) const override;
 
 private:
   std::vector<StateflowNodeBase> nodes;

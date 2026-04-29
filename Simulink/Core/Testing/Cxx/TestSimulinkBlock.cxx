@@ -15,7 +15,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest")
 
   SimulinkBlock* block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
   CHECK(block->getBlockType().isA(SimulinkBlockType::Type::Constant));
-  CHECK(block->getType().isA(SimulinkElementType::Type::Block));
+  CHECK(block->GetElementType().isA(SimulinkElementType::Type::Block));
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest")
@@ -25,7 +25,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest")
     new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
   SimulinkBlock* block = new SimulinkBlock(*pblockPtr);
 
-  CHECK(block->getID() == 10);
+  CHECK(block->GetElementId() == 10);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
@@ -38,8 +38,8 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
     std::make_shared<SimulinkBlock>(
       SimulinkBlockType::Type::Clock, "ClockBlock", 20);
 
-  ErrorCode status = parentblockPtr->add(childblockPtr);
-  CHECK(status == ErrorCode::E_OK);
+  ReturnType status = parentblockPtr->AddElement(childblockPtr);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
@@ -51,11 +51,11 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
   std::shared_ptr<SimulinkBlock> childblockPtr =
     std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
 
-  ErrorCode addStatus = parentblockPtr->add(childblockPtr);
-  CHECK(addStatus == ErrorCode::E_OK);
+  ReturnType addStatus = parentblockPtr->AddElement(childblockPtr);
+  CHECK(addStatus == E_OK);
 
-  ErrorCode RemoveStatus = parentblockPtr->remove(childblockPtr);
-  CHECK(RemoveStatus == ErrorCode::E_OK);
+  ReturnType RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
+  CHECK(RemoveStatus == E_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

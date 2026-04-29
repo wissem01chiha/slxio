@@ -24,8 +24,8 @@ public:
   };
   SimulinkModelType() = default;
   explicit SimulinkModelType(SimulinkModelType::Type type);
-  static std::string toString(SimulinkModelType::Type type);
-  Type getType() const;
+  static std::string ToString(SimulinkModelType::Type type);
+  Type GetElementType() const;
 
 private:
   Type type;

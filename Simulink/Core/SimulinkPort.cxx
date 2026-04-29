@@ -26,89 +26,89 @@ SimulinkPortType SimulinkPort::getPortType()
   return type;
 }
 
-SimulinkElementType SimulinkPort::getType() const
+SimulinkElementType SimulinkPort::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Port);
 }
 
-std::string SimulinkPort::toString() const
+std::string SimulinkPort::ToString() const
 {
   std::ostringstream oss;
   oss << "SimulinkPort[ID=" << blockId;
-  oss << ", Type=  " << type.toString();
+  oss << ", Type=  " << type.ToString();
   if (block)
   {
-    oss << ", Block=" << block->toString();
+    oss << ", Block=" << block->ToString();
   }
   oss << "]";
   return oss.str();
 }
 
-ErrorCode SimulinkPort::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   Logger& l = Logger::getInstance();
   if (element == nullptr)
   {
-    l.log(Logger::V_WARNING,
+    //l.log(Logger::V_WARNING,
       "SimulinkPort::Cannot remove a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
-  if (!(element->getType().isA(SimulinkElementType::Line)))
+  if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "Cannot remove a Simulink element of a different "
       "type than Line from a SimulinkPort");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
-  if (element->getType().isA(SimulinkElementType::Line))
+  if (element->GetElementType().isA(SimulinkElementType::Line))
   {
 
     std::shared_ptr<SimulinkLine> linePtr =
       std::dynamic_pointer_cast<SimulinkLine>(element);
 
     // portLines.push_back(linePtr);
-    l.log(Logger::VERBOSITY_0, "Removed line from port");
+    //l.log(Logger::VERBOSITY_0, "Removed line from port");
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkPort::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    l.log(
+    //l.log(
       Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
-  if (!(element->getType().isA(SimulinkElementType::Line)))
+  if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "Cannot add a Simulink element of a different "
       "type than Line to a SimulinkPort");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
-  if (element->getType().isA(SimulinkElementType::Line))
+  if (element->GetElementType().isA(SimulinkElementType::Line))
   {
 
     std::shared_ptr<SimulinkLine> linePtr =
       std::dynamic_pointer_cast<SimulinkLine>(element);
 
     lines.push_back(linePtr);
-    l.log(Logger::VERBOSITY_0, "Added line to port");
+    //l.log(Logger::VERBOSITY_0, "Added line to port");
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-Index SimulinkPort::getID() const
+IdType SimulinkPort::GetElementId() const
 {
   return blockId;
 }
 
-bool SimulinkPort::contains(const Index& id) const
+bool SimulinkPort::Contains(const IdType& id) const
 {
   return blockId == id;
 }
@@ -123,11 +123,11 @@ std::vector<std::shared_ptr<SimulinkLine>> SimulinkPort::getLines()
   return lines;
 }
 
-std::shared_ptr<SimulinkLine> SimulinkPort::getLine(const Index& lineId)
+std::shared_ptr<SimulinkLine> SimulinkPort::getLine(const IdType& lineId)
 {
   for (const auto& line : lines)
   {
-    if (line->getID() == lineId)
+    if (line->GetElementId() == lineId)
     {
       return line;
     }

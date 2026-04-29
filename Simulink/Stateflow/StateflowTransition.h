@@ -28,9 +28,9 @@ public:
   std::shared_ptr<StateflowNodeBase> getDst() const;
 
   std::string getLabel() const;
-  void remove();
+  void RemoveElement();
 
-  std::string toString() const;
+  std::string ToString() const;
 
 private:
   std::shared_ptr<StateflowNodeBase> src;

@@ -3,31 +3,31 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkSolverParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkSolverParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
-    l.log(
+    //l.log(
       Logger::V_ERROR, "SimulinkSolverParser::null data node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (xmlStrcmp(data->name, BAD_CAST "Solver") != 0)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkSolverParser::setInputData failed: expected node "
       "<Solver>, but got <%s>",
       data->name);
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
 
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkSolverParser::parse()
+ReturnType SimulinkSolverParser::parse()
 {
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

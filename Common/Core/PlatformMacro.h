@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __PlatformMacro_h__
-#define __PlatformMacro_h__
+#ifndef PlatformMacro_h
+#define PlatformMacro_h
 
 #if defined(_WIN64)
 #define PLATFORM_WINDOWS
@@ -34,4 +34,4 @@
 #define PATH_SEP '/'
 #endif
 
-#endif /* __PlatformMacro_h__ */
+#endif /* PlatformMacro_h */

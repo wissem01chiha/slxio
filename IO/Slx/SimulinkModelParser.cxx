@@ -3,15 +3,15 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkModelParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkModelParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkModelParser:: null pointer received");
-    return ErrorCode::SLX_EINVAR;
+    //l.log(Logger::V_ERROR, "SimulinkModelParser:: null pointer received");
+    return E_WRNG_FUNC_PARAM;
   }
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __PlatformTypes_h__
-#define __PlatformTypes_h__
+#ifndef PlatformTypes_h
+#define PlatformTypes_h
 
 #include "Config.h"
 #include <cstddef>
@@ -162,16 +162,22 @@ using Int64 = signed long;
 #define SLXIO_TYPE_INT64 SLXIO_LONG
 #define SLXIO_TYPE_INT64_MIN SLXIO_LONG_MIN
 #define SLXIO_TYPE_INT64_MAX SLXIO_LONG_MAX
+#else
+#error ""
 #endif
 
 #if SLXIO_SIZEOF_FLOAT == 4
 using Float32 = float;
 #define SLXIO_TYPE_FLOAT32 SLXIO_FLOAT
+#else
+#error ""
 #endif
 
 #if SLXIO_SIZEOF_DOUBLE == 8
 using Float64 = double;
 #define SLXIO_TYPE_FLOAT64 SLXIO_DOUBLE
+#else
+#error ""
 #endif
 
 /* Select the implementation type for IdType.  */
@@ -185,4 +191,7 @@ using IdType = long;
 using IdType = int;
 #endif 
 
-#endif /* __PlatformTypes_h__ */
+/* Define an alias for error code return data types*/
+typedef UInt32 ReturnType;
+
+#endif /* PlatformTypes_h */

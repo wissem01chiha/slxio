@@ -27,8 +27,8 @@ class APIEXPORT SimulinkObjectParser final
 {
 public:
   SimulinkObjectParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkObjectParser() = default;
 };
 

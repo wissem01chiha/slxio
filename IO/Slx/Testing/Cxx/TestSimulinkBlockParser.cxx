@@ -50,15 +50,15 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "ParserSetInputDataTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::E_OK);
+  ReturnType status = parserPtr->setInputData(nodePtr);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ErrorCode status = parserPtr->setInputData(nodePtr);
+  ReturnType status = parserPtr->setInputData(nodePtr);
   std::shared_ptr<SimulinkBlock> dataObj = parserPtr->getOutputData();
 
   CHECK(dataObj != nullptr);
@@ -68,19 +68,19 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ErrorCode status = parserPtr->setInputData(nodePtr);
-  CHECK(status == ErrorCode::E_OK);
+  ReturnType status = parserPtr->setInputData(nodePtr);
+  CHECK(status == E_OK);
 
   status = parserPtr->parse();
-  CHECK(status == ErrorCode::E_OK);
+  CHECK(status == E_OK);
 
   std::shared_ptr<SimulinkBlock> blockObj = parserPtr->getOutputData();
-  CHECK(blockObj->getID() == 6);
+  CHECK(blockObj->GetElementId() == 6);
   CHECK(blockObj->getName() == "Driving Cycle");
-  std::cout << blockObj->toString() << std::endl;
+  std::cout << blockObj->ToString() << std::endl;
 
   auto blockType = blockObj->getBlockType();
-  CHECK(blockType.toString() == "FromWorkspace");
+  CHECK(blockType.ToString() == "FromWorkspace");
   CHECK(blockType.isA(SimulinkBlockType::Type::FromWorkspace));
 }
 

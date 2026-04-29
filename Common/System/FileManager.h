@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __FileManager_h__
-#define __FileManager_h__
+#ifndef FileManager_h
+#define FileManager_h
 
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
@@ -39,27 +39,63 @@ public:
   FileManager& operator=(std::vector<File*> files) = delete;
   FileManager& operator=(std::list<File*> files) = delete;
 
-  FileManager(std::vector<std::shared_ptr<File*>> files);
+  FileManager(std::vector<std::shared_ptr<File>> files);
 
-  UInt32 GetFileMaxID();
-  UInt32 GetFileID(const std::string& _stFilename);
-  UInt32 GetFirstFreeFileID();
+  /**
+   * 
+   */
+  IdType GetFileMaxID();
 
-  File* GetFile(UInt32 _iID);
-  UInt32 GetCurrentFile();
+  /**
+   * 
+   */
+  IdType GetFileID(const std::string& _stFilename);
 
+  /**
+   * 
+   */
+  IdType GetFirstFreeFileID();
+
+  /**
+   * 
+   */
+  File* GetFile(IdType _iID);
+
+  /**
+   * 
+   */
+  IdType GetCurrentFile();
+
+  /**
+   * 
+   */
   static bool IsOpened(const std::string& _stFilename);
 
-  UInt32 PushBack(File* _file);
-  void Remove(UInt32 _iID);
-  UInt32 Clear();
+  /**
+   * 
+   */
+  ReturnType Add(File* _file);
+
+  /**
+   * 
+   */
+  ReturnType Remove(IdType _iID);
+
+  /**
+   * 
+   */
+  ReturnType Clear();
 
   UInt32 GetOpenedCount();
   wchar_t** GetTypesAsString();
   wchar_t** GetFilenames();
   Float32* GetModes();
   std::vector<Float32> GetSwaps();
-  UInt32* GetIDs();
+
+  /**
+   * 
+   */
+  IdType* GetFileIds();
 
 private:
   typedef std::vector<File*> vectFile;

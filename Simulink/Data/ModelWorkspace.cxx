@@ -1,65 +1,81 @@
 #include "ModelWorkspace.h"
+#include "ErrorTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+static const Logger::ApplicationIdInfoType ModelWorkspaceId = { 1002,
+  "ModelWorkspace" };
+
 ModelWorkspace::ModelWorkspace()
-  : dataSource(DataSourceType::ModelFile)
-  , l(Logger::GetInstance())
+  : DataSource(DataSourceType::Type::ModelFile), logger(Logger::GetInstance())
 {
 }
 
-std::string ModelWorkspace::getVariable(const std::string& name) const
+std::string ModelWorkspace::GetVariable(const std::string& name) const
 {
 
-  auto it = variables.find(name);
-  if (it != variables.end())
+  auto it = Variables.find(name);
+  if (it != Variables.end())
   {
     return it->second;
   }
-  l.Log(Logger::V_WARNING, "ModelWorkspace variable ", name, " not found.");
+  logger.SendMessage(
+    { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
+    { "GetVariable : Variable", name, "not found in ModelWorkspace." });
   return std::string("");
 }
 
-void ModelWorkspace::assignVariable(
+ReturnType ModelWorkspace::AssignVariable(
   const std::string& name, const std::string& value)
 {
-  variables[name] = value;
+  Variables[name] = value;
+  return E_OK;
 }
 
-void ModelWorkspace::clear(const std::string& name)
+ReturnType ModelWorkspace::ClearVariable(const std::string& name)
 {
-  auto it = variables.find(name);
-  if (it != variables.end())
+  auto it = Variables.find(name);
+  if (it != Variables.end())
   {
-    variables.erase(it);
+    Variables.erase(it);
   }
   else
   {
-    l.Log(Logger::V_WARNING, "ModelWorkspace variable ", name,
-      " not found. Cannot clear.");
+    logger.SendMessage(
+      { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
+      { "ClearVariable: Variable", name, "not found in ModelWorkspace. Cannot clear." });
   }
+  return E_OK;
 }
 
-void ModelWorkspace::clearAll()
+ReturnType ModelWorkspace::ClearAll()
 {
-  variables.clear();
-  l.Log(Logger::V_INFO, "All variables cleared from ModelWorkspace.");
+  Variables.clear();
+  logger.SendMessage(
+    { Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },
+    { "ClearAll: All Variables cleared from ModelWorkspace." });
+  return E_OK;
 }
 
-DataSourceType ModelWorkspace::getDataSource()
+DataSourceType ModelWorkspace::GetDataSourceType()
 {
-  return dataSource;
+  return DataSource;
 }
 
-const char* ModelWorkspace::getFilename()
+const char* ModelWorkspace::GetFileName()
 {
-  return fileName.c_str();
+  return FileName.c_str();
 }
 
-std::string ModelWorkspace::getMatlabCode()
+std::string ModelWorkspace::GetMatlabCode()
 {
-  return matlabCode;
+  return MatlabCode;
+}
+
+Logger& ModelWorkspace::GetLogger()
+{
+  return logger;
 }
 
 SLXIO_ABI_NAMESPACE_END

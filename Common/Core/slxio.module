@@ -37,11 +37,11 @@ CLASSES
   Version
   Timer
   Logger
-  ErrorManager
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
 SOURCES
+  ErrorTypes.cxx
 WINDOWS_SOURCES
 UNIX_SOURCES
 ANDROID_SOURCES
@@ -57,8 +57,6 @@ HEADERS
   Version.h 
   VersionMacro.h
   Timer.h
-  ErrorMap.h
-  ErrorManager.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

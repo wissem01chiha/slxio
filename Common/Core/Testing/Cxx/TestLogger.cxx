@@ -1,4 +1,3 @@
-#include "Compiler.h"
 #include "Doctest.h"
 #include "Logger.h"
 
@@ -8,16 +7,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
 TEST_CASE("Logger Constructor Test")
 {
 
-  Logger& Logger = Logger::getInstance();
+  Logger& Logger = Logger::GetInstance();
   CHECK(&Logger != nullptr);
 }
 
 TEST_CASE("Logger Verbosity Test")
 {
 
-  Logger& Logger = Logger::getInstance();
+  Logger& Logger = Logger::GetInstance();
 
-  Logger.setInternalVerbosity(Logger::V_ERROR);
+  Logger.SetInternalVerbosity(Logger::V_ERROR);
   Logger.log("default internal Error message.");
 
   Logger.log(Logger::V_INFO, "verbosity 2 message.");
@@ -55,9 +54,9 @@ TEST_CASE("Logger random file logging Test")
 
   Logger& Logger = Logger::getInstance();
   Logger.setInternalFileMode(File::Mode::Append);
-  ErrorCode status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
+  ReturnType status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
     "Logger file logging Test :: Hello Message");
-  CHECK(status_t == ErrorCode::E_OK);
+  CHECK(status_t == E_OK);
 }
 
 SLXIO_ABI_NAMESPACE_END

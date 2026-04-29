@@ -81,7 +81,7 @@ UInt32 SimulinkParameter::getValueAsDouble(Float& fval)
   if (!Value)
   {
     fval = 0.0;
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   char* endptr = nullptr;
   fval = std::strtod(Value, &endptr);
@@ -97,7 +97,7 @@ UInt32 SimulinkParameter::getValueAsSingle(Float& sval)
   if (!Value)
   {
     sval = 0.0;
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   char* endptr = nullptr;
   sval = std::strtof(Value, &endptr);
@@ -113,7 +113,7 @@ UInt32 SimulinkParameter::getValueAsUInt8(uint8& u8val)
   if (!Value)
   {
     u8val = 0;
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
@@ -132,7 +132,7 @@ UInt32 SimulinkParameter::getValueAsUInt16(uint16& u16val)
   if (!Value)
   {
     u16val = 0;
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
@@ -151,7 +151,7 @@ UInt32 SimulinkParameter::getValueAsString(std::string& strval)
   if (!Value)
   {
     strval.clear();
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   strval = std::string(Value);
   return E_OK;
@@ -163,7 +163,7 @@ UInt32 SimulinkParameter::getValueAsArray(std::vector<Float>& vecval)
   vecval.clear();
   if (!Value)
   {
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   if (Value[0] != '[')
   {
@@ -202,7 +202,7 @@ std::vector<uint16> SimulinkParameter::getDimensions()
   return Dimensions;
 }
 
-std::string SimulinkParameter::toString() const
+std::string SimulinkParameter::ToString() const
 {
 
   char str[100];
@@ -227,50 +227,50 @@ UInt32 SimulinkParameter::setName(const char* name)
 
   if (name == nullptr)
   {
-    return SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
   if (strcmp(name, "") == 0)
   {
-    return SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
   Name = name;
   return E_OK;
 }
 
-SimulinkElementType SimulinkParameter::getType() const
+SimulinkElementType SimulinkParameter::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Parameter);
 }
 
-Index SimulinkParameter::getID() const
+IdType SimulinkParameter::GetElementId() const
 {
   Logger::getInstance().log(Logger::V_WARNING,
-    "SimulinkParameter::getID called on unsupported element. "
+    "SimulinkParameter::GetElementId called on unsupported element. "
     "Returning 0.");
-  return (Index)0;
+  return (IdType)0;
 }
 
-bool SimulinkParameter::contains(const Index& id) const
+bool SimulinkParameter::Contains(const IdType& id) const
 {
   Logger::getInstance().log(Logger::V_WARNING,
     "SimulinkParameter::contains called on unsupported element.");
   return false;
 }
 
-UInt32 SimulinkParameter::remove(
+UInt32 SimulinkParameter::RemoveElement(
   const std::shared_ptr<SimulinkElementBase> element)
 {
   Logger::getInstance().log(
     Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
-  return SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
-UInt32 SimulinkParameter::add(
+UInt32 SimulinkParameter::AddElement(
   const std::shared_ptr<SimulinkElementBase> element)
 {
   Logger::getInstance().log(
     Logger::V_ERROR, "SimulinkParameter::add is not supported.");
-  return SLX_ENOTIMPL;
+  return E_NOT_IMPL;
 }
 
 Float SimulinkParameter::getMin()

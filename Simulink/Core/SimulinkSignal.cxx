@@ -13,10 +13,10 @@ SimulinkSignal::SimulinkSignal()
 {
 }
 
-ErrorCode SimulinkSignal::setDataType(SimulinkDataType dt)
+ReturnType SimulinkSignal::setDataType(SimulinkDataType dt)
 {
   DataType = dt;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SimulinkDataType SimulinkSignal::getDataType()
@@ -24,7 +24,7 @@ SimulinkDataType SimulinkSignal::getDataType()
   return DataType;
 }
 
-ErrorCode SimulinkSignal::setDataType(const char* dt)
+ReturnType SimulinkSignal::setDataType(const char* dt)
 {
 
   if (strcmp(dt, "auto") == 0)
@@ -77,12 +77,12 @@ ErrorCode SimulinkSignal::setDataType(const char* dt)
   }
   else
   {
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
-ErrorCode SimulinkSignal::setComplexityType(const char* ct)
+ReturnType SimulinkSignal::setComplexityType(const char* ct)
 {
 
   if (strcmp(ct, "auto") == 0)
@@ -99,9 +99,9 @@ ErrorCode SimulinkSignal::setComplexityType(const char* ct)
   }
   else
   {
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 const char* SimulinkSignal::getComplexity()
@@ -144,11 +144,11 @@ std::vector<Float32> SimulinkSignal::getSampleTime()
   return SampleTime;
 }
 
-ErrorCode SimulinkSignal::setRange(Float min, Float max)
+ReturnType SimulinkSignal::setRange(Float min, Float max)
 {
   Min = min;
   Max = max;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

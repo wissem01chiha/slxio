@@ -31,14 +31,14 @@ public:
   SimulinkDataType getDataType();
 
   /// @brief Set the data type of the signal
-  ErrorCode setDataType(SimulinkDataType dt);
+  ReturnType setDataType(SimulinkDataType dt);
 
   /// @brief Set the data type of the signal from a string (MatWorks
   /// API style)
-  ErrorCode setDataType(const char* dt);
+  ReturnType setDataType(const char* dt);
 
   /// @brief Set the complexity type of the signal from a string
-  ErrorCode setComplexityType(const char* ct);
+  ReturnType setComplexityType(const char* ct);
 
   /// @brief Get the complexity type of the signal
   const char* getComplexity();
@@ -65,7 +65,7 @@ public:
   std::vector<Float> getSampleTime();
 
   /// @brief Set the valid range (minimum and maximum) for the signal
-  ErrorCode setRange(Float min, Float max);
+  ReturnType setRange(Float min, Float max);
 
 private:
   const char* InitialValue;

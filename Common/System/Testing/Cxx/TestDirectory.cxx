@@ -71,8 +71,8 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory")
 
   std::string path = testDirectoryEmptyRandDir();
   Directory d(path);
-  ErrorCode ec = d.open();
-  CHECK(ec == ErrorCode::E_OK);
+  ReturnType ec = d.open();
+  CHECK(ec == E_OK);
   CHECK(d.getNumberOfFiles() == 0);
   CHECK(d.empty());
 }
@@ -82,8 +82,8 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open directory with files")
 
   std::string path = tempDirFiles();
   Directory d(path);
-  ErrorCode ec = d.open();
-  CHECK(ec == ErrorCode::E_OK);
+  ReturnType ec = d.open();
+  CHECK(ec == E_OK);
   CHECK(d.getNumberOfFiles() == 2);
 
   const File* f1 = d.getFile("file1.txt");
@@ -117,14 +117,14 @@ TEST_CASE("Test Prefixed getTemporaryDirectory")
   CHECK(Directory::isDirectory(tmpdir));
 }
 
-TEST_CASE("Test Mkdir Directory Utility")
+TEST_CASE("Test Create Directory Utility")
 {
 
   const char* cwd = Directory::getCurrentDirectory();
   char subdirpath[1024];
   snprintf(
     subdirpath, sizeof(subdirpath), "%s/%s", cwd, "simulink/plugin/rels/");
-  ErrorCode ec = Directory::mkdir(subdirpath);
+  ReturnType ec = Directory::mkdir(subdirpath);
 
-  CHECK(ec == ErrorCode::E_OK);
+  CHECK(ec == E_OK);
 }

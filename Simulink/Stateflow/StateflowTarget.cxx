@@ -14,27 +14,27 @@ StateflowTarget::StateflowTarget(StateflowTarget& orig)
 {
 }
 
-ErrorCode StateflowTarget::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowTarget::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isFalse(getParent() == null,
   //                "Target has no parent to be removed from.");
   // getParent().removeTarget(this);
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode StateflowTarget::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowTarget::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-std::string StateflowTarget::toString() const
+std::string StateflowTarget::ToString() const
 {
   return std::string("");
 }
 
-Index StateflowTarget::getID() const
+IdType StateflowTarget::GetElementId() const
 {
-  return (Index)0;
+  return (IdType)0;
 }
 
 SLXIO_ABI_NAMESPACE_END

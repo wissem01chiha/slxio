@@ -1,88 +1,35 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
-
 #include "Logger.h"
 #include "Compiler.h"
-#include "ErrorTypes.h"
 #include "Config.h"
+#include "ErrorTypes.h"
 #include <cstring>
 #include <fstream>
+#include <ostream>
 #include <random>
 #include <sstream>
 #if SLXIO_SLOG
 #include "Slog.h"
 #elif SLXIO_LOGURU
 #include "Loguru.h"
-#endif 
+#endif
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
-  : InternalVerbosityLevel(Logger::MessageLogLevelType::LOG_INFO)
+  : InternalVerbosityLevel(Logger::MessageLevelType::LOG_INFO), 
+  DefaultFileModeType(Logger::LogFileModeType::WRITE)
 {
 }
 
-void Logger::Init(int argc, char** argv)
+ReturnType Logger::Init(int argc, char** argv)
 {
 #if SLXIO_LOGURU
   loguru::init(argc, argv);
 #elif SLXIO_SLOG
   slog_init("logfile.log", SLOG_FLAGS_ALL, 0);
 #endif
-}
-
-void Logger::Log(Logger::MessageLogLevelType level, const char* message)
-{
-#if SLXIO_LOGURU
-  switch (level)
-  {
-    case V_ERROR:
-      LOG_F(ERROR, "%s", message);
-      break;
-    case V_WARNING:
-      LOG_F(WARNING, "%s", message);
-      break;
-    case V_INFO:
-      LOG_F(INFO, "%s", message);
-      break;
-    default:
-      LOG_F(INFO, "%s", message);
-      break;
-  }
-#elif SLXIO_SLOG
-
-  slog_config_t cfg;
-  slog_config_get(&cfg);
-  cfg.eColorFormat = SLOG_COLORING_FULL;
-  slog_config_set(&cfg);
-  slog_init(NULL, SLOG_FLAGS_ALL, 0);
-
-  switch (level)
-  {
-    case LOG_ERROR:
-      slog_error("%s", message);
-      break;
-    case LOG_WARN:
-      slog_warn("%s", message);
-      break;
-    case LOG_INFO:
-      slog_info(message);
-      break;
-    default:
-      slog_debug("%s", message);
-      break;
-  };
-  slog_destroy();
-
-#else
-  (void*)message;
-#endif
-}
-
-void Logger::Log(const char* message)
-{
-  Log(InternalVerbosityLevel, message);
+  return E_OK;
 }
 
 Logger& Logger::GetInstance()
@@ -91,12 +38,172 @@ Logger& Logger::GetInstance()
   return instance;
 }
 
-void Logger::SetLogLevel(Logger::MessageLogLevelType level)
+ReturnType Logger::SendMessage(
+  const MessageInfoType& logInfo, const std::vector<std::string>& logData)
 {
-  InternalVerbosityLevel = level;
+  LogMessage message;
+  message.info = logInfo;
+  message.messages = logData;
+  LogBuffer.push_back(message);
+  return E_OK;
 }
 
-Logger::MessageLogLevelType Logger::GetLogLevel(void)
+void Logger::Print()
+{
+#if SLXIO_LOGURU
+
+#elif SLXIO_SLOG
+
+  slog_config_t cfg;
+  slog_config_get(&cfg);
+  cfg.eColorFormat = SLOG_COLORING_FULL;
+  slog_config_set(&cfg);
+  slog_init(NULL, SLOG_FLAGS_ALL, 0);
+
+  for (const auto& entry : LogBuffer)
+  {
+    const auto& info = entry.info;
+
+    int slogLevel = SLOG_INFO;
+    switch (info.logLevel)
+    {
+      case LOG_FATAL:
+        slogLevel = SLOG_FATAL;
+        break;
+      case LOG_ERROR:
+        slogLevel = SLOG_ERROR;
+        break;
+      case LOG_WARN:
+        slogLevel = SLOG_WARN;
+        break;
+      case LOG_INFO:
+        slogLevel = SLOG_INFO;
+        break;
+      case LOG_DEBUG:
+        slogLevel = SLOG_DEBUG;
+        break;
+      case LOG_VERBOSE:
+        slogLevel = SLOG_TRACE;
+        break;
+      default:
+        slogLevel = SLOG_INFO;
+        break;
+    }
+
+    for (const auto& msg : entry.messages)
+    {
+      if (slogLevel == SLOG_FATAL)
+      {
+        slog_fatal("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else if (slogLevel == SLOG_ERROR)
+      {
+        slog_error("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else if (slogLevel == SLOG_WARN)
+      {
+        slog_warn("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else if (slogLevel == SLOG_INFO)
+      {
+        slog_info("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else if (slogLevel == SLOG_DEBUG)
+      {
+        slog_debug("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else if (slogLevel == TRACE)
+      {
+        slog_trace("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+      else
+      {
+        slog_info("[AppId=%u, Desc=%s] %s", info.appId.appId,
+          info.appId.appDescription, msg.c_str());
+      }
+    }
+  }
+
+  slog_destroy();
+#endif
+}
+
+ReturnType Logger::WriteToFile(const std::string& path)
+{
+  std::ofstream outFile(path, DefaultFileModeType);
+  if (!outFile.is_open())
+  {
+    return E_FOPEN_FAIL;
+  }
+
+  for (const auto& entry : LogBuffer)
+  {
+    const auto& info = entry.info;
+    outFile << "[AppId=" << info.appId.appId
+            << ", Desc=" << info.appId.appDescription
+            << ", Type=" << static_cast<int>(info.type)
+            << ", Level=" << static_cast<int>(info.logLevel) << "] ";
+
+    for (size_t i = 0; i < entry.messages.size(); ++i)
+    {
+      outFile << entry.messages[i];
+      if (i < entry.messages.size() - 1)
+      {
+        outFile << " ";
+      }
+    }
+    outFile << std::endl;
+  }
+
+  outFile.close();
+  return E_OK;
+}
+
+ReturnType Logger::WriteToFile(const char* path)
+{
+  return WriteToFile(std::string(path));
+}
+
+ReturnType Logger::WriteToFile()
+{
+  const size_t size = 1024;
+  char buffer[size];
+  if (getcwd(buffer, size) == nullptr)
+  {
+    return E_GET_CWD_FAIL;
+  }
+
+  std::random_device rand_dev;
+  std::mt19937 generator(rand_dev());
+  std::uniform_int_distribution<UInt32> distr(10000, 999999);
+
+  std::ostringstream oss;
+  oss << distr(generator) << ".log";
+  std::string filename = oss.str();
+
+  std::string fullPath = std::string(buffer) + "/" + filename;
+
+  ReturnType result = WriteToFile(fullPath);
+  if (result != E_OK)
+  {
+    return result;
+  }
+
+  return E_OK;
+}
+
+void Logger::SetLogLevel(Logger::MessageLevelType newLogLevel)
+{
+  InternalVerbosityLevel = newLogLevel;
+}
+
+Logger::MessageLevelType Logger::GetLogLevel(void)
 {
   return InternalVerbosityLevel;
 }
@@ -111,73 +218,8 @@ Logger::LogFileModeType Logger::GetDefaultLogFileMode()
   return LogFileModeType();
 }
 
-void Logger::Print(const char* message, std::ostream& os)
-{
-  os << message;
-}
-
-UInt32 Logger::LogToFile(Logger::MessageLogLevelType verbosity, const char* path,
-  unsigned int linenum, const char* message)
-{
-#if SLXIO_LOGURU
-
-  loguru::add_file(path, static_cast<loguru::Mode>(filemode),
-    static_cast<loguru::Verbosity>(verbosity));
-  loguru::log(
-    static_cast<loguru::Verbosity>(verbosity), path, linenum, message);
-  loguru::flush();
-  return ErrorCode::E_OK;
-
-#elif SLXIO_SLOG
-
-  std::ofstream out(path, std::ios::app);
-  if (out.is_open())
-  {
-    out << "[" << static_cast<int>(verbosity) << "] " << path << ":" << linenum
-        << " " << message << std::endl;
-  }
-  return E_OK;
-#endif
-  return E_OK;
-}
-
-UInt32 Logger::LogToFile(Logger::MessageLogLevelType verbosity, const char* message)
-{
-
-  const size_t size = 1024;
-  char buffer[size];
-  if (getcwd(buffer, size) == nullptr)
-  {
-    return SLX_EGETCWD;
-  }
-
-  std::random_device rand_dev;
-  std::mt19937 generator(rand_dev());
-  std::uniform_int_distribution<UInt32> distr(10000, 999999);
-  std::ostringstream oss;
-  oss << distr(generator) << ".log";
-  std::string filename = oss.str();
-  const char* path = filename.c_str();
-
-  if (strlen(buffer) + strlen(path) < size)
-  {
-    strcat(buffer, path);
-    UInt32 errno_ = LogToFile(verbosity, path, 1, message);
-    if (errno_ != E_OK)
-    {
-      return errno_;
-    }
-  }
-  else
-  {
-    return SLX_ELONGPATH;
-  }
-  return E_OK;
-}
-
-Logger::MessageLogLevelType Logger::ToMessageLogLevelType(UInt8 value)
-{
-  return static_cast<Logger::MessageLogLevelType>(value);
+void Logger::ResetLogLevelType() {
+  InternalVerbosityLevel = DefaultInternalVerbosityLevel;
 }
 
 bool Logger::IsEnabled()
@@ -187,6 +229,10 @@ bool Logger::IsEnabled()
 #else
   return false;
 #endif
+}
+
+void Logger::ClearBuffer() {
+  LogBuffer.clear();
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -21,8 +21,8 @@ class APIEXPORT SimulinkConfigSetParser final
 {
 public:
   SimulinkConfigSetParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkConfigSetParser() = default;
 };
 

@@ -23,7 +23,7 @@ class APIEXPORT SimulinkFileBase
 {
 public:
   /// @brief Convert metadata fields to a human-readable string.
-  std::string toString() const;
+  std::string ToString() const;
 
   /// @brief Default destructor.
   ~SimulinkFileBase() = default;

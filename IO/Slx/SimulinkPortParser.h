@@ -25,8 +25,8 @@ class APIEXPORT SimulinkPortParser final
 {
 public:
   SimulinkPortParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkPortParser() = default;
 };
 

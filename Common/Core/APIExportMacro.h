@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __APIExportMacro_h__
-#define __APIExportMacro_h__
+#ifndef APIExportMacro_h
+#define APIExportMacro_h
 
 #include "Config.h"
 #include "PlatformMacro.h"
@@ -17,4 +17,4 @@
 #define APIEXPORT __attribute__((visibility("default")))
 #endif
 
-#endif /* __APIExportMacro_h__ */
+#endif /* APIExportMacro_h */

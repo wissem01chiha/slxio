@@ -87,7 +87,7 @@ SimulinkBlockType::Type SimulinkBlockType::toType(const char* typeName)
     return SimulinkBlockType::Stop;
 }
 
-const char* SimulinkBlockType::toString(Type type)
+const char* SimulinkBlockType::ToString(Type type)
 {
 
   switch (type)
@@ -166,9 +166,9 @@ bool SimulinkBlockType::isA(SimulinkBlockType::Type type)
   return this->type_ == type;
 }
 
-std::string SimulinkBlockType::toString() const
+std::string SimulinkBlockType::ToString() const
 {
-  return std::string(toString(type_));
+  return std::string(ToString(type_));
 }
 
 SLXIO_ABI_NAMESPACE_END

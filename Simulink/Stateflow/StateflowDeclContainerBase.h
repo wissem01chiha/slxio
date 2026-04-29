@@ -44,7 +44,7 @@ private
     public
       void addData(StateflowData data)
       {
-        dates.add(data);
+        dates.AddElement(data);
         data.setParent(this);
       }
 
@@ -52,7 +52,7 @@ private
     public
       void addEvent(StateflowEvent event)
       {
-        events.add(event);
+        events.AddElement(event);
         event.setParent(this);
       }
 
@@ -75,7 +75,7 @@ private
       {
         CCSMPre.isTrue(data.getParent() == this,
           "Data object must belong to container to be removed.");
-        dates.remove(data);
+        dates.RemoveElement(data);
         data.setParent(null);
       }
 
@@ -83,7 +83,7 @@ private
       {
         CCSMPre.isTrue(event.getParent() == this,
           "Event must belong to container to be removed.");
-        events.remove(event);
+        events.RemoveElement(event);
         event.setParent(null);
       }
 }

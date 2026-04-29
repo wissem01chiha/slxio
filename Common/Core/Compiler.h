@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Compiler_h__
-#define __Compiler_h__
+#ifndef Compiler_h
+#define Compiler_h
 
 #include "Config.h"
 
@@ -80,4 +80,4 @@
 #define FORCE_INLINE inline
 #endif
 
-#endif /* __Compiler_h__ */
+#endif /* Compiler_h */

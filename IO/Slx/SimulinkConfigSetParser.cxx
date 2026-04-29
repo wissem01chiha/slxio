@@ -5,28 +5,28 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkConfigSetParser::null data node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (xmlStrcmp(data->name, BAD_CAST SlxParameter::SECTION_ConfigSet) != 0)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkConfigSetParser::setInputData failed: expected node "
       "<ConfigSet>, but got <%s>",
       data->name);
-    return ErrorCode::SLX_EINVAR;
+    return E_WRNG_FUNC_PARAM;
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkConfigSetParser::parse()
+ReturnType SimulinkConfigSetParser::parse()
 {
   for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
     nodePtr_ = nodePtr_->next)
@@ -34,10 +34,10 @@ ErrorCode SimulinkConfigSetParser::parse()
 
     std::unique_ptr<SimulinkObjectParser> objParserPtr =
       std::make_unique<SimulinkObjectParser>();
-    ErrorCode objInputStatus = objParserPtr->setInputData(nodePtr_);
-    if (objInputStatus != ErrorCode::E_OK)
+    ReturnType objInputStatus = objParserPtr->setInputData(nodePtr_);
+    if (objInputStatus != E_OK)
     {
-      l.log(Logger::V_ERROR,
+      //l.log(Logger::V_ERROR,
         "SimulinkConfigSetParser:: failed to set input "
         "data for object parser");
       return objInputStatus;
@@ -47,14 +47,14 @@ ErrorCode SimulinkConfigSetParser::parse()
       objParserPtr->getOutputData());
     if (!cfgPtr)
     {
-      l.log(Logger::V_ERROR,
+      //l.log(Logger::V_ERROR,
         "SimulinkConfigSetParser:: failed to cast parsed "
         "object to SimulinkConfigSet");
-      return ErrorCode::SLX_ECASTFAIL;
+      return SLX_ECASTFAIL;
     }
     ptr = cfgPtr;
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

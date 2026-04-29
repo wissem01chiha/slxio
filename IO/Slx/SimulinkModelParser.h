@@ -27,8 +27,8 @@ class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel>
 {
 public:
   SimulinkModelParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkModelParser() = default;
 };
 

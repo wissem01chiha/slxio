@@ -32,7 +32,7 @@ public:
   const std::vector<std::shared_ptr<StateflowTransition>>& getOutTransitions()
     const;
 
-  void remove();
+  void RemoveElement();
   void removeInTransition(
     const std::shared_ptr<StateflowTransition>& transition);
   void removeOutTransition(

@@ -15,7 +15,7 @@ public:
   StateflowData(StateflowData& stateflowData) {}
 
   /** Remove this data object from the model. */
-  void remove()
+  void RemoveElement()
   {
     CCSMPre.isFalse(
       getParent() == null, "Data object has no parent to be removed from.");

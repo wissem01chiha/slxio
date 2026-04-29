@@ -39,16 +39,16 @@ StateflowNodeBase::getOutTransitions() const
   return outTransitions;
 }
 
-void StateflowNodeBase::remove()
+void StateflowNodeBase::RemoveElement()
 {
   // TODO: implement removal from parent container
   for (auto& t : inTransitions)
   {
-    t->remove();
+    t->RemoveElement();
   }
   for (auto& t : outTransitions)
   {
-    t->remove();
+    t->RemoveElement();
   }
   inTransitions.clear();
   outTransitions.clear();

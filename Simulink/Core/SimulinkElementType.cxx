@@ -41,12 +41,7 @@ SimulinkElementType::Type SimulinkElementType::toType(const char* typeName)
   return Type::Unkown;
 }
 
-bool operator==(const SimulinkElementType& lhs, const SimulinkElementType& rhs)
-{
-  return lhs.type_ == rhs.type_;
-};
-
-const char* SimulinkElementType::toString(SimulinkElementType::Type type)
+const char* SimulinkElementType::ToString(SimulinkElementType::Type type)
 {
   switch (type)
   {
@@ -79,9 +74,9 @@ const char* SimulinkElementType::toString(SimulinkElementType::Type type)
   }
 }
 
-std::string SimulinkElementType::toString()
+std::string SimulinkElementType::ToString()
 {
-  return std::string(this->toString(type_));
+  return std::string(this->ToString(type_));
 }
 
 SLXIO_ABI_NAMESPACE_END

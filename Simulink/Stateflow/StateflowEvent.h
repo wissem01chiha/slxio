@@ -20,7 +20,7 @@ class APIEXPORT StateflowEvent : public StateflowElementBase
 public:
   StateflowEvent();
   StateflowEvent(StateflowEvent& orig);
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:
 };

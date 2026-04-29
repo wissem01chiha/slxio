@@ -4,21 +4,21 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkLineParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkLineParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkLineParser:: null node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR, "SimulinkLineParser:: null node pointer received");
+    return E_FUNC_PARAM_NULL_PTR;
   }
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkLineParser::parse()
+ReturnType SimulinkLineParser::parse()
 {
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

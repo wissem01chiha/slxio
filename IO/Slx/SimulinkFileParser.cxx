@@ -5,22 +5,22 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkFileParser::setInputData(const File fs)
+ReturnType SimulinkFileParser::setInputData(const File fs)
 {
   dataObject = fs;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkFileParser::parse()
+ReturnType SimulinkFileParser::parse()
 {
   SimulinkContentParser contentParser;
-  ErrorCode status = contentParser.setInputData(dataObject);
-  if (status != ErrorCode::E_OK)
+  ReturnType status = contentParser.setInputData(dataObject);
+  if (status != E_OK)
   {
     return status;
   }
   status = contentParser.parse();
-  if (status != ErrorCode::E_OK)
+  if (status != E_OK)
   {
     return status;
   }
@@ -28,11 +28,11 @@ ErrorCode SimulinkFileParser::parse()
   ptr->content = *(content_.get());
 
   xmlNodePtr propertiesNodePtr = new xmlNode();
-  ErrorCode propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
+  ReturnType propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
 
-  if (propertieStatus != ErrorCode::E_OK)
+  if (propertieStatus != E_OK)
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "failed to get properties node pointer from SimulinkContent");
     return propertieStatus;
   }
@@ -65,7 +65,7 @@ ErrorCode SimulinkFileParser::parse()
     }
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

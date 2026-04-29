@@ -50,7 +50,7 @@ public:
   bool isA(const SimulinkPortType& typeObj);
   friend bool operator==(
     const SimulinkPortType& lhs, const SimulinkPortType& rhs);
-  std::string toString() const;
+  std::string ToString() const;
   ~SimulinkPortType() = default;
 
 private:

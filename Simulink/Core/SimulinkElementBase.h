@@ -6,7 +6,6 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorTypes.h"
 #include "SimulinkElementType.h"
 #include "PlatformTypes.h"
 #include <memory>
@@ -37,17 +36,17 @@ class APIEXPORT SimulinkElementBase
 public:
   virtual ~SimulinkElementBase() = default;
   SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
-  virtual SimulinkElementType getType() const = 0;
-  virtual IdType GetID() const = 0;
-  virtual std::string toString() const = 0;
+  virtual SimulinkElementType GetElementType() const = 0;
+  virtual IdType GetElementId() const = 0;
+  virtual std::string ToString() const = 0;
   virtual bool Contains(const IdType& id) const = 0;
 
 protected:
   SimulinkElementBase() = default;
   SimulinkElementBase(const SimulinkElementBase&) = delete;
-  virtual UInt32 Remove(
+  virtual ReturnType RemoveElement(
     const std::shared_ptr<SimulinkElementBase> element) = 0;
-  virtual UInt32 add(const std::shared_ptr<SimulinkElementBase> element) = 0;
+  virtual ReturnType AddElement(const std::shared_ptr<SimulinkElementBase> element) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

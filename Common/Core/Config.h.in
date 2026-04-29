@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Config_h__
-#define __Config_h__
+#ifndef Config_h
+#define Config_h
 
 #cmakedefine01 HAVE_STDBOOL_H
 
@@ -96,4 +96,4 @@
 
 #cmakedefine USE_EXTERNAL_ZLIB
 
-#endif /* __Config_h__ */
+#endif /* Config_h */

@@ -33,8 +33,8 @@ class APIEXPORT SimulinkLineParser final
 {
 public:
   SimulinkLineParser() = default;
-  ErrorCode setInputData(const xmlNodePtr data) override;
-  ErrorCode parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulinkLineParser() = default;
 };
 

@@ -16,7 +16,7 @@ SimulinkObject::SimulinkObject()
 }
 
 SimulinkObject::SimulinkObject(
-  Index id, std::string name, std::string className)
+  IdType id, std::string name, std::string className)
   : id(id)
   , propName(name)
   , className(className)
@@ -25,7 +25,7 @@ SimulinkObject::SimulinkObject(
 }
 
 SimulinkObject::SimulinkObject(
-  Index id, std::string version, std::string name, std::string className)
+  IdType id, std::string version, std::string name, std::string className)
   : id(id)
   , version(version)
   , propName(name)
@@ -53,17 +53,17 @@ SimulinkObject::SimulinkObject(const SimulinkObject& other)
   this->parameters = other.parameters;
 }
 
-SimulinkElementType SimulinkObject::getType() const
+SimulinkElementType SimulinkObject::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Object);
 }
 
-Index SimulinkObject::getID() const
+IdType SimulinkObject::GetElementId() const
 {
   return id;
 }
 
-std::string SimulinkObject::toString() const
+std::string SimulinkObject::ToString() const
 {
 
   std::ostringstream oss;
@@ -79,7 +79,7 @@ std::string SimulinkObject::toString() const
   {
     if (obj)
     {
-      oss << "    - " << obj->toString() << "\n";
+      oss << "    - " << obj->ToString() << "\n";
     }
   }
 
@@ -88,7 +88,7 @@ std::string SimulinkObject::toString() const
   {
     if (arr)
     {
-      oss << "    - " << arr->toString() << "\n";
+      oss << "    - " << arr->ToString() << "\n";
     }
   }
 
@@ -97,7 +97,7 @@ std::string SimulinkObject::toString() const
   {
     if (param)
     {
-      oss << "    - " << param->toString() << "\n";
+      oss << "    - " << param->ToString() << "\n";
     }
   }
 
@@ -106,34 +106,34 @@ std::string SimulinkObject::toString() const
   return oss.str();
 }
 
-ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
-  if (element->getType().isA(SimulinkElementType::Array) ||
-    element->getType().isA(SimulinkElementType::Object))
+  if (element->GetElementType().isA(SimulinkElementType::Array) ||
+    element->GetElementType().isA(SimulinkElementType::Object))
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "Cannot remove a Simulink element of a different "
       "type than Array or Object from a SimulinkObject");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
-  if (element->getType().isA(SimulinkElementType::Parameter))
+  if (element->GetElementType().isA(SimulinkElementType::Parameter))
   {
 
     std::shared_ptr<SimulinkParameter> paramPtr =
       std::dynamic_pointer_cast<SimulinkParameter>(element);
     if (!paramPtr)
     {
-      l.log(Logger::V_ERROR,
+      //l.log(Logger::V_ERROR,
         "SimulinkObject: Failed to cast SimulinkElementBase to "
         "SimulinkParameter");
-      return ErrorCode::SLX_ETYPEMISMATCH;
+      return SLX_ETYPEMISMATCH;
     }
 
     for (const auto& param : parameters)
@@ -142,13 +142,13 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element)
       if (strcmp(param->getName(), paramPtr->getName()) == 0)
       {
         parameters.erase(
-          std::remove(parameters.begin(), parameters.end(), param),
+          std::RemoveElement(parameters.begin(), parameters.end(), param),
           parameters.end());
       }
     }
   }
 
-  if (element->getType().isA(SimulinkElementType::Object))
+  if (element->GetElementType().isA(SimulinkElementType::Object))
   {
 
     std::shared_ptr<SimulinkObject> objPtr =
@@ -156,15 +156,15 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element)
 
     for (const auto& obj : objects)
     {
-      if (element->getID() == obj->getID())
+      if (element->GetElementId() == obj->GetElementId())
       {
         objects.erase(
-          std::remove(objects.begin(), objects.end(), obj), objects.end());
+          std::RemoveElement(objects.begin(), objects.end(), obj), objects.end());
       }
     }
   }
 
-  if (element->getType().isA(SimulinkElementType::Array))
+  if (element->GetElementType().isA(SimulinkElementType::Array))
   {
 
     std::shared_ptr<SimulinkArray> arrayPtr =
@@ -176,51 +176,51 @@ ErrorCode SimulinkObject::remove(std::shared_ptr<SimulinkElementBase> element)
       if (arr->getName() == arrayPtr->getName())
       {
         arrays.erase(
-          std::remove(arrays.begin(), arrays.end(), arr), arrays.end());
+          std::RemoveElement(arrays.begin(), arrays.end(), arr), arrays.end());
       }
     }
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    l.log(
+    //l.log(
       Logger::V_ERROR, "SimulinkObject:: Cannot add a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
-  if (!(element->getType().isA(SimulinkElementType::Array) ||
-        element->getType().isA(SimulinkElementType::Object) ||
-        element->getType().isA(SimulinkElementType::Parameter)))
+  if (!(element->GetElementType().isA(SimulinkElementType::Array) ||
+        element->GetElementType().isA(SimulinkElementType::Object) ||
+        element->GetElementType().isA(SimulinkElementType::Parameter)))
   {
-    l.log(Logger::V_ERROR,
+    //l.log(Logger::V_ERROR,
       "SimulinkObject: cannot add a Simulink element of a different type than "
       "Array "
       "or "
       "Object or a Parameter to a SimulinkObject");
-    return ErrorCode::SLX_ETYPEMISMATCH;
+    return SLX_ETYPEMISMATCH;
   }
 
-  if (element->getType().isA(SimulinkElementType::Parameter))
+  if (element->GetElementType().isA(SimulinkElementType::Parameter))
   {
     std::shared_ptr<SimulinkParameter> paramPtr =
       std::dynamic_pointer_cast<SimulinkParameter>(element);
     if (!paramPtr)
     {
-      l.log(Logger::V_ERROR,
+      //l.log(Logger::V_ERROR,
         "SimulinkObject: failed to cast SimulinkElementBase to "
         "SimulinkParameter");
-      return ErrorCode::SLX_ECASTFAIL;
+      return SLX_ECASTFAIL;
     }
     parameters.push_back(paramPtr);
   }
 
-  if (element->getType().isA(SimulinkElementType::Object))
+  if (element->GetElementType().isA(SimulinkElementType::Object))
   {
 
     std::shared_ptr<SimulinkObject> objPtr =
@@ -229,17 +229,17 @@ ErrorCode SimulinkObject::add(std::shared_ptr<SimulinkElementBase> element)
     objects.push_back(objPtr);
   }
 
-  if (element->getType().isA(SimulinkElementType::Array))
+  if (element->GetElementType().isA(SimulinkElementType::Array))
   {
 
     std::shared_ptr<SimulinkArray> arrayPtr =
       std::dynamic_pointer_cast<SimulinkArray>(element);
     arrays.push_back(arrayPtr);
   }
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-bool SimulinkObject::contains(const Index& id) const
+bool SimulinkObject::Contains(const IdType& id) const
 {
 
   if (id == id)
@@ -253,7 +253,7 @@ bool SimulinkObject::contains(const Index& id) const
     {
       if (obj)
       {
-        if (obj->contains(id))
+        if (obj->Contains(id))
         {
           return 1;
         }
@@ -267,7 +267,7 @@ bool SimulinkObject::contains(const Index& id) const
     {
       if (arr)
       {
-        if (arr->contains(id))
+        if (arr->Contains(id))
         {
           return 1;
         }
@@ -313,7 +313,7 @@ std::shared_ptr<SimulinkParameter> SimulinkObject::getParameter(
       }
     }
   }
-  l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not found.");
+  //l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not found.");
   return std::make_shared<SimulinkParameter>();
 }
 

@@ -59,7 +59,7 @@ public:
 
   void addTarget(StateflowTarget target)
   {
-    // targets.add(target);
+    // targets.AddElement(target);
     // target.setParent(this);
   }
 
@@ -91,7 +91,7 @@ public:
    * removed from the model only after all {@link StateflowBlock}s
    * were removed.
    */
-  void remove()
+  void RemoveElement()
   {
     // CCSMPre.isTrue(charts.isEmpty(), "All charts must be removed
     // first (via "
@@ -101,7 +101,7 @@ public:
 
     // for (StateflowTarget target : new
     // ArrayList<StateflowTarget>(targets)) {
-    //   target.remove();
+    //   target.RemoveElement();
     // }
   }
 
@@ -116,7 +116,7 @@ public:
     // CCSMAssert.isTrue(charts.get(fqName) == chart, "Error in chart
     // storage.");
 
-    // charts.remove(fqName);
+    // charts.RemoveElement(fqName);
     chart.removeNodes();
     // chart.setStateflowBlock(null);
     // chart.setParent(null);
@@ -124,7 +124,7 @@ public:
 
   void removeTarget(StateflowTarget target)
   {
-    // targets.remove(target);
+    // targets.RemoveElement(target);
     // target.setParent(null);
   }
 

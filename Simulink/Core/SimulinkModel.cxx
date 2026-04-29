@@ -1,4 +1,7 @@
 #include "SimulinkModel.h"
+#include "SimulinkArray.h"
+#include "SimulinkPort.h"
+#include "SimulinkLine.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -25,17 +28,17 @@ SimulinkModel::SimulinkModel(const SimulinkModel& other)
   this->version = other.version;
 }
 
-SimulinkElementType SimulinkModel::getType() const
+SimulinkElementType SimulinkModel::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Model);
 }
 
-Index SimulinkModel::getID() const
+IdType SimulinkModel::GetElementId() const
 {
   return id;
 }
 
-std::string SimulinkModel::toString() const
+std::string SimulinkModel::ToString() const
 {
   return std::string();
 }
@@ -45,12 +48,12 @@ SimulinkBlock SimulinkModel::getBlock(uint32 blockIdx)
 
   for (const auto& blk : blocks)
   {
-    if (blk->getID() == blockIdx)
+    if (blk->GetElementId() == blockIdx)
     {
       return *blk;
     }
   }
-  // slog_warn("Block (Index) %d not found in model (Index) %s",
+  // slog_warn("Block (IdType) %d not found in model (IdType) %s",
   // blockIdx,
   //           id);
   return SimulinkBlock();
@@ -76,7 +79,7 @@ uint32 SimulinkModel::getVersion()
   return version;
 }
 
-bool SimulinkModel::contains(const Index& id) const
+bool SimulinkModel::Contains(const IdType& id) const
 {
   return false;
 }

@@ -25,7 +25,7 @@ protected:
   // std::string getName() { return
   // std::string(SimulinkConstant::PARAM_name); }
 
-  std::string toString() const override
+  std::string ToString() const override
   {
     // return getName() + " [" + getStateflowId() + "]";
   }

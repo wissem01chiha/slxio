@@ -5,26 +5,26 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode SimulinkArrayParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkArrayParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkArrayParser:: null node pointer received");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR, "SimulinkArrayParser:: null node pointer received");
+    return E_FUNC_PARAM_NULL_PTR;
   }
 
   if (data->name == nullptr)
   {
-    l.log(Logger::V_ERROR, "SimulinkArrayParser:: invalid xmlNodePtr received");
-    return ErrorCode::SLX_EINVAR;
+    //l.log(Logger::V_ERROR, "SimulinkArrayParser:: invalid xmlNodePtr received");
+    return E_WRNG_FUNC_PARAM;
   }
 
   dataObject = data;
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkArrayParser::parse()
+ReturnType SimulinkArrayParser::parse()
 {
 
   std::string name, dimension, type;
@@ -61,19 +61,19 @@ ErrorCode SimulinkArrayParser::parse()
 
       std::unique_ptr<SimulinkObjectParser> subObjParserPtr(
         new SimulinkObjectParser());
-      ErrorCode subInputStatus = subObjParserPtr->setInputData(nodePtr_);
-      if (subInputStatus != ErrorCode::E_OK)
+      ReturnType subInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
-      ErrorCode subObjParseStatus = subObjParserPtr->parse();
-      if (subObjParseStatus != ErrorCode::E_OK)
+      ReturnType subObjParseStatus = subObjParserPtr->parse();
+      if (subObjParseStatus != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkArrayParser :: fail to build subObject element");
         return subObjParseStatus;
       }
-      ptr->add(subObjParserPtr->getOutputData());
+      ptr->AddElement(subObjParserPtr->getOutputData());
     }
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
@@ -82,23 +82,23 @@ ErrorCode SimulinkArrayParser::parse()
 
       std::unique_ptr<SimulinkArrayParser> subArrParserPtr(
         new SimulinkArrayParser());
-      ErrorCode subInputStatus = subArrParserPtr->setInputData(nodePtr_);
-      if (subInputStatus != ErrorCode::E_OK)
+      ReturnType subInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
-      ErrorCode subArrParseStatus = subArrParserPtr->parse();
-      if (subArrParseStatus != ErrorCode::E_OK)
+      ReturnType subArrParseStatus = subArrParserPtr->parse();
+      if (subArrParseStatus != E_OK)
       {
-        l.log(Logger::V_ERROR,
+        //l.log(Logger::V_ERROR,
           "SimulinkArrayParser :: fail to build subArray element");
         return subArrParseStatus;
       }
-      ptr->add(subArrParserPtr->getOutputData());
+      ptr->AddElement(subArrParserPtr->getOutputData());
     }
   }
 
-  return ErrorCode::E_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

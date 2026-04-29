@@ -1,10 +1,11 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Timer_h__
-#define __Timer_h__
+#ifndef TIMER_H
+#define TIMER_H
 
 #include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -12,9 +13,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Timer
- * @brief  Abstract class for all Timers
+ * @brief Abstract class for all Timers
  */
-class Timer 
+class APIEXPORT Timer 
 {
 public:
   virtual ~Timer();
@@ -56,4 +57,4 @@ protected:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* __Timer_h__ */
+#endif /* TIMER_H */

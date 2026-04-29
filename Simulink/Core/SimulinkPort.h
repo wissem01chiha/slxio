@@ -28,33 +28,33 @@ public:
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
   SimulinkPortType getPortType();
-  SimulinkElementType getType() const override;
+  SimulinkElementType GetElementType() const override;
 
   /// @brief Get a string representation of this port.
-  std::string toString() const override;
+  std::string ToString() const override;
 
   /**
    * @brief Remove a line from this port.
    * @param element The element to remove (must be a SimulinkLine).
-   * @return ErrorCode indicating success or failure.
+   * @return ReturnType indicating success or failure.
    */
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * @brief Add a line to this port.
    *  @details Only SimulinkLine elements are supported for add/remove
    * operations.
    */
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get the ID of the linked block.
-  Index getID() const override;
+  IdType GetElementId() const override;
 
   /**
    *  @brief Compare the given ID with this port's ID.
    *  @note A port can only be connected to one and only one block.
    */
-  bool contains(const Index& id) const override;
+  bool Contains(const IdType& id) const override;
 
   /// @brief Get the parent block of this port.
   std::shared_ptr<SimulinkBlock> getBlock();
@@ -64,11 +64,11 @@ public:
 
   /// @brief Get a specific line by its ID.
   /// @note Each line should have a unique identifier.
-  std::shared_ptr<SimulinkLine> getLine(const Index& lineId);
+  std::shared_ptr<SimulinkLine> getLine(const IdType& lineId);
 
 private:
   Logger& l;
-  Index blockId;
+  IdType blockId;
   SimulinkPortType type;
   std::shared_ptr<SimulinkBlock> block;
   std::vector<std::shared_ptr<SimulinkLine>> lines;
