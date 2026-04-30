@@ -21,33 +21,33 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT Version final 
 {
 public:
-/**
- * 
- */
+  /**
+   * Returns the major version number of the library.
+   */
   static UInt32 GetMajorVersion();
 
   /**
-   * 
+   * Returns the minor version number of the library.
    */
   static UInt32 GetMinorVersion();
 
   /**
-   * 
+   * Returns the patch version number of the library.
    */
   static UInt32 GetPatchVersion();
 
   /**
-   * 
+   * Checks if the current major version is less than the given version.
    */
   bool IsMajorVersionLessThan(UInt32 version);
 
   /**
-   * 
+   * Checks if the current minor version is less than the given version.
    */
   bool IsMinorVersionLessThan(UInt32 version);
 
   /**
-   * 
+   * Returns the full version string in "major.minor.patch" format.
    */
   std::string GetVersionString();
 
@@ -59,4 +59,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* VERSION_H */
+#endif // VERSION_H 

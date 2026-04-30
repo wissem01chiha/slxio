@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef PlatformTypes_h
-#define PlatformTypes_h
+#ifndef PLATFORMTYPES_H
+#define PLATFORMTYPES_H
 
 #include "Config.h"
 #include <cstddef>
@@ -194,4 +194,4 @@ using IdType = int;
 /* Define an alias for error code return data types*/
 typedef UInt32 ReturnType;
 
-#endif /* PlatformTypes_h */
+#endif /* PLATFORMTYPES_H */

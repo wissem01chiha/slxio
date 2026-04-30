@@ -44,12 +44,13 @@ CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   Common::Core
-PRIVATE_DEPENDS
   Simulink::Core
   Simulink::Misc
   Simulink::Data
+PRIVATE_DEPENDS
 TEST_DEPENDS 
   ThirdParty::doctest
-TEST_OPTIONAL_DEPENDS
+  
+
  
 

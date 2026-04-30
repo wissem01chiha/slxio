@@ -27,5 +27,10 @@ bool Version::IsMinorVersionLessThan(UInt32 version)
   return SLXIO_VERSION_MINOR < version;
 }
 
+std::string Version::GetVersionString()
+{
+  return std::string();
+}
+
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

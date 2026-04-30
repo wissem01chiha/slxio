@@ -14,7 +14,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest")
 {
 
   SimulinkBlock* block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
-  CHECK(block->getBlockType().isA(SimulinkBlockType::Type::Constant));
+  CHECK(block->GetBlockType().isA(SimulinkBlockType::Type::Constant));
   CHECK(block->GetElementType().isA(SimulinkElementType::Type::Block));
 }
 

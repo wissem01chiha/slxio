@@ -28,19 +28,19 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-  DataStore
+  DataStoreMemory
 SOURCES
 HEADERS
-  DataStore.h
+  DataStoreMemory.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   Common::System
   Common::Core
-PRIVATE_DEPENDS
   Simulink::Core
   Simulink::Misc
+PRIVATE_DEPENDS
 TEST_DEPENDS 
   ThirdParty::doctest
-TEST_OPTIONAL_DEPENDS 
+ 
 

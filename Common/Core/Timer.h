@@ -26,22 +26,22 @@ public:
   virtual void Start() = 0;
 
   /**
-   *  
+   * Stops the timer and records the elapsed time.
    */
   virtual void Stop() = 0;
 
   /**
-   * 
+   * Resets the timer state and clears any recorded time.
    */
   virtual void Reset() = 0;
 
   /**
-   * 
+   * Checks whether the timer is currently running.
    */
   virtual bool IsRunning() const = 0;
 
   /**
-   * 
+   * Returns the precision or resolution of the timer in seconds.
    */
   virtual Float32 Precision() const = 0;
 

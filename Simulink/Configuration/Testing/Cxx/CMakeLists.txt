@@ -1,4 +1,4 @@
-add_test_sources (Simulink::Configuration 
+add_test_sources (SimulinkConfiguration 
   TestSimulinkConfigSet.cxx
   TestConfigSetManager.cxx
 )

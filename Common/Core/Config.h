@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef Config_h
-#define Config_h
+#ifndef CONFIG_H
+#define CONFIG_H
 
 #define HAVE_STDBOOL_H 1
 
@@ -96,4 +96,4 @@
 
 /* #undef USE_EXTERNAL_ZLIB */
 
-#endif /* Config_h */
+#endif // CONFIG_H 

@@ -79,6 +79,60 @@ WINDOWS_SOURCES
   src/src/win/winapi.c
   src/src/win/winsock.c
 UNIX_SOURCES
+  src/src/unix/aix-common.c
+  src/src/unix/aix.c
+  src/src/unix/async.c
+  src/src/unix/bsd-ifaddrs.c
+  src/src/unix/bsd-proctitle.c
+  src/src/unix/core.c
+  src/src/unix/cygwin.c
+  src/src/unix/darwin-proctitle.c
+  src/src/unix/darwin-stub.h
+  src/src/unix/darwin-syscalls.h
+  src/src/unix/darwin.c
+  src/src/unix/dl.c
+  src/src/unix/freebsd.c
+  src/src/unix/fs.c
+  src/src/unix/fsevents.c
+  src/src/unix/getaddrinfo.c
+  src/src/unix/getnameinfo.c
+  src/src/unix/haiku.c
+  src/src/unix/hurd.c
+  src/src/unix/ibmi.c
+  src/src/unix/internal.h
+  src/src/unix/kqueue.c
+  src/src/unix/linux.c
+  src/src/unix/loop-watcher.c
+  src/src/unix/loop.c
+  src/src/unix/netbsd.c
+  src/src/unix/no-fsevents.c
+  src/src/unix/no-proctitle.c
+  src/src/unix/openbsd.c
+  src/src/unix/os390-proctitle.c
+  src/src/unix/os390-syscalls.c
+  src/src/unix/os390-syscalls.h
+  src/src/unix/os390.c
+  src/src/unix/pipe.c
+  src/src/unix/poll.c
+  src/src/unix/posix-hrtime.c
+  src/src/unix/posix-poll.c
+  src/src/unix/process.c
+  src/src/unix/procfs-exepath.c
+  src/src/unix/proctitle.c
+  src/src/unix/qnx.c
+  src/src/unix/random-devurandom.c
+  src/src/unix/random-getentropy.c
+  src/src/unix/random-getrandom.c
+  src/src/unix/random-sysctl-linux.c
+  src/src/unix/signal.c
+  src/src/unix/stream.c
+  src/src/unix/sunos.c
+  src/src/unix/sysinfo-loadavg.c
+  src/src/unix/sysinfo-memory.c
+  src/src/unix/tcp.c
+  src/src/unix/thread.c
+  src/src/unix/tty.c
+  src/src/unix/udp.c
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
@@ -100,5 +154,5 @@ UNIX_COMPILE_FLAGS
 MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
 TEST_DEPENDS 
-TEST_OPTIONAL_DEPENDS 
+ 
 

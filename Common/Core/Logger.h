@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef Logger_h
-#define Logger_h
+#ifndef LOGGER_H
+#define LOGGER_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
@@ -56,13 +56,14 @@ public:
   };
 
   /**
-   * Information about Applications/User  classes/functions
+   * Data structure for external applications that 
+   * log information using the API.
    */
   typedef struct
   {
     UInt32 appId;
-    char appDescription[32];
-  } ApplicationIdInfoType;
+    char appDescription[1024];
+  } ApplicationInfoType;
 
   /**
    * Container data struct about a logging message
@@ -71,7 +72,7 @@ public:
   {
     MessageType type;
     MessageLevelType logLevel;
-    ApplicationIdInfoType appId;
+    ApplicationInfoType appId;
     UInt8 argCount;
   } MessageInfoType;
 
@@ -88,19 +89,18 @@ public:
 
   /**
    * Main logging routine call with a MessageInfoType metadata struct and
-   * a list of message strings. Each entry in logData represents one argument
-   * or message fragment (e.g., a plain text message, a numeric value converted
-   * to string, or a key/value pair).
-   * if no MessageLevelType is specified in logInfo, Logger will use its
-   * internal level until explicitly set with SetInternalMessageLogLevelType.
+   * a list of message strings, each entry in logData represents one argument
+   * or message fragment, if no MessageLevelType is specified in logInfo,
+   * Logger will use its internal level until explicitly set with 
+   * SetInternalMessageLogLevelType.
    */
   ReturnType SendMessage(
     const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /**
    * Print all logging messages to stdio.
-   * currently it prints all messages without filtring, this will be enhnaced
-   * future version of the librray 
+   * Currently, it prints all messages without filtering; this will be enhanced
+   * in a future version of the library.
    */
   void Print();
   
@@ -175,4 +175,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* Logger_h*/
+#endif // LOGGER_H

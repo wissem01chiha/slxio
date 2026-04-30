@@ -20,24 +20,24 @@ include(ModuleDebugging)
     add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 
 #]==]
-function (add_submodules directory)
-  find_modules (_submodules_directory_list ${directory})
-  scan_submodules (_sorted_list "${_submodules_directory_list}")
+function(add_submodules directory)
+  find_modules(_submodules_directory_list ${directory})
+  scan_submodules(_sorted_list "${_submodules_directory_list}")
 
   # this cache variable will hold the mapping between the module
   # qualified name 'eg Common::Core' and the buildbale library name defined
   # in the module file, typically, we used the follwing rule for library name:
-  # <namespace><module_name>, but in genral those can be different and the later 
+  # <namespace><module_name>, but in general those can be different and the later 
   # is random defined by the user
   set(module_map "" CACHE INTERNAL "Global module name-target mapping")
 
-  foreach (_submodule_directory IN LISTS _sorted_list)
+  foreach(_submodule_directory IN LISTS _sorted_list)
     if(SLXIO_MODULE_DEBUG)
-      message (STATUS "[add_submodules] Adding Module ${_submodule_directory} ...")
+      message(STATUS "[add_submodules] Adding Module ${_submodule_directory} ...")
     endif()
-    add_subdirectory (${_submodule_directory})
-  endforeach ()
-endfunction ()
+    add_subdirectory(${_submodule_directory})
+  endforeach()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: find_modules(<output> [<directory>...])
@@ -49,17 +49,17 @@ endfunction ()
 
     find_modules(_module_dirs ${CMAKE_CURRENT_SOURCE_DIR})
 #]==]
-function (find_modules output)
+function(find_modules output)
   set(_modules_all)
-  foreach (_find_modules_directory IN LISTS ARGN)
-    file (GLOB_RECURSE _found_modules "${_find_modules_directory}/slxio.module")
-    foreach (_module_file IN LISTS _found_modules)
-      get_filename_component (_module_directory "${_module_file}" DIRECTORY)
-      list (APPEND _modules_all ${_module_directory})
-    endforeach ()
-  endforeach ()
-  set (${output} ${_modules_all} PARENT_SCOPE)
-endfunction ()
+  foreach(_find_modules_directory IN LISTS ARGN)
+    file(GLOB_RECURSE _found_modules "${_find_modules_directory}/slxio.module")
+    foreach(_module_file IN LISTS _found_modules)
+      get_filename_component(_module_directory "${_module_file}" DIRECTORY)
+      list(APPEND _modules_all ${_module_directory})
+    endforeach()
+  endforeach()
+  set(${output} ${_modules_all} PARENT_SCOPE)
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: scan_submodules(<directory_list>)
@@ -71,83 +71,83 @@ endfunction ()
 
     scan_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 #]==]
-function (scan_submodules _sorted_list _modules_dir_list)
+function(scan_submodules _sorted_list _modules_dir_list)
 
-  set (_tmp_sorted)
-  set (_buffer ${_modules_dir_list})
+  set(_tmp_sorted)
+  set(_buffer ${_modules_dir_list})
 
-  foreach (_mod_dir IN LISTS _buffer)
+  foreach(_mod_dir IN LISTS _buffer)
 
     scan_module_file(_module "${_mod_dir}/slxio.module")
-    set (_module_id "${_module_group}_${_module_name}")
+    set(_module_id "${_module_group}_${_module_name}")
 
     get_submodule_dependency(_module _deps_raw)
 
-    set (_deps_ids "")
+    set(_deps_ids "")
     if(SLXIO_MODULE_DEBUG)
       message(STATUS "[scan_submodules] Scanning module dependencies: ${_deps_raw}")
     endif()
-    foreach (_d IN LISTS _deps_raw)
+    foreach(_d IN LISTS _deps_raw)
         string(REPLACE "::" ";" _parts "${_d}")
         list(GET _parts 0 _dep_group)
         list(GET _parts 1 _dep_name)
         set(_dep_id "${_dep_group}_${_dep_name}")
         list(APPEND _deps_ids "${_dep_id}")
-    endforeach ()
+    endforeach()
 
-    set (_dir_to_id_${_mod_dir} "${_module_id}")
-    set (_deps_map_${_module_id} "${_deps_ids}")
+    set(_dir_to_id_${_mod_dir} "${_module_id}")
+    set(_deps_map_${_module_id} "${_deps_ids}")
 
-  endforeach ()
+  endforeach()
 
-  set (_queue)
-  foreach (_mod_dir IN LISTS _buffer)
-    set (_module_id "${_dir_to_id_${_mod_dir}}")
-    if ("${_deps_map_${_module_id}}" STREQUAL "")
-      list (APPEND _queue "${_mod_dir}")
-    endif ()
-  endforeach ()
+  set(_queue)
+  foreach(_mod_dir IN LISTS _buffer)
+    set(_module_id "${_dir_to_id_${_mod_dir}}")
+    if("${_deps_map_${_module_id}}" STREQUAL "")
+      list(APPEND _queue "${_mod_dir}")
+    endif()
+  endforeach()
 
-  while (_queue)
+  while(_queue)
 
-    list (GET _queue 0 _mod_dir)
-    list (REMOVE_AT _queue 0)
+    list(GET _queue 0 _mod_dir)
+    list(REMOVE_AT _queue 0)
 
-    set (_module_id "${_dir_to_id_${_mod_dir}}")
+    set(_module_id "${_dir_to_id_${_mod_dir}}")
 
-    list (APPEND _tmp_sorted "${_mod_dir}")
-    list (REMOVE_ITEM _buffer "${_mod_dir}")
+    list(APPEND _tmp_sorted "${_mod_dir}")
+    list(REMOVE_ITEM _buffer "${_mod_dir}")
 
-    foreach (_other_dir IN LISTS _buffer)
-      set (_other_id "${_dir_to_id_${_other_dir}}")
-      set (_other_deps "${_deps_map_${_other_id}}")
+    foreach(_other_dir IN LISTS _buffer)
+      set(_other_id "${_dir_to_id_${_other_dir}}")
+      set(_other_deps "${_deps_map_${_other_id}}")
 
-      list (REMOVE_ITEM _other_deps "${_module_id}")
-      set (_deps_map_${_other_id} "${_other_deps}")
+      list(REMOVE_ITEM _other_deps "${_module_id}")
+      set(_deps_map_${_other_id} "${_other_deps}")
 
-      if ("${_other_deps}" STREQUAL "")
-        list (FIND _queue "${_other_dir}" _inq)
-        if (_inq EQUAL -1)
-          list (APPEND _queue "${_other_dir}")
-        endif ()
-      endif ()
+      if("${_other_deps}" STREQUAL "")
+        list(FIND _queue "${_other_dir}" _inq)
+        if(_inq EQUAL -1)
+          list(APPEND _queue "${_other_dir}")
+        endif()
+      endif()
 
-    endforeach ()
-  endwhile ()
+    endforeach()
+  endwhile()
   
   # unresolved modules
-  if (_buffer)
-    foreach (_mod_dir IN LISTS _buffer)
-      set (_module_id "${_dir_to_id_${_mod_dir}}")
-      message (STATUS "[scan_submodules] Module ${_module_id} 
+  if(_buffer)
+    foreach(_mod_dir IN LISTS _buffer)
+      set(_module_id "${_dir_to_id_${_mod_dir}}")
+      message(STATUS "[scan_submodules] Module ${_module_id} 
         still depends on : ${_deps_map_${_module_id}}")
-    endforeach ()
-    message (FATAL_ERROR "[scan_submodules] Cyclic or unresolved 
+    endforeach()
+    message(FATAL_ERROR "[scan_submodules] Cyclic or unresolved 
     module dependencies.")
-  endif ()
+  endif()
 
-  set (${_sorted_list} ${_tmp_sorted} PARENT_SCOPE)
-endfunction ()
+  set(${_sorted_list} ${_tmp_sorted} PARENT_SCOPE)
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: get_submodule_dependency(<module_prefix> <list>)
@@ -160,18 +160,18 @@ endfunction ()
 
     get_submodule_dependency(_module dependency_list)
 #]==]
-function (get_submodule_dependency module_prefix dep_list)
+function(get_submodule_dependency module_prefix dep_list)
 
-  set (_deps "")
-  if (NOT "${${module_prefix}_public_depends}" STREQUAL "")
-    list (APPEND _deps ${${module_prefix}_public_depends})
-  endif ()
-  if (NOT "${${module_prefix}_private_depends}" STREQUAL "")
-    list (APPEND _deps ${${module_prefix}_private_depends})
-  endif ()
-  set (${dep_list} ${_deps} PARENT_SCOPE)
+  set(_deps "")
+  if(NOT "${${module_prefix}_public_depends}" STREQUAL "")
+    list(APPEND _deps ${${module_prefix}_public_depends})
+  endif()
+  if(NOT "${${module_prefix}_private_depends}" STREQUAL "")
+    list(APPEND _deps ${${module_prefix}_private_depends})
+  endif()
+  set(${dep_list} ${_deps} PARENT_SCOPE)
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: add_module(<module_name>)
@@ -187,27 +187,27 @@ endfunction ()
     add_module(Common::Core)
 
 #]==]
-function (add_module module_name)
+function(add_module module_name)
 
-  scan_module_file (_module)
+  scan_module_file(_module)
   
-  if (${_module_enable_build} STREQUAL "FALSE")
+  if(${_module_enable_build} STREQUAL "FALSE")
   if(SLXIO_MODULE_DEBUG)
     message(STATUS "[add_module] module ${module_name} build is disabled.")
   endif()
-    return ()
-  endif ()
+    return()
+  endif()
 
-  configure_module ("${_module_config_headers}" 
+  configure_module("${_module_config_headers}" 
     "${CMAKE_CURRENT_SOURCE_DIR}")
   
-  add_library (${_module_library_name})
+  add_library(${_module_library_name})
   if(SLXIO_BUILD_SHARED)
-    set_target_properties (${_module_library_name} PROPERTIES
+    set_target_properties(${_module_library_name} PROPERTIES
       WINDOWS_EXPORT_ALL_SYMBOLS ON)
   endif()
-  module_sources (_module ${_module_library_name})
-  add_module_dependencies (_module ${_module_library_name})
+  module_sources(_module ${_module_library_name})
+  add_module_dependencies(_module ${_module_library_name})
 
   # module include directories
   target_include_directories(${_module_library_name} PUBLIC
@@ -225,15 +225,15 @@ function (add_module module_name)
    CACHE INTERNAL "Global module name-target mapping")
 
   module_include_directories(_module ${_module_library_name})
-  module_link_libraries (_module ${_module_library_name})
-  module_add_compile_defintions (_module ${_module_library_name})
+  module_link_libraries(_module ${_module_library_name})
+  module_add_compile_defintions(_module ${_module_library_name})
 
   # test targets
   if(${_module_enable_test} STREQUAL "TRUE")
-    add_subdirectory (${CMAKE_CURRENT_SOURCE_DIR}/Testing/Cxx)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Testing/Cxx)
   endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: configure_module([<input>...] <directory>)
@@ -247,25 +247,25 @@ endfunction ()
       ${CMAKE_CURRENT_SOURCE_DIR}
     )
 #]==]
-function (configure_module input directory)
-  if (NOT input)
+function(configure_module input directory)
+  if(NOT input)
   if(SLXIO_MODULE_DEBUG)
     message(STATUS "[configure_module] No input files provided, skipping.")
   endif()
     return()
   endif()
-  foreach (infile IN LISTS input)
-    get_filename_component (filename "${infile}" NAME_WE)
-    set (outfile "${directory}/${filename}.h")
-    configure_file ("${infile}" "${outfile}")
-  endforeach ()
-endfunction ()
+  foreach(infile IN LISTS input)
+    get_filename_component(filename "${infile}" NAME_WE)
+    set(outfile "${directory}/${filename}.h")
+    configure_file("${infile}" "${outfile}")
+  endforeach()
+endfunction()
 
 #[==[.rst:
   .. cmake:function:: module_sources(<module_prefix> <module_target_name>)
 
     A wrapper around ``target_sources`` that works for modules.
-    This function adds source files (classes, sources, and platform
+    This function adds source files(classes, sources, and platform
      specific sources) to the module target.
     Note: this function shoule be called after the module target 
     created and module properties are propulated in the parent 
@@ -275,51 +275,51 @@ endfunction ()
 
       module_sources(_module CommonCore)
 #]==]
-function (module_sources module_prefix module_target_name)
-    set (srcs "")
-    if (NOT "${${module_prefix}_classes}" STREQUAL "")
-      foreach (class IN LISTS ${module_prefix}_classes)
-        list (APPEND srcs "${class}.cxx")
-      endforeach ()
-    endif ()
-    if (NOT "${${module_prefix}_sources}" STREQUAL "")
-      foreach (source IN LISTS ${module_prefix}_sources)
-        list (APPEND srcs "${source}")
-      endforeach ()
-    endif ()
+function(module_sources module_prefix module_target_name)
+    set(srcs "")
+    if(NOT "${${module_prefix}_classes}" STREQUAL "")
+      foreach(class IN LISTS ${module_prefix}_classes)
+        list(APPEND srcs "${class}.cxx")
+      endforeach()
+    endif()
+    if(NOT "${${module_prefix}_sources}" STREQUAL "")
+      foreach(source IN LISTS ${module_prefix}_sources)
+        list(APPEND srcs "${source}")
+      endforeach()
+    endif()
 
     # add platform specific sources
-    if (WIN32 AND DEFINED ${module_prefix}_windows_sources 
+    if(WIN32 AND DEFINED ${module_prefix}_windows_sources 
     AND NOT "${${module_prefix}_windows_sources}" STREQUAL "")
-      foreach (win_src IN LISTS ${module_prefix}_windows_sources)
-        list (APPEND srcs "${win_src}")
-      endforeach ()
-    endif ()
+      foreach(win_src IN LISTS ${module_prefix}_windows_sources)
+        list(APPEND srcs "${win_src}")
+      endforeach()
+    endif()
 
-    if (UNIX AND DEFINED ${module_prefix}_unix_sources 
+    if(UNIX AND DEFINED ${module_prefix}_unix_sources 
     AND NOT "${${module_prefix}_unix_sources}" STREQUAL "")
-      foreach (unix_src IN LISTS ${module_prefix}_unix_sources)
-        list (APPEND srcs "${unix_src}")
-      endforeach ()
-    endif ()
+      foreach(unix_src IN LISTS ${module_prefix}_unix_sources)
+        list(APPEND srcs "${unix_src}")
+      endforeach()
+    endif()
 
     if(ANDROID AND DEFINED ${module_prefix}_android_sources
     AND NOT "${${module_prefix}_android_sources}" STREQUAL "")
-      foreach (android_src IN LISTS ${module_prefix}_android_sources)
-        list (APPEND srcs "${android_src}")
-      endforeach ()
-    endif ()
+      foreach(android_src IN LISTS ${module_prefix}_android_sources)
+        list(APPEND srcs "${android_src}")
+      endforeach()
+    endif()
 
     if(WASM AND DEFINED ${module_prefix}_wasm_sources
       AND NOT "${${module_prefix}_wasm_sources}" STREQUAL "")
-      foreach (wasm_src IN LISTS ${module_prefix}_wasm_sources)
-        list (APPEND srcs "${wasm_src}")
-      endforeach ()
-    endif ()
+      foreach(wasm_src IN LISTS ${module_prefix}_wasm_sources)
+        list(APPEND srcs "${wasm_src}")
+      endforeach()
+    endif()
 
-    target_sources (${module_target_name} PRIVATE ${srcs})
+    target_sources(${module_target_name} PRIVATE ${srcs})
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
   .. cmake:function:: add_module_dependencies(<module_prefix> 
@@ -334,27 +334,27 @@ endfunction ()
 
       add_module_dependencies(_module CommonCore)
 #]==]
-function (add_module_dependencies module_prefix module_target_name)
+function(add_module_dependencies module_prefix module_target_name)
 
-  set (dep_targets "")
-  foreach (dep IN LISTS ${module_prefix}_public_depends 
+  set(dep_targets "")
+  foreach(dep IN LISTS ${module_prefix}_public_depends 
     ${module_prefix}_private_depends)
     # for each dependency, get its target name in module file
-    module_target_name (${dep} dep_tmp)
-    list (APPEND dep_targets ${dep_tmp})
-  endforeach ()
+    module_target_name(${dep} dep_tmp)
+    list(APPEND dep_targets ${dep_tmp})
+  endforeach()
 
-  if (dep_targets)
-    add_dependencies (${module_target_name} ${dep_targets})
-  endif ()
+  if(dep_targets)
+    add_dependencies(${module_target_name} ${dep_targets})
+  endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
   .. cmake:function:: module_target_name(<module_id> <prefix>)
 
    This function retuns the module target name specified in the 
-   module declaration file as LIBRARY_NAME, used for fectching 
+   module declaration file as LIBRARY_NAME, used for fetching 
    the target name for the module dependencies, and also to set
    the target name for the current module.
 
@@ -364,9 +364,9 @@ endfunction ()
    Sets:
       library_name = "CommonCore"
 #]==]
-function (module_target_name module_name library_name)
+function(module_target_name module_name library_name)
   
-  split_module_name (${module_name} temp)
+  split_module_name(${module_name} temp)
   # build the full path to the module slxio.module file
   # a Woraround for IO modules, in slxio.module files, the _depend section are 
   # listed as Io:Core, to not break the parsing logic in scan_module_file function, 
@@ -377,10 +377,10 @@ function (module_target_name module_name library_name)
   set(module_file 
     "${PROJECT_SOURCE_DIR}/${temp_NAMESPACE}/${temp_MODULE_NAME}/slxio.module")
   # scan the module file 
-  scan_module_file (tmp "${module_file}")
+  scan_module_file(tmp "${module_file}")
   set(${library_name} "${tmp_LIBRARY_NAME}")
   set(${library_name} "${tmp_LIBRARY_NAME}" PARENT_SCOPE)
-endfunction ()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: split_module_name(<name> <prefix>)
@@ -392,19 +392,19 @@ endfunction ()
    - <prefix>_MODULE_NAME
 
 #]==]
-function (split_module_name name prefix)
-  string (FIND "${name}" "::" namespace_pos)
-  if (namespace_pos EQUAL -1)
-    set (namespace "")
-    set (module_name "${name}")
-  else ()
-    string (SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
-    math (EXPR name_pos "${namespace_pos} + 2")
-    string (SUBSTRING "${name}" "${name_pos}" -1 module_name)
-  endif ()
-  set ("${prefix}_NAMESPACE" "${namespace}" PARENT_SCOPE)
-  set ("${prefix}_MODULE_NAME" "${module_name}" PARENT_SCOPE)
-endfunction ()
+function(split_module_name name prefix)
+  string(FIND "${name}" "::" namespace_pos)
+  if(namespace_pos EQUAL -1)
+    set(namespace "")
+    set(module_name "${name}")
+  else()
+    string(SUBSTRING "${name}" 0 "${namespace_pos}" namespace)
+    math(EXPR name_pos "${namespace_pos} + 2")
+    string(SUBSTRING "${name}" "${name_pos}" -1 module_name)
+  endif()
+  set("${prefix}_NAMESPACE" "${namespace}" PARENT_SCOPE)
+  set("${prefix}_MODULE_NAME" "${module_name}" PARENT_SCOPE)
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_include_directories(<prefix> <target_name>)
@@ -424,11 +424,11 @@ endfunction ()
     module_include_directories(_module CommonCore)
 
 #]==]
-function (module_include_directories module_prefix module_target_name)
+function(module_include_directories module_prefix module_target_name)
 
-if (DEFINED ${module_prefix}_public_depends 
+if(DEFINED ${module_prefix}_public_depends 
   AND NOT "${${module_prefix}_public_depends}" STREQUAL "")
-  foreach (dep IN LISTS ${module_prefix}_public_depends)
+  foreach(dep IN LISTS ${module_prefix}_public_depends)
 
     foreach(entry IN LISTS module_map)
       string(FIND "${entry}" "=" pos)
@@ -436,18 +436,20 @@ if (DEFINED ${module_prefix}_public_depends
       math(EXPR val_pos "${pos}+1")
       string(SUBSTRING "${entry}" ${val_pos} -1 value)
       if(key STREQUAL "${dep}")
-        get_target_property(public_include_directories ${value} module_include_directories)
-        target_include_directories(${module_target_name} PUBLIC "${public_include_directories}")
+        get_target_property(public_include_directories 
+        ${value} module_include_directories)
+        target_include_directories(${module_target_name} 
+        PUBLIC "${public_include_directories}")
         break()
       endif()
     endforeach()
-  endforeach ()
+  endforeach()
 
-endif ()
+endif()
 
-if (DEFINED ${module_prefix}_private_depends 
+if(DEFINED ${module_prefix}_private_depends 
   AND NOT "${${module_prefix}_private_depends}" STREQUAL "")
-  foreach (dep IN LISTS ${module_prefix}_private_depends)
+  foreach(dep IN LISTS ${module_prefix}_private_depends)
 
     foreach(entry IN LISTS module_map)
       string(FIND "${entry}" "=" pos)
@@ -455,16 +457,18 @@ if (DEFINED ${module_prefix}_private_depends
       math(EXPR val_pos "${pos}+1")
       string(SUBSTRING "${entry}" ${val_pos} -1 value)
       if(key STREQUAL "${dep}")
-        get_target_property(private_include_directories ${value} module_include_directories)
-        target_include_directories(${module_target_name} PRIVATE "${private_include_directories}")
+        get_target_property(private_include_directories 
+        ${value} module_include_directories)
+        target_include_directories(${module_target_name} 
+        PRIVATE "${private_include_directories}")
         break()
       endif()
     endforeach()
-  endforeach ()
+  endforeach()
 
-endif ()
+endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_link_libraries(<prefix> <target_name>)
@@ -475,29 +479,10 @@ endfunction ()
 
     module_link_libraries(_module Common::Core)
 #]==]
-function (module_link_libraries module_prefix module_target_name)
+function(module_link_libraries module_prefix module_target_name)
 
-  if (DEFINED ${module_prefix}_public_depends)
-    foreach (dep IN LISTS ${module_prefix}_public_depends)
-
-      foreach(entry IN LISTS module_map)
-        string(FIND "${entry}" "=" pos)
-        string(SUBSTRING "${entry}" 0 ${pos} key)
-        math(EXPR val_pos "${pos}+1")
-        string(SUBSTRING "${entry}" ${val_pos} -1 value)
-        if(key STREQUAL "${dep}")
-          target_link_libraries (${module_target_name} PUBLIC ${value})
-          break()
-        endif()
-      endforeach()
-
-    endforeach ()
-  else ()
-    message (FATAL_ERROR "module_public_depends not defined")
-  endif ()
-
-  if (DEFINED ${module_prefix}_private_depends)
-    foreach (dep IN LISTS ${module_prefix}_private_depends)
+  if(DEFINED ${module_prefix}_public_depends)
+    foreach(dep IN LISTS ${module_prefix}_public_depends)
 
       foreach(entry IN LISTS module_map)
         string(FIND "${entry}" "=" pos)
@@ -505,50 +490,69 @@ function (module_link_libraries module_prefix module_target_name)
         math(EXPR val_pos "${pos}+1")
         string(SUBSTRING "${entry}" ${val_pos} -1 value)
         if(key STREQUAL "${dep}")
-          target_link_libraries (${module_target_name} PRIVATE ${value})
+          target_link_libraries(${module_target_name} PUBLIC ${value})
           break()
         endif()
       endforeach()
 
-    endforeach ()
-  else ()
-    message (FATAL_ERROR "module_private_depends not defined")
-  endif ()
+    endforeach()
+  else()
+    message(FATAL_ERROR "[module_link_libraries] : module_public_depends not defined")
+  endif()
+
+  if(DEFINED ${module_prefix}_private_depends)
+    foreach(dep IN LISTS ${module_prefix}_private_depends)
+
+      foreach(entry IN LISTS module_map)
+        string(FIND "${entry}" "=" pos)
+        string(SUBSTRING "${entry}" 0 ${pos} key)
+        math(EXPR val_pos "${pos}+1")
+        string(SUBSTRING "${entry}" ${val_pos} -1 value)
+        if(key STREQUAL "${dep}")
+          target_link_libraries(${module_target_name} PRIVATE ${value})
+          break()
+        endif()
+      endforeach()
+
+    endforeach()
+  else()
+    message(FATAL_ERROR "[module_link_libraries] : module_private_depends not defined")
+  endif()
 
   # Add system wise libraries if declared for each platform
-  if (WIN32)
-    if (DEFINED ${module_prefix}_windows_depends)
-      foreach (sysdep IN LISTS ${module_prefix}_windows_depends)
-        target_link_libraries (${module_target_name} PRIVATE ${sysdep})
-      endforeach ()
-    endif ()
-  endif ()
+  if(WIN32)
+    if(DEFINED ${module_prefix}_windows_depends)
+      foreach(sysdep IN LISTS ${module_prefix}_windows_depends)
+        target_link_libraries(${module_target_name} PRIVATE ${sysdep})
+      endforeach()
+    endif()
+  endif()
 
   if(UNIX)
-    if (DEFINED ${module_prefix}_unix_depends)
-      foreach (sysdep IN LISTS ${module_prefix}_unix_depends)
-        target_link_libraries (${module_target_name} PRIVATE ${sysdep})
-      endforeach ()
-    endif ()
+    if(DEFINED ${module_prefix}_unix_depends)
+      foreach(sysdep IN LISTS ${module_prefix}_unix_depends)
+        target_link_libraries(${module_target_name} PRIVATE ${sysdep})
+      endforeach()
+    endif()
   endif()
 
   if(ANDROID)
-    if (DEFINED ${module_prefix}_android_depends)
-      foreach (sysdep IN LISTS ${module_prefix}_android_depends)
-        target_link_libraries (${module_target_name} PRIVATE ${sysdep})
-      endforeach ()
+    if(DEFINED ${module_prefix}_android_depends)
+      foreach(sysdep IN LISTS ${module_prefix}_android_depends)
+        target_link_libraries(${module_target_name} PRIVATE ${sysdep})
+      endforeach()
     endif()
   endif()
 
   if(WASM)
-    if (DEFINED ${module_prefix}_wasm_depends)
-      foreach (sysdep IN LISTS ${module_prefix}_wasm_depends)
-        target_link_libraries (${module_target_name} PRIVATE ${sysdep})
-      endforeach ()
+    if(DEFINED ${module_prefix}_wasm_depends)
+      foreach(sysdep IN LISTS ${module_prefix}_wasm_depends)
+        target_link_libraries(${module_target_name} PRIVATE ${sysdep})
+      endforeach()
     endif()
   endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
 .. cmake:function:: module_add_compile_defintions(<prefix> <target_name>)
@@ -559,43 +563,45 @@ endfunction ()
 
     module_add_compile_defintions(_module Common::Core)
 #]==]
-function (module_add_compile_defintions module_prefix module_target_name)
-  if (DEFINED ${module_prefix}_compile_flags)
-    target_compile_definitions (${module_target_name} PUBLIC ${${module_prefix}_compile_flags})
-  endif ()
+function(module_add_compile_defintions module_prefix module_target_name)
+  if(DEFINED ${module_prefix}_compile_flags)
+    target_compile_definitions(${module_target_name} 
+    PUBLIC ${${module_prefix}_compile_flags})
+  endif()
 
   # add system wise compile flags if declared for each platform
-  if (WIN32)
-    if (DEFINED ${module_prefix}_windows_compile_flags)
-      target_compile_definitions (${module_target_name} PRIVATE ${${module_prefix}_windows_compile_flags})
-    endif ()
+  if(WIN32)
+    if(DEFINED ${module_prefix}_windows_compile_flags)
+      target_compile_definitions(${module_target_name} 
+      PRIVATE ${${module_prefix}_windows_compile_flags})
+    endif()
   endif()
 
   if(UNIX)
-    if (DEFINED ${module_prefix}_unix_compile_flags)
-      target_compile_definitions (${module_target_name} PRIVATE ${${module_prefix}_unix_compile_flags})
-    endif ()
+    if(DEFINED ${module_prefix}_unix_compile_flags)
+      target_compile_definitions(${module_target_name} 
+      PRIVATE ${${module_prefix}_unix_compile_flags})
+    endif()
   endif()
 
   if(ANDROID)
-    if (DEFINED ${module_prefix}_android_compile_flags)
-      target_compile_definitions (${module_target_name} PRIVATE ${${module_prefix}_android_compile_flags})
-    endif ()
+    if(DEFINED ${module_prefix}_android_compile_flags)
+      target_compile_definitions(${module_target_name} 
+      PRIVATE ${${module_prefix}_android_compile_flags})
+    endif()
   endif()
 
   if(WASM)
-    if (DEFINED ${module_prefix}_wasm_compile_flags)
-      target_compile_definitions (${module_target_name} PRIVATE ${${module_prefix}_wasm_compile_flags})
-    endif ()
+    if(DEFINED ${module_prefix}_wasm_compile_flags)
+      target_compile_definitions(${module_target_name} 
+        PRIVATE ${${module_prefix}_wasm_compile_flags})
+    endif()
   endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
   .. cmake:function:: scan_module_file(<prefix> <file_path>)
-
-  slxio.module file contents
-  =========================
 
   The slxio.module is parsed and used as input to the CMake build system
   Uppercase keys are used to define various properties of the module.
@@ -603,387 +609,170 @@ endfunction ()
   Uppercase values are not allowed as they will be considered as keys
   This function sets pattern for module metadata in parent scope as
     <prefix>_<key>
-  Note: if <file_path> not given, the default is the value of the variable
+  NOTE:
+   if <file_path> not given, the default is the value of the variable
     ${CMAKE_CURRENT_SOURCE_DIR}/slxio.module
 
     .. code-block:: cmake
         scan_module_file(_module)
 
-      # Sets
+      Sets
         _module_name
         _mdoule_version
         ....
-
-  Template of `slxio.module` file:
-
-  .. code-block:: text
-    NAME
-      <module_name>
-    GROUP
-      <namespace>
-    LIBRARY_NAME
-      CommonCore
-    SPDX_LICENSE_IDENTIFIER
-      <SPDX license identifier>
-    SPDX_COPYRIGHT_TEXT
-      <SPDX copyright text>
-    SPDX_CUSTOM_LICENSE_FILE
-    SPDX_CUSTOM_LICENSE_NAME
-    LICENSE_FILES
-    DESCRIPTION  
-      <module description>
-    VERSION 
-      <module version> 
-    MAINTAINER 
-      <module maintainer>
-    ENABLE_BUILD 
-      TRUE/FALSE
-    ENABLE_SOURCE_TARGETS
-      FALSE/TRUE
-    INCLUDE_IN_GROUP
-      TRUE/FALSE
-    ENABLE_TEST
-      TRUE/FALSE
-    ENABLE_COVERAGE
-      TRUE/FALSE
-    INSTALL_HEADERS 
-      TRUE/FALSE 
-    INSTALL_TARGETS 
-      TRUE/FALSE
-    INSTALL_LICENSES
-      TRUE/FALSE
-    CLASSES
-      <class_name>
-    WINDOWS_CLASSES
-    UNIX_CLASSES
-    MACOS_CLASSES
-    SOURCES
-    WINDOWS_SOURCES
-    UNIX_SOURCES
-    ANDROID_SOURCES
-    WASM_SOURCES
-    HEADERS
-      <header_name>
-    WINDOWS_HEADERS
-    UNIX_HEADERS
-    ANDROID_HEADERS
-    WASM_HEADERS
-    CONFIG_HEADERS
-    PUBLIC_DEPENDS
-      <dependency_name>
-    PRIVATE_DEPENDS
-    WINDOWS_DEPENDS
-    UNIX_DEPENDS
-    MACOS_DEPENDS
-    ANDROID_DEPENDS
-    WASM_DEPENDS
-    COMPILE_FLAGS
-    WINDOWS_COMPILE_FLAGS
-    UNIX_COMPILE_FLAGS
-    MACOS_COMPILE_FLAGS
-    ANDROID_COMPILE_FLAGS
-    TEST_DEPENDS 
-      <dependency_name>
-    TEST_OPTIONAL_DEPENDS 
 #]==]
-function (scan_module_file prefix)
+function(scan_module_file prefix)
 
-  if (ARGC GREATER 1)
-    set (_module_path "${ARGV1}")
-  else ()
-    set (_module_path "${CMAKE_CURRENT_SOURCE_DIR}/slxio.module")
-  endif ()
-  if (NOT EXISTS "${_module_path}")
-    message (FATAL_ERROR "[scan_module_file] slxio.module not found at: ${_module_path}")
-    return ()
-  endif ()
+  if(ARGC GREATER 1)
+    set(_module_path "${ARGV1}")
+  else()
+    set(_module_path "${CMAKE_CURRENT_SOURCE_DIR}/slxio.module")
+  endif()
+  if(NOT EXISTS "${_module_path}")
+    message(FATAL_ERROR "[scan_module_file] slxio.module not found at: ${_module_path}")
+    return()
+  endif()
 
-  file (READ ${_module_path} contents)
-  string (REPLACE "\r" "" contents "${contents}")
-  string (REPLACE "\t" " " contents "${contents}")
-  string (REPLACE "\n" ";" contents "${contents}")
-  string (REPLACE "  " " " contents "${contents}")
-  string (REPLACE "  " " " contents "${contents}")
-  string (REPLACE "  " " " contents "${contents}")
+  file(READ ${_module_path} contents)
+  string(REPLACE "\r" "" contents "${contents}")
+  string(REPLACE "\t" " " contents "${contents}")
+  string(REPLACE "\n" ";" contents "${contents}")
+  string(REPLACE "  " " " contents "${contents}")
+  string(REPLACE "  " " " contents "${contents}")
+  string(REPLACE "  " " " contents "${contents}")
 
-  list (LENGTH contents line_count)
-  math (EXPR last_index "${line_count} - 1")
+  list(LENGTH contents line_count)
+  math(EXPR last_index "${line_count} - 1")
 
-  set (current_key "")
-  set (current_values "")
+  set(current_key "")
+  set(current_values "")
   if(SLXIO_MODULE_DEBUG)
     message(STATUS "[scan_module_file] Scanning module file : ${_module_path}")
   endif()
-  foreach (i RANGE 0 ${last_index})
-    list (GET contents ${i} line)
-    string (STRIP "${line}" strip_line)
+  foreach(i RANGE 0 ${last_index})
+    list(GET contents ${i} line)
+    string(STRIP "${line}" strip_line)
 
-    if (strip_line STREQUAL "")
-      continue ()
-    endif ()
-    string (REGEX MATCH "^[A-Z_]+$" is_key "${strip_line}")
-    if (is_key
+    if(strip_line STREQUAL "")
+      continue()
+    endif()
+    string(REGEX MATCH "^[A-Z_]+$" is_key "${strip_line}")
+    if(is_key
         AND NOT strip_line STREQUAL "TRUE"
         AND NOT strip_line STREQUAL "FALSE")
-      if (current_key)
-        string (TOLOWER "${current_key}" key_lower)
-        set ("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
-      endif ()
-      set (current_key "${strip_line}")
-      set (current_values "")
-    else ()
-      list (APPEND current_values "${strip_line}")
-    endif ()
-  endforeach ()
-  if (current_key)
-    string (TOLOWER "${current_key}" key_lower)
-    set ("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
-  endif ()
-endfunction ()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      if(current_key)
+        string(TOLOWER "${current_key}" key_lower)
+        set("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
+      endif()
+      set(current_key "${strip_line}")
+      set(current_values "")
+    else()
+      list(APPEND current_values "${strip_line}")
+    endif()
+  endforeach()
+  if(current_key)
+    string(TOLOWER "${current_key}" key_lower)
+    set("${prefix}_${key_lower}" "${current_values}" PARENT_SCOPE)
+  endif()
+endfunction()
 
 #[==[.rst:
-.. cmake:function:: module_verify_status(<module>)
-
-  Verify that all dependencies of a module are enabled before building.
-
-  This function checks whether the given ``<module>`` has its binding enabled
-  (``<module>_enable_building``). If not, the function returns immediately.
-
-  If binding is enabled, the function iterates over the module’s public and
-  private dependencies (``<module>_public_depends`` and
-  ``<module>_private_depends``). For each dependency, it verifies that
-  ``<dep>_enable_building`` is set. If any dependency is not enabled, a
-  ``FATAL_ERROR`` is raised.
-  .. code-block:: cmake
-
-    module_verify_status(Common::Core)
-
-#]==]
-function (module_verify_status module)
-  if (NOT ${module}_enable_building)
-    return ()
-  endif ()
-  foreach (dep IN LISTS ${module}_public_depends ${module}_private_depends)
-    if (NOT ${dep}_enable_building)
-      message (FATAL_ERROR "[module_verify_status] Module ${module} depends on ${dep},
-        which is not enabled.")
-    endif ()
-  endforeach ()
-endfunction ()
-
-
-
-
-
-
-
-
-
-
-
-
-
-#[==[.rst:
-.. cmake:function:: add_test_sources(<module> [<source>...])
+.. cmake:function:: add_test_sources(<target> [<source>...])
 
   A wrapper around ``target_sources`` that works for module test sources.
 
   .. code-block:: cmake
 
-    add_test_sources(Common::Core
-        TestFileSystem.cxx
-    )
-
+    add_test_sources(CommonCore TestFileSystem.cxx)
 #]==]
-function (add_test_sources module)
+function(add_test_sources module_target)
 
-  # module_target_name (${module} tmp)
-  # foreach (filename IN LISTS ARGN)
-  #   get_filename_component (test_name "${filename}" NAME_WE)
-  #   split_module_name (${module} tmp)
-  #   set (test_name "${tmp_NAMESPACE}${tmp_MODULE_NAME}${test_name}")
-  #   add_executable (${test_name} ${filename})
-  #   add_test_dependencies (${test_name} ${module})
-  #   test_include_directory (${test_name} ${module})
-  #   test_link_libraries (${test_name} ${module})
-  #   add_test (NAME ${test_name} COMMAND ${test_name})
-  # endforeach ()
+  get_target_property(module_source_directory
+          ${module_target} module_source_dir)
+  scan_module_file(_module 
+  ${module_source_directory}/slxio.module)
 
-endfunction ()
+  foreach(filename IN LISTS ARGN)
+    get_filename_component(test_source_filename "${filename}" NAME_WE)
+    set(test_target_name "${_module_library_name}${test_source_filename}")
+    add_executable(${test_target_name} ${filename})
+    add_test_dependencies(${test_target_name} _module)
+    test_include_directory(${test_target_name} _module)
+    test_link_libraries(${test_target_name} _module)
+    add_test(NAME ${test_target_name} COMMAND ${test_target_name})
+  endforeach()
+
+endfunction()
 
 #[==[.rst:
-.. cmake:function:: add_test_dependencies(<test_target> <module>)
+.. cmake:function:: add_test_dependencies(<target> <prefix>)
 
   A wrapper around ``add_dependencies`` that works for module test dependencies.
   fetch all required and optional dependencies for the module tests targets
 
 #]==]
-function (add_test_dependencies test_target module)
+function(add_test_dependencies test_target module_prefix)
 
-  module_target_name (${module} tmp)
-  add_dependencies (${test_target} ${tmp_TARGET_NAME})
-  set (MODULE_test_dep_targets "")
-  foreach (test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
-    module_target_name (${test_dep} dep_tmp)
-    list (APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
-  endforeach ()
-  if (MODULE_test_dep_targets)
-    add_dependencies (${test_target} ${MODULE_test_dep_targets})
-  endif ()
+  add_dependencies(${test_target} ${${module_prefix}_library_name})
+  set(module_test_dep_targets "")
+  foreach(test_dep IN LISTS ${module_prefix}_test_depends 
+    ${module_prefix}_test_optional_depends)
+    module_target_name(${test_dep} test_dep_library_name)
+    list(APPEND module_test_dep_targets ${test_dep_library_name})
+  endforeach()
+  if(module_test_dep_targets)
+    add_dependencies(${test_target} ${MODULE_test_dep_targets})
+  endif()
 
-endfunction ()
+endfunction()
 
 #[==[.rst:
-.. cmake:function:: test_link_libraries(<test_target>)
+  ..  cmake_function:test_include_directory(<test_target> <prefix>)
+
+  A wrapper around target_include_directory() but for modules test dependency
+
+#]==]
+function(test_include_directory test_target module_prefix)
+
+  get_target_property(public_include_directories 
+        ${${module_prefix}_library_name} module_include_directories)
+
+  target_include_directories(${test_target} PUBLIC 
+      "${public_include_directories}")
+
+  if(DEFINED ${module_prefix}_test_depends AND NOT 
+  "${module_prefix}_test_depends" STREQUAL "")
+    foreach(test_dep IN LISTS ${module_prefix}_test_depends)
+
+      foreach(entry IN LISTS module_map)
+        string(FIND "${entry}" "=" pos)
+        string(SUBSTRING "${entry}" 0 ${pos} key)
+        math(EXPR val_pos "${pos}+1")
+        string(SUBSTRING "${entry}" ${val_pos} -1 value)
+        if(key STREQUAL "${test_dep}")
+          get_target_property(test_depends_include_directories 
+            ${value} module_include_directories)
+          target_include_directories(${test_target} 
+            PRIVATE "${test_depends_include_directories}")
+          break()
+        endif()
+      endforeach()
+
+    endforeach()
+  endif()
+
+endfunction()
+
+#[==[.rst:
+.. cmake:function:: test_link_libraries(<target> <prefix>)
 
   A wrapper around ``target_link_libraries`` that works for module test dependencies.
 
   test_link_libraries(IOSlxTestParameterParser ThirdParty::libxml2)
 #]==]
-function (test_link_libraries test_target module)
+function(test_link_libraries test_target module_prefix)
 
-  module_target_name (${module} tmp)
-  target_link_libraries (${test_target} PRIVATE ${tmp_TARGET_NAME})
+  target_link_libraries(${test_target} PRIVATE
+  ${${module_prefix}_library_name})
 
-  set (MODULE_test_dep_targets "")
-
-  foreach (test_dep IN LISTS MODULE_test_depends MODULE_test_optional_depends)
-    module_target_name (${test_dep} dep_tmp)
-    list (APPEND MODULE_test_dep_targets ${dep_tmp_TARGET_NAME})
-  endforeach ()
-
-  if (MODULE_test_dep_targets)
-    target_link_libraries (${test_target} PRIVATE ${MODULE_test_dep_targets})
-  endif ()
-
-  get_target_property (_module_libs ${tmp_TARGET_NAME} LINK_LIBRARIES)
-  if (_module_libs)
-    target_link_libraries (${test_target} PRIVATE ${_module_libs})
-  endif ()
-
-endfunction ()
-
-#[==[.rst:
-  ..  cmake_function:test_include_directory(<test_target>)
-
-  A wrapper around target_include_directory() but for modules test dependency
-
-#]==]
-function (test_include_directory test_target module)
-
-  module_target_name (${module} prefix)
-  get_target_property (_module_include_dirs ${prefix_TARGET_NAME} INCLUDE_DIRECTORIES)
-
-  target_include_directories (
-    ${test_target} PUBLIC "${_module_include_dirs}" "${CMAKE_CURRENT_BINARY_DIR}"
-                          "${CMAKE_CURRENT_SOURCE_DIR}")
-
-  get_filename_component (_module_test_dir "${CMAKE_CURRENT_LIST_FILE}" DIRECTORY)
-  get_filename_component (_parent_dir "${_module_test_dir}" DIRECTORY)
-  get_filename_component (_module_dir "${_parent_dir}" DIRECTORY)
-
-  scan_module_file (_module "${_module_dir}/slxio.module")
-
-  if (DEFINED _module_test_depends AND NOT "${_module_test_depends}" STREQUAL "")
-    foreach (test_dep IN LISTS _module_test_depends)
-      module_target_name (${test_dep} _dep_prefix)
-      get_target_property (_dep_mod_inc_dirs ${_dep_prefix_TARGET_NAME}
-                           INCLUDE_DIRECTORIES)
-      target_include_directories (${test_target} PRIVATE "${_dep_mod_inc_dirs}")
-    endforeach ()
-  endif ()
-
-  if (DEFINED _module_test_optional_depends AND NOT "${_module_test_optional_depends}"
-                                                STREQUAL "")
-    foreach (test_opt_dep IN LISTS _module_test_optional_depends)
-      module_target_name (${test_opt_dep} _opt_dep_prefix)
-      get_target_property (_opt_dep_mod_inc_dirs ${_opt_dep_prefix_TARGET_NAME}
-                           INCLUDE_DIRECTORIES)
-      target_include_directories (${test_target} PRIVATE "${_opt_dep_mod_inc_dirs}")
-    endforeach ()
-  endif ()
-
-endfunction ()
-
-
-
-
-
-
+endfunction()

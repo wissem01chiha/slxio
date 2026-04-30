@@ -1,4 +1,4 @@
-include (FindPythonModule)
+include(FindPythonModule)
 
 if(SLXIO_SLOG)
   set(SLXIO_LOGURU 0)
@@ -8,20 +8,21 @@ else()
   set(SLXIO_SLOG 0)
 endif()
 
+if(SLXIO_OPENMP)
+  find_package(OpenMP)
+endif()
 find_package(JSON-C)
 find_package(LibXml2)
 
 if(SLXIO_BUILD_PYTHON)
   find_package(Python COMPONENTS Interpreter Development)
-endif ()
+endif()
 
 if(SLXIO_COVERAGE)
   find_program(GCOV gcov)
   find_program(LCOV lcov)
   find_program(GENHTML genhtml)
-endif ()
+endif()
 
-if (SLXIO_OPENMP)
-  find_package(OpenMP)
-endif ()
+
 

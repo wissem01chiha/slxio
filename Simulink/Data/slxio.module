@@ -11,7 +11,7 @@ LICENSE
 VERSION 
   0.1.0 
 MAINTAINER 
-  Wissem CHIHA 
+  Wissem Chiha
 ENABLE_BUILD 
   TRUE 
 ENABLE_TEST
@@ -30,12 +30,11 @@ HEADERS
   ModelWorkspace.h
   DataSourceType.h
 CONFIG_HEADERS
-CMAKE_MODULES_DIRS
-PUBLIC_DEPENDS 
-PRIVATE_DEPENDS 
+PUBLIC_DEPENDS
   Common::Core
-  Common::System
+  Common::System 
+PRIVATE_DEPENDS 
 TEST_DEPENDS 
   ThirdParty::doctest
-TEST_OPTIONAL_DEPENDS 
+ 
 

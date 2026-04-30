@@ -1,13 +1,12 @@
 <!-- omit in toc -->
 # SLXIO
 
-[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
-[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)
+[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
 [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
-![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
-[![Docs](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml)
+[![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml)
 [![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
+![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
 
@@ -42,7 +41,7 @@
 
 ## 1.0 Overview
 
-**Slxio** is an open-source C++17 library for reading and writing [simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**Slxio** is an open-source C++11 library for reading and writing [simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 

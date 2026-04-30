@@ -246,9 +246,7 @@ elseif(HAVE_SYS_TYPES_H)
   set(LIBZIP_TYPES_INCLUDE "include <sys/types.h>")
 endif()
 
- #
 # Check to see if we have large file support
-#
 set(CMAKE_REQUIRED_DEFINITIONS -D_LARGEFILE64_SOURCE=1)
 check_type_size(off64_t OFF64_T)
 unset(CMAKE_REQUIRED_DEFINITIONS)  

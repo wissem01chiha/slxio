@@ -1,16 +1,17 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SIMULINKBLOCKDATA_H
-#define SIMULINKBLOCKDATA_H
+#ifndef CONSTANT_H
+#define CONSTANT_H
 
 #include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
+#include "SimulinkLibraryBase.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Constant
+class APIEXPORT Constant final 
 {
   Float32 value;
 };
@@ -18,4 +19,4 @@ class Constant
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKBLOCKDATA_H
+#endif // CONSTANT_H

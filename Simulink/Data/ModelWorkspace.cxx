@@ -4,7 +4,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationIdInfoType ModelWorkspaceId = { 1002,
+static const Logger::ApplicationInfoType ModelWorkspaceId = { 1002,
   "ModelWorkspace" };
 
 ModelWorkspace::ModelWorkspace()
