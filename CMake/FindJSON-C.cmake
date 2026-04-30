@@ -20,7 +20,7 @@ This module defines the following variables:
   True if the JSON-C library and headers were found.
 
 * ``JSON-C_INCLUDE_DIR``
-  The directory containing the JSON-C headers (e.g. ``json.h``).
+  The directory containing the JSON-C headers(e.g. ``json.h``).
 
 * ``JSON-C_INCLUDE_DIRS``
   Same as ``JSON-C_INCLUDE_DIR``, provided for consistency.
@@ -56,24 +56,25 @@ Notes
 * The library is typically named ``json-c`` or ``libjson-c``.
 #]=======================================================================]
 
-include (FindPackageHandleStandardArgs)
+include(FindPackageHandleStandardArgs)
 
-find_package (PkgConfig)
-pkg_check_modules (PC_JSON-C QUIET json-c)
+find_package(PkgConfig)
+pkg_check_modules(PC_JSON-C QUIET json-c)
 
-find_path (
+find_path(
   JSON-C_INCLUDE_DIR json.h
   HINTS ${PC_JSON-C_INCLUDEDIR} ${PC_JSON-C_INCLUDE_DIRS}
   PATH_SUFFIXES json-c json)
 
-find_library (
+find_library(
   JSON-C_LIBRARY
   NAMES json-c libjson-c
   HINTS ${PC_JSON-C_LIBDIR} ${PC_JSON-C_LIBRARY_DIRS})
 
-set (JSON-C_LIBRARIES ${JSON-C_LIBRARY})
-set (JSON-C_INCLUDE_DIRS ${JSON-C_INCLUDE_DIR})
+set(JSON-C_LIBRARIES ${JSON-C_LIBRARY})
+set(JSON-C_INCLUDE_DIRS ${JSON-C_INCLUDE_DIR})
 
-find_package_handle_standard_args (JSON-C DEFAULT_MSG JSON-C_LIBRARY JSON-C_INCLUDE_DIR)
+find_package_handle_standard_args(JSON-C DEFAULT_MSG 
+JSON-C_LIBRARY JSON-C_INCLUDE_DIR)
 
-mark_as_advanced (JSON-C_INCLUDE_DIR JSON-C_LIBRARY)
+mark_as_advanced(JSON-C_INCLUDE_DIR JSON-C_LIBRARY)

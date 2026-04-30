@@ -62,5 +62,5 @@ jobs:
         run: cmake --build build
 
       - name: Test
-        run: ctest --output-on-failure --max-width 120
+        run: ctest -C Debug --output-on-failure --max-width 120
         working-directory: build
