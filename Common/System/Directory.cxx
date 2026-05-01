@@ -195,7 +195,7 @@ const File* Directory::GetFile(const std::string& filename) const
   return nullptr;
 }
 
-const char* Directory::GetCurrentDirectory()
+const char* Directory::GetCurrentWorkingDirectory()
 {
   static char buffer[1024];
 

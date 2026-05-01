@@ -20,7 +20,7 @@ std::string ModelWorkspace::GetVariable(const std::string& name) const
   {
     return it->second;
   }
-  logger.SendMessage(
+  logger.SendLogMessage(
     { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
     { "GetVariable : Variable", name, "not found in ModelWorkspace." });
   return std::string("");
@@ -42,7 +42,7 @@ ReturnType ModelWorkspace::ClearVariable(const std::string& name)
   }
   else
   {
-    logger.SendMessage(
+    logger.SendLogMessage(
       { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
       { "ClearVariable: Variable", name, "not found in ModelWorkspace. Cannot clear." });
   }
@@ -52,7 +52,7 @@ ReturnType ModelWorkspace::ClearVariable(const std::string& name)
 ReturnType ModelWorkspace::ClearAll()
 {
   Variables.clear();
-  logger.SendMessage(
+  logger.SendLogMessage(
     { Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },
     { "ClearAll: All Variables cleared from ModelWorkspace." });
   return E_OK;

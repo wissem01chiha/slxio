@@ -1,14 +1,15 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef Directory_h
-#define Directory_h
+#ifndef DIRECTORY_H
+#define DIRECTORY_H
 
 #include "APIExportMacro.h"
 #include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include <map>
 #include <vector>
+#include <string>
 
 class File;
 
@@ -82,7 +83,7 @@ public:
   const File* GetFile(const std::string& filename) const;
 
   /** Get the current working directory. */
-  static const char* GetCurrentDirectory();
+  static const char* GetCurrentWorkingDirectory();
 
   /**
    * Get the system temporary directory.
@@ -145,4 +146,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* Directory_h */
+#endif // DIRECTORY_H 

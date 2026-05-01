@@ -7,8 +7,6 @@
 #include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "APIExportMacro.h"
-#include "VersionMacro.h"
-#include "SimulinkVersion.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -21,6 +19,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT Version final 
 {
 public:
+  /**
+   * Default Constructor
+   */
+  Version() =default;
+
   /**
    * Returns the major version number of the library.
    */
@@ -49,10 +52,16 @@ public:
   /**
    * Returns the full version string in "major.minor.patch" format.
    */
-  std::string GetVersionString();
+  static std::string GetVersionString();
 
-private:
-  Version() = default;
+  /**
+   * Returns the full Simulink version in "year.release" format
+   */
+  static std::string GetSimulinkVersionString();
+  
+  /**
+   * Default Destructor
+   */
   ~Version() = default;
 };
 

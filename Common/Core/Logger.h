@@ -7,21 +7,21 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <vector>
 #include <string>
+#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Logger
- * @brief Main Logging handler class
+ * @brief Main logging handler class.
  */
 class APIEXPORT Logger final
 {
 public:
   /**
-   * Logging Verbosity Levels
+   * Logging verbosity levels.
    */
   enum MessageLevelType : UInt8
   {
@@ -35,8 +35,7 @@ public:
   };
 
   /**
-   * This type describes the type of the message.
-   * either a standard logging message or trace message
+   * Type of the message, either a standard log or a trace.
    */
   enum MessageType : UInt8
   {
@@ -56,17 +55,18 @@ public:
   };
 
   /**
-   * Data structure for external applications that 
-   * log information using the API.
+   * Data structure for external applications that log information using the
+   * API.
    */
   typedef struct
   {
     UInt32 appId;
-    char appDescription[1024];
+    std::string appName;
+    std::string appDescription;
   } ApplicationInfoType;
 
   /**
-   * Container data struct about a logging message
+   * Container for logging message metadata.
    */
   typedef struct
   {
@@ -77,76 +77,93 @@ public:
   } MessageInfoType;
 
   /**
-   * Initialize the Logger with command line arguments,
-   * for old style compatibility with third party logging libs.
+   * Container for a logging message with its metadata.
+   */
+  typedef struct
+  {
+    MessageInfoType info;
+    std::vector<std::string> messages;
+  } LogMessage;
+
+  /**
+   * Initialize the logger with command line arguments.
    */
   static ReturnType Init(int argc, char** argv);
 
   /**
-   * Get the singleton instance of the Logger.
+   * Get the singleton instance of the logger.
    */
   static Logger& GetInstance();
 
   /**
-   * Main logging routine call with a MessageInfoType metadata struct and
-   * a list of message strings, each entry in logData represents one argument
-   * or message fragment, if no MessageLevelType is specified in logInfo,
-   * Logger will use its internal level until explicitly set with 
-   * SetInternalMessageLogLevelType.
+   * Send a log message with metadata and message fragments.
    */
-  ReturnType SendMessage(
+  ReturnType SendLogMessage(
     const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /**
-   * Print all logging messages to stdio.
-   * Currently, it prints all messages without filtering; this will be enhanced
-   * in a future version of the library.
+   * Print all logging messages to standard output.
    */
   void Print();
-  
-  /**
-   * Write logging messages to a given file, if the file path 
-   * is not valid an error is returned  
-   */
-  ReturnType WriteToFile(const std::string& path);
-  
-  /**
-   * oveloded of WriteToFile for compatbaily with old style
-   */
-  ReturnType WriteToFile(const char* path);
-  
-  /**
-   * will write logging information to a random genarted file
-   */
-  ReturnType WriteToFile();
 
   /**
-   * Set the default internal MessageLevelType level.
+   * Write logging messages to a file created in the current working directory.
+   * To change the logging directory use SetLogDirectoryPath
+   */
+  ReturnType WriteToFile(const std::string& filename);
+
+  /**
+   * Overload of WriteToFile for compatibility with C-style strings.
+   */
+  ReturnType WriteToFile(const char* filename);
+
+  /**
+   * Write logging messages to a randomly generated file.
+   */
+  ReturnType WriteToFile(void);
+
+  /**
+   * Set the internal logging level.
    */
   void SetLogLevel(MessageLevelType newLogLevel);
 
   /**
-   * Set the default internal MessageLevelType level.
+   * Get the current logging level.
    */
   MessageLevelType GetLogLevel(void);
 
   /**
-   * Set the default file logging mode.
+   * Set the file logging mode.
    */
   void SetLogFileMode(LogFileModeType mode);
 
   /**
-   * Get the default file logging mode
+   * Get the default file logging mode.
    */
   LogFileModeType GetDefaultLogFileMode();
-  
+
   /**
-   * Rest logging level to default one 
+   * Get the current file logging mode.
+   */
+  LogFileModeType GetLogFileMode();
+
+  /**
+   * Reset logging level to the default.
    */
   void ResetLogLevelType();
 
   /**
-   * Check if logging is enabled at runtime.
+   * Get log messages from a given application by ID.
+   */
+  std::vector<LogMessage> GetFiltredLogMessage(UInt32 Id);
+
+  /**
+   * Get log messages from a given application by name.
+   */
+  std::vector<LogMessage> GetFiltredLogMessage(const char* Name);
+
+  /**
+   * Check if logging is enabled.
    */
   bool IsEnabled();
 
@@ -155,21 +172,47 @@ public:
    */
   void ClearBuffer();
 
-private:
-  struct LogMessage
-  {
-    MessageInfoType info;
-    std::vector<std::string> messages;
-  };
+  /**
+   * Get the logging directory path.
+   */
+  std::string GetLogDirectoryPath(void);
 
+  /**
+   * Set the logging directory path.
+   * Note this function do not check the validity of the directory
+   */
+  void SetLogDirectoryPath(const std::string pathname);
+
+  /**
+   * Get the default logging directory path.
+   */
+  std::string GetDefaultLogDirectoryPath(void);
+  
+private:
+  /**
+   * Helper function for slog logging library
+   */
+  int ToSlogLevel(Logger::MessageLevelType level);
+
+  /**
+   * Helper function for formatting output logs
+   */
+  std::string FormatLogEntry(
+    const LogMessage& entry, const std::string& msg);
+  
+  /**
+   * Default Constructor 
+   */
   Logger();
   Logger(const Logger&) = delete;
   ~Logger() = default;
   Logger::MessageLevelType InternalVerbosityLevel;
-  Logger::MessageLevelType DefaultInternalVerbosityLevel;
+  Logger::MessageLevelType DefaultInternalVerbosityLevel =
+    Logger::MessageLevelType::LOG_OFF;
   Logger::LogFileModeType FileModeType;
-  Logger::LogFileModeType DefaultFileModeType;
+  Logger::LogFileModeType DefaultFileModeType = Logger::LogFileModeType::WRITE;
   std::vector<LogMessage> LogBuffer;
+  std::string LogDirectoryPath;
 };
 
 SLXIO_ABI_NAMESPACE_END

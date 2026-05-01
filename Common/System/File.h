@@ -37,14 +37,11 @@ public:
   /** Default constructor. */
   File() = default;
 
-  /** Construct a File object from a path string and explicit mode */
-  File(const std::string& path, Mode mode);
-
   /** Construct a File object from a path string */
   File(const std::string& path);
 
   /** Construct a File object from a C‑string path. */
-  File(const char* path, Mode mode);
+  File(const char* path);
 
   /** Copy constructor. */
   File(const File& other);
@@ -71,25 +68,25 @@ public:
   bool IsFile() const;
 
   /** Open the file with the initialized mode. */
-  UInt32 Open();
+  ReturnType Open();
 
   /** Read data from the file into the internal buffer. */
-  UInt32 Read();
+  ReturnType Read();
 
   /** Write data to the file. */
-  UInt32 Write(const char* message);
+  ReturnType Write(const char* message);
 
   /** Close the file descriptor. */
-  UInt32 Close();
+  ReturnType Close();
 
   /** Copy the current file content to another file. */
-  UInt32 Copy(File& otherFile);
+  ReturnType Copy(File& otherFile);
 
   /** Copy the current file content to another directory. */
-  UInt32 Copy(const char* destDir);
+  ReturnType Copy(const char* destDir);
 
   /** Rename the file. */
-  UInt32 Rename(const char* filename);
+  ReturnType Rename(const char* filename);
 
   /** Get the filename component of the path. */
   const std::string GetFileName();

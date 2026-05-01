@@ -13,10 +13,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @enum SimulinkDataType
+ * @class SimulinkDataType
  * @brief Simulink Supported Data Types.
- * @see
- * https://www.mathworks.com/help/simulink/ug/data-types-supported-by-simulink.html
  */
 enum class APIEXPORT SimulinkDataType
 {

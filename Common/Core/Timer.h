@@ -57,4 +57,4 @@ protected:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* TIMER_H */
+#endif // TIMER_H

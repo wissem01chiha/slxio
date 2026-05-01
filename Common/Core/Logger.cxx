@@ -2,7 +2,7 @@
 #include "Compiler.h"
 #include "Config.h"
 #include "ErrorTypes.h"
-#include <cstring>
+#include "Libuv.h"
 #include <fstream>
 #include <ostream>
 #include <random>
@@ -17,8 +17,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
-  : InternalVerbosityLevel(Logger::MessageLevelType::LOG_INFO), 
-  DefaultFileModeType(Logger::LogFileModeType::WRITE)
+  : InternalVerbosityLevel(Logger::MessageLevelType::LOG_INFO)
+  , DefaultFileModeType(Logger::LogFileModeType::WRITE)
 {
 }
 
@@ -38,7 +38,7 @@ Logger& Logger::GetInstance()
   return instance;
 }
 
-ReturnType Logger::SendMessage(
+ReturnType Logger::SendLogMessage(
   const MessageInfoType& logInfo, const std::vector<std::string>& logData)
 {
   LogMessage message;
@@ -53,7 +53,6 @@ void Logger::Print()
 #if SLXIO_LOGURU
 
 #elif SLXIO_SLOG
-
   slog_config_t cfg;
   slog_config_get(&cfg);
   cfg.eColorFormat = SLOG_COLORING_FULL;
@@ -62,106 +61,74 @@ void Logger::Print()
 
   for (const auto& entry : LogBuffer)
   {
-    const auto& info = entry.info;
-
-    int slogLevel = SLOG_INFO;
-    switch (info.logLevel)
-    {
-      case LOG_FATAL:
-        slogLevel = SLOG_FATAL;
-        break;
-      case LOG_ERROR:
-        slogLevel = SLOG_ERROR;
-        break;
-      case LOG_WARN:
-        slogLevel = SLOG_WARN;
-        break;
-      case LOG_INFO:
-        slogLevel = SLOG_INFO;
-        break;
-      case LOG_DEBUG:
-        slogLevel = SLOG_DEBUG;
-        break;
-      case LOG_VERBOSE:
-        slogLevel = SLOG_TRACE;
-        break;
-      default:
-        slogLevel = SLOG_INFO;
-        break;
-    }
+    int slogLevel = ToSlogLevel(entry.info.logLevel);
 
     for (const auto& msg : entry.messages)
     {
-      if (slogLevel == SLOG_FATAL)
+      std::string FormatMsg = FormatLogEntry(entry, msg);
+
+      switch (slogLevel)
       {
-        slog_fatal("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else if (slogLevel == SLOG_ERROR)
-      {
-        slog_error("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else if (slogLevel == SLOG_WARN)
-      {
-        slog_warn("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else if (slogLevel == SLOG_INFO)
-      {
-        slog_info("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else if (slogLevel == SLOG_DEBUG)
-      {
-        slog_debug("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else if (slogLevel == TRACE)
-      {
-        slog_trace("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
-      }
-      else
-      {
-        slog_info("[AppId=%u, Desc=%s] %s", info.appId.appId,
-          info.appId.appDescription, msg.c_str());
+        case SLOG_FATAL:
+          slog_fatal("%s", FormatMsg.c_str());
+          break;
+        case SLOG_ERROR:
+          slog_error("%s", FormatMsg.c_str());
+          break;
+        case SLOG_WARN:
+          slog_warn("%s", FormatMsg.c_str());
+          break;
+        case SLOG_INFO:
+          slog_info("%s", FormatMsg.c_str());
+          break;
+        case SLOG_DEBUG:
+          slog_debug("%s", FormatMsg.c_str());
+          break;
+        case SLOG_TRACE:
+          slog_trace("%s", FormatMsg.c_str());
+          break;
+        default:
+          slog_info("%s", FormatMsg.c_str());
+          break;
       }
     }
   }
-
   slog_destroy();
 #endif
 }
 
-ReturnType Logger::WriteToFile(const std::string& path)
+ReturnType Logger::WriteToFile(const std::string& filename)
 {
-  std::ofstream outFile(path, DefaultFileModeType);
-  if (!outFile.is_open())
-  {
-    return E_FOPEN_FAIL;
-  }
+  std::string logFilePath = GetDefaultLogDirectoryPath() + PATH_SEP + filename;
+
+  uv_fs_t req;
+  int flags = O_CREAT | O_WRONLY | O_TRUNC;
+  int mode = DefaultFileModeType;
+  uv_file file = uv_fs_open(
+    uv_default_loop(), &req, logFilePath.c_str(), flags, mode, nullptr);
+  uv_fs_req_cleanup(&req);
 
   for (const auto& entry : LogBuffer)
   {
-    const auto& info = entry.info;
-    outFile << "[AppId=" << info.appId.appId
-            << ", Desc=" << info.appId.appDescription
-            << ", Type=" << static_cast<int>(info.type)
-            << ", Level=" << static_cast<int>(info.logLevel) << "] ";
-
-    for (size_t i = 0; i < entry.messages.size(); ++i)
+    for (const auto& msg : entry.messages)
     {
-      outFile << entry.messages[i];
-      if (i < entry.messages.size() - 1)
-      {
-        outFile << " ";
-      }
+      std::string formatted = FormatLogEntry(entry, msg);
+      uv_buf_t buf = uv_buf_init(const_cast<char*>(formatted.c_str()),
+        static_cast<unsigned int>(formatted.size()));
+
+      uv_fs_write(uv_default_loop(), &req, file, &buf, 1, -1, nullptr);
+      uv_fs_req_cleanup(&req);
+
+      const char* newline = "\n";
+      uv_buf_t nlBuf = uv_buf_init(const_cast<char*>(newline), 1);
+      uv_fs_write(uv_default_loop(), &req, file, &nlBuf, 1, -1, nullptr);
+      uv_fs_req_cleanup(&req);
     }
-    outFile << std::endl;
   }
 
-  outFile.close();
+  uv_fs_close(uv_default_loop(), &req, file, nullptr);
+  uv_fs_req_cleanup(&req);
+
   return E_OK;
 }
 
@@ -172,13 +139,6 @@ ReturnType Logger::WriteToFile(const char* path)
 
 ReturnType Logger::WriteToFile()
 {
-  const size_t size = 1024;
-  char buffer[size];
-  if (getcwd(buffer, size) == nullptr)
-  {
-    return E_GET_CWD_FAIL;
-  }
-
   std::random_device rand_dev;
   std::mt19937 generator(rand_dev());
   std::uniform_int_distribution<UInt32> distr(10000, 999999);
@@ -187,15 +147,8 @@ ReturnType Logger::WriteToFile()
   oss << distr(generator) << ".log";
   std::string filename = oss.str();
 
-  std::string fullPath = std::string(buffer) + "/" + filename;
-
-  ReturnType result = WriteToFile(fullPath);
-  if (result != E_OK)
-  {
-    return result;
-  }
-
-  return E_OK;
+  std::string FullFilepath = GetDefaultLogDirectoryPath() + PATH_SEP + filename;
+  return WriteToFile(FullFilepath);
 }
 
 void Logger::SetLogLevel(Logger::MessageLevelType newLogLevel)
@@ -215,11 +168,43 @@ void Logger::SetLogFileMode(Logger::LogFileModeType mode)
 
 Logger::LogFileModeType Logger::GetDefaultLogFileMode()
 {
-  return LogFileModeType();
+  return DefaultFileModeType;
 }
 
-void Logger::ResetLogLevelType() {
+Logger::LogFileModeType Logger::GetLogFileMode()
+{
+  return FileModeType;
+}
+
+void Logger::ResetLogLevelType()
+{
   InternalVerbosityLevel = DefaultInternalVerbosityLevel;
+}
+
+std::vector<Logger::LogMessage> Logger::GetFiltredLogMessage(UInt32 Id)
+{
+  std::vector<Logger::LogMessage> result;
+  for (const auto& entry : LogBuffer)
+  {
+    if (entry.info.appId.appId == Id)
+    {
+      result.push_back(entry);
+    }
+  }
+  return result;
+}
+
+std::vector<Logger::LogMessage> Logger::GetFiltredLogMessage(const char* Name)
+{
+  std::vector<Logger::LogMessage> result;
+  for (const auto& entry : LogBuffer)
+  {
+    if (entry.info.appId.appName == std::string(Name))
+    {
+      result.push_back(entry);
+    }
+  }
+  return result;
 }
 
 bool Logger::IsEnabled()
@@ -231,9 +216,74 @@ bool Logger::IsEnabled()
 #endif
 }
 
-void Logger::ClearBuffer() {
+void Logger::ClearBuffer()
+{
   LogBuffer.clear();
 }
+
+std::string Logger::GetLogDirectoryPath(void)
+{
+  return LogDirectoryPath;
+}
+
+void Logger::SetLogDirectoryPath(const std::string pathname)
+{
+  LogDirectoryPath = pathname;
+}
+
+std::string Logger::GetDefaultLogDirectoryPath(void)
+{
+  char buffer[1024];
+  size_t size = sizeof(buffer);
+  uv_cwd(buffer, &size);
+  return std::string(buffer);
+}
+
+std::string Logger::FormatLogEntry(
+  const Logger::LogMessage& entry, const std::string& msg)
+{
+  const auto& info = entry.info;
+  std::ostringstream oss;
+  oss << "[Id=" << info.appId.appId << ", Name=" << info.appId.appName
+      << ", Description=" << info.appId.appDescription
+      << ", Type=" << static_cast<int>(info.type)
+      << ", Level=" << static_cast<int>(info.logLevel) << "] " << msg;
+  return oss.str();
+}
+
+int Logger::ToSlogLevel(Logger::MessageLevelType level)
+{
+  int slogLevel;
+  switch (level)
+  {
+    case Logger::MessageLevelType::LOG_FATAL:
+      slogLevel = SLOG_FATAL;
+      break;
+    case Logger::MessageLevelType::LOG_ERROR:
+      slogLevel = SLOG_ERROR;
+      break;
+    case Logger::MessageLevelType::LOG_WARN:
+      slogLevel = SLOG_WARN;
+      break;
+    case Logger::MessageLevelType::LOG_INFO:
+      slogLevel = SLOG_INFO;
+      break;
+    case Logger::MessageLevelType::LOG_DEBUG:
+      slogLevel = SLOG_DEBUG;
+      break;
+    case Logger::MessageLevelType::LOG_VERBOSE:
+      slogLevel = SLOG_TRACE;
+      break;
+    default:
+      slogLevel = SLOG_INFO;
+      break;
+  }
+  return slogLevel;
+};
+
+#if SLXIO_LOGURU
+loguru::Verbosity ToLoguruLevel(Logger::MessageLevelType level) {};
+#endif // SLXIO_LOGURU
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

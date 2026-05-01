@@ -66,6 +66,7 @@ CONFIG_HEADERS
 PUBLIC_DEPENDS
   ThirdParty::loguru
   ThirdParty::slog
+  ThirdParty::libuv
 PRIVATE_DEPENDS
 WINDOWS_DEPENDS
 UNIX_DEPENDS

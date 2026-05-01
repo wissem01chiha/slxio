@@ -30,6 +30,10 @@ public:
     Chart = 10,
     Unkown = 11
   };
+
+  /**
+   * Default Construtor
+   */
   SimulinkElementType() = default;
 
   /**
@@ -61,6 +65,10 @@ public:
    * 
    */
   static const char* ToString(SimulinkElementType::Type type);
+
+  /**
+   * 
+   */
   std::string ToString();
 
 private:

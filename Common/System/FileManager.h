@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef FileManager_h
-#define FileManager_h
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
 
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
@@ -19,42 +19,62 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class FileManager 
- * @brief A singleton class that manages multiple files in the software
+ * @brief A singleton class for managing multiple files 
  */
 class APIEXPORT FileManager final
 {
 public:
+  /**
+   * Default Construtor
+   */
   FileManager();
+
+  /**
+   * Default Destructor
+   */
   ~FileManager() = default;
 
+  /**
+   * Copy Constructor 
+   */
   FileManager(const FileManager&) = delete;
+
+  /**
+   * Copy Operator 
+   */
   FileManager& operator=(const FileManager&) = delete;
 
+  /**
+   * Move Constructor
+   */
   FileManager(FileManager&& other) = delete;
+
+  /**
+   * Move Operator 
+   */
   FileManager& operator=(FileManager&& other) = delete;
 
   FileManager(std::vector<File*> files);
   FileManager(std::list<File*> files);
-
-  FileManager& operator=(std::vector<File*> files) = delete;
-  FileManager& operator=(std::list<File*> files) = delete;
 
   FileManager(std::vector<std::shared_ptr<File>> files);
 
   /**
    * 
    */
-  IdType GetFileMaxID();
+  IdType GetFileId(const std::string& filename);
 
   /**
    * 
    */
-  IdType GetFileID(const std::string& _stFilename);
+  IdType GetFileMaxId();
+
+
 
   /**
    * 
    */
-  IdType GetFirstFreeFileID();
+  IdType GetFirstFreeFileId();
 
   /**
    * 
@@ -69,7 +89,7 @@ public:
   /**
    * 
    */
-  static bool IsOpened(const std::string& _stFilename);
+  bool IsOpened(const std::string& filename);
 
   /**
    * 
@@ -106,4 +126,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* __FileManager_h__*/
+#endif // FILEMANAGER_H

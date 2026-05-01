@@ -1,13 +1,12 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Color_h__
-#define __Color_h__
+#ifndef COLOR_H
+#define COLOR_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <cstdint>
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
@@ -37,4 +36,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* __Color_h__ */
+#endif // COLOR_H

@@ -58,4 +58,4 @@
 #error "Simulink Version is not set or unsupported !"
 #endif
 
-#endif /* SIMULINKVERSION_H */
+#endif // SIMULINKVERSION_H 

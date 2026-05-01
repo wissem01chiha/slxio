@@ -1,4 +1,6 @@
 #include "Version.h"
+#include "SimulinkVersion.h"
+#include "VersionMacro.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -28,6 +30,13 @@ bool Version::IsMinorVersionLessThan(UInt32 version)
 }
 
 std::string Version::GetVersionString()
+{
+    return std::to_string(GetMajorVersion()) + "." +
+           std::to_string(GetMinorVersion()) + "." +
+           std::to_string(GetPatchVersion());
+}
+
+std::string Version::GetSimulinkVersionString()
 {
   return std::string();
 }

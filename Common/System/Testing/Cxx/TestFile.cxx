@@ -1,13 +1,12 @@
-// #include "Compiler.h"
-// #include "Doctest.h"
-// #include "File.h"
+#include "Doctest.h"
+#include "File.h"
 // #include "Libuv.h"
 // #include <chrono>
 // #include <random>
 
-// class FileTestFixture
-// {
-// public:
+class FileTestFixture 
+{
+public:
 //   static constexpr const char* TEST_FILE = "testfile.txt";
 
 //   FileTestFixture()
@@ -89,20 +88,20 @@
 
 //   ~FileTestFixture() { std::remove(TEST_FILE); }
 
-// protected:
-//   char cwdbuffer[1024];
-// };
+protected:
+   char cwdbuffer[1024];
+};
 
-// TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test")
-// {
+TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test")
+{
 
 //   File f(TEST_FILE, File::Read);
 //   CHECK(f.isFile() == true);
 //   CHECK(f.getFilename() == "testfile.txt");
-// }
+}
 
-// TEST_CASE_FIXTURE(FileTestFixture, "Get Filename Test")
-// {
+TEST_CASE_FIXTURE(FileTestFixture, "Get Filename Test")
+{
 
 //   static char TEST_FILE_FULL_PATH[512];
 //   snprintf(TEST_FILE_FULL_PATH, sizeof(TEST_FILE_FULL_PATH),
@@ -110,15 +109,15 @@
 
 //   File f(TEST_FILE_FULL_PATH, File::Read);
 //   CHECK(f.getFilename() == "testfile.txt");
-// }
+}
 
-// TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test")
-// {
+TEST_CASE_FIXTURE(FileTestFixture, "Open and Close File Test")
+{
 
 //   File f(TEST_FILE, File::Read);
 //   CHECK(f.open() == E_OK);
 //   CHECK(f.close() == E_OK);
-// }
+}
 
 // TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents")
 // {
@@ -217,7 +216,3 @@
 //   CHECK(f.zip(getZipPath("Asset2.zip"), "simulink/blockdiagram.xml") ==
 //     E_OK);
 // }
-
-int main(){
-  return 0;
-}

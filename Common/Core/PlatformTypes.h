@@ -18,7 +18,7 @@
 #define SLXIO_SIZEOF_DOUBLE SLXIO_ABI_SIZEOF_DOUBLE
 
 /* Is data type char signed or not ?  */
-#if defined(SLXIO_ABI_CHAR_IS_SIGNED)
+#ifdef SLXIO_ABI_CHAR_IS_SIGNED
 #define SLXIO_TYPE_CHAR_IS_SIGNED 1
 #else
 #define SLXIO_TYPE_CHAR_IS_SIGNED 0
@@ -102,6 +102,8 @@
   #define SLXIO_TYPE_INT8 SLXIO_SIGNED_CHAR
   #define SLXIO_TYPE_INT8_MIN SLXIO_SIGNED_CHAR_MIN
   #define SLXIO_TYPE_INT8_MAX SLXIO_SIGNED_CHAR_MAX
+#else
+#error "No native data type can represent an 8-bit integer."
 #endif 
 
 #if SLXIO_SIZEOF_SHORT == 2
@@ -122,6 +124,8 @@ using Int16 = signed int;
 #define SLXIO_TYPE_INT16 SLXIO_INT
 #define SLXIO_TYPE_INT16_MIN SLXIO_INT_MIN
 #define SLXIO_TYPE_INT16_MAX SLXIO_INT_MAX
+#else
+#error "No native data type can represent an 16-bit integer."
 #endif
 
 #if SLXIO_SIZEOF_INT == 4
@@ -142,6 +146,8 @@ using Int16 = signed int;
   #define SLXIO_TYPE_INT32 SLXIO_LONG
   #define SLXIO_TYPE_INT32_MIN SLXIO_LONG_MIN
   #define SLXIO_TYPE_INT32_MAX SLXIO_LONG_MAX
+#else
+#error "No native data type can represent an 32-bit integer."
 #endif
 
 #if SLXIO_SIZEOF_LONG_LONG == 8
@@ -163,21 +169,21 @@ using Int64 = signed long;
 #define SLXIO_TYPE_INT64_MIN SLXIO_LONG_MIN
 #define SLXIO_TYPE_INT64_MAX SLXIO_LONG_MAX
 #else
-#error ""
+#error "No native data type can represent an 64-bit integer."
 #endif
 
 #if SLXIO_SIZEOF_FLOAT == 4
 using Float32 = float;
 #define SLXIO_TYPE_FLOAT32 SLXIO_FLOAT
 #else
-#error ""
+#error "No native data type can represent an 32-bit float."
 #endif
 
 #if SLXIO_SIZEOF_DOUBLE == 8
 using Float64 = double;
 #define SLXIO_TYPE_FLOAT64 SLXIO_DOUBLE
 #else
-#error ""
+#error "No native data type can represent an 64-bit float."
 #endif
 
 /* Select the implementation type for IdType.  */
@@ -194,4 +200,4 @@ using IdType = int;
 /* Define an alias for error code return data types*/
 typedef UInt32 ReturnType;
 
-#endif /* PLATFORMTYPES_H */
+#endif // PLATFORMTYPES_H

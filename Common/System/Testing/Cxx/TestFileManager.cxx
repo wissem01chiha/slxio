@@ -7,6 +7,10 @@ public:
 private:
 };
 
-int main(){
-  return 0;
+TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test")
+{
+
+//   File f(TEST_FILE, File::Read);
+//   CHECK(f.isFile() == true);
+//   CHECK(f.getFilename() == "testfile.txt");
 }

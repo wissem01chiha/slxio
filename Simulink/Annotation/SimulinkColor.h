@@ -6,14 +6,16 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "Color.h"
 #include "PlatformTypes.h"
 #include <string>
-#include <vector>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @class SimulinkColor
+ * @brief Container for default Simulink Supported Colors
+ */
 class APIEXPORT SimulinkColor final
 {
 public:

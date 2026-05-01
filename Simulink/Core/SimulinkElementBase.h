@@ -16,7 +16,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class Base class for Simulink elements.
+ * @class SimulinkElementBase
+ * @brief Base class for Simulink elements.
  * @note Visual Simulink elements may differ from their actual XML
  * file representation. For example, a SimulinkArray is not a direct
  * component of the model, but rather a construct used to group
@@ -24,7 +25,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * purposes. This class currently serves as a common base for both
  * visual and structural elements. The key characteristic for
  * inheriting from this class is that the child element must have a
- * unique integer-based ID across the entire model XML file. Elements
+ * unique integer-based Id across the entire model XML file. Elements
  * that use string-based identifiers or other indexing mechanisms
  * should not inherit from this class.
  * @todo Separate base interfaces for concrete Simulink model elements
@@ -39,6 +40,10 @@ public:
   virtual SimulinkElementType GetElementType() const = 0;
   virtual IdType GetElementId() const = 0;
   virtual std::string ToString() const = 0;
+
+  /**
+   * 
+   */
   virtual bool Contains(const IdType& id) const = 0;
 
 protected:

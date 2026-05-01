@@ -93,16 +93,11 @@ const char* GetErrorLevelInfo(UInt32 code)
 {
   switch (GET_SEVERITY(code))
   {
-    case E_FATAL:
-      return "FATAL";
-    case E_ERROR:
-      return "ERROR";
-    case E_WARN:
-      return "WARN";
-    case E_INFO:
-      return "INFO";
-    default:
-      return "UNKNOWN";
+    case E_FATAL: return "FATAL";
+    case E_ERROR: return "ERROR";
+    case E_WARN: return "WARN";
+    case E_INFO: return "INFO";
+    default: return "UNKNOWN";
   }
 }
 
@@ -130,7 +125,7 @@ const char* _GetErrorInfo(UInt32 code)
 
 int PrintError(UInt32 code)
 {
-  return printf("Error [level:%s group:%s module:%u code:%u] %s\n",
+  return printf("ERROR [Level:%s, Group:%s, Module:%u, Code:%u] %s\n",
     GetErrorLevelInfo(code), GetErrorDomainInfo(code), GET_MODULE(code),
     GET_ERROR(code), _GetErrorInfo(code));
 }

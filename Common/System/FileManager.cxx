@@ -1,35 +1,36 @@
 #include "FileManager.h"
-#include "File.h"
 #include "ErrorTypes.h"
+#include "File.h"
 
-// UInt32 FileManager::GetFileID(const std::string& _stFilename)
-// {
-//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
-//   {
-//     if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
-//     {
-//       return i;
-//     }
-//   }
-//   return -1;
-// }
+IdType FileManager::GetFileId(const std::string& filename)
+{
+for (UInt32 i = 0; i < GetFileMaxId(); i++)
+     {
+       //if (fileList[i] != nullptr && fileList[i]->GetFilename() ==
+       //filename)
+      //{
+       //  return i;
+       //}
+   }
+  return (IdType)-1;
+}
 
-// UInt32 FileManager::GetFileMaxID()
-// {
-//   return static_cast<UInt32>(fileList.size());
-// }
+IdType FileManager::GetFileMaxId()
+{
+   return SLXIO_TYPE_CAST(IdType,fileList.size());
+}
 
-// bool FileManager::IsOpened(const std::string& _stFilename)
-// {
-//   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
-//   {
+bool FileManager::IsOpened(const std::string& filename)
+ {
+  for (UInt32 i = 0; i < GetFileMaxId() ; i++)
+   {
 //     if (fileList[i] != nullptr && fileList[i]->getFilename() == _stFilename)
 //     {
 //       return true;
 //     }
-//   }
-//   return false;
-// }
+   }
+  return false;
+ }
 
 // File* FileManager::GetFile(UInt32 _iID)
 // {
@@ -79,8 +80,8 @@
 //   return iNewId;
 // }
 
-// UInt32 FileManager::GetFirstFreeFileID()
-// {
+IdType FileManager::GetFirstFreeFileId()
+ {
 //   // find first free space
 //   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
 //   {
@@ -89,7 +90,8 @@
 //       file = i;
 //       return i;
 //     }
-//   }
+    return (IdType)-1;
+   }
 
 //   // no free space, add at the end
 //   UInt32 iNewId = static_cast<UInt32>(fileList.size());

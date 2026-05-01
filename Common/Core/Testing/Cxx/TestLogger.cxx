@@ -1,58 +1,113 @@
 #include "Doctest.h"
+#include "ErrorTypes.h"
 #include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Logger Constructor Test")
+TEST_CASE("Logger Singleton Constructor Test")
 {
-  Logger& Logger = Logger::GetInstance();
-  CHECK(&Logger != nullptr);
+  Logger& logger = Logger::GetInstance();
+  CHECK(&logger != nullptr);
 }
 
-TEST_CASE("Logger Set Verbosity Test")
+TEST_CASE("Logger Set and Get Verbosity Test")
 {
   Logger& logger = Logger::GetInstance();
 
   logger.SetLogLevel(Logger::MessageLevelType::LOG_DEBUG);
-  Logger::MessageLevelType level = logger.GetLogLevel();
-  CHECK(level == Logger::MessageLevelType::LOG_DEBUG);
+  CHECK(logger.GetLogLevel() == Logger::MessageLevelType::LOG_DEBUG);
+
+  logger.SetLogLevel(Logger::MessageLevelType::LOG_INFO);
+  CHECK(logger.GetLogLevel() == Logger::MessageLevelType::LOG_INFO);
+
+  logger.ResetLogLevelType();
+  CHECK(logger.GetLogLevel() == Logger::MessageLevelType::LOG_OFF);
 }
 
 TEST_CASE("Logger Enabled Test")
- {
-  Logger& Logger = Logger::GetInstance();
-  CHECK(Logger.IsEnabled());
+{
+  Logger& logger = Logger::GetInstance();
+  CHECK(logger.IsEnabled() == true);
 }
 
-// TEST_CASE("Logger file logging Test")
-// {
+TEST_CASE("Logger Buffer Clear Test")
+{
+  Logger& logger = Logger::GetInstance();
 
-//   Logger& Logger = Logger::GetInstance();
-//   Logger.setInternalFileMode(File::Mode::Append);
+  Logger::ApplicationInfoType appInfo = { 1, "TestApp", "" };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG,
+    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  std::vector<std::string> data = { "hello world" };
 
-//   const size_t size = 1024;
-//   char buffer[size];
-//   CHECK(getcwd(buffer, size) != nullptr);
-//   CHECK(strlen(buffer) + strlen("test.txt") < size);
-//   strcat(buffer, "/test.txt");
+  logger.SendLogMessage(info, data);
 
-//   Logger.logToFile(Logger::Verbosity::VERBOSITY_1, buffer, 1,
-//     "Logger file logging Test :: Hello Message");
+  auto filtered = logger.GetFiltredLogMessage(1);
+  CHECK(filtered.size() > 0);
 
-//   std::ifstream f(buffer);
-//   CHECK(f.good());
-// }
+  logger.ClearBuffer();
+  auto filteredAfterClear = logger.GetFiltredLogMessage(1);
+  CHECK(filteredAfterClear.empty());
+}
 
-// TEST_CASE("Logger random file logging Test")
-// {
+TEST_CASE("Logger Filtered Message By Name Test")
+{
+  Logger& logger = Logger::GetInstance();
 
-//   Logger& Logger = Logger::GetInstance();
-//   Logger.setInternalFileMode(File::Mode::Append);
-//   ReturnType status_t = Logger.logToFile(Logger::Verbosity::VERBOSITY_1,
-//     "Logger file logging Test :: Hello Message");
-//   CHECK(status_t == E_OK);
-// }
+  Logger::ApplicationInfoType appInfo = { 2, "MyApp", "" };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG,
+    Logger::MessageLevelType::LOG_WARN, appInfo, 1 };
+  std::vector<std::string> data = { "Warning message" };
 
+  logger.SendLogMessage(info, data);
+
+  auto filtered = logger.GetFiltredLogMessage("MyApp");
+  CHECK(filtered.size() > 0);
+  CHECK(filtered[0].info.logLevel == Logger::MessageLevelType::LOG_WARN);
+}
+
+TEST_CASE("Logger File Mode Test")
+{
+  Logger& logger = Logger::GetInstance();
+
+  logger.SetLogFileMode(Logger::LogFileModeType::APPEND);
+  CHECK(logger.GetLogFileMode() == Logger::LogFileModeType::APPEND);
+
+  logger.SetLogFileMode(Logger::LogFileModeType::TRUNCATE);
+  CHECK(logger.GetLogFileMode() == Logger::LogFileModeType::TRUNCATE);
+}
+
+TEST_CASE("Logger Print Test")
+{
+  Logger& logger = Logger::GetInstance();
+
+  logger.ClearBuffer();
+
+  Logger::ApplicationInfoType appInfo = { 3, "PrintApp", "Dummy Application" };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG,
+    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  std::vector<std::string> data = { "Hello from Print" };
+
+  logger.SendLogMessage(info, data);
+
+  logger.Print();
+}
+
+TEST_CASE("Logger WriteToFile Test")
+{
+  Logger& logger = Logger::GetInstance();
+  logger.ClearBuffer();
+
+  Logger::ApplicationInfoType appInfo = { 42, "FileApp",
+    "File test application" };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG,
+    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  std::vector<std::string> data = { "Message written to file" };
+  logger.SendLogMessage(info, data);
+
+  ReturnType result = logger.WriteToFile("testlogfile.log");
+  PrintError(result);
+  CHECK(result == E_OK);
+}
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

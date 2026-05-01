@@ -4,26 +4,14 @@
 #include "ErrorTypes.h"
 #include "LibZip.h"
 #include "Libuv.h"
-#include <cstring>
 #include <fstream>
 #include <iostream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-File::File(const std::string& path, Mode mode)
-  : FileMode(mode)
-  , FilePath(path)
-{
-}
-
 File::File(const std::string& path) {}
 
-File::File(const char* path, Mode mode)
-  : FileMode(mode)
-{
-  FilePath = std::string(path);
-}
 
 File::File(const File& fs)
   : FilePath(fs.FilePath)
@@ -124,7 +112,6 @@ UInt32 File::Open()
 
   if (err < 0)
   {
-
     return SLXIO_ERROR_CODE(E_ERROR, THIRDPARTY, LIBUV, abs(err));
   }
   FileDescriptor = err;
@@ -187,7 +174,7 @@ UInt32 File::Write(const char* message)
   return E_OK;
 }
 
-UInt32 File::Close()
+ReturnType File::Close()
 {
   if (FileDescriptor < 0)
   {
@@ -517,9 +504,8 @@ UInt32 File::Unzip(const char* dir)
   return E_OK;
 }
 
-UInt32 File::Zip(const char* zfilepath, const char* zname)
+ReturnType File::Zip(const char* zfilepath, const char* zname)
 {
-
   zip_t* za;
   int err;
 
