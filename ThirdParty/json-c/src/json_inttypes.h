@@ -8,11 +8,11 @@
 #include <inttypes.h>
 #include <stdint.h>
 
-#if defined(_MSC_VER) 
+#if defined(_WIN32) 
 #include <BaseTsd.h>
 #ifndef ssize_t
 typedef SSIZE_T ssize_t;
 #endif
-#endif // _MSC_VER
+#endif // _WIN32
 
 #endif // _json_inttypes_h_

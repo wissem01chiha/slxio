@@ -4,8 +4,8 @@
 #ifndef SIMULINKROOT_H
 #define SIMULINKROOT_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
 #include "PlatformTypes.h"

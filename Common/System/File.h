@@ -4,8 +4,8 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include <string>
 #include <vector>
@@ -16,9 +16,8 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class File - Cross‑platform file system abstraction.
- * @brief Provides a unified interface for file operations such as open, read,
- * write, copy, move, rename, and compression.
+ * @class File
+ * @brief Cross‑platform file system abstraction.
  */
 class APIEXPORT File final
 {

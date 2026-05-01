@@ -4,8 +4,8 @@
 #ifndef SIMULINKDATATYPE_H
 #define SIMULINKDATATYPE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include <string>
 

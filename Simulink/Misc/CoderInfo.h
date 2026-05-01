@@ -4,8 +4,8 @@
 #ifndef CODERINFO_H
 #define CODERINFO_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN

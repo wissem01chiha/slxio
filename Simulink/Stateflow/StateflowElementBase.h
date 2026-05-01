@@ -4,8 +4,8 @@
 #ifndef STATEFLOWELEMENTBASE_H
 #define STATEFLOWELEMENTBASE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "SimulinkElementBase.h"
 
 SLXIO_NAMESPACE_BEGIN

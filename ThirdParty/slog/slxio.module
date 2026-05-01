@@ -5,7 +5,7 @@ GROUP
 LIBRARY_NAME
   ThirdPartyslog
 DESCRIPTION
-  Slog Logging Third Party Module
+  Advanced cross-platform logging library for C/C++
 LICENSE
   MIT-License
 VERSION

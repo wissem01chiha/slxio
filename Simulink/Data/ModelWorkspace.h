@@ -4,8 +4,8 @@
 #ifndef MODELWORKSPACE_H
 #define MODELWORKSPACE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "DataSourceType.h"
 #include "PlatformTypes.h"
 #include <string>

@@ -4,8 +4,8 @@
 #ifndef SIMULINKMODELTYPE_H
 #define SIMULINKMODELTYPE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN

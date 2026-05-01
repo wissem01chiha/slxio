@@ -15,8 +15,8 @@
 #ifndef SIMULINKPARAMETERWRITER_H
 #define SIMULINKPARAMETERWRITER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Json-c.h"
 #include "SimulinkParameter.h"
 #include "SimulinkParserBase.h"

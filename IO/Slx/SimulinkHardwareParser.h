@@ -4,8 +4,8 @@
 #ifndef SIMULINKHARDWAREPARSER_H
 #define SIMULINKHARDWAREPARSER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "ErrorTypes.h"
 #include "LibXML2.h"
 #include "SimulinkHardware.h"

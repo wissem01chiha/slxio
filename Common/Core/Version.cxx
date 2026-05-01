@@ -36,9 +36,19 @@ std::string Version::GetVersionString()
            std::to_string(GetPatchVersion());
 }
 
+UInt8 Version::GetSimulinkVersion()
+{
+  return (UInt8)SIMULINK_VERSION_YEAR;
+}
+
+const char* Version::GetSimulinkRelease()
+{
+  return SIMULINK_VERSION_RELEASE;
+}
+
 std::string Version::GetSimulinkVersionString()
 {
-  return std::string();
+  return std::to_string(GetSimulinkVersion()) + std::string(GetSimulinkRelease()) ;
 }
 
 SLXIO_ABI_NAMESPACE_END

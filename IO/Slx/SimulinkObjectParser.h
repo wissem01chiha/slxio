@@ -4,8 +4,8 @@
 #ifndef SIMULINKOBJECTPARSER_H
 #define SIMULINKOBJECTPARSER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "LibXML2.h"
 #include "SimulinkObject.h"
 #include "SimulinkParserBase.h"

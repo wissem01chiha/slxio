@@ -35,7 +35,7 @@ INSTALL_LICENSES
   TRUE
 CLASSES
   Version
-  Timer
+  SteadyTimer
   Logger
 WINDOWS_CLASSES
 UNIX_CLASSES
@@ -52,11 +52,13 @@ HEADERS
   Compiler.h 
   Config.h
   ErrorTypes.h 
-  PlatformTypes.h 
+  PlatformTypes.h
+  ErrorTypes.h 
   Logger.h
   Version.h 
   VersionMacro.h
   Timer.h
+  SteadyTimer.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Libpng_h__
-#define __Libpng_h__
+#ifndef LIBPNG_H
+#define LIBPNG_H
 
-#ifdef USE_EXTERNAL_LIBPNG
+#if USE_EXTERNAL_LIBPNG
 #include <png.h>
 #else
-#include "src/png.h"
+#include <src/png.h>
 #endif 
 
-#endif /* __Libpng_h__ */
+#endif // LIBPNG_H

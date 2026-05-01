@@ -4,8 +4,8 @@
 #ifndef SIMULATIONSETTINGSPARSER_H
 #define SIMULATIONSETTINGSPARSER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "LibXML2.h"
 #include "SimulationSettings.h"
 #include "SimulinkParserBase.h"

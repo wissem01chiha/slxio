@@ -4,9 +4,9 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include "APIExportMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-#include "ABINamespaceMacro.h"
+#include "AbiNamespaceMacro.h"
 #include <list>
 #include <string>
 #include <memory>

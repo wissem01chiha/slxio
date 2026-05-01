@@ -4,8 +4,8 @@
 #ifndef DIRECTORYMANAGER_H
 #define DIRECTORYMANAGER_H
 
-#include "APIExportMacro.h"
-#include "ABINamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "AbiNamespaceMacro.h"
 #include "PlatformTypes.h"
 
 class File;

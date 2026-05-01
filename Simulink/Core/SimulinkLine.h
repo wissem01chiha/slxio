@@ -4,8 +4,8 @@
 #ifndef SIMULINKLINE_H
 #define SIMULINKLINE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Logger.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"

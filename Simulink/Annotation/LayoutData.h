@@ -4,7 +4,7 @@
 #ifndef LAYOUTDATA_H
 #define LAYOUTDATA_H
 
-#include "ABINamespaceMacro.h"
+#include "AbiNamespaceMacro.h"
 #include "Color.h"
 #include "RectangleLayoutDataBase.h"
 #include "RectangleType.h"

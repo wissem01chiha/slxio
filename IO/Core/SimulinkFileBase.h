@@ -4,8 +4,8 @@
 #ifndef SIMULINKFILEBASE_H
 #define SIMULINKFILEBASE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN

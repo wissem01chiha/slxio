@@ -4,8 +4,8 @@
 #ifndef STATEFLOWEVENT_H
 #define STATEFLOWEVENT_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "ErrorTypes.h"
 #include "StateflowElementBase.h"
 

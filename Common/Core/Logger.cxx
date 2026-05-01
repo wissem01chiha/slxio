@@ -27,7 +27,11 @@ ReturnType Logger::Init(int argc, char** argv)
 #if SLXIO_LOGURU
   loguru::init(argc, argv);
 #elif SLXIO_SLOG
-  slog_init("logfile.log", SLOG_FLAGS_ALL, 0);
+  slog_config_t cfg;
+  slog_config_get(&cfg);
+  cfg.eColorFormat = SLOG_COLORING_FULL;
+  slog_config_set(&cfg);
+  slog_init(NULL, SLOG_FLAGS_ALL, 0);
 #endif
   return E_OK;
 }
@@ -53,6 +57,7 @@ void Logger::Print()
 #if SLXIO_LOGURU
 
 #elif SLXIO_SLOG
+  
   slog_config_t cfg;
   slog_config_get(&cfg);
   cfg.eColorFormat = SLOG_COLORING_FULL;
@@ -244,10 +249,10 @@ std::string Logger::FormatLogEntry(
 {
   const auto& info = entry.info;
   std::ostringstream oss;
-  oss << "[Id=" << info.appId.appId << ", Name=" << info.appId.appName
-      << ", Description=" << info.appId.appDescription
-      << ", Type=" << static_cast<int>(info.type)
-      << ", Level=" << static_cast<int>(info.logLevel) << "] " << msg;
+  oss << "[" << info.appId.appId << "," << info.appId.appName
+      << "," << info.appId.appDescription
+      << "," << static_cast<int>(info.type)
+      << "," << static_cast<int>(info.logLevel) << "] " << msg;
   return oss.str();
 }
 

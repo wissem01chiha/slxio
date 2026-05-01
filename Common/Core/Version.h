@@ -4,9 +4,9 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#include "ABINamespaceMacro.h"
+#include "AbiNamespaceMacro.h"
 #include "PlatformTypes.h"
-#include "APIExportMacro.h"
+#include "ApiExportMacro.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -54,6 +54,15 @@ public:
    */
   static std::string GetVersionString();
 
+  /**
+   * Returns the Simulink Release year
+   */
+  static UInt8 GetSimulinkVersion();
+  
+  /**
+   * Returns the Simulink Release tag
+   */
+  static const char* GetSimulinkRelease();
   /**
    * Returns the full Simulink version in "year.release" format
    */

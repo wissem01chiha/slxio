@@ -4,8 +4,8 @@
 #ifndef SIMULINKSIGNAL_H
 #define SIMULINKSIGNAL_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "CoderInfo.h"
 #include "ErrorTypes.h"
 #include "PlatformTypes.h"

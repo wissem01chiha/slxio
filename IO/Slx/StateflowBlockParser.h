@@ -4,8 +4,8 @@
 #ifndef STATEFLOWBLOCKPARSER_H
 #define STATEFLOWBLOCKPARSER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "LibXML2.h"
 #include "SimulinkParserBase.h"
 #include "StateflowBlock.h"

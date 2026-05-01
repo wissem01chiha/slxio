@@ -15,8 +15,8 @@
 #ifndef SIMULINKBLOCKWRITER_H
 #define SIMULINKBLOCKWRITER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Json-c.h"
 #include "SimulinkBlock.h"
 #include "SimulinkWriterBase.h"

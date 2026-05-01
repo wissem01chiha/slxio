@@ -15,8 +15,8 @@
 #ifndef SIMULINKARRAYWRITER_H
 #define SIMULINKARRAYWRITER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Json-c.h"
 #include "SimulinkArray.h"
 #include "SimulinkWriterBase.h"

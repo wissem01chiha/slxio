@@ -4,8 +4,8 @@
 #ifndef SIMULINKCONTENT_H
 #define SIMULINKCONTENT_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "ErrorTypes.h"
 #include "LibXML2.h"
 #include "Logger.h"

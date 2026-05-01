@@ -4,8 +4,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include <string>
 #include <vector>
@@ -187,7 +187,7 @@ public:
    * Get the default logging directory path.
    */
   std::string GetDefaultLogDirectoryPath(void);
-  
+
 private:
   /**
    * Helper function for slog logging library
@@ -197,11 +197,10 @@ private:
   /**
    * Helper function for formatting output logs
    */
-  std::string FormatLogEntry(
-    const LogMessage& entry, const std::string& msg);
-  
+  std::string FormatLogEntry(const LogMessage& entry, const std::string& msg);
+
   /**
-   * Default Constructor 
+   * Default Constructor
    */
   Logger();
   Logger(const Logger&) = delete;

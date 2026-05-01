@@ -4,8 +4,8 @@
 #ifndef SIMULINKCONTENTPARSER_H
 #define SIMULINKCONTENTPARSER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Directory.h"
 #include "ErrorTypes.h"
 #include "File.h"

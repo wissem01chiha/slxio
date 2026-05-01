@@ -4,7 +4,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Version Major/Minor/Patch getters")
+TEST_CASE("Version major/minor/patch getters")
 {
   CHECK(Version::GetMajorVersion() == SLXIO_VERSION_MAJOR);
   CHECK(Version::GetMinorVersion() == SLXIO_VERSION_MINOR);

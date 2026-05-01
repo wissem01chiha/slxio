@@ -48,6 +48,11 @@ extern "C"
 #define LIBUV 16
 
 /* Define error mapping macro */
+// Error code layout (uint32_t):
+// [31..30] Severity (2 bits)
+// [29..22] Namespace (8 bits)
+// [21..14] Module (8 bits)
+// [13..0]  Error code (14 bits)
 #define SLXIO_ERROR_CODE(severity, namespace, module, error)                   \
   (((UInt32)(severity) << 30) | ((UInt32)(namespace) << 22) |                  \
     ((UInt32)(module) << 14) | ((UInt32)(error) & 0x3FFF))

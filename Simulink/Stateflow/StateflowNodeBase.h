@@ -3,8 +3,8 @@
 #ifndef STATEFLOWNODEBASE_H
 #define STATEFLOWNODEBASE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "ErrorTypes.h"
 #include "StateflowElementBase.h"
 #include <memory>

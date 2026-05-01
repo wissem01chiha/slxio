@@ -4,8 +4,8 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -18,7 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT Timer 
 {
 public:
-  virtual ~Timer();
+  virtual ~Timer() =default;
 
   /** 
    * Call Start every time to reset the timer to zero.

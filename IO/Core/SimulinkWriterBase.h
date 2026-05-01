@@ -4,8 +4,8 @@
 #ifndef SIMULINKWRITERBASE_H
 #define SIMULINKWRITERBASE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include "ErrorTypes.h"
 #include "Logger.h"

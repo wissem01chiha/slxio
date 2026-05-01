@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef __Pybind11_h__
-#define __Pybind11_h__
+#ifndef PYBIND11_H
+#define PYBIND11_H
 
-#ifdef USE_EXTERNAL_PYBIND11
+#if USE_EXTERNAL_PYBIND11
 
 #else
 
 #endif 
 
-#endif /* __Pybind11_h__ */
+#endif // PYBIND11_H

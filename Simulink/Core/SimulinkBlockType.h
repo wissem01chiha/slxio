@@ -4,8 +4,8 @@
 #ifndef SIMULINKBLOCKTYPE_H
 #define SIMULINKBLOCKTYPE_H
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "SimulinkElementType.h"
 
 SLXIO_NAMESPACE_BEGIN
