@@ -6,7 +6,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkPort::SimulinkPort(const SimulinkPort& other)
-  : l(Logger::GetInstance())
+  : logger(Logger::GetInstance())
 {
   this->blockId = other.blockId;
   this->block = other.block;
@@ -17,7 +17,7 @@ SimulinkPort::SimulinkPort(
   std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType)
   : type(pType)
   , block(block)
-  , l(Logger::GetInstance())
+  , logger(Logger::GetInstance())
 {
 }
 
@@ -46,8 +46,6 @@ std::string SimulinkPort::ToString() const
 
 ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
-
-  Logger& l = Logger::GetInstance();
   if (element == nullptr)
   {
     //l.log(Logger::V_WARNING,

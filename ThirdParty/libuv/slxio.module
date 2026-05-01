@@ -79,7 +79,6 @@ WINDOWS_SOURCES
   src/src/win/winapi.c
   src/src/win/winsock.c
 UNIX_SOURCES
-  src/src/unix/aix-common.c
   src/src/unix/aix.c
   src/src/unix/async.c
   src/src/unix/bsd-ifaddrs.c
