@@ -43,7 +43,7 @@ std::string SimulinkModel::ToString() const
   return std::string();
 }
 
-SimulinkBlock& SimulinkModel::GetBlock(IdType blockIdx)
+SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
 {
 
   for (const auto& blk : blocks)

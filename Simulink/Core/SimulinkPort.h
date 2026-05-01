@@ -18,12 +18,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkLine;
 
 /**
+ * @class SimulinkPort
  * @brief Base class for Simulink ports.
  */
-class APIEXPORT SimulinkPort final : public SimulinkElementBase
+class APIEXPORT SimulinkPort : public SimulinkElementBase
 {
 public:
-  SimulinkPort() = default;
+  SimulinkPort() = delete;
   SimulinkPort(const SimulinkPort& other);
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
@@ -66,8 +67,13 @@ public:
   /// @note Each line should have a unique identifier.
   std::shared_ptr<SimulinkLine> getLine(const IdType& lineId);
 
+  /**
+   * 
+   */
+  Logger& GetLogger();
+  
 private:
-  Logger& l;
+  Logger& logger;
   IdType blockId;
   SimulinkPortType type;
   std::shared_ptr<SimulinkBlock> block;

@@ -79,7 +79,7 @@ public:
   /**
    * 
    */
-  SimulinkBlock& GetBlock(IdType blockIdx);
+  SimulinkBlock GetBlock(IdType blockIdx);
 
   /**
    * 

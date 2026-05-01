@@ -135,5 +135,10 @@ std::shared_ptr<SimulinkLine> SimulinkPort::getLine(const IdType& lineId)
   return std::shared_ptr<SimulinkLine>();
 }
 
+Logger& SimulinkPort::GetLogger()
+{
+  return logger;
+}
+
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
