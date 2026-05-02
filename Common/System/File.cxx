@@ -1,7 +1,7 @@
 ﻿#include "File.h"
 #include "Compiler.h"
 #include "Directory.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "LibZip.h"
 #include "Libuv.h"
 #include <fstream>
@@ -10,8 +10,11 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-File::File(const std::string& path) {}
-
+File::File(const std::string& path)
+  : FileDescriptor(-1)
+  , FileMode(Mode::APPEND)
+{
+}
 
 File::File(const File& fs)
   : FilePath(fs.FilePath)
@@ -112,7 +115,7 @@ UInt32 File::Open()
 
   if (err < 0)
   {
-    return SLXIO_ERROR_CODE(E_ERROR, THIRDPARTY, LIBUV, abs(err));
+    return err;
   }
   FileDescriptor = err;
   return E_OK;
@@ -123,7 +126,7 @@ UInt32 File::Read()
 
   if (FileMode != READ)
   {
-    return E_WRNG_FILE_MODE;
+    return E_INVALID_FILE_MODE;
   }
 
   InternalBuffer.resize(4096);
@@ -137,12 +140,7 @@ UInt32 File::Read()
 
   if (err < 0)
   {
-    return SLXIO_ERROR_CODE(ERROR, THIRDPARTY, LIBUV, abs(err));
-  }
-  if (err == 0)
-  {
-
-    return E_EOF;
+    return err;
   }
 
   NumberOfBytes = static_cast<size_t>(err);
@@ -154,7 +152,7 @@ UInt32 File::Write(const char* message)
 
   if (FileMode == READ)
   {
-    return E_WRNG_FILE_MODE;
+    return E_INVALID_FILE_MODE;
   }
 
   uv_fs_t req;
@@ -256,11 +254,11 @@ UInt32 File::SetFileExtension(const char* newExt)
 
   if (!newExt || *newExt == '\0')
   {
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   if (FilePath.empty())
   {
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   size_t pos = FilePath.find_last_of('.');
@@ -279,14 +277,14 @@ UInt32 File::SetFileExtension(const char* newExt)
   FILE* src = fopen(FilePath.c_str(), "rb");
   if (!src)
   {
-    return E_FOPEN_FAIL;
+    return E_FILE_OPEN_FAIL;
   }
 
   FILE* dst = fopen(dest.c_str(), "wb");
   if (!dst)
   {
     fclose(src);
-    return E_FOPEN_FAIL;
+    return E_FILE_OPEN_FAIL;
   }
 
   char InternalBuffer[4096];
@@ -309,7 +307,7 @@ UInt32 File::Move(const char* dirpath)
 
   if (dirpath == nullptr)
   {
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   std::string newPath = std::string(dirpath);
@@ -336,13 +334,13 @@ UInt32 File::Move(const char* dirpath)
 
 UInt32 File::Copy(File& ofile)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 UInt32 File::Copy(const char* destdir)
 {
   if (!destdir)
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
 
   std::string destpath(destdir);
   if (!destpath.empty() && destpath.back() != PATH_SEP)
@@ -354,13 +352,13 @@ UInt32 File::Copy(const char* destdir)
   std::ifstream src(FilePath, std::ios::binary);
   if (!src.is_open())
   {
-    return E_FOPEN_FAIL;
+    return E_FILE_OPEN_FAIL;
   }
 
   std::ofstream dst(destpath, std::ios::binary);
   if (!dst.is_open())
   {
-    return E_FOPEN_FAIL;
+    return E_FILE_OPEN_FAIL;
   }
 
   dst << src.rdbuf();
@@ -381,7 +379,7 @@ UInt32 File::Copy(const char* destdir)
 UInt32 File::Rename(const char* filename)
 {
   if (!filename || *filename == '\0')
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   FilePath = std::string(filename);
   return E_OK;
 }
@@ -454,7 +452,7 @@ UInt32 File::Unzip(const char* dir)
   zip_t* archive = zip_open(FilePath.c_str(), ZIP_RDONLY, &err);
   if (!archive)
   {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, err);
+    return err;
   }
 
   zip_int64_t num_entries = zip_get_num_entries(archive, 0);
@@ -514,34 +512,12 @@ ReturnType File::Zip(const char* zfilepath, const char* zname)
     zip_error_t error;
     zip_error_init_with_code(&error, err);
     zip_error_fini(&error);
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &error);
+    return err;
   }
-
   zip_int64_t idx = zip_name_locate(za, zname, 0);
-  if (idx < 0)
-  {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &za);
-  }
-
   zip_source_t* source = zip_source_file(za, FilePath.c_str(), 0, -1);
-  if (source == nullptr)
-  {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &za);
-  }
-
-  if (zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8) < 0)
-  {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &za);
-  }
-
-  if (idx < 0)
-  {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &za);
-  }
-  if (zip_close(za) < 0)
-  {
-    return SLXIO_ERROR_CODE(E_INFO, THIRDPARTY, LIBZIP, &za);
-  }
+  zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8);
+  zip_close(za);
 
   return E_OK;
 };

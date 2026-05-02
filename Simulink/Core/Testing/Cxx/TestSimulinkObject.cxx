@@ -8,7 +8,7 @@ TEST_CASE("AddNullParameterTest")
 {
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
   ReturnType status = obj.AddElement(nullptr);
-  CHECK(status == E_FUNC_PARAM_NULL_PTR);
+  CHECK(status == E_PARAMETER_NULL_PTR);
 }
 
 TEST_CASE("AddSimulinkParameterTest")

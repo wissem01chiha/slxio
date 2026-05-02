@@ -50,7 +50,7 @@ ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
   {
     //l.log(Logger::V_WARNING,
     //  "SimulinkPort::Cannot remove a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))
@@ -79,7 +79,7 @@ ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element
   {
     //l.log(
    //   Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))

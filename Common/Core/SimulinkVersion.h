@@ -41,7 +41,7 @@
 #define SIMULINK_VERSION_RELEASE "a"
 #elif SLXIO_SIMULINK_VERSION == R2023b
 #define SIMULINK_VERSION_YEAR 2023
-#define SIMULINK_VERSION_RELEASE "b" 
+#define SIMULINK_VERSION_RELEASE "b"
 #elif SLXIO_SIMULINK_VERSION == R2024a
 #define SIMULINK_VERSION_YEAR 2024
 #define SIMULINK_VERSION_RELEASE "a"
@@ -58,4 +58,4 @@
 #error "Simulink Version is not set or unsupported"
 #endif
 
-#endif // SIMULINKVERSION_H 
+#endif // SIMULINKVERSION_H

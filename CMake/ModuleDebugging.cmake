@@ -35,7 +35,7 @@ endfunction()
 #]==]
 function(summary)
   message(STATUS "")
-  message(STATUS "***************  ${PROJECT_NAME} Build Configuration Summary *******************")
+  message(STATUS "***************  ${PROJECT_NAME} build configuration summary *******************")
   message(STATUS "")
   message(STATUS "Platform            : ${CMAKE_SYSTEM_NAME}")
   message(STATUS "Architecture        : ${CMAKE_SYSTEM_PROCESSOR}")

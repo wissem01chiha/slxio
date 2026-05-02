@@ -6,7 +6,7 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "StateflowElementBase.h"
 
 SLXIO_NAMESPACE_BEGIN

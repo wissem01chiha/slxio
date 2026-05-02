@@ -1,5 +1,5 @@
 ﻿#include "Directory.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "File.h"
 #include "Libuv.h"
 #include <codecvt>
@@ -92,7 +92,7 @@ UInt32 Directory::Open()
 
   if (Path.empty())
   {
-    return E_NULL_DIR_PATH;
+    return E_PATH_EMPTY ;
   }
 
   uv_fs_t req;
@@ -100,7 +100,7 @@ UInt32 Directory::Open()
   if (err < 0)
   {
     uv_fs_req_cleanup(&req);
-    return SLXIO_ERROR_CODE(E_ERROR, THIRDPARTY, LIBUV, abs(err));
+    return err;
   }
 
   uv_dir_t* dir = static_cast<uv_dir_t*>(req.ptr);
@@ -291,7 +291,7 @@ bool Directory::Empty()
 
 UInt32 Directory::Zip(const char* dir)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 UInt32 Directory::Create(const char* path)
@@ -299,7 +299,7 @@ UInt32 Directory::Create(const char* path)
 
   if (path == nullptr)
   {
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   char* Path = (char*)malloc(strlen(path) + 1);

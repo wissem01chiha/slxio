@@ -1,5 +1,5 @@
 #include "StateflowTarget.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN

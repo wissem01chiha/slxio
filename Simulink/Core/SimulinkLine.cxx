@@ -1,5 +1,5 @@
 #include "SimulinkLine.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -46,7 +46,7 @@ ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
   if (element == nullptr)
   {
     //l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (SourcePort != nullptr)
@@ -69,7 +69,7 @@ ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element
   if (element == nullptr)
   {
     //l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (SourcePort != nullptr)

@@ -4,23 +4,55 @@
 #ifndef ERRORHANDLINGAPI_H
 #define ERRORHANDLINGAPI_H
 
-#include "PlatformTypes.h"
-
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-  /* Define service functions / macro to debug error codes */
-  const char* SlxGetErrorLevelInfo(UInt32 code);
-  const char* SlxGetErrorDomainInfo(UInt32 code);
-  // added prefix '_' to avoid collision with Windows C API
-  // function GetErrorInfo
-  const char* SlxGetErrorInfo(UInt32 code);
+  /**
+   * Sets the last error code (similar to Windows SetLastError).
+   */
+  void sSetLastError(int code);
 
-  int SlxPrintError(UInt32 code);
-  int SlxPrintfError(const char* format, UInt32 code);
+  /**
+   * Retrieves the last error code value.
+   */
+  int sGetLastError(void);
 
+  /**
+   * Get string representation of slxio error by last error.
+   */
+  const char* sGetLastErrorMessage(void);
+
+  /**
+   * Get string representation of slxio error by code.
+   * library specific error code starts from 1000
+   * for codes 0-35 (range for libzip error code), fallback
+   * to zip_error_strerror() and for negative error codes
+   * it fallback to uv_strerror(), otherwise return a default 
+   * message eg unkown error code 
+   */
+  const char* sGetErrorMessage(int code);
+
+  /**
+   * Print error message for given code.
+   */
+  int sPrintErrorMessage(int code);
+
+  /**
+   * Printf-style error message for given code.
+   */
+  int sPrintfErrorMessage(const char* format, int code);
+
+  /**
+   * Print last error message.
+   */
+  int sPrintLastErrorMessage(void);
+
+  /**
+   * Printf-style last error message.
+   */
+  int sPrintfLastErrorMessage(const char* format);
 
 #ifdef __cplusplus
 } /* extern "C" */

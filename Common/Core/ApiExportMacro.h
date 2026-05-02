@@ -17,4 +17,4 @@
 #define APIEXPORT __attribute__((visibility("default")))
 #endif
 
-#endif // APIEXPORTMACRO_H 
+#endif // APIEXPORTMACRO_H

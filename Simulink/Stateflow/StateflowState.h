@@ -6,7 +6,7 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
 #include "PlatformTypes.h"

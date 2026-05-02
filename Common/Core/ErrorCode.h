@@ -4,16 +4,9 @@
 #ifndef ERRORCODE_H
 #define ERRORCODE_H
 
-#include "PlatformTypes.h"
-
 /**
- * @file ErrorCode.h
- * @brief Define Software Error Codes
- * Error code layout (uint32_t):
- *  [31..30] Severity (2 bits)
- *  [29..22] Namespace (8 bits)
- *  [21..14] Module (8 bits)
- *  [13..0]  Error code (14 bits)
+ * This file describe librray error codes (errors 1000 to 1255)
+ * They are returned by the sGetLastError function when many functions fail
  */
 
 #ifdef __cplusplus
@@ -21,46 +14,25 @@ extern "C"
 {
 #endif
 
-/* Define error severity levels (2 bits) */
-#define E_FATAL 0x0
-#define E_ERROR 0x1
-#define E_WARN 0x2
-#define E_INFO 0x3
+#define E_OK 1000
 
-/* Define a unique id for each namespace (or so called group) (8 bits) */
-#define COMMON 1
-#define DOCUMENTATION 2
-#define EXAMPLES 3
-#define INTERACTION 4
-#define IO 5
-#define SIMULINK 6
-#define TESTING 7
-#define THIRDPARTY 8
-#define UTILITIES 9
-#define VISUALIZATION 10
-
-/* Define a unique id for each module  (8 bits) */
-#define CORE 1
-#define SYSTEM 2
-#define DATA 3
-#define JSON 4
-#define SLX 5
-#define ANNOTATION 6
-#define CONFIGURATION 7
-#define LAYOUT 8
-#define LIBRARY 9
-#define MISC 10
-#define STATEFLOW 11
-#define CONSOLE 12
-#define PYTHON 13
-#define QT 14
-#define LIBZIP 15
-#define LIBUV 16
-
-/* Define error mapping macro */
-#define SLXIO_ERROR_CODE(severity, namespace, module, error)                   \
-  (((UInt32)(severity) << 30) | ((UInt32)(namespace) << 22) |                  \
-    ((UInt32)(module) << 14) | ((UInt32)(error) & 0x3FFF))
+#define E_INVALID_FUNCTION 1001
+#define E_FILE_NOT_FOUND 1002
+#define E_PATH_NOT_FOUND 1003
+#define E_PATH_TOO_LONG 1004
+#define E_MESSAGE_TOO_LARGE 1005
+#define E_PATH_EMPTY 1006
+#define E_TOO_MANY_OPEN_FILES 1007
+#define E_FILE_OPEN_FAIL 1008
+#define E_INVALID_HANDLE 1009
+#define E_INVALID_FILE_MODE 1010
+#define E_STREAM_WRITE_FAIL 1011
+#define E_STREAM_EMPTY_OUTPUT 1012
+#define E_NOT_IMPLEMENTED 1013
+#define E_INVALID_ARGUMENT 1014
+#define E_PARAMETER_NULL_PTR 1015
+#define E_INVALID_DATA_TYPE 1016
+#define E_CONFIG_ALREADY_ACTIVE 1020
 
 #ifdef __cplusplus
 } /* extern "C" */

@@ -77,7 +77,7 @@ ReturnType SimulinkSignal::setDataType(const char* dt)
   }
   else
   {
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   return E_OK;
@@ -99,7 +99,7 @@ ReturnType SimulinkSignal::setComplexityType(const char* ct)
   }
   else
   {
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   return E_OK;
 }

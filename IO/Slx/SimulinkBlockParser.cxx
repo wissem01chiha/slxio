@@ -12,7 +12,7 @@ ReturnType SimulinkBlockParser::setInputData(const xmlNodePtr data)
   if (data == nullptr)
   {
     //l.log(Logger::V_ERROR, "SimulinkBlockParser:: null pointer received");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   dataObject = data;
   return E_OK;

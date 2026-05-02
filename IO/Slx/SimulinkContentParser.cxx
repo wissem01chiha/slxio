@@ -10,13 +10,13 @@ ReturnType SimulinkContentParser::setInputData(const File fs)
   if (!fs.isFile())
   {
     //l.log(Logger::V_ERROR, "Input file  is not valid : ", fs.getFilepath());
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   if (~strcmp(fs.getFileExtension(), "slx") == 0)
   {
     //l.log(
       Logger::V_ERROR, "Only slx file extension are supported in this version");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   dataObject = fs;
   return E_OK;

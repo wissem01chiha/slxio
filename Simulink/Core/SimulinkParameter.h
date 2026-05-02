@@ -7,7 +7,7 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "CoderInfo.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "SimulinkDataType.h"
 #include "SimulinkElementBase.h"
 #include "PlatformTypes.h"
@@ -106,11 +106,11 @@ public:
   std::string ToString() const override;
 
   /// @brief Parameters cannot remove child elements. Returns
-  /// E_NOT_IMPL.
+  /// E_NOT_IMPLEMENTED.
   UInt32 RemoveElement(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Parameters cannot add child elements. Returns
-  /// E_NOT_IMPL.
+  /// E_NOT_IMPLEMENTED.
   UInt32 AddElement(const std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief get code generation data struct

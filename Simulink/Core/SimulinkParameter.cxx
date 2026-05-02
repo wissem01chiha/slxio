@@ -81,7 +81,7 @@ UInt32 SimulinkParameter::getValueAsDouble(Float32& fval)
   if (!Value)
   {
     fval = 0.0;
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   char* endptr = nullptr;
   fval = std::strtod(Value, &endptr);
@@ -97,7 +97,7 @@ UInt32 SimulinkParameter::getValueAsSingle(Float32& sval)
   if (!Value)
   {
     sval = 0.0;
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   char* endptr = nullptr;
   sval = std::strtof(Value, &endptr);
@@ -113,7 +113,7 @@ UInt32 SimulinkParameter::getValueAsUInt8(UInt8& u8val)
   if (!Value)
   {
     u8val = 0;
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
@@ -132,7 +132,7 @@ UInt32 SimulinkParameter::getValueAsUInt16(UInt16& u16val)
   if (!Value)
   {
     u16val = 0;
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   char* endptr = nullptr;
   long parsed = std::strtol(Value, &endptr, 10);
@@ -151,7 +151,7 @@ UInt32 SimulinkParameter::getValueAsString(std::string& strval)
   if (!Value)
   {
     strval.clear();
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   strval = std::string(Value);
   return E_OK;
@@ -163,7 +163,7 @@ UInt32 SimulinkParameter::getValueAsArray(std::vector<Float32>& vecval)
   vecval.clear();
   if (!Value)
   {
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   if (Value[0] != '[')
   {
@@ -227,11 +227,11 @@ UInt32 SimulinkParameter::setName(const char* name)
 
   if (name == nullptr)
   {
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   if (strcmp(name, "") == 0)
   {
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   Name = name;
   return E_OK;
@@ -262,7 +262,7 @@ UInt32 SimulinkParameter::RemoveElement(
 {
   //Logger::GetInstance().log(
    // Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 UInt32 SimulinkParameter::AddElement(
@@ -270,7 +270,7 @@ UInt32 SimulinkParameter::AddElement(
 {
  // Logger::GetInstance().log(
     //Logger::V_ERROR, "SimulinkParameter::add is not supported.");
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 Float32 SimulinkParameter::getMin()

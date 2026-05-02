@@ -17,7 +17,7 @@ ReturnType StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> el
   if (getParent() == nullptr)
   {
     //l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   // getParent().removeEvent(this);
   return E_OK;

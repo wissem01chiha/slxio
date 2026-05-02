@@ -82,7 +82,7 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
   {
     //l.log(
       //Logger::V_WARNING, "SimulinkArray::Cannot add a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (element->GetElementType().isA(SimulinkElementType::Array))
@@ -143,7 +143,7 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
   {
     //l.log(Logger::V_WARNING,
      // "SimulinkArray::Cannot remove a null Simulink element.");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (elment->GetElementType().isA(SimulinkElementType::Array))

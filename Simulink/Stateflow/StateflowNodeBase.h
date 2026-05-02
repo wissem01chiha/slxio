@@ -5,7 +5,7 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "StateflowElementBase.h"
 #include <memory>
 #include <vector>

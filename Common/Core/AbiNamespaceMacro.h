@@ -7,20 +7,28 @@
 #include "Config.h"
 #include "VersionMacro.h"
 
-#if SLXIO_NAMESPACE 
-    #define SLXIO_NAMESPACE_BEGIN namespace slxio {
-    #define SLXIO_NAMESPACE_END   };
+#if SLXIO_NAMESPACE
+#define SLXIO_NAMESPACE_BEGIN                                                  \
+  namespace slxio                                                              \
+  {
+#define SLXIO_NAMESPACE_END                                                    \
+  }                                                                            \
+  ;
 #else
-    #define SLXIO_NAMESPACE_BEGIN
-    #define SLXIO_NAMESPACE_END
+#define SLXIO_NAMESPACE_BEGIN
+#define SLXIO_NAMESPACE_END
 #endif
 
-#if SLXIO_ABI_NAMESPACE 
-    #define SLXIO_ABI_NAMESPACE_BEGIN namespace SLXIO_VERSION_STRING {
-    #define SLXIO_ABI_NAMESPACE_END   };
+#if SLXIO_ABI_NAMESPACE
+#define SLXIO_ABI_NAMESPACE_BEGIN                                              \
+  namespace SLXIO_VERSION_STRING                                               \
+  {
+#define SLXIO_ABI_NAMESPACE_END                                                \
+  }                                                                            \
+  ;
 #else
-    #define SLXIO_ABI_NAMESPACE_BEGIN
-    #define SLXIO_ABI_NAMESPACE_END
-#endif 
+#define SLXIO_ABI_NAMESPACE_BEGIN
+#define SLXIO_ABI_NAMESPACE_END
+#endif
 
-#endif /* ABINAMESPACEMACRO_H */
+#endif // ABINAMESPACEMACRO_H

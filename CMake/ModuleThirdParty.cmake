@@ -8,6 +8,12 @@ else()
   set(SLXIO_SLOG 0)
 endif()
 
+if(BUILD_SHARED_LIBS)
+  set(HAVE_SHARED TRUE)
+else()
+  set(ZIP_STATIC TRUE)
+endif()
+
 if(SLXIO_OPENMP)
   find_package(OpenMP)
 endif()

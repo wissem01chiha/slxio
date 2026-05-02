@@ -72,7 +72,7 @@ TEST_CASE_FIXTURE(
 
   ReturnType status =
     parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
-  CHECK(status == E_WRNG_FUNC_PARAM);
+  CHECK(status == E_INVALID_ARGUMENT);
 };
 
 TEST_CASE_FIXTURE(

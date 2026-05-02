@@ -11,7 +11,7 @@ ReturnType SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
   {
     //l.log(Logger::V_ERROR,
       "SimulinkConfigSetParser::null data node pointer received");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (xmlStrcmp(data->name, BAD_CAST SlxParameter::SECTION_ConfigSet) != 0)
@@ -20,7 +20,7 @@ ReturnType SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
       "SimulinkConfigSetParser::setInputData failed: expected node "
       "<ConfigSet>, but got <%s>",
       data->name);
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   return E_OK;

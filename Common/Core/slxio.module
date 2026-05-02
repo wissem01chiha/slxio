@@ -41,7 +41,7 @@ WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
 SOURCES
-  ErrorTypes.cxx
+  ErrorHandlingApi.cxx
 WINDOWS_SOURCES
 UNIX_SOURCES
 ANDROID_SOURCES
@@ -50,15 +50,14 @@ HEADERS
   ABINamespace.h
   APIExportMacro.h
   Compiler.h 
-  Config.h
   ErrorTypes.h 
   PlatformTypes.h
-  ErrorTypes.h 
   Logger.h
   Version.h 
   VersionMacro.h
   Timer.h
   SteadyTimer.h
+  ErrorHandlingApi.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -69,6 +68,7 @@ PUBLIC_DEPENDS
   ThirdParty::loguru
   ThirdParty::slog
   ThirdParty::libuv
+  ThirdParty::libzip
 PRIVATE_DEPENDS
 WINDOWS_DEPENDS
 UNIX_DEPENDS
@@ -82,5 +82,6 @@ MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
 TEST_DEPENDS 
   ThirdParty::doctest
+  ThirdParty::libzip
  
 

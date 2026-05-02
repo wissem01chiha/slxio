@@ -15,12 +15,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Timer
  * @brief Abstract class for all Timers
  */
-class APIEXPORT Timer 
+class APIEXPORT Timer
 {
 public:
-  virtual ~Timer() =default;
+  virtual ~Timer() = default;
 
-  /** 
+  /**
    * Call Start every time to reset the timer to zero.
    */
   virtual void Start() = 0;
@@ -47,7 +47,7 @@ public:
 
   /**
    * Obtains a timer measurement in seconds.
-   */ 
+   */
   virtual Float32 Time() = 0;
 
 protected:

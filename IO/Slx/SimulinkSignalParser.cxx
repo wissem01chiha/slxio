@@ -8,7 +8,7 @@ ReturnType SimulinkSignalParser::setInputData(const xmlNodePtr data)
   if (data == nullptr)
   {
     //l.log(Logger::V_ERROR, "SimulinkSignalParser:: null node pointer received");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
   dataObject = data;
   return E_OK;

@@ -76,27 +76,27 @@ ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
 
 ReturnType SimulinkConfigSet::copy()
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 ReturnType SimulinkConfigSet::clone()
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 ReturnType SimulinkConfigSet::RemoveElement()
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 ReturnType SimulinkConfigSet::attach(SimulinkModel& model)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 ReturnType SimulinkConfigSet::detach(SimulinkModel& model)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 std::string SimulinkConfigSet::getName()
@@ -116,12 +116,12 @@ IdType SimulinkConfigSet::GetElementId() const
 
 ReturnType SimulinkConfigSet::saveToFile(const char* path)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 ReturnType SimulinkConfigSet::loadFromFile(const char* path)
 {
-  return E_NOT_IMPL;
+  return E_NOT_IMPLEMENTED;
 }
 
 SimulinkConfigSet SimulinkConfigSet::fromFile(const char* path)

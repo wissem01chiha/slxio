@@ -1,7 +1,7 @@
 #include "Logger.h"
 #include "Compiler.h"
 #include "Config.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include "Libuv.h"
 #include <fstream>
 #include <ostream>
@@ -57,7 +57,7 @@ void Logger::Print()
 #if SLXIO_LOGURU
 
 #elif SLXIO_SLOG
-  
+
   slog_config_t cfg;
   slog_config_get(&cfg);
   cfg.eColorFormat = SLOG_COLORING_FULL;
@@ -249,10 +249,9 @@ std::string Logger::FormatLogEntry(
 {
   const auto& info = entry.info;
   std::ostringstream oss;
-  oss << "[" << info.appId.appId << "," << info.appId.appName
-      << "," << info.appId.appDescription
-      << "," << static_cast<int>(info.type)
-      << "," << static_cast<int>(info.logLevel) << "] " << msg;
+  oss << "[" << info.appId.appId << "," << info.appId.appName << ","
+      << info.appId.appDescription << "," << static_cast<int>(info.type) << ","
+      << static_cast<int>(info.logLevel) << "] " << msg;
   return oss.str();
 }
 

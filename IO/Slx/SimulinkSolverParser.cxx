@@ -9,7 +9,7 @@ ReturnType SimulinkSolverParser::setInputData(const xmlNodePtr data)
   {
     //l.log(
       Logger::V_ERROR, "SimulinkSolverParser::null data node pointer received");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (xmlStrcmp(data->name, BAD_CAST "Solver") != 0)
@@ -18,7 +18,7 @@ ReturnType SimulinkSolverParser::setInputData(const xmlNodePtr data)
       "SimulinkSolverParser::setInputData failed: expected node "
       "<Solver>, but got <%s>",
       data->name);
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   dataObject = data;

@@ -1,23 +1,48 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
+#ifndef ERRORMAP_H
+#define ERRORMAP_H
 
-#include "PlatformTypes.h"
+#include "ErrorCode.h"
+#include <cstddef>
+
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 
   /* Define error metadata structure */
   typedef struct
   {
-    UInt32 code;
+    int code;
     const char* msg;
-  } ErrorTypeInfo;
+  } ErrorMessageTypeInfo;
 
-  /* Define error named namepsace/module/level mapping */
-  typedef struct
-  {
-    UInt8 code;
-    const char* name;
-  } ErrorLevelTypeInfo;
+  /* Define error message for each error code */
+  static const ErrorMessageTypeInfo ErrorInfo[] = {
+    { E_OK, "The operation completed successfully" },
+    { E_INVALID_FUNCTION, "Invalid function called" },
+    { E_FILE_NOT_FOUND, "File not found" },
+    { E_PATH_NOT_FOUND, "Path not found" },
+    { E_PATH_TOO_LONG, "Path length exceeds maximum allowed" },
+    { E_MESSAGE_TOO_LARGE, "Message size exceeds maximum allowed" },
+    { E_PATH_EMPTY, "Path is empty" },
+    { E_TOO_MANY_OPEN_FILES, "Too many files are open" },
+    { E_FILE_OPEN_FAIL, "Failed to open file" },
+    { E_INVALID_HANDLE, "Invalid file handle" },
+    { E_INVALID_FILE_MODE, "Invalid file mode specified" },
+    { E_STREAM_WRITE_FAIL, "Failed to write to stream" },
+    { E_STREAM_EMPTY_OUTPUT, "Stream produced empty output" },
+    { E_NOT_IMPLEMENTED, "Functionality not implemented" },
+    { E_INVALID_ARGUMENT, "Invalid argument passed to function" },
+    { E_PARAMETER_NULL_PTR, "Function parameter is a null pointer" },
+    { E_INVALID_DATA_TYPE, "Invalid data type provided" },
+    { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
+  };
 
-  typedef struct
-  {
-    UInt8 code;
-    const char* name;
-  } ErrorDomainTypeInfo;
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
+
+#endif // ERRORMAP_H

@@ -3,28 +3,54 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-void SteadyTimer::Start() {}
+Float32 DurationToSeconds(const SteadyTimer::Clock::duration& d)
+{
+  return std::chrono::duration_cast<std::chrono::duration<Float32>>(d).count();
+}
 
-void SteadyTimer::Stop() {}
+void SteadyTimer::Start()
+{
+  if (!Running)
+  {
+    StartTime = Clock::now();
+    Running = true;
+  }
+}
 
-void SteadyTimer::Reset() {}
+void SteadyTimer::Stop()
+{
+  if (Running)
+  {
+    Accumulated += Clock::now() - StartTime;
+    Running = false;
+  }
+}
+
+void SteadyTimer::Reset()
+{
+  Accumulated = Clock::duration::zero();
+  Running = false;
+}
 
 bool SteadyTimer::IsRunning() const
 {
-  return false;
+  return Running;
 }
 
 Float32 SteadyTimer::Precision() const
 {
-  return Float32();
+  return DurationToSeconds(Clock::duration(1));
 }
 
 Float32 SteadyTimer::Time()
 {
-  return Float32();
+  if (Running)
+  {
+    auto now = Clock::now();
+    return DurationToSeconds(Accumulated + (now - StartTime));
+  }
+  return DurationToSeconds(Accumulated);
 }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

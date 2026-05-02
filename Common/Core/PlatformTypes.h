@@ -9,9 +9,9 @@
 #include <cstdint>
 
 /* Define memory sizes for each type  */
-#define SLXIO_SIZEOF_CHAR  SLXIO_ABI_SIZEOF_CHAR
+#define SLXIO_SIZEOF_CHAR SLXIO_ABI_SIZEOF_CHAR
 #define SLXIO_SIZEOF_SHORT SLXIO_ABI_SIZEOF_SHORT
-#define SLXIO_SIZEOF_INT  SLXIO_ABI_SIZEOF_INT
+#define SLXIO_SIZEOF_INT SLXIO_ABI_SIZEOF_INT
 #define SLXIO_SIZEOF_LONG SLXIO_ABI_SIZEOF_LONG
 #define SLXIO_SIZEOF_LONG_LONG SLXIO_ABI_SIZEOF_LONG_LONG
 #define SLXIO_SIZEOF_FLOAT SLXIO_ABI_SIZEOF_FLOAT
@@ -54,7 +54,7 @@
 
 /* Define type compare macro  */
 #if defined(__cplusplus)
-#define SLXIO_ASSERT_TYPE_EQUAL(var1, var2) \
+#define SLXIO_ASSERT_TYPE_EQUAL(var1, var2)                                    \
   static_assert(std::is_same<decltype(var1), decltype(var2)>::value)
 #endif
 
@@ -94,17 +94,17 @@
 /* Select implementation data types.  */
 
 #if SLXIO_SIZEOF_CHAR == 1
-  using UInt8 = unsigned char;
-  using Int8  = signed char;
-  #define SLXIO_TYPE_UINT8 SLXIO_UNSIGNED_CHAR
-  #define SLXIO_TYPE_UINT8_MIN SLXIO_UNSIGNED_CHAR_MIN
-  #define SLXIO_TYPE_UINT8_MAX SLXIO_UNSIGNED_CHAR_MAX
-  #define SLXIO_TYPE_INT8 SLXIO_SIGNED_CHAR
-  #define SLXIO_TYPE_INT8_MIN SLXIO_SIGNED_CHAR_MIN
-  #define SLXIO_TYPE_INT8_MAX SLXIO_SIGNED_CHAR_MAX
+using UInt8 = unsigned char;
+using Int8 = signed char;
+#define SLXIO_TYPE_UINT8 SLXIO_UNSIGNED_CHAR
+#define SLXIO_TYPE_UINT8_MIN SLXIO_UNSIGNED_CHAR_MIN
+#define SLXIO_TYPE_UINT8_MAX SLXIO_UNSIGNED_CHAR_MAX
+#define SLXIO_TYPE_INT8 SLXIO_SIGNED_CHAR
+#define SLXIO_TYPE_INT8_MIN SLXIO_SIGNED_CHAR_MIN
+#define SLXIO_TYPE_INT8_MAX SLXIO_SIGNED_CHAR_MAX
 #else
 #error "No native data type can represent an 8-bit integer."
-#endif 
+#endif
 
 #if SLXIO_SIZEOF_SHORT == 2
 using UInt16 = unsigned short;
@@ -129,23 +129,23 @@ using Int16 = signed int;
 #endif
 
 #if SLXIO_SIZEOF_INT == 4
-  using UInt32 = std::uint32_t;
-  using Int32  = std::int32_t;
-  #define SLXIO_TYPE_UINT32 SLXIO_UNSIGNED_INT
-  #define SLXIO_TYPE_UINT32_MIN SLXIO_UNSIGNED_INT_MIN
-  #define SLXIO_TYPE_UINT32_MAX SLXIO_UNSIGNED_INT_MAX
-  #define SLXIO_TYPE_INT32 SLXIO_INT
-  #define SLXIO_TYPE_INT32_MIN SLXIO_INT_MIN
-  #define SLXIO_TYPE_INT32_MAX SLXIO_INT_MAX
+using UInt32 = std::uint32_t;
+using Int32 = std::int32_t;
+#define SLXIO_TYPE_UINT32 SLXIO_UNSIGNED_INT
+#define SLXIO_TYPE_UINT32_MIN SLXIO_UNSIGNED_INT_MIN
+#define SLXIO_TYPE_UINT32_MAX SLXIO_UNSIGNED_INT_MAX
+#define SLXIO_TYPE_INT32 SLXIO_INT
+#define SLXIO_TYPE_INT32_MIN SLXIO_INT_MIN
+#define SLXIO_TYPE_INT32_MAX SLXIO_INT_MAX
 #elif SLXIO_SIZEOF_LONG == 4
-  using UInt32 = unsigned long;
-  using Int32  = signed long;
-  #define SLXIO_TYPE_UINT32 SLXIO_UNSIGNED_LONG
-  #define SLXIO_TYPE_UINT32_MIN SLXIO_UNSIGNED_LONG_MIN
-  #define SLXIO_TYPE_UINT32_MAX SLXIO_UNSIGNED_LONG_MAX
-  #define SLXIO_TYPE_INT32 SLXIO_LONG
-  #define SLXIO_TYPE_INT32_MIN SLXIO_LONG_MIN
-  #define SLXIO_TYPE_INT32_MAX SLXIO_LONG_MAX
+using UInt32 = unsigned long;
+using Int32 = signed long;
+#define SLXIO_TYPE_UINT32 SLXIO_UNSIGNED_LONG
+#define SLXIO_TYPE_UINT32_MIN SLXIO_UNSIGNED_LONG_MIN
+#define SLXIO_TYPE_UINT32_MAX SLXIO_UNSIGNED_LONG_MAX
+#define SLXIO_TYPE_INT32 SLXIO_LONG
+#define SLXIO_TYPE_INT32_MIN SLXIO_LONG_MIN
+#define SLXIO_TYPE_INT32_MAX SLXIO_LONG_MAX
 #else
 #error "No native data type can represent an 32-bit integer."
 #endif
@@ -195,7 +195,7 @@ using IdType = long;
 #endif
 #else
 using IdType = int;
-#endif 
+#endif
 
 /* Define an alias for error code return data types*/
 typedef UInt32 ReturnType;

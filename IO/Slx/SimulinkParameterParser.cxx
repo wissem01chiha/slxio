@@ -13,21 +13,21 @@ ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
   {
     //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: null node pointer received");
-    return E_FUNC_PARAM_NULL_PTR;
+    return E_PARAMETER_NULL_PTR;
   }
 
   if (data->type != XML_ELEMENT_NODE)
   {
     //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: non-element node received");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   if (data->name == nullptr)
   {
     //l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: invalid xmlNodePtr received");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
 
   this->dataObject = data;

@@ -10,7 +10,7 @@ ReturnType SimulinkDataTypeParser::setInputData(const std::string data)
   if (data.empty())
   {
     //l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   dataObject = data;
   return E_OK;
@@ -23,7 +23,7 @@ ReturnType SimulinkDataTypeParser::setInputData(const char* data)
   {
     //l.log(Logger::V_ERROR,
       "SimulinkDataTypeParser:: null or empty input data received");
-    return E_WRNG_FUNC_PARAM;
+    return E_INVALID_ARGUMENT;
   }
   dataObject = std::string(data);
   return E_OK;
@@ -47,7 +47,7 @@ ReturnType SimulinkDataTypeParser::parse()
   //l.log(Logger::V_ERROR,
     "SimulinkDataTypeParser:: unrecognized data type string: " + dataObject);
   ptr = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
-  return E_WRNG_FUNC_PARAM;
+  return E_INVALID_ARGUMENT;
 }
 
 SLXIO_ABI_NAMESPACE_END

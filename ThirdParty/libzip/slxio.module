@@ -4,27 +4,27 @@ GROUP
   ThirdParty
 LIBRARY_NAME
   ThirdPartylibzip
-DESCRIPTION
-  Libzip Library Third Party Module
-LICENSE
+SPDX_LICENSE_IDENTIFIER
   3-clause BSD license
+SPDX_COPYRIGHT_TEXT
+  Copyright (c) Dieter Baron and Thomas Klausner
+SPDX_CUSTOM_LICENSE_FILE
+  src/LICENSE
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/LICENSE
+DESCRIPTION
+  A C library for reading, creating, and modifying zip archives.
 VERSION
   1.11.4
 MAINTAINER
-  Dieter Baron and Thomas Klausner
+  Dieter Baron and Thomas Klausner <info@libzip.org>
 ENABLE_BUILD
   TRUE
 ENABLE_TEST
   FALSE
 ENABLE_BUILD
   TRUE
-EXTERNAL_BUILD
-  FALSE
-EXTERNAL_SOURCE_DIR
-ENABLE_DOC
-  FALSE
-ENABLE_BINDING
-  FALSE
 INSTALL_HEADERS
   TRUE
 INSTALL_TARGETS

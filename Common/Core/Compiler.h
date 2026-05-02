@@ -63,7 +63,7 @@
 #include <cmath>
 #ifndef finite
 #define finite(x) std::isfinite(x)
-#endif 
+#endif
 #endif // __cplusplus
 
 #ifdef _MSC_VER
@@ -80,4 +80,4 @@
 #define FORCE_INLINE inline
 #endif
 
-#endif /* COMPILER_H */
+#endif // COMPILER_H

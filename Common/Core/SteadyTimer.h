@@ -21,17 +21,21 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class APIEXPORT SteadyTimer final : public Timer
 {
 public:
-    SteadyTimer() = default;
-    void Start() override;
-    void Stop() override;
-    void Reset() override;
-    bool IsRunning() const override;
-    Float32 Precision() const override;
-    Float32 Time() override;
-    ~SteadyTimer() = default;
+  using Clock = std::chrono::steady_clock;
+
+  SteadyTimer() = default;
+  void Start() override;
+  void Stop() override;
+  void Reset() override;
+  bool IsRunning() const override;
+  Float32 Precision() const override;
+  Float32 Time() override;
+  ~SteadyTimer() = default;
+
 private:
-    using Clock = std::chrono::steady_clock;
-    Clock::time_point StartTime;
+  Clock::time_point StartTime;
+  bool Running;
+  Clock::duration Accumulated{ Clock::duration::zero() };
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,6 +1,6 @@
 #include "Doctest.h"
 #include "Directory.h"
-#include "ErrorTypes.h"
+#include "ErrorCode.h"
 #include <chrono>
 #include <random>
 
