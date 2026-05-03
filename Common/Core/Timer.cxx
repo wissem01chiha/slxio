@@ -1,14 +1,14 @@
-#include "SteadyTimer.h"
+#include "Timer.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Float32 DurationToSeconds(const SteadyTimer::Clock::duration& d)
+Float32 DurationToSeconds(const Timer::Clock::duration& d)
 {
   return std::chrono::duration_cast<std::chrono::duration<Float32>>(d).count();
 }
 
-void SteadyTimer::Start()
+void Timer::Start()
 {
   if (!Running)
   {
@@ -17,7 +17,7 @@ void SteadyTimer::Start()
   }
 }
 
-void SteadyTimer::Stop()
+void Timer::Stop()
 {
   if (Running)
   {
@@ -26,23 +26,23 @@ void SteadyTimer::Stop()
   }
 }
 
-void SteadyTimer::Reset()
+void Timer::Reset()
 {
   Accumulated = Clock::duration::zero();
   Running = false;
 }
 
-bool SteadyTimer::IsRunning() const
+bool Timer::IsRunning() const
 {
   return Running;
 }
 
-Float32 SteadyTimer::Precision() const
+Float32 Timer::Precision() const
 {
   return DurationToSeconds(Clock::duration(1));
 }
 
-Float32 SteadyTimer::Time()
+Float32 Timer::Time()
 {
   if (Running)
   {

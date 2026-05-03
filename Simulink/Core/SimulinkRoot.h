@@ -18,7 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @see
  * https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
  */
-class APIEXPORT SimulinkRoot final
+class SLXIO_APIEXPORT SimulinkRoot final
 {
 public:
   SimulinkRoot();

@@ -15,7 +15,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base parser for encoded port type strings
-class APIEXPORT SimulinkPortTypeParser final
+class SLXIO_APIEXPORT SimulinkPortTypeParser final
   : public SimulinkParserBase<std::string, SimulinkPortType>
 {
 public:

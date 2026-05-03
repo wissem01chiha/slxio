@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Enumeration of Simulink block types.
  */
-class APIEXPORT SimulinkBlockType final : public SimulinkElementType
+class SLXIO_APIEXPORT SimulinkBlockType final : public SimulinkElementType
 {
 public:
   enum Type

@@ -22,7 +22,7 @@ class SimulinkConfigSet;
  * @note This is not a part of Simulink API, but a utility added to slxio
  * to manage multiple configuration sets
  */
-class APIEXPORT SimulinkConfigSetManager final
+class SLXIO_APIEXPORT SimulinkConfigSetManager final
 {
 public:
   SimulinkConfigSetManager();

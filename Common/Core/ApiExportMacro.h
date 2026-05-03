@@ -9,12 +9,12 @@
 
 #ifdef PLATFORM_WINDOWS
 #if BUILD_SHARED_LIBS
-#define APIEXPORT __declspec(dllexport)
+#define SLXIO_APIEXPORT __declspec(dllexport)
 #else
-#define APIEXPORT
+#define SLXIO_APIEXPORT
 #endif
 #else
-#define APIEXPORT __attribute__((visibility("default")))
+#define SLXIO_APIEXPORT __attribute__((visibility("default")))
 #endif
 
 #endif // APIEXPORTMACRO_H

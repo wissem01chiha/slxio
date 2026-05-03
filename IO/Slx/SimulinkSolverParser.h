@@ -16,7 +16,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkSolver Parser class.
  */
-class APIEXPORT SimulinkSolverParser final
+class SLXIO_APIEXPORT SimulinkSolverParser final
   : public SimulinkParserBase<xmlNodePtr, SimulinkSolver>
 {
 public:

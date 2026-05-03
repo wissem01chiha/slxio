@@ -16,7 +16,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkContent
-class APIEXPORT SimulinkContentParser
+class SLXIO_APIEXPORT SimulinkContentParser
   : public SimulinkParserBase<File, SimulinkContent>
 {
 public:

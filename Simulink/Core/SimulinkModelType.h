@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Represents the type of a Simulink model.
  */
-class APIEXPORT SimulinkModelType final
+class SLXIO_APIEXPORT SimulinkModelType final
 {
 public:
   enum Type

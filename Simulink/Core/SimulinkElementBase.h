@@ -32,7 +32,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * and implementation-specific elements.
  * @note this file do not provide any implementation
  */
-class APIEXPORT SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkElementBase
 {
 public:
   virtual ~SimulinkElementBase() = default;

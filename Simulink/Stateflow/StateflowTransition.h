@@ -17,7 +17,7 @@ class StateflowNodeBase;
 /**
  * @brief A Stateflow transition.
  */
-class APIEXPORT StateflowTransition final
+class SLXIO_APIEXPORT StateflowTransition final
 {
 public:
   StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);

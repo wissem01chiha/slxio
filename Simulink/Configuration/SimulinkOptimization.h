@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief optimization settings
  */
-class APIEXPORT SimulinkOptimization final
+class SLXIO_APIEXPORT SimulinkOptimization final
 {
 public:
   SimulinkOptimization() = default;

@@ -25,7 +25,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * *.c).
  * @note this file do not provide any related cxx implementation
  */
-class APIEXPORT SlxParameter
+class SLXIO_APIEXPORT SlxParameter
 {
 public:
   /** @brief  Color code red. */

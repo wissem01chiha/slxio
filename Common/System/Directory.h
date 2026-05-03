@@ -20,7 +20,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Directory class
  * @brief Cross-platform Directory abstraction.
  */
-class APIEXPORT Directory final
+class SLXIO_APIEXPORT Directory final
 {
 public:
   /** Default constructor. */

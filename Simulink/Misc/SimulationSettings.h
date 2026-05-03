@@ -15,7 +15,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulationSettings 
  * @brief 
  */
-class APIEXPORT SimulationSettings
+class SLXIO_APIEXPORT SimulationSettings
 {
 public:
   SimulationSettings() = default;

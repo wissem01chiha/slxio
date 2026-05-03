@@ -22,7 +22,7 @@ class StateflowMachine;
  * There is a one-to-one association between StateflowBlock
  * and StateflowChart.
  */
-class APIEXPORT StateflowChart final : public StateflowElementBase
+class SLXIO_APIEXPORT StateflowChart final : public StateflowElementBase
 {
 public:
   StateflowChart() = default;

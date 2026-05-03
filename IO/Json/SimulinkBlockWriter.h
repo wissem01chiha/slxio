@@ -24,7 +24,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT SimulinkBlockWriter
+class SLXIO_APIEXPORT SimulinkBlockWriter
   : public SimulinkWriterBase<SimulinkBlock, json_object*>
 {
 public:

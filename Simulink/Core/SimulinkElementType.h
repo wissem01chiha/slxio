@@ -12,7 +12,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT SimulinkElementType
+class SLXIO_APIEXPORT SimulinkElementType
 {
 public:
   enum Type

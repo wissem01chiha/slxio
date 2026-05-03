@@ -15,7 +15,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A Stateflow event object.
  */
-class APIEXPORT StateflowEvent : public StateflowElementBase
+class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase
 {
 public:
   StateflowEvent();

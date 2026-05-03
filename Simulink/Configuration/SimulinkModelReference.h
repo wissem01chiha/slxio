@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkModelReference represents the model reference settings
  */
-class APIEXPORT SimulinkModelReference final
+class SLXIO_APIEXPORT SimulinkModelReference final
 {
 public:
   SimulinkModelReference() = default;

@@ -20,7 +20,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @note StorageClass= 'Custom' not supported along with the
  * CustomAttribute
  */
-class APIEXPORT CoderInfo final
+class SLXIO_APIEXPORT CoderInfo final
 {
 public:
   CoderInfo();

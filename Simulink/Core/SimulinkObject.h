@@ -21,7 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Class for Simulink objects, which are a construct for
  * structured storage of meta-data in the model.
  */
-class APIEXPORT SimulinkObject : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkObject : public SimulinkElementBase
 {
 public:
   SimulinkObject();

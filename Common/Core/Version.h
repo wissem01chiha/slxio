@@ -16,7 +16,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Version
  * @brief Manage the version of the library.
  */
-class APIEXPORT Version final
+class SLXIO_APIEXPORT Version final
 {
 public:
   /**

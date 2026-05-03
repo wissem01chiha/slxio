@@ -21,7 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class FileManager 
  * @brief A singleton class for managing multiple files 
  */
-class APIEXPORT FileManager final
+class SLXIO_APIEXPORT FileManager final
 {
 public:
   /**

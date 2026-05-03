@@ -16,7 +16,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkDataType
  * @brief Simulink Supported Data Types.
  */
-enum class APIEXPORT SimulinkDataType
+enum class SLXIO_APIEXPORT SimulinkDataType
 {
   Auto = 0,
   Double,

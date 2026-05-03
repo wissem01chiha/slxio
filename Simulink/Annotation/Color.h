@@ -12,7 +12,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Color final
+class SLXIO_APIEXPORT Color final
 {
 public:
   Color();

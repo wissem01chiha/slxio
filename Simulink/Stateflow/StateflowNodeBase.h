@@ -19,7 +19,7 @@ class StateflowTransition;
  * @brief Base class for Stateflow nodes (elements that can be
  * connected by transitions).
  */
-class APIEXPORT StateflowNodeBase : public StateflowElementBase
+class SLXIO_APIEXPORT StateflowNodeBase : public StateflowElementBase
 {
 public:
   virtual ~StateflowNodeBase() = default;

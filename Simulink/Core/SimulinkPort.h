@@ -21,7 +21,7 @@ class SimulinkLine;
  * @class SimulinkPort
  * @brief Base class for Simulink ports.
  */
-class APIEXPORT SimulinkPort : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkPort : public SimulinkElementBase
 {
 public:
   SimulinkPort() = delete;

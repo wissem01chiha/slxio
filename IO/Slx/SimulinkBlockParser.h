@@ -26,7 +26,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
   </Block>
  * @endcode
  */
-class APIEXPORT SimulinkBlockParser final
+class SLXIO_APIEXPORT SimulinkBlockParser final
   : public SimulinkParserBase<xmlNodePtr, SimulinkBlock>
 {
 public:

@@ -19,7 +19,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * to be subclassed by specific file readers/writers that need
  * consistent metadata handling.
  */
-class APIEXPORT SimulinkFileBase
+class SLXIO_APIEXPORT SimulinkFileBase
 {
 public:
   /// @brief Convert metadata fields to a human-readable string.

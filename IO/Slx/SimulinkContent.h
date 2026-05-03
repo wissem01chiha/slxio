@@ -24,7 +24,7 @@ class SimulinkContentParser;
 /// document pointers and provides accessor methods for parsers to
 /// retrieve the corresponding XML nodes as input data.
 /// @todo Add validation routines in each getter
-class APIEXPORT SimulinkContent final
+class SLXIO_APIEXPORT SimulinkContent final
 {
 public:
   friend class SimulinkContentParser;

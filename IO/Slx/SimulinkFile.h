@@ -18,7 +18,7 @@ class SimulinkFileParser;
  * SimulinkFileBase, while file contents are delegated to
  * SimulinkContent.
  */
-class APIEXPORT SimulinkFile final : public SimulinkFileBase
+class SLXIO_APIEXPORT SimulinkFile final : public SimulinkFileBase
 {
 public:
   friend class SimulinkFileParser;

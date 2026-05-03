@@ -29,8 +29,8 @@ extern "C"
    * library specific error code starts from 1000
    * for codes 0-35 (range for libzip error code), fallback
    * to zip_error_strerror() and for negative error codes
-   * it fallback to uv_strerror(), otherwise return a default 
-   * message eg unkown error code 
+   * it fallback to uv_strerror(), otherwise return a default
+   * message eg unkown error code
    */
   const char* sGetErrorMessage(int code);
 

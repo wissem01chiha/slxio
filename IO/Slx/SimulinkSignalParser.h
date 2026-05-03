@@ -14,7 +14,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkSignal data object
-class APIEXPORT SimulinkSignalParser final
+class SLXIO_APIEXPORT SimulinkSignalParser final
   : public SimulinkParserBase<xmlNodePtr, SimulinkSignal>
 {
 public:

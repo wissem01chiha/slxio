@@ -25,7 +25,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT SimulinkConfigSetWriter
+class SLXIO_APIEXPORT SimulinkConfigSetWriter
   : public SimulinkWriterBase<SimulinkConfigSet, json_object*>
 {
 public:

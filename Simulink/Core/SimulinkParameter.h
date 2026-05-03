@@ -21,7 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkParameter
  * @brief A Simulink Parameter object.
  */
-class APIEXPORT SimulinkParameter : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkParameter : public SimulinkElementBase
 {
 public:
   /**

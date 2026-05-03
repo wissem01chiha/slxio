@@ -30,7 +30,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @tparam P the retrun type object beeing constructed
  */
 template <typename T, typename P>
-class APIEXPORT SimulinkParserBase
+class SLXIO_APIEXPORT SimulinkParserBase
 {
 public:
   /// @brief Virtual destructor (proper cleanup of derived classes.)

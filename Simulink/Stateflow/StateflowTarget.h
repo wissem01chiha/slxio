@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief A Stateflow target object. Stateflow uses targets for
  * generating C-Code which is used for simulation.
  */
-class APIEXPORT StateflowTarget final : public StateflowElementBase
+class SLXIO_APIEXPORT StateflowTarget final : public StateflowElementBase
 {
 public:
   StateflowTarget();

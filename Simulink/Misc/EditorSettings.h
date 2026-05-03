@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Base Class for MATLAB editor settings
  */
-class APIEXPORT EditorSettings final
+class SLXIO_APIEXPORT EditorSettings final
 {
 public:
   EditorSettings() = default;

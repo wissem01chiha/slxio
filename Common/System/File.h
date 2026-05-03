@@ -19,7 +19,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class File
  * @brief Cross‑platform file system abstraction.
  */
-class APIEXPORT File final
+class SLXIO_APIEXPORT File final
 {
 public:
   /**

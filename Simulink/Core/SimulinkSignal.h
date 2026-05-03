@@ -18,7 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A SimulinkSignal Object
  */
-class APIEXPORT SimulinkSignal final
+class SLXIO_APIEXPORT SimulinkSignal final
 {
 public:
   /**

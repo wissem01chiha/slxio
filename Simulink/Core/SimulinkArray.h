@@ -22,7 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * a list of object IDs to avoid mutable inclusion, forward
  * declarations, and compiler conflicts.
  */
-class APIEXPORT SimulinkArray final : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase
 {
 public:
   SimulinkArray();

@@ -1,7 +1,7 @@
 #[==[.rst:
 .. cmake:function:: module_print(<prefix>)
 
-  Debugging function to print the key parsed variables of a module.
+  Function to print the key parsed variables of a module.
   This function is only used when module-level debugging is enabled.
   It will print the module variables(name, group, version, description,
   maintainer, license) that are set after parsing the 'slxio.module' file

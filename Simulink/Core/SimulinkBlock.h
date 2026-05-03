@@ -21,7 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SimulinkBlock
  */
-class APIEXPORT SimulinkBlock : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkBlock : public SimulinkElementBase
 {
 public:
   /**

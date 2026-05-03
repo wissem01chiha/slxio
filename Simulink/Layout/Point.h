@@ -13,7 +13,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Point final
+class SLXIO_APIEXPORT Point final
 {
 public:
   Point();

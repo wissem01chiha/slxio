@@ -28,7 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 31#out:1: Block ID 31, output port 1
  * 36#in:1: Block ID 36, input port 1
  */
-class APIEXPORT SimulinkLineParser final
+class SLXIO_APIEXPORT SimulinkLineParser final
   : public SimulinkParserBase<xmlNodePtr, SimulinkLine>
 {
 public:

@@ -11,7 +11,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT Constant final 
+class SLXIO_APIEXPORT Constant final 
 {
   Float32 value;
 };

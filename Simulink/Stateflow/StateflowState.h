@@ -19,7 +19,7 @@ class StateflowNodeBase;
 /**
  * @brief This class represents Stateflow states.
  */
-class APIEXPORT StateflowState final : public StateflowElementBase
+class SLXIO_APIEXPORT StateflowState final : public StateflowElementBase
 {
 public:
   StateflowState() = default;

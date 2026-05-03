@@ -22,7 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * MATLAB API rather then an extension for hiracical blcoks or models
  * manipulatoation added as a feature in the librray
  */
-class APIEXPORT SimulinkSubsystem
+class SLXIO_APIEXPORT SimulinkSubsystem
 {
 public:
   SimulinkSubsystem();

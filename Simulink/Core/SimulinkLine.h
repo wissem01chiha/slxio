@@ -19,7 +19,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkLine
  * @brief A Simulink line.
  */
-class APIEXPORT SimulinkLine final : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkLine final : public SimulinkElementBase
 {
 public:
   SimulinkLine();

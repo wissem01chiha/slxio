@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkDebugging represents the debugging settings in a Simulink
  */
-class APIEXPORT SimulinkDebugging final
+class SLXIO_APIEXPORT SimulinkDebugging final
 {
 public:
   SimulinkDebugging() = default;

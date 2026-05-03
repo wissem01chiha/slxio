@@ -8,7 +8,7 @@
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Stateflow data object.*/
-class APIEXPORT StateflowData : public StateflowDeclBase
+class SLXIO_APIEXPORT StateflowData : public StateflowDeclBase
 {
 public:
   StateflowData() {}

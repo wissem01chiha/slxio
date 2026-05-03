@@ -17,7 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Logger
  * @brief Main logging handler class.
  */
-class APIEXPORT Logger final
+class SLXIO_APIEXPORT Logger final
 {
 public:
   /**

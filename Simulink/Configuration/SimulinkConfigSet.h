@@ -30,7 +30,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
-class APIEXPORT SimulinkConfigSet final
+class SLXIO_APIEXPORT SimulinkConfigSet final
 {
 public:
   SimulinkConfigSet();

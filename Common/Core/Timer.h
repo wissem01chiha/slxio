@@ -7,6 +7,7 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include <chrono>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -15,43 +16,55 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Timer
  * @brief Abstract class for all Timers
  */
-class APIEXPORT Timer
+class SLXIO_APIEXPORT Timer final
 {
 public:
-  virtual ~Timer() = default;
+  using Clock = std::chrono::steady_clock;
+
+  /**
+   * Default Constructor
+   */
+  Timer() = default;
+
+  /**
+   * Default Destructor
+   */
+  ~Timer() = default;
 
   /**
    * Call Start every time to reset the timer to zero.
    */
-  virtual void Start() = 0;
+  void Start();
 
   /**
    * Stops the timer and records the elapsed time.
    */
-  virtual void Stop() = 0;
+  void Stop();
 
   /**
    * Resets the timer state and clears any recorded time.
    */
-  virtual void Reset() = 0;
+  void Reset();
 
   /**
    * Checks whether the timer is currently running.
    */
-  virtual bool IsRunning() const = 0;
+  bool IsRunning() const;
 
   /**
    * Returns the precision or resolution of the timer in seconds.
    */
-  virtual Float32 Precision() const = 0;
+  Float32 Precision() const;
 
   /**
    * Obtains a timer measurement in seconds.
    */
-  virtual Float32 Time() = 0;
+  Float32 Time();
 
-protected:
-  Timer() = default;
+private:
+  Clock::time_point StartTime;
+  bool Running;
+  Clock::duration Accumulated{ Clock::duration::zero() };
 };
 
 SLXIO_ABI_NAMESPACE_END

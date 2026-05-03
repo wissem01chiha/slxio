@@ -16,7 +16,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkColor
  * @brief Container for default Simulink Supported Colors
  */
-class APIEXPORT SimulinkColor final
+class SLXIO_APIEXPORT SimulinkColor final
 {
 public:
   std::string name;

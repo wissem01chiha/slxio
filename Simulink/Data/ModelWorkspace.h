@@ -20,7 +20,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class ModelWorkspace
  * @brief
  */
-class APIEXPORT ModelWorkspace final
+class SLXIO_APIEXPORT ModelWorkspace final
 {
 public:
   ModelWorkspace();

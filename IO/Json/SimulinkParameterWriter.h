@@ -28,7 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief write a Simulink Parameter data object to a json element
  */
-class APIEXPORT SimulinkParameterWriter final
+class SLXIO_APIEXPORT SimulinkParameterWriter final
   : public SimulinkWriterBase<SimulinkParameter, json_object*>
 {
 public:
