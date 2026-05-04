@@ -4,3 +4,7 @@ GROUP
   ThirdParty
 LIBRARY_NAME
   ThirdPartyrapidcsv
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  FALSE

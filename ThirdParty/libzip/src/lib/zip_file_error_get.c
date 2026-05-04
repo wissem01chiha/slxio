@@ -1,6 +1,6 @@
 /*
   zip_file_error_get.c -- get zip file error
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -35,7 +35,8 @@
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
+
 ZIP_EXTERN void zip_file_error_get(zip_file_t *zf, int *zep, int *sep) {
-  _zip_error_get(&zf->error, zep, sep);
+    _zip_error_get(&zf->error, zep, sep);
 }
 /* LCOV_EXCL_STOP */

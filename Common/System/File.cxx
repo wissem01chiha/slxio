@@ -2,10 +2,11 @@
 #include "Compiler.h"
 #include "Directory.h"
 #include "ErrorCode.h"
-#include "LibZip.h"
+#include "Libzip.h"
 #include "Libuv.h"
 #include <fstream>
 #include <iostream>
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

@@ -6,7 +6,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArray::SimulinkArray()
-  : logger(Logger::GetInstance())
+  :  logger(Logger::GetInstance())
 {
 }
 

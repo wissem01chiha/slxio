@@ -364,6 +364,16 @@ CXXOPTS_LINKONCE_CONST std::string RQUOTE("\'");
 CXXOPTS_DIAGNOSTIC_PUSH
 CXXOPTS_IGNORE_WARNING("-Wnon-virtual-dtor")
 
+enum class ImplicitArgPolicy {
+  Disabled,
+  Enabled
+};
+
+enum class PositionalMode {
+  Replace,
+  Append
+};
+
 // some older versions of GCC warn under this warning
 CXXOPTS_IGNORE_WARNING("-Weffc++")
 class Value : public std::enable_shared_from_this<Value>
@@ -394,6 +404,9 @@ class Value : public std::enable_shared_from_this<Value>
   virtual bool
   has_implicit() const = 0;
 
+  virtual bool
+  has_disabled_args() const = 0;
+
   virtual std::string
   get_default_value() const = 0;
 
@@ -404,7 +417,7 @@ class Value : public std::enable_shared_from_this<Value>
   default_value(const std::string& value) = 0;
 
   virtual std::shared_ptr<Value>
-  implicit_value(const std::string& value) = 0;
+  implicit_value(const std::string& value, ImplicitArgPolicy arg_policy = ImplicitArgPolicy::Enabled) = 0;
 
   virtual std::shared_ptr<Value>
   no_implicit_value() = 0;
@@ -478,6 +491,15 @@ class invalid_option_syntax : public parsing {
   explicit invalid_option_syntax(const std::string& text)
   : parsing("Argument " + LQUOTE + text + RQUOTE +
             " starts with a - but has incorrect syntax")
+  {
+  }
+};
+
+class specified_disabled_args : public parsing {
+  public:
+  explicit specified_disabled_args(const std::string& text)
+  : parsing("Option " + LQUOTE + text + RQUOTE +
+            " has disabled_args but argument was specified")
   {
   }
 };
@@ -672,6 +694,16 @@ inline bool IsFalseText(const std::string &text)
   return false;
 }
 
+static inline bool valid_option_later_char(char c)
+{
+  return c!='=' && c!=',' && !std::isspace(c, std::locale::classic()) && !std::iscntrl(c, std::locale::classic());
+}
+
+static inline bool valid_option_first_char(char c)
+{
+  return c != '-' && valid_option_later_char(c);
+}
+
 inline OptionNames split_option_names(const std::string &text)
 {
   OptionNames split_names;
@@ -692,24 +724,26 @@ inline OptionNames split_option_names(const std::string &text)
     }
     token_start_pos = next_non_space_pos;
     auto next_delimiter_pos = text.find(',', token_start_pos);
-    if (next_delimiter_pos == token_start_pos) {
-      throw_or_mimic<exceptions::invalid_option_format>(text);
-    }
+
     if (next_delimiter_pos == npos) {
       next_delimiter_pos = length;
     }
+    else if (next_delimiter_pos == token_start_pos) {
+      throw_or_mimic<exceptions::invalid_option_format>(text);
+    }
+    else if(next_delimiter_pos == length-1) {
+      // delimter at the end. ex : "a,ab,"
+      throw_or_mimic<exceptions::invalid_option_format>(text);
+    }
     auto token_length = next_delimiter_pos - token_start_pos;
-    // validate the token itself matches the regex /([:alnum:][-_[:alnum:]]*/
     {
-      const char* option_name_valid_chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        "abcdefghijklmnopqrstuvwxyz"
-        "0123456789"
-        "_-.?";
-
-      if (!std::isalnum(text[token_start_pos], std::locale::classic()) ||
-          text.find_first_not_of(option_name_valid_chars, token_start_pos) < next_delimiter_pos) {
+      if(!valid_option_first_char(text[token_start_pos])){
         throw_or_mimic<exceptions::invalid_option_format>(text);
+      }
+      for(size_t i=token_start_pos+1; i<next_delimiter_pos; ++i){
+        if(!valid_option_later_char(text[i])) {
+          throw_or_mimic<exceptions::invalid_option_format>(text);
+        }
       }
     }
     split_names.emplace_back(text.substr(token_start_pos, token_length));
@@ -726,11 +760,11 @@ inline ArguDesc ParseArgument(const char *arg, bool &matched)
   if (strncmp(pdata, "--", 2) == 0)
   {
     pdata += 2;
-    if (isalnum(*pdata, std::locale::classic()))
+    if (valid_option_first_char(*pdata))
     {
       argu_desc.arg_name.push_back(*pdata);
       pdata += 1;
-      while (isalnum(*pdata, std::locale::classic()) || *pdata == '-' || *pdata == '_')
+      while (valid_option_later_char(*pdata))
       {
         argu_desc.arg_name.push_back(*pdata);
         pdata += 1;
@@ -757,13 +791,19 @@ inline ArguDesc ParseArgument(const char *arg, bool &matched)
   else if (strncmp(pdata, "-", 1) == 0)
   {
     pdata += 1;
-    argu_desc.grouping = true;
-    while (isalnum(*pdata, std::locale::classic()))
-    {
-      argu_desc.arg_name.push_back(*pdata);
-      pdata += 1;
+    if(valid_option_first_char(*pdata)) {
+      // If we have '=' right after first alnum, its a match.
+      if(*(pdata+1) == '=') {
+        argu_desc.arg_name.push_back(*pdata);
+        argu_desc.set_value = true;
+        argu_desc.value = std::string(pdata+2);
+      }
+      else{
+        argu_desc.arg_name = std::string(pdata);
+      }
+      argu_desc.grouping = true;
+      matched = true;
     }
-    matched = !argu_desc.arg_name.empty() && *pdata == '\0';
   }
   return argu_desc;
 }
@@ -771,6 +811,13 @@ inline ArguDesc ParseArgument(const char *arg, bool &matched)
 #else  // CXXOPTS_NO_REGEX
 
 namespace {
+
+#define CXXOPTS_RE_NAME_START "[^-=,[:space:][:cntrl:]]"
+#define CXXOPTS_RE_NAME_CHAR "[^=,[:space:][:cntrl:]]"
+#define CXXOPTS_RE_NAME CXXOPTS_RE_NAME_START CXXOPTS_RE_NAME_CHAR "*"
+#define CXXOPTS_RE_LONG_NAME CXXOPTS_RE_NAME_START CXXOPTS_RE_NAME_CHAR "+"
+#define CXXOPTS_RE_SHORT_NAME CXXOPTS_RE_NAME_START
+
 CXXOPTS_LINKONCE
 const char* const integer_pattern =
   "(-)?(0x)?([0-9a-zA-Z]+)|((0x)?0)";
@@ -782,12 +829,31 @@ const char* const falsy_pattern =
   "(f|F)(alse)?|0";
 CXXOPTS_LINKONCE
 const char* const option_pattern =
-  "--([[:alnum:]][-_[:alnum:]\\.]+)(=(.*))?|-([[:alnum:]].*)";
+  "--(" CXXOPTS_RE_LONG_NAME ")(=(.*))?|-(" CXXOPTS_RE_SHORT_NAME ")((=(.*))|(.*))";
+// <-------Long Option--------------->  <-------------Short Option--------------->
+// Groups :
+//   <---------1--------------><--2-->   <-----------4-------------><-----5------>
+//                               <-3>                                <--6--> <-8>
+//                                                                         <-7>
+const int LONG_NAME_IDX=1;
+const int LONG_MATCH_IDX=2;
+const int LONG_MATCH_VALUE_IDX=3;
+const int SHORT_NAME_IDX=4;
+const int SHORT_MATCH_IDX=6;
+const int SHORT_MATCH_VALUE_IDX=7;
+const int SHORT_GROUPING_IDX=8;
+
 CXXOPTS_LINKONCE
 const char* const option_specifier_pattern =
-  "([[:alnum:]][-_[:alnum:]\\.]*)(,[ ]*[[:alnum:]][-_[:alnum:]]*)*";
+  "(" CXXOPTS_RE_NAME ")(,[ ]*" CXXOPTS_RE_NAME ")*";
 CXXOPTS_LINKONCE
 const char* const option_specifier_separator_pattern = ", *";
+
+#undef CXXOPTS_RE_NAME_START
+#undef CXXOPTS_RE_NAME_CHAR
+#undef CXXOPTS_RE_NAME
+#undef CXXOPTS_RE_LONG_NAME
+#undef CXXOPTS_RE_SHORT_NAME
 
 } // namespace
 
@@ -864,13 +930,21 @@ inline ArguDesc ParseArgument(const char *arg, bool &matched)
 
   ArguDesc argu_desc;
   if (matched) {
-    argu_desc.arg_name = result[1].str();
-    argu_desc.set_value = result[2].length() > 0;
-    argu_desc.value = result[3].str();
-    if (result[4].length() > 0)
+    if(result[LONG_NAME_IDX].length() > 0) {
+      argu_desc.arg_name = result[LONG_NAME_IDX].str();
+      argu_desc.set_value = result[LONG_MATCH_IDX].length() > 0;
+      argu_desc.value = result[LONG_MATCH_VALUE_IDX].str();
+    }
+    else if (result[SHORT_NAME_IDX].length() > 0)
     {
       argu_desc.grouping = true;
-      argu_desc.arg_name = result[4].str();
+      argu_desc.arg_name = result[SHORT_NAME_IDX].str();
+      if(result[SHORT_MATCH_IDX].length() > 0){
+        argu_desc.set_value = true;
+        argu_desc.value = result[SHORT_MATCH_VALUE_IDX].str();
+      } else {
+        argu_desc.arg_name += result[SHORT_GROUPING_IDX].str();
+      }
     }
   }
 
@@ -1100,22 +1174,19 @@ void parse_value(const std::string& text, char& c)
   c = text[0];
 }
 
+template<typename T> void add_value(const std::string& text, std::vector<T>& value);
+
 template <typename T>
 void
 parse_value(const std::string& text, std::vector<T>& value)
 {
   if (text.empty()) {
-    T v;
-    parse_value(text, v);
-    value.emplace_back(std::move(v));
     return;
   }
   std::stringstream in(text);
   std::string token;
   while(!in.eof() && std::getline(in, token, CXXOPTS_VECTOR_DELIMITER)) {
-    T v;
-    parse_value(token, v);
-    value.emplace_back(std::move(v));
+    add_value(token, value);
   }
 }
 
@@ -1222,6 +1293,12 @@ class abstract_value : public Value
     return m_implicit;
   }
 
+  bool
+  has_disabled_args() const override
+  {
+    return m_implicit && (m_implicit_arg_policy == ImplicitArgPolicy::Disabled);
+  }
+
   std::shared_ptr<Value>
   default_value(const std::string& value) override
   {
@@ -1231,10 +1308,11 @@ class abstract_value : public Value
   }
 
   std::shared_ptr<Value>
-  implicit_value(const std::string& value) override
+  implicit_value(const std::string& value, ImplicitArgPolicy arg_policy = ImplicitArgPolicy::Enabled) override
   {
     m_implicit = true;
     m_implicit_value = value;
+    m_implicit_arg_policy = arg_policy;
     return shared_from_this();
   }
 
@@ -1280,6 +1358,9 @@ class abstract_value : public Value
   bool m_default = false;
   bool m_implicit = false;
 
+  // NOTE: Only meaningful when m_implicit == true
+  ImplicitArgPolicy m_implicit_arg_policy = ImplicitArgPolicy::Enabled;
+
   std::string m_default_value{};
   std::string m_implicit_value{};
 };
@@ -1302,8 +1383,6 @@ template <>
 class standard_value<bool> : public abstract_value<bool>
 {
   public:
-  ~standard_value() override = default;
-
   standard_value()
   {
     set_default_and_implicit();
@@ -2035,18 +2114,18 @@ class Options
 
   //parse positional arguments into the given option
   void
-  parse_positional(std::string option);
+  parse_positional(std::string option, PositionalMode mode = PositionalMode::Replace);
 
   void
-  parse_positional(std::vector<std::string> options);
+  parse_positional(std::vector<std::string> options, PositionalMode mode = PositionalMode::Replace);
 
   void
-  parse_positional(std::initializer_list<std::string> options);
+  parse_positional(std::initializer_list<std::string> options, PositionalMode mode = PositionalMode::Replace);
 
   template <typename Iterator>
   void
-  parse_positional(Iterator begin, Iterator end) {
-    parse_positional(std::vector<std::string>{begin, end});
+  parse_positional(Iterator begin, Iterator end, PositionalMode mode = PositionalMode::Replace) {
+    parse_positional(std::vector<std::string>{begin, end}, mode);
   }
 
   std::string
@@ -2131,6 +2210,143 @@ namespace {
 constexpr std::size_t OPTION_LONGEST = 30;
 constexpr std::size_t OPTION_DESC_GAP = 2;
 
+
+
+String
+wrap_text
+(
+  const String& text,
+  std::size_t allowed,
+  std::size_t start = 0 // spaces_to_append_at_newline
+)
+{
+  if(allowed == 0) return String{};
+
+  String result;
+  auto current = std::begin(text);
+  using Iterator = decltype(current);
+
+  auto startLine = current;
+  auto lastSpace = current;
+  auto contentEnd = current;
+  auto lastSpaceContentEnd = current;
+  auto size = std::size_t{};
+
+  bool firstLine = true;
+  const auto textEnd = std::end(text);
+
+  // Loop invariants at the beginning of each iteration:
+  // 1 - [std::begin(text), startLine) is already added to result
+  // 2 - currentLine [startLine, current) is not added to result yet
+  // 3 - size is the number of characters in [startLine, current)
+  //
+  // At every loop we try to include current in the currentLine.
+  // If there is a need to start a new line, we do that first.
+
+  // Treat explicit newlines as whitespace for trimming and break detection.
+  auto is_space = [](Iterator itr) -> bool {
+    return *itr == ' ' || *itr == '\t' || *itr == '\n';
+  };
+
+  // Ensure when calling begin <= end
+  auto add_line = [&firstLine, &result, start](Iterator begin, Iterator end) {
+    // begin == end means empty line
+    // Handle newlines, clamping, everything here
+    if(!firstLine) {
+      stringAppend(result, 1, '\n');
+    }
+
+    // Actual Content
+    if(begin != end) {
+      // Clamp if not the first line
+      if(!firstLine) stringAppend(result, start, ' ');
+      stringAppend(result, begin, end);
+    }
+
+    firstLine = false;
+  };
+
+  // Make the line [itr, current]
+  // It is assumed, as a special case for the below algorithm
+  // that [itr, current] doesn't contains any space.
+  // either its called with itr = std::next(current)
+  // or with an itr <= current in case of word splitting
+  auto reset_line_start = [&size, &startLine, &lastSpace, &contentEnd, &lastSpaceContentEnd, &current](Iterator itr, Iterator lineContentEnd) {
+    startLine = itr;
+    lastSpace = startLine;
+    contentEnd = lineContentEnd;
+    lastSpaceContentEnd = startLine;
+
+    size = std::distance(startLine, std::next(current));
+  };
+
+
+  for (; current != textEnd; ++current)
+  {
+    const auto currentNext = std::next(current);
+
+    if(*current == '\n') {
+      add_line(startLine, contentEnd);
+      reset_line_start(currentNext, currentNext);
+
+      // Last character is a newline. Hence there is another line to be added. An empty one
+      // And we need to do that now as we don't be doing further iterations
+      if(currentNext == textEnd) {
+        add_line(currentNext, currentNext);
+      }
+
+    } else {
+      size ++ ;
+      if(is_space(current)) {
+        lastSpace = current;
+        lastSpaceContentEnd = contentEnd;
+      } else {
+        contentEnd = currentNext;
+      }
+      bool endHere = false;
+      auto endLine = contentEnd;
+      auto nextLineStart = currentNext;
+
+      if(currentNext == textEnd) {
+        endHere = true;
+      }
+      else if(is_space(current) && size == 1) {
+        // Ignore leading spaces
+        reset_line_start(currentNext, currentNext);
+      }
+      else if(size >= allowed && !is_space(currentNext)) {
+        // Don't break. Think of cases 'abc   \nxyz' with allowed=5
+        // we will decide in the next iteration if needed
+        //
+        // Now we know currentNext is not a space:
+        // - if there is no breakable whitespace, we have to split the word
+        // - if the line ends in whitespace, split here
+        // - otherwise split from the last whitespace inside the line
+        if(lastSpace != startLine && lastSpace != current)
+        {
+          endLine = lastSpaceContentEnd;
+          nextLineStart = std::next(lastSpace);
+        }
+
+        // If the chosen break lands right before an explicit newline, let the
+        // newline branch handle it instead of forcing an extra wrapped line.
+        if(*endLine == '\n') {
+          endHere = false;
+        } else {
+          endHere = true;
+        }
+      }
+
+      if(endHere) {
+        add_line(startLine, endLine);
+        reset_line_start(nextLineStart, currentNext);
+      }
+    }
+  }
+
+  return result;
+}
+
 String
 format_option
 (
@@ -2200,7 +2416,6 @@ format_description
     }
   }
 
-  String result;
 
   if (tab_expansion)
   {
@@ -2228,82 +2443,9 @@ format_description
     desc = desc2;
   }
 
-  desc += " ";
-
-  auto current = std::begin(desc);
-  auto previous = current;
-  auto startLine = current;
-  auto lastSpace = current;
-
-  auto size = std::size_t{};
-
-  bool appendNewLine;
-  bool onlyWhiteSpace = true;
-
-  while (current != std::end(desc))
-  {
-    appendNewLine = false;
-    if (*previous == ' ' || *previous == '\t')
-    {
-      lastSpace = current;
-    }
-    if (*current != ' ' && *current != '\t')
-    {
-      onlyWhiteSpace = false;
-    }
-
-    while (*current == '\n')
-    {
-      previous = current;
-      ++current;
-      appendNewLine = true;
-    }
-
-    if (!appendNewLine && size >= allowed)
-    {
-      if (lastSpace != startLine)
-      {
-        current = lastSpace;
-        previous = current;
-      }
-      appendNewLine = true;
-    }
-
-    if (appendNewLine)
-    {
-      stringAppend(result, startLine, current);
-      startLine = current;
-      lastSpace = current;
-
-      if (*previous != '\n')
-      {
-        stringAppend(result, "\n");
-      }
-
-      stringAppend(result, start, ' ');
-
-      if (*previous != '\n')
-      {
-        stringAppend(result, lastSpace, current);
-      }
-
-      onlyWhiteSpace = true;
-      size = 0;
-    }
-
-    previous = current;
-    ++current;
-    ++size;
-  }
-
-  //append whatever is left but ignore whitespace
-  if (!onlyWhiteSpace)
-  {
-    stringAppend(result, startLine, previous);
-  }
-
-  return result;
+  return wrap_text(desc, allowed, start);
 }
+
 
 } // namespace
 
@@ -2344,7 +2486,7 @@ OptionAdder::operator()
     // (length-1) and longer names
   std::string short_name {""};
   auto first_short_name_iter =
-    std::partition(option_names.begin(), option_names.end(),
+    std::stable_partition(option_names.begin(), option_names.end(),
       [&](const std::string& name) { return name.length() > 1; }
     );
   auto num_length_1_names = (option_names.end() - first_short_name_iter);
@@ -2485,25 +2627,32 @@ OptionParser::consume_positional(const std::string& a, PositionalListIterator& n
 
 inline
 void
-Options::parse_positional(std::string option)
+Options::parse_positional(std::string option, PositionalMode mode)
 {
-  parse_positional(std::vector<std::string>{std::move(option)});
+  parse_positional(std::vector<std::string>{std::move(option)}, mode);
 }
 
 inline
 void
-Options::parse_positional(std::vector<std::string> options)
+Options::parse_positional(std::vector<std::string> options, PositionalMode mode)
 {
-  m_positional = std::move(options);
-
-  m_positional_set.insert(m_positional.begin(), m_positional.end());
+  switch(mode){
+    case PositionalMode::Replace:
+      m_positional = std::move(options);
+      m_positional_set = std::unordered_set<std::string>(m_positional.begin(), m_positional.end());
+      break;
+    case PositionalMode::Append:
+      m_positional.insert(m_positional.end(), options.begin(), options.end());
+      m_positional_set.insert(options.begin(), options.end());
+      break;
+  }
 }
 
 inline
 void
-Options::parse_positional(std::initializer_list<std::string> options)
+Options::parse_positional(std::initializer_list<std::string> options, PositionalMode mode)
 {
-  parse_positional(std::vector<std::string>(options));
+  parse_positional(std::vector<std::string>(options), mode);
 }
 
 inline
@@ -2524,7 +2673,7 @@ OptionParser::parse(int argc, const char* const* argv)
 
   std::vector<std::string> unmatched;
 
-  while (current != argc)
+  while (current < argc)
   {
     if (strcmp(argv[current], "--") == 0)
     {
@@ -2586,7 +2735,15 @@ OptionParser::parse(int argc, const char* const* argv)
           if (i + 1 == s.size())
           {
             //it must be the last argument
-            checked_parse_arg(argc, argv, current, value, name);
+            if (argu_desc.set_value) {
+              if(value->value().has_disabled_args()){
+                throw_or_mimic<exceptions::specified_disabled_args>(name);
+              }
+              parse_option(value, name, argu_desc.value);
+            }
+            else{
+              checked_parse_arg(argc, argv, current, value, name);
+            }
           }
           else if (value->value().has_implicit())
           {
@@ -2629,6 +2786,9 @@ OptionParser::parse(int argc, const char* const* argv)
         //equals provided for long option?
         if (argu_desc.set_value)
         {
+          if(opt->value().has_disabled_args()){
+            throw_or_mimic<exceptions::specified_disabled_args>(name);
+          }
           //parse the option given
 
           parse_option(opt, name, argu_desc.value);
@@ -2776,17 +2936,17 @@ Options::help_one_group(const std::string& g) const
 {
   using OptionHelp = std::vector<std::pair<String, String>>;
 
+  String result;
+
   auto group = m_help.find(g);
   if (group == m_help.end())
   {
-    return "";
+    return result;
   }
 
   OptionHelp format;
 
   std::size_t longest = 0;
-
-  String result;
 
   if (!g.empty())
   {
@@ -2828,6 +2988,7 @@ Options::help_one_group(const std::string& g) const
     auto d = format_description(o, longest + OPTION_DESC_GAP, allowed, m_tab_expansion);
 
     result += fiter->first;
+
     if (stringLength(fiter->first) > longest)
     {
       result += '\n';
@@ -2898,6 +3059,8 @@ Options::help(const std::vector<std::string>& help_groups, bool print_usage) con
   }
 
   result += "\n\n";
+
+  result = wrap_text(result, m_width, 0);
 
   if (help_groups.empty())
   {

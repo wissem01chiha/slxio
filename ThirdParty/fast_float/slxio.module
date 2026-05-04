@@ -1,0 +1,23 @@
+NAME
+  fast_float
+GROUP
+  ThirdParty
+LIBRARY_NAME
+  ThirdPartyfast_float
+SPDX_LICENSE_IDENTIFIER
+  MIT
+SPDX_COPYRIGHT_TEXT
+  Copyright (c) 2021 The fast_float authors
+SPDX_CUSTOM_LICENSE_FILE
+  src/LICENSE-MIT
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/LICENSE-MIT
+  src/LICENSE-BOOST
+  src/LICENSE-APACHE
+DESCRIPTION
+  Fast and exact implementation of the C++ from_chars functions for number types
+VERSION
+  8.5.2
+MAINTAINER
+  The fast_float authors

@@ -31,30 +31,31 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include "zipint.h"
 
-ZIP_EXTERN zip_int8_t zip_fseek(zip_file_t *zf, zip_int64_t offset,
-                                int whence) {
-  if (zf == NULL) {
-    return -1;
-  }
+ZIP_EXTERN zip_int8_t zip_fseek(zip_file_t *zf, zip_int64_t offset, int whence) {
+    if (zf == NULL) {
+        return -1;
+    }
 
-  if (zf->error.zip_err != 0) {
-    return -1;
-  }
+    if (zf->error.zip_err != 0) {
+        return -1;
+    }
 
-  if (zip_source_seek(zf->src, offset, whence) < 0) {
-    zip_error_set_from_source(&zf->error, zf->src);
-    return -1;
-  }
+    if (zip_source_seek(zf->src, offset, whence) < 0) {
+        zip_error_set_from_source(&zf->error, zf->src);
+        return -1;
+    }
 
-  return 0;
+    return 0;
 }
 
-ZIP_EXTERN int zip_file_is_seekable(zip_file_t *zfile) {
-  if (zfile == NULL) {
-    return -1;
-  }
 
-  return zip_source_is_seekable(zfile->src);
+ZIP_EXTERN int zip_file_is_seekable(zip_file_t *zfile) {
+    if (zfile == NULL) {
+        return -1;
+    }
+
+    return zip_source_is_seekable(zfile->src);
 }

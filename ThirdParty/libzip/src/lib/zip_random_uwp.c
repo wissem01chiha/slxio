@@ -1,6 +1,6 @@
 /*
   zip_random_uwp.c -- fill the user's buffer with random stuff (UWP version)
-  Copyright (C) 2017-2023 Dieter Baron and Thomas Klausner
+  Copyright (C) 2017-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -39,22 +39,22 @@
 
 #ifndef HAVE_SECURE_RANDOM
 
-#include <bcrypt.h>
 #include <windows.h>
 
+#include <bcrypt.h>
+
 ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
-  BCRYPT_ALG_HANDLE hAlg = NULL;
-  NTSTATUS hr = BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_RNG_ALGORITHM,
-                                            MS_PRIMITIVE_PROVIDER, 0);
-  if (!BCRYPT_SUCCESS(hr) || hAlg == NULL) {
-    return false;
-  }
-  hr = BCryptGenRandom(&hAlg, buffer, length, 0);
-  BCryptCloseAlgorithmProvider(&hAlg, 0);
-  if (!BCRYPT_SUCCESS(hr)) {
-    return false;
-  }
-  return true;
+    BCRYPT_ALG_HANDLE hAlg = NULL;
+    NTSTATUS hr = BCryptOpenAlgorithmProvider(&hAlg, BCRYPT_RNG_ALGORITHM, MS_PRIMITIVE_PROVIDER, 0);
+    if (!BCRYPT_SUCCESS(hr) || hAlg == NULL) {
+        return false;
+    }
+    hr = BCryptGenRandom(&hAlg, buffer, length, 0);
+    BCryptCloseAlgorithmProvider(&hAlg, 0);
+    if (!BCRYPT_SUCCESS(hr)) {
+        return false;
+    }
+    return true;
 }
 
 #endif
@@ -63,19 +63,19 @@ ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
 #include <stdlib.h>
 
 zip_uint32_t zip_random_uint32(void) {
-  static bool seeded = false;
+    static bool seeded = false;
 
-  zip_uint32_t value;
+    zip_uint32_t value;
 
-  if (zip_secure_random((zip_uint8_t *)&value, sizeof(value))) {
-    return value;
-  }
+    if (zip_secure_random((zip_uint8_t *)&value, sizeof(value))) {
+        return value;
+    }
 
-  if (!seeded) {
-    srand((unsigned int)time(NULL));
-    seeded = true;
-  }
+    if (!seeded) {
+        srand((unsigned int)time(NULL));
+        seeded = true;
+    }
 
-  return (zip_uint32_t)rand();
+    return (zip_uint32_t)rand();
 }
 #endif

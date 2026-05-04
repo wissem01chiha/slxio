@@ -1,3 +1,4 @@
-add_module(ThirdParty::libxml2)
-target_include_directories(ThirdPartylibxml2
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/include)
+add_thirdparty_module(libxml2
+    ${PROJECT_SOURCE_DIR}/ThirdParty/libxml2
+    LibXml2
+)

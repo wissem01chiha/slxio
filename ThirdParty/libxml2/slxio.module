@@ -18,117 +18,17 @@ ENABLE_TEST
   FALSE
 ENABLE_BUILD
   TRUE
-EXTERNAL_BUILD
-  FALSE
-EXTERNAL_SOURCE_DIR
 INSTALL_HEADERS
   TRUE
 INSTALL_TARGETS
   FALSE
 CLASSES
 SOURCES
-    src/buf.c
-    src/chvalid.c
-    src/dict.c
-    src/encoding.c
-    src/entities.c
-    src/error.c
-    src/globals.c
-    src/hash.c
-    src/list.c
-    src/parser.c
-    src/parserInternals.c
-    src/SAX2.c
-    src/threads.c
-    src/tree.c
-    src/uri.c
-    src/valid.c
-    src/xmlIO.c
-    src/xmlmemory.c
-    src/xmlstring.c
-    src/xmlsave.c
-    src/xmlregexp.c
-    src/relaxng.c
-    src/xmlschemas.c
-    src/pattern.c
-    src/xmllint.c
-    src/xpath.c
-    src/c14n.c
-    src/catalog.c
-    src/debugXML.c
-    src/HTMLparser.c
-    src/HTMLtree.c
-    src/lintmain.c
-    src/nanohttp.c
-    src/runsuite.c
-    src/runtest.c
-    src/runxmlconf.c
-    src/schematron.c
-    src/shell.c
-    src/xinclude.c
-    src/xlink.c
-    src/xmlcatalog.c
-    src/xmlmodule.c
-    src/xmlreader.c
-    src/xmlschemastypes.c
-    src/xmlwriter.c
-    src/xpointer.c
 HEADERS
-    src/include/libxml/c14n.h
-    src/include/libxml/catalog.h
-    src/include/libxml/chvalid.h
-    src/include/libxml/debugXML.h
-    src/include/libxml/dict.h
-    src/include/libxml/encoding.h
-    src/include/libxml/entities.h
-    src/include/libxml/globals.h
-    src/include/libxml/hash.h
-    src/include/libxml/HTMLparser.h
-    src/include/libxml/HTMLtree.h
-    src/include/libxml/list.h
-    src/include/libxml/nanoftp.h
-    src/include/libxml/nanohttp.h
-    src/include/libxml/parser.h
-    src/include/libxml/parserInternals.h
-    src/include/libxml/pattern.h
-    src/include/libxml/relaxng.h
-    src/include/libxml/SAX.h
-    src/include/libxml/SAX2.h
-    src/include/libxml/schemasInternals.h
-    src/include/libxml/schematron.h
-    src/include/libxml/threads.h
-    src/include/libxml/tree.h
-    src/include/libxml/uri.h
-    src/include/libxml/valid.h
-    src/include/libxml/xinclude.h
-    src/include/libxml/xlink.h
-    src/include/libxml/xmlIO.h
-    src/include/libxml/xmlautomata.h
-    src/include/libxml/xmlerror.h
-    src/include/libxml/xmlexports.h
-    src/include/libxml/xmlmemory.h
-    src/include/libxml/xmlmodule.h
-    src/include/libxml/xmlreader.h
-    src/include/libxml/xmlregexp.h
-    src/include/libxml/xmlsave.h
-    src/include/libxml/xmlschemas.h
-    src/include/libxml/xmlschemastypes.h
-    src/include/libxml/xmlstring.h
-    src/include/libxml/xmlunicode.h
-    src/include/libxml/xmlwriter.h
-    src/include/libxml/xpath.h
-    src/include/libxml/xpathInternals.h
-    src/include/libxml/xpointer.h
 CONFIG_HEADERS
-  src/config.h.cmake.in
-  src/xml2-config.in
-  src/libxml2-config.cmake.in
-  src/libxml2-config.cmake.cmake.in
-CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
 PRIVATE_DEPENDS 
 WINDOWS_DEPENDS
-  bcrypt
 TEST_DEPENDS
 
   

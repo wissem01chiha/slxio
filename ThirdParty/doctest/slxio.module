@@ -29,7 +29,7 @@ INSTALL_TARGETS
   TRUE
 CLASSES
 SOURCES
-  src/doctest/parts/doctest.cpp
+  src/doctest/doctest.cpp
 HEADERS
   src/doctest/doctest.h
   src/doctest/parts/doctest_fwd.h

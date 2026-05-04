@@ -1,6 +1,6 @@
 /*
   zip_fopen.c -- open file in zip archive for reading
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,15 +31,16 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include "zipint.h"
 
-ZIP_EXTERN zip_file_t *zip_fopen(zip_t *za, const char *fname,
-                                 zip_flags_t flags) {
-  zip_int64_t idx;
 
-  if ((idx = zip_name_locate(za, fname, flags)) < 0)
-    return NULL;
+ZIP_EXTERN zip_file_t *zip_fopen(zip_t *za, const char *fname, zip_flags_t flags) {
+    zip_int64_t idx;
 
-  return zip_fopen_index_encrypted(za, (zip_uint64_t)idx, flags,
-                                   za->default_password);
+    if ((idx = zip_name_locate(za, fname, flags)) < 0) {
+        return NULL;
+    }
+
+    return zip_fopen_index_encrypted(za, (zip_uint64_t)idx, flags, za->default_password);
 }

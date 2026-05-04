@@ -31,24 +31,25 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include "zipint.h"
 
 ZIP_EXTERN zip_int64_t zip_ftell(zip_file_t *zf) {
-  zip_int64_t res;
+    zip_int64_t res;
 
-  if (zf == NULL) {
-    return -1;
-  }
+    if (zf == NULL) {
+        return -1;
+    }
 
-  if (zf->error.zip_err != 0) {
-    return -1;
-  }
+    if (zf->error.zip_err != 0) {
+        return -1;
+    }
 
-  res = zip_source_tell(zf->src);
-  if (res < 0) {
-    zip_error_set_from_source(&zf->error, zf->src);
-    return -1;
-  }
+    res = zip_source_tell(zf->src);
+    if (res < 0) {
+        zip_error_set_from_source(&zf->error, zf->src);
+        return -1;
+    }
 
-  return res;
+    return res;
 }

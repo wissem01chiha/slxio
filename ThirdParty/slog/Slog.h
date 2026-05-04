@@ -7,7 +7,7 @@
 #if USE_EXTERNAL_SLOG
 #include <slog.h>
 #else
-#include <src/slog.h>
+#include <src/src/slog.h>
 #endif 
 
 #endif // SLOG_H

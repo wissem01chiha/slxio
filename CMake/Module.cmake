@@ -776,3 +776,29 @@ function(test_link_libraries test_target module_prefix)
   ${${module_prefix}_library_name})
 
 endfunction()
+
+#[==[.rst:
+.. cmake:function:: add_thirdparty_module(<name> <path> <target>)
+
+  Wrapper for vendored third‑party libraries.  
+
+  .. code-block:: cmake
+
+    add_thirdparty_module(libuv
+        ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
+        uv)
+#]==]
+function(add_thirdparty_module module_name module_path target_name)
+
+  add_subdirectory(src)
+
+  set(module_map 
+    "${module_map};ThirdParty::${module_name}=${target_name}"
+    CACHE INTERNAL "Global module name-target mapping")
+
+  get_target_property(thirdparty_includes ${target_name} INCLUDE_DIRECTORIES)
+  set_target_properties(${target_name} PROPERTIES
+    module_include_directories "${thirdparty_includes};${CMAKE_CURRENT_SOURCE_DIR}"
+    module_source_dir "${module_path}")
+
+endfunction()

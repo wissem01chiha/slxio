@@ -1,4 +1,17 @@
-[![Build Status](https://travis-ci.org/jarro2783/cxxopts.svg?branch=master)](https://travis-ci.org/jarro2783/cxxopts)
+<div align="center">
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/jarro2783/cxxopts/cmake.yml?label=build)](https://github.com/jarro2783/cxxopts/actions/workflows/cmake.yml)
+[![Conan](https://img.shields.io/conan/v/cxxopts)](https://conan.io/center/recipes/cxxopts)
+[![vcpkg](https://img.shields.io/vcpkg/v/cxxopts)](https://vcpkg.io/en/package/cxxopts)
+[![GitHub release](https://img.shields.io/github/v/release/jarro2783/cxxopts?label=github%20release)](https://github.com/jarro2783/cxxopts/releases)
+
+[![Header Only](https://img.shields.io/badge/header--only-yes-green.svg)](https://github.com/jarro2783/cxxopts)
+[![Mentioned in Awesome C++](https://awesome.re/mentioned-badge.svg)](https://github.com/fffaraz/awesome-cpp)
+[![Homebrew](https://img.shields.io/homebrew/installs/dy/cxxopts?label=brew%20downloads&logo=homebrew)](https://formulae.brew.sh/formula/cxxopts)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
+</div>
 
 # Release versions
 
@@ -116,10 +129,7 @@ explaining the error.
 ## Help groups
 
 Options can be placed into groups for the purposes of displaying help messages.
-To place options in a group, pass the group as a string to `add_options`. Then,
-when displaying the help, pass the groups that you would like displayed as a
-vector to the `help` function.
-
+To place options in a group, pass the group as a string to `add_options`. Then, when displaying the help, `help` by default prints help for all groups. If you want to only print help for a specific group, pass the groups that you would like displayed as a vector to the `help` function.
 ## Positional Arguments
 
 Positional arguments are those given without a preceding flag and can be used
@@ -140,6 +150,12 @@ options.parse_positional({"script", "server", "filenames"});
 
 // Parse options the usual way
 options.parse(argc, argv);
+```
+
+Note : `parse_positional` defaults to replacing the positionals with the arguments provided in the function call. To append to the existing list of positionals, please use `cxxopts::PositionalMode::Append`.
+
+```cpp
+options.parse_positional("another_option", cxxopts::PositionalMode::Append);
 ```
 
 For example, parsing the following arguments:
@@ -176,11 +192,23 @@ If an option had both, then not specifying it would give the value `"value"`,
 writing it on the command line as `--option` would give the value `"implicit"`,
 and writing `--option=another` would give it the value `"another"`.
 
+Note that if `option` has an implicit value, specifying `--option another` will not work. You must use `=` syntax - `--option=another` or `-o=another`(assumming `o` is a short name for the option). This is because no argument is required. Hence, there is no good way to determine if the next string is an argument to your option or a positional argument.
+
 Note that the default and implicit value is always stored as a string,
 regardless of the type that you want to store it in. It will be parsed as
 though it was given on the command line.
 
 Default values are not counted by `Options::count`.
+
+### Implicit values with disabled arguments
+
+You can specify an option for which an argument cannot be specified using below syntax.
+
+```cpp
+cxxopts::value<bool>()->implicit_value("true", cxxopts::ImplicitArgPolicy::Disabled)
+```
+
+In this case specifying option as `--option=<value>` is disallowed and will throw `specified_disabled_args` exception. Note that `--option value` is not supported for implicit values. It is treated as positional/unmatched.
 
 ## Boolean values
 
@@ -195,13 +223,22 @@ therefore, `-o false` does not work.
 
 Parsing a list of values into a `std::vector<T>` is also supported, as long as `T`
 can be parsed. To separate single values in a list the define symbol `CXXOPTS_VECTOR_DELIMITER`
-is used, which is ',' by default. Ensure that you use no whitespaces between values because
-those would be interpreted as the next command line option. Example for a command line option
+is used, which is ',' by default. Ensure that you use no whitespaces between values
+(unless the entire list is double quoted) because those would be interpreted as the
+next command line option. Example for a command line option
 that can be parsed as a `std::vector<double>`:
 
 ~~~
 --my_list=1,-2.1,3,4.5
 ~~~
+
+If the list of values is quoted, then spaces can be included. For example:
+
+~~~
+--my_list="review,memory sanitize,build help,reformat"
+~~~
+
+This will be parsed into `review`, `memory sanitize`, `build help`, and `reformat`.
 
 ## Options specified multiple times
 
@@ -230,6 +267,9 @@ also want to override the positional help by calling `options.positional_help`.
 
 Putting all together:
 ```cpp
+#include <iostream>
+#include "cxxopts.hpp"
+
 int main(int argc, char** argv)
 {
     cxxopts::Options options("test", "A brief description");

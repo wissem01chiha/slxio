@@ -1,6 +1,6 @@
 /*
   zip_error_to_str.c -- get string representation of zip error code
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,28 +31,29 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/* LCOV_EXCL_START */
-#include <stdio.h>
-#include <string.h>
 
+/* LCOV_EXCL_START */
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
+#include <stdio.h>
+#include <string.h>
+
+
 ZIP_EXTERN int zip_error_to_str(char *buf, zip_uint64_t len, int ze, int se) {
-  zip_error_t error;
-  const char *error_string;
-  int ret;
+    zip_error_t error;
+    const char *error_string;
+    int ret;
 
-  zip_error_init(&error);
-  zip_error_set(&error, ze, se);
+    zip_error_init(&error);
+    zip_error_set(&error, ze, se);
 
-  error_string = zip_error_strerror(&error);
+    error_string = zip_error_strerror(&error);
 
-  ret = snprintf_s(buf, ZIP_MIN(len, SIZE_MAX), error_string,
-                   strlen(error_string));
+    ret = snprintf_s(buf, ZIP_MIN(len, SIZE_MAX), error_string, strlen(error_string));
 
-  zip_error_fini(&error);
+    zip_error_fini(&error);
 
-  return ret;
+    return ret;
 }
 /* LCOV_EXCL_STOP */

@@ -1,1 +1,4 @@
-add_module(ThirdParty::doctest)
+add_thirdparty_module(doctest
+    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
+    doctest
+)

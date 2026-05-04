@@ -16,6 +16,7 @@ Authors, for copyright and licensing purposes.
  * Glenn Randers-Pehrson
  * Greg Roelofs
  * Guy Eric Schalnat
+ * Halil Oktay
  * James Yu
  * John Bowler
  * Joshua Inscoe
@@ -28,6 +29,7 @@ Authors, for copyright and licensing purposes.
  * Mans Rullgard
  * Matt Sarett
  * Mike Klein
+ * Mohammad Seet
  * Pascal Massimino
  * Paul Schmidt
  * Petr Simecek
@@ -36,6 +38,7 @@ Authors, for copyright and licensing purposes.
  * Sam Bushell
  * Samuel Williams
  * Simon-Pierre Cadieux
+ * Taegu Ha (하태구)
  * Tim Wegner
  * Tobias Stoeckmann
  * Tom Lane

@@ -1,6 +1,6 @@
 /*
   zip_algorithm_deflate.c -- deflate (de)compression routines
-  Copyright (C) 2017-2023 Dieter Baron and Thomas Klausner
+  Copyright (C) 2017-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -38,193 +38,200 @@
 #include <zlib.h>
 
 struct ctx {
-  zip_error_t *error;
-  bool compress;
-  int level;
-  int mem_level;
-  bool end_of_input;
-  z_stream zstr;
+    zip_error_t *error;
+    bool compress;
+    int level;
+    int mem_level;
+    bool end_of_input;
+    z_stream zstr;
 };
 
+
 static zip_uint64_t maximum_compressed_size(zip_uint64_t uncompressed_size) {
-  /* max deflate size increase: size + ceil(size/16k)*5+6 */
+    /* max deflate size increase: size + ceil(size/16k)*5+6 */
 
-  zip_uint64_t compressed_size =
-      uncompressed_size + (uncompressed_size + 16383) / 16384 * 5 + 6;
+    zip_uint64_t compressed_size = uncompressed_size + (uncompressed_size + 16383) / 16384 * 5 + 6;
 
-  if (compressed_size < uncompressed_size) {
-    return ZIP_UINT64_MAX;
-  }
-  return compressed_size;
+    if (compressed_size < uncompressed_size) {
+        return ZIP_UINT64_MAX;
+    }
+    return compressed_size;
 }
 
-static void *allocate(bool compress, zip_uint32_t compression_flags,
-                      zip_error_t *error) {
-  struct ctx *ctx;
 
-  if ((ctx = (struct ctx *)malloc(sizeof(*ctx))) == NULL) {
-    zip_error_set(error, ZIP_ET_SYS, errno);
-    return NULL;
-  }
+static void *allocate(bool compress, zip_uint32_t compression_flags, zip_error_t *error) {
+    struct ctx *ctx;
 
-  ctx->error = error;
-  ctx->compress = compress;
-  if (compression_flags >= 1 && compression_flags <= 9) {
-    ctx->level = (int)compression_flags;
-  } else {
-    ctx->level = Z_BEST_COMPRESSION;
-  }
-  ctx->mem_level = compression_flags == TORRENTZIP_COMPRESSION_FLAGS
-                       ? TORRENTZIP_MEM_LEVEL
-                       : MAX_MEM_LEVEL;
-  ctx->end_of_input = false;
-
-  ctx->zstr.zalloc = Z_NULL;
-  ctx->zstr.zfree = Z_NULL;
-  ctx->zstr.opaque = NULL;
-
-  return ctx;
-}
-
-static void *compress_allocate(zip_uint16_t method,
-                               zip_uint32_t compression_flags,
-                               zip_error_t *error) {
-  (void)method;
-  return allocate(true, compression_flags, error);
-}
-
-static void *decompress_allocate(zip_uint16_t method,
-                                 zip_uint32_t compression_flags,
-                                 zip_error_t *error) {
-  (void)method;
-  return allocate(false, compression_flags, error);
-}
-
-static void deallocate(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-
-  free(ctx);
-}
-
-static zip_uint16_t general_purpose_bit_flags(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-
-  if (!ctx->compress) {
-    return 0;
-  }
-
-  if (ctx->level < 3) {
-    return 2 << 1;
-  } else if (ctx->level > 7) {
-    return 1 << 1;
-  }
-  return 0;
-}
-
-static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
-  struct ctx *ctx = (struct ctx *)ud;
-  int ret;
-
-  (void)st;
-  (void)attributes;
-
-  ctx->zstr.avail_in = 0;
-  ctx->zstr.next_in = NULL;
-  ctx->zstr.avail_out = 0;
-  ctx->zstr.next_out = NULL;
-
-  if (ctx->compress) {
-    /* negative value to tell zlib not to write a header */
-    ret = deflateInit2(&ctx->zstr, ctx->level, Z_DEFLATED, -MAX_WBITS,
-                       ctx->mem_level, Z_DEFAULT_STRATEGY);
-  } else {
-    ret = inflateInit2(&ctx->zstr, -MAX_WBITS);
-  }
-
-  if (ret != Z_OK) {
-    zip_error_set(ctx->error, ZIP_ER_ZLIB, ret);
-    return false;
-  }
-
-  return true;
-}
-
-static bool end(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-  int err;
-
-  if (ctx->compress) {
-    err = deflateEnd(&ctx->zstr);
-  } else {
-    err = inflateEnd(&ctx->zstr);
-  }
-
-  if (err != Z_OK) {
-    zip_error_set(ctx->error, ZIP_ER_ZLIB, err);
-    return false;
-  }
-
-  return true;
-}
-
-static bool input(void *ud, zip_uint8_t *data, zip_uint64_t length) {
-  struct ctx *ctx = (struct ctx *)ud;
-
-  if (length > UINT_MAX || ctx->zstr.avail_in > 0) {
-    zip_error_set(ctx->error, ZIP_ER_INVAL, 0);
-    return false;
-  }
-
-  ctx->zstr.avail_in = (uInt)length;
-  ctx->zstr.next_in = (Bytef *)data;
-
-  return true;
-}
-
-static bool end_of_input(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-
-  ctx->end_of_input = true;
-  return ctx->zstr.avail_in != 0;
-}
-
-static zip_compression_status_t process(void *ud, zip_uint8_t *data,
-                                        zip_uint64_t *length) {
-  struct ctx *ctx = (struct ctx *)ud;
-  uInt avail_out;
-
-  int ret;
-
-  avail_out = (uInt)ZIP_MIN(UINT_MAX, *length);
-  ctx->zstr.avail_out = avail_out;
-  ctx->zstr.next_out = (Bytef *)data;
-
-  if (ctx->compress) {
-    ret = deflate(&ctx->zstr, ctx->end_of_input ? Z_FINISH : 0);
-  } else {
-    ret = inflate(&ctx->zstr, Z_SYNC_FLUSH);
-  }
-
-  *length = avail_out - ctx->zstr.avail_out;
-
-  switch (ret) {
-  case Z_OK:
-    return ZIP_COMPRESSION_OK;
-
-  case Z_STREAM_END:
-    return ZIP_COMPRESSION_END;
-
-  case Z_BUF_ERROR:
-    if (ctx->zstr.avail_in == 0) {
-      return ZIP_COMPRESSION_NEED_DATA;
+    if ((ctx = (struct ctx *)malloc(sizeof(*ctx))) == NULL) {
+        zip_error_set(error, ZIP_ET_SYS, errno);
+        return NULL;
     }
 
-    /* fallthrough */
+    ctx->error = error;
+    ctx->compress = compress;
+    if (compression_flags >= 1 && compression_flags <= 9) {
+        ctx->level = (int)compression_flags;
+    }
+    else {
+        ctx->level = Z_BEST_COMPRESSION;
+    }
+    ctx->mem_level = compression_flags == TORRENTZIP_COMPRESSION_FLAGS ? TORRENTZIP_MEM_LEVEL : MAX_MEM_LEVEL;
+    ctx->end_of_input = false;
 
-  default:
-    zip_error_set(ctx->error, ZIP_ER_ZLIB, ret);
-    return ZIP_COMPRESSION_ERROR;
-  }
+    ctx->zstr.zalloc = Z_NULL;
+    ctx->zstr.zfree = Z_NULL;
+    ctx->zstr.opaque = NULL;
+
+    return ctx;
+}
+
+
+static void *compress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+    (void)method;
+    return allocate(true, compression_flags, error);
+}
+
+
+static void *decompress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+    (void)method;
+    return allocate(false, compression_flags, error);
+}
+
+
+static void deallocate(void *ud) {
+    struct ctx *ctx = (struct ctx *)ud;
+
+    free(ctx);
+}
+
+
+static zip_uint16_t general_purpose_bit_flags(void *ud) {
+    struct ctx *ctx = (struct ctx *)ud;
+
+    if (!ctx->compress) {
+        return 0;
+    }
+
+    if (ctx->level < 3) {
+        return 2 << 1;
+    }
+    else if (ctx->level > 7) {
+        return 1 << 1;
+    }
+    return 0;
+}
+
+
+static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
+    struct ctx *ctx = (struct ctx *)ud;
+    int ret;
+
+    (void)st;
+    (void)attributes;
+
+    ctx->zstr.avail_in = 0;
+    ctx->zstr.next_in = NULL;
+    ctx->zstr.avail_out = 0;
+    ctx->zstr.next_out = NULL;
+
+    if (ctx->compress) {
+        /* negative value to tell zlib not to write a header */
+        ret = deflateInit2(&ctx->zstr, ctx->level, Z_DEFLATED, -MAX_WBITS, ctx->mem_level, Z_DEFAULT_STRATEGY);
+    }
+    else {
+        ret = inflateInit2(&ctx->zstr, -MAX_WBITS);
+    }
+
+    if (ret != Z_OK) {
+        zip_error_set(ctx->error, ZIP_ER_ZLIB, ret);
+        return false;
+    }
+
+
+    return true;
+}
+
+
+static bool end(void *ud) {
+    struct ctx *ctx = (struct ctx *)ud;
+    int err;
+
+    if (ctx->compress) {
+        err = deflateEnd(&ctx->zstr);
+    }
+    else {
+        err = inflateEnd(&ctx->zstr);
+    }
+
+    if (err != Z_OK) {
+        zip_error_set(ctx->error, ZIP_ER_ZLIB, err);
+        return false;
+    }
+
+    return true;
+}
+
+
+static bool input(void *ud, zip_uint8_t *data, zip_uint64_t length) {
+    struct ctx *ctx = (struct ctx *)ud;
+
+    if (length > UINT_MAX || ctx->zstr.avail_in > 0) {
+        zip_error_set(ctx->error, ZIP_ER_INVAL, 0);
+        return false;
+    }
+
+    ctx->zstr.avail_in = (uInt)length;
+    ctx->zstr.next_in = (Bytef *)data;
+
+    return true;
+}
+
+
+static bool end_of_input(void *ud) {
+    struct ctx *ctx = (struct ctx *)ud;
+
+    ctx->end_of_input = true;
+    return ctx->zstr.avail_in != 0;
+}
+
+
+static zip_compression_status_t process(void *ud, zip_uint8_t *data, zip_uint64_t *length) {
+    struct ctx *ctx = (struct ctx *)ud;
+    uInt avail_out;
+
+    int ret;
+
+    avail_out = (uInt)ZIP_MIN(UINT_MAX, *length);
+    ctx->zstr.avail_out = avail_out;
+    ctx->zstr.next_out = (Bytef *)data;
+
+    if (ctx->compress) {
+        ret = deflate(&ctx->zstr, ctx->end_of_input ? Z_FINISH : 0);
+    }
+    else {
+        ret = inflate(&ctx->zstr, Z_SYNC_FLUSH);
+    }
+
+    *length = avail_out - ctx->zstr.avail_out;
+
+    switch (ret) {
+    case Z_OK:
+        return ZIP_COMPRESSION_OK;
+
+    case Z_STREAM_END:
+        return ZIP_COMPRESSION_END;
+
+    case Z_BUF_ERROR:
+        if (ctx->zstr.avail_in == 0) {
+            return ZIP_COMPRESSION_NEED_DATA;
+        }
+
+        /* fallthrough */
+
+    default:
+        zip_error_set(ctx->error, ZIP_ER_ZLIB, ret);
+        return ZIP_COMPRESSION_ERROR;
+    }
 }
 
 /* clang-format off */

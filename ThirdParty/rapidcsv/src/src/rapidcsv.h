@@ -2,7 +2,7 @@
  * rapidcsv.h
  *
  * URL:      https://github.com/d99kris/rapidcsv
- * Version:  8.92
+ * Version:  8.97
  *
  * Copyright (C) 2017-2026 Kristofer Berggren
  * All rights reserved.
@@ -191,24 +191,16 @@ namespace rapidcsv
           pVal = static_cast<T>(std::stoi(pStr));
           return;
         }
-        else if (typeid(T) == typeid(signed char))
+        else if ((typeid(T) == typeid(signed char)) || (typeid(T) == typeid(unsigned char)) ||
+                 (typeid(T) == typeid(short)) || (typeid(T) == typeid(unsigned short)))
         {
-          pVal = static_cast<T>(std::stoi(pStr));
-          return;
-        }
-        else if (typeid(T) == typeid(unsigned char))
-        {
-          pVal = static_cast<T>(std::stoi(pStr));
-          return;
-        }
-        else if (typeid(T) == typeid(short))
-        {
-          pVal = static_cast<T>(std::stoi(pStr));
-          return;
-        }
-        else if (typeid(T) == typeid(unsigned short))
-        {
-          pVal = static_cast<T>(std::stoi(pStr));
+          const int i = std::stoi(pStr);
+          if ((i < static_cast<int>((std::numeric_limits<T>::min)())) ||
+              (i > static_cast<int>((std::numeric_limits<T>::max)())))
+          {
+            throw std::out_of_range("conversion: out of range");
+          }
+          pVal = static_cast<T>(i);
           return;
         }
         else if (typeid(T) == typeid(long))
@@ -1448,6 +1440,14 @@ namespace rapidcsv
       }
 
       const size_t dataColumnIdx = GetDataColumnIndex(pColumnIdx);
+
+      // remove old name from map before adding new one
+      const size_t nameRowIdx = static_cast<size_t>(mLabelParams.mColumnNameIdx);
+      if ((nameRowIdx < mData.size()) && (dataColumnIdx < mData.at(nameRowIdx).size()))
+      {
+        const std::string oldName = mData.at(nameRowIdx).at(dataColumnIdx);
+        mColumnNames.erase(oldName);
+      }
       mColumnNames[pColumnName] = dataColumnIdx;
 
       // increase table size if necessary:
@@ -1456,7 +1456,8 @@ namespace rapidcsv
       {
         mData.resize(rowIdx + 1);
       }
-      auto& row = mData[rowIdx];
+
+      std::vector<std::string>& row = mData[rowIdx];
       if (dataColumnIdx >= row.size())
       {
         row.resize(dataColumnIdx + 1);
@@ -1473,9 +1474,12 @@ namespace rapidcsv
     {
       if (mLabelParams.mColumnNameIdx >= 0)
       {
-        return std::vector<std::string>(mData.at(static_cast<size_t>(mLabelParams.mColumnNameIdx)).begin() +
-                                        (mLabelParams.mRowNameIdx + 1),
-                                        mData.at(static_cast<size_t>(mLabelParams.mColumnNameIdx)).end());
+        const std::vector<std::string>& labelRow = mData.at(static_cast<size_t>(mLabelParams.mColumnNameIdx));
+        const size_t offset = static_cast<size_t>(mLabelParams.mRowNameIdx + 1);
+        if (offset <= labelRow.size())
+        {
+          return std::vector<std::string>(labelRow.begin() + static_cast<int>(offset), labelRow.end());
+        }
       }
 
       return std::vector<std::string>();
@@ -1505,6 +1509,14 @@ namespace rapidcsv
     void SetRowName(size_t pRowIdx, const std::string& pRowName)
     {
       const size_t dataRowIdx = GetDataRowIndex(pRowIdx);
+
+      // remove old name from map before adding new one
+      if ((mLabelParams.mRowNameIdx >= 0) && (dataRowIdx < mData.size()) &&
+          (static_cast<size_t>(mLabelParams.mRowNameIdx) < mData.at(dataRowIdx).size()))
+      {
+        const std::string oldName = mData.at(dataRowIdx).at(static_cast<size_t>(mLabelParams.mRowNameIdx));
+        mRowNames.erase(oldName);
+      }
       mRowNames[pRowName] = dataRowIdx;
       if (mLabelParams.mRowNameIdx < 0)
       {
@@ -1516,7 +1528,8 @@ namespace rapidcsv
       {
         mData.resize(dataRowIdx + 1);
       }
-      auto& row = mData[dataRowIdx];
+
+      std::vector<std::string>& row = mData[dataRowIdx];
       if (mLabelParams.mRowNameIdx >= static_cast<int>(row.size()))
       {
         row.resize(static_cast<size_t>(mLabelParams.mRowNameIdx) + 1);
@@ -1820,6 +1833,7 @@ namespace rapidcsv
         {
           if (mSeparatorParams.mAutoQuote &&
               ((itc->find(mSeparatorParams.mSeparator) != std::string::npos) ||
+               (itc->find(mSeparatorParams.mQuoteChar) != std::string::npos) ||
                (itc->find(' ') != std::string::npos) ||
                (itc->find('\n') != std::string::npos)))
           {
@@ -1880,7 +1894,9 @@ namespace rapidcsv
         str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](unsigned char ch) { return !isspace(ch); }));
 
         // rtrim
-        str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) { return !isspace(ch); }).base(), str.end());
+        str.erase(std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
+          return !isspace(ch);
+        }).base(), str.end());
 
         return str;
       }
