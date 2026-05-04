@@ -797,6 +797,10 @@ function(add_thirdparty_module module_name module_path target_name)
     CACHE INTERNAL "Global module name-target mapping")
 
   get_target_property(thirdparty_includes ${target_name} INCLUDE_DIRECTORIES)
+  if(NOT thirdparty_includes)
+    set(thirdparty_includes "")
+  endif()
+
   set_target_properties(${target_name} PROPERTIES
     module_include_directories "${thirdparty_includes};${CMAKE_CURRENT_SOURCE_DIR}"
     module_source_dir "${module_path}")

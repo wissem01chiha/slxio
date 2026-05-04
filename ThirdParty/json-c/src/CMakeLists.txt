@@ -59,7 +59,7 @@ COMMAND make package_source
 # Enable or disable features. By default, all features are turned off.
 option(DISABLE_BSYMBOLIC              "Avoid linking with -Bsymbolic-function."               OFF)
 option(DISABLE_THREAD_LOCAL_STORAGE   "Disable using Thread-Local Storage (HAVE___THREAD)."   OFF)
-option(DISABLE_WERROR                 "Avoid treating compiler warnings as fatal errors."     OFF)
+option(DISABLE_WERROR                 "Avoid treating compiler warnings as fatal errors."     ON)
 option(ENABLE_RDRAND                  "Enable RDRAND Hardware RNG Hash Seed."                 OFF)
 option(ENABLE_THREADING               "Enable partial threading support."                     OFF)
 option(OVERRIDE_GET_RANDOM_SEED       "Override json_c_get_random_seed() with custom code."   OFF)
