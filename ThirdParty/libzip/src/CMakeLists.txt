@@ -26,11 +26,11 @@ option(ENABLE_FDOPEN "Enable zip_fdopen, which is not allowed in Microsoft CRT s
 
 option(ENABLE_COVERAGE "Enable code coverage reporting of test suite" OFF)
 
-option(BUILD_TOOLS "Build tools in the src directory (zipcmp, zipmerge, ziptool)" ON)
-option(BUILD_REGRESS "Build regression tests" ON)
-option(BUILD_OSSFUZZ "Build fuzzers for ossfuzz" ON)
-option(BUILD_EXAMPLES "Build examples" ON)
-option(BUILD_DOC "Build documentation" ON)
+option(BUILD_TOOLS "Build tools in the src directory (zipcmp, zipmerge, ziptool)" OFF)
+option(BUILD_REGRESS "Build regression tests" OFF)
+option(BUILD_OSSFUZZ "Build fuzzers for ossfuzz" OFF)
+option(BUILD_EXAMPLES "Build examples" OFF)
+option(BUILD_DOC "Build documentation" OFF)
 
 include(CheckFunctionExists)
 include(CheckIncludeFiles)
