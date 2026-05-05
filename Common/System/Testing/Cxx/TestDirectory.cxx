@@ -71,7 +71,7 @@
 
 //   std::string path = testDirectoryEmptyRandDir();
 //   Directory d(path);
-//   ReturnType ec = d.open();
+//   slxReturnType ec = d.open();
 //   CHECK(ec == E_OK);
 //   CHECK(d.getNumberOfFiles() == 0);
 //   CHECK(d.empty());
@@ -82,7 +82,7 @@
 
 //   std::string path = tempDirFiles();
 //   Directory d(path);
-//   ReturnType ec = d.open();
+//   slxReturnType ec = d.open();
 //   CHECK(ec == E_OK);
 //   CHECK(d.getNumberOfFiles() == 2);
 
@@ -124,7 +124,7 @@
 //   char subdirpath[1024];
 //   snprintf(
 //     subdirpath, sizeof(subdirpath), "%s/%s", cwd, "simulink/plugin/rels/");
-//   ReturnType ec = Directory::Create(subdirpath);
+//   slxReturnType ec = Directory::Create(subdirpath);
 
 //   CHECK(ec == E_OK);
 // }

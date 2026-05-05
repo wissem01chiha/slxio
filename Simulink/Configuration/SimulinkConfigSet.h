@@ -57,22 +57,22 @@ public:
     const std::string& name);
 
   /// @brief Sets a parameter value by name.
-  ReturnType setParameter(const char* name, const char* value);
+  slxReturnType setParameter(const char* name, const char* value);
 
   /// @brief Creates a copy of this configuration set.
-  ReturnType copy();
+  slxReturnType copy();
 
   /// @brief Create a deep copy of this configuration set.
-  ReturnType clone();
+  slxReturnType clone();
 
   /// @brief Deletes this configuration set.
-  ReturnType RemoveElement();
+  slxReturnType RemoveElement();
 
   /// @brief Attaches this configuration set to a Simulink model.
-  ReturnType attach(SimulinkModel& model);
+  slxReturnType attach(SimulinkModel& model);
 
   /// @brief Detaches this configuration set from a Simulink model.
-  ReturnType detach(SimulinkModel& model);
+  slxReturnType detach(SimulinkModel& model);
 
   /// @brief Activates this configuration set.
   void activate();
@@ -88,10 +88,10 @@ public:
   std::shared_ptr<SimulinkObject> getObject() const;
 
   /// @brief  forward to underlying SimulinkObject GetElementId
-  IdType GetElementId() const;
+  slxIdType GetElementId() const;
 
   /// @brief Loads the configuration set from a file.
-  ReturnType loadFromFile(const char* path);
+  slxReturnType loadFromFile(const char* path);
 
   /// @brief Creates a configuration set from a file.
   /// Supported formats: .m, .mat(planned)
@@ -99,7 +99,7 @@ public:
 
   /// @brief Saves the configuration set to a file.
   /// @brief Supported formats: .m, .mat(planned)
-  ReturnType saveToFile(const char* path);
+  slxReturnType saveToFile(const char* path);
 
   /// @brief Converts to a string representation.
   std::string ToString() const;

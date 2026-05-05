@@ -3,7 +3,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkPortTypeParser::setInputData(const std::string data)
+slxReturnType SimulinkPortTypeParser::setInputData(const std::string data)
 {
   dataObject = data;
   return E_OK;

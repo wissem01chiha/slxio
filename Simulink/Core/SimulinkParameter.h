@@ -98,10 +98,10 @@ public:
 
   /// @brief by default parameter do not have ids
   /// when called dipslay a waring , fallback to 0
-  IdType GetElementId() const override;
+  slxIdType GetElementId() const override;
 
   /// @brief no logic return always true, an a warning message
-  bool Contains(const IdType& id) const override;
+  bool Contains(const slxIdType& id) const override;
 
   std::string ToString() const override;
 

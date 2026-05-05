@@ -42,22 +42,22 @@ public:
   /**
    * 
    */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * 
    */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * 
    */
-  IdType GetElementId() const override;
+  slxIdType GetElementId() const override;
 
   /**
    * Check if the line Id matches the given identifier.
    */
-  bool Contains(const IdType& id) const override;
+  bool Contains(const slxIdType& id) const override;
 
   /**
    * Check if the line is connected to both source and
@@ -82,7 +82,7 @@ public:
   Logger& GetLogger();
 
 private:
-  IdType Id;
+  slxIdType Id;
   Logger& logger;
   std::shared_ptr<SimulinkPort> SourcePort;
   std::shared_ptr<SimulinkPort> DestPort;

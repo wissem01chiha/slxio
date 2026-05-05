@@ -7,14 +7,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowState::StateflowState(StateflowState& orig) {}
 
-ReturnType StateflowState::AddElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType StateflowState::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-ReturnType StateflowState::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType StateflowState::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isTrue(node.getParent() == this,
   //          "Node does not belong to this chart.");
@@ -43,12 +43,12 @@ std::string StateflowState::ToString() const
   return std::string("");
 }
 
-IdType StateflowState::GetElementId() const
+slxIdType StateflowState::GetElementId() const
 {
-  return (IdType)0;
+  return (slxIdType)0;
 }
 
-bool StateflowState::Contains(const IdType& id) const
+bool StateflowState::Contains(const slxIdType& id) const
 {
   return false;
 }

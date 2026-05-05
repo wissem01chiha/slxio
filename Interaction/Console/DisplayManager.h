@@ -51,7 +51,7 @@ void setBackgroundColor(int color);
  *
  * @return TRUE if color should be printed
  */
-BOOL getCLIColor(void);
+bool getCLIColor(void);
 
 /**
  * Enable or disable color in the term

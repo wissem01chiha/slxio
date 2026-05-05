@@ -34,12 +34,12 @@ public:
   /// @brief Copy Operator, Deep copy of all xmlDocPtr members
   SimulinkContent& operator=(const SimulinkContent& other);
 
-  ReturnType getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const;
-  ReturnType getPropertiesNodePtr(xmlNodePtr& nodePtr) const;
-  ReturnType getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const;
-  ReturnType getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const;
-  ReturnType getConfigSetNodePtr(IdType& idx, xmlNodePtr& nodePtr) const;
-  ReturnType getModelDictionaryPtr(xmlNodePtr& nodePtr) const;
+  slxReturnType getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const;
+  slxReturnType getPropertiesNodePtr(xmlNodePtr& nodePtr) const;
+  slxReturnType getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const;
+  slxReturnType getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const;
+  slxReturnType getConfigSetNodePtr(slxIdType& idx, xmlNodePtr& nodePtr) const;
+  slxReturnType getModelDictionaryPtr(xmlNodePtr& nodePtr) const;
 
   ~SimulinkContent() = default;
 

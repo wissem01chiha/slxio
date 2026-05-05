@@ -26,8 +26,8 @@ class SLXIO_APIEXPORT SimulinkArrayParser final
 {
 public:
   SimulinkArrayParser() = default;
-  ReturnType setInputData(const xmlNodePtr data) override;
-  ReturnType parse() override;
+  slxReturnType setInputData(const xmlNodePtr data) override;
+  slxReturnType parse() override;
   ~SimulinkArrayParser() = default;
 };
 

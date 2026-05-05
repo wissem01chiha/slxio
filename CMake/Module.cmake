@@ -230,7 +230,7 @@ function(add_module module_name)
 
   # test targets
   if(${_module_enable_test} STREQUAL "TRUE")
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Testing/Cxx)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/Testing)
   endif()
 
 endfunction()

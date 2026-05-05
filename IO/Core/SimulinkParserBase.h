@@ -6,8 +6,8 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorCode.h"
 #include "Logger.h"
+#include "ErrorCode.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -37,7 +37,7 @@ public:
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual ReturnType setInputData(const T data)
+  virtual slxReturnType setInputData(const T data)
   {
     dataObject = data;
     return E_OK;
@@ -47,7 +47,7 @@ public:
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual ReturnType setInputData(const T& data)
+  virtual slxReturnType setInputData(const T& data)
   {
     dataObject = data;
     return E_OK;
@@ -60,7 +60,7 @@ public:
   T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
-  virtual ReturnType parse() = 0;
+  virtual slxReturnType parse() = 0;
 
 protected:
   /// @brief Default constructor

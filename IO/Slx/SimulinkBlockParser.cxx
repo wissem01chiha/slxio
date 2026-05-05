@@ -7,7 +7,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkBlockParser::setInputData(const xmlNodePtr data)
+slxReturnType SimulinkBlockParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
@@ -18,9 +18,9 @@ ReturnType SimulinkBlockParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-ReturnType SimulinkBlockParser::parse()
+slxReturnType SimulinkBlockParser::parse()
 {
-  IdType id = (IdType)0;
+  slxIdType id = (slxIdType)0;
   std::string name;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
@@ -30,7 +30,7 @@ ReturnType SimulinkBlockParser::parse()
       reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_SID)
     {
-      id = static_cast<IdType>(std::stoul(attrValue));
+      id = static_cast<slxIdType>(std::stoul(attrValue));
     }
     else if (attrName == SlxParameter::PARAM_Name)
     {
@@ -60,7 +60,7 @@ ReturnType SimulinkBlockParser::parse()
     {
       std::unique_ptr<SimulinkParameterParser> parser(
         new SimulinkParameterParser());
-      ReturnType status = parser->setInputData(nodePtr_);
+      slxReturnType status = parser->setInputData(nodePtr_);
       if (status != E_OK)
       {
         //l.log(Logger::V_ERROR,
@@ -68,7 +68,7 @@ ReturnType SimulinkBlockParser::parse()
           "for SimulinkParameterParser");
         continue;
       }
-      ReturnType parserStatus = parser->parse();
+      slxReturnType parserStatus = parser->parse();
       if (parserStatus != E_OK)
       {
         //l.log(Logger::V_ERROR,

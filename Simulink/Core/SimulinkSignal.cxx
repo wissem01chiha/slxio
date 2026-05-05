@@ -13,7 +13,7 @@ SimulinkSignal::SimulinkSignal()
 {
 }
 
-ReturnType SimulinkSignal::setDataType(SimulinkDataType dt)
+slxReturnType SimulinkSignal::setDataType(SimulinkDataType dt)
 {
   DataType = dt;
   return E_OK;
@@ -24,7 +24,7 @@ SimulinkDataType SimulinkSignal::getDataType()
   return DataType;
 }
 
-ReturnType SimulinkSignal::setDataType(const char* dt)
+slxReturnType SimulinkSignal::setDataType(const char* dt)
 {
 
   if (strcmp(dt, "auto") == 0)
@@ -82,7 +82,7 @@ ReturnType SimulinkSignal::setDataType(const char* dt)
 
   return E_OK;
 }
-ReturnType SimulinkSignal::setComplexityType(const char* ct)
+slxReturnType SimulinkSignal::setComplexityType(const char* ct)
 {
 
   if (strcmp(ct, "auto") == 0)
@@ -144,7 +144,7 @@ std::vector<Float32> SimulinkSignal::getSampleTime()
   return SampleTime;
 }
 
-ReturnType SimulinkSignal::setRange(Float32 min, Float32 max)
+slxReturnType SimulinkSignal::setRange(Float32 min, Float32 max)
 {
   Min = min;
   Max = max;

@@ -57,10 +57,10 @@ public:
    * Open the directory and initialize member variables.
    * Populates the file map and file list attributes.
    */
-  ReturnType Open();
+  slxReturnType Open();
 
   /** Remove the directory and its contents recursively. */
-  ReturnType Remove();
+  slxReturnType Remove();
 
   /**
    * Get the number of files in the directory.

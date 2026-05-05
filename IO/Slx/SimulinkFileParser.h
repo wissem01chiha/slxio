@@ -27,8 +27,8 @@ class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile>
 {
 public:
   SimulinkFileParser() = default;
-  ReturnType setInputData(const File fs) override;
-  ReturnType parse() override;
+  slxReturnType setInputData(const File fs) override;
+  slxReturnType parse() override;
   ~SimulinkFileParser() = default;
 };
 

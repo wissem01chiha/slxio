@@ -35,7 +35,7 @@ SimulinkContent& SimulinkContent::operator=(const SimulinkContent& other)
   return *this;
 }
 
-ReturnType SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
 {
   if (blockdiagram == nullptr)
   {
@@ -55,7 +55,7 @@ ReturnType SimulinkContent::getBlockdiagramNodePtr(xmlNodePtr& nodePtr) const
   return E_OK;
 }
 
-ReturnType SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
 {
   if (nodePtr == nullptr)
   {
@@ -80,7 +80,7 @@ ReturnType SimulinkContent::getPropertiesNodePtr(xmlNodePtr& nodePtr) const
   return E_OK;
 }
 
-ReturnType SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
 {
   if (mwcoreProperties == nullptr)
   {
@@ -100,7 +100,7 @@ ReturnType SimulinkContent::getMwPropertiesNodePtr(xmlNodePtr& nodePtr) const
   return E_OK;
 }
 
-ReturnType SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
 {
   if (configSetInfo == nullptr)
   {
@@ -119,8 +119,8 @@ ReturnType SimulinkContent::getConfigSetInfoNodePtr(xmlNodePtr& nodePtr) const
   return E_OK;
 }
 
-ReturnType SimulinkContent::getConfigSetNodePtr(
-  IdType& idx, xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getConfigSetNodePtr(
+  slxIdType& idx, xmlNodePtr& nodePtr) const
 {
   if (idx > configSets.size())
   {
@@ -144,7 +144,7 @@ ReturnType SimulinkContent::getConfigSetNodePtr(
   return E_OK;
 }
 
-ReturnType SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
+slxReturnType SimulinkContent::getModelDictionaryPtr(xmlNodePtr& nodePtr) const
 {
   if (modelDictionary == nullptr)
   {

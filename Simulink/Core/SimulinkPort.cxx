@@ -44,7 +44,7 @@ std::string SimulinkPort::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
@@ -73,7 +73,7 @@ ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
   return E_OK;
 }
 
-ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
@@ -101,12 +101,12 @@ ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element
   return E_OK;
 }
 
-IdType SimulinkPort::GetElementId() const
+slxIdType SimulinkPort::GetElementId() const
 {
   return blockId;
 }
 
-bool SimulinkPort::Contains(const IdType& id) const
+bool SimulinkPort::Contains(const slxIdType& id) const
 {
   return blockId == id;
 }
@@ -121,7 +121,7 @@ std::vector<std::shared_ptr<SimulinkLine>> SimulinkPort::getLines()
   return lines;
 }
 
-std::shared_ptr<SimulinkLine> SimulinkPort::getLine(const IdType& lineId)
+std::shared_ptr<SimulinkLine> SimulinkPort::getLine(const slxIdType& lineId)
 {
   for (const auto& line : lines)
   {

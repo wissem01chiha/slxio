@@ -35,10 +35,10 @@ public:
   SimulinkConfigSetManager& operator=(const SimulinkConfigSetManager&) = delete;
 
   /// @brief Adds a configuration set to the manager.
-  ReturnType AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
+  slxReturnType AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
   /// @brief Removes a configuration set from the manager.
-  ReturnType RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg);
+  slxReturnType RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
   /// @brief Retrieves the active configuration set.
   /// @note Only one configuration set can be active at a time.

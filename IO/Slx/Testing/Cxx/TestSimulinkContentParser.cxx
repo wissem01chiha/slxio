@@ -38,7 +38,7 @@ protected:
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserSetInputDataTest")
 {
 
-  ReturnType status =
+  slxReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 };
@@ -46,7 +46,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserSetInputDataTest")
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 {
 
-  ReturnType status =
+  slxReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
   status = parserPtr->parse();
@@ -56,7 +56,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
 {
 
-  ReturnType status =
+  slxReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
   status = parserPtr->parse();
@@ -70,7 +70,7 @@ TEST_CASE_FIXTURE(
   SimulinkContentParserTestFixture, "ParserInvalidInputDataTest")
 {
 
-  ReturnType status =
+  slxReturnType status =
     parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
   CHECK(status == E_INVALID_ARGUMENT);
 };
@@ -85,7 +85,7 @@ TEST_CASE_FIXTURE(
   CHECK(contentPtr != nullptr);
 
   xmlNodePtr nodePtrNull = nullptr;
-  ReturnType status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
+  slxReturnType status = contentPtr->getBlockdiagramNodePtr(nodePtrNull);
   CHECK(status == E_OK);
   CHECK(nodePtrNull != nullptr);
 

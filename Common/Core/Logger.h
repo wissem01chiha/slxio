@@ -88,7 +88,7 @@ public:
   /**
    * Initialize the logger with command line arguments.
    */
-  static ReturnType Init(int argc, char** argv);
+  static slxReturnType Init(int argc, char** argv);
 
   /**
    * Get the singleton instance of the logger.
@@ -98,7 +98,7 @@ public:
   /**
    * Send a log message with metadata and message fragments.
    */
-  ReturnType SendLogMessage(
+  slxReturnType SendLogMessage(
     const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /**
@@ -110,17 +110,17 @@ public:
    * Write logging messages to a file created in the current working directory.
    * To change the logging directory use SetLogDirectoryPath
    */
-  ReturnType WriteToFile(const std::string& filename);
+  slxReturnType WriteToFile(const std::string& filename);
 
   /**
    * Overload of WriteToFile for compatibility with C-style strings.
    */
-  ReturnType WriteToFile(const char* filename);
+  slxReturnType WriteToFile(const char* filename);
 
   /**
    * Write logging messages to a randomly generated file.
    */
-  ReturnType WriteToFile(void);
+  slxReturnType WriteToFile(void);
 
   /**
    * Set the internal logging level.

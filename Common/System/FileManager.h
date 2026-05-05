@@ -62,29 +62,29 @@ public:
   /**
    * 
    */
-  IdType GetFileId(const std::string& filename);
+  slxIdType GetFileId(const std::string& filename);
 
   /**
    * 
    */
-  IdType GetFileMaxId();
+  slxIdType GetFileMaxId();
 
 
 
   /**
    * 
    */
-  IdType GetFirstFreeFileId();
+  slxIdType GetFirstFreeFileId();
 
   /**
    * 
    */
-  File* GetFile(IdType _iID);
+  File* GetFile(slxIdType _iID);
 
   /**
    * 
    */
-  IdType GetCurrentFile();
+  slxIdType GetCurrentFile();
 
   /**
    * 
@@ -94,17 +94,17 @@ public:
   /**
    * 
    */
-  ReturnType Add(File* _file);
+  slxReturnType Add(File* _file);
 
   /**
    * 
    */
-  ReturnType Remove(IdType _iID);
+  slxReturnType Remove(slxIdType _iID);
 
   /**
    * 
    */
-  ReturnType Clear();
+  slxReturnType Clear();
 
   UInt32 GetOpenedCount();
   wchar_t** GetTypesAsString();
@@ -115,7 +115,7 @@ public:
   /**
    * 
    */
-  IdType* GetFileIds();
+  slxIdType* GetFileIds();
 
 private:
   typedef std::vector<File*> vectFile;

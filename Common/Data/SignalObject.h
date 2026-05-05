@@ -7,13 +7,16 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include "DataObject.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SignalObject 
+class SLXIO_APIEXPORT SignalObject : public DataObject 
 {
 public:
+    SignalObject* New() override;
+    
     SignalObject();
     ~SignalObject();
 private:

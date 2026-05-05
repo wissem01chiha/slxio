@@ -9,7 +9,7 @@ TEST_CASE("AddConfigurationSetTest")
 {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
-  ReturnType status = manager.AddElement(configSet);
+  slxReturnType status = manager.AddElement(configSet);
   CHECK(status == E_OK);
 }
 
@@ -18,7 +18,7 @@ TEST_CASE("RemoveConfigurationSetTest")
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
   manager.AddElement(configSet);
-  ReturnType status = manager.RemoveElement(configSet);
+  slxReturnType status = manager.RemoveElement(configSet);
   CHECK(status == E_OK);
 }
 

@@ -6,7 +6,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
+slxReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
@@ -19,9 +19,9 @@ ReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-ReturnType SimulinkObjectParser::parse()
+slxReturnType SimulinkObjectParser::parse()
 {
-  IdType id = (IdType)0;
+  slxIdType id = (slxIdType)0;
   std::string name, className;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
@@ -32,7 +32,7 @@ ReturnType SimulinkObjectParser::parse()
       reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_ObjectID)
     {
-      id = static_cast<IdType>(std::stoul(attrValue));
+      id = static_cast<slxIdType>(std::stoul(attrValue));
     }
     else if (attrName == SlxParameter::PARAM_ClassName)
     {
@@ -54,13 +54,13 @@ ReturnType SimulinkObjectParser::parse()
     {
 
       SimulinkParameterParser* paramParserPtr = new SimulinkParameterParser();
-      ReturnType subInputStatus = paramParserPtr->setInputData(nodePtr_);
+      slxReturnType subInputStatus = paramParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
 
-      ReturnType paramParseStatus = paramParserPtr->parse();
+      slxReturnType paramParseStatus = paramParserPtr->parse();
       if (paramParseStatus != E_OK)
       {
         //l.log(Logger::V_ERROR,
@@ -76,13 +76,13 @@ ReturnType SimulinkObjectParser::parse()
     {
 
       SimulinkObjectParser* subObjParserPtr = new SimulinkObjectParser();
-      ReturnType subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      slxReturnType subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subObjInputStatus != E_OK)
       {
         return subObjInputStatus;
       }
 
-      ReturnType subObjStat = subObjParserPtr->parse();
+      slxReturnType subObjStat = subObjParserPtr->parse();
       if (subObjStat != E_OK)
       {
         //l.log(Logger::V_ERROR,
@@ -96,13 +96,13 @@ ReturnType SimulinkObjectParser::parse()
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
     {
       SimulinkArrayParser* subArrParserPtr = new SimulinkArrayParser();
-      ReturnType subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      slxReturnType subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subArrInputStatus != E_OK)
       {
         return subArrInputStatus;
       }
 
-      ReturnType subArrParseStat = subArrParserPtr->parse();
+      slxReturnType subArrParseStat = subArrParserPtr->parse();
       if (subArrParseStat != E_OK)
       {
         //l.log(Logger::V_ERROR,

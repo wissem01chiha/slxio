@@ -106,7 +106,7 @@ TEST_CASE("Logger WriteToFile Test")
   std::vector<std::string> data = { "Message written to file" };
   logger.SendLogMessage(info, data);
 
-  ReturnType result = logger.WriteToFile("testlogfile.log");
+  slxReturnType result = logger.WriteToFile("testlogfile.log");
   sPrintErrorMessage(result);
   CHECK(result == E_OK);
 }

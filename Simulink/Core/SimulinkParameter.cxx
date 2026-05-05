@@ -242,15 +242,15 @@ SimulinkElementType SimulinkParameter::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Parameter);
 }
 
-IdType SimulinkParameter::GetElementId() const
+slxIdType SimulinkParameter::GetElementId() const
 {
   //Logger::GetInstance().log(Logger::V_WARNING,
   //  "SimulinkParameter::GetElementId called on unsupported element. "
   //  "Returning 0.");
-  return (IdType)0;
+  return (slxIdType)0;
 }
 
-bool SimulinkParameter::Contains(const IdType& id) const
+bool SimulinkParameter::Contains(const slxIdType& id) const
 {
   /*Logger::GetInstance().log(Logger::V_WARNING,
     "SimulinkParameter::contains called on unsupported element.");*/

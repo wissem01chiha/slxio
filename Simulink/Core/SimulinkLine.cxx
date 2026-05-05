@@ -40,7 +40,7 @@ SimulinkElementType SimulinkLine::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
-ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -63,7 +63,7 @@ ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
   return E_OK;
 }
 
-ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -86,12 +86,12 @@ ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element
   return E_OK;
 }
 
-IdType SimulinkLine::GetElementId() const
+slxIdType SimulinkLine::GetElementId() const
 {
   return Id;
 }
 
-bool SimulinkLine::Contains(const IdType& Id) const
+bool SimulinkLine::Contains(const slxIdType& Id) const
 {
   return this->Id == Id;
 }

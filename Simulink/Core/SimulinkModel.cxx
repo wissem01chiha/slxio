@@ -33,7 +33,7 @@ SimulinkElementType SimulinkModel::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Model);
 }
 
-IdType SimulinkModel::GetElementId() const
+slxIdType SimulinkModel::GetElementId() const
 {
   return id;
 }
@@ -43,7 +43,7 @@ std::string SimulinkModel::ToString() const
   return std::string();
 }
 
-SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
+SimulinkBlock SimulinkModel::GetBlock(slxIdType blockIdx)
 {
 
   for (const auto& blk : blocks)
@@ -53,7 +53,7 @@ SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
       return *blk;
     }
   }
-  // slog_warn("Block (IdType) %d not found in model (IdType) %s",
+  // slog_warn("Block (slxIdType) %d not found in model (slxIdType) %s",
   // blockIdx,
   //           id);
   return SimulinkBlock();
@@ -79,7 +79,7 @@ UInt32 SimulinkModel::GetModelVersion()
   return version;
 }
 
-bool SimulinkModel::Contains(const IdType& id) const
+bool SimulinkModel::Contains(const slxIdType& id) const
 {
   return false;
 }

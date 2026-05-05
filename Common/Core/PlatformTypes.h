@@ -186,18 +186,18 @@ using Float64 = double;
 #error "No native data type can represent an 64-bit float."
 #endif
 
-/* Select the implementation type for IdType.  */
+/* Select the implementation type for slxIdType.  */
 #if SLXIO_64BIT_IDS
 #if SLXIO_SIZEOF_LONG_LONG == 8
-using IdType = long long;
+using slxIdType = long long;
 #elif SLXIO_SIZEOF_LONG == 8
-using IdType = long;
+using slxIdType = long;
 #endif
 #else
-using IdType = int;
+using slxIdType = int;
 #endif
 
 /* Define an alias for error code return data types*/
-typedef UInt32 ReturnType;
+typedef UInt32 slxReturnType;
 
 #endif // PLATFORMTYPES_H

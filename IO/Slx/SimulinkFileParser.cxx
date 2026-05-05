@@ -5,16 +5,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkFileParser::setInputData(const File fs)
+slxReturnType SimulinkFileParser::setInputData(const File fs)
 {
   dataObject = fs;
   return E_OK;
 }
 
-ReturnType SimulinkFileParser::parse()
+slxReturnType SimulinkFileParser::parse()
 {
   SimulinkContentParser contentParser;
-  ReturnType status = contentParser.setInputData(dataObject);
+  slxReturnType status = contentParser.setInputData(dataObject);
   if (status != E_OK)
   {
     return status;
@@ -28,7 +28,7 @@ ReturnType SimulinkFileParser::parse()
   ptr->content = *(content_.get());
 
   xmlNodePtr propertiesNodePtr = new xmlNode();
-  ReturnType propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
+  slxReturnType propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
 
   if (propertieStatus != E_OK)
   {

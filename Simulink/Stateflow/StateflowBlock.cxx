@@ -20,7 +20,7 @@ std::shared_ptr<StateflowChart> StateflowBlock::getChart()
   return chart;
 }
 
-ReturnType StateflowBlock::RemoveElement()
+slxReturnType StateflowBlock::RemoveElement()
 {
   return E_OK;
 }

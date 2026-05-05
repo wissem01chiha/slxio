@@ -76,7 +76,7 @@ std::string SimulinkArray::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
@@ -137,7 +137,7 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
   return E_OK;
 }
 
-ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elment)
+slxReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elment)
 {
   if (elment == nullptr)
   {
@@ -187,7 +187,7 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
   return E_OK;
 }
 
-IdType SimulinkArray::GetElementId() const
+slxIdType SimulinkArray::GetElementId() const
 {
   //l.log(Logger::V_INFO,
    // "SimulinkArray do not have an ID by default use Contains(uint32 "
@@ -196,9 +196,9 @@ IdType SimulinkArray::GetElementId() const
   return id;
 }
 
-bool SimulinkArray::Contains(const IdType& id) const
+bool SimulinkArray::Contains(const slxIdType& id) const
 {
-  for (IdType objID : objects)
+  for (slxIdType objID : objects)
   {
     if (objID == id)
     {

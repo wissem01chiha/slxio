@@ -59,7 +59,7 @@ public:
   /**
    * 
    */
-  IdType GetElementId() const override;
+  slxIdType GetElementId() const override;
 
   /**
    * 
@@ -69,17 +69,17 @@ public:
   /**
    * 
    */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element);
+  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element);
 
   /**
    * 
    */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
+  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
 
   /**
    * 
    */
-  SimulinkBlock GetBlock(IdType blockIdx);
+  SimulinkBlock GetBlock(slxIdType blockIdx);
 
   /**
    * 
@@ -104,7 +104,7 @@ public:
   /**
    * 
    */
-  bool Contains(const IdType& id) const override;
+  bool Contains(const slxIdType& id) const override;
 
   /**
    * 
@@ -118,7 +118,7 @@ public:
 
 private:
   Logger& logger;
-  IdType id;
+  slxIdType id;
   UInt32 version;
   SimulinkModelType type;
   std::shared_ptr<ModelWorkspace> workspace;

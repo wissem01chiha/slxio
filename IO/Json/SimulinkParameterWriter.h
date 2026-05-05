@@ -33,8 +33,8 @@ class SLXIO_APIEXPORT SimulinkParameterWriter final
 {
 public:
   SimulinkParameterWriter() = default;
-  ReturnType Write() override;
-  ReturnType setInputData(const SimulinkParameter data) override;
+  slxReturnType Write() override;
+  slxReturnType setInputData(const SimulinkParameter data) override;
   ~SimulinkParameterWriter() = default;
 };
 

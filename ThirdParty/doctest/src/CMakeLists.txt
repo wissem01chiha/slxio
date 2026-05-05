@@ -13,7 +13,7 @@ if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(MAIN_PROJECT ON)
 endif()
 
-option(DOCTEST_WITH_TESTS               "Build tests/examples" ${MAIN_PROJECT})
+option(DOCTEST_WITH_TESTS               "Build tests/examples" OFF)
 option(DOCTEST_WITH_MAIN_IN_STATIC_LIB  "Build a static lib (cmake target) with a default main entry point" ON)
 option(DOCTEST_NO_INSTALL  "Skip the installation process" OFF)
 option(DOCTEST_USE_STD_HEADERS  "Use std headers" OFF)

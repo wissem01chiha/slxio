@@ -26,10 +26,10 @@ public:
   StateflowState(StateflowState& orig);
 
   /// @brief Add a StateflowNodeBase object
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent of this StateflowTranstion
   std::shared_ptr<StateflowElementBase> getParent() const override;
@@ -44,10 +44,10 @@ public:
   std::string ToString() const override;
 
   /// @brief Id is not supported for StateflowState, fallback to 0
-  IdType GetElementId() const override;
+  slxIdType GetElementId() const override;
 
   /// @brief Id is not supported for StateflowState, fallback to 0
-  bool Contains(const IdType& id) const override;
+  bool Contains(const slxIdType& id) const override;
 
 private:
   std::vector<StateflowNodeBase> nodes;

@@ -11,38 +11,32 @@ LICENSE
 VERSION 
   0.1.0 
 MAINTAINER 
-  Wissem CHIHA 
+  Wissem Chiha
 ENABLE_BUILD 
-  FALSE
-EXTERNAL_BUILD
-  FALSE
-EXTERNAL_SOURCE_DIR
+  TRUE
 ENABLE_TEST
   TRUE 
-ENABLE_BINDING 
-  TRUE 
-ENABLE_DOC 
-  FALSE 
 INSTALL_HEADERS 
   TRUE 
 INSTALL_TARGETS 
   TRUE 
 CLASSES
 	SimulinkParserBase
-	SimulinkWriterBase
+	SimulinkWriter
 	SimulinkFileBase
 SOURCES
 HEADERS
   SimulinkParserBase.h
-  SimulinkWriterBase.h
+  SimulinkWriter.h
   SimulinkFileBase.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
-PUBLIC_DEPENDS 
-PRIVATE_DEPENDS
+PUBLIC_DEPENDS
   Common::System 
   Common::Core
-  Simulink::Core
+  Common::Data
+  Simulink::Core 
+PRIVATE_DEPENDS
 TEST_DEPENDS 
  
 

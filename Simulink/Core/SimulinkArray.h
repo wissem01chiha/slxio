@@ -49,17 +49,17 @@ public:
   /**
    * 
    */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
+  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
   /**
    * 
    */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
+  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
   /**
    * 
    */
-  IdType GetElementId() const override;
+  slxIdType GetElementId() const override;
 
   /**
    * 
@@ -84,7 +84,7 @@ public:
   /**
    * 
    */
-  bool Contains(const IdType& id) const override;
+  bool Contains(const slxIdType& id) const override;
 
   /**
    * 
@@ -92,12 +92,12 @@ public:
   Logger& GetLogger();
 
 private:
-  IdType id;
+  slxIdType id;
   Logger& logger;
   std::string type;
   std::string name;
   std::string dimension;
-  std::vector<IdType> objects;
+  std::vector<slxIdType> objects;
   std::vector<std::shared_ptr<SimulinkArray>> subArrays;
   std::vector<std::shared_ptr<SimulinkParameter>> parameters;
 };

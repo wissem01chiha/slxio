@@ -5,14 +5,14 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-ReturnType StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+slxReturnType StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
@@ -49,7 +49,7 @@ std::string StateflowChart::ToString() const
   return std::string("");
 }
 
-ReturnType StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
+slxReturnType StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
 {
   // if (stateflowBlock != null) {
   //   CCSMPre.isTrue(this.stateflowBlock == null,
@@ -59,12 +59,12 @@ ReturnType StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
   return E_OK;
 }
 
-IdType StateflowChart::GetElementId() const
+slxIdType StateflowChart::GetElementId() const
 {
-  return (IdType)0;
+  return (slxIdType)0;
 }
 
-bool StateflowChart::Contains(const IdType& id) const
+bool StateflowChart::Contains(const slxIdType& id) const
 {
   return false;
 }
