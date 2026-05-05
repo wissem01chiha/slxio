@@ -8,10 +8,10 @@ else()
   set(SLXIO_SLOG 0)
 endif()
 
-if(BUILD_SHARED_LIBS)
-  set(HAVE_SHARED TRUE)
+if(SLXIO_BUILD_SHARED)
+  set(BUILD_SHARED_LIBS TRUE)
 else()
-  set(ZIP_STATIC TRUE)
+  set(BUILD_SHARED_LIBS FALSE)
 endif()
 
 if(SLXIO_OPENMP)
