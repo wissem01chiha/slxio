@@ -1,3 +1,5 @@
-add_module(ThirdParty::zlib)
-target_include_directories(ThirdPartyzlib
-    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+add_thirdparty_module(zlib
+    ${PROJECT_SOURCE_DIR}/ThirdParty/zlib
+    zlib
+)
+export(TARGETS zlib FILE ZLIBTargets.cmake)

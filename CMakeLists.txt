@@ -19,6 +19,7 @@ set(SLXIO_64BIT_IDS  1)
 
 option(SLXIO_BUILD_SHARED "Build as shared library" OFF)
 option(SLXIO_BUILD_TESTS "Build library tests" ON)
+option(SLXIO_BUILD_THIRDPARTY_TESTS "Build vendored modules tests" OFF)
 option(SLXIO_COVERAGE "Enable code coverage" OFF)
 option(SLXIO_LOGURU "Use Loguru librray for logging" FALSE)
 option(SLXIO_SLOG  "Use slog librray for logging" TRUE)

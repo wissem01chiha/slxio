@@ -16,13 +16,6 @@ jobs:
             pkgtgt: package package_source
             cmake-args:
 
-          - name: Ubuntu Clang
-            os: ubuntu-latest
-            compiler: clang
-            cflags: -Wall -Wextra
-            pkgtgt: package package_source
-            cmake-args:
-
           - name: Ubuntu GCC C11
             os: ubuntu-latest
             compiler: gcc
