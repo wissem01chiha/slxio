@@ -59,7 +59,7 @@ if(WIN32)
   endif()
 endif()
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LIBZIP_DO_INSTALL "Install libzip and the related files" ON)
 
 option(SHARED_LIB_VERSIONNING "Add SO version in .so build" ON)
@@ -229,7 +229,7 @@ if(ENABLE_BZIP2)
   if(BZIP2_FOUND)
     set(HAVE_LIBBZ2 1)
   else()
-    message(WARNING "-- bzip2 library not found; bzip2 support disabled")
+    message(STATUS "-- bzip2 library not found; bzip2 support disabled")
   endif(BZIP2_FOUND)
 endif(ENABLE_BZIP2)
 
@@ -321,7 +321,7 @@ endif()
 find_program(NIHTEST nihtest)
 
 if(BUILD_REGRESS AND NOT NIHTEST)
-  message(WARNING "-- nihtest not found, regression testing disabled")
+  message(STATUS "-- nihtest not found, regression testing disabled")
   set(BUILD_REGRESS OFF)
 endif()
 
