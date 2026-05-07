@@ -31,7 +31,7 @@ public:
   std::shared_ptr<StateflowChart> getChart();
 
   /// @brief Remove this block from the StateflowChart
-  slxReturnType RemoveElement();
+  ReturnType RemoveElement();
 
 private:
   std::shared_ptr<StateflowChart> chart;

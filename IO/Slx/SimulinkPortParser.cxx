@@ -4,12 +4,12 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-slxReturnType SimulinkPortParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkPortParser::setInputData(const xmlNodePtr data)
 {
   return E_OK;
 }
 
-slxReturnType SimulinkPortParser::parse()
+ReturnType SimulinkPortParser::parse()
 {
   return E_OK;
 }

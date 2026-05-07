@@ -5,7 +5,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-slxReturnType SimulinkContentParser::setInputData(const File fs)
+ReturnType SimulinkContentParser::setInputData(const File fs)
 {
   if (!fs.isFile())
   {
@@ -22,27 +22,27 @@ slxReturnType SimulinkContentParser::setInputData(const File fs)
   return E_OK;
 }
 
-slxReturnType SimulinkContentParser::parse()
+ReturnType SimulinkContentParser::parse()
 {
-  slxReturnType init_status = initTempDirectory();
+  ReturnType init_status = initTempDirectory();
   if (init_status != E_OK)
   {
     return init_status;
   }
 
-  slxReturnType unzip_status = unzip();
+  ReturnType unzip_status = unzip();
   if (unzip_status != E_OK)
   {
     return unzip_status;
   }
 
-  slxReturnType load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
+  ReturnType load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
   if (load_status != E_OK)
   {
     return load_status;
   }
 
-  slxReturnType clear_status = clearTempDirectory();
+  ReturnType clear_status = clearTempDirectory();
   if (clear_status != E_OK)
   {
     return clear_status;
@@ -51,7 +51,7 @@ slxReturnType SimulinkContentParser::parse()
   return E_OK;
 }
 
-slxReturnType SimulinkContentParser::initTempDirectory()
+ReturnType SimulinkContentParser::initTempDirectory()
 {
   /// replace "." with "_" for temporary directory name
   /// to be removed and implemented in Directory class
@@ -91,12 +91,12 @@ slxReturnType SimulinkContentParser::initTempDirectory()
   return E_OK;
 }
 
-slxReturnType SimulinkContentParser::unzip()
+ReturnType SimulinkContentParser::unzip()
 {
   const char* tmpdir = tempDirectory.getDirectoryPath().c_str();
   std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
-  slxReturnType mv_status = dataObject.copy(tempdirfullpath.c_str());
+  ReturnType mv_status = dataObject.copy(tempdirfullpath.c_str());
   if (mv_status != E_OK)
   {
     //l.log(Logger::V_ERROR, "failed to copy slx file to temporary directory : ",
@@ -117,7 +117,7 @@ slxReturnType SimulinkContentParser::unzip()
       tempfilefullpath);
     return SLX_EIOERR;
   }
-  slxReturnType status = fileDataObject.setFileExtension("zip");
+  ReturnType status = fileDataObject.setFileExtension("zip");
 
   if (status != E_OK)
   {
@@ -125,7 +125,7 @@ slxReturnType SimulinkContentParser::unzip()
     return status;
   }
 
-  slxReturnType unzip_status = fileDataObject.unzip(tmpdir);
+  ReturnType unzip_status = fileDataObject.unzip(tmpdir);
   if (unzip_status != E_OK)
   {
     //l.log(Logger::V_ERROR, "failed to unzip ",
@@ -136,7 +136,7 @@ slxReturnType SimulinkContentParser::unzip()
   return E_OK;
 }
 
-slxReturnType SimulinkContentParser::loadXmlTargets(
+ReturnType SimulinkContentParser::loadXmlTargets(
   const std::string& tempdirfullpath)
 {
 
@@ -165,9 +165,9 @@ slxReturnType SimulinkContentParser::loadXmlTargets(
   return E_OK;
 }
 
-slxReturnType SimulinkContentParser::clearTempDirectory()
+ReturnType SimulinkContentParser::clearTempDirectory()
 {
-  slxReturnType status = tempDirectory.RemoveElement();
+  ReturnType status = tempDirectory.RemoveElement();
   if (status != E_OK)
   {
     //l.log(Logger::V_ERROR, "failed to remove temporary directory : ",

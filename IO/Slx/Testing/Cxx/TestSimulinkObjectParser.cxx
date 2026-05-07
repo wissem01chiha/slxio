@@ -49,7 +49,7 @@ TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("object.xml");
-  slxReturnType status = parserPtr->setInputData(nodePtr);
+  ReturnType status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 

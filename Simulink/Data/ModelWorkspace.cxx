@@ -26,14 +26,14 @@ std::string ModelWorkspace::GetVariable(const std::string& name) const
   return std::string("");
 }
 
-slxReturnType ModelWorkspace::AssignVariable(
+ReturnType ModelWorkspace::AssignVariable(
   const std::string& name, const std::string& value)
 {
   Variables[name] = value;
   return E_OK;
 }
 
-slxReturnType ModelWorkspace::ClearVariable(const std::string& name)
+ReturnType ModelWorkspace::ClearVariable(const std::string& name)
 {
   auto it = Variables.find(name);
   if (it != Variables.end())
@@ -49,7 +49,7 @@ slxReturnType ModelWorkspace::ClearVariable(const std::string& name)
   return E_OK;
 }
 
-slxReturnType ModelWorkspace::ClearAll()
+ReturnType ModelWorkspace::ClearAll()
 {
   Variables.clear();
   logger.SendLogMessage(

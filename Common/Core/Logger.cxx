@@ -22,7 +22,7 @@ Logger::Logger()
 {
 }
 
-slxReturnType Logger::Init(int argc, char** argv)
+ReturnType Logger::Init(int argc, char** argv)
 {
 #if SLXIO_LOGURU
   loguru::init(argc, argv);
@@ -42,7 +42,7 @@ Logger& Logger::GetInstance()
   return instance;
 }
 
-slxReturnType Logger::SendLogMessage(
+ReturnType Logger::SendLogMessage(
   const MessageInfoType& logInfo, const std::vector<std::string>& logData)
 {
   LogMessage message;
@@ -102,7 +102,7 @@ void Logger::Print()
 #endif
 }
 
-slxReturnType Logger::WriteToFile(const std::string& filename)
+ReturnType Logger::WriteToFile(const std::string& filename)
 {
   std::string logFilePath = GetDefaultLogDirectoryPath() + PATH_SEP + filename;
 
@@ -137,12 +137,12 @@ slxReturnType Logger::WriteToFile(const std::string& filename)
   return E_OK;
 }
 
-slxReturnType Logger::WriteToFile(const char* path)
+ReturnType Logger::WriteToFile(const char* path)
 {
   return WriteToFile(std::string(path));
 }
 
-slxReturnType Logger::WriteToFile()
+ReturnType Logger::WriteToFile()
 {
   std::random_device rand_dev;
   std::mt19937 generator(rand_dev());

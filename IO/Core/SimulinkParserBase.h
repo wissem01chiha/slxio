@@ -37,7 +37,7 @@ public:
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual slxReturnType setInputData(const T data)
+  virtual ReturnType setInputData(const T data)
   {
     dataObject = data;
     return E_OK;
@@ -47,7 +47,7 @@ public:
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual slxReturnType setInputData(const T& data)
+  virtual ReturnType setInputData(const T& data)
   {
     dataObject = data;
     return E_OK;
@@ -60,7 +60,7 @@ public:
   T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
-  virtual slxReturnType parse() = 0;
+  virtual ReturnType parse() = 0;
 
 protected:
   /// @brief Default constructor

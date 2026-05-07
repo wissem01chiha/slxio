@@ -11,7 +11,7 @@ StateflowEvent::StateflowEvent()
   //l.log(Logger::V_INFO, "StateflowEvent created.");
 }
 
-slxReturnType StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   Logger& l = Logger::GetInstance();
   if (getParent() == nullptr)

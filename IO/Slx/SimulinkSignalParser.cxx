@@ -3,7 +3,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-slxReturnType SimulinkSignalParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkSignalParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
@@ -14,7 +14,7 @@ slxReturnType SimulinkSignalParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-slxReturnType SimulinkSignalParser::parse()
+ReturnType SimulinkSignalParser::parse()
 {
   return E_OK;
 }

@@ -35,7 +35,7 @@ protected:
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
 
-  slxReturnType status =
+  ReturnType status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 }
@@ -43,10 +43,10 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
 
-  slxReturnType in_status =
+  ReturnType in_status =
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(in_status == E_OK);
-  slxReturnType parseStatus = parserPtr->parse();
+  ReturnType parseStatus = parserPtr->parse();
   CHECK(parseStatus == E_OK);
 };
 

@@ -2,7 +2,7 @@
 #include "ErrorCode.h"
 #include "File.h"
 
-slxIdType FileManager::GetFileId(const std::string& filename)
+IdType FileManager::GetFileId(const std::string& filename)
 {
   for (UInt32 i = 0; i < GetFileMaxId(); i++)
   {
@@ -12,12 +12,12 @@ slxIdType FileManager::GetFileId(const std::string& filename)
     //  return i;
     //}
   }
-  return (slxIdType)-1;
+  return (IdType)-1;
 }
 
-slxIdType FileManager::GetFileMaxId()
+IdType FileManager::GetFileMaxId()
 {
-  return SLXIO_TYPE_CAST(slxIdType, fileList.size());
+  return SLXIO_TYPE_CAST(IdType, fileList.size());
 }
 
 bool FileManager::IsOpened(const std::string& filename)
@@ -81,7 +81,7 @@ bool FileManager::IsOpened(const std::string& filename)
 //   return iNewId;
 // }
 
-slxIdType FileManager::GetFirstFreeFileId()
+IdType FileManager::GetFirstFreeFileId()
 {
   //   // find first free space
   //   for (UInt32 i = 0; i < static_cast<UInt32>(fileList.size()); i++)
@@ -91,7 +91,7 @@ slxIdType FileManager::GetFirstFreeFileId()
   //       file = i;
   //       return i;
   //     }
-  return (slxIdType)-1;
+  return (IdType)-1;
 }
 
 //   // no free space, add at the end

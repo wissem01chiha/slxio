@@ -6,57 +6,58 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "DataObject.h"
 #include "PlatformTypes.h"
-#include "Logger.h"
+
+class DataObject;
+class Logger;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkWriter
- * @brief Abstract class to write simulink data to files
+ * @brief Abstract class to write Simulink data to files
  */
 class SLXIO_APIEXPORT SimulinkWriter
 {
 public:
   /**
-   * 
+   * Create a new instance of the writer
    */
   virtual SimulinkWriter* New() = 0;
 
   /**
-   * 
+   * Virtual destructor for cleanup
    */
   virtual ~SimulinkWriter() = default;
 
   /**
-   * 
+   * Write the current input data to output
    */
-  virtual slxReturnType Write() = 0;
+  virtual ReturnType Write() = 0;
 
   /**
-   * Set input data for writing
+   * Set single input data object for writing
    */
-  virtual slxReturnType SetInputData(const DataObject data) = 0;
+  virtual ReturnType SetInputData(const DataObject data) = 0;
 
   /**
-   * Set ouput data for writing
+   * Set indexed input data object for writing
    */
-  virtual slxReturnType SetInputData(slxIdType idx, const DataObject& data) = 0;
+  virtual ReturnType SetInputData(IdType idx, const DataObject& data) = 0;
 
   /**
-   * 
+   * Get the single input data object
    */
   DataObject* GetInputData() const;
 
   /**
-   * 
+   * Get the indexed input data object
    */
-  DataObject* GetInputData(slxIdType idx) const;
+  DataObject* GetInputData(IdType idx) const;
 
   /**
-   * 
+   * Access the logger instance
    */
   Logger& GetLogger();
 

@@ -21,8 +21,8 @@ class SLXIO_APIEXPORT SimulationSettingsParser final
 {
 public:
   SimulationSettingsParser() = default;
-  slxReturnType setInputData(const xmlNodePtr data) override;
-  slxReturnType parse() override;
+  ReturnType setInputData(const xmlNodePtr data) override;
+  ReturnType parse() override;
   ~SimulationSettingsParser() = default;
 };
 

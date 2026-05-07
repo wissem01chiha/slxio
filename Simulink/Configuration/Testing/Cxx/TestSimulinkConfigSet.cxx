@@ -29,11 +29,11 @@ TEST_CASE("SetParameterTest")
   auto param = std::make_shared<SimulinkParameter>();
   param->setName("Solver");
   param->setValue("Discrete");
-  slxReturnType ec = object.AddElement(param);
+  ReturnType ec = object.AddElement(param);
   CHECK(ec == E_OK);
 
   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-  slxReturnType status = configCst->setParameter("Solver", "ode45");
+  ReturnType status = configCst->setParameter("Solver", "ode45");
   CHECK(status == E_OK);
   std::cout << configCst->ToString() << std::endl;
   CHECK(strcmp(configCst->getParameter("Solver"), "ode45") == 0);
@@ -48,12 +48,12 @@ TEST_CASE("AddAndGetParameterTest")
 
   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
 
-  slxReturnType ec = object.AddElement(param);
+  ReturnType ec = object.AddElement(param);
   CHECK(ec == E_OK);
   std::cout << object.ToString() << std::endl;
 
   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-  slxReturnType status = configCst->setParameter("Solver", "Discrete");
+  ReturnType status = configCst->setParameter("Solver", "Discrete");
   CHECK(status == E_OK);
   CHECK(strcmp(configCst->getParameter("Solver"), "Discrete") == 0);
   delete configCst;

@@ -33,18 +33,18 @@ public:
   /**
    * Assign a value to a variable in the model workspace.
    */
-  slxReturnType AssignVariable(
+  ReturnType AssignVariable(
     const std::string& name, const std::string& value);
 
   /**
    * Clear a variable from the model workspace.
    */
-  slxReturnType ClearVariable(const std::string& name);
+  ReturnType ClearVariable(const std::string& name);
 
   /**
    * Clear all variables from the model workspace.
    */
-  slxReturnType ClearAll();
+  ReturnType ClearAll();
 
   /**
    * Get the data source type for this model workspace.

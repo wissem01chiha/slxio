@@ -173,7 +173,7 @@ UInt32 File::Write(const char* message)
   return E_OK;
 }
 
-slxReturnType File::Close()
+ReturnType File::Close()
 {
   if (FileDescriptor < 0)
   {
@@ -503,7 +503,7 @@ UInt32 File::Unzip(const char* dir)
   return E_OK;
 }
 
-slxReturnType File::Zip(const char* zfilepath, const char* zname)
+ReturnType File::Zip(const char* zfilepath, const char* zname)
 {
   zip_t* za;
   int err;

@@ -3,7 +3,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-slxReturnType SimulationSettingsParser::setInputData(const xmlNodePtr data)
+ReturnType SimulationSettingsParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
@@ -25,7 +25,7 @@ slxReturnType SimulationSettingsParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-slxReturnType SimulationSettingsParser::parse()
+ReturnType SimulationSettingsParser::parse()
 {
 
   return E_OK;

@@ -27,23 +27,23 @@ public:
   SimulinkObject();
   virtual ~SimulinkObject() = default;
   SimulinkObject(const SimulinkObject& other);
-  SimulinkObject(slxIdType id, std::string name, std::string className);
+  SimulinkObject(IdType id, std::string name, std::string className);
   SimulinkObject(
-    slxIdType id, std::string version, std::string name, std::string className);
+    IdType id, std::string version, std::string name, std::string className);
   SimulinkObject(std::string version, std::string className);
   SimulinkObject& operator=(const SimulinkObject& other) = delete;
   SimulinkElementType GetElementType() const override;
-  slxIdType GetElementId() const override;
+  IdType GetElementId() const override;
   std::string ToString() const override;
-  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
-  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
-  bool Contains(const slxIdType& id) const override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  bool Contains(const IdType& id) const override;
   std::shared_ptr<SimulinkParameter> getParameter(const std::string& name);
   std::string getName();
 
 protected:
   Logger& l;
-  slxIdType id;
+  IdType id;
   std::string version;
   std::string propName;
   std::string className;

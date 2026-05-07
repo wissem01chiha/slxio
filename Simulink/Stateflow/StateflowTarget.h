@@ -20,11 +20,11 @@ public:
   StateflowTarget();
   StateflowTarget(StateflowTarget& orig);
 
-  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
-  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   std::string ToString() const override;
-  slxIdType GetElementId() const override;
+  IdType GetElementId() const override;
 
 private:
 };

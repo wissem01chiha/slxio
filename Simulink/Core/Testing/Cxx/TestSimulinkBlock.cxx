@@ -38,7 +38,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
     std::make_shared<SimulinkBlock>(
       SimulinkBlockType::Type::Clock, "ClockBlock", 20);
 
-  slxReturnType status = parentblockPtr->AddElement(childblockPtr);
+  ReturnType status = parentblockPtr->AddElement(childblockPtr);
   CHECK(status == E_OK);
 }
 
@@ -51,10 +51,10 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
   std::shared_ptr<SimulinkBlock> childblockPtr =
     std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
 
-  slxReturnType addStatus = parentblockPtr->AddElement(childblockPtr);
+  ReturnType addStatus = parentblockPtr->AddElement(childblockPtr);
   CHECK(addStatus == E_OK);
 
-  slxReturnType RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
+  ReturnType RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
   CHECK(RemoveStatus == E_OK);
 }
 

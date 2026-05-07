@@ -53,13 +53,13 @@ public:
    * Constructor with block type, name, and Id.
    */
   SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName,
-    const slxIdType& blockId);
+    const IdType& blockId);
 
   /**
    * Support adding Only SimulinkBlock and SimulinkParameter 
    * Object Types.
    */
-  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * Add a port to the block.
@@ -70,7 +70,7 @@ public:
    * Support Removing Only SimulinkBlock and SimulinkParameter
    * object types.
    */
-  slxReturnType RemoveElement(
+  ReturnType RemoveElement(
     std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
@@ -81,7 +81,7 @@ public:
   /**
    * .Return the block unqiue id 
    */
-  slxIdType GetElementId() const override;
+  IdType GetElementId() const override;
 
   /**
    * .override from SimulinkElmentBase
@@ -108,7 +108,7 @@ public:
    * Retrieve a sub-block by Id. Returns an empty shared_ptr if not
    * found.
    */
-  std::shared_ptr<SimulinkBlock> GetSubBlock(const slxIdType& blockId);
+  std::shared_ptr<SimulinkBlock> GetSubBlock(const IdType& blockId);
 
   /**
    * Get the Parent block at the hiraciy .
@@ -125,7 +125,7 @@ public:
    * Sets the block Id to a given one, shoule not used by public users, only 
    * for internal Peraser 
    */
-  void SetBlockId(const slxIdType& blockId);
+  void SetBlockId(const IdType& blockId);
 
   /**
    * .Set the block name
@@ -140,7 +140,7 @@ public:
   /**
    * Check whatever a blcok contains an other block given it unqiue id.
    */
-  bool Contains(const slxIdType& blockId) const override;
+  bool Contains(const IdType& blockId) const override;
 
   /**
    * Return the class internal logger object
@@ -148,11 +148,11 @@ public:
   Logger& GetLogger();
 
 private:
-  slxIdType id;
+  IdType id;
   Logger& logger;
   std::string name;
   SimulinkBlockType type;
-  std::map<slxIdType, SimulinkPortType> ports;
+  std::map<IdType, SimulinkPortType> ports;
   std::vector<std::shared_ptr<SimulinkBlock>> blocks;
   std::shared_ptr<SimulinkBlock> parent;
   std::vector<std::shared_ptr<SimulinkParameter>> parameters;

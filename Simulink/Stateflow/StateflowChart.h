@@ -29,10 +29,10 @@ public:
   StateflowChart(StateflowChart& origChart) = delete;
 
   /// @brief Add a StateflowNodeBase object
-  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent
   std::shared_ptr<StateflowElementBase> getParent() const override;
@@ -53,7 +53,7 @@ public:
   std::string ToString() const override;
 
   /** @brief Set Stateflow block this chart belongs to. */
-  slxReturnType setStateflowBlock(StateflowBlock stateflowBlock);
+  ReturnType setStateflowBlock(StateflowBlock stateflowBlock);
 
   /** @brief Get the Stateflow machine this chart belongs to. */
   // StateflowMachine getMachine() {
@@ -61,10 +61,10 @@ public:
   //}
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  slxIdType GetElementId() const override;
+  IdType GetElementId() const override;
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  bool Contains(const slxIdType& id) const override;
+  bool Contains(const IdType& id) const override;
 
 private:
   std::shared_ptr<StateflowBlock> stateflowBlock;

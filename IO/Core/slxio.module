@@ -21,22 +21,21 @@ INSTALL_HEADERS
 INSTALL_TARGETS 
   TRUE 
 CLASSES
-	SimulinkParserBase
 	SimulinkWriter
+  SimulinkArrayWriter
+  SimulinkParserBase
 	SimulinkFileBase
 SOURCES
 HEADERS
-  SimulinkParserBase.h
   SimulinkWriter.h
+  SimulinkArrayWriter.h
   SimulinkFileBase.h
+  SimulinkParserBase.h
 CONFIG_HEADERS
-CMAKE_MODULES_DIRS
 PUBLIC_DEPENDS
   Common::System 
   Common::Core
   Common::Data
   Simulink::Core 
 PRIVATE_DEPENDS
-TEST_DEPENDS 
- 
-
+TEST_DEPENDS

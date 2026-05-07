@@ -67,25 +67,25 @@ public:
   bool IsFile() const;
 
   /** Open the file with the initialized mode. */
-  slxReturnType Open();
+  ReturnType Open();
 
   /** Read data from the file into the internal buffer. */
-  slxReturnType Read();
+  ReturnType Read();
 
   /** Write data to the file. */
-  slxReturnType Write(const char* message);
+  ReturnType Write(const char* message);
 
   /** Close the file descriptor. */
-  slxReturnType Close();
+  ReturnType Close();
 
   /** Copy the current file content to another file. */
-  slxReturnType Copy(File& otherFile);
+  ReturnType Copy(File& otherFile);
 
   /** Copy the current file content to another directory. */
-  slxReturnType Copy(const char* destDir);
+  ReturnType Copy(const char* destDir);
 
   /** Rename the file. */
-  slxReturnType Rename(const char* filename);
+  ReturnType Rename(const char* filename);
 
   /** Get the filename component of the path. */
   const std::string GetFileName();

@@ -38,20 +38,20 @@ public:
   virtual ~SimulinkElementBase() = default;
   SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
   virtual SimulinkElementType GetElementType() const = 0;
-  virtual slxIdType GetElementId() const = 0;
+  virtual IdType GetElementId() const = 0;
   virtual std::string ToString() const = 0;
 
   /**
    * 
    */
-  virtual bool Contains(const slxIdType& id) const = 0;
+  virtual bool Contains(const IdType& id) const = 0;
 
 protected:
   SimulinkElementBase() = default;
   SimulinkElementBase(const SimulinkElementBase&) = delete;
-  virtual slxReturnType RemoveElement(
+  virtual ReturnType RemoveElement(
     const std::shared_ptr<SimulinkElementBase> element) = 0;
-  virtual slxReturnType AddElement(const std::shared_ptr<SimulinkElementBase> element) = 0;
+  virtual ReturnType AddElement(const std::shared_ptr<SimulinkElementBase> element) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

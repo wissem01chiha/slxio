@@ -7,6 +7,7 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include <chrono>               
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -14,11 +15,39 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT DataObject 
 {
 public:
-    virtual DataObject* New() = 0;
+    /**
+     * Create a new instance of the data object
+     */
+    virtual DataObject* New();
+
+    /**
+     * Reset the data object to its initial state
+     */
+    virtual void Initialize();
+
+    /**
+     * Get the last update time (in milliseconds since epoch)
+     */
+    virtual UInt32 GetUpdateTime();
+
+    /**
+     * Return the memory size used by this object
+     */
+    virtual UInt32 GetMemorySize();
+
+    /**
+     * Return the type identifier of the data
+     */
+    virtual IdType GetDataType();
+
+    DataObject() = default;
     
-    DataObject();
-    ~DataObject();
+    ~DataObject() = default;
+
 private:
+    // Disable copy and assignment
+    DataObject(const DataObject&) = delete;
+    void operator=(const DataObject&) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END

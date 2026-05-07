@@ -16,7 +16,7 @@ SimulinkObject::SimulinkObject()
 }
 
 SimulinkObject::SimulinkObject(
-  slxIdType id, std::string name, std::string className)
+  IdType id, std::string name, std::string className)
   : id(id)
   , propName(name)
   , className(className)
@@ -25,7 +25,7 @@ SimulinkObject::SimulinkObject(
 }
 
 SimulinkObject::SimulinkObject(
-  slxIdType id, std::string version, std::string name, std::string className)
+  IdType id, std::string version, std::string name, std::string className)
   : id(id)
   , version(version)
   , propName(name)
@@ -58,7 +58,7 @@ SimulinkElementType SimulinkObject::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Object);
 }
 
-slxIdType SimulinkObject::GetElementId() const
+IdType SimulinkObject::GetElementId() const
 {
   return id;
 }
@@ -106,7 +106,7 @@ std::string SimulinkObject::ToString() const
   return oss.str();
 }
 
-slxReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
@@ -184,7 +184,7 @@ slxReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase>
   return E_OK;
 }
 
-slxReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -239,7 +239,7 @@ slxReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> el
   return E_OK;
 }
 
-bool SimulinkObject::Contains(const slxIdType& id) const
+bool SimulinkObject::Contains(const IdType& id) const
 {
 
   if (id == id)

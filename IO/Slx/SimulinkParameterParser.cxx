@@ -7,7 +7,7 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-slxReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
+ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
@@ -34,7 +34,7 @@ slxReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-slxReturnType SimulinkParameterParser::parse()
+ReturnType SimulinkParameterParser::parse()
 {
 
   Logger& l = Logger::GetInstance();
@@ -82,7 +82,7 @@ slxReturnType SimulinkParameterParser::parse()
   std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
     std::make_unique<SimulinkDataTypeParser>();
 
-  slxReturnType dataTypeInputStatus =
+  ReturnType dataTypeInputStatus =
     dataTypeParserPtr->setInputData(paramClassStr);
 
   if (dataTypeInputStatus != E_OK)
@@ -92,7 +92,7 @@ slxReturnType SimulinkParameterParser::parse()
       "type "
       "parser");
   }
-  slxReturnType dataTypeParseStatus = dataTypeParserPtr->parse();
+  ReturnType dataTypeParseStatus = dataTypeParserPtr->parse();
   if (dataTypeParseStatus != E_OK)
   {
     //l.log(Logger::V_ERROR,

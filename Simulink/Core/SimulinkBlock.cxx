@@ -42,7 +42,7 @@ SimulinkBlock::SimulinkBlock(const SimulinkBlock& origBlock)
 }
 
 SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
-  const char* blockName, const slxIdType& blockId)
+  const char* blockName, const IdType& blockId)
   : type(blockType)
   , name(std::string(blockName))
   , id(blockId)
@@ -113,7 +113,7 @@ UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
 
 void SimulinkBlock::AddElement(SimulinkPortType portType)
 {
-  // ports[portType] += (slxIdType)1;
+  // ports[portType] += (IdType)1;
 }
 
 std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(
@@ -132,7 +132,7 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(
   return std::shared_ptr<SimulinkBlock>();
 }
 
-std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const slxIdType& blockId)
+std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const IdType& blockId)
 {
   if (blockId == 0)
   {
@@ -156,12 +156,12 @@ SimulinkElementType SimulinkBlock::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Block);
 }
 
-slxIdType SimulinkBlock::GetElementId() const
+IdType SimulinkBlock::GetElementId() const
 {
   return id;
 }
 
-void SimulinkBlock::SetBlockId(const slxIdType& blockId)
+void SimulinkBlock::SetBlockId(const IdType& blockId)
 {
   id = blockId;
 }
@@ -266,7 +266,7 @@ std::string SimulinkBlock::GetBlockName()
   return name;
 }
 
-bool SimulinkBlock::Contains(const slxIdType& blockId) const
+bool SimulinkBlock::Contains(const IdType& blockId) const
 {
   for (const auto& block : blocks)
   {

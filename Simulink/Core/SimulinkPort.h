@@ -37,25 +37,25 @@ public:
   /**
    * @brief Remove a line from this port.
    * @param element The element to remove (must be a SimulinkLine).
-   * @return slxReturnType indicating success or failure.
+   * @return ReturnType indicating success or failure.
    */
-  slxReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * @brief Add a line to this port.
    *  @details Only SimulinkLine elements are supported for add/remove
    * operations.
    */
-  slxReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get the ID of the linked block.
-  slxIdType GetElementId() const override;
+  IdType GetElementId() const override;
 
   /**
    *  @brief Compare the given ID with this port's ID.
    *  @note A port can only be connected to one and only one block.
    */
-  bool Contains(const slxIdType& id) const override;
+  bool Contains(const IdType& id) const override;
 
   /// @brief Get the parent block of this port.
   std::shared_ptr<SimulinkBlock> getBlock();
@@ -65,7 +65,7 @@ public:
 
   /// @brief Get a specific line by its ID.
   /// @note Each line should have a unique identifier.
-  std::shared_ptr<SimulinkLine> getLine(const slxIdType& lineId);
+  std::shared_ptr<SimulinkLine> getLine(const IdType& lineId);
 
   /**
    * 
@@ -74,7 +74,7 @@ public:
   
 private:
   Logger& logger;
-  slxIdType blockId;
+  IdType blockId;
   SimulinkPortType type;
   std::shared_ptr<SimulinkBlock> block;
   std::vector<std::shared_ptr<SimulinkLine>> lines;
