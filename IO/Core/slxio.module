@@ -24,12 +24,10 @@ CLASSES
 	SimulinkWriter
   SimulinkArrayWriter
   SimulinkParserBase
-	SimulinkFileBase
 SOURCES
 HEADERS
   SimulinkWriter.h
   SimulinkArrayWriter.h
-  SimulinkFileBase.h
   SimulinkParserBase.h
 CONFIG_HEADERS
 PUBLIC_DEPENDS

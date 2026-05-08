@@ -1,0 +1,10 @@
+NAME
+  libxlsxwriter
+GROUP
+  ThirdParty
+LIBRARY_NAME
+  ThirdPartylibxlsxwriter
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  FALSE
