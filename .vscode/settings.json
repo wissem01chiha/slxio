@@ -104,5 +104,7 @@
         "version": "c",
         "coroutine": "cpp",
         "resumable": "cpp"
-    }
+    },
+    "protobuf.clangFormat.enabled": true,
+    "protobuf.clangFormat.path": "/usr/bin/clang-format"
 }

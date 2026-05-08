@@ -1,6 +1,6 @@
 /*
   zip_add.c -- add file via callback function
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -35,6 +35,7 @@
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
+
 /*
   NOTE: Return type is signed so we can return -1 on error.
         The index can not be larger than ZIP_INT64_MAX since the size
@@ -42,8 +43,7 @@
         ZIP_UINT64_MAX, and each entry is larger than 2 bytes.
 */
 
-ZIP_EXTERN zip_int64_t zip_add(zip_t *za, const char *name,
-                               zip_source_t *source) {
-  return zip_file_add(za, name, source, 0);
+ZIP_EXTERN zip_int64_t zip_add(zip_t *za, const char *name, zip_source_t *source) {
+    return zip_file_add(za, name, source, 0);
 }
 /* LCOV_EXCL_STOP */

@@ -1,7 +1,3 @@
-#[=======================================================================[.rst:
-# Based on the original libuv CMake:
-# https://github.com/libuv/libuv/blob/v1.x/CMakeLists.txt
-#]=======================================================================]
 cmake_minimum_required(VERSION 3.10)
 
 if(POLICY CMP0091)
@@ -13,7 +9,7 @@ endif()
 
 project(libuv LANGUAGES C)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(CMakePackageConfigHelpers)
 include(CMakeDependentOption)
@@ -28,21 +24,14 @@ set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-#option(LIBUV_BUILD_SHARED "Build shared lib" ON)
-set(LIBUV_BUILD_SHARED ${BUILD_SHARED_LIBS})
 
-# cmake_dependent_option(LIBUV_BUILD_TESTS
-#   "Build the unit tests when BUILD_TESTING is enabled and we are the root project" ON
-#   "BUILD_TESTING;LIBUV_BUILD_SHARED;CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR" OFF)
-# cmake_dependent_option(LIBUV_BUILD_BENCH
-#   "Build the benchmarks when building unit tests and we are the root project" ON
-#   "LIBUV_BUILD_TESTS" OFF)
+option(LIBUV_BUILD_SHARED "Build shared lib" ON)
 
 cmake_dependent_option(LIBUV_BUILD_TESTS
-  "Build the unit tests when BUILD_TESTING is enabled and we are the root project" OFF
-  "BUILD_TESTING;LIBUV_BUILD_SHARED;CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR" OFF)
+  "Build the unit tests when BUILD_TESTING is enabled and we are the root project" ON
+  "BUILD_TESTING;LIBUV_BUILD_SHARED;CMAKE_SOURCE_DIR STREQUAL PROJECT_SOURCE_DIR" OFF)
 cmake_dependent_option(LIBUV_BUILD_BENCH
-  "Build the benchmarks when building unit tests and we are the root project" OFF
+  "Build the benchmarks when building unit tests and we are the root project" ON
   "LIBUV_BUILD_TESTS" OFF)
 
 # Qemu Build
@@ -474,10 +463,10 @@ if(LIBUV_BUILD_SHARED)
   target_compile_options(uv PRIVATE ${uv_cflags})
   target_include_directories(uv
     PUBLIC
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
       $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
     PRIVATE
-      $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+      $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
   if(CMAKE_SYSTEM_NAME STREQUAL "OS390")
     target_include_directories(uv PUBLIC $<BUILD_INTERFACE:${ZOSLIB_DIR}/include>)
     set_target_properties(uv PROPERTIES LINKER_LANGUAGE CXX)
@@ -491,10 +480,10 @@ target_compile_definitions(uv_a PRIVATE ${uv_defines})
 target_compile_options(uv_a PRIVATE ${uv_cflags})
 target_include_directories(uv_a
   PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
   PRIVATE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src>)
 if(CMAKE_SYSTEM_NAME STREQUAL "OS390")
   target_include_directories(uv_a PUBLIC $<BUILD_INTERFACE:${ZOSLIB_DIR}/include>)
   set_target_properties(uv_a PROPERTIES LINKER_LANGUAGE CXX)
@@ -712,6 +701,7 @@ if(LIBUV_BUILD_TESTS)
        test/test-udp-send-immediate.c
        test/test-udp-sendmmsg-error.c
        test/test-udp-send-unreachable.c
+       test/test-udp-recv-cb-close-pollerr.c
        test/test-udp-recvmsg-unreachable-error.c
        test/test-udp-try-send.c
        test/test-udp-recv-in-a-row.c
@@ -788,13 +778,18 @@ configure_file(libuv-static.pc.in libuv-static.pc @ONLY)
 install(DIRECTORY include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(FILES LICENSE DESTINATION ${CMAKE_INSTALL_DOCDIR})
 install(FILES LICENSE-extra DESTINATION ${CMAKE_INSTALL_DOCDIR})
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libuv-static.pc
+install(FILES ${PROJECT_BINARY_DIR}/libuv-static.pc
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
 install(TARGETS uv_a EXPORT libuvConfig
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(EXPORT libuvConfig
 	DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/libuv
 	NAMESPACE libuv::)
+write_basic_package_version_file(libuvConfigVersion.cmake
+                                 VERSION ${PACKAGE_VERSION}
+                                 COMPATIBILITY SameMajorVersion)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libuvConfigVersion.cmake
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/libuv)
 
 if(LIBUV_BUILD_SHARED)
   # The version in the filename is mirroring the behaviour of autotools.
@@ -802,7 +797,7 @@ if(LIBUV_BUILD_SHARED)
           VERSION ${UV_VERSION_MAJOR}.0.0
           SOVERSION ${UV_VERSION_MAJOR})
   configure_file(libuv.pc.in libuv.pc @ONLY)
-  install(FILES ${CMAKE_CURRENT_BINARY_DIR}/libuv.pc
+  install(FILES ${PROJECT_BINARY_DIR}/libuv.pc
           DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
   install(TARGETS uv EXPORT libuvConfig
           RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -826,25 +821,86 @@ else()
   set(LIB_SELECTED uv_a)
 endif()
 
-#add_library(libuv::libuv ALIAS ${LIB_SELECTED})
-add_library(ThirdPartylibuv ALIAS ${LIB_SELECTED})
+add_library(libuv::libuv ALIAS ${LIB_SELECTED})
 
-get_filename_component(LIBUV_PARENT_SOURCE_DIR 
-  ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY
-)
-get_filename_component(LIBUV_PARENT_BINARY_DIR 
-  ${CMAKE_CURRENT_BINARY_DIR} DIRECTORY
-)
-set_target_properties(${LIB_SELECTED} PROPERTIES
-  target_src_include_dir ${LIBUV_PARENT_SOURCE_DIR}
-  target_bin_include_dir ${LIBUV_PARENT_BINARY_DIR}
-)
+message(STATUS "summary of build options:
+    Install prefix:  ${CMAKE_INSTALL_PREFIX}
+    Target system:   ${CMAKE_SYSTEM_NAME}
+    Compiler:
+      C compiler:    ${CMAKE_C_COMPILER} (${CMAKE_C_COMPILER_ID})
+      CFLAGS:        ${CMAKE_C_FLAGS_${_build_type}} ${CMAKE_C_FLAGS}
+")
 
+# clang-tidy support
+option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" ON)
+if(ENABLE_CLANG_TIDY)
+  find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
+  if(CLANG_TIDY_EXE)
+    set(CMAKE_C_CLANG_TIDY "${CLANG_TIDY_EXE}")
+    message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}")
+  else()
+    set(CMAKE_C_CLANG_TIDY "clang-tidy")
+    message(STATUS "clang-tidy not found: install clang-tidy or set -DCLANG_TIDY_EXE to run tidy analysis on this platform")
+  endif()
 
-#message(STATUS "summary of build options:
-#     Install prefix:  ${CMAKE_INSTALL_PREFIX}
-#     Target system:   ${CMAKE_SYSTEM_NAME}
-#     Compiler:
-#       C compiler:    ${CMAKE_C_COMPILER} (${CMAKE_C_COMPILER_ID})
-#       CFLAGS:        ${CMAKE_C_FLAGS_${_build_type}} ${CMAKE_C_FLAGS}
-# ")
+  # Collect source files from existing targets (deduplicated)
+  set(ALL_SOURCE_FILES)
+  set(SRC_TARGETS)
+  set(TEST_TARGETS)
+  set(TIDY_TARGETS)
+
+  # Add main library sources
+  list(APPEND ALL_SOURCE_FILES ${uv_sources})
+
+  # Add test sources if tests are enabled
+  if(LIBUV_BUILD_TESTS)
+    list(APPEND ALL_SOURCE_FILES ${uv_test_sources})
+  endif()
+
+  # Remove duplicates and non-existent files
+  list(REMOVE_DUPLICATES ALL_SOURCE_FILES)
+
+  foreach(SOURCE_FILE ${ALL_SOURCE_FILES})
+    # Create a clean target name
+    string(REPLACE "/" "-" TARGET_NAME ${SOURCE_FILE})
+    string(REGEX REPLACE "\\.[^.]*$" "" TARGET_NAME ${TARGET_NAME})
+    set(FULL_TARGET_NAME "tidy-${TARGET_NAME}")
+
+    # Create individual target for this source file
+    add_custom_target(${FULL_TARGET_NAME}
+      COMMAND ${CMAKE_C_CLANG_TIDY} -p "${CMAKE_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}/${SOURCE_FILE}"
+      COMMENT "Running clang-tidy on ${SOURCE_FILE}"
+      VERBATIM)
+
+    # Add to appropriate folder list
+    if(SOURCE_FILE MATCHES "^src/")
+      list(APPEND SRC_TARGETS ${FULL_TARGET_NAME})
+    elseif(SOURCE_FILE MATCHES "^test/")
+      list(APPEND TEST_TARGETS ${FULL_TARGET_NAME})
+    endif()
+
+    # Add to list of all tidy targets
+    list(APPEND TIDY_TARGETS ${FULL_TARGET_NAME})
+  endforeach()
+
+  # Create folder-based targets
+  if(SRC_TARGETS)
+    add_custom_target(tidy-src
+      COMMENT "Running clang-tidy on src files"
+      VERBATIM)
+    add_dependencies(tidy-src ${SRC_TARGETS})
+  endif()
+
+  if(TEST_TARGETS)
+    add_custom_target(tidy-test
+      COMMENT "Running clang-tidy on test files"
+      VERBATIM)
+    add_dependencies(tidy-test ${TEST_TARGETS})
+  endif()
+
+  # Create main tidy target that depends on all individual targets
+  add_custom_target(tidy
+    COMMENT "Running clang-tidy on all source files"
+    VERBATIM)
+  add_dependencies(tidy ${TIDY_TARGETS})
+endif()

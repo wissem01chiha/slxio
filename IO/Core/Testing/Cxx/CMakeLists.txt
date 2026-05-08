@@ -1,1 +1,1 @@
-add_test_sources (IO::Core)
+add_test_sources(Io::Core)

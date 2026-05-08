@@ -1,7 +1,7 @@
-#[=======================================================================[.rst:
-Install
------------------
-#]=======================================================================]
+
+set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
+set(PROJECT_DESCRIPTION  "SLXIO – SIMULINK SLX File I/O Library")
+
 if (ENABLE_PKGCONFIG)
   set (PKGCONFIG_INSTALL_DIR lib/pkgconfig)
 

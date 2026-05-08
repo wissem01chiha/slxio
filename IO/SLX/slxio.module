@@ -1,0 +1,89 @@
+NAME 
+  Slx
+GROUP
+  Io
+LIBRARY_NAME
+  IoSlx
+DESCRIPTION  
+  SLX IO Module 
+LICENSE   
+  Apache-2.0 
+VERSION 
+  0.1.0 
+MAINTAINER 
+  Wissem CHIHA 
+ENABLE_BUILD 
+  FALSE
+EXTERNAL_BUILD
+  FALSE
+EXTERNAL_SOURCE_DIR
+ENABLE_TEST
+  TRUE 
+ENABLE_BINDING 
+  TRUE 
+ENABLE_DOC
+  FALSE 
+INSTALL_HEADERS 
+  TRUE 
+INSTALL_TARGETS 
+  TRUE 
+CLASSES
+  SimulinkParameterParser
+  SimulinkArrayParser 
+  SimulinkObjectParser
+  SimulinkPortParser
+  SimulinkPortTypeParser
+  SimulinkConfigSetParser
+  SimulinkLineParser
+  SimulinkDataTypeParser
+  SimulinkSignalParser
+  SimulinkFileParser
+  SimulinkContent
+  SimulinkContentParser
+  SimulinkBlockParser
+  SimulinkHardwareParser
+  SimulinkModelParser
+  SimulinkFile
+  SimulationSettingsParser
+  SimulinkSolverParser
+  StateflowBlockParser
+SOURCES
+HEADERS
+  SimulinkParameterParser.h
+  SimulinkArrayParser.h
+  SimulinkObjectParser.h
+  SimulinkPortParser.h
+  SimulinkPortTypeParser.h
+  SimulinkConfigSetParser.h
+  SimulinkLineParser.h
+  SimulinkDataTypeParser.h
+  SimulinkSignalParser.h
+  SimulinkFileParser.h
+  SimulinkFile.h
+  SimulinkContent.h
+  SimulinkContentParser.h
+  SimulinkBlockParser.h
+  SimulinkHardwareParser.h
+  SimulinkModelParser.h
+  SlxParameter.h
+  SimulationSettingsParser.h
+  SimulinkSolverParser.h
+  StateflowBlockParser.h
+CONFIG_HEADERS
+CMAKE_MODULES_DIRS
+PUBLIC_DEPENDS 
+  ThirdParty::loguru
+  ThirdParty::libxml2
+PRIVATE_DEPENDS 
+  Io::Core
+  Common::Core
+  Simulink::Core
+  Simulink::Configuration
+  Simulink::Misc
+  Simulink::Data
+  Simulink::Stateflow
+  ThirdParty::libxml2
+TEST_DEPENDS 
+  ThirdParty::doctest
+ 
+

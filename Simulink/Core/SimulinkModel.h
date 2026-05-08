@@ -1,68 +1,125 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKMODEL_H
 #define SIMULINKMODEL_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Logger.h"
 #include "ModelWorkspace.h"
 #include "SimulationSettings.h"
-#include "SimulinkArray.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkLine.h"
 #include "SimulinkModelType.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
-#include "SimulinkPort.h"
-#include "Type.h"
+#include "PlatformTypes.h"
 #include <memory>
+
+class SimulinkObject;
+class SimulinkArray;
+class SImulinkPort;
+class SimulinkLine;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** @brief A Simulink model  */
-class APIEXPORT SimulinkModel final : public SimulinkElementBase
+/** 
+ * @class SimulinkModel 
+ */
+class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
 public:
+  /**
+   * Default Constructor
+   */
   SimulinkModel();
+
+  /**
+   * 
+   */
   SimulinkModel(SimulinkModelType Type);
+
+  /**
+   * 
+   */
   SimulinkModel(const SimulinkModel& other);
+
+  /**
+   * 
+   */
   SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
-  SimulinkElementType getType() const override;
-  Index getID() const override;
-  std::string toString() const override;
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element);
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> element);
 
-  SimulinkBlock getBlock(uint32 blockIdx);
-  SimulinkModelType getModelType();
-  std::shared_ptr<SimulationSettings> getSimulationSettings();
+  /**
+   * 
+   */
+  SimulinkElementType GetElementType() const override;
 
-  std::vector<std::shared_ptr<SimulinkParameter>> getParameters();
+  /**
+   * 
+   */
+  IdType GetElementId() const override;
 
-  uint32 getVersion();
-  bool contains(const Index& id) const override;
+  /**
+   * 
+   */
+  std::string ToString() const override;
 
-  std::shared_ptr<ModelWorkspace> getWorkspace();
+  /**
+   * 
+   */
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element);
+
+  /**
+   * 
+   */
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
+
+  /**
+   * 
+   */
+  SimulinkBlock GetBlock(IdType blockIdx);
+
+  /**
+   * 
+   */
+  SimulinkModelType GetModelType();
+
+  /**
+   * 
+   */
+  std::shared_ptr<SimulationSettings> GetSimulationSettings();
+
+  /**
+   * 
+   */
+  std::vector<std::shared_ptr<SimulinkParameter>> GetParameters();
+
+  /**
+   * 
+   */
+  UInt32 GetModelVersion();
+
+  /**
+   * 
+   */
+  bool Contains(const IdType& id) const override;
+
+  /**
+   * 
+   */
+  std::shared_ptr<ModelWorkspace> GetModelWorkspace();
+
+  /**
+   * 
+   */
+  Logger& GetLogger();
 
 private:
-  Logger& l;
-  Index id;
-  uint32 version;
+  Logger& logger;
+  IdType id;
+  UInt32 version;
   SimulinkModelType type;
   std::shared_ptr<ModelWorkspace> workspace;
   std::shared_ptr<SimulationSettings> simSet;

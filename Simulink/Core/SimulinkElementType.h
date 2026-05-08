@@ -1,29 +1,18 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKELEMENTTYPE_H
 #define SIMULINKELEMENTTYPE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
-#include "Type.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class APIEXPORT SimulinkElementType
+class SLXIO_APIEXPORT SimulinkElementType
 {
 public:
   enum Type
@@ -41,16 +30,46 @@ public:
     Chart = 10,
     Unkown = 11
   };
+
+  /**
+   * Default Construtor
+   */
   SimulinkElementType() = default;
+
+  /**
+   * 
+   */
   bool isA(const SimulinkElementType& typeObj);
+
+  /**
+   * 
+   */
   bool isA(const SimulinkElementType::Type& type);
-  friend bool operator==(
-    const SimulinkElementType& lhs, const SimulinkElementType& rhs);
+
+  /**
+   * 
+   */
   explicit SimulinkElementType(SimulinkElementType::Type typeName);
+
+  /**
+   * 
+   */
   static SimulinkElementType& getInstance();
+
+  /**
+   * 
+   */
   static SimulinkElementType::Type toType(const char* typeName);
-  static const char* toString(SimulinkElementType::Type type);
-  std::string toString();
+
+  /**
+   * 
+   */
+  static const char* ToString(SimulinkElementType::Type type);
+
+  /**
+   * 
+   */
+  std::string ToString();
 
 private:
   SimulinkElementType::Type type_;

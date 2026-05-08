@@ -7,20 +7,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 StateflowEvent::StateflowEvent()
   : StateflowElementBase()
 {
-  Logger& l = Logger::getInstance();
-  l.log(Logger::V_INFO, "StateflowEvent created.");
+  Logger& l = Logger::GetInstance();
+  //l.log(Logger::V_INFO, "StateflowEvent created.");
 }
 
-ErrorCode StateflowEvent::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  Logger& l = Logger::getInstance();
+  Logger& l = Logger::GetInstance();
   if (getParent() == nullptr)
   {
-    l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
+    return E_PARAMETER_NULL_PTR;
   }
   // getParent().removeEvent(this);
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

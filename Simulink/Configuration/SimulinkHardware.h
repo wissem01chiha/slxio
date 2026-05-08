@@ -1,29 +1,18 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKHARDWARE_H
 #define SIMULINKHARDWARE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
-#include "Type.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base Conainer for Simulink Hardware Configuration
-class APIEXPORT SimulinkHardware final
+class SLXIO_APIEXPORT SimulinkHardware final
 {
 public:
   SimulinkHardware() = default;
@@ -32,43 +21,43 @@ public:
   const char* DisabledProps;
   const char* Description;
   const char* Components;
-  uint16 ProdBitPerChar;
-  uint16 ProdBitPerShort;
-  uint16 ProdBitPeruint16;
-  uint16 ProdBitPerLong;
-  uint16 ProdBitPerLongLong;
-  uint16 ProdBitPerFloat;
-  uint16 ProdBitPerfloat64;
-  uint16 ProdBitPerPouint16er;
-  uint16 ProdBitPerSizeT;
-  uint16 ProdBitPerPtrDiffT;
+  UInt16 ProdBitPerChar;
+  UInt16 ProdBitPerShort;
+  UInt16 ProdBitPeruint16;
+  UInt16 ProdBitPerLong;
+  UInt16 ProdBitPerLongLong;
+  UInt16 ProdBitPerFloat;
+  UInt16 ProdBitPerfloat64;
+  UInt16 ProdBitPerPouint16er;
+  UInt16 ProdBitPerSizeT;
+  UInt16 ProdBitPerPtrDiffT;
   const char* ProdLargestAtomicuint16eger;
   const char* ProdLargestAtomicFloat;
   const char* Produint16DivRoundTo;
   const char* ProdEndianess;
-  uint16 ProdWordSize;
+  UInt16 ProdWordSize;
   const char* ProdShiftRightuint16Arith;
   const char* ProdLongLongMode;
   const char* ProdHWDeviceType;
-  uint16 TargetBitPerChar;
-  uint16 TargetBitPerShort;
-  uint16 TargetBitPeruint16;
-  uint16 TargetBitPerLong;
-  uint16 TargetBitPerLongLong;
-  uint16 TargetBitPerFloat;
-  uint16 TargetBitPerfloat64;
-  uint16 TargetBitPerPouint16er;
-  uint16 TargetBitPerSizeT;
-  uint16 TargetBitPerPtrDiffT;
+  UInt16 TargetBitPerChar;
+  UInt16 TargetBitPerShort;
+  UInt16 TargetBitPeruint16;
+  UInt16 TargetBitPerLong;
+  UInt16 TargetBitPerLongLong;
+  UInt16 TargetBitPerFloat;
+  UInt16 TargetBitPerfloat64;
+  UInt16 TargetBitPerPouint16er;
+  UInt16 TargetBitPerSizeT;
+  UInt16 TargetBitPerPtrDiffT;
   const char* TargetLargestAtomicuint16eger;
   const char* TargetLargestAtomicFloat;
   const char* TargetShiftRightuint16Arith;
   const char* TargetLongLongMode;
   const char* Targetuint16DivRoundTo;
   const char* TargetEndianess;
-  uint16 TargetWordSize;
-  uint16 TargetPreprocMaxBitsSuint16;
-  uint16 TargetPreprocMaxBitsUuint16;
+  UInt16 TargetWordSize;
+  UInt16 TargetPreprocMaxBitsSuint16;
+  UInt16 TargetPreprocMaxBitsUuint16;
   const char* TargetHWDeviceType;
   const char* TargetUnknown;
   const char* ProdEqTarget;

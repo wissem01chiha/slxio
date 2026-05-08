@@ -1,26 +1,15 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKSIGNAL_H
 #define SIMULINKSIGNAL_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "CoderInfo.h"
 #include "ErrorCode.h"
+#include "PlatformTypes.h"
 #include "SimulinkDataType.h"
-#include "Type.h"
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
@@ -29,33 +18,42 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A SimulinkSignal Object
  */
-class APIEXPORT SimulinkSignal final
+class SLXIO_APIEXPORT SimulinkSignal final
 {
 public:
-  /// @brief Construct a new SimulinkSignal object
+  /**
+   * Construct a new SimulinkSignal object.
+   */
   SimulinkSignal();
 
-  /// @brief Destroy the SimulinkSignal object
+  /**
+   * Destroy the SimulinkSignal object.
+   */
   ~SimulinkSignal() = default;
 
-  /// @brief Return the underlying Simulink data type of the signal
+  /**
+   * Return the underlying Simulink data type of the signal.
+   */
   SimulinkDataType getDataType();
 
-  /// @brief Set the data type of the signal
-  ErrorCode setDataType(SimulinkDataType dt);
+  /**
+   * Set the data type of the signal.
+   */
+  ReturnType setDataType(SimulinkDataType dt);
 
-  /// @brief Set the data type of the signal from a string (MatWorks
-  /// API style)
-  ErrorCode setDataType(const char* dt);
+  /**
+   * Set the data type of the signal from a string (MatWorks API style).
+   */
+  ReturnType setDataType(const char* dt);
 
   /// @brief Set the complexity type of the signal from a string
-  ErrorCode setComplexityType(const char* ct);
+  ReturnType setComplexityType(const char* ct);
 
   /// @brief Get the complexity type of the signal
   const char* getComplexity();
 
   /// @brief Get the dimensions of the signal
-  std::vector<uint16> getDimensions();
+  std::vector<UInt16> getDimensions();
 
   /// @brief Get code generation metadata for the signal
   CoderInfo getCoderInfo();
@@ -73,10 +71,10 @@ public:
   const char* getUnit();
 
   /// @brief Get the sample time values of the signal
-  std::vector<Float> getSampleTime();
+  std::vector<Float32> getSampleTime();
 
   /// @brief Set the valid range (minimum and maximum) for the signal
-  ErrorCode setRange(Float min, Float max);
+  ReturnType setRange(Float32 min, Float32 max);
 
 private:
   const char* InitialValue;
@@ -87,11 +85,11 @@ private:
   const char* Complexity = "real";
 
   const char* DimensionsMode;
-  std::vector<uint16> Dimensions;
-  std::vector<Float> SampleTime;
+  std::vector<UInt16> Dimensions;
+  std::vector<Float32> SampleTime;
 
-  Float Min;
-  Float Max;
+  Float32 Min;
+  Float32 Max;
 
   CoderInfo coder;
 };
@@ -99,4 +97,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // SIMULINKSIGNAL_H
+#endif /* SIMULINKSIGNAL_H */

@@ -1,0 +1,99 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define HAVE_STDBOOL_H 1
+
+#define HAVE_LIMITS_H 1
+
+#define HAVE_VALUES_H  1
+
+#define HAVE_STDLIB_H 1
+
+#define HAVE_FLOAT_H  1
+
+#define HAVE_DIRECT_H  0
+
+#define HAVE_UNISTD_H 1
+
+#define HAVE_IO_H  0
+
+#define HAVE_WINDOWS_H  0
+
+#define HAVE_INTRIN_H  0
+
+#define HAVE_SYS_STAT_H 1
+
+#define HAVE_SYS_TYPES_H  1
+
+#define HAVE_UNISTD_H  1
+
+#define HAVE_STDINT_H 1
+
+#define SLXIO_BUILD_SHARED 0
+
+#define SLXIO_NAMESPACE 0
+
+#define SLXIO_ABI_NAMESPACE 0
+
+#define SLXIO_LOGURU 0
+
+#define SLXIO_SLOG 1
+
+#define SLXIO_ABI_SIZEOF_CHAR 1
+
+#define SLXIO_ABI_SIZEOF_INT 4
+
+#define SLXIO_ABI_SIZEOF_SIZE_T 8
+
+#define SLXIO_ABI_SIZEOF_DOUBLE 8
+
+#define SLXIO_ABI_SIZEOF_FLOAT 4
+
+#define SLXIO_ABI_SIZEOF_SHORT 2
+
+#define SLXIO_ABI_SIZEOF_LONG_LONG 8
+
+#define SLXIO_ABI_SIZEOF_LONG 8
+
+#define SLXIO_ABI_SIZEOF_UINT8_T 1
+
+#define SLXIO_ABI_SIZEOF_UINT16_T 2
+
+#define SLXIO_ABI_SIZEOF_UINT32_T 4
+
+#define SLXIO_SIMULINK_VERSION R2018b
+
+#define SLXIO_64BIT_IDS 1
+
+#define USE_EXTERNAL_CXXOPTS 0
+
+#define USE_EXTERNAL_DOCTEST 0
+
+#define USE_EXTERNAL_JSON_C 0
+
+#define USE_EXTERNAL_LIBPNG 0
+
+#define USE_EXTERNAL_LIBUV 0
+
+#define USE_EXTERNAL_LIBXML2 0
+
+#define USE_EXTERNAL_LIBZIP 0
+
+#define USE_EXTERNAL_LOGURU 0
+
+#define USE_EXTERNAL_PYBIND11 0
+
+#define USE_EXTERNAL_RAPIDCSV 0
+
+#define USE_EXTERNAL_SLOG 0
+
+#define USE_EXTERNAL_SOL2 0
+
+#define USE_EXTERNAL_TINYXML2 0
+
+#define USE_EXTERNAL_ZLIB 0
+
+#endif // CONFIG_H 

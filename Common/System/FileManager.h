@@ -1,79 +1,129 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include "APIExport.h"
-#include "ErrorCode.h"
-#include "File.h"
-#include "Type.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
+#include "AbiNamespaceMacro.h"
 #include <list>
 #include <string>
+#include <memory>
 #include <vector>
 
+class File;
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
 /**
- * @brief FileManager class
- * @details
- * A singleton class that manages multiple files in the system, usful
- * for manging I/O from multiple files original version from :
- * https://github.com/scilab/scilab/blob/master/scilab/modules/fileio/includes/filemanager.hxx
+ * @class FileManager 
+ * @brief A singleton class for managing multiple files 
  */
-class APIEXPORT FileManager final
+class SLXIO_APIEXPORT FileManager final
 {
 public:
+  /**
+   * Default Construtor
+   */
   FileManager();
+
+  /**
+   * Default Destructor
+   */
   ~FileManager() = default;
 
+  /**
+   * Copy Constructor 
+   */
   FileManager(const FileManager&) = delete;
+
+  /**
+   * Copy Operator 
+   */
   FileManager& operator=(const FileManager&) = delete;
 
+  /**
+   * Move Constructor
+   */
   FileManager(FileManager&& other) = delete;
+
+  /**
+   * Move Operator 
+   */
   FileManager& operator=(FileManager&& other) = delete;
 
   FileManager(std::vector<File*> files);
   FileManager(std::list<File*> files);
 
-  FileManager& operator=(std::vector<File*> files) = delete;
-  FileManager& operator=(std::list<File*> files) = delete;
-
   FileManager(std::vector<std::shared_ptr<File>> files);
 
-  Index getFileMaxID();
-  Index getFileID(const std::string& _stFilename);
-  Index getFirstFreeFileID();
+  /**
+   * 
+   */
+  IdType GetFileId(const std::string& filename);
 
-  File* getFile(Index _iID);
-  Index getCurrentFile();
+  /**
+   * 
+   */
+  IdType GetFileMaxId();
 
-  static bool isOpened(const std::string& _stFilename);
 
-  Index push_back(File* _file);
-  void remove(Index _iID);
-  ErrorCode clear();
 
-  Index getOpenedCount();
-  wchar_t** getTypesAsString();
-  wchar_t** getFilenames();
-  Float* getModes();
-  std::vector<Float> getSwaps();
-  Index* getIDs();
+  /**
+   * 
+   */
+  IdType GetFirstFreeFileId();
+
+  /**
+   * 
+   */
+  File* GetFile(IdType _iID);
+
+  /**
+   * 
+   */
+  IdType GetCurrentFile();
+
+  /**
+   * 
+   */
+  bool IsOpened(const std::string& filename);
+
+  /**
+   * 
+   */
+  ReturnType Add(File* _file);
+
+  /**
+   * 
+   */
+  ReturnType Remove(IdType _iID);
+
+  /**
+   * 
+   */
+  ReturnType Clear();
+
+  UInt32 GetOpenedCount();
+  wchar_t** GetTypesAsString();
+  wchar_t** GetFilenames();
+  Float32* GetModes();
+  std::vector<Float32> GetSwaps();
+
+  /**
+   * 
+   */
+  IdType* GetFileIds();
 
 private:
   typedef std::vector<File*> vectFile;
   static vectFile fileList;
-  static Index file;
+  static UInt32 file;
 };
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
 
 #endif // FILEMANAGER_H

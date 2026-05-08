@@ -1,22 +1,11 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKBLOCKTYPE_H
 #define SIMULINKBLOCKTYPE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "SimulinkElementType.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -25,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Enumeration of Simulink block types.
  */
-class APIEXPORT SimulinkBlockType final : public SimulinkElementType
+class SLXIO_APIEXPORT SimulinkBlockType final : public SimulinkElementType
 {
 public:
   enum Type
@@ -67,9 +56,9 @@ public:
   SimulinkBlockType(Type type_);
   ~SimulinkBlockType() = default;
   static SimulinkBlockType::Type toType(const char* typeName);
-  static const char* toString(Type type);
+  static const char* ToString(Type type);
   bool isA(SimulinkBlockType::Type type);
-  std::string toString() const;
+  std::string ToString() const;
 
 private:
   SimulinkBlockType::Type type_;

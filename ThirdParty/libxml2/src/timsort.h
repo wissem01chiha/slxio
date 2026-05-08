@@ -31,8 +31,8 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #ifdef HAVE_STDINT_H
 #include <stdint.h>
@@ -49,38 +49,32 @@ typedef unsigned __int64 uint64_t;
 #endif
 
 #ifndef SORT_CMP
-#define SORT_CMP(x, y) ((x) < (y) ? -1 : ((x) == (y) ? 0 : 1))
+#define SORT_CMP(x, y)  ((x) < (y) ? -1 : ((x) == (y) ? 0 : 1))
 #endif
 
 #ifndef TIM_SORT_STACK_SIZE
 #define TIM_SORT_STACK_SIZE 128
 #endif
 
-#define SORT_SWAP(x, y)                                                        \
-  {                                                                            \
-    SORT_TYPE __SORT_SWAP_t = (x);                                             \
-    (x) = (y);                                                                 \
-    (y) = __SORT_SWAP_t;                                                       \
-  }
+#define SORT_SWAP(x,y) {SORT_TYPE __SORT_SWAP_t = (x); (x) = (y); (y) = __SORT_SWAP_t;}
 
-/* Common, type-agnostic functions and constants that we don't want to declare
- * twice. */
+
+/* Common, type-agnostic functions and constants that we don't want to declare twice. */
 #ifndef SORT_COMMON_H
 #define SORT_COMMON_H
 
 #ifndef MAX
-#define MAX(x, y) (((x) > (y) ? (x) : (y)))
+#define MAX(x,y) (((x) > (y) ? (x) : (y)))
 #endif
 
 #ifndef MIN
-#define MIN(x, y) (((x) < (y) ? (x) : (y)))
+#define MIN(x,y) (((x) < (y) ? (x) : (y)))
 #endif
 
 static int compute_minrun(const uint64_t);
 
 #ifndef CLZ
-#if defined(__GNUC__) &&                                                       \
-    ((__GNUC__ == 3 && __GNUC_MINOR__ >= 4) || (__GNUC__ > 3))
+#if defined(__GNUC__) && ((__GNUC__ == 3 && __GNUC_MINOR__ >= 4) || (__GNUC__ > 3))
 #define CLZ __builtin_clzll
 #else
 
@@ -147,26 +141,26 @@ static __inline int compute_minrun(const uint64_t size) {
 
 #endif /* SORT_COMMON_H */
 
-#define SORT_CONCAT(x, y) x##_##y
-#define SORT_MAKE_STR1(x, y) SORT_CONCAT(x, y)
-#define SORT_MAKE_STR(x) SORT_MAKE_STR1(SORT_NAME, x)
+#define SORT_CONCAT(x, y) x ## _ ## y
+#define SORT_MAKE_STR1(x, y) SORT_CONCAT(x,y)
+#define SORT_MAKE_STR(x) SORT_MAKE_STR1(SORT_NAME,x)
 
-#define BINARY_INSERTION_FIND SORT_MAKE_STR(binary_insertion_find)
-#define BINARY_INSERTION_SORT_START SORT_MAKE_STR(binary_insertion_sort_start)
-#define BINARY_INSERTION_SORT SORT_MAKE_STR(binary_insertion_sort)
-#define REVERSE_ELEMENTS SORT_MAKE_STR(reverse_elements)
-#define COUNT_RUN SORT_MAKE_STR(count_run)
-#define CHECK_INVARIANT SORT_MAKE_STR(check_invariant)
-#define TIM_SORT SORT_MAKE_STR(tim_sort)
-#define TIM_SORT_RESIZE SORT_MAKE_STR(tim_sort_resize)
-#define TIM_SORT_MERGE SORT_MAKE_STR(tim_sort_merge)
-#define TIM_SORT_COLLAPSE SORT_MAKE_STR(tim_sort_collapse)
+#define BINARY_INSERTION_FIND          SORT_MAKE_STR(binary_insertion_find)
+#define BINARY_INSERTION_SORT_START    SORT_MAKE_STR(binary_insertion_sort_start)
+#define BINARY_INSERTION_SORT          SORT_MAKE_STR(binary_insertion_sort)
+#define REVERSE_ELEMENTS               SORT_MAKE_STR(reverse_elements)
+#define COUNT_RUN                      SORT_MAKE_STR(count_run)
+#define CHECK_INVARIANT                SORT_MAKE_STR(check_invariant)
+#define TIM_SORT                       SORT_MAKE_STR(tim_sort)
+#define TIM_SORT_RESIZE                SORT_MAKE_STR(tim_sort_resize)
+#define TIM_SORT_MERGE                 SORT_MAKE_STR(tim_sort_merge)
+#define TIM_SORT_COLLAPSE              SORT_MAKE_STR(tim_sort_collapse)
 
 #ifndef MAX
-#define MAX(x, y) (((x) > (y) ? (x) : (y)))
+#define MAX(x,y) (((x) > (y) ? (x) : (y)))
 #endif
 #ifndef MIN
-#define MIN(x, y) (((x) < (y) ? (x) : (y)))
+#define MIN(x,y) (((x) < (y) ? (x) : (y)))
 #endif
 
 typedef struct {
@@ -174,14 +168,16 @@ typedef struct {
   size_t length;
 } TIM_SORT_RUN_T;
 
+
 XML_HIDDEN
 void BINARY_INSERTION_SORT(SORT_TYPE *dst, const size_t size);
 XML_HIDDEN
 void TIM_SORT(SORT_TYPE *dst, const size_t size);
 
+
 /* Function used to do a binary search for binary insertion sort */
 static __inline size_t BINARY_INSERTION_FIND(SORT_TYPE *dst, const SORT_TYPE x,
-                                             const size_t size) {
+    const size_t size) {
   size_t l, c, r;
   SORT_TYPE cx;
   l = 0;
@@ -219,10 +215,8 @@ static __inline size_t BINARY_INSERTION_FIND(SORT_TYPE *dst, const SORT_TYPE x,
   }
 }
 
-/* Binary insertion sort, but knowing that the first "start" entries are sorted.
- * Used in timsort. */
-static void BINARY_INSERTION_SORT_START(SORT_TYPE *dst, const size_t start,
-                                        const size_t size) {
+/* Binary insertion sort, but knowing that the first "start" entries are sorted.  Used in timsort. */
+static void BINARY_INSERTION_SORT_START(SORT_TYPE *dst, const size_t start, const size_t size) {
   size_t i;
 
   for (i = start; i < size; i++) {
@@ -235,8 +229,7 @@ static void BINARY_INSERTION_SORT_START(SORT_TYPE *dst, const size_t start,
       continue;
     }
 
-    /* Else we need to find the right place, shift everything over, and squeeze
-     * in */
+    /* Else we need to find the right place, shift everything over, and squeeze in */
     x = dst[i];
     location = BINARY_INSERTION_FIND(dst, x, i);
 
@@ -264,8 +257,7 @@ void BINARY_INSERTION_SORT(SORT_TYPE *dst, const size_t size) {
 
 /* timsort implementation, based on timsort.txt */
 
-static __inline void REVERSE_ELEMENTS(SORT_TYPE *dst, size_t start,
-                                      size_t end) {
+static __inline void REVERSE_ELEMENTS(SORT_TYPE *dst, size_t start, size_t end) {
   while (1) {
     if (start >= end) {
       return;
@@ -365,12 +357,10 @@ typedef struct {
 
 static void TIM_SORT_RESIZE(TEMP_STORAGE_T *store, const size_t new_size) {
   if (store->alloc < new_size) {
-    SORT_TYPE *tempstore =
-        (SORT_TYPE *)realloc(store->storage, new_size * sizeof(SORT_TYPE));
+    SORT_TYPE *tempstore = (SORT_TYPE *)realloc(store->storage, new_size * sizeof(SORT_TYPE));
 
     if (tempstore == NULL) {
-      fprintf(stderr,
-              "Error allocating temporary storage for tim sort: need %lu bytes",
+      fprintf(stderr, "Error allocating temporary storage for tim sort: need %lu bytes",
               (unsigned long)(sizeof(SORT_TYPE) * new_size));
       exit(1);
     }
@@ -380,8 +370,8 @@ static void TIM_SORT_RESIZE(TEMP_STORAGE_T *store, const size_t new_size) {
   }
 }
 
-static void TIM_SORT_MERGE(SORT_TYPE *dst, const TIM_SORT_RUN_T *stack,
-                           const int stack_curr, TEMP_STORAGE_T *store) {
+static void TIM_SORT_MERGE(SORT_TYPE *dst, const TIM_SORT_RUN_T *stack, const int stack_curr,
+                           TEMP_STORAGE_T *store) {
   const size_t A = stack[stack_curr - 2].length;
   const size_t B = stack[stack_curr - 1].length;
   const size_t curr = stack[stack_curr - 2].start;
@@ -433,9 +423,8 @@ static void TIM_SORT_MERGE(SORT_TYPE *dst, const TIM_SORT_RUN_T *stack,
   }
 }
 
-static int TIM_SORT_COLLAPSE(SORT_TYPE *dst, TIM_SORT_RUN_T *stack,
-                             int stack_curr, TEMP_STORAGE_T *store,
-                             const size_t size) {
+static int TIM_SORT_COLLAPSE(SORT_TYPE *dst, TIM_SORT_RUN_T *stack, int stack_curr,
+                             TEMP_STORAGE_T *store, const size_t size) {
   while (1) {
     size_t A, B, C, D;
     int ABC, BCD, CD;
@@ -498,9 +487,12 @@ static int TIM_SORT_COLLAPSE(SORT_TYPE *dst, TIM_SORT_RUN_T *stack,
   return stack_curr;
 }
 
-static __inline int PUSH_NEXT(SORT_TYPE *dst, const size_t size,
-                              TEMP_STORAGE_T *store, const size_t minrun,
-                              TIM_SORT_RUN_T *run_stack, size_t *stack_curr,
+static __inline int PUSH_NEXT(SORT_TYPE *dst,
+                              const size_t size,
+                              TEMP_STORAGE_T *store,
+                              const size_t minrun,
+                              TIM_SORT_RUN_T *run_stack,
+                              size_t *stack_curr,
                               size_t *curr) {
   size_t len = COUNT_RUN(dst, *curr, size);
   size_t run = minrun;

@@ -223,26 +223,26 @@ test.write("""/*
 #define XML_DEPRECATED
 
 #include "libxml.h"
-#include <include/libxml/HTMLparser.h>
-#include <include/libxml/HTMLtree.h>
-#include <include/libxml/c14n.h>
-#include <include/libxml/catalog.h>
-#include <include/libxml/debugXML.h>
-#include <include/libxml/parserInternals.h>
-#include <include/libxml/pattern.h>
-#include <include/libxml/relaxng.h>
-#include <include/libxml/schematron.h>
-#include <include/libxml/uri.h>
-#include <include/libxml/xinclude.h>
-#include <include/libxml/xlink.h>
-#include <include/libxml/xmlmodule.h>
-#include <include/libxml/xmlreader.h>
-#include <include/libxml/xmlsave.h>
-#include <include/libxml/xmlschemas.h>
-#include <include/libxml/xmlschemastypes.h>
-#include <include/libxml/xmlwriter.h>
-#include <include/libxml/xpathInternals.h>
-#include <include/libxml/xpointer.h>
+#include <libxml/HTMLparser.h>
+#include <libxml/HTMLtree.h>
+#include <libxml/c14n.h>
+#include <libxml/catalog.h>
+#include <libxml/debugXML.h>
+#include <libxml/parserInternals.h>
+#include <libxml/pattern.h>
+#include <libxml/relaxng.h>
+#include <libxml/schematron.h>
+#include <libxml/uri.h>
+#include <libxml/xinclude.h>
+#include <libxml/xlink.h>
+#include <libxml/xmlmodule.h>
+#include <libxml/xmlreader.h>
+#include <libxml/xmlsave.h>
+#include <libxml/xmlschemas.h>
+#include <libxml/xmlschemastypes.h>
+#include <libxml/xmlwriter.h>
+#include <libxml/xpathInternals.h>
+#include <libxml/xpointer.h>
 
 static void
 ignoreError(void *userData ATTRIBUTE_UNUSED,

@@ -1,33 +1,66 @@
 name: Windows
-
-on:
-  push:
-    branches: [ "master", "develop" ]
-  pull_request:
-    branches: [ "master", "develop" ]
-
-env:
-  BUILD_TYPE: Release
-
+on: [push, pull_request]
 jobs:
-  build:
-    runs-on: windows-latest
+  cmake:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 80
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows MSVC Win32
+            os: windows-latest
+            compiler: cl
+            cmake-args: -A Win32
+
+          - name: Windows MSVC Win64
+            os: windows-latest
+            compiler: cl
+            cmake-args: -A x64
+
+          - name: Windows MSVC ARM64
+            os: windows-11-arm
+            compiler: cl
+            cmake-args: -A ARM64
+
+          - name: Windows GCC
+            os: windows-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -G Ninja
+
+          - name: Windows Clang C++11
+            os: windows-latest
+            compiler: clang
+            cxx-compiler: clang++
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11
+
+          - name: Windows Clang C++17
+            os: windows-latest
+            compiler: clang
+            cxx-compiler: clang++
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17
+
+          - name: Windows Clang C++23
+            os: windows-latest
+            compiler: clang
+            cxx-compiler: clang++
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=23
 
     steps:
-    - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Configure CMake
-      run: cmake -B build -S ${{github.workspace}} -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+      - name: Configure
+        run: cmake -S . -B build ${{ matrix.cmake-args }}
+        env:
+          CC: ${{ matrix.compiler }}
+          CXX: ${{ matrix.cxx-compiler }}
 
+      - name: Build
+        run: cmake --build build
 
-    - name: Build with MSVC
-      run: cmake --build build --config ${{env.BUILD_TYPE}}
-
-    - name: Test
-      run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure
-      working-directory: build
-
-    - name: List build folder tree 
-      run: tree /f
-      shell: cmd
-
+      - name: Test
+        run: ctest -C Debug --output-on-failure --max-width 120
+        working-directory: build

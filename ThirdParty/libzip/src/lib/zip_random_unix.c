@@ -1,6 +1,6 @@
 /*
   zip_random_unix.c -- fill the user's buffer with random stuff (Unix version)
-  Copyright (C) 2016-2023 Dieter Baron and Thomas Klausner
+  Copyright (C) 2016-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -43,13 +43,15 @@
 
 #ifndef HAVE_SECURE_RANDOM
 ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
-  arc4random_buf(buffer, length);
-  return true;
+    arc4random_buf(buffer, length);
+    return true;
 }
 #endif
 
 #ifndef HAVE_RANDOM_UINT32
-zip_uint32_t zip_random_uint32(void) { return arc4random(); }
+zip_uint32_t zip_random_uint32(void) {
+    return arc4random();
+}
 #endif
 
 #else /* HAVE_ARC4RANDOM */
@@ -59,19 +61,19 @@ zip_uint32_t zip_random_uint32(void) { return arc4random(); }
 #include <unistd.h>
 
 ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
-  int fd;
+    int fd;
 
-  if ((fd = open("/dev/urandom", O_RDONLY)) < 0) {
-    return false;
-  }
+    if ((fd = open("/dev/urandom", O_RDONLY)) < 0) {
+        return false;
+    }
 
-  if (read(fd, buffer, length) != length) {
+    if (read(fd, buffer, length) != length) {
+        close(fd);
+        return false;
+    }
+
     close(fd);
-    return false;
-  }
-
-  close(fd);
-  return true;
+    return true;
 }
 #endif
 
@@ -84,20 +86,20 @@ ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
 #endif
 
 zip_uint32_t zip_random_uint32(void) {
-  static bool seeded = false;
+    static bool seeded = false;
 
-  zip_uint32_t value;
+    zip_uint32_t value;
 
-  if (zip_secure_random((zip_uint8_t *)&value, sizeof(value))) {
-    return value;
-  }
+    if (zip_secure_random((zip_uint8_t *)&value, sizeof(value))) {
+        return value;
+    }
 
-  if (!seeded) {
-    srandom((unsigned int)time(NULL));
-    seeded = true;
-  }
+    if (!seeded) {
+        srandom((unsigned int)time(NULL));
+        seeded = true;
+    }
 
-  return (zip_uint32_t)random();
+    return (zip_uint32_t)random();
 }
 #endif
 

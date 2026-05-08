@@ -1,35 +1,25 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKLINE_H
 #define SIMULINKLINE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Logger.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"
 #include "SimulinkPort.h"
-#include "Type.h"
+#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
+ * @class SimulinkLine
  * @brief A Simulink line.
  */
-class APIEXPORT SimulinkLine final : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkLine final : public SimulinkElementBase
 {
 public:
   SimulinkLine();
@@ -37,34 +27,65 @@ public:
   SimulinkLine(
     std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
   SimulinkLine& operator=(const SimulinkLine&) = delete;
-  SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_);
-  SimulinkElementType getType() const override;
-  std::string toString() const override;
-  ErrorCode remove(std::shared_ptr<SimulinkElementBase> element) override;
-  ErrorCode add(std::shared_ptr<SimulinkElementBase> element) override;
-  Index getID() const override;
+  SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
 
   /**
-   * @brief Check if the line ID matches the given identifier.
-   * @param id The identifier to compare against.
-   * @return True if the line ID equals the given id, false otherwise.
+   * 
    */
-  bool contains(const Index& id) const override;
+  SimulinkElementType GetElementType() const override;
 
   /**
-   * @brief Check if the line is connected to both source and
-   * destination ports.
-   * @details A line is considered connected if both the source and
+   * 
+   */
+  std::string ToString() const override;
+
+  /**
+   * 
+   */
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+
+  /**
+   * 
+   */
+  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+
+  /**
+   * 
+   */
+  IdType GetElementId() const override;
+
+  /**
+   * Check if the line Id matches the given identifier.
+   */
+  bool Contains(const IdType& id) const override;
+
+  /**
+   * Check if the line is connected to both source and
+   * destination ports. A line is considered connected if both the source and
    * destination ports are non-null (set during creation).
-   * @return True if both ports are valid, false otherwise.
    */
-  bool isConnected();
+  bool IsConnected();
+
+  /**
+   * 
+   */
+  std::shared_ptr<SimulinkPort> GetSourcePort();
+
+  /**
+   * 
+   */
+  std::shared_ptr<SimulinkPort> GetDestPort();
+  
+  /**
+   * 
+   */
+  Logger& GetLogger();
 
 private:
-  Logger& l;
-  Index id;
-  std::shared_ptr<SimulinkPort> sourcePort;
-  std::shared_ptr<SimulinkPort> destPort;
+  IdType Id;
+  Logger& logger;
+  std::shared_ptr<SimulinkPort> SourcePort;
+  std::shared_ptr<SimulinkPort> DestPort;
 };
 
 SLXIO_ABI_NAMESPACE_END

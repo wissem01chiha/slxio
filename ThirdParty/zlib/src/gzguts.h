@@ -1,5 +1,5 @@
 /* gzguts.h -- zlib internal header definitions for gz* operations
- * Copyright (C) 2004-2019 Mark Adler
+ * Copyright (C) 2004-2026 Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
@@ -15,6 +15,18 @@
 #  define ZLIB_INTERNAL __attribute__((visibility ("hidden")))
 #else
 #  define ZLIB_INTERNAL
+#endif
+
+#if defined(_WIN32)
+#  ifndef WIN32_LEAN_AND_MEAN
+#    define WIN32_LEAN_AND_MEAN
+#  endif
+#  ifndef _CRT_SECURE_NO_WARNINGS
+#    define _CRT_SECURE_NO_WARNINGS
+#  endif
+#  ifndef _CRT_NONSTDC_NO_DEPRECATE
+#    define _CRT_NONSTDC_NO_DEPRECATE
+#  endif
 #endif
 
 #include <stdio.h>
@@ -36,17 +48,11 @@
 
 #if defined(__TURBOC__) || defined(_MSC_VER) || defined(_WIN32)
 #  include <io.h>
+#  include <sys/stat.h>
 #endif
 
-#if defined(_WIN32)
+#if defined(_WIN32) && !defined(WIDECHAR)
 #  define WIDECHAR
-#endif
-
-#ifdef WINAPI_FAMILY
-#  define open _open
-#  define read _read
-#  define write _write
-#  define close _close
 #endif
 
 #ifdef NO_DEFLATE       /* for compatibility with old definition */
@@ -177,7 +183,9 @@ typedef struct {
     unsigned char *out;     /* output buffer (double-sized when reading) */
     int direct;             /* 0 if processing gzip, 1 if transparent */
         /* just for reading */
+    int junk;               /* -1 = start, 1 = junk candidate, 0 = in gzip */
     int how;                /* 0: get header, 1: copy, 2: decompress */
+    int again;              /* true if EAGAIN or EWOULDBLOCK on last i/o */
     z_off64_t start;        /* where the gzip data started, for rewinding */
     int eof;                /* true if end of input file reached */
     int past;               /* true if read requested past end */
@@ -187,7 +195,6 @@ typedef struct {
     int reset;              /* true if a reset is pending after a Z_FINISH */
         /* seek request */
     z_off64_t skip;         /* amount to skip (already rewound if backwards) */
-    int seek;               /* true if seek request pending */
         /* error information */
     int err;                /* error code */
     char *msg;              /* error message */
@@ -205,9 +212,5 @@ char ZLIB_INTERNAL *gz_strwinerror(DWORD error);
 /* GT_OFF(x), where x is an unsigned value, is true if x > maximum z_off64_t
    value -- needed when comparing unsigned to z_off64_t, which is signed
    (possible z_off64_t types off_t, off64_t, and long are all signed) */
-#ifdef INT_MAX
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > INT_MAX)
-#else
 unsigned ZLIB_INTERNAL gz_intmax(void);
-#  define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > gz_intmax())
-#endif
+#define GT_OFF(x) (sizeof(int) == sizeof(z_off64_t) && (x) > gz_intmax())

@@ -1,6 +1,6 @@
 /*
   zip_source_supports.c -- check for supported functions
-  Copyright (C) 2014-2023 Dieter Baron and Thomas Klausner
+  Copyright (C) 2014-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,38 +31,41 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include <stdarg.h>
 
 #include "zipint.h"
 
-zip_int64_t zip_source_supports(zip_source_t *src) { return src->supports; }
+
+zip_int64_t zip_source_supports(zip_source_t *src) {
+    return src->supports;
+}
 
 bool zip_source_supports_reopen(zip_source_t *src) {
-  return (zip_source_supports(src) &
-          ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_SUPPORTS_REOPEN)) != 0;
+    return (zip_source_supports(src) & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_SUPPORTS_REOPEN)) != 0;
 }
 
-ZIP_EXTERN zip_int64_t zip_source_make_command_bitmap(zip_source_cmd_t cmd0,
-                                                      ...) {
-  zip_int64_t bitmap;
-  va_list ap;
+ZIP_EXTERN zip_int64_t zip_source_make_command_bitmap(zip_source_cmd_t cmd0, ...) {
+    zip_int64_t bitmap;
+    va_list ap;
 
-  bitmap = ZIP_SOURCE_MAKE_COMMAND_BITMASK(cmd0);
+    bitmap = ZIP_SOURCE_MAKE_COMMAND_BITMASK(cmd0);
 
-  va_start(ap, cmd0);
-  for (;;) {
-    int cmd = va_arg(ap, int);
-    if (cmd < 0) {
-      break;
+
+    va_start(ap, cmd0);
+    for (;;) {
+        int cmd = va_arg(ap, int);
+        if (cmd < 0) {
+            break;
+        }
+        bitmap |= ZIP_SOURCE_MAKE_COMMAND_BITMASK(cmd);
     }
-    bitmap |= ZIP_SOURCE_MAKE_COMMAND_BITMASK(cmd);
-  }
-  va_end(ap);
+    va_end(ap);
 
-  return bitmap;
+    return bitmap;
 }
+
 
 ZIP_EXTERN int zip_source_is_seekable(zip_source_t *src) {
-  return ZIP_SOURCE_CHECK_SUPPORTED(zip_source_supports(src->src),
-                                    ZIP_SOURCE_SEEK);
+    return ZIP_SOURCE_CHECK_SUPPORTED(zip_source_supports(src->src), ZIP_SOURCE_SEEK);
 }

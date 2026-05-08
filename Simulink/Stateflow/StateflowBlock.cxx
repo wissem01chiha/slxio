@@ -20,9 +20,9 @@ std::shared_ptr<StateflowChart> StateflowBlock::getChart()
   return chart;
 }
 
-ErrorCode StateflowBlock::remove()
+ReturnType StateflowBlock::RemoveElement()
 {
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,0 +1,44 @@
+NAME 
+  Misc
+GROUP
+  Simulink
+LIBRARY_NAME
+  SimulinkMisc
+DESCRIPTION
+  Simulink Misc Support Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem Chiha
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  FALSE
+ENABLE_BUILD
+  TRUE
+EXTERNAL_BUILD
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
+CLASSES
+  CoderInfo
+  SimulationSettings
+  EditorSettings
+SOURCES
+HEADERS
+  CoderInfo
+  SimulationSettings
+CONFIG_HEADERS
+CMAKE_MODULES_DIRS
+PUBLIC_DEPENDS
+  Common::System
+  Common::Core
+PRIVATE_DEPENDS
+TEST_DEPENDS
+  ThirdParty::doctest
+
+  

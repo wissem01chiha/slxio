@@ -1,0 +1,39 @@
+NAME 
+  Core
+GROUP
+  Io
+LIBRARY_NAME
+  IoCore
+DESCRIPTION  
+  File Readers and Writers Core Module 
+LICENSE   
+  Apache-2.0 
+VERSION 
+  0.1.0 
+MAINTAINER 
+  Wissem Chiha
+ENABLE_BUILD 
+  TRUE
+ENABLE_TEST
+  TRUE 
+INSTALL_HEADERS 
+  TRUE 
+INSTALL_TARGETS 
+  TRUE 
+CLASSES
+	SimulinkWriter
+  SimulinkArrayWriter
+  SimulinkParserBase
+SOURCES
+HEADERS
+  SimulinkWriter.h
+  SimulinkArrayWriter.h
+  SimulinkParserBase.h
+CONFIG_HEADERS
+PUBLIC_DEPENDS
+  Common::System 
+  Common::Core
+  Common::Data
+  Simulink::Core 
+PRIVATE_DEPENDS
+TEST_DEPENDS

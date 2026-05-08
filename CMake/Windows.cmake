@@ -1,13 +1,3 @@
-if (WIN32 AND MSVC)
-  cmake_policy (SET CMP0135 NEW)
-  if (NOT CMAKE_BUILD_TYPE)
-    set (
-      CMAKE_BUILD_TYPE
-      Release
-      CACHE STRING "Build type" FORCE)
-  endif ()
-  set (
-    CMAKE_CONFIGURATION_TYPES
-    Release
-    CACHE STRING "" FORCE)
-endif ()
+if(WIN32 AND MSVC)
+  cmake_policy(SET CMP0135 NEW)
+endif()

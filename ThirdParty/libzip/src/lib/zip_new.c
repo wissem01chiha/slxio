@@ -31,41 +31,43 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include <stdlib.h>
 
 #include "zipint.h"
+
 
 /* _zip_new:
    creates a new zipfile struct, and sets the contents to zero; returns
    the new struct. */
 
 zip_t *_zip_new(zip_error_t *error) {
-  zip_t *za;
+    zip_t *za;
 
-  za = (zip_t *)malloc(sizeof(struct zip));
-  if (za == NULL) {
-    zip_error_set(error, ZIP_ER_MEMORY, 0);
-    return NULL;
-  }
+    za = (zip_t *)malloc(sizeof(struct zip));
+    if (za == NULL) {
+        zip_error_set(error, ZIP_ER_MEMORY, 0);
+        return NULL;
+    }
 
-  if ((za->names = _zip_hash_new(error)) == NULL) {
-    free(za);
-    return NULL;
-  }
+    if ((za->names = _zip_hash_new(error)) == NULL) {
+        free(za);
+        return NULL;
+    }
 
-  za->src = NULL;
-  za->open_flags = 0;
-  zip_error_init(&za->error);
-  za->flags = za->ch_flags = 0;
-  za->default_password = NULL;
-  za->comment_orig = za->comment_changes = NULL;
-  za->comment_changed = 0;
-  za->nentry = za->nentry_alloc = 0;
-  za->entry = NULL;
-  za->nopen_source = za->nopen_source_alloc = 0;
-  za->open_source = NULL;
-  za->progress = NULL;
-  za->torrent_mtime = 0;
+    za->src = NULL;
+    za->open_flags = 0;
+    zip_error_init(&za->error);
+    za->flags = za->ch_flags = 0;
+    za->default_password = NULL;
+    za->comment_orig = za->comment_changes = NULL;
+    za->comment_changed = 0;
+    za->nentry = za->nentry_alloc = 0;
+    za->entry = NULL;
+    za->nopen_source = za->nopen_source_alloc = 0;
+    za->open_source = NULL;
+    za->progress = NULL;
+    za->torrent_mtime = 0;
 
-  return za;
+    return za;
 }

@@ -1,19 +1,30 @@
-#=============================================================================
-# Copyright 2025-2026 Wissem Chiha
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http:#www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-# implied. See the License for the specific language governing
-# permissions and limitations under the License.
-#=============================================================================
-
 #!/bin/bash
 
 set -e
+
+name="libzip"
+repository="https://github.com/nih-at/libzip"
+subtree="$name/src"
+version="1.11.4"
+tag=""
+files=(
+    "AUTHORS"
+    "LICENSE"
+    "THANKS"
+    "README.md"
+    "config.h.in"
+    "libzip-config.cmake.in"
+    "zipconf.h.in"
+    "lib/compat.h"
+    "lib/zip.h"
+    "lib/zip_add_dir.c"
+    "lib/zip_add_entry.c"
+    "src/diff_output.c"
+    "src/diff_output.h"
+    "src/getopt.c"
+    "src/getopt.h"
+    "src/zipcmp.c"
+    "src/zipmerge.c"
+    "src/ziptool.c"
+    
+)

@@ -12,6 +12,7 @@
 #cmakedefine HAVE__FILENO
 #cmakedefine HAVE__FSEEKI64
 #cmakedefine HAVE__FSTAT64
+#cmakedefine HAVE__FTELLI64
 #cmakedefine HAVE__SETMODE
 #cmakedefine HAVE__SNPRINTF
 #cmakedefine HAVE__SNPRINTF_S
@@ -40,7 +41,6 @@
 #cmakedefine HAVE_LOCALTIME_R
 #cmakedefine HAVE_LOCALTIME_S
 #cmakedefine HAVE_MEMCPY_S
-#cmakedefine HAVE_MBEDTLS
 #cmakedefine HAVE_MKSTEMP
 #cmakedefine HAVE_OPENSSL
 #cmakedefine HAVE_SETMODE

@@ -16,25 +16,24 @@
 #define IN_LIBXML
 #include "libxml.h"
 
-#include <include/libxml/xmlerror.h>
-#include <include/libxml/xmlmemory.h>
-#include <include/libxml/xmlmodule.h>
-#include <include/libxml/xmlstring.h>
 #include <string.h>
+#include <libxml/xmlmodule.h>
+#include <libxml/xmlmemory.h>
+#include <libxml/xmlerror.h>
+#include <libxml/xmlstring.h>
 
-#include "include/private/error.h"
+#include "private/error.h"
 
 #ifdef LIBXML_MODULES_ENABLED
 
 struct _xmlModule {
-  unsigned char *name;
-  void *handle;
+    unsigned char *name;
+    void *handle;
 };
 
 static void *xmlModulePlatformOpen(const char *name);
 static int xmlModulePlatformClose(void *handle);
-static int xmlModulePlatformSymbol(void *handle, const char *name,
-                                   void **result);
+static int xmlModulePlatformSymbol(void *handle, const char *name, void **result);
 
 /************************************************************************
  *									*
@@ -57,24 +56,26 @@ static int xmlModulePlatformSymbol(void *handle, const char *name,
  * @param options  a set of xmlModuleOption
  * @returns a handle for the module or NULL in case of error
  */
-xmlModule *xmlModuleOpen(const char *name, int options ATTRIBUTE_UNUSED) {
-  xmlModulePtr module;
+xmlModule *
+xmlModuleOpen(const char *name, int options ATTRIBUTE_UNUSED)
+{
+    xmlModulePtr module;
 
-  module = (xmlModulePtr)xmlMalloc(sizeof(xmlModule));
-  if (module == NULL)
-    return (NULL);
+    module = (xmlModulePtr) xmlMalloc(sizeof(xmlModule));
+    if (module == NULL)
+        return (NULL);
 
-  memset(module, 0, sizeof(xmlModule));
+    memset(module, 0, sizeof(xmlModule));
 
-  module->handle = xmlModulePlatformOpen(name);
+    module->handle = xmlModulePlatformOpen(name);
 
-  if (module->handle == NULL) {
-    xmlFree(module);
-    return (NULL);
-  }
+    if (module->handle == NULL) {
+        xmlFree(module);
+        return(NULL);
+    }
 
-  module->name = xmlStrdup((const xmlChar *)name);
-  return (module);
+    module->name = xmlStrdup((const xmlChar *) name);
+    return (module);
 }
 
 /**
@@ -92,18 +93,20 @@ xmlModule *xmlModuleOpen(const char *name, int options ATTRIBUTE_UNUSED) {
  * @param symbol  the resulting symbol address
  * @returns 0 if the symbol was found, or -1 in case of error
  */
-int xmlModuleSymbol(xmlModule *module, const char *name, void **symbol) {
-  int rc = -1;
+int
+xmlModuleSymbol(xmlModule *module, const char *name, void **symbol)
+{
+    int rc = -1;
 
-  if ((NULL == module) || (symbol == NULL) || (name == NULL))
+    if ((NULL == module) || (symbol == NULL) || (name == NULL))
+        return rc;
+
+    rc = xmlModulePlatformSymbol(module->handle, name, symbol);
+
+    if (rc == -1)
+        return rc;
+
     return rc;
-
-  rc = xmlModulePlatformSymbol(module->handle, name, symbol);
-
-  if (rc == -1)
-    return rc;
-
-  return rc;
 }
 
 /**
@@ -116,19 +119,21 @@ int xmlModuleSymbol(xmlModule *module, const char *name, void **symbol) {
  * @returns 0 in case of success, -1 in case of argument error and -2
  *         if the module could not be closed/unloaded.
  */
-int xmlModuleClose(xmlModule *module) {
-  int rc;
+int
+xmlModuleClose(xmlModule *module)
+{
+    int rc;
 
-  if (NULL == module)
-    return -1;
+    if (NULL == module)
+        return -1;
 
-  rc = xmlModulePlatformClose(module->handle);
+    rc = xmlModulePlatformClose(module->handle);
 
-  if (rc != 0)
-    return -2;
+    if (rc != 0)
+        return -2;
 
-  rc = xmlModuleFree(module);
-  return (rc);
+    rc = xmlModuleFree(module);
+    return (rc);
 }
 
 /**
@@ -141,20 +146,22 @@ int xmlModuleClose(xmlModule *module) {
  * @param module  the module handle
  * @returns 0 in case of success, -1 in case of argument error
  */
-int xmlModuleFree(xmlModule *module) {
-  if (NULL == module)
-    return -1;
+int
+xmlModuleFree(xmlModule *module)
+{
+    if (NULL == module)
+        return -1;
 
-  xmlFree(module->name);
-  xmlFree(module);
+    xmlFree(module->name);
+    xmlFree(module);
 
-  return (0);
+    return (0);
 }
 
 #if defined(HAVE_DLOPEN) && !defined(_WIN32)
 #include <dlfcn.h>
 
-#ifndef RTLD_GLOBAL /* For Tru64 UNIX 4.0 */
+#ifndef RTLD_GLOBAL            /* For Tru64 UNIX 4.0 */
 #define RTLD_GLOBAL 0
 #endif
 
@@ -163,8 +170,10 @@ int xmlModuleFree(xmlModule *module) {
  * @returns a handle on success, and zero on error.
  */
 
-static void *xmlModulePlatformOpen(const char *name) {
-  return dlopen(name, RTLD_GLOBAL | RTLD_NOW);
+static void *
+xmlModulePlatformOpen(const char *name)
+{
+    return dlopen(name, RTLD_GLOBAL | RTLD_NOW);
 }
 
 /*
@@ -173,7 +182,11 @@ static void *xmlModulePlatformOpen(const char *name) {
  * @returns 0 on success, and non-zero on error.
  */
 
-static int xmlModulePlatformClose(void *handle) { return dlclose(handle); }
+static int
+xmlModulePlatformClose(void *handle)
+{
+    return dlclose(handle);
+}
 
 /*
  * http://www.opengroup.org/onlinepubs/009695399/functions/dlsym.html
@@ -181,32 +194,39 @@ static int xmlModulePlatformClose(void *handle) { return dlclose(handle); }
  * @returns 0 on success and the loaded symbol in result, and -1 on error.
  */
 
-static int xmlModulePlatformSymbol(void *handle, const char *name,
-                                   void **symbol) {
-  *symbol = dlsym(handle, name);
-  if (dlerror() != NULL) {
-    return -1;
-  }
-  return 0;
+static int
+xmlModulePlatformSymbol(void *handle, const char *name, void **symbol)
+{
+    *symbol = dlsym(handle, name);
+    if (dlerror() != NULL) {
+	return -1;
+    }
+    return 0;
 }
 
 #else /* ! HAVE_DLOPEN */
 
-#ifdef HAVE_SHLLOAD /* HAVE_SHLLOAD */
+#ifdef HAVE_SHLLOAD             /* HAVE_SHLLOAD */
 #include <dl.h>
 /*
  * @returns a handle on success, and zero on error.
  */
 
-static void *xmlModulePlatformOpen(const char *name) {
-  return shl_load(name, BIND_IMMEDIATE, 0L);
+static void *
+xmlModulePlatformOpen(const char *name)
+{
+    return shl_load(name, BIND_IMMEDIATE, 0L);
 }
 
 /*
  * @returns 0 on success, and non-zero on error.
  */
 
-static int xmlModulePlatformClose(void *handle) { return shl_unload(handle); }
+static int
+xmlModulePlatformClose(void *handle)
+{
+    return shl_unload(handle);
+}
 
 /*
  * http://docs.hp.com/en/B2355-90683/shl_load.3X.html
@@ -214,13 +234,14 @@ static int xmlModulePlatformClose(void *handle) { return shl_unload(handle); }
  * @returns 0 on success and the loaded symbol in result, and -1 on error.
  */
 
-static int xmlModulePlatformSymbol(void *handle, const char *name,
-                                   void **symbol) {
-  int rc;
+static int
+xmlModulePlatformSymbol(void *handle, const char *name, void **symbol)
+{
+    int rc;
 
-  errno = 0;
-  rc = shl_findsym(&handle, name, TYPE_UNDEFINED, symbol);
-  return rc;
+    errno = 0;
+    rc = shl_findsym(&handle, name, TYPE_UNDEFINED, symbol);
+    return rc;
 }
 
 #endif /* HAVE_SHLLOAD */
@@ -235,19 +256,23 @@ static int xmlModulePlatformSymbol(void *handle, const char *name,
  * @returns a handle on success, and zero on error.
  */
 
-static void *xmlModulePlatformOpen(const char *name) {
-  return LoadLibraryA(name);
+static void *
+xmlModulePlatformOpen(const char *name)
+{
+    return LoadLibraryA(name);
 }
 
 /*
  * @returns 0 on success, and non-zero on error.
  */
 
-static int xmlModulePlatformClose(void *handle) {
-  int rc;
+static int
+xmlModulePlatformClose(void *handle)
+{
+    int rc;
 
-  rc = FreeLibrary(handle);
-  return (0 == rc);
+    rc = FreeLibrary(handle);
+    return (0 == rc);
 }
 
 /*
@@ -256,12 +281,13 @@ static int xmlModulePlatformClose(void *handle) {
  * @returns 0 on success and the loaded symbol in result, and -1 on error.
  */
 
-static int xmlModulePlatformSymbol(void *handle, const char *name,
-                                   void **symbol) {
-  FARPROC proc = GetProcAddress(handle, name);
+static int
+xmlModulePlatformSymbol(void *handle, const char *name, void **symbol)
+{
+    FARPROC proc = GetProcAddress(handle, name);
 
-  memcpy(symbol, &proc, sizeof(proc));
-  return (NULL == *symbol) ? -1 : 0;
+    memcpy(symbol, &proc, sizeof(proc));
+    return (NULL == *symbol) ? -1 : 0;
 }
 
 #endif /* _WIN32 */

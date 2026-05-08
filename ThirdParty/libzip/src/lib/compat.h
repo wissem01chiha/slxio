@@ -3,7 +3,7 @@
 
 /*
   compat.h -- compatibility defines.
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -34,15 +34,15 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "zipconf.h"
-
-#include "config.h"
-
 /* to have *_MAX definitions for all types when compiling with g++ */
 #define __STDC_LIMIT_MACROS
 
 /* to have ISO C secure library functions */
 #define __STDC_WANT_LIB_EXT1__ 1
+
+#include "config.h"
+
+#include <sys/stat.h>
 
 #ifdef _WIN32
 #ifndef ZIP_EXTERN
@@ -90,8 +90,7 @@ typedef char bool;
 #if defined(HAVE__DUP)
 #define dup _dup
 #endif
-/* crashes reported when using fdopen instead of _fdopen on Windows/Visual
- * Studio 10/Win64 */
+/* crashes reported when using fdopen instead of _fdopen on Windows/Visual Studio 10/Win64 */
 #if defined(HAVE__FDOPEN)
 #define fdopen _fdopen
 #endif
@@ -102,8 +101,7 @@ typedef char bool;
 #define snprintf _snprintf
 #endif
 #if !defined(HAVE__SNWPRINTF_S)
-#define _snwprintf_s(buf, bufsz, len, fmt, ...)                                \
-  (_snwprintf((buf), (len), (fmt), __VA_ARGS__))
+#define _snwprintf_s(buf, bufsz, len, fmt, ...) (_snwprintf((buf), (len), (fmt), __VA_ARGS__))
 #endif
 #if defined(HAVE__STRDUP)
 #if !defined(HAVE_STRDUP) || defined(_WIN32)
@@ -125,19 +123,20 @@ typedef char bool;
 #endif
 #endif
 
-#if defined(HAVE__FSEEKI64) && defined(HAVE__FSTAT64) && defined(HAVE__SEEK64)
+
+#if defined(HAVE__FSEEKI64) && defined(HAVE__FSTAT64) && defined(HAVE__FTELLI64)
 /* Windows API using int64 */
 typedef zip_int64_t zip_off_t;
 typedef struct _stat64 zip_os_stat_t;
 #define zip_os_stat _stat64
 #define zip_os_fstat _fstat64
-#define zip_os_seek _fseeki64
+#define zip_os_fseek _fseeki64
+#define zip_os_ftell _ftelli64
 #define ZIP_FSEEK_MAX ZIP_INT64_MAX
 #define ZIP_FSEEK_MIN ZIP_INT64_MIN
 #else
 
 /* Normal API */
-#include <sys/stat.h>
 typedef struct stat zip_os_stat_t;
 #define zip_os_fstat fstat
 #define zip_os_stat stat
@@ -181,6 +180,7 @@ typedef long zip_off_t;
 #define ftello(s) ((long)ftell((s)))
 #endif
 
+
 #ifdef HAVE_LOCALTIME_S
 #ifdef _WIN32
 /* Windows is incompatible to the C11 standard, hurray! */
@@ -197,14 +197,12 @@ typedef long zip_off_t;
 #endif
 
 #ifndef HAVE_MEMCPY_S
-#define memcpy_s(dest, destsz, src, count)                                     \
-  (memcpy((dest), (src), (count)) == NULL)
+#define memcpy_s(dest, destsz, src, count) (memcpy((dest), (src), (count)) == NULL)
 #endif
 
 #ifndef HAVE_SNPRINTF_S
 #ifdef HAVE__SNPRINTF_S
-#define snprintf_s(buf, bufsz, fmt, ...)                                       \
-  (_snprintf_s((buf), (bufsz), (bufsz), (fmt), __VA_ARGS__))
+#define snprintf_s(buf, bufsz, fmt, ...) (_snprintf_s((buf), (bufsz), (bufsz), (fmt), __VA_ARGS__))
 #else
 #define snprintf_s snprintf
 #endif
@@ -224,14 +222,13 @@ typedef long zip_off_t;
 
 #ifndef HAVE_STRERROR_S
 #define strerrorlen_s(errnum) (strlen(strerror(errnum)))
-#define strerror_s(buf, bufsz, errnum)                                         \
-  ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)),                 \
-   (buf)[(bufsz)-1] = '\0', strerrorlen_s(errnum) >= (bufsz))
+#define strerror_s(buf, bufsz, errnum) ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)), (buf)[(bufsz) - 1] = '\0', strerrorlen_s(errnum) >= (bufsz))
 #else
 #ifndef HAVE_STRERRORLEN_S
 #define strerrorlen_s(errnum) 8192
 #endif
 #endif
+
 
 #ifndef SIZE_MAX
 #if SIZEOF_SIZE_T == 8
@@ -262,11 +259,11 @@ typedef long zip_off_t;
 #endif
 
 #ifndef S_ISDIR
-#define S_ISDIR(mode) (((mode)&S_IFMT) == S_IFDIR)
+#define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)
 #endif
 
 #ifndef S_ISREG
-#define S_ISREG(mode) (((mode)&S_IFMT) == S_IFREG)
+#define S_ISREG(mode) (((mode) & S_IFMT) == S_IFREG)
 #endif
 
 #endif /* compat.h */

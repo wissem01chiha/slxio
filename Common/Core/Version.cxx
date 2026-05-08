@@ -1,30 +1,54 @@
 #include "Version.h"
+#include "SimulinkVersion.h"
+#include "VersionMacro.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-uint32 Version::getMajorVersion()
+UInt32 Version::GetMajorVersion()
 {
-  return (uint32)SLXIO_VERSION_MAJOR;
+  return (UInt32)SLXIO_VERSION_MAJOR;
 }
 
-uint32 Version::getMinorVersion()
+UInt32 Version::GetMinorVersion()
 {
-  return (uint32)SLXIO_VERSION_MINOR;
+  return (UInt32)SLXIO_VERSION_MINOR;
 }
 
-uint32 Version::getPatchVersion()
+UInt32 Version::GetPatchVersion()
 {
-  return (uint32)SLXIO_VERSION_PATCH;
+  return (UInt32)SLXIO_VERSION_PATCH;
 }
-bool Version::isMajorVersionLessThan(uint32 version)
+bool Version::IsMajorVersionLessThan(UInt32 version)
 {
   return SLXIO_VERSION_MAJOR < version;
 }
 
-bool Version::isMinorVersionLessThan(uint32 version)
+bool Version::IsMinorVersionLessThan(UInt32 version)
 {
   return SLXIO_VERSION_MINOR < version;
+}
+
+std::string Version::GetVersionString()
+{
+  return std::to_string(GetMajorVersion()) + "." +
+    std::to_string(GetMinorVersion()) + "." + std::to_string(GetPatchVersion());
+}
+
+UInt8 Version::GetSimulinkVersion()
+{
+  return (UInt8)SIMULINK_VERSION_YEAR;
+}
+
+const char* Version::GetSimulinkRelease()
+{
+  return SIMULINK_VERSION_RELEASE;
+}
+
+std::string Version::GetSimulinkVersionString()
+{
+  return std::to_string(GetSimulinkVersion()) +
+    std::string(GetSimulinkRelease());
 }
 
 SLXIO_ABI_NAMESPACE_END

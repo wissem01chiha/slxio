@@ -1,0 +1,27 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef SIGNALOBJECT_H
+#define SIGNALOBJECT_H
+
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
+#include "DataObject.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class SLXIO_APIEXPORT SignalObject : public DataObject 
+{
+public:
+    SignalObject* New() override;
+    
+    IdType GetDataType() override;
+private:
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // SIGNALOBJECT_H

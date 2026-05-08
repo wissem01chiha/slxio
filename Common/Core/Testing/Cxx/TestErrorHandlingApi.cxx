@@ -1,0 +1,47 @@
+#include "Doctest.h"
+#include "ErrorCode.h"
+#include "ErrorHandlingApi.h"
+#include "Libuv.h"
+
+TEST_CASE("Set and Get last error")
+{
+  sSetLastError(E_INVALID_ARGUMENT);
+  CHECK(sGetLastError() == E_INVALID_ARGUMENT);
+  CHECK(std::string(sGetLastErrorMessage()) ==
+    "Invalid argument passed to function");
+}
+
+TEST_CASE("Get error message for known SLXIO code")
+{
+  CHECK(std::string(sGetErrorMessage(E_FILE_NOT_FOUND)) == "File not found");
+  CHECK(std::string(sGetErrorMessage(E_CONFIG_ALREADY_ACTIVE)) ==
+    "Configuration is already active");
+}
+
+TEST_CASE("Get error message for unknown SLXIO code")
+{
+  int unknownCode = 1999;
+  std::string msg = sGetErrorMessage(unknownCode);
+  CHECK(msg.find("unknown") != std::string::npos);
+}
+
+TEST_CASE("Get error message for libzip code")
+{
+  int zipCode = 18;
+  std::string msg = sGetErrorMessage(zipCode);
+  CHECK(msg.find("Invalid argument") != std::string::npos);
+}
+
+TEST_CASE("Get error message for libuv code")
+{
+  int uvCode = UV_EINVAL;
+  std::string msg = sGetErrorMessage(uvCode);
+  CHECK(msg.find("invalid") != std::string::npos);
+}
+
+TEST_CASE("Print error message functions")
+{
+  sSetLastError(E_FILE_OPEN_FAIL);
+  CHECK(sPrintLastErrorMessage() > 0);
+  CHECK(sPrintfLastErrorMessage("Last error: %s\n") > 0);
+}

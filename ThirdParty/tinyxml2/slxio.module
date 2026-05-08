@@ -1,0 +1,41 @@
+NAME
+  tinyxml2
+GROUP
+  ThirdParty
+LIBRARY_NAME
+  ThirdPartytinyxml2
+SPDX_LICENSE_IDENTIFIER
+  zlib-License
+SPDX_COPYRIGHT_TEXT
+  Copyright (c) Lee Thomason
+SPDX_CUSTOM_LICENSE_FILE
+  src/LICENSE.txt
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/LICENSE.txt
+DESCRIPTION
+  TinyXML2 is a simple, small, efficient, 
+  C++ XML parser that can be easily integrated 
+  into other programs.
+VERSION
+  11.0.0
+MAINTAINER
+  TinyXML2 Contributors
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  FALSE
+CLASSES
+SOURCES
+  src/tinyxml2.cpp
+HEADERS
+  src/tinyxml2.h
+PUBLIC_DEPENDS
+PRIVATE_DEPENDS
+TEST_DEPENDS
+
+  

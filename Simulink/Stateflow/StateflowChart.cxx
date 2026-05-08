@@ -5,18 +5,18 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ErrorCode StateflowChart::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  // nodes.add(node);
+  // nodes.AddElement(node);
   // node.setParent(this);
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
-ErrorCode StateflowChart::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  // nodes.add(node);
+  // nodes.AddElement(node);
   // node.setParent(this);
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
 std::shared_ptr<StateflowElementBase> StateflowChart::getParent() const
@@ -24,7 +24,7 @@ std::shared_ptr<StateflowElementBase> StateflowChart::getParent() const
   return std::shared_ptr<StateflowElementBase>();
 }
 
-SimulinkElementType StateflowChart::getType() const
+SimulinkElementType StateflowChart::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Chart);
 }
@@ -44,27 +44,27 @@ std::shared_ptr<StateflowBlock> StateflowChart::getStateflowBlock()
   return stateflowBlock;
 };
 
-std::string StateflowChart::toString() const
+std::string StateflowChart::ToString() const
 {
   return std::string("");
 }
 
-ErrorCode StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
+ReturnType StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
 {
   // if (stateflowBlock != null) {
   //   CCSMPre.isTrue(this.stateflowBlock == null,
   //                  "Cannot set new Stateflow block.");
   // }
   // this.stateflowBlock = stateflowBlock;
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
-Index StateflowChart::getID() const
+IdType StateflowChart::GetElementId() const
 {
-  return (Index)0;
+  return (IdType)0;
 }
 
-bool StateflowChart::contains(const Index& id) const
+bool StateflowChart::Contains(const IdType& id) const
 {
   return false;
 }

@@ -6,40 +6,40 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
   cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-ErrorCode SimulinkConfigSetManager::add(std::shared_ptr<SimulinkConfigSet> cfg)
+ReturnType SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg)
 {
   if (cfg == nullptr)
   {
-    l.log(Logger::V_ERROR,
-      "SimulinkConfigSetManager:: Cannot add a null configuration set.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR,
+     // "SimulinkConfigSetManager:: Cannot add a null configuration set.");
+    return E_PARAMETER_NULL_PTR;
   }
   cfgs.push_back(cfg);
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkConfigSetManager::remove(
+ReturnType SimulinkConfigSetManager::RemoveElement(
   std::shared_ptr<SimulinkConfigSet> cfg)
 {
 
   if (cfg == nullptr)
   {
-    l.log(Logger::V_ERROR,
-      "SimulinkConfigSetManager:: Cannot remove a null configuration set.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_ERROR,
+      //"SimulinkConfigSetManager:: Cannot remove a null configuration set.");
+    return E_PARAMETER_NULL_PTR;
   }
   auto it = std::find(cfgs.begin(), cfgs.end(), cfg);
   if (it != cfgs.end())
   {
     cfgs.erase(it);
-    return ErrorCode::SLX_OK;
+    return E_OK;
   }
-  return ErrorCode::SLX_ENOENT;
+  return E_OK;
 }
 
 std::shared_ptr<SimulinkConfigSet>

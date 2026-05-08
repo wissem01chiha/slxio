@@ -1,0 +1,71 @@
+NAME
+  json-c
+GROUP
+  ThirdParty
+LIBRARY_NAME
+  ThirdPartyjson-c
+SPDX_LICENSE_IDENTIFIER
+  MIT
+SPDX_COPYRIGHT_TEXT
+  2009-2012 Eric Haszlakiewicz
+  Copyright (c) 2004, 2005 Metaparadigm Pte Ltd
+SPDX_CUSTOM_LICENSE_FILE
+  src/COPYING
+SPDX_CUSTOM_LICENSE_NAME
+LICENSE_FILES
+  src/COPYING
+DESCRIPTION
+  A JSON implementation in C
+VERSION
+  0.18
+MAINTAINER
+  Eric Haszlakiewicz, Metaparadigm Pte Ltd
+ENABLE_BUILD
+  TRUE
+ENABLE_TEST
+  FALSE
+EXTERNAL_BUILD
+  FALSE
+EXTERNAL_SOURCE_DIR
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  FALSE
+CLASSES
+SOURCES
+  src/debug.c
+  src/json_c_version.c
+  src/json_object_iterator.c 
+  src/json_object.c 
+  src/json_patch.c 
+  src/json_pointer.c 
+  src/json_tokener.c
+  src/json_util.c
+  src/json_visit.c
+  src/libjson.c
+  src/printbuf.c
+  src/random_seed.c
+  src/strerror_override.c
+HEADERS
+  src/debug.h
+  src/json_c_version.h
+  src/json_object_iterator.h
+  src/json_object.h
+  src/json_patch.h
+  src/json_pointer.h
+  src/json_tokener.h
+  src/json_util.h
+  src/libjson.h
+  src/printbuf.h
+  src/random_seed.h
+  src/strerror_override.h
+CONFIG_HEADERS
+  src/cmake/config.h.in
+  src/json.h.cmakein
+CMAKE_MODULES_DIRS
+PUBLIC_DEPENDS
+PRIVATE_DEPENDS
+WINDOWS_DEPENDS
+TEST_DEPENDS
+
+  

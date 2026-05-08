@@ -1,25 +1,13 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "ABINamespace.h"
-#include "File.h"
-#include "Type.h"
-#include <ostream>
-#include <sstream>
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
+#include <string>
 #include <vector>
 
 SLXIO_NAMESPACE_BEGIN
@@ -27,109 +15,206 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Logger
- * @brief Main Logging handler class for the librray
- * it can use multiple verbosity levels and log to file, for
- * dipslaying message we can alternate between many third party utils,
- * slxio support many logging libraries, all othe rthem are
- * enbaled/disbaled via preprocessor directives at compile time, eg:
- * USE_LOGURU, SE_SLOG, if none of these are defined, a basic Logger
- * is used that log to stderr and/or to a file. these are use in order
- * to ease the integration of the librray in existing projects, that
- * use already these lib as default logging utilities, note that one
- * and only one logging library can be used at a time. to make modules
- * inetgation easy, each module can use it spec logging librray all of
- * them can share the same API and define their owen flag support
- * logging in ostream logs Logger::LOG << and as fprintf style todo
- * add a check if the developer try to enable multiple loggers at once
+ * @brief Main logging handler class.
  */
-class Logger
+class SLXIO_APIEXPORT Logger final
 {
 public:
-  enum Verbosity
+  /**
+   * Logging verbosity levels.
+   */
+  enum MessageLevelType : UInt8
   {
-    V_INVALID = -10,
-    V_OFF = -9,
-    V_ERROR = -2,
-    V_WARNING = -1,
-    V_INFO = 0,
-    VERBOSITY_0 = 0,
-    VERBOSITY_1 = 1,
-    VERBOSITY_2 = 2,
-    VERBOSITY_3 = 3,
-    VERBOSITY_4 = 4,
-    VERBOSITY_5 = 5,
-    VERBOSITY_6 = 6,
-    VERBOSITY_7 = 7,
-    VERBOSITY_8 = 8,
-    VERBOSITY_9 = 9,
-    V_TRACE = 9
+    LOG_OFF = 0x00,
+    LOG_FATAL = 0x01,
+    LOG_ERROR = 0x02,
+    LOG_WARN = 0x03,
+    LOG_INFO = 0x04,
+    LOG_DEBUG = 0x05,
+    LOG_VERBOSE = 0x06
   };
 
-  /// @brief initialize the Logger with command line arguments, for
-  /// old style compatibility third party logging libs
-  static void init(int argc, char** argv);
-
-  /// @brief main logging routine, call with a message and a verbosity
-  /// level, 2 overrides if not verbosity is specified Logger will
-  /// internal level until an explict setting is done with
-  /// setInternalVerbosity.
-  void log(Verbosity level, const char* message);
-
-  /// @brief log a message given the default set verbosity level
-  void log(const char* message);
-
-  /// @brief Log a formatted message with a given verbosity level.
-  template <typename... Args>
-  void log(Verbosity level, Args&&... args)
+  /**
+   * Type of the message, either a standard log or a trace.
+   */
+  enum MessageType : UInt8
   {
-    if (!IsEnabled())
-      return;
-    std::ostringstream oss;
-    (oss << ... << args);
-    this->log(level, oss.str().c_str());
-  }
-  /// @brief get the singleton instance of the Logger
-  static Logger& getInstance();
+    LOG = 0x00,
+    TRACE = 0x01
+  };
 
-  /// @brief set the verbosity level for stderr output
-  /// everything below this level will not be printed to stderr
-  void setStderrVerbosity(Verbosity level);
+  /**
+   * File logging access modes.
+   */
+  enum LogFileModeType
+  {
+    TRUNCATE,
+    APPEND,
+    READ,
+    WRITE
+  };
 
-  /// @brief set the default internal verbosity level
-  void setInternalVerbosity(Verbosity level);
+  /**
+   * Data structure for external applications that log information using the
+   * API.
+   */
+  typedef struct
+  {
+    UInt32 appId;
+    std::string appName;
+    std::string appDescription;
+  } ApplicationInfoType;
 
-  /// @brief set the defual file logging mode
-  void setInternalFileMode(File::Mode mode);
+  /**
+   * Container for logging message metadata.
+   */
+  typedef struct
+  {
+    MessageType type;
+    MessageLevelType logLevel;
+    ApplicationInfoType appId;
+    UInt8 argCount;
+  } MessageInfoType;
 
-  /// @brief appen the given message to the given output stream
-  void print(const char* message, std::ostream& os);
+  /**
+   * Container for a logging message with its metadata.
+   */
+  typedef struct
+  {
+    MessageInfoType info;
+    std::vector<std::string> messages;
+  } LogMessage;
 
-  /// @brief log to a file with a specific verbosity level
-  ErrorCode logToFile(Verbosity verbosity, const char* path,
-    unsigned int linenum, const char* message);
+  /**
+   * Initialize the logger with command line arguments.
+   */
+  static ReturnType Init(int argc, char** argv);
 
-  /// @brief log to a random file generated in the current working
-  /// directory
-  ErrorCode logToFile(Verbosity verbosity, const char* message);
+  /**
+   * Get the singleton instance of the logger.
+   */
+  static Logger& GetInstance();
 
-  static Verbosity toVerbosity(uint8 value);
+  /**
+   * Send a log message with metadata and message fragments.
+   */
+  ReturnType SendLogMessage(
+    const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
-  static Verbosity toVerbosity(const char* text);
+  /**
+   * Print all logging messages to standard output.
+   */
+  void Print();
 
-  /// @brief check if logging is enabled, at runtime
+  /**
+   * Write logging messages to a file created in the current working directory.
+   * To change the logging directory use SetLogDirectoryPath
+   */
+  ReturnType WriteToFile(const std::string& filename);
+
+  /**
+   * Overload of WriteToFile for compatibility with C-style strings.
+   */
+  ReturnType WriteToFile(const char* filename);
+
+  /**
+   * Write logging messages to a randomly generated file.
+   */
+  ReturnType WriteToFile(void);
+
+  /**
+   * Set the internal logging level.
+   */
+  void SetLogLevel(MessageLevelType newLogLevel);
+
+  /**
+   * Get the current logging level.
+   */
+  MessageLevelType GetLogLevel(void);
+
+  /**
+   * Set the file logging mode.
+   */
+  void SetLogFileMode(LogFileModeType mode);
+
+  /**
+   * Get the default file logging mode.
+   */
+  LogFileModeType GetDefaultLogFileMode();
+
+  /**
+   * Get the current file logging mode.
+   */
+  LogFileModeType GetLogFileMode();
+
+  /**
+   * Reset logging level to the default.
+   */
+  void ResetLogLevelType();
+
+  /**
+   * Get log messages from a given application by ID.
+   */
+  std::vector<LogMessage> GetFiltredLogMessage(UInt32 Id);
+
+  /**
+   * Get log messages from a given application by name.
+   */
+  std::vector<LogMessage> GetFiltredLogMessage(const char* Name);
+
+  /**
+   * Check if logging is enabled.
+   */
   bool IsEnabled();
 
-protected:
-  ~Logger() = default;
+  /**
+   * Clear all buffered log messages.
+   */
+  void ClearBuffer();
+
+  /**
+   * Get the logging directory path.
+   */
+  std::string GetLogDirectoryPath(void);
+
+  /**
+   * Set the logging directory path.
+   * Note this function do not check the validity of the directory
+   */
+  void SetLogDirectoryPath(const std::string pathname);
+
+  /**
+   * Get the default logging directory path.
+   */
+  std::string GetDefaultLogDirectoryPath(void);
 
 private:
+  /**
+   * Helper function for slog logging library
+   */
+  int ToSlogLevel(Logger::MessageLevelType level);
+
+  /**
+   * Helper function for formatting output logs
+   */
+  std::string FormatLogEntry(const LogMessage& entry, const std::string& msg);
+
+  /**
+   * Default Constructor
+   */
   Logger();
   Logger(const Logger&) = delete;
-  Logger::Verbosity internalVerbosityLevel;
-  File::Mode filemode;
+  ~Logger() = default;
+  Logger::MessageLevelType InternalVerbosityLevel;
+  Logger::MessageLevelType DefaultInternalVerbosityLevel =
+    Logger::MessageLevelType::LOG_OFF;
+  Logger::LogFileModeType FileModeType;
+  Logger::LogFileModeType DefaultFileModeType = Logger::LogFileModeType::WRITE;
+  std::vector<LogMessage> LogBuffer;
+  std::string LogDirectoryPath;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif // Logger_H
+#endif // LOGGER_H

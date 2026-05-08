@@ -1,24 +1,13 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKPARSERBASE_H
 #define SIMULINKPARSERBASE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
-#include "ErrorCode.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "Logger.h"
+#include "ErrorCode.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -41,27 +30,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @tparam P the retrun type object beeing constructed
  */
 template <typename T, typename P>
-class APIEXPORT SimulinkParserBase
+class SLXIO_APIEXPORT SimulinkParserBase
 {
 public:
   /// @brief Virtual destructor (proper cleanup of derived classes.)
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual ErrorCode setInputData(const T data)
+  virtual ReturnType setInputData(const T data)
   {
     dataObject = data;
-    return ErrorCode::SLX_OK;
+    return E_OK;
   };
 
   /// @brief Set the input data for the parser.
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual ErrorCode setInputData(const T& data)
+  virtual ReturnType setInputData(const T& data)
   {
     dataObject = data;
-    return ErrorCode::SLX_OK;
+    return E_OK;
   };
 
   /// @brief Retrieve the parsed SimulinkElementBase object.
@@ -71,14 +60,14 @@ public:
   T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
-  virtual ErrorCode parse() = 0;
+  virtual ReturnType parse() = 0;
 
 protected:
   /// @brief Default constructor
   SimulinkParserBase()
     : ptr(std::make_shared<P>())
     , dataObject()
-    , l(Logger::getInstance()) {};
+    , l(Logger::GetInstance()) {};
   std::shared_ptr<P> ptr;
   T dataObject;
   Logger& l;

@@ -141,6 +141,13 @@
 #define LIBXML_SGML_CATALOG_ENABLED
 #endif
 
+#if @WITH_WINPATH@
+/**
+ * Whether the Windows path support is configured in
+ */
+#define LIBXML_WINPATH_ENABLED
+#endif
+
 #if @WITH_XPATH@
 /**
  * Whether XPath is configured in
@@ -248,14 +255,7 @@
 #define LIBXML_ZLIB_ENABLED
 #endif
 
-#if @WITH_LZMA@
-/**
- * Whether the Lzma support is compiled in
- */
-#define LIBXML_LZMA_ENABLED
-#endif
-
-#include <include/libxml/xmlexports.h>
+#include <libxml/xmlexports.h>
 
 #endif
 

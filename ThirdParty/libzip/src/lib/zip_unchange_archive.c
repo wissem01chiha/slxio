@@ -1,6 +1,6 @@
 /*
   zip_unchange_archive.c -- undo global changes to ZIP archive
-  Copyright (C) 2006-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 2006-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,18 +31,20 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include <stdlib.h>
 
 #include "zipint.h"
 
+
 ZIP_EXTERN int zip_unchange_archive(zip_t *za) {
-  if (za->comment_changed) {
-    _zip_string_free(za->comment_changes);
-    za->comment_changes = NULL;
-    za->comment_changed = 0;
-  }
+    if (za->comment_changed) {
+        _zip_string_free(za->comment_changes);
+        za->comment_changes = NULL;
+        za->comment_changed = 0;
+    }
 
-  za->ch_flags = za->flags;
+    za->ch_flags = za->flags;
 
-  return 0;
+    return 0;
 }

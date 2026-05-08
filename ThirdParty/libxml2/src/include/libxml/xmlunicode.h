@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief Unicode character APIs
- *
+ * 
  * API for the Unicode character APIs
  *
  * Deprecated, don't use.
@@ -12,7 +12,7 @@
 #define __XML_UNICODE_H__
 
 #ifdef __GNUC__
-#warning "libxml/xmlunicode.h is deprecated"
+  #warning "libxml/xmlunicode.h is deprecated"
 #endif
 
 #endif /* __XML_UNICODE_H__ */

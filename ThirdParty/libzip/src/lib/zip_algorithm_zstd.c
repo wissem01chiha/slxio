@@ -1,6 +1,6 @@
 /*
   zip_algorithm_zstd.c -- zstd (de)compression routines
-  Copyright (C) 2020-2023 Dieter Baron and Thomas Klausner
+  Copyright (C) 2020-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -38,210 +38,217 @@
 #include <zstd_errors.h>
 
 struct ctx {
-  zip_error_t *error;
-  bool compress;
-  int compression_flags;
-  bool end_of_input;
-  ZSTD_DStream *zdstream;
-  ZSTD_CStream *zcstream;
-  ZSTD_outBuffer out;
-  ZSTD_inBuffer in;
+    zip_error_t *error;
+    bool compress;
+    int compression_flags;
+    bool end_of_input;
+    ZSTD_DStream *zdstream;
+    ZSTD_CStream *zcstream;
+    ZSTD_outBuffer out;
+    ZSTD_inBuffer in;
 };
 
 static zip_uint64_t maximum_compressed_size(zip_uint64_t uncompressed_size) {
-  return ZSTD_compressBound(uncompressed_size);
+    return ZSTD_compressBound(uncompressed_size);
 }
 
-static void *allocate(bool compress, zip_uint32_t compression_flags,
-                      zip_error_t *error) {
-  struct ctx *ctx;
 
-  if ((ctx = (struct ctx *)malloc(sizeof(*ctx))) == NULL) {
-    return NULL;
-  }
+static void *allocate(bool compress, zip_uint32_t compression_flags, zip_error_t *error) {
+    struct ctx *ctx;
 
-  ctx->compression_flags = (zip_int32_t)compression_flags;
-  if (ctx->compression_flags < ZSTD_minCLevel() ||
-      ctx->compression_flags > ZSTD_maxCLevel()) {
-    ctx->compression_flags = 0; /* let zstd choose */
-  }
+    if ((ctx = (struct ctx *)malloc(sizeof(*ctx))) == NULL) {
+        return NULL;
+    }
 
-  ctx->error = error;
-  ctx->compress = compress;
-  ctx->end_of_input = false;
+    ctx->compression_flags = (zip_int32_t)compression_flags;
+    if (ctx->compression_flags < ZSTD_minCLevel() || ctx->compression_flags > ZSTD_maxCLevel()) {
+        ctx->compression_flags = 0; /* let zstd choose */
+    }
 
-  ctx->zdstream = NULL;
-  ctx->zcstream = NULL;
-  ctx->in.src = NULL;
-  ctx->in.pos = 0;
-  ctx->in.size = 0;
-  ctx->out.dst = NULL;
-  ctx->out.pos = 0;
-  ctx->out.size = 0;
+    ctx->error = error;
+    ctx->compress = compress;
+    ctx->end_of_input = false;
 
-  return ctx;
+    ctx->zdstream = NULL;
+    ctx->zcstream = NULL;
+    ctx->in.src = NULL;
+    ctx->in.pos = 0;
+    ctx->in.size = 0;
+    ctx->out.dst = NULL;
+    ctx->out.pos = 0;
+    ctx->out.size = 0;
+
+    return ctx;
 }
 
-static void *compress_allocate(zip_uint16_t method,
-                               zip_uint32_t compression_flags,
-                               zip_error_t *error) {
-  (void)method;
-  return allocate(true, compression_flags, error);
+
+static void *compress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+    (void)method;
+    return allocate(true, compression_flags, error);
 }
 
-static void *decompress_allocate(zip_uint16_t method,
-                                 zip_uint32_t compression_flags,
-                                 zip_error_t *error) {
-  (void)method;
-  return allocate(false, compression_flags, error);
+
+static void *decompress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+    (void)method;
+    return allocate(false, compression_flags, error);
 }
+
 
 static void deallocate(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-  free(ctx);
+    struct ctx *ctx = (struct ctx *)ud;
+    free(ctx);
 }
 
+
 static zip_uint16_t general_purpose_bit_flags(void *ud) {
-  (void)ud;
-  return 0;
+    (void)ud;
+    return 0;
 }
 
 static int map_error(size_t ret) {
-  switch (ret) {
-  case ZSTD_error_no_error:
-    return ZIP_ER_OK;
+    switch (ret) {
+    case ZSTD_error_no_error:
+        return ZIP_ER_OK;
 
-  case ZSTD_error_corruption_detected:
-  case ZSTD_error_checksum_wrong:
-  case ZSTD_error_dictionary_corrupted:
-  case ZSTD_error_dictionary_wrong:
-    return ZIP_ER_COMPRESSED_DATA;
+    case ZSTD_error_corruption_detected:
+    case ZSTD_error_checksum_wrong:
+    case ZSTD_error_dictionary_corrupted:
+    case ZSTD_error_dictionary_wrong:
+        return ZIP_ER_COMPRESSED_DATA;
 
-  case ZSTD_error_memory_allocation:
-    return ZIP_ER_MEMORY;
+    case ZSTD_error_memory_allocation:
+        return ZIP_ER_MEMORY;
 
-  case ZSTD_error_parameter_unsupported:
-  case ZSTD_error_parameter_outOfBound:
-    return ZIP_ER_INVAL;
+    case ZSTD_error_parameter_unsupported:
+    case ZSTD_error_parameter_outOfBound:
+        return ZIP_ER_INVAL;
 
-  default:
-    return ZIP_ER_INTERNAL;
-  }
+    default:
+        return ZIP_ER_INTERNAL;
+    }
 }
+
 
 static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
-  struct ctx *ctx = (struct ctx *)ud;
+    struct ctx *ctx = (struct ctx *)ud;
 
-  (void)st;
-  (void)attributes;
+    (void)st;
+    (void)attributes;
 
-  ctx->in.src = NULL;
-  ctx->in.pos = 0;
-  ctx->in.size = 0;
-  ctx->out.dst = NULL;
-  ctx->out.pos = 0;
-  ctx->out.size = 0;
-  if (ctx->compress) {
-    size_t ret;
-    ctx->zcstream = ZSTD_createCStream();
-    if (ctx->zcstream == NULL) {
-      zip_error_set(ctx->error, ZIP_ER_MEMORY, 0);
-      return false;
+    ctx->in.src = NULL;
+    ctx->in.pos = 0;
+    ctx->in.size = 0;
+    ctx->out.dst = NULL;
+    ctx->out.pos = 0;
+    ctx->out.size = 0;
+    if (ctx->compress) {
+        size_t ret;
+        ctx->zcstream = ZSTD_createCStream();
+        if (ctx->zcstream == NULL) {
+            zip_error_set(ctx->error, ZIP_ER_MEMORY, 0);
+            return false;
+        }
+        ret = ZSTD_initCStream(ctx->zcstream, ctx->compression_flags);
+        if (ZSTD_isError(ret)) {
+            zip_error_set(ctx->error, ZIP_ER_ZLIB, map_error(ret));
+            return false;
+        }
     }
-    ret = ZSTD_initCStream(ctx->zcstream, ctx->compression_flags);
-    if (ZSTD_isError(ret)) {
-      zip_error_set(ctx->error, ZIP_ER_ZLIB, map_error(ret));
-      return false;
+    else {
+        ctx->zdstream = ZSTD_createDStream();
+        if (ctx->zdstream == NULL) {
+            zip_error_set(ctx->error, ZIP_ER_MEMORY, 0);
+            return false;
+        }
     }
-  } else {
-    ctx->zdstream = ZSTD_createDStream();
-    if (ctx->zdstream == NULL) {
-      zip_error_set(ctx->error, ZIP_ER_MEMORY, 0);
-      return false;
-    }
-  }
 
-  return true;
+    return true;
 }
+
 
 static bool end(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
-  size_t ret;
+    struct ctx *ctx = (struct ctx *)ud;
+    size_t ret;
 
-  if (ctx->compress) {
-    ret = ZSTD_freeCStream(ctx->zcstream);
-    ctx->zcstream = NULL;
-  } else {
-    ret = ZSTD_freeDStream(ctx->zdstream);
-    ctx->zdstream = NULL;
-  }
+    if (ctx->compress) {
+        ret = ZSTD_freeCStream(ctx->zcstream);
+        ctx->zcstream = NULL;
+    }
+    else {
+        ret = ZSTD_freeDStream(ctx->zdstream);
+        ctx->zdstream = NULL;
+    }
 
-  if (ZSTD_isError(ret)) {
-    zip_error_set(ctx->error, map_error(ret), 0);
-    return false;
-  }
+    if (ZSTD_isError(ret)) {
+        zip_error_set(ctx->error, map_error(ret), 0);
+        return false;
+    }
 
-  return true;
+    return true;
 }
+
 
 static bool input(void *ud, zip_uint8_t *data, zip_uint64_t length) {
-  struct ctx *ctx = (struct ctx *)ud;
-  if (length > SIZE_MAX || ctx->in.pos != ctx->in.size) {
-    zip_error_set(ctx->error, ZIP_ER_INVAL, 0);
-    return false;
-  }
-  ctx->in.src = (const void *)data;
-  ctx->in.size = (size_t)length;
-  ctx->in.pos = 0;
-  return true;
+    struct ctx *ctx = (struct ctx *)ud;
+    if (length > SIZE_MAX || ctx->in.pos != ctx->in.size) {
+        zip_error_set(ctx->error, ZIP_ER_INVAL, 0);
+        return false;
+    }
+    ctx->in.src = (const void *)data;
+    ctx->in.size = (size_t)length;
+    ctx->in.pos = 0;
+    return true;
 }
+
 
 static bool end_of_input(void *ud) {
-  struct ctx *ctx = (struct ctx *)ud;
+    struct ctx *ctx = (struct ctx *)ud;
 
-  ctx->end_of_input = true;
-  return ctx->in.pos != ctx->in.size;
+    ctx->end_of_input = true;
+    return ctx->in.pos != ctx->in.size;
 }
 
-static zip_compression_status_t process(void *ud, zip_uint8_t *data,
-                                        zip_uint64_t *length) {
-  struct ctx *ctx = (struct ctx *)ud;
 
-  size_t ret;
+static zip_compression_status_t process(void *ud, zip_uint8_t *data, zip_uint64_t *length) {
+    struct ctx *ctx = (struct ctx *)ud;
 
-  if (ctx->in.pos == ctx->in.size && !ctx->end_of_input) {
-    *length = 0;
-    return ZIP_COMPRESSION_NEED_DATA;
-  }
+    size_t ret;
 
-  ctx->out.dst = data;
-  ctx->out.pos = 0;
-  ctx->out.size = ZIP_MIN(SIZE_MAX, *length);
-
-  if (ctx->compress) {
-    if (ctx->in.pos == ctx->in.size && ctx->end_of_input) {
-      ret = ZSTD_endStream(ctx->zcstream, &ctx->out);
-      if (ret == 0) {
-        *length = ctx->out.pos;
-        return ZIP_COMPRESSION_END;
-      }
-    } else {
-      ret = ZSTD_compressStream(ctx->zcstream, &ctx->out, &ctx->in);
+    if (ctx->in.pos == ctx->in.size && !ctx->end_of_input) {
+        *length = 0;
+        return ZIP_COMPRESSION_NEED_DATA;
     }
-  } else {
-    ret = ZSTD_decompressStream(ctx->zdstream, &ctx->out, &ctx->in);
-  }
-  if (ZSTD_isError(ret)) {
-    zip_error_set(ctx->error, map_error(ret), 0);
-    return ZIP_COMPRESSION_ERROR;
-  }
 
-  *length = ctx->out.pos;
-  if (ctx->in.pos == ctx->in.size) {
-    return ZIP_COMPRESSION_NEED_DATA;
-  }
+    ctx->out.dst = data;
+    ctx->out.pos = 0;
+    ctx->out.size = ZIP_MIN(SIZE_MAX, *length);
 
-  return ZIP_COMPRESSION_OK;
+    if (ctx->compress) {
+        if (ctx->in.pos == ctx->in.size && ctx->end_of_input) {
+            ret = ZSTD_endStream(ctx->zcstream, &ctx->out);
+            if (ret == 0) {
+                *length = ctx->out.pos;
+                return ZIP_COMPRESSION_END;
+            }
+        }
+        else {
+            ret = ZSTD_compressStream(ctx->zcstream, &ctx->out, &ctx->in);
+        }
+    }
+    else {
+        ret = ZSTD_decompressStream(ctx->zdstream, &ctx->out, &ctx->in);
+    }
+    if (ZSTD_isError(ret)) {
+        zip_error_set(ctx->error, map_error(ret), 0);
+        return ZIP_COMPRESSION_ERROR;
+    }
+
+    *length = ctx->out.pos;
+    if (ctx->in.pos == ctx->in.size) {
+        return ZIP_COMPRESSION_NEED_DATA;
+    }
+
+    return ZIP_COMPRESSION_OK;
 }
 
 /* Version Required should be set to 63 (6.3) because this compression

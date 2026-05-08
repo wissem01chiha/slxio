@@ -1,0 +1,99 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#cmakedefine01 HAVE_STDBOOL_H
+
+#cmakedefine01 HAVE_LIMITS_H
+
+#cmakedefine01 HAVE_VALUES_H 
+
+#cmakedefine01 HAVE_STDLIB_H
+
+#cmakedefine01 HAVE_FLOAT_H 
+
+#cmakedefine01 HAVE_DIRECT_H 
+
+#cmakedefine01 HAVE_UNISTD_H
+
+#cmakedefine01 HAVE_IO_H 
+
+#cmakedefine01 HAVE_WINDOWS_H 
+
+#cmakedefine01 HAVE_INTRIN_H 
+
+#cmakedefine01 HAVE_SYS_STAT_H
+
+#cmakedefine01 HAVE_SYS_TYPES_H 
+
+#cmakedefine01 HAVE_UNISTD_H 
+
+#cmakedefine01 HAVE_STDINT_H
+
+#cmakedefine01 SLXIO_BUILD_SHARED
+
+#cmakedefine01 SLXIO_NAMESPACE
+
+#cmakedefine01 SLXIO_ABI_NAMESPACE
+
+#cmakedefine01 SLXIO_LOGURU
+
+#cmakedefine01 SLXIO_SLOG
+
+#cmakedefine SLXIO_ABI_SIZEOF_CHAR ${SLXIO_ABI_SIZEOF_CHAR}
+
+#cmakedefine SLXIO_ABI_SIZEOF_INT ${SLXIO_ABI_SIZEOF_INT}
+
+#cmakedefine SLXIO_ABI_SIZEOF_SIZE_T ${SLXIO_ABI_SIZEOF_SIZE_T}
+
+#cmakedefine SLXIO_ABI_SIZEOF_DOUBLE ${SLXIO_ABI_SIZEOF_DOUBLE}
+
+#cmakedefine SLXIO_ABI_SIZEOF_FLOAT ${SLXIO_ABI_SIZEOF_FLOAT}
+
+#cmakedefine SLXIO_ABI_SIZEOF_SHORT ${SLXIO_ABI_SIZEOF_SHORT}
+
+#cmakedefine SLXIO_ABI_SIZEOF_LONG_LONG ${SLXIO_ABI_SIZEOF_LONG_LONG}
+
+#cmakedefine SLXIO_ABI_SIZEOF_LONG ${SLXIO_ABI_SIZEOF_LONG}
+
+#cmakedefine SLXIO_ABI_SIZEOF_UINT8_T ${SLXIO_ABI_SIZEOF_UINT8_T}
+
+#cmakedefine SLXIO_ABI_SIZEOF_UINT16_T ${SLXIO_ABI_SIZEOF_UINT16_T}
+
+#cmakedefine SLXIO_ABI_SIZEOF_UINT32_T ${SLXIO_ABI_SIZEOF_UINT32_T}
+
+#cmakedefine SLXIO_SIMULINK_VERSION ${SLXIO_SIMULINK_VERSION}
+
+#cmakedefine SLXIO_64BIT_IDS ${SLXIO_64BIT_IDS}
+
+#cmakedefine01 USE_EXTERNAL_CXXOPTS
+
+#cmakedefine01 USE_EXTERNAL_DOCTEST
+
+#cmakedefine01 USE_EXTERNAL_JSON_C
+
+#cmakedefine01 USE_EXTERNAL_LIBPNG
+
+#cmakedefine01 USE_EXTERNAL_LIBUV
+
+#cmakedefine01 USE_EXTERNAL_LIBXML2
+
+#cmakedefine01 USE_EXTERNAL_LIBZIP
+
+#cmakedefine01 USE_EXTERNAL_LOGURU
+
+#cmakedefine01 USE_EXTERNAL_PYBIND11
+
+#cmakedefine01 USE_EXTERNAL_RAPIDCSV
+
+#cmakedefine01 USE_EXTERNAL_SLOG
+
+#cmakedefine01 USE_EXTERNAL_SOL2
+
+#cmakedefine01 USE_EXTERNAL_TINYXML2
+
+#cmakedefine01 USE_EXTERNAL_ZLIB
+
+#endif // CONFIG_H 

@@ -1,49 +1,55 @@
 #include "DataSourceType.h"
+#include "Logger.h"
 #include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataSourceType toDataSourceType(const char* sldt)
+DataSourceType::DataSourceType(DataSourceType::Type type)
+  : InternalDataSourceType(type)
+{
+}
+
+DataSourceType::Type DataSourceType::FromString(const char* sldt)
 {
   if (sldt == nullptr)
   {
-    return DataSourceType::ModelFile;
+    return Type::ModelFile;
   }
 
   if (std::strcmp(sldt, "ModelFile") == 0)
   {
-    return DataSourceType::ModelFile;
+    return Type::ModelFile;
   }
   else if (std::strcmp(sldt, "MatFile") == 0)
   {
-    return DataSourceType::MatFile;
+    return Type::MatFile;
   }
   else if (std::strcmp(sldt, "MatlabCode") == 0)
   {
-    return DataSourceType::MatlabCode;
+    return Type::MatlabCode;
   }
   else if (std::strcmp(sldt, "MatlabFile") == 0)
   {
-    return DataSourceType::MatlabFile;
+    return Type::MatlabFile;
   }
-  return DataSourceType::ModelFile;
+  return Type::ModelFile;
 }
 
-const char* toChar(DataSourceType sldst)
+const char* DataSourceType::ToString(Type type)
 {
-  switch (sldst)
+  switch (type)
   {
-    case DataSourceType::ModelFile:
+    case Type::ModelFile:
       return "ModelFile";
-    case DataSourceType::MatFile:
+    case Type::MatFile:
       return "MatFile";
-    case DataSourceType::MatlabCode:
+    case Type::MatlabCode:
       return "MatlabCode";
-    case DataSourceType::MatlabFile:
+    case Type::MatlabFile:
       return "MatlabFile";
     default:
-      return "Unknown";
+      return "";
   }
 }
 

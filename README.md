@@ -1,13 +1,12 @@
 <!-- omit in toc -->
 # SLXIO
 
-[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
-[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)
+[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
 [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
-![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
-[![Docs](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml)
+[![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/doc.yml)
 [![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
+![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
 
@@ -42,13 +41,13 @@
 
 ## 1.0 Overview
 
-**Slxio** is an open-source C++17 library for reading and writing [simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+**slxio** is an open‑source C++11 library for reading, writing, visualizing, and exporting [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
-This library is designed for use in projects that either lack access to MATLAB's libraries/runtime or prefer not to rely on them, as well as in automation workflows. It aims to provide a lightweight alternative for manipulating Simulink models using modern scripting languages such as Python, Lua, etc., via C++ bindings.
+The project is designed as a lightweight alternative to MATLAB’s proprietary libraries and runtime, similar in spirit to the [matio](https://github.com/tbeu/matio) library for `.mat` files. Its goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python, Java, and others via C++ bindings.
 
-The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava).It has since been ported to C++ and refactored into a highly modular architecture.
+The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava). It has since been ported to C++ and refactored into a highly modular architecture.
 
-**Slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
+**slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
 To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 
@@ -63,9 +62,12 @@ The project is under active development, and contributions are highly encouraged
 
 ### 1.1 Features
 
-- Parse and extract slx files into c++ structures  
-- Serialize slx data into json format  
-- Edit metadata or parameters and save changes back to the slx file  
+- Read Simulink internal block‑diagram files into native C++ structures  
+- Export model hierarchies into JSON, HDF5, or Graphviz‑compatible formats  
+- Edit metadata and parameters, then save changes back into the `.slx` file  
+- Perform static analysis on Simulink models and generate reports in PDF or HTML  
+- Visualize Simulink diagrams interactively  
+- Integrate symbolic execution for advanced model validation and testing  
 
 ### 1.2 Supported MATLAB  
 

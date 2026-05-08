@@ -1,112 +1,118 @@
 #include "SimulinkLine.h"
+#include "ErrorCode.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkLine::SimulinkLine()
-  : destPort(nullptr)
-  , sourcePort(nullptr)
-  , l(Logger::getInstance())
+  : DestPort(nullptr)
+  , SourcePort(nullptr)
+  , logger(Logger::GetInstance())
 {
 }
 
 SimulinkLine::SimulinkLine(const SimulinkLine& other)
-  : l(Logger::getInstance())
+  : logger(Logger::GetInstance())
 {
-  this->destPort = other.destPort;
-  this->sourcePort = other.sourcePort;
+  this->DestPort = other.DestPort;
+  this->SourcePort = other.SourcePort;
 }
 
 SimulinkLine::SimulinkLine(
   std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
-  : destPort(pIn)
-  , sourcePort(pOut)
-  , l(Logger::getInstance())
+  : DestPort(pIn)
+  , SourcePort(pOut)
+  , logger(Logger::GetInstance())
 {
 }
 
-SimulinkLine::SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort_)
-  : l(Logger::getInstance())
+SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort)
+  :logger(Logger::GetInstance())
 {
 
-  sourcePort = std::make_shared<SimulinkPort>(sourcePort_);
-  destPort = std::make_shared<SimulinkPort>(destPort_);
+  SourcePort = std::make_shared<SimulinkPort>(sourcePort);
+  DestPort = std::make_shared<SimulinkPort>(destPort);
 }
 
-SimulinkElementType SimulinkLine::getType() const
+SimulinkElementType SimulinkLine::GetElementType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
-ErrorCode SimulinkLine::remove(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    return E_PARAMETER_NULL_PTR;
   }
 
-  if (sourcePort != nullptr)
+  if (SourcePort != nullptr)
   {
-    sourcePort->remove(std::make_shared<SimulinkLine>(*this));
-    sourcePort = nullptr;
+    SourcePort->RemoveElement(std::make_shared<SimulinkLine>(*this));
+    SourcePort = nullptr;
   }
 
-  if (destPort != nullptr)
+  if (DestPort != nullptr)
   {
-    destPort->remove(std::make_shared<SimulinkLine>(*this));
-    destPort = nullptr;
+    DestPort->RemoveElement(std::make_shared<SimulinkLine>(*this));
+    DestPort = nullptr;
   }
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
-ErrorCode SimulinkLine::add(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
-    return ErrorCode::SLX_ENULLPTR;
+    //l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
+    return E_PARAMETER_NULL_PTR;
   }
 
-  if (sourcePort != nullptr)
+  if (SourcePort != nullptr)
   {
-    sourcePort->add(std::make_shared<SimulinkLine>(*this));
-    sourcePort = nullptr;
+    SourcePort->AddElement(std::make_shared<SimulinkLine>(*this));
+    SourcePort = nullptr;
   }
 
-  if (destPort != nullptr)
+  if (DestPort != nullptr)
   {
-    destPort->add(std::make_shared<SimulinkLine>(*this));
-    destPort = nullptr;
+    DestPort->AddElement(std::make_shared<SimulinkLine>(*this));
+    DestPort = nullptr;
   }
-  return ErrorCode::SLX_OK;
+  return E_OK;
 }
 
-Index SimulinkLine::getID() const
+IdType SimulinkLine::GetElementId() const
 {
-  return id;
+  return Id;
 }
 
-bool SimulinkLine::contains(const Index& id) const
+bool SimulinkLine::Contains(const IdType& Id) const
 {
-  return this->id == id;
+  return this->Id == Id;
 }
 
-bool SimulinkLine::isConnected()
+bool SimulinkLine::IsConnected()
 {
-  return (sourcePort != nullptr && destPort != nullptr);
+  return (SourcePort != nullptr && DestPort != nullptr);
 }
 
-std::string SimulinkLine::toString() const
+Logger& SimulinkLine::GetLogger()
+{
+  return logger;
+}
+
+std::string SimulinkLine::ToString() const
 {
 
   std::ostringstream oss;
-  oss << "SimulinkLine[ID=" << id;
-  oss << ", Source=  " << sourcePort->toString();
-  oss << ", Destination=  " << destPort->toString();
+  oss << "SimulinkLine[ID=" << Id;
+  oss << ", Source=  " << SourcePort->ToString();
+  oss << ", Destination=  " << DestPort->ToString();
   oss << "]";
   return oss.str();
 }

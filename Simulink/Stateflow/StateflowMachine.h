@@ -1,22 +1,11 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef STATEFLOWMACHINE_H
 #define STATEFLOWMACHINE_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "StateflowChart.h"
 #include "StateflowElementBase.h"
 #include "StateflowTarget.h"
@@ -70,7 +59,7 @@ public:
 
   void addTarget(StateflowTarget target)
   {
-    // targets.add(target);
+    // targets.AddElement(target);
     // target.setParent(this);
   }
 
@@ -102,7 +91,7 @@ public:
    * removed from the model only after all {@link StateflowBlock}s
    * were removed.
    */
-  void remove()
+  void RemoveElement()
   {
     // CCSMPre.isTrue(charts.isEmpty(), "All charts must be removed
     // first (via "
@@ -112,7 +101,7 @@ public:
 
     // for (StateflowTarget target : new
     // ArrayList<StateflowTarget>(targets)) {
-    //   target.remove();
+    //   target.RemoveElement();
     // }
   }
 
@@ -127,7 +116,7 @@ public:
     // CCSMAssert.isTrue(charts.get(fqName) == chart, "Error in chart
     // storage.");
 
-    // charts.remove(fqName);
+    // charts.RemoveElement(fqName);
     chart.removeNodes();
     // chart.setStateflowBlock(null);
     // chart.setParent(null);
@@ -135,7 +124,7 @@ public:
 
   void removeTarget(StateflowTarget target)
   {
-    // targets.remove(target);
+    // targets.RemoveElement(target);
     // target.setParent(null);
   }
 

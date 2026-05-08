@@ -1,25 +1,14 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKROOT_H
 #define SIMULINKROOT_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
-#include "Type.h"
+#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -29,7 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @see
  * https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
  */
-class APIEXPORT SimulinkRoot final
+class SLXIO_APIEXPORT SimulinkRoot final
 {
 public:
   SimulinkRoot();

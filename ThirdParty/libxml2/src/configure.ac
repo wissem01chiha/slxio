@@ -86,8 +86,6 @@ AC_ARG_WITH(icu,
 [  --with-icu              ICU support (off)])
 AC_ARG_WITH(iso8859x,
 [  --with-iso8859x         ISO-8859-X support if no iconv (on)])
-AC_ARG_WITH(lzma,
-[  --with-lzma[[=DIR]]       use liblzma in DIR (off)])
 AC_ARG_WITH(modules,
 [  --with-modules          dynamic modules support (on)])
 AC_ARG_WITH(output,
@@ -116,6 +114,8 @@ AC_ARG_WITH(thread-alloc,
 [  --with-thread-alloc     per-thread malloc hooks (off)])
 AC_ARG_WITH(valid,
 [  --with-valid            DTD validation support (on)])
+AC_ARG_WITH(winpath,
+[  --with-winpath          Windows-styled path support (auto)])
 AC_ARG_WITH(writer,
 [  --with-writer           xmlWriter serialization interface (on)])
 AC_ARG_WITH(xinclude,
@@ -235,7 +235,6 @@ if test "$with_minimum" = "yes"; then
     test "$with_http" = "" && with_http=no
     test "$with_iconv" = "" && with_iconv=no
     test "$with_iso8859x" = "" && with_iso8859x=no
-    test "$with_lzma" = "" && with_lzma=no
     test "$with_output" = "" && with_output=no
     test "$with_pattern" = "" && with_pattern=no
     test "$with_push" = "" && with_push=no
@@ -402,6 +401,24 @@ else
 fi
 AC_SUBST(WITH_READER)
 AM_CONDITIONAL(WITH_READER_SOURCES, test "$WITH_READER" = "1")
+
+if test "$with_winpath" = "yes" ; then
+    echo Enabling Windows path support
+    WITH_WINPATH=1
+elif test "$with_winpath" = "no" ; then
+    WITH_WINPATH=0
+else
+    case "$host" in
+        *-*-mingw* | *-*-cygwin* | *-*-msys* )
+            echo "Enabling Windows path support (default for Windows)"
+            WITH_WINPATH=1
+            ;;
+        *)
+            WITH_WINPATH=0
+            ;;
+    esac
+fi
+AC_SUBST(WITH_WINPATH)
 
 if test "$with_writer" = "no" ; then
     echo Disabling the xmlWriter saving interface
@@ -841,61 +858,8 @@ if test "$with_zlib" != "no" && test "$with_zlib" != ""; then
     XML_PRIVATE_LIBS="${XML_PRIVATE_LIBS} ${Z_LIBS}"
 fi
 AC_SUBST(WITH_ZLIB)
-
-dnl
-dnl Checks for lzma library.
-dnl
-WITH_LZMA=0
-
-if test "$with_lzma" != "no" && test "$with_lzma" != ""; then
-    echo "Enabling lzma compression support"
-
-    if test "$with_lzma" != "yes"; then
-        LZMA_DIR=$with_lzma
-    fi
-
-    # Don't run pkg-config if with_lzma contains a path.
-    if test "x$LZMA_DIR" = "x"; then
-        # Try pkg-config first so that static linking works.
-        PKG_CHECK_MODULES([LZMA],[liblzma],
-            [WITH_LZMA=1; XML_PC_REQUIRES="${XML_PC_REQUIRES} liblzma"],
-            [:])
-    fi
-
-    # If pkg-config failed, fall back to AC_CHECK_LIB. This
-    # will not pick up the necessary LIBS flags for liblzma's
-    # private dependencies, though, so static linking may fail.
-    if test "$WITH_LZMA" = "0"; then
-        _cppflags=$CPPFLAGS
-        _libs=$LIBS
-        if test "x$LZMA_DIR" != "x"; then
-            CPPFLAGS="${CPPFLAGS} -I$LZMA_DIR/include"
-            LIBS="${LIBS} -L$LZMA_DIR/lib"
-        fi
-        AC_CHECK_HEADERS(lzma.h,
-            AC_CHECK_LIB(lzma, lzma_code,[
-                WITH_LZMA=1
-                if test "x${LZMA_DIR}" != "x"; then
-                    LZMA_CFLAGS="-I${LZMA_DIR}/include"
-                    LZMA_LIBS="-L${LZMA_DIR}/lib -llzma"
-                else
-                    LZMA_LIBS="-llzma"
-                fi])
-                XML_PC_LIBS="${XML_PC_LIBS} ${LZMA_LIBS}"
-            )
-        CPPFLAGS=$_cppflags
-        LIBS=$_libs
-    fi
-
-    if test "$WITH_LZMA" = "0"; then
-        AC_MSG_ERROR([liblzma not found])
-    fi
-
-    XML_PRIVATE_CFLAGS="${XML_PRIVATE_CFLAGS} ${LZMA_CFLAGS}"
-    XML_PRIVATE_LIBS="${XML_PRIVATE_LIBS} ${LZMA_LIBS}"
-fi
-AC_SUBST(WITH_LZMA)
-AM_CONDITIONAL(WITH_LZMA_SOURCES, test "$WITH_LZMA" = "1")
+AC_SUBST(Z_CFLAGS)
+AC_SUBST(Z_LIBS)
 
 dnl
 dnl Checks for iconv library.

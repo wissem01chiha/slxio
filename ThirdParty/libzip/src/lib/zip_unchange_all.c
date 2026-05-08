@@ -1,6 +1,6 @@
 /*
   zip_unchange.c -- undo changes to all files in zip archive
-  Copyright (C) 1999-2022 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2024 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,21 +31,24 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include "zipint.h"
 
+
 ZIP_EXTERN int zip_unchange_all(zip_t *za) {
-  int ret;
-  zip_uint64_t i;
+    int ret;
+    zip_uint64_t i;
 
-  if (!_zip_hash_revert(za->names, &za->error)) {
-    return -1;
-  }
+    if (!_zip_hash_revert(za->names, &za->error)) {
+        return -1;
+    }
 
-  ret = 0;
-  for (i = 0; i < za->nentry; i++)
-    ret |= _zip_unchange(za, i, 1);
+    ret = 0;
+    for (i = 0; i < za->nentry; i++) {
+        ret |= _zip_unchange(za, i, 1);
+    }
 
-  ret |= zip_unchange_archive(za);
+    ret |= zip_unchange_archive(za);
 
-  return ret;
+    return ret;
 }

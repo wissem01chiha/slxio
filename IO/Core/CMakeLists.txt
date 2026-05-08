@@ -1,1 +1,1 @@
-add_module (IO::Core)
+add_module(Io::Core)

@@ -5,17 +5,17 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulationSettings::~SimulationSettings() {}
 
-char* SimulationSettings::getSolverName()
+char* SimulationSettings::GetSolverName()
 {
   return SolverName;
 }
 
-char* SimulationSettings::getSolverType()
+char* SimulationSettings::GetSolverType()
 {
   return SolverType;
 }
 
-Float SimulationSettings::getFixedStepSize()
+Float32 SimulationSettings::GetFixedStepSize()
 {
   return FixedStepSize;
 }

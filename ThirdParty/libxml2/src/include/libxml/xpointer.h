@@ -21,12 +21,12 @@
 #ifndef __XML_XPTR_H__
 #define __XML_XPTR_H__
 
-#include <include/libxml/xmlversion.h>
+#include <libxml/xmlversion.h>
 
 #ifdef LIBXML_XPTR_ENABLED
 
-#include <include/libxml/tree.h>
-#include <include/libxml/xpath.h>
+#include <libxml/tree.h>
+#include <libxml/xpath.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -36,9 +36,13 @@ extern "C" {
  * Functions.
  */
 XML_DEPRECATED
-XMLPUBFUN xmlXPathContext *xmlXPtrNewContext(xmlDoc *doc, xmlNode *here,
-                                             xmlNode *origin);
-XMLPUBFUN xmlXPathObject *xmlXPtrEval(const xmlChar *str, xmlXPathContext *ctx);
+XMLPUBFUN xmlXPathContext *
+		    xmlXPtrNewContext		(xmlDoc *doc,
+						 xmlNode *here,
+						 xmlNode *origin);
+XMLPUBFUN xmlXPathObject *
+		    xmlXPtrEval			(const xmlChar *str,
+						 xmlXPathContext *ctx);
 
 #ifdef __cplusplus
 }

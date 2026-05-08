@@ -1,1 +1,5 @@
-add_test_sources (Common::System TestFile.cxx TestStatus.cxx TestDirectory.cxx)
+add_test_sources(CommonSystem 
+    TestFile.cxx 
+    TestDirectory.cxx
+    TestFileManager.cxx
+)

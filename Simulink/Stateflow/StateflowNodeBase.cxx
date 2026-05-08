@@ -12,8 +12,8 @@ void StateflowNodeBase::addInTransition(
 {
   if (transition->getDst().get() == this)
   {
-    Logger::getInstance().log(
-      Logger::V_ERROR, "Transition destination does not match this node");
+    //Logger::GetInstance().log(
+     // Logger::V_ERROR, "Transition destination does not match this node");
     return;
   }
   inTransitions.push_back(transition);
@@ -39,16 +39,16 @@ StateflowNodeBase::getOutTransitions() const
   return outTransitions;
 }
 
-void StateflowNodeBase::remove()
+void StateflowNodeBase::RemoveElement()
 {
   // TODO: implement removal from parent container
   for (auto& t : inTransitions)
   {
-    t->remove();
+    t->RemoveElement();
   }
   for (auto& t : outTransitions)
   {
-    t->remove();
+    t->RemoveElement();
   }
   inTransitions.clear();
   outTransitions.clear();

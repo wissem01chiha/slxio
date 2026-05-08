@@ -1,1 +1,1 @@
-add_module (Common::Core)
+add_module(Common::Core)

@@ -1,6 +1,6 @@
 /*
   zip_add_entry.c -- create and init struct zip_entry
-  Copyright (C) 1999-2024 Dieter Baron and Thomas Klausner
+  Copyright (C) 1999-2025 Dieter Baron and Thomas Klausner
 
   This file is part of libzip, a library to manipulate ZIP archives.
   The authors can be contacted at <info@libzip.org>
@@ -31,33 +31,35 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+
 #include <stdlib.h>
 
 #include "zipint.h"
 
+
 /* NOTE: Signed due to -1 on error.  See zip_add.c for more details. */
 
 zip_int64_t _zip_add_entry(zip_t *za) {
-  zip_uint64_t idx;
+    zip_uint64_t idx;
 
-  if (za->nentry + 1 >= za->nentry_alloc) {
-    zip_uint64_t additional_entries = 2 * za->nentry_alloc;
+    if (za->nentry + 1 >= za->nentry_alloc) {
+        zip_uint64_t additional_entries = 2 * za->nentry_alloc;
 
-    if (additional_entries < 16) {
-      additional_entries = 16;
-    } else if (additional_entries > 1024) {
-      additional_entries = 1024;
+        if (additional_entries < 16) {
+            additional_entries = 16;
+        }
+        else if (additional_entries > 1024) {
+            additional_entries = 1024;
+        }
+
+        if (!ZIP_REALLOC(za->entry, za->nentry_alloc, additional_entries, &za->error)) {
+            return -1;
+        }
     }
 
-    if (!ZIP_REALLOC(za->entry, za->nentry_alloc, additional_entries,
-                     &za->error)) {
-      return -1;
-    }
-  }
+    idx = za->nentry++;
 
-  idx = za->nentry++;
+    _zip_entry_init(za->entry + idx);
 
-  _zip_entry_init(za->entry + idx);
-
-  return (zip_int64_t)idx;
+    return (zip_int64_t)idx;
 }

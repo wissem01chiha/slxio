@@ -1,53 +1,70 @@
-#[=======================================================================[.rst:
-ModuleDebugging.cmake
------------------
-Provides utilities to debug module parsing and configuration.
-#]=======================================================================]
-
-option ("${PROJECT_NAME}_DEBUG_MODULE" "Debug module logic in ${PROJECT_NAME}" OFF)
-mark_as_advanced ("${PROJECT_NAME}_DEBUG_MODULE")
-
-include (CMakeDependentOption)
-
 #[==[.rst:
-.. cmake:function:: module_debug(<module>)
-  Debugging function to print all parsed variables of a module.
-  this function is only when module level debugging var is enabled
-  it will print all the global variables set after parsing the Module.txt file
-  for the given module
+.. cmake:function:: module_print(<prefix>)
+
+  Function to print the key parsed variables of a module.
+  This function is only used when module-level debugging is enabled.
+  It will print the module variables(name, group, version, description,
+  maintainer, license) that are set after parsing the 'slxio.module' file
+  for the given module.
+
+  Note: This function should be called after ''scan_module_file''.
 
   .. code-block:: cmake
 
-    module_debug(Common::Core)
-
-  TODO: Improve the output formatting for better readability,
-  for now set the global debug flag manully before invoking the function
+    module_print(_module)
 #]==]
-function (module_debug module)
-  if (NOT MODULE_DEBUG)
-    return ()
-  endif ()
-  scan_module_file (tmp)
-  message (STATUS "---- Debugging  global variables for ${module} ----")
-  message (STATUS "MODULE_IS_MODULE_TARGET  = ${MODULE_IS_MODULE_TARGET}")
-  message (STATUS "MODULE_name              = ${tmp_name}")
-  message (STATUS "MODULE_description       = ${tmp_description}")
-  message (STATUS "MODULE_license           = ${tmp_license}")
-  message (STATUS "MODULE_version           = ${tmp_version}")
-  message (STATUS "MODULE_maintainer        = ${tmp_maintainer}")
-  message (STATUS "MODULE_enable_build      = ${tmp_enable_build}")
-  message (STATUS "MODULE_enable_test       = ${tmp_enable_test}")
-  message (STATUS "MODULE_enable_binding    = ${tmp_enable_binding}")
-  message (STATUS "MODULE_enable_documentation = ${tmp_enable_documentation}")
-  message (STATUS "MODULE_install_headers   = ${tmp_install_headers}")
-  message (STATUS "MODULE_install_targets   = ${tmp_install_targets}")
-  message (STATUS "MODULE_classes           = ${tmp_classes}")
-  message (STATUS "MODULE_sources           = ${tmp_sources}")
-  message (STATUS "MODULE_headers           = ${tmp_headers}")
-  message (STATUS "MODULE_config_headers    = ${tmp_config_headers}")
-  message (STATUS "MODULE_public_depends    = ${tmp_public_depends}")
-  message (STATUS "MODULE_private_depends   = ${tmp_private_depends}")
-  message (STATUS "MODULE_test_depends      = ${tmp_test_depends}")
-  message (STATUS "MODULE_test_optional_depends = ${tmp_test_optional_depends}")
-  message (STATUS "----------------------------------------------------------")
-endfunction ()
+function(module_print module_prefix)
+  message(STATUS "**********************************************************************")
+  message(STATUS "module_name                   = ${${module_prefix}_name}")
+  message(STATUS "module_group                  = ${${module_prefix}_group}")
+  message(STATUS "module_version                = ${${module_prefix}_version}")
+  message(STATUS "module_description            = ${${module_prefix}_description}")
+  message(STATUS "module_maintainer             = ${${module_prefix}_maintainer}")
+  message(STATUS "module_license                = ${${module_prefix}_license}")
+  message(STATUS "**********************************************************************")
+endfunction()
+
+#[==[.rst:
+.. cmake:function:: summary()
+
+  Print the cmake build summary informations to console
+
+  .. code-block:: cmake
+
+    summary()
+#]==]
+function(summary)
+  message(STATUS "")
+  message(STATUS "***************  ${PROJECT_NAME} build configuration summary *******************")
+  message(STATUS "")
+  message(STATUS "Platform            : ${CMAKE_SYSTEM_NAME}")
+  message(STATUS "Architecture        : ${CMAKE_SYSTEM_PROCESSOR}")
+  message(STATUS "Compiler            : ${CMAKE_CXX_COMPILER_ID}")
+  message(STATUS "Compiler Version    : ${CMAKE_CXX_COMPILER_VERSION}")
+  message(STATUS "CMake Version       : ${CMAKE_VERSION}")
+  message(STATUS "Simulink Version    : ${SLXIO_SIMULINK_VERSION}")
+  message(STATUS "Build Type          : ${CMAKE_BUILD_TYPE}")
+  message(STATUS "Shared Libs         : ${SLXIO_BUILD_SHARED}")
+  message(STATUS "Version             : ${PROJECT_VERSION}")
+  message(STATUS "Install             : ${SLXIO_INSTALL}")
+  message(STATUS "Install prefix      : ${CMAKE_INSTALL_PREFIX}")
+  message(STATUS "Package Config      : ${SLXIO_PKGCONFIG}")
+  message(STATUS "Testing Enabled     : ${SLXIO_BUILD_TESTS}")
+  message(STATUS "Coverage Enabled    : ${SLXIO_COVERAGE}")
+  message(STATUS "AddressSanitizer    : ${SLXIO_ASAN}")
+  message(STATUS "MemorySanitizer     : ${SLXIO_MSAN}")
+  message(STATUS "ThreadSanitizer     : ${SLXIO_TSAN}")
+  message(STATUS "UBSanitizer         : ${SLXIO_UBSAN}")
+  message(STATUS "Python Found        : ${Python_FOUND}")
+  message(STATUS "Python Version      : ${Python_VERSION}")
+  message(STATUS "Python Enabled      : ${SLXIO_BUILD_PYTHON}")
+  message(STATUS "Building Examples   : ${SLXIO_BUILD_EXAMPLES}")
+  message(STATUS "Building Docs       : ${SLXIO_DOCUMENTATION}")
+  message(STATUS "Clang-tidy          : ${SLXIO_ENABLE_CLANG_TIDY}")
+  message(STATUS "Clang-Version       : ${CLANGFORMAT_EXECUTABLE}")
+  message(STATUS "Clang-found         : ${CLANGFORMAT_FOUND}")
+  message(STATUS "Cppcheck Enabled    : ${SLXIO_ENABLE_CPPCHECK}")
+  message(STATUS " ")
+  message(STATUS "**********************************************************************")
+  message(STATUS " ")
+endfunction()

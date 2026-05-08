@@ -1,8 +1,8 @@
 /**
  * @file
- *
+ * 
  * @brief Provide Canonical XML and Exclusive XML Canonicalization
- *
+ * 
  * the c14n modules provides a
  *
  * "Canonical XML" implementation
@@ -20,12 +20,12 @@
 #ifndef __XML_C14N_H__
 #define __XML_C14N_H__
 
-#include <include/libxml/xmlversion.h>
+#include <libxml/xmlversion.h>
 
 #ifdef LIBXML_C14N_ENABLED
 
-#include <include/libxml/tree.h>
-#include <include/libxml/xpath.h>
+#include <libxml/tree.h>
+#include <libxml/xpath.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,28 +49,39 @@ extern "C" {
  * Predefined values for C14N modes
  */
 typedef enum {
-  /** Original C14N 1.0 spec */
-  XML_C14N_1_0 = 0,
-  /** Exclusive C14N 1.0 spec */
-  XML_C14N_EXCLUSIVE_1_0 = 1,
-  /** C14N 1.1 spec */
-  XML_C14N_1_1 = 2
+    /** Original C14N 1.0 spec */
+    XML_C14N_1_0            = 0,
+    /** Exclusive C14N 1.0 spec */
+    XML_C14N_EXCLUSIVE_1_0  = 1,
+    /** C14N 1.1 spec */
+    XML_C14N_1_1            = 2
 } xmlC14NMode;
 
-XMLPUBFUN int xmlC14NDocSaveTo(xmlDoc *doc, xmlNodeSet *nodes,
-                               int mode, /* a xmlC14NMode */
-                               xmlChar **inclusive_ns_prefixes,
-                               int with_comments, xmlOutputBuffer *buf);
+XMLPUBFUN int
+		xmlC14NDocSaveTo	(xmlDoc *doc,
+					 xmlNodeSet *nodes,
+					 int mode, /* a xmlC14NMode */
+					 xmlChar **inclusive_ns_prefixes,
+					 int with_comments,
+					 xmlOutputBuffer *buf);
 
-XMLPUBFUN int xmlC14NDocDumpMemory(xmlDoc *doc, xmlNodeSet *nodes,
-                                   int mode, /* a xmlC14NMode */
-                                   xmlChar **inclusive_ns_prefixes,
-                                   int with_comments, xmlChar **doc_txt_ptr);
+XMLPUBFUN int
+		xmlC14NDocDumpMemory	(xmlDoc *doc,
+					 xmlNodeSet *nodes,
+					 int mode, /* a xmlC14NMode */
+					 xmlChar **inclusive_ns_prefixes,
+					 int with_comments,
+					 xmlChar **doc_txt_ptr);
 
-XMLPUBFUN int xmlC14NDocSave(xmlDoc *doc, xmlNodeSet *nodes,
-                             int mode, /* a xmlC14NMode */
-                             xmlChar **inclusive_ns_prefixes, int with_comments,
-                             const char *filename, int compression);
+XMLPUBFUN int
+		xmlC14NDocSave		(xmlDoc *doc,
+					 xmlNodeSet *nodes,
+					 int mode, /* a xmlC14NMode */
+					 xmlChar **inclusive_ns_prefixes,
+					 int with_comments,
+					 const char* filename,
+					 int compression);
+
 
 /**
  * This is the core C14N function
@@ -83,14 +94,18 @@ XMLPUBFUN int xmlC14NDocSave(xmlDoc *doc, xmlNodeSet *nodes,
  * @param parent  the parent node
  * @returns 1 if the node should be included
  */
-typedef int (*xmlC14NIsVisibleCallback)(void *user_data, xmlNode *node,
-                                        xmlNode *parent);
+typedef int (*xmlC14NIsVisibleCallback)	(void* user_data,
+					 xmlNode *node,
+					 xmlNode *parent);
 
-XMLPUBFUN int xmlC14NExecute(xmlDoc *doc,
-                             xmlC14NIsVisibleCallback is_visible_callback,
-                             void *user_data, int mode, /* a xmlC14NMode */
-                             xmlChar **inclusive_ns_prefixes, int with_comments,
-                             xmlOutputBuffer *buf);
+XMLPUBFUN int
+		xmlC14NExecute		(xmlDoc *doc,
+					 xmlC14NIsVisibleCallback is_visible_callback,
+					 void* user_data,
+					 int mode, /* a xmlC14NMode */
+					 xmlChar **inclusive_ns_prefixes,
+					 int with_comments,
+					 xmlOutputBuffer *buf);
 
 #ifdef __cplusplus
 }
@@ -98,3 +113,4 @@ XMLPUBFUN int xmlC14NExecute(xmlDoc *doc,
 
 #endif /* LIBXML_C14N_ENABLED */
 #endif /* __XML_C14N_H__ */
+

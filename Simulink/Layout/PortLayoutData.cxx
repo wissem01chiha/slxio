@@ -4,28 +4,28 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 PortLayoutData::PortLayoutData()
-  : l(Logger::getInstance())
+  : l(Logger::GetInstance())
 {
 }
 
 PortLayoutData::PortLayoutData(Point point, Color color)
   : position(point)
   , color(color)
-  , l(Logger::getInstance())
+  , l(Logger::GetInstance())
 {
 }
 
-Point PortLayoutData::getPosition()
+Point PortLayoutData::GetPosition()
 {
   return position;
 }
 
-Float PortLayoutData::getDirection()
+Float32 PortLayoutData::GetDirection()
 {
   return 0.0;
 }
 
-Color PortLayoutData::getColor()
+Color PortLayoutData::GetColor()
 {
   return color;
 }

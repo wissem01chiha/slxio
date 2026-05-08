@@ -1,28 +1,17 @@
-// Copyright 2025-2026 Wissem Chiha
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-// implied. See the License for the specific language governing
-// permissions and limitations under the License.
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
 
 #ifndef SIMULINKCONFIGSET_H
 #define SIMULINKCONFIGSET_H
 
-#include "ABINamespace.h"
-#include "APIExport.h"
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
 #include "ErrorCode.h"
 #include "Logger.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
-#include "Type.h"
+#include "PlatformTypes.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -41,7 +30,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
-class APIEXPORT SimulinkConfigSet final
+class SLXIO_APIEXPORT SimulinkConfigSet final
 {
 public:
   SimulinkConfigSet();
@@ -50,7 +39,7 @@ public:
 
   /// @brief disbale copy constructor
   /// @note instead use clone to create a copy of the configuration set
-  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
+  SimulinkConfigSet(const SimulinkConfigSet&);
 
   /// @brief Contructor from SimulinkObject, this is used internally to
   /// fill a SimulinkConfigSet from low level Slx Representation, not
@@ -68,22 +57,22 @@ public:
     const std::string& name);
 
   /// @brief Sets a parameter value by name.
-  ErrorCode setParameter(const char* name, const char* value);
+  ReturnType setParameter(const char* name, const char* value);
 
   /// @brief Creates a copy of this configuration set.
-  ErrorCode copy();
+  ReturnType copy();
 
   /// @brief Create a deep copy of this configuration set.
-  ErrorCode clone();
+  ReturnType clone();
 
   /// @brief Deletes this configuration set.
-  ErrorCode remove();
+  ReturnType RemoveElement();
 
   /// @brief Attaches this configuration set to a Simulink model.
-  ErrorCode attach(SimulinkModel& model);
+  ReturnType attach(SimulinkModel& model);
 
   /// @brief Detaches this configuration set from a Simulink model.
-  ErrorCode detach(SimulinkModel& model);
+  ReturnType detach(SimulinkModel& model);
 
   /// @brief Activates this configuration set.
   void activate();
@@ -98,11 +87,11 @@ public:
   /// configuration set.
   std::shared_ptr<SimulinkObject> getObject() const;
 
-  /// @brief  forward to underlying SimulinkObject getID
-  Index getID() const;
+  /// @brief  forward to underlying SimulinkObject GetElementId
+  IdType GetElementId() const;
 
   /// @brief Loads the configuration set from a file.
-  ErrorCode loadFromFile(const char* path);
+  ReturnType loadFromFile(const char* path);
 
   /// @brief Creates a configuration set from a file.
   /// Supported formats: .m, .mat(planned)
@@ -110,10 +99,10 @@ public:
 
   /// @brief Saves the configuration set to a file.
   /// @brief Supported formats: .m, .mat(planned)
-  ErrorCode saveToFile(const char* path);
+  ReturnType saveToFile(const char* path);
 
   /// @brief Converts to a string representation.
-  std::string toString() const;
+  std::string ToString() const;
 
   /// @brief Get a Pointer to Solver Configuration struct
   std::shared_ptr<SimulinkSolver> getSolver();

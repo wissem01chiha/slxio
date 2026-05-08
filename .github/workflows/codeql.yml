@@ -10,16 +10,7 @@
 # supported CodeQL languages.
 #
 name: "CodeQL"
-
-on:
-  push:
-    branches: [ "master", "develop" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "master" ]
-  schedule:
-    - cron: '27 3 * * 2'
-
+on: [push, pull_request]
 jobs:
   analyze:
     name: Analyze

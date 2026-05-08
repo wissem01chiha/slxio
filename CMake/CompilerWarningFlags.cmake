@@ -8,6 +8,7 @@ if (MSVC)
     /wd4702
     /wd4334
     /wd4701
+    /wd4005
     /wd4152)
 else ()
   add_compile_options (-Wno-return-type)

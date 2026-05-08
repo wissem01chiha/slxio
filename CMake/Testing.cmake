@@ -1,12 +1,4 @@
-#[=======================================================================[.rst:
-Testing
--------
-Configure testing settings for the project build
-#]=======================================================================]
 include (CTest)
-include (ModuleTesting)
-
-set (CTEST_OUTPUT_ON_FAILURE TRUE)
 
 if (ENABLE_TESTING)
   enable_testing ()
@@ -21,4 +13,19 @@ if (ENABLE_TESTING)
       add_subdirectory (${_module_test_dir})
     endif ()
   endforeach ()
+endif ()
+
+if (ENABLE_COVERAGE AND NOT ENABLE_TESTING)
+  message (FATAL_ERROR "coverage requires testing to be enabled")
+endif ()
+
+if (ENABLE_COVERAGE)
+  if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    add_compile_options (--coverage)
+    add_link_options (--coverage)
+  endif ()
+  if (ENABLE_COVERAGE AND MSVC)
+    add_compile_options (/Zi)
+    add_link_options (/DEBUG)
+  endif ()
 endif ()

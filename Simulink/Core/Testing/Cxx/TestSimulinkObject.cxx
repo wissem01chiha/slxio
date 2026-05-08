@@ -7,8 +7,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 TEST_CASE("AddNullParameterTest")
 {
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  ErrorCode status = obj.add(nullptr);
-  CHECK(status == ErrorCode::SLX_ENULLPTR);
+  ReturnType status = obj.AddElement(nullptr);
+  CHECK(status == E_PARAMETER_NULL_PTR);
 }
 
 TEST_CASE("AddSimulinkParameterTest")
@@ -17,8 +17,8 @@ TEST_CASE("AddSimulinkParameterTest")
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
   auto param = std::make_shared<SimulinkParameter>("DefaultTransition");
 
-  ErrorCode status = obj.add(param);
-  CHECK(status == ErrorCode::SLX_OK);
+  ReturnType status = obj.AddElement(param);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE("AddSubObjectTest")
@@ -28,8 +28,8 @@ TEST_CASE("AddSubObjectTest")
   auto subObject = std::make_shared<SimulinkObject>(
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  ErrorCode status = obj.add(subObject);
-  CHECK(status == ErrorCode::SLX_OK);
+  ReturnType status = obj.AddElement(subObject);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE("GetParameterTest")
@@ -40,8 +40,8 @@ TEST_CASE("GetParameterTest")
   param->setName("Solver");
   param->setValue("ode45");
 
-  ErrorCode status = obj.add(param);
-  CHECK(status == ErrorCode::SLX_OK);
+  ReturnType status = obj.AddElement(param);
+  CHECK(status == E_OK);
 
   std::shared_ptr<SimulinkParameter> retrievedParam =
     obj.getParameter("Solver");
@@ -56,8 +56,8 @@ TEST_CASE("AddArrayTest")
   auto subArray =
     std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
-  ErrorCode status = obj.add(subArray);
-  CHECK(status == ErrorCode::SLX_OK);
+  ReturnType status = obj.AddElement(subArray);
+  CHECK(status == E_OK);
 }
 
 TEST_CASE("ContainsObjectTest")
@@ -68,10 +68,10 @@ TEST_CASE("ContainsObjectTest")
   auto subObject = std::make_shared<SimulinkObject>(
     1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  ErrorCode status = obj.add(subObject);
-  CHECK(status == ErrorCode::SLX_OK);
+  ReturnType status = obj.AddElement(subObject);
+  CHECK(status == E_OK);
 
-  CHECK(obj.contains(1));
+  CHECK(obj.Contains(1));
 }
 
 SLXIO_ABI_NAMESPACE_END
