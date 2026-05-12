@@ -1,4 +1,11 @@
-add_thirdparty_module(libuv
-    ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
-    uv
-)
+if(LIBUV_BUILD_SHARED)
+    add_thirdparty_module(libuv
+        ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
+        uv
+    )
+else()
+    add_thirdparty_module(libuv
+        ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
+        uv_a
+    )
+endif()

@@ -194,7 +194,7 @@ int main(int argc, char *argv[]) { unsigned long x = FICLONERANGE; }" HAVE_FICLO
 
 test_big_endian(WORDS_BIGENDIAN)
 
-find_package(ZLIB 1.1.2 REQUIRED)
+#find_package(ZLIB 1.1.2 REQUIRED)
 # so developers on systems where zlib is named differently (Windows, sometimes)
 # can override the name used in the pkg-config file
 if (NOT ZLIB_LINK_LIBRARY_NAME)
@@ -238,7 +238,7 @@ if(ENABLE_LZMA)
   if(LIBLZMA_FOUND)
     set(HAVE_LIBLZMA 1)
   else()
-    message(WARNING "-- lzma library not found; lzma/xz support disabled")
+    message(STATUS "-- lzma library not found; lzma/xz support disabled")
   endif(LIBLZMA_FOUND)
 endif(ENABLE_LZMA)
 
@@ -252,7 +252,7 @@ if(ENABLE_ZSTD)
       set(zstd_TARGET zstd::libzstd_static)
     endif()
   else()
-    message(WARNING "-- zstd library not found; zstandard support disabled")
+    message(STATUS "-- zstd library not found; zstandard support disabled")
   endif(zstd_FOUND)
 endif(ENABLE_ZSTD)
 

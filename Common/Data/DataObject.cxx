@@ -1,4 +1,5 @@
 #include "DataObject.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -23,6 +24,11 @@ UInt32 DataObject::GetMemorySize()
 IdType DataObject::GetDataType()
 {
   return IdType();
+}
+
+Logger& DataObject::GetLogger()
+{
+  return logger;
 }
 
 SLXIO_ABI_NAMESPACE_END

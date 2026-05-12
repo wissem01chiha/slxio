@@ -8,19 +8,19 @@
 
 #define HAVE_LIMITS_H 1
 
-#define HAVE_VALUES_H  1
+#define HAVE_VALUES_H  0
 
 #define HAVE_STDLIB_H 1
 
 #define HAVE_FLOAT_H  1
 
-#define HAVE_DIRECT_H  0
+#define HAVE_DIRECT_H  1
 
-#define HAVE_UNISTD_H 1
+#define HAVE_UNISTD_H 0
 
-#define HAVE_IO_H  0
+#define HAVE_IO_H  1
 
-#define HAVE_WINDOWS_H  0
+#define HAVE_WINDOWS_H  1
 
 #define HAVE_INTRIN_H  0
 
@@ -28,7 +28,7 @@
 
 #define HAVE_SYS_TYPES_H  1
 
-#define HAVE_UNISTD_H  1
+#define HAVE_UNISTD_H  0
 
 #define HAVE_STDINT_H 1
 
@@ -56,7 +56,7 @@
 
 #define SLXIO_ABI_SIZEOF_LONG_LONG 8
 
-#define SLXIO_ABI_SIZEOF_LONG 8
+#define SLXIO_ABI_SIZEOF_LONG 4
 
 #define SLXIO_ABI_SIZEOF_UINT8_T 1
 

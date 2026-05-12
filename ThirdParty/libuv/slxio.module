@@ -40,72 +40,8 @@ WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
 SOURCES
-  src/src/fs-poll.c
-  src/src/idna.c
-  src/src/inet.c
-  src/src/random.c
-  src/src/strscpy.c
-  src/src/strtok.c
-  src/src/thread-common.c
-  src/src/threadpool.c
-  src/src/timer.c
-  src/src/uv-common.c
-  src/src/uv-data-getter-setters.c
-  src/src/version.c
 WINDOWS_SOURCES
-  src/src/win/async.c
-  src/src/win/core.c
-  src/src/win/detect-wakeup.c
-  src/src/win/dl.c
-  src/src/win/error.c
-  src/src/win/fs-event.c
-  src/src/win/fs.c
-  src/src/win/getaddrinfo.c
-  src/src/win/getnameinfo.c
-  src/src/win/handle.c
-  src/src/win/loop-watcher.c
-  src/src/win/pipe.c
-  src/src/win/poll.c
-  src/src/win/process-stdio.c
-  src/src/win/process.c
-  src/src/win/signal.c
-  src/src/win/snprintf.c
-  src/src/win/stream.c
-  src/src/win/tcp.c
-  src/src/win/thread.c
-  src/src/win/tty.c
-  src/src/win/udp.c
-  src/src/win/util.c
-  src/src/win/winapi.c
-  src/src/win/winsock.c
 UNIX_SOURCES
-  src/src/unix/async.c
-  src/src/unix/core.c
-  src/src/unix/dl.c
-  src/src/unix/fs.c
-  src/src/unix/getaddrinfo.c
-  src/src/unix/getnameinfo.c
-  src/src/unix/internal.h
-  src/src/unix/linux.c
-  src/src/unix/loop-watcher.c
-  src/src/unix/loop.c
-  src/src/unix/pipe.c
-  src/src/unix/poll.c
-  src/src/unix/posix-hrtime.c
-  src/src/unix/posix-poll.c
-  src/src/unix/process.c
-  src/src/unix/procfs-exepath.c
-  src/src/unix/random-devurandom.c
-  src/src/unix/random-getrandom.c
-  src/src/unix/random-sysctl-linux.c
-  src/src/unix/signal.c
-  src/src/unix/stream.c
-  src/src/unix/sysinfo-loadavg.c
-  src/src/unix/sysinfo-memory.c
-  src/src/unix/tcp.c
-  src/src/unix/thread.c
-  src/src/unix/tty.c
-  src/src/unix/udp.c
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
@@ -126,5 +62,4 @@ WINDOWS_COMPILE_FLAGS
 UNIX_COMPILE_FLAGS
 MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
-TEST_DEPENDS 
-
+TEST_DEPENDS

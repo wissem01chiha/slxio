@@ -47,4 +47,5 @@ build/
 out/ 
 .vs/
 
-
+# Vcpkg Files 
+vcpkg_installed/

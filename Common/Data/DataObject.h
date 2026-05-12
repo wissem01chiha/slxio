@@ -9,6 +9,8 @@
 #include "PlatformTypes.h"
 #include <chrono>               
 
+class Logger;
+
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
@@ -40,6 +42,11 @@ public:
      */
     virtual IdType GetDataType();
 
+    /**
+     * Return the Data Object Logger instance
+     */
+    Logger& GetLogger();
+
     DataObject() = default;
     
     ~DataObject() = default;
@@ -48,6 +55,8 @@ private:
     // Disable copy and assignment
     DataObject(const DataObject&) = delete;
     void operator=(const DataObject&) = delete;
+
+    Logger& logger;
 };
 
 SLXIO_ABI_NAMESPACE_END

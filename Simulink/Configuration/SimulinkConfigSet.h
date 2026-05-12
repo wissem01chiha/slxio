@@ -6,8 +6,6 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorCode.h"
-#include "Logger.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
@@ -23,6 +21,7 @@ class SimulinkDebugging;
 class SimulinkHardware;
 class SimulinkModelReference;
 class SimulinkRTW;
+class Logger;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

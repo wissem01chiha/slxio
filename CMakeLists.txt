@@ -56,6 +56,7 @@ include(Version)
 include(Testing)
 include(Install)
 
+add_subdirectory(ThirdParty/zlib)
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 summary()
 
