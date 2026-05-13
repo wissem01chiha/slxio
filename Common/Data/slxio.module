@@ -12,7 +12,7 @@ SPDX_CUSTOM_LICENSE_FILE
 SPDX_CUSTOM_LICENSE_NAME
 LICENSE_FILES
 DESCRIPTION  
-  Data Types Support Module
+  Data Object Model Module
 VERSION 
   0.1.0 
 MAINTAINER 
@@ -37,6 +37,9 @@ CLASSES
   DataObject
   SignalDataObject
   JsonDataObject
+  xmlDocDataObject
+  SimulinkFileObject
+  xmlCharDataObject
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
@@ -49,6 +52,11 @@ HEADERS
   DataObject.h
   SignalDataObject.h
   JsonDataObject.h
+  xmlDocDataObject.h
+  xmlCharDataObject.h
+  SimulinkFileObject.h
+  SimulinkFile.h
+  Signal.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -58,6 +66,7 @@ PUBLIC_DEPENDS
   Common::Core
   Common::System
   ThirdParty::libxml2
+  ThirdParty::json-c
 PRIVATE_DEPENDS
 WINDOWS_DEPENDS
 UNIX_DEPENDS

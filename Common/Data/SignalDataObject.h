@@ -6,19 +6,26 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "PlatformTypes.h"
 #include "DataObject.h"
+#include "PlatformTypes.h"
+#include "Signal.h"
+#include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SignalObject : public DataObject 
+class SLXIO_APIEXPORT SignalObject : public DataObject
 {
 public:
-    SignalObject* New() override;
-    
-    IdType GetDataType() override;
+  SignalObject* New() override;
+  bool operator==(const DataObject&) override;
+  void* GetImplDataObject() const override;
+  std::string toString() const override;
+  bool Empty() override;
+  SignalObject();
+
 private:
+    SignalPtr ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,4 +1,5 @@
 #include "SimulinkFileObject.h"
+#include "xmlDocDataObject.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -6,37 +7,53 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkFileObject* SimulinkFileObject::New()
 {
-  return nullptr;
+  return new SimulinkFileObject();
 }
 
 void SimulinkFileObject::Initialize() {}
 
-UInt32 SimulinkFileObject::GetUpdateTime()
+UInt32 SimulinkFileObject::GetUpdateTime() const
 {
   return UInt32();
 }
 
-IdType SimulinkFileObject::GetDataType()
+void* SimulinkFileObject::GetImplDataObject() const
 {
-  return IdType();
+  return ImplDataObject;
 }
 
-std::string SimulinkFileObject::ToString() const
+bool SimulinkFileObject::operator==(const DataObject& other)
+{
+  return ImplDataObject->Name ==
+    static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
+}
+
+std::string SimulinkFileObject::toString() const
 {
   std::ostringstream oss;
-  oss << "SimulinkFileBase { "
-      << "category=\"" << Category << "\", "
-      << "creator=\"" << Creator << "\", "
-      << "lastModifiedBy=\"" << LastModifiedBy << "\", "
-      << "revision=\"" << Revision << "\", "
-      << "version=\"" << Version << "\", "
-      << "contentType=\"" << ContentType << "\", "
-      << "contentTypeFriendlyName=\"" << ContentTypeFriendlyName << "\", "
-      << "matlabRelease=\"" << MatlabRelease << "\", "
-      << "matlabVersion=\"" << MatlabVersion << "\""
+  oss << "SimulinkFileObject { "
+      << "name=\"" << ImplDataObject->Name << "\", "
+      << "extension=\"" << ImplDataObject->Extension << "\", "
+      << "category=\"" << ImplDataObject->Category << "\", "
+      << "creator=\"" << ImplDataObject->Creator << "\", "
+      << "lastModifiedBy=\"" << ImplDataObject->LastModifiedBy << "\", "
+      << "revision=\"" << ImplDataObject->Revision << "\", "
+      << "version=\"" << ImplDataObject->Version << "\", "
+      << "contentType=\"" << ImplDataObject->ContentType << "\", "
+      << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName
+      << "\", "
+      << "matlabRelease=\"" << ImplDataObject->MatlabRelease << "\", "
+      << "matlabVersion=\"" << ImplDataObject->MatlabVersion << "\""
       << " }";
   return oss.str();
 }
+
+bool SimulinkFileObject::Empty()
+{
+  return ImplDataObject == nullptr;
+}
+
+SimulinkFileObject::SimulinkFileObject() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

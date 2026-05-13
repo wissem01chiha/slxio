@@ -24,7 +24,7 @@ class SLXIO_APIEXPORT SimulinkArrayWriter
 public:
   SimulinkArrayWriter* New() override;
   ReturnType Write() override;
-  ReturnType SetInputData(const DataObject data) override;
+  ReturnType SetInputData(const DataObject& data) override;
   ReturnType SetInputData(IdType idx, const DataObject& data) override;
 private:
   DataObject& InputDataObject;

@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SIMULINKFILEBASE_H
-#define SIMULINKFILEBASE_H
+#ifndef SIMULINKFILEOBJECT_H
+#define SIMULINKFILEOBJECT_H
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "DataObject.h"
+#include "SimulinkFile.h"
 #include <string>
 #include <vector>
 
@@ -22,37 +23,17 @@ class SLXIO_APIEXPORT SimulinkFileObject : public DataObject
 {
 public:
   SimulinkFileObject* New() override;
-
   void Initialize() override;
+  UInt32 GetUpdateTime() const override;
+  void* GetImplDataObject() const override;
+  bool operator==(const DataObject&) override;
+  std::string toString() const;
+  bool Empty() override;
 
-  UInt32 GetUpdateTime() override;
+  SimulinkFileObject();
 
-  IdType GetDataType() override;
-
-  std::string ToString() const;
-
-protected:
-  std::string Category;
-  std::string Creator;
-  std::string LastModifiedBy;
-  std::string Revision;
-  std::string Version;
-  std::string ContentType;
-  std::string ContentTypeFriendlyName;
-  std::string MatlabRelease;
-  std::string MatlabVersion;
-
-  xmlDocDataObject& Blockdiagram;
-  xmlDocDataObject& ModelDictionary;
-  xmlDocDataObject& ConfigSetInfo;
-  xmlDocDataObject& Bddefaults;
-  xmlDocDataObject& ScheduleEditor;
-  xmlDocDataObject& ScheduleCore;
-  xmlDocDataObject& GraphicalInterface;
-  xmlDocDataObject& CoreProperties;
-  xmlDocDataObject& MWcoreProperties;
-  xmlDocDataObject& MWcorePropertiesExtension;
-  std::vector<xmlDocDataObject&> ConfigSets;
+private:
+  SimulinkFilePtr ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
