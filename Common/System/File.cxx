@@ -147,7 +147,7 @@ ReturnType File::Close()
   return E_OK;
 }
 
-Directory& File::GetFileDirectory() const
+Directory File::GetFileDirectory() const
 {
   size_t pos = FilePath.find_last_of(PATH_SEP);
   if (pos == std::string::npos)
@@ -248,22 +248,22 @@ bool File::Exist() const
   return Exist(FilePath);
 }
 
-const UInt8 File::GetFileMode()
+const int File::GetFileMode()
 {
-  UInt8 flags = 0;
+  int flags = 0;
   switch (InternalFileMode)
   {
     case Mode::Read:
-      flags = (UInt8)O_RDONLY;
+      flags =  O_RDONLY;
       break;
     case Mode::Write:
-      flags = (UInt8)O_WRONLY | O_CREAT;
+      flags =  O_WRONLY | O_CREAT;
       break;
     case Mode::Truncate:
-      flags = (UInt8)O_WRONLY | O_CREAT | O_TRUNC;
+      flags =  O_WRONLY | O_CREAT | O_TRUNC;
       break;
     case Mode::Append:
-      flags = (UInt8)O_WRONLY | O_CREAT | O_APPEND;
+      flags =  O_WRONLY | O_CREAT | O_APPEND;
       break;
   }
 

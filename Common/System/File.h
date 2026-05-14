@@ -68,7 +68,7 @@ public:
   ReturnType Rename(const std::string& filename);
 
   /** Get file mode flags. */
-  const UInt8 GetFileMode();
+  const int GetFileMode();
 
   /** Set file mode. */
   void SetFileMode(const File::Mode mode);
@@ -77,7 +77,7 @@ public:
   UInt32 Move(Directory& directory);
 
   /** Get parent directory object. */
-  Directory& GetFileDirectory() const;
+  Directory GetFileDirectory() const;
 
   /** Get the file internal buffer, after reading the file */
   std::vector<char> GetInternalBuffer() const;
