@@ -12,12 +12,14 @@ jobs:
           - name: Windows MSVC Win32
             os: windows-latest
             compiler: cl
+            python-arch: x86
             cmake-args: -A Win32
 
           - name: Windows MSVC Win64
             os: windows-latest
             compiler: cl
             cmake-args: -A x64
+            python-arch: x64
 
           - name: Windows MSVC ARM64
             os: windows-11-arm
@@ -49,11 +51,17 @@ jobs:
             cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=23
 
     steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          architecture: ${{ matrix.python-arch }} 
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Configure
-        run: cmake -S . -B build ${{ matrix.cmake-args }}
+        run: cmake -S . -B build ${{ matrix.cmake-args }} -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}
@@ -62,5 +70,5 @@ jobs:
         run: cmake --build build
 
       - name: Test
-        run: ctest -C Debug --output-on-failure --max-width 120
+        run: ctest -C Debug --output-on-failure --max-width 150
         working-directory: build

@@ -9,7 +9,7 @@
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/slxio/overview/master)
 
 <!-- omit in toc -->
 ## Table of Contents

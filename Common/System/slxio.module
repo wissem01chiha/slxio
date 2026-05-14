@@ -49,6 +49,10 @@ HEADERS
   File.h
   Directory.h
   FileManager.h
+  DirectoryManager.h
+  Archive.h
+  ArchiveManager.h
+  ExecutableRunner.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -71,5 +75,3 @@ MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
 TEST_DEPENDS 
   ThirdParty::doctest
- 
-

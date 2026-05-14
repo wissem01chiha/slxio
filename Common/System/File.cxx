@@ -2,88 +2,33 @@
 #include "Compiler.h"
 #include "Directory.h"
 #include "ErrorCode.h"
-#include "Libzip.h"
 #include "Libuv.h"
 #include <fstream>
 #include <iostream>
-#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+File::File(const std::string& path, Mode mode)
+  : InternalFileMode(mode)
+  , FileDescriptor(-1)
+  , FilePath(path)
+  , CachedSize(0)
+{
+}
+
 File::File(const std::string& path)
   : FileDescriptor(-1)
-  , FileMode(Mode::APPEND)
+  , InternalFileMode(Mode::Append)
+  , FilePath(path)
+  , CachedSize(0)
 {
 }
 
-File::File(const File& fs)
-  : FilePath(fs.FilePath)
-  , FileMode(fs.FileMode)
-  , FileDescriptor(fs.FileDescriptor)
-  , InternalBuffer(fs.InternalBuffer)
-  , NumberOfBytes(fs.NumberOfBytes)
+bool File::Exist(const std::string& path)
 {
-}
-
-File& File::operator=(const File& other) noexcept
-{
-  if (this != &other)
-  {
-    FilePath = other.FilePath;
-    FileMode = other.FileMode;
-    FileDescriptor = other.FileDescriptor;
-    InternalBuffer = other.InternalBuffer;
-    NumberOfBytes = other.NumberOfBytes;
-  }
-  return *this;
-}
-
-File& File::operator=(File&& other) noexcept
-{
-  if (this != &other)
-  {
-
-    FilePath = std::move(other.FilePath);
-    FileMode = other.FileMode;
-    FileDescriptor = other.FileDescriptor;
-    InternalBuffer = std::move(other.InternalBuffer);
-    NumberOfBytes = other.NumberOfBytes;
-
-    other.FileDescriptor = -1;
-    other.NumberOfBytes = 0;
-    other.FileMode = Mode::READ;
-    other.FilePath.clear();
-    other.InternalBuffer.clear();
-  }
-  return *this;
-}
-
-File::File(File&& other) noexcept
-  : FilePath(std::move(other.FilePath))
-  , FileMode(other.FileMode)
-  , FileDescriptor(other.FileDescriptor)
-  , InternalBuffer(std::move(other.InternalBuffer))
-  , NumberOfBytes(other.NumberOfBytes)
-{
-
-  other.FileDescriptor = -1;
-  other.NumberOfBytes = 0;
-  other.FileMode = Mode{};
-  other.FilePath.clear();
-  other.InternalBuffer.clear();
-}
-
-bool File::IsFile(const std::string& path)
-{
-  return IsFile(path.c_str());
-}
-
-bool File::IsFile(const char* path)
-{
-
   uv_fs_t req;
-  int r = uv_fs_stat(uv_default_loop(), &req, path, nullptr);
+  int r = uv_fs_stat(uv_default_loop(), &req, path.c_str(), nullptr);
   if (r < 0)
   {
     uv_fs_req_cleanup(&req);
@@ -95,40 +40,54 @@ bool File::IsFile(const char* path)
   return result;
 }
 
-bool File::IsFile()
+bool File::Empty() const
 {
-  return this->IsFile(FilePath);
+  return Size() == 0;
 }
 
-bool File::IsFile() const
+ReturnType File::Write(std::vector<std::string>& message)
 {
-  return IsFile(FilePath);
+  if (InternalFileMode == Mode::Read)
+    return E_INVALID_FILE_MODE;
+
+  for (const auto& line : message)
+  {
+    ReturnType result = Write(line.c_str());
+    if (result != E_OK)
+      return result;
+  }
+  return E_OK;
 }
 
-UInt32 File::Open()
+ReturnType File::Open()
 {
-
   uv_fs_t req;
-
   int err = uv_fs_open(
     uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
-  {
     return err;
-  }
+
   FileDescriptor = err;
+
+  uv_fs_t statReq;
+  int statErr =
+    uv_fs_fstat(uv_default_loop(), &statReq, FileDescriptor, nullptr);
+  if (statErr >= 0)
+  {
+    uv_stat_t* statbuf = static_cast<uv_stat_t*>(statReq.ptr);
+    CachedSize = static_cast<UInt32>(statbuf->st_size);
+  }
+  uv_fs_req_cleanup(&statReq);
+
   return E_OK;
 }
 
-UInt32 File::Read()
+ReturnType File::Read()
 {
-
-  if (FileMode != READ)
-  {
+  if (InternalFileMode != Mode::Read)
     return E_INVALID_FILE_MODE;
-  }
 
   InternalBuffer.resize(4096);
   uv_fs_t req;
@@ -140,21 +99,22 @@ UInt32 File::Read()
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
-  {
     return err;
-  }
 
-  NumberOfBytes = static_cast<size_t>(err);
+  NumberOfBytes = static_cast<UInt32>(err);
   return E_OK;
 }
 
-UInt32 File::Write(const char* message)
+std::string File::GetFilePath() const
+{
+  return FilePath;
+}
+
+ReturnType File::Write(const char* message)
 {
 
-  if (FileMode == READ)
-  {
+  if (InternalFileMode == Mode::Read)
     return E_INVALID_FILE_MODE;
-  }
 
   uv_fs_t req;
   size_t len = strlen(message);
@@ -166,201 +126,81 @@ UInt32 File::Write(const char* message)
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
-  {
+    return err;
 
-    return static_cast<int>(-err);
-  }
   return E_OK;
 }
 
 ReturnType File::Close()
 {
   if (FileDescriptor < 0)
-  {
     return 0;
-  }
 
   uv_fs_t req;
   int err = uv_fs_close(uv_default_loop(), &req, FileDescriptor, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
-  {
-    return static_cast<int>(-err);
-  }
+    return err;
 
   FileDescriptor = -1;
   return E_OK;
 }
 
-bool File::Eof() const
+Directory& File::GetFileDirectory() const
 {
-
-  if (FileDescriptor < 0 || FileMode != READ)
-  {
-    return false;
-  }
-
-  uv_fs_t req;
-  int result = uv_fs_fstat(uv_default_loop(), &req, FileDescriptor, nullptr);
-  if (result < 0)
-  {
-    uv_fs_req_cleanup(&req);
-    return false;
-  }
-
-  uv_stat_t* statbuf = static_cast<uv_stat_t*>(req.ptr);
-  size_t size_ = statbuf->st_size;
-  uv_fs_req_cleanup(&req);
-
-  return NumberOfBytes >= size_;
-}
-
-std::vector<char> File::GetInternalBuffer()
-{
-  return InternalBuffer;
-}
-
-size_t File::GetNumberOfBytes() const
-{
-  return NumberOfBytes;
-}
-
-std::string File::GetFileDirectory()
-{
-
   size_t pos = FilePath.find_last_of(PATH_SEP);
   if (pos == std::string::npos)
   {
-    return std::string(".");
+    return Directory("");
   }
-  return FilePath.substr(0, pos + 1);
+  return Directory(FilePath.substr(0, pos + 1));
 }
 
-const char* File::GetFileExtension() const
+ReturnType File::Move(Directory& directory)
 {
 
-  if (FilePath == "")
-    return nullptr;
+  if (!directory.Exist())
+    return E_DIRECTORY_NOT_EXSIT;
 
-  const char* dot = strrchr(FilePath.c_str(), '.');
-  if (!dot || dot == FilePath)
-    return nullptr;
+  std::string path = directory.GetDirectoryPath();
+  if (!path.empty() && path.back() != '/' && path.back() != '\\')
+    path += PATH_SEP;
 
-  return dot + 1;
-}
-
-UInt32 File::SetFileExtension(const char* newExt)
-{
-
-  if (!newExt || *newExt == '\0')
-  {
-    return E_INVALID_ARGUMENT;
-  }
-  if (FilePath.empty())
-  {
-    return E_INVALID_ARGUMENT;
-  }
-
-  size_t pos = FilePath.find_last_of('.');
-  std::string base;
-  if (pos == std::string::npos)
-  {
-    base = FilePath;
-  }
-  else
-  {
-    base = FilePath.substr(0, pos);
-  }
-
-  std::string dest = base + "." + newExt;
-
-  FILE* src = fopen(FilePath.c_str(), "rb");
-  if (!src)
-  {
-    return E_FILE_OPEN_FAIL;
-  }
-
-  FILE* dst = fopen(dest.c_str(), "wb");
-  if (!dst)
-  {
-    fclose(src);
-    return E_FILE_OPEN_FAIL;
-  }
-
-  char InternalBuffer[4096];
-  size_t bytes;
-  while ((bytes = fread(InternalBuffer, 1, sizeof(InternalBuffer), src)) > 0)
-  {
-    fwrite(InternalBuffer, 1, bytes, dst);
-  }
-
-  fclose(src);
-  fclose(dst);
-
-  FilePath = dest;
-
-  return E_OK;
-}
-
-UInt32 File::Move(const char* dirpath)
-{
-
-  if (dirpath == nullptr)
-  {
-    return E_PARAMETER_NULL_PTR;
-  }
-
-  std::string newPath = std::string(dirpath);
-  if (!newPath.empty() && newPath.back() != '/' && newPath.back() != '\\')
-  {
-    newPath += PATH_SEP;
-  }
-  newPath += GetFileName();
+  path += GetFileName();
 
   uv_fs_t req;
   int err = uv_fs_rename(
-    uv_default_loop(), &req, FilePath.c_str(), newPath.c_str(), nullptr);
+    uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
-  {
+    return err;
 
-    return static_cast<int>(-err);
-  }
-
-  FilePath = newPath;
+  FilePath = path;
   return E_OK;
 }
 
-UInt32 File::Copy(File& ofile)
+ReturnType File::Copy(const Directory& directory)
 {
-  return E_NOT_IMPLEMENTED;
-}
-
-UInt32 File::Copy(const char* destdir)
-{
-  if (!destdir)
+  if (!directory.Exist())
     return E_INVALID_ARGUMENT;
 
-  std::string destpath(destdir);
+  if (!Exist())
+    return E_FILE_NOT_FOUND;
+
+  std::string destpath = directory.GetDirectoryPath();
   if (!destpath.empty() && destpath.back() != PATH_SEP)
-  {
     destpath += PATH_SEP;
-  }
   destpath += GetFileName();
 
   std::ifstream src(FilePath, std::ios::binary);
   if (!src.is_open())
-  {
     return E_FILE_OPEN_FAIL;
-  }
 
   std::ofstream dst(destpath, std::ios::binary);
   if (!dst.is_open())
-  {
     return E_FILE_OPEN_FAIL;
-  }
 
   dst << src.rdbuf();
 
@@ -368,160 +208,77 @@ UInt32 File::Copy(const char* destdir)
   {
     return E_STREAM_WRITE_FAIL;
   }
-
-  if (dst.tellp() == 0)
-  {
+  src.seekg(0, std::ios::end);
+  if (src.tellg() == 0)
     return E_STREAM_EMPTY_OUTPUT;
-  }
 
-  return E_OK;
-};
-
-UInt32 File::Rename(const char* filename)
-{
-  if (!filename || *filename == '\0')
-    return E_INVALID_ARGUMENT;
-  FilePath = std::string(filename);
   return E_OK;
 }
 
-const std::string File::GetFileName()
+ReturnType File::Rename(const std::string& filename)
+{
+  if (filename.empty())
+    return E_INVALID_ARGUMENT;
+
+  uv_fs_t req;
+  int err = uv_fs_rename(
+    uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
+  uv_fs_req_cleanup(&req);
+
+  if (err < 0)
+    return err;
+
+  FilePath = filename;
+  return E_OK;
+}
+
+void File::SetFileMode(const File::Mode mode)
+{
+  InternalFileMode = mode;
+}
+
+const std::string File::GetFileName() const
 {
   size_t pos = FilePath.find_last_of("/\\");
-  if (pos == std::string::npos)
-  {
-    return std::string(FilePath.begin(), FilePath.end());
-  }
-  return std::string(FilePath.begin() + pos + 1, FilePath.end());
+  return (pos == std::string::npos) ? FilePath : FilePath.substr(pos + 1);
 }
 
-const std::string& File::GetFilePath() const
+bool File::Exist() const
 {
-  return FilePath;
+  return Exist(FilePath);
 }
 
-const int File::GetFileMode()
+const UInt8 File::GetFileMode()
 {
-  int flags = 0;
-  switch (FileMode)
+  UInt8 flags = 0;
+  switch (InternalFileMode)
   {
-    case READ:
-      flags = O_RDONLY;
+    case Mode::Read:
+      flags = (UInt8)O_RDONLY;
       break;
-    case WRITE:
-      flags = O_WRONLY | O_CREAT;
+    case Mode::Write:
+      flags = (UInt8)O_WRONLY | O_CREAT;
       break;
-    case TRUNCATE:
-      flags = O_WRONLY | O_CREAT | O_TRUNC;
+    case Mode::Truncate:
+      flags = (UInt8)O_WRONLY | O_CREAT | O_TRUNC;
       break;
-    case APPEND:
-      flags = O_WRONLY | O_CREAT | O_APPEND;
+    case Mode::Append:
+      flags = (UInt8)O_WRONLY | O_CREAT | O_APPEND;
       break;
   }
 
   return flags;
 }
 
-size_t File::Size() const
+std::vector<char> File::GetInternalBuffer() const
 {
-
-  if (FileDescriptor < 0)
-  {
-    return -1;
-  }
-
-  uv_fs_t req;
-  int result = uv_fs_fstat(uv_default_loop(), &req, FileDescriptor, nullptr);
-  if (result < 0)
-  {
-    uv_fs_req_cleanup(&req);
-    return 0;
-  }
-  uv_stat_t* statbuf = static_cast<uv_stat_t*>(req.ptr);
-  size_t size_ = statbuf->st_size;
-  uv_fs_req_cleanup(&req);
-
-  return size_;
+  return InternalBuffer;
 }
 
-UInt32 File::Unzip(const char* dir)
+UInt32 File::Size() const
 {
-
-  int err = 0;
-  uv_fs_t req;
-
-  zip_t* archive = zip_open(FilePath.c_str(), ZIP_RDONLY, &err);
-  if (!archive)
-  {
-    return err;
-  }
-
-  zip_int64_t num_entries = zip_get_num_entries(archive, 0);
-
-  for (zip_uint64_t i = 0; i < num_entries; ++i)
-  {
-
-    const char* name = zip_get_name(archive, i, 0);
-    if (!name)
-    {
-      continue;
-    }
-
-    char entrydirpath[1024];
-    snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", dir, name);
-
-    int ec = Directory::Create(entrydirpath);
-    if (ec != E_OK)
-    {
-      return ec;
-    }
-
-    zip_file_t* zf = zip_fopen_index(archive, i, 0);
-    if (!zf)
-    {
-      continue;
-    }
-
-    FILE* out = fopen(entrydirpath, "wb");
-    if (!out)
-    {
-      zip_fclose(zf);
-      continue;
-    }
-
-    char InternalBuffer[4096];
-    zip_int64_t bytes;
-    while ((bytes = zip_fread(zf, InternalBuffer, sizeof(InternalBuffer))) > 0)
-    {
-      fwrite(InternalBuffer, 1, bytes, out);
-    }
-
-    fclose(out);
-    zip_fclose(zf);
-  }
-
-  return E_OK;
+  return CachedSize;
 }
-
-ReturnType File::Zip(const char* zfilepath, const char* zname)
-{
-  zip_t* za;
-  int err;
-
-  if ((za = zip_open(zfilepath, ZIP_CREATE, &err)) == NULL)
-  {
-    zip_error_t error;
-    zip_error_init_with_code(&error, err);
-    zip_error_fini(&error);
-    return err;
-  }
-  zip_int64_t idx = zip_name_locate(za, zname, 0);
-  zip_source_t* source = zip_source_file(za, FilePath.c_str(), 0, -1);
-  zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8);
-  zip_close(za);
-
-  return E_OK;
-};
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
