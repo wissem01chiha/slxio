@@ -86,7 +86,7 @@ public:
   static bool Exist(const std::string& path);
 
   /** Get subdirectories in the current directory. */
-  std::vector<Directory> GetSubDirectories();
+  std::vector<Directory> GetSubDirectories() const;
 
   /** Get the directory name from the full path. */
   std::string GetDirectoryName();

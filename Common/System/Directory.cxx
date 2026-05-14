@@ -5,6 +5,9 @@
 #include <cstring>
 #include <locale>
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
 Directory::Directory(const std::string& path)
   : DirectoryPath(path)
 {
@@ -12,13 +15,60 @@ Directory::Directory(const std::string& path)
   SubDirList.clear();
 }
 
+ReturnType Directory::Create(const char* path)
+{
+  if (path == nullptr)
+    return E_PARAMETER_NULL_PTR;
+
+  char* Path = (char*)malloc(strlen(path) + 1);
+  strcpy(Path, path);
+
+  if (path[strlen(path) - 1] != '/')
+  {
+
+    char* last_slash = strrchr(Path, '/');
+    if (last_slash)
+    {
+      *(last_slash + 1) = '\0';
+    }
+    else
+    {
+      Path[0] = '\0';
+    }
+  }
+
+  uv_fs_t req;
+  char temp[1024];
+  strncpy(temp, Path, sizeof(temp));
+  temp[sizeof(temp) - 1] = '\0';
+
+  for (char* p = temp + 1; *p; p++)
+  {
+    if (*p == '/')
+    {
+      *p = '\0';
+      int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+      if (r < 0 && r != UV_EEXIST)
+      {
+        return r;
+      }
+      *p = '/';
+    }
+  }
+
+  int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+  if (r < 0 && r != UV_EEXIST)
+  {
+    return r;
+  }
+
+  return E_OK;
+}
+
 ReturnType Directory::Open()
 {
-
   if (DirectoryPath.empty())
-  {
     return E_PATH_EMPTY;
-  }
 
   uv_fs_t req;
   int err =
@@ -112,7 +162,6 @@ const File* Directory::GetFile(const IdType& index) const
 
 const File* Directory::GetFile(const std::string& filename) const
 {
-
   auto it = DirectoryFileMap.find(filename);
   if (it != DirectoryFileMap.end())
   {
@@ -137,7 +186,6 @@ const char* Directory::GetCurrentWorkingDirectory()
 
 const char* Directory::CreateTemporaryDirectory(const char* prefix)
 {
-
   uv_fs_t req;
 
   std::string tempDirName = "XXXXXX";
@@ -166,24 +214,23 @@ const char* Directory::CreateTemporaryDirectory(const char* prefix)
   return tmpdir;
 }
 
-// bool Directory::IsDirectory(const char* path)
-//{
-//   uv_fs_t req;
-//   int r = uv_fs_stat(uv_default_loop(), &req, path, nullptr);
-//   if (r < 0)
-//   {
-//     uv_fs_req_cleanup(&req);
-//     return false;
-//   }
-//
-//   bool result = (req.statbuf.st_mode & S_IFMT) == S_IFDIR;
-//   uv_fs_req_cleanup(&req);
-//   return result;
-// }
-
-std::vector<Directory> Directory::GetSubDirectories()
+bool Directory::Exist(const std::string& path)
 {
-  return std::vector<Directory>();
+  uv_fs_t req;
+  int r = uv_fs_stat(uv_default_loop(), &req, path.c_str(), nullptr);
+  if (r < 0)
+  {
+    uv_fs_req_cleanup(&req);
+    return false;
+  }
+  bool result = (req.statbuf.st_mode & S_IFMT) == S_IFDIR;
+  uv_fs_req_cleanup(&req);
+  return result;
+}
+
+std::vector<Directory> Directory::GetSubDirectories() const
+{
+  return SubDirList;
 }
 
 std::string Directory::GetDirectoryName()
@@ -212,58 +259,8 @@ bool Directory::Empty() const
 
 bool Directory::Exist() const
 {
-  return false;
+  return Exist(DirectoryPath);
 }
 
-UInt32 Directory::Create(const char* path)
-{
-
-  if (path == nullptr)
-  {
-    return E_PARAMETER_NULL_PTR;
-  }
-
-  char* Path = (char*)malloc(strlen(path) + 1);
-  strcpy(Path, path);
-
-  if (path[strlen(path) - 1] != '/')
-  {
-
-    char* last_slash = strrchr(Path, '/');
-    if (last_slash)
-    {
-      *(last_slash + 1) = '\0';
-    }
-    else
-    {
-      Path[0] = '\0';
-    }
-  }
-
-  uv_fs_t req;
-  char temp[1024];
-  strncpy(temp, Path, sizeof(temp));
-  temp[sizeof(temp) - 1] = '\0';
-
-  for (char* p = temp + 1; *p; p++)
-  {
-    if (*p == '/')
-    {
-      *p = '\0';
-      int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
-      if (r < 0 && r != UV_EEXIST)
-      {
-        return static_cast<UInt32>(-r);
-      }
-      *p = '/';
-    }
-  }
-
-  int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
-  if (r < 0 && r != UV_EEXIST)
-  {
-    return static_cast<UInt32>(-r);
-  }
-
-  return E_OK;
-}
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

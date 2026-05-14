@@ -4,6 +4,7 @@
 #include "ErrorCode.h"
 #include "Libuv.h"
 #include <fstream>
+#include <cstring>
 #include <iostream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -128,6 +129,8 @@ ReturnType File::Write(const char* message)
   if (err < 0)
     return err;
 
+  CachedSize += static_cast<UInt32>(err);
+
   return E_OK;
 }
 
@@ -248,26 +251,16 @@ bool File::Exist() const
   return Exist(FilePath);
 }
 
-const int File::GetFileMode()
+const int File::GetFileMode() 
 {
-  int flags = 0;
-  switch (InternalFileMode)
-  {
-    case Mode::Read:
-      flags =  O_RDONLY;
-      break;
-    case Mode::Write:
-      flags =  O_WRONLY | O_CREAT;
-      break;
-    case Mode::Truncate:
-      flags =  O_WRONLY | O_CREAT | O_TRUNC;
-      break;
-    case Mode::Append:
-      flags =  O_WRONLY | O_CREAT | O_APPEND;
-      break;
-  }
-
-  return flags;
+    switch (InternalFileMode)
+    {
+        case Mode::Read:     return O_RDONLY;
+        case Mode::Write:    return O_WRONLY | O_CREAT;
+        case Mode::Truncate: return O_WRONLY | O_CREAT | O_TRUNC;
+        case Mode::Append:   return O_WRONLY | O_CREAT | O_APPEND;
+    }
+    return O_RDONLY;  
 }
 
 std::vector<char> File::GetInternalBuffer() const
