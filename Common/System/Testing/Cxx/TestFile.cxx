@@ -31,7 +31,7 @@ public:
     return CurrentDir + PATH_SEP + TestFile;
   }
 
-  Directory& CreateTempDirectory() const
+  Directory CreateTempDirectory() const
   {
     std::string tempDir;
     if (CurrentDir.back() != PATH_SEP)
@@ -98,8 +98,8 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
 
   REQUIRE(f.Open() == E_OK);
   REQUIRE(f.Close() == E_OK);
-  //REQUIRE(CreateTempDirectory().Exist()==true);
+  REQUIRE(CreateTempDirectory().Exist()==true);
 
-  //CHECK(f.Move(CreateTempDirectory()) != E_OK);
-  //CHECK(f.GetFileDirectory().Empty() == true);
+  CHECK(f.Move(CreateTempDirectory()) == E_OK);
+  CHECK(f.GetFileDirectory().Empty() == true);
 }
