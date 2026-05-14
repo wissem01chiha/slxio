@@ -74,7 +74,7 @@ public:
   void SetFileMode(const File::Mode mode);
 
   /** Move file to a directory. */
-  UInt32 Move(Directory& directory);
+  UInt32 Move(const Directory& directory);
 
   /** Get parent directory object. */
   Directory GetFileDirectory() const;

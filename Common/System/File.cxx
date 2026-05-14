@@ -160,7 +160,7 @@ Directory File::GetFileDirectory() const
   return Directory(FilePath.substr(0, pos + 1));
 }
 
-ReturnType File::Move(Directory& directory)
+ReturnType File::Move(const Directory& directory)
 {
 
   if (!directory.Exist())
