@@ -46,5 +46,3 @@ normalize-space("abc  def  ")
 normalize-space(" abcdef   ")
 normalize-space("   abcdef")
 normalize-space("abcdef ")
-
-

@@ -198,4 +198,3 @@ tests if possible.
 - Igor Zlatkovic for the Windows port
 - Aleksey Sanin
 - Nick Wellnhofer
-

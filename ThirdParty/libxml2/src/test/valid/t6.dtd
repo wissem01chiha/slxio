@@ -2,4 +2,3 @@
 <!ENTITY % %xdef; "ghi">
 <!ENTITY abc "%def;">
 <!ELEMENT root (#PCDATA)>
-

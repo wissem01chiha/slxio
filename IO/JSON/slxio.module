@@ -1,34 +1,34 @@
-NAME 
+NAME
   Json
 GROUP
   Io
 LIBRARY_NAME
   IoJson
-DESCRIPTION  
-  SLX Json Converter Module 
-LICENSE   
-  Apache-2.0 
-VERSION 
-  0.1.0 
-MAINTAINER 
-  Wissem CHIHA 
-ENABLE_BUILD 
+DESCRIPTION
+  SLX Json Converter Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem CHIHA
+ENABLE_BUILD
   FALSE
 EXTERNAL_BUILD
   FALSE
 EXTERNAL_SOURCE_DIR
 ENABLE_TEST
-  TRUE 
-ENABLE_BINDING 
-  TRUE 
+  TRUE
+ENABLE_BINDING
+  TRUE
 ENABLE_DOC
-  FALSE 
-INSTALL_HEADERS 
-  TRUE 
-INSTALL_TARGETS 
-  TRUE 
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
 CLASSES
-  SimulinkParameterWriter 
+  SimulinkParameterWriter
 SOURCES
 HEADERS
  SimulinkParameterWriter.h
@@ -43,7 +43,6 @@ PRIVATE_DEPENDS
   Simulink::Core
   Simulink::Misc
   Simulink::Data
-TEST_DEPENDS 
+TEST_DEPENDS
   ThirdParty::doctest
- 
 

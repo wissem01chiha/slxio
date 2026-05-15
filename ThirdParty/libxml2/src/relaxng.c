@@ -2240,7 +2240,7 @@ xmlRelaxNGDumpValidError(xmlRelaxNGValidCtxtPtr ctxt)
 {
     int i, j, k;
     xmlRelaxNGValidErrorPtr err, dup;
-    
+
     for (i = 0, k = 0; i < ctxt->errNr; i++) {
         err = &ctxt->errTab[i];
         if (k < MAX_ERROR) {
@@ -5877,7 +5877,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                 parent->type = XML_RELAXNG_NOT_ALLOWED;
                 break;
             }
-            if ((parent != NULL) && ((parent->type == XML_RELAXNG_CHOICE) || 
+            if ((parent != NULL) && ((parent->type == XML_RELAXNG_CHOICE) ||
                 ((parent->type == XML_RELAXNG_DEF) &&
                     (ctxt->def != NULL && ctxt->def->parent != NULL) && (ctxt->def->parent->type == XML_RELAXNG_CHOICE)))) {
                 if (parent->type == XML_RELAXNG_CHOICE)
@@ -5895,7 +5895,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                 parent->type = XML_RELAXNG_EMPTY;
                 break;
             }
-            if ((parent != NULL) && 
+            if ((parent != NULL) &&
                 ((parent->type == XML_RELAXNG_GROUP) ||
                  (parent->type == XML_RELAXNG_INTERLEAVE) ||
                     ((parent->type == XML_RELAXNG_DEF) &&
@@ -5904,7 +5904,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                           ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE)))) {
                 if (parent->type == XML_RELAXNG_GROUP || parent->type == XML_RELAXNG_INTERLEAVE)
                     prev = xmlRelaxNGTryUnlink(ctxt, cur, parent, prev);
-                else if (ctxt->def->parent->type == XML_RELAXNG_GROUP || ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE) 
+                else if (ctxt->def->parent->type == XML_RELAXNG_GROUP || ctxt->def->parent->type == XML_RELAXNG_INTERLEAVE)
                     prev = xmlRelaxNGTryUnlink(ctxt, ctxt->def, ctxt->def->parent, prev);
             } else
                 prev = cur;
@@ -5970,7 +5970,7 @@ xmlRelaxNGSimplify(xmlRelaxNGParserCtxtPtr ctxt,
                     if ((parent == NULL) && (prev == NULL)) {
                         cur->type = XML_RELAXNG_NOOP;
                     } else if (prev == NULL) {
-                        /* 
+                        /*
                          * this simplification may already have happened
                          * if this is done twice this leads to an infinite loop of attrs->next
                          */

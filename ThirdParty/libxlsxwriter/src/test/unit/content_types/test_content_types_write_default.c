@@ -27,4 +27,3 @@ CTEST(content_types, write_default) {
 
     lxw_content_types_free(content_types);
 }
-

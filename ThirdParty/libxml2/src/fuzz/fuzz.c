@@ -600,4 +600,3 @@ xmlFuzzMutateChunks(const xmlFuzzChunkDesc *chunks,
 
     return ret;
 }
-

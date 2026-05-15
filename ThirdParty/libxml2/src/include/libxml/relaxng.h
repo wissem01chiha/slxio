@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief implementation of the Relax-NG validation
- * 
+ *
  * implementation of the Relax-NG validation
  *
  * @copyright See Copyright for the status of this software.

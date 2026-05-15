@@ -2,7 +2,7 @@
 <!--
 http://www.w3.org/TR/xmldsig2ed-tests/#XMLID
 
-Check that implementations of [XML-C14N1.1] handle xml:id attributes 
+Check that implementations of [XML-C14N1.1] handle xml:id attributes
 as defined in [XML-C14N1.1]
 -->
 <ietf:c14n11XmlIdDoc1 xmlns:ietf="http://www.ietf.org" xmlns:w3c="http://www.w3.org">
@@ -16,5 +16,5 @@ as defined in [XML-C14N1.1]
      </ietf:e1>
      <ietf:e2 >
         <ietf:e21 />
-     </ietf:e2>  
+     </ietf:e2>
 </ietf:c14n11XmlIdDoc1>

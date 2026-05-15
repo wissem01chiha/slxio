@@ -3,15 +3,15 @@
     type and <simpleType> must not both be present
 -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://foo" xmlns:foo="http://foo">
-	
-	<attribute name="bar" type="string">		
+
+	<attribute name="bar" type="string">
 		<simpleType>
   	  		<restriction base="string">
   	  			<maxLength value="20"/>
   	  		</restriction>
   	  	</simpleType>
-	</attribute>  	
-	
+	</attribute>
+
 	<element name="foo"/>
-  
+
 </schema>

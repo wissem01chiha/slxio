@@ -92,4 +92,3 @@ CTEST(worksheet, write_print_options4) {
 
     lxw_worksheet_free(worksheet);
 }
-

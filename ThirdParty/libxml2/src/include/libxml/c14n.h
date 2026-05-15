@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Provide Canonical XML and Exclusive XML Canonicalization
- * 
+ *
  * the c14n modules provides a
  *
  * "Canonical XML" implementation
@@ -113,4 +113,3 @@ XMLPUBFUN int
 
 #endif /* LIBXML_C14N_ENABLED */
 #endif /* __XML_C14N_H__ */
-

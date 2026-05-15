@@ -31,4 +31,3 @@ int main() {
 
     return workbook_close(workbook);
 }
-

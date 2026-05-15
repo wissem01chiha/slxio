@@ -68,7 +68,7 @@ info "Using clang-format config: $CLANGFILE"
 
 ALLFILES=$(find "$SRCDIR" \
     -type f \
-    \( -name "*.c" -o -name "*.cpp" -o -name "*.cxx" \ 
+    \( -name "*.c" -o -name "*.cpp" -o -name "*.cxx" \
         -o -name "*.h" -o -name "*.hpp" \))
 
 for FILE in $ALLFILES; do

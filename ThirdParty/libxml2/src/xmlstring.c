@@ -1141,4 +1141,3 @@ xmlEscapeFormatString(xmlChar **msg)
 
     return *msg;
 }
-

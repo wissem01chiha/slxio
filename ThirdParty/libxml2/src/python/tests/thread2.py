@@ -40,7 +40,7 @@ def test(expectedPedanticParserDefault):
         failed = 1
         print("FAILED to obtain correct value for " \
               "pedanticParserDefault in thread %d" % get_ident())
-    # check the global error handler 
+    # check the global error handler
     # (which is NOT per-thread in the python bindings)
     try:
         doc = libxml2.parseFile("bad.xml")

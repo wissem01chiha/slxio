@@ -25,8 +25,8 @@ class SimulinkLine;
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** 
- * @class SimulinkModel 
+/**
+ * @class SimulinkModel
  */
 class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
@@ -37,82 +37,82 @@ public:
   SimulinkModel();
 
   /**
-   * 
+   *
    */
   SimulinkModel(SimulinkModelType Type);
 
   /**
-   * 
+   *
    */
   SimulinkModel(const SimulinkModel& other);
 
   /**
-   * 
+   *
    */
   SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
 
   /**
-   * 
+   *
    */
   SimulinkElementType GetElementType() const override;
 
   /**
-   * 
+   *
    */
   IdType GetElementId() const override;
 
   /**
-   * 
+   *
    */
   std::string ToString() const override;
 
   /**
-   * 
+   *
    */
   ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element);
 
   /**
-   * 
+   *
    */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
 
   /**
-   * 
+   *
    */
   SimulinkBlock GetBlock(IdType blockIdx);
 
   /**
-   * 
+   *
    */
   SimulinkModelType GetModelType();
 
   /**
-   * 
+   *
    */
   std::shared_ptr<SimulationSettings> GetSimulationSettings();
 
   /**
-   * 
+   *
    */
   std::vector<std::shared_ptr<SimulinkParameter>> GetParameters();
 
   /**
-   * 
+   *
    */
   UInt32 GetModelVersion();
 
   /**
-   * 
+   *
    */
   bool Contains(const IdType& id) const override;
 
   /**
-   * 
+   *
    */
   std::shared_ptr<ModelWorkspace> GetModelWorkspace();
 
   /**
-   * 
+   *
    */
   Logger& GetLogger();
 

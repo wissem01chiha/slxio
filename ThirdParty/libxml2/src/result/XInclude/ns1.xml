@@ -4,7 +4,7 @@
     <elem xmlns:ns="urn:foo">
         <ns:elem xml:id="a"/>
     </elem>
-    
+
             <ns:elem xmlns:ns="urn:bar"/>
-        
+
 </doc>

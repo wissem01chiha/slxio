@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief unfinished XLink detection module
- * 
+ *
  * This module is deprecated, don't use.
  *
  * @copyright See Copyright for the status of this software.

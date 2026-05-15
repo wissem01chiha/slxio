@@ -33,12 +33,12 @@ This guide documents the automation utilities in the [Development](/Development/
 
 ## 2.0 Environment Setup
 
-### 2.1 Graphviz 
-Required for generating dependency graphs.  
+### 2.1 Graphviz
+Required for generating dependency graphs.
 Install via package manager or from [Graphviz.org](https://graphviz.org).
 
-### 2.2 Cygwin 
-Used for running POSIX‑style scripts on Windows.  
+### 2.2 Cygwin
+Used for running POSIX‑style scripts on Windows.
 Ensure `bash` and `make` are installed.
 
 ### 2.3 Coverage Tools
@@ -50,7 +50,7 @@ Ensure `bash` and `make` are installed.
 
 Install via system package manager.
 
-### 2.5 Profiling Tools 
+### 2.5 Profiling Tools
 
 ### 2.6 Fuzzing Tools
 
@@ -70,7 +70,7 @@ Slxio uses a **module‑based build system** inspired by [VTK](https://vtk.org).
 
 See the [Module.txt](/Development/ModuleTemplate.txt) for configuration details.
 
-## 4.0 Build Automation 
+## 4.0 Build Automation
 
 ## 5.0 Code Style
 
@@ -105,8 +105,8 @@ cmake-format -i CMakeLists.txt
 
 ### 6.1 Cppcheck
 
-Static analysis tool for detecting bugs and undefined behavior.  
-Run via:  
+Static analysis tool for detecting bugs and undefined behavior.
+Run via:
 ```bash
 cppcheck --enable=all src/
 ```
@@ -117,7 +117,7 @@ cppcheck --enable=all src/
 ### 7.2 Internal Modules
 ### 7.3 Dependency Graph
 
-Generated using cinclude2dot.pl script: 
+Generated using cinclude2dot.pl script:
 
 ## 8.0 Update Vendored ThirdParty
 
@@ -125,13 +125,13 @@ Generated using cinclude2dot.pl script:
 
 ## 10.0 Miscellaneous
 
-- Scan a directory looking for sources and headers  
+- Scan a directory looking for sources and headers
 ```bash
   ./scan_sources_headers.sh ./src
   ```
 - Generate Module.txt pre‑input file for the build system
-```bash 
-   ./generate_module_file.sh ExampleModule ./src ./include 
+```bash
+   ./generate_module_file.sh ExampleModule ./src ./include
   ```
 - Flatten a directory with non‑empty subdirectories into one level directory
  ```bash
@@ -145,5 +145,3 @@ Generated using cinclude2dot.pl script:
 ```bash
    ./generate_project_header.sh ./modules ./project_all.h
   ```
-
-

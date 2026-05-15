@@ -1,6 +1,6 @@
 
 # Author: Declan Moran
-# www.silverglint.com 
+# www.silverglint.com
 # Thanks to damaex (https://github.com/damaex), for significant contributions
 
 ANDROID_NDK_ROOT=/home/android/android-ndk-r19c

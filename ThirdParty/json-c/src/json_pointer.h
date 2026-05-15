@@ -133,7 +133,7 @@ JSON_EXPORT int json_pointer_set_with_limit_index(struct json_object **obj, cons
 
 /**
  * Callback function type.
- * 
+ *
  * When setting an array element, 'key' will be NULL and 'idx' will be the
  * target index.
  * When setting an object field, 'key' will be the target key and 'idx' will

@@ -293,5 +293,3 @@ IdType FileManager::GetFirstFreeFileId()
 // }
 
 // FileManager::FileManager(std::vector<File*> files) {}
-
-

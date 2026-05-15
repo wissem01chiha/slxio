@@ -42,4 +42,3 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
     # Same as background02 except with an image buffer.
     def test_background52(self):
         self.run_exe_test('test_background52', 'background02.xlsx')
-

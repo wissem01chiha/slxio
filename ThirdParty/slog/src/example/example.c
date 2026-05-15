@@ -121,7 +121,7 @@ int main()
     /* Fatal error message */
     slog_fatal("Fatal message also throws source location");
 
-    /* Enable date + time in output */ 
+    /* Enable date + time in output */
     cfg.eDateControl = SLOG_DATE_FULL;
     slog_config_set(&cfg);
     slog_debug("Debug message with time and date");

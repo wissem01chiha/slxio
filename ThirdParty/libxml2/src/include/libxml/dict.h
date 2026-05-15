@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief string dictionary
- * 
+ *
  * dictionary of reusable strings, just used to avoid allocation
  *         and freeing operations.
  *

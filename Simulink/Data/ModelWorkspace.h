@@ -65,7 +65,7 @@ public:
    * Destructor
    */
   ~ModelWorkspace() = default;
-  
+
   /**
    * Return the class internal logger object
    */

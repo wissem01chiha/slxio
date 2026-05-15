@@ -4,7 +4,7 @@
     This one tests <simpleType>
 -->
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://foo" xmlns:foo="http://foo">
-	
+
   <element name="foo">
   	  <complexType>
   	  	<attribute ref="foo:bar">
@@ -14,9 +14,9 @@
   	  			</restriction>
   	  		</simpleType>
   	  	</attribute>
-  	  </complexType>    
-  </element>  
-  
+  	  </complexType>
+  </element>
+
   <attribute name="bar" type="string" />
 
 </schema>

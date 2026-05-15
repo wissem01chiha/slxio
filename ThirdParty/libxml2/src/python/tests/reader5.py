@@ -11,7 +11,7 @@ import sys
 # Memory debug specific
 libxml2.debugMemory(1)
 
-expect="""<bibl id="Aho" key="Aho/Ullman">Aho, Alfred V., 
+expect="""<bibl id="Aho" key="Aho/Ullman">Aho, Alfred V.,
 Ravi Sethi, and Jeffrey D. Ullman.
 <emph>Compilers:  Principles, Techniques, and Tools</emph>.
 Reading:  Addison-Wesley, 1986, rpt. corr. 1988.</bibl>"""
@@ -33,7 +33,7 @@ if res != expect:
     print("Error: didn't get the expected output")
     print("got '%s'" % (res))
     print("expected '%s'" % (expect))
-    
+
 
 #
 # cleanup

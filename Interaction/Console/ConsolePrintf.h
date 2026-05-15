@@ -12,4 +12,3 @@
 CONSOLE_IMPEXP int ConsolePrintf(const char *line);
 /*--------------------------------------------------------------------------*/
 #endif /* __CONSOLEPRINTF_H__ */
-

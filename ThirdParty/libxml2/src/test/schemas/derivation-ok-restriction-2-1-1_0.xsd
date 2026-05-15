@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns="http://FOO" targetNamespace="http://FOO">
 
 	<xs:element name="foo">
@@ -7,32 +7,32 @@
 			<xs:complexContent>
 				<xs:restriction base="typeA">
 					<xs:attribute name="barA_1" type="xs:string"  use="optional"/>
-					<!-- OK -->								
+					<!-- OK -->
 					<xs:attribute name="barA_2" type="xs:string"  use="required"/>
-					<!-- OK -->									
+					<!-- OK -->
 					<xs:attribute name="barA_3" type="xs:string"  use="prohibited"/>
-					<!-- OK -->	
+					<!-- OK -->
 
-					<xs:attribute name="barB_1" type="xs:string"  use="optional"/>		
-					<!-- 2.1.1 inconsistent ( OR 3 ) -->							
+					<xs:attribute name="barB_1" type="xs:string"  use="optional"/>
+					<!-- 2.1.1 inconsistent ( OR 3 ) -->
 					<xs:attribute name="barB_2" type="xs:string"  use="required"/>
-					<!-- OK -->	
+					<!-- OK -->
 					<xs:attribute name="barB_3" type="xs:string"  use="prohibited"/>
-					<!-- 3 -->									
+					<!-- 3 -->
 
 					<xs:attribute name="barC_1" type="xs:string"  use="optional"/>
-					<!-- 2.2  no match in base -->								
-					<xs:attribute name="barC_2" type="xs:string"  use="required"/>	
-					<!-- 2.2  no match in base -->				
+					<!-- 2.2  no match in base -->
+					<xs:attribute name="barC_2" type="xs:string"  use="required"/>
+					<!-- 2.2  no match in base -->
 					<xs:attribute name="barC_3" type="xs:string"  use="prohibited"/>
-					<!-- OK -->	
+					<!-- OK -->
 
 					<xs:attribute name="barD_1" type="xs:string"  use="optional"/>
-					<!-- 2.2  no match in base -->	
+					<!-- 2.2  no match in base -->
 					<xs:attribute name="barD_2" type="xs:string"  use="required"/>
-					<!-- 2.2  no match in base -->	
+					<!-- 2.2  no match in base -->
 					<xs:attribute name="barD_3" type="xs:string"  use="prohibited"/>
-					<!-- OK -->	
+					<!-- OK -->
 
 				</xs:restriction>
 			</xs:complexContent>
@@ -40,17 +40,15 @@
 	</xs:element>
 
 	<xs:complexType name="typeA">
-		<xs:attribute name="barA_1" type="xs:string" use="optional"/>			
-		<xs:attribute name="barA_2" type="xs:string" use="optional"/>			
-		<xs:attribute name="barA_3" type="xs:string" use="optional"/>	
-		<xs:attribute name="barB_1" type="xs:string" use="required"/>		
-		<xs:attribute name="barB_2" type="xs:string" use="required"/>		
-		<xs:attribute name="barB_3" type="xs:string" use="required"/>			
-		<xs:attribute name="barC_1" type="xs:string" use="prohibited"/>	
-		<xs:attribute name="barC_2" type="xs:string" use="prohibited"/>	
-		<xs:attribute name="barC_3" type="xs:string" use="prohibited"/> 
+		<xs:attribute name="barA_1" type="xs:string" use="optional"/>
+		<xs:attribute name="barA_2" type="xs:string" use="optional"/>
+		<xs:attribute name="barA_3" type="xs:string" use="optional"/>
+		<xs:attribute name="barB_1" type="xs:string" use="required"/>
+		<xs:attribute name="barB_2" type="xs:string" use="required"/>
+		<xs:attribute name="barB_3" type="xs:string" use="required"/>
+		<xs:attribute name="barC_1" type="xs:string" use="prohibited"/>
+		<xs:attribute name="barC_2" type="xs:string" use="prohibited"/>
+		<xs:attribute name="barC_3" type="xs:string" use="prohibited"/>
 	</xs:complexType>
 
 </xs:schema>
-
-

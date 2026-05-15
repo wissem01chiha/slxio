@@ -3,12 +3,12 @@
 <!-- This test checks the implementation of the "itemType" attribute of the xsd:list element. -->
 
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://FOO" xmlns:foo="http://FOO">
-  
+
  <element name="foo">
 	<simpleType>
   		<list itemType="string"/>
-	</simpleType>   			          
-  </element>   
+	</simpleType>
+  </element>
 
-  
-</schema>    
+
+</schema>

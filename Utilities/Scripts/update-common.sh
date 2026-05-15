@@ -19,12 +19,12 @@ set -e
 
 ##############################################################################
 # Script for updating third-party packages vendored in the source tree.
-# 
+#
 # Usage:
 #   ./update-common.sh [--cygwin] [source_dir]
 #
 # Example :
-#   Update all Json-C files vendored 
+#   Update all Json-C files vendored
 #
 #       set -e
 #       name="json-c"
@@ -37,7 +37,7 @@ set -e
 # Notes:
 #   - Requires Git installed and configured.
 #   - Supports Cygwin paths.
-#   - To get the default sorted list of files in current directory: 
+#   - To get the default sorted list of files in current directory:
 #       >> find . -type f -printf '    "%P"\n' | sort
 ##############################################################################
 

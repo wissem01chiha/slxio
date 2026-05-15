@@ -4,4 +4,3 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-

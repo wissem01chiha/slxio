@@ -26,9 +26,9 @@
 /** Create a unique temporary file.
 @param dir (optional) directory to create file. If NULL use default TMP directory.
 @param prefix (optional) prefix for file name. If NULL use "tmp.".
-@param pathname (optional) pointer to a buffer to receive the temp filename. 
+@param pathname (optional) pointer to a buffer to receive the temp filename.
 	Allocated using `malloc()`; user to free. Ignored if NULL.
-@param keep If `keep` is nonzero and `pathname` is not NULL, then keep the file after closing. 
+@param keep If `keep` is nonzero and `pathname` is not NULL, then keep the file after closing.
 	Otherwise file is automatically deleted when closed.
 @return Pointer to stream opened in binary read/write (w+b) mode, or a null pointer on error.
 @exception ENOMEM Not enough memory to allocate filename.

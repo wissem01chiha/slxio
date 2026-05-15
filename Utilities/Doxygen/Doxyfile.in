@@ -19,9 +19,9 @@
 DOXYFILE_ENCODING       = UTF-8
 PROJECT_NAME            = @PROJECT_NAME@
 PROJECT_NUMBER          = @TARGET_VERSION@
-PROJECT_BRIEF           = 
-PROJECT_LOGO            = 
-PROJECT_ICON            = 
+PROJECT_BRIEF           =
+PROJECT_LOGO            =
+PROJECT_ICON            =
 OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
 OUTPUT_LANGUAGE         = English
 MARKDOWN_SUPPORT        = YES
@@ -31,7 +31,7 @@ RTF_HYPERLINKS          = YES
 FULL_SIDEBAR            = YES
 DISABLE_INDEX           = YES
 GENERATE_TREEVIEW       = YES
-HTML_COLORSTYLE         = 
+HTML_COLORSTYLE         =
 HTML_EXTRA_STYLESHEET   = @DOXYGEN_EXTRA_STYLESHEET@
 LAYOUT_FILE             = @DOXYGEN_LAYOUT_FILE@
 HTML_HEADER            =  @DOXYGEN_HTML_HEADER@
@@ -59,7 +59,7 @@ FILE_PATTERNS          = *.cxx \
                          *.hpp \
                          *.md \
                          *.txt \
-                         *.dox 
+                         *.dox
 
 #---------------------------------------------------------------------------
 # configuration options for main page of the documentation
@@ -78,10 +78,9 @@ TOC_EXPAND             = YES
 INCLUDE_GRAPH          = YES
 INCLUDED_BY_GRAPH      = YES
 GENERATE_LEGEND        = NO
-GRAPHICAL_HIERARCHY    = YES        
+GRAPHICAL_HIERARCHY    = YES
 MAX_DOT_GRAPH_DEPTH    = 100
 USE_MATHJAX            = YES
 GENERATE_BUGLIST       = YES
 SHOW_INCLUDE_FILES     = YES
 HTML_COPY_CLIPBOARD    = YES
-

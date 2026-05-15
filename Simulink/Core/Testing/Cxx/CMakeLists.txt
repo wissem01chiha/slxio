@@ -1,6 +1,6 @@
-add_test_sources(SimulinkCore 
-    TestSimulinkParameter.cxx 
+add_test_sources(SimulinkCore
+    TestSimulinkParameter.cxx
     TestSimulinkObject.cxx
-    TestSimulinkBlock.cxx 
+    TestSimulinkBlock.cxx
     TestSimulinkArray.cxx
 )

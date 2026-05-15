@@ -8,8 +8,8 @@
 			<xsd:sequence>
 				<xsd:element ref="foo:bar"/>
 				<xsd:element name="boo" type="xsd:string"/>
-			</xsd:sequence>	
-			<xsd:attribute name="req" use="required" form="qualified"/>		
+			</xsd:sequence>
+			<xsd:attribute name="req" use="required" form="qualified"/>
 		</xsd:complexType>
 	</xsd:element>
 </xsd:schema>

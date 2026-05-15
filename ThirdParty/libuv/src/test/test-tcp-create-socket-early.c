@@ -163,7 +163,7 @@ TEST_IMPL(tcp_create_early_bad_bind) {
     ASSERT_OK(r);
     ASSERT_EQ(sockname.sin6_family, AF_INET6);
   }
-#else 
+#else
   ASSERT_PTR_NE(fd, INVALID_FD);
 #endif
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <XPath xmlns:bar="http://example.org/bar" xmlns:baz="http://example.org/baz" xmlns:foo="http://example.org/foo" xml:lang="en-ie">
-    (//. | //@* | //namespace::*) 
-    [ 
+    (//. | //@* | //namespace::*)
+    [
               <!-- only namespace nodes -->
               ancestor-or-self::bar:Something  and
               (count(parent::node()/namespace::*)  =

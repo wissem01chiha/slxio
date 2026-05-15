@@ -27,4 +27,3 @@ CTEST(worksheet, write_sheet_format_pr) {
 
     lxw_worksheet_free(worksheet);
 }
-

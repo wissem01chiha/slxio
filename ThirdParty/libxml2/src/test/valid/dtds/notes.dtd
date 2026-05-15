@@ -5,7 +5,7 @@ This gets parsed without complaint:
 
 <!--
 This triggers a diagnostic:
-notes.dtd:13: validity error : Definition of notes has duplicate 
+notes.dtd:13: validity error : Definition of notes has duplicate
 references of note
 <!ELEMENT pfx:notes  ( #PCDATA | pfx:note | note )* >
 -->

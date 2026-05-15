@@ -56,7 +56,7 @@ public:
     const IdType& blockId);
 
   /**
-   * Support adding Only SimulinkBlock and SimulinkParameter 
+   * Support adding Only SimulinkBlock and SimulinkParameter
    * Object Types.
    */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
@@ -79,7 +79,7 @@ public:
   std::string ToString() const override;
 
   /**
-   * .Return the block unqiue id 
+   * .Return the block unqiue id
    */
   IdType GetElementId() const override;
 
@@ -99,7 +99,7 @@ public:
   std::string GetBlockName();
 
   /**
-   * Retrieve a sub-block by name. Returns an empty shared_ptr if not 
+   * Retrieve a sub-block by name. Returns an empty shared_ptr if not
    * found.
    */
   std::shared_ptr<SimulinkBlock> GetSubBlock(const std::string& blockName);
@@ -122,8 +122,8 @@ public:
   std::shared_ptr<SimulinkParameter> GetParameter(const char* parameterName);
 
   /**
-   * Sets the block Id to a given one, shoule not used by public users, only 
-   * for internal Peraser 
+   * Sets the block Id to a given one, shoule not used by public users, only
+   * for internal Peraser
    */
   void SetBlockId(const IdType& blockId);
 

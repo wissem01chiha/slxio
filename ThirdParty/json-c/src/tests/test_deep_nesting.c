@@ -61,7 +61,7 @@ static void test_deep_nesting_tostring(const char *str)
 
 int main(int argc, char **argv)
 {
-	char *str;	
+	char *str;
 #ifdef HAVE_SETRLIMIT
 	struct rlimit rl;
 	rl.rlim_cur = 2048;

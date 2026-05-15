@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="yes"?>
 <svg width="4in" height="3in"
  xmlns = 'http://www.w3.org/Graphics/SVG/svg-19990412.dtd'>
-  <desc>This example uses the switch element to provide a 
-  fallback graphical representation of an equation, if 
+  <desc>This example uses the switch element to provide a
+  fallback graphical representation of an equation, if
   MathML is not supported.
   </desc>
   <!-- The <switch> element will process the first child element
@@ -12,8 +12,8 @@
     <!-- Process the MathML if the system-required attribute
          evaluates to true (i.e., the user agent supports MathML
          embedded within SVG). -->
-    <foreignobject 
-       system-required="http://www.w3.org/TR/REC-MathML-19980407" 
+    <foreignobject
+       system-required="http://www.w3.org/TR/REC-MathML-19980407"
        width="100" height="50">
       <!-- MathML content goes here -->
     </foreignobject>

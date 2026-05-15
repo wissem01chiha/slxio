@@ -194,7 +194,7 @@ ReturnType File::Delete()
     }
 
     if (std::remove(FilePath.c_str()) != 0) {
-        return E_FILE_REMOVE_FAILED;   
+        return E_FILE_REMOVE_FAILED;
     }
     return E_OK;
 }
@@ -267,7 +267,7 @@ bool File::Exist() const
   return Exist(FilePath);
 }
 
-const int File::GetFileMode() 
+const int File::GetFileMode()
 {
     switch (InternalFileMode)
     {
@@ -276,7 +276,7 @@ const int File::GetFileMode()
         case Mode::Truncate: return O_WRONLY | O_CREAT | O_TRUNC;
         case Mode::Append:   return O_WRONLY | O_CREAT | O_APPEND;
     }
-    return O_RDONLY;  
+    return O_RDONLY;
 }
 
 std::vector<char> File::GetInternalBuffer() const

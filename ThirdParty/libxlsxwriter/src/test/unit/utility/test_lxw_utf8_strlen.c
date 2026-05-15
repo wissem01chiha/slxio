@@ -21,4 +21,3 @@ CTEST(utility, lxw_utf8_strlen) {
     ASSERT_EQUAL(21, (long)lxw_utf8_strlen("Это фраза на русском!"));
 
 }
-

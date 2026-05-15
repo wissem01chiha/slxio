@@ -5,5 +5,5 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:test:foo any8_1.xsd">
 	<foo:bar/>
-        <foo:bar/>  
+        <foo:bar/>
 </foo:foo>

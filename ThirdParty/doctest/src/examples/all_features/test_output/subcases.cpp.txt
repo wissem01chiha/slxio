@@ -14,7 +14,7 @@ root
 subcases.cpp(0):
 TEST CASE:  lots of nested subcases
 
-subcases.cpp(0): FATAL ERROR: 
+subcases.cpp(0): FATAL ERROR:
 
 
 root

@@ -33,7 +33,7 @@ warning off;
 
             try
                 % If it's a Simulink model
-                if endsWith(srcFile, '.slx') 
+                if endsWith(srcFile, '.slx')
                     % Export to target release format
                     [~, modelName, ext] = fileparts(srcFile);
                     load_system(srcFile);

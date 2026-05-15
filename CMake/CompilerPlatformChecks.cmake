@@ -30,4 +30,3 @@ check_type_size("float"  SLXIO_ABI_SIZEOF_FLOAT)
 check_type_size(uint8_t  SLXIO_ABI_SIZEOF_UINT8_T)
 check_type_size(uint16_t SLXIO_ABI_SIZEOF_UINT16_T)
 check_type_size(uint32_t SLXIO_ABI_SIZEOF_UINT32_T)
-

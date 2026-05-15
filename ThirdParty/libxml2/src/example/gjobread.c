@@ -18,7 +18,7 @@
 
 /*
  * COMPAT using xml-config --cflags to get the include path this will
- * work with both 
+ * work with both
  */
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
@@ -123,7 +123,7 @@ DEBUG("parseJob\n");
     /* We don't care what the top level element name is */
     cur = cur->xmlChildrenNode;
     while (cur != NULL) {
-        
+
         if ((!xmlStrcmp(cur->name, (const xmlChar *) "Project")) &&
 	    (cur->ns == ns)) {
 	    ret->projectID = xmlGetProp(cur, (const xmlChar *) "ID");
@@ -133,7 +133,7 @@ DEBUG("parseJob\n");
 	}
         if ((!xmlStrcmp(cur->name, (const xmlChar *) "Application")) &&
             (cur->ns == ns))
-	    ret->application = 
+	    ret->application =
 		xmlNodeListGetString(doc, cur->xmlChildrenNode, 1);
         if ((!xmlStrcmp(cur->name, (const xmlChar *) "Category")) &&
 	    (cur->ns == ns))
@@ -193,7 +193,7 @@ parseGjobFile(char *filename) {
     /*
      * Check the document is of the right kind
      */
-    
+
     cur = xmlDocGetRootElement(doc);
     if (cur == NULL) {
         fprintf(stderr,"empty document\n");

@@ -30,7 +30,7 @@ type="text/css"?>
 
 	<authlist>
 		<!--Updated author hrefs  dorchard-->
-		<!-- Update Steve's email - bent --> 
+		<!-- Update Steve's email - bent -->
 		<author>
 			<name>Steve DeRose</name>
 			<affiliation>Inso Corp. and Brown University</affiliation>
@@ -240,7 +240,7 @@ document. bent-->
 	<p>A locator generally contains a URI, as described in IETF RFCs <bibref ref="rfc1738"/> and <bibref ref="rfc1808"/>. As these RFCs state, the URI may include a trailing <emph>query</emph> (marked by a leading "<code>?</code>"), and be followed by a "<code>#</code>" and a <emph>fragment identifier</emph>, with the query interpreted by the host providing the indicated resource, and the interpretation of the fragment identifier dependent on the data type of the indicated resource.</p>
 	<!--Is there some restriction on URNs having queries and/or fragment identifiers?  Since these RFCs don't mention URIs explicitly, should the wording here lead from URLs to URIs more explicitly? -elm-->
 	<p>In order to locate XML documents and portions of documents, a locator value may contain either a <xtermref href="http://www.w3.org/Addressing/rfc1738.txt"> URI</xtermref> or a fragment identifier, or both. Any fragment identifier for pointing into XML must be an <xtermref href="http://www.w3.org/TR/WD-xptr#dt-xpointer"> XPointer</xtermref>.</p>
-	<p>Special syntax may be used to request the use of particular processing models in accessing the locator's resource. This is designed to reflect the realities of network operation, where it may or may not be desirable to exercise fine control over the distribution of work between local and remote processors. 
+	<p>Special syntax may be used to request the use of particular processing models in accessing the locator's resource. This is designed to reflect the realities of network operation, where it may or may not be desirable to exercise fine control over the distribution of work between local and remote processors.
 		<scrap id="locator" lang="ebnf">
 			<head>Locator</head>
 			<prod id="nt-locator">
@@ -263,14 +263,14 @@ document. bent-->
 				<p><termdef id="dt-containing-resource" term="Containing Resource">		  The URI, if provided, locates a resource called the <term>containing resource</term>.</termdef></p>
 			</item>
 			<item>
-				<p>If the URI is not provided, the containing resource is considered to be the document in which the linking element is contained. 
+				<p>If the URI is not provided, the containing resource is considered to be the document in which the linking element is contained.
 				</p></item>
 			<item>
 				<p><termdef id="dt-sub-resource" term="Sub-Resource">If an XPointer				  is provided, the designated resource is a <term>sub-resource</term>
 				of the containing resource; otherwise the designated resource is the
 				containing resource.</termdef></p>
 			</item>
-			<!--Is this now incorrect, given the nature of the switch from here() to origin()? -elm 
+			<!--Is this now incorrect, given the nature of the switch from here() to origin()? -elm
 			Oy, yes, i think so. it will require some fun wording, though, so i haven't fixed it yet here -sjd-->
 			<item>
 				<p>If the <nt def="nt-connector">Connector</nt> is followed directly by a <xnt href="http://www.w3.org/TR/REC-xml#NT-Name">Name</xnt>, the <xnt href="http://www.w3.org/TR/REC-xml#NT-Name">Name</xnt> is shorthand for the XPointer"<code>id(Name)</code>"; that is, the sub-resource is the element in the containing resource that has an XML <xtermref href="http://www.w3.org/TR/REC-xml#sec-attrtypes">ID attribute</xtermref> whose value <xtermref href="http://www.w3.org/TR/REC-xml#dt-match">matches</xtermref> the 				  <xnt href="http://www.w3.org/TR/REC-xml#NT-Name">Name</xnt>. This shorthand is to encourage use of the robust <code>id</code> addressing mode.</p>
@@ -286,7 +286,7 @@ document. bent-->
 		</ulist>
 	</p>
 	<p>Note that the definition of a URI includes an optional query component. </p>
-	<p>In the case where the URI contains a query (to be interpreted by the server), information providers and authors of server software are urged to use queries as follows: 
+	<p>In the case where the URI contains a query (to be interpreted by the server), information providers and authors of server software are urged to use queries as follows:
 		<scrap id="querysyntax" lang="ebnf">
 			<head>Query</head>
 			<prod id="nt-query">
@@ -313,7 +313,7 @@ title="The XLink Working Draft"&gt;The XLink Working Draft&lt;/xlink:simple&gt;<
 <div1>
 	<head>Linking Attributes</head>
 	<p>XLink has several attributes associated with the variety of links it may represent. These attributes define four main concepts: locators, arcs, behaviors, and semantics. <emph>Locators</emph> define where the actual resource is located. <emph>Arcs</emph> define the traversal of links. Where does the link come from? Where does it go to? All this information can be stored in the arc attributes. <emph>Behaviors</emph> define how the link is activated, and what the application should do with the resource being linked to. <emph>Semantics</emph> define useful information that the application may use, and enables the link for such specalized targets as constricted devices and accessibility software.</p>
-	
+
 	<div2 id="link-locators">
 		<head>Locator Attributes</head>
 		<p>The only locator attribute at this time is <code>href</code>. This attribute must contain either a string in the form of a URI that defines the remote resource being linked to, a string containing a fragment identifier that links to a local resource, or a string containing a URI with a fragment identifier concacenated onto it.</p>
@@ -361,7 +361,7 @@ title="The XLink Working Draft"&gt;The XLink Working Draft&lt;/xlink:simple&gt;<
 	And here is how to make an arbitrary element into a simple link.
 	<eg>&lt;!ELEMENT xlink:simple ANY&gt;
 &lt;!ATTLIST foo
-	xlink:type     (simple|extended|locator|arc) #FIXED "simple"		
+	xlink:type     (simple|extended|locator|arc) #FIXED "simple"
     xlink:href     CDATA    				#REQUIRED
     xlink:role     CDATA    				#IMPLIED
     xlink:title    CDATA    				#IMPLIED
@@ -369,7 +369,7 @@ title="The XLink Working Draft"&gt;The XLink Working Draft&lt;/xlink:simple&gt;<
     xlink:actuate  (user|auto) 				"user"
 &gt;</eg>
 	Here is how the first example might look in a document:
-<eg>&lt;xlink:simple href="http://www.w3.org/TR/wd-xlink" role="working draft" 
+<eg>&lt;xlink:simple href="http://www.w3.org/TR/wd-xlink" role="working draft"
 	title="The XLink Working Draft" show="replace" actuate="user"&gt;
 The XLink Working Draft.&lt;/xlink:simple&gt;</eg>
 <eg>&lt;foo xlink:href="http://www.w3.org/TR/wd-xlink" xlink:role="working draft"
@@ -396,7 +396,7 @@ The XLink Working Draft.&lt;/foo&gt;</eg>
 <div2 id="extended-link">
 <head>Extended Links</head>
 	<p><termdef id="dt-extendedlink" term="Extended Link">An <term>extended link</term> differs from a simple link in that it can connect any number of resources, not just one local resource (optionally) and one remote resource, and in that extended links are more often out-of-line than simple links.</termdef></p>
-	<p>These additional capabilities of extended links are required for:  
+	<p>These additional capabilities of extended links are required for:
 		<ulist>
 			<item>
 				<p>Enabling outgoing links in documents that cannot be modified to add an inline link</p>
@@ -415,12 +415,12 @@ The XLink Working Draft.&lt;/foo&gt;</eg>
 	<p>The <code>xlink:type</code> attribute value for an extended link must be <code> extended</code>, if the link is being instantiated on an arbitrary element. Note that extended links introduce variants of the <code>show</code> and <code>actuate</code> behavior attributes. These attributes, the <code>showdefault</code> and <code>actuatedefault</code> define the same behavior as their counterparts. However, in this case, they are considered to define the default behavior for all the linking elements that they contain.</p>
 	<p>However, when a linking element within an extended link has a <code>show</code> or <code>actuate</code> attribute of its own, that attribute overrides the defaults set on the extended linking element.</p>
 	<p>The extended linking element itself retains those attributes relevant to the link as a whole, and to its local resource if any. Following are two sample declaration for an extended link. The first is an example of the explicit XLink extended link:
-	
+
 <eg>&lt;!ELEMENT xlink:extended ((xlink:arc | xlink:locator)*)&gt;
 &lt;!ATTLIST xlink:extended
 	role           CDATA    				#IMPLIED
 	title          CDATA    				#IMPLIED
-	showdefault    (new|parsed|replace)    	#IMPLIED 
+	showdefault    (new|parsed|replace)    	#IMPLIED
     actuatedefault (user|auto) 				#IMPLIED &gt;</eg>
 
 	The second is an example of an arbitrary element being used an extended link:
@@ -430,7 +430,7 @@ The XLink Working Draft.&lt;/foo&gt;</eg>
 	xlink:type     	(simple|extended|locator|arc) 	#FIXED "extended"
 	xlink:role           CDATA    					#IMPLIED
 	xlink:title          CDATA    					#IMPLIED
-	xlink:showdefault    (new|parsed|replace)    	#IMPLIED 
+	xlink:showdefault    (new|parsed|replace)    	#IMPLIED
     xlink:actuatedefault (user|auto) 				#IMPLIED &gt;</eg>
 
 	The following two examples demonstrate how each of the above might appear within a document instance. Note that the content of these examples would be other elements. For brevity's sake, they've been left blank. The first example shows how the link might appear, using an explicit XLink extended link:

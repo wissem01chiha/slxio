@@ -159,7 +159,7 @@ TEST_CASE("Providing options values via equal sign", "[options]")
 
   options.add_options()
     ("o,option", "a option", cxxopts::value<std::string>())
-    ("b", "bool option as string", 
+    ("b", "bool option as string",
       cxxopts::value<std::string>()->implicit_value("true")->default_value("false"))
     ("c", "c option", cxxopts::value<std::string>()->implicit_value("implicit"));
 
@@ -201,9 +201,9 @@ TEST_CASE("Providing options values via equal sign", "[options]")
       false
     },
     {
-      "Short empty value", 
-      Argv{"test_equal_sign", "-o="}, 
-      {{"o", ""}}, 
+      "Short empty value",
+      Argv{"test_equal_sign", "-o="},
+      {{"o", ""}},
       false
     },
     {
@@ -1481,7 +1481,7 @@ TEST_CASE("Iterator", "[iterator]") {
   REQUIRE(++iter != result.end());
   CHECK(iter->key() == "default");
   CHECK(iter->value() == "42");
-  
+
   REQUIRE(++iter == result.end());
 }
 
@@ -1508,7 +1508,7 @@ TEST_CASE("Iterator no args", "[iterator]") {
   REQUIRE(iter != result.end());
   CHECK(iter->key() == "default");
   CHECK(iter->value() == "42");
-  
+
   ++iter;
   CHECK(iter == result.end());
 }
@@ -1547,7 +1547,7 @@ TEST_CASE("Ordering of multiple long options", "[help]")
     ("alphaz,betaz,z", "Multiple names z", cxxopts::value<int>())
     ("alphaw,w", "Multiple names w", cxxopts::value<int>())
     ("beta,gamma,alpha,delta", "Without short name", cxxopts::value<int>());
-    
+
   auto opts = options.group_help("").options;
 
   // Veryfiy ordering
@@ -1560,7 +1560,7 @@ TEST_CASE("Ordering of multiple long options", "[help]")
 
 
   std::string help = options.help();
-  
+
   // Verify first long options are always present in help output
   CHECK(help.find("--alphax") != std::string::npos);
   CHECK(help.find("--deltay") != std::string::npos);

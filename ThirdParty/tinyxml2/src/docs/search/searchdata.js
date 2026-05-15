@@ -21,4 +21,3 @@ var indexSectionLabels =
   2: "Functions",
   3: "Pages"
 };
-

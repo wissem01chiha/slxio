@@ -15,4 +15,3 @@ ReturnType SimulinkArrayWriter::Write()
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-

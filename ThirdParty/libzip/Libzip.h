@@ -8,6 +8,6 @@
 #include <libzip/zip.h>
 #else
 #include <src/lib/zip.h>
-#endif 
+#endif
 
-#endif // LIBZIP_H 
+#endif // LIBZIP_H

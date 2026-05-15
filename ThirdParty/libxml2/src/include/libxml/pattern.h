@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief pattern expression handling
- * 
+ *
  * allows to compile and test pattern expressions for nodes
  *              either in a tree or based on a parser state.
  *

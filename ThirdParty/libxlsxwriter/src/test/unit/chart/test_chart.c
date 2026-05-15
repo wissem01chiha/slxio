@@ -154,4 +154,3 @@ CTEST(chart, chart01) {
 
     lxw_chart_free(chart);
 }
-

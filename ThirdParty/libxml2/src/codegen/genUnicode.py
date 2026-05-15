@@ -20,7 +20,7 @@ import rangetab
 blockAliases = []
 blockAliases.append("CombiningMarksforSymbols:CombiningDiacriticalMarksforSymbols")
 blockAliases.append("Greek:GreekandCoptic")
-blockAliases.append("PrivateUse:PrivateUseArea,SupplementaryPrivateUseArea-A," + 
+blockAliases.append("PrivateUse:PrivateUseArea,SupplementaryPrivateUseArea-A," +
 	"SupplementaryPrivateUseArea-B")
 
 # minTableSize gives the minimum number of ranges which must be present
@@ -122,7 +122,7 @@ for line in data.readlines():
     except:
         print("Failed to process line: %s" % (line))
         continue
-    
+
     nbchar = nbchar + 1
     # update entry for "full name"
     try:

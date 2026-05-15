@@ -68,7 +68,7 @@
       <zeroOrMore>
         <element name="attribute">
           <attribute name="name"/>
-          <ref name="expr"/> 
+          <ref name="expr"/>
         </element>
       </zeroOrMore>
       <optional>

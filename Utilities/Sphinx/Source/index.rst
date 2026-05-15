@@ -17,8 +17,8 @@ using modern scripting languages such as Python, Lua, etc., via C++ bindings.
 Features
 --------
 
-*  
-* 
+*
+*
 
 
 
@@ -44,4 +44,3 @@ Installation
 ------------
 
 Installation instructions can be found in the `README <https://github.com/wissemchiha/slxio/blob/master/README.md>`_.
-

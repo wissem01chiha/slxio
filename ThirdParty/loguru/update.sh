@@ -12,4 +12,3 @@ files=(
     "loguru.cpp"
     "README.md"
 )
-

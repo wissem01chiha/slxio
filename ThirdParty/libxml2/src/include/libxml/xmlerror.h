@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Error handling
- * 
+ *
  * API for error reporting and callbacks.
  *
  * @copyright See Copyright for the status of this software.

@@ -8,6 +8,6 @@
 #include <rapidcsv.h>
 #else
 #include <src/src/rapidcsv.h>
-#endif 
+#endif
 
 #endif // RAPIDCSV_H

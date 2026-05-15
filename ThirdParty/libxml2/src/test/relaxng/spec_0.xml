@@ -347,7 +347,7 @@ URI</para></listitem>
 </itemizedlist>
 
 <para>followed by an element which has</para>
- 
+
 <itemizedlist>
 <listitem><para>a name which has</para>
 <itemizedlist>
@@ -1182,7 +1182,7 @@ that ranges over names</para></listitem></varlistentry>
       <p:var range="name"/>
       <p:var range="nameClass"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that name <p:var range="name"/> is a member of name class <p:var range="nameClass"/>
 
 </para></listitem></varlistentry>
@@ -1233,7 +1233,7 @@ range="name"/>.</para>
 <para>This says that for any name <p:var range="name"/>
 and for any name class 	<p:var range="nameClass"/>,
 if <p:var range="name"/> does not belong to <p:var range="nameClass"/>,
-then <p:var range="name"/> belongs to 
+then <p:var range="name"/> belongs to
       <p:element name="anyName">
         <p:element name="except">
   	  <p:var range="nameClass"/>
@@ -1398,7 +1398,7 @@ production)</para></listitem></varlistentry>
       <p:var range="mixed"/>
       <p:var range="pattern"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that with respect to context <p:var range="context"/>, the
 attributes <p:var range="att"/> and the sequence of elements and
 strings <p:var range="mixed"/> matches the pattern <p:var
@@ -1706,7 +1706,7 @@ and of an attribute in <p:var range="att" sub="2"/>
       <p:var range="mixed" sub="2"/>
       <p:var range="mixed" sub="3"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that <p:var range="mixed" sub="1"/>
 is an interleaving of <p:var range="mixed" sub="2"/>
 and <p:var range="mixed" sub="3"/>
@@ -1719,7 +1719,7 @@ and <p:var range="mixed" sub="3"/>
 
 <p:proofSystem>
   <p:rule name="interleaves 1">
-   
+
     <p:judgement name="interleave">
       <p:function name="emptySequence"/>
       <p:function name="emptySequence"/>
@@ -1729,7 +1729,7 @@ and <p:var range="mixed" sub="3"/>
   </p:rule>
 
   <p:rule name="interleaves 2">
-   
+
     <p:judgement name="interleave">
       <p:var range="mixed" sub="1"/>
       <p:var range="mixed" sub="2"/>
@@ -1751,7 +1751,7 @@ and <p:var range="mixed" sub="3"/>
   </p:rule>
 
   <p:rule name="interleaves 3">
-   
+
     <p:judgement name="interleave">
       <p:var range="mixed" sub="1"/>
       <p:var range="mixed" sub="2"/>
@@ -1861,7 +1861,7 @@ whitespace</para></listitem></varlistentry>
       <p:var range="mixed"/>
       <p:var range="pattern"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that with respect to context <p:var range="context"/>, the
 attributes <p:var range="att"/> and the sequence of elements and
 strings <p:var range="mixed"/> weakly matches the pattern <p:var
@@ -1924,7 +1924,7 @@ range="pattern"/></para></listitem></varlistentry>
         <p:var range="name"/>
         <p:var range="string"/>
       </p:function></term><listitem><para>
-      
+
 constructs an attribute with name <p:var range="name"/>
 and value <p:var range="string"/>
 </para></listitem></varlistentry>
@@ -1935,7 +1935,7 @@ and value <p:var range="string"/>
 	<p:var range="att"/>
 	<p:var range="mixed"/>
       </p:function></term><listitem><para>
-      
+
 constructs an element with name <p:var range="name"/>,
 context <p:var range="context"/>,
 attributes <p:var range="att"/>
@@ -1945,7 +1945,7 @@ and mixed sequence <p:var range="mixed"/> as children
 <varlistentry><term><p:judgement name="okAsChildren">
       <p:var range="mixed"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that the mixed sequence <p:var range="mixed"/> can occur as
 the children of an element: it does not contain any member that is an
 empty string, nor does it contain two consecutive members that are
@@ -1956,7 +1956,7 @@ both strings</para></listitem></varlistentry>
       <p:var range="nameClass"/>
       <p:var range="pattern"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that the grammar contains
 <p:element name="define">
   <p:attribute name="name">
@@ -2095,7 +2095,7 @@ map.</para>
       <p:var range="string"/>
       <p:var range="context"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that in the datatype library identified by URI <p:var range="uri"/>, the string <p:var range="string"/> interpreted with
 context <p:var range="context"/> is a legal
 value of datatype <p:var range="ncname"/> with parameters <p:var range="params"/></para></listitem></varlistentry>
@@ -2108,7 +2108,7 @@ value of datatype <p:var range="ncname"/> with parameters <p:var range="params"/
       <p:var range="string" sub="2"/>
       <p:var range="context" sub="2"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that in the datatype library identified by URI <p:var range="uri"/>, string <p:var range="string" sub="1"/> interpreted with
 context <p:var range="context" sub="1"/> represents the same value of
 the datatype <p:var range="ncname"/> as the string <p:var range="string" sub="2"/> interpreted in the context of <p:var range="context" sub="2"/>
@@ -2119,7 +2119,7 @@ the datatype <p:var range="ncname"/> as the string <p:var range="string" sub="2"
 <varlistentry><term><p:context>
      <p:var range="context"/>
    </p:context></term><listitem><para>
-   
+
 within the start-tag of a pattern refers to the context
 of the pattern element
 </para></listitem></varlistentry>
@@ -2410,7 +2410,7 @@ follows:</para>
 <varlistentry><term><p:function name="split">
         <p:var range="string"/>
       </p:function></term><listitem><para>
-      
+
 returns a sequence of strings one for each whitespace delimited token
 of <p:var range="string"/>; each string in the returned sequence will
 be non-empty and will not contain any
@@ -2465,7 +2465,7 @@ schema.  We use the following additional notation:</para>
 <varlistentry><term><p:judgement name="valid">
       <p:var range="element"/>
     </p:judgement></term><listitem><para>
-    
+
 asserts that the element <p:var range="element"/> is valid with
 respect to the grammar</para></listitem></varlistentry>
 
@@ -2495,7 +2495,7 @@ it matches the <literal>start</literal> pattern of the grammar.</para>
       <p:var range="element"/>
     </p:judgement>
   </p:rule>
-      
+
 
 </p:proofSystem>
 

@@ -7,4 +7,3 @@ Commands to build the example project:
 
     pushd ../../ ; ./make.sh install ; popd
     mkdir -p build && cd build && cmake .. && make
-

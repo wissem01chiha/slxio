@@ -1573,4 +1573,3 @@ XMLPUBFUN size_t         xmlBufShrink	(xmlBuf *buf, size_t len);
 #endif /* __XML_TREE_H__ */
 
 #endif /* XML_TREE_INTERNALS */
-

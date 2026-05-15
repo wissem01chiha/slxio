@@ -29,4 +29,3 @@ if(DELETE_STATIC)
         ./test_file_static.orig
         ./test_file_static.zip)
 endif(DELETE_STATIC)
-

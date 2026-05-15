@@ -62,7 +62,7 @@ TEST_IMPL(pipe_close_stdout_read_stdin) {
 
   r = pipe(fd);
   ASSERT_OK(r);
-    
+
 #if defined(__APPLE__) && (TARGET_OS_TV || TARGET_OS_WATCH)
   pid = -1;
 #else

@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief XML Schematron implementation
- * 
+ *
  * interface to the XML Schematron validity checking.
  *
  * @copyright See Copyright for the status of this software.

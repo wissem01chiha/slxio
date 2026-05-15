@@ -35,4 +35,3 @@ htmlNodeDumpInternal(xmlOutputBuffer *buf, xmlNode *cur,
 #endif /* LIBXML_HTML_ENABLED */
 
 #endif /* XML_HTML_H_PRIVATE__ */
-

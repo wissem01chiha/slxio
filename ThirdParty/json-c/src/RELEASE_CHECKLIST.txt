@@ -29,7 +29,7 @@
         ( git log -r ${PREV}..HEAD | grep Author: | sed -e's/Author: //' ; cat AUTHORS ) | sort -u > A1
         mv A1 AUTHORS
 
-    * Exclude mentioning changes that have already been included in a point 
+    * Exclude mentioning changes that have already been included in a point
       release of the previous release branch.
 
 * Update ChangeLog with relevant notes before branching.

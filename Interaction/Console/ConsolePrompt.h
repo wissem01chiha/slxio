@@ -37,4 +37,3 @@ wchar_t *setPrompt(wchar_t *);
  */
 int printPrompt(int);
 #endif /* __SETCONSOLEPROMPT_H__ */
-

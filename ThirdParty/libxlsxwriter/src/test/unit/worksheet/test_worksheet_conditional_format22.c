@@ -224,5 +224,3 @@ CTEST(worksheet, worksheet_condtional_format22) {
 
     lxw_worksheet_free(worksheet);
 }
-
-

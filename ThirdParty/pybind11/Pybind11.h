@@ -8,6 +8,6 @@
 
 #else
 
-#endif 
+#endif
 
 #endif // PYBIND11_H

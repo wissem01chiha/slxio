@@ -76,4 +76,3 @@ for my $i ( 0 .. @examples - 1 ) {
 
 # Print the end of the doxygen comment.
 print "*/\n";
-

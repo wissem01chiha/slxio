@@ -8,6 +8,6 @@
 #include <tinyxml2.h>
 #else
 #include <src/tinyxml2.h>
-#endif 
+#endif
 
 #endif // TINYXML2_H

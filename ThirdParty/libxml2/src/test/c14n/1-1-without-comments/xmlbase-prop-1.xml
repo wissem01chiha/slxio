@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 
+<!--
 http://www.w3.org/TR/xmldsig2ed-tests/#c14n11xmlbase-prop-1
 
-Check that implementations of [XML-C14N1.1] work properly when the 
-xml:base origin appears in the output document subset and also children 
+Check that implementations of [XML-C14N1.1] work properly when the
+xml:base origin appears in the output document subset and also children
 with xml:base, which do not require further processing, are also present.
 -->
 <ietf:c14n11XmlBaseDoc1 xmlns:ietf="http://www.ietf.org" xmlns:w3c="http://www.w3.org" xml:base="http://xmlbase.example.org/xmlbase0/">

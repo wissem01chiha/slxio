@@ -10,7 +10,7 @@ appconf_data.set('HAVE_SYS_RESOURCE_H', cc.has_header('sys/resource.h') ? 1 : 0,
 if appconf_data.get('HAVE_SYS_RESOURCE_H') == 1
   appconf_data.set('HAVE_GETRUSAGE',
     cc.has_function('getrusage', prefix: '#include <sys/resource.h>') ? 1 : 0, description: 'Define if you have the `getrusage` function. ')
-else 
+else
   appconf_data.set('HAVE_GETRUSAGE', 0, description: 'Define if you have the `getrusage` function. ')
 endif
 

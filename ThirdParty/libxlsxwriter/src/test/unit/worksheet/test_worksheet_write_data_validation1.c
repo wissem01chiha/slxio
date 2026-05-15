@@ -213,4 +213,3 @@ CTEST(worksheet, write_data_validations07) {
 
     lxw_worksheet_free(worksheet);
 }
-

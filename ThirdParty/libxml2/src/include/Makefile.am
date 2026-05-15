@@ -2,4 +2,3 @@
 SUBDIRS=libxml private
 
 EXTRA_DIST = meson.build
-

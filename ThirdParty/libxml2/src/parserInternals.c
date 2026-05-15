@@ -3745,4 +3745,3 @@ xmlKeepBlanksDefault(int val) {
 #endif
     return(old);
 }
-

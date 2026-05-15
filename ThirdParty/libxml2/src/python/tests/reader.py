@@ -242,7 +242,7 @@ if reader.MoveToNextAttribute() != 0:
     print("Failed to detect last attribute")
     sys.exit(1)
 
-    
+
 #
 # a couple of tests for namespace nodes
 #
@@ -316,7 +316,7 @@ def tst_reader(s):
                                        reader.Name(),reader.Value(),
                                        reader.IsEmptyElement(), reader.Depth())
     return res
-    
+
 doc="""<a><b b1="b1"/><c>content of c</c></a>"""
 expect="""1 (a) [None] 0 0
 1 (b) [None] 1 1
@@ -407,7 +407,7 @@ if res != expect:
     sys.exit(1)
 
 #
-# test from bug #108801 
+# test from bug #108801
 #
 doc="""<?xml version="1.0" standalone="no"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"

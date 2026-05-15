@@ -7,7 +7,7 @@ long comment long comment long comment long comment long comment long comment
 long comment long comment long comment long comment long comment long comment
 long comment long comment long comment long comment long comment long comment
 -->
-<!DOCTYPE a [ 
-<!ELEMENT a EMPTY> 
+<!DOCTYPE a [
+<!ELEMENT a EMPTY>
 ]>
 <a/>

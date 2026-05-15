@@ -65,5 +65,3 @@ CTEST(worksheet, write_write_sheet_pr03) {
 
     lxw_worksheet_free(worksheet);
 }
-
-

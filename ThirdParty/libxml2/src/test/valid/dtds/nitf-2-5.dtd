@@ -6,14 +6,14 @@
 	Copyright (c) 2000. All Rights Reserved.
 	International Press Telecommunications Council
 	http://www.iptc.org
-		
+
 	Last changed: 9 August 2000  wb/kr/ak
-	
+
 	For the list of modifications from previous releases, see:
-		http://www.nitf.org/recent-modifications.html 
+		http://www.nitf.org/recent-modifications.html
 
 	For the list of proposed modifications, see:
-		http://www.nitf.org/proposed-changes.html 
+		http://www.nitf.org/proposed-changes.html
 -->
 
 
@@ -79,13 +79,13 @@
 	baselang 	CDATA 		#IMPLIED
 	class 		NMTOKENS 	#IMPLIED
 	>
-	
+
 
 <!ELEMENT head (title?, meta*, tobject?, iim?, docdata?, pubdata*, revision-history*)>
 <!ATTLIST head
 	%global-attributes;
 	>
-	
+
 <!ELEMENT title (#PCDATA)>
 <!ATTLIST title
 	%global-attributes;
@@ -98,7 +98,7 @@
 		| other
 		) 	#IMPLIED
 	>
-	
+
 <!ELEMENT meta EMPTY>
 <!ATTLIST meta
 	%global-attributes;
@@ -106,19 +106,19 @@
 	name 		NMTOKEN 	#IMPLIED
 	content 	CDATA 		#REQUIRED
 	>
-	
+
 <!ELEMENT tobject (tobject.property*, tobject.subject*)>
 <!ATTLIST tobject
 	%global-attributes;
 	tobject.type 		CDATA 	"news"
 	>
-	
+
 	<!ELEMENT tobject.property EMPTY>
 	<!ATTLIST tobject.property
 		%global-attributes;
 		tobject.property.type 	CDATA 	"current"
 		>
-		
+
 	<!ELEMENT tobject.subject  EMPTY>
 	<!ATTLIST tobject.subject
 		%global-attributes;
@@ -129,20 +129,20 @@
 		tobject.subject.matter 		CDATA 		#IMPLIED
 		tobject.subject.detail 		CDATA 		#IMPLIED
 		>
-		
+
 <!ELEMENT iim (ds*)>
 <!ATTLIST iim
 	%global-attributes;
 	ver 	NMTOKEN 	#IMPLIED
 	>
-	
+
 	<!ELEMENT ds EMPTY>
 	<!ATTLIST ds
 		%global-attributes;
 		num 		NMTOKEN 	#REQUIRED
 		value 		CDATA 		#IMPLIED
 		>
-		
+
 <!ELEMENT docdata (
 	correction
 	| evloc
@@ -164,7 +164,7 @@
 <!ATTLIST docdata
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT correction EMPTY>
 	<!ATTLIST correction
 		%global-attributes;
@@ -172,7 +172,7 @@
 		id-string 	CDATA 	#IMPLIED
 		reg-src 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT evloc EMPTY>
 	<!ATTLIST evloc
 		%global-attributes;
@@ -181,62 +181,62 @@
 		county-dist 	CDATA 	#IMPLIED
 		city 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT doc-id EMPTY>
 	<!ATTLIST doc-id
 		%global-attributes;
 		regsrc 		CDATA 	#IMPLIED
 		id-string 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT del-list (from-src)*>
 	<!ATTLIST del-list
 		%global-attributes;
 		>
-		
+
 		<!ELEMENT from-src EMPTY>
 		<!ATTLIST from-src
 			%global-attributes;
 			src-name 	CDATA 	#IMPLIED
 			level-number 	CDATA 	#IMPLIED
 			>
-			
+
 	<!ELEMENT urgency EMPTY>
 	<!ATTLIST urgency
 		%global-attributes;
 		ed-urg 		NMTOKEN 	#IMPLIED
 		>
-		
+
 	<!ELEMENT fixture EMPTY>
 	<!ATTLIST fixture
 		%global-attributes;
 		fix-id 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT date.issue EMPTY>
 	<!ATTLIST date.issue
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT date.release EMPTY>
 	<!ATTLIST date.release
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT date.expire EMPTY>
 	<!ATTLIST date.expire
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT doc-scope EMPTY>
 	<!ATTLIST doc-scope
 		%global-attributes;
 		scope 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT series EMPTY>
 	<!ATTLIST series
 		%global-attributes;
@@ -244,14 +244,14 @@
 		series.part 		NMTOKEN 	"0"
 		series.totalpart 	NMTOKEN 	"0"
 		>
-		
+
 	<!ELEMENT ed-msg EMPTY>
 	<!ATTLIST ed-msg
 		%global-attributes;
 		msg-type 	CDATA 	#IMPLIED
 		info 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT du-key EMPTY>
 	<!ATTLIST du-key
 		%global-attributes;
@@ -260,14 +260,14 @@
 		version 	NMTOKEN 	#IMPLIED
 		key 		CDATA 		#IMPLIED
 		>
-		
+
 	<!ELEMENT doc.copyright EMPTY>
 	<!ATTLIST doc.copyright
 		%global-attributes;
 		year 		NMTOKEN 	#IMPLIED
 		holder 		CDATA 		#IMPLIED
 		>
-		
+
 	<!ELEMENT doc.rights EMPTY>
 	<!ATTLIST doc.rights
 		%global-attributes;
@@ -281,18 +281,18 @@
 		type 		CDATA 		#IMPLIED
 		limitations 	CDATA 		#IMPLIED
 		>
-		
+
 	<!ELEMENT key-list (keyword)*>
 	<!ATTLIST key-list
 		%global-attributes;
 		>
-		
+
 		<!ELEMENT keyword EMPTY>
 		<!ATTLIST keyword
 			%global-attributes;
 			key 		CDATA 	#IMPLIED
 			>
-			
+
 <!ELEMENT pubdata EMPTY>
 <!ATTLIST pubdata
 	%global-attributes;
@@ -329,7 +329,7 @@
 	position.sequence 	CDATA 		#IMPLIED
 	ex-ref 			CDATA 		#IMPLIED
 	>
-	
+
 <!ELEMENT revision-history EMPTY>
 <!ATTLIST revision-history
 	%global-attributes;
@@ -348,14 +348,14 @@
 	norm 		CDATA 			#IMPLIED
 	comment 	CDATA 			#IMPLIED
 	>
-	
+
 
 <!ELEMENT body (body.head?, body.content*, body.end?)>
 <!ATTLIST body
 	%common-attributes;
 	background 	CDATA 		#IMPLIED
 	>
-	
+
 
 <!ELEMENT body.head (
 	hedline?,
@@ -370,18 +370,18 @@
 <!ATTLIST body.head
 	%global-attributes;
 	>
-	
+
 <!ELEMENT hedline (hl1, hl2*)>
 <!ATTLIST hedline
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT hl1 (%enriched-text;)*>
 	<!ATTLIST hl1 %common-attributes;>
-	
+
 	<!ELEMENT hl2 (%enriched-text;)*>
 	<!ATTLIST hl2 %common-attributes;>
-	
+
 <!ELEMENT note (body.content)+>
 <!ATTLIST note
 	%common-attributes;
@@ -397,7 +397,7 @@
 	src 		CDATA 			#IMPLIED
 	%url.link;
 	>
-	
+
 <!ELEMENT rights (
 	#PCDATA
 	| rights.owner
@@ -411,102 +411,102 @@
 <!ATTLIST rights
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT rights.owner (#PCDATA)>
 	<!ATTLIST rights.owner
 		%global-attributes;
 		contact 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT rights.startdate (#PCDATA)>
 	<!ATTLIST rights.startdate
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT rights.enddate (#PCDATA)>
 	<!ATTLIST rights.enddate
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT rights.agent (#PCDATA)>
 	<!ATTLIST rights.agent
 		%global-attributes;
 		contact 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT rights.geography (#PCDATA)>
 	<!ATTLIST rights.geography
 		%global-attributes;
 		location-code 	CDATA 	#IMPLIED
 		code-source 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT rights.type (#PCDATA)>
 	<!ATTLIST rights.type
 		%global-attributes;
 		>
-		
+
 	<!ELEMENT rights.limitations (#PCDATA)>
 	<!ATTLIST rights.limitations
 		%global-attributes;
 		>
-		
+
 <!ELEMENT byline (#PCDATA | person | byttl | location | virtloc)*>
 <!ATTLIST byline
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT byttl (#PCDATA | org )*>
 	<!ATTLIST byttl
 		%global-attributes;
 		>
-		
+
 <!ELEMENT distributor (#PCDATA | org)*>
 <!ATTLIST distributor
 	%global-attributes;
 	>
-	
+
 <!ELEMENT dateline (#PCDATA | location | story.date)*>
 <!ATTLIST dateline %common-attributes;>
-	
+
 	<!ELEMENT story.date (#PCDATA)>
 	<!ATTLIST story.date
 		%global-attributes;
 		norm 		CDATA 	#IMPLIED
 		>
-		
+
 <!ELEMENT abstract (%block.content;)+>
 <!ATTLIST abstract
 	%global-attributes;
 	>
-	
+
 
 <!ELEMENT copyrite (#PCDATA | copyrite.year | copyrite.holder)*>
 <!ATTLIST copyrite
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT copyrite.year (#PCDATA)>
 	<!ATTLIST copyrite.year
 		%global-attributes;
 		>
-		
+
 	<!ELEMENT copyrite.holder (#PCDATA)>
 	<!ATTLIST copyrite.holder
 		%global-attributes;
 		>
-		
+
 
 <!ELEMENT body.content (block | %block.content;)*>
 <!ATTLIST body.content
 	%global-attributes;
 	>
-	
+
 <!ELEMENT block ((%block.head;)?, (%block.content;)*, (%block.end;)?)>
 <!ATTLIST block %common-attributes;>
-	
+
 <!ELEMENT p (%enriched-text;)*>
 <!ATTLIST p
 	%common-attributes;
@@ -514,7 +514,7 @@
 	summary 	%boolean; 	#IMPLIED
 	optional-text 	%boolean; 	#IMPLIED
 	>
-	
+
 
 <!ELEMENT table (caption?, (col* | colgroup*), thead?, tfoot?, tbody+)>
 <!ATTLIST table
@@ -552,7 +552,7 @@
 	table.domain 	CDATA 		#IMPLIED
 	table.inst 	CDATA 		#IMPLIED
 	>
-	
+
 <!ELEMENT media (media-metadata*, media-reference, media-object?, media-caption*, media-producer?)>
 <!ATTLIST media
 	%common-attributes;
@@ -566,7 +566,7 @@
 			| other
 			)		#REQUIRED
 	>
-	
+
 	<!ELEMENT media-reference (#PCDATA)>
 	<!ATTLIST media-reference
 		%common-attributes;
@@ -587,30 +587,30 @@
 		imagemap 		CDATA 		#IMPLIED
 		noflow 			(noflow) 	#IMPLIED
 		>
-		
+
 	<!ELEMENT media-metadata EMPTY>
 	<!ATTLIST media-metadata
 		%common-attributes;
 		name 		CDATA 		#REQUIRED
 		value 		CDATA 		#IMPLIED
 		>
-		
+
 	<!ELEMENT media-object (#PCDATA)>
 	<!ATTLIST media-object
 		%common-attributes;
 		encoding 	CDATA 	#REQUIRED
 		>
-		
+
 	<!ELEMENT media-caption (%enriched-text; | %block.content;)*>
 	<!ATTLIST media-caption
 		%common-attributes;
 		>
-		
+
 	<!ELEMENT media-producer (%enriched-text;)*>
 	<!ATTLIST media-producer
 		%common-attributes;
 		>
-		
+
 <!ELEMENT ol (li)+>
 <!ATTLIST ol
 	%common-attributes;
@@ -618,7 +618,7 @@
 	seqnum 		NMTOKEN 	#IMPLIED
 	compact 	(compact) 	#IMPLIED
 	>
-	
+
 <!ELEMENT ul (li)+>
 <!ATTLIST ul
 	%common-attributes;
@@ -629,7 +629,7 @@
 	%url.link;
 	compact 	(compact) 		#IMPLIED
 	>
-	
+
 	<!ELEMENT li (%enriched-text; | %block.content;)*>
 	<!ATTLIST li
 		%common-attributes;
@@ -638,47 +638,47 @@
 		%url.link;
 		skip 		NMTOKEN 	"0"
 		>
-		
+
 <!ELEMENT dl (dt | dd)+>
 <!ATTLIST dl %common-attributes;>
-	
+
 	<!ELEMENT dt (%enriched-text;)*>
 	<!ATTLIST dt %common-attributes;>
-		
+
 	<!ELEMENT dd (block)*>
 	<!ATTLIST dd %common-attributes;>
-		
+
 <!ELEMENT bq (block+, credit?)*>
 <!ATTLIST bq
 	%common-attributes;
 	nowrap 		(nowrap) 	#IMPLIED
 	quote-source 	CDATA 		#IMPLIED
 	>
-	
+
 	<!ELEMENT credit (%enriched-text;)*>
 	<!ATTLIST credit %common-attributes;>
-	
+
 <!ELEMENT fn (body.content)+>
 <!ATTLIST fn %common-attributes;>
-	
+
 
 <!ELEMENT pre (#PCDATA)>
 <!ATTLIST pre
 	%global-attributes;
 	>
-	
+
 <!ELEMENT hr EMPTY>
 <!ATTLIST hr
 	%global-attributes;
 	src 		CDATA 	#IMPLIED
 	>
-	
+
 
 <!ELEMENT datasource (#PCDATA)>
 <!ATTLIST datasource
 	%global-attributes;
 	>
-	
+
 
 
 <!ELEMENT caption (%enriched-text; | %block.content;)*>
@@ -691,7 +691,7 @@
 			| right
 			) 		#IMPLIED
 	>
-	
+
 <!ELEMENT col EMPTY>
 <!ATTLIST col
 	%common-attributes;
@@ -700,42 +700,42 @@
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT colgroup (col+)>
 <!ATTLIST colgroup
 	%common-attributes;
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT thead (tr+)>
 <!ATTLIST thead
 	%common-attributes;
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT tbody (tr+)>
 <!ATTLIST tbody
 	%common-attributes;
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT tfoot (tr+)>
 <!ATTLIST tfoot
 	%common-attributes;
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT tr (th | td)+>
 <!ATTLIST tr
 	%common-attributes;
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT th (%enriched-text; | %block.content;)*>
 <!ATTLIST th
 	%common-attributes;
@@ -747,7 +747,7 @@
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 <!ELEMENT td (%enriched-text; | %block.content;)*>
 <!ATTLIST td
 	%common-attributes;
@@ -759,14 +759,14 @@
 	%cell.align;
 	%cell.valign;
 	>
-	
+
 
 <!ELEMENT chron (#PCDATA)>
 <!ATTLIST chron
 	%global-attributes;
 	norm 		CDATA 	#IMPLIED
 	>
-	
+
 
 <!ELEMENT event (#PCDATA | alt-code)*>
 <!ATTLIST event
@@ -776,62 +776,62 @@
 	idsrc 		CDATA 		#REQUIRED
 	value 		CDATA 		#REQUIRED
 	>
-	
+
 <!ELEMENT function (#PCDATA | alt-code)*>
 <!ATTLIST function
 	%global-attributes;
 	idsrc 		CDATA 		#REQUIRED
 	value 		CDATA 		#REQUIRED
 	>
-	
+
 <!ELEMENT location (#PCDATA | sublocation | city | state | region | country | alt-code)*>
 <!ATTLIST location
 	%global-attributes;
 	location-code 	CDATA 	#IMPLIED
 	code-source 	CDATA 	#IMPLIED
 	>
-	
+
 	<!ELEMENT sublocation (#PCDATA | alt-code)*>
 	<!ATTLIST sublocation
 		%global-attributes;
 		location-code 	CDATA 	#IMPLIED
 		code-source 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT city (#PCDATA | alt-code)*>
 	<!ATTLIST city
 		%global-attributes;
 		city-code 	CDATA 	#IMPLIED
 		code-source 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT state (#PCDATA | alt-code)*>
 	<!ATTLIST state
 		%global-attributes;
 		state-code 	CDATA 	#IMPLIED
 		code-source 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT region (#PCDATA | alt-code)*>
 	<!ATTLIST region
 		%global-attributes;
 		region-code 	CDATA 	#IMPLIED
 		code-source 	CDATA 	#IMPLIED
 		>
-		
+
 	<!ELEMENT country (#PCDATA | alt-code)*>
 	<!ATTLIST country
 		%global-attributes;
 		iso-cc 		CDATA 	#IMPLIED
 		>
-		
+
 <!ELEMENT money (#PCDATA)>
 <!ATTLIST money
 	%global-attributes;
 	unit 		CDATA 	#IMPLIED
 	date 		CDATA 	#IMPLIED
 	>
-	
+
 <!ELEMENT num (#PCDATA | frac | sub | sup)*>
 <!ATTLIST num
 	%global-attributes;
@@ -839,83 +839,83 @@
 	decimal-ch 	CDATA 	#IMPLIED
 	thousands-ch 	CDATA 	#IMPLIED
 	>
-	
+
 	<!ELEMENT frac (numer, frac-sep?, denom)>
 	<!ATTLIST frac
 		%global-attributes;
 		>
-		
+
 		<!ELEMENT numer (#PCDATA)>
 		<!ATTLIST numer
 			%global-attributes;
 			>
-			
+
 		<!ELEMENT frac-sep (#PCDATA)>
 		<!ATTLIST frac-sep
 			%global-attributes;
 			>
-			
+
 		<!ELEMENT denom (#PCDATA)>
 		<!ATTLIST denom
 			%global-attributes;
 			>
-			
+
 	<!ELEMENT sub (#PCDATA)>
 	<!ATTLIST sub %common-attributes;>
-		
+
 	<!ELEMENT sup (#PCDATA)>
 	<!ATTLIST sup %common-attributes;>
-		
+
 <!ELEMENT object.title (#PCDATA | alt-code)*>
-<!ATTLIST object.title 
+<!ATTLIST object.title
 	%common-attributes;
 	idsrc 	CDATA 	#REQUIRED
 	value 	CDATA 	#REQUIRED
 	>
-	
+
 <!ELEMENT org (#PCDATA | alt-code)*>
 <!ATTLIST org
 	%global-attributes;
 	idsrc 	CDATA 	#REQUIRED
 	value 	CDATA 	#REQUIRED
 	>
-	
+
 	<!ELEMENT alt-code EMPTY>
 	<!ATTLIST alt-code
 		%global-attributes;
 		idsrc 	CDATA 	#REQUIRED
 		value 	CDATA 	#REQUIRED
 		>
-		
+
 <!ELEMENT person (#PCDATA | name.given | name.family | function | alt-code)*>
 <!ATTLIST person
 	%global-attributes;
 	idsrc 	CDATA 	#REQUIRED
 	value 	CDATA 	#REQUIRED
 	>
-	
+
 	<!ELEMENT name.given (#PCDATA)>
 	<!ATTLIST name.given
 		%global-attributes;
 		>
-		
+
 	<!ELEMENT name.family (#PCDATA)>
 	<!ATTLIST name.family
 		%global-attributes;
 		>
-		
+
 <!ELEMENT postaddr (addressee, delivery.point?, (postcode | delivery.office | region | country)*)>
 <!ATTLIST postaddr
 	%global-attributes;
 	>
-	
+
 <!ELEMENT virtloc (#PCDATA | alt-code)*>
 <!ATTLIST virtloc
 	%global-attributes;
 	idsrc 		CDATA 		#REQUIRED
 	value 		CDATA 		#REQUIRED
 	>
-	
+
 <!ELEMENT a (%enriched-text;)*>
 <!ATTLIST a
 	%common-attributes;
@@ -927,62 +927,62 @@
 	title 		CDATA 		#IMPLIED
 	methods 	NMTOKENS 	#IMPLIED
 	>
-	
+
 <!ELEMENT br EMPTY>
 <!ATTLIST br
 	%global-attributes;
 	>
-	
+
 <!ELEMENT em (%enriched-text;)*>
 <!ATTLIST em %common-attributes;>
-	
+
 <!ELEMENT lang (%enriched-text;)*>
 <!ATTLIST lang %common-attributes;>
-	
+
 <!ELEMENT pronounce (%enriched-text;)*>
 <!ATTLIST pronounce
 	%global-attributes;
 	guide 		CDATA 	#IMPLIED
 	phonetic 	CDATA 	#IMPLIED
 	>
-	
+
 <!ELEMENT q (%enriched-text;)*>
 <!ATTLIST q
 	%common-attributes;
 	quote-source 	CDATA 	#IMPLIED
 	>
-	
+
 
 <!ELEMENT addressee (person, function?, care.of?)>
 <!ATTLIST addressee
 	%global-attributes;
 	>
-	
+
 	<!ELEMENT care.of (#PCDATA)>
 	<!ATTLIST care.of
 		%global-attributes;
 		>
-		
+
 <!ELEMENT delivery.point (#PCDATA | br)*>
 <!ATTLIST delivery.point
 	%global-attributes;
 	point-code 	CDATA 	#IMPLIED
 	code-source 	CDATA 	#IMPLIED
 	>
-	
+
 <!ELEMENT postcode (#PCDATA)>
 <!ATTLIST postcode
 	%global-attributes;
 	code-source 	CDATA 	#IMPLIED
 	>
-	
+
 <!ELEMENT delivery.office (#PCDATA | br)*>
 <!ATTLIST delivery.office
 	%global-attributes;
 	office-code 	CDATA 	#IMPLIED
 	code-source 	CDATA 	#IMPLIED
 	>
-	
+
 
 
 
@@ -990,15 +990,15 @@
 <!ATTLIST body.end
 	%global-attributes;
 	>
-	
+
 <!ELEMENT tagline (%enriched-text;)*>
 <!ATTLIST tagline
 	%global-attributes;
 	type 		(std | pa | npa) 	"std"
 	>
-	
+
 <!ELEMENT bibliography (#PCDATA)>
 <!ATTLIST bibliography
 	%global-attributes;
 	>
-	
+

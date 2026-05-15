@@ -52,5 +52,3 @@ CTEST(worksheet, worksheet_table04) {
     lxw_worksheet_free(worksheet);
     lxw_table_free(table);
 }
-
-

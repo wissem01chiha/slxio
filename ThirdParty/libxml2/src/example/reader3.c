@@ -1,7 +1,7 @@
 /**
  * section: xmlReader
  * synopsis: Show how to extract subdocuments with xmlReader
- * purpose: Demonstrate the use of xmlTextReaderPreservePattern() 
+ * purpose: Demonstrate the use of xmlTextReaderPreservePattern()
  *          to parse an XML file with the xmlReader while collecting
  *          only some subparts of the document.
  *          (Note that the XMLReader functions require libxml2 version later

@@ -333,11 +333,11 @@ SAX.endElement(td)
 SAX.characters(
 , 1)
 SAX.endElement(tr)
-SAX.characters( 
+SAX.characters(
 
  , 4)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
       , 8)
 SAX.startElement(td, valign='BOTTOM', align='RIGHT', class='wired', bgcolor='#FFFFFF')
 SAX.startElement(a, href='/news/0,1287,,00.html')
@@ -384,14 +384,14 @@ SAX.endElement(tr)
 SAX.characters(
     , 5)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
       , 8)
 SAX.startElement(td, valign='MIDDLE', align='RIGHT', bgcolor='#FFFFFF')
 SAX.startElement(img, src='http://static.wired.com/news/images/spacer.gif', width='1', height='30')
 SAX.endElement(img)
 SAX.endElement(td)
 SAX.characters(
-      
+
       , 14)
 SAX.startElement(td, colspan='2', bgcolor='#999999')
 SAX.characters(
@@ -404,10 +404,10 @@ SAX.startElement(form, name='RedirectSearch', action='http://redirect.wired.com/
 SAX.characters(
                 , 17)
 SAX.startElement(tr)
-SAX.characters(  
+SAX.characters(
             , 15)
 SAX.startElement(td)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(font, face='courier', size='1')
 SAX.startElement(input, type='TEXT', name='query', size='20', value='')
@@ -454,7 +454,7 @@ SAX.characters(
 SAX.startElement(option, value='http://search.hotwired.com/search97/s97.vts?Action=FilterSearch&amp;Filter=docs_filter.hts&amp;ResultTemplate=animation.hts&amp;Collection=animation&amp;QueryMode=Internet&amp;Query=')
 SAX.characters(Animation Express, 17)
 SAX.endElement(option)
-SAX.characters( 
+SAX.characters(
  , 3)
 SAX.startElement(option, value='http://search.hotwired.com/search97/s97.vts?collection=suck&amp;Action=FilterSearch&amp;filter=docs_filter.hts&amp;ResultTemplate=suck.hts&amp;QueryMode=Internet&amp;Query=')
 SAX.characters(Suck.com, 8)
@@ -481,7 +481,7 @@ SAX.endElement(td)
 SAX.characters(
             , 13)
 SAX.startElement(td)
-SAX.characters( 
+SAX.characters(
               , 16)
 SAX.startElement(input, type='SUBMIT', name='SUBMIT', value='SEARCH')
 SAX.endElement(input)
@@ -494,7 +494,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.endElement(form)
-SAX.characters(        
+SAX.characters(
        , 16)
 SAX.endElement(table)
 SAX.characters(
@@ -505,7 +505,7 @@ SAX.characters(
 SAX.endElement(tr)
 SAX.characters(
 , 1)
-SAX.comment( 
+SAX.comment(
 <TR>
 <td></td>
 <TD valign="TOP" align="LEFT" colspan="3" bgcolor="#F0F0F0"><img src="http://static.wired.com/news/images/spacer.gif" height=1 width=15 alt=""><br>
@@ -529,11 +529,11 @@ SAX.startElement(table, border='0', cellpadding='3', cellspacing='0', align='LEF
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#FF0000')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
-SAX.characters( 
+SAX.characters(
       , 8)
 SAX.startElement(img, src='http://static.wired.com/news/images/spacer.gif', width='147', height='1', border='0')
 SAX.endElement(img)
@@ -656,11 +656,11 @@ SAX.comment( Begin lower Left Nav )
 SAX.characters(
     , 5)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#FF0000')
 SAX.startElement(font, face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
-SAX.characters( 
+SAX.characters(
       , 8)
 SAX.startElement(b)
 SAX.startElement(font, size='1')
@@ -675,7 +675,7 @@ SAX.endElement(tr)
 SAX.characters(
     , 5)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#99FF99')
 SAX.characters(
@@ -694,12 +694,12 @@ SAX.characters(
 SAX.startElement(input, type='hidden', name='success_page', value='http://www.hotwired.com/email/signup/wirednews-ascii.html')
 SAX.endElement(input)
 SAX.characters(
- 
+
 , 3)
 SAX.startElement(input, type='hidden', name='failure_page', value='http://www.hotwired.com/email/signup/wirednews-ascii.html')
 SAX.endElement(input)
 SAX.characters(
- 
+
 , 3)
 SAX.startElement(input, type='hidden', name='LIST', value='wn_ascii')
 SAX.endElement(input)
@@ -712,7 +712,7 @@ SAX.characters(
 SAX.startElement(input, type='hidden', name='ACTION', value='subscribe')
 SAX.endElement(input)
 SAX.characters(
- 
+
 , 3)
 SAX.startElement(input, type='TEXT', name='from', size='10', value='enter email')
 SAX.endElement(input)
@@ -721,14 +721,14 @@ SAX.characters(
 , 1)
 SAX.endElement(form)
 SAX.endElement(td)
-SAX.characters( 
+SAX.characters(
 		, 4)
 SAX.startElement(td, valign='top', bgcolor='#99FF99')
 SAX.characters(
 		, 3)
 SAX.startElement(input, type='SUBMIT', name='SUBMIT', value='GO')
 SAX.endElement(input)
-SAX.characters( 
+SAX.characters(
 
   , 5)
 SAX.endElement(td)
@@ -747,11 +747,11 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#FF0000')
 SAX.startElement(font, face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
-SAX.characters( 
+SAX.characters(
       , 8)
 SAX.startElement(b)
 SAX.startElement(font, size='1')
@@ -766,7 +766,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#99FF99')
 SAX.startElement(font, face='Verdana, Arial, Helvetica, sans-serif', size='1')
@@ -797,7 +797,7 @@ SAX.characters(
 , 1)
 SAX.comment( BEGIN BUTTON ADS )
 SAX.characters(
-  
+
  , 5)
 SAX.startElement(tr)
 SAX.startElement(td, bgcolor='#CCFFCC')
@@ -852,10 +852,10 @@ SAX.endElement(tr)
 SAX.characters( , 1)
 SAX.comment( END BUTTON ADS )
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#99FF99')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#000000')
@@ -870,7 +870,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#CCFFCC')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#000000')
@@ -889,7 +889,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#99FF99')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#000000')
@@ -909,7 +909,7 @@ SAX.characters(
 
 , 2)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
  , 3)
 SAX.startElement(td, bgcolor='#FF0000')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
@@ -1006,11 +1006,11 @@ SAX.characters( Bargain Books
                , 40)
 SAX.endElement(option)
 SAX.startElement(option, value='4')
-SAX.characters(Other 
+SAX.characters(Other
 
 
 
- 
+
 
  , 14)
 SAX.endElement(option)
@@ -1042,14 +1042,14 @@ SAX.characters(
 , 1)
 SAX.endElement(td)
 SAX.characters(
-                 
+
            , 35)
 SAX.endElement(tr)
 SAX.characters(
                 , 17)
 SAX.startElement(tr, align='left', valign='top')
 SAX.characters(
- 
+
         , 11)
 SAX.startElement(td, align='left', valign='top', colspan='2', rowspan='1', bgcolor='#CCFFCC')
 SAX.characters(
@@ -1091,20 +1091,20 @@ SAX.endElement(tr)
 SAX.characters(
  , 2)
 SAX.comment( END B&N spot )
-SAX.characters(   
-  
+SAX.characters(
+
 , 7)
 SAX.comment( BEGIN MAGAZINE SPOT )
 SAX.characters(
 
  , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#000000')
 SAX.startElement(font, color='#FFFFFF', face='Verdana, Arial, Helvetica, sans-serif', size='1')
 SAX.startElement(b)
-SAX.characters(WIRED 
+SAX.characters(WIRED
       MAGAZINE , 22)
 SAX.endElement(b)
 SAX.endElement(font)
@@ -1115,7 +1115,7 @@ SAX.endElement(tr)
 SAX.characters(
 , 1)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(td, bgcolor='#FFFF99', align='CENTER')
 SAX.characters(
@@ -1153,13 +1153,13 @@ SAX.characters(
 
 , 2)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(td, bgcolor='#FFFF99', align='center')
 SAX.characters(
 , 1)
 SAX.startElement(font, face='verdana, arial, helvetica, sans-serif', size='1')
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(a, href='http://www.wired.com/wired/subscribe/special/79WN')
@@ -1189,7 +1189,7 @@ SAX.startElement(tr)
 SAX.characters(
     , 5)
 SAX.startElement(td, bgcolor='#000000')
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
 SAX.startElement(b)
@@ -1203,7 +1203,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#FFFF99')
 SAX.characters( , 1)
@@ -1258,13 +1258,13 @@ SAX.characters(
   , 3)
 SAX.endElement(tr)
 SAX.characters(
-  
+
     , 8)
 SAX.startElement(tr)
 SAX.characters(
     , 5)
 SAX.startElement(td, bgcolor='#000000')
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
 SAX.startElement(b)
@@ -1278,7 +1278,7 @@ SAX.endElement(tr)
 SAX.characters(
   , 3)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
     , 6)
 SAX.startElement(td, bgcolor='#FFFF99')
 SAX.characters( , 1)
@@ -1305,7 +1305,7 @@ SAX.characters(
   , 3)
 SAX.endElement(tr)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(tr)
 SAX.startElement(td)
@@ -1343,14 +1343,14 @@ SAX.endElement(b)
 SAX.endElement(font)
 SAX.characters(
 
-  
+
   , 7)
 SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(font, face='Verdana, Arial, Helvetica, sans-serif', size='1')
 SAX.characters(Wired News  delivered, 21)
@@ -1580,12 +1580,12 @@ SAX.comment( Commentary Frag End )
 SAX.characters(
 , 1)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(td, align='left', bgcolor='#000000')
 SAX.characters(&nbsp;, 2)
 SAX.endElement(td)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(td, bgcolor='#000000')
 SAX.startElement(font, size='1', face='Verdana, Arial, Helvetica, sans-serif', color='#FFFFFF')
@@ -1601,7 +1601,7 @@ SAX.characters(
 
 , 2)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElement(td)
 SAX.characters(&nbsp;, 2)
@@ -1647,7 +1647,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1677,7 +1677,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1697,7 +1697,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1727,7 +1727,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1757,7 +1757,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1782,7 +1782,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1837,7 +1837,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1867,7 +1867,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1899,7 +1899,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, size='2', face='Arial,Helvetica, sans-serif')
@@ -1919,7 +1919,7 @@ SAX.startElement(br)
 SAX.endElement(br)
 SAX.startElement(br)
 SAX.endElement(br)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(font, face='Arial, Helvetica, sans-serif', size='2')
@@ -1969,7 +1969,7 @@ SAX.comment( start of Gen News )
 SAX.characters(
                 , 17)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
                   , 20)
 SAX.startElement(td, bgcolor='#000000')
 SAX.characters(&nbsp;, 2)
@@ -1990,7 +1990,7 @@ SAX.characters(
 
         , 10)
 SAX.startElement(tr)
-SAX.characters( 
+SAX.characters(
           , 12)
 SAX.startElement(td)
 SAX.characters(&nbsp;, 2)
@@ -2386,7 +2386,7 @@ SAX.comment( SQL above )
 SAX.characters(
 
 
-        
+
 , 12)
 SAX.comment(----TRADES-------)
 SAX.characters(
@@ -2595,7 +2595,7 @@ SAX.characters(
 , 4)
 SAX.comment( - - - - - - - - - - - - )
 SAX.characters(
- 
+
    , 6)
 SAX.endElement(td)
 SAX.characters(
@@ -2616,7 +2616,7 @@ SAX.endElement(img)
 SAX.startElement(br)
 SAX.endElement(br)
 SAX.characters(
-	
+
     , 7)
 SAX.comment( FOOTER )
 SAX.characters(

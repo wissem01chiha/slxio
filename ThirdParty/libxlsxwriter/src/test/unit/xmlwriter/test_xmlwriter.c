@@ -224,4 +224,3 @@ CTEST(xmlwriter, xml_data_element_with_escapes) {
 
     LXW_FREE_ATTRIBUTES();
 }
-

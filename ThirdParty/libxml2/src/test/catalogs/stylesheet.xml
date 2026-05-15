@@ -9,4 +9,3 @@
    uri="http://www.oasis-open.org/committes/entity/stylesheets/base/tr.xsl"/>
 <public publicId="toto" uri="file:///usr/share/xml/toto/toto.dtd"/>
 </catalog>
-

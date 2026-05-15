@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" ?> 
+<?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://www.tempuri.org/MainSchema"
            xmlns:tns="http://www.tempuri.org/MainSchema"
            xmlns:ns="http://www.tempuri.org/ImportedSchema"
            elementFormDefault="qualified" >
-           
+
   <xs:import namespace="http://www.tempuri.org/ImportedSchema" schemaLocation="./import-455953.xsd" />
-  
+
   <xs:complexType name="MyMainType">
     <xs:sequence>
       <xs:element name="MainA">

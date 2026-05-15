@@ -14,7 +14,7 @@ SAX.endElement(code)
 SAX.characters(" is:
 , 6)
 SAX.startElement(eg)
-SAX.characters(La Peste: Albert Camus, 
+SAX.characters(La Peste: Albert Camus,
 , 25)
 SAX.characters(©, 2)
 SAX.characters( 1947 , 6)

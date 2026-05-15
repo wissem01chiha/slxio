@@ -269,7 +269,7 @@ SAX.characters(
 SAX.startElement(p)
 SAX.characters(After upgrading to FrontPage 2, 385)
 SAX.endElement(p)
-SAX.characters( 
+SAX.characters(
 
 , 3)
 SAX.startElement(p)
@@ -427,7 +427,7 @@ SAX.characters(http://support.microsoft.com/s, 37)
 SAX.endElement(a)
 SAX.characters(., 1)
 SAX.endElement(p)
-SAX.characters(  
+SAX.characters(
 
 , 4)
 SAX.startElement(p, align='right')
@@ -444,7 +444,7 @@ SAX.characters(
 SAX.startElement(p)
 SAX.characters(&nbsp;, 2)
 SAX.endElement(p)
-SAX.characters(  
+SAX.characters(
 
 , 4)
 SAX.endElement(font)

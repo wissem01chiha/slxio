@@ -56,4 +56,3 @@ Purchase order schema for Example.com.
     </xsd:restriction>
   </xsd:simpleType>
 </xsd:schema>
-

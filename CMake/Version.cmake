@@ -1,4 +1,4 @@
-# read version string from the VERSION.txt file and 
+# read version string from the VERSION.txt file and
 # set the version variables.
 file(READ "VERSION.txt" VERSION)
 string(STRIP ${VERSION} VERSION)
@@ -11,5 +11,5 @@ endif()
 set(PROJECT_VERSION_MAJOR ${SLXIO_MAJOR_VERSION})
 set(PROJECT_VERSION_MINOR ${SLXIO_MINOR_VERSION})
 set(PROJECT_VERSION_PATCH ${SLXIO_MICRO_VERSION})
-set(PROJECT_VERSION 
+set(PROJECT_VERSION
 ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})

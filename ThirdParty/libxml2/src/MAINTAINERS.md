@@ -127,4 +127,3 @@ Dockerfile in the .gitlab-ci directory:
     docker build -t registry.gitlab.gnome.org/gnome/libxml2 - \
         < .gitlab-ci/Dockerfile
     docker push registry.gitlab.gnome.org/gnome/libxml2
-

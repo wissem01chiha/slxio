@@ -15,7 +15,7 @@ int main() {
     loop = uv_default_loop();
     uv_tty_init(loop, &tty, STDOUT_FILENO, 0);
     uv_tty_set_mode(&tty, UV_TTY_MODE_NORMAL);
-    
+
     if (uv_guess_handle(1) == UV_TTY) {
         buf1.base = "\033[41;37m";
         buf1.len = strlen(buf1.base);

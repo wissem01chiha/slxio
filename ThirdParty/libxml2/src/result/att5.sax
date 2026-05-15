@@ -69,7 +69,7 @@ SAX.startElement(norm, attr='foobar  <')
 SAX.endElement(norm)
 SAX.characters(
   , 3)
-SAX.startElement(norm, attr='  
+SAX.startElement(norm, attr='
 	 ')
 SAX.endElement(norm)
 SAX.characters(
@@ -137,7 +137,7 @@ SAX.startElement(normId, attr='foobar  <')
 SAX.endElement(normId)
 SAX.characters(
   , 3)
-SAX.startElement(normId, attr=' 
+SAX.startElement(normId, attr='
 	 ')
 SAX.endElement(normId)
 SAX.characters( , 1)

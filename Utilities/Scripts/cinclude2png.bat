@@ -1,13 +1,13 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM 
+REM
 REM SPDX-FileCopyrightText: Copyright 2025-2026 Wissem Chiha
 REM SPDX-License-Identifier: Apache-2.0
-REM 
+REM
 
 REM ########################################################################
-REM 
+REM
 REM ########################################################################
 
 set "CUR_DIR=%~dp0"

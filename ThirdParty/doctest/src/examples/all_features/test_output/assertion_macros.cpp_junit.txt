@@ -109,7 +109,7 @@ WARN_THROWS( throw_if(false, 0) ) did NOT throw at all!
       </failure>
       <failure type="WARN_THROWS_WITH">
 assertion_macros.cpp(0):
-WARN_THROWS_WITH( throw_if(true, ""), "whops!" ) threw a DIFFERENT exception: 
+WARN_THROWS_WITH( throw_if(true, ""), "whops!" ) threw a DIFFERENT exception:
 
       </failure>
       <failure type="WARN_THROWS_WITH">
@@ -270,7 +270,7 @@ REQUIRE_THROWS_WITH( throw_if(false, ""), "whops!" ) did NOT throw at all!
     <testcase classname="assertion_macros.cpp" name="REQUIRE level of asserts fail and abort the test case - 7" status="run">
       <failure type="REQUIRE_THROWS_WITH">
 assertion_macros.cpp(0):
-REQUIRE_THROWS_WITH( throw_if(true, ""), "whops!" ) threw a DIFFERENT exception: 
+REQUIRE_THROWS_WITH( throw_if(true, ""), "whops!" ) threw a DIFFERENT exception:
 
       </failure>
     </testcase>

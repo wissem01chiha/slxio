@@ -1,4 +1,4 @@
-/** 
+/**
  * section: 	XPath
  * synopsis: 	Load a document, locate subelements with XPath, modify
  *              said elements and save the resulting document.
@@ -28,16 +28,16 @@ static int example4(const char *filename, const xmlChar * xpathExpr,
 static void update_xpath_nodes(xmlNodeSetPtr nodes, const xmlChar * value);
 
 
-int 
+int
 main(int argc, char **argv) {
     /* Parse command line and process file */
     if (argc != 4) {
 	fprintf(stderr, "Error: wrong number of arguments.\n");
 	usage(argv[0]);
 	return(-1);
-    } 
-    
-    /* Init libxml */     
+    }
+
+    /* Init libxml */
     xmlInitParser();
     LIBXML_TEST_VERSION
 
@@ -56,10 +56,10 @@ main(int argc, char **argv) {
  *
  * Prints usage information.
  */
-static void 
+static void
 usage(const char *name) {
     assert(name);
-    
+
     fprintf(stderr, "Usage: %s <xml-file> <xpath-expr> <value>\n", name);
 }
 
@@ -74,12 +74,12 @@ usage(const char *name) {
  *
  * Returns 0 on success and a negative value otherwise.
  */
-static int 
+static int
 example4(const char* filename, const xmlChar* xpathExpr, const xmlChar* value) {
     xmlDocPtr doc;
-    xmlXPathContextPtr xpathCtx; 
-    xmlXPathObjectPtr xpathObj; 
-    
+    xmlXPathContextPtr xpathCtx;
+    xmlXPathObjectPtr xpathObj;
+
     assert(filename);
     assert(xpathExpr);
     assert(value);
@@ -95,34 +95,34 @@ example4(const char* filename, const xmlChar* xpathExpr, const xmlChar* value) {
     xpathCtx = xmlXPathNewContext(doc);
     if(xpathCtx == NULL) {
         fprintf(stderr,"Error: unable to create new XPath context\n");
-        xmlFreeDoc(doc); 
+        xmlFreeDoc(doc);
         return(-1);
     }
-    
+
     /* Evaluate xpath expression */
     xpathObj = xmlXPathEvalExpression(xpathExpr, xpathCtx);
     if(xpathObj == NULL) {
         fprintf(stderr,"Error: unable to evaluate xpath expression \"%s\"\n", xpathExpr);
-        xmlXPathFreeContext(xpathCtx); 
-        xmlFreeDoc(doc); 
+        xmlXPathFreeContext(xpathCtx);
+        xmlFreeDoc(doc);
         return(-1);
     }
 
     /* update selected nodes */
     update_xpath_nodes(xpathObj->nodesetval, value);
 
-    
+
     /* Cleanup of XPath data */
     xmlXPathFreeObject(xpathObj);
-    xmlXPathFreeContext(xpathCtx); 
+    xmlXPathFreeContext(xpathCtx);
 
     /* dump the resulting document */
     xmlDocDump(stdout, doc);
 
 
     /* free the document */
-    xmlFreeDoc(doc); 
-    
+    xmlFreeDoc(doc);
+
     return(0);
 }
 
@@ -137,10 +137,10 @@ static void
 update_xpath_nodes(xmlNodeSetPtr nodes, const xmlChar* value) {
     int size;
     int i;
-    
+
     assert(value);
     size = (nodes) ? nodes->nodeNr : 0;
-    
+
     /*
      * NOTE: the nodes are processed in reverse order, i.e. reverse document
      *       order because xmlNodeSetContent can actually free up descendant
@@ -151,7 +151,7 @@ update_xpath_nodes(xmlNodeSetPtr nodes, const xmlChar* value) {
      */
     for(i = size - 1; i >= 0; i--) {
 	assert(nodes->nodeTab[i]);
-	
+
 	xmlNodeSetContent(nodes->nodeTab[i], value);
 	/*
 	 * All the elements returned by an XPath query are pointers to
@@ -164,7 +164,7 @@ update_xpath_nodes(xmlNodeSetPtr nodes, const xmlChar* value) {
 	 * This can be exercised by running
 	 *       valgrind xpath2 test3.xml '//discarded' discarded
 	 * There is 2 ways around it:
-	 *   - make a copy of the pointers to the nodes from the result set 
+	 *   - make a copy of the pointers to the nodes from the result set
 	 *     then call xmlXPathFreeObject() and then modify the nodes
 	 * or
 	 *   - remove the reference to the modified nodes from the node set

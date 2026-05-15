@@ -10,9 +10,9 @@
 			attribute in this document are described by xs:annotation tags. This
 			file is kept at http://nvd.nist.gov/schema/nvdcve.xsd. The NVD XML
 			feeds are available at http://nvd.nist.gov/download.cfm.
-			
+
 			Release Notes:
-			
+
 			Version 1.2:
 			* CVSS version 2 scores and vectors have been added.  Please see
 			http://nvd.nist.gov/cvss.cfm?vectorinfo and
@@ -45,7 +45,7 @@
 			<xs:documentation>A CVE entry.</xs:documentation>
 		</xs:annotation>
 	</xs:element>
-	
+
 	<!-- ******************************************************************* -->
 	<!-- * Complex Types                                                   * -->
 	<!-- ******************************************************************* -->
@@ -278,7 +278,7 @@
 			</xs:extension>
 		</xs:simpleContent>
 	</xs:complexType>
-	
+
 	<xs:complexType name="impactType">
 		<xs:simpleContent>
 			<xs:extension base="xs:string">

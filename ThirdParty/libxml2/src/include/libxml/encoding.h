@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Character encoding conversion functions
- * 
+ *
  * @copyright See Copyright for the status of this software.
  *
  * @author Daniel Veillard

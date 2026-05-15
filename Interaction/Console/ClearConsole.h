@@ -26,4 +26,3 @@
 CONSOLE_IMPEXP BOOL ClearConsole(void);
 /*--------------------------------------------------------------------------*/
 #endif /*__CLEARCONSOLE_H__ */
-

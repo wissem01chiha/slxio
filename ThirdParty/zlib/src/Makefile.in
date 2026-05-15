@@ -366,7 +366,7 @@ zlib.3.pdf: $(SRCDIR)zlib.3
 # 	sed -f $$TEMPFILE $(SRCDIR)zconf.h.in > $@ &&\
 # 	touch -r $(SRCDIR)zconf.h.in $@ &&\
 # 	rm $$TEMPFILE
-# 
+#
 
 zconf: $(SRCDIR)zconf.h.in
 	cp -p $(SRCDIR)zconf.h.in zconf.h

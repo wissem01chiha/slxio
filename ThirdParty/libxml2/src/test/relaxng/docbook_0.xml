@@ -58,7 +58,7 @@
     <releaseinfo>
       This is a pre-release!
     </releaseinfo>
-    
+
     <revhistory>
       <revision>
         <revnumber>
@@ -69,7 +69,7 @@
         </date>
       </revision>
     </revhistory>
-    
+
     <copyright>
       <year>2000</year>
       <holder>Red Hat, Inc., Daniel Mueth, and Alexander Kirillov</holder>
@@ -100,7 +100,7 @@
     <title>The GNOME Handbook of Writing Software Documentation</title>
 
   </articleinfo>
-  
+
   <!-- ################# Introduction ############### -->
 
   <sect1 id="intro">
@@ -261,7 +261,7 @@
        DocBook(SGML) and is available in several formats including
        SGML, HTML, PostScript, and PDF.  For the latest version, see
        <ulink
-       url="http://developer.gnome.org/projects/gdp/handbook.html"> 
+       url="http://developer.gnome.org/projects/gdp/handbook.html">
        <citetitle>Getting The GNOME Handbook of Writing Software
        Documentation</citetitle> </ulink>.  Alternately, one may
        download it anonymously from GNOME CVS under <filename
@@ -279,7 +279,7 @@
 
     <sect2 id="selecting">
       <title>Selecting A Document</title>
-    
+
       <sect3 id="know">
         <title>Document Something You Know</title>
         <para>
@@ -307,7 +307,7 @@
           documentation project at <email>docs@gnome.org</email>.
         </para>
       </sect3>
-      
+
       <sect3 id="doctable">
         <title>The GNOME Documentation Status Table</title>
         <para>
@@ -343,7 +343,7 @@
           <citetitle>DocTable</citetitle> may not always be up-to-date
           or accurate.  When you assign yourself to documenting an
           application, make sure you find out the latest status of
-          documentation by contacting the application author.  
+          documentation by contacting the application author.
          </para>
         </note>
       </sect3>
@@ -382,7 +382,7 @@
           jadetex, sgml-common, and stylesheets. (RPM users should note
           that jade is platform dependent (eg. i386), while the other packages
           are in the <filename class="directory">noarch</filename>
-          directory.) You can find more 
+          directory.) You can find more
           information on DocBook Tools <ulink url="
           http://sourceware.cygnus.com/docbook-tools/"
           type="http">here</ulink>.
@@ -393,7 +393,7 @@
           for editing sgml files in <application>Emacs</application>.
         </para>
       </sect3>
-      
+
       <sect3 id="gdpstylesheets">
         <title>GDP Stylesheets</title>
         <para>
@@ -435,7 +435,7 @@
         </note>
 -->
       </sect3>
-      
+
       <sect3 id="gdpdtd">
         <title>GDP DTD (PNG Image Support)</title>
         <para>
@@ -479,11 +479,11 @@
               file:
               <programlisting>
 PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.0//EN" "png-support-3.0.dtd"
-              </programlisting> 
+              </programlisting>
               If you are using the 3.1 DTD, use:
               <programlisting>
 PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN" "png-support-3.1.dtd"
-              </programlisting> 
+              </programlisting>
             </para>
           </listitem>
         </itemizedlist>
@@ -514,7 +514,7 @@ V1.1//EN"[]>]]>
         </para>
 
       </sect3>
-      
+
       <sect3 id="editors">
         <title>Editors</title>
         <para>
@@ -536,7 +536,7 @@ V1.1//EN"[]>]]>
           in <xref linkend="installingdocbook" />.
         </para>
       </sect3>
-      
+
       <sect3 id="make-output">
         <title>Creating Something Useful with your Docs</title>
         <para>
@@ -572,7 +572,7 @@ V1.1//EN"[]>]]>
           You can also convert your document to PostScript by running
           the command <prompt>$</prompt><command>db2ps
           mydocument.sgml</command>, after which you can print out or
-          view the resulting .ps file.  
+          view the resulting .ps file.
         </para>
         <note>
           <title>NOTE</title>
@@ -586,7 +586,7 @@ V1.1//EN"[]>]]>
           </para>
         </note>
       </sect3>
-      
+
       <sect3 id="jadeimages">
         <title>Images in DocBook Tools</title>
         <para>
@@ -638,7 +638,7 @@ V1.1//EN"[]>]]>
           <command>img2eps</command> on you system.
         </para>
       </sect3>
-      
+
       <sect3 id="moredocbookinfo">
         <title>Learning DocBook</title>
         <para>
@@ -712,7 +712,7 @@ V1.1//EN"[]>]]>
         </para>
       </sect3>
     </sect2>
-   
+
 <!-- ####### Getting Started | GDP Document Examples ####### -->
 <!--
     <sect2 id="examples">
@@ -734,7 +734,7 @@ V1.1//EN"[]>]]>
         <xref linkend="templates" />.  They are kept in CVS in
         gnome-docu/gdp/templates. The easiest source to get them from
         is probably the <ulink
-        url="http://developer.gnome.org/projects/gdp/templates.html" 
+        url="http://developer.gnome.org/projects/gdp/templates.html"
         type="http">GDP
         Document Templates</ulink> web page, which is typically kept
         completely up-to-date with CVS and has a basic description of
@@ -799,10 +799,10 @@ V1.1//EN"[]>]]>
           <application>xv</application> can be used to crop the
           screenshot to only include the relevant portion of the
           <interface>Panel</interface>. Note that
-          <application>xv</application> and 
+          <application>xv</application> and
           <application>gimp</application> can both be used for taking
           screenshots, cropping screenshots, and converting image
-          formats. 
+          formats.
         </para>
       </sect3>
       <sect3 id="screenshotfiles">
@@ -836,7 +836,7 @@ V1.1//EN"[]>]]>
       <title>Application Bugs</title>
       <para>
         Documentation authors tend to investigate and test applets and
-        applications more thoroughly than most 
+        applications more thoroughly than most
         users.  Often documentation authors will discover one or
         more bugs in the software.  These bugs vary from small ones,
         such as mis-spelled words or missing
@@ -846,7 +846,7 @@ V1.1//EN"[]>]]>
         developers know of them and can fix them.  The easiest way to
         submit a bug report is by using the <application>Bug
         Buddy</application> applet which is part of the gnome-applets
-        package.  
+        package.
       </para>
     </sect2>
 
@@ -941,7 +941,7 @@ V1.1//EN"[]>]]>
       </sect3>
     </sect2>
   </sect1>
-  
+
 <!-- ################# The GNOME Documentation System###############
 -->
 
@@ -950,7 +950,7 @@ V1.1//EN"[]>]]>
 
 <!-- ####### The GNOME Documentation System | The GNOME Help Browser
 ####### -->
-    
+
     <sect2 id="gnomehelpbrowser">
       <title>The GNOME Help Browser</title>
       <para>
@@ -998,7 +998,7 @@ V1.1//EN"[]>]]>
 
 <!-- ####### The GNOME Documentation System | GNOME On-The-Fly
 Documentation Generation  ####### -->
-    
+
     <sect2 id="gnomehelponthefly">
       <title>Dynamic Document Synthesis(GNOME-2.0)</title>
       <para>
@@ -1016,7 +1016,7 @@ Documentation Generation  ####### -->
         table of contents, any search you do in the help browser.
       </para>
     </sect2>
-    
+
 <!-- ####### The GNOME Documentation System | The GNOME Documentation
 Components  ####### -->
 
@@ -1121,12 +1121,12 @@ Components  ####### -->
       </sect3>
     </sect2>
   </sect1>
-  
-  
+
+
 <!-- ################# DocBook Basics ############### -->
 
   <sect1 id="docbookbasics">
-    <title>DocBook Basics </title>  
+    <title>DocBook Basics </title>
 <!-- ####### DocBook Basics | Introduction to DocBook ####### -->
 
     <sect2 id="introtodocbook">
@@ -1148,14 +1148,14 @@ Components  ####### -->
         elements can be used. For example, if one element can only be used when
         embedded within another, this is defined in the DTD.
       </para>
-      <para> 
+      <para>
 	An SGML file is just a plain ASCII file containing the text
 	with the markup specified above. To convert it  to some easily
 	readable format, you need special tools. The GDP uses <emphasis>DocBook
         Tools</emphasis>, a free package of utilities for working with DocBook
         which includes <emphasis>Jade</emphasis>, which does the SGML/DSSL
         parsing. You can read more about DocBook Tools in <xref
-        linkend="installingdocbook" />. 
+        linkend="installingdocbook" />.
       </para>
       <para>
         The final appearance of the output (e.g. PostScript or HTML)
@@ -1169,7 +1169,7 @@ Components  ####### -->
         collection of stylesheets (Norman Walsh's modular
         stylesheets); GNOME Document Project uses some customized
         version of this stylesheets &mdash; see <xref
-        linkend="gdpstylesheets"/>.   
+        linkend="gdpstylesheets"/>.
       </para>
       <para>
         The advantage of specifying the <emphasis>structure</emphasis>
@@ -1207,8 +1207,8 @@ Components  ####### -->
         for GDP documentation-specific guidelines.
       </para>
     </sect2>
-    
- <!-- ######  DocBook Basics | XML and SGML       ########--> 
+
+ <!-- ######  DocBook Basics | XML and SGML       ########-->
  <sect2 id="xml">
       <title>XML and SGML</title>
 
@@ -1222,12 +1222,12 @@ Components  ####### -->
       advised</emphasis> that the documentation writers conform to XML
       syntax rules. Here are most important differences:
       </para>
-	
+
       <variablelist>
 	  <varlistentry>
-	    <term> <emphasis>Minimization</emphasis></term> 
+	    <term> <emphasis>Minimization</emphasis></term>
 	    <listitem>
-	    
+
 	    <para>
 	      It is possible with some implementations of SGML to use
 	      minimizations to close elements in a document by using
@@ -1242,29 +1242,29 @@ Components  ####### -->
              <guimenu>Modify</guimenu>
              <guimenuitem>Normalize</guimenuitem>
           </menuchoice>.
-         </para> 
+         </para>
 	    </listitem>
 	    </varlistentry>
 	  <varlistentry>
-	    <term> <emphasis>Self-closing tags</emphasis></term> 
+	    <term> <emphasis>Self-closing tags</emphasis></term>
 	    <listitem>
- 
+
          <para>
             Also, in SGML some tags are allowed not to have closing
             tags.  For example, it is legal for
-            <sgmltag>&lt;xref></sgmltag> not to have a closing tag: 
-            <literal><sgmltag>&lt;xref 
+            <sgmltag>&lt;xref></sgmltag> not to have a closing tag:
+            <literal><sgmltag>&lt;xref
                    linkend="someid"></sgmltag></literal>. In
-            XML, it is illegal; instead, you should use  
-            <literal><sgmltag>&lt;xref 
+            XML, it is illegal; instead, you should use
+            <literal><sgmltag>&lt;xref
                    linkend="someid"/></sgmltag></literal> (note the
             slash!).
-          </para> 
+          </para>
   </listitem>
   </varlistentry>
 
 	<varlistentry>
-	    <term> <emphasis>Case sensitive tags</emphasis></term> 
+	    <term> <emphasis>Case sensitive tags</emphasis></term>
 	    <listitem>
 	    <para>
 	      In XML, unlike SGML, tags are case-senstive
@@ -1272,21 +1272,21 @@ Components  ####### -->
 	      <sgmltag>&lt;TITLE></sgmltag> are different tags!
 	      Therefore, please always use lowercase tags (except for
 	      things like <literal>DOCTYPE, CDATA</literal> and
-	      <literal>ENTITY</literal>, which are not DocBook tags). 
+	      <literal>ENTITY</literal>, which are not DocBook tags).
 	    </para>
 	  </listitem>
 	</varlistentry>
 
 
 
-</variablelist> 
+</variablelist>
 </sect2>
 
 
 
     <!-- ####### DocBook Basics | Structure Elements ####### -->
 
-    
+
     <sect2 id="structure"> <title> Structure Elements</title>
 
       <sect3 id="section">
@@ -1350,7 +1350,7 @@ Components  ####### -->
         <para>
           To include screenshots and other figures, use the following
           tags:
-          
+
           <programlisting>
 <![CDATA[
 <figure id="shot1">
@@ -1364,14 +1364,14 @@ Components  ####### -->
           </programlisting>
           replacing <filename>example_screenshot</filename> with the
           actual file name (without extension). The result will look like this:
-          
+
           <figure id="shot1">
             <title>Screenshot</title>
             <screenshot>
               <screeninfo>Screenshot of a program</screeninfo>
               <graphic format="PNG"
 		       fileref="figures/example_screenshot" srccredit="ME"/>
-              
+
             </screenshot>
           </figure>
         </para>
@@ -1382,7 +1382,7 @@ Components  ####### -->
             not include the file type extension &mdash; to find out
             why, please read <xref linkend="jadeimages" />.
           </para>
-        </note>          
+        </note>
       </sect3>
       <sect3 id="listing">
         <title>Program listings and terminal session</title> <para>
@@ -1391,21 +1391,21 @@ Components  ####### -->
           <programlisting>
 <![CDATA[
 <programlisting>
-[Desktop Entry] 
+[Desktop Entry]
 Name=Gnumeric spreadsheet
-Exec=gnumeric 
-Icon=gnome-gnumeric.png 
+Exec=gnumeric
+Icon=gnome-gnumeric.png
 Terminal=0
 Type=Application
 </programlisting>]]>
           </programlisting>
           which produces
           <programlisting>
-[Desktop Entry] 
-Name=Gnumeric spreadsheet 
+[Desktop Entry]
+Name=Gnumeric spreadsheet
 Exec=gnumeric
-Icon=gnome-gnumeric.png 
-Terminal=0 
+Icon=gnome-gnumeric.png
+Terminal=0
 Type=Application
           </programlisting>
           As a matter of fact, all examples in this document were
@@ -1418,13 +1418,13 @@ Type=Application
           <programlisting>
 <![CDATA[
 <screen>
-<prompt>bash$</prompt><userinput>make love</userinput> 
+<prompt>bash$</prompt><userinput>make love</userinput>
 make: *** No rule to make target `love'. Stop.
 </screen>]]>
           </programlisting>
           which produces
           <screen>
-<prompt>bash$</prompt><userinput>make love</userinput>  
+<prompt>bash$</prompt><userinput>make love</userinput>
 make: *** No rule to make target `love'.  Stop.
           </screen>
           Note the use of tags <sgmltag>&lt;prompt></sgmltag> and
@@ -1448,15 +1448,15 @@ make: *** No rule to make target `love'.  Stop.
 	<para>
 	  The most common list types  in DocBook are
 	  <sgmltag>&lt;itemizedlist></sgmltag>,
-	  <sgmltag>&lt;orderedlist></sgmltag>, and 
+	  <sgmltag>&lt;orderedlist></sgmltag>, and
 	  <sgmltag>&lt;variablelist></sgmltag>.
 	</para>
 	<variablelist>
 	  <varlistentry>
-	    <term> <sgmltag>&lt;itemizedlist></sgmltag></term> 
-	    <listitem><para> 
+	    <term> <sgmltag>&lt;itemizedlist></sgmltag></term>
+	    <listitem><para>
 		This is the simplest unnumbered list, parallel to
-	    <sgmltag>&lt;ul></sgmltag> in HTML. Here is an example: 
+	    <sgmltag>&lt;ul></sgmltag> in HTML. Here is an example:
 		<programlisting>
 <![CDATA[
 <itemizedlist>
@@ -1477,11 +1477,11 @@ make: *** No rule to make target `love'.  Stop.
     <para>
       <guilabel>Mix files and directories</guilabel> &mdash; This
       option will  display files and directories in the order you
-      sort them instead of 
+      sort them instead of
       always having directories shown above files.
     </para>
    </listitem>
-</itemizedlist> 
+</itemizedlist>
 ]]>
 		</programlisting>
 		and output:
@@ -1531,7 +1531,7 @@ make: *** No rule to make target `love'.  Stop.
 	    </listitem>
 	  </varlistentry>
 	  <varlistentry>
-	    <term> <sgmltag>&lt;orderedlist></sgmltag></term> 
+	    <term> <sgmltag>&lt;orderedlist></sgmltag></term>
 	    <listitem><para>
 		This list is completely analogous to
 		<sgmltag>&lt;itemizedlist></sgmltag> and has the same
@@ -1564,28 +1564,28 @@ make: *** No rule to make target `love'.  Stop.
 <![CDATA[
 <variablelist>
   <varlistentry>
-    <term> <sgmltag>&lt;itemizedlist></sgmltag></term> 
-    <listitem><para> 
+    <term> <sgmltag>&lt;itemizedlist></sgmltag></term>
+    <listitem><para>
 	This is the simplest unnumbered list, parallel to
         <sgmltag>&lt;ul></sgmltag> in HTML. Here is an example:...
     </para></listitem>
     </varlistentry>
-    <varlistentry>		 
+    <varlistentry>
 	<term> <sgmltag>&lt;orderedlist></sgmltag></term>
-     <listitem><para>	
+     <listitem><para>
 	This list is completely analogous to
-	<sgmltag>&lt;itemizedlist></sgmltag> 
+	<sgmltag>&lt;itemizedlist></sgmltag>
     </para></listitem>
     </varlistentry>
-    <varlistentry>		 
+    <varlistentry>
 	<term> <sgmltag>&lt;variablelist></sgmltag></term>
-     <listitem><para>	
+     <listitem><para>
 		This list is used when each entry is rather long,...
     </para></listitem>
     </varlistentry>
-</variablelist>        
+</variablelist>
 ]]>
-		</programlisting>		
+		</programlisting>
 		</para>
 	    </listitem>
 	  </varlistentry>
@@ -1614,35 +1614,35 @@ make: *** No rule to make target `love'.  Stop.
               buttons, including checkbuttons and radio buttons
             </para>
           </listitem>
-          
+
           <listitem>
             <para>
-              <sgmltag>&lt;guimenu></sgmltag>, 
-              <sgmltag>&lt;guisubmenu></sgmltag> &mdash;used for 
+              <sgmltag>&lt;guimenu></sgmltag>,
+              <sgmltag>&lt;guisubmenu></sgmltag> &mdash;used for
 	      top-level menus and submenus
               respectively, for example <literal><![CDATA[
               <guisubmenu>Utilities</guisubmenu> submenu of the
               <guimenu>Main Menu</guimenu>]]></literal>
             </para>
           </listitem>
-          
+
           <listitem>
             <para>
               <sgmltag>&lt;guimenuitem></sgmltag>&mdash;an entry in a
               menu
             </para>
           </listitem>
-          
+
           <listitem>
             <para>
               <sgmltag>&lt;guiicon></sgmltag>&mdash;an icon
             </para>
           </listitem>
-          
+
           <listitem>
             <para>
               <sgmltag>&lt;guilabel></sgmltag>&mdash;for items which have
-              labels, like tabs, or bounding boxes. 
+              labels, like tabs, or bounding boxes.
             </para>
           </listitem>
           <listitem>
@@ -1712,7 +1712,7 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
         computer-related things</title>
         <para>
           Here are some tags used to describe operating system-related
-          things:  
+          things:
         </para>
 	<itemizedlist>
           <listitem>
@@ -1720,7 +1720,7 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
               for filenames,
               e.g.<sgmltag>&lt;filename></sgmltag>
                     foo.sgml
-                  <sgmltag>&lt;/filename></sgmltag> 
+                  <sgmltag>&lt;/filename></sgmltag>
               produces: <filename>foo.sgml</filename>.
             </para>
           </listitem>
@@ -1746,11 +1746,11 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
           <listitem>
             <para>
 	      <sgmltag>&lt;envar></sgmltag> &mdash; used for
-	      environment variables, e.g. 
-              <sgmltag>&lt;envar></sgmltag>PATH<sgmltag>&lt;/envar></sgmltag>. 
+	      environment variables, e.g.
+              <sgmltag>&lt;envar></sgmltag>PATH<sgmltag>&lt;/envar></sgmltag>.
             </para>
           </listitem>
-  
+
           <listitem>
             <para>
               <sgmltag>&lt;command></sgmltag> &mdash; used for
@@ -1771,17 +1771,17 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
               <replaceable>foo.sgml</replaceable></command>.
             </para>
           </listitem>
-        </itemizedlist>  
+        </itemizedlist>
       </sect3>
 
-      <sect3 id="keys">   
-        <title>Keyboard input</title> 
+      <sect3 id="keys">
+        <title>Keyboard input</title>
         <para> To mark up text input by the user, use
         <sgmltag>&lt;userinput></sgmltag>.
         </para>
         <para>  To mark keystrokes such as shortcuts and other
-          commands, use <sgmltag>&lt;keycap></sgmltag>. 
-          This is used for marking up what is printed on the top 
+          commands, use <sgmltag>&lt;keycap></sgmltag>.
+          This is used for marking up what is printed on the top
           of the physical key on the keyboard. There are a couple of
           other tags for keys, too: <sgmltag>&lt;keysym&gt;</sgmltag>
           and <sgmltag>&lt;keycode&gt;</sgmltag>. However you are
@@ -1813,8 +1813,8 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
 <menuchoice>
  <shortcut>
   <keycombo><keycap>Ctrl</keycap><keycap>q</keycap></keycombo>
- </shortcut> 
- <guimenuitem> Quit</guimenuitem> 
+ </shortcut>
+ <guimenuitem> Quit</guimenuitem>
 </menuchoice>]]>
           </programlisting>
           which produces simply
@@ -1841,14 +1841,14 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
 
       <sect3 id="specsymb">
 	<title> Special symbols </title>
-	<para> 
+	<para>
 	  DocBook also provides special means for entering
 	typographic symbols which can not be entered directly
 	form the keyboard (such as copyright sign). This is done using
 	<emphasis>entities</emphasis>, which is SGML analogue of
-	macros, or commands, of LaTeX. They generally have the form 
+	macros, or commands, of LaTeX. They generally have the form
 	  <sgmltag>&amp;entityname;</sgmltag>. Note that the semicolon
-	is required. 
+	is required.
 	</para>
 	<para>
 	  here is partial list of most commonly used enitites:
@@ -1876,16 +1876,16 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
 	  happen that long dash (<sgmltag>&amp;mdash;</sgmltag>) looks
 	  exactly like the usual dash (-). However, in the PostScript
 	  (and thus, in print) the output will look markedly better if
-	  you use appropriate tags. 
+	  you use appropriate tags.
 	</para>
       </sect3>
     </sect2>
   </sect1>
-  
+
 <!-- ################# GDP Documentation Conventions ############### -->
- 
+
   <sect1 id="conventions">
-    <title>GDP Documentation Conventions </title> 
+    <title>GDP Documentation Conventions </title>
 
 <!-- ####### GDP Documentation Conventions | All Documentation ####### -->
 
@@ -1898,16 +1898,16 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
 	  requirements, which are stricter than SGML ones &mdash; see
 	  <xref linkend="xml" /> for more informaion.
 	</para>
-      </sect3> 
+      </sect3>
 
-      <sect3 id="authorsnames"> 
+      <sect3 id="authorsnames">
 	<title> Authors' names</title>
-	<para> 
+	<para>
 	  All GNOME documentation should contain the names of both the
 	  application authors and documentation authors, as well as a
 	  link to the application web page (if it exists) and
 	  information for bug submission &mdash; see templates for an
-	  example. 
+	  example.
 	  </para>
       </sect3>
     </sect2>
@@ -1934,7 +1934,7 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
         </para>
       </sect3>
       <sect3 id="license">
-	<title> Copyright information </title> 
+	<title> Copyright information </title>
         <para> Application
         documentation should contain a copyright notice, stating the
         licensing terms. It is suggested that you use the GNU Free
@@ -1947,26 +1947,26 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
       </sect3>
       <sect3 id="license2">
        <title>Software license</title>
-       <para> 
+       <para>
          All GNOME applications must contain information about the
        license (for software, not for documentation), either in the
-       "About" box or in the manual. 
+       "About" box or in the manual.
        </para>
       </sect3>
 
       <sect3 id="bugtraq">
-	<title> Bug reporting</title> 	
-        <para> 
+	<title> Bug reporting</title>
+        <para>
 	  Application documentation should give an address for
         reporting bugs and for submitting comments about the
-        documentaion (see templates for an example). 
+        documentaion (see templates for an example).
        </para>
       </sect3>
     </sect2>
   </sect1>
-  
+
 <!-- ################# Writing Application Manuals ###############-->
-  
+
   <sect1 id="writingapplicationmanuals">
     <title>Writing Application and Applet Manuals</title>
     <para>
@@ -2021,13 +2021,13 @@ url="http://www.gnome.org">GNOME Web page</ulink> ]]>
     <para>
       Application manuals should be made available by having a
       "Manual" entry in the <guimenu>Help</guimenu> pull-down menu
-      at the top of the 
+      at the top of the
       application, as described in <xref linkend="listingdocsinhelpmenu" />.
       Applets should make their manuals available by
-      right-clicking on the applet. 
+      right-clicking on the applet.
     </para>
   </sect1>
-  
+
 
 <!-- ############### Listing Documents in the Help Menu ############# -->
 
@@ -2075,18 +2075,18 @@ function-reference.html Gnumeric function reference
     <note>
       <para>
        If the help files are not present in the correct directory, the
-       menu items will NOT appear when the program is run. 
+       menu items will NOT appear when the program is run.
       </para>
     </note>
     <para>
       The <filename>topic.dat</filename> file is used by the GNOME
       menu building code to generate the <guimenu>Help</guimenu>
-      menu. When you define your menu:  
+      menu. When you define your menu:
 <programlisting>
 GnomeUIInfo helpmenu[] = {
-              {GNOME_APP_UI_ITEM, 
+              {GNOME_APP_UI_ITEM,
                N_("About"), N_("Info about this program"),
-               about_cb, NULL, NULL, 
+               about_cb, NULL, NULL,
                GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT,
                0, 0, NULL},
                GNOMEUIINFO_SEPARATOR,
@@ -2128,7 +2128,7 @@ GnomeUIInfo helpmenu[] = {
       documentation author(s) do not need to do very much.  However,
       the application author must be careful to guarantee that the
       application correctly opens the help documentation when the
-      <guibutton>Help</guibutton> buttons are pressed.  
+      <guibutton>Help</guibutton> buttons are pressed.
     </para>
     <para>
       To make the Help buttons call the correct document in the GNOME Help
@@ -2167,7 +2167,7 @@ if (tmp) {
         applet in the gnome-applets package has its own manual(stored
         with the applet in CVS), but they are merged together manually
         to create the <citetitle>GNOME Applets</citetitle> book before
-        distribution.  Telsa 
+        distribution.  Telsa
         <email>hobbit@aloss.ukuu.org.uk</email> is the maintainer of
         this document.  Applet documentation should be sent to Telsa
         (or placed in CVS) who will make sure they are correctly
@@ -2204,7 +2204,7 @@ if (tmp) {
           This section is for developers.  Documentation authors
           generally do not need to know this material.
         </para>
-      </note> 
+      </note>
       <para>
         Applets should have <guimenu>About</guimenu> and
         <guimenu>Manual</guimenu> menu items, typically as the first
@@ -2302,8 +2302,8 @@ applet_widget_register_stock_callback (APPLET_WIDGET(applet), "about",
       this is in development.
     </para>
   </sect1>
-  
-  
+
+
 <!-- ################# Basics of Documentation Style ############### -->
 
   <sect1 id="basics">
@@ -2328,7 +2328,7 @@ applet_widget_register_stock_callback (APPLET_WIDGET(applet), "about",
        problems they're likely to run into, and solve them.  It will
        also help if you focus on the tasks users will perform, and
        group features accordingly, rather than simply describing
-       features at random.  
+       features at random.
     </para>
 
 <!--  *********** Basics of Documentation Style: planning -->
@@ -2354,7 +2354,7 @@ applet_widget_register_stock_callback (APPLET_WIDGET(applet), "about",
     <sect2 id="balance">
       <title>Achieving a Balanced Style</title>
 
-      <para> 
+      <para>
          Just as you need to juggle expert and novice readers,
          you'll have to juggle a number of other extremes as you write:
          <itemizedlist>
@@ -2383,7 +2383,7 @@ applet_widget_register_stock_callback (APPLET_WIDGET(applet), "about",
               allusions or puns.
            </para>
 	  </listitem>
-	  
+
    	  <listitem>
 	    <para>
               Examples, tips, notes, and screenshots are useful to
@@ -2475,7 +2475,7 @@ applet_widget_register_stock_callback (APPLET_WIDGET(applet), "about",
       </para>
     </sect2>
   </sect1>
-  
+
 <!-- ################# Teamwork ############### -->
 
   <sect1 id="teamwork">
@@ -2540,7 +2540,7 @@ GDP Team ####### -->
       </para>
     </sect2>-->
   </sect1>
-  
+
 <!-- ################# Finishing a Document ############### -->
 
   <sect1 id="finishing">
@@ -2583,17 +2583,17 @@ GDP Team ####### -->
       </para>
     </sect2>
   </sect1>
-  
+
 <!-- ################# Resources ############### -->
 
   <sect1 id="resources">
-    <title>Resources</title> 
+    <title>Resources</title>
 <!-- ####### Resources | Resources on the Web ####### -->
 
     <sect2 id="resourcesweb">
       <title>Resources On The Web</title> <para>  The <ulink
       type="http" url="http://developer.gnome.org/projects/gdp/">GNOME
-      Documentation Project Web page</ulink> lists current GDP 
+      Documentation Project Web page</ulink> lists current GDP
       projects and members.
       </para>
       <para>
@@ -2650,13 +2650,13 @@ GDP Team ####### -->
       </para>
     </sect2>
   </sect1>
-  
+
 <!-- ################# Example Docs ###############
 
   <appendix id="exampledocs">
-    <title>Example Docs</title> 
+    <title>Example Docs</title>
 
-####### Example Docs | Example 1: Application Manual ####### 
+####### Example Docs | Example 1: Application Manual #######
 
     <sect1 id="ex1">
       <title>Example 1: Application Manual</title>
@@ -2664,7 +2664,7 @@ GDP Team ####### -->
 <![CDATA[ (Put sgml here.)]]> </programlisting>
     </sect1>
 
-####### Example Docs | Example 2: Applet Manual ####### 
+####### Example Docs | Example 2: Applet Manual #######
 
     <sect1 id="ex2">
       <title>Example 2: Applet Manual</title>
@@ -2696,11 +2696,11 @@ GDP Team ####### -->
 <![CDATA[(Put sgml here.)]]> </programlisting>
     </sect1>
   </appendix>-->
-  
+
 <!-- ################# Document Templates ############### -->
 
   <appendix id="templates">
-    <title>Document Templates</title> 
+    <title>Document Templates</title>
 <!-- ####### Document Templates | Templates 1: Application Manual ####### -->
 
     <sect1 id="template1">
@@ -2782,7 +2782,7 @@ GDP Team ####### -->
       </para>
     </legalnotice>
 
-  <!-- this is the version of manual, not application --> 
+  <!-- this is the version of manual, not application -->
     <releaseinfo>
        This is version 1.0 of MY-GNOME-APP manual.
     </releaseinfo>
@@ -2862,7 +2862,7 @@ GDP Team ####### -->
 	  </screenshot>
 	</figure>
     <!-- ==== End of Figure ==== -->
-      </para> 
+      </para>
 
 
  <!-- For this app, one could put "proving" or "edit" (probably even
@@ -2892,8 +2892,8 @@ GDP Team ####### -->
           selected a proof type at all,
           <application>MY-GNOME-APP</application> will attempt to
           choose the one that it thinks is most conclusive.  In order,
-          it will attempt to prove the theorem with the following techniques: 
-     
+          it will attempt to prove the theorem with the following techniques:
+
                 <variablelist>
 	    <varlistentry>
 	      <term>Deduction</term>
@@ -2937,7 +2937,7 @@ GDP Team ####### -->
           </para>
 
    <!-- You might want to include a note, warning, or tip, e.g. -->
-	
+
 	<warning>
 	  <title>Proving Incorrect Theorms</title>
 	  <para>
@@ -2994,8 +2994,8 @@ GDP Team ####### -->
        they belong here.   -->
 
     </sect2>
- 
-    <!-- ========================================================= 
+
+    <!-- =========================================================
       Additional Sect2's should describe additional windows, such as
       larger dialog boxes, or functionality that differs significantly
       from the most immediate functions of the application. Make the
@@ -3041,12 +3041,12 @@ GDP Team ####### -->
 	         Save the current theorem permanently in a
 	         file.
                </para>
-	    </listitem> 
+	    </listitem>
 	  </varlistentry>
 	</variablelist>
        </para>
     </sect2>
-    <!-- ========= Menus =========================== --> 
+    <!-- ========= Menus =========================== -->
 
     <sect2 id="menubar">
 
@@ -3115,7 +3115,7 @@ GDP Team ####### -->
 	  </para>
 	  </listitem>
 	</varlistentry>
-	
+
 	<varlistentry>
 	  <term><guimenu>Edit</guimenu></term>
 	  <listitem>
@@ -3175,7 +3175,7 @@ GDP Team ####### -->
 	    </para>
 	  </listitem>
 	</varlistentry>
-	
+
 
 	<varlistentry>
 	  <term><guimenu>Settings</guimenu></term>
@@ -3202,7 +3202,7 @@ GDP Team ####### -->
 	    </para>
 	  </listitem>
 	</varlistentry>
-	
+
 	<varlistentry>
 	  <term><guimenu>Help</guimenu></term>
 	  <listitem>
@@ -3216,7 +3216,7 @@ GDP Team ####### -->
     	              Browser</application> and displays this manual.
 	          </para>
 		</listitem>
-		
+
 		<listitem>
 		  <para>
 	            <guimenuitem>About</guimenuitem> &mdash; This
@@ -3264,7 +3264,7 @@ GDP Team ####### -->
 
   <para>
    The properties in the <guilabel>PREFSTABNAME</guilabel> tab are:
-   
+
    <!--many people use itemizedlists in cases like this. Variablelists
    are more appropriate -->
 
@@ -3375,10 +3375,10 @@ GDP Team ####### -->
    This manual was written by ME
    (<email>MYNAME@MYADDRESS</email>). Please send all comments and
    suggestions regarding this manual to the <ulink type="http"
-   url="http://developer.gnome.org/projects/gdp">GNOME Documentation 
-   Project</ulink> by sending an email to 
-   <email>docs@gnome.org</email>. You can also add your comments online 
-   by using the <ulink type="http" 
+   url="http://developer.gnome.org/projects/gdp">GNOME Documentation
+   Project</ulink> by sending an email to
+   <email>docs@gnome.org</email>. You can also add your comments online
+   by using the <ulink type="http"
    url="http://www.gnome.org/gdp/doctable/">GNOME Documentation Status
    Table</ulink>.
   </para>
@@ -3486,7 +3486,7 @@ GDP Team ####### -->
 <article id="index"> <!-- please do not change the id -->
 
  <!-- ============= Document Header ============================= -->
- <artheader> 
+ <artheader>
   <title>APPLETNAME Applet</title>
   <copyright>
    <year>2000</year>
@@ -3553,7 +3553,7 @@ GDP Team ####### -->
   <para>
    <application>APPLET</application> applet, shown in <xref
    linkend="APPLETapplet-fig">, allows you to &hellip;.  To add this
-   applet to a <interface>Panel</interface>, 
+   applet to a <interface>Panel</interface>,
    right-click on the <interface>Panel</interface> and choose
    <menuchoice>
     <guimenu>Panel</guimenu>
@@ -3568,7 +3568,7 @@ GDP Team ####### -->
    <title>APPLET Applet</title>
    <screenshot>
     <screeninfo>APPLET Applet</screeninfo>
-    <graphic format="png" fileref="APPLET_applet" 
+    <graphic format="png" fileref="APPLET_applet"
     srccredit="YOURNAME">
     </graphic>
    </screenshot>
@@ -3664,7 +3664,7 @@ GDP Team ####### -->
      </itemizedlist>
     </para>
 
-    <para> 
+    <para>
       After you have made all the changes you want, click on
       <guibutton>OK</guibutton> to apply the changes and close the
       <interface>Properties</interface> dialog. To cancel the changes
@@ -3693,7 +3693,7 @@ GDP Team ####### -->
    <para>
     <application>APPLET</application> was written by GNOME-HACKER
     (<email>hacker@gnome.org</email>).  Please send all comments,
-    suggestions, and bug 
+    suggestions, and bug
     reports to the <ulink url="http://bugs.gnome.org" type="http">GNOME
     bug tracking database</ulink>. (Instructions for submitting bug
     reports can be found <ulink
@@ -3825,7 +3825,7 @@ GDP Team ####### -->
   <copyright>
    <year>2000</year>
    <holder>Telsa Gwynne, John Fleck, Red Hat Inc., Dan Mueth, and
-    Alexander Kirillov</holder> 
+    Alexander Kirillov</holder>
   </copyright>
   <legalnotice>
    <para>
@@ -3857,11 +3857,11 @@ GDP Team ####### -->
 
  <!-- #### Introduction ###### -->
  <chapter id="applets-intro">
-  <title>Introduction</title> 
+  <title>Introduction</title>
 
   <!-- #### Intro | What Are Applets? ###### -->
   <sect1 id="applets-what-are">
-   <title>What Are Applets?</title> 
+   <title>What Are Applets?</title>
    <para>
     Applets are one of the most popular and useful objects you can add
     to your <interface>Panel</interface> to customize your desktop.
@@ -3869,7 +3869,7 @@ GDP Team ####### -->
     your <interface>Panel</interface>. Applets have been written for
     a wide range of purposes.  Some are very powerful interactive
     tools, such as the <application>Tasklist</application> Applet
-    which allows you to easily 
+    which allows you to easily
     control all of your main applications.  Others are simple system
     monitors, displaying information such as the amount of power left
     in the battery on your laptop (see <application>Battery Charge
@@ -3880,7 +3880,7 @@ GDP Team ####### -->
 
    <para>
     Applets are similar to swallowed applications in that both of them
-    reside within the <interface>Panel</interface>. However, 
+    reside within the <interface>Panel</interface>. However,
     swallowed applications are generally applications which were
     not designed to run within the <interface>Panel</interface>.
     Typically one will swallow an application which already exists in
@@ -3927,12 +3927,12 @@ GDP Team ####### -->
     downloaded off the Web.   See <ulink type="http"
      url="http://www.gnome.org/applist/list-martin.phtml">The GNOME
     Software Map</ulink> for lists of additional GNOME applications
-    and applets. 
+    and applets.
    </para>
    <para>
     As you read through the the rest of this chapter, you should try
     adding and removing applets from your <interface>Panel</interface> and
-    experiment with them freely.  
+    experiment with them freely.
    </para>
   </sect1>
 
@@ -3940,11 +3940,11 @@ GDP Team ####### -->
   <sect1 id="applet-add-move-replace">
    <title>Adding, Moving, and Removing Applets</title>
 
-   <sect2 id="adding-applets">   
+   <sect2 id="adding-applets">
     <title>Adding Applets to a Panel</title>
     <para>
      To add an applet to a <interface>Panel</interface>, right-click
-     on the <interface>Panel</interface> and select 
+     on the <interface>Panel</interface> and select
      <menuchoice><guimenu>Panel</guimenu><guisubmenu>Add to panel</guisubmenu>
      <guisubmenu>Applet</guisubmenu></menuchoice>. This will show you
      the menu of all the applets on your system, divided into
@@ -3963,7 +3963,7 @@ GDP Team ####### -->
      releasing the middle mouse button when you are finished.  Note
      that you can drag applets within a <interface>Panel</interface>
      or between two <interface>Panels</interface> this way. If you
-     don't have a three-button mouse, just 
+     don't have a three-button mouse, just
      right-click on the applet and choose
      <guimenuitem>Move</guimenuitem>. The cursor will turn into a
      cross and the applet will move with your mouse until you press
@@ -3982,7 +3982,7 @@ GDP Team ####### -->
     </para>
     <para>
      To change the global Panel preferences, right-click on any applet
-     or <interface>Panel</interface> and select 
+     or <interface>Panel</interface> and select
      <menuchoice>
       <guimenu>Panel</guimenu>
       <guimenuitem>Global Preferences...</guimenuitem>
@@ -3993,11 +3993,11 @@ GDP Team ####### -->
    </sect2>
 
    <sect2 id="removing-applets">
-    <title>Removing Applets from a Panel</title> 
-    <para>  
+    <title>Removing Applets from a Panel</title>
+    <para>
      To remove an applet from a <interface>Panel</interface>,
      right-click on the applet and select <guimenuitem>Remove from
-     panel...</guimenuitem>. 
+     panel...</guimenuitem>.
     </para>
    </sect2>
   </sect1>
@@ -4008,12 +4008,12 @@ GDP Team ####### -->
    <title>The Right-Click Pop-Up Menu</title>
    <para>
     Clicking the right mouse button on any applet brings up
-    a <guimenu>pop-up menu</guimenu>. This 
+    a <guimenu>pop-up menu</guimenu>. This
     menu always has certain standard menu items in it and
     often has additional items which vary depending on the particular
-    applet. 
+    applet.
    </para>
-   <sect2 id="standard-right-click-items"> 
+   <sect2 id="standard-right-click-items">
     <title>Standard Pop-Up Items</title>
     <para>
      All applets should have the following items in their right-click
@@ -4024,7 +4024,7 @@ GDP Team ####### -->
        <listitem>
         <para>
          The <guimenuitem>Remove from panel</guimenuitem> menu item
-         removes the applet from the <interface>Panel</interface>. 
+         removes the applet from the <interface>Panel</interface>.
         </para>
        </listitem>
       </varlistentry>
@@ -4060,10 +4060,10 @@ GDP Team ####### -->
        <term>About</term>
        <listitem>
         <para>
-         The <guimenuitem>About...</guimenuitem> menu item brings up a 
+         The <guimenuitem>About...</guimenuitem> menu item brings up a
          dialogue box containing various information about the applet,
          typically including the applet's  name, version, author,
-         copyright, license and desciption. 
+         copyright, license and desciption.
         </para>
        </listitem>
       </varlistentry>
@@ -4073,7 +4073,7 @@ GDP Team ####### -->
        <listitem>
         <para>
          The <guimenuitem>Help</guimenuitem> menu item brings up the help
-         manual for the applet. 
+         manual for the applet.
         </para>
        </listitem>
       </varlistentry>
@@ -4081,13 +4081,13 @@ GDP Team ####### -->
     </para>
    </sect2>
 
-   <sect2 id="applet-properties-dialog"> 
+   <sect2 id="applet-properties-dialog">
     <title>The Applet Properties Dialog</title>
     <para>
      Many applets have customizable properties.  These applets will
      have a <guimenuitem>Properties...</guimenuitem> menu item in their
      right-click <guimenu>pop-up menu</guimenu> which brings up the
-     <interface>Properties</interface> dialog where you can alter the 
+     <interface>Properties</interface> dialog where you can alter the
      appearance or behaviour of the applet.
      <figure id="example-props-dialog-fig">
       <title>An Example Applet Properties Dialog</title>
@@ -4140,8 +4140,8 @@ GDP Team ####### -->
      </itemizedlist>
     </para>
    </sect2>
- 
-   <sect2 id="common-right-click-items"> 
+
+   <sect2 id="common-right-click-items">
     <title>Other Common Pop-Up Items</title>
     <para>
      Many applets also have one or more of the following items in their
@@ -4154,7 +4154,7 @@ GDP Team ####### -->
          The <guimenuitem>Run...</guimenuitem> menu item generally
          invokes a program  which is related to the applet in some way
          but which runs in its own window rather than in the
-         panel. For example: 
+         panel. For example:
         </para>
         <orderedlist>
          <listitem>
@@ -4181,10 +4181,10 @@ GDP Team ####### -->
     </para>
    </sect2>
   </sect1>
-  
+
   <sect1 id="feedback">
    <title>Feedback</title>
-   <sect2 id="reporting-bugs"> 
+   <sect2 id="reporting-bugs">
     <title>Reporting Applet Bugs</title>
     <para>
      GNOME users are encouraged to report bugs to <ulink type="http"
@@ -4193,14 +4193,14 @@ GDP Team ####### -->
      <application>Bug Report Tool</application> program by selecting
      <menuchoice>
       <guimenu>Main Menu</guimenu> <guisubmenu>Utilities</guisubmenu>
-      <guimenuitem>Bug Report Tool</guimenuitem> 
+      <guimenuitem>Bug Report Tool</guimenuitem>
      </menuchoice>.
      Be sure to be complete in describing what you did to cause the
      bug to surface and, if possible, describe how the developer can
      reproduce the the scenario.
     </para>
    </sect2>
-   <sect2 id="documentation-feedback"> 
+   <sect2 id="documentation-feedback">
     <title>Providing Feedback</title>
     <para>
      GNOME users are welcome to provide suggestions for how
@@ -4210,10 +4210,10 @@ GDP Team ####### -->
      Suggestions for documentation changes can be emailed directly to
      the documentation author (whose email should be included in the
      "Authors" section of the document) or by sending an email to
-     <email>docs@gnome.org</email>. 
+     <email>docs@gnome.org</email>.
     </para>
    </sect2>
-   <sect2 id="joining-gnome">  
+   <sect2 id="joining-gnome">
     <title>Joining GNOME</title>
     <para>
      GNOME is a community project, created by hundreds of programmers,
@@ -4254,14 +4254,14 @@ GDP Team ####### -->
 
 ]]>
 	</programlisting>
-	
+
         <programlisting>
 <![CDATA[
 
   <!-- Please replace everywhere below GNOMEAPPLET with the name of -->
   <!-- your applet. Most importantly, all id attributes should start -->
   <!-- with the name of your applet - this is necessary to avoid name -->
-  <!-- conflict among different applets --> 
+  <!-- conflict among different applets -->
   <!-- Please replace YOUR-NAME with your name and YOUR-EMAIL with your email-->
   <!-- Please replace HACKER-NAME with the applet author's name and -->
   <!-- HACKER-EMAIL with the applet author's email -->
@@ -4290,16 +4290,16 @@ GDP Team ####### -->
 
   <!-- ###############   GNOMEAPPLET   ############### -->
   <sect1 id="GNOMEAPPLET">
-   <title>GNOMEAPPLET Applet</title> 
+   <title>GNOMEAPPLET Applet</title>
 
-   <para> 
+   <para>
     <application>GNOMEAPPLET</application> applet, shown in <xref
     linkend="GNOMEAPPLET-fig">, does this and that. To learn how to
     add this applet to a <interface>Panel</interface>, see <xref
-    linkend="adding-applets">. 
+    linkend="adding-applets">.
    </para>
-  
- 
+
+
    <figure id="GNOMEAPPLET-fig">
    <title>GNOMEAPPLET</title>
    <screenshot>
@@ -4313,17 +4313,17 @@ GDP Team ####### -->
     <title>Usage</title>
     <para>
      This applet does nothing. To use it, just
-     left-click on it and it will instantly do nothing.   
+     left-click on it and it will instantly do nothing.
     </para>
    </sect2>
 
    <sect2 id="GNOMEAPPLET-right-click">
     <title>Right-Click Pop-Up Menu Items</title>
-    <para> 
+    <para>
      In addition to the standard menu items (see <xref
-     linkend="standard-right-click-items">), the right-click pop-up menu has 
-     the following items: 
-     <itemizedlist> 	
+     linkend="standard-right-click-items">), the right-click pop-up menu has
+     the following items:
+     <itemizedlist>
       <listitem>
        <para>
         <guimenuitem>Properties...</guimenuitem> &mdash; This menu
@@ -4336,7 +4336,7 @@ GDP Team ####### -->
        <para>
         <guimenuitem>Run Hello World...</guimenuitem> &mdash; This
         menu item starts the program <application>Hello
-        World</application>, used to say "hello" to the world. 
+        World</application>, used to say "hello" to the world.
        </para>
       </listitem>
      </itemizedlist>
@@ -4355,16 +4355,16 @@ GDP Team ####### -->
     <figure id="GNOMEAPPLET-properties-fig">
      <title>Properties Dialog</title>
      <screenshot>
-      <screeninfo>Properties Dialog</screeninfo> 
+      <screeninfo>Properties Dialog</screeninfo>
       <graphic format="png" fileref="GNOMEAPPLET-properties" srccredit="ME">
       </graphic>
      </screenshot>
     </figure>
-    
-    <para> 
+
+    <para>
      To change the color of the applet, click on the
      <guibutton>color</guibutton> button. To change other properties,
-     click on other buttons. 
+     click on other buttons.
     </para>
 
     <para>
@@ -4375,12 +4375,12 @@ GDP Team ####### -->
      linkend="applet-properties-dialog">.
     </para>
    </sect2>
-  
+
    <sect2 id="GNOMEAPPLET-bugs">
     <title> Known Bugs and Limitations</title>
     <para>
      There are no known bugs in the
-     <application>GNOMEAPPLET</application> applet. 
+     <application>GNOMEAPPLET</application> applet.
     </para>
    </sect2>
 
@@ -4392,7 +4392,7 @@ GDP Team ####### -->
      which you are reading now was written by
      YOUR-NAME <email>YOUR-EMAIL</email>. For information on submitting
      bug reports and suggestions for improvements, see <xref
-     linkend="feedback">. 
+     linkend="feedback">.
     </para>
    </sect2>
 
@@ -4409,7 +4409,7 @@ GDP Team ####### -->
       </para>
     </sect1>
 
-<!-- ####### Document Templates | Templates 3: Application Help ####### 
+<!-- ####### Document Templates | Templates 3: Application Help #######
 
     <sect1 id="template3">
       <title>Template 2: Application Help</title>
@@ -4426,22 +4426,22 @@ GDP Team ####### -->
       </para>
     </sect1>
 
-####### Document Templates | Templates 5: Complete Application: gnome-hello  ####### 
+####### Document Templates | Templates 5: Complete Application: gnome-hello  #######
 
     <sect1 id="template5">
       <title>Template 4: Complete Application: gnome-hello</title>
       <programlisting>
 <![CDATA[(Put sgml here.)]]>
-      </programlisting>  
+      </programlisting>
     </sect1>
 
-####### Document Templates | Templates 6: Tutorial ####### 
+####### Document Templates | Templates 6: Tutorial #######
 
     <sect1 id="template6">
       <title>Template 5: Tutorial</title>
       <programlisting>
 <![CDATA[(Put sgml here.)]]>
-      </programlisting>  
+      </programlisting>
     </sect1>-->
   </appendix>
 

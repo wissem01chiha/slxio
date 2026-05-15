@@ -10,8 +10,8 @@
         <form/>
         <!-- The second element should not be reported as an error -->
         <form/>
-        <notAllowed/> 
+        <notAllowed/>
     </entryWithRef>
 </_>
-    
-    
+
+

@@ -61,4 +61,3 @@
  -nln, --no-line-numbers=<bool>        0 instead of real line numbers in output
 
 [doctest] for more information visit the project documentation
-

@@ -28,4 +28,3 @@ CTEST(workbook, write_defined_name) {
 
     lxw_workbook_free(workbook);
 }
-

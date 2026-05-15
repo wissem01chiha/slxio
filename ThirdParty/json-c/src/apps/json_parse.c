@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <fcntl.h>
-#ifdef HAVE_GETOPT_H 
+#ifdef HAVE_GETOPT_H
 #include <getopt.h>
 #endif
 #include <stddef.h>

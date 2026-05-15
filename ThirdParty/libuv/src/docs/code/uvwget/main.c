@@ -91,7 +91,7 @@ void curl_perform(uv_poll_t *req, int status, int events) {
     context = (curl_context_t*)req;
 
     curl_multi_socket_action(curl_handle, context->sockfd, flags, &running_handles);
-    check_multi_info();   
+    check_multi_info();
 }
 
 void on_timeout(uv_timer_t *req) {
@@ -128,7 +128,7 @@ int handle_socket(CURL *easy, curl_socket_t s, int action, void *userp, void *so
         case CURL_POLL_REMOVE:
             if (socketp) {
                 uv_poll_stop(&((curl_context_t*)socketp)->poll_handle);
-                destroy_curl_context((curl_context_t*) socketp);                
+                destroy_curl_context((curl_context_t*) socketp);
                 curl_multi_assign(curl_handle, s, NULL);
             }
             break;

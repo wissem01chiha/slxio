@@ -130,7 +130,7 @@ TEST_IMPL(fs_fd_hash) {
   /* Empty table */
   RUN_HASH(assert_nonexistent);
   RUN_COLLISIONS(assert_nonexistent);
-  
+
   return 0;
 }
 

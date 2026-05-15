@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!--
-  "element complexType: Schemas parser error : 
+  "element complexType: Schemas parser error :
    local complex type: The content model is not determinist."
 
-  This schema is OK with XSV and Xerces. 
+  This schema is OK with XSV and Xerces.
 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="urn:test:foo"

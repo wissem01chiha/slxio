@@ -58,4 +58,3 @@ CTEST(utility, lxw_name_to_row_2) {
     ASSERT_EQUAL(1048576, lxw_name_to_row_2("A1:XFE1048577"));
     ASSERT_EQUAL(1048576, lxw_name_to_row_2("A1:$XFE$1048577"));
 }
-

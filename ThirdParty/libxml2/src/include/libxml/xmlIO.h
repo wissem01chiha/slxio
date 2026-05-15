@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief I/O interfaces used by the parser
- * 
+ *
  * Functions and datatypes for parser input and output.
  *
  * @copyright See Copyright for the status of this software.

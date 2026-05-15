@@ -1470,4 +1470,3 @@ static const xmlUnicodeRange xmlUnicodeBlocks[] = {
   {"YijingHexagramSymbols",
    {1,0,xmlYijingHexagramSymbolsS,NULL}}
 };
-

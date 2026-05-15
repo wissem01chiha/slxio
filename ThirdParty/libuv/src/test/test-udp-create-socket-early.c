@@ -93,9 +93,9 @@ TEST_IMPL(udp_create_early_bad_bind) {
   ASSERT_OK(r);
 
   /* Windows returns WSAEINVAL if the socket is not bound */
-#ifndef _WIN32 
+#ifndef _WIN32
   ASSERT_NE(fd, INVALID_FD);
-  { 
+  {
     int namelen;
     struct sockaddr_in6 sockname;
     namelen = sizeof sockname;
@@ -103,7 +103,7 @@ TEST_IMPL(udp_create_early_bad_bind) {
     ASSERT_OK(r);
     ASSERT_EQ(sockname.sin6_family, AF_INET6);
   }
-#else 
+#else
   ASSERT_PTR_NE(fd, INVALID_FD);
 #endif
 

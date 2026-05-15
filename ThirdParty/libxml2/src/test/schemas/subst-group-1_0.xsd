@@ -12,7 +12,7 @@
       <xs:extension base="xs:anySimpleType">
       </xs:extension>
     </xs:simpleContent>
-  </xs:complexType>  
+  </xs:complexType>
 
   <!-- Common members of the SimpleEvent substitution group -->
   <xs:element name="TestEvent" substitutionGroup="SimpleEvent">

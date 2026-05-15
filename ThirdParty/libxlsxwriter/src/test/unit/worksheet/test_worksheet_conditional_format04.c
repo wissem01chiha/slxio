@@ -81,5 +81,3 @@ CTEST(worksheet, worksheet_condtional_format04) {
 
     lxw_worksheet_free(worksheet);
 }
-
-

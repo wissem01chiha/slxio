@@ -47,6 +47,6 @@ cat issues.md >> issues_closed_for_0.18.md
 * [Issue #864](https://github.com/json-c/json-c/issues/864) - Build pkg-config for msvc as well
 * [Issue #865](https://github.com/json-c/json-c/issues/865) - Assertion usage
 * [Issue #866](https://github.com/json-c/json-c/issues/866) - Added github actions
-* [Issue #868](https://github.com/json-c/json-c/issues/868) - I meet compile error in harmony  
+* [Issue #868](https://github.com/json-c/json-c/issues/868) - I meet compile error in harmony
 * [Issue #869](https://github.com/json-c/json-c/issues/869) - At a high level how are jsons parses? Are they terminated by the new line?
 * [Issue #870](https://github.com/json-c/json-c/issues/870) - Non-Compliant features should be optional (and disabled)

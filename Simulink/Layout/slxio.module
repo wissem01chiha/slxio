@@ -1,11 +1,11 @@
-NAME 
+NAME
   Layout
 GROUP
   Simulink
 LIBRARY_NAME
   SimulinkLayout
-DESCRIPTION  
-  Simulink Layout Support Module 
+DESCRIPTION
+  Simulink Layout Support Module
 LICENSE
   Apache-2.0
 VERSION
@@ -43,4 +43,4 @@ PRIVATE_DEPENDS
   Simulink::Annotation
 TEST_DEPENDS
   ThirdParty::doctest
-  
+

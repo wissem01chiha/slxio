@@ -3,15 +3,14 @@
 	invalid: <bar.A/> and <foo:bar.B/>
 	valid: <bar:bar.C/>
 -->
-<foo:foo 
-	xmlns:foo="http://FOO" 
+<foo:foo
+	xmlns:foo="http://FOO"
 	xmlns:bar="http://BAR"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://FOO any4_0.xsd">
 
 	<foo:anything>
 		<foo:boo booAttr="123"/>
-	</foo:anything>	
-	
-</foo:foo>
+	</foo:anything>
 
+</foo:foo>

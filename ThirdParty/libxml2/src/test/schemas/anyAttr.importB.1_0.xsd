@@ -5,17 +5,16 @@
 		<xsd:anyAttribute namespace="##other"/>
 	</xsd:attributeGroup>
 
-	<xsd:complexType name="imp.type.base.inters.4_1">	
-		<xsd:anyAttribute namespace="##other" processContents="lax"/>	
+	<xsd:complexType name="imp.type.base.inters.4_1">
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="imp.type.base.derive.4_1">	
-		<xsd:anyAttribute namespace="##other" processContents="lax"/>	
+	<xsd:complexType name="imp.type.base.derive.4_1">
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
 	</xsd:complexType>
 
-	<xsd:complexType name="imp.type.base.derive.6">	
-		<xsd:anyAttribute namespace="##other" processContents="lax"/>	
+	<xsd:complexType name="imp.type.base.derive.6">
+		<xsd:anyAttribute namespace="##other" processContents="lax"/>
 	</xsd:complexType>
 
 </xsd:schema>
-

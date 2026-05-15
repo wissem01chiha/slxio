@@ -3013,7 +3013,7 @@ SAX.comment(				<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0" WIDTH="100%" B
 							ALIGN="BOTTOM" BORDER="0"></A>
 						</TD>
 					</TR>
-				</TABLE> 
+				</TABLE>
 )
 SAX.characters(
       , 7)

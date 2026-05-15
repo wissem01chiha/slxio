@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-	
+
 	<xsd:simpleType name="myDecimal">
-		<xsd:restriction base="xsd:decimal">			
-			<xsd:totalDigits value="18"/>			
+		<xsd:restriction base="xsd:decimal">
+			<xsd:totalDigits value="18"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 

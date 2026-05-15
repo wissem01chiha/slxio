@@ -4,5 +4,3 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "DataObject.h"
-
-

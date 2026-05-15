@@ -14,7 +14,7 @@ include(ModuleDebugging)
 .. cmake:function:: add_submodules(<directory>)
 
   A wrapper around ``add_subdirectory`` to add multiple modules.
-  
+
   .. code-block::cmake
 
     add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
@@ -27,7 +27,7 @@ function(add_submodules directory)
   # this cache variable will hold the mapping between the module
   # qualified name 'eg Common::Core' and the buildbale library name defined
   # in the module file, typically, we used the follwing rule for library name:
-  # <namespace><module_name>, but in general those can be different and the later 
+  # <namespace><module_name>, but in general those can be different and the later
   # is random defined by the user
   set(module_map "" CACHE INTERNAL "Global module name-target mapping")
 
@@ -134,15 +134,15 @@ function(scan_submodules _sorted_list _modules_dir_list)
 
     endforeach()
   endwhile()
-  
+
   # unresolved modules
   if(_buffer)
     foreach(_mod_dir IN LISTS _buffer)
       set(_module_id "${_dir_to_id_${_mod_dir}}")
-      message(STATUS "[scan_submodules] Module ${_module_id} 
+      message(STATUS "[scan_submodules] Module ${_module_id}
         still depends on : ${_deps_map_${_module_id}}")
     endforeach()
-    message(FATAL_ERROR "[scan_submodules] Cyclic or unresolved 
+    message(FATAL_ERROR "[scan_submodules] Cyclic or unresolved
     module dependencies.")
   endif()
 
@@ -153,7 +153,7 @@ endfunction()
 .. cmake:function:: get_submodule_dependency(<module_prefix> <list>)
 
   Get the list of dependencies for a given module.
-  Note : This function should be called after ``scan_module_file`` to 
+  Note : This function should be called after ``scan_module_file`` to
   ensure that the module properties are available in the parent scope.
 
   .. code-block::cmake
@@ -176,10 +176,10 @@ endfunction()
 #[==[.rst:
 .. cmake:function:: add_module(<module_name>)
 
-  Main wrapper for module declarations, this function should be called 
+  Main wrapper for module declarations, this function should be called
   in each module's CMakeLists.txt file.
-  Note: a module should contain a slxio.module file with all properties, and 
-  at least one source file or config header to be buildable as target, by the 
+  Note: a module should contain a slxio.module file with all properties, and
+  at least one source file or config header to be buildable as target, by the
   wrapper
 
   ... code-block:: cmake
@@ -190,7 +190,7 @@ endfunction()
 function(add_module module_name)
 
   scan_module_file(_module)
-  
+
   if(${_module_enable_build} STREQUAL "FALSE")
   if(SLXIO_MODULE_DEBUG)
     message(STATUS "[add_module] module ${module_name} build is disabled.")
@@ -198,9 +198,9 @@ function(add_module module_name)
     return()
   endif()
 
-  configure_module("${_module_config_headers}" 
+  configure_module("${_module_config_headers}"
     "${CMAKE_CURRENT_SOURCE_DIR}")
-  
+
   add_library(${_module_library_name})
   if(SLXIO_BUILD_SHARED)
     set_target_properties(${_module_library_name} PROPERTIES
@@ -211,16 +211,16 @@ function(add_module module_name)
 
   # module include directories
   target_include_directories(${_module_library_name} PUBLIC
-   ${CMAKE_CURRENT_SOURCE_DIR} 
+   ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
   )
   set_target_properties(${_module_library_name} PROPERTIES
-    module_include_directories 
+    module_include_directories
     "${CMAKE_CURRENT_SOURCE_DIR}")
   set_target_properties(${_module_library_name} PROPERTIES
     module_source_dir "${CMAKE_CURRENT_SOURCE_DIR}")
 
-  set(module_map 
+  set(module_map
   "${module_map};${_module_group}::${_module_name}=${_module_library_name}"
    CACHE INTERNAL "Global module name-target mapping")
 
@@ -267,8 +267,8 @@ endfunction()
     A wrapper around ``target_sources`` that works for modules.
     This function adds source files(classes, sources, and platform
      specific sources) to the module target.
-    Note: this function shoule be called after the module target 
-    created and module properties are propulated in the parent 
+    Note: this function shoule be called after the module target
+    created and module properties are propulated in the parent
     scope by calling ``scan_module_file`` function
 
     .. code-block:: cmake
@@ -289,14 +289,14 @@ function(module_sources module_prefix module_target_name)
     endif()
 
     # add platform specific sources
-    if(WIN32 AND DEFINED ${module_prefix}_windows_sources 
+    if(WIN32 AND DEFINED ${module_prefix}_windows_sources
     AND NOT "${${module_prefix}_windows_sources}" STREQUAL "")
       foreach(win_src IN LISTS ${module_prefix}_windows_sources)
         list(APPEND srcs "${win_src}")
       endforeach()
     endif()
 
-    if(UNIX AND DEFINED ${module_prefix}_unix_sources 
+    if(UNIX AND DEFINED ${module_prefix}_unix_sources
     AND NOT "${${module_prefix}_unix_sources}" STREQUAL "")
       foreach(unix_src IN LISTS ${module_prefix}_unix_sources)
         list(APPEND srcs "${unix_src}")
@@ -322,7 +322,7 @@ function(module_sources module_prefix module_target_name)
 endfunction()
 
 #[==[.rst:
-  .. cmake:function:: add_module_dependencies(<module_prefix> 
+  .. cmake:function:: add_module_dependencies(<module_prefix>
       <module_target_name>)
 
     A wrapper around ``add_dependencies`` that works for modules.
@@ -337,7 +337,7 @@ endfunction()
 function(add_module_dependencies module_prefix module_target_name)
 
   set(dep_targets "")
-  foreach(dep IN LISTS ${module_prefix}_public_depends 
+  foreach(dep IN LISTS ${module_prefix}_public_depends
     ${module_prefix}_private_depends)
     # for each dependency, get its target name in module file
     module_target_name(${dep} dep_tmp)
@@ -353,8 +353,8 @@ endfunction()
 #[==[.rst:
   .. cmake:function:: module_target_name(<module_id> <prefix>)
 
-   This function retuns the module target name specified in the 
-   module declaration file as LIBRARY_NAME, used for fetching 
+   This function retuns the module target name specified in the
+   module declaration file as LIBRARY_NAME, used for fetching
    the target name for the module dependencies, and also to set
    the target name for the current module.
 
@@ -365,18 +365,18 @@ endfunction()
       library_name = "CommonCore"
 #]==]
 function(module_target_name module_name library_name)
-  
+
   split_module_name(${module_name} temp)
   # build the full path to the module slxio.module file
-  # a Woraround for IO modules, in slxio.module files, the _depend section are 
-  # listed as Io:Core, to not break the parsing logic in scan_module_file function, 
+  # a Woraround for IO modules, in slxio.module files, the _depend section are
+  # listed as Io:Core, to not break the parsing logic in scan_module_file function,
   # here we need to reconvert it to upper to match folder name, can we do better ?
   if(temp_NAMESPACE STREQUAL "Io")
     set(temp_NAMESPACE "IO")
   endif()
-  set(module_file 
+  set(module_file
     "${PROJECT_SOURCE_DIR}/${temp_NAMESPACE}/${temp_MODULE_NAME}/slxio.module")
-  # scan the module file 
+  # scan the module file
   scan_module_file(tmp "${module_file}")
   set(${library_name} "${tmp_LIBRARY_NAME}")
   set(${library_name} "${tmp_LIBRARY_NAME}" PARENT_SCOPE)
@@ -410,15 +410,15 @@ endfunction()
 .. cmake:function:: module_include_directories(<prefix> <target_name>)
 
   A wrapper around ``target_include_directories`` that works for modules.
-  This function adds include directories from all module dependencies to 
+  This function adds include directories from all module dependencies to
   the given target.
-  Note: this function require that all module targets have the following 
+  Note: this function require that all module targets have the following
   properties set before:
     - module_include_directories
     - module_source_dir
   And also the module properties should be available in the parent scope by
   calling ``scan_module_file`` function
-  
+
   .. code-block:: cmake
 
     module_include_directories(_module CommonCore)
@@ -426,7 +426,7 @@ endfunction()
 #]==]
 function(module_include_directories module_prefix module_target_name)
 
-if(DEFINED ${module_prefix}_public_depends 
+if(DEFINED ${module_prefix}_public_depends
   AND NOT "${${module_prefix}_public_depends}" STREQUAL "")
   foreach(dep IN LISTS ${module_prefix}_public_depends)
 
@@ -436,9 +436,9 @@ if(DEFINED ${module_prefix}_public_depends
       math(EXPR val_pos "${pos}+1")
       string(SUBSTRING "${entry}" ${val_pos} -1 value)
       if(key STREQUAL "${dep}")
-        get_target_property(public_include_directories 
+        get_target_property(public_include_directories
         ${value} module_include_directories)
-        target_include_directories(${module_target_name} 
+        target_include_directories(${module_target_name}
         PUBLIC "${public_include_directories}")
         break()
       endif()
@@ -447,7 +447,7 @@ if(DEFINED ${module_prefix}_public_depends
 
 endif()
 
-if(DEFINED ${module_prefix}_private_depends 
+if(DEFINED ${module_prefix}_private_depends
   AND NOT "${${module_prefix}_private_depends}" STREQUAL "")
   foreach(dep IN LISTS ${module_prefix}_private_depends)
 
@@ -457,9 +457,9 @@ if(DEFINED ${module_prefix}_private_depends
       math(EXPR val_pos "${pos}+1")
       string(SUBSTRING "${entry}" ${val_pos} -1 value)
       if(key STREQUAL "${dep}")
-        get_target_property(private_include_directories 
+        get_target_property(private_include_directories
         ${value} module_include_directories)
-        target_include_directories(${module_target_name} 
+        target_include_directories(${module_target_name}
         PRIVATE "${private_include_directories}")
         break()
       endif()
@@ -565,35 +565,35 @@ endfunction()
 #]==]
 function(module_add_compile_defintions module_prefix module_target_name)
   if(DEFINED ${module_prefix}_compile_flags)
-    target_compile_definitions(${module_target_name} 
+    target_compile_definitions(${module_target_name}
     PUBLIC ${${module_prefix}_compile_flags})
   endif()
 
   # add system wise compile flags if declared for each platform
   if(WIN32)
     if(DEFINED ${module_prefix}_windows_compile_flags)
-      target_compile_definitions(${module_target_name} 
+      target_compile_definitions(${module_target_name}
       PRIVATE ${${module_prefix}_windows_compile_flags})
     endif()
   endif()
 
   if(UNIX)
     if(DEFINED ${module_prefix}_unix_compile_flags)
-      target_compile_definitions(${module_target_name} 
+      target_compile_definitions(${module_target_name}
       PRIVATE ${${module_prefix}_unix_compile_flags})
     endif()
   endif()
 
   if(ANDROID)
     if(DEFINED ${module_prefix}_android_compile_flags)
-      target_compile_definitions(${module_target_name} 
+      target_compile_definitions(${module_target_name}
       PRIVATE ${${module_prefix}_android_compile_flags})
     endif()
   endif()
 
   if(WASM)
     if(DEFINED ${module_prefix}_wasm_compile_flags)
-      target_compile_definitions(${module_target_name} 
+      target_compile_definitions(${module_target_name}
         PRIVATE ${${module_prefix}_wasm_compile_flags})
     endif()
   endif()
@@ -689,7 +689,7 @@ function(add_test_sources module_target)
 
   get_target_property(module_source_directory
           ${module_target} module_source_dir)
-  scan_module_file(_module 
+  scan_module_file(_module
   ${module_source_directory}/slxio.module)
 
   foreach(filename IN LISTS ARGN)
@@ -715,7 +715,7 @@ function(add_test_dependencies test_target module_prefix)
 
   add_dependencies(${test_target} ${${module_prefix}_library_name})
   set(module_test_dep_targets "")
-  foreach(test_dep IN LISTS ${module_prefix}_test_depends 
+  foreach(test_dep IN LISTS ${module_prefix}_test_depends
     ${module_prefix}_test_optional_depends)
     module_target_name(${test_dep} test_dep_library_name)
     list(APPEND module_test_dep_targets ${test_dep_library_name})
@@ -734,13 +734,13 @@ endfunction()
 #]==]
 function(test_include_directory test_target module_prefix)
 
-  get_target_property(public_include_directories 
+  get_target_property(public_include_directories
         ${${module_prefix}_library_name} module_include_directories)
 
-  target_include_directories(${test_target} PUBLIC 
+  target_include_directories(${test_target} PUBLIC
       "${public_include_directories}")
 
-  if(DEFINED ${module_prefix}_test_depends AND NOT 
+  if(DEFINED ${module_prefix}_test_depends AND NOT
   "${module_prefix}_test_depends" STREQUAL "")
     foreach(test_dep IN LISTS ${module_prefix}_test_depends)
 
@@ -750,9 +750,9 @@ function(test_include_directory test_target module_prefix)
         math(EXPR val_pos "${pos}+1")
         string(SUBSTRING "${entry}" ${val_pos} -1 value)
         if(key STREQUAL "${test_dep}")
-          get_target_property(test_depends_include_directories 
+          get_target_property(test_depends_include_directories
             ${value} module_include_directories)
-          target_include_directories(${test_target} 
+          target_include_directories(${test_target}
             PRIVATE "${test_depends_include_directories}")
           break()
         endif()
@@ -780,7 +780,7 @@ endfunction()
 #[==[.rst:
 .. cmake:function:: add_thirdparty_module(<name> <path> <target>)
 
-  Wrapper for vendored third‑party libraries.  
+  Wrapper for vendored third‑party libraries.
 
   .. code-block:: cmake
 
@@ -792,7 +792,7 @@ function(add_thirdparty_module module_name module_path target_name)
 
   add_subdirectory(src)
 
-  set(module_map 
+  set(module_map
     "${module_map};ThirdParty::${module_name}=${target_name}"
     CACHE INTERNAL "Global module name-target mapping")
 

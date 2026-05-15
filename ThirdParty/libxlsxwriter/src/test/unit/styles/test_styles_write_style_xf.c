@@ -27,4 +27,3 @@ CTEST(styles, write_style_xf) {
 
     lxw_styles_free(styles);
 }
-

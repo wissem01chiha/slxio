@@ -15,6 +15,6 @@
 #include "src/json_tokener.h"
 #include "src/json_util.h"
 #include "src/linkhash.h"
-#endif 
+#endif
 
 #endif // JSON_C_H

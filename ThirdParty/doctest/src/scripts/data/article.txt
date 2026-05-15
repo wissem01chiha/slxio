@@ -144,7 +144,7 @@ Suppose you want to open a file in a few test cases and read from it. If you don
 TEST_CASE("testing file stuff") {
     printf("opening the file\n");
     std::ifstream is ("test.txt", std::ifstream::binary);
-    
+
     SUBCASE("seeking in file") {
         printf("seeking\n");
         // is.seekg()

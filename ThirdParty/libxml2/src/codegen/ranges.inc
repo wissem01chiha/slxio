@@ -128,4 +128,3 @@ static const xmlChSRange xmlIsIdeographic_srng[] = {{0x3007, 0x3007},
     {0x3021, 0x3029}, {0x4e00, 0x9fa5}};
 const xmlChRangeGroup xmlIsIdeographicGroup =
 	{3,0,xmlIsIdeographic_srng,NULL};
-

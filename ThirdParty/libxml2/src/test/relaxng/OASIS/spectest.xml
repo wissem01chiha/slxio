@@ -3177,7 +3177,7 @@
 <testCase>
 <section>4.17</section>
 <incorrect>
-<element name="foo" xmlns="http://relaxng.org/ns/structure/1.0"> 
+<element name="foo" xmlns="http://relaxng.org/ns/structure/1.0">
 <grammar>
 <start name="x">
   <element name="bar1">
@@ -3211,7 +3211,7 @@
       <empty/>
     </element>
   </define>
-</grammar>   
+</grammar>
 </incorrect>
 </testCase>
 <testCase>
@@ -3231,7 +3231,7 @@
 	  <empty/>
 	</element>
       </define>
-    </grammar>   
+    </grammar>
   </define>
 </grammar>
 </incorrect>
@@ -3252,7 +3252,7 @@
 	  <empty/>
 	</element>
       </define>
-    </grammar>   
+    </grammar>
   </group>
 </choice>
 </incorrect>

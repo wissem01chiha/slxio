@@ -74,7 +74,7 @@ find_library(
 set(JSON-C_LIBRARIES ${JSON-C_LIBRARY})
 set(JSON-C_INCLUDE_DIRS ${JSON-C_INCLUDE_DIR})
 
-find_package_handle_standard_args(JSON-C DEFAULT_MSG 
+find_package_handle_standard_args(JSON-C DEFAULT_MSG
 JSON-C_LIBRARY JSON-C_INCLUDE_DIR)
 
 mark_as_advanced(JSON-C_INCLUDE_DIR JSON-C_LIBRARY)

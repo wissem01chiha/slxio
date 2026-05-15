@@ -1604,4 +1604,3 @@ static const unsigned char htmlEntStrings[20588] = {
     's', 'c', 'r',   4, 240, 157, 147, 143,   2, 'w', 'j',   3, 226, 128, 141,
       3, 'w', 'n', 'j',   3, 226, 128, 140
 };
-

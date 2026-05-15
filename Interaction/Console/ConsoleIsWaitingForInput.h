@@ -27,4 +27,3 @@ CONSOLE_IMPEXP BOOL ConsoleIsWaitingForInput(void);
 
 /*--------------------------------------------------------------------------*/
 #endif /* __CONSOLEISWAITINGFORINPUT_H__ */
-

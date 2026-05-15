@@ -2,7 +2,7 @@
  * @file
  *
  * @brief library of generic URI related routines
- * 
+ *
  * library of generic URI related routines
  *              Implements RFC 2396
  *

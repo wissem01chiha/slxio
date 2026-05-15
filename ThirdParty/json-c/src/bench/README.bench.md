@@ -75,6 +75,5 @@ Issues
     ```
 
  With the (unreleased) arraylist trimming changes, maxrss reported by
-  getrusage() goes down, but massif claims *more* total usage, and a HUGE 
+  getrusage() goes down, but massif claims *more* total usage, and a HUGE
   extra-heap amount (50% of total).
-

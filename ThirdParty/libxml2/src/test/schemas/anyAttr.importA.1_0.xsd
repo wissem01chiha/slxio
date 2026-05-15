@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://IMPORT" 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://IMPORT"
 	xmlns:imp="http://IMPORT" xmlns:boo="http://BOO">
 
 	<xsd:attributeGroup name="attrGr.inters.5_1">
 		<xsd:anyAttribute namespace="##other"/>
-	</xsd:attributeGroup>	
+	</xsd:attributeGroup>
 
-	<xsd:element name="imp.element"/>		
+	<xsd:element name="imp.element"/>
 
 	<xsd:attribute name="imp.attribute" type="xsd:string"/>
 
@@ -21,4 +21,3 @@
 	</xsd:complexType>
 
 </xsd:schema>
-

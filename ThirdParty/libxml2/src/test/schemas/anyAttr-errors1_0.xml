@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <foo
-	xmlns="http://FOO" 
-	xmlns:foo="http://FOO" 
-	xmlns:bar="http://BAR" 
-	xmlns:import="http://IMPORT" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://FOO"
+	xmlns:foo="http://FOO"
+	xmlns:bar="http://BAR"
+	xmlns:import="http://IMPORT"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://FOO file:///c:/dev/libxml2/patches/2004-05-17/anyAttr-errors1_0.xsd">
 
 	<!-- not allowed: foo:barC -->
@@ -22,5 +22,3 @@
 	<!-- not allowed: barA, foo:barC -->
 	<inters.6_1 barA="o" bar:barB="o" foo:barC="o"/>
 </foo>
-
-

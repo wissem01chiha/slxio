@@ -28,4 +28,3 @@ CTEST(styles, write_name) {
 
     lxw_styles_free(styles);
 }
-

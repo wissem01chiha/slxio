@@ -47,4 +47,3 @@ iteration of the loop still takes places.
     :language: c
     :linenos:
     :emphasize-lines: 11
-

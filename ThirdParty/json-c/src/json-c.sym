@@ -3,7 +3,7 @@
  * Symbol versioning for libjson-c.
  * All exported symbols must be listed here.
  *
- * See 
+ * See
  *   https://software.intel.com/sites/default/files/m/a/1/e/dsohowto.pdf
  */
 

@@ -1,5 +1,5 @@
 <!-- omit in toc -->
-# Contributing Guide 
+# Contributing Guide
 
 - [Welcome](#welcome)
 - [Project overview](#project-overview)
@@ -38,7 +38,7 @@ However, at this time, we do not accept the following contributions:
 * {Contribution type 3}
 
 ## Project overview
-  see [README](../README.md) for generale project overview 
+  see [README](../README.md) for generale project overview
 
 ## Before you start
 
@@ -84,7 +84,7 @@ Read our {name and link to your style guide} to understand our guidelines for wr
 
 - Make sure that you are using the latest release version.
 - To see if other users have experienced (and potentially already solved) the same issue you are having, check if there is not already a bug report existing for your bug or error in the [bug tracker](https://github.com/wissem01chiha/slxio/issues).
-- for nwo there are ready-to-go templates for bug reporting and faeture request, if your rleated request do not fit into theose templates to add other templates open an github request 
+- for nwo there are ready-to-go templates for bug reporting and faeture request, if your rleated request do not fit into theose templates to add other templates open an github request
 
 ### Issue management
 
@@ -92,17 +92,17 @@ Read our {name and link to your style guide} to understand our guidelines for wr
 
 ### Commit messages
 
-for now there is not any restriction about commit message format, use the format you want 
+for now there is not any restriction about commit message format, use the format you want
 
 ### Branch creation
 
 The project uses the Git branching system with the following main branches:
 
-- `master` – stable, production-ready code  
-- `develop` – active development and integration  
+- `master` – stable, production-ready code
+- `develop` – active development and integration
 - `hotfix` – urgent fixes applied directly to `master`
 
-fature branches are created upon the approval of of a new fature 
+fature branches are created upon the approval of of a new fature
 
 for more information : https://www.geeksforgeeks.org/git/branching-strategies-in-git/
 
@@ -119,44 +119,44 @@ C:\cygwin64\bin\bash.exe -l -c "/cygdrive/c/Users/chiha/OneDrive/Documents/githu
 
 These are the main features and issues planned to be added or fixed:
 
-- Python bindings for modules 
-  - All related module bindings should be placed into:  
+- Python bindings for modules
+  - All related module bindings should be placed into:
     ```
     /<module-namespace>/<module_name>/Binding/Python
-    ```  
-  - Other language bindings should follow the same pattern, e.g.:  
+    ```
+  - Other language bindings should follow the same pattern, e.g.:
     ```
     /<module-namespace>/<module_name>/Binding/Rust
-    ```  
-  - Each module manages its own bindings.  
+    ```
+  - Each module manages its own bindings.
   - Project‑root bindings should be placed into the main [Binding](https://github.com/wissem01chiha/slxio/tree/master/Binding) folder, named by language.
 
-- JSON serializer module  
+- JSON serializer module
   - Start implementation in [IO‑Json](https://github.com/wissem01chiha/slxio/tree/master/IO).
 
-- CMake tooling fixes  
-  - Fix `clang-format` and `cppcheck` CMake target construction in:  
-    - [CppCheck.cmake](https://github.com/wissem01chiha/slxio/blob/master/CMake/CppCheck.cmake)  
+- CMake tooling fixes
+  - Fix `clang-format` and `cppcheck` CMake target construction in:
+    - [CppCheck.cmake](https://github.com/wissem01chiha/slxio/blob/master/CMake/CppCheck.cmake)
     - [CheckClangSupport.cmake](https://github.com/wissem01chiha/slxio/blob/master/CMake/CheckClangSupport.cmake)
 
-- Compiler flag helpers  
+- Compiler flag helpers
   - Add a CMake module file providing helper macros for compiler flag support.
 
-- Compile definitions  
-  - Fix compile definitions in the main `module.cmake` (`PUBLIC_COMPILE_DEFINITIONS`) and private compiler definition functions.  
+- Compile definitions
+  - Fix compile definitions in the main `module.cmake` (`PUBLIC_COMPILE_DEFINITIONS`) and private compiler definition functions.
   - Ensure support for module‑specific compile‑time flags.
 
-- Matlab script parsing  
-  - Add source files for parsing Matlab scripts into an AST (Abstract Syntax Tree) in the [Matlab Utilities module](https://github.com/wissem01chiha/slxio/tree/master/Utilities/Matlab).  
-  - Support parsing of Matlab function blocks.  
+- Matlab script parsing
+  - Add source files for parsing Matlab scripts into an AST (Abstract Syntax Tree) in the [Matlab Utilities module](https://github.com/wissem01chiha/slxio/tree/master/Utilities/Matlab).
+  - Support parsing of Matlab function blocks.
   - Tools like ANTLR can be used to assist.
 
-- Test coverage 
+- Test coverage
   - Fix and add coverage generation for tests.
 
-- Fuzzing support 
+- Fuzzing support
   - Add fuzzing support in the [Fuzzing](https://github.com/wissem01chiha/slxio/tree/master/Fuzzing) module.
- 
+
 ### Releases
 
 {Provide a description of the release process and cadence for the project, such as the source code.}
@@ -164,5 +164,3 @@ These are the main features and issues planned to be added or fixed:
 ### Text formats
 
 {Provide information on what you need contributors to know and use to edit and create documents.}
-
-

@@ -9,7 +9,7 @@
       <!-- The system-required attribute tests to see if
            the user agent supports SVG. If true, then
            render the file drawing.svg. -->
-      <ref system-required="http://www.w3.org/Graphics/SVG/svg-19990412.dtd" 
+      <ref system-required="http://www.w3.org/Graphics/SVG/svg-19990412.dtd"
            type="image/svg" src="drawing.svg" />
 
       <!-- Else, render the alternate image. -->
@@ -17,5 +17,3 @@
     </switch>
   </body>
 </smil>
-
-

@@ -2,7 +2,7 @@
 
 To get started with **doctest** all you need is to download the [**latest version**](https://raw.githubusercontent.com/doctest/doctest/master/doctest/doctest.h) which is just a single header and include it in your source files (or add this repository as a git submodule).
 
-This tutorial assumes you can use the header directly: ```#include "doctest.h"``` - so it is either in the same folder with your test source files or you have set up the include paths to it in your build system properly. 
+This tutorial assumes you can use the header directly: ```#include "doctest.h"``` - so it is either in the same folder with your test source files or you have set up the include paths to it in your build system properly.
 
 [TDD](https://en.wikipedia.org/wiki/Test-driven_development) is not discussed in this tutorial.
 
@@ -136,7 +136,7 @@ TEST_CASE("lots of nested subcases") {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "1" << endl;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBCASE("") { cout << "1.1" << endl; }
 &nbsp;&nbsp;&nbsp;&nbsp;}
-&nbsp;&nbsp;&nbsp;&nbsp;SUBCASE("") {   
+&nbsp;&nbsp;&nbsp;&nbsp;SUBCASE("") {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cout << "2" << endl;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBCASE("") { cout << "2.1" << endl; }
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SUBCASE("") {

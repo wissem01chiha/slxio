@@ -38,6 +38,3 @@ if(SLXIO_COVERAGE)
   find_program(LCOV lcov)
   find_program(GENHTML genhtml)
 endif()
-
-
-

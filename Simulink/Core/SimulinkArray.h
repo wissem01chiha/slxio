@@ -28,66 +28,66 @@ public:
   SimulinkArray();
 
   /**
-   * 
+   *
    */
   SimulinkArray(std::string type, std::string name, std::string dimension);
 
   /**
-   * 
+   *
    */
   SimulinkArray(const SimulinkArray& other);
 
   SimulinkArray& operator=(const SimulinkArray&) = delete;
-  
+
   /**
-   * 
+   *
    */
   SimulinkElementType GetElementType() const override;
 
   std::string ToString() const override;
 
   /**
-   * 
+   *
    */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
   /**
-   * 
+   *
    */
   ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
   /**
-   * 
+   *
    */
   IdType GetElementId() const override;
 
   /**
-   * 
+   *
    */
   std::string getName();
 
   /**
-   * 
+   *
    */
   std::string getDimension();
 
   /**
-   * 
+   *
    */
   std::string getArrayType();
 
   /**
-   * 
+   *
    */
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
 
   /**
-   * 
+   *
    */
   bool Contains(const IdType& id) const override;
 
   /**
-   * 
+   *
    */
   Logger& GetLogger();
 

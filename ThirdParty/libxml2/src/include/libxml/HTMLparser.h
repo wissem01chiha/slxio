@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief HTML parser, doesn't support HTML5
- * 
+ *
  * This module orginally implemented an HTML parser based on the
  * (underspecified) HTML 4.0 spec. As of 2.14, the tokenizer
  * conforms to HTML5. Tree construction still follows a custom,

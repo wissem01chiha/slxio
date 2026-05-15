@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief minimal HTTP implementation
- * 
+ *
  * minimal HTTP implementation allowing to fetch resources
  *              like external subset.
  *

@@ -269,14 +269,14 @@ int json_patch_apply(struct json_object *copy_from, struct json_object *patch,
 	patch_error->patch_failure_idx = SIZE_T_MAX;
 	patch_error->errno_code = 0;
 
-	if (base == NULL|| 
+	if (base == NULL||
 	    (*base == NULL && copy_from == NULL) ||
 	    (*base != NULL && copy_from != NULL))
 	{
 		_set_err(EFAULT, "Exactly one of *base or copy_from must be non-NULL");
 		return -1;
 	}
-	    
+
 	if (!json_object_is_type(patch, json_type_array)) {
 		_set_err(EFAULT, "Patch object is not of type json_type_array");
 		return -1;

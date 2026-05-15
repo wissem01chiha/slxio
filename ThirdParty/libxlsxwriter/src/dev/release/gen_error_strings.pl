@@ -44,7 +44,3 @@ for my $string (@strings) {
 }
 print qq{    "Unknown error number."\n};
 print "};\n\n";
-
-
-
-

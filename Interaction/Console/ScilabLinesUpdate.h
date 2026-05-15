@@ -26,4 +26,3 @@
 CONSOLE_IMPEXP BOOL ScilabLinesUpdate(void);
 /*--------------------------------------------------------------------------*/
 #endif /*__SCILABLINESUPDATE_H__ */
-

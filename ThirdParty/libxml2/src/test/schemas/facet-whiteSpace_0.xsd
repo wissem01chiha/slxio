@@ -5,7 +5,7 @@
 	<xsd:element name="foo">
 		<xsd:simpleType>
 			<xsd:restriction base="xsd:string">
-				<xsd:whiteSpace value="replace"/>				
+				<xsd:whiteSpace value="replace"/>
 			</xsd:restriction>
 		</xsd:simpleType>
 	</xsd:element>

@@ -236,4 +236,3 @@ fuzz-xpath: xpath$(EXEEXT) seed/xpath.stamp
 	    -max_len=10000 \
 	    $$XML_FUZZ_OPTIONS \
 	    corpus/xpath seed/xpath
-

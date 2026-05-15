@@ -27,4 +27,3 @@ CTEST(styles, write_cell_styles) {
 
     lxw_styles_free(styles);
 }
-

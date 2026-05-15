@@ -18,4 +18,3 @@ m4_defun([AS_CASE],
 [case $1 in
 _AS_CASE(m4_shift($@))
 esac])])
-

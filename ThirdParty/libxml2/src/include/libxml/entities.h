@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief XML entities
- * 
+ *
  * This module provides an API to work with XML entities.
  *
  * @copyright See Copyright for the status of this software.

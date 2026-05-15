@@ -69,7 +69,7 @@ SAX.startElementNs(norm, NULL, NULL, 0, 1, 0, attr='foob...', 9)
 SAX.endElementNs(norm, NULL, NULL)
 SAX.characters(
   , 3)
-SAX.startElementNs(norm, NULL, NULL, 0, 1, 0, attr='  
+SAX.startElementNs(norm, NULL, NULL, 0, 1, 0, attr='
 ...', 6)
 SAX.endElementNs(norm, NULL, NULL)
 SAX.characters(

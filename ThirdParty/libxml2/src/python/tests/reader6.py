@@ -34,7 +34,7 @@ libxml2.debugMemory(1)
 
 #
 # Parse the Relax NG Schemas
-# 
+#
 rngp = libxml2.relaxNGNewMemParserCtxt(schema, len(schema))
 rngs = rngp.relaxNGParse()
 del rngp

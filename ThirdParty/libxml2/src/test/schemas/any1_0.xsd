@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!-- Tests xsd:any with "##any". -->
-<xsd:schema 
+<xsd:schema
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://FOO"
-	xmlns:foo="http://FOO">		
+	xmlns:foo="http://FOO">
 
 	<xsd:element name="boo">
 		<xsd:complexType>

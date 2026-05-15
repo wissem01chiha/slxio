@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief SAX2 parser interface used to build the DOM tree
- * 
+ *
  * those are the default SAX2 interfaces used by
  *              the library when building DOM tree.
  *

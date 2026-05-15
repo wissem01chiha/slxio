@@ -196,11 +196,11 @@ SAX.characters(&#1578;, 2)
 SAX.characters(&nbsp;, 2)
 SAX.characters(1387, 4)
 SAX.characters(&nbsp;, 2)
-SAX.characters( 
+SAX.characters(
 				-, 7)
 SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
-SAX.characters( 
+SAX.characters(
 				, 6)
 SAX.startElement(span, dir='ltr')
 SAX.characters(Sunday, May 04, 2008, 20)
@@ -252,7 +252,7 @@ SAX.characters(
 							, 8)
 SAX.startElement(td, valign='top')
 SAX.characters(
-								
+
 , 10)
 SAX.startElement(script)
 SAX.cdata(
@@ -302,7 +302,7 @@ SAX.characters(&#1601;, 2)
 SAX.characters(&#1606;, 2)
 SAX.characters(&#1583;, 2)
 SAX.characters(&nbsp;, 2)
-SAX.characters(1386 
+SAX.characters(1386
 			- Wednesday, March 19, 36)
 SAX.endElement(font)
 SAX.characters(&nbsp;, 2)
@@ -310,7 +310,7 @@ SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
-SAX.characters( 
+SAX.characters(
 			, 5)
 SAX.characters(&#1606;, 2)
 SAX.characters(&#1608;, 2)
@@ -327,7 +327,7 @@ SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
 SAX.characters(&nbsp;, 2)
-SAX.characters( 
+SAX.characters(
 			, 5)
 SAX.characters(&#1583;, 2)
 SAX.characters(&#1601;, 2)
@@ -345,7 +345,7 @@ SAX.characters(: , 2)
 SAX.startElement(font, color='#000000')
 SAX.characters(2688, 4)
 SAX.endElement(font)
-SAX.characters( 
+SAX.characters(
 			, 5)
 SAX.characters(&#1576;, 2)
 SAX.characters(&#1575;, 2)
@@ -378,7 +378,7 @@ SAX.comment(
 		<a href="javascript:ChangeSize('NewsBody','13pt')"><font size="3">&#1576;&#1586;&#1585;&#1711;</font></a>&nbsp;
 		</div>)
 SAX.characters(
-		
+
 
 		, 7)
 SAX.startElement(div, class='Titr1')
@@ -393,11 +393,11 @@ SAX.characters(
 		, 3)
 SAX.startElement(div, id='NewsBody')
 SAX.characters(
-			
+
 			, 8)
 SAX.startElement(div, class='Image')
 SAX.characters(
-				
+
 				, 10)
 SAX.startElement(a, href='showimage.aspx?path=Files_Upload\302.JPG&amp;Width=', rel='lightbox', title='&#1588;&#1607;&#1610;&#1585; &#1576;&#1604;&#1575;&#1711;')
 SAX.characters(

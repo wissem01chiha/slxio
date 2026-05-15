@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief text writing API for XML
- * 
+ *
  * text writing API for XML
  *
  * @copyright See Copyright for the status of this software.

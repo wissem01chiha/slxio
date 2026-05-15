@@ -178,5 +178,3 @@ CTEST(worksheet, worksheet_condtional_format03b) {
 
     lxw_worksheet_free(worksheet);
 }
-
-

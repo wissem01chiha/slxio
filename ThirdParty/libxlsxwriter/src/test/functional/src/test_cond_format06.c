@@ -36,4 +36,3 @@ int main() {
     free(conditional_format);
     return workbook_close(workbook);
 }
-

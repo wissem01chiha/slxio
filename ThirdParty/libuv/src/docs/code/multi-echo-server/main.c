@@ -89,7 +89,7 @@ void setup_workers() {
         worker->options.file = args[0];
         worker->options.args = args;
 
-        uv_spawn(loop, &worker->req, &worker->options); 
+        uv_spawn(loop, &worker->req, &worker->options);
         fprintf(stderr, "Started worker %d\n", worker->req.pid);
     }
 }

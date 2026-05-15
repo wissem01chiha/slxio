@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Old SAX version 1 handler, deprecated
- * 
+ *
  * @deprecated set of SAX version 1 interfaces used to
  *              build the DOM tree.
  *

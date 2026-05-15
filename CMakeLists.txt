@@ -43,7 +43,7 @@ include(Sanitize)
 include(Testing)
 
 #-----------------------------------------------------------------------------
-# License files installation 
+# License files installation
 set(CMAKE_INSTALL_LICENSEDIR ""
   CACHE STRING "License files")
 mark_as_advanced(CMAKE_INSTALL_LICENSEDIR)
@@ -69,12 +69,12 @@ else()
 endif()
 
 #-----------------------------------------------------------------------------
-# Select Logging thirdParty libraray 
+# Select Logging thirdParty libraray
 option(SLXIO_LOGURU "Use Loguru librray for logging" FALSE)
 option(SLXIO_SLOG  "Use slog librray for logging" TRUE)
 
 #-----------------------------------------------------------------------------
-# Testing 
+# Testing
 option(SLXIO_BUILD_TESTS "Build library tests" ON)
 option(SLXIO_BUILD_THIRDPARTY_TESTS "Build vendored modules tests" OFF)
 mark_as_advanced(SLXIO_BUILD_THIRDPARTY_TESTS)
@@ -109,4 +109,3 @@ include(Install)
 add_subdirectory(ThirdParty/zlib)
 add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
 summary()
-

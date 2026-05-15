@@ -3,4 +3,3 @@
 <!ENTITY ampproblem '&amp;'>
 ]>
 <t a="&ampproblem;">a</t>
-

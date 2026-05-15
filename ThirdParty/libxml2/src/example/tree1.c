@@ -41,8 +41,8 @@ print_element_names(xmlNode * a_node)
 
 
 /**
- * Simple example to parse a file called "file.xml", 
- * walk down the DOM, and print the name of the 
+ * Simple example to parse a file called "file.xml",
+ * walk down the DOM, and print the name of the
  * xml elements nodes.
  */
 int
