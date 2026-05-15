@@ -9,16 +9,16 @@
 	<xsd:import namespace="http://BAR"/>
 
 	<xsd:element name="foo">
-		<xsd:complexType>							
-			<xsd:sequence>				
+		<xsd:complexType>
+			<xsd:sequence>
 				<xsd:element name="foo.B" type="bar:fooType"/>
-				<xsd:element ref="bar:bar"/>				
+				<xsd:element ref="bar:bar"/>
 			</xsd:sequence>
-			<xsd:attribute name="foo.attr"/>			
-			
-		</xsd:complexType>		
+			<xsd:attribute name="foo.attr"/>
+
+		</xsd:complexType>
 	</xsd:element>
 
-	
+
 
 </xsd:schema>

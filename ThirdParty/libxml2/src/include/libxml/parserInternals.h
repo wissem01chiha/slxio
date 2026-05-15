@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Internals routines and limits exported by the parser.
- * 
+ *
  * Except for some I/O-related functions, most of these macros and
  * functions are deprecated.
  *

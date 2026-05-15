@@ -21,4 +21,3 @@ xmlNsListDumpOutput(xmlOutputBuffer *buf, xmlNs *cur);
 #endif /* LIBXML_OUTPUT_ENABLED */
 
 #endif /* XML_SAVE_H_PRIVATE__ */
-

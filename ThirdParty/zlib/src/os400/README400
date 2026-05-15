@@ -31,7 +31,7 @@ The script will:
 - install header files for C/C++ and for ILE/RPG, both for compilation in
   DB2 and IFS environments.
 
-That's all. 
+That's all.
 
 
 Notes:  For OS/400 ILE RPG programmers, a /copy member defining the ZLIB

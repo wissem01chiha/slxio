@@ -119,4 +119,3 @@ RUN sdkmanager "platform-tools" $ANDROID_SDK_PLATFORM_VERS
 # ----
 RUN wget ${NDK_URL_BASE}/$NDK_FILE
 RUN unzip $NDK_FILE
-

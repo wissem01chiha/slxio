@@ -413,12 +413,12 @@ void xmlCleanupGlobalsInternal(void) {
                 UnregisterWait(gs->waitHandle);
                 gs->waitHandle = NULL;
             }
-           
+
             if (gs->threadHandle != NULL) {
                 CloseHandle(gs->threadHandle);
                 gs->threadHandle = NULL;
             }
-            
+
             xmlFreeGlobalState(gs);
             TlsSetValue(globalkey, NULL);
         }
@@ -1156,4 +1156,3 @@ xmlThrDefOutputBufferCreateFilenameDefault(xmlOutputBufferCreateFilenameFunc fun
 
     return(old);
 }
-

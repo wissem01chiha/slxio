@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Validating XML 1.0 parser
- * 
+ *
  * Interfaces, constants and types related to the XML parser.
  *
  * @copyright See Copyright for the status of this software.

@@ -46,7 +46,7 @@ SAX.characters(
   , 3)
 SAX.endElement(image)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -63,7 +63,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -80,7 +80,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -97,7 +97,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -114,7 +114,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -131,7 +131,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -148,7 +148,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -165,7 +165,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -182,7 +182,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(
@@ -199,7 +199,7 @@ SAX.characters(
   , 3)
 SAX.endElement(item)
 SAX.characters(
-  
+
   , 6)
 SAX.startElement(item)
 SAX.characters(

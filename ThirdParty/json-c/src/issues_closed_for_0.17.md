@@ -34,7 +34,7 @@ cat issues.md >> issues_closed_for_0.17.md
 * [Issue #756](https://github.com/json-c/json-c/issues/756) - Question: Is there any way to build this with Gnu Make?
 * [Issue #757](https://github.com/json-c/json-c/issues/757) - json_object_from_fd_ex: fail if file is too large
 * [Issue #759](https://github.com/json-c/json-c/issues/759) - json_tokener_parse_ex: handle out of memory errors
-* [Issue #766](https://github.com/json-c/json-c/issues/766) - Some people have trouble with undefined references to arc4random 
+* [Issue #766](https://github.com/json-c/json-c/issues/766) - Some people have trouble with undefined references to arc4random
 * [Issue #767](https://github.com/json-c/json-c/issues/767) - How to create a character array using json-c
 * [Issue #768](https://github.com/json-c/json-c/issues/768) - commits from May 30, 2022 killed my docker build process
 * [Issue #769](https://github.com/json-c/json-c/issues/769) - Issue #768
@@ -73,7 +73,7 @@ cat issues.md >> issues_closed_for_0.17.md
 * [Issue #806](https://github.com/json-c/json-c/issues/806) - The problem is libjson-c.dylib incompatible with OS version
 * [Issue #807](https://github.com/json-c/json-c/issues/807) - json simple parse syntax
 * [Issue #808](https://github.com/json-c/json-c/issues/808) - iOS Build using cmake fails due to 64 to 32bits conversion precision loss
-* [Issue #809](https://github.com/json-c/json-c/issues/809) - Feature request json_object_new_uint() 
+* [Issue #809](https://github.com/json-c/json-c/issues/809) - Feature request json_object_new_uint()
 * [Issue #810](https://github.com/json-c/json-c/issues/810) - docs: update to Internet Standard reference
 * [Issue #811](https://github.com/json-c/json-c/issues/811) - dependence on execution character set
 * [Issue #812](https://github.com/json-c/json-c/issues/812) - Duplicate symbol when compiling with clang-cl
@@ -82,7 +82,7 @@ cat issues.md >> issues_closed_for_0.17.md
 * [Issue #816](https://github.com/json-c/json-c/issues/816) - Hi I need to generate libjson-c.so.3 and libjson-c.so.3.0.1, please help with steps
 * [Issue #818](https://github.com/json-c/json-c/issues/818) - error: a function declaration without a prototype is deprecated in all versions of C
 * [Issue #819](https://github.com/json-c/json-c/issues/819) - build with intel 2023 fails on vasprintf
-* [Issue #820](https://github.com/json-c/json-c/issues/820) - ISO C forbids in 
+* [Issue #820](https://github.com/json-c/json-c/issues/820) - ISO C forbids in
 * [Issue #821](https://github.com/json-c/json-c/issues/821) - Any release planing for 0.17?
 * [Issue #822](https://github.com/json-c/json-c/issues/822) - Added option to disable app build
 * [Issue #823](https://github.com/json-c/json-c/issues/823) - Symbol not found during linking stage of libjson-c.so

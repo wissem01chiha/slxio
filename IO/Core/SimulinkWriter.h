@@ -39,7 +39,7 @@ public:
   /**
    * Set single input data object for writing
    */
-  virtual ReturnType SetInputData(const DataObject data) = 0;
+  virtual ReturnType SetInputData(const DataObject& data) = 0;
 
   /**
    * Set indexed input data object for writing

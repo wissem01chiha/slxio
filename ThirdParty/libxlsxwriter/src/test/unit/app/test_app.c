@@ -166,4 +166,3 @@ CTEST(app, app03) {
 
     lxw_app_free(app);
 }
-

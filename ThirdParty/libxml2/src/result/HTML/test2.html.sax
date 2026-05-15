@@ -90,7 +90,7 @@ SAX.characters( |
 SAX.startElement(a, href='http://linuxtoday.com/volt/')
 SAX.characters(volt, 4)
 SAX.endElement(a)
-SAX.characters( | 
+SAX.characters( |
 , 4)
 SAX.startElement(a, href='http://linuxtoday.com/contrib.pl')
 SAX.characters(contribute/submit, 17)

@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief set of routines to process strings
- * 
+ *
  * type and interfaces needed for the internal string handling
  *              of the library, especially UTF8 processing.
  *

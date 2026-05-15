@@ -1,4 +1,4 @@
-NAME 
+NAME
   Misc
 GROUP
   Simulink
@@ -41,4 +41,4 @@ PRIVATE_DEPENDS
 TEST_DEPENDS
   ThirdParty::doctest
 
-  
+

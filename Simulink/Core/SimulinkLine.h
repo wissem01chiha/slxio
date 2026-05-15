@@ -30,27 +30,27 @@ public:
   SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
 
   /**
-   * 
+   *
    */
   SimulinkElementType GetElementType() const override;
 
   /**
-   * 
+   *
    */
   std::string ToString() const override;
 
   /**
-   * 
+   *
    */
   ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
-   * 
+   *
    */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
-   * 
+   *
    */
   IdType GetElementId() const override;
 
@@ -67,17 +67,17 @@ public:
   bool IsConnected();
 
   /**
-   * 
+   *
    */
   std::shared_ptr<SimulinkPort> GetSourcePort();
 
   /**
-   * 
+   *
    */
   std::shared_ptr<SimulinkPort> GetDestPort();
-  
+
   /**
-   * 
+   *
    */
   Logger& GetLogger();
 

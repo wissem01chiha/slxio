@@ -38,6 +38,8 @@ extern "C"
     { E_INVALID_ARGUMENT, "Invalid argument passed to function" },
     { E_PARAMETER_NULL_PTR, "Function parameter is a null pointer" },
     { E_INVALID_DATA_TYPE, "Invalid data type provided" },
+    { E_DIRECTORY_NOT_EXSIT, "Directory folder do not exsit" },
+    { E_FILE_REMOVE_FAILED, "Failed to delete file from disk"},
     { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
   };
 

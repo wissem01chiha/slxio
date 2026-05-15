@@ -1,30 +1,30 @@
 #include "DataObject.h"
+#include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataObject* DataObject::New()
+DataObject::DataObject()
+  : logger(Logger::GetInstance())
 {
-  return nullptr;
 }
 
 void DataObject::Initialize() {}
 
-UInt32 DataObject::GetUpdateTime()
+UInt32 DataObject::GetUpdateTime() const
 {
   return UInt32();
 }
 
-UInt32 DataObject::GetMemorySize()
+UInt32 DataObject::GetMemorySize() const
 {
   return UInt32();
 }
 
-IdType DataObject::GetDataType()
+Logger& DataObject::GetLogger()
 {
-  return IdType();
+  return logger;
 }
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-

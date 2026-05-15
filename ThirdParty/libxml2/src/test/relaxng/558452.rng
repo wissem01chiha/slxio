@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <grammar ns="http://www.example.com/choice"
          xmlns="http://relaxng.org/ns/structure/1.0">
-  <start> 
+  <start>
     <element name="doc" ns="">
       <ref name="elem"/>
       <optional>

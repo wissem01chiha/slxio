@@ -9,7 +9,7 @@ import subprocess
 average_num_times = 3
 max_accum_time    = 60  # don't take too long on a test - stop averaging if time exceeds some amount of seconds
 
-with open('tests.json') as data_file:    
+with open('tests.json') as data_file:
     data = json.load(data_file)
 
 def runBench(prog):
@@ -41,7 +41,7 @@ for test in ['header', 'asserts', 'runtime']:
                 if curr[0] == framework or curr[0] == "any":
                     command = call + data[test][0] + config + curr[1] + (' --catch' if framework == 'catch' else '')
                     print(command)
-                    
+
                     accum = float(0)
                     num_times = 0
                     for i in range(0, average_num_times):
@@ -49,10 +49,10 @@ for test in ['header', 'asserts', 'runtime']:
                         print(res)
                         accum += res
                         num_times += 1
-                        
+
                         if accum > max_accum_time:
                             break
-                    
+
                     average = "{:7.2f}".format(round(accum / num_times, 2))
                     print("AVERAGE: " + average)
                     f.write(average + " | ")
@@ -61,5 +61,3 @@ for test in ['header', 'asserts', 'runtime']:
             f.flush()
 
 f.close()
-
-

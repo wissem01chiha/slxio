@@ -66,7 +66,7 @@ link_libraries(doctest::doctest)
 
 ```
 
-- An older CMake integration approach is using `ExternalProject_Add`. It is not recommended for new code, but known to work and is kept here for 
+- An older CMake integration approach is using `ExternalProject_Add`. It is not recommended for new code, but known to work and is kept here for
 legacy reasons:
 
 ```cmake

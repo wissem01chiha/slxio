@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief implementation of XML Schema Datatypes
- * 
+ *
  * module providing the XML Schema Datatypes implementation
  *              both definition and validity checking
  *
@@ -95,7 +95,7 @@ XMLPUBFUN xmlChar *
 		xmlSchemaCollapseString		(const xmlChar *value);
 XMLPUBFUN xmlChar *
 		xmlSchemaWhiteSpaceReplace	(const xmlChar *value);
-XMLPUBFUN unsigned long 
+XMLPUBFUN unsigned long
 		xmlSchemaGetFacetValueAsULong	(xmlSchemaFacet *facet);
 XMLPUBFUN int
 		xmlSchemaValidateLengthFacet	(xmlSchemaType *type,

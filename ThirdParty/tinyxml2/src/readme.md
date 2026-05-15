@@ -59,7 +59,7 @@ browsers or have more complete XML needs, TinyXML-2 is not the parser for you.
 TinyXML-1 vs. TinyXML-2
 -----------------------
 
-TinyXML-2 has long been the focus of all development. It is well tested 
+TinyXML-2 has long been the focus of all development. It is well tested
 and should be used instead of TinyXML-1.
 
 TinyXML-2 uses a similar API to TinyXML-1 and the same
@@ -143,9 +143,9 @@ It essentially causes the XML to be parsed twice.
 
 #### Pedantic Whitespace (PEDANTIC_WHITESPACE)
 
-For applications that need to know about text nodes that are composed entirely of 
+For applications that need to know about text nodes that are composed entirely of
 whitespace, PEDANTIC_WHITESPACE is available. PEDANTIC_WHITESPACE maintains all the
-whitespace between elements. 
+whitespace between elements.
 
 PEDANTIC_WHITESPACE is a new mode and not as tested as the other whitespace modes.
 
@@ -265,7 +265,7 @@ There are 2 files in TinyXML-2:
 And additionally a test file:
 * xmltest.cpp
 
-Generally speaking, the intent is that you simply include the tinyxml2.cpp and 
+Generally speaking, the intent is that you simply include the tinyxml2.cpp and
 tinyxml2.h files in your project and build with your other source code.
 
 There is also a CMake build included. CMake is the general build for TinyXML-2.
@@ -331,5 +331,3 @@ of TinyXML-2 (and TinyXML-1) but TinyXML-2 has been and is being improved
 by many contributors.
 
 Thanks to John Mackay at http://john.mackay.rosalilastudio.com for the TinyXML-2 logo!
-
-

@@ -266,7 +266,7 @@ class SAXCallback:
 #
 class xmlCore:
     def __init__(self, _obj=None):
-        if _obj != None: 
+        if _obj != None:
             self._o = _obj;
             return
         self._o = None
@@ -337,7 +337,7 @@ class xmlCore:
     #
     # Those are common attributes to nearly all type of nodes
     # defined as python2 properties
-    # 
+    #
     import sys
     if float(sys.version[0:3]) < 2.2:
         def __getattr__(self, attr):
@@ -408,7 +408,7 @@ class xmlCore:
         return libxml2mod.serializeNode(self._o, encoding, format)
     def saveTo(self, file, encoding = None, format = 0):
         return libxml2mod.saveNodeTo(self._o, file, encoding, format)
-            
+
     #
     # Canonicalization routines:
     #
@@ -646,7 +646,7 @@ def registerErrorHandler(f, ctx):
 class parserCtxtCore:
 
     def __init__(self, _obj=None):
-        if _obj != None: 
+        if _obj != None:
             self._o = _obj;
             return
         self._o = None
@@ -659,7 +659,7 @@ class parserCtxtCore:
     def setErrorHandler(self,f,arg):
         """Register an error handler that will be called back as
            f(arg,msg,severity,reserved).
-           
+
            @reserved is currently always None."""
         libxml2mod.xmlParserCtxtSetErrorHandler(self._o,f,arg)
 
@@ -671,7 +671,7 @@ class parserCtxtCore:
     def addLocalCatalog(self, uri):
         """Register a local catalog with the parser"""
         return libxml2mod.addLocalCatalog(self._o, uri)
-    
+
 
 class ValidCtxtCore:
 
@@ -684,7 +684,7 @@ class ValidCtxtCore:
         These will be called back as f(msg,arg)
         """
         libxml2mod.xmlSetValidErrors(self._o, err_func, warn_func, arg)
-    
+
 
 class SchemaValidCtxtCore:
 
@@ -711,7 +711,7 @@ class relaxNgValidCtxtCore:
         """
         libxml2mod.xmlRelaxNGSetValidErrors(self._o, err_func, warn_func, arg)
 
-    
+
 def _xmlTextReaderErrorFunc(xxx_todo_changeme,msg,severity,locator):
     """Intermediate callback to wrap the locator"""
     (f,arg) = xxx_todo_changeme
@@ -787,8 +787,7 @@ def dumpMemory():
 
 # WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
 #
-# Everything before this line comes from libxml.py 
+# Everything before this line comes from libxml.py
 # Everything after this line is automatically generated
 #
 # WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING WARNING
-

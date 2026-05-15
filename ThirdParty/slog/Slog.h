@@ -8,6 +8,6 @@
 #include <slog.h>
 #else
 #include <src/src/slog.h>
-#endif 
+#endif
 
 #endif // SLOG_H

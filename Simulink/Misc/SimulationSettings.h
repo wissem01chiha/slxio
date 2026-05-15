@@ -11,9 +11,9 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/** 
- * @class SimulationSettings 
- * @brief 
+/**
+ * @class SimulationSettings
+ * @brief
  */
 class SLXIO_APIEXPORT SimulationSettings
 {

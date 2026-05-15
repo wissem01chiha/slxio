@@ -134,4 +134,3 @@
 #define TEST_UNIXTIME_1904(_unixtime, exp)                          \
     got = lxw_unixtime_to_excel_date_with_epoch(_unixtime, 1);           \
     ASSERT_DBL_NEAR(exp, got);
-

@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief macros for marking symbols as exportable/importable.
- * 
+ *
  * macros for marking symbols as exportable/importable.
  *
  * @copyright See Copyright for the status of this software.
@@ -94,5 +94,3 @@ XMLPUBFUN void xmlCheckVersion(int version);
 #endif
 
 #endif /* __XML_EXPORTS_H__ */
-
-

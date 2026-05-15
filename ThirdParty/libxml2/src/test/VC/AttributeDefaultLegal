@@ -9,4 +9,3 @@
 <!ATTLIST doc ok3 IDREFS "abc:1 a1bc_2">
 ]>
 <doc val="v1"/>
-

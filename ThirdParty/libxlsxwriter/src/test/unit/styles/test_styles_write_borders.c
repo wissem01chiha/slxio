@@ -35,4 +35,3 @@ CTEST(styles, write_borders) {
 
     lxw_styles_free(styles);
 }
-

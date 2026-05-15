@@ -64,4 +64,3 @@ CTEST(workbook, write_sheet3) {
 
     lxw_workbook_free(workbook);
 }
-

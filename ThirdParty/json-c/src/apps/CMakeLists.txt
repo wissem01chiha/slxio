@@ -122,4 +122,3 @@ target_link_libraries(json_parse PRIVATE ${APPS_LINK_LIBS})
 # Note: it is intentional that there are no install instructions here yet.
 # When/if the interface of the app(s) listed here settles down enough to
 # publish as part of a regular build that will be added.
-

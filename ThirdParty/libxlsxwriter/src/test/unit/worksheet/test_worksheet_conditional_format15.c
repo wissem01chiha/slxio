@@ -100,5 +100,3 @@ CTEST(worksheet, worksheet_condtional_format15) {
 
     lxw_worksheet_free(worksheet);
 }
-
-

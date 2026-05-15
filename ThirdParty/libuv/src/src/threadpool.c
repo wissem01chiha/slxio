@@ -208,7 +208,7 @@ static void init_threads(void) {
   val = NULL;
   if (err == 0)
     val = buf;
-  
+
   if (val != NULL)
     nthreads = atoi(val);
   if (nthreads == 0)

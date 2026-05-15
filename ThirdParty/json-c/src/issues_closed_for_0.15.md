@@ -82,4 +82,3 @@ Issues and Pull Requests closed for the 0.15 release
 * [Issue #644](https://github.com/json-c/json-c/issues/644) - Why src->_userdata not checked before calling strdup?
 * [Issue #645](https://github.com/json-c/json-c/issues/645) - Misuse of tolower() in json_tokener.c
 * [Issue #646](https://github.com/json-c/json-c/issues/646) - Cast to unsigned char instead of int when calling tolower (Fixes #645)
-

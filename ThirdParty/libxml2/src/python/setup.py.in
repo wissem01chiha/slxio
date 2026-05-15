@@ -252,4 +252,3 @@ setup (name = "libxml2-python",
        )
 
 sys.exit(0)
-

@@ -25,7 +25,7 @@ instance="""<?xml version="1.0" encoding="iso-8859-1"?>
 	<FirstName>Raymond</FirstName>
 	<MiddleInitial>G</MiddleInitial>
 	<LastName>Bayliss</LastName>
-</Customer>	
+</Customer>
 """
 
 ctxt_parser = libxml2.schemaNewMemParserCtxt(schema, len(schema))
@@ -49,4 +49,3 @@ if libxml2.debugMemory(1) == 0:
     print("OK")
 else:
     print("Memory leak %d bytes" % (libxml2.debugMemory(1)))
-

@@ -159,4 +159,3 @@ xmlFuzzMutateChunks(const xmlFuzzChunkDesc *chunks,
 #endif
 
 #endif /* __XML_FUZZERCOMMON_H__ */
-

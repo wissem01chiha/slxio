@@ -7,4 +7,3 @@
 <!ELEMENT aElement (a |b * >
 ]>
 <root>Any content</root>
-

@@ -48,6 +48,3 @@ CTEST(worksheet, write_sheet_view2) {
 
     lxw_worksheet_free(worksheet);
 }
-
-
-

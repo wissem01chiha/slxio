@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <RDF:RDF xmlns:p3p="http://www.w3.org/TR/1998/WD-P3P10-syntax#proposal.DTD"
          xmlns:RDF="http://www.w3.org/TR/WD-rdf-syntax#">
-<PROP realm="http://www.CoolCatalog.com/catalogue/" 
+<PROP realm="http://www.CoolCatalog.com/catalogue/"
  entity="CoolCatalog" agreeID="94df1293a3e519bb"
  assurance="http://www.TrustUs.org">
   <USES>
@@ -19,6 +19,6 @@
     <REF name="User.Shipping."/>
   </STATEMENT>
   </USES>
-  <DISCLOSURE discURI="http://www.CoolCatalog.com/PrivacyPractice.html" 
+  <DISCLOSURE discURI="http://www.CoolCatalog.com/PrivacyPractice.html"
    access="3" other="0,1"/>
 </PROP></RDF:RDF>

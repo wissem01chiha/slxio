@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Chained hash tables
- * 
+ *
  * This module implements the hash table support used in
  *		various places in the library.
  *
@@ -167,7 +167,7 @@ XMLPUBFUN int
 					 const xmlChar *name,
 					 const xmlChar *name2,
 					 xmlHashDeallocator dealloc);
-XMLPUBFUN int 
+XMLPUBFUN int
 		xmlHashRemoveEntry3	(xmlHashTable *hash,
 					 const xmlChar *name,
 					 const xmlChar *name2,

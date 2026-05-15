@@ -21,7 +21,7 @@ def checkNamespaceDefs(node, count):
     #print nsList
     if len(nsList) != count :
         raise Exception("Error: saw %d namespace declarations.  Expected %d" % (len(nsList), count))
-    
+
 # Memory debug specific
 libxml2.debugMemory(1)
 

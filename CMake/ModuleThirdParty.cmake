@@ -9,10 +9,10 @@ else()
 endif()
 
 if(SLXIO_BUILD_SHARED)
-  set(BUILD_SHARED_LIBS TRUE)
+  set(LIBUV_BUILD_SHARED TRUE)
 else()
-  set(BUILD_SHARED_LIBS FALSE)
   set(ZLIB_BUILD_SHARED FALSE)
+  set(LIBUV_BUILD_SHARED FALSE)
 endif()
 
 if(SLXIO_OPENMP)
@@ -26,7 +26,6 @@ if(SLXIO_BUILD_PYTHON)
 endif()
 
 if(NOT SLXIO_BUILD_THIRDPARTY_TESTS)
-  set(PNG_TESTS FALSE)
   set(ZLIB_BUILD_TESTING FALSE)
   set(LIBXML2_WITH_TESTS FALSE)
   set(tinyxml2_BUILD_TESTING FALSE)
@@ -39,6 +38,3 @@ if(SLXIO_COVERAGE)
   find_program(LCOV lcov)
   find_program(GENHTML genhtml)
 endif()
-
-
-

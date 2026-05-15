@@ -3,7 +3,7 @@
 	xmlns:foo="http://FOO"
 	targetNamespace="http://FOO" version="0.1"
 	elementFormDefault="qualified">
- 
+
   <complexType name="fooType">
     <choice>
       <sequence>
@@ -20,6 +20,6 @@ maxOccurs="unbounded"/>
     </choice>
   </complexType>
 
-  <element name="foo" type="foo:fooType"/>     
- 
+  <element name="foo" type="foo:fooType"/>
+
 </schema>

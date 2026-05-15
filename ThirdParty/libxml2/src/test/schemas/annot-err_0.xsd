@@ -6,16 +6,16 @@
 	<xsd:element name="foo" xml:lang="hhh">
 		<xsd:annotation id="id1" death="is a good entertainer" but:such="is life">
 		    I shouldn't do this here...
-			<xsd:appinfo id="id2" source="somewhere" 
+			<xsd:appinfo id="id2" source="somewhere"
 				goo:fun="bag" fun="another fun-bag">
 				weeelll
 			</xsd:appinfo>
-			<xsd:documentation xml:lang="*" id="id3" source="anywhere" 
+			<xsd:documentation xml:lang="*" id="id3" source="anywhere"
 				goo:mothers="of invention" mothers="don't do your dishes">
 				hmmmmmm
 			</xsd:documentation>
 			...and here as well - more than ever
-		</xsd:annotation>	
+		</xsd:annotation>
 	</xsd:element>
 
 </xsd:schema>

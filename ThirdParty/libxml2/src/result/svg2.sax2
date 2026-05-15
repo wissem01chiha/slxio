@@ -6,61 +6,61 @@ SAX.startElementNs(svg, NULL, NULL, 0, 2, 0, width='268p...', 5, height='207p...
 SAX.characters(
 , 1)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(path, NULL, NULL, 0, 1, 0, d=' M 2...', 9)
 SAX.endElementNs(path, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(path, NULL, NULL, 0, 1, 0, d=' L 1...', 9)
 SAX.endElementNs(path, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(polyline, NULL, NULL, 0, 1, 0, verts=' 32,...', 46)
 SAX.endElementNs(polyline, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(rect, NULL, NULL, 0, 4, 0, x='30" ...', 2, y='101"...', 3, width='51" ...', 2, height='33"/...', 2)
 SAX.endElementNs(rect, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='fill...', 13)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(ellipse, NULL, NULL, 0, 5, 0, cx='182"...', 3, cy='127"...', 3, major='37" ...', 2, minor='31" ...', 2, angle='90"/...', 2)
 SAX.endElementNs(ellipse, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='fill...', 13)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(polyline, NULL, NULL, 0, 1, 0, verts=' 78,...', 445)
 SAX.endElementNs(polyline, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(g, NULL, NULL, 0, 0, 0)
 SAX.characters(
@@ -68,7 +68,7 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Dialog 0, 30)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(
@@ -79,16 +79,16 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Helvetic, 33)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(text, NULL, NULL, 0, 2, 0, x='188"...', 3, y='36" ...', 2)
 SAX.characters(this is text, 12)
@@ -96,10 +96,10 @@ SAX.endElementNs(text, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(g, NULL, NULL, 0, 0, 0)
 SAX.characters(
@@ -107,7 +107,7 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Dialog 0, 30)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(
@@ -118,16 +118,16 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Helvetic, 35)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(text, NULL, NULL, 0, 2, 0, x='176"...', 3, y='85" ...', 2)
 SAX.characters(sadfsadfsad, 11)
@@ -135,32 +135,32 @@ SAX.endElementNs(text, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='fill...', 13)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(ellipse, NULL, NULL, 0, 5, 0, cx='208"...', 3, cy='180"...', 3, major='45" ...', 2, minor='31" ...', 2, angle='0"/>...', 1)
 SAX.endElementNs(ellipse, NULL, NULL)
 SAX.characters(
 , 1)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='stro...', 15)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(g, NULL, NULL)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.startElementNs(g, NULL, NULL, 0, 1, 0, style='fill...', 13)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.startElementNs(g, NULL, NULL, 0, 0, 0)
 SAX.characters(
@@ -168,7 +168,7 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Dialog 7, 32)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(
@@ -179,7 +179,7 @@ SAX.characters(
 SAX.startElementNs(desc, NULL, NULL, 0, 0, 0)
 SAX.characters( Java Font definition:Dialog 7, 32)
 SAX.endElementNs(desc, NULL, NULL)
-SAX.characters( 
+SAX.characters(
    , 5)
 SAX.endElementNs(g, NULL, NULL)
 SAX.characters(

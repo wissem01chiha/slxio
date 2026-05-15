@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<schema 
+<schema
   targetNamespace="urn:oma:bac:dldrm:roap-1.0"
   xmlns="http://www.w3.org/2001/XMLSchema"
   xmlns:roap="urn:oma:bac:dldrm:roap-1.0"
@@ -26,7 +26,7 @@
         <element name="hash" type="base64Binary"/>
       </sequence>
       <attribute name="algorithm" type="anyURI"
-                 default="http://www.w3.org/2000/09/xmldsig#sha1"/> 
+                 default="http://www.w3.org/2000/09/xmldsig#sha1"/>
     </extension>
   </complexContent>
 </complexType>
@@ -38,12 +38,10 @@
     <extension base="roap:Request">
       <sequence>
         <element name="deviceID" type="roap:Identifier"
-                 maxOccurs="unbounded"/> 
+                 maxOccurs="unbounded"/>
       </sequence>
     </extension>
   </complexContent>
 </complexType>
 
 </schema>
-
-

@@ -1,10 +1,10 @@
 <?xml version="1.0" ?>
-<!--  
+<!--
  * $Id: giml.xsd,v 1.3 2004/06/25 09:03:53 ensonic Exp $
  * @file   giml.xsd
  * @author Stefan Kost <ensonic@users.sf.net>
  * @date   Thu Jun 24 17:28:26 MEST 2004
- * 
+ *
  * @brief  giml document schema definition
  * @ingroup gitkcore
  *
@@ -26,7 +26,7 @@
   <!--xs:import namespace="http://apache.org/cocoon/i18n/2.0/"
 		schemaLocation="file://./i18n.xsd"
 	/-->
- 
+
  <!-- foreign namespace
 	 <xs:element name="title">
 			<xs:complexType mixed="true">
@@ -34,18 +34,18 @@
 				</xs:choice>
 			</xs:complexType>
 		</xs:element>
-	
+
 		<xs:element name="text">
 			<xs:complexType mixed="true"></xs:complexType>
 		</xs:element>
  -->
-	
+
 	<xs:element name="option">
 		<xs:complexType mixed="true">
 			<xs:choice minOccurs="0" maxOccurs="unbounded"></xs:choice>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="options">
 		<xs:complexType>
 			<xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -53,25 +53,25 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="disabled">
 		<xs:complexType mixed="true"></xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="required">
 		<xs:complexType mixed="true"></xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="value">
 		<xs:complexType mixed="true"></xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="label">
 		<xs:complexType mixed="true">
 			<xs:choice minOccurs="0" maxOccurs="1"></xs:choice>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="widget">
 		<xs:complexType>
 			<xs:sequence>
@@ -107,7 +107,7 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="widgetgroup">
 		<xs:complexType>
 			<xs:sequence>
@@ -118,13 +118,13 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="dialogwidget">
 		<xs:complexType mixed="true">
 			<xs:attribute name="id" type="xs:ID"/>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="dialogwidgets">
 		<xs:complexType>
 			<xs:sequence>
@@ -132,7 +132,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="meta">
 		<xs:complexType>
 			<xs:sequence>
@@ -140,7 +140,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="dialog">
 		<xs:complexType>
 			<xs:sequence>
@@ -159,7 +159,7 @@
 			</xs:attribute>
 		</xs:complexType>
 	</xs:element>
-	
+
 	<xs:element name="giml">
 		<xs:complexType>
 			<xs:sequence>
@@ -170,4 +170,3 @@
 	</xs:element>
 
 </xs:schema>
-

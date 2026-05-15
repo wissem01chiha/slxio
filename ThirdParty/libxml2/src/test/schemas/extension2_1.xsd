@@ -11,7 +11,7 @@
          <xs:extension base="xs:anyType"/>
        </xs:complexContent>
      </xs:complexType>
-     
+
      <xs:element name="foo" type="dataInlineType"/>
 
    </xs:schema>

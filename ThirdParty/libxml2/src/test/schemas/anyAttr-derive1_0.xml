@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <foo
-	xmlns="http://FOO" 
-	xmlns:foo="http://FOO" 
-	xmlns:bar="http://BAR" 
-	xmlns:doo="http://DOO" 
-	xmlns:import="http://IMPORT" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://FOO"
+	xmlns:foo="http://FOO"
+	xmlns:bar="http://BAR"
+	xmlns:doo="http://DOO"
+	xmlns:import="http://IMPORT"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://FOO anyAttr-derive1_0.xsd">
 
 	<derive.1_1 barA="o" bar:barB="o" foo:barC="o"/>
@@ -26,5 +26,3 @@
 	<derive.6_1 barA="o" bar:barB="o" foo:barC="o" doo:barD="o"/>
 	<derive.6_2 bar:barB="o" foo:barC="o" doo:barD="o"/>
 </foo>
-
-

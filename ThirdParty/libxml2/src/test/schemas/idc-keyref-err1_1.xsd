@@ -5,7 +5,7 @@
     xmlns:foo="urn:test:foo"
     elementFormDefault="qualified"
     attributeFormDefault="qualified">
-  
+
    <xs:element name="Link">
        <xs:complexType>
            <xs:simpleContent>
@@ -15,13 +15,13 @@
            </xs:simpleContent>
        </xs:complexType>
    </xs:element>
-      
-    
+
+
   <!--  -->
   <xs:element name="Foo">
     <xs:complexType>
       <xs:sequence>
-	          
+
         <xs:element name="Def">
             <xs:complexType>
                 <xs:sequence>
@@ -29,7 +29,7 @@
                 </xs:sequence>
             </xs:complexType>
         </xs:element>
-        
+
         <xs:element name="Ref">
             <xs:complexType>
                 <xs:attribute name="linkRef" use="required"/>
@@ -37,7 +37,7 @@
         </xs:element>
 
       </xs:sequence>
-	</xs:complexType>      
+	</xs:complexType>
 
 	<xs:key name="LinkKey">
 	  <xs:selector xpath=".//foo:Link | .//foo:Link"/>
@@ -47,7 +47,7 @@
 	<xs:keyref name="LinkKeyRef" refer="foo:LinkKey">
 	  <xs:selector xpath=".//foo:Ref"/>
 	  <xs:field xpath="@foo:linkRef"/>
-	</xs:keyref>    
+	</xs:keyref>
   </xs:element>
 
 </xs:schema>

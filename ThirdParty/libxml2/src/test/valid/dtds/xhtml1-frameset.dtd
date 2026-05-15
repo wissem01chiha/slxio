@@ -9,7 +9,7 @@
    For further information, see: http://www.w3.org/TR/xhtml1
 
    Copyright (c) 1998-1999 W3C (MIT, INRIA, Keio),
-   All Rights Reserved. 
+   All Rights Reserved.
 
    This DTD module is identified by the PUBLIC and SYSTEM identifiers:
 
@@ -523,14 +523,14 @@
   start       %Number;       #IMPLIED
   >
 
-<!-- single column list (DEPRECATED) --> 
+<!-- single column list (DEPRECATED) -->
 <!ELEMENT menu (li)+>
 <!ATTLIST menu
   %attrs;
   compact     (compact)     #IMPLIED
   >
 
-<!-- multiple column list (DEPRECATED) --> 
+<!-- multiple column list (DEPRECATED) -->
 <!ELEMENT dir (li)+>
 <!ATTLIST dir
   %attrs;
@@ -589,7 +589,7 @@
 
 <!--=================== Preformatted Text ================================-->
 
-<!-- content is %Inline; excluding 
+<!-- content is %Inline; excluding
         "img|object|applet|big|small|sub|sup|font|basefont" -->
 
 <!ELEMENT pre %pre.content;>
@@ -1019,7 +1019,7 @@
 
 <!--
  Content is %Flow; excluding a, form, form controls, iframe
---> 
+-->
 <!ELEMENT button %button.content;>  <!-- push button -->
 <!ATTLIST button
   %attrs;
@@ -1063,7 +1063,7 @@
 -->
 
 <!ENTITY % TRules "(none | groups | rows | cols | all)">
-  
+
 <!-- horizontal placement of table relative to document -->
 <!ENTITY % TAlign "(left|center|right)">
 
@@ -1220,4 +1220,3 @@ several semantically related columns together.
   width       %Pixels;       #IMPLIED
   height      %Pixels;       #IMPLIED
   >
-

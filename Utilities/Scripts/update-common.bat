@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
 
-REM 
+REM
 REM SPDX-FileCopyrightText: Copyright 2025-2026 Wissem Chiha
 REM SPDX-License-Identifier: Apache-2.0
-REM 
+REM
 
 REM ########################################################################
 REM This is a wrapper for updating third‑party modules.
@@ -21,8 +21,8 @@ REM ########################################################################
 REM Change this to align with your local installation folder
 set CYGWIN_HOME=C:\cygwin64
 
-REM Get submodules source directory, fallback to the current 
-REM script directory if not given 
+REM Get submodules source directory, fallback to the current
+REM script directory if not given
 if "%~1"=="" (
     set SRCDIR=%~dp0
 ) else (
@@ -39,7 +39,7 @@ if not exist "%CYGWIN_HOME%\bin\dos2unix.exe" (
     exit /b 1
 )
 
-REM Alias 
+REM Alias
 set dos2unix=C:\cygwin64\bin\dos2unix.exe
 set bash=C:\cygwin64\bin\bash.exe
 

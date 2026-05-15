@@ -1,32 +1,32 @@
-NAME 
+NAME
   Annotation
 GROUP
   Simulink
 LIBRARY_NAME
   SimulinkAnnotation
-DESCRIPTION  
-  Simulink Annotation Module 
-LICENSE   
-  Apache-2.0 
-VERSION 
-  0.1.0 
-MAINTAINER 
-  Wissem CHIHA 
-ENABLE_BUILD 
+DESCRIPTION
+  Simulink Annotation Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem CHIHA
+ENABLE_BUILD
   TRUE
 EXTERNAL_BUILD
   FALSE
 EXTERNAL_SOURCE_DIR
 ENABLE_TEST
-  TRUE 
-ENABLE_BINDING 
-  TRUE 
+  TRUE
+ENABLE_BINDING
+  TRUE
 ENABLE_DOC
-  FALSE 
-INSTALL_HEADERS 
-  TRUE 
-INSTALL_TARGETS 
-  TRUE 
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
 CLASSES
   Color
   SimulinkColor
@@ -43,7 +43,6 @@ PRIVATE_DEPENDS
   Simulink::Misc
   Simulink::Data
   ThirdParty::loguru
-TEST_DEPENDS 
+TEST_DEPENDS
   ThirdParty::doctest
- 
 

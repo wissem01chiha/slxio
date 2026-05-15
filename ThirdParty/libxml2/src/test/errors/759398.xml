@@ -15,11 +15,11 @@ publication.  -->
 <!ENTITY draft.month 'February'>
 <!ENTITY draft.year '1998'>
 
-<!ENTITY WebSGML 
+<!ENTITY WebSGML
  'WebSGML Adaptations Annex to ISO 8879'>
 
-<!ENTITY lt     "&#38;#60;"> 
-<!ENTITY gt     ">"> 
+<!ENTITY lt     "&#38;#60;">
+<!ENTITY gt     ">">
 <!ENTITY xmlpio "'&lt;?xml'">
 <!ENTITY pic    "'?>'">
 <!ENTITY br     "\n">
@@ -36,7 +36,7 @@ publication.  -->
 <code>gt</code>,
 <code>apos</code>,
 <code>quot</code>">
- 
+
 <!-- audience and distribution status:  for use at publication time -->
 <!ENTITY doc.audience "public review and discussion">
 <!ENTITY doc.distribution "may be dislributed freely, as long as
@@ -89,7 +89,7 @@ http://www.w3.org/TR/WD-xml-971117</loc>-->
 <authlist>
 <author><name>Tim Bray</name>
 <affiliation>Textuality and Netscape</affiliation>
-<email 
+<email
 href="mailto:tbray@textuality.com">tbray@textuality.com</email></author>
 <author><name>Jean Paoli</name>
 <affiliation>Microsoft</affiliation>
@@ -128,12 +128,12 @@ at <loc href='http://www.w3.org/TR'>http://www.w3.org/TR</loc>.
 </p>
 <p>This specification uses the term URI, which is defined by <bibref
 ref="Berners-Lee"/>, a work in progress expected to update <bibref
-ref="RFC1738"/> and <bibref ref="RFC1808"/>. 
+ref="RFC1738"/> and <bibref ref="RFC1808"/>.
 </p>
-<p>The list of known errors in this specification is 
-available at 
+<p>The list of known errors in this specification is
+available at
 <loc href='http://www.w3.org/XML/xml-19980210-errata'>http://www.w3.org/XML/xml-19980210-errata</loc>.</p>
-<p>Please report errors in this document to 
+<p>Please report errors in this document to
 <loc href='mailto:xml-editor@w3.org'>xml-editor@w3.org</loc>.
 </p>
 </status>
@@ -169,7 +169,7 @@ re-tag back matter so informative appendices are tagged informdiv1,
 remove XXX XXX from list of 'normative' specs in prose,
 move some references from Other References to Normative References,
 add RFC 1738, 1808, and 2141 to Other References (they are not
-normative since we do not require the processor to enforce any 
+normative since we do not require the processor to enforce any
 rules based on them),
 add reference to 'Fielding draft' (Berners-Lee et al.),
 move notation section to end of body,
@@ -177,7 +177,7 @@ drop URIchar non-terminal and use SkipLit instead,
 lose stray reference to defunct nonterminal 'markupdecls',
 move reference to Aho et al. into appendix (Tim's right),
 add prose note saying that hash marks and fragment identifiers are
-NOT part of the URI formally speaking, and are NOT legal in 
+NOT part of the URI formally speaking, and are NOT legal in
 system identifiers (processor 'may' signal an error).
 Work through:
 Tim Bray reacting to James Clark,
@@ -204,9 +204,9 @@ mixed and element content.
 </sitem>
 <sitem>1997-06-30 : CMSMcQ : change date, some cosmetic changes,
 changes to productions for choice, seq, Mixed, NotationType,
-Enumeration.  Follow James Clark's suggestion and prohibit 
+Enumeration.  Follow James Clark's suggestion and prohibit
 conditional sections in internal subset.  TO DO:  simplify
-production for ignored sections as a result, since we don't 
+production for ignored sections as a result, since we don't
 need to worry about parsers whi<! don't expand PErefs finding
 a conditional section.</sitem>
 <sitem>1997-06-29 : TB : various edits</sitem>
@@ -219,7 +219,7 @@ Remove RMD requirement relating to element content (?).
 <sitem>1997-06-28 : CMSMcQ : Various changes for 1 July draft:
 Add text for draconian error handling (introduce
 the term Fatal Error).
-RE deleta est (changing wording from 
+RE deleta est (changing wording from
 original announcement to restrict the requirement to validating
 parsers).
 Tag definition of validawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww it meant 'may or may not'.</sitem>
@@ -293,7 +293,7 @@ mechanism.</sitem>
 <sitem>1996-10-09 : CMSMcQ : re-unite everything for convenience,
 at least temporarily, and revise quickly</sitem>
 <sitem>1996-10-08 : TB : first major homogenization pass</sitem>
-<sitem>1996-10-08 : TB : turn "current" attribute on div type into 
+<sitem>1996-10-08 : TB : turn "current" attribute on div type into
 CDATA</sitem>
 <sitem>1996-10-02 : TB : remould into skeleton + entities</sitem>
 <sitem>1996-09-30 : CMSMcQ : add a few more sections prior to exchange
@@ -312,7 +312,7 @@ doing its work on behalf of another module, called the
 <term>application</term>.</termdef> This specification describes the
 required beh\vior of an XML processor in terms of how it must read XML
 data and the information it must provide to the application.</p>
- 
+
 <div2 id='sec-origin-goals'>
 <head>Origin and Goals</head>
 <p>XML was developed by an XML Working Group (orisable over the

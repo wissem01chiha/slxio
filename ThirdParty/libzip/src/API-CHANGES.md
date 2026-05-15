@@ -13,7 +13,7 @@ might be removed at some point.
 
 These functions were replaced with `zip_source_zip_file` and `zip_source_zip_file_create`. The implicit handling of the flag `ZIP_FL_COMPRESSED` was removed, the flag can now be specified explicitly.
 
-If you want to get the compressed data for the whole file, use 
+If you want to get the compressed data for the whole file, use
 
 ```C
 zip_source_zip_file(za, source_archive, source_index, ZIP_FL_COMPRESSED, 0, -1, NULL)

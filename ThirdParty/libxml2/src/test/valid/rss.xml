@@ -3,27 +3,27 @@
 <!--
 
   Rich Site Summary (RSS) 0.91 official DTD, proposed.
-  
+
   RSS is an XML vocabulary for describing
   metadata about websites, and enabling the display of
   "channels" on the "My Netscape" website.
-  
+
   RSS Info can be found at http://my.netscape.com/publish/
-  XML Info can be found at http://www.w3.org/XML/ 
-  
+  XML Info can be found at http://www.w3.org/XML/
+
   copyright Netscape Communications, 1999
 
   Dan Libby - danda@netscape.com
-  
+
   Based on RSS DTD originally created by
   Lars Marius Garshol - larsga@ifi.uio.no.
-  
+
 -->
 <!ELEMENT rss (channel)>
 <!ATTLIST rss version CDATA #REQUIRED>
-<!-- must be "0.91"> --><!ELEMENT channel (title | description | link 
-| language | item+ | rating? | image? | textinput? | copyright? | 
-pubDate? | lastBuildDate? | docs? | managingEditor? | webMaster? | 
+<!-- must be "0.91"> --><!ELEMENT channel (title | description | link
+| language | item+ | rating? | image? | textinput? | copyright? |
+pubDate? | lastBuildDate? | docs? | managingEditor? | webMaster? |
 skipHours? | skipDays?)*>
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT description (#PCDATA)>
@@ -52,9 +52,9 @@ skipHours? | skipDays?)*>
      http://www.w3.org/TR/REC-html32.html#dtd
      =============== BEGIN ===================
 -->
-<!-- 
+<!--
      Character Entities for ISO Latin-1
-     
+
      (C) International Organization for Standardization 1986
      Permission to copy in any form is granted for use with
      conforming SGML systems and applications as defined in

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<xsd:schema 
+<xsd:schema
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://FOO"
-	xmlns:foo="http://FOO">		
+	xmlns:foo="http://FOO">
 
 	<xsd:element name="boo">
 		<xsd:complexType>
@@ -24,5 +24,5 @@
 			</xsd:choice>
 		</xsd:complexType>
 	</xsd:element>
-	
+
 </xsd:schema>

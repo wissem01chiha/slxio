@@ -6,7 +6,7 @@ bindings from the libxml2 repo.
 
 This is the libxml2 python module, providing access to the
 libxml2 and libxslt (if available) libraries. For general
-informationss on those XML and XSLT libraries check their 
+informationss on those XML and XSLT libraries check their
 web pages at:
     https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home
     and
@@ -23,7 +23,7 @@ packages provided with your operating system.
 
 NOTE:
 this module distribution is not the primary distribution
-of the libxml2 and libxslt Python binding code, but as 
+of the libxml2 and libxslt Python binding code, but as
 the Python way of packaging those for non-Linux systems.
 The main sources are the libxml2 and libxslt tar.gz found on
 the site. One side effect is that the official RPM packages for

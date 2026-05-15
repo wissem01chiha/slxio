@@ -53,7 +53,7 @@ table.exceptions { background-color: rgb(255,255,153); }
 </head>
 <body>
 <div class="navbar">
-  <a href="#toc">table of contents</a> 
+  <a href="#toc">table of contents</a>
   <hr />
 </div>
 <div class="head"><p><a href="http://www.w3.org/"><img class="head" src="w3c_home.gif" alt="W3C" /></a></p>
@@ -119,11 +119,11 @@ agents is possible by following a small set of guidelines.</p>
 of its publication. Other documents may supersede this document. The
 latest status of this document series is maintained at the W3C.</em></p>
 
-<p>This specification is a Proposed Recommendation of the HTML Working Group. It is 
+<p>This specification is a Proposed Recommendation of the HTML Working Group. It is
 a revision of the Proposed Recommendation dated <a href="http://www.w3.org/TR/1999/PR-xhtml1-19990824/">24 August
 1999</a> incorporating changes as a result of comments from the Proposed
-Recommendation review, and 
-comments and further deliberations of the W3C HTML Working Group. A 
+Recommendation review, and
+comments and further deliberations of the W3C HTML Working Group. A
 <a href="xhtml1-diff-19991210.html">diff-marked version</a> from the previous
 proposed recommendation is available for comparison purposes.</p>
 
@@ -170,7 +170,7 @@ Raggett</a>.</p>
 
 <div class="contents">
 <ul class="toc">
-<li class="tocline">1. <a href="#xhtml">What is XHTML?</a> 
+<li class="tocline">1. <a href="#xhtml">What is XHTML?</a>
 
 <ul class="toc">
 <li class="tocline">1.1 <a href="#html4">What is HTML 4.0?</a></li>
@@ -181,7 +181,7 @@ Raggett</a>.</p>
 </ul>
 </li>
 
-<li class="tocline">2. <a href="#defs">Definitions</a> 
+<li class="tocline">2. <a href="#defs">Definitions</a>
 
 <ul class="toc">
 <li class="tocline">2.1 <a href="#terms">Terminology</a></li>
@@ -200,18 +200,18 @@ Raggett</a>.</p>
 </ul>
 </li>
 
-<li class="tocline">4. <a href="#diffs">Differences with HTML 4.0</a> 
+<li class="tocline">4. <a href="#diffs">Differences with HTML 4.0</a>
 
 </li>
 
-<li class="tocline">5. <a href="#issues">Compatibility Issues</a> 
+<li class="tocline">5. <a href="#issues">Compatibility Issues</a>
 
 <ul class="toc">
 <li class="tocline">5.1 <a href="#media">Internet Media Types</a></li>
 </ul>
 </li>
 
-<li class="tocline">6. <a href="#future">Future Directions</a> 
+<li class="tocline">6. <a href="#future">Future Directions</a>
 
 <ul class="toc">
 <li class="tocline">6.1 <a href="#mods">Modularizing HTML</a></li>
@@ -249,7 +249,7 @@ Directions</a>. </p>
 family. It is a reformulation of the three HTML 4.0 document types as
 applications of XML 1.0 <a href="#ref-xml"> [XML]</a>. It is intended
 to be used as a language for content that is both XML-conforming and, if some
-simple <a href="#guidelines">guidelines</a> are followed, 
+simple <a href="#guidelines">guidelines</a> are followed,
 operates in HTML 4.0 conforming user agents. Developers who migrate
 their content to XHTML 1.0 will realize the following benefits:</p>
 
@@ -535,7 +535,7 @@ criteria:</p>
 <li>
 <p>The root element of the document must designate the XHTML
 namespace using the <code>xmlns</code> attribute <a href="#ref-xmlns">[XMLNAMES]</a>. The namespace for XHTML is
-defined to be 
+defined to be
 <code>http://www.w3.org/1999/xhtml</code>.</p>
 </li>
 
@@ -548,15 +548,15 @@ Formal Public Identifier. The system identifier may be changed to reflect
 local system conventions.</p>
 
 <pre>
-&lt;!DOCTYPE html 
+&lt;!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/1999/PR-xhtml1-19991210/DTD/xhtml1-strict.dtd&gt;
 
-&lt;!DOCTYPE html 
+&lt;!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
      "http://www.w3.org/TR/1999/PR-xhtml1-19991210/DTD/xhtml1-transitional.dtd&gt;
 
-&lt;!DOCTYPE html 
+&lt;!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
      "http://www.w3.org/TR/1999/PR-xhtml1-19991210/DTD/xhtml1-frameset.dtd&gt;
 </pre>
@@ -568,7 +568,7 @@ local system conventions.</p>
 <div class="good">
 <pre>
 &lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!DOCTYPE html 
+&lt;!DOCTYPE html
      PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/1999/PR-xhtml1-19991210/DTD/xhtml1-strict.dtd"&gt;
 &lt;html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"&gt;
@@ -675,14 +675,14 @@ recognize, it must ignore the entire attribute specification
 recognize, it must use the default attribute value.</li>
 
 <li>If it encounters an entity reference (other than one
-of the predefined entities) for which the User Agent has 
+of the predefined entities) for which the User Agent has
 processed no declaration (which could happen if the declaration
-is in the external subset which the User Agent hasn't read), the entity 
+is in the external subset which the User Agent hasn't read), the entity
 reference should be rendered as the characters (starting
 with the ampersand and ending with the semi-colon) that
 make up the entity reference.</li>
 
-<li>When rendering content, User Agents that encounter 
+<li>When rendering content, User Agents that encounter
 characters or character entity references that are recognized but not renderable should display the document in such a way that it is obvious to the user that normal rendering has not taken place.</li>
 
 <li>
@@ -748,7 +748,7 @@ the ZW space character to delimit 'internal' grammatical boundaries (what
 look like words in Arabic to an English eye frequently encode several words,
 e.g. 'kitAbuhum' = 'kitAbu-hum' = 'book them' == their book); and languages
 in the Chinese script tradition typically neither encode such delimiters nor
-use typographic whitespace in this way. 
+use typographic whitespace in this way.
 </li>
 </ul>
 
@@ -1202,13 +1202,13 @@ maximum forward and backward compatibility (e.g., <code class="greenmono">&lt;a 
 <p>Further, since the set of
 legal values for attributes of type <code>ID</code> is much smaller than
 for those of type <code>CDATA</code>, the type of the <code>name</code>
-attribute has been changed to <code>NMTOKEN</code>. This attribute is 
+attribute has been changed to <code>NMTOKEN</code>. This attribute is
 constrained such that it can only have the same values as type
 <code>ID</code>, or as the <code>Name</code> production in XML 1.0 Section
 2.5, production 5. Unfortunately, this constraint cannot be expressed in the
 XHTML 1.0 DTDs.  Because of this change, care must be taken when
 converting existing HTML documents. The values of these attributes
-must be unique within the document, valid, and any references to these 
+must be unique within the document, valid, and any references to these
 fragment identifiers (both
 internal and external) must be updated should the values be changed during
 conversion.</p>
@@ -1243,7 +1243,7 @@ noresize</code>, <code>defer</code>.</p>
 The Document Object Model level 1 Recommendation [<a href="#ref-dom">DOM</a>]
 defines document object model interfaces for XML and HTML 4.0. The HTML 4.0
 document object model specifies that HTML element and attribute names are
-returned in upper-case. The XML document object model specifies that 
+returned in upper-case. The XML document object model specifies that
 element and attribute names are returned in the case they are specified. In
 XHTML 1.0, elements and attributes are specified in lower-case. This apparent difference can be
 addressed in two ways:
@@ -1265,7 +1265,7 @@ in the object tree because they are optional in the content model
 permitted to be minimized such that their start and end tags are both omitted
 (an SGML feature).
 This is not possible in XML. Rather than require document authors to insert
-extraneous elements, XHTML has made the elements optional. 
+extraneous elements, XHTML has made the elements optional.
 Applications need to adapt to this
 accordingly.</li>
 </ol>
@@ -1447,7 +1447,7 @@ http://www.w3.org/TR/REC-xml-names</a></dd>
 <img height="32" width="88" src="wcag1AAA.gif" alt="Level Triple-A conformance icon, W3C-WAI Web Content Accessibility Guidelines 1.0" /></a></p>
 <div class="navbar">
   <hr />
-  <a href="#toc">table of contents</a> 
+  <a href="#toc">table of contents</a>
 </div>
 </body>
 </html>

@@ -553,8 +553,8 @@ const char* XMLUtil::GetCharacterRef(const char* p, char* value, int* length)
 
             const unsigned int digitScaled = mult * digit;
             ucs += digitScaled;
-            mult *= radix;       
-            
+            mult *= radix;
+
             // Security check: could a value exist that is out of range?
             // Easily; limit to the MAX_CODE_POINT, which also allows for a
             // bunch of leading zeroes.
@@ -1144,10 +1144,10 @@ char* XMLNode::ParseDeep( char* p, StrPair* parentEndTag, int* curLineNumPtr )
             // Declarations are only allowed at document level
             //
             // Multiple declarations are allowed but all declarations
-            // must occur before anything else. 
+            // must occur before anything else.
             //
-            // Optimized due to a security test case. If the first node is 
-            // a declaration, and the last node is a declaration, then only 
+            // Optimized due to a security test case. If the first node is
+            // a declaration, and the last node is a declaration, then only
             // declarations have so far been added.
             bool wellLocated = false;
 
@@ -2347,7 +2347,7 @@ static FILE* callfopen( const char* filepath, const char* mode )
     return fp;
 }
 
-void XMLDocument::DeleteNode( XMLNode* node )	{   
+void XMLDocument::DeleteNode( XMLNode* node )	{
     if(node == 0) {
         return; // check for null pointer
     }

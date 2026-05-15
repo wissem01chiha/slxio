@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief interface for all global variables of the library
- * 
+ *
  * Deprecated, don't use
  *
  * @copyright See Copyright for the status of this software.

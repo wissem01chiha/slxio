@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
 
     uv_pipe_init(loop, &stdout_pipe, 0);
     uv_pipe_open(&stdout_pipe, 1);
-    
+
     uv_fs_t file_req;
     int fd = uv_fs_open(loop, &file_req, argv[1], O_CREAT | O_RDWR, 0644, NULL);
     uv_pipe_init(loop, &file_pipe, 0);

@@ -19,7 +19,7 @@ Some notes:
 - the lazy stringification means the expressions will be evaluated when an assert fails and not at the point of capture - so the value might have changed by then
 - refer to the [**stringification**](stringification.md) page for information on how to teach doctest to stringify your types
 
-The lazy evaluation means that in the common case when no asserts fail the code runs super fast. This makes it suitable even in loops - perhaps to log the iteration. 
+The lazy evaluation means that in the common case when no asserts fail the code runs super fast. This makes it suitable even in loops - perhaps to log the iteration.
 
 There is also the **```CAPTURE()```** macro which is a convenience wrapper of **```INFO()```**:
 

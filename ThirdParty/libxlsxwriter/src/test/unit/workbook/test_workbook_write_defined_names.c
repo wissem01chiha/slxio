@@ -89,4 +89,3 @@ CTEST(workbook, write_defined_names_invalid) {
 
     lxw_workbook_free(workbook);
 }
-

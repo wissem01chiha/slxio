@@ -64,6 +64,6 @@ SAX.endElement(body)
 SAX.characters(
 , 1)
 SAX.endElement(html)
-SAX.characters(  
+SAX.characters(
 , 3)
 SAX.endDocument()

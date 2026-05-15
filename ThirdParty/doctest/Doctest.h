@@ -8,8 +8,8 @@
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 #else
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN 
+#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <src/doctest/doctest.h>
-#endif 
+#endif
 
 #endif // DOCTEST_H

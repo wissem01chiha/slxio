@@ -2,7 +2,7 @@
  * @file
  *
  * @brief interfaces for thread handling
- * 
+ *
  * set of generic threading related routines
  *              should work with pthreads, Windows native or TLS threads
  *

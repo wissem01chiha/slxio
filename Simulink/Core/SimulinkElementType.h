@@ -37,37 +37,37 @@ public:
   SimulinkElementType() = default;
 
   /**
-   * 
+   *
    */
   bool isA(const SimulinkElementType& typeObj);
 
   /**
-   * 
+   *
    */
   bool isA(const SimulinkElementType::Type& type);
 
   /**
-   * 
+   *
    */
   explicit SimulinkElementType(SimulinkElementType::Type typeName);
 
   /**
-   * 
+   *
    */
   static SimulinkElementType& getInstance();
 
   /**
-   * 
+   *
    */
   static SimulinkElementType::Type toType(const char* typeName);
 
   /**
-   * 
+   *
    */
   static const char* ToString(SimulinkElementType::Type type);
 
   /**
-   * 
+   *
    */
   std::string ToString();
 

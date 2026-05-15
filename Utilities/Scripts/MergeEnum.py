@@ -10,7 +10,7 @@
 # and the AUTOSAR workflows.
 #
 # How to use:
-#   >> python3 MergeEnum.py --enum-map-file 'path/to/enum.map' --root-dir 
+#   >> python3 MergeEnum.py --enum-map-file 'path/to/enum.map' --root-dir
 #       'path/to/slxio/root' --output-file 'path/to/output/header.h'
 #
 # By default, it will update and generate the slxio.enum file in the root
@@ -23,7 +23,7 @@ import os
 
 def parse_enum_map_file(filename):
     """
-    Parse the enum map file to get the mapping between module 
+    Parse the enum map file to get the mapping between module
     id and module name and group id and group name.s
     """
     names = {}
@@ -54,7 +54,7 @@ def parse_enum_map_file(filename):
 
 def parse_module_file(filename):
     """
-    Read metada fro mslxio.module to get name and groupe name 
+    Read metada fro mslxio.module to get name and groupe name
     """
     print(f"Parsing module file: {filename}")
     module_name = None
@@ -80,10 +80,10 @@ def parse_module_file(filename):
                 current_section = None
 
     return module_name, group_name
- 
+
 def parse_enum_file(path):
     """
-    Read a given enumeration file, return tuple 
+    Read a given enumeration file, return tuple
     """
     enums = []
     with open(path, "r", encoding="utf-8") as f:
@@ -91,20 +91,20 @@ def parse_enum_file(path):
             line = line.strip()
             if not line:
                 continue
-            parts = line.split(None, 1)  
+            parts = line.split(None, 1)
             if len(parts) == 2:
                 code, ident = parts
-                enums.append((int(code), ident))  
+                enums.append((int(code), ident))
     return enums
 
 def merge_enum_definitions(enums, names, groups):
     """
     This function will generate the final enumeration definitions
     by merging the enums with the names and groups
-    and return a list of enumeration definitions 
+    and return a list of enumeration definitions
     """
     enum_definitions = []
-    
+
     names_rev = {v: k for k, v in names.items()}
     groups_rev = {v: k for k, v in groups.items()}
 
@@ -129,18 +129,18 @@ def merge_enum_definitions(enums, names, groups):
 
 def get_enum_global_id(group_id, module_id, error_code):
     """
-    by default all error code are 32 bist signed integres, 
+    by default all error code are 32 bist signed integres,
     8 most sig bist for Group id
     8 bits for module id
-    16 bits for error code 
+    16 bits for error code
     """
     error_val = abs(error_code) & 0xFFFF
     return (group_id << 24) | (module_id << 16) | error_val
-        
+
 
 def generate_enum_header(enum_definitions, output_file):
     """
-    by default it genrate a C99 header file 
+    by default it genrate a C99 header file
     """
     with open(output_file, "w", encoding="utf-8") as f:
         f.write("// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha\n")
@@ -170,7 +170,7 @@ def generate_enum_header(enum_definitions, output_file):
         f.write("#ifdef __cplusplus\n")
         f.write("} /*__cplusplus */ \n")
         f.write("#endif\n\n")
-        
+
         f.write("#endif /* __ErrorTypes_h__*/ \n")
 
 
@@ -206,4 +206,3 @@ if __name__ == "__main__":
     main("C:/Users/chiha.000/Documents/github/slxio",
         "C:/Users/chiha.000/Documents/github/slxio/Common/Core/enum.map",
         "C:/Users/chiha.000/Documents/github/slxio/Common/Core/ErrorTypes.h")
-

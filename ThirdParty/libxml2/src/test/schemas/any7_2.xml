@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 No error reported.
 
 Seems like <moo> is accepted, but should not, since "##other" rules out
 elements in no namespace.
 
 Xerces reports:
-any-err-2.xml:18,8: (Error) cvc-complex-type.2.4.a: Invalid content starting 
-with element 'moo'. 
+any-err-2.xml:18,8: (Error) cvc-complex-type.2.4.a: Invalid content starting
+with element 'moo'.
 One of '{"urn:test:foo":bar, WC[##other:"urn:test:foo"]}' is expected.
 
 -->
@@ -15,6 +15,6 @@ One of '{"urn:test:foo":bar, WC[##other:"urn:test:foo"]}' is expected.
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:test:foo any7_2.xsd">
 	<foo:bar/>
-	<moo:moo/>	
+	<moo:moo/>
 </foo:foo>
- 
+

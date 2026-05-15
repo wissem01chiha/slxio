@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief DTD validator
- * 
+ *
  * API to handle XML Document Type Definitions and validate
  * documents.
  *

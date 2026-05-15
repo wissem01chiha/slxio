@@ -8,6 +8,6 @@
 #include <loguru.hpp>
 #else
 #include <src/loguru.hpp>
-#endif 
+#endif
 
 #endif // LOGURU_H

@@ -185,4 +185,3 @@ TEST_IMPL(shutdown_eof) {
   MAKE_VALGRIND_HAPPY(uv_default_loop());
   return 0;
 }
-

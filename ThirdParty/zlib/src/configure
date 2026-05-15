@@ -922,7 +922,7 @@ cat > $test.c << EOF
     #error
 #endif
 EOF
-if try $CC -c $CFLAGS $test.c; then 
+if try $CC -c $CFLAGS $test.c; then
     echo "Checking for s390x build ... Yes." | tee -a configure.log
     HAVE_S390X=1
 else
@@ -963,7 +963,7 @@ EOF
         HAVE_S390X_VX=1
         VGFMAFLAG="$VGFMAFLAG -march=z13"
     # else we are not on s390x
-    else 
+    else
         echo "Checking for s390x vx vector extension ... No." | tee -a configure.log
     fi
 

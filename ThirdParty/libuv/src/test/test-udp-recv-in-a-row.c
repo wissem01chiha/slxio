@@ -85,7 +85,7 @@ static void check_cb(uv_check_t* handle) {
 
 TEST_IMPL(udp_recv_in_a_row) {
   int i, r;
-  
+
   ASSERT_OK(uv_check_init(uv_default_loop(), &check_handle));
   ASSERT_OK(uv_check_start(&check_handle, check_cb));
 
@@ -116,7 +116,7 @@ TEST_IMPL(udp_recv_in_a_row) {
   ASSERT_OK(r);
 
   /* check_cb() asserts that the N packets can be received
-   * before it gets called. 
+   * before it gets called.
    */
 
   ASSERT_OK(uv_run(uv_default_loop(), UV_RUN_DEFAULT));

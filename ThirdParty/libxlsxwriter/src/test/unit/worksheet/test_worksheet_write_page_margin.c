@@ -139,4 +139,3 @@ CTEST(worksheet, write_page_margin07) {
 
     lxw_worksheet_free(worksheet);
 }
-

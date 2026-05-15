@@ -2031,7 +2031,7 @@ int main( int argc, const char ** argv )
 		doc.DeleteNode(nullptr);
 		XMLTest("DeleteNode with null pointer", true, doc.Error() == XML_SUCCESS);
 	}
-		
+
 	// Check sample xml can be parsed with pedantic mode
 	{
 		XMLDocument doc(true, PEDANTIC_WHITESPACE);
@@ -2327,7 +2327,7 @@ int main( int argc, const char ** argv )
 		XMLTest( "Should be no error initially", false, doc.Error() );
 		doc.LoadFile( "resources/no-such-file.xml" );
 		XMLTest( "No such file - should fail", true, doc.Error() );
-                
+
 		doc.LoadFile("resources/dream.xml");
 		XMLTest("Error should be cleared", false, doc.Error());
 
@@ -2712,7 +2712,7 @@ int main( int argc, const char ** argv )
 			XMLPrinter defaultPrinter;
 			doc.Print( &defaultPrinter );
 			const char* defaultOutput = defaultPrinter.CStr();
-			const bool foundTextWithUnescapedApos = (strstr(defaultOutput, testText) != nullptr); 
+			const bool foundTextWithUnescapedApos = (strstr(defaultOutput, testText) != nullptr);
 			XMLTest("Default XMLPrinter should escape ' characters", false, foundTextWithUnescapedApos);
 			{
 				XMLDocument parsingDoc;
@@ -2725,7 +2725,7 @@ int main( int argc, const char ** argv )
 			XMLPrinter customPrinter(0, false, 0, XMLPrinter::DONT_ESCAPE_APOS_CHARS_IN_ATTRIBUTES);
 			doc.Print( &customPrinter );
 			const char* customOutput = customPrinter.CStr();
-			const bool foundTextWithUnescapedApos = (strstr(customOutput, testText) != nullptr); 
+			const bool foundTextWithUnescapedApos = (strstr(customOutput, testText) != nullptr);
 			XMLTest("Custom XMLPrinter should not escape ' characters", true, foundTextWithUnescapedApos);
 			{
 				XMLDocument parsingDoc;
@@ -2735,7 +2735,7 @@ int main( int argc, const char ** argv )
 			}
 		}
 	}
-	
+
     // ----------- Performance tracking --------------
 	{
 #if defined( _MSC_VER )

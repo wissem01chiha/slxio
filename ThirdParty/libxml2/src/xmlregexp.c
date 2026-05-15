@@ -1154,7 +1154,7 @@ xmlRegPrintAtom(FILE *output, xmlRegAtomPtr atom) {
 static void
 xmlRegPrintAtomCompact(FILE* output, xmlRegexpPtr regexp, int atom)
 {
-    if (output == NULL || regexp == NULL || atom < 0 || 
+    if (output == NULL || regexp == NULL || atom < 0 ||
         atom >= regexp->nbstrings) {
         return;
     }
@@ -1209,7 +1209,7 @@ xmlRegPrintTransCompact(
 )
 {
     int target;
-    if (output == NULL || regexp == NULL || regexp->compact == NULL || 
+    if (output == NULL || regexp == NULL || regexp->compact == NULL ||
         state < 0 || atom < 0) {
         return;
     }
@@ -1223,19 +1223,19 @@ xmlRegPrintTransCompact(
     }
 
     /* We will ignore most of the attributes used in xmlRegPrintTrans,
-     * since the compact form is much simpler and uses only a part of the 
-     * features provided by the libxml2 regexp libary 
+     * since the compact form is much simpler and uses only a part of the
+     * features provided by the libxml2 regexp libary
      * (no rollbacks, counters etc.) */
 
     /* Compared to the standard representation, an automata written using the
-     * compact form will ALWAYS be deterministic! 
+     * compact form will ALWAYS be deterministic!
      * From    xmlRegPrintTrans:
          if (trans->nd != 0) {
             ...
       * trans->nd will always be 0! */
 
     /* In automata represented in compact form, the transitions will not use
-     * counters. 
+     * counters.
      * From    xmlRegPrintTrans:
          if (trans->counter >= 0) {
             ...
@@ -1243,8 +1243,8 @@ xmlRegPrintTransCompact(
 
     /* In compact form, we won't use */
 
-    /* An automata in the compact representation will always use string 
-     * atoms. 
+    /* An automata in the compact representation will always use string
+     * atoms.
      * From    xmlRegPrintTrans:
          if (trans->atom->type == XML_REGEXP_CHARVAL)
              ...
@@ -1285,14 +1285,14 @@ xmlRegPrintStateCompact(FILE* output, xmlRegexpPtr regexp, int state)
         state < 0) {
         return;
     }
-    
+
     fprintf(output, " state: ");
 
     stateType = regexp->compact[state * (regexp->nbstrings + 1)];
     if (stateType == XML_REGEXP_START_STATE) {
         fprintf(output, " START ");
     }
-    
+
     if (stateType == XML_REGEXP_FINAL_STATE) {
         fprintf(output, " FINAL ");
     }
@@ -1305,15 +1305,15 @@ xmlRegPrintStateCompact(FILE* output, xmlRegexpPtr regexp, int state)
     /* Count all the transitions from the compact representation. */
     for (i = 0; i < regexp->nbstrings; i++) {
         target = regexp->compact[state * (regexp->nbstrings + 1) + i + 1];
-        if (target > 0 && target <= regexp->nbstates && 
-            regexp->compact[(target - 1) * (regexp->nbstrings + 1)] == 
+        if (target > 0 && target <= regexp->nbstates &&
+            regexp->compact[(target - 1) * (regexp->nbstrings + 1)] ==
             XML_REGEXP_SINK_STATE) {
                 nbTrans++;
             }
     }
 
     fprintf(output, "%d, %d transitions:\n", state, nbTrans);
-    
+
     /* Print all transitions */
     for (i = 0; i < regexp->nbstrings; i++) {
         xmlRegPrintTransCompact(output, regexp, state, i);
@@ -1323,7 +1323,7 @@ xmlRegPrintStateCompact(FILE* output, xmlRegexpPtr regexp, int state)
 /*
  * @param output  an output stream
  * @param regexp  the regexp instance
- * 
+ *
  * Print the compact representation of a regexp, in the same fashion as the
  * public #xmlRegexpPrint function.
  */
@@ -1334,7 +1334,7 @@ xmlRegPrintCompact(FILE* output, xmlRegexpPtr regexp)
     if (output == NULL || regexp == NULL || regexp->compact == NULL) {
         return;
     }
-    
+
     fprintf(output, "'%s' ", regexp->string);
 
     fprintf(output, "%d atoms:\n", regexp->nbstrings);
@@ -1611,7 +1611,7 @@ xmlRegStatePush(xmlRegParserCtxtPtr ctxt) {
  * @param ctxt  a regexp parser context
  * @param from  the from state
  * @param to  the target state or NULL for building a new one
- * @param lax  
+ * @param lax
  */
 static int
 xmlFAGenerateAllTransition(xmlRegParserCtxtPtr ctxt,

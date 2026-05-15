@@ -9,14 +9,14 @@
 	Copyright (c) 2000. All Rights Reserved.
 	International Press Telecommunications Council
 	http://www.iptc.org
-		
+
 	Last changed: 9 August 2000  wb/kr/ak
-	
+
 	For the list of modifications from previous releases, see:
-		http://www.nitf.org/recent-modifications.html 
+		http://www.nitf.org/recent-modifications.html
 
 	For the list of proposed modifications, see:
-		http://www.nitf.org/proposed-changes.html 
+		http://www.nitf.org/proposed-changes.html
 --><!ENTITY % enriched-text "
 	#PCDATA
 	| chron
@@ -729,7 +729,7 @@
         </Provider>
       </AdministrativeMetadata>
       <DescriptiveMetadata>
-        <Language FormalName="de"/> 
+        <Language FormalName="de"/>
       </DescriptiveMetadata>
       <NewsComponent>
         <NewsLines>

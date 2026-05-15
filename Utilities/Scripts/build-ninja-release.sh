@@ -15,7 +15,7 @@
 # permissions and limitations under the License.
 #=============================================================================
 
-set -e  
+set -e
 
 BUILD_DIR="build"
 
@@ -24,7 +24,7 @@ if [ ! -d "$BUILD_DIR" ]; then
     cd $BUILD_DIR
 fi
 
-CORES=$(nproc)  
+CORES=$(nproc)
 
 cmake -G Ninja -DCMAKE_BUILD_TYPE=Release  ..
 ninja -j$CORES

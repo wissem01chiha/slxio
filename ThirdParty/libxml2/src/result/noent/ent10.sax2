@@ -4,7 +4,7 @@ SAX.internalSubset(rnode, , )
 SAX.elementDecl(rnode, 4, ...)
 SAX.elementDecl(f, 3, ...)
 SAX.attributeDecl(f, att1, 1, 4, J, ...)
-SAX.entityDecl(f, 1, (null), (null), 
+SAX.entityDecl(f, 1, (null), (null),
    <f>
    hello world
    </f>

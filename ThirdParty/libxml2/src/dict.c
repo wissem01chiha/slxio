@@ -1034,4 +1034,3 @@ unsigned
 xmlRandom(void) {
     return(xoroshiro64ss(xmlGetLocalRngState()));
 }
-

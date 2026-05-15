@@ -513,4 +513,3 @@ xmlGcMemGet(xmlFreeFunc *freeFunc, xmlMallocFunc *mallocFunc,
     if (strdupFunc != NULL) *strdupFunc = xmlMemStrdup;
     return(0);
 }
-

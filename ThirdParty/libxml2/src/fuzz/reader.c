@@ -565,4 +565,3 @@ LLVMFuzzerCustomMutator(char *data, size_t size, size_t maxSize,
     return xmlFuzzMutateChunks(chunks, data, size, maxSize, seed,
                                LLVMFuzzerMutate);
 }
-

@@ -96,7 +96,7 @@ TEST_IMPL(getnameinfo_basic_ip6) {
 #if defined(__QEMU__)
   RETURN_SKIP("Test does not currently work in QEMU");
 #endif
-  
+
   int r;
 
   r = uv_ip6_addr(address_ip6, port, &addr6);

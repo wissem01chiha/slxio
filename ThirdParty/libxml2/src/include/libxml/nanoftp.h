@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Removed legacy symbols for an outdated FTP client
- * 
+ *
  *
  * @copyright See Copyright for the status of this software.
  *

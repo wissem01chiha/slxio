@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<xsd:schema 
+<xsd:schema
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified" attributeFormDefault="qualified"
 	blockDefault="extension" finalDefault="extension">
@@ -11,7 +11,7 @@
 			</xsd:sequence>
 			<xsd:attribute name="bar"/>
 		</xsd:complexType>
-		
+
 	</xsd:element>
 
 </xsd:schema>

@@ -17,6 +17,6 @@
 
 ########################################################################
 # Script for #include graphs generation for given module/directory
-# this script require perl installed, install it via 
-# 
+# this script require perl installed, install it via
+#
 ########################################################################

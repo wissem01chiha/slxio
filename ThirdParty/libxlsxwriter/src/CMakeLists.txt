@@ -304,7 +304,7 @@ enable_language(CXX)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 # Set the zlib includes.
-find_package(ZLIB "1.2.8" REQUIRED)
+#find_package(ZLIB  REQUIRED)
 list(APPEND LXW_PRIVATE_INCLUDE_DIRS ${ZLIB_INCLUDE_DIRS})
 
 # Set the minizip includes.
@@ -383,7 +383,12 @@ add_library(${PROJECT_NAME} "")
 set_target_properties(${PROJECT_NAME} PROPERTIES SOVERSION ${SOVERSION})
 target_sources(${PROJECT_NAME} PRIVATE ${LXW_SOURCES} PUBLIC ${LXW_HEADERS})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE ZLIB::ZLIB)
+if(ZLIB_BUILD_STATIC)
+  target_link_libraries(${PROJECT_NAME} PRIVATE zlibstatic)
+endif()
+if(ZLIB_BUILD_SHARED)
+ target_link_libraries(${PROJECT_NAME} PRIVATE zlib)
+endif()
 
 if(MINIZIP_LINK_LIBRARIES)
     target_link_libraries(${PROJECT_NAME} PRIVATE ${MINIZIP_LINK_LIBRARIES})

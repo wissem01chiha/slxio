@@ -58,13 +58,13 @@
  };
 
 
-// TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Directory Constructor Test")
-// {
+TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Directory Constructor Test")
+{
 
 //   std::string path = testDirectoryEmptyRandDir();
 //   Directory d(path);
 //   CHECK(Directory::isDirectory(path));
-// }
+}
 
 // TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory")
 // {

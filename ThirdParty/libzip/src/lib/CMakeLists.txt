@@ -176,7 +176,13 @@ if(SHARED_LIB_VERSIONNING)
   set_target_properties(zip PROPERTIES VERSION 5.5 SOVERSION 5 MACHO_CURRENT_VERSION 6.5 MACHO_COMPATIBILITY_VERSION 6)
 endif()
 
-target_link_libraries(zip PRIVATE ZLIB::ZLIB)
+if(ZLIB_BUILD_STATIC)
+  target_link_libraries(zip PRIVATE zlibstatic)
+endif()
+if(ZLIB_BUILD_SHARED)
+ target_link_libraries(zip PRIVATE zlib)
+endif()
+
 target_include_directories(zip
   PUBLIC
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/lib>

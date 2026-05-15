@@ -593,12 +593,12 @@ static void start_poll_test(void) {
   MAKE_VALGRIND_HAPPY(uv_default_loop());
 }
 
- 
+
 /* Issuing a shutdown() on IBM i PASE with parameter SHUT_WR
  * also sends a normal close sequence to the partner program.
  * This leads to timing issues and ECONNRESET failures in the
  * test 'poll_duplex' and 'poll_unidirectional'.
- * 
+ *
  * https://www.ibm.com/support/knowledgecenter/en/ssw_ibm_i_74/apis/shutdn.htm
  */
 TEST_IMPL(poll_duplex) {

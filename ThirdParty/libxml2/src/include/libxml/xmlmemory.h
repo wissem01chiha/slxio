@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief interface for the memory allocator
- * 
+ *
  * provides interfaces for the memory allocator,
  *              including debugging capabilities.
  *
@@ -200,4 +200,3 @@ XMLPUBFUN char *
 #endif /* __cplusplus */
 
 #endif  /* __DEBUG_MEMORY_ALLOC__ */
-

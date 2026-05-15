@@ -12,7 +12,7 @@ There are 3 levels of assert severity for all assertion macros:
 
 The ```CHECK``` level is mostly useful if you have a series of essentially orthogonal assertions and it is useful to see all the results rather than stopping at the first failure.
 
-All asserts evaluate the expressions only once and if they fail - the values are [**stringified**](stringification.md) properly. 
+All asserts evaluate the expressions only once and if they fail - the values are [**stringified**](stringification.md) properly.
 
 Since **doctest** is [**thread-safe**](faq.md#is-doctest-thread-aware) all asserts and [**logging**](logging.md) macros can be used in threads spawned from test cases.
 

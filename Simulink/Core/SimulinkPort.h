@@ -68,10 +68,10 @@ public:
   std::shared_ptr<SimulinkLine> getLine(const IdType& lineId);
 
   /**
-   * 
+   *
    */
   Logger& GetLogger();
-  
+
 private:
   Logger& logger;
   IdType blockId;

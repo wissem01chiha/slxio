@@ -15,7 +15,7 @@ ReturnType SimulinkArrayWriter::Write()
   return E_OK;
 }
 
-ReturnType SimulinkArrayWriter::SetInputData(const DataObject data) {
+ReturnType SimulinkArrayWriter::SetInputData(const DataObject& data) {
 
     return E_OK;
 }

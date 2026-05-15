@@ -2,4 +2,3 @@
 <!ELEMENT doc ANY>
 ]>
 <doc>This is a valid document !</doc>
-

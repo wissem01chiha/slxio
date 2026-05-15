@@ -27,4 +27,3 @@
 CONSOLE_IMPEXP BOOL ClearConsolePart(int nbLines);
 /*--------------------------------------------------------------------------*/
 #endif /*__CLEARCONSOLEPART_H__ */
-

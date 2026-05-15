@@ -10,7 +10,7 @@
 #include <libxml/xpathInternals.h>
 ]]>
 </xsl:text>
-		<xsl:call-template name="serializer"/>		
+		<xsl:call-template name="serializer"/>
 		<xsl:apply-templates select="tests/test"/>
 		<xsl:text>
 
@@ -21,7 +21,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 	return (0);
 }
 </xsl:text>
-	</xsl:template>	
+	</xsl:template>
 
 	<xsl:template match="tests/test" mode="call">
 		<xsl:text>	nsTest_</xsl:text>
@@ -32,7 +32,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 	<xsl:template name="xml-text">
 		<xsl:param name="text"/>
 		<xsl:call-template name="replace-string">
-			<!-- Substitute #10 for " -->	        			
+			<!-- Substitute #10 for " -->
 	        <xsl:with-param name="from" select="'&#10;'"/>
 	        <xsl:with-param name="to" select="'&quot;&#10;&quot;'"/>
 			<xsl:with-param name="text">
@@ -51,7 +51,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
     			</xsl:call-template>
 			</xsl:with-param>
     	</xsl:call-template>
-		
+
 	</xsl:template>
 
 	<xsl:template match="doc" mode="define">
@@ -63,16 +63,16 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 		<xsl:text>_str = "</xsl:text>
 		<xsl:call-template name="xml-text">
 	        <xsl:with-param name="text" select="."/>
-    	</xsl:call-template>		
+    	</xsl:call-template>
 		<xsl:text>";&#xA;</xsl:text>
 	</xsl:template>
 
 	<xsl:template match="expected" mode="define">
-		<xsl:text>	const char * </xsl:text>	
+		<xsl:text>	const char * </xsl:text>
 		<xsl:text>exp_str = "</xsl:text>
 		<xsl:call-template name="xml-text">
 	        <xsl:with-param name="text" select="."/>
-    	</xsl:call-template>		
+    	</xsl:call-template>
 		<xsl:text>";&#xA;</xsl:text>
 	</xsl:template>
 
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 		<xsl:text> = xmlReadDoc(BAD_CAST </xsl:text>
 		<xsl:value-of select="@name"/>
 		<xsl:text>_str, NULL, NULL, 0);&#xA;</xsl:text>
-			
+
 		<xsl:apply-templates select="following-sibling::*[1]"/>
 
 		<xsl:text>	xmlFreeDoc(</xsl:text>
@@ -158,7 +158,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 			<xsl:otherwise>
 				<xsl:text>NULL</xsl:text>
 			</xsl:otherwise>
-		</xsl:choose>		
+		</xsl:choose>
 		<xsl:text>, 0);&#xA;</xsl:text>
 		<xsl:apply-templates select="following-sibling::*[1]"/>
 	</xsl:template>
@@ -172,7 +172,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 		<xsl:apply-templates select="following-sibling::*[1]"/>
 	</xsl:template>
 
-	<xsl:template match="expected">		
+	<xsl:template match="expected">
 		<xsl:text>	/* Serialize "</xsl:text><xsl:value-of select="@doc"/><xsl:text>". */&#xA;</xsl:text>
 		<xsl:text>	result_str = nsSerializeNode(xmlDocGetRootElement(</xsl:text>
 		<xsl:value-of select="@doc"/>
@@ -191,7 +191,7 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 	<!--********
 	    * TEST *
 	    ********-->
-	<xsl:template match="test">		
+	<xsl:template match="test">
 		<xsl:text>void nsTest_</xsl:text>
 		<xsl:value-of select="@name"/>
 		<xsl:text>(void) {
@@ -207,18 +207,18 @@ int main(int argc, char **argv) {&#xA;</xsl:text>
 	xmlCleanupParser();
 	memory = xmlMemUsed() - memory;
 
-	if (memory != 0) {		
+	if (memory != 0) {
 		printf("## '%s' MEMORY leak: %d\n", "</xsl:text>
 		<xsl:value-of select="@name"/>
 		<xsl:text>", memory);
-    }		
+    }
 }
-</xsl:text>	
+</xsl:text>
 	</xsl:template>
 
 	<xsl:template name="serializer">
 		<xsl:text>
-		
+
 xmlChar * nsSerializeNode(xmlNodePtr node) {
 	xmlChar * ret;
 
@@ -234,8 +234,8 @@ xmlChar * nsSerializeNode(xmlNodePtr node) {
 
 xmlNodePtr nsSelectNode(xmlXPathContextPtr xp, const char * xpath) {
 	xmlXPathObjectPtr xpres;
-	xmlNodePtr ret;	
-		
+	xmlNodePtr ret;
+
 	xpres = xmlXPathEval(BAD_CAST xpath, xp);
 	ret = xpres->nodesetval->nodeTab[0];
 	xmlXPathFreeObject(xpres);
@@ -264,12 +264,12 @@ xmlNodePtr nsSelectNode(xmlXPathContextPtr xp, const char * xpath) {
 	  <xsl:with-param name="from" select="$from"/>
 	  <xsl:with-param name="to" select="$to"/>
 	</xsl:call-template>
-      </xsl:when> 
+      </xsl:when>
       <xsl:otherwise>
-        <xsl:value-of select="$text"/>  
+        <xsl:value-of select="$text"/>
       </xsl:otherwise>
-    </xsl:choose>            
+    </xsl:choose>
  </xsl:template>
-		
-	
+
+
 </xsl:stylesheet>

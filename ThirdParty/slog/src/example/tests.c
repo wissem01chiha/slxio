@@ -48,7 +48,7 @@ int test_slog_file_logging()
     char file_path[PATH_MAX];
     slog_get_full_path(file_path, sizeof(file_path));
     slog_destroy();
-    
+
     FILE *log_file = fopen(file_path, "r");
     if (log_file != NULL)
     {
@@ -131,7 +131,7 @@ int test_thread_safe_logging()
 int main()
 {
     int failed = 0;
-    
+
     failed += test_slog_basic();
     failed += test_slog_file_logging();
     failed += test_slog_formatting();

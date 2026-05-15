@@ -103,4 +103,3 @@ CTEST(drawing, drawing_image01) {
 
     lxw_drawing_free(drawing);
 }
-

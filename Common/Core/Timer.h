@@ -63,7 +63,7 @@ public:
 
 private:
   Clock::time_point StartTime;
-  bool Running;
+  bool Running =false;
   Clock::duration Accumulated{ Clock::duration::zero() };
 };
 

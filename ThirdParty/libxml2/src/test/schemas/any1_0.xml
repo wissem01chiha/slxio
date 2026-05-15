@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- Tests xsd:any with "##any". -->
-<foo:foo 
-	xmlns:foo="http://FOO" 
+<foo:foo
+	xmlns:foo="http://FOO"
 	xmlns:bar="http://BAR"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://FOO any1_0.xsd">
 
 	<foo:anything>
@@ -15,7 +15,6 @@
 	<anything>
 		<foo:boo booAttr="213"/>
 	</anything>
-	
+
 
 </foo:foo>
-

@@ -34,12 +34,12 @@ expect = {
 {0}/dtds/766956.dtd:2: parser error : Content error in the external subset
 %ä%ent;
         ^
-Entity: line 1: 
+Entity: line 1:
 value
 ^
 """.format(dir_prefix),
     '781333':
-"""{0}/781333.xml:4: element a: validity error : Element a content does not follow the DTD, expecting ( ..., got 
+"""{0}/781333.xml:4: element a: validity error : Element a content does not follow the DTD, expecting ( ..., got
 <a/>
     ^
 {0}/781333.xml:5: element a: validity error : Element a content does not follow the DTD, Expecting more children
@@ -50,13 +50,13 @@ value
 """{0}/dtds/cond_sect2.dtd:15: parser error : Parameter entity must match extSubsetDecl
     %ent;
          ^
-Entity: line 1: 
+Entity: line 1:
 ]]>
 ^
 {0}/dtds/cond_sect2.dtd:15: parser error : Content error in the external subset
     %ent;
          ^
-Entity: line 1: 
+Entity: line 1:
 ]]>
 ^
 """.format(dir_prefix),
@@ -69,7 +69,7 @@ Entity: line 1:
 """{0}/t8.xml:6: parser error : Content error in the internal subset
 %defroot; %defmiddle; %deftest;
          ^
-Entity: line 1: 
+Entity: line 1:
 &lt;!ELEMENT root (middle) >
 ^
 """.format(dir_prefix),
@@ -77,7 +77,7 @@ Entity: line 1:
 """{0}/t8a.xml:6: parser error : Content error in the internal subset
 %defroot;%defmiddle;%deftest;
          ^
-Entity: line 1: 
+Entity: line 1:
 &lt;!ELEMENT root (middle) >
 ^
 """.format(dir_prefix),

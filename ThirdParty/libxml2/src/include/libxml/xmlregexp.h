@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief Regular expressions
- * 
+ *
  * A regular expression engine used for DTD and XML Schema
  * validation.
  *

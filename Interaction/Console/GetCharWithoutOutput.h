@@ -25,4 +25,3 @@
 CONSOLE_IMPEXP int GetCharWithoutOutput(void);
 /*--------------------------------------------------------------------------*/
 #endif /* __GETCHARWITHOUTOUTPUT_H__ */
-

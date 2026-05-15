@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
-<!-- Tests xsd:any with a set of namespaces, icluding 
+<!-- Tests xsd:any with a set of namespaces, icluding
 	"##local" and "##targetNamespace". -->
-<xsd:schema 
+<xsd:schema
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://FOO"
-	xmlns:foo="http://FOO">		
+	xmlns:foo="http://FOO">
 
 	<xsd:element name="boo">
 		<xsd:complexType>
@@ -15,9 +15,9 @@
 	<xsd:element name="foo">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:any 
-					namespace="##targetNamespace http://BAR ##local" 
-					processContents="lax" 
+				<xsd:any
+					namespace="##targetNamespace http://BAR ##local"
+					processContents="lax"
 					maxOccurs="3"/>
 			</xsd:sequence>
 		</xsd:complexType>

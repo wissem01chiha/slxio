@@ -19,4 +19,3 @@ This book was made using `Sphinx <https://www.sphinx-doc.org>`_ and `vim
 .. note::
     In 2017 the libuv project incorporated the Nikhil's work into the official
     documentation and it's maintained there henceforth.
-

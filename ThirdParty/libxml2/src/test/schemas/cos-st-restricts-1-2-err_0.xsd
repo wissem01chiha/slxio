@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://FOO" xmlns:foo="http://FOO">
 
 	<element name="foo" type="foo:type.A"/>
@@ -7,24 +7,24 @@
 	<simpleType name="type.A">
 		<restriction>
 			<simpleType>
-				<list itemType="integer"/>			
+				<list itemType="integer"/>
 			</simpleType>
 			<length value="3"/>
 		</restriction>
 	</simpleType>
 
 	<!--restriction base="foo:type.base.A">
-			
+
 	</restriction-->
 
 	<simpleType name="type.base.A">
 		<restriction>
 			<simpleType>
-				<list itemType="integer"/>				
+				<list itemType="integer"/>
 			</simpleType>
 		</restriction>
 	</simpleType>
 
-	
+
 
 </schema>

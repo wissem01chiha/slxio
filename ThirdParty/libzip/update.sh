@@ -26,5 +26,5 @@ files=(
     "src/zipcmp.c"
     "src/zipmerge.c"
     "src/ziptool.c"
-    
+
 )

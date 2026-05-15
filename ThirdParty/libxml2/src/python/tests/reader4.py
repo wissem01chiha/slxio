@@ -28,7 +28,7 @@ def tst_reader(s):
                 res = res + "-- %s (%s) [%s]\n" % (reader.NodeType(),
 						   reader.Name(),reader.Value())
     return res
-    
+
 expect="""1 (test) [None] 0
 1 (b) [None] 1
 1 (c) [None] 1

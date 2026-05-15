@@ -7,8 +7,8 @@
 	<xsd:element name="foo">
 		<xsd:complexType>
 			<xsd:sequence>
-				<xsd:element ref="foo:bar"/>				
-			</xsd:sequence>	
+				<xsd:element ref="foo:bar"/>
+			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 </xsd:schema>

@@ -142,4 +142,3 @@ API
     This function is not implemented on Unix, where it returns ``UV_ENOTSUP``.
 
     .. versionadded:: 1.33.0
-

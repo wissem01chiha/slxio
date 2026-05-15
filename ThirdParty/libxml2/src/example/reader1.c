@@ -32,7 +32,7 @@ processNode(xmlTextReaderPtr reader) {
 
     value = xmlTextReaderConstValue(reader);
 
-    printf("%d %d %s %d %d", 
+    printf("%d %d %s %d %d",
 	    xmlTextReaderDepth(reader),
 	    xmlTextReaderNodeType(reader),
 	    name,

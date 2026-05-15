@@ -667,7 +667,7 @@ libxml_xmlValidCtxtPtrWrap(xmlValidCtxtPtr valid)
 		return (Py_None);
 	}
 
-	ret = 
+	ret =
 		PyCapsule_New((void *) valid,
 									 (char *) "xmlValidCtxtPtr", NULL);
 
@@ -841,7 +841,7 @@ libxml_xmlSchemaParserCtxtPtrWrap(xmlSchemaParserCtxtPtr ctxt)
 		Py_INCREF(Py_None);
 		return (Py_None);
 	}
-	ret = 
+	ret =
 		PyCapsule_New((void *) ctxt,
 									 (char *) "xmlSchemaParserCtxtPtr", NULL);
 
@@ -852,13 +852,13 @@ PyObject *
 libxml_xmlSchemaValidCtxtPtrWrap(xmlSchemaValidCtxtPtr valid)
 {
 	PyObject *ret;
-	
+
 	if (valid == NULL) {
 		Py_INCREF(Py_None);
 		return (Py_None);
 	}
 
-	ret = 
+	ret =
 		PyCapsule_New((void *) valid,
 									 (char *) "xmlSchemaValidCtxtPtr", NULL);
 

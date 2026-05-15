@@ -17,4 +17,3 @@ ThirdParty/libzip/src/*** linguist-vendored
 ThirdParty/libzip/src/*.c linguist-vendored
 ThirdParty/libzip/src/*.h linguist-vendored
 IO/Slx/Testing/Data/*** linguist-vendored
-

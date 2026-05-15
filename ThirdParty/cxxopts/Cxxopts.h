@@ -8,6 +8,6 @@
 #include <cxxopts.hpp>
 #else
 #include <src/include/cxxopts.hpp>
-#endif 
+#endif
 
 #endif // CXXOPTS_H

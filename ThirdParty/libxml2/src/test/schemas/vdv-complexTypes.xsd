@@ -19,7 +19,7 @@
 													</xs:extension>
 									</xs:complexContent>
 		</xs:complexType>
-	
+
 	<xs:complexType name="personType">
 					<xs:complexContent>
 									<xs:extension base="elementWithID">
@@ -32,6 +32,6 @@
 									</xs:extension>
 					</xs:complexContent>
 		</xs:complexType>
-		
-	
+
+
 </xs:schema>

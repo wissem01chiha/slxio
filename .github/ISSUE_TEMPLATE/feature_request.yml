@@ -7,8 +7,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this feature request! 
-        Please make sure this feature request hasn't been already submitted by someone by looking through other open/closed issues. 
+        Thanks for taking the time to fill out this feature request!
+        Please make sure this feature request hasn't been already submitted by someone by looking through other open/closed issues.
 
   - type: dropdown
     attributes:

@@ -37,4 +37,3 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
                              '[Content_Types].xml',
                              'xl/_rels/workbook.xml.rels']
         self.run_exe_test('test_array_formula04')
-

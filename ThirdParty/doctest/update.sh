@@ -13,8 +13,8 @@ files=(
     "doctest/extensions/doctest_util.h"
     "doctest/extensions/mpi_reporter.h"
     "doctest/extensions/mpi_sub_comm.h"
-    "doctest/doctest.cpp" 
+    "doctest/doctest.cpp"
     "doctest/parts/doctest_fwd.h"
-    "LICENSE.txt" 
+    "LICENSE.txt"
     "README.md"
 )

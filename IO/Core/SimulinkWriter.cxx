@@ -23,5 +23,3 @@ Logger& SimulinkWriter::GetLogger()
 
 SLXIO_NAMESPACE_END
 SLXIO_ABI_NAMESPACE_END
-
-

@@ -303,14 +303,14 @@ static inline int _json_object_put_maybe_free(struct json_object *jso, int free_
 
 	switch (jso->o_type)
 	{
-	case json_type_object: 
+	case json_type_object:
 		if (free_containers || lh_table_length(JC_OBJECT(jso)->c_object) == 0)
 		{
 			json_object_object_delete(jso);
 			break;
 		}
 		return 1;
-	case json_type_array: 
+	case json_type_array:
 		// container objects are handled by the caller
 		if (free_containers || array_list_length(JC_ARRAY(jso)->c_array) == 0)
 		{
@@ -377,7 +377,7 @@ int json_object_put(struct json_object *jso)
 			// and we "recurse" into it.
 			switch (jso->o_type)
 			{
-			case json_type_object: 
+			case json_type_object:
 				child = (json_object *)lh_entry_v(cur_entry);
 				// We're going to free child, so detach it from the entry
 				lh_entry_set_val(cur_entry, NULL);
@@ -402,7 +402,7 @@ int json_object_put(struct json_object *jso)
 					cur_entry = cur_entry->prev;
 				continue;
 			}
-			// _ref_count == 0 now, and _user_delete has been called so we can re-use _userdata 
+			// _ref_count == 0 now, and _user_delete has been called so we can re-use _userdata
 			child->_delete_parent = jso;  // aka _userdata
 			child->_user_delete = NULL;   // make sure it's not called again
 
@@ -418,7 +418,7 @@ int json_object_put(struct json_object *jso)
 			{
 				array_list_del_idx(JC_ARRAY(jso)->c_array, cur_slot, total_slots - cur_slot);
 			}
-			// Iterate down through the child, it will be freed once all 
+			// Iterate down through the child, it will be freed once all
 			// of *its* children are freed
 			jso = child;
 			retry_main_loop = 1;

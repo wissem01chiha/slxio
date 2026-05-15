@@ -37,14 +37,14 @@ valid="""<?xml version="1.0" encoding="iso-8859-1"?>
 	<FirstName>Raymond</FirstName>
 	<MiddleInitial>G</MiddleInitial>
 	<LastName>Bayliss</LastName>
-</Customer>	
+</Customer>
 """
 
 invalid="""<?xml version="1.0" encoding="iso-8859-1"?>
 <Customer customerID = "24332">
 	<MiddleInitial>G</MiddleInitial>
 	<LastName>Bayliss</LastName>
-</Customer>	
+</Customer>
 """
 
 e = ErrorHandler()
@@ -80,4 +80,3 @@ if libxml2.debugMemory(1) == 0:
     print("OK")
 else:
     print("Memory leak %d bytes" % (libxml2.debugMemory(1)))
-

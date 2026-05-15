@@ -2,4 +2,3 @@
 <!ENTITY%percent;def "ghi">
 <!ENTITY abc "%def;">
 <!ELEMENT root (#PCDATA)>
-

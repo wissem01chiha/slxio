@@ -33,4 +33,3 @@ void forceScilabLines(int nbRows, int nbCols);
 
 #endif /* __GUIMANAGEMENT_H__ */
 /*--------------------------------------------------------------------------*/
-

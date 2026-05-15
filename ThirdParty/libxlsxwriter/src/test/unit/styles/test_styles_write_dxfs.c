@@ -27,4 +27,3 @@ CTEST(styles, write_dxfs) {
 
     lxw_styles_free(styles);
 }
-

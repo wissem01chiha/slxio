@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief HTML documents
- * 
+ *
  * This modules implements functions to work with HTML documents,
  * most of them related to serialization.
  *
@@ -120,4 +120,3 @@ XMLPUBFUN int
 #endif /* LIBXML_HTML_ENABLED */
 
 #endif /* __HTML_TREE_H__ */
-

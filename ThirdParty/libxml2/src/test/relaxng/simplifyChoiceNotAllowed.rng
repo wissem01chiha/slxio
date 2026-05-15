@@ -5,7 +5,7 @@
         <element name="_">
         <element>
             <name>entryWithoutRef</name>
-            <oneOrMore>               
+            <oneOrMore>
                 <choice>
                     <element>
                         <name>form</name>

@@ -2928,4 +2928,3 @@ xmlCleanupOutputCallbacks(void)
     xmlOutputCallbackNr = 0;
 }
 #endif /* LIBXML_OUTPUT_ENABLED */
-

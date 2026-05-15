@@ -11,31 +11,31 @@ SPDX_COPYRIGHT_TEXT
 SPDX_CUSTOM_LICENSE_FILE
 SPDX_CUSTOM_LICENSE_NAME
 LICENSE_FILES
-DESCRIPTION  
+DESCRIPTION
   Core Common Module
-VERSION 
-  0.1.0 
-MAINTAINER 
-  Wissem CHIHA
-ENABLE_BUILD 
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem Chiha
+ENABLE_BUILD
   TRUE
 ENABLE_SOURCE_TARGETS
   FALSE
 INCLUDE_IN_GROUP
   TRUE
 ENABLE_TEST
-  TRUE 
+  TRUE
 ENABLE_COVERAGE
   TRUE
-INSTALL_HEADERS 
-  TRUE 
-INSTALL_TARGETS 
-  TRUE 
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
 INSTALL_LICENSES
   TRUE
 CLASSES
-  Version
   Timer
+  Version
   Logger
 WINDOWS_CLASSES
 UNIX_CLASSES
@@ -47,16 +47,18 @@ UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
-  ABINamespace.h
-  APIExportMacro.h
-  Compiler.h 
-  ErrorTypes.h 
-  PlatformTypes.h
-  Logger.h
-  Version.h 
-  VersionMacro.h
-  Timer.h
+  AbiNamespaceMacro.h
+  ApiExportMacro.h
+  Compiler.h
+  ErrorCode.
   ErrorHandlingApi.h
+  ErrorMap.h
+  Logger.h
+  PlatformTypes.h
+  SimulinkVersion.h
+  Timer.h
+  Version.h
+  VersionMacro.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -79,8 +81,5 @@ WINDOWS_COMPILE_FLAGS
 UNIX_COMPILE_FLAGS
 MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
-TEST_DEPENDS 
+TEST_DEPENDS
   ThirdParty::doctest
-  ThirdParty::libzip
- 
-

@@ -1,6 +1,5 @@
 #include "Logger.h"
 #include "Compiler.h"
-#include "Config.h"
 #include "ErrorCode.h"
 #include "Libuv.h"
 #include <fstream>
@@ -11,7 +10,7 @@
 #include "Slog.h"
 #elif SLXIO_LOGURU
 #include "Loguru.h"
-#endif
+#endif // SLXIO_SLOG
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -255,6 +254,7 @@ std::string Logger::FormatLogEntry(
   return oss.str();
 }
 
+#if SLXIO_SLOG
 int Logger::ToSlogLevel(Logger::MessageLevelType level)
 {
   int slogLevel;
@@ -284,9 +284,12 @@ int Logger::ToSlogLevel(Logger::MessageLevelType level)
   }
   return slogLevel;
 };
+#endif // SLXIO_SLOG
 
 #if SLXIO_LOGURU
-loguru::Verbosity ToLoguruLevel(Logger::MessageLevelType level) {};
+int Logger::ToLoguruLevel(Logger::MessageLevelType level) {
+  return 0;
+};
 #endif // SLXIO_LOGURU
 
 SLXIO_ABI_NAMESPACE_END

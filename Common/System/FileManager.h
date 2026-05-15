@@ -7,120 +7,85 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include "AbiNamespaceMacro.h"
-#include <list>
 #include <string>
 #include <memory>
 #include <vector>
 
 class File;
+class Directory;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class FileManager 
- * @brief A singleton class for managing multiple files 
+ * @class FileManager
+ * A singleton class for managing multiple files.
  */
 class SLXIO_APIEXPORT FileManager final
 {
 public:
-  /**
-   * Default Construtor
-   */
+  /** Default constructor. */
   FileManager();
 
-  /**
-   * Default Destructor
-   */
+  /** Default destructor. */
   ~FileManager() = default;
 
-  /**
-   * Copy Constructor 
-   */
+  /** Deleted copy constructor. */
   FileManager(const FileManager&) = delete;
 
-  /**
-   * Copy Operator 
-   */
+  /** Deleted copy assignment operator. */
   FileManager& operator=(const FileManager&) = delete;
 
-  /**
-   * Move Constructor
-   */
+  /** Deleted move constructor. */
   FileManager(FileManager&& other) = delete;
 
-  /**
-   * Move Operator 
-   */
+  /** Deleted move assignment operator. */
   FileManager& operator=(FileManager&& other) = delete;
 
-  FileManager(std::vector<File*> files);
-  FileManager(std::list<File*> files);
-
+  /** Construct a FileManager with an initial set of files. */
   FileManager(std::vector<std::shared_ptr<File>> files);
 
-  /**
-   * 
-   */
-  IdType GetFileId(const std::string& filename);
+  /** Get the unique ID of a file by its name. */
+  IdType GetFileId(const std::string& filename) const;
 
-  /**
-   * 
-   */
-  IdType GetFileMaxId();
+  /** Get the maximum file ID currently in use. */
+  IdType GetFileMaxId() const;
 
-
-
-  /**
-   * 
-   */
+  /** Find the first available free file ID. */
   IdType GetFirstFreeFileId();
 
-  /**
-   * 
-   */
-  File* GetFile(IdType _iID);
+  /** Retrieve a file by its Id. */
+  std::shared_ptr<File> GetFile(IdType id) const;
 
-  /**
-   * 
-   */
-  IdType GetCurrentFile();
+  /** Get the Id of the current active file. */
+  IdType GetCurrentFileId();
 
-  /**
-   * 
-   */
+  /** Check if a file with the given name is opened. */
   bool IsOpened(const std::string& filename);
 
-  /**
-   * 
-   */
-  ReturnType Add(File* _file);
+  /** Add a new file to the manager. */
+  ReturnType Add(std::shared_ptr<File> file);
 
-  /**
-   * 
-   */
-  ReturnType Remove(IdType _iID);
+  /** Remove a file by its ID. */
+  ReturnType Remove(const IdType id);
 
-  /**
-   * 
-   */
+  /** Clear all managed files. */
   ReturnType Clear();
 
+  /** Get the number of currently opened files. */
   UInt32 GetOpenedCount();
-  wchar_t** GetTypesAsString();
-  wchar_t** GetFilenames();
-  Float32* GetModes();
-  std::vector<Float32> GetSwaps();
 
-  /**
-   * 
-   */
-  IdType* GetFileIds();
+  /** Get the names of all managed files. */
+  std::vector<std::string> GetFileNames();
+
+  /** Get the modes of all managed files. */
+  Float32 GetFileModes() const;
+
+  /** Get the IDs of all managed files. */
+  std::vector<IdType> GetFileIds() const;
 
 private:
-  typedef std::vector<File*> vectFile;
-  static vectFile fileList;
-  static UInt32 file;
+  std::vector<std::shared_ptr<File>> InternalFileBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -22,122 +22,91 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT File final
 {
 public:
-  /**
-   * File access modes.
-   */
-  enum Mode
-  {
-    TRUNCATE,
-    APPEND,
-    READ,
-    WRITE
-  };
+  /** File access modes. */
+  enum class Mode { Read, Write, Append, Truncate };
 
-  /** Default constructor. */
-  File() = default;
+  /** Construct a File with path and mode. */
+  File(const std::string& path, Mode mode);
 
-  /** Construct a File object from a path string */
-  File(const std::string& path);
+  /** Construct a File with path only. */
+  explicit File(const std::string& path);
 
-  /** Construct a File object from a C‑string path. */
-  File(const char* path);
-
-  /** Copy constructor. */
-  File(const File& other);
-
-  /** Copy assignment operator. */
-  File& operator=(const File& other) noexcept;
-
-  /** Move constructor. */
-  File(File&& other) noexcept;
-
-  /** Move assignment operator. */
-  File& operator=(File&& other) noexcept;
-
-  /** Check if the given path is an existing file. */
-  static bool IsFile(const char* path);
-
-  /** Check if the given path is an existing file. */
-  static bool IsFile(const std::string& path);
-
-  /** Member function version of IsFile. */
-  bool IsFile();
-
-  /** Const member function version of IsFile. */
-  bool IsFile() const;
-
-  /** Open the file with the initialized mode. */
+  /** Open the file. */
   ReturnType Open();
 
-  /** Read data from the file into the internal buffer. */
-  ReturnType Read();
-
-  /** Write data to the file. */
-  ReturnType Write(const char* message);
-
-  /** Close the file descriptor. */
+  /** Close the file. */
   ReturnType Close();
 
-  /** Copy the current file content to another file. */
-  ReturnType Copy(File& otherFile);
+  /** Read data from the file. */
+  ReturnType Read();
 
-  /** Copy the current file content to another directory. */
-  ReturnType Copy(const char* destDir);
+  /** Check if a path exists as a file. */
+  static bool Exist(const std::string& path);
 
-  /** Rename the file. */
-  ReturnType Rename(const char* filename);
+  /** Check if file is empty. */
+  bool Empty() const;
 
-  /** Get the filename component of the path. */
-  const std::string GetFileName();
+  /** Get full file path. */
+  std::string GetFilePath() const;
 
-  /** Get the full file path. */
-  const std::string& GetFilePath() const;
+  /** Get filename from path. */
+  const std::string GetFileName() const;
 
-  /** Get the file access mode as an integer (fcntl.h style). */
+  /** Check if current file exists. */
+  bool Exist() const;
+
+  /** Write string data to file. */
+  ReturnType Write(const char* message);
+
+  /** Write vector of strings to file. */
+  ReturnType Write(std::vector<std::string>& message);
+
+  /** Copy file to a directory. */
+  ReturnType Copy(const Directory& directory);
+
+  /** Rename the file. if not opened */
+  ReturnType Rename(const std::string& filename);
+
+  /** Get file mode flags. */
   const int GetFileMode();
 
-  /** Check if the end of file has been reached. */
-  bool Eof() const;
+  /** Set file mode. */
+  void SetFileMode(const File::Mode mode);
 
-  /** Get the internal data buffer. */
-  std::vector<char> GetInternalBuffer();
+  /** Move file to a directory. */
+  ReturnType Move(const Directory& directory);
 
-  /** Get the number of bytes read or written. */
-  size_t GetNumberOfBytes() const;
+  /** Delete the file from disk */
+  ReturnType Delete();
 
-  /** Move the file to another directory. */
-  UInt32 Move(const char* dirPath);
+  /** Get parent directory object. */
+  Directory GetFileDirectory() const;
 
-  /** Get the parent directory path. */
-  std::string GetFileDirectory();
+  /** Get the file internal buffer, after reading the file */
+  std::vector<char> GetInternalBuffer() const;
 
-  /** Get the file extension. */
-  const char* GetFileExtension() const;
+  /** Check Whatever the file is still open or not */
+  bool IsOpened() const;
 
-  /** Set the file extension. */
-  UInt32 SetFileExtension(const char* ext);
-
-  /** Extract the current file if it is a ZIP archive. */
-  UInt32 Unzip(const char* dir);
-
-  /** Replace the current file in a compressed ZIP archive. */
-  UInt32 Zip(const char* file, const char* entryName);
-
-  /** Retrieve the size of the current file on disk. */
-  size_t Size() const;
+  /** Get file size on disk. */
+  UInt32 Size() const;
 
   /** Destructor. */
   ~File() = default;
 
+  /** Default Constructor */
+  File() = default;
+
 private:
   std::string FilePath;
-  Mode FileMode;
-  int FileDescriptor;
+  Mode InternalFileMode;
+  int FileDescriptor = -1;
   std::vector<char> InternalBuffer;
-  size_t NumberOfBytes = 0;
+  UInt32 NumberOfBytes = 0;
+  UInt32 CachedSize;
 };
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
 
-#endif /* FILE_H */
+#endif // FILE_H

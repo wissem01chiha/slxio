@@ -2,9 +2,9 @@
 <test xmlns:xi="http://www.w3.org/2001/XInclude">
     <t1 xmlns:xi="http://www.w3.org/2001/XInclude" xml:base="../ents/coalesce1.xml">
     start
-    
+
     start
-    
+
     end
 </t1>
 </test>

@@ -16,5 +16,3 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
 
     def test_panes01(self):
         self.run_exe_test('test_panes01')
-
-

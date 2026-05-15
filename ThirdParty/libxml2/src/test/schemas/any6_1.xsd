@@ -2,7 +2,7 @@
 <!--
 Content model error:
 
-any-err-not-determinist-1.xsd:29: element complexType: Schemas parser error : 
+any-err-not-determinist-1.xsd:29: element complexType: Schemas parser error :
 local complex type: The content model is not determinist.
 
 As per Xerces and XSV this schema is OK.

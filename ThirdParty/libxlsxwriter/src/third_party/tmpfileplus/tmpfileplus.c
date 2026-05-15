@@ -338,5 +338,3 @@ FILE *tmpfileplus_f(const char *dir, const char *prefix, char *pathnamebuf, size
 
 	return fp;
 }
-
-

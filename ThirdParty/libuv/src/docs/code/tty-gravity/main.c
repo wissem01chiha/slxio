@@ -34,7 +34,7 @@ int main() {
 
     uv_tty_init(loop, &tty, STDOUT_FILENO, 0);
     uv_tty_set_mode(&tty, 0);
-    
+
     if (uv_tty_get_winsize(&tty, &width, &height)) {
         fprintf(stderr, "Could not get TTY information\n");
         uv_tty_reset_mode();

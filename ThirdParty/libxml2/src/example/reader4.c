@@ -33,13 +33,13 @@ static void processDoc(xmlTextReaderPtr readerPtr) {
      */
     docPtr = xmlTextReaderCurrentDoc(readerPtr);
     if (NULL == docPtr) {
-      fprintf(stderr, "failed to obtain document\n");      
+      fprintf(stderr, "failed to obtain document\n");
       return;
     }
-      
+
     URL = docPtr->URL;
     if (NULL == URL) {
-      fprintf(stderr, "Failed to obtain URL\n");      
+      fprintf(stderr, "Failed to obtain URL\n");
     }
 
     if (ret != 0) {
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
      */
     readerPtr = xmlReaderForFile(argv[1], NULL, 0);
     if (NULL == readerPtr) {
-      fprintf(stderr, "%s: failed to create reader\n", argv[1]);      
+      fprintf(stderr, "%s: failed to create reader\n", argv[1]);
       return(1);
     }
     processDoc(readerPtr);
@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
     for (i=2; i < argc; ++i) {
       	xmlReaderNewFile(readerPtr, argv[i], NULL, 0);
 	if (NULL == readerPtr) {
-	  fprintf(stderr, "%s: failed to create reader\n", argv[i]);      
+	  fprintf(stderr, "%s: failed to create reader\n", argv[i]);
 	  return(1);
 	}
         processDoc(readerPtr);

@@ -134,5 +134,3 @@ CTEST(worksheet, worksheet03) {
     lxw_sst_free(worksheet->sst);
     lxw_worksheet_free(worksheet);
 }
-
-

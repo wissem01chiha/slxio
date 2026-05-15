@@ -14,7 +14,7 @@ CAVEATS
       to be invoked before the corresponding content callback,
       because the underlying reader interface parses
       data by chunks of 512 bytes
-    
+
 TODO
     - search for TODO
     - some ErrorHandler events (warning)
@@ -189,7 +189,7 @@ class LibXml2Reader(xmlreader.XMLReader):
                 # get node type
                 nodeType = reader.NodeType()
                 # Element
-                if nodeType == 1: 
+                if nodeType == 1:
                     if self.__ns:
                         eltName = (_d(reader.NamespaceUri()),\
                                    _d(reader.LocalName()))
@@ -216,7 +216,7 @@ class LibXml2Reader(xmlreader.XMLReader):
                             attrs[attName] = value
                         reader.MoveToElement()
                         self._cont_handler.startElementNS( \
-                            eltName,eltQName,attributesNSImpl) 
+                            eltName,eltQName,attributesNSImpl)
                         if reader.IsEmptyElement():
                             self._cont_handler.endElementNS(eltName,eltQName)
                             for newPrefix in newPrefixes:
@@ -235,7 +235,7 @@ class LibXml2Reader(xmlreader.XMLReader):
                         if reader.IsEmptyElement():
                             self._cont_handler.endElement(eltName)
                 # EndElement
-                elif nodeType == 15: 
+                elif nodeType == 15:
                     if self.__ns:
                         self._cont_handler.endElementNS( \
                              (_d(reader.NamespaceUri()),_d(reader.LocalName())),
@@ -245,10 +245,10 @@ class LibXml2Reader(xmlreader.XMLReader):
                     else:
                         self._cont_handler.endElement(_d(reader.Name()))
                 # Text
-                elif nodeType == 3: 
+                elif nodeType == 3:
                     self._cont_handler.characters(_d(reader.Value()))
                 # Whitespace
-                elif nodeType == 13: 
+                elif nodeType == 13:
                     self._cont_handler.ignorableWhitespace(_d(reader.Value()))
                 # SignificantWhitespace
                 elif nodeType == 14:
@@ -270,7 +270,7 @@ class LibXml2Reader(xmlreader.XMLReader):
                     if not self.__lex_handler is None:
                         self.endEntity(_d(reader.Name()))
                 # ProcessingInstruction
-                elif nodeType == 7: 
+                elif nodeType == 7:
                     self._cont_handler.processingInstruction( \
                         _d(reader.Name()),_d(reader.Value()))
                 # Comment
@@ -292,10 +292,10 @@ class LibXml2Reader(xmlreader.XMLReader):
                 elif nodeType == 12:
                     pass # TODO
                 # Attribute (never in this loop)
-                #elif nodeType == 2: 
+                #elif nodeType == 2:
                 #    pass
                 # Document (not exposed)
-                #elif nodeType == 9: 
+                #elif nodeType == 9:
                 #    pass
                 # DocumentFragment (never returned by XmlReader)
                 #elif nodeType == 11:
@@ -365,7 +365,7 @@ class LibXml2Reader(xmlreader.XMLReader):
             raise SAXNotRecognizedException("Property '%s' not recognized" % \
                                             name)
 
-    def setProperty(self, name, value):     
+    def setProperty(self, name, value):
         if name == property_lexical_handler:
             self.__lex_handler = value
         elif name == property_declaration_handler:
@@ -379,4 +379,3 @@ class LibXml2Reader(xmlreader.XMLReader):
 
 def create_parser():
     return LibXml2Reader()
-

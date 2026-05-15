@@ -1,34 +1,47 @@
 #include "FileManager.h"
 #include "ErrorCode.h"
+#include "Directory.h"
 #include "File.h"
 
-IdType FileManager::GetFileId(const std::string& filename)
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+FileManager::FileManager() {
+  InternalFileBuffer.clear();
+}
+
+FileManager::FileManager(std::vector<std::shared_ptr<File>> files) {
+  InternalFileBuffer =files;
+}
+
+
+IdType FileManager::GetFileId(const std::string& filename) const
 {
-  for (UInt32 i = 0; i < GetFileMaxId(); i++)
+  for (UInt32 i = 0; i <= GetFileMaxId(); i++)
   {
-    // if (fileList[i] != nullptr && fileList[i]->GetFilename() ==
-    // filename)
-    //{
-    //  return i;
-    //}
+     if (InternalFileBuffer[i] != nullptr && InternalFileBuffer[i]->GetFileName() ==
+        filename)
+        {
+           return i;
+         }
   }
   return (IdType)-1;
 }
 
-IdType FileManager::GetFileMaxId()
+IdType FileManager::GetFileMaxId() const
 {
-  return SLXIO_TYPE_CAST(IdType, fileList.size());
+  return SLXIO_TYPE_CAST(IdType, InternalFileBuffer.size());
 }
 
 bool FileManager::IsOpened(const std::string& filename)
 {
-  for (UInt32 i = 0; i < GetFileMaxId(); i++)
+  for (UInt32 i = 0; i <= GetFileMaxId(); i++)
   {
-    //     if (fileList[i] != nullptr && fileList[i]->getFilename() ==
-    //     _stFilename)
-    //     {
-    //       return true;
-    //     }
+        if (InternalFileBuffer[i] != nullptr && InternalFileBuffer[i]->GetFileName() ==
+        filename)
+        {
+           return true;
+         }
   }
   return false;
 }
@@ -80,6 +93,8 @@ bool FileManager::IsOpened(const std::string& filename)
 //   file = iNewId;
 //   return iNewId;
 // }
+
+
 
 IdType FileManager::GetFirstFreeFileId()
 {

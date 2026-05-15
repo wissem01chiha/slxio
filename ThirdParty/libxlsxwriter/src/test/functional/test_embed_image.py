@@ -65,4 +65,3 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
 
     def test_embed_image52(self):
         self.run_exe_test('test_embed_image52', 'embed_image08.xlsx')
-

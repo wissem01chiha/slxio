@@ -7,7 +7,7 @@ SAX.characters(¡, 2)
 SAX.characters(
     This is a space , 21)
 SAX.characters( , 1)
-SAX.characters( 
+SAX.characters(
 , 2)
 SAX.endElementNs(EXAMPLE, NULL, NULL)
 SAX.endDocument()

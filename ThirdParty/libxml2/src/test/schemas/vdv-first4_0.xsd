@@ -45,7 +45,7 @@
   <xs:element name="born" type="date"/>
   <xs:element name="dead" type="date"/>
   <xs:element name="isbn" type="isbn"/>
-  
+
   <xs:attribute name="id" type="xs:ID"/>
   <xs:attribute name="available" type="xs:boolean"/>
   <xs:attribute name="lang" type="supportedLanguages"/>
@@ -67,7 +67,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  
+
   <xs:complexType name="personType">
     <xs:complexContent>
       <xs:extension base="elementWithID">
@@ -80,7 +80,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-    
+
   <xs:element name="title">
     <xs:complexType>
       <xs:simpleContent>
@@ -90,7 +90,7 @@
       </xs:simpleContent>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="library">
     <xs:complexType>
       <xs:sequence>
@@ -98,7 +98,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  
+
   <xs:element name="book">
     <xs:complexType>
       <xs:complexContent>
@@ -130,8 +130,8 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
-  
+
+
   <xs:element name="character">
     <xs:complexType>
       <xs:complexContent>
@@ -146,5 +146,5 @@
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  
+
 </xs:schema>

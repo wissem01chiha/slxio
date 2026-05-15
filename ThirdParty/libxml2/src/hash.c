@@ -1294,4 +1294,3 @@ xmlHashRemoveEntry3(xmlHashTable *hash, const xmlChar *key,
 
     return(0);
 }
-

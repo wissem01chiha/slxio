@@ -42,4 +42,3 @@ def setup(app):
     app.add_role('man', man_role)
     app.add_config_value('man_url_regex', None, 'env')
     return
-

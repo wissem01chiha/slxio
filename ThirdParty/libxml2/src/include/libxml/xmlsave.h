@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief XML/HTML serializer
- * 
+ *
  * API to save documents or subtrees of documents.
  *
  * @copyright See Copyright for the status of this software.
@@ -152,5 +152,3 @@ XMLPUBFUN int
 
 #endif /* LIBXML_OUTPUT_ENABLED */
 #endif /* __XML_XMLSAVE_H__ */
-
-

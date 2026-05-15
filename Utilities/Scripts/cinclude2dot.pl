@@ -44,7 +44,7 @@ Command line options are:
 END
 	exit 0;
 }
- 
+
 ##########################################################################
 # Version history:
 #
@@ -63,7 +63,7 @@ END
 
 ##########################################################################
 # Ideas for improvements:
-# 
+#
 # - Change the %links hash to store a count, and weigh the link by how often
 #   there was an include along that link.  Thicker lines mean stronger
 #   connections.
@@ -124,7 +124,7 @@ sub tidypath {
 
 ##########################################################################
 # Searches file include path, and returns exact filename of file
-# Parameters: 
+# Parameters:
 # 	$inc - text from within the #include statement
 #   $file - filename the include was from
 sub include_search {
@@ -163,12 +163,12 @@ sub file_display {
 	$_ = basename($_) unless $paths;
 	if ($merge eq "module")
 	{
-        s/\.c$//; 
-        s/\.cc$//; 
+        s/\.c$//;
+        s/\.cc$//;
         s/\.cxx$//;
         s/\.cpp$//;
-        s/\.C$//; 
-		s/\.h$//; 
+        s/\.C$//;
+		s/\.h$//;
         s/\.hpp$//;
         s/\.hxx$//;
 	}
@@ -202,7 +202,7 @@ my $file;
 foreach $file (@files)
 {
   next if ($exclude ne "" and $file =~ m/$exclude/);
-	
+
   chomp $file;
   #strip "./" off off $file
   $file =~ s#^./##g;
@@ -213,9 +213,9 @@ foreach $file (@files)
   {
 #    if ($line =~ m#^\#\s*include\s(\S+)#)
     my $regexp_include_line = '^\#\s*include\s+(\S+)';
-    if ($quotetypes eq "angle") 
+    if ($quotetypes eq "angle")
         { $regexp_include_line = '^\#\s*include\s+<(\S+)>'; }
-    elsif ($quotetypes eq "quote") 
+    elsif ($quotetypes eq "quote")
         { $regexp_include_line = '^\#\s*include\s+"(\S+)"'; }
     if ($line =~ m/$regexp_include_line/)
     {
@@ -264,7 +264,7 @@ END
 		  {
 		      $links{"	\"$file_display\" -> \"$includefile_display\"\n"} = 1;
 		  }
-       }	
+       }
     }
   }
 

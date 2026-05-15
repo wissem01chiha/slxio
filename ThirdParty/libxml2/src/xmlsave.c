@@ -2678,4 +2678,3 @@ xmlSaveFile(const char *filename, xmlDoc *cur) {
 }
 
 #endif /* LIBXML_OUTPUT_ENABLED */
-

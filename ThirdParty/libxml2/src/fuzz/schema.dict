@@ -52,4 +52,3 @@ xs_white_space_collapse="<xs:whiteSpace value='collapse'/>"
 xs_white_space_preserve="<xs:whiteSpace value='preserve'/>"
 xs_white_space_replace="<xs:whiteSpace value='replace'/>"
 xs_pattern="<xs:pattern value='a'/>"
-

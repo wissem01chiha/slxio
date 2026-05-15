@@ -10,14 +10,14 @@
 	<xsd:attribute name="bar" type="barType" fixed="o"/>
 
 	<xsd:element name="bar.B" type="xsd:anyURI" block="#all" nillable="true" final="restriction extension"/>
-	
+
 	<xsd:element name="bar">
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element name="bar.A" block="restriction" form="qualified" nillable="true" />
 				<xsd:element ref="bar.B"/>
 			</xsd:sequence>
-			
+
 			<xsd:attribute ref="bar" xml:lang="DE">
 				<xsd:annotation/>
 			</xsd:attribute>

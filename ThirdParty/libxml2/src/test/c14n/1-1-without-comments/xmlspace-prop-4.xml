@@ -2,7 +2,7 @@
 <!--
 http://www.w3.org/TR/xmldsig2ed-tests/#XMLSPACE
 
-Check that implementations of [XML-C14N1.1] handle xml:space attributes 
+Check that implementations of [XML-C14N1.1] handle xml:space attributes
 as defined in [XML-C14N1.1]
 -->
 <ietf:c14n11XmlSpaceDoc1 xmlns:ietf="http://www.ietf.org" xmlns:w3c="http://www.w3.org">

@@ -136,7 +136,7 @@
       "doc": ["foo", "sil"],
       "patch": [{"op":"add", "path": "/3", "value": "bar"}],
       "error": "index is greater than number of items in array" },
-      
+
     { "comment": "test against implementation-specific numeric parsing",
       "doc": {"1e0": "foo"},
       "patch": [{"op": "test", "path": "/1e0", "value": "foo"}],

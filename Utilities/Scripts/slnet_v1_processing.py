@@ -6,7 +6,7 @@ from pathlib import Path
 import sys
 
 def extract_selected_files(zip_path, dest_dir, archive_prefix=""):
-    target_exts = {".slx", ".sldd"}   
+    target_exts = {".slx", ".sldd"}
     with zipfile.ZipFile(zip_path, "r") as zf:
         for member in zf.namelist():
             ext = Path(member).suffix.lower()
@@ -25,7 +25,7 @@ def extract_selected_files(zip_path, dest_dir, archive_prefix=""):
                 with zf.open(member) as nested_file, open(nested_zip_path, "wb") as f:
                     f.write(nested_file.read())
                 extract_selected_files(nested_zip_path, dest_dir, archive_prefix=Path(zip_path).stem)
-                nested_zip_path.unlink()   
+                nested_zip_path.unlink()
 
 def main():
     if len(sys.argv) < 2:

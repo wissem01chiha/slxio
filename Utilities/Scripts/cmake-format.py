@@ -19,8 +19,8 @@ import os
 import subprocess
 
 def check_cmake_format():
-    result = subprocess.run(['where', 'cmake-format'], 
-                            stdout=subprocess.PIPE, 
+    result = subprocess.run(['where', 'cmake-format'],
+                            stdout=subprocess.PIPE,
                             stderr=subprocess.PIPE)
     if result.returncode != 0:
         print('cmake-format not found')

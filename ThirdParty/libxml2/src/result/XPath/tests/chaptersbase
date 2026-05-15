@@ -73,10 +73,10 @@ Expression: /child::EXAMPLE/child::head/node()
 Object is a Node Set :
 Set contains 3 nodes:
 1  TEXT
-    content=    
+    content=
 2  ELEMENT title
 3  TEXT
-    content=   
+    content=
 
 ========================
 Expression: /descendant::title

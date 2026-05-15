@@ -12,5 +12,5 @@ asserts_used_outside_of_tests.cpp(21): ERROR: CHECK_UNARY_FALSE( true ) is NOT c
   values: CHECK_UNARY_FALSE( true )
 asserts_used_outside_of_tests.cpp(23): ERROR: CHECK( false ) is NOT correct!
   values: CHECK( false )
-hello! 
+hello!
 asserts_used_outside_of_tests.cpp(24): ERROR: an assert dealing with exceptions has failed!

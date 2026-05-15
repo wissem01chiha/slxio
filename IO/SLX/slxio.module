@@ -1,35 +1,35 @@
-NAME 
+NAME
   Slx
 GROUP
   Io
 LIBRARY_NAME
   IoSlx
-DESCRIPTION  
-  SLX IO Module 
-LICENSE   
-  Apache-2.0 
-VERSION 
-  0.1.0 
-MAINTAINER 
-  Wissem CHIHA 
-ENABLE_BUILD 
+DESCRIPTION
+  SLX IO Module
+LICENSE
+  Apache-2.0
+VERSION
+  0.1.0
+MAINTAINER
+  Wissem CHIHA
+ENABLE_BUILD
   FALSE
 EXTERNAL_BUILD
   FALSE
 EXTERNAL_SOURCE_DIR
 ENABLE_TEST
-  TRUE 
-ENABLE_BINDING 
-  TRUE 
+  TRUE
+ENABLE_BINDING
+  TRUE
 ENABLE_DOC
-  FALSE 
-INSTALL_HEADERS 
-  TRUE 
-INSTALL_TARGETS 
-  TRUE 
+  FALSE
+INSTALL_HEADERS
+  TRUE
+INSTALL_TARGETS
+  TRUE
 CLASSES
   SimulinkParameterParser
-  SimulinkArrayParser 
+  SimulinkArrayParser
   SimulinkObjectParser
   SimulinkPortParser
   SimulinkPortTypeParser
@@ -71,10 +71,10 @@ HEADERS
   StateflowBlockParser.h
 CONFIG_HEADERS
 CMAKE_MODULES_DIRS
-PUBLIC_DEPENDS 
+PUBLIC_DEPENDS
   ThirdParty::loguru
   ThirdParty::libxml2
-PRIVATE_DEPENDS 
+PRIVATE_DEPENDS
   Io::Core
   Common::Core
   Simulink::Core
@@ -83,7 +83,6 @@ PRIVATE_DEPENDS
   Simulink::Data
   Simulink::Stateflow
   ThirdParty::libxml2
-TEST_DEPENDS 
+TEST_DEPENDS
   ThirdParty::doctest
- 
 

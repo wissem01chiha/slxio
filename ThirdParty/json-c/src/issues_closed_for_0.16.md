@@ -60,7 +60,7 @@ cat issues.md >> issues_closed_for_0.16.md
 * [Issue #708](https://github.com/json-c/json-c/issues/708) - direct access to elements
 * [Issue #709](https://github.com/json-c/json-c/issues/709) - Include guards not namespaced / build errors for debug.h with openNDS
 * [Issue #710](https://github.com/json-c/json-c/issues/710) - 'file system sandbox blocked mmap()' error on iOS
-* [Issue #711](https://github.com/json-c/json-c/issues/711) - creating a json object 
+* [Issue #711](https://github.com/json-c/json-c/issues/711) - creating a json object
 * [Issue #712](https://github.com/json-c/json-c/issues/712) - building json-c using cmake for ESP32
 * [Issue #713](https://github.com/json-c/json-c/issues/713) - When value converted to char* can not compare it with another value
 * [Issue #714](https://github.com/json-c/json-c/issues/714) - Add AfterCaseLabel to .clang-format

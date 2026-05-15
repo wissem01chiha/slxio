@@ -8,7 +8,7 @@ subtree="$name/src"
 version="3.3.1"
 tag=""
 files=(
-    "include/cxxopts.hpp" 
+    "include/cxxopts.hpp"
     "LICENSE"
     "README.md"
 )

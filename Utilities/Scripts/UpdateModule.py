@@ -9,7 +9,7 @@ List all .c and .cpp files in the given directory.
 :param directory: Path to the directory to search
 :return: List of file paths
 to be refactored to genrte the "Module.txt"
- file later on 
+ file later on
 Example :
  scan --module ThirdParty::zip -r -*/c
 display genela infos

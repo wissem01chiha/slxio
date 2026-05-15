@@ -86,4 +86,3 @@ json_c_visit(stop_array)=0
 flags: 0x0, key: (null), index: -1, value: { "obj1": 123, "obj2": { "subobj1": "aaa", "subobj2": "bbb", "subobj3": [ "elem1", "elem2", true ] }, "obj3": 1.234, "obj4": [ true, false, null ] }
 json_c_visit(err_return)=-1
 ================================
-

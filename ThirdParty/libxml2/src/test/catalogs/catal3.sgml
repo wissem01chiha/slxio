@@ -4,5 +4,3 @@ PUBLIC "-//OASIS//ELEMENTS DocBook XML Information Pool V4.1//EN" "dbpool.mod"
 PUBLIC "-//OASIS//ELEMENTS DocBook XML Document Hierarchy V4.1//EN" "dbhier.mod"PUBLIC "-//OASIS//ENTITIES DocBook XML Additional General Entities V4.1//EN" "dbgenent.mod"
 PUBLIC "-//OASIS//ENTITIES DocBook XML Notations V4.1//EN" "dbnotn.mod"
 PUBLIC "-//OASIS//ENTITIES DocBook XML Character Entities V4.1//EN" "dbcent.mod"
-
-

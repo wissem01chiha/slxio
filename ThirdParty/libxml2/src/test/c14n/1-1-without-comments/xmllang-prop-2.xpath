@@ -1,7 +1,7 @@
-<!-- 
+<!--
 http://www.w3.org/TR/xmldsig2ed-tests/#XMLLANG
 
-Check that implementations of [XML-C14N1.1] handle xml:lang attributes 
+Check that implementations of [XML-C14N1.1] handle xml:lang attributes
 as defined in [XML-C14N1.1]
 -->
 <XPath xmlns:ietf="http://www.ietf.org" >

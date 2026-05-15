@@ -492,4 +492,3 @@ https://github.com/d99kris/rapidcsv
 Keywords
 ========
 c++, c++11, csv parser, comma separated values, single header library.
-

@@ -146,10 +146,10 @@ API
 
     :param flags: Flags that control the behavior of binding the socket.
         ``UV_TCP_IPV6ONLY`` can be contained in `flags` to disable dual-stack
-        support and only use IPv6. 
+        support and only use IPv6.
         ``UV_TCP_REUSEPORT`` can be contained in `flags` to enable the socket option
         `SO_REUSEPORT` with the capability of load balancing that distribute incoming
-        connections across all listening sockets in multiple processes or threads. 
+        connections across all listening sockets in multiple processes or threads.
 
     :returns: 0 on success, or an error code < 0 on failure.
 

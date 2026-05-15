@@ -38,13 +38,13 @@ Getting Help
 If you have questions about using json-c, please start a thread on
 our forums at: https://groups.google.com/forum/#!forum/json-c
 
-If you believe you've discovered a bug, report it at 
+If you believe you've discovered a bug, report it at
 (https://github.com/json-c/json-c/issues).  Please be sure to include
 the version of json-c you're using, the OS you're running on, and any
 other relevant details.  Fully reproducible test cases and/or patches
 to fix problems are greatly appreciated.
 
-Fixes for bugs, or small new features can be directly submitted as a 
+Fixes for bugs, or small new features can be directly submitted as a
 [pull request](https://github.com/json-c/json-c/pulls).  For major new
 features or large changes of any kind, please first start a discussion
 on the [forums](https://groups.google.com/forum/#!forum/json-c).
@@ -387,16 +387,16 @@ The primary type in json-c is json_object.  It describes a reference counted
 tree of json objects which are created by either parsing text with a
 json_tokener (i.e. `json_tokener_parse_ex()`), or by creating
 (with `json_object_new_object()`, `json_object_new_int()`, etc...) and adding
-(with `json_object_object_add()`, `json_object_array_add()`, etc...) them 
+(with `json_object_object_add()`, `json_object_array_add()`, etc...) them
 individually.
 Typically, every object in the tree will have one reference, from its parent.
 When you are done with the tree of objects, you call json_object_put() on just
 the root object to free it, which recurses down through any child objects
 calling json_object_put() on each one of those in turn.
 
-You can get a reference to a single child 
+You can get a reference to a single child
 (`json_object_object_get()` or `json_object_array_get_idx()`)
-and use that object as long as its parent is valid.  
+and use that object as long as its parent is valid.
 If you need a child object to live longer than its parent, you can
 increment the child's refcount (`json_object_get()`) to allow it to survive
 the parent being freed or it being removed from its parent
@@ -407,8 +407,7 @@ that it returns.  It can be allocated (`json_tokener_new()`)
 used one or multiple times (`json_tokener_parse_ex()`, and
 freed (`json_tokener_free()`) while the json_object objects live on.
 
-A json_object tree can be serialized back into a string with 
-`json_object_to_json_string_ext()`.  The string that is returned 
+A json_object tree can be serialized back into a string with
+`json_object_to_json_string_ext()`.  The string that is returned
 is only valid until the next "to_json_string" call on that same object.
 Also, it is freed when the json_object is freed.
-

@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief incomplete XML Schemas structure implementation
- * 
+ *
  * interface to the XML Schemas handling and schema validity
  *              checking, it is incomplete right now.
  *

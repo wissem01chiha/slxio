@@ -5,4 +5,3 @@
 <EXAMPLE prop1="a&amp;b" prop2="&xml;">
   Test of entities in attributes.
 </EXAMPLE>
-

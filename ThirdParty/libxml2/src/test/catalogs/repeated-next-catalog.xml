@@ -7,4 +7,3 @@
   <nextCatalog catalog="./../catalogs/registry.xml"/>
   <nextCatalog catalog="./../catalogs/./registry.xml"/>
 </catalog>
-

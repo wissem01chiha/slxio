@@ -13,7 +13,7 @@
       <ref name="inline"/>
     </element>
   </define>
-  
+
   <define name="inline.class" combine="choice">
     <element name="italic">
       <ref name="inline"/>

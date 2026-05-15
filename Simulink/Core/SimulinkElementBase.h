@@ -42,7 +42,7 @@ public:
   virtual std::string ToString() const = 0;
 
   /**
-   * 
+   *
    */
   virtual bool Contains(const IdType& id) const = 0;
 

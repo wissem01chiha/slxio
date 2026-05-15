@@ -8,27 +8,27 @@
 
 #cmakedefine01 HAVE_LIMITS_H
 
-#cmakedefine01 HAVE_VALUES_H 
+#cmakedefine01 HAVE_VALUES_H
 
 #cmakedefine01 HAVE_STDLIB_H
 
-#cmakedefine01 HAVE_FLOAT_H 
+#cmakedefine01 HAVE_FLOAT_H
 
-#cmakedefine01 HAVE_DIRECT_H 
+#cmakedefine01 HAVE_DIRECT_H
 
 #cmakedefine01 HAVE_UNISTD_H
 
-#cmakedefine01 HAVE_IO_H 
+#cmakedefine01 HAVE_IO_H
 
-#cmakedefine01 HAVE_WINDOWS_H 
+#cmakedefine01 HAVE_WINDOWS_H
 
-#cmakedefine01 HAVE_INTRIN_H 
+#cmakedefine01 HAVE_INTRIN_H
 
 #cmakedefine01 HAVE_SYS_STAT_H
 
-#cmakedefine01 HAVE_SYS_TYPES_H 
+#cmakedefine01 HAVE_SYS_TYPES_H
 
-#cmakedefine01 HAVE_UNISTD_H 
+#cmakedefine01 HAVE_UNISTD_H
 
 #cmakedefine01 HAVE_STDINT_H
 
@@ -96,4 +96,4 @@
 
 #cmakedefine01 USE_EXTERNAL_ZLIB
 
-#endif // CONFIG_H 
+#endif // CONFIG_H

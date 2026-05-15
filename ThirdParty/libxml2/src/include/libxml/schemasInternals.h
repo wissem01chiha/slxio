@@ -1,8 +1,8 @@
 /**
  * @file
- * 
+ *
  * @brief internal interfaces for XML Schemas
- * 
+ *
  * internal interfaces for the XML Schemas handling
  *              and schema validity checking
  *		The Schemas development is a Work In Progress.

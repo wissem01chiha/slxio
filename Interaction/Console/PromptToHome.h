@@ -26,4 +26,3 @@
 CONSOLE_IMPEXP BOOL PromptToHome(void);
 /*--------------------------------------------------------------------------*/
 #endif /*__PROMPTTOHOME_H__ */
-

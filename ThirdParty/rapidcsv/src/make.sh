@@ -100,10 +100,10 @@ if [[ "${SRC}" == "1" ]]; then
     for SRC in examples/*.cpp; do
       DST="${TMPDIR}/$(basename ${SRC})"
       printf "\n\n\n\n\n\n"  > ${DST}         # add 6 blank lines
-      tail -n +8 ${SRC}     >> ${DST}         # skip header (first 7 lines) 
+      tail -n +8 ${SRC}     >> ${DST}         # skip header (first 7 lines)
       head -7 ${SRC}         > ${DST}.header  # store header separately (first 7 lines)
     done
-    
+
     uncrustify -c uncrustify.cfg --replace --no-backup src/rapidcsv.h tests/*.cpp tests/*.h ${TMPDIR}/*.cpp
     if [[ "${?}" != "0" ]]; then
       rm -rf ${TMPDIR}

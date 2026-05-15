@@ -3,7 +3,7 @@
         <bar:Something xml:lang="en-ie">
             xmlns:foo="http://example.org/foo"
              <baz:Something xmlns:baz="http://example.org/baz" xml:lang="en-ie"></baz:Something>
-           
+
         </bar:Something>
-     
+
   </bar:Something>

@@ -58,7 +58,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v6
-    
+
     - name: Install packages
       if: ${{ matrix.packages }}
       run: sudo apt-get update && sudo apt-get install -y ${{ join(matrix.packages, ' ') }}
@@ -74,5 +74,5 @@ jobs:
       run: cmake --build build
 
     - name: Test
-      run: ctest --output-on-failure --max-width 120
+      run: ctest --output-on-failure --max-width 150
       working-directory: build

@@ -47,7 +47,7 @@
       <packagereq type="mandatory">cpio</packagereq>
       <packagereq type="mandatory">e2fsprogs</packagereq>
       <packagereq type="mandatory">ed</packagereq>
-      <packagereq type="mandatory">file</packagereq>     
+      <packagereq type="mandatory">file</packagereq>
       <packagereq type="mandatory">filesystem</packagereq>
       <packagereq type="mandatory">glibc</packagereq>
       <packagereq type="mandatory">grub</packagereq>
@@ -861,7 +861,7 @@
       <groupreq>base-x</groupreq>
     </grouplist>
     <packagelist>
-      <packagereq type="default">openoffice</packagereq> 
+      <packagereq type="default">openoffice</packagereq>
       <packagereq type="default">xpdf</packagereq>
       <packagereq type="optional">MagicPoint</packagereq>
       <packagereq type="optional">abiword</packagereq>
@@ -877,7 +877,7 @@
       <packagereq type="optional">tetex-xdvi</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>mail-server</id>
     <name>Mail Server</name>
@@ -1365,7 +1365,7 @@
       <packagereq type="mandatory">xmlto</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>engineering-and-scientific</id>
     <name>Engineering and Scientific</name>
@@ -1415,7 +1415,7 @@
     </packagelist>
   </group>
 
-   
+
   <group>
     <id>editors</id>
     <name>Editors</name>
@@ -1648,7 +1648,7 @@
       <packagereq type="default">redhat-config-mouse</packagereq>
       <packagereq type="default">redhat-config-rootpassword</packagereq>
       <packagereq type="default">redhat-config-soundcard</packagereq>
-      <packagereq type="default">redhat-config-users</packagereq> 
+      <packagereq type="default">redhat-config-users</packagereq>
       <packagereq type="default">redhat-config-packages</packagereq>
       <packagereq type="default">redhat-config-proc</packagereq>
       <packagereq type="default">redhat-logviewer</packagereq>
@@ -1808,7 +1808,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-British</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>canadian-support</id>
     <uservisible>false</uservisible>
@@ -1833,7 +1833,7 @@
       <packagereq type="mandatory">aspell-en-ca</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>catalan-support</id>
     <uservisible>false</uservisible>
@@ -2350,7 +2350,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-Portuguese</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>romanian-support</id>
     <uservisible>false</uservisible>
@@ -2378,7 +2378,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-Romanian</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>russian-support</id>
     <uservisible>false</uservisible>
@@ -2407,7 +2407,7 @@
       <packagereq type="mandatory">man-pages-ru</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>serbian-support</id>
     <uservisible>false</uservisible>
@@ -2435,7 +2435,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-Serbian</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>slovak-support</id>
     <uservisible>false</uservisible>
@@ -2491,7 +2491,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-Slovenian</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>swedish-support</id>
     <uservisible>false</uservisible>
@@ -2517,7 +2517,7 @@
       <packagereq type="optional" requires="kdelibs">kde-i18n-Swedish</packagereq>
     </packagelist>
   </group>
-  
+
   <group>
     <id>turkish-support</id>
     <uservisible>false</uservisible>
@@ -3127,7 +3127,7 @@
     <name xml:lang="zh_CN">工作站通用</name>
     <name xml:lang="zh_TW">工作站共同</name>
     <grouplist>
-      <groupreq>base</groupreq> 
+      <groupreq>base</groupreq>
       <groupreq>base-x</groupreq>
       <groupreq>admin-tools</groupreq>
       <groupreq>editors</groupreq>
@@ -3220,7 +3220,7 @@
       <groupreq>kde-desktop</groupreq>
     </grouplist>
   </group>
-  
+
   <group>
     <id>supported</id>
     <uservisible>false</uservisible>
@@ -3364,7 +3364,7 @@
       </subcategories>
     </category>
   </grouphierarchy>
- 
+
   <!-- packages -->
   <package>
     <name>busybox</name>

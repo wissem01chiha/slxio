@@ -45,7 +45,7 @@ if [ -z "$CTEST" ]; then
     fatal "ctest not found in path, install CMake/CTest."
 fi
 
-# Default build directory 
+# Default build directory
 BUILDDIR="${1:-build}"
 
 if [ ! -d "$BUILDDIR" ]; then

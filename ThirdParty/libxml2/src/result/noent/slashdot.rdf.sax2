@@ -46,7 +46,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(image, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -63,7 +63,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -80,7 +80,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -97,7 +97,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -114,7 +114,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -131,7 +131,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -148,7 +148,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -165,7 +165,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -182,7 +182,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(
@@ -199,7 +199,7 @@ SAX.characters(
   , 3)
 SAX.endElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/')
 SAX.characters(
-  
+
   , 6)
 SAX.startElementNs(item, NULL, 'http://my.netscape.com/rdf/simple/0.9/', 0, 0, 0)
 SAX.characters(

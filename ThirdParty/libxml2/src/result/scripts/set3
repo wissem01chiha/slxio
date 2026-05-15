@@ -9,4 +9,4 @@ Set contains 2 nodes:
 2  ELEMENT b
 a > <?xml version="1.0"?>
 <a xmlns="bar"><b/></a>
-a > 
+a >

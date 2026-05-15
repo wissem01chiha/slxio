@@ -12,4 +12,3 @@ CONSOLE_IMPEXP char *ConsoleRead(void);
 
 /*--------------------------------------------------------------------------*/
 #endif /* __CONSOLEREAD_H__ */
-

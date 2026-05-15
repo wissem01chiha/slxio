@@ -4,4 +4,3 @@ STRING(REGEX REPLACE "(NetBSD|macOS) [0-9.]*" "NiH" MAN "${MAN}")
 FILE(WRITE ${OUT}.new "${MAN}")
 CONFIGURE_FILE(${OUT}.new ${OUT} COPYONLY)
 FILE(REMOVE ${OUT}.new)
-

@@ -2,6 +2,6 @@
 0000000000000000000000000000000000000000000000000000000000000000000000000000000'
                                                                                ^
 ./test/errors/759020.xml:46: parser error : Couldn't find end of Start Tag s00
-                                                                   
+
                                                                    ^
 ./test/errors/759020.xml : failed to parse
