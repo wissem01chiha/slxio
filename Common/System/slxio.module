@@ -46,13 +46,14 @@ UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
-  File.h
-  Directory.h
-  FileManager.h
-  DirectoryManager.h
   Archive.h
   ArchiveManager.h
+  Directory.h
+  DirectoryManager.
+  ExecutableManager.h
   ExecutableRunner.h
+  File.h
+  FileManager.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

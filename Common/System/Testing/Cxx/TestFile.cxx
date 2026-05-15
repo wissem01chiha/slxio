@@ -1,6 +1,7 @@
 #include "Directory.h"
 #include "Doctest.h"
 #include "ErrorCode.h"
+#include "ErrorHandlingApi.h"
 #include "File.h"
 #include "Libuv.h"
 
@@ -31,21 +32,38 @@ public:
     return CurrentDir + PATH_SEP + TestFile;
   }
 
-  Directory CreateTempDirectory() const
+  Directory CreateTempDirectory(const char* name, int* err) const
   {
-    std::string tempDir;
-    if (CurrentDir.back() != PATH_SEP)
-      tempDir += PATH_SEP;
-    tempDir += "tempdir";
+    uv_fs_t req;
+    uv_loop_t* loop = uv_default_loop();
+    *err = uv_fs_mkdir(loop, &req, name, 0755, nullptr);
+    uv_fs_req_cleanup(&req);
+    return Directory(CurrentDir + PATH_SEP + name);
+  }
 
+  void ClearTempDirectory(const char* name, int* err) const
+  {
     uv_fs_t req;
     uv_loop_t* loop = uv_default_loop();
 
-    int r = uv_fs_mkdir(loop, &req, tempDir.c_str(), 0755, nullptr);
+    *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(),
+     nullptr);
     uv_fs_req_cleanup(&req);
-    return Directory(tempDir);
   }
 };
+
+TEST_CASE_FIXTURE(FileTestFixture, "Create Temporary Directory Test")
+{
+  int err;
+  Directory tempDir = CreateTempDirectory("tempdir_1", &err);
+  sPrintErrorMessage(err);
+  CHECK(err == 0);
+  CHECK(tempDir.Exist()==true);
+
+  ClearTempDirectory("tempdir_1", &err);
+  sPrintErrorMessage(err);
+  CHECK(err == 0);
+}
 
 TEST_CASE_FIXTURE(FileTestFixture, "File Constructor Test")
 {
@@ -95,11 +113,16 @@ TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test")
 TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
 {
   File f(GetTestFilePath(), File::Mode::Read);
-
+  int err=0;
   REQUIRE(f.Open() == E_OK);
   REQUIRE(f.Close() == E_OK);
-  REQUIRE(CreateTempDirectory().Exist()==true);
 
-  CHECK(f.Move(CreateTempDirectory()) == E_OK);
+  CHECK(f.Move(CreateTempDirectory("tempdir_2", &err)) == E_OK);
   CHECK(f.GetFileDirectory().Empty() == true);
+
+  f.Delete();
+
+  ClearTempDirectory("tempdir_2", &err);
+  sPrintErrorMessage(err);
+  CHECK(err == 0);
 }

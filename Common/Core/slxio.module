@@ -16,7 +16,7 @@ DESCRIPTION
 VERSION 
   0.1.0 
 MAINTAINER 
-  Wissem CHIHA
+  Wissem Chiha
 ENABLE_BUILD 
   TRUE
 ENABLE_SOURCE_TARGETS
@@ -34,8 +34,8 @@ INSTALL_TARGETS
 INSTALL_LICENSES
   TRUE
 CLASSES
-  Version
   Timer
+  Version
   Logger
 WINDOWS_CLASSES
 UNIX_CLASSES
@@ -47,16 +47,18 @@ UNIX_SOURCES
 ANDROID_SOURCES
 WASM_SOURCES
 HEADERS
-  ABINamespace.h
-  APIExportMacro.h
-  Compiler.h 
-  ErrorTypes.h 
-  PlatformTypes.h
+  AbiNamespaceMacro.h
+  ApiExportMacro.h
+  Compiler.h
+  ErrorCode.
+  ErrorHandlingApi.h
+  ErrorMap.h
   Logger.h
+  PlatformTypes.h
+  SimulinkVersion.h
+  Timer.h
   Version.h 
   VersionMacro.h
-  Timer.h
-  ErrorHandlingApi.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -81,6 +83,3 @@ MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
 TEST_DEPENDS 
   ThirdParty::doctest
-  ThirdParty::libzip
- 
-

@@ -51,23 +51,13 @@ public:
   /** Remove the directory and its contents recursively. */
   ReturnType Remove();
 
-  /**
-   * Get the number of files in the directory.
-   * Returns number of files, or -1 if the directory could not be opened.
-   */
+  /** Get the number of files in the directory.*/
   UInt32 GetNumberOfFiles() const;
 
-  /**
-   * Get a file by index.
-   * @param index Position of the file in the list.
-   * @return Pointer to the File object at the given index.
-   */
+  /** Get a file by index.*/
   const File* GetFile(const IdType& index) const;
 
-  /**
-   * Get a specific file by name.
-   * @return Pointer to the File object if found, otherwise nullptr.
-   */
+  /** Get a specific file by name.*/
   const File* GetFile(const std::string& filename) const;
 
   /** Get the current working directory. */
@@ -97,7 +87,7 @@ public:
   /** Check if the directory is empty. */
   bool Empty() const;
 
-  /** */
+  /** Check if the directory exist on disk. */
   bool Exist() const;
 
   /** Destructor. */

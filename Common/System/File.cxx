@@ -81,7 +81,6 @@ ReturnType File::Open()
     CachedSize = static_cast<UInt32>(statbuf->st_size);
   }
   uv_fs_req_cleanup(&statReq);
-
   return E_OK;
 }
 
@@ -137,7 +136,7 @@ ReturnType File::Write(const char* message)
 ReturnType File::Close()
 {
   if (FileDescriptor < 0)
-    return 0;
+    return E_OK;
 
   uv_fs_t req;
   int err = uv_fs_close(uv_default_loop(), &req, FileDescriptor, nullptr);
@@ -147,6 +146,7 @@ ReturnType File::Close()
     return err;
 
   FileDescriptor = -1;
+  CachedSize = 0;
   return E_OK;
 }
 
@@ -183,6 +183,22 @@ ReturnType File::Move(const Directory& directory)
   FilePath = path;
   return E_OK;
 }
+
+ReturnType File::Delete()
+{
+    if (IsOpened()) {
+        ReturnType rc = Close();
+        if (rc != E_OK) {
+            return rc;
+        }
+    }
+
+    if (std::remove(FilePath.c_str()) != 0) {
+        return E_FILE_REMOVE_FAILED;   
+    }
+    return E_OK;
+}
+
 
 ReturnType File::Copy(const Directory& directory)
 {
@@ -266,6 +282,11 @@ const int File::GetFileMode()
 std::vector<char> File::GetInternalBuffer() const
 {
   return InternalBuffer;
+}
+
+bool File::IsOpened() const
+{
+  return FileDescriptor == -1;
 }
 
 UInt32 File::Size() const

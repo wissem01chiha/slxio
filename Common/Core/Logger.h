@@ -7,6 +7,7 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include "Config.h"
 #include <string>
 #include <vector>
 
@@ -20,9 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT Logger final
 {
 public:
-  /**
-   * Logging verbosity levels.
-   */
+  /** Logging verbosity levels.*/
   enum MessageLevelType : UInt8
   {
     LOG_OFF = 0x00,
@@ -34,18 +33,14 @@ public:
     LOG_VERBOSE = 0x06
   };
 
-  /**
-   * Type of the message, either a standard log or a trace.
-   */
+  /** Type of the message, either a standard log or a trace.*/
   enum MessageType : UInt8
   {
     LOG = 0x00,
     TRACE = 0x01
   };
 
-  /**
-   * File logging access modes.
-   */
+  /** File logging access modes.*/
   enum LogFileModeType
   {
     TRUNCATE,
@@ -54,10 +49,7 @@ public:
     WRITE
   };
 
-  /**
-   * Data structure for external applications that log information using the
-   * API.
-   */
+  /** Data structure for external applications that log information using the API.*/
   typedef struct
   {
     UInt32 appId;
@@ -65,9 +57,7 @@ public:
     std::string appDescription;
   } ApplicationInfoType;
 
-  /**
-   * Container for logging message metadata.
-   */
+  /** Container for logging message metadata.*/
   typedef struct
   {
     MessageType type;
@@ -76,34 +66,24 @@ public:
     UInt8 argCount;
   } MessageInfoType;
 
-  /**
-   * Container for a logging message with its metadata.
-   */
+  /** Container for a logging message with its metadata.*/
   typedef struct
   {
     MessageInfoType info;
     std::vector<std::string> messages;
   } LogMessage;
 
-  /**
-   * Initialize the logger with command line arguments.
-   */
+  /** Initialize the logger with command line arguments.*/
   static ReturnType Init(int argc, char** argv);
 
-  /**
-   * Get the singleton instance of the logger.
-   */
+  /** Get the singleton instance of the logger.*/
   static Logger& GetInstance();
 
-  /**
-   * Send a log message with metadata and message fragments.
-   */
+  /** Send a log message with metadata and message fragments.*/
   ReturnType SendLogMessage(
     const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
-  /**
-   * Print all logging messages to standard output.
-   */
+  /** Print all logging messages to standard output.*/
   void Print();
 
   /**
@@ -112,96 +92,66 @@ public:
    */
   ReturnType WriteToFile(const std::string& filename);
 
-  /**
-   * Overload of WriteToFile for compatibility with C-style strings.
-   */
+  /** Overload of WriteToFile for compatibility with C-style strings.*/
   ReturnType WriteToFile(const char* filename);
 
-  /**
-   * Write logging messages to a randomly generated file.
-   */
+  /** Write logging messages to a randomly generated file. */
   ReturnType WriteToFile(void);
 
-  /**
-   * Set the internal logging level.
-   */
+  /** Set the internal logging level.*/
   void SetLogLevel(MessageLevelType newLogLevel);
 
-  /**
-   * Get the current logging level.
-   */
+  /** Get the current logging level.*/
   MessageLevelType GetLogLevel(void);
 
-  /**
-   * Set the file logging mode.
-   */
+  /** Set the file logging mode. */
   void SetLogFileMode(LogFileModeType mode);
 
-  /**
-   * Get the default file logging mode.
-   */
+  /** Get the default file logging mode.*/
   LogFileModeType GetDefaultLogFileMode();
 
-  /**
-   * Get the current file logging mode.
-   */
+  /** Get the current file logging mode.*/
   LogFileModeType GetLogFileMode();
 
-  /**
-   * Reset logging level to the default.
-   */
+  /** Reset logging level to the default */
   void ResetLogLevelType();
 
-  /**
-   * Get log messages from a given application by ID.
-   */
+  /** Get log messages from a given application by ID */
   std::vector<LogMessage> GetFiltredLogMessage(UInt32 Id);
 
-  /**
-   * Get log messages from a given application by name.
-   */
+  /** Get log messages from a given application by name. */
   std::vector<LogMessage> GetFiltredLogMessage(const char* Name);
 
-  /**
-   * Check if logging is enabled.
-   */
+  /** Check if logging is enabled. */
   bool IsEnabled();
 
-  /**
-   * Clear all buffered log messages.
-   */
+  /** Clear all buffered log messages. */
   void ClearBuffer();
 
-  /**
-   * Get the logging directory path.
-   */
+  /** Get the logging directory path. */
   std::string GetLogDirectoryPath(void);
 
-  /**
-   * Set the logging directory path.
-   * Note this function do not check the validity of the directory
-   */
+  /** Set the logging directory path.*/
   void SetLogDirectoryPath(const std::string pathname);
 
-  /**
-   * Get the default logging directory path.
-   */
+  /** Get the default logging directory path. */
   std::string GetDefaultLogDirectoryPath(void);
 
 private:
-  /**
-   * Helper function for slog logging library
-   */
+#if SLXIO_SLOG
+  /** Helper function for slog logging library */
   int ToSlogLevel(Logger::MessageLevelType level);
+#endif // SLXIO_SLOG
 
-  /**
-   * Helper function for formatting output logs
-   */
+#if SLXIO_LOGURU
+  /** Helper function for loguru logging library */
+  int Logger::ToLoguruLevel(Logger::MessageLevelType level);
+#endif // SLXIO_LOGURU
+
+  /** Helper function for formatting output logs */
   std::string FormatLogEntry(const LogMessage& entry, const std::string& msg);
 
-  /**
-   * Default Constructor
-   */
+  /** Default Constructor */
   Logger();
   Logger(const Logger&) = delete;
   ~Logger() = default;

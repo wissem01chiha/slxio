@@ -74,13 +74,19 @@ public:
   void SetFileMode(const File::Mode mode);
 
   /** Move file to a directory. */
-  UInt32 Move(const Directory& directory);
+  ReturnType Move(const Directory& directory);
+
+  /** Delete the file from disk */
+  ReturnType Delete();
 
   /** Get parent directory object. */
   Directory GetFileDirectory() const;
 
   /** Get the file internal buffer, after reading the file */
   std::vector<char> GetInternalBuffer() const;
+
+  /** Check Whatever the file is still open or not */
+  bool IsOpened() const;
 
   /** Get file size on disk. */
   UInt32 Size() const;
