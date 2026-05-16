@@ -1,9 +1,19 @@
-// #include <chrono>
-// #include <random>
+#include "Archive.h"
+#include "Doctest.h"
 
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
+class ArchiveTestFixture
+{
+public:
+  ArchiveTestFixture() {}
+  ~ArchiveTestFixture() {}
 
-TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test")
+private:
+};
+
+TEST_CASE_FIXTURE(ArchiveTestFixture, "Set File Extension Test")
 {
 
   //   std::string TEMP_FILE_PATH =
@@ -83,3 +93,6 @@ TEST_CASE_FIXTURE(FileTestFixture, "Set File Extension Test")
 //     }
 //     return tempDir;
 //   }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

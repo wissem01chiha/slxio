@@ -10,6 +10,7 @@
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/slxio/overview/master)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
 
 <!-- omit in toc -->
 ## Table of Contents
@@ -62,10 +63,10 @@ The project is under active development, and contributions are highly encouraged
 
 ### 1.1 Features
 
-- Read Simulink internal block‑diagram files into native C++ structures
-- Export model hierarchies into JSON, HDF5, or Graphviz‑compatible formats
+- Read Simulink internal block‑diagram files into native c++ structures
+- Export model hierarchies into [json](https://www.json.org/json-en.html), [HDF5](https://www.hdfgroup.org/solutions/hdf5/), or [Graphviz](https://graphviz.org/)‑compatible formats
 - Edit metadata and parameters, then save changes back into the `.slx` file
-- Perform static analysis on Simulink models and generate reports in PDF or HTML
+- Perform static analysis on Simulink models and generate reports in [PDF]() or HTML
 - Visualize Simulink diagrams interactively
 - Integrate symbolic execution for advanced model validation and testing
 

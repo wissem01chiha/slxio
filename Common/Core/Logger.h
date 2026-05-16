@@ -6,8 +6,8 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "PlatformTypes.h"
 #include "Config.h"
+#include "PlatformTypes.h"
 #include <string>
 #include <vector>
 
@@ -49,7 +49,8 @@ public:
     WRITE
   };
 
-  /** Data structure for external applications that log information using the API.*/
+  /** Data structure for external applications that log information using the
+   * API.*/
   typedef struct
   {
     UInt32 appId;

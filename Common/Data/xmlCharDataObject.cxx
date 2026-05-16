@@ -10,7 +10,7 @@ xmlCharDataObject* xmlCharDataObject::New()
 
 bool xmlCharDataObject::Empty()
 {
-  return ImplDataObject ==nullptr;
+  return ImplDataObject == nullptr;
 }
 
 bool xmlCharDataObject::operator==(const DataObject&)

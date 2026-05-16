@@ -37,11 +37,11 @@ CLASSES
   Timer
   Version
   Logger
+  ErrorHandler
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
 SOURCES
-  ErrorHandlingApi.cxx
 WINDOWS_SOURCES
 UNIX_SOURCES
 ANDROID_SOURCES
@@ -50,7 +50,8 @@ HEADERS
   AbiNamespaceMacro.h
   ApiExportMacro.h
   Compiler.h
-  ErrorCode.
+  ErrorCode.h 
+  ErrorHandler.h
   ErrorHandlingApi.h
   ErrorMap.h
   Logger.h

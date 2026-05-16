@@ -25,7 +25,7 @@ public:
   SignalObject();
 
 private:
-    SignalPtr ImplDataObject;
+  SignalPtr ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

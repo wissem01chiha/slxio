@@ -4,11 +4,6 @@
 #ifndef ERRORCODE_H
 #define ERRORCODE_H
 
-/**
- * This file describe librray error codes (errors 1000 to 1255)
- * They are returned by the sGetLastError function when many functions fail
- */
-
 #ifdef __cplusplus
 extern "C"
 {

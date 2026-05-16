@@ -1,36 +1,64 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-  /** Get the file extension. */
-  const char* GetFileExtension() const;
+#ifndef ARCHIVE_H
+#define ARCHIVE_H
+
+#include "AbiNamespaceMacro.h"
+#include "ApiExportMacro.h"
+#include "PlatformTypes.h"
+
+class File;
+class Directory;
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+/**
+ * @class Archive
+ * @brief
+ */
+class SLXIO_APIEXPORT Archive final
+{
+public:
+  /** Default Constructor */
+  Archive();
+
+  /** Create a Reference to an instance */
+  Archive* New();
+
+  /** Get the default archive file extension. */
+  const char* GetArchiveExtension() const;
 
   /** Set the file extension. */
-  UInt32 SetFileExtension(const char* ext);
+  void SetArchiveExtension(const char* ext);
 
-  /** Extract the current file if it is a ZIP archive. */
-  UInt32 Unzip(const char* dir);
+  /* Set the archive directory folder is not given a temporary one will be used
+   * as default */
+  void SetArchiveDirectory(const Directory& directory);
 
-  /** Replace the current file in a compressed ZIP archive. */
-  UInt32 Zip(const char* file, const char* entryName);
+  /** Extract the archive if it is a ZIP archive. */
+  ReturnType Extract();
 
+  /** Add a file to the Archive */
+  ReturnType Add(const File& file);
 
-  const char* File::GetFileExtension() const
-  {
-
-    if (FilePath == "")
-      return nullptr;
-
-    const char* dot = strrchr(FilePath.c_str(), '.');
-    if (!dot || dot == FilePath)
-      return nullptr;
-
-    return dot + 1;
-  }
-
-
-    /**
+  /**
    * Compress the directory content into a ZIP archive.
    * Output file will be named <dirname>.zip.
    * If a new archive name is given, it will assume same as parent directory.
    */
-  UInt32 Zip(const char* dir = "");
+  ReturnType Compress();
+
+  /** Default Destructor */
+  ~Archive();
+
+private:
+  Directory& directory;
+  File& file;
+};
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END
+
+#endif // ARCHIVE_H

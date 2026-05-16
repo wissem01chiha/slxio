@@ -12,10 +12,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 struct Signal
 {
-
 };
 
-typedef Signal*  SignalPtr;
+typedef Signal* SignalPtr;
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
