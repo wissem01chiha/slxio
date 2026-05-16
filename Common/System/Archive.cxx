@@ -14,11 +14,6 @@ Archive* Archive::New()
   return new Archive();
 }
 
-const char* Archive::GetArchiveExtension() const
-{
-  return nullptr;
-}
-
 void Archive::SetArchiveExtension(const char* ext) {}
 
 void Archive::SetArchiveDirectory(const Directory& _directory)
@@ -79,6 +74,11 @@ ReturnType Archive::Extract()
     zip_fclose(zf);
   }
 
+  return E_OK;
+}
+
+ReturnType Archive::Add(const File& file)
+{
   return E_OK;
 }
 
