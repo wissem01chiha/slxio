@@ -1,1 +1,1 @@
-add_module (Simulink::Library)
+add_module(Simulink::Library)

@@ -6,10 +6,9 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "Directory.h"
+#include "File.h"
 #include "PlatformTypes.h"
-
-class File;
-class Directory;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -24,34 +23,40 @@ public:
   /** Default Constructor */
   Archive();
 
+  /** Constructor given an expilcit file */
+  Archive(File file);
+
   /** Create a Reference to an instance */
   Archive* New();
 
   /** Get the default archive file extension. */
-  const char* GetArchiveExtension() const;
+  std::string GetArchiveExtension() const;
 
   /** Set the file extension. */
   void SetArchiveExtension(const char* ext);
 
   /* Set the archive directory folder is not given a temporary one will be used
    * as default */
-  void SetArchiveDirectory(const Directory& directory);
+  void SetArchiveDirectory(const Directory directory);
+
+  /** Get the archive directory object */
+  Directory GetArchiveDirectory() const;
 
   /** Extract the archive if it is a ZIP archive. */
   ReturnType Extract();
 
-  /** Add a file to the Archive */
-  ReturnType Add(const File& file);
+  /** Add a file to the Archive, if the file already there */
+  ReturnType Add(const File file);
 
-  /** Compress the directory content into a ZIP archive.*/
-  ReturnType Compress();
+  /** Remove a file from teh archive, if the file exist else return and error */
+  ReturnType Remove(const File file);
 
   /** Default Destructor */
-  ~Archive();
+  ~Archive() = default;
 
 private:
-  Directory& directory;
-  File& file;
+  Directory directory;
+  File file;
 };
 
 SLXIO_ABI_NAMESPACE_END

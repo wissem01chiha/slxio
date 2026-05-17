@@ -2,6 +2,8 @@
 #include "Directory.h"
 #include "ErrorCode.h"
 #include "Libuv.h"
+#include <cstring>
+#include <sstream>
 #include <string.h>
 
 SLXIO_NAMESPACE_BEGIN
@@ -9,7 +11,33 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 std::string DirectoryService::toString(const Directory& directory)
 {
-  return std::string();
+  std::ostringstream oss;
+
+  oss << directory.GetDirectoryName() << "\n";
+
+  std::vector<File> files = directory.GetDirectoryFiles();
+  for (const auto& file : files)
+  {
+    oss << "  - " << file.GetFileName() << "\n";
+  }
+  std::vector<Directory> subdirs = directory.GetSubDirectories();
+  for (const auto& subdir : subdirs)
+  {
+    oss << subdir.GetDirectoryName() << "\n";
+
+    std::vector<File> subFiles = subdir.GetDirectoryFiles();
+    for (const auto& f : subFiles)
+    {
+      oss << "    - " << f.GetFileName() << "\n";
+    }
+    std::vector<Directory> subSubDirs = subdir.GetSubDirectories();
+    for (const auto& s : subSubDirs)
+    {
+      oss << s.GetDirectoryName() << "\n";
+    }
+  }
+
+  return oss.str();
 }
 
 Directory DirectoryService::GetWorkingDirectory(int* error)

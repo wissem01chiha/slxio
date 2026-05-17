@@ -42,6 +42,7 @@ CLASSES
   DirectoryService
   ExecutableManager
   ExecutableRunner
+  ArchiveManager
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES

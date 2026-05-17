@@ -3,12 +3,31 @@
 
 #include "AbiNamespaceMacro.h"
 #include "PlatformTypes.h"
+#include "ApiExportMacro.h"
+#include <string>
 
-class DataStore
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+class SLXIO_APIEXPORT DataStoreMemory final 
 {
 public:
-  DataStore();
-  ~DataStore();
+  /** Default Constructor */
+  DataStoreMemory();
 
-private:
+  /** Get the Data store object name */
+  std::string GetName() const;
+
+  /** Set the data store obejct name */
+  void SetName(std::string& name);
+
+  /** Default Destructor */
+  ~DataStoreMemory();
+
+private: 
+std::string DataStoreMemoryName;
 };
+
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

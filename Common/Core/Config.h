@@ -68,32 +68,34 @@
 
 #define SLXIO_64BIT_IDS 1
 
-#define USE_EXTERNAL_CXXOPTS 0
+#define SLXIO_ROOT_DIR "C:/Users/chiha.000/Documents/github/slxio"
 
-#define USE_EXTERNAL_DOCTEST 0
+/* #undef USE_EXTERNAL_CXXOPTS */
 
-#define USE_EXTERNAL_JSON_C 0
+/* #undef USE_EXTERNAL_DOCTEST */
 
-#define USE_EXTERNAL_LIBPNG 0
+/* #undef USE_EXTERNAL_JSON_C */
 
-#define USE_EXTERNAL_LIBUV 0
+/* #undef USE_EXTERNAL_LIBPNG */
 
-#define USE_EXTERNAL_LIBXML2 0
+/* #undef USE_EXTERNAL_LIBUV */
 
-#define USE_EXTERNAL_LIBZIP 0
+/* #undef USE_EXTERNAL_LIBXML2 */
 
-#define USE_EXTERNAL_LOGURU 0
+/* #undef USE_EXTERNAL_LIBZIP */
 
-#define USE_EXTERNAL_PYBIND11 0
+/* #undef USE_EXTERNAL_LOGURU */
 
-#define USE_EXTERNAL_RAPIDCSV 0
+/* #undef USE_EXTERNAL_PYBIND11 */
 
-#define USE_EXTERNAL_SLOG 0
+/* #undef USE_EXTERNAL_RAPIDCSV */
 
-#define USE_EXTERNAL_SOL2 0
+/* #undef USE_EXTERNAL_SLOG */
 
-#define USE_EXTERNAL_TINYXML2 0
+/* #undef USE_EXTERNAL_SOL2 */
 
-#define USE_EXTERNAL_ZLIB 0
+/* #undef USE_EXTERNAL_TINYXML2 */
+
+/* #undef USE_EXTERNAL_ZLIB */
 
 #endif // CONFIG_H

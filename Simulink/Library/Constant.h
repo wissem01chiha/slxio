@@ -13,7 +13,21 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT Constant final
 {
-  Float32 value;
+public:
+  /** Deafult Constructor */
+  Constant() =default;
+
+  /** Default Destructor */
+  ~Constant() =default;
+
+  /** */
+  void SetValue(Float32 value);
+
+  /** */
+  Float32 GetValue() const;
+
+private:
+  Float32 ConstantValue = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

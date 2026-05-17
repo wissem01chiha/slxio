@@ -121,6 +121,9 @@ if(SLXIO_PKGCONFIG)
     endif()
 endif()
 
+#-----------------------------------------------------------------------------
+# CTest Configuration
+set(SLXIO_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 option(SLXIO_OPENMP "Enable OpenMP support" ON)
 

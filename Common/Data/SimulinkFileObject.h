@@ -18,6 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkFileObject
+ * @brief DataObject Wrapper for SimulinkFile struct
  */
 class SLXIO_APIEXPORT SimulinkFileObject : public DataObject
 {
