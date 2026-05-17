@@ -2,6 +2,7 @@
 #include "Directory.h"
 #include "ErrorCode.h"
 #include "Libuv.h"
+#include <string.h>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
