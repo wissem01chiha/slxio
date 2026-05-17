@@ -1,5 +1,6 @@
 #include "SimulinkArray.h"
 #include <algorithm>
+#include "Logger.h"
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN

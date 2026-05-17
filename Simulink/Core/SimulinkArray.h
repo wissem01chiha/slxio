@@ -5,11 +5,12 @@
 #define SIMULINKARRAY_H
 
 #include "AbiNamespaceMacro.h"
-#include "Logger.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
 #include "PlatformTypes.h"
 #include <memory>
+
+class Logger;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -25,70 +26,49 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase
 {
 public:
+  /** Default Constructor */
   SimulinkArray();
 
-  /**
-   *
-   */
+  /** */
   SimulinkArray(std::string type, std::string name, std::string dimension);
 
-  /**
-   *
-   */
+  /** */
   SimulinkArray(const SimulinkArray& other);
 
+  /**  */
   SimulinkArray& operator=(const SimulinkArray&) = delete;
 
-  /**
-   *
-   */
+  /** */
   SimulinkElementType GetElementType() const override;
 
+  /**  */
   std::string ToString() const override;
 
-  /**
-   *
-   */
+  /** */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
-  /**
-   *
-   */
+  /** */
   ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
-  /**
-   *
-   */
+  /** */
   IdType GetElementId() const override;
 
-  /**
-   *
-   */
+  /** */
   std::string getName();
 
-  /**
-   *
-   */
+  /** */
   std::string getDimension();
 
-  /**
-   *
-   */
+  /** */
   std::string getArrayType();
 
-  /**
-   *
-   */
+  /** */
   std::shared_ptr<SimulinkParameter> getParameter(std::string name);
 
-  /**
-   *
-   */
+  /** */
   bool Contains(const IdType& id) const override;
 
-  /**
-   *
-   */
+  /** Get Class logger */
   Logger& GetLogger();
 
 private:

@@ -11,7 +11,7 @@ std::string DirectoryService::toString(const Directory& directory)
   return std::string();
 }
 
-Directory DirectoryService::GetWorkingDirectory(ReturnType* error)
+Directory DirectoryService::GetWorkingDirectory(int* error)
 {
   static char buffer[1024];
 
@@ -21,63 +21,62 @@ Directory DirectoryService::GetWorkingDirectory(ReturnType* error)
   return Directory(buffer);
 }
 
-ReturnType DirectoryService::CreateDirectoryStructure(
-  const std::string& structure)
+std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(
+  const std::string& structure, int* error)
 {
-  const char* tree = structure.c_str();
-  if (tree == nullptr)
-    return E_PARAMETER_NULL_PTR;
-
-  char* Path = (char*)malloc(strlen(tree) + 1);
-  strcpy(Path, tree);
-
-  if (tree[strlen(tree) - 1] != '/')
+  if (structure.empty())
   {
-    char* last_slash = strrchr(Path, '/');
-    if (last_slash)
+    if (error)
+      *error = UV_EINVAL;
+    return nullptr;
+  }
+
+  std::string path = structure;
+  if (path.back() != PATH_SEP)
+  {
+    auto pos = path.find_last_of(PATH_SEP);
+    if (pos != std::string::npos)
     {
-      *(last_slash + 1) = '\0';
+      path.erase(pos + 1);
     }
     else
     {
-      Path[0] = '\0';
+      path.clear();
     }
   }
 
   uv_fs_t req;
-  char temp[1024];
-  strncpy(temp, Path, sizeof(temp));
-  temp[sizeof(temp) - 1] = '\0';
+  std::string temp;
 
-  for (char* p = temp + 1; *p; p++)
+  for (size_t i = 1; i < path.size(); ++i)
   {
-    if (*p == '/')
+    if (path[i] == PATH_SEP)
     {
-      *p = '\0';
-      int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+      temp = path.substr(0, i);
+      int r = uv_fs_mkdir(uv_default_loop(), &req, temp.c_str(), 0755, nullptr);
       if (r < 0 && r != UV_EEXIST)
       {
-        return r;
+        *error = r;
+        return nullptr;
       }
-      *p = '/';
     }
   }
-
-  int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
+  int r = uv_fs_mkdir(uv_default_loop(), &req, path.c_str(), 0755, nullptr);
   if (r < 0 && r != UV_EEXIST)
   {
-    return r;
+    *error = r;
+    return nullptr;
   }
-
-  return E_OK;
+  return std::make_shared<Directory>(path);
 }
 
-std::string DirectoryService::CreateTemporaryDirectory(ReturnType* error)
+std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(
+  int* error)
 {
   uv_fs_t req;
-  int r = uv_fs_mkdtemp(uv_default_loop(), &req, "XXXXXX", nullptr);
+  *error = uv_fs_mkdtemp(uv_default_loop(), &req, "XXXXXX", nullptr);
 
-  if (r < 0)
+  if (*error < 0)
   {
     uv_fs_req_cleanup(&req);
     return nullptr;
@@ -92,11 +91,11 @@ std::string DirectoryService::CreateTemporaryDirectory(ReturnType* error)
   const char* tmpdir = strdup(req.path);
   uv_fs_req_cleanup(&req);
 
-  return std::string(tmpdir);
+  return std::make_shared<Directory>(tmpdir);
 }
 
-std::string DirectoryService::CreatePrefixedTemporaryDirectory(
-  const char* prefix, ReturnType* error)
+std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(
+  const char* prefix, int* error)
 {
   uv_fs_t req;
 
@@ -123,7 +122,7 @@ std::string DirectoryService::CreatePrefixedTemporaryDirectory(
   const char* tmpdir = strdup(req.path);
   uv_fs_req_cleanup(&req);
 
-  return std::string(tmpdir);
+  return std::make_shared<Directory>(tmpdir);
 }
 
 SLXIO_ABI_NAMESPACE_END

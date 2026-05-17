@@ -8,6 +8,4 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-
-
 #endif // ARCHIVEMANAGER_H

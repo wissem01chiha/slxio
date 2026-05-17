@@ -7,6 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include <memory>
+#include <string>
 
 class Directory;
 
@@ -30,7 +32,7 @@ public:
   static std::string toString(const Directory& directory);
 
   /** Get the current working directory. */
-  static Directory GetWorkingDirectory(ReturnType* error);
+  static Directory GetWorkingDirectory(int* error);
 
   /**
    * Creates the directory structure for a given entry name.
@@ -40,14 +42,15 @@ public:
    * This function ensures that the directory structure is created up
    * to the specified root folder (`dir`)
    */
-  static ReturnType CreateDirectoryStructure(const std::string& structure);
+  static std::shared_ptr<Directory> CreateDirectoryStructure(
+    const std::string& structure, int* error);
 
-  /** Create a system tempory directory and return it path */
-  static std::string CreateTemporaryDirectory(ReturnType* error);
+  /** Create a system temporary directory and retrun a pointer to it*/
+  static std::shared_ptr<Directory> CreateTemporaryDirectory(int* error);
 
   /** same as CreateTemporaryDirectory using a prefix for directory name */
-  static std::string CreatePrefixedTemporaryDirectory(
-    const char* prefix, ReturnType* error);
+  static std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(
+    const char* prefix, int* error);
 };
 
 SLXIO_ABI_NAMESPACE_END

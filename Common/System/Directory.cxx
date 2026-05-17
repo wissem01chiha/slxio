@@ -1,6 +1,5 @@
 ﻿#include "Directory.h"
 #include "ErrorCode.h"
-#include "File.h"
 #include "Libuv.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -201,9 +200,55 @@ ReturnType Directory::Move(const Directory& directory)
   return E_NOT_IMPLEMENTED;
 }
 
+ReturnType Directory::Delete(const std::string& path)
+{
+  uv_fs_t scandir_req;
+  uv_dirent_t ent;
+  int r =
+    uv_fs_scandir(uv_default_loop(), &scandir_req, path.c_str(), 0, nullptr);
+  if (r < 0)
+  {
+    return r;
+  }
+
+  while (UV_EOF != uv_fs_scandir_next(&scandir_req, &ent))
+  {
+    std::string fullPath = path + "/" + ent.name;
+
+    if (ent.type == UV_DIRENT_DIR)
+    {
+      int sub = Delete(fullPath);
+      if (sub < 0)
+        return sub;
+      uv_fs_t rmdir_req;
+      int rr =
+        uv_fs_rmdir(uv_default_loop(), &rmdir_req, fullPath.c_str(), nullptr);
+      uv_fs_req_cleanup(&rmdir_req);
+      if (rr < 0 && rr != UV_ENOENT)
+        return rr;
+    }
+    else
+    {
+      uv_fs_t unlink_req;
+      int ur =
+        uv_fs_unlink(uv_default_loop(), &unlink_req, fullPath.c_str(), nullptr);
+      uv_fs_req_cleanup(&unlink_req);
+      if (ur < 0 && ur != UV_ENOENT)
+        return ur;
+    }
+  }
+
+  uv_fs_req_cleanup(&scandir_req);
+
+  uv_fs_t rmdir_req;
+  int rr = uv_fs_rmdir(uv_default_loop(), &rmdir_req, path.c_str(), nullptr);
+  uv_fs_req_cleanup(&rmdir_req);
+  return rr;
+}
+
 ReturnType Directory::Delete()
 {
-  return E_NOT_IMPLEMENTED;
+  return Delete(DirectoryPath);
 }
 
 SLXIO_ABI_NAMESPACE_END

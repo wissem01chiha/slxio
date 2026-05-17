@@ -40,6 +40,8 @@ extern "C"
     { E_INVALID_DATA_TYPE, "Invalid data type provided" },
     { E_DIRECTORY_NOT_EXSIT, "Directory folder do not exsit" },
     { E_FILE_REMOVE_FAILED, "Failed to delete file from disk" },
+    { E_DIRECTORY_STRUCT_FAILED,
+      "Failed to create a filesystem directory tree" },
     { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
   };
 

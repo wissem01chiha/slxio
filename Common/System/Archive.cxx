@@ -5,6 +5,7 @@
 #include "File.h"
 #include "Libuv.h"
 #include "Libzip.h"
+#include <cstring>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -45,10 +46,11 @@ ReturnType Archive::Extract()
     snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s",
       directory.GetDirectoryPath().c_str(), name);
 
-    int ec = DirectoryService::CreateDirectoryStructure(entrydirpath);
-    if (ec != E_OK)
+    int ec = 0;
+    DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);
+    if (ec != 0)
     {
-      return ec;
+      return E_DIRECTORY_STRUCT_FAILED;
     }
 
     zip_file_t* zf = zip_fopen_index(archive, i, 0);

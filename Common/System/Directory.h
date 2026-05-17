@@ -6,12 +6,11 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "File.h"
 #include "PlatformTypes.h"
 #include <memory>
 #include <string>
 #include <vector>
-
-class File;
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -77,7 +76,10 @@ public:
   /** Move the directory to an other directory. */
   ReturnType Move(const Directory& directory);
 
-  /** Delete the directory from disk */
+  /** Delete a directory and contenant from disk */
+  static ReturnType Delete(const std::string& path);
+
+  /** Member function of Delete */
   ReturnType Delete();
 
   /** Destructor. */

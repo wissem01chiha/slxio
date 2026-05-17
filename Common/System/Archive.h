@@ -16,7 +16,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Archive
- * @brief
+ * @brief A singleton class for managing archived file format
  */
 class SLXIO_APIEXPORT Archive final
 {
@@ -43,11 +43,7 @@ public:
   /** Add a file to the Archive */
   ReturnType Add(const File& file);
 
-  /**
-   * Compress the directory content into a ZIP archive.
-   * Output file will be named <dirname>.zip.
-   * If a new archive name is given, it will assume same as parent directory.
-   */
+  /** Compress the directory content into a ZIP archive.*/
   ReturnType Compress();
 
   /** Default Destructor */
