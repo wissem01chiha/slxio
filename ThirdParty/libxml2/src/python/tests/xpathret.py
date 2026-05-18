@@ -3,7 +3,7 @@ import sys
 import setup_test
 import libxml2
 
-#memory debug specific
+# memory debug specific
 libxml2.debugMemory(1)
 
 #
@@ -11,17 +11,19 @@ libxml2.debugMemory(1)
 #
 mydoc = libxml2.newDoc("1.0")
 
+
 def foo(ctx, str):
     global mydoc
 
     #
     # test returning a node set works as expected
     #
-    parent = mydoc.newDocNode(None, 'p', None)
+    parent = mydoc.newDocNode(None, "p", None)
     mydoc.addChild(parent)
     node = mydoc.newDocText(str)
     parent.addChild(node)
     return [parent]
+
 
 doc = libxml2.parseFile("tst.xml")
 ctxt = doc.xpathNewContext()
@@ -34,14 +36,14 @@ if len(res) != 1:
     print("Unexpected nodeset size")
     sys.exit(1)
 node = res[0]
-if node.name != 'p':
+if node.name != "p":
     print("Unexpected nodeset element result")
     sys.exit(1)
 node = node.children
-if node.type != 'text':
+if node.type != "text":
     print("Unexpected nodeset element children type")
     sys.exit(1)
-if node.content != 'hello':
+if node.content != "hello":
     print("Unexpected nodeset element children content")
     sys.exit(1)
 
@@ -49,7 +51,7 @@ doc.freeDoc()
 mydoc.freeDoc()
 ctxt.xpathFreeContext()
 
-#memory debug specific
+# memory debug specific
 libxml2.cleanupParser()
 if libxml2.debugMemory(1) == 0:
     print("OK")

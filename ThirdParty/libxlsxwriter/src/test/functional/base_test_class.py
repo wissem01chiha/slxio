@@ -22,8 +22,8 @@ class XLSXBaseTest(unittest.TestCase):
         self.maxDiff = None
 
         self.no_system_error = 0
-        self.got_filename = ''
-        self.exp_filename = ''
+        self.got_filename = ""
+        self.exp_filename = ""
         self.ignore_files = []
         self.ignore_elements = {}
 
@@ -31,32 +31,34 @@ class XLSXBaseTest(unittest.TestCase):
         """Run C exe and compare output xlsx file with the Excel file."""
 
         # Create the executable command
-        if sys.platform == 'win32':
-            command = r'cd test\functional\src && %s.exe' % exe_name
+        if sys.platform == "win32":
+            command = r"cd test\functional\src && %s.exe" % exe_name
         else:
-            command = 'cd test/functional/src && ./%s' % exe_name
+            command = "cd test/functional/src && ./%s" % exe_name
 
         # Run the C executable to generate the "got" xlsx file.
         got = os.system(command)
         self.assertEqual(got, self.no_system_error)
 
         # Create the path/file names for the xlsx/xlsm files to compare.
-        if exp_filename and exp_filename.endswith('.xlsm'):
-            got_filename = exe_name.replace('test_', '') + '.xlsm'
+        if exp_filename and exp_filename.endswith(".xlsm"):
+            got_filename = exe_name.replace("test_", "") + ".xlsm"
         else:
-            got_filename = exe_name.replace('test_', '') + '.xlsx'
+            got_filename = exe_name.replace("test_", "") + ".xlsx"
 
         if not exp_filename:
             exp_filename = got_filename
 
-        self.got_filename = 'test/functional/src/test_' + got_filename
-        self.exp_filename = 'test/functional/xlsx_files/' + exp_filename
+        self.got_filename = "test/functional/src/test_" + got_filename
+        self.exp_filename = "test/functional/xlsx_files/" + exp_filename
 
         # Do the comparison between the files.
-        got, exp = _compare_xlsx_files(self.got_filename,
-                                       self.exp_filename,
-                                       self.ignore_files,
-                                       self.ignore_elements)
+        got, exp = _compare_xlsx_files(
+            self.got_filename,
+            self.exp_filename,
+            self.ignore_files,
+            self.ignore_elements,
+        )
         self.assertEqual(exp, got)
 
     def tearDown(self):

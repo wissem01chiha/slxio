@@ -198,27 +198,19 @@ def test_negative_stride_from_python(msg):
     # Mutator:
     with pytest.raises(TypeError) as excinfo:
         m.double_threer(second_row)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         double_threer(): incompatible function arguments. The following argument types are supported:
             1. (arg0: typing.Annotated[numpy.typing.NDArray[numpy.float32], "[1, 3]", "flags.writeable"]) -> None
 
-        Invoked with: """
-        + repr(np.array([5.0, 4.0, 3.0], dtype="float32"))
-    )
+        Invoked with: """ + repr(np.array([5.0, 4.0, 3.0], dtype="float32"))
 
     with pytest.raises(TypeError) as excinfo:
         m.double_threec(second_col)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         double_threec(): incompatible function arguments. The following argument types are supported:
             1. (arg0: typing.Annotated[numpy.typing.NDArray[numpy.float32], "[3, 1]", "flags.writeable"]) -> None
 
-        Invoked with: """
-        + repr(np.array([7.0, 4.0, 1.0], dtype="float32"))
-    )
+        Invoked with: """ + repr(np.array([7.0, 4.0, 1.0], dtype="float32"))
 
 
 def test_block_runtime_error_type_caster_eigen_ref_made_a_copy():
@@ -245,9 +237,9 @@ def test_eigen_ref_to_python():
     chols = [m.cholesky1, m.cholesky2, m.cholesky3, m.cholesky4]
     for i, chol in enumerate(chols, start=1):
         mymat = chol(np.array([[1.0, 2, 4], [2, 13, 23], [4, 23, 77]]))
-        assert np.all(mymat == np.array([[1, 0, 0], [2, 3, 0], [4, 5, 6]])), (
-            f"cholesky{i}"
-        )
+        assert np.all(
+            mymat == np.array([[1, 0, 0], [2, 3, 0], [4, 5, 6]])
+        ), f"cholesky{i}"
 
 
 def assign_both(a1, a2, r, c, v):
@@ -698,18 +690,12 @@ def test_special_matrix_objects():
 
 
 def test_dense_signature(doc):
-    assert (
-        doc(m.double_col)
-        == """
+    assert doc(m.double_col) == """
         double_col(arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float32, "[m, 1]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float32], "[m, 1]"]
     """
-    )
-    assert (
-        doc(m.double_row)
-        == """
+    assert doc(m.double_row) == """
         double_row(arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float32, "[1, n]"]) -> typing.Annotated[numpy.typing.NDArray[numpy.float32], "[1, n]"]
     """
-    )
     assert doc(m.double_complex) == (
         """
         double_complex(arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.complex64, "[m, 1]"])"""
@@ -762,18 +748,12 @@ def test_sparse():
 
 def test_sparse_signature(doc):
     pytest.importorskip("scipy")
-    assert (
-        doc(m.sparse_copy_r)
-        == """
+    assert doc(m.sparse_copy_r) == """
         sparse_copy_r(arg0: scipy.sparse.csr_matrix[numpy.float32]) -> scipy.sparse.csr_matrix[numpy.float32]
     """
-    )
-    assert (
-        doc(m.sparse_copy_c)
-        == """
+    assert doc(m.sparse_copy_c) == """
         sparse_copy_c(arg0: scipy.sparse.csc_matrix[numpy.float32]) -> scipy.sparse.csc_matrix[numpy.float32]
     """
-    )
 
 
 def test_issue738():

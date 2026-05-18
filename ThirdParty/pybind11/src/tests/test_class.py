@@ -134,24 +134,18 @@ def test_docstrings(doc):
     assert UserType.get_value.__name__ == "get_value"
     assert UserType.get_value.__module__ == "pybind11_tests"
 
-    assert (
-        doc(UserType.get_value)
-        == """
+    assert doc(UserType.get_value) == """
         get_value(self: m.UserType) -> int
 
         Get value using a method
     """
-    )
     assert doc(UserType.value) == "Get/set value using a property"
 
-    assert (
-        doc(m.NoConstructor.new_instance)
-        == """
+    assert doc(m.NoConstructor.new_instance) == """
         new_instance() -> m.class_.NoConstructor
 
         Return an instance
     """
-    )
 
 
 def test_qualname(doc):
@@ -160,36 +154,21 @@ def test_qualname(doc):
     assert m.NestBase.__qualname__ == "NestBase"
     assert m.NestBase.Nested.__qualname__ == "NestBase.Nested"
 
-    assert (
-        doc(m.NestBase.__init__)
-        == """
+    assert doc(m.NestBase.__init__) == """
         __init__(self: m.class_.NestBase) -> None
     """
-    )
-    assert (
-        doc(m.NestBase.g)
-        == """
+    assert doc(m.NestBase.g) == """
         g(self: m.class_.NestBase, arg0: m.class_.NestBase.Nested) -> None
     """
-    )
-    assert (
-        doc(m.NestBase.Nested.__init__)
-        == """
+    assert doc(m.NestBase.Nested.__init__) == """
         __init__(self: m.class_.NestBase.Nested) -> None
     """
-    )
-    assert (
-        doc(m.NestBase.Nested.fn)
-        == """
+    assert doc(m.NestBase.Nested.fn) == """
         fn(self: m.class_.NestBase.Nested, arg0: typing.SupportsInt | typing.SupportsIndex, arg1: m.class_.NestBase, arg2: m.class_.NestBase.Nested) -> None
     """
-    )
-    assert (
-        doc(m.NestBase.Nested.fa)
-        == """
+    assert doc(m.NestBase.Nested.fa) == """
         fa(self: m.class_.NestBase.Nested, a: typing.SupportsInt | typing.SupportsIndex, b: m.class_.NestBase, c: m.class_.NestBase.Nested) -> None
     """
-    )
     assert m.NestBase.__module__ == "pybind11_tests.class_"
     assert m.NestBase.Nested.__module__ == "pybind11_tests.class_"
 
@@ -214,15 +193,12 @@ def test_inheritance(msg):
 
     with pytest.raises(TypeError) as excinfo:
         m.dog_bark(polly)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         dog_bark(): incompatible function arguments. The following argument types are supported:
             1. (arg0: m.class_.Dog) -> str
 
         Invoked with: <m.class_.Pet object at 0>
     """
-    )
 
     with pytest.raises(TypeError) as excinfo:
         m.Chimera("lion", "goat")
@@ -332,14 +308,11 @@ def test_operator_new_delete(capture):
         a = m.HasOpNewDel()
         b = m.HasOpNewDelSize()
         d = m.HasOpNewDelBoth()
-    assert (
-        capture
-        == """
+    assert capture == """
         A new 8
         B new 4
         D new 32
     """
-    )
     sz_alias = str(m.AliasedHasOpNewDelSize.size_alias)
     sz_noalias = str(m.AliasedHasOpNewDelSize.size_noalias)
     with capture:
@@ -354,14 +327,11 @@ def test_operator_new_delete(capture):
         pytest.gc_collect()
         del d
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         A delete
         B delete 4
         D delete
     """
-    )
 
     with capture:
         del c
@@ -432,15 +402,12 @@ def test_reentrant_implicit_conversion_failure(msg):
     # ensure that there is no runaway reentrant implicit conversion (#1035)
     with pytest.raises(TypeError) as excinfo:
         m.BogusImplicitConversion(0)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         __init__(): incompatible constructor arguments. The following argument types are supported:
             1. m.class_.BogusImplicitConversion(arg0: m.class_.BogusImplicitConversion)
 
         Invoked with: 0
     """
-    )
 
 
 def test_error_after_conversions():

@@ -8,6 +8,7 @@
 
 import base_test_class
 
+
 class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
     """
     Test file created with libxlsxwriter against a file created by Excel.
@@ -15,37 +16,37 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
     """
 
     def test_autofilter00(self):
-        self.run_exe_test('test_autofilter00')
+        self.run_exe_test("test_autofilter00")
 
     def test_autofilter01(self):
-        self.run_exe_test('test_autofilter01')
+        self.run_exe_test("test_autofilter01")
 
     def test_autofilter02(self):
-        self.run_exe_test('test_autofilter02')
+        self.run_exe_test("test_autofilter02")
 
     def test_autofilter03(self):
-        self.run_exe_test('test_autofilter03')
+        self.run_exe_test("test_autofilter03")
 
     def test_autofilter04(self):
-        self.run_exe_test('test_autofilter04')
+        self.run_exe_test("test_autofilter04")
 
     def test_autofilter05(self):
-        self.run_exe_test('test_autofilter05')
+        self.run_exe_test("test_autofilter05")
 
     def test_autofilter06(self):
-        self.run_exe_test('test_autofilter06')
+        self.run_exe_test("test_autofilter06")
 
     def test_autofilter07(self):
-        self.run_exe_test('test_autofilter07')
+        self.run_exe_test("test_autofilter07")
 
     def test_autofilter08(self):
-        self.run_exe_test('test_autofilter08')
+        self.run_exe_test("test_autofilter08")
 
     def test_autofilter09(self):
-        self.run_exe_test('test_autofilter09')
+        self.run_exe_test("test_autofilter09")
 
     def test_autofilter10(self):
-        self.run_exe_test('test_autofilter10')
+        self.run_exe_test("test_autofilter10")
 
     def test_autofilter11(self):
-        self.run_exe_test('test_autofilter11')
+        self.run_exe_test("test_autofilter11")

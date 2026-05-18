@@ -8,6 +8,7 @@ libxml2.debugMemory(1)
 
 log = ""
 
+
 class callback:
     def startDocument(self):
         global log
@@ -41,6 +42,7 @@ class callback:
         global log
         log = log + "fatalError: %s:" % (msg)
 
+
 handler = callback()
 
 ctxt = libxml2.createPushParser(handler, "<foo", 4, "test.xml")
@@ -48,7 +50,7 @@ chunk = " url='tst'>b"
 ctxt.parseChunk(chunk, len(chunk), 0)
 chunk = "ar</foo>"
 ctxt.parseChunk(chunk, len(chunk), 1)
-ctxt=None
+ctxt = None
 
 reference = "startDocument:startElement foo {'url': 'tst'}:characters: bar:endElement foo:endDocument:"
 if log != reference:

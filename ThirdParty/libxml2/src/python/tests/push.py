@@ -9,7 +9,7 @@ libxml2.debugMemory(1)
 ctxt = libxml2.createPushParser(None, "<foo", 4, "test.xml")
 ctxt.parseChunk("/>", 2, 1)
 doc = ctxt.doc()
-ctxt=None
+ctxt = None
 if doc.name != "test.xml":
     print("document name error")
     sys.exit(1)
@@ -24,8 +24,8 @@ while i > 0:
     ctxt.parseChunk("/>", 2, 1)
     doc = ctxt.doc()
     doc.freeDoc()
-    i = i -1
-ctxt=None
+    i = i - 1
+ctxt = None
 
 # Memory debug specific
 libxml2.cleanupParser()

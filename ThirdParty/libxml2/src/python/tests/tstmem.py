@@ -9,17 +9,19 @@ except ModuleNotFoundError:
 
 import sys
 
+
 def error(msg, data):
     pass
+
 
 # Memory debug specific
 libxml2.debugMemory(1)
 
-dtd="""<!ELEMENT foo EMPTY>"""
-instance="""<?xml version="1.0"?>
+dtd = """<!ELEMENT foo EMPTY>"""
+instance = """<?xml version="1.0"?>
 <foo></foo>"""
 
-dtd = libxml2.parseDTD(None, 'test.dtd')
+dtd = libxml2.parseDTD(None, "test.dtd")
 ctxt = libxml2.newValidCtxt()
 libxml2mod.xmlSetValidErrors(ctxt._o, error, error)
 doc = libxml2.parseDoc(instance)

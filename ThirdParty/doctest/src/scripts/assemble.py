@@ -20,10 +20,7 @@ from itertools import chain
 from pathlib import Path
 from textwrap import dedent
 
-
-TEMPLATE = string.Template(
-    dedent(
-        """\
+TEMPLATE = string.Template(dedent("""\
   // =============================================================
   // == DO NOT MODIFY THIS FILE BY HAND - IT IS AUTO GENERATED! ==
   // =============================================================
@@ -38,9 +35,7 @@ TEMPLATE = string.Template(
   $sources
 
   #endif // defined(DOCTEST_CONFIG_IMPLEMENT) && !defined(DOCTEST_LIBRARY_IMPLEMENTATION)
-"""
-    )
-)
+"""))
 
 
 def main(args):
@@ -51,11 +46,11 @@ def main(args):
     script = Path(__file__).resolve()
     root = script.parent.parent
 
-    public_dir  = root / "doctest" / "parts" / "public"
+    public_dir = root / "doctest" / "parts" / "public"
     private_dir = root / "doctest" / "parts" / "private"
-    output      = root / "doctest" / "doctest.h"
+    output = root / "doctest" / "doctest.h"
 
-    public_headers  = sorted(set(public_dir.rglob("*.h")))
+    public_headers = sorted(set(public_dir.rglob("*.h")))
     private_headers = sorted(set(private_dir.rglob("*.h")))
     private_sources = sorted(set(private_dir.rglob("*.cpp")))
 
@@ -119,7 +114,7 @@ def main(args):
             else:
                 yield line
 
-    visited     = set()
+    visited = set()
     doctest_fwd = root / "doctest" / "parts" / "doctest_fwd.h"
     result = TEMPLATE.substitute(
         headers="\n".join(
@@ -128,7 +123,9 @@ def main(args):
         sources="\n".join(
             chain.from_iterable(
                 process_file(
-                    file, visited=visited, headers=public_headers + private_headers + [doctest_fwd]
+                    file,
+                    visited=visited,
+                    headers=public_headers + private_headers + [doctest_fwd],
                 )
                 for file in private_sources
             )

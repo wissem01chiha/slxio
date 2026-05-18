@@ -5,14 +5,17 @@
 import sys
 import setup_test
 import libxml2
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
-schema="""<element name="foo" xmlns="http://relaxng.org/ns/structure/1.0"
+schema = """<element name="foo" xmlns="http://relaxng.org/ns/structure/1.0"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
   <oneOrMore>
     <element name="label">
@@ -42,7 +45,7 @@ del rngp
 #
 # Parse and validate the correct document
 #
-docstr="""<foo>
+docstr = """<foo>
 <label>some text</label>
 <item>100</item>
 </foo>"""
@@ -66,28 +69,31 @@ if reader.IsValid() != 1:
 #
 # Parse and validate the incorrect document
 #
-docstr="""<foo>
+docstr = """<foo>
 <label>some text</label>
 <item>1000</item>
 </foo>"""
 
-err=""
+err = ""
 # RNG errors are not as good as before , TODO
-#expect="""RNG validity error: file error line 3 element text
-#Type byte doesn't allow value '1000'
-#RNG validity error: file error line 3 element text
-#Error validating datatype byte
-#RNG validity error: file error line 3 element text
-#Element item failed to validate content
-#"""
-expect="""Type byte doesn't allow value '1000'
+# expect="""RNG validity error: file error line 3 element text
+# Type byte doesn't allow value '1000'
+# RNG validity error: file error line 3 element text
+# Error validating datatype byte
+# RNG validity error: file error line 3 element text
+# Element item failed to validate content
+# """
+expect = """Type byte doesn't allow value '1000'
 Error validating datatype byte
 Element item failed to validate content
 """
 
+
 def callback(ctx, str):
     global err
     err = err + "%s" % (str)
+
+
 libxml2.registerErrorHandler(callback, "")
 
 f = str_io(docstr)

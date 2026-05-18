@@ -5,39 +5,51 @@
 import setup_test
 import libxml2
 import sys
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
 # Memory debug specific
 libxml2.debugMemory(1)
 
-expect="""--> (3) test1:1:xmlns: URI foo is not absolute
+expect = """--> (3) test1:1:xmlns: URI foo is not absolute
 --> (4) test1:1:Opening and ending tag mismatch: c line 1 and a
 """
-err=""
-def myErrorHandler(arg,msg,severity,locator):
+err = ""
+
+
+def myErrorHandler(arg, msg, severity, locator):
     global err
-    err = err + "%s (%d) %s:%d:%s" % (arg,severity,locator.BaseURI(),locator.LineNumber(),msg)
+    err = err + "%s (%d) %s:%d:%s" % (
+        arg,
+        severity,
+        locator.BaseURI(),
+        locator.LineNumber(),
+        msg,
+    )
+
 
 f = str_io("""<a xmlns="foo"><b b1="b1"/><c>content of c</a>""")
 input = libxml2.inputBuffer(f)
 reader = input.newTextReader("test1")
-reader.SetErrorHandler(myErrorHandler,"-->")
+reader.SetErrorHandler(myErrorHandler, "-->")
 while reader.Read() == 1:
     pass
 
 if err != expect:
     print("error")
-    print("received %s" %(err))
-    print("expected %s" %(expect))
+    print("received %s" % (err))
+    print("expected %s" % (expect))
     sys.exit(1)
 
-reader.SetErrorHandler(None,None)
-if reader.GetErrorHandler() != (None,None):
+reader.SetErrorHandler(None, None)
+if reader.GetErrorHandler() != (None, None):
     print("GetErrorHandler failed")
     sys.exit(1)
 

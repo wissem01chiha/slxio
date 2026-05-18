@@ -3,7 +3,8 @@ import setup_test
 import libxml2
 import sys
 
-ARG = 'test string'
+ARG = "test string"
+
 
 class ErrorHandler:
 
@@ -15,10 +16,11 @@ class ErrorHandler:
             raise Exception("Error handler did not receive correct argument")
         self.errors.append(msg)
 
+
 # Memory debug specific
 libxml2.debugMemory(1)
 
-schema="""<?xml version="1.0"?>
+schema = """<?xml version="1.0"?>
 <element name="foo"
          xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:a="http://relaxng.org/ns/annotation/1.0"
@@ -34,10 +36,10 @@ schema="""<?xml version="1.0"?>
 </element>
 """
 
-valid="""<?xml version="1.0"?>
+valid = """<?xml version="1.0"?>
 <foo><pre1:bar1 xmlns:pre1="http://www.example.com/n1"/><pre2:bar2 xmlns:pre2="http://www.example.com/n2"/></foo>"""
 
-invalid="""<?xml version="1.0"?>
+invalid = """<?xml version="1.0"?>
 <foo><pre1:bar1 xmlns:pre1="http://www.example.com/n1">bad</pre1:bar1><pre2:bar2 xmlns:pre2="http://www.example.com/n2"/></foo>"""
 
 rngp = libxml2.relaxNGNewMemParserCtxt(schema, len(schema))

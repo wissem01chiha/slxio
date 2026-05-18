@@ -37,9 +37,11 @@ while i > 0:
         sys.exit(1)
     i = i - 1
 
-#deactivate error messages from the validation
+
+# deactivate error messages from the validation
 def noerr(ctx, str):
     pass
+
 
 libxml2.registerErrorHandler(noerr, None)
 

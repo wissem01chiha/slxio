@@ -6,27 +6,33 @@ import libxml2
 # TODO: Check what this does and move away from libxml2 Python bindings
 
 libxml2.debugMemory(1)
-baseDir = os.path.join('msxsdtest', 'Particles')
+baseDir = os.path.join("msxsdtest", "Particles")
 filenames = os.listdir(baseDir)
 mainXSD = str()
 signature = str()
 dictXSD = dict()
 
+
 def gatherFiles():
     for file in filenames:
-        if (file[-5] in ["a", "b", "c"]) and (file[-3:] == 'xsd'):
+        if (file[-5] in ["a", "b", "c"]) and (file[-3:] == "xsd"):
             # newfilename = string.replace(filename, ' ', '_')
             signature = file[:-5]
             mainXSD = signature + ".xsd"
             imports = []
             for sub in filenames:
-                if (mainXSD != sub) and (sub[-3:] == 'xsd') and sub.startswith(signature):
+                if (
+                    (mainXSD != sub)
+                    and (sub[-3:] == "xsd")
+                    and sub.startswith(signature)
+                ):
                     imports.append(sub)
             if len(imports) != 0:
                 dictXSD[mainXSD] = imports
 
+
 def debugMsg(text):
-    #pass
+    # pass
     print("DEBUG:", text)
 
 
@@ -38,7 +44,7 @@ def fixup():
         # Load the schema document.
         schemaFile = os.path.join(baseDir, mainXSD)
         schemaDoc = libxml2.parseFile(schemaFile)
-        if (schemaDoc is None):
+        if schemaDoc is None:
             print("ERROR: doc '%s' not found" % mainXSD)
             sys.exit(1)
         try:
@@ -55,7 +61,7 @@ def fixup():
             if len(xpres) != 0:
                 for elem in xpres:
                     loc = elem.noNsProp("schemaLocation")
-                    if (loc is not None):
+                    if loc is not None:
                         debugMsg("  imports '%s'" % loc)
                         if loc in dictXSD[mainXSD]:
                             dictXSD[mainXSD].remove(loc)
@@ -68,7 +74,9 @@ def fixup():
                     xpimpCtx = impDoc.xpathNewContext()
                     try:
                         xpimpCtx.setContextDoc(impDoc)
-                        xpimpCtx.xpathRegisterNs("xs", "http://www.w3.org/2001/XMLSchema")
+                        xpimpCtx.xpathRegisterNs(
+                            "xs", "http://www.w3.org/2001/XMLSchema"
+                        )
                         xpres = xpimpCtx.xpathEval("/xs:schema")
                         impTargetNs = xpres[0].noNsProp("targetNamespace")
                     finally:
@@ -77,9 +85,12 @@ def fixup():
                     impDoc.freeDoc()
 
                 # Add the <import>.
-                debugMsg("  adding <import namespace='%s' schemaLocation='%s'/>" % (impTargetNs, loc))
+                debugMsg(
+                    "  adding <import namespace='%s' schemaLocation='%s'/>"
+                    % (impTargetNs, loc)
+                )
                 newElem = schemaDoc.newDocNode(schemaNs, "import", None)
-                if (impTargetNs is not None):
+                if impTargetNs is not None:
                     newElem.newProp("namespace", impTargetNs)
                 newElem.newProp("schemaLocation", loc)
                 if schemaElem.children is not None:
@@ -88,6 +99,7 @@ def fixup():
         finally:
             xpmainCtx.xpathFreeContext()
             schemaDoc.freeDoc()
+
 
 try:
     gatherFiles()

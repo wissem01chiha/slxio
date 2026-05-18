@@ -166,52 +166,40 @@ def test_string_view(capture):
         m.string_view_print("utf8 🎂")
         m.string_view16_print("utf16 🎂")
         m.string_view32_print("utf32 🎂")
-    assert (
-        capture
-        == """
+    assert capture == """
         Hi 2
         utf8 🎂 9
         utf16 🎂 8
         utf32 🎂 7
     """
-    )
     if hasattr(m, "has_u8string"):
         with capture:
             m.string_view8_print("Hi")
             m.string_view8_print("utf8 🎂")
-        assert (
-            capture
-            == """
+        assert capture == """
             Hi 2
             utf8 🎂 9
         """
-        )
 
     with capture:
         m.string_view_print("Hi, ascii")
         m.string_view_print("Hi, utf8 🎂")
         m.string_view16_print("Hi, utf16 🎂")
         m.string_view32_print("Hi, utf32 🎂")
-    assert (
-        capture
-        == """
+    assert capture == """
         Hi, ascii 9
         Hi, utf8 🎂 13
         Hi, utf16 🎂 12
         Hi, utf32 🎂 11
     """
-    )
     if hasattr(m, "has_u8string"):
         with capture:
             m.string_view8_print("Hi, ascii")
             m.string_view8_print("Hi, utf8 🎂")
-        assert (
-            capture
-            == """
+        assert capture == """
             Hi, ascii 9
             Hi, utf8 🎂 13
         """
-        )
 
     assert m.string_view_bytes() == b"abc \x80\x80 def"
     assert m.string_view_str() == "abc ‽ def"
@@ -438,22 +426,16 @@ def test_tuple(doc):
     assert m.tuple_passthrough([True, "test", 5]) == (5, "test", True)
     assert m.empty_tuple() == ()
 
-    assert (
-        doc(m.pair_passthrough)
-        == """
+    assert doc(m.pair_passthrough) == """
         pair_passthrough(arg0: tuple[bool, str]) -> tuple[str, bool]
 
         Return a pair in reversed order
     """
-    )
-    assert (
-        doc(m.tuple_passthrough)
-        == """
+    assert doc(m.tuple_passthrough) == """
         tuple_passthrough(arg0: tuple[bool, str, typing.SupportsInt | typing.SupportsIndex]) -> tuple[int, str, bool]
 
         Return a triple in reversed order
     """
-    )
 
     assert doc(m.empty_tuple) == """empty_tuple() -> tuple[()]"""
 

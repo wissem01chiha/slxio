@@ -57,8 +57,7 @@ def test_py_cast_useable_on_shutdown():
 
     See PR #5972 and https://github.com/pybind/pybind11/pull/5958#discussion_r2717645230.
     """
-    env.check_script_success_in_subprocess(
-        f"""
+    env.check_script_success_in_subprocess(f"""
         import sys
 
         sys.path.insert(0, {os.path.dirname(env.__file__)!r})
@@ -75,5 +74,4 @@ def test_py_cast_useable_on_shutdown():
         # Add weakref callbacks that verify the capsule is still alive when the
         # pybind11 object is garbage collected during shutdown.
         m.add_gc_checkers_with_weakrefs(obj)
-        """
-    )
+        """)

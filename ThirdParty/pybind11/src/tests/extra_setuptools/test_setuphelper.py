@@ -19,8 +19,7 @@ def test_simple_setup_py(monkeypatch, tmpdir, parallel, std):
     monkeypatch.syspath_prepend(MAIN_DIR)
 
     (tmpdir / "setup.py").write_text(
-        dedent(
-            f"""\
+        dedent(f"""\
             import sys
             sys.path.append({MAIN_DIR!r})
 
@@ -52,14 +51,12 @@ def test_simple_setup_py(monkeypatch, tmpdir, parallel, std):
                 cmdclass=cmdclass,
                 ext_modules=ext_modules,
             )
-            """
-        ),
+            """),
         encoding="ascii",
     )
 
     (tmpdir / "main.cpp").write_text(
-        dedent(
-            """\
+        dedent("""\
             #include <pybind11/pybind11.h>
 
             int f(int x) {
@@ -68,8 +65,7 @@ def test_simple_setup_py(monkeypatch, tmpdir, parallel, std):
             PYBIND11_MODULE(simple_setup, m) {
                 m.def("f", &f);
             }
-            """
-        ),
+            """),
         encoding="ascii",
     )
 
@@ -96,12 +92,10 @@ def test_simple_setup_py(monkeypatch, tmpdir, parallel, std):
     assert len(list(tmpdir.listdir())) == 4  # two files + output + build_dir
 
     (tmpdir / "test.py").write_text(
-        dedent(
-            """\
+        dedent("""\
             import simple_setup
             assert simple_setup.f(3) == 9
-            """
-        ),
+            """),
         encoding="ascii",
     )
 

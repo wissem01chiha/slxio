@@ -10,20 +10,27 @@ import libxml2
 libxml2.debugMemory(1)
 
 result = ""
+
+
 def processNode(reader):
     global result
 
-    result = result + "%d %d %s %d\n" % (reader.Depth(), reader.NodeType(),
-			   reader.Name(), reader.IsEmptyElement())
+    result = result + "%d %d %s %d\n" % (
+        reader.Depth(),
+        reader.NodeType(),
+        reader.Name(),
+        reader.IsEmptyElement(),
+    )
+
 
 #
 # Parse a document testing the readerForxxx API
 #
-docstr="""<foo>
+docstr = """<foo>
 <label>some text</label>
 <item>100</item>
 </foo>"""
-expect="""0 1 foo 0
+expect = """0 1 foo 0
 1 14 #text 0
 1 1 label 0
 2 3 #text 0
@@ -55,11 +62,11 @@ if result != expect:
 #
 # Reuse the reader for another document testing the ReaderNewxxx API
 #
-docstr="""<foo>
+docstr = """<foo>
 <label>some text</label>
 <item>1000</item>
 </foo>"""
-expect="""0 1 foo 0
+expect = """0 1 foo 0
 1 14 #text 0
 1 1 label 0
 2 3 #text 0

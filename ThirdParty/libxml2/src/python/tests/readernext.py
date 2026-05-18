@@ -6,11 +6,14 @@
 import setup_test
 import libxml2
 import sys
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
 # Memory debug specific
@@ -23,24 +26,31 @@ ret = reader.Read()
 if ret != 1:
     print("test_next: Error reading to first element")
     sys.exit(1)
-if reader.Name() != "a" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "a"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 0
+):
     print("test_next: Error reading the first element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test_next: Error reading to second element")
     sys.exit(1)
-if reader.Name() != "b" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "b"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 0
+):
     print("test_next: Error reading the second element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test_next: Error reading to third element")
     sys.exit(1)
-if reader.Name() != "c" or reader.NodeType() != 1 or \
-   reader.HasAttributes() != 0:
+if reader.Name() != "c" or reader.NodeType() != 1 or reader.HasAttributes() != 0:
     print("test_next: Error reading the third element")
     sys.exit(1)
 ret = reader.Read()
@@ -54,16 +64,24 @@ ret = reader.Next()
 if ret != 1:
     print("test_next: Error moving to third element")
     sys.exit(1)
-if reader.Name() != "d" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "d"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 0
+):
     print("test_next: Error reading third element")
     sys.exit(1)
 ret = reader.Next()
 if ret != 1:
     print("test_next: Error reading to end of first element")
     sys.exit(1)
-if reader.Name() != "a" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 15 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "a"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 15
+    or reader.HasAttributes() != 0
+):
     print("test_next: Error reading the end of first element")
     sys.exit(1)
 ret = reader.Read()

@@ -6,11 +6,14 @@
 import setup_test
 import libxml2
 import sys
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
 # Memory debug specific
@@ -23,49 +26,73 @@ ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to first element")
     sys.exit(1)
-if reader.Name() != "a" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "a"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 0
+):
     print("test1: Error reading the first element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to second element")
     sys.exit(1)
-if reader.Name() != "b" or reader.IsEmptyElement() != 1 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 1:
+if (
+    reader.Name() != "b"
+    or reader.IsEmptyElement() != 1
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 1
+):
     print("test1: Error reading the second element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to third element")
     sys.exit(1)
-if reader.Name() != "c" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 1 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "c"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 1
+    or reader.HasAttributes() != 0
+):
     print("test1: Error reading the third element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to text node")
     sys.exit(1)
-if reader.Name() != "#text" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 3 or reader.HasAttributes() != 0 or \
-   reader.Value() != "content of c":
+if (
+    reader.Name() != "#text"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 3
+    or reader.HasAttributes() != 0
+    or reader.Value() != "content of c"
+):
     print("test1: Error reading the text node")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to end of third element")
     sys.exit(1)
-if reader.Name() != "c" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 15 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "c"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 15
+    or reader.HasAttributes() != 0
+):
     print("test1: Error reading the end of third element")
     sys.exit(1)
 ret = reader.Read()
 if ret != 1:
     print("test1: Error reading to end of first element")
     sys.exit(1)
-if reader.Name() != "a" or reader.IsEmptyElement() != 0 or \
-   reader.NodeType() != 15 or reader.HasAttributes() != 0:
+if (
+    reader.Name() != "a"
+    or reader.IsEmptyElement() != 0
+    or reader.NodeType() != 15
+    or reader.HasAttributes() != 0
+):
     print("test1: Error reading the end of first element")
     sys.exit(1)
 ret = reader.Read()
@@ -84,10 +111,12 @@ ret = reader.Read()
 if ret != 1:
     print("Error reading test element")
     sys.exit(1)
-if reader.GetAttributeNo(0) != "urn:datatypes" or \
-   reader.GetAttributeNo(1) != "int" or \
-   reader.GetAttributeNs("type", "urn:datatypes") != "int" or \
-   reader.GetAttribute("dt:type") != "int":
+if (
+    reader.GetAttributeNo(0) != "urn:datatypes"
+    or reader.GetAttributeNo(1) != "int"
+    or reader.GetAttributeNs("type", "urn:datatypes") != "int"
+    or reader.GetAttribute("dt:type") != "int"
+):
     print("error reading test attributes")
     sys.exit(1)
 
@@ -257,9 +286,13 @@ ret = reader.MoveToFirstAttribute()
 if ret != 1:
     print("test6: failed to MoveToFirstAttribute()")
     sys.exit(1)
-if reader.NamespaceUri() != "http://www.w3.org/2000/xmlns/" or \
-   reader.LocalName() != "xmlns" or reader.Name() != "xmlns" or \
-   reader.Value() != "http://example.com/foo" or reader.NodeType() != 2:
+if (
+    reader.NamespaceUri() != "http://www.w3.org/2000/xmlns/"
+    or reader.LocalName() != "xmlns"
+    or reader.Name() != "xmlns"
+    or reader.Value() != "http://example.com/foo"
+    or reader.NodeType() != 2
+):
     print("test6: failed to read the namespace node")
     sys.exit(1)
 
@@ -274,9 +307,13 @@ ret = reader.MoveToFirstAttribute()
 if ret != 1:
     print("test7: failed to MoveToFirstAttribute()")
     sys.exit(1)
-if reader.NamespaceUri() != "http://www.w3.org/2000/xmlns/" or \
-   reader.LocalName() != "prefix" or reader.Name() != "xmlns:prefix" or \
-   reader.Value() != "http://example.com/foo" or reader.NodeType() != 2:
+if (
+    reader.NamespaceUri() != "http://www.w3.org/2000/xmlns/"
+    or reader.LocalName() != "prefix"
+    or reader.Name() != "xmlns:prefix"
+    or reader.Value() != "http://example.com/foo"
+    or reader.NodeType() != 2
+):
     print("test7: failed to read the namespace node")
     sys.exit(1)
 
@@ -298,6 +335,7 @@ if ret != 0:
     print("test8: failed to detect the EOF")
     sys.exit(1)
 
+
 #
 # Another test provided by Stéphane Bidoul and checked with C#
 #
@@ -307,18 +345,27 @@ def tst_reader(s):
     reader = input.newTextReader("tst")
     res = ""
     while reader.Read():
-        res=res + "%s (%s) [%s] %d %d\n" % (reader.NodeType(),reader.Name(),
-                                      reader.Value(), reader.IsEmptyElement(),
-                                      reader.Depth())
-        if reader.NodeType() == 1: # Element
+        res = res + "%s (%s) [%s] %d %d\n" % (
+            reader.NodeType(),
+            reader.Name(),
+            reader.Value(),
+            reader.IsEmptyElement(),
+            reader.Depth(),
+        )
+        if reader.NodeType() == 1:  # Element
             while reader.MoveToNextAttribute():
-                res = res + "-- %s (%s) [%s] %d %d\n" % (reader.NodeType(),
-                                       reader.Name(),reader.Value(),
-                                       reader.IsEmptyElement(), reader.Depth())
+                res = res + "-- %s (%s) [%s] %d %d\n" % (
+                    reader.NodeType(),
+                    reader.Name(),
+                    reader.Value(),
+                    reader.IsEmptyElement(),
+                    reader.Depth(),
+                )
     return res
 
-doc="""<a><b b1="b1"/><c>content of c</c></a>"""
-expect="""1 (a) [None] 0 0
+
+doc = """<a><b b1="b1"/><c>content of c</c></a>"""
+expect = """1 (a) [None] 0 0
 1 (b) [None] 1 1
 -- 2 (b1) [b1] 0 2
 1 (c) [None] 0 1
@@ -332,8 +379,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<test><b/><c/></test>"""
-expect="""1 (test) [None] 0 0
+doc = """<test><b/><c/></test>"""
+expect = """1 (test) [None] 0 0
 1 (b) [None] 1 1
 1 (c) [None] 1 1
 15 (test) [None] 0 0
@@ -344,8 +391,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<a><b>bbb</b><c>ccc</c></a>"""
-expect="""1 (a) [None] 0 0
+doc = """<a><b>bbb</b><c>ccc</c></a>"""
+expect = """1 (a) [None] 0 0
 1 (b) [None] 0 1
 3 (#text) [bbb] 0 2
 15 (b) [None] 0 1
@@ -360,8 +407,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<test a="a"/>"""
-expect="""1 (test) [None] 1 0
+doc = """<test a="a"/>"""
+expect = """1 (test) [None] 1 0
 -- 2 (a) [a] 0 1
 """
 res = tst_reader(doc)
@@ -370,8 +417,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<test><a>aaa</a><b/></test>"""
-expect="""1 (test) [None] 0 0
+doc = """<test><a>aaa</a><b/></test>"""
+expect = """1 (test) [None] 0 0
 1 (a) [None] 0 1
 3 (#text) [aaa] 0 2
 15 (a) [None] 0 1
@@ -384,8 +431,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<test><p></p></test>"""
-expect="""1 (test) [None] 0 0
+doc = """<test><p></p></test>"""
+expect = """1 (test) [None] 0 0
 1 (p) [None] 0 1
 15 (p) [None] 0 1
 15 (test) [None] 0 0
@@ -396,8 +443,8 @@ if res != expect:
     print(res)
     sys.exit(1)
 
-doc="""<p></p>"""
-expect="""1 (p) [None] 0 0
+doc = """<p></p>"""
+expect = """1 (p) [None] 0 0
 15 (p) [None] 0 0
 """
 res = tst_reader(doc)
@@ -409,7 +456,7 @@ if res != expect:
 #
 # test from bug #108801
 #
-doc="""<?xml version="1.0" standalone="no"?>
+doc = """<?xml version="1.0" standalone="no"?>
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
                   "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
 ]>
@@ -418,7 +465,7 @@ doc="""<?xml version="1.0" standalone="no"?>
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 </article>
 """
-expect="""10 (article) [None] 0 0
+expect = """10 (article) [None] 0 0
 1 (article) [None] 0 0
 3 (#text) [
 xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

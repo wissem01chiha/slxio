@@ -2,11 +2,14 @@
 import sys
 import setup_test
 import libxml2
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
 # Memory debug specific

@@ -8,6 +8,7 @@ libxml2.debugMemory(1)
 
 log = ""
 
+
 class callback:
     def startDocument(self):
         global log
@@ -41,37 +42,42 @@ class callback:
         global log
         log = log + "fatalError: %s:" % (msg)
 
+
 handler = callback()
 
-log=""
-chunk="""<foo><bar2/>"""
+log = ""
+chunk = """<foo><bar2/>"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
-reference = "startDocument:startElement foo None:startElement bar2 None:endElement bar2:"
+reference = (
+    "startDocument:startElement foo None:startElement bar2 None:endElement bar2:"
+)
 if log != reference:
     print("Error got: %s" % log)
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2></bar2>"""
+log = ""
+chunk = """<foo><bar2></bar2>"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
-reference = "startDocument:startElement foo None:startElement bar2 None:endElement bar2:"
+reference = (
+    "startDocument:startElement foo None:startElement bar2 None:endElement bar2:"
+)
 if log != reference:
     print("Error got: %s" % log)
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2>"""
+log = ""
+chunk = """<foo><bar2>"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
 reference = "startDocument:startElement foo None:startElement bar2 None:"
 if log != reference:
@@ -79,11 +85,11 @@ if log != reference:
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2 a="1" b='2' />"""
+log = ""
+chunk = """<foo><bar2 a="1" b='2' />"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
 reference1 = "startDocument:startElement foo None:startElement bar2 {'a': '1', 'b': '2'}:endElement bar2:"
 reference2 = "startDocument:startElement foo None:startElement bar2 {'b': '2', 'a': '1'}:endElement bar2:"
@@ -92,24 +98,28 @@ if log not in (reference1, reference2):
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2 a="1" b='2' >"""
+log = ""
+chunk = """<foo><bar2 a="1" b='2' >"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
-reference1 = "startDocument:startElement foo None:startElement bar2 {'a': '1', 'b': '2'}:"
-reference2 = "startDocument:startElement foo None:startElement bar2 {'b': '2', 'a': '1'}:"
+reference1 = (
+    "startDocument:startElement foo None:startElement bar2 {'a': '1', 'b': '2'}:"
+)
+reference2 = (
+    "startDocument:startElement foo None:startElement bar2 {'b': '2', 'a': '1'}:"
+)
 if log not in (reference1, reference2):
     print("Error got: %s" % log)
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2 a="1" b='2' ></bar2>"""
+log = ""
+chunk = """<foo><bar2 a="1" b='2' ></bar2>"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
 reference1 = "startDocument:startElement foo None:startElement bar2 {'a': '1', 'b': '2'}:endElement bar2:"
 reference2 = "startDocument:startElement foo None:startElement bar2 {'b': '2', 'a': '1'}:endElement bar2:"
@@ -118,11 +128,11 @@ if log not in (reference1, reference2):
     print("Expected: %s" % reference)
     sys.exit(1)
 
-log=""
-chunk="""<foo><bar2 a="b='1' />"""
+log = ""
+chunk = """<foo><bar2 a="b='1' />"""
 ctxt = libxml2.createPushParser(handler, None, 0, "test.xml")
 ctxt.parseChunk(chunk, len(chunk), 0)
-ctxt=None
+ctxt = None
 
 reference = "startDocument:startElement foo None:"
 if log != reference:

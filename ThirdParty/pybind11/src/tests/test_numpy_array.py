@@ -290,14 +290,11 @@ def test_numpy_view(capture):
         assert np.all(ac_view_1 == np.array([1, 2], dtype=np.int32))
         del ac
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         ArrayClass()
         ArrayClass::numpy_view()
         ArrayClass::numpy_view()
     """
-    )
     ac_view_1[0] = 4
     ac_view_1[1] = 3
     assert ac_view_2[0] == 4
@@ -307,12 +304,9 @@ def test_numpy_view(capture):
         del ac_view_2
         pytest.gc_collect()
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         ~ArrayClass()
     """
-    )
 
 
 def test_cast_numpy_int64_to_uint64():
@@ -363,9 +357,7 @@ def test_overload_resolution(msg):
 
     with pytest.raises(TypeError) as excinfo:
         m.overloaded("not an array")
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         overloaded(): incompatible function arguments. The following argument types are supported:
             1. (arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> str
             2. (arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.float32]) -> str
@@ -377,7 +369,6 @@ def test_overload_resolution(msg):
 
         Invoked with: 'not an array'
     """
-    )
 
     assert m.overloaded2(np.array([1], dtype="float64")) == "double"
     assert m.overloaded2(np.array([1], dtype="float32")) == "float"

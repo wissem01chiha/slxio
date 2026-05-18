@@ -3,10 +3,11 @@ import sys
 import setup_test
 import libxml2
 
-#memory debug specific
+# memory debug specific
 libxml2.debugMemory(1)
 
 called = ""
+
 
 def foo(ctx, x):
     global called
@@ -19,8 +20,10 @@ def foo(ctx, x):
     called = ctxt.function()
     return x + 1
 
+
 def bar(ctxt, x):
     return "%d" % (x + 2)
+
 
 doc = libxml2.parseFile("tst.xml")
 ctxt = doc.xpathNewContext()
@@ -55,7 +58,7 @@ if called != "foo":
     print("xpath function: %s" % (called))
     sys.exit(1)
 
-#memory debug specific
+# memory debug specific
 libxml2.cleanupParser()
 if libxml2.debugMemory(1) == 0:
     print("OK")

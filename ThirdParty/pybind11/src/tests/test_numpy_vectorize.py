@@ -20,13 +20,10 @@ def test_vectorize(capture):
         assert capture == "my_func(x:int=1, y:float=2, z:float=3)"
         with capture:
             assert np.allclose(f(np.array([1, 3]), np.array([2, 4]), 3), [6, 36])
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=3)
             my_func(x:int=3, y:float=4, z:float=3)
         """
-        )
         with capture:
             a = np.array([[1, 2], [3, 4]], order="F")
             b = np.array([[10, 20], [30, 40]], order="F")
@@ -35,15 +32,12 @@ def test_vectorize(capture):
             assert np.allclose(result, a * b * c)
             assert result.flags.f_contiguous
         # All inputs are F order and full or singletons, so we the result is in col-major order:
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=10, z:float=3)
             my_func(x:int=3, y:float=30, z:float=3)
             my_func(x:int=2, y:float=20, z:float=3)
             my_func(x:int=4, y:float=40, z:float=3)
         """
-        )
         with capture:
             a, b, c = (
                 np.array([[1, 3, 5], [7, 9, 11]]),
@@ -51,9 +45,7 @@ def test_vectorize(capture):
                 3,
             )
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=3)
             my_func(x:int=3, y:float=4, z:float=3)
             my_func(x:int=5, y:float=6, z:float=3)
@@ -61,13 +53,10 @@ def test_vectorize(capture):
             my_func(x:int=9, y:float=10, z:float=3)
             my_func(x:int=11, y:float=12, z:float=3)
         """
-        )
         with capture:
             a, b, c = np.array([[1, 2, 3], [4, 5, 6]]), np.array([2, 3, 4]), 2
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=2)
             my_func(x:int=2, y:float=3, z:float=2)
             my_func(x:int=3, y:float=4, z:float=2)
@@ -75,13 +64,10 @@ def test_vectorize(capture):
             my_func(x:int=5, y:float=3, z:float=2)
             my_func(x:int=6, y:float=4, z:float=2)
         """
-        )
         with capture:
             a, b, c = np.array([[1, 2, 3], [4, 5, 6]]), np.array([[2], [3]]), 2
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=2)
             my_func(x:int=2, y:float=2, z:float=2)
             my_func(x:int=3, y:float=2, z:float=2)
@@ -89,7 +75,6 @@ def test_vectorize(capture):
             my_func(x:int=5, y:float=3, z:float=2)
             my_func(x:int=6, y:float=3, z:float=2)
         """
-        )
         with capture:
             a, b, c = (
                 np.array([[1, 2, 3], [4, 5, 6]], order="F"),
@@ -97,9 +82,7 @@ def test_vectorize(capture):
                 2,
             )
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=2)
             my_func(x:int=2, y:float=2, z:float=2)
             my_func(x:int=3, y:float=2, z:float=2)
@@ -107,19 +90,15 @@ def test_vectorize(capture):
             my_func(x:int=5, y:float=3, z:float=2)
             my_func(x:int=6, y:float=3, z:float=2)
         """
-        )
         with capture:
             a, b, c = np.array([[1, 2, 3], [4, 5, 6]])[::, ::2], np.array([[2], [3]]), 2
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=2)
             my_func(x:int=3, y:float=2, z:float=2)
             my_func(x:int=4, y:float=3, z:float=2)
             my_func(x:int=6, y:float=3, z:float=2)
         """
-        )
         with capture:
             a, b, c = (
                 np.array([[1, 2, 3], [4, 5, 6]], order="F")[::, ::2],
@@ -127,15 +106,12 @@ def test_vectorize(capture):
                 2,
             )
             assert np.allclose(f(a, b, c), a * b * c)
-        assert (
-            capture
-            == """
+        assert capture == """
             my_func(x:int=1, y:float=2, z:float=2)
             my_func(x:int=3, y:float=2, z:float=2)
             my_func(x:int=4, y:float=3, z:float=2)
             my_func(x:int=6, y:float=3, z:float=2)
         """
-        )
 
 
 def test_type_selection():
@@ -148,12 +124,9 @@ def test_type_selection():
 
 
 def test_docs(doc):
-    assert (
-        doc(m.vectorized_func)
-        == """
+    assert doc(m.vectorized_func) == """
         vectorized_func(arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int32], arg1: typing.Annotated[numpy.typing.ArrayLike, numpy.float32], arg2: typing.Annotated[numpy.typing.ArrayLike, numpy.float64]) -> object
     """
-    )
 
 
 def test_trivial_broadcasting():

@@ -85,4 +85,3 @@ PRIVATE_DEPENDS
   ThirdParty::libxml2
 TEST_DEPENDS
   ThirdParty::doctest
-

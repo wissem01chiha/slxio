@@ -88,16 +88,13 @@ def test_list(capture, doc):
 
         lst.append("value2")
         m.print_list(lst)
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         Entry at position 0: value
         list item 0: inserted-0
         list item 1: overwritten
         list item 2: inserted-2
         list item 3: value2
     """
-    )
 
     assert doc(m.get_list) == "get_list() -> list"
     assert doc(m.print_list) == "print_list(arg0: list) -> None"
@@ -116,15 +113,12 @@ def test_set(capture, doc):
     s.add("key4")
     with capture:
         m.print_anyset(s)
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         key: key1
         key: key2
         key: key3
         key: key4
     """
-    )
 
     m.set_add(s, "key5")
     assert m.anyset_size(s) == 5
@@ -147,14 +141,11 @@ def test_frozenset(capture, doc):
 
     with capture:
         m.print_anyset(s)
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         key: key1
         key: key2
         key: key3
     """
-    )
     assert m.anyset_size(s) == 3
     assert not m.anyset_empty(s)
 
@@ -172,13 +163,10 @@ def test_dict(capture, doc):
     with capture:
         d["key2"] = "value2"
         m.print_dict(d)
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         key: key, value=value
         key: key2, value=value2
     """
-    )
 
     assert not m.dict_contains({}, 42)
     assert m.dict_contains({42: None}, 42)
@@ -302,87 +290,66 @@ def test_capsule(capture):
         a = m.return_capsule_with_destructor()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule
         destructing capsule
     """
-    )
 
     with capture:
         a = m.return_renamed_capsule_with_destructor()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule
         renaming capsule
         destructing capsule
     """
-    )
 
     with capture:
         a = m.return_capsule_with_destructor_2()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule
         destructing capsule: 1234
     """
-    )
 
     with capture:
         a = m.return_capsule_with_destructor_3()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule
         destructing capsule: 1233
         original name: oname
     """
-    )
 
     with capture:
         a = m.return_renamed_capsule_with_destructor_2()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule
         renaming capsule
         destructing capsule: 1234
     """
-    )
 
     with capture:
         a = m.return_capsule_with_name_and_destructor()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         created capsule (1234, 'pointer type description')
         destructing capsule (1234, 'pointer type description')
     """
-    )
 
     with capture:
         a = m.return_capsule_with_explicit_nullptr_dtor()
         del a
         pytest.gc_collect()
-    assert (
-        capture.unordered
-        == """
+    assert capture.unordered == """
         creating capsule with explicit nullptr dtor
     """
-    )
 
 
 def test_accessors():
@@ -548,9 +515,7 @@ def test_implicit_casting():
 def test_print(capture):
     with capture:
         m.print_function()
-    assert (
-        capture
-        == """
+    assert capture == """
         Hello, World!
         1 2.0 three True -- multiple args
         *args-and-a-custom-separator
@@ -558,7 +523,6 @@ def test_print(capture):
         flush
         py::print + str.format = this
     """
-    )
     assert capture.stderr == "this goes to stderr"
 
     with pytest.raises(RuntimeError) as excinfo:

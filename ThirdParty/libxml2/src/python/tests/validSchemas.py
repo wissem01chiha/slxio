@@ -3,7 +3,8 @@ import setup_test
 import libxml2
 import sys
 
-ARG = 'test string'
+ARG = "test string"
+
 
 class ErrorHandler:
 
@@ -15,10 +16,11 @@ class ErrorHandler:
             raise Exception("Error handler did not receive correct argument")
         self.errors.append(msg)
 
+
 # Memory debug specific
 libxml2.debugMemory(1)
 
-schema="""<?xml version="1.0" encoding="iso-8859-1"?>
+schema = """<?xml version="1.0" encoding="iso-8859-1"?>
 <schema xmlns = "http://www.w3.org/2001/XMLSchema">
 	<element name = "Customer">
 		<complexType>
@@ -32,7 +34,7 @@ schema="""<?xml version="1.0" encoding="iso-8859-1"?>
 	</element>
 </schema>"""
 
-valid="""<?xml version="1.0" encoding="iso-8859-1"?>
+valid = """<?xml version="1.0" encoding="iso-8859-1"?>
 <Customer customerID = "24332">
 	<FirstName>Raymond</FirstName>
 	<MiddleInitial>G</MiddleInitial>
@@ -40,7 +42,7 @@ valid="""<?xml version="1.0" encoding="iso-8859-1"?>
 </Customer>
 """
 
-invalid="""<?xml version="1.0" encoding="iso-8859-1"?>
+invalid = """<?xml version="1.0" encoding="iso-8859-1"?>
 <Customer customerID = "24332">
 	<MiddleInitial>G</MiddleInitial>
 	<LastName>Bayliss</LastName>
@@ -50,7 +52,7 @@ invalid="""<?xml version="1.0" encoding="iso-8859-1"?>
 e = ErrorHandler()
 ctxt_parser = libxml2.schemaNewMemParserCtxt(schema, len(schema))
 ctxt_schema = ctxt_parser.schemaParse()
-ctxt_valid  = ctxt_schema.schemaNewValidCtxt()
+ctxt_valid = ctxt_schema.schemaNewValidCtxt()
 ctxt_valid.setValidityErrorHandler(e.handler, e.handler, ARG)
 
 # Test valid document

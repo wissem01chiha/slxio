@@ -35,7 +35,10 @@ source.freeDoc()
 
 # check the resulting tree
 str = dest.serialize()
-if str != """<root xmlns:foobar="http://example.org/bar" xmlns:default="http://example.org/include" xmlns:foo="http://example.org/foo"><default:fragment><foo:elem bar="tricky"/></default:fragment></root>""":
+if (
+    str
+    != """<root xmlns:foobar="http://example.org/bar" xmlns:default="http://example.org/include" xmlns:foo="http://example.org/foo"><default:fragment><foo:elem bar="tricky"/></default:fragment></root>"""
+):
     print("reconciliateNs() failed")
     sys.exit(1)
 target.freeDoc()

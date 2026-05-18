@@ -6,7 +6,7 @@ import sys
 # Memory debug specific
 libxml2.debugMemory(1)
 
-schema="""<?xml version="1.0" encoding="iso-8859-1"?>
+schema = """<?xml version="1.0" encoding="iso-8859-1"?>
 <schema xmlns = "http://www.w3.org/2001/XMLSchema">
 	<element name = "Customer">
 		<complexType>
@@ -20,7 +20,7 @@ schema="""<?xml version="1.0" encoding="iso-8859-1"?>
 	</element>
 </schema>"""
 
-instance="""<?xml version="1.0" encoding="iso-8859-1"?>
+instance = """<?xml version="1.0" encoding="iso-8859-1"?>
 <Customer customerID = "24332">
 	<FirstName>Raymond</FirstName>
 	<MiddleInitial>G</MiddleInitial>
@@ -30,7 +30,7 @@ instance="""<?xml version="1.0" encoding="iso-8859-1"?>
 
 ctxt_parser = libxml2.schemaNewMemParserCtxt(schema, len(schema))
 ctxt_schema = ctxt_parser.schemaParse()
-ctxt_valid  = ctxt_schema.schemaNewValidCtxt()
+ctxt_valid = ctxt_schema.schemaNewValidCtxt()
 doc = libxml2.parseDoc(instance)
 ret = doc.schemaValidateDoc(ctxt_valid)
 if ret != 0:

@@ -3,13 +3,13 @@
 import setup_test
 import libxml2
 
-expect=' xmlns:a="urn:whatevar"'
+expect = ' xmlns:a="urn:whatevar"'
 
 # Memory debug specific
 libxml2.debugMemory(1)
 
 d = libxml2.parseDoc("<a:a xmlns:a='urn:whatevar'/>")
-res=""
+res = ""
 for n in d.xpathEval("//namespace::*"):
     res = res + n.serialize()
 del n

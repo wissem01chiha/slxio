@@ -244,29 +244,25 @@ def test_no_mixed_overloads():
 
     with pytest.raises(RuntimeError) as excinfo:
         m.ExampleMandA.add_mixed_overloads1()
-    assert (
-        str(excinfo.value)
-        == "overloading a method with both static and instance methods is not supported; "
-        + (
-            "#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for more details"
-            if not detailed_error_messages_enabled
-            else "error while attempting to bind static method ExampleMandA.overload_mixed1"
-            "(arg0: typing.SupportsFloat | typing.SupportsIndex) -> str"
-        )
+    assert str(
+        excinfo.value
+    ) == "overloading a method with both static and instance methods is not supported; " + (
+        "#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for more details"
+        if not detailed_error_messages_enabled
+        else "error while attempting to bind static method ExampleMandA.overload_mixed1"
+        "(arg0: typing.SupportsFloat | typing.SupportsIndex) -> str"
     )
 
     with pytest.raises(RuntimeError) as excinfo:
         m.ExampleMandA.add_mixed_overloads2()
-    assert (
-        str(excinfo.value)
-        == "overloading a method with both static and instance methods is not supported; "
-        + (
-            "#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for more details"
-            if not detailed_error_messages_enabled
-            else "error while attempting to bind instance method ExampleMandA.overload_mixed2"
-            "(self: pybind11_tests.methods_and_attributes.ExampleMandA, arg0: typing.SupportsInt | typing.SupportsIndex, arg1: typing.SupportsInt | typing.SupportsIndex)"
-            " -> str"
-        )
+    assert str(
+        excinfo.value
+    ) == "overloading a method with both static and instance methods is not supported; " + (
+        "#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for more details"
+        if not detailed_error_messages_enabled
+        else "error while attempting to bind instance method ExampleMandA.overload_mixed2"
+        "(self: pybind11_tests.methods_and_attributes.ExampleMandA, arg0: typing.SupportsInt | typing.SupportsIndex, arg1: typing.SupportsInt | typing.SupportsIndex)"
+        " -> str"
     )
 
 
@@ -456,15 +452,12 @@ def test_accepts_none(msg):
     # The first one still raises because you can't pass None as a lvalue reference arg:
     with pytest.raises(TypeError) as excinfo:
         assert m.ok_none1(None) == -1
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         ok_none1(): incompatible function arguments. The following argument types are supported:
             1. (arg0: m.methods_and_attributes.NoneTester) -> int
 
         Invoked with: None
     """
-    )
 
     # The rest take the argument as pointer or holder, and accept None:
     assert m.ok_none2(None) == -1
@@ -504,16 +497,13 @@ def test_str_issue(msg):
 
     with pytest.raises(TypeError) as excinfo:
         str(m.StrIssue("no", "such", "constructor"))
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         __init__(): incompatible constructor arguments. The following argument types are supported:
             1. m.methods_and_attributes.StrIssue(arg0: typing.SupportsInt | typing.SupportsIndex)
             2. m.methods_and_attributes.StrIssue()
 
         Invoked with: 'no', 'such', 'constructor'
     """
-    )
 
 
 def test_unregistered_base_implementations():

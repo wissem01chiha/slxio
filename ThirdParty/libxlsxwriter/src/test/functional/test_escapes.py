@@ -8,6 +8,7 @@
 
 import base_test_class
 
+
 class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
     """
     Test file created with libxlsxwriter against a file created by Excel.
@@ -21,19 +22,19 @@ class TestCompareXLSXFiles(base_test_class.XLSXBaseTest):
     #     self.run_exe_test('test_escapes02')
 
     def test_escapes03(self):
-        self.run_exe_test('test_escapes03')
+        self.run_exe_test("test_escapes03")
 
     def test_escapes04(self):
-        self.run_exe_test('test_escapes04')
+        self.run_exe_test("test_escapes04")
 
     def test_escapes05(self):
-        self.run_exe_test('test_escapes05')
+        self.run_exe_test("test_escapes05")
 
     def test_escapes06(self):
-        self.run_exe_test('test_escapes06')
+        self.run_exe_test("test_escapes06")
 
     def test_escapes07(self):
-        self.run_exe_test('test_escapes07')
+        self.run_exe_test("test_escapes07")
 
     def test_escapes08(self):
-        self.run_exe_test('test_escapes08')
+        self.run_exe_test("test_escapes08")

@@ -98,14 +98,12 @@ def test_independent_subinterpreters():
     if not m.defined_PYBIND11_HAS_SUBINTERPRETER_SUPPORT:
         pytest.skip("Does not have subinterpreter support compiled in")
 
-    code = textwrap.dedent(
-        """
+    code = textwrap.dedent("""
         import mod_per_interpreter_gil as m
         import pickle
         with open(pipeo, 'wb') as f:
             pickle.dump(m.internals_at(), f)
-        """
-    ).strip()
+        """).strip()
 
     with create() as interp1, create() as interp2:
         try:
@@ -125,9 +123,9 @@ def test_independent_subinterpreters():
         with open(pipei, "rb") as f:
             res2 = pickle.load(f)
 
-    assert "does not support loading in subinterpreters" in res0, (
-        "cannot use shared_gil in a default subinterpreter"
-    )
+    assert (
+        "does not support loading in subinterpreters" in res0
+    ), "cannot use shared_gil in a default subinterpreter"
     assert res1 != m.internals_at(), "internals should differ from main interpreter"
     assert res2 != m.internals_at(), "internals should differ from main interpreter"
     assert res1 != res2, "internals should differ between interpreters"
@@ -149,13 +147,11 @@ def test_independent_subinterpreters_modern():
 
     from concurrent import interpreters
 
-    code = textwrap.dedent(
-        """
+    code = textwrap.dedent("""
         import mod_per_interpreter_gil as m
 
         values.put_nowait(m.internals_at())
-        """
-    ).strip()
+        """).strip()
 
     with contextlib.closing(interpreters.create()) as interp1, contextlib.closing(
         interpreters.create()
@@ -195,14 +191,12 @@ def test_dependent_subinterpreters():
     if not m.defined_PYBIND11_HAS_SUBINTERPRETER_SUPPORT:
         pytest.skip("Does not have subinterpreter support compiled in")
 
-    code = textwrap.dedent(
-        """
+    code = textwrap.dedent("""
         import mod_shared_interpreter_gil as m
         import pickle
         with open(pipeo, 'wb') as f:
             pickle.dump(m.internals_at(), f)
-        """
-    ).strip()
+        """).strip()
 
     with create("legacy") as interp1:
         pipei, pipeo = os.pipe()
@@ -213,8 +207,7 @@ def test_dependent_subinterpreters():
     assert res1 != m.internals_at(), "internals should differ from main interpreter"
 
 
-PREAMBLE_CODE = textwrap.dedent(
-    f"""
+PREAMBLE_CODE = textwrap.dedent(f"""
     def test():
         import sys
 
@@ -252,8 +245,7 @@ PREAMBLE_CODE = textwrap.dedent(
         assert hasattr(m, 'MyGlobalError'), "Module missing MyGlobalError"
         assert hasattr(m, 'MyLocalError'), "Module missing MyLocalError"
         assert hasattr(m, 'MyEnum'), "Module missing MyEnum"
-    """
-).lstrip()
+    """).lstrip()
 
 
 @pytest.mark.skipif(
@@ -275,10 +267,7 @@ def test_import_module_with_singleton_per_interpreter():
 @pytest.mark.skipif(not CONCURRENT_INTERPRETERS_SUPPORT, reason="Requires 3.14.0b3+")
 def test_import_in_subinterpreter_after_main():
     """Tests that importing a module in a subinterpreter after the main interpreter works correctly"""
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import contextlib
             import gc
             from concurrent import interpreters
@@ -292,14 +281,9 @@ def test_import_in_subinterpreter_after_main():
             del interp
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))
 
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import contextlib
             import gc
             import random
@@ -320,9 +304,7 @@ def test_import_in_subinterpreter_after_main():
             del interps, interp, stack
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))
 
 
 @pytest.mark.skipif(
@@ -331,10 +313,7 @@ def test_import_in_subinterpreter_after_main():
 @pytest.mark.skipif(not CONCURRENT_INTERPRETERS_SUPPORT, reason="Requires 3.14.0b3+")
 def test_import_in_subinterpreter_before_main():
     """Tests that importing a module in a subinterpreter before the main interpreter works correctly"""
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import contextlib
             import gc
             from concurrent import interpreters
@@ -348,14 +327,9 @@ def test_import_in_subinterpreter_before_main():
             del interp
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))
 
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import contextlib
             import gc
             from concurrent import interpreters
@@ -374,14 +348,9 @@ def test_import_in_subinterpreter_before_main():
             del interps, interp, stack
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))
 
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import contextlib
             import gc
             from concurrent import interpreters
@@ -400,9 +369,7 @@ def test_import_in_subinterpreter_before_main():
             del interps, interp, stack
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))
 
 
 @pytest.mark.skipif(
@@ -416,10 +383,7 @@ def test_import_in_subinterpreter_before_main():
 @pytest.mark.skipif(not CONCURRENT_INTERPRETERS_SUPPORT, reason="Requires 3.14.0b3+")
 def test_import_in_subinterpreter_concurrently():
     """Tests that importing a module in multiple subinterpreters concurrently works correctly"""
-    env.check_script_success_in_subprocess(
-        PREAMBLE_CODE
-        + textwrap.dedent(
-            """
+    env.check_script_success_in_subprocess(PREAMBLE_CODE + textwrap.dedent("""
             import gc
             from concurrent.futures import InterpreterPoolExecutor, as_completed
 
@@ -432,6 +396,4 @@ def test_import_in_subinterpreter_concurrently():
 
             for _ in range(5):
                 gc.collect()
-            """
-        )
-    )
+            """))

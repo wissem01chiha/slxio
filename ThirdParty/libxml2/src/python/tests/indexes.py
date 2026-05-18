@@ -9,6 +9,7 @@ libxml2.debugMemory(1)
 
 ctxt = None
 
+
 class callback:
     def __init__(self, startd, starte, ende, delta, endd):
         self.startd = startd
@@ -21,16 +22,20 @@ class callback:
     def startDocument(self):
         global ctxt
         if ctxt.byteConsumed() != self.startd:
-            print("document start at wrong index: %d expecting %d\n" % (
-                  ctxt.byteConsumed(), self.startd))
+            print(
+                "document start at wrong index: %d expecting %d\n"
+                % (ctxt.byteConsumed(), self.startd)
+            )
             sys.exit(1)
 
     def endDocument(self):
         global ctxt
         expect = self.ende + self.delta * (self.count - 1) + self.endd
         if ctxt.byteConsumed() != expect:
-            print("document end at wrong index: %d expecting %d\n" % (
-                  ctxt.byteConsumed(), expect))
+            print(
+                "document end at wrong index: %d expecting %d\n"
+                % (ctxt.byteConsumed(), expect)
+            )
             sys.exit(1)
 
     def startElement(self, tag, attrs):
@@ -38,23 +43,27 @@ class callback:
         if tag == "bar1":
             expect = self.starte + self.delta * self.count
             if ctxt.byteConsumed() != expect:
-                print("element start at wrong index: %d expecting %d\n" % (
-                   ctxt.byteConsumed(), expect))
+                print(
+                    "element start at wrong index: %d expecting %d\n"
+                    % (ctxt.byteConsumed(), expect)
+                )
                 sys.exit(1)
-
 
     def endElement(self, tag):
         global ctxt
         if tag == "bar1":
             expect = self.ende + self.delta * self.count
             if ctxt.byteConsumed() != expect:
-                print("element end at wrong index: %d expecting %d\n" % (
-                      ctxt.byteConsumed(), expect))
+                print(
+                    "element end at wrong index: %d expecting %d\n"
+                    % (ctxt.byteConsumed(), expect)
+                )
                 sys.exit(1)
             self.count = self.count + 1
 
     def characters(self, data):
         pass
+
 
 #
 # First run a pure UTF-8 test
@@ -77,13 +86,13 @@ while i < 10000:
     i = i + 1
 chunk = "</foo>"
 ctxt.parseChunk(chunk, len(chunk), 1)
-ctxt=None
+ctxt = None
 
 #
 # Then run a test relying on ISO-Latin-1
 #
 handler = callback(43, 57, 71, 198, 183)
-chunk="""<?xml version="1.0" encoding="ISO-8859-1"?>
+chunk = """<?xml version="1.0" encoding="ISO-8859-1"?>
 <foo>
 """
 ctxt = libxml2.createPushParser(handler, chunk, len(chunk), "test.xml")
@@ -103,7 +112,7 @@ while i < 10000:
     i = i + 1
 chunk = "</foo>"
 ctxt.parseChunk(chunk, len(chunk), 1)
-ctxt=None
+ctxt = None
 
 # Memory debug specific
 libxml2.cleanupParser()

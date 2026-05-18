@@ -7,8 +7,9 @@ import sys
 import setup_test
 import libxml2
 
-instance="""<?xml version="1.0"?>
+instance = """<?xml version="1.0"?>
 <tag xmlns:foo='urn:foo' xmlns:bar='urn:bar' xmlns:baz='urn:baz' />"""
+
 
 def namespaceDefs(node):
     n = node.nsDefs()
@@ -16,11 +17,15 @@ def namespaceDefs(node):
         yield n
         n = n.next
 
+
 def checkNamespaceDefs(node, count):
     nsList = list(namespaceDefs(node))
-    #print nsList
-    if len(nsList) != count :
-        raise Exception("Error: saw %d namespace declarations.  Expected %d" % (len(nsList), count))
+    # print nsList
+    if len(nsList) != count:
+        raise Exception(
+            "Error: saw %d namespace declarations.  Expected %d" % (len(nsList), count)
+        )
+
 
 # Memory debug specific
 libxml2.debugMemory(1)
@@ -29,7 +34,7 @@ libxml2.debugMemory(1)
 doc = libxml2.parseDoc(instance)
 node = doc.getRootElement()
 checkNamespaceDefs(node, 3)
-ns = node.removeNsDef('urn:bar')
+ns = node.removeNsDef("urn:bar")
 checkNamespaceDefs(node, 2)
 ns.freeNsList()
 doc.freeDoc()
@@ -51,7 +56,7 @@ child = root.newChild(namespace, "child", None)
 root.removeNsDef("http://example.com/sample")
 doc.reconciliateNs(root)
 namespace.freeNsList()
-doc.serialize() # This should not segfault
+doc.serialize()  # This should not segfault
 doc.freeDoc()
 
 # Memory debug specific

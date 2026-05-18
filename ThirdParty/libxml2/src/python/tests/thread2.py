@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import string, sys, time
+
 try:
     from _thread import get_ident
 except:
@@ -16,21 +17,24 @@ THREADS_COUNT = 15
 
 failed = 0
 
+
 class ErrorHandler:
 
     def __init__(self):
         self.errors = []
         self.lock = Lock()
 
-    def handler(self,ctx,str):
+    def handler(self, ctx, str):
         self.lock.acquire()
         self.errors.append(str)
         self.lock.release()
+
 
 def getPedanticParserDefault():
     old = libxml2.pedanticParserDefault(0)
     libxml2.pedanticParserDefault(old)
     return old
+
 
 def test(expectedPedanticParserDefault):
     time.sleep(1)
@@ -38,8 +42,10 @@ def test(expectedPedanticParserDefault):
     # check a per thread-global
     if expectedPedanticParserDefault != getPedanticParserDefault():
         failed = 1
-        print("FAILED to obtain correct value for " \
-              "pedanticParserDefault in thread %d" % get_ident())
+        print(
+            "FAILED to obtain correct value for "
+            "pedanticParserDefault in thread %d" % get_ident()
+        )
     # check the global error handler
     # (which is NOT per-thread in the python bindings)
     try:
@@ -49,9 +55,10 @@ def test(expectedPedanticParserDefault):
     else:
         assert "failed"
 
+
 # global error handler
 eh = ErrorHandler()
-libxml2.registerErrorHandler(eh.handler,"")
+libxml2.registerErrorHandler(eh.handler, "")
 
 # set on the main thread only
 libxml2.pedanticParserDefault(1)
@@ -65,13 +72,13 @@ ts = []
 for i in range(THREADS_COUNT):
     # expect 0 for pedanticParserDefault because
     # the new value has been set on the main thread only
-    ts.append(Thread(target=test,args=(0,)))
+    ts.append(Thread(target=test, args=(0,)))
 for t in ts:
     t.start()
 for t in ts:
     t.join()
 
-if len(eh.errors) != ec+THREADS_COUNT*ec:
+if len(eh.errors) != ec + THREADS_COUNT * ec:
     print("FAILED: did not obtain the correct number of errors")
     sys.exit(1)
 
@@ -80,13 +87,13 @@ libxml2.thrDefPedanticParserDefaultValue(1)
 ts = []
 for i in range(THREADS_COUNT):
     # expect 1 for pedanticParserDefault
-    ts.append(Thread(target=test,args=(1,)))
+    ts.append(Thread(target=test, args=(1,)))
 for t in ts:
     t.start()
 for t in ts:
     t.join()
 
-if len(eh.errors) != ec+THREADS_COUNT*ec*2:
+if len(eh.errors) != ec + THREADS_COUNT * ec * 2:
     print("FAILED: did not obtain the correct number of errors")
     sys.exit(1)
 

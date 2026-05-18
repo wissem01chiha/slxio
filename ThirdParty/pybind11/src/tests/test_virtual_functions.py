@@ -40,12 +40,9 @@ def test_override(capture, msg):
     ex12 = m.ExampleVirt(10)
     with capture:
         assert m.runExampleVirt(ex12, 20) == 30
-    assert (
-        capture
-        == """
+    assert capture == """
         Original implementation of ExampleVirt::run(state=10, value=20, str1=default1, str2=default2)
     """
-    )
 
     with pytest.raises(RuntimeError) as excinfo:
         m.runExampleVirtVirtual(ex12)
@@ -57,13 +54,10 @@ def test_override(capture, msg):
     ex12p = ExtendedExampleVirt(10)
     with capture:
         assert m.runExampleVirt(ex12p, 20) == 32
-    assert (
-        capture
-        == """
+    assert capture == """
         ExtendedExampleVirt::run(20), calling parent..
         Original implementation of ExampleVirt::run(state=11, value=21, str1=override1, str2=default2)
     """
-    )
     with capture:
         assert m.runExampleVirtBool(ex12p) is False
     assert capture == "ExtendedExampleVirt::run_bool()"
@@ -74,13 +68,10 @@ def test_override(capture, msg):
     ex12p2 = ExtendedExampleVirt2(15)
     with capture:
         assert m.runExampleVirt(ex12p2, 50) == 68
-    assert (
-        capture
-        == """
+    assert capture == """
         ExtendedExampleVirt::run(50), calling parent..
         Original implementation of ExampleVirt::run(state=17, value=51, str1=override1, str2=override2)
     """
-    )
 
     if env.GRAALPY:
         pytest.skip("ConstructorStats is incompatible with GraalPy.")
@@ -123,15 +114,12 @@ def test_alias_delay_initialization1(capture):
         m.call_f(b)
         del b
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         PyA.PyA()
         PyA.f()
         In python f()
         PyA.~PyA()
     """
-    )
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
@@ -160,9 +148,7 @@ def test_alias_delay_initialization2(capture):
         m.call_f(a3)
         del a3
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         PyA2.PyA2()
         PyA2.f()
         A2.f()
@@ -172,7 +158,6 @@ def test_alias_delay_initialization2(capture):
         A2.f()
         PyA2.~PyA2()
     """
-    )
 
     # Python subclass version
     with capture:
@@ -180,15 +165,12 @@ def test_alias_delay_initialization2(capture):
         m.call_f(b2)
         del b2
         pytest.gc_collect()
-    assert (
-        capture
-        == """
+    assert capture == """
         PyA2.PyA2()
         PyA2.f()
         In python B2.f()
         PyA2.~PyA2()
     """
-    )
 
 
 # PyPy: Reference count > 1 causes call with noncopyable instance

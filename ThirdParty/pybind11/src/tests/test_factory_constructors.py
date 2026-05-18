@@ -74,9 +74,7 @@ def test_init_factory_basic():
 def test_init_factory_signature(msg):
     with pytest.raises(TypeError) as excinfo:
         m.TestFactory1("invalid", "constructor", "arguments")
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         __init__(): incompatible constructor arguments. The following argument types are supported:
             1. m.factory_constructors.TestFactory1(arg0: m.factory_constructors.tag.unique_ptr_tag, arg1: typing.SupportsInt | typing.SupportsIndex)
             2. m.factory_constructors.TestFactory1(arg0: str)
@@ -85,11 +83,8 @@ def test_init_factory_signature(msg):
 
         Invoked with: 'invalid', 'constructor', 'arguments'
     """
-    )
 
-    assert (
-        msg(m.TestFactory1.__init__.__doc__)
-        == """
+    assert msg(m.TestFactory1.__init__.__doc__) == """
         __init__(*args, **kwargs)
         Overloaded function.
 
@@ -101,7 +96,6 @@ def test_init_factory_signature(msg):
 
         4. __init__(self: m.factory_constructors.TestFactory1, arg0: object, arg1: typing.SupportsInt | typing.SupportsIndex, arg2: object) -> None
     """
-    )
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
@@ -366,9 +360,7 @@ def test_reallocation_a(capture, msg):
 
     with capture:
         create_and_destroy(1)
-    assert (
-        msg(capture)
-        == """
+    assert msg(capture) == """
         noisy new
         noisy placement new
         NoisyAlloc(int 1)
@@ -376,15 +368,13 @@ def test_reallocation_a(capture, msg):
         ~NoisyAlloc()
         noisy delete
     """
-    )
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_b(capture, msg):
     with capture:
         create_and_destroy(1.5)
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         noisy new               # allocation required to attempt first overload
         noisy delete            # have to dealloc before considering factory init overload
         noisy new               # pointer factory calling "new", part 1: allocation
@@ -392,47 +382,41 @@ def test_reallocation_b(capture, msg):
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_c(capture, msg):
     with capture:
         create_and_destroy(2, 3)
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         noisy new          # pointer factory calling "new", allocation
         NoisyAlloc(int 2)  # constructor
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_d(capture, msg):
     with capture:
         create_and_destroy(2.5, 3)
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         NoisyAlloc(double 2.5)  # construction (local func variable: operator_new not called)
         noisy new               # return-by-value "new" part 1: allocation
         ~NoisyAlloc()           # moved-away local func variable destruction
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_e(capture, msg):
     with capture:
         create_and_destroy(3.5, 4.5)
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         noisy new          # preallocation needed before invoking factory pointer overload
         noisy delete       # deallocation of preallocated storage
         noisy new          # Factory pointer allocation
@@ -440,32 +424,28 @@ def test_reallocation_e(capture, msg):
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_f(capture, msg):
     with capture:
         create_and_destroy(4, 0.5)
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         noisy new          # preallocation needed before invoking placement-new overload
         noisy placement new     # Placement new
         NoisyAlloc(int 4)  # construction
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 @pytest.mark.skipif("env.GRAALPY", reason="Cannot reliably trigger GC")
 def test_reallocation_g(capture, msg):
     with capture:
         create_and_destroy(5, "hi")
-    assert msg(capture) == strip_comments(
-        """
+    assert msg(capture) == strip_comments("""
         noisy new            # preallocation needed before invoking first placement new
         noisy delete         # delete before considering new-style constructor
         noisy new            # preallocation for second placement new
@@ -474,8 +454,7 @@ def test_reallocation_g(capture, msg):
         ---
         ~NoisyAlloc()  # Destructor
         noisy delete   # operator delete
-    """
-    )
+    """)
 
 
 def test_invalid_self():

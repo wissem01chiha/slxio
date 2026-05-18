@@ -3,7 +3,8 @@ import setup_test
 import libxml2
 import sys
 
-ARG = 'test string'
+ARG = "test string"
+
 
 class ErrorHandler:
 
@@ -19,14 +20,14 @@ class ErrorHandler:
 # Memory debug specific
 libxml2.debugMemory(1)
 
-dtd="""<!ELEMENT foo EMPTY>"""
-valid="""<?xml version="1.0"?>
+dtd = """<!ELEMENT foo EMPTY>"""
+valid = """<?xml version="1.0"?>
 <foo></foo>"""
 
-invalid="""<?xml version="1.0"?>
+invalid = """<?xml version="1.0"?>
 <foo><bar/></foo>"""
 
-dtd = libxml2.parseDTD(None, 'test.dtd')
+dtd = libxml2.parseDTD(None, "test.dtd")
 ctxt = libxml2.newValidCtxt()
 e = ErrorHandler()
 ctxt.setValidityErrorHandler(e.handler, e.handler, ARG)

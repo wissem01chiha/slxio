@@ -17,15 +17,15 @@ foonode1 = root.children
 foonode2 = root.children
 
 # Now check that [in]equality tests work ok
-if not ( foonode1 == foonode2 ):
+if not (foonode1 == foonode2):
     print("Error comparing nodes with ==, nodes should be equal but are unequal")
     sys.exit(1)
-if not ( foonode1 != root ):
+if not (foonode1 != root):
     print("Error comparing nodes with ==, nodes should not be equal but are equal")
     sys.exit(1)
-if not ( foonode1 != root ):
+if not (foonode1 != root):
     print("Error comparing nodes with !=, nodes should not be equal but are equal")
-if ( foonode1 != foonode2 ):
+if foonode1 != foonode2:
     print("Error comparing nodes with !=, nodes should be equal but are unequal")
 
 # Next check that the hash function for the objects also works ok

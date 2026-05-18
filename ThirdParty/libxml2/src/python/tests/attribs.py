@@ -10,16 +10,20 @@ libxml2.debugMemory(1)
 # Testing XML document serialization
 #
 doc = libxml2.readDoc(
-"""<?xml version="1.0" encoding="iso-8859-1"?>
+    """<?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE test [
 <!ELEMENT test (#PCDATA) >
 <!ATTLIST test xmlns:abc CDATA #FIXED "http://abc.org" >
 <!ATTLIST test abc:attr CDATA #FIXED "def" >
 ]>
 <test />
-""", None, None, libxml2.XML_PARSE_DTDATTR)
+""",
+    None,
+    None,
+    libxml2.XML_PARSE_DTDATTR,
+)
 elem = doc.getRootElement()
-attr = elem.hasNsProp('attr', 'http://abc.org')
+attr = elem.hasNsProp("attr", "http://abc.org")
 print(attr.serialize())
 if attr == None:
     print("Failed to find defaulted attribute abc:attr")

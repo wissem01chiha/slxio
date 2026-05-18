@@ -12,7 +12,7 @@ libxml2.debugMemory(1)
 #
 # Parse a document testing the Close() API
 #
-docstr="""<foo>
+docstr = """<foo>
 <label>some text</label>
 <item>100</item>
 </foo>"""

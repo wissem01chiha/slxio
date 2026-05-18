@@ -260,9 +260,9 @@ def pytest_configure():
 
 
 def pytest_report_header():
-    assert pybind11_tests.compiler_info is not None, (
-        "Please update pybind11_tests.cpp if this assert fails."
-    )
+    assert (
+        pybind11_tests.compiler_info is not None
+    ), "Please update pybind11_tests.cpp if this assert fails."
     interesting_packages = ("pybind11", "numpy", "scipy", "build")
     valid = []
     for package in sorted(interesting_packages):

@@ -5,14 +5,17 @@
 import sys
 import setup_test
 import libxml2
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
-docstr="""<?xml version='1.0'?>
+docstr = """<?xml version='1.0'?>
 <!DOCTYPE doc [
 <!ENTITY tst "<p>test</p>">
 ]>
@@ -118,27 +121,33 @@ s = """<!DOCTYPE struct [
 ]>
 <struct>&simplestruct2.ent;</struct>
 """
-expect="""10 struct 0 0
+expect = """10 struct 0 0
 1 struct 0 0
 1 descr 1 1
 15 struct 0 0
 """
-res=""
-simplestruct2_ent="""<descr/>"""
+res = ""
+simplestruct2_ent = """<descr/>"""
+
 
 def myResolver(URL, ID, ctxt):
     if URL == "simplestruct2.ent":
-        return(str_io(simplestruct2_ent))
+        return str_io(simplestruct2_ent)
     return None
+
 
 libxml2.setEntityLoader(myResolver)
 
 input = libxml2.inputBuffer(str_io(s))
 reader = input.newTextReader("test3")
-reader.SetParserProp(libxml2.PARSER_SUBST_ENTITIES,1)
+reader.SetParserProp(libxml2.PARSER_SUBST_ENTITIES, 1)
 while reader.Read() == 1:
-    res = res + "%s %s %d %d\n" % (reader.NodeType(),reader.Name(),
-                                   reader.Depth(),reader.IsEmptyElement())
+    res = res + "%s %s %d %d\n" % (
+        reader.NodeType(),
+        reader.Name(),
+        reader.Depth(),
+        reader.IsEmptyElement(),
+    )
 
 if res != expect:
     print("test3 failed: unexpected output")

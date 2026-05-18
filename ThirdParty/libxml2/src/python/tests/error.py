@@ -10,12 +10,15 @@ import libxml2
 # Memory debug specific
 libxml2.debugMemory(1)
 
-expect='--> I/O --> warning : --> failed to load "missing.xml": No such file or directory\n'
-err=""
-def callback(ctx, str):
-     global err
+expect = '--> I/O --> warning : --> failed to load "missing.xml": No such file or directory\n'
+err = ""
 
-     err = err + "%s %s" % (ctx, str)
+
+def callback(ctx, str):
+    global err
+
+    err = err + "%s %s" % (ctx, str)
+
 
 got_exc = 0
 libxml2.registerErrorHandler(callback, "-->")
@@ -30,8 +33,8 @@ if got_exc == 0:
 
 if err != expect:
     print("error")
-    print("received %s" %(err))
-    print("expected %s" %(expect))
+    print("received %s" % (err))
+    print("expected %s" % (expect))
     sys.exit(1)
 
 i = 10000

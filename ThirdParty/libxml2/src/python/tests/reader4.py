@@ -5,15 +5,19 @@
 import setup_test
 import libxml2
 import sys
+
 try:
     import StringIO
+
     str_io = StringIO.StringIO
 except:
     import io
+
     str_io = io.StringIO
 
 # Memory debug specific
 libxml2.debugMemory(1)
+
 
 def tst_reader(s):
     f = str_io(s)
@@ -21,15 +25,23 @@ def tst_reader(s):
     reader = input.newTextReader("tst")
     res = ""
     while reader.Read():
-        res=res + "%s (%s) [%s] %d\n" % (reader.NodeType(),reader.Name(),
-				      reader.Value(), reader.IsEmptyElement())
-        if reader.NodeType() == 1: # Element
+        res = res + "%s (%s) [%s] %d\n" % (
+            reader.NodeType(),
+            reader.Name(),
+            reader.Value(),
+            reader.IsEmptyElement(),
+        )
+        if reader.NodeType() == 1:  # Element
             while reader.MoveToNextAttribute():
-                res = res + "-- %s (%s) [%s]\n" % (reader.NodeType(),
-						   reader.Name(),reader.Value())
+                res = res + "-- %s (%s) [%s]\n" % (
+                    reader.NodeType(),
+                    reader.Name(),
+                    reader.Value(),
+                )
     return res
 
-expect="""1 (test) [None] 0
+
+expect = """1 (test) [None] 0
 1 (b) [None] 1
 1 (c) [None] 1
 15 (test) [None] 0

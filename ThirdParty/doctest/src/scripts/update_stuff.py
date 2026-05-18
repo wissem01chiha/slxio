@@ -3,10 +3,13 @@
 import fileinput
 
 # the version of the release
-with open("version.txt") as f: version = f.read()
+with open("version.txt") as f:
+    version = f.read()
+
 
 def getVersionTuple(v):
     return tuple(map(int, (v.split("."))))
+
 
 version_major = str(getVersionTuple(version)[0])
 version_minor = str(getVersionTuple(version)[1])
@@ -48,7 +51,7 @@ print("updating the MODULE.bazel file")
 bzlmod_contents = ""
 for line in fileinput.input(["../MODULE.bazel"]):
     if line.startswith("    version = "):
-        bzlmod_contents += "    version = \"" + version + "\",\n"
+        bzlmod_contents += '    version = "' + version + '",\n'
     else:
         bzlmod_contents += line
 

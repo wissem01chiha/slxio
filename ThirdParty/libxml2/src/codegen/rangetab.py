@@ -5,7 +5,7 @@ def gen_range_tables(out, name, s_suffix, l_suffix, ranges):
     lptr = "NULL"
 
     for range in ranges:
-        (low, high) = range
+        low, high = range
         if high < 0x10000:
             if numshort == 0:
                 sptr = name + s_suffix

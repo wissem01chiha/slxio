@@ -6,11 +6,14 @@ import libxml2
 # Memory debug specific
 libxml2.debugMemory(1)
 
+
 def foo(ctx, x):
     return x + 1
 
+
 def bar(ctx, x):
     return "%d" % (x + 2)
+
 
 doc = libxml2.parseFile("tst.xml")
 ctxt = doc.xpathNewContext()

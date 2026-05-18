@@ -13,7 +13,7 @@ libxml2.debugMemory(1)
 doc = libxml2.parseFile("tst.xml")
 if doc.name != "tst.xml":
     print("doc.name error")
-    sys.exit(1);
+    sys.exit(1)
 
 ctxt = doc.xpathNewContext()
 res = ctxt.xpathEval("//*")
@@ -40,7 +40,7 @@ while i > 0:
     res = ctxt.xpathEval("//*")
     doc.freeDoc()
     ctxt.xpathFreeContext()
-    i = i -1
+    i = i - 1
 del ctxt
 
 # Memory debug specific

@@ -47,7 +47,8 @@ def test_call_cpp_conduit_success():
     )
     assert cap.__class__.__name__ == "PyCapsule" or (
         # Note: this will become unnecessary in the next GraalPy release
-        env.GRAALPY and cap.__class__.__name__ == "capsule"
+        env.GRAALPY
+        and cap.__class__.__name__ == "capsule"
     )
 
 

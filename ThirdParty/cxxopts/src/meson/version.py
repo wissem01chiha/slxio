@@ -23,24 +23,26 @@
 
 import sys
 
+
 def main():
     versions = [None, None, None]
-    with open(sys.argv[1], 'r', encoding='ascii') as f:
+    with open(sys.argv[1], "r", encoding="ascii") as f:
         for line in f:
-            if line.startswith('#define CXXOPTS__VERSION_'):
-                ver = line.rstrip().rsplit(' ', 1)[-1]
-                if 'MAJOR' in line:
+            if line.startswith("#define CXXOPTS__VERSION_"):
+                ver = line.rstrip().rsplit(" ", 1)[-1]
+                if "MAJOR" in line:
                     versions[0] = ver
-                elif 'MINOR' in line:
+                elif "MINOR" in line:
                     versions[1] = ver
-                elif 'PATCH' in line:
+                elif "PATCH" in line:
                     versions[2] = ver
                 if None not in versions:
                     break
 
-    assert None not in versions, \
-        "Did not find all of the expected version strings in cxxopts.hpp"
-    print('.'.join(versions))
+    assert (
+        None not in versions
+    ), "Did not find all of the expected version strings in cxxopts.hpp"
+    print(".".join(versions))
 
 
 if __name__ == "__main__":

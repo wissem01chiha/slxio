@@ -6,7 +6,7 @@ import sys
 # Memory debug specific
 libxml2.debugMemory(1)
 
-schema="""<?xml version="1.0"?>
+schema = """<?xml version="1.0"?>
 <element name="foo"
          xmlns="http://relaxng.org/ns/structure/1.0"
          xmlns:a="http://relaxng.org/ns/annotation/1.0"
@@ -21,7 +21,7 @@ schema="""<?xml version="1.0"?>
   </element>
 </element>
 """
-instance="""<?xml version="1.0"?>
+instance = """<?xml version="1.0"?>
 <foo><pre1:bar1 xmlns:pre1="http://www.example.com/n1"/><pre2:bar2 xmlns:pre2="http://www.example.com/n2"/></foo>"""
 
 rngp = libxml2.relaxNGNewMemParserCtxt(schema, len(schema))

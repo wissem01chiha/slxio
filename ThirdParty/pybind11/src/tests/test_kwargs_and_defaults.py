@@ -135,26 +135,20 @@ def test_mixed_args_and_kwargs(msg):
     assert mpa(1, 2.5) == (1, 2.5, ())
     with pytest.raises(TypeError) as excinfo:
         assert mpa(1)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         mixed_plus_args(): incompatible function arguments. The following argument types are supported:
             1. (arg0: typing.SupportsInt | typing.SupportsIndex, arg1: typing.SupportsFloat | typing.SupportsIndex, *args) -> tuple[int, float, tuple]
 
         Invoked with: 1
     """
-    )
     with pytest.raises(TypeError) as excinfo:
         assert mpa()
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         mixed_plus_args(): incompatible function arguments. The following argument types are supported:
             1. (arg0: typing.SupportsInt | typing.SupportsIndex, arg1: typing.SupportsFloat | typing.SupportsIndex, *args) -> tuple[int, float, tuple]
 
         Invoked with:
     """
-    )
 
     assert mpk(-2, 3.5, pi=3.14159, e=2.71828) == (
         -2,
@@ -180,26 +174,20 @@ def test_mixed_args_and_kwargs(msg):
     # Arguments specified both positionally and via kwargs should fail:
     with pytest.raises(TypeError) as excinfo:
         assert mpakd(1, i=1)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         mixed_plus_args_kwargs_defaults(): incompatible function arguments. The following argument types are supported:
             1. (i: typing.SupportsInt | typing.SupportsIndex = 1, j: typing.SupportsFloat | typing.SupportsIndex = 3.14159, *args, **kwargs) -> tuple[int, float, tuple, dict[str, typing.Any]]
 
         Invoked with: 1; kwargs: i=1
     """
-    )
     with pytest.raises(TypeError) as excinfo:
         assert mpakd(1, 2, j=1)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         mixed_plus_args_kwargs_defaults(): incompatible function arguments. The following argument types are supported:
             1. (i: typing.SupportsInt | typing.SupportsIndex = 1, j: typing.SupportsFloat | typing.SupportsIndex = 3.14159, *args, **kwargs) -> tuple[int, float, tuple, dict[str, typing.Any]]
 
         Invoked with: 1, 2; kwargs: j=1
     """
-    )
 
     # Arguments after a py::args are automatically keyword-only (pybind 2.9+)
     assert m.args_kwonly(2, 2.5, z=22) == (2, 2.5, (), 22)
@@ -208,15 +196,12 @@ def test_mixed_args_and_kwargs(msg):
 
     with pytest.raises(TypeError) as excinfo:
         assert m.args_kwonly(2, 2.5, 22)  # missing z= keyword
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         args_kwonly(): incompatible function arguments. The following argument types are supported:
             1. (i: typing.SupportsInt | typing.SupportsIndex, j: typing.SupportsFloat | typing.SupportsIndex, *args, z: typing.SupportsInt | typing.SupportsIndex) -> tuple[int, float, tuple, int]
 
         Invoked with: 2, 2.5, 22
     """
-    )
 
     assert m.args_kwonly_kwargs(i=1, k=4, j=10, z=-1, y=9) == (
         1,
@@ -282,12 +267,9 @@ def test_keyword_only_args(msg):
 
     with pytest.raises(RuntimeError) as excinfo:
         m.register_invalid_kw_only(m)
-    assert (
-        msg(excinfo.value)
-        == """
+    assert msg(excinfo.value) == """
         arg(): cannot specify an unnamed argument after a kw_only() annotation or args() argument
     """
-    )
 
     # https://github.com/pybind/pybind11/pull/3402#issuecomment-963341987
     x = m.first_arg_kw_only(i=1)
