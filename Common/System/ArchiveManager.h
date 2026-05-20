@@ -19,7 +19,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT ArchiveManager final
 {
 public:
-  /**  */
+  /** Default Constructor */
   ArchiveManager();
 
   /** Default destructor. */
@@ -43,7 +43,26 @@ public:
   /** Get the unique Id of an archive by its name. */
   IdType GetArchiveId(const std::string& archivename) const;
 
+  /** Get the maximum archive Id currently in use. */
+  IdType GetArchiveMaxId() const;
+
+  /** Find the first available free archive Id. */
+  IdType GetFirstFreeArchiveId();
+
+  /** Retrieve an archive by its Id. */
+  std::shared_ptr<Archive> GetArchive(IdType id) const;
+
+  /** Check if an archive with the given name is opened. */
+  bool IsArchiveOpened(const std::string& archivename) const;
+
+  /** Add a new archive to the manager. */
+  ReturnType Add(std::shared_ptr<Archive> archive);
+
+  /** Remove an archive by its Id. */
+  ReturnType Remove(const IdType id);
+
 private:
+  std::vector<std::shared_ptr<Archive>> ArchiveBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END

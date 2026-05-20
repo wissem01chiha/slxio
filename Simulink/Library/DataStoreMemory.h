@@ -25,7 +25,7 @@ public:
   ~DataStoreMemory();
 
 private: 
-std::string DataStoreMemoryName;
+  std::string DataStoreMemoryName;
 };
 
 

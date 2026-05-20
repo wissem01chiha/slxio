@@ -91,7 +91,7 @@ option(SLXIO_BUILD_TESTS "Build library tests" ON)
 CMAKE_DEPENDENT_OPTION(SLXIO_BUILD_THIRDPARTY_TESTS "Build vendored modules tests"
     OFF "SLXIO_BUILD_TESTS" OFF)
 mark_as_advanced(SLXIO_BUILD_THIRDPARTY_TESTS)
-option(SLXIO_COVERAGE "Enable testing code coverage" OFF)
+option(SLXIO_COVERAGE "Enable testing code coverage" ON)
 mark_as_advanced(SLXIO_COVERAGE)
 
 #-----------------------------------------------------------------------------
@@ -106,7 +106,7 @@ option(SLXIO_UBSAN "Enable UndefinedBehaviorSanitizer (UBSan)" OFF)
 mark_as_advanced(SLXIO_UBSAN)
 
 #-----------------------------------------------------------------------------
-# Package Configuration
+# Package Config
 option(SLXIO_PKGCONFIG "Generate pkg-config file during build" ON)
 mark_as_advanced(SLXIO_PKGCONFIG)
 if(SLXIO_PKGCONFIG)
@@ -122,7 +122,7 @@ if(SLXIO_PKGCONFIG)
 endif()
 
 #-----------------------------------------------------------------------------
-# CTest Configuration
+# CTest Config
 set(SLXIO_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 option(SLXIO_OPENMP "Enable OpenMP support" ON)

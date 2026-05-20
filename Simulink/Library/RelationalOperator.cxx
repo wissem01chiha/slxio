@@ -1,0 +1,23 @@
+#include "RelationalOperator.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
+
+RelationalOperator::RelationalOperator() {}
+
+Float32 RelationalOperator::GetOperatorCode() const
+{
+  return OperatorCode;
+}
+
+void RelationalOperator::SetOperatorCode(Float32 value)
+{
+  OperatorCode = value;
+}
+
+RelationalOperator::~RelationalOperator()
+{
+}
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

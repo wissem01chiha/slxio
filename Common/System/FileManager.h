@@ -48,7 +48,7 @@ public:
   /** Get the unique Id of a file by its name. */
   IdType GetFileId(const std::string& filename) const;
 
-  /** Get the maximum file ID currently in use. */
+  /** Get the maximum file Id currently in use. */
   IdType GetFileMaxId() const;
 
   /** Find the first available free file ID. */
