@@ -4,11 +4,11 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
+#include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-#include "AbiNamespaceMacro.h"
-#include <string>
 #include <memory>
+#include <string>
 #include <vector>
 
 class File;
@@ -19,7 +19,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class FileManager
- * A singleton class for managing multiple files.
+ * @brief A singleton class for managing multiple files.
  */
 class SLXIO_APIEXPORT FileManager final
 {
@@ -45,10 +45,10 @@ public:
   /** Construct a FileManager with an initial set of files. */
   FileManager(std::vector<std::shared_ptr<File>> files);
 
-  /** Get the unique ID of a file by its name. */
+  /** Get the unique Id of a file by its name. */
   IdType GetFileId(const std::string& filename) const;
 
-  /** Get the maximum file ID currently in use. */
+  /** Get the maximum file Id currently in use. */
   IdType GetFileMaxId() const;
 
   /** Find the first available free file ID. */
@@ -57,16 +57,13 @@ public:
   /** Retrieve a file by its Id. */
   std::shared_ptr<File> GetFile(IdType id) const;
 
-  /** Get the Id of the current active file. */
-  IdType GetCurrentFileId();
-
   /** Check if a file with the given name is opened. */
   bool IsOpened(const std::string& filename);
 
   /** Add a new file to the manager. */
   ReturnType Add(std::shared_ptr<File> file);
 
-  /** Remove a file by its ID. */
+  /** Remove a file by its Id. */
   ReturnType Remove(const IdType id);
 
   /** Clear all managed files. */
@@ -79,13 +76,16 @@ public:
   std::vector<std::string> GetFileNames();
 
   /** Get the modes of all managed files. */
-  Float32 GetFileModes() const;
+  std::vector<int> GetFileModes() const;
 
   /** Get the IDs of all managed files. */
   std::vector<IdType> GetFileIds() const;
 
+  /** Get the directories of all managned files */
+  std::vector<Directory> GetFileDirectories() const;
+
 private:
-  std::vector<std::shared_ptr<File>> InternalFileBuffer;
+  std::vector<std::shared_ptr<File>> FileBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END

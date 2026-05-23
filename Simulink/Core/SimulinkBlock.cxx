@@ -55,8 +55,8 @@ UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
 
   if (element == nullptr)
   {
-    //l.log(Logger::Verbosity::V_ERROR,
-      //"SimulinkBlock:: Cannot add a null Simulink element.");
+    // l.log(Logger::Verbosity::V_ERROR,
+    //"SimulinkBlock:: Cannot add a null Simulink element.");
     return E_OK;
   }
 
@@ -66,17 +66,17 @@ UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
       std::dynamic_pointer_cast<SimulinkBlock>(element);
     if (subblock == nullptr)
     {
-      //l.log(Logger::Verbosity::V_ERROR,
-       // "SimulinkBlock:: failed to cast SimulinkElementBase to "
-       // "SimulinkBlock.");
+      // l.log(Logger::Verbosity::V_ERROR,
+      //  "SimulinkBlock:: failed to cast SimulinkElementBase to "
+      //  "SimulinkBlock.");
       return E_OK;
     }
 
     if (subblock->GetParent() != nullptr)
     {
-      //l.log(Logger::Verbosity::V_ERROR,
-       // "SimulinkBlock:: Cannot add block that already has a "
-       // "parent.");
+      // l.log(Logger::Verbosity::V_ERROR,
+      //  "SimulinkBlock:: Cannot add block that already has a "
+      //  "parent.");
       return E_OK;
     }
 
@@ -92,9 +92,9 @@ UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
       std::dynamic_pointer_cast<SimulinkParameter>(element);
     if (parameter == nullptr)
     {
-      //l.log(Logger::Verbosity::V_ERROR,
-       // "SimulinkBlock:: failed to cast SimulinkElementBase to "
-       // "SimulinkParameter.");
+      // l.log(Logger::Verbosity::V_ERROR,
+      //  "SimulinkBlock:: failed to cast SimulinkElementBase to "
+      //  "SimulinkParameter.");
       return E_OK;
     }
     parameters.push_back(parameter);
@@ -102,9 +102,9 @@ UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
   }
   else
   {
-    //l.log(Logger::Verbosity::V_ERROR,
-      //"SimulinkBlock:: Cannot add a Simulink element of a different "
-     // "type than Block or Parameter.");
+    // l.log(Logger::Verbosity::V_ERROR,
+    //"SimulinkBlock:: Cannot add a Simulink element of a different "
+    // "type than Block or Parameter.");
     return E_OK;
   }
 
@@ -127,8 +127,9 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(
       return blk;
     }
   }
-  //l.log(Logger::V_WARNING, "No Sublock named ", blockName, "' found in Block ",
-   // name);
+  // l.log(Logger::V_WARNING, "No Sublock named ", blockName, "' found in Block
+  // ",
+  //  name);
   return std::shared_ptr<SimulinkBlock>();
 }
 
@@ -136,7 +137,7 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const IdType& blockId)
 {
   if (blockId == 0)
   {
-    //l.log(Logger::V_ERROR, "SimulinkBlock:: block Id passed cannot be 0");
+    // l.log(Logger::V_ERROR, "SimulinkBlock:: block Id passed cannot be 0");
     return std::shared_ptr<SimulinkBlock>();
   }
   for (const auto& sublock : blocks)
@@ -146,8 +147,8 @@ std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const IdType& blockId)
       return sublock;
     }
   }
-  //l.log(Logger::V_WARNING, "SimulinkBlock:: sublock given Id ",
-   // std::to_string(blockId), " not found");
+  // l.log(Logger::V_WARNING, "SimulinkBlock:: sublock given Id ",
+  //  std::to_string(blockId), " not found");
   return std::shared_ptr<SimulinkBlock>();
 }
 
@@ -176,12 +177,13 @@ void SimulinkBlock::SetBlockType(SimulinkBlockType::Type blockType)
   type = blockType;
 }
 
-UInt32 SimulinkBlock::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+UInt32 SimulinkBlock::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    //l.log(Logger::V_WARNING,
-   //   "SimulinkBlock:: removing a null Simulink element "
+    // l.log(Logger::V_WARNING,
+    //   "SimulinkBlock:: removing a null Simulink element "
     //  "pointer from subelement");
     return E_OK;
   }
@@ -189,10 +191,10 @@ UInt32 SimulinkBlock::RemoveElement(std::shared_ptr<SimulinkElementBase> element
 
   if (!(element_t.isA(SimulinkElementType::Type::Block)))
   {
-    //l.log(Logger::V_ERROR,
-    //  "SimulinkBlock:: cannot remove a Simulink element of a "
-     // "different "
-      //"type than Block.");
+    // l.log(Logger::V_ERROR,
+    //   "SimulinkBlock:: cannot remove a Simulink element of a "
+    //  "different "
+    //"type than Block.");
     return E_OK;
   }
 
@@ -200,9 +202,9 @@ UInt32 SimulinkBlock::RemoveElement(std::shared_ptr<SimulinkElementBase> element
     std::dynamic_pointer_cast<SimulinkBlock>(element);
   if (subblock == nullptr)
   {
-    //l.log(Logger::V_ERROR,
-    //  "SimulinkBlock:: failed to cast SimulinkElementBase to "
-      //"SimulinkBlock.");
+    // l.log(Logger::V_ERROR,
+    //   "SimulinkBlock:: failed to cast SimulinkElementBase to "
+    //"SimulinkBlock.");
     return E_OK;
   }
 
@@ -238,15 +240,15 @@ std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(
 {
   if (parameterName == nullptr)
   {
-    //l.log(Logger::V_WARNING,
-     // "SimulinkBlock:: getParameter called with null parameter name");
+    // l.log(Logger::V_WARNING,
+    //  "SimulinkBlock:: getParameter called with null parameter name");
     return nullptr;
   }
   if (parameters.empty())
   {
-    //l.log(Logger::V_WARNING,
-      //"SimulinkBlock:: getParameter called but block has no "
-     // "parameters");
+    // l.log(Logger::V_WARNING,
+    //"SimulinkBlock:: getParameter called but block has no "
+    // "parameters");
     return nullptr;
   }
 

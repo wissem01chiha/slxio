@@ -3,9 +3,9 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include "SimulinkElementType.h"
 #include "StateflowNodeBase.h"
-#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

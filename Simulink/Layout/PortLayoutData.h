@@ -7,8 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "Color.h"
 #include "Logger.h"
-#include "Point.h"
 #include "PlatformTypes.h"
+#include "Point.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

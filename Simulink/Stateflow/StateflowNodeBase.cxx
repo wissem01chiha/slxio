@@ -12,8 +12,8 @@ void StateflowNodeBase::addInTransition(
 {
   if (transition->getDst().get() == this)
   {
-    //Logger::GetInstance().log(
-     // Logger::V_ERROR, "Transition destination does not match this node");
+    // Logger::GetInstance().log(
+    //  Logger::V_ERROR, "Transition destination does not match this node");
     return;
   }
   inTransitions.push_back(transition);

@@ -672,4 +672,3 @@ RFC 1952             GZIP File Format Specification             May 1996
 
 
 Deutsch                      Informational                     [Page 12]
-

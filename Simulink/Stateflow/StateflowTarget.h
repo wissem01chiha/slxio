@@ -20,7 +20,8 @@ public:
   StateflowTarget();
   StateflowTarget(StateflowTarget& orig);
 
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   std::string ToString() const override;

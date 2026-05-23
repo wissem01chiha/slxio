@@ -3,9 +3,9 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementType.h"
-#include "PlatformTypes.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN

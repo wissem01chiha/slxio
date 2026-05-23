@@ -1,6 +1,6 @@
 #include "Doctest.h"
 #include "ErrorCode.h"
-#include "ErrorHandlingApi.h"
+#include "ErrorHandler.h"
 #include "Logger.h"
 
 SLXIO_NAMESPACE_BEGIN
@@ -107,7 +107,7 @@ TEST_CASE("Logger WriteToFile Test")
   logger.SendLogMessage(info, data);
 
   ReturnType result = logger.WriteToFile("testlogfile.log");
-  sPrintErrorMessage(result);
+  ErrorHandler::PrintErrorMessage(result);
   CHECK(result == E_OK);
 }
 SLXIO_ABI_NAMESPACE_END

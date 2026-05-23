@@ -10,7 +10,7 @@ SignalObject* SignalObject::New()
 
 bool SignalObject::operator==(const DataObject&)
 {
-  return ImplDataObject ==nullptr;
+  return ImplDataObject == nullptr;
 }
 
 void* SignalObject::GetImplDataObject() const

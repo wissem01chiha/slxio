@@ -68,32 +68,34 @@
 
 #cmakedefine SLXIO_64BIT_IDS ${SLXIO_64BIT_IDS}
 
-#cmakedefine01 USE_EXTERNAL_CXXOPTS
+#cmakedefine SLXIO_ROOT_DIR "@PROJECT_SOURCE_DIR@"
 
-#cmakedefine01 USE_EXTERNAL_DOCTEST
+#cmakedefine USE_EXTERNAL_CXXOPTS
 
-#cmakedefine01 USE_EXTERNAL_JSON_C
+#cmakedefine USE_EXTERNAL_DOCTEST
 
-#cmakedefine01 USE_EXTERNAL_LIBPNG
+#cmakedefine USE_EXTERNAL_JSON_C
 
-#cmakedefine01 USE_EXTERNAL_LIBUV
+#cmakedefine USE_EXTERNAL_LIBPNG
 
-#cmakedefine01 USE_EXTERNAL_LIBXML2
+#cmakedefine USE_EXTERNAL_LIBUV
 
-#cmakedefine01 USE_EXTERNAL_LIBZIP
+#cmakedefine USE_EXTERNAL_LIBXML2
 
-#cmakedefine01 USE_EXTERNAL_LOGURU
+#cmakedefine USE_EXTERNAL_LIBZIP
 
-#cmakedefine01 USE_EXTERNAL_PYBIND11
+#cmakedefine USE_EXTERNAL_LOGURU
 
-#cmakedefine01 USE_EXTERNAL_RAPIDCSV
+#cmakedefine USE_EXTERNAL_PYBIND11
 
-#cmakedefine01 USE_EXTERNAL_SLOG
+#cmakedefine USE_EXTERNAL_RAPIDCSV
 
-#cmakedefine01 USE_EXTERNAL_SOL2
+#cmakedefine USE_EXTERNAL_SLOG
 
-#cmakedefine01 USE_EXTERNAL_TINYXML2
+#cmakedefine USE_EXTERNAL_SOL2
 
-#cmakedefine01 USE_EXTERNAL_ZLIB
+#cmakedefine USE_EXTERNAL_TINYXML2
+
+#cmakedefine USE_EXTERNAL_ZLIB
 
 #endif // CONFIG_H

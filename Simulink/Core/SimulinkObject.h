@@ -8,10 +8,10 @@
 #include "ApiExportMacro.h"
 #include "ErrorCode.h"
 #include "Logger.h"
+#include "PlatformTypes.h"
 #include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "PlatformTypes.h"
 #include <memory>
 
 SLXIO_NAMESPACE_BEGIN
@@ -35,7 +35,8 @@ public:
   SimulinkElementType GetElementType() const override;
   IdType GetElementId() const override;
   std::string ToString() const override;
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
   bool Contains(const IdType& id) const override;
   std::shared_ptr<SimulinkParameter> getParameter(const std::string& name);

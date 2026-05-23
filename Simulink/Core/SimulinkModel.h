@@ -8,13 +8,13 @@
 #include "ApiExportMacro.h"
 #include "Logger.h"
 #include "ModelWorkspace.h"
+#include "PlatformTypes.h"
 #include "SimulationSettings.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkModelType.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
-#include "PlatformTypes.h"
 #include <memory>
 
 class SimulinkObject;

@@ -106,20 +106,21 @@ std::string SimulinkObject::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    //l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    // l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
   if (element->GetElementType().isA(SimulinkElementType::Array) ||
     element->GetElementType().isA(SimulinkElementType::Object))
   {
-    //l.log(Logger::V_ERROR,
-    //  "Cannot remove a Simulink element of a different "
-     // "type than Array or Object from a SimulinkObject");
+    // l.log(Logger::V_ERROR,
+    //   "Cannot remove a Simulink element of a different "
+    //  "type than Array or Object from a SimulinkObject");
     return E_OK;
   }
 
@@ -130,9 +131,9 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
       std::dynamic_pointer_cast<SimulinkParameter>(element);
     if (!paramPtr)
     {
-      //l.log(Logger::V_ERROR,
-       // "SimulinkObject: Failed to cast SimulinkElementBase to "
-        //"SimulinkParameter");
+      // l.log(Logger::V_ERROR,
+      //  "SimulinkObject: Failed to cast SimulinkElementBase to "
+      //"SimulinkParameter");
       return E_OK;
     }
 
@@ -184,13 +185,14 @@ ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> el
   return E_OK;
 }
 
-ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::AddElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    //l.log(
-      //Logger::V_ERROR, "SimulinkObject:: Cannot add a null Simulink element.");
+    // l.log(
+    // Logger::V_ERROR, "SimulinkObject:: Cannot add a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
@@ -198,11 +200,9 @@ ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> eleme
         element->GetElementType().isA(SimulinkElementType::Object) ||
         element->GetElementType().isA(SimulinkElementType::Parameter)))
   {
-    //l.log(Logger::V_ERROR,
-     // "SimulinkObject: cannot add a Simulink element of a different type than "
-     // "Array "
-     // "or "
-     // "Object or a Parameter to a SimulinkObject");
+    // l.log(Logger::V_ERROR,
+    //  "SimulinkObject: cannot add a Simulink element of a different type than
+    //  " "Array " "or " "Object or a Parameter to a SimulinkObject");
     return E_OK;
   }
 
@@ -212,9 +212,9 @@ ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> eleme
       std::dynamic_pointer_cast<SimulinkParameter>(element);
     if (!paramPtr)
     {
-      //l.log(Logger::V_ERROR,
-       // "SimulinkObject: failed to cast SimulinkElementBase to "
-       // "SimulinkParameter");
+      // l.log(Logger::V_ERROR,
+      //  "SimulinkObject: failed to cast SimulinkElementBase to "
+      //  "SimulinkParameter");
       return E_OK;
     }
     parameters.push_back(paramPtr);
@@ -313,7 +313,8 @@ std::shared_ptr<SimulinkParameter> SimulinkObject::getParameter(
       }
     }
   }
-  //l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not found.");
+  // l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not
+  // found.");
   return std::make_shared<SimulinkParameter>();
 }
 

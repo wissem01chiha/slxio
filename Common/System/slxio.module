@@ -34,9 +34,15 @@ INSTALL_TARGETS
 INSTALL_LICENSES
   TRUE
 CLASSES
+  Archive
   File
   Directory
   FileManager
+  DirectoryManager
+  DirectoryService
+  ExecutableManager
+  ExecutableRunner
+  ArchiveManager
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
@@ -49,9 +55,10 @@ HEADERS
   Archive.h
   ArchiveManager.h
   Directory.h
-  DirectoryManager.
+  DirectoryManager.h
   ExecutableManager.h
   ExecutableRunner.h
+  DirectoryService.h
   File.h
   FileManager.h
 WINDOWS_HEADERS

@@ -5,4 +5,3 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://FOO attrGroup-wildcard1_0.xsd"
 	foo:bar="o" doo:bar="o"/>
-

@@ -4,13 +4,16 @@
 class FileManagerTestFixture
 {
 public:
+  FileManagerTestFixture() {}
+  ~FileManagerTestFixture() {}
+
 private:
 };
 
 TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test")
 {
 
-//   File f(TEST_FILE, File::Read);
-//   CHECK(f.isFile() == true);
-//   CHECK(f.getFilename() == "testfile.txt");
+  //   File f(TEST_FILE, File::Read);
+  //   CHECK(f.isFile() == true);
+  //   CHECK(f.getFilename() == "testfile.txt");
 }

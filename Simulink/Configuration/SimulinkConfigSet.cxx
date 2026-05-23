@@ -1,8 +1,8 @@
 #include "SimulinkConfigSet.h"
+#include "ErrorCode.h"
+#include "Logger.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
-#include "Logger.h"
-#include "ErrorCode.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -26,7 +26,6 @@ SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
 {
 }
 
-
 std::string SimulinkConfigSet::ToString() const
 {
   return object->ToString();
@@ -42,7 +41,7 @@ const char* SimulinkConfigSet::getParameter(const char* name)
 
   if (name == nullptr)
   {
-    //l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
+    // l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
   std::shared_ptr<SimulinkParameter> cfgParam =
@@ -58,8 +57,8 @@ std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(
   {
     return param;
   }
-  //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-   // " not found in configuration set.");
+  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  //  " not found in configuration set.");
   return nullptr;
 }
 
@@ -71,8 +70,8 @@ ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
     param->setValue(value);
     return E_OK;
   }
-  //l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-    //" not found in configuration set. Cannot set value.");
+  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  //" not found in configuration set. Cannot set value.");
   return E_OK;
 }
 
@@ -135,8 +134,8 @@ void SimulinkConfigSet::activate()
 {
   if (status)
   {
-    //l.log(Logger::V_INFO, "Activating Simulink configuration set ",
-    //  object->getName());
+    // l.log(Logger::V_INFO, "Activating Simulink configuration set ",
+    //   object->getName());
   }
   status = true;
 }
@@ -145,8 +144,8 @@ void SimulinkConfigSet::deactivate()
 {
   if (!status)
   {
-    //l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
-     // object->getName());
+    // l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
+    //  object->getName());
   }
   status = false;
 }

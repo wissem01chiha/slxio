@@ -14,56 +14,41 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Timer
- * @brief Abstract class for all Timers
+ * @brief  A high-resolution timer class for measuring elapsed time with
+ * precision.
  */
 class SLXIO_APIEXPORT Timer final
 {
 public:
   using Clock = std::chrono::steady_clock;
 
-  /**
-   * Default Constructor
-   */
+  /** Default Constructor */
   Timer() = default;
 
-  /**
-   * Default Destructor
-   */
+  /** Default Destructor */
   ~Timer() = default;
 
-  /**
-   * Call Start every time to reset the timer to zero.
-   */
+  /** Call Start every time to reset the timer to zero. */
   void Start();
 
-  /**
-   * Stops the timer and records the elapsed time.
-   */
+  /** Stops the timer and records the elapsed time. */
   void Stop();
 
-  /**
-   * Resets the timer state and clears any recorded time.
-   */
+  /** Resets the timer state and clears any recorded time.*/
   void Reset();
 
-  /**
-   * Checks whether the timer is currently running.
-   */
+  /** Checks whether the timer is currently running. */
   bool IsRunning() const;
 
-  /**
-   * Returns the precision or resolution of the timer in seconds.
-   */
+  /** Returns the precision or resolution of the timer in seconds. */
   Float32 Precision() const;
 
-  /**
-   * Obtains a timer measurement in seconds.
-   */
+  /** Obtains a timer measurement in seconds.*/
   Float32 Time();
 
 private:
   Clock::time_point StartTime;
-  bool Running =false;
+  bool Running = false;
   Clock::duration Accumulated{ Clock::duration::zero() };
 };
 

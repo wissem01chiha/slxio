@@ -6,6 +6,9 @@ endif()
 if(POLICY CMP0092)
   cmake_policy(SET CMP0092 NEW) # disable /W3 warning, if possible
 endif()
+if(POLICY CMP0077)
+  cmake_policy(SET CMP0077 NEW)
+endif()
 
 project(libuv LANGUAGES C)
 

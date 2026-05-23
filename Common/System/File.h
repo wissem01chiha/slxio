@@ -23,7 +23,13 @@ class SLXIO_APIEXPORT File final
 {
 public:
   /** File access modes. */
-  enum class Mode { Read, Write, Append, Truncate };
+  enum class Mode
+  {
+    Read,
+    Write,
+    Append,
+    Truncate
+  };
 
   /** Construct a File with path and mode. */
   File(const std::string& path, Mode mode);

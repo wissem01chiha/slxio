@@ -1,28 +1,26 @@
-#include "ErrorHandlingApi.h"
+#include "ErrorHandler.h"
 #include "ErrorCode.h"
 #include "ErrorMap.h"
 #include "Libuv.h"
 #include "Libzip.h"
 #include <cstdio>
 
-static int lastError = E_OK;
-
-void sSetLastError(int code)
+void ErrorHandler::SetLastError(int code)
 {
   lastError = code;
 }
 
-int sGetLastError(void)
+int ErrorHandler::GetLastError(void)
 {
   return lastError;
 }
 
-const char* sGetLastErrorMessage(void)
+const char* ErrorHandler::GetLastErrorMessage(void)
 {
-  return sGetErrorMessage(lastError);
+  return GetErrorMessage(lastError);
 }
 
-const char* sGetErrorMessage(int code)
+const char* ErrorHandler::GetErrorMessage(int code)
 {
   if (code >= 1000)
   {
@@ -60,22 +58,22 @@ const char* sGetErrorMessage(int code)
   return buf;
 }
 
-int sPrintErrorMessage(int code)
+int ErrorHandler::PrintErrorMessage(int code)
 {
-  return printf("[%d]: %s\n", code, sGetErrorMessage(code));
+  return printf("[%d]: %s\n", code, GetErrorMessage(code));
 }
 
-int sPrintfErrorMessage(const char* format, int code)
+int ErrorHandler::PrintfErrorMessage(const char* format, int code)
 {
-  return printf(format, sGetErrorMessage(code));
+  return printf(format, GetErrorMessage(code));
 }
 
-int sPrintLastErrorMessage(void)
+int ErrorHandler::PrintLastErrorMessage(void)
 {
-  return sPrintErrorMessage(lastError);
+  return PrintErrorMessage(lastError);
 }
 
-int sPrintfLastErrorMessage(const char* format)
+int ErrorHandler::PrintfLastErrorMessage(const char* format)
 {
-  return sPrintfErrorMessage(format, lastError);
+  return PrintfErrorMessage(format, lastError);
 }

@@ -44,20 +44,21 @@ std::string SimulinkPort::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkPort::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    //l.log(Logger::V_WARNING,
-    //  "SimulinkPort::Cannot remove a null Simulink element.");
+    // l.log(Logger::V_WARNING,
+    //   "SimulinkPort::Cannot remove a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
-    //l.log(Logger::V_ERROR,
-    //  "Cannot remove a Simulink element of a different "
-     //"type than Line from a SimulinkPort");
+    // l.log(Logger::V_ERROR,
+    //   "Cannot remove a Simulink element of a different "
+    //"type than Line from a SimulinkPort");
     return E_OK;
   }
 
@@ -68,25 +69,27 @@ ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
       std::dynamic_pointer_cast<SimulinkLine>(element);
 
     // portLines.push_back(linePtr);
-    //l.log(Logger::VERBOSITY_0, "Removed line from port");
+    // l.log(Logger::VERBOSITY_0, "Removed line from port");
   }
   return E_OK;
 }
 
-ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkPort::AddElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    //l.log(
-   //   Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink element.");
+    // l.log(
+    //   Logger::V_WARNING, "SimulinkPort::Cannot add a null Simulink
+    //   element.");
     return E_PARAMETER_NULL_PTR;
   }
 
   if (!(element->GetElementType().isA(SimulinkElementType::Line)))
   {
-    //l.log(Logger::V_ERROR,
-     // "Cannot add a Simulink element of a different "
-     // "type than Line to a SimulinkPort");
+    // l.log(Logger::V_ERROR,
+    //  "Cannot add a Simulink element of a different "
+    //  "type than Line to a SimulinkPort");
     return E_OK;
   }
   if (element->GetElementType().isA(SimulinkElementType::Line))
@@ -96,7 +99,7 @@ ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element
       std::dynamic_pointer_cast<SimulinkLine>(element);
 
     lines.push_back(linePtr);
-    //l.log(Logger::VERBOSITY_0, "Added line to port");
+    // l.log(Logger::VERBOSITY_0, "Added line to port");
   }
   return E_OK;
 }

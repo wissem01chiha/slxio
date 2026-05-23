@@ -4,7 +4,7 @@
 #ifndef CXXOPTS_H
 #define CXXOPTS_H
 
-#if USE_EXTERNAL_CXXOPTS
+#ifdef USE_EXTERNAL_CXXOPTS
 #include <cxxopts.hpp>
 #else
 #include <src/include/cxxopts.hpp>
