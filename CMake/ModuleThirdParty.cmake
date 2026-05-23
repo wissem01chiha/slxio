@@ -48,8 +48,7 @@ message(STATUS "Checking if Doxygen is available")
 find_package(Doxygen)
 
 if(NOT DOXYGEN_FOUND)
-  message(WARNING "Doxygen not found, documentation will not be generated")
-  return()
+  message(STATUS "Doxygen not found, documentation will not be generated")
 endif()
 message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
 
