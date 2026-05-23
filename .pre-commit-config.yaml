@@ -4,12 +4,12 @@ repos:
   hooks:
   - id: check-yaml
   - id: end-of-file-fixer
-    exclude: ^version\.txt$
+    exclude: ^(ThirdParty/doctest/src/scripts/version.txt)$
   - id: trailing-whitespace
-    exclude: ^version\.txt$
+    exclude: ^(ThirdParty/doctest/src/scripts/version.txt)$
 
 - repo: https://github.com/psf/black
-  rev: 24.4.0
+  rev: 24.4.2
   hooks:
   - id: black
     exclude: ^(ThirdParty/doctest/src/scripts/version.txt)$
