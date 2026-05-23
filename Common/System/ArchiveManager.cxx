@@ -1,6 +1,6 @@
 #include "ArchiveManager.h"
-#include "ErrorCode.h"
 #include "Archive.h"
+#include "ErrorCode.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -43,7 +43,6 @@ ReturnType ArchiveManager::Remove(const IdType id)
 {
   return E_OK;
 }
-
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

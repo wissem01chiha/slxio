@@ -15,9 +15,7 @@ void Mux::SetNumInputs(UInt32 value)
   NumInputs = value;
 }
 
-Mux::~Mux()
-{
-}
+Mux::~Mux() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

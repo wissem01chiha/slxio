@@ -15,9 +15,7 @@ void Saturation::SetUpperLimit(Float32 value)
   UpperLimit = value;
 }
 
-Saturation::~Saturation()
-{
-}
+Saturation::~Saturation() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

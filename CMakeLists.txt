@@ -91,11 +91,12 @@ option(SLXIO_BUILD_TESTS "Build library tests" ON)
 CMAKE_DEPENDENT_OPTION(SLXIO_BUILD_THIRDPARTY_TESTS "Build vendored modules tests"
     OFF "SLXIO_BUILD_TESTS" OFF)
 mark_as_advanced(SLXIO_BUILD_THIRDPARTY_TESTS)
-option(SLXIO_COVERAGE "Enable testing code coverage" ON)
+CMAKE_DEPENDENT_OPTION(SLXIO_COVERAGE "Enable testing code coverage"
+    OFF "SLXIO_BUILD_TESTS" OFF)
 mark_as_advanced(SLXIO_COVERAGE)
 
 #-----------------------------------------------------------------------------
-# Sanitizers 
+# Sanitizers
 option(SLXIO_ASAN "Enable AddressSanitizer (ASan)" OFF)
 mark_as_advanced(SLXIO_ASAN)
 option(SLXIO_MSAN "Enable MemorySanitizer (MSan)" OFF)
@@ -125,10 +126,16 @@ endif()
 # CTest Config
 set(SLXIO_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
+#-----------------------------------------------------------------------------
+# Documentation Config
+option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
+
+
+
 option(SLXIO_OPENMP "Enable OpenMP support" ON)
 
 option(SLXIO_INSTALL "Enable installtion after build" OFF)
-option(SLXIO_DOCUMENTATION "Enable documentation generation" OFF)
+
 option(SLXIO_BUILD_EXAMPLES "Build example applications" OFF)
 option(SLXIO_BUILD_PYTHON "Enable building Python Interface" ON)
 option(SLXIO_BUILD_JAVA "Enable building Java Interface" ON)

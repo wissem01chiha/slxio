@@ -5,8 +5,8 @@
 #define SCOPE_H
 
 #include "AbiNamespaceMacro.h"
-#include "PlatformTypes.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -15,16 +15,17 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Scope
  * @brief A class representing a scope in the simulation.
  */
-class  SLXIO_APIEXPORT Scope final
+class SLXIO_APIEXPORT Scope final
 {
 public:
   Scope();
- 
+
   UInt32 GetNumInputPorts() const;
 
   void SetNumInputPorts(UInt32 numPorts);
 
-   ~Scope();
+  ~Scope();
+
 private:
   UInt32 numInputPorts;
   bool floating;

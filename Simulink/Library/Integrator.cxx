@@ -15,9 +15,7 @@ void Integrator::SetValue(float value)
   IntegratorValue = value;
 }
 
-Integrator::~Integrator()
-{
-}
+Integrator::~Integrator() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

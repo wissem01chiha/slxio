@@ -15,9 +15,7 @@ void DataTypeConversion::SetConversionCode(Float32 value)
   ConversionCode = value;
 }
 
-DataTypeConversion::~DataTypeConversion()
-{
-}
+DataTypeConversion::~DataTypeConversion() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

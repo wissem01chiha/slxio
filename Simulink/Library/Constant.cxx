@@ -3,8 +3,9 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-void Constant::SetValue(Float32 value) {
-    ConstantValue = value;
+void Constant::SetValue(Float32 value)
+{
+  ConstantValue = value;
 }
 
 Float32 Constant::GetValue() const
@@ -14,5 +15,3 @@ Float32 Constant::GetValue() const
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

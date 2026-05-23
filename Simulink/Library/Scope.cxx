@@ -15,11 +15,7 @@ void Scope::SetNumInputPorts(UInt32 numPorts)
   numInputPorts = numPorts;
 }
 
-Scope::~Scope()
-{
-}
+Scope::~Scope() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
-
-

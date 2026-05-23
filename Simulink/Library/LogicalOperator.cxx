@@ -15,9 +15,7 @@ void LogicalOperator::SetOperatorCode(Float32 value)
   OperatorCode = value;
 }
 
-LogicalOperator::~LogicalOperator()
-{
-}
+LogicalOperator::~LogicalOperator() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

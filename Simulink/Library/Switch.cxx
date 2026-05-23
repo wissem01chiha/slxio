@@ -15,9 +15,7 @@ void Switch::SetThreshold(Float32 value)
   Threshold = value;
 }
 
-Switch::~Switch()
-{
-}
+Switch::~Switch() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

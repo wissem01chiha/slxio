@@ -15,9 +15,7 @@ void RelationalOperator::SetOperatorCode(Float32 value)
   OperatorCode = value;
 }
 
-RelationalOperator::~RelationalOperator()
-{
-}
+RelationalOperator::~RelationalOperator() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

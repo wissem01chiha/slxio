@@ -15,9 +15,7 @@ void AlgebraicConstraint::SetConstraintValue(Float32 value)
   ConstraintValue = value;
 }
 
-AlgebraicConstraint::~AlgebraicConstraint()
-{
-}
+AlgebraicConstraint::~AlgebraicConstraint() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

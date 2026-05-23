@@ -15,9 +15,7 @@ void Sum::SetValue(Float32 value)
   SumValue = value;
 }
 
-Sum::~Sum()
-{
-}
+Sum::~Sum() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

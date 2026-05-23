@@ -15,9 +15,7 @@ void BitSet::SetBitPosition(Float32 value)
   BitPosition = value;
 }
 
-BitSet::~BitSet()
-{
-}
+BitSet::~BitSet() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -7,10 +7,10 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "Logger.h"
+#include "PlatformTypes.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
-#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -39,7 +39,8 @@ public:
    * @param element The element to remove (must be a SimulinkLine).
    * @return ReturnType indicating success or failure.
    */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * @brief Add a line to this port.

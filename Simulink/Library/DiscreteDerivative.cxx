@@ -15,9 +15,7 @@ void DiscreteDerivative::SetSampleTime(Float32 value)
   SampleTime = value;
 }
 
-DiscreteDerivative::~DiscreteDerivative()
-{
-}
+DiscreteDerivative::~DiscreteDerivative() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

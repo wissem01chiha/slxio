@@ -15,9 +15,7 @@ void Add::SetOperandValue(Float32 value)
   OperandValue = value;
 }
 
-Add::~Add()
-{
-}
+Add::~Add() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -7,9 +7,9 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "ErrorCode.h"
+#include "PlatformTypes.h"
 #include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
-#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -29,7 +29,8 @@ public:
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent of this StateflowTranstion
   std::shared_ptr<StateflowElementBase> getParent() const override;

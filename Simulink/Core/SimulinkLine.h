@@ -7,10 +7,10 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "Logger.h"
+#include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"
 #include "SimulinkPort.h"
-#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -42,7 +42,8 @@ public:
   /**
    *
    */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    *

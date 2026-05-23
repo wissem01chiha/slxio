@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "AbiNamespaceMacro.h"
-#include "PlatformTypes.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataStoreMemory final 
+class SLXIO_APIEXPORT DataStoreMemory final
 {
 public:
   /** Default Constructor */
@@ -24,10 +24,9 @@ public:
   /** Default Destructor */
   ~DataStoreMemory();
 
-private: 
+private:
   std::string DataStoreMemoryName;
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

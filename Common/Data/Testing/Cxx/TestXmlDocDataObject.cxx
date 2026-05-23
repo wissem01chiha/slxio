@@ -8,8 +8,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class XmlDocDataObjectTestFixture
 {
 public:
-  XmlDocDataObjectTestFixture(){};
-  ~XmlDocDataObjectTestFixture(){};
+  XmlDocDataObjectTestFixture() {};
+  ~XmlDocDataObjectTestFixture() {};
 
 private:
 };

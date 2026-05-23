@@ -15,9 +15,7 @@ void Ground::SetGrounded(bool value)
   Grounded = value;
 }
 
-Ground::~Ground()
-{
-}
+Ground::~Ground() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

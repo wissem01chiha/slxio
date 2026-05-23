@@ -15,9 +15,7 @@ void BitClear::SetBitPosition(Float32 value)
   BitPosition = value;
 }
 
-BitClear::~BitClear()
-{
-}
+BitClear::~BitClear() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

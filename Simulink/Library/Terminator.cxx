@@ -15,9 +15,7 @@ void Terminator::SetTerminated(bool value)
   Terminated = value;
 }
 
-Terminator::~Terminator()
-{
-}
+Terminator::~Terminator() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

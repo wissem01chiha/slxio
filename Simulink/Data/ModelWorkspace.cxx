@@ -8,7 +8,8 @@ static const Logger::ApplicationInfoType ModelWorkspaceId = { 1002,
   "ModelWorkspace" };
 
 ModelWorkspace::ModelWorkspace()
-  : DataSource(DataSourceType::Type::ModelFile), logger(Logger::GetInstance())
+  : DataSource(DataSourceType::Type::ModelFile)
+  , logger(Logger::GetInstance())
 {
 }
 
@@ -20,8 +21,7 @@ std::string ModelWorkspace::GetVariable(const std::string& name) const
   {
     return it->second;
   }
-  logger.SendLogMessage(
-    { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
+  logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
     { "GetVariable : Variable", name, "not found in ModelWorkspace." });
   return std::string("");
 }
@@ -44,7 +44,8 @@ ReturnType ModelWorkspace::ClearVariable(const std::string& name)
   {
     logger.SendLogMessage(
       { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
-      { "ClearVariable: Variable", name, "not found in ModelWorkspace. Cannot clear." });
+      { "ClearVariable: Variable", name,
+        "not found in ModelWorkspace. Cannot clear." });
   }
   return E_OK;
 }
@@ -52,8 +53,7 @@ ReturnType ModelWorkspace::ClearVariable(const std::string& name)
 ReturnType ModelWorkspace::ClearAll()
 {
   Variables.clear();
-  logger.SendLogMessage(
-    { Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },
+  logger.SendLogMessage({ Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },
     { "ClearAll: All Variables cleared from ModelWorkspace." });
   return E_OK;
 }

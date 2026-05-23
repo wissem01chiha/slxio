@@ -1,4 +1,0 @@
-.. _guide:
-
-User guide
-==========

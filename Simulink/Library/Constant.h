@@ -15,10 +15,10 @@ class SLXIO_APIEXPORT Constant final
 {
 public:
   /** Default Constructor */
-  Constant() =default;
+  Constant() = default;
 
   /** Default Destructor */
-  ~Constant() =default;
+  ~Constant() = default;
 
   /** Set the constant value */
   void SetValue(Float32 value);

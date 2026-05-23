@@ -14,7 +14,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Timer
- * @brief Abstract class for all Timers
+ * @brief  A high-resolution timer class for measuring elapsed time with
+ * precision.
  */
 class SLXIO_APIEXPORT Timer final
 {

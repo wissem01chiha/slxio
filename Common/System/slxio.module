@@ -34,7 +34,7 @@ INSTALL_TARGETS
 INSTALL_LICENSES
   TRUE
 CLASSES
-  Archive 
+  Archive
   File
   Directory
   FileManager

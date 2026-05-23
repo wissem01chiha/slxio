@@ -15,9 +15,7 @@ void DataStoreRead::SetName(std::string& name)
   DataStoreReadName = name;
 }
 
-DataStoreRead::~DataStoreRead()
-{
-}
+DataStoreRead::~DataStoreRead() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

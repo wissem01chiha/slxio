@@ -15,9 +15,7 @@ void Abs::SetInputValue(Float32 value)
   InputValue = value;
 }
 
-Abs::~Abs()
-{
-}
+Abs::~Abs() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

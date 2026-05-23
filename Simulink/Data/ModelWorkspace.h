@@ -7,9 +7,9 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "DataSourceType.h"
+#include "Logger.h"
 #include "PlatformTypes.h"
 #include <string>
-#include "Logger.h"
 #include <unordered_map>
 #include <vector>
 
@@ -33,8 +33,7 @@ public:
   /**
    * Assign a value to a variable in the model workspace.
    */
-  ReturnType AssignVariable(
-    const std::string& name, const std::string& value);
+  ReturnType AssignVariable(const std::string& name, const std::string& value);
 
   /**
    * Clear a variable from the model workspace.

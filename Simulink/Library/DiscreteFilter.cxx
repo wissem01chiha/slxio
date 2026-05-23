@@ -15,9 +15,7 @@ void DiscreteFilter::SetFilterCoefficient(Float32 value)
   FilterCoefficient = value;
 }
 
-DiscreteFilter::~DiscreteFilter()
-{
-}
+DiscreteFilter::~DiscreteFilter() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -57,9 +57,9 @@ void SimulinkParameter::setDataType(SimulinkDataType DataType_)
 
   if (DataType_ == DataType)
   {
-   // Logger::GetInstance().log(Logger::V_WARNING,
-     // "SimulinkParameter::setDataType called with same "
-     // "data type. No changes made.");
+    // Logger::GetInstance().log(Logger::V_WARNING,
+    // "SimulinkParameter::setDataType called with same "
+    // "data type. No changes made.");
     return;
   }
 
@@ -244,9 +244,9 @@ SimulinkElementType SimulinkParameter::GetElementType() const
 
 IdType SimulinkParameter::GetElementId() const
 {
-  //Logger::GetInstance().log(Logger::V_WARNING,
-  //  "SimulinkParameter::GetElementId called on unsupported element. "
-  //  "Returning 0.");
+  // Logger::GetInstance().log(Logger::V_WARNING,
+  //   "SimulinkParameter::GetElementId called on unsupported element. "
+  //   "Returning 0.");
   return (IdType)0;
 }
 
@@ -260,16 +260,16 @@ bool SimulinkParameter::Contains(const IdType& id) const
 UInt32 SimulinkParameter::RemoveElement(
   const std::shared_ptr<SimulinkElementBase> element)
 {
-  //Logger::GetInstance().log(
-   // Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
+  // Logger::GetInstance().log(
+  //  Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
   return E_NOT_IMPLEMENTED;
 }
 
 UInt32 SimulinkParameter::AddElement(
   const std::shared_ptr<SimulinkElementBase> element)
 {
- // Logger::GetInstance().log(
-    //Logger::V_ERROR, "SimulinkParameter::add is not supported.");
+  // Logger::GetInstance().log(
+  // Logger::V_ERROR, "SimulinkParameter::add is not supported.");
   return E_NOT_IMPLEMENTED;
 }
 

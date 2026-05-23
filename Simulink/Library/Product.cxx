@@ -15,9 +15,7 @@ void Product::SetProductValue(Float32 value)
   ProductValue = value;
 }
 
-Product::~Product()
-{
-}
+Product::~Product() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

@@ -15,9 +15,7 @@ void IntegratorSecondOrder::SetNaturalFrequency(Float32 value)
   NaturalFrequency = value;
 }
 
-IntegratorSecondOrder::~IntegratorSecondOrder()
-{
-}
+IntegratorSecondOrder::~IntegratorSecondOrder() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

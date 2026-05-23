@@ -5,14 +5,14 @@
 #define INTEGRATOR_H
 
 #include "AbiNamespaceMacro.h"
-#include "PlatformTypes.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Integrator final 
+class SLXIO_APIEXPORT Integrator final
 {
 public:
   /** Default Constructor */

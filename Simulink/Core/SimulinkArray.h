@@ -5,9 +5,9 @@
 #define SIMULINKARRAY_H
 
 #include "AbiNamespaceMacro.h"
+#include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkParameter.h"
-#include "PlatformTypes.h"
 #include <memory>
 
 class Logger;
@@ -48,7 +48,8 @@ public:
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
 
   /** */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> elment) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> elment) override;
 
   /** */
   IdType GetElementId() const override;

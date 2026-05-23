@@ -1,3 +1,8 @@
+cmake_policy(PUSH)
+if (POLICY CMP0159)
+  cmake_policy(SET CMP0159 NEW)
+endif ()
+
 include(FindPythonModule)
 
 if(SLXIO_SLOG)
@@ -38,3 +43,14 @@ if(SLXIO_COVERAGE)
   find_program(LCOV lcov)
   find_program(GENHTML genhtml)
 endif()
+
+message(STATUS "Checking if Doxygen is available")
+find_package(Doxygen)
+
+if(NOT DOXYGEN_FOUND)
+  message(WARNING "Doxygen not found, documentation will not be generated")
+  return()
+endif()
+message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
+
+cmake_policy(POP)

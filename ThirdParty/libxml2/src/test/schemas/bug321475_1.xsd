@@ -41,8 +41,3 @@
     <xs:element name="source"/>
     <xs:element name="technique"/>
 </xs:schema>
-
-
-
-
-

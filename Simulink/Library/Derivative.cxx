@@ -15,9 +15,7 @@ void Derivative::SetDerivativeGain(Float32 value)
   DerivativeGain = value;
 }
 
-Derivative::~Derivative()
-{
-}
+Derivative::~Derivative() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

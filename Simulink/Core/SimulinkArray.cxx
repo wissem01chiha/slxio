@@ -1,13 +1,13 @@
 #include "SimulinkArray.h"
-#include <algorithm>
 #include "Logger.h"
+#include <algorithm>
 #include <sstream>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArray::SimulinkArray()
-  :  logger(Logger::GetInstance())
+  : logger(Logger::GetInstance())
 {
 }
 
@@ -77,12 +77,13 @@ std::string SimulinkArray::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkArray::AddElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
-    //l.log(
-      //Logger::V_WARNING, "SimulinkArray::Cannot add a null Simulink element.");
+    // l.log(
+    // Logger::V_WARNING, "SimulinkArray::Cannot add a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
@@ -96,9 +97,9 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
     {
       if (subArrayPtr->getName() == arraysPtr->getName())
       {
-        //l.log(Logger::V_WARNING,
-         // "SimulinkArray::subArray already exsists in the Base "
-         // "array");
+        // l.log(Logger::V_WARNING,
+        //  "SimulinkArray::subArray already exsists in the Base "
+        //  "array");
       }
     }
     subArrays.push_back(subArrayPtr);
@@ -110,9 +111,9 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
     {
       if (element->GetElementId() == objId)
       {
-        //l.log(Logger::V_WARNING,
-         // "SimulinkArray::subObject already exsists in the base "
-         // "array");
+        // l.log(Logger::V_WARNING,
+        //  "SimulinkArray::subObject already exsists in the base "
+        //  "array");
         return E_OK;
       }
     }
@@ -129,21 +130,22 @@ ReturnType SimulinkArray::AddElement(std::shared_ptr<SimulinkElementBase> elemen
   }
   else
   {
-    //l.log(Logger::V_ERROR,
-      //"Cannot add a Simulink element of a different type "
-     // "than Array or Object to a SimulinkObject");
+    // l.log(Logger::V_ERROR,
+    //"Cannot add a Simulink element of a different type "
+    // "than Array or Object to a SimulinkObject");
     return E_OK;
   }
 
   return E_OK;
 }
 
-ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elment)
+ReturnType SimulinkArray::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> elment)
 {
   if (elment == nullptr)
   {
-    //l.log(Logger::V_WARNING,
-     // "SimulinkArray::Cannot remove a null Simulink element.");
+    // l.log(Logger::V_WARNING,
+    //  "SimulinkArray::Cannot remove a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
@@ -158,8 +160,8 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
 
       if (arr->getName() == arrayPtr->getName())
       {
-        subArrays.erase(remove(subArrays.begin(), subArrays.end(), arr),
-          subArrays.end());
+        subArrays.erase(
+          remove(subArrays.begin(), subArrays.end(), arr), subArrays.end());
       }
       arr->RemoveElement(elment);
     }
@@ -178,10 +180,10 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
   }
   else
   {
-    //l.log(Logger::V_WARNING,
-     // "SimulinkArray::Cannot remove a Simulink element of a "
-     // "different type "
-      //"than Array or Object to a SimulinkObject");
+    // l.log(Logger::V_WARNING,
+    //  "SimulinkArray::Cannot remove a Simulink element of a "
+    //  "different type "
+    //"than Array or Object to a SimulinkObject");
     return E_OK;
   }
 
@@ -190,8 +192,8 @@ ReturnType SimulinkArray::RemoveElement(std::shared_ptr<SimulinkElementBase> elm
 
 IdType SimulinkArray::GetElementId() const
 {
-  //l.log(Logger::V_INFO,
-   // "SimulinkArray do not have an ID by default use Contains(uint32 "
+  // l.log(Logger::V_INFO,
+  //  "SimulinkArray do not have an ID by default use Contains(uint32 "
   //  "id) to "
   //  "check for sub objects by their Id");
   return id;
@@ -249,8 +251,8 @@ std::shared_ptr<SimulinkParameter> SimulinkArray::getParameter(std::string name)
     }
   }
 
-  //l.log(Logger::V_WARNING, "SimulinkArray:: Parameter", name.c_str(),
-    //" not found.");
+  // l.log(Logger::V_WARNING, "SimulinkArray:: Parameter", name.c_str(),
+  //" not found.");
   return nullptr;
 }
 

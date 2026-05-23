@@ -10,8 +10,9 @@ std::string DataStoreMemory::GetName() const
   return DataStoreMemoryName;
 }
 
-void DataStoreMemory::SetName(std::string& name) {
-    DataStoreMemoryName = name;
+void DataStoreMemory::SetName(std::string& name)
+{
+  DataStoreMemoryName = name;
 }
 
 DataStoreMemory::~DataStoreMemory() {}

@@ -12,7 +12,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ExecutableManager
- * @brief Manages executable files and their associated metadata within the system.
+ * @brief Manages executable files and their associated metadata within the
+ * system.
  */
 class SLXIO_APIEXPORT ExecutableManager final
 {

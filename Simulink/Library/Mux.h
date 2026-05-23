@@ -5,8 +5,8 @@
 #define MUX_H
 
 #include "AbiNamespaceMacro.h"
-#include "PlatformTypes.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

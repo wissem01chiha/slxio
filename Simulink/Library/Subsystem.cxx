@@ -15,9 +15,7 @@ void Subsystem::SetEnabled(bool value)
   Enabled = value;
 }
 
-Subsystem::~Subsystem()
-{
-}
+Subsystem::~Subsystem() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

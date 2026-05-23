@@ -11,11 +11,9 @@
 class SLXIO_APIEXPORT SimulinkLibraryBase
 {
 private:
-
 public:
-    SimulinkLibraryBase();
-    ~SimulinkLibraryBase();
+  SimulinkLibraryBase();
+  ~SimulinkLibraryBase();
 };
-
 
 #endif // SIMULINKLIBRRAYBASE_H

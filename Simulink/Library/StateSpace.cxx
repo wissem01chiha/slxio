@@ -15,9 +15,7 @@ void StateSpace::SetStateValue(Float32 value)
   StateValue = value;
 }
 
-StateSpace::~StateSpace()
-{
-}
+StateSpace::~StateSpace() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

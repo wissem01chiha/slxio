@@ -15,9 +15,7 @@ void DataStoreWrite::SetName(std::string& name)
   DataStoreWriteName = name;
 }
 
-DataStoreWrite::~DataStoreWrite()
-{
-}
+DataStoreWrite::~DataStoreWrite() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END

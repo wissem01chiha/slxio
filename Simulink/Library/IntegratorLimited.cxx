@@ -15,9 +15,7 @@ void IntegratorLimited::SetUpperLimit(Float32 value)
   UpperLimit = value;
 }
 
-IntegratorLimited::~IntegratorLimited()
-{
-}
+IntegratorLimited::~IntegratorLimited() {}
 
 SLXIO_ABI_NAMESPACE_END
 SLXIO_NAMESPACE_END
