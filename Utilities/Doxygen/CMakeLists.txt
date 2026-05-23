@@ -19,7 +19,7 @@ if(SLXIO_DOXYGEN_DOCUMENTATION)
        ${PROJECT_SOURCE_DIR}/IO
        ${PROJECT_SOURCE_DIR}/Simulink/Core
        ${PROJECT_SOURCE_DIR}/Simulink/Configuration
-       ${PROJECT_SOURCE_DIR}/Documentation
+       ${PROJECT_SOURCE_DIR}/Documentation/Doxygen/Mainpages
        ${PROJECT_SOURCE_DIR}/README.md")
 
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
