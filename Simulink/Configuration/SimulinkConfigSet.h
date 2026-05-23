@@ -6,10 +6,10 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
-#include "PlatformTypes.h"
 #include <memory>
 #include <string>
 #include <vector>

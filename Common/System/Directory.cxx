@@ -1,9 +1,6 @@
 ﻿#include "Directory.h"
 #include "ErrorCode.h"
-#include "File.h"
 #include "Libuv.h"
-#include <cstring>
-#include <locale>
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -15,57 +12,7 @@ Directory::Directory(const std::string& path)
   SubDirList.clear();
 }
 
-ReturnType Directory::Create(const char* path)
-{
-  if (path == nullptr)
-    return E_PARAMETER_NULL_PTR;
-
-  char* Path = (char*)malloc(strlen(path) + 1);
-  strcpy(Path, path);
-
-  if (path[strlen(path) - 1] != '/')
-  {
-
-    char* last_slash = strrchr(Path, '/');
-    if (last_slash)
-    {
-      *(last_slash + 1) = '\0';
-    }
-    else
-    {
-      Path[0] = '\0';
-    }
-  }
-
-  uv_fs_t req;
-  char temp[1024];
-  strncpy(temp, Path, sizeof(temp));
-  temp[sizeof(temp) - 1] = '\0';
-
-  for (char* p = temp + 1; *p; p++)
-  {
-    if (*p == '/')
-    {
-      *p = '\0';
-      int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
-      if (r < 0 && r != UV_EEXIST)
-      {
-        return r;
-      }
-      *p = '/';
-    }
-  }
-
-  int r = uv_fs_mkdir(uv_default_loop(), &req, temp, 0755, NULL);
-  if (r < 0 && r != UV_EEXIST)
-  {
-    return r;
-  }
-
-  return E_OK;
-}
-
-ReturnType Directory::Open()
+ReturnType Directory::Init()
 {
   if (DirectoryPath.empty())
     return E_PATH_EMPTY;
@@ -94,12 +41,12 @@ ReturnType Directory::Open()
     if (r < 0)
     {
       uv_fs_req_cleanup(&readdir_req);
-      break;
+      return r;
     }
     if (r == 0)
     {
       uv_fs_req_cleanup(&readdir_req);
-      break;
+      return r;
     }
 
     for (unsigned i = 0; i < dir->nentries; ++i)
@@ -120,13 +67,11 @@ ReturnType Directory::Open()
       {
         File f(full);
         DirectoryFileList.push_back(f);
-        DirectoryFileMap[name] = f;
       }
       else if (ent.type == UV_DIRENT_DIR)
       {
         Directory d_(full);
         SubDirList.push_back(d_);
-        SubDirs[name] = d_;
       }
     }
 
@@ -141,9 +86,32 @@ ReturnType Directory::Open()
   return E_OK;
 }
 
-ReturnType Directory::Remove()
+void Directory::Add(const File& file)
 {
-  return E_OK;
+  DirectoryFileList.push_back(file);
+}
+
+void Directory::Remove(const File& file) {}
+
+bool Directory::Contains(std::string& entryname) const
+{
+  for (auto file : DirectoryFileList)
+  {
+    if (file.GetFileName() == entryname)
+    {
+      return true;
+    }
+  }
+
+  for (auto subdir : SubDirList)
+  {
+    if (subdir.GetDirectoryName() == entryname)
+    {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 UInt32 Directory::GetNumberOfFiles() const
@@ -151,67 +119,26 @@ UInt32 Directory::GetNumberOfFiles() const
   return DirectoryFileList.size();
 }
 
-const File* Directory::GetFile(const IdType& index) const
+const std::shared_ptr<File> Directory::GetFile(const IdType& index) const
 {
   if (index >= DirectoryFileList.size())
   {
     return nullptr;
   }
-  return &DirectoryFileList[index];
+  return std::make_shared<File>(DirectoryFileList[index]);
 }
 
-const File* Directory::GetFile(const std::string& filename) const
+const std::shared_ptr<File> Directory::GetFile(
+  const std::string& filename) const
 {
-  auto it = DirectoryFileMap.find(filename);
-  if (it != DirectoryFileMap.end())
+  for (size_t i = 0; i < DirectoryFileList.size(); i++)
   {
-    return &it->second;
+    if (DirectoryFileList[i].GetFileName() == filename)
+    {
+      return std::make_shared<File>(DirectoryFileList[i]);
+    }
   }
   return nullptr;
-}
-
-const char* Directory::GetCurrentWorkingDirectory()
-{
-  static char buffer[1024];
-
-  size_t size = sizeof(buffer);
-
-  int r = uv_cwd(buffer, &size);
-  if (r < 0)
-  {
-    return nullptr;
-  }
-  return buffer;
-}
-
-const char* Directory::CreateTemporaryDirectory(const char* prefix)
-{
-  uv_fs_t req;
-
-  std::string tempDirName = "XXXXXX";
-  if (prefix != nullptr && strlen(prefix) > 0)
-  {
-    tempDirName = std::string(prefix) + "_XXXXXX";
-  }
-
-  int r = uv_fs_mkdtemp(uv_default_loop(), &req, tempDirName.c_str(), nullptr);
-
-  if (r < 0)
-  {
-    uv_fs_req_cleanup(&req);
-    return nullptr;
-  }
-
-  if (req.path == nullptr)
-  {
-    uv_fs_req_cleanup(&req);
-    return nullptr;
-  }
-
-  const char* tmpdir = strdup(req.path);
-  uv_fs_req_cleanup(&req);
-
-  return tmpdir;
 }
 
 bool Directory::Exist(const std::string& path)
@@ -233,21 +160,22 @@ std::vector<Directory> Directory::GetSubDirectories() const
   return SubDirList;
 }
 
-std::string Directory::GetDirectoryName()
+std::vector<File> Directory::GetDirectoryFiles() const
 {
-  if (DirectoryPath.empty())
-  {
-    return "";
-  }
-  size_t pos = DirectoryPath.find_last_of("/\\");
-  if (pos == std::string::npos)
-  {
-    return DirectoryPath;
-  }
-  return DirectoryPath.substr(pos + 1);
+  return DirectoryFileList;
 }
 
-const std::string& Directory::GetDirectoryPath() const
+std::string Directory::GetDirectoryName() const
+{
+  if (DirectoryPath.empty())
+    return "";
+
+  size_t pos = DirectoryPath.find_last_of("/\\");
+  return (pos == std::string::npos) ? DirectoryPath
+                                    : DirectoryPath.substr(pos + 1);
+}
+
+const std::string Directory::GetDirectoryPath() const
 {
   return DirectoryPath;
 }
@@ -260,6 +188,67 @@ bool Directory::Empty() const
 bool Directory::Exist() const
 {
   return Exist(DirectoryPath);
+}
+
+ReturnType Directory::Clear()
+{
+  return E_NOT_IMPLEMENTED;
+}
+
+ReturnType Directory::Move(const Directory& directory)
+{
+  return E_NOT_IMPLEMENTED;
+}
+
+ReturnType Directory::Delete(const std::string& path)
+{
+  uv_fs_t scandir_req;
+  uv_dirent_t ent;
+  int r =
+    uv_fs_scandir(uv_default_loop(), &scandir_req, path.c_str(), 0, nullptr);
+  if (r < 0)
+  {
+    return r;
+  }
+
+  while (UV_EOF != uv_fs_scandir_next(&scandir_req, &ent))
+  {
+    std::string fullPath = path + "/" + ent.name;
+
+    if (ent.type == UV_DIRENT_DIR)
+    {
+      int sub = Delete(fullPath);
+      if (sub < 0)
+        return sub;
+      uv_fs_t rmdir_req;
+      int rr =
+        uv_fs_rmdir(uv_default_loop(), &rmdir_req, fullPath.c_str(), nullptr);
+      uv_fs_req_cleanup(&rmdir_req);
+      if (rr < 0 && rr != UV_ENOENT)
+        return rr;
+    }
+    else
+    {
+      uv_fs_t unlink_req;
+      int ur =
+        uv_fs_unlink(uv_default_loop(), &unlink_req, fullPath.c_str(), nullptr);
+      uv_fs_req_cleanup(&unlink_req);
+      if (ur < 0 && ur != UV_ENOENT)
+        return ur;
+    }
+  }
+
+  uv_fs_req_cleanup(&scandir_req);
+
+  uv_fs_t rmdir_req;
+  int rr = uv_fs_rmdir(uv_default_loop(), &rmdir_req, path.c_str(), nullptr);
+  uv_fs_req_cleanup(&rmdir_req);
+  return rr;
+}
+
+ReturnType Directory::Delete()
+{
+  return Delete(DirectoryPath);
 }
 
 SLXIO_ABI_NAMESPACE_END

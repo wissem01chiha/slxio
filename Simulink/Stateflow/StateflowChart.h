@@ -32,7 +32,8 @@ public:
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(
+    std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent
   std::shared_ptr<StateflowElementBase> getParent() const override;

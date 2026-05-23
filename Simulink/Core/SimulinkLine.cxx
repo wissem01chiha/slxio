@@ -28,7 +28,7 @@ SimulinkLine::SimulinkLine(
 }
 
 SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort)
-  :logger(Logger::GetInstance())
+  : logger(Logger::GetInstance())
 {
 
   SourcePort = std::make_shared<SimulinkPort>(sourcePort);
@@ -40,12 +40,13 @@ SimulinkElementType SimulinkLine::GetElementType() const
   return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
-ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    //l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
+    // l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 
@@ -63,12 +64,13 @@ ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> elem
   return E_OK;
 }
 
-ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::AddElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
   {
-    //l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
+    // l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
     return E_PARAMETER_NULL_PTR;
   }
 

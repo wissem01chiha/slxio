@@ -1,5 +1,10 @@
-# read version string from the VERSION.txt file and
-# set the version variables.
+# Used to read version string from the VERSION.txt file
+# On success sets following variables in caller's scope:
+#   SLXIO_VERSION
+#   SLXIO_MAJOR_VERSION
+#   SLXIO_MINOR_VERSION
+#   SLXIO_BUILD_VERSION
+
 file(READ "VERSION.txt" VERSION)
 string(STRIP ${VERSION} VERSION)
 if(${VERSION} MATCHES [[([0-9]+)\.([0-9]+)\.([0-9]+)]])

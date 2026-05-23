@@ -5,14 +5,16 @@
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::AddElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-ReturnType StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::RemoveElement(
+  std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);

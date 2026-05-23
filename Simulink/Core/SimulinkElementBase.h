@@ -6,8 +6,8 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "SimulinkElementType.h"
 #include "PlatformTypes.h"
+#include "SimulinkElementType.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -51,7 +51,8 @@ protected:
   SimulinkElementBase(const SimulinkElementBase&) = delete;
   virtual ReturnType RemoveElement(
     const std::shared_ptr<SimulinkElementBase> element) = 0;
-  virtual ReturnType AddElement(const std::shared_ptr<SimulinkElementBase> element) = 0;
+  virtual ReturnType AddElement(
+    const std::shared_ptr<SimulinkElementBase> element) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

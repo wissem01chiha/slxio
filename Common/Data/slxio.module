@@ -40,6 +40,7 @@ CLASSES
   xmlDocDataObject
   SimulinkFileObject
   xmlCharDataObject
+  AbstractSignal
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
@@ -56,7 +57,7 @@ HEADERS
   xmlCharDataObject.h
   SimulinkFileObject.h
   SimulinkFile.h
-  Signal.h
+  AbstractSignal.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS
@@ -80,4 +81,3 @@ MACOS_COMPILE_FLAGS
 ANDROID_COMPILE_FLAGS
 TEST_DEPENDS
   ThirdParty::doctest
-

@@ -5,8 +5,8 @@
 #define SIMULINKPORTTYPE_H
 
 #include "AbiNamespaceMacro.h"
-#include "SimulinkElementType.h"
 #include "PlatformTypes.h"
+#include "SimulinkElementType.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN

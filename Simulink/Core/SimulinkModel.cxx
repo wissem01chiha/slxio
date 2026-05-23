@@ -1,7 +1,7 @@
 #include "SimulinkModel.h"
 #include "SimulinkArray.h"
-#include "SimulinkPort.h"
 #include "SimulinkLine.h"
+#include "SimulinkPort.h"
 
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN

@@ -287,7 +287,8 @@ int Logger::ToSlogLevel(Logger::MessageLevelType level)
 #endif // SLXIO_SLOG
 
 #if SLXIO_LOGURU
-int Logger::ToLoguruLevel(Logger::MessageLevelType level) {
+int Logger::ToLoguruLevel(Logger::MessageLevelType level)
+{
   return 0;
 };
 #endif // SLXIO_LOGURU

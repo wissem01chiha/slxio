@@ -39,7 +39,14 @@ extern "C"
     { E_PARAMETER_NULL_PTR, "Function parameter is a null pointer" },
     { E_INVALID_DATA_TYPE, "Invalid data type provided" },
     { E_DIRECTORY_NOT_EXSIT, "Directory folder do not exsit" },
-    { E_FILE_REMOVE_FAILED, "Failed to delete file from disk"},
+    { E_FILE_REMOVE_FAILED, "Failed to delete file from disk" },
+    { E_ARCHIVE_OPEN_FAILED, "Failed to open archive file " },
+    { E_ARCHIVE_SOURCE_FAILED, "Failed to source archive " },
+    { E_ARCHIVE_REPLACE_FAILED, "Failed to replace file in archive folder" },
+    { E_ARCHIVE_ADD_FAILED, "Failed to add a file to archive" },
+    { E_ARCHIVE_CLOSE_FAILED, "Failed to clsoe archive" },
+    { E_ARCHIVE_REMOVE_FAILED, "failed to remove a file from archive" },
+    { E_ARCHIVE_ENTRY_NOT_FOUND, "Entry not found in archive file" },
     { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
   };
 

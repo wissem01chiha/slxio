@@ -6,9 +6,9 @@
 
 #include "AbiNamespaceMacro.h"
 #include "Color.h"
+#include "PlatformTypes.h"
 #include "RectangleLayoutDataBase.h"
 #include "RectangleType.h"
-#include "PlatformTypes.h"
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

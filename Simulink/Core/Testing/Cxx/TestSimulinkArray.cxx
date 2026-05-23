@@ -7,8 +7,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("CopyConstructorTest")
 {
-  // std::shared_ptr<SimulinkArray> original = std::make_shared<SimulinkArray>();
-  // auto param = std::make_shared<SimulinkParameter>("5");
+  // std::shared_ptr<SimulinkArray> original =
+  // std::make_shared<SimulinkArray>(); auto param =
+  // std::make_shared<SimulinkParameter>("5");
 
   // ReturnType status = original->AddElement(param);
 

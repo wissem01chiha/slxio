@@ -24,7 +24,7 @@ jobs:
         run: sudo apt-get install -y graphviz
 
       - name: Configure CMake
-        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DSLXIO_CLI=OFF -DSLXIO_BUILD_DOCUMENTATION=ON -DSLXIO_BUILD_TESTS=OFF
+        run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release  -DSLXIO_DOXYGEN_DOCUMENTATION=ON -DSLXIO_BUILD_TESTS=OFF
 
       - name: Build
         run: cmake --build ${{github.workspace}}/build
@@ -34,7 +34,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{github.workspace}}/build/doc/html
+          path: ${{github.workspace}}/build/Utilities/Doxygen/html
 
       - name: Deploy to GitHub Pages
         id: deployment

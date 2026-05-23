@@ -1,13 +1,3 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-#[=======================================================================[.rst:
-Module.cmake
-----------------
-This file is part of the slxio project.
-Released under the terms of the Apache-2.0 license. <chihawissem08@gmail.com>
-Provide utility functions for managing project modules build.
-#]=======================================================================]
-
 include(ModuleDebugging)
 
 #[==[.rst:
@@ -361,8 +351,9 @@ endfunction()
    .. code-block:: cmake
 
       module_target_name(Common::Core library_name)
-   Sets:
-      library_name = "CommonCore"
+
+    sets:
+        library_name = "CommonCore"
 #]==]
 function(module_target_name module_name library_name)
 
@@ -387,9 +378,9 @@ endfunction()
 
   Splits a qualified module name into namespace and module name.
 
-  Sets in parent scope:
-   - <prefix>_NAMESPACE
-   - <prefix>_MODULE_NAME
+    sets in parent scope:
+    - <prefix>_NAMESPACE
+    - <prefix>_MODULE_NAME
 
 #]==]
 function(split_module_name name prefix)
@@ -616,7 +607,7 @@ endfunction()
     .. code-block:: cmake
         scan_module_file(_module)
 
-      Sets
+      sets
         _module_name
         _mdoule_version
         ....

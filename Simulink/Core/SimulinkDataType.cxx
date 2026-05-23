@@ -23,7 +23,6 @@ SimulinkDataType toSimulinkDataType(Float32)
 #endif
 }
 
-
 SimulinkDataType toSimulinkDataType(UInt8)
 {
   return SimulinkDataType::UInt8;

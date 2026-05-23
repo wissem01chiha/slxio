@@ -5,10 +5,10 @@
 #define SIGNALOBJECT_H
 
 #include "AbiNamespaceMacro.h"
+#include "AbstractSignal.h"
 #include "ApiExportMacro.h"
 #include "DataObject.h"
 #include "PlatformTypes.h"
-#include "Signal.h"
 #include <string>
 
 SLXIO_NAMESPACE_BEGIN
@@ -25,7 +25,7 @@ public:
   SignalObject();
 
 private:
-    SignalPtr ImplDataObject;
+  AbstractSignalPtr ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

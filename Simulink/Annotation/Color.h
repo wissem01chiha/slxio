@@ -26,6 +26,7 @@ public:
   static Color fromVector(const std::vector<UInt32>& vec);
 
   std::vector<UInt32> toVector() const;
+
 private:
   UInt32 r;
   UInt32 g;

@@ -1,9 +1,12 @@
 #include "Directory.h"
 #include "Doctest.h"
 #include "ErrorCode.h"
-#include "ErrorHandlingApi.h"
+#include "ErrorHandler.h"
 #include "File.h"
 #include "Libuv.h"
+
+SLXIO_NAMESPACE_BEGIN
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class FileTestFixture
 {
@@ -46,8 +49,8 @@ public:
     uv_fs_t req;
     uv_loop_t* loop = uv_default_loop();
 
-    *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(),
-     nullptr);
+    *err =
+      uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
     uv_fs_req_cleanup(&req);
   }
 };
@@ -56,12 +59,12 @@ TEST_CASE_FIXTURE(FileTestFixture, "Create Temporary Directory Test")
 {
   int err;
   Directory tempDir = CreateTempDirectory("tempdir_1", &err);
-  sPrintErrorMessage(err);
+  ErrorHandler::PrintErrorMessage(err);
   CHECK(err == 0);
-  CHECK(tempDir.Exist()==true);
+  CHECK(tempDir.Exist() == true);
 
   ClearTempDirectory("tempdir_1", &err);
-  sPrintErrorMessage(err);
+  ErrorHandler::PrintErrorMessage(err);
   CHECK(err == 0);
 }
 
@@ -113,7 +116,7 @@ TEST_CASE_FIXTURE(FileTestFixture, "Rename File Test")
 TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
 {
   File f(GetTestFilePath(), File::Mode::Read);
-  int err=0;
+  int err = 0;
   REQUIRE(f.Open() == E_OK);
   REQUIRE(f.Close() == E_OK);
 
@@ -123,6 +126,9 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
   f.Delete();
 
   ClearTempDirectory("tempdir_2", &err);
-  sPrintErrorMessage(err);
+  ErrorHandler::PrintErrorMessage(err);
   CHECK(err == 0);
 }
+
+SLXIO_ABI_NAMESPACE_END
+SLXIO_NAMESPACE_END

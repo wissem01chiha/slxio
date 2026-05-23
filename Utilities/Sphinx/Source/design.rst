@@ -1,4 +1,0 @@
-.. _design:
-
-Design overview
-===============

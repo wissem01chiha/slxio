@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "ErrorHandlingApi.h"
+#include "ErrorHandler.h"
 #include "Timer.h"
 #include <thread>
 

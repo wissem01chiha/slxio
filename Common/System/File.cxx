@@ -3,8 +3,8 @@
 #include "Directory.h"
 #include "ErrorCode.h"
 #include "Libuv.h"
-#include <fstream>
 #include <cstring>
+#include <fstream>
 #include <iostream>
 
 SLXIO_NAMESPACE_BEGIN
@@ -186,19 +186,21 @@ ReturnType File::Move(const Directory& directory)
 
 ReturnType File::Delete()
 {
-    if (IsOpened()) {
-        ReturnType rc = Close();
-        if (rc != E_OK) {
-            return rc;
-        }
+  if (IsOpened())
+  {
+    ReturnType rc = Close();
+    if (rc != E_OK)
+    {
+      return rc;
     }
+  }
 
-    if (std::remove(FilePath.c_str()) != 0) {
-        return E_FILE_REMOVE_FAILED;
-    }
-    return E_OK;
+  if (std::remove(FilePath.c_str()) != 0)
+  {
+    return E_FILE_REMOVE_FAILED;
+  }
+  return E_OK;
 }
-
 
 ReturnType File::Copy(const Directory& directory)
 {
@@ -269,14 +271,18 @@ bool File::Exist() const
 
 const int File::GetFileMode()
 {
-    switch (InternalFileMode)
-    {
-        case Mode::Read:     return O_RDONLY;
-        case Mode::Write:    return O_WRONLY | O_CREAT;
-        case Mode::Truncate: return O_WRONLY | O_CREAT | O_TRUNC;
-        case Mode::Append:   return O_WRONLY | O_CREAT | O_APPEND;
-    }
-    return O_RDONLY;
+  switch (InternalFileMode)
+  {
+    case Mode::Read:
+      return O_RDONLY;
+    case Mode::Write:
+      return O_WRONLY | O_CREAT;
+    case Mode::Truncate:
+      return O_WRONLY | O_CREAT | O_TRUNC;
+    case Mode::Append:
+      return O_WRONLY | O_CREAT | O_APPEND;
+  }
+  return O_RDONLY;
 }
 
 std::vector<char> File::GetInternalBuffer() const
