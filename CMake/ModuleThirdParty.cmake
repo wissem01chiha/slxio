@@ -52,4 +52,11 @@ if(NOT DOXYGEN_FOUND)
 endif()
 message(STATUS "Doxygen found: ${DOXYGEN_EXECUTABLE}")
 
+find_program(DOT_EXECUTABLE dot)
+if(DOT_EXECUTABLE)
+  message(STATUS "Graphviz dot found: ${DOT_EXECUTABLE}")
+else()
+  message(WARNING "Graphviz dot not found; Doxygen graphs will be disabled")
+endif()
+
 cmake_policy(POP)

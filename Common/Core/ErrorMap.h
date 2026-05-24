@@ -47,6 +47,7 @@ extern "C"
     { E_ARCHIVE_CLOSE_FAILED, "Failed to clsoe archive" },
     { E_ARCHIVE_REMOVE_FAILED, "failed to remove a file from archive" },
     { E_ARCHIVE_ENTRY_NOT_FOUND, "Entry not found in archive file" },
+    { E_ARCHIVE_INVALID_ID, "Invalid archive Id" },
     { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
   };
 

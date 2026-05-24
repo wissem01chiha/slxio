@@ -50,6 +50,8 @@ CLASSES
   SimulinkPort
   SimulinkObject
   SimulinkRoot
+  SimulinkEnabledSubsystem
+  SimulinkAtomicSubsystem
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
@@ -69,6 +71,8 @@ HEADERS
   SimulinkLine.h
   SimulinkDataType.h
   SimulinkPort.h
+  SimulinkEnabledSubsystem.h
+  SimulinkAtomicSubsystem.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

@@ -2,9 +2,6 @@
 # Development Kit for Slxio
 
 - [1.0 Introduction](#10-introduction)
-- [2.0 Environment Setup](#20-environment-setup)
-  - [2.1 Graphviz](#21-graphviz)
-  - [2.2 Cygwin](#22-cygwin)
   - [2.3 Coverage Tools](#23-coverage-tools)
   - [2.4 Perl](#24-perl)
   - [2.5 Profiling Tools](#25-profiling-tools)
@@ -29,17 +26,6 @@
 ## 1.0 Introduction
 
 This guide documents the automation utilities in the [Development](/Development/) folder.Some scripts require additional packages or third‑party tools to run correctly.
-
-
-## 2.0 Environment Setup
-
-### 2.1 Graphviz
-Required for generating dependency graphs.
-Install via package manager or from [Graphviz.org](https://graphviz.org).
-
-### 2.2 Cygwin
-Used for running POSIX‑style scripts on Windows.
-Ensure `bash` and `make` are installed.
 
 ### 2.3 Coverage Tools
 - GCC: `gcov`, `lcov`

@@ -38,7 +38,8 @@ However, at this time, we do not accept the following contributions:
 * {Contribution type 3}
 
 ## Project overview
-  see [README](../README.md) for generale project overview
+
+ see [README](../README.md) for generale project overview
 
 ## Before you start
 

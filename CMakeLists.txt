@@ -111,7 +111,7 @@ mark_as_advanced(SLXIO_UBSAN)
 option(SLXIO_PKGCONFIG "Generate pkg-config file during build" ON)
 mark_as_advanced(SLXIO_PKGCONFIG)
 if(SLXIO_PKGCONFIG)
-    find_package(PkgConfig QUIET)
+    find_package(PkgConfig)
     if(PKG_CONFIG_FOUND)
         set(SLXIO_PC "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.pc")
         configure_file(
@@ -128,7 +128,7 @@ set(SLXIO_ROOT_DIR "${PROJECT_SOURCE_DIR}")
 
 #-----------------------------------------------------------------------------
 # Documentation Config
-option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
+option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" ON)
 
 
 

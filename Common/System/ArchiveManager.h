@@ -16,6 +16,10 @@ class Archive;
 SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @class ArchiveManager
+ * @brief Manages a collection of Archive objects.
+ */
 class SLXIO_APIEXPORT ArchiveManager final
 {
 public:

@@ -16,7 +16,7 @@ SLXIO_NAMESPACE_BEGIN
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class Directory class
+ * @class Directory
  * @brief Cross-platform Directory abstraction.
  */
 class SLXIO_APIEXPORT Directory final
