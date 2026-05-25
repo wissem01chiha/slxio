@@ -221,7 +221,7 @@ EXTRA_SEARCH_MAPPINGS  =
 #---------------------------------------------------------------------------
 # configuration options for main page of the documentation
 #---------------------------------------------------------------------------
-#USE_MDFILE_AS_MAINPAGE = 
+#USE_MDFILE_AS_MAINPAGE =
 HAVE_DOT               = YES
 DOT_NUM_THREADS        = 3
 INTERACTIVE_SVG        = YES
