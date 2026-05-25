@@ -11,7 +11,8 @@
 #include "PlatformTypes.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT SignalObject : public DataObject
@@ -20,7 +21,7 @@ public:
   SignalObject* New() override;
   bool operator==(const DataObject&) override;
   void* GetImplDataObject() const override;
-  std::string toString() const override;
+  std::string ToString() const override;
   bool Empty() override;
   SignalObject();
 
@@ -29,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIGNALOBJECT_H

@@ -2,7 +2,8 @@
 #include "SimulinkVersion.h"
 #include "VersionMacro.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 UInt32 Version::GetMajorVersion()
@@ -52,4 +53,4 @@ std::string Version::GetSimulinkVersionString()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

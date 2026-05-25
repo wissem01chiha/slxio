@@ -2,7 +2,8 @@
 #include "ErrorCode.h"
 #include "Libuv.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Directory::Directory(const std::string& path)
@@ -12,7 +13,7 @@ Directory::Directory(const std::string& path)
   SubDirList.clear();
 }
 
-ReturnType Directory::Init()
+ReturnType Directory::Initialize()
 {
   if (DirectoryPath.empty())
     return E_PATH_EMPTY;
@@ -252,4 +253,4 @@ ReturnType Directory::Delete()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

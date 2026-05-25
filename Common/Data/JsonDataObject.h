@@ -11,7 +11,8 @@
 
 struct json_object;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -25,7 +26,7 @@ public:
   bool Empty() override;
   bool operator==(const DataObject&) override;
   void* GetImplDataObject() const override;
-  std::string toString() const override;
+  std::string ToString() const override;
   JsonDataObject();
 
 private:
@@ -33,6 +34,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // JSONDATAOBJECT_H

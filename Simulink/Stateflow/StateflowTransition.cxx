@@ -3,7 +3,8 @@
 #include "StateflowNodeBase.h"
 #include <cassert>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowTransition::StateflowTransition(
@@ -69,4 +70,4 @@ std::string StateflowTransition::ToString() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

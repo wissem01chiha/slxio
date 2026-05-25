@@ -2,7 +2,7 @@
 #include "SimulinkArrayParser.h"
 #include <iostream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkArrayParserTestFixture
@@ -100,4 +100,4 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -5,7 +5,8 @@
 #include "File.h"
 #include "Libuv.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class FileTestFixture
@@ -131,4 +132,4 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

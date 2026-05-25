@@ -11,7 +11,8 @@
 
 class Logger;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT DataObject
@@ -33,7 +34,7 @@ public:
   virtual void* GetImplDataObject() const = 0;
 
   /** Return the type identifier of the data */
-  virtual std::string toString() const = 0;
+  virtual std::string ToString() const = 0;
 
   /** Return true if the data object underlaying container is empty */
   virtual bool Empty() = 0;
@@ -57,6 +58,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // DATAOBJECT_H

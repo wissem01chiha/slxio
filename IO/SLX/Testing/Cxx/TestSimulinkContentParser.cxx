@@ -1,7 +1,7 @@
 #include "Doctest.h"
 #include "SimulinkContentParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkContentParserTestFixture
@@ -109,4 +109,4 @@ TEST_CASE_FIXTURE(
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

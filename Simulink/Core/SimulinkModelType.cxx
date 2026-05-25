@@ -1,6 +1,7 @@
 #include "SimulinkModelType.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModelType::SimulinkModelType(SimulinkModelType::Type type)
@@ -27,4 +28,4 @@ SimulinkModelType::Type SimulinkModelType::GetElementType() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

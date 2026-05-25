@@ -1,7 +1,8 @@
 #include "Doctest.h"
 #include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("AddNullParameterTest")
@@ -75,4 +76,4 @@ TEST_CASE("ContainsObjectTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

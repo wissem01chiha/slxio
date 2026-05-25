@@ -2,7 +2,7 @@
 #include "SimulinkBlockParser.h"
 #include <iostream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkBlockParserTestFixture
@@ -106,4 +106,4 @@ TEST_CASE_FIXTURE(
   CHECK(strcmp(parameter->getValue(), "[365, 262, 455, 408]") == 0);
 }
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

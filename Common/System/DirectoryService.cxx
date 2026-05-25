@@ -6,10 +6,11 @@
 #include <sstream>
 #include <string.h>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-std::string DirectoryService::toString(const Directory& directory)
+std::string DirectoryService::ToString(const Directory& directory)
 {
   std::ostringstream oss;
 
@@ -155,4 +156,4 @@ std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

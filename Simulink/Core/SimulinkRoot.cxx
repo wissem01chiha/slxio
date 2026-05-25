@@ -1,20 +1,27 @@
 #include "SimulinkRoot.h"
 #include "Logger.h"
+#include "SimulinkArray.h"
+#include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkRoot::SimulinkRoot() {}
-
-SimulinkArray& SimulinkRoot::getSubsystems()
+SimulinkRoot::SimulinkRoot()
 {
-  return subsystems;
+  Subsystems = new SimulinkArray();
+  ConfigSets = new SimulinkArray();
 }
 
-SimulinkArray& SimulinkRoot::getConfigSets()
+SimulinkArray* SimulinkRoot::GetSubsystems()
 {
-  return configSets;
+  return Subsystems;
+}
+
+SimulinkArray* SimulinkRoot::GetConfigSets()
+{
+  return ConfigSets;
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

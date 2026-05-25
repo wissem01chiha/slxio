@@ -2,7 +2,8 @@
 #include "Logger.h"
 #include "StateflowNodeBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowState::StateflowState(StateflowState& orig) {}
@@ -56,4 +57,4 @@ bool StateflowState::Contains(const IdType& id) const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

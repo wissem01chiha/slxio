@@ -8,7 +8,8 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -82,6 +83,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // EDITORSETTINGS_H

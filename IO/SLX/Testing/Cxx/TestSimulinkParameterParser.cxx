@@ -1,7 +1,7 @@
 #include "Doctest.h"
 #include "SimulinkParameterParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkParameterParserTestFixture
@@ -87,4 +87,4 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

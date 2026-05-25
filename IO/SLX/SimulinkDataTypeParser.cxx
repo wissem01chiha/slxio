@@ -2,7 +2,7 @@
 #include <cstring>
 #include <unordered_map>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkDataTypeParser::setInputData(const std::string data)
@@ -51,4 +51,4 @@ ReturnType SimulinkDataTypeParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

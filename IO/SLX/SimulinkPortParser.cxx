@@ -1,7 +1,7 @@
 #include "SimulinkPortParser.h"
 #include "SlxParameter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkPortParser::setInputData(const xmlNodePtr data)
@@ -15,4 +15,4 @@ ReturnType SimulinkPortParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -2,7 +2,8 @@
 #include "Logger.h"
 #include "StateflowBlock.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType StateflowChart::AddElement(
@@ -72,4 +73,4 @@ bool StateflowChart::Contains(const IdType& id) const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -2,7 +2,7 @@
 #include "Logger.h"
 #include "SimulinkContentParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkFileParser::setInputData(const File fs)
@@ -69,4 +69,4 @@ ReturnType SimulinkFileParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

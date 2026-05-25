@@ -9,7 +9,8 @@
 #include "PlatformTypes.h"
 #include <vector>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT Color final
@@ -35,6 +36,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // COLOR_H

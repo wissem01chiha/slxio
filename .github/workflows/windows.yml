@@ -2,69 +2,76 @@ name: Windows
 on: [push, pull_request]
 jobs:
   cmake:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
+    name: ${{matrix.name}}
+    runs-on: ${{matrix.os}}
     timeout-minutes: 80
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: Windows MSVC Win32
+          - name: Windows MSVC Win32 C++11 Debug
             os: windows-latest
             compiler: cl
             python-arch: x86
-            cmake-args: -A Win32
+            cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows MSVC Win64
+          - name: Windows MSVC Win64 C++11 Debug
             os: windows-latest
             compiler: cl
-            cmake-args: -A x64
-            python-arch: x64
+            cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
+            python-arch: x64 
 
-          - name: Windows MSVC ARM64
+          - name: Windows MSVC ARM64 C++11 Debug
             os: windows-11-arm
             compiler: cl
-            cmake-args: -A ARM64
+            cmake-args: -A ARM64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
+            python-arch: arm64
 
-          - name: Windows GCC
+          - name: GCC x64 C++11 Debug
             os: windows-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -G Ninja
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows Clang C++11
+          - name: GCC x64 C++20 Release
+            os: windows-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=20 -DCMAKE_BUILD_TYPE=Release
+
+          - name: Windows Clang C++11 Debug
             os: windows-latest
             compiler: clang
             cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows Clang C++17
+          - name: Windows Clang C++17 Debug
             os: windows-latest
             compiler: clang
             cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows Clang C++23
+          - name: Windows Clang C++23 Debug
             os: windows-latest
             compiler: clang
             cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=23
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=23 -DCMAKE_BUILD_TYPE=Debug
 
     steps:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          architecture: ${{ matrix.python-arch }}
+          architecture: ${{matrix.python-arch}}
 
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Configure
-        run: cmake -S . -B build ${{ matrix.cmake-args }} -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
+        run: cmake -S . -B build ${{matrix.cmake-args}} -DPython_EXECUTABLE=${{env.pythonLocation}}/python.exe
         env:
-          CC: ${{ matrix.compiler }}
-          CXX: ${{ matrix.cxx-compiler }}
+          CC: ${{matrix.compiler}}
+          CXX: ${{matrix.cxx-compiler}}
 
       - name: Build
         run: cmake --build build

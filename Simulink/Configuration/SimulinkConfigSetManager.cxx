@@ -2,7 +2,8 @@
 #include "SimulinkConfigSet.h"
 #include <algorithm>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
@@ -64,4 +65,4 @@ bool SimulinkConfigSetManager::hasConfigurationSet(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

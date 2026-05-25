@@ -4,7 +4,7 @@
 #include <cstring>
 #include <iostream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
@@ -109,4 +109,4 @@ ReturnType SimulinkParameterParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

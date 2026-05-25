@@ -11,7 +11,7 @@
 #include "SimulinkHardware.h"
 #include "SimulinkParserBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkHardware
@@ -28,6 +28,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKHARDWAREPARSER_H

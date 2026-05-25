@@ -3,7 +3,8 @@
 #include "Timer.h"
 #include <thread>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Timer starts and reports running state")
@@ -36,4 +37,4 @@ TEST_CASE("Timer reset clears state")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

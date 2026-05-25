@@ -2,7 +2,8 @@
 #include "xmlDocDataObject.h"
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkFileObject* SimulinkFileObject::New()
@@ -28,7 +29,7 @@ bool SimulinkFileObject::operator==(const DataObject& other)
     static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
 }
 
-std::string SimulinkFileObject::toString() const
+std::string SimulinkFileObject::ToString() const
 {
   std::ostringstream oss;
   oss << "SimulinkFileObject { "
@@ -56,4 +57,4 @@ bool SimulinkFileObject::Empty()
 SimulinkFileObject::SimulinkFileObject() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

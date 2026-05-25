@@ -17,7 +17,7 @@ void banner()
                              )"
             << std::endl;
 
-  // std::cout << "    Version:      " << SLXIO_VERSION_STRING <<
+  // std::cout << "    Version:      " << SLXIO_VERSION_NUMBER <<
   // "\n";
   std::cout << "    Developer:    "
             << "Wissem Chiha"

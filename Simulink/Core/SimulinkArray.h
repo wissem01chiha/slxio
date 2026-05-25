@@ -12,7 +12,8 @@
 
 class Logger;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -26,64 +27,83 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase
 {
 public:
-  /** Default Constructor */
+  /** Default constructor. */
   SimulinkArray();
 
-  /** */
+  /** Create a new SimulinkArray instance. */
+  SimulinkArray* New() const override;
+
+  /** Construct a SimulinkArray with type, name, and dimension. */
   SimulinkArray(std::string type, std::string name, std::string dimension);
 
-  /** */
-  SimulinkArray(const SimulinkArray& other);
-
-  /**  */
-  SimulinkArray& operator=(const SimulinkArray&) = delete;
-
-  /** */
+  /** Return the element type. */
   SimulinkElementType GetElementType() const override;
 
-  /**  */
+  /** Return the array as a string. */
   std::string ToString() const override;
 
-  /** */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> elment) override;
-
-  /** */
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> elment) override;
-
-  /** */
-  IdType GetElementId() const override;
-
-  /** */
-  std::string getName();
-
-  /** */
-  std::string getDimension();
-
-  /** */
-  std::string getArrayType();
-
-  /** */
-  std::shared_ptr<SimulinkParameter> getParameter(std::string name);
-
-  /** */
+  /** Check if the array contains a subarray with the given Id. */
   bool Contains(const IdType& id) const override;
 
-  /** Get Class logger */
+  /** Return the number of elements in the array. */
+  UInt32 Size() const override;
+
+  /** Return true if the array is empty. */
+  bool Empty() const override;
+
+  /** Remove all elements from the array. */
+  void Clear() override;
+
+  /** Insert an element into the array. */
+  ReturnType Insert(
+    const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erase an element by Id. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erase an element by reference. */
+  ReturnType Erase(
+    const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Find an element by Id. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Return the element at the specified index. */
+  std::shared_ptr<SimulinkElementBase> at(IdType index) override;
+
+  /** Return the element at the specified index. */
+  std::shared_ptr<const SimulinkElementBase> at(IdType index) const override;
+
+  /** Return the array's element Id. */
+  IdType GetElementId() const override;
+
+  /** Return the array name. */
+  std::string GetArrayName();
+
+  /** Return the array dimension. */
+  std::string GetArrayDimension();
+
+  /** Return the array type. */
+  std::string GetArrayType();
+
+  /** Return the parameter with the given name. */
+  std::shared_ptr<SimulinkParameter> GetArrayParameter(std::string name);
+
+  /** Return the class logger. */
   Logger& GetLogger();
 
 private:
-  IdType id;
+  IdType ArrayId;
   Logger& logger;
-  std::string type;
-  std::string name;
-  std::string dimension;
-  std::vector<IdType> objects;
-  std::vector<std::shared_ptr<SimulinkArray>> subArrays;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  std::string ArrayType;
+  std::string ArrayName;
+  std::string ArrayDimension;
+  std::vector<IdType> ArrayObjectIds;
+  std::vector<std::shared_ptr<SimulinkArray>> SubArrays;
+  std::vector<std::shared_ptr<SimulinkParameter>> ArrayParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKARRAY_H

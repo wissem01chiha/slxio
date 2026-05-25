@@ -1,7 +1,8 @@
 #include "SimulinkBlockType.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlockType::SimulinkBlockType(Type type_)
@@ -172,4 +173,4 @@ std::string SimulinkBlockType::ToString() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

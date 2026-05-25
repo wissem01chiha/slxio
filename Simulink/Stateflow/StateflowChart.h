@@ -11,7 +11,8 @@
 #include "StateflowNodeBase.h"
 #include <vector>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class StateflowBlock;
@@ -73,6 +74,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // STATEFLOWCHART_H

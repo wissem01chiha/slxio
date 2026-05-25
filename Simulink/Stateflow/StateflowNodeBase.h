@@ -10,7 +10,8 @@
 #include <memory>
 #include <vector>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class StateflowTransition;
@@ -48,6 +49,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // STATEFLOWNODEBASE_H

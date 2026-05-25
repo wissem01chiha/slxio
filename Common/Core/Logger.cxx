@@ -12,7 +12,8 @@
 #include "Loguru.h"
 #endif // SLXIO_SLOG
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
@@ -294,4 +295,4 @@ int Logger::ToLoguruLevel(Logger::MessageLevelType level)
 #endif // SLXIO_LOGURU
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

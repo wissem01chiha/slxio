@@ -2,7 +2,8 @@
 #include "Archive.h"
 #include "ErrorCode.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
@@ -77,4 +78,4 @@ ReturnType ArchiveManager::Remove(const IdType id)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

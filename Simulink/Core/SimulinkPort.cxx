@@ -2,7 +2,8 @@
 #include "SimulinkLine.h"
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkPort::SimulinkPort(const SimulinkPort& other)
@@ -142,4 +143,4 @@ Logger& SimulinkPort::GetLogger()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

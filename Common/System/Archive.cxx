@@ -5,7 +5,8 @@
 #include "Libzip.h"
 #include <cstring>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Archive* Archive::New()
@@ -193,4 +194,4 @@ std::string Archive::GetArchiveExtension() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

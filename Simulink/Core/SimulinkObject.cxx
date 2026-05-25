@@ -3,7 +3,8 @@
 #include <cstring>
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::SimulinkObject()
@@ -324,4 +325,4 @@ std::string SimulinkObject::getName()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

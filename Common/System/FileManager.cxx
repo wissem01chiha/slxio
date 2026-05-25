@@ -3,7 +3,8 @@
 #include "ErrorCode.h"
 #include "File.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 FileManager::FileManager()

@@ -1,6 +1,7 @@
 #include "1DLookupTable.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 1DLookupTable ::1DLookupTable() {}
@@ -18,4 +19,4 @@ void 1DLookupTable ::SetTableData(Float32 value)
 1DLookupTable ::~1DLookupTable() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

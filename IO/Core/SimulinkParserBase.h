@@ -10,7 +10,7 @@
 #include "ErrorCode.h"
 #include <memory>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -73,7 +73,7 @@ protected:
   Logger& l;
 };
 
-SLXIO_NAMESPACE_END
+};
 SLXIO_ABI_NAMESPACE_END
 
 #endif // SIMULINKPARSERBASE_H

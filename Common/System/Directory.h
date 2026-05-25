@@ -12,7 +12,8 @@
 #include <string>
 #include <vector>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -29,7 +30,7 @@ public:
   explicit Directory(const std::string& path);
 
   /** Open the directory and initialize member variables. */
-  ReturnType Init();
+  ReturnType Initialize();
 
   /* Add a file to this directory, it will copy the file into it on disk */
   void Add(const File& file);
@@ -92,6 +93,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // DIRECTORY_H

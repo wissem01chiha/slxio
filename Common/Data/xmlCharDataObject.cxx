@@ -1,6 +1,7 @@
 #include "xmlCharDataObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 xmlCharDataObject* xmlCharDataObject::New()
@@ -23,7 +24,7 @@ void* xmlCharDataObject::GetImplDataObject() const
   return ImplDataObject;
 }
 
-std::string xmlCharDataObject::toString() const
+std::string xmlCharDataObject::ToString() const
 {
   return std::string();
 }
@@ -31,4 +32,4 @@ std::string xmlCharDataObject::toString() const
 xmlCharDataObject::xmlCharDataObject() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

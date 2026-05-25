@@ -11,7 +11,7 @@
 class DataObject;
 class Logger;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -65,7 +65,7 @@ protected:
   Logger& logger;
 };
 
-SLXIO_NAMESPACE_END
+};
 SLXIO_ABI_NAMESPACE_END
 
 #endif // SIMULINKWRITER_H

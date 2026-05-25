@@ -2,7 +2,8 @@
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("CopyConstructorTest")
@@ -78,4 +79,4 @@ TEST_CASE("ContainsArrayTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

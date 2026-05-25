@@ -1,6 +1,7 @@
 #include "xmlDocDataObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 xmlDocDataObject* xmlDocDataObject::New()
@@ -23,7 +24,7 @@ void* xmlDocDataObject::GetImplDataObject() const
   return ImplDataObject;
 }
 
-std::string xmlDocDataObject::toString() const
+std::string xmlDocDataObject::ToString() const
 {
   if (ImplDataObject == nullptr)
   {
@@ -45,4 +46,4 @@ std::string xmlDocDataObject::toString() const
 xmlDocDataObject::xmlDocDataObject() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

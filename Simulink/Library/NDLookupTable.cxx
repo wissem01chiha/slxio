@@ -1,6 +1,7 @@
 #include "NDLookupTable.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 NDLookupTable::NDLookupTable() {}
@@ -18,4 +19,4 @@ void NDLookupTable::SetTableData(Float32 value)
 NDLookupTable::~NDLookupTable() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

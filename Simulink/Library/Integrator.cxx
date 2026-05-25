@@ -1,6 +1,7 @@
 #include "Integrator.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Integrator::Integrator() {}
@@ -18,4 +19,4 @@ void Integrator::SetValue(float value)
 Integrator::~Integrator() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

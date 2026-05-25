@@ -14,7 +14,10 @@
 #include <string>
 #include <vector>
 
-SLXIO_NAMESPACE_BEGIN
+class Logger;
+
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -24,9 +27,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkParameter : public SimulinkElementBase
 {
 public:
-  /**
-   * Default constructor
-   */
+  /** Default constructor */
   SimulinkParameter();
 
   /// @brief Explicit constructor.
@@ -44,13 +45,13 @@ public:
   explicit SimulinkParameter(const char* val);
 
   /// @brief get the resolved parameter SimulinkDataType
-  SimulinkDataType getDataType();
+  SimulinkDataType GetDataType();
 
   /// @brief set the parameter data type
   /// @warning this function overrites the default Min, Max values
   /// based on new type
   /// @note not implemented the automatic range override
-  void setDataType(SimulinkDataType DataType_);
+  void SetDataType(SimulinkDataType DataType_);
 
   /// @brief Returns the default type representation of the parameter
   /// value. This provides the raw value as stored internally, without
@@ -86,7 +87,7 @@ public:
   UInt32 getValueAsString(std::string& strval);
 
   /// @brief get parameter dimensions
-  std::vector<UInt16> getDimensions();
+  std::vector<UInt16> GetDimensions();
 
   /// @brief return current parameter name
   const char* getName();
@@ -107,24 +108,29 @@ public:
 
   /// @brief Parameters cannot remove child elements. Returns
   /// E_NOT_IMPLEMENTED.
-  UInt32 RemoveElement(
-    const std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType Erase(
+    const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /// @brief Parameters cannot add child elements. Returns
   /// E_NOT_IMPLEMENTED.
-  UInt32 AddElement(
-    const std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType Insert(
+    const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /// @brief get code generation data struct
-  CoderInfo getCoderInfo();
+  CoderInfo GetCoderInfo();
 
   /// @brief Parameter minumin value
-  Float32 getMin();
+  Float32 GetMin();
 
   /// @brief Parameter maxiumum value
-  Float32 getMax();
+  Float32 GetMax();
+
+  /* Get the class internal logger*/
+  Logger& GetLogger() const;
 
 private:
+  Logger& logger;
+
   const char* Name;
   const char* Value;
   SimulinkDataType DataType;
@@ -140,6 +146,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
-#endif /* SIMULINKPARAMETER_H */
+#endif // SIMULINKPARAMETER_H

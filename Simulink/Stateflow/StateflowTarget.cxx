@@ -2,7 +2,8 @@
 #include "ErrorCode.h"
 #include "Logger.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowTarget::StateflowTarget()
@@ -30,7 +31,7 @@ ReturnType StateflowTarget::AddElement(
   return E_OK;
 }
 
-std::string StateflowTarget::ToString() const
+std::string StateflowTarget::toString() const
 {
   return std::string("");
 }
@@ -41,4 +42,4 @@ IdType StateflowTarget::GetElementId() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

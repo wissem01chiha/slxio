@@ -12,7 +12,8 @@
 
 class Directory;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -29,7 +30,7 @@ public:
   ~DirectoryService() = default;
 
   /** Get a String Serialisation of the directory tree */
-  static std::string toString(const Directory& directory);
+  static std::string ToString(const Directory& directory);
 
   /** Get the current working directory. */
   static Directory GetWorkingDirectory(int* error);
@@ -54,6 +55,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // DIRECTORYSERVICE_H

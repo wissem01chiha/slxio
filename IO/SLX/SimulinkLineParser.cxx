@@ -1,7 +1,7 @@
 #include "SimulinkLineParser.h"
 #include "SimulinkParameterParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkLineParser::setInputData(const xmlNodePtr data)
@@ -22,4 +22,4 @@ ReturnType SimulinkLineParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

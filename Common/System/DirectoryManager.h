@@ -13,7 +13,8 @@
 class File;
 class Directory;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -44,10 +45,13 @@ public:
   /** Construct a DirectoryManager with an initial set of directories. */
   DirectoryManager(std::vector<std::shared_ptr<Directory>> directories);
 
+  /** Get the names of all managed directories. */
+  std::vector<std::string> GetDirectoryNames();
+
 private:
   std::vector<std::shared_ptr<Directory>> DirectoryBuffer;
 };
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // DIRECTORYMANAGER_H

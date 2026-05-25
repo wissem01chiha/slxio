@@ -7,7 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "PlatformTypes.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 struct AbstractSignal
@@ -17,6 +18,6 @@ struct AbstractSignal
 typedef AbstractSignal* AbstractSignalPtr;
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // ABSTRACTSIGNAL_H

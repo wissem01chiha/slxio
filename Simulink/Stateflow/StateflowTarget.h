@@ -7,7 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "StateflowElementBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -24,13 +25,13 @@ public:
     std::shared_ptr<SimulinkElementBase> element) override;
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
-  std::string ToString() const override;
+  std::string toString() const override;
   IdType GetElementId() const override;
 
 private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // STATEFLOWTARGET_H

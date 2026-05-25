@@ -1,7 +1,8 @@
 #include "StateflowElementBase.h"
 #include "Logger.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowElementBase::StateflowElementBase(const StateflowElementBase& orig)
@@ -16,4 +17,4 @@ void StateflowElementBase::setParent(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

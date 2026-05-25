@@ -1,7 +1,8 @@
 #include "JsonDataObject.h"
 #include "Json-c.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 JsonDataObject* JsonDataObject::New()
@@ -30,7 +31,7 @@ void* JsonDataObject::GetImplDataObject() const
   return ImplDataObject;
 }
 
-std::string JsonDataObject::toString() const
+std::string JsonDataObject::ToString() const
 {
   return std::string();
 }
@@ -41,4 +42,4 @@ JsonDataObject::JsonDataObject()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

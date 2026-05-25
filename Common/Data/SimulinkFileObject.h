@@ -13,7 +13,8 @@
 
 class xmlDocDataObject;
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -28,7 +29,7 @@ public:
   UInt32 GetUpdateTime() const override;
   void* GetImplDataObject() const override;
   bool operator==(const DataObject&) override;
-  std::string toString() const;
+  std::string ToString() const;
   bool Empty() override;
 
   SimulinkFileObject();
@@ -38,6 +39,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKFILEOBJECT_H

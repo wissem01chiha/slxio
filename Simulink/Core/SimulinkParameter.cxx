@@ -4,12 +4,17 @@
 #include <cstring>
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101,
+  "SimulinkParameter" };
 
 SimulinkParameter::SimulinkParameter()
   : Min(SLXIO_FLOAT_MIN)
   , Max(SLXIO_FLOAT_MAX)
+  , logger(Logger::GetInstance())
 {
 
   DataType = SimulinkDataType::Auto;
@@ -19,11 +24,13 @@ SimulinkParameter::SimulinkParameter()
   Description = "";
   Unit = "";
   Dimensions.clear();
+  coder = CoderInfo();
 }
 
 SimulinkParameter::SimulinkParameter(const char* val)
   : Min(SLXIO_FLOAT_MIN)
   , Max(SLXIO_FLOAT_MAX)
+  , logger(Logger::GetInstance())
 {
 
   Value = val;
@@ -47,19 +54,20 @@ SimulinkParameter::SimulinkParameter(const char* val)
   DataType = toSimulinkDataType(val);
 }
 
-SimulinkDataType SimulinkParameter::getDataType()
+SimulinkDataType SimulinkParameter::GetDataType()
 {
   return DataType;
 }
 
-void SimulinkParameter::setDataType(SimulinkDataType DataType_)
+void SimulinkParameter::SetDataType(SimulinkDataType DataType_)
 {
 
   if (DataType_ == DataType)
   {
-    // Logger::GetInstance().log(Logger::V_WARNING,
-    // "SimulinkParameter::setDataType called with same "
-    // "data type. No changes made.");
+    logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_WARN,
+                            SimulinkParameterLogApp, 0 },
+      { "SimulinkParameter::SetDataType called with same data type. No changes "
+        "made." });
     return;
   }
 
@@ -192,12 +200,12 @@ UInt32 SimulinkParameter::getValueAsArray(std::vector<Float32>& vecval)
   return E_OK;
 }
 
-CoderInfo SimulinkParameter::getCoderInfo()
+CoderInfo SimulinkParameter::GetCoderInfo()
 {
   return coder;
 }
 
-std::vector<UInt16> SimulinkParameter::getDimensions()
+std::vector<UInt16> SimulinkParameter::GetDimensions()
 {
   return Dimensions;
 }
@@ -244,44 +252,52 @@ SimulinkElementType SimulinkParameter::GetElementType() const
 
 IdType SimulinkParameter::GetElementId() const
 {
-  // Logger::GetInstance().log(Logger::V_WARNING,
-  //   "SimulinkParameter::GetElementId called on unsupported element. "
-  //   "Returning 0.");
+  logger.SendLogMessage(
+    { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
+    { "GetElementId called on unsupported element. Returning 0." });
   return (IdType)0;
 }
 
 bool SimulinkParameter::Contains(const IdType& id) const
 {
-  /*Logger::GetInstance().log(Logger::V_WARNING,
-    "SimulinkParameter::contains called on unsupported element.");*/
+  logger.SendLogMessage(
+    { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
+    { "Contains called on unsupported element." });
   return false;
 }
 
-UInt32 SimulinkParameter::RemoveElement(
-  const std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkParameter::Erase(
+  const std::shared_ptr<SimulinkElementBase>& element)
 {
-  // Logger::GetInstance().log(
-  //  Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
+  logger.SendLogMessage(
+    { Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
+    { "Erase is not supported." });
   return E_NOT_IMPLEMENTED;
 }
 
-UInt32 SimulinkParameter::AddElement(
-  const std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkParameter::Insert(
+  const std::shared_ptr<SimulinkElementBase>& element)
 {
-  // Logger::GetInstance().log(
-  // Logger::V_ERROR, "SimulinkParameter::add is not supported.");
+  logger.SendLogMessage(
+    { Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
+    { "Insert is not supported." });
   return E_NOT_IMPLEMENTED;
 }
 
-Float32 SimulinkParameter::getMin()
+Float32 SimulinkParameter::GetMin()
 {
   return Min;
 }
 
-Float32 SimulinkParameter::getMax()
+Float32 SimulinkParameter::GetMax()
 {
   return Max;
 }
 
+Logger& SimulinkParameter::GetLogger() const
+{
+  return logger;
+}
+
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -8,7 +8,8 @@
 #include <fstream>
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class ArchiveTestFixture
@@ -90,4 +91,4 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

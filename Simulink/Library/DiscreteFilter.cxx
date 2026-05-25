@@ -1,6 +1,7 @@
 #include "DiscreteFilter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DiscreteFilter::DiscreteFilter() {}
@@ -18,4 +19,4 @@ void DiscreteFilter::SetFilterCoefficient(Float32 value)
 DiscreteFilter::~DiscreteFilter() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

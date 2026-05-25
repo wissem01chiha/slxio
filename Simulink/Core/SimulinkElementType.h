@@ -9,9 +9,14 @@
 #include "PlatformTypes.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @class SimulinkElementType
+ * @brief Represents the type of a Simulink element.
+ */
 class SLXIO_APIEXPORT SimulinkElementType
 {
 public:
@@ -28,54 +33,39 @@ public:
     Parameter = 8,
     ConfigSet = 9,
     Chart = 10,
-    Unkown = 11
+    Subsystem = 11,
+    Unknown = 11,
   };
 
-  /**
-   * Default Construtor
-   */
+  /** Default constructor. */
   SimulinkElementType() = default;
 
-  /**
-   *
-   */
+  /** Checks if this type matches another type object. */
   bool isA(const SimulinkElementType& typeObj);
 
-  /**
-   *
-   */
+  /** Checks if this type matches a given enum value. */
   bool isA(const SimulinkElementType::Type& type);
 
-  /**
-   *
-   */
+  /** Constructs a type from an enum value. */
   explicit SimulinkElementType(SimulinkElementType::Type typeName);
 
-  /**
-   *
-   */
-  static SimulinkElementType& getInstance();
+  /** Creates a new type instance. */
+  static SimulinkElementType& New();
 
-  /**
-   *
-   */
-  static SimulinkElementType::Type toType(const char* typeName);
+  /** Converts a type name string to an enum value. */
+  static SimulinkElementType::Type ToType(const char* typeName);
 
-  /**
-   *
-   */
+  /** Converts an enum value to a string representation. */
   static const char* ToString(SimulinkElementType::Type type);
 
-  /**
-   *
-   */
-  std::string ToString();
+  /** Returns the string representation of this type. */
+  std::string ToString() const;
 
 private:
   SimulinkElementType::Type type_;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKELEMENTTYPE_H

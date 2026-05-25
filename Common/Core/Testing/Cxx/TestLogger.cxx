@@ -3,7 +3,8 @@
 #include "ErrorHandler.h"
 #include "Logger.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Logger Singleton Constructor Test")
@@ -111,4 +112,4 @@ TEST_CASE("Logger WriteToFile Test")
   CHECK(result == E_OK);
 }
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

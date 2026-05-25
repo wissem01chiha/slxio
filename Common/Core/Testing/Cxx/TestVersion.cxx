@@ -1,7 +1,8 @@
 #include "Doctest.h"
 #include "Version.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Version major/minor/patch getters")
@@ -32,4 +33,4 @@ TEST_CASE("Version string format")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

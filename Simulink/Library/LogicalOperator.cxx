@@ -1,6 +1,7 @@
 #include "LogicalOperator.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 LogicalOperator::LogicalOperator() {}
@@ -18,4 +19,4 @@ void LogicalOperator::SetOperatorCode(Float32 value)
 LogicalOperator::~LogicalOperator() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

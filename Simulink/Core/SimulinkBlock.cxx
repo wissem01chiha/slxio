@@ -2,7 +2,8 @@
 #include <cstring>
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlock::SimulinkBlock()
@@ -291,4 +292,4 @@ Logger& SimulinkBlock::GetLogger()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
