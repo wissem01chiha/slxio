@@ -10,11 +10,11 @@
 #include <string>
 #include <vector>
 
-class Directory;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Directory;
 
 /**
  * @class File

@@ -7,16 +7,17 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "ErrorCode.h"
-#include "Logger.h"
 #include "PlatformTypes.h"
-#include "SimulinkArray.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkParameter.h"
 #include <memory>
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
+class SimulinkParameter;
+class SimulinkArray;
 
 /**
  * @brief Class for Simulink objects, which are a construct for
@@ -36,9 +37,6 @@ public:
   SimulinkElementType GetElementType() const override;
   IdType GetElementId() const override;
   std::string ToString() const override;
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
   bool Contains(const IdType& id) const override;
   std::shared_ptr<SimulinkParameter> getParameter(const std::string& name);
   std::string getName();

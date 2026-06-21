@@ -5,6 +5,10 @@
 #include "Libzip.h"
 #include <cstdio>
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 void ErrorHandler::SetLastError(int code)
 {
   lastError = code;
@@ -77,3 +81,6 @@ int ErrorHandler::PrintfLastErrorMessage(const char* format)
 {
   return PrintfErrorMessage(format, lastError);
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

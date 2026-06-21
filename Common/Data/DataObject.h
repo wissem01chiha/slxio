@@ -9,11 +9,11 @@
 #include "PlatformTypes.h"
 #include <string>
 
-class Logger;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
 
 class SLXIO_APIEXPORT DataObject
 {

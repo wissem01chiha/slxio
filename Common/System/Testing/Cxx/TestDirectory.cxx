@@ -7,6 +7,10 @@
 #include <random>
 #include <string>
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 class DirectoryTestFixture
 {
 public:
@@ -86,3 +90,6 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Delete directory")
   CHECK(ec == 0);
   CHECK_FALSE(Directory::Exist(path));
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

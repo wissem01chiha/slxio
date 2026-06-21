@@ -7,7 +7,7 @@
 #include "Config.h"
 #include "VersionMacro.h"
 
-#ifdef SLXIO_ABI_NAMESPACE
+#if SLXIO_ABI_NAMESPACE
 #define SLXIO_ABI_NAMESPACE_BEGIN                                              \
   namespace SLXIO_VERSION_NUMBER                                               \
   {

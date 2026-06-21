@@ -11,12 +11,12 @@
 #include <string>
 #include <vector>
 
-class File;
-class Directory;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class File;
+class Directory;
 
 /**
  * @class FileManager

@@ -10,11 +10,11 @@
 #include <memory>
 #include <string>
 
-class Directory;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Directory;
 
 /**
  * @class DirectoryService

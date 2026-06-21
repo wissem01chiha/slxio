@@ -3,6 +3,10 @@
 #include "ErrorHandler.h"
 #include "Libuv.h"
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 TEST_CASE("Set and Get last error")
 {
   ErrorHandler eh;
@@ -48,3 +52,6 @@ TEST_CASE("Print error message functions")
   CHECK(eh.PrintLastErrorMessage() > 0);
   CHECK(eh.PrintfLastErrorMessage("Last error: %s\n") > 0);
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

@@ -1,6 +1,11 @@
 clone_depth: 10
 version: 1.0.{build}
 
+install:
+  - choco install cmake --version=3.27.7 -y
+  - refreshenv
+  - cmake --version    
+
 platform:
   - x64
   - Win32

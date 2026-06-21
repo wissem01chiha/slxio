@@ -188,3 +188,6 @@ ReturnType FileManager::Clear()
   FileBuffer.clear();
   return E_OK;
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

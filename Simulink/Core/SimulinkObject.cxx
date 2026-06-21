@@ -1,4 +1,7 @@
 #include "SimulinkObject.h"
+#include "SimulinkParameter.h"
+#include "SimulinkArray.h"
+#include "Logger.h"
 #include <algorithm>
 #include <cstring>
 #include <sstream>

@@ -88,9 +88,6 @@ public:
   /** Accesses a child element by index. */
   virtual std::shared_ptr<SimulinkElementBase> at(IdType index) = 0;
 
-  /** Accesses a child element by index (const overload). */
-  virtual std::shared_ptr<const SimulinkElementBase> at(IdType index) const = 0;
-
 protected:
   /** Default constructor. */
   SimulinkElementBase() = default;

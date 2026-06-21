@@ -14,11 +14,11 @@
 #include <string>
 #include <vector>
 
-class Logger;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
 
 /**
  * @class SimulinkParameter

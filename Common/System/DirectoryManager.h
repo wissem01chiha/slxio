@@ -9,13 +9,14 @@
 #include "PlatformTypes.h"
 #include <memory>
 #include <vector>
-
-class File;
-class Directory;
+#include <string>
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class File;
+class Directory;
 
 /**
  * @class DirectoryManager

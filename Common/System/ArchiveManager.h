@@ -11,11 +11,11 @@
 #include <string>
 #include <vector>
 
-class Archive;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Archive;
 
 /**
  * @class ArchiveManager

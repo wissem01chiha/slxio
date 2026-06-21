@@ -10,11 +10,11 @@
 #include "SimulinkParameter.h"
 #include <memory>
 
-class Logger;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
 
 /**
  * @class SimulinkArray
@@ -70,9 +70,6 @@ public:
 
   /** Return the element at the specified index. */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
-
-  /** Return the element at the specified index. */
-  std::shared_ptr<const SimulinkElementBase> at(IdType index) const override;
 
   /** Return the array's element Id. */
   IdType GetElementId() const override;

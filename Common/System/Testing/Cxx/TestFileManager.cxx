@@ -1,6 +1,10 @@
 #include "Doctest.h"
 #include "FileManager.h"
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 class FileManagerTestFixture
 {
 public:
@@ -17,3 +21,6 @@ TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test")
   //   CHECK(f.isFile() == true);
   //   CHECK(f.getFilename() == "testfile.txt");
 }
+
+SLXIO_ABI_NAMESPACE_END
+};
