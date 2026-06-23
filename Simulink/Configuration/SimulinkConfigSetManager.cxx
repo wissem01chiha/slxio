@@ -47,7 +47,7 @@ std::shared_ptr<SimulinkConfigSet> SimulinkConfigSetManager::getActiveConfigurat
 
   for (const auto& cfg : cfgs)
   {
-    if (cfg->isActive())
+    if (cfg->IsActive())
     {
       return cfg;
     }

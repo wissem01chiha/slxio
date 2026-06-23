@@ -8,9 +8,9 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkParameterBase.h"
-#include <vector>
-#include <string>
 #include <memory>
+#include <string>
+#include <vector>
 
 namespace slxio
 {
@@ -53,6 +53,5 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 };
-
 
 #endif // SIMULINKPARAMETERSTRING_H

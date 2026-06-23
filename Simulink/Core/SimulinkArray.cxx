@@ -251,6 +251,11 @@ std::shared_ptr<SimulinkElementBase> SimulinkArray::at(IdType index)
   return SubArrays.at(index);
 }
 
+std::shared_ptr<SimulinkElementBase> SimulinkArray::operator[](IdType index)
+{
+  return std::shared_ptr<SimulinkElementBase>();
+}
+
 Logger& SimulinkArray::GetLogger()
 {
   return logger;

@@ -21,8 +21,8 @@ SimulinkConfigSet::SimulinkConfigSet()
 {
 }
 
-SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
-  : object(std::make_shared<SimulinkObject>(obj))
+SimulinkConfigSet::SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj)
+  : object(obj)
   , logger(Logger::GetInstance())
 {
 }
@@ -32,12 +32,12 @@ std::string SimulinkConfigSet::ToString() const
   return object->ToString();
 }
 
-std::shared_ptr<SimulinkSolver> SimulinkConfigSet::getSolver()
+std::shared_ptr<SimulinkSolver> SimulinkConfigSet::GetSolver()
 {
   return solver;
 }
 
-const char* SimulinkConfigSet::getParameter(const char* name)
+const char* SimulinkConfigSet::GetParameter(const char* name)
 {
 
   if (name == nullptr)
@@ -45,11 +45,12 @@ const char* SimulinkConfigSet::getParameter(const char* name)
     // logger.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
-  std::shared_ptr<SimulinkParameterBase> cfgParam = getParameterObject(std::string(name));
+  std::shared_ptr<SimulinkParameterBase> cfgParam = GetParameterObject(std::string(name));
   return cfgParam->ToString().c_str();
 }
 
-std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::getParameterObject(const std::string& name)
+std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::GetParameterObject(
+  const std::string& name)
 {
   auto param = object->GetParameter(name);
   if (param)
@@ -61,12 +62,12 @@ std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::getParameterObject(con
   return nullptr;
 }
 
-ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
+ReturnType SimulinkConfigSet::SetParameter(const char* name, const char* value)
 {
   auto param = object->GetParameter(std::string(name));
   if (param)
   {
-    //param->SetValue(value);
+    // param->SetValue(value);
     return E_OK;
   }
   // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
@@ -74,37 +75,37 @@ ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
   return E_OK;
 }
 
-ReturnType SimulinkConfigSet::copy()
+ReturnType SimulinkConfigSet::Copy()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::clone()
+ReturnType SimulinkConfigSet::Clone()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::RemoveElement()
+ReturnType SimulinkConfigSet::Clear()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::attach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::Attach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::detach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::Detach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-std::string SimulinkConfigSet::getName()
+std::string SimulinkConfigSet::GetName()
 {
   return object->GetName();
 }
 
-std::shared_ptr<SimulinkObject> SimulinkConfigSet::getObject() const
+std::shared_ptr<SimulinkObject> SimulinkConfigSet::GetObject() const
 {
   return object;
 }
@@ -114,22 +115,17 @@ IdType SimulinkConfigSet::GetId() const
   return object->GetId();
 }
 
-ReturnType SimulinkConfigSet::saveToFile(const char* path)
+ReturnType SimulinkConfigSet::SaveToFile(const char* path)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::loadFromFile(const char* path)
+ReturnType SimulinkConfigSet::FromFile(const char* path)
 {
-  return E_NOT_IMPLEMENTED;
+  return E_OK;
 }
 
-SimulinkConfigSet SimulinkConfigSet::fromFile(const char* path)
-{
-  return SimulinkConfigSet();
-}
-
-void SimulinkConfigSet::activate()
+void SimulinkConfigSet::Activate()
 {
   if (status)
   {
@@ -139,7 +135,7 @@ void SimulinkConfigSet::activate()
   status = true;
 }
 
-void SimulinkConfigSet::deactivate()
+void SimulinkConfigSet::Deactivate()
 {
   if (!status)
   {
@@ -149,7 +145,7 @@ void SimulinkConfigSet::deactivate()
   status = false;
 }
 
-bool SimulinkConfigSet::isActive() const
+bool SimulinkConfigSet::IsActive() const
 {
   return status;
 }

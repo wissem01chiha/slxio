@@ -104,10 +104,10 @@ public:
    */
   bool IsConnected();
 
-  /** */
+  /** Returns the Line Source Port */
   std::shared_ptr<SimulinkPort> GetSourcePort();
 
-  /** */
+  /** Returns the Line Destination Port */
   std::shared_ptr<SimulinkPort> GetDestPort();
 
   /** Return the class internal logger object*/

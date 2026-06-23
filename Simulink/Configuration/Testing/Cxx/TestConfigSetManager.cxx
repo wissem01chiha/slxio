@@ -32,7 +32,7 @@ TEST_CASE("GetActiveConfigurationSetTest")
   manager.AddElement(configSet1);
   manager.AddElement(configSet2);
 
-  configSet1->activate();
+  configSet1->Activate();
 
   std::shared_ptr<SimulinkConfigSet> activeConfig = manager.getActiveConfiguration();
   CHECK(activeConfig == configSet1);

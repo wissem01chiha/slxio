@@ -7,8 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-#include "SimulinkElementBase.h"
 #include "SimulinkBlockType.h"
+#include "SimulinkElementBase.h"
 #include <memory>
 
 namespace slxio
@@ -30,7 +30,9 @@ public:
   /** Default Constructor */
   SimulinkObject();
 
-  /**  */
+  SimulinkObject* New() const override;
+
+  /** Constructor given explicit parameters  */
   SimulinkObject(IdType id, std::string name, std::string className);
 
   /**  */
@@ -38,8 +40,8 @@ public:
 
   /**  */
   SimulinkObject(std::string version, std::string className);
-  
-    /** Accesses a child element by index with bound checking */
+
+  /** Accesses a child element by index with bound checking */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
 
   /** Access specified element */
@@ -105,11 +107,11 @@ protected:
   Logger& logger;
   IdType ObjectId;
   std::string ObjectVersion;
-  std::string propName;
-  std::string className;
-  std::vector<std::shared_ptr<SimulinkObject>> objects;
-  std::vector<std::shared_ptr<SimulinkArray>> arrays;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  std::string PropName;
+  std::string ClassName;
+  std::vector<std::shared_ptr<SimulinkObject>> SubObjects;
+  std::vector<std::shared_ptr<SimulinkArray>> SubArrays;
+  std::vector<std::shared_ptr<SimulinkParameter>> ObjectParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

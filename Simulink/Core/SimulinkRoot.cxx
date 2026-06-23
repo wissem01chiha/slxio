@@ -7,9 +7,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkRoot::SimulinkRoot()
-{
-}
+SimulinkRoot::SimulinkRoot() {}
 
 SimulinkArray* SimulinkRoot::GetSubsystems()
 {

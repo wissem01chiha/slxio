@@ -1,9 +1,12 @@
 #include "SimulinkModel.h"
 #include "Logger.h"
+#include "SimulationSettings.h"
 #include "SimulinkArray.h"
-#include "SimulinkLine.h"
-#include "SimulinkPort.h"
 #include "SimulinkBlock.h"
+#include "SimulinkLine.h"
+#include "SimulinkObject.h"
+#include "SimulinkParameter.h"
+#include "SimulinkPort.h"
 
 namespace slxio
 {
@@ -12,23 +15,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 SimulinkModel::SimulinkModel()
   : logger(Logger::GetInstance())
 {
-  type = SimulinkModelType(SimulinkModelType::Model);
+  ModelType = SimulinkModelType(SimulinkModelType::Model);
+}
+
+SimulinkModel* SimulinkModel::New() const
+{
+  return nullptr;
 }
 
 SimulinkModel::SimulinkModel(SimulinkModelType Type)
-  : type(Type)
+  : ModelType(Type)
   , logger(Logger::GetInstance())
 {
-}
-
-SimulinkModel::SimulinkModel(const SimulinkModel& other)
-  : logger(Logger::GetInstance())
-{
-
-  this->lines = other.lines;
-  this->id = other.id;
-  this->simSet = other.simSet;
-  this->version = other.version;
 }
 
 SimulinkElementType SimulinkModel::GetType() const
@@ -53,7 +51,7 @@ std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(IdType blockIdx)
   {
     if (blk->GetId() == blockIdx)
     {
-      //return blk;
+      // return blk;
     }
   }
   // slog_warn("Block (IdType) %d not found in model (IdType) %s",
@@ -64,17 +62,12 @@ std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(IdType blockIdx)
 
 SimulinkModelType SimulinkModel::GetModelType()
 {
-  return type;
+  return ModelType;
 }
 
 std::shared_ptr<SimulationSettings> SimulinkModel::GetSimulationSettings()
 {
   return simSet;
-}
-
-std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::GetParameters()
-{
-  return parameters;
 }
 
 UInt32 SimulinkModel::GetModelVersion()

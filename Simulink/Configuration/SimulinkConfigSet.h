@@ -36,77 +36,79 @@ public:
   /** Default Constructor */
   SimulinkConfigSet();
 
-  /// @brief disbale copy constructor
-  /// @note instead use clone to create a copy of the configuration set
-  SimulinkConfigSet(const SimulinkConfigSet&);
+  /**
+   * disbale copy constructor
+   * nstead use clone to create a copy of the configuration set
+   */
+  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
 
-  /// @brief Contructor from SimulinkObject, this is used internally to
-  /// fill a SimulinkConfigSet from low level Slx Representation, not
-  /// recommended for public use !!!
-  explicit SimulinkConfigSet(const SimulinkObject& obj);
+  /**
+   * Contructor from SimulinkObject, this is used internally to
+   * fill a SimulinkConfigSet from low level Slx Representation, not
+   * recommended for public use.
+   */
+  SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj);
 
-  /// @brief checks if this configuration set is active
-  bool isActive() const;
+  /** checks if this configuration set is active */
+  bool IsActive() const;
 
-  /// @brief Gets a parameter value by name.
-  const char* getParameter(const char* name);
+  /** Gets a parameter value by name.*/
+  const char* GetParameter(const char* name);
 
-  /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameterBase> getParameterObject(const std::string& name);
+  /** Retuens the parameter object by name. */
+  std::shared_ptr<SimulinkParameterBase> GetParameterObject(const std::string& name);
 
-  /// @brief Sets a parameter value by name.
-  ReturnType setParameter(const char* name, const char* value);
+  /** Sets a parameter value by name.*/
+  ReturnType SetParameter(const char* name, const char* value);
 
-  /// @brief Creates a copy of this configuration set.
-  ReturnType copy();
+  /** Creates a copy of this configuration set.*/
+  ReturnType Copy();
 
-  /// @brief Create a deep copy of this configuration set.
-  ReturnType clone();
+  /** Create a deep copy of this configuration set.*/
+  ReturnType Clone();
 
-  /// @brief Deletes this configuration set.
-  ReturnType RemoveElement();
+  /** Deletes this configuration set.*/
+  ReturnType Clear();
 
-  /// @brief Attaches this configuration set to a Simulink model.
-  ReturnType attach(SimulinkModel& model);
+  /** Attaches this configuration set to a Simulink model.*/
+  ReturnType Attach(SimulinkModel& model);
 
-  /// @brief Detaches this configuration set from a Simulink model.
-  ReturnType detach(SimulinkModel& model);
+  /** Detaches this configuration set from a Simulink model.*/
+  ReturnType Detach(SimulinkModel& model);
 
-  /// @brief Activates this configuration set.
-  void activate();
+  /** Activates this configuration set.*/
+  void Activate();
 
-  /// @brief Deactivates this configuration set.
-  void deactivate();
+  /** Deactivates this configuration set.*/
+  void Deactivate();
 
-  /// @brief Retrieves the name of the configuration set.
-  std::string getName();
+  /** Retrieves the name of the configuration set.*/
+  std::string GetName();
 
-  /// @brief  Retrive the underlying SimulinkObject representing this
-  /// configuration set.
-  std::shared_ptr<SimulinkObject> getObject() const;
+  /**
+   * Retrive the underlying SimulinkObject representing this
+   * configuration set.
+   */
+  std::shared_ptr<SimulinkObject> GetObject() const;
 
-  /// @brief  forward to underlying SimulinkObject GetId
+  /** forward to underlying SimulinkObject GetId*/
   IdType GetId() const;
 
-  /// @brief Loads the configuration set from a file.
-  ReturnType loadFromFile(const char* path);
+  /** Creates a configuration set from a file.*/
+  ReturnType FromFile(const char* path);
 
-  /// @brief Creates a configuration set from a file.
-  /// Supported formats: .m, .mat(planned)
-  static SimulinkConfigSet fromFile(const char* path);
+  /** Saves the configuration set to a file. */
+  ReturnType SaveToFile(const char* path);
 
-  /// @brief Saves the configuration set to a file.
-  /// @brief Supported formats: .m, .mat(planned)
-  ReturnType saveToFile(const char* path);
-
-  /// @brief Converts to a string representation.
+  /** Converts to a string representation. */
   std::string ToString() const;
 
-  /// @brief Get a Pointer to Solver Configuration struct
-  std::shared_ptr<SimulinkSolver> getSolver();
+  /** Get a Pointer to Solver Configuration struct */
+  std::shared_ptr<SimulinkSolver> GetSolver();
 
   /** Default destructor */
   ~SimulinkConfigSet() = default;
+
 private:
   Logger& logger;
   bool status = false;

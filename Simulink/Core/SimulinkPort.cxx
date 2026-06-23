@@ -15,7 +15,10 @@ SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> PortBlock, SimulinkPor
 {
 }
 
-SimulinkPort::SimulinkPort(): logger(Logger::GetInstance()) {}
+SimulinkPort::SimulinkPort()
+  : logger(Logger::GetInstance())
+{
+}
 
 SimulinkPort* SimulinkPort::New() const
 {
