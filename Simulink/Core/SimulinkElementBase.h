@@ -96,8 +96,15 @@ public:
   /** Returns the elment dimensions string if supported else "" */
   virtual std::string GetDimension() = 0;
 
-  /** Access the elment specifc parameter interface */
-  virtual std::string GetParameter(std::string name) = 0;
+  /** Access the element specifc parameter interface */
+  virtual std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) = 0;
+
+  /** Sets the element specifc parameter to given one  */
+  virtual ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) = 0;
+
+  /** Adds the element specifc parameter  */
+  virtual ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) = 0;
 
 protected:
   /** Default constructor. */

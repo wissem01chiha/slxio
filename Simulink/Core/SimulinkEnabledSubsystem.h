@@ -23,21 +23,72 @@ class SLXIO_APIEXPORT SimulinkEnabledSubsystem
   , SimulinkSubsystem
 {
 public:
-  SimulinkEnabledSubsystem() = default;
+  /** Default constructor.*/
+  SimulinkEnabledSubsystem();
 
   SimulinkEnabledSubsystem* New() const override;
-  SimulinkElementType GetType() const override;
-  std::string ToString() const override;
-  ReturnType Erase(const IdType& id) override;
-  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
-  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Accesses a child element by index with bound checking */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
-  std::shared_ptr<const SimulinkElementBase> at(IdType index) const override;
-  bool Contains(const IdType& id) const override;
+
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
+
+  /** Returns the number of child elements. */
   UInt32 Size() const override;
+
+  /** Returns true if no child elements exist. */
   bool Empty() const override;
+
+  /** Removes all child elements. */
   void Clear() override;
+
+  /** Inserts a new child element. */
   ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
+  bool Contains(const IdType& id) const override;
+
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
+
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
+
+  /** Returns a string representation of this element. */
+  std::string ToString() const override;
+
+  /** Retrieve the block type of the Simulink block.*/
+  SimulinkBlockType GetBlockType();
+
+  /** Get the block name.*/
+  std::string GetName() override;
+
+  /** Dim of a Simulink Block ????? */
+  std::string GetDimension() override;
+
+  /** Get the Parent block at the hiraciy .*/
+  std::shared_ptr<SimulinkBlock> GetBlockParent();
+
+  /** Return a pointer to a given parameter by name, if not
+   * found a or the blcok has not paramters an empty parameter returned. */
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
 private:
 };

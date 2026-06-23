@@ -6,18 +6,22 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
+#include "PlatformTypes.h"
 #include "SimulinkElementType.h"
+#include <string>
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Enumeration of Simulink block types.
+ * @class SimulinkBlockType
+ * @brief Enumeration wrapper for Simulink block types.
  */
 class SLXIO_APIEXPORT SimulinkBlockType final : public SimulinkElementType
 {
 public:
+  /** Enumeration of supported Simulink block types */
   enum Type
   {
     DigitalClock,
@@ -53,16 +57,31 @@ public:
     numInPorts,
     numOutPorts
   };
+
+  /** Default constructor */
   SimulinkBlockType() = default;
-  SimulinkBlockType(Type type_);
+
+  /** Constructs a block type from an enum value */
+  explicit SimulinkBlockType(Type type);
+
+  /** Default destructor */
   ~SimulinkBlockType() = default;
-  static SimulinkBlockType::Type toType(const char* typeName);
+
+  /** Converts a type name string to a block type enum */
+  static SimulinkBlockType::Type ToType(const char* typeName);
+
+  /** Converts a block type enum to its string representation */
   static const char* ToString(Type type);
+
+  /** Checks if this block type matches the given type */
   bool isA(SimulinkBlockType::Type type);
+
+  /** Returns the string representation of the current block type */
   std::string ToString() const;
 
 private:
-  SimulinkBlockType::Type type_;
+  /** Internal storage for the block type */
+  SimulinkBlockType::Type blockType;
 };
 
 SLXIO_ABI_NAMESPACE_END

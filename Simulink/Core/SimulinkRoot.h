@@ -8,13 +8,13 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-class Logger;
-class SimulinkArray;
-class SimulinkObject;
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
+class SimulinkArray;
+class SimulinkObject;
 
 /**
  * @class SimulinkRoot

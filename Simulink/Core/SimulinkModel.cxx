@@ -3,6 +3,7 @@
 #include "SimulinkArray.h"
 #include "SimulinkLine.h"
 #include "SimulinkPort.h"
+#include "SimulinkBlock.h"
 
 namespace slxio
 {
@@ -45,20 +46,20 @@ std::string SimulinkModel::ToString() const
   return std::string();
 }
 
-SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
+std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(IdType blockIdx)
 {
 
   for (const auto& blk : blocks)
   {
     if (blk->GetId() == blockIdx)
     {
-      return *blk;
+      //return blk;
     }
   }
   // slog_warn("Block (IdType) %d not found in model (IdType) %s",
   // blockIdx,
   //           id);
-  return SimulinkBlock();
+  return std::make_shared<SimulinkBlock>();
 }
 
 SimulinkModelType SimulinkModel::GetModelType()

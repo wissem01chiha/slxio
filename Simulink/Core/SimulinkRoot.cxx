@@ -9,8 +9,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkRoot::SimulinkRoot()
 {
-  Subsystems = new SimulinkArray();
-  ConfigSets = new SimulinkArray();
 }
 
 SimulinkArray* SimulinkRoot::GetSubsystems()

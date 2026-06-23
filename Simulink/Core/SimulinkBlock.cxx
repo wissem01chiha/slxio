@@ -1,4 +1,5 @@
 #include "SimulinkBlock.h"
+#include "ErrorCode.h"
 #include "Logger.h"
 #include "SimulinkParameter.h"
 #include <cstring>
@@ -11,6 +12,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType)
   : BlockType(blockType)
   , logger(Logger::GetInstance())
+{
+}
+
+SimulinkBlock::SimulinkBlock()
+  : logger(Logger::GetInstance())
 {
 }
 
@@ -57,7 +63,7 @@ void SimulinkBlock::Clear() {}
 
 ReturnType SimulinkBlock::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return E_OK;
 }
 
 ReturnType SimulinkBlock::Erase(const IdType& id)
@@ -68,6 +74,11 @@ ReturnType SimulinkBlock::Erase(const IdType& id)
 ReturnType SimulinkBlock::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
   return ReturnType();
+}
+
+std::shared_ptr<SimulinkElementBase> SimulinkBlock::Find(const IdType& id)
+{
+  return std::shared_ptr<SimulinkElementBase>();
 }
 
 // UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase>
@@ -186,6 +197,22 @@ IdType SimulinkBlock::GetId() const
   return BlockId;
 }
 
+std::shared_ptr<SimulinkParameterBase> SimulinkBlock::GetParameter(std::string name)
+{
+  return std::shared_ptr<SimulinkParameterBase>();
+}
+
+ReturnType SimulinkBlock::SetParameter(
+  std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
+{
+  return E_OK;
+}
+
+ReturnType SimulinkBlock::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+{
+  return E_OK;
+}
+
 void SimulinkBlock::SetBlockId(const IdType& blockId)
 {
   BlockId = blockId;
@@ -198,7 +225,7 @@ void SimulinkBlock::SetBlockName(const std::string& blockName)
 
 void SimulinkBlock::SetBlockType(SimulinkBlockType::Type blockType)
 {
-  BlockType = blockType;
+  BlockType = SimulinkBlockType(blockType);
 }
 
 // UInt32 SimulinkBlock::RemoveElement(
@@ -259,34 +286,34 @@ std::string SimulinkBlock::ToString() const
   return oss.str();
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(const char* parameterName)
-{
-  if (parameterName == nullptr)
-  {
-    // l.log(Logger::V_WARNING,
-    //  "SimulinkBlock:: getParameter called with null parameter name");
-    return nullptr;
-  }
-  if (BlockParameters.empty())
-  {
-    // l.log(Logger::V_WARNING,
-    //"SimulinkBlock:: getParameter called but block has no "
-    // "parameters");
-    return nullptr;
-  }
+// std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(const char* parameterName)
+// {
+//   if (parameterName == nullptr)
+//   {
+//     // l.log(Logger::V_WARNING,
+//     //  "SimulinkBlock:: getParameter called with null parameter name");
+//     return nullptr;
+//   }
+//   if (BlockParameters.empty())
+//   {
+//     // l.log(Logger::V_WARNING,
+//     //"SimulinkBlock:: getParameter called but block has no "
+//     // "parameters");
+//     return nullptr;
+//   }
 
-  for (const auto& blockParameter : BlockParameters)
-  {
-    const char* value = blockParameter->getName();
-    if (value != nullptr && strcmp(value, parameterName) == 0)
-    {
-      return blockParameter;
-    }
-  }
-  return std::make_shared<SimulinkParameter>();
-}
+//   for (const auto& blockParameter : BlockParameters)
+//   {
+//     std::string value = blockParameter->GetName();
+//     if (value ==  parameterName)
+//     {
+//       return blockParameter;
+//     }
+//   }
+//   return std::make_shared<SimulinkParameter>();
+// }
 
-std::string SimulinkBlock::GetBlockName()
+std::string SimulinkBlock::GetName()
 {
   return BlockName;
 }
@@ -301,6 +328,11 @@ bool SimulinkBlock::Contains(const IdType& blockId) const
     }
   }
   return false;
+}
+
+std::string SimulinkBlock::GetDimension()
+{
+  return std::string("");
 }
 
 std::shared_ptr<SimulinkBlock> SimulinkBlock::GetBlockParent()

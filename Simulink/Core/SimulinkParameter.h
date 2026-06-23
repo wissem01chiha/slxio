@@ -9,6 +9,7 @@
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
 #include "SimulinkParameterBase.h"
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -22,6 +23,13 @@ class CoderInfo;
 /**
  * @class SimulinkParameter
  * @brief A Simulink Parameter object.
+ * Accepts values provided as string literals, such as:
+ * - Numeric literals: "10.0", "1", "true"
+ * Other types are treated as strings and mapped to
+ * SimulinkDataType::String. Expressions and structs are not supported.
+ * @note No public data type setting is exposed.
+ * Resolution from const char* to SimulinkDataType is handled internally.
+ * Complexity defaults to "real" and is also resolved internally.
  */
 class SLXIO_APIEXPORT SimulinkParameter : public SimulinkParameterBase
 {
@@ -29,83 +37,60 @@ public:
   /** Default constructor */
   SimulinkParameter();
 
-  /// @brief Explicit constructor.
-  /// Accepts values provided as string literals, such as:
-  /// - Numeric literals: "10.0", "1", "true"
-  /// - Arrays: "[1,2,3]"
-  /// - Complex values: "2+2i"
-  /// Other types are treated as strings and mapped to
-  /// SimulinkDataType::String. Expressions and structs are not
-  /// supported.
-  /// @note No public data type setting is exposed.
-  /// Resolution from const char* to SimulinkDataType is handled
-  /// internally by the class. Complexity defaults to "real" and is
-  /// also resolved internally.
+  /** Explicit constructor */
   explicit SimulinkParameter(const char* val);
 
-  /// @brief get the resolved parameter SimulinkDataType
-  SimulinkDataType GetDataType() override;
+  /** Returns current parameter name */
+  std::string GetName() override;
 
-  /// @brief set the parameter data type
-  /// @warning this function overrites the default Min, Max values
-  /// based on new type
-  /// @note not implemented the automatic range override
-  void SetDataType(SimulinkDataType DataType_);
-
-  /// @brief Returns the default type representation of the parameter
-  /// value. This provides the raw value as stored internally, without
-  /// conversion to another data type.
-  const char* getValue();
-
-  /// @brief Provide a way to modify the parameter value, mimicking the Matlab
-  /// API.
-  void setValue(const char* value);
-
-  /// @brief Attempts to resolve the value as double.
-  UInt32 getValueAsDouble(Float32& fval);
-
-  /// @brief Attempts to resolve the value as Single if enbaled.
-  UInt32 getValueAsSingle(Float32& sval);
-
-  /// @brief Resolves the parameter value as an unsigned 8-bit
-  /// integer.
-  /// @param[out] u8val Parsed value.
-  UInt32 getValueAsUInt8(UInt8& u8val);
-
-  /// @brief Resolves the parameter value as an unsigned 16-bit
-  /// integer.
-  /// @param[out] u16val Parsed value.
-  UInt32 getValueAsUInt16(UInt16& u16val);
-
-  /// @brief Resolves the parameter value as an array of floats.
-  /// @param[out] vecval Parsed array.
-  UInt32 getValueAsArray(std::vector<Float32>& vecval);
-
-  /// @brief Resolves the parameter value as a string.
-  /// @param[out] strval Parsed string.
-  UInt32 getValueAsString(std::string& strval);
-
-  /// @brief get parameter dimensions
+  /** Returns parameter dimensions */
   std::vector<UInt16> GetDimensions() override;
 
-  /// @brief return current parameter name
-  const char* getName();
-
-  /// @brief modify parameter name, no backup used
-  UInt32 setName(const char* name);
-
+  /** Serializes parameter to string */
   std::string ToString() const override;
 
-  /// @brief get code generation data struct
+  /** Returns code generation data struct */
   std::shared_ptr<CoderInfo> GetCoderInfo() override;
 
-  /// @brief Parameter minumin value
+  /** Returns parameter minimum value */
   Float32 GetMin() override;
 
-  /// @brief Parameter maxiumum value
+  /** Returns parameter maximum value */
   Float32 GetMax() override;
 
-  /* Get the class internal logger*/
+  /** Returns the resolved parameter SimulinkDataType */
+  SimulinkDataType GetDataType() override;
+
+  /**
+   * Sets the parameter data type.
+   * @warning This function overwrites the default Min/Max values
+   * based on the new type.
+   * @note Automatic range override is not implemented.
+   */
+  void SetDataType(SimulinkDataType dataType);
+
+  /** Returns the raw parameter value as stored internally */
+  const char* GetValue();
+
+  /** Sets the parameter value */
+  void SetValue(const char* value);
+
+  /** Attempts to resolve the value as double */
+  ReturnType GetValueAsDouble(Float32& fval);
+
+  /** Attempts to resolve the value as single */
+  ReturnType GetValueAsSingle(Float32& sval);
+
+  /** Resolves the parameter value as unsigned 8-bit integer */
+  ReturnType GetValueAsUInt8(UInt8& u8val);
+
+  /** Resolves the parameter value as unsigned 16-bit integer */
+  ReturnType GetValueAsUInt16(UInt16& u16val);
+
+  /** Sets the parameter name (no backup used) */
+  ReturnType SetName(const char* name);
+
+  /** Returns the internal logger */
   Logger& GetLogger() const;
 
 private:

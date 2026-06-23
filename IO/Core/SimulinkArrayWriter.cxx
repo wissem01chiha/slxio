@@ -1,6 +1,7 @@
 #include "SimulinkArrayWriter.h"
 #include "DataObject.h"
 #include "SimulinkArray.h"
+#include "ErrorCode.h"
 
 namespace slxio
 {

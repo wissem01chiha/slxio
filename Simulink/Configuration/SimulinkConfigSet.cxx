@@ -17,13 +17,13 @@ SimulinkConfigSet::SimulinkConfigSet()
   , hardware(nullptr)
   , modelReference(nullptr)
   , rtw(nullptr)
-  , l(Logger::GetInstance())
+  , logger(Logger::GetInstance())
 {
 }
 
 SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
   : object(std::make_shared<SimulinkObject>(obj))
-  , l(Logger::GetInstance())
+  , logger(Logger::GetInstance())
 {
 }
 
@@ -42,34 +42,34 @@ const char* SimulinkConfigSet::getParameter(const char* name)
 
   if (name == nullptr)
   {
-    // l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
+    // logger.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
-  std::shared_ptr<SimulinkParameter> cfgParam = getParameterObject(std::string(name));
-  return cfgParam->getValue();
+  std::shared_ptr<SimulinkParameterBase> cfgParam = getParameterObject(std::string(name));
+  return cfgParam->ToString().c_str();
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(const std::string& name)
+std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::getParameterObject(const std::string& name)
 {
-  auto param = object->getParameter(name);
+  auto param = object->GetParameter(name);
   if (param)
   {
     return param;
   }
-  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
   //  " not found in configuration set.");
   return nullptr;
 }
 
 ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
 {
-  auto param = object->getParameter(std::string(name));
+  auto param = object->GetParameter(std::string(name));
   if (param)
   {
-    param->setValue(value);
+    //param->SetValue(value);
     return E_OK;
   }
-  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
   //" not found in configuration set. Cannot set value.");
   return E_OK;
 }
@@ -101,7 +101,7 @@ ReturnType SimulinkConfigSet::detach(SimulinkModel& model)
 
 std::string SimulinkConfigSet::getName()
 {
-  return object->getName();
+  return object->GetName();
 }
 
 std::shared_ptr<SimulinkObject> SimulinkConfigSet::getObject() const
@@ -133,7 +133,7 @@ void SimulinkConfigSet::activate()
 {
   if (status)
   {
-    // l.log(Logger::V_INFO, "Activating Simulink configuration set ",
+    // logger.log(Logger::V_INFO, "Activating Simulink configuration set ",
     //   object->getName());
   }
   status = true;
@@ -143,7 +143,7 @@ void SimulinkConfigSet::deactivate()
 {
   if (!status)
   {
-    // l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
+    // logger.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
     //  object->getName());
   }
   status = false;

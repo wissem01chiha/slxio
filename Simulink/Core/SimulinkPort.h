@@ -6,17 +6,18 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Logger.h"
 #include "PlatformTypes.h"
-#include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
+#include "SimulinkBlockType.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkLine;
+class Logger;
+class SimulinkBlock;
 
 /**
  * @class SimulinkPort
@@ -25,60 +26,95 @@ class SimulinkLine;
 class SLXIO_APIEXPORT SimulinkPort : public SimulinkElementBase
 {
 public:
-  SimulinkPort() = delete;
-  SimulinkPort(const SimulinkPort& other);
+  /** Default constructor.*/
+  SimulinkPort();
+
+  SimulinkPort* New() const override;
+
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
-  SimulinkPortType getPortType();
-  SimulinkElementType GetType() const override;
+  SimulinkPortType GetPortType();
 
-  /// @brief Get a string representation of this port.
-  std::string ToString() const override;
+  /** Accesses a child element by index with bound checking */
+  std::shared_ptr<SimulinkElementBase> at(IdType index) override;
 
-  /**
-   * @brief Remove a line from this port.
-   * @param element The element to remove (must be a SimulinkLine).
-   * @return ReturnType indicating success or failure.
-   */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
 
-  /**
-   * @brief Add a line to this port.
-   *  @details Only SimulinkLine elements are supported for add/remove
-   * operations.
-   */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  /** Returns the number of child elements. */
+  UInt32 Size() const override;
 
-  /// @brief Get the ID of the linked block.
-  IdType GetId() const override;
+  /** Returns true if no child elements exist. */
+  bool Empty() const override;
 
-  /**
-   *  @brief Compare the given ID with this port's ID.
-   *  @note A port can only be connected to one and only one block.
-   */
+  /** Removes all child elements. */
+  void Clear() override;
+
+  /** Inserts a new child element. */
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
   bool Contains(const IdType& id) const override;
 
-  /// @brief Get the parent block of this port.
-  std::shared_ptr<SimulinkBlock> getBlock();
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
 
-  /// @brief Get all line handlers connected to this port.
-  std::vector<std::shared_ptr<SimulinkLine>> getLines();
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
 
-  /// @brief Get a specific line by its ID.
-  /// @note Each line should have a unique identifier.
-  std::shared_ptr<SimulinkLine> getLine(const IdType& lineId);
+  /** Returns a string representation of this element. */
+  std::string ToString() const override;
 
-  /**
-   *
-   */
+  /** Retrieve the block type of the Simulink block.*/
+  SimulinkBlockType GetBlockType();
+
+  /** Get the block name.*/
+  std::string GetName() override;
+
+  /** Dim of a Simulink Block ????? */
+  std::string GetDimension() override;
+
+  /** Get the Parent block at the hiraciy .*/
+  std::shared_ptr<SimulinkBlock> GetBlockParent();
+
+  /** Return a pointer to a given parameter by name, if not
+   * found a or the blcok has not paramters an empty parameter returned. */
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /** Get the parent block of this port.*/
+  std::shared_ptr<SimulinkBlock> GetBlock();
+
+  /** Get all line handlers connected to this port.*/
+  std::vector<std::shared_ptr<SimulinkLine>> GetLines();
+
+  /** Get a specific line by its Id */
+  std::shared_ptr<SimulinkLine> GetLine(const IdType& lineId);
+
+  /** Return the class internal logger object*/
   Logger& GetLogger();
 
 private:
   Logger& logger;
-  IdType blockId;
-  SimulinkPortType type;
-  std::shared_ptr<SimulinkBlock> block;
-  std::vector<std::shared_ptr<SimulinkLine>> lines;
+  IdType BlockId;
+  SimulinkPortType PortType;
+  std::shared_ptr<SimulinkBlock> PortBlock;
+  std::vector<std::shared_ptr<SimulinkLine>> PortLines;
 };
 
 SLXIO_ABI_NAMESPACE_END

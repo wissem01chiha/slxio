@@ -27,7 +27,7 @@ class SLXIO_APIEXPORT SimulinkBlock : public SimulinkElementBase
 {
 public:
   /** Default constructor.*/
-  SimulinkBlock() = default;
+  SimulinkBlock();
 
   SimulinkBlock* New() const override;
 
@@ -80,14 +80,24 @@ public:
   SimulinkBlockType GetBlockType();
 
   /** Get the block name.*/
-  std::string GetBlockName();
+  std::string GetName() override;
+
+  /** Dim of a Simulink Block ????? */
+  std::string GetDimension() override;
 
   /** Get the Parent block at the hiraciy .*/
   std::shared_ptr<SimulinkBlock> GetBlockParent();
 
   /** Return a pointer to a given parameter by name, if not
    * found a or the blcok has not paramters an empty parameter returned. */
-  std::shared_ptr<SimulinkParameter> GetBlockParameter(const char* parameterName);
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Sets the block Id to a given one, shoule not used by public users, only
    * for internal Peraser */

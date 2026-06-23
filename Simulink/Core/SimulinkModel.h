@@ -24,6 +24,7 @@ class SimulinkObject;
 class SimulinkArray;
 class SImulinkPort;
 class SimulinkLine;
+class SimulinkBlock;
 class Logger;
 
 /**
@@ -32,9 +33,7 @@ class Logger;
 class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
 public:
-  /**
-   * Default Constructor
-   */
+  /** Default Constructor */
   SimulinkModel();
 
   /**
@@ -77,10 +76,8 @@ public:
    */
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
 
-  /**
-   *
-   */
-  SimulinkBlock GetBlock(IdType blockIdx);
+  /** */
+  std::shared_ptr<SimulinkBlock> GetBlock(IdType blockIdx);
 
   /**
    *

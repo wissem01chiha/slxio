@@ -9,10 +9,14 @@
 #include "PlatformTypes.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
-#include "SimulinkParameter.h"
+#include "SimulinkParameterBase.h"
 #include <memory>
 #include <string>
 #include <vector>
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkSolver;
 class SimulinkOptimization;
@@ -23,19 +27,14 @@ class SimulinkModelReference;
 class SimulinkRTW;
 class Logger;
 
-namespace slxio
-{
-SLXIO_ABI_NAMESPACE_BEGIN
-
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
 class SLXIO_APIEXPORT SimulinkConfigSet final
 {
 public:
+  /** Default Constructor */
   SimulinkConfigSet();
-
-  ~SimulinkConfigSet() = default;
 
   /// @brief disbale copy constructor
   /// @note instead use clone to create a copy of the configuration set
@@ -53,7 +52,7 @@ public:
   const char* getParameter(const char* name);
 
   /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameter> getParameterObject(const std::string& name);
+  std::shared_ptr<SimulinkParameterBase> getParameterObject(const std::string& name);
 
   /// @brief Sets a parameter value by name.
   ReturnType setParameter(const char* name, const char* value);
@@ -106,8 +105,10 @@ public:
   /// @brief Get a Pointer to Solver Configuration struct
   std::shared_ptr<SimulinkSolver> getSolver();
 
+  /** Default destructor */
+  ~SimulinkConfigSet() = default;
 private:
-  Logger& l;
+  Logger& logger;
   bool status = false;
   std::shared_ptr<SimulinkObject> object;
   std::shared_ptr<SimulinkSolver> solver;

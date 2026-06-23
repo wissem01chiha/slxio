@@ -5,12 +5,12 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockType::SimulinkBlockType(Type type_)
+SimulinkBlockType::SimulinkBlockType(Type blockType)
 {
-  this->type_ = type_;
+  this->blockType = blockType;
 }
 
-SimulinkBlockType::Type SimulinkBlockType::toType(const char* typeName)
+SimulinkBlockType::Type SimulinkBlockType::ToType(const char* typeName)
 {
 
   if (!typeName)
@@ -164,12 +164,12 @@ const char* SimulinkBlockType::ToString(Type type)
 
 bool SimulinkBlockType::isA(SimulinkBlockType::Type type)
 {
-  return this->type_ == type;
+  return this->blockType == type;
 }
 
 std::string SimulinkBlockType::ToString() const
 {
-  return std::string(ToString(type_));
+  return std::string(ToString(blockType));
 }
 
 SLXIO_ABI_NAMESPACE_END

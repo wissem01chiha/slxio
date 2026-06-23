@@ -1,4 +1,5 @@
 #include "SimulinkArray.h"
+#include "ErrorCode.h"
 #include "Logger.h"
 #include "SimulinkParameter.h"
 #include <algorithm>
@@ -86,7 +87,7 @@ ReturnType SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& ele
 
     for (const auto& arraysPtr : SubArrays)
     {
-      if (subArrayPtr->GetArrayName() == arraysPtr->GetArrayName())
+      if (subArrayPtr->GetName() == arraysPtr->GetName())
       {
         logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
           { "SubArray already exists in the base array" });
@@ -160,7 +161,7 @@ ReturnType SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& elem
     for (const auto& arr : SubArrays)
     {
 
-      if (arr->GetArrayName() == arrayPtr->GetArrayName())
+      if (arr->GetName() == arrayPtr->GetName())
       {
         SubArrays.erase(remove(SubArrays.begin(), SubArrays.end(), arr), SubArrays.end());
         return E_OK;
@@ -255,12 +256,12 @@ Logger& SimulinkArray::GetLogger()
   return logger;
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkArray::GetArrayParameter(std::string ArrayName)
+std::shared_ptr<SimulinkParameterBase> SimulinkArray::GetParameter(std::string name)
 {
 
   for (const auto& param : ArrayParameters)
   {
-    if (param && param->getName() == ArrayName)
+    if (param && param->GetName() == name)
     {
       return param;
     }
@@ -270,7 +271,7 @@ std::shared_ptr<SimulinkParameter> SimulinkArray::GetArrayParameter(std::string 
   {
     if (SubArray)
     {
-      auto result = SubArray->GetArrayParameter(ArrayName);
+      auto result = SubArray->GetParameter(name);
       if (result)
       {
         return result;
@@ -282,12 +283,23 @@ std::shared_ptr<SimulinkParameter> SimulinkArray::GetArrayParameter(std::string 
   return nullptr;
 }
 
-std::string SimulinkArray::GetArrayName()
+ReturnType SimulinkArray::SetParameter(
+  std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
+{
+  return E_OK;
+}
+
+ReturnType SimulinkArray::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+{
+  return E_OK;
+}
+
+std::string SimulinkArray::GetName()
 {
   return ArrayName;
 }
 
-std::string SimulinkArray::GetArrayDimension()
+std::string SimulinkArray::GetDimension()
 {
   return ArrayDimension;
 }

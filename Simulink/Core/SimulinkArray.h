@@ -85,7 +85,14 @@ public:
   std::string GetArrayType();
 
   /** Return the parameter with the given name. */
-  std::shared_ptr<SimulinkParameter> GetParameter(std::string name) override;
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Return the class logger. */
   Logger& GetLogger();

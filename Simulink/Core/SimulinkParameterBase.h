@@ -7,6 +7,8 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
+#include <memory>
+#include <string>
 #include <vector>
 
 namespace slxio
@@ -36,10 +38,10 @@ public:
   virtual std::shared_ptr<CoderInfo> GetCoderInfo() = 0;
 
   /** Parameter minumin value */
-  virtual Float64 GetMin() = 0;
+  virtual Float32 GetMin() = 0;
 
   /** Parameter maxiumum value */
-  virtual Float64 GetMax() = 0;
+  virtual Float32 GetMax() = 0;
 
   /** Get the resolved parameter SimulinkDataType */
   virtual SimulinkDataType GetDataType() = 0;
