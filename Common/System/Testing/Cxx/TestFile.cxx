@@ -31,10 +31,7 @@ public:
 
   ~FileTestFixture() { std::remove(TestFile.c_str()); }
 
-  std::string GetTestFilePath() const
-  {
-    return CurrentDir + PATH_SEP + TestFile;
-  }
+  std::string GetTestFilePath() const { return CurrentDir + PATH_SEP + TestFile; }
 
   Directory CreateTempDirectory(const char* name, int* err) const
   {
@@ -50,8 +47,7 @@ public:
     uv_fs_t req;
     uv_loop_t* loop = uv_default_loop();
 
-    *err =
-      uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
+    *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
     uv_fs_req_cleanup(&req);
   }
 };

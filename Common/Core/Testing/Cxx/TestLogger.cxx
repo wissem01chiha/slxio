@@ -38,8 +38,8 @@ TEST_CASE("Logger Buffer Clear Test")
   Logger& logger = Logger::GetInstance();
 
   Logger::ApplicationInfoType appInfo = { 1, "TestApp", "" };
-  Logger::MessageInfoType info = { Logger::MessageType::LOG,
-    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG, Logger::MessageLevelType::LOG_INFO,
+    appInfo, 1 };
   std::vector<std::string> data = { "hello world" };
 
   logger.SendLogMessage(info, data);
@@ -57,8 +57,8 @@ TEST_CASE("Logger Filtered Message By Name Test")
   Logger& logger = Logger::GetInstance();
 
   Logger::ApplicationInfoType appInfo = { 2, "MyApp", "" };
-  Logger::MessageInfoType info = { Logger::MessageType::LOG,
-    Logger::MessageLevelType::LOG_WARN, appInfo, 1 };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG, Logger::MessageLevelType::LOG_WARN,
+    appInfo, 1 };
   std::vector<std::string> data = { "Warning message" };
 
   logger.SendLogMessage(info, data);
@@ -86,8 +86,8 @@ TEST_CASE("Logger Print Test")
   logger.ClearBuffer();
 
   Logger::ApplicationInfoType appInfo = { 3, "PrintApp", "Dummy Application" };
-  Logger::MessageInfoType info = { Logger::MessageType::LOG,
-    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG, Logger::MessageLevelType::LOG_INFO,
+    appInfo, 1 };
   std::vector<std::string> data = { "Hello from Print" };
 
   logger.SendLogMessage(info, data);
@@ -100,10 +100,9 @@ TEST_CASE("Logger WriteToFile Test")
   Logger& logger = Logger::GetInstance();
   logger.ClearBuffer();
 
-  Logger::ApplicationInfoType appInfo = { 42, "FileApp",
-    "File test application" };
-  Logger::MessageInfoType info = { Logger::MessageType::LOG,
-    Logger::MessageLevelType::LOG_INFO, appInfo, 1 };
+  Logger::ApplicationInfoType appInfo = { 42, "FileApp", "File test application" };
+  Logger::MessageInfoType info = { Logger::MessageType::LOG, Logger::MessageLevelType::LOG_INFO,
+    appInfo, 1 };
   std::vector<std::string> data = { "Message written to file" };
   logger.SendLogMessage(info, data);
 

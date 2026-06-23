@@ -13,73 +13,73 @@
  *
  */
 
-#include <algorithm>
 #include "configvariable.hxx"
 #include "threadmanagement.hxx"
+#include <algorithm>
 
 extern "C"
 {
+#include "SetConsolePrompt.h"
+#include "TermReadAndProcess.h"
+#include "configvariable_interface.h"
+#include "diary.h"
+#include "localization.h"
+#include "os_string.h"
 #include "prompt.h"
 #include "sci_malloc.h"
 #include "scilabRead.h"
-#include "SetConsolePrompt.h"
-#include "TermReadAndProcess.h"
-#include "os_string.h"
-#include "configvariable_interface.h"
-#include "localization.h"
-#include "diary.h"
 }
 
 static SCILAB_INPUT_METHOD _reader;
 
 void setScilabInputMethod(SCILAB_INPUT_METHOD reader)
 {
-    _reader = reader;
+  _reader = reader;
 }
 
 void C2F(scilabread)(char* strRead, int len)
 {
-    scilabRead();
-    char* str = ConfigVariable::getConsoleReadStr();
-    int size = std::min(static_cast<int>(strlen(str)), len - 1);
-    strncpy(strRead, str, size);
-    strRead[size] = '\0';
-    FREE(str);
+  scilabRead();
+  char* str = ConfigVariable::getConsoleReadStr();
+  int size = std::min(static_cast<int>(strlen(str)), len - 1);
+  strncpy(strRead, str, size);
+  strRead[size] = '\0';
+  FREE(str);
 }
 
 int scilabRead()
 {
-    ThreadManagement::LockScilabRead();
-    if (getScilabMode() == SCILAB_STD)
+  ThreadManagement::LockScilabRead();
+  if (getScilabMode() == SCILAB_STD)
+  {
+    /* Send new prompt to Java Console, do not display it */
+    std::string tmp = GetTemporaryPrompt();
+    if (tmp.empty() == false)
     {
-        /* Send new prompt to Java Console, do not display it */
-        std::string tmp = GetTemporaryPrompt();
-        if (tmp.empty() == false)
-        {
-            SetConsolePrompt(tmp.data());
-        }
-        else
-        {
-            SetConsolePrompt(GetCurrentPrompt());
-        }
+      SetConsolePrompt(tmp.data());
     }
+    else
+    {
+      SetConsolePrompt(GetCurrentPrompt());
+    }
+  }
 
-    //call reader
-    char* pstTemp = (*_reader)();
+  // call reader
+  char* pstTemp = (*_reader)();
 
-    //add prompt to diary
-    wchar_t* pwstPrompt = to_wide_string(GetCurrentPrompt());
-    diaryWrite(pwstPrompt, TRUE);
-    FREE(pwstPrompt);
+  // add prompt to diary
+  wchar_t* pwstPrompt = to_wide_string(GetCurrentPrompt());
+  diaryWrite(pwstPrompt, TRUE);
+  FREE(pwstPrompt);
 
-    //add input to diary
-    wchar_t* pwstIn = to_wide_string(pstTemp);
-    diaryWriteln(pwstIn, TRUE);
-    FREE(pwstIn);
+  // add input to diary
+  wchar_t* pwstIn = to_wide_string(pstTemp);
+  diaryWriteln(pwstIn, TRUE);
+  FREE(pwstIn);
 
-    ConfigVariable::setConsoleReadStr(pstTemp);
-    int isSciCmd = ConfigVariable::isScilabCommand();
-    ThreadManagement::UnlockScilabRead();
+  ConfigVariable::setConsoleReadStr(pstTemp);
+  int isSciCmd = ConfigVariable::isScilabCommand();
+  ThreadManagement::UnlockScilabRead();
 
-    return isSciCmd;
+  return isSciCmd;
 }

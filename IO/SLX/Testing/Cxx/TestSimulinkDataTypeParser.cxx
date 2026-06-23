@@ -1,7 +1,8 @@
 #include "Doctest.h"
 #include "SimulinkDataTypeParser.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Test Parser Set Empty String Input Data")

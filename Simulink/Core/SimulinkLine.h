@@ -25,15 +25,14 @@ class SLXIO_APIEXPORT SimulinkLine final : public SimulinkElementBase
 public:
   SimulinkLine();
   SimulinkLine(const SimulinkLine& other);
-  SimulinkLine(
-    std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
+  SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
   SimulinkLine& operator=(const SimulinkLine&) = delete;
   SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
 
   /**
    *
    */
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /**
    *
@@ -43,8 +42,7 @@ public:
   /**
    *
    */
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    *
@@ -54,7 +52,7 @@ public:
   /**
    *
    */
-  IdType GetElementId() const override;
+  IdType GetId() const override;
 
   /**
    * Check if the line Id matches the given identifier.

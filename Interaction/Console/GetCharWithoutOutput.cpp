@@ -14,18 +14,19 @@
  */
 
 /*--------------------------------------------------------------------------*/
-#include <stdlib.h>
 #include <jni.h>
-extern "C" {
-#include "./../../jvm/includes/getScilabObject.h"
+#include <stdlib.h>
+extern "C"
+{
 #include "../../../jvm/includes/getScilabJNIEnv.h"
+#include "./../../jvm/includes/getScilabObject.h"
 }
-#include "sci_malloc.h"
 #include "GetCharWithoutOutput.hxx"
+#include "sci_malloc.h"
 /*--------------------------------------------------------------------------*/
 #include "CallScilabBridge.hxx"
-using namespace  org_scilab_modules_gui_bridge;
+using namespace org_scilab_modules_gui_bridge;
 int GetCharWithoutOutput(void)
 {
-    return CallScilabBridge::getCharWithoutOutput(getScilabJavaVM());
+  return CallScilabBridge::getCharWithoutOutput(getScilabJavaVM());
 }

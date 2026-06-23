@@ -11,7 +11,8 @@
 #include "SimulinkPortType.h"
 #include <string>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base parser for encoded port type strings

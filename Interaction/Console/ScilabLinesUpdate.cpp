@@ -17,10 +17,10 @@
 #include "ScilabLinesUpdate.hxx"
 /*--------------------------------------------------------------------------*/
 #include "CallScilabBridge.hxx"
-using namespace  org_scilab_modules_gui_bridge;
+using namespace org_scilab_modules_gui_bridge;
 BOOL ScilabLinesUpdate(void)
 {
-    CallScilabBridge::scilabLinesUpdate(getScilabJavaVM());
-    return TRUE;
+  CallScilabBridge::scilabLinesUpdate(getScilabJavaVM());
+  return TRUE;
 }
 /*--------------------------------------------------------------------------*/

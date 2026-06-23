@@ -1,4 +1,5 @@
 #include "SimulinkModel.h"
+#include "Logger.h"
 #include "SimulinkArray.h"
 #include "SimulinkLine.h"
 #include "SimulinkPort.h"
@@ -29,12 +30,12 @@ SimulinkModel::SimulinkModel(const SimulinkModel& other)
   this->version = other.version;
 }
 
-SimulinkElementType SimulinkModel::GetElementType() const
+SimulinkElementType SimulinkModel::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Model);
 }
 
-IdType SimulinkModel::GetElementId() const
+IdType SimulinkModel::GetId() const
 {
   return id;
 }
@@ -49,7 +50,7 @@ SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
 
   for (const auto& blk : blocks)
   {
-    if (blk->GetElementId() == blockIdx)
+    if (blk->GetId() == blockIdx)
     {
       return *blk;
     }

@@ -8,8 +8,8 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include <memory>
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace slxio
 {

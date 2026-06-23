@@ -1,4 +1,5 @@
 #include "SimulinkParameter.h"
+#include "CoderInfo.h"
 #include "Logger.h"
 #include <cstdlib>
 #include <cstring>
@@ -8,8 +9,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101,
-  "SimulinkParameter" };
+static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101, "SimulinkParameter" };
 
 SimulinkParameter::SimulinkParameter()
   : Min(SLXIO_FLOAT_MIN)
@@ -24,7 +24,7 @@ SimulinkParameter::SimulinkParameter()
   Description = "";
   Unit = "";
   Dimensions.clear();
-  coder = CoderInfo();
+  coder = std::make_shared<CoderInfo>();
 }
 
 SimulinkParameter::SimulinkParameter(const char* val)
@@ -39,7 +39,7 @@ SimulinkParameter::SimulinkParameter(const char* val)
   Unit = "";
   Complexity = "real";
   Dimensions.clear();
-  coder = CoderInfo();
+  coder = std::make_shared<CoderInfo>();
 
   if (Value && Value[0] == '[')
   {
@@ -64,8 +64,8 @@ void SimulinkParameter::SetDataType(SimulinkDataType DataType_)
 
   if (DataType_ == DataType)
   {
-    logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_WARN,
-                            SimulinkParameterLogApp, 0 },
+    logger.SendLogMessage(
+      { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
       { "SimulinkParameter::SetDataType called with same data type. No changes "
         "made." });
     return;
@@ -200,7 +200,7 @@ UInt32 SimulinkParameter::getValueAsArray(std::vector<Float32>& vecval)
   return E_OK;
 }
 
-CoderInfo SimulinkParameter::GetCoderInfo()
+std::shared_ptr<CoderInfo> SimulinkParameter::GetCoderInfo()
 {
   return coder;
 }
@@ -245,41 +245,35 @@ UInt32 SimulinkParameter::setName(const char* name)
   return E_OK;
 }
 
-SimulinkElementType SimulinkParameter::GetElementType() const
+SimulinkElementType SimulinkParameter::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Parameter);
 }
 
-IdType SimulinkParameter::GetElementId() const
+IdType SimulinkParameter::GetId() const
 {
-  logger.SendLogMessage(
-    { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
-    { "GetElementId called on unsupported element. Returning 0." });
+  logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
+    { "GetId called on unsupported element. Returning 0." });
   return (IdType)0;
 }
 
 bool SimulinkParameter::Contains(const IdType& id) const
 {
-  logger.SendLogMessage(
-    { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
+  logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
     { "Contains called on unsupported element." });
   return false;
 }
 
-ReturnType SimulinkParameter::Erase(
-  const std::shared_ptr<SimulinkElementBase>& element)
+ReturnType SimulinkParameter::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  logger.SendLogMessage(
-    { Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
+  logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
     { "Erase is not supported." });
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkParameter::Insert(
-  const std::shared_ptr<SimulinkElementBase>& element)
+ReturnType SimulinkParameter::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  logger.SendLogMessage(
-    { Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
+  logger.SendLogMessage({ Logger::MessageType::LOG, Logger::LOG_ERROR, SimulinkParameterLogApp, 0 },
     { "Insert is not supported." });
   return E_NOT_IMPLEMENTED;
 }

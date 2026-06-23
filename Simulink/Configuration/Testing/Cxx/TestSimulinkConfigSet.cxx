@@ -10,7 +10,7 @@ TEST_CASE("ConstructorTest")
   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
   CHECK(strcmp(configCst->getName().c_str(), "MyObject") == 0);
-  CHECK(configCst->GetElementId() == 42);
+  CHECK(configCst->GetId() == 42);
   delete configCst;
 }
 

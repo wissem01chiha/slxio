@@ -10,12 +10,12 @@ SimulinkAtomicSubsystem* SimulinkAtomicSubsystem::New() const
   return new SimulinkAtomicSubsystem();
 }
 
-SimulinkElementType SimulinkAtomicSubsystem::GetElementType() const
+SimulinkElementType SimulinkAtomicSubsystem::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Subsystem);
 }
 
-IdType SimulinkAtomicSubsystem::GetElementId() const
+IdType SimulinkAtomicSubsystem::GetId() const
 {
   return 0;
 }

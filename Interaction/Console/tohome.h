@@ -19,9 +19,9 @@
 #include "dynlib_console.h"
 /*--------------------------------------------------------------------------*/
 /**
-* tohome function
-* @return a boolean
-*/
+ * tohome function
+ * @return a boolean
+ */
 CONSOLE_IMPEXP BOOL tohome(void);
 /*--------------------------------------------------------------------------*/
 #endif /* __TOHOME_H__ */

@@ -16,36 +16,36 @@
 #ifndef __SCILINES_H__
 #define __SCILINES_H__
 
-#include "machine.h" /* C2F */
 #include "BOOL.h"
 #include "dynlib_console.h"
+#include "machine.h" /* C2F */
 
 /**
-* set number of lines and columns to display data
-* @param[in] number of lines
-* @param[in] number of columns
-* @return 0
-*/
+ * set number of lines and columns to display data
+ * @param[in] number of lines
+ * @param[in] number of columns
+ * @return 0
+ */
 CONSOLE_IMPEXP int scilines(int nl, int nc);
 
 /**
-* set default number of lines and columns to display data
-* @return 0
-*/
+ * set default number of lines and columns to display data
+ * @return 0
+ */
 CONSOLE_IMPEXP int scilinesdefault(void);
 
 /**
-* set number of lines and columns to display data (C2F version)
-* @param[in] number of lines
-* @param[in] number of columns
-* @return 0
-*/
-CONSOLE_IMPEXP int C2F(scilines)(int *nl, int *nc);
+ * set number of lines and columns to display data (C2F version)
+ * @param[in] number of lines
+ * @param[in] number of columns
+ * @return 0
+ */
+CONSOLE_IMPEXP int C2F(scilines)(int* nl, int* nc);
 
 /**
-* set default number of lines and columns to display data (C2F version)
-* @return 0
-*/
+ * set default number of lines and columns to display data (C2F version)
+ * @return 0
+ */
 CONSOLE_IMPEXP int C2F(scilinesdefault)(void);
 
 #endif /* __SCILINES_H__ */
@@ -57,9 +57,9 @@ CONSOLE_IMPEXP int C2F(scilinesdefault)(void);
 #include "dynlib_console.h"
 
 /**
-* do a "more"
-* @return 0 or 1
-*/
+ * do a "more"
+ * @return 0 or 1
+ */
 CONSOLE_IMPEXP int linesmore(void);
 
 #endif /*  __MORE_H__ */
@@ -74,6 +74,6 @@ CONSOLE_IMPEXP int linesmore(void);
  * @param string whose number of line will be counted
  * @return number of line used by the string.
  */
-int getNbrLine(wchar_t * str);
+int getNbrLine(wchar_t* str);
 
 #endif /* !_GETNBRLINE_H */

@@ -45,13 +45,11 @@ const char* SimulinkConfigSet::getParameter(const char* name)
     // l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
-  std::shared_ptr<SimulinkParameter> cfgParam =
-    getParameterObject(std::string(name));
+  std::shared_ptr<SimulinkParameter> cfgParam = getParameterObject(std::string(name));
   return cfgParam->getValue();
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(
-  const std::string& name)
+std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(const std::string& name)
 {
   auto param = object->getParameter(name);
   if (param)
@@ -111,9 +109,9 @@ std::shared_ptr<SimulinkObject> SimulinkConfigSet::getObject() const
   return object;
 }
 
-IdType SimulinkConfigSet::GetElementId() const
+IdType SimulinkConfigSet::GetId() const
 {
-  return object->GetElementId();
+  return object->GetId();
 }
 
 ReturnType SimulinkConfigSet::saveToFile(const char* path)

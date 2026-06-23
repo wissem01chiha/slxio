@@ -11,7 +11,8 @@
 #include "SimulinkParserBase.h"
 #include <string>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief base parser for encoded data type strings

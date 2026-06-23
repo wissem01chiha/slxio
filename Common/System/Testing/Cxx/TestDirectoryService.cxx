@@ -17,8 +17,7 @@ public:
 private:
 };
 
-TEST_CASE_FIXTURE(
-  DirectoryServiceTestFixture, "Test Static GetWorkingDirectory Exist")
+TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test Static GetWorkingDirectory Exist")
 {
   int err = 0;
   Directory d = DirectoryService::GetWorkingDirectory(&err);
@@ -26,8 +25,7 @@ TEST_CASE_FIXTURE(
   CHECK(err == 0);
 }
 
-TEST_CASE_FIXTURE(
-  DirectoryServiceTestFixture, "Test Static CreateTemporaryDirectory Exist")
+TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test Static CreateTemporaryDirectory Exist")
 {
   int err = 0;
   auto d = DirectoryService::CreateTemporaryDirectory(&err);
@@ -35,8 +33,7 @@ TEST_CASE_FIXTURE(
   CHECK(d->Exist() == true);
 }
 
-TEST_CASE_FIXTURE(
-  DirectoryServiceTestFixture, "Test Prefixed CreatePrefixedTemporaryDirectory")
+TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test Prefixed CreatePrefixedTemporaryDirectory")
 {
 
   int err = 0;
@@ -45,13 +42,12 @@ TEST_CASE_FIXTURE(
   CHECK(d->Exist() == true);
 }
 
-TEST_CASE_FIXTURE(
-  DirectoryServiceTestFixture, "Test CreateDirectoryStructure Valid")
+TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test CreateDirectoryStructure Valid")
 {
   int err = 0;
   auto d = DirectoryService::GetWorkingDirectory(&err);
-  std::string subdirpath = d.GetDirectoryPath() + PATH_SEP + "simulink" +
-    PATH_SEP + "plugin" + PATH_SEP + "rels" + PATH_SEP;
+  std::string subdirpath = d.GetDirectoryPath() + PATH_SEP + "simulink" + PATH_SEP + "plugin" +
+    PATH_SEP + "rels" + PATH_SEP;
 
   int error = 0;
   auto dir = DirectoryService::CreateDirectoryStructure(subdirpath, &error);
@@ -67,9 +63,6 @@ TEST_CASE_FIXTURE(
   CHECK(r == 0);
 }
 
-TEST_CASE_FIXTURE(
-  DirectoryServiceTestFixture, "Test Serlise Directory to String")
-{
-}
+TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test Serlise Directory to String") {}
 SLXIO_ABI_NAMESPACE_END
 };

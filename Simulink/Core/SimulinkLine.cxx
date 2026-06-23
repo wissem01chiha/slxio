@@ -20,8 +20,7 @@ SimulinkLine::SimulinkLine(const SimulinkLine& other)
   this->SourcePort = other.SourcePort;
 }
 
-SimulinkLine::SimulinkLine(
-  std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
+SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
   : DestPort(pIn)
   , SourcePort(pOut)
   , logger(Logger::GetInstance())
@@ -36,13 +35,12 @@ SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort)
   DestPort = std::make_shared<SimulinkPort>(destPort);
 }
 
-SimulinkElementType SimulinkLine::GetElementType() const
+SimulinkElementType SimulinkLine::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
-ReturnType SimulinkLine::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -65,8 +63,7 @@ ReturnType SimulinkLine::RemoveElement(
   return E_OK;
 }
 
-ReturnType SimulinkLine::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -89,7 +86,7 @@ ReturnType SimulinkLine::AddElement(
   return E_OK;
 }
 
-IdType SimulinkLine::GetElementId() const
+IdType SimulinkLine::GetId() const
 {
   return Id;
 }

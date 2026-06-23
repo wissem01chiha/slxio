@@ -22,7 +22,7 @@ std::string SimulinkModelType::ToString(SimulinkModelType::Type type)
   }
 }
 
-SimulinkModelType::Type SimulinkModelType::GetElementType() const
+SimulinkModelType::Type SimulinkModelType::GetType() const
 {
   return type;
 }

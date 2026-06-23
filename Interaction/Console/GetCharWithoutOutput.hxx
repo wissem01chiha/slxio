@@ -20,8 +20,8 @@
 
 extern "C"
 {
-#include "getScilabJavaVM.h"
 #include "GetCharWithoutOutput.h"
+#include "getScilabJavaVM.h"
 } /* extern "C" */
 
 /*--------------------------------------------------------------------------*/

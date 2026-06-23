@@ -158,8 +158,7 @@ private:
   Logger(const Logger&) = delete;
   ~Logger() = default;
   Logger::MessageLevelType InternalVerbosityLevel;
-  Logger::MessageLevelType DefaultInternalVerbosityLevel =
-    Logger::MessageLevelType::LOG_OFF;
+  Logger::MessageLevelType DefaultInternalVerbosityLevel = Logger::MessageLevelType::LOG_OFF;
   Logger::LogFileModeType FileModeType;
   Logger::LogFileModeType DefaultFileModeType = Logger::LogFileModeType::WRITE;
   std::vector<LogMessage> LogBuffer;

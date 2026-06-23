@@ -10,7 +10,8 @@
 #include "SimulinkParserBase.h"
 #include "SimulinkSignal.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkSignal data object

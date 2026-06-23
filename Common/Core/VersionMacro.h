@@ -16,7 +16,6 @@
 #define SLXIO_VERSION_PATCH 0
 #endif
 
-#define SLXIO_VERSION_NUMBER                                              \
-  v##SLXIO_VERSION_MAJOR##_##SLXIO_VERSION_MINOR##_##SLXIO_VERSION_PATCH
+#define SLXIO_VERSION_NUMBER v010
 
 #endif // VERSIONMACRO_H

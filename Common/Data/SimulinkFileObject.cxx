@@ -25,8 +25,7 @@ void* SimulinkFileObject::GetImplDataObject() const
 
 bool SimulinkFileObject::operator==(const DataObject& other)
 {
-  return ImplDataObject->Name ==
-    static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
+  return ImplDataObject->Name == static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
 }
 
 std::string SimulinkFileObject::ToString() const
@@ -41,8 +40,7 @@ std::string SimulinkFileObject::ToString() const
       << "revision=\"" << ImplDataObject->Revision << "\", "
       << "version=\"" << ImplDataObject->Version << "\", "
       << "contentType=\"" << ImplDataObject->ContentType << "\", "
-      << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName
-      << "\", "
+      << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName << "\", "
       << "matlabRelease=\"" << ImplDataObject->MatlabRelease << "\", "
       << "matlabVersion=\"" << ImplDataObject->MatlabVersion << "\""
       << " }";

@@ -64,8 +64,7 @@ ReturnType File::Write(std::vector<std::string>& message)
 ReturnType File::Open()
 {
   uv_fs_t req;
-  int err = uv_fs_open(
-    uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
+  int err = uv_fs_open(uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -74,8 +73,7 @@ ReturnType File::Open()
   FileDescriptor = err;
 
   uv_fs_t statReq;
-  int statErr =
-    uv_fs_fstat(uv_default_loop(), &statReq, FileDescriptor, nullptr);
+  int statErr = uv_fs_fstat(uv_default_loop(), &statReq, FileDescriptor, nullptr);
   if (statErr >= 0)
   {
     uv_stat_t* statbuf = static_cast<uv_stat_t*>(statReq.ptr);
@@ -92,11 +90,10 @@ ReturnType File::Read()
 
   InternalBuffer.resize(4096);
   uv_fs_t req;
-  uv_buf_t iov = uv_buf_init(
-    InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
+  uv_buf_t iov =
+    uv_buf_init(InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
 
-  int err =
-    uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
+  int err = uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -119,11 +116,9 @@ ReturnType File::Write(const char* message)
 
   uv_fs_t req;
   size_t len = strlen(message);
-  uv_buf_t iov =
-    uv_buf_init(const_cast<char*>(message), static_cast<unsigned int>(len));
+  uv_buf_t iov = uv_buf_init(const_cast<char*>(message), static_cast<unsigned int>(len));
 
-  int err =
-    uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
+  int err = uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -174,8 +169,7 @@ ReturnType File::Move(const Directory& directory)
   path += GetFileName();
 
   uv_fs_t req;
-  int err = uv_fs_rename(
-    uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
+  int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -243,8 +237,7 @@ ReturnType File::Rename(const std::string& filename)
     return E_INVALID_ARGUMENT;
 
   uv_fs_t req;
-  int err = uv_fs_rename(
-    uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
+  int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)

@@ -30,7 +30,7 @@ public:
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
   SimulinkPortType getPortType();
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /// @brief Get a string representation of this port.
   std::string ToString() const override;
@@ -40,8 +40,7 @@ public:
    * @param element The element to remove (must be a SimulinkLine).
    * @return ReturnType indicating success or failure.
    */
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /**
    * @brief Add a line to this port.
@@ -51,7 +50,7 @@ public:
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get the ID of the linked block.
-  IdType GetElementId() const override;
+  IdType GetId() const override;
 
   /**
    *  @brief Compare the given ID with this port's ID.

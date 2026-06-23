@@ -2,7 +2,8 @@
 #include "SimulinkObjectParser.h"
 #include "SlxParameter.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkArrayParser::setInputData(const xmlNodePtr data)
@@ -10,13 +11,15 @@ ReturnType SimulinkArrayParser::setInputData(const xmlNodePtr data)
 
   if (data == nullptr)
   {
-    //l.log(Logger::V_ERROR, "SimulinkArrayParser:: null node pointer received");
+    // l.log(Logger::V_ERROR, "SimulinkArrayParser:: null node pointer
+    // received");
     return E_PARAMETER_NULL_PTR;
   }
 
   if (data->name == nullptr)
   {
-    //l.log(Logger::V_ERROR, "SimulinkArrayParser:: invalid xmlNodePtr received");
+    // l.log(Logger::V_ERROR, "SimulinkArrayParser:: invalid xmlNodePtr
+    // received");
     return E_INVALID_ARGUMENT;
   }
 
@@ -32,8 +35,7 @@ ReturnType SimulinkArrayParser::parse()
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
   {
     std::string attrName = reinterpret_cast<const char*>(attr->name);
-    std::string attrValue =
-      reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
+    std::string attrValue = reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
 
     if (attrName == SlxParameter::PARAM_PropName)
     {
@@ -51,16 +53,14 @@ ReturnType SimulinkArrayParser::parse()
 
   ptr = std::make_shared<SimulinkArray>(type, name, dimension);
 
-  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
-    nodePtr_ = nodePtr_->next)
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
   {
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0)
     {
 
-      std::unique_ptr<SimulinkObjectParser> subObjParserPtr(
-        new SimulinkObjectParser());
+      std::unique_ptr<SimulinkObjectParser> subObjParserPtr(new SimulinkObjectParser());
       ReturnType subInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
@@ -69,9 +69,9 @@ ReturnType SimulinkArrayParser::parse()
       ReturnType subObjParseStatus = subObjParserPtr->parse();
       if (subObjParseStatus != E_OK)
       {
-        //l.log(Logger::V_ERROR,
+        // l.log(Logger::V_ERROR,
           "SimulinkArrayParser :: fail to build subObject element");
-        return subObjParseStatus;
+          return subObjParseStatus;
       }
       ptr->AddElement(subObjParserPtr->getOutputData());
     }
@@ -80,8 +80,7 @@ ReturnType SimulinkArrayParser::parse()
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
     {
 
-      std::unique_ptr<SimulinkArrayParser> subArrParserPtr(
-        new SimulinkArrayParser());
+      std::unique_ptr<SimulinkArrayParser> subArrParserPtr(new SimulinkArrayParser());
       ReturnType subInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
@@ -90,9 +89,9 @@ ReturnType SimulinkArrayParser::parse()
       ReturnType subArrParseStatus = subArrParserPtr->parse();
       if (subArrParseStatus != E_OK)
       {
-        //l.log(Logger::V_ERROR,
+        // l.log(Logger::V_ERROR,
           "SimulinkArrayParser :: fail to build subArray element");
-        return subArrParseStatus;
+          return subArrParseStatus;
       }
       ptr->AddElement(subArrParserPtr->getOutputData());
     }

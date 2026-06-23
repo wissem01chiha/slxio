@@ -11,21 +11,22 @@
 class SimulinkArray;
 class Logger;
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkArrayWriter
  * @brief Abstract Serliser of SimulinkArray object to a file or stream
  */
-class SLXIO_APIEXPORT SimulinkArrayWriter
-  : public SimulinkWriter
+class SLXIO_APIEXPORT SimulinkArrayWriter : public SimulinkWriter
 {
 public:
   SimulinkArrayWriter* New() override;
   ReturnType Write() override;
   ReturnType SetInputData(const DataObject& data) override;
   ReturnType SetInputData(IdType idx, const DataObject& data) override;
+
 private:
   DataObject& InputDataObject;
 };

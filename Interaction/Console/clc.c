@@ -14,69 +14,70 @@
  *
  */
 /*--------------------------------------------------------------------------*/
-#include <stdlib.h>
-#include <stdio.h>
 #include "clc.h"
-#include "configvariable_interface.h"
 #include "ClearConsole.h"
 #include "ClearConsolePart.h"
+#include "configvariable_interface.h"
+#include <stdio.h>
+#include <stdlib.h>
 #ifdef _MSC_VER
-#include "windows/clrscr_nw.h"
 #include "windows/clrscrPart_nw.h"
+#include "windows/clrscr_nw.h"
 #else
 #include "others/clrscr_nw.h"
 #endif
 /*--------------------------------------------------------------------------*/
 BOOL clc(int nblines)
 {
-    BOOL bOK = FALSE;
-    if ( getScilabMode() != SCILAB_STD )
+  BOOL bOK = FALSE;
+  if (getScilabMode() != SCILAB_STD)
+  {
+    /* console C */
+    if (nblines != -1)
     {
-        /* console C */
-        if (nblines != -1)
-        {
-#ifdef  _MSC_VER
-            clrscrPart_nw(nblines);
-            if (getPromptMode() != 2) /* Add extra newline for other modes besides mode 2 */
-            {
-                printf("\n");
-            }
-            bOK = TRUE;
+#ifdef _MSC_VER
+      clrscrPart_nw(nblines);
+      if (getPromptMode() != 2) /* Add extra newline for other modes besides mode 2 */
+      {
+        printf("\n");
+      }
+      bOK = TRUE;
 #else
-            if (getPromptMode() == 2) /* Check for output mode(2) and move the cursor up for extra 1 line */
-            {
-                printf("\033[%dA\033[J\033[A", nblines + 1);
-            }
-            else
-            {
-                printf("\033[%dA\033[J", nblines + 1);
-            }
-            bOK = TRUE;
+      if (getPromptMode() == 2) /* Check for output mode(2) and move the cursor
+                                   up for extra 1 line */
+      {
+        printf("\033[%dA\033[J\033[A", nblines + 1);
+      }
+      else
+      {
+        printf("\033[%dA\033[J", nblines + 1);
+      }
+      bOK = TRUE;
 #endif
-        }
-        else
-        {
-            clrscr_nw();
-            bOK = TRUE;
-        }
     }
     else
     {
-        /* Java Console*/
-        if ( nblines == -1) /* Clear the whole console window */
-        {
-            bOK = ClearConsole();
-        }
-        else if (nblines >= 0) /* Clear a part of the console window */
-        {
-            bOK = ClearConsolePart(nblines);
-        }
-        else
-        {
-            /* error */
-            bOK = FALSE;
-        }
+      clrscr_nw();
+      bOK = TRUE;
     }
-    return bOK;
+  }
+  else
+  {
+    /* Java Console*/
+    if (nblines == -1) /* Clear the whole console window */
+    {
+      bOK = ClearConsole();
+    }
+    else if (nblines >= 0) /* Clear a part of the console window */
+    {
+      bOK = ClearConsolePart(nblines);
+    }
+    else
+    {
+      /* error */
+      bOK = FALSE;
+    }
+  }
+  return bOK;
 }
 /*--------------------------------------------------------------------------*/

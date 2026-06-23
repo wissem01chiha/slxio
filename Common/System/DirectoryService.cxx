@@ -100,8 +100,7 @@ std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(
   return std::make_shared<Directory>(path);
 }
 
-std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(
-  int* error)
+std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(int* error)
 {
   uv_fs_t req;
   *error = uv_fs_mkdtemp(uv_default_loop(), &req, "XXXXXX", nullptr);

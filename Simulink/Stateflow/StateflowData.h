@@ -17,8 +17,7 @@ public:
   /** Remove this data object from the model. */
   void RemoveElement()
   {
-    CCSMPre.isFalse(
-      getParent() == null, "Data object has no parent to be removed from.");
+    CCSMPre.isFalse(getParent() == null, "Data object has no parent to be removed from.");
     getParent().removeData(this);
   }
 

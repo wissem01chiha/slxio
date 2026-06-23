@@ -17,9 +17,9 @@
 #define __CLRSCRPART_NW_H__
 
 /**
-* Clear a part of screen nw mode
-* @param[in] nblines to remove
-*/
+ * Clear a part of screen nw mode
+ * @param[in] nblines to remove
+ */
 void clrscrPart_nw(int nblines);
 
 #endif /* __CLRSCRPART_NW_H__ */

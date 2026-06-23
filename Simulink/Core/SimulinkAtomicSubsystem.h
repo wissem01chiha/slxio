@@ -25,23 +25,20 @@ public:
   SimulinkAtomicSubsystem() = default;
 
   SimulinkAtomicSubsystem* New() const override;
-  SimulinkElementType GetElementType() const override;
-  IdType GetElementId() const override;
+  SimulinkElementType GetType() const override;
+  IdType GetId() const override;
   std::string ToString() const override;
   ReturnType Erase(const IdType& id) override;
-  ReturnType Erase(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
   std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
   bool Contains(const IdType& id) const override;
   UInt32 Size() const override;
   bool Empty() const override;
   void Clear() override;
-  ReturnType Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
 private:
-
 };
 
 SLXIO_ABI_NAMESPACE_END

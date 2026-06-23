@@ -9,7 +9,6 @@
 #include "PlatformTypes.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkParameter.h"
 #include "SimulinkPortType.h"
 #include <map>
 #include <memory>
@@ -19,6 +18,7 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Logger;
+class SimulinkParameter;
 
 /**
  * @class SimulinkBlock
@@ -34,36 +34,47 @@ public:
   /** Constructor with block type.*/
   explicit SimulinkBlock(SimulinkBlockType::Type blockType);
 
-  /**
-   * Constructor from a Pointer to a Block*/
-  explicit SimulinkBlock(SimulinkBlockType* blockType);
-
   /** Constructor with block type, name, and Id.*/
-  SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName,
-    const IdType& blockId);
+  SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName, const IdType& blockId);
 
-  /**Return the block unqiue id */
-  IdType GetElementId() const override;
-
-  /**.override from SimulinkElmentBase*/
-  SimulinkElementType GetElementType() const override;
-
-
-  /** Serliser the block to string*/
-  std::string ToString() const override;
-
-ReturnType Erase(const IdType& id) override;
-  ReturnType Erase(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
-  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+  /** Accesses a child element by index with bound checking */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
 
-  UInt32 Size() const override;
-  bool Empty() const override;
-  void Clear() override;
-  ReturnType Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
 
+  /** Returns the number of child elements. */
+  UInt32 Size() const override;
+
+  /** Returns true if no child elements exist. */
+  bool Empty() const override;
+
+  /** Removes all child elements. */
+  void Clear() override;
+
+  /** Inserts a new child element. */
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
+  bool Contains(const IdType& id) const override;
+
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
+
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
+
+  /** Returns a string representation of this element. */
+  std::string ToString() const override;
 
   /** Retrieve the block type of the Simulink block.*/
   SimulinkBlockType GetBlockType();
@@ -74,30 +85,21 @@ ReturnType Erase(const IdType& id) override;
   /** Get the Parent block at the hiraciy .*/
   std::shared_ptr<SimulinkBlock> GetBlockParent();
 
-  /**
-   * Return a pointer to a given parameter by name, if not
-   * found a or the blcok has not paramters an empty parameter returned.
-   */
-  std::shared_ptr<SimulinkParameter> GetParameter(const char* parameterName);
+  /** Return a pointer to a given parameter by name, if not
+   * found a or the blcok has not paramters an empty parameter returned. */
+  std::shared_ptr<SimulinkParameter> GetBlockParameter(const char* parameterName);
 
-  /**
-   * Sets the block Id to a given one, shoule not used by public users, only
-   * for internal Peraser
-   */
+  /** Sets the block Id to a given one, shoule not used by public users, only
+   * for internal Peraser */
   void SetBlockId(const IdType& blockId);
 
-  /**
-   * .Set the block name
-   */
+  /** Set the block name */
   void SetBlockName(const std::string& blockName);
 
   /** Sets the bclok explict type.*/
   void SetBlockType(SimulinkBlockType::Type blockType);
 
-  /** Check whatever a blcok contains an other block given it unqiue id.*/
-  bool Contains(const IdType& blockId) const override;
-
-  /**Return the class internal logger object*/
+  /** Return the class internal logger object*/
   Logger& GetLogger();
 
 private:

@@ -17,8 +17,8 @@
 #ifndef __INTIALIZECONSOLE_H__
 #define __INTIALIZECONSOLE_H__
 
-#include "dynlib_console.h"
 #include "BOOL.h"
+#include "dynlib_console.h"
 
 CONSOLE_IMPEXP BOOL InitializeConsole(void);
 

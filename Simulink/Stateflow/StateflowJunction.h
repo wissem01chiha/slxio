@@ -33,7 +33,7 @@ private:
   }
 
   /// @brief
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /// @brief Return
   std::string ToString() const override;

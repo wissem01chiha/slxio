@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ErrorHandler
- * @brief Error Handling Class
+ * @brief Main Error Handling Class
  */
 class SLXIO_APIEXPORT ErrorHandler final
 {

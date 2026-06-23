@@ -17,8 +17,8 @@
 #define __CLRSCR_NW_H__
 
 /**
-* Clear screen nw mode
-*/
+ * Clear screen nw mode
+ */
 void clrscr_nw(void);
 
 #endif /* __CLRSCR_NW_H__ */

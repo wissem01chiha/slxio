@@ -6,11 +6,9 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "CoderInfo.h"
-#include "ErrorCode.h"
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
-#include "SimulinkElementBase.h"
+#include "SimulinkParameterBase.h"
 #include <string>
 #include <vector>
 
@@ -19,12 +17,13 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Logger;
+class CoderInfo;
 
 /**
  * @class SimulinkParameter
  * @brief A Simulink Parameter object.
  */
-class SLXIO_APIEXPORT SimulinkParameter : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkParameter : public SimulinkParameterBase
 {
 public:
   /** Default constructor */
@@ -45,7 +44,7 @@ public:
   explicit SimulinkParameter(const char* val);
 
   /// @brief get the resolved parameter SimulinkDataType
-  SimulinkDataType GetDataType();
+  SimulinkDataType GetDataType() override;
 
   /// @brief set the parameter data type
   /// @warning this function overrites the default Min, Max values
@@ -87,7 +86,7 @@ public:
   UInt32 getValueAsString(std::string& strval);
 
   /// @brief get parameter dimensions
-  std::vector<UInt16> GetDimensions();
+  std::vector<UInt16> GetDimensions() override;
 
   /// @brief return current parameter name
   const char* getName();
@@ -95,35 +94,16 @@ public:
   /// @brief modify parameter name, no backup used
   UInt32 setName(const char* name);
 
-  SimulinkElementType GetElementType() const override;
-
-  /// @brief by default parameter do not have ids
-  /// when called dipslay a waring , fallback to 0
-  IdType GetElementId() const override;
-
-  /// @brief no logic return always true, an a warning message
-  bool Contains(const IdType& id) const override;
-
   std::string ToString() const override;
 
-  /// @brief Parameters cannot remove child elements. Returns
-  /// E_NOT_IMPLEMENTED.
-  ReturnType Erase(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
-
-  /// @brief Parameters cannot add child elements. Returns
-  /// E_NOT_IMPLEMENTED.
-  ReturnType Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
-
   /// @brief get code generation data struct
-  CoderInfo GetCoderInfo();
+  std::shared_ptr<CoderInfo> GetCoderInfo() override;
 
   /// @brief Parameter minumin value
-  Float32 GetMin();
+  Float32 GetMin() override;
 
   /// @brief Parameter maxiumum value
-  Float32 GetMax();
+  Float32 GetMax() override;
 
   /* Get the class internal logger*/
   Logger& GetLogger() const;
@@ -142,7 +122,7 @@ private:
   Float32 Min;
   Float32 Max;
   std::vector<UInt16> Dimensions;
-  CoderInfo coder;
+  std::shared_ptr<CoderInfo> coder;
 };
 
 SLXIO_ABI_NAMESPACE_END

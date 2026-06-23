@@ -1,5 +1,5 @@
-#include "Archive.h"
 #include "ArchiveManager.h"
+#include "Archive.h"
 #include "ErrorCode.h"
 
 namespace slxio
@@ -47,8 +47,7 @@ bool ArchiveManager::IsArchiveOpened(const std::string& archivename) const
 {
   for (const auto& archive : ArchiveBuffer)
   {
-    if (archive &&
-      archive->GetArchiveDirectory().GetDirectoryName() == archivename)
+    if (archive && archive->GetArchiveDirectory().GetDirectoryName() == archivename)
     {
       return true;
     }

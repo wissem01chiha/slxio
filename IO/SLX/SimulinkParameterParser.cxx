@@ -4,30 +4,31 @@
 #include <cstring>
 #include <iostream>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkParameterParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    //l.log(
+    // l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: null node pointer received");
-    return E_PARAMETER_NULL_PTR;
+      return E_PARAMETER_NULL_PTR;
   }
 
   if (data->type != XML_ELEMENT_NODE)
   {
-    //l.log(
+    // l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: non-element node received");
-    return E_INVALID_ARGUMENT;
+      return E_INVALID_ARGUMENT;
   }
 
   if (data->name == nullptr)
   {
-    //l.log(
+    // l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: invalid xmlNodePtr received");
-    return E_INVALID_ARGUMENT;
+      return E_INVALID_ARGUMENT;
   }
 
   this->dataObject = data;
@@ -82,12 +83,11 @@ ReturnType SimulinkParameterParser::parse()
   std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
     std::make_unique<SimulinkDataTypeParser>();
 
-  ReturnType dataTypeInputStatus =
-    dataTypeParserPtr->setInputData(paramClassStr);
+  ReturnType dataTypeInputStatus = dataTypeParserPtr->setInputData(paramClassStr);
 
   if (dataTypeInputStatus != E_OK)
   {
-    //l.log(Logger::V_ERROR,
+    // l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to set input data for data "
       "type "
       "parser");
@@ -95,11 +95,10 @@ ReturnType SimulinkParameterParser::parse()
   ReturnType dataTypeParseStatus = dataTypeParserPtr->parse();
   if (dataTypeParseStatus != E_OK)
   {
-    //l.log(Logger::V_ERROR,
+    // l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to parse data type string");
   }
-  std::shared_ptr<SimulinkDataType> dataTypePtr =
-    dataTypeParserPtr->getOutputData();
+  std::shared_ptr<SimulinkDataType> dataTypePtr = dataTypeParserPtr->getOutputData();
   if (dataTypePtr != nullptr)
   {
     ptr->setDataType(*dataTypePtr);

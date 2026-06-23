@@ -2,14 +2,15 @@
 #include <cstring>
 #include <unordered_map>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkDataTypeParser::setInputData(const std::string data)
 {
   if (data.empty())
   {
-    //l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
+    // l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
     return E_INVALID_ARGUMENT;
   }
   dataObject = data;
@@ -21,9 +22,9 @@ ReturnType SimulinkDataTypeParser::setInputData(const char* data)
 
   if (data == nullptr || strlen(data) == 0)
   {
-    //l.log(Logger::V_ERROR,
+    // l.log(Logger::V_ERROR,
       "SimulinkDataTypeParser:: null or empty input data received");
-    return E_INVALID_ARGUMENT;
+      return E_INVALID_ARGUMENT;
   }
   dataObject = std::string(data);
   return E_OK;
@@ -44,10 +45,10 @@ ReturnType SimulinkDataTypeParser::parse()
     ptr = std::make_shared<SimulinkDataType>(it->second);
     return E_OK;
   }
-  //l.log(Logger::V_ERROR,
+  // l.log(Logger::V_ERROR,
     "SimulinkDataTypeParser:: unrecognized data type string: " + dataObject);
-  ptr = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
-  return E_INVALID_ARGUMENT;
+    ptr = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
+    return E_INVALID_ARGUMENT;
 }
 
 SLXIO_ABI_NAMESPACE_END

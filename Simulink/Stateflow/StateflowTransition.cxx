@@ -7,26 +7,21 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StateflowTransition::StateflowTransition(
-  const std::shared_ptr<StateflowNodeBase>& dst)
+StateflowTransition::StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst)
   : dst(dst)
 {
   assert(dst && "Destination may not be null");
-  dst->addInTransition(
-    std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
+  dst->addInTransition(std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
 }
 
 StateflowTransition::StateflowTransition(
-  const std::shared_ptr<StateflowNodeBase>& src,
-  const std::shared_ptr<StateflowNodeBase>& dst)
+  const std::shared_ptr<StateflowNodeBase>& src, const std::shared_ptr<StateflowNodeBase>& dst)
   : src(src)
   , dst(dst)
 {
   assert(src && dst && "Neither src nor dst may be null");
-  src->addOutTransition(
-    std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
-  dst->addInTransition(
-    std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
+  src->addOutTransition(std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
+  dst->addInTransition(std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
 }
 
 std::shared_ptr<StateflowNodeBase> StateflowTransition::getSrc() const

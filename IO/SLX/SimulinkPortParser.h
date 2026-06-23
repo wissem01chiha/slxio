@@ -10,7 +10,8 @@
 #include "SimulinkParserBase.h"
 #include "SimulinkPort.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,8 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * is implemented in a non-static way to match the implementation of
  * SimulinkLineParser.
  */
-class SLXIO_APIEXPORT SimulinkPortParser final
-  : public SimulinkParserBase<xmlNodePtr, SimulinkPort>
+class SLXIO_APIEXPORT SimulinkPortParser final : public SimulinkParserBase<xmlNodePtr, SimulinkPort>
 {
 public:
   SimulinkPortParser() = default;

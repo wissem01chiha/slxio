@@ -7,7 +7,6 @@
 #include "AbiNamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkParameter.h"
 #include <memory>
 
 namespace slxio
@@ -15,11 +14,12 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Logger;
+class SimulinkParameter;
 
 /**
  * @class SimulinkArray
  * @brief Base class for Simulink Array.
- * An slx Array can contain nested arrays as well as objects derived
+ * A Simulink Array can contain nested arrays as well as objects derived
  * from the SimulinkObject class. for object references, it maintains
  * a list of object Ids to avoid mutable inclusion, forward
  * declarations, and compiler conflicts.
@@ -36,55 +36,56 @@ public:
   /** Construct a SimulinkArray with type, name, and dimension. */
   SimulinkArray(std::string type, std::string name, std::string dimension);
 
-  /** Return the element type. */
-  SimulinkElementType GetElementType() const override;
-
-  /** Return the array as a string. */
-  std::string ToString() const override;
-
-  /** Check if the array contains a subarray with the given Id. */
-  bool Contains(const IdType& id) const override;
-
-  /** Return the number of elements in the array. */
-  UInt32 Size() const override;
-
-  /** Return true if the array is empty. */
-  bool Empty() const override;
-
-  /** Remove all elements from the array. */
-  void Clear() override;
-
-  /** Insert an element into the array. */
-  ReturnType Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
-
-  /** Erase an element by Id. */
-  ReturnType Erase(const IdType& id) override;
-
-  /** Erase an element by reference. */
-  ReturnType Erase(
-    const std::shared_ptr<SimulinkElementBase>& element) override;
-
-  /** Find an element by Id. */
-  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
-
-  /** Return the element at the specified index. */
+  /** Accesses a child element by index with bound checking */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
 
-  /** Return the array's element Id. */
-  IdType GetElementId() const override;
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
+
+  /** Returns the number of child elements. */
+  UInt32 Size() const override;
+
+  /** Returns true if no child elements exist. */
+  bool Empty() const override;
+
+  /** Removes all child elements. */
+  void Clear() override;
+
+  /** Inserts a new child element. */
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
+  bool Contains(const IdType& id) const override;
+
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
+
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
+
+  /** Returns a string representation of this element. */
+  std::string ToString() const override;
 
   /** Return the array name. */
-  std::string GetArrayName();
+  std::string GetName() override;
 
   /** Return the array dimension. */
-  std::string GetArrayDimension();
+  std::string GetDimension() override;
 
   /** Return the array type. */
   std::string GetArrayType();
 
   /** Return the parameter with the given name. */
-  std::shared_ptr<SimulinkParameter> GetArrayParameter(std::string name);
+  std::shared_ptr<SimulinkParameter> GetParameter(std::string name) override;
 
   /** Return the class logger. */
   Logger& GetLogger();

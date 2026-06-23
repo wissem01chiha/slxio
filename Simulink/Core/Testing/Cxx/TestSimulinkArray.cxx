@@ -19,9 +19,9 @@ TEST_CASE("CopyConstructorTest")
 
   // SimulinkArray copy(*original);
 
-  // //CHECK(copy.GetElementType() == original->GetElementType());
+  // //CHECK(copy.GetType() == original->GetType());
   // CHECK(copy.ToString() == original->ToString());
-  // CHECK(copy.GetElementId() == original->GetElementId());
+  // CHECK(copy.GetId() == original->GetId());
 }
 
 TEST_CASE("AddArrayTest")

@@ -1,7 +1,7 @@
 #include "SimulinkObject.h"
-#include "SimulinkParameter.h"
-#include "SimulinkArray.h"
 #include "Logger.h"
+#include "SimulinkArray.h"
+#include "SimulinkParameter.h"
 #include <algorithm>
 #include <cstring>
 #include <sstream>
@@ -19,8 +19,7 @@ SimulinkObject::SimulinkObject()
   id = 0;
 }
 
-SimulinkObject::SimulinkObject(
-  IdType id, std::string name, std::string className)
+SimulinkObject::SimulinkObject(IdType id, std::string name, std::string className)
   : id(id)
   , propName(name)
   , className(className)
@@ -57,12 +56,12 @@ SimulinkObject::SimulinkObject(const SimulinkObject& other)
   this->parameters = other.parameters;
 }
 
-SimulinkElementType SimulinkObject::GetElementType() const
+SimulinkElementType SimulinkObject::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Object);
 }
 
-IdType SimulinkObject::GetElementId() const
+IdType SimulinkObject::GetId() const
 {
   return id;
 }
@@ -110,8 +109,7 @@ std::string SimulinkObject::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkObject::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   if (element == nullptr)
   {
@@ -119,8 +117,8 @@ ReturnType SimulinkObject::RemoveElement(
     return E_PARAMETER_NULL_PTR;
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Array) ||
-    element->GetElementType().isA(SimulinkElementType::Object))
+  if (element->GetType().isA(SimulinkElementType::Array) ||
+    element->GetType().isA(SimulinkElementType::Object))
   {
     // l.log(Logger::V_ERROR,
     //   "Cannot remove a Simulink element of a different "
@@ -128,7 +126,7 @@ ReturnType SimulinkObject::RemoveElement(
     return E_OK;
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Parameter))
+  if (element->GetType().isA(SimulinkElementType::Parameter))
   {
 
     std::shared_ptr<SimulinkParameter> paramPtr =
@@ -147,41 +145,36 @@ ReturnType SimulinkObject::RemoveElement(
       if (strcmp(param->getName(), paramPtr->getName()) == 0)
       {
         parameters.erase(
-          std::remove(parameters.begin(), parameters.end(), param),
-          parameters.end());
+          std::remove(parameters.begin(), parameters.end(), param), parameters.end());
       }
     }
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Object))
+  if (element->GetType().isA(SimulinkElementType::Object))
   {
 
-    std::shared_ptr<SimulinkObject> objPtr =
-      std::dynamic_pointer_cast<SimulinkObject>(element);
+    std::shared_ptr<SimulinkObject> objPtr = std::dynamic_pointer_cast<SimulinkObject>(element);
 
     for (const auto& obj : objects)
     {
-      if (element->GetElementId() == obj->GetElementId())
+      if (element->GetId() == obj->GetId())
       {
-        objects.erase(
-          std::remove(objects.begin(), objects.end(), obj), objects.end());
+        objects.erase(std::remove(objects.begin(), objects.end(), obj), objects.end());
       }
     }
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Array))
+  if (element->GetType().isA(SimulinkElementType::Array))
   {
 
-    std::shared_ptr<SimulinkArray> arrayPtr =
-      std::dynamic_pointer_cast<SimulinkArray>(element);
+    std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
 
     for (const auto& arr : arrays)
     {
 
       if (arr->getName() == arrayPtr->getName())
       {
-        arrays.erase(
-          std::remove(arrays.begin(), arrays.end(), arr), arrays.end());
+        arrays.erase(std::remove(arrays.begin(), arrays.end(), arr), arrays.end());
       }
     }
   }
@@ -189,8 +182,7 @@ ReturnType SimulinkObject::RemoveElement(
   return E_OK;
 }
 
-ReturnType SimulinkObject::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
 
   if (element == nullptr)
@@ -200,9 +192,9 @@ ReturnType SimulinkObject::AddElement(
     return E_PARAMETER_NULL_PTR;
   }
 
-  if (!(element->GetElementType().isA(SimulinkElementType::Array) ||
-        element->GetElementType().isA(SimulinkElementType::Object) ||
-        element->GetElementType().isA(SimulinkElementType::Parameter)))
+  if (!(element->GetType().isA(SimulinkElementType::Array) ||
+        element->GetType().isA(SimulinkElementType::Object) ||
+        element->GetType().isA(SimulinkElementType::Parameter)))
   {
     // l.log(Logger::V_ERROR,
     //  "SimulinkObject: cannot add a Simulink element of a different type than
@@ -210,7 +202,7 @@ ReturnType SimulinkObject::AddElement(
     return E_OK;
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Parameter))
+  if (element->GetType().isA(SimulinkElementType::Parameter))
   {
     std::shared_ptr<SimulinkParameter> paramPtr =
       std::dynamic_pointer_cast<SimulinkParameter>(element);
@@ -224,20 +216,18 @@ ReturnType SimulinkObject::AddElement(
     parameters.push_back(paramPtr);
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Object))
+  if (element->GetType().isA(SimulinkElementType::Object))
   {
 
-    std::shared_ptr<SimulinkObject> objPtr =
-      std::dynamic_pointer_cast<SimulinkObject>(element);
+    std::shared_ptr<SimulinkObject> objPtr = std::dynamic_pointer_cast<SimulinkObject>(element);
 
     objects.push_back(objPtr);
   }
 
-  if (element->GetElementType().isA(SimulinkElementType::Array))
+  if (element->GetType().isA(SimulinkElementType::Array))
   {
 
-    std::shared_ptr<SimulinkArray> arrayPtr =
-      std::dynamic_pointer_cast<SimulinkArray>(element);
+    std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
     arrays.push_back(arrayPtr);
   }
   return E_OK;
@@ -281,8 +271,7 @@ bool SimulinkObject::Contains(const IdType& id) const
   return 0;
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkObject::getParameter(
-  const std::string& name)
+std::shared_ptr<SimulinkParameter> SimulinkObject::getParameter(const std::string& name)
 {
 
   for (const auto& param : parameters)

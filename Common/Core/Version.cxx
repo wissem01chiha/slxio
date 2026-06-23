@@ -32,8 +32,8 @@ bool Version::IsMinorVersionLessThan(UInt32 version)
 
 std::string Version::GetVersionString()
 {
-  return std::to_string(GetMajorVersion()) + "." +
-    std::to_string(GetMinorVersion()) + "." + std::to_string(GetPatchVersion());
+  return std::to_string(GetMajorVersion()) + "." + std::to_string(GetMinorVersion()) + "." +
+    std::to_string(GetPatchVersion());
 }
 
 UInt8 Version::GetSimulinkVersion()
@@ -48,8 +48,7 @@ const char* Version::GetSimulinkRelease()
 
 std::string Version::GetSimulinkVersionString()
 {
-  return std::to_string(GetSimulinkVersion()) +
-    std::string(GetSimulinkRelease());
+  return std::to_string(GetSimulinkVersion()) + std::string(GetSimulinkRelease());
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -21,8 +21,8 @@
 
 extern "C"
 {
-#include "getScilabJavaVM.h"
 #include "SetConsolePrompt.h"
+#include "getScilabJavaVM.h"
 } /* extern "C" */
 
 /*--------------------------------------------------------------------------*/

@@ -33,14 +33,13 @@ public:
   ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent
   std::shared_ptr<StateflowElementBase> getParent() const override;
 
   /// @brief Return SimulinkElementType::Chart
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /** @brief Returns the name of the chart. */
   std::string getName();
@@ -63,7 +62,7 @@ public:
   //}
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  IdType GetElementId() const override;
+  IdType GetId() const override;
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
   bool Contains(const IdType& id) const override;

@@ -8,6 +8,7 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementType.h"
+#include "SimulinkParameterBase.h"
 #include <memory>
 #include <string>
 #include <vector>
@@ -50,17 +51,11 @@ public:
   /** Deleted move assignment operator. */
   SimulinkElementBase& operator=(SimulinkElementBase&& other) = delete;
 
-  /** Returns the generic type of this element. */
-  virtual SimulinkElementType GetElementType() const = 0;
+  /** Accesses a child element by index with bound checking */
+  virtual std::shared_ptr<SimulinkElementBase> at(IdType index) = 0;
 
-  /** Returns the unique identifier of this element. */
-  virtual IdType GetElementId() const = 0;
-
-  /** Returns a string representation of this element. */
-  virtual std::string ToString() const = 0;
-
-  /** Checks if this element or its children contain the given identifier. */
-  virtual bool Contains(const IdType& id) const = 0;
+  /** Access specified element */
+  virtual std::shared_ptr<SimulinkElementBase> operator[](IdType index) = 0;
 
   /** Returns the number of child elements. */
   virtual UInt32 Size() const = 0;
@@ -72,21 +67,37 @@ public:
   virtual void Clear() = 0;
 
   /** Inserts a new child element. */
-  virtual ReturnType Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) = 0;
+  virtual ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
   /** Erases a child element by identifier. */
   virtual ReturnType Erase(const IdType& id) = 0;
 
   /** Erases a child element by reference. */
-  virtual ReturnType Erase(
-    const std::shared_ptr<SimulinkElementBase>& element) = 0;
+  virtual ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
   /** Finds a child element by identifier. */
   virtual std::shared_ptr<SimulinkElementBase> Find(const IdType& id) = 0;
 
-  /** Accesses a child element by index. */
-  virtual std::shared_ptr<SimulinkElementBase> at(IdType index) = 0;
+  /** Checks if this element or its children contain the given identifier. */
+  virtual bool Contains(const IdType& id) const = 0;
+
+  /** Returns the generic type of this element. */
+  virtual SimulinkElementType GetType() const = 0;
+
+  /** Returns the unique identifier of this element. */
+  virtual IdType GetId() const = 0;
+
+  /** Returns a string representation of this element. */
+  virtual std::string ToString() const = 0;
+
+  /** Returns the element specific name */
+  virtual std::string GetName() = 0;
+
+  /** Returns the elment dimensions string if supported else "" */
+  virtual std::string GetDimension() = 0;
+
+  /** Access the elment specifc parameter interface */
+  virtual std::string GetParameter(std::string name) = 0;
 
 protected:
   /** Default constructor. */

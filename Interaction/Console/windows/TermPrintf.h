@@ -1,7 +1,7 @@
 /*
-* Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
-* Copyright (C) INRIA - Allan CORNET
-*
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) INRIA - Allan CORNET
+ *
  * Copyright (C) 2012 - 2016 - Scilab Enterprises
  *
  * This file is hereby licensed under the terms of the GNU GPL v2.0,
@@ -10,21 +10,20 @@
  * and continues to be available under such terms.
  * For more information, see the COPYING file which you should have received
  * along with this program.
-*
-*/
+ *
+ */
 
 /*--------------------------------------------------------------------------*/
 
 #ifndef __TERMPRINTF_WINDOWS_H__
 #define __TERMPRINTF_WINDOWS_H__
 
-
 /**
-* Print a buffer in windows terminal (dos box)
-* @param[in] a string to disp
-*/
+ * Print a buffer in windows terminal (dos box)
+ * @param[in] a string to disp
+ */
 
-void TermPrintf_Windows(char *buffer);
+void TermPrintf_Windows(char* buffer);
 
 #endif /* __TERMPRINTF_WINDOWS_H__ */
 /*--------------------------------------------------------------------------*/

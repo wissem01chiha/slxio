@@ -16,13 +16,13 @@
 #ifndef __CONSOLEISWAITINGFORINPUT_H__
 #define __CONSOLEISWAITINGFORINPUT_H__
 /*--------------------------------------------------------------------------*/
-#include "dynlib_console.h"
 #include "BOOL.h"
+#include "dynlib_console.h"
 
 /**
-* ConsoleIsWaitingForInput function
-* @return true if the console is at the prompt
-*/
+ * ConsoleIsWaitingForInput function
+ * @return true if the console is at the prompt
+ */
 CONSOLE_IMPEXP BOOL ConsoleIsWaitingForInput(void);
 
 /*--------------------------------------------------------------------------*/

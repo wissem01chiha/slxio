@@ -1,6 +1,7 @@
 #include "SimulinkPortTypeParser.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkPortTypeParser::setInputData(const std::string data)

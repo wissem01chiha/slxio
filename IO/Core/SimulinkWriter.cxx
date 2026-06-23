@@ -2,7 +2,8 @@
 #include "DataObject.h"
 #include "Logger.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DataObject* SimulinkWriter::GetInputData() const
@@ -14,7 +15,6 @@ DataObject* SimulinkWriter::GetInputData(IdType idx) const
 {
   return nullptr;
 }
-
 
 Logger& SimulinkWriter::GetLogger()
 {

@@ -12,12 +12,12 @@
 #include "SimulinkContent.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkContent
-class SLXIO_APIEXPORT SimulinkContentParser
-  : public SimulinkParserBase<File, SimulinkContent>
+class SLXIO_APIEXPORT SimulinkContentParser : public SimulinkParserBase<File, SimulinkContent>
 {
 public:
   SimulinkContentParser() = default;

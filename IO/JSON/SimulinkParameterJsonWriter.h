@@ -22,7 +22,8 @@
 #include "SimulinkParserBase.h"
 #include "SimulinkWriterBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**

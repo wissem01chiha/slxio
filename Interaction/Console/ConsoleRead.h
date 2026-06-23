@@ -5,10 +5,10 @@
 /*--------------------------------------------------------------------------*/
 #include "dynlib_console.h"
 /**
-* ConsoleRead function
-* @return characters read in console
-*/
-CONSOLE_IMPEXP char *ConsoleRead(void);
+ * ConsoleRead function
+ * @return characters read in console
+ */
+CONSOLE_IMPEXP char* ConsoleRead(void);
 
 /*--------------------------------------------------------------------------*/
 #endif /* __CONSOLEREAD_H__ */

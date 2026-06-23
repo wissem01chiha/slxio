@@ -53,8 +53,7 @@ public:
   const char* getParameter(const char* name);
 
   /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameter> getParameterObject(
-    const std::string& name);
+  std::shared_ptr<SimulinkParameter> getParameterObject(const std::string& name);
 
   /// @brief Sets a parameter value by name.
   ReturnType setParameter(const char* name, const char* value);
@@ -87,8 +86,8 @@ public:
   /// configuration set.
   std::shared_ptr<SimulinkObject> getObject() const;
 
-  /// @brief  forward to underlying SimulinkObject GetElementId
-  IdType GetElementId() const;
+  /// @brief  forward to underlying SimulinkObject GetId
+  IdType GetId() const;
 
   /// @brief Loads the configuration set from a file.
   ReturnType loadFromFile(const char* path);

@@ -20,8 +20,8 @@
 
 extern "C"
 {
-#include "getScilabJavaVM.h"
 #include "PromptToHome.h"
+#include "getScilabJavaVM.h"
 } /* extern "C" */
 
 /*--------------------------------------------------------------------------*/

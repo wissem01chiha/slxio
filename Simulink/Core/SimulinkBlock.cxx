@@ -1,7 +1,8 @@
 #include "SimulinkBlock.h"
+#include "Logger.h"
+#include "SimulinkParameter.h"
 #include <cstring>
 #include <sstream>
-#include "Logger.h"
 
 namespace slxio
 {
@@ -15,13 +16,7 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType)
 
 SimulinkBlock* SimulinkBlock::New() const
 {
-  return nullptr;
-}
-
-SimulinkBlock::SimulinkBlock(SimulinkBlockType* blockType)
-  : BlockType(*blockType)
-  , logger(Logger::GetInstance())
-{
+  return new SimulinkBlock();
 }
 
 SimulinkBlockType SimulinkBlock::GetBlockType()
@@ -29,8 +24,8 @@ SimulinkBlockType SimulinkBlock::GetBlockType()
   return BlockType;
 }
 
-SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
-  const char* blockName, const IdType& blockId)
+SimulinkBlock::SimulinkBlock(
+  SimulinkBlockType::Type blockType, const char* blockName, const IdType& blockId)
   : BlockType(blockType)
   , BlockName(std::string(blockName))
   , BlockId(blockId)
@@ -38,7 +33,45 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 {
 }
 
-// UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase> element)
+std::shared_ptr<SimulinkElementBase> SimulinkBlock::at(IdType index)
+{
+  return std::shared_ptr<SimulinkElementBase>();
+}
+
+std::shared_ptr<SimulinkElementBase> SimulinkBlock::operator[](IdType index)
+{
+  return std::shared_ptr<SimulinkElementBase>();
+}
+
+UInt32 SimulinkBlock::Size() const
+{
+  return UInt32();
+}
+
+bool SimulinkBlock::Empty() const
+{
+  return false;
+}
+
+void SimulinkBlock::Clear() {}
+
+ReturnType SimulinkBlock::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+{
+  return ReturnType();
+}
+
+ReturnType SimulinkBlock::Erase(const IdType& id)
+{
+  return ReturnType();
+}
+
+ReturnType SimulinkBlock::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+{
+  return ReturnType();
+}
+
+// UInt32 SimulinkBlock::AddElement(std::shared_ptr<SimulinkElementBase>
+// element)
 // {
 
 //   if (element == nullptr)
@@ -48,7 +81,7 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 //     return E_OK;
 //   }
 
-//   if (element->GetElementType().isA(SimulinkElementType::Type::Block))
+//   if (element->GetType().isA(SimulinkElementType::Type::Block))
 //   {
 //     std::shared_ptr<SimulinkBlock> subblock =
 //       std::dynamic_pointer_cast<SimulinkBlock>(element);
@@ -68,13 +101,14 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 //       return E_OK;
 //     }
 
-//     if (Contains(subblock->GetElementId()))
+//     if (Contains(subblock->GetId()))
 //     {
 //       parent = std::make_shared<SimulinkBlock>(*subblock);
 //     }
 //     return E_OK;
 //   }
-//   else if (element->GetElementType().isA(SimulinkElementType::Type::Parameter))
+//   else if
+//   (element->GetType().isA(SimulinkElementType::Type::Parameter))
 //   {
 //     std::shared_ptr<SimulinkParameter> parameter =
 //       std::dynamic_pointer_cast<SimulinkParameter>(element);
@@ -115,13 +149,15 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 //       return blk;
 //     }
 //   }
-//   // l.log(Logger::V_WARNING, "No Sublock named ", blockName, "' found in Block
+//   // l.log(Logger::V_WARNING, "No Sublock named ", blockName, "' found in
+//   Block
 //   // ",
 //   //  name);
 //   return std::shared_ptr<SimulinkBlock>();
 // }
 
-// std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const IdType& blockId)
+// std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const IdType&
+// blockId)
 // {
 //   if (blockId == 0)
 //   {
@@ -130,7 +166,7 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 //   }
 //   for (const auto& sublock : blocks)
 //   {
-//     if (sublock->GetElementId() == blockId)
+//     if (sublock->GetId() == blockId)
 //     {
 //       return sublock;
 //     }
@@ -140,12 +176,12 @@ SimulinkBlock::SimulinkBlock(SimulinkBlockType::Type blockType,
 //   return std::shared_ptr<SimulinkBlock>();
 // }
 
-SimulinkElementType SimulinkBlock::GetElementType() const
+SimulinkElementType SimulinkBlock::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Block);
 }
 
-IdType SimulinkBlock::GetElementId() const
+IdType SimulinkBlock::GetId() const
 {
   return BlockId;
 }
@@ -175,7 +211,7 @@ void SimulinkBlock::SetBlockType(SimulinkBlockType::Type blockType)
 //     //  "pointer from subelement");
 //     return E_OK;
 //   }
-//   SimulinkElementType element_t = element->GetElementType();
+//   SimulinkElementType element_t = element->GetType();
 
 //   if (!(element_t.isA(SimulinkElementType::Type::Block)))
 //   {
@@ -223,8 +259,7 @@ std::string SimulinkBlock::ToString() const
   return oss.str();
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(
-  const char* parameterName)
+std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(const char* parameterName)
 {
   if (parameterName == nullptr)
   {
@@ -260,7 +295,7 @@ bool SimulinkBlock::Contains(const IdType& blockId) const
 {
   for (const auto& block : SubBlocks)
   {
-    if (block && block->GetElementId() == blockId)
+    if (block && block->GetId() == blockId)
     {
       return true;
     }

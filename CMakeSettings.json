@@ -7,7 +7,9 @@
       "configurationType": "Debug",
       "ctestCommandArgs": "--output-on-failure",
       "generator": "Ninja",
-      "inheritEnvironments": [ "msvc_x64" ],
+      "inheritEnvironments": [
+        "msvc_x64"
+      ],
       "installRoot": "${projectDir}\\install\\${name}",
       "name": "x64-Debug",
       "intelliSenseMode": "windows-msvc-x64"
@@ -21,7 +23,9 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ]
+      "inheritEnvironments": [
+        "msvc_x64_x64"
+      ]
     }
   ]
 }

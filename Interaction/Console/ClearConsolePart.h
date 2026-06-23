@@ -16,14 +16,14 @@
 #ifndef __CLEARCONSOLEPART_H__
 #define __CLEARCONSOLEPART_H__
 /*--------------------------------------------------------------------------*/
-#include "dynlib_console.h"
 #include "BOOL.h"
+#include "dynlib_console.h"
 /*--------------------------------------------------------------------------*/
 /**
-* Clear Java console
-* @param nblines numbers of lines -1 --> all
-* @return a boolean
-*/
+ * Clear Java console
+ * @param nblines numbers of lines -1 --> all
+ * @return a boolean
+ */
 CONSOLE_IMPEXP BOOL ClearConsolePart(int nbLines);
 /*--------------------------------------------------------------------------*/
 #endif /*__CLEARCONSOLEPART_H__ */

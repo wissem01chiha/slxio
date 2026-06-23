@@ -15,17 +15,17 @@
  */
 
 /*--------------------------------------------------------------------------*/
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "dropFiles.h"
-#include "sci_malloc.h"
-#include "storeCommand.h" /* storecommand */
 #include "FindFileExtension.h"
 #include "URIFileToFilename.h"
-#include "with_module.h"
-#include "os_string.h"
 #include "charEncoding.h"
+#include "os_string.h"
+#include "sci_malloc.h"
+#include "storeCommand.h" /* storecommand */
+#include "with_module.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 /*--------------------------------------------------------------------------*/
 #define BIN_EXTENSION_FILE ".bin"
 #define SAV_EXTENSION_FILE ".sav"
@@ -47,120 +47,120 @@
 #define FORMAT_UNKNOW_EXTENSION_FILES "disp(gettext('Unknown file type : %s'));"
 #define XCOS_NOT_INSTALLED "disp(gettext('Please install xcos module.'))"
 /*--------------------------------------------------------------------------*/
-static char *getCommandByFileExtension(char *File, char *FileExtension);
-static char *buildCommand(char *format, char *filename);
-static BOOL LaunchFilebyExtension(char *File);
+static char* getCommandByFileExtension(char* File, char* FileExtension);
+static char* buildCommand(char* format, char* filename);
+static BOOL LaunchFilebyExtension(char* File);
 /*--------------------------------------------------------------------------*/
-BOOL dropFiles(char **files)
+BOOL dropFiles(char** files)
 {
-    int len = 0;
+  int len = 0;
 
-    while (files[len])
+  while (files[len])
+  {
+    char* convertfile = URIFileToFilename(files[len]);
+
+    if (convertfile)
     {
-        char *convertfile = URIFileToFilename(files[len]);
-
-        if (convertfile)
-        {
-            BOOL bCheck = LaunchFilebyExtension(convertfile);
-            if (convertfile)
-            {
-                FREE(convertfile);
-                convertfile = NULL;
-            }
-            if (!bCheck)
-            {
-                return bCheck;
-            }
-        }
-        len++;
+      BOOL bCheck = LaunchFilebyExtension(convertfile);
+      if (convertfile)
+      {
+        FREE(convertfile);
+        convertfile = NULL;
+      }
+      if (!bCheck)
+      {
+        return bCheck;
+      }
     }
-    return TRUE;
+    len++;
+  }
+  return TRUE;
 }
 /*--------------------------------------------------------------------------*/
-BOOL LaunchFilebyExtension(char *File)
+BOOL LaunchFilebyExtension(char* File)
 {
-    BOOL bOK = FALSE;
+  BOOL bOK = FALSE;
 
-    char *CommandLine = NULL;
-    char *FileExtension = NULL;
+  char* CommandLine = NULL;
+  char* FileExtension = NULL;
 
-    FileExtension = FindFileExtension(File);
-    CommandLine = getCommandByFileExtension(File, FileExtension);
+  FileExtension = FindFileExtension(File);
+  CommandLine = getCommandByFileExtension(File, FileExtension);
 
-    if (CommandLine)
-    {
-        StoreCommand(CommandLine);
-        bOK = TRUE;
+  if (CommandLine)
+  {
+    StoreCommand(CommandLine);
+    bOK = TRUE;
 
-        FREE(CommandLine);
-        CommandLine = NULL;
-    }
+    FREE(CommandLine);
+    CommandLine = NULL;
+  }
 
-    if (FileExtension)
-    {
-        FREE(FileExtension);
-        FileExtension = NULL;
-    }
+  if (FileExtension)
+  {
+    FREE(FileExtension);
+    FileExtension = NULL;
+  }
 
-    return bOK;
+  return bOK;
 }
 /*--------------------------------------------------------------------------*/
-static char *getCommandByFileExtension(char *File, char *FileExtension)
+static char* getCommandByFileExtension(char* File, char* FileExtension)
 {
-    char *command = NULL;
+  char* command = NULL;
 
-    if (FileExtension)
+  if (FileExtension)
+  {
+    if (stricmp(FileExtension, BIN_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, SAV_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, SOD_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, SCG_EXTENSION_FILE) == 0)
     {
-        if (stricmp(FileExtension, BIN_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SAV_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SOD_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SCG_EXTENSION_FILE) == 0)
-        {
-            command = buildCommand(FORMAT_LOAD_FILES, File);
-        }
-        else if (stricmp(FileExtension, COS_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, COSF_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, ZCOS_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, XCOS_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, XMI_EXTENSION_FILE) == 0)
-        {
-            if (with_module(L"xcos"))
-            {
-                command = buildCommand(FORMAT_XCOS_FILES, File);
-            }
-            else
-            {
-                command = os_strdup(XCOS_NOT_INSTALLED);
-            }
-        }
-        else if (stricmp(FileExtension, SCI_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, SCE_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, TST_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, DEM_EXTENSION_FILE) == 0)
-        {
-            command = buildCommand(FORMAT_EXEC_FILES, File);
-        }
-        else
-        {
-            command = buildCommand(FORMAT_UNKNOW_EXTENSION_FILES, File);
-        }
+      command = buildCommand(FORMAT_LOAD_FILES, File);
     }
-    return command;
+    else if (stricmp(FileExtension, COS_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, COSF_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, ZCOS_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, XCOS_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, XMI_EXTENSION_FILE) == 0)
+    {
+      if (with_module(L"xcos"))
+      {
+        command = buildCommand(FORMAT_XCOS_FILES, File);
+      }
+      else
+      {
+        command = os_strdup(XCOS_NOT_INSTALLED);
+      }
+    }
+    else if (stricmp(FileExtension, SCI_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, SCE_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, TST_EXTENSION_FILE) == 0 ||
+      stricmp(FileExtension, DEM_EXTENSION_FILE) == 0)
+    {
+      command = buildCommand(FORMAT_EXEC_FILES, File);
+    }
+    else
+    {
+      command = buildCommand(FORMAT_UNKNOW_EXTENSION_FILES, File);
+    }
+  }
+  return command;
 }
 /*--------------------------------------------------------------------------*/
-static char *buildCommand(char *format, char *filename)
+static char* buildCommand(char* format, char* filename)
 {
-    char *command = NULL;
+  char* command = NULL;
 
-    if (format && filename)
+  if (format && filename)
+  {
+    command = (char*)MALLOC((strlen(filename) + strlen(format) + 1) * sizeof(char));
+    if (command)
     {
-        command = (char*)MALLOC( (strlen(filename) + strlen(format) + 1) * sizeof(char) );
-        if (command)
-        {
-            sprintf(command, format, filename);
-        }
+      sprintf(command, format, filename);
     }
+  }
 
-    return command;
+  return command;
 }
 /*--------------------------------------------------------------------------*/

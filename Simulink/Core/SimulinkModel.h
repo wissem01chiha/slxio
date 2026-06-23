@@ -6,7 +6,6 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Logger.h"
 #include "ModelWorkspace.h"
 #include "PlatformTypes.h"
 #include "SimulationSettings.h"
@@ -17,14 +16,15 @@
 #include "SimulinkParameter.h"
 #include <memory>
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 class SimulinkObject;
 class SimulinkArray;
 class SImulinkPort;
 class SimulinkLine;
-
-namespace slxio
-{
-SLXIO_ABI_NAMESPACE_BEGIN
+class Logger;
 
 /**
  * @class SimulinkModel
@@ -55,12 +55,12 @@ public:
   /**
    *
    */
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /**
    *
    */
-  IdType GetElementId() const override;
+  IdType GetId() const override;
 
   /**
    *
