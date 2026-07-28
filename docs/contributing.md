@@ -1,21 +1,27 @@
-<!-- omit in toc -->
-# Contributing Guide
+---
+title: Contribution Guide
+nav_order: 5
+---
 
-- [Welcome](#welcome)
-- [Project overview](#project-overview)
-- [Before you start](#before-you-start)
-- [Environment setup](#environment-setup)
-  - [Troubleshoot](#troubleshoot)
-- [Best practices](#best-practices)
-- [Content style guide](#content-style-guide)
-  - [Fork and clone repositories](#fork-and-clone-repositories)
-  - [Report issues and bugs](#report-issues-and-bugs)
-  - [Issue management](#issue-management)
-  - [Commit messages](#commit-messages)
-  - [Branch creation](#branch-creation)
-  - [Pull requests](#pull-requests)
-  - [Releases](#releases)
-  - [Text formats](#text-formats)
+# Contribution Guide
+
+- [Contribution Guide](#contribution-guide)
+  - [Welcome](#welcome)
+  - [Project overview](#project-overview)
+  - [Before you start](#before-you-start)
+  - [Environment setup](#environment-setup)
+    - [Troubleshoot](#troubleshoot)
+  - [Best practices](#best-practices)
+  - [Content style guide](#content-style-guide)
+    - [Fork and clone repositories](#fork-and-clone-repositories)
+    - [Report issues and bugs](#report-issues-and-bugs)
+    - [Issue management](#issue-management)
+    - [Commit messages](#commit-messages)
+    - [Branch creation](#branch-creation)
+    - [Pull requests](#pull-requests)
+- [To‑Do List](#todo-list)
+    - [Releases](#releases)
+    - [Text formats](#text-formats)
 
 ## Welcome
 
