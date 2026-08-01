@@ -1,0 +1,4 @@
+# SPDX-FileCopyrightText: Copyright (c) Wissem Chiha
+# SPDX-License-Identifier: MIT
+@PACKAGE_INIT@
+include("${CMAKE_CURRENT_LIST_DIR}/libnpioTargets.cmake")

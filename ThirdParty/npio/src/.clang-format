@@ -1,0 +1,29 @@
+BasedOnStyle: LLVM
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never   
+
+BreakBeforeBraces: Allman   
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+
+AlignConsecutiveAssignments: true
+AlignConsecutiveDeclarations: true
+AlignTrailingComments: true
+
+IndentWrappedFunctionNames: false
+AllowAllParametersOfDeclarationOnNextLine: false
+BinPackParameters: false
+BinPackArguments: false
+
+IndentCaseLabels: true
+IndentGotoLabels: true
+
+IndentPPDirectives: AfterHash
+SpaceAfterCStyleCast: true
+
+ColumnLimit: 100  
+
+SortIncludes: false   
+KeepEmptyLinesAtTheStartOfBlocks: false

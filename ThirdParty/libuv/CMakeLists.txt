@@ -1,11 +1,4 @@
-if(LIBUV_BUILD_SHARED)
-    add_thirdparty_module(libuv
-        ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
-        uv
-    )
-else()
-    add_thirdparty_module(libuv
-        ${PROJECT_SOURCE_DIR}/ThirdParty/libuv
-        uv_a
-    )
-endif()
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
+add_subdirectory(src)

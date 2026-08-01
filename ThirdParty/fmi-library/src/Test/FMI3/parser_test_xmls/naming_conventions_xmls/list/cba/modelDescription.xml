@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="3.0" modelName="" instantiationToken="" variableNamingConvention="structured">
+<CoSimulation modelIdentifier="id"/>
+
+<ModelVariables>
+  <Int32 name="c" valueReference="0"/>
+  <Int32 name="b" valueReference="1"/>
+  <Int32 name="a" valueReference="2"/>
+</ModelVariables>
+
+<ModelStructure/>
+</fmiModelDescription>

@@ -1,0 +1,30 @@
+Source: libopc
+Priority: optional
+Maintainer: Florian Reuter <flr@acm.org>
+Build-Depends: debhelper (>= 7.0.50~), python (>= 2.6.1~)
+Standards-Version: 3.9.1
+Section: libs
+Homepage: http://libopc.codeplex.com
+#Vcs-Git: git://git.debian.org/collab-maint/libopc.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/libopc.git;a=summary
+
+Package: libopc-dev
+Section: libdevel
+Architecture: any
+Depends: libopc (= ${binary:Version}), libxml2-dev, zlib1g-dev, ${misc:Depends}
+Description: Headers and static libraries for libopc
+ This package is needed to develop application which use libopc. It contains
+ all headers as well as static versions of the libopc libraries.
+
+Package: libopc
+#Section: libs # removed since lintian complained.
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Library for handling ISO/IEC 29500 container
+ The Open Packaging Convention (OPC) is part of the ISO/IEC 29500 specification
+ which standardizes word-processing, spreadsheet and presentation documents. A
+ prominent implementer of the new standard is Microsoft Office Version 2007 and
+ beyond. Every .docx, .xslx, .pptx document is an OPC container. Libopc has
+ functions to read/write OPC container.
+ Another part of ISO/IEC 29500 is Markup Compatibility and Extensibility (MCE).
+ Libopc also has features to parse and generate XML markup compatible with MCE.

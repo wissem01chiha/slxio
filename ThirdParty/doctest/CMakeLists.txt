@@ -1,4 +1,4 @@
-add_thirdparty_module(doctest
-    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
-    doctest
-)
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
+add_subdirectory(src)

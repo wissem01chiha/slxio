@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
+add_subdirectory(zlib)
+add_subdirectory(libzip)
+add_subdirectory(libxml2)
+add_subdirectory(cxxopts)
+add_subdirectory(json-c)
+add_subdirectory(libuv)
+add_subdirectory(libxlsxwriter)
+add_subdirectory(doctest)
+add_subdirectory(loguru)
+add_subdirectory(matio)
+add_subdirectory(libopc)
+add_subdirectory(slog)
+add_subdirectory(fast_float)
+add_subdirectory(libtex)
+add_subdirectory(pybind11)  
+add_subdirectory(rapidcsv)
+add_subdirectory(fmi-library)
+add_subdirectory(npio)
