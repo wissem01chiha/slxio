@@ -1,11 +1,12 @@
 ---
 title: Supported MATLAB
+layout: page
 nav_order: 3
 ---
 
-### Supported MATLAB
+# Supported MATLAB
 
-**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
+SLXIO aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
 
 > [!NOTE]
 > Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.
