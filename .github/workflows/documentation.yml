@@ -42,10 +42,11 @@ jobs:
           ruby --version
 
       - name: Install Bundler
-        run: gem install bundler
+        run: sudo gem install bundler
+
 
       - name: Install Gems
-        run: bundle install
+        run: sudo bundle install
 
       - name: Setup Pages
         id: pages
