@@ -1,50 +1,20 @@
-# SLXIO
+---
+title: Home
+layout: home
+nav_order: 1
+description: "SLXIO – SIMULINK SLX File I/O Library"
+permalink: /
+---
 
-SLXIO – SIMULINK SLX File I/O Library
+# Welcome to SLXIO !
+{: .fs-9 }
 
-## Status
+[Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
-[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
-[![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
-[![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
-[![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml)
-[![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)
-![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
-[![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
-![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
-[![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/slxio/overview/master)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
+# SLXIO User's Guide
 
-<!-- omit in toc -->
-## Table of Contents
-- [SLXIO](#slxio)
-  - [Status](#status)
-  - [1.0 Overview](#10-overview)
-    - [1.1 Features](#11-features)
-    - [1.2 Supported MATLAB](#12-supported-matlab)
-      - [1.2.1 MATLAB Regression Testing Matrix](#121-matlab-regression-testing-matrix)
-    - [1.3 Contact](#13-contact)
-    - [1.4 Contributing](#14-contributing)
-    - [2.0 Installation](#20-installation)
-      - [2.1 Binary Release](#21-binary-release)
-      - [2.2 vcpkg](#22-vcpkg)
-      - [2.3 Conan Recipe](#23-conan-recipe)
-  - [3.0 Building from Source](#30-building-from-source)
-    - [3.1 Dependencies](#31-dependencies)
-      - [3.1.1 zlib](#311-zlib)
-      - [3.1.1 HDF5](#311-hdf5)
-    - [3.2 Building Slxio](#32-building-slxio)
-      - [3.2.1 Quick Build Guide](#321-quick-build-guide)
-      - [3.2.2 Configure Options](#322-configure-options)
-    - [3.3 Platform Support](#33-platform-support)
-  - [4.0 Testing](#40-testing)
-    - [4.1 Running Tests](#41-running-tests)
-    - [4.2 Debugging Test Failures](#42-debugging-test-failures)
-  - [5.0 Use in Other Projects](#50-use-in-other-projects)
-  - [6.0 API Documentation](#60-api-documentation)
-  - [7.0 References](#70-references)
-  - [8.0 License](#80-license)
+## Welcome to SLXIO !
+
 
 ## 1.0 Overview
 
@@ -73,41 +43,6 @@ The project is under active development, and contributions are highly encouraged
 - Edit metadata and parameters, then save changes back into `.slx` files. This feature may be delayed because Simulink files follow the [Opc Convention]() and the archive layout changes between versions. We currently maintain the [libopc](https://github.com/wissem01chiha/libopc) project to provide a portable, cross‑version abstraction for editing.
 - Perform static analysis on Simulink models and generate reports in [PDF](https://en.wikipedia.org/wiki/PDF) or [HTML](https://www.geeksforgeeks.org/html/html-web-page-format/).
 - Visualize Simulink models interactively. For now, only the [Qt](https://www.qt.io/) backend is supported. Other 2D graphing engines or tools are open for discussion — please feel free to start one [here](https://github.com/wissem01chiha/slxio/discussions).
-
-### 1.2 Supported MATLAB
-
-**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
-
-> [!NOTE]
-> Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.
-
-[*.mdl](https://amazingalgorithms.com/file-extensions/mdl/) files are out of scope, for certain specific releases they may be partially compatible, but no support or fixes are planned for mdl file compatibility.
-
-At present, there is no official documentation from MathWorks regarding the slx data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed slx files.
-
-To ensure compatibility when using slxio with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.
-For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
-
-#### 1.2.1 MATLAB Regression Testing Matrix
-
-| Release | Status | Comment | Release Notes                                                                                                                             |
-|---------|--------|--------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| R2018a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018a/r2018a-update-2-release-notes.pdf)|
-| R2018b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2018b/r2018b-updates-release-notes.pdf) |
-| R2019a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019a/r2019a-updates-release-notes.pdf) |
-| R2019b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2019b/r2019b-updates-release-notes.pdf) |
-| R2020a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020a/r2020a-updates-release-notes.pdf) |
-| R2020b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2020b/r2020b-updates-release-notes.pdf) |
-| R2021a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021a/r2021a-updates-release-notes.pdf) |
-| R2021b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2021b/r2021b-updates-release-notes.pdf) |
-| R2022a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022a/r2022a-updates-release-notes.pdf) |
-| R2022b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2022b/r2022b-updates-release-notes.pdf) |
-| R2023a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023a/r2023a-updates-release-notes.pdf) |
-| R2023b  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2023b/r2023b-updates-release-notes.pdf) |
-| R2024a  |        |        | [Release Notes](https://www.mathworks.com/content/dam/mathworks/mathworks-dot-com/support/updates/r2024a/r2024a-updates-release-notes.pdf) |
-| R2024b  |        |        | [Release Notes](https://www.mathworks.com/matlabcentral/discussions/uploaded_files/35746/Whats_New_In_MATLAB_R2024b%202.pdf)               |
-| R2025a  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
-| R2025b  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
 
 ### 1.3 Contact
 
