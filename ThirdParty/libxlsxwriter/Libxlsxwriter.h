@@ -5,9 +5,9 @@
 #define LIBXLSXWRITER_H
 
 #ifdef USE_EXTERNAL_LIBXLSXWRITER
-
+#include <xlsxwriter.h>
 #else
-
+#include <src/include/xlsxwriter.h>
 #endif
 
 #endif // LIBXLSXWRITER_H

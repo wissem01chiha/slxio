@@ -4,7 +4,7 @@
 #ifndef DOCTEST_H
 #define DOCTEST_H
 
-#if USE_EXTERNAL_DOCTEST
+#ifdef USE_EXTERNAL_DOCTEST
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <doctest/doctest.h>
 #else

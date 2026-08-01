@@ -338,8 +338,8 @@ if(FMILIB_BUILD_STATIC_LIB)
     # the same include dirs as will exist for installation.
     target_include_directories(fmilib
         PUBLIC
-            ${JMUTIL_PUBLIC_INCLUDE_DIR}
-            ${FMIIMPORT_PUBLIC_INCLUDE_DIR}
+            ${JMUTILS_PUBLIC_INCLUDE_DIRS}
+            ${FMIIMPORT_PUBLIC_INCLUDE_DIRS}
             ${FMILIB_INCLUDE_DIR}
             ${FMILIB_CONFIG_INCLUDE_DIR}
     )
@@ -351,6 +351,8 @@ if(FMILIB_BUILD_SHARED_LIB)
     # Even if fmilib_shared is built from source files, it's still necessary that e.g.
     # fmiimport's dependencies such as generated code is built first.
     add_dependencies(fmilib_shared fmiimport)
+
+    set_target_properties (fmilib_shared PROPERTIES SOVERSION 3 VERSION 3.0)
 
     if(UNIX AND NOT APPLE)
         target_compile_definitions(fmilib_shared PRIVATE -D_GNU_SOURCE)
