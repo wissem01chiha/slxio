@@ -45,17 +45,6 @@ include(CMakePackageConfigHelpers)
 option(BUILD_SHARED_LIBS  "Default to building shared libraries" ON)
 option(BUILD_STATIC_LIBS  "Default to building static libraries" ON)
 
-# Generate a release merge and test it to verify the correctness of republishing the package.
-# ADD_CUSTOM_TARGET(distcheck
-# COMMAND make package_source
-#     COMMAND tar -xvf "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source.tar.gz"
-#     COMMAND mkdir "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source/build"
-#     COMMAND cmake "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source/" -B"./${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source/build/"
-#     COMMAND make -C "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source/build"
-#     COMMAND make test -C "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source/build"
-#     COMMAND rm -rf "${PROJECT_NAME}-${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}-Source"
-# )
-
 # Enable or disable features. By default, all features are turned off.
 option(DISABLE_BSYMBOLIC              "Avoid linking with -Bsymbolic-function."               OFF)
 option(DISABLE_THREAD_LOCAL_STORAGE   "Disable using Thread-Local Storage (HAVE___THREAD)."   OFF)
@@ -521,17 +510,6 @@ include_directories(${PROJECT_SOURCE_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 
 add_subdirectory(doc)
-
-# "uninstall" custom target for make generators in unix like operating systems
-# and if that target is not present
-if (CMAKE_GENERATOR STREQUAL "Unix Makefiles")
-    if(NOT TARGET uninstall)
-        add_custom_target(uninstall
-                COMMAND cat ${PROJECT_BINARY_DIR}/install_manifest.txt | xargs rm
-                WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-                )
-    endif()
-endif()
 
 # XXX for a normal full distribution we'll need to figure out
 # XXX how to build both shared and static libraries.
