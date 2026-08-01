@@ -1,6 +1,7 @@
 #include "DiscreteDerivative.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DiscreteDerivative::DiscreteDerivative() {}
@@ -18,4 +19,4 @@ void DiscreteDerivative::SetSampleTime(Float32 value)
 DiscreteDerivative::~DiscreteDerivative() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -6,11 +6,12 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Logger.h"
 #include "ErrorCode.h"
+#include "Logger.h"
 #include <memory>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -67,13 +68,13 @@ protected:
   SimulinkParserBase()
     : ptr(std::make_shared<P>())
     , dataObject()
-    , l(Logger::GetInstance()) {};
+    , l(Logger::GetInstance()){};
   std::shared_ptr<P> ptr;
   T dataObject;
   Logger& l;
 };
 
-SLXIO_NAMESPACE_END
+};
 SLXIO_ABI_NAMESPACE_END
 
 #endif // SIMULINKPARSERBASE_H

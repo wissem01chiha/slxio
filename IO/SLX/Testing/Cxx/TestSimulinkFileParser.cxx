@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkFileParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkFileTestFixture
@@ -16,8 +17,7 @@ protected:
 
     char path_slx[512];
 
-    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
-      PROJECT_ROOT_DIR, assetName);
+    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, assetName);
 
     return File(path_slx);
   }
@@ -35,16 +35,14 @@ protected:
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
 
-  ReturnType status =
-    parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  ReturnType status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
 
-  ReturnType in_status =
-    parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  ReturnType in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(in_status == E_OK);
   ReturnType parseStatus = parserPtr->parse();
   CHECK(parseStatus == E_OK);
@@ -62,4 +60,4 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

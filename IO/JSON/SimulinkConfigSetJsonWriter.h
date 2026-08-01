@@ -12,29 +12,28 @@
 // implied. See the License for the specific language governing
 // permissions and limitations under the License.
 
-
 #ifndef SIMULINKCONFIGSETWRITER_H
 #define SIMULINKCONFIGSETWRITER_H
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Json-c.h"
+#include "slxJson-c.h"
 #include "SimulinkConfigSet.h"
 #include "SimulinkWriterBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT SimulinkConfigSetWriter
   : public SimulinkWriterBase<SimulinkConfigSet, json_object*>
 {
 public:
-
-    SimulinkConfigSetWriter() = default;
-    ~SimulinkConfigSetWriter() = default;
-    };
+  SimulinkConfigSetWriter() = default;
+  ~SimulinkConfigSetWriter() = default;
+};
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKCONFIGSETWRITER_H

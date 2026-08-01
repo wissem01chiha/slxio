@@ -1,8 +1,9 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("CopyConstructorTest")
@@ -18,9 +19,9 @@ TEST_CASE("CopyConstructorTest")
 
   // SimulinkArray copy(*original);
 
-  // //CHECK(copy.GetElementType() == original->GetElementType());
+  // //CHECK(copy.GetType() == original->GetType());
   // CHECK(copy.ToString() == original->ToString());
-  // CHECK(copy.GetElementId() == original->GetElementId());
+  // CHECK(copy.GetId() == original->GetId());
 }
 
 TEST_CASE("AddArrayTest")
@@ -78,4 +79,4 @@ TEST_CASE("ContainsArrayTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

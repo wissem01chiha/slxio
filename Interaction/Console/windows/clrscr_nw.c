@@ -13,21 +13,21 @@
  *
  */
 /*--------------------------------------------------------------------------*/
-#include <Windows.h>
 #include "clrscr_nw.h"
 #include "TermPosition.h"
+#include <Windows.h>
 /*--------------------------------------------------------------------------*/
 void clrscr_nw(void)
 {
-    COORD coord;
-    DWORD written;
-    CONSOLE_SCREEN_BUFFER_INFO info;
-    coord.X = 0;
-    coord.Y = 0;
-    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-    FillConsoleOutputCharacter (GetStdHandle(STD_OUTPUT_HANDLE), ' ',
-                                info.dwSize.X * info.dwSize.Y, coord, &written);
+  COORD coord;
+  DWORD written;
+  CONSOLE_SCREEN_BUFFER_INFO info;
+  coord.X = 0;
+  coord.Y = 0;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
+  FillConsoleOutputCharacter(
+    GetStdHandle(STD_OUTPUT_HANDLE), ' ', info.dwSize.X * info.dwSize.Y, coord, &written);
 
-    TermSetPosition(0, 0);
+  TermSetPosition(0, 0);
 }
 /*--------------------------------------------------------------------------*/

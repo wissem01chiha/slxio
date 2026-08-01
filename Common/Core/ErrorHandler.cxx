@@ -1,9 +1,13 @@
 #include "ErrorHandler.h"
 #include "ErrorCode.h"
 #include "ErrorMap.h"
-#include "Libuv.h"
-#include "Libzip.h"
+#include "slxLibuv.h"
+#include "slxLibzip.h"
 #include <cstdio>
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 void ErrorHandler::SetLastError(int code)
 {
@@ -77,3 +81,6 @@ int ErrorHandler::PrintfLastErrorMessage(const char* format)
 {
   return PrintfErrorMessage(format, lastError);
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

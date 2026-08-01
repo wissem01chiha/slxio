@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkContentParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkContentParserTestFixture
@@ -9,18 +10,14 @@ class SimulinkContentParserTestFixture
 protected:
   SimulinkContentParser* parserPtr;
 
-  SimulinkContentParserTestFixture()
-  {
-    parserPtr = new SimulinkContentParser();
-  }
+  SimulinkContentParserTestFixture() { parserPtr = new SimulinkContentParser(); }
 
   File getTestFileAsset(const char* assetName)
   {
 
     char path_slx[512];
 
-    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
-      PROJECT_ROOT_DIR, assetName);
+    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, assetName);
 
     return File(path_slx);
   }
@@ -38,16 +35,14 @@ protected:
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserSetInputDataTest")
 {
 
-  ReturnType status =
-    parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  ReturnType status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 };
 
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 {
 
-  ReturnType status =
-    parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  ReturnType status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
   status = parserPtr->parse();
   CHECK(status == E_OK);
@@ -56,8 +51,7 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserParseTest")
 TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
 {
 
-  ReturnType status =
-    parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  ReturnType status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
   status = parserPtr->parse();
   CHECK(status == E_OK);
@@ -66,17 +60,14 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserGetDataObjectTest")
   CHECK(contentPtr != nullptr);
 };
 
-TEST_CASE_FIXTURE(
-  SimulinkContentParserTestFixture, "ParserInvalidInputDataTest")
+TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserInvalidInputDataTest")
 {
 
-  ReturnType status =
-    parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
+  ReturnType status = parserPtr->setInputData(getTestFileAsset("NonExistingFile.slx"));
   CHECK(status == E_INVALID_ARGUMENT);
 };
 
-TEST_CASE_FIXTURE(
-  SimulinkContentParserTestFixture, "ParserDataObjectValidAttributeTest")
+TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserDataObjectValidAttributeTest")
 {
 
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
@@ -103,10 +94,9 @@ TEST_CASE_FIXTURE(
   CHECK(content == nullptr);
 
   const xmlAttr* properties = nodePtr->properties;
-  printf(
-    "Blockdiagram root node properties: %s\n", (const char*)properties->name);
+  printf("Blockdiagram root node properties: %s\n", (const char*)properties->name);
   CHECK(properties != nullptr);
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

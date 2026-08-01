@@ -9,7 +9,8 @@
 #include "ErrorCode.h"
 #include "StateflowElementBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,13 +21,12 @@ class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase
 public:
   StateflowEvent();
   StateflowEvent(StateflowEvent& orig);
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
+  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // STATEFLOWEVENT_H

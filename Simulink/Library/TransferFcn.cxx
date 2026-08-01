@@ -1,6 +1,7 @@
 #include "TransferFcn.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TransferFcn::TransferFcn() {}
@@ -18,4 +19,4 @@ void TransferFcn::SetNumerator(Float32 value)
 TransferFcn::~TransferFcn() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

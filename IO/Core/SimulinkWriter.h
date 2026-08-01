@@ -8,11 +8,12 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
 class DataObject;
 class Logger;
-
-SLXIO_NAMESPACE_BEGIN
-SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkWriter
@@ -21,51 +22,35 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkWriter
 {
 public:
-  /**
-   * Create a new instance of the writer
-   */
+  /** Create a new instance of the writer */
   virtual SimulinkWriter* New() = 0;
 
-  /**
-   * Virtual destructor for cleanup
-   */
+  /** Virtual destructor for cleanup */
   virtual ~SimulinkWriter() = default;
 
-  /**
-   * Write the current input data to output
-   */
+  /** Write the current input data to output */
   virtual ReturnType Write() = 0;
 
-  /**
-   * Set single input data object for writing
-   */
+  /** Set single input data object for writing */
   virtual ReturnType SetInputData(const DataObject& data) = 0;
 
-  /**
-   * Set indexed input data object for writing
-   */
+  /** Set indexed input data object for writing */
   virtual ReturnType SetInputData(IdType idx, const DataObject& data) = 0;
 
-  /**
-   * Get the single input data object
-   */
+  /** Get the single input data object*/
   DataObject* GetInputData() const;
 
-  /**
-   * Get the indexed input data object
-   */
+  /** Get the indexed input data object */
   DataObject* GetInputData(IdType idx) const;
 
-  /**
-   * Access the logger instance
-   */
+  /** Access the logger instance*/
   Logger& GetLogger();
 
 protected:
   Logger& logger;
 };
 
-SLXIO_NAMESPACE_END
+};
 SLXIO_ABI_NAMESPACE_END
 
 #endif // SIMULINKWRITER_H

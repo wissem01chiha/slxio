@@ -3,7 +3,8 @@
 #include "SimulinkParameterParser.h"
 #include "SlxParameter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
@@ -11,7 +12,8 @@ ReturnType SimulinkObjectParser::setInputData(const xmlNodePtr data)
 
   if (data == nullptr)
   {
-    //l.log(Logger::V_ERROR, "SimulinkObjectParser:: null node pointer received");
+    // l.log(Logger::V_ERROR, "SimulinkObjectParser:: null node pointer
+    // received");
     return E_PARAMETER_NULL_PTR;
   }
 
@@ -28,8 +30,7 @@ ReturnType SimulinkObjectParser::parse()
   {
 
     std::string attrName = reinterpret_cast<const char*>(attr->name);
-    std::string attrValue =
-      reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
+    std::string attrValue = reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_ObjectID)
     {
       id = static_cast<IdType>(std::stoul(attrValue));
@@ -45,8 +46,7 @@ ReturnType SimulinkObjectParser::parse()
   }
   ptr = std::make_shared<SimulinkObject>(id, name, className);
 
-  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
-    nodePtr_ = nodePtr_->next)
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
   {
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&
@@ -63,9 +63,9 @@ ReturnType SimulinkObjectParser::parse()
       ReturnType paramParseStatus = paramParserPtr->parse();
       if (paramParseStatus != E_OK)
       {
-        //l.log(Logger::V_ERROR,
+        // l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build object Parameter");
-        return paramParseStatus;
+          return paramParseStatus;
       }
       ptr->AddElement(paramParserPtr->getOutputData());
       delete paramParserPtr;
@@ -85,9 +85,9 @@ ReturnType SimulinkObjectParser::parse()
       ReturnType subObjStat = subObjParserPtr->parse();
       if (subObjStat != E_OK)
       {
-        //l.log(Logger::V_ERROR,
+        // l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build subobject element");
-        return subObjStat;
+          return subObjStat;
       }
       ptr->AddElement(subObjParserPtr->getOutputData());
     }
@@ -105,9 +105,9 @@ ReturnType SimulinkObjectParser::parse()
       ReturnType subArrParseStat = subArrParserPtr->parse();
       if (subArrParseStat != E_OK)
       {
-        //l.log(Logger::V_ERROR,
+        // l.log(Logger::V_ERROR,
           "SimulinkObjectParser:: fail to build subArray element");
-        return subArrParseStat;
+          return subArrParseStat;
       }
       ptr->AddElement(subArrParserPtr->getOutputData());
       delete subArrParserPtr;
@@ -117,4 +117,4 @@ ReturnType SimulinkObjectParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

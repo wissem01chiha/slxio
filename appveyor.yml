@@ -1,0 +1,46 @@
+clone_depth: 10
+version: 1.0.{build}
+
+install:
+  - choco install cmake --version=3.27.7 -y
+  - refreshenv
+  - cmake --version    
+
+platform:
+  - x64
+  - Win32
+
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      CMAKE_GENERATOR: "Visual Studio 15 2017"
+      CONFIG: Release
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      CMAKE_GENERATOR: "Visual Studio 16 2019"
+      CONFIG: Release
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "Visual Studio 17 2022"
+      CONFIG: Release
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "Visual Studio 17 2022"
+      CONFIG: Debug
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "Visual Studio 17 2022"
+      CONFIG: RelWithDebInfo
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "Visual Studio 17 2022"
+      CONFIG: MinSizeRel
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "MinGW Makefiles"
+      CONFIG: Release
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
+      CMAKE_GENERATOR: "MinGW Makefiles"
+      CONFIG: Debug
+
+build_script:
+  - echo Running cmake...
+  - cmake -S . -B build -G "%CMAKE_GENERATOR%" -A %PLATFORM%
+  - cmake --build build --config %CONFIG%
+
+test_script:
+  - ctest  -C %CONFIG% --output-on-failure --timeout 500 -E parallel_for

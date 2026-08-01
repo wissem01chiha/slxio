@@ -4,7 +4,8 @@
 #include "SimulinkObject.h"
 #include "SimulinkParameter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSet::SimulinkConfigSet()
@@ -16,13 +17,13 @@ SimulinkConfigSet::SimulinkConfigSet()
   , hardware(nullptr)
   , modelReference(nullptr)
   , rtw(nullptr)
-  , l(Logger::GetInstance())
+  , logger(Logger::GetInstance())
 {
 }
 
-SimulinkConfigSet::SimulinkConfigSet(const SimulinkObject& obj)
-  : object(std::make_shared<SimulinkObject>(obj))
-  , l(Logger::GetInstance())
+SimulinkConfigSet::SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj)
+  : object(obj)
+  , logger(Logger::GetInstance())
 {
 }
 
@@ -31,129 +32,123 @@ std::string SimulinkConfigSet::ToString() const
   return object->ToString();
 }
 
-std::shared_ptr<SimulinkSolver> SimulinkConfigSet::getSolver()
+std::shared_ptr<SimulinkSolver> SimulinkConfigSet::GetSolver()
 {
   return solver;
 }
 
-const char* SimulinkConfigSet::getParameter(const char* name)
+const char* SimulinkConfigSet::GetParameter(const char* name)
 {
 
   if (name == nullptr)
   {
-    // l.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
+    // logger.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
-  std::shared_ptr<SimulinkParameter> cfgParam =
-    getParameterObject(std::string(name));
-  return cfgParam->getValue();
+  std::shared_ptr<SimulinkParameterBase> cfgParam = GetParameterObject(std::string(name));
+  return cfgParam->ToString().c_str();
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkConfigSet::getParameterObject(
+std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::GetParameterObject(
   const std::string& name)
 {
-  auto param = object->getParameter(name);
+  auto param = object->GetParameter(name);
   if (param)
   {
     return param;
   }
-  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
   //  " not found in configuration set.");
   return nullptr;
 }
 
-ReturnType SimulinkConfigSet::setParameter(const char* name, const char* value)
+ReturnType SimulinkConfigSet::SetParameter(const char* name, const char* value)
 {
-  auto param = object->getParameter(std::string(name));
+  auto param = object->GetParameter(std::string(name));
   if (param)
   {
-    param->setValue(value);
+    // param->SetValue(value);
     return E_OK;
   }
-  // l.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+  // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
   //" not found in configuration set. Cannot set value.");
   return E_OK;
 }
 
-ReturnType SimulinkConfigSet::copy()
+ReturnType SimulinkConfigSet::Copy()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::clone()
+ReturnType SimulinkConfigSet::Clone()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::RemoveElement()
+ReturnType SimulinkConfigSet::Clear()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::attach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::Attach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::detach(SimulinkModel& model)
+ReturnType SimulinkConfigSet::Detach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-std::string SimulinkConfigSet::getName()
+std::string SimulinkConfigSet::GetName()
 {
-  return object->getName();
+  return object->GetName();
 }
 
-std::shared_ptr<SimulinkObject> SimulinkConfigSet::getObject() const
+std::shared_ptr<SimulinkObject> SimulinkConfigSet::GetObject() const
 {
   return object;
 }
 
-IdType SimulinkConfigSet::GetElementId() const
+IdType SimulinkConfigSet::GetId() const
 {
-  return object->GetElementId();
+  return object->GetId();
 }
 
-ReturnType SimulinkConfigSet::saveToFile(const char* path)
-{
-  return E_NOT_IMPLEMENTED;
-}
-
-ReturnType SimulinkConfigSet::loadFromFile(const char* path)
+ReturnType SimulinkConfigSet::SaveToFile(const char* path)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-SimulinkConfigSet SimulinkConfigSet::fromFile(const char* path)
+ReturnType SimulinkConfigSet::FromFile(const char* path)
 {
-  return SimulinkConfigSet();
+  return E_OK;
 }
 
-void SimulinkConfigSet::activate()
+void SimulinkConfigSet::Activate()
 {
   if (status)
   {
-    // l.log(Logger::V_INFO, "Activating Simulink configuration set ",
+    // logger.log(Logger::V_INFO, "Activating Simulink configuration set ",
     //   object->getName());
   }
   status = true;
 }
 
-void SimulinkConfigSet::deactivate()
+void SimulinkConfigSet::Deactivate()
 {
   if (!status)
   {
-    // l.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
+    // logger.log(Logger::V_INFO, "Deactivating Simulink configuration set ",
     //  object->getName());
   }
   status = false;
 }
 
-bool SimulinkConfigSet::isActive() const
+bool SimulinkConfigSet::IsActive() const
 {
   return status;
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

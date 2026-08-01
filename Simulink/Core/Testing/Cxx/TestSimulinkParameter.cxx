@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkParameter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("SimulinkParameter")
@@ -20,7 +21,7 @@ TEST_CASE("SimulinkParameter")
 {
 
   SimulinkParameter* ParameterPtr = new SimulinkParameter("10");
-  CHECK(ParameterPtr->GetElementType().isA(SimulinkElementType::Parameter));
+  CHECK(ParameterPtr->GetType().isA(SimulinkElementType::Parameter));
   delete ParameterPtr;
 }
 
@@ -51,8 +52,7 @@ TEST_CASE("SimulinkParameter")
 TEST_CASE("SimulinkParameter")
 {
 
-  SimulinkParameter* ParameterPtr =
-    new SimulinkParameter("[10.025, 10.2, 4.5]");
+  SimulinkParameter* ParameterPtr = new SimulinkParameter("[10.025, 10.2, 4.5]");
 
   const std::vector<Float32> expected = { 10.025f, 10.2f, 4.5f };
 
@@ -67,4 +67,4 @@ TEST_CASE("SimulinkParameter")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

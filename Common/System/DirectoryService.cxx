@@ -1,15 +1,16 @@
 #include "DirectoryService.h"
 #include "Directory.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 #include <cstring>
 #include <sstream>
 #include <string.h>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-std::string DirectoryService::toString(const Directory& directory)
+std::string DirectoryService::ToString(const Directory& directory)
 {
   std::ostringstream oss;
 
@@ -99,8 +100,7 @@ std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(
   return std::make_shared<Directory>(path);
 }
 
-std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(
-  int* error)
+std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(int* error)
 {
   uv_fs_t req;
   *error = uv_fs_mkdtemp(uv_default_loop(), &req, "XXXXXX", nullptr);
@@ -155,4 +155,4 @@ std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

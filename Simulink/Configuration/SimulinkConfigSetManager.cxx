@@ -2,7 +2,8 @@
 #include "SimulinkConfigSet.h"
 #include <algorithm>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
@@ -11,8 +12,7 @@ SimulinkConfigSetManager::SimulinkConfigSetManager()
   cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-ReturnType SimulinkConfigSetManager::AddElement(
-  std::shared_ptr<SimulinkConfigSet> cfg)
+ReturnType SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg)
 {
   if (cfg == nullptr)
   {
@@ -24,8 +24,7 @@ ReturnType SimulinkConfigSetManager::AddElement(
   return E_OK;
 }
 
-ReturnType SimulinkConfigSetManager::RemoveElement(
-  std::shared_ptr<SimulinkConfigSet> cfg)
+ReturnType SimulinkConfigSetManager::RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg)
 {
 
   if (cfg == nullptr)
@@ -43,13 +42,12 @@ ReturnType SimulinkConfigSetManager::RemoveElement(
   return E_OK;
 }
 
-std::shared_ptr<SimulinkConfigSet>
-SimulinkConfigSetManager::getActiveConfiguration()
+std::shared_ptr<SimulinkConfigSet> SimulinkConfigSetManager::getActiveConfiguration()
 {
 
   for (const auto& cfg : cfgs)
   {
-    if (cfg->isActive())
+    if (cfg->IsActive())
     {
       return cfg;
     }
@@ -64,4 +62,4 @@ bool SimulinkConfigSetManager::hasConfigurationSet(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

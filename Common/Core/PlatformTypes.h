@@ -54,7 +54,7 @@
 
 /* Define type compare macro  */
 #if defined(__cplusplus)
-#define SLXIO_ASSERT_TYPE_EQUAL(var1, var2)                                    \
+#define SLXIO_ASSERT_TYPE_EQUAL(var1, var2)                                                        \
   static_assert(std::is_same<decltype(var1), decltype(var2)>::value)
 #endif
 

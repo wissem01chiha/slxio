@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkObjectParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObjectParserTestFixture
@@ -17,8 +18,8 @@ protected:
   {
 
     char xmlfilepath[512];
-    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-      PROJECT_ROOT_DIR, xmlfilename);
+    snprintf(
+      xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
     if (!doc)
     {
@@ -54,4 +55,4 @@ TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

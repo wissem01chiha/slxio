@@ -32,7 +32,7 @@
  * Set character display characteristic.
  * @param Characteristic to set using previous define.
  */
-void setCharDisplay(char *characteristic);
+void setCharDisplay(char* characteristic);
 
 /**
  * Change Characters color using nCurses colors define.
@@ -59,6 +59,5 @@ bool getCLIColor(void);
  * @param CLIColor True for color, False without
  */
 void setCLIColor(BOOL CLIColor);
-
 
 #endif /* SETCHARDISPLAY_H_ */

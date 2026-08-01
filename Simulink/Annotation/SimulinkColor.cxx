@@ -1,6 +1,7 @@
 #include "SimulinkColor.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 static const SimulinkColor BLACK = { "BLACK", "#000000" };
@@ -17,4 +18,4 @@ static const SimulinkColor LIGHTBLUE = { "LIGHTBLUE", "#63b9ff" };
 static const SimulinkColor DARKGREEN = { "DARKGREEN", "#699640" };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

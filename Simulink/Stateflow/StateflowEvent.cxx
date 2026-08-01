@@ -1,7 +1,8 @@
 #include "StateflowEvent.h"
 #include "Logger.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowEvent::StateflowEvent()
@@ -11,8 +12,7 @@ StateflowEvent::StateflowEvent()
   // l.log(Logger::V_INFO, "StateflowEvent created.");
 }
 
-ReturnType StateflowEvent::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   Logger& l = Logger::GetInstance();
   if (getParent() == nullptr)
@@ -25,4 +25,4 @@ ReturnType StateflowEvent::RemoveElement(
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

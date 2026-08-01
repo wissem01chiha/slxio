@@ -12,44 +12,44 @@
  * along with this program.
  */
 
-#include <string.h>
-#include <wctype.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "cliPrompt.h"
+#include "cliDisplayManagement.h"
+#include "prompt.h"
+#include <curses.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 #include <wchar.h>
 #include <wctype.h>
-#include <curses.h>
-#include "cliPrompt.h"
-#include "prompt.h"
-#include "cliDisplayManagement.h"
 
 /*
  * The function shows the current prompt
- * If none are set, function set it to the basic prompt SCIPROMPT ("-->") using wchar.
- * If Argument pass is WRITE_PROMPT (1), it write prompt (NOWRITE_PROMPT (-1) not to write prompt)
- * Function return size of the prompt.
+ * If none are set, function set it to the basic prompt SCIPROMPT ("-->") using
+ * wchar. If Argument pass is WRITE_PROMPT (1), it write prompt (NOWRITE_PROMPT
+ * (-1) not to write prompt) Function return size of the prompt.
  */
 int printPrompt(int token)
 {
-    /* Retrieve the prompt. It can be different if the pause mode is enabled */
-    const char * prompt     = GetCurrentPrompt();
-    const char * tmpPrompt  = GetTemporaryPrompt();
+  /* Retrieve the prompt. It can be different if the pause mode is enabled */
+  const char* prompt = GetCurrentPrompt();
+  const char* tmpPrompt = GetTemporaryPrompt();
 
-    if (token == WRITE_PROMPT)
+  if (token == WRITE_PROMPT)
+  {
+    setCharDisplay(DISP_DEFAULT);
+    if (tmpPrompt == '\0')
     {
-        setCharDisplay(DISP_DEFAULT);
-        if (tmpPrompt == '\0')
-        {
-            printf("%s", tmpPrompt);
-        }
-        else
-        {
-            printf("%s", prompt);
-        }
-        setCharDisplay(DISP_LAST_SET);
-        fflush(stdout);
+      printf("%s", tmpPrompt);
     }
+    else
+    {
+      printf("%s", prompt);
+    }
+    setCharDisplay(DISP_LAST_SET);
+    fflush(stdout);
+  }
 
-    return strlen(prompt);;
+  return strlen(prompt);
+  ;
 }

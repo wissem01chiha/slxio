@@ -1,2 +1,2 @@
 #include "SimulinkParameterWriter.h"
-#include <Doctest.h>
+#include <slxDoctest.h>

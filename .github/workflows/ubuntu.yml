@@ -2,8 +2,8 @@ name: Ubuntu
 on: [push, pull_request]
 jobs:
   cmake:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.os }}
+    name: ${{matrix.name}}
+    runs-on: ${{matrix.os}}
     timeout-minutes: 80
     strategy:
       fail-fast: false
@@ -60,15 +60,15 @@ jobs:
       uses: actions/checkout@v6
 
     - name: Install packages
-      if: ${{ matrix.packages }}
+      if: ${{matrix.packages}}
       run: sudo apt-get update && sudo apt-get install -y ${{ join(matrix.packages, ' ') }}
 
     - name: Configure
       run: cmake -S . -B build ${{ matrix.cmake-args }}
       env:
-          CC: ${{ matrix.compiler }}
-          CXX: ${{ matrix.cxx-compiler }}
-          CFLAGS: ${{ matrix.cflags }}
+          CC: ${{matrix.compiler}}
+          CXX: ${{matrix.cxx-compiler}}
+          CFLAGS: ${{matrix.cflags}}
 
     - name: Build
       run: cmake --build build

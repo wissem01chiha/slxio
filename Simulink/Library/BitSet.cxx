@@ -1,6 +1,7 @@
 #include "BitSet.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 BitSet::BitSet() {}
@@ -18,4 +19,4 @@ void BitSet::SetBitPosition(Float32 value)
 BitSet::~BitSet() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

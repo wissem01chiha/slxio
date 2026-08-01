@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 # SPDX-License-Identifier: Apache-2.0
-cmake_minimum_required(VERSION 3.12...3.21 FATAL_ERROR)
+
+cmake_minimum_required(VERSION 3.18...3.21 FATAL_ERROR)
 
 project(slxio)
 
@@ -154,6 +155,5 @@ include(ModuleDebugging)
 include(Module)
 include(Install)
 
-add_subdirectory(ThirdParty/zlib)
-add_submodules(${CMAKE_CURRENT_SOURCE_DIR})
+add_subdirectory(ThirdParty)
 summary()

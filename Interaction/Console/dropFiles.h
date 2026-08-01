@@ -19,11 +19,11 @@
 
 #include "BOOL.h" /* BOOL */
 /**
-* drap & drop files
-* @param[in] list of files
-* @return TRUE or FALSE
-*/
-BOOL dropFiles(char **files);
+ * drap & drop files
+ * @param[in] list of files
+ * @return TRUE or FALSE
+ */
+BOOL dropFiles(char** files);
 
 #endif /* __DROPFILES_H__ */
 /*--------------------------------------------------------------------------*/

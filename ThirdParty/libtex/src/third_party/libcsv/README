@@ -1,0 +1,29 @@
+Installation
+------------
+The libcsv library may be installed using the package management software included
+with many operating systems.  The relevant packages are typically named libcsv3
+and libcsv-dev.  See the documentation of your operating system's package management
+software for details on fetching and installing the appropriate package.
+
+Installation from source usually consists of:
+
+    ./configure && make && make check && make install
+
+see the INSTALL file for details and instructions on other systems.
+
+
+License
+-------
+The libcsv library is licensed under the LGPL, see the COPYING file for details.
+The example programs are not covered under a license and can be used without restriction.
+
+
+Documentation
+-------------
+See the accompanying man pages or pdf documentation
+
+
+libcsv interfaces for other programming languages
+-------------------------------------------------
+Ruby - Rcsv by Artur Pyrogovskyi
+       https://github.com/fiksu/rcsv

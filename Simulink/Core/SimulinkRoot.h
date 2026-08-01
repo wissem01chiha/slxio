@@ -7,13 +7,17 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-#include "SimulinkArray.h"
-#include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class Logger;
+class SimulinkArray;
+class SimulinkObject;
+
 /**
+ * @class SimulinkRoot
  * @brief A Mimic for SimulinkRoot Object given by sfroot function
  * @see
  * https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
@@ -21,16 +25,34 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkRoot final
 {
 public:
+  /* Default Construtor */
   SimulinkRoot();
-  SimulinkArray& getSubsystems();
-  SimulinkArray& getConfigSets();
 
+  /* Default Destructor */
+  ~SimulinkRoot() = default;
+
+  /* Deleted copy constructor */
+  SimulinkRoot(const SimulinkRoot&) = delete;
+
+  /* Deleted copy assignment operator */
+  SimulinkRoot& operator=(const SimulinkRoot&) = delete;
+
+  /* Deleted move constructor */
+  SimulinkRoot(SimulinkRoot&& other) = delete;
+
+  /* Deleted move assignment operator */
+  SimulinkRoot& operator=(SimulinkRoot&& other) = delete;
+
+  SimulinkArray* GetSubsystems();
+  SimulinkArray* GetConfigSets();
+
+  /* Find the state named A.*/
 private:
-  SimulinkArray subsystems;
-  SimulinkArray configSets;
+  SimulinkArray* Subsystems;
+  SimulinkArray* ConfigSets;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKROOT_H

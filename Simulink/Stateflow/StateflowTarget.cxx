@@ -2,7 +2,8 @@
 #include "ErrorCode.h"
 #include "Logger.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowTarget::StateflowTarget()
@@ -15,8 +16,7 @@ StateflowTarget::StateflowTarget(StateflowTarget& orig)
 {
 }
 
-ReturnType StateflowTarget::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowTarget::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isFalse(getParent() == null,
   //                "Target has no parent to be removed from.");
@@ -24,21 +24,20 @@ ReturnType StateflowTarget::RemoveElement(
   return E_OK;
 }
 
-ReturnType StateflowTarget::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowTarget::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   return E_OK;
 }
 
-std::string StateflowTarget::ToString() const
+std::string StateflowTarget::toString() const
 {
   return std::string("");
 }
 
-IdType StateflowTarget::GetElementId() const
+IdType StateflowTarget::GetId() const
 {
   return (IdType)0;
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

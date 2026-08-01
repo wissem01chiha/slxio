@@ -1,6 +1,7 @@
 #include "Constant.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 void Constant::SetValue(Float32 value)
@@ -14,4 +15,4 @@ Float32 Constant::GetValue() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

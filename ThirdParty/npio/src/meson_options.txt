@@ -1,0 +1,20 @@
+option(
+    'build_tests',
+    type : 'boolean',
+    value : 'true',
+    description : 'Whether to build the unit tests when build_testing is enabled and we are the root project'
+)
+
+option(
+    'asan',
+    type : 'boolean',
+    value : 'false',
+    description : 'Whether to enable address sanitizer'
+)
+
+option(
+    'build_shared',
+    type : 'boolean',
+    value : 'false',
+    description : 'Whether to build shared librray files'
+)  

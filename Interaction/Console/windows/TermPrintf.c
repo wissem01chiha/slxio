@@ -1,7 +1,7 @@
 /*
-* Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
-* Copyright (C) 2008 - INRIA - Allan CORNET
-*
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2008 - INRIA - Allan CORNET
+ *
  * Copyright (C) 2012 - 2016 - Scilab Enterprises
  *
  * This file is hereby licensed under the terms of the GNU GPL v2.0,
@@ -10,15 +10,15 @@
  * and continues to be available under such terms.
  * For more information, see the COPYING file which you should have received
  * along with this program.
-*
-*/
+ *
+ */
 
 /*--------------------------------------------------------------------------*/
-#include "dynlib_console.h"
 #include "TermConsole.h"
+#include "dynlib_console.h"
 /*--------------------------------------------------------------------------*/
-CONSOLE_IMPEXP void TermPrintf_Windows(char *buffer)
+CONSOLE_IMPEXP void TermPrintf_Windows(char* buffer)
 {
-    TerminalPrintf(buffer);
+  TerminalPrintf(buffer);
 }
 /*--------------------------------------------------------------------------*/

@@ -1,6 +1,7 @@
 #include "SimulinkArrayWriter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArrayWriter* SimulinkArrayWriter::New()
@@ -14,4 +15,4 @@ ReturnType SimulinkArrayWriter::Write()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -1,15 +1,21 @@
 #include "SimulinkParameter.h"
+#include "CoderInfo.h"
+#include "ErrorCode.h"
 #include "Logger.h"
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101, "SimulinkParameter" };
 
 SimulinkParameter::SimulinkParameter()
   : Min(SLXIO_FLOAT_MIN)
   , Max(SLXIO_FLOAT_MAX)
+  , logger(Logger::GetInstance())
 {
 
   DataType = SimulinkDataType::Auto;
@@ -19,11 +25,13 @@ SimulinkParameter::SimulinkParameter()
   Description = "";
   Unit = "";
   Dimensions.clear();
+  coder = std::make_shared<CoderInfo>();
 }
 
 SimulinkParameter::SimulinkParameter(const char* val)
   : Min(SLXIO_FLOAT_MIN)
   , Max(SLXIO_FLOAT_MAX)
+  , logger(Logger::GetInstance())
 {
 
   Value = val;
@@ -32,7 +40,7 @@ SimulinkParameter::SimulinkParameter(const char* val)
   Unit = "";
   Complexity = "real";
   Dimensions.clear();
-  coder = CoderInfo();
+  coder = std::make_shared<CoderInfo>();
 
   if (Value && Value[0] == '[')
   {
@@ -47,36 +55,37 @@ SimulinkParameter::SimulinkParameter(const char* val)
   DataType = toSimulinkDataType(val);
 }
 
-SimulinkDataType SimulinkParameter::getDataType()
+SimulinkDataType SimulinkParameter::GetDataType()
 {
   return DataType;
 }
 
-void SimulinkParameter::setDataType(SimulinkDataType DataType_)
+void SimulinkParameter::SetDataType(SimulinkDataType DataType_)
 {
 
   if (DataType_ == DataType)
   {
-    // Logger::GetInstance().log(Logger::V_WARNING,
-    // "SimulinkParameter::setDataType called with same "
-    // "data type. No changes made.");
+    logger.SendLogMessage(
+      { Logger::MessageType::LOG, Logger::LOG_WARN, SimulinkParameterLogApp, 0 },
+      { "SimulinkParameter::SetDataType called with same data type. No changes "
+        "made." });
     return;
   }
 
   this->DataType = DataType_;
 }
 
-const char* SimulinkParameter::getValue()
+const char* SimulinkParameter::GetValue()
 {
   return Value;
 }
 
-void SimulinkParameter::setValue(const char* value)
+void SimulinkParameter::SetValue(const char* value)
 {
   Value = value;
 }
 
-UInt32 SimulinkParameter::getValueAsDouble(Float32& fval)
+UInt32 SimulinkParameter::GetValueAsDouble(Float32& fval)
 {
   if (!Value)
   {
@@ -92,7 +101,7 @@ UInt32 SimulinkParameter::getValueAsDouble(Float32& fval)
   return E_OK;
 }
 
-UInt32 SimulinkParameter::getValueAsSingle(Float32& sval)
+UInt32 SimulinkParameter::GetValueAsSingle(Float32& sval)
 {
   if (!Value)
   {
@@ -108,7 +117,7 @@ UInt32 SimulinkParameter::getValueAsSingle(Float32& sval)
   return E_OK;
 }
 
-UInt32 SimulinkParameter::getValueAsUInt8(UInt8& u8val)
+UInt32 SimulinkParameter::GetValueAsUInt8(UInt8& u8val)
 {
   if (!Value)
   {
@@ -126,7 +135,7 @@ UInt32 SimulinkParameter::getValueAsUInt8(UInt8& u8val)
   return E_OK;
 }
 
-UInt32 SimulinkParameter::getValueAsUInt16(UInt16& u16val)
+UInt32 SimulinkParameter::GetValueAsUInt16(UInt16& u16val)
 {
 
   if (!Value)
@@ -145,59 +154,12 @@ UInt32 SimulinkParameter::getValueAsUInt16(UInt16& u16val)
   return E_OK;
 }
 
-UInt32 SimulinkParameter::getValueAsString(std::string& strval)
-{
-
-  if (!Value)
-  {
-    strval.clear();
-    return E_PARAMETER_NULL_PTR;
-  }
-  strval = std::string(Value);
-  return E_OK;
-}
-
-UInt32 SimulinkParameter::getValueAsArray(std::vector<Float32>& vecval)
-{
-
-  vecval.clear();
-  if (!Value)
-  {
-    return E_PARAMETER_NULL_PTR;
-  }
-  if (Value[0] != '[')
-  {
-    return E_OK;
-  }
-
-  std::string s(Value);
-  s.erase(0, 1);
-  if (!s.empty() && s.back() == ']')
-  {
-    s.pop_back();
-  }
-
-  std::stringstream ss(s);
-  std::string token;
-  while (std::getline(ss, token, ','))
-  {
-    char* endptr = nullptr;
-    double parsed = std::strtod(token.c_str(), &endptr);
-    if (endptr == token.c_str())
-    {
-      return E_OK;
-    }
-    vecval.push_back(static_cast<Float32>(parsed));
-  }
-  return E_OK;
-}
-
-CoderInfo SimulinkParameter::getCoderInfo()
+std::shared_ptr<CoderInfo> SimulinkParameter::GetCoderInfo()
 {
   return coder;
 }
 
-std::vector<UInt16> SimulinkParameter::getDimensions()
+std::vector<UInt16> SimulinkParameter::GetDimensions()
 {
   return Dimensions;
 }
@@ -217,12 +179,12 @@ std::string SimulinkParameter::ToString() const
   return std::string(str);
 }
 
-const char* SimulinkParameter::getName()
+std::string SimulinkParameter::GetName()
 {
   return Name;
 }
 
-UInt32 SimulinkParameter::setName(const char* name)
+UInt32 SimulinkParameter::SetName(const char* name)
 {
 
   if (name == nullptr)
@@ -237,51 +199,20 @@ UInt32 SimulinkParameter::setName(const char* name)
   return E_OK;
 }
 
-SimulinkElementType SimulinkParameter::GetElementType() const
-{
-  return SimulinkElementType(SimulinkElementType::Type::Parameter);
-}
-
-IdType SimulinkParameter::GetElementId() const
-{
-  // Logger::GetInstance().log(Logger::V_WARNING,
-  //   "SimulinkParameter::GetElementId called on unsupported element. "
-  //   "Returning 0.");
-  return (IdType)0;
-}
-
-bool SimulinkParameter::Contains(const IdType& id) const
-{
-  /*Logger::GetInstance().log(Logger::V_WARNING,
-    "SimulinkParameter::contains called on unsupported element.");*/
-  return false;
-}
-
-UInt32 SimulinkParameter::RemoveElement(
-  const std::shared_ptr<SimulinkElementBase> element)
-{
-  // Logger::GetInstance().log(
-  //  Logger::V_ERROR, "SimulinkParameter::remove is not supported.");
-  return E_NOT_IMPLEMENTED;
-}
-
-UInt32 SimulinkParameter::AddElement(
-  const std::shared_ptr<SimulinkElementBase> element)
-{
-  // Logger::GetInstance().log(
-  // Logger::V_ERROR, "SimulinkParameter::add is not supported.");
-  return E_NOT_IMPLEMENTED;
-}
-
-Float32 SimulinkParameter::getMin()
+Float32 SimulinkParameter::GetMin()
 {
   return Min;
 }
 
-Float32 SimulinkParameter::getMax()
+Float32 SimulinkParameter::GetMax()
 {
   return Max;
 }
 
+Logger& SimulinkParameter::GetLogger() const
+{
+  return logger;
+}
+
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

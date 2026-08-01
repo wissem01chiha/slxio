@@ -17,10 +17,10 @@
 #define __GOTOXY_NW_H__
 
 /**
-* move cursor in -nw mode
-* @param[in] x
-* @param[in] y
-*/
+ * move cursor in -nw mode
+ * @param[in] x
+ * @param[in] y
+ */
 void gotoxy_nw(int x, int y);
 
 #endif /* __GOTOXY_NW_H__ */

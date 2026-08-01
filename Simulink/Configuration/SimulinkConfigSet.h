@@ -9,10 +9,14 @@
 #include "PlatformTypes.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
-#include "SimulinkParameter.h"
+#include "SimulinkParameterBase.h"
 #include <memory>
 #include <string>
 #include <vector>
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkSolver;
 class SimulinkOptimization;
@@ -23,91 +27,90 @@ class SimulinkModelReference;
 class SimulinkRTW;
 class Logger;
 
-SLXIO_NAMESPACE_BEGIN
-SLXIO_ABI_NAMESPACE_BEGIN
-
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
 class SLXIO_APIEXPORT SimulinkConfigSet final
 {
 public:
+  /** Default Constructor */
   SimulinkConfigSet();
 
-  ~SimulinkConfigSet() = default;
+  /**
+   * disbale copy constructor
+   * nstead use clone to create a copy of the configuration set
+   */
+  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
 
-  /// @brief disbale copy constructor
-  /// @note instead use clone to create a copy of the configuration set
-  SimulinkConfigSet(const SimulinkConfigSet&);
+  /**
+   * Contructor from SimulinkObject, this is used internally to
+   * fill a SimulinkConfigSet from low level Slx Representation, not
+   * recommended for public use.
+   */
+  SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj);
 
-  /// @brief Contructor from SimulinkObject, this is used internally to
-  /// fill a SimulinkConfigSet from low level Slx Representation, not
-  /// recommended for public use !!!
-  explicit SimulinkConfigSet(const SimulinkObject& obj);
+  /** checks if this configuration set is active */
+  bool IsActive() const;
 
-  /// @brief checks if this configuration set is active
-  bool isActive() const;
+  /** Gets a parameter value by name.*/
+  const char* GetParameter(const char* name);
 
-  /// @brief Gets a parameter value by name.
-  const char* getParameter(const char* name);
+  /** Retuens the parameter object by name. */
+  std::shared_ptr<SimulinkParameterBase> GetParameterObject(const std::string& name);
 
-  /// @brief Retuens the parameter object by name.
-  std::shared_ptr<SimulinkParameter> getParameterObject(
-    const std::string& name);
+  /** Sets a parameter value by name.*/
+  ReturnType SetParameter(const char* name, const char* value);
 
-  /// @brief Sets a parameter value by name.
-  ReturnType setParameter(const char* name, const char* value);
+  /** Creates a copy of this configuration set.*/
+  ReturnType Copy();
 
-  /// @brief Creates a copy of this configuration set.
-  ReturnType copy();
+  /** Create a deep copy of this configuration set.*/
+  ReturnType Clone();
 
-  /// @brief Create a deep copy of this configuration set.
-  ReturnType clone();
+  /** Deletes this configuration set.*/
+  ReturnType Clear();
 
-  /// @brief Deletes this configuration set.
-  ReturnType RemoveElement();
+  /** Attaches this configuration set to a Simulink model.*/
+  ReturnType Attach(SimulinkModel& model);
 
-  /// @brief Attaches this configuration set to a Simulink model.
-  ReturnType attach(SimulinkModel& model);
+  /** Detaches this configuration set from a Simulink model.*/
+  ReturnType Detach(SimulinkModel& model);
 
-  /// @brief Detaches this configuration set from a Simulink model.
-  ReturnType detach(SimulinkModel& model);
+  /** Activates this configuration set.*/
+  void Activate();
 
-  /// @brief Activates this configuration set.
-  void activate();
+  /** Deactivates this configuration set.*/
+  void Deactivate();
 
-  /// @brief Deactivates this configuration set.
-  void deactivate();
+  /** Retrieves the name of the configuration set.*/
+  std::string GetName();
 
-  /// @brief Retrieves the name of the configuration set.
-  std::string getName();
+  /**
+   * Retrive the underlying SimulinkObject representing this
+   * configuration set.
+   */
+  std::shared_ptr<SimulinkObject> GetObject() const;
 
-  /// @brief  Retrive the underlying SimulinkObject representing this
-  /// configuration set.
-  std::shared_ptr<SimulinkObject> getObject() const;
+  /** forward to underlying SimulinkObject GetId*/
+  IdType GetId() const;
 
-  /// @brief  forward to underlying SimulinkObject GetElementId
-  IdType GetElementId() const;
+  /** Creates a configuration set from a file.*/
+  ReturnType FromFile(const char* path);
 
-  /// @brief Loads the configuration set from a file.
-  ReturnType loadFromFile(const char* path);
+  /** Saves the configuration set to a file. */
+  ReturnType SaveToFile(const char* path);
 
-  /// @brief Creates a configuration set from a file.
-  /// Supported formats: .m, .mat(planned)
-  static SimulinkConfigSet fromFile(const char* path);
-
-  /// @brief Saves the configuration set to a file.
-  /// @brief Supported formats: .m, .mat(planned)
-  ReturnType saveToFile(const char* path);
-
-  /// @brief Converts to a string representation.
+  /** Converts to a string representation. */
   std::string ToString() const;
 
-  /// @brief Get a Pointer to Solver Configuration struct
-  std::shared_ptr<SimulinkSolver> getSolver();
+  /** Get a Pointer to Solver Configuration struct */
+  std::shared_ptr<SimulinkSolver> GetSolver();
+
+  /** Default destructor */
+  ~SimulinkConfigSet() = default;
 
 private:
-  Logger& l;
+  Logger& logger;
   bool status = false;
   std::shared_ptr<SimulinkObject> object;
   std::shared_ptr<SimulinkSolver> solver;
@@ -120,6 +123,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKCONFIGSET_H

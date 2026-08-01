@@ -11,10 +11,11 @@
 #include <string>
 #include <vector>
 
-class Archive;
-
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Archive;
 
 /**
  * @class ArchiveManager
@@ -70,6 +71,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // ARCHIVEMANAGER_H

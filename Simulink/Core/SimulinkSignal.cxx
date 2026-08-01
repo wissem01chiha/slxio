@@ -1,7 +1,8 @@
 #include "SimulinkSignal.h"
 #include <cstring>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkSignal::SimulinkSignal()
@@ -152,4 +153,4 @@ ReturnType SimulinkSignal::setRange(Float32 min, Float32 max)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

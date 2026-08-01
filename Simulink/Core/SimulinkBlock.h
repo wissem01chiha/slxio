@@ -6,17 +6,19 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Logger.h"
 #include "PlatformTypes.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkParameter.h"
 #include "SimulinkPortType.h"
 #include <map>
 #include <memory>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
+class SimulinkParameter;
 
 /**
  * @class SimulinkBlock
@@ -24,141 +26,104 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkBlock : public SimulinkElementBase
 {
 public:
-  /**
-   * Default constructor.
-   */
+  /** Default constructor.*/
   SimulinkBlock();
 
-  /**
-   * Constructor with block type.
-   */
+  SimulinkBlock* New() const override;
+
+  /** Constructor with block type.*/
   explicit SimulinkBlock(SimulinkBlockType::Type blockType);
 
-  /**
-   * Constructor from a Pointer to a Block
-   */
-  explicit SimulinkBlock(SimulinkBlockType* blockType);
+  /** Constructor with block type, name, and Id.*/
+  SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName, const IdType& blockId);
 
-  /**
-   * Copy constructor.
-   */
-  SimulinkBlock(const SimulinkBlock& origBlock);
+  /** Accesses a child element by index with bound checking */
+  std::shared_ptr<SimulinkElementBase> at(IdType index) override;
 
-  /**
-   * Deleted copy assignment operator to prevent copying.
-   */
-  SimulinkBlock& operator=(const SimulinkBlock&) = delete;
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
 
-  /**
-   * Constructor with block type, name, and Id.
-   */
-  SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName,
-    const IdType& blockId);
+  /** Returns the number of child elements. */
+  UInt32 Size() const override;
 
-  /**
-   * Support adding Only SimulinkBlock and SimulinkParameter
-   * Object Types.
-   */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  /** Returns true if no child elements exist. */
+  bool Empty() const override;
 
-  /**
-   * Add a port to the block.
-   */
-  void AddElement(SimulinkPortType portType);
+  /** Removes all child elements. */
+  void Clear() override;
 
-  /**
-   * Support Removing Only SimulinkBlock and SimulinkParameter
-   * object types.
-   */
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
+  /** Inserts a new child element. */
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
-  /**
-   * .Serliser the block to string
-   */
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
+  bool Contains(const IdType& id) const override;
+
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
+
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
+
+  /** Returns a string representation of this element. */
   std::string ToString() const override;
 
-  /**
-   * .Return the block unqiue id
-   */
-  IdType GetElementId() const override;
-
-  /**
-   * .override from SimulinkElmentBase
-   */
-  SimulinkElementType GetElementType() const override;
-
-  /**
-   * Retrieve the block type of the Simulink block.
-   */
+  /** Retrieve the block type of the Simulink block.*/
   SimulinkBlockType GetBlockType();
 
-  /**
-   * Get the block name.
-   */
-  std::string GetBlockName();
+  /** Get the block name.*/
+  std::string GetName() override;
 
-  /**
-   * Retrieve a sub-block by name. Returns an empty shared_ptr if not
-   * found.
-   */
-  std::shared_ptr<SimulinkBlock> GetSubBlock(const std::string& blockName);
+  /** Dim of a Simulink Block ????? */
+  std::string GetDimension() override;
 
-  /**
-   * Retrieve a sub-block by Id. Returns an empty shared_ptr if not
-   * found.
-   */
-  std::shared_ptr<SimulinkBlock> GetSubBlock(const IdType& blockId);
+  /** Get the Parent block at the hiraciy .*/
+  std::shared_ptr<SimulinkBlock> GetBlockParent();
 
-  /**
-   * Get the Parent block at the hiraciy .
-   */
-  std::shared_ptr<SimulinkBlock> GetParent();
+  /** Return a pointer to a given parameter by name, if not
+   * found a or the blcok has not paramters an empty parameter returned. */
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
-  /**
-   * Return a pointer to a given parameter by name, if not
-   * found a or the blcok has not paramters an empty parameter returned.
-   */
-  std::shared_ptr<SimulinkParameter> GetParameter(const char* parameterName);
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
-  /**
-   * Sets the block Id to a given one, shoule not used by public users, only
-   * for internal Peraser
-   */
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /** Sets the block Id to a given one, shoule not used by public users, only
+   * for internal Peraser */
   void SetBlockId(const IdType& blockId);
 
-  /**
-   * .Set the block name
-   */
+  /** Set the block name */
   void SetBlockName(const std::string& blockName);
 
-  /**
-   * Sets the bclok explict type.
-   */
+  /** Sets the bclok explict type.*/
   void SetBlockType(SimulinkBlockType::Type blockType);
 
-  /**
-   * Check whatever a blcok contains an other block given it unqiue id.
-   */
-  bool Contains(const IdType& blockId) const override;
-
-  /**
-   * Return the class internal logger object
-   */
+  /** Return the class internal logger object*/
   Logger& GetLogger();
 
 private:
-  IdType id;
+  IdType BlockId;
   Logger& logger;
-  std::string name;
-  SimulinkBlockType type;
-  std::map<IdType, SimulinkPortType> ports;
-  std::vector<std::shared_ptr<SimulinkBlock>> blocks;
-  std::shared_ptr<SimulinkBlock> parent;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  std::string BlockName;
+  SimulinkBlockType BlockType;
+  std::map<IdType, SimulinkPortType> BlockPorts;
+  std::vector<std::shared_ptr<SimulinkBlock>> SubBlocks;
+  std::shared_ptr<SimulinkBlock> BlockParent;
+  std::vector<std::shared_ptr<SimulinkParameter>> BlockParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKBLOCK_H

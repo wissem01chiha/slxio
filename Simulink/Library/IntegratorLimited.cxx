@@ -1,6 +1,7 @@
 #include "IntegratorLimited.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 IntegratorLimited::IntegratorLimited() {}
@@ -18,4 +19,4 @@ void IntegratorLimited::SetUpperLimit(Float32 value)
 IntegratorLimited::~IntegratorLimited() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

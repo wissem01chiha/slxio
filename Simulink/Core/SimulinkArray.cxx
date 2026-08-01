@@ -1,39 +1,35 @@
 #include "SimulinkArray.h"
+#include "ErrorCode.h"
 #include "Logger.h"
+#include "SimulinkParameter.h"
 #include <algorithm>
 #include <sstream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+static const Logger::ApplicationInfoType SimulinkArrayLogApp = { 100, "SimulinkArray" };
 
 SimulinkArray::SimulinkArray()
   : logger(Logger::GetInstance())
 {
 }
 
-SimulinkArray::SimulinkArray(
-  std::string type, std::string name, std::string dimension)
-  : type(type)
-  , name(name)
-  , dimension(dimension)
+SimulinkArray* SimulinkArray::New() const
+{
+  return new SimulinkArray();
+}
+
+SimulinkArray::SimulinkArray(std::string type, std::string name, std::string dimension)
+  : ArrayType(type)
+  , ArrayName(name)
+  , ArrayDimension(dimension)
   , logger(Logger::GetInstance())
 {
 }
 
-SimulinkArray::SimulinkArray(const SimulinkArray& other)
-  : logger(Logger::GetInstance())
-{
-
-  this->id = other.id;
-  this->name = other.name;
-  this->dimension = other.dimension;
-  this->parameters = other.parameters;
-  this->objects = other.objects;
-  this->subArrays = other.subArrays;
-  this->type = other.type;
-}
-
-SimulinkElementType SimulinkArray::GetElementType() const
+SimulinkElementType SimulinkArray::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Array);
 }
@@ -43,19 +39,19 @@ std::string SimulinkArray::ToString() const
   std::ostringstream oss;
 
   oss << "SimulinkArray {\n";
-  oss << "  Id: " << id << "\n";
-  oss << "  Type: " << type << "\n";
-  oss << "  Name: " << name << "\n";
-  oss << "  Dimension: " << dimension << "\n";
+  oss << "  Id: " << ArrayId << "\n";
+  oss << "  Type: " << ArrayType << "\n";
+  oss << "  Name: " << ArrayName << "\n";
+  oss << "  Dimension: " << ArrayDimension << "\n";
 
   oss << "  Object Ids:\n";
-  for (const auto& id : objects)
+  for (const auto& ArrayId : ArrayObjectIds)
   {
-    oss << "    - " << id << "\n";
+    oss << "    - " << ArrayId << "\n";
   }
 
   oss << "  SubArrays:\n";
-  for (const auto& subArray : subArrays)
+  for (const auto& subArray : SubArrays)
   {
     if (subArray)
     {
@@ -64,7 +60,7 @@ std::string SimulinkArray::ToString() const
   }
 
   oss << "  Parameters:\n";
-  for (const auto& param : parameters)
+  for (const auto& param : ArrayParameters)
   {
     if (param)
     {
@@ -77,143 +73,148 @@ std::string SimulinkArray::ToString() const
   return oss.str();
 }
 
-ReturnType SimulinkArray::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
   if (element == nullptr)
   {
-    // l.log(
-    // Logger::V_WARNING, "SimulinkArray::Cannot add a null Simulink element.");
+    logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+      { "Cannot add a null Simulink element." });
     return E_PARAMETER_NULL_PTR;
   }
-
-  if (element->GetElementType().isA(SimulinkElementType::Array))
+  if (element->GetType().isA(SimulinkElementType::Array))
   {
+    std::shared_ptr<SimulinkArray> subArrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
 
-    std::shared_ptr<SimulinkArray> subArrayPtr =
-      std::dynamic_pointer_cast<SimulinkArray>(element);
-
-    for (const auto& arraysPtr : subArrays)
+    for (const auto& arraysPtr : SubArrays)
     {
-      if (subArrayPtr->getName() == arraysPtr->getName())
+      if (subArrayPtr->GetName() == arraysPtr->GetName())
       {
-        // l.log(Logger::V_WARNING,
-        //  "SimulinkArray::subArray already exsists in the Base "
-        //  "array");
+        logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+          { "SubArray already exists in the base array" });
+        return E_OK;
       }
     }
-    subArrays.push_back(subArrayPtr);
+    SubArrays.push_back(subArrayPtr);
+    return E_OK;
   }
-  else if (element->GetElementType().isA(SimulinkElementType::Object))
+  else if (element->GetType().isA(SimulinkElementType::Object))
   {
 
-    for (const auto& objId : objects)
+    for (const auto& objId : ArrayObjectIds)
     {
-      if (element->GetElementId() == objId)
+      if (element->GetId() == objId)
       {
-        // l.log(Logger::V_WARNING,
-        //  "SimulinkArray::subObject already exsists in the base "
-        //  "array");
+        logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+          { "Object already exists in the base array" });
         return E_OK;
       }
     }
 
-    objects.push_back(element->GetElementId());
+    ArrayObjectIds.push_back(element->GetId());
+    return E_OK;
   }
-  else if (element->GetElementType().isA(SimulinkElementType::Parameter))
+  else if (element->GetType().isA(SimulinkElementType::Parameter))
   {
 
     std::shared_ptr<SimulinkParameter> param =
       std::dynamic_pointer_cast<SimulinkParameter>(element);
-    parameters.push_back(param);
+    ArrayParameters.push_back(param);
     return E_OK;
   }
   else
   {
-    // l.log(Logger::V_ERROR,
-    //"Cannot add a Simulink element of a different type "
-    // "than Array or Object to a SimulinkObject");
-    return E_OK;
+    logger.SendLogMessage({ Logger::LOG, Logger::LOG_ERROR, SimulinkArrayLogApp, 3 },
+      { "Cannot add a Simulink element of a different type than Array or "
+        "Object to a SimulinkArray" });
   }
 
   return E_OK;
 }
 
-ReturnType SimulinkArray::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> elment)
+ReturnType SimulinkArray::Erase(const IdType& ArrayId)
 {
-  if (elment == nullptr)
+  for (const auto& objId : ArrayObjectIds)
   {
-    // l.log(Logger::V_WARNING,
-    //  "SimulinkArray::Cannot remove a null Simulink element.");
+    if (objId == ArrayId)
+    {
+      ArrayObjectIds.erase(
+        remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId), ArrayObjectIds.end());
+      return E_OK;
+    }
+  }
+  return E_OK;
+}
+
+ReturnType SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+{
+  if (element == nullptr)
+  {
+    logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+      { "Cannot remove a null Simulink element." });
     return E_PARAMETER_NULL_PTR;
   }
-
-  if (elment->GetElementType().isA(SimulinkElementType::Array))
+  if (element->GetType().isA(SimulinkElementType::Array))
   {
 
-    std::shared_ptr<SimulinkArray> arrayPtr =
-      std::dynamic_pointer_cast<SimulinkArray>(elment);
+    std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
 
-    for (const auto& arr : subArrays)
+    for (const auto& arr : SubArrays)
     {
 
-      if (arr->getName() == arrayPtr->getName())
+      if (arr->GetName() == arrayPtr->GetName())
       {
-        subArrays.erase(
-          remove(subArrays.begin(), subArrays.end(), arr), subArrays.end());
+        SubArrays.erase(remove(SubArrays.begin(), SubArrays.end(), arr), SubArrays.end());
+        return E_OK;
       }
-      arr->RemoveElement(elment);
+      arr->Erase(element);
     }
   }
-  else if (elment->GetElementType().isA(SimulinkElementType::Object))
+  else if (element->GetType().isA(SimulinkElementType::Object))
   {
 
-    for (const auto& objId : objects)
+    for (const auto& objId : ArrayObjectIds)
     {
-      if (elment->GetElementId() == objId)
+      if (element->GetId() == objId)
       {
-        objects.erase(
-          remove(objects.begin(), objects.end(), objId), objects.end());
+        ArrayObjectIds.erase(
+          remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId), ArrayObjectIds.end());
+        return E_OK;
       }
     }
   }
   else
   {
-    // l.log(Logger::V_WARNING,
-    //  "SimulinkArray::Cannot remove a Simulink element of a "
-    //  "different type "
-    //"than Array or Object to a SimulinkObject");
+    logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+      { "Cannot remove a Simulink element of a different type "
+        "than Array or Object from a SimulinkArray" });
     return E_OK;
   }
-
   return E_OK;
 }
 
-IdType SimulinkArray::GetElementId() const
+IdType SimulinkArray::GetId() const
 {
-  // l.log(Logger::V_INFO,
-  //  "SimulinkArray do not have an ID by default use Contains(uint32 "
-  //  "id) to "
-  //  "check for sub objects by their Id");
-  return id;
+  logger.SendLogMessage({ Logger::LOG, Logger::LOG_INFO, SimulinkArrayLogApp, 3 },
+    { "SimulinkArray do not have an Id by default use Contains(IdType id) to "
+      "check for sub objects or sub arrays by their Id" });
+  return ArrayId;
 }
 
-bool SimulinkArray::Contains(const IdType& id) const
+bool SimulinkArray::Contains(const IdType& ArrayId) const
 {
-  for (IdType objID : objects)
+  for (IdType objID : ArrayObjectIds)
   {
-    if (objID == id)
+    if (objID == ArrayId)
     {
       return true;
     }
   }
 
-  for (const auto& arr : subArrays)
+  for (const auto& arr : SubArrays)
   {
     if (arr)
     {
-      if (arr->Contains(id))
+      if (arr->Contains(ArrayId))
       {
         return true;
       }
@@ -223,53 +224,95 @@ bool SimulinkArray::Contains(const IdType& id) const
   return false;
 }
 
+UInt32 SimulinkArray::Size() const
+{
+  return ArrayObjectIds.size() + SubArrays.size() + ArrayParameters.size();
+}
+
+bool SimulinkArray::Empty() const
+{
+  return ArrayObjectIds.empty() && SubArrays.empty() && ArrayParameters.empty();
+}
+
+void SimulinkArray::Clear()
+{
+  ArrayObjectIds.clear();
+  SubArrays.clear();
+  ArrayParameters.clear();
+}
+
+std::shared_ptr<SimulinkElementBase> SimulinkArray::Find(const IdType& id)
+{
+  return std::shared_ptr<SimulinkElementBase>();
+}
+
+std::shared_ptr<SimulinkElementBase> SimulinkArray::at(IdType index)
+{
+  return SubArrays.at(index);
+}
+
+std::shared_ptr<SimulinkElementBase> SimulinkArray::operator[](IdType index)
+{
+  return std::shared_ptr<SimulinkElementBase>();
+}
+
 Logger& SimulinkArray::GetLogger()
 {
   return logger;
 }
 
-std::shared_ptr<SimulinkParameter> SimulinkArray::getParameter(std::string name)
+std::shared_ptr<SimulinkParameterBase> SimulinkArray::GetParameter(std::string name)
 {
 
-  for (const auto& param : parameters)
+  for (const auto& param : ArrayParameters)
   {
-    if (param && param->getName() == name)
+    if (param && param->GetName() == name)
     {
       return param;
     }
   }
 
-  for (const auto& subArray : subArrays)
+  for (const auto& SubArray : SubArrays)
   {
-    if (subArray)
+    if (SubArray)
     {
-      auto result = subArray->getParameter(name);
+      auto result = SubArray->GetParameter(name);
       if (result)
       {
         return result;
       }
     }
   }
-
-  // l.log(Logger::V_WARNING, "SimulinkArray:: Parameter", name.c_str(),
-  //" not found.");
+  logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+    { "Parameter ", ArrayName, " not found." });
   return nullptr;
 }
 
-std::string SimulinkArray::getName()
+ReturnType SimulinkArray::SetParameter(
+  std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return name;
+  return E_OK;
 }
 
-std::string SimulinkArray::getDimension()
+ReturnType SimulinkArray::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return dimension;
+  return E_OK;
 }
 
-std::string SimulinkArray::getArrayType()
+std::string SimulinkArray::GetName()
 {
-  return type;
+  return ArrayName;
+}
+
+std::string SimulinkArray::GetDimension()
+{
+  return ArrayDimension;
+}
+
+std::string SimulinkArray::GetArrayType()
+{
+  return ArrayType;
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

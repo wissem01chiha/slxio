@@ -1,7 +1,7 @@
 /*
-* Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
-* Copyright (C) 2008 - DIGITEO - Allan CORNET
-*
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2008 - DIGITEO - Allan CORNET
+ *
  * Copyright (C) 2012 - 2016 - Scilab Enterprises
  *
  * This file is hereby licensed under the terms of the GNU GPL v2.0,
@@ -10,8 +10,8 @@
  * and continues to be available under such terms.
  * For more information, see the COPYING file which you should have received
  * along with this program.
-*
-*/
+ *
+ */
 
 #ifndef __TERMLINE_H__
 #define __TERMLINE_H__
@@ -19,138 +19,138 @@
 #include "BOOL.h"
 
 /**
-* returns current line
-* @return current line
-*/
-char *getCurrentLine(void);
+ * returns current line
+ * @return current line
+ */
+char* getCurrentLine(void);
 
 /**
-* returns line before caret
-* return line
-*/
-char *getLineBeforeCaret(void);
+ * returns line before caret
+ * return line
+ */
+char* getLineBeforeCaret(void);
 
 /**
-* returns line after caret
-* return line
-*/
-char *getLineAfterCaret(void);
+ * returns line after caret
+ * return line
+ */
+char* getLineAfterCaret(void);
 
 /**
-* moves to the beginning of the line
-*/
+ * moves to the beginning of the line
+ */
 void moveBeginningLine(void);
 
 /**
-* moves to the end of the line
-*/
+ * moves to the end of the line
+ */
 void moveEndLine(void);
 
 /**
-* moves back a single character
-*/
+ * moves back a single character
+ */
 void moveBackSingleChar(void);
 
 /**
-* moves forward a single character
-*/
+ * moves forward a single character
+ */
 void moveForwardSingleChar(void);
 
 /**
-* moves back a single word
-*/
+ * moves back a single word
+ */
 void moveBackSingleWord(void);
 
 /**
-* moves forward a single word
-*/
+ * moves forward a single word
+ */
 void moveForwardSingleWord(void);
 
 /**
-* kills from current position to the end of line
-*/
+ * kills from current position to the end of line
+ */
 void killCurrentPositionToEndLine(void);
 
 /**
-* delete the previous character
-*/
+ * delete the previous character
+ */
 void deletePreviousChar(void);
 
 /**
-* deletes the current character
-*/
+ * deletes the current character
+ */
 void deleteCurrentChar(void);
 
 /**
-* moves back through history
-*/
+ * moves back through history
+ */
 void moveBackHistory(void);
 
 /**
-* moves forward through history
-*/
+ * moves forward through history
+ */
 void moveForwardHistory(void);
 
 /**
-* redraw line
-*/
+ * redraw line
+ */
 void redrawLine(void);
 
 /**
-* kills last word
-*/
+ * kills last word
+ */
 void killLastWord(void);
 
 /**
-* initialize new line
-*/
+ * initialize new line
+ */
 void newLine(void);
 
 /**
-* clear current line
-*/
+ * clear current line
+ */
 void clearCurrentLine(void);
 
 /**
-* set prompt used by terminal
-*/
-void setCurrentPrompt(const char *prompt);
+ * set prompt used by terminal
+ */
+void setCurrentPrompt(const char* prompt);
 
 /**
-* display prompt
-*/
+ * display prompt
+ */
 void displayPrompt(void);
 
 /**
-* refresh line
-*/
+ * refresh line
+ */
 void refreshLine(void);
 
 /**
-* copy line on terminal
-*/
-void copyLine(char *line);
+ * copy line on terminal
+ */
+void copyLine(char* line);
 
 /**
-* line is a history search
-* @return TRUE or FALSE;
-*/
+ * line is a history search
+ * @return TRUE or FALSE;
+ */
 BOOL isHistorySearch(void);
 
 /**
-* add character to current line
-* @param[in] character to add
-*/
+ * add character to current line
+ * @param[in] character to add
+ */
 void addCharacterCurrentLine(unsigned char ch);
 
 /**
-* put line searched in history
-*/
+ * put line searched in history
+ */
 void putLineSearchedHistory(void);
 
 /**
-* Paste current clipboard on line
-*/
+ * Paste current clipboard on line
+ */
 void pasteClipBoard(void);
 
 void finalizeLineBuffer(void);

@@ -1,0 +1,7 @@
+docs/** linguist-vendored
+*.c linguist-language=C
+*.h linguist-language=C
+cmake/FindLATEX.cmake linguist-vendored
+cmake/FindLibUV.cmake linguist-vendored
+cmake/FindFreetype.cmake linguist-vendored
+cmake/FindGnuplot.cmake linguist-vendored

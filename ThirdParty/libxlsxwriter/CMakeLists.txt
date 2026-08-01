@@ -1,4 +1,4 @@
-add_thirdparty_module(libxlsxwriter
-    ${PROJECT_SOURCE_DIR}/ThirdParty/libxlsxwriter
-    xlsxwriter
-)
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
+add_subdirectory(src)

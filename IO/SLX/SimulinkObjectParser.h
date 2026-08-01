@@ -6,11 +6,12 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "LibXML2.h"
+#include "slxLibxml2.h"
 #include "SimulinkObject.h"
 #include "SimulinkParserBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -33,6 +34,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKOBJECTPARSER_H

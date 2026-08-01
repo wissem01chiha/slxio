@@ -1,21 +1,23 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Set and Get last error")
 {
   ErrorHandler eh;
   eh.SetLastError(E_INVALID_ARGUMENT);
   CHECK(eh.GetLastError() == E_INVALID_ARGUMENT);
-  CHECK(std::string(eh.GetLastErrorMessage()) ==
-    "Invalid argument passed to function");
+  CHECK(std::string(eh.GetLastErrorMessage()) == "Invalid argument passed to function");
 }
 
 TEST_CASE("Get error message for known SLXIO code")
 {
-  CHECK(std::string(ErrorHandler::GetErrorMessage(E_FILE_NOT_FOUND)) ==
-    "File not found");
+  CHECK(std::string(ErrorHandler::GetErrorMessage(E_FILE_NOT_FOUND)) == "File not found");
   CHECK(std::string(ErrorHandler::GetErrorMessage(E_CONFIG_ALREADY_ACTIVE)) ==
     "Configuration is already active");
 }
@@ -48,3 +50,6 @@ TEST_CASE("Print error message functions")
   CHECK(eh.PrintLastErrorMessage() > 0);
   CHECK(eh.PrintfLastErrorMessage("Last error: %s\n") > 0);
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

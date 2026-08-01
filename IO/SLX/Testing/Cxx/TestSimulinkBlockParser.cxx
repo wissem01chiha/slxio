@@ -1,8 +1,9 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkBlockParser.h"
 #include <iostream>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkBlockParserTestFixture
@@ -18,8 +19,8 @@ protected:
   {
 
     char xmlfilepath[512];
-    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-      PROJECT_ROOT_DIR, xmlfilename);
+    snprintf(
+      xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
     if (!doc)
     {
@@ -75,7 +76,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
   CHECK(status == E_OK);
 
   std::shared_ptr<SimulinkBlock> blockObj = parserPtr->getOutputData();
-  CHECK(blockObj->GetElementId() == 6);
+  CHECK(blockObj->GetId() == 6);
   CHECK(blockObj->getName() == "Driving Cycle");
   std::cout << blockObj->ToString() << std::endl;
 
@@ -84,8 +85,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
   CHECK(blockType.isA(SimulinkBlockType::Type::FromWorkspace));
 }
 
-TEST_CASE_FIXTURE(
-  SimulinkBlockParserTestFixture, "BlockParamtersValidationTest")
+TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParamtersValidationTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
@@ -106,4 +106,4 @@ TEST_CASE_FIXTURE(
   CHECK(strcmp(parameter->getValue(), "[365, 262, 455, 408]") == 0);
 }
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

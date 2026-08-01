@@ -8,7 +8,8 @@
 #include "ApiExportMacro.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -25,13 +26,13 @@ public:
   SimulinkModelType() = default;
   explicit SimulinkModelType(SimulinkModelType::Type type);
   static std::string ToString(SimulinkModelType::Type type);
-  Type GetElementType() const;
+  Type GetType() const;
 
 private:
   Type type;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKMODELTYPE_H

@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "Version.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Version major/minor/patch getters")
@@ -25,11 +26,10 @@ TEST_CASE("Version comparison methods")
 TEST_CASE("Version string format")
 {
   std::string expected = std::to_string(Version::GetMajorVersion()) + "." +
-    std::to_string(Version::GetMinorVersion()) + "." +
-    std::to_string(Version::GetPatchVersion());
+    std::to_string(Version::GetMinorVersion()) + "." + std::to_string(Version::GetPatchVersion());
 
   CHECK(Version::GetVersionString() == expected);
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

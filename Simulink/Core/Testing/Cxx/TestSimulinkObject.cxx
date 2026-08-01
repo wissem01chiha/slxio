@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkObject.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("AddNullParameterTest")
@@ -25,8 +26,8 @@ TEST_CASE("AddSubObjectTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  auto subObject = std::make_shared<SimulinkObject>(
-    1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject =
+    std::make_shared<SimulinkObject>(1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ReturnType status = obj.AddElement(subObject);
   CHECK(status == E_OK);
@@ -43,8 +44,7 @@ TEST_CASE("GetParameterTest")
   ReturnType status = obj.AddElement(param);
   CHECK(status == E_OK);
 
-  std::shared_ptr<SimulinkParameter> retrievedParam =
-    obj.getParameter("Solver");
+  std::shared_ptr<SimulinkParameter> retrievedParam = obj.getParameter("Solver");
   CHECK(retrievedParam != nullptr);
   CHECK(std::string(retrievedParam->getValue()) == "ode45");
 }
@@ -53,8 +53,7 @@ TEST_CASE("AddArrayTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  auto subArray =
-    std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
+  auto subArray = std::make_shared<SimulinkArray>("Cell", "subArray", "{10*50}");
 
   ReturnType status = obj.AddElement(subArray);
   CHECK(status == E_OK);
@@ -65,8 +64,8 @@ TEST_CASE("ContainsObjectTest")
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  auto subObject = std::make_shared<SimulinkObject>(
-    1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject =
+    std::make_shared<SimulinkObject>(1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   ReturnType status = obj.AddElement(subObject);
   CHECK(status == E_OK);
@@ -75,4 +74,4 @@ TEST_CASE("ContainsObjectTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

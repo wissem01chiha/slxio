@@ -1,6 +1,7 @@
 #include "Ground.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Ground::Ground() {}
@@ -18,4 +19,4 @@ void Ground::SetGrounded(bool value)
 Ground::~Ground() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

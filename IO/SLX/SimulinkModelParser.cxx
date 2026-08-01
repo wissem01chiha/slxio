@@ -1,13 +1,14 @@
 #include "SimulinkModelParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkModelParser::setInputData(const xmlNodePtr data)
 {
   if (data == nullptr)
   {
-    //l.log(Logger::V_ERROR, "SimulinkModelParser:: null pointer received");
+    // l.log(Logger::V_ERROR, "SimulinkModelParser:: null pointer received");
     return E_INVALID_ARGUMENT;
   }
   dataObject = data;
@@ -15,4 +16,4 @@ ReturnType SimulinkModelParser::setInputData(const xmlNodePtr data)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -1,11 +1,12 @@
 #include "Directory.h"
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "File.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class FileTestFixture
@@ -30,10 +31,7 @@ public:
 
   ~FileTestFixture() { std::remove(TestFile.c_str()); }
 
-  std::string GetTestFilePath() const
-  {
-    return CurrentDir + PATH_SEP + TestFile;
-  }
+  std::string GetTestFilePath() const { return CurrentDir + PATH_SEP + TestFile; }
 
   Directory CreateTempDirectory(const char* name, int* err) const
   {
@@ -49,8 +47,7 @@ public:
     uv_fs_t req;
     uv_loop_t* loop = uv_default_loop();
 
-    *err =
-      uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
+    *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
     uv_fs_req_cleanup(&req);
   }
 };
@@ -131,4 +128,4 @@ TEST_CASE_FIXTURE(FileTestFixture, "Move File Test")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

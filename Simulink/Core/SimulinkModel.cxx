@@ -1,39 +1,40 @@
 #include "SimulinkModel.h"
+#include "Logger.h"
+#include "SimulationSettings.h"
 #include "SimulinkArray.h"
+#include "SimulinkBlock.h"
 #include "SimulinkLine.h"
+#include "SimulinkObject.h"
+#include "SimulinkParameter.h"
 #include "SimulinkPort.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModel::SimulinkModel()
   : logger(Logger::GetInstance())
 {
-  type = SimulinkModelType(SimulinkModelType::Model);
+  ModelType = SimulinkModelType(SimulinkModelType::Model);
+}
+
+SimulinkModel* SimulinkModel::New() const
+{
+  return nullptr;
 }
 
 SimulinkModel::SimulinkModel(SimulinkModelType Type)
-  : type(Type)
+  : ModelType(Type)
   , logger(Logger::GetInstance())
 {
 }
 
-SimulinkModel::SimulinkModel(const SimulinkModel& other)
-  : logger(Logger::GetInstance())
-{
-
-  this->lines = other.lines;
-  this->id = other.id;
-  this->simSet = other.simSet;
-  this->version = other.version;
-}
-
-SimulinkElementType SimulinkModel::GetElementType() const
+SimulinkElementType SimulinkModel::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Type::Model);
 }
 
-IdType SimulinkModel::GetElementId() const
+IdType SimulinkModel::GetId() const
 {
   return id;
 }
@@ -43,35 +44,30 @@ std::string SimulinkModel::ToString() const
   return std::string();
 }
 
-SimulinkBlock SimulinkModel::GetBlock(IdType blockIdx)
+std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(IdType blockIdx)
 {
 
   for (const auto& blk : blocks)
   {
-    if (blk->GetElementId() == blockIdx)
+    if (blk->GetId() == blockIdx)
     {
-      return *blk;
+      // return blk;
     }
   }
   // slog_warn("Block (IdType) %d not found in model (IdType) %s",
   // blockIdx,
   //           id);
-  return SimulinkBlock();
+  return std::make_shared<SimulinkBlock>();
 }
 
 SimulinkModelType SimulinkModel::GetModelType()
 {
-  return type;
+  return ModelType;
 }
 
 std::shared_ptr<SimulationSettings> SimulinkModel::GetSimulationSettings()
 {
   return simSet;
-}
-
-std::vector<std::shared_ptr<SimulinkParameter>> SimulinkModel::GetParameters()
-{
-  return parameters;
 }
 
 UInt32 SimulinkModel::GetModelVersion()
@@ -95,4 +91,4 @@ Logger& SimulinkModel::GetLogger()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

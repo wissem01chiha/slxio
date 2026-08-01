@@ -20,17 +20,14 @@ extern "C"
   } ErrorMessageTypeInfo;
 
   /* Define error message for each error code */
-  static const ErrorMessageTypeInfo ErrorInfo[] = {
-    { E_OK, "The operation completed successfully" },
-    { E_INVALID_FUNCTION, "Invalid function called" },
-    { E_FILE_NOT_FOUND, "File not found" },
+  static const ErrorMessageTypeInfo ErrorInfo[] = { { E_OK,
+                                                      "The operation completed successfully" },
+    { E_INVALID_FUNCTION, "Invalid function called" }, { E_FILE_NOT_FOUND, "File not found" },
     { E_PATH_NOT_FOUND, "Path not found" },
     { E_PATH_TOO_LONG, "Path length exceeds maximum allowed" },
     { E_MESSAGE_TOO_LARGE, "Message size exceeds maximum allowed" },
-    { E_PATH_EMPTY, "Path is empty" },
-    { E_TOO_MANY_OPEN_FILES, "Too many files are open" },
-    { E_FILE_OPEN_FAIL, "Failed to open file" },
-    { E_INVALID_HANDLE, "Invalid file handle" },
+    { E_PATH_EMPTY, "Path is empty" }, { E_TOO_MANY_OPEN_FILES, "Too many files are open" },
+    { E_FILE_OPEN_FAIL, "Failed to open file" }, { E_INVALID_HANDLE, "Invalid file handle" },
     { E_INVALID_FILE_MODE, "Invalid file mode specified" },
     { E_STREAM_WRITE_FAIL, "Failed to write to stream" },
     { E_STREAM_EMPTY_OUTPUT, "Stream produced empty output" },
@@ -48,8 +45,7 @@ extern "C"
     { E_ARCHIVE_REMOVE_FAILED, "failed to remove a file from archive" },
     { E_ARCHIVE_ENTRY_NOT_FOUND, "Entry not found in archive file" },
     { E_ARCHIVE_INVALID_ID, "Invalid archive Id" },
-    { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL }
-  };
+    { E_CONFIG_ALREADY_ACTIVE, "Configuration is already active" }, { 0, NULL } };
 
 #ifdef __cplusplus
 } /* extern "C" */

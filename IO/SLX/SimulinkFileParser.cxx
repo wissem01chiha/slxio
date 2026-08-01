@@ -2,7 +2,8 @@
 #include "Logger.h"
 #include "SimulinkContentParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkFileParser::setInputData(const File fs)
@@ -32,13 +33,12 @@ ReturnType SimulinkFileParser::parse()
 
   if (propertieStatus != E_OK)
   {
-    //l.log(Logger::V_ERROR,
+    // l.log(Logger::V_ERROR,
       "failed to get properties node pointer from SimulinkContent");
-    return propertieStatus;
+      return propertieStatus;
   }
 
-  for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr;
-    cur = cur->next)
+  for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr; cur = cur->next)
   {
     std::string nodeName = (const char*)cur->name;
     xmlChar* content = xmlNodeGetContent(cur);
@@ -69,4 +69,4 @@ ReturnType SimulinkFileParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

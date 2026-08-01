@@ -1,11 +1,15 @@
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include <chrono>
 #include <fstream>
 #include <random>
 #include <string>
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class DirectoryTestFixture
 {
@@ -57,7 +61,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory")
 {
   std::string path = MakeTempDir("EmptyDir");
   Directory d(path);
-  ReturnType ec = d.Init();
+  ReturnType ec = d.Initialize();
   CHECK(ec == 0);
   CHECK(d.GetNumberOfFiles() == 0);
   CHECK(d.Empty());
@@ -67,7 +71,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open directory with files")
 {
   std::string path = MakeTempDirWithFiles();
   Directory d(path);
-  ReturnType ec = d.Init();
+  ReturnType ec = d.Initialize();
   CHECK(ec == 0);
   CHECK(d.GetNumberOfFiles() == 2);
 
@@ -86,3 +90,6 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Delete directory")
   CHECK(ec == 0);
   CHECK_FALSE(Directory::Exist(path));
 }
+
+SLXIO_ABI_NAMESPACE_END
+};

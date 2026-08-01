@@ -19,24 +19,25 @@
 #include "ConsolePrintf.hxx"
 /*--------------------------------------------------------------------------*/
 #include "CallScilabBridge.hxx"
-extern "C" {
+extern "C"
+{
 #include "getScilabJavaVM.h"
 }
 
-using namespace  org_scilab_modules_gui_bridge;
+using namespace org_scilab_modules_gui_bridge;
 
-int ConsolePrintf(const char *line)
+int ConsolePrintf(const char* line)
 {
-    JavaVM *vm = getScilabJavaVM();
-    if (vm == NULL)
-    {
-        /* Java not yet or badly initialized */
-        printf("%s", line);
-    }
-    else
-    {
-        CallScilabBridge::display(vm, line);
-    }
+  JavaVM* vm = getScilabJavaVM();
+  if (vm == NULL)
+  {
+    /* Java not yet or badly initialized */
+    printf("%s", line);
+  }
+  else
+  {
+    CallScilabBridge::display(vm, line);
+  }
 
-    return 0;
+  return 0;
 }

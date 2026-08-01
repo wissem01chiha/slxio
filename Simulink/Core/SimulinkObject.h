@@ -6,16 +6,19 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "ErrorCode.h"
-#include "Logger.h"
 #include "PlatformTypes.h"
-#include "SimulinkArray.h"
+#include "SimulinkBlockType.h"
 #include "SimulinkElementBase.h"
-#include "SimulinkParameter.h"
 #include <memory>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
+
+class Logger;
+class SimulinkParameter;
+class SimulinkArray;
+class SimulinkBlock;
 
 /**
  * @brief Class for Simulink objects, which are a construct for
@@ -24,36 +27,94 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkObject : public SimulinkElementBase
 {
 public:
+  /** Default Constructor */
   SimulinkObject();
-  virtual ~SimulinkObject() = default;
-  SimulinkObject(const SimulinkObject& other);
+
+  SimulinkObject* New() const override;
+
+  /** Constructor given explicit parameters  */
   SimulinkObject(IdType id, std::string name, std::string className);
-  SimulinkObject(
-    IdType id, std::string version, std::string name, std::string className);
+
+  /**  */
+  SimulinkObject(IdType id, std::string version, std::string name, std::string className);
+
+  /**  */
   SimulinkObject(std::string version, std::string className);
-  SimulinkObject& operator=(const SimulinkObject& other) = delete;
-  SimulinkElementType GetElementType() const override;
-  IdType GetElementId() const override;
-  std::string ToString() const override;
-  ReturnType RemoveElement(
-    std::shared_ptr<SimulinkElementBase> element) override;
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+
+  /** Accesses a child element by index with bound checking */
+  std::shared_ptr<SimulinkElementBase> at(IdType index) override;
+
+  /** Access specified element */
+  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
+
+  /** Returns the number of child elements. */
+  UInt32 Size() const override;
+
+  /** Returns true if no child elements exist. */
+  bool Empty() const override;
+
+  /** Removes all child elements. */
+  void Clear() override;
+
+  /** Inserts a new child element. */
+  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Erases a child element by identifier. */
+  ReturnType Erase(const IdType& id) override;
+
+  /** Erases a child element by reference. */
+  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+
+  /** Finds a child element by identifier. */
+  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+
+  /** Checks if this element or its children contain the given identifier. */
   bool Contains(const IdType& id) const override;
-  std::shared_ptr<SimulinkParameter> getParameter(const std::string& name);
-  std::string getName();
+
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
+
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
+
+  /** Returns a string representation of this element. */
+  std::string ToString() const override;
+
+  /** Retrieve the block type of the Simulink block.*/
+  SimulinkBlockType GetBlockType();
+
+  /** Get the block name.*/
+  std::string GetName() override;
+
+  /** Dim of a Simulink Block ????? */
+  std::string GetDimension() override;
+
+  /** Get the Parent block at the hiraciy .*/
+  std::shared_ptr<SimulinkBlock> GetBlockParent();
+
+  /** Return a pointer to a given parameter by name, if not
+   * found a or the blcok has not paramters an empty parameter returned. */
+  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+
+  /** Sets the element specifc parameter to given one  */
+  ReturnType SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+
+  /* Adds a Parameter to the array */
+  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
 protected:
-  Logger& l;
-  IdType id;
-  std::string version;
-  std::string propName;
-  std::string className;
-  std::vector<std::shared_ptr<SimulinkObject>> objects;
-  std::vector<std::shared_ptr<SimulinkArray>> arrays;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+  Logger& logger;
+  IdType ObjectId;
+  std::string ObjectVersion;
+  std::string PropName;
+  std::string ClassName;
+  std::vector<std::shared_ptr<SimulinkObject>> SubObjects;
+  std::vector<std::shared_ptr<SimulinkArray>> SubArrays;
+  std::vector<std::shared_ptr<SimulinkParameter>> ObjectParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKOBJECT_H

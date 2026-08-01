@@ -1,11 +1,15 @@
-<!-- omit in toc -->
 # SLXIO
+
+SLXIO – SIMULINK SLX File I/O Library
+
+## Status
 
 [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
 [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
 [![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml)
 [![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 ![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
@@ -14,31 +18,33 @@
 
 <!-- omit in toc -->
 ## Table of Contents
-- [1.0 Overview](#10-overview)
-  - [1.1 Features](#11-features)
-  - [1.2 Supported MATLAB](#12-supported-matlab)
-    - [1.2.1 MATLAB Regression Testing Matrix](#121-matlab-regression-testing-matrix)
-  - [1.3 Contact](#13-contact)
-  - [1.4 Contributing](#14-contributing)
-  - [2.0 Installation](#20-installation)
-    - [2.1 Binary Release](#21-binary-release)
-    - [2.2 vcpkg](#22-vcpkg)
-    - [2.3 Conan Recipe](#23-conan-recipe)
-- [3.0 Building from Source](#30-building-from-source)
-  - [3.1 Dependencies](#31-dependencies)
-    - [3.1.1 zlib](#311-zlib)
-    - [3.1.1 HDF5](#311-hdf5)
-  - [3.2 Building Slxio](#32-building-slxio)
-    - [3.2.1 Quick Build Guide](#321-quick-build-guide)
-    - [3.2.2 Configure Options](#322-configure-options)
-  - [3.3 Platform Support](#33-platform-support)
-- [4.0 Testing](#40-testing)
-  - [4.1 Running Tests](#41-running-tests)
-  - [4.2 Debugging Test Failures](#42-debugging-test-failures)
-- [5.0 Use in Other Projects](#50-use-in-other-projects)
-- [6.0 API Documentation](#60-api-documentation)
-- [7.0 References](#70-references)
-- [8.0 License](#80-license)
+- [SLXIO](#slxio)
+  - [Status](#status)
+  - [1.0 Overview](#10-overview)
+    - [1.1 Features](#11-features)
+    - [1.2 Supported MATLAB](#12-supported-matlab)
+      - [1.2.1 MATLAB Regression Testing Matrix](#121-matlab-regression-testing-matrix)
+    - [1.3 Contact](#13-contact)
+    - [1.4 Contributing](#14-contributing)
+    - [2.0 Installation](#20-installation)
+      - [2.1 Binary Release](#21-binary-release)
+      - [2.2 vcpkg](#22-vcpkg)
+      - [2.3 Conan Recipe](#23-conan-recipe)
+  - [3.0 Building from Source](#30-building-from-source)
+    - [3.1 Dependencies](#31-dependencies)
+      - [3.1.1 zlib](#311-zlib)
+      - [3.1.1 HDF5](#311-hdf5)
+    - [3.2 Building Slxio](#32-building-slxio)
+      - [3.2.1 Quick Build Guide](#321-quick-build-guide)
+      - [3.2.2 Configure Options](#322-configure-options)
+    - [3.3 Platform Support](#33-platform-support)
+  - [4.0 Testing](#40-testing)
+    - [4.1 Running Tests](#41-running-tests)
+    - [4.2 Debugging Test Failures](#42-debugging-test-failures)
+  - [5.0 Use in Other Projects](#50-use-in-other-projects)
+  - [6.0 API Documentation](#60-api-documentation)
+  - [7.0 References](#70-references)
+  - [8.0 License](#80-license)
 
 ## 1.0 Overview
 

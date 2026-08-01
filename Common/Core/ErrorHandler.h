@@ -8,12 +8,13 @@
 #include "ApiExportMacro.h"
 #include "ErrorCode.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ErrorHandler
- * @brief Error Handling Class
+ * @brief Main Error Handling Class
  */
 class SLXIO_APIEXPORT ErrorHandler final
 {
@@ -60,6 +61,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // ERRORHANDLER_H

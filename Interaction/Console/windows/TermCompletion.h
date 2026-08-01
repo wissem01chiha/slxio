@@ -1,7 +1,7 @@
 /*
-* Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
-* Copyright (C) 2008 - DIGITEO - Allan CORNET
-*
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2008 - DIGITEO - Allan CORNET
+ *
  * Copyright (C) 2012 - 2016 - Scilab Enterprises
  *
  * This file is hereby licensed under the terms of the GNU GPL v2.0,
@@ -10,15 +10,15 @@
  * and continues to be available under such terms.
  * For more information, see the COPYING file which you should have received
  * along with this program.
-*
-*/
+ *
+ */
 
 #ifndef __TERMCOMPLETION_H__
 #define __TERMCOMPLETION_H__
 
 /**
-* Do completion in terminal
-*/
+ * Do completion in terminal
+ */
 void TermCompletion(void);
 
 #endif /* __TERMCOMPLETION_H__ */

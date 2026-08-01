@@ -1,7 +1,8 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkConfigSetParser.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkConfigSetParserTestFixture
@@ -16,8 +17,7 @@ protected:
     slog_init("logfile", SLOG_FLAGS_ALL, 0);
     slog_disable(SLOG_TRACE);
 
-    snprintf(
-      path_xml, sizeof(path_xml), "%s/test/assets/configSet.xml", PROJECT_ROOT);
+    snprintf(path_xml, sizeof(path_xml), "%s/test/assets/configSet.xml", PROJECT_ROOT);
     builderPtr = new SimulinkConfigSetBuilder();
     xmlDocPtr doc;
     doc = xmlReadFile(path_xml, NULL, 0);
@@ -43,8 +43,8 @@ TEST_F(SimulinkConfigSetBuilderTestFixture, BuildTest)
 {
 
   std::shared_ptr<SimulinkConfigSet> obj = builderPtr->get();
-  // ASSERT_EQ(obj->GetElementType(), SimulinkElementType::ConfigSet);
+  // ASSERT_EQ(obj->GetType(), SimulinkElementType::ConfigSet);
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

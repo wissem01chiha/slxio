@@ -6,24 +6,26 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Logger.h"
 #include "ModelWorkspace.h"
 #include "PlatformTypes.h"
-#include "SimulationSettings.h"
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkModelType.h"
-#include "SimulinkObject.h"
-#include "SimulinkParameter.h"
 #include <memory>
+
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObject;
 class SimulinkArray;
 class SImulinkPort;
 class SimulinkLine;
-
-SLXIO_NAMESPACE_BEGIN
-SLXIO_ABI_NAMESPACE_BEGIN
+class SimulinkBlock;
+class SimulinkObject;
+class SimulinkParameter;
+class SimulationSettings;
+class Logger;
 
 /**
  * @class SimulinkModel
@@ -31,96 +33,49 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
 public:
-  /**
-   * Default Constructor
-   */
+  /** Default Constructor */
   SimulinkModel();
 
-  /**
-   *
-   */
+  SimulinkModel* New() const override;
+
+  /** Construct a Model by given an explict model type */
   SimulinkModel(SimulinkModelType Type);
 
-  /**
-   *
-   */
-  SimulinkModel(const SimulinkModel& other);
+  /** Returns the generic type of this element. */
+  SimulinkElementType GetType() const override;
 
-  /**
-   *
-   */
-  SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
+  /** Returns the unique identifier of this element. */
+  IdType GetId() const override;
 
-  /**
-   *
-   */
-  SimulinkElementType GetElementType() const override;
-
-  /**
-   *
-   */
-  IdType GetElementId() const override;
-
-  /**
-   *
-   */
+  /** Returns a string representation of this element. */
   std::string ToString() const override;
 
-  /**
-   *
-   */
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element);
+  /** Return a Pointer to given Simulink Block by Id*/
+  std::shared_ptr<SimulinkBlock> GetBlock(IdType blockIdx);
 
-  /**
-   *
-   */
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element);
-
-  /**
-   *
-   */
-  SimulinkBlock GetBlock(IdType blockIdx);
-
-  /**
-   *
-   */
+  /** Get Model type */
   SimulinkModelType GetModelType();
 
-  /**
-   *
-   */
+  /** Rteuns a pointer to Simulink Settings */
   std::shared_ptr<SimulationSettings> GetSimulationSettings();
 
-  /**
-   *
-   */
-  std::vector<std::shared_ptr<SimulinkParameter>> GetParameters();
-
-  /**
-   *
-   */
+  /** Rteurns Model Version number*/
   UInt32 GetModelVersion();
 
-  /**
-   *
-   */
+  /** Checks if this element or its children contain the given identifier. */
   bool Contains(const IdType& id) const override;
 
-  /**
-   *
-   */
+  /** */
   std::shared_ptr<ModelWorkspace> GetModelWorkspace();
 
-  /**
-   *
-   */
+  /** */
   Logger& GetLogger();
 
 private:
   Logger& logger;
   IdType id;
   UInt32 version;
-  SimulinkModelType type;
+  SimulinkModelType ModelType;
   std::shared_ptr<ModelWorkspace> workspace;
   std::shared_ptr<SimulationSettings> simSet;
   std::vector<std::shared_ptr<SimulinkBlock>> blocks;
@@ -129,6 +84,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKMODEL_H

@@ -1,6 +1,7 @@
 #include "Saturation.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Saturation::Saturation() {}
@@ -18,4 +19,4 @@ void Saturation::SetUpperLimit(Float32 value)
 Saturation::~Saturation() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -2,19 +2,18 @@
 #include "Logger.h"
 #include "StateflowBlock.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType StateflowChart::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-ReturnType StateflowChart::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
@@ -26,7 +25,7 @@ std::shared_ptr<StateflowElementBase> StateflowChart::getParent() const
   return std::shared_ptr<StateflowElementBase>();
 }
 
-SimulinkElementType StateflowChart::GetElementType() const
+SimulinkElementType StateflowChart::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Chart);
 }
@@ -61,7 +60,7 @@ ReturnType StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
   return E_OK;
 }
 
-IdType StateflowChart::GetElementId() const
+IdType StateflowChart::GetId() const
 {
   return (IdType)0;
 }
@@ -72,4 +71,4 @@ bool StateflowChart::Contains(const IdType& id) const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

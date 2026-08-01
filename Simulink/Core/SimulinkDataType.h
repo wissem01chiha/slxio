@@ -9,7 +9,8 @@
 #include "PlatformTypes.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -34,21 +35,21 @@ enum class SLXIO_APIEXPORT SimulinkDataType
   Char
 };
 
-#define SIMULINKDATATYPE_MAP(XX)                                               \
-  XX(SimulinkDataType::Double, "double")                                       \
-  XX(SimulinkDataType::Single, "single")                                       \
-  XX(SimulinkDataType::Half, "half")                                           \
-  XX(SimulinkDataType::Int8, "int8")                                           \
-  XX(SimulinkDataType::UInt8, "uint8")                                         \
-  XX(SimulinkDataType::Int16, "int16")                                         \
-  XX(SimulinkDataType::UInt16, "UInt16")                                       \
-  XX(SimulinkDataType::Int32, "int32")                                         \
-  XX(SimulinkDataType::UInt32, "uint32")                                       \
-  XX(SimulinkDataType::UInt64, "uint64")                                       \
-  XX(SimulinkDataType::Boolean, "boolean")                                     \
-  XX(SimulinkDataType::Boolean, "logical")                                     \
-  XX(SimulinkDataType::String, "string")                                       \
-  XX(SimulinkDataType::Char, "char")                                           \
+#define SIMULINKDATATYPE_MAP(XX)                                                                   \
+  XX(SimulinkDataType::Double, "double")                                                           \
+  XX(SimulinkDataType::Single, "single")                                                           \
+  XX(SimulinkDataType::Half, "half")                                                               \
+  XX(SimulinkDataType::Int8, "int8")                                                               \
+  XX(SimulinkDataType::UInt8, "uint8")                                                             \
+  XX(SimulinkDataType::Int16, "int16")                                                             \
+  XX(SimulinkDataType::UInt16, "UInt16")                                                           \
+  XX(SimulinkDataType::Int32, "int32")                                                             \
+  XX(SimulinkDataType::UInt32, "uint32")                                                           \
+  XX(SimulinkDataType::UInt64, "uint64")                                                           \
+  XX(SimulinkDataType::Boolean, "boolean")                                                         \
+  XX(SimulinkDataType::Boolean, "logical")                                                         \
+  XX(SimulinkDataType::String, "string")                                                           \
+  XX(SimulinkDataType::Char, "char")                                                               \
   XX(SimulinkDataType::Auto, "auto")
 
 SimulinkDataType toSimulinkDataType(bool);
@@ -64,6 +65,6 @@ SimulinkDataType toSimulinkDataType(const char*);
 const char* toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKDATATYPE_H

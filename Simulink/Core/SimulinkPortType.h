@@ -9,7 +9,8 @@
 #include "SimulinkElementType.h"
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -48,8 +49,7 @@ public:
   };
   SimulinkPortType() = default;
   bool isA(const SimulinkPortType& typeObj);
-  friend bool operator==(
-    const SimulinkPortType& lhs, const SimulinkPortType& rhs);
+  friend bool operator==(const SimulinkPortType& lhs, const SimulinkPortType& rhs);
   std::string ToString() const;
   ~SimulinkPortType() = default;
 
@@ -58,6 +58,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKPORTTYPE_H

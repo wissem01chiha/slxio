@@ -1,6 +1,7 @@
 #include "Sum.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Sum::Sum() {}
@@ -18,4 +19,4 @@ void Sum::SetValue(Float32 value)
 Sum::~Sum() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

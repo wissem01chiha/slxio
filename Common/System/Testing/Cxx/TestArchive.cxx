@@ -1,14 +1,15 @@
 #include "Archive.h"
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "File.h"
 #include <fstream>
 #include <string>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class ArchiveTestFixture
@@ -26,8 +27,8 @@ public:
   std::string GetAssetFilePath(const char* filename)
   {
     static char FilePath[512];
-    snprintf(FilePath, sizeof(FilePath), "%s/Common/System/Testing/Data/%s",
-      SLXIO_ROOT_DIR, filename);
+    snprintf(
+      FilePath, sizeof(FilePath), "%s/Common/System/Testing/Data/%s", SLXIO_ROOT_DIR, filename);
     return std::string(FilePath);
   }
 
@@ -45,8 +46,8 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling")
   File f(GetAssetFilePath("TestAsset1.zip"));
   Archive archive(f);
   archive.SetArchiveExtension("zip");
-  std::cout << "this is the archive extesion"
-            << std::string(archive.GetArchiveExtension()) << std::endl;
+  std::cout << "this is the archive extesion" << std::string(archive.GetArchiveExtension())
+            << std::endl;
   CHECK(std::string(archive.GetArchiveExtension()) == "zip");
 }
 
@@ -90,4 +91,4 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -1,6 +1,7 @@
 #include "CoderInfo.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 CoderInfo::CoderInfo()
@@ -30,4 +31,4 @@ UInt32 CoderInfo::getAlignment()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

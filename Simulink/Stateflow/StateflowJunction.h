@@ -7,7 +7,8 @@
 #include "SimulinkElementType.h"
 #include "StateflowNodeBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -32,11 +33,11 @@ private:
   }
 
   /// @brief
-  SimulinkElementType GetElementType() const override;
+  SimulinkElementType GetType() const override;
 
   /// @brief Return
   std::string ToString() const override;
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -1,6 +1,7 @@
 #include "DataStoreRead.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DataStoreRead::DataStoreRead() {}
@@ -18,4 +19,4 @@ void DataStoreRead::SetName(std::string& name)
 DataStoreRead::~DataStoreRead() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

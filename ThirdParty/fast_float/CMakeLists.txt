@@ -1,4 +1,4 @@
-add_thirdparty_module(fast_float
-    ${PROJECT_SOURCE_DIR}/ThirdParty/fast_float
-    fast_float
-)
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
+add_subdirectory(src)

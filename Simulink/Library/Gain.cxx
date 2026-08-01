@@ -1,6 +1,7 @@
 #include "Gain.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Gain::Gain() {}
@@ -18,4 +19,4 @@ void Gain::SetGainValue(Float32 value)
 Gain::~Gain() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -2,21 +2,20 @@
 #include "Logger.h"
 #include "StateflowNodeBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowState::StateflowState(StateflowState& orig) {}
 
-ReturnType StateflowState::AddElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowState::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-ReturnType StateflowState::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+ReturnType StateflowState::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isTrue(node.getParent() == this,
   //          "Node does not belong to this chart.");
@@ -35,7 +34,7 @@ const std::vector<StateflowNodeBase>& StateflowState::getNodes() const
   return nodes;
 }
 
-SimulinkElementType StateflowState::GetElementType() const
+SimulinkElementType StateflowState::GetType() const
 {
   return SimulinkElementType(SimulinkElementType::Unkown);
 }
@@ -45,7 +44,7 @@ std::string StateflowState::ToString() const
   return std::string("");
 }
 
-IdType StateflowState::GetElementId() const
+IdType StateflowState::GetId() const
 {
   return (IdType)0;
 }
@@ -56,4 +55,4 @@ bool StateflowState::Contains(const IdType& id) const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

@@ -1,6 +1,7 @@
 #include "SimulinkParameterWriter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType SimulinkParameterWriter::Write()
@@ -14,4 +15,4 @@ ReturnType SimulinkParameterWriter::setInputData(const SimulinkParameter data)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

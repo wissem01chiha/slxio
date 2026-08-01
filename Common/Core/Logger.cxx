@@ -1,18 +1,19 @@
 #include "Logger.h"
 #include "Compiler.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 #include <fstream>
 #include <ostream>
 #include <random>
 #include <sstream>
 #if SLXIO_SLOG
-#include "Slog.h"
+#include "slxSlog.h"
 #elif SLXIO_LOGURU
-#include "Loguru.h"
+#include "slxLoguru.h"
 #endif // SLXIO_SLOG
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Logger::Logger()
@@ -108,8 +109,7 @@ ReturnType Logger::WriteToFile(const std::string& filename)
   uv_fs_t req;
   int flags = O_CREAT | O_WRONLY | O_TRUNC;
   int mode = DefaultFileModeType;
-  uv_file file = uv_fs_open(
-    uv_default_loop(), &req, logFilePath.c_str(), flags, mode, nullptr);
+  uv_file file = uv_fs_open(uv_default_loop(), &req, logFilePath.c_str(), flags, mode, nullptr);
   uv_fs_req_cleanup(&req);
 
   for (const auto& entry : LogBuffer)
@@ -117,8 +117,8 @@ ReturnType Logger::WriteToFile(const std::string& filename)
     for (const auto& msg : entry.messages)
     {
       std::string formatted = FormatLogEntry(entry, msg);
-      uv_buf_t buf = uv_buf_init(const_cast<char*>(formatted.c_str()),
-        static_cast<unsigned int>(formatted.size()));
+      uv_buf_t buf = uv_buf_init(
+        const_cast<char*>(formatted.c_str()), static_cast<unsigned int>(formatted.size()));
 
       uv_fs_write(uv_default_loop(), &req, file, &buf, 1, -1, nullptr);
       uv_fs_req_cleanup(&req);
@@ -243,14 +243,13 @@ std::string Logger::GetDefaultLogDirectoryPath(void)
   return std::string(buffer);
 }
 
-std::string Logger::FormatLogEntry(
-  const Logger::LogMessage& entry, const std::string& msg)
+std::string Logger::FormatLogEntry(const Logger::LogMessage& entry, const std::string& msg)
 {
   const auto& info = entry.info;
   std::ostringstream oss;
-  oss << "[" << info.appId.appId << "," << info.appId.appName << ","
-      << info.appId.appDescription << "," << static_cast<int>(info.type) << ","
-      << static_cast<int>(info.logLevel) << "] " << msg;
+  oss << "[" << info.appId.appId << "," << info.appId.appName << "," << info.appId.appDescription
+      << "," << static_cast<int>(info.type) << "," << static_cast<int>(info.logLevel) << "] "
+      << msg;
   return oss.str();
 }
 
@@ -294,4 +293,4 @@ int Logger::ToLoguruLevel(Logger::MessageLevelType level)
 #endif // SLXIO_LOGURU
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

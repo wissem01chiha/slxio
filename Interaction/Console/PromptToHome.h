@@ -16,13 +16,13 @@
 #ifndef __PROMPTTOHOME_H__
 #define __PROMPTTOHOME_H__
 /*--------------------------------------------------------------------------*/
-#include "dynlib_console.h"
 #include "BOOL.h"
+#include "dynlib_console.h"
 /*--------------------------------------------------------------------------*/
 /**
-* Clear Java console
-* @return a boolean
-*/
+ * Clear Java console
+ * @return a boolean
+ */
 CONSOLE_IMPEXP BOOL PromptToHome(void);
 /*--------------------------------------------------------------------------*/
 #endif /*__PROMPTTOHOME_H__ */

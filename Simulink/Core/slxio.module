@@ -24,7 +24,7 @@ ENABLE_SOURCE_TARGETS
 INCLUDE_IN_GROUP
   TRUE
 ENABLE_TEST
-  TRUE
+  FALSE
 ENABLE_COVERAGE
   TRUE
 INSTALL_HEADERS
@@ -52,6 +52,8 @@ CLASSES
   SimulinkRoot
   SimulinkEnabledSubsystem
   SimulinkAtomicSubsystem
+  SimulinkParameterArray
+  SimulinkParameterString
 WINDOWS_CLASSES
 UNIX_CLASSES
 MACOS_CLASSES
@@ -73,6 +75,8 @@ HEADERS
   SimulinkPort.h
   SimulinkEnabledSubsystem.h
   SimulinkAtomicSubsystem.h
+  SimulinkParameterArray.h
+  SimulinkParameterString.h
 WINDOWS_HEADERS
 UNIX_HEADERS
 ANDROID_HEADERS

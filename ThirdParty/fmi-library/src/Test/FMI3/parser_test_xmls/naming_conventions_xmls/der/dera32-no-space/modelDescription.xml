@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fmiModelDescription fmiVersion="3.0" modelName="" instantiationToken="" variableNamingConvention="structured">
+<CoSimulation modelIdentifier="id"/>
+
+<ModelVariables>
+  <Int32 name="der(a,32)" valueReference="0"/>
+</ModelVariables>
+
+<ModelStructure/>
+</fmiModelDescription>

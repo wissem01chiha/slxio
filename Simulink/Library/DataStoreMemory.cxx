@@ -1,6 +1,7 @@
 #include "DataStoreMemory.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DataStoreMemory::DataStoreMemory() {}
@@ -18,4 +19,4 @@ void DataStoreMemory::SetName(std::string& name)
 DataStoreMemory::~DataStoreMemory() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

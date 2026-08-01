@@ -1,6 +1,7 @@
 #include "Timer.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Float32 DurationToSeconds(const Timer::Clock::duration& d)
@@ -53,4 +54,4 @@ Float32 Timer::Time()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

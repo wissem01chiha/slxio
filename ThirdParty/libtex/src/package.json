@@ -1,0 +1,24 @@
+{
+  "name": "libtex",
+  "version": "1.0.0",
+  "description":
+      "[![Ubuntu](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/cmake.yml)\r [![MacOS](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/macos.yml)\r [![Windows](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/libtex/actions/workflows/windows.yml)\r [![codecov](https://codecov.io/gh/wissem01chiha/libtex/branch/develop/graph/badge.svg?token=DAKZZFFS9N)](https://codecov.io/gh/wissem01chiha/libtex)\r [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/libtex/badge)](https://www.codefactor.io/repository/github/wissem01chiha/libtex)\r ![GitHub License](https://img.shields.io/github/license/wissem01chiha/libtex)\r [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/libtex/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/libtex/master)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wissem01chiha/libtex.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wissem01chiha/libtex/issues"
+  },
+  "homepage": "https://github.com/wissem01chiha/libtex#readme"
+}

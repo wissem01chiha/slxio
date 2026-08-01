@@ -1,11 +1,12 @@
 #include "Archive.h"
 #include "DirectoryService.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
-#include "Libzip.h"
+#include "slxLibuv.h"
+#include "slxLibzip.h"
 #include <cstring>
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Archive* Archive::New()
@@ -34,8 +35,7 @@ void Archive::SetArchiveExtension(const char* ext)
 
   size_t pos = file.GetFilePath().find_last_of('.');
   std::string base;
-  base = (pos == std::string::npos) ? file.GetFilePath()
-                                    : file.GetFilePath().substr(0, pos);
+  base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
   std::string dest = base + "." + ext;
   file.Rename(dest);
 }
@@ -71,8 +71,8 @@ ReturnType Archive::Extract()
       continue;
     }
     char entrydirpath[1024];
-    snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s",
-      directory.GetDirectoryPath().c_str(), name);
+    snprintf(
+      entrydirpath, sizeof(entrydirpath), "%s/%s", directory.GetDirectoryPath().c_str(), name);
 
     int ec = 0;
     DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);
@@ -136,8 +136,7 @@ ReturnType Archive::Add(const File file_)
   }
   else
   {
-    if (zip_file_add(
-          za, file_.GetFileName().c_str(), source, ZIP_FL_ENC_UTF_8) < 0)
+    if (zip_file_add(za, file_.GetFileName().c_str(), source, ZIP_FL_ENC_UTF_8) < 0)
     {
       zip_source_free(source);
       zip_close(za);
@@ -193,4 +192,4 @@ std::string Archive::GetArchiveExtension() const
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

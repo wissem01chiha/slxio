@@ -1,7 +1,7 @@
 /*
-* Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
-* Copyright (C) 2008 - DIGITEO - Allan CORNET
-*
+ * Scilab ( http://www.scilab.org/ ) - This file is part of Scilab
+ * Copyright (C) 2008 - DIGITEO - Allan CORNET
+ *
  * Copyright (C) 2012 - 2016 - Scilab Enterprises
  *
  * This file is hereby licensed under the terms of the GNU GPL v2.0,
@@ -10,28 +10,28 @@
  * and continues to be available under such terms.
  * For more information, see the COPYING file which you should have received
  * along with this program.
-*
-*/
+ *
+ */
 
 /*--------------------------------------------------------------------------*/
-#include <Windows.h>
 #include "TermPosition.h"
+#include <Windows.h>
 /*--------------------------------------------------------------------------*/
 void TermSetPosition(int x, int y)
 {
-    COORD pt;
+  COORD pt;
 
-    pt.X = (SHORT)x;
-    pt.Y = (SHORT)y;
-    SetConsoleCursorPosition (GetStdHandle(STD_OUTPUT_HANDLE), pt);
+  pt.X = (SHORT)x;
+  pt.Y = (SHORT)y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pt);
 }
 /*--------------------------------------------------------------------------*/
-void TermGetPosition(int *x, int *y)
+void TermGetPosition(int* x, int* y)
 {
-    CONSOLE_SCREEN_BUFFER_INFO csbi;
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
 
-    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-    *x = csbi.dwCursorPosition.X;
-    *y = csbi.dwCursorPosition.Y;
+  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+  *x = csbi.dwCursorPosition.X;
+  *y = csbi.dwCursorPosition.Y;
 }
 /*--------------------------------------------------------------------------*/

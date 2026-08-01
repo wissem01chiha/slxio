@@ -2,25 +2,26 @@
 #include "SimulinkObjectParser.h"
 #include "SlxParameter.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ReturnType StateflowBlockParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
-    //l.log(
+    // l.log(
       Logger::V_ERROR, "StateflowBlockParser::null data node pointer received");
-    return E_PARAMETER_NULL_PTR;
+      return E_PARAMETER_NULL_PTR;
   }
 
   if (xmlStrcmp(data->name, BAD_CAST "StateflowBlock") != 0)
   {
-    //l.log(Logger::V_ERROR,
+    // l.log(Logger::V_ERROR,
       "StateflowBlockParser::setInputData failed: expected node "
       "<StateflowBlock>, but got <%s>",
       data->name);
-    return E_INVALID_ARGUMENT;
+      return E_INVALID_ARGUMENT;
   }
 
   dataObject = data;
@@ -28,4 +29,4 @@ ReturnType StateflowBlockParser::setInputData(const xmlNodePtr data)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

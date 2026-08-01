@@ -17,15 +17,15 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "Json-c.h"
+#include "slxJson-c.h"
 #include "SimulinkArray.h"
 #include "SimulinkWriterBase.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SimulinkArrayWriter
-  : public SimulinkWriterBase<SimulinkArray, json_object*>
+class SLXIO_APIEXPORT SimulinkArrayWriter : public SimulinkWriterBase<SimulinkArray, json_object*>
 {
 public:
   SimulinkArrayWriter() = default;
@@ -33,6 +33,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
 
 #endif // SIMULINKARRAYWRITER_H

@@ -2,7 +2,8 @@
 #include "Archive.h"
 #include "ErrorCode.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
@@ -46,8 +47,7 @@ bool ArchiveManager::IsArchiveOpened(const std::string& archivename) const
 {
   for (const auto& archive : ArchiveBuffer)
   {
-    if (archive &&
-      archive->GetArchiveDirectory().GetDirectoryName() == archivename)
+    if (archive && archive->GetArchiveDirectory().GetDirectoryName() == archivename)
     {
       return true;
     }
@@ -77,4 +77,4 @@ ReturnType ArchiveManager::Remove(const IdType id)
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

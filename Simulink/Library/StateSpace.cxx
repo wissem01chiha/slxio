@@ -1,6 +1,7 @@
 #include "StateSpace.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateSpace::StateSpace() {}
@@ -18,4 +19,4 @@ void StateSpace::SetStateValue(Float32 value)
 StateSpace::~StateSpace() {}
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};

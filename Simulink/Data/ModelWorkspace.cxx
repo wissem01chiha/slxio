@@ -1,11 +1,11 @@
 #include "ModelWorkspace.h"
 #include "ErrorCode.h"
 
-SLXIO_NAMESPACE_BEGIN
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationInfoType ModelWorkspaceId = { 1002,
-  "ModelWorkspace" };
+static const Logger::ApplicationInfoType ModelWorkspaceId = { 1002, "ModelWorkspace" };
 
 ModelWorkspace::ModelWorkspace()
   : DataSource(DataSourceType::Type::ModelFile)
@@ -26,8 +26,7 @@ std::string ModelWorkspace::GetVariable(const std::string& name) const
   return std::string("");
 }
 
-ReturnType ModelWorkspace::AssignVariable(
-  const std::string& name, const std::string& value)
+ReturnType ModelWorkspace::AssignVariable(const std::string& name, const std::string& value)
 {
   Variables[name] = value;
   return E_OK;
@@ -42,10 +41,8 @@ ReturnType ModelWorkspace::ClearVariable(const std::string& name)
   }
   else
   {
-    logger.SendLogMessage(
-      { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
-      { "ClearVariable: Variable", name,
-        "not found in ModelWorkspace. Cannot clear." });
+    logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
+      { "ClearVariable: Variable", name, "not found in ModelWorkspace. Cannot clear." });
   }
   return E_OK;
 }
@@ -79,4 +76,4 @@ Logger& ModelWorkspace::GetLogger()
 }
 
 SLXIO_ABI_NAMESPACE_END
-SLXIO_NAMESPACE_END
+};
