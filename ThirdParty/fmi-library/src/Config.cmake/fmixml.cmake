@@ -188,7 +188,7 @@ if(FMILIB_SYSTEM_EXPAT)
     #   - EXPAT_LIBRARIES
     # And the following target:
     #   - expat
-    find_package(EXPAT REQUIRED)
+    #find_package(EXPAT REQUIRED)
 else()
     include(ExternalProject)
 
@@ -265,12 +265,12 @@ else()
     )
     add_custom_target(tmp_expatlib DEPENDS ${expatlib})
 
-    add_library(expat STATIC IMPORTED)
+    add_library(fmi_expat STATIC IMPORTED)
     set_target_properties(
-        expat PROPERTIES
+        fmi_expat PROPERTIES
             IMPORTED_LOCATION "${expatlib}"
     )
-    add_dependencies(expat tmp_expatlib)
+    add_dependencies(fmi_expat tmp_expatlib)
 
     if(FMILIB_INSTALL_SUBLIBS)
         install(FILES "${expatlib}" DESTINATION lib)
@@ -296,7 +296,7 @@ if(MSVC)
     target_compile_definitions(fmixml PUBLIC XML_STATIC)
 endif()
 target_link_libraries(fmixml
-    PRIVATE expat
+    PRIVATE fmi_expat
     PUBLIC  jmutils
 )
 target_include_directories(fmixml
