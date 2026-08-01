@@ -46,6 +46,7 @@ jobs:
 
 
       - name: Install Gems
+        working-directory: Documentation
         run: sudo bundle install
 
       - name: Setup Pages
@@ -53,7 +54,8 @@ jobs:
         uses: actions/configure-pages@v6
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build --source Documentation --config Documentation/_config.yml  --destination Documentation/_site --baseurl "${{ steps.pages.outputs.base_path }}"
+        working-directory: Documentation
+        run: bundle exec jekyll build --source . --config ./_config.yml --destination ./_site --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
 

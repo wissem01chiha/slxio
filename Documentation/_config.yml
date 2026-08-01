@@ -1,5 +1,7 @@
 title: SLXIO
+email: chihawissem08@gmail.com
 description: SIMULINK SLX File I/O Library.
-remote_theme: just-the-docs/just-the-docs
+github_username:  wissem01chiha
+theme: just-the-docs
 plugins:
   - jekyll-default-layout
