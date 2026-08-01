@@ -49,3 +49,8 @@ out/
 
 # Vcpkg Files
 vcpkg_installed/
+
+# jekyll build folder
+_site/
+.jekyll-cache/
+Gemfile.lock

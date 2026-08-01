@@ -24,7 +24,6 @@ permissions:
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -35,21 +34,28 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "3.4"
-          # runs 'bundle install' and caches installed gems automatically
-          bundler-cache: true 
-          # Increment this number if you need to re-download cached gems
-          cache-version: 0 
+
+      - name: Install Ruby
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ruby-full build-essential zlib1g-dev
+          ruby --version
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install Gems
+        run: bundle install
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
+
       - name: Build with Jekyll
-        run: bundle exec jekyll build --source Documentation --destination Documentation/_site --baseurl "${{ steps.pages.outputs.base_path }}"
+        run: bundle exec jekyll build --source Documentation --config Documentation/_config.yml  --destination Documentation/_site --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
