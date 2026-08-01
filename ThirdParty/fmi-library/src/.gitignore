@@ -13,8 +13,6 @@
 /testlogs-*/
 /doc/
 
-/src/XML/src-gen/
-
 /Test/test_installation/build
 
 /ThirdParty/winflexbison/

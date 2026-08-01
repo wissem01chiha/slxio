@@ -4,7 +4,7 @@
 #ifndef RAPIDCSV_H
 #define RAPIDCSV_H
 
-#if USE_EXTERNAL_RAPIDCSV
+#ifdef USE_EXTERNAL_RAPIDCSV
 #include <rapidcsv.h>
 #else
 #include <src/src/rapidcsv.h>
