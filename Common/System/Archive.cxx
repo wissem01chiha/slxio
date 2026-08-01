@@ -1,8 +1,8 @@
 #include "Archive.h"
 #include "DirectoryService.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
-#include "Libzip.h"
+#include "slxLibuv.h"
+#include "slxLibzip.h"
 #include <cstring>
 
 namespace slxio

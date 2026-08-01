@@ -1,4 +1,4 @@
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "SimulinkLineParser.h"
 
 namespace slxio

@@ -2,7 +2,7 @@
 #include "Compiler.h"
 #include "Directory.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>

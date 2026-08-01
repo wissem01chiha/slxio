@@ -1,6 +1,6 @@
 ﻿#include "Directory.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 
 namespace slxio
 {

@@ -1,8 +1,8 @@
 #include "ErrorHandler.h"
 #include "ErrorCode.h"
 #include "ErrorMap.h"
-#include "Libuv.h"
-#include "Libzip.h"
+#include "slxLibuv.h"
+#include "slxLibzip.h"
 #include <cstdio>
 
 namespace slxio

@@ -1,6 +1,6 @@
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "Doctest.h"
+#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include <chrono>
 #include <fstream>

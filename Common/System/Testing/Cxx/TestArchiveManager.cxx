@@ -1,5 +1,5 @@
 #include "ArchiveManager.h"
-#include "Doctest.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

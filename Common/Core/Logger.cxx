@@ -1,15 +1,15 @@
 #include "Logger.h"
 #include "Compiler.h"
 #include "ErrorCode.h"
-#include "Libuv.h"
+#include "slxLibuv.h"
 #include <fstream>
 #include <ostream>
 #include <random>
 #include <sstream>
 #if SLXIO_SLOG
-#include "Slog.h"
+#include "slxSlog.h"
 #elif SLXIO_LOGURU
-#include "Loguru.h"
+#include "slxLoguru.h"
 #endif // SLXIO_SLOG
 
 namespace slxio
