@@ -48,7 +48,7 @@ jobs:
           -G Ninja
           -DCMAKE_CXX_STANDARD=11
           -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
-          -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
+          -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} 
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}
