@@ -17,6 +17,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        os: 
+          - windows-latest
+        name: 
+          - MinGW
         toolchain:
           - windows-mingw
         configuration:
