@@ -7,7 +7,7 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "DataObject.h"
-#include "slxLibxml2.h"
+#include "Libxml2.h"
 
 namespace slxio
 {

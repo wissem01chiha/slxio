@@ -6,7 +6,7 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "slxLibxml2.h"
+#include "Libxml2.h"
 #include "Logger.h"
 #include "SimulinkDataType.h"
 #include "SimulinkParameter.h"

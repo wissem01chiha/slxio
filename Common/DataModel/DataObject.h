@@ -42,14 +42,8 @@ public:
   /** Compare equality with another DataObject */
   virtual bool operator==(const DataObject&) = 0;
 
-  /** Return the Data Object Logger instance */
-  Logger& GetLogger();
-
   DataObject();
   virtual ~DataObject() = default;
-
-protected:
-  Logger& logger;
 
 private:
   // Disable copy and assignment

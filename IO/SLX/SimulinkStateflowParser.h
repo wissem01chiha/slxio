@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #include "AbiNamespaceMacro.h"
-#include "slxLibxml2.h"
+#include "Libxml2.h"
 
 SLXIO_ABI_NAMESPACE_END
 

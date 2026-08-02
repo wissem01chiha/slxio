@@ -17,7 +17,7 @@
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
-#include "slxJson-c.h"
+#include "Json-c.h"
 #include "SimulinkBlock.h"
 #include "SimulinkWriterBase.h"
 
