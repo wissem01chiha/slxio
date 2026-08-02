@@ -1,9 +1,10 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SLXLIBXML2
-#define SLXLIBXML2
-#if USE_EXTERNAL_LIBXML2
+#ifndef LIBXML2
+#define LIBXML2
+
+#ifdef USE_EXTERNAL_LIBXML2
     #include <libxml/parser.h>
     #include <libxml/tree.h>
     #include <libxml/xmlerror.h>
@@ -21,4 +22,4 @@
     #include <src/include/libxml/xmlstring.h>
 #endif
 
-#endif // SLXLIBXML2
+#endif // LIBXML2

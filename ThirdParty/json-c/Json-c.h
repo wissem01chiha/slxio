@@ -1,10 +1,10 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SLXJSON_C
-#define SLXJSON_C
+#ifndef JSON_C
+#define JSON_C
 
-#if USE_EXTERNAL_JSON_C
+#ifdef USE_EXTERNAL_JSON_C
 #include <json.h>
 #else
 #include "src/arraylist.h"
@@ -17,4 +17,4 @@
 #include "src/linkhash.h"
 #endif
 
-#endif // SLXJSON_C
+#endif // JSON_C

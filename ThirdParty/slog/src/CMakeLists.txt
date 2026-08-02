@@ -1,14 +1,9 @@
-cmake_minimum_required(VERSION 3.16)
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
 project(slog LANGUAGES C)
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
-#find_package(Threads REQUIRED)
-
-IF (WIN32)
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /Od /W3")
-ELSE()
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g -O2 -Wall")
-ENDIF()
 
 add_library(slog STATIC src/slog.c src/slog.h)
 

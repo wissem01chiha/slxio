@@ -1,71 +1,84 @@
 {
-  "version": 8,
-  "configurePresets": [
-    {
-      "name": "Visual Studio Community 2022 Release - amd64",
-      "displayName": "Visual Studio Community 2022 Release - amd64",
-      "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
-      "generator": "Visual Studio 17 2022",
-      "toolset": "host=x64",
-      "architecture": "x64",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
-        "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe"
-      }
-    },
-    {
-      "name": "GCC 11.4.0 x86_64-linux-gnu",
-      "displayName": "GCC 11.4.0 x86_64-linux-gnu",
-      "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
-        "CMAKE_C_COMPILER": "/usr/bin/gcc",
-        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "Clang 14.0.0 x86_64-pc-linux-gnu",
-      "displayName": "Clang 14.0.0 x86_64-pc-linux-gnu",
-      "description": "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
-        "CMAKE_C_COMPILER": "/usr/bin/clang",
-        "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
-        "CMAKE_BUILD_TYPE": "Debug"
-      }
-    },
-    {
-      "name": "Visual Studio Community 2022 Release - amd64_x86",
-      "displayName": "Visual Studio Community 2022 Release - amd64_x86",
-      "description": "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
-      "generator": "Visual Studio 17 2022",
-      "toolset": "host=x64",
-      "architecture": "x64",
-      "binaryDir": "${sourceDir}/build/${presetName}",
-      "cacheVariables": {
-        "CMAKE_INSTALL_PREFIX": "${sourceDir}/buil/install/${presetName}",
-        "CMAKE_C_COMPILER": "cl.exe",
-        "CMAKE_CXX_COMPILER": "cl.exe"
-      }
-    }
-  ],
-  "buildPresets": [
-    {
-      "name": "Visual Studio Community 2022 Release - amd64-debug",
-      "displayName": "Visual Studio Community 2022 Release - amd64 - Debug",
-      "configurePreset": "Visual Studio Community 2022 Release - amd64",
-      "configuration": "Debug"
-    },
-    {
-      "name": "Visual Studio Community 2022 Release - amd64_x86-debug",
-      "displayName": "Visual Studio Community 2022 Release - amd64_x86 - Debug",
-      "configurePreset": "Visual Studio Community 2022 Release - amd64_x86",
-      "configuration": "Debug"
-    }
-  ]
+    "version": 8,
+    "configurePresets": [
+        {
+            "name": "Visual-Studio-Community-2022-Release-amd64",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64",
+            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+            "generator": "Visual Studio 17 2022",
+            "toolset": "host=x64",
+            "architecture": "x64",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            }
+        },
+        {
+            "name": "GCC-11.4.0-x86_64-linux-gnu",
+            "displayName": "GCC-11.4.0-x86_64-linux-gnu",
+            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "/usr/bin/gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "Clang-14.0.0-x86_64-pc-linux-gnu",
+            "displayName": "Clang-14.0.0-x86_64-pc-linux-gnu",
+            "description": "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
+                "CMAKE_C_COMPILER": "/usr/bin/clang",
+                "CMAKE_CXX_COMPILER": "/usr/bin/clang++",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "Visual-Studio-Community-2022-Release-amd64_x86",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64_x86",
+            "description": "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
+            "generator": "Visual Studio 17 2022",
+            "toolset": "host=x64",
+            "architecture": "x64",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/buil/install/${presetName}",
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe"
+            }
+        },
+        {
+            "name": "GCC-15.3.0-x86_64-w64-mingw32",
+            "displayName": "GCC-15.3.0-x86_64-w64-mingw32",
+            "description": "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
+            "generator": "MinGW Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/mingw64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/mingw64/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "Visual-Studio-Community-2022-Release-amd64-debug",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64-debug",
+            "configurePreset": "Visual-Studio-Community-2022-Release-amd64",
+            "configuration": "Debug"
+        },
+        {
+            "name": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
+            "configurePreset": "Visual-Studio-Community-2022-Release-amd64_x86",
+            "configuration": "Debug"
+        }
+    ]
 }

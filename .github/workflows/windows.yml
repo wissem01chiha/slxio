@@ -1,84 +1,90 @@
 name: Windows
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   cmake:
-    name: ${{matrix.name}}
-    runs-on: ${{matrix.os}}
-    timeout-minutes: 80
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
+        compiler: 
+          - msvc
+          - clang
+        configuration: 
+          - Debug
+          - Release
+        platform: 
+          - Win32
+          - x64
+        python-version: 
+          - 3.12
+        os: 
+          - windows-latest
+
         include:
-          - name: Windows MSVC Win32 C++11 Debug
-            os: windows-latest
-            compiler: cl
+          - compiler: msvc
+            platform: Win32
+            name: Windows MSVC Win32 ${{ matrix.configuration }}
+            cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
             python-arch: x86
-            cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows MSVC Win64 C++11 Debug
-            os: windows-latest
-            compiler: cl
-            cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
-            python-arch: x64 
+          - compiler: msvc
+            platform: x64
+            name: Windows MSVC x64 ${{ matrix.configuration }}
+            cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            python-arch: x64
 
-          - name: Windows MSVC ARM64 C++11 Debug
-            os: windows-11-arm
-            compiler: cl
-            cmake-args: -A ARM64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
-            python-arch: arm64
-
-          - name: GCC x64 C++11 Debug
-            os: windows-latest
-            compiler: gcc
-            cxx-compiler: g++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
-
-          - name: GCC x64 C++20 Release
-            os: windows-latest
-            compiler: gcc
-            cxx-compiler: g++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=20 -DCMAKE_BUILD_TYPE=Release
-
-          - name: Windows Clang C++11 Debug
-            os: windows-latest
-            compiler: clang
+          - compiler: clang
+            platform: Win32
+            name: Windows Clang Win32 ${{ matrix.configuration }}
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            python-arch: x86
             cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
-          - name: Windows Clang C++17 Debug
-            os: windows-latest
-            compiler: clang
+          - compiler: clang
+            platform: x64
+            name: Windows Clang x64 ${{ matrix.configuration }}
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            python-arch: x64
             cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
-
-          - name: Windows Clang C++23 Debug
-            os: windows-latest
-            compiler: clang
-            cxx-compiler: clang++
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=23 -DCMAKE_BUILD_TYPE=Debug
 
     steps:
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          architecture: ${{matrix.python-arch}}
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+            python-version: ${{ matrix.python-version }}
+            architecture: ${{ matrix.python-arch }}
 
-      - name: Install MSVC Build Tools
-        run: choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive --locale en-US"
+        - name: Install MSVC Build Tools
+          if: ${{ matrix.compiler == 'msvc' }}
+          run: choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive --locale en-US"
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        - name: Checkout repository
+          uses: actions/checkout@v4
 
-      - name: Configure
-        run: cmake -S . -B build ${{matrix.cmake-args}} -DPython_EXECUTABLE=${{env.pythonLocation}}/python.exe
-        env:
-          CC: ${{matrix.compiler}}
-          CXX: ${{matrix.cxx-compiler}}
+        - name: Configure
+          run: >
+            cmake -S . -B build
+            ${{ matrix.cmake-args }}
+            -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
+          env:
+            CC: ${{ matrix.compiler }}
+            CXX: ${{ matrix.cxx-compiler }}
 
-      - name: Build
-        run: cmake --build build
+        - name: Build
+          run: cmake --build build
 
-      - name: Test
-        run: ctest -C Debug --output-on-failure --max-width 150
-        working-directory: build
+        - name: Test
+          run: ctest -C ${{ matrix.configuration }} --output-on-failure --max-width 150
+          working-directory: build

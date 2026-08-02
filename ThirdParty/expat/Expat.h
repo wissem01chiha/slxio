@@ -1,12 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SLXEXPAT
-#define SLXEXPAT
+#ifndef EXPAT
+#define EXPAT
+
 #ifdef USE_EXTERNAL_EXPAT
-    #include <expat.h>
+#include <expat.h>
 #else
-    #include <src/lib/expat.h>
+#include <src/lib/expat.h>
 #endif
 
-#endif // SLXEXPAT
+#endif // EXPAT

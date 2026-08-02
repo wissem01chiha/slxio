@@ -1,0 +1,57 @@
+name: MinGW
+on:
+  push:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  cmake:
+    name: ${{matrix.name}}
+    runs-on: ${{matrix.os}}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain:
+          - windows-mingw
+        configuration:
+          - Release
+          - Debug
+        compiler: 
+          - gcc
+        cxx-compiler: 
+          - g++
+        python-version:
+          - 3.12
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure
+        run: >
+          cmake -S . -B build
+          -G Ninja
+          -DCMAKE_CXX_STANDARD=11
+          -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+          -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
+        env:
+          CC: ${{ matrix.compiler }}
+          CXX: ${{ matrix.cxx-compiler }}
+
+      - name: Build
+        run: cmake --build build
+
+      - name: Test
+        run: ctest -C ${{ matrix.configuration }} --output-on-failure --max-width 150
+        working-directory: build

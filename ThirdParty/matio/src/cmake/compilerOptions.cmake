@@ -135,3 +135,8 @@ int main() { int* foo = (int*) malloc(sizeof(int)); free(foo); return 0; }
         set(REQUIRE_EXPLICIT_LIBC_LINK 1)
     endif()
 endif()
+
+if(MINGW)
+    set(HAVE_VASPRINTF 0)
+    set(HAVE_ASPRINTF 0)
+endif()
