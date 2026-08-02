@@ -5,6 +5,7 @@ SLXIO – SIMULINK SLX File I/O Library
 ## Status
 
 [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
+[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)
 [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
 [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
 [![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml)

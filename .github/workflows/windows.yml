@@ -1,5 +1,4 @@
 name: Windows
-
 on:
   push:
   pull_request:
@@ -18,46 +17,47 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        compiler: 
-          - msvc
-          - clang
-        configuration: 
-          - Debug
-          - Release
-        platform: 
-          - Win32
-          - x64
-        python-version: 
-          - 3.12
-        os: 
-          - windows-latest
-
         include:
           - compiler: msvc
+            cxx-compiler: cl
             platform: Win32
-            name: Windows MSVC Win32 ${{ matrix.configuration }}
-            cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            configuration: Debug
+            os: windows-latest
+            python-version: 3.12
             python-arch: x86
+            name: Windows MSVC Win32 Debug
+            cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
           - compiler: msvc
+            cxx-compiler: cl
             platform: x64
-            name: Windows MSVC x64 ${{ matrix.configuration }}
-            cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            configuration: Release
+            os: windows-latest
+            python-version: 3.12
             python-arch: x64
+            name: Windows MSVC x64 Release
+            cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Release
 
           - compiler: clang
+            cxx-compiler: clang++
             platform: Win32
-            name: Windows Clang Win32 ${{ matrix.configuration }}
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
+            configuration: Debug
+            os: windows-latest
+            python-version: 3.12
             python-arch: x86
-            cxx-compiler: clang++
+            name: Windows Clang Win32 Debug
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Debug
 
           - compiler: clang
-            platform: x64
-            name: Windows Clang x64 ${{ matrix.configuration }}
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
-            python-arch: x64
             cxx-compiler: clang++
+            platform: x64
+            configuration: Release
+            os: windows-latest
+            python-version: 3.12
+            python-arch: x64
+            name: Windows Clang x64 Release
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=11 -DCMAKE_BUILD_TYPE=Release
+
 
     steps:
         - name: Setup Python
@@ -77,7 +77,7 @@ jobs:
           run: >
             cmake -S . -B build
             ${{ matrix.cmake-args }}
-            -DPython_EXECUTABLE=${{ env.pythonLocation }}/python.exe
+            -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }}
           env:
             CC: ${{ matrix.compiler }}
             CXX: ${{ matrix.cxx-compiler }}
