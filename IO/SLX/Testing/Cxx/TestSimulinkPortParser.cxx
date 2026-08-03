@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "SimulinkPortParser.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

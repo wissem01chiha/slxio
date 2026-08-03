@@ -5,9 +5,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataObject::DataObject()
-{
-}
+DataObject::DataObject() {}
 
 void DataObject::Initialize() {}
 

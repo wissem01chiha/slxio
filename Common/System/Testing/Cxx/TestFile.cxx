@@ -1,8 +1,8 @@
 #include "Directory.h"
-#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "File.h"
+#include "slxDoctest.h"
 #include "slxLibuv.h"
 
 namespace slxio

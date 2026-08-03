@@ -1,7 +1,7 @@
-#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "Logger.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#include "slxCxxopts.h"
 #include "Version.h"
+#include "slxCxxopts.h"
 #include <iostream>
 
 void banner()

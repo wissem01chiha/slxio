@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "ErrorCode.h"
+#include "slxDoctest.h"
 #include "xmlDocDataObject.h"
 
 namespace slxio
@@ -9,8 +9,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class XmlDocDataObjectTestFixture
 {
 public:
-  XmlDocDataObjectTestFixture(){};
-  ~XmlDocDataObjectTestFixture(){};
+  XmlDocDataObjectTestFixture() {};
+  ~XmlDocDataObjectTestFixture() {};
 
 private:
 };

@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "Version.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

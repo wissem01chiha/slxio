@@ -1,7 +1,7 @@
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "slxDoctest.h"
 #include "ErrorCode.h"
+#include "slxDoctest.h"
 #include <chrono>
 #include <fstream>
 #include <random>

@@ -1,6 +1,6 @@
-#include "slxDoctest.h"
 #include "ErrorHandler.h"
 #include "Timer.h"
+#include "slxDoctest.h"
 #include <thread>
 
 namespace slxio

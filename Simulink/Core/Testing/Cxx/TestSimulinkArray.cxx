@@ -1,6 +1,6 @@
-#include "slxDoctest.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {
