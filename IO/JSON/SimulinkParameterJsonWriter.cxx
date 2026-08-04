@@ -4,12 +4,12 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkParameterWriter::Write()
+SResult SimulinkParameterWriter::Write()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkParameterWriter::setInputData(const SimulinkParameter data)
+SResult SimulinkParameterWriter::setInputData(const SimulinkParameter data)
 {
   return E_NOT_IMPLEMENTED;
 }

@@ -6,7 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkDataTypeParser::setInputData(const std::string data)
+SResult SimulinkDataTypeParser::setInputData(const std::string data)
 {
   if (data.empty())
   {
@@ -17,7 +17,7 @@ ReturnType SimulinkDataTypeParser::setInputData(const std::string data)
   return E_OK;
 }
 
-ReturnType SimulinkDataTypeParser::setInputData(const char* data)
+SResult SimulinkDataTypeParser::setInputData(const char* data)
 {
 
   if (data == nullptr || strlen(data) == 0)
@@ -30,7 +30,7 @@ ReturnType SimulinkDataTypeParser::setInputData(const char* data)
   return E_OK;
 }
 
-ReturnType SimulinkDataTypeParser::parse()
+SResult SimulinkDataTypeParser::parse()
 {
 
   static const std::unordered_map<std::string, SimulinkDataType> sldtMap = {

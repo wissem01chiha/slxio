@@ -29,13 +29,13 @@ public:
   virtual ~SimulinkWriter() = default;
 
   /** Write the current input data to output */
-  virtual ReturnType Write() = 0;
+  virtual SResult Write() = 0;
 
   /** Set single input data object for writing */
-  virtual ReturnType SetInputData(const DataObject& data) = 0;
+  virtual SResult SetInputData(const DataObject& data) = 0;
 
   /** Set indexed input data object for writing */
-  virtual ReturnType SetInputData(IdType idx, const DataObject& data) = 0;
+  virtual SResult SetInputData(IdType idx, const DataObject& data) = 0;
 
   /** Get the single input data object*/
   DataObject* GetInputData() const;

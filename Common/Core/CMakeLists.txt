@@ -24,6 +24,7 @@ add_module(
     Version.h
     Logger.h
     Compiler.h
+    ResultHandler.h
     ErrorHandler.h
     SimulinkVersion.h
     VersionMacro.h
@@ -32,6 +33,7 @@ add_module(
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES
+    ResultHandler.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR
@@ -39,6 +41,7 @@ add_module(
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
     TestTimer.cxx
+    TestVersion.cxx
   MODULE_PUBLIC_DEPENDS
     loguru
     uv_a

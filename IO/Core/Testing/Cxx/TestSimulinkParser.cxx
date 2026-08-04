@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "SimulinkParserBase.h"
+#include "slxDoctest.h"
 
 class TestParserFixture
 {

@@ -32,7 +32,7 @@ public:
   std::shared_ptr<StateflowChart> getChart();
 
   /// @brief Remove this block from the StateflowChart
-  ReturnType RemoveElement();
+  SResult RemoveElement();
 
 private:
   std::shared_ptr<StateflowChart> chart;

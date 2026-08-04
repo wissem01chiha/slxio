@@ -28,8 +28,8 @@ class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile>
 {
 public:
   SimulinkFileParser() = default;
-  ReturnType setInputData(const File fs) override;
-  ReturnType parse() override;
+  SResult setInputData(const File fs) override;
+  SResult parse() override;
   ~SimulinkFileParser() = default;
 };
 

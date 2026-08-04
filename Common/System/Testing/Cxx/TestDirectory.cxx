@@ -1,7 +1,7 @@
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "slxDoctest.h"
 #include "ErrorCode.h"
+#include "slxDoctest.h"
 #include <chrono>
 #include <fstream>
 #include <random>
@@ -61,7 +61,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open empty directory")
 {
   std::string path = MakeTempDir("EmptyDir");
   Directory d(path);
-  ReturnType ec = d.Initialize();
+  SResult ec = d.Initialize();
   CHECK(ec == 0);
   CHECK(d.GetNumberOfFiles() == 0);
   CHECK(d.Empty());
@@ -71,7 +71,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Open directory with files")
 {
   std::string path = MakeTempDirWithFiles();
   Directory d(path);
-  ReturnType ec = d.Initialize();
+  SResult ec = d.Initialize();
   CHECK(ec == 0);
   CHECK(d.GetNumberOfFiles() == 2);
 
@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(DirectoryTestFixture, "Test Delete directory")
 {
   std::string path = MakeTempDirWithFiles();
   CHECK(Directory::Exist(path));
-  ReturnType ec = Directory::Delete(path);
+  SResult ec = Directory::Delete(path);
   CHECK(ec == 0);
   CHECK_FALSE(Directory::Exist(path));
 }

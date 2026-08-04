@@ -1,10 +1,10 @@
 #include "Archive.h"
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "slxDoctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "File.h"
+#include "slxDoctest.h"
 #include <fstream>
 #include <string>
 
@@ -73,11 +73,11 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Add File to Archive")
   Archive archive(zip);
   archive.SetArchiveDirectory(Directory(GetArchiveTestDirTmp()));
 
-  ReturnType ec = archive.Add(f);
+  SResult ec = archive.Add(f);
   ErrorHandler::PrintErrorMessage(ec);
   CHECK(ec == E_OK);
 
-  ReturnType rc = archive.Remove(f);
+  SResult rc = archive.Remove(f);
   CHECK(rc == E_OK);
 }
 
@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
   File f(GetAssetFilePath("Asset2.zip"));
   Archive archive(f);
   archive.SetArchiveDirectory(Directory(GetArchiveTestDirTmp()));
-  ReturnType rc = archive.Extract();
+  SResult rc = archive.Extract();
   CHECK(rc == E_OK);
 }
 

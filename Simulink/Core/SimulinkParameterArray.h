@@ -32,7 +32,7 @@ public:
   std::string ToString() const override;
 
   /** Parser the array given a string representation */
-  ReturnType FromString(const char* value);
+  SResult FromString(const char* value);
 
   /** Get code generation data struct*/
   std::shared_ptr<CoderInfo> GetCoderInfo() override;

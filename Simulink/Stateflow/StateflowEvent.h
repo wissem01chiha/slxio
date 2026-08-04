@@ -21,7 +21,7 @@ class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase
 public:
   StateflowEvent();
   StateflowEvent(StateflowEvent& orig);
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  SResult RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:
 };

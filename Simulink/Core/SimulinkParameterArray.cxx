@@ -23,7 +23,7 @@ std::string SimulinkParameterArray::ToString() const
   return std::string();
 }
 
-ReturnType SimulinkParameterArray::FromString(const char* value)
+SResult SimulinkParameterArray::FromString(const char* value)
 {
   Data.clear();
   if (!value)

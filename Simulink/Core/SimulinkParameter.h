@@ -76,19 +76,19 @@ public:
   void SetValue(const char* value);
 
   /** Attempts to resolve the value as double */
-  ReturnType GetValueAsDouble(Float32& fval);
+  SResult GetValueAsDouble(Float32& fval);
 
   /** Attempts to resolve the value as single */
-  ReturnType GetValueAsSingle(Float32& sval);
+  SResult GetValueAsSingle(Float32& sval);
 
   /** Resolves the parameter value as unsigned 8-bit integer */
-  ReturnType GetValueAsUInt8(UInt8& u8val);
+  SResult GetValueAsUInt8(UInt8& u8val);
 
   /** Resolves the parameter value as unsigned 16-bit integer */
-  ReturnType GetValueAsUInt16(UInt16& u16val);
+  SResult GetValueAsUInt16(UInt16& u16val);
 
   /** Sets the parameter name (no backup used) */
-  ReturnType SetName(const char* name);
+  SResult SetName(const char* name);
 
   /** Returns the internal logger */
   Logger& GetLogger() const;

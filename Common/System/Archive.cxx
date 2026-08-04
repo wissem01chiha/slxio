@@ -50,7 +50,7 @@ Directory Archive::GetArchiveDirectory() const
   return directory;
 }
 
-ReturnType Archive::Extract()
+SResult Archive::Extract()
 {
   int err = 0;
   uv_fs_t req;
@@ -107,7 +107,7 @@ ReturnType Archive::Extract()
   return E_OK;
 }
 
-ReturnType Archive::Add(const File file_)
+SResult Archive::Add(const File file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
@@ -151,7 +151,7 @@ ReturnType Archive::Add(const File file_)
   return E_OK;
 }
 
-ReturnType Archive::Remove(const File file_)
+SResult Archive::Remove(const File file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);

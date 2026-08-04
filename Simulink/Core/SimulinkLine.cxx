@@ -47,19 +47,19 @@ bool SimulinkLine::Empty() const
 
 void SimulinkLine::Clear() {}
 
-ReturnType SimulinkLine::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkLine::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkLine::Erase(const IdType& id)
+SResult SimulinkLine::Erase(const IdType& id)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkLine::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkLine::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return SResult();
 }
 
 SimulinkElementType SimulinkLine::GetType() const
@@ -67,7 +67,7 @@ SimulinkElementType SimulinkLine::GetType() const
   return SimulinkElementType(SimulinkElementType::Type::Line);
 }
 
-// ReturnType SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+// SResult SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 
 //   if (element == nullptr)
@@ -90,7 +90,7 @@ SimulinkElementType SimulinkLine::GetType() const
 //   return E_OK;
 // }
 
-// ReturnType SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
+// SResult SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 
 //   if (element == nullptr)

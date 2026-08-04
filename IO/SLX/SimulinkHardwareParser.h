@@ -23,8 +23,8 @@ class SLXIO_APIEXPORT SimulinkHardwareParser final
 {
 public:
   SimulinkHardwareParser() = default;
-  ReturnType setInputData(const xmlNodePtr data) override;
-  ReturnType parse() override;
+  SResult setInputData(const xmlNodePtr data) override;
+  SResult parse() override;
   ~SimulinkHardwareParser() = default;
 };
 

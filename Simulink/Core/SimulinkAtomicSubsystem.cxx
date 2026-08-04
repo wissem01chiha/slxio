@@ -35,13 +35,13 @@ std::string SimulinkAtomicSubsystem::GetDimension()
   return std::string();
 }
 
-ReturnType SimulinkAtomicSubsystem::SetParameter(
+SResult SimulinkAtomicSubsystem::SetParameter(
   std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }
 
-ReturnType SimulinkAtomicSubsystem::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+SResult SimulinkAtomicSubsystem::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }
@@ -53,19 +53,19 @@ bool SimulinkAtomicSubsystem::Contains(const IdType& id) const
 
 void SimulinkAtomicSubsystem::Clear() {}
 
-ReturnType SimulinkAtomicSubsystem::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkAtomicSubsystem::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
   return E_OK;
 }
 
-ReturnType SimulinkAtomicSubsystem::Erase(const IdType& id)
+SResult SimulinkAtomicSubsystem::Erase(const IdType& id)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkAtomicSubsystem::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkAtomicSubsystem::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return SResult();
 }
 
 std::shared_ptr<SimulinkElementBase> SimulinkAtomicSubsystem::at(IdType index)

@@ -62,13 +62,13 @@ public:
   bool IsOpened(const std::string& filename);
 
   /** Add a new file to the manager. */
-  ReturnType Add(std::shared_ptr<File> file);
+  SResult Add(std::shared_ptr<File> file);
 
   /** Remove a file by its Id. */
-  ReturnType Remove(const IdType id);
+  SResult Remove(const IdType id);
 
   /** Clear all managed files. */
-  ReturnType Clear();
+  SResult Clear();
 
   /** Get the number of currently opened files. */
   UInt32 GetOpenedCount();

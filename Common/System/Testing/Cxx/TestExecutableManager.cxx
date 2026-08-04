@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "ExecutableManager.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

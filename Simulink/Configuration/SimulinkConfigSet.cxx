@@ -62,7 +62,7 @@ std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::GetParameterObject(
   return nullptr;
 }
 
-ReturnType SimulinkConfigSet::SetParameter(const char* name, const char* value)
+SResult SimulinkConfigSet::SetParameter(const char* name, const char* value)
 {
   auto param = object->GetParameter(std::string(name));
   if (param)
@@ -75,27 +75,27 @@ ReturnType SimulinkConfigSet::SetParameter(const char* name, const char* value)
   return E_OK;
 }
 
-ReturnType SimulinkConfigSet::Copy()
+SResult SimulinkConfigSet::Copy()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::Clone()
+SResult SimulinkConfigSet::Clone()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::Clear()
+SResult SimulinkConfigSet::Clear()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::Attach(SimulinkModel& model)
+SResult SimulinkConfigSet::Attach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::Detach(SimulinkModel& model)
+SResult SimulinkConfigSet::Detach(SimulinkModel& model)
 {
   return E_NOT_IMPLEMENTED;
 }
@@ -115,12 +115,12 @@ IdType SimulinkConfigSet::GetId() const
   return object->GetId();
 }
 
-ReturnType SimulinkConfigSet::SaveToFile(const char* path)
+SResult SimulinkConfigSet::SaveToFile(const char* path)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-ReturnType SimulinkConfigSet::FromFile(const char* path)
+SResult SimulinkConfigSet::FromFile(const char* path)
 {
   return E_OK;
 }

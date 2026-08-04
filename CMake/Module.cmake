@@ -13,6 +13,7 @@ into a library and optionally installed.
 
 Changelog:
   - 03-08-2026 Wissem CHIHA Intial Release
+  - 04-08-2026 Add CMAKE_BINARY_NAME_PREFIX
 #]=======================================================================]
 
 #[==[.rst:
@@ -147,8 +148,11 @@ function(add_module)
   cmake_parse_arguments(MOD "${options}" "${oneValueArgs}" 
                         "${multiValueArgs}"
                         ${ARGN})
-
-  set(TARGET_NAME "${CMAKE_PROJECT_NAME}${MOD_LIBRARY_NAME}")
+  if(NOT CMAKE_BINARY_NAME_PREFIX)
+    set(TARGET_NAME "${MOD_LIBRARY_NAME}")
+  else()
+    set(TARGET_NAME "${CMAKE_BINARY_NAME_PREFIX}${MOD_LIBRARY_NAME}")
+  endif()
 
   foreach(cfg_header IN LISTS MOD_MODULE_CONFIG_HEADERS)
     get_filename_component(cfg_header_name "${cfg_header}" NAME_WE)

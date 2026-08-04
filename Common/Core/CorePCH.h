@@ -4,8 +4,10 @@
 #ifndef COREPCH_H
 #define COREPCH_H
 
+#include <chrono>
 #include <string>
 #include <vector>
-#include <chrono>
+#include <mutex>
+#include <iostream>
 
 #endif // COREPCH_H

@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "ErrorCode.h"
+#include "slxDoctest.h"
 #include "xmlDocDataObject.h"
 
 namespace slxio

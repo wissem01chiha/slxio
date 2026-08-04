@@ -7,8 +7,8 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "Config.h"
-#include "PlatformTypes.h"
 #include "CorePCH.h"
+#include "PlatformTypes.h"
 
 namespace slxio
 {
@@ -75,14 +75,13 @@ public:
   } LogMessage;
 
   /** Initialize the logger with command line arguments.*/
-  static ReturnType Init(int argc, char** argv);
+  static SResult Init(int argc, char** argv);
 
   /** Get the singleton instance of the logger.*/
   static Logger& GetInstance();
 
   /** Send a log message with metadata and message fragments.*/
-  ReturnType SendLogMessage(
-    const MessageInfoType& logInfo, const std::vector<std::string>& logData);
+  SResult SendLogMessage(const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /** Print all logging messages to standard output.*/
   void Print();
@@ -91,13 +90,13 @@ public:
    * Write logging messages to a file created in the current working directory.
    * To change the logging directory use SetLogDirectoryPath
    */
-  ReturnType WriteToFile(const std::string& filename);
+  SResult WriteToFile(const std::string& filename);
 
   /** Overload of WriteToFile for compatibility with C-style strings.*/
-  ReturnType WriteToFile(const char* filename);
+  SResult WriteToFile(const char* filename);
 
   /** Write logging messages to a randomly generated file. */
-  ReturnType WriteToFile(void);
+  SResult WriteToFile(void);
 
   /** Set the internal logging level.*/
   void SetLogLevel(MessageLevelType newLogLevel);

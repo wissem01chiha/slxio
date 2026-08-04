@@ -30,7 +30,7 @@ public:
   explicit Directory(const std::string& path);
 
   /** Open the directory and initialize member variables. */
-  ReturnType Initialize();
+  SResult Initialize();
 
   /* Add a file to this directory, it will copy the file into it on disk */
   void Add(const File& file);
@@ -72,16 +72,16 @@ public:
   bool Exist() const;
 
   /** Delete all files/subfolders inside the directory */
-  ReturnType Clear();
+  SResult Clear();
 
   /** Move the directory to an other directory. */
-  ReturnType Move(const Directory& directory);
+  SResult Move(const Directory& directory);
 
   /** Delete a directory and contenant from disk */
-  static ReturnType Delete(const std::string& path);
+  static SResult Delete(const std::string& path);
 
   /** Member function of Delete */
-  ReturnType Delete();
+  SResult Delete();
 
   /** Destructor. */
   ~Directory() = default;

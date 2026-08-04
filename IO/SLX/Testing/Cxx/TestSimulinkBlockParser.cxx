@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "SimulinkBlockParser.h"
+#include "slxDoctest.h"
 #include <iostream>
 
 namespace slxio
@@ -51,7 +51,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "ParserSetInputDataTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ReturnType status = parserPtr->setInputData(nodePtr);
+  SResult status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 
@@ -59,7 +59,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "GetBlockNotNullPtrTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ReturnType status = parserPtr->setInputData(nodePtr);
+  SResult status = parserPtr->setInputData(nodePtr);
   std::shared_ptr<SimulinkBlock> dataObj = parserPtr->getOutputData();
 
   CHECK(dataObj != nullptr);
@@ -69,7 +69,7 @@ TEST_CASE_FIXTURE(SimulinkBlockParserTestFixture, "BlockParserTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("block.xml");
-  ReturnType status = parserPtr->setInputData(nodePtr);
+  SResult status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 
   status = parserPtr->parse();

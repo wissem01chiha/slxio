@@ -53,7 +53,7 @@ SimulinkBlockType SimulinkPort::GetBlockType()
   return SimulinkBlockType();
 }
 
-// ReturnType SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+// SResult SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 //   if (element == nullptr)
 //   {
@@ -81,7 +81,7 @@ SimulinkBlockType SimulinkPort::GetBlockType()
 //   return E_OK;
 // }
 
-// ReturnType SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
+// SResult SimulinkPort::AddElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 //   if (element == nullptr)
 //   {
@@ -131,19 +131,19 @@ bool SimulinkPort::Empty() const
 
 void SimulinkPort::Clear() {}
 
-ReturnType SimulinkPort::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkPort::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkPort::Erase(const IdType& id)
+SResult SimulinkPort::Erase(const IdType& id)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkPort::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkPort::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return ReturnType();
+  return SResult();
 }
 
 bool SimulinkPort::Contains(const IdType& id) const
@@ -171,15 +171,15 @@ std::shared_ptr<SimulinkParameterBase> SimulinkPort::GetParameter(std::string na
   return std::shared_ptr<SimulinkParameterBase>();
 }
 
-ReturnType SimulinkPort::SetParameter(
+SResult SimulinkPort::SetParameter(
   std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return ReturnType();
+  return SResult();
 }
 
-ReturnType SimulinkPort::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+SResult SimulinkPort::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return ReturnType();
+  return SResult();
 }
 
 std::shared_ptr<SimulinkBlock> SimulinkPort::GetBlock()

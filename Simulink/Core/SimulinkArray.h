@@ -52,13 +52,13 @@ public:
   void Clear() override;
 
   /** Inserts a new child element. */
-  ReturnType Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+  SResult Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Erases a child element by identifier. */
-  ReturnType Erase(const IdType& id) override;
+  SResult Erase(const IdType& id) override;
 
   /** Erases a child element by reference. */
-  ReturnType Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+  SResult Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Finds a child element by identifier. */
   std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
@@ -88,11 +88,10 @@ public:
   std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  ReturnType SetParameter(
-    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+  SResult SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
-  ReturnType AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+  SResult AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Return the class logger. */
   Logger& GetLogger();

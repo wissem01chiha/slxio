@@ -6,8 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "CorePCH.h"
+#include "PlatformTypes.h"
 
 namespace slxio
 {

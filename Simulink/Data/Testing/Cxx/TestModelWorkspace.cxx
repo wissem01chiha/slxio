@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "ModelWorkspace.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {

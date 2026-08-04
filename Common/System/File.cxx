@@ -47,21 +47,21 @@ bool File::Empty() const
   return Size() == 0;
 }
 
-ReturnType File::Write(std::vector<std::string>& message)
+SResult File::Write(std::vector<std::string>& message)
 {
   if (InternalFileMode == Mode::Read)
     return E_INVALID_FILE_MODE;
 
   for (const auto& line : message)
   {
-    ReturnType result = Write(line.c_str());
+    SResult result = Write(line.c_str());
     if (result != E_OK)
       return result;
   }
   return E_OK;
 }
 
-ReturnType File::Open()
+SResult File::Open()
 {
   uv_fs_t req;
   int err = uv_fs_open(uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
@@ -83,7 +83,7 @@ ReturnType File::Open()
   return E_OK;
 }
 
-ReturnType File::Read()
+SResult File::Read()
 {
   if (InternalFileMode != Mode::Read)
     return E_INVALID_FILE_MODE;
@@ -108,7 +108,7 @@ std::string File::GetFilePath() const
   return FilePath;
 }
 
-ReturnType File::Write(const char* message)
+SResult File::Write(const char* message)
 {
 
   if (InternalFileMode == Mode::Read)
@@ -129,7 +129,7 @@ ReturnType File::Write(const char* message)
   return E_OK;
 }
 
-ReturnType File::Close()
+SResult File::Close()
 {
   if (FileDescriptor < 0)
     return E_OK;
@@ -156,7 +156,7 @@ Directory File::GetFileDirectory() const
   return Directory(FilePath.substr(0, pos + 1));
 }
 
-ReturnType File::Move(const Directory& directory)
+SResult File::Move(const Directory& directory)
 {
 
   if (!directory.Exist())
@@ -179,11 +179,11 @@ ReturnType File::Move(const Directory& directory)
   return E_OK;
 }
 
-ReturnType File::Delete()
+SResult File::Delete()
 {
   if (IsOpened())
   {
-    ReturnType rc = Close();
+    SResult rc = Close();
     if (rc != E_OK)
     {
       return rc;
@@ -197,7 +197,7 @@ ReturnType File::Delete()
   return E_OK;
 }
 
-ReturnType File::Copy(const Directory& directory)
+SResult File::Copy(const Directory& directory)
 {
   if (!directory.Exist())
     return E_INVALID_ARGUMENT;
@@ -231,7 +231,7 @@ ReturnType File::Copy(const Directory& directory)
   return E_OK;
 }
 
-ReturnType File::Rename(const std::string& filename)
+SResult File::Rename(const std::string& filename)
 {
   if (filename.empty())
     return E_INVALID_ARGUMENT;

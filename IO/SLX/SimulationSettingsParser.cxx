@@ -4,7 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulationSettingsParser::setInputData(const xmlNodePtr data)
+SResult SimulationSettingsParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
@@ -26,7 +26,7 @@ ReturnType SimulationSettingsParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-ReturnType SimulationSettingsParser::parse()
+SResult SimulationSettingsParser::parse()
 {
 
   return E_OK;

@@ -27,10 +27,10 @@ public:
   StateflowState(StateflowState& orig);
 
   /// @brief Add a StateflowNodeBase object
-  ReturnType AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  SResult AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  ReturnType RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  SResult RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent of this StateflowTranstion
   std::shared_ptr<StateflowElementBase> getParent() const override;

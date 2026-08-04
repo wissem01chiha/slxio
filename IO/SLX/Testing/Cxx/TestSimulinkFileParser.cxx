@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "SimulinkFileParser.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {
@@ -35,16 +35,16 @@ protected:
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
 
-  ReturnType status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  SResult status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
 
-  ReturnType in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  SResult in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(in_status == E_OK);
-  ReturnType parseStatus = parserPtr->parse();
+  SResult parseStatus = parserPtr->parse();
   CHECK(parseStatus == E_OK);
 };
 

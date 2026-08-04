@@ -1,5 +1,5 @@
-#include "slxDoctest.h"
 #include "SimulinkObjectParser.h"
+#include "slxDoctest.h"
 
 namespace slxio
 {
@@ -50,7 +50,7 @@ TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("object.xml");
-  ReturnType status = parserPtr->setInputData(nodePtr);
+  SResult status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 

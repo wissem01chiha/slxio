@@ -16,7 +16,7 @@ StateflowTarget::StateflowTarget(StateflowTarget& orig)
 {
 }
 
-ReturnType StateflowTarget::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+SResult StateflowTarget::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // CCSMPre.isFalse(getParent() == null,
   //                "Target has no parent to be removed from.");
@@ -24,7 +24,7 @@ ReturnType StateflowTarget::RemoveElement(std::shared_ptr<SimulinkElementBase> e
   return E_OK;
 }
 
-ReturnType StateflowTarget::AddElement(std::shared_ptr<SimulinkElementBase> element)
+SResult StateflowTarget::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   return E_OK;
 }

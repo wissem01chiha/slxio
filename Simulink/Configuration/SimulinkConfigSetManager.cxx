@@ -12,7 +12,7 @@ SimulinkConfigSetManager::SimulinkConfigSetManager()
   cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-ReturnType SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg)
+SResult SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg)
 {
   if (cfg == nullptr)
   {
@@ -24,7 +24,7 @@ ReturnType SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSe
   return E_OK;
 }
 
-ReturnType SimulinkConfigSetManager::RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg)
+SResult SimulinkConfigSetManager::RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg)
 {
 
   if (cfg == nullptr)

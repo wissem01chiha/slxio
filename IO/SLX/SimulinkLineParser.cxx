@@ -5,7 +5,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkLineParser::setInputData(const xmlNodePtr data)
+SResult SimulinkLineParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
@@ -18,7 +18,7 @@ ReturnType SimulinkLineParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-ReturnType SimulinkLineParser::parse()
+SResult SimulinkLineParser::parse()
 {
   return E_OK;
 }

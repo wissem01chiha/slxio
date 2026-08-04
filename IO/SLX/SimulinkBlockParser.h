@@ -32,8 +32,8 @@ class SLXIO_APIEXPORT SimulinkBlockParser final
 {
 public:
   SimulinkBlockParser() = default;
-  ReturnType setInputData(const xmlNodePtr data) override;
-  ReturnType parse() override;
+  SResult setInputData(const xmlNodePtr data) override;
+  SResult parse() override;
   ~SimulinkBlockParser() = default;
 };
 

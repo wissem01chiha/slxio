@@ -21,8 +21,8 @@ class StateflowBlockParser final : public SimulinkParserBase<xmlNodePtr, Statefl
 {
 public:
   StateflowBlockParser() = default;
-  ReturnType setInputData(const xmlNodePtr data) override;
-  ReturnType parse() override;
+  SResult setInputData(const xmlNodePtr data) override;
+  SResult parse() override;
   ~StateflowBlockParser() = default;
 };
 

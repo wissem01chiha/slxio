@@ -4,7 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReturnType SimulinkSolverParser::setInputData(const xmlNodePtr data)
+SResult SimulinkSolverParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
@@ -26,7 +26,7 @@ ReturnType SimulinkSolverParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-ReturnType SimulinkSolverParser::parse()
+SResult SimulinkSolverParser::parse()
 {
   return E_OK;
 }
