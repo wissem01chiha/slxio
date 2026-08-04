@@ -159,7 +159,8 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Object))
 //   {
 
-//     std::shared_ptr<SimulinkObject> objPtr = std::dynamic_pointer_cast<SimulinkObject>(element);
+//     std::shared_ptr<SimulinkObject> objPtr =
+//     std::dynamic_pointer_cast<SimulinkObject>(element);
 
 //     for (const auto& obj : SubObjects)
 //     {
@@ -174,14 +175,16 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Array))
 //   {
 
-//     std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
+//     std::shared_ptr<SimulinkArray> arrayPtr =
+//     std::dynamic_pointer_cast<SimulinkArray>(element);
 
 //     for (const auto& arr : SubArrays)
 //     {
 
 //       if (arr->getName() == arrayPtr->getName())
 //       {
-//         SubArrays.erase(std::remove(SubArrays.begin(), SubArrays.end(), arr), SubArrays.end());
+//         SubArrays.erase(std::remove(SubArrays.begin(), SubArrays.end(), arr),
+//         SubArrays.end());
 //       }
 //     }
 //   }
@@ -226,7 +229,8 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Object))
 //   {
 
-//     std::shared_ptr<SimulinkObject> objPtr = std::dynamic_pointer_cast<SimulinkObject>(element);
+//     std::shared_ptr<SimulinkObject> objPtr =
+//     std::dynamic_pointer_cast<SimulinkObject>(element);
 
 //     SubObjects.push_back(objPtr);
 //   }
@@ -234,8 +238,8 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Array))
 //   {
 
-//     std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
-//     SubArrays.push_back(arrayPtr);
+//     std::shared_ptr<SimulinkArray> arrayPtr =
+//     std::dynamic_pointer_cast<SimulinkArray>(element); SubArrays.push_back(arrayPtr);
 //   }
 //   return E_OK;
 // }

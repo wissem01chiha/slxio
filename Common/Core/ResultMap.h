@@ -6,23 +6,10 @@
 
 #include "PlatformTypes.h"
 
-// error code using bitfield layout similar to HRESULT on winodws APi
-// https://learn.microsoft.com/en-us/windows/win32/seccrypto/common-hresult-values
-/**
-31      30 29      25 24      17 16    15 14         5 4      0
-+---------+----------+----------+--------+------------+--------+
-| Project | Group    |Component | Level  |  Error Id  |Reserved|
-+---------+----------+----------+--------+------------+--------+
-    2 bits    5 bits     8 bits    2 bits    10 bits    5 bits
-
-helper functions to decored or extrcat each bitset can be found in ResultHandler.h
- */
-
-// project id useful for extending the error code system to other projects, but for now we only have
-// one project
+/// project Id
 #define SLXIO_PROJECT 0U
 
-// that error code is used or returned by the whole project, not a specific namespace or component
+/// error code used by the entire project.
 #define GLOBAL 0U
 
 #define COMMON 1U
@@ -36,43 +23,47 @@ helper functions to decored or extrcat each bitset can be found in ResultHandler
 #define VISUALIZATION 9U
 #define INTERACTION 10U
 
-// that error code is used or returned by the whole Namespace, not a specific component
+/// error code used by the entire namespace.
 #define GLOBAL 0U
 
 #define CORE 1U
 #define SYSTEM 2U
 #define DATAMODEL 3U
 #define CONSOLE 4U
-#define LIBUV 5U
-#define LIBZIP 6U
-#define LIBXML2 7U
+#define CONFIGURATION 5U
+#define LIBUV 6U
+#define LIBZIP 7U
+#define LIBXML2 8U
 
-#define SLXIO_SUCCESS 0U
-#define SLXIO_INFO 1U
-#define SLXIO_WARN 2U
-#define SLXIO_FATAL 3U
+#define SLXIO_SUCCESS 0U ///< Operation succeeded.
+#define SLXIO_INFO 1U    ///< Informational message.
+#define SLXIO_WARN 2U    ///< Warning condition.
+#define SLXIO_FATAL 3U   ///< Fatal error.
 
-#define SLXIO_SRESULT(PROJECT, NAMESPACE, COMPONENT, LEVEL, ERRORID)                               \
-  ((((UInt32)(PROJECT) & 0x3U) << 30) | (((UInt32)(NAMESPACE) & 0x1FU) << 25) |                    \
-    (((UInt32)(COMPONENT) & 0xFFU) << 17) | (((UInt32)(LEVEL) & 0x3U) << 15) |                     \
+/// @brief construct an slxio based error code.
+/// @param PROJECT   project identifier (2 bits).
+/// @param NAMESPACE namespace identifier (5 bits).
+/// @param COMPONENT component identifier (8 bits).
+/// @param LEVEL     severity level (2 bits).
+/// @param ERRORID   error identifier (10 bits).
+/// @return encoded 32-bit error code.
+#define SLXIO_SRESULT(PROJECT, NAMESPACE, COMPONENT, LEVEL, ERRORID)                     \
+  ((((UInt32)(PROJECT) & 0x3U) << 30) | (((UInt32)(NAMESPACE) & 0x1FU) << 25) |          \
+    (((UInt32)(COMPONENT) & 0xFFU) << 17) | (((UInt32)(LEVEL) & 0x3U) << 15) |           \
     (((UInt32)(ERRORID) & 0x3FFU) << 5))
 
-// helper macor for third_parties modules
-// taht do not follwi the standar code retune
-// int rc = uv_fs_open(...);
-//
-// if (rc < 0)
-// {
-//     return SLXIO_LIBUV_ERROR(rc);
-// }
+/// third-party error handling macros
 
-#define SLXIO_LIBUV_ERROR(err)                                                                     \
+/// convert libuv error code to slxio format.
+#define SLXIO_LIBUV_ERROR(err)                                                           \
   SLXIO_SRESULT(SLXIO_PROJECT, THIRDPARTY, LIBUV, SLXIO_FATAL, ((-(err)) & 0x3FFU))
 
-#define SLXIO_LIBZIP_ERROR(err)                                                                    \
+/// convert libzip error code to slxio format.
+#define SLXIO_LIBZIP_ERROR(err)                                                          \
   SLXIO_SRESULT(SLXIO_PROJECT, THIRDPARTY, LIBZIP, SLXIO_FATAL, ((err) & 0x3FFU))
 
-#define SLXIO_LIBXML2_ERROR(err)                                                                   \
+/// convert libxml2 error code to slxio format.
+#define SLXIO_LIBXML2_ERROR(err)                                                         \
   SLXIO_SRESULT(SLXIO_PROJECT, THIRDPARTY, LIBXML2, SLXIO_FATAL, ((err) & 0x3FFU))
 
 #endif // RESULTMAP_H

@@ -14,43 +14,56 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- *
+ * @class ResultManager
+ * @brief A singleton class that manages error and status results across the
+ * library.
  */
 class SLXIO_APIEXPORT ResultManager final
 {
+public:
+  /* Retrieves the singleton instance of ResultManager. */
+  static ResultManager& GetInstance();
+
+  /* Change the buffer size if needed.
+   * Adjusting the buffer size can have performance implications.
+   */
+  void SetBufferSize(size_t new_size);
+
+  /* Retrieves the last error code value.
+   * If no status has been recorded, returns the E_OK code.
+   */
+  SResult GetLastResult(void);
+
+  /* Retrieves the last informational result.
+   * If no information record is found, falls back to E_OK.
+   */
+  SResult GetLastInfoResult(void);
+
+  /* Retrieves the last warning result.
+   */
+  SResult GetLastWarningResult(void);
+
+  /* Retrieves the last fatal result.
+   */
+  SResult GetLastFatalResult(void);
+
+  /* Set the execution program status.
+   * Thread-safe routine accessible by any class.
+   * This is the main entry point to update the execution status.
+   */
+  void SetResult(SResult status);
+
+  /* Retrieve the full log buffer.
+   * Provides access to the complete log for analysis or transmission.
+   */
+  std::vector<SResult> GetBuffer();
+
 private:
-  static const size_t BUFFER_SIZE = 500; // Keep last 500 warnings/infos
+  static const size_t bufferSize = 500;
   std::vector<SResult> ringBuffer;
   size_t head = 0;
   std::mutex log_mutex;
-
-  // Private constructor for Singleton pattern
-  ResultManager() { ringBuffer.resize(BUFFER_SIZE); }
-
-public:
-  static ResultManager& GetInstance();
-
-  // change the buffer size if needed, but be aware of memory usage and performance implications
-  void SetBufferSize(size_t new_size);
-
-  /** Retrieves the last error code value.
-   * it returns code whatever recorded, for fine grain control or filtering
-   * see GetLastInfoResult() or GetLastWarningResult() for more specific retrieval
-   */
-  SResult GetLastResult(void);
-  SResult GetLastInfoResult(void);
-  SResult GetLastWarningResult(void);
-  SResult GetLastFatalResult(void);
-
-  // Thread-safe method accessible by ANY class or method
-  void SetResult(SResult status);
-
-  // Retrieve full log for analysis or telemetry transmission
-  std::vector<SResult> DumpLogs()
-  {
-    std::lock_guard<std::mutex> lock(log_mutex);
-    return ringBuffer; // In production, sort this by timestamp before returning
-  }
+  ResultManager();
 };
 
 SLXIO_ABI_NAMESPACE_END

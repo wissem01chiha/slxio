@@ -1,3 +1,5 @@
+set(ZLIB_BUILD_TESTING OFF)
+
 add_subdirectory(src)
 
 if(ZLIB_BUILD_STATIC)

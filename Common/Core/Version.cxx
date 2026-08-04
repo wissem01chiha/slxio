@@ -32,8 +32,8 @@ bool Version::IsMinorVersionLessThan(UInt32 version)
 
 std::string Version::GetVersionString()
 {
-  return std::to_string(GetMajorVersion()) + "." + std::to_string(GetMinorVersion()) + "." +
-    std::to_string(GetPatchVersion());
+  return std::to_string(GetMajorVersion()) + "." + std::to_string(GetMinorVersion()) +
+    "." + std::to_string(GetPatchVersion());
 }
 
 UInt8 Version::GetSimulinkVersion()

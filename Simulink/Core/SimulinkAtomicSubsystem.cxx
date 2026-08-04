@@ -41,7 +41,8 @@ SResult SimulinkAtomicSubsystem::SetParameter(
   return E_OK;
 }
 
-SResult SimulinkAtomicSubsystem::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+SResult SimulinkAtomicSubsystem::AddParameter(
+  std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }
@@ -53,7 +54,8 @@ bool SimulinkAtomicSubsystem::Contains(const IdType& id) const
 
 void SimulinkAtomicSubsystem::Clear() {}
 
-SResult SimulinkAtomicSubsystem::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkAtomicSubsystem::Insert(
+  const std::shared_ptr<SimulinkElementBase>& element)
 {
   return E_OK;
 }
@@ -63,7 +65,8 @@ SResult SimulinkAtomicSubsystem::Erase(const IdType& id)
   return SResult();
 }
 
-SResult SimulinkAtomicSubsystem::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+SResult SimulinkAtomicSubsystem::Erase(
+  const std::shared_ptr<SimulinkElementBase>& element)
 {
   return SResult();
 }

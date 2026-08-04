@@ -65,7 +65,8 @@ void setPreviousLevel(int pause)
     {
       if (getWarningMode())
       {
-        sciprint(_("Type '%s' or '%s' to return to standard level prompt.\n\n"), "resume", "abort");
+        sciprint(_("Type '%s' or '%s' to return to standard level prompt.\n\n"), "resume",
+          "abort");
         dispWarningLevelPrompt = FALSE;
       }
     }

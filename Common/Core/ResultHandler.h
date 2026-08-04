@@ -22,6 +22,7 @@ SLXIO_APIEXPORT UInt32 GetErrorIdentifier(SResult result);
 SLXIO_APIEXPORT bool IsSuccess(SResult result);
 SLXIO_APIEXPORT bool IsWarning(SResult result);
 SLXIO_APIEXPORT bool IsFatal(SResult result);
+SLXIO_APIEXPORT bool IsInfo(SResult result);
 
 SLXIO_APIEXPORT bool IsSameLevel(SResult result1, SResult result2);
 SLXIO_APIEXPORT bool IsSameProject(SResult result1, SResult result2);

@@ -83,7 +83,8 @@ SResult SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& elemen
   }
   if (element->GetType().isA(SimulinkElementType::Array))
   {
-    std::shared_ptr<SimulinkArray> subArrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
+    std::shared_ptr<SimulinkArray> subArrayPtr =
+      std::dynamic_pointer_cast<SimulinkArray>(element);
 
     for (const auto& arraysPtr : SubArrays)
     {
@@ -137,8 +138,8 @@ SResult SimulinkArray::Erase(const IdType& ArrayId)
   {
     if (objId == ArrayId)
     {
-      ArrayObjectIds.erase(
-        remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId), ArrayObjectIds.end());
+      ArrayObjectIds.erase(remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
+        ArrayObjectIds.end());
       return E_OK;
     }
   }
@@ -156,7 +157,8 @@ SResult SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element
   if (element->GetType().isA(SimulinkElementType::Array))
   {
 
-    std::shared_ptr<SimulinkArray> arrayPtr = std::dynamic_pointer_cast<SimulinkArray>(element);
+    std::shared_ptr<SimulinkArray> arrayPtr =
+      std::dynamic_pointer_cast<SimulinkArray>(element);
 
     for (const auto& arr : SubArrays)
     {
@@ -176,8 +178,8 @@ SResult SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element
     {
       if (element->GetId() == objId)
       {
-        ArrayObjectIds.erase(
-          remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId), ArrayObjectIds.end());
+        ArrayObjectIds.erase(remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
+          ArrayObjectIds.end());
         return E_OK;
       }
     }

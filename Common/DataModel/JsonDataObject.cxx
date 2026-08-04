@@ -22,7 +22,8 @@ bool JsonDataObject::operator==(const DataObject& other)
     return ImplDataObject == other.GetImplDataObject();
   }
 
-  return json_object_equal(ImplDataObject, static_cast<json_object*>(other.GetImplDataObject()));
+  return json_object_equal(
+    ImplDataObject, static_cast<json_object*>(other.GetImplDataObject()));
 }
 
 void* JsonDataObject::GetImplDataObject() const

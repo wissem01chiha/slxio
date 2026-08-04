@@ -286,7 +286,8 @@ std::string SimulinkBlock::ToString() const
   return oss.str();
 }
 
-// std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(const char* parameterName)
+// std::shared_ptr<SimulinkParameter> SimulinkBlock::GetParameter(const char*
+// parameterName)
 // {
 //   if (parameterName == nullptr)
 //   {

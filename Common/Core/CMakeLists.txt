@@ -18,6 +18,7 @@ add_module(
     Timer.cxx
     Version.cxx
     Logger.cxx
+    ResultManager.cxx
     ErrorHandler.cxx
   MODULE_HEADERS
     Timer.h
@@ -29,7 +30,9 @@ add_module(
     SimulinkVersion.h
     VersionMacro.h
     APIExportMacro.h
+    ResultManager.h
     ABINamespaceMacro.h
+    CoreMacro.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES

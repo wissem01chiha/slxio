@@ -44,6 +44,11 @@ bool IsFatal(SResult result)
   return GetLevelIdentifier(result) == SLXIO_FATAL;
 }
 
+SLXIO_APIEXPORT bool IsInfo(SResult result)
+{
+  return GetLevelIdentifier(result) == SLXIO_INFO;
+}
+
 bool IsSameLevel(SResult result1, SResult result2)
 {
   return GetLevelIdentifier(result1) == GetLevelIdentifier(result2);

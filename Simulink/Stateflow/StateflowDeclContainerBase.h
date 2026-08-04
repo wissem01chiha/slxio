@@ -56,24 +56,31 @@ private
 
       /** Get Stateflow data objects. */
     public
-      UnmodifiableSet<StateflowData> getData() { return CollectionUtils.asUnmodifiable(dates); }
+      UnmodifiableSet<StateflowData> getData()
+      {
+        return CollectionUtils.asUnmodifiable(dates);
+      }
 
       /** Get Stateflow events objects. */
     public
-      UnmodifiableSet<StateflowEvent> getEvents() { return CollectionUtils.asUnmodifiable(events); }
+      UnmodifiableSet<StateflowEvent> getEvents()
+      {
+        return CollectionUtils.asUnmodifiable(events);
+      }
 
       /** Remove Stateflow data object. */
       /* package */ void removeData(StateflowData data)
       {
-        CCSMPre.isTrue(
-          data.getParent() == this, "Data object must belong to container to be removed.");
+        CCSMPre.isTrue(data.getParent() == this,
+          "Data object must belong to container to be removed.");
         dates.RemoveElement(data);
         data.setParent(null);
       }
 
       void removeEvent(StateflowEvent event)
       {
-        CCSMPre.isTrue(event.getParent() == this, "Event must belong to container to be removed.");
+        CCSMPre.isTrue(
+          event.getParent() == this, "Event must belong to container to be removed.");
         events.RemoveElement(event);
         event.setParent(null);
       }

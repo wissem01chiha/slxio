@@ -10,7 +10,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101, "SimulinkParameter" };
+static const Logger::ApplicationInfoType SimulinkParameterLogApp = { 101,
+  "SimulinkParameter" };
 
 SimulinkParameter::SimulinkParameter()
   : Min(SLXIO_FLOAT_MIN)

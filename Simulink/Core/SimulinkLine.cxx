@@ -13,7 +13,8 @@ SimulinkLine* SimulinkLine::New() const
   return new SimulinkLine();
 }
 
-SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
+SimulinkLine::SimulinkLine(
+  std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn)
   : DestPort(pIn)
   , SourcePort(pOut)
   , logger(Logger::GetInstance())

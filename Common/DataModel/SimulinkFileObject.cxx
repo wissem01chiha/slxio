@@ -25,7 +25,8 @@ void* SimulinkFileObject::GetImplDataObject() const
 
 bool SimulinkFileObject::operator==(const DataObject& other)
 {
-  return ImplDataObject->Name == static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
+  return ImplDataObject->Name ==
+    static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
 }
 
 std::string SimulinkFileObject::ToString() const

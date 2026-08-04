@@ -528,7 +528,8 @@ void pasteClipBoard(void)
     lpMem = (LPSTR)GlobalLock(hGMem);
     if (lpMem)
     {
-      char* newline = (char*)MALLOC(sizeof(char) * (strlen(CurrentLine) + strlen(lpMem) + 1));
+      char* newline =
+        (char*)MALLOC(sizeof(char) * (strlen(CurrentLine) + strlen(lpMem) + 1));
       memset(newline, 0x00, strlen(CurrentLine) + strlen(lpMem) + 1);
       strncpy(newline, CurrentLine, cur_pos);
       strcat(newline, lpMem);

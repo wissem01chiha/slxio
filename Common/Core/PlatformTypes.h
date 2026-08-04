@@ -4,6 +4,7 @@
 #ifndef PLATFORMTYPES_H
 #define PLATFORMTYPES_H
 
+#include "Config.h"
 #include <cstdint>
 #include <limits>
 #include <type_traits>
@@ -42,7 +43,7 @@ constexpr Float64 Float64Eps = std::numeric_limits<Float64>::epsilon();
 #define SLXIO_ASSERT_TYPE_EQUAL(T1, T2) static_assert(std::is_same_v<T1, T2>)
 
 /* Select the implementation type for SIdentifier.  */
-#ifdef SLXIO_64BIT_IDENTIFIERS
+#if SLXIO_64BIT_IDENTIFIERS
 using SIdentifier = UInt64;
 #else
 using SIdentifier = UInt32;

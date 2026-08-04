@@ -139,7 +139,8 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
           CFRelease(JavaVMBundlerVersionsDirURL);
           if (TargetJavaVM != NULL)
           {
-            if (CFURLGetFileSystemRepresentation(TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
+            if (CFURLGetFileSystemRepresentation(
+                  TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
             {
               // Check to see if the directory, or a sym link for the target JVM
               // directory exists, and if so set the environment variable
@@ -168,7 +169,8 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
             }
             else
             {
-              fprintf(stderr, "Error getting file system representation for bundle url.\n");
+              fprintf(
+                stderr, "Error getting file system representation for bundle url.\n");
               CFRelease(TargetJavaVM);
             }
           }

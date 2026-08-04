@@ -81,7 +81,8 @@ public:
   static Logger& GetInstance();
 
   /** Send a log message with metadata and message fragments.*/
-  SResult SendLogMessage(const MessageInfoType& logInfo, const std::vector<std::string>& logData);
+  SResult SendLogMessage(
+    const MessageInfoType& logInfo, const std::vector<std::string>& logData);
 
   /** Print all logging messages to standard output.*/
   void Print();
@@ -156,7 +157,8 @@ private:
   Logger(const Logger&) = delete;
   ~Logger() = default;
   Logger::MessageLevelType InternalVerbosityLevel;
-  Logger::MessageLevelType DefaultInternalVerbosityLevel = Logger::MessageLevelType::LOG_OFF;
+  Logger::MessageLevelType DefaultInternalVerbosityLevel =
+    Logger::MessageLevelType::LOG_OFF;
   Logger::LogFileModeType FileModeType;
   Logger::LogFileModeType DefaultFileModeType = Logger::LogFileModeType::WRITE;
   std::vector<LogMessage> LogBuffer;

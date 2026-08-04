@@ -88,7 +88,8 @@ public:
   std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  SResult SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+  SResult SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
   SResult AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;

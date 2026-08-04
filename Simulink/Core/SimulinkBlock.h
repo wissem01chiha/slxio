@@ -35,7 +35,8 @@ public:
   explicit SimulinkBlock(SimulinkBlockType::Type blockType);
 
   /** Constructor with block type, name, and Id.*/
-  SimulinkBlock(SimulinkBlockType::Type blockType, const char* blockName, const IdType& blockId);
+  SimulinkBlock(
+    SimulinkBlockType::Type blockType, const char* blockName, const IdType& blockId);
 
   /** Accesses a child element by index with bound checking */
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
@@ -93,7 +94,8 @@ public:
   std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  SResult SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+  SResult SetParameter(
+    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
   SResult AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;

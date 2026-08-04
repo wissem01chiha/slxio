@@ -27,7 +27,8 @@ SResult SimulinkBlockParser::parse()
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next)
   {
     std::string attrName = reinterpret_cast<const char*>(attr->name);
-    std::string attrValue = reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
+    std::string attrValue =
+      reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_SID)
     {
       id = static_cast<IdType>(std::stoul(attrValue));
@@ -50,7 +51,8 @@ SResult SimulinkBlockParser::parse()
   ptr->setID(id);
   ptr->setName(name);
 
-  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+       nodePtr_ = nodePtr_->next)
   {
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&

@@ -65,9 +65,9 @@ TEST_CASE("IsActiveTest")
 // TEST_CASE("GetParameterReturnsEmptyIfNotFound")
 // {
 //   std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(42, "1.0",
-//   "MyObject", "SimulinkConfigSet"); SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-//   CHECK(strcmp(configCst->GetParameter("NonExistent"), "") == 0);
-//   delete configCst;
+//   "MyObject", "SimulinkConfigSet"); SimulinkConfigSet* configCst = new
+//   SimulinkConfigSet(object); CHECK(strcmp(configCst->GetParameter("NonExistent"), "")
+//   == 0); delete configCst;
 // }
 
 SLXIO_ABI_NAMESPACE_END

@@ -19,8 +19,8 @@ protected:
   {
 
     char xmlfilepath[512];
-    snprintf(
-      xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, xmlfilename);
+    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
+      PROJECT_ROOT_DIR, xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
     if (!doc)
     {

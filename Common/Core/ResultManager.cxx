@@ -1,9 +1,15 @@
 #include "ResultManager.h"
+#include "CoreMacro.h"
 #include "ResultHandler.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+ResultManager::ResultManager()
+{
+  ringBuffer.resize(bufferSize);
+}
 
 ResultManager& ResultManager::GetInstance()
 {
@@ -15,25 +21,74 @@ void ResultManager::SetBufferSize(size_t new_size)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   ringBuffer.resize(new_size);
-  head = 0; // Reset head to start of new buffer
+  head = 0;
+}
+
+SResult ResultManager::GetLastResult(void)
+{
+  std::lock_guard<std::mutex> lock(log_mutex);
+  for (size_t i = 0; i < bufferSize; ++i)
+  {
+    size_t idx = (head + bufferSize - 1 - i) % bufferSize;
+    if (ringBuffer[idx] != SResult())
+      return ringBuffer[idx];
+  }
+  return E_OK;
+}
+
+SResult ResultManager::GetLastInfoResult(void)
+{
+  std::lock_guard<std::mutex> lock(log_mutex);
+  for (size_t i = 0; i < bufferSize; ++i)
+  {
+    size_t idx = (head + bufferSize - 1 - i) % bufferSize;
+    if (IsInfo(ringBuffer[idx]))
+      return ringBuffer[idx];
+  }
+  return E_OK;
+}
+
+SResult ResultManager::GetLastWarningResult(void)
+{
+  std::lock_guard<std::mutex> lock(log_mutex);
+  for (size_t i = 0; i < bufferSize; ++i)
+  {
+    size_t idx = (head + bufferSize - 1 - i) % bufferSize;
+    if (IsWarning(ringBuffer[idx]))
+      return ringBuffer[idx];
+  }
+  return E_OK;
+}
+
+SResult ResultManager::GetLastFatalResult(void)
+{
+  std::lock_guard<std::mutex> lock(log_mutex);
+  for (size_t i = 0; i < bufferSize; ++i)
+  {
+    size_t idx = (head + bufferSize - 1 - i) % bufferSize;
+    if (IsFatal(ringBuffer[idx]))
+      return ringBuffer[idx];
+  }
+  return E_OK;
 }
 
 void ResultManager::SetResult(SResult status)
 {
-  // Extract error level using the mask we defined earlier
   UInt32 level = GetLevelIdentifier(status);
-
-  // Ignore Success codes, only log Info (1) and Warning (2)
   if (level == 0)
     return;
 
   std::lock_guard<std::mutex> lock(log_mutex);
 
-  // Populate the record
   ringBuffer[head] = { status = status };
 
-  // Move head pointer (wrap around if it hits BUFFER_SIZE)
-  head = (head + 1) % BUFFER_SIZE;
+  head = (head + 1) % bufferSize;
+}
+
+std::vector<SResult> ResultManager::GetBuffer()
+{
+  std::lock_guard<std::mutex> lock(log_mutex);
+  return ringBuffer;
 }
 
 SLXIO_ABI_NAMESPACE_END

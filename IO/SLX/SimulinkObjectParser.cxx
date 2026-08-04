@@ -30,7 +30,8 @@ SResult SimulinkObjectParser::parse()
   {
 
     std::string attrName = reinterpret_cast<const char*>(attr->name);
-    std::string attrValue = reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
+    std::string attrValue =
+      reinterpret_cast<const char*>(xmlNodeGetContent(attr->children));
     if (attrName == SlxParameter::PARAM_ObjectID)
     {
       id = static_cast<IdType>(std::stoul(attrValue));
@@ -46,7 +47,8 @@ SResult SimulinkObjectParser::parse()
   }
   ptr = std::make_shared<SimulinkObject>(id, name, className);
 
-  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
+  for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
+       nodePtr_ = nodePtr_->next)
   {
 
     if (nodePtr_->type == XML_ELEMENT_NODE &&

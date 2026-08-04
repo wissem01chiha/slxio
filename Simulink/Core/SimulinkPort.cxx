@@ -8,7 +8,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> PortBlock, SimulinkPortType pType)
+SimulinkPort::SimulinkPort(
+  std::shared_ptr<SimulinkBlock> PortBlock, SimulinkPortType pType)
   : PortType(pType)
   , PortBlock(PortBlock)
   , logger(Logger::GetInstance())
@@ -73,7 +74,8 @@ SimulinkBlockType SimulinkPort::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Line))
 //   {
 
-//     std::shared_ptr<SimulinkLine> linePtr = std::dynamic_pointer_cast<SimulinkLine>(element);
+//     std::shared_ptr<SimulinkLine> linePtr =
+//     std::dynamic_pointer_cast<SimulinkLine>(element);
 
 //     // portLines.push_back(linePtr);
 //     // l.log(Logger::VERBOSITY_0, "Removed line from port");
@@ -101,7 +103,8 @@ SimulinkBlockType SimulinkPort::GetBlockType()
 //   if (element->GetType().isA(SimulinkElementType::Line))
 //   {
 
-//     std::shared_ptr<SimulinkLine> linePtr = std::dynamic_pointer_cast<SimulinkLine>(element);
+//     std::shared_ptr<SimulinkLine> linePtr =
+//     std::dynamic_pointer_cast<SimulinkLine>(element);
 
 //     lines.push_back(linePtr);
 //     // l.log(Logger::VERBOSITY_0, "Added line to port");

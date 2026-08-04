@@ -35,7 +35,8 @@ void Archive::SetArchiveExtension(const char* ext)
 
   size_t pos = file.GetFilePath().find_last_of('.');
   std::string base;
-  base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
+  base =
+    (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
   std::string dest = base + "." + ext;
   file.Rename(dest);
 }
@@ -71,8 +72,8 @@ SResult Archive::Extract()
       continue;
     }
     char entrydirpath[1024];
-    snprintf(
-      entrydirpath, sizeof(entrydirpath), "%s/%s", directory.GetDirectoryPath().c_str(), name);
+    snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s",
+      directory.GetDirectoryPath().c_str(), name);
 
     int ec = 0;
     DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);

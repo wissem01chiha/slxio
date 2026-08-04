@@ -64,7 +64,8 @@ SResult File::Write(std::vector<std::string>& message)
 SResult File::Open()
 {
   uv_fs_t req;
-  int err = uv_fs_open(uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
+  int err =
+    uv_fs_open(uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -169,7 +170,8 @@ SResult File::Move(const Directory& directory)
   path += GetFileName();
 
   uv_fs_t req;
-  int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
+  int err =
+    uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -237,7 +239,8 @@ SResult File::Rename(const std::string& filename)
     return E_INVALID_ARGUMENT;
 
   uv_fs_t req;
-  int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
+  int err =
+    uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
