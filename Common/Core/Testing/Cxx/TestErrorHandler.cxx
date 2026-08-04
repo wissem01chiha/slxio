@@ -1,7 +1,7 @@
-#include "slxDoctest.h"
+#include "Doctest.h"
 #include "ErrorCode.h"
 #include "ErrorHandler.h"
-#include "slxLibuv.h"
+#include "Libuv.h"
 
 namespace slxio
 {

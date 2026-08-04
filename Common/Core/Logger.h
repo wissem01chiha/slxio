@@ -4,8 +4,8 @@
 #ifndef LOGGER_H
 #define LOGGER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Config.h"
 #include "PlatformTypes.h"
 #include "CorePCH.h"

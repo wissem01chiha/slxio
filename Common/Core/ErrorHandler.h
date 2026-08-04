@@ -4,8 +4,8 @@
 #ifndef ERRORHANDLER_H
 #define ERRORHANDLER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "ErrorCode.h"
 
 namespace slxio

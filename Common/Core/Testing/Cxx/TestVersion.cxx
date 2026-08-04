@@ -1,4 +1,4 @@
-#include "slxDoctest.h"
+#include "Doctest.h"
 #include "Version.h"
 
 namespace slxio
