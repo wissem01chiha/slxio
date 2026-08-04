@@ -34,7 +34,7 @@ set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON)
 set(CMAKE_WARN_DEPRECATED OFF CACHE BOOL "suppress cmake deprecation message")
 
 option(LIBTEX_BUILD_SHARED "Build shared lib" OFF)
-option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" ON)
+option(LIBTEX_BUILD_TOOLS "Build tools in the script directory" OFF)
 option(LIBTEX_BUILD_TESTS "Build tests" OFF)
 option(LIBTEX_BUILD_REGRESS "Build regression tests" ON)
 option(LIBTEX_BUILD_DOC "Build documentation" ON)

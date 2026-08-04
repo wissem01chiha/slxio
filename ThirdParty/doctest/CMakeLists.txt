@@ -1,4 +1,2 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
-add_subdirectory(src)
+set(DOCTEST_WITH_MAIN_IN_STATIC_LIB ON)
+add_third_party_module(doctest)

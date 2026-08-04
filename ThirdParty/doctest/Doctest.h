@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 #ifndef DOCTEST
-#define SLXDOCTEST
+#define DOCTEST
 
 #ifdef USE_EXTERNAL_DOCTEST
 #define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
