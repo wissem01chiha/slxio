@@ -15,41 +15,42 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 enum LogLevelType : UInt8
 {
-LOG_OFF = 0x00,
-LOG_FATAL = 0x01,
-LOG_ERROR = 0x02,
-LOG_WARN = 0x03,
-LOG_INFO = 0x04,
-LOG_DEBUG = 0x05,
-LOG_VERBOSE = 0x06
+  LOG_OFF = 0x00,
+  LOG_FATAL = 0x01,
+  LOG_ERROR = 0x02,
+  LOG_WARN = 0x03,
+  LOG_INFO = 0x04,
+  LOG_DEBUG = 0x05,
+  LOG_VERBOSE = 0x06
 };
 
-class ILogger {
+class ILogger
+{
 public:
-    virtual ~ILogger() = default;
+  virtual ~ILogger() = default;
 
-    virtual void Log(LogMessage msg) = 0;
-    virtual void SetLogLevel(LogLevelType level) = 0;
-    virtual LogLevelType GetLogLevel() const = 0;
+  virtual void Log(LogMessage msg) = 0;
+  virtual void SetLogLevel(LogLevelType level) = 0;
+  virtual LogLevelType GetLogLevel() const = 0;
 
-    virtual bool IsEnabled() = 0 ;
+  virtual bool IsEnabled() = 0;
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 };
 
-class Logger : public ILogger {
+class Logger : public ILogger
+{
 public:
-    explicit Logger(std::unique_ptr<IOutputStrategy> strategy)
-        : output(std::move(strategy)) {}
+  explicit Logger(std::unique_ptr<IOutputStrategy> strategy)
+    : output(std::move(strategy))
+  {
+  }
 
-    void Log(LogMessage msg) override {
-        output->Write(msg);
-    }
+  void Log(LogMessage msg) override { output->Write(msg); }
 
 private:
-    std::unique_ptr<IOutputStrategy> output;
+  std::unique_ptr<IOutputStrategy> output;
 };
 
 #endif // ILOGGER_H
