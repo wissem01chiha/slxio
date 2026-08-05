@@ -77,6 +77,7 @@ extern "C"
 
   /**
    * Add explicit content from filesystem to a list item object
+   * this delegates the call to the figure_fs_create routine
    */
   TEX_EXTERN tex_error_t list_item_add_fs_content(tex_list_item *itm,
                                                   const char    *filename);
@@ -108,11 +109,28 @@ extern "C"
    */
   TEX_EXTERN tex_error_t list_item_add_fs_table(tex_list_item *itm,
                                                 tex_table     *tab);
+  /**
+   * This function add a the generic type element to the list it can be used
+   * instead of list_item_add_table, list_item_add_figure, but with more setup
+   * to wrap this objects into an elment based object, the previous api callback
+   * relay on this function to reduce biopralte code.
+   */
+  TEX_EXTERN tex_error_t list_item_add_element(tex_list_item *itm,
+                                               tex_element   *ele);
 
   /**
    * Add a list_item to the given list
    */
   TEX_EXTERN tex_error_t list_add_item(tex_list *lst, tex_list_item *itm);
+
+  /**
+   * Write tex_list_item to a memeory buffer, this mainly function a helper
+   * for list_write routine , not intended to use by externals
+   */
+  TEX_EXTERN int list_item_write(const tex_list_item *itm,
+                                 char                *buffer,
+                                 size_t               buffer_size,
+                                 tex_error_t         *err);
 
   /**
    *  Write list to a memeory buffer

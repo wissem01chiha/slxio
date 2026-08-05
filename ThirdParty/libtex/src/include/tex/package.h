@@ -4,38 +4,95 @@
 #pragma once
 
 #include <stddef.h>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-variable"
-
+#include <stdbool.h>
 #include "texexport.h"
+#include "texerrno.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 
-  //
-  typedef struct
-  {
-    int         priority;
-    const char *name;
-    const char *options;
-  } tex_package;
+  typedef struct tex_package_option tex_package_option;
+  typedef struct tex_package        tex_package;
+  typedef enum tex_engine_t         tex_engine_t;
 
-  static tex_package packages[] = {
-      {1, "geometry", NULL},  {1, "graphicx", NULL},   {2, "hyperref", NULL},
-      {1, "amsmath", NULL},   {1, "amssymb", NULL},    {1, "booktabs", NULL},
-      {1, "xcolor", NULL},    {1, "listings", NULL},   {1, "fancyhdr", NULL},
-      {1, "tikz", NULL},      {1, "pgfplots", NULL},   {1, "algorithm2e", NULL},
-      {1, "caption", NULL},   {1, "subcaption", NULL}, {1, "float", NULL},
-      {1, "multicol", NULL},  {1, "array", NULL},      {1, "tabularx", NULL},
-      {1, "longtable", NULL}, {1, "enumitem", NULL},   {1, "siunitx", NULL},
-      {1, "xspace", NULL},    {1, "titlesec", NULL},   {1, "fancyvrb", NULL},
-      {1, "minted", NULL},    {1, "csquotes", NULL},   {1, "biblatex", NULL},
+  enum tex_engine_t
+  {
+    TEX_ENGINE_ANY,
+    TEX_ENGINE_PDFLATEX,
+    TEX_ENGINE_XELATEX,
+    TEX_ENGINE_LUALATEX
   };
 
-#pragma GCC diagnostic pop
+  struct tex_package_option
+  {
+    char               *name;
+    char               *value;
+    tex_package_option *next;
+  };
+
+  struct tex_package
+  {
+    const char         *name;
+    tex_package_option *options;
+    bool                enabled;
+    int                 priority;
+    tex_engine_t        engine;
+    tex_package        *next;
+  };
+
+  /**
+   * Create a tex_package_option based object
+   */
+  TEX_EXTERN tex_package_option *package_option_create(tex_error_t *err);
+
+  /**
+   * Set the value of a given package option object
+   */
+  TEX_EXTERN tex_error_t package_option_set_value(tex_package_option *opt,
+                                                  const char         *value);
+
+  /**
+   * Set the value of a given package option object, this function do not
+   * validate the option name against a latex synatax one, it's caller
+   * responsability to pass the right option name else the generated file will
+   * be compilation issues
+   */
+  TEX_EXTERN tex_error_t package_option_set_name(tex_package_option *opt,
+                                                 const char         *name);
+
+  /**
+   * Add an option to a given package_option object based,
+   * Note if the option is already present in the package configuration, if will
+   * be skipped with return of TEX_ENONE code, this behvaior may be subject to
+   * change in next library releases
+   */
+  TEX_EXTERN tex_error_t package_add_option(tex_package        *pkg,
+                                            tex_package_option *opt);
+
+  /**
+   * Create a tex_package based object
+   */
+  TEX_EXTERN tex_package *package_create(tex_error_t *err);
+
+  /**
+   * Delete a tex_package based object
+   */
+  TEX_EXTERN tex_error_t package_delete(tex_package *pkg);
+
+  /**
+   * Append a tex_package based object to the list of packages,
+   * will be by default placed at the end of the linked list
+   */
+  TEX_EXTERN tex_error_t package_add_package(tex_package *pkg,
+                                             tex_package *npkg);
+
+  /**
+   * Write the package to a buffer in memory.
+   */
+  TEX_EXTERN int
+  package_write(const tex_package *pkg, char *buffer, size_t buffer_size);
 
 #ifdef __cplusplus
 };

@@ -14,12 +14,6 @@ extern "C"
   typedef struct tex_element    tex_element;
   typedef enum tex_element_type tex_element_type;
 
-  /**
-   * Enumeration of all element types supported in a TeX/LaTeX document.
-   * This enumeration defines the different kinds of elements that can appear
-   * inside a document section. The set of supported elements will be
-   * progressively increased according to the release roadmap.
-   */
   enum tex_element_type
   {
     TEX_ELE_CONTENT,

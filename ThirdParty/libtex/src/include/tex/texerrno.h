@@ -10,7 +10,6 @@ extern "C"
 {
 #endif
 
-  // Standard error codes used in libtex.
   typedef enum tex_error_t
   {
     TEX_ENONE = 0,
@@ -37,11 +36,13 @@ extern "C"
     TEX_EINVAL_FIGURE_SCALE,
     TEX_ENULL_TABLE,
     TEX_ENULL_LIST,
+    TEX_ENULL_TABLE_LABEL,
     TEX_ENULL_PACKAGE,
     TEX_EOVERFLOW_BUFFER,
     TEX_EINVAL_INPUT,
     TEX_EINVAL_FILE_PATH,
     TEX_EFAIL_LOAD_IMAGE,
+    TEX_EINVALID_ELEMENT,
     TEX_EWRITE_FAIL,
     TEX_EUNKNOWN
 

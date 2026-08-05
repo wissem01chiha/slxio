@@ -5,6 +5,7 @@
 
 #include "texerrno.h"
 #include "texexport.h"
+#include "package.h"
 
 #ifdef __cplusplus
 extern "C"

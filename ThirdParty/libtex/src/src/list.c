@@ -137,6 +137,7 @@ tex_error_t list_item_add_content(tex_list_item *itm, tex_content *content)
   {
     return TEX_ENULL_CONTENT;
   }
+
   // create a new tex_element
   tex_error_t  err = TEX_ENONE;
   tex_element *ele = element_create(&err);
@@ -144,9 +145,24 @@ tex_error_t list_item_add_content(tex_list_item *itm, tex_content *content)
   {
     return err;
   }
-  ele->type     = TEX_ELE_CONTENT;
-  ele->data     = content;
-  itm->elements = ele;
+  ele->type = TEX_ELE_CONTENT;
+  ele->data = content;
+
+  // if this is the first element to add
+  if (itm->elements == NULL)
+  {
+    itm->elements = ele;
+  }
+  else
+  {
+    // not the first need to go throgth elements unit the end to append it
+    tex_element *cur = itm->elements;
+    while (cur->next)
+    {
+      cur = cur->next;
+    }
+    cur->next = ele;
+  }
   return TEX_ENONE;
 }
 
@@ -206,11 +222,38 @@ tex_error_t list_item_add_figure(tex_list_item *itm, tex_figure *fig)
 
 tex_error_t list_item_add_fs_figure(tex_list_item *itm, const char *filename)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  // create a new tex_element
+  tex_error_t  err = TEX_ENONE;
+  tex_element *ele = element_create(&err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  ele->type = TEX_ELE_FIGURE;
+  ele->data = figure_fs_create(filename, &err);
+  if (err != TEX_ENONE)
+  {
+    return err;
+  }
+  itm->elements = ele;
   return TEX_ENONE;
 }
 
 tex_error_t list_item_add_fs_table(tex_list_item *itm, tex_table *tab)
 {
+  if (itm == NULL)
+  {
+    return TEX_ENULL_LIST_ITEM;
+  }
+  if (tab == NULL)
+  {
+    return TEX_ENULL_TABLE;
+  }
+
   return TEX_ENONE;
 }
 
@@ -251,6 +294,61 @@ tex_error_t list_add_item(tex_list *lst, tex_list_item *itm)
   return TEX_ENONE;
 }
 
+int list_item_write(const tex_list_item *itm,
+                    char                *buffer,
+                    size_t               buffer_size,
+                    tex_error_t         *err)
+{
+  int written = 0;
+  int total   = 0;
+
+  if (itm == NULL)
+  {
+    *err = TEX_ENULL_LIST_ITEM;
+    return -1;
+  }
+
+  if (buffer == NULL)
+  {
+    *err = TEX_ENULL_BUFFER;
+    return -1;
+  }
+
+  if (itm->label != NULL)
+  {
+    written = snprintf(buffer, buffer_size, "\\item[%s] ", itm->label);
+  }
+  else
+  {
+    written = snprintf(buffer, buffer_size, "\\item ");
+  }
+
+  if (written < 0 || (size_t) written >= buffer_size)
+  {
+    *err = TEX_EOVERFLOW_BUFFER;
+    return -1;
+  }
+
+  total += written;
+
+  tex_element *cur = itm->elements;
+
+  while (cur != NULL)
+  {
+    written = element_write(cur, buffer + total, buffer_size - total, err);
+
+    if (written < 0)
+    {
+      return -1;
+    }
+
+    total += written;
+    cur = cur->next;
+  }
+
+  return total;
+}
+
 int list_write(const tex_list *lst,
                char           *buffer,
                size_t          buffer_size,
@@ -264,5 +362,47 @@ int list_write(const tex_list *lst,
   {
     *err = TEX_ENULL_BUFFER;
   }
-  return 0;
+
+  // write the list header
+  const char *begin_fmt = NULL;
+  const char *end_fmt   = NULL;
+
+  switch (lst->type)
+  {
+    case Itemize:
+      begin_fmt = "\\begin{itemize}\n";
+      end_fmt   = "\\end{itemize}\n";
+      break;
+    case Description:
+      begin_fmt = "\\begin{description}\n";
+      end_fmt   = "\\end{description}\n";
+      break;
+    case Enumerate:
+      begin_fmt = "\\begin{enumerate}\n";
+      end_fmt   = "\\end{enumerate}\n";
+      break;
+  }
+
+  int written = snprintf(buffer, buffer_size, "%s", begin_fmt);
+
+  // write list items
+  tex_list_item *curr = lst->items;
+  while (curr != NULL)
+  {
+    int n = list_item_write(curr, buffer + written, buffer_size - written, err);
+    written += n;
+    curr = curr->next;
+  }
+
+  // handle adjcent lists
+  if (lst->next != NULL)
+  {
+    int written_next =
+        list_write(lst->next, buffer + written, buffer_size - written, err);
+    written += written_next;
+  }
+  // write end header
+  written += snprintf(buffer + written, buffer_size - written, "%s", end_fmt);
+
+  return written;
 }

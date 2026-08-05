@@ -18,7 +18,7 @@ tex_section *section_create(tex_error_t *err)
   sec->level    = Section;
   sec->next     = NULL;
   sec->elements = NULL;
-  err           = TEX_ENONE;
+  *err          = TEX_ENONE;
   return sec;
 }
 
@@ -131,6 +131,19 @@ tex_content *section_get_content(tex_section *sec)
   }
 
   return head;
+}
+
+tex_error_t section_add_list(tex_section *sec, tex_list *lst)
+{
+  if (sec == NULL)
+  {
+    return TEX_ENULL_SECTION;
+  }
+  if (lst == NULL)
+  {
+    return TEX_ENULL_LIST;
+  }
+  return TEX_ENONE;
 }
 
 tex_error_t section_add_fs_content(tex_section *sec, const char *filename)

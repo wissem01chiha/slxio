@@ -14,8 +14,8 @@ tex_algorithm *algorithm_create(tex_error_t *err)
     *err = -1;
     return NULL;
   }
-  algorithm->caption = '\0';
-  algorithm->label   = '\0';
+  algorithm->caption = NULL;
+  algorithm->label   = NULL;
   return algorithm;
 }
 
@@ -23,10 +23,10 @@ tex_error_t algorithm_delete(tex_algorithm *algorithm)
 {
   if (algorithm)
   {
-    return 0;
+    return TEX_ENONE;
   }
   free(algorithm);
-  return 0;
+  return TEX_ENONE;
 }
 
 void alorithm_set_caption(tex_algorithm *algorithm, const char *caption)

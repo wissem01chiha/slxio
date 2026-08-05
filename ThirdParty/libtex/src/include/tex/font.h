@@ -3,10 +3,9 @@
 
 #pragma once
 
-#include <stddef.h>
-#include <stdbool.h>
-#include "texexport.h"
 #include "texerrno.h"
+#include "texexport.h"
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C"

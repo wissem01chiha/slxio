@@ -23,7 +23,7 @@ if (ENABLE_CUSTOM_COMPILER_FLAGS)
             -pedantic
             -Wall
             -Wextra
-            -Werror
+            # -Werror
             -Wstrict-prototypes
             -Wwrite-strings
             -Wshadow
@@ -32,7 +32,7 @@ if (ENABLE_CUSTOM_COMPILER_FLAGS)
             -Wformat=2
             -Wmissing-prototypes
             -Wstrict-overflow=2
-            -Wcast-qual
+            # -Wcast-qual trigger an error in cast_away_const for clang on windows, so disable it,enabled only for GCC
             -Wundef
             -Wswitch-default
             -Wconversion
@@ -47,6 +47,14 @@ if (ENABLE_CUSTOM_COMPILER_FLAGS)
             -Wused-but-marked-unused
             -Wswitch-enum
         )
+
+    if("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+        list(APPEND custom_compiler_flags
+            -Wcast-qual
+            -Werror
+        )
+    endif()
+
     elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
         # Disable warning c4001 - nonstandard extension 'single line comment' was used
         # Define _CRT_SECURE_NO_WARNINGS to disable deprecation warnings for "insecure" C library functions

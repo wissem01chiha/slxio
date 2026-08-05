@@ -5,13 +5,16 @@
 
 #include "texerrno.h"
 #include "texexport.h"
+#include "package.h"
 
 #ifdef __cplusplus
 extern "C"
 {
 #endif
-  // supported lanagues types
-  typedef enum tex_language_t
+
+  typedef enum tex_language_t tex_language_t;
+
+  enum tex_language_t
   {
     English    = 0,
     French     = 1,
@@ -24,9 +27,21 @@ extern "C"
     Chinese    = 8,
     Japanese   = 9,
     Arabic     = 10
-  } tex_language_t;
+  };
 
+  /**
+   * Return a string based representtaion of the language type
+   */
   TEX_EXTERN const char *tex_language_to_string(tex_language_t lang);
+
+  /**
+   * This function compute the required tex_package based object
+   * given the langauge type selected and the latex engine for supported
+   * langauges, note that this is an internal API routine not intended to
+   * use by end users
+   */
+  TEX_EXTERN tex_package *language_package(tex_language_t lang,
+                                           tex_error_t   *err);
 
 #ifdef __cplusplus
 };

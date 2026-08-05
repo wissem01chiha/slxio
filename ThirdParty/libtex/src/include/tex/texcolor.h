@@ -4,6 +4,8 @@
 #pragma once
 
 #include "texerrno.h"
+#include "package.h"
+#include "texexport.h"
 
 #ifdef __cplusplus
 extern "C"
