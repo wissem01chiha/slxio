@@ -1,1 +1,1 @@
-add_third_party_module(loguru)
+add_third_party(loguru)

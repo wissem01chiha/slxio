@@ -1,1 +1,1 @@
-add_third_party_module(cxxopts)
+add_third_party(cxxopts)

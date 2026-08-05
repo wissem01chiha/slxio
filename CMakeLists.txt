@@ -7,13 +7,6 @@ project(SLXIO)
 
 list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 
-if(APPLE)
-  include(Apple)
-endif()
-if(WIN32)
-  include(Windows)
-endif()
-
 find_package(Git)
 include(DetermineVersion)
 include(CMakeDependentOption)
@@ -41,14 +34,15 @@ option(SLXIO_BUILD_EXAMPLES "" OFF)
 # For more information refer to https://wissem01chiha.github.io/slxio/matlab-support.html
 set(SLXIO_SIMULINK_DEFAULT_VERSION R2018b)
 
-# Option to enable building utilities like console application and others
-option(SLXIO_WITH_Interaction "" ON)
+# Option to enable building utilities like console application 
+# and others
+option(SLXIO_WITH_INTERACTION "" ON)
 
 # Option to enable Python bindings
-option(SLXIO_BUILD_PYTHON_BINDINGS "" ON)
+option(SLXIO_BUILD_PYTHON_BINDINGS "" OFF)
 
 # Option to enable Java bindings
-option(SLXIO_BUILD_JAVA_BINDINGS "" ON)
+option(SLXIO_BUILD_JAVA_BINDINGS "" OFF)
 
 # Option to use only vendored third_party modules
 option(SLXIO_FORCE_LOCAL_MODULES "" ON)
@@ -71,7 +65,7 @@ set(SLXIO_SLDD "Enable Simulink Data Dictionary support" ON)
 set(SLDD ${SLXIO_SLDD})
 
 # Option to enable *.mat file support
-set(SLXIO_MATIO "Enable MATLAB MAT file support" ON)
+set(SLXIO_MAT "Enable MATLAB MAT file support" ON)
 
 # Build with HDF5 library support
 # Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
@@ -109,13 +103,14 @@ mark_as_advanced(SLXIO_WITH_PKGCONFIG)
 
 # Option to generate API HTML documentation
 # Requires Doxygen installed, else throws a build error
-option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" ON)
+option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
 mark_as_advanced(SLXIO_DOXYGEN_DOCUMENTATION)
 
 # Options to enable/disable sanitizers
 option(SLXIO_ASAN "Enable AddressSanitizer (ASan)" OFF)
 mark_as_advanced(SLXIO_ASAN)
 
+# MSan 
 option(SLXIO_MSAN "Enable MemorySanitizer (MSan)" OFF)
 mark_as_advanced(SLXIO_MSAN)
 
@@ -136,6 +131,7 @@ mark_as_advanced(SLXIO_ENABLE_WERROR)
 option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
 mark_as_advanced(SLXIO_ENABLE_WALL)
 
+# Option to set build type when user didn't specify for single generators
 if(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
   set(CMAKE_BUILD_TYPE ${SLXIO_DEFAULT_BUILD_TYPE})
 endif()
@@ -147,8 +143,16 @@ set(CMAKE_BINARY_NAME_PREFIX "SLX")
 set(SLXIO_SIMULINK_VERSION "${SLXIO_SIMULINK_DEFAULT_VERSION}")
 set(SLXIO_SIMULINK_VERSION ${SLXIO_SIMULINK_VERSION})
 
-# Do not change this without changing filename on disk
+# Do not change this without changing filename on disk !
 set(SLXIO_PKG_CONFIG_FILE "slxio.pc")
+
+# Platform specific settings options
+if(APPLE)
+  include(Apple)
+endif()
+if(WIN32)
+  include(Windows)
+endif()
 
 if(NOT CMAKE_INSTALL_LICENSEDIR)
  set(CMAKE_INSTALL_LICENSEDIR "${CMAKE_DEFAULT_LICENSEDIR}")
@@ -161,26 +165,33 @@ include(CompilerExtraFlags)
 include(CompilerWarningFlags)
 
 if(SLXIO_WITH_PKGCONFIG)
-    find_package(PkgConfig)
-     if(PKG_CONFIG_FOUND)
-        set(SLXIO_PKG_CFG "${CMAKE_CURRENT_BINARY_DIR}/${SLXIO_PKG_CONFIG_FILE}")
-        configure_file(
-          ${CMAKE_CURRENT_SOURCE_DIR}/${SLXIO_PKG_CONFIG_FILE}.in
-          ${SLXIO_PKG_CFG}
-          @ONLY
-        )
-    endif()
+  include(PkgConfig)
 endif()
-
-
-set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}")
-if(SLXIO_BUILD_TESTING)
-  enable_testing()
-endif()
-
 
 include(ThirdParty)
 include(Module)
+if(SLXIO_BUILD_TESTING)
+  include(Testing)
+endif()
 
-add_subdirectory(Common)
 add_subdirectory(ThirdParty)
+add_subdirectory(Common)
+add_subdirectory(Simulink)
+add_subdirectory(IO)
+add_subdirectory(Utilities)
+
+if(SLXIO_WITH_INTERACTION)
+  add_subdirectory(Interaction)
+endif()
+
+if(SLXIO_BUILD_TESTING)
+  add_subdirectory(Testing)
+endif()
+
+if(SLXIO_BUILD_EXAMPLES)
+  add_subdirectory(Examples)
+endif()
+
+if(SLXIO_WITH_VISUALIZATION)
+  add_subdirectory(Visualization)
+endif()

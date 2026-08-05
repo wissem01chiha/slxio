@@ -1,1 +1,1 @@
-add_third_party_module(uv_a)
+add_third_party(uv_a)

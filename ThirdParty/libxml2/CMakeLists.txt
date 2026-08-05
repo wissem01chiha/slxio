@@ -1,3 +1,3 @@
 set(LIBXML2_WITH_HTML OFF)
-set(LIBXML2_WITH_TESTS OFF)
-add_subdirectory(src)
+set(LIBXML2_WITH_TESTS ${SLXIO_BUILD_THIRDPARTY_TESTING})
+add_third_party(LibXml2)

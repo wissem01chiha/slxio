@@ -1,1 +1,1 @@
-add_third_party_module(zip)
+add_third_party(zip)

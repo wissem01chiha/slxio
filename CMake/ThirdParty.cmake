@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 # SPDX-License-Identifier: Apache-2.0
 
-function(add_third_party_module target)
+function(add_third_party target)
   add_subdirectory(src)
   get_target_property(target_type ${target} TYPE)
     if(target_type STREQUAL "INTERFACE_LIBRARY")
@@ -20,26 +20,6 @@ function(add_third_party_module target)
 endfunction()
 
 
-
-
-
-
-
-
-# cmake_policy(PUSH)
-# if (POLICY CMP0159)
-#   cmake_policy(SET CMP0159 NEW)
-# endif ()
-
-# include(FindPythonModule)
-
-# if(SLXIO_SLOG)
-#   set(SLXIO_LOGURU 0)
-#   set(SLXIO_SLOG 1)
-# else()
-#   set(SLXIO_LOGURU 1)
-#   set(SLXIO_SLOG 0)
-# endif()
 
 # if(SLXIO_BUILD_SHARED)
 #   set(LIBUV_BUILD_SHARED TRUE)

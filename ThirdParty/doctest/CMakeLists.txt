@@ -1,2 +1,2 @@
 set(DOCTEST_WITH_MAIN_IN_STATIC_LIB ON)
-add_third_party_module(doctest)
+add_third_party(doctest)

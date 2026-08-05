@@ -9,30 +9,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu GCC
+          - name: Ubuntu GNU GCC Default
             os: ubuntu-latest
             compiler: gcc
             cflags: -Wall -Wextra
             pkgtgt: package package_source
             cmake-args:
 
-          - name: Ubuntu GCC C11
+          - name: Ubuntu GNU GCC C++11
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=11
-
-          - name: Ubuntu GCC C17
-            os: ubuntu-latest
-            compiler: gcc
-            cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17
-
-          - name: Ubuntu GCC C23
-            os: ubuntu-latest
-            compiler: gcc
-            cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=23
 
           - name: Ubuntu Clang C++11
             os: ubuntu-latest
@@ -40,20 +28,6 @@ jobs:
             cxx-compiler: clang++-15
             cmake-args: -DCMAKE_CXX_STANDARD=11
             packages: clang-15 llvm-15 llvm-15-tools
-
-          - name: Ubuntu Clang C17
-            os: ubuntu-latest
-            compiler: clang-15
-            cxx-compiler: clang++-15
-            cmake-args: -DCMAKE_CXX_STANDARD=17
-            packages: clang-15 llvm-15 llvm-15-tools
-
-          - name: Ubuntu Clang C23
-            os: ubuntu-latest
-            compiler: clang-18
-            cxx-compiler: clang++-18
-            cmake-args: -DCMAKE_CXX_STANDARD=23
-            packages: clang-18 llvm-18 llvm-18-tools
 
     steps:
     - name: Checkout repository

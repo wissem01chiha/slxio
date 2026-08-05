@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
+
 set (CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1)
 if (MSVC)
   add_compile_options (

@@ -1,1 +1,1 @@
-add_subdirectory(src)
+add_third_party(fast_float)

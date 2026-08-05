@@ -3,4 +3,4 @@ if(POLICY CMP0077)
 endif()
 set(BUILD_APPS OFF)
 
-add_subdirectory(src)
+add_third_party(json-c)

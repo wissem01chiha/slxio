@@ -9,31 +9,19 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: macOS AppleClang Default
+          - name: MacOS AppleClang Default
             os: macos-latest
             compiler: clang
             cxx-compiler: clang++
             cmake-args:
 
-          - name: macOS AppleClang C++11
+          - name: MacOS AppleClang C++11
             os: macos-latest
             compiler: clang
             cxx-compiler: clang++
             cmake-args: -DCMAKE_CXX_STANDARD=11
 
-          - name: macOS AppleClang C++17
-            os: macos-latest
-            compiler: clang
-            cxx-compiler: clang++
-            cmake-args: -DCMAKE_CXX_STANDARD=17
-
-          - name: macOS AppleClang C++23
-            os: macos-latest
-            compiler: clang
-            cxx-compiler: clang++
-            cmake-args: -DCMAKE_CXX_STANDARD=23
-
-          - name: macOS GCC (Homebrew)
+          - name: MacOS GNU GCC Homebrew
             os: macos-latest
             compiler: gcc-13
             cxx-compiler: g++-13

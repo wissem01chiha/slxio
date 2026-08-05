@@ -7,10 +7,6 @@
 #[=======================================================================[.rst:
 Module.cmake
 ------
-Provides a CMake function to add a module to the project. A module is a
-collection of source files, headers, and resources that can be built togther
-into a library and optionally installed.
-
 Changelog:
   - 03-08-2026 Wissem CHIHA Intial Release
   - 04-08-2026 Add CMAKE_BINARY_NAME_PREFIX
@@ -249,8 +245,10 @@ function(add_module)
       foreach(test_depends IN LISTS MOD_MODULE_TEST_DEPENDS)
         if(TARGET ${test_depends})
           get_target_property(test_depends_includes ${test_depends} INCLUDE_DIRECTORIES)
-          target_include_directories(${TARGET_NAME}${test_source_name} 
-          PRIVATE ${test_depends_includes})
+          if(test_depends_includes)
+            target_include_directories(${TARGET_NAME}${test_source_name} 
+            PRIVATE ${test_depends_includes})
+          endif()
         endif()
       endforeach()
 
