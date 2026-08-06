@@ -4,5 +4,4 @@
 #ifndef COREPCH_H
 #define COREPCH_H
 
-
 #endif // COREPCH_H

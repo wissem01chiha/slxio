@@ -24,7 +24,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * enabling new message types to be introduced without modifying the
  * logging infrastructure.
  */
-class SLXIO_APIEXPORT ILogMessage : public Object 
+class SLXIO_APIEXPORT ILogMessage : public Object
 {
 public:
   virtual ~ILogMessage() = default;
@@ -34,8 +34,9 @@ public:
 
   /* Implement specific logic to check whether a message is considered empty */
   virtual bool Empty() const = 0;
- 
-  /* Concatenate ILogMessage based object to form a new ILogMessage, Combine *this with rhs */
+
+  /* Concatenate ILogMessage based object to form a new ILogMessage, Combine *this with
+   * rhs */
   virtual ILogMessage operator+(const ILogMessage& rhs) const = 0;
 };
 

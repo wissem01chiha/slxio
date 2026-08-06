@@ -15,18 +15,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class Object
  * @brief Abstract base class for most SLXIO objects.
- * 
- * Provides essential utilities for type access, debugging, tracking, 
- * safe casting, and modification. All classes should inherit from this 
+ *
+ * Provides essential utilities for type access, debugging, tracking,
+ * safe casting, and modification. All classes should inherit from this
  * interface, with some exceptions for enumeration classes.
  */
 class SLXIO_APIEXPORT Object
-{   
+{
 public:
-    virtual ~Object() = default;
+  virtual ~Object() = default;
 
-    /** Returns the underlying object type. */
-    virtual DataType GetDataType() const = 0;
+  /** Returns the underlying object type. */
+  virtual DataType GetDataType() const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

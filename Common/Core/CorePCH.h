@@ -4,17 +4,17 @@
 #ifndef COREPCH_H
 #define COREPCH_H
 
+#include <array>
 #include <chrono>
 #include <cstddef>
 #include <cstdint>
 #include <iostream>
 #include <limits>
 #include <mutex>
-#include <sstream> 
+#include <sstream>
 #include <string>
 #include <thread>
 #include <type_traits>
 #include <vector>
-#include <array>
 
 #endif // COREPCH_H
