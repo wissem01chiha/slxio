@@ -1,6 +1,6 @@
 #include "ErrorManager.h"
-#include "ErrorHandlerMacro.h"
 #include "ErrorHandler.h"
+#include "ErrorHandlerMacro.h"
 #include "ErrorTypes.h"
 
 namespace slxio

@@ -4,10 +4,10 @@
 #ifndef ERRORHANDLER_H
 #define ERRORHANDLER_H
 
-#include "ErrorHandlerMacro.h"
-#include "PlatformTypes.h"
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ErrorHandlerMacro.h"
+#include "PlatformTypes.h"
 
 namespace slxio
 {

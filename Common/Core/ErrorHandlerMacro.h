@@ -32,13 +32,13 @@
 #define LIBZIP 7U
 #define LIBXML2 8U
 
-#define SLXIO_SUCCESS 0U 
-#define SLXIO_INFO 1U    
-#define SLXIO_WARN 2U    
-#define SLXIO_FATAL 3U   
+#define SLXIO_SUCCESS 0U
+#define SLXIO_INFO 1U
+#define SLXIO_WARN 2U
+#define SLXIO_FATAL 3U
 
 /// @brief Helper macro to construct a complient slxio error code.
-#define SLXIO_HERROR(PROJECT, NAMESPACE, COMPONENT, LEVEL, ERRORID)                     \
+#define SLXIO_HERROR(PROJECT, NAMESPACE, COMPONENT, LEVEL, ERRORID)                      \
   ((((UInt32)(PROJECT) & 0x3U) << 30) | (((UInt32)(NAMESPACE) & 0x1FU) << 25) |          \
     (((UInt32)(COMPONENT) & 0xFFU) << 17) | (((UInt32)(LEVEL) & 0x3U) << 15) |           \
     (((UInt32)(ERRORID) & 0x3FFU) << 5))

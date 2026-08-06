@@ -14,7 +14,7 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class ErrorManager 
+ * @class ErrorManager
  * @brief A singleton class that manages error and status results across the
  * library.
  */

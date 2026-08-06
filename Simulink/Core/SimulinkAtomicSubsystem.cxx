@@ -65,8 +65,7 @@ HError SimulinkAtomicSubsystem::Erase(const IdType& id)
   return HError();
 }
 
-HError SimulinkAtomicSubsystem::Erase(
-  const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkAtomicSubsystem::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
   return HError();
 }
