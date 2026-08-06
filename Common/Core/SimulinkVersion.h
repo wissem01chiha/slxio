@@ -4,58 +4,38 @@
 #ifndef SIMULINKVERSION_H
 #define SIMULINKVERSION_H
 
-#include "Config.h"
+#include "Options.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
+#include "PlatformTypes.h"
+#include "CorePCH.h"
 
-#if SLXIO_SIMULINK_VERSION == R2018a
-#define SIMULINK_VERSION_YEAR 2018
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2018b
-#define SIMULINK_VERSION_YEAR 2018
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2019a
-#define SIMULINK_VERSION_YEAR 2019
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2019b
-#define SIMULINK_VERSION_YEAR 2019
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2020a
-#define SIMULINK_VERSION_YEAR 2020
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2020b
-#define SIMULINK_VERSION_YEAR 2020
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2021a
-#define SIMULINK_VERSION_YEAR 2021
-#define SIMULINK_VERSION_R2021A "a"
-#elif SLXIO_SIMULINK_VERSION == R2021b
-#define SIMULINK_VERSION_YEAR 2021
-#define SISIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2022a
-#define SIMULINK_VERSION_YEAR 2022
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2022b
-#define SIMULINK_VERSION_YEAR 2022
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2023a
-#define SIMULINK_VERSION_YEAR 2023
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2023b
-#define SIMULINK_VERSION_YEAR 2023
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2024a
-#define SIMULINK_VERSION_YEAR 2024
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2024b
-#define SIMULINK_VERSION_YEAR 2024
-#define SIMULINK_VERSION_RELEASE "b"
-#elif SLXIO_SIMULINK_VERSION == R2025a
-#define SIMULINK_VERSION_YEAR 2025
-#define SIMULINK_VERSION_RELEASE "a"
-#elif SLXIO_SIMULINK_VERSION == R2025b
-#define SIMULINK_VERSION_YEAR 2025
-#define SIMULINK_VERSION_RELEASE "b"
-#else
-#error "Simulink Version is not set or unsupported"
-#endif
+namespace slxio
+{
+SLXIO_ABI_NAMESPACE_BEGIN
+
+enum class SimulinkVersionRelease;
+
+/**
+ * @class SimulinkVersion
+ */
+class SLXIO_APIEXPORT SimulinkVersion
+{
+public:
+    /**  */
+    static UInt16 Year();
+
+    /**  */
+    static char Release();
+    
+    /* */
+    static std::string ToString();
+    
+    /**  */
+    static SimulinkVersionRelease GetRelease();
+};
+
+SLXIO_ABI_NAMESPACE_END
+};
 
 #endif // SIMULINKVERSION_H

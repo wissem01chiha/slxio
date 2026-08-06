@@ -4,10 +4,8 @@
 #ifndef PLATFORMTYPES_H
 #define PLATFORMTYPES_H
 
-#include "Config.h"
-#include <cstdint>
-#include <limits>
-#include <type_traits>
+#include "Options.h"
+#include "CorePCH.h"
 
 using UInt8 = std::uint8_t;
 using Int8 = std::int8_t;

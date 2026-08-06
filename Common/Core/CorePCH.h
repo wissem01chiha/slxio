@@ -9,5 +9,9 @@
 #include <mutex>
 #include <string>
 #include <vector>
+#include <cstddef>
+#include <cstdint>
+#include <limits>
+#include <type_traits>
 
 #endif // COREPCH_H

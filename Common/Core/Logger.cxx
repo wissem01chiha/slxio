@@ -4,6 +4,7 @@
 #include "Libuv.h"
 #include <fstream>
 #include <ostream>
+#include "PlatformMacro.h"
 #include <random>
 #include <sstream>
 #if SLXIO_SLOG

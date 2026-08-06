@@ -4,51 +4,11 @@
 #ifndef COMPILER_H
 #define COMPILER_H
 
-#include "Config.h"
-
 #ifdef _MSC_VER
 
+#ifndef NOMINMAX
 #define NOMINMAX
-
-#ifdef HAVE_STDBOOL_H
-#include "stdbool.h"
-#endif
-
-#if HAVE_LIMITS_H
-#include <limits.h>
-#endif
-
-#if HAVE_VALUES_H
-#include <values.h>
-#endif
-
-#if HAVE_STDLIB_H
-#include <stdlib.h>
-#endif
-
-#if HAVE_FLOAT_H
-#include <float.h>
-#endif
-
-#if HAVE_DIRECT_H
-#include <direct.h>
-#endif
-
-#if HAVE_IO_H
-#include <io.h>
-#endif
-
-#if HAVE_SYS_STAT_H
-#include <sys/stat.h>
-#endif
-
-#if HAVE_SYS_TYPES_H
-#include <sys/types.h>
-#endif
-
-#if HAVE_UNISTD_H
-#include <unistd.h>
-#endif
+#endif 
 
 #ifndef S_ISDIR
 #define S_ISDIR(mode) (((mode) & S_IFMT) == S_IFDIR)
@@ -78,6 +38,26 @@
 #define FORCE_INLINE inline __attribute__((always_inline))
 #else
 #define FORCE_INLINE inline
+#endif
+
+/* Define deprecated symbol for api changes warnings*/
+#if defined(__GNUC__) || defined(__clang__)
+#define SLXIO_DEPRECATED __attribute__((deprecated))
+#elif defined(_MSC_VER)
+#define SLXIO_DEPRECATED __declspec(deprecated)
+#else
+#define SLXIO_DEPRECATED
+#endif
+
+/* Define compiler nodiscard macro  */
+#if defined(__has_cpp_attribute)
+#if __has_cpp_attribute(nodiscard)
+#define SLXIO_NODISCARD [[nodiscard]]
+#else
+#define SLXIO_NODISCARD
+#endif
+#else
+#define SLXIO_NODISCARD
 #endif
 
 #endif // COMPILER_H

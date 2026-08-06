@@ -4,7 +4,7 @@
 #ifndef ABINAMESPACEMACRO_H
 #define ABINAMESPACEMACRO_H
 
-#include "Config.h"
+#include "Options.h"
 #include "VersionMacro.h"
 
 #if SLXIO_ABI_NAMESPACE
