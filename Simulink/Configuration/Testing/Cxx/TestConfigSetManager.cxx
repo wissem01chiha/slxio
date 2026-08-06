@@ -10,7 +10,7 @@ TEST_CASE("AddConfigurationSetTest")
 {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
-  SResult status = manager.AddElement(configSet);
+  HError status = manager.AddElement(configSet);
   CHECK(status == E_OK);
 }
 
@@ -19,7 +19,7 @@ TEST_CASE("RemoveConfigurationSetTest")
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
   manager.AddElement(configSet);
-  SResult status = manager.RemoveElement(configSet);
+  HError status = manager.RemoveElement(configSet);
   CHECK(status == E_OK);
 }
 

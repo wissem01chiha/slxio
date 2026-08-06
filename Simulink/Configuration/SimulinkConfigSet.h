@@ -59,22 +59,22 @@ public:
   std::shared_ptr<SimulinkParameterBase> GetParameterObject(const std::string& name);
 
   /** Sets a parameter value by name.*/
-  SResult SetParameter(const char* name, const char* value);
+  HError SetParameter(const char* name, const char* value);
 
   /** Creates a copy of this configuration set.*/
-  SResult Copy();
+  HError Copy();
 
   /** Create a deep copy of this configuration set.*/
-  SResult Clone();
+  HError Clone();
 
   /** Deletes this configuration set.*/
-  SResult Clear();
+  HError Clear();
 
   /** Attaches this configuration set to a Simulink model.*/
-  SResult Attach(SimulinkModel& model);
+  HError Attach(SimulinkModel& model);
 
   /** Detaches this configuration set from a Simulink model.*/
-  SResult Detach(SimulinkModel& model);
+  HError Detach(SimulinkModel& model);
 
   /** Activates this configuration set.*/
   void Activate();
@@ -95,10 +95,10 @@ public:
   IdType GetId() const;
 
   /** Creates a configuration set from a file.*/
-  SResult FromFile(const char* path);
+  HError FromFile(const char* path);
 
   /** Saves the configuration set to a file. */
-  SResult SaveToFile(const char* path);
+  HError SaveToFile(const char* path);
 
   /** Converts to a string representation. */
   std::string ToString() const;

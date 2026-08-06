@@ -5,12 +5,12 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkPortParser::setInputData(const xmlNodePtr data)
+HError SimulinkPortParser::setInputData(const xmlNodePtr data)
 {
   return E_OK;
 }
 
-SResult SimulinkPortParser::parse()
+HError SimulinkPortParser::parse()
 {
   return E_OK;
 }

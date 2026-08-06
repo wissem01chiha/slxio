@@ -51,7 +51,7 @@ Directory Archive::GetArchiveDirectory() const
   return directory;
 }
 
-SResult Archive::Extract()
+HError Archive::Extract()
 {
   int err = 0;
   uv_fs_t req;
@@ -108,7 +108,7 @@ SResult Archive::Extract()
   return E_OK;
 }
 
-SResult Archive::Add(const File file_)
+HError Archive::Add(const File file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
@@ -152,7 +152,7 @@ SResult Archive::Add(const File file_)
   return E_OK;
 }
 
-SResult Archive::Remove(const File file_)
+HError Archive::Remove(const File file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);

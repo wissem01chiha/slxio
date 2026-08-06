@@ -114,7 +114,7 @@ SimulinkBlockType SimulinkObject::GetBlockType()
   return SimulinkBlockType();
 }
 
-// SResult SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+// HError SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 //   if (element == nullptr)
 //   {
@@ -192,7 +192,7 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   return E_OK;
 // }
 
-// SResult SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
+// HError SimulinkObject::AddElement(std::shared_ptr<SimulinkElementBase> element)
 // {
 
 //   if (element == nullptr)
@@ -261,19 +261,19 @@ bool SimulinkObject::Empty() const
 
 void SimulinkObject::Clear() {}
 
-SResult SimulinkObject::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkObject::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return SResult();
+  return HError();
 }
 
-SResult SimulinkObject::Erase(const IdType& id)
+HError SimulinkObject::Erase(const IdType& id)
 {
-  return SResult();
+  return HError();
 }
 
-SResult SimulinkObject::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkObject::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return SResult();
+  return HError();
 }
 
 std::shared_ptr<SimulinkElementBase> SimulinkObject::Find(const IdType& id)
@@ -359,15 +359,15 @@ std::shared_ptr<SimulinkParameterBase> SimulinkObject::GetParameter(std::string 
   return std::make_shared<SimulinkParameter>();
 }
 
-SResult SimulinkObject::SetParameter(
+HError SimulinkObject::SetParameter(
   std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return SResult();
+  return HError();
 }
 
-SResult SimulinkObject::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkObject::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return SResult();
+  return HError();
 }
 
 std::string SimulinkObject::GetName()

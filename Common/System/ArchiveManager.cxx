@@ -55,13 +55,13 @@ bool ArchiveManager::IsArchiveOpened(const std::string& archivename) const
   return false;
 }
 
-SResult ArchiveManager::Add(std::shared_ptr<Archive> archive)
+HError ArchiveManager::Add(std::shared_ptr<Archive> archive)
 {
   ArchiveBuffer.push_back(std::move(archive));
   return E_OK;
 }
 
-SResult ArchiveManager::Remove(const IdType id)
+HError ArchiveManager::Remove(const IdType id)
 {
   if (id < 0 || id >= static_cast<IdType>(ArchiveBuffer.size()))
   {

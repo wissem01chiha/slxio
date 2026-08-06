@@ -1,0 +1,17 @@
+// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+// SPDX-License-Identifier: Apache-2.0
+
+#ifndef SIMULINKVERSIONMACRO_H
+#define SIMULINKVERSIONMACRO_H
+
+/* Supported Simulink version */
+#define SLXIO_SIMULINK_VERSION_STRING "@SLXIO_SIMULINK_VERSION@"
+
+/* Supported Simulink year */
+#define SLXIO_SIMULINK_VERSION_YEAR @SLXIO_SIMULINK_VERSION_YEAR@
+
+/* Supported Simulink release */
+#define SLXIO_SIMULINK_VERSION_RELEASE '@SLXIO_SIMULINK_VERSION_RELEASE@'
+
+
+#endif // SIMULINKVERSIONMACRO_H

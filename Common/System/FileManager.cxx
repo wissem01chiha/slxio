@@ -46,7 +46,7 @@ bool FileManager::IsOpened(const std::string& filename)
   return false;
 }
 
-SResult FileManager::Add(std::shared_ptr<File> file)
+HError FileManager::Add(std::shared_ptr<File> file)
 {
   return E_OK;
 }
@@ -111,7 +111,7 @@ IdType FileManager::GetFirstFreeFileId()
   return NewId;
 }
 
-SResult FileManager::Remove(IdType id)
+HError FileManager::Remove(IdType id)
 {
   if (0 < id && id < static_cast<IdType>(FileBuffer.size()))
   {
@@ -183,7 +183,7 @@ std::vector<int> FileManager::GetFileModes() const
   return pdblModes;
 }
 
-SResult FileManager::Clear()
+HError FileManager::Clear()
 {
   FileBuffer.clear();
   return E_OK;

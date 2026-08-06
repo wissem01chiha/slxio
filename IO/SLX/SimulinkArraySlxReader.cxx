@@ -6,7 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkArrayParser::setInputData(const xmlNodePtr data)
+HError SimulinkArrayParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
@@ -27,7 +27,7 @@ SResult SimulinkArrayParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-SResult SimulinkArrayParser::parse()
+HError SimulinkArrayParser::parse()
 {
 
   std::string name, dimension, type;
@@ -63,12 +63,12 @@ SResult SimulinkArrayParser::parse()
     {
 
       std::unique_ptr<SimulinkObjectParser> subObjParserPtr(new SimulinkObjectParser());
-      SResult subInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      HError subInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
-      SResult subObjParseStatus = subObjParserPtr->parse();
+      HError subObjParseStatus = subObjParserPtr->parse();
       if (subObjParseStatus != E_OK)
       {
         // l.log(Logger::V_ERROR,
@@ -83,12 +83,12 @@ SResult SimulinkArrayParser::parse()
     {
 
       std::unique_ptr<SimulinkArrayParser> subArrParserPtr(new SimulinkArrayParser());
-      SResult subInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      HError subInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
-      SResult subArrParseStatus = subArrParserPtr->parse();
+      HError subArrParseStatus = subArrParserPtr->parse();
       if (subArrParseStatus != E_OK)
       {
         // l.log(Logger::V_ERROR,

@@ -73,11 +73,11 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Add File to Archive")
   Archive archive(zip);
   archive.SetArchiveDirectory(Directory(GetArchiveTestDirTmp()));
 
-  SResult ec = archive.Add(f);
+  HError ec = archive.Add(f);
   ErrorHandler::PrintErrorMessage(ec);
   CHECK(ec == E_OK);
 
-  SResult rc = archive.Remove(f);
+  HError rc = archive.Remove(f);
   CHECK(rc == E_OK);
 }
 
@@ -86,7 +86,7 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
   File f(GetAssetFilePath("Asset2.zip"));
   Archive archive(f);
   archive.SetArchiveDirectory(Directory(GetArchiveTestDirTmp()));
-  SResult rc = archive.Extract();
+  HError rc = archive.Extract();
   CHECK(rc == E_OK);
 }
 

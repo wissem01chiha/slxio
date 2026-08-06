@@ -13,7 +13,7 @@ Directory::Directory(const std::string& path)
   SubDirList.clear();
 }
 
-SResult Directory::Initialize()
+HError Directory::Initialize()
 {
   if (DirectoryPath.empty())
     return E_PATH_EMPTY;
@@ -188,17 +188,17 @@ bool Directory::Exist() const
   return Exist(DirectoryPath);
 }
 
-SResult Directory::Clear()
+HError Directory::Clear()
 {
   return E_NOT_IMPLEMENTED;
 }
 
-SResult Directory::Move(const Directory& directory)
+HError Directory::Move(const Directory& directory)
 {
   return E_NOT_IMPLEMENTED;
 }
 
-SResult Directory::Delete(const std::string& path)
+HError Directory::Delete(const std::string& path)
 {
   uv_fs_t scandir_req;
   uv_dirent_t ent;
@@ -241,7 +241,7 @@ SResult Directory::Delete(const std::string& path)
   return rr;
 }
 
-SResult Directory::Delete()
+HError Directory::Delete()
 {
   return Delete(DirectoryPath);
 }

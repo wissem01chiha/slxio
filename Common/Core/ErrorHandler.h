@@ -4,63 +4,32 @@
 #ifndef ERRORHANDLER_H
 #define ERRORHANDLER_H
 
+#include "ErrorHandlerMacro.h"
+#include "PlatformTypes.h"
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorCode.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @class ErrorHandler
- * @brief Main Error Handling Class
- */
-class SLXIO_APIEXPORT ErrorHandler final
-{
-public:
-  /** Default Constructor */
-  ErrorHandler() = default;
+SLXIO_APIEXPORT UInt32 GetProjectIdentifier(HError result);
+SLXIO_APIEXPORT UInt32 GetGroupIdentifier(HError result);
+SLXIO_APIEXPORT UInt32 GetComponentIdentifier(HError result);
+SLXIO_APIEXPORT UInt32 GetLevelIdentifier(HError result);
+SLXIO_APIEXPORT UInt32 GetErrorIdentifier(HError result);
 
-  /** Sets the last error code (similar to Windows SetLastError).*/
-  void SetLastError(int code);
+SLXIO_APIEXPORT bool IsSuccess(HError result);
+SLXIO_APIEXPORT bool IsWarning(HError result);
+SLXIO_APIEXPORT bool IsFatal(HError result);
+SLXIO_APIEXPORT bool IsInfo(HError result);
 
-  /** Retrieves the last error code value.*/
-  int GetLastError(void);
-
-  /** Get string representation of error by last error.*/
-  const char* GetLastErrorMessage(void);
-
-  /**
-   * Get string representation of slxio error by code.
-   * library specific error code starts from 1000
-   * for codes 0-35 (range for libzip error code), fallback
-   * to zip_error_strerror() and for negative error codes
-   * it fallback to uv_strerror(), otherwise return a default
-   * message eg unkown error code
-   */
-  static const char* GetErrorMessage(int code);
-
-  /** Print error message for given code.*/
-  static int PrintErrorMessage(int code);
-
-  /** Printf-style error message for given code.*/
-  static int PrintfErrorMessage(const char* format, int code);
-
-  /** Print last error message.*/
-  int PrintLastErrorMessage(void);
-
-  /** Printf-style last error message.*/
-  int PrintfLastErrorMessage(const char* format);
-
-  /** Default Destructor */
-  ~ErrorHandler() = default;
-
-private:
-  int lastError = E_OK;
-};
+SLXIO_APIEXPORT bool IsSameLevel(HError result1, HError result2);
+SLXIO_APIEXPORT bool IsSameProject(HError result1, HError result2);
+SLXIO_APIEXPORT bool IsSameGroup(HError result1, HError result2);
+SLXIO_APIEXPORT bool IsSameComponent(HError result1, HError result2);
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ERRORHANDLER_H

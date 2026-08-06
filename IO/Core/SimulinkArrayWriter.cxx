@@ -12,17 +12,17 @@ SimulinkArrayWriter* SimulinkArrayWriter::New()
   return nullptr;
 }
 
-SResult SimulinkArrayWriter::Write()
+HError SimulinkArrayWriter::Write()
 {
   return E_OK;
 }
 
-SResult SimulinkArrayWriter::SetInputData(const DataObject& data)
+HError SimulinkArrayWriter::SetInputData(const DataObject& data)
 {
 
   return E_OK;
 }
-SResult SimulinkArrayWriter::SetInputData(IdType idx, const DataObject& data)
+HError SimulinkArrayWriter::SetInputData(IdType idx, const DataObject& data)
 {
 
   return E_OK;

@@ -6,14 +6,14 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
+HError StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
   return E_OK;
 }
 
-SResult StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+HError StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
   // nodes.AddElement(node);
   // node.setParent(this);
@@ -50,7 +50,7 @@ std::string StateflowChart::ToString() const
   return std::string("");
 }
 
-SResult StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
+HError StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
 {
   // if (stateflowBlock != null) {
   //   CCSMPre.isTrue(this.stateflowBlock == null,

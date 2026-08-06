@@ -52,7 +52,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ParserSetInputDataTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
-  SResult status = parserPtr->setInputData(nodePtr);
+  HError status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 
@@ -60,7 +60,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest")
 {
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
-  SResult status = parserPtr->setInputData(nodePtr);
+  HError status = parserPtr->setInputData(nodePtr);
   std::shared_ptr<SimulinkArray> dataObj = parserPtr->getOutputData();
 
   CHECK(dataObj != nullptr);
@@ -71,7 +71,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayParserTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   parserPtr->setInputData(nodePtr);
-  SResult status = parserPtr->parse();
+  HError status = parserPtr->parse();
   CHECK(status == E_OK);
 }
 
@@ -93,7 +93,7 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest")
 
   xmlNodePtr nodePtr = getXmlNodePtr("arrayobject.xml");
   parserPtr->setInputData(nodePtr);
-  SResult status = parserPtr->parse();
+  HError status = parserPtr->parse();
   CHECK(status == E_OK);
   std::shared_ptr<SimulinkArray> array = parserPtr->getOutputData();
   std::cout << array->ToString();

@@ -25,7 +25,7 @@
 #elif defined(__NetBSD__)
 #define PLATFORM_NETBSD
 #else
-#error "Platform Macro is not set or unsupported Platform"
+#error "Unsupported Platform Detected"
 #endif
 
 #ifdef PLATFORM_WINDOWS

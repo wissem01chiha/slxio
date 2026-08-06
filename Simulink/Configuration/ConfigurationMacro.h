@@ -4,4 +4,4 @@
 #include "ResultMap.h"
 
 #define E_CONFIG_ALREADY_ACTIVE                                                          \
-  SLXIO_SRESULT(SLXIO_PROJECT, SIMULINK, CONFIGURATION, SLXIO_INFO, 27U)
+  SLXIO_HERROR(SLXIO_PROJECT, SIMULINK, CONFIGURATION, SLXIO_INFO, 27U)

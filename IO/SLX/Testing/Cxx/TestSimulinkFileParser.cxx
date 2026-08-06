@@ -36,16 +36,16 @@ protected:
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
 
-  SResult status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  HError status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
 
-  SResult in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+  HError in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
   CHECK(in_status == E_OK);
-  SResult parseStatus = parserPtr->parse();
+  HError parseStatus = parserPtr->parse();
   CHECK(parseStatus == E_OK);
 };
 

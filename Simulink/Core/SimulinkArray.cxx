@@ -73,7 +73,7 @@ std::string SimulinkArray::ToString() const
   return oss.str();
 }
 
-SResult SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
   if (element == nullptr)
   {
@@ -132,7 +132,7 @@ SResult SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& elemen
   return E_OK;
 }
 
-SResult SimulinkArray::Erase(const IdType& ArrayId)
+HError SimulinkArray::Erase(const IdType& ArrayId)
 {
   for (const auto& objId : ArrayObjectIds)
   {
@@ -146,7 +146,7 @@ SResult SimulinkArray::Erase(const IdType& ArrayId)
   return E_OK;
 }
 
-SResult SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
   if (element == nullptr)
   {
@@ -290,13 +290,13 @@ std::shared_ptr<SimulinkParameterBase> SimulinkArray::GetParameter(std::string n
   return nullptr;
 }
 
-SResult SimulinkArray::SetParameter(
+HError SimulinkArray::SetParameter(
   std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }
 
-SResult SimulinkArray::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkArray::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }

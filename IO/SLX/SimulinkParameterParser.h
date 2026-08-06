@@ -36,8 +36,8 @@ public:
   /// @note Check if the related node name attribute is empty.
   /// If so, it returns an error since a parameter cannot be built
   /// without a name.
-  SResult setInputData(const xmlNodePtr data) override;
-  SResult parse() override;
+  HError setInputData(const xmlNodePtr data) override;
+  HError parse() override;
   ~SimulinkParameterParser() = default;
 };
 

@@ -38,7 +38,7 @@ public:
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual SResult setInputData(const T data)
+  virtual HError setInputData(const T data)
   {
     dataObject = data;
     return E_OK;
@@ -48,7 +48,7 @@ public:
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual SResult setInputData(const T& data)
+  virtual HError setInputData(const T& data)
   {
     dataObject = data;
     return E_OK;
@@ -61,7 +61,7 @@ public:
   T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
-  virtual SResult parse() = 0;
+  virtual HError parse() = 0;
 
 protected:
   /// @brief Default constructor

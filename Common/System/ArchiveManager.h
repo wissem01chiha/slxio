@@ -61,10 +61,10 @@ public:
   bool IsArchiveOpened(const std::string& archivename) const;
 
   /** Add a new archive to the manager. */
-  SResult Add(std::shared_ptr<Archive> archive);
+  HError Add(std::shared_ptr<Archive> archive);
 
   /** Remove an archive by its Id. */
-  SResult Remove(const IdType id);
+  HError Remove(const IdType id);
 
 private:
   std::vector<std::shared_ptr<Archive>> ArchiveBuffer;

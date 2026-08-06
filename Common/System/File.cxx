@@ -47,21 +47,21 @@ bool File::Empty() const
   return Size() == 0;
 }
 
-SResult File::Write(std::vector<std::string>& message)
+HError File::Write(std::vector<std::string>& message)
 {
   if (InternalFileMode == Mode::Read)
     return E_INVALID_FILE_MODE;
 
   for (const auto& line : message)
   {
-    SResult result = Write(line.c_str());
+    HError result = Write(line.c_str());
     if (result != E_OK)
       return result;
   }
   return E_OK;
 }
 
-SResult File::Open()
+HError File::Open()
 {
   uv_fs_t req;
   int err =
@@ -84,7 +84,7 @@ SResult File::Open()
   return E_OK;
 }
 
-SResult File::Read()
+HError File::Read()
 {
   if (InternalFileMode != Mode::Read)
     return E_INVALID_FILE_MODE;
@@ -109,7 +109,7 @@ std::string File::GetFilePath() const
   return FilePath;
 }
 
-SResult File::Write(const char* message)
+HError File::Write(const char* message)
 {
 
   if (InternalFileMode == Mode::Read)
@@ -130,7 +130,7 @@ SResult File::Write(const char* message)
   return E_OK;
 }
 
-SResult File::Close()
+HError File::Close()
 {
   if (FileDescriptor < 0)
     return E_OK;
@@ -157,7 +157,7 @@ Directory File::GetFileDirectory() const
   return Directory(FilePath.substr(0, pos + 1));
 }
 
-SResult File::Move(const Directory& directory)
+HError File::Move(const Directory& directory)
 {
 
   if (!directory.Exist())
@@ -181,11 +181,11 @@ SResult File::Move(const Directory& directory)
   return E_OK;
 }
 
-SResult File::Delete()
+HError File::Delete()
 {
   if (IsOpened())
   {
-    SResult rc = Close();
+    HError rc = Close();
     if (rc != E_OK)
     {
       return rc;
@@ -199,7 +199,7 @@ SResult File::Delete()
   return E_OK;
 }
 
-SResult File::Copy(const Directory& directory)
+HError File::Copy(const Directory& directory)
 {
   if (!directory.Exist())
     return E_INVALID_ARGUMENT;
@@ -233,7 +233,7 @@ SResult File::Copy(const Directory& directory)
   return E_OK;
 }
 
-SResult File::Rename(const std::string& filename)
+HError File::Rename(const std::string& filename)
 {
   if (filename.empty())
     return E_INVALID_ARGUMENT;

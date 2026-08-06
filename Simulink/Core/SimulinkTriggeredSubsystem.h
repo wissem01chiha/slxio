@@ -28,8 +28,8 @@ public:
   SimulinkTriggeredSubsystem* New() const override;
   SimulinkElementType GetType() const override;
   std::string ToString() const override;
-  SResult Erase(const IdType& id) override;
-  SResult Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Erase(const IdType& id) override;
+  HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
   std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
   std::shared_ptr<SimulinkElementBase> at(IdType index) override;
   std::shared_ptr<const SimulinkElementBase> at(IdType index) const override;
@@ -37,7 +37,7 @@ public:
   UInt32 Size() const override;
   bool Empty() const override;
   void Clear() override;
-  SResult Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
 private:
 };

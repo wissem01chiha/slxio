@@ -22,8 +22,8 @@ class SLXIO_APIEXPORT SimulinkContentParser
 {
 public:
   SimulinkContentParser() = default;
-  SResult setInputData(const File fs) override;
-  SResult parse() override;
+  HError setInputData(const File fs) override;
+  HError parse() override;
   ~SimulinkContentParser() = default;
 
 private:
@@ -41,19 +41,19 @@ private:
 
   /// @brief Initialize the temporary directory, creates unique paths
   /// for the directory and the copied slx file into it.
-  SResult initTempDirectory();
+  HError initTempDirectory();
 
   /// @brief Unzip the slx file into the temporary directory.
   /// cast the slx extension to zip for libzip compatibility
-  SResult unzip();
+  HError unzip();
 
   /// @brief Load XML documents from the extracted slx files into the
   /// SimulinkContent object.
-  SResult loadXmlTargets(const std::string& tempdirfullpath);
+  HError loadXmlTargets(const std::string& tempdirfullpath);
 
   /// @brief delete the temporary directory and its contents,
   /// this is called at the end of the parsing process if successful
-  SResult clearTempDirectory();
+  HError clearTempDirectory();
 };
 
 SLXIO_ABI_NAMESPACE_END

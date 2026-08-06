@@ -30,10 +30,10 @@ public:
   StateflowChart(StateflowChart& origChart) = delete;
 
   /// @brief Add a StateflowNodeBase object
-  SResult AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Remove a StateflowNodeBase object
-  SResult RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   /// @brief Get Chat Parent
   std::shared_ptr<StateflowElementBase> getParent() const override;
@@ -54,7 +54,7 @@ public:
   std::string ToString() const override;
 
   /** @brief Set Stateflow block this chart belongs to. */
-  SResult setStateflowBlock(StateflowBlock stateflowBlock);
+  HError setStateflowBlock(StateflowBlock stateflowBlock);
 
   /** @brief Get the Stateflow machine this chart belongs to. */
   // StateflowMachine getMachine() {

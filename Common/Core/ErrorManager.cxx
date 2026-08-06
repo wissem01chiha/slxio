@@ -1,42 +1,43 @@
-#include "ResultManager.h"
-#include "CoreMacro.h"
-#include "ResultHandler.h"
+#include "ErrorManager.h"
+#include "ErrorHandlerMacro.h"
+#include "ErrorHandler.h"
+#include "ErrorTypes.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ResultManager::ResultManager()
+ErrorManager::ErrorManager()
 {
   ringBuffer.resize(bufferSize);
 }
 
-ResultManager& ResultManager::GetInstance()
+ErrorManager& ErrorManager::GetInstance()
 {
-  static ResultManager instance;
+  static ErrorManager instance;
   return instance;
 }
 
-void ResultManager::SetBufferSize(size_t new_size)
+void ErrorManager::SetBufferSize(size_t new_size)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   ringBuffer.resize(new_size);
   head = 0;
 }
 
-SResult ResultManager::GetLastResult(void)
+HError ErrorManager::GetLastResult(void)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   for (size_t i = 0; i < bufferSize; ++i)
   {
     size_t idx = (head + bufferSize - 1 - i) % bufferSize;
-    if (ringBuffer[idx] != SResult())
+    if (ringBuffer[idx] != HError())
       return ringBuffer[idx];
   }
   return E_OK;
 }
 
-SResult ResultManager::GetLastInfoResult(void)
+HError ErrorManager::GetLastInfoResult(void)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   for (size_t i = 0; i < bufferSize; ++i)
@@ -48,7 +49,7 @@ SResult ResultManager::GetLastInfoResult(void)
   return E_OK;
 }
 
-SResult ResultManager::GetLastWarningResult(void)
+HError ErrorManager::GetLastWarningResult(void)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   for (size_t i = 0; i < bufferSize; ++i)
@@ -60,7 +61,7 @@ SResult ResultManager::GetLastWarningResult(void)
   return E_OK;
 }
 
-SResult ResultManager::GetLastFatalResult(void)
+HError ErrorManager::GetLastFatalResult(void)
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   for (size_t i = 0; i < bufferSize; ++i)
@@ -72,7 +73,7 @@ SResult ResultManager::GetLastFatalResult(void)
   return E_OK;
 }
 
-void ResultManager::SetResult(SResult status)
+void ErrorManager::SetResult(HError status)
 {
   UInt32 level = GetLevelIdentifier(status);
   if (level == 0)
@@ -85,7 +86,7 @@ void ResultManager::SetResult(SResult status)
   head = (head + 1) % bufferSize;
 }
 
-std::vector<SResult> ResultManager::GetBuffer()
+std::vector<HError> ErrorManager::GetBuffer()
 {
   std::lock_guard<std::mutex> lock(log_mutex);
   return ringBuffer;

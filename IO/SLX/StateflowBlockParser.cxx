@@ -6,7 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult StateflowBlockParser::setInputData(const xmlNodePtr data)
+HError StateflowBlockParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {

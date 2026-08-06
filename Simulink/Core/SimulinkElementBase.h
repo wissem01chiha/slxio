@@ -67,13 +67,13 @@ public:
   virtual void Clear() = 0;
 
   /** Inserts a new child element. */
-  virtual SResult Insert(const std::shared_ptr<SimulinkElementBase>& element) = 0;
+  virtual HError Insert(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
   /** Erases a child element by identifier. */
-  virtual SResult Erase(const IdType& id) = 0;
+  virtual HError Erase(const IdType& id) = 0;
 
   /** Erases a child element by reference. */
-  virtual SResult Erase(const std::shared_ptr<SimulinkElementBase>& element) = 0;
+  virtual HError Erase(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
   /** Finds a child element by identifier. */
   virtual std::shared_ptr<SimulinkElementBase> Find(const IdType& id) = 0;
@@ -100,11 +100,11 @@ public:
   virtual std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) = 0;
 
   /** Sets the element specifc parameter to given one  */
-  virtual SResult SetParameter(
+  virtual HError SetParameter(
     std::string name, std::shared_ptr<SimulinkParameterBase> parameter) = 0;
 
   /** Adds the element specifc parameter  */
-  virtual SResult AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) = 0;
+  virtual HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) = 0;
 
 protected:
   /** Default constructor. */

@@ -4,11 +4,10 @@
 #ifndef SIMULINKVERSION_H
 #define SIMULINKVERSION_H
 
-#include "Options.h"
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "CorePCH.h"
+#include "PlatformTypes.h"
 
 namespace slxio
 {
@@ -18,21 +17,22 @@ enum class SimulinkVersionRelease;
 
 /**
  * @class SimulinkVersion
+ * @brief Provides access to the Simulink version Supported
  */
-class SLXIO_APIEXPORT SimulinkVersion
+class SLXIO_APIEXPORT SimulinkVersion final
 {
 public:
-    /**  */
-    static UInt16 Year();
+  /** Returns the Simulink release year.  */
+  static UInt16 Year();
 
-    /**  */
-    static char Release();
-    
-    /* */
-    static std::string ToString();
-    
-    /**  */
-    static SimulinkVersionRelease GetRelease();
+  /** Returns the Simulink release letter.  */
+  static char Release();
+
+  /* Returns the Simulink version as a string. */
+  static std::string ToString();
+
+  /** Returns the Simulink release enumeration value.  */
+  static SimulinkVersionRelease GetRelease();
 };
 
 SLXIO_ABI_NAMESPACE_END

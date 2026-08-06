@@ -61,19 +61,19 @@ bool SimulinkBlock::Empty() const
 
 void SimulinkBlock::Clear() {}
 
-SResult SimulinkBlock::Insert(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkBlock::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
   return E_OK;
 }
 
-SResult SimulinkBlock::Erase(const IdType& id)
+HError SimulinkBlock::Erase(const IdType& id)
 {
-  return SResult();
+  return HError();
 }
 
-SResult SimulinkBlock::Erase(const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkBlock::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return SResult();
+  return HError();
 }
 
 std::shared_ptr<SimulinkElementBase> SimulinkBlock::Find(const IdType& id)
@@ -202,13 +202,13 @@ std::shared_ptr<SimulinkParameterBase> SimulinkBlock::GetParameter(std::string n
   return std::shared_ptr<SimulinkParameterBase>();
 }
 
-SResult SimulinkBlock::SetParameter(
+HError SimulinkBlock::SetParameter(
   std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }
 
-SResult SimulinkBlock::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkBlock::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
   return E_OK;
 }

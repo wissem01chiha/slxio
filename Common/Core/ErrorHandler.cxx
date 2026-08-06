@@ -1,86 +1,73 @@
 #include "ErrorHandler.h"
-#include "ErrorCode.h"
-#include "ErrorMap.h"
-#include "Libuv.h"
-#include "Libzip.h"
-#include <cstdio>
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-void ErrorHandler::SetLastError(int code)
+UInt32 GetProjectIdentifier(HError result)
 {
-  lastError = code;
+  return (result >> 30U) & 0x3U;
 }
 
-int ErrorHandler::GetLastError(void)
+UInt32 GetGroupIdentifier(HError result)
 {
-  return lastError;
+  return (result >> 25U) & 0x1FU;
 }
 
-const char* ErrorHandler::GetLastErrorMessage(void)
+UInt32 GetComponentIdentifier(HError result)
 {
-  return GetErrorMessage(lastError);
+  return (result >> 17U) & 0xFFU;
 }
 
-const char* ErrorHandler::GetErrorMessage(int code)
+UInt32 GetLevelIdentifier(HError result)
 {
-  if (code >= 1000)
-  {
-    for (int i = 0; ErrorInfo[i].msg != NULL; ++i)
-    {
-      if (ErrorInfo[i].code == code)
-      {
-        return ErrorInfo[i].msg;
-      }
-    }
-    static char buf[128];
-    snprintf(buf, sizeof(buf), "unknown error %d", code);
-    return buf;
-  }
-
-  if (code >= 0 && code <= 35)
-  {
-    static zip_error_t err;
-    zip_error_init_with_code(&err, code);
-    const char* msg = zip_error_strerror(&err);
-
-    static char buf[128];
-    snprintf(buf, sizeof(buf), "%s", msg ? msg : "unknown libzip error");
-    zip_error_fini(&err);
-
-    return buf;
-  }
-
-  if (code < 0)
-  {
-    return uv_strerror(code);
-  }
-  static char buf[128];
-  snprintf(buf, sizeof(buf), "unknown error %d", code);
-  return buf;
+  return (result >> 15U) & 0x3U;
 }
 
-int ErrorHandler::PrintErrorMessage(int code)
+UInt32 GetErrorIdentifier(HError result)
 {
-  return printf("[%d]: %s\n", code, GetErrorMessage(code));
+  return (result >> 5U) & 0x3FFU;
 }
 
-int ErrorHandler::PrintfErrorMessage(const char* format, int code)
+bool IsSuccess(HError result)
 {
-  return printf(format, GetErrorMessage(code));
+  return GetLevelIdentifier(result) == SLXIO_SUCCESS;
 }
 
-int ErrorHandler::PrintLastErrorMessage(void)
+bool IsWarning(HError result)
 {
-  return PrintErrorMessage(lastError);
+  return GetLevelIdentifier(result) == SLXIO_WARN;
 }
 
-int ErrorHandler::PrintfLastErrorMessage(const char* format)
+bool IsFatal(HError result)
 {
-  return PrintfErrorMessage(format, lastError);
+  return GetLevelIdentifier(result) == SLXIO_FATAL;
+}
+
+SLXIO_APIEXPORT bool IsInfo(HError result)
+{
+  return GetLevelIdentifier(result) == SLXIO_INFO;
+}
+
+bool IsSameLevel(HError result1, HError result2)
+{
+  return GetLevelIdentifier(result1) == GetLevelIdentifier(result2);
+}
+
+bool IsSameProject(HError result1, HError result2)
+{
+  return GetProjectIdentifier(result1) == GetProjectIdentifier(result2);
+}
+
+bool IsSameGroup(HError result1, HError result2)
+{
+  return GetGroupIdentifier(result1) == GetGroupIdentifier(result2);
+}
+
+bool IsSameComponent(HError result1, HError result2)
+{
+  return GetComponentIdentifier(result1) == GetComponentIdentifier(result2);
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

@@ -6,7 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
+HError SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
 {
   if (!data)
   {
@@ -27,7 +27,7 @@ SResult SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-SResult SimulinkConfigSetParser::parse()
+HError SimulinkConfigSetParser::parse()
 {
   for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
        nodePtr_ = nodePtr_->next)
@@ -35,7 +35,7 @@ SResult SimulinkConfigSetParser::parse()
 
     std::unique_ptr<SimulinkObjectParser> objParserPtr =
       std::make_unique<SimulinkObjectParser>();
-    SResult objInputStatus = objParserPtr->setInputData(nodePtr_);
+    HError objInputStatus = objParserPtr->setInputData(nodePtr_);
     if (objInputStatus != E_OK)
     {
       // l.log(Logger::V_ERROR,

@@ -32,11 +32,11 @@ TEST_CASE("IsActiveTest")
 //   auto param = std::make_shared<SimulinkParameter>();
 //   param->SetName("Solver");
 //   param->SetValue("Discrete");
-//   SResult ec = object.Insert(param);
+//   HError ec = object.Insert(param);
 //   CHECK(ec == E_OK);
 
 //   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-//   SResult status = configCst->SetParameter("Solver", "ode45");
+//   HError status = configCst->SetParameter("Solver", "ode45");
 //   CHECK(status == E_OK);
 //   std::cout << configCst->ToString() << std::endl;
 //   CHECK(strcmp(configCst->getParameter("Solver"), "ode45") == 0);
@@ -51,12 +51,12 @@ TEST_CASE("IsActiveTest")
 
 //   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
 
-//   SResult ec = object.AddElement(param);
+//   HError ec = object.AddElement(param);
 //   CHECK(ec == E_OK);
 //   std::cout << object.ToString() << std::endl;
 
 //   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-//   SResult status = configCst->SetParameter("Solver", "Discrete");
+//   HError status = configCst->SetParameter("Solver", "Discrete");
 //   CHECK(status == E_OK);
 //   CHECK(strcmp(configCst->GetParameter("Solver"), "Discrete") == 0);
 //   delete configCst;

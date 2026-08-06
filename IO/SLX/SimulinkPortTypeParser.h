@@ -21,9 +21,9 @@ class SLXIO_APIEXPORT SimulinkPortTypeParser final
 {
 public:
   SimulinkPortTypeParser() = default;
-  SResult setInputData(const std::string data) override;
-  SResult setInputData(const char* data);
-  SResult parse() override;
+  HError setInputData(const std::string data) override;
+  HError setInputData(const char* data);
+  HError parse() override;
   ~SimulinkPortTypeParser() = default;
 };
 SLXIO_ABI_NAMESPACE_END

@@ -40,15 +40,15 @@ public:
   /**
    * Set the data type of the signal.
    */
-  SResult setDataType(SimulinkDataType dt);
+  HError setDataType(SimulinkDataType dt);
 
   /**
    * Set the data type of the signal from a string (MatWorks API style).
    */
-  SResult setDataType(const char* dt);
+  HError setDataType(const char* dt);
 
   /// @brief Set the complexity type of the signal from a string
-  SResult setComplexityType(const char* ct);
+  HError setComplexityType(const char* ct);
 
   /// @brief Get the complexity type of the signal
   const char* getComplexity();
@@ -75,7 +75,7 @@ public:
   std::vector<Float32> getSampleTime();
 
   /// @brief Set the valid range (minimum and maximum) for the signal
-  SResult setRange(Float32 min, Float32 max);
+  HError setRange(Float32 min, Float32 max);
 
 private:
   const char* InitialValue;

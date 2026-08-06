@@ -39,13 +39,13 @@ public:
   explicit File(const std::string& path);
 
   /** Open the file. */
-  SResult Open();
+  HError Open();
 
   /** Close the file. */
-  SResult Close();
+  HError Close();
 
   /** Read data from the file. */
-  SResult Read();
+  HError Read();
 
   /** Check if a path exists as a file. */
   static bool Exist(const std::string& path);
@@ -63,16 +63,16 @@ public:
   bool Exist() const;
 
   /** Write string data to file. */
-  SResult Write(const char* message);
+  HError Write(const char* message);
 
   /** Write vector of strings to file. */
-  SResult Write(std::vector<std::string>& message);
+  HError Write(std::vector<std::string>& message);
 
   /** Copy file to a directory. */
-  SResult Copy(const Directory& directory);
+  HError Copy(const Directory& directory);
 
   /** Rename the file. if not opened */
-  SResult Rename(const std::string& filename);
+  HError Rename(const std::string& filename);
 
   /** Get file mode flags. */
   const int GetFileMode();
@@ -81,10 +81,10 @@ public:
   void SetFileMode(const File::Mode mode);
 
   /** Move file to a directory. */
-  SResult Move(const Directory& directory);
+  HError Move(const Directory& directory);
 
   /** Delete the file from disk */
-  SResult Delete();
+  HError Delete();
 
   /** Get parent directory object. */
   Directory GetFileDirectory() const;

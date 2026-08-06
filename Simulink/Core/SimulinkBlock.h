@@ -54,13 +54,13 @@ public:
   void Clear() override;
 
   /** Inserts a new child element. */
-  SResult Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Erases a child element by identifier. */
-  SResult Erase(const IdType& id) override;
+  HError Erase(const IdType& id) override;
 
   /** Erases a child element by reference. */
-  SResult Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Finds a child element by identifier. */
   std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
@@ -94,11 +94,11 @@ public:
   std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  SResult SetParameter(
+  HError SetParameter(
     std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
-  SResult AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+  HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Sets the block Id to a given one, shoule not used by public users, only
    * for internal Peraser */

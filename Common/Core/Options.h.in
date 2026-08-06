@@ -10,9 +10,6 @@
 /* Enable ABI namespace */
 #cmakedefine01 SLXIO_ABI_NAMESPACE
 
-/* Supported Simulink version */
-#cmakedefine SLXIO_SIMULINK_VERSION @SLXIO_SIMULINK_VERSION@
-
 /* Enable 64-bit identifiers */
 #cmakedefine01 SLXIO_64BIT_IDENTIFIERS
 

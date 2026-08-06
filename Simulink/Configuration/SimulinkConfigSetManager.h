@@ -36,10 +36,10 @@ public:
   SimulinkConfigSetManager& operator=(const SimulinkConfigSetManager&) = delete;
 
   /// @brief Adds a configuration set to the manager.
-  SResult AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
+  HError AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
   /// @brief Removes a configuration set from the manager.
-  SResult RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg);
+  HError RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
   /// @brief Retrieves the active configuration set.
   /// @note Only one configuration set can be active at a time.

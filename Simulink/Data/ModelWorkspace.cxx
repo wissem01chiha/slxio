@@ -26,13 +26,13 @@ std::string ModelWorkspace::GetVariable(const std::string& name) const
   return std::string("");
 }
 
-SResult ModelWorkspace::AssignVariable(const std::string& name, const std::string& value)
+HError ModelWorkspace::AssignVariable(const std::string& name, const std::string& value)
 {
   Variables[name] = value;
   return E_OK;
 }
 
-SResult ModelWorkspace::ClearVariable(const std::string& name)
+HError ModelWorkspace::ClearVariable(const std::string& name)
 {
   auto it = Variables.find(name);
   if (it != Variables.end())
@@ -47,7 +47,7 @@ SResult ModelWorkspace::ClearVariable(const std::string& name)
   return E_OK;
 }
 
-SResult ModelWorkspace::ClearAll()
+HError ModelWorkspace::ClearAll()
 {
   Variables.clear();
   logger.SendLogMessage({ Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },

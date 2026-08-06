@@ -21,7 +21,7 @@ std::shared_ptr<StateflowChart> StateflowBlock::getChart()
   return chart;
 }
 
-SResult StateflowBlock::RemoveElement()
+HError StateflowBlock::RemoveElement()
 {
   return E_OK;
 }

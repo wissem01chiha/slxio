@@ -7,7 +7,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkObjectParser::setInputData(const xmlNodePtr data)
+HError SimulinkObjectParser::setInputData(const xmlNodePtr data)
 {
 
   if (data == nullptr)
@@ -21,7 +21,7 @@ SResult SimulinkObjectParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-SResult SimulinkObjectParser::parse()
+HError SimulinkObjectParser::parse()
 {
   IdType id = (IdType)0;
   std::string name, className;
@@ -56,13 +56,13 @@ SResult SimulinkObjectParser::parse()
     {
 
       SimulinkParameterParser* paramParserPtr = new SimulinkParameterParser();
-      SResult subInputStatus = paramParserPtr->setInputData(nodePtr_);
+      HError subInputStatus = paramParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
         return subInputStatus;
       }
 
-      SResult paramParseStatus = paramParserPtr->parse();
+      HError paramParseStatus = paramParserPtr->parse();
       if (paramParseStatus != E_OK)
       {
         // l.log(Logger::V_ERROR,
@@ -78,13 +78,13 @@ SResult SimulinkObjectParser::parse()
     {
 
       SimulinkObjectParser* subObjParserPtr = new SimulinkObjectParser();
-      SResult subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
+      HError subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subObjInputStatus != E_OK)
       {
         return subObjInputStatus;
       }
 
-      SResult subObjStat = subObjParserPtr->parse();
+      HError subObjStat = subObjParserPtr->parse();
       if (subObjStat != E_OK)
       {
         // l.log(Logger::V_ERROR,
@@ -98,13 +98,13 @@ SResult SimulinkObjectParser::parse()
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
     {
       SimulinkArrayParser* subArrParserPtr = new SimulinkArrayParser();
-      SResult subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
+      HError subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subArrInputStatus != E_OK)
       {
         return subArrInputStatus;
       }
 
-      SResult subArrParseStat = subArrParserPtr->parse();
+      HError subArrParseStat = subArrParserPtr->parse();
       if (subArrParseStat != E_OK)
       {
         // l.log(Logger::V_ERROR,

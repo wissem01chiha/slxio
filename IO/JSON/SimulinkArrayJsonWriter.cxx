@@ -9,9 +9,9 @@ SimulinkArrayWriter* SimulinkArrayWriter::New()
   return nullptr;
 }
 
-SResult SimulinkArrayWriter::Write()
+HError SimulinkArrayWriter::Write()
 {
-  return SResult();
+  return HError();
 }
 
 SLXIO_ABI_NAMESPACE_END

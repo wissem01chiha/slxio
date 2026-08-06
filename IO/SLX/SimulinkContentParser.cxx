@@ -6,7 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkContentParser::setInputData(const File fs)
+HError SimulinkContentParser::setInputData(const File fs)
 {
   if (!fs.isFile())
   {
@@ -23,27 +23,27 @@ SResult SimulinkContentParser::setInputData(const File fs)
   return E_OK;
 }
 
-SResult SimulinkContentParser::parse()
+HError SimulinkContentParser::parse()
 {
-  SResult init_status = initTempDirectory();
+  HError init_status = initTempDirectory();
   if (init_status != E_OK)
   {
     return init_status;
   }
 
-  SResult unzip_status = unzip();
+  HError unzip_status = unzip();
   if (unzip_status != E_OK)
   {
     return unzip_status;
   }
 
-  SResult load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
+  HError load_status = loadXmlTargets(tempDirectory.getDirectoryPath());
   if (load_status != E_OK)
   {
     return load_status;
   }
 
-  SResult clear_status = clearTempDirectory();
+  HError clear_status = clearTempDirectory();
   if (clear_status != E_OK)
   {
     return clear_status;
@@ -52,7 +52,7 @@ SResult SimulinkContentParser::parse()
   return E_OK;
 }
 
-SResult SimulinkContentParser::initTempDirectory()
+HError SimulinkContentParser::initTempDirectory()
 {
   /// replace "." with "_" for temporary directory name
   /// to be removed and implemented in Directory class
@@ -91,12 +91,12 @@ SResult SimulinkContentParser::initTempDirectory()
   return E_OK;
 }
 
-SResult SimulinkContentParser::unzip()
+HError SimulinkContentParser::unzip()
 {
   const char* tmpdir = tempDirectory.getDirectoryPath().c_str();
   std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
-  SResult mv_status = dataObject.copy(tempdirfullpath.c_str());
+  HError mv_status = dataObject.copy(tempdirfullpath.c_str());
   if (mv_status != E_OK)
   {
     // l.log(Logger::V_ERROR, "failed to copy slx file to temporary directory :
@@ -117,7 +117,7 @@ SResult SimulinkContentParser::unzip()
       tempfilefullpath);
       return SLX_EIOERR;
   }
-  SResult status = fileDataObject.setFileExtension("zip");
+  HError status = fileDataObject.setFileExtension("zip");
 
   if (status != E_OK)
   {
@@ -125,7 +125,7 @@ SResult SimulinkContentParser::unzip()
     return status;
   }
 
-  SResult unzip_status = fileDataObject.unzip(tmpdir);
+  HError unzip_status = fileDataObject.unzip(tmpdir);
   if (unzip_status != E_OK)
   {
     // l.log(Logger::V_ERROR, "failed to unzip ",
@@ -136,7 +136,7 @@ SResult SimulinkContentParser::unzip()
   return E_OK;
 }
 
-SResult SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath)
+HError SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath)
 {
 
   XmlTarget targets[] = { { "/simulink/blockdiagram.xml", &ptr->blockdiagram },
@@ -163,9 +163,9 @@ SResult SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath
   return E_OK;
 }
 
-SResult SimulinkContentParser::clearTempDirectory()
+HError SimulinkContentParser::clearTempDirectory()
 {
-  SResult status = tempDirectory.RemoveElement();
+  HError status = tempDirectory.RemoveElement();
   if (status != E_OK)
   {
     // l.log(Logger::V_ERROR, "failed to remove temporary directory : ",

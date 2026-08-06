@@ -38,7 +38,7 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
   std::shared_ptr<SimulinkBlock> childblockPtr =
     std::make_shared<SimulinkBlock>(SimulinkBlockType::Type::Clock, "ClockBlock", 20);
 
-  SResult status = parentblockPtr->AddElement(childblockPtr);
+  HError status = parentblockPtr->AddElement(childblockPtr);
   CHECK(status == E_OK);
 }
 
@@ -51,10 +51,10 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
   std::shared_ptr<SimulinkBlock> childblockPtr =
     std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
 
-  SResult addStatus = parentblockPtr->AddElement(childblockPtr);
+  HError addStatus = parentblockPtr->AddElement(childblockPtr);
   CHECK(addStatus == E_OK);
 
-  SResult RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
+  HError RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
   CHECK(RemoveStatus == E_OK);
 }
 

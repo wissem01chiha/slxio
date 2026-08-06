@@ -21,8 +21,8 @@ public:
   StateflowTarget();
   StateflowTarget(StateflowTarget& orig);
 
-  SResult RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
-  SResult AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+  HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+  HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
   std::string toString() const override;
   IdType GetId() const override;

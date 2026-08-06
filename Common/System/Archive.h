@@ -44,13 +44,13 @@ public:
   Directory GetArchiveDirectory() const;
 
   /** Extract the archive if it is a ZIP archive. */
-  SResult Extract();
+  HError Extract();
 
   /** Add a file to the Archive, if the file already there */
-  SResult Add(const File file);
+  HError Add(const File file);
 
   /** Remove a file from teh archive, if the file exist else return and error */
-  SResult Remove(const File file);
+  HError Remove(const File file);
 
   /** Default Destructor */
   ~Archive() = default;

@@ -6,16 +6,16 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SResult SimulinkFileParser::setInputData(const File fs)
+HError SimulinkFileParser::setInputData(const File fs)
 {
   dataObject = fs;
   return E_OK;
 }
 
-SResult SimulinkFileParser::parse()
+HError SimulinkFileParser::parse()
 {
   SimulinkContentParser contentParser;
-  SResult status = contentParser.setInputData(dataObject);
+  HError status = contentParser.setInputData(dataObject);
   if (status != E_OK)
   {
     return status;
@@ -29,7 +29,7 @@ SResult SimulinkFileParser::parse()
   ptr->content = *(content_.get());
 
   xmlNodePtr propertiesNodePtr = new xmlNode();
-  SResult propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
+  HError propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
 
   if (propertieStatus != E_OK)
   {

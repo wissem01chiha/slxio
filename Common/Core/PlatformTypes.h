@@ -4,8 +4,8 @@
 #ifndef PLATFORMTYPES_H
 #define PLATFORMTYPES_H
 
-#include "Options.h"
 #include "CorePCH.h"
+#include "Options.h"
 
 using UInt8 = std::uint8_t;
 using Int8 = std::int8_t;
@@ -48,6 +48,6 @@ using SIdentifier = UInt32;
 #endif
 
 /* Define an alias for error code return data types*/
-typedef UInt32 SResult;
+typedef UInt32 HError;
 
 #endif // PLATFORMTYPES_H

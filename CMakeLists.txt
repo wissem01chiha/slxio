@@ -9,6 +9,7 @@ list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 
 find_package(Git)
 include(DetermineVersion)
+include(Version)
 include(CMakeDependentOption)
 
 # Build slxio static or shared libs
@@ -142,6 +143,14 @@ set(CMAKE_BINARY_NAME_PREFIX "SLX")
 # Set Simulink version
 set(SLXIO_SIMULINK_VERSION "${SLXIO_SIMULINK_DEFAULT_VERSION}")
 set(SLXIO_SIMULINK_VERSION ${SLXIO_SIMULINK_VERSION})
+
+if(SLXIO_SIMULINK_VERSION MATCHES "^R([0-9]+)([ab])$")
+  set(SLXIO_SIMULINK_VERSION_YEAR "${CMAKE_MATCH_1}")
+  set(SLXIO_SIMULINK_VERSION_RELEASE "${CMAKE_MATCH_2}")
+else()
+  message(FATAL_ERROR
+    "Invalid Simulink Version: ${SLXIO_SIMULINK_VERSION}")
+endif()
 
 # Do not change this without changing filename on disk !
 set(SLXIO_PKG_CONFIG_FILE "slxio.pc")
