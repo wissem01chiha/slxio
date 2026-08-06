@@ -1,5 +1,5 @@
 #include "JsonDataObject.h"
-#include "slxJson-c.h"
+#include "Json-c.h"
 
 namespace slxio
 {

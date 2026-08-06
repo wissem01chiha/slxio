@@ -4,9 +4,8 @@
 #ifndef SIGNALOBJECT_H
 #define SIGNALOBJECT_H
 
-#include "AbiNamespaceMacro.h"
-#include "AbstractSignal.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "DataObject.h"
 #include "PlatformTypes.h"
 #include <string>

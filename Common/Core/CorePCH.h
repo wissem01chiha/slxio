@@ -10,8 +10,11 @@
 #include <iostream>
 #include <limits>
 #include <mutex>
+#include <sstream> 
 #include <string>
+#include <thread>
 #include <type_traits>
 #include <vector>
+#include <array>
 
 #endif // COREPCH_H

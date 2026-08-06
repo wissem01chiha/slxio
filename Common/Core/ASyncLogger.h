@@ -25,7 +25,6 @@ public:
   void Log(const ILogMessage& msg) override;
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;
-  DataType GetDataType() const override;
   ~ASyncLogger(){};
 
 private:

@@ -13,7 +13,8 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- *
+ * @class TimeStamp
+ * @brief
  */
 class SLXIO_APIEXPORT TimeStamp final
 {

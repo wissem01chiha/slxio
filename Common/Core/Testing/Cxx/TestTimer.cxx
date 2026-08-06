@@ -1,7 +1,6 @@
 #include "Doctest.h"
 #include "ErrorHandler.h"
 #include "Timer.h"
-#include <thread>
 
 namespace slxio
 {

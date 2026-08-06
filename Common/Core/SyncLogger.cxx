@@ -50,10 +50,5 @@ LogLevelType SyncLogger::GetLogLevel() const
   return m_level;
 }
 
-DataType SyncLogger::GetDataType() const
-{
-  return DataType::SLXIO_TYPE_SYNCHRONOUS_LOGGER;
-}
-
 SLXIO_ABI_NAMESPACE_END
 };

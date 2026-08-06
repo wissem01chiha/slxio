@@ -31,6 +31,7 @@ add_module(
     TimeStamp.cxx
     SyncLogger.cxx
     ErrorManager.cxx
+    ArrayLogMessage.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
@@ -41,6 +42,7 @@ add_module(
     SimulinkVersionRelease.h
     TimeStamp.h
     DataType.h
+    Object.h
     ILogger.h
     SyncLogger.h
     ASyncLogger.h
@@ -48,6 +50,8 @@ add_module(
     ErrorHandler.h
     ErrorTypes.h
     ErrorManager.h
+    ILogMessage.h
+    ArrayLogMessage.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES

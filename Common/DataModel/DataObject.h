@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SLXDATAOBJECT_H
-#define SLXDATAOBJECT_H
+#ifndef DATAOBJECT_H
+#define DATAOBJECT_H
 
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"

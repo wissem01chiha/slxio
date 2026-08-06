@@ -8,6 +8,7 @@
 #include "APIExportMacro.h"
 #include "CorePCH.h"
 #include "DataType.h"
+#include "ILogMessage.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -26,35 +27,13 @@ enum class LogLevelType : UInt8
 };
 
 /**
- * @brief Base interface for all log message types.
- * ILogMessage defines the common abstraction for data that can be
- * submitted to a logging system. Concrete implementations may
- * represent text messages, diagnostics, numeric arrays, structured
- * data, or domain-specific logging events.
- * The interface decouples log producers from logger implementations,
- * enabling new message types to be introduced without modifying the
- * logging infrastructure.
- */
-class SLXIO_APIEXPORT ILogMessage
-{
-public:
-  virtual ~ILogMessage() = default;
-
-  /* Returns the underlaying message type */
-  virtual DataType GetDataType() const = 0;
-
-  /* Serlise the message to string for logging*/
-  virtual std::string ToString() const = 0;
-};
-
-/**
  * @brief Defines the interface for logger implementations.
  *
  * ILogger provides a common abstraction for logging backends.
  * Concrete implementations may write log messages to the console,
  * files, databases, network services, or other destinations.
  */
-class SLXIO_APIEXPORT ILogger
+class SLXIO_APIEXPORT ILogger : public Object
 {
 public:
   virtual ~ILogger() = default;
@@ -71,9 +50,17 @@ public:
   /** Returns the current logging level. */
   virtual LogLevelType GetLogLevel() const = 0;
 
-  /* Returns Logger registred type, inherited classes should
-  define their custom type and return it via this function*/
-  virtual DataType GetDataType() const = 0;
+  /* Returns Logger default registred type,inherited classes should
+  define their custom type and return it via this function, if there they intend to
+  override the default type  */
+  DataType GetDataType() const override { return DataType::SLXIO_TYPE_GENERIC_LOGGER; };
+
+  /* Append ILogMessage Based Object in a stream way to the ILogger based object */
+  ILogger& operator<<(const ILogMessage& msg)
+  {
+    this->Log(msg);
+    return *this;
+  }
 };
 
 SLXIO_ABI_NAMESPACE_END
