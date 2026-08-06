@@ -31,7 +31,6 @@ add_module(
     TimeStamp.cxx
     SyncLogger.cxx
     ErrorManager.cxx
-    ArrayLogMessage.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h

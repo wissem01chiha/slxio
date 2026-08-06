@@ -1,10 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef FILELOGGER_H
-#define FILELOGGER_H
+#ifndef ERRORLOGMESSAGE_H
+#define ERRORLOGMESSAGE_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 
-#endif // FILELOGGER_H
+
+
+
+#endif // ERRORLOGMESSAGE_H

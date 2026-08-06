@@ -13,8 +13,12 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @class ArrayLogMessage
+ * @brief Implementation of ILogMessage for std::array<T,N> based objects
+ */
 template <typename T, size_t N>
-class ArrayLogMessage : public ILogMessage
+class SLXIO_APIEXPORT ArrayLogMessage : public ILogMessage
 {
 public:
   ArrayLogMessage(std::array<T, N> d)
