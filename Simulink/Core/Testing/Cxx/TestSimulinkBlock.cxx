@@ -35,8 +35,8 @@ TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
   SimulinkBlock* parentblockPtr =
     new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
-  std::shared_ptr<SimulinkBlock> childblockPtr =
-    std::make_shared<SimulinkBlock>(SimulinkBlockType::Type::Clock, "ClockBlock", 20);
+  std::shared_ptr<SimulinkBlock> childblockPtr = std::make_shared<SimulinkBlock>(
+    SimulinkBlockType::Type::Clock, "ClockBlock", 20);
 
   HError status = parentblockPtr->AddElement(childblockPtr);
   CHECK(status == E_OK);

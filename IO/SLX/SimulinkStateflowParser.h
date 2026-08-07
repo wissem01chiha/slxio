@@ -36,7 +36,8 @@ class StateflowParser final
    *             if a problem occurred during building the Stateflow
    * part
    */
-  void buildStateflow(SLXSection stateflowSection) throws SimulinkModelBuildingException
+  void buildStateflow(
+    SLXSection stateflowSection) throws SimulinkModelBuildingException
   {
 
     buildMachine(stateflowSection.getFirstSubSection(SECTION_machine));
@@ -135,7 +136,8 @@ class StateflowParser final
           }
           if (elements.containsKey(id))
           {
-            throw new SimulinkModelBuildingException("Duplicate id " + id + ".", section);
+            throw new SimulinkModelBuildingException(
+              "Duplicate id " + id + ".", section);
           }
           elements.put(id, element);
         }
@@ -294,8 +296,8 @@ class StateflowParser final
         void buildChartRelation(
           StateflowChart element) throws SimulinkModelBuildingException
         {
-          StateflowElementBase < ? > relatedElement =
-                                     elements.get(element.getParameter(PARAM_machine));
+          StateflowElementBase < ? >
+            relatedElement = elements.get(element.getParameter(PARAM_machine));
           StateflowMachine parent = castToMachine(relatedElement, element);
           String fqName =
             model.getParameter(PARAM_Name) + "/" + element.getParameter(PARAM_name);
@@ -328,7 +330,8 @@ class StateflowParser final
 
         /** Build transition. */
       private
-        void buildTransition(MDLSection section) throws SimulinkModelBuildingException
+        void buildTransition(
+          MDLSection section) throws SimulinkModelBuildingException
         {
           String srcId = getId(section, SECTION_src);
           String dstId = getId(section, SECTION_dst);
@@ -381,8 +384,8 @@ class StateflowParser final
          * Get parameter 'id' in the first sub section with a given
          * name.
          */
-        String getId(
-          MDLSection section, String subSectionName) throws SimulinkModelBuildingException
+        String getId(MDLSection section,
+          String subSectionName) throws SimulinkModelBuildingException
         {
           MDLSection subSection = section.getFirstSubSection(subSectionName);
 

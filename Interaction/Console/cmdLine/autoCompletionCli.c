@@ -36,7 +36,8 @@
 #include <wchar.h>
 #include <wctype.h>
 
-static void doCompletion(char** wk_buf, unsigned int* cursor, unsigned int* cursor_max);
+static void doCompletion(
+  char** wk_buf, unsigned int* cursor, unsigned int* cursor_max);
 
 static char* getLineBeforeCaret(char* wk_buf, unsigned int* cursor);
 
@@ -48,21 +49,23 @@ static void backspace(int n);
 static void erase_nchar(int n);
 
 static void TermCompletionOnFiles(char** dictionaryFiles, int sizedictionaryFiles,
-  char* lineBeforeCaret, char* lineAfterCaret, char* filePattern, char* defaultPattern,
-  char** wk_buf, unsigned int* cursor, unsigned int* cursor_max);
+  char* lineBeforeCaret, char* lineAfterCaret, char* filePattern,
+  char* defaultPattern, char** wk_buf, unsigned int* cursor,
+  unsigned int* cursor_max);
 static int CopyLineAtPrompt(
   char** wk_buf, char* line, unsigned int* cursor, unsigned int* cursor_max);
 static void separateFilesDirectories(char** dictionary, int size, char*** files,
   int* sizeFiles, char*** directories, int* sizeDirectories);
 
 static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
-  char* defaultPattern, char** wk_buf, unsigned int* cursor, unsigned int* cursor_max);
+  char* defaultPattern, char** wk_buf, unsigned int* cursor,
+  unsigned int* cursor_max);
 
 static void displayCompletionDictionary(
   char** dictionary, int sizedictionary, char* namedictionary);
 
-static char** concatenateStrings(int* sizearrayofstring, char* string1, char* string2,
-  char* string3, char* string4, char* string5);
+static char** concatenateStrings(int* sizearrayofstring, char* string1,
+  char* string2, char* string3, char* string4, char* string5);
 
 /* Autocompletion in NW/NWNI */
 void autoCompletionInConsoleMode(wchar_t** commandLine, unsigned int* cursorLocation)
@@ -88,7 +91,8 @@ void autoCompletionInConsoleMode(wchar_t** commandLine, unsigned int* cursorLoca
   FREE(multiByteString);
 }
 
-static void doCompletion(char** wk_buf, unsigned int* cursor, unsigned int* cursor_max)
+static void doCompletion(
+  char** wk_buf, unsigned int* cursor, unsigned int* cursor_max)
 {
   char* LineBeforeCaret = getLineBeforeCaret(*wk_buf, cursor);
   char* LineAfterCaret = getLineAfterCaret(*wk_buf, cursor, cursor_max);
@@ -200,8 +204,9 @@ static void erase_nchar(int n)
 }
 
 static void TermCompletionOnFiles(char** dictionaryFiles, int sizedictionaryFiles,
-  char* lineBeforeCaret, char* lineAfterCaret, char* filePattern, char* defaultPattern,
-  char** wk_buf, unsigned int* cursor, unsigned int* cursor_max)
+  char* lineBeforeCaret, char* lineAfterCaret, char* filePattern,
+  char* defaultPattern, char** wk_buf, unsigned int* cursor,
+  unsigned int* cursor_max)
 {
   if (dictionaryFiles)
   {
@@ -233,13 +238,14 @@ static void TermCompletionOnFiles(char** dictionaryFiles, int sizedictionaryFile
       int sizeFiles;
       char** directories;
       int sizeDirectories;
-      separateFilesDirectories(dictionaryFiles, sizedictionaryFiles, &files, &sizeFiles,
-        &directories, &sizeDirectories);
+      separateFilesDirectories(dictionaryFiles, sizedictionaryFiles, &files,
+        &sizeFiles, &directories, &sizeDirectories);
 
       // displayCompletionDictionary(dictionaryFiles, sizedictionaryFiles,
       // gettext("File or Directory"));
       displayCompletionDictionary(files, sizeFiles, gettext("File"));
-      displayCompletionDictionary(directories, sizeDirectories, gettext("Directory"));
+      displayCompletionDictionary(
+        directories, sizeDirectories, gettext("Directory"));
       freeArrayOfString(files, sizeFiles);
       freeArrayOfString(directories, sizeDirectories);
 
@@ -269,8 +275,8 @@ static void TermCompletionOnFiles(char** dictionaryFiles, int sizedictionaryFile
       }
       else if (common)
       {
-        char* new_line = completeLine(
-          lineBeforeCaret, common, filePattern, defaultPattern, TRUE, lineAfterCaret);
+        char* new_line = completeLine(lineBeforeCaret, common, filePattern,
+          defaultPattern, TRUE, lineAfterCaret);
 
         if (new_line)
         {
@@ -283,7 +289,8 @@ static void TermCompletionOnFiles(char** dictionaryFiles, int sizedictionaryFile
         }
         else
         {
-          int lennewline = (int)strlen(lineBeforeCaret) + (int)strlen(lineAfterCaret);
+          int lennewline =
+            (int)strlen(lineBeforeCaret) + (int)strlen(lineAfterCaret);
 
           new_line = (char*)MALLOC(sizeof(char) * (lennewline + 1));
 
@@ -353,7 +360,8 @@ static void separateFilesDirectories(char** dictionary, int size, char*** files,
     if (len && word[len - 1] == '/')
     {
       (*sizeDirectories)++;
-      *directories = (char**)REALLOC(*directories, sizeof(char*) * (*sizeDirectories));
+      *directories =
+        (char**)REALLOC(*directories, sizeof(char*) * (*sizeDirectories));
       (*directories)[*sizeDirectories - 1] = strdup(word);
     }
     else
@@ -365,8 +373,8 @@ static void separateFilesDirectories(char** dictionary, int size, char*** files,
   }
 }
 
-static char** concatenateStrings(int* sizearrayofstring, char* string1, char* string2,
-  char* string3, char* string4, char* string5)
+static char** concatenateStrings(int* sizearrayofstring, char* string1,
+  char* string2, char* string3, char* string4, char* string5)
 {
   int newsize = 0;
 
@@ -438,7 +446,8 @@ static char** concatenateStrings(int* sizearrayofstring, char* string1, char* st
 }
 
 static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
-  char* defaultPattern, char** wk_buf, unsigned int* cursor, unsigned int* cursor_max)
+  char* defaultPattern, char** wk_buf, unsigned int* cursor,
+  unsigned int* cursor_max)
 {
   if (defaultPattern)
   {
@@ -475,20 +484,22 @@ static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
     {
       completionDictionaryFunctions =
         completionOnFunctions(defaultPattern, &sizecompletionDictionaryFunctions);
-      completionDictionaryCommandWords =
-        completionOnCommandWords(defaultPattern, &sizecompletionDictionaryCommandWords);
+      completionDictionaryCommandWords = completionOnCommandWords(
+        defaultPattern, &sizecompletionDictionaryCommandWords);
       completionDictionaryMacros =
         completionOnMacros(defaultPattern, &sizecompletionDictionaryMacros);
       completionDictionaryVariables = completionOnVariablesWithoutMacros(
         defaultPattern, &sizecompletionDictionaryVariables);
-      completionDictionaryHandleGraphicsProperties = completionOnHandleGraphicsProperties(
-        defaultPattern, &sizecompletionDictionaryHandleGraphicsProperties);
+      completionDictionaryHandleGraphicsProperties =
+        completionOnHandleGraphicsProperties(
+          defaultPattern, &sizecompletionDictionaryHandleGraphicsProperties);
     }
 
     numberWordFound = sizecompletionDictionaryFunctions +
       sizecompletionDictionaryCommandWords + sizecompletionDictionaryMacros +
       sizecompletionDictionaryVariables +
-      sizecompletionDictionaryHandleGraphicsProperties + sizecompletionDictionaryFields;
+      sizecompletionDictionaryHandleGraphicsProperties +
+      sizecompletionDictionaryFields;
 
     if (numberWordFound > 0)
     {
@@ -545,8 +556,8 @@ static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
 
         if (completionDictionaryFields)
         {
-          commonAll =
-            getCommonPart(completionDictionaryFields, sizecompletionDictionaryFields);
+          commonAll = getCommonPart(
+            completionDictionaryFields, sizecompletionDictionaryFields);
           displayCompletionDictionary(completionDictionaryFields,
             sizecompletionDictionaryFields, (char*)_("Scilab Fields"));
         }
@@ -558,8 +569,8 @@ static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
           char* commonCommandWords = getCommonPart(
             completionDictionaryCommandWords, sizecompletionDictionaryCommandWords);
 
-          char* commonMacros =
-            getCommonPart(completionDictionaryMacros, sizecompletionDictionaryMacros);
+          char* commonMacros = getCommonPart(
+            completionDictionaryMacros, sizecompletionDictionaryMacros);
 
           char* commonVariables = getCommonPart(
             completionDictionaryVariables, sizecompletionDictionaryVariables);
@@ -630,11 +641,13 @@ static void TermCompletionOnAll(char* lineBeforeCaret, char* lineAfterCaret,
       }
     }
     freeArrayOfString(completionDictionaryFields, sizecompletionDictionaryFields);
-    freeArrayOfString(completionDictionaryFunctions, sizecompletionDictionaryFunctions);
+    freeArrayOfString(
+      completionDictionaryFunctions, sizecompletionDictionaryFunctions);
     freeArrayOfString(
       completionDictionaryCommandWords, sizecompletionDictionaryCommandWords);
     freeArrayOfString(completionDictionaryMacros, sizecompletionDictionaryMacros);
-    freeArrayOfString(completionDictionaryVariables, sizecompletionDictionaryVariables);
+    freeArrayOfString(
+      completionDictionaryVariables, sizecompletionDictionaryVariables);
     freeArrayOfString(completionDictionaryHandleGraphicsProperties,
       sizecompletionDictionaryHandleGraphicsProperties);
   }
@@ -663,7 +676,8 @@ static void displayCompletionDictionary(
     setCharDisplay(DISP_RESET);
     for (i = 0; i < sizedictionary; i++)
     {
-      int newlenLine = lenCurrentLine + (int)strlen(dictionary[i]) + (int)strlen(" ");
+      int newlenLine =
+        lenCurrentLine + (int)strlen(dictionary[i]) + (int)strlen(" ");
 
       if ((lenCurrentLine + newlenLine) > MAX_LINE_SIZE)
       {

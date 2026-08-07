@@ -41,7 +41,8 @@ std::string SimulinkFileObject::ToString() const
       << "revision=\"" << ImplDataObject->Revision << "\", "
       << "version=\"" << ImplDataObject->Version << "\", "
       << "contentType=\"" << ImplDataObject->ContentType << "\", "
-      << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName << "\", "
+      << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName
+      << "\", "
       << "matlabRelease=\"" << ImplDataObject->MatlabRelease << "\", "
       << "matlabVersion=\"" << ImplDataObject->MatlabVersion << "\""
       << " }";

@@ -36,7 +36,8 @@ public:
   SimulinkObject(IdType id, std::string name, std::string className);
 
   /**  */
-  SimulinkObject(IdType id, std::string version, std::string name, std::string className);
+  SimulinkObject(
+    IdType id, std::string version, std::string name, std::string className);
 
   /**  */
   SimulinkObject(std::string version, std::string className);

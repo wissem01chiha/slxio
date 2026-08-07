@@ -8,11 +8,11 @@
 #include "VersionMacro.h"
 
 #if SLXIO_ABI_NAMESPACE
-#define SLXIO_ABI_NAMESPACE_BEGIN                                                        \
-  namespace SLXIO_VERSION_NUMBER                                                         \
+#define SLXIO_ABI_NAMESPACE_BEGIN                                                   \
+  namespace SLXIO_VERSION_NUMBER                                                    \
   {
-#define SLXIO_ABI_NAMESPACE_END                                                          \
-  }                                                                                      \
+#define SLXIO_ABI_NAMESPACE_END                                                     \
+  }                                                                                 \
   ;
 #else
 #define SLXIO_ABI_NAMESPACE_BEGIN

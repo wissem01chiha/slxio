@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <iostream>
 #include <limits>
+#include <memory>
 #include <mutex>
 #include <sstream>
 #include <string>

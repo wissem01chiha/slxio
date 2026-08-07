@@ -26,7 +26,8 @@ SimulinkObject* SimulinkObject::New() const
   return new SimulinkObject();
 }
 
-SimulinkObject::SimulinkObject(IdType ObjectId, std::string name, std::string ClassName)
+SimulinkObject::SimulinkObject(
+  IdType ObjectId, std::string name, std::string ClassName)
   : ObjectId(ObjectId)
   , PropName(name)
   , ClassName(ClassName)
@@ -34,8 +35,8 @@ SimulinkObject::SimulinkObject(IdType ObjectId, std::string name, std::string Cl
 {
 }
 
-SimulinkObject::SimulinkObject(
-  IdType ObjectId, std::string ObjectVersion, std::string name, std::string ClassName)
+SimulinkObject::SimulinkObject(IdType ObjectId, std::string ObjectVersion,
+  std::string name, std::string ClassName)
   : ObjectId(ObjectId)
   , ObjectVersion(ObjectVersion)
   , PropName(name)
@@ -239,7 +240,8 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 //   {
 
 //     std::shared_ptr<SimulinkArray> arrayPtr =
-//     std::dynamic_pointer_cast<SimulinkArray>(element); SubArrays.push_back(arrayPtr);
+//     std::dynamic_pointer_cast<SimulinkArray>(element);
+//     SubArrays.push_back(arrayPtr);
 //   }
 //   return E_OK;
 // }

@@ -1,4 +1,5 @@
 #include "ErrorHandler.h"
+#include "CorePCH.h"
 
 namespace slxio
 {
@@ -67,6 +68,24 @@ bool IsSameGroup(HError result1, HError result2)
 bool IsSameComponent(HError result1, HError result2)
 {
   return GetComponentIdentifier(result1) == GetComponentIdentifier(result2);
+}
+
+const char* GetSeverityString(HError result)
+{
+  // get the severity level
+  UInt32 level = GetLevelIdentifier(result);
+  switch (level)
+  {
+    case SLXIO_SUCCESS:
+      return "Success";
+    case SLXIO_FATAL:
+      return "Fatal";
+    case SLXIO_WARN:
+      return "Warning";
+    case SLXIO_INFO:
+      return "Info";
+  }
+  return "";
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -25,8 +25,8 @@ void clrscr_nw(void)
   coord.X = 0;
   coord.Y = 0;
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &info);
-  FillConsoleOutputCharacter(
-    GetStdHandle(STD_OUTPUT_HANDLE), ' ', info.dwSize.X * info.dwSize.Y, coord, &written);
+  FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ',
+    info.dwSize.X * info.dwSize.Y, coord, &written);
 
   TermSetPosition(0, 0);
 }

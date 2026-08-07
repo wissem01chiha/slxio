@@ -16,7 +16,8 @@ private:
 
   /** Set of Stateflow events. */
 private
-  final IdentityHashSet<StateflowEvent> events = new IdentityHashSet<StateflowEvent>();
+  final IdentityHashSet<StateflowEvent> events =
+    new IdentityHashSet<StateflowEvent>();
 
   /** Create new declaration container. */
   /* package */ StateflowDeclContainerBase() { super(); }
@@ -79,8 +80,8 @@ private
 
       void removeEvent(StateflowEvent event)
       {
-        CCSMPre.isTrue(
-          event.getParent() == this, "Event must belong to container to be removed.");
+        CCSMPre.isTrue(event.getParent() == this,
+          "Event must belong to container to be removed.");
         events.RemoveElement(event);
         event.setParent(null);
       }

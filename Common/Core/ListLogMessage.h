@@ -4,5 +4,4 @@
 #ifndef LISTLOGMESSAGE_H
 #define LISTLOGMESSAGE_H
 
-
 #endif // LISTLOGMESSAGE_H

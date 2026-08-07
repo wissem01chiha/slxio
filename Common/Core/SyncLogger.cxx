@@ -5,6 +5,26 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
+void SyncLogger::Init()
+{
+  static bool initialized = false;
+  if (initialized)
+  {
+    return;
+  }
+  int argc = 1;
+  char appName[] = "slxio";
+  char* argv[] = { appName, nullptr };
+  loguru::g_preamble_date = false;
+  loguru::g_preamble_time = false;
+  loguru::g_preamble_uptime = false;
+  loguru::g_preamble_thread = false;
+  loguru::g_preamble_file = false;
+  loguru::g_preamble_verbose = false;
+  loguru::init(argc, argv);
+  initialized = true;
+}
+
 void SyncLogger::Log(const ILogMessage& msg)
 {
 

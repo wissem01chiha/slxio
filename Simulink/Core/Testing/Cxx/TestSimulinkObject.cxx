@@ -26,8 +26,8 @@ TEST_CASE("AddSubObjectTest")
 {
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
-  auto subObject =
-    std::make_shared<SimulinkObject>(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject = std::make_shared<SimulinkObject>(
+    1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   HError status = obj.AddElement(subObject);
   CHECK(status == E_OK);
@@ -64,8 +64,8 @@ TEST_CASE("ContainsObjectTest")
 
   SimulinkObject obj(1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
-  auto subObject =
-    std::make_shared<SimulinkObject>(1, "DataTransfer", "Simulink.GlobalDataTransfer");
+  auto subObject = std::make_shared<SimulinkObject>(
+    1, "DataTransfer", "Simulink.GlobalDataTransfer");
 
   HError status = obj.AddElement(subObject);
   CHECK(status == E_OK);

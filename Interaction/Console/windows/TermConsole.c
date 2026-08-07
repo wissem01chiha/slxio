@@ -368,7 +368,8 @@ static char actionControlKey(void)
   {
     moveBackHistory();
   }
-  else if (isCTRL_VKEY('R') || isCTRL_VKEY('L')) /* redraw line in case it gets trashed */
+  else if (isCTRL_VKEY('R') ||
+    isCTRL_VKEY('L')) /* redraw line in case it gets trashed */
   {
     redrawLine();
   }

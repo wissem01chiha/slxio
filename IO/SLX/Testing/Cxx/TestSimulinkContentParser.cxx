@@ -17,8 +17,8 @@ protected:
 
     char path_slx[512];
 
-    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR,
-      assetName);
+    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
+      PROJECT_ROOT_DIR, assetName);
 
     return File(path_slx);
   }
@@ -68,7 +68,8 @@ TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserInvalidInputDataTest"
   CHECK(status == E_INVALID_ARGUMENT);
 };
 
-TEST_CASE_FIXTURE(SimulinkContentParserTestFixture, "ParserDataObjectValidAttributeTest")
+TEST_CASE_FIXTURE(
+  SimulinkContentParserTestFixture, "ParserDataObjectValidAttributeTest")
 {
 
   parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));

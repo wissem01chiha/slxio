@@ -145,7 +145,8 @@ int deletePreviousWordFromCurs(wchar_t* CommandLine, unsigned int* cursorLocatio
 {
   /* Delete void character before cursor */
   while (*cursorLocation &&
-    (CommandLine[*cursorLocation - 1] == ' ' || CommandLine[*cursorLocation - 1] == '\t'))
+    (CommandLine[*cursorLocation - 1] == ' ' ||
+      CommandLine[*cursorLocation - 1] == '\t'))
   {
     rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
   }

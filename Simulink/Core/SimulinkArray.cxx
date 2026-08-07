@@ -9,7 +9,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationInfoType SimulinkArrayLogApp = { 100, "SimulinkArray" };
+static const Logger::ApplicationInfoType SimulinkArrayLogApp = { 100,
+  "SimulinkArray" };
 
 SimulinkArray::SimulinkArray()
   : logger(Logger::GetInstance())
@@ -21,7 +22,8 @@ SimulinkArray* SimulinkArray::New() const
   return new SimulinkArray();
 }
 
-SimulinkArray::SimulinkArray(std::string type, std::string name, std::string dimension)
+SimulinkArray::SimulinkArray(
+  std::string type, std::string name, std::string dimension)
   : ArrayType(type)
   , ArrayName(name)
   , ArrayDimension(dimension)
@@ -90,7 +92,8 @@ HError SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element
     {
       if (subArrayPtr->GetName() == arraysPtr->GetName())
       {
-        logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+        logger.SendLogMessage(
+          { Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
           { "SubArray already exists in the base array" });
         return E_OK;
       }
@@ -105,7 +108,8 @@ HError SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element
     {
       if (element->GetId() == objId)
       {
-        logger.SendLogMessage({ Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
+        logger.SendLogMessage(
+          { Logger::LOG, Logger::LOG_WARN, SimulinkArrayLogApp, 3 },
           { "Object already exists in the base array" });
         return E_OK;
       }
@@ -138,7 +142,8 @@ HError SimulinkArray::Erase(const IdType& ArrayId)
   {
     if (objId == ArrayId)
     {
-      ArrayObjectIds.erase(remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
+      ArrayObjectIds.erase(
+        remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
         ArrayObjectIds.end());
       return E_OK;
     }
@@ -165,7 +170,8 @@ HError SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 
       if (arr->GetName() == arrayPtr->GetName())
       {
-        SubArrays.erase(remove(SubArrays.begin(), SubArrays.end(), arr), SubArrays.end());
+        SubArrays.erase(
+          remove(SubArrays.begin(), SubArrays.end(), arr), SubArrays.end());
         return E_OK;
       }
       arr->Erase(element);
@@ -178,7 +184,8 @@ HError SimulinkArray::Erase(const std::shared_ptr<SimulinkElementBase>& element)
     {
       if (element->GetId() == objId)
       {
-        ArrayObjectIds.erase(remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
+        ArrayObjectIds.erase(
+          remove(ArrayObjectIds.begin(), ArrayObjectIds.end(), objId),
           ArrayObjectIds.end());
         return E_OK;
       }

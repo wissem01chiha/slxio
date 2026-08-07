@@ -105,7 +105,8 @@ public:
   static inline const char* SECTION_machine = "machine";
 
   /** @brief  Block parameter defaults section. */
-  static inline const char* SECTION_BlockParameterDefaults = "BlockParameterDefaults";
+  static inline const char* SECTION_BlockParameterDefaults =
+    "BlockParameterDefaults";
 
   /** @brief  Block defaults section. */
   static inline const char* SECTION_BlockDefaults = "BlockDefaults";

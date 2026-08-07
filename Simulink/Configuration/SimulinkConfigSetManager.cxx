@@ -24,7 +24,8 @@ HError SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> c
   return E_OK;
 }
 
-HError SimulinkConfigSetManager::RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg)
+HError SimulinkConfigSetManager::RemoveElement(
+  std::shared_ptr<SimulinkConfigSet> cfg)
 {
 
   if (cfg == nullptr)

@@ -34,7 +34,7 @@ public:
     return oss.str();
   }
 
-  ArrayLogMessage operator+(const ArrayLogMessage& rhs) const
+  ArrayLogMessage operator+(const ArrayLogMessage& rhs) const override
   {
     std::array<T, N> combined = m_data;
     return ArrayLogMessage(combined);

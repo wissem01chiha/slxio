@@ -62,7 +62,8 @@ HError SimulinkArrayParser::parse()
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0)
     {
 
-      std::unique_ptr<SimulinkObjectParser> subObjParserPtr(new SimulinkObjectParser());
+      std::unique_ptr<SimulinkObjectParser> subObjParserPtr(
+        new SimulinkObjectParser());
       HError subInputStatus = subObjParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {
@@ -82,7 +83,8 @@ HError SimulinkArrayParser::parse()
       xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
     {
 
-      std::unique_ptr<SimulinkArrayParser> subArrParserPtr(new SimulinkArrayParser());
+      std::unique_ptr<SimulinkArrayParser> subArrParserPtr(
+        new SimulinkArrayParser());
       HError subInputStatus = subArrParserPtr->setInputData(nodePtr_);
       if (subInputStatus != E_OK)
       {

@@ -28,12 +28,11 @@ enum class LogLevelType : UInt8
 
 /**
  * @brief Defines the interface for logger implementations.
- *
  * ILogger provides a common abstraction for logging backends.
  * Concrete implementations may write log messages to the console,
  * files, databases, network services, or other destinations.
  */
-class SLXIO_APIEXPORT ILogger : public Object
+class SLXIO_APIEXPORT ILogger
 {
 public:
   virtual ~ILogger() = default;
@@ -53,7 +52,7 @@ public:
   /* Returns Logger default registred type,inherited classes should
   define their custom type and return it via this function, if there they intend to
   override the default type  */
-  DataType GetDataType() const override { return DataType::SLXIO_TYPE_GENERIC_LOGGER; };
+  DataType GetDataType() const { return DataType::SLXIO_TYPE_GENERIC_LOGGER; };
 
   /* Append ILogMessage Based Object in a stream way to the ILogger based object */
   ILogger& operator<<(const ILogMessage& msg)

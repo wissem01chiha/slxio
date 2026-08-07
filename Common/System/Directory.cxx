@@ -226,7 +226,8 @@ HError Directory::Delete(const std::string& path)
     else
     {
       uv_fs_t unlink_req;
-      int ur = uv_fs_unlink(uv_default_loop(), &unlink_req, fullPath.c_str(), nullptr);
+      int ur =
+        uv_fs_unlink(uv_default_loop(), &unlink_req, fullPath.c_str(), nullptr);
       uv_fs_req_cleanup(&unlink_req);
       if (ur < 0 && ur != UV_ENOENT)
         return ur;

@@ -151,8 +151,8 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
                 // environment var JAVA_JVM_VERSION to the CFSTR targetJVM We
                 // can reuse the pathToTargetJVM buffer to set the environement
                 // var.
-                if (CFStringGetCString(
-                      targetJVM, (char*)pathToTargetJVM, PATH_MAX, kCFStringEncodingUTF8))
+                if (CFStringGetCString(targetJVM, (char*)pathToTargetJVM, PATH_MAX,
+                      kCFStringEncodingUTF8))
                 {
                   setenv("JAVA_JVM_VERSION", (char*)pathToTargetJVM, 1);
                   ret = 0;
@@ -169,8 +169,8 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
             }
             else
             {
-              fprintf(
-                stderr, "Error getting file system representation for bundle url.\n");
+              fprintf(stderr,
+                "Error getting file system representation for bundle url.\n");
               CFRelease(TargetJavaVM);
             }
           }

@@ -23,8 +23,8 @@ void StateflowNodeBase::addInTransition(
 void StateflowNodeBase::addOutTransition(
   const std::shared_ptr<StateflowTransition>& transition)
 {
-  assert(
-    transition->getSrc().get() == this && "Transition source does not match this node");
+  assert(transition->getSrc().get() == this &&
+    "Transition source does not match this node");
   outTransitions.push_back(transition);
 }
 

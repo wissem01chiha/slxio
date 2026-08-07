@@ -165,8 +165,8 @@ int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation)
       /* If the cursor will move to a previous line separated by L'\n' */
       if (*cursorLocation > 1)
       {
-        nbrCol =
-          (sizeOfOneLineInTerm(CommandLine, *cursorLocation - 2) + 1) % tgetnum("co");
+        nbrCol = (sizeOfOneLineInTerm(CommandLine, *cursorLocation - 2) + 1) %
+          tgetnum("co");
       }
       else
       {
@@ -259,12 +259,14 @@ static BOOL isAWideCharToJump(wchar_t wideCharToTest)
 int nextWord(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
   /* Passing current word... */
-  while (CommandLine[*cursorLocation] && !isAWideCharToJump(CommandLine[*cursorLocation]))
+  while (
+    CommandLine[*cursorLocation] && !isAWideCharToJump(CommandLine[*cursorLocation]))
   {
     gotoRight(CommandLine, cursorLocation);
   }
   /* ... then passing through characters to jump */
-  while (CommandLine[*cursorLocation] && isAWideCharToJump(CommandLine[*cursorLocation]))
+  while (
+    CommandLine[*cursorLocation] && isAWideCharToJump(CommandLine[*cursorLocation]))
   {
     gotoRight(CommandLine, cursorLocation);
   }

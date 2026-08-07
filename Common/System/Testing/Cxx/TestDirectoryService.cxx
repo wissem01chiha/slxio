@@ -17,7 +17,8 @@ public:
 private:
 };
 
-TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test Static GetWorkingDirectory Exist")
+TEST_CASE_FIXTURE(
+  DirectoryServiceTestFixture, "Test Static GetWorkingDirectory Exist")
 {
   int err = 0;
   Directory d = DirectoryService::GetWorkingDirectory(&err);

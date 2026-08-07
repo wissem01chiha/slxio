@@ -16,7 +16,7 @@ add_module(
   MODULE_ENABLE_BUILD 
     TRUE
   MODULE_ENABLE_TESTS 
-    FALSE
+    TRUE
   MODULE_CONFIG_HEADERS
     Options.h.in
     VersionMacro.h.in
@@ -31,6 +31,7 @@ add_module(
     TimeStamp.cxx
     SyncLogger.cxx
     ErrorManager.cxx
+    ErrorLogMessage.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
@@ -41,7 +42,6 @@ add_module(
     SimulinkVersionRelease.h
     TimeStamp.h
     DataType.h
-    Object.h
     ILogger.h
     SyncLogger.h
     ASyncLogger.h
@@ -61,8 +61,10 @@ add_module(
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
-    TestTimer.cxx
     TestVersion.cxx
+    TestSyncLogger.cxx
+    TestSimulinkVersion.cxx
+    TestErrorHandler.cxx
   MODULE_PUBLIC_DEPENDS
     loguru
   MODULE_TEST_DEPENDS

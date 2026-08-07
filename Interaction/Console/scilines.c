@@ -68,7 +68,8 @@ int scilinesdefault(void)
   char tc_buf[1024]; /* holds termcap buffer */
   if (tgetent(tc_buf, getenv("TERM")) == 1)
   {
-    setConsoleLines(tgetnum("li")); /* retrieve from the term info the number
+    setConsoleLines(
+      tgetnum("li"));               /* retrieve from the term info the number
                                                                             of lines */
     setConsoleWidth(tgetnum("co")); /* And the number of columns */
   }

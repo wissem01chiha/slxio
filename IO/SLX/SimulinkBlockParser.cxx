@@ -39,7 +39,8 @@ HError SimulinkBlockParser::parse()
     }
     else if (attrName == SlxParameter::PARAM_BlockType)
     {
-      SimulinkBlockType::Type blockType = SimulinkBlockType::toType(attrValue.c_str());
+      SimulinkBlockType::Type blockType =
+        SimulinkBlockType::toType(attrValue.c_str());
       ptr->setBlockType(blockType);
     }
     else

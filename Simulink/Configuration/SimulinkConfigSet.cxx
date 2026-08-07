@@ -45,7 +45,8 @@ const char* SimulinkConfigSet::GetParameter(const char* name)
     // logger.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
     return "";
   }
-  std::shared_ptr<SimulinkParameterBase> cfgParam = GetParameterObject(std::string(name));
+  std::shared_ptr<SimulinkParameterBase> cfgParam =
+    GetParameterObject(std::string(name));
   return cfgParam->ToString().c_str();
 }
 

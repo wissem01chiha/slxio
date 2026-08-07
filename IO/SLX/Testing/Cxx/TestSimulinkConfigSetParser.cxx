@@ -17,7 +17,8 @@ protected:
     slog_init("logfile", SLOG_FLAGS_ALL, 0);
     slog_disable(SLOG_TRACE);
 
-    snprintf(path_xml, sizeof(path_xml), "%s/test/assets/configSet.xml", PROJECT_ROOT);
+    snprintf(
+      path_xml, sizeof(path_xml), "%s/test/assets/configSet.xml", PROJECT_ROOT);
     builderPtr = new SimulinkConfigSetBuilder();
     xmlDocPtr doc;
     doc = xmlReadFile(path_xml, NULL, 0);

@@ -16,9 +16,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class ASyncLogger
  * @brief Provides a Asynchronous implementation of the ILogger interface,
- * asynchronous logging don't block the caller's process, pushes the raw logs messages to
- * a background thread enqueue the message and return immediately, while another thread
- * flushes logs to the destination.
+ * asynchronous logging don't block the caller's process, pushes the raw logs
+ * messages to a background thread enqueue the message and return immediately, while
+ * another thread flushes logs to the destination.
  */
 class ASyncLogger final : public ILogger
 {

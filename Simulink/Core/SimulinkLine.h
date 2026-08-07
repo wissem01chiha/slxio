@@ -31,7 +31,8 @@ public:
   SimulinkLine* New() const override;
 
   /** Construct a SimulinkLine given the Inport and OutPort blocks */
-  SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
+  SimulinkLine(
+    std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
 
   SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
 

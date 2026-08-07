@@ -46,7 +46,7 @@ jobs:
         run: >
           cmake -S . -B build
           -G Ninja
-          -DCMAKE_CXX_STANDARD=11
+          -DCMAKE_CXX_STANDARD=14
           -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
           -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} 
         env:

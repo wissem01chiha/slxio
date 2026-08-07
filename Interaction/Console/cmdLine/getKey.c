@@ -340,7 +340,8 @@ char* getCmdLine(void)
   }
 
   cursorLocation = nextLineLocationInWideString;
-  while (commandLine[cursorLocation] != L'\n' && commandLine[cursorLocation] != L'\0')
+  while (
+    commandLine[cursorLocation] != L'\n' && commandLine[cursorLocation] != L'\0')
   {
     cursorLocation++;
   }

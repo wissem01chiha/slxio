@@ -21,6 +21,7 @@ class SyncLogger final : public ILogger
 {
 public:
   SyncLogger() = default;
+  void Init() override;
   void Log(const ILogMessage& msg) override;
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;

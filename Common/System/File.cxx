@@ -91,10 +91,11 @@ HError File::Read()
 
   InternalBuffer.resize(4096);
   uv_fs_t req;
-  uv_buf_t iov =
-    uv_buf_init(InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
+  uv_buf_t iov = uv_buf_init(
+    InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
 
-  int err = uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
+  int err =
+    uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -117,9 +118,11 @@ HError File::Write(const char* message)
 
   uv_fs_t req;
   size_t len = strlen(message);
-  uv_buf_t iov = uv_buf_init(const_cast<char*>(message), static_cast<unsigned int>(len));
+  uv_buf_t iov =
+    uv_buf_init(const_cast<char*>(message), static_cast<unsigned int>(len));
 
-  int err = uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
+  int err =
+    uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)
@@ -239,8 +242,8 @@ HError File::Rename(const std::string& filename)
     return E_INVALID_ARGUMENT;
 
   uv_fs_t req;
-  int err =
-    uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
+  int err = uv_fs_rename(
+    uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
   uv_fs_req_cleanup(&req);
 
   if (err < 0)

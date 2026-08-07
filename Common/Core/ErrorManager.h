@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CorePCH.h"
+#include "ILogger.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -58,11 +59,38 @@ public:
    */
   std::vector<HError> GetBuffer();
 
+  /**
+   * Set a custom ILogger based object type to enable the ErrorManager
+   * to write trace into the supported logging implementations
+   * Note the ErrorManager is not allowed to modify the logger object
+   */
+  void SetLogger(const ILogger* logger);
+
+  /**
+   * Get the logger sink
+   */
+  const ILogger* GetLogger();
+
+  /**
+   * Enables logging feature, Logging is disabled by default for performance reasons.
+   * It can be enabled or disabled at runtime using the provided logging control
+   * functions.
+   */
+  void EnableLogging();
+
+  /* Prevents log messages from being generated until logging */
+  void DisableLogging();
+
+  /* Returns the current logging state */
+  bool GetLogStatus();
+
 private:
-  static const size_t bufferSize = 500;
-  std::vector<HError> ringBuffer;
+  static const size_t m_bufferSize = 500;
+  std::vector<HError> m_ringBuffer;
+  const ILogger* m_logger = nullptr;
+  bool m_logStatus = false;
   size_t head = 0;
-  std::mutex log_mutex;
+  std::mutex m_logMutex;
   ErrorManager();
 };
 

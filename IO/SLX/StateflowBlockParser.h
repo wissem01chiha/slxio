@@ -17,7 +17,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkStateflowBlock Parser class.
  */
-class StateflowBlockParser final : public SimulinkParserBase<xmlNodePtr, StateflowBlock>
+class StateflowBlockParser final
+  : public SimulinkParserBase<xmlNodePtr, StateflowBlock>
 {
 public:
   StateflowBlockParser() = default;

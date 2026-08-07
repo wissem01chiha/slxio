@@ -17,8 +17,8 @@ protected:
 
     char path_slx[512];
 
-    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR,
-      assetName);
+    snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
+      PROJECT_ROOT_DIR, assetName);
 
     return File(path_slx);
   }

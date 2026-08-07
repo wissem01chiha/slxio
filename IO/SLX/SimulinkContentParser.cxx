@@ -108,7 +108,8 @@ HError SimulinkContentParser::unzip()
   // Build the full path to the temporary copy of the SLX file.
   // Create a new File object using this path as the working baseline,
   // ensuring the original user file remains untouched.
-  std::string tempfilefullpath = tempdirfullpath + PATH_SEP + dataObject.getFilename();
+  std::string tempfilefullpath =
+    tempdirfullpath + PATH_SEP + dataObject.getFilename();
 
   File fileDataObject(tempfilefullpath, File::Read);
   if (!fileDataObject.isFile())

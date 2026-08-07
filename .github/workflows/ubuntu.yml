@@ -16,17 +16,17 @@ jobs:
             pkgtgt: package package_source
             cmake-args:
 
-          - name: Ubuntu GNU GCC C++11
+          - name: Ubuntu GNU GCC C++14
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=11
+            cmake-args: -DCMAKE_CXX_STANDARD=14
 
-          - name: Ubuntu Clang C++11
+          - name: Ubuntu Clang C++14
             os: ubuntu-latest
             compiler: clang-15
             cxx-compiler: clang++-15
-            cmake-args: -DCMAKE_CXX_STANDARD=11
+            cmake-args: -DCMAKE_CXX_STANDARD=14
             packages: clang-15 llvm-15 llvm-15-tools
 
     steps:
