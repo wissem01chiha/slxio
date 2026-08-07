@@ -170,7 +170,6 @@ endif ()
 include(CompilerChecks)
 include(CompilerFlags)
 include(CompilerPlatformFlags)
-include(CompilerExtraFlags)
 include(CompilerWarningFlags)
 
 if(SLXIO_WITH_PKGCONFIG)
