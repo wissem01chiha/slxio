@@ -65,6 +65,7 @@ add_module(
     TestSyncLogger.cxx
     TestSimulinkVersion.cxx
     TestErrorHandler.cxx
+    TestErrorManager.cxx
   MODULE_PUBLIC_DEPENDS
     loguru
   MODULE_TEST_DEPENDS

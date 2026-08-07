@@ -22,7 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT ErrorManager final
 {
 public:
-  /* Retrieves the singleton instance of ResultManager. */
+  /* Retrieves the singleton instance of ErrorManager. */
   static ErrorManager& GetInstance();
 
   /* Change the buffer size if needed.
@@ -35,16 +35,16 @@ public:
    */
   HError GetLastResult(void);
 
-  /* Retrieves the last informational result.
+  /* Retrieves the last informational error.
    * If no information record is found, falls back to E_OK.
    */
   HError GetLastInfoResult(void);
 
-  /* Retrieves the last warning result.
+  /* Retrieves the last warning error.
    */
   HError GetLastWarningResult(void);
 
-  /* Retrieves the last fatal result.
+  /* Retrieves the last fatal error.
    */
   HError GetLastFatalResult(void);
 

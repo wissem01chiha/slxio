@@ -19,4 +19,8 @@
 /// The object is in an invalid state.
 #define E_INVALID_STATE SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 3U)
 
+/// A default value was used because none was provided.
+#define E_DEFAULT_VALUE_USED                                                        \
+  SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_WARN, 4U)
+
 #endif // ERRORTYPES_H

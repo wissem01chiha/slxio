@@ -1,57 +1,59 @@
 #include "Doctest.h"
-#include "ErrorCode.h"
-#include "ErrorHandler.h"
-#include "Libuv.h"
+#include "ErrorManager.h"
+#include "ErrorTypes.h"
 
-namespace slxio
-{
+using namespace slxio;
+
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Set and Get last error")
+TEST_CASE("Singleton Constructor GetInstance Test")
 {
-  ErrorHandler eh;
-  eh.SetLastError(E_INVALID_ARGUMENT);
-  CHECK(eh.GetLastError() == E_INVALID_ARGUMENT);
-  CHECK(
-    std::string(eh.GetLastErrorMessage()) == "Invalid argument passed to function");
+
+  CHECK_NOTHROW(ErrorManager::GetInstance());
 }
 
-TEST_CASE("Get error message for known SLXIO code")
+TEST_CASE("SetBufferSize Test")
 {
-  CHECK(std::string(ErrorHandler::GetErrorMessage(E_FILE_NOT_FOUND)) ==
-    "File not found");
-  CHECK(std::string(ErrorHandler::GetErrorMessage(E_CONFIG_ALREADY_ACTIVE)) ==
-    "Configuration is already active");
+
+  CHECK_NOTHROW(ErrorManager::GetInstance().SetBufferSize(1024));
 }
 
-TEST_CASE("Get error message for unknown SLXIO code")
+TEST_CASE("SetResult And GetLastResult Test")
 {
-  int unknownCode = 1999;
-  std::string msg = ErrorHandler::GetErrorMessage(unknownCode);
-  CHECK(msg.find("unknown") != std::string::npos);
+  ErrorManager& manager = ErrorManager::GetInstance();
+
+  manager.SetResult(E_INVALID_ARGUMENT);
+
+  CHECK(manager.GetLastResult() == E_INVALID_ARGUMENT);
 }
 
-TEST_CASE("Get error message for libzip code")
+TEST_CASE("GetLastWarningResult Test")
 {
-  int zipCode = 18;
-  std::string msg = ErrorHandler::GetErrorMessage(zipCode);
-  CHECK(msg.find("Invalid argument") != std::string::npos);
+  ErrorManager& manager = ErrorManager::GetInstance();
+
+  manager.SetResult(E_DEFAULT_VALUE_USED);
+
+  CHECK(manager.GetLastWarningResult() == E_DEFAULT_VALUE_USED);
 }
 
-TEST_CASE("Get error message for libuv code")
+TEST_CASE("GetLastFatalResult Test")
 {
-  int uvCode = UV_EINVAL;
-  std::string msg = ErrorHandler::GetErrorMessage(uvCode);
-  CHECK(msg.find("invalid") != std::string::npos);
+  ErrorManager& manager = ErrorManager::GetInstance();
+
+  manager.SetResult(E_INVALID_ARGUMENT);
+
+  CHECK(manager.GetLastFatalResult() == E_INVALID_ARGUMENT);
 }
 
-TEST_CASE("Print error message functions")
+TEST_CASE("GetBuffer Test")
 {
-  ErrorHandler eh;
-  eh.SetLastError(E_FILE_OPEN_FAIL);
-  CHECK(eh.PrintLastErrorMessage() > 0);
-  CHECK(eh.PrintfLastErrorMessage("Last error: %s\n") > 0);
+  ErrorManager& manager = ErrorManager::GetInstance();
+
+  manager.SetResult(E_INVALID_ARGUMENT);
+
+  auto buffer = manager.GetBuffer();
+
+  CHECK_FALSE(buffer.empty());
 }
 
 SLXIO_ABI_NAMESPACE_END
-};

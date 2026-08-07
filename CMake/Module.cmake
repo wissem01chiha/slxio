@@ -225,7 +225,9 @@ function(add_module)
     endif()
   endif()
 
-  if(MOD_MODULE_ENABLE_TESTS AND MOD_MODULE_TEST_DEPENDS)
+  # fixed issue with building tests even MODULE_TEST_DEPENDS is evaluated
+  # to empty this was disable standlone tests from beeing compiled
+  if(MOD_MODULE_ENABLE_TESTS)
 
     enable_testing()
     foreach(test_source IN LISTS MOD_MODULE_TEST_SOURCES)
@@ -241,20 +243,29 @@ function(add_module)
           PRIVATE ${module_includes})
       endif()
 
-      foreach(test_depends IN LISTS MOD_MODULE_TEST_DEPENDS)
-        if(TARGET ${test_depends})
-          get_target_property(test_depends_includes ${test_depends} INCLUDE_DIRECTORIES)
-          if(test_depends_includes)
-            target_include_directories(${TARGET_NAME}${test_source_name} 
-            PRIVATE ${test_depends_includes})
+      if(NOT MODULE_TEST_DEPENDS)
+        foreach(test_depends IN LISTS MOD_MODULE_TEST_DEPENDS)
+          if(TARGET ${test_depends})
+            get_target_property(test_depends_includes ${test_depends} INCLUDE_DIRECTORIES)
+            if(test_depends_includes)
+              target_include_directories(${TARGET_NAME}${test_source_name} 
+              PRIVATE ${test_depends_includes})
+            endif()
           endif()
-        endif()
-      endforeach()
+        endforeach()
+      endif()
 
-      target_link_libraries(
-        ${TARGET_NAME}${test_source_name}
-        PRIVATE ${MOD_MODULE_TEST_DEPENDS}
-        PUBLIC ${TARGET_NAME})
+      if(NOT MODULE_TEST_DEPENDS)
+        target_link_libraries(
+          ${TARGET_NAME}${test_source_name}
+          PRIVATE ${MOD_MODULE_TEST_DEPENDS}
+          PUBLIC ${TARGET_NAME})
+      else()
+          target_link_libraries(
+            ${TARGET_NAME}${test_source_name}
+            PUBLIC ${TARGET_NAME})
+      endif()
+
       add_test(NAME ${TARGET_NAME}${test_source_name} COMMAND
         ${TARGET_NAME}${test_source_name}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
