@@ -8,12 +8,10 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT StateSpace final
-{
+class SLXIO_APIEXPORT StateSpace final {
 public:
   /** Default Constructor */
   StateSpace();
@@ -32,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // STATESPACE_H

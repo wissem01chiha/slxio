@@ -73,8 +73,7 @@ EVEN IF APPLE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * Set the name of the application (the mac os x way)
  * @param name the name of the application
  */
-static void setAppName(const char* name)
-{
+static void setAppName(const char *name) {
   char a[32];
   pid_t id = getpid();
   sprintf(a, "APP_NAME_%ld", (long)id);
@@ -88,8 +87,7 @@ static void setAppName(const char* name)
  * realmain
  * @return the result of the operation (0 if OK ...)
  */
-static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
-{
+static int launchMacOSXEnv(ScilabEngineInfo *_pSEI) {
 
 #undef JVM_DETECTION
 #ifdef JVM_DETECTION
@@ -118,79 +116,62 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
     // Look for the JavaVM bundle using its identifier
     JavaVMBundle = CFBundleGetBundleWithIdentifier(CFSTR("com.apple.JavaVM"));
 
-    if (JavaVMBundle != NULL)
-    {
+    if (JavaVMBundle != NULL) {
       // Get a path for the JavaVM bundle
       JavaVMBundleURL = CFBundleCopyBundleURL(JavaVMBundle);
       CFRelease(JavaVMBundle);
 
-      if (JavaVMBundleURL != NULL)
-      {
+      if (JavaVMBundleURL != NULL) {
         // Append to the path the Versions Component
         JavaVMBundlerVersionsDirURL = CFURLCreateCopyAppendingPathComponent(
-          kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"), true);
+            kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"), true);
         CFRelease(JavaVMBundleURL);
 
-        if (JavaVMBundlerVersionsDirURL != NULL)
-        {
+        if (JavaVMBundlerVersionsDirURL != NULL) {
           // Append to the path the target JVM's Version
           TargetJavaVM = CFURLCreateCopyAppendingPathComponent(
-            kCFAllocatorDefault, JavaVMBundlerVersionsDirURL, targetJVM, true);
+              kCFAllocatorDefault, JavaVMBundlerVersionsDirURL, targetJVM,
+              true);
           CFRelease(JavaVMBundlerVersionsDirURL);
-          if (TargetJavaVM != NULL)
-          {
-            if (CFURLGetFileSystemRepresentation(
-                  TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
-            {
+          if (TargetJavaVM != NULL) {
+            if (CFURLGetFileSystemRepresentation(TargetJavaVM, true,
+                                                 pathToTargetJVM, PATH_MAX)) {
               // Check to see if the directory, or a sym link for the target JVM
               // directory exists, and if so set the environment variable
               // JAVA_JVM_VERSION to the target JVM.
-              if (stat((char*)pathToTargetJVM, &sbuf) == 0)
-              {
+              if (stat((char *)pathToTargetJVM, &sbuf) == 0) {
                 // Ok, the directory exists, so now we need to set the
                 // environment var JAVA_JVM_VERSION to the CFSTR targetJVM We
                 // can reuse the pathToTargetJVM buffer to set the environement
                 // var.
-                if (CFStringGetCString(targetJVM, (char*)pathToTargetJVM, PATH_MAX,
-                      kCFStringEncodingUTF8))
-                {
-                  setenv("JAVA_JVM_VERSION", (char*)pathToTargetJVM, 1);
+                if (CFStringGetCString(targetJVM, (char *)pathToTargetJVM,
+                                       PATH_MAX, kCFStringEncodingUTF8)) {
+                  setenv("JAVA_JVM_VERSION", (char *)pathToTargetJVM, 1);
                   ret = 0;
+                } else {
+                  fprintf(stderr,
+                          "Could not get the path to the target JVM.\n");
                 }
-                else
-                {
-                  fprintf(stderr, "Could not get the path to the target JVM.\n");
-                }
-              }
-              else
-              {
+              } else {
                 fprintf(stderr, "Error checking symlink for the target jvm.\n");
               }
-            }
-            else
-            {
-              fprintf(stderr,
-                "Error getting file system representation for bundle url.\n");
+            } else {
+              fprintf(
+                  stderr,
+                  "Error getting file system representation for bundle url.\n");
               CFRelease(TargetJavaVM);
             }
+          } else {
+            fprintf(stderr,
+                    "Error appending version component to bundle url.\n");
           }
-          else
-          {
-            fprintf(stderr, "Error appending version component to bundle url.\n");
-          }
-        }
-        else
-        {
+        } else {
           fprintf(stderr, "Error appending path component to bundle url.\n");
         }
-      }
-      else
-      {
+      } else {
         fprintf(stderr, "Error copying bundle url.\n");
       }
-    }
-    else
-    {
+    } else {
       fprintf(stderr, "Error: cant find bundle: com.apple.JavaVM.\n");
     }
   }
@@ -209,8 +190,7 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
   /* End of the workaround */
 #endif
 
-  if (ret == 0)
-  {
+  if (ret == 0) {
     StartScilabEngine(_pSEI);
     ret = RunScilabEngine(_pSEI);
     StopScilabEngine(_pSEI);
@@ -223,13 +203,12 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
 /* call back for dummy source used to make sure the CFRunLoop doesn't exit right
  * away */
 /* This callback is called when the source has fired. */
-static void sourceCallBack(void* info) {}
+static void sourceCallBack(void *info) {}
 
 /* Specific wrapper for mac os X which is going to call realmin in a specific
  * thread. Takes the same args as realmain
  */
-int initMacOSXEnv(ScilabEngineInfo* _pSEI)
-{
+int initMacOSXEnv(ScilabEngineInfo *_pSEI) {
   CFRunLoopSourceContext sourceContext;
   /* Start the thread that runs the VM. */
   pthread_t vmthread;
@@ -239,10 +218,8 @@ int initMacOSXEnv(ScilabEngineInfo* _pSEI)
   struct rlimit limit;
   size_t stack_size = 0;
   int rc = getrlimit(RLIMIT_STACK, &limit);
-  if (rc == 0)
-  {
-    if (limit.rlim_cur != 0LL)
-    {
+  if (rc == 0) {
+    if (limit.rlim_cur != 0LL) {
       stack_size = (size_t)limit.rlim_cur;
     }
   }
@@ -250,8 +227,7 @@ int initMacOSXEnv(ScilabEngineInfo* _pSEI)
   pthread_attr_init(&thread_attr);
   pthread_attr_setscope(&thread_attr, PTHREAD_SCOPE_SYSTEM);
   pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_DETACHED);
-  if (stack_size > 0)
-  {
+  if (stack_size > 0) {
     pthread_attr_setstacksize(&thread_attr, stack_size);
   }
 

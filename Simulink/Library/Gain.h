@@ -8,12 +8,10 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Gain final
-{
+class SLXIO_APIEXPORT Gain final {
 public:
   /** Default Constructor */
   Gain();
@@ -32,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // GAIN_H

@@ -10,16 +10,14 @@
 #include "SimulinkParserBase.h"
 #include "StateflowBlock.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief SimulinkStateflowBlock Parser class.
  */
 class StateflowBlockParser final
-  : public SimulinkParserBase<xmlNodePtr, StateflowBlock>
-{
+    : public SimulinkParserBase<xmlNodePtr, StateflowBlock> {
 public:
   StateflowBlockParser() = default;
   HError setInputData(const xmlNodePtr data) override;
@@ -28,6 +26,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // STATEFLOWBLOCKPARSER_H

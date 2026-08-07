@@ -9,16 +9,14 @@
 #include "CorePCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Version
  * @brief Provides access to the library version information.
  */
-class SLXIO_APIEXPORT Version final
-{
+class SLXIO_APIEXPORT Version final {
 public:
   Version() = default;
 
@@ -44,6 +42,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // VERSION_H

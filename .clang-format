@@ -1,21 +1,3 @@
-BasedOnStyle: Mozilla
-AlignAfterOpenBracket: DontAlign
-AlignOperands: false
-AlwaysBreakAfterReturnType: None
-AlwaysBreakAfterDefinitionReturnType: None
-BreakBeforeBraces: Allman
-BinPackArguments: true
-BinPackParameters: true
-ColumnLimit: 85
-SpaceAfterTemplateKeyword: true
-Standard: c++17
-StatementMacros:
-- DefineScopedHandle
-- DefineToNumeric
-- EXECUTE_METHOD
-- ParticleTracerSetMacro
-- PyObject_HEAD
-- PyObject_VAR_HEAD
-- SCALAR_FUNC
-- STANDARD_OPERATION_DEFINITION
-- STANDARD_OPERATION_FLOAT_OVERRIDE
+BasedOnStyle: LLVM
+ColumnLimit: 80
+Standard: c++14

@@ -9,8 +9,7 @@
 #include "PlatformTypes.h"
 #include "SystemPCH.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Archive;
@@ -19,8 +18,7 @@ class Archive;
  * @class ArchiveManager
  * @brief Manages a collection of Archive objects.
  */
-class SLXIO_APIEXPORT ArchiveManager final
-{
+class SLXIO_APIEXPORT ArchiveManager final {
 public:
   /** Default Constructor */
   ArchiveManager();
@@ -29,46 +27,46 @@ public:
   ~ArchiveManager() = default;
 
   /** Deleted copy constructor. */
-  ArchiveManager(const ArchiveManager&) = delete;
+  ArchiveManager(const ArchiveManager &) = delete;
 
   /** Deleted copy assignment operator. */
-  ArchiveManager& operator=(const ArchiveManager&) = delete;
+  ArchiveManager &operator=(const ArchiveManager &) = delete;
 
   /** Deleted move constructor. */
-  ArchiveManager(ArchiveManager&& other) = delete;
+  ArchiveManager(ArchiveManager &&other) = delete;
 
   /** Deleted move assignment operator. */
-  ArchiveManager& operator=(ArchiveManager&& other) = delete;
+  ArchiveManager &operator=(ArchiveManager &&other) = delete;
 
   /** Construct a FileManager with an initial set of files. */
   ArchiveManager(std::vector<std::shared_ptr<Archive>> archives);
 
   /** Get the unique Id of an archive by its name. */
-  SIdentifier GetArchiveId(const std::string& archivename) const;
+  SId GetArchiveId(const std::string &archivename) const;
 
   /** Get the maximum archive Id currently in use. */
-  SIdentifier GetArchiveMaxId() const;
+  SId GetArchiveMaxId() const;
 
   /** Find the first available free archive Id. */
-  SIdentifier GetFirstFreeArchiveId();
+  SId GetFirstFreeArchiveId();
 
   /** Retrieve an archive by its Id. */
-  std::shared_ptr<Archive> GetArchive(SIdentifier id) const;
+  std::shared_ptr<Archive> GetArchive(SId id) const;
 
   /** Check if an archive with the given name is opened. */
-  bool IsArchiveOpened(const std::string& archivename) const;
+  bool IsArchiveOpened(const std::string &archivename) const;
 
   /** Add a new archive to the manager. */
   HError Add(std::shared_ptr<Archive> archive);
 
   /** Remove an archive by its Id. */
-  HError Remove(const SIdentifier id);
+  HError Remove(const SId id);
 
 private:
   std::vector<std::shared_ptr<Archive>> ArchiveBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ARCHIVEMANAGER_H

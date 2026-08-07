@@ -8,20 +8,18 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base Conainer for Simulink Hardware Configuration
-class SLXIO_APIEXPORT SimulinkHardware final
-{
+class SLXIO_APIEXPORT SimulinkHardware final {
 public:
   SimulinkHardware() = default;
   ~SimulinkHardware() = default;
 
-  const char* DisabledProps;
-  const char* Description;
-  const char* Components;
+  const char *DisabledProps;
+  const char *Description;
+  const char *Components;
   UInt16 ProdBitPerChar;
   UInt16 ProdBitPerShort;
   UInt16 ProdBitPeruint16;
@@ -32,14 +30,14 @@ public:
   UInt16 ProdBitPerPouint16er;
   UInt16 ProdBitPerSizeT;
   UInt16 ProdBitPerPtrDiffT;
-  const char* ProdLargestAtomicuint16eger;
-  const char* ProdLargestAtomicFloat;
-  const char* Produint16DivRoundTo;
-  const char* ProdEndianess;
+  const char *ProdLargestAtomicuint16eger;
+  const char *ProdLargestAtomicFloat;
+  const char *Produint16DivRoundTo;
+  const char *ProdEndianess;
   UInt16 ProdWordSize;
-  const char* ProdShiftRightuint16Arith;
-  const char* ProdLongLongMode;
-  const char* ProdHWDeviceType;
+  const char *ProdShiftRightuint16Arith;
+  const char *ProdLongLongMode;
+  const char *ProdHWDeviceType;
   UInt16 TargetBitPerChar;
   UInt16 TargetBitPerShort;
   UInt16 TargetBitPeruint16;
@@ -50,24 +48,24 @@ public:
   UInt16 TargetBitPerPouint16er;
   UInt16 TargetBitPerSizeT;
   UInt16 TargetBitPerPtrDiffT;
-  const char* TargetLargestAtomicuint16eger;
-  const char* TargetLargestAtomicFloat;
-  const char* TargetShiftRightuint16Arith;
-  const char* TargetLongLongMode;
-  const char* Targetuint16DivRoundTo;
-  const char* TargetEndianess;
+  const char *TargetLargestAtomicuint16eger;
+  const char *TargetLargestAtomicFloat;
+  const char *TargetShiftRightuint16Arith;
+  const char *TargetLongLongMode;
+  const char *Targetuint16DivRoundTo;
+  const char *TargetEndianess;
   UInt16 TargetWordSize;
   UInt16 TargetPreprocMaxBitsSuint16;
   UInt16 TargetPreprocMaxBitsUuint16;
-  const char* TargetHWDeviceType;
-  const char* TargetUnknown;
-  const char* ProdEqTarget;
-  const char* UseEmbeddedCoderFeatures;
-  const char* UseSimulinkCoderFeatures;
-  const char* HardwareBoardFeatureSet;
+  const char *TargetHWDeviceType;
+  const char *TargetUnknown;
+  const char *ProdEqTarget;
+  const char *UseEmbeddedCoderFeatures;
+  const char *UseSimulinkCoderFeatures;
+  const char *HardwareBoardFeatureSet;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKHARDWARE_H

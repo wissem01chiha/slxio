@@ -11,8 +11,7 @@
 #include "SimulinkElementBase.h"
 #include "SimulinkPortType.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkLine;
@@ -23,23 +22,22 @@ class SimulinkBlock;
  * @class SimulinkPort
  * @brief Base class for Simulink ports.
  */
-class SLXIO_APIEXPORT SimulinkPort : public SimulinkElementBase
-{
+class SLXIO_APIEXPORT SimulinkPort : public SimulinkElementBase {
 public:
   /** Default constructor.*/
   SimulinkPort();
 
-  SimulinkPort* New() const override;
+  SimulinkPort *New() const override;
 
   SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
   SimulinkPortType GetPortType();
 
   /** Accesses a child element by index with bound checking */
-  std::shared_ptr<SimulinkElementBase> at(IdType index) override;
+  std::shared_ptr<SimulinkElementBase> at(SId index) override;
 
   /** Access specified element */
-  std::shared_ptr<SimulinkElementBase> operator[](IdType index) override;
+  std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
 
   /** Returns the number of child elements. */
   UInt32 Size() const override;
@@ -51,25 +49,25 @@ public:
   void Clear() override;
 
   /** Inserts a new child element. */
-  HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Insert(const std::shared_ptr<SimulinkElementBase> &element) override;
 
   /** Erases a child element by identifier. */
-  HError Erase(const IdType& id) override;
+  HError Erase(const SId &id) override;
 
   /** Erases a child element by reference. */
-  HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+  HError Erase(const std::shared_ptr<SimulinkElementBase> &element) override;
 
   /** Finds a child element by identifier. */
-  std::shared_ptr<SimulinkElementBase> Find(const IdType& id) override;
+  std::shared_ptr<SimulinkElementBase> Find(const SId &id) override;
 
   /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const IdType& id) const override;
+  bool Contains(const SId &id) const override;
 
   /** Returns the generic type of this element. */
   SimulinkElementType GetType() const override;
 
   /** Returns the unique identifier of this element. */
-  IdType GetId() const override;
+  SId GetId() const override;
 
   /** Returns a string representation of this element. */
   std::string ToString() const override;
@@ -88,14 +86,17 @@ public:
 
   /** Return a pointer to a given parameter by name, if not
    * found a or the blcok has not paramters an empty parameter returned. */
-  std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
+  std::shared_ptr<SimulinkParameterBase>
+  GetParameter(std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  HError SetParameter(
-    std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
+  HError
+  SetParameter(std::string name,
+               std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
-  HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+  HError
+  AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Get the parent block of this port.*/
   std::shared_ptr<SimulinkBlock> GetBlock();
@@ -104,20 +105,20 @@ public:
   std::vector<std::shared_ptr<SimulinkLine>> GetLines();
 
   /** Get a specific line by its Id */
-  std::shared_ptr<SimulinkLine> GetLine(const IdType& lineId);
+  std::shared_ptr<SimulinkLine> GetLine(const SId &lineId);
 
   /** Return the class internal logger object*/
-  Logger& GetLogger();
+  Logger &GetLogger();
 
 private:
-  Logger& logger;
-  IdType BlockId;
+  Logger &logger;
+  SId BlockId;
   SimulinkPortType PortType;
   std::shared_ptr<SimulinkBlock> PortBlock;
   std::vector<std::shared_ptr<SimulinkLine>> PortLines;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKPORT_H

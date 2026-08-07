@@ -18,8 +18,7 @@
 #include "CallScilabBridge.hxx"
 /*--------------------------------------------------------------------------*/
 using namespace org_scilab_modules_gui_bridge;
-BOOL PromptToHome(void)
-{
+BOOL PromptToHome(void) {
   CallScilabBridge::toHome(getScilabJavaVM());
   return TRUE;
 }

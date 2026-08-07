@@ -22,15 +22,12 @@
 #include "prompt.h"
 #include "sci_malloc.h"
 /*--------------------------------------------------------------------------*/
-char* getCmdLine(void)
-{
-  const char* tmp = GetTemporaryPrompt();
+char *getCmdLine(void) {
+  const char *tmp = GetTemporaryPrompt();
   if (tmp[0] != 0) /* Input function is used */
   {
     return TerminalGetString(tmp);
-  }
-  else
-  {
+  } else {
     return TerminalGetString(GetCurrentPrompt());
   }
 }

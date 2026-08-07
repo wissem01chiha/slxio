@@ -1,8 +1,7 @@
 #include "SimulinkParserBase.h"
 #include "slxDoctest.h"
 
-class TestParserFixture
-{
+class TestParserFixture {
 public:
 private:
 };

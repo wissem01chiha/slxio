@@ -10,11 +10,10 @@
 
 #include <vector>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKPARAMETERCOMPLEX_H

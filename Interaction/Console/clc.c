@@ -27,18 +27,15 @@
 #include "others/clrscr_nw.h"
 #endif
 /*--------------------------------------------------------------------------*/
-BOOL clc(int nblines)
-{
+BOOL clc(int nblines) {
   BOOL bOK = FALSE;
-  if (getScilabMode() != SCILAB_STD)
-  {
+  if (getScilabMode() != SCILAB_STD) {
     /* console C */
-    if (nblines != -1)
-    {
+    if (nblines != -1) {
 #ifdef _MSC_VER
       clrscrPart_nw(nblines);
       if (getPromptMode() !=
-        2) /* Add extra newline for other modes besides mode 2 */
+          2) /* Add extra newline for other modes besides mode 2 */
       {
         printf("\n");
       }
@@ -48,33 +45,24 @@ BOOL clc(int nblines)
                                    up for extra 1 line */
       {
         printf("\033[%dA\033[J\033[A", nblines + 1);
-      }
-      else
-      {
+      } else {
         printf("\033[%dA\033[J", nblines + 1);
       }
       bOK = TRUE;
 #endif
-    }
-    else
-    {
+    } else {
       clrscr_nw();
       bOK = TRUE;
     }
-  }
-  else
-  {
+  } else {
     /* Java Console*/
     if (nblines == -1) /* Clear the whole console window */
     {
       bOK = ClearConsole();
-    }
-    else if (nblines >= 0) /* Clear a part of the console window */
+    } else if (nblines >= 0) /* Clear a part of the console window */
     {
       bOK = ClearConsolePart(nblines);
-    }
-    else
-    {
+    } else {
       /* error */
       bOK = FALSE;
     }

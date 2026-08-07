@@ -1,16 +1,11 @@
 #include "SimulinkDataType.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkDataType toSimulinkDataType(bool)
-{
-  return SimulinkDataType::Boolean;
-}
+SimulinkDataType toSimulinkDataType(bool) { return SimulinkDataType::Boolean; }
 
-SimulinkDataType toSimulinkDataType(Float32)
-{
+SimulinkDataType toSimulinkDataType(Float32) {
 #ifdef USE_FLOAT16
   return SimulinkDataType::Half;
 #elif defined(USE_FLOAT32)
@@ -24,68 +19,52 @@ SimulinkDataType toSimulinkDataType(Float32)
 #endif
 }
 
-SimulinkDataType toSimulinkDataType(UInt8)
-{
-  return SimulinkDataType::UInt8;
-}
-SimulinkDataType toSimulinkDataType(UInt16)
-{
-  return SimulinkDataType::UInt16;
-}
-SimulinkDataType toSimulinkDataType(UInt32)
-{
-  return SimulinkDataType::UInt32;
-}
-SimulinkDataType toSimulinkDataType(UInt64)
-{
-  return SimulinkDataType::UInt64;
-}
+SimulinkDataType toSimulinkDataType(UInt8) { return SimulinkDataType::UInt8; }
+SimulinkDataType toSimulinkDataType(UInt16) { return SimulinkDataType::UInt16; }
+SimulinkDataType toSimulinkDataType(UInt32) { return SimulinkDataType::UInt32; }
+SimulinkDataType toSimulinkDataType(UInt64) { return SimulinkDataType::UInt64; }
 
-SimulinkDataType toSimulinkDataType(const std::string&)
-{
+SimulinkDataType toSimulinkDataType(const std::string &) {
   return SimulinkDataType::String;
 }
 
-SimulinkDataType toSimulinkDataType(const char* cstr)
-{
+SimulinkDataType toSimulinkDataType(const char *cstr) {
   std::string str(cstr);
   return toSimulinkDataType(str);
 }
 
-const char* toChar(SimulinkDataType sldt)
-{
-  switch (sldt)
-  {
-    case SimulinkDataType::Auto:
-      return "auto";
-    case SimulinkDataType::Double:
-      return "double";
-    case SimulinkDataType::Single:
-      return "single";
-    case SimulinkDataType::Half:
-      return "half";
-    case SimulinkDataType::Int8:
-      return "int8";
-    case SimulinkDataType::UInt8:
-      return "uint8";
-    case SimulinkDataType::Int16:
-      return "int16";
-    case SimulinkDataType::UInt16:
-      return "UInt16";
-    case SimulinkDataType::Int32:
-      return "int32";
-    case SimulinkDataType::UInt32:
-      return "uint32";
-    case SimulinkDataType::UInt64:
-      return "uint64";
-    case SimulinkDataType::Boolean:
-      return "boolean";
-    case SimulinkDataType::String:
-      return "string";
-    default:
-      return "";
+const char *toChar(SimulinkDataType sldt) {
+  switch (sldt) {
+  case SimulinkDataType::Auto:
+    return "auto";
+  case SimulinkDataType::Double:
+    return "double";
+  case SimulinkDataType::Single:
+    return "single";
+  case SimulinkDataType::Half:
+    return "half";
+  case SimulinkDataType::Int8:
+    return "int8";
+  case SimulinkDataType::UInt8:
+    return "uint8";
+  case SimulinkDataType::Int16:
+    return "int16";
+  case SimulinkDataType::UInt16:
+    return "UInt16";
+  case SimulinkDataType::Int32:
+    return "int32";
+  case SimulinkDataType::UInt32:
+    return "uint32";
+  case SimulinkDataType::UInt64:
+    return "uint64";
+  case SimulinkDataType::Boolean:
+    return "boolean";
+  case SimulinkDataType::String:
+    return "string";
+  default:
+    return "";
   }
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

@@ -5,10 +5,9 @@
 #include "slxCxxopts.h"
 #include <iostream>
 
-void banner()
-{
+void banner() {
   std::cout <<
-    R"(
+      R"(
    _____ __   _  __ ________
   / ___// /  | |/ //  _/ __ \
   \__ \/ /   |   / / // / / /
@@ -30,14 +29,12 @@ void banner()
             << "\n\n";
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char *argv[]) {
   banner();
   cxxopts::Options options("SLXIO");
   options.add_options()("h,help", "Show help");
   auto result = options.parse(argc, argv);
-  if (result.count("help"))
-  {
+  if (result.count("help")) {
     std::cout << options.help() << std::endl;
     return 0;
   }

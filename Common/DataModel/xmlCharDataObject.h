@@ -9,26 +9,24 @@
 #include "DataObject.h"
 #include "Libxml2.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT xmlCharDataObject : public DataObject
-{
+class SLXIO_APIEXPORT xmlCharDataObject : public DataObject {
 public:
-  xmlCharDataObject* New() override;
+  xmlCharDataObject *New() override;
   bool Empty() override;
-  bool operator==(const DataObject&) override;
-  void* GetImplDataObject() const override;
+  bool operator==(const DataObject &) override;
+  void *GetImplDataObject() const override;
   std::string ToString() const override;
 
   xmlCharDataObject();
 
 private:
-  xmlChar* ImplDataObject;
+  xmlChar *ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // XMLCHARDATAOBJECT

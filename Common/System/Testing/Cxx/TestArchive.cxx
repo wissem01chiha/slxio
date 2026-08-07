@@ -8,15 +8,12 @@
 #include <fstream>
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class ArchiveTestFixture
-{
+class ArchiveTestFixture {
 public:
-  ArchiveTestFixture()
-  {
+  ArchiveTestFixture() {
 
     auto d = DirectoryService::GetWorkingDirectory(&lastError);
     tempDirPath = d.GetDirectoryPath() + PATH_SEP + "ArchiveTestTmp" + PATH_SEP;
@@ -24,11 +21,10 @@ public:
     DirectoryService::CreateDirectoryStructure(tempDirPath, &lastError);
   }
 
-  std::string GetAssetFilePath(const char* filename)
-  {
+  std::string GetAssetFilePath(const char *filename) {
     static char FilePath[512];
     snprintf(FilePath, sizeof(FilePath), "%s/Common/System/Testing/Data/%s",
-      SLXIO_ROOT_DIR, filename);
+             SLXIO_ROOT_DIR, filename);
     return std::string(FilePath);
   }
 
@@ -41,8 +37,7 @@ private:
   std::string tempDirPath = "";
 };
 
-TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling")
-{
+TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling") {
   File f(GetAssetFilePath("TestAsset1.zip"));
   Archive archive(f);
   archive.SetArchiveExtension("zip");
@@ -51,16 +46,14 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling")
   CHECK(std::string(archive.GetArchiveExtension()) == "zip");
 }
 
-TEST_CASE_FIXTURE(ArchiveTestFixture, "Set Archive Directory")
-{
+TEST_CASE_FIXTURE(ArchiveTestFixture, "Set Archive Directory") {
   Archive archive;
   Directory dir(GetArchiveTestDirTmp());
   archive.SetArchiveDirectory(dir);
   CHECK(archive.GetArchiveDirectory().Exist());
 }
 
-TEST_CASE_FIXTURE(ArchiveTestFixture, "Add File to Archive")
-{
+TEST_CASE_FIXTURE(ArchiveTestFixture, "Add File to Archive") {
   std::string newfilePath = GetArchiveTestDirTmp() + "/dummy.txt";
   {
     std::ofstream ofs(newfilePath);
@@ -81,8 +74,7 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Add File to Archive")
   CHECK(rc == E_OK);
 }
 
-TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
-{
+TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive") {
   File f(GetAssetFilePath("Asset2.zip"));
   Archive archive(f);
   archive.SetArchiveDirectory(Directory(GetArchiveTestDirTmp()));
@@ -91,4 +83,4 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Extract Archive")
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

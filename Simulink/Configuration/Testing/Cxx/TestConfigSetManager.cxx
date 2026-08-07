@@ -2,20 +2,17 @@
 #include "SimulinkConfigSetManager.h"
 #include "slxDoctest.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("AddConfigurationSetTest")
-{
+TEST_CASE("AddConfigurationSetTest") {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
   HError status = manager.AddElement(configSet);
   CHECK(status == E_OK);
 }
 
-TEST_CASE("RemoveConfigurationSetTest")
-{
+TEST_CASE("RemoveConfigurationSetTest") {
   SimulinkConfigSetManager manager;
   auto configSet = std::make_shared<SimulinkConfigSet>();
   manager.AddElement(configSet);
@@ -23,8 +20,7 @@ TEST_CASE("RemoveConfigurationSetTest")
   CHECK(status == E_OK);
 }
 
-TEST_CASE("GetActiveConfigurationSetTest")
-{
+TEST_CASE("GetActiveConfigurationSetTest") {
   SimulinkConfigSetManager manager;
   auto configSet1 = std::make_shared<SimulinkConfigSet>();
   auto configSet2 = std::make_shared<SimulinkConfigSet>();
@@ -34,9 +30,10 @@ TEST_CASE("GetActiveConfigurationSetTest")
 
   configSet1->Activate();
 
-  std::shared_ptr<SimulinkConfigSet> activeConfig = manager.getActiveConfiguration();
+  std::shared_ptr<SimulinkConfigSet> activeConfig =
+      manager.getActiveConfiguration();
   CHECK(activeConfig == configSet1);
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

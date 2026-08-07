@@ -2,15 +2,14 @@
 #include "ErrorLogMessage.h"
 #include "ErrorTypes.h"
 #include "Loguru.h"
-#include "SyncLogger.h"
+#include "Logger.h"
 
 using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("SyncLogger SetAndGetLogLevel")
-{
-  SyncLogger logger;
+TEST_CASE("Logger SetAndGetLogLevel") {
+  Logger logger;
   logger.SetLogLevel(LogLevelType::LOG_INFO);
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
 
@@ -18,17 +17,15 @@ TEST_CASE("SyncLogger SetAndGetLogLevel")
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_DEBUG);
 }
 
-TEST_CASE("SyncLogger LogSingleErrorMessage")
-{
-  SyncLogger logger;
+TEST_CASE("Logger LogSingleErrorMessage") {
+  Logger logger;
   ErrorLogMessage msg(E_OK);
 
   CHECK_NOTHROW(logger.Log(msg));
 }
 
-TEST_CASE("SyncLogger LogCombinedErrorMessage")
-{
-  SyncLogger logger;
+TEST_CASE("Logger LogCombinedErrorMessage") {
+  Logger logger;
   logger.Init();
   logger.SetLogLevel(LogLevelType::LOG_WARN);
 

@@ -17,8 +17,7 @@
 #include "TermPosition.h"
 #include <Windows.h>
 /*--------------------------------------------------------------------------*/
-void clrscrPart_nw(int nblines)
-{
+void clrscrPart_nw(int nblines) {
   COORD coord;
   DWORD written;
   CONSOLE_SCREEN_BUFFER_INFO info;
@@ -31,7 +30,8 @@ void clrscrPart_nw(int nblines)
   TermSetPosition(0, coord.Y - 1);
 
   FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ',
-    info.dwSize.X * (info.dwSize.Y - coord.Y - 1), coord, &written);
+                             info.dwSize.X * (info.dwSize.Y - coord.Y - 1),
+                             coord, &written);
 
   TermSetPosition(0, coord.Y - 1);
 }

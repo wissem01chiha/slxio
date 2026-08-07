@@ -7,24 +7,16 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class DataSourceType
  * @brief
  */
-class SLXIO_APIEXPORT DataSourceType
-{
+class SLXIO_APIEXPORT DataSourceType {
 public:
-  enum class Type
-  {
-    ModelFile,
-    MatFile,
-    MatlabCode,
-    MatlabFile
-  };
+  enum class Type { ModelFile, MatFile, MatlabCode, MatlabFile };
 
   /**
    * Constructor
@@ -34,18 +26,18 @@ public:
   /**
    * Convert a C-string to a DataSourceType enum.
    */
-  static Type FromString(const char* sldt);
+  static Type FromString(const char *sldt);
 
   /**
    * Convert a DataSourceType enum to its string representation.
    */
-  static const char* ToString(Type type);
+  static const char *ToString(Type type);
 
 private:
   Type InternalDataSourceType;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // DataSourceType_h

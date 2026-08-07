@@ -15,17 +15,17 @@ jobs:
             cxx-compiler: clang++
             cmake-args:
 
-          - name: MacOS AppleClang C++17
+          - name: MacOS AppleClang C++14
             os: macos-latest
             compiler: clang
             cxx-compiler: clang++
-            cmake-args: -DCMAKE_CXX_STANDARD=17
+            cmake-args: -DCMAKE_CXX_STANDARD=14
 
-          - name: MacOS GNU GCC Homebrew C++17
+          - name: MacOS GNU GCC Homebrew C++14
             os: macos-latest
             compiler: gcc-13
             cxx-compiler: g++-13
-            cmake-args: -DCMAKE_CXX_STANDARD=17
+            cmake-args: -DCMAKE_CXX_STANDARD=14
             packages: gcc@13
 
     steps:

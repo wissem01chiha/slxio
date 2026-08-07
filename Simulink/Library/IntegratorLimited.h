@@ -8,12 +8,10 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntegratorLimited final
-{
+class SLXIO_APIEXPORT IntegratorLimited final {
 public:
   /** Default Constructor */
   IntegratorLimited();
@@ -32,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // INTEGRATORLIMITED_H

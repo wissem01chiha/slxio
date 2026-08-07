@@ -8,15 +8,13 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Base Class for MATLAB editor settings
  */
-class SLXIO_APIEXPORT EditorSettings final
-{
+class SLXIO_APIEXPORT EditorSettings final {
 public:
   EditorSettings() = default;
   ~EditorSettings() = default;
@@ -44,8 +42,8 @@ public:
   bool getMultiThreadCoSim();
 
 private:
-  const char* LibraryLinkDisplay;
-  const char* PortDataTypeDisplayFormat;
+  const char *LibraryLinkDisplay;
+  const char *PortDataTypeDisplayFormat;
   bool SampleTimeColors;
   bool SampleTimeAnnotations;
   bool WideLines;
@@ -83,6 +81,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // EDITORSETTINGS_H

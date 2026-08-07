@@ -26,19 +26,17 @@
 #include <wchar.h>
 
 /* Get the prev command line */
-int previousCmd(wchar_t** commandLine, unsigned int* cursorLocation)
-{
+int previousCmd(wchar_t **commandLine, unsigned int *cursorLocation) {
   int promptSize;
 
   int newSizeToAlloc = 0;
 
-  char* multiByteHistory = NULL;
+  char *multiByteHistory = NULL;
 
-  wchar_t* wideHistory = NULL;
+  wchar_t *wideHistory = NULL;
 
   /* Go the beginning of the current edited line then clearn the screen from */
-  while (*cursorLocation)
-  {
+  while (*cursorLocation) {
     gotoLeft(*commandLine, cursorLocation);
   }
   setStringCapacities("up");
@@ -47,17 +45,14 @@ int previousCmd(wchar_t** commandLine, unsigned int* cursorLocation)
   /* Get the new command line then display it */
   promptSize = printPrompt(WRITE_PROMPT);
   multiByteHistory = getPreviousLineInScilabHistory();
-  if (multiByteHistory != NULL)
-  {
+  if (multiByteHistory != NULL) {
     wideHistory = to_wide_string(multiByteHistory);
-    if (wideHistory != NULL)
-    {
+    if (wideHistory != NULL) {
       /* Allocation by a multiple of 1024 */
       newSizeToAlloc = wcslen(wideHistory) / 1024 + 1;
       FREE(*commandLine);
       *commandLine = MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
-      if (*commandLine != NULL)
-      {
+      if (*commandLine != NULL) {
         wcscpy(*commandLine, wideHistory);
       }
     }
@@ -72,27 +67,24 @@ int previousCmd(wchar_t** commandLine, unsigned int* cursorLocation)
    *
    * Must be done, else the cursor disappear and bug.
    */
-  if (!((*cursorLocation + promptSize) % tgetnum("co")))
-  {
+  if (!((*cursorLocation + promptSize) % tgetnum("co"))) {
     setStringCapacities("do");
   }
   return 0;
 }
 
 /* Get the next command line */
-int nextCmd(wchar_t** commandLine, unsigned int* cursorLocation)
-{
+int nextCmd(wchar_t **commandLine, unsigned int *cursorLocation) {
   int promptSize;
 
   int newSizeToAlloc = 0;
 
-  char* multiByteHistory = NULL;
+  char *multiByteHistory = NULL;
 
-  wchar_t* wideHistory = NULL;
+  wchar_t *wideHistory = NULL;
 
   /* Go the beginning of the current edited line then clearn the screen from */
-  while (*cursorLocation)
-  {
+  while (*cursorLocation) {
     gotoLeft(*commandLine, cursorLocation);
   }
   setStringCapacities("up");
@@ -101,17 +93,14 @@ int nextCmd(wchar_t** commandLine, unsigned int* cursorLocation)
   /* Get the new command line then display it */
   promptSize = printPrompt(WRITE_PROMPT);
   multiByteHistory = getNextLineInScilabHistory();
-  if (multiByteHistory != NULL)
-  {
+  if (multiByteHistory != NULL) {
     wideHistory = to_wide_string(multiByteHistory);
-    if (wideHistory != NULL)
-    {
+    if (wideHistory != NULL) {
       /* Allocation by a multiple of 1024 */
       newSizeToAlloc = wcslen(wideHistory) / 1024 + 1;
       FREE(*commandLine);
       *commandLine = MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
-      if (*commandLine != NULL)
-      {
+      if (*commandLine != NULL) {
         wcscpy(*commandLine, wideHistory);
       }
     }
@@ -126,8 +115,7 @@ int nextCmd(wchar_t** commandLine, unsigned int* cursorLocation)
    *
    * Must be done, else the cursor disappear and bug.
    */
-  if (!((*cursorLocation + promptSize) % tgetnum("co")))
-  {
+  if (!((*cursorLocation + promptSize) % tgetnum("co"))) {
     setStringCapacities("do");
   }
   return 0;

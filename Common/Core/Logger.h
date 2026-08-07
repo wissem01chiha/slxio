@@ -1,37 +1,36 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SYNCLOGGER_H
-#define SYNCLOGGER_H
+#ifndef LOGGER_H
+#define LOGGER_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CorePCH.h"
 #include "ILogger.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class SyncLogger
- * @brief Provides a synchronous implementation of the ILogger interface.
+ * @class Logger
+ * @brief Provides a synchronous implementation of the 
+ * ILogger interface.
  */
-class SyncLogger final : public ILogger
-{
+class Logger final : public ILogger {
 public:
-  SyncLogger() = default;
+  Logger() = default;
   void Init() override;
-  void Log(const ILogMessage& msg) override;
+  void Log(const ILogMessage &msg) override;
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;
-  ~SyncLogger(){};
+  ~Logger(){};
 
 private:
   LogLevelType m_level;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
-#endif // SYNCLOGGER_H
+#endif // LOGGER_H

@@ -8,8 +8,7 @@
 #ifndef SIMULINKLIBRRAYBASE_H
 #define SIMULINKLIBRRAYBASE_H
 
-class SLXIO_APIEXPORT SimulinkLibraryBase
-{
+class SLXIO_APIEXPORT SimulinkLibraryBase {
 private:
 public:
   SimulinkLibraryBase();

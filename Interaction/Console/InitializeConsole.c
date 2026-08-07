@@ -22,12 +22,10 @@
 #include "scilines.h"
 #include <stdio.h>
 /*--------------------------------------------------------------------------*/
-BOOL InitializeConsole(void)
-{
+BOOL InitializeConsole(void) {
   BOOL bRes = TRUE;
   scilinesdefault();
-  if (getScilabMode() == SCILAB_STD)
-  {
+  if (getScilabMode() == SCILAB_STD) {
     bRes = ScilabLinesUpdate();
   }
   return bRes;

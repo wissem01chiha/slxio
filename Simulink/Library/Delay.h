@@ -6,12 +6,10 @@
 #include "PlatformTypes.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Delay final
-{
+class SLXIO_APIEXPORT Delay final {
 public:
   /** Default Constructor */
   Delay();
@@ -30,4 +28,4 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

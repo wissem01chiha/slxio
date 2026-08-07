@@ -7,16 +7,14 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ExecutableRunner
  * @brief
  */
-class SLXIO_APIEXPORT ExecutableRunner final
-{
+class SLXIO_APIEXPORT ExecutableRunner final {
 public:
   ExecutableRunner();
   ~ExecutableRunner();
@@ -25,6 +23,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // EXECUTABLERUNNER_H

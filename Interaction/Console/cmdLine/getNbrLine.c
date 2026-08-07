@@ -20,8 +20,7 @@
 #include <wctype.h>
 
 /* Get the number of line the string passed take in the window */
-int getNbrLine(wchar_t* string)
-{
+int getNbrLine(wchar_t *string) {
   int promptSize = 0;
 
   int sizeString = 0;

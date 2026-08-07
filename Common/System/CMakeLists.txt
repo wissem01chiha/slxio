@@ -27,11 +27,19 @@ add_module(
     Directory.cxx
     Archive.cxx
     ArchiveManager.cxx
+    FileManager.cxx
+    DirectoryManager.cxx
+    ExecutableManager.cxx
+    DirectoryService.cxx
   MODULE_HEADERS
     File.h 
     Directory.h
     Archive.h
     ArchiveManager.h
+    FileManager.h
+    DirectoryManager.h
+    ExecutableManager.h
+    DirectoryService.h
   MODULE_PCH_HEADERS
     SystemPCH.h
   MODULE_SOURCES

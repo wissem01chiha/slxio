@@ -8,12 +8,10 @@
 #include "PlatformTypes.h"
 #include "SimulinkLibraryBase.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Constant final
-{
+class SLXIO_APIEXPORT Constant final {
 public:
   /** Default Constructor */
   Constant() = default;
@@ -32,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // CONSTANT_H

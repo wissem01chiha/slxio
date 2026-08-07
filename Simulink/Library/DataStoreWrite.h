@@ -9,12 +9,10 @@
 #include "PlatformTypes.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataStoreWrite final
-{
+class SLXIO_APIEXPORT DataStoreWrite final {
 public:
   /** Default Constructor */
   DataStoreWrite();
@@ -23,7 +21,7 @@ public:
   std::string GetName() const;
 
   /** Set the data store object name */
-  void SetName(std::string& name);
+  void SetName(std::string &name);
 
   /** Default Destructor */
   ~DataStoreWrite();
@@ -33,6 +31,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // DATASTOREWRITE_H

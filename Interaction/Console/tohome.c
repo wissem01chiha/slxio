@@ -21,12 +21,10 @@
 #include "others/clrscr_nw.h"
 #endif
 /*--------------------------------------------------------------------------*/
-BOOL tohome(void)
-{
+BOOL tohome(void) {
   BOOL bOK = FALSE;
 
-  if (getScilabMode() != SCILAB_STD)
-  {
+  if (getScilabMode() != SCILAB_STD) {
 #ifdef _MSC_VER
     /* not on Windows */
     bOK = FALSE;
@@ -34,9 +32,7 @@ BOOL tohome(void)
     clrscr_nw();
     bOK = TRUE;
 #endif
-  }
-  else
-  {
+  } else {
     /* Java Console */
     bOK = PromptToHome();
   }

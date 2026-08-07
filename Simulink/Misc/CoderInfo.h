@@ -8,8 +8,7 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -21,25 +20,24 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @note StorageClass= 'Custom' not supported along with the
  * CustomAttribute
  */
-class SLXIO_APIEXPORT CoderInfo final
-{
+class SLXIO_APIEXPORT CoderInfo final {
 public:
   CoderInfo();
   ~CoderInfo() = default;
-  const char* getStorageClass() const;
+  const char *getStorageClass() const;
   bool isTunable();
-  const char* getIdentifier();
+  const char *getIdentifier();
   UInt32 getAlignment();
 
 private:
-  const char* Identifier;
+  const char *Identifier;
   UInt32 Alignment;
-  const char* StorageClass;
+  const char *StorageClass;
   bool Tunable = true;
   bool ExportedGlobal = false;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // CODERINFO_H

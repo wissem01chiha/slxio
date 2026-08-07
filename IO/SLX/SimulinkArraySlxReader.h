@@ -10,8 +10,7 @@
 #include "SimulinkArray.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -23,8 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class SLXIO_APIEXPORT SimulinkArrayParser final
-  : public SimulinkParserBase<xmlNodePtr, SimulinkArray>
-{
+    : public SimulinkParserBase<xmlNodePtr, SimulinkArray> {
 public:
   SimulinkArrayParser() = default;
   HError setInputData(const xmlNodePtr data) override;
@@ -33,6 +31,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKARRAYPARSER_H

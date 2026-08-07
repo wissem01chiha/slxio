@@ -29,8 +29,8 @@
 #include <windows.h>
 /*--------------------------------------------------------------------------*/
 static int CURRENT_MAX_LINE_SIZE = bsiz;
-static char* cur_line = NULL; /* current contents of the line */
-static const char* currentPrompt = NULL;
+static char *cur_line = NULL; /* current contents of the line */
+static const char *currentPrompt = NULL;
 static int cur_pos = 0; /* current position of the cursor */
 static int max_pos = 0;
 /*--------------------------------------------------------------------------*/
@@ -39,180 +39,138 @@ static void backSpace(void);
 static void initializeLineBuffer(void);
 static void reallocLineBuffer(void);
 /*--------------------------------------------------------------------------*/
-static void initializeLineBuffer(void)
-{
+static void initializeLineBuffer(void) {
   int i = 0;
-  if (cur_line)
-  {
+  if (cur_line) {
     FREE(cur_line);
     cur_line = NULL;
   }
-  cur_line = (char*)MALLOC(sizeof(char) * CURRENT_MAX_LINE_SIZE);
-  if (cur_line)
-  {
-    for (i = 0; i < CURRENT_MAX_LINE_SIZE; i++)
-    {
+  cur_line = (char *)MALLOC(sizeof(char) * CURRENT_MAX_LINE_SIZE);
+  if (cur_line) {
+    for (i = 0; i < CURRENT_MAX_LINE_SIZE; i++) {
       cur_line[i] = '\0';
     }
-  }
-  else
-  {
+  } else {
     fprintf(stderr, "Error: Buffer line allocation.\n");
     exit(1);
   }
 }
 /*--------------------------------------------------------------------------*/
-static void reallocLineBuffer(void)
-{
-  if (cur_line)
-  {
-    if (max_pos > (CURRENT_MAX_LINE_SIZE - 1))
-    {
-      char* ptrBackup = cur_line;
+static void reallocLineBuffer(void) {
+  if (cur_line) {
+    if (max_pos > (CURRENT_MAX_LINE_SIZE - 1)) {
+      char *ptrBackup = cur_line;
       int newCURRENT_MAX_LINE_SIZE = CURRENT_MAX_LINE_SIZE * 2;
-      cur_line = (char*)REALLOC(cur_line, sizeof(char) * (newCURRENT_MAX_LINE_SIZE));
-      if (cur_line == NULL)
-      {
+      cur_line =
+          (char *)REALLOC(cur_line, sizeof(char) * (newCURRENT_MAX_LINE_SIZE));
+      if (cur_line == NULL) {
         cur_line = ptrBackup;
-      }
-      else
-      {
+      } else {
         CURRENT_MAX_LINE_SIZE = newCURRENT_MAX_LINE_SIZE;
       }
     }
-  }
-  else
-  {
+  } else {
     initializeLineBuffer();
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveBeginningLine(void)
-{
+void moveBeginningLine(void) {
   reallocLineBuffer();
-  while (cur_pos > 0)
-  {
+  while (cur_pos > 0) {
     cur_pos -= 1;
     backSpace();
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveEndLine(void)
-{
+void moveEndLine(void) {
   reallocLineBuffer();
-  while (cur_pos < max_pos)
-  {
+  while (cur_pos < max_pos) {
     TerminalPutc(cur_line[cur_pos]);
     cur_pos += 1;
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveBackSingleChar(void)
-{
+void moveBackSingleChar(void) {
   reallocLineBuffer();
-  if (cur_pos > 0)
-  {
+  if (cur_pos > 0) {
     cur_pos -= 1;
     backSpace();
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveForwardSingleChar(void)
-{
+void moveForwardSingleChar(void) {
   reallocLineBuffer();
-  if (cur_pos < max_pos)
-  {
+  if (cur_pos < max_pos) {
     TerminalPutc(cur_line[cur_pos]);
     cur_pos += 1;
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveBackSingleWord(void)
-{
+void moveBackSingleWord(void) {
   reallocLineBuffer();
-  while ((cur_pos > 0) && (isspace(cur_line[cur_pos - 1])))
-  {
+  while ((cur_pos > 0) && (isspace(cur_line[cur_pos - 1]))) {
     cur_pos -= 1;
     backSpace();
   }
-  while ((cur_pos > 0) && (!isspace(cur_line[cur_pos - 1])))
-  {
+  while ((cur_pos > 0) && (!isspace(cur_line[cur_pos - 1]))) {
     cur_pos -= 1;
     backSpace();
   }
   refreshLine();
 }
 /*--------------------------------------------------------------------------*/
-void moveForwardSingleWord(void)
-{
+void moveForwardSingleWord(void) {
   reallocLineBuffer();
-  while (!isspace(cur_line[cur_pos]) && (cur_pos < max_pos))
-  {
+  while (!isspace(cur_line[cur_pos]) && (cur_pos < max_pos)) {
     TerminalPutc(cur_line[cur_pos]);
     cur_pos++;
   }
-  while (isspace(cur_line[cur_pos]) && (cur_pos < max_pos))
-  {
+  while (isspace(cur_line[cur_pos]) && (cur_pos < max_pos)) {
     TerminalPutc(cur_line[cur_pos]);
     cur_pos++;
   }
   refreshLine();
 }
 /*--------------------------------------------------------------------------*/
-void killCurrentPositionToEndLine(void)
-{
+void killCurrentPositionToEndLine(void) {
   int i = 0;
   reallocLineBuffer();
-  for (i = cur_pos; i < max_pos; i++)
-  {
+  for (i = cur_pos; i < max_pos; i++) {
     cur_line[i] = '\0';
   }
-  for (i = cur_pos; i < max_pos; i++)
-  {
+  for (i = cur_pos; i < max_pos; i++) {
     TerminalPutc(VK_SPACE);
   }
-  for (i = cur_pos; i < max_pos; i++)
-  {
+  for (i = cur_pos; i < max_pos; i++) {
     backSpace();
   }
   max_pos = cur_pos;
 }
 /*--------------------------------------------------------------------------*/
-void deletePreviousChar(void)
-{
+void deletePreviousChar(void) {
   reallocLineBuffer();
-  if (cur_pos > 0)
-  {
+  if (cur_pos > 0) {
     int i = 0;
     cur_pos -= 1;
     backSpace();
-    for (i = cur_pos; i < max_pos; i++)
-    {
+    for (i = cur_pos; i < max_pos; i++) {
       cur_line[i] = cur_line[i + 1];
     }
     max_pos -= 1;
     refreshLine();
-  }
-  else
-  {
+  } else {
     TerminalBeep();
   }
 }
 /*--------------------------------------------------------------------------*/
-void deleteCurrentChar(void)
-{
+void deleteCurrentChar(void) {
   reallocLineBuffer();
-  if (max_pos == 0)
-  {
+  if (max_pos == 0) {
     StorePrioritaryCommand("exit");
-  }
-  else
-  {
-    if (cur_pos < max_pos)
-    {
+  } else {
+    if (cur_pos < max_pos) {
       int i = 0;
-      for (i = cur_pos; i < max_pos; i++)
-      {
+      for (i = cur_pos; i < max_pos; i++) {
         cur_line[i] = cur_line[i + 1];
       }
       max_pos -= 1;
@@ -221,23 +179,20 @@ void deleteCurrentChar(void)
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveBackHistory(void)
-{
-  char* newline = NULL;
+void moveBackHistory(void) {
+  char *newline = NULL;
 
   reallocLineBuffer();
 
   cur_line[max_pos + 1] = '\0';
-  if (cur_line[0] == '\0')
-  {
+  if (cur_line[0] == '\0') {
     resetSearchedTokenInScilabHistory();
     setSearchedTokenInScilabHistory(NULL);
   }
 
   newline = getPreviousLineInScilabHistory();
 
-  if (newline)
-  {
+  if (newline) {
     clearCurrentLine();
     copyLine(newline);
     FREE(newline);
@@ -245,23 +200,20 @@ void moveBackHistory(void)
   }
 }
 /*--------------------------------------------------------------------------*/
-void moveForwardHistory(void)
-{
-  char* newline = NULL;
+void moveForwardHistory(void) {
+  char *newline = NULL;
 
   reallocLineBuffer();
 
   cur_line[max_pos + 1] = '\0';
-  if (cur_line[0] == '\0')
-  {
+  if (cur_line[0] == '\0') {
     resetSearchedTokenInScilabHistory();
     setSearchedTokenInScilabHistory(NULL);
   }
 
   newline = getNextLineInScilabHistory();
 
-  if (newline)
-  {
+  if (newline) {
     clearCurrentLine();
     copyLine(newline);
     FREE(newline);
@@ -269,47 +221,39 @@ void moveForwardHistory(void)
   }
 }
 /*--------------------------------------------------------------------------*/
-void redrawLine(void)
-{
+void redrawLine(void) {
   int i = 0;
-  char* line = getCurrentLine();
+  char *line = getCurrentLine();
 
   displayPrompt();
-  for (i = max_pos; i > cur_pos; i--)
-  {
+  for (i = max_pos; i > cur_pos; i--) {
     backSpace();
   }
-  if (line)
-  {
+  if (line) {
     copyLine(line);
     FREE(line);
     line = NULL;
   }
 }
 /*--------------------------------------------------------------------------*/
-void copyLine(char* line)
-{
+void copyLine(char *line) {
   reallocLineBuffer();
 
-  if (line)
-  {
+  if (line) {
     TerminalPrintf(line);
     CharToOem(line, cur_line);
     cur_pos = max_pos = (int)strlen(cur_line);
   }
 }
 /*--------------------------------------------------------------------------*/
-void killLastWord(void)
-{
+void killLastWord(void) {
   reallocLineBuffer();
 
-  while ((cur_pos > 0) && (cur_line[cur_pos - 1] == VK_SPACE))
-  {
+  while ((cur_pos > 0) && (cur_line[cur_pos - 1] == VK_SPACE)) {
     cur_pos -= 1;
     backSpace();
   }
-  while ((cur_pos > 0) && (cur_line[cur_pos - 1] != VK_SPACE))
-  {
+  while ((cur_pos > 0) && (cur_line[cur_pos - 1] != VK_SPACE)) {
     cur_pos -= 1;
     backSpace();
   }
@@ -317,8 +261,7 @@ void killLastWord(void)
   killCurrentPositionToEndLine();
 }
 /*--------------------------------------------------------------------------*/
-void newLine(void)
-{
+void newLine(void) {
   reallocLineBuffer();
 
   cur_line[0] = '\0';
@@ -326,15 +269,13 @@ void newLine(void)
   max_pos = 0;
 }
 /*--------------------------------------------------------------------------*/
-void refreshLine(void)
-{
+void refreshLine(void) {
   int i = 0;
 
   reallocLineBuffer();
 
   /* write tail of string */
-  for (i = cur_pos; i < max_pos; i++)
-  {
+  for (i = cur_pos; i < max_pos; i++) {
     TerminalPutc(cur_line[i]);
   }
 
@@ -342,27 +283,23 @@ void refreshLine(void)
   TerminalPutc(VK_SPACE);
 
   /* backup to original position */
-  for (i = max_pos + 1; i > cur_pos; i--)
-  {
+  for (i = max_pos + 1; i > cur_pos; i--) {
     backSpace();
   }
 }
 /*--------------------------------------------------------------------------*/
-void clearCurrentLine(void)
-{
+void clearCurrentLine(void) {
   int i = 0;
 
   reallocLineBuffer();
 
-  for (i = 0; i < max_pos; i++)
-  {
+  for (i = 0; i < max_pos; i++) {
     cur_line[i] = '\0';
   }
 
   moveBeginningLine();
 
-  for (i = 0; i < max_pos; i++)
-  {
+  for (i = 0; i < max_pos; i++) {
     TerminalPutc(VK_SPACE);
   }
 
@@ -372,66 +309,51 @@ void clearCurrentLine(void)
   newLine();
 }
 /*--------------------------------------------------------------------------*/
-static void backSpace(void)
-{
+static void backSpace(void) {
   int X = 0, Y = 0;
   reallocLineBuffer();
 
   TermGetPosition(&X, &Y);
-  if ((X - 1) < 0)
-  {
+  if ((X - 1) < 0) {
     X = getXConsoleScreenSize();
     Y = Y - 1;
     TermSetPosition(X, Y);
-  }
-  else
-  {
+  } else {
     TerminalPutc(VK_BACK);
   }
 }
 /*--------------------------------------------------------------------------*/
-static const char* getCurrentPrompt(void)
-{
-  return currentPrompt;
-}
+static const char *getCurrentPrompt(void) { return currentPrompt; }
 /*--------------------------------------------------------------------------*/
-void setCurrentPrompt(const char* prompt)
-{
-  currentPrompt = prompt;
-}
+void setCurrentPrompt(const char *prompt) { currentPrompt = prompt; }
 /*--------------------------------------------------------------------------*/
-void displayPrompt(void)
-{
+void displayPrompt(void) {
   int X = 0, Y = 0;
 
   /* check position */
   TermGetPosition(&X, &Y);
-  if (X)
-  {
+  if (X) {
     TerminalPrintf("\n");
   }
 
   TerminalPrintf(getCurrentPrompt());
 }
 /*--------------------------------------------------------------------------*/
-char* getCurrentLine(void)
-{
-  char* line = NULL;
+char *getCurrentLine(void) {
+  char *line = NULL;
 
   reallocLineBuffer();
 
   cur_line[max_pos + 1] = '\0';
   line = os_strdup(cur_line);
-  if (line)
-  {
+  if (line) {
     OemToChar(cur_line, line);
   }
   return line;
 }
 /*--------------------------------------------------------------------------*/
-char* getLineBeforeCaret(void)
-{
-  char* line = NULL;
+char *getLineBeforeCaret(void) {
+  char *line = NULL;
 
   reallocLineBuffer();
   line = os_strdup(cur_line);
@@ -439,30 +361,24 @@ char* getLineBeforeCaret(void)
   return line;
 }
 /*--------------------------------------------------------------------------*/
-char* getLineAfterCaret(void)
-{
-  char* line = NULL;
+char *getLineAfterCaret(void) {
+  char *line = NULL;
 
   reallocLineBuffer();
-  if (cur_pos != max_pos)
-  {
+  if (cur_pos != max_pos) {
     line = os_strdup(&cur_line[cur_pos]);
-  }
-  else
-  {
+  } else {
     line = os_strdup("");
   }
   return line;
 }
 /*--------------------------------------------------------------------------*/
-void addCharacterCurrentLine(unsigned char ch)
-{
+void addCharacterCurrentLine(unsigned char ch) {
   int i = 0;
 
   reallocLineBuffer();
 
-  for (i = max_pos; i > cur_pos; i--)
-  {
+  for (i = max_pos; i > cur_pos; i--) {
     cur_line[i] = cur_line[i - 1];
   }
 
@@ -473,26 +389,19 @@ void addCharacterCurrentLine(unsigned char ch)
 
   setSearchedTokenInScilabHistory(cur_line);
 
-  if (cur_pos < max_pos)
-  {
+  if (cur_pos < max_pos) {
     refreshLine();
   }
 }
 /*--------------------------------------------------------------------------*/
-BOOL isHistorySearch(void)
-{
-  return (cur_line[0] == '!');
-}
+BOOL isHistorySearch(void) { return (cur_line[0] == '!'); }
 /*--------------------------------------------------------------------------*/
-void putLineSearchedHistory(void)
-{
-  char* line = NULL;
-  char* token = getCurrentLine();
+void putLineSearchedHistory(void) {
+  char *line = NULL;
+  char *token = getCurrentLine();
 
-  if (token)
-  {
-    if ((int)strlen(token) > 1)
-    {
+  if (token) {
+    if ((int)strlen(token) > 1) {
       setSearchedTokenInScilabHistory(&token[1]);
       line = getNextLineInScilabHistory();
     }
@@ -502,16 +411,14 @@ void putLineSearchedHistory(void)
 
   clearCurrentLine();
 
-  if (line)
-  {
+  if (line) {
     copyLine(line);
     FREE(line);
     line = NULL;
   }
 }
 /*--------------------------------------------------------------------------*/
-void pasteClipBoard(void)
-{
+void pasteClipBoard(void) {
   HGLOBAL hGMem = NULL;
   LPSTR lpMem; /* Ptr on clipboard */
 
@@ -520,16 +427,14 @@ void pasteClipBoard(void)
   OpenClipboard(NULL);
 
   hGMem = GetClipboardData(typeClipboard);
-  if (hGMem)
-  {
+  if (hGMem) {
 
-    char* CurrentLine = getCurrentLine();
+    char *CurrentLine = getCurrentLine();
 
     lpMem = (LPSTR)GlobalLock(hGMem);
-    if (lpMem)
-    {
-      char* newline =
-        (char*)MALLOC(sizeof(char) * (strlen(CurrentLine) + strlen(lpMem) + 1));
+    if (lpMem) {
+      char *newline = (char *)MALLOC(sizeof(char) *
+                                     (strlen(CurrentLine) + strlen(lpMem) + 1));
       memset(newline, 0x00, strlen(CurrentLine) + strlen(lpMem) + 1);
       strncpy(newline, CurrentLine, cur_pos);
       strcat(newline, lpMem);
@@ -545,10 +450,8 @@ void pasteClipBoard(void)
   CloseClipboard();
 }
 /*--------------------------------------------------------------------------*/
-void finalizeLineBuffer(void)
-{
-  if (cur_line)
-  {
+void finalizeLineBuffer(void) {
+  if (cur_line) {
     FREE(cur_line);
     cur_line = NULL;
   }

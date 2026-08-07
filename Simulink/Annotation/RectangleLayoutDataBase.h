@@ -12,12 +12,12 @@ class Color;
  * @brief Encapsulates all information required for layouting
  * a rectangular element.
  */
-class RectangleLayoutDataBase
-{
+class RectangleLayoutDataBase {
 public:
   RectangleLayoutDataBase();
-  RectangleLayoutDataBase(const RectangleType& position,
-    const Color& foregroundColor, const Color& backgroundColor);
+  RectangleLayoutDataBase(const RectangleType &position,
+                          const Color &foregroundColor,
+                          const Color &backgroundColor);
   virtual ~RectangleLayoutDataBase() = default;
 
 protected:

@@ -13,22 +13,20 @@
 
 class xmlDocDataObject;
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkFileObject
  * @brief DataObject Wrapper for SimulinkFile struct
  */
-class SLXIO_APIEXPORT SimulinkFileObject : public DataObject
-{
+class SLXIO_APIEXPORT SimulinkFileObject : public DataObject {
 public:
-  SimulinkFileObject* New() override;
+  SimulinkFileObject *New() override;
   void Initialize() override;
   UInt32 GetUpdateTime() const override;
-  void* GetImplDataObject() const override;
-  bool operator==(const DataObject&) override;
+  void *GetImplDataObject() const override;
+  bool operator==(const DataObject &) override;
   std::string ToString() const;
   bool Empty() override;
 
@@ -39,6 +37,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKFILEOBJECT_H

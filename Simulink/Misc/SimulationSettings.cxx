@@ -1,25 +1,15 @@
 #include "SimulationSettings.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulationSettings::~SimulationSettings() {}
 
-char* SimulationSettings::GetSolverName()
-{
-  return SolverName;
-}
+char *SimulationSettings::GetSolverName() { return SolverName; }
 
-char* SimulationSettings::GetSolverType()
-{
-  return SolverType;
-}
+char *SimulationSettings::GetSolverType() { return SolverType; }
 
-Float32 SimulationSettings::GetFixedStepSize()
-{
-  return FixedStepSize;
-}
+Float32 SimulationSettings::GetFixedStepSize() { return FixedStepSize; }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

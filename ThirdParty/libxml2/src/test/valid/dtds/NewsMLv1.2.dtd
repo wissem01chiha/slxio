@@ -839,7 +839,7 @@ A displayable headline.
 Identification information for the NewsItem.
 ================================================================================
 -->
-<!ELEMENT Identification (NewsIdentifier, NameLabel?, DateLabel?, Label*)>
+<!ELEMENT Identification (NewSId, NameLabel?, DateLabel?, Label*)>
 <!ATTLIST Identification
 	%localid;
 >
@@ -1067,11 +1067,11 @@ document.
 	%localid;
 >
 <!--
-================================ NewsIdentifier ================================
+================================ NewSId ================================
 A globally unique identifier for a NewsItem.
 ================================================================================
 -->
-<!ELEMENT NewsIdentifier (ProviderId, DateId, NewsItemId, RevisionId, PublicIdentifier)>
+<!ELEMENT NewSId (ProviderId, DateId, NewsItemId, RevisionId, PublicIdentifier)>
 <!--
 =================================== NewsItem ===================================
 A managed set of information representing a point of view, at a given time, on
@@ -1378,15 +1378,15 @@ publication.
 An identifier for the news provider that produced the NewsItem. The
 provider's ID is specified in the element content. This should be an Internet
 domain name that is owned by the provider at the date identified by the DateId
-subelement of the NewsIdentifier.
+subelement of the NewSId.
 
 Example:
-<NewsIdentifier>
+<NewSId>
  <ProviderId>iptc.org</ProviderId>
  <DateId>20001001</DateId>
  <NewsItemId>NewsML version 1.0</NewsItemId>
  <RevisionId>1</RevisionId
-</NewsIdentifier>
+</NewSId>
 
 Because the domain name "iptc.org" was owned on 1 October 2000 by the
 International Press Telecommunications Council (IPTC) and no-one else, it is
@@ -1404,9 +1404,9 @@ NewsItem. This is the NewsML URN, and must be constructed as follows:
 
 urn:newsml:{ProviderId}:{DateId}:{NewsItemId}:{RevisionId}{RevisionId@Update}
 
-where {x} means "the content of the x subelement of the NewsIdentifier" and
+where {x} means "the content of the x subelement of the NewSId" and
 {x@y} means "the value of the y attribute of the x subelement of the
-NewsIdentifier", with the exception that if the Update attribute of the
+NewSId", with the exception that if the Update attribute of the
 RevisionId element has its default value of N, it is omitted from the URN.
 
 Note that the set of characters that can be directly included within a URN

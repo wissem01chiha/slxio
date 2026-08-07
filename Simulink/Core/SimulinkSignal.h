@@ -12,15 +12,13 @@
 #include "SimulinkDataType.h"
 #include <vector>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief A SimulinkSignal Object
  */
-class SLXIO_APIEXPORT SimulinkSignal final
-{
+class SLXIO_APIEXPORT SimulinkSignal final {
 public:
   /**
    * Construct a new SimulinkSignal object.
@@ -45,13 +43,13 @@ public:
   /**
    * Set the data type of the signal from a string (MatWorks API style).
    */
-  HError setDataType(const char* dt);
+  HError setDataType(const char *dt);
 
   /// @brief Set the complexity type of the signal from a string
-  HError setComplexityType(const char* ct);
+  HError setComplexityType(const char *ct);
 
   /// @brief Get the complexity type of the signal
-  const char* getComplexity();
+  const char *getComplexity();
 
   /// @brief Get the dimensions of the signal
   std::vector<UInt16> getDimensions();
@@ -60,16 +58,16 @@ public:
   CoderInfo getCoderInfo();
 
   /// @brief Get the initial value of the signal
-  const char* getInitialValue();
+  const char *getInitialValue();
 
   /// @brief Get the description of the signal
-  const char* getDescription();
+  const char *getDescription();
 
   /// @brief Get the dimensions mode of the signal
-  const char* getDimensionsMode();
+  const char *getDimensionsMode();
 
   /// @brief Get the unit of the signal
-  const char* getUnit();
+  const char *getUnit();
 
   /// @brief Get the sample time values of the signal
   std::vector<Float32> getSampleTime();
@@ -78,14 +76,14 @@ public:
   HError setRange(Float32 min, Float32 max);
 
 private:
-  const char* InitialValue;
+  const char *InitialValue;
   SimulinkDataType DataType;
 
-  const char* Description;
-  const char* Unit;
-  const char* Complexity = "real";
+  const char *Description;
+  const char *Unit;
+  const char *Complexity = "real";
 
-  const char* DimensionsMode;
+  const char *DimensionsMode;
   std::vector<UInt16> Dimensions;
   std::vector<Float32> SampleTime;
 
@@ -96,6 +94,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif /* SIMULINKSIGNAL_H */

@@ -10,13 +10,13 @@
   </NewsEnvelope>
   <NewsItem>
     <Identification>
-      <NewsIdentifier>
+      <NewSId>
         <ProviderId>afp.com</ProviderId>
         <DateId>20011022</DateId>
         <NewsItemId>mmd--deutsch--journal--spo</NewsItemId>
         <RevisionId PreviousRevision="0" Update="N">1</RevisionId>
         <PublicIdentifier>urn:NewsML:afp.com:20011022:mmd--deutsch--journal--spo:1</PublicIdentifier>
-      </NewsIdentifier>
+      </NewSId>
       <NameLabel>HINTERGRUND</NameLabel>
     </Identification>
     <NewsManagement>
@@ -36,7 +36,7 @@
       </DescriptiveMetadata>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>Berliner SPD führt Gespräche mit FDP und Grünen</HeadLine>
+          <HeadLine>Berliner SPD fï¿½hrt Gesprï¿½che mit FDP und Grï¿½nen</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011022154450.sq80bp9h.xml"/>
       </NewsComponent>
@@ -54,31 +54,31 @@
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>Die Lieblingsfarben des Kanzlers sind Rot Gelb Grün</HeadLine>
+          <HeadLine>Die Lieblingsfarben des Kanzlers sind Rot Gelb Grï¿½n</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011022134541.cmmaoim7.xml"/>
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>INFOGRAFIK: Wen wählt Wowereit?</HeadLine>
+          <HeadLine>INFOGRAFIK: Wen wï¿½hlt Wowereit?</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011022122545.hl3z2as6.xml"/>
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>CDU ist auch in kommunalen Rathäusern der Verlierer</HeadLine>
+          <HeadLine>CDU ist auch in kommunalen Rathï¿½usern der Verlierer</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011022120205.b8sykfvu.xml"/>
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>Gutes Abschneiden der PDS hat verschiedene Gründe</HeadLine>
+          <HeadLine>Gutes Abschneiden der PDS hat verschiedene Grï¿½nde</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011022134159.agvne048.xml"/>
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>Ans Regieren hat sich Klaus Wowereit gewöhnt</HeadLine>
+          <HeadLine>Ans Regieren hat sich Klaus Wowereit gewï¿½hnt</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011021161031.1oq7qyub.xml"/>
       </NewsComponent>
@@ -102,7 +102,7 @@
       </NewsComponent>
       <NewsComponent>
         <NewsLines>
-          <HeadLine>Rexrodt - das Stehaufmännchen der Berliner FDP</HeadLine>
+          <HeadLine>Rexrodt - das Stehaufmï¿½nnchen der Berliner FDP</HeadLine>
         </NewsLines>
         <NewsItemRef NewsItem="011021165558.gujrz59m.xml"/>
       </NewsComponent>

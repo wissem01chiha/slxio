@@ -9,12 +9,10 @@
 #include "PlatformTypes.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Integrator final
-{
+class SLXIO_APIEXPORT Integrator final {
 public:
   /** Default Constructor */
   Integrator();
@@ -33,6 +31,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // INTEGRATOR_H

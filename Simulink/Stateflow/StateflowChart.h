@@ -11,8 +11,7 @@
 #include "StateflowNodeBase.h"
 #include <vector>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class StateflowBlock;
@@ -23,11 +22,10 @@ class StateflowMachine;
  * There is a one-to-one association between StateflowBlock
  * and StateflowChart.
  */
-class SLXIO_APIEXPORT StateflowChart final : public StateflowElementBase
-{
+class SLXIO_APIEXPORT StateflowChart final : public StateflowElementBase {
 public:
   StateflowChart() = default;
-  StateflowChart(StateflowChart& origChart) = delete;
+  StateflowChart(StateflowChart &origChart) = delete;
 
   /// @brief Add a StateflowNodeBase object
   HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
@@ -62,10 +60,10 @@ public:
   //}
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  IdType GetId() const override;
+  SId GetId() const override;
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  bool Contains(const IdType& id) const override;
+  bool Contains(const SId &id) const override;
 
 private:
   std::shared_ptr<StateflowBlock> stateflowBlock;
@@ -73,6 +71,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // STATEFLOWCHART_H

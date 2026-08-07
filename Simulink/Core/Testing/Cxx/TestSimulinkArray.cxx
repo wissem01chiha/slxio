@@ -2,12 +2,10 @@
 #include "SimulinkObject.h"
 #include "slxDoctest.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("CopyConstructorTest")
-{
+TEST_CASE("CopyConstructorTest") {
   // std::shared_ptr<SimulinkArray> original =
   // std::make_shared<SimulinkArray>(); auto param =
   // std::make_shared<SimulinkParameter>("5");
@@ -24,8 +22,7 @@ TEST_CASE("CopyConstructorTest")
   // CHECK(copy.GetId() == original->GetId());
 }
 
-TEST_CASE("AddArrayTest")
-{
+TEST_CASE("AddArrayTest") {
 
   // std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   // auto subArray =
@@ -35,8 +32,7 @@ TEST_CASE("AddArrayTest")
   // CHECK(status == E_OK);
 }
 
-TEST_CASE("RemoveArrayTest")
-{
+TEST_CASE("RemoveArrayTest") {
 
   // std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   // auto subArray =
@@ -49,15 +45,13 @@ TEST_CASE("RemoveArrayTest")
   // CHECK(RemoveStatus == E_OK);
 }
 
-TEST_CASE("RemoveNullptrArrayTest")
-{
+TEST_CASE("RemoveNullptrArrayTest") {
   // std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   // HError status = array->RemoveElement(nullptr);
   // CHECK(status == E_PARAMETER_NULL_PTR);
 }
 
-TEST_CASE("RemoveNotElementArrayTest")
-{
+TEST_CASE("RemoveNotElementArrayTest") {
 
   // std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   // auto subArray =
@@ -67,8 +61,7 @@ TEST_CASE("RemoveNotElementArrayTest")
   // CHECK(status == E_OK);
 }
 
-TEST_CASE("ContainsArrayTest")
-{
+TEST_CASE("ContainsArrayTest") {
   // std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
   // auto subObject = std::make_shared<SimulinkObject>(
   //   1, "DataTransfer", "Simulink.GlobalDataTransfer");
@@ -79,4 +72,4 @@ TEST_CASE("ContainsArrayTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

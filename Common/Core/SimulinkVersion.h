@@ -9,8 +9,7 @@
 #include "CorePCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class SimulinkVersionRelease;
@@ -19,8 +18,7 @@ enum class SimulinkVersionRelease;
  * @class SimulinkVersion
  * @brief Provides access to the Simulink version Supported
  */
-class SLXIO_APIEXPORT SimulinkVersion final
-{
+class SLXIO_APIEXPORT SimulinkVersion final {
 public:
   /** Returns the Simulink release year.  */
   static UInt16 Year();
@@ -36,6 +34,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKVERSION_H

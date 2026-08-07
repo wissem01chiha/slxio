@@ -9,8 +9,7 @@
 #include "CorePCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -23,8 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * enabling new message types to be introduced without modifying the
  * logging infrastructure.
  */
-class SLXIO_APIEXPORT ILogMessage
-{
+class SLXIO_APIEXPORT ILogMessage {
 public:
   virtual ~ILogMessage() = default;
 
@@ -34,16 +32,17 @@ public:
   /* Implement specific logic to check whether a message is considered empty */
   virtual bool Empty() const = 0;
 
-  /* Returns the underlaying data type of log message, every implementation should
-  override this, to provide safe type casting and checks */
+  /* Returns the underlaying data type of log message, every implementation
+  should override this, to provide safe type casting and checks */
   virtual DataType GetDataType() const = 0;
 
-  /* Concatenate ILogMessage based object to form a new ILogMessage, Combine *this
-   * with rhs */
-  virtual std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const = 0;
+  /* Concatenate ILogMessage based object to form a new ILogMessage, Combine
+   * *this with rhs */
+  virtual std::unique_ptr<ILogMessage>
+  operator+(const ILogMessage &rhs) const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ILOGMESSAGE_H

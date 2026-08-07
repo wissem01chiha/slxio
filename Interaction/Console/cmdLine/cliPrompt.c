@@ -29,21 +29,16 @@
  * wchar. If Argument pass is WRITE_PROMPT (1), it write prompt (NOWRITE_PROMPT
  * (-1) not to write prompt) Function return size of the prompt.
  */
-int printPrompt(int token)
-{
+int printPrompt(int token) {
   /* Retrieve the prompt. It can be different if the pause mode is enabled */
-  const char* prompt = GetCurrentPrompt();
-  const char* tmpPrompt = GetTemporaryPrompt();
+  const char *prompt = GetCurrentPrompt();
+  const char *tmpPrompt = GetTemporaryPrompt();
 
-  if (token == WRITE_PROMPT)
-  {
+  if (token == WRITE_PROMPT) {
     setCharDisplay(DISP_DEFAULT);
-    if (tmpPrompt == '\0')
-    {
+    if (tmpPrompt == '\0') {
       printf("%s", tmpPrompt);
-    }
-    else
-    {
+    } else {
       printf("%s", prompt);
     }
     setCharDisplay(DISP_LAST_SET);

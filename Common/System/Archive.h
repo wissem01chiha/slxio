@@ -9,17 +9,16 @@
 #include "Directory.h"
 #include "File.h"
 #include "PlatformTypes.h"
+#include "SystemPCH.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Archive
  * @brief A singleton class for managing archived file format
  */
-class SLXIO_APIEXPORT Archive final
-{
+class SLXIO_APIEXPORT Archive final {
 public:
   /** Default Constructor */
   Archive();
@@ -28,13 +27,13 @@ public:
   Archive(File file);
 
   /** Create a Reference to an instance */
-  Archive* New();
+  Archive *New();
 
   /** Get the default archive file extension. */
   std::string GetArchiveExtension() const;
 
   /** Set the file extension. */
-  void SetArchiveExtension(const char* ext);
+  void SetArchiveExtension(const char *ext);
 
   /* Set the archive directory folder is not given a temporary one will be used
    * as default */
@@ -61,6 +60,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ARCHIVE_H

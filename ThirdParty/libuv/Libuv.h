@@ -4,6 +4,10 @@
 #ifndef LIBUV_H
 #define LIBUV_H
 
+#if defined(__APPLE__) && defined(__MACH__)
+#include "port.h"
+#endif
+
 #ifdef USE_EXTERNAL_LIBUV
 #include <uv.h>
 #else

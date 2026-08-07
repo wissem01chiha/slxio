@@ -9,6 +9,6 @@
  * @param a string to display
  * @return total number of characters written is returned.
  */
-CONSOLE_IMPEXP int ConsolePrintf(const char* line);
+CONSOLE_IMPEXP int ConsolePrintf(const char *line);
 /*--------------------------------------------------------------------------*/
 #endif /* __CONSOLEPRINTF_H__ */

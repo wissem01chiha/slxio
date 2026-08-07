@@ -10,14 +10,12 @@
 #include "SimulinkParserBase.h"
 #include "SimulinkSignal.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkSignal data object
 class SLXIO_APIEXPORT SimulinkSignalParser final
-  : public SimulinkParserBase<xmlNodePtr, SimulinkSignal>
-{
+    : public SimulinkParserBase<xmlNodePtr, SimulinkSignal> {
 public:
   SimulinkSignalParser() = default;
   HError setInputData(const xmlNodePtr data) override;
@@ -26,6 +24,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKSIGNALPARSER_H

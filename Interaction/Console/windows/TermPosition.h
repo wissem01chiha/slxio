@@ -29,7 +29,7 @@ void TermSetPosition(int x, int y);
  * @param[out] x
  * @param[out] y
  */
-void TermGetPosition(int* x, int* y);
+void TermGetPosition(int *x, int *y);
 
 #endif /* __TERMPOSITION_H__ */
 /*--------------------------------------------------------------------------*/

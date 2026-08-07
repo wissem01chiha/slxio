@@ -3,5 +3,5 @@
 
 #include "ResultMap.h"
 
-#define E_CONFIG_ALREADY_ACTIVE                                                     \
+#define E_CONFIG_ALREADY_ACTIVE                                                \
   SLXIO_HERROR(SLXIO_PROJECT, SIMULINK, CONFIGURATION, SLXIO_INFO, 27U)

@@ -2,21 +2,17 @@
 #include "SimulinkObjectParser.h"
 #include "SlxParameter.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
-{
-  if (!data)
-  {
+HError SimulinkConfigSetParser::setInputData(const xmlNodePtr data) {
+  if (!data) {
     // l.log(Logger::V_ERROR,
       "SimulinkConfigSetParser::null data node pointer received");
       return E_PARAMETER_NULL_PTR;
   }
 
-  if (xmlStrcmp(data->name, BAD_CAST SlxParameter::SECTION_ConfigSet) != 0)
-  {
+  if (xmlStrcmp(data->name, BAD_CAST SlxParameter::SECTION_ConfigSet) != 0) {
     // l.log(Logger::V_ERROR,
       "SimulinkConfigSetParser::setInputData failed: expected node "
       "<ConfigSet>, but got <%s>",
@@ -27,27 +23,23 @@ HError SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
   return E_OK;
 }
 
-HError SimulinkConfigSetParser::parse()
-{
+HError SimulinkConfigSetParser::parse() {
   for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
-       nodePtr_ = nodePtr_->next)
-  {
+       nodePtr_ = nodePtr_->next) {
 
     std::unique_ptr<SimulinkObjectParser> objParserPtr =
-      std::make_unique<SimulinkObjectParser>();
+        std::make_unique<SimulinkObjectParser>();
     HError objInputStatus = objParserPtr->setInputData(nodePtr_);
-    if (objInputStatus != E_OK)
-    {
+    if (objInputStatus != E_OK) {
       // l.log(Logger::V_ERROR,
         "SimulinkConfigSetParser:: failed to set input "
         "data for object parser");
         return objInputStatus;
     }
 
-    auto cfgPtr =
-      std::dynamic_pointer_cast<SimulinkConfigSet>(objParserPtr->getOutputData());
-    if (!cfgPtr)
-    {
+    auto cfgPtr = std::dynamic_pointer_cast<SimulinkConfigSet>(
+        objParserPtr->getOutputData());
+    if (!cfgPtr) {
       // l.log(Logger::V_ERROR,
         "SimulinkConfigSetParser:: failed to cast parsed "
         "object to SimulinkConfigSet");
@@ -59,4 +51,4 @@ HError SimulinkConfigSetParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

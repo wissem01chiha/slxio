@@ -14,7 +14,7 @@
  * Function is left when the user press enter.
  * @return command line enter by the user.
  */
-char* getCmdLine(void);
+char *getCmdLine(void);
 
 /**
  * Set a token to know what to do during command line edition.

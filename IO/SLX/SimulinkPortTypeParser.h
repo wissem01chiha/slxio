@@ -11,22 +11,20 @@
 #include "SimulinkPortType.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Base parser for encoded port type strings
 class SLXIO_APIEXPORT SimulinkPortTypeParser final
-  : public SimulinkParserBase<std::string, SimulinkPortType>
-{
+    : public SimulinkParserBase<std::string, SimulinkPortType> {
 public:
   SimulinkPortTypeParser() = default;
   HError setInputData(const std::string data) override;
-  HError setInputData(const char* data);
+  HError setInputData(const char *data);
   HError parse() override;
   ~SimulinkPortTypeParser() = default;
 };
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKPORTTYPEPARSER_H

@@ -1,25 +1,22 @@
 #include "SimulinkConfigSet.h"
 #include "slxDoctest.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("ConstructorTest")
-{
-  std::shared_ptr<SimulinkObject> object =
-    std::make_shared<SimulinkObject>(42, "1.0", "MyObject", "SimulinkConfigSet");
-  SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
+TEST_CASE("ConstructorTest") {
+  std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
+      42, "1.0", "MyObject", "SimulinkConfigSet");
+  SimulinkConfigSet *configCst = new SimulinkConfigSet(object);
   CHECK(strcmp(configCst->GetName().c_str(), "MyObject") == 0);
   CHECK(configCst->GetId() == 42);
   delete configCst;
 }
 
-TEST_CASE("IsActiveTest")
-{
-  std::shared_ptr<SimulinkObject> object =
-    std::make_shared<SimulinkObject>(42, "1.0", "MyObject", "SimulinkConfigSet");
-  SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
+TEST_CASE("IsActiveTest") {
+  std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
+      42, "1.0", "MyObject", "SimulinkConfigSet");
+  SimulinkConfigSet *configCst = new SimulinkConfigSet(object);
   CHECK(configCst->IsActive() == false);
   delete configCst;
 }
@@ -64,12 +61,14 @@ TEST_CASE("IsActiveTest")
 
 // TEST_CASE("GetParameterReturnsEmptyIfNotFound")
 // {
-//   std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(42,
-//   "1.0", "MyObject", "SimulinkConfigSet"); SimulinkConfigSet* configCst = new
-//   SimulinkConfigSet(object); CHECK(strcmp(configCst->GetParameter("NonExistent"),
+//   std::shared_ptr<SimulinkObject> object =
+//   std::make_shared<SimulinkObject>(42, "1.0", "MyObject",
+//   "SimulinkConfigSet"); SimulinkConfigSet* configCst = new
+//   SimulinkConfigSet(object);
+//   CHECK(strcmp(configCst->GetParameter("NonExistent"),
 //   "")
 //   == 0); delete configCst;
 // }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

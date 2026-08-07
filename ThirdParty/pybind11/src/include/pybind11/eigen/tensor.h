@@ -55,7 +55,7 @@ struct eigen_tensor_helper {};
 template <typename Scalar_, int NumIndices_, int Options_, typename IndexType>
 struct eigen_tensor_helper<Eigen::Tensor<Scalar_, NumIndices_, Options_, IndexType>> {
     using Type = Eigen::Tensor<Scalar_, NumIndices_, Options_, IndexType>;
-    using ValidType = void;
+    using ValSId = void;
 
     static Eigen::DSizes<typename Type::Index, Type::NumIndices> get_shape(const Type &f) {
         return f.dimensions();
@@ -89,7 +89,7 @@ template <typename Scalar_, typename std::ptrdiff_t... Indices, int Options_, ty
 struct eigen_tensor_helper<
     Eigen::TensorFixedSize<Scalar_, Eigen::Sizes<Indices...>, Options_, IndexType>> {
     using Type = Eigen::TensorFixedSize<Scalar_, Eigen::Sizes<Indices...>, Options_, IndexType>;
-    using ValidType = void;
+    using ValSId = void;
 
     static constexpr Eigen::DSizes<typename Type::Index, Type::NumIndices>
     get_shape(const Type & /*f*/) {
@@ -168,7 +168,7 @@ Eigen::DSizes<T, size> get_shape_for_array(const array &arr) {
 PYBIND11_WARNING_POP
 
 template <typename Type>
-struct type_caster<Type, typename eigen_tensor_helper<Type>::ValidType> {
+struct type_caster<Type, typename eigen_tensor_helper<Type>::ValSId> {
     static_assert(!std::is_pointer<typename Type::Scalar>::value,
                   PYBIND11_EIGEN_MESSAGE_POINTER_TYPES_ARE_NOT_SUPPORTED);
     using Helper = eigen_tensor_helper<Type>;
@@ -365,7 +365,7 @@ struct get_storage_pointer_type<MapType, void_t<typename MapType::PointerArgType
 
 template <typename Type, int Options>
 struct type_caster<Eigen::TensorMap<Type, Options>,
-                   typename eigen_tensor_helper<remove_cv_t<Type>>::ValidType> {
+                   typename eigen_tensor_helper<remove_cv_t<Type>>::ValSId> {
     static_assert(!std::is_pointer<typename Type::Scalar>::value,
                   PYBIND11_EIGEN_MESSAGE_POINTER_TYPES_ARE_NOT_SUPPORTED);
     using MapType = Eigen::TensorMap<Type, Options>;

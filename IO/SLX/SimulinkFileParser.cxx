@@ -2,27 +2,22 @@
 #include "Logger.h"
 #include "SimulinkContentParser.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkFileParser::setInputData(const File fs)
-{
+HError SimulinkFileParser::setInputData(const File fs) {
   dataObject = fs;
   return E_OK;
 }
 
-HError SimulinkFileParser::parse()
-{
+HError SimulinkFileParser::parse() {
   SimulinkContentParser contentParser;
   HError status = contentParser.setInputData(dataObject);
-  if (status != E_OK)
-  {
+  if (status != E_OK) {
     return status;
   }
   status = contentParser.parse();
-  if (status != E_OK)
-  {
+  if (status != E_OK) {
     return status;
   }
   std::shared_ptr<SimulinkContent> content_ = contentParser.getOutputData();
@@ -31,36 +26,26 @@ HError SimulinkFileParser::parse()
   xmlNodePtr propertiesNodePtr = new xmlNode();
   HError propertieStatus = content_->getPropertiesNodePtr(propertiesNodePtr);
 
-  if (propertieStatus != E_OK)
-  {
+  if (propertieStatus != E_OK) {
     // l.log(Logger::V_ERROR,
       "failed to get properties node pointer from SimulinkContent");
       return propertieStatus;
   }
 
-  for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr; cur = cur->next)
-  {
-    std::string nodeName = (const char*)cur->name;
-    xmlChar* content = xmlNodeGetContent(cur);
-    std::string nodeContent = (const char*)content;
-    if (nodeName == "category")
-    {
+  for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr;
+       cur = cur->next) {
+    std::string nodeName = (const char *)cur->name;
+    xmlChar *content = xmlNodeGetContent(cur);
+    std::string nodeContent = (const char *)content;
+    if (nodeName == "category") {
       ptr->category = nodeContent;
-    }
-    else if (nodeName == "creator")
-    {
+    } else if (nodeName == "creator") {
       ptr->creator = nodeContent;
-    }
-    else if (nodeName == "lastModifiedBy")
-    {
+    } else if (nodeName == "lastModifiedBy") {
       ptr->lastModifiedBy = nodeContent;
-    }
-    else if (nodeName == "revision")
-    {
+    } else if (nodeName == "revision") {
       ptr->revision = nodeContent;
-    }
-    else if (nodeName == "version")
-    {
+    } else if (nodeName == "version") {
       ptr->matlabVersion = nodeContent;
     }
   }
@@ -69,4 +54,4 @@ HError SimulinkFileParser::parse()
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

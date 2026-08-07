@@ -10,8 +10,7 @@
 #include "ILogger.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -19,11 +18,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief A singleton class that manages error and status results across the
  * library.
  */
-class SLXIO_APIEXPORT ErrorManager final
-{
+class SLXIO_APIEXPORT ErrorManager final {
 public:
   /* Retrieves the singleton instance of ErrorManager. */
-  static ErrorManager& GetInstance();
+  static ErrorManager &GetInstance();
 
   /* Change the buffer size if needed.
    * Adjusting the buffer size can have performance implications.
@@ -64,17 +62,17 @@ public:
    * to write trace into the supported logging implementations
    * Note the ErrorManager is not allowed to modify the logger object
    */
-  void SetLogger(const ILogger* logger);
+  void SetLogger(const ILogger *logger);
 
   /**
    * Get the logger sink
    */
-  const ILogger* GetLogger();
+  const ILogger *GetLogger();
 
   /**
-   * Enables logging feature, Logging is disabled by default for performance reasons.
-   * It can be enabled or disabled at runtime using the provided logging control
-   * functions.
+   * Enables logging feature, Logging is disabled by default for performance
+   * reasons. It can be enabled or disabled at runtime using the provided
+   * logging control functions.
    */
   void EnableLogging();
 
@@ -87,7 +85,7 @@ public:
 private:
   static const size_t m_bufferSize = 500;
   std::vector<HError> m_ringBuffer;
-  const ILogger* m_logger = nullptr;
+  const ILogger *m_logger = nullptr;
   bool m_logStatus = false;
   size_t head = 0;
   std::mutex m_logMutex;
@@ -95,6 +93,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ERRORMANAGER_H

@@ -19,8 +19,7 @@
 
 #include <jni.h>
 
-extern "C"
-{
+extern "C" {
 #include "ScilabLinesUpdate.h"
 #include "getScilabJavaVM.h"
 } /* extern "C" */

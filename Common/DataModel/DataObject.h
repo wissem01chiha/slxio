@@ -7,19 +7,16 @@
 #include "AbiNamespaceMacro.h"
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
-#include <string>
+#include "DataModelPCH.h"
+#include "ILogger.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Logger;
-
-class SLXIO_APIEXPORT DataObject
-{
+class SLXIO_APIEXPORT DataObject {
 public:
   /** Create a new instance of the data object */
-  virtual DataObject* New() = 0;
+  virtual DataObject *New() = 0;
 
   /** Reset the data object to its initial state */
   virtual void Initialize();
@@ -31,7 +28,7 @@ public:
   virtual UInt32 GetMemorySize() const;
 
   /** Access the underlying implementation object */
-  virtual void* GetImplDataObject() const = 0;
+  virtual void *GetImplDataObject() const = 0;
 
   /** Return the type identifier of the data */
   virtual std::string ToString() const = 0;
@@ -40,18 +37,23 @@ public:
   virtual bool Empty() = 0;
 
   /** Compare equality with another DataObject */
-  virtual bool operator==(const DataObject&) = 0;
+  virtual bool operator==(const DataObject &) = 0;
+
+  /** Set a logger object for this data object */
+  void SetLogger(const ILogger& logger);
+
+  ILogger& GetLogger();
 
   DataObject();
   virtual ~DataObject() = default;
 
 private:
   // Disable copy and assignment
-  DataObject(const DataObject&) = delete;
-  void operator=(const DataObject&) = delete;
+  DataObject(const DataObject &) = delete;
+  void operator=(const DataObject &) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // DATAOBJECT_H

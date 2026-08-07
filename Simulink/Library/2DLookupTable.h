@@ -8,12 +8,10 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT 2DLookupTable final
-{
+class SLXIO_APIEXPORT 2DLookupTable final {
 public:
   /** Default Constructor */
   2DLookupTable();
@@ -32,6 +30,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // 2DLOOKUPTABLE_H

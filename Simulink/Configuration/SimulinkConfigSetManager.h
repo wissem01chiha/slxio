@@ -11,8 +11,7 @@
 #include <memory>
 #include <vector>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkConfigSet;
@@ -23,17 +22,17 @@ class SimulinkConfigSet;
  * @note This is not a part of Simulink API, but a utility added to slxio
  * to manage multiple configuration sets
  */
-class SLXIO_APIEXPORT SimulinkConfigSetManager final
-{
+class SLXIO_APIEXPORT SimulinkConfigSetManager final {
 public:
   SimulinkConfigSetManager();
   ~SimulinkConfigSetManager() = default;
 
   /// @brief Copy constructor
-  SimulinkConfigSetManager(const SimulinkConfigSetManager&) = delete;
+  SimulinkConfigSetManager(const SimulinkConfigSetManager &) = delete;
 
   /// @brief Assignment operator
-  SimulinkConfigSetManager& operator=(const SimulinkConfigSetManager&) = delete;
+  SimulinkConfigSetManager &
+  operator=(const SimulinkConfigSetManager &) = delete;
 
   /// @brief Adds a configuration set to the manager.
   HError AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
@@ -52,14 +51,14 @@ public:
   std::shared_ptr<SimulinkConfigSet> getActiveConfiguration();
 
   /// @brief Checks if a configuration set exists in the manager.
-  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet>& cfg) const;
+  bool hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet> &cfg) const;
 
 private:
-  Logger& l;
+  Logger &l;
   std::vector<std::shared_ptr<SimulinkConfigSet>> cfgs;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKCONFIGSETMANAGER_H

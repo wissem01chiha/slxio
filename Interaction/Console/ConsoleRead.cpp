@@ -10,12 +10,10 @@
 
 using namespace org_scilab_modules_gui_bridge;
 /*--------------------------------------------------------------------------*/
-static char* line = NULL;
+static char *line = NULL;
 /*--------------------------------------------------------------------------*/
-char* ConsoleRead(void)
-{
-  if (line)
-  {
+char *ConsoleRead(void) {
+  if (line) {
     delete[] line;
     line = NULL;
   }

@@ -1,12 +1,10 @@
 #include "FileManager.h"
 #include "slxDoctest.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class FileManagerTestFixture
-{
+class FileManagerTestFixture {
 public:
   FileManagerTestFixture() {}
   ~FileManagerTestFixture() {}
@@ -14,8 +12,7 @@ public:
 private:
 };
 
-TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test")
-{
+TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test") {
 
   //   File f(TEST_FILE, File::Read);
   //   CHECK(f.isFile() == true);
@@ -23,4 +20,4 @@ TEST_CASE_FIXTURE(FileManagerTestFixture, "File Constructor Test")
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

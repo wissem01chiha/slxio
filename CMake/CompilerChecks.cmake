@@ -11,17 +11,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_VERSION VERSION
   message (FATAL_ERROR "LLVM Clang 7.0 or later is required.")
 endif ()
 
-# On macOS, the minimum supported compiler standard is C++17
-# because the newer macOS 26 SDK introduces breaking changes in system APIs
-# that rely on C++17 features.On other platforms like Linux, 
-# Windows we continue to support C++14.
-if(APPLE AND CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-    set(CMAKE_CXX_STANDARD 17)
-else()
-    if(NOT CMAKE_CXX_STANDARD)
-        set(CMAKE_CXX_STANDARD 14)
-    endif()
+if(NOT CMAKE_CXX_STANDARD)
+    set(CMAKE_CXX_STANDARD 14)
 endif()
-
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS OFF)

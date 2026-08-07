@@ -12,8 +12,7 @@
 #include "ErrorTypes.h"
 #include "ILogMessage.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -22,18 +21,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * a fixed size logging message contain N elments of type T
  */
 template <typename T, size_t N>
-class SLXIO_APIEXPORT ArrayLogMessage : public ILogMessage
-{
+class SLXIO_APIEXPORT ArrayLogMessage : public ILogMessage {
 public:
-  ArrayLogMessage(std::array<T, N> d)
-    : m_data(std::move(d))
-  {
-  }
+  ArrayLogMessage(std::array<T, N> d) : m_data(std::move(d)) {}
 
-  std::string ToString() const override
-  {
+  std::string ToString() const override {
     std::ostringstream oss;
-    for (auto& s : m_data)
+    for (auto &s : m_data)
       oss << s << " ";
     return oss.str();
   }
@@ -41,17 +35,17 @@ public:
   bool Empty() const override { return m_data.empty(); };
 
   /**
-   * Since std::array is a fixed size at compile time, operator+ is not supported
-   * we disable it, an error code is flagged and returns a nullptr object
+   * Since std::array is a fixed size at compile time, operator+ is not
+   * supported we disable it, an error code is flagged and returns a nullptr
+   * object
    */
-  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override
-  {
+  std::unique_ptr<ILogMessage>
+  operator+(const ILogMessage &rhs) const override {
     ErrorManager::GetInstance().SetResult(E_OPERATION_NOT_SUPPORTED);
     return nullptr;
   }
 
-  DataType GetDataType() const override
-  {
+  DataType GetDataType() const override {
     return DataType::SLXIO_TYPE_ARRAYLOGMESSAGE;
   }
   ~ArrayLogMessage() = default;
@@ -61,6 +55,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ARRAYLOGMESSAGE_H

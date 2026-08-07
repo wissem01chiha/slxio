@@ -10,8 +10,7 @@
 #include "ILogMessage.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -22,8 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * a sequence of related errors. This allows multiple errors generated
  * during an operation to be propagated and logged as a single message.
  */
-class SLXIO_APIEXPORT ErrorLogMessage : public ILogMessage
-{
+class SLXIO_APIEXPORT ErrorLogMessage : public ILogMessage {
 public:
   /* Construct a message containing a single error code.*/
   explicit ErrorLogMessage(HError error);
@@ -42,7 +40,7 @@ public:
    * ErrorLogMessage containing the errors from both operands in
    * insertion order.
    */
-  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override;
+  std::unique_ptr<ILogMessage> operator+(const ILogMessage &rhs) const override;
   ~ErrorLogMessage() = default;
 
 private:
@@ -50,6 +48,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // ERRORLOGMESSAGE_H

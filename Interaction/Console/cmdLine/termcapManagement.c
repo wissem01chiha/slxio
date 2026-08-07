@@ -20,29 +20,24 @@
 #include <termios.h>
 #include <unistd.h>
 /* Simplify termcap activation */
-void setStringCapacities(const char* capacity)
-{
-  char* stringCap;
+void setStringCapacities(const char *capacity) {
+  char *stringCap;
 
   stringCap = tgetstr(capacity, NULL);
-  if (stringCap != NULL)
-  {
+  if (stringCap != NULL) {
     tputs(stringCap, 1, putchar);
   }
 }
 
 /* Move cursor to the column _col and the line _li */
-void capGoto(int col, int li)
-{
-  char* stringCap;
+void capGoto(int col, int li) {
+  char *stringCap;
 
   stringCap = tgetstr("cm", NULL);
-  if (stringCap != NULL)
-  {
+  if (stringCap != NULL) {
     stringCap = tgoto(stringCap, col, li);
   }
-  if (stringCap != NULL)
-  {
+  if (stringCap != NULL) {
     tputs(stringCap, 1, putchar);
   }
 }

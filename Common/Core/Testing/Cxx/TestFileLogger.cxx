@@ -6,14 +6,12 @@ using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool FileExists(const std::string& fileName)
-{
+bool FileExists(const std::string &fileName) {
   std::ifstream file(fileName.c_str());
   return file.good();
 }
 
-TEST_CASE("FileLogger creates log file")
-{
+TEST_CASE("FileLogger creates log file") {
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());
@@ -26,8 +24,7 @@ TEST_CASE("FileLogger creates log file")
   std::remove(logFile.c_str());
 }
 
-TEST_CASE("FileLogger log level setter getter")
-{
+TEST_CASE("FileLogger log level setter getter") {
   FileLogger logger;
 
   logger.SetLogLevel(LogLevelType::LOG_INFO);
@@ -35,8 +32,7 @@ TEST_CASE("FileLogger log level setter getter")
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
 }
 
-TEST_CASE("FileLogger writes message to file")
-{
+TEST_CASE("FileLogger writes message to file") {
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());
@@ -44,7 +40,7 @@ TEST_CASE("FileLogger writes message to file")
   FileLogger logger(logFile);
   logger.Init();
 
-  std::array<std::string, 3> data{ "Hello", "File", "Logger" };
+  std::array<std::string, 3> data{"Hello", "File", "Logger"};
 
   ArrayLogMessage<std::string, 3> msg(data);
 
@@ -65,8 +61,7 @@ TEST_CASE("FileLogger writes message to file")
   std::remove(logFile.c_str());
 }
 
-TEST_CASE("FileLogger stream operator")
-{
+TEST_CASE("FileLogger stream operator") {
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());
@@ -74,7 +69,7 @@ TEST_CASE("FileLogger stream operator")
   FileLogger logger(logFile);
   logger.Init();
 
-  std::array<std::string, 2> data{ "Test", "Message" };
+  std::array<std::string, 2> data{"Test", "Message"};
 
   ArrayLogMessage<std::string, 2> msg(data);
 

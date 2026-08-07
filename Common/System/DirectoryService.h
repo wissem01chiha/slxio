@@ -9,8 +9,7 @@
 #include "PlatformTypes.h"
 #include "SystemPCH.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Directory;
@@ -19,8 +18,7 @@ class Directory;
  * @class DirectoryService
  * @brief Provide some extra serivces for common system directory manipulations
  */
-class SLXIO_APIEXPORT DirectoryService final
-{
+class SLXIO_APIEXPORT DirectoryService final {
 public:
   /** Default constructor. */
   DirectoryService() = default;
@@ -29,10 +27,10 @@ public:
   ~DirectoryService() = default;
 
   /** Get a String Serialisation of the directory tree */
-  static std::string ToString(const Directory& directory);
+  static std::string ToString(const Directory &directory);
 
   /** Get the current working directory. */
-  static Directory GetWorkingDirectory(int* error);
+  static Directory GetWorkingDirectory(int *error);
 
   /**
    * Creates the directory structure for a given entry name.
@@ -42,18 +40,18 @@ public:
    * This function ensures that the directory structure is created up
    * to the specified root folder (`dir`)
    */
-  static std::shared_ptr<Directory> CreateDirectoryStructure(
-    const std::string& structure, int* error);
+  static std::shared_ptr<Directory>
+  CreateDirectoryStructure(const std::string &structure, int *error);
 
   /** Create a system temporary directory and retrun a pointer to it*/
-  static std::shared_ptr<Directory> CreateTemporaryDirectory(int* error);
+  static std::shared_ptr<Directory> CreateTemporaryDirectory(int *error);
 
   /** same as CreateTemporaryDirectory using a prefix for directory name */
-  static std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(
-    const char* prefix, int* error);
+  static std::shared_ptr<Directory>
+  CreatePrefixedTemporaryDirectory(const char *prefix, int *error);
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // DIRECTORYSERVICE_H

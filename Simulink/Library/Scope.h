@@ -8,16 +8,14 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Scope
  * @brief A class representing a scope in the simulation.
  */
-class SLXIO_APIEXPORT Scope final
-{
+class SLXIO_APIEXPORT Scope final {
 public:
   Scope();
 
@@ -30,10 +28,10 @@ public:
 private:
   UInt32 numInputPorts;
   bool floating;
-  const char* scopeSpecificationString;
+  const char *scopeSpecificationString;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SCOPE_H

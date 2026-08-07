@@ -16,8 +16,7 @@
 #include <stdio.h>
 #include <string>
 
-extern "C"
-{
+extern "C" {
 #include "BOOL.h"
 #include "configvariable_interface.h"
 #include "localization.h"
@@ -33,40 +32,26 @@ static BOOL dispWarningLevelPrompt = TRUE;
 /*------------------------------------------------------------------------*/
 /* setprlev : set the current prompt string */
 /*------------------------------------------------------------------------*/
-void setPreviousLevel(int pause)
-{
+void setPreviousLevel(int pause) {
   // debugger prompt first !
-  if (isEnableDebug())
-  {
-    if (isDebugInterrupted())
-    {
+  if (isEnableDebug()) {
+    if (isDebugInterrupted()) {
       Sci_Prompt = SCIPROMPTBREAK;
-    }
-    else
-    {
+    } else {
       Sci_Prompt = SCIPROMPTDEBUG;
     }
-  }
-  else if (pause == 0)
-  {
-    if (temporaryPrompt.empty() == false)
-    {
+  } else if (pause == 0) {
+    if (temporaryPrompt.empty() == false) {
       Sci_Prompt = temporaryPrompt;
       ClearTemporaryPrompt();
-    }
-    else
-    {
+    } else {
       Sci_Prompt = SCIPROMPT;
     }
-  }
-  else if (pause > 0)
-  {
-    if (dispWarningLevelPrompt)
-    {
-      if (getWarningMode())
-      {
+  } else if (pause > 0) {
+    if (dispWarningLevelPrompt) {
+      if (getWarningMode()) {
         sciprint(_("Type '%s' or '%s' to return to standard level prompt.\n\n"),
-          "resume", "abort");
+                 "resume", "abort");
         dispWarningLevelPrompt = FALSE;
       }
     }
@@ -77,9 +62,7 @@ void setPreviousLevel(int pause)
     // bug 5513
     // when we change prompt to a pause level, we change also temp. prompt
     // SetTemporaryPrompt(Sci_Prompt);
-  }
-  else
-  {
+  } else {
     Sci_Prompt = SCIPROMPT_PAUSE;
     // bug 5513
     // when we change prompt to halt level, we change also temp. prompt
@@ -87,23 +70,13 @@ void setPreviousLevel(int pause)
   }
 }
 /*------------------------------------------------------------------------*/
-const char* GetCurrentPrompt()
-{
-  return Sci_Prompt.data();
-}
+const char *GetCurrentPrompt() { return Sci_Prompt.data(); }
 /*------------------------------------------------------------------------*/
-void SetTemporaryPrompt(const char* tempPrompt)
-{
+void SetTemporaryPrompt(const char *tempPrompt) {
   temporaryPrompt = tempPrompt;
 }
 /*------------------------------------------------------------------------*/
-const char* GetTemporaryPrompt(void)
-{
-  return temporaryPrompt.data();
-}
+const char *GetTemporaryPrompt(void) { return temporaryPrompt.data(); }
 /*------------------------------------------------------------------------*/
-void ClearTemporaryPrompt(void)
-{
-  temporaryPrompt = "";
-}
+void ClearTemporaryPrompt(void) { temporaryPrompt = ""; }
 /*------------------------------------------------------------------------*/

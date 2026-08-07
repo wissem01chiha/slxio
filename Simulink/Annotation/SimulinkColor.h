@@ -9,22 +9,20 @@
 #include "PlatformTypes.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkColor
  * @brief Container for default Simulink Supported Colors
  */
-class SLXIO_APIEXPORT SimulinkColor final
-{
+class SLXIO_APIEXPORT SimulinkColor final {
 public:
   std::string name;
   std::string hexValue;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKCOLOR_H

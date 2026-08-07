@@ -10,16 +10,14 @@
 #include <string>
 #include <vector>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkFile
  * @brief Represents metadata and XML sections of a Simulink model file
  */
-struct SimulinkFile
-{
+struct SimulinkFile {
   std::string Extension;
   std::string Name;
   UInt16 Size;
@@ -34,22 +32,22 @@ struct SimulinkFile
   std::string MatlabRelease;
   std::string MatlabVersion;
 
-  xmlDocDataObject& Blockdiagram;
-  xmlDocDataObject& ModelDictionary;
-  xmlDocDataObject& ConfigSetInfo;
-  xmlDocDataObject& Bddefaults;
-  xmlDocDataObject& ScheduleEditor;
-  xmlDocDataObject& ScheduleCore;
-  xmlDocDataObject& GraphicalInterface;
-  xmlDocDataObject& CoreProperties;
-  xmlDocDataObject& MWcoreProperties;
-  xmlDocDataObject& MWcorePropertiesExtension;
+  xmlDocDataObject &Blockdiagram;
+  xmlDocDataObject &ModelDictionary;
+  xmlDocDataObject &ConfigSetInfo;
+  xmlDocDataObject &Bddefaults;
+  xmlDocDataObject &ScheduleEditor;
+  xmlDocDataObject &ScheduleCore;
+  xmlDocDataObject &GraphicalInterface;
+  xmlDocDataObject &CoreProperties;
+  xmlDocDataObject &MWcoreProperties;
+  xmlDocDataObject &MWcorePropertiesExtension;
   std::vector<xmlDocDataObject> ConfigSets;
 };
 
-typedef SimulinkFile* SimulinkFilePtr;
+typedef SimulinkFile *SimulinkFilePtr;
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKFILE_H

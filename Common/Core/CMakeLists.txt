@@ -29,11 +29,14 @@ add_module(
     Version.cxx
     SimulinkVersion.cxx
     TimeStamp.cxx
-    SyncLogger.cxx
+    Logger.cxx
     ErrorManager.cxx
     ErrorLogMessage.cxx
     FileLogger.cxx
-    ASyncLogger.cxx
+    BackgroundLogger.cxx
+    BufferedLogger.cxx
+    TimerHandler.cxx
+    PathHandler.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
@@ -42,18 +45,19 @@ add_module(
     TimeStamp.h
     SimulinkVersion.h 
     SimulinkVersionRelease.h
-    TimeStamp.h
     DataType.h
     ILogger.h
-    SyncLogger.h
-    ASyncLogger.h
+    Logger.h
+    BackgroundLogger.h
     ErrorHandlerMacro.h
     ErrorHandler.h
     ErrorTypes.h
     ErrorManager.h
     ILogMessage.h
-    ArrayLogMessage.h
     FileLogger.h
+    BufferedLogger.h
+    TimerHandler.h
+    PathHandler.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES
@@ -65,11 +69,11 @@ add_module(
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
     TestVersion.cxx
-    TestSyncLogger.cxx
+    TestLogger.cxx
     TestSimulinkVersion.cxx
     TestErrorHandler.cxx
     TestErrorManager.cxx
-    TestArrayLogMessage.cxx
+    TestLoggerArrayMessage.cxx
     TestFileLogger.cxx
   MODULE_PUBLIC_DEPENDS
     loguru

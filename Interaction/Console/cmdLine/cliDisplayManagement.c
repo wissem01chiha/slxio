@@ -19,25 +19,20 @@
 static BOOL cliColor = TRUE;
 
 /* Set color and other settings about character display */
-void setCharDisplay(char* setting)
-{
-  static char* currentSetting = NULL;
+void setCharDisplay(char *setting) {
+  static char *currentSetting = NULL;
 
-  static char* lastSetting = NULL;
+  static char *lastSetting = NULL;
 
-  if (!getCLIColor())
-  {
+  if (!getCLIColor()) {
     return;
   }
 
   /* If NULL is passed, Previous settings are set. */
-  if (setting == NULL)
-  {
-    if (lastSetting != NULL)
-    {
+  if (setting == NULL) {
+    if (lastSetting != NULL) {
       setting = lastSetting;
-    }
-    else /* currentSetting should never be NULL */
+    } else /* currentSetting should never be NULL */
     {
       setting = currentSetting;
     }
@@ -51,8 +46,7 @@ void setCharDisplay(char* setting)
 }
 
 /* Change Characters color */
-void setForegroundColor(int color)
-{
+void setForegroundColor(int color) {
   char charColor[3];
 
   charColor[0] = SET_CONSOLE_FOREGROUND;
@@ -62,8 +56,7 @@ void setForegroundColor(int color)
 }
 
 /* Change background color */
-void setBackgroundColor(int color)
-{
+void setBackgroundColor(int color) {
   char charColor[3];
 
   charColor[0] = SET_CONSOLE_BACKGROUND;
@@ -72,12 +65,6 @@ void setBackgroundColor(int color)
   setCharDisplay(charColor);
 }
 
-BOOL getCLIColor()
-{
-  return cliColor;
-}
+BOOL getCLIColor() { return cliColor; }
 
-void setCLIColor(BOOL CLIColor)
-{
-  cliColor = CLIColor;
-}
+void setCLIColor(BOOL CLIColor) { cliColor = CLIColor; }

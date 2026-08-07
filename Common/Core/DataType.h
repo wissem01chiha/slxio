@@ -7,16 +7,14 @@
 #include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @enum DataType
  * @brief Values Returned by GetDataType
  */
-enum class DataType : UInt16
-{
+enum class DataType : UInt16 {
   SLXIO_TYPE_NONE = 0,
   SLXIO_TYPE_BOOL,
   SLXIO_TYPE_CHAR,
@@ -34,6 +32,6 @@ enum class DataType : UInt16
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // DATATYPE_H

@@ -10,16 +10,14 @@
 #include "SimulinkConfigSet.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief SimulinkConfigurationSet Parser class.
  */
 class SLXIO_APIEXPORT SimulinkConfigSetParser final
-  : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet>
-{
+    : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet> {
 public:
   SimulinkConfigSetParser() = default;
   HError setInputData(const xmlNodePtr data) override;
@@ -28,6 +26,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKCONFIGSETPARSER_H

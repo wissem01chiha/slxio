@@ -9,8 +9,7 @@
 #include "ErrorHandlerMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SLXIO_APIEXPORT UInt32 GetProjectIdentifier(HError result);
@@ -30,7 +29,7 @@ SLXIO_APIEXPORT bool IsSameGroup(HError result1, HError result2);
 SLXIO_APIEXPORT bool IsSameComponent(HError result1, HError result2);
 
 /* Return a string serlisation of the severity level of the error code*/
-SLXIO_APIEXPORT const char* GetSeverityString(HError result);
+SLXIO_APIEXPORT const char *GetSeverityString(HError result);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

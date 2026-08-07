@@ -10,16 +10,14 @@
 #include "PlatformTypes.h"
 #include "Point.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @brief Encapsulates all information required for layouting a port
  * (relative to its parent's canvas).
  */
-class PortLayoutData final
-{
+class PortLayoutData final {
 public:
   PortLayoutData();
   PortLayoutData(Point point, Color color);
@@ -28,7 +26,7 @@ public:
   Color GetColor();
 
 private:
-  Logger& l;
+  Logger &l;
   Point position;
   Color color;
   /**
@@ -41,6 +39,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // PORTLAYOUTDATA_H

@@ -18,23 +18,20 @@
 #include "os_string.h"
 #include <stdio.h>
 
-char* getPipeLine(void)
-{
+char *getPipeLine(void) {
   int len_line = 0;
   char buffer[bsiz];
 
   // read from stdin
   int eof = (fgets(buffer, bsiz, stdin) == NULL);
-  if (eof)
-  {
+  if (eof) {
     // send command to quit to Scilab
     return os_strdup("quit");
   }
 
   // remove trailing \n
   len_line = (int)strlen(buffer);
-  if (buffer[len_line - 1] == '\n')
-  {
+  if (buffer[len_line - 1] == '\n') {
     buffer[len_line - 1] = '\0';
   }
 

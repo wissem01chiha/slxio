@@ -11,8 +11,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * This interface describes entities that contain
  * @param Type of the parent of this node.
  */
-class IStateflowNodeContainer
-{
+class IStateflowNodeContainer {
 public:
   IStateflowNodeContainer();
 

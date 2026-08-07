@@ -11,8 +11,7 @@
 #include "SimulinkFile.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @class SimulinkFileParser
@@ -24,8 +23,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /// and organizes the relevant data. The builder then fills the
 /// metadata fields and content pointers required to produce a
 /// complete SimulinkFile object.
-class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile>
-{
+class SimulinkFileParser final : public SimulinkParserBase<File, SimulinkFile> {
 public:
   SimulinkFileParser() = default;
   HError setInputData(const File fs) override;
@@ -34,6 +32,6 @@ public:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKFILEPARSER_H

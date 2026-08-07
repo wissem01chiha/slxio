@@ -11,29 +11,27 @@
 
 struct json_object;
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class JsonDataObject
  * @brief A Wrapper Around Json-c Object types
  */
-class SLXIO_APIEXPORT JsonDataObject : public DataObject
-{
+class SLXIO_APIEXPORT JsonDataObject : public DataObject {
 public:
-  JsonDataObject* New() override;
+  JsonDataObject *New() override;
   bool Empty() override;
-  bool operator==(const DataObject&) override;
-  void* GetImplDataObject() const override;
+  bool operator==(const DataObject &) override;
+  void *GetImplDataObject() const override;
   std::string ToString() const override;
   JsonDataObject();
 
 private:
-  json_object* ImplDataObject;
+  json_object *ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // JSONDATAOBJECT_H

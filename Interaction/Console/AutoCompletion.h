@@ -10,7 +10,7 @@
  * @param pointer to Command line currently edited.
  * @param Cursor position in command line.
  */
-void autoCompletionInConsoleMode(
-  wchar_t** commandLine, unsigned int* cursorLocation);
+void autoCompletionInConsoleMode(wchar_t **commandLine,
+                                 unsigned int *cursorLocation);
 
 #endif /* !AUTO_COMPLETION_CLI_H_ */

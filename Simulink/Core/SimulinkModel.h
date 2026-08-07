@@ -13,8 +13,7 @@
 #include "SimulinkModelType.h"
 #include <memory>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObject;
@@ -30,13 +29,12 @@ class Logger;
 /**
  * @class SimulinkModel
  */
-class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
-{
+class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase {
 public:
   /** Default Constructor */
   SimulinkModel();
 
-  SimulinkModel* New() const override;
+  SimulinkModel *New() const override;
 
   /** Construct a Model by given an explict model type */
   SimulinkModel(SimulinkModelType Type);
@@ -45,13 +43,13 @@ public:
   SimulinkElementType GetType() const override;
 
   /** Returns the unique identifier of this element. */
-  IdType GetId() const override;
+  SId GetId() const override;
 
   /** Returns a string representation of this element. */
   std::string ToString() const override;
 
   /** Return a Pointer to given Simulink Block by Id*/
-  std::shared_ptr<SimulinkBlock> GetBlock(IdType blockIdx);
+  std::shared_ptr<SimulinkBlock> GetBlock(SId blockIdx);
 
   /** Get Model type */
   SimulinkModelType GetModelType();
@@ -63,17 +61,17 @@ public:
   UInt32 GetModelVersion();
 
   /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const IdType& id) const override;
+  bool Contains(const SId &id) const override;
 
   /** */
   std::shared_ptr<ModelWorkspace> GetModelWorkspace();
 
   /** */
-  Logger& GetLogger();
+  Logger &GetLogger();
 
 private:
-  Logger& logger;
-  IdType id;
+  Logger &logger;
+  SId id;
   UInt32 version;
   SimulinkModelType ModelType;
   std::shared_ptr<ModelWorkspace> workspace;
@@ -84,6 +82,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKMODEL_H

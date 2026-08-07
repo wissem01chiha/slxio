@@ -11,23 +11,21 @@
 #include "SimulinkParserBase.h"
 #include <string>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief base parser for encoded data type strings
 class SLXIO_APIEXPORT SimulinkDataTypeParser final
-  : public SimulinkParserBase<std::string, SimulinkDataType>
-{
+    : public SimulinkParserBase<std::string, SimulinkDataType> {
 public:
   SimulinkDataTypeParser() = default;
   HError setInputData(const std::string data) override;
-  HError setInputData(const char* data);
+  HError setInputData(const char *data);
   HError parse() override;
   ~SimulinkDataTypeParser() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKDATATYPEPARSER_H

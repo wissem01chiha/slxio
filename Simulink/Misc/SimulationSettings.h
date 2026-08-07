@@ -8,22 +8,20 @@
 #include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulationSettings
  * @brief
  */
-class SLXIO_APIEXPORT SimulationSettings
-{
+class SLXIO_APIEXPORT SimulationSettings {
 public:
   SimulationSettings() = default;
   ~SimulationSettings();
 
-  char* GetSolverName();
-  char* GetSolverType();
+  char *GetSolverName();
+  char *GetSolverType();
   Float32 GetFixedStepSize();
 
 private:
@@ -68,6 +66,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULATIONSETTINGS_H

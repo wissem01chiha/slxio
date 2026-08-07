@@ -13,8 +13,7 @@
 #include "SimulinkPort.h"
 #include <memory>
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -23,8 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * MATLAB API rather then an extension for hiracical blcoks or models
  * manipulatoation added as a feature in the librray
  */
-class SLXIO_APIEXPORT SimulinkSubsystem
-{
+class SLXIO_APIEXPORT SimulinkSubsystem {
 public:
   SimulinkSubsystem();
   ~SimulinkSubsystem() = default;
@@ -37,6 +35,6 @@ private:
 };
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio
 
 #endif // SIMULINKSUBSYSTEM_H

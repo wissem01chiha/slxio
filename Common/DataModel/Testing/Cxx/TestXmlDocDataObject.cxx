@@ -2,12 +2,10 @@
 #include "slxDoctest.h"
 #include "xmlDocDataObject.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class XmlDocDataObjectTestFixture
-{
+class XmlDocDataObjectTestFixture {
 public:
   XmlDocDataObjectTestFixture(){};
   ~XmlDocDataObjectTestFixture(){};
@@ -18,4 +16,4 @@ private:
 TEST_CASE_FIXTURE(XmlDocDataObjectTestFixture, "Test Constructor") {}
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

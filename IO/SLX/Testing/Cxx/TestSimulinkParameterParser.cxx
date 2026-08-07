@@ -1,62 +1,52 @@
 #include "SimulinkParameterParser.h"
 #include "slxDoctest.h"
 
-namespace slxio
-{
+namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkParameterParserTestFixture
-{
+class SimulinkParameterParserTestFixture {
 protected:
   SimulinkParameterParserTestFixture()
-    : parserPtr(new SimulinkParameterParser())
-    , doc(nullptr)
-  {
-  }
+      : parserPtr(new SimulinkParameterParser()), doc(nullptr) {}
 
-  xmlNodePtr getXmlNodePtr(const char* xmlfilename)
-  {
+  xmlNodePtr getXmlNodePtr(const char *xmlfilename) {
 
     char xmlfilepath[512];
     snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-      PROJECT_ROOT_DIR, xmlfilename);
+             PROJECT_ROOT_DIR, xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
-    if (!doc)
-    {
+    if (!doc) {
       throw std::runtime_error("failed to read XML file");
     }
     xmlNodePtr root = xmlDocGetRootElement(doc);
     return root;
   }
 
-  ~SimulinkParameterParserTestFixture()
-  {
+  ~SimulinkParameterParserTestFixture() {
 
-    if (parserPtr)
-    {
+    if (parserPtr) {
       delete parserPtr;
       parserPtr = nullptr;
     }
-    if (doc)
-    {
+    if (doc) {
       xmlFreeDoc(doc);
     }
   }
 
-  SimulinkParameterParser* parserPtr;
+  SimulinkParameterParser *parserPtr;
   xmlDocPtr doc;
 };
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest")
-{
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "ParserSetInputDataTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   HError status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "GetParameterNotNullPtrTest")
-{
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "GetParameterNotNullPtrTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   HError status = parserPtr->setInputData(nodePtr);
@@ -65,8 +55,7 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "GetParameterNotNullPtrTes
   CHECK(dataObj != nullptr);
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest")
-{
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
@@ -74,8 +63,8 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest")
   CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest")
-{
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
+                  "ParameterValidDataTest") {
 
   xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
   parserPtr->setInputData(nodePtr);
@@ -87,4 +76,4 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest")
 }
 
 SLXIO_ABI_NAMESPACE_END
-};
+}; // namespace slxio

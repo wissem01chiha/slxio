@@ -18,8 +18,7 @@
 /*--------------------------------------------------------------------------*/
 #include "CallScilabBridge.hxx"
 using namespace org_scilab_modules_gui_bridge;
-BOOL ScilabLinesUpdate(void)
-{
+BOOL ScilabLinesUpdate(void) {
   CallScilabBridge::scilabLinesUpdate(getScilabJavaVM());
   return TRUE;
 }
