@@ -4,11 +4,10 @@
 #ifndef FILE_H
 #define FILE_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <string>
-#include <vector>
+#include "SystemPCH.h"
 
 namespace slxio
 {

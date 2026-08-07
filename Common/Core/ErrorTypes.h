@@ -23,4 +23,8 @@
 #define E_DEFAULT_VALUE_USED                                                        \
   SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_WARN, 4U)
 
+/// a not supported callback or function being invoked on an object or class
+#define E_OPERATION_NOT_SUPPORTED                                                   \
+  SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 5U)
+
 #endif // ERRORTYPES_H

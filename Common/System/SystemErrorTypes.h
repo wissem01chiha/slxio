@@ -4,7 +4,9 @@
 #ifndef SYSTEMERRORTYPES_H
 #define SYSTEMERRORTYPES_H
 
+/// always include the global error codes header defintion file
 #include "ErrorHandlerMacro.h"
+#include "ErrorTypes.h"
 
 #define E_INVALID_FUNCTION SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 1U)
 #define E_FILE_NOT_FOUND SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 2U)
@@ -16,7 +18,6 @@
 #define E_TOO_MANY_OPEN_FILES                                                       \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 7U)
 #define E_FILE_OPEN_FAIL SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 8U)
-#define E_INVALID_HANDLE SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 9U)
 #define E_INVALID_FILE_MODE                                                         \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 10U)
 #define E_STREAM_WRITE_FAIL                                                         \
@@ -24,8 +25,6 @@
 #define E_STREAM_EMPTY_OUTPUT                                                       \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 12U)
 #define E_NOT_IMPLEMENTED SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 13U)
-#define E_INVALID_ARGUMENT                                                          \
-  SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 14U)
 #define E_PARAMETER_NULL_PTR                                                        \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 15U)
 #define E_INVALID_DATA_TYPE                                                         \
@@ -34,22 +33,23 @@
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 17U)
 #define E_FILE_REMOVE_FAILED                                                        \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 18U)
-
-#define E_ARCHIVE_OPEN_FAILED                                                       \
+#define E_DIRECTORY_NOT_EXSIT                                                       \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 19U)
-#define E_ARCHIVE_SOURCE_FAILED                                                     \
+#define E_ARCHIVE_OPEN_FAILED                                                       \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 20U)
-#define E_ARCHIVE_REPLACE_FAILED                                                    \
+#define E_ARCHIVE_SOURCE_FAILED                                                     \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 21U)
-#define E_ARCHIVE_ADD_FAILED                                                        \
+#define E_ARCHIVE_REPLACE_FAILED                                                    \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 22U)
-#define E_ARCHIVE_CLOSE_FAILED                                                      \
+#define E_ARCHIVE_ADD_FAILED                                                        \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 23U)
-#define E_ARCHIVE_REMOVE_FAILED                                                     \
+#define E_ARCHIVE_CLOSE_FAILED                                                      \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 24U)
-#define E_ARCHIVE_ENTRY_NOT_FOUND                                                   \
+#define E_ARCHIVE_REMOVE_FAILED                                                     \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 25U)
-#define E_ARCHIVE_INVALID_ID                                                        \
+#define E_ARCHIVE_ENTRY_NOT_FOUND                                                   \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 26U)
+#define E_ARCHIVE_INVALID_ID                                                        \
+  SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 27U)
 
 #endif // SYSTEMERRORTYPES_H

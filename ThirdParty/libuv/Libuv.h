@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef LIBUV
-#define LIBUV
+#ifndef LIBUV_H
+#define LIBUV_H
 
 #ifdef USE_EXTERNAL_LIBUV
 #include <uv.h>
@@ -10,4 +10,4 @@
 #include <src/include/uv.h>
 #endif
 
-#endif // LIBUV
+#endif // LIBUV_H

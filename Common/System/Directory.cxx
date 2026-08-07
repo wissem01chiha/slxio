@@ -1,6 +1,7 @@
 ﻿#include "Directory.h"
-#include "ErrorCode.h"
-#include "slxLibuv.h"
+#include "Libuv.h"
+#include "PlatformMacro.h"
+#include "SystemErrorTypes.h"
 
 namespace slxio
 {
@@ -119,7 +120,7 @@ UInt32 Directory::GetNumberOfFiles() const
   return DirectoryFileList.size();
 }
 
-const std::shared_ptr<File> Directory::GetFile(const IdType& index) const
+const std::shared_ptr<File> Directory::GetFile(const SIdentifier& index) const
 {
   if (index >= DirectoryFileList.size())
   {

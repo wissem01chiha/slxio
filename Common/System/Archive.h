@@ -4,8 +4,8 @@
 #ifndef ARCHIVE_H
 #define ARCHIVE_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Directory.h"
 #include "File.h"
 #include "PlatformTypes.h"

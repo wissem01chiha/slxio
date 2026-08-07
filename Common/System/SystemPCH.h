@@ -4,7 +4,11 @@
 #ifndef SYSTEMPCH_H
 #define SYSTEMPCH_H
 
+#include <cstring>
+#include <fstream>
+#include <iostream>
 #include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
 

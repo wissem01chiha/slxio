@@ -4,13 +4,11 @@
 #ifndef DIRECTORY_H
 #define DIRECTORY_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "File.h"
 #include "PlatformTypes.h"
-#include <memory>
-#include <string>
-#include <vector>
+#include "SystemPCH.h"
 
 namespace slxio
 {
@@ -48,7 +46,7 @@ public:
   std::vector<File> GetDirectoryFiles() const;
 
   /** Get a file by index.*/
-  const std::shared_ptr<File> GetFile(const IdType& index) const;
+  const std::shared_ptr<File> GetFile(const SIdentifier& index) const;
 
   /** Get a specific file by name.*/
   const std::shared_ptr<File> GetFile(const std::string& filename) const;

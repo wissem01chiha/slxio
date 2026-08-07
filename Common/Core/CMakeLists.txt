@@ -32,6 +32,8 @@ add_module(
     SyncLogger.cxx
     ErrorManager.cxx
     ErrorLogMessage.cxx
+    FileLogger.cxx
+    ASyncLogger.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
@@ -51,6 +53,7 @@ add_module(
     ErrorManager.h
     ILogMessage.h
     ArrayLogMessage.h
+    FileLogger.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES
@@ -66,6 +69,8 @@ add_module(
     TestSimulinkVersion.cxx
     TestErrorHandler.cxx
     TestErrorManager.cxx
+    TestArrayLogMessage.cxx
+    TestFileLogger.cxx
   MODULE_PUBLIC_DEPENDS
     loguru
   MODULE_TEST_DEPENDS

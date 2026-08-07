@@ -1,11 +1,9 @@
 ﻿#include "File.h"
 #include "Compiler.h"
 #include "Directory.h"
-#include "ErrorCode.h"
-#include "slxLibuv.h"
-#include <cstring>
-#include <fstream>
-#include <iostream>
+#include "Libuv.h"
+#include "PlatformMacro.h"
+#include "SystemErrorTypes.h"
 
 namespace slxio
 {

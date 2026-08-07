@@ -1,6 +1,6 @@
 #include "ArchiveManager.h"
 #include "Archive.h"
-#include "ErrorCode.h"
+#include "SystemErrorTypes.h"
 
 namespace slxio
 {
@@ -11,32 +11,32 @@ ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
   ArchiveBuffer = std::move(archives);
 }
 
-IdType ArchiveManager::GetArchiveId(const std::string& archivename) const
+SIdentifier ArchiveManager::GetArchiveId(const std::string& archivename) const
 {
   for (size_t i = 0; i < ArchiveBuffer.size(); ++i)
   {
     if (ArchiveBuffer[i] &&
       ArchiveBuffer[i]->GetArchiveDirectory().GetDirectoryName() == archivename)
     {
-      return SLXIO_TYPE_CAST(IdType, i);
+      return SLXIO_STATIC_CAST(SIdentifier, i);
     }
   }
   return -1;
 }
 
-IdType ArchiveManager::GetArchiveMaxId() const
+SIdentifier ArchiveManager::GetArchiveMaxId() const
 {
-  return SLXIO_TYPE_CAST(IdType, ArchiveBuffer.size() - 1);
+  return SLXIO_STATIC_CAST(SIdentifier, ArchiveBuffer.size() - 1);
 }
 
-IdType ArchiveManager::GetFirstFreeArchiveId()
+SIdentifier ArchiveManager::GetFirstFreeArchiveId()
 {
-  return IdType();
+  return SIdentifier();
 }
 
-std::shared_ptr<Archive> ArchiveManager::GetArchive(IdType id) const
+std::shared_ptr<Archive> ArchiveManager::GetArchive(SIdentifier id) const
 {
-  if (id < 0 || id >= static_cast<IdType>(ArchiveBuffer.size()))
+  if (id < 0 || id >= static_cast<SIdentifier>(ArchiveBuffer.size()))
   {
     return nullptr;
   }
@@ -61,9 +61,9 @@ HError ArchiveManager::Add(std::shared_ptr<Archive> archive)
   return E_OK;
 }
 
-HError ArchiveManager::Remove(const IdType id)
+HError ArchiveManager::Remove(const SIdentifier id)
 {
-  if (id < 0 || id >= static_cast<IdType>(ArchiveBuffer.size()))
+  if (id < 0 || id >= static_cast<SIdentifier>(ArchiveBuffer.size()))
   {
     return E_ARCHIVE_INVALID_ID;
   }

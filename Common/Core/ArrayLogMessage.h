@@ -7,6 +7,9 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CorePCH.h"
+#include "DataType.h"
+#include "ErrorManager.h"
+#include "ErrorTypes.h"
 #include "ILogMessage.h"
 
 namespace slxio
@@ -15,7 +18,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ArrayLogMessage
- * @brief Implementation of ILogMessage for std::array<T,N> based objects
+ * @brief Implementation of ILogMessage for std::array<T,N> based objects,
+ * a fixed size logging message contain N elments of type T
  */
 template <typename T, size_t N>
 class SLXIO_APIEXPORT ArrayLogMessage : public ILogMessage
@@ -34,12 +38,22 @@ public:
     return oss.str();
   }
 
-  ArrayLogMessage operator+(const ArrayLogMessage& rhs) const override
+  bool Empty() const override { return m_data.empty(); };
+
+  /**
+   * Since std::array is a fixed size at compile time, operator+ is not supported
+   * we disable it, an error code is flagged and returns a nullptr object
+   */
+  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override
   {
-    std::array<T, N> combined = m_data;
-    return ArrayLogMessage(combined);
+    ErrorManager::GetInstance().SetResult(E_OPERATION_NOT_SUPPORTED);
+    return nullptr;
   }
 
+  DataType GetDataType() const override
+  {
+    return DataType::SLXIO_TYPE_ARRAYLOGMESSAGE;
+  }
   ~ArrayLogMessage() = default;
 
 private:

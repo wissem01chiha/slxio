@@ -4,12 +4,10 @@
 #ifndef ARCHIVEMANAGER_H
 #define ARCHIVEMANAGER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include <memory>
-#include <string>
-#include <vector>
+#include "SystemPCH.h"
 
 namespace slxio
 {
@@ -46,16 +44,16 @@ public:
   ArchiveManager(std::vector<std::shared_ptr<Archive>> archives);
 
   /** Get the unique Id of an archive by its name. */
-  IdType GetArchiveId(const std::string& archivename) const;
+  SIdentifier GetArchiveId(const std::string& archivename) const;
 
   /** Get the maximum archive Id currently in use. */
-  IdType GetArchiveMaxId() const;
+  SIdentifier GetArchiveMaxId() const;
 
   /** Find the first available free archive Id. */
-  IdType GetFirstFreeArchiveId();
+  SIdentifier GetFirstFreeArchiveId();
 
   /** Retrieve an archive by its Id. */
-  std::shared_ptr<Archive> GetArchive(IdType id) const;
+  std::shared_ptr<Archive> GetArchive(SIdentifier id) const;
 
   /** Check if an archive with the given name is opened. */
   bool IsArchiveOpened(const std::string& archivename) const;
@@ -64,7 +62,7 @@ public:
   HError Add(std::shared_ptr<Archive> archive);
 
   /** Remove an archive by its Id. */
-  HError Remove(const IdType id);
+  HError Remove(const SIdentifier id);
 
 private:
   std::vector<std::shared_ptr<Archive>> ArchiveBuffer;

@@ -143,10 +143,11 @@ function(add_module)
   cmake_parse_arguments(MOD "${options}" "${oneValueArgs}" 
                         "${multiValueArgs}"
                         ${ARGN})
-  if(NOT CMAKE_BINARY_NAME_PREFIX)
-    set(TARGET_NAME "${MOD_LIBRARY_NAME}")
-  else()
-    set(TARGET_NAME "${CMAKE_BINARY_NAME_PREFIX}${MOD_LIBRARY_NAME}")
+
+  set(TARGET_NAME "${MOD_LIBRARY_NAME}")
+  # target module binary output name 
+  if(CMAKE_BINARY_NAME_PREFIX)
+    set(TARGET_OUTPUT_NAME "${CMAKE_BINARY_NAME_PREFIX}${MOD_LIBRARY_NAME}")
   endif()
 
   foreach(cfg_header IN LISTS MOD_MODULE_CONFIG_HEADERS)
@@ -164,7 +165,11 @@ function(add_module)
       ${MOD_MODULE_HEADERS}
       ${MOD_MODULE_CLASSES}
       ${MOD_MODULE_RESOURCES})
-    
+     
+    if(CMAKE_BINARY_NAME_PREFIX) 
+      set_target_properties(${TARGET_NAME} PROPERTIES
+            OUTPUT_NAME "${TARGET_OUTPUT_NAME}")
+    endif()
     target_include_directories(${TARGET_NAME} PUBLIC
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
       $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
@@ -191,9 +196,17 @@ function(add_module)
       target_compile_options(${TARGET_NAME} PRIVATE 
         ${MOD_MODULE_COMPILE_FLAGS})
     endif()
+    
     if(MOD_MODULE_PUBLIC_DEPENDS)
       target_link_libraries(${TARGET_NAME} PUBLIC 
         ${MOD_MODULE_PUBLIC_DEPENDS})
+        # add include directories from dependency targets 
+        foreach(module_depend IN LISTS MOD_MODULE_PUBLIC_DEPENDS)
+          get_target_property(module_depend_includes ${module_depend} INCLUDE_DIRECTORIES)
+          if(NOT module_depend_includes)
+            target_include_directories(${TARGET_NAME} PUBLIC ${module_depend_includes})
+          endif()
+        endforeach()
     endif()
     if(MOD_MODULE_PRIVATE_DEPENDS)
       target_link_libraries(
@@ -235,8 +248,14 @@ function(add_module)
       if(MOD_MODULE_TEST_SOURCE_DIR)
         set(test_source "${MOD_MODULE_TEST_SOURCE_DIR}/${test_source}")
       endif()
-      add_executable(${TARGET_NAME}${test_source_name} ${test_source})
 
+      add_executable(${TARGET_NAME}${test_source_name} ${test_source})
+      if(CMAKE_BINARY_NAME_PREFIX) 
+        set_target_properties(${TARGET_NAME}${test_source_name} PROPERTIES
+          OUTPUT_NAME "${CMAKE_BINARY_NAME_PREFIX}${TARGET_NAME}${test_source_name}"
+        )
+      endif()
+      
       get_target_property(module_includes ${TARGET_NAME} INCLUDE_DIRECTORIES)
       if(module_includes)
         target_include_directories(${TARGET_NAME}${test_source_name}

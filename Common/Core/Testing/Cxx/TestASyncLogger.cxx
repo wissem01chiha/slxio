@@ -1,5 +1,4 @@
 #include "Doctest.h"
-#include "ErrorCode.h"
 #include "ErrorHandler.h"
 #include "Logger.h"
 

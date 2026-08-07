@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef LIBZIP
-#define LIBZIP
+#ifndef LIBZIP_H
+#define LIBZIP_H
 
 #ifdef USE_EXTERNAL_LIBZIP
 #include <libzip/zip.h>
@@ -10,4 +10,4 @@
 #include <src/lib/zip.h>
 #endif
 
-#endif // LIBZIP
+#endif // LIBZIP_H
