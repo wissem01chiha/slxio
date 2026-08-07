@@ -4,5 +4,4 @@
 #ifndef BUFFREDLOGGER_H
 #define BUFFREDLOGGER_H
 
-
 #endif // BUFFREDLOGGER_H

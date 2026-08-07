@@ -1,8 +1,8 @@
 #include "Doctest.h"
 #include "ErrorLogMessage.h"
 #include "ErrorTypes.h"
-#include "Loguru.h"
 #include "Logger.h"
+#include "Loguru.h"
 
 using namespace slxio;
 

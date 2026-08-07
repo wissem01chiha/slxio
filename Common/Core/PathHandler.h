@@ -4,9 +4,9 @@
 #ifndef PATHHANDLER_H
 #define PATHHANDLER_H
 
-#include "PlatformMacro.h"
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "PlatformMacro.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

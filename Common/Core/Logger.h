@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class Logger
- * @brief Provides a synchronous implementation of the 
+ * @brief Provides a synchronous implementation of the
  * ILogger interface.
  */
 class Logger final : public ILogger {

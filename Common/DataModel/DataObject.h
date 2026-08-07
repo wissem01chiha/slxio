@@ -4,11 +4,11 @@
 #ifndef DATAOBJECT_H
 #define DATAOBJECT_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
-#include "PlatformTypes.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "DataModelPCH.h"
 #include "ILogger.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -40,9 +40,9 @@ public:
   virtual bool operator==(const DataObject &) = 0;
 
   /** Set a logger object for this data object */
-  void SetLogger(const ILogger& logger);
+  void SetLogger(const ILogger &logger);
 
-  ILogger& GetLogger();
+  ILogger &GetLogger();
 
   DataObject();
   virtual ~DataObject() = default;
