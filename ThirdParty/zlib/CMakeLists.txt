@@ -1,4 +1,5 @@
 set(ZLIB_BUILD_TESTING ${SLXIO_BUILD_THIRDPARTY_TESTING})
+set(ZLIB_BUILD_SHARED  OFF)
 
 add_subdirectory(src)
 

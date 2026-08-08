@@ -57,3 +57,5 @@ vcpkg_installed/
 _site/
 .jekyll-cache/
 Gemfile.lock
+
+Testing/Temporary/
