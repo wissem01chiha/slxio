@@ -75,8 +75,11 @@ add_module(
     TestErrorManager.cxx
     TestErrorLogger.cxx
     TestFileLogger.cxx
+    TestBackgroundLogger.cxx
+  MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     loguru
+    spdlog
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest

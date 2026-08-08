@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef NPIO
-#define NPIO
+#ifndef NPIO_H
+#define NPIO_H
 
 #ifdef USE_EXTERNAL_NPIO
-    #include <npio/npio.h>
+#include <npio/npio.h>
 #else
-    #include <src/src/npio.h>
+#include <src/src/npio.h>
 #endif
 
-#endif // NPIO
+#endif // NPIO_H

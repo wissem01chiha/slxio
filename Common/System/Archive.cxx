@@ -1,5 +1,6 @@
 #include "Archive.h"
 #include "DirectoryService.h"
+#include "ErrorHandlerMacro.h"
 #include "Libuv.h"
 #include "Libzip.h"
 #include "SystemErrorType.h"
@@ -38,7 +39,7 @@ HError Archive::Extract() {
 
   zip_t *archive = zip_open(file.GetFilePath().c_str(), ZIP_RDONLY, &err);
   if (!archive) {
-    return err;
+    return SLXIO_LIBZIP_ERROR(err);
   }
 
   zip_int64_t num_entries = zip_get_num_entries(archive, 0);
@@ -86,7 +87,7 @@ HError Archive::Add(const File file_) {
   int err = 0;
   zip_t *za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
   if (!za) {
-    return E_ARCHIVE_OPEN_FAILED;
+    return SLXIO_LIBZIP_ERROR(err);
   }
 
   zip_int64_t idx = zip_name_locate(za, file.GetFileName().c_str(), 0);

@@ -19,7 +19,7 @@ public:
   virtual DataObject *New() = 0;
 
   /** Reset the data object to its initial state */
-  virtual void Initialize();
+  virtual void Initialize(void *implDataObject) = 0;
 
   /** Get the last update time (in milliseconds since epoch) */
   virtual UInt32 GetUpdateTime() const;
@@ -34,7 +34,7 @@ public:
   virtual std::string ToString() const = 0;
 
   /** Return true if the data object underlaying container is empty */
-  virtual bool Empty() = 0;
+  virtual bool Empty() const = 0;
 
   /** Compare equality with another DataObject */
   virtual bool operator==(const DataObject &) = 0;
@@ -50,12 +50,13 @@ public:
 
   virtual ~DataObject() = default;
 
+protected:
+  const ILogger *m_logger = nullptr;
+
 private:
   // Disable copy and assignment
   DataObject(const DataObject &) = delete;
   void operator=(const DataObject &) = delete;
-
-  const ILogger *m_logger = nullptr;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -24,8 +24,10 @@ add_module(
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
     DataObject.cxx
+    JsonDataObject.cxx
   MODULE_HEADERS
     DataObject.h
+    JsonDataObject.h
     DataModelErrorType.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
@@ -36,6 +38,7 @@ add_module(
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+  MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     json-c

@@ -6,8 +6,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 DataObject::DataObject() {}
 
-void DataObject::Initialize() {}
-
 UInt32 DataObject::GetUpdateTime() const { return (UInt32)0; }
 
 UInt32 DataObject::GetMemorySize() const { return (UInt32)0; }

@@ -1,5 +1,5 @@
 # Distributed under the Apache-2.0 License.  See accompanying file
-# LICENSE.rst or https://cmake.org/licensing for details.
+# LICENSE.rst or https://github.com/wissem01chiha/slxio for details.
 
 # SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 # SPDX-License-Identifier: Apache-2.0
@@ -7,9 +7,6 @@
 #[=======================================================================[.rst:
 Module.cmake
 ------
-Changelog:
-  - 03-08-2026 Wissem CHIHA Intial Release
-  - 04-08-2026 Add CMAKE_BINARY_NAME_PREFIX
 #]=======================================================================]
 
 #[==[.rst:
@@ -125,6 +122,7 @@ function(add_module)
       MODULE_PRIVATE_DEPENDS
       MODULE_TEST_DEPENDS
       MODULE_TEST_INCLUDE_DIRS
+      MODULE_INCLUDE_DIRS
       MODULE_WINDOWS_DEPENDS
       MODULE_UNIX_DEPENDS
       MODULE_MACOS_DEPENDS
@@ -173,6 +171,11 @@ function(add_module)
     target_include_directories(${TARGET_NAME} PUBLIC
       $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
       $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>)
+
+    if(MOD_MODULE_INCLUDE_DIRS)
+        target_include_directories(${TARGET_NAME} PUBLIC
+        ${MOD_MODULE_INCLUDE_DIRS})
+    endif()
 
     if(WIN32)
       target_sources(${TARGET_NAME} PRIVATE ${MOD_MODULE_WINDOWS_SOURCES})

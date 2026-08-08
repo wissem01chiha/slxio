@@ -46,6 +46,12 @@ jobs:
 
     - name: Build
       run: cmake --build build
+    
+    - name: Upload Build Folder
+      uses: actions/upload-artifact@v4
+      with:
+          name: build-${{ matrix.name }}
+          path: build/
 
     - name: Test
       run: ctest --output-on-failure --max-width 150

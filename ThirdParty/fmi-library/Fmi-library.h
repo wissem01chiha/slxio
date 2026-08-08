@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef FMI_LIBRARY
-#define FMI_LIBRARY
+#ifndef FMI_LIBRARY_H
+#define FMI_LIBRARY_H
 
 #ifdef USE_EXTERNAL_FMI_LIBRARY
-    #include <fmi-library/Fmi-library.h>
+#include <fmi-library/Fmi-library.h>
 #else
-    #include <src/src/Import/include/FMI/fmi_import_context.h>
+#include <src/src/Import/include/FMI/fmi_import_context.h>
 #endif
 
-#endif // FMI_LIBRARY
+#endif // FMI_LIBRARY_H

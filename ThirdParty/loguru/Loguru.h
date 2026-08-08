@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef LOGURU
-#define LOGURU
+#ifndef LOGURU_H
+#define LOGURU_H
 
 #ifdef USE_EXTERNAL_LOGURU
 #include <loguru.hpp>
@@ -10,4 +10,4 @@
 #include <src/loguru.hpp>
 #endif
 
-#endif // LOGURU
+#endif // LOGURU_H

@@ -49,6 +49,7 @@ add_module(
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+  MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     libzip::zip

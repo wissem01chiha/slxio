@@ -30,7 +30,7 @@
   SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 5U)
 
 /// A nullptr object of type ILogger passed to a function
-#define E_ILOGGER_NULLPTR_RECEIVED \
-    SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 6U)
+#define E_ILOGGER_NULLPTR_RECEIVED                                             \
+  SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 6U)
 
 #endif // ERRORTYPE_H

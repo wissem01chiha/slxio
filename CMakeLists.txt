@@ -62,21 +62,23 @@ option(SLXIO_INTSALL_THIRDPARTY_LISENCES "" ON)
 option(SLXIO_BUILD_THIRDPARTY_TESTING "" OFF)
 
 # Option to enable building third party module extra tools or scripts 
-# some external modules require
 option(SLXIO_BUILD_THIRDPARTY_TOOLS "" OFF)
 
 # Option to enable *.sldd file support
-set(SLXIO_SLDD "Enable Simulink Data Dictionary support" ON)
+option(SLXIO_SLDD "Enable Simulink Data Dictionary support" ON)
 set(SLDD ${SLXIO_SLDD})
 
 # Option to enable *.mat file support
-set(SLXIO_MAT "Enable MATLAB MAT file support" OFF)
+option(SLXIO_MAT "Enable MATLAB MAT file support" OFF)
 
 # Option to enable Numpy *.npy file support
-set(SLXIO_NPY "Enable NUMPY NPY file support" OFF)
+option(SLXIO_NPY "Enable NUMPY NPY file support" OFF)
 
 # Option to enable Numpy *.npz file support
-set(SLXIO_NPZ "Enable NUMPY NPZ file support" OFF)
+option(SLXIO_NPZ "Enable NUMPY NPZ file support" OFF)
+
+# Option to enable export feature to *.xlsx files 
+option(SLXIO_XLSX "Enable Microsoft Excel file support" OFF)
 
 # Build with HDF5 library support
 # Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
@@ -130,6 +132,18 @@ mark_as_advanced(SLXIO_TSAN)
 
 option(SLXIO_UBSAN "Enable UndefinedBehaviorSanitizer (UBSan)" OFF)
 mark_as_advanced(SLXIO_UBSAN)
+
+# Option to enable/disable third party memory sanitizers
+option(SLXIO_THIRDPARTY_MSAN "" OFF)
+mark_as_advanced(SLXIO_THIRDPARTY_MSAN)
+
+# Option to enable/disable third party address sanitizers
+option(SLXIO_THIRDPARTY_ASAN "" OFF)
+mark_as_advanced(SLXIO_THIRDPARTY_ASAN)
+
+# Option to enable/disable third party undefined behavior sanitizers
+option(SLXIO_THIRDPARTY_UBSAN "" OFF)
+mark_as_advanced(SLXIO_THIRDPARTY_UBSAN)
 
 # Option to use OpenMP acceleration when available
 option(SLXIO_WITH_OPENMP "Enable OpenMP support" ON)

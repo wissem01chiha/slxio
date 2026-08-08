@@ -6,5 +6,6 @@
 
 #include "Json-c.h"
 #include <string>
+#include <vector>
 
 #endif // DATAMODELPCH_H

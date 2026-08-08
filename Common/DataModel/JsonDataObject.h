@@ -9,23 +9,24 @@
 #include "DataObject.h"
 #include "PlatformTypes.h"
 
+struct json_object;
+
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-struct json_object;
-
 /**
  * @class JsonDataObject
- * @brief A Wrapper Around Json-c Object types
  */
 class SLXIO_APIEXPORT JsonDataObject : public DataObject {
 public:
   JsonDataObject *New() override;
-  bool Empty() override;
+  void Initialize(void *implDataObject) override;
+  bool Empty() const override;
   bool operator==(const DataObject &) override;
   void *GetImplDataObject() const override;
   std::string ToString() const override;
   JsonDataObject();
+  ~JsonDataObject();
 
 private:
   json_object *ImplDataObject;

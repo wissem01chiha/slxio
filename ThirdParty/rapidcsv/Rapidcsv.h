@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef RAPIDCSV
-#define RAPIDCSV
+#ifndef RAPIDCSV_H
+#define RAPIDCSV_H
 
 #ifdef USE_EXTERNAL_RAPIDCSV
 #include <rapidcsv.h>
@@ -10,4 +10,4 @@
 #include <src/src/rapidcsv.h>
 #endif
 
-#endif // RAPIDCSV
+#endif // RAPIDCSV_H

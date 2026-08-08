@@ -66,24 +66,10 @@ public:
   /** Get the logger sink */
   const ILogger *GetLogger();
 
-  /**
-   * Enables logging feature, Logging is disabled by default for performance
-   * reasons. It can be enabled or disabled at runtime using the provided
-   * logging control functions.
-   */
-  void EnableLogging();
-
-  /* Prevents log messages from being generated until logging */
-  void DisableLogging();
-
-  /* Returns the current logging state */
-  bool GetLogStatus();
-
 private:
   static const size_t m_bufferSize = 500;
   std::vector<HError> m_ringBuffer;
   const ILogger *m_logger = nullptr;
-  bool m_logStatus = false;
   size_t head = 0;
   std::mutex m_logMutex;
   ErrorManager();

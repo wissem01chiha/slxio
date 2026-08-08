@@ -89,11 +89,5 @@ HError ErrorManager::SetLogger(const ILogger *logger) {
 
 const ILogger *ErrorManager::GetLogger() { return m_logger; }
 
-void ErrorManager::EnableLogging() { m_logStatus = true; }
-
-void ErrorManager::DisableLogging() { m_logStatus = false; }
-
-bool ErrorManager::GetLogStatus() { return m_logStatus; }
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

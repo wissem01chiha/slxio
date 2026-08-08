@@ -17,7 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Provides a synchronous implementation of the
  * ILogger interface.
  */
-class Logger final : public ILogger {
+class SLXIO_APIEXPORT Logger final : public ILogger {
 public:
   Logger() = default;
   void Init() override;

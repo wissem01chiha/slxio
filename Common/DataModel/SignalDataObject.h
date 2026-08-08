@@ -19,11 +19,8 @@ public:
   bool operator==(const DataObject &) override;
   void *GetImplDataObject() const override;
   std::string ToString() const override;
-  bool Empty() override;
+  bool Empty() const override;
   SignalObject();
-
-private:
-  AbstractSignalPtr ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

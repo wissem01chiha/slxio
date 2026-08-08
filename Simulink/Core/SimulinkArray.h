@@ -5,6 +5,7 @@
 #define SIMULINKARRAY_H
 
 #include "ABINamespaceMacro.h"
+#include "ILogger.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
 #include <memory>
@@ -12,7 +13,6 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Logger;
 class SimulinkParameter;
 
 /**
