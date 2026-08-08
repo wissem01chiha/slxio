@@ -1,7 +1,7 @@
 ﻿#include "Directory.h"
 #include "Libuv.h"
 #include "PlatformMacro.h"
-#include "SystemErrorTypes.h"
+#include "SystemErrorType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

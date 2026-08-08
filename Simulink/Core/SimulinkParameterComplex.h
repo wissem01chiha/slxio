@@ -4,8 +4,8 @@
 #ifndef SIMULINKPARAMETERCOMPLEX_H
 #define SIMULINKPARAMETERCOMPLEX_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
 #include <vector>

@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef SYSTEMERRORTYPES_H
-#define SYSTEMERRORTYPES_H
+#ifndef SYSTEMERRORTYPE_H
+#define SYSTEMERRORTYPE_H
 
 /// Always include the global error codes header definition file.
 /// This file is an implementation file and should be included in
 /// Cxx source files only.
 #include "ErrorHandlerMacro.h"
-#include "ErrorTypes.h"
+#include "ErrorType.h"
 
 #define E_INVALID_FUNCTION                                                     \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, CORE, SLXIO_FATAL, 1U)
@@ -60,4 +60,4 @@
 #define E_ARCHIVE_INVALID_ID                                                   \
   SLXIO_HERROR(SLXIO_PROJECT, COMMON, SYSTEM, SLXIO_FATAL, 27U)
 
-#endif // SYSTEMERRORTYPES_H
+#endif // SYSTEMERRORTYPE_H

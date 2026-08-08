@@ -4,8 +4,8 @@
 #ifndef LOGICALOPERATOR_H
 #define LOGICALOPERATOR_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
 namespace slxio {

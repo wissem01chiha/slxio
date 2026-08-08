@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef ERRORTYPES_H
-#define ERRORTYPES_H
+#ifndef ERRORTYPE_H
+#define ERRORTYPE_H
 
 #include "ErrorHandlerMacro.h"
 
@@ -29,4 +29,8 @@
 #define E_OPERATION_NOT_SUPPORTED                                              \
   SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 5U)
 
-#endif // ERRORTYPES_H
+/// A nullptr object of type ILogger passed to a function
+#define E_ILOGGER_NULLPTR_RECEIVED \
+    SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 6U)
+
+#endif // ERRORTYPE_H

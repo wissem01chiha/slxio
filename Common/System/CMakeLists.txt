@@ -54,5 +54,5 @@ add_module(
     libzip::zip
     uv_a
   MODULE_TEST_DEPENDS
-    doctest_with_main
+  MODULE_TEST_INCLUDE_DIRS
 )

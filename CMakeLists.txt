@@ -61,12 +61,22 @@ option(SLXIO_INTSALL_THIRDPARTY_LISENCES "" ON)
 # Requires SLXIO_BUILD_TESTING enabled
 option(SLXIO_BUILD_THIRDPARTY_TESTING "" OFF)
 
+# Option to enable building third party module extra tools or scripts 
+# some external modules require
+option(SLXIO_BUILD_THIRDPARTY_TOOLS "" OFF)
+
 # Option to enable *.sldd file support
 set(SLXIO_SLDD "Enable Simulink Data Dictionary support" ON)
 set(SLDD ${SLXIO_SLDD})
 
 # Option to enable *.mat file support
-set(SLXIO_MAT "Enable MATLAB MAT file support" ON)
+set(SLXIO_MAT "Enable MATLAB MAT file support" OFF)
+
+# Option to enable Numpy *.npy file support
+set(SLXIO_NPY "Enable NUMPY NPY file support" OFF)
+
+# Option to enable Numpy *.npz file support
+set(SLXIO_NPZ "Enable NUMPY NPZ file support" OFF)
 
 # Build with HDF5 library support
 # Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5

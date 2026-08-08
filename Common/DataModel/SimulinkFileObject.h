@@ -4,8 +4,8 @@
 #ifndef SIMULINKFILEOBJECT_H
 #define SIMULINKFILEOBJECT_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "DataObject.h"
 #include "SimulinkFile.h"
 #include <string>

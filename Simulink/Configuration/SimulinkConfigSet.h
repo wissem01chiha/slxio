@@ -4,8 +4,8 @@
 #ifndef SIMULINKCONFIGSET_H
 #define SIMULINKCONFIGSET_H
 
+#include "APIExportMacro.h"
 #include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"

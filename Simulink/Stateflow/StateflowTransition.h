@@ -4,8 +4,8 @@
 #ifndef STATEFLOWTRANSITION_H
 #define STATEFLOWTRANSITION_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include <memory>
 #include <string>
 

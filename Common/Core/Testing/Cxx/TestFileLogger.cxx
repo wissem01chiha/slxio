@@ -1,6 +1,6 @@
-#include "ArrayLogMessage.h"
 #include "Doctest.h"
 #include "FileLogger.h"
+#include "LogMessageFixture.h"
 
 using namespace slxio;
 
@@ -40,9 +40,9 @@ TEST_CASE("FileLogger writes message to file") {
   FileLogger logger(logFile);
   logger.Init();
 
-  std::array<std::string, 3> data{"Hello", "File", "Logger"};
+  std::string data("Hello");
 
-  ArrayLogMessage<std::string, 3> msg(data);
+  LogMessage msg(data);
 
   logger.Log(msg);
 
@@ -55,8 +55,6 @@ TEST_CASE("FileLogger writes message to file") {
   const std::string content = buffer.str();
 
   CHECK(content.find("Hello") != std::string::npos);
-  CHECK(content.find("File") != std::string::npos);
-  CHECK(content.find("Logger") != std::string::npos);
 
   std::remove(logFile.c_str());
 }
@@ -69,9 +67,9 @@ TEST_CASE("FileLogger stream operator") {
   FileLogger logger(logFile);
   logger.Init();
 
-  std::array<std::string, 2> data{"Test", "Message"};
+  std::string data = "Test";
 
-  ArrayLogMessage<std::string, 2> msg(data);
+  LogMessage msg(data);
 
   logger << msg;
 
@@ -84,7 +82,6 @@ TEST_CASE("FileLogger stream operator") {
   const std::string content = buffer.str();
 
   CHECK(content.find("Test") != std::string::npos);
-  CHECK(content.find("Message") != std::string::npos);
 
   std::remove(logFile.c_str());
 }

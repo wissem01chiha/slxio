@@ -4,7 +4,7 @@
 #ifndef SIMULINKFILE_H
 #define SIMULINKFILE_H
 
-#include "AbiNamespaceMacro.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "xmlDocDataObject.h"
 #include <string>

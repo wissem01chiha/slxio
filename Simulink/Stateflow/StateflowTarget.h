@@ -4,7 +4,7 @@
 #ifndef STATEFLOWTARGET_H
 #define STATEFLOWTARGET_H
 
-#include "AbiNamespaceMacro.h"
+#include "ABINamespaceMacro.h"
 #include "StateflowElementBase.h"
 
 namespace slxio {

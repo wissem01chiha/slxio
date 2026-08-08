@@ -4,8 +4,8 @@
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include <memory>
 #include <string>

@@ -4,8 +4,8 @@
 #ifndef SIMULINKSOLVERPARSER_H
 #define SIMULINKSOLVERPARSER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Libxml2.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkSolver.h"

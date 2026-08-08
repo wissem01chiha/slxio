@@ -51,7 +51,7 @@ add_module(
     BackgroundLogger.h
     ErrorHandlerMacro.h
     ErrorHandler.h
-    ErrorTypes.h
+    ErrorType.h
     ErrorManager.h
     ILogMessage.h
     FileLogger.h
@@ -73,10 +73,11 @@ add_module(
     TestSimulinkVersion.cxx
     TestErrorHandler.cxx
     TestErrorManager.cxx
-    TestLoggerArrayMessage.cxx
+    TestErrorLogger.cxx
     TestFileLogger.cxx
   MODULE_PUBLIC_DEPENDS
     loguru
   MODULE_TEST_DEPENDS
-    doctest_with_main
+  MODULE_TEST_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
 )

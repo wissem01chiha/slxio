@@ -4,8 +4,8 @@
 #ifndef SIMUMINKMODELPARSER_H
 #define SIMUMINKMODELPARSER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "ErrorCode.h"
 #include "Libxml2.h"
 #include "SimulinkModel.h"

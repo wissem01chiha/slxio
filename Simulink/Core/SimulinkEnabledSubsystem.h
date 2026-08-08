@@ -4,8 +4,8 @@
 #ifndef SIMULINKENABLEDSUBSYSTEM_H
 #define SIMULINKENABLEDSUBSYSTEM_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkSubsystem.h"

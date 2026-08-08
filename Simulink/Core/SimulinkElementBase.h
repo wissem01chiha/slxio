@@ -4,8 +4,8 @@
 #ifndef SIMULINKELEMENTBASE_H
 #define SIMULINKELEMENTBASE_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementType.h"
 #include "SimulinkParameterBase.h"

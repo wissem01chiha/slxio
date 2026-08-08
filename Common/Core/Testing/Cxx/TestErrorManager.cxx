@@ -1,6 +1,6 @@
 #include "Doctest.h"
 #include "ErrorManager.h"
-#include "ErrorTypes.h"
+#include "ErrorType.h"
 
 using namespace slxio;
 

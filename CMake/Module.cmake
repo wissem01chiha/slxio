@@ -26,7 +26,6 @@ Changelog:
       MODULE_ENABLE_BUILD
       MODULE_ENABLE_TESTS
       MODULE_ENABLE_COVERAGE
-      MODULE_INCLUDE_IN_GROUP
       MODULE_INSTALL_HEADERS
       MODULE_INSTALL_TARGETS
       MODULE_INSTALL_LICENSES
@@ -125,6 +124,7 @@ function(add_module)
       MODULE_PUBLIC_DEPENDS
       MODULE_PRIVATE_DEPENDS
       MODULE_TEST_DEPENDS
+      MODULE_TEST_INCLUDE_DIRS
       MODULE_WINDOWS_DEPENDS
       MODULE_UNIX_DEPENDS
       MODULE_MACOS_DEPENDS
@@ -260,6 +260,12 @@ function(add_module)
       if(module_includes)
         target_include_directories(${TARGET_NAME}${test_source_name}
           PRIVATE ${module_includes})
+      endif()
+      # this option specifies additional include directories for tests,
+      # such as header‑only frameworks, fixtures, and other test helpers.
+      if(MOD_MODULE_TEST_INCLUDE_DIRS)
+        target_include_directories(${TARGET_NAME}${test_source_name}
+          PRIVATE ${MOD_MODULE_TEST_INCLUDE_DIRS})
       endif()
 
       if(NOT MODULE_TEST_DEPENDS)

@@ -4,8 +4,8 @@
 #ifndef SIMULINKRTW_H
 #define SIMULINKRTW_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
 namespace slxio {

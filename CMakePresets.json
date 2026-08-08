@@ -91,10 +91,22 @@
       "configuration": "Debug"
     },
     {
+      "name": "Visual-Studio-Community-2022-Release-amd64-release",
+      "displayName": "Visual-Studio-Community-2022-Release-amd64-release",
+      "configurePreset": "Visual-Studio-Community-2022-Release-amd64",
+      "configuration": "Release"
+    },
+    {
       "name": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
       "displayName": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
       "configurePreset": "Visual-Studio-Community-2022-Release-amd64_x86",
       "configuration": "Debug"
+    },
+    {
+      "name": "Visual-Studio-Community-2022-Release-amd64_x86-release",
+      "displayName": "Visual-Studio-Community-2022-Release-amd64_x86-release",
+      "configurePreset": "Visual-Studio-Community-2022-Release-amd64_x86",
+      "configuration": "Release"
     }
   ]
 }

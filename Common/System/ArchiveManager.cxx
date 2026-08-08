@@ -1,6 +1,6 @@
 #include "ArchiveManager.h"
 #include "Archive.h"
-#include "SystemErrorTypes.h"
+#include "SystemErrorType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

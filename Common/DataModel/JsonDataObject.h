@@ -4,15 +4,15 @@
 #ifndef JSONDATAOBJECT_H
 #define JSONDATAOBJECT_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "DataObject.h"
 #include "PlatformTypes.h"
 
-struct json_object;
-
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
+
+struct json_object;
 
 /**
  * @class JsonDataObject

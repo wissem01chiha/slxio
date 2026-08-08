@@ -4,7 +4,7 @@
 #ifndef SIMULINKARRAY_H
 #define SIMULINKARRAY_H
 
-#include "AbiNamespaceMacro.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
 #include <memory>

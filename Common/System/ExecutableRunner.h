@@ -4,8 +4,8 @@
 #ifndef EXECUTABLERUNNER_H
 #define EXECUTABLERUNNER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

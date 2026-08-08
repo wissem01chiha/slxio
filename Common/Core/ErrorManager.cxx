@@ -1,7 +1,7 @@
 #include "ErrorManager.h"
 #include "ErrorHandler.h"
 #include "ErrorHandlerMacro.h"
-#include "ErrorTypes.h"
+#include "ErrorType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -79,7 +79,13 @@ std::vector<HError> ErrorManager::GetBuffer() {
   return m_ringBuffer;
 }
 
-void ErrorManager::SetLogger(const ILogger *logger) { m_logger = logger; }
+HError ErrorManager::SetLogger(const ILogger *logger) {
+  if (logger == nullptr) {
+    return E_ILOGGER_NULLPTR_RECEIVED;
+  }
+  m_logger = logger;
+  return E_OK;
+}
 
 const ILogger *ErrorManager::GetLogger() { return m_logger; }
 

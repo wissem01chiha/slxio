@@ -4,7 +4,7 @@
 #ifndef SIMULINKPORTTYPE_H
 #define SIMULINKPORTTYPE_H
 
-#include "AbiNamespaceMacro.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementType.h"
 #include <string>

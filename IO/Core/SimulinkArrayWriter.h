@@ -4,8 +4,8 @@
 #ifndef SIMULINKARRAYWRITER_H
 #define SIMULINKARRAYWRITER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "SimulinkWriter.h"
 
 class SimulinkArray;

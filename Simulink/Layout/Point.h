@@ -4,8 +4,8 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Logger.h"
 #include "PlatformTypes.h"
 #include <vector>

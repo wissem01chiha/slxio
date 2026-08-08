@@ -4,7 +4,7 @@
 #ifndef CONSTANT_H
 #define CONSTANT_H
 
-#include "AbiNamespaceMacro.h"
+#include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkLibraryBase.h"
 

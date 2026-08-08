@@ -4,8 +4,8 @@
 #ifndef STATEFLOWMACHINE_H
 #define STATEFLOWMACHINE_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "StateflowChart.h"
 #include "StateflowElementBase.h"
 #include "StateflowTarget.h"

@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef BackgroundLogger_H
-#define BackgroundLogger_H
+#ifndef BACKGROUNDLOGGER_H
+#define BACKGROUNDLOGGER_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
@@ -34,4 +34,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 
-#endif // BackgroundLogger_H
+#endif // BACKGROUNDLOGGER_H

@@ -8,7 +8,7 @@ nav_order: 10
 
 
 Slxio has moved from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight and efficient testing since version 0.1.0.
-Testing is enabled via the CMake option `ENABLE_TESTING`.
+Testing is enabled via the CMake option `SLXIO_ENABLE_TESTING`.
 
 
 ### 4.1 Running Tests

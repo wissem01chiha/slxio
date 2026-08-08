@@ -4,8 +4,8 @@
 #ifndef 2DLOOKUPTABLE_H
 #define 2DLOOKUPTABLE_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
 namespace slxio {

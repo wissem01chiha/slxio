@@ -4,8 +4,8 @@
 #ifndef SIMULINKSIGNALPARSER_H
 #define SIMULINKSIGNALPARSER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "Libxml2.h"
 #include "SimulinkParserBase.h"
 #include "SimulinkSignal.h"

@@ -4,8 +4,8 @@
 #ifndef STATEFLOWCHART_H
 #define STATEFLOWCHART_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
 #include "StateflowNodeBase.h"

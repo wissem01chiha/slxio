@@ -2,7 +2,7 @@
 #include "DirectoryService.h"
 #include "Libuv.h"
 #include "Libzip.h"
-#include "SystemErrorTypes.h"
+#include "SystemErrorType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

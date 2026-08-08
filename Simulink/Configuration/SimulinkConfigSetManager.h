@@ -4,8 +4,8 @@
 #ifndef SIMULINKCONFIGSETMANAGER_H
 #define SIMULINKCONFIGSETMANAGER_H
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "ErrorCode.h"
 #include "Logger.h"
 #include <memory>

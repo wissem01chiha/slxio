@@ -4,8 +4,8 @@
 #ifndef DataSourceType_h
 #define DataSourceType_h
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

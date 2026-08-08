@@ -17,3 +17,4 @@ nav_order: 4
 | Ubuntu 22.04| Clang       | 14.0, 15.0           | x64               | NA     |
 | macOS 14    | Apple Clang | 14.0, 15.0           | arm64, x64        |  [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)     |
 
+note for MacOS users: 

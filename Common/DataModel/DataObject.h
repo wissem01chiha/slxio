@@ -40,17 +40,22 @@ public:
   virtual bool operator==(const DataObject &) = 0;
 
   /** Set a logger object for this data object */
-  void SetLogger(const ILogger &logger);
+  HError SetLogger(const ILogger *logger);
 
-  ILogger &GetLogger();
+  /** Get the logger sink */
+  const ILogger *GetLogger();
 
+  /* Default Constructor */
   DataObject();
+
   virtual ~DataObject() = default;
 
 private:
   // Disable copy and assignment
   DataObject(const DataObject &) = delete;
   void operator=(const DataObject &) = delete;
+
+  const ILogger *m_logger = nullptr;
 };
 
 SLXIO_ABI_NAMESPACE_END

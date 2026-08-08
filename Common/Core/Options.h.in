@@ -16,4 +16,7 @@
 /* Project source directory */
 #cmakedefine PROJECT_SOURCE_DIR "@PROJECT_SOURCE_DIR@"
 
+/* Project Testing option */
+#cmakedefine01 SLXIO_BUILD_TESTING 
+
 #endif // OPTIONS_H

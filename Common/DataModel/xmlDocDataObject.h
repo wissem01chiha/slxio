@@ -4,8 +4,8 @@
 #ifndef XMLDOCDATAOBJECT
 #define XMLDOCDATAOBJECT
 
-#include "AbiNamespaceMacro.h"
-#include "ApiExportMacro.h"
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "DataObject.h"
 #include "Libxml2.h"
 

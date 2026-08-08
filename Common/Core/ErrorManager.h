@@ -53,8 +53,7 @@ public:
   void SetResult(HError status);
 
   /* Retrieve the full log buffer.
-   * Provides access to the complete log for analysis or transmission.
-   */
+   * Provides access to the complete log for analysis or transmission.*/
   std::vector<HError> GetBuffer();
 
   /**
@@ -62,11 +61,9 @@ public:
    * to write trace into the supported logging implementations
    * Note the ErrorManager is not allowed to modify the logger object
    */
-  void SetLogger(const ILogger *logger);
+  HError SetLogger(const ILogger *logger);
 
-  /**
-   * Get the logger sink
-   */
+  /** Get the logger sink */
   const ILogger *GetLogger();
 
   /**

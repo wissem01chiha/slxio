@@ -25,7 +25,8 @@ add_module(
   MODULE_CLASSES
     DataObject.cxx
   MODULE_HEADERS
-    DataObject.h 
+    DataObject.h
+    DataModelErrorType.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
@@ -39,5 +40,5 @@ add_module(
     CommonCore
     json-c
   MODULE_TEST_DEPENDS
-    doctest_with_main
+  MODULE_TEST_INCLUDE_DIRS
 )

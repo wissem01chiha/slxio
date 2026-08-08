@@ -4,7 +4,7 @@
 include(CTest)
 enable_testing()
 
-# 
+set(BUILD_TESTING ON)
 set(PROJECT_SOURCE_DIR "${PROJECT_SOURCE_DIR}")
 
 if(SLXIO_COVERAGE)
