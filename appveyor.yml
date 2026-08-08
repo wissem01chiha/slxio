@@ -3,7 +3,7 @@ version: 1.0.{build}
 
 install:
   - choco install cmake --version=3.27.7 -y
-  - refreshenv
+  - set PATH=C:\Program Files\CMake\bin;%PATH%
   - cmake --version    
 
 platform:

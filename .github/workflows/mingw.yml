@@ -42,6 +42,12 @@ jobs:
       - name: Install MinGW
         uses: egor-tensin/setup-mingw@v3
 
+      - name: Print Environment
+        run: |
+          gcc --version
+          where gcc
+          echo $PATH
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -50,6 +56,7 @@ jobs:
           cmake -S . -B build
           -G Ninja
           -DCMAKE_CXX_STANDARD=14
+          -DCMAKE_EXE_LINKER_FLAGS="-static"
           -DCMAKE_BUILD_TYPE=${{ matrix.configuration }}
           -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} 
         env:
