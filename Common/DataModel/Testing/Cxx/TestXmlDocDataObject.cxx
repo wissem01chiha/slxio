@@ -5,7 +5,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class XmlDocDataObjectTestFixture {
+class XmlDocDataObjectTestFixture
+{
 public:
   XmlDocDataObjectTestFixture(){};
   ~XmlDocDataObjectTestFixture(){};

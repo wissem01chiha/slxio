@@ -14,6 +14,7 @@
  */
 /*--------------------------------------------------------------------------*/
 #include "TermConsole.h"
+
 #include "FocusOnConsole.h"
 #include "HistoryManager.h"
 #include "TermCommand.h"
@@ -25,6 +26,7 @@
 #include "sci_malloc.h"
 #include "scilines.h"
 #include "storeCommand.h"
+
 #include <Windows.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -53,19 +55,21 @@ static BOOL isExtendedPressed(DWORD StateKey);
 static void simulateCarriageReturn(void);
 static char actionControlKey(void);
 /*--------------------------------------------------------------------------*/
-static BOOL CtrlHandler(DWORD fdwCtrlType) {
+static BOOL CtrlHandler(DWORD fdwCtrlType)
+{
   switch (fdwCtrlType) {
-  case CTRL_C_EVENT: {
-    ControlC_Command();
-    newLine();
-    simulateCarriageReturn();
-  }
-    return TRUE;
+    case CTRL_C_EVENT: {
+      ControlC_Command();
+      newLine();
+      simulateCarriageReturn();
+    }
+      return TRUE;
   }
   return FALSE;
 }
 /*--------------------------------------------------------------------------*/
-static void simulateCarriageReturn(void) {
+static void simulateCarriageReturn(void)
+{
   INPUT_RECORD rec;
   DWORD written;
 
@@ -81,7 +85,8 @@ static void simulateCarriageReturn(void) {
   WriteConsoleInput(Win32InputStream, &rec, 1, &written);
 }
 /*--------------------------------------------------------------------------*/
-void InitializeTerminal(void) {
+void InitializeTerminal(void)
+{
   if (!Win32InputStream) {
     Win32InputStream = GetStdHandle(STD_INPUT_HANDLE);
     GetConsoleMode(Win32InputStream, &OldWin32Mode);
@@ -97,9 +102,13 @@ void InitializeTerminal(void) {
   SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
 }
 /*--------------------------------------------------------------------------*/
-void TerminalBeep(void) { MessageBeep(MB_OK); }
+void TerminalBeep(void)
+{
+  MessageBeep(MB_OK);
+}
 /*--------------------------------------------------------------------------*/
-int TerminalPrintf(const char *buffer) {
+int TerminalPrintf(const char* buffer)
+{
   if (buffer) {
     if (buffer[0] != 0) {
       int len = (int)strlen(buffer);
@@ -120,9 +129,13 @@ int TerminalPrintf(const char *buffer) {
   return -1;
 }
 /*--------------------------------------------------------------------------*/
-int TerminalPutc(char ch) { return putc(ch, stdout); }
+int TerminalPutc(char ch)
+{
+  return putc(ch, stdout);
+}
 /*--------------------------------------------------------------------------*/
-static unsigned char TerminalGetchar(void) {
+static unsigned char TerminalGetchar(void)
+{
   INPUT_RECORD irBuffer;
   DWORD n = 0;
   unsigned char ch = 0;
@@ -136,138 +149,139 @@ static unsigned char TerminalGetchar(void) {
     PeekConsoleInput(Win32InputStream, &irBuffer, 1, &n);
 
     switch (irBuffer.EventType) {
-    case KEY_EVENT: {
-      if (irBuffer.Event.KeyEvent.bKeyDown) {
-        if (irBuffer.Event.KeyEvent.dwControlKeyState) {
-          if (isCTRLPressed(irBuffer.Event.KeyEvent.dwControlKeyState)) {
-            char c = actionControlKey();
-            if (c) {
-              ReadConsoleInputW(Win32InputStream, &irBuffer, 1, &n);
-              return c;
-            } else {
-              if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
+      case KEY_EVENT: {
+        if (irBuffer.Event.KeyEvent.bKeyDown) {
+          if (irBuffer.Event.KeyEvent.dwControlKeyState) {
+            if (isCTRLPressed(irBuffer.Event.KeyEvent.dwControlKeyState)) {
+              char c = actionControlKey();
+              if (c) {
                 ReadConsoleInputW(Win32InputStream, &irBuffer, 1, &n);
-                c = irBuffer.Event.KeyEvent.uChar.AsciiChar;
-                if ((c > 0) && !iscntrl(c)) {
-                  return c;
-                }
+                return c;
               } else {
-                ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+                if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
+                  ReadConsoleInputW(Win32InputStream, &irBuffer, 1, &n);
+                  c = irBuffer.Event.KeyEvent.uChar.AsciiChar;
+                  if ((c > 0) && !iscntrl(c)) {
+                    return c;
+                  }
+                } else {
+                  ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+                }
               }
+              break;
             }
-            break;
+
+            if (isALTPressed(irBuffer.Event.KeyEvent.dwControlKeyState)) {
+              if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
+                ReadConsole(Win32InputStream, &ch, 1, &n, NULL);
+                return ch;
+              } else {
+                DWORD stateKey = 0;
+                WORD vk = 0;
+
+                ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+
+                stateKey = irBuffer.Event.KeyEvent.dwControlKeyState;
+                vk = irBuffer.Event.KeyEvent.wVirtualKeyCode;
+
+                switch (vk) {
+                  case VK_F4:
+                    ALTF4_Command();
+                    break;
+
+                  default:
+                    break;
+                }
+              }
+              break;
+            }
           }
 
-          if (isALTPressed(irBuffer.Event.KeyEvent.dwControlKeyState)) {
-            if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
-              ReadConsole(Win32InputStream, &ch, 1, &n, NULL);
-              return ch;
-            } else {
-              DWORD stateKey = 0;
-              WORD vk = 0;
+          if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
+            ReadConsole(Win32InputStream, &ch, 1, &n, NULL);
 
-              ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-
-              stateKey = irBuffer.Event.KeyEvent.dwControlKeyState;
-              vk = irBuffer.Event.KeyEvent.wVirtualKeyCode;
-
-              switch (vk) {
-              case VK_F4:
-                ALTF4_Command();
+            switch (ch) {
+              case VK_TAB:
+                TermCompletion();
                 break;
+              case VK_BACK:
+                deletePreviousChar();
+                break;
+              default: {
+                if (!iscntrl(ch) || (ch == CR_1) || (ch == CR_2)) {
+                  return ch;
+                }
+              } break;
+            }
+          } else {
+            WORD vk = 0;
+            ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+            vk = irBuffer.Event.KeyEvent.wVirtualKeyCode;
 
+            switch (vk) {
+              case VK_F1:
+              case VK_HELP:
+                F1_Command();
+                break;
+              case VK_F2:
+                F2_Command();
+                break;
+              case VK_LEFT:
+                moveBackSingleChar();
+                break;
+              case VK_RIGHT:
+                moveForwardSingleChar();
+                break;
+              case VK_UP:
+                moveBackHistory();
+                break;
+              case VK_DOWN:
+                moveForwardHistory();
+                break;
+              case VK_DELETE:
+                deleteCurrentChar();
+                break;
+              case VK_HOME:
+                moveBeginningLine();
+                break;
+              case VK_END:
+                moveEndLine();
+                break;
               default:
                 break;
-              }
             }
-            break;
-          }
-        }
-
-        if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0') {
-          ReadConsole(Win32InputStream, &ch, 1, &n, NULL);
-
-          switch (ch) {
-          case VK_TAB:
-            TermCompletion();
-            break;
-          case VK_BACK:
-            deletePreviousChar();
-            break;
-          default: {
-            if (!iscntrl(ch) || (ch == CR_1) || (ch == CR_2)) {
-              return ch;
-            }
-          } break;
           }
         } else {
-          WORD vk = 0;
           ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-          vk = irBuffer.Event.KeyEvent.wVirtualKeyCode;
-
-          switch (vk) {
-          case VK_F1:
-          case VK_HELP:
-            F1_Command();
-            break;
-          case VK_F2:
-            F2_Command();
-            break;
-          case VK_LEFT:
-            moveBackSingleChar();
-            break;
-          case VK_RIGHT:
-            moveForwardSingleChar();
-            break;
-          case VK_UP:
-            moveBackHistory();
-            break;
-          case VK_DOWN:
-            moveForwardHistory();
-            break;
-          case VK_DELETE:
-            deleteCurrentChar();
-            break;
-          case VK_HOME:
-            moveBeginningLine();
-            break;
-          case VK_END:
-            moveEndLine();
-            break;
-          default:
-            break;
-          }
         }
-      } else {
+      } break;
+      case MOUSE_EVENT: {
+        /* Read mouse Input but not used */
         ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-      }
-    } break;
-    case MOUSE_EVENT: {
-      /* Read mouse Input but not used */
-      ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-    } break;
-    case WINDOW_BUFFER_SIZE_EVENT: {
-      /* Read resize event Input */
-      setConsoleWidth(irBuffer.Event.WindowBufferSizeEvent.dwSize.X);
-      setConsoleLines(irBuffer.Event.WindowBufferSizeEvent.dwSize.Y);
+      } break;
+      case WINDOW_BUFFER_SIZE_EVENT: {
+        /* Read resize event Input */
+        setConsoleWidth(irBuffer.Event.WindowBufferSizeEvent.dwSize.X);
+        setConsoleLines(irBuffer.Event.WindowBufferSizeEvent.dwSize.Y);
 
-      ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-    } break;
-    case MENU_EVENT: {
-      ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-    } break;
-    case FOCUS_EVENT: {
-      ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-    } break;
-    default: {
-      /* Read Input but not used */
-      ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
-    } break;
+        ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+      } break;
+      case MENU_EVENT: {
+        ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+      } break;
+      case FOCUS_EVENT: {
+        ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+      } break;
+      default: {
+        /* Read Input but not used */
+        ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
+      } break;
     }
   } while (TRUE);
 }
 /*--------------------------------------------------------------------------*/
-static char actionControlKey(void) {
+static char actionControlKey(void)
+{
   if (isCTRL_VKEY('X') || isCTRL_VKEY('C')) {
     ControlC_Command();
     return '\n';
@@ -290,7 +304,7 @@ static char actionControlKey(void) {
   {
     deletePreviousChar();
   } else if (isCTRL_VKEY(
-                 'K')) /* kills from current position to the end of line */
+               'K')) /* kills from current position to the end of line */
   {
     killCurrentPositionToEndLine();
   } else if (isCTRL_VKEY('N')) /* moves forward through history */
@@ -324,7 +338,8 @@ static char actionControlKey(void) {
   return 0;
 }
 /*--------------------------------------------------------------------------*/
-char *TerminalGetString(const char *prompt) {
+char* TerminalGetString(const char* prompt)
+{
   if (InitTerm) {
     InitializeTerminal();
     InitTerm = FALSE;
@@ -357,7 +372,7 @@ char *TerminalGetString(const char *prompt) {
       if (isHistorySearch()) {
         putLineSearchedHistory();
       } else {
-        char *line = getCurrentLine();
+        char* line = getCurrentLine();
         TerminalPutc('\n');
         appendLineToScilabHistory(line);
         return line;
@@ -370,17 +385,23 @@ char *TerminalGetString(const char *prompt) {
   return NULL;
 }
 /*--------------------------------------------------------------------------*/
-static BOOL isCTRLPressed(DWORD StateKey) {
+static BOOL isCTRLPressed(DWORD StateKey)
+{
   return ((StateKey & (RIGHT_CTRL_PRESSED | LEFT_CTRL_PRESSED)) != 0);
 }
 /*--------------------------------------------------------------------------*/
-static BOOL isALTPressed(DWORD StateKey) {
+static BOOL isALTPressed(DWORD StateKey)
+{
   return ((StateKey & (RIGHT_ALT_PRESSED | LEFT_ALT_PRESSED)) != 0);
 }
 /*--------------------------------------------------------------------------*/
-static BOOL isExtendedPressed(DWORD StateKey) {
+static BOOL isExtendedPressed(DWORD StateKey)
+{
   return ((StateKey & (ENHANCED_KEY)) != 0);
 }
 /*--------------------------------------------------------------------------*/
-static BOOL isCTRL_VKEY(int VKEY) { return (GetKeyState(VKEY) & 0x80); }
+static BOOL isCTRL_VKEY(int VKEY)
+{
+  return (GetKeyState(VKEY) & 0x80);
+}
 /*--------------------------------------------------------------------------*/

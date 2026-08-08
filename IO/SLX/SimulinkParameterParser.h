@@ -28,7 +28,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class SLXIO_APIEXPORT SimulinkParameterParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkParameter> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
+{
 public:
   SimulinkParameterParser() = default;
   /// @note Check if the related node name attribute is empty.

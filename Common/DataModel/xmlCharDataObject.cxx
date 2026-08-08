@@ -3,15 +3,30 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-xmlCharDataObject *xmlCharDataObject::New() { return new xmlCharDataObject(); }
+xmlCharDataObject* xmlCharDataObject::New()
+{
+  return new xmlCharDataObject();
+}
 
-bool xmlCharDataObject::Empty() { return ImplDataObject == nullptr; }
+bool xmlCharDataObject::Empty()
+{
+  return ImplDataObject == nullptr;
+}
 
-bool xmlCharDataObject::operator==(const DataObject &) { return false; }
+bool xmlCharDataObject::operator==(const DataObject&)
+{
+  return false;
+}
 
-void *xmlCharDataObject::GetImplDataObject() const { return ImplDataObject; }
+void* xmlCharDataObject::GetImplDataObject() const
+{
+  return ImplDataObject;
+}
 
-std::string xmlCharDataObject::ToString() const { return std::string(); }
+std::string xmlCharDataObject::ToString() const
+{
+  return std::string();
+}
 
 xmlCharDataObject::xmlCharDataObject() {}
 

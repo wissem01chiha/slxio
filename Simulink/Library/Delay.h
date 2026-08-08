@@ -4,12 +4,14 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <string>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Delay final {
+class SLXIO_APIEXPORT Delay final
+{
 public:
   /** Default Constructor */
   Delay();

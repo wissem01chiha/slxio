@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Derivative final {
+class SLXIO_APIEXPORT Derivative final
+{
 public:
   /** Default Constructor */
   Derivative();

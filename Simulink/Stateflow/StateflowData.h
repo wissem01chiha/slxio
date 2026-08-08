@@ -8,13 +8,15 @@
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /** @brief A Stateflow data object.*/
-class SLXIO_APIEXPORT StateflowData : public StateflowDeclBase {
+class SLXIO_APIEXPORT StateflowData : public StateflowDeclBase
+{
 public:
   StateflowData() {}
-  StateflowData(StateflowData &stateflowData) {}
+  StateflowData(StateflowData& stateflowData) {}
 
   /** Remove this data object from the model. */
-  void RemoveElement() {
+  void RemoveElement()
+  {
     CCSMPre.isFalse(getParent() == null,
                     "Data object has no parent to be removed from.");
     getParent().removeData(this);

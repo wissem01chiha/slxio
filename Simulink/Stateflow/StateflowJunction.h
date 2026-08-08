@@ -13,12 +13,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief This class represents Stateflow junctions.
  */
-class StateflowJunction final : public StateflowNodeBase {
+class StateflowJunction final : public StateflowNodeBase
+{
 public:
   StateflowJunction() = default;
 
 private:
-  StateflowJunction(StateflowJunction &orig) {
+  StateflowJunction(StateflowJunction& orig)
+  {
 
     // duplicate all default transitions to this one
     // for (StateflowTransition transition : orig.getInTransitions())

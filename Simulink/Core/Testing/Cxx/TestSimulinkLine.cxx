@@ -4,11 +4,13 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkLineTestFixture {
+class SimulinkLineTestFixture
+{
 protected:
 };
 
-TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test") {
+TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test")
+{
 
   SimulinkLine line;
 }

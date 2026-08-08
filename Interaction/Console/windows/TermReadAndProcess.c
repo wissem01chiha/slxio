@@ -14,16 +14,18 @@
  */
 
 /*--------------------------------------------------------------------------*/
-#include <stdio.h>
-#include <string.h>
+#include "TermReadAndProcess.h"
 
 #include "TermConsole.h"
-#include "TermReadAndProcess.h"
 #include "prompt.h"
 #include "sci_malloc.h"
+
+#include <stdio.h>
+#include <string.h>
 /*--------------------------------------------------------------------------*/
-char *getCmdLine(void) {
-  const char *tmp = GetTemporaryPrompt();
+char* getCmdLine(void)
+{
+  const char* tmp = GetTemporaryPrompt();
   if (tmp[0] != 0) /* Input function is used */
   {
     return TerminalGetString(tmp);

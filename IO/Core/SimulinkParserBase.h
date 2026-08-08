@@ -8,6 +8,7 @@
 #include "APIExportMacro.h"
 #include "ErrorCode.h"
 #include "Logger.h"
+
 #include <memory>
 
 namespace slxio {
@@ -29,13 +30,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @tparam T the input data object to read from
  * @tparam P the retrun type object beeing constructed
  */
-template <typename T, typename P> class SLXIO_APIEXPORT SimulinkParserBase {
+template <typename T, typename P>
+class SLXIO_APIEXPORT SimulinkParserBase
+{
 public:
   /// @brief Virtual destructor (proper cleanup of derived classes.)
   virtual ~SimulinkParserBase() = default;
 
   /// @brief Set the input data for the parser.
-  virtual HError setInputData(const T data) {
+  virtual HError setInputData(const T data)
+  {
     dataObject = data;
     return E_OK;
   };
@@ -44,7 +48,8 @@ public:
   /// @note  Used when the input data is a pointer type or a heavy
   /// object,
   ///        to avoid unnecessary copying.
-  virtual HError setInputData(const T &data) {
+  virtual HError setInputData(const T& data)
+  {
     dataObject = data;
     return E_OK;
   };
@@ -53,7 +58,7 @@ public:
   std::shared_ptr<P> getOutputData() { return ptr; };
 
   /// @brief Retrieve the input data object.
-  T &getDataObject() { return dataObject; };
+  T& getDataObject() { return dataObject; };
 
   /// @brief Parsing Callback
   virtual HError parse() = 0;
@@ -61,10 +66,12 @@ public:
 protected:
   /// @brief Default constructor
   SimulinkParserBase()
-      : ptr(std::make_shared<P>()), dataObject(), l(Logger::GetInstance()){};
+    : ptr(std::make_shared<P>())
+    , dataObject()
+    , l(Logger::GetInstance()){};
   std::shared_ptr<P> ptr;
   T dataObject;
-  Logger &l;
+  Logger& l;
 };
 
 }; // namespace slxio

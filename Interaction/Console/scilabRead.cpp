@@ -15,9 +15,11 @@
 
 #include "configvariable.hxx"
 #include "threadmanagement.hxx"
+
 #include <algorithm>
 
-extern "C" {
+extern "C"
+{
 #include "SetConsolePrompt.h"
 #include "TermReadAndProcess.h"
 #include "configvariable_interface.h"
@@ -31,18 +33,23 @@ extern "C" {
 
 static SCILAB_INPUT_METHOD _reader;
 
-void setScilabInputMethod(SCILAB_INPUT_METHOD reader) { _reader = reader; }
+void setScilabInputMethod(SCILAB_INPUT_METHOD reader)
+{
+  _reader = reader;
+}
 
-void C2F(scilabread)(char *strRead, int len) {
+void C2F(scilabread)(char* strRead, int len)
+{
   scilabRead();
-  char *str = ConfigVariable::getConsoleReadStr();
+  char* str = ConfigVariable::getConsoleReadStr();
   int size = std::min(static_cast<int>(strlen(str)), len - 1);
   strncpy(strRead, str, size);
   strRead[size] = '\0';
   FREE(str);
 }
 
-int scilabRead() {
+int scilabRead()
+{
   ThreadManagement::LockScilabRead();
   if (getScilabMode() == SCILAB_STD) {
     /* Send new prompt to Java Console, do not display it */
@@ -55,15 +62,15 @@ int scilabRead() {
   }
 
   // call reader
-  char *pstTemp = (*_reader)();
+  char* pstTemp = (*_reader)();
 
   // add prompt to diary
-  wchar_t *pwstPrompt = to_wide_string(GetCurrentPrompt());
+  wchar_t* pwstPrompt = to_wide_string(GetCurrentPrompt());
   diaryWrite(pwstPrompt, TRUE);
   FREE(pwstPrompt);
 
   // add input to diary
-  wchar_t *pwstIn = to_wide_string(pstTemp);
+  wchar_t* pwstIn = to_wide_string(pstTemp);
   diaryWriteln(pwstIn, TRUE);
   FREE(pwstIn);
 

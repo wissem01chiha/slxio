@@ -1,13 +1,16 @@
 #include "SimulinkParameterParser.h"
+
 #include "SimulinkDataTypeParser.h"
 #include "SlxParameter.h"
+
 #include <cstring>
 #include <iostream>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkParameterParser::setInputData(const xmlNodePtr data) {
+HError SimulinkParameterParser::setInputData(const xmlNodePtr data)
+{
   if (data == nullptr) {
     // l.log(
       Logger::V_ERROR, "SimulinkParameterParser:: null node pointer received");
@@ -30,32 +33,33 @@ HError SimulinkParameterParser::setInputData(const xmlNodePtr data) {
   return E_OK;
 }
 
-HError SimulinkParameterParser::parse() {
+HError SimulinkParameterParser::parse()
+{
 
-  Logger &l = Logger::GetInstance();
+  Logger& l = Logger::GetInstance();
 
-  const char *paramClassStr = nullptr;
-  const char *paramNameStr = nullptr;
-  const char *paramValStr = nullptr;
+  const char* paramClassStr = nullptr;
+  const char* paramNameStr = nullptr;
+  const char* paramValStr = nullptr;
 
   for (xmlAttrPtr attr = dataObject->properties; attr; attr = attr->next) {
-    const char *attrName = reinterpret_cast<const char *>(attr->name);
+    const char* attrName = reinterpret_cast<const char*>(attr->name);
 
-    xmlChar *content = xmlNodeGetContent(attr->children);
+    xmlChar* content = xmlNodeGetContent(attr->children);
     if (!content)
       continue;
 
     if (strcmp(attrName, SlxParameter::PARAM_Class) == 0) {
-      paramClassStr = strdup(reinterpret_cast<const char *>(content));
+      paramClassStr = strdup(reinterpret_cast<const char*>(content));
     } else if (strcmp(attrName, SlxParameter::PARAM_Name) == 0) {
-      paramNameStr = strdup(reinterpret_cast<const char *>(content));
+      paramNameStr = strdup(reinterpret_cast<const char*>(content));
     }
     xmlFree(content);
   }
 
-  xmlChar *nodeContent = xmlNodeGetContent(dataObject);
+  xmlChar* nodeContent = xmlNodeGetContent(dataObject);
   if (nodeContent) {
-    paramValStr = strdup(reinterpret_cast<const char *>(nodeContent));
+    paramValStr = strdup(reinterpret_cast<const char*>(nodeContent));
   }
 
   ptr = std::make_shared<SimulinkParameter>(paramValStr ? paramValStr : "");
@@ -68,7 +72,7 @@ HError SimulinkParameterParser::parse() {
   }
 
   std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
-      std::make_unique<SimulinkDataTypeParser>();
+    std::make_unique<SimulinkDataTypeParser>();
 
   HError dataTypeInputStatus = dataTypeParserPtr->setInputData(paramClassStr);
 
@@ -84,7 +88,7 @@ HError SimulinkParameterParser::parse() {
       "SimulinkParameterParser:: failed to parse data type string");
   }
   std::shared_ptr<SimulinkDataType> dataTypePtr =
-      dataTypeParserPtr->getOutputData();
+    dataTypeParserPtr->getOutputData();
   if (dataTypePtr != nullptr) {
     ptr->setDataType(*dataTypePtr);
   }

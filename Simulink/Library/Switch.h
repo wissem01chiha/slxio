@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Switch final {
+class SLXIO_APIEXPORT Switch final
+{
 public:
   /** Default Constructor */
   Switch();

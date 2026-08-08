@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 BitSet::BitSet() {}
 
-Float32 BitSet::GetBitPosition() const { return BitPosition; }
+Float32 BitSet::GetBitPosition() const
+{
+  return BitPosition;
+}
 
-void BitSet::SetBitPosition(Float32 value) { BitPosition = value; }
+void BitSet::SetBitPosition(Float32 value)
+{
+  BitPosition = value;
+}
 
 BitSet::~BitSet() {}
 

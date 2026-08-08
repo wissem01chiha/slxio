@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT TransferFcn final {
+class SLXIO_APIEXPORT TransferFcn final
+{
 public:
   /** Default Constructor */
   TransferFcn();

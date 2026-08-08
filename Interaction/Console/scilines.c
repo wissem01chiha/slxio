@@ -54,19 +54,21 @@
 #define MIN_NUMBERS_LINES 0
 #define MIN_NUMBERS_COLUMNS 10
 /*--------------------------------------------------------------------------*/
-int scilines(int nblines, int nbcolumns) {
+int scilines(int nblines, int nbcolumns)
+{
   setConsoleLines(nblines);
   setConsoleWidth(nbcolumns);
   return 0;
 }
 /*--------------------------------------------------------------------------*/
-int scilinesdefault(void) {
+int scilinesdefault(void)
+{
 #ifndef _MSC_VER
 
   char tc_buf[1024]; /* holds termcap buffer */
   if (tgetent(tc_buf, getenv("TERM")) == 1) {
     setConsoleLines(
-        tgetnum("li"));             /* retrieve from the term info the number
+      tgetnum("li"));               /* retrieve from the term info the number
                                                                             of lines */
     setConsoleWidth(tgetnum("co")); /* And the number of columns */
   } else {
@@ -97,9 +99,13 @@ int scilinesdefault(void) {
   return 0;
 }
 /*--------------------------------------------------------------------------*/
-int C2F(scilines)(int *nblines, int *nbcolumns) {
+int C2F(scilines)(int* nblines, int* nbcolumns)
+{
   return scilines(*nblines, *nbcolumns);
 }
 /*--------------------------------------------------------------------------*/
-int C2F(scilinesdefault)(void) { return scilinesdefault(); }
+int C2F(scilinesdefault)(void)
+{
+  return scilinesdefault();
+}
 /*--------------------------------------------------------------------------*/

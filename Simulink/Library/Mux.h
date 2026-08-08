@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Mux final {
+class SLXIO_APIEXPORT Mux final
+{
 public:
   /** Default Constructor */
   Mux();

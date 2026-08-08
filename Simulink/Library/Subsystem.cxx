@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 Subsystem::Subsystem() {}
 
-bool Subsystem::GetEnabled() const { return Enabled; }
+bool Subsystem::GetEnabled() const
+{
+  return Enabled;
+}
 
-void Subsystem::SetEnabled(bool value) { Enabled = value; }
+void Subsystem::SetEnabled(bool value)
+{
+  Enabled = value;
+}
 
 Subsystem::~Subsystem() {}
 

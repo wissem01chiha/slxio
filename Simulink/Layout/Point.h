@@ -8,20 +8,22 @@
 #include "APIExportMacro.h"
 #include "Logger.h"
 #include "PlatformTypes.h"
+
 #include <vector>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Point final {
+class SLXIO_APIEXPORT Point final
+{
 public:
   Point();
   Point(UInt32 x, UInt32 y, UInt32 width, UInt32 height);
-  Point(const std::vector<UInt32> &vec);
+  Point(const std::vector<UInt32>& vec);
   std::vector<UInt32> toVector() const;
 
 private:
-  Logger &l;
+  Logger& l;
   UInt32 x;
   UInt32 y;
   UInt32 width;

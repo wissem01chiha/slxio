@@ -13,10 +13,12 @@
  */
 
 #include "charactersManagement.h"
+
 #include "cliPrompt.h"
 #include "getNbrLine.h"
 #include "gotoFunctions.h"
 #include "termcapManagement.h"
+
 #include <curses.h>
 #include <stdlib.h>
 #include <term.h>
@@ -26,7 +28,8 @@
 #include <wctype.h>
 
 /* Add a character to a command line */
-int addChar(wchar_t **CommandLine, int key, unsigned int *cursorLocation) {
+int addChar(wchar_t** CommandLine, int key, unsigned int* cursorLocation)
+{
   unsigned int indexToMoveChar = 0;
 
   unsigned int sizeOfCmd = 0;
@@ -43,7 +46,7 @@ int addChar(wchar_t **CommandLine, int key, unsigned int *cursorLocation) {
      */
     if (sizeOfCmd && !((sizeOfCmd + 1) % 1024)) {
       *CommandLine =
-          realloc(*CommandLine, sizeof(wchar_t) * (sizeOfCmd + 1 + 1024));
+        realloc(*CommandLine, sizeof(wchar_t) * (sizeOfCmd + 1 + 1024));
     }
     indexToMoveChar = sizeOfCmd;
     /* move each character to the next place */
@@ -74,7 +77,8 @@ int addChar(wchar_t **CommandLine, int key, unsigned int *cursorLocation) {
 }
 
 /* Delete a character in the command line */
-int rmChar(wchar_t *CommandLine, int key, unsigned int *cursorLocation) {
+int rmChar(wchar_t* CommandLine, int key, unsigned int* cursorLocation)
+{
   unsigned int indexToMoveChar;
 
   unsigned int sizeOfCmd = 0;
@@ -110,8 +114,8 @@ int rmChar(wchar_t *CommandLine, int key, unsigned int *cursorLocation) {
 }
 
 /* Delete all characters from cursor to the end. */
-int deleteFromCursToEndLine(wchar_t *CommandLine,
-                            unsigned int *cursorLocation) {
+int deleteFromCursToEndLine(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   /* set the end of the command line at the current cursor location */
   CommandLine[*cursorLocation] = '\0';
   /*
@@ -122,16 +126,18 @@ int deleteFromCursToEndLine(wchar_t *CommandLine,
   return 0;
 }
 
-int deleteFromCursToBeginningLine(wchar_t *CommandLine,
-                                  unsigned int *cursorLocation) {
+int deleteFromCursToBeginningLine(wchar_t* CommandLine,
+                                  unsigned int* cursorLocation)
+{
   while (*cursorLocation) {
     rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
   }
   return 0;
 }
 
-int deletePreviousWordFromCurs(wchar_t *CommandLine,
-                               unsigned int *cursorLocation) {
+int deletePreviousWordFromCurs(wchar_t* CommandLine,
+                               unsigned int* cursorLocation)
+{
   /* Delete void character before cursor */
   while (*cursorLocation && (CommandLine[*cursorLocation - 1] == ' ' ||
                              CommandLine[*cursorLocation - 1] == '\t')) {

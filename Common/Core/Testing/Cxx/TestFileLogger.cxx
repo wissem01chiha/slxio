@@ -6,12 +6,14 @@ using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool FileExists(const std::string &fileName) {
+bool FileExists(const std::string& fileName)
+{
   std::ifstream file(fileName.c_str());
   return file.good();
 }
 
-TEST_CASE("FileLogger creates log file") {
+TEST_CASE("FileLogger creates log file")
+{
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());
@@ -24,7 +26,8 @@ TEST_CASE("FileLogger creates log file") {
   std::remove(logFile.c_str());
 }
 
-TEST_CASE("FileLogger log level setter getter") {
+TEST_CASE("FileLogger log level setter getter")
+{
   FileLogger logger;
 
   logger.SetLogLevel(LogLevelType::LOG_INFO);
@@ -32,7 +35,8 @@ TEST_CASE("FileLogger log level setter getter") {
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
 }
 
-TEST_CASE("FileLogger writes message to file") {
+TEST_CASE("FileLogger writes message to file")
+{
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());
@@ -59,7 +63,8 @@ TEST_CASE("FileLogger writes message to file") {
   std::remove(logFile.c_str());
 }
 
-TEST_CASE("FileLogger stream operator") {
+TEST_CASE("FileLogger stream operator")
+{
   const std::string logFile = "FileLoggerTest.log";
 
   std::remove(logFile.c_str());

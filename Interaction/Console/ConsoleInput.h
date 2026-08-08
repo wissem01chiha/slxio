@@ -19,9 +19,9 @@
 #include "dynlib_console.h"
 #include "machine.h"
 
-typedef char *(*SCILAB_INPUT_METHOD)(void);
+typedef char* (*SCILAB_INPUT_METHOD)(void);
 
-CONSOLE_IMPEXP void C2F(scilabread)(char *strRead, int len);
+CONSOLE_IMPEXP void C2F(scilabread)(char* strRead, int len);
 
 CONSOLE_IMPEXP void setScilabInputMethod(SCILAB_INPUT_METHOD reader);
 CONSOLE_IMPEXP int scilabRead();

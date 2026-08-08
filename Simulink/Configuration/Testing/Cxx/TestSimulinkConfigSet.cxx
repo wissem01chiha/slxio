@@ -4,19 +4,21 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("ConstructorTest") {
+TEST_CASE("ConstructorTest")
+{
   std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
-      42, "1.0", "MyObject", "SimulinkConfigSet");
-  SimulinkConfigSet *configCst = new SimulinkConfigSet(object);
+    42, "1.0", "MyObject", "SimulinkConfigSet");
+  SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
   CHECK(strcmp(configCst->GetName().c_str(), "MyObject") == 0);
   CHECK(configCst->GetId() == 42);
   delete configCst;
 }
 
-TEST_CASE("IsActiveTest") {
+TEST_CASE("IsActiveTest")
+{
   std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
-      42, "1.0", "MyObject", "SimulinkConfigSet");
-  SimulinkConfigSet *configCst = new SimulinkConfigSet(object);
+    42, "1.0", "MyObject", "SimulinkConfigSet");
+  SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
   CHECK(configCst->IsActive() == false);
   delete configCst;
 }

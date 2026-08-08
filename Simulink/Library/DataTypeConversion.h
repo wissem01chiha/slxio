@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataTypeConversion final {
+class SLXIO_APIEXPORT DataTypeConversion final
+{
 public:
   /** Default Constructor */
   DataTypeConversion();

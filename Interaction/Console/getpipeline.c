@@ -13,12 +13,15 @@
  *
  */
 #include "getpipeline.h"
+
 #include "isatty.hxx"
 #include "machine.h" // bsiz
 #include "os_string.h"
+
 #include <stdio.h>
 
-char *getPipeLine(void) {
+char* getPipeLine(void)
+{
   int len_line = 0;
   char buffer[bsiz];
 

@@ -17,19 +17,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class JsonDataObject
  */
-class SLXIO_APIEXPORT JsonDataObject : public DataObject {
+class SLXIO_APIEXPORT JsonDataObject : public DataObject
+{
 public:
-  JsonDataObject *New() override;
-  void Initialize(void *implDataObject) override;
+  JsonDataObject* New() override;
+  void Initialize(void* implDataObject) override;
   bool Empty() const override;
-  bool operator==(const DataObject &) override;
-  void *GetImplDataObject() const override;
+  bool operator==(const DataObject&) override;
+  void* GetImplDataObject() const override;
   std::string ToString() const override;
   JsonDataObject();
   ~JsonDataObject();
 
 private:
-  json_object *ImplDataObject;
+  json_object* ImplDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -49,8 +49,8 @@
 
 /// @brief Convert libuv error code to slxio format.
 #define SLXIO_LIBUV_ERROR(err)                                                 \
-  SLXIO_HERROR(SLXIO_PROJECT, THIRDPARTY, LIBUV, SLXIO_FATAL,                  \
-               ((-(err)) & 0x3FFU))
+  SLXIO_HERROR(                                                                \
+    SLXIO_PROJECT, THIRDPARTY, LIBUV, SLXIO_FATAL, ((-(err)) & 0x3FFU))
 
 /// @brief Convert libzip error code to slxio format.
 #define SLXIO_LIBZIP_ERROR(err)                                                \
@@ -58,8 +58,8 @@
 
 /// @brief Convert libxml2 error code to slxio format.
 #define SLXIO_LIBXML2_ERROR(err)                                               \
-  SLXIO_HERROR(SLXIO_PROJECT, THIRDPARTY, LIBXML2, SLXIO_FATAL,                \
-               ((err) & 0x3FFU))
+  SLXIO_HERROR(                                                                \
+    SLXIO_PROJECT, THIRDPARTY, LIBXML2, SLXIO_FATAL, ((err) & 0x3FFU))
 
 /// @brief Convert npio error code to slxio format
 #define SLXIO_NPIO_ERROR(err)                                                  \

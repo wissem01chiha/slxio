@@ -5,11 +5,13 @@
 
 #include "cpp_gateway_prototype.hxx"
 
-extern "C" {
+extern "C"
+{
 #include "dynlib_console_gw.h"
 }
 
-class ConsoleModule {
+class ConsoleModule
+{
 private:
   ConsoleModule(){};
   ~ConsoleModule(){};

@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 Delay::Delay() {}
 
-float Delay::GetDelayTime() const { return DelayTime; }
+float Delay::GetDelayTime() const
+{
+  return DelayTime;
+}
 
-void Delay::SetDelayTime(float delayTime) { DelayTime = delayTime; }
+void Delay::SetDelayTime(float delayTime)
+{
+  DelayTime = delayTime;
+}
 
 Delay::~Delay() {}
 

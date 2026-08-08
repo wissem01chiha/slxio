@@ -13,6 +13,7 @@
  */
 
 #include "termcapManagement.h"
+
 #include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,8 +21,9 @@
 #include <termios.h>
 #include <unistd.h>
 /* Simplify termcap activation */
-void setStringCapacities(const char *capacity) {
-  char *stringCap;
+void setStringCapacities(const char* capacity)
+{
+  char* stringCap;
 
   stringCap = tgetstr(capacity, NULL);
   if (stringCap != NULL) {
@@ -30,8 +32,9 @@ void setStringCapacities(const char *capacity) {
 }
 
 /* Move cursor to the column _col and the line _li */
-void capGoto(int col, int li) {
-  char *stringCap;
+void capGoto(int col, int li)
+{
+  char* stringCap;
 
   stringCap = tgetstr("cm", NULL);
   if (stringCap != NULL) {

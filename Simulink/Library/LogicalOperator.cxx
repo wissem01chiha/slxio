@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 LogicalOperator::LogicalOperator() {}
 
-Float32 LogicalOperator::GetOperatorCode() const { return OperatorCode; }
+Float32 LogicalOperator::GetOperatorCode() const
+{
+  return OperatorCode;
+}
 
-void LogicalOperator::SetOperatorCode(Float32 value) { OperatorCode = value; }
+void LogicalOperator::SetOperatorCode(Float32 value)
+{
+  OperatorCode = value;
+}
 
 LogicalOperator::~LogicalOperator() {}
 

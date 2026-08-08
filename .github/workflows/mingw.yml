@@ -63,5 +63,5 @@ jobs:
           path: build/
 
       - name: Test
-        run: ctest -C ${{ matrix.configuration }} --output-on-failure --max-width 150
+        run: ctest -C ${{ matrix.configuration }} --parallel 4 --output-on-failure --max-width 150
         working-directory: build

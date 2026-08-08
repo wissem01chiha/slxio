@@ -14,17 +14,17 @@
 
 /* for wcwidth and wcswidth */
 #define _XOPEN_SOURCE
-#include <wchar.h>
+#include "gotoFunctions.h"
+
+#include "BOOL.h"
+#include "cliPrompt.h"
+#include "termcapManagement.h"
 
 #include <curses.h>
 #include <string.h>
 #include <term.h>
 #include <termios.h>
-
-#include "BOOL.h"
-#include "cliPrompt.h"
-#include "gotoFunctions.h"
-#include "termcapManagement.h"
+#include <wchar.h>
 #include <wctype.h>
 
 /*
@@ -34,8 +34,9 @@
  * This function return the number of column used. It may not correspond to the
  * number of characters.
  */
-static int sizeOfOneLineInTerm(wchar_t *CommandLine,
-                               unsigned int cursorLocation) {
+static int sizeOfOneLineInTerm(wchar_t* CommandLine,
+                               unsigned int cursorLocation)
+{
   unsigned int beginningOfLine = cursorLocation;
 
   int sizeOfLineInTerm = 0;
@@ -69,7 +70,8 @@ static int sizeOfOneLineInTerm(wchar_t *CommandLine,
 }
 
 /* Move cursor to the right */
-int gotoRight(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int gotoRight(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   int nbrCol;
 
   int sizeOfWChar = 0;
@@ -91,7 +93,7 @@ int gotoRight(wchar_t *CommandLine, unsigned int *cursorLocation) {
       if ((widthOfStringInTerm && !(widthOfStringInTerm % nbrCol) &&
            sizeOfWChar <= 1) // if last column of the terminal is reached...
           || CommandLine[*cursorLocation] ==
-                 L'\n') // ... or if the cursor will go to the next line.
+               L'\n') // ... or if the cursor will go to the next line.
       {
         /* move the cursor down. */
         setStringCapacities("do");
@@ -112,7 +114,8 @@ int gotoRight(wchar_t *CommandLine, unsigned int *cursorLocation) {
 }
 
 /* Move cursor to the left */
-int gotoLeft(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   int nbrCol;
 
   int sizeOfWChar = 0;
@@ -155,12 +158,12 @@ int gotoLeft(wchar_t *CommandLine, unsigned int *cursorLocation) {
     }
     widthOfStringInTerm = sizeOfOneLineInTerm(CommandLine, i);
     while (
-        sizeOfWChar) /* While we are not at the beginning of the character... */
+      sizeOfWChar) /* While we are not at the beginning of the character... */
     {
       if ((nbrCol && !(widthOfStringInTerm % nbrCol) &&
            sizeOfWChar <= 1) // if last column of the terminal is reached...
           || CommandLine[*cursorLocation - 1] ==
-                 L'\n') // ... or if the cursor will go to the previous line.
+               L'\n') // ... or if the cursor will go to the previous line.
       {
         setStringCapacities("up");
         while (nbrCol) {
@@ -181,7 +184,8 @@ int gotoLeft(wchar_t *CommandLine, unsigned int *cursorLocation) {
 }
 
 /* Move cursor to the beginning of a line */
-int begLine(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int begLine(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   /* While the index is not zero (meaning it's the beginning of th line) */
   while (*cursorLocation) {
     gotoLeft(CommandLine, cursorLocation);
@@ -190,7 +194,8 @@ int begLine(wchar_t *CommandLine, unsigned int *cursorLocation) {
 }
 
 /* Move cursor to the end of a line */
-int endLine(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int endLine(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   int sizeOfCmd = 0;
 
   sizeOfCmd = wcslen(CommandLine);
@@ -201,28 +206,30 @@ int endLine(wchar_t *CommandLine, unsigned int *cursorLocation) {
   return *cursorLocation;
 }
 
-static BOOL isAWideCharToJump(wchar_t wideCharToTest) {
+static BOOL isAWideCharToJump(wchar_t wideCharToTest)
+{
   /* List of characters for cursor moving word by word. */
   switch (wideCharToTest) {
-  case L' ':
-  case L'\t':
-  case L'\n':
-  case L'[':
-  case L']':
-  case L'{':
-  case L'}':
-  case L'(':
-  case L')':
-  case L'.':
-  case L',':
-  case L';':
-    return TRUE;
-  default:
-    return FALSE;
+    case L' ':
+    case L'\t':
+    case L'\n':
+    case L'[':
+    case L']':
+    case L'{':
+    case L'}':
+    case L'(':
+    case L')':
+    case L'.':
+    case L',':
+    case L';':
+      return TRUE;
+    default:
+      return FALSE;
   }
 }
 
-int nextWord(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int nextWord(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   /* Passing current word... */
   while (CommandLine[*cursorLocation] &&
          !isAWideCharToJump(CommandLine[*cursorLocation])) {
@@ -237,7 +244,8 @@ int nextWord(wchar_t *CommandLine, unsigned int *cursorLocation) {
   return *cursorLocation;
 }
 
-int previousWord(wchar_t *CommandLine, unsigned int *cursorLocation) {
+int previousWord(wchar_t* CommandLine, unsigned int* cursorLocation)
+{
   /* Passing through characters to jump... */
   while (*cursorLocation &&
          isAWideCharToJump(CommandLine[*cursorLocation - 1])) {

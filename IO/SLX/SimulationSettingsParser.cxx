@@ -3,7 +3,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulationSettingsParser::setInputData(const xmlNodePtr data) {
+HError SimulationSettingsParser::setInputData(const xmlNodePtr data)
+{
   if (!data) {
     // l.log(Logger::V_ERROR,
       "SimulationSettingsParser::null data node pointer received");
@@ -22,7 +23,10 @@ HError SimulationSettingsParser::setInputData(const xmlNodePtr data) {
   return E_OK;
 }
 
-HError SimulationSettingsParser::parse() { return E_OK; }
+HError SimulationSettingsParser::parse()
+{
+  return E_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

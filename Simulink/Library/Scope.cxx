@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 Scope::Scope() {}
 
-UInt32 Scope::GetNumInputPorts() const { return numInputPorts; }
+UInt32 Scope::GetNumInputPorts() const
+{
+  return numInputPorts;
+}
 
-void Scope::SetNumInputPorts(UInt32 numPorts) { numInputPorts = numPorts; }
+void Scope::SetNumInputPorts(UInt32 numPorts)
+{
+  numInputPorts = numPorts;
+}
 
 Scope::~Scope() {}
 

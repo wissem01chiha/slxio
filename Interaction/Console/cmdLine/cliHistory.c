@@ -13,12 +13,14 @@
  */
 
 #include "cliHistory.h"
+
 #include "HistoryManager.h"
 #include "charEncoding.h"
 #include "cliPrompt.h"
 #include "gotoFunctions.h"
 #include "sci_malloc.h"
 #include "termcapManagement.h"
+
 #include <stdio.h>
 #include <term.h>
 #include <termios.h>
@@ -26,14 +28,15 @@
 #include <wchar.h>
 
 /* Get the prev command line */
-int previousCmd(wchar_t **commandLine, unsigned int *cursorLocation) {
+int previousCmd(wchar_t** commandLine, unsigned int* cursorLocation)
+{
   int promptSize;
 
   int newSizeToAlloc = 0;
 
-  char *multiByteHistory = NULL;
+  char* multiByteHistory = NULL;
 
-  wchar_t *wideHistory = NULL;
+  wchar_t* wideHistory = NULL;
 
   /* Go the beginning of the current edited line then clearn the screen from */
   while (*cursorLocation) {
@@ -74,14 +77,15 @@ int previousCmd(wchar_t **commandLine, unsigned int *cursorLocation) {
 }
 
 /* Get the next command line */
-int nextCmd(wchar_t **commandLine, unsigned int *cursorLocation) {
+int nextCmd(wchar_t** commandLine, unsigned int* cursorLocation)
+{
   int promptSize;
 
   int newSizeToAlloc = 0;
 
-  char *multiByteHistory = NULL;
+  char* multiByteHistory = NULL;
 
-  wchar_t *wideHistory = NULL;
+  wchar_t* wideHistory = NULL;
 
   /* Go the beginning of the current edited line then clearn the screen from */
   while (*cursorLocation) {

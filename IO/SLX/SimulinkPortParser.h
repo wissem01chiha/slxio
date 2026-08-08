@@ -21,7 +21,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * SimulinkLineParser.
  */
 class SLXIO_APIEXPORT SimulinkPortParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkPort> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkPort>
+{
 public:
   SimulinkPortParser() = default;
   HError setInputData(const xmlNodePtr data) override;

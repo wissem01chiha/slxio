@@ -8,6 +8,7 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkParameterBase.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -18,7 +19,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SimulinkParameterArray
  */
-class SLXIO_APIEXPORT SimulinkParameterArray : public SimulinkParameterBase {
+class SLXIO_APIEXPORT SimulinkParameterArray : public SimulinkParameterBase
+{
 public:
   /** Returns current parameter name*/
   std::string GetName() override;
@@ -30,7 +32,7 @@ public:
   std::string ToString() const override;
 
   /** Parser the array given a string representation */
-  HError FromString(const char *value);
+  HError FromString(const char* value);
 
   /** Get code generation data struct*/
   std::shared_ptr<CoderInfo> GetCoderInfo() override;

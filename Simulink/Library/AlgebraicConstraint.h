@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT AlgebraicConstraint final {
+class SLXIO_APIEXPORT AlgebraicConstraint final
+{
 public:
   /** Default Constructor */
   AlgebraicConstraint();

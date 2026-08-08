@@ -11,6 +11,7 @@
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkPort.h"
+
 #include <memory>
 
 namespace slxio {
@@ -22,7 +23,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * MATLAB API rather then an extension for hiracical blcoks or models
  * manipulatoation added as a feature in the librray
  */
-class SLXIO_APIEXPORT SimulinkSubsystem {
+class SLXIO_APIEXPORT SimulinkSubsystem
+{
 public:
   SimulinkSubsystem();
   ~SimulinkSubsystem() = default;

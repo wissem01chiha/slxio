@@ -13,6 +13,7 @@
  */
 
 #include "getKey.h"
+
 #include "HistoryManager.h"
 #include "autoCompletionCli.h"
 #include "charEncoding.h"
@@ -26,6 +27,7 @@
 #include "sci_malloc.h"
 #include "termcapManagement.h"
 #include "tohome.h"
+
 #include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,8 +39,9 @@
 #include <wctype.h>
 
 /* Set new token in order to get string changement in history */
-static void updateTokenInScilabHistory(wchar_t **commandLine) {
-  char *multiByteString = NULL;
+static void updateTokenInScilabHistory(wchar_t** commandLine)
+{
+  char* multiByteString = NULL;
 
   multiByteString = wide_string_to_UTF8(*commandLine);
   setSearchedTokenInScilabHistory(multiByteString);
@@ -49,16 +52,17 @@ static void updateTokenInScilabHistory(wchar_t **commandLine) {
  * If last key was '1'
  * it means this could be arrow key plus control key
  */
-static void caseCtrlAndArrowKey(wchar_t *commandLine,
-                                unsigned int *cursorLocation) {
+static void caseCtrlAndArrowKey(wchar_t* commandLine,
+                                unsigned int* cursorLocation)
+{
   if (getwchar() == L';' && getwchar() == L'5') {
     switch (getwchar()) {
-    case L'C':
-      nextWord(commandLine, cursorLocation);
-      break;
-    case L'D':
-      previousWord(commandLine, cursorLocation);
-      break;
+      case L'C':
+        nextWord(commandLine, cursorLocation);
+        break;
+      case L'D':
+        previousWord(commandLine, cursorLocation);
+        break;
     }
   } else {
     /*
@@ -70,15 +74,15 @@ static void caseCtrlAndArrowKey(wchar_t *commandLine,
   }
 }
 
-static void caseHomeOrEndKey(wchar_t *commandLine,
-                             unsigned int *cursorLocation) {
+static void caseHomeOrEndKey(wchar_t* commandLine, unsigned int* cursorLocation)
+{
   switch (getwchar()) {
-  case L'H':
-    begLine(commandLine, cursorLocation);
-    break;
-  case L'F':
-    endLine(commandLine, cursorLocation);
-    break;
+    case L'H':
+      begLine(commandLine, cursorLocation);
+      break;
+    case L'F':
+      endLine(commandLine, cursorLocation);
+      break;
   }
 }
 
@@ -86,64 +90,67 @@ static void caseHomeOrEndKey(wchar_t *commandLine,
  * If second key was L'['
  * It means this could be an arrow key, a delete key or home/end key.
  */
-static void caseDelOrArrowKey(wchar_t **commandLine,
-                              unsigned int *cursorLocation) {
-  int *cmd = *commandLine;
+static void caseDelOrArrowKey(wchar_t** commandLine,
+                              unsigned int* cursorLocation)
+{
+  int* cmd = *commandLine;
   switch (getwchar()) {
-  case L'A':
-    previousCmd(commandLine, cursorLocation);
-    break;
-  case L'B':
-    nextCmd(commandLine, cursorLocation);
-    break;
-  case L'C':
-    gotoRight(*commandLine, cursorLocation);
-    break;
-  case L'D':
-    gotoLeft(*commandLine, cursorLocation);
-    break;
-  case L'1':
-    caseCtrlAndArrowKey(*commandLine, cursorLocation);
-    break;
-  case L'3':
-    if (getwchar() == L'~') {
-      rmChar(*commandLine, SCI_DELETE, cursorLocation);
-      updateTokenInScilabHistory(commandLine);
+    case L'A':
+      previousCmd(commandLine, cursorLocation);
       break;
-    }
-  // home or end key in some consoles
-  case L'H':
-    begLine(cmd, cursorLocation);
-    break;
-  case L'F':
-    endLine(cmd, cursorLocation);
-    break;
+    case L'B':
+      nextCmd(commandLine, cursorLocation);
+      break;
+    case L'C':
+      gotoRight(*commandLine, cursorLocation);
+      break;
+    case L'D':
+      gotoLeft(*commandLine, cursorLocation);
+      break;
+    case L'1':
+      caseCtrlAndArrowKey(*commandLine, cursorLocation);
+      break;
+    case L'3':
+      if (getwchar() == L'~') {
+        rmChar(*commandLine, SCI_DELETE, cursorLocation);
+        updateTokenInScilabHistory(commandLine);
+        break;
+      }
+    // home or end key in some consoles
+    case L'H':
+      begLine(cmd, cursorLocation);
+      break;
+    case L'F':
+      endLine(cmd, cursorLocation);
+      break;
   }
 }
 
 /*
  * If last key was Meta...
  */
-static void caseMetaKey(wchar_t **commandLine, unsigned int *cursorLocation) {
+static void caseMetaKey(wchar_t** commandLine, unsigned int* cursorLocation)
+{
   switch (getwchar()) {
-  case L'f':
-  case L'F':
-    nextWord(*commandLine, cursorLocation);
-    break;
-  case L'b':
-  case L'B':
-    previousWord(*commandLine, cursorLocation);
-    break;
-  case L'[':
-    caseDelOrArrowKey(commandLine, cursorLocation);
-    break;
-  case L'O':
-    caseHomeOrEndKey(*commandLine, cursorLocation);
-    break;
+    case L'f':
+    case L'F':
+      nextWord(*commandLine, cursorLocation);
+      break;
+    case L'b':
+    case L'B':
+      previousWord(*commandLine, cursorLocation);
+      break;
+    case L'[':
+      caseDelOrArrowKey(commandLine, cursorLocation);
+      break;
+    case L'O':
+      caseHomeOrEndKey(*commandLine, cursorLocation);
+      break;
   }
 }
 
-static void setCBreak(bool cbk) {
+static void setCBreak(bool cbk)
+{
   struct termios t;
 
   tcgetattr(0, &t);
@@ -157,7 +164,8 @@ static void setCBreak(bool cbk) {
   tcsetattr(0, 0, &t);
 }
 
-static void endCopyPast(wchar_t *commandLine) {
+static void endCopyPast(wchar_t* commandLine)
+{
   int sizeOfCmd = 0;
 
   sizeOfCmd = wcslen(commandLine);
@@ -174,9 +182,10 @@ static void endCopyPast(wchar_t *commandLine) {
 }
 
 /* Reset command line if CTRL-C is pressed */
-static void resetCommandLine(wchar_t **commandLine,
-                             unsigned int *cursorLocation) {
-  char *multiByteString = NULL;
+static void resetCommandLine(wchar_t** commandLine,
+                             unsigned int* cursorLocation)
+{
+  char* multiByteString = NULL;
 
   /* Send the preivous edited line in the history */
   multiByteString = wide_string_to_UTF8(*commandLine);
@@ -194,7 +203,8 @@ static void resetCommandLine(wchar_t **commandLine,
 /*
  * Read keyboard a first time.
  */
-static void getKey(wchar_t **commandLine, unsigned int *cursorLocation) {
+static void getKey(wchar_t** commandLine, unsigned int* cursorLocation)
+{
   int key;
 
   key = getwchar();
@@ -210,84 +220,85 @@ static void getKey(wchar_t **commandLine, unsigned int *cursorLocation) {
   }
 
   switch (key) {
-  case CTRL_A:
-    begLine(*commandLine, cursorLocation);
-    break;
-  case CTRL_B:
-    gotoLeft(*commandLine, cursorLocation);
-    break;
-  case CTRL_D:
-    rmChar(*commandLine, SCI_DELETE, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case CTRL_E:
-    endLine(*commandLine, cursorLocation);
-    break;
-  case CTRL_F:
-    gotoRight(*commandLine, cursorLocation);
-    break;
-  case CTRL_H:
-    rmChar(*commandLine, SCI_BACKSPACE, cursorLocation);
-    break;
-  case CTRL_K:
-    deleteFromCursToEndLine(*commandLine, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case CTRL_L:
-    tohome();
-    printPrompt(WRITE_PROMPT);
-    printf("%ls", *commandLine);
-    break;
-  case CTRL_N:
-    nextCmd(commandLine, cursorLocation);
-    break;
-  case CTRL_P:
-    previousCmd(commandLine, cursorLocation);
-    break;
-  case CTRL_U:
-    deleteFromCursToBeginningLine(*commandLine, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case CTRL_W:
-    deletePreviousWordFromCurs(*commandLine, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case '\t':
-    autoCompletionInConsoleMode(commandLine, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case ESCAPE:
-    caseMetaKey(commandLine, cursorLocation);
-    break;
-  case SCI_BACKSPACE:
-    rmChar(*commandLine, SCI_BACKSPACE, cursorLocation);
-    updateTokenInScilabHistory(commandLine);
-    break;
-  case WEOF:
-    setCBreak(1);
-    endCopyPast(*commandLine);
-    break;
-  default:
-    /* Different keys are not in different case when it add characters to the
-     * command line */
-    if (key == L'\n') {
-      setCBreak(0);
-      setCharDisplay(DISP_FAINT);
-    }
-    addChar(commandLine, key, cursorLocation);
+    case CTRL_A:
+      begLine(*commandLine, cursorLocation);
+      break;
+    case CTRL_B:
+      gotoLeft(*commandLine, cursorLocation);
+      break;
+    case CTRL_D:
+      rmChar(*commandLine, SCI_DELETE, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case CTRL_E:
+      endLine(*commandLine, cursorLocation);
+      break;
+    case CTRL_F:
+      gotoRight(*commandLine, cursorLocation);
+      break;
+    case CTRL_H:
+      rmChar(*commandLine, SCI_BACKSPACE, cursorLocation);
+      break;
+    case CTRL_K:
+      deleteFromCursToEndLine(*commandLine, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case CTRL_L:
+      tohome();
+      printPrompt(WRITE_PROMPT);
+      printf("%ls", *commandLine);
+      break;
+    case CTRL_N:
+      nextCmd(commandLine, cursorLocation);
+      break;
+    case CTRL_P:
+      previousCmd(commandLine, cursorLocation);
+      break;
+    case CTRL_U:
+      deleteFromCursToBeginningLine(*commandLine, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case CTRL_W:
+      deletePreviousWordFromCurs(*commandLine, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case '\t':
+      autoCompletionInConsoleMode(commandLine, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case ESCAPE:
+      caseMetaKey(commandLine, cursorLocation);
+      break;
+    case SCI_BACKSPACE:
+      rmChar(*commandLine, SCI_BACKSPACE, cursorLocation);
+      updateTokenInScilabHistory(commandLine);
+      break;
+    case WEOF:
+      setCBreak(1);
+      endCopyPast(*commandLine);
+      break;
+    default:
+      /* Different keys are not in different case when it add characters to the
+       * command line */
+      if (key == L'\n') {
+        setCBreak(0);
+        setCharDisplay(DISP_FAINT);
+      }
+      addChar(commandLine, key, cursorLocation);
 
-    updateTokenInScilabHistory(commandLine);
-    break;
+      updateTokenInScilabHistory(commandLine);
+      break;
   }
 }
 
 /* main command line function */
-char *getCmdLine(void) {
-  char *multiByteString = NULL;
+char* getCmdLine(void)
+{
+  char* multiByteString = NULL;
 
   unsigned int cursorLocation = 0;
 
-  static wchar_t *commandLine = NULL;
+  static wchar_t* commandLine = NULL;
 
   static int nextLineLocationInWideString = 0;
 
@@ -322,7 +333,7 @@ char *getCmdLine(void) {
   }
 
   multiByteString =
-      wide_string_to_UTF8(&commandLine[nextLineLocationInWideString]);
+    wide_string_to_UTF8(&commandLine[nextLineLocationInWideString]);
 
   nextLineLocationInWideString = cursorLocation + 1;
 
@@ -348,7 +359,8 @@ char *getCmdLine(void) {
 }
 
 /* set the token for the command line */
-int setTokenInteruptExecution(int token) {
+int setTokenInteruptExecution(int token)
+{
   static int savedToken = RESET_TOKEN;
 
   if (token != CHECK_TOKEN) {
@@ -358,6 +370,7 @@ int setTokenInteruptExecution(int token) {
 }
 
 /* get the token for the command line */
-int getTokenInteruptExecution(void) {
+int getTokenInteruptExecution(void)
+{
   return setTokenInteruptExecution(CHECK_TOKEN);
 }

@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <string>
 
 namespace slxio {
@@ -16,9 +17,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkElementType
  * @brief Represents the type of a Simulink element.
  */
-class SLXIO_APIEXPORT SimulinkElementType {
+class SLXIO_APIEXPORT SimulinkElementType
+{
 public:
-  enum Type {
+  enum Type
+  {
     Base = 0,
     Object = 1,
     Block = 2,
@@ -38,22 +41,22 @@ public:
   SimulinkElementType() = default;
 
   /** Checks if this type matches another type object. */
-  bool isA(const SimulinkElementType &typeObj);
+  bool isA(const SimulinkElementType& typeObj);
 
   /** Checks if this type matches a given enum value. */
-  bool isA(const SimulinkElementType::Type &type);
+  bool isA(const SimulinkElementType::Type& type);
 
   /** Constructs a type from an enum value. */
   explicit SimulinkElementType(SimulinkElementType::Type typeName);
 
   /** Creates a new type instance. */
-  static SimulinkElementType &New();
+  static SimulinkElementType& New();
 
   /** Converts a type name string to an enum value. */
-  static SimulinkElementType::Type ToType(const char *typeName);
+  static SimulinkElementType::Type ToType(const char* typeName);
 
   /** Converts an enum value to a string representation. */
-  static const char *ToString(SimulinkElementType::Type type);
+  static const char* ToString(SimulinkElementType::Type type);
 
   /** Returns the string representation of this type. */
   std::string ToString() const;

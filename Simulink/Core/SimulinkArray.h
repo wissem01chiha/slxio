@@ -8,6 +8,7 @@
 #include "ILogger.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
+
 #include <memory>
 
 namespace slxio {
@@ -23,13 +24,14 @@ class SimulinkParameter;
  * a list of object Ids to avoid mutable inclusion, forward
  * declarations, and compiler conflicts.
  */
-class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase {
+class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase
+{
 public:
   /** Default constructor. */
   SimulinkArray();
 
   /** Create a new SimulinkArray instance. */
-  SimulinkArray *New() const override;
+  SimulinkArray* New() const override;
 
   /** Construct a SimulinkArray with type, name, and dimension. */
   SimulinkArray(std::string type, std::string name, std::string dimension);
@@ -50,19 +52,19 @@ public:
   void Clear() override;
 
   /** Inserts a new child element. */
-  HError Insert(const std::shared_ptr<SimulinkElementBase> &element) override;
+  HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Erases a child element by identifier. */
-  HError Erase(const SId &id) override;
+  HError Erase(const SId& id) override;
 
   /** Erases a child element by reference. */
-  HError Erase(const std::shared_ptr<SimulinkElementBase> &element) override;
+  HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
   /** Finds a child element by identifier. */
-  std::shared_ptr<SimulinkElementBase> Find(const SId &id) override;
+  std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
 
   /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const SId &id) const override;
+  bool Contains(const SId& id) const override;
 
   /** Returns the generic type of this element. */
   SimulinkElementType GetType() const override;
@@ -83,24 +85,24 @@ public:
   std::string GetArrayType();
 
   /** Return the parameter with the given name. */
-  std::shared_ptr<SimulinkParameterBase>
-  GetParameter(std::string name) override;
+  std::shared_ptr<SimulinkParameterBase> GetParameter(
+    std::string name) override;
 
   /** Sets the element specifc parameter to given one  */
-  HError
-  SetParameter(std::string name,
-               std::shared_ptr<SimulinkParameterBase> parameter) override;
+  HError SetParameter(
+    std::string name,
+    std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /* Adds a Parameter to the array */
-  HError
-  AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+  HError AddParameter(
+    std::shared_ptr<SimulinkParameterBase> parameter) override;
 
   /** Return the class logger. */
-  Logger &GetLogger();
+  Logger& GetLogger();
 
 private:
   SId ArrayId;
-  Logger &logger;
+  Logger& logger;
   std::string ArrayType;
   std::string ArrayName;
   std::string ArrayDimension;

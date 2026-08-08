@@ -17,5 +17,8 @@
 #include "TermConsole.h"
 #include "dynlib_console.h"
 /*--------------------------------------------------------------------------*/
-CONSOLE_IMPEXP void TermPrintf_Windows(char *buffer) { TerminalPrintf(buffer); }
+CONSOLE_IMPEXP void TermPrintf_Windows(char* buffer)
+{
+  TerminalPrintf(buffer);
+}
 /*--------------------------------------------------------------------------*/

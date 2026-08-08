@@ -9,6 +9,7 @@
 #include "SimulinkElementType.h"
 #include "StateflowElementBase.h"
 #include "StateflowNodeBase.h"
+
 #include <vector>
 
 namespace slxio {
@@ -22,10 +23,11 @@ class StateflowMachine;
  * There is a one-to-one association between StateflowBlock
  * and StateflowChart.
  */
-class SLXIO_APIEXPORT StateflowChart final : public StateflowElementBase {
+class SLXIO_APIEXPORT StateflowChart final : public StateflowElementBase
+{
 public:
   StateflowChart() = default;
-  StateflowChart(StateflowChart &origChart) = delete;
+  StateflowChart(StateflowChart& origChart) = delete;
 
   /// @brief Add a StateflowNodeBase object
   HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
@@ -63,7 +65,7 @@ public:
   SId GetId() const override;
 
   /// @brief Id is not supported for StateflowChart, fallback to 0
-  bool Contains(const SId &id) const override;
+  bool Contains(const SId& id) const override;
 
 private:
   std::shared_ptr<StateflowBlock> stateflowBlock;

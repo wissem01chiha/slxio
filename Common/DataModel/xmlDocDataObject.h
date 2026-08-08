@@ -12,12 +12,13 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT xmlDocDataObject : public DataObject {
+class SLXIO_APIEXPORT xmlDocDataObject : public DataObject
+{
 public:
-  xmlDocDataObject *New() override;
+  xmlDocDataObject* New() override;
   bool Empty() override;
-  bool operator==(const DataObject &) override;
-  void *GetImplDataObject() const override;
+  bool operator==(const DataObject&) override;
+  void* GetImplDataObject() const override;
   std::string ToString() const override;
 
   xmlDocDataObject();

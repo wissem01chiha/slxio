@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -21,7 +22,8 @@ enum class SimulinkDataType;
  * @class SimulinkParameterBase
  * @brief Base class for all built-in or Custom simulink parameters
  */
-class SLXIO_APIEXPORT SimulinkParameterBase {
+class SLXIO_APIEXPORT SimulinkParameterBase
+{
 public:
   /** Returns current parameter name*/
   virtual std::string GetName() = 0;
@@ -49,7 +51,7 @@ protected:
   SimulinkParameterBase() = default;
 
   /** Deleted copy constructor. */
-  SimulinkParameterBase(const SimulinkParameterBase &) = delete;
+  SimulinkParameterBase(const SimulinkParameterBase&) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END

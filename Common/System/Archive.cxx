@@ -1,4 +1,5 @@
 #include "Archive.h"
+
 #include "DirectoryService.h"
 #include "ErrorHandlerMacro.h"
 #include "Libuv.h"
@@ -8,13 +9,25 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Archive *Archive::New() { return new Archive(); }
+Archive* Archive::New()
+{
+  return new Archive();
+}
 
-Archive::Archive() : file(File("")), directory(Directory("")) {}
+Archive::Archive()
+  : file(File(""))
+  , directory(Directory(""))
+{
+}
 
-Archive::Archive(File _file) : file(_file), directory(Directory("")) {}
+Archive::Archive(File _file)
+  : file(_file)
+  , directory(Directory(""))
+{
+}
 
-void Archive::SetArchiveExtension(const char *ext) {
+void Archive::SetArchiveExtension(const char* ext)
+{
   if (!ext || *ext == '\0') {
     return;
   }
@@ -27,17 +40,22 @@ void Archive::SetArchiveExtension(const char *ext) {
   file.Rename(dest);
 }
 
-void Archive::SetArchiveDirectory(const Directory _directory) {
+void Archive::SetArchiveDirectory(const Directory _directory)
+{
   directory = _directory;
 }
 
-Directory Archive::GetArchiveDirectory() const { return directory; }
+Directory Archive::GetArchiveDirectory() const
+{
+  return directory;
+}
 
-HError Archive::Extract() {
+HError Archive::Extract()
+{
   int err = 0;
   uv_fs_t req;
 
-  zip_t *archive = zip_open(file.GetFilePath().c_str(), ZIP_RDONLY, &err);
+  zip_t* archive = zip_open(file.GetFilePath().c_str(), ZIP_RDONLY, &err);
   if (!archive) {
     return SLXIO_LIBZIP_ERROR(err);
   }
@@ -45,13 +63,16 @@ HError Archive::Extract() {
   zip_int64_t num_entries = zip_get_num_entries(archive, 0);
 
   for (zip_uint64_t i = 0; i < num_entries; ++i) {
-    const char *name = zip_get_name(archive, i, 0);
+    const char* name = zip_get_name(archive, i, 0);
     if (!name) {
       continue;
     }
     char entrydirpath[1024];
-    snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s",
-             directory.GetDirectoryPath().c_str(), name);
+    snprintf(entrydirpath,
+             sizeof(entrydirpath),
+             "%s/%s",
+             directory.GetDirectoryPath().c_str(),
+             name);
 
     int ec = 0;
     DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);
@@ -59,12 +80,12 @@ HError Archive::Extract() {
       return ec;
     }
 
-    zip_file_t *zf = zip_fopen_index(archive, i, 0);
+    zip_file_t* zf = zip_fopen_index(archive, i, 0);
     if (!zf) {
       continue;
     }
 
-    FILE *out = fopen(entrydirpath, "wb");
+    FILE* out = fopen(entrydirpath, "wb");
     if (!out) {
       zip_fclose(zf);
       continue;
@@ -83,16 +104,17 @@ HError Archive::Extract() {
   return E_OK;
 }
 
-HError Archive::Add(const File file_) {
+HError Archive::Add(const File file_)
+{
   int err = 0;
-  zip_t *za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
+  zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
   if (!za) {
     return SLXIO_LIBZIP_ERROR(err);
   }
 
   zip_int64_t idx = zip_name_locate(za, file.GetFileName().c_str(), 0);
 
-  zip_source_t *source = zip_source_file(za, file.GetFilePath().c_str(), 0, -1);
+  zip_source_t* source = zip_source_file(za, file.GetFilePath().c_str(), 0, -1);
   if (!source) {
     zip_close(za);
     return E_ARCHIVE_SOURCE_FAILED;
@@ -105,8 +127,8 @@ HError Archive::Add(const File file_) {
       return E_ARCHIVE_REPLACE_FAILED;
     }
   } else {
-    if (zip_file_add(za, file_.GetFileName().c_str(), source,
-                     ZIP_FL_ENC_UTF_8) < 0) {
+    if (zip_file_add(
+          za, file_.GetFileName().c_str(), source, ZIP_FL_ENC_UTF_8) < 0) {
       zip_source_free(source);
       zip_close(za);
       return E_ARCHIVE_ADD_FAILED;
@@ -119,9 +141,10 @@ HError Archive::Add(const File file_) {
   return E_OK;
 }
 
-HError Archive::Remove(const File file_) {
+HError Archive::Remove(const File file_)
+{
   int err = 0;
-  zip_t *za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
+  zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
   if (!za) {
     return E_ARCHIVE_OPEN_FAILED;
   }
@@ -144,7 +167,8 @@ HError Archive::Remove(const File file_) {
   return E_OK;
 }
 
-std::string Archive::GetArchiveExtension() const {
+std::string Archive::GetArchiveExtension() const
+{
   if (file.GetFilePath().empty())
     return {};
   auto pos = file.GetFilePath().find_last_of('.');

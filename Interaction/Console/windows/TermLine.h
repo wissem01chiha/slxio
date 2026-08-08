@@ -22,19 +22,19 @@
  * returns current line
  * @return current line
  */
-char *getCurrentLine(void);
+char* getCurrentLine(void);
 
 /**
  * returns line before caret
  * return line
  */
-char *getLineBeforeCaret(void);
+char* getLineBeforeCaret(void);
 
 /**
  * returns line after caret
  * return line
  */
-char *getLineAfterCaret(void);
+char* getLineAfterCaret(void);
 
 /**
  * moves to the beginning of the line
@@ -114,7 +114,7 @@ void clearCurrentLine(void);
 /**
  * set prompt used by terminal
  */
-void setCurrentPrompt(const char *prompt);
+void setCurrentPrompt(const char* prompt);
 
 /**
  * display prompt
@@ -129,7 +129,7 @@ void refreshLine(void);
 /**
  * copy line on terminal
  */
-void copyLine(char *line);
+void copyLine(char* line);
 
 /**
  * line is a history search

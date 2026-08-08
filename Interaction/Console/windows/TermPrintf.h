@@ -23,7 +23,7 @@
  * @param[in] a string to disp
  */
 
-void TermPrintf_Windows(char *buffer);
+void TermPrintf_Windows(char* buffer);
 
 #endif /* __TERMPRINTF_WINDOWS_H__ */
 /*--------------------------------------------------------------------------*/

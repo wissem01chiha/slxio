@@ -15,9 +15,11 @@
  */
 /*--------------------------------------------------------------------------*/
 #include "clc.h"
+
 #include "ClearConsole.h"
 #include "ClearConsolePart.h"
 #include "configvariable_interface.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef _MSC_VER
@@ -27,7 +29,8 @@
 #include "others/clrscr_nw.h"
 #endif
 /*--------------------------------------------------------------------------*/
-BOOL clc(int nblines) {
+BOOL clc(int nblines)
+{
   BOOL bOK = FALSE;
   if (getScilabMode() != SCILAB_STD) {
     /* console C */

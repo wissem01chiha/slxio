@@ -5,15 +5,18 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("BackgroundLogger basic init and level get/set") {
+TEST_CASE("BackgroundLogger basic init and level get/set")
+{
   BackgroundLogger logger;
 
-  SUBCASE("init sets defaults") {
+  SUBCASE("init sets defaults")
+  {
     logger.Init();
     CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
   }
 
-  SUBCASE("set and get log level") {
+  SUBCASE("set and get log level")
+  {
     logger.SetLogLevel(LogLevelType::LOG_DEBUG);
     CHECK(logger.GetLogLevel() == LogLevelType::LOG_DEBUG);
 
@@ -21,13 +24,15 @@ TEST_CASE("BackgroundLogger basic init and level get/set") {
     CHECK(logger.GetLogLevel() == LogLevelType::LOG_ERROR);
   }
 
-  SUBCASE("Queue size can be set") {
+  SUBCASE("Queue size can be set")
+  {
     logger.SetQueueSize(4096);
     CHECK(logger.GetQueueSize() == 4096);
   }
 }
 
-TEST_CASE("BackgroundLogger logging call") {
+TEST_CASE("BackgroundLogger logging call")
+{
 
   BackgroundLogger logger;
   logger.Init();

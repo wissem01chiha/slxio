@@ -9,7 +9,8 @@ SLXIO_ABI_NAMESPACE_END
 /**
  * This class builds the Stateflow part of the Simulink models.
  */
-class StateflowParser final {
+class StateflowParser final
+{
 
   /** Maps from id to Statflow elements. */
   std::map<std::string, StateflowElementBase> elements;
@@ -36,7 +37,8 @@ class StateflowParser final {
    * part
    */
   void buildStateflow(SLXSection stateflowSection) throws
-      SimulinkModelBuildingException {
+    SimulinkModelBuildingException
+  {
 
     buildMachine(stateflowSection.getFirstSubSection(SECTION_machine));
 
@@ -46,7 +48,7 @@ class StateflowParser final {
     // step
     for (SLXSection section : stateflowSection.getSubSections()) {
       StateflowElementBase <
-          ? > element = createElementFromSectionName(section.getName());
+        ? > element = createElementFromSectionName(section.getName());
       if (element != null) {
         process(section, element);
       }
@@ -69,7 +71,8 @@ class StateflowParser final {
    *
    * @return <code>null</code> for unknown section name.
    */
-  StateflowElementBase<P> createElementFromSectionName(std::string name) {
+  StateflowElementBase<P> createElementFromSectionName(std::string name)
+  {
     if (name.equals(SECTION_chart)) {
       return new StateflowChart();
     }
@@ -93,7 +96,8 @@ class StateflowParser final {
 
   /** Build machine. */
   void buildMachine(MDLSection machineSection) throws
-      SimulinkModelBuildingException {
+    SimulinkModelBuildingException
+  {
     if (machineSection == null) {
       throw new SimulinkModelBuildingException("No Stateflow machine defined!");
     }
@@ -132,7 +136,8 @@ class StateflowParser final {
          * Recursively add parameter defined in the section to the
          * element.
          */
-        void addParameters(SLXSection section, ParameterizedElement element) {
+        void addParameters(SLXSection section, ParameterizedElement element)
+        {
           for (Map.Entry<String, String> parameter :
                section.getParameterMapRecursively().entrySet()) {
             element.setParameter(parameter.getKey(), parameter.getValue());
@@ -141,7 +146,8 @@ class StateflowParser final {
 
         /** Build relation for Stateflow element. */
         void buildRelation(StateflowElementBase<P> element) throws
-            SimulinkModelBuildingException {
+          SimulinkModelBuildingException
+        {
           if (element instanceof StateflowState) {
             buildNodeRelation((StateflowState)element, PARAM_treeNode);
             return;
@@ -178,16 +184,17 @@ class StateflowParser final {
         /** Build node relation. */
       private
         void buildNodeRelation(StateflowNodeBase node, String relationParam)
-            throws SimulinkModelBuildingException {
+          throws SimulinkModelBuildingException
+        {
           StateflowElementBase < ? > relatedElement =
-                                       getRelatedElement(node, relationParam);
+                                     getRelatedElement(node, relationParam);
                 if (!(relatedElement instanceof IStateflowNodeContainer<?>))
                 {
                   throw new SimulinkModelBuildingException(
-                      relatedElement + " cannot be parent of " + node);
+                    relatedElement + " cannot be parent of " + node);
                 }
                 IStateflowNodeContainer <
-                    ? > parent = (IStateflowNodeContainer < ? >) relatedElement;
+                  ? > parent = (IStateflowNodeContainer < ? >) relatedElement;
                 parent.addNode(node);
         }
 
@@ -205,37 +212,39 @@ class StateflowParser final {
          */
       private
         StateflowElementBase <
-            ? > getRelatedElement(
-                    StateflowElementBase < ? > element,
-                    String relationshipParam)
-                        throws SimulinkModelBuildingException {
+          ? > getRelatedElement(StateflowElementBase < ? > element,
+                                String relationshipParam)
+                                  throws SimulinkModelBuildingException
+        {
           String array = element.getParameter(relationshipParam);
           if (array == null) {
             throw new SimulinkModelBuildingException(
-                "Relationsship parameter " + relationshipParam +
-                " not found for element with id " + element.getStateflowId() +
-                ".");
+              "Relationsship parameter " + relationshipParam +
+              " not found for element with id " + element.getStateflowId() +
+              ".");
           }
           String[] relationship = SimulinkUtils.getStringParameterArray(array);
           if (relationship.length == 0) {
             throw new SimulinkModelBuildingException(
-                "Relationsship parameter " + relationshipParam +
-                " not found for element with id " + element.getStateflowId() +
-                ".");
+              "Relationsship parameter " + relationshipParam +
+              " not found for element with id " + element.getStateflowId() +
+              ".");
           }
           return elements.get(relationship[0]);
         }
 
         /** Build event relation. */
         void buildEventRelation(StateflowEvent element) throws
-            SimulinkModelBuildingException {
+          SimulinkModelBuildingException
+        {
           StateflowDeclContainerBase < ? > parent = determineParent(element);
           parent.addEvent(element);
         }
 
         /** Build relation for data. */
         void buildDataRelation(StateflowData element) throws
-            SimulinkModelBuildingException {
+          SimulinkModelBuildingException
+        {
           StateflowDeclContainerBase < ? > parent = determineParent(element);
           parent.addData(element);
         }
@@ -243,22 +252,24 @@ class StateflowParser final {
         /** Determine parent of a Stateflow declaration (event or
          * data). */
         StateflowDeclContainerBase<P> determineParent(
-            StateflowDeclBase element) throws SimulinkModelBuildingException {
-          StateflowElementBase <
-              ? > relatedElement = getRelatedElement(element, PARAM_linkNode);
+          StateflowDeclBase element) throws SimulinkModelBuildingException
+        {
+          StateflowElementBase < ? > relatedElement =
+                                     getRelatedElement(element, PARAM_linkNode);
                 if (!(relatedElement instanceof StateflowDeclContainerBase<?>))
                 {
                   throw new SimulinkModelBuildingException(
-                      relatedElement + " cannot be parent of " + element);
+                    relatedElement + " cannot be parent of " + element);
                 }
                 return (StateflowDeclContainerBase<?>) relatedElement;
         }
 
         /** Build target relation. */
         void buildTargetRelation(StateflowTarget element) throws
-            SimulinkModelBuildingException {
-          StateflowElementBase <
-              ? > relatedElement = getRelatedElement(element, PARAM_linkNode);
+          SimulinkModelBuildingException
+        {
+          StateflowElementBase < ? > relatedElement =
+                                     getRelatedElement(element, PARAM_linkNode);
           StateflowMachine parent = castToMachine(relatedElement, element);
           parent.addTarget(element);
         }
@@ -266,9 +277,10 @@ class StateflowParser final {
         /** Build relation for charts. */
       private
         void buildChartRelation(StateflowChart element) throws
-            SimulinkModelBuildingException {
+          SimulinkModelBuildingException
+        {
           StateflowElementBase < ? > relatedElement = elements.get(
-                                       element.getParameter(PARAM_machine));
+                                     element.getParameter(PARAM_machine));
           StateflowMachine parent = castToMachine(relatedElement, element);
           String fqName = model.getParameter(PARAM_Name) + "/" +
                           element.getParameter(PARAM_name);
@@ -293,8 +305,8 @@ class StateflowParser final {
         {
           if (machineElement != model.getStateflowMachine()) {
             throw new SimulinkModelBuildingException(
-                element + " must belong to machine " +
-                model.getStateflowMachine());
+              element + " must belong to machine " +
+              model.getStateflowMachine());
           }
           return (StateflowMachine)machineElement;
         }
@@ -302,7 +314,8 @@ class StateflowParser final {
         /** Build transition. */
       private
         void buildTransition(MDLSection section) throws
-            SimulinkModelBuildingException {
+          SimulinkModelBuildingException
+        {
           String srcId = getId(section, SECTION_src);
           String dstId = getId(section, SECTION_dst);
 
@@ -324,7 +337,7 @@ class StateflowParser final {
             transition = new StateflowTransition(dstNode);
           } else {
             transition =
-                new StateflowTransition(getNode(srcId, section), dstNode);
+              new StateflowTransition(getNode(srcId, section), dstNode);
           }
 
           addParameters(section, transition);
@@ -338,8 +351,10 @@ class StateflowParser final {
          * to the transition (using src/dst prefix).
          */
       private
-        void copyIntersection(MDLSection section, String subSectionName,
-                              StateflowTransition transition) {
+        void copyIntersection(MDLSection section,
+                              String subSectionName,
+                              StateflowTransition transition)
+        {
           MDLSection subSection = section.getFirstSubSection(subSectionName);
           transition.setParameter(subSectionName + "_" + PARAM_intersection,
                                   subSection.getParameter(PARAM_intersection));
@@ -349,14 +364,14 @@ class StateflowParser final {
          * Get parameter 'id' in the first sub section with a given
          * name.
          */
-        String
-        getId(MDLSection section,
-              String subSectionName) throws SimulinkModelBuildingException {
+        String getId(MDLSection section, String subSectionName) throws
+          SimulinkModelBuildingException
+        {
           MDLSection subSection = section.getFirstSubSection(subSectionName);
 
           if (subSection == null) {
             throw new SimulinkModelBuildingException(
-                "Section " + section + " has no child " + subSectionName);
+              "Section " + section + " has no child " + subSectionName);
           }
 
           return subSection.getParameter(PARAM_id);
@@ -369,21 +384,21 @@ class StateflowParser final {
          *             if no node was found for the given id.
          */
       private
-        StateflowNodeBase
-        getNode(String id,
-                MDLSection section) throws SimulinkModelBuildingException {
+        StateflowNodeBase getNode(String id, MDLSection section) throws
+          SimulinkModelBuildingException
+        {
           StateflowElementBase < ? > element = elements.get(id);
 
           if (element == null) {
             throw new SimulinkModelBuildingException(
-                "Stateflow element with id " + id + " not found.", section);
+              "Stateflow element with id " + id + " not found.", section);
           }
 
           if (!(element instanceof StateflowNodeBase)) {
             throw new SimulinkModelBuildingException(
-                "Only Stateflow nodes can be source or destination of "
-                "transitions.",
-                section);
+              "Only Stateflow nodes can be source or destination of "
+              "transitions.",
+              section);
           }
 
           return (StateflowNodeBase)element;

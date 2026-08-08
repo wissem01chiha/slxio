@@ -5,7 +5,7 @@
       "name": "Visual-Studio-Community-2022-Release-amd64",
       "displayName": "Visual-Studio-Community-2022-Release-amd64",
       "description":
-          "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+        "Using compilers for Visual Studio 17 2022 (x64 architecture)",
       "generator": "Visual Studio 17 2022",
       "toolset": "host=x64",
       "architecture": "x64",
@@ -32,7 +32,7 @@
       "name": "Clang-14.0.0-x86_64-pc-linux-gnu",
       "displayName": "Clang-14.0.0-x86_64-pc-linux-gnu",
       "description":
-          "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
+        "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
@@ -45,7 +45,7 @@
       "name": "Visual-Studio-Community-2022-Release-amd64_x86",
       "displayName": "Visual-Studio-Community-2022-Release-amd64_x86",
       "description":
-          "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
+        "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
       "generator": "Visual Studio 17 2022",
       "toolset": "host=x64",
       "architecture": "x64",
@@ -60,7 +60,7 @@
       "name": "GCC-15.3.0-x86_64-w64-mingw32",
       "displayName": "GCC-15.3.0-x86_64-w64-mingw32",
       "description":
-          "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
+        "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
       "generator": "MinGW Makefiles",
       "binaryDir": "${sourceDir}/build/${presetName}",
       "cacheVariables": {
@@ -79,6 +79,21 @@
         "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
         "CMAKE_C_COMPILER": "/usr/bin/gcc",
         "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "GCC-15.2.0-x86_64-w64-mingw32",
+      "displayName": "GCC-15.2.0-x86_64-w64-mingw32",
+      "description":
+        "Using compilers: C = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\gcc.exe, CXX = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\g++.exe",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+        "CMAKE_C_COMPILER":
+          "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/gcc.exe",
+        "CMAKE_CXX_COMPILER":
+          "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/g++.exe",
         "CMAKE_BUILD_TYPE": "Debug"
       }
     }

@@ -15,10 +15,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief A Stateflow event object.
  */
-class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase {
+class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase
+{
 public:
   StateflowEvent();
-  StateflowEvent(StateflowEvent &orig);
+  StateflowEvent(StateflowEvent& orig);
   HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
 private:

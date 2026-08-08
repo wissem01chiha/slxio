@@ -23,7 +23,7 @@
  * @param[in] list of files
  * @return TRUE or FALSE
  */
-BOOL dropFiles(char **files);
+BOOL dropFiles(char** files);
 
 #endif /* __DROPFILES_H__ */
 /*--------------------------------------------------------------------------*/

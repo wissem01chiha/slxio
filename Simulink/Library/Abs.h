@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Abs final {
+class SLXIO_APIEXPORT Abs final
+{
 public:
   /** Default Constructor */
   Abs();

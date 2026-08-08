@@ -7,7 +7,8 @@ using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("Logger Set And Get Log Level") {
+TEST_CASE("Logger Set And Get Log Level")
+{
   Logger logger;
   logger.SetLogLevel(LogLevelType::LOG_INFO);
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
@@ -16,14 +17,16 @@ TEST_CASE("Logger Set And Get Log Level") {
   CHECK(logger.GetLogLevel() == LogLevelType::LOG_DEBUG);
 }
 
-TEST_CASE("Logger Log Single Error Message") {
+TEST_CASE("Logger Log Single Error Message")
+{
   Logger logger;
   ErrorLogMessage msg(E_OK);
 
   CHECK_NOTHROW(logger.Log(msg));
 }
 
-TEST_CASE("Logger Log Combined Error Message") {
+TEST_CASE("Logger Log Combined Error Message")
+{
   Logger logger;
   logger.Init();
   logger.SetLogLevel(LogLevelType::LOG_WARN);

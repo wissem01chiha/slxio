@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DiscreteDerivative final {
+class SLXIO_APIEXPORT DiscreteDerivative final
+{
 public:
   /** Default Constructor */
   DiscreteDerivative();

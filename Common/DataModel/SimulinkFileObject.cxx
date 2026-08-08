@@ -1,26 +1,37 @@
 #include "SimulinkFileObject.h"
+
 #include "xmlDocDataObject.h"
+
 #include <sstream>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkFileObject *SimulinkFileObject::New() {
+SimulinkFileObject* SimulinkFileObject::New()
+{
   return new SimulinkFileObject();
 }
 
 void SimulinkFileObject::Initialize() {}
 
-UInt32 SimulinkFileObject::GetUpdateTime() const { return UInt32(); }
-
-void *SimulinkFileObject::GetImplDataObject() const { return ImplDataObject; }
-
-bool SimulinkFileObject::operator==(const DataObject &other) {
-  return ImplDataObject->Name ==
-         static_cast<SimulinkFile *>(other.GetImplDataObject())->Name;
+UInt32 SimulinkFileObject::GetUpdateTime() const
+{
+  return UInt32();
 }
 
-std::string SimulinkFileObject::ToString() const {
+void* SimulinkFileObject::GetImplDataObject() const
+{
+  return ImplDataObject;
+}
+
+bool SimulinkFileObject::operator==(const DataObject& other)
+{
+  return ImplDataObject->Name ==
+         static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
+}
+
+std::string SimulinkFileObject::ToString() const
+{
   std::ostringstream oss;
   oss << "SimulinkFileObject { "
       << "name=\"" << ImplDataObject->Name << "\", "
@@ -39,7 +50,10 @@ std::string SimulinkFileObject::ToString() const {
   return oss.str();
 }
 
-bool SimulinkFileObject::Empty() { return ImplDataObject == nullptr; }
+bool SimulinkFileObject::Empty()
+{
+  return ImplDataObject == nullptr;
+}
 
 SimulinkFileObject::SimulinkFileObject() {}
 

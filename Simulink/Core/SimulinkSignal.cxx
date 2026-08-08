@@ -1,21 +1,32 @@
 #include "SimulinkSignal.h"
+
 #include <cstring>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkSignal::SimulinkSignal()
-    : Description(""), Complexity("auto"), DataType(SimulinkDataType::Auto),
-      Min(SLXIO_FLOAT_MIN), Max(SLXIO_FLOAT_MAX) {}
+  : Description("")
+  , Complexity("auto")
+  , DataType(SimulinkDataType::Auto)
+  , Min(SLXIO_FLOAT_MIN)
+  , Max(SLXIO_FLOAT_MAX)
+{
+}
 
-HError SimulinkSignal::setDataType(SimulinkDataType dt) {
+HError SimulinkSignal::setDataType(SimulinkDataType dt)
+{
   DataType = dt;
   return E_OK;
 }
 
-SimulinkDataType SimulinkSignal::getDataType() { return DataType; }
+SimulinkDataType SimulinkSignal::getDataType()
+{
+  return DataType;
+}
 
-HError SimulinkSignal::setDataType(const char *dt) {
+HError SimulinkSignal::setDataType(const char* dt)
+{
 
   if (strcmp(dt, "auto") == 0) {
     DataType = SimulinkDataType::Auto;
@@ -47,7 +58,8 @@ HError SimulinkSignal::setDataType(const char *dt) {
 
   return E_OK;
 }
-HError SimulinkSignal::setComplexityType(const char *ct) {
+HError SimulinkSignal::setComplexityType(const char* ct)
+{
 
   if (strcmp(ct, "auto") == 0) {
     Complexity = "auto";
@@ -61,23 +73,48 @@ HError SimulinkSignal::setComplexityType(const char *ct) {
   return E_OK;
 }
 
-const char *SimulinkSignal::getComplexity() { return Complexity; }
+const char* SimulinkSignal::getComplexity()
+{
+  return Complexity;
+}
 
-std::vector<UInt16> SimulinkSignal::getDimensions() { return Dimensions; }
+std::vector<UInt16> SimulinkSignal::getDimensions()
+{
+  return Dimensions;
+}
 
-CoderInfo SimulinkSignal::getCoderInfo() { return coder; }
+CoderInfo SimulinkSignal::getCoderInfo()
+{
+  return coder;
+}
 
-const char *SimulinkSignal::getInitialValue() { return InitialValue; }
+const char* SimulinkSignal::getInitialValue()
+{
+  return InitialValue;
+}
 
-const char *SimulinkSignal::getDescription() { return Description; }
+const char* SimulinkSignal::getDescription()
+{
+  return Description;
+}
 
-const char *SimulinkSignal::getDimensionsMode() { return DimensionsMode; }
+const char* SimulinkSignal::getDimensionsMode()
+{
+  return DimensionsMode;
+}
 
-const char *SimulinkSignal::getUnit() { return Unit; }
+const char* SimulinkSignal::getUnit()
+{
+  return Unit;
+}
 
-std::vector<Float32> SimulinkSignal::getSampleTime() { return SampleTime; }
+std::vector<Float32> SimulinkSignal::getSampleTime()
+{
+  return SampleTime;
+}
 
-HError SimulinkSignal::setRange(Float32 min, Float32 max) {
+HError SimulinkSignal::setRange(Float32 min, Float32 max)
+{
   Min = min;
   Max = max;
   return E_OK;

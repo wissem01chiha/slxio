@@ -29,7 +29,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 36#in:1: Block ID 36, input port 1
  */
 class SLXIO_APIEXPORT SimulinkLineParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkLine> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkLine>
+{
 public:
   SimulinkLineParser() = default;
   HError setInputData(const xmlNodePtr data) override;

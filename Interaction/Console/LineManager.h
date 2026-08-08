@@ -40,7 +40,7 @@ CONSOLE_IMPEXP int scilinesdefault(void);
  * @param[in] number of columns
  * @return 0
  */
-CONSOLE_IMPEXP int C2F(scilines)(int *nl, int *nc);
+CONSOLE_IMPEXP int C2F(scilines)(int* nl, int* nc);
 
 /**
  * set default number of lines and columns to display data (C2F version)
@@ -74,6 +74,6 @@ CONSOLE_IMPEXP int linesmore(void);
  * @param string whose number of line will be counted
  * @return number of line used by the string.
  */
-int getNbrLine(wchar_t *str);
+int getNbrLine(wchar_t* str);
 
 #endif /* !_GETNBRLINE_H */

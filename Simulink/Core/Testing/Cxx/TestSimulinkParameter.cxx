@@ -4,9 +4,10 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("SimulinkParameter") {
+TEST_CASE("SimulinkParameter")
+{
 
-  SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
+  SimulinkParameter* ParameterPtr = new SimulinkParameter("10");
   CHECK(ParameterPtr->setName("NAME") == E_OK);
   CHECK(std::strcmp(ParameterPtr->getName(), "NAME") == 0);
   std::string strval;
@@ -15,16 +16,18 @@ TEST_CASE("SimulinkParameter") {
   delete ParameterPtr;
 }
 
-TEST_CASE("SimulinkParameter") {
+TEST_CASE("SimulinkParameter")
+{
 
-  SimulinkParameter *ParameterPtr = new SimulinkParameter("10");
+  SimulinkParameter* ParameterPtr = new SimulinkParameter("10");
   CHECK(ParameterPtr->GetType().isA(SimulinkElementType::Parameter));
   delete ParameterPtr;
 }
 
-TEST_CASE("SimulinkParameter") {
+TEST_CASE("SimulinkParameter")
+{
 
-  SimulinkParameter *ParameterPtr = new SimulinkParameter("10.0");
+  SimulinkParameter* ParameterPtr = new SimulinkParameter("10.0");
 
   Float32 dblVal = 0.0;
   CHECK(ParameterPtr->getValueAsDouble(dblVal) == E_OK);
@@ -45,12 +48,13 @@ TEST_CASE("SimulinkParameter") {
   delete ParameterPtr;
 }
 
-TEST_CASE("SimulinkParameter") {
+TEST_CASE("SimulinkParameter")
+{
 
-  SimulinkParameter *ParameterPtr =
-      new SimulinkParameter("[10.025, 10.2, 4.5]");
+  SimulinkParameter* ParameterPtr =
+    new SimulinkParameter("[10.025, 10.2, 4.5]");
 
-  const std::vector<Float32> expected = {10.025f, 10.2f, 4.5f};
+  const std::vector<Float32> expected = { 10.025f, 10.2f, 4.5f };
 
   std::vector<Float32> arr;
   CHECK(ParameterPtr->getValueAsArray(arr) == E_OK);

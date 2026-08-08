@@ -15,7 +15,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class TimeStamp
  * @brief
  */
-class SLXIO_APIEXPORT TimeStamp final {
+class SLXIO_APIEXPORT TimeStamp final
+{
 public:
   TimeStamp();
   ~TimeStamp() = default;

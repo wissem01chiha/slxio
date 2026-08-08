@@ -14,12 +14,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief
  */
-class SimulinkRTW final {
+class SimulinkRTW final
+{
 public:
   SimulinkRTW();
 
 private:
-  const char **DisabledProps;
+  const char** DisabledProps;
   UInt16 DisabledPropsCount;
 };
 

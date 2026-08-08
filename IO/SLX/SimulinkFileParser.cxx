@@ -1,16 +1,19 @@
 #include "SimulinkFileParser.h"
+
 #include "Logger.h"
 #include "SimulinkContentParser.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkFileParser::setInputData(const File fs) {
+HError SimulinkFileParser::setInputData(const File fs)
+{
   dataObject = fs;
   return E_OK;
 }
 
-HError SimulinkFileParser::parse() {
+HError SimulinkFileParser::parse()
+{
   SimulinkContentParser contentParser;
   HError status = contentParser.setInputData(dataObject);
   if (status != E_OK) {
@@ -34,9 +37,9 @@ HError SimulinkFileParser::parse() {
 
   for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr;
        cur = cur->next) {
-    std::string nodeName = (const char *)cur->name;
-    xmlChar *content = xmlNodeGetContent(cur);
-    std::string nodeContent = (const char *)content;
+    std::string nodeName = (const char*)cur->name;
+    xmlChar* content = xmlNodeGetContent(cur);
+    std::string nodeContent = (const char*)content;
     if (nodeName == "category") {
       ptr->category = nodeContent;
     } else if (nodeName == "creator") {

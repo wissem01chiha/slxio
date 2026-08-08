@@ -7,12 +7,14 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <string>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataStoreRead final {
+class SLXIO_APIEXPORT DataStoreRead final
+{
 public:
   /** Default Constructor */
   DataStoreRead();
@@ -21,7 +23,7 @@ public:
   std::string GetName() const;
 
   /** Set the data store object name */
-  void SetName(std::string &name);
+  void SetName(std::string& name);
 
   /** Default Destructor */
   ~DataStoreRead();

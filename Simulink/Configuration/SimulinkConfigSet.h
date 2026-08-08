@@ -10,6 +10,7 @@
 #include "SimulinkModel.h"
 #include "SimulinkObject.h"
 #include "SimulinkParameterBase.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -29,7 +30,8 @@ class Logger;
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
-class SLXIO_APIEXPORT SimulinkConfigSet final {
+class SLXIO_APIEXPORT SimulinkConfigSet final
+{
 public:
   /** Default Constructor */
   SimulinkConfigSet();
@@ -38,7 +40,7 @@ public:
    * disbale copy constructor
    * nstead use clone to create a copy of the configuration set
    */
-  SimulinkConfigSet(const SimulinkConfigSet &) = delete;
+  SimulinkConfigSet(const SimulinkConfigSet&) = delete;
 
   /**
    * Contructor from SimulinkObject, this is used internally to
@@ -51,14 +53,14 @@ public:
   bool IsActive() const;
 
   /** Gets a parameter value by name.*/
-  const char *GetParameter(const char *name);
+  const char* GetParameter(const char* name);
 
   /** Retuens the parameter object by name. */
-  std::shared_ptr<SimulinkParameterBase>
-  GetParameterObject(const std::string &name);
+  std::shared_ptr<SimulinkParameterBase> GetParameterObject(
+    const std::string& name);
 
   /** Sets a parameter value by name.*/
-  HError SetParameter(const char *name, const char *value);
+  HError SetParameter(const char* name, const char* value);
 
   /** Creates a copy of this configuration set.*/
   HError Copy();
@@ -70,10 +72,10 @@ public:
   HError Clear();
 
   /** Attaches this configuration set to a Simulink model.*/
-  HError Attach(SimulinkModel &model);
+  HError Attach(SimulinkModel& model);
 
   /** Detaches this configuration set from a Simulink model.*/
-  HError Detach(SimulinkModel &model);
+  HError Detach(SimulinkModel& model);
 
   /** Activates this configuration set.*/
   void Activate();
@@ -94,10 +96,10 @@ public:
   SId GetId() const;
 
   /** Creates a configuration set from a file.*/
-  HError FromFile(const char *path);
+  HError FromFile(const char* path);
 
   /** Saves the configuration set to a file. */
-  HError SaveToFile(const char *path);
+  HError SaveToFile(const char* path);
 
   /** Converts to a string representation. */
   std::string ToString() const;
@@ -109,7 +111,7 @@ public:
   ~SimulinkConfigSet() = default;
 
 private:
-  Logger &logger;
+  Logger& logger;
   bool status = false;
   std::shared_ptr<SimulinkObject> object;
   std::shared_ptr<SimulinkSolver> solver;

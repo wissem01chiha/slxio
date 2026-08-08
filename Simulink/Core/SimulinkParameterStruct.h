@@ -5,6 +5,7 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkParameterBase.h"
+
 #include <memory>
 #include <string>
 #include <vector>

@@ -4,48 +4,52 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkBlockTestFixture {
+class SimulinkBlockTestFixture
+{
 public:
 protected:
 };
 
-TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest") {
+TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest")
+{
 
-  SimulinkBlock *block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
+  SimulinkBlock* block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
   CHECK(block->GetBlockType().isA(SimulinkBlockType::Type::Constant));
   CHECK(block->GetType().isA(SimulinkElementType::Type::Block));
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest") {
+TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest")
+{
 
-  SimulinkBlock *pblockPtr =
-      new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
-  SimulinkBlock *block = new SimulinkBlock(*pblockPtr);
+  SimulinkBlock* pblockPtr =
+    new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
+  SimulinkBlock* block = new SimulinkBlock(*pblockPtr);
 
   CHECK(block->GetId() == 10);
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest") {
+TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
+{
 
-  SimulinkBlock *parentblockPtr =
-      new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
+  SimulinkBlock* parentblockPtr =
+    new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
   std::shared_ptr<SimulinkBlock> childblockPtr =
-      std::make_shared<SimulinkBlock>(SimulinkBlockType::Type::Clock,
-                                      "ClockBlock", 20);
+    std::make_shared<SimulinkBlock>(
+      SimulinkBlockType::Type::Clock, "ClockBlock", 20);
 
   HError status = parentblockPtr->AddElement(childblockPtr);
   CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest") {
+TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
+{
 
-  SimulinkBlock *parentblockPtr =
-      new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
+  SimulinkBlock* parentblockPtr =
+    new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
   std::shared_ptr<SimulinkBlock> childblockPtr =
-      std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock",
-                                      20);
+    std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
 
   HError addStatus = parentblockPtr->AddElement(childblockPtr);
   CHECK(addStatus == E_OK);

@@ -18,10 +18,11 @@ class Logger;
  * @class SimulinkWriter
  * @brief Abstract class to write Simulink data to files
  */
-class SLXIO_APIEXPORT SimulinkWriter {
+class SLXIO_APIEXPORT SimulinkWriter
+{
 public:
   /** Create a new instance of the writer */
-  virtual SimulinkWriter *New() = 0;
+  virtual SimulinkWriter* New() = 0;
 
   /** Virtual destructor for cleanup */
   virtual ~SimulinkWriter() = default;
@@ -30,22 +31,22 @@ public:
   virtual HError Write() = 0;
 
   /** Set single input data object for writing */
-  virtual HError SetInputData(const DataObject &data) = 0;
+  virtual HError SetInputData(const DataObject& data) = 0;
 
   /** Set indexed input data object for writing */
-  virtual HError SetInputData(SId idx, const DataObject &data) = 0;
+  virtual HError SetInputData(SId idx, const DataObject& data) = 0;
 
   /** Get the single input data object*/
-  DataObject *GetInputData() const;
+  DataObject* GetInputData() const;
 
   /** Get the indexed input data object */
-  DataObject *GetInputData(SId idx) const;
+  DataObject* GetInputData(SId idx) const;
 
   /** Access the logger instance*/
-  Logger &GetLogger();
+  Logger& GetLogger();
 
 protected:
-  Logger &logger;
+  Logger& logger;
 };
 
 }; // namespace slxio

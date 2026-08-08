@@ -23,12 +23,14 @@
 #include "localization.h"
 #include "more.h"
 #include "sciprint.h"
+
 #include <stdio.h>
 /*--------------------------------------------------------------------------*/
 #define MSG_MORE                                                               \
   _("[Continue display? n (no) to stop, any other key to continue]")
 /*--------------------------------------------------------------------------*/
-int linesmore(void) {
+int linesmore(void)
+{
   int retval = 0;
   if (getScilabMode() != SCILAB_STD) {
     int ch = 0;

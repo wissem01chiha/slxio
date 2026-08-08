@@ -13,8 +13,10 @@
  */
 
 #include "cliPrompt.h"
+
 #include "cliDisplayManagement.h"
 #include "prompt.h"
+
 #include <curses.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -29,10 +31,11 @@
  * wchar. If Argument pass is WRITE_PROMPT (1), it write prompt (NOWRITE_PROMPT
  * (-1) not to write prompt) Function return size of the prompt.
  */
-int printPrompt(int token) {
+int printPrompt(int token)
+{
   /* Retrieve the prompt. It can be different if the pause mode is enabled */
-  const char *prompt = GetCurrentPrompt();
-  const char *tmpPrompt = GetTemporaryPrompt();
+  const char* prompt = GetCurrentPrompt();
+  const char* tmpPrompt = GetTemporaryPrompt();
 
   if (token == WRITE_PROMPT) {
     setCharDisplay(DISP_DEFAULT);

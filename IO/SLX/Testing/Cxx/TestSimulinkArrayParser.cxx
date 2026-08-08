@@ -1,20 +1,29 @@
 #include "SimulinkArrayParser.h"
 #include "slxDoctest.h"
+
 #include <iostream>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkArrayParserTestFixture {
+class SimulinkArrayParserTestFixture
+{
 protected:
   SimulinkArrayParserTestFixture()
-      : parserPtr(new SimulinkArrayParser()), doc(nullptr) {}
+    : parserPtr(new SimulinkArrayParser())
+    , doc(nullptr)
+  {
+  }
 
-  xmlNodePtr getXmlNodePtr(const char *xmlfilename) {
+  xmlNodePtr getXmlNodePtr(const char* xmlfilename)
+  {
 
     char xmlfilepath[512];
-    snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-             PROJECT_ROOT_DIR, xmlfilename);
+    snprintf(xmlfilepath,
+             sizeof(xmlfilepath),
+             "%s/IO/Slx/Testing/Data/%s",
+             PROJECT_ROOT_DIR,
+             xmlfilename);
     doc = xmlReadFile(xmlfilepath, nullptr, 0);
     if (!doc) {
       throw std::runtime_error("failed to read XML file");
@@ -23,7 +32,8 @@ protected:
     return root;
   }
 
-  ~SimulinkArrayParserTestFixture() {
+  ~SimulinkArrayParserTestFixture()
+  {
 
     if (parserPtr) {
       delete parserPtr;
@@ -34,18 +44,20 @@ protected:
     }
   }
 
-  SimulinkArrayParser *parserPtr;
+  SimulinkArrayParser* parserPtr;
   xmlDocPtr doc;
 };
 
-TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ParserSetInputDataTest") {
+TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ParserSetInputDataTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   HError status = parserPtr->setInputData(nodePtr);
   CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest") {
+TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   HError status = parserPtr->setInputData(nodePtr);
@@ -54,7 +66,8 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "GetArrayNotNullPtrTest") {
   CHECK(dataObj != nullptr);
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayParserTest") {
+TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayParserTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   parserPtr->setInputData(nodePtr);
@@ -62,7 +75,8 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayParserTest") {
   CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayValidDataTest") {
+TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayValidDataTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("array.xml");
   parserPtr->setInputData(nodePtr);
@@ -74,7 +88,8 @@ TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayValidDataTest") {
   CHECK(strcmp(array->getArrayType().c_str(), "Cell") == 0);
 }
 
-TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest") {
+TEST_CASE_FIXTURE(SimulinkArrayParserTestFixture, "ArrayWithSubObjectTest")
+{
 
   xmlNodePtr nodePtr = getXmlNodePtr("arrayobject.xml");
   parserPtr->setInputData(nodePtr);

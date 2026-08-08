@@ -14,7 +14,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-enum class LogLevelType : UInt8 {
+enum class LogLevelType : UInt8
+{
   LOG_OFF = 0x00,
   LOG_FATAL = 0x01,
   LOG_ERROR = 0x02,
@@ -30,7 +31,8 @@ enum class LogLevelType : UInt8 {
  * Concrete implementations may write log messages to the console,
  * files, databases, network services, or other destinations.
  */
-class SLXIO_APIEXPORT ILogger {
+class SLXIO_APIEXPORT ILogger
+{
 public:
   virtual ~ILogger() = default;
 
@@ -38,7 +40,7 @@ public:
   virtual void Init(){};
 
   /** Logs a message. */
-  virtual void Log(const ILogMessage &msg) = 0;
+  virtual void Log(const ILogMessage& msg) = 0;
 
   /** Sets the current logging level. */
   virtual void SetLogLevel(LogLevelType level) = 0;
@@ -53,7 +55,8 @@ public:
 
   /* Append ILogMessage Based Object in a stream way to the ILogger based object
    */
-  ILogger &operator<<(const ILogMessage &msg) {
+  ILogger& operator<<(const ILogMessage& msg)
+  {
     this->Log(msg);
     return *this;
   }

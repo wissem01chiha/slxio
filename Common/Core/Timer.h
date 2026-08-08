@@ -18,7 +18,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief  A high-resolution timer class for measuring elapsed time with
  * precision.
  */
-class SLXIO_APIEXPORT Timer final {
+class SLXIO_APIEXPORT Timer final
+{
 public:
   using Clock = std::chrono::steady_clock;
 
@@ -49,7 +50,7 @@ public:
 private:
   Clock::time_point StartTime;
   bool Running = false;
-  Clock::duration Accumulated{Clock::duration::zero()};
+  Clock::duration Accumulated{ Clock::duration::zero() };
 };
 
 SLXIO_ABI_NAMESPACE_END

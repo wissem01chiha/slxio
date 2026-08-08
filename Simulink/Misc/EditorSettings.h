@@ -14,7 +14,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Base Class for MATLAB editor settings
  */
-class SLXIO_APIEXPORT EditorSettings final {
+class SLXIO_APIEXPORT EditorSettings final
+{
 public:
   EditorSettings() = default;
   ~EditorSettings() = default;
@@ -42,8 +43,8 @@ public:
   bool getMultiThreadCoSim();
 
 private:
-  const char *LibraryLinkDisplay;
-  const char *PortDataTypeDisplayFormat;
+  const char* LibraryLinkDisplay;
+  const char* PortDataTypeDisplayFormat;
   bool SampleTimeColors;
   bool SampleTimeAnnotations;
   bool WideLines;

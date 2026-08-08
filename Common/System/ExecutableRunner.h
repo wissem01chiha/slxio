@@ -14,7 +14,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class ExecutableRunner
  * @brief
  */
-class SLXIO_APIEXPORT ExecutableRunner final {
+class SLXIO_APIEXPORT ExecutableRunner final
+{
 public:
   ExecutableRunner();
   ~ExecutableRunner();

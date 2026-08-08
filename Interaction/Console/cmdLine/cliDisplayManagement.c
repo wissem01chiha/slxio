@@ -13,16 +13,18 @@
  */
 
 #include "cliDisplayManagement.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
 static BOOL cliColor = TRUE;
 
 /* Set color and other settings about character display */
-void setCharDisplay(char *setting) {
-  static char *currentSetting = NULL;
+void setCharDisplay(char* setting)
+{
+  static char* currentSetting = NULL;
 
-  static char *lastSetting = NULL;
+  static char* lastSetting = NULL;
 
   if (!getCLIColor()) {
     return;
@@ -46,7 +48,8 @@ void setCharDisplay(char *setting) {
 }
 
 /* Change Characters color */
-void setForegroundColor(int color) {
+void setForegroundColor(int color)
+{
   char charColor[3];
 
   charColor[0] = SET_CONSOLE_FOREGROUND;
@@ -56,7 +59,8 @@ void setForegroundColor(int color) {
 }
 
 /* Change background color */
-void setBackgroundColor(int color) {
+void setBackgroundColor(int color)
+{
   char charColor[3];
 
   charColor[0] = SET_CONSOLE_BACKGROUND;
@@ -65,6 +69,12 @@ void setBackgroundColor(int color) {
   setCharDisplay(charColor);
 }
 
-BOOL getCLIColor() { return cliColor; }
+BOOL getCLIColor()
+{
+  return cliColor;
+}
 
-void setCLIColor(BOOL CLIColor) { cliColor = CLIColor; }
+void setCLIColor(BOOL CLIColor)
+{
+  cliColor = CLIColor;
+}

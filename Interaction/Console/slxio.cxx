@@ -3,11 +3,13 @@
 
 #include "Version.h"
 #include "slxCxxopts.h"
+
 #include <iostream>
 
-void banner() {
+void banner()
+{
   std::cout <<
-      R"(
+    R"(
    _____ __   _  __ ________
   / ___// /  | |/ //  _/ __ \
   \__ \/ /   |   / / // / / /
@@ -29,7 +31,8 @@ void banner() {
             << "\n\n";
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
   banner();
   cxxopts::Options options("SLXIO");
   options.add_options()("h,help", "Show help");

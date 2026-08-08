@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DiscreteFilter final {
+class SLXIO_APIEXPORT DiscreteFilter final
+{
 public:
   /** Default Constructor */
   DiscreteFilter();

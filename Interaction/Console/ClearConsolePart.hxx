@@ -18,7 +18,8 @@
 /*--------------------------------------------------------------------------*/
 #include <jni.h>
 
-extern "C" {
+extern "C"
+{
 #include "ClearConsolePart.h"
 #include "getScilabJavaVM.h"
 } /* extern "C" */

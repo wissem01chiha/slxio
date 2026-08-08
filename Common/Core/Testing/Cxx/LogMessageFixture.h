@@ -10,16 +10,20 @@ using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT LogMessage : public ILogMessage {
+class SLXIO_APIEXPORT LogMessage : public ILogMessage
+{
 public:
-  explicit LogMessage(const std::string &text) : m_text(text) {}
+  explicit LogMessage(const std::string& text)
+    : m_text(text)
+  {
+  }
 
   std::string ToString() const override { return m_text; }
 
   bool Empty() const override { return m_text.empty(); }
 
-  std::unique_ptr<ILogMessage>
-  operator+(const ILogMessage &rhs) const override {
+  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override
+  {
     return std::make_unique<LogMessage>(m_text + " " + rhs.ToString());
   }
 

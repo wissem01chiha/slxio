@@ -1,17 +1,21 @@
 #include "SimulinkConfigSetManager.h"
+
 #include "SimulinkConfigSet.h"
+
 #include <algorithm>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
-    : l(Logger::GetInstance()) {
+  : l(Logger::GetInstance())
+{
   cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
 }
 
-HError
-SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg) {
+HError SimulinkConfigSetManager::AddElement(
+  std::shared_ptr<SimulinkConfigSet> cfg)
+{
   if (cfg == nullptr) {
     // l.log(Logger::V_ERROR,
     //  "SimulinkConfigSetManager:: Cannot add a null configuration set.");
@@ -22,7 +26,8 @@ SimulinkConfigSetManager::AddElement(std::shared_ptr<SimulinkConfigSet> cfg) {
 }
 
 HError SimulinkConfigSetManager::RemoveElement(
-    std::shared_ptr<SimulinkConfigSet> cfg) {
+  std::shared_ptr<SimulinkConfigSet> cfg)
+{
 
   if (cfg == nullptr) {
     // l.log(Logger::V_ERROR,
@@ -38,9 +43,10 @@ HError SimulinkConfigSetManager::RemoveElement(
 }
 
 std::shared_ptr<SimulinkConfigSet>
-SimulinkConfigSetManager::getActiveConfiguration() {
+SimulinkConfigSetManager::getActiveConfiguration()
+{
 
-  for (const auto &cfg : cfgs) {
+  for (const auto& cfg : cfgs) {
     if (cfg->IsActive()) {
       return cfg;
     }
@@ -49,7 +55,8 @@ SimulinkConfigSetManager::getActiveConfiguration() {
 }
 
 bool SimulinkConfigSetManager::hasConfigurationSet(
-    const std::shared_ptr<SimulinkConfigSet> &cfg) const {
+  const std::shared_ptr<SimulinkConfigSet>& cfg) const
+{
   return std::find(cfgs.begin(), cfgs.end(), cfg) != cfgs.end();
 }
 

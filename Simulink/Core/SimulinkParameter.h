@@ -9,6 +9,7 @@
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
 #include "SimulinkParameterBase.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -30,13 +31,14 @@ class CoderInfo;
  * Resolution from const char* to SimulinkDataType is handled internally.
  * Complexity defaults to "real" and is also resolved internally.
  */
-class SLXIO_APIEXPORT SimulinkParameter : public SimulinkParameterBase {
+class SLXIO_APIEXPORT SimulinkParameter : public SimulinkParameterBase
+{
 public:
   /** Default constructor */
   SimulinkParameter();
 
   /** Explicit constructor */
-  explicit SimulinkParameter(const char *val);
+  explicit SimulinkParameter(const char* val);
 
   /** Returns current parameter name */
   std::string GetName() override;
@@ -68,39 +70,39 @@ public:
   void SetDataType(SimulinkDataType dataType);
 
   /** Returns the raw parameter value as stored internally */
-  const char *GetValue();
+  const char* GetValue();
 
   /** Sets the parameter value */
-  void SetValue(const char *value);
+  void SetValue(const char* value);
 
   /** Attempts to resolve the value as double */
-  HError GetValueAsDouble(Float32 &fval);
+  HError GetValueAsDouble(Float32& fval);
 
   /** Attempts to resolve the value as single */
-  HError GetValueAsSingle(Float32 &sval);
+  HError GetValueAsSingle(Float32& sval);
 
   /** Resolves the parameter value as unsigned 8-bit integer */
-  HError GetValueAsUInt8(UInt8 &u8val);
+  HError GetValueAsUInt8(UInt8& u8val);
 
   /** Resolves the parameter value as unsigned 16-bit integer */
-  HError GetValueAsUInt16(UInt16 &u16val);
+  HError GetValueAsUInt16(UInt16& u16val);
 
   /** Sets the parameter name (no backup used) */
-  HError SetName(const char *name);
+  HError SetName(const char* name);
 
   /** Returns the internal logger */
-  Logger &GetLogger() const;
+  Logger& GetLogger() const;
 
 private:
-  Logger &logger;
+  Logger& logger;
 
-  const char *Name;
-  const char *Value;
+  const char* Name;
+  const char* Value;
   SimulinkDataType DataType;
 
-  const char *Unit;
-  const char *Description;
-  const char *Complexity;
+  const char* Unit;
+  const char* Description;
+  const char* Complexity;
 
   Float32 Min;
   Float32 Max;

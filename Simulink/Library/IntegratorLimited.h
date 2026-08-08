@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntegratorLimited final {
+class SLXIO_APIEXPORT IntegratorLimited final
+{
 public:
   /** Default Constructor */
   IntegratorLimited();

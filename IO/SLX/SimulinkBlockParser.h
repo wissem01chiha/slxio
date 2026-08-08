@@ -27,7 +27,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class SLXIO_APIEXPORT SimulinkBlockParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkBlock> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkBlock>
+{
 public:
   SimulinkBlockParser() = default;
   HError setInputData(const xmlNodePtr data) override;

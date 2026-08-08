@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementType.h"
+
 #include <string>
 
 namespace slxio {
@@ -32,9 +33,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * 6 : RConn
  * 7 : ifaction
  */
-class SimulinkPortType : public SimulinkElementType {
+class SimulinkPortType : public SimulinkElementType
+{
 public:
-  enum Type {
+  enum Type
+  {
     INPORT = 0,
     OUTPORT = 1,
     ENABLE = 2,
@@ -45,9 +48,9 @@ public:
     IFACTION = 7,
   };
   SimulinkPortType() = default;
-  bool isA(const SimulinkPortType &typeObj);
-  friend bool operator==(const SimulinkPortType &lhs,
-                         const SimulinkPortType &rhs);
+  bool isA(const SimulinkPortType& typeObj);
+  friend bool operator==(const SimulinkPortType& lhs,
+                         const SimulinkPortType& rhs);
   std::string ToString() const;
   ~SimulinkPortType() = default;
 

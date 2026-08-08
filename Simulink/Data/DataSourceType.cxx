@@ -1,14 +1,19 @@
 #include "DataSourceType.h"
+
 #include "Logger.h"
+
 #include <cstring>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DataSourceType::DataSourceType(DataSourceType::Type type)
-    : InternalDataSourceType(type) {}
+  : InternalDataSourceType(type)
+{
+}
 
-DataSourceType::Type DataSourceType::FromString(const char *sldt) {
+DataSourceType::Type DataSourceType::FromString(const char* sldt)
+{
   if (sldt == nullptr) {
     return Type::ModelFile;
   }
@@ -25,18 +30,19 @@ DataSourceType::Type DataSourceType::FromString(const char *sldt) {
   return Type::ModelFile;
 }
 
-const char *DataSourceType::ToString(Type type) {
+const char* DataSourceType::ToString(Type type)
+{
   switch (type) {
-  case Type::ModelFile:
-    return "ModelFile";
-  case Type::MatFile:
-    return "MatFile";
-  case Type::MatlabCode:
-    return "MatlabCode";
-  case Type::MatlabFile:
-    return "MatlabFile";
-  default:
-    return "";
+    case Type::ModelFile:
+      return "ModelFile";
+    case Type::MatFile:
+      return "MatFile";
+    case Type::MatlabCode:
+      return "MatlabCode";
+    case Type::MatlabFile:
+      return "MatlabFile";
+    default:
+      return "";
   }
 }
 

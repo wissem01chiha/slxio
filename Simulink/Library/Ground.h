@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Ground final {
+class SLXIO_APIEXPORT Ground final
+{
 public:
   /** Default Constructor */
   Ground();

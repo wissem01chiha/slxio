@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitSet final {
+class SLXIO_APIEXPORT BitSet final
+{
 public:
   /** Default Constructor */
   BitSet();

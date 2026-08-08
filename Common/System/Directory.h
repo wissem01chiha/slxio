@@ -17,25 +17,26 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Directory
  * @brief Cross-platform Directory abstraction.
  */
-class SLXIO_APIEXPORT Directory final {
+class SLXIO_APIEXPORT Directory final
+{
 public:
   /** Default constructor. */
   Directory() = default;
 
   /** Construct a Directory object from a UTF‑8 path string. */
-  explicit Directory(const std::string &path);
+  explicit Directory(const std::string& path);
 
   /** Open the directory and initialize member variables. */
   HError Initialize();
 
   /* Add a file to this directory, it will copy the file into it on disk */
-  void Add(const File &file);
+  void Add(const File& file);
 
   /** Remove a file from this directory. */
-  void Remove(const File &file);
+  void Remove(const File& file);
 
   /** Check if the directory contains a given file/directory, by name */
-  bool Contains(std::string &entryname) const;
+  bool Contains(std::string& entryname) const;
 
   /** Get subdirectories in the current directory. */
   std::vector<Directory> GetSubDirectories() const;
@@ -44,10 +45,10 @@ public:
   std::vector<File> GetDirectoryFiles() const;
 
   /** Get a file by index.*/
-  const std::shared_ptr<File> GetFile(const SId &index) const;
+  const std::shared_ptr<File> GetFile(const SId& index) const;
 
   /** Get a specific file by name.*/
-  const std::shared_ptr<File> GetFile(const std::string &filename) const;
+  const std::shared_ptr<File> GetFile(const std::string& filename) const;
 
   /** Get the number of files in the directory.*/
   UInt32 GetNumberOfFiles() const;
@@ -59,7 +60,7 @@ public:
   const std::string GetDirectoryPath() const;
 
   /** Check if the given path is a directory. */
-  static bool Exist(const std::string &path);
+  static bool Exist(const std::string& path);
 
   /** Check if the directory is empty. */
   bool Empty() const;
@@ -71,10 +72,10 @@ public:
   HError Clear();
 
   /** Move the directory to an other directory. */
-  HError Move(const Directory &directory);
+  HError Move(const Directory& directory);
 
   /** Delete a directory and contenant from disk */
-  static HError Delete(const std::string &path);
+  static HError Delete(const std::string& path);
 
   /** Member function of Delete */
   HError Delete();

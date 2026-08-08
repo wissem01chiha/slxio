@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitClear final {
+class SLXIO_APIEXPORT BitClear final
+{
 public:
   /** Default Constructor */
   BitClear();

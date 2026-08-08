@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <string>
 
 namespace slxio {
@@ -16,7 +17,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkDataType
  * @brief Simulink Supported Data Types.
  */
-enum class SLXIO_APIEXPORT SimulinkDataType {
+enum class SLXIO_APIEXPORT SimulinkDataType
+{
   Auto = 0,
   Double,
   Single,
@@ -57,10 +59,10 @@ SimulinkDataType toSimulinkDataType(UInt16);
 SimulinkDataType toSimulinkDataType(UInt32);
 SimulinkDataType toSimulinkDataType(UInt64);
 
-SimulinkDataType toSimulinkDataType(const std::string &);
-SimulinkDataType toSimulinkDataType(const char *);
+SimulinkDataType toSimulinkDataType(const std::string&);
+SimulinkDataType toSimulinkDataType(const char*);
 
-const char *toChar(SimulinkDataType sldt);
+const char* toChar(SimulinkDataType sldt);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

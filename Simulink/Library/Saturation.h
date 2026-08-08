@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Saturation final {
+class SLXIO_APIEXPORT Saturation final
+{
 public:
   /** Default Constructor */
   Saturation();

@@ -16,7 +16,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * releases, note that slxio and Simulink DO NOT follow the same versioning
  * system!
  */
-enum class SimulinkVersionRelease {
+enum class SimulinkVersionRelease
+{
   R2018a,
   R2018b,
   R2019a,

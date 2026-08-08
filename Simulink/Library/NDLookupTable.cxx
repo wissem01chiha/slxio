@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 NDLookupTable::NDLookupTable() {}
 
-Float32 NDLookupTable::GetTableData() const { return TableData; }
+Float32 NDLookupTable::GetTableData() const
+{
+  return TableData;
+}
 
-void NDLookupTable::SetTableData(Float32 value) { TableData = value; }
+void NDLookupTable::SetTableData(Float32 value)
+{
+  TableData = value;
+}
 
 NDLookupTable::~NDLookupTable() {}
 

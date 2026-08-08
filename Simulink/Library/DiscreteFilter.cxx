@@ -5,11 +5,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 DiscreteFilter::DiscreteFilter() {}
 
-Float32 DiscreteFilter::GetFilterCoefficient() const {
+Float32 DiscreteFilter::GetFilterCoefficient() const
+{
   return FilterCoefficient;
 }
 
-void DiscreteFilter::SetFilterCoefficient(Float32 value) {
+void DiscreteFilter::SetFilterCoefficient(Float32 value)
+{
   FilterCoefficient = value;
 }
 

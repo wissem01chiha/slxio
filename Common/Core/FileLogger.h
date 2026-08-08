@@ -17,17 +17,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief By default, a new log file is created for each FileLogger instance.
  * Append mode is currently not supported.
  */
-class SLXIO_APIEXPORT FileLogger final : public ILogger {
+class SLXIO_APIEXPORT FileLogger final : public ILogger
+{
 public:
   /* Explicit constructor: if no name is provided, a default name
    * and default path are set by the logger. this option provides flexibility to
    * override the default logging file sink in different cases.*/
-  explicit FileLogger(const std::string &fileName = "slxio.log");
+  explicit FileLogger(const std::string& fileName = "slxio.log");
   ~FileLogger() override;
 
   /* Create the file if not already exists*/
   void Init() override;
-  void Log(const ILogMessage &msg) override;
+  void Log(const ILogMessage& msg) override;
 
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;

@@ -4,7 +4,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SimulinkPortTestFixture {
+class SimulinkPortTestFixture
+{
 protected:
 };
 

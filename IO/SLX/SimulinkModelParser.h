@@ -23,8 +23,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * all model elements from external sources such as XML, JSON, or
  * other supported formats.
  */
-class SimulinkModelParser
-    : public SimulinkParserBase<xmlNodePtr, SimulinkModel> {
+class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel>
+{
 public:
   SimulinkModelParser() = default;
   HError setInputData(const xmlNodePtr data) override;

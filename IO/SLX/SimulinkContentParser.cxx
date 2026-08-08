@@ -1,11 +1,14 @@
 #include "SimulinkContentParser.h"
+
 #include "Directory.h"
+
 #include <cstring>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkContentParser::setInputData(const File fs) {
+HError SimulinkContentParser::setInputData(const File fs)
+{
   if (!fs.isFile()) {
     // l.log(Logger::V_ERROR, "Input file  is not valid : ", fs.getFilepath());
     return E_INVALID_ARGUMENT;
@@ -19,7 +22,8 @@ HError SimulinkContentParser::setInputData(const File fs) {
   return E_OK;
 }
 
-HError SimulinkContentParser::parse() {
+HError SimulinkContentParser::parse()
+{
   HError init_status = initTempDirectory();
   if (init_status != E_OK) {
     return init_status;
@@ -43,7 +47,8 @@ HError SimulinkContentParser::parse() {
   return E_OK;
 }
 
-HError SimulinkContentParser::initTempDirectory() {
+HError SimulinkContentParser::initTempDirectory()
+{
   /// replace "." with "_" for temporary directory name
   /// to be removed and implemented in Directory class
   std::string tempdirname = dataObject.getFilename();
@@ -53,7 +58,7 @@ HError SimulinkContentParser::initTempDirectory() {
   }
   tempdirname += "_tmp";
 
-  const char *tmpdir = Directory::getTemporaryDirectory(tempdirname.c_str());
+  const char* tmpdir = Directory::getTemporaryDirectory(tempdirname.c_str());
 
   if (tmpdir == nullptr) {
     // l.log(Logger::V_ERROR,
@@ -63,8 +68,8 @@ HError SimulinkContentParser::initTempDirectory() {
   }
 
   std::string tempDirectoryPath =
-      std::string(Directory::getCurrentDirectory()) + PATH_SEP +
-      std::string(tmpdir);
+    std::string(Directory::getCurrentDirectory()) + PATH_SEP +
+    std::string(tmpdir);
 
   if (Directory::isDirectory(tempDirectoryPath)) {
     tempDirectory = Directory(tempDirectoryPath);
@@ -77,8 +82,9 @@ HError SimulinkContentParser::initTempDirectory() {
   return E_OK;
 }
 
-HError SimulinkContentParser::unzip() {
-  const char *tmpdir = tempDirectory.getDirectoryPath().c_str();
+HError SimulinkContentParser::unzip()
+{
+  const char* tmpdir = tempDirectory.getDirectoryPath().c_str();
   std::string tempdirfullpath = tempDirectory.getDirectoryPath();
 
   HError mv_status = dataObject.copy(tempdirfullpath.c_str());
@@ -93,7 +99,7 @@ HError SimulinkContentParser::unzip() {
   // Create a new File object using this path as the working baseline,
   // ensuring the original user file remains untouched.
   std::string tempfilefullpath =
-      tempdirfullpath + PATH_SEP + dataObject.getFilename();
+    tempdirfullpath + PATH_SEP + dataObject.getFilename();
 
   File fileDataObject(tempfilefullpath, File::Read);
   if (!fileDataObject.isFile()) {
@@ -118,21 +124,22 @@ HError SimulinkContentParser::unzip() {
   return E_OK;
 }
 
-HError
-SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
+HError SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath)
+{
 
   XmlTarget targets[] = {
-      {"/simulink/blockdiagram.xml", &ptr->blockdiagram},
-      {"/simulink/modelDictionary.xml", &ptr->modelDictionary},
-      {"/simulink/configSetInfo.xml", &ptr->configSetInfo},
-      {"/simulink/bddefaults.xml", &ptr->bddefaults},
-      {"/simulink/graphicalInterface.xml", &ptr->graphicalInterface},
-      {"/metadata/coreProperties.xml", &ptr->coreProperties},
-      {"/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties},
-      {"/metadata/mwcorePropertiesExtension.xml",
-       &ptr->mwcorePropertiesExtension}};
+    { "/simulink/blockdiagram.xml", &ptr->blockdiagram },
+    { "/simulink/modelDictionary.xml", &ptr->modelDictionary },
+    { "/simulink/configSetInfo.xml", &ptr->configSetInfo },
+    { "/simulink/bddefaults.xml", &ptr->bddefaults },
+    { "/simulink/graphicalInterface.xml", &ptr->graphicalInterface },
+    { "/metadata/coreProperties.xml", &ptr->coreProperties },
+    { "/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties },
+    { "/metadata/mwcorePropertiesExtension.xml",
+      &ptr->mwcorePropertiesExtension }
+  };
 
-  for (auto &t : targets) {
+  for (auto& t : targets) {
     std::string fullPath = tempdirfullpath + t.path;
     *t.target = xmlReadFile(fullPath.c_str(), nullptr, 0);
     if (*t.target == nullptr) {
@@ -145,7 +152,8 @@ SimulinkContentParser::loadXmlTargets(const std::string &tempdirfullpath) {
   return E_OK;
 }
 
-HError SimulinkContentParser::clearTempDirectory() {
+HError SimulinkContentParser::clearTempDirectory()
+{
   HError status = tempDirectory.RemoveElement();
   if (status != E_OK) {
     // l.log(Logger::V_ERROR, "failed to remove temporary directory : ",

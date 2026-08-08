@@ -17,7 +17,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkContent
 class SLXIO_APIEXPORT SimulinkContentParser
-    : public SimulinkParserBase<File, SimulinkContent> {
+  : public SimulinkParserBase<File, SimulinkContent>
+{
 public:
   SimulinkContentParser() = default;
   HError setInputData(const File fs) override;
@@ -31,9 +32,10 @@ private:
   /// @brief Structure to map XML file paths to their corresponding
   /// xmlDocPtr targets in SimulinkContent, mapping is provided in
   /// implementation file.
-  struct XmlTarget {
-    const char *path;
-    xmlDocPtr *target;
+  struct XmlTarget
+  {
+    const char* path;
+    xmlDocPtr* target;
   };
 
   /// @brief Initialize the temporary directory, creates unique paths
@@ -46,7 +48,7 @@ private:
 
   /// @brief Load XML documents from the extracted slx files into the
   /// SimulinkContent object.
-  HError loadXmlTargets(const std::string &tempdirfullpath);
+  HError loadXmlTargets(const std::string& tempdirfullpath);
 
   /// @brief delete the temporary directory and its contents,
   /// this is called at the end of the parsing process if successful

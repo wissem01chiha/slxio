@@ -3,7 +3,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkHardwareParser::setInputData(const xmlNodePtr data) {
+HError SimulinkHardwareParser::setInputData(const xmlNodePtr data)
+{
   if (data == nullptr) {
     // l.log(Logger::V_ERROR, "SimulinkHardwareParser:: null pointer received");
     return E_INVALID_ARGUMENT;
@@ -12,7 +13,10 @@ HError SimulinkHardwareParser::setInputData(const xmlNodePtr data) {
   return E_OK;
 }
 
-HError SimulinkHardwareParser::parse() { return E_OK; }
+HError SimulinkHardwareParser::parse()
+{
+  return E_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -14,27 +14,28 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkModelReference represents the model reference settings
  */
-class SLXIO_APIEXPORT SimulinkModelReference final {
+class SLXIO_APIEXPORT SimulinkModelReference final
+{
 public:
   SimulinkModelReference() = default;
   ~SimulinkModelReference() = default;
 
-  const char **DisabledProps;
-  const char *Description;
-  const char **Components;
-  const char *UpdateModelReferenceTargets;
-  const char *EnableRefExpFcnMdlSchedulingChecks;
-  const char *CheckModelReferenceTargetMessage;
-  const char *EnableParallelModelReferenceBuilds;
-  const char *ParallelModelReferenceErrorOnInvalidPool;
-  const char *ParallelModelReferenceMATLABWorkerInit;
-  const char *ModelReferenceNumInstancesAllowed;
-  const char *PropagateVarSize;
-  const char *ModelDependencies;
-  const char *ModelReferencePassRootInputsByReference;
-  const char *ModelReferenceMinAlgLoopOccurrences;
-  const char *PropagateSignalLabelsOutOfModel;
-  const char *SupportModelReferenceSimTargetCustomCode;
+  const char** DisabledProps;
+  const char* Description;
+  const char** Components;
+  const char* UpdateModelReferenceTargets;
+  const char* EnableRefExpFcnMdlSchedulingChecks;
+  const char* CheckModelReferenceTargetMessage;
+  const char* EnableParallelModelReferenceBuilds;
+  const char* ParallelModelReferenceErrorOnInvalidPool;
+  const char* ParallelModelReferenceMATLABWorkerInit;
+  const char* ModelReferenceNumInstancesAllowed;
+  const char* PropagateVarSize;
+  const char* ModelDependencies;
+  const char* ModelReferencePassRootInputsByReference;
+  const char* ModelReferenceMinAlgLoopOccurrences;
+  const char* PropagateSignalLabelsOutOfModel;
+  const char* SupportModelReferenceSimTargetCustomCode;
 };
 
 SLXIO_ABI_NAMESPACE_END

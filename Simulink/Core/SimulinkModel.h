@@ -11,6 +11,7 @@
 #include "SimulinkBlock.h"
 #include "SimulinkElementBase.h"
 #include "SimulinkModelType.h"
+
 #include <memory>
 
 namespace slxio {
@@ -29,12 +30,13 @@ class Logger;
 /**
  * @class SimulinkModel
  */
-class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase {
+class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
+{
 public:
   /** Default Constructor */
   SimulinkModel();
 
-  SimulinkModel *New() const override;
+  SimulinkModel* New() const override;
 
   /** Construct a Model by given an explict model type */
   SimulinkModel(SimulinkModelType Type);
@@ -61,16 +63,16 @@ public:
   UInt32 GetModelVersion();
 
   /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const SId &id) const override;
+  bool Contains(const SId& id) const override;
 
   /** */
   std::shared_ptr<ModelWorkspace> GetModelWorkspace();
 
   /** */
-  Logger &GetLogger();
+  Logger& GetLogger();
 
 private:
-  Logger &logger;
+  Logger& logger;
   SId id;
   UInt32 version;
   SimulinkModelType ModelType;

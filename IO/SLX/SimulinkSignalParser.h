@@ -15,7 +15,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief Parser for SimulinkSignal data object
 class SLXIO_APIEXPORT SimulinkSignalParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkSignal> {
+  : public SimulinkParserBase<xmlNodePtr, SimulinkSignal>
+{
 public:
   SimulinkSignalParser() = default;
   HError setInputData(const xmlNodePtr data) override;

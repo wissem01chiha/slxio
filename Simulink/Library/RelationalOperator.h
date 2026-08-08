@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT RelationalOperator final {
+class SLXIO_APIEXPORT RelationalOperator final
+{
 public:
   /** Default Constructor */
   RelationalOperator();

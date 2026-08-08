@@ -15,9 +15,11 @@
 
 /*--------------------------------------------------------------------------*/
 #include "TermPosition.h"
+
 #include <Windows.h>
 /*--------------------------------------------------------------------------*/
-void TermSetPosition(int x, int y) {
+void TermSetPosition(int x, int y)
+{
   COORD pt;
 
   pt.X = (SHORT)x;
@@ -25,7 +27,8 @@ void TermSetPosition(int x, int y) {
   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pt);
 }
 /*--------------------------------------------------------------------------*/
-void TermGetPosition(int *x, int *y) {
+void TermGetPosition(int* x, int* y)
+{
   CONSOLE_SCREEN_BUFFER_INFO csbi;
 
   GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);

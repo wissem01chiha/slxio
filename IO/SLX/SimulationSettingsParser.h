@@ -17,7 +17,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief SimulinkSimulationSettings Parser class.
  */
 class SLXIO_APIEXPORT SimulationSettingsParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulationSettings> {
+  : public SimulinkParserBase<xmlNodePtr, SimulationSettings>
+{
 public:
   SimulationSettingsParser() = default;
   HError setInputData(const xmlNodePtr data) override;

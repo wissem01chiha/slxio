@@ -15,13 +15,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulationSettings
  * @brief
  */
-class SLXIO_APIEXPORT SimulationSettings {
+class SLXIO_APIEXPORT SimulationSettings
+{
 public:
   SimulationSettings() = default;
   ~SimulationSettings();
 
-  char *GetSolverName();
-  char *GetSolverType();
+  char* GetSolverName();
+  char* GetSolverType();
   Float32 GetFixedStepSize();
 
 private:

@@ -20,11 +20,12 @@ class SimulinkModel;
  * Stateflow elements of a Simulink model. There is only one machine
  * per model and Stateflow machines do not have a parent element.
  */
-class StateflowMachine : public StateflowElementBase {
+class StateflowMachine : public StateflowElementBase
+{
 public:
-  StateflowMachine(SimulinkModel &model){
-      // this->model = model;
-      // model.setStateflowMachine(this);
+  StateflowMachine(SimulinkModel& model){
+    // this->model = model;
+    // model.setStateflowMachine(this);
   };
 
   /**
@@ -33,7 +34,8 @@ public:
    * @param orig original machine
    * @param model model the clone belongs to.
    */
-  StateflowMachine(StateflowMachine orig, SimulinkModel model) {
+  StateflowMachine(StateflowMachine orig, SimulinkModel model)
+  {
 
     // model = model;
     // model.setStateflowMachine(this);
@@ -49,12 +51,14 @@ public:
    * chart belongs to.
    * @param chart the chart.
    */
-  void addChart(std::string fqName, StateflowChart chart) {
+  void addChart(std::string fqName, StateflowChart chart)
+  {
     // charts.put(fqName, chart);
     // chart.setParent(this);
   }
 
-  void addTarget(StateflowTarget target) {
+  void addTarget(StateflowTarget target)
+  {
     // targets.AddElement(target);
     // target.setParent(this);
   }
@@ -68,7 +72,8 @@ public:
   //  }
 
   /** Get charts of this machine. */
-  std::vector<StateflowChart> getCharts() {
+  std::vector<StateflowChart> getCharts()
+  {
     //   return CollectionUtils.asUnmodifiable(charts.values());
   }
 
@@ -76,7 +81,8 @@ public:
   SimulinkModel getModel() { return model; }
 
   /** @brief Get targets of this machine. */
-  std::vector<StateflowTarget> getTargets() {
+  std::vector<StateflowTarget> getTargets()
+  {
     //   return CollectionUtils.asUnmodifiable(targets);
   }
 
@@ -85,7 +91,8 @@ public:
    * removed from the model only after all {@link StateflowBlock}s
    * were removed.
    */
-  void RemoveElement() {
+  void RemoveElement()
+  {
     // CCSMPre.isTrue(charts.isEmpty(), "All charts must be removed
     // first (via "
     //              "removing the Stateflow blocks).");
@@ -99,7 +106,8 @@ public:
   }
 
   /** @brief Remove chart. */
-  void removeChart(StateflowChart chart) {
+  void removeChart(StateflowChart chart)
+  {
     // CCSMPre.isTrue(chart.getMachine() == this,
     //               "Machine does not contain chart with name " +
     //               chart);
@@ -114,7 +122,8 @@ public:
     // chart.setParent(null);
   }
 
-  void removeTarget(StateflowTarget target) {
+  void removeTarget(StateflowTarget target)
+  {
     // targets.RemoveElement(target);
     // target.setParent(null);
   }

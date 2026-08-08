@@ -18,10 +18,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief A singleton class that manages error and status results across the
  * library.
  */
-class SLXIO_APIEXPORT ErrorManager final {
+class SLXIO_APIEXPORT ErrorManager final
+{
 public:
   /* Retrieves the singleton instance of ErrorManager. */
-  static ErrorManager &GetInstance();
+  static ErrorManager& GetInstance();
 
   /* Change the buffer size if needed.
    * Adjusting the buffer size can have performance implications.
@@ -61,15 +62,15 @@ public:
    * to write trace into the supported logging implementations
    * Note the ErrorManager is not allowed to modify the logger object
    */
-  HError SetLogger(const ILogger *logger);
+  HError SetLogger(const ILogger* logger);
 
   /** Get the logger sink */
-  const ILogger *GetLogger();
+  const ILogger* GetLogger();
 
 private:
   static const size_t m_bufferSize = 500;
   std::vector<HError> m_ringBuffer;
-  const ILogger *m_logger = nullptr;
+  const ILogger* m_logger = nullptr;
   size_t head = 0;
   std::mutex m_logMutex;
   ErrorManager();

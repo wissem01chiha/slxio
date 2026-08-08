@@ -22,7 +22,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * enabling new message types to be introduced without modifying the
  * logging infrastructure.
  */
-class SLXIO_APIEXPORT ILogMessage {
+class SLXIO_APIEXPORT ILogMessage
+{
 public:
   virtual ~ILogMessage() = default;
 
@@ -38,8 +39,8 @@ public:
 
   /* Concatenate ILogMessage based object to form a new ILogMessage, Combine
    * *this with rhs */
-  virtual std::unique_ptr<ILogMessage>
-  operator+(const ILogMessage &rhs) const = 0;
+  virtual std::unique_ptr<ILogMessage> operator+(
+    const ILogMessage& rhs) const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

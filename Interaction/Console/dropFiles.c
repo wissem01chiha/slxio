@@ -16,6 +16,7 @@
 
 /*--------------------------------------------------------------------------*/
 #include "dropFiles.h"
+
 #include "FindFileExtension.h"
 #include "URIFileToFilename.h"
 #include "charEncoding.h"
@@ -23,6 +24,7 @@
 #include "sci_malloc.h"
 #include "storeCommand.h" /* storecommand */
 #include "with_module.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -47,15 +49,16 @@
 #define FORMAT_UNKNOW_EXTENSION_FILES "disp(gettext('Unknown file type : %s'));"
 #define XCOS_NOT_INSTALLED "disp(gettext('Please install xcos module.'))"
 /*--------------------------------------------------------------------------*/
-static char *getCommandByFileExtension(char *File, char *FileExtension);
-static char *buildCommand(char *format, char *filename);
-static BOOL LaunchFilebyExtension(char *File);
+static char* getCommandByFileExtension(char* File, char* FileExtension);
+static char* buildCommand(char* format, char* filename);
+static BOOL LaunchFilebyExtension(char* File);
 /*--------------------------------------------------------------------------*/
-BOOL dropFiles(char **files) {
+BOOL dropFiles(char** files)
+{
   int len = 0;
 
   while (files[len]) {
-    char *convertfile = URIFileToFilename(files[len]);
+    char* convertfile = URIFileToFilename(files[len]);
 
     if (convertfile) {
       BOOL bCheck = LaunchFilebyExtension(convertfile);
@@ -72,11 +75,12 @@ BOOL dropFiles(char **files) {
   return TRUE;
 }
 /*--------------------------------------------------------------------------*/
-BOOL LaunchFilebyExtension(char *File) {
+BOOL LaunchFilebyExtension(char* File)
+{
   BOOL bOK = FALSE;
 
-  char *CommandLine = NULL;
-  char *FileExtension = NULL;
+  char* CommandLine = NULL;
+  char* FileExtension = NULL;
 
   FileExtension = FindFileExtension(File);
   CommandLine = getCommandByFileExtension(File, FileExtension);
@@ -97,8 +101,9 @@ BOOL LaunchFilebyExtension(char *File) {
   return bOK;
 }
 /*--------------------------------------------------------------------------*/
-static char *getCommandByFileExtension(char *File, char *FileExtension) {
-  char *command = NULL;
+static char* getCommandByFileExtension(char* File, char* FileExtension)
+{
+  char* command = NULL;
 
   if (FileExtension) {
     if (stricmp(FileExtension, BIN_EXTENSION_FILE) == 0 ||
@@ -128,12 +133,13 @@ static char *getCommandByFileExtension(char *File, char *FileExtension) {
   return command;
 }
 /*--------------------------------------------------------------------------*/
-static char *buildCommand(char *format, char *filename) {
-  char *command = NULL;
+static char* buildCommand(char* format, char* filename)
+{
+  char* command = NULL;
 
   if (format && filename) {
     command =
-        (char *)MALLOC((strlen(filename) + strlen(format) + 1) * sizeof(char));
+      (char*)MALLOC((strlen(filename) + strlen(format) + 1) * sizeof(char));
     if (command) {
       sprintf(command, format, filename);
     }

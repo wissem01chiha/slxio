@@ -21,11 +21,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * init a a global thread pool with queue size of 8192 and 1 worker thread but
  * this can be adjusted via Logger functions
  */
-class BackgroundLogger final : public ILogger {
+class BackgroundLogger final : public ILogger
+{
 public:
   BackgroundLogger();
   void Init() override;
-  void Log(const ILogMessage &msg) override;
+  void Log(const ILogMessage& msg) override;
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;
   void SetQueueSize(UInt32 q);

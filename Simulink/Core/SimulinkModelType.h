@@ -6,6 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+
 #include <string>
 
 namespace slxio {
@@ -14,9 +15,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief Represents the type of a Simulink model.
  */
-class SLXIO_APIEXPORT SimulinkModelType final {
+class SLXIO_APIEXPORT SimulinkModelType final
+{
 public:
-  enum Type { Library, Model };
+  enum Type
+  {
+    Library,
+    Model
+  };
   SimulinkModelType() = default;
   explicit SimulinkModelType(SimulinkModelType::Type type);
   static std::string ToString(SimulinkModelType::Type type);

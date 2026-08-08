@@ -16,7 +16,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class Version
  * @brief Provides access to the library version information.
  */
-class SLXIO_APIEXPORT Version final {
+class SLXIO_APIEXPORT Version final
+{
 public:
   Version() = default;
 

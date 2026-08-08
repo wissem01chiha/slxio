@@ -1,11 +1,13 @@
 #include "SimulinkDataTypeParser.h"
+
 #include <cstring>
 #include <unordered_map>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError SimulinkDataTypeParser::setInputData(const std::string data) {
+HError SimulinkDataTypeParser::setInputData(const std::string data)
+{
   if (data.empty()) {
     // l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
     return E_INVALID_ARGUMENT;
@@ -14,7 +16,8 @@ HError SimulinkDataTypeParser::setInputData(const std::string data) {
   return E_OK;
 }
 
-HError SimulinkDataTypeParser::setInputData(const char *data) {
+HError SimulinkDataTypeParser::setInputData(const char* data)
+{
 
   if (data == nullptr || strlen(data) == 0) {
     // l.log(Logger::V_ERROR,
@@ -25,11 +28,12 @@ HError SimulinkDataTypeParser::setInputData(const char *data) {
   return E_OK;
 }
 
-HError SimulinkDataTypeParser::parse() {
+HError SimulinkDataTypeParser::parse()
+{
 
   static const std::unordered_map<std::string, SimulinkDataType> sldtMap = {
-#define XX(enumVal, str) {str, enumVal},
-      SIMULINKDATATYPE_MAP(XX)
+#define XX(enumVal, str) { str, enumVal },
+    SIMULINKDATATYPE_MAP(XX)
 #undef XX
   };
 

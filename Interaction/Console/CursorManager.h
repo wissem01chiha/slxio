@@ -11,7 +11,7 @@
  * @param cursor location in the command line.
  * @return user Input
  */
-int gotoRight(wchar_t *CommandLine, unsigned int *cursorLocation);
+int gotoRight(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Move the cursor to the left.
@@ -19,7 +19,7 @@ int gotoRight(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @param cursor location in the command line.
  * @return user Input
  */
-int gotoLeft(wchar_t *CommandLine, unsigned int *cursorLocation);
+int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Move the cursor to the end of the current edited line.
@@ -27,7 +27,7 @@ int gotoLeft(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @param cursor location in the command line.
  * @return user Input
  */
-int endLine(wchar_t *CommandLine, unsigned int *cursorLocation);
+int endLine(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Move the cursor to the beginning of the current edited line.
@@ -35,7 +35,7 @@ int endLine(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @param cursor location in the command line.
  * @return user Input
  */
-int begLine(wchar_t *CommandLine, unsigned int *cursorLocation);
+int begLine(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Move cursor to the beginning of the next word or to the end of the string if
@@ -44,7 +44,7 @@ int begLine(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @param cursor location in the command line.
  * @return user Input
  */
-int nextWord(wchar_t *CommandLine, unsigned int *cursorLocation);
+int nextWord(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Move cursor to the beginning of the prev word or to the beginning of the
@@ -53,7 +53,7 @@ int nextWord(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @param cursor location in the command line.
  * @return user Input
  */
-int previousWord(wchar_t *CommandLine, unsigned int *cursorLocation);
+int previousWord(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 #endif /* !GOTO_FUNC_H_ */
 
@@ -66,6 +66,6 @@ int previousWord(wchar_t *CommandLine, unsigned int *cursorLocation);
  * @return characters read from stdin when stdin is not a tty
  * ie: echo "1+1" | bin/scilab -nwni
  */
-CONSOLE_IMPEXP char *getPipeLine(void);
+CONSOLE_IMPEXP char* getPipeLine(void);
 
 #endif /* _GETPIPELINE_H_ */

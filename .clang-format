@@ -1,3 +1,10 @@
-BasedOnStyle: LLVM
+BasedOnStyle: Mozilla
 ColumnLimit: 80
 Standard: c++14
+AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+SpaceAfterTemplateKeyword: true
+BreakBeforeBraces: Mozilla
+CompactNamespaces: false
+IncludeBlocks: 
+  Regroup

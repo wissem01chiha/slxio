@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+
 #include <string>
 
 namespace slxio {
@@ -16,7 +17,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkColor
  * @brief Container for default Simulink Supported Colors
  */
-class SLXIO_APIEXPORT SimulinkColor final {
+class SLXIO_APIEXPORT SimulinkColor final
+{
 public:
   std::string name;
   std::string hexValue;

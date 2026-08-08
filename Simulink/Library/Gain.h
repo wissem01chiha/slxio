@@ -11,7 +11,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Gain final {
+class SLXIO_APIEXPORT Gain final
+{
 public:
   /** Default Constructor */
   Gain();

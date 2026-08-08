@@ -16,7 +16,8 @@
 #include <stdio.h>
 #include <string>
 
-extern "C" {
+extern "C"
+{
 #include "BOOL.h"
 #include "configvariable_interface.h"
 #include "localization.h"
@@ -32,7 +33,8 @@ static BOOL dispWarningLevelPrompt = TRUE;
 /*------------------------------------------------------------------------*/
 /* setprlev : set the current prompt string */
 /*------------------------------------------------------------------------*/
-void setPreviousLevel(int pause) {
+void setPreviousLevel(int pause)
+{
   // debugger prompt first !
   if (isEnableDebug()) {
     if (isDebugInterrupted()) {
@@ -51,7 +53,8 @@ void setPreviousLevel(int pause) {
     if (dispWarningLevelPrompt) {
       if (getWarningMode()) {
         sciprint(_("Type '%s' or '%s' to return to standard level prompt.\n\n"),
-                 "resume", "abort");
+                 "resume",
+                 "abort");
         dispWarningLevelPrompt = FALSE;
       }
     }
@@ -70,13 +73,23 @@ void setPreviousLevel(int pause) {
   }
 }
 /*------------------------------------------------------------------------*/
-const char *GetCurrentPrompt() { return Sci_Prompt.data(); }
+const char* GetCurrentPrompt()
+{
+  return Sci_Prompt.data();
+}
 /*------------------------------------------------------------------------*/
-void SetTemporaryPrompt(const char *tempPrompt) {
+void SetTemporaryPrompt(const char* tempPrompt)
+{
   temporaryPrompt = tempPrompt;
 }
 /*------------------------------------------------------------------------*/
-const char *GetTemporaryPrompt(void) { return temporaryPrompt.data(); }
+const char* GetTemporaryPrompt(void)
+{
+  return temporaryPrompt.data();
+}
 /*------------------------------------------------------------------------*/
-void ClearTemporaryPrompt(void) { temporaryPrompt = ""; }
+void ClearTemporaryPrompt(void)
+{
+  temporaryPrompt = "";
+}
 /*------------------------------------------------------------------------*/

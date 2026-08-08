@@ -1,11 +1,13 @@
 #include "StateflowBlockParser.h"
+
 #include "SimulinkObjectParser.h"
 #include "SlxParameter.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError StateflowBlockParser::setInputData(const xmlNodePtr data) {
+HError StateflowBlockParser::setInputData(const xmlNodePtr data)
+{
   if (!data) {
     // l.log(
       Logger::V_ERROR, "StateflowBlockParser::null data node pointer received");

@@ -5,9 +5,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 RelationalOperator::RelationalOperator() {}
 
-Float32 RelationalOperator::GetOperatorCode() const { return OperatorCode; }
+Float32 RelationalOperator::GetOperatorCode() const
+{
+  return OperatorCode;
+}
 
-void RelationalOperator::SetOperatorCode(Float32 value) {
+void RelationalOperator::SetOperatorCode(Float32 value)
+{
   OperatorCode = value;
 }
 

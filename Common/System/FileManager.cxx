@@ -1,4 +1,5 @@
 #include "FileManager.h"
+
 #include "Directory.h"
 #include "File.h"
 #include "SystemErrorType.h"
@@ -6,13 +7,18 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FileManager::FileManager() { FileBuffer.clear(); }
+FileManager::FileManager()
+{
+  FileBuffer.clear();
+}
 
-FileManager::FileManager(std::vector<std::shared_ptr<File>> files) {
+FileManager::FileManager(std::vector<std::shared_ptr<File>> files)
+{
   FileBuffer = files;
 }
 
-SId FileManager::GetFileId(const std::string &filename) const {
+SId FileManager::GetFileId(const std::string& filename) const
+{
   for (UInt32 i = 0; i <= GetFileMaxId(); i++) {
     if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename) {
       return i;
@@ -21,11 +27,13 @@ SId FileManager::GetFileId(const std::string &filename) const {
   return (SId)-1;
 }
 
-SId FileManager::GetFileMaxId() const {
+SId FileManager::GetFileMaxId() const
+{
   return SLXIO_STATIC_CAST(SId, FileBuffer.size());
 }
 
-bool FileManager::IsOpened(const std::string &filename) {
+bool FileManager::IsOpened(const std::string& filename)
+{
   for (UInt32 i = 0; i <= GetFileMaxId(); i++) {
     if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename) {
       return true;
@@ -34,9 +42,13 @@ bool FileManager::IsOpened(const std::string &filename) {
   return false;
 }
 
-HError FileManager::Add(std::shared_ptr<File> file) { return E_OK; }
+HError FileManager::Add(std::shared_ptr<File> file)
+{
+  return E_OK;
+}
 
-std::shared_ptr<File> FileManager::GetFile(SId id) const {
+std::shared_ptr<File> FileManager::GetFile(SId id) const
+{
   if (id < 0) {
     return nullptr;
   }
@@ -76,7 +88,8 @@ std::shared_ptr<File> FileManager::GetFile(SId id) const {
 //   return iNewId;
 // }
 
-SId FileManager::GetFirstFreeFileId() {
+SId FileManager::GetFirstFreeFileId()
+{
   // find first free space
   for (size_t i = 0; i < FileBuffer.size(); i++) {
     if (FileBuffer[i] == nullptr) {
@@ -90,7 +103,8 @@ SId FileManager::GetFirstFreeFileId() {
   return NewId;
 }
 
-HError FileManager::Remove(SId id) {
+HError FileManager::Remove(SId id)
+{
   if (0 < id && id < static_cast<SId>(FileBuffer.size())) {
     //     delete fileList[_iID];
     //     fileList[_iID] = nullptr;
@@ -107,7 +121,8 @@ HError FileManager::Remove(SId id) {
   return E_OK;
 }
 
-std::vector<SId> FileManager::GetFileIds() const {
+std::vector<SId> FileManager::GetFileIds() const
+{
   std::vector<SId> piIds;
   for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++) {
     if (FileBuffer[i] != nullptr) {
@@ -118,11 +133,13 @@ std::vector<SId> FileManager::GetFileIds() const {
   return piIds;
 }
 
-std::vector<Directory> FileManager::GetFileDirectories() const {
+std::vector<Directory> FileManager::GetFileDirectories() const
+{
   return std::vector<Directory>();
 }
 
-UInt32 FileManager::GetOpenedCount() {
+UInt32 FileManager::GetOpenedCount()
+{
   UInt32 iCount = 0;
   for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++) {
     if (FileBuffer[i] != nullptr) {
@@ -132,11 +149,13 @@ UInt32 FileManager::GetOpenedCount() {
   return iCount;
 }
 
-std::vector<std::string> FileManager::GetFileNames() {
+std::vector<std::string> FileManager::GetFileNames()
+{
   return std::vector<std::string>();
 }
 
-std::vector<int> FileManager::GetFileModes() const {
+std::vector<int> FileManager::GetFileModes() const
+{
   std::vector<int> pdblModes;
 
   for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++) {
@@ -148,7 +167,8 @@ std::vector<int> FileManager::GetFileModes() const {
   return pdblModes;
 }
 
-HError FileManager::Clear() {
+HError FileManager::Clear()
+{
   FileBuffer.clear();
   return E_OK;
 }

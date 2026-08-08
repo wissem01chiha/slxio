@@ -5,9 +5,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 StateSpace::StateSpace() {}
 
-Float32 StateSpace::GetStateValue() const { return StateValue; }
+Float32 StateSpace::GetStateValue() const
+{
+  return StateValue;
+}
 
-void StateSpace::SetStateValue(Float32 value) { StateValue = value; }
+void StateSpace::SetStateValue(Float32 value)
+{
+  StateValue = value;
+}
 
 StateSpace::~StateSpace() {}
 
