@@ -189,33 +189,49 @@ cmake -G "MinGW Makefiles" ..
 cmake --build .
 cmake --install .
 ```
+
 #### 3.2.2 Configure Options
 
-| Option               | Description                                                       | Default | Supported Since |
-|----------------------|-------------------------------------------------------------------|---------|-----------------|
-| BUILD_SHARED_LIBS    | Build as shared libraries                                         | OFF     |                 |
-| ENABLE_PYTHON_BINDING| Enable building Python interface                                  | ON      |                 |
-| ENABLE_TESTING       | Build C++ unit tests                                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_BINDING_TEST  | Build binding interface tests                                     | ON      |                 |
-| ENABLE_NAMESPACE     | Enable global namespace                                           | TRUE    |                 |
-| ENABLE_ABI_NAMESPACE | Enable ABI namespace (requires ENABLE_NAMESPACE=ON)               | ON      |                 |
-| USE_LOCAL_LIBS       | Use locally installed libraries                                   | ON      |                 |
-| ENABLE_OPENMP        | Enable compiling with OpenMP support                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_AVX           | Enable AVX optimizations where available                          | ON      |                 |
-| ENABLE_HDF5          | Enable HDF5 support                                               | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_MATLAB        | Enable MATLAB support                                             | OFF     |                 |
-| ENABLE_PKGCONFIG     | Generate pkg-config file                                          | ON      |                 |
-| ENABLE_INSTALL       | Enable installation after build                                   | OFF     |                 |
-| ENABLE_SANITIZER     | Enable sanitizers (ASan/UBSan/etc.)                               | OFF     |                 |
-| ENABLE_CLANG_TIDY    | Enable static analysis with clang-tidy                            | OFF     |                 |
-| ENABLE_CPPCHECK      | Enable static analysis with cppcheck                              | ON      |                 |
-| ENABLE_CLANG_FORMAT  | Enable Clang-Format support mode                                  | ON      |                 |
-| ENABLE_COVERAGE      | Enable code coverage reporting (GCC/Clang)                        | OFF     |                 |
-| ENABLE_FUZZING       | Enable fuzzing support                                            | OFF     |                 |
-| ENABLE_DOCUMENTATION | Enable documentation generation                                   | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| BUILD_EXAMPLES       | Build example applications                                        | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| CMAKE_INSTALL_PREFIX | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-
+| Option                          | Description                                                                 | Default | Supported Since |
+|---------------------------------|-----------------------------------------------------------------------------|---------|-----------------|
+| SLXIO_BUILD_SHARED_LIBS         | Build slxio as shared libraries                                             | OFF     |                 |
+| SLXIO_64BIT_IDENTIFIERS         | Enable 64‑bit identifiers (`std::uint64_t`)                                 | ON      |                 |
+| SLXIO_BUILD_TESTING             | Enable unit and integration testing                                         | ON      |  |
+| SLXIO_ENABLE_TESTING_COVERAGE   | Enable coverage reports when testing is ON                                  | ON      |                 |
+| SLXIO_BUILD_EXAMPLES            | Compile example scripts                                                     | OFF     |  |
+| SLXIO_SIMULINK_DEFAULT_VERSION  | Default Simulink version (auto‑detected if installed)                       | R2018b  |                 |
+| SLXIO_WITH_INTERACTION          | Build utilities like console applications                                   | ON      |                 |
+| SLXIO_BUILD_PYTHON_BINDINGS     | Enable Python bindings                                                      | OFF     |                 |
+| SLXIO_BUILD_JAVA_BINDINGS       | Enable Java bindings                                                        | OFF     |                 |
+| SLXIO_FORCE_LOCAL_MODULES       | Use only vendored third_party modules                                       | ON      |                 |
+| SLXIO_USE_SYSTEM_MODULES        | Use system‑wide installed modules when found                                | OFF     |                 |
+| SLXIO_DISABLE_VENDORED_MODULES  | Disable vendored third_party modules                                        | OFF     |                 |
+| SLXIO_INTSALL_THIRDPARTY_LISENCES | Install vendored third_party module licenses                               | ON      |                 |
+| SLXIO_BUILD_THIRDPARTY_TESTING  | Build third‑party module regression tests (requires testing enabled)        | OFF     |                 |
+| SLXIO_BUILD_THIRDPARTY_TOOLS    | Build third‑party module extra tools or scripts                             | OFF     |                 |
+| SLXIO_SLDD                      | Enable Simulink Data Dictionary (`*.sldd`) support                          | ON      |                 |
+| SLXIO_MAT                       | Enable MATLAB MAT file support                                              | OFF     |                 |
+| SLXIO_NPY                       | Enable NumPy NPY file support                                               | OFF     |                 |
+| SLXIO_NPZ                       | Enable NumPy NPZ file support                                               | OFF     |                 |
+| SLXIO_XLSX                      | Enable Microsoft Excel (`*.xlsx`) file support                              | OFF     |                 |
+| SLXIO_WITH_HDF5                 | Enable HDF5 library support                                                 | ON      |  |
+| SLXIO_PIC                       | Enable position‑independent code (PIC)                                      | ON      |                 |
+| SLXIO_WITH_VISUALIZATION        | Enable visualization modules (may require extra third‑parties)              | ON      |                 |
+| SLXIO_MDL                       | Enable legacy Simulink model (`*.mdl`) support (experimental)               | OFF     |                 |
+| SLXIO_INSTALL                   | Enable installation rules on target machine                                 | ON      |                 |
+| SLXIO_DEFAULT_BUILD_TYPE        | Override default build type                                                 | Release |                 |
+| SLXIO_WITH_PKGCONFIG            | Generate pkg‑config file during build                                       | ON      |                 |
+| SLXIO_DOXYGEN_DOCUMENTATION     | Enable Doxygen documentation generation                                     | OFF     |  |
+| SLXIO_ASAN                      | Enable AddressSanitizer (ASan)                                              | OFF     |                 |
+| SLXIO_MSAN                      | Enable MemorySanitizer (MSan)                                               | OFF     |                 |
+| SLXIO_TSAN                      | Enable ThreadSanitizer (TSan)                                               | OFF     |                 |
+| SLXIO_UBSAN                     | Enable UndefinedBehaviorSanitizer (UBSan)                                   | OFF     |                 |
+| SLXIO_THIRDPARTY_MSAN           | Enable third‑party MemorySanitizer                                          | OFF     |                 |
+| SLXIO_THIRDPARTY_ASAN           | Enable third‑party AddressSanitizer                                         | OFF     |                 |
+| SLXIO_THIRDPARTY_UBSAN          | Enable third‑party UndefinedBehaviorSanitizer                               | OFF     |                 |
+| SLXIO_WITH_OPENMP               | Enable OpenMP support                                                       | ON      |  |
+| SLXIO_ENABLE_WERROR             | Treat warnings as errors                                                    | OFF     |                 |
+| SLXIO_ENABLE_WALL               | Enable all compiler warnings                                                | ON      |                 |
 
 
 ### 3.3 Platform Support
