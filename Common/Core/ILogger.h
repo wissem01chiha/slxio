@@ -37,7 +37,7 @@ public:
   virtual ~ILogger() = default;
 
   /* Some Logger may need an init step */
-  virtual void Init(){};
+  virtual void Init() {};
 
   /** Logs a message. */
   virtual void Log(const ILogMessage& msg) = 0;
