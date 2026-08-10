@@ -1,5 +1,4 @@
 #include "ErrorLogMessage.h"
-
 #include "ErrorHandler.h"
 
 namespace slxio {

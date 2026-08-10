@@ -4,11 +4,6 @@
 # SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 # SPDX-License-Identifier: Apache-2.0
 
-#[=======================================================================[.rst:
-Module.cmake
-------
-#]=======================================================================]
-
 #[==[.rst:
 .. cmake:function:: add_module(
       MODULE_NAME
@@ -70,14 +65,6 @@ Module.cmake
   )
 #]==]
 function(add_module)
-  set(options
-      MODULE_ENABLE_COVERAGE
-      MODULE_INSTALL_HEADERS
-      MODULE_INSTALL_TARGETS
-      MODULE_INSTALL_LICENSES
-      MODULE_INSTALL_DOCS
-      MODULE_INSTALL_RESOURCES
-      MODULE_ENABLE_DOCS)
   set(oneValueArgs
       MODULE_NAME
       MODULE_GROUP
@@ -93,7 +80,14 @@ function(add_module)
       MODULE_EXPORT_TARGETS
       MODULE_PACKAGE_CONFIG
       MODULE_ENABLE_BUILD
-      MODULE_ENABLE_TESTS)
+      MODULE_ENABLE_TESTS
+      MODULE_ENABLE_COVERAGE
+      MODULE_INSTALL_HEADERS
+      MODULE_INSTALL_TARGETS
+      MODULE_INSTALL_LICENSES
+      MODULE_INSTALL_DOCS
+      MODULE_INSTALL_RESOURCES
+      MODULE_ENABLE_DOCS)
   set(multiValueArgs
       MODULE_CLASSES
       MODULE_SOURCES
@@ -143,7 +137,6 @@ function(add_module)
                         ${ARGN})
 
   set(TARGET_NAME "${MOD_LIBRARY_NAME}")
-  # target module binary output name 
   if(CMAKE_BINARY_NAME_PREFIX)
     set(TARGET_OUTPUT_NAME "${CMAKE_BINARY_NAME_PREFIX}${MOD_LIBRARY_NAME}")
   endif()
@@ -191,8 +184,7 @@ function(add_module)
      
   foreach(pch_header IN LISTS MOD_MODULE_PCH_HEADERS)
     target_precompile_headers(${TARGET_NAME} PRIVATE  
-      ${pch_header}
-    )
+      ${pch_header})
   endforeach()
 
     if(MOD_MODULE_COMPILE_FLAGS)
@@ -203,7 +195,6 @@ function(add_module)
     if(MOD_MODULE_PUBLIC_DEPENDS)
       target_link_libraries(${TARGET_NAME} PUBLIC 
         ${MOD_MODULE_PUBLIC_DEPENDS})
-        # add include directories from dependency targets 
         foreach(module_depend IN LISTS MOD_MODULE_PUBLIC_DEPENDS)
           get_target_property(module_depend_includes ${module_depend} INCLUDE_DIRECTORIES)
           if(NOT module_depend_includes)
@@ -211,11 +202,13 @@ function(add_module)
           endif()
         endforeach()
     endif()
+
     if(MOD_MODULE_PRIVATE_DEPENDS)
       target_link_libraries(
         ${TARGET_NAME}
         PRIVATE ${MOD_MODULE_PRIVATE_DEPENDS})
     endif()
+
     if(MOD_MODULE_INSTALL_TARGETS)
       install(TARGETS ${TARGET_NAME} DESTINATION lib)
     endif()
@@ -241,8 +234,6 @@ function(add_module)
     endif()
   endif()
 
-  # fixed issue with building tests even MODULE_TEST_DEPENDS is evaluated
-  # to empty this was disable standlone tests from beeing compiled
   if(MOD_MODULE_ENABLE_TESTS)
 
     enable_testing()
@@ -264,8 +255,7 @@ function(add_module)
         target_include_directories(${TARGET_NAME}${test_source_name}
           PRIVATE ${module_includes})
       endif()
-      # this option specifies additional include directories for tests,
-      # such as header‑only frameworks, fixtures, and other test helpers.
+
       if(MOD_MODULE_TEST_INCLUDE_DIRS)
         target_include_directories(${TARGET_NAME}${test_source_name}
           PRIVATE ${MOD_MODULE_TEST_INCLUDE_DIRS})
@@ -308,8 +298,7 @@ function(add_module)
       configure_file(
           ${CMAKE_CURRENT_SOURCE_DIR}/${test_data}
           ${CMAKE_CURRENT_BINARY_DIR}/${test_data_source}
-          COPYONLY
-      )
+          COPYONLY)
     endforeach()
 
   endif()

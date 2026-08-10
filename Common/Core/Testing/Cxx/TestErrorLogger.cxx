@@ -1,6 +1,6 @@
+#include "CommonECH.h"
 #include "Doctest.h"
 #include "ErrorLogMessage.h"
-#include "ErrorType.h"
 #include "Logger.h"
 
 using namespace slxio;

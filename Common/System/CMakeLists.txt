@@ -40,6 +40,7 @@ add_module(
     DirectoryManager.h
     ExecutableManager.h
     DirectoryService.h
+    SystemECH.h
   MODULE_PCH_HEADERS
     SystemPCH.h
   MODULE_SOURCES

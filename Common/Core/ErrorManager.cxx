@@ -1,8 +1,7 @@
 #include "ErrorManager.h"
-
+#include "CommonECH.h"
 #include "ErrorHandler.h"
 #include "ErrorHandlerMacro.h"
-#include "ErrorType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

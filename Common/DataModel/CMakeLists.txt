@@ -23,12 +23,16 @@ add_module(
   MODULE_INSTALL_LICENSES
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
-    DataObject.cxx
+    IDataObject.cxx
     JsonDataObject.cxx
   MODULE_HEADERS
-    DataObject.h
+    IDataObject.h
     JsonDataObject.h
-    DataModelErrorType.h
+    IParameterObject.h
+    ISignalObject.h
+    DataModelECH.h
+    ISignalDataObject.h
+    IDataObjectHandler.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES

@@ -5,7 +5,8 @@
 #define DATAMODELPCH_H
 
 #include "Json-c.h"
-
+#include <memory>
+#include <sstream>
 #include <string>
 #include <vector>
 

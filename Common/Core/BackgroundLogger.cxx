@@ -1,5 +1,4 @@
 #include "BackgroundLogger.h"
-
 #include "Spdlog.h"
 
 namespace slxio {

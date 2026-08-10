@@ -30,12 +30,6 @@ environment:
     - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
       CMAKE_GENERATOR: "Visual Studio 17 2022"
       CONFIG: MinSizeRel
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-      CMAKE_GENERATOR: "MinGW Makefiles"
-      CONFIG: Release
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
-      CMAKE_GENERATOR: "MinGW Makefiles"
-      CONFIG: Debug
 
 build_script:
   - echo Running cmake...
