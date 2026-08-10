@@ -6,9 +6,9 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "DataModelPCH.h"
 #include "IDataObject.h"
 #include "SimulinkFile.h"
-#include "DataModelPCH.h"
 
 class xmlDocDataObject;
 
@@ -28,7 +28,7 @@ public:
   void* GetImplDataObject() const override;
   bool operator==(const IDataObject&) override;
   std::string ToString() const;
-  bool Empty() const  override;
+  bool Empty() const override;
 
   SimulinkFileObject();
 

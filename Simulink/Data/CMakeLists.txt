@@ -1,1 +1,1 @@
-add_module(Simulink::Data)
+slx_add_module(Simulink::Data)

@@ -1,7 +1,6 @@
 #include "SimulinkFileObject.h"
 #include "xmlDocDataObject.h"
 
-
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 

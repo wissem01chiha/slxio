@@ -1,1 +1,1 @@
-add_module(Utilities::Console)
+slx_add_module(Utilities::Console)

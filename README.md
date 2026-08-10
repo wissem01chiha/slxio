@@ -77,7 +77,7 @@ The project is under active development, and contributions are highly encouraged
 
 ### 1.2 Supported MATLAB
 
-**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
+**SLXIO** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
 
 > [!NOTE]
 > Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.
@@ -198,6 +198,7 @@ cmake --install .
 | SLXIO_64BIT_IDENTIFIERS         | Enable 64‑bit identifiers (`std::uint64_t`)                                 | ON      |                 |
 | SLXIO_BUILD_TESTING             | Enable unit and integration testing                                         | ON      |  |
 | SLXIO_ENABLE_TESTING_COVERAGE   | Enable coverage reports when testing is ON                                  | ON      |                 |
+| SLXIO_BUILD_FUZZ_TESTING      |  Enable build fuzzy tests  | OFF | 
 | SLXIO_BUILD_EXAMPLES            | Compile example scripts                                                     | OFF     |  |
 | SLXIO_SIMULINK_DEFAULT_VERSION  | Default Simulink version (auto‑detected if installed)                       | R2018b  |                 |
 | SLXIO_WITH_INTERACTION          | Build utilities like console applications                                   | ON      |                 |

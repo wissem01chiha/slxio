@@ -31,7 +31,6 @@ public:
   bool operator==(const IDataObject&) override;
   void* GetImplDataObject() const override;
   std::string ToString() const override;
-  /** Returns SLXIO_TYPE_CJSON_OBJECT */
   DataType GetDataType() override;
   JsonDataObject();
   ~JsonDataObject();

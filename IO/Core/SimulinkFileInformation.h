@@ -7,7 +7,6 @@
 #include "ABINamespaceMacro.h"
 #include "DataModelPCH.h"
 #include "PlatformTypes.h"
-#include "DataModelPCH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -33,7 +32,10 @@ public:
   const std::string& GetRevision() const { return revision; }
   const std::string& GetVersion() const { return version; }
   const std::string& GetContentType() const { return contentType; }
-  const std::string& GetContentTypeFriendlyName() const { return contentTypeFriendlyName; }
+  const std::string& GetContentTypeFriendlyName() const
+  {
+    return contentTypeFriendlyName;
+  }
   const std::string& GetMatlabRelease() const { return matlabRelease; }
   const std::string& GetMatlabVersion() const { return matlabVersion; }
 

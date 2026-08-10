@@ -5,7 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 #[==[.rst:
-.. cmake:function:: add_module(
+.. cmake:function:: slx_add_module(
       MODULE_NAME
       MODULE_GROUP
       LIBRARY_NAME
@@ -64,7 +64,7 @@
       MODULE_PACKAGE_CONFIG
   )
 #]==]
-function(add_module)
+function(slx_add_module)
   set(oneValueArgs
       MODULE_NAME
       MODULE_GROUP

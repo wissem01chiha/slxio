@@ -14,16 +14,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class IParameterObject
- * @brief 
+ * @brief
  */
 template <typename T>
 class SLXIO_APIEXPORT IParameterObject
 {
 public:
-    IParameterObject();
-    ~IParameterObject();
+  IParameterObject();
+  ~IParameterObject();
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

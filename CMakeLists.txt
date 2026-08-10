@@ -24,7 +24,10 @@ set(SLXIO_64BIT_IDENTIFIERS ${SLXIO_64BIT_IDENTIFIERS})
 option(SLXIO_BUILD_TESTING "" ON)
 
 # Enable coverage reports when testing is ON
-option(SLXIO_ENABLE_TESTING_COVERAGE "" ON)
+option(SLXIO_ENABLE_TESTING_COVERAGE "" OFF)
+
+# Enable build fuzzy tests
+option(SLXIO_BUILD_FUZZ_TESTING "" OFF)
 
 # Option to enable compiling example scripts
 option(SLXIO_BUILD_EXAMPLES "" OFF)

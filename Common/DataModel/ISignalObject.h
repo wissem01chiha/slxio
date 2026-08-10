@@ -6,10 +6,10 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "DataModelECH.h"
 #include "DataModelPCH.h"
 #include "DataType.h"
 #include "ILogger.h"
-#include "DataModelECH.h"
 #include "PlatformTypes.h"
 
 namespace slxio {
@@ -28,28 +28,29 @@ public:
   virtual void SetData(const std::vector<T>& data) = 0;
   virtual const std::vector<T>& GetData() const = 0;
   virtual std::vector<T>& GetData() = 0;
-  virtual DataType GetDataType() = 0 ;
+  virtual DataType GetDataType() = 0;
   virtual size_t Size() const = 0;
-  virtual bool Empty() const =0;
+  virtual bool Empty() const = 0;
 
-  HError SetLogger(const ILogger* logger){ if(logger==nullptr){
-    return E_ILOGGER_NULLPTR_RECEIVED;
-  }
-  m_logger = logger;
-  return E_OK;
-};
-  const ILogger* GetLogger(){
-    return m_logger;
+  HError SetLogger(const ILogger* logger)
+  {
+    if (logger == nullptr) {
+      return E_ILOGGER_NULLPTR_RECEIVED;
+    }
+    m_logger = logger;
+    return E_OK;
   };
+  const ILogger* GetLogger() { return m_logger; };
 
-    SignalObject();
+  SignalObject();
 
-    virtual  ~SignalObject() = default;
+  virtual ~SignalObject() = default;
+
 protected:
   const ILogger* m_logger = nullptr;
   std::vector<T> m_buffer;
-private:
 
+private:
 };
 
 SLXIO_ABI_NAMESPACE_END

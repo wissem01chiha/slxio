@@ -7,15 +7,15 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "DataModelPCH.h"
-#include "ILogger.h"
 #include "DataType.h"
+#include "ILogger.h"
 #include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class IDataObject 
+ * @class IDataObject
  */
 class SLXIO_APIEXPORT IDataObject
 {
@@ -45,7 +45,7 @@ public:
   virtual bool operator==(const IDataObject&) = 0;
 
   /* Return the underlaying data type of the object */
-  virtual DataType GetDataType() = 0 ;
+  virtual DataType GetDataType() = 0;
 
   /** Set a logger object for this data object */
   HError SetLogger(const ILogger* logger);

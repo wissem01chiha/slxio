@@ -1,1 +1,1 @@
-add_module (Simulink::Core)
+slx_add_module (Simulink::Core)

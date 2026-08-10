@@ -1,1 +1,1 @@
-add_module(Simulink::Layout)
+slx_add_module(Simulink::Layout)

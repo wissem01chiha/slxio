@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class XmlCharDataObject
- * @brief 
+ * @brief
  */
 class SLXIO_APIEXPORT XmlCharDataObject : public IDataObject
 {
