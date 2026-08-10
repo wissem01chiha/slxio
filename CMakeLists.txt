@@ -200,6 +200,7 @@ if(SLXIO_WITH_PKGCONFIG)
   include(PkgConfig)
 endif()
 
+include(Sanitize)
 include(ThirdParty)
 include(Module)
 if(SLXIO_BUILD_TESTING)

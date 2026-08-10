@@ -50,7 +50,7 @@ Feel free to  contact the maintainer through email at [mail](mailto:chihawissem0
 
 # Contributing
 
-If you are interested in collaborating, please see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).
+If you are interested in collaborating, please see the [CONTRIBUTING](CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).
 Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
 
 ## 7.0 References

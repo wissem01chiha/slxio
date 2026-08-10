@@ -6,13 +6,17 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "DataObject.h"
+#include "IDataObject.h"
 #include "Libxml2.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT xmlCharDataObject : public DataObject
+/**
+ * @class XmlCharDataObject
+ * @brief 
+ */
+class SLXIO_APIEXPORT XmlCharDataObject : public IDataObject
 {
 public:
   xmlCharDataObject* New() override;
@@ -20,8 +24,7 @@ public:
   bool operator==(const DataObject&) override;
   void* GetImplDataObject() const override;
   std::string ToString() const override;
-
-  xmlCharDataObject();
+  XmlCharDataObject();
 
 private:
   xmlChar* ImplDataObject;

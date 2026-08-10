@@ -1,9 +1,9 @@
-#include "xmlCharDataObject.h"
+#include "XmlCharDataObject.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-xmlCharDataObject* xmlCharDataObject::New()
+XmlCharDataObject* XmlCharDataObject::New()
 {
   return new xmlCharDataObject();
 }
