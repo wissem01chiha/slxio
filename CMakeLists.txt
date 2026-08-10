@@ -87,6 +87,9 @@ option(SLXIO_XLSX "Enable Microsoft Excel file support" OFF)
 # Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
 option(SLXIO_WITH_HDF5 "Check for hdf5 library" ON)
 
+# Option to enable latex *.tex file support
+option(SLXIO_TEX "Enable Latex TeX file support" OFF)
+
 # Option to enable position-independent code (PIC)
 option(SLXIO_PIC "Enable position-independent code (PIC)" ON)
 

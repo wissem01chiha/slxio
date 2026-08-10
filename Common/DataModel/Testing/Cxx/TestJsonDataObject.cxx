@@ -20,7 +20,6 @@ TEST_CASE("JsonDataObject init with json_object")
   CHECK_FALSE(obj.Empty());
   CHECK(obj.GetImplDataObject() == j);
   CHECK(obj.ToString() == "\"hello\"");
-  json_object_put(j);
 }
 
 SLXIO_ABI_NAMESPACE_END

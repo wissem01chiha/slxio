@@ -26,6 +26,7 @@ slx_add_module(
     IDataObject.cxx
     JsonDataObject.cxx
     XmlDocDataObject.cxx
+    XmlNodeDataObject.cxx
   MODULE_HEADERS
     IDataObject.h
     JsonDataObject.h
@@ -35,6 +36,7 @@ slx_add_module(
     ISignalDataObject.h
     IDataObjectHandler.h
     XmlDocDataObject.h
+    XmlNodeDataObject.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
@@ -45,6 +47,7 @@ slx_add_module(
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
     TestJsonDataObject.cxx
+    TestXmlDocDataObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore

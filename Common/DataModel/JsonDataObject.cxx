@@ -1,5 +1,5 @@
 #include "JsonDataObject.h"
-#include "Json-c.h"
+#include "DataModelPCH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -25,15 +25,18 @@ bool JsonDataObject::Empty() const
   return m_implDataObject == nullptr;
 }
 
-bool JsonDataObject::operator==(const IDataObject& other)
+bool JsonDataObject::operator==(const IDataObject& other) const
 {
   if (m_implDataObject == nullptr || other.GetImplDataObject() == nullptr) {
     return m_implDataObject == other.GetImplDataObject();
   }
+  if (GetDataType() == other.GetDataType()) {
+    return json_object_equal(
+      m_implDataObject,
+      SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
+  }
 
-  return json_object_equal(
-    m_implDataObject,
-    SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
+  return false;
 }
 
 void* JsonDataObject::GetImplDataObject() const
@@ -50,7 +53,7 @@ std::string JsonDataObject::ToString() const
   return std::string(str);
 }
 
-DataType JsonDataObject::GetDataType()
+DataType JsonDataObject::GetDataType() const
 {
   return DataType::SLXIO_TYPE_CJSON_OBJECT;
 }

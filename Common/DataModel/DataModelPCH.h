@@ -4,10 +4,12 @@
 #ifndef DATAMODELPCH_H
 #define DATAMODELPCH_H
 
-#include "Json-c.h"
 #include <memory>
 #include <sstream>
 #include <string>
 #include <vector>
+
+#include "Json-c.h"
+#include "Libxml2.h"
 
 #endif // DATAMODELPCH_H

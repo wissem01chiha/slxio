@@ -13,7 +13,7 @@ SLXIO – SIMULINK SLX File I/O Library
 [![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
-![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
+[![codecov](https://codecov.io/gh/wissem01chiha/slxio/graph/badge.svg?token=EBZSHLWF78)](https://codecov.io/gh/wissem01chiha/slxio)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/slxio/overview/master)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
 

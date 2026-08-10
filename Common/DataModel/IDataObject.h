@@ -42,10 +42,10 @@ public:
   virtual bool Empty() const = 0;
 
   /** Compare equality with another DataObject */
-  virtual bool operator==(const IDataObject&) = 0;
+  virtual bool operator==(const IDataObject&) const = 0;
 
   /* Return the underlaying data type of the object */
-  virtual DataType GetDataType() = 0;
+  virtual DataType GetDataType() const = 0;
 
   /** Set a logger object for this data object */
   HError SetLogger(const ILogger* logger);

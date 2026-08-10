@@ -28,10 +28,10 @@ public:
   JsonDataObject* New() override;
   void Initialize(void* implDataObject) override;
   bool Empty() const override;
-  bool operator==(const IDataObject&) override;
+  bool operator==(const IDataObject& other) const override;
   void* GetImplDataObject() const override;
   std::string ToString() const override;
-  DataType GetDataType() override;
+  DataType GetDataType() const override;
   JsonDataObject();
   ~JsonDataObject();
 
