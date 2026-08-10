@@ -39,7 +39,9 @@ jobs:
 
     - name: Generate coverage report
       run: |
-        covr -r . --exclude-directories '(^|/)(ThirdParty)(/|$)' --xml-pretty --output coverage.xml
+            gcovr -r . \
+            --exclude-directories '(^|/)(ThirdParty)(/|$)' \
+            --xml-pretty --output coverage.xml
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5

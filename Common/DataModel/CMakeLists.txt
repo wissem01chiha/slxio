@@ -42,10 +42,12 @@ slx_add_module(
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+    TestJsonDataObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     json-c
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
 )
