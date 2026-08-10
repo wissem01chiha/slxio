@@ -1,36 +1,43 @@
-#include "xmlDocDataObject.h"
+#include "XmlDocDataObject.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-xmlDocDataObject* xmlDocDataObject::New()
+XmlDocDataObject* XmlDocDataObject::New()
 {
-  return new xmlDocDataObject();
+  return new XmlDocDataObject();
 }
 
-bool xmlDocDataObject::Empty()
+void XmlDocDataObject::Initialize(void* implDataObject)
 {
-  return ImplDataObject == nullptr;
+  if (implDataObject != nullptr) {
+    m_implDataObject = SLXIO_STATIC_CAST(xmlDocPtr, implDataObject);
+  }
 }
 
-bool xmlDocDataObject::operator==(const DataObject&)
+bool XmlDocDataObject::Empty() const
+{
+  return m_implDataObject == nullptr;
+}
+
+bool XmlDocDataObject::operator==(const IDataObject&)
 {
   return false;
 }
 
-void* xmlDocDataObject::GetImplDataObject() const
+void* XmlDocDataObject::GetImplDataObject() const
 {
-  return ImplDataObject;
+  return m_implDataObject;
 }
 
-std::string xmlDocDataObject::ToString() const
+std::string XmlDocDataObject::ToString() const
 {
-  if (ImplDataObject == nullptr) {
+  if (m_implDataObject == nullptr) {
     return std::string();
   }
   xmlChar* buffer = nullptr;
   int size = 0;
-  xmlDocDumpMemory(ImplDataObject, &buffer, &size);
+  xmlDocDumpMemory(m_implDataObject, &buffer, &size);
   std::string result;
   if (buffer != nullptr && size > 0) {
     result.assign(reinterpret_cast<char*>(buffer), size);
@@ -40,7 +47,12 @@ std::string xmlDocDataObject::ToString() const
   return result;
 }
 
-xmlDocDataObject::xmlDocDataObject() {}
+DataType XmlDocDataObject::GetDataType()
+{
+  return DataType::SLXIO_TYPE_LIBXML_DOCPTR;
+}
+
+XmlDocDataObject::XmlDocDataObject() {}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

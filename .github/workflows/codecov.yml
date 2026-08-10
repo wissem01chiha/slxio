@@ -40,7 +40,7 @@ jobs:
     - name: Generate coverage report
       run: |
             gcovr -r . \
-            --exclude '.*ThirdParty/.*' \ --xml-pretty --output coverage.xml
+            --exclude '.*ThirdParty/.*'  --xml-pretty --output coverage.xml
 
     - name: Upload coverage reports to Codecov
       uses: codecov/codecov-action@v5

@@ -13,21 +13,24 @@ namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- *
+ * @class XmlDocDataObject
+ * @brief A wrapper around libxml2 xmlDocPtr object
+ * implementing IDataObject interface
  */
-class SLXIO_APIEXPORT xmlDocDataObject : public IDataObject
+class SLXIO_APIEXPORT XmlDocDataObject : public IDataObject
 {
 public:
-  xmlDocDataObject* New() override;
-  bool Empty() override;
-  bool operator==(const DataObject&) override;
+  XmlDocDataObject* New() override;
+  void Initialize(void* implDataObject) override;
+  bool Empty() const override;
+  bool operator==(const IDataObject&) override;
   void* GetImplDataObject() const override;
   std::string ToString() const override;
-
-  xmlDocDataObject();
+  DataType GetDataType() override;
+  XmlDocDataObject();
 
 private:
-  xmlDocPtr ImplDataObject;
+  xmlDocPtr m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

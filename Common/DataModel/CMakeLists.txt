@@ -25,6 +25,7 @@ slx_add_module(
   MODULE_CLASSES
     IDataObject.cxx
     JsonDataObject.cxx
+    XmlDocDataObject.cxx
   MODULE_HEADERS
     IDataObject.h
     JsonDataObject.h
@@ -33,6 +34,7 @@ slx_add_module(
     DataModelECH.h
     ISignalDataObject.h
     IDataObjectHandler.h
+    XmlDocDataObject.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
@@ -47,6 +49,7 @@ slx_add_module(
   MODULE_PUBLIC_DEPENDS
     CommonCore
     json-c
+    LibXml2
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
