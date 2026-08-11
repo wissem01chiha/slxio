@@ -17,6 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ISignalObject
+ * @brief Abstract Interface for all signal types
  */
 template <typename T>
 class SLXIO_APIEXPORT ISignalObject
@@ -42,9 +43,9 @@ public:
   };
   const ILogger* GetLogger() { return m_logger; };
 
-  SignalObject();
+  ISignalObject();
 
-  virtual ~SignalObject() = default;
+  virtual ~ISignalObject() = default;
 
 protected:
   const ILogger* m_logger = nullptr;
