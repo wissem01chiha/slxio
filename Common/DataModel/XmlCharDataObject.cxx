@@ -5,30 +5,35 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 XmlCharDataObject* XmlCharDataObject::New()
 {
-  return new xmlCharDataObject();
+  return new XmlCharDataObject();
 }
 
-bool xmlCharDataObject::Empty()
+bool XmlCharDataObject::Empty()
 {
   return ImplDataObject == nullptr;
 }
 
-bool xmlCharDataObject::operator==(const DataObject&)
+bool XmlCharDataObject::operator==(const IDataObject& other)
 {
   return false;
 }
 
-void* xmlCharDataObject::GetImplDataObject() const
+void* XmlCharDataObject::GetImplDataObject() const
 {
   return ImplDataObject;
 }
 
-std::string xmlCharDataObject::ToString() const
+std::string XmlCharDataObject::ToString() const
 {
   return std::string();
 }
 
-xmlCharDataObject::xmlCharDataObject() {}
+DataType XmlCharDataObject::GetDataType() const
+{
+  return DataType();
+}
+
+XmlCharDataObject::XmlCharDataObject() {}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

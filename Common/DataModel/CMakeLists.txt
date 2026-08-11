@@ -27,6 +27,7 @@ slx_add_module(
     JsonDataObject.cxx
     XmlDocDataObject.cxx
     XmlNodeDataObject.cxx
+    IParameterizedObject.cxx
   MODULE_HEADERS
     IDataObject.h
     JsonDataObject.h
@@ -37,6 +38,10 @@ slx_add_module(
     IDataObjectHandler.h
     XmlDocDataObject.h
     XmlNodeDataObject.h
+    IParameterizedObject.h
+    IMutableParameterObject.h
+    IRangeParameterObject.h
+    IParameterDataObjectBase.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES

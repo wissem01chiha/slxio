@@ -7,8 +7,6 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "DataModelPCH.h"
-#include "DataType.h"
-#include "ILogger.h"
 #include "IParameterObject.h"
 #include "IParameterObjectBase.h"
 
@@ -17,8 +15,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class IParameterizedObject
- * @brief An object that supports one or more IParameterObject
- * attributes
+ * @brief An object that supports one or more IParameterObject attributes.
+ * Parameters can be mutable or immutable, or mixed. This design is valid for
+ * both. Many Simulink core blocks implement this pattern.
  */
 class SLXIO_APIEXPORT IParameterizedObject
 {
@@ -26,27 +25,11 @@ public:
   /** Create a new instance of the IParameterizedObject */
   virtual IParameterizedObject* New() = 0;
 
-  template <typename T>
-  void AddParameter(const std::shared_ptr<IParameterObject<T>>& p)
-  {
-    parameters[p->GetName()] = p;
-  }
+  /** Add a parameter */
+  void AddParameter(const std::shared_ptr<IParameterObjectBase>& p);
 
-  template <typename T>
-  void SetParameter(std::string name, std::shared_ptr<T> value);
-
-  template <typename T>
-  std::shared_ptr<IParameterObject<T>> GetParameter(const std::string& name)
-  {
-    auto it = parameters.find(name);
-    if (it != parameters.end()) {
-      return std::dynamic_pointer_cast<IParameterObject<T>>(it->second);
-    }
-    return nullptr;
-  }
-
-  template <typename T>
-  std::shared_ptr<IParameterObject<T>> GetParameter(const std::string name);
+  /** Get a parameter by name */
+  std::shared_ptr<IParameterObjectBase> GetParameter(const std::string& name);
 
 protected:
   std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>>

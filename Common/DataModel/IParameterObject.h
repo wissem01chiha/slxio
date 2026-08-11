@@ -26,30 +26,10 @@ template <typename T>
 class SLXIO_APIEXPORT IParameterObject : public IParameterObjectBase
 {
 public:
-  /** Create a new instance of the IParameterObject */
   virtual IParameterObject* New() = 0;
-
-  /** Returns current parameter name */
-  virtual std::string GetName() { return m_name; };
-
-  /** Parameter minumin value */
-  virtual Float32 GetMin() = 0;
-
-  /** Parameter maxiumum value */
-  virtual Float32 GetMax() = 0;
-
-  virtual DataType GetDataType() = 0;
-
   virtual T& GetValue() = 0;
-
-  IParameterObject();
-
   virtual ~IParameterObject() = default;
-
-protected:
-  std::string m_name;
 };
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 

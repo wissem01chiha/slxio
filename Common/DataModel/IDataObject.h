@@ -60,6 +60,7 @@ public:
 
 protected:
   const ILogger* m_logger = nullptr;
+  UInt32 m_updateTime;
 
 private:
   // Disable copy and assignment

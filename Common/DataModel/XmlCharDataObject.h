@@ -19,11 +19,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT XmlCharDataObject : public IDataObject
 {
 public:
-  xmlCharDataObject* New() override;
-  bool Empty() override;
-  bool operator==(const DataObject&) override;
+  XmlCharDataObject* New() override;
+  bool Empty() const override;
+  bool operator==(const IDataObject&) const override;
   void* GetImplDataObject() const override;
   std::string ToString() const override;
+  DataType GetDataType() const override;
   XmlCharDataObject();
 
 private:
