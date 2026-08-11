@@ -8,8 +8,8 @@
 #include "APIExportMacro.h"
 #include "DataModelPCH.h"
 #include "DataType.h"
-#include "IParameterObjectBase.h"
 #include "ILogger.h"
+#include "IParameterObjectBase.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
