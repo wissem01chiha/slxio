@@ -13,14 +13,15 @@ namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class IRangeParameterObject 
+ * @class IRangeParameterObject
  * @brief Specialization for range-based types
  */
 template <typename T>
-class SLXIO_APIEXPORT IRangeParameterObject : public IParameterObject<T> {
+class SLXIO_APIEXPORT IRangeParameterObject : public IParameterObject<T>
+{
 public:
-    virtual T& GetMin() = 0;
-    virtual T& GetMax() = 0;
+  virtual T& GetMin() = 0;
+  virtual T& GetMax() = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END
