@@ -5,7 +5,8 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives) : ArchiveBuffer(std::move(archives))
+ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
+  : ArchiveBuffer(std::move(archives))
 {
 }
 

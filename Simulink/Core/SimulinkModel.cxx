@@ -12,7 +12,8 @@ namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModel::SimulinkModel()
-  : logger(Logger::GetInstance()),  ModelType(SimulinkModelType(SimulinkModelType::Model))
+  : logger(Logger::GetInstance())
+  , ModelType(SimulinkModelType(SimulinkModelType::Model))
 {
 }
 

@@ -32,16 +32,14 @@ bool Color::operator!=(const Color& other) const
 
 Color Color::fromVector(const std::vector<UInt32>& vec)
 {
-    if (vec.size() >= 4) {
-        return Color(vec[0], vec[1], vec[2], vec[3]);
-    }
-    return Color(
-        vec.size() > 0 ? vec[0] : 0,
-        vec.size() > 1 ? vec[1] : 0,
-        vec.size() > 2 ? vec[2] : 0,
-        255); 
+  if (vec.size() >= 4) {
+    return Color(vec[0], vec[1], vec[2], vec[3]);
+  }
+  return Color(vec.size() > 0 ? vec[0] : 0,
+               vec.size() > 1 ? vec[1] : 0,
+               vec.size() > 2 ? vec[2] : 0,
+               255);
 }
-
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
