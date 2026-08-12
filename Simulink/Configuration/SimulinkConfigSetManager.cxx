@@ -1,16 +1,14 @@
 #include "SimulinkConfigSetManager.h"
-
 #include "SimulinkConfigSet.h"
-
 #include <algorithm>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetManager::SimulinkConfigSetManager()
-  : l(Logger::GetInstance())
+  : l(Logger::GetInstance()), cfgs(std::vector<std::shared_ptr<SimulinkConfigSet>>())
 {
-  cfgs = std::vector<std::shared_ptr<SimulinkConfigSet>>();
+
 }
 
 HError SimulinkConfigSetManager::AddElement(

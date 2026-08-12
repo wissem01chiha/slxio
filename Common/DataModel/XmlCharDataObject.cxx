@@ -33,7 +33,7 @@ DataType XmlCharDataObject::GetDataType() const
   return DataType();
 }
 
-XmlCharDataObject::XmlCharDataObject() {}
+XmlCharDataObject::XmlCharDataObject() : m_implDataObject(nullptr) {}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

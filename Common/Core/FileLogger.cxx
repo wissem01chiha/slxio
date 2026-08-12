@@ -3,7 +3,7 @@
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FileLogger::FileLogger(const std::string& fileName)
+FileLogger::FileLogger(const std::string& fileName= "slxio.log")
   : m_fileName(fileName)
   , m_logLevel(LogLevelType::LOG_INFO)
 {

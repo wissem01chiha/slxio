@@ -1,4 +1,5 @@
 #include "Orientation.h"
+#include <cstring>
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
@@ -51,18 +52,21 @@ Orientation getOpposite(Orientation Orientation)
   }
 }
 
+
+
 Orientation fromRotationValue(const char* str)
 {
-  if (str == "0")
-    return Orientation::RIGHT;
-  if (str == "90")
-    return Orientation::DOWN;
-  if (str == "180")
-    return Orientation::LEFT;
-  if (str == "270")
-    return Orientation::UP;
+    if (std::strcmp(str, "0") == 0)
+        return Orientation::RIGHT;
+    if (std::strcmp(str, "90") == 0)
+        return Orientation::DOWN;
+    if (std::strcmp(str, "180") == 0)
+        return Orientation::LEFT;
+    if (std::strcmp(str, "270") == 0)
+        return Orientation::UP;
 
-  return Orientation::RIGHT;
+    return Orientation::RIGHT;
 }
+
 
 SLXIO_ABI_NAMESPACE_END

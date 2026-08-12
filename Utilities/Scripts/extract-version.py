@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env python3
 #=============================================================================
 # Copyright 2025-2026 Wissem Chiha
 #
@@ -14,16 +14,19 @@
 # implied. See the License for the specific language governing
 # permissions and limitations under the License.
 #=============================================================================
-set -e
 
-echo "Running pre-commit checks..."
+import os
+import re
 
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.sh$')
-if [ -n "$FILES" ]; then
-    shellcheck $FILES || {
-        echo "Shellcheck failed. Fix issues before committing."
-        exit 1
-    }
-fi
+base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+config_h = os.path.join(base_path, "include", "CLI", "Version.hpp")
+data = {"MAJOR": 0, "MINOR": 0, "PATCH": 0}
+reg = re.compile(r"^\s*#define\s+CLI11_VERSION_([A-Z]+)\s+([0-9]+).*$")
 
-echo "All checks passed!"
+with open(config_h, "r") as fp:
+    for l in fp:
+        m = reg.match(l)
+        if m:
+            data[m.group(1)] = int(m.group(2))
+
+print("{}.{}.{}".format(data["MAJOR"], data["MINOR"], data["PATCH"]))
