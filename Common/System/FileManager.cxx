@@ -12,8 +12,8 @@ FileManager::FileManager()
 }
 
 FileManager::FileManager(std::vector<std::shared_ptr<File>> files)
+  : FileBuffer(files)
 {
-  FileBuffer = files;
 }
 
 SId FileManager::GetFileId(const std::string& filename) const

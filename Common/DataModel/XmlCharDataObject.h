@@ -28,7 +28,7 @@ public:
   XmlCharDataObject();
 
 private:
-  xmlChar* ImplDataObject;
+  xmlChar* m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

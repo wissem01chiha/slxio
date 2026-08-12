@@ -25,7 +25,7 @@ public:
   Archive();
 
   /** Constructor given an expilcit file */
-  Archive(File file);
+  Archive(const File& file);
 
   /** Create a Reference to an instance */
   Archive* New();
@@ -38,7 +38,7 @@ public:
 
   /* Set the archive directory folder is not given a temporary one will be used
    * as default */
-  void SetArchiveDirectory(const Directory directory);
+  void SetArchiveDirectory(const Directory& directory);
 
   /** Get the archive directory object */
   Directory GetArchiveDirectory() const;
@@ -47,10 +47,10 @@ public:
   HError Extract();
 
   /** Add a file to the Archive, if the file already there */
-  HError Add(const File file);
+  HError Add(const File& file);
 
   /** Remove a file from teh archive, if the file exist else return and error */
-  HError Remove(const File file);
+  HError Remove(const File& file);
 
   /** Default Destructor */
   ~Archive() = default;

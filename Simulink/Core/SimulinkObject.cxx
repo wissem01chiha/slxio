@@ -15,11 +15,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::SimulinkObject()
   : logger(Logger::GetInstance())
+  , PropName("")
+  , ClassName("")
+  , ObjectVersion("")
+  , ObjectId(0)
 {
-  PropName = std::string("");
-  ClassName = std::string("");
-  ObjectVersion = std::string("");
-  ObjectId = 0;
 }
 
 SimulinkObject* SimulinkObject::New() const
