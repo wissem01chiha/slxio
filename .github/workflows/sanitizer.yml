@@ -1,5 +1,9 @@
 name: Sanitizer
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  workflow_call:
+  workflow_dispatch:
 
 jobs:
   cmake:

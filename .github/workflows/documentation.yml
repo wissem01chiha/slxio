@@ -2,23 +2,14 @@
 # Copyright (c) 2016 Patrick Marsceill
 # SPDX-License-Identifier: MIT
 
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Documentation
 
 on:
   push:
-    # documentation is only built and deployed when changes are pushed to 
-    # the master branch
     branches: ["master"]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write

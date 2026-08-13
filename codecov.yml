@@ -1,4 +1,5 @@
 # https://docs.codecov.com/docs/ignoring-paths
 ignore:
-  - "ThirdParty/*"
-  - "Testing/*"
+  - "ThirdParty"
+  - "Testing"
+  - "**/Test_*.cxx"  
