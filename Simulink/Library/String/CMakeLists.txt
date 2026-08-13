@@ -1,4 +1,5 @@
-set(String_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/AsciiToString.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ComposeString.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ScanString.cxx
@@ -17,9 +18,7 @@ set(String_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/StringToSingle.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Substring.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ToString.cxx
-)
 
-set(String_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/AsciiToString.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ComposeString.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ScanString.h
@@ -39,7 +38,3 @@ set(String_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Substring.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ToString.h
 )
-
-
-set(String_HDRS ${String_HDRS} PARENT_SCOPE)
-set(String_SRCS ${String_SRCS} PARENT_SCOPE)

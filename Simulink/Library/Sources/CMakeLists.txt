@@ -1,4 +1,5 @@
-set(Sources_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/BandLimitedWhiteNoise.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ChirpSignal.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Clock.cxx
@@ -26,9 +27,7 @@ set(Sources_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Step.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/UniformRandomNumber.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/WaveformGenerator.cxx
-)
 
-set(Sources_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/BandLimitedWhiteNoise.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ChirpSignal.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Clock.h
@@ -57,7 +56,3 @@ set(Sources_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/UniformRandomNumber.h
     ${CMAKE_CURRENT_SOURCE_DIR}/WaveformGenerator.h
 )
-
-
-set(Sources_HDRS ${Sources_HDRS} PARENT_SCOPE)
-set(Sources_SRCS ${Sources_SRCS} PARENT_SCOPE)

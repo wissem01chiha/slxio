@@ -17,7 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class IParameterizedObject
  * @brief An object that supports one or more IParameterObject attributes.
  * Parameters can be mutable or immutable, or mixed. This design is valid for
- * both. Many Simulink core blocks implement this pattern.
+ * both. Many Simulink core blocks implement this pattern
  */
 class SLXIO_APIEXPORT IParameterizedObject
 {
@@ -25,15 +25,22 @@ public:
   /** Create a new instance of the IParameterizedObject */
   virtual IParameterizedObject* New() = 0;
 
-  /** Add a parameter */
-  void AddParameter(const std::shared_ptr<IParameterObjectBase>& p);
+  /** 
+   * Add a parameter 
+   * https://www.mathworks.com/help/simulink/slref/add_param.html
+   */
+  virtual void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) =0;
+
+  /** 
+   * Set a parameter 
+   * https://www.mathworks.com/help/simulink/slref/set_param.html
+   * @param name parameter name to set it value
+   */
+  virtual void SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) =0;
 
   /** Get a parameter by name */
-  std::shared_ptr<IParameterObjectBase> GetParameter(const std::string& name);
+  virtual std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) = 0;
 
-protected:
-  std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>>
-    m_parameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

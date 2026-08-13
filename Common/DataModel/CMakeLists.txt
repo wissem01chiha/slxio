@@ -27,7 +27,6 @@ add_module(
     JsonDataObject.cxx
     XmlDocDataObject.cxx
     XmlNodeDataObject.cxx
-    IParameterizedObject.cxx
   MODULE_HEADERS
     IDataObject.h
     JsonDataObject.h

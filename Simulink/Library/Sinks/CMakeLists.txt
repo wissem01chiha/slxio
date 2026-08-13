@@ -1,4 +1,5 @@
-set(Sinks_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Display.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FloatingScope.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Out1.cxx
@@ -10,9 +11,7 @@ set(Sinks_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/ToFile.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ToWorkspace.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/XyGraph.cxx
-)
 
-set(Sinks_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Display.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FloatingScope.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Out1.h
@@ -25,7 +24,3 @@ set(Sinks_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/ToWorkspace.h
     ${CMAKE_CURRENT_SOURCE_DIR}/XyGraph.h
 )
-
-
-set(Sinks_HDRS ${Sinks_HDRS} PARENT_SCOPE)
-set(Sinks_SRCS ${Sinks_SRCS} PARENT_SCOPE)

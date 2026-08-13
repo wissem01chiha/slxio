@@ -1,4 +1,5 @@
-set(SignalAttributes_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/BusToVector.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversionInherited.cxx
@@ -14,9 +15,7 @@ set(SignalAttributes_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/UnitConversion.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/WeightedSampleTime.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Width.cxx
-)
 
-set(SignalAttributes_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/BusToVector.h
     ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.h
     ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversionInherited.h
@@ -33,7 +32,3 @@ set(SignalAttributes_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/WeightedSampleTime.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Width.h
 )
-
-
-set(SignalAttributes_HDRS ${SignalAttributes_HDRS} PARENT_SCOPE)
-set(SignalAttributes_SRCS ${SignalAttributes_SRCS} PARENT_SCOPE)

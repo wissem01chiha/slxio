@@ -1,4 +1,5 @@
-set(QuickInsert_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Accumulator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Acos.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Acosh.cxx
@@ -134,9 +135,7 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/UserDefinedFunctions.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Xor.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Zero.cxx
-)
 
-set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Accumulator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Acos.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Acosh.h
@@ -273,7 +272,3 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Xor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Zero.h
 )
-
-
-set(QuickInsert_HDRS ${QuickInsert_HDRS} PARENT_SCOPE)
-set(QuickInsert_SRCS ${QuickInsert_SRCS} PARENT_SCOPE)

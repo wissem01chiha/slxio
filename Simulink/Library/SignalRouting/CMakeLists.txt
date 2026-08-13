@@ -1,4 +1,5 @@
-set(SignalRouting_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/BusAssignment.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/BusCreator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/BusElementIn.cxx
@@ -30,9 +31,7 @@ set(SignalRouting_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantSource.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantStart.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/VectorConcatenate.cxx
-)
 
-set(SignalRouting_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/BusAssignment.h
     ${CMAKE_CURRENT_SOURCE_DIR}/BusCreator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/BusElementIn.h
@@ -65,7 +64,3 @@ set(SignalRouting_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantStart.h
     ${CMAKE_CURRENT_SOURCE_DIR}/VectorConcatenate.h
 )
-
-
-set(SignalRouting_HDRS ${SignalRouting_HDRS} PARENT_SCOPE)
-set(SignalRouting_SRCS ${SignalRouting_SRCS} PARENT_SCOPE)

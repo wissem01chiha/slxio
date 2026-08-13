@@ -1,31 +1,26 @@
-set(AdditionalMathDiscrete_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.cxx
+target_sources(SimulinkLibrary
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.cxx
+        ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.cxx
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.h
 )
-
-set(AdditionalMathDiscrete_HDRS
-    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.h
-)
-
-
-set(AdditionalMathDiscrete_HDRS ${AdditionalMathDiscrete_HDRS} PARENT_SCOPE)
-set(AdditionalMathDiscrete_SRCS ${AdditionalMathDiscrete_SRCS} PARENT_SCOPE)

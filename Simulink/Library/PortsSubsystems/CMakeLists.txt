@@ -1,4 +1,5 @@
-set(PortsSubsystems_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/AtomicSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Codereusesubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Enable.cxx
@@ -32,9 +33,7 @@ set(PortsSubsystems_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantModel.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/WhileIteratorSubsystem.cxx
-)
 
-set(PortsSubsystems_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/AtomicSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Codereusesubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Enable.h
@@ -69,7 +68,3 @@ set(PortsSubsystems_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/WhileIteratorSubsystem.h
 )
-
-
-set(PortsSubsystems_HDRS ${PortsSubsystems_HDRS} PARENT_SCOPE)
-set(PortsSubsystems_SRCS ${PortsSubsystems_SRCS} PARENT_SCOPE)

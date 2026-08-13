@@ -1,4 +1,5 @@
-set(UserDefinedFunctions_SRCS
+target_sources(SimulinkLibrary
+    PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.cxx
@@ -15,9 +16,7 @@ set(UserDefinedFunctions_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionExamples.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.cxx
-)
 
-set(UserDefinedFunctions_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.h
@@ -35,7 +34,3 @@ set(UserDefinedFunctions_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.h
 )
-
-
-set(UserDefinedFunctions_HDRS ${UserDefinedFunctions_HDRS} PARENT_SCOPE)
-set(UserDefinedFunctions_SRCS ${UserDefinedFunctions_SRCS} PARENT_SCOPE)
