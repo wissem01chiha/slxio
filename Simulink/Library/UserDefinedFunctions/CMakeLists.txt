@@ -1,14 +1,8 @@
 set(UserDefinedFunctions_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Demux.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/EventListener.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/F.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCaller.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/InitializeFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/InterpretedMatlabFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Level2MatlabSFunction.cxx
@@ -16,29 +10,18 @@ set(UserDefinedFunctions_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/MatlabSystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ReinitializeFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ResetFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionBuilder.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionExamples.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sfunction.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/StateReader.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/StateWriter.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Terminator.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
 )
 
 set(UserDefinedFunctions_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Demux.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/EventListener.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/F.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCaller.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.h
     ${CMAKE_CURRENT_SOURCE_DIR}/InitializeFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/InterpretedMatlabFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Level2MatlabSFunction.h
@@ -46,16 +29,11 @@ set(UserDefinedFunctions_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/MatlabSystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ReinitializeFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ResetFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionBuilder.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionExamples.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sfunction.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/StateReader.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/StateWriter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Terminator.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
 )
 
 

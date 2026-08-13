@@ -3,9 +3,6 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Acos.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Acosh.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/AddConstant.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp25.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp50.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp75.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/And.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Asin.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Asinh.cxx
@@ -24,24 +21,16 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToBoolean.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToDouble.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToSingle.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Castu16en16.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Ceil.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Compare.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Conj.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ContinuousPulseGenerator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Cos.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Cos2PiU.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CosCordic.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CosJsin.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Cosh.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Cosine.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CosineLookup.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/D1stOr4thQuad.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/D3DLookupTable.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/DelayOneStep.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Diff.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Difference.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Discrete.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/DiscreteDerivative.cxx
@@ -53,7 +42,6 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Equal.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/EulersNumber.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Exp.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ExpJ2PiU.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ExponentialLookup.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Fix.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Floor.cxx
@@ -61,17 +49,12 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Greaterthanorequal.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Gt.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Gte.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gtep75.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetryCosine.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetrySine.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Hermitian.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Hypot.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/In1.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/IndexSearch.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Inf.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Inport.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Input.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/InputToLookupTable.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Isfinite.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Isinf.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Isnan.cxx
@@ -87,15 +70,12 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Log.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Log10.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/LogicAndBitOperations.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupTables.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithAkimaSplineInterpolation.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithLinearLagrangeInterpolation.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithLinearPointSlopeInterpolation.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Lt.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Lte.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep25.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep50.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/MagnitudeSquared.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/MathOperations.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/MatrixDivide.cxx
@@ -109,7 +89,6 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Multiply.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Nan.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Nand.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Negate.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/NegativeInf.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Nor.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Not.cxx
@@ -119,15 +98,8 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Or.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Outport.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Output.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/OutputFromLookupTable.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/P25ma.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/P50ma.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/P75ma.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Pi.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Plus.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point25.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point50.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point75.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/PortsSubsystems.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Power.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/PowerOf10.cxx
@@ -135,11 +107,6 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeDimension.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeSampleTime.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeWidth.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1a.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1b.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle2.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/RawAngle.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Reciprocal.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ReciprocalSquareRoot.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Rem.cxx
@@ -147,15 +114,12 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/SawtoothGenerator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalAttributes.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalCopy.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Signcorrected.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SignedSquareRoot.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Sin.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sin2PiU.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SinCordic.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Sincos.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SincosCordic.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SincosLookup.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sine.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SineLookup.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Sinh.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Sources.cxx
@@ -166,14 +130,9 @@ set(QuickInsert_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Tanh.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ToNonvirtualBus.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ToVirtualBus.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tocplx.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Transpose.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tsamp.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ud.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/UserDefinedFunctions.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Xor.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Zero.cxx
 )
 
@@ -182,9 +141,6 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Acos.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Acosh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AddConstant.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp25.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp50.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Amp75.h
     ${CMAKE_CURRENT_SOURCE_DIR}/And.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Asin.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Asinh.h
@@ -203,24 +159,16 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToBoolean.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToDouble.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CastToSingle.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Castu16en16.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Ceil.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Compare.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Conj.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ContinuousPulseGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Cos.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Cos2PiU.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CosCordic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CosJsin.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Cosh.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Cosine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CosineLookup.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/D1stOr4thQuad.h
     ${CMAKE_CURRENT_SOURCE_DIR}/D3DLookupTable.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/DelayOneStep.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Diff.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Difference.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Discrete.h
     ${CMAKE_CURRENT_SOURCE_DIR}/DiscreteDerivative.h
@@ -232,7 +180,6 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Equal.h
     ${CMAKE_CURRENT_SOURCE_DIR}/EulersNumber.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Exp.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ExpJ2PiU.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ExponentialLookup.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Fix.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Floor.h
@@ -240,17 +187,12 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Greaterthanorequal.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Gt.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Gte.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gtep75.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetryCosine.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetrySine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Hermitian.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Hypot.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/In1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/IndexSearch.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Inf.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Inport.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Input.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/InputToLookupTable.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Isfinite.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Isinf.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Isnan.h
@@ -266,15 +208,12 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Log.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Log10.h
     ${CMAKE_CURRENT_SOURCE_DIR}/LogicAndBitOperations.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable.h
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupTables.h
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithAkimaSplineInterpolation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithLinearLagrangeInterpolation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/LookupWithLinearPointSlopeInterpolation.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Lt.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Lte.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep25.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep50.h
     ${CMAKE_CURRENT_SOURCE_DIR}/MagnitudeSquared.h
     ${CMAKE_CURRENT_SOURCE_DIR}/MathOperations.h
     ${CMAKE_CURRENT_SOURCE_DIR}/MatrixDivide.h
@@ -288,7 +227,6 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Multiply.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Nan.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Nand.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Negate.h
     ${CMAKE_CURRENT_SOURCE_DIR}/NegativeInf.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Nor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Not.h
@@ -298,15 +236,8 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Or.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Outport.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Output.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/OutputFromLookupTable.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/P25ma.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/P50ma.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/P75ma.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Pi.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Plus.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point25.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point50.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Point75.h
     ${CMAKE_CURRENT_SOURCE_DIR}/PortsSubsystems.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Power.h
     ${CMAKE_CURRENT_SOURCE_DIR}/PowerOf10.h
@@ -314,11 +245,6 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeDimension.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeSampleTime.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ProbeWidth.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1a.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1b.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle2.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/RawAngle.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Reciprocal.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ReciprocalSquareRoot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Rem.h
@@ -326,15 +252,12 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/SawtoothGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalAttributes.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalCopy.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Signcorrected.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignedSquareRoot.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Sin.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sin2PiU.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SinCordic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Sincos.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SincosCordic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SincosLookup.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sine.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SineLookup.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Sinh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Sources.h
@@ -345,14 +268,9 @@ set(QuickInsert_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Tanh.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ToNonvirtualBus.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ToVirtualBus.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tocplx.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Transpose.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tsamp.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ud.h
     ${CMAKE_CURRENT_SOURCE_DIR}/UserDefinedFunctions.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Xor.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Zero.h
 )
 

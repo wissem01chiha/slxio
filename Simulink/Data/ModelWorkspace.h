@@ -9,10 +9,8 @@
 #include "DataSourceType.h"
 #include "Logger.h"
 #include "PlatformTypes.h"
+#include "DataPCH.h"
 
-#include <string>
-#include <unordered_map>
-#include <vector>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN

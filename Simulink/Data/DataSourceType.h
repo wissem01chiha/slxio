@@ -1,11 +1,12 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef DataSourceType_h
-#define DataSourceType_h
+#ifndef DATASOURCETYPE_H
+#define DATASOURCETYPE_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "DataPCH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -14,7 +15,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class DataSourceType
  * @brief
  */
-class SLXIO_APIEXPORT DataSourceType
+class SLXIO_APIEXPORT DataSourceType final 
 {
 public:
   enum class Type
@@ -47,4 +48,4 @@ private:
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 
-#endif // DataSourceType_h
+#endif // DATASOURCETYPE_H

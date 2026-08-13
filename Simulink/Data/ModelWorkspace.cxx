@@ -1,7 +1,5 @@
 #include "ModelWorkspace.h"
 
-#include "ErrorCode.h"
-
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 

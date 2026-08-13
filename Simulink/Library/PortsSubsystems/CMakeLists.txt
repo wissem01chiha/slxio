@@ -1,23 +1,17 @@
 set(PortsSubsystems_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/ActionPort.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/AtomicSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Codereusesubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Enable.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/EnabledAndTriggeredSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/EnabledSubsystem.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForEach.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ForEachSubsystem.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForIterator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ForIteratorSubsystem.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Function.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallFeedbackLatch.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallGenerator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallSplit.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionElement.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionElementCall.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/If.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/IfActionSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/In1.cxx
@@ -25,7 +19,6 @@ set(PortsSubsystems_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/Model.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Out1.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/OutBusElement.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Reset.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ResettableSubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Subsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SubsystemExamples.cxx
@@ -38,30 +31,23 @@ set(PortsSubsystems_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantAssemblySubsystem.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantModel.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantSubsystem.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/WhileIterator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/WhileIteratorSubsystem.cxx
 )
 
 set(PortsSubsystems_HDRS
-    ${CMAKE_CURRENT_SOURCE_DIR}/ActionPort.h
     ${CMAKE_CURRENT_SOURCE_DIR}/AtomicSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Codereusesubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Enable.h
     ${CMAKE_CURRENT_SOURCE_DIR}/EnabledAndTriggeredSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/EnabledSubsystem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForEach.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ForEachSubsystem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForIterator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ForIteratorSubsystem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Function.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallFeedbackLatch.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallSplit.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCallSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionElement.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FunctionElementCall.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.h
     ${CMAKE_CURRENT_SOURCE_DIR}/If.h
     ${CMAKE_CURRENT_SOURCE_DIR}/IfActionSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/In1.h
@@ -69,7 +55,6 @@ set(PortsSubsystems_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/Model.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Out1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/OutBusElement.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Reset.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ResettableSubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Subsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SubsystemExamples.h
@@ -82,7 +67,6 @@ set(PortsSubsystems_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantAssemblySubsystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantModel.h
     ${CMAKE_CURRENT_SOURCE_DIR}/VariantSubsystem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/WhileIterator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/WhileIteratorSubsystem.h
 )
 

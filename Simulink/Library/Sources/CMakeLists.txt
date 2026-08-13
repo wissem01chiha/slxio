@@ -2,142 +2,60 @@ set(Sources_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/BandLimitedWhiteNoise.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/ChirpSignal.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Clock.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Clock1.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Constant.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Converter.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CounterFreeRunning.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CounterLimited.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Deltafreq.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/DigitalClock.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/EnumeratedConstant.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptConstant.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSum1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForceToBeScalar.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FromFile.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FromSpreadsheet.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/FromWorkspace.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FromwsSignal1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Ground.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/In1.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/InBusElement.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Initialfreq.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Limitedcounter.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Lookup.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MathFunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ModelInfo.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Multiportswitch.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MultiportswitchE3df3653d217406.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Output.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Playback.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product2.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/PulseGenerator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Ramp.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/RandomNumber.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequence.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequenceInterpolated.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequenceStair.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/SampleTimeMath.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Signal1.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalEditor.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalGenerator.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/SineWave.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Starttime.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/Step.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Switch.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Targettime.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/UniformRandomNumber.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Vector.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/WaveformGenerator.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/WhiteNoise.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/WrapToZero.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
 )
 
 set(Sources_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/BandLimitedWhiteNoise.h
     ${CMAKE_CURRENT_SOURCE_DIR}/ChirpSignal.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Clock.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Clock1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Constant.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Constant1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Converter.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CounterFreeRunning.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CounterLimited.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Deltafreq.h
     ${CMAKE_CURRENT_SOURCE_DIR}/DigitalClock.h
     ${CMAKE_CURRENT_SOURCE_DIR}/EnumeratedConstant.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptConstant.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSum1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ForceToBeScalar.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FromFile.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FromSpreadsheet.h
     ${CMAKE_CURRENT_SOURCE_DIR}/FromWorkspace.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FromwsSignal1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Ground.h
     ${CMAKE_CURRENT_SOURCE_DIR}/In1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/InBusElement.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Initialfreq.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Limitedcounter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Lookup.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MathFunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ModelInfo.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Multiportswitch.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MultiportswitchE3df3653d217406.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Output.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Playback.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Product2.h
     ${CMAKE_CURRENT_SOURCE_DIR}/PulseGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Ramp.h
     ${CMAKE_CURRENT_SOURCE_DIR}/RandomNumber.h
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequence.h
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequenceInterpolated.h
     ${CMAKE_CURRENT_SOURCE_DIR}/RepeatingSequenceStair.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/SampleTimeMath.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Signal1.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalEditor.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SignalGenerator.h
     ${CMAKE_CURRENT_SOURCE_DIR}/SineWave.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Starttime.h
     ${CMAKE_CURRENT_SOURCE_DIR}/Step.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Switch.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Targettime.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
     ${CMAKE_CURRENT_SOURCE_DIR}/UniformRandomNumber.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Vector.h
     ${CMAKE_CURRENT_SOURCE_DIR}/WaveformGenerator.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/WhiteNoise.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/WrapToZero.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
 )
 
 

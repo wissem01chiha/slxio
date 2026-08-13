@@ -1,4 +1,4 @@
-slx_add_module(
+add_module(
   MODULE_NAME 
     Data
   MODULE_GROUP 
@@ -28,6 +28,9 @@ slx_add_module(
     DataSourceType.h
     IBlockParameters.h
     IBlockProperties.h
+    ILogging.h
+    ISignalAttributes.h
+    ICodeGenration.h
   MODULE_PCH_HEADERS
     DataPCH.h
     DataECH.h

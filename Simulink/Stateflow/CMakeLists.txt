@@ -1,1 +1,1 @@
-#slx_add_module(Simulink::Stateflow)
+#add_module(Simulink::Stateflow)

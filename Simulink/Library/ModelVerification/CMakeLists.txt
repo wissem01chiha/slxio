@@ -10,40 +10,6 @@ set(ModelVerification_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticLowerBound.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticRange.cxx
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticUpperBound.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Conjunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Conversion.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion1.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadOut.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadResolution.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadU.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Demux.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Disjunction.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Expander.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/FallRelop.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Falling.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Fixed.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Fold.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/GradientType.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/GradientVal.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Max.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MaxRelop.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MaxVal.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Memory.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Min.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MinRelop.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/MinVal.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Relop.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Rem.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Resolution.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/ResolutionType.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/RiseRelop.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Rising.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Steps.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tol.cxx
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
 )
 
 set(ModelVerification_HDRS
@@ -58,40 +24,6 @@ set(ModelVerification_HDRS
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticLowerBound.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticRange.h
     ${CMAKE_CURRENT_SOURCE_DIR}/CheckStaticUpperBound.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Conjunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Conversion.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion1.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadOut.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadResolution.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/DeadU.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Demux.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Disjunction.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Expander.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/FallRelop.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Falling.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Fixed.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Fold.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/GradientType.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/GradientVal.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Max.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MaxRelop.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MaxVal.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Memory.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Min.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MinRelop.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/MinVal.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Out.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Relop.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Rem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Resolution.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/ResolutionType.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/RiseRelop.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Rising.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Steps.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/Tol.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
 )
 
 

@@ -64,7 +64,7 @@ list(APPEND LIB_HDRS ${Sources_HDRS})
 list(APPEND LIB_HDRS ${String_HDRS})
 list(APPEND LIB_HDRS ${UserDefinedFunctions_HDRS})
 
-slx_add_module(
+add_module(
   MODULE_NAME 
     Library
   MODULE_GROUP 

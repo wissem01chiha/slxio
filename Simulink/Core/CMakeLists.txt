@@ -1,4 +1,4 @@
-slx_add_module(
+add_module(
   MODULE_NAME 
     Core
   MODULE_GROUP 

@@ -23,6 +23,6 @@ if(SLXIO_DOXYGEN_DOCUMENTATION)
     COMMENT "Generating ${PROJECT_NAME} API Documentation with Doxygen"
     VERBATIM)
 
-  slx_add_module(Utilities::Doxygen)
+  add_module(Utilities::Doxygen)
 
 endif()

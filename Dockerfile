@@ -6,10 +6,11 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CXX=/usr/bin/g++
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     cmake \
     git \
-    g++
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workdir
 COPY . /workdir
