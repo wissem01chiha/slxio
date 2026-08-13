@@ -1,0 +1,81 @@
+set(MatrixOperations_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/A.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/AElements.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ArrayProcessing.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ArrayProcessingSubsystem.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/B.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/BElements.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CreateDiagonalMatrix.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CrossProduct.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ElementProduct.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExpandScalar.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractDiagonal.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/HermitianTranspose.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Identitymatrix.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/In.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/In1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ishermitian.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Issymmetric.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Istriangular.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MathFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixConcatenate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixMultiply.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixSquare.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Neighborhood.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/NeighborhoodProcessingSubsystem.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/PermuteMatrix.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/PixelProcessing.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/PixelProcessingSubsystem.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Product.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Selector2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Selector3.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Submatrix.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Transpose.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+)
+
+set(MatrixOperations_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/A.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/AElements.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ArrayProcessing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ArrayProcessingSubsystem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/B.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/BElements.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CreateDiagonalMatrix.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CrossProduct.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ElementProduct.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExpandScalar.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractDiagonal.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HermitianTranspose.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Identitymatrix.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/In.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/In1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ishermitian.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Issymmetric.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Istriangular.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MathFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixConcatenate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixMultiply.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatrixSquare.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Neighborhood.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/NeighborhoodProcessingSubsystem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/PermuteMatrix.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/PixelProcessing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/PixelProcessingSubsystem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Product.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Selector2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Selector3.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Submatrix.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Transpose.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+)
+
+
+set(MatrixOperations_HDRS ${MatrixOperations_HDRS} PARENT_SCOPE)
+set(MatrixOperations_SRCS ${MatrixOperations_SRCS} PARENT_SCOPE)

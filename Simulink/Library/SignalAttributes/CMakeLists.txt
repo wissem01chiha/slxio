@@ -1,0 +1,53 @@
+set(SignalAttributes_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/BusToVector.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Conversion.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversionInherited.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagationExamples.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeScalingStrip.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DtsReference.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptGatewayOut.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Probe.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateTransition.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignalConversion.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignalSpecification.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/UnitConversion.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/WeightedSampleTime.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Width.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+)
+
+set(SignalAttributes_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/BusToVector.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Conversion.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversion.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeConversionInherited.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagationExamples.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeScalingStrip.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DtsReference.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptGatewayOut.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Probe.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateTransition.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignalConversion.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SignalSpecification.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UnitConversion.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/WeightedSampleTime.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Width.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+)
+
+
+set(SignalAttributes_HDRS ${SignalAttributes_HDRS} PARENT_SCOPE)
+set(SignalAttributes_SRCS ${SignalAttributes_SRCS} PARENT_SCOPE)

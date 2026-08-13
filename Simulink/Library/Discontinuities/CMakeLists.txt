@@ -1,0 +1,97 @@
+set(Discontinuities_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Backlash.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CoulombViscousFriction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dc.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeadZone.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeadZoneDynamic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Delay.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeltaFallLimit.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeltaRiseLimit.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Diff.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DifferenceInputs1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DifferenceInputs2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/HitCrossing.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lo.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lowerrelop1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Pwm.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quantizer.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateLimiter.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateLimiterDynamic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Relay.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SampleTime.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Saturation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SaturationDynamic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sign.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/UGtLo.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/UGteUp.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Up.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Upperrelop.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/VariablePulseGenerator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/WrapToZero.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ZeroOrderHold.cxx
+)
+
+set(Discontinuities_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Backlash.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CoulombViscousFriction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypePropagation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dc.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeadZone.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeadZoneDynamic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Delay.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeltaFallLimit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DeltaRiseLimit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Diff.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DifferenceInputs1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DifferenceInputs2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gain1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HitCrossing.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lo.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lowerrelop1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Pwm.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quantizer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateLimiter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RateLimiterDynamic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Relay.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SampleTime.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Saturation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SaturationDynamic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sign.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Switch2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UGtLo.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UGteUp.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Up.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Upperrelop.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/VariablePulseGenerator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/WrapToZero.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ZeroOrderHold.h
+)
+
+
+set(Discontinuities_HDRS ${Discontinuities_HDRS} PARENT_SCOPE)
+set(Discontinuities_SRCS ${Discontinuities_SRCS} PARENT_SCOPE)

@@ -1,0 +1,107 @@
+set(LogicandBitOperations_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/And.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitClear.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitSet.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitToIntegerConverter.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitwiseOperator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CombinatorialLogic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Compare.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CompareToConstant.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CompareToZero.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DelayInput1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectChange.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectDecrease.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectFallNegative.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectFallNonpositive.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectIncrease.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectRiseNonnegative.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectRisePositive.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dtprop1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dtprop2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractBits.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractDesiredBits.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator3.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator4.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator5.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptLogicalOperator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptRelationalOperator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FloatExtractBits.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntegerToBitConverter.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntervalTest.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntervalTestDynamic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lo.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/LogicalOperator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/LowerLimit.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/LowerTest.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ModifyScalingOnly.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Negative.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Nonnegative.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Nonpositive.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Positive.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/RelationalOperator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShiftArithmetic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Up.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpperLimit.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpperTest.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+)
+
+set(LogicandBitOperations_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/And.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitClear.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitSet.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitToIntegerConverter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/BitwiseOperator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CombinatorialLogic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Compare.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CompareToConstant.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CompareToZero.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Constant.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DelayInput1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectChange.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectDecrease.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectFallNegative.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectFallNonpositive.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectIncrease.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectRiseNonnegative.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DetectRisePositive.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dtprop1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dtprop2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractBits.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ExtractDesiredBits.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator3.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator4.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptBitwiseOperator5.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptLogicalOperator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptRelationalOperator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FloatExtractBits.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntegerToBitConverter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntervalTest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IntervalTestDynamic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Lo.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/LogicalOperator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/LowerLimit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/LowerTest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ModifyScalingOnly.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Negative.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Nonnegative.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Nonpositive.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Positive.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RelationalOperator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ShiftArithmetic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Up.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpperLimit.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/UpperTest.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+)
+
+
+set(LogicandBitOperations_HDRS ${LogicandBitOperations_HDRS} PARENT_SCOPE)
+set(LogicandBitOperations_SRCS ${LogicandBitOperations_SRCS} PARENT_SCOPE)

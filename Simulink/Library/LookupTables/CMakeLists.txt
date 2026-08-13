@@ -1,0 +1,89 @@
+set(LookupTables_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp25.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp50.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp75.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Castu16en16.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Cos2PiU.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Cosine.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/D1DLookupTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/D1stOr4thQuad.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/D2DLookupTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DirectLookupTableND.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gtep75.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetryCosine.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetrySine.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/In1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/InputToLookupTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/InterpolationUsingPrelookup.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/LookupTableDynamic.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep25.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep50.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/NDLookupTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Negate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutputFromLookupTable.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/P25ma.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/P50ma.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/P75ma.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point25.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point50.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point75.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Prelookup.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1a.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1b.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/RawAngle.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Signcorrected.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sin2PiU.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sine.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+)
+
+set(LookupTables_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp25.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp50.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Amp75.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Castu16en16.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Cos2PiU.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Cosine.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/D1DLookupTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/D1stOr4thQuad.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/D2DLookupTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DirectLookupTableND.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Gtep75.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetryCosine.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/HandleQuarterSymmetrySine.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/In1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InputToLookupTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InterpolationUsingPrelookup.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/LookUpTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/LookupTableDynamic.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep25.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ltep50.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/NDLookupTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Negate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutputFromLookupTable.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/P25ma.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/P50ma.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/P75ma.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point25.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point50.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Point75.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Prelookup.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1a.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle1b.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Quadhandle2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/RawAngle.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Signcorrected.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sin2PiU.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sine.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+)
+
+
+set(LookupTables_HDRS ${LookupTables_HDRS} PARENT_SCOPE)
+set(LookupTables_SRCS ${LookupTables_SRCS} PARENT_SCOPE)

@@ -1,0 +1,101 @@
+set(AdditionalMathDiscrete_SRCS
+    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Datatypeprop.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Datatypeprop1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DelayStateX.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DenNoLead.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dencoef.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DirectLinkMatrixD.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dot1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dot2.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Downcast.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Downcast1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DowncastNextStateX.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/DowncastOutputY.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptConstant.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptGatewayIn.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptRelationalOperator3.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSampleTimeMath.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSum1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch4.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ground1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/InputMatrixB.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Mux.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Num.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Numcoef.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutputMatrixC.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/StateMatrixA.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SumOutputEquation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SumStateEquation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/TappedDelay.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.cxx
+)
+
+set(AdditionalMathDiscrete_HDRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalDiscrete.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/AdditionalMathIncrementDecrement.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DataTypeDuplicate1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Datatypeprop.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Datatypeprop1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementRealWorld.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementStoredInteger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementTimeToZero.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DecrementToZero.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DelayStateX.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DenNoLead.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dencoef.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DirectLinkMatrixD.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dot1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Dot2.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Downcast.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Downcast1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DowncastNextStateX.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/DowncastOutputY.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixedPointStateSpace.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptConstant.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypeDuplicate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptDataTypePropagation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptGatewayIn.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptRelationalOperator3.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSampleTimeMath.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSum1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FixptSwitch4.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Ground1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementRealWorld.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/IncrementStoredInteger.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InputMatrixB.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Mux.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Num.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Numcoef.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutputMatrixC.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/StateMatrixA.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Sum.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SumOutputEquation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SumStateEquation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/TappedDelay.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIi.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/TransferFcnDirectFormIiTimeVarying.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/U.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Y.h
+)
+
+
+set(AdditionalMathDiscrete_HDRS ${AdditionalMathDiscrete_HDRS} PARENT_SCOPE)
+set(AdditionalMathDiscrete_SRCS ${AdditionalMathDiscrete_SRCS} PARENT_SCOPE)
