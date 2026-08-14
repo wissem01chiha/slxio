@@ -153,25 +153,29 @@ This section describes how to build SLXIO, see  [2.1](#21-dependencies) describe
 
 Currently, the only supported build system is CMake. Other build systems are not planned at the moment, though they may be considered in future discussions.
 
-All core dependencies are vendored with the source code in the [ThirdParty](./ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build or fetch rules. However, large third-party modules, SDKs, and frameworks are not vendored, as doing so would significantly increase repository size and build times.
-
-Instead, these dependencies default to system-wide installations when available. If a required dependency is not found, the corresponding features are automatically disabled or skipped during the build process.
+All core dependencies are vendored with the source code in the [ThirdParty](./ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build or fetch rules. However, large third-party modules, SDKs, and frameworks are not vendored, as doing so would significantly increase repository size and build times. Instead, these dependencies default to system-wide installations when available. If a required dependency is not found, the corresponding features are automatically disabled or skipped during the build process.
 
 
-| Library                                            | Version | Introduced In                                             | Depends On                            | Notes                                   |
-|----------------------------------------------------|---------|-----------------------------------------------------------|---------------------------------------|-----------------------------------------|
-| [slog](https://github.com/kala13x/slog)            | Latest  | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                         |
-| [json-c](https://github.com/json-c/json-c)         | Latest  | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                         |
-| [zlib](https://github.com/madler/zlib)             | 1.2.8   | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                         |
-| [libzip](https://github.com/nih-at/libzip)         | 1.11.4  | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) | [zlib](https://github.com/madler/zlib)|                                         |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2)  | 2.14.5  | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                         |
-| [TinyXML2](https://github.com/leethomason/tinyxml2)|         | [v0.1.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       | Not yet used                            |
-| [HDF5](https://github.com/HDFGroup/hdf5)           | 1.14.1  | [v0.3.0](https://github.com/wissem01chiha/SLXIO/releases) | [zlib](https://github.com/madler/zlib)| experimental                            |
-| [matio](https://github.com/tbeu/matio)             | 1.5.28  | [v0.3.0](https://github.com/wissem01chiha/SLXIO/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
-| [cxxopts](https://github.com/jarro2783/cxxopts)    | 3.3.1   | [v0.3.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       | experimental                             |
-| [doctest](https://github.com/doctest/doctest)      | 1.14.0  | [v0.3.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                          |
-| [libuv](https://github.com/libuv/libuv)            |         | [v0.3.0](https://github.com/wissem01chiha/SLXIO/releases) |                                       |                                          |
-
+| Library       | Version| Required | Available Since | Depends On | Notes |
+|---------------|--------|----------|----------|------|----------|
+| json-c        | Latest | Core     | v0.1.0   | -    |          |
+| zlib          | Latest | Core     | v0.1.0   | -    |          |
+| libzip        | Latest | Core     | v0.1.0   | zlib |          |
+| libxml2       | Latest | Core     | v0.1.0   | -    |          |
+| cxxopts       | Latest | Optional | v0.3.0   | -    |          |
+| doctest       | Latest | Devel    | v0.3.0   | -    |          |
+| libuv         | Latest | Optional | v0.3.0   | -    |          |
+| expat         | Latest | Optional |       | -    |          |
+| fast_float    | Latest | Core     |       | -    |          |
+| fmi-library   | Latest | Optional |       | libxml2, zlib | |
+| libtex        | Latest | Optional |       | -    |          |
+| libxlsxwriter | Latest | Optional |       | zlib |          |
+| loguru        | Latest | Optional |       | -    |          |
+| matio         | Latest | Optional | v0.3.0   | zlib |          |
+| npio          | Latest | Optional |       | -    |          |
+| pybind11      | Latest | Optional |       | Python |        |
+| rapidcsv      | Latest | Optional |       | -    | |
+| spdlog        | Latest | Core     |       | -    | |
 
 #### 3.1.1 zlib
 
