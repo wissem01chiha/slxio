@@ -1,0 +1,36 @@
+target_sources(SimulinkLibrary
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCaller.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/InitializeFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/InterpretedMatlabFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Level2MatlabSFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatlabFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatlabSystem.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ReinitializeFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResetFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionBuilder.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionExamples.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.cxx
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/CCaller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/CFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Fcn.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FunctionCaller.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InitializeFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/InterpretedMatlabFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Level2MatlabSFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatlabFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MatlabSystem.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ReinitializeFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ResetFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionBuilder.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SFunctionExamples.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SimulinkFunction.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/TerminateFunction.h
+)

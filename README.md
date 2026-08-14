@@ -4,22 +4,26 @@ SLXIO – SIMULINK SLX File I/O Library
 
 ## Status
 
-[![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml)
-[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)
-[![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)
-[![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)
-[![Documentation](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/documentation.yml)
-[![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
-[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)
-![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
-[![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
-![Coveralls](https://img.shields.io/coverallsCoverage/github/wissem01/slxio)
-[![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/slxio/overview/master)
-[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
+[![Windows](https://github.com/wissem01chiha/SLXIO/actions/workflows/windows.yml/badge.svg?branch=master)](https://github.com/wissem01chiha/SLXIO/actions/workflows/windows.yml)
+[![MinGW](https://github.com/wissem01chiha/SLXIO/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/mingw.yml)
+[![Ubuntu](https://github.com/wissem01chiha/SLXIO/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/ubuntu.yml)
+[![MacOS](https://github.com/wissem01chiha/SLXIO/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/macos.yml)
+[![Documentation](https://github.com/wissem01chiha/SLXIO/actions/workflows/documentation.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/documentation.yml)
+[![CodeQL](https://github.com/wissem01chiha/SLXIO/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/codeql.yml)
+[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/SLXIO)
+[![Sanitizer](https://github.com/wissem01chiha/SLXIO/actions/workflows/sanitizer.yml/badge.svg?branch=develop)](https://github.com/wissem01chiha/SLXIO/actions/workflows/sanitizer.yml)
+![GitHub License](https://img.shields.io/github/license/wissem01chiha/SLXIO)
+[![Release](https://github.com/wissem01chiha/SLXIO/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/release.yml)
+[![codecov](https://codecov.io/gh/wissem01chiha/SLXIO/graph/badge.svg?token=EBZSHLWF78)](https://codecov.io/gh/wissem01chiha/SLXIO)
+[![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/overview/master)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e91d3a5f2f39464bb6dcf2d6b582541b)](https://app.codacy.com/gh/wissem01chiha/SLXIO/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/SLXIO/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/SLXIO/master)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=wissem01chiha_slxio&metric=bugs)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)
+[![Quality gate status](https://sonarcloud.io/api/project_badges/measure?project=wissem01chiha_slxio&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)
 
 <!-- omit in toc -->
 ## Table of Contents
-- [SLXIO](#slxio)
+- [SLXIO](#SLXIO)
   - [Status](#status)
   - [1.0 Overview](#10-overview)
     - [1.1 Features](#11-features)
@@ -35,7 +39,7 @@ SLXIO – SIMULINK SLX File I/O Library
     - [3.1 Dependencies](#31-dependencies)
       - [3.1.1 zlib](#311-zlib)
       - [3.1.1 HDF5](#311-hdf5)
-    - [3.2 Building Slxio](#32-building-slxio)
+    - [3.2 Building SLXIO](#32-building-SLXIO)
       - [3.2.1 Quick Build Guide](#321-quick-build-guide)
       - [3.2.2 Configure Options](#322-configure-options)
     - [3.3 Platform Support](#33-platform-support)
@@ -49,35 +53,35 @@ SLXIO – SIMULINK SLX File I/O Library
 
 ## 1.0 Overview
 
-**Slxio** is an open‑source C++14 library for reading, writing, visualizing, and exporting [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+SLXIO is an open‑source C++14 library for reading, writing, visualizing, and exporting [Simulink](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 The project is designed as a lightweight alternative to MATLAB’s proprietary libraries and runtime, similar in spirit to the [matio](https://github.com/tbeu/matio) library for `.mat` files. Its goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python, Java, and others via C++ bindings.
 
 The project was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava). It has since been ported to C++ and refactored into a highly modular architecture.
 
-**Slxio** does not aim to support all Simulink features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
+SLXIO does not aim to support all Simulink features, at least at the current time where we are writing these lines, but rather focuses on the most commonly used ones. The library provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
-To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
+To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/SLXIO/releases),for building the library from source, see the same page for detailed instructions.
 
 Examples and tutorials for beginners are hosted with the project and can be found on the [Tutorials](Tutorials) page, along with their source code. Many of the features are not yet implemented or tested. For a detailed list of features and their support status, see the [feature](#11-features) section.
 
 The project is under active development, and contributions are highly encouraged. See the [Contributing](.github/CONTRIBUTING.md) guide for basics on Git, CMake, C++, and workflow, and the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
 
 > [!NOTE]
->  This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published.
+>  This project is still in an experimental phase. It is not yet ready for production use, and no stable release has been published, The API may change frequently. 
 
 
 ### 1.1 Features
 
 - Read [Simulink](https://www.mathworks.com/products/simulink.html) internal block‑diagram files into native C++ data structures.
 - Export model hierarchies into [JSON](https://www.json.org/json-en.html), [HDF5](https://www.hdfgroup.org/solutions/hdf5/), or [Graphviz](https://graphviz.org/)‑compatible formats.
-- Edit metadata and parameters, then save changes back into `.slx` files. This feature may be delayed because Simulink files follow the [Opc Convention]() and the archive layout changes between versions. We currently maintain the [libopc](https://github.com/wissem01chiha/libopc) project to provide a portable, cross‑version abstraction for editing.
+- Edit metadata and parameters, then save changes back into `.slx` files. This feature may be delayed because Simulink files follow the [Opc Convention](https://en.wikipedia.org/wiki/Open_Packaging_Conventions) and the archive layout changes between versions. We currently maintain the [libopc](https://github.com/wissem01chiha/libopc) project to provide a portable, cross‑version abstraction for editing.
 - Perform static analysis on Simulink models and generate reports in [PDF](https://en.wikipedia.org/wiki/PDF) or [HTML](https://www.geeksforgeeks.org/html/html-web-page-format/).
-- Visualize Simulink models interactively. For now, only the [Qt](https://www.qt.io/) backend is supported. Other 2D graphing engines or tools are open for discussion — please feel free to start one [here](https://github.com/wissem01chiha/slxio/discussions).
+- Visualize Simulink models interactively. For now, only the [Qt](https://www.qt.io/) backend is supported. Other 2D graphing engines or tools are open for discussion — please feel free to start one [here](https://github.com/wissem01chiha/SLXIO/discussions).
 
 ### 1.2 Supported MATLAB
 
-**Slxio** aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
+SLXIO aims to support MATLAB releases from R2018a to R2025a. Currently, the primary supported versions are R2019a and R2018a. Additional versions will be progressively supported in future project releases.
 
 > [!NOTE]
 > Some new features introduced in the graphical interface (e.g., layout, formatting, annotations) by [MathWorks](https://www.mathworks.com/) may not be available, as the project focuses on core model/library block diagram data.
@@ -86,7 +90,7 @@ The project is under active development, and contributions are highly encouraged
 
 At present, there is no official documentation from MathWorks regarding the slx data format or XML schema rules. As a result, this project relies on reverse engineering and interpretation of actual compressed slx files.
 
-To ensure compatibility when using slxio with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.
+To ensure compatibility when using SLXIO with unsupported Simulink versions, we recommend exporting models to one of the supported versions before reading them. This process may require a valid MATLAB license.
 For more information, see: [Simulink Export to Version](https://www.mathworks.com/help/simulink/slref/simulink.exporttoversion.html).
 
 #### 1.2.1 MATLAB Regression Testing Matrix
@@ -116,22 +120,21 @@ Feel free to  contact the maintainer through email at [mail](mailto:chihawissem0
 
 ### 1.4 Contributing
 
-If you are interested in collaborating, please see the [CONTRIBUTING](.github/CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).
-Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
+If you are interested in collaborating, please see the [CONTRIBUTING](CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)). Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
 
 ### 2.0 Installation
 
 #### 2.1 Binary Release
 
-The easiest way to install is to visit the [Releases page](https://github.com/wissem01chiha/slxio/releases) and download the latest release for your platform.
+The easiest way to install is to visit the [Releases page](https://github.com/wissem01chiha/SLXIO/releases) and download the latest release for your platform, 
 
 #### 2.2 vcpkg
 
 > [!NOTE]
-> `slxio` is not yet available on [vcpkg](https://github.com/microsoft/vcpkg), once it is published, you will be able to install it using:
+> `SLXIO` is not yet available on [vcpkg](https://github.com/microsoft/vcpkg), once it is published, you will be able to install it using:
 >
 > ```bash
-> vcpkg install slxio
+> vcpkg install SLXIO
 > ```
 
 #### 2.3 Conan Recipe
@@ -139,34 +142,40 @@ The easiest way to install is to visit the [Releases page](https://github.com/wi
 See [Conan](https://github.com/conan-io/conan).
 
 > [!NOTE]
-> `slxio` is not yet available on the Conan package manager, once it is published, you will be able to add it to your project using a Conan recipe.
+> `SLXIO` is not yet available on the Conan package manager, once it is published, you will be able to add it to your project using a Conan recipe.
 
 
 ## 3.0 Building from Source
 
-This section describes how to build slxio, see  [2.1](#21-dependencies) describes the dependencies,
+This section describes how to build SLXIO, see  [2.1](#21-dependencies) describes the dependencies,
 
 ### 3.1 Dependencies
 
-Slxio has its own modular build wrapper, written on top of CMake, similar to many open‑source projects.
-All core dependencies are vendored with the source code in the [ThirdParty](/ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build/fetch rules.
-Optional dependencies may either use system‑wide installations or be fetched externally depending on configuration options, via CMake package managers or other internal helpers.
+Currently, the only supported build system is CMake. Other build systems are not planned at the moment, though they may be considered in future discussions.
+
+All core dependencies are vendored with the source code in the [ThirdParty](./ThirdParty/) directory to maximize platform compatibility and reduce reliance on external build or fetch rules. However, large third-party modules, SDKs, and frameworks are not vendored, as doing so would significantly increase repository size and build times. Instead, these dependencies default to system-wide installations when available. If a required dependency is not found, the corresponding features are automatically disabled or skipped during the build process.
 
 
-| Library                                            | Version | Introduced In                                             | Depends On                            | Notes                                   |
-|----------------------------------------------------|---------|-----------------------------------------------------------|---------------------------------------|-----------------------------------------|
-| [slog](https://github.com/kala13x/slog)            | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
-| [json-c](https://github.com/json-c/json-c)         | Latest  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
-| [zlib](https://github.com/madler/zlib)             | 1.2.8   | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
-| [libzip](https://github.com/nih-at/libzip)         | 1.11.4  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)|                                         |
-| [libxml2](https://gitlab.gnome.org/GNOME/libxml2)  | 2.14.5  | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                         |
-| [TinyXML2](https://github.com/leethomason/tinyxml2)|         | [v0.1.0](https://github.com/wissem01chiha/slxio/releases) |                                       | Not yet used                            |
-| [HDF5](https://github.com/HDFGroup/hdf5)           | 1.14.1  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib)| experimental                            |
-| [matio](https://github.com/tbeu/matio)             | 1.5.28  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) | [zlib](https://github.com/madler/zlib), [HDF5](https://github.com/HDFGroup/hdf5) |  experimental |
-| [cxxopts](https://github.com/jarro2783/cxxopts)    | 3.3.1   | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       | experimental                             |
-| [doctest](https://github.com/doctest/doctest)      | 1.14.0  | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
-| [libuv](https://github.com/libuv/libuv)            |         | [v0.3.0](https://github.com/wissem01chiha/slxio/releases) |                                       |                                          |
-
+| Library       | Version| Required | Available Since | Depends On | Notes |
+|---------------|--------|----------|----------|------|----------|
+| json-c        | Latest | Core     | v0.1.0   | -    |          |
+| zlib          | Latest | Core     | v0.1.0   | -    |          |
+| libzip        | Latest | Core     | v0.1.0   | zlib |          |
+| libxml2       | Latest | Core     | v0.1.0   | -    |          |
+| cxxopts       | Latest | Optional | v0.3.0   | -    |          |
+| doctest       | Latest | Devel    | v0.3.0   | -    |          |
+| libuv         | Latest | Optional | v0.3.0   | -    |          |
+| expat         | Latest | Optional |       | -    |          |
+| fast_float    | Latest | Core     |       | -    |          |
+| fmi-library   | Latest | Optional |       | libxml2, zlib | |
+| libtex        | Latest | Optional |       | -    |          |
+| libxlsxwriter | Latest | Optional |       | zlib |          |
+| loguru        | Latest | Optional |       | -    |          |
+| matio         | Latest | Optional | v0.3.0   | zlib |          |
+| npio          | Latest | Optional |       | -    |          |
+| pybind11      | Latest | Optional |       | Python |        |
+| rapidcsv      | Latest | Optional |       | -    | |
+| spdlog        | Latest | Core     |       | -    | |
 
 #### 3.1.1 zlib
 
@@ -176,7 +185,7 @@ Support for compressed [SLX](), [JSON](), [MAT](), and [h5]() file formats requi
 
 Support for MATLAB [MAT](https://www.mathworks.com/help/pdf_doc/matlab/matfile_format.pdf) files, used for reading Simulink-related data structures, is provided through [matio](https://github.com/tbeu/matio), which itself requires the HDF5 library. Additionally, for serializing SLX files into standard `.h5` data files, SLXIO depends on the HDF5 library. If the library is not found, it is automatically fetched and built via CPM. However, it is recommended to use a prebuilt binary, as this significantly reduces the build and compilation time.
 
-### 3.2 Building Slxio
+### 3.2 Building SLXIO
 
 Building the library from source can be time‑consuming depending on your system configuration and setup.
 For a quicker installation, we recommend using the binary distribution for each platform
@@ -189,146 +198,232 @@ cmake -G "MinGW Makefiles" ..
 cmake --build .
 cmake --install .
 ```
+
 #### 3.2.2 Configure Options
 
-| Option               | Description                                                       | Default | Supported Since |
-|----------------------|-------------------------------------------------------------------|---------|-----------------|
-| BUILD_SHARED_LIBS    | Build as shared libraries                                         | OFF     |                 |
-| ENABLE_PYTHON_BINDING| Enable building Python interface                                  | ON      |                 |
-| ENABLE_TESTING       | Build C++ unit tests                                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_BINDING_TEST  | Build binding interface tests                                     | ON      |                 |
-| ENABLE_NAMESPACE     | Enable global namespace                                           | TRUE    |                 |
-| ENABLE_ABI_NAMESPACE | Enable ABI namespace (requires ENABLE_NAMESPACE=ON)               | ON      |                 |
-| USE_LOCAL_LIBS       | Use locally installed libraries                                   | ON      |                 |
-| ENABLE_OPENMP        | Enable compiling with OpenMP support                              | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_AVX           | Enable AVX optimizations where available                          | ON      |                 |
-| ENABLE_HDF5          | Enable HDF5 support                                               | ON      | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| ENABLE_MATLAB        | Enable MATLAB support                                             | OFF     |                 |
-| ENABLE_PKGCONFIG     | Generate pkg-config file                                          | ON      |                 |
-| ENABLE_INSTALL       | Enable installation after build                                   | OFF     |                 |
-| ENABLE_SANITIZER     | Enable sanitizers (ASan/UBSan/etc.)                               | OFF     |                 |
-| ENABLE_CLANG_TIDY    | Enable static analysis with clang-tidy                            | OFF     |                 |
-| ENABLE_CPPCHECK      | Enable static analysis with cppcheck                              | ON      |                 |
-| ENABLE_CLANG_FORMAT  | Enable Clang-Format support mode                                  | ON      |                 |
-| ENABLE_COVERAGE      | Enable code coverage reporting (GCC/Clang)                        | OFF     |                 |
-| ENABLE_FUZZING       | Enable fuzzing support                                            | OFF     |                 |
-| ENABLE_DOCUMENTATION | Enable documentation generation                                   | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| BUILD_EXAMPLES       | Build example applications                                        | OFF     | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-| CMAKE_INSTALL_PREFIX | Default install path                                              | `${CMAKE_BINARY_DIR}/install` | [0.1.0](https://github.com/wissem01chiha/slxio/releases) |
-
-
+| Option                          | Description                                                                 | Default | Supported Since |
+|---------------------------------|-----------------------------------------------------------------------------|---------|-----------------|
+| SLXIO_BUILD_SHARED_LIBS         | Build SLXIO as shared libraries                                             | OFF     |                 |
+| SLXIO_64BIT_IDENTIFIERS         | Enable 64‑bit identifiers (`std::uint64_t`)                                 | ON      |                 |
+| SLXIO_BUILD_TESTING             | Enable unit and integration testing                                         | ON      |                 |
+| SLXIO_ENABLE_TESTING_COVERAGE   | Enable coverage reports when testing is ON                                  | ON      |                 |
+| SLXIO_BUILD_FUZZ_TESTING        |  Enable build fuzzy tests                                                   | OFF     |                 |
+| SLXIO_BUILD_EXAMPLES            | Compile example scripts                                                     | OFF     |                 |
+| SLXIO_SIMULINK_DEFAULT_VERSION  | Default Simulink version (auto‑detected if installed)                       | R2018b  |                 |
+| SLXIO_WITH_INTERACTION          | Build utilities like console applications                                   | ON      |                 |
+| SLXIO_BUILD_PYTHON_BINDINGS     | Enable Python bindings                                                      | OFF     |                 |
+| SLXIO_BUILD_JAVA_BINDINGS       | Enable Java bindings                                                        | OFF     |                 |
+| SLXIO_FORCE_LOCAL_MODULES       | Use only vendored third_party modules                                       | ON      |                 |
+| SLXIO_USE_SYSTEM_MODULES        | Use system‑wide installed modules when found                                | OFF     |                 |
+| SLXIO_DISABLE_VENDORED_MODULES  | Disable vendored third_party modules                                        | OFF     |                 |
+| SLXIO_INTSALL_THIRDPARTY_LISENCES | Install vendored third_party module licenses                              | ON      |                 |
+| SLXIO_BUILD_THIRDPARTY_TESTING  | Build third‑party module regression tests (requires testing enabled)        | OFF     |                 |
+| SLXIO_BUILD_THIRDPARTY_TOOLS    | Build third‑party module extra tools or scripts                             | OFF     |                 |
+| SLXIO_SLDD                      | Enable Simulink Data Dictionary (`*.sldd`) support                          | ON      |                 |
+| SLXIO_MAT                       | Enable MATLAB MAT file support                                              | OFF     |                 |
+| SLXIO_NPY                       | Enable NumPy NPY file support                                               | OFF     |                 |
+| SLXIO_NPZ                       | Enable NumPy NPZ file support                                               | OFF     |                 |
+| SLXIO_XLSX                      | Enable Microsoft Excel (`*.xlsx`) file support                              | OFF     |                 |
+| SLXIO_WITH_HDF5                 | Enable HDF5 library support                                                 | ON      |                 |
+| SLXIO_PIC                       | Enable position‑independent code (PIC)                                      | ON      |                 |
+| SLXIO_WITH_VISUALIZATION        | Enable visualization modules (may require extra third‑parties)              | ON      |                 |
+| SLXIO_MDL                       | Enable legacy Simulink model (`*.mdl`) support (experimental)               | OFF     |                 |
+| SLXIO_INSTALL                   | Enable installation rules on target machine                                 | ON      |                 |
+| SLXIO_DEFAULT_BUILD_TYPE        | Override default build type                                                 | Release |                 |
+| SLXIO_WITH_PKGCONFIG            | Generate pkg‑config file during build                                       | ON      |                 |
+| SLXIO_DOXYGEN_DOCUMENTATION     | Enable Doxygen documentation generation                                     | OFF     |                 |
+| SLXIO_ASAN                      | Enable AddressSanitizer (ASan)                                              | OFF     |                 |
+| SLXIO_MSAN                      | Enable MemorySanitizer (MSan)                                               | OFF     |                 |
+| SLXIO_TSAN                      | Enable ThreadSanitizer (TSan)                                               | OFF     |                 |
+| SLXIO_UBSAN                     | Enable UndefinedBehaviorSanitizer (UBSan)                                   | OFF     |                 |
+| SLXIO_THIRDPARTY_MSAN           | Enable third‑party MemorySanitizer                                          | OFF     |                 |
+| SLXIO_THIRDPARTY_ASAN           | Enable third‑party AddressSanitizer                                         | OFF     |                 |
+| SLXIO_THIRDPARTY_UBSAN          | Enable third‑party UndefinedBehaviorSanitizer                               | OFF     |                 |
+| SLXIO_WITH_OPENMP               | Enable OpenMP support                                                       | ON      |                 |
+| SLXIO_ENABLE_WERROR             | Treat warnings as errors                                                    | OFF     |                 |
+| SLXIO_ENABLE_WALL               | Enable all compiler warnings                                                | ON      |                 |
+| SLXIO_ENABLE_WALL               | Enable all compiler warnings                                                | ON      |                 |
+| SLXIO_ENABLE_BUILD_SUMMARY      | Option to enable/disable build summary logging during cmake configuration   | ON      |                 |
 
 ### 3.3 Platform Support
 
-| OS          | Compiler    | Version              | Arch              |  Status |
-|-------------|-------------|----------------------|-------------------|--------|
-| Windows 11  | MSVC        | 19.1x                | x64, Win32        |  NA     |
-| Windows 11  | MSVC        | 19.2x                | x64, Win32, ARM64 |  NA     |
-| Windows 11  | MSVC        | 19.43                | x64, Win32, ARM64 |  [![Windows](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/windows.yml) |
-| Windows 11  | MSVC        | 19.50                | x64, ARM64        |  NA     |
-| Windows 11  | MinGW‑w64   | GCC 11.2.0, 15.2.0   | x64               |  [![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml) | NA |
-| Ubuntu 22.04| GCC         | 11.2.0, 13.3.0       | x64               |  [![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml) |
-| Ubuntu 22.04| Clang       | 14.0, 15.0           | x64               | NA     |
-| macOS 14    | Apple Clang | 14.0, 15.0           | arm64, x64        |  [![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)     |
+SLXIO supports Windows, Linux, and macOS platforms. It primarily uses widely adopted open-source compilers, with compiler support ported for each platform. Other platforms are not supported. For detailed platform and compiler support information, refer to the table below.
 
-
+| OS                   | Compiler     | Architecture | Status    |
+|----------------------|--------------|--------------|-----------|
+| Windows (VS 2022)    | MSVC         | Win32        |[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)           |
+| Windows (VS 2022)    | MSVC         | x64          |[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)           |
+| Windows (VS 2022)    | Clang        | Win32        |[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)           |
+| Windows (VS 2022)    | Clang        | x64          |[![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/slxio)           |
+| Windows              | MinGW        | x64          |[![MinGW](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/mingw.yml)           |
+| macOS (latest)       | Apple Clang  | Native*      |[![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)           |
+| macOS (latest)       | GCC 13       | Native*      |[![MacOS](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/macos.yml)           |
+| Ubuntu (latest)      | GCC          | x64          |[![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |
+| Ubuntu (latest)      | Clang 15     | x64          |[![Ubuntu](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/ubuntu.yml)           |
 
 ## 4.0 Testing
 
-Slxio has moved from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight and efficient testing since version 0.1.0.
-Testing is enabled via the CMake option `ENABLE_TESTING`.
+SLXIO has migrated from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight andthe early refactoring stages. Although GoogleTest offers significantly more features than doctest, the latter was chosen for its simplicity and reduced compilation overhead.
 
+By default, test builds are disabled. They can be enabled using the CMake option `SLXIO_BUILD_TESTING`. Refer to the #322-configure-options section for more details.
 
 ### 4.1 Running Tests
+
 To run all unit tests after building, use:
 
 ```bash
 ctest -C Debug --output-on-failure
 ```
-This will execute all project unit tests by default.
 
+This command executes all available unit tests and displays detailed output for any failing tests.
 
-> **Note:** Code coverage is not yet supported.
+> **Note:** Code coverage is only supported when both `SLXIO_BUILD_TESTING` and `SLXIO_BUILD_TESTING_COVERAGE` are set to `ON`.
+
+### 4.2 Generating Code Coverage Reports 
+
+> **Note:** The following instructions are written for Ubuntu but are generally applicable to any Unix-like platform that supports GCC, gcov, and lcov.
+
+When coverage support is enabled, SLXIO is compiled with coverage instrumentation flags, allowing coverage data to be collected and analyzed during test execution.
+
+#### Using LCOV 
+
+Install the required tools:
+
+```bash
+sudo apt update
+sudo apt install lcov
+```
+
+Run the test suite:
+
+```bash
+ctest --output-on-failure
+```
+
+Capture coverage data:
+
+```bash
+lcov --capture \
+     --directory . \
+     --output-file coverage.info
+```
+
+Optionally remove coverage data from system headers and third-party dependencies:
+
+```bash
+lcov --remove coverage.info \
+     '/usr/*' \
+     '*/_deps/*' \
+     --output-file coverage.f*ltered.info
+```
+
+Generate an HTML report:
+
+```bash
+genhtml coverage.f*ltered.info \
+        --output-dir*ctory coverage-report
+```
+
+#### Using gcov
+
+Generate coverage information directly with `gcov`:
+
+```bash
+find . -name "*.gcda" -exec gcov {} \;
+```
+
+This command generates `.gcov` files containing line-by-line coverage statistics for each source file.
+
 
 ### 4.2 Debugging Test Failures
 
-If a test fails, check `Testing/Temporary/LastTest.log`,
-`test/testSubDir/${testname}/${testname}.vg.out`, and other similar files.
+If a test fails, check the following files for diagnostic information:
 
-## 5.0 Use in Other Projects
+- `Testing/Temporary/LastTest.log`
+- `test/testSubDir/${testname}/${testname}.vg.out`
+- Other similar log and output files generated during test execution.
 
-Currently, the only supported build system is CMake. Other build systems are not planned at the moment, though they may be considered in future discussions.
-Below are several ways to integrate `slxio` into your project:
+## 5.0 Using  Other Projects
 
-- 1. Using FetchContent (built-in CMake module)
+> **Note:** The CMake examples below have not yet been extensively tested, as the development of core libraries is still ongoing. They are intended to provide an overview of how  libraries can be integrated and consumed using native CMake mechanisms. Integration with package managers such as Conan and vcpkg has not yet been established.
 
-The simplest way is to use CMake’s built-in [`FetchContent`](https://cmake.org/cmake/help/latest/module/FetchContent.html) to add `slxio` as an external dependency.
-This will automatically download, configure, and build the library alongside your application.
+Several approaches can be used to integrate SLXIO into your project. The recommended method is to use CMake's built-in `FetchContent` module.
 
-  ```cmake
-  include(FetchContent)
+### 5.1 Using FetchContent
 
-  FetchContent_Declare(
-    slxio
-    GIT_REPOSITORY https://github.com/wissem01chiha/slxio.git
-    GIT_TAG master
-  )
-  FetchContent_MakeAvailable(slxio)
+The simplest way to consume the project is through CMake's built-in [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html) module. This approach automatically downloads, configures, and builds the library alongside your application.
 
-  add_executable(app main.cpp)
-  target_link_libraries(app PRIVATE SLXIO::SLXIO)
-  ```
-- 2. Using CPM.cmake (CMake Package Manager)
+Add the following script to a CMake module file or directly to a location accessible from your project's CMake configuration:
 
-  If you prefer a package manager approach, you can use [CPM.cmake]() to fetch and integrate slxio
+```cmake
+include(FetchContent)
 
- ```cmake
-  CPMAddPackage(
-    NAME slxio
-    GITHUB_REPOSITORY wissem01chiha/slxio
-    VERSION 0.1.0
-  )
+FetchContent_Declare(
+  slxio
+  GIT_REPOSITORY https://github.com/wissem01chiha/slxio.git
+  GIT_TAG master
+)
 
-  add_executable(app main.cpp)
-  target_link_libraries(app PRIVATE SLXIO::SLXIO)
-  ```
+FetchContent_MakeAvailable(slxio)
+```
 
-- 3. Using ExternalProject
+-  Linking Individual Components
 
-For more control, you can use  [ExternalProject](https://cmake.org/cmake/help/latest/module/ExternalProject.html)  to build slxio separately and then link it:
+Linking against specific SLXIO components can be finely controlled using the CMake alias targets provided by the project. This approach is useful when your application depends only on a subset of the available libraries.
 
-  ```cmake
-  include(ExternalProject)
+```cmake
+add_executable(mytarget main.cpp)
 
-  ExternalProject_Add(
-    slxio
-    GIT_REPOSITORY https://github.com/wissem01chiha/slxio.git
-    GIT_TAG master
-    UPDATE_DISCONNECTED 1
-    PREFIX ${CMAKE_BINARY_DIR}/slxio
-    INSTALL_COMMAND ""
-  )
+target_link_libraries(mytarget PRIVATE
+  CommonCore
+  CommonDataModel
+  CommonSystem
+  SimulinkCore
+  SimulinkData
+  SimulinkConfiguration
+  SimulinkMisc
+  SimulinkStateflow
+  SimulinkAnnotation
+  SimulinkLayout
+)
+```
 
-  add_executable(app main.cpp)
-  add_dependencies(app slxio)
-  target_link_libraries(app PRIVATE SLXIO::SLXIO)
-  ```
+-  Linking High-Level Component Groups
 
-- 4. Using find_package
+Once the project exposes higher-level alias targets, linking against the core SLXIO functionality becomes simpler. For example, if your application only requires the main Common, Simulink, and IO components:
 
-Once slxio provides proper CMake configuration files, you’ll be able to integrate it like any other modern CMake package:
+```cmake
+add_executable(mytarget main.cpp)
 
-  ```cmake
-  find_package(slxio CONFIG REQUIRED)
+target_link_libraries(mytarget PRIVATE
+  Common
+  Simulink
+  IO
+)
+```
 
-  add_executable(app main.cpp)
-  target_link_libraries(app PRIVATE SLXIO::SLXIO)
-  ```
+-  Linking the Complete Framework
+
+If you are unsure about the exact SLXIO dependencies required by your application, you can link against the umbrella target that includes all project libraries.
+
+```cmake
+add_executable(mytarget main.cpp)
+
+target_link_libraries(mytarget PRIVATE
+  SLXIO::SLXIO
+)
+```
+This is the recommended approach for new users, as it ensures that all required SLXIO components and transitive dependencies are linked automatically.
 
 ## 6.0 API Documentation
 
-Since version 0.1.0, Slxio has used [Sphinx](https://www.sphinx-doc.org/en/master/index.html) for documentation.
-However, for detailed implementation documentation, Slxio includes integrated support for [Doxygen](https://www.doxygen.nl/index.html), which can be enabled via the `ENABLE_DOCUMENTATION` cmake option.
+Since version **0.1.0**, SLXIO documentation has been published through **GitHub Pages** using a Jekyll-based theme.
+For detailed API and implementation documentation, we also provides integrated support for **Doxygen**. Documentation generation can be enabled during the CMake configuration step by setting the `SLXIO_DOXYGEN_DOCUMENTATION` option to `ON`.
+By default, the Doxygen documentation is generated automatically as part of the build process. The generated HTML documentation can be found at:
+
+```text
+build/Utilities/Doxygen/html
+```
 
 
 ## 7.0 References
@@ -340,6 +435,7 @@ However, for detailed implementation documentation, Slxio includes integrated su
 
 ## 8.0 License
 
-All material is provided under an Apache License unless otherwise specified.
+All material is provided under an Apache License unless otherwise specified. See the [LICENSE](./LICENSE) file for more details
 
-see the [`LICENSE`](./LICENSE) file for more details
+----
+[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)

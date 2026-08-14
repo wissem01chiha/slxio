@@ -23,12 +23,24 @@ add_module(
   MODULE_INSTALL_LICENSES
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
-    DataObject.cxx
+    IDataObject.cxx
     JsonDataObject.cxx
+    XmlDocDataObject.cxx
+    XmlNodeDataObject.cxx
   MODULE_HEADERS
-    DataObject.h
+    IDataObject.h
     JsonDataObject.h
-    DataModelErrorType.h
+    IParameterObject.h
+    ISignalObject.h
+    DataModelECH.h
+    ISignalDataObject.h
+    IDataObjectHandler.h
+    XmlDocDataObject.h
+    XmlNodeDataObject.h
+    IParameterizedObject.h
+    IMutableParameterObject.h
+    IRangeParameterObject.h
+    IParameterDataObjectBase.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
@@ -38,10 +50,14 @@ add_module(
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+    TestJsonDataObject.cxx
+    TestXmlDocDataObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     json-c
+    LibXml2
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
 )

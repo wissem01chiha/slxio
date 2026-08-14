@@ -1,7 +1,5 @@
 #include "DataSourceType.h"
-
 #include "Logger.h"
-
 #include <cstring>
 
 namespace slxio {

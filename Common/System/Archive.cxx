@@ -1,10 +1,9 @@
 #include "Archive.h"
-
 #include "DirectoryService.h"
 #include "ErrorHandlerMacro.h"
 #include "Libuv.h"
 #include "Libzip.h"
-#include "SystemErrorType.h"
+#include "SystemECH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -20,7 +19,7 @@ Archive::Archive()
 {
 }
 
-Archive::Archive(File _file)
+Archive::Archive(const File& _file)
   : file(_file)
   , directory(Directory(""))
 {
@@ -40,7 +39,7 @@ void Archive::SetArchiveExtension(const char* ext)
   file.Rename(dest);
 }
 
-void Archive::SetArchiveDirectory(const Directory _directory)
+void Archive::SetArchiveDirectory(const Directory& _directory)
 {
   directory = _directory;
 }
@@ -104,7 +103,7 @@ HError Archive::Extract()
   return E_OK;
 }
 
-HError Archive::Add(const File file_)
+HError Archive::Add(const File& file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
@@ -141,7 +140,7 @@ HError Archive::Add(const File file_)
   return E_OK;
 }
 
-HError Archive::Remove(const File file_)
+HError Archive::Remove(const File& file_)
 {
   int err = 0;
   zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);

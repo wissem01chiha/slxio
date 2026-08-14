@@ -1,5 +1,4 @@
 #include "BackgroundLogger.h"
-
 #include "Spdlog.h"
 
 namespace slxio {
@@ -8,6 +7,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 BackgroundLogger::BackgroundLogger()
   : m_nthreads(1)
   , m_queueSize(8192)
+  , m_level(LogLevelType::LOG_INFO)
 {
 }
 

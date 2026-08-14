@@ -1,5 +1,4 @@
 #include "ErrorHandler.h"
-
 #include "CorePCH.h"
 
 namespace slxio {

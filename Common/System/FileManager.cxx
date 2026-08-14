@@ -1,8 +1,7 @@
 #include "FileManager.h"
-
 #include "Directory.h"
 #include "File.h"
-#include "SystemErrorType.h"
+#include "SystemECH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -13,8 +12,8 @@ FileManager::FileManager()
 }
 
 FileManager::FileManager(std::vector<std::shared_ptr<File>> files)
+  : FileBuffer(files)
 {
-  FileBuffer = files;
 }
 
 SId FileManager::GetFileId(const std::string& filename) const

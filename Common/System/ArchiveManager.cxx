@@ -1,14 +1,13 @@
 #include "ArchiveManager.h"
-
 #include "Archive.h"
-#include "SystemErrorType.h"
+#include "SystemECH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
+  : ArchiveBuffer(std::move(archives))
 {
-  ArchiveBuffer = std::move(archives);
 }
 
 SId ArchiveManager::GetArchiveId(const std::string& archivename) const

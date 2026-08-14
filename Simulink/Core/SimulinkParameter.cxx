@@ -165,13 +165,13 @@ std::string SimulinkParameter::ToString() const
 {
 
   char str[100];
-  strcpy(str, "{");
-  strcpy(str, Name);
-  strcpy(str, ",");
-  strcpy(str, toChar(DataType));
-  strcpy(str, ",");
-  strcpy(str, Value);
-  strcpy(str, "}");
+  strncpy(str, "{");
+  strncpy(str, Name);
+  strncpy(str, ",");
+  strncpy(str, toChar(DataType));
+  strncpy(str, ",");
+  strncpy(str, Value);
+  strncpy(str, "}");
 
   return std::string(str);
 }

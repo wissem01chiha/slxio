@@ -1,25 +1,19 @@
 #include "SimulinkObject.h"
-
-#include "ErrorCode.h"
 #include "Logger.h"
 #include "SimulinkArray.h"
 #include "SimulinkBlock.h"
 #include "SimulinkParameter.h"
-
-#include <algorithm>
-#include <cstring>
-#include <sstream>
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::SimulinkObject()
   : logger(Logger::GetInstance())
+  , PropName("")
+  , ClassName("")
+  , ObjectVersion("")
+  , ObjectId(0)
 {
-  PropName = std::string("");
-  ClassName = std::string("");
-  ObjectVersion = std::string("");
-  ObjectId = 0;
 }
 
 SimulinkObject* SimulinkObject::New() const
@@ -286,17 +280,17 @@ std::shared_ptr<SimulinkElementBase> SimulinkObject::Find(const SId& id)
   return std::shared_ptr<SimulinkElementBase>();
 }
 
-bool SimulinkObject::Contains(const SId& ObjectId) const
+bool SimulinkObject::Contains(const SId& ObjectId_) const
 {
 
-  if (ObjectId == ObjectId) {
+  if (ObjectId == ObjectId_) {
     return 1;
   }
 
   if (!SubObjects.empty()) {
     for (const auto& obj : SubObjects) {
       if (obj) {
-        if (obj->Contains(ObjectId)) {
+        if (obj->Contains(ObjectId_)) {
           return 1;
         }
       }
@@ -306,7 +300,7 @@ bool SimulinkObject::Contains(const SId& ObjectId) const
   if (!SubArrays.empty()) {
     for (const auto& arr : SubArrays) {
       if (arr) {
-        if (arr->Contains(ObjectId)) {
+        if (arr->Contains(ObjectId_)) {
           return 1;
         }
       }

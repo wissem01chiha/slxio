@@ -24,7 +24,10 @@ set(SLXIO_64BIT_IDENTIFIERS ${SLXIO_64BIT_IDENTIFIERS})
 option(SLXIO_BUILD_TESTING "" ON)
 
 # Enable coverage reports when testing is ON
-option(SLXIO_ENABLE_TESTING_COVERAGE "" ON)
+option(SLXIO_ENABLE_TESTING_COVERAGE "" OFF)
+
+# Enable build fuzzy tests
+option(SLXIO_BUILD_FUZZ_TESTING "" OFF)
 
 # Option to enable compiling example scripts
 option(SLXIO_BUILD_EXAMPLES "" OFF)
@@ -84,6 +87,9 @@ option(SLXIO_XLSX "Enable Microsoft Excel file support" OFF)
 # Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
 option(SLXIO_WITH_HDF5 "Check for hdf5 library" ON)
 
+# Option to enable latex *.tex file support
+option(SLXIO_TEX "Enable Latex TeX file support" OFF)
+
 # Option to enable position-independent code (PIC)
 option(SLXIO_PIC "Enable position-independent code (PIC)" ON)
 
@@ -105,6 +111,7 @@ mark_as_advanced(CMAKE_INSTALL_LICENSEDIR)
 
 # Default license installation directory
 option(CMAKE_DEFAULT_LICENSEDIR ${CMAKE_INSTALL_DATAROOTDIR}/licenses/${CMAKE_PROJECT_NAME})
+mark_as_advanced(CMAKE_DEFAULT_LICENSEDIR)
 
 # Override default build type
 option(SLXIO_DEFAULT_BUILD_TYPE "" Release)
@@ -153,6 +160,11 @@ mark_as_advanced(SLXIO_WITH_OPENMP)
 option(SLXIO_ENABLE_WERROR "Enable treating warnings as errors" OFF)
 mark_as_advanced(SLXIO_ENABLE_WERROR)
 
+# Option to enable/disable build summary logging during 
+# cmake configuration step
+option(SLXIO_ENABLE_BUILD_SUMMARY "" ON)
+mark_as_advanced(SLXIO_ENABLE_BUILD_SUMMARY)
+
 option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
 mark_as_advanced(SLXIO_ENABLE_WALL)
 
@@ -200,10 +212,14 @@ if(SLXIO_WITH_PKGCONFIG)
   include(PkgConfig)
 endif()
 
+include(Sanitize)
 include(ThirdParty)
 include(Module)
 if(SLXIO_BUILD_TESTING)
   include(Testing)
+endif()
+if(SLXIO_ENABLE_BUILD_SUMMARY)
+  include(Summary)
 endif()
 
 add_subdirectory(ThirdParty)

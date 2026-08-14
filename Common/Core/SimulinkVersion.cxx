@@ -1,5 +1,4 @@
 #include "SimulinkVersion.h"
-
 #include "SimulinkVersionMacro.h"
 #include "SimulinkVersionRelease.h"
 

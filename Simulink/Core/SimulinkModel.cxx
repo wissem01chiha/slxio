@@ -1,5 +1,4 @@
 #include "SimulinkModel.h"
-
 #include "Logger.h"
 #include "SimulationSettings.h"
 #include "SimulinkArray.h"
@@ -14,8 +13,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkModel::SimulinkModel()
   : logger(Logger::GetInstance())
+  , ModelType(SimulinkModelType(SimulinkModelType::Model))
 {
-  ModelType = SimulinkModelType(SimulinkModelType::Model);
 }
 
 SimulinkModel* SimulinkModel::New() const

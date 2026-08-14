@@ -1,1 +1,1 @@
-add_module (Simulink::Configuration)
+slx_add_module (Simulink::Configuration)

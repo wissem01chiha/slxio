@@ -51,7 +51,7 @@ add_module(
     BackgroundLogger.h
     ErrorHandlerMacro.h
     ErrorHandler.h
-    ErrorType.h
+    CommonECH.h
     ErrorManager.h
     ILogMessage.h
     FileLogger.h

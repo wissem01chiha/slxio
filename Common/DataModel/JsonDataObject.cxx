@@ -1,6 +1,5 @@
 #include "JsonDataObject.h"
-
-#include "Json-c.h"
+#include "DataModelPCH.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -18,27 +17,31 @@ void JsonDataObject::Initialize(void* implDataObject)
     }
     return;
   }
-  ImplDataObject = SLXIO_STATIC_CAST(json_object*, implDataObject);
+  m_implDataObject = SLXIO_STATIC_CAST(json_object*, implDataObject);
 }
 
 bool JsonDataObject::Empty() const
 {
-  return ImplDataObject == nullptr;
+  return m_implDataObject == nullptr;
 }
 
-bool JsonDataObject::operator==(const DataObject& other)
+bool JsonDataObject::operator==(const IDataObject& other) const
 {
-  if (ImplDataObject == nullptr || other.GetImplDataObject() == nullptr) {
-    return ImplDataObject == other.GetImplDataObject();
+  if (m_implDataObject == nullptr || other.GetImplDataObject() == nullptr) {
+    return m_implDataObject == other.GetImplDataObject();
+  }
+  if (GetDataType() == other.GetDataType()) {
+    return json_object_equal(
+      m_implDataObject,
+      SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
   }
 
-  return json_object_equal(
-    ImplDataObject, SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
+  return false;
 }
 
 void* JsonDataObject::GetImplDataObject() const
 {
-  return ImplDataObject;
+  return m_implDataObject;
 }
 
 std::string JsonDataObject::ToString() const
@@ -46,20 +49,25 @@ std::string JsonDataObject::ToString() const
   if (Empty()) {
     return std::string("");
   }
-  const char* str = json_object_to_json_string(ImplDataObject);
+  const char* str = json_object_to_json_string(m_implDataObject);
   return std::string(str);
 }
 
+DataType JsonDataObject::GetDataType() const
+{
+  return DataType::SLXIO_TYPE_CJSON_OBJECT;
+}
+
 JsonDataObject::JsonDataObject()
-  : ImplDataObject(nullptr)
+  : m_implDataObject(nullptr)
 {
 }
 
 JsonDataObject::~JsonDataObject()
 {
-  if (ImplDataObject) {
-    json_object_put(ImplDataObject);
-    ImplDataObject = nullptr;
+  if (m_implDataObject) {
+    json_object_put(m_implDataObject);
+    m_implDataObject = nullptr;
   }
 }
 SLXIO_ABI_NAMESPACE_END

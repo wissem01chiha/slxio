@@ -1,0 +1,26 @@
+target_sources(SimulinkLibrary
+    PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/Display.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/FloatingScope.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutBusElement.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Record.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Scope.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/StopSimulation.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/Terminator.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ToFile.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/ToWorkspace.cxx
+    ${CMAKE_CURRENT_SOURCE_DIR}/XyGraph.cxx
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/Display.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/FloatingScope.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Out1.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/OutBusElement.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Record.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Scope.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/StopSimulation.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Terminator.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ToFile.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/ToWorkspace.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/XyGraph.h
+)

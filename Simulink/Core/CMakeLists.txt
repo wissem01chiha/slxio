@@ -1,1 +1,46 @@
-add_module (Simulink::Core)
+add_module(
+  MODULE_NAME 
+    Core
+  MODULE_GROUP 
+    Simulink
+  LIBRARY_NAME 
+    SimulinkCore
+  MODULE_DESCRIPTION 
+    "Simulink Core Support Module"
+  MODULE_MAINTAINER 
+    "Wissem Chiha"
+  MODULE_SPDX_LICENSE_IDENTIFIER 
+    "Apache-2.0"
+  MODULE_SPDX_COPYRIGHT_TEXT 
+    "Copyright (c) 2025-2026 Wissem Chiha"
+  MODULE_ENABLE_BUILD 
+    TRUE
+  MODULE_ENABLE_TESTS 
+    TRUE
+  MODULE_CONFIG_HEADERS
+  MODULE_INSTALL_HEADERS
+  MODULE_INSTALL_TARGETS
+  MODULE_INSTALL_LICENSES
+  MODULE_INSTALL_DOCS
+  MODULE_CLASSES
+    SimulinkElementBase.cxx
+  MODULE_HEADERS
+    SimulinkECH.h
+    SimulinkElementBase.h
+  MODULE_PCH_HEADERS
+    SimulinkPCH.h
+  MODULE_SOURCES
+  MODULE_TEST_SOURCE_DIR
+    Testing/Cxx
+  MODULE_TEST_DATA_SOURCE_DIR
+    Testing/Data
+  MODULE_TEST_DATA_SOURCES
+  MODULE_TEST_SOURCES
+  MODULE_INCLUDE_DIRS
+  MODULE_PUBLIC_DEPENDS
+    CommonCore
+    CommonDataModel
+  MODULE_TEST_DEPENDS
+  MODULE_TEST_INCLUDE_DIRS
+    ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
+)

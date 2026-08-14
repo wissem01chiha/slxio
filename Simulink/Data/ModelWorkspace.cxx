@@ -1,84 +1,83 @@
 #include "ModelWorkspace.h"
-
-#include "ErrorCode.h"
+#include "DataECH.h"
+#include "DataSourceType.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-static const Logger::ApplicationInfoType ModelWorkspaceId = {
-  1002,
-  "ModelWorkspace"
-};
-
-ModelWorkspace::ModelWorkspace()
-  : DataSource(DataSourceType::Type::ModelFile)
-  , logger(Logger::GetInstance())
+std::shared_ptr<IParameterDataObjectBase> ModelWorkspace::GetVariable(
+  const std::string& name) const
 {
-}
-
-std::string ModelWorkspace::GetVariable(const std::string& name) const
-{
-
-  auto it = Variables.find(name);
-  if (it != Variables.end()) {
+  auto it = m_variables.find(name);
+  if (it != m_variables.end()) {
     return it->second;
   }
-  logger.SendLogMessage(
-    { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
-    { "GetVariable : Variable", name, "not found in ModelWorkspace." });
-  return std::string("");
+
+  return nullptr;
 }
 
-HError ModelWorkspace::AssignVariable(const std::string& name,
-                                      const std::string& value)
+HError ModelWorkspace::AssignVariable(
+  const std::string& name,
+  const std::shared_ptr<IParameterDataObjectBase>& p)
 {
-  Variables[name] = value;
+  if (!p) {
+    return E_INVALID_ARGUMENT;
+  }
+
+  m_variables[name] = p;
   return E_OK;
 }
 
 HError ModelWorkspace::ClearVariable(const std::string& name)
 {
-  auto it = Variables.find(name);
-  if (it != Variables.end()) {
-    Variables.erase(it);
-  } else {
-    logger.SendLogMessage(
-      { Logger::LOG, Logger::LOG_WARN, ModelWorkspaceId, 3 },
-      { "ClearVariable: Variable",
-        name,
-        "not found in ModelWorkspace. Cannot clear." });
+  auto it = m_variables.find(name);
+  if (it != m_variables.end()) {
+    m_variables.erase(it);
   }
+
   return E_OK;
 }
 
 HError ModelWorkspace::ClearAll()
 {
-  Variables.clear();
-  logger.SendLogMessage(
-    { Logger::LOG, Logger::LOG_INFO, ModelWorkspaceId, 3 },
-    { "ClearAll: All Variables cleared from ModelWorkspace." });
+  m_variables.clear();
   return E_OK;
 }
 
-DataSourceType ModelWorkspace::GetDataSourceType()
+std::shared_ptr<DataSourceType> ModelWorkspace::GetDataSourceType()
 {
-  return DataSource;
+  return m_dataSource;
 }
 
-const char* ModelWorkspace::GetFileName()
+const std::string ModelWorkspace::GetFileName()
 {
-  return FileName.c_str();
+  return m_fileName;
 }
 
 std::string ModelWorkspace::GetMatlabCode()
 {
-  return MatlabCode;
+  return m_matlabCode;
 }
 
-Logger& ModelWorkspace::GetLogger()
+UInt16 ModelWorkspace::GetVariableCount() const
 {
-  return logger;
+  return SLXIO_STATIC_CAST(UInt16, m_variables.size());
+}
+
+HError ModelWorkspace::SetLogger(const ILogger* logger)
+{
+  if (logger == nullptr) {
+    return E_ILOGGER_NULLPTR_RECEIVED;
+  }
+
+  m_logger = logger;
+  return E_OK;
+}
+
+const ILogger* ModelWorkspace::GetLogger()
+{
+  return m_logger;
 }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
