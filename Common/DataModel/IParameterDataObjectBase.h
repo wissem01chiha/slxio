@@ -33,7 +33,7 @@ public:
     bool operator==(const IDataObject& other) const override;
     DataType GetDataType() const override;
 
-    virtual ~IParameterDataObjectBase();
+    virtual ~IParameterDataObjectBase()= default;
 
 private:
     std::shared_ptr<IParameterObjectBase> m_param;

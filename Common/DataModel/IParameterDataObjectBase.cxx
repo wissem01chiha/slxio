@@ -47,7 +47,5 @@ DataType IParameterDataObjectBase::GetDataType() const
                    : DataType::SLXIO_TYPE_GENERIC_PARAMETER_DATA_OBJECT;
 }
 
-IParameterDataObjectBase::~IParameterDataObjectBase() = default;
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
