@@ -40,15 +40,16 @@ LogLevelType FileLogger::GetLogLevel() const
   return m_logLevel;
 }
 
-FileLogger::~FileLogger() noexcept {
+FileLogger::~FileLogger() noexcept
+{
 
-    if (m_file.is_open()) {
-        try {
-            m_file.close();
-        } catch (const std::exception& e) {
-            std::cerr << "file close failed: " << e.what() << '\n';
-        }
-      }
+  if (m_file.is_open()) {
+    try {
+      m_file.close();
+    } catch (const std::exception& e) {
+      std::cerr << "file close failed: " << e.what() << '\n';
+    }
+  }
 }
 
 SLXIO_ABI_NAMESPACE_END

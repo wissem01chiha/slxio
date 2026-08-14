@@ -158,20 +158,13 @@ std::vector<UInt16> SimulinkParameter::GetDimensions()
   return Dimensions;
 }
 
-
-
 std::string SimulinkParameter::ToString() const
 {
-    std::ostringstream oss;
-    oss << "{" 
-        << Name << "," 
-        << toChar(DataType) << "," 
-        << Value 
-        << "}";
+  std::ostringstream oss;
+  oss << "{" << Name << "," << toChar(DataType) << "," << Value << "}";
 
-    return oss.str();
+  return oss.str();
 }
-
 
 std::string SimulinkParameter::GetName()
 {

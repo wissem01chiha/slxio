@@ -86,7 +86,7 @@ SimulinkVersionRelease SimulinkVersion::GetRelease()
   return SimulinkVersionRelease::R2025b;
 
 #else
- return SimulinkVersionRelease::Unknown;
+  return SimulinkVersionRelease::Unknown;
 #endif
 }
 

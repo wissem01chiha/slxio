@@ -39,25 +39,23 @@ std::shared_ptr<SimulinkSolver> SimulinkConfigSet::GetSolver()
 
 std::string SimulinkConfigSet::GetParameter(const char* name)
 {
-    if (name == nullptr) {
-        return "";
-    }
-    auto cfgParam = GetParameterObject(std::string(name));
-    return cfgParam ? cfgParam->ToString() : "";
+  if (name == nullptr) {
+    return "";
+  }
+  auto cfgParam = GetParameterObject(std::string(name));
+  return cfgParam ? cfgParam->ToString() : "";
 }
-
 
 std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::GetParameterObject(
-    const std::string& name)
+  const std::string& name)
 {
-    auto param = object->GetParameter(name);
-    if (!param) {
-        // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-        //  " not found in configuration set.");
-    }
-    return param;
+  auto param = object->GetParameter(name);
+  if (!param) {
+    // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+    //  " not found in configuration set.");
+  }
+  return param;
 }
-
 
 HError SimulinkConfigSet::SetParameter(const char* name, const char* value)
 {

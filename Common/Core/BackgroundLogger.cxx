@@ -54,7 +54,7 @@ LogLevelType BackgroundLogger::GetLogLevel() const
   return m_level;
 }
 
-void BackgroundLogger::SetQueueSize(UInt32 q) 
+void BackgroundLogger::SetQueueSize(UInt32 q)
 {
   m_queueSize = q;
 }

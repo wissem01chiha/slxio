@@ -81,10 +81,7 @@ public:
   SimulinkModel getModel() { return model; }
 
   /** @brief Get targets of this machine. */
-  std::vector<StateflowTarget> GetTargets()
-  {
-    return m_targets;
-  }
+  std::vector<StateflowTarget> GetTargets() { return m_targets; }
 
   /**
    * @brief Removes the machine from the model. The Machine can be
