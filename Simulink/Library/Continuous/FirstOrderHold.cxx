@@ -9,42 +9,42 @@ FirstOrderHold::~FirstOrderHold() {}
 
 const std::string& FirstOrderHold::GetInitialoutput() const
 {
-    return m_Initialoutput;
+  return m_Initialoutput;
 }
 
 void FirstOrderHold::SetInitialoutput(const std::string& value)
 {
-    m_Initialoutput = value;
+  m_Initialoutput = value;
 }
 
 const std::string& FirstOrderHold::GetOutputalgorithm() const
 {
-    return m_Outputalgorithm;
+  return m_Outputalgorithm;
 }
 
 void FirstOrderHold::SetOutputalgorithm(const std::string& value)
 {
-    m_Outputalgorithm = value;
+  m_Outputalgorithm = value;
 }
 
 const std::string& FirstOrderHold::GetErrortolerance() const
 {
-    return m_Errortolerance;
+  return m_Errortolerance;
 }
 
 void FirstOrderHold::SetErrortolerance(const std::string& value)
 {
-    m_Errortolerance = value;
+  m_Errortolerance = value;
 }
 
 const std::string& FirstOrderHold::GetAllowcontinuousinput() const
 {
-    return m_Allowcontinuousinput;
+  return m_Allowcontinuousinput;
 }
 
 void FirstOrderHold::SetAllowcontinuousinput(const std::string& value)
 {
-    m_Allowcontinuousinput = value;
+  m_Allowcontinuousinput = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

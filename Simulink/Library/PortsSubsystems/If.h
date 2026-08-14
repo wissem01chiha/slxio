@@ -5,16 +5,18 @@
 #define IF_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT If : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT If
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -42,7 +44,6 @@ public:
   void SetSampletime(const std::string& value);
 
 private:
-
   std::string m_Numinputs;
 
   std::string m_Ifexpression;
@@ -54,7 +55,6 @@ private:
   std::string m_Zerocross;
 
   std::string m_Sampletime;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

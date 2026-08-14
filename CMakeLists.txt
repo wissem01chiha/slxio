@@ -111,6 +111,7 @@ mark_as_advanced(CMAKE_INSTALL_LICENSEDIR)
 
 # Default license installation directory
 option(CMAKE_DEFAULT_LICENSEDIR ${CMAKE_INSTALL_DATAROOTDIR}/licenses/${CMAKE_PROJECT_NAME})
+mark_as_advanced(CMAKE_DEFAULT_LICENSEDIR)
 
 # Override default build type
 option(SLXIO_DEFAULT_BUILD_TYPE "" Release)
@@ -158,6 +159,11 @@ mark_as_advanced(SLXIO_WITH_OPENMP)
 # Compiler/build options
 option(SLXIO_ENABLE_WERROR "Enable treating warnings as errors" OFF)
 mark_as_advanced(SLXIO_ENABLE_WERROR)
+
+# Option to enable/disable build summary logging during 
+# cmake configuration step
+option(SLXIO_ENABLE_BUILD_SUMMARY "" ON)
+mark_as_advanced(SLXIO_ENABLE_BUILD_SUMMARY)
 
 option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
 mark_as_advanced(SLXIO_ENABLE_WALL)
@@ -211,6 +217,9 @@ include(ThirdParty)
 include(Module)
 if(SLXIO_BUILD_TESTING)
   include(Testing)
+endif()
+if(SLXIO_ENABLE_BUILD_SUMMARY)
+  include(Summary)
 endif()
 
 add_subdirectory(ThirdParty)

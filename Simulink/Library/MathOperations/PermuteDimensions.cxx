@@ -9,12 +9,12 @@ PermuteDimensions::~PermuteDimensions() {}
 
 const std::string& PermuteDimensions::GetOrder() const
 {
-    return m_Order;
+  return m_Order;
 }
 
 void PermuteDimensions::SetOrder(const std::string& value)
 {
-    m_Order = value;
+  m_Order = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

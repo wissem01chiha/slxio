@@ -9,42 +9,42 @@ ChirpSignal::~ChirpSignal() {}
 
 const std::string& ChirpSignal::GetF1() const
 {
-    return m_F1;
+  return m_F1;
 }
 
 void ChirpSignal::SetF1(const std::string& value)
 {
-    m_F1 = value;
+  m_F1 = value;
 }
 
 const std::string& ChirpSignal::GetT() const
 {
-    return m_T;
+  return m_T;
 }
 
 void ChirpSignal::SetT(const std::string& value)
 {
-    m_T = value;
+  m_T = value;
 }
 
 const std::string& ChirpSignal::GetF2() const
 {
-    return m_F2;
+  return m_F2;
 }
 
 void ChirpSignal::SetF2(const std::string& value)
 {
-    m_F2 = value;
+  m_F2 = value;
 }
 
 const std::string& ChirpSignal::GetVectorparams1d() const
 {
-    return m_Vectorparams1d;
+  return m_Vectorparams1d;
 }
 
 void ChirpSignal::SetVectorparams1d(const std::string& value)
 {
-    m_Vectorparams1d = value;
+  m_Vectorparams1d = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

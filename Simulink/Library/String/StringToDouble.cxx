@@ -9,12 +9,12 @@ StringToDouble::~StringToDouble() {}
 
 const std::string& StringToDouble::GetFormat() const
 {
-    return m_Format;
+  return m_Format;
 }
 
 void StringToDouble::SetFormat(const std::string& value)
 {
-    m_Format = value;
+  m_Format = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

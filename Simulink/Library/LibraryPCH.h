@@ -4,6 +4,4 @@
 #ifndef LIBRARYPCH_H
 #define LIBRARYPCH_H
 
-
-
 #endif // LIBRARYPCH_H

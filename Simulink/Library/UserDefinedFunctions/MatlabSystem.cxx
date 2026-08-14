@@ -9,12 +9,12 @@ MatlabSystem::~MatlabSystem() {}
 
 const std::string& MatlabSystem::GetSystem() const
 {
-    return m_System;
+  return m_System;
 }
 
 void MatlabSystem::SetSystem(const std::string& value)
 {
-    m_System = value;
+  m_System = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

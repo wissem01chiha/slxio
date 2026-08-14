@@ -5,16 +5,18 @@
 #define EXPANDSCALAR_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ExpandScalar : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT ExpandScalar
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -36,7 +38,6 @@ public:
   void SetSampletime(const std::string& value);
 
 private:
-
   std::string m_Elementvalue;
 
   std::string m_Outputdimensions;
@@ -44,7 +45,6 @@ private:
   std::string m_Outdatatypestr;
 
   std::string m_Sampletime;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

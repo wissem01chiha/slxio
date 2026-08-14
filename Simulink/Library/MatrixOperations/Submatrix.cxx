@@ -9,102 +9,102 @@ Submatrix::~Submatrix() {}
 
 const std::string& Submatrix::GetRowspan() const
 {
-    return m_Rowspan;
+  return m_Rowspan;
 }
 
 void Submatrix::SetRowspan(const std::string& value)
 {
-    m_Rowspan = value;
+  m_Rowspan = value;
 }
 
 const std::string& Submatrix::GetRowstartmode() const
 {
-    return m_Rowstartmode;
+  return m_Rowstartmode;
 }
 
 void Submatrix::SetRowstartmode(const std::string& value)
 {
-    m_Rowstartmode = value;
+  m_Rowstartmode = value;
 }
 
 const std::string& Submatrix::GetRowstartindex() const
 {
-    return m_Rowstartindex;
+  return m_Rowstartindex;
 }
 
 void Submatrix::SetRowstartindex(const std::string& value)
 {
-    m_Rowstartindex = value;
+  m_Rowstartindex = value;
 }
 
 const std::string& Submatrix::GetRowendmode() const
 {
-    return m_Rowendmode;
+  return m_Rowendmode;
 }
 
 void Submatrix::SetRowendmode(const std::string& value)
 {
-    m_Rowendmode = value;
+  m_Rowendmode = value;
 }
 
 const std::string& Submatrix::GetRowendindex() const
 {
-    return m_Rowendindex;
+  return m_Rowendindex;
 }
 
 void Submatrix::SetRowendindex(const std::string& value)
 {
-    m_Rowendindex = value;
+  m_Rowendindex = value;
 }
 
 const std::string& Submatrix::GetColspan() const
 {
-    return m_Colspan;
+  return m_Colspan;
 }
 
 void Submatrix::SetColspan(const std::string& value)
 {
-    m_Colspan = value;
+  m_Colspan = value;
 }
 
 const std::string& Submatrix::GetColstartmode() const
 {
-    return m_Colstartmode;
+  return m_Colstartmode;
 }
 
 void Submatrix::SetColstartmode(const std::string& value)
 {
-    m_Colstartmode = value;
+  m_Colstartmode = value;
 }
 
 const std::string& Submatrix::GetColstartindex() const
 {
-    return m_Colstartindex;
+  return m_Colstartindex;
 }
 
 void Submatrix::SetColstartindex(const std::string& value)
 {
-    m_Colstartindex = value;
+  m_Colstartindex = value;
 }
 
 const std::string& Submatrix::GetColendmode() const
 {
-    return m_Colendmode;
+  return m_Colendmode;
 }
 
 void Submatrix::SetColendmode(const std::string& value)
 {
-    m_Colendmode = value;
+  m_Colendmode = value;
 }
 
 const std::string& Submatrix::GetColendindex() const
 {
-    return m_Colendindex;
+  return m_Colendindex;
 }
 
 void Submatrix::SetColendindex(const std::string& value)
 {
-    m_Colendindex = value;
+  m_Colendindex = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

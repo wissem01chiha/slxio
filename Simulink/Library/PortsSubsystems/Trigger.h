@@ -5,16 +5,18 @@
 #define TRIGGER_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Trigger : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Trigger
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -102,7 +104,6 @@ public:
   void SetFunctionprototype(const std::string& value);
 
 private:
-
   std::string m_Triggertype;
 
   std::string m_Triggertime;
@@ -154,7 +155,6 @@ private:
   std::string m_Interpolate;
 
   std::string m_Functionprototype;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

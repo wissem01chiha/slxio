@@ -5,16 +5,18 @@
 #define ACCUMULATOR_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Accumulator : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Accumulator
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -96,7 +98,6 @@ public:
   void SetStatesignalobject(const std::string& value);
 
 private:
-
   std::string m_Integratormethod;
 
   std::string m_Gainval;
@@ -144,7 +145,6 @@ private:
   std::string m_Rtwstatestoragetypequalifier;
 
   std::string m_Statesignalobject;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

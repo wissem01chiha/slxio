@@ -5,16 +5,18 @@
 #define QUEUE_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Queue : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Queue
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -69,7 +71,6 @@ public:
   void SetAveragequeuelength(const std::string& value);
 
 private:
-
   std::string m_Overwriteoldest;
 
   std::string m_Capacity;
@@ -99,7 +100,6 @@ private:
   std::string m_Averagewait;
 
   std::string m_Averagequeuelength;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

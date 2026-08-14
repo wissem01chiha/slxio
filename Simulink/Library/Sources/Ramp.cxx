@@ -9,42 +9,42 @@ Ramp::~Ramp() {}
 
 const std::string& Ramp::GetSlope() const
 {
-    return m_Slope;
+  return m_Slope;
 }
 
 void Ramp::SetSlope(const std::string& value)
 {
-    m_Slope = value;
+  m_Slope = value;
 }
 
 const std::string& Ramp::GetStart() const
 {
-    return m_Start;
+  return m_Start;
 }
 
 void Ramp::SetStart(const std::string& value)
 {
-    m_Start = value;
+  m_Start = value;
 }
 
 const std::string& Ramp::GetInitialoutput() const
 {
-    return m_Initialoutput;
+  return m_Initialoutput;
 }
 
 void Ramp::SetInitialoutput(const std::string& value)
 {
-    m_Initialoutput = value;
+  m_Initialoutput = value;
 }
 
 const std::string& Ramp::GetVectorparams1d() const
 {
-    return m_Vectorparams1d;
+  return m_Vectorparams1d;
 }
 
 void Ramp::SetVectorparams1d(const std::string& value)
 {
-    m_Vectorparams1d = value;
+  m_Vectorparams1d = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

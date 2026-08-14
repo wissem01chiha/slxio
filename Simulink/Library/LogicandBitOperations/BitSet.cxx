@@ -9,12 +9,12 @@ BitSet::~BitSet() {}
 
 const std::string& BitSet::GetIbit() const
 {
-    return m_Ibit;
+  return m_Ibit;
 }
 
 void BitSet::SetIbit(const std::string& value)
 {
-    m_Ibit = value;
+  m_Ibit = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

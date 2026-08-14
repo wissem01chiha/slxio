@@ -9,22 +9,22 @@ Sign::~Sign() {}
 
 const std::string& Sign::GetZerocross() const
 {
-    return m_Zerocross;
+  return m_Zerocross;
 }
 
 void Sign::SetZerocross(const std::string& value)
 {
-    m_Zerocross = value;
+  m_Zerocross = value;
 }
 
 const std::string& Sign::GetSampletime() const
 {
-    return m_Sampletime;
+  return m_Sampletime;
 }
 
 void Sign::SetSampletime(const std::string& value)
 {
-    m_Sampletime = value;
+  m_Sampletime = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

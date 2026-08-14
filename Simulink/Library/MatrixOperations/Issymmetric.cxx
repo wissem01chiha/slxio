@@ -9,12 +9,12 @@ Issymmetric::~Issymmetric() {}
 
 const std::string& Issymmetric::GetMode() const
 {
-    return m_Mode;
+  return m_Mode;
 }
 
 void Issymmetric::SetMode(const std::string& value)
 {
-    m_Mode = value;
+  m_Mode = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

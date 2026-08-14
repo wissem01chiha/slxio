@@ -5,16 +5,18 @@
 #define FORITERATORSUBSYSTEM_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ForIteratorSubsystem : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT ForIteratorSubsystem
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -24,7 +26,6 @@ public:
   ~ForIteratorSubsystem();
 
 private:
-
 };
 
 SLXIO_ABI_NAMESPACE_END

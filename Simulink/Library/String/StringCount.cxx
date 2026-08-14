@@ -9,22 +9,22 @@ StringCount::~StringCount() {}
 
 const std::string& StringCount::GetCasesensitive() const
 {
-    return m_Casesensitive;
+  return m_Casesensitive;
 }
 
 void StringCount::SetCasesensitive(const std::string& value)
 {
-    m_Casesensitive = value;
+  m_Casesensitive = value;
 }
 
 const std::string& StringCount::GetOutdatatypestr() const
 {
-    return m_Outdatatypestr;
+  return m_Outdatatypestr;
 }
 
 void StringCount::SetOutdatatypestr(const std::string& value)
 {
-    m_Outdatatypestr = value;
+  m_Outdatatypestr = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

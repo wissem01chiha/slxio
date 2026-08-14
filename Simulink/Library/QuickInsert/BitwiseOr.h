@@ -5,16 +5,18 @@
 #define BITWISEOR_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitwiseOr : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT BitwiseOr
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -39,7 +41,6 @@ public:
   void SetBitmaskrealworld(const std::string& value);
 
 private:
-
   std::string m_Logicop;
 
   std::string m_Usebitmask;
@@ -49,7 +50,6 @@ private:
   std::string m_Bitmask;
 
   std::string m_Bitmaskrealworld;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

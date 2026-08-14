@@ -9,12 +9,12 @@ ScanString::~ScanString() {}
 
 const std::string& ScanString::GetFormat() const
 {
-    return m_Format;
+  return m_Format;
 }
 
 void ScanString::SetFormat(const std::string& value)
 {
-    m_Format = value;
+  m_Format = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

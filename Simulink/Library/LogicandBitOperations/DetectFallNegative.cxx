@@ -9,32 +9,32 @@ DetectFallNegative::~DetectFallNegative() {}
 
 const std::string& DetectFallNegative::GetVinit() const
 {
-    return m_Vinit;
+  return m_Vinit;
 }
 
 void DetectFallNegative::SetVinit(const std::string& value)
 {
-    m_Vinit = value;
+  m_Vinit = value;
 }
 
 const std::string& DetectFallNegative::GetInputprocessing() const
 {
-    return m_Inputprocessing;
+  return m_Inputprocessing;
 }
 
 void DetectFallNegative::SetInputprocessing(const std::string& value)
 {
-    m_Inputprocessing = value;
+  m_Inputprocessing = value;
 }
 
 const std::string& DetectFallNegative::GetOutdatatypestr() const
 {
-    return m_Outdatatypestr;
+  return m_Outdatatypestr;
 }
 
 void DetectFallNegative::SetOutdatatypestr(const std::string& value)
 {
-    m_Outdatatypestr = value;
+  m_Outdatatypestr = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

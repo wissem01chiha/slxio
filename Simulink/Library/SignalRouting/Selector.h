@@ -5,16 +5,18 @@
 #define SELECTOR_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Selector : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Selector
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -57,7 +59,6 @@ public:
   void SetRuntimerangechecks(const std::string& value);
 
 private:
-
   std::string m_Numberofdimensions;
 
   std::string m_Indexmode;
@@ -79,7 +80,6 @@ private:
   std::string m_Outputsizes;
 
   std::string m_Runtimerangechecks;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

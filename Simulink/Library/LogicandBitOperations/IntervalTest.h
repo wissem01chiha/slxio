@@ -5,16 +5,18 @@
 #define INTERVALTEST_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntervalTest : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT IntervalTest
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -39,7 +41,6 @@ public:
   void SetOutdatatypestr(const std::string& value);
 
 private:
-
   std::string m_Intervalclosedright;
 
   std::string m_Uplimit;
@@ -49,7 +50,6 @@ private:
   std::string m_Lowlimit;
 
   std::string m_Outdatatypestr;
-
 };
 
 SLXIO_ABI_NAMESPACE_END
