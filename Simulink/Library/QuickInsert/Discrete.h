@@ -5,16 +5,18 @@
 #define DISCRETE_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Discrete : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Discrete
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -144,7 +146,8 @@ public:
   void SetAllowflexibleinterface(const std::string& value);
 
   const std::string& GetTreatasgroupedwhenpropagatingvariantconditions() const;
-  void SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value);
+  void SetTreatasgroupedwhenpropagatingvariantconditions(
+    const std::string& value);
 
   const std::string& GetReferencedsubsystem() const;
   void SetReferencedsubsystem(const std::string& value);
@@ -156,7 +159,6 @@ public:
   void SetAutoframesizecalculation(const std::string& value);
 
 private:
-
   std::string m_Showportlabels;
 
   std::string m_Blockchoice;
@@ -244,7 +246,6 @@ private:
   std::string m_Latency;
 
   std::string m_Autoframesizecalculation;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

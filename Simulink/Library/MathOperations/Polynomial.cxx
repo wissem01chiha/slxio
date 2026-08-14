@@ -9,12 +9,12 @@ Polynomial::~Polynomial() {}
 
 const std::string& Polynomial::GetCoefs() const
 {
-    return m_Coefs;
+  return m_Coefs;
 }
 
 void Polynomial::SetCoefs(const std::string& value)
 {
-    m_Coefs = value;
+  m_Coefs = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

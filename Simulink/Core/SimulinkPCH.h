@@ -4,9 +4,9 @@
 #ifndef SIMULINKPCH_H
 #define SIMULINKPCH_H
 
-#include <memory>
 #include <algorithm>
 #include <cstring>
+#include <memory>
 #include <sstream>
 
 #endif // SIMULINKPCH_H

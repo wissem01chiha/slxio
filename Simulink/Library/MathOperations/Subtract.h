@@ -5,16 +5,18 @@
 #define SUBTRACT_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Subtract : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Subtract
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -63,7 +65,6 @@ public:
   void SetSampletime(const std::string& value);
 
 private:
-
   std::string m_Iconshape;
 
   std::string m_Inputs;
@@ -89,7 +90,6 @@ private:
   std::string m_Saturateonintegeroverflow;
 
   std::string m_Sampletime;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

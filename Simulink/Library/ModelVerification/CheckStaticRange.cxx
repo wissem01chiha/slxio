@@ -9,92 +9,92 @@ CheckStaticRange::~CheckStaticRange() {}
 
 const std::string& CheckStaticRange::GetMax() const
 {
-    return m_Max;
+  return m_Max;
 }
 
 void CheckStaticRange::SetMax(const std::string& value)
 {
-    m_Max = value;
+  m_Max = value;
 }
 
 const std::string& CheckStaticRange::GetMaxIncluded() const
 {
-    return m_MaxIncluded;
+  return m_MaxIncluded;
 }
 
 void CheckStaticRange::SetMaxIncluded(const std::string& value)
 {
-    m_MaxIncluded = value;
+  m_MaxIncluded = value;
 }
 
 const std::string& CheckStaticRange::GetMin() const
 {
-    return m_Min;
+  return m_Min;
 }
 
 void CheckStaticRange::SetMin(const std::string& value)
 {
-    m_Min = value;
+  m_Min = value;
 }
 
 const std::string& CheckStaticRange::GetMinIncluded() const
 {
-    return m_MinIncluded;
+  return m_MinIncluded;
 }
 
 void CheckStaticRange::SetMinIncluded(const std::string& value)
 {
-    m_MinIncluded = value;
+  m_MinIncluded = value;
 }
 
 const std::string& CheckStaticRange::GetEnabled() const
 {
-    return m_Enabled;
+  return m_Enabled;
 }
 
 void CheckStaticRange::SetEnabled(const std::string& value)
 {
-    m_Enabled = value;
+  m_Enabled = value;
 }
 
 const std::string& CheckStaticRange::GetCallback() const
 {
-    return m_Callback;
+  return m_Callback;
 }
 
 void CheckStaticRange::SetCallback(const std::string& value)
 {
-    m_Callback = value;
+  m_Callback = value;
 }
 
 const std::string& CheckStaticRange::GetStopwhenassertionfail() const
 {
-    return m_Stopwhenassertionfail;
+  return m_Stopwhenassertionfail;
 }
 
 void CheckStaticRange::SetStopwhenassertionfail(const std::string& value)
 {
-    m_Stopwhenassertionfail = value;
+  m_Stopwhenassertionfail = value;
 }
 
 const std::string& CheckStaticRange::GetExport() const
 {
-    return m_Export;
+  return m_Export;
 }
 
 void CheckStaticRange::SetExport(const std::string& value)
 {
-    m_Export = value;
+  m_Export = value;
 }
 
 const std::string& CheckStaticRange::GetIcon() const
 {
-    return m_Icon;
+  return m_Icon;
 }
 
 void CheckStaticRange::SetIcon(const std::string& value)
 {
-    m_Icon = value;
+  m_Icon = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

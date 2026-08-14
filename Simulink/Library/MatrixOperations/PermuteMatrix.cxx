@@ -9,42 +9,42 @@ PermuteMatrix::~PermuteMatrix() {}
 
 const std::string& PermuteMatrix::GetMode() const
 {
-    return m_Mode;
+  return m_Mode;
 }
 
 void PermuteMatrix::SetMode(const std::string& value)
 {
-    m_Mode = value;
+  m_Mode = value;
 }
 
 const std::string& PermuteMatrix::GetZerooneidxmode() const
 {
-    return m_Zerooneidxmode;
+  return m_Zerooneidxmode;
 }
 
 void PermuteMatrix::SetZerooneidxmode(const std::string& value)
 {
-    m_Zerooneidxmode = value;
+  m_Zerooneidxmode = value;
 }
 
 const std::string& PermuteMatrix::GetErrmode() const
 {
-    return m_Errmode;
+  return m_Errmode;
 }
 
 void PermuteMatrix::SetErrmode(const std::string& value)
 {
-    m_Errmode = value;
+  m_Errmode = value;
 }
 
 const std::string& PermuteMatrix::GetCheckdims() const
 {
-    return m_Checkdims;
+  return m_Checkdims;
 }
 
 void PermuteMatrix::SetCheckdims(const std::string& value)
 {
-    m_Checkdims = value;
+  m_Checkdims = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

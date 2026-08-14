@@ -6,5 +6,4 @@
 
 #include "CommonECH.h"
 
-
 #endif // DATAECH_H

@@ -5,16 +5,18 @@
 #define ASINH_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Asinh : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Asinh
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -54,7 +56,6 @@ public:
   void SetSampletime(const std::string& value);
 
 private:
-
   std::string m_Operator;
 
   std::string m_Approximationmethod;
@@ -74,7 +75,6 @@ private:
   std::string m_Removeprotectionagainstoutofrangeinput;
 
   std::string m_Sampletime;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

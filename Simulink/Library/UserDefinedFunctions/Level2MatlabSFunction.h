@@ -5,16 +5,18 @@
 #define LEVEL2MATLABSFUNCTION_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Level2MatlabSFunction : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT Level2MatlabSFunction
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -30,11 +32,9 @@ public:
   void SetParameters(const std::string& value);
 
 private:
-
   std::string m_Functionname;
 
   std::string m_Parameters;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

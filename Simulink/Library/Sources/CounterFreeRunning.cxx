@@ -9,22 +9,22 @@ CounterFreeRunning::~CounterFreeRunning() {}
 
 const std::string& CounterFreeRunning::GetNumbits() const
 {
-    return m_Numbits;
+  return m_Numbits;
 }
 
 void CounterFreeRunning::SetNumbits(const std::string& value)
 {
-    m_Numbits = value;
+  m_Numbits = value;
 }
 
 const std::string& CounterFreeRunning::GetTsamp() const
 {
-    return m_Tsamp;
+  return m_Tsamp;
 }
 
 void CounterFreeRunning::SetTsamp(const std::string& value)
 {
-    m_Tsamp = value;
+  m_Tsamp = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

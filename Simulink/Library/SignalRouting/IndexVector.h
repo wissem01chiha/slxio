@@ -5,16 +5,18 @@
 #define INDEXVECTOR_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IndexVector : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT IndexVector
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -66,7 +68,6 @@ public:
   void SetAllowdiffinputsizes(const std::string& value);
 
 private:
-
   std::string m_Dataportorder;
 
   std::string m_Inputs;
@@ -94,7 +95,6 @@ private:
   std::string m_Sampletime;
 
   std::string m_Allowdiffinputsizes;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

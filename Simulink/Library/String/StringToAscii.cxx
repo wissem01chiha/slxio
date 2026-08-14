@@ -9,12 +9,12 @@ StringToAscii::~StringToAscii() {}
 
 const std::string& StringToAscii::GetOutputvectorsize() const
 {
-    return m_Outputvectorsize;
+  return m_Outputvectorsize;
 }
 
 void StringToAscii::SetOutputvectorsize(const std::string& value)
 {
-    m_Outputvectorsize = value;
+  m_Outputvectorsize = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

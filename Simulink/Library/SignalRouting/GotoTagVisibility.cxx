@@ -9,12 +9,12 @@ GotoTagVisibility::~GotoTagVisibility() {}
 
 const std::string& GotoTagVisibility::GetGototag() const
 {
-    return m_Gototag;
+  return m_Gototag;
 }
 
 void GotoTagVisibility::SetGototag(const std::string& value)
 {
-    m_Gototag = value;
+  m_Gototag = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

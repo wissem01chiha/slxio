@@ -9,22 +9,22 @@ TriggerBasedLinearization::~TriggerBasedLinearization() {}
 
 const std::string& TriggerBasedLinearization::GetTriggertype() const
 {
-    return m_Triggertype;
+  return m_Triggertype;
 }
 
 void TriggerBasedLinearization::SetTriggertype(const std::string& value)
 {
-    m_Triggertype = value;
+  m_Triggertype = value;
 }
 
 const std::string& TriggerBasedLinearization::GetSampletime() const
 {
-    return m_Sampletime;
+  return m_Sampletime;
 }
 
 void TriggerBasedLinearization::SetSampletime(const std::string& value)
 {
-    m_Sampletime = value;
+  m_Sampletime = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

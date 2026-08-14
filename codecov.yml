@@ -2,4 +2,4 @@
 ignore:
   - "ThirdParty"
   - "Testing"
-  - "**/Test_*.cxx"  
+  - "**/Test*.cxx"  

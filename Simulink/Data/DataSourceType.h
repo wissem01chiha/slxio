@@ -15,7 +15,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class DataSourceType
  * @brief
  */
-class SLXIO_APIEXPORT DataSourceType final 
+class SLXIO_APIEXPORT DataSourceType final
 {
 public:
   enum class Type

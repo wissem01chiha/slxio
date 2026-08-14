@@ -9,32 +9,32 @@ XyGraph::~XyGraph() {}
 
 const std::string& XyGraph::GetNumports() const
 {
-    return m_Numports;
+  return m_Numports;
 }
 
 void XyGraph::SetNumports(const std::string& value)
 {
-    m_Numports = value;
+  m_Numports = value;
 }
 
 const std::string& XyGraph::GetFramesettings() const
 {
-    return m_Framesettings;
+  return m_Framesettings;
 }
 
 void XyGraph::SetFramesettings(const std::string& value)
 {
-    m_Framesettings = value;
+  m_Framesettings = value;
 }
 
 const std::string& XyGraph::GetLayout() const
 {
-    return m_Layout;
+  return m_Layout;
 }
 
 void XyGraph::SetLayout(const std::string& value)
 {
-    m_Layout = value;
+  m_Layout = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

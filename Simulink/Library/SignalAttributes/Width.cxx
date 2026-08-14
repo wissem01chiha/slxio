@@ -9,32 +9,32 @@ Width::~Width() {}
 
 const std::string& Width::GetOutdatatypemode() const
 {
-    return m_Outdatatypemode;
+  return m_Outdatatypemode;
 }
 
 void Width::SetOutdatatypemode(const std::string& value)
 {
-    m_Outdatatypemode = value;
+  m_Outdatatypemode = value;
 }
 
 const std::string& Width::GetDatatype() const
 {
-    return m_Datatype;
+  return m_Datatype;
 }
 
 void Width::SetDatatype(const std::string& value)
 {
-    m_Datatype = value;
+  m_Datatype = value;
 }
 
 const std::string& Width::GetAlwaysuseconstantsampletime() const
 {
-    return m_Alwaysuseconstantsampletime;
+  return m_Alwaysuseconstantsampletime;
 }
 
 void Width::SetAlwaysuseconstantsampletime(const std::string& value)
 {
-    m_Alwaysuseconstantsampletime = value;
+  m_Alwaysuseconstantsampletime = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

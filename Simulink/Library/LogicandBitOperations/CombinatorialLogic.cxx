@@ -9,22 +9,22 @@ CombinatorialLogic::~CombinatorialLogic() {}
 
 const std::string& CombinatorialLogic::GetTruthtable() const
 {
-    return m_Truthtable;
+  return m_Truthtable;
 }
 
 void CombinatorialLogic::SetTruthtable(const std::string& value)
 {
-    m_Truthtable = value;
+  m_Truthtable = value;
 }
 
 const std::string& CombinatorialLogic::GetSampletime() const
 {
-    return m_Sampletime;
+  return m_Sampletime;
 }
 
 void CombinatorialLogic::SetSampletime(const std::string& value)
 {
-    m_Sampletime = value;
+  m_Sampletime = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

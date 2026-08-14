@@ -9,12 +9,12 @@ WrapToZero::~WrapToZero() {}
 
 const std::string& WrapToZero::GetThreshold() const
 {
-    return m_Threshold;
+  return m_Threshold;
 }
 
 void WrapToZero::SetThreshold(const std::string& value)
 {
-    m_Threshold = value;
+  m_Threshold = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

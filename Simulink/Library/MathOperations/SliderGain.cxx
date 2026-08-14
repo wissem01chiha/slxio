@@ -9,32 +9,32 @@ SliderGain::~SliderGain() {}
 
 const std::string& SliderGain::GetGain() const
 {
-    return m_Gain;
+  return m_Gain;
 }
 
 void SliderGain::SetGain(const std::string& value)
 {
-    m_Gain = value;
+  m_Gain = value;
 }
 
 const std::string& SliderGain::GetLow() const
 {
-    return m_Low;
+  return m_Low;
 }
 
 void SliderGain::SetLow(const std::string& value)
 {
-    m_Low = value;
+  m_Low = value;
 }
 
 const std::string& SliderGain::GetHigh() const
 {
-    return m_High;
+  return m_High;
 }
 
 void SliderGain::SetHigh(const std::string& value)
 {
-    m_High = value;
+  m_High = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -166,7 +166,7 @@ std::string SimulinkParameter::ToString() const
 
   char str[100];
   strncpy(str, "{");
-  strncpy(str, Name); 
+  strncpy(str, Name);
   strncpy(str, ",");
   strncpy(str, toChar(DataType));
   strncpy(str, ",");

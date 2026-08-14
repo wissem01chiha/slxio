@@ -24,13 +24,19 @@ add_module(
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
     DataSourceType.cxx
+    ModelWorkspace.cxx
+    ModelWorkspaceParameter.cxx
   MODULE_HEADERS
     DataSourceType.h
     IBlockParameters.h
     IBlockProperties.h
     ILogging.h
     ISignalAttributes.h
+    IBlockPropertiesInformation.h
+    IBlockParametersInformation.h
     ICodeGenration.h
+    ModelWorkspace.h
+    ModelWorkspaceParameter.h
   MODULE_PCH_HEADERS
     DataPCH.h
     DataECH.h

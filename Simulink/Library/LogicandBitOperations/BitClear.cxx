@@ -9,12 +9,12 @@ BitClear::~BitClear() {}
 
 const std::string& BitClear::GetIbit() const
 {
-    return m_Ibit;
+  return m_Ibit;
 }
 
 void BitClear::SetIbit(const std::string& value)
 {
-    m_Ibit = value;
+  m_Ibit = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

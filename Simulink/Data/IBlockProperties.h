@@ -8,13 +8,20 @@
 #include "APIExportMacro.h"
 #include "DataPCH.h"
 
-class IBlockProperties
+namespace slxio {
+SLXIO_ABI_NAMESPACE_BEGIN
+
+/**
+ * @class IBlockProperties
+ */
+class SLXIO_APIEXPORT IBlockProperties
 {
-private:
 public:
-    IBlockProperties();
-    ~IBlockProperties();
+  IBlockProperties();
+  ~IBlockProperties();
 };
 
+SLXIO_ABI_NAMESPACE_END
+}; // namespace slxio
 
 #endif // IBLOCKPROPERITIES_H

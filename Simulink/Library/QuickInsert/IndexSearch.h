@@ -5,16 +5,18 @@
 #define INDEXSEARCH_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IndexSearch : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT IndexSearch
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -93,7 +95,6 @@ public:
   void SetOutputbusdatatypestr(const std::string& value);
 
 private:
-
   std::string m_Breakpointsdatasource;
 
   std::string m_Breakpointsdata;
@@ -139,7 +140,6 @@ private:
   std::string m_Sampletime;
 
   std::string m_Outputbusdatatypestr;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

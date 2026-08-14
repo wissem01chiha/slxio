@@ -25,22 +25,24 @@ public:
   /** Create a new instance of the IParameterizedObject */
   virtual IParameterizedObject* New() = 0;
 
-  /** 
-   * Add a parameter 
+  /**
+   * Add a parameter
    * https://www.mathworks.com/help/simulink/slref/add_param.html
    */
-  virtual void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) =0;
+  virtual void AddParam(const std::string& name,
+                        const std::shared_ptr<IParameterObjectBase>& p) = 0;
 
-  /** 
-   * Set a parameter 
+  /**
+   * Set a parameter
    * https://www.mathworks.com/help/simulink/slref/set_param.html
    * @param name parameter name to set it value
    */
-  virtual void SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) =0;
+  virtual void SetParam(const std::string& name,
+                        const std::shared_ptr<IParameterObjectBase>& p) = 0;
 
   /** Get a parameter by name */
-  virtual std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) = 0;
-
+  virtual std::shared_ptr<IParameterObjectBase> GetParam(
+    const std::string& name) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

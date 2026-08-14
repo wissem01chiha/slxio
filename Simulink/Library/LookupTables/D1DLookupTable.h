@@ -5,16 +5,18 @@
 #define D1DLOOKUPTABLE_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT D1DLookupTable : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT D1DLookupTable
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -762,7 +764,6 @@ public:
   void SetSupporttunablesize(const std::string& value);
 
 private:
-
   std::string m_Numberoftabledimensions;
 
   std::string m_Dataspecification;
@@ -1254,7 +1255,6 @@ private:
   std::string m_Maximumindicesforeachdimension;
 
   std::string m_Supporttunablesize;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -5,16 +5,18 @@
 #define SIGNALSPECIFICATION_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SignalSpecification : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT SignalSpecification
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -54,7 +56,6 @@ public:
   void SetSignaltype(const std::string& value);
 
 private:
-
   std::string m_Outmin;
 
   std::string m_Outmax;
@@ -74,7 +75,6 @@ private:
   std::string m_Sampletime;
 
   std::string m_Signaltype;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

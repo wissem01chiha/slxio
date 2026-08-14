@@ -5,16 +5,18 @@
 #define CHECKDYNAMICUPPERBOUND_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT CheckDynamicUpperBound : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT CheckDynamicUpperBound
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -39,7 +41,6 @@ public:
   void SetIcon(const std::string& value);
 
 private:
-
   std::string m_Enabled;
 
   std::string m_Callback;
@@ -49,7 +50,6 @@ private:
   std::string m_Export;
 
   std::string m_Icon;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

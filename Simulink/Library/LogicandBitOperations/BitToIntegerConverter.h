@@ -5,16 +5,18 @@
 #define BITTOINTEGERCONVERTER_H
 
 #include "ABINamespaceMacro.h"
-#include "LibraryECH.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "LibraryECH.h"
+#include "PlatformTypes.h"
 
 namespace slxio {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitToIntegerConverter : public IBlockParameters, public IBlockProperties
+class SLXIO_APIEXPORT BitToIntegerConverter
+  : public IBlockParameters
+  , public IBlockProperties
 {
 public:
   /** Default Constructor */
@@ -39,7 +41,6 @@ public:
   void SetOutdtypesigned(const std::string& value);
 
 private:
-
   std::string m_Nbits;
 
   std::string m_Bitorder;
@@ -49,7 +50,6 @@ private:
   std::string m_Outdtype;
 
   std::string m_Outdtypesigned;
-
 };
 
 SLXIO_ABI_NAMESPACE_END
