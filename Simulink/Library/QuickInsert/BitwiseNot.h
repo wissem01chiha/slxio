@@ -11,45 +11,45 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitwiseNot
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT BitwiseNot : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  BitwiseNot();
+    /** Default Constructor */
+    BitwiseNot();
 
-  /** Default Destructor */
-  ~BitwiseNot();
+    /** Default Destructor */
+    ~BitwiseNot();
 
-  const std::string& GetLogicop() const;
-  void SetLogicop(const std::string& value);
+    const std::string& GetLogicop() const;
+    void SetLogicop(const std::string& value);
 
-  const std::string& GetUsebitmask() const;
-  void SetUsebitmask(const std::string& value);
+    const std::string& GetUsebitmask() const;
+    void SetUsebitmask(const std::string& value);
 
-  const std::string& GetNuminputports() const;
-  void SetNuminputports(const std::string& value);
+    const std::string& GetNuminputports() const;
+    void SetNuminputports(const std::string& value);
 
-  const std::string& GetBitmask() const;
-  void SetBitmask(const std::string& value);
+    const std::string& GetBitmask() const;
+    void SetBitmask(const std::string& value);
 
-  const std::string& GetBitmaskrealworld() const;
-  void SetBitmaskrealworld(const std::string& value);
+    const std::string& GetBitmaskrealworld() const;
+    void SetBitmaskrealworld(const std::string& value);
 
 private:
-  std::string m_Logicop;
+    std::string m_Logicop;
 
-  std::string m_Usebitmask;
+    std::string m_Usebitmask;
 
-  std::string m_Numinputports;
+    std::string m_Numinputports;
 
-  std::string m_Bitmask;
+    std::string m_Bitmask;
 
-  std::string m_Bitmaskrealworld;
+    std::string m_Bitmaskrealworld;
 };
 
 SLXIO_ABI_NAMESPACE_END

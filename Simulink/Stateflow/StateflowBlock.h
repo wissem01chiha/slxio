@@ -9,7 +9,8 @@
 
 #include <memory>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class StateflowChart;
@@ -23,19 +24,19 @@ class StateflowChart;
 class SLXIO_APIEXPORT StateflowBlock : public SimulinkBlock
 {
 public:
-  StateflowBlock() = default;
-  StateflowBlock(StateflowChart& chart);
-  StateflowBlock(StateflowBlock& block);
+    StateflowBlock() = default;
+    StateflowBlock(StateflowChart& chart);
+    StateflowBlock(StateflowBlock& block);
 
-  /// @brief  Get a pointer to the StateflowChart which the blcok
-  /// belong to
-  std::shared_ptr<StateflowChart> getChart();
+    /// @brief  Get a pointer to the StateflowChart which the blcok
+    /// belong to
+    std::shared_ptr<StateflowChart> getChart();
 
-  /// @brief Remove this block from the StateflowChart
-  HError RemoveElement();
+    /// @brief Remove this block from the StateflowChart
+    HError RemoveElement();
 
 private:
-  std::shared_ptr<StateflowChart> chart;
+    std::shared_ptr<StateflowChart> chart;
 };
 
 SLXIO_ABI_NAMESPACE_END

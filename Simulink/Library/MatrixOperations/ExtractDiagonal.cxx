@@ -1,6 +1,7 @@
 #include "ExtractDiagonal.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ExtractDiagonal::ExtractDiagonal() {}

@@ -7,7 +7,8 @@
 #include "ABINamespaceMacro.h"
 #include "StateflowElementBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -17,14 +18,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT StateflowTarget final : public StateflowElementBase
 {
 public:
-  StateflowTarget();
-  StateflowTarget(StateflowTarget& orig);
+    StateflowTarget();
+    StateflowTarget(StateflowTarget& orig);
 
-  HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
-  HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+    HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
+    HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
 
-  std::string toString() const override;
-  SId GetId() const override;
+    std::string toString() const override;
+    SId GetId() const override;
 
 private:
 };

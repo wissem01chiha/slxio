@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IncrementRealWorld
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT IncrementRealWorld : public IBlockParameters,
+                                           public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  IncrementRealWorld();
+    /** Default Constructor */
+    IncrementRealWorld();
 
-  /** Default Destructor */
-  ~IncrementRealWorld();
+    /** Default Destructor */
+    ~IncrementRealWorld();
 
 private:
 };

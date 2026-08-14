@@ -9,7 +9,8 @@
 #include "CorePCH.h"
 #include "ILogger.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,15 +21,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT Logger final : public ILogger
 {
 public:
-  Logger() = default;
-  void Init() override;
-  void Log(const ILogMessage& msg) override;
-  void SetLogLevel(LogLevelType level) override;
-  LogLevelType GetLogLevel() const override;
-  ~Logger(){};
+    Logger() = default;
+    void Init() override;
+    void Log(const ILogMessage& msg) override;
+    void SetLogLevel(LogLevelType level) override;
+    LogLevelType GetLogLevel() const override;
+    ~Logger(){};
 
 private:
-  LogLevelType m_level;
+    LogLevelType m_level;
 };
 
 SLXIO_ABI_NAMESPACE_END

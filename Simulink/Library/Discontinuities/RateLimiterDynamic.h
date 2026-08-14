@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT RateLimiterDynamic
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT RateLimiterDynamic : public IBlockParameters,
+                                           public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  RateLimiterDynamic();
+    /** Default Constructor */
+    RateLimiterDynamic();
 
-  /** Default Destructor */
-  ~RateLimiterDynamic();
+    /** Default Destructor */
+    ~RateLimiterDynamic();
 
 private:
 };

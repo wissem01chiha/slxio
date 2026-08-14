@@ -23,24 +23,27 @@
 /* Simplify termcap activation */
 void setStringCapacities(const char* capacity)
 {
-  char* stringCap;
+    char* stringCap;
 
-  stringCap = tgetstr(capacity, NULL);
-  if (stringCap != NULL) {
-    tputs(stringCap, 1, putchar);
-  }
+    stringCap = tgetstr(capacity, NULL);
+    if (stringCap != NULL)
+    {
+        tputs(stringCap, 1, putchar);
+    }
 }
 
 /* Move cursor to the column _col and the line _li */
 void capGoto(int col, int li)
 {
-  char* stringCap;
+    char* stringCap;
 
-  stringCap = tgetstr("cm", NULL);
-  if (stringCap != NULL) {
-    stringCap = tgoto(stringCap, col, li);
-  }
-  if (stringCap != NULL) {
-    tputs(stringCap, 1, putchar);
-  }
+    stringCap = tgetstr("cm", NULL);
+    if (stringCap != NULL)
+    {
+        stringCap = tgoto(stringCap, col, li);
+    }
+    if (stringCap != NULL)
+    {
+        tputs(stringCap, 1, putchar);
+    }
 }

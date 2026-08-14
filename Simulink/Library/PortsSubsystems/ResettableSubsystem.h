@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ResettableSubsystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ResettableSubsystem : public IBlockParameters,
+                                            public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ResettableSubsystem();
+    /** Default Constructor */
+    ResettableSubsystem();
 
-  /** Default Destructor */
-  ~ResettableSubsystem();
+    /** Default Destructor */
+    ~ResettableSubsystem();
 
 private:
 };

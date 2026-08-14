@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT FunctionCallGenerator
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT FunctionCallGenerator : public IBlockParameters,
+                                              public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  FunctionCallGenerator();
+    /** Default Constructor */
+    FunctionCallGenerator();
 
-  /** Default Destructor */
-  ~FunctionCallGenerator();
+    /** Default Destructor */
+    ~FunctionCallGenerator();
 
-  const std::string& GetSampleTime() const;
-  void SetSampleTime(const std::string& value);
+    const std::string& GetSampleTime() const;
+    void SetSampleTime(const std::string& value);
 
-  const std::string& GetNumberofiterations() const;
-  void SetNumberofiterations(const std::string& value);
+    const std::string& GetNumberofiterations() const;
+    void SetNumberofiterations(const std::string& value);
 
-  const std::string& GetDisallowwideoutput() const;
-  void SetDisallowwideoutput(const std::string& value);
+    const std::string& GetDisallowwideoutput() const;
+    void SetDisallowwideoutput(const std::string& value);
 
-  const std::string& GetShowenableport() const;
-  void SetShowenableport(const std::string& value);
+    const std::string& GetShowenableport() const;
+    void SetShowenableport(const std::string& value);
 
 private:
-  std::string m_SampleTime;
+    std::string m_SampleTime;
 
-  std::string m_Numberofiterations;
+    std::string m_Numberofiterations;
 
-  std::string m_Disallowwideoutput;
+    std::string m_Disallowwideoutput;
 
-  std::string m_Showenableport;
+    std::string m_Showenableport;
 };
 
 SLXIO_ABI_NAMESPACE_END

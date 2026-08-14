@@ -1,6 +1,7 @@
 #include "DecrementToZero.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DecrementToZero::DecrementToZero() {}

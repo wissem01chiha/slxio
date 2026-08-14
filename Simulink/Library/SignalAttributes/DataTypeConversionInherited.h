@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataTypeConversionInherited
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT DataTypeConversionInherited : public IBlockParameters,
+                                                    public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  DataTypeConversionInherited();
+    /** Default Constructor */
+    DataTypeConversionInherited();
 
-  /** Default Destructor */
-  ~DataTypeConversionInherited();
+    /** Default Destructor */
+    ~DataTypeConversionInherited();
 
-  const std::string& GetConvertrealworld() const;
-  void SetConvertrealworld(const std::string& value);
+    const std::string& GetConvertrealworld() const;
+    void SetConvertrealworld(const std::string& value);
 
-  const std::string& GetRndmeth() const;
-  void SetRndmeth(const std::string& value);
+    const std::string& GetRndmeth() const;
+    void SetRndmeth(const std::string& value);
 
-  const std::string& GetDosatur() const;
-  void SetDosatur(const std::string& value);
+    const std::string& GetDosatur() const;
+    void SetDosatur(const std::string& value);
 
 private:
-  std::string m_Convertrealworld;
+    std::string m_Convertrealworld;
 
-  std::string m_Rndmeth;
+    std::string m_Rndmeth;
 
-  std::string m_Dosatur;
+    std::string m_Dosatur;
 };
 
 SLXIO_ABI_NAMESPACE_END

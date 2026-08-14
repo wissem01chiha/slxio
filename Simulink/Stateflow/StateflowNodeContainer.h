@@ -14,7 +14,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class IStateflowNodeContainer
 {
 public:
-  IStateflowNodeContainer();
+    IStateflowNodeContainer();
 
 private:
 };

@@ -1,6 +1,7 @@
 #include "Transpose.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 Transpose::Transpose() {}

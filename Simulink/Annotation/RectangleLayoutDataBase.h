@@ -15,16 +15,16 @@ class Color;
 class RectangleLayoutDataBase
 {
 public:
-  RectangleLayoutDataBase();
-  RectangleLayoutDataBase(const RectangleType& position,
-                          const Color& foregroundColor,
-                          const Color& backgroundColor);
-  virtual ~RectangleLayoutDataBase() = default;
+    RectangleLayoutDataBase();
+    RectangleLayoutDataBase(const RectangleType& position,
+                            const Color& foregroundColor,
+                            const Color& backgroundColor);
+    virtual ~RectangleLayoutDataBase() = default;
 
 protected:
-  Rectangle Position;
-  std::shared_ptr<Color> foregroundColor_;
-  std::shared_ptr<Color> backgroundColor_;
+    Rectangle Position;
+    std::shared_ptr<Color> foregroundColor_;
+    std::shared_ptr<Color> backgroundColor_;
 };
 
 #endif // RectangleTypeLAYOUTDATABASE_H

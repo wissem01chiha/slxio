@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT MatrixConcatenate
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT MatrixConcatenate : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  MatrixConcatenate();
+    /** Default Constructor */
+    MatrixConcatenate();
 
-  /** Default Destructor */
-  ~MatrixConcatenate();
+    /** Default Destructor */
+    ~MatrixConcatenate();
 
-  const std::string& GetNuminputs() const;
-  void SetNuminputs(const std::string& value);
+    const std::string& GetNuminputs() const;
+    void SetNuminputs(const std::string& value);
 
-  const std::string& GetMode() const;
-  void SetMode(const std::string& value);
+    const std::string& GetMode() const;
+    void SetMode(const std::string& value);
 
-  const std::string& GetConcatenatedimension() const;
-  void SetConcatenatedimension(const std::string& value);
+    const std::string& GetConcatenatedimension() const;
+    void SetConcatenatedimension(const std::string& value);
 
 private:
-  std::string m_Numinputs;
+    std::string m_Numinputs;
 
-  std::string m_Mode;
+    std::string m_Mode;
 
-  std::string m_Concatenatedimension;
+    std::string m_Concatenatedimension;
 };
 
 SLXIO_ABI_NAMESPACE_END

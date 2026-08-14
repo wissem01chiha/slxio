@@ -9,7 +9,8 @@
 #include "Options.h"
 #include "PlatformMacro.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SLXIO_ABI_NAMESPACE_END

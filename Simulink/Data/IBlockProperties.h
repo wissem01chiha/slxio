@@ -7,18 +7,23 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "DataPCH.h"
+#include "IBlockPropertiesInformation.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class IBlockProperties
+ * @brief
  */
 class SLXIO_APIEXPORT IBlockProperties
 {
 public:
-  IBlockProperties();
-  ~IBlockProperties();
+    IBlockProperties();
+    ~IBlockProperties();
+
+    virtual std::shared_ptr<IBlockProperties> GetInformation() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

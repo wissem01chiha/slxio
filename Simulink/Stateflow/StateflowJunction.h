@@ -7,7 +7,8 @@
 #include "SimulinkElementType.h"
 #include "StateflowNodeBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -16,26 +17,26 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class StateflowJunction final : public StateflowNodeBase
 {
 public:
-  StateflowJunction() = default;
+    StateflowJunction() = default;
 
 private:
-  StateflowJunction(StateflowJunction& orig)
-  {
+    StateflowJunction(StateflowJunction& orig)
+    {
 
-    // duplicate all default transitions to this one
-    // for (StateflowTransition transition : orig.getInTransitions())
-    // { if (transition.getSrc() == null) {
-    // SimulinkUtils.copyParameters(transition, new
-    // StateflowTransition(this));
-    //}
-    //}
-  }
+        // duplicate all default transitions to this one
+        // for (StateflowTransition transition : orig.getInTransitions())
+        // { if (transition.getSrc() == null) {
+        // SimulinkUtils.copyParameters(transition, new
+        // StateflowTransition(this));
+        //}
+        //}
+    }
 
-  /// @brief
-  SimulinkElementType GetType() const override;
+    /// @brief
+    SimulinkElementType GetType() const override;
 
-  /// @brief Return
-  std::string ToString() const override;
+    /// @brief Return
+    std::string ToString() const override;
 };
 
 SLXIO_ABI_NAMESPACE_END

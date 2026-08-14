@@ -8,7 +8,8 @@
 #ifndef IMUTABLEPARAMETEROBJECT_H
 #define IMUTABLEPARAMETEROBJECT_H
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,13 +21,13 @@ template <typename T>
 class SLXIO_APIEXPORT IMutableParameterObject : public IParameterObject<T>
 {
 public:
-  /** Access mutable value */
-  virtual T& GetValue() = 0;
+    /** Access mutable value */
+    virtual T& GetValue() = 0;
 
-  /** Set a new value */
-  virtual void SetValue(const T& value) = 0;
+    /** Set a new value */
+    virtual void SetValue(const T& value) = 0;
 
-  virtual ~IMutableParameterObject() = default;
+    virtual ~IMutableParameterObject() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

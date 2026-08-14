@@ -11,35 +11,34 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Display
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Display : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Display();
+    /** Default Constructor */
+    Display();
 
-  /** Default Destructor */
-  ~Display();
+    /** Default Destructor */
+    ~Display();
 
-  const std::string& GetFormat() const;
-  void SetFormat(const std::string& value);
+    const std::string& GetFormat() const;
+    void SetFormat(const std::string& value);
 
-  const std::string& GetDecimation() const;
-  void SetDecimation(const std::string& value);
+    const std::string& GetDecimation() const;
+    void SetDecimation(const std::string& value);
 
-  const std::string& GetFloating() const;
-  void SetFloating(const std::string& value);
+    const std::string& GetFloating() const;
+    void SetFloating(const std::string& value);
 
 private:
-  std::string m_Format;
+    std::string m_Format;
 
-  std::string m_Decimation;
+    std::string m_Decimation;
 
-  std::string m_Floating;
+    std::string m_Floating;
 };
 
 SLXIO_ABI_NAMESPACE_END

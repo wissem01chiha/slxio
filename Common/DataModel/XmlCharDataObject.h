@@ -9,7 +9,8 @@
 #include "IDataObject.h"
 #include "Libxml2.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -19,16 +20,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT XmlCharDataObject : public IDataObject
 {
 public:
-  XmlCharDataObject* New() override;
-  bool Empty() const override;
-  bool operator==(const IDataObject&) const override;
-  void* GetImplDataObject() const override;
-  std::string ToString() const override;
-  DataType GetDataType() const override;
-  XmlCharDataObject();
+    XmlCharDataObject* New() override;
+    bool Empty() const override;
+    bool operator==(const IDataObject&) const override;
+    void* GetImplDataObject() const override;
+    std::string ToString() const override;
+    DataType GetDataType() const override;
+    XmlCharDataObject();
 
 private:
-  xmlChar* m_implDataObject;
+    xmlChar* m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

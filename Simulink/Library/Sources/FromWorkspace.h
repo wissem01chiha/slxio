@@ -11,50 +11,50 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT FromWorkspace
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT FromWorkspace : public IBlockParameters,
+                                      public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  FromWorkspace();
+    /** Default Constructor */
+    FromWorkspace();
 
-  /** Default Destructor */
-  ~FromWorkspace();
+    /** Default Destructor */
+    ~FromWorkspace();
 
-  const std::string& GetVariablename() const;
-  void SetVariablename(const std::string& value);
+    const std::string& GetVariablename() const;
+    void SetVariablename(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
-  const std::string& GetInterpolate() const;
-  void SetInterpolate(const std::string& value);
+    const std::string& GetInterpolate() const;
+    void SetInterpolate(const std::string& value);
 
-  const std::string& GetZerocross() const;
-  void SetZerocross(const std::string& value);
+    const std::string& GetZerocross() const;
+    void SetZerocross(const std::string& value);
 
-  const std::string& GetOutputafterfinalvalue() const;
-  void SetOutputafterfinalvalue(const std::string& value);
+    const std::string& GetOutputafterfinalvalue() const;
+    void SetOutputafterfinalvalue(const std::string& value);
 
 private:
-  std::string m_Variablename;
+    std::string m_Variablename;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 
-  std::string m_Interpolate;
+    std::string m_Interpolate;
 
-  std::string m_Zerocross;
+    std::string m_Zerocross;
 
-  std::string m_Outputafterfinalvalue;
+    std::string m_Outputafterfinalvalue;
 };
 
 SLXIO_ABI_NAMESPACE_END

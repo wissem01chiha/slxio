@@ -8,86 +8,86 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 bool FileExists(const std::string& fileName)
 {
-  std::ifstream file(fileName.c_str());
-  return file.good();
+    std::ifstream file(fileName.c_str());
+    return file.good();
 }
 
 TEST_CASE("FileLogger creates log file")
 {
-  const std::string logFile = "FileLoggerTest.log";
+    const std::string logFile = "FileLoggerTest.log";
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 
-  FileLogger logger(logFile);
-  logger.Init();
+    FileLogger logger(logFile);
+    logger.Init();
 
-  CHECK(FileExists(logFile));
+    CHECK(FileExists(logFile));
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 }
 
 TEST_CASE("FileLogger log level setter getter")
 {
-  FileLogger logger;
+    FileLogger logger;
 
-  logger.SetLogLevel(LogLevelType::LOG_INFO);
+    logger.SetLogLevel(LogLevelType::LOG_INFO);
 
-  CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
+    CHECK(logger.GetLogLevel() == LogLevelType::LOG_INFO);
 }
 
 TEST_CASE("FileLogger writes message to file")
 {
-  const std::string logFile = "FileLoggerTest.log";
+    const std::string logFile = "FileLoggerTest.log";
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 
-  FileLogger logger(logFile);
-  logger.Init();
+    FileLogger logger(logFile);
+    logger.Init();
 
-  std::string data("Hello");
+    std::string data("Hello");
 
-  LogMessage msg(data);
+    LogMessage msg(data);
 
-  logger.Log(msg);
+    logger.Log(msg);
 
-  std::ifstream file(logFile.c_str());
-  REQUIRE(file.is_open());
+    std::ifstream file(logFile.c_str());
+    REQUIRE(file.is_open());
 
-  std::stringstream buffer;
-  buffer << file.rdbuf();
+    std::stringstream buffer;
+    buffer << file.rdbuf();
 
-  const std::string content = buffer.str();
+    const std::string content = buffer.str();
 
-  CHECK(content.find("Hello") != std::string::npos);
+    CHECK(content.find("Hello") != std::string::npos);
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 }
 
 TEST_CASE("FileLogger stream operator")
 {
-  const std::string logFile = "FileLoggerTest.log";
+    const std::string logFile = "FileLoggerTest.log";
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 
-  FileLogger logger(logFile);
-  logger.Init();
+    FileLogger logger(logFile);
+    logger.Init();
 
-  std::string data = "Test";
+    std::string data = "Test";
 
-  LogMessage msg(data);
+    LogMessage msg(data);
 
-  logger << msg;
+    logger << msg;
 
-  std::ifstream file(logFile.c_str());
-  REQUIRE(file.is_open());
+    std::ifstream file(logFile.c_str());
+    REQUIRE(file.is_open());
 
-  std::stringstream buffer;
-  buffer << file.rdbuf();
+    std::stringstream buffer;
+    buffer << file.rdbuf();
 
-  const std::string content = buffer.str();
+    const std::string content = buffer.str();
 
-  CHECK(content.find("Test") != std::string::npos);
+    CHECK(content.find("Test") != std::string::npos);
 
-  std::remove(logFile.c_str());
+    std::remove(logFile.c_str());
 }
 SLXIO_ABI_NAMESPACE_END

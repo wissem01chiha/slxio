@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Substring
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Substring : public IBlockParameters,
+                                  public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Substring();
+    /** Default Constructor */
+    Substring();
 
-  /** Default Destructor */
-  ~Substring();
+    /** Default Destructor */
+    ~Substring();
 
-  const std::string& GetInheritmaximumlength() const;
-  void SetInheritmaximumlength(const std::string& value);
+    const std::string& GetInheritmaximumlength() const;
+    void SetInheritmaximumlength(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetStringfromidxtoend() const;
-  void SetStringfromidxtoend(const std::string& value);
+    const std::string& GetStringfromidxtoend() const;
+    void SetStringfromidxtoend(const std::string& value);
 
 private:
-  std::string m_Inheritmaximumlength;
+    std::string m_Inheritmaximumlength;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Stringfromidxtoend;
+    std::string m_Stringfromidxtoend;
 };
 
 SLXIO_ABI_NAMESPACE_END

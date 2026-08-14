@@ -14,7 +14,8 @@
 #include <string>
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Logger;
@@ -34,80 +35,80 @@ class CoderInfo;
 class SLXIO_APIEXPORT SimulinkParameter : public SimulinkParameterBase
 {
 public:
-  /** Default constructor */
-  SimulinkParameter();
+    /** Default constructor */
+    SimulinkParameter();
 
-  /** Explicit constructor */
-  explicit SimulinkParameter(const char* val);
+    /** Explicit constructor */
+    explicit SimulinkParameter(const char* val);
 
-  /** Returns current parameter name */
-  std::string GetName() override;
+    /** Returns current parameter name */
+    std::string GetName() override;
 
-  /** Returns parameter dimensions */
-  std::vector<UInt16> GetDimensions() override;
+    /** Returns parameter dimensions */
+    std::vector<UInt16> GetDimensions() override;
 
-  /** Serializes parameter to string */
-  std::string ToString() const override;
+    /** Serializes parameter to string */
+    std::string ToString() const override;
 
-  /** Returns code generation data struct */
-  std::shared_ptr<CoderInfo> GetCoderInfo() override;
+    /** Returns code generation data struct */
+    std::shared_ptr<CoderInfo> GetCoderInfo() override;
 
-  /** Returns parameter minimum value */
-  Float32 GetMin() override;
+    /** Returns parameter minimum value */
+    Float32 GetMin() override;
 
-  /** Returns parameter maximum value */
-  Float32 GetMax() override;
+    /** Returns parameter maximum value */
+    Float32 GetMax() override;
 
-  /** Returns the resolved parameter SimulinkDataType */
-  SimulinkDataType GetDataType() override;
+    /** Returns the resolved parameter SimulinkDataType */
+    SimulinkDataType GetDataType() override;
 
-  /**
-   * Sets the parameter data type.
-   * @warning This function overwrites the default Min/Max values
-   * based on the new type.
-   * @note Automatic range override is not implemented.
-   */
-  void SetDataType(SimulinkDataType dataType);
+    /**
+     * Sets the parameter data type.
+     * @warning This function overwrites the default Min/Max values
+     * based on the new type.
+     * @note Automatic range override is not implemented.
+     */
+    void SetDataType(SimulinkDataType dataType);
 
-  /** Returns the raw parameter value as stored internally */
-  const char* GetValue();
+    /** Returns the raw parameter value as stored internally */
+    const char* GetValue();
 
-  /** Sets the parameter value */
-  void SetValue(const char* value);
+    /** Sets the parameter value */
+    void SetValue(const char* value);
 
-  /** Attempts to resolve the value as double */
-  HError GetValueAsDouble(Float32& fval);
+    /** Attempts to resolve the value as double */
+    HError GetValueAsDouble(Float32& fval);
 
-  /** Attempts to resolve the value as single */
-  HError GetValueAsSingle(Float32& sval);
+    /** Attempts to resolve the value as single */
+    HError GetValueAsSingle(Float32& sval);
 
-  /** Resolves the parameter value as unsigned 8-bit integer */
-  HError GetValueAsUInt8(UInt8& u8val);
+    /** Resolves the parameter value as unsigned 8-bit integer */
+    HError GetValueAsUInt8(UInt8& u8val);
 
-  /** Resolves the parameter value as unsigned 16-bit integer */
-  HError GetValueAsUInt16(UInt16& u16val);
+    /** Resolves the parameter value as unsigned 16-bit integer */
+    HError GetValueAsUInt16(UInt16& u16val);
 
-  /** Sets the parameter name (no backup used) */
-  HError SetName(const char* name);
+    /** Sets the parameter name (no backup used) */
+    HError SetName(const char* name);
 
-  /** Returns the internal logger */
-  Logger& GetLogger() const;
+    /** Returns the internal logger */
+    Logger& GetLogger() const;
 
 private:
-  Logger& logger;
+    Logger& logger;
 
-  const char* Name;
-  const char* Value;
-  SimulinkDataType DataType;
+    const char* Name;
+    const char* Value;
+    SimulinkDataType DataType;
 
-  const char* Unit;
-  const char* Description;
-  const char* Complexity;
+    const char* Unit;
+    const char* Description;
+    const char* Complexity;
 
-  Float32 Min;
-  Float32 Max;
-  std::vector<UInt16> Dimensions;
-  std::shared_ptr<CoderInfo> coder;
+    Float32 Min;
+    Float32 Max;
+    std::vector<UInt16> Dimensions;
+    std::shared_ptr<CoderInfo> coder;
 };
 
 SLXIO_ABI_NAMESPACE_END

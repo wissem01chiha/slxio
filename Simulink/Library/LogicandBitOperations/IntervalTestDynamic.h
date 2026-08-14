@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntervalTestDynamic
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT IntervalTestDynamic : public IBlockParameters,
+                                            public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  IntervalTestDynamic();
+    /** Default Constructor */
+    IntervalTestDynamic();
 
-  /** Default Destructor */
-  ~IntervalTestDynamic();
+    /** Default Destructor */
+    ~IntervalTestDynamic();
 
-  const std::string& GetIntervalclosedright() const;
-  void SetIntervalclosedright(const std::string& value);
+    const std::string& GetIntervalclosedright() const;
+    void SetIntervalclosedright(const std::string& value);
 
-  const std::string& GetIntervalclosedleft() const;
-  void SetIntervalclosedleft(const std::string& value);
+    const std::string& GetIntervalclosedleft() const;
+    void SetIntervalclosedleft(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
 private:
-  std::string m_Intervalclosedright;
+    std::string m_Intervalclosedright;
 
-  std::string m_Intervalclosedleft;
+    std::string m_Intervalclosedleft;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 };
 
 SLXIO_ABI_NAMESPACE_END

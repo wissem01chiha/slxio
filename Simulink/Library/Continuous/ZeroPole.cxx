@@ -1,70 +1,53 @@
 #include "ZeroPole.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ZeroPole::ZeroPole() {}
 
 ZeroPole::~ZeroPole() {}
 
-const std::string& ZeroPole::GetZeros() const
-{
-  return m_Zeros;
-}
+const std::string& ZeroPole::GetZeros() const { return m_Zeros; }
 
-void ZeroPole::SetZeros(const std::string& value)
-{
-  m_Zeros = value;
-}
+void ZeroPole::SetZeros(const std::string& value) { m_Zeros = value; }
 
-const std::string& ZeroPole::GetPoles() const
-{
-  return m_Poles;
-}
+const std::string& ZeroPole::GetPoles() const { return m_Poles; }
 
-void ZeroPole::SetPoles(const std::string& value)
-{
-  m_Poles = value;
-}
+void ZeroPole::SetPoles(const std::string& value) { m_Poles = value; }
 
-const std::string& ZeroPole::GetGain() const
-{
-  return m_Gain;
-}
+const std::string& ZeroPole::GetGain() const { return m_Gain; }
 
-void ZeroPole::SetGain(const std::string& value)
-{
-  m_Gain = value;
-}
+void ZeroPole::SetGain(const std::string& value) { m_Gain = value; }
 
 const std::string& ZeroPole::GetParametertunability() const
 {
-  return m_Parametertunability;
+    return m_Parametertunability;
 }
 
 void ZeroPole::SetParametertunability(const std::string& value)
 {
-  m_Parametertunability = value;
+    m_Parametertunability = value;
 }
 
 const std::string& ZeroPole::GetAbsolutetolerance() const
 {
-  return m_Absolutetolerance;
+    return m_Absolutetolerance;
 }
 
 void ZeroPole::SetAbsolutetolerance(const std::string& value)
 {
-  m_Absolutetolerance = value;
+    m_Absolutetolerance = value;
 }
 
 const std::string& ZeroPole::GetContinuousstateattributes() const
 {
-  return m_Continuousstateattributes;
+    return m_Continuousstateattributes;
 }
 
 void ZeroPole::SetContinuousstateattributes(const std::string& value)
 {
-  m_Continuousstateattributes = value;
+    m_Continuousstateattributes = value;
 }
 
 SLXIO_ABI_NAMESPACE_END

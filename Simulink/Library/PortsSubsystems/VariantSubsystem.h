@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT VariantSubsystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT VariantSubsystem : public IBlockParameters,
+                                         public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  VariantSubsystem();
+    /** Default Constructor */
+    VariantSubsystem();
 
-  /** Default Destructor */
-  ~VariantSubsystem();
+    /** Default Destructor */
+    ~VariantSubsystem();
 
 private:
 };

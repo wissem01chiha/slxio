@@ -8,7 +8,8 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -17,11 +18,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkRTW final
 {
 public:
-  SimulinkRTW();
+    SimulinkRTW();
 
 private:
-  const char** DisabledProps;
-  UInt16 DisabledPropsCount;
+    const char** DisabledProps;
+    UInt16 DisabledPropsCount;
 };
 
 SLXIO_ABI_NAMESPACE_END

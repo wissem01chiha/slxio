@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT MatlabSystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT MatlabSystem : public IBlockParameters,
+                                     public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  MatlabSystem();
+    /** Default Constructor */
+    MatlabSystem();
 
-  /** Default Destructor */
-  ~MatlabSystem();
+    /** Default Destructor */
+    ~MatlabSystem();
 
-  const std::string& GetSystem() const;
-  void SetSystem(const std::string& value);
+    const std::string& GetSystem() const;
+    void SetSystem(const std::string& value);
 
 private:
-  std::string m_System;
+    std::string m_System;
 };
 
 SLXIO_ABI_NAMESPACE_END

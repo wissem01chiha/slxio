@@ -11,50 +11,50 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT VariantSink
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT VariantSink : public IBlockParameters,
+                                    public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  VariantSink();
+    /** Default Constructor */
+    VariantSink();
 
-  /** Default Destructor */
-  ~VariantSink();
+    /** Default Destructor */
+    ~VariantSink();
 
-  const std::string& GetVariantcontrols() const;
-  void SetVariantcontrols(const std::string& value);
+    const std::string& GetVariantcontrols() const;
+    void SetVariantcontrols(const std::string& value);
 
-  const std::string& GetVariantcontrolmode() const;
-  void SetVariantcontrolmode(const std::string& value);
+    const std::string& GetVariantcontrolmode() const;
+    void SetVariantcontrolmode(const std::string& value);
 
-  const std::string& GetVariantactivationtime() const;
-  void SetVariantactivationtime(const std::string& value);
+    const std::string& GetVariantactivationtime() const;
+    void SetVariantactivationtime(const std::string& value);
 
-  const std::string& GetLabelmodeactivechoice() const;
-  void SetLabelmodeactivechoice(const std::string& value);
+    const std::string& GetLabelmodeactivechoice() const;
+    void SetLabelmodeactivechoice(const std::string& value);
 
-  const std::string& GetShowconditiononblock() const;
-  void SetShowconditiononblock(const std::string& value);
+    const std::string& GetShowconditiononblock() const;
+    void SetShowconditiononblock(const std::string& value);
 
-  const std::string& GetAllowzerovariantcontrols() const;
-  void SetAllowzerovariantcontrols(const std::string& value);
+    const std::string& GetAllowzerovariantcontrols() const;
+    void SetAllowzerovariantcontrols(const std::string& value);
 
 private:
-  std::string m_Variantcontrols;
+    std::string m_Variantcontrols;
 
-  std::string m_Variantcontrolmode;
+    std::string m_Variantcontrolmode;
 
-  std::string m_Variantactivationtime;
+    std::string m_Variantactivationtime;
 
-  std::string m_Labelmodeactivechoice;
+    std::string m_Labelmodeactivechoice;
 
-  std::string m_Showconditiononblock;
+    std::string m_Showconditiononblock;
 
-  std::string m_Allowzerovariantcontrols;
+    std::string m_Allowzerovariantcontrols;
 };
 
 SLXIO_ABI_NAMESPACE_END

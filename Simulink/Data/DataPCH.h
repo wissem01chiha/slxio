@@ -4,6 +4,7 @@
 #ifndef DATAPCH_H
 #define DATAPCH_H
 
+#include <cstring>
 #include <memory>
 #include <string>
 #include <unordered_map>

@@ -9,7 +9,8 @@
 #include "CorePCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -19,27 +20,27 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT Version final
 {
 public:
-  Version() = default;
+    Version() = default;
 
-  /** Returns the major version number of the library.*/
-  static UInt32 GetMajorVersion();
+    /** Returns the major version number of the library.*/
+    static UInt32 GetMajorVersion();
 
-  /** Returns the minor version number of the library.*/
-  static UInt32 GetMinorVersion();
+    /** Returns the minor version number of the library.*/
+    static UInt32 GetMinorVersion();
 
-  /** Returns the patch version number of the library.*/
-  static UInt32 GetPatchVersion();
+    /** Returns the patch version number of the library.*/
+    static UInt32 GetPatchVersion();
 
-  /** Checks if the current major version is less than the given version.*/
-  bool IsMajorVersionLessThan(UInt32 version);
+    /** Checks if the current major version is less than the given version.*/
+    bool IsMajorVersionLessThan(UInt32 version);
 
-  /** Checks if the current minor version is less than the given version.*/
-  bool IsMinorVersionLessThan(UInt32 version);
+    /** Checks if the current minor version is less than the given version.*/
+    bool IsMinorVersionLessThan(UInt32 version);
 
-  /** Returns the full version string in "major.minor.patch" format.*/
-  static std::string GetVersionString();
+    /** Returns the full version string in "major.minor.patch" format.*/
+    static std::string GetVersionString();
 
-  ~Version() = default;
+    ~Version() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

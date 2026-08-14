@@ -9,7 +9,8 @@
 
 #include <string>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -18,18 +19,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkModelType final
 {
 public:
-  enum Type
-  {
-    Library,
-    Model
-  };
-  SimulinkModelType() = default;
-  explicit SimulinkModelType(SimulinkModelType::Type type);
-  static std::string ToString(SimulinkModelType::Type type);
-  Type GetType() const;
+    enum Type
+    {
+        Library,
+        Model
+    };
+    SimulinkModelType() = default;
+    explicit SimulinkModelType(SimulinkModelType::Type type);
+    static std::string ToString(SimulinkModelType::Type type);
+    Type GetType() const;
 
 private:
-  Type type;
+    Type type;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,6 +1,7 @@
 #include "DecrementStoredInteger.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DecrementStoredInteger::DecrementStoredInteger() {}

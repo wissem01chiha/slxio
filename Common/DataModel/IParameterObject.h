@@ -11,7 +11,8 @@
 #include "ILogger.h"
 #include "IParameterObjectBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -26,9 +27,9 @@ template <typename T>
 class SLXIO_APIEXPORT IParameterObject : public IParameterObjectBase
 {
 public:
-  virtual IParameterObject* New() = 0;
-  virtual T& GetValue() = 0;
-  virtual ~IParameterObject() = default;
+    virtual IParameterObject* New() = 0;
+    virtual T& GetValue() = 0;
+    virtual ~IParameterObject() = default;
 };
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

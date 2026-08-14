@@ -12,7 +12,8 @@
 #include <string>
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class CoderInfo;
@@ -25,33 +26,33 @@ enum class SimulinkDataType;
 class SLXIO_APIEXPORT SimulinkParameterBase
 {
 public:
-  /** Returns current parameter name*/
-  virtual std::string GetName() = 0;
+    /** Returns current parameter name*/
+    virtual std::string GetName() = 0;
 
-  /** Returns parameter dimensions */
-  virtual std::vector<UInt16> GetDimensions() = 0;
+    /** Returns parameter dimensions */
+    virtual std::vector<UInt16> GetDimensions() = 0;
 
-  /** Serlise Parameter to string */
-  virtual std::string ToString() const = 0;
+    /** Serlise Parameter to string */
+    virtual std::string ToString() const = 0;
 
-  /** Get code generation data struct*/
-  virtual std::shared_ptr<CoderInfo> GetCoderInfo() = 0;
+    /** Get code generation data struct*/
+    virtual std::shared_ptr<CoderInfo> GetCoderInfo() = 0;
 
-  /** Parameter minumin value */
-  virtual Float32 GetMin() = 0;
+    /** Parameter minumin value */
+    virtual Float32 GetMin() = 0;
 
-  /** Parameter maxiumum value */
-  virtual Float32 GetMax() = 0;
+    /** Parameter maxiumum value */
+    virtual Float32 GetMax() = 0;
 
-  /** Get the resolved parameter SimulinkDataType */
-  virtual SimulinkDataType GetDataType() = 0;
+    /** Get the resolved parameter SimulinkDataType */
+    virtual SimulinkDataType GetDataType() = 0;
 
 protected:
-  /** Default constructor. */
-  SimulinkParameterBase() = default;
+    /** Default constructor. */
+    SimulinkParameterBase() = default;
 
-  /** Deleted copy constructor. */
-  SimulinkParameterBase(const SimulinkParameterBase&) = delete;
+    /** Deleted copy constructor. */
+    SimulinkParameterBase(const SimulinkParameterBase&) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END

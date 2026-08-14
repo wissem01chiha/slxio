@@ -11,30 +11,29 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Demux
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Demux : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Demux();
+    /** Default Constructor */
+    Demux();
 
-  /** Default Destructor */
-  ~Demux();
+    /** Default Destructor */
+    ~Demux();
 
-  const std::string& GetOutputs() const;
-  void SetOutputs(const std::string& value);
+    const std::string& GetOutputs() const;
+    void SetOutputs(const std::string& value);
 
-  const std::string& GetDisplayoption() const;
-  void SetDisplayoption(const std::string& value);
+    const std::string& GetDisplayoption() const;
+    void SetDisplayoption(const std::string& value);
 
 private:
-  std::string m_Outputs;
+    std::string m_Outputs;
 
-  std::string m_Displayoption;
+    std::string m_Displayoption;
 };
 
 SLXIO_ABI_NAMESPACE_END

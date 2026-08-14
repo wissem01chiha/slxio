@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT StringToDouble
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT StringToDouble : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  StringToDouble();
+    /** Default Constructor */
+    StringToDouble();
 
-  /** Default Destructor */
-  ~StringToDouble();
+    /** Default Destructor */
+    ~StringToDouble();
 
-  const std::string& GetFormat() const;
-  void SetFormat(const std::string& value);
+    const std::string& GetFormat() const;
+    void SetFormat(const std::string& value);
 
 private:
-  std::string m_Format;
+    std::string m_Format;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -2,93 +2,115 @@
 
 #include <cstring>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 bool SimulinkElementType::isA(const SimulinkElementType& typeObj)
 {
-  return this->type_ == typeObj.type_;
+    return this->type_ == typeObj.type_;
 }
 
 bool SimulinkElementType::isA(const SimulinkElementType::Type& type)
 {
-  return this->type_ == type;
+    return this->type_ == type;
 }
 
 SimulinkElementType::SimulinkElementType(SimulinkElementType::Type typeName)
 {
-  this->type_ = typeName;
+    this->type_ = typeName;
 }
 
 SimulinkElementType& SimulinkElementType::New()
 {
-  static SimulinkElementType instance;
-  return instance;
+    static SimulinkElementType instance;
+    return instance;
 }
 
 SimulinkElementType::Type SimulinkElementType::ToType(const char* typeName)
 {
-  if (typeName != nullptr && *typeName) {
-    if (strcmp(typeName, "Array")) {
-      return Type::Array;
-    } else if (strcmp(typeName, "Object")) {
-      return Type::Object;
-    } else if (strcmp(typeName, "Block")) {
-      return Type::Block;
-    } else if (strcmp(typeName, "Port")) {
-      return Type::Port;
-    } else if (strcmp(typeName, "Line")) {
-      return Type::Line;
-    } else if (strcmp(typeName, "Model")) {
-      return Type::Model;
-    } else if (strcmp(typeName, "Annotation")) {
-      return Type::Annotation;
-    } else if (strcmp(typeName, "Parameter")) {
-      return Type::Parameter;
-    } else if (strcmp(typeName, "ConfigSet")) {
-      return Type::ConfigSet;
-    } else if (strcmp(typeName, "Chart")) {
-      return Type::Chart;
+    if (typeName != nullptr && *typeName)
+    {
+        if (strcmp(typeName, "Array"))
+        {
+            return Type::Array;
+        }
+        else if (strcmp(typeName, "Object"))
+        {
+            return Type::Object;
+        }
+        else if (strcmp(typeName, "Block"))
+        {
+            return Type::Block;
+        }
+        else if (strcmp(typeName, "Port"))
+        {
+            return Type::Port;
+        }
+        else if (strcmp(typeName, "Line"))
+        {
+            return Type::Line;
+        }
+        else if (strcmp(typeName, "Model"))
+        {
+            return Type::Model;
+        }
+        else if (strcmp(typeName, "Annotation"))
+        {
+            return Type::Annotation;
+        }
+        else if (strcmp(typeName, "Parameter"))
+        {
+            return Type::Parameter;
+        }
+        else if (strcmp(typeName, "ConfigSet"))
+        {
+            return Type::ConfigSet;
+        }
+        else if (strcmp(typeName, "Chart"))
+        {
+            return Type::Chart;
+        }
     }
-  }
-  return Type::Unknown;
+    return Type::Unknown;
 }
 
 const char* SimulinkElementType::ToString(SimulinkElementType::Type type)
 {
-  switch (type) {
+    switch (type)
+    {
     case Base:
-      return "Base";
+        return "Base";
     case Object:
-      return "Object";
+        return "Object";
     case Block:
-      return "Block";
+        return "Block";
     case Port:
-      return "Port";
+        return "Port";
     case Line:
-      return "Line";
+        return "Line";
     case Model:
-      return "Model";
+        return "Model";
     case Annotation:
-      return "Annotation";
+        return "Annotation";
     case Array:
-      return "Array";
+        return "Array";
     case Parameter:
-      return "Parameter";
+        return "Parameter";
     case ConfigSet:
-      return "ConfigSet";
+        return "ConfigSet";
     case Chart:
-      return "Chart";
+        return "Chart";
     case Unknown:
-      return "Unknown";
+        return "Unknown";
     default:
-      return "Invalid";
-  }
+        return "Invalid";
+    }
 }
 
 std::string SimulinkElementType::ToString() const
 {
-  return std::string(this->ToString(type_));
+    return std::string(this->ToString(type_));
 }
 
 SLXIO_ABI_NAMESPACE_END

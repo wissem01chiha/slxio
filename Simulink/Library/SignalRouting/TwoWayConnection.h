@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT TwoWayConnection
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT TwoWayConnection : public IBlockParameters,
+                                         public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  TwoWayConnection();
+    /** Default Constructor */
+    TwoWayConnection();
 
-  /** Default Destructor */
-  ~TwoWayConnection();
+    /** Default Destructor */
+    ~TwoWayConnection();
 
 private:
 };

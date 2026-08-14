@@ -9,7 +9,8 @@
 #include "IParameterDataObjectBase.h"
 #include "IParameterObjectBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class ModelWorkspace;
@@ -19,28 +20,28 @@ class ModelWorkspace;
  * @brief Generic parameter stored in a ModelWorkspace.
  */
 class SLXIO_APIEXPORT ModelWorkspaceParameter final
-  : public IParameterObjectBase
+    : public IParameterObjectBase
 {
 public:
-  ModelWorkspaceParameter();
+    ModelWorkspaceParameter();
 
-  ModelWorkspaceParameter(const std::string& name,
-                          const std::shared_ptr<ModelWorkspace>& data);
+    ModelWorkspaceParameter(const std::string& name,
+                            const std::shared_ptr<ModelWorkspace>& data);
 
-  IParameterObjectBase* New() override;
+    IParameterObjectBase* New() override;
 
-  DataType GetDataType() const override;
+    DataType GetDataType() const override;
 
-  UInt16 Size() const override;
+    UInt16 Size() const override;
 
-  void SetData(const std::shared_ptr<ModelWorkspace>& data);
+    void SetData(const std::shared_ptr<ModelWorkspace>& data);
 
-  std::shared_ptr<ModelWorkspace> GetData() const;
+    std::shared_ptr<ModelWorkspace> GetData() const;
 
-  ~ModelWorkspaceParameter() override = default;
+    ~ModelWorkspaceParameter() override = default;
 
 private:
-  std::shared_ptr<ModelWorkspace> m_data;
+    std::shared_ptr<ModelWorkspace> m_data;
 };
 
 SLXIO_ABI_NAMESPACE_END

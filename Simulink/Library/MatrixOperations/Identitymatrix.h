@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Identitymatrix
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Identitymatrix : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Identitymatrix();
+    /** Default Constructor */
+    Identitymatrix();
 
-  /** Default Destructor */
-  ~Identitymatrix();
+    /** Default Destructor */
+    ~Identitymatrix();
 
-  const std::string& GetInheritoutputportattributes() const;
-  void SetInheritoutputportattributes(const std::string& value);
+    const std::string& GetInheritoutputportattributes() const;
+    void SetInheritoutputportattributes(const std::string& value);
 
-  const std::string& GetOutputdimensions() const;
-  void SetOutputdimensions(const std::string& value);
+    const std::string& GetOutputdimensions() const;
+    void SetOutputdimensions(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
 private:
-  std::string m_Inheritoutputportattributes;
+    std::string m_Inheritoutputportattributes;
 
-  std::string m_Outputdimensions;
+    std::string m_Outputdimensions;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

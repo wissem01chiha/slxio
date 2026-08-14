@@ -11,7 +11,8 @@
 
 struct json_object;
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -25,18 +26,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT JsonDataObject : public IDataObject
 {
 public:
-  JsonDataObject* New() override;
-  void Initialize(void* implDataObject) override;
-  bool Empty() const override;
-  bool operator==(const IDataObject& other) const override;
-  void* GetImplDataObject() const override;
-  std::string ToString() const override;
-  DataType GetDataType() const override;
-  JsonDataObject();
-  ~JsonDataObject();
+    JsonDataObject* New() override;
+    void Initialize(void* implDataObject) override;
+    bool Empty() const override;
+    bool operator==(const IDataObject& other) const override;
+    void* GetImplDataObject() const override;
+    std::string ToString() const override;
+    DataType GetDataType() const override;
+    JsonDataObject();
+    ~JsonDataObject();
 
 private:
-  json_object* m_implDataObject;
+    json_object* m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -22,59 +22,57 @@ static BOOL cliColor = TRUE;
 /* Set color and other settings about character display */
 void setCharDisplay(char* setting)
 {
-  static char* currentSetting = NULL;
+    static char* currentSetting = NULL;
 
-  static char* lastSetting = NULL;
+    static char* lastSetting = NULL;
 
-  if (!getCLIColor()) {
-    return;
-  }
-
-  /* If NULL is passed, Previous settings are set. */
-  if (setting == NULL) {
-    if (lastSetting != NULL) {
-      setting = lastSetting;
-    } else /* currentSetting should never be NULL */
+    if (!getCLIColor())
     {
-      setting = currentSetting;
+        return;
     }
-  }
-  /* Print the setting to apply */
-  printf("\033[%sm", setting);
-  /* The save preious and current settings */
-  lastSetting = currentSetting;
-  currentSetting = setting;
-  fflush(stdout);
+
+    /* If NULL is passed, Previous settings are set. */
+    if (setting == NULL)
+    {
+        if (lastSetting != NULL)
+        {
+            setting = lastSetting;
+        }
+        else /* currentSetting should never be NULL */
+        {
+            setting = currentSetting;
+        }
+    }
+    /* Print the setting to apply */
+    printf("\033[%sm", setting);
+    /* The save preious and current settings */
+    lastSetting = currentSetting;
+    currentSetting = setting;
+    fflush(stdout);
 }
 
 /* Change Characters color */
 void setForegroundColor(int color)
 {
-  char charColor[3];
+    char charColor[3];
 
-  charColor[0] = SET_CONSOLE_FOREGROUND;
-  charColor[1] = color + '0';
-  charColor[2] = '\0';
-  setCharDisplay(charColor);
+    charColor[0] = SET_CONSOLE_FOREGROUND;
+    charColor[1] = color + '0';
+    charColor[2] = '\0';
+    setCharDisplay(charColor);
 }
 
 /* Change background color */
 void setBackgroundColor(int color)
 {
-  char charColor[3];
+    char charColor[3];
 
-  charColor[0] = SET_CONSOLE_BACKGROUND;
-  charColor[1] = color + '0';
-  charColor[2] = '\0';
-  setCharDisplay(charColor);
+    charColor[0] = SET_CONSOLE_BACKGROUND;
+    charColor[1] = color + '0';
+    charColor[2] = '\0';
+    setCharDisplay(charColor);
 }
 
-BOOL getCLIColor()
-{
-  return cliColor;
-}
+BOOL getCLIColor() { return cliColor; }
 
-void setCLIColor(BOOL CLIColor)
-{
-  cliColor = CLIColor;
-}
+void setCLIColor(BOOL CLIColor) { cliColor = CLIColor; }

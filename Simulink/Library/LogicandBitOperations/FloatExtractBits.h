@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT FloatExtractBits
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT FloatExtractBits : public IBlockParameters,
+                                         public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  FloatExtractBits();
+    /** Default Constructor */
+    FloatExtractBits();
 
-  /** Default Destructor */
-  ~FloatExtractBits();
+    /** Default Destructor */
+    ~FloatExtractBits();
 
-  const std::string& GetOutputmode() const;
-  void SetOutputmode(const std::string& value);
+    const std::string& GetOutputmode() const;
+    void SetOutputmode(const std::string& value);
 
-  const std::string& GetBitrange() const;
-  void SetBitrange(const std::string& value);
+    const std::string& GetBitrange() const;
+    void SetBitrange(const std::string& value);
 
 private:
-  std::string m_Outputmode;
+    std::string m_Outputmode;
 
-  std::string m_Bitrange;
+    std::string m_Bitrange;
 };
 
 SLXIO_ABI_NAMESPACE_END

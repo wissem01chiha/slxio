@@ -1,14 +1,15 @@
 #include "ArchiveManager.h"
-#include "slxDoctest.h"
+#include "Doctest.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class ArchiveManagerTestFixture
 {
 public:
-  ArchiveManagerTestFixture() {}
-  ~ArchiveManagerTestFixture() {}
+    ArchiveManagerTestFixture() {}
+    ~ArchiveManagerTestFixture() {}
 
 private:
 };

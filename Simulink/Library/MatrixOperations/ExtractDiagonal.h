@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ExtractDiagonal
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ExtractDiagonal : public IBlockParameters,
+                                        public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ExtractDiagonal();
+    /** Default Constructor */
+    ExtractDiagonal();
 
-  /** Default Destructor */
-  ~ExtractDiagonal();
+    /** Default Destructor */
+    ~ExtractDiagonal();
 
 private:
 };

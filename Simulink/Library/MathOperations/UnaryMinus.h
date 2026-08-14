@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT UnaryMinus
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT UnaryMinus : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  UnaryMinus();
+    /** Default Constructor */
+    UnaryMinus();
 
-  /** Default Destructor */
-  ~UnaryMinus();
+    /** Default Destructor */
+    ~UnaryMinus();
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
-  const std::string& GetSaturateonintegeroverflow() const;
-  void SetSaturateonintegeroverflow(const std::string& value);
+    const std::string& GetSaturateonintegeroverflow() const;
+    void SetSaturateonintegeroverflow(const std::string& value);
 
 private:
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 
-  std::string m_Saturateonintegeroverflow;
+    std::string m_Saturateonintegeroverflow;
 };
 
 SLXIO_ABI_NAMESPACE_END

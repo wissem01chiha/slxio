@@ -9,7 +9,8 @@
 #include "PlatformTypes.h"
 #include "SystemPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Directory;
@@ -21,94 +22,94 @@ class Directory;
 class SLXIO_APIEXPORT File final
 {
 public:
-  /** File access modes. */
-  enum class Mode
-  {
-    Read,
-    Write,
-    Append,
-    Truncate
-  };
+    /** File access modes. */
+    enum class Mode
+    {
+        Read,
+        Write,
+        Append,
+        Truncate
+    };
 
-  /** Construct a File with path and mode. */
-  File(const std::string& path, Mode mode);
+    /** Construct a File with path and mode. */
+    File(const std::string& path, Mode mode);
 
-  /** Construct a File with path only. */
-  explicit File(const std::string& path);
+    /** Construct a File with path only. */
+    explicit File(const std::string& path);
 
-  /** Open the file. */
-  HError Open();
+    /** Open the file. */
+    HError Open();
 
-  /** Close the file. */
-  HError Close();
+    /** Close the file. */
+    HError Close();
 
-  /** Read data from the file. */
-  HError Read();
+    /** Read data from the file. */
+    HError Read();
 
-  /** Check if a path exists as a file. */
-  static bool Exist(const std::string& path);
+    /** Check if a path exists as a file. */
+    static bool Exist(const std::string& path);
 
-  /** Check if file is empty. */
-  bool Empty() const;
+    /** Check if file is empty. */
+    bool Empty() const;
 
-  /** Get full file path. */
-  std::string GetFilePath() const;
+    /** Get full file path. */
+    std::string GetFilePath() const;
 
-  /** Get filename from path. */
-  const std::string GetFileName() const;
+    /** Get filename from path. */
+    const std::string GetFileName() const;
 
-  /** Check if current file exists. */
-  bool Exist() const;
+    /** Check if current file exists. */
+    bool Exist() const;
 
-  /** Write string data to file. */
-  HError Write(const std::string& message);
+    /** Write string data to file. */
+    HError Write(const std::string& message);
 
-  /** Write vector of strings to file. */
-  HError Write(std::vector<std::string>& message);
+    /** Write vector of strings to file. */
+    HError Write(std::vector<std::string>& message);
 
-  /** Copy file to a directory. */
-  HError Copy(const Directory& directory);
+    /** Copy file to a directory. */
+    HError Copy(const Directory& directory);
 
-  /** Rename the file. if not opened */
-  HError Rename(const std::string& filename);
+    /** Rename the file. if not opened */
+    HError Rename(const std::string& filename);
 
-  /** Get file mode flags. */
-  const int GetFileMode();
+    /** Get file mode flags. */
+    const int GetFileMode();
 
-  /** Set file mode. */
-  void SetFileMode(const File::Mode mode);
+    /** Set file mode. */
+    void SetFileMode(const File::Mode mode);
 
-  /** Move file to a directory. */
-  HError Move(const Directory& directory);
+    /** Move file to a directory. */
+    HError Move(const Directory& directory);
 
-  /** Delete the file from disk */
-  HError Delete();
+    /** Delete the file from disk */
+    HError Delete();
 
-  /** Get parent directory object. */
-  Directory GetFileDirectory() const;
+    /** Get parent directory object. */
+    Directory GetFileDirectory() const;
 
-  /** Get the file internal buffer, after reading the file */
-  std::vector<char> GetInternalBuffer() const;
+    /** Get the file internal buffer, after reading the file */
+    std::vector<char> GetInternalBuffer() const;
 
-  /** Check Whatever the file is still open or not */
-  bool IsOpened() const;
+    /** Check Whatever the file is still open or not */
+    bool IsOpened() const;
 
-  /** Get file size on disk. */
-  UInt32 Size() const;
+    /** Get file size on disk. */
+    UInt32 Size() const;
 
-  /** Destructor. */
-  ~File() = default;
+    /** Destructor. */
+    ~File() = default;
 
-  /** Default Constructor */
-  File() = default;
+    /** Default Constructor */
+    File() = default;
 
 private:
-  std::string FilePath;
-  Mode InternalFileMode;
-  int FileDescriptor = -1;
-  std::vector<char> InternalBuffer;
-  UInt32 NumberOfBytes = 0;
-  UInt32 CachedSize;
+    std::string FilePath;
+    Mode InternalFileMode;
+    int FileDescriptor = -1;
+    std::vector<char> InternalBuffer;
+    UInt32 NumberOfBytes = 0;
+    UInt32 CachedSize;
 };
 
 SLXIO_ABI_NAMESPACE_END

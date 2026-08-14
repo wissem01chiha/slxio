@@ -10,7 +10,8 @@
 
 #include <string>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -36,26 +37,26 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkPortType : public SimulinkElementType
 {
 public:
-  enum Type
-  {
-    INPORT = 0,
-    OUTPORT = 1,
-    ENABLE = 2,
-    TRIGGER = 3,
-    STATE = 4,
-    LCONN = 5,
-    RCONN = 6,
-    IFACTION = 7,
-  };
-  SimulinkPortType() = default;
-  bool isA(const SimulinkPortType& typeObj);
-  friend bool operator==(const SimulinkPortType& lhs,
-                         const SimulinkPortType& rhs);
-  std::string ToString() const;
-  ~SimulinkPortType() = default;
+    enum Type
+    {
+        INPORT = 0,
+        OUTPORT = 1,
+        ENABLE = 2,
+        TRIGGER = 3,
+        STATE = 4,
+        LCONN = 5,
+        RCONN = 6,
+        IFACTION = 7,
+    };
+    SimulinkPortType() = default;
+    bool isA(const SimulinkPortType& typeObj);
+    friend bool operator==(const SimulinkPortType& lhs,
+                           const SimulinkPortType& rhs);
+    std::string ToString() const;
+    ~SimulinkPortType() = default;
 
 private:
-  SimulinkPortType::Type type_;
+    SimulinkPortType::Type type_;
 };
 
 SLXIO_ABI_NAMESPACE_END

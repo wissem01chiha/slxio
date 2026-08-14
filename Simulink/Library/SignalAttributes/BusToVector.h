@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BusToVector
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT BusToVector : public IBlockParameters,
+                                    public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  BusToVector();
+    /** Default Constructor */
+    BusToVector();
 
-  /** Default Destructor */
-  ~BusToVector();
+    /** Default Destructor */
+    ~BusToVector();
 
 private:
 };

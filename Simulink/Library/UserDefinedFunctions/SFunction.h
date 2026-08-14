@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SFunction
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT SFunction : public IBlockParameters,
+                                  public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  SFunction();
+    /** Default Constructor */
+    SFunction();
 
-  /** Default Destructor */
-  ~SFunction();
+    /** Default Destructor */
+    ~SFunction();
 
-  const std::string& GetFunctionname() const;
-  void SetFunctionname(const std::string& value);
+    const std::string& GetFunctionname() const;
+    void SetFunctionname(const std::string& value);
 
-  const std::string& GetParameters() const;
-  void SetParameters(const std::string& value);
+    const std::string& GetParameters() const;
+    void SetParameters(const std::string& value);
 
-  const std::string& GetSfunctionmodules() const;
-  void SetSfunctionmodules(const std::string& value);
+    const std::string& GetSfunctionmodules() const;
+    void SetSfunctionmodules(const std::string& value);
 
 private:
-  std::string m_Functionname;
+    std::string m_Functionname;
 
-  std::string m_Parameters;
+    std::string m_Parameters;
 
-  std::string m_Sfunctionmodules;
+    std::string m_Sfunctionmodules;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -5,17 +5,19 @@
 #include "APIExportMacro.h"
 #include "DataPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ICodeGenration
+ * @brief
  */
 class SLXIO_APIEXPORT ICodeGenration
 {
 public:
-  ICodeGenration() = default;
-  virtual ~ICodeGenration() = default;
+    ICodeGenration() = default;
+    virtual ~ICodeGenration() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

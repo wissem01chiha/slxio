@@ -8,7 +8,8 @@
 #include "APIExportMacro.h"
 #include "SimulinkElementBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -17,16 +18,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class StateflowElementBase : public SimulinkElementBase
 {
 public:
-  virtual ~StateflowElementBase() = default;
-  StateflowElementBase& operator=(const StateflowElementBase&) = delete;
+    virtual ~StateflowElementBase() = default;
+    StateflowElementBase& operator=(const StateflowElementBase&) = delete;
 
 protected:
-  StateflowElementBase() {}
-  StateflowElementBase(const StateflowElementBase& orig);
+    StateflowElementBase() {}
+    StateflowElementBase(const StateflowElementBase& orig);
 
-  void setParent(std::shared_ptr<SimulinkElementBase> parent);
-  virtual std::shared_ptr<StateflowElementBase> getParent() const = 0;
-  std::shared_ptr<SimulinkElementBase> parent;
+    void setParent(std::shared_ptr<SimulinkElementBase> parent);
+    virtual std::shared_ptr<StateflowElementBase> getParent() const = 0;
+    std::shared_ptr<SimulinkElementBase> parent;
 };
 
 SLXIO_ABI_NAMESPACE_END

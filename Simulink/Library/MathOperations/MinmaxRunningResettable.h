@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT MinmaxRunningResettable
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT MinmaxRunningResettable : public IBlockParameters,
+                                                public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  MinmaxRunningResettable();
+    /** Default Constructor */
+    MinmaxRunningResettable();
 
-  /** Default Destructor */
-  ~MinmaxRunningResettable();
+    /** Default Destructor */
+    ~MinmaxRunningResettable();
 
-  const std::string& GetFunction() const;
-  void SetFunction(const std::string& value);
+    const std::string& GetFunction() const;
+    void SetFunction(const std::string& value);
 
-  const std::string& GetVinit() const;
-  void SetVinit(const std::string& value);
+    const std::string& GetVinit() const;
+    void SetVinit(const std::string& value);
 
 private:
-  std::string m_Function;
+    std::string m_Function;
 
-  std::string m_Vinit;
+    std::string m_Vinit;
 };
 
 SLXIO_ABI_NAMESPACE_END

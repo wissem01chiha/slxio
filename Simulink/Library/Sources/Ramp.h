@@ -11,40 +11,39 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Ramp
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Ramp : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Ramp();
+    /** Default Constructor */
+    Ramp();
 
-  /** Default Destructor */
-  ~Ramp();
+    /** Default Destructor */
+    ~Ramp();
 
-  const std::string& GetSlope() const;
-  void SetSlope(const std::string& value);
+    const std::string& GetSlope() const;
+    void SetSlope(const std::string& value);
 
-  const std::string& GetStart() const;
-  void SetStart(const std::string& value);
+    const std::string& GetStart() const;
+    void SetStart(const std::string& value);
 
-  const std::string& GetInitialoutput() const;
-  void SetInitialoutput(const std::string& value);
+    const std::string& GetInitialoutput() const;
+    void SetInitialoutput(const std::string& value);
 
-  const std::string& GetVectorparams1d() const;
-  void SetVectorparams1d(const std::string& value);
+    const std::string& GetVectorparams1d() const;
+    void SetVectorparams1d(const std::string& value);
 
 private:
-  std::string m_Slope;
+    std::string m_Slope;
 
-  std::string m_Start;
+    std::string m_Start;
 
-  std::string m_Initialoutput;
+    std::string m_Initialoutput;
 
-  std::string m_Vectorparams1d;
+    std::string m_Vectorparams1d;
 };
 
 SLXIO_ABI_NAMESPACE_END

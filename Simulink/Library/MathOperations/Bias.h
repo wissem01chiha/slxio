@@ -11,30 +11,29 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Bias
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Bias : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Bias();
+    /** Default Constructor */
+    Bias();
 
-  /** Default Destructor */
-  ~Bias();
+    /** Default Destructor */
+    ~Bias();
 
-  const std::string& GetBias() const;
-  void SetBias(const std::string& value);
+    const std::string& GetBias() const;
+    void SetBias(const std::string& value);
 
-  const std::string& GetSaturateonintegeroverflow() const;
-  void SetSaturateonintegeroverflow(const std::string& value);
+    const std::string& GetSaturateonintegeroverflow() const;
+    void SetSaturateonintegeroverflow(const std::string& value);
 
 private:
-  std::string m_Bias;
+    std::string m_Bias;
 
-  std::string m_Saturateonintegeroverflow;
+    std::string m_Saturateonintegeroverflow;
 };
 
 SLXIO_ABI_NAMESPACE_END

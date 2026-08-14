@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT HermitianTranspose
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT HermitianTranspose : public IBlockParameters,
+                                           public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  HermitianTranspose();
+    /** Default Constructor */
+    HermitianTranspose();
 
-  /** Default Destructor */
-  ~HermitianTranspose();
+    /** Default Destructor */
+    ~HermitianTranspose();
 
 private:
 };

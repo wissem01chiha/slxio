@@ -25,21 +25,24 @@
 /*--------------------------------------------------------------------------*/
 BOOL tohome(void)
 {
-  BOOL bOK = FALSE;
+    BOOL bOK = FALSE;
 
-  if (getScilabMode() != SCILAB_STD) {
+    if (getScilabMode() != SCILAB_STD)
+    {
 #ifdef _MSC_VER
-    /* not on Windows */
-    bOK = FALSE;
+        /* not on Windows */
+        bOK = FALSE;
 #else
-    clrscr_nw();
-    bOK = TRUE;
+        clrscr_nw();
+        bOK = TRUE;
 #endif
-  } else {
-    /* Java Console */
-    bOK = PromptToHome();
-  }
+    }
+    else
+    {
+        /* Java Console */
+        bOK = PromptToHome();
+    }
 
-  return bOK;
+    return bOK;
 }
 /*--------------------------------------------------------------------------*/

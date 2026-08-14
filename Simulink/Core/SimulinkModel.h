@@ -14,7 +14,8 @@
 
 #include <memory>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkObject;
@@ -33,54 +34,54 @@ class Logger;
 class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
 {
 public:
-  /** Default Constructor */
-  SimulinkModel();
+    /** Default Constructor */
+    SimulinkModel();
 
-  SimulinkModel* New() const override;
+    SimulinkModel* New() const override;
 
-  /** Construct a Model by given an explict model type */
-  SimulinkModel(SimulinkModelType Type);
+    /** Construct a Model by given an explict model type */
+    SimulinkModel(SimulinkModelType Type);
 
-  /** Returns the generic type of this element. */
-  SimulinkElementType GetType() const override;
+    /** Returns the generic type of this element. */
+    SimulinkElementType GetType() const override;
 
-  /** Returns the unique identifier of this element. */
-  SId GetId() const override;
+    /** Returns the unique identifier of this element. */
+    SId GetId() const override;
 
-  /** Returns a string representation of this element. */
-  std::string ToString() const override;
+    /** Returns a string representation of this element. */
+    std::string ToString() const override;
 
-  /** Return a Pointer to given Simulink Block by Id*/
-  std::shared_ptr<SimulinkBlock> GetBlock(SId blockIdx);
+    /** Return a Pointer to given Simulink Block by Id*/
+    std::shared_ptr<SimulinkBlock> GetBlock(SId blockIdx);
 
-  /** Get Model type */
-  SimulinkModelType GetModelType();
+    /** Get Model type */
+    SimulinkModelType GetModelType();
 
-  /** Rteuns a pointer to Simulink Settings */
-  std::shared_ptr<SimulationSettings> GetSimulationSettings();
+    /** Rteuns a pointer to Simulink Settings */
+    std::shared_ptr<SimulationSettings> GetSimulationSettings();
 
-  /** Rteurns Model Version number*/
-  UInt32 GetModelVersion();
+    /** Rteurns Model Version number*/
+    UInt32 GetModelVersion();
 
-  /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const SId& id) const override;
+    /** Checks if this element or its children contain the given identifier. */
+    bool Contains(const SId& id) const override;
 
-  /** */
-  std::shared_ptr<ModelWorkspace> GetModelWorkspace();
+    /** */
+    std::shared_ptr<ModelWorkspace> GetModelWorkspace();
 
-  /** */
-  Logger& GetLogger();
+    /** */
+    Logger& GetLogger();
 
 private:
-  Logger& logger;
-  SId id;
-  UInt32 version;
-  SimulinkModelType ModelType;
-  std::shared_ptr<ModelWorkspace> workspace;
-  std::shared_ptr<SimulationSettings> simSet;
-  std::vector<std::shared_ptr<SimulinkBlock>> blocks;
-  std::vector<std::shared_ptr<SimulinkLine>> lines;
-  std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+    Logger& logger;
+    SId id;
+    UInt32 version;
+    SimulinkModelType ModelType;
+    std::shared_ptr<ModelWorkspace> workspace;
+    std::shared_ptr<SimulationSettings> simSet;
+    std::vector<std::shared_ptr<SimulinkBlock>> blocks;
+    std::vector<std::shared_ptr<SimulinkLine>> lines;
+    std::vector<std::shared_ptr<SimulinkParameter>> parameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

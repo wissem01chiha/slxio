@@ -21,15 +21,16 @@
 #include "SimulinkBlock.h"
 #include "SimulinkWriterBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT SimulinkBlockWriter
-  : public SimulinkWriterBase<SimulinkBlock, json_object*>
+    : public SimulinkWriterBase<SimulinkBlock, json_object*>
 {
 public:
-  SimulinkBlockWriter() = default;
-  ~SimulinkBlockWriter() = default;
+    SimulinkBlockWriter() = default;
+    ~SimulinkBlockWriter() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

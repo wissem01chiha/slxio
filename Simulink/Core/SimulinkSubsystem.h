@@ -14,7 +14,8 @@
 
 #include <memory>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -26,14 +27,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkSubsystem
 {
 public:
-  SimulinkSubsystem();
-  ~SimulinkSubsystem() = default;
-  std::vector<std::shared_ptr<SimulinkBlock>> getBlocks();
-  std::vector<std::shared_ptr<SimulinkBlock>> getPorts();
+    SimulinkSubsystem();
+    ~SimulinkSubsystem() = default;
+    std::vector<std::shared_ptr<SimulinkBlock>> getBlocks();
+    std::vector<std::shared_ptr<SimulinkBlock>> getPorts();
 
 private:
-  std::vector<std::shared_ptr<SimulinkBlock>> subsystemBlocks;
-  std::vector<std::shared_ptr<SimulinkBlock>> subsystemPorts;
+    std::vector<std::shared_ptr<SimulinkBlock>> subsystemBlocks;
+    std::vector<std::shared_ptr<SimulinkBlock>> subsystemPorts;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -11,50 +11,49 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Xor
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Xor : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Xor();
+    /** Default Constructor */
+    Xor();
 
-  /** Default Destructor */
-  ~Xor();
+    /** Default Destructor */
+    ~Xor();
 
-  const std::string& GetOperator() const;
-  void SetOperator(const std::string& value);
+    const std::string& GetOperator() const;
+    void SetOperator(const std::string& value);
 
-  const std::string& GetInputs() const;
-  void SetInputs(const std::string& value);
+    const std::string& GetInputs() const;
+    void SetInputs(const std::string& value);
 
-  const std::string& GetIconshape() const;
-  void SetIconshape(const std::string& value);
+    const std::string& GetIconshape() const;
+    void SetIconshape(const std::string& value);
 
-  const std::string& GetAllportssamedt() const;
-  void SetAllportssamedt(const std::string& value);
+    const std::string& GetAllportssamedt() const;
+    void SetAllportssamedt(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
 private:
-  std::string m_Operator;
+    std::string m_Operator;
 
-  std::string m_Inputs;
+    std::string m_Inputs;
 
-  std::string m_Iconshape;
+    std::string m_Iconshape;
 
-  std::string m_Allportssamedt;
+    std::string m_Allportssamedt;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

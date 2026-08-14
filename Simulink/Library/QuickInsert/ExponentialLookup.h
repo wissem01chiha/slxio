@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ExponentialLookup
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ExponentialLookup : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ExponentialLookup();
+    /** Default Constructor */
+    ExponentialLookup();
 
-  /** Default Destructor */
-  ~ExponentialLookup();
+    /** Default Destructor */
+    ~ExponentialLookup();
 
-  const std::string& GetFormula() const;
-  void SetFormula(const std::string& value);
+    const std::string& GetFormula() const;
+    void SetFormula(const std::string& value);
 
-  const std::string& GetNumdatapoints() const;
-  void SetNumdatapoints(const std::string& value);
+    const std::string& GetNumdatapoints() const;
+    void SetNumdatapoints(const std::string& value);
 
-  const std::string& GetOutputwordlength() const;
-  void SetOutputwordlength(const std::string& value);
+    const std::string& GetOutputwordlength() const;
+    void SetOutputwordlength(const std::string& value);
 
-  const std::string& GetInternalrulepriority() const;
-  void SetInternalrulepriority(const std::string& value);
+    const std::string& GetInternalrulepriority() const;
+    void SetInternalrulepriority(const std::string& value);
 
 private:
-  std::string m_Formula;
+    std::string m_Formula;
 
-  std::string m_Numdatapoints;
+    std::string m_Numdatapoints;
 
-  std::string m_Outputwordlength;
+    std::string m_Outputwordlength;
 
-  std::string m_Internalrulepriority;
+    std::string m_Internalrulepriority;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT CounterFreeRunning
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT CounterFreeRunning : public IBlockParameters,
+                                           public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  CounterFreeRunning();
+    /** Default Constructor */
+    CounterFreeRunning();
 
-  /** Default Destructor */
-  ~CounterFreeRunning();
+    /** Default Destructor */
+    ~CounterFreeRunning();
 
-  const std::string& GetNumbits() const;
-  void SetNumbits(const std::string& value);
+    const std::string& GetNumbits() const;
+    void SetNumbits(const std::string& value);
 
-  const std::string& GetTsamp() const;
-  void SetTsamp(const std::string& value);
+    const std::string& GetTsamp() const;
+    void SetTsamp(const std::string& value);
 
 private:
-  std::string m_Numbits;
+    std::string m_Numbits;
 
-  std::string m_Tsamp;
+    std::string m_Tsamp;
 };
 
 SLXIO_ABI_NAMESPACE_END

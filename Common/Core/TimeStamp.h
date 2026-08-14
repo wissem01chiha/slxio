@@ -8,7 +8,8 @@
 #include "APIExportMacro.h"
 #include "CorePCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -18,8 +19,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT TimeStamp final
 {
 public:
-  TimeStamp();
-  ~TimeStamp() = default;
+    TimeStamp();
+    ~TimeStamp() = default;
 
 private:
 };

@@ -22,21 +22,23 @@
 
 char* getPipeLine(void)
 {
-  int len_line = 0;
-  char buffer[bsiz];
+    int len_line = 0;
+    char buffer[bsiz];
 
-  // read from stdin
-  int eof = (fgets(buffer, bsiz, stdin) == NULL);
-  if (eof) {
-    // send command to quit to Scilab
-    return os_strdup("quit");
-  }
+    // read from stdin
+    int eof = (fgets(buffer, bsiz, stdin) == NULL);
+    if (eof)
+    {
+        // send command to quit to Scilab
+        return os_strdup("quit");
+    }
 
-  // remove trailing \n
-  len_line = (int)strlen(buffer);
-  if (buffer[len_line - 1] == '\n') {
-    buffer[len_line - 1] = '\0';
-  }
+    // remove trailing \n
+    len_line = (int)strlen(buffer);
+    if (buffer[len_line - 1] == '\n')
+    {
+        buffer[len_line - 1] = '\0';
+    }
 
-  return os_strdup(buffer);
+    return os_strdup(buffer);
 }

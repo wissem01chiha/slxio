@@ -11,45 +11,45 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT LookupTableDynamic
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT LookupTableDynamic : public IBlockParameters,
+                                           public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  LookupTableDynamic();
+    /** Default Constructor */
+    LookupTableDynamic();
 
-  /** Default Destructor */
-  ~LookupTableDynamic();
+    /** Default Destructor */
+    ~LookupTableDynamic();
 
-  const std::string& GetLookupmeth() const;
-  void SetLookupmeth(const std::string& value);
+    const std::string& GetLookupmeth() const;
+    void SetLookupmeth(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetLockscale() const;
-  void SetLockscale(const std::string& value);
+    const std::string& GetLockscale() const;
+    void SetLockscale(const std::string& value);
 
-  const std::string& GetRndmeth() const;
-  void SetRndmeth(const std::string& value);
+    const std::string& GetRndmeth() const;
+    void SetRndmeth(const std::string& value);
 
-  const std::string& GetDosatur() const;
-  void SetDosatur(const std::string& value);
+    const std::string& GetDosatur() const;
+    void SetDosatur(const std::string& value);
 
 private:
-  std::string m_Lookupmeth;
+    std::string m_Lookupmeth;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Lockscale;
+    std::string m_Lockscale;
 
-  std::string m_Rndmeth;
+    std::string m_Rndmeth;
 
-  std::string m_Dosatur;
+    std::string m_Dosatur;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -11,50 +11,50 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT TransferFcnLeadOrLag
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT TransferFcnLeadOrLag : public IBlockParameters,
+                                             public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  TransferFcnLeadOrLag();
+    /** Default Constructor */
+    TransferFcnLeadOrLag();
 
-  /** Default Destructor */
-  ~TransferFcnLeadOrLag();
+    /** Default Destructor */
+    ~TransferFcnLeadOrLag();
 
-  const std::string& GetPolez() const;
-  void SetPolez(const std::string& value);
+    const std::string& GetPolez() const;
+    void SetPolez(const std::string& value);
 
-  const std::string& GetZeroz() const;
-  void SetZeroz(const std::string& value);
+    const std::string& GetZeroz() const;
+    void SetZeroz(const std::string& value);
 
-  const std::string& GetIcprevoutput() const;
-  void SetIcprevoutput(const std::string& value);
+    const std::string& GetIcprevoutput() const;
+    void SetIcprevoutput(const std::string& value);
 
-  const std::string& GetIcprevinput() const;
-  void SetIcprevinput(const std::string& value);
+    const std::string& GetIcprevinput() const;
+    void SetIcprevinput(const std::string& value);
 
-  const std::string& GetRndmeth() const;
-  void SetRndmeth(const std::string& value);
+    const std::string& GetRndmeth() const;
+    void SetRndmeth(const std::string& value);
 
-  const std::string& GetDosatur() const;
-  void SetDosatur(const std::string& value);
+    const std::string& GetDosatur() const;
+    void SetDosatur(const std::string& value);
 
 private:
-  std::string m_Polez;
+    std::string m_Polez;
 
-  std::string m_Zeroz;
+    std::string m_Zeroz;
 
-  std::string m_Icprevoutput;
+    std::string m_Icprevoutput;
 
-  std::string m_Icprevinput;
+    std::string m_Icprevinput;
 
-  std::string m_Rndmeth;
+    std::string m_Rndmeth;
 
-  std::string m_Dosatur;
+    std::string m_Dosatur;
 };
 
 SLXIO_ABI_NAMESPACE_END

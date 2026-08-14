@@ -1,88 +1,75 @@
 #include "SimulinkDataType.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkDataType toSimulinkDataType(bool)
-{
-  return SimulinkDataType::Boolean;
-}
+SimulinkDataType toSimulinkDataType(bool) { return SimulinkDataType::Boolean; }
 
 SimulinkDataType toSimulinkDataType(Float32)
 {
 #ifdef USE_FLOAT16
-  return SimulinkDataType::Half;
+    return SimulinkDataType::Half;
 #elif defined(USE_FLOAT32)
-  return SimulinkDataType::Single;
+    return SimulinkDataType::Single;
 #elif defined(USE_FLOAT64)
-  return SimulinkDataType::Double;
+    return SimulinkDataType::Double;
 #elif defined(USE_FLOAT128)
-  return SimulinkDataType::Double;
+    return SimulinkDataType::Double;
 #else
-  return SimulinkDataType::Double;
+    return SimulinkDataType::Double;
 #endif
 }
 
-SimulinkDataType toSimulinkDataType(UInt8)
-{
-  return SimulinkDataType::UInt8;
-}
-SimulinkDataType toSimulinkDataType(UInt16)
-{
-  return SimulinkDataType::UInt16;
-}
-SimulinkDataType toSimulinkDataType(UInt32)
-{
-  return SimulinkDataType::UInt32;
-}
-SimulinkDataType toSimulinkDataType(UInt64)
-{
-  return SimulinkDataType::UInt64;
-}
+SimulinkDataType toSimulinkDataType(UInt8) { return SimulinkDataType::UInt8; }
+SimulinkDataType toSimulinkDataType(UInt16) { return SimulinkDataType::UInt16; }
+SimulinkDataType toSimulinkDataType(UInt32) { return SimulinkDataType::UInt32; }
+SimulinkDataType toSimulinkDataType(UInt64) { return SimulinkDataType::UInt64; }
 
 SimulinkDataType toSimulinkDataType(const std::string&)
 {
-  return SimulinkDataType::String;
+    return SimulinkDataType::String;
 }
 
 SimulinkDataType toSimulinkDataType(const char* cstr)
 {
-  std::string str(cstr);
-  return toSimulinkDataType(str);
+    std::string str(cstr);
+    return toSimulinkDataType(str);
 }
 
 const char* toChar(SimulinkDataType sldt)
 {
-  switch (sldt) {
+    switch (sldt)
+    {
     case SimulinkDataType::Auto:
-      return "auto";
+        return "auto";
     case SimulinkDataType::Double:
-      return "double";
+        return "double";
     case SimulinkDataType::Single:
-      return "single";
+        return "single";
     case SimulinkDataType::Half:
-      return "half";
+        return "half";
     case SimulinkDataType::Int8:
-      return "int8";
+        return "int8";
     case SimulinkDataType::UInt8:
-      return "uint8";
+        return "uint8";
     case SimulinkDataType::Int16:
-      return "int16";
+        return "int16";
     case SimulinkDataType::UInt16:
-      return "UInt16";
+        return "UInt16";
     case SimulinkDataType::Int32:
-      return "int32";
+        return "int32";
     case SimulinkDataType::UInt32:
-      return "uint32";
+        return "uint32";
     case SimulinkDataType::UInt64:
-      return "uint64";
+        return "uint64";
     case SimulinkDataType::Boolean:
-      return "boolean";
+        return "boolean";
     case SimulinkDataType::String:
-      return "string";
+        return "string";
     default:
-      return "";
-  }
+        return "";
+    }
 }
 
 SLXIO_ABI_NAMESPACE_END

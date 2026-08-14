@@ -13,7 +13,8 @@
 #include <string>
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -22,36 +23,36 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkParameterArray : public SimulinkParameterBase
 {
 public:
-  /** Returns current parameter name*/
-  std::string GetName() override;
+    /** Returns current parameter name*/
+    std::string GetName() override;
 
-  /** Returns parameter dimensions */
-  std::vector<UInt16> GetDimensions() override;
+    /** Returns parameter dimensions */
+    std::vector<UInt16> GetDimensions() override;
 
-  /** Serlise Parameter to string */
-  std::string ToString() const override;
+    /** Serlise Parameter to string */
+    std::string ToString() const override;
 
-  /** Parser the array given a string representation */
-  HError FromString(const char* value);
+    /** Parser the array given a string representation */
+    HError FromString(const char* value);
 
-  /** Get code generation data struct*/
-  std::shared_ptr<CoderInfo> GetCoderInfo() override;
+    /** Get code generation data struct*/
+    std::shared_ptr<CoderInfo> GetCoderInfo() override;
 
-  /** Parameter minumin value */
-  Float32 GetMin() override;
+    /** Parameter minumin value */
+    Float32 GetMin() override;
 
-  /** Parameter maxiumum value */
-  Float32 GetMax() override;
+    /** Parameter maxiumum value */
+    Float32 GetMax() override;
 
-  /** Get the resolved parameter SimulinkDataType */
-  SimulinkDataType GetDataType() override;
+    /** Get the resolved parameter SimulinkDataType */
+    SimulinkDataType GetDataType() override;
 
 private:
-  std::vector<Float32> Data;
-  std::string Name;
-  std::vector<UInt16> Dimensions;
-  std::shared_ptr<CoderInfo> Coder;
-  SimulinkDataType DataType;
+    std::vector<Float32> Data;
+    std::string Name;
+    std::vector<UInt16> Dimensions;
+    std::shared_ptr<CoderInfo> Coder;
+    SimulinkDataType DataType;
 };
 
 SLXIO_ABI_NAMESPACE_END

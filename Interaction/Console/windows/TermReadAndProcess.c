@@ -25,12 +25,14 @@
 /*--------------------------------------------------------------------------*/
 char* getCmdLine(void)
 {
-  const char* tmp = GetTemporaryPrompt();
-  if (tmp[0] != 0) /* Input function is used */
-  {
-    return TerminalGetString(tmp);
-  } else {
-    return TerminalGetString(GetCurrentPrompt());
-  }
+    const char* tmp = GetTemporaryPrompt();
+    if (tmp[0] != 0) /* Input function is used */
+    {
+        return TerminalGetString(tmp);
+    }
+    else
+    {
+        return TerminalGetString(GetCurrentPrompt());
+    }
 }
 /*--------------------------------------------------------------------------*/

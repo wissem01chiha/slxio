@@ -3,104 +3,107 @@
 #include "ErrorHandler.h"
 #include "ErrorHandlerMacro.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ErrorManager::ErrorManager()
 {
-  m_ringBuffer.resize(m_bufferSize);
-  m_logger = nullptr;
+    m_ringBuffer.resize(m_bufferSize);
+    m_logger = nullptr;
 }
 
 ErrorManager& ErrorManager::GetInstance()
 {
-  static ErrorManager instance;
-  return instance;
+    static ErrorManager instance;
+    return instance;
 }
 
 void ErrorManager::SetBufferSize(size_t new_size)
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  m_ringBuffer.resize(new_size);
-  m_head = 0;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    m_ringBuffer.resize(new_size);
+    m_head = 0;
 }
 
 HError ErrorManager::GetLastResult(void)
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
-    if (m_ringBuffer[idx] != HError())
-      return m_ringBuffer[idx];
-  }
-  return E_OK;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    for (size_t i = 0; i < m_bufferSize; ++i)
+    {
+        size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
+        if (m_ringBuffer[idx] != HError())
+            return m_ringBuffer[idx];
+    }
+    return E_OK;
 }
 
 HError ErrorManager::GetLastInfoResult(void)
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
-    if (IsInfo(m_ringBuffer[idx]))
-      return m_ringBuffer[idx];
-  }
-  return E_OK;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    for (size_t i = 0; i < m_bufferSize; ++i)
+    {
+        size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
+        if (IsInfo(m_ringBuffer[idx]))
+            return m_ringBuffer[idx];
+    }
+    return E_OK;
 }
 
 HError ErrorManager::GetLastWarningResult(void)
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
-    if (IsWarning(m_ringBuffer[idx]))
-      return m_ringBuffer[idx];
-  }
-  return E_OK;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    for (size_t i = 0; i < m_bufferSize; ++i)
+    {
+        size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
+        if (IsWarning(m_ringBuffer[idx]))
+            return m_ringBuffer[idx];
+    }
+    return E_OK;
 }
 
 HError ErrorManager::GetLastFatalResult(void)
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
-    if (IsFatal(m_ringBuffer[idx]))
-      return m_ringBuffer[idx];
-  }
-  return E_OK;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    for (size_t i = 0; i < m_bufferSize; ++i)
+    {
+        size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
+        if (IsFatal(m_ringBuffer[idx]))
+            return m_ringBuffer[idx];
+    }
+    return E_OK;
 }
 
 void ErrorManager::SetResult(HError status)
 {
-  UInt32 level = GetLevelIdentifier(status);
-  if (level == 0)
-    return;
+    UInt32 level = GetLevelIdentifier(status);
+    if (level == 0)
+        return;
 
-  std::lock_guard<std::mutex> lock(m_logMutex);
+    std::lock_guard<std::mutex> lock(m_logMutex);
 
-  m_ringBuffer[m_head] = status;
+    m_ringBuffer[m_head] = status;
 
-  m_head = (m_head + 1) % m_bufferSize;
+    m_head = (m_head + 1) % m_bufferSize;
 }
 
 std::vector<HError> ErrorManager::GetBuffer()
 {
-  std::lock_guard<std::mutex> lock(m_logMutex);
-  return m_ringBuffer;
+    std::lock_guard<std::mutex> lock(m_logMutex);
+    return m_ringBuffer;
 }
 
 HError ErrorManager::SetLogger(const ILogger* logger)
 {
-  if (logger == nullptr) {
-    return E_ILOGGER_NULLPTR_RECEIVED;
-  }
-  m_logger = logger;
-  return E_OK;
+    if (logger == nullptr)
+    {
+        return E_ILOGGER_NULLPTR_RECEIVED;
+    }
+    m_logger = logger;
+    return E_OK;
 }
 
-const ILogger* ErrorManager::GetLogger()
-{
-  return m_logger;
-}
+const ILogger* ErrorManager::GetLogger() { return m_logger; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

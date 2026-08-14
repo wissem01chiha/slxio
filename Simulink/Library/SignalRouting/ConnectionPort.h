@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ConnectionPort
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ConnectionPort : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ConnectionPort();
+    /** Default Constructor */
+    ConnectionPort();
 
-  /** Default Destructor */
-  ~ConnectionPort();
+    /** Default Destructor */
+    ~ConnectionPort();
 
-  const std::string& GetPort() const;
-  void SetPort(const std::string& value);
+    const std::string& GetPort() const;
+    void SetPort(const std::string& value);
 
-  const std::string& GetSide() const;
-  void SetSide(const std::string& value);
+    const std::string& GetSide() const;
+    void SetSide(const std::string& value);
 
-  const std::string& GetConnectiontype() const;
-  void SetConnectiontype(const std::string& value);
+    const std::string& GetConnectiontype() const;
+    void SetConnectiontype(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
 private:
-  std::string m_Port;
+    std::string m_Port;
 
-  std::string m_Side;
+    std::string m_Side;
 
-  std::string m_Connectiontype;
+    std::string m_Connectiontype;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

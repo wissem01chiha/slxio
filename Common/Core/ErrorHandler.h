@@ -9,7 +9,8 @@
 #include "ErrorHandlerMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SLXIO_APIEXPORT UInt32 GetProjectIdentifier(HError result);

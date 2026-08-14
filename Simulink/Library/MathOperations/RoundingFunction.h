@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT RoundingFunction
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT RoundingFunction : public IBlockParameters,
+                                         public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  RoundingFunction();
+    /** Default Constructor */
+    RoundingFunction();
 
-  /** Default Destructor */
-  ~RoundingFunction();
+    /** Default Destructor */
+    ~RoundingFunction();
 
-  const std::string& GetOperator() const;
-  void SetOperator(const std::string& value);
+    const std::string& GetOperator() const;
+    void SetOperator(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
 private:
-  std::string m_Operator;
+    std::string m_Operator;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

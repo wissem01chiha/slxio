@@ -21,19 +21,22 @@
 /*--------------------------------------------------------------------------*/
 void setScilabLines(int nbRows, int nbCols)
 {
-  if (getConsoleLines() == 0) {
-    /* The user does not want to be asked for more display */
-    /* Modify only the number of columns used to format displayed data */
-    scilines(getConsoleLines(), nbCols);
-  } else {
-    /* Modify number of lines and columns used to format displayed data */
-    scilines(nbRows, nbCols);
-  }
+    if (getConsoleLines() == 0)
+    {
+        /* The user does not want to be asked for more display */
+        /* Modify only the number of columns used to format displayed data */
+        scilines(getConsoleLines(), nbCols);
+    }
+    else
+    {
+        /* Modify number of lines and columns used to format displayed data */
+        scilines(nbRows, nbCols);
+    }
 }
 /*--------------------------------------------------------------------------*/
 void forceScilabLines(int nbRows, int nbCols)
 {
-  /* Modify number of lines and columns used to format displayed data */
-  scilines(nbRows, nbCols);
+    /* Modify number of lines and columns used to format displayed data */
+    scilines(nbRows, nbCols);
 }
 /*--------------------------------------------------------------------------*/

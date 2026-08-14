@@ -10,7 +10,8 @@
 #include "ILogger.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -21,59 +22,59 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT ErrorManager final
 {
 public:
-  /* Retrieves the singleton instance of ErrorManager. */
-  static ErrorManager& GetInstance();
+    /* Retrieves the singleton instance of ErrorManager. */
+    static ErrorManager& GetInstance();
 
-  /* Change the buffer size if needed.
-   * Adjusting the buffer size can have performance implications.
-   */
-  void SetBufferSize(size_t new_size);
+    /* Change the buffer size if needed.
+     * Adjusting the buffer size can have performance implications.
+     */
+    void SetBufferSize(size_t new_size);
 
-  /* Retrieves the last error code value.
-   * If no status has been recorded, returns the E_OK code.
-   */
-  HError GetLastResult(void);
+    /* Retrieves the last error code value.
+     * If no status has been recorded, returns the E_OK code.
+     */
+    HError GetLastResult(void);
 
-  /* Retrieves the last informational error.
-   * If no information record is found, falls back to E_OK.
-   */
-  HError GetLastInfoResult(void);
+    /* Retrieves the last informational error.
+     * If no information record is found, falls back to E_OK.
+     */
+    HError GetLastInfoResult(void);
 
-  /* Retrieves the last warning error.
-   */
-  HError GetLastWarningResult(void);
+    /* Retrieves the last warning error.
+     */
+    HError GetLastWarningResult(void);
 
-  /* Retrieves the last fatal error.
-   */
-  HError GetLastFatalResult(void);
+    /* Retrieves the last fatal error.
+     */
+    HError GetLastFatalResult(void);
 
-  /* Set the execution program status.
-   * Thread-safe routine accessible by any class.
-   * This is the main entry point to update the execution status.
-   */
-  void SetResult(HError status);
+    /* Set the execution program status.
+     * Thread-safe routine accessible by any class.
+     * This is the main entry point to update the execution status.
+     */
+    void SetResult(HError status);
 
-  /* Retrieve the full log buffer.
-   * Provides access to the complete log for analysis or transmission.*/
-  std::vector<HError> GetBuffer();
+    /* Retrieve the full log buffer.
+     * Provides access to the complete log for analysis or transmission.*/
+    std::vector<HError> GetBuffer();
 
-  /**
-   * Set a custom ILogger based object type to enable the ErrorManager
-   * to write trace into the supported logging implementations
-   * Note the ErrorManager is not allowed to modify the logger object
-   */
-  HError SetLogger(const ILogger* logger);
+    /**
+     * Set a custom ILogger based object type to enable the ErrorManager
+     * to write trace into the supported logging implementations
+     * Note the ErrorManager is not allowed to modify the logger object
+     */
+    HError SetLogger(const ILogger* logger);
 
-  /** Get the logger sink */
-  const ILogger* GetLogger();
+    /** Get the logger sink */
+    const ILogger* GetLogger();
 
 private:
-  static const size_t m_bufferSize = 500;
-  std::vector<HError> m_ringBuffer;
-  const ILogger* m_logger = nullptr;
-  size_t m_head = 0;
-  std::mutex m_logMutex;
-  ErrorManager();
+    static const size_t m_bufferSize = 500;
+    std::vector<HError> m_ringBuffer;
+    const ILogger* m_logger = nullptr;
+    size_t m_head = 0;
+    std::mutex m_logMutex;
+    ErrorManager();
 };
 
 SLXIO_ABI_NAMESPACE_END

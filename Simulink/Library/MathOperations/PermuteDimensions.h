@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT PermuteDimensions
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT PermuteDimensions : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  PermuteDimensions();
+    /** Default Constructor */
+    PermuteDimensions();
 
-  /** Default Destructor */
-  ~PermuteDimensions();
+    /** Default Destructor */
+    ~PermuteDimensions();
 
-  const std::string& GetOrder() const;
-  void SetOrder(const std::string& value);
+    const std::string& GetOrder() const;
+    void SetOrder(const std::string& value);
 
 private:
-  std::string m_Order;
+    std::string m_Order;
 };
 
 SLXIO_ABI_NAMESPACE_END

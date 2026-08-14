@@ -26,11 +26,12 @@
 /*--------------------------------------------------------------------------*/
 BOOL InitializeConsole(void)
 {
-  BOOL bRes = TRUE;
-  scilinesdefault();
-  if (getScilabMode() == SCILAB_STD) {
-    bRes = ScilabLinesUpdate();
-  }
-  return bRes;
+    BOOL bRes = TRUE;
+    scilinesdefault();
+    if (getScilabMode() == SCILAB_STD)
+    {
+        bRes = ScilabLinesUpdate();
+    }
+    return bRes;
 }
 /*--------------------------------------------------------------------------*/

@@ -4,108 +4,94 @@
 #include "SimulinkBlock.h"
 #include "SimulinkParameter.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::SimulinkObject()
-  : logger(Logger::GetInstance())
-  , PropName("")
-  , ClassName("")
-  , ObjectVersion("")
-  , ObjectId(0)
+    : logger(Logger::GetInstance()), PropName(""), ClassName(""),
+      ObjectVersion(""), ObjectId(0)
 {
 }
 
-SimulinkObject* SimulinkObject::New() const
-{
-  return new SimulinkObject();
-}
+SimulinkObject* SimulinkObject::New() const { return new SimulinkObject(); }
 
-SimulinkObject::SimulinkObject(SId ObjectId,
-                               std::string name,
+SimulinkObject::SimulinkObject(SId ObjectId, std::string name,
                                std::string ClassName)
-  : ObjectId(ObjectId)
-  , PropName(name)
-  , ClassName(ClassName)
-  , logger(Logger::GetInstance())
+    : ObjectId(ObjectId), PropName(name), ClassName(ClassName),
+      logger(Logger::GetInstance())
 {
 }
 
-SimulinkObject::SimulinkObject(SId ObjectId,
-                               std::string ObjectVersion,
-                               std::string name,
-                               std::string ClassName)
-  : ObjectId(ObjectId)
-  , ObjectVersion(ObjectVersion)
-  , PropName(name)
-  , ClassName(ClassName)
-  , logger(Logger::GetInstance())
+SimulinkObject::SimulinkObject(SId ObjectId, std::string ObjectVersion,
+                               std::string name, std::string ClassName)
+    : ObjectId(ObjectId), ObjectVersion(ObjectVersion), PropName(name),
+      ClassName(ClassName), logger(Logger::GetInstance())
 {
 }
 
 SimulinkObject::SimulinkObject(std::string ObjectVersion, std::string ClassName)
-  : ObjectVersion(ObjectVersion)
-  , ClassName(ClassName)
-  , logger(Logger::GetInstance())
+    : ObjectVersion(ObjectVersion), ClassName(ClassName),
+      logger(Logger::GetInstance())
 {
 }
 
 std::shared_ptr<SimulinkElementBase> SimulinkObject::at(SId index)
 {
-  return std::shared_ptr<SimulinkElementBase>();
+    return std::shared_ptr<SimulinkElementBase>();
 }
 
 SimulinkElementType SimulinkObject::GetType() const
 {
-  return SimulinkElementType(SimulinkElementType::Type::Object);
+    return SimulinkElementType(SimulinkElementType::Type::Object);
 }
 
-SId SimulinkObject::GetId() const
-{
-  return ObjectId;
-}
+SId SimulinkObject::GetId() const { return ObjectId; }
 
 std::string SimulinkObject::ToString() const
 {
 
-  std::ostringstream oss;
+    std::ostringstream oss;
 
-  oss << "SimulinkObject {\n";
-  oss << "  ID: " << ObjectId << "\n";
-  oss << "  Version: " << ObjectVersion << "\n";
-  oss << "  Name: " << PropName << "\n";
-  oss << "  Class: " << ClassName << "\n";
+    oss << "SimulinkObject {\n";
+    oss << "  ID: " << ObjectId << "\n";
+    oss << "  Version: " << ObjectVersion << "\n";
+    oss << "  Name: " << PropName << "\n";
+    oss << "  Class: " << ClassName << "\n";
 
-  oss << "  Objects:\n";
-  for (const auto& obj : SubObjects) {
-    if (obj) {
-      oss << "    - " << obj->ToString() << "\n";
+    oss << "  Objects:\n";
+    for (const auto& obj : SubObjects)
+    {
+        if (obj)
+        {
+            oss << "    - " << obj->ToString() << "\n";
+        }
     }
-  }
 
-  oss << "  Arrays:\n";
-  for (const auto& arr : SubArrays) {
-    if (arr) {
-      oss << "    - " << arr->ToString() << "\n";
+    oss << "  Arrays:\n";
+    for (const auto& arr : SubArrays)
+    {
+        if (arr)
+        {
+            oss << "    - " << arr->ToString() << "\n";
+        }
     }
-  }
 
-  oss << "  Parameters:\n";
-  for (const auto& param : ObjectParameters) {
-    if (param) {
-      oss << "    - " << param->ToString() << "\n";
+    oss << "  Parameters:\n";
+    for (const auto& param : ObjectParameters)
+    {
+        if (param)
+        {
+            oss << "    - " << param->ToString() << "\n";
+        }
     }
-  }
 
-  oss << "}";
+    oss << "}";
 
-  return oss.str();
+    return oss.str();
 }
 
-SimulinkBlockType SimulinkObject::GetBlockType()
-{
-  return SimulinkBlockType();
-}
+SimulinkBlockType SimulinkObject::GetBlockType() { return SimulinkBlockType(); }
 
 // HError SimulinkObject::RemoveElement(std::shared_ptr<SimulinkElementBase>
 // element)
@@ -243,131 +229,133 @@ SimulinkBlockType SimulinkObject::GetBlockType()
 
 std::shared_ptr<SimulinkElementBase> SimulinkObject::operator[](SId index)
 {
-  return std::shared_ptr<SimulinkElementBase>();
+    return std::shared_ptr<SimulinkElementBase>();
 }
 
-UInt32 SimulinkObject::Size() const
-{
-  return UInt32();
-}
+UInt32 SimulinkObject::Size() const { return UInt32(); }
 
-bool SimulinkObject::Empty() const
-{
-  return false;
-}
+bool SimulinkObject::Empty() const { return false; }
 
 void SimulinkObject::Clear() {}
 
-HError SimulinkObject::Insert(
-  const std::shared_ptr<SimulinkElementBase>& element)
+HError
+SimulinkObject::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return HError();
+    return HError();
 }
 
-HError SimulinkObject::Erase(const SId& id)
-{
-  return HError();
-}
+HError SimulinkObject::Erase(const SId& id) { return HError(); }
 
-HError SimulinkObject::Erase(
-  const std::shared_ptr<SimulinkElementBase>& element)
+HError
+SimulinkObject::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
-  return HError();
+    return HError();
 }
 
 std::shared_ptr<SimulinkElementBase> SimulinkObject::Find(const SId& id)
 {
-  return std::shared_ptr<SimulinkElementBase>();
+    return std::shared_ptr<SimulinkElementBase>();
 }
 
 bool SimulinkObject::Contains(const SId& ObjectId_) const
 {
 
-  if (ObjectId == ObjectId_) {
-    return 1;
-  }
+    if (ObjectId == ObjectId_)
+    {
+        return 1;
+    }
 
-  if (!SubObjects.empty()) {
-    for (const auto& obj : SubObjects) {
-      if (obj) {
-        if (obj->Contains(ObjectId_)) {
-          return 1;
+    if (!SubObjects.empty())
+    {
+        for (const auto& obj : SubObjects)
+        {
+            if (obj)
+            {
+                if (obj->Contains(ObjectId_))
+                {
+                    return 1;
+                }
+            }
         }
-      }
     }
-  }
 
-  if (!SubArrays.empty()) {
-    for (const auto& arr : SubArrays) {
-      if (arr) {
-        if (arr->Contains(ObjectId_)) {
-          return 1;
+    if (!SubArrays.empty())
+    {
+        for (const auto& arr : SubArrays)
+        {
+            if (arr)
+            {
+                if (arr->Contains(ObjectId_))
+                {
+                    return 1;
+                }
+            }
         }
-      }
     }
-  }
-  return 0;
+    return 0;
 }
 
-std::shared_ptr<SimulinkParameterBase> SimulinkObject::GetParameter(
-  std::string name)
+std::shared_ptr<SimulinkParameterBase>
+SimulinkObject::GetParameter(std::string name)
 {
 
-  for (const auto& param : ObjectParameters) {
-    if (param && param->GetName() == name) {
-      return param;
+    for (const auto& param : ObjectParameters)
+    {
+        if (param && param->GetName() == name)
+        {
+            return param;
+        }
     }
-  }
 
-  for (const auto& subElement : SubObjects) {
-    if (subElement) {
+    for (const auto& subElement : SubObjects)
+    {
+        if (subElement)
+        {
 
-      auto result = subElement->GetParameter(name);
-      if (result) {
-        return result;
-      }
+            auto result = subElement->GetParameter(name);
+            if (result)
+            {
+                return result;
+            }
+        }
     }
-  }
 
-  for (const auto& array : SubArrays) {
-    if (array) {
-      auto arrayParam = array->GetParameter(name);
-      if (arrayParam) {
-        return arrayParam;
-      }
+    for (const auto& array : SubArrays)
+    {
+        if (array)
+        {
+            auto arrayParam = array->GetParameter(name);
+            if (arrayParam)
+            {
+                return arrayParam;
+            }
+        }
     }
-  }
-  // l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not
-  // found.");
-  return std::make_shared<SimulinkParameter>();
+    // l.log(Logger::V_WARNING, "SimulinkObject:: Parameter ", name, " not
+    // found.");
+    return std::make_shared<SimulinkParameter>();
 }
 
-HError SimulinkObject::SetParameter(
-  std::string name,
-  std::shared_ptr<SimulinkParameterBase> parameter)
+HError
+SimulinkObject::SetParameter(std::string name,
+                             std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return HError();
+    return HError();
 }
 
-HError SimulinkObject::AddParameter(
-  std::shared_ptr<SimulinkParameterBase> parameter)
+HError
+SimulinkObject::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
-  return HError();
+    return HError();
 }
 
-std::string SimulinkObject::GetName()
-{
-  return PropName;
-}
+std::string SimulinkObject::GetName() { return PropName; }
 
-std::string SimulinkObject::GetDimension()
-{
-  return std::string();
-}
+std::string SimulinkObject::GetDimension() { return std::string(); }
 
 std::shared_ptr<SimulinkBlock> SimulinkObject::GetBlockParent()
 {
-  return std::shared_ptr<SimulinkBlock>();
+    return std::shared_ptr<SimulinkBlock>();
 }
 
 SLXIO_ABI_NAMESPACE_END

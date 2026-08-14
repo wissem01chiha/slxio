@@ -9,28 +9,30 @@
 #include "DataPCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class IDiagnoctics
+ * @brief
  */
 class SLXIO_APIEXPORT IDiagnoctics
 {
 public:
-  enum class Type
-  {
-    none,
-    warning,
-    error
-  };
+    enum class Type
+    {
+        none,
+        warning,
+        error
+    };
 
-  IDiagnoctics() = default;
-  virtual ~IDiagnoctics() = default;
+    IDiagnoctics() = default;
+    virtual ~IDiagnoctics() = default;
 
-  virtual void SetDetectReadBeforeWrite(IDiagnoctics::Type m) = 0;
-  virtual void SetDetectWriteBeforeRead(IDiagnoctics::Type m) = 0;
-  virtual void SetDetectWriteAfterWrite(IDiagnoctics::Type m) = 0;
+    virtual void SetDetectReadBeforeWrite(IDiagnoctics::Type m) = 0;
+    virtual void SetDetectWriteBeforeRead(IDiagnoctics::Type m) = 0;
+    virtual void SetDetectWriteAfterWrite(IDiagnoctics::Type m) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

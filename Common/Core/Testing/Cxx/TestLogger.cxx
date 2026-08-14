@@ -8,22 +8,22 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Logger With SimpleLogMessage Logging Test")
 {
-  Logger logger;
-  logger.Init();
-  logger.SetLogLevel(LogLevelType::LOG_INFO);
+    Logger logger;
+    logger.Init();
+    logger.SetLogLevel(LogLevelType::LOG_INFO);
 
-  LogMessage msg("Hello World");
-  CHECK_NOTHROW(logger.Log(msg));
+    LogMessage msg("Hello World");
+    CHECK_NOTHROW(logger.Log(msg));
 }
 
 TEST_CASE("Logger With SimpleLogMessage via << operator")
 {
-  Logger logger;
-  logger.Init();
-  logger.SetLogLevel(LogLevelType::LOG_INFO);
+    Logger logger;
+    logger.Init();
+    logger.SetLogLevel(LogLevelType::LOG_INFO);
 
-  LogMessage msg("Hello World");
-  CHECK_NOTHROW(logger << msg);
+    LogMessage msg("Hello World");
+    CHECK_NOTHROW(logger << msg);
 }
 
 SLXIO_ABI_NAMESPACE_END

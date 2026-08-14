@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT NeighborhoodProcessingSubsystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT NeighborhoodProcessingSubsystem : public IBlockParameters,
+                                                        public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  NeighborhoodProcessingSubsystem();
+    /** Default Constructor */
+    NeighborhoodProcessingSubsystem();
 
-  /** Default Destructor */
-  ~NeighborhoodProcessingSubsystem();
+    /** Default Destructor */
+    ~NeighborhoodProcessingSubsystem();
 
 private:
 };

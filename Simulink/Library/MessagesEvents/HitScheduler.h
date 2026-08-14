@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT HitScheduler
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT HitScheduler : public IBlockParameters,
+                                     public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  HitScheduler();
+    /** Default Constructor */
+    HitScheduler();
 
-  /** Default Destructor */
-  ~HitScheduler();
+    /** Default Destructor */
+    ~HitScheduler();
 
-  const std::string& GetHitscheduleroutputtype() const;
-  void SetHitscheduleroutputtype(const std::string& value);
+    const std::string& GetHitscheduleroutputtype() const;
+    void SetHitscheduleroutputtype(const std::string& value);
 
-  const std::string& GetInitialbuffersize() const;
-  void SetInitialbuffersize(const std::string& value);
+    const std::string& GetInitialbuffersize() const;
+    void SetInitialbuffersize(const std::string& value);
 
-  const std::string& GetFixedbuffer() const;
-  void SetFixedbuffer(const std::string& value);
+    const std::string& GetFixedbuffer() const;
+    void SetFixedbuffer(const std::string& value);
 
 private:
-  std::string m_Hitscheduleroutputtype;
+    std::string m_Hitscheduleroutputtype;
 
-  std::string m_Initialbuffersize;
+    std::string m_Initialbuffersize;
 
-  std::string m_Fixedbuffer;
+    std::string m_Fixedbuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END

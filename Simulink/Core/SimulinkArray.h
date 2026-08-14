@@ -11,7 +11,8 @@
 
 #include <memory>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkParameter;
@@ -27,88 +28,88 @@ class SimulinkParameter;
 class SLXIO_APIEXPORT SimulinkArray final : public SimulinkElementBase
 {
 public:
-  /** Default constructor. */
-  SimulinkArray();
+    /** Default constructor. */
+    SimulinkArray();
 
-  /** Create a new SimulinkArray instance. */
-  SimulinkArray* New() const override;
+    /** Create a new SimulinkArray instance. */
+    SimulinkArray* New() const override;
 
-  /** Construct a SimulinkArray with type, name, and dimension. */
-  SimulinkArray(std::string type, std::string name, std::string dimension);
+    /** Construct a SimulinkArray with type, name, and dimension. */
+    SimulinkArray(std::string type, std::string name, std::string dimension);
 
-  /** Accesses a child element by index with bound checking */
-  std::shared_ptr<SimulinkElementBase> at(SId index) override;
+    /** Accesses a child element by index with bound checking */
+    std::shared_ptr<SimulinkElementBase> at(SId index) override;
 
-  /** Access specified element */
-  std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
+    /** Access specified element */
+    std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
 
-  /** Returns the number of child elements. */
-  UInt32 Size() const override;
+    /** Returns the number of child elements. */
+    UInt32 Size() const override;
 
-  /** Returns true if no child elements exist. */
-  bool Empty() const override;
+    /** Returns true if no child elements exist. */
+    bool Empty() const override;
 
-  /** Removes all child elements. */
-  void Clear() override;
+    /** Removes all child elements. */
+    void Clear() override;
 
-  /** Inserts a new child element. */
-  HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
+    /** Inserts a new child element. */
+    HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
-  /** Erases a child element by identifier. */
-  HError Erase(const SId& id) override;
+    /** Erases a child element by identifier. */
+    HError Erase(const SId& id) override;
 
-  /** Erases a child element by reference. */
-  HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
+    /** Erases a child element by reference. */
+    HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
-  /** Finds a child element by identifier. */
-  std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
+    /** Finds a child element by identifier. */
+    std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
 
-  /** Checks if this element or its children contain the given identifier. */
-  bool Contains(const SId& id) const override;
+    /** Checks if this element or its children contain the given identifier. */
+    bool Contains(const SId& id) const override;
 
-  /** Returns the generic type of this element. */
-  SimulinkElementType GetType() const override;
+    /** Returns the generic type of this element. */
+    SimulinkElementType GetType() const override;
 
-  /** Returns the unique identifier of this element. */
-  SId GetId() const override;
+    /** Returns the unique identifier of this element. */
+    SId GetId() const override;
 
-  /** Returns a string representation of this element. */
-  std::string ToString() const override;
+    /** Returns a string representation of this element. */
+    std::string ToString() const override;
 
-  /** Return the array name. */
-  std::string GetName() override;
+    /** Return the array name. */
+    std::string GetName() override;
 
-  /** Return the array dimension. */
-  std::string GetDimension() override;
+    /** Return the array dimension. */
+    std::string GetDimension() override;
 
-  /** Return the array type. */
-  std::string GetArrayType();
+    /** Return the array type. */
+    std::string GetArrayType();
 
-  /** Return the parameter with the given name. */
-  std::shared_ptr<SimulinkParameterBase> GetParameter(
-    std::string name) override;
+    /** Return the parameter with the given name. */
+    std::shared_ptr<SimulinkParameterBase>
+    GetParameter(std::string name) override;
 
-  /** Sets the element specifc parameter to given one  */
-  HError SetParameter(
-    std::string name,
-    std::shared_ptr<SimulinkParameterBase> parameter) override;
+    /** Sets the element specifc parameter to given one  */
+    HError
+    SetParameter(std::string name,
+                 std::shared_ptr<SimulinkParameterBase> parameter) override;
 
-  /* Adds a Parameter to the array */
-  HError AddParameter(
-    std::shared_ptr<SimulinkParameterBase> parameter) override;
+    /* Adds a Parameter to the array */
+    HError
+    AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
-  /** Return the class logger. */
-  Logger& GetLogger();
+    /** Return the class logger. */
+    Logger& GetLogger();
 
 private:
-  SId ArrayId;
-  Logger& logger;
-  std::string ArrayType;
-  std::string ArrayName;
-  std::string ArrayDimension;
-  std::vector<SId> ArrayObjectIds;
-  std::vector<std::shared_ptr<SimulinkArray>> SubArrays;
-  std::vector<std::shared_ptr<SimulinkParameter>> ArrayParameters;
+    SId ArrayId;
+    Logger& logger;
+    std::string ArrayType;
+    std::string ArrayName;
+    std::string ArrayDimension;
+    std::vector<SId> ArrayObjectIds;
+    std::vector<std::shared_ptr<SimulinkArray>> SubArrays;
+    std::vector<std::shared_ptr<SimulinkParameter>> ArrayParameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

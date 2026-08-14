@@ -14,7 +14,8 @@
 #include <string>
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -36,86 +37,87 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkElementBase
 {
 public:
-  /** Default destructor. */
-  virtual ~SimulinkElementBase() = default;
+    /** Default destructor. */
+    virtual ~SimulinkElementBase() = default;
 
-  /** Creates a new instance of this element. */
-  virtual SimulinkElementBase* New() const = 0;
+    /** Creates a new instance of this element. */
+    virtual SimulinkElementBase* New() const = 0;
 
-  /** Deleted copy assignment operator. */
-  SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
+    /** Deleted copy assignment operator. */
+    SimulinkElementBase& operator=(const SimulinkElementBase&) = delete;
 
-  /** Deleted move constructor. */
-  SimulinkElementBase(SimulinkElementBase&& other) = delete;
+    /** Deleted move constructor. */
+    SimulinkElementBase(SimulinkElementBase&& other) = delete;
 
-  /** Deleted move assignment operator. */
-  SimulinkElementBase& operator=(SimulinkElementBase&& other) = delete;
+    /** Deleted move assignment operator. */
+    SimulinkElementBase& operator=(SimulinkElementBase&& other) = delete;
 
-  /** Accesses a child element by index with bound checking */
-  virtual std::shared_ptr<SimulinkElementBase> at(SId index) = 0;
+    /** Accesses a child element by index with bound checking */
+    virtual std::shared_ptr<SimulinkElementBase> at(SId index) = 0;
 
-  /** Access specified element */
-  virtual std::shared_ptr<SimulinkElementBase> operator[](SId index) = 0;
+    /** Access specified element */
+    virtual std::shared_ptr<SimulinkElementBase> operator[](SId index) = 0;
 
-  /** Returns the number of child elements. */
-  virtual UInt32 Size() const = 0;
+    /** Returns the number of child elements. */
+    virtual UInt32 Size() const = 0;
 
-  /** Returns true if no child elements exist. */
-  virtual bool Empty() const = 0;
+    /** Returns true if no child elements exist. */
+    virtual bool Empty() const = 0;
 
-  /** Removes all child elements. */
-  virtual void Clear() = 0;
+    /** Removes all child elements. */
+    virtual void Clear() = 0;
 
-  /** Inserts a new child element. */
-  virtual HError Insert(
-    const std::shared_ptr<SimulinkElementBase>& element) = 0;
+    /** Inserts a new child element. */
+    virtual HError
+    Insert(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
-  /** Erases a child element by identifier. */
-  virtual HError Erase(const SId& id) = 0;
+    /** Erases a child element by identifier. */
+    virtual HError Erase(const SId& id) = 0;
 
-  /** Erases a child element by reference. */
-  virtual HError Erase(const std::shared_ptr<SimulinkElementBase>& element) = 0;
+    /** Erases a child element by reference. */
+    virtual HError
+    Erase(const std::shared_ptr<SimulinkElementBase>& element) = 0;
 
-  /** Finds a child element by identifier. */
-  virtual std::shared_ptr<SimulinkElementBase> Find(const SId& id) = 0;
+    /** Finds a child element by identifier. */
+    virtual std::shared_ptr<SimulinkElementBase> Find(const SId& id) = 0;
 
-  /** Checks if this element or its children contain the given identifier. */
-  virtual bool Contains(const SId& id) const = 0;
+    /** Checks if this element or its children contain the given identifier. */
+    virtual bool Contains(const SId& id) const = 0;
 
-  /** Returns the generic type of this element. */
-  virtual SimulinkElementType GetType() const = 0;
+    /** Returns the generic type of this element. */
+    virtual SimulinkElementType GetType() const = 0;
 
-  /** Returns the unique identifier of this element. */
-  virtual SId GetId() const = 0;
+    /** Returns the unique identifier of this element. */
+    virtual SId GetId() const = 0;
 
-  /** Returns a string representation of this element. */
-  virtual std::string ToString() const = 0;
+    /** Returns a string representation of this element. */
+    virtual std::string ToString() const = 0;
 
-  /** Returns the element specific name */
-  virtual std::string GetName() = 0;
+    /** Returns the element specific name */
+    virtual std::string GetName() = 0;
 
-  /** Returns the elment dimensions string if supported else "" */
-  virtual std::string GetDimension() = 0;
+    /** Returns the elment dimensions string if supported else "" */
+    virtual std::string GetDimension() = 0;
 
-  /** Access the element specifc parameter interface */
-  virtual std::shared_ptr<SimulinkParameterBase> GetParameter(
-    std::string name) = 0;
+    /** Access the element specifc parameter interface */
+    virtual std::shared_ptr<SimulinkParameterBase>
+    GetParameter(std::string name) = 0;
 
-  /** Sets the element specifc parameter to given one  */
-  virtual HError SetParameter(
-    std::string name,
-    std::shared_ptr<SimulinkParameterBase> parameter) = 0;
+    /** Sets the element specifc parameter to given one  */
+    virtual HError
+    SetParameter(std::string name,
+                 std::shared_ptr<SimulinkParameterBase> parameter) = 0;
 
-  /** Adds the element specifc parameter  */
-  virtual HError AddParameter(
-    std::shared_ptr<SimulinkParameterBase> parameter) = 0;
+    /** Adds the element specifc parameter  */
+    virtual HError
+    AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) = 0;
 
 protected:
-  /** Default constructor. */
-  SimulinkElementBase() = default;
+    /** Default constructor. */
+    SimulinkElementBase() = default;
 
-  /** Deleted copy constructor. */
-  SimulinkElementBase(const SimulinkElementBase&) = delete;
+    /** Deleted copy constructor. */
+    SimulinkElementBase(const SimulinkElementBase&) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END

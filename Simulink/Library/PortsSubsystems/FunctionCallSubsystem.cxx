@@ -1,6 +1,7 @@
 #include "FunctionCallSubsystem.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 FunctionCallSubsystem::FunctionCallSubsystem() {}
