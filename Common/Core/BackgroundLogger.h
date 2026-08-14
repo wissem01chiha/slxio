@@ -30,7 +30,7 @@ public:
   void SetLogLevel(LogLevelType level) override;
   LogLevelType GetLogLevel() const override;
   void SetQueueSize(UInt32 q);
-  UInt32 GetQueueSize();
+  UInt32 GetQueueSize() const;
   ~BackgroundLogger();
 
 private:

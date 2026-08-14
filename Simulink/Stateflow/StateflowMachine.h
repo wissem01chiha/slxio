@@ -81,9 +81,9 @@ public:
   SimulinkModel getModel() { return model; }
 
   /** @brief Get targets of this machine. */
-  std::vector<StateflowTarget> getTargets()
+  std::vector<StateflowTarget> GetTargets()
   {
-    //   return CollectionUtils.asUnmodifiable(targets);
+    return m_targets;
   }
 
   /**
@@ -130,7 +130,7 @@ public:
 
 private:
   SimulinkModel model;
-  std::vector<StateflowTarget> targets;
+  std::vector<StateflowTarget> m_targets;
   std::map<std::string, StateflowChart> charts;
 };
 

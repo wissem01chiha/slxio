@@ -22,14 +22,14 @@ void ErrorManager::SetBufferSize(size_t new_size)
 {
   std::lock_guard<std::mutex> lock(m_logMutex);
   m_ringBuffer.resize(new_size);
-  head = 0;
+  m_head = 0;
 }
 
 HError ErrorManager::GetLastResult(void)
 {
   std::lock_guard<std::mutex> lock(m_logMutex);
   for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (head + m_bufferSize - 1 - i) % m_bufferSize;
+    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
     if (m_ringBuffer[idx] != HError())
       return m_ringBuffer[idx];
   }
@@ -40,7 +40,7 @@ HError ErrorManager::GetLastInfoResult(void)
 {
   std::lock_guard<std::mutex> lock(m_logMutex);
   for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (head + m_bufferSize - 1 - i) % m_bufferSize;
+    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
     if (IsInfo(m_ringBuffer[idx]))
       return m_ringBuffer[idx];
   }
@@ -51,7 +51,7 @@ HError ErrorManager::GetLastWarningResult(void)
 {
   std::lock_guard<std::mutex> lock(m_logMutex);
   for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (head + m_bufferSize - 1 - i) % m_bufferSize;
+    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
     if (IsWarning(m_ringBuffer[idx]))
       return m_ringBuffer[idx];
   }
@@ -62,7 +62,7 @@ HError ErrorManager::GetLastFatalResult(void)
 {
   std::lock_guard<std::mutex> lock(m_logMutex);
   for (size_t i = 0; i < m_bufferSize; ++i) {
-    size_t idx = (head + m_bufferSize - 1 - i) % m_bufferSize;
+    size_t idx = (m_head + m_bufferSize - 1 - i) % m_bufferSize;
     if (IsFatal(m_ringBuffer[idx]))
       return m_ringBuffer[idx];
   }
@@ -77,9 +77,9 @@ void ErrorManager::SetResult(HError status)
 
   std::lock_guard<std::mutex> lock(m_logMutex);
 
-  m_ringBuffer[head] = { status = status };
+  m_ringBuffer[m_head] = status;
 
-  head = (head + 1) % m_bufferSize;
+  m_head = (m_head + 1) % m_bufferSize;
 }
 
 std::vector<HError> ErrorManager::GetBuffer()

@@ -1,5 +1,4 @@
 #include "SimulinkDataTypeParser.h"
-
 #include <cstring>
 #include <unordered_map>
 
@@ -16,10 +15,10 @@ HError SimulinkDataTypeParser::setInputData(const std::string data)
   return E_OK;
 }
 
-HError SimulinkDataTypeParser::setInputData(const char* data)
+HError SimulinkDataTypeParser::setInputData(const std::string& data)
 {
 
-  if (data == nullptr || strlen(data) == 0) {
+  if (data.length() == 0) {
     // l.log(Logger::V_ERROR,
       "SimulinkDataTypeParser:: null or empty input data received");
       return E_INVALID_ARGUMENT;

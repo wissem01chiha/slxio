@@ -105,28 +105,27 @@ std::string File::GetFilePath() const
   return FilePath;
 }
 
-HError File::Write(const char* message)
+HError File::Write(const std::string& message)
 {
+    if (InternalFileMode == Mode::Read)
+        return E_INVALID_FILE_MODE;
 
-  if (InternalFileMode == Mode::Read)
-    return E_INVALID_FILE_MODE;
+    uv_fs_t req;
+    uv_buf_t iov = uv_buf_init(
+        const_cast<char*>(message.data()), 
+        static_cast<unsigned int>(message.size()));
 
-  uv_fs_t req;
-  size_t len = strlen(message);
-  uv_buf_t iov =
-    uv_buf_init(const_cast<char*>(message), static_cast<unsigned int>(len));
+    int err = uv_fs_write(
+        uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
+    uv_fs_req_cleanup(&req);
 
-  int err =
-    uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
-  uv_fs_req_cleanup(&req);
+    if (err < 0)
+        return err;
 
-  if (err < 0)
-    return err;
-
-  CachedSize += static_cast<UInt32>(err);
-
-  return E_OK;
+    CachedSize += static_cast<UInt32>(err);
+    return E_OK;
 }
+
 
 HError File::Close()
 {

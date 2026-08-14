@@ -16,7 +16,7 @@ SLXIO – SIMULINK SLX File I/O Library
 [![Release](https://github.com/wissem01chiha/SLXIO/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/SLXIO/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/wissem01chiha/SLXIO/graph/badge.svg?token=EBZSHLWF78)](https://codecov.io/gh/wissem01chiha/SLXIO)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/overview/master)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e91d3a5f2f39464bb6dcf2d6b582541b)](https://app.codacy.com/gh/wissem01chiha/SLXIO/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e91d3a5f2f39464bb6dcf2d6b582541b)](https://app.codacy.com/gh/wissem01chiha/slxio/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/SLXIO/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/SLXIO/master)
 [![SonarQube](https://github.com/wissem01chiha/slxio/actions/workflows/sonar-qube.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/sonar-qube.yml)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=wissem01chiha_slxio&metric=bugs)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)

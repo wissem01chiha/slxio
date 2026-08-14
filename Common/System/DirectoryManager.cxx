@@ -12,7 +12,7 @@ DirectoryManager::DirectoryManager()
 }
 
 DirectoryManager::DirectoryManager(
-  std::vector<std::shared_ptr<Directory>> directories)
+  const std::vector<std::shared_ptr<Directory>>& directories)
   : DirectoryBuffer(directories)
 {
 }

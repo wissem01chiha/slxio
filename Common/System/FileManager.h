@@ -44,7 +44,7 @@ public:
   FileManager& operator=(FileManager&& other) = delete;
 
   /** Construct a FileManager with an initial set of files. */
-  FileManager(std::vector<std::shared_ptr<File>> files);
+  FileManager(const std::vector<std::shared_ptr<File>>& files);
 
   /** Get the unique Id of a file by its name. */
   SId GetFileId(const std::string& filename) const;

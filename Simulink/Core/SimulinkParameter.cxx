@@ -1,9 +1,6 @@
 #include "SimulinkParameter.h"
-
 #include "CoderInfo.h"
-#include "ErrorCode.h"
 #include "Logger.h"
-
 #include <cstdlib>
 #include <cstring>
 #include <sstream>
@@ -161,20 +158,20 @@ std::vector<UInt16> SimulinkParameter::GetDimensions()
   return Dimensions;
 }
 
+
+
 std::string SimulinkParameter::ToString() const
 {
+    std::ostringstream oss;
+    oss << "{" 
+        << Name << "," 
+        << toChar(DataType) << "," 
+        << Value 
+        << "}";
 
-  char str[100];
-  strncpy(str, "{");
-  strncpy(str, Name);
-  strncpy(str, ",");
-  strncpy(str, toChar(DataType));
-  strncpy(str, ",");
-  strncpy(str, Value);
-  strncpy(str, "}");
-
-  return std::string(str);
+    return oss.str();
 }
+
 
 std::string SimulinkParameter::GetName()
 {

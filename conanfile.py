@@ -1,4 +1,4 @@
-# Copyright 2025 Wissem Chiha
+# Copyright 2026-2025 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,3 +13,9 @@
 # permissions and limitations under the License.
 
 from conan import ConanFile
+
+class SlxioConan(ConanFile):
+    name = 'slxio'
+    version = '0.1.0'
+    license = 'Apache-2.0 License'
+    description = 'Slxio is a C++ library for reading and writing SIMULINK SLX files.'

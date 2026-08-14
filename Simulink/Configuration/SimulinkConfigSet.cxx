@@ -37,34 +37,32 @@ std::shared_ptr<SimulinkSolver> SimulinkConfigSet::GetSolver()
   return solver;
 }
 
-const char* SimulinkConfigSet::GetParameter(const char* name)
+std::string SimulinkConfigSet::GetParameter(const char* name)
 {
-
-  if (name == nullptr) {
-    // logger.log(Logger::V_ERROR, "SimulinkConfigSet parameter name null");
-    return "";
-  }
-  std::shared_ptr<SimulinkParameterBase> cfgParam =
-    GetParameterObject(std::string(name));
-  return cfgParam->ToString().c_str();
+    if (name == nullptr) {
+        return "";
+    }
+    auto cfgParam = GetParameterObject(std::string(name));
+    return cfgParam ? cfgParam->ToString() : "";
 }
+
 
 std::shared_ptr<SimulinkParameterBase> SimulinkConfigSet::GetParameterObject(
-  const std::string& name)
+    const std::string& name)
 {
-  auto param = object->GetParameter(name);
-  if (param) {
+    auto param = object->GetParameter(name);
+    if (!param) {
+        // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
+        //  " not found in configuration set.");
+    }
     return param;
-  }
-  // logger.log(Logger::V_WARNING, "SimulinkConfigSet Parameter ", name,
-  //  " not found in configuration set.");
-  return nullptr;
 }
+
 
 HError SimulinkConfigSet::SetParameter(const char* name, const char* value)
 {
   auto param = object->GetParameter(std::string(name));
-  if (param) {
+  if (!param) {
     // param->SetValue(value);
     return E_OK;
   }
