@@ -108,14 +108,14 @@ std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(
 }
 
 std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(
-  const char* prefix,
+  const std::string& prefix,
   int* error)
 {
   uv_fs_t req;
 
   std::string tempDirName = "XXXXXX";
-  if (prefix != nullptr && strlen(prefix) > 0) {
-    tempDirName = std::string(prefix) + "_XXXXXX";
+  if (prefix.length() > 0) {
+    tempDirName = prefix + "_XXXXXX";
   }
 
   int r = uv_fs_mkdtemp(uv_default_loop(), &req, tempDirName.c_str(), nullptr);
@@ -130,9 +130,8 @@ std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(
     return nullptr;
   }
 
-  const char* tmpdir = strdup(req.path);
+  std::string tmpdir(req.path);
   uv_fs_req_cleanup(&req);
-
   return std::make_shared<Directory>(tmpdir);
 }
 

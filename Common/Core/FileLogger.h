@@ -24,7 +24,7 @@ public:
    * and default path are set by the logger. this option provides flexibility to
    * override the default logging file sink in different cases.*/
   explicit FileLogger(const std::string& fileName = "slxio.log");
-  ~FileLogger() override;
+  ~FileLogger() noexcept;
 
   /* Create the file if not already exists*/
   void Init() override;

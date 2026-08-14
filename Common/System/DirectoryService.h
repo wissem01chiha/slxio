@@ -50,7 +50,7 @@ public:
 
   /** same as CreateTemporaryDirectory using a prefix for directory name */
   static std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(
-    const char* prefix,
+    const std::string& prefix,
     int* error);
 };
 

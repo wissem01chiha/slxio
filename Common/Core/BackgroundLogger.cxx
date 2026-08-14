@@ -59,7 +59,7 @@ void BackgroundLogger::SetQueueSize(UInt32 q)
   m_queueSize = q;
 }
 
-UInt32 BackgroundLogger::GetQueueSize()
+UInt32 BackgroundLogger::GetQueueSize() const
 {
   return m_queueSize;
 }

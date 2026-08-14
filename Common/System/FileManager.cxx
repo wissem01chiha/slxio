@@ -11,7 +11,7 @@ FileManager::FileManager()
   FileBuffer.clear();
 }
 
-FileManager::FileManager(std::vector<std::shared_ptr<File>> files)
+FileManager::FileManager(const std::vector<std::shared_ptr<File>>& files)
   : FileBuffer(files)
 {
 }

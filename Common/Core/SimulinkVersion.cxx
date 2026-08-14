@@ -86,7 +86,7 @@ SimulinkVersionRelease SimulinkVersion::GetRelease()
   return SimulinkVersionRelease::R2025b;
 
 #else
-#error Unsupported Simulink version.
+  return SimulinkVersionRelease::Unknown;
 #endif
 }
 

@@ -41,7 +41,7 @@ public:
   DirectoryManager& operator=(DirectoryManager&& other) = delete;
 
   /** Construct a DirectoryManager with an initial set of directories. */
-  DirectoryManager(std::vector<std::shared_ptr<Directory>> directories);
+  DirectoryManager(const std::vector<std::shared_ptr<Directory>>& directories);
 
   /** Get the names of all managed directories. */
   std::vector<std::string> GetDirectoryNames();

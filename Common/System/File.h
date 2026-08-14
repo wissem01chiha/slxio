@@ -61,7 +61,7 @@ public:
   bool Exist() const;
 
   /** Write string data to file. */
-  HError Write(const char* message);
+  HError Write(const std::string& message);
 
   /** Write vector of strings to file. */
   HError Write(std::vector<std::string>& message);

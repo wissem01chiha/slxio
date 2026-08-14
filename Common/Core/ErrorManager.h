@@ -71,7 +71,7 @@ private:
   static const size_t m_bufferSize = 500;
   std::vector<HError> m_ringBuffer;
   const ILogger* m_logger = nullptr;
-  size_t head = 0;
+  size_t m_head = 0;
   std::mutex m_logMutex;
   ErrorManager();
 };
