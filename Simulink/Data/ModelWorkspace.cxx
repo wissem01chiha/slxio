@@ -61,7 +61,7 @@ std::string ModelWorkspace::GetMatlabCode()
 
 UInt16 ModelWorkspace::GetVariableCount() const
 {
-  return SLXIO_STATIC_CAST(UInt16,m_variables.size());
+  return SLXIO_STATIC_CAST(UInt16, m_variables.size());
 }
 
 HError ModelWorkspace::SetLogger(const ILogger* logger)

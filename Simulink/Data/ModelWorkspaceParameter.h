@@ -24,9 +24,8 @@ class SLXIO_APIEXPORT ModelWorkspaceParameter final
 public:
   ModelWorkspaceParameter();
 
-  ModelWorkspaceParameter(
-    const std::string& name,
-    const std::shared_ptr<ModelWorkspace>& data);
+  ModelWorkspaceParameter(const std::string& name,
+                          const std::shared_ptr<ModelWorkspace>& data);
 
   IParameterObjectBase* New() override;
 
@@ -34,8 +33,7 @@ public:
 
   UInt16 Size() const override;
 
-  void SetData(
-    const std::shared_ptr<ModelWorkspace>& data);
+  void SetData(const std::shared_ptr<ModelWorkspace>& data);
 
   std::shared_ptr<ModelWorkspace> GetData() const;
 

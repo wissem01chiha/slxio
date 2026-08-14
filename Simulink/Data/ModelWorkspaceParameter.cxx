@@ -28,7 +28,7 @@ DataType ModelWorkspaceParameter::GetDataType() const
 UInt16 ModelWorkspaceParameter::Size() const
 {
   if (m_data) {
-   return m_data->GetVariableCount();
+    return m_data->GetVariableCount();
   }
 
   return (UInt16)0;
@@ -40,8 +40,7 @@ void ModelWorkspaceParameter::SetData(
   m_data = data;
 }
 
-std::shared_ptr<ModelWorkspace>
-ModelWorkspaceParameter::GetData() const
+std::shared_ptr<ModelWorkspace> ModelWorkspaceParameter::GetData() const
 {
   return m_data;
 }

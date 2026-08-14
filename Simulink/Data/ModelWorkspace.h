@@ -48,7 +48,7 @@ public:
 
   /** Get the MATLAB code associated with this model workspace*/
   std::string GetMatlabCode();
-  
+
   /** Get the number of variables in the workspace */
   UInt16 GetVariableCount() const;
 
