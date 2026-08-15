@@ -30,10 +30,7 @@ bool IsFatal(HError result)
     return GetLevelIdentifier(result) == SLXIO_FATAL;
 }
 
-bool IsInfo(HError result)
-{
-    return GetLevelIdentifier(result) == SLXIO_INFO;
-}
+bool IsInfo(HError result) { return GetLevelIdentifier(result) == SLXIO_INFO; }
 
 bool IsSameLevel(HError result1, HError result2)
 {

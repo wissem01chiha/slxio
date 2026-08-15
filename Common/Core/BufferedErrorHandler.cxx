@@ -1,6 +1,6 @@
 #include "BufferedErrorHandler.h"
-#include "ErrorLogMessage.h"
 #include "CommonECH.h"
+#include "ErrorLogMessage.h"
 
 namespace slxio
 {
@@ -16,7 +16,7 @@ void BufferedErrorHandler::SetResult(HError status)
     m_buffer.push_back(status);
     m_last = status;
 
-    if (m_logger!=nullptr)
+    if (m_logger != nullptr)
     {
         ErrorLogMessage msg(status);
         m_logger->Log(msg);
@@ -39,7 +39,7 @@ HError BufferedErrorHandler::SetLogger(ILogger* logger)
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     m_logger = logger;
-    return E_OK; 
+    return E_OK;
 }
 
 const ILogger* BufferedErrorHandler::GetLogger() const

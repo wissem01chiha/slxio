@@ -13,14 +13,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class IObserver
- * @brief An abstract One-to-One Observer design Interface 
+ * @brief An abstract One-to-One Observer design Interface
  */
 class SLXIO_APIEXPORT IObserver
 {
 public:
-   virtual ~IObserver() = default;
-
-   
+    virtual ~IObserver() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

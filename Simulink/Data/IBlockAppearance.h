@@ -25,16 +25,16 @@ public:
     /// Background color
     virtual std::string GetBackgroundColor() const = 0;
 
-    /// Block mirror 
+    /// Block mirror
     virtual std::string GetBlockMirror() const = 0;
 
-    /// Rotation angle 
+    /// Rotation angle
     virtual int GetBlockRotation() const = 0;
 
-    /// Drop shadow 
+    /// Drop shadow
     virtual std::string GetDropShadow() const = 0;
 
-    /// Font angle 
+    /// Font angle
     virtual std::string GetFontAngle() const = 0;
 
     /// Font name
@@ -43,25 +43,25 @@ public:
     /// Font size
     virtual int GetFontSize() const = 0;
 
-    /// Font weight 
+    /// Font weight
     virtual std::string GetFontWeight() const = 0;
 
     /// Foreground color
     virtual std::string GetForegroundColor() const = 0;
 
-    /// Hide automatic name 
+    /// Hide automatic name
     virtual std::string GetHideAutomaticName() const = 0;
 
-    /// Name placement 
+    /// Name placement
     virtual std::string GetNamePlacement() const = 0;
 
-    /// Orientation 
+    /// Orientation
     virtual std::string GetOrientation() const = 0;
 
-    /// Position vector 
+    /// Position vector
     virtual std::vector<int> GetPosition() const = 0;
 
-    /// Show block name 
+    /// Show block name
     virtual std::string GetShowName() const = 0;
 };
 

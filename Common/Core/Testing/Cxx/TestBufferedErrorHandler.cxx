@@ -1,15 +1,17 @@
-#include "Doctest.h"
 #include "BufferedErrorHandler.h"
+#include "Doctest.h"
 #include "Logger.h"
 
 using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("BufferedErrorHandler Test") {
+TEST_CASE("BufferedErrorHandler Test")
+{
     BufferedErrorHandler handler;
 
-    SUBCASE("SetResult stores and updates last result") {
+    SUBCASE("SetResult stores and updates last result")
+    {
         HError err1 = 42;
         HError err2 = 99;
 
@@ -25,7 +27,8 @@ TEST_CASE("BufferedErrorHandler Test") {
         CHECK(buf[1] == err2);
     }
 
-    SUBCASE("Logger injection works") {
+    SUBCASE("Logger injection works")
+    {
         Logger logger;
         handler.SetLogger(&logger);
         handler.SetResult(123);
@@ -33,6 +36,5 @@ TEST_CASE("BufferedErrorHandler Test") {
         CHECK(handler.GetLogger() == &logger);
     }
 }
-
 
 SLXIO_ABI_NAMESPACE_END

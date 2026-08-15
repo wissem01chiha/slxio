@@ -22,7 +22,6 @@ class SLXIO_APIEXPORT XmlNodeDataObject : public IDataObject
 {
 public:
     XmlNodeDataObject();
-    ~XmlNodeDataObject();
     XmlNodeDataObject* New() override;
     void Initialize(void* implDataObject) override;
     bool Empty() const override;
@@ -30,6 +29,7 @@ public:
     void* GetImplDataObject() const override;
     std::string ToString() const override;
     DataType GetDataType() const override;
+    ~XmlNodeDataObject();
 
 private:
     xmlNodePtr m_implDataObject{nullptr};

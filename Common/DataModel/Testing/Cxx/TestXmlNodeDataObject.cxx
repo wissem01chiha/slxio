@@ -28,6 +28,7 @@ TEST_CASE("XmlNodeDataObject init with xmlChar")
 
     CHECK_FALSE(obj.Empty());
     CHECK(obj.GetImplDataObject() == doc);
+    xmlFreeDoc(doc);
 }
 
 SLXIO_ABI_NAMESPACE_END

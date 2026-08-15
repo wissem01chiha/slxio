@@ -5,7 +5,7 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 XmlNodeDataObject::XmlNodeDataObject() = default;
-XmlNodeDataObject::~XmlNodeDataObject() = default;
+;
 
 XmlNodeDataObject* XmlNodeDataObject::New() { return new XmlNodeDataObject(); }
 
@@ -38,6 +38,14 @@ std::string XmlNodeDataObject::ToString() const
 DataType XmlNodeDataObject::GetDataType() const
 {
     return DataType::SLXIO_TYPE_LIBXML_XML_NODE;
+}
+
+XmlNodeDataObject::~XmlNodeDataObject()
+{
+    if (m_implDataObject != nullptr)
+    {
+        m_implDataObject = nullptr;
+    }
 }
 
 SLXIO_ABI_NAMESPACE_END

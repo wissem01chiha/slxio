@@ -12,7 +12,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IBlockHandles {
+class SLXIO_APIEXPORT IBlockHandles
+{
 public:
     virtual ~IBlockHandles() = default;
 
@@ -24,7 +25,6 @@ public:
     virtual std::vector<std::string> GetLineHandles() const = 0;
     virtual std::vector<std::string> GetPortHandles() const = 0;
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

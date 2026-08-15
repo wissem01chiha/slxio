@@ -22,7 +22,7 @@ public:
     BufferedErrorHandler();
     void SetResult(HError status) override;
     HError GetLastResult() const override;
-    std::vector<HError> GetBuffer()const  override;
+    std::vector<HError> GetBuffer() const override;
     HError SetLogger(ILogger* logger) override;
     const ILogger* GetLogger() const override;
     ~BufferedErrorHandler();
@@ -32,7 +32,6 @@ private:
     std::vector<HError> m_buffer;
     HError m_last{};
     ILogger* m_logger{nullptr};
-
 };
 
 SLXIO_ABI_NAMESPACE_END
