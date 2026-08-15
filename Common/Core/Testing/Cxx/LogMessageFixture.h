@@ -30,6 +30,11 @@ public:
         return DataType::SLXIO_TYPE_STRING;
     }
 
+    std::unique_ptr<ILogMessage> Clone() const override
+    {
+        return std::make_unique<LogMessage>(*this);
+    }
+
 private:
     std::string m_text;
 };

@@ -2,7 +2,7 @@
 #include "DirectoryService.h"
 #include "Doctest.h"
 #include "ErrorCode.h"
-#include "ErrorHandler.h"
+#include "HErrorHelper.h"
 
 namespace slxio
 {

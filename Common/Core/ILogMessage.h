@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CorePCH.h"
+#include "DataType.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -43,6 +44,9 @@ public:
      * *this with rhs */
     virtual std::unique_ptr<ILogMessage>
     operator+(const ILogMessage& rhs) const = 0;
+
+    /* Polymorphic copy */
+    virtual std::unique_ptr<ILogMessage> Clone() const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

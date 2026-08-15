@@ -8,8 +8,7 @@
 #include "ILogger.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
-
-#include <memory>
+#include "SimulinkPCH.h"
 
 namespace slxio
 {

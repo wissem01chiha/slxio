@@ -6,13 +6,12 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "IParameterObject.h"
+#include "IParameterObjectBase.h"
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
+#include "SimulinkPCH.h"
 #include "SimulinkParameterBase.h"
-
-#include <memory>
-#include <string>
-#include <vector>
 
 namespace slxio
 {

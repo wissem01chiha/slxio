@@ -23,10 +23,10 @@ add_module(
   MODULE_INSTALL_LICENSES
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
-    SimulinkElementBase.cxx
+    ISimulinkElement.cxx
   MODULE_HEADERS
     SimulinkECH.h
-    SimulinkElementBase.h
+    ISimulinkElement.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES

@@ -8,6 +8,7 @@
 #include "APIExportMacro.h"
 #include "DataPCH.h"
 #include "ILogger.h"
+#include "IObservable.h"
 #include "IParameterDataObjectBase.h"
 #include "PlatformTypes.h"
 
@@ -54,7 +55,7 @@ public:
     UInt16 GetVariableCount() const;
 
     /** Set a logger object for this data object */
-    HError SetLogger(const ILogger* logger);
+    HError SetLogger(ILogger* logger);
 
     /** Get the logger sink */
     const ILogger* GetLogger();
@@ -62,7 +63,7 @@ public:
     ~ModelWorkspace() = default;
 
 private:
-    const ILogger* m_logger = nullptr;
+    ILogger* m_logger = nullptr;
     std::string m_fileName;
     std::string m_matlabCode;
     std::shared_ptr<DataSourceType> m_dataSource;

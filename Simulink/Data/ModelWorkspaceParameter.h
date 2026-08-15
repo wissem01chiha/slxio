@@ -27,15 +27,10 @@ public:
 
     ModelWorkspaceParameter(const std::string& name,
                             const std::shared_ptr<ModelWorkspace>& data);
-
     IParameterObjectBase* New() override;
-
     DataType GetDataType() const override;
-
     UInt16 Size() const override;
-
     void SetData(const std::shared_ptr<ModelWorkspace>& data);
-
     std::shared_ptr<ModelWorkspace> GetData() const;
 
     ~ModelWorkspaceParameter() override = default;

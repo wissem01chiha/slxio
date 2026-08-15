@@ -4,7 +4,7 @@
 #ifndef COMMONECH_H
 #define COMMONECH_H
 
-#include "ErrorHandlerMacro.h"
+#include "ErrorMacro.h"
 
 /// Success status code.
 #define E_OK SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_SUCCESS, 0U)

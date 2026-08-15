@@ -1,6 +1,6 @@
 #include "Archive.h"
 #include "DirectoryService.h"
-#include "ErrorHandlerMacro.h"
+#include "ErrorMacro.h"
 #include "Libuv.h"
 #include "Libzip.h"
 #include "SystemECH.h"

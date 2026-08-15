@@ -1,8 +1,7 @@
 #include "Doctest.h"
 #include "XmlDocDataObject.h"
 
-namespace slxio
-{
+using namespace slxio;
 SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("XmlDocDataObject constructor")
@@ -37,4 +36,3 @@ TEST_CASE("XmlDocDataObject = operator")
 }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio

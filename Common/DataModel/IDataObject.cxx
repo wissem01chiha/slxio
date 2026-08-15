@@ -11,7 +11,7 @@ UInt32 IDataObject::GetUpdateTime() const { return (UInt32)0; }
 
 UInt32 IDataObject::GetMemorySize() const { return (UInt32)0; }
 
-HError IDataObject::SetLogger(const ILogger* logger)
+HError IDataObject::SetLogger(ILogger* logger)
 {
     if (logger == nullptr)
     {

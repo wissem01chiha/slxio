@@ -31,7 +31,7 @@ public:
     /* Serialize the message to a string for logging */
     std::string ToString() const override;
 
-    /* Returns SLXIO_TYPE_ERRORLOGMESSAGE type index */
+    /* Returns SLXIO_TYPE_ERROR_LOG_MESSAGE type index */
     DataType GetDataType() const override;
 
     /** Returns true when no errors are stored. */
@@ -44,6 +44,9 @@ public:
      */
     std::unique_ptr<ILogMessage>
     operator+(const ILogMessage& rhs) const override;
+
+    std::unique_ptr<ILogMessage> Clone() const override;
+
     ~ErrorLogMessage() = default;
 
 private:

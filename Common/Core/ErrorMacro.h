@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef ERRORHANDLERMACRO_H
-#define ERRORHANDLERMACRO_H
+#ifndef ERRORMACRO_H
+#define ERRORMACRO_H
 
 #include "PlatformTypes.h"
 
@@ -66,4 +66,4 @@
 #define SLXIO_NPIO_ERROR(err)                                                  \
     SLXIO_HERROR(SLXIO_PROJECT, THIRDPARTY, NPIO, SLXIO_FATAL, ((err) & 0x3FFU))
 
-#endif // ERRORHANDLERMACRO_H
+#endif // ERRORMACRO_H

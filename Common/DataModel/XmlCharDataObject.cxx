@@ -6,17 +6,56 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 XmlCharDataObject* XmlCharDataObject::New() { return new XmlCharDataObject(); }
 
-bool XmlCharDataObject::Empty() { return ImplDataObject == nullptr; }
+void XmlCharDataObject::Initialize(void* implDataObject)
+{
 
-bool XmlCharDataObject::operator==(const IDataObject& other) { return false; }
+    if (implDataObject != nullptr)
+    {
+        m_implDataObject = SLXIO_STATIC_CAST(xmlChar*, implDataObject);
+    }
+}
 
-void* XmlCharDataObject::GetImplDataObject() const { return ImplDataObject; }
+bool XmlCharDataObject::Empty() const { return m_implDataObject == nullptr; }
 
-std::string XmlCharDataObject::ToString() const { return std::string(); }
+bool XmlCharDataObject::operator==(const IDataObject& other) const
+{
+    if (m_implDataObject == nullptr || other.GetImplDataObject() == nullptr)
+    {
+        return m_implDataObject == other.GetImplDataObject();
+    }
+    if (GetDataType() != other.GetDataType())
+    {
+        return false;
+    }
+    return m_implDataObject == other.GetImplDataObject();
+}
 
-DataType XmlCharDataObject::GetDataType() const { return DataType(); }
+void* XmlCharDataObject::GetImplDataObject() const { return m_implDataObject; }
+
+std::string XmlCharDataObject::ToString() const
+{
+
+    if (m_implDataObject == nullptr)
+    {
+        return std::string("");
+    }
+    return std::string(reinterpret_cast<const char*>(m_implDataObject));
+}
+
+DataType XmlCharDataObject::GetDataType() const
+{
+    return DataType::SLXIO_TYPE_LIBXML_XMLCHAR;
+}
 
 XmlCharDataObject::XmlCharDataObject() : m_implDataObject(nullptr) {}
+
+XmlCharDataObject::~XmlCharDataObject()
+{
+    if (m_implDataObject)
+    {
+        m_implDataObject = nullptr;
+    }
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

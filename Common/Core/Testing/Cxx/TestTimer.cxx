@@ -1,5 +1,5 @@
 #include "Doctest.h"
-#include "ErrorHandler.h"
+#include "HErrorHelper.h"
 #include "Timer.h"
 
 namespace slxio

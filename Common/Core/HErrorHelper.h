@@ -1,13 +1,14 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef ERRORHANDLER_H
-#define ERRORHANDLER_H
+#ifndef HERRORHELPER_H
+#define HERRORHELPER_H
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorHandlerMacro.h"
+#include "ErrorMacro.h"
 #include "PlatformTypes.h"
+#include "CommonECH.h"
 
 namespace slxio
 {
@@ -35,4 +36,4 @@ SLXIO_APIEXPORT const char* GetSeverityString(HError result);
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 
-#endif // ERRORHANDLER_H
+#endif // HERRORHELPER_H

@@ -4,6 +4,7 @@
 #ifndef COREPCH_H
 #define COREPCH_H
 
+#include <algorithm>
 #include <array>
 #include <chrono>
 #include <cstddef>

@@ -62,7 +62,7 @@ UInt16 ModelWorkspace::GetVariableCount() const
     return SLXIO_STATIC_CAST(UInt16, m_variables.size());
 }
 
-HError ModelWorkspace::SetLogger(const ILogger* logger)
+HError ModelWorkspace::SetLogger(ILogger* logger)
 {
     if (logger == nullptr)
     {

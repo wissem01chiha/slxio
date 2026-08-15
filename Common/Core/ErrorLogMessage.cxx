@@ -1,5 +1,5 @@
 #include "ErrorLogMessage.h"
-#include "ErrorHandler.h"
+#include "HErrorHelper.h"
 
 namespace slxio
 {
@@ -28,7 +28,7 @@ std::string ErrorLogMessage::ToString() const
 
 DataType ErrorLogMessage::GetDataType() const
 {
-    return DataType::SLXIO_TYPE_ERRORLOGMESSAGE;
+    return DataType::SLXIO_TYPE_ERROR_LOG_MESSAGE;
 }
 
 bool ErrorLogMessage::Empty() const { return m_data.empty(); }
@@ -36,7 +36,7 @@ bool ErrorLogMessage::Empty() const { return m_data.empty(); }
 std::unique_ptr<ILogMessage>
 ErrorLogMessage::operator+(const ILogMessage& rhs) const
 {
-    if (rhs.GetDataType() != DataType::SLXIO_TYPE_ERRORLOGMESSAGE)
+    if (rhs.GetDataType() != DataType::SLXIO_TYPE_ERROR_LOG_MESSAGE)
     {
         return std::make_unique<ErrorLogMessage>(*this);
     }
@@ -47,6 +47,11 @@ ErrorLogMessage::operator+(const ILogMessage& rhs) const
     result->m_data.insert(result->m_data.end(), other.m_data.begin(),
                           other.m_data.end());
     return result;
+}
+
+std::unique_ptr<ILogMessage> ErrorLogMessage::Clone() const
+{
+    return std::make_unique<ErrorLogMessage>(*this);
 }
 
 SLXIO_ABI_NAMESPACE_END

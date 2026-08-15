@@ -9,6 +9,7 @@
 #include "DataModelPCH.h"
 #include "DataType.h"
 #include "ILogger.h"
+#include "IObservable.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -49,7 +50,7 @@ public:
     virtual DataType GetDataType() const = 0;
 
     /** Set a logger object for this data object */
-    HError SetLogger(const ILogger* logger);
+    HError SetLogger(ILogger* logger);
 
     /** Get the logger sink */
     const ILogger* GetLogger();
@@ -60,7 +61,7 @@ public:
     virtual ~IDataObject() = default;
 
 protected:
-    const ILogger* m_logger = nullptr;
+    ILogger* m_logger = nullptr;
     UInt32 m_updateTime;
 
 private:

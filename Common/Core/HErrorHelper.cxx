@@ -1,4 +1,4 @@
-#include "ErrorHandler.h"
+#include "HErrorHelper.h"
 #include "CorePCH.h"
 
 namespace slxio
@@ -30,7 +30,7 @@ bool IsFatal(HError result)
     return GetLevelIdentifier(result) == SLXIO_FATAL;
 }
 
-SLXIO_APIEXPORT bool IsInfo(HError result)
+bool IsInfo(HError result)
 {
     return GetLevelIdentifier(result) == SLXIO_INFO;
 }
