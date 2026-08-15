@@ -12,8 +12,6 @@ XmlNodeDataObject* XmlNodeDataObject::New() { return new XmlNodeDataObject(); }
 void XmlNodeDataObject::Initialize(void* implDataObject)
 {
     m_implDataObject = static_cast<xmlNodePtr>(implDataObject);
-    m_updateTime =
-        static_cast<UInt32>(std::time(nullptr) * 1000); // ms since epoch
 }
 
 bool XmlNodeDataObject::Empty() const { return m_implDataObject == nullptr; }

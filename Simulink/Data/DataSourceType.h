@@ -30,7 +30,7 @@ public:
     static Type FromString(const std::string& sldt);
     static std::string ToString(Type type);
     Type GetType() const;
-    ~DataSourceType() =default;
+    ~DataSourceType() = default;
 
 private:
     Type m_type;

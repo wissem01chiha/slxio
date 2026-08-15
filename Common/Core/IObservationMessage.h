@@ -11,7 +11,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IObservationMessage {
+class SLXIO_APIEXPORT IObservationMessage
+{
 public:
     virtual ~IObservationMessage() = default;
 };

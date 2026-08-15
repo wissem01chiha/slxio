@@ -4,15 +4,15 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CoderInfo::CoderInfo() : Identifier(""), StorageClass("auto") {}
+CoderInfo::CoderInfo() : m_identifier(""), m_storageClass("auto") {}
 
-const char* CoderInfo::getStorageClass() const { return StorageClass; }
+std::string CoderInfo::GetStorageClass() const { return m_storageClass; }
 
-bool CoderInfo::isTunable() { return false; }
+bool CoderInfo::IsTunable() const { return m_tunable; }
 
-const char* CoderInfo::getIdentifier() { return Identifier; }
+std::string CoderInfo::GetIdentifier() const { return m_identifier; }
 
-UInt32 CoderInfo::getAlignment() { return Alignment; }
+UInt32 CoderInfo::GetAlignment() const { return m_alignment; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -4,68 +4,68 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool EditorSettings::getShowPortDataTypes() { return ShowPortDataTypes; }
+bool EditorSettings::GetShowPortDataTypes() { return m_showPortDataTypes; }
 
-bool EditorSettings::getSampleTimeColors() { return SampleTimeColors; }
+bool EditorSettings::GetSampleTimeColors() { return m_sampleTimeColors; }
 
-bool EditorSettings::getShowLineDimensions() { return ShowLineDimensions; }
+bool EditorSettings::GetShowLineDimensions() { return m_showLineDimensions; }
 
-bool EditorSettings::getShowPortUnits() { return ShowPortUnits; }
+bool EditorSettings::GetShowPortUnits() { return m_showPortUnits; }
 
-bool EditorSettings::getShowLoopsOnError() { return ShowLoopsOnError; }
+bool EditorSettings::GetShowLoopsOnError() { return m_showLoopsOnError; }
 
-bool EditorSettings::getShowStorageClass() { return ShowStorageClass; }
+bool EditorSettings::GetShowStorageClass() { return m_showStorageClass; }
 
-bool EditorSettings::getShowTestPointIcons() { return ShowTestPointIcons; }
+bool EditorSettings::GetShowTestPointIcons() { return m_showTestPointIcons; }
 
-bool EditorSettings::getShowSignalResolutionIcons()
+bool EditorSettings::GetShowSignalResolutionIcons()
 {
-    return ShowSignalResolutionIcons;
+    return m_showSignalResolutionIcons;
 }
 
-bool EditorSettings::getShowViewerIcons() { return ShowViewerIcons; }
+bool EditorSettings::GetShowViewerIcons() { return m_showViewerIcons; }
 
-bool EditorSettings::getShowVisualizeInsertedRTB()
+bool EditorSettings::GetShowVisualizeInsertedRTB()
 {
-    return ShowVisualizeInsertedRTB;
+    return m_showVisualizeInsertedRTB;
 }
 
-bool EditorSettings::getShowMarkup() { return ShowMarkup; }
+bool EditorSettings::GetShowMarkup() { return m_showMarkup; }
 
-bool EditorSettings::getBlockNameDataTip() { return BlockNameDataTip; }
+bool EditorSettings::GetBlockNameDataTip() { return m_blockNameDataTip; }
 
-bool EditorSettings::getBlockParametersDataTip()
+bool EditorSettings::GetBlockParametersDataTip()
 {
-    return BlockParametersDataTip;
+    return m_blockParametersDataTip;
 }
 
-bool EditorSettings::getBlockDescriptionStringDataTip()
+bool EditorSettings::GetBlockDescriptionStringDataTip()
 {
-    return BlockDescriptionStringDataTip;
+    return m_blockDescriptionStringDataTip;
 }
 
-bool EditorSettings::getBlockVariantConditionDataTip()
+bool EditorSettings::GetBlockVariantConditionDataTip()
 {
-    return BlockVariantConditionDataTip;
+    return m_blockVariantConditionDataTip;
 }
 
-bool EditorSettings::getToolBar() { return ToolBar; }
+bool EditorSettings::GetToolBar() { return m_toolBar; }
 
-bool EditorSettings::getStatusBar() { return StatusBar; }
+bool EditorSettings::GetStatusBar() { return m_statusBar; }
 
-bool EditorSettings::getBrowserShowLibraryLinks()
+bool EditorSettings::GetBrowserShowLibraryLinks()
 {
-    return BrowserShowLibraryLinks;
+    return m_browserShowLibraryLinks;
 }
 
-bool EditorSettings::getFunctionConnectors() { return FunctionConnectors; }
+bool EditorSettings::GetFunctionConnectors() { return m_functionConnectors; }
 
-bool EditorSettings::getBrowserLookUnderMasks()
+bool EditorSettings::GetBrowserLookUnderMasks()
 {
-    return BrowserLookUnderMasks;
+    return m_browserLookUnderMasks;
 }
 
-bool EditorSettings::getMultiThreadCoSim() { return MultiThreadCoSim; }
+bool EditorSettings::GetMultiThreadCoSim() { return m_multiThreadCoSim; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

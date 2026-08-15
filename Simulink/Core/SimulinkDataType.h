@@ -43,7 +43,6 @@ public:
     std::string ToString() const;
     static SimulinkDataType FromString(const std::string& str);
 
-    // traits
     bool isNumeric() const;
     bool isFloatingPoint() const;
     bool isSigned() const;
