@@ -79,6 +79,7 @@ TEST_CASE("ModelWorkspace Logging interface test")
     Logger* log = new Logger();
     CHECK(ws.SetLogger(log) == E_OK);
     CHECK(ws.GetLogger() != nullptr);
+    delete log; 
 }
 
 SLXIO_ABI_NAMESPACE_END

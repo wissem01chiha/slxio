@@ -14,7 +14,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class DataSourceType
- * @brief
  */
 class SLXIO_APIEXPORT DataSourceType final
 {
@@ -31,6 +30,7 @@ public:
     static Type FromString(const std::string& sldt);
     static std::string ToString(Type type);
     Type GetType() const;
+    ~DataSourceType() =default;
 
 private:
     Type m_type;
