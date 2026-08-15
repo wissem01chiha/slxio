@@ -58,11 +58,34 @@ public:
      */
     virtual HError Insert(const std::shared_ptr<ISimulinkElement>& element);
 
+    /**
+     * This function is push type‑specific behavior to avoid dynamic-pointer
+     * cast in the caller scope when insperting elements, because it's not save,
+     * each elment should define hwo should it be inserted in a large tree, the
+     * cller's just dispatch to  this
+     */
+    virtual HError AcceptInsert(ISimulinkElement& parent) = 0;
+
     /** Finds a child element by identifier.
      * Default implementation: lookup in m_children.
-     * Returns nullptr if not found or if element does not support children.
+     * Returns nullptr if not found or if element does not support children,
+     * for recursive lookup use  fucntion
      */
-    virtual std::shared_ptr<ISimulinkElement> Find(const SId& id);
+    virtual std::shared_ptr<ISimulinkElement> Find(const SId& id) const;
+
+    /** Finds a child bu identifer in all the tree, return nullptr if not found
+     */
+    virtual std::shared_ptr<ISimulinkElement>
+    FindRecursive(const SId& id) const;
+
+    /** Removes a child element by identifier. */
+    virtual HError Erase(const SId& id);
+
+    /** Removes all children. */
+    virtual void Clear();
+
+    /** Checks if a child exists. */
+    virtual bool Contains(const SId& id) const;
 
     /** return a refrence to the element parent if exist, else nullptr */
     std::weak_ptr<ISimulinkElement> GetParent() const;

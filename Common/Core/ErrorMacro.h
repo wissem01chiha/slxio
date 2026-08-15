@@ -28,10 +28,11 @@
 #define DATAMODEL 3U
 #define CONSOLE 4U
 #define CONFIGURATION 5U
-#define LIBUV 6U
-#define LIBZIP 7U
-#define LIBXML2 8U
-#define NPIO 9U
+#define DATA 6U
+#define LIBUV 7U
+#define LIBZIP 8U
+#define LIBXML2 9U
+#define NPIO 10U
 
 #define SLXIO_SUCCESS 0U
 #define SLXIO_INFO 1U

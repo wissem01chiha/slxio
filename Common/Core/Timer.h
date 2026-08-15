@@ -34,9 +34,6 @@ public:
     Float32 Precision() const;
     Float32 Time();
 
-    void Attach(IObserver* obs) override;
-    void Detach(IObserver* obs) override;
-
 private:
     void NotifyState(const std::string& state);
     void NotifyTimeout();

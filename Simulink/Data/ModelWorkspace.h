@@ -66,7 +66,7 @@ private:
     ILogger* m_logger = nullptr;
     std::string m_fileName;
     std::string m_matlabCode;
-    std::shared_ptr<DataSourceType> m_dataSource;
+    std::shared_ptr<DataSourceType> m_dataSource = nullptr;
     std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>>
         m_variables;
 };

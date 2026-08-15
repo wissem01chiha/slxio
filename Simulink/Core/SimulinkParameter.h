@@ -55,6 +55,14 @@ public:
     /** Returns parameter minimum value */
     Float32 GetMin() override;
 
+    // duymmy example hh
+        HError AcceptInsert(ISimulinkElement& parent) override {
+        // Only allow insertion into arrays
+        auto* array = dynamic_cast<SimulinkArray*>(&parent);
+        if (!array) return E_OPERATION_NOT_SUPPORTED;
+        array->AddParameter(shared_from_this());
+        return E_OK;
+    }
     /** Returns parameter maximum value */
     Float32 GetMax() override;
 

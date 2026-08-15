@@ -124,10 +124,9 @@ SimulinkArray::Insert(const std::shared_ptr<SimulinkElementBase>& element)
     }
     else
     {
-        logger.SendLogMessage(
-            {Logger::LOG, Logger::LOG_ERROR, SimulinkArrayLogApp, 3},
-            {"Cannot add a Simulink element of a different type than Array or "
-             "Object to a SimulinkArray"});
+        m_logger->Log(
+            "Cannot add a Simulink element of a different type than Array or "
+            "Object to a SimulinkArray");
     }
 
     return E_OK;

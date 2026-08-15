@@ -43,15 +43,6 @@ public:
     /**  */
     SimulinkObject(std::string version, std::string className);
 
-    /** Accesses a child element by index with bound checking */
-    std::shared_ptr<SimulinkElementBase> at(SId index) override;
-
-    /** Access specified element */
-    std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
-
-    /** Returns the number of child elements. */
-    UInt32 Size() const override;
-
     /** Returns true if no child elements exist. */
     bool Empty() const override;
 
@@ -109,8 +100,8 @@ public:
     AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
 protected:
-    Logger& logger;
-    SId ObjectId;
+    Logger* logger = nullptr;
+    SId m_id;
     std::string ObjectVersion;
     std::string PropName;
     std::string ClassName;

@@ -24,9 +24,13 @@ add_module(
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
     ISimulinkElement.cxx
+    SimulinkDataType.cxx
+    SimulinkBlockType.cxx
   MODULE_HEADERS
     SimulinkECH.h
     ISimulinkElement.h
+    SimulinkDataType.h
+    SimulinkBlockType.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES

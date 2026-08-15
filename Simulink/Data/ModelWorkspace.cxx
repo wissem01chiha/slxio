@@ -9,6 +9,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 std::shared_ptr<IParameterObjectBase>
 ModelWorkspace::GetVariable(const std::string& name) const
 {
+    if (name.empty())
+    {
+        return nullptr;
+    }
     auto it = m_variables.find(name);
     if (it != m_variables.end())
     {
@@ -26,6 +30,10 @@ ModelWorkspace::AssignVariable(const std::string& name,
     {
         return E_INVALID_ARGUMENT;
     }
+    if (name.empty())
+    {
+        return E_PARAM_VAR_NAME_EMPTY;
+    }
 
     m_variables[name] = p;
     return E_OK;
@@ -33,6 +41,10 @@ ModelWorkspace::AssignVariable(const std::string& name,
 
 HError ModelWorkspace::ClearVariable(const std::string& name)
 {
+    if (name.empty())
+    {
+        return E_PARAM_VAR_NAME_EMPTY;
+    }
     auto it = m_variables.find(name);
     if (it != m_variables.end())
     {
@@ -66,7 +78,7 @@ HError ModelWorkspace::SetLogger(ILogger* logger)
 {
     if (logger == nullptr)
     {
-        return E_ILOGGER_NULLPTR_RECEIVED;
+        return E_LOGGER_NULLPTR_RECEIVED;
     }
 
     m_logger = logger;

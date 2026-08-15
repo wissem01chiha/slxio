@@ -1,4 +1,6 @@
+#include "DataECH.h"
 #include "Doctest.h"
+#include "Logger.h"
 #include "ModelWorkspace.h"
 
 using namespace slxio;
@@ -7,7 +9,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class MockParameterObject : public IParameterObjectBase
 {
 public:
-    MockParameterObject(const std::string& name) { m_name = name; }
+    explicit MockParameterObject(const std::string& name) { m_name = name; }
     IParameterObjectBase* New() override
     {
         return new MockParameterObject(m_name);
@@ -26,6 +28,9 @@ TEST_CASE("Assign and Get Variable")
     auto retrieved = ws.GetVariable("x");
     REQUIRE(retrieved != nullptr);
     CHECK(retrieved->GetName() == "x");
+
+    CHECK(ws.AssignVariable("x", nullptr) != E_OK);
+    CHECK(ws.AssignVariable("", param) == E_PARAM_VAR_NAME_EMPTY);
 }
 
 TEST_CASE("Clear Variable")
@@ -60,6 +65,20 @@ TEST_CASE("FileName and MatlabCode defaults")
     ModelWorkspace ws;
     CHECK(ws.GetFileName().empty());
     CHECK(ws.GetMatlabCode().empty());
+}
+
+TEST_CASE("GetDataSource default not nullptr")
+{
+    ModelWorkspace ws;
+    CHECK(ws.GetDataSourceType() == nullptr);
+}
+
+TEST_CASE("ModelWorkspace Logging interface test")
+{
+    ModelWorkspace ws;
+    Logger* log = new Logger();
+    CHECK(ws.SetLogger(log) == E_OK);
+    CHECK(ws.GetLogger() != nullptr);
 }
 
 SLXIO_ABI_NAMESPACE_END

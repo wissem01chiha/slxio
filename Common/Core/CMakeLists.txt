@@ -37,6 +37,7 @@ add_module(
     BufferedLogger.cxx
     BufferedErrorHandler.cxx
     BufferedLogger.cxx
+    IObservable.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
@@ -60,6 +61,7 @@ add_module(
     BufferedErrorHandler.h
     IObserver.h
     IObservable.h
+    IObservationMessage.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES

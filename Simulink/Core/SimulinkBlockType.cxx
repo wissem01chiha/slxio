@@ -1,98 +1,15 @@
 #include "SimulinkBlockType.h"
 
-#include <string>
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockType::SimulinkBlockType(Type blockType)
-{
-    this->blockType = blockType;
-}
+SimulinkBlockType::SimulinkBlockType(Type m_type) { this->m_type = m_type; }
 
-SimulinkBlockType::Type SimulinkBlockType::ToType(const char* typeName)
+std::string SimulinkBlockType::ToString() const
 {
 
-    if (!typeName)
-    {
-        return SimulinkBlockType::Stop;
-    }
-
-    std::string s(typeName);
-
-    if (s == "DigitalClock")
-        return SimulinkBlockType::DigitalClock;
-    else if (s == "Clock")
-        return SimulinkBlockType::Clock;
-    else if (s == "FromWorkspace")
-        return SimulinkBlockType::FromWorkspace;
-    else if (s == "FromFile")
-        return SimulinkBlockType::FromFile;
-    else if (s == "Step")
-        return SimulinkBlockType::Step;
-    else if (s == "UniformRandomNumber")
-        return SimulinkBlockType::UniformRandomNumber;
-    else if (s == "RandomNumber")
-        return SimulinkBlockType::RandomNumber;
-    else if (s == "ToWorkspace")
-        return SimulinkBlockType::ToWorkspace;
-    else if (s == "Stop")
-        return SimulinkBlockType::Stop;
-    else if (s == "ToFile")
-        return SimulinkBlockType::ToFile;
-    else if (s == "From")
-        return SimulinkBlockType::From;
-    else if (s == "Goto")
-        return SimulinkBlockType::Goto;
-    else if (s == "DataStoreRead")
-        return SimulinkBlockType::DataStoreRead;
-    else if (s == "DataStoreWrite")
-        return SimulinkBlockType::DataStoreWrite;
-    else if (s == "DataStoreMemory")
-        return SimulinkBlockType::DataStoreMemory;
-    else if (s == "GotoTagVisibility")
-        return SimulinkBlockType::GotoTagVisibility;
-    else if (s == "Assertion")
-        return SimulinkBlockType::Assertion;
-    else if (s == "Terminator")
-        return SimulinkBlockType::Terminator;
-    else if (s == "Ground")
-        return SimulinkBlockType::Ground;
-    else if (s == "Scope")
-        return SimulinkBlockType::Scope;
-    else if (s == "Constant")
-        return SimulinkBlockType::Constant;
-    else if (s == "Inport")
-        return SimulinkBlockType::Inport;
-    else if (s == "Outport")
-        return SimulinkBlockType::Outport;
-    else if (s == "Switch")
-        return SimulinkBlockType::Switch;
-    else if (s == "RelationalOperator")
-        return SimulinkBlockType::RelationalOperator;
-    else if (s == "Lookup2D")
-        return SimulinkBlockType::Lookup2D;
-    else if (s == "VariableTransportDelay")
-        return SimulinkBlockType::VariableTransportDelay;
-    else if (s == "DotProduct")
-        return SimulinkBlockType::DotProduct;
-    else if (s == "FunctionCallSplit")
-        return SimulinkBlockType::FunctionCallSplit;
-    else if (s == "ManualSwitch")
-        return SimulinkBlockType::ManualSwitch;
-    else if (s == "numInPorts")
-        return SimulinkBlockType::numInPorts;
-    else if (s == "numOutPorts")
-        return SimulinkBlockType::numOutPorts;
-    else
-        return SimulinkBlockType::Stop;
-}
-
-const char* SimulinkBlockType::ToString(Type type)
-{
-
-    switch (type)
+    switch (m_type)
     {
     case SimulinkBlockType::DigitalClock:
         return "DigitalClock";
@@ -159,18 +76,14 @@ const char* SimulinkBlockType::ToString(Type type)
     case SimulinkBlockType::numOutPorts:
         return "numOutPorts";
     default:
-        return "Unknown";
+        return "";
     }
+    return "";
 }
 
-bool SimulinkBlockType::isA(SimulinkBlockType::Type type)
+bool SimulinkBlockType::isA(SimulinkBlockType::Type type) const
 {
-    return this->blockType == type;
-}
-
-std::string SimulinkBlockType::ToString() const
-{
-    return std::string(ToString(blockType));
+    return this->m_type == type;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -26,11 +26,21 @@
     SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_WARN, 4U)
 
 /// a not supported callback or function being invoked on an object or class
+/// this is a very generic error status and modules can specify on which class,
+/// componnat or function the operation was invoked
 #define E_OPERATION_NOT_SUPPORTED                                              \
     SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 5U)
 
-/// A nullptr object of type ILogger passed to a function
+/// A nullptr object of type ILogger passed to a function, for concrete logger's
+/// implementaions nullptr use specifc erro code for each logger
 #define E_ILOGGER_NULLPTR_RECEIVED                                             \
     SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 6U)
+
+#define E_LOGGER_NULLPTR_RECEIVED                                              \
+    SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 7U)
+
+/// a nullptr of a generic IErrorHandler type is passed to a function
+#define E_IERRORHANDLER_NULLPTR_RECEIVED                                       \
+    SLXIO_HERROR(SLXIO_PROJECT, GLOBAL, GLOBAL, SLXIO_FATAL, 8U)
 
 #endif // COMMONECH_H

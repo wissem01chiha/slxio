@@ -48,13 +48,5 @@ Float32 Timer::Time()
     return std::chrono::duration<Float32>(elapsed).count();
 }
 
-void Timer::Attach(IObserver* obs) { m_observers.push_back(obs); }
-
-void Timer::Detach(IObserver* obs)
-{
-    m_observers.erase(std::remove(m_observers.begin(), m_observers.end(), obs),
-                      m_observers.end());
-}
-
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

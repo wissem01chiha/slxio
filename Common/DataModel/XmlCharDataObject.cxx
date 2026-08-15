@@ -27,7 +27,9 @@ bool XmlCharDataObject::operator==(const IDataObject& other) const
     {
         return false;
     }
-    return m_implDataObject == other.GetImplDataObject();
+    return std::string(reinterpret_cast<const char*>(m_implDataObject)) ==
+           std::string(
+               reinterpret_cast<const char*>(other.GetImplDataObject()));
 }
 
 void* XmlCharDataObject::GetImplDataObject() const { return m_implDataObject; }

@@ -5,6 +5,7 @@
 #define SIMULINKARRAY_H
 
 #include "ABINamespaceMacro.h"
+#include "IErrorHandler.h"
 #include "ILogger.h"
 #include "PlatformTypes.h"
 #include "SimulinkElementBase.h"
@@ -35,15 +36,6 @@ public:
 
     /** Construct a SimulinkArray with type, name, and dimension. */
     SimulinkArray(std::string type, std::string name, std::string dimension);
-
-    /** Accesses a child element by index with bound checking */
-    std::shared_ptr<SimulinkElementBase> at(SId index) override;
-
-    /** Access specified element */
-    std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
-
-    /** Returns the number of child elements. */
-    UInt32 Size() const override;
 
     /** Returns true if no child elements exist. */
     bool Empty() const override;
@@ -101,8 +93,9 @@ public:
     Logger& GetLogger();
 
 private:
-    SId ArrayId;
-    Logger& logger;
+    SId m_id;
+    Logger* logger = nullptr;
+    IErrorHandler* handler = nullptr;
     std::string ArrayType;
     std::string ArrayName;
     std::string ArrayDimension;

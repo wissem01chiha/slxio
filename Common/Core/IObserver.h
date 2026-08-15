@@ -6,6 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "CorePCH.h"
+#include "IObservationMessage.h"
 
 namespace slxio
 {
@@ -19,6 +21,9 @@ class SLXIO_APIEXPORT IObserver
 {
 public:
     virtual ~IObserver() = default;
+
+    /**  when the observable updates its state */
+    virtual void Update(const IObservationMessage& msg) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

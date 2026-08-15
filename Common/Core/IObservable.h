@@ -6,6 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "CorePCH.h"
+#include "IObservationMessage.h"
 #include "IObserver.h"
 
 namespace slxio
@@ -20,8 +22,12 @@ class SLXIO_APIEXPORT IObservable
 {
 public:
     virtual ~IObservable() = default;
-    virtual void Attach(IObserver* obs) = 0;
-    virtual void Detach(IObserver* obs) = 0;
+    virtual void Attach(IObserver* obs);
+    virtual void Detach(IObserver* obs);
+
+protected:
+    virtual void Update(const IObservationMessage& msg);
+    std::vector<IObserver*> m_observers;
 };
 
 SLXIO_ABI_NAMESPACE_END
