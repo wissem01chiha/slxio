@@ -46,12 +46,12 @@ public:
     std::shared_ptr<CoderInfo> GetCoderInfo() const;
 
 private:
-    std::string m_unit;          
-    std::string m_description;   
-    std::string m_complexity;   
-    Float32 m_min;        
-    Float32 m_max;       
-    std::vector<UInt16> m_dimensions; 
+    std::string m_unit;
+    std::string m_description;
+    std::string m_complexity;
+    Float32 m_min;
+    Float32 m_max;
+    std::vector<UInt16> m_dimensions;
     std::shared_ptr<CoderInfo> m_coder;
 };
 
