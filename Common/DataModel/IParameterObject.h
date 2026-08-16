@@ -27,7 +27,6 @@ template <typename T>
 class SLXIO_APIEXPORT IParameterObject : public IParameterObjectBase
 {
 public:
-    virtual IParameterObject* New() = 0;
     virtual T& GetValue() = 0;
     virtual ~IParameterObject() = default;
 };

@@ -99,5 +99,7 @@ const IErrorHandler* ISimulinkElement::GetErrorHandler() const
     return m_error;
 }
 
+std::string ISimulinkElement::ToString() const { return std::string(""); }
+
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

@@ -26,11 +26,18 @@ add_module(
     ISimulinkElement.cxx
     SimulinkDataType.cxx
     SimulinkBlockType.cxx
+    SimulinkParameterInformation.cxx
+    SimulinkParameter.cxx
+    SimulinkArray.cxx
   MODULE_HEADERS
     SimulinkECH.h
     ISimulinkElement.h
     SimulinkDataType.h
     SimulinkBlockType.h
+    SimulinkParameterInformation.h
+    SimulinkParameter.h
+    SimulinkArray.h
+    ISimulinkType.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES
@@ -44,6 +51,8 @@ add_module(
   MODULE_PUBLIC_DEPENDS
     CommonCore
     CommonDataModel
+    SimulinkMisc
+    SimulinkData
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest

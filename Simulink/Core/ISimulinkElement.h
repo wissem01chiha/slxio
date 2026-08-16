@@ -43,15 +43,6 @@ public:
     /** Creates a new instance of this element. */
     virtual ISimulinkElement* New() const = 0;
 
-    /** Deleted copy assignment operator. */
-    ISimulinkElement& operator=(const ISimulinkElement&) = delete;
-
-    /** Deleted move constructor. */
-    ISimulinkElement(ISimulinkElement&& other) = delete;
-
-    /** Deleted move assignment operator. */
-    ISimulinkElement& operator=(ISimulinkElement&& other) = delete;
-
     /** The defula behvaior is that the element do not support nested childern,
      * but for most element they override this to add functionlay for hircacal
      * modeling
@@ -108,6 +99,9 @@ public:
 
     /** Get the error handler object */
     const IErrorHandler* GetErrorHandler() const;
+
+    /** children can oveload for convience, default is empty string */
+    virtual std::string ToString() const;
 
 protected:
     /** a non owning refrence to the parent, childern do not own parent elments,

@@ -27,6 +27,7 @@ add_module(
     ModelWorkspace.cxx
     ModelWorkspaceParameter.cxx
   MODULE_HEADERS
+    DataECH.h
     DataSourceType.h
     IBlockParameters.h
     IBlockProperties.h
@@ -39,7 +40,6 @@ add_module(
     ModelWorkspaceParameter.h
   MODULE_PCH_HEADERS
     DataPCH.h
-    DataECH.h
   MODULE_SOURCES
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx

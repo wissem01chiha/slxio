@@ -23,9 +23,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT IParameterizedObject
 {
 public:
-    /** Create a new instance of the IParameterizedObject */
-    virtual IParameterizedObject* New() = 0;
-
     /**
      * Add a parameter
      * https://www.mathworks.com/help/simulink/slref/add_param.html

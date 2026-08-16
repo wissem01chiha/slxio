@@ -6,8 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-
-#include <string>
+#include "SimulinkPCH.h"
 
 namespace slxio
 {
@@ -30,7 +29,7 @@ public:
     Type GetType() const;
 
 private:
-    Type type;
+    Type m_type;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,3 +1,3 @@
-add_subdirectory(Core)
-add_subdirectory(Data)
 add_subdirectory(Misc)
+add_subdirectory(Data)
+add_subdirectory(Core)

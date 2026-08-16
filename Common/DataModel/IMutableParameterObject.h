@@ -21,9 +21,6 @@ template <typename T>
 class SLXIO_APIEXPORT IMutableParameterObject : public IParameterObject<T>
 {
 public:
-    /** Access mutable value */
-    virtual T& GetValue() = 0;
-
     /** Set a new value */
     virtual void SetValue(const T& value) = 0;
 

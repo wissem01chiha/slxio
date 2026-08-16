@@ -7,7 +7,6 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CoderInfo.h"
-#include "ErrorCode.h"
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
 
