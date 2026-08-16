@@ -6,8 +6,9 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "IParameterObjectBase.h"
+#include "ISimulinkElement.h"
 #include "PlatformTypes.h"
-#include "SimulinkBlockType.h"
 #include "SimulinkPCH.h"
 
 namespace slxio
@@ -18,22 +19,37 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Class for Simulink objects, which are a construct for
  * structured storage of meta-data in the model.
  */
-class SLXIO_APIEXPORT SimulinkObject
+class SLXIO_APIEXPORT SimulinkObject final : public ISimulinkElement
 {
 public:
-    /** Default Constructor */
     SimulinkObject();
+    ~SimulinkObject() override;
 
-    SimulinkObject* New() const;
+    ISimulinkElement* New() const override;
+    HError AcceptInsert(ISimulinkElement& parent) override;
+    HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
+    SId GetId() const override;
+
+    void AddParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    void SetParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    std::shared_ptr<IParameterObjectBase>
+    GetParam(const std::string& name) override;
+
+    std::string GetName() const;
+    std::string GetDimension() const;
+    std::string GetVersion() const;
+
+    std::string ToString() const override;
 
 protected:
     SId m_id;
     std::string m_version;
     std::string m_propName;
     std::string m_className;
-    std::vector<std::shared_ptr<SimulinkObject>> m_objects;
-    std::vector<std::shared_ptr<SimulinkArray>> m_arrays;
-    std::vector<std::shared_ptr<SimulinkParameter>> m_parameters;
+    std::vector<std::shared_ptr<ISimulinkElement>> m_arrays;
+    std::vector<std::shared_ptr<IParameterObjectBase>> m_parameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

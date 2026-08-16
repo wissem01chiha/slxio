@@ -63,7 +63,7 @@ HError SimulinkArray::AcceptInsert(ISimulinkElement& parent)
         {
             return E_OPERATION_NOT_SUPPORTED;
         }
-        array->Insert(std::make_shared<SimulinkArray>(*this));
+        object->Insert(std::make_shared<SimulinkArray>(*this));
     }
     array->Insert(std::make_shared<SimulinkArray>(*this));
     return E_OK;

@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "IErrorHandler.h"
 #include "ILogger.h"
+#include "IObservable.h"
 #include "IParameterObjectBase.h"
 #include "ISimulinkElement.h"
 #include "PlatformTypes.h"

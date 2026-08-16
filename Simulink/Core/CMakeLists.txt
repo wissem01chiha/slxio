@@ -29,6 +29,7 @@ add_module(
     SimulinkParameterInformation.cxx
     SimulinkParameter.cxx
     SimulinkArray.cxx
+    SimulinkObject.cxx
   MODULE_HEADERS
     SimulinkECH.h
     ISimulinkElement.h
@@ -38,6 +39,7 @@ add_module(
     SimulinkParameter.h
     SimulinkArray.h
     ISimulinkType.h
+    SimulinkObject.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES
