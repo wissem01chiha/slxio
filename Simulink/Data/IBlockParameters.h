@@ -13,7 +13,8 @@
 #include "ILogging.h"
 #include "ISignalAttributes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -23,14 +24,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT IBlockParameters
 {
 public:
-  IBlockParameters() = default;
-  virtual ~IBlockParameters() = default;
+    IBlockParameters() = default;
+    virtual ~IBlockParameters() = default;
 
-  virtual ISignalAttributes* GetSignalAttributes() const;
-  virtual ILogging* GetLogging() const;
-  virtual IBlockParametersInformation* GetBlockParametersInformation() const;
-  virtual ICodeGenration* GetCodeGeneration() const;
-  virtual IBlockParametersInformation* GetInformation() const;
+    virtual std::shared_ptr<ISignalAttributes> GetSignalAttributes() const;
+    virtual std::shared_ptr<ILogging> GetLogging() const;
+    virtual std::shared_ptr<IBlockParametersInformation>
+    GetBlockParametersInformation() const;
+    virtual std::shared_ptr<ICodeGenration> GetCodeGeneration() const;
+    virtual std::shared_ptr<IBlockParametersInformation> GetInformation() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

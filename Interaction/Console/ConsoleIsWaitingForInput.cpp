@@ -20,10 +20,12 @@
 using namespace org_scilab_modules_gui_bridge;
 BOOL ConsoleIsWaitingForInput(void)
 {
-  if (getScilabJavaVM()) {
-    return booltoBOOL(CallScilabBridge::isWaitingForInput(getScilabJavaVM()));
-  }
-  return FALSE;
+    if (getScilabJavaVM())
+    {
+        return booltoBOOL(
+            CallScilabBridge::isWaitingForInput(getScilabJavaVM()));
+    }
+    return FALSE;
 }
 
 /*--------------------------------------------------------------------------*/

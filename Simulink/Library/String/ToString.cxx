@@ -1,6 +1,7 @@
 #include "ToString.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ToString::ToString() {}

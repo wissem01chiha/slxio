@@ -13,12 +13,12 @@ extern "C"
 class ConsoleModule
 {
 private:
-  ConsoleModule(){};
-  ~ConsoleModule(){};
+    ConsoleModule(){};
+    ~ConsoleModule(){};
 
 public:
-  EXTERN_CONSOLE_GW static int Load();
-  EXTERN_CONSOLE_GW static int Unload() { return 1; }
+    EXTERN_CONSOLE_GW static int Load();
+    EXTERN_CONSOLE_GW static int Unload() { return 1; }
 };
 
 CPP_GATEWAY_PROTOTYPE(sci_clc);

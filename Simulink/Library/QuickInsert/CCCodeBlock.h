@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT CCCodeBlock
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT CCCodeBlock : public IBlockParameters,
+                                    public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  CCCodeBlock();
+    /** Default Constructor */
+    CCCodeBlock();
 
-  /** Default Destructor */
-  ~CCCodeBlock();
+    /** Default Destructor */
+    ~CCCodeBlock();
 
 private:
 };

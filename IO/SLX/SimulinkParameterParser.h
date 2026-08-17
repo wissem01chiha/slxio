@@ -12,7 +12,8 @@
 #include "SimulinkParameter.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -28,16 +29,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @endcode
  */
 class SLXIO_APIEXPORT SimulinkParameterParser final
-  : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
+    : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
 {
 public:
-  SimulinkParameterParser() = default;
-  /// @note Check if the related node name attribute is empty.
-  /// If so, it returns an error since a parameter cannot be built
-  /// without a name.
-  HError setInputData(const xmlNodePtr data) override;
-  HError parse() override;
-  ~SimulinkParameterParser() = default;
+    SimulinkParameterParser() = default;
+    /// @note Check if the related node name attribute is empty.
+    /// If so, it returns an error since a parameter cannot be built
+    /// without a name.
+    HError setInputData(const xmlNodePtr data) override;
+    HError parse() override;
+    ~SimulinkParameterParser() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

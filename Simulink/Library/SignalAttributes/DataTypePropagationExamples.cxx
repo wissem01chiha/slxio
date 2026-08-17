@@ -1,6 +1,7 @@
 #include "DataTypePropagationExamples.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 DataTypePropagationExamples::DataTypePropagationExamples() {}

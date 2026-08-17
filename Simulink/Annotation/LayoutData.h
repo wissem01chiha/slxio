@@ -20,19 +20,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class LayoutData : public RectangleTypeLayoutDataBase
 {
 public:
-  LayoutData(const RectangleType& position,
-             const Color& foregroundColor,
-             const Color& backgroundColor,
-             bool borderVisible)
-    : RectangleTypeLayoutDataBase(position, foregroundColor, backgroundColor)
-    , borderVisible_(borderVisible)
-  {
-  }
+    LayoutData(const RectangleType& position, const Color& foregroundColor,
+               const Color& backgroundColor, bool borderVisible)
+        : RectangleTypeLayoutDataBase(position, foregroundColor,
+                                      backgroundColor),
+          borderVisible_(borderVisible)
+    {
+    }
 
-  bool isBorderVisible() const;
+    bool isBorderVisible() const;
 
 private:
-  const bool borderVisible_;
+    const bool borderVisible_;
 };
 
 SLXIO_ABI_NAMESPACE_END

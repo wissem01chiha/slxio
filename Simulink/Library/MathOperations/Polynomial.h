@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Polynomial
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Polynomial : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Polynomial();
+    /** Default Constructor */
+    Polynomial();
 
-  /** Default Destructor */
-  ~Polynomial();
+    /** Default Destructor */
+    ~Polynomial();
 
-  const std::string& GetCoefs() const;
-  void SetCoefs(const std::string& value);
+    const std::string& GetCoefs() const;
+    void SetCoefs(const std::string& value);
 
 private:
-  std::string m_Coefs;
+    std::string m_Coefs;
 };
 
 SLXIO_ABI_NAMESPACE_END

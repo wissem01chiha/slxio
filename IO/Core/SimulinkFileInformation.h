@@ -8,7 +8,8 @@
 #include "DataModelPCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -21,38 +22,38 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkFileInformation
 {
 public:
-  SimulinkFileInformation();
+    SimulinkFileInformation();
 
-  const std::string& GetExtension() const { return extension; }
-  const std::string& GetName() const { return name; }
-  UInt16 GetSize() const { return size; }
-  const std::string& GetCategory() const { return category; }
-  const std::string& GetCreator() const { return creator; }
-  const std::string& GetLastModifiedBy() const { return lastModifiedBy; }
-  const std::string& GetRevision() const { return revision; }
-  const std::string& GetVersion() const { return version; }
-  const std::string& GetContentType() const { return contentType; }
-  const std::string& GetContentTypeFriendlyName() const
-  {
-    return contentTypeFriendlyName;
-  }
-  const std::string& GetMatlabRelease() const { return matlabRelease; }
-  const std::string& GetMatlabVersion() const { return matlabVersion; }
+    const std::string& GetExtension() const { return extension; }
+    const std::string& GetName() const { return name; }
+    UInt16 GetSize() const { return size; }
+    const std::string& GetCategory() const { return category; }
+    const std::string& GetCreator() const { return creator; }
+    const std::string& GetLastModifiedBy() const { return lastModifiedBy; }
+    const std::string& GetRevision() const { return revision; }
+    const std::string& GetVersion() const { return version; }
+    const std::string& GetContentType() const { return contentType; }
+    const std::string& GetContentTypeFriendlyName() const
+    {
+        return contentTypeFriendlyName;
+    }
+    const std::string& GetMatlabRelease() const { return matlabRelease; }
+    const std::string& GetMatlabVersion() const { return matlabVersion; }
 
 private:
-  const std::string extension;
-  const std::string name;
-  const UInt16 size;
+    const std::string extension;
+    const std::string name;
+    const UInt16 size;
 
-  const std::string category;
-  const std::string creator;
-  const std::string lastModifiedBy;
-  const std::string revision;
-  const std::string version;
-  const std::string contentType;
-  const std::string contentTypeFriendlyName;
-  const std::string matlabRelease;
-  const std::string matlabVersion;
+    const std::string category;
+    const std::string creator;
+    const std::string lastModifiedBy;
+    const std::string revision;
+    const std::string version;
+    const std::string contentType;
+    const std::string contentTypeFriendlyName;
+    const std::string matlabRelease;
+    const std::string matlabVersion;
 };
 
 SLXIO_ABI_NAMESPACE_END

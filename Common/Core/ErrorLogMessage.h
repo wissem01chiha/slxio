@@ -10,7 +10,8 @@
 #include "ILogMessage.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -24,28 +25,32 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT ErrorLogMessage : public ILogMessage
 {
 public:
-  /* Construct a message containing a single error code.*/
-  explicit ErrorLogMessage(HError error);
+    /* Construct a message containing a single error code.*/
+    explicit ErrorLogMessage(HError error);
 
-  /* Serialize the message to a string for logging */
-  std::string ToString() const override;
+    /* Serialize the message to a string for logging */
+    std::string ToString() const override;
 
-  /* Returns SLXIO_TYPE_ERRORLOGMESSAGE type index */
-  DataType GetDataType() const override;
+    /* Returns SLXIO_TYPE_ERROR_LOG_MESSAGE type index */
+    DataType GetDataType() const override;
 
-  /** Returns true when no errors are stored. */
-  bool Empty() const override;
+    /** Returns true when no errors are stored. */
+    bool Empty() const override;
 
-  /**
-   * Concatenating two ErrorLogMessage objects produces a new
-   * ErrorLogMessage containing the errors from both operands in
-   * insertion order.
-   */
-  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override;
-  ~ErrorLogMessage() = default;
+    /**
+     * Concatenating two ErrorLogMessage objects produces a new
+     * ErrorLogMessage containing the errors from both operands in
+     * insertion order.
+     */
+    std::unique_ptr<ILogMessage>
+    operator+(const ILogMessage& rhs) const override;
+
+    std::unique_ptr<ILogMessage> Clone() const override;
+
+    ~ErrorLogMessage() = default;
 
 private:
-  std::vector<HError> m_data;
+    std::vector<HError> m_data;
 };
 
 SLXIO_ABI_NAMESPACE_END

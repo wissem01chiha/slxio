@@ -1,3 +1,3 @@
-add_subdirectory(Core)
+add_subdirectory(Misc)
 add_subdirectory(Data)
-#add_subdirectory(Library)
+add_subdirectory(Core)

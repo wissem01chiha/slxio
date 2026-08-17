@@ -9,10 +9,33 @@
 #include "DataModelPCH.h"
 #include "IDataObject.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
+/**
+ * @class XmlNodeDataObject
+ * @brief A wrapper around libxml2 xmlNodePtr object
+ * implementing IDataObject interface
+ */
+class SLXIO_APIEXPORT XmlNodeDataObject : public IDataObject
+{
+public:
+    XmlNodeDataObject();
+    XmlNodeDataObject* New() override;
+    void Initialize(void* implDataObject) override;
+    bool Empty() const override;
+    bool operator==(const IDataObject& other) const override;
+    void* GetImplDataObject() const override;
+    std::string ToString() const override;
+    DataType GetDataType() const override;
+    ~XmlNodeDataObject();
+
+private:
+    xmlNodePtr m_implDataObject{nullptr};
+};
+
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // XMLNODEDATAOBJECT

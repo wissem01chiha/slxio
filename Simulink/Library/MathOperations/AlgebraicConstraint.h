@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT AlgebraicConstraint
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT AlgebraicConstraint : public IBlockParameters,
+                                            public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  AlgebraicConstraint();
+    /** Default Constructor */
+    AlgebraicConstraint();
 
-  /** Default Destructor */
-  ~AlgebraicConstraint();
+    /** Default Destructor */
+    ~AlgebraicConstraint();
 
-  const std::string& GetConstraint() const;
-  void SetConstraint(const std::string& value);
+    const std::string& GetConstraint() const;
+    void SetConstraint(const std::string& value);
 
-  const std::string& GetSolver() const;
-  void SetSolver(const std::string& value);
+    const std::string& GetSolver() const;
+    void SetSolver(const std::string& value);
 
-  const std::string& GetTolerance() const;
-  void SetTolerance(const std::string& value);
+    const std::string& GetTolerance() const;
+    void SetTolerance(const std::string& value);
 
-  const std::string& GetInitialguess() const;
-  void SetInitialguess(const std::string& value);
+    const std::string& GetInitialguess() const;
+    void SetInitialguess(const std::string& value);
 
 private:
-  std::string m_Constraint;
+    std::string m_Constraint;
 
-  std::string m_Solver;
+    std::string m_Solver;
 
-  std::string m_Tolerance;
+    std::string m_Tolerance;
 
-  std::string m_Initialguess;
+    std::string m_Initialguess;
 };
 
 SLXIO_ABI_NAMESPACE_END

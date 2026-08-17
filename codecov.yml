@@ -3,3 +3,4 @@ ignore:
   - "ThirdParty"
   - "Testing"
   - "**/Test*.cxx"  
+  - "**/*Fixture.h"

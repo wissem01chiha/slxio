@@ -9,7 +9,8 @@
 #include "CorePCH.h"
 #include "ILogger.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,24 +21,24 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT FileLogger final : public ILogger
 {
 public:
-  /* Explicit constructor: if no name is provided, a default name
-   * and default path are set by the logger. this option provides flexibility to
-   * override the default logging file sink in different cases.*/
-  explicit FileLogger(const std::string& fileName = "slxio.log");
-  ~FileLogger() noexcept;
+    /* Explicit constructor: if no name is provided, a default name
+     * and default path are set by the logger. this option provides flexibility
+     * to override the default logging file sink in different cases.*/
+    explicit FileLogger(const std::string& fileName = "slxio.log");
+    ~FileLogger() noexcept;
 
-  /* Create the file if not already exists*/
-  void Init() override;
-  void Log(const ILogMessage& msg) override;
+    /* Create the file if not already exists*/
+    void Init() override;
+    void Log(const ILogMessage& msg) override;
 
-  void SetLogLevel(LogLevelType level) override;
-  LogLevelType GetLogLevel() const override;
+    void SetLogLevel(LogLevelType level) override;
+    LogLevelType GetLogLevel() const override;
 
 private:
-  std::string m_fileName;
-  LogLevelType m_logLevel;
-  std::ofstream m_file;
-  mutable std::mutex m_mutex;
+    std::string m_fileName;
+    LogLevelType m_logLevel;
+    std::ofstream m_file;
+    mutable std::mutex m_mutex;
 };
 
 SLXIO_ABI_NAMESPACE_END

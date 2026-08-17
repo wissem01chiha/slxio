@@ -21,15 +21,16 @@
 #include "SimulinkConfigSet.h"
 #include "SimulinkWriterBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT SimulinkConfigSetWriter
-  : public SimulinkWriterBase<SimulinkConfigSet, json_object*>
+    : public SimulinkWriterBase<SimulinkConfigSet, json_object*>
 {
 public:
-  SimulinkConfigSetWriter() = default;
-  ~SimulinkConfigSetWriter() = default;
+    SimulinkConfigSetWriter() = default;
+    ~SimulinkConfigSetWriter() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

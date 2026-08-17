@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BusSelector
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT BusSelector : public IBlockParameters,
+                                    public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  BusSelector();
+    /** Default Constructor */
+    BusSelector();
 
-  /** Default Destructor */
-  ~BusSelector();
+    /** Default Destructor */
+    ~BusSelector();
 
-  const std::string& GetOutputsignals() const;
-  void SetOutputsignals(const std::string& value);
+    const std::string& GetOutputsignals() const;
+    void SetOutputsignals(const std::string& value);
 
-  const std::string& GetOutputasbus() const;
-  void SetOutputasbus(const std::string& value);
+    const std::string& GetOutputasbus() const;
+    void SetOutputasbus(const std::string& value);
 
-  const std::string& GetInputsignals() const;
-  void SetInputsignals(const std::string& value);
+    const std::string& GetInputsignals() const;
+    void SetInputsignals(const std::string& value);
 
 private:
-  std::string m_Outputsignals;
+    std::string m_Outputsignals;
 
-  std::string m_Outputasbus;
+    std::string m_Outputasbus;
 
-  std::string m_Inputsignals;
+    std::string m_Inputsignals;
 };
 
 SLXIO_ABI_NAMESPACE_END

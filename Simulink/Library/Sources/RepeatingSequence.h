@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT RepeatingSequence
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT RepeatingSequence : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  RepeatingSequence();
+    /** Default Constructor */
+    RepeatingSequence();
 
-  /** Default Destructor */
-  ~RepeatingSequence();
+    /** Default Destructor */
+    ~RepeatingSequence();
 
-  const std::string& GetRepSeqT() const;
-  void SetRepSeqT(const std::string& value);
+    const std::string& GetRepSeqT() const;
+    void SetRepSeqT(const std::string& value);
 
-  const std::string& GetRepSeqY() const;
-  void SetRepSeqY(const std::string& value);
+    const std::string& GetRepSeqY() const;
+    void SetRepSeqY(const std::string& value);
 
 private:
-  std::string m_RepSeqT;
+    std::string m_RepSeqT;
 
-  std::string m_RepSeqY;
+    std::string m_RepSeqY;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -35,61 +35,67 @@ static BOOL dispWarningLevelPrompt = TRUE;
 /*------------------------------------------------------------------------*/
 void setPreviousLevel(int pause)
 {
-  // debugger prompt first !
-  if (isEnableDebug()) {
-    if (isDebugInterrupted()) {
-      Sci_Prompt = SCIPROMPTBREAK;
-    } else {
-      Sci_Prompt = SCIPROMPTDEBUG;
+    // debugger prompt first !
+    if (isEnableDebug())
+    {
+        if (isDebugInterrupted())
+        {
+            Sci_Prompt = SCIPROMPTBREAK;
+        }
+        else
+        {
+            Sci_Prompt = SCIPROMPTDEBUG;
+        }
     }
-  } else if (pause == 0) {
-    if (temporaryPrompt.empty() == false) {
-      Sci_Prompt = temporaryPrompt;
-      ClearTemporaryPrompt();
-    } else {
-      Sci_Prompt = SCIPROMPT;
+    else if (pause == 0)
+    {
+        if (temporaryPrompt.empty() == false)
+        {
+            Sci_Prompt = temporaryPrompt;
+            ClearTemporaryPrompt();
+        }
+        else
+        {
+            Sci_Prompt = SCIPROMPT;
+        }
     }
-  } else if (pause > 0) {
-    if (dispWarningLevelPrompt) {
-      if (getWarningMode()) {
-        sciprint(_("Type '%s' or '%s' to return to standard level prompt.\n\n"),
-                 "resume",
-                 "abort");
-        dispWarningLevelPrompt = FALSE;
-      }
-    }
-    char t[50];
+    else if (pause > 0)
+    {
+        if (dispWarningLevelPrompt)
+        {
+            if (getWarningMode())
+            {
+                sciprint(_("Type '%s' or '%s' to return to standard level "
+                           "prompt.\n\n"),
+                         "resume", "abort");
+                dispWarningLevelPrompt = FALSE;
+            }
+        }
+        char t[50];
 
-    sprintf(t, SCIPROMPT_INTERRUPT, pause);
-    Sci_Prompt = t;
-    // bug 5513
-    // when we change prompt to a pause level, we change also temp. prompt
-    // SetTemporaryPrompt(Sci_Prompt);
-  } else {
-    Sci_Prompt = SCIPROMPT_PAUSE;
-    // bug 5513
-    // when we change prompt to halt level, we change also temp. prompt
-    SetTemporaryPrompt(Sci_Prompt.data());
-  }
+        sprintf(t, SCIPROMPT_INTERRUPT, pause);
+        Sci_Prompt = t;
+        // bug 5513
+        // when we change prompt to a pause level, we change also temp. prompt
+        // SetTemporaryPrompt(Sci_Prompt);
+    }
+    else
+    {
+        Sci_Prompt = SCIPROMPT_PAUSE;
+        // bug 5513
+        // when we change prompt to halt level, we change also temp. prompt
+        SetTemporaryPrompt(Sci_Prompt.data());
+    }
 }
 /*------------------------------------------------------------------------*/
-const char* GetCurrentPrompt()
-{
-  return Sci_Prompt.data();
-}
+const char* GetCurrentPrompt() { return Sci_Prompt.data(); }
 /*------------------------------------------------------------------------*/
 void SetTemporaryPrompt(const char* tempPrompt)
 {
-  temporaryPrompt = tempPrompt;
+    temporaryPrompt = tempPrompt;
 }
 /*------------------------------------------------------------------------*/
-const char* GetTemporaryPrompt(void)
-{
-  return temporaryPrompt.data();
-}
+const char* GetTemporaryPrompt(void) { return temporaryPrompt.data(); }
 /*------------------------------------------------------------------------*/
-void ClearTemporaryPrompt(void)
-{
-  temporaryPrompt = "";
-}
+void ClearTemporaryPrompt(void) { temporaryPrompt = ""; }
 /*------------------------------------------------------------------------*/

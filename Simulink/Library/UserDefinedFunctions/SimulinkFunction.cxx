@@ -1,6 +1,7 @@
 #include "SimulinkFunction.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkFunction::SimulinkFunction() {}

@@ -20,7 +20,7 @@
 using namespace org_scilab_modules_gui_bridge;
 BOOL ClearConsole(void)
 {
-  CallScilabBridge::clear(getScilabJavaVM());
-  return TRUE;
+    CallScilabBridge::clear(getScilabJavaVM());
+    return TRUE;
 }
 /*--------------------------------------------------------------------------*/

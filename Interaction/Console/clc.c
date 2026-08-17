@@ -31,45 +31,56 @@
 /*--------------------------------------------------------------------------*/
 BOOL clc(int nblines)
 {
-  BOOL bOK = FALSE;
-  if (getScilabMode() != SCILAB_STD) {
-    /* console C */
-    if (nblines != -1) {
+    BOOL bOK = FALSE;
+    if (getScilabMode() != SCILAB_STD)
+    {
+        /* console C */
+        if (nblines != -1)
+        {
 #ifdef _MSC_VER
-      clrscrPart_nw(nblines);
-      if (getPromptMode() !=
-          2) /* Add extra newline for other modes besides mode 2 */
-      {
-        printf("\n");
-      }
-      bOK = TRUE;
+            clrscrPart_nw(nblines);
+            if (getPromptMode() !=
+                2) /* Add extra newline for other modes besides mode 2 */
+            {
+                printf("\n");
+            }
+            bOK = TRUE;
 #else
-      if (getPromptMode() == 2) /* Check for output mode(2) and move the cursor
-                                   up for extra 1 line */
-      {
-        printf("\033[%dA\033[J\033[A", nblines + 1);
-      } else {
-        printf("\033[%dA\033[J", nblines + 1);
-      }
-      bOK = TRUE;
+            if (getPromptMode() == 2) /* Check for output mode(2) and move the
+                                         cursor up for extra 1 line */
+            {
+                printf("\033[%dA\033[J\033[A", nblines + 1);
+            }
+            else
+            {
+                printf("\033[%dA\033[J", nblines + 1);
+            }
+            bOK = TRUE;
 #endif
-    } else {
-      clrscr_nw();
-      bOK = TRUE;
+        }
+        else
+        {
+            clrscr_nw();
+            bOK = TRUE;
+        }
     }
-  } else {
-    /* Java Console*/
-    if (nblines == -1) /* Clear the whole console window */
+    else
     {
-      bOK = ClearConsole();
-    } else if (nblines >= 0) /* Clear a part of the console window */
-    {
-      bOK = ClearConsolePart(nblines);
-    } else {
-      /* error */
-      bOK = FALSE;
+        /* Java Console*/
+        if (nblines == -1) /* Clear the whole console window */
+        {
+            bOK = ClearConsole();
+        }
+        else if (nblines >= 0) /* Clear a part of the console window */
+        {
+            bOK = ClearConsolePart(nblines);
+        }
+        else
+        {
+            /* error */
+            bOK = FALSE;
+        }
     }
-  }
-  return bOK;
+    return bOK;
 }
 /*--------------------------------------------------------------------------*/

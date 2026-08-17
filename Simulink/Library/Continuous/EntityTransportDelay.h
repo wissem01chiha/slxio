@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT EntityTransportDelay
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT EntityTransportDelay : public IBlockParameters,
+                                             public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  EntityTransportDelay();
+    /** Default Constructor */
+    EntityTransportDelay();
 
-  /** Default Destructor */
-  ~EntityTransportDelay();
+    /** Default Destructor */
+    ~EntityTransportDelay();
 
-  const std::string& GetCapacity() const;
-  void SetCapacity(const std::string& value);
+    const std::string& GetCapacity() const;
+    void SetCapacity(const std::string& value);
 
-  const std::string& GetShownumberentitiesinblock() const;
-  void SetShownumberentitiesinblock(const std::string& value);
+    const std::string& GetShownumberentitiesinblock() const;
+    void SetShownumberentitiesinblock(const std::string& value);
 
 private:
-  std::string m_Capacity;
+    std::string m_Capacity;
 
-  std::string m_Shownumberentitiesinblock;
+    std::string m_Shownumberentitiesinblock;
 };
 
 SLXIO_ABI_NAMESPACE_END

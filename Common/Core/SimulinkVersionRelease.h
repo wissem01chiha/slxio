@@ -6,7 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -18,22 +19,22 @@ SLXIO_ABI_NAMESPACE_BEGIN
  */
 enum class SimulinkVersionRelease
 {
-  R2018a,
-  R2018b,
-  R2019a,
-  R2019b,
-  R2020a,
-  R2020b,
-  R2021a,
-  R2021b,
-  R2022a,
-  R2022b,
-  R2023a,
-  R2023b,
-  R2024a,
-  R2024b,
-  R2025a,
-  R2025b
+    R2018a,
+    R2018b,
+    R2019a,
+    R2019b,
+    R2020a,
+    R2020b,
+    R2021a,
+    R2021b,
+    R2022a,
+    R2022b,
+    R2023a,
+    R2023b,
+    R2024a,
+    R2024b,
+    R2025a,
+    R2025b
 };
 
 SLXIO_ABI_NAMESPACE_END

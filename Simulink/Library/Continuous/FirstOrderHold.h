@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT FirstOrderHold
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT FirstOrderHold : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  FirstOrderHold();
+    /** Default Constructor */
+    FirstOrderHold();
 
-  /** Default Destructor */
-  ~FirstOrderHold();
+    /** Default Destructor */
+    ~FirstOrderHold();
 
-  const std::string& GetInitialoutput() const;
-  void SetInitialoutput(const std::string& value);
+    const std::string& GetInitialoutput() const;
+    void SetInitialoutput(const std::string& value);
 
-  const std::string& GetOutputalgorithm() const;
-  void SetOutputalgorithm(const std::string& value);
+    const std::string& GetOutputalgorithm() const;
+    void SetOutputalgorithm(const std::string& value);
 
-  const std::string& GetErrortolerance() const;
-  void SetErrortolerance(const std::string& value);
+    const std::string& GetErrortolerance() const;
+    void SetErrortolerance(const std::string& value);
 
-  const std::string& GetAllowcontinuousinput() const;
-  void SetAllowcontinuousinput(const std::string& value);
+    const std::string& GetAllowcontinuousinput() const;
+    void SetAllowcontinuousinput(const std::string& value);
 
 private:
-  std::string m_Initialoutput;
+    std::string m_Initialoutput;
 
-  std::string m_Outputalgorithm;
+    std::string m_Outputalgorithm;
 
-  std::string m_Errortolerance;
+    std::string m_Errortolerance;
 
-  std::string m_Allowcontinuousinput;
+    std::string m_Allowcontinuousinput;
 };
 
 SLXIO_ABI_NAMESPACE_END

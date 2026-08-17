@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DataTypeDuplicate
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT DataTypeDuplicate : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  DataTypeDuplicate();
+    /** Default Constructor */
+    DataTypeDuplicate();
 
-  /** Default Destructor */
-  ~DataTypeDuplicate();
+    /** Default Destructor */
+    ~DataTypeDuplicate();
 
-  const std::string& GetNuminputports() const;
-  void SetNuminputports(const std::string& value);
+    const std::string& GetNuminputports() const;
+    void SetNuminputports(const std::string& value);
 
 private:
-  std::string m_Numinputports;
+    std::string m_Numinputports;
 };
 
 SLXIO_ABI_NAMESPACE_END

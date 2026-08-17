@@ -11,40 +11,40 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntegerToBitConverter
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT IntegerToBitConverter : public IBlockParameters,
+                                              public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  IntegerToBitConverter();
+    /** Default Constructor */
+    IntegerToBitConverter();
 
-  /** Default Destructor */
-  ~IntegerToBitConverter();
+    /** Default Destructor */
+    ~IntegerToBitConverter();
 
-  const std::string& GetNbits() const;
-  void SetNbits(const std::string& value);
+    const std::string& GetNbits() const;
+    void SetNbits(const std::string& value);
 
-  const std::string& GetSignedinputvalues() const;
-  void SetSignedinputvalues(const std::string& value);
+    const std::string& GetSignedinputvalues() const;
+    void SetSignedinputvalues(const std::string& value);
 
-  const std::string& GetBitorder() const;
-  void SetBitorder(const std::string& value);
+    const std::string& GetBitorder() const;
+    void SetBitorder(const std::string& value);
 
-  const std::string& GetOutdtype() const;
-  void SetOutdtype(const std::string& value);
+    const std::string& GetOutdtype() const;
+    void SetOutdtype(const std::string& value);
 
 private:
-  std::string m_Nbits;
+    std::string m_Nbits;
 
-  std::string m_Signedinputvalues;
+    std::string m_Signedinputvalues;
 
-  std::string m_Bitorder;
+    std::string m_Bitorder;
 
-  std::string m_Outdtype;
+    std::string m_Outdtype;
 };
 
 SLXIO_ABI_NAMESPACE_END

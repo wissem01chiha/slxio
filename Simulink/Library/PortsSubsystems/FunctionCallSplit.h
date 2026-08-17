@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT FunctionCallSplit
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT FunctionCallSplit : public IBlockParameters,
+                                          public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  FunctionCallSplit();
+    /** Default Constructor */
+    FunctionCallSplit();
 
-  /** Default Destructor */
-  ~FunctionCallSplit();
+    /** Default Destructor */
+    ~FunctionCallSplit();
 
-  const std::string& GetIconshape() const;
-  void SetIconshape(const std::string& value);
+    const std::string& GetIconshape() const;
+    void SetIconshape(const std::string& value);
 
-  const std::string& GetNumoutputports() const;
-  void SetNumoutputports(const std::string& value);
+    const std::string& GetNumoutputports() const;
+    void SetNumoutputports(const std::string& value);
 
-  const std::string& GetOutputportlayout() const;
-  void SetOutputportlayout(const std::string& value);
+    const std::string& GetOutputportlayout() const;
+    void SetOutputportlayout(const std::string& value);
 
 private:
-  std::string m_Iconshape;
+    std::string m_Iconshape;
 
-  std::string m_Numoutputports;
+    std::string m_Numoutputports;
 
-  std::string m_Outputportlayout;
+    std::string m_Outputportlayout;
 };
 
 SLXIO_ABI_NAMESPACE_END

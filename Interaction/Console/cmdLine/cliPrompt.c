@@ -33,21 +33,25 @@
  */
 int printPrompt(int token)
 {
-  /* Retrieve the prompt. It can be different if the pause mode is enabled */
-  const char* prompt = GetCurrentPrompt();
-  const char* tmpPrompt = GetTemporaryPrompt();
+    /* Retrieve the prompt. It can be different if the pause mode is enabled */
+    const char* prompt = GetCurrentPrompt();
+    const char* tmpPrompt = GetTemporaryPrompt();
 
-  if (token == WRITE_PROMPT) {
-    setCharDisplay(DISP_DEFAULT);
-    if (tmpPrompt == '\0') {
-      printf("%s", tmpPrompt);
-    } else {
-      printf("%s", prompt);
+    if (token == WRITE_PROMPT)
+    {
+        setCharDisplay(DISP_DEFAULT);
+        if (tmpPrompt == '\0')
+        {
+            printf("%s", tmpPrompt);
+        }
+        else
+        {
+            printf("%s", prompt);
+        }
+        setCharDisplay(DISP_LAST_SET);
+        fflush(stdout);
     }
-    setCharDisplay(DISP_LAST_SET);
-    fflush(stdout);
-  }
 
-  return strlen(prompt);
-  ;
+    return strlen(prompt);
+    ;
 }

@@ -11,7 +11,8 @@
 #include "SimulinkModel.h"
 #include "SimulinkParserBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -26,10 +27,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkModelParser : public SimulinkParserBase<xmlNodePtr, SimulinkModel>
 {
 public:
-  SimulinkModelParser() = default;
-  HError setInputData(const xmlNodePtr data) override;
-  HError parse() override;
-  ~SimulinkModelParser() = default;
+    SimulinkModelParser() = default;
+    HError setInputData(const xmlNodePtr data) override;
+    HError parse() override;
+    ~SimulinkModelParser() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

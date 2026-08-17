@@ -5,17 +5,19 @@
 #include "APIExportMacro.h"
 #include "DataPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ILogging
+ * @brief
  */
 class SLXIO_APIEXPORT ILogging
 {
 public:
-  ILogging() = default;
-  virtual ~ILogging() = default;
+    ILogging() = default;
+    virtual ~ILogging() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

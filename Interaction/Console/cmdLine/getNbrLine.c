@@ -24,20 +24,20 @@
 /* Get the number of line the string passed take in the window */
 int getNbrLine(wchar_t* string)
 {
-  int promptSize = 0;
+    int promptSize = 0;
 
-  int sizeString = 0;
+    int sizeString = 0;
 
-  int nbrLine = 0;
+    int nbrLine = 0;
 
-  promptSize = printPrompt(NOWRITE_PROMPT);
-  sizeString = wcslen(string);
-  /*
-   * Number of line is equal to :
-   * the size of the command line plus the size of the prompt
-   * divided by the number of column in the window
-   * Plus one.
-   */
-  nbrLine = 1 + (sizeString + promptSize + 1) / tgetnum("co");
-  return nbrLine;
+    promptSize = printPrompt(NOWRITE_PROMPT);
+    sizeString = wcslen(string);
+    /*
+     * Number of line is equal to :
+     * the size of the command line plus the size of the prompt
+     * divided by the number of column in the window
+     * Plus one.
+     */
+    nbrLine = 1 + (sizeString + promptSize + 1) / tgetnum("co");
+    return nbrLine;
 }

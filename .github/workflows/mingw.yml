@@ -1,4 +1,5 @@
 name: MinGW
+
 on:
   push:
   pull_request:

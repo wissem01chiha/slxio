@@ -29,39 +29,43 @@ add_module(
     Version.cxx
     SimulinkVersion.cxx
     TimeStamp.cxx
+    Timer.cxx
     Logger.cxx
-    ErrorManager.cxx
     ErrorLogMessage.cxx
     FileLogger.cxx
     BackgroundLogger.cxx
     BufferedLogger.cxx
-    TimerHandler.cxx
-    PathHandler.cxx
+    BufferedErrorHandler.cxx
+    BufferedLogger.cxx
+    IObservable.cxx
   MODULE_HEADERS
     ABINamespaceMacro.h
     APIExportMacro.h
     Compiler.h
     Version.h
     TimeStamp.h
+    Timer.h
     SimulinkVersion.h 
     SimulinkVersionRelease.h
     DataType.h
     ILogger.h
     Logger.h
     BackgroundLogger.h
-    ErrorHandlerMacro.h
-    ErrorHandler.h
+    BufferedLogger.h
+    ErrorMacro.h
+    HErrorHelper.h
     CommonECH.h
-    ErrorManager.h
     ILogMessage.h
     FileLogger.h
     BufferedLogger.h
-    TimerHandler.h
-    PathHandler.h
+    BufferedErrorHandler.h
+    IObserver.h
+    IObservable.h
+    IObservationMessage.h
   MODULE_PCH_HEADERS
     CorePCH.h
   MODULE_SOURCES
-    ErrorHandler.cxx
+    HErrorHelper.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR
@@ -71,11 +75,12 @@ add_module(
     TestVersion.cxx
     TestLogger.cxx
     TestSimulinkVersion.cxx
-    TestErrorHandler.cxx
-    TestErrorManager.cxx
+    TestHErrorHelper.cxx
     TestErrorLogger.cxx
     TestFileLogger.cxx
     TestBackgroundLogger.cxx
+    TestBufferedLogger.cxx
+    TestBufferedErrorHandler.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     loguru

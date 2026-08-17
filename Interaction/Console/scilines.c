@@ -56,56 +56,60 @@
 /*--------------------------------------------------------------------------*/
 int scilines(int nblines, int nbcolumns)
 {
-  setConsoleLines(nblines);
-  setConsoleWidth(nbcolumns);
-  return 0;
+    setConsoleLines(nblines);
+    setConsoleWidth(nbcolumns);
+    return 0;
 }
 /*--------------------------------------------------------------------------*/
 int scilinesdefault(void)
 {
 #ifndef _MSC_VER
 
-  char tc_buf[1024]; /* holds termcap buffer */
-  if (tgetent(tc_buf, getenv("TERM")) == 1) {
-    setConsoleLines(
-      tgetnum("li"));               /* retrieve from the term info the number
-                                                                            of lines */
-    setConsoleWidth(tgetnum("co")); /* And the number of columns */
-  } else {
-    /* Haven't been able to detect the terminal */
-    setConsoleLines(DEFAULT_NUMBERS_LINES);
-    setConsoleWidth(DEFAULT_NUMBERS_COLUMNS);
-  }
+    char tc_buf[1024]; /* holds termcap buffer */
+    if (tgetent(tc_buf, getenv("TERM")) == 1)
+    {
+        setConsoleLines(tgetnum("li")); /* retrieve from the term info the
+                                           number of lines */
+        setConsoleWidth(tgetnum("co")); /* And the number of columns */
+    }
+    else
+    {
+        /* Haven't been able to detect the terminal */
+        setConsoleLines(DEFAULT_NUMBERS_LINES);
+        setConsoleWidth(DEFAULT_NUMBERS_COLUMNS);
+    }
 
 #else
-  if ((getScilabMode() != SCILAB_STD) && (getScilabMode() != SCILAB_API)) {
-    /* -NW or -NWNI mode */
-    int X = getXConsoleScreenSize();
-    int Y = getYConsoleScreenSize();
+    if ((getScilabMode() != SCILAB_STD) && (getScilabMode() != SCILAB_API))
+    {
+        /* -NW or -NWNI mode */
+        int X = getXConsoleScreenSize();
+        int Y = getYConsoleScreenSize();
 
-    if (X < DEFAULT_NUMBERS_COLUMNS) {
-      X = DEFAULT_NUMBERS_COLUMNS;
+        if (X < DEFAULT_NUMBERS_COLUMNS)
+        {
+            X = DEFAULT_NUMBERS_COLUMNS;
+        }
+        if (Y < DEFAULT_NUMBERS_LINES)
+        {
+            Y = DEFAULT_NUMBERS_LINES;
+        }
+        setConsoleWidth(X);
+        setConsoleLines(Y);
     }
-    if (Y < DEFAULT_NUMBERS_LINES) {
-      Y = DEFAULT_NUMBERS_LINES;
+    else
+    {
+        setConsoleLines(DEFAULT_NUMBERS_LINES);
+        setConsoleWidth(DEFAULT_NUMBERS_COLUMNS);
     }
-    setConsoleWidth(X);
-    setConsoleLines(Y);
-  } else {
-    setConsoleLines(DEFAULT_NUMBERS_LINES);
-    setConsoleWidth(DEFAULT_NUMBERS_COLUMNS);
-  }
 #endif
-  return 0;
+    return 0;
 }
 /*--------------------------------------------------------------------------*/
 int C2F(scilines)(int* nblines, int* nbcolumns)
 {
-  return scilines(*nblines, *nbcolumns);
+    return scilines(*nblines, *nbcolumns);
 }
 /*--------------------------------------------------------------------------*/
-int C2F(scilinesdefault)(void)
-{
-  return scilinesdefault();
-}
+int C2F(scilinesdefault)(void) { return scilinesdefault(); }
 /*--------------------------------------------------------------------------*/

@@ -1,41 +1,62 @@
 #include "XmlCharDataObject.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-XmlCharDataObject* XmlCharDataObject::New()
+XmlCharDataObject* XmlCharDataObject::New() { return new XmlCharDataObject(); }
+
+void XmlCharDataObject::Initialize(void* implDataObject)
 {
-  return new XmlCharDataObject();
+
+    if (implDataObject != nullptr)
+    {
+        m_implDataObject = SLXIO_STATIC_CAST(xmlChar*, implDataObject);
+    }
 }
 
-bool XmlCharDataObject::Empty()
+bool XmlCharDataObject::Empty() const { return m_implDataObject == nullptr; }
+
+bool XmlCharDataObject::operator==(const IDataObject& other) const
 {
-  return ImplDataObject == nullptr;
+    if (m_implDataObject == nullptr || other.GetImplDataObject() == nullptr)
+    {
+        return m_implDataObject == other.GetImplDataObject();
+    }
+    if (GetDataType() != other.GetDataType())
+    {
+        return false;
+    }
+    return std::string(reinterpret_cast<const char*>(m_implDataObject)) ==
+           std::string(
+               reinterpret_cast<const char*>(other.GetImplDataObject()));
 }
 
-bool XmlCharDataObject::operator==(const IDataObject& other)
-{
-  return false;
-}
-
-void* XmlCharDataObject::GetImplDataObject() const
-{
-  return ImplDataObject;
-}
+void* XmlCharDataObject::GetImplDataObject() const { return m_implDataObject; }
 
 std::string XmlCharDataObject::ToString() const
 {
-  return std::string();
+
+    if (m_implDataObject == nullptr)
+    {
+        return std::string("");
+    }
+    return std::string(reinterpret_cast<const char*>(m_implDataObject));
 }
 
 DataType XmlCharDataObject::GetDataType() const
 {
-  return DataType();
+    return DataType::SLXIO_TYPE_LIBXML_XMLCHAR;
 }
 
-XmlCharDataObject::XmlCharDataObject()
-  : m_implDataObject(nullptr)
+XmlCharDataObject::XmlCharDataObject() : m_implDataObject(nullptr) {}
+
+XmlCharDataObject::~XmlCharDataObject()
 {
+    if (m_implDataObject)
+    {
+        m_implDataObject = nullptr;
+    }
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ToNonvirtualBus
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ToNonvirtualBus : public IBlockParameters,
+                                        public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ToNonvirtualBus();
+    /** Default Constructor */
+    ToNonvirtualBus();
 
-  /** Default Destructor */
-  ~ToNonvirtualBus();
+    /** Default Destructor */
+    ~ToNonvirtualBus();
 
-  const std::string& GetConversionoutput() const;
-  void SetConversionoutput(const std::string& value);
+    const std::string& GetConversionoutput() const;
+    void SetConversionoutput(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
-  const std::string& GetOverrideopt() const;
-  void SetOverrideopt(const std::string& value);
+    const std::string& GetOverrideopt() const;
+    void SetOverrideopt(const std::string& value);
 
 private:
-  std::string m_Conversionoutput;
+    std::string m_Conversionoutput;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 
-  std::string m_Overrideopt;
+    std::string m_Overrideopt;
 };
 
 SLXIO_ABI_NAMESPACE_END

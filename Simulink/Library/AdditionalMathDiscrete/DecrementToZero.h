@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DecrementToZero
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT DecrementToZero : public IBlockParameters,
+                                        public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  DecrementToZero();
+    /** Default Constructor */
+    DecrementToZero();
 
-  /** Default Destructor */
-  ~DecrementToZero();
+    /** Default Destructor */
+    ~DecrementToZero();
 
 private:
 };

@@ -51,7 +51,7 @@ out/
 vcpkg_installed/
 
 # vscode folders
-.vscode/
+#.vscode/
 
 # jekyll build folder
 _site/

@@ -27,7 +27,8 @@ static_assert(sizeof(Float32) == 4, "Float32 must be 4 bytes");
 static_assert(sizeof(Float64) == 8, "Float64 must be 8 bytes");
 
 /* Smallest number to avoid dividing by zero */
-namespace slxio {
+namespace slxio
+{
 constexpr Float32 FloatEps = std::numeric_limits<Float32>::epsilon();
 constexpr Float64 Float64Eps = std::numeric_limits<Float64>::epsilon();
 

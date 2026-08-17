@@ -1,112 +1,71 @@
 #include "EditorSettings.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool EditorSettings::getShowPortDataTypes()
+bool EditorSettings::GetShowPortDataTypes() { return m_showPortDataTypes; }
+
+bool EditorSettings::GetSampleTimeColors() { return m_sampleTimeColors; }
+
+bool EditorSettings::GetShowLineDimensions() { return m_showLineDimensions; }
+
+bool EditorSettings::GetShowPortUnits() { return m_showPortUnits; }
+
+bool EditorSettings::GetShowLoopsOnError() { return m_showLoopsOnError; }
+
+bool EditorSettings::GetShowStorageClass() { return m_showStorageClass; }
+
+bool EditorSettings::GetShowTestPointIcons() { return m_showTestPointIcons; }
+
+bool EditorSettings::GetShowSignalResolutionIcons()
 {
-  return ShowPortDataTypes;
+    return m_showSignalResolutionIcons;
 }
 
-bool EditorSettings::getSampleTimeColors()
+bool EditorSettings::GetShowViewerIcons() { return m_showViewerIcons; }
+
+bool EditorSettings::GetShowVisualizeInsertedRTB()
 {
-  return SampleTimeColors;
+    return m_showVisualizeInsertedRTB;
 }
 
-bool EditorSettings::getShowLineDimensions()
+bool EditorSettings::GetShowMarkup() { return m_showMarkup; }
+
+bool EditorSettings::GetBlockNameDataTip() { return m_blockNameDataTip; }
+
+bool EditorSettings::GetBlockParametersDataTip()
 {
-  return ShowLineDimensions;
+    return m_blockParametersDataTip;
 }
 
-bool EditorSettings::getShowPortUnits()
+bool EditorSettings::GetBlockDescriptionStringDataTip()
 {
-  return ShowPortUnits;
+    return m_blockDescriptionStringDataTip;
 }
 
-bool EditorSettings::getShowLoopsOnError()
+bool EditorSettings::GetBlockVariantConditionDataTip()
 {
-  return ShowLoopsOnError;
+    return m_blockVariantConditionDataTip;
 }
 
-bool EditorSettings::getShowStorageClass()
+bool EditorSettings::GetToolBar() { return m_toolBar; }
+
+bool EditorSettings::GetStatusBar() { return m_statusBar; }
+
+bool EditorSettings::GetBrowserShowLibraryLinks()
 {
-  return ShowStorageClass;
+    return m_browserShowLibraryLinks;
 }
 
-bool EditorSettings::getShowTestPointIcons()
+bool EditorSettings::GetFunctionConnectors() { return m_functionConnectors; }
+
+bool EditorSettings::GetBrowserLookUnderMasks()
 {
-  return ShowTestPointIcons;
+    return m_browserLookUnderMasks;
 }
 
-bool EditorSettings::getShowSignalResolutionIcons()
-{
-  return ShowSignalResolutionIcons;
-}
-
-bool EditorSettings::getShowViewerIcons()
-{
-  return ShowViewerIcons;
-}
-
-bool EditorSettings::getShowVisualizeInsertedRTB()
-{
-  return ShowVisualizeInsertedRTB;
-}
-
-bool EditorSettings::getShowMarkup()
-{
-  return ShowMarkup;
-}
-
-bool EditorSettings::getBlockNameDataTip()
-{
-  return BlockNameDataTip;
-}
-
-bool EditorSettings::getBlockParametersDataTip()
-{
-  return BlockParametersDataTip;
-}
-
-bool EditorSettings::getBlockDescriptionStringDataTip()
-{
-  return BlockDescriptionStringDataTip;
-}
-
-bool EditorSettings::getBlockVariantConditionDataTip()
-{
-  return BlockVariantConditionDataTip;
-}
-
-bool EditorSettings::getToolBar()
-{
-  return ToolBar;
-}
-
-bool EditorSettings::getStatusBar()
-{
-  return StatusBar;
-}
-
-bool EditorSettings::getBrowserShowLibraryLinks()
-{
-  return BrowserShowLibraryLinks;
-}
-
-bool EditorSettings::getFunctionConnectors()
-{
-  return FunctionConnectors;
-}
-
-bool EditorSettings::getBrowserLookUnderMasks()
-{
-  return BrowserLookUnderMasks;
-}
-
-bool EditorSettings::getMultiThreadCoSim()
-{
-  return MultiThreadCoSim;
-}
+bool EditorSettings::GetMultiThreadCoSim() { return m_multiThreadCoSim; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

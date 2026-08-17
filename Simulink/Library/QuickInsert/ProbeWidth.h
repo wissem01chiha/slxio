@@ -11,60 +11,60 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ProbeWidth
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ProbeWidth : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ProbeWidth();
+    /** Default Constructor */
+    ProbeWidth();
 
-  /** Default Destructor */
-  ~ProbeWidth();
+    /** Default Destructor */
+    ~ProbeWidth();
 
-  const std::string& GetProbewidth() const;
-  void SetProbewidth(const std::string& value);
+    const std::string& GetProbewidth() const;
+    void SetProbewidth(const std::string& value);
 
-  const std::string& GetProbesampletime() const;
-  void SetProbesampletime(const std::string& value);
+    const std::string& GetProbesampletime() const;
+    void SetProbesampletime(const std::string& value);
 
-  const std::string& GetProbecomplexsignal() const;
-  void SetProbecomplexsignal(const std::string& value);
+    const std::string& GetProbecomplexsignal() const;
+    void SetProbecomplexsignal(const std::string& value);
 
-  const std::string& GetProbesignaldimensions() const;
-  void SetProbesignaldimensions(const std::string& value);
+    const std::string& GetProbesignaldimensions() const;
+    void SetProbesignaldimensions(const std::string& value);
 
-  const std::string& GetProbewidthdatatype() const;
-  void SetProbewidthdatatype(const std::string& value);
+    const std::string& GetProbewidthdatatype() const;
+    void SetProbewidthdatatype(const std::string& value);
 
-  const std::string& GetProbesampletimedatatype() const;
-  void SetProbesampletimedatatype(const std::string& value);
+    const std::string& GetProbesampletimedatatype() const;
+    void SetProbesampletimedatatype(const std::string& value);
 
-  const std::string& GetProbecomplexitydatatype() const;
-  void SetProbecomplexitydatatype(const std::string& value);
+    const std::string& GetProbecomplexitydatatype() const;
+    void SetProbecomplexitydatatype(const std::string& value);
 
-  const std::string& GetProbedimensionsdatatype() const;
-  void SetProbedimensionsdatatype(const std::string& value);
+    const std::string& GetProbedimensionsdatatype() const;
+    void SetProbedimensionsdatatype(const std::string& value);
 
 private:
-  std::string m_Probewidth;
+    std::string m_Probewidth;
 
-  std::string m_Probesampletime;
+    std::string m_Probesampletime;
 
-  std::string m_Probecomplexsignal;
+    std::string m_Probecomplexsignal;
 
-  std::string m_Probesignaldimensions;
+    std::string m_Probesignaldimensions;
 
-  std::string m_Probewidthdatatype;
+    std::string m_Probewidthdatatype;
 
-  std::string m_Probesampletimedatatype;
+    std::string m_Probesampletimedatatype;
 
-  std::string m_Probecomplexitydatatype;
+    std::string m_Probecomplexitydatatype;
 
-  std::string m_Probedimensionsdatatype;
+    std::string m_Probedimensionsdatatype;
 };
 
 SLXIO_ABI_NAMESPACE_END

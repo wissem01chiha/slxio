@@ -10,7 +10,8 @@
 
 #include <string>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,8 +21,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkColor final
 {
 public:
-  std::string name;
-  std::string hexValue;
+    std::string name;
+    std::string hexValue;
 };
 
 SLXIO_ABI_NAMESPACE_END

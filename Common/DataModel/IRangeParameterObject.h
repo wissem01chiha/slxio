@@ -9,7 +9,8 @@
 #include "DataModelPCH.h"
 #include "IParameterObject.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,8 +21,8 @@ template <typename T>
 class SLXIO_APIEXPORT IRangeParameterObject : public IParameterObject<T>
 {
 public:
-  virtual T& GetMin() = 0;
-  virtual T& GetMax() = 0;
+    virtual T& GetMin() = 0;
+    virtual T& GetMax() = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

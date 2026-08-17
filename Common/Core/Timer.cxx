@@ -1,53 +1,52 @@
 #include "Timer.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Float32 DurationToSeconds(const Timer::Clock::duration& d)
-{
-  return std::chrono::duration_cast<std::chrono::duration<Float32>>(d).count();
-}
+Timer::Timer() = default;
+Timer::~Timer() = default;
 
 void Timer::Start()
 {
-  if (!Running) {
-    StartTime = Clock::now();
-    Running = true;
-  }
+    m_startTime = Clock::now();
+    m_running = true;
+    NotifyState("Timer started");
 }
 
 void Timer::Stop()
 {
-  if (Running) {
-    Accumulated += Clock::now() - StartTime;
-    Running = false;
-  }
+    if (m_running)
+    {
+        m_accumulated += Clock::now() - m_startTime;
+        m_running = false;
+        NotifyState("Timer stopped");
+    }
 }
 
 void Timer::Reset()
 {
-  Accumulated = Clock::duration::zero();
-  Running = false;
+    m_running = false;
+    m_accumulated = Clock::duration::zero();
+    NotifyState("Timer reset");
 }
 
-bool Timer::IsRunning() const
-{
-  return Running;
-}
+bool Timer::IsRunning() const { return m_running; }
 
 Float32 Timer::Precision() const
 {
-  return DurationToSeconds(Clock::duration(1));
+    return static_cast<Float32>(Clock::period::num) / Clock::period::den;
 }
 
 Float32 Timer::Time()
 {
-  if (Running) {
-    auto now = Clock::now();
-    return DurationToSeconds(Accumulated + (now - StartTime));
-  }
-  return DurationToSeconds(Accumulated);
+    auto elapsed = m_accumulated;
+    if (m_running)
+    {
+        elapsed += Clock::now() - m_startTime;
+    }
+    return std::chrono::duration<Float32>(elapsed).count();
 }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio

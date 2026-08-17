@@ -11,45 +11,45 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ModelInfo
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ModelInfo : public IBlockParameters,
+                                  public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ModelInfo();
+    /** Default Constructor */
+    ModelInfo();
 
-  /** Default Destructor */
-  ~ModelInfo();
+    /** Default Destructor */
+    ~ModelInfo();
 
-  const std::string& GetFrame() const;
-  void SetFrame(const std::string& value);
+    const std::string& GetFrame() const;
+    void SetFrame(const std::string& value);
 
-  const std::string& GetDisplaystringwithtags() const;
-  void SetDisplaystringwithtags(const std::string& value);
+    const std::string& GetDisplaystringwithtags() const;
+    void SetDisplaystringwithtags(const std::string& value);
 
-  const std::string& GetMaskdisplaystring() const;
-  void SetMaskdisplaystring(const std::string& value);
+    const std::string& GetMaskdisplaystring() const;
+    void SetMaskdisplaystring(const std::string& value);
 
-  const std::string& GetHorizontaltextalignment() const;
-  void SetHorizontaltextalignment(const std::string& value);
+    const std::string& GetHorizontaltextalignment() const;
+    void SetHorizontaltextalignment(const std::string& value);
 
-  const std::string& GetLeftalignmentvalue() const;
-  void SetLeftalignmentvalue(const std::string& value);
+    const std::string& GetLeftalignmentvalue() const;
+    void SetLeftalignmentvalue(const std::string& value);
 
 private:
-  std::string m_Frame;
+    std::string m_Frame;
 
-  std::string m_Displaystringwithtags;
+    std::string m_Displaystringwithtags;
 
-  std::string m_Maskdisplaystring;
+    std::string m_Maskdisplaystring;
 
-  std::string m_Horizontaltextalignment;
+    std::string m_Horizontaltextalignment;
 
-  std::string m_Leftalignmentvalue;
+    std::string m_Leftalignmentvalue;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -12,77 +12,79 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class StateflowDeclContainerBase
 {
 private:
-  final IdentityHashSet<StateflowData> dates =
-    new IdentityHashSet<StateflowData>();
+    final IdentityHashSet<StateflowData> dates =
+        new IdentityHashSet<StateflowData>();
 
-  /** Set of Stateflow events. */
+    /** Set of Stateflow events. */
 private
-  final IdentityHashSet<StateflowEvent> events =
-    new IdentityHashSet<StateflowEvent>();
+    final IdentityHashSet<StateflowEvent> events =
+        new IdentityHashSet<StateflowEvent>();
 
-  /** Create new declaration container. */
-  /* package */ StateflowDeclContainerBase() { super(); }
+    /** Create new declaration container. */
+    /* package */ StateflowDeclContainerBase() { super(); }
 
-  /** Copy constructor for deep cloning. */
+    /** Copy constructor for deep cloning. */
       StateflowDeclContainerBase(
 			StateflowDeclContainerBase<? extends P> orig)
       {
-        super(orig);
+          super(orig);
 
-        for (StateflowData data : orig.dates) {
-          addData(data.deepClone());
-        }
+          for (StateflowData data : orig.dates)
+          {
+              addData(data.deepClone());
+          }
 
-        for (StateflowEvent event : orig.events) {
-          addEvent(event.deepClone());
-        }
+          for (StateflowEvent event : orig.events)
+          {
+              addEvent(event.deepClone());
+          }
       }
 
       /** Add Stateflow data. */
-    public
+  public
       void addData(StateflowData data)
       {
-        dates.AddElement(data);
-        data.setParent(this);
+          dates.AddElement(data);
+          data.setParent(this);
       }
 
       /** Add Stateflow event. */
-    public
+  public
       void addEvent(StateflowEvent event)
       {
-        events.AddElement(event);
-        event.setParent(this);
+          events.AddElement(event);
+          event.setParent(this);
       }
 
       /** Get Stateflow data objects. */
-    public
+  public
       UnmodifiableSet<StateflowData> getData()
       {
-        return CollectionUtils.asUnmodifiable(dates);
+          return CollectionUtils.asUnmodifiable(dates);
       }
 
       /** Get Stateflow events objects. */
-    public
+  public
       UnmodifiableSet<StateflowEvent> getEvents()
       {
-        return CollectionUtils.asUnmodifiable(events);
+          return CollectionUtils.asUnmodifiable(events);
       }
 
       /** Remove Stateflow data object. */
       /* package */ void removeData(StateflowData data)
       {
-        CCSMPre.isTrue(data.getParent() == this,
-                       "Data object must belong to container to be removed.");
-        dates.RemoveElement(data);
-        data.setParent(null);
+          CCSMPre.isTrue(data.getParent() == this,
+                         "Data object must belong to container to be removed.");
+          dates.RemoveElement(data);
+          data.setParent(null);
       }
 
       void removeEvent(StateflowEvent event)
       {
-        CCSMPre.isTrue(event.getParent() == this,
-                       "Event must belong to container to be removed.");
-        events.RemoveElement(event);
-        event.setParent(null);
+          CCSMPre.isTrue(event.getParent() == this,
+                         "Event must belong to container to be removed.");
+          events.RemoveElement(event);
+          event.setParent(null);
       }
 }
 

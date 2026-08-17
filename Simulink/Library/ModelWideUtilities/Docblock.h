@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Docblock
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Docblock : public IBlockParameters,
+                                 public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Docblock();
+    /** Default Constructor */
+    Docblock();
 
-  /** Default Destructor */
-  ~Docblock();
+    /** Default Destructor */
+    ~Docblock();
 
-  const std::string& GetEcoderflag() const;
-  void SetEcoderflag(const std::string& value);
+    const std::string& GetEcoderflag() const;
+    void SetEcoderflag(const std::string& value);
 
-  const std::string& GetDocumenttype() const;
-  void SetDocumenttype(const std::string& value);
+    const std::string& GetDocumenttype() const;
+    void SetDocumenttype(const std::string& value);
 
 private:
-  std::string m_Ecoderflag;
+    std::string m_Ecoderflag;
 
-  std::string m_Documenttype;
+    std::string m_Documenttype;
 };
 
 SLXIO_ABI_NAMESPACE_END

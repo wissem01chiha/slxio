@@ -11,25 +11,24 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Send
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Send : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Send();
+    /** Default Constructor */
+    Send();
 
-  /** Default Destructor */
-  ~Send();
+    /** Default Destructor */
+    ~Send();
 
-  const std::string& GetShowenableport() const;
-  void SetShowenableport(const std::string& value);
+    const std::string& GetShowenableport() const;
+    void SetShowenableport(const std::string& value);
 
 private:
-  std::string m_Showenableport;
+    std::string m_Showenableport;
 };
 
 SLXIO_ABI_NAMESPACE_END

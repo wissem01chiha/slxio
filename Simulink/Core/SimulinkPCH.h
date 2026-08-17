@@ -8,5 +8,8 @@
 #include <cstring>
 #include <memory>
 #include <sstream>
+#include <string>
+#include <unordered_map>
+#include <vector>
 
 #endif // SIMULINKPCH_H

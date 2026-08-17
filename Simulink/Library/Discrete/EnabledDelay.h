@@ -11,110 +11,110 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT EnabledDelay
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT EnabledDelay : public IBlockParameters,
+                                     public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  EnabledDelay();
+    /** Default Constructor */
+    EnabledDelay();
 
-  /** Default Destructor */
-  ~EnabledDelay();
+    /** Default Destructor */
+    ~EnabledDelay();
 
-  const std::string& GetDelaylengthsource() const;
-  void SetDelaylengthsource(const std::string& value);
+    const std::string& GetDelaylengthsource() const;
+    void SetDelaylengthsource(const std::string& value);
 
-  const std::string& GetDelaylength() const;
-  void SetDelaylength(const std::string& value);
+    const std::string& GetDelaylength() const;
+    void SetDelaylength(const std::string& value);
 
-  const std::string& GetDelaylengthupperlimit() const;
-  void SetDelaylengthupperlimit(const std::string& value);
+    const std::string& GetDelaylengthupperlimit() const;
+    void SetDelaylengthupperlimit(const std::string& value);
 
-  const std::string& GetInitialconditionsource() const;
-  void SetInitialconditionsource(const std::string& value);
+    const std::string& GetInitialconditionsource() const;
+    void SetInitialconditionsource(const std::string& value);
 
-  const std::string& GetInitialcondition() const;
-  void SetInitialcondition(const std::string& value);
+    const std::string& GetInitialcondition() const;
+    void SetInitialcondition(const std::string& value);
 
-  const std::string& GetExternalreset() const;
-  void SetExternalreset(const std::string& value);
+    const std::string& GetExternalreset() const;
+    void SetExternalreset(const std::string& value);
 
-  const std::string& GetShowenableport() const;
-  void SetShowenableport(const std::string& value);
+    const std::string& GetShowenableport() const;
+    void SetShowenableport(const std::string& value);
 
-  const std::string& GetPreventdirectfeedthrough() const;
-  void SetPreventdirectfeedthrough(const std::string& value);
+    const std::string& GetPreventdirectfeedthrough() const;
+    void SetPreventdirectfeedthrough(const std::string& value);
 
-  const std::string& GetDiagnosticfordelaylength() const;
-  void SetDiagnosticfordelaylength(const std::string& value);
+    const std::string& GetDiagnosticfordelaylength() const;
+    void SetDiagnosticfordelaylength(const std::string& value);
 
-  const std::string& GetRemovedelaylengthcheckingeneratedcode() const;
-  void SetRemovedelaylengthcheckingeneratedcode(const std::string& value);
+    const std::string& GetRemovedelaylengthcheckingeneratedcode() const;
+    void SetRemovedelaylengthcheckingeneratedcode(const std::string& value);
 
-  const std::string& GetInputprocessing() const;
-  void SetInputprocessing(const std::string& value);
+    const std::string& GetInputprocessing() const;
+    void SetInputprocessing(const std::string& value);
 
-  const std::string& GetUsecircularbuffer() const;
-  void SetUsecircularbuffer(const std::string& value);
+    const std::string& GetUsecircularbuffer() const;
+    void SetUsecircularbuffer(const std::string& value);
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
-  const std::string& GetStatename() const;
-  void SetStatename(const std::string& value);
+    const std::string& GetStatename() const;
+    void SetStatename(const std::string& value);
 
-  const std::string& GetStatemustresolvetosignalobject() const;
-  void SetStatemustresolvetosignalobject(const std::string& value);
+    const std::string& GetStatemustresolvetosignalobject() const;
+    void SetStatemustresolvetosignalobject(const std::string& value);
 
-  const std::string& GetStatesignalobject() const;
-  void SetStatesignalobject(const std::string& value);
+    const std::string& GetStatesignalobject() const;
+    void SetStatesignalobject(const std::string& value);
 
-  const std::string& GetStatestorageclass() const;
-  void SetStatestorageclass(const std::string& value);
+    const std::string& GetStatestorageclass() const;
+    void SetStatestorageclass(const std::string& value);
 
-  const std::string& GetCodegenstatestoragetypequalifier() const;
-  void SetCodegenstatestoragetypequalifier(const std::string& value);
+    const std::string& GetCodegenstatestoragetypequalifier() const;
+    void SetCodegenstatestoragetypequalifier(const std::string& value);
 
 private:
-  std::string m_Delaylengthsource;
+    std::string m_Delaylengthsource;
 
-  std::string m_Delaylength;
+    std::string m_Delaylength;
 
-  std::string m_Delaylengthupperlimit;
+    std::string m_Delaylengthupperlimit;
 
-  std::string m_Initialconditionsource;
+    std::string m_Initialconditionsource;
 
-  std::string m_Initialcondition;
+    std::string m_Initialcondition;
 
-  std::string m_Externalreset;
+    std::string m_Externalreset;
 
-  std::string m_Showenableport;
+    std::string m_Showenableport;
 
-  std::string m_Preventdirectfeedthrough;
+    std::string m_Preventdirectfeedthrough;
 
-  std::string m_Diagnosticfordelaylength;
+    std::string m_Diagnosticfordelaylength;
 
-  std::string m_Removedelaylengthcheckingeneratedcode;
+    std::string m_Removedelaylengthcheckingeneratedcode;
 
-  std::string m_Inputprocessing;
+    std::string m_Inputprocessing;
 
-  std::string m_Usecircularbuffer;
+    std::string m_Usecircularbuffer;
 
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 
-  std::string m_Statename;
+    std::string m_Statename;
 
-  std::string m_Statemustresolvetosignalobject;
+    std::string m_Statemustresolvetosignalobject;
 
-  std::string m_Statesignalobject;
+    std::string m_Statesignalobject;
 
-  std::string m_Statestorageclass;
+    std::string m_Statestorageclass;
 
-  std::string m_Codegenstatestoragetypequalifier;
+    std::string m_Codegenstatestoragetypequalifier;
 };
 
 SLXIO_ABI_NAMESPACE_END

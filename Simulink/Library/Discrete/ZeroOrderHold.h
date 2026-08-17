@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ZeroOrderHold
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ZeroOrderHold : public IBlockParameters,
+                                      public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ZeroOrderHold();
+    /** Default Constructor */
+    ZeroOrderHold();
 
-  /** Default Destructor */
-  ~ZeroOrderHold();
+    /** Default Destructor */
+    ~ZeroOrderHold();
 
-  const std::string& GetSampletime() const;
-  void SetSampletime(const std::string& value);
+    const std::string& GetSampletime() const;
+    void SetSampletime(const std::string& value);
 
 private:
-  std::string m_Sampletime;
+    std::string m_Sampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

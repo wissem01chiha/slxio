@@ -12,44 +12,45 @@
 #include "ILogger.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class ISignalObject
  * @brief Abstract Interface for all signal types
  */
-template <typename T>
-class SLXIO_APIEXPORT ISignalObject
+template <typename T> class SLXIO_APIEXPORT ISignalObject
 {
 public:
-  virtual ISignalObject* New() = 0;
-  virtual void Initialize(T& value) = 0;
+    virtual ISignalObject* New() = 0;
+    virtual void Initialize(T& value) = 0;
 
-  virtual void SetData(const std::vector<T>& data) = 0;
-  virtual const std::vector<T>& GetData() const = 0;
-  virtual std::vector<T>& GetData() = 0;
-  virtual DataType GetDataType() = 0;
-  virtual size_t Size() const = 0;
-  virtual bool Empty() const = 0;
+    virtual void SetData(const std::vector<T>& data) = 0;
+    virtual const std::vector<T>& GetData() const = 0;
+    virtual std::vector<T>& GetData() = 0;
+    virtual DataType GetDataType() = 0;
+    virtual size_t Size() const = 0;
+    virtual bool Empty() const = 0;
 
-  HError SetLogger(const ILogger* logger)
-  {
-    if (logger == nullptr) {
-      return E_ILOGGER_NULLPTR_RECEIVED;
-    }
-    m_logger = logger;
-    return E_OK;
-  };
-  const ILogger* GetLogger() { return m_logger; };
+    HError SetLogger(const ILogger* logger)
+    {
+        if (logger == nullptr)
+        {
+            return E_ILOGGER_NULLPTR_RECEIVED;
+        }
+        m_logger = logger;
+        return E_OK;
+    };
+    const ILogger* GetLogger() { return m_logger; };
 
-  ISignalObject();
+    ISignalObject();
 
-  virtual ~ISignalObject() = default;
+    virtual ~ISignalObject() = default;
 
 protected:
-  const ILogger* m_logger = nullptr;
-  std::vector<T> m_buffer;
+    const ILogger* m_logger = nullptr;
+    std::vector<T> m_buffer;
 
 private:
 };

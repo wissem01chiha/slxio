@@ -27,6 +27,9 @@ add_module(
     JsonDataObject.cxx
     XmlDocDataObject.cxx
     XmlNodeDataObject.cxx
+    IParameterDataObjectBase.cxx
+    XmlCharDataObject.cxx
+    XmlNodeDataObject.cxx
   MODULE_HEADERS
     IDataObject.h
     JsonDataObject.h
@@ -34,13 +37,14 @@ add_module(
     ISignalObject.h
     DataModelECH.h
     ISignalDataObject.h
-    IDataObjectHandler.h
     XmlDocDataObject.h
     XmlNodeDataObject.h
     IParameterizedObject.h
     IMutableParameterObject.h
     IRangeParameterObject.h
     IParameterDataObjectBase.h
+    XmlCharDataObject.h
+    XmlNodeDataObject.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
@@ -49,9 +53,12 @@ add_module(
   MODULE_TEST_DATA_SOURCE_DIR
     Testing/Data
   MODULE_TEST_DATA_SOURCES
+    Testing/Data/sample.xml
   MODULE_TEST_SOURCES
     TestJsonDataObject.cxx
     TestXmlDocDataObject.cxx
+    TestXmlCharDataObject.cxx
+    TestXmlNodeDataObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore

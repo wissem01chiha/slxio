@@ -23,23 +23,47 @@ add_module(
   MODULE_INSTALL_LICENSES
   MODULE_INSTALL_DOCS
   MODULE_CLASSES
-    SimulinkElementBase.cxx
+    ISimulinkElement.cxx
+    SimulinkDataType.cxx
+    SimulinkBlockType.cxx
+    SimulinkParameterInformation.cxx
+    SimulinkParameter.cxx
+    SimulinkArray.cxx
+    SimulinkObject.cxx
   MODULE_HEADERS
     SimulinkECH.h
-    SimulinkElementBase.h
+    ISimulinkElement.h
+    SimulinkDataType.h
+    SimulinkBlockType.h
+    SimulinkParameterInformation.h
+    SimulinkParameter.h
+    SimulinkArray.h
+    SimulinkObject.h
+    SimulinkPortType.h
+    SimulinkModelType.h
+    SimulinkBlockType.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES
+    SimulinkPortType.cxx
+    SimulinkModelType.cxx
+    SimulinkBlockType.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+    TestSimulinkArray.cxx
+    TestSimulinkParameter.cxx
+    TestSimulinkDataType.cxx
+    TestSimulinkObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     CommonDataModel
+    SimulinkMisc
+    SimulinkData
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest

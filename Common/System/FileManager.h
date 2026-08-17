@@ -12,7 +12,8 @@
 #include <string>
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class File;
@@ -25,68 +26,68 @@ class Directory;
 class SLXIO_APIEXPORT FileManager final
 {
 public:
-  /** Default constructor. */
-  FileManager();
+    /** Default constructor. */
+    FileManager();
 
-  /** Default destructor. */
-  ~FileManager() = default;
+    /** Default destructor. */
+    ~FileManager() = default;
 
-  /** Deleted copy constructor. */
-  FileManager(const FileManager&) = delete;
+    /** Deleted copy constructor. */
+    FileManager(const FileManager&) = delete;
 
-  /** Deleted copy assignment operator. */
-  FileManager& operator=(const FileManager&) = delete;
+    /** Deleted copy assignment operator. */
+    FileManager& operator=(const FileManager&) = delete;
 
-  /** Deleted move constructor. */
-  FileManager(FileManager&& other) = delete;
+    /** Deleted move constructor. */
+    FileManager(FileManager&& other) = delete;
 
-  /** Deleted move assignment operator. */
-  FileManager& operator=(FileManager&& other) = delete;
+    /** Deleted move assignment operator. */
+    FileManager& operator=(FileManager&& other) = delete;
 
-  /** Construct a FileManager with an initial set of files. */
-  FileManager(const std::vector<std::shared_ptr<File>>& files);
+    /** Construct a FileManager with an initial set of files. */
+    FileManager(const std::vector<std::shared_ptr<File>>& files);
 
-  /** Get the unique Id of a file by its name. */
-  SId GetFileId(const std::string& filename) const;
+    /** Get the unique Id of a file by its name. */
+    SId GetFileId(const std::string& filename) const;
 
-  /** Get the maximum file Id currently in use. */
-  SId GetFileMaxId() const;
+    /** Get the maximum file Id currently in use. */
+    SId GetFileMaxId() const;
 
-  /** Find the first available free file ID. */
-  SId GetFirstFreeFileId();
+    /** Find the first available free file ID. */
+    SId GetFirstFreeFileId();
 
-  /** Retrieve a file by its Id. */
-  std::shared_ptr<File> GetFile(SId id) const;
+    /** Retrieve a file by its Id. */
+    std::shared_ptr<File> GetFile(SId id) const;
 
-  /** Check if a file with the given name is opened. */
-  bool IsOpened(const std::string& filename);
+    /** Check if a file with the given name is opened. */
+    bool IsOpened(const std::string& filename);
 
-  /** Add a new file to the manager. */
-  HError Add(std::shared_ptr<File> file);
+    /** Add a new file to the manager. */
+    HError Add(std::shared_ptr<File> file);
 
-  /** Remove a file by its Id. */
-  HError Remove(const SId id);
+    /** Remove a file by its Id. */
+    HError Remove(const SId id);
 
-  /** Clear all managed files. */
-  HError Clear();
+    /** Clear all managed files. */
+    HError Clear();
 
-  /** Get the number of currently opened files. */
-  UInt32 GetOpenedCount();
+    /** Get the number of currently opened files. */
+    UInt32 GetOpenedCount();
 
-  /** Get the names of all managed files. */
-  std::vector<std::string> GetFileNames();
+    /** Get the names of all managed files. */
+    std::vector<std::string> GetFileNames();
 
-  /** Get the modes of all managed files. */
-  std::vector<int> GetFileModes() const;
+    /** Get the modes of all managed files. */
+    std::vector<int> GetFileModes() const;
 
-  /** Get the IDs of all managed files. */
-  std::vector<SId> GetFileIds() const;
+    /** Get the IDs of all managed files. */
+    std::vector<SId> GetFileIds() const;
 
-  /** Get the directories of all managned files */
-  std::vector<Directory> GetFileDirectories() const;
+    /** Get the directories of all managned files */
+    std::vector<Directory> GetFileDirectories() const;
 
 private:
-  std::vector<std::shared_ptr<File>> FileBuffer;
+    std::vector<std::shared_ptr<File>> FileBuffer;
 };
 
 SLXIO_ABI_NAMESPACE_END

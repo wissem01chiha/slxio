@@ -13,24 +13,30 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT LogMessage : public ILogMessage
 {
 public:
-  explicit LogMessage(const std::string& text)
-    : m_text(text)
-  {
-  }
+    explicit LogMessage(const std::string& text) : m_text(text) {}
 
-  std::string ToString() const override { return m_text; }
+    std::string ToString() const override { return m_text; }
 
-  bool Empty() const override { return m_text.empty(); }
+    bool Empty() const override { return m_text.empty(); }
 
-  std::unique_ptr<ILogMessage> operator+(const ILogMessage& rhs) const override
-  {
-    return std::make_unique<LogMessage>(m_text + " " + rhs.ToString());
-  }
+    std::unique_ptr<ILogMessage>
+    operator+(const ILogMessage& rhs) const override
+    {
+        return std::make_unique<LogMessage>(m_text + " " + rhs.ToString());
+    }
 
-  DataType GetDataType() const override { return DataType::SLXIO_TYPE_STRING; }
+    DataType GetDataType() const override
+    {
+        return DataType::SLXIO_TYPE_STRING;
+    }
+
+    std::unique_ptr<ILogMessage> Clone() const override
+    {
+        return std::make_unique<LogMessage>(*this);
+    }
 
 private:
-  std::string m_text;
+    std::string m_text;
 };
 
 SLXIO_ABI_NAMESPACE_END

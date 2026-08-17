@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SimulinkFunction
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT SimulinkFunction : public IBlockParameters,
+                                         public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  SimulinkFunction();
+    /** Default Constructor */
+    SimulinkFunction();
 
-  /** Default Destructor */
-  ~SimulinkFunction();
+    /** Default Destructor */
+    ~SimulinkFunction();
 
 private:
 };

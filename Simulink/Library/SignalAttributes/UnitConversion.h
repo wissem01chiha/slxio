@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT UnitConversion
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT UnitConversion : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  UnitConversion();
+    /** Default Constructor */
+    UnitConversion();
 
-  /** Default Destructor */
-  ~UnitConversion();
+    /** Default Destructor */
+    ~UnitConversion();
 
-  const std::string& GetOutputtype() const;
-  void SetOutputtype(const std::string& value);
+    const std::string& GetOutputtype() const;
+    void SetOutputtype(const std::string& value);
 
 private:
-  std::string m_Outputtype;
+    std::string m_Outputtype;
 };
 
 SLXIO_ABI_NAMESPACE_END

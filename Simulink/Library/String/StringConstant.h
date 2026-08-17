@@ -11,30 +11,30 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT StringConstant
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT StringConstant : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  StringConstant();
+    /** Default Constructor */
+    StringConstant();
 
-  /** Default Destructor */
-  ~StringConstant();
+    /** Default Destructor */
+    ~StringConstant();
 
-  const std::string& GetString() const;
-  void SetString(const std::string& value);
+    const std::string& GetString() const;
+    void SetString(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
 private:
-  std::string m_String;
+    std::string m_String;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 };
 
 SLXIO_ABI_NAMESPACE_END

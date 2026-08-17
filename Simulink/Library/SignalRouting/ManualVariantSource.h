@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT ManualVariantSource
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT ManualVariantSource : public IBlockParameters,
+                                            public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  ManualVariantSource();
+    /** Default Constructor */
+    ManualVariantSource();
 
-  /** Default Destructor */
-  ~ManualVariantSource();
+    /** Default Destructor */
+    ~ManualVariantSource();
 
-  const std::string& GetNumchoices() const;
-  void SetNumchoices(const std::string& value);
+    const std::string& GetNumchoices() const;
+    void SetNumchoices(const std::string& value);
 
 private:
-  std::string m_Numchoices;
+    std::string m_Numchoices;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -10,29 +10,30 @@
 
 #include <vector>
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT Color final
 {
 public:
-  Color();
-  Color(UInt32 red, UInt32 green, UInt32 blue, UInt32 alpha = 255);
-  ~Color() = default;
-  Color(const Color& other) = default;
-  Color& operator=(const Color& other) = default;
-  bool operator==(const Color& other) const;
-  bool operator!=(const Color& other) const;
+    Color();
+    Color(UInt32 red, UInt32 green, UInt32 blue, UInt32 alpha = 255);
+    ~Color() = default;
+    Color(const Color& other) = default;
+    Color& operator=(const Color& other) = default;
+    bool operator==(const Color& other) const;
+    bool operator!=(const Color& other) const;
 
-  static Color fromVector(const std::vector<UInt32>& vec);
+    static Color fromVector(const std::vector<UInt32>& vec);
 
-  std::vector<UInt32> toVector() const;
+    std::vector<UInt32> toVector() const;
 
 private:
-  UInt32 r;
-  UInt32 g;
-  UInt32 b;
-  UInt32 a;
+    UInt32 r;
+    UInt32 g;
+    UInt32 b;
+    UInt32 a;
 };
 
 SLXIO_ABI_NAMESPACE_END

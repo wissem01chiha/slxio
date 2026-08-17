@@ -1,6 +1,7 @@
 #include "ResetFunction.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 ResetFunction::ResetFunction() {}

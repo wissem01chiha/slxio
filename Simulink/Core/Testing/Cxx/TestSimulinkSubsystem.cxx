@@ -1,7 +1,8 @@
+#include "Doctest.h"
 #include "SimulinkSubsystem.h"
-#include "slxDoctest.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SimulinkSubsystemTestFixture

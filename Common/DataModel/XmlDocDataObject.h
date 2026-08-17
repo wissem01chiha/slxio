@@ -9,7 +9,8 @@
 #include "DataModelPCH.h"
 #include "IDataObject.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,18 +21,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT XmlDocDataObject : public IDataObject
 {
 public:
-  XmlDocDataObject* New() override;
-  void Initialize(void* implDataObject) override;
-  bool Empty() const override;
-  bool operator==(const IDataObject& other) const override;
-  void* GetImplDataObject() const override;
-  std::string ToString() const override;
-  DataType GetDataType() const override;
-  XmlDocDataObject();
-  ~XmlDocDataObject();
+    XmlDocDataObject* New() override;
+    void Initialize(void* implDataObject) override;
+    bool Empty() const override;
+    bool operator==(const IDataObject& other) const override;
+    void* GetImplDataObject() const override;
+    std::string ToString() const override;
+    DataType GetDataType() const override;
+    XmlDocDataObject();
+    ~XmlDocDataObject();
 
 private:
-  xmlDocPtr m_implDataObject;
+    xmlDocPtr m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

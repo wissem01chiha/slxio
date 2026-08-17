@@ -9,7 +9,8 @@
 #include "PlatformTypes.h"
 #include "SystemPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class Directory;
@@ -21,37 +22,35 @@ class Directory;
 class SLXIO_APIEXPORT DirectoryService final
 {
 public:
-  /** Default constructor. */
-  DirectoryService() = default;
+    /** Default constructor. */
+    DirectoryService() = default;
 
-  /** Destructor. */
-  ~DirectoryService() = default;
+    /** Destructor. */
+    ~DirectoryService() = default;
 
-  /** Get a String Serialisation of the directory tree */
-  static std::string ToString(const Directory& directory);
+    /** Get a String Serialisation of the directory tree */
+    static std::string ToString(const Directory& directory);
 
-  /** Get the current working directory. */
-  static Directory GetWorkingDirectory(int* error);
+    /** Get the current working directory. */
+    static Directory GetWorkingDirectory(int* error);
 
-  /**
-   * Creates the directory structure for a given entry name.
-   * The entry name can be in one of the following formats:
-   * - "simulink/plugin/rels/" (a directory path)
-   * - "simulink/blockdiagram.xml" (a file path)
-   * This function ensures that the directory structure is created up
-   * to the specified root folder (`dir`)
-   */
-  static std::shared_ptr<Directory> CreateDirectoryStructure(
-    const std::string& structure,
-    int* error);
+    /**
+     * Creates the directory structure for a given entry name.
+     * The entry name can be in one of the following formats:
+     * - "simulink/plugin/rels/" (a directory path)
+     * - "simulink/blockdiagram.xml" (a file path)
+     * This function ensures that the directory structure is created up
+     * to the specified root folder (`dir`)
+     */
+    static std::shared_ptr<Directory>
+    CreateDirectoryStructure(const std::string& structure, int* error);
 
-  /** Create a system temporary directory and retrun a pointer to it*/
-  static std::shared_ptr<Directory> CreateTemporaryDirectory(int* error);
+    /** Create a system temporary directory and retrun a pointer to it*/
+    static std::shared_ptr<Directory> CreateTemporaryDirectory(int* error);
 
-  /** same as CreateTemporaryDirectory using a prefix for directory name */
-  static std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(
-    const std::string& prefix,
-    int* error);
+    /** same as CreateTemporaryDirectory using a prefix for directory name */
+    static std::shared_ptr<Directory>
+    CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error);
 };
 
 SLXIO_ABI_NAMESPACE_END

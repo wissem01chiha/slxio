@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT MessageMerge
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT MessageMerge : public IBlockParameters,
+                                     public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  MessageMerge();
+    /** Default Constructor */
+    MessageMerge();
 
-  /** Default Destructor */
-  ~MessageMerge();
+    /** Default Destructor */
+    ~MessageMerge();
 
-  const std::string& GetNumberinputports() const;
-  void SetNumberinputports(const std::string& value);
+    const std::string& GetNumberinputports() const;
+    void SetNumberinputports(const std::string& value);
 
 private:
-  std::string m_Numberinputports;
+    std::string m_Numberinputports;
 };
 
 SLXIO_ABI_NAMESPACE_END

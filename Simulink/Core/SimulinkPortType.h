@@ -5,60 +5,32 @@
 #define SIMULINKPORTTYPE_H
 
 #include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include "SimulinkElementType.h"
+#include "SimulinkPCH.h"
 
-#include <string>
-
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @brief Enumeration of port types found in Simulink models.
- * The SLX file uses a rather intransparent way of specifying the
- * ports of block: The parameter 'Ports' points to array that has 0-8
- * elements. Each array entry specifies the number of ports of a
- * certain type. This enumeration is meant to make this more explicit
- * and to prevent an implementation with a heavy if/then/else-density.
- * @code{.xml}
- * <P Name="Ports">[0, 0, 0, 0, 0, 1, 1]</P>
- * @endcode
- * The following list explains the port type for each index.
- * 0 : inports
- * 1 : outports
- * 2 : enable ports
- * 3 : trigger ports
- * 4 : state
- * 5 : LConn
- * 6 : RConn
- * 7 : ifaction
+ * @brief Enumeration of Simulink port types.
  */
-class SimulinkPortType : public SimulinkElementType
+enum class SimulinkPortType
 {
-public:
-  enum Type
-  {
-    INPORT = 0,
-    OUTPORT = 1,
-    ENABLE = 2,
-    TRIGGER = 3,
-    STATE = 4,
-    LCONN = 5,
-    RCONN = 6,
-    IFACTION = 7,
-  };
-  SimulinkPortType() = default;
-  bool isA(const SimulinkPortType& typeObj);
-  friend bool operator==(const SimulinkPortType& lhs,
-                         const SimulinkPortType& rhs);
-  std::string ToString() const;
-  ~SimulinkPortType() = default;
-
-private:
-  SimulinkPortType::Type type_;
+    Inport = 0,
+    Outport = 1,
+    Enable = 2,
+    Trigger = 3,
+    State = 4,
+    LConn = 5,
+    RConn = 6,
+    IfAction = 7
 };
 
+SLXIO_APIEXPORT std::string ToString(SimulinkPortType type);
+
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // SIMULINKPORTTYPE_H

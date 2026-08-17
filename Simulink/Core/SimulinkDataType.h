@@ -7,64 +7,41 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
+#include "SimulinkPCH.h"
 
-#include <string>
-
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkDataType
  * @brief Simulink Supported Data Types.
  */
-enum class SLXIO_APIEXPORT SimulinkDataType
+enum class SimulinkDataType
 {
-  Auto = 0,
-  Double,
-  Single,
-  Int8,
-  UInt8,
-  Int16,
-  UInt16,
-  UInt64,
-  Int32,
-  UInt32,
-  Boolean,
-  Half,
-  String,
-  Char
+    Auto,
+    Double,
+    Single,
+    Int8,
+    UInt8,
+    Int16,
+    UInt16,
+    Int32,
+    UInt32,
+    UInt64,
+    Boolean,
+    Half,
+    String,
+    Char
 };
 
-#define SIMULINKDATATYPE_MAP(XX)                                               \
-  XX(SimulinkDataType::Double, "double")                                       \
-  XX(SimulinkDataType::Single, "single")                                       \
-  XX(SimulinkDataType::Half, "half")                                           \
-  XX(SimulinkDataType::Int8, "int8")                                           \
-  XX(SimulinkDataType::UInt8, "uint8")                                         \
-  XX(SimulinkDataType::Int16, "int16")                                         \
-  XX(SimulinkDataType::UInt16, "UInt16")                                       \
-  XX(SimulinkDataType::Int32, "int32")                                         \
-  XX(SimulinkDataType::UInt32, "uint32")                                       \
-  XX(SimulinkDataType::UInt64, "uint64")                                       \
-  XX(SimulinkDataType::Boolean, "boolean")                                     \
-  XX(SimulinkDataType::Boolean, "logical")                                     \
-  XX(SimulinkDataType::String, "string")                                       \
-  XX(SimulinkDataType::Char, "char")                                           \
-  XX(SimulinkDataType::Auto, "auto")
-
-SimulinkDataType toSimulinkDataType(bool);
-SimulinkDataType toSimulinkDataType(Float32);
-SimulinkDataType toSimulinkDataType(UInt8);
-SimulinkDataType toSimulinkDataType(UInt16);
-SimulinkDataType toSimulinkDataType(UInt32);
-SimulinkDataType toSimulinkDataType(UInt64);
-
-SimulinkDataType toSimulinkDataType(const std::string&);
-SimulinkDataType toSimulinkDataType(const char*);
-
-const char* toChar(SimulinkDataType sldt);
+SLXIO_APIEXPORT std::string ToString(SimulinkDataType type);
+SLXIO_APIEXPORT SimulinkDataType FromString(const std::string& str);
+SLXIO_APIEXPORT bool IsNumeric(SimulinkDataType type);
+SLXIO_APIEXPORT bool IsFloatingPoint(SimulinkDataType type);
+SLXIO_APIEXPORT bool IsSigned(SimulinkDataType type);
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // SIMULINKDATATYPE_H

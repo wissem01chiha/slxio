@@ -11,35 +11,35 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT StringCompare
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT StringCompare : public IBlockParameters,
+                                      public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  StringCompare();
+    /** Default Constructor */
+    StringCompare();
 
-  /** Default Destructor */
-  ~StringCompare();
+    /** Default Destructor */
+    ~StringCompare();
 
-  const std::string& GetCasesensitive() const;
-  void SetCasesensitive(const std::string& value);
+    const std::string& GetCasesensitive() const;
+    void SetCasesensitive(const std::string& value);
 
-  const std::string& GetCompareoption() const;
-  void SetCompareoption(const std::string& value);
+    const std::string& GetCompareoption() const;
+    void SetCompareoption(const std::string& value);
 
-  const std::string& GetNumberofcharacters() const;
-  void SetNumberofcharacters(const std::string& value);
+    const std::string& GetNumberofcharacters() const;
+    void SetNumberofcharacters(const std::string& value);
 
 private:
-  std::string m_Casesensitive;
+    std::string m_Casesensitive;
 
-  std::string m_Compareoption;
+    std::string m_Compareoption;
 
-  std::string m_Numberofcharacters;
+    std::string m_Numberofcharacters;
 };
 
 SLXIO_ABI_NAMESPACE_END

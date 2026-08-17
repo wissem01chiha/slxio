@@ -1,28 +1,20 @@
 #include "SimulinkModelType.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkModelType::SimulinkModelType(SimulinkModelType::Type type)
-  : type(type)
+std::string ToString(SimulinkModelType type)
 {
-}
-
-std::string SimulinkModelType::ToString(SimulinkModelType::Type type)
-{
-  switch (type) {
+    switch (type)
+    {
     case SimulinkModelType::Library:
-      return std::string("Library");
+        return std::string("Library");
     case SimulinkModelType::Model:
-      return std::string("Model");
+        return std::string("Model");
     default:
-      return std::string("");
-  }
-}
-
-SimulinkModelType::Type SimulinkModelType::GetType() const
-{
-  return type;
+        return std::string("");
+    }
 }
 
 SLXIO_ABI_NAMESPACE_END

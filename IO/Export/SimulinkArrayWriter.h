@@ -11,7 +11,8 @@
 class SimulinkArray;
 class Logger;
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -21,13 +22,13 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkArrayWriter : public SimulinkWriter
 {
 public:
-  SimulinkArrayWriter* New() override;
-  HError Write() override;
-  HError SetInputData(const DataObject& data) override;
-  HError SetInputData(SId idx, const DataObject& data) override;
+    SimulinkArrayWriter* New() override;
+    HError Write() override;
+    HError SetInputData(const DataObject& data) override;
+    HError SetInputData(SId idx, const DataObject& data) override;
 
 private:
-  DataObject& InputDataObject;
+    DataObject& InputDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

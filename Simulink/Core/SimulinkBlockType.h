@@ -7,23 +7,17 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
-#include "SimulinkElementType.h"
+#include "SimulinkPCH.h"
 
-#include <string>
-
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class SimulinkBlockType
- * @brief Enumeration wrapper for Simulink block types.
+ * @brief Enumeration of Simulink block types.
  */
-class SLXIO_APIEXPORT SimulinkBlockType final : public SimulinkElementType
+enum class SimulinkBlockType
 {
-public:
-  /** Enumeration of supported Simulink block types */
-  enum Type
-  {
     DigitalClock,
     Clock,
     FromWorkspace,
@@ -54,37 +48,13 @@ public:
     DotProduct,
     FunctionCallSplit,
     ManualSwitch,
-    numInPorts,
-    numOutPorts
-  };
-
-  /** Default constructor */
-  SimulinkBlockType() = default;
-
-  /** Constructs a block type from an enum value */
-  explicit SimulinkBlockType(Type type);
-
-  /** Default destructor */
-  ~SimulinkBlockType() = default;
-
-  /** Converts a type name string to a block type enum */
-  static SimulinkBlockType::Type ToType(const char* typeName);
-
-  /** Converts a block type enum to its string representation */
-  static const char* ToString(Type type);
-
-  /** Checks if this block type matches the given type */
-  bool isA(SimulinkBlockType::Type type);
-
-  /** Returns the string representation of the current block type */
-  std::string ToString() const;
-
-private:
-  /** Internal storage for the block type */
-  SimulinkBlockType::Type blockType;
+    NumInPorts,
+    NumOutPorts
 };
 
+SLXIO_APIEXPORT std::string ToString(SimulinkBlockType type);
+
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // SIMULINKBLOCKTYPE_H

@@ -1,48 +1,55 @@
 #include "DataSourceType.h"
 #include "Logger.h"
-#include <cstring>
 
-namespace slxio {
+#include "DataSourceType.h"
+
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataSourceType::DataSourceType(DataSourceType::Type type)
-  : InternalDataSourceType(type)
+DataSourceType::DataSourceType(DataSourceType::Type type) : m_type(type) {}
+
+DataSourceType::Type DataSourceType::FromString(const std::string& sldt)
 {
+    const char* cstr = sldt.c_str();
+
+    if (std::strcmp(cstr, "ModelFile") == 0)
+    {
+        return Type::ModelFile;
+    }
+    else if (std::strcmp(cstr, "MatFile") == 0)
+    {
+        return Type::MatFile;
+    }
+    else if (std::strcmp(cstr, "MatlabCode") == 0)
+    {
+        return Type::MatlabCode;
+    }
+    else if (std::strcmp(cstr, "MatlabFile") == 0)
+    {
+        return Type::MatlabFile;
+    }
+    return Type::ModelFile;
 }
 
-DataSourceType::Type DataSourceType::FromString(const char* sldt)
+std::string DataSourceType::ToString(Type type)
 {
-  if (sldt == nullptr) {
-    return Type::ModelFile;
-  }
-
-  if (std::strcmp(sldt, "ModelFile") == 0) {
-    return Type::ModelFile;
-  } else if (std::strcmp(sldt, "MatFile") == 0) {
-    return Type::MatFile;
-  } else if (std::strcmp(sldt, "MatlabCode") == 0) {
-    return Type::MatlabCode;
-  } else if (std::strcmp(sldt, "MatlabFile") == 0) {
-    return Type::MatlabFile;
-  }
-  return Type::ModelFile;
-}
-
-const char* DataSourceType::ToString(Type type)
-{
-  switch (type) {
+    switch (type)
+    {
     case Type::ModelFile:
-      return "ModelFile";
+        return "ModelFile";
     case Type::MatFile:
-      return "MatFile";
+        return "MatFile";
     case Type::MatlabCode:
-      return "MatlabCode";
+        return "MatlabCode";
     case Type::MatlabFile:
-      return "MatlabFile";
+        return "MatlabFile";
     default:
-      return "";
-  }
+        return "";
+    }
 }
+
+DataSourceType::Type DataSourceType::GetType() const { return m_type; }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio

@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SwitchCaseActionSubsystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT SwitchCaseActionSubsystem : public IBlockParameters,
+                                                  public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  SwitchCaseActionSubsystem();
+    /** Default Constructor */
+    SwitchCaseActionSubsystem();
 
-  /** Default Destructor */
-  ~SwitchCaseActionSubsystem();
+    /** Default Destructor */
+    ~SwitchCaseActionSubsystem();
 
 private:
 };

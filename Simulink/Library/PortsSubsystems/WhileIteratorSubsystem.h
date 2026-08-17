@@ -11,19 +11,19 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT WhileIteratorSubsystem
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT WhileIteratorSubsystem : public IBlockParameters,
+                                               public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  WhileIteratorSubsystem();
+    /** Default Constructor */
+    WhileIteratorSubsystem();
 
-  /** Default Destructor */
-  ~WhileIteratorSubsystem();
+    /** Default Destructor */
+    ~WhileIteratorSubsystem();
 
 private:
 };

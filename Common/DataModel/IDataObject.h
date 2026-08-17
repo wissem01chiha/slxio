@@ -9,9 +9,11 @@
 #include "DataModelPCH.h"
 #include "DataType.h"
 #include "ILogger.h"
+#include "IObservable.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -20,52 +22,52 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT IDataObject
 {
 public:
-  /** Create a new instance of the data object */
-  virtual IDataObject* New() = 0;
+    /** Create a new instance of the data object */
+    virtual IDataObject* New() = 0;
 
-  /** Reset the data object to its initial state */
-  virtual void Initialize(void* implDataObject) = 0;
+    /** Reset the data object to its initial state */
+    virtual void Initialize(void* implDataObject) = 0;
 
-  /** Get the last update time (in milliseconds since epoch) */
-  virtual UInt32 GetUpdateTime() const;
+    /** Get the last update time (in milliseconds since epoch) */
+    virtual UInt32 GetUpdateTime() const;
 
-  /** Return the memory size used by this object */
-  virtual UInt32 GetMemorySize() const;
+    /** Return the memory size used by this object */
+    virtual UInt32 GetMemorySize() const;
 
-  /** Access the underlying implementation object */
-  virtual void* GetImplDataObject() const = 0;
+    /** Access the underlying implementation object */
+    virtual void* GetImplDataObject() const = 0;
 
-  /** Return the type identifier of the data */
-  virtual std::string ToString() const = 0;
+    /** Return the type identifier of the data */
+    virtual std::string ToString() const = 0;
 
-  /** Return true if the data object underlaying container is empty */
-  virtual bool Empty() const = 0;
+    /** Return true if the data object underlaying container is empty */
+    virtual bool Empty() const = 0;
 
-  /** Compare equality with another DataObject */
-  virtual bool operator==(const IDataObject&) const = 0;
+    /** Compare equality with another DataObject */
+    virtual bool operator==(const IDataObject&) const = 0;
 
-  /* Return the underlaying data type of the object */
-  virtual DataType GetDataType() const = 0;
+    /* Return the underlaying data type of the object */
+    virtual DataType GetDataType() const = 0;
 
-  /** Set a logger object for this data object */
-  HError SetLogger(const ILogger* logger);
+    /** Set a logger object for this data object */
+    HError SetLogger(ILogger* logger);
 
-  /** Get the logger sink */
-  const ILogger* GetLogger();
+    /** Get the logger sink */
+    const ILogger* GetLogger();
 
-  /* Default Constructor */
-  IDataObject();
+    /* Default Constructor */
+    IDataObject();
 
-  virtual ~IDataObject() = default;
+    virtual ~IDataObject() = default;
 
 protected:
-  const ILogger* m_logger = nullptr;
-  UInt32 m_updateTime;
+    ILogger* m_logger = nullptr;
+    UInt32 m_updateTime;
 
 private:
-  // Disable copy and assignment
-  IDataObject(const IDataObject&) = delete;
-  void operator=(const IDataObject&) = delete;
+    // Disable copy and assignment
+    IDataObject(const IDataObject&) = delete;
+    void operator=(const IDataObject&) = delete;
 };
 
 SLXIO_ABI_NAMESPACE_END

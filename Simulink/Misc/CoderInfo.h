@@ -6,9 +6,11 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "MiscPCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -23,19 +25,19 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT CoderInfo final
 {
 public:
-  CoderInfo();
-  ~CoderInfo() = default;
-  const char* getStorageClass() const;
-  bool isTunable();
-  const char* getIdentifier();
-  UInt32 getAlignment();
+    CoderInfo();
+    ~CoderInfo() = default;
+    std::string GetStorageClass() const;
+    bool IsTunable() const;
+    std::string GetIdentifier() const;
+    UInt32 GetAlignment() const;
 
 private:
-  const char* Identifier;
-  UInt32 Alignment;
-  const char* StorageClass;
-  bool Tunable = true;
-  bool ExportedGlobal = false;
+    std::string m_identifier;
+    UInt32 m_alignment;
+    std::string m_storageClass;
+    bool m_tunable = true;
+    bool m_exportedGlobal = false;
 };
 
 SLXIO_ABI_NAMESPACE_END

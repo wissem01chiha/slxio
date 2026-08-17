@@ -8,7 +8,8 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -17,38 +18,38 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkSFSim final
 {
 public:
-  SimulinkSFSim();
+    SimulinkSFSim();
 
 private:
-  const char** DisabledProps;
-  const char* Description;
-  const char** Components;
-  const char* SimCustomSourceCode;
-  const char* SimCustomHeaderCode;
-  const char* SimCustomInitializer;
-  const char* SimCustomTerminator;
-  const char** SimReservedNameArray;
-  const char* SimUserSources;
-  const char* SimUserIncludeDirs;
-  const char* SimUserLibraries;
-  const char* SimUserDefines;
-  const char* SimCustomCompilerFlags;
-  const char* SimCustomLinkerFlags;
-  const char* SFSimEcho;
-  const char* SimCtrlC;
-  const char* Simuint16egrity;
-  const char* SimUseLocalCustomCode;
-  const char* SimParseCustomCode;
-  const char* SimAnalyzeCustomCode;
-  const char* SimBuildMode;
-  const char* SimGenImportedTypeDefs;
-  const char* ModelFunctionsGlobalVisibility;
-  UInt16 CompileTimeRecursionLimit;
-  const char* EnableRuntimeRecursion;
-  const char* MATLABDynamicMemAlloc;
-  UInt16 MATLABDynamicMemAllocThreshold;
-  const char** CustomCodeFunctionArrayLayout;
-  const char* DefaultCustomCodeFunctionArrayLayout;
+    const char** DisabledProps;
+    const char* Description;
+    const char** Components;
+    const char* SimCustomSourceCode;
+    const char* SimCustomHeaderCode;
+    const char* SimCustomInitializer;
+    const char* SimCustomTerminator;
+    const char** SimReservedNameArray;
+    const char* SimUserSources;
+    const char* SimUserIncludeDirs;
+    const char* SimUserLibraries;
+    const char* SimUserDefines;
+    const char* SimCustomCompilerFlags;
+    const char* SimCustomLinkerFlags;
+    const char* SFSimEcho;
+    const char* SimCtrlC;
+    const char* Simuint16egrity;
+    const char* SimUseLocalCustomCode;
+    const char* SimParseCustomCode;
+    const char* SimAnalyzeCustomCode;
+    const char* SimBuildMode;
+    const char* SimGenImportedTypeDefs;
+    const char* ModelFunctionsGlobalVisibility;
+    UInt16 CompileTimeRecursionLimit;
+    const char* EnableRuntimeRecursion;
+    const char* MATLABDynamicMemAlloc;
+    UInt16 MATLABDynamicMemAllocThreshold;
+    const char** CustomCodeFunctionArrayLayout;
+    const char* DefaultCustomCodeFunctionArrayLayout;
 };
 
 SLXIO_ABI_NAMESPACE_END

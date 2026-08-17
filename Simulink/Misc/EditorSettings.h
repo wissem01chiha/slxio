@@ -6,9 +6,11 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "MiscPCH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -17,68 +19,69 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT EditorSettings final
 {
 public:
-  EditorSettings() = default;
-  ~EditorSettings() = default;
+    EditorSettings() = default;
+    ~EditorSettings() = default;
 
-  bool getShowPortDataTypes();
-  bool getSampleTimeColors();
-  bool getShowLineDimensions();
-  bool getShowPortUnits();
-  bool getShowLoopsOnError();
-  bool getShowStorageClass();
-  bool getShowTestPointIcons();
-  bool getShowSignalResolutionIcons();
-  bool getShowViewerIcons();
-  bool getShowVisualizeInsertedRTB();
-  bool getShowMarkup();
-  bool getBlockNameDataTip();
-  bool getBlockParametersDataTip();
-  bool getBlockDescriptionStringDataTip();
-  bool getBlockVariantConditionDataTip();
-  bool getToolBar();
-  bool getStatusBar();
-  bool getBrowserShowLibraryLinks();
-  bool getFunctionConnectors();
-  bool getBrowserLookUnderMasks();
-  bool getMultiThreadCoSim();
+    bool GetShowPortDataTypes();
+    bool GetSampleTimeColors();
+    bool GetShowLineDimensions();
+    bool GetShowPortUnits();
+    bool GetShowLoopsOnError();
+    bool GetShowStorageClass();
+    bool GetShowTestPointIcons();
+    bool GetShowSignalResolutionIcons();
+    bool GetShowViewerIcons();
+    bool GetShowVisualizeInsertedRTB();
+    bool GetShowMarkup();
+    bool GetBlockNameDataTip();
+    bool GetBlockParametersDataTip();
+    bool GetBlockDescriptionStringDataTip();
+    bool GetBlockVariantConditionDataTip();
+    bool GetToolBar();
+    bool GetStatusBar();
+    bool GetBrowserShowLibraryLinks();
+    bool GetFunctionConnectors();
+    bool GetBrowserLookUnderMasks();
+    bool GetMultiThreadCoSim();
 
 private:
-  const char* LibraryLinkDisplay;
-  const char* PortDataTypeDisplayFormat;
-  bool SampleTimeColors;
-  bool SampleTimeAnnotations;
-  bool WideLines;
-  bool ShowLineDimensions;
-  bool ShowPortDataTypes;
-  bool ShowAllPropagatedSignalLabels;
-  bool ShowEditTimeErrors;
-  bool ShowEditTimeWarnings;
-  bool ShowEditTimeAdvisorChecks;
-  bool ShowPortUnits;
-  bool ShowDesignRanges;
-  bool ShowLoopsOnError;
-  bool IgnoreBidirectionalLines;
-  bool ShowStorageClass;
-  bool ShowTestPointIcons;
-  bool ShowSignalResolutionIcons;
-  bool ShowViewerIcons;
-  bool SortedOrder;
-  bool VariantCondition;
-  bool ShowSubsystemDomainSpec;
-  bool ExecutionContextIcon;
-  bool ShowLinearizationAnnotations;
-  bool ShowVisualizeInsertedRTB;
-  bool ShowMarkup;
-  bool BlockNameDataTip;
-  bool BlockParametersDataTip;
-  bool BlockDescriptionStringDataTip;
-  bool BlockVariantConditionDataTip;
-  bool ToolBar;
-  bool StatusBar;
-  bool BrowserShowLibraryLinks;
-  bool FunctionConnectors;
-  bool BrowserLookUnderMasks;
-  bool MultiThreadCoSim;
+    std::string m_libraryLinkDisplay;
+    std::string m_portDataTypeDisplayFormat;
+
+    bool m_sampleTimeColors;
+    bool m_sampleTimeAnnotations;
+    bool m_wideLines;
+    bool m_showLineDimensions;
+    bool m_showPortDataTypes;
+    bool m_showAllPropagatedSignalLabels;
+    bool m_showEditTimeErrors;
+    bool m_showEditTimeWarnings;
+    bool m_showEditTimeAdvisorChecks;
+    bool m_showPortUnits;
+    bool m_showDesignRanges;
+    bool m_showLoopsOnError;
+    bool m_ignoreBidirectionalLines;
+    bool m_showStorageClass;
+    bool m_showTestPointIcons;
+    bool m_showSignalResolutionIcons;
+    bool m_showViewerIcons;
+    bool m_sortedOrder;
+    bool m_variantCondition;
+    bool m_showSubsystemDomainSpec;
+    bool m_executionContextIcon;
+    bool m_showLinearizationAnnotations;
+    bool m_showVisualizeInsertedRTB;
+    bool m_showMarkup;
+    bool m_blockNameDataTip;
+    bool m_blockParametersDataTip;
+    bool m_blockDescriptionStringDataTip;
+    bool m_blockVariantConditionDataTip;
+    bool m_toolBar;
+    bool m_statusBar;
+    bool m_browserShowLibraryLinks;
+    bool m_functionConnectors;
+    bool m_browserLookUnderMasks;
+    bool m_multiThreadCoSim;
 };
 
 SLXIO_ABI_NAMESPACE_END

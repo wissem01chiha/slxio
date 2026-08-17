@@ -11,25 +11,24 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT BitSet
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT BitSet : public IBlockParameters, public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  BitSet();
+    /** Default Constructor */
+    BitSet();
 
-  /** Default Destructor */
-  ~BitSet();
+    /** Default Destructor */
+    ~BitSet();
 
-  const std::string& GetIbit() const;
-  void SetIbit(const std::string& value);
+    const std::string& GetIbit() const;
+    void SetIbit(const std::string& value);
 
 private:
-  std::string m_Ibit;
+    std::string m_Ibit;
 };
 
 SLXIO_ABI_NAMESPACE_END

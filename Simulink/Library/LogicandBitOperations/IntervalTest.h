@@ -11,45 +11,45 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT IntervalTest
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT IntervalTest : public IBlockParameters,
+                                     public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  IntervalTest();
+    /** Default Constructor */
+    IntervalTest();
 
-  /** Default Destructor */
-  ~IntervalTest();
+    /** Default Destructor */
+    ~IntervalTest();
 
-  const std::string& GetIntervalclosedright() const;
-  void SetIntervalclosedright(const std::string& value);
+    const std::string& GetIntervalclosedright() const;
+    void SetIntervalclosedright(const std::string& value);
 
-  const std::string& GetUplimit() const;
-  void SetUplimit(const std::string& value);
+    const std::string& GetUplimit() const;
+    void SetUplimit(const std::string& value);
 
-  const std::string& GetIntervalclosedleft() const;
-  void SetIntervalclosedleft(const std::string& value);
+    const std::string& GetIntervalclosedleft() const;
+    void SetIntervalclosedleft(const std::string& value);
 
-  const std::string& GetLowlimit() const;
-  void SetLowlimit(const std::string& value);
+    const std::string& GetLowlimit() const;
+    void SetLowlimit(const std::string& value);
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
 private:
-  std::string m_Intervalclosedright;
+    std::string m_Intervalclosedright;
 
-  std::string m_Uplimit;
+    std::string m_Uplimit;
 
-  std::string m_Intervalclosedleft;
+    std::string m_Intervalclosedleft;
 
-  std::string m_Lowlimit;
+    std::string m_Lowlimit;
 
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 };
 
 SLXIO_ABI_NAMESPACE_END

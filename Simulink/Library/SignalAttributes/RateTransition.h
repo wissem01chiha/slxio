@@ -11,50 +11,50 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT RateTransition
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT RateTransition : public IBlockParameters,
+                                       public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  RateTransition();
+    /** Default Constructor */
+    RateTransition();
 
-  /** Default Destructor */
-  ~RateTransition();
+    /** Default Destructor */
+    ~RateTransition();
 
-  const std::string& GetIntegrity() const;
-  void SetIntegrity(const std::string& value);
+    const std::string& GetIntegrity() const;
+    void SetIntegrity(const std::string& value);
 
-  const std::string& GetDeterministic() const;
-  void SetDeterministic(const std::string& value);
+    const std::string& GetDeterministic() const;
+    void SetDeterministic(const std::string& value);
 
-  const std::string& GetInitialcondition() const;
-  void SetInitialcondition(const std::string& value);
+    const std::string& GetInitialcondition() const;
+    void SetInitialcondition(const std::string& value);
 
-  const std::string& GetOutportsampletimeopt() const;
-  void SetOutportsampletimeopt(const std::string& value);
+    const std::string& GetOutportsampletimeopt() const;
+    void SetOutportsampletimeopt(const std::string& value);
 
-  const std::string& GetOutportsampletimemultiple() const;
-  void SetOutportsampletimemultiple(const std::string& value);
+    const std::string& GetOutportsampletimemultiple() const;
+    void SetOutportsampletimemultiple(const std::string& value);
 
-  const std::string& GetOutportsampletime() const;
-  void SetOutportsampletime(const std::string& value);
+    const std::string& GetOutportsampletime() const;
+    void SetOutportsampletime(const std::string& value);
 
 private:
-  std::string m_Integrity;
+    std::string m_Integrity;
 
-  std::string m_Deterministic;
+    std::string m_Deterministic;
 
-  std::string m_Initialcondition;
+    std::string m_Initialcondition;
 
-  std::string m_Outportsampletimeopt;
+    std::string m_Outportsampletimeopt;
 
-  std::string m_Outportsampletimemultiple;
+    std::string m_Outportsampletimemultiple;
 
-  std::string m_Outportsampletime;
+    std::string m_Outportsampletime;
 };
 
 SLXIO_ABI_NAMESPACE_END

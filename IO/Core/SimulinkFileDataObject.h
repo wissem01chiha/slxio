@@ -12,7 +12,8 @@
 
 class xmlDocDataObject;
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -22,18 +23,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkFileObject : public IDataObject
 {
 public:
-  SimulinkFileObject* New() override;
-  void Initialize(void* implDataObject) override;
-  UInt32 GetUpdateTime() const override;
-  void* GetImplDataObject() const override;
-  bool operator==(const IDataObject&) override;
-  std::string ToString() const;
-  bool Empty() const override;
+    SimulinkFileObject* New() override;
+    void Initialize(void* implDataObject) override;
+    UInt32 GetUpdateTime() const override;
+    void* GetImplDataObject() const override;
+    bool operator==(const IDataObject&) override;
+    std::string ToString() const;
+    bool Empty() const override;
 
-  SimulinkFileObject();
+    SimulinkFileObject();
 
 private:
-  SimulinkFile m_implDataObject;
+    SimulinkFile m_implDataObject;
 };
 
 SLXIO_ABI_NAMESPACE_END

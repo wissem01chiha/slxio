@@ -5,7 +5,8 @@
 #include "APIExportMacro.h"
 #include "DataPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
@@ -14,8 +15,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT IBlockParametersInformation
 {
 public:
-  IBlockParametersInformation() = default;
-  virtual ~IBlockParametersInformation() = default;
+    IBlockParametersInformation() = default;
+    virtual ~IBlockParametersInformation() = default;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT StringFind
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT StringFind : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  StringFind();
+    /** Default Constructor */
+    StringFind();
 
-  /** Default Destructor */
-  ~StringFind();
+    /** Default Destructor */
+    ~StringFind();
 
-  const std::string& GetOutdatatypestr() const;
-  void SetOutdatatypestr(const std::string& value);
+    const std::string& GetOutdatatypestr() const;
+    void SetOutdatatypestr(const std::string& value);
 
 private:
-  std::string m_Outdatatypestr;
+    std::string m_Outdatatypestr;
 };
 
 SLXIO_ABI_NAMESPACE_END

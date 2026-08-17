@@ -3,57 +3,49 @@
 #include "Logger.h"
 #include "StateflowNodeBase.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
 StateflowState::StateflowState(StateflowState& orig) {}
 
 HError StateflowState::AddElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  // nodes.AddElement(node);
-  // node.setParent(this);
-  return E_OK;
+    // nodes.AddElement(node);
+    // node.setParent(this);
+    return E_OK;
 }
 
-HError StateflowState::RemoveElement(
-  std::shared_ptr<SimulinkElementBase> element)
+HError
+StateflowState::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
-  // CCSMPre.isTrue(node.getParent() == this,
-  //          "Node does not belong to this chart.");
-  // nodes.RemoveElement(node);
-  // node.setParent(null);
-  return E_OK;
+    // CCSMPre.isTrue(node.getParent() == this,
+    //          "Node does not belong to this chart.");
+    // nodes.RemoveElement(node);
+    // node.setParent(null);
+    return E_OK;
 }
 
 std::shared_ptr<StateflowElementBase> StateflowState::getParent() const
 {
-  return std::shared_ptr<StateflowElementBase>();
+    return std::shared_ptr<StateflowElementBase>();
 }
 
 const std::vector<StateflowNodeBase>& StateflowState::getNodes() const
 {
-  return nodes;
+    return nodes;
 }
 
 SimulinkElementType StateflowState::GetType() const
 {
-  return SimulinkElementType(SimulinkElementType::Unkown);
+    return SimulinkElementType(SimulinkElementType::Unkown);
 }
 
-std::string StateflowState::ToString() const
-{
-  return std::string("");
-}
+std::string StateflowState::ToString() const { return std::string(""); }
 
-SId StateflowState::GetId() const
-{
-  return (SId)0;
-}
+SId StateflowState::GetId() const { return (SId)0; }
 
-bool StateflowState::Contains(const SId& id) const
-{
-  return false;
-}
+bool StateflowState::Contains(const SId& id) const { return false; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

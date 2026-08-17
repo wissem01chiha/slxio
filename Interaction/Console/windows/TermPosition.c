@@ -20,19 +20,19 @@
 /*--------------------------------------------------------------------------*/
 void TermSetPosition(int x, int y)
 {
-  COORD pt;
+    COORD pt;
 
-  pt.X = (SHORT)x;
-  pt.Y = (SHORT)y;
-  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pt);
+    pt.X = (SHORT)x;
+    pt.Y = (SHORT)y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pt);
 }
 /*--------------------------------------------------------------------------*/
 void TermGetPosition(int* x, int* y)
 {
-  CONSOLE_SCREEN_BUFFER_INFO csbi;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
 
-  GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
-  *x = csbi.dwCursorPosition.X;
-  *y = csbi.dwCursorPosition.Y;
+    GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+    *x = csbi.dwCursorPosition.X;
+    *y = csbi.dwCursorPosition.Y;
 }
 /*--------------------------------------------------------------------------*/

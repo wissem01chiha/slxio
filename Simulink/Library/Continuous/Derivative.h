@@ -11,25 +11,25 @@
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
-namespace slxio {
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Derivative
-  : public IBlockParameters
-  , public IBlockProperties
+class SLXIO_APIEXPORT Derivative : public IBlockParameters,
+                                   public IBlockProperties
 {
 public:
-  /** Default Constructor */
-  Derivative();
+    /** Default Constructor */
+    Derivative();
 
-  /** Default Destructor */
-  ~Derivative();
+    /** Default Destructor */
+    ~Derivative();
 
-  const std::string& GetCoefficientintfapproximation() const;
-  void SetCoefficientintfapproximation(const std::string& value);
+    const std::string& GetCoefficientintfapproximation() const;
+    void SetCoefficientintfapproximation(const std::string& value);
 
 private:
-  std::string m_Coefficientintfapproximation;
+    std::string m_Coefficientintfapproximation;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -28,17 +28,18 @@
 /*--------------------------------------------------------------------------*/
 int WINAPI DllMain(HINSTANCE hInstance, DWORD reason, PVOID pvReserved)
 {
-  switch (reason) {
+    switch (reason)
+    {
     case DLL_PROCESS_ATTACH:
-      break;
+        break;
     case DLL_PROCESS_DETACH:
-      finalizeLineBuffer();
-      break;
+        finalizeLineBuffer();
+        break;
     case DLL_THREAD_ATTACH:
-      break;
+        break;
     case DLL_THREAD_DETACH:
-      break;
-  }
-  return 1;
+        break;
+    }
+    return 1;
 }
 /*--------------------------------------------------------------------------*/
