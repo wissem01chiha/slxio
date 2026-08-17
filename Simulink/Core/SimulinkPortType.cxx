@@ -4,40 +4,37 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkPortType::isA(const SimulinkPortType& typeObj)
+std::string ToString(SimulinkPortType type)
 {
-    return this->type_ == typeObj.type_;
-}
-
-bool operator==(const SimulinkPortType& lhs, const SimulinkPortType& rhs)
-{
-    return lhs.type_ == rhs.type_;
-}
-
-std::string SimulinkPortType::ToString() const
-{
-    switch (type_)
+    switch (type)
     {
-    case INPORT:
-        return "INPORT";
-    case OUTPORT:
-        return "OUTPORT";
-    case ENABLE:
-        return "ENABLE";
-    case TRIGGER:
-        return "TRIGGER";
-    case STATE:
-        return "STATE";
-    case LCONN:
-        return "LCONN";
-    case RCONN:
-        return "RCONN";
-    case IFACTION:
-        return "IFACTION";
-    default:
-        return "UNKNOWN";
+    case SimulinkPortType::Inport:
+        return "Inport";
+
+    case SimulinkPortType::Outport:
+        return "Outport";
+
+    case SimulinkPortType::Enable:
+        return "Enable";
+
+    case SimulinkPortType::Trigger:
+        return "Trigger";
+
+    case SimulinkPortType::State:
+        return "State";
+
+    case SimulinkPortType::LConn:
+        return "LConn";
+
+    case SimulinkPortType::RConn:
+        return "RConn";
+
+    case SimulinkPortType::IfAction:
+        return "IfAction";
     }
+
+    return {};
 }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio

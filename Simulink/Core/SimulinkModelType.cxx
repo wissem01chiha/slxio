@@ -4,11 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkModelType::SimulinkModelType(SimulinkModelType::Type type) : type(type)
-{
-}
-
-std::string SimulinkModelType::ToString(SimulinkModelType::Type type)
+std::string ToString(SimulinkModelType type)
 {
     switch (type)
     {
@@ -20,8 +16,6 @@ std::string SimulinkModelType::ToString(SimulinkModelType::Type type)
         return std::string("");
     }
 }
-
-SimulinkModelType::Type SimulinkModelType::GetType() const { return type; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -8,7 +8,6 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 #include "SimulinkBlockType.h"
-#include "SimulinkElementBase.h"
 #include "SimulinkElementType.h"
 #include "SimulinkPort.h"
 
@@ -35,9 +34,6 @@ public:
                  std::shared_ptr<SimulinkPort> pIn);
 
     SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
-
-    /** Accesses a child element by index with bound checking */
-    std::shared_ptr<SimulinkElementBase> at(SId index) override;
 
     /** Access specified element */
     std::shared_ptr<SimulinkElementBase> operator[](SId index) override;

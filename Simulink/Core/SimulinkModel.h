@@ -9,15 +9,13 @@
 #include "ModelWorkspace.h"
 #include "PlatformTypes.h"
 #include "SimulinkBlock.h"
-#include "SimulinkElementBase.h"
 #include "SimulinkModelType.h"
-
-#include <memory>
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class ModelWorkspace;
 class SimulinkObject;
 class SimulinkArray;
 class SImulinkPort;

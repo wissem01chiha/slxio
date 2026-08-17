@@ -10,8 +10,6 @@
 #include "PlatformTypes.h"
 #include "SimulinkDataType.h"
 
-#include <vector>
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN

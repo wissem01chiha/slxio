@@ -38,17 +38,26 @@ add_module(
     SimulinkParameterInformation.h
     SimulinkParameter.h
     SimulinkArray.h
-    ISimulinkType.h
     SimulinkObject.h
+    SimulinkPortType.h
+    SimulinkModelType.h
+    SimulinkBlockType.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES
+    SimulinkPortType.cxx
+    SimulinkModelType.cxx
+    SimulinkBlockType.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+    TestSimulinkArray.cxx
+    TestSimulinkParameter.cxx
+    TestSimulinkDataType.cxx
+    TestSimulinkObject.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore

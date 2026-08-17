@@ -6,7 +6,8 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkParameterInformation::SimulinkParameterInformation()
-    : m_min(0.0f), m_max(0.0f)
+    : m_min(0.0f), m_max(0.0f), m_description(""), m_unit(""),
+      m_complexity("real")
 {
 }
 

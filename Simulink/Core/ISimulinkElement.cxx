@@ -101,5 +101,11 @@ const IErrorHandler* ISimulinkElement::GetErrorHandler() const
 
 std::string ISimulinkElement::ToString() const { return std::string(""); }
 
+void ISimulinkElement::SetParent(
+    const std::shared_ptr<ISimulinkElement>& parent)
+{
+    m_parent = parent;
+}
+
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

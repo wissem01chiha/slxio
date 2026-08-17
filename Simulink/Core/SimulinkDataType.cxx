@@ -4,98 +4,108 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkDataType::SimulinkDataType(Type type) : m_type(type) {}
-
-SimulinkDataType::Type SimulinkDataType::GetType() const { return m_type; }
-
-std::string SimulinkDataType::ToString() const
+std::string ToString(SimulinkDataType type)
 {
-    switch (m_type)
+    switch (type)
     {
-    case Type::Double:
+    case SimulinkDataType::Double:
         return "double";
-    case Type::Single:
+    case SimulinkDataType::Single:
         return "single";
-    case Type::Half:
+    case SimulinkDataType::Half:
         return "half";
-    case Type::Int8:
+    case SimulinkDataType::Int8:
         return "int8";
-    case Type::UInt8:
+    case SimulinkDataType::UInt8:
         return "uint8";
-    case Type::Int16:
+    case SimulinkDataType::Int16:
         return "int16";
-    case Type::UInt16:
+    case SimulinkDataType::UInt16:
         return "uint16";
-    case Type::Int32:
+    case SimulinkDataType::Int32:
         return "int32";
-    case Type::UInt32:
+    case SimulinkDataType::UInt32:
         return "uint32";
-    case Type::UInt64:
+    case SimulinkDataType::UInt64:
         return "uint64";
-    case Type::Boolean:
+    case SimulinkDataType::Boolean:
         return "boolean";
-    case Type::String:
+    case SimulinkDataType::String:
         return "string";
-    case Type::Char:
+    case SimulinkDataType::Char:
         return "char";
-    case Type::Auto:
+    case SimulinkDataType::Auto:
         return "auto";
     }
-    return "";
+
+    return {};
 }
 
-SimulinkDataType SimulinkDataType::FromString(const std::string& str)
+SimulinkDataType FromString(const std::string& str)
 {
     if (str == "double")
-        return SimulinkDataType(Type::Double);
+        return SimulinkDataType::Double;
     if (str == "single")
-        return SimulinkDataType(Type::Single);
+        return SimulinkDataType::Single;
     if (str == "half")
-        return SimulinkDataType(Type::Half);
+        return SimulinkDataType::Half;
     if (str == "int8")
-        return SimulinkDataType(Type::Int8);
+        return SimulinkDataType::Int8;
     if (str == "uint8")
-        return SimulinkDataType(Type::UInt8);
+        return SimulinkDataType::UInt8;
     if (str == "int16")
-        return SimulinkDataType(Type::Int16);
+        return SimulinkDataType::Int16;
     if (str == "uint16")
-        return SimulinkDataType(Type::UInt16);
+        return SimulinkDataType::UInt16;
     if (str == "int32")
-        return SimulinkDataType(Type::Int32);
+        return SimulinkDataType::Int32;
     if (str == "uint32")
-        return SimulinkDataType(Type::UInt32);
+        return SimulinkDataType::UInt32;
     if (str == "uint64")
-        return SimulinkDataType(Type::UInt64);
+        return SimulinkDataType::UInt64;
     if (str == "boolean" || str == "logical")
-        return SimulinkDataType(Type::Boolean);
+        return SimulinkDataType::Boolean;
     if (str == "string")
-        return SimulinkDataType(Type::String);
+        return SimulinkDataType::String;
     if (str == "char")
-        return SimulinkDataType(Type::Char);
+        return SimulinkDataType::Char;
     if (str == "auto")
-        return SimulinkDataType(Type::Auto);
+        return SimulinkDataType::Auto;
+
     throw std::invalid_argument("Unknown SimulinkDataType string: " + str);
 }
 
-bool SimulinkDataType::isNumeric() const
+bool IsNumeric(SimulinkDataType type)
 {
-    return m_type == Type::Double || m_type == Type::Single ||
-           m_type == Type::Half || m_type == Type::Int8 ||
-           m_type == Type::UInt8 || m_type == Type::Int16 ||
-           m_type == Type::UInt16 || m_type == Type::Int32 ||
-           m_type == Type::UInt32 || m_type == Type::UInt64;
+    switch (type)
+    {
+    case SimulinkDataType::Double:
+    case SimulinkDataType::Single:
+    case SimulinkDataType::Half:
+    case SimulinkDataType::Int8:
+    case SimulinkDataType::UInt8:
+    case SimulinkDataType::Int16:
+    case SimulinkDataType::UInt16:
+    case SimulinkDataType::Int32:
+    case SimulinkDataType::UInt32:
+    case SimulinkDataType::UInt64:
+        return true;
+
+    default:
+        return false;
+    }
 }
 
-bool SimulinkDataType::isFloatingPoint() const
+bool IsFloatingPoint(SimulinkDataType type)
 {
-    return m_type == Type::Double || m_type == Type::Single ||
-           m_type == Type::Half;
+    return type == SimulinkDataType::Double ||
+           type == SimulinkDataType::Single || type == SimulinkDataType::Half;
 }
 
-bool SimulinkDataType::isSigned() const
+bool IsSigned(SimulinkDataType type)
 {
-    return m_type == Type::Int8 || m_type == Type::Int16 ||
-           m_type == Type::Int32;
+    return type == SimulinkDataType::Int8 || type == SimulinkDataType::Int16 ||
+           type == SimulinkDataType::Int32;
 }
 
 SLXIO_ABI_NAMESPACE_END

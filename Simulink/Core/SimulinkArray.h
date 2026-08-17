@@ -47,6 +47,7 @@ public:
     GetParam(const std::string& name) override;
 
     std::string GetName() const;
+    void SetName(const std::string& name);
     std::string GetDimension() const;
 
     std::string ToString() const override;

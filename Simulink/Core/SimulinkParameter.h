@@ -28,6 +28,11 @@ class SLXIO_APIEXPORT SimulinkParameter : public IParameterObject<std::string>,
 {
 public:
     SimulinkParameter();
+
+    explicit SimulinkParameter(const std::string& value);
+
+    IParameterObjectBase* New() override;
+
     ~SimulinkParameter();
 
     std::string& GetValue() override;
@@ -38,12 +43,11 @@ public:
 
     DataType GetDataType() const override;
     SimulinkDataType GetSimulinkDataType() const;
-    void SetSimulinkDataType(SimulinkDataType dt);
+    void SetSimulinkDataType(SimulinkDataType type);
 
     SimulinkParameterInformation& GetSimulinkParameterInformation() const;
 
 private:
-    std::string m_name;
     std::string m_value;
     SimulinkDataType m_dataType;
     std::unique_ptr<SimulinkParameterInformation> m_information;

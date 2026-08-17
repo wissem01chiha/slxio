@@ -53,20 +53,23 @@ std::string SimulinkArray::ToString() const
 
 HError SimulinkArray::AcceptInsert(ISimulinkElement& parent)
 {
-
     auto* array = dynamic_cast<SimulinkArray*>(&parent);
 
-    if (array == nullptr)
+    if (array != nullptr)
     {
-        auto* object = dynamic_cast<SimulinkObject*>(&parent);
-        if (object == nullptr)
-        {
-            return E_OPERATION_NOT_SUPPORTED;
-        }
-        object->Insert(std::make_shared<SimulinkArray>(*this));
+        // needs valid copy constructor
+        array->Insert(std::make_shared<SimulinkArray>(*this));
+        return E_OK;
     }
-    array->Insert(std::make_shared<SimulinkArray>(*this));
-    return E_OK;
+
+    auto* object = dynamic_cast<SimulinkObject*>(&parent);
+    if (object != nullptr)
+    { // needs copy constructor valid
+        object->Insert(std::make_shared<SimulinkArray>(*this));
+        return E_OK;
+    }
+
+    return E_OPERATION_NOT_SUPPORTED;
 }
 
 HError SimulinkArray::Insert(const std::shared_ptr<ISimulinkElement>& element)
@@ -75,13 +78,10 @@ HError SimulinkArray::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
         return E_CHILD_NULLPTR_RECEIVED;
     }
-    HError status = element->AcceptInsert(*this);
-    if (status != E_OK)
-    {
-        return status;
-    }
     m_children[element->GetId()] = element;
     m_childrenOrder.push_back(element);
+    // tell the element how is his parent
+    element->SetParent(shared_from_this());
     return E_OK;
 }
 
@@ -90,16 +90,21 @@ SId SimulinkArray::GetId() const { return m_id; }
 void SimulinkArray::AddParam(const std::string& name,
                              const std::shared_ptr<IParameterObjectBase>& p)
 {
-    if (!p)
+    if (p == nullptr)
+    {
         return;
+    }
     m_parameters.push_back(p);
 }
 
 void SimulinkArray::SetParam(const std::string& name,
                              const std::shared_ptr<IParameterObjectBase>& p)
 {
-    if (!p)
+    if (p == nullptr)
+    {
         return;
+    }
+
     for (auto& param : m_parameters)
     {
         if (param->GetName() == name)
@@ -114,10 +119,11 @@ void SimulinkArray::SetParam(const std::string& name,
 std::shared_ptr<IParameterObjectBase>
 SimulinkArray::GetParam(const std::string& name)
 {
-    for (auto& param : m_parameters)
+    for (const auto& param : m_parameters)
     {
         if (param->GetName() == name)
         {
+
             return param;
         }
     }
@@ -125,6 +131,19 @@ SimulinkArray::GetParam(const std::string& name)
 }
 
 std::string SimulinkArray::GetName() const { return m_name; }
+
+void SimulinkArray::SetName(const std::string& name)
+{
+    if (name.empty())
+    {
+        return;
+    }
+    else
+    {
+        m_name = name;
+    }
+    m_name = name;
+}
 
 std::string SimulinkArray::GetDimension() const { return m_dimension; }
 

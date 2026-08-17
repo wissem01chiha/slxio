@@ -33,8 +33,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @todo Separate base interfaces for concrete Simulink model elements
  * and implementation-specific elements.
  */
-class SLXIO_APIEXPORT ISimulinkElement : public IParameterizedObject,
-                                         public IObservable
+class SLXIO_APIEXPORT ISimulinkElement
+    : public IParameterizedObject,
+      public IObservable,
+      public std::enable_shared_from_this<ISimulinkElement>
 {
 public:
     /** Default destructor. */
@@ -81,10 +83,17 @@ public:
     /** return a refrence to the element parent if exist, else nullptr */
     std::weak_ptr<ISimulinkElement> GetParent() const;
 
+    /** Set the parent for this element */
+    void SetParent(const std::shared_ptr<ISimulinkElement>& parent);
+
     /** Returns the unique identifier of this element, most Simulink element
      * representaion, in xml files support SID indexation
      */
     virtual SId GetId() const = 0;
+
+    /** If the Object id is mutable override this function to let setting
+     * manully the Id */
+    virtual void SetId(const SId& id){};
 
     /** Set a logger object for this data object, this automaticlly propagte
      *  the logger to all implemented childers unless overriden by themself for

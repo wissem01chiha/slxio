@@ -5,9 +5,19 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkParameter::SimulinkParameter()
-    : m_dataType(SimulinkDataType(SimulinkDataType::Type::Auto)),
+    : m_dataType(SimulinkDataType(SimulinkDataType::Auto)),
       m_information(std::make_unique<SimulinkParameterInformation>())
 {
+}
+
+SimulinkParameter::SimulinkParameter(const std::string& value)
+{
+    m_value = value;
+}
+
+IParameterObjectBase* SimulinkParameter::New()
+{
+    return new SimulinkParameter();
 }
 
 SimulinkParameter::~SimulinkParameter() = default;
@@ -35,9 +45,9 @@ SimulinkDataType SimulinkParameter::GetSimulinkDataType() const
 {
     return m_dataType;
 }
-void SimulinkParameter::SetSimulinkDataType(SimulinkDataType dt)
+void SimulinkParameter::SetSimulinkDataType(SimulinkDataType type)
 {
-    m_dataType = dt;
+    m_dataType = type;
 }
 
 SimulinkParameterInformation&

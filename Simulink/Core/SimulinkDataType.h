@@ -6,7 +6,6 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ISimulinkType.h"
 #include "PlatformTypes.h"
 #include "SimulinkPCH.h"
 
@@ -18,40 +17,31 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkDataType
  * @brief Simulink Supported Data Types.
  */
-class SLXIO_APIEXPORT SimulinkDataType final
+enum class SimulinkDataType
 {
-public:
-    enum class Type
-    {
-        Auto,
-        Double,
-        Single,
-        Int8,
-        UInt8,
-        Int16,
-        UInt16,
-        Int32,
-        UInt32,
-        UInt64,
-        Boolean,
-        Half,
-        String,
-        Char
-    };
-
-    explicit SimulinkDataType(Type type);
-    Type GetType() const;
-    std::string ToString() const;
-    static SimulinkDataType FromString(const std::string& str);
-
-    bool isNumeric() const;
-    bool isFloatingPoint() const;
-    bool isSigned() const;
-
-private:
-    Type m_type;
+    Auto,
+    Double,
+    Single,
+    Int8,
+    UInt8,
+    Int16,
+    UInt16,
+    Int32,
+    UInt32,
+    UInt64,
+    Boolean,
+    Half,
+    String,
+    Char
 };
+
+SLXIO_APIEXPORT std::string ToString(SimulinkDataType type);
+SLXIO_APIEXPORT SimulinkDataType FromString(const std::string& str);
+SLXIO_APIEXPORT bool IsNumeric(SimulinkDataType type);
+SLXIO_APIEXPORT bool IsFloatingPoint(SimulinkDataType type);
+SLXIO_APIEXPORT bool IsSigned(SimulinkDataType type);
+
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // SIMULINKDATATYPE_H

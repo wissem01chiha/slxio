@@ -103,6 +103,20 @@
                     "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
+        },
+        {
+            "name": "GCC-13.2.0-x86_64-w64-mingw32",
+            "displayName": "GCC-13.2.0-x86_64-w64-mingw32",
+            "description":
+                "Using compilers: C = C:\\Tools\\c\\bin\\gcc.exe, CXX = C:\\Tools\\c\\bin\\g++.exe",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX":
+                    "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Tools/c/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/Tools/c/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
         }
     ],
     "buildPresets": [

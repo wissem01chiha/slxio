@@ -25,6 +25,7 @@ class SLXIO_APIEXPORT IParameterObjectBase
 public:
     virtual IParameterObjectBase* New() = 0;
     virtual std::string GetName() const { return m_name; };
+    virtual void SetName(const std::string& name) { m_name = name; }
     virtual DataType GetDataType() const = 0;
     virtual UInt16 Size() const { return (UInt16)1; }
     std::string ToString() const { return std::string(""); };

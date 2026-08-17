@@ -26,9 +26,12 @@ public:
     ~SimulinkObject() override;
 
     ISimulinkElement* New() const override;
+    // objects can only be inserted into other objects, so the parent must be an
+    // object
     HError AcceptInsert(ISimulinkElement& parent) override;
     HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
     SId GetId() const override;
+    void SetId(const SId& id) override;
 
     void AddParam(const std::string& name,
                   const std::shared_ptr<IParameterObjectBase>& p) override;
@@ -38,10 +41,14 @@ public:
     GetParam(const std::string& name) override;
 
     std::string GetName() const;
-    std::string GetDimension() const;
+    void SetName(const std::string& name);
+    std::string GetClassName() const;
     std::string GetVersion() const;
 
     std::string ToString() const override;
+
+    /** Return an array with the current object if not foudn return nullptr ! */
+    std::shared_ptr<ISimulinkElement> GetArray(const SId& id) const;
 
 protected:
     SId m_id;

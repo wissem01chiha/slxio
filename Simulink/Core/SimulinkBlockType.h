@@ -14,68 +14,47 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * @class SimulinkBlockType
- * @brief Enumeration wrapper for Simulink block types.
+ * @brief Enumeration of Simulink block types.
  */
-class SLXIO_APIEXPORT SimulinkBlockType final
+enum class SimulinkBlockType
 {
-public:
-    enum Type
-    {
-        DigitalClock,
-        Clock,
-        FromWorkspace,
-        FromFile,
-        Step,
-        UniformRandomNumber,
-        RandomNumber,
-        ToWorkspace,
-        Stop,
-        ToFile,
-        From,
-        Goto,
-        DataStoreRead,
-        DataStoreWrite,
-        DataStoreMemory,
-        GotoTagVisibility,
-        Assertion,
-        Terminator,
-        Ground,
-        Scope,
-        Constant,
-        Inport,
-        Outport,
-        Switch,
-        RelationalOperator,
-        Lookup2D,
-        VariableTransportDelay,
-        DotProduct,
-        FunctionCallSplit,
-        ManualSwitch,
-        numInPorts,
-        numOutPorts
-    };
-
-    /** Default constructor */
-    SimulinkBlockType() = default;
-
-    /** Constructs a block type from an enum value */
-    explicit SimulinkBlockType(Type type);
-
-    /** Default destructor */
-    ~SimulinkBlockType() = default;
-
-    /** Checks if this block type matches the given type */
-    bool isA(SimulinkBlockType::Type type) const;
-
-    /** Returns the string representation of the current block type */
-    std::string ToString() const;
-
-private:
-    Type m_type;
+    DigitalClock,
+    Clock,
+    FromWorkspace,
+    FromFile,
+    Step,
+    UniformRandomNumber,
+    RandomNumber,
+    ToWorkspace,
+    Stop,
+    ToFile,
+    From,
+    Goto,
+    DataStoreRead,
+    DataStoreWrite,
+    DataStoreMemory,
+    GotoTagVisibility,
+    Assertion,
+    Terminator,
+    Ground,
+    Scope,
+    Constant,
+    Inport,
+    Outport,
+    Switch,
+    RelationalOperator,
+    Lookup2D,
+    VariableTransportDelay,
+    DotProduct,
+    FunctionCallSplit,
+    ManualSwitch,
+    NumInPorts,
+    NumOutPorts
 };
 
+SLXIO_APIEXPORT std::string ToString(SimulinkBlockType type);
+
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+} // namespace slxio
 
 #endif // SIMULINKBLOCKTYPE_H

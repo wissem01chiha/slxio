@@ -4,12 +4,10 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkBlockType::SimulinkBlockType(Type m_type) { this->m_type = m_type; }
-
-std::string SimulinkBlockType::ToString() const
+std::string ToString(SimulinkBlockType type)
 {
 
-    switch (m_type)
+    switch (type)
     {
     case SimulinkBlockType::DigitalClock:
         return "DigitalClock";
@@ -71,19 +69,14 @@ std::string SimulinkBlockType::ToString() const
         return "FunctionCallSplit";
     case SimulinkBlockType::ManualSwitch:
         return "ManualSwitch";
-    case SimulinkBlockType::numInPorts:
+    case SimulinkBlockType::NumInPorts:
         return "numInPorts";
-    case SimulinkBlockType::numOutPorts:
+    case SimulinkBlockType::NumOutPorts:
         return "numOutPorts";
     default:
         return "";
     }
     return "";
-}
-
-bool SimulinkBlockType::isA(SimulinkBlockType::Type type) const
-{
-    return this->m_type == type;
 }
 
 SLXIO_ABI_NAMESPACE_END
