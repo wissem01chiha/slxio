@@ -42,6 +42,6 @@ based ones.
 - **[Contributing](Contributing/index.md)**  
 - **[Changelog](Changelog/index.md)**  
 - **[Licenses](Licenses/index.md)** 
--  
+
 
 [slxio repo]: https://github.com/wissem01chiha/slxio
