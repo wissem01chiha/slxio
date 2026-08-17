@@ -26,7 +26,7 @@ public:
     void Log(const ILogMessage& msg) override;
     void SetLogLevel(LogLevelType level) override;
     LogLevelType GetLogLevel() const override;
-    ~Logger(){};
+    ~Logger() {};
 
 private:
     LogLevelType m_level;
