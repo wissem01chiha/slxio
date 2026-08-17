@@ -11,7 +11,6 @@
 #include "SimulinkElementBase.h"
 #include "SimulinkPort.h"
 
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN

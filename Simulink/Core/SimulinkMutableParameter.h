@@ -4,7 +4,6 @@
 #ifndef SIMULINKMUTABLEPARAMETER_H
 #define SIMULINKMUTABLEPARAMETER_H
 
-
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "IMutableParameterObject.h"
@@ -21,8 +20,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SimulinkMutableParameter
  */
-class SLXIO_APIEXPORT SimulinkMutableParameter  : public IParameterObject<std::string>,
-                                          public IObservable
+class SLXIO_APIEXPORT SimulinkMutableParameter
+    : public IParameterObject<std::string>,
+      public IObservable
 {
 public:
     ~SimulinkMutableParameter();
