@@ -30,8 +30,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * unique integer-based ID across the entire model XML file. Elements
  * that rely on string-based identifiers or alternative indexing
  * mechanisms should not inherit from this class.
- * @todo Separate base interfaces for concrete Simulink model elements
- * and implementation-specific elements.
  */
 class SLXIO_APIEXPORT ISimulinkElement
     : public IParameterizedObject,
@@ -93,7 +91,7 @@ public:
 
     /** If the Object id is mutable override this function to let setting
      * manully the Id */
-    virtual void SetId(const SId& id) {};
+    virtual void SetId(const SId& id) {return;};
 
     /** Set a logger object for this data object, this automaticlly propagte
      *  the logger to all implemented childers unless overriden by themself for

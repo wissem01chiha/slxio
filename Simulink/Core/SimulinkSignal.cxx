@@ -1,7 +1,5 @@
 #include "SimulinkSignal.h"
 
-#include <cstring>
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN

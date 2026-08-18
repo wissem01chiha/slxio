@@ -8,7 +8,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArray::~SimulinkArray() = default;
 
-SimulinkArray::SimulinkArray() {}
+SimulinkArray::SimulinkArray(): m_id(SId(0)) {}
 
 ISimulinkElement* SimulinkArray::New() const { return new SimulinkArray(); }
 
@@ -23,9 +23,9 @@ std::string SimulinkArray::ToString() const
     oss << "  Dimension: " << m_dimension << "\n";
 
     oss << "  Object Ids:\n";
-    for (const auto& m_id : m_objects)
+    for (const auto& object : m_objects)
     {
-        oss << "    - " << m_id << "\n";
+        oss << "    - " << object << "\n";
     }
 
     oss << "  m_arrays:\n";

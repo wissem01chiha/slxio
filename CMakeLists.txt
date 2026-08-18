@@ -12,6 +12,10 @@ include(DetermineVersion)
 include(Version)
 include(CMakeDependentOption)
 
+# Project metadata
+set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
+set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
+
 # Build slxio static or shared libs
 option(SLXIO_BUILD_SHARED_LIBS  "" OFF)
 

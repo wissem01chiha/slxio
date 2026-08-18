@@ -75,7 +75,7 @@ HError ISimulinkElement::SetLogger(ILogger* logger)
         return E_ILOGGER_NULLPTR_RECEIVED;
     }
     m_logger = logger;
-    for (auto& child : m_childrenOrder)
+    for (const auto& child : m_childrenOrder)
     {
         child->SetLogger(logger);
     }

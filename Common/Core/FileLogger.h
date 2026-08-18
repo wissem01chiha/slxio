@@ -21,6 +21,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT FileLogger final : public ILogger
 {
 public:
+    FileLogger() = default;
     /* Explicit constructor: if no name is provided, a default name
      * and default path are set by the logger. this option provides flexibility
      * to override the default logging file sink in different cases.*/

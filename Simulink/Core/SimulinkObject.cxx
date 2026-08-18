@@ -5,8 +5,6 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkObject::SimulinkObject() {}
-
 SimulinkObject::~SimulinkObject() = default;
 
 ISimulinkElement* SimulinkObject::New() const { return new SimulinkObject(); }
