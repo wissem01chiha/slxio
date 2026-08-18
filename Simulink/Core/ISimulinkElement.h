@@ -93,7 +93,7 @@ public:
 
     /** If the Object id is mutable override this function to let setting
      * manully the Id */
-    virtual void SetId(const SId& id){};
+    virtual void SetId(const SId& id) {};
 
     /** Set a logger object for this data object, this automaticlly propagte
      *  the logger to all implemented childers unless overriden by themself for
