@@ -8,7 +8,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkArray::~SimulinkArray() = default;
 
-SimulinkArray::SimulinkArray() {}
+SimulinkArray::SimulinkArray() =default;
 
 ISimulinkElement* SimulinkArray::New() const { return new SimulinkArray(); }
 
