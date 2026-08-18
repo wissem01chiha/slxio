@@ -28,7 +28,7 @@ TEST_CASE("FileLogger creates log file")
 
 TEST_CASE("FileLogger log level setter getter")
 {
-    FileLogger logger;
+    FileLogger logger("slxio.log");
 
     logger.SetLogLevel(LogLevelType::LOG_INFO);
 

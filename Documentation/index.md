@@ -7,7 +7,7 @@ description: "SIMULINK® SLX File I/O Library"
 # Welcome to SLXIO !
 {: .fs-9 }
 
-SIMULINK® File I/O Library
+Simulink® File I/O Library
 
 [Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View it on GitHub][slxio repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
@@ -33,14 +33,13 @@ based ones.
 
 ## Getting-Started
 
-- **[Introduction](Introduction/index.md)**  
-- **[Examples](Examples/index.md)**  
-- **[Integration](Integration/index.md)**  
-- **[Platform Support](Platform/index.md)**  
-- **[Reference](Reference/index.md)**  
-- **[Contributing](Contributing/index.md)**  
-- **[Changelog](Changelog/index.md)**  
-- **[Licenses](Licenses/index.md)** 
+- **[Introduction](Documentation/Introduction/index.md)**  
+- **[Examples](Documentation/Examples/index.md)**  
+- **[Integration](Documentation/Integration/index.md)**  
+- **[Platform Support](Documentation/Platform/index.md)**  
+- **[Reference](Documentation/Reference/index.md)**   
+- **[Changelog](Documentation/Changelog/index.md)**  
+- **[Licenses](Documentation/Licenses/index.md)**
 
 
 [slxio repo]: https://github.com/wissem01chiha/slxio

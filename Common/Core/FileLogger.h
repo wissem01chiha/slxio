@@ -24,7 +24,9 @@ public:
     /* Explicit constructor: if no name is provided, a default name
      * and default path are set by the logger. this option provides flexibility
      * to override the default logging file sink in different cases.*/
-    explicit FileLogger(const std::string& fileName = "slxio.log");
+    explicit FileLogger(const std::string& fileName);
+
+    /* Default destructor */
     ~FileLogger() noexcept;
 
     /* Create the file if not already exists*/

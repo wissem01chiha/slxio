@@ -41,7 +41,6 @@ private:
     Clock::time_point m_startTime{};
     bool m_running{false};
     Clock::duration m_accumulated{Clock::duration::zero()};
-    std::vector<IObserver*> m_observers;
 };
 
 SLXIO_ABI_NAMESPACE_END

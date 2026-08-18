@@ -6,7 +6,7 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 BackgroundLogger::BackgroundLogger()
-    : m_nthreads(1), m_queueSize(8192), m_level(LogLevelType::LOG_INFO)
+    : m_level(LogLevelType::LOG_INFO), m_queueSize(8192), m_nthreads(1)
 {
 }
 
@@ -23,8 +23,6 @@ void BackgroundLogger::Init()
 
 void BackgroundLogger::Log(const ILogMessage& msg)
 {
-
-    spdlog::level::level_enum lvl = spdlog::level::info;
     switch (m_level)
     {
     case LogLevelType::LOG_DEBUG:
@@ -37,6 +35,14 @@ void BackgroundLogger::Log(const ILogMessage& msg)
         spdlog::get("background_logger")->warn(msg.ToString());
         break;
     case LogLevelType::LOG_ERROR:
+        spdlog::get("background_logger")->error(msg.ToString());
+        break;
+    case LogLevelType::LOG_OFF:
+        break;
+    case LogLevelType::LOG_VERBOSE:
+        spdlog::get("background_logger")->info(msg.ToString());
+        break;
+    case LogLevelType::LOG_FATAL:
         spdlog::get("background_logger")->error(msg.ToString());
         break;
     }

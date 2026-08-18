@@ -103,25 +103,8 @@ DirectoryService::CreateDirectoryStructure(const std::string& structure,
 std::shared_ptr<Directory>
 DirectoryService::CreateTemporaryDirectory(int* error)
 {
-    uv_fs_t req;
-    *error = uv_fs_mkdtemp(uv_default_loop(), &req, "XXXXXX", nullptr);
 
-    if (*error < 0)
-    {
-        uv_fs_req_cleanup(&req);
-        return nullptr;
-    }
-
-    if (req.path == nullptr)
-    {
-        uv_fs_req_cleanup(&req);
-        return nullptr;
-    }
-
-    const char* tmpdir = strdup(req.path);
-    uv_fs_req_cleanup(&req);
-
-    return std::make_shared<Directory>(tmpdir);
+    return std::make_shared<Directory>();
 }
 
 std::shared_ptr<Directory>

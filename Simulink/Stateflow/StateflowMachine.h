@@ -76,6 +76,7 @@ public:
     std::vector<StateflowChart> getCharts()
     {
         //   return CollectionUtils.asUnmodifiable(charts.values());
+        return std::vector<StateflowChart>();
     }
 
     /** @brief Get the Simulink model this machine belongs to. */

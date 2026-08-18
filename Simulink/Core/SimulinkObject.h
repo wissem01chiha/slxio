@@ -22,7 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT SimulinkObject final : public ISimulinkElement
 {
 public:
-    SimulinkObject();
+    SimulinkObject() = default;
     ~SimulinkObject() override;
 
     ISimulinkElement* New() const override;
@@ -50,7 +50,7 @@ public:
     /** Return an array with the current object if not foudn return nullptr ! */
     std::shared_ptr<ISimulinkElement> GetArray(const SId& id) const;
 
-protected:
+private:
     SId m_id;
     std::string m_version;
     std::string m_propName;
