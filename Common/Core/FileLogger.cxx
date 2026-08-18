@@ -35,12 +35,13 @@ void FileLogger::SetLogLevel(LogLevelType level) { m_logLevel = level; }
 
 LogLevelType FileLogger::GetLogLevel() const { return m_logLevel; }
 
-FileLogger::~FileLogger() noexcept {
-    if (m_file.is_open()) {
-        m_file.close();  
+FileLogger::~FileLogger() noexcept
+{
+    if (m_file.is_open())
+    {
+        m_file.close();
     }
 }
-
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -10,8 +10,9 @@ SimulinkParameter::SimulinkParameter()
 {
 }
 
-SimulinkParameter::SimulinkParameter(const std::string& value) : m_value(value),m_dataType(SimulinkDataType::Auto),
-m_information(std::make_unique<SimulinkParameterInformation>())
+SimulinkParameter::SimulinkParameter(const std::string& value)
+    : m_value(value), m_dataType(SimulinkDataType::Auto),
+      m_information(std::make_unique<SimulinkParameterInformation>())
 {
 }
 
