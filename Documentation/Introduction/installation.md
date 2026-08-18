@@ -1,7 +1,7 @@
 ---
 title: Installation Guide
+description:
 layout: page
-nav_order: 4
 ---
 To install the prebuilt binary of the library, refer to the [Installation](#20-building) section and check out the latest release from the official GitHub release [page](https://github.com/wissem01chiha/slxio/releases),for building the library from source, see the same page for detailed instructions.
 

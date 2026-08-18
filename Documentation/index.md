@@ -4,11 +4,10 @@ layout: home
 description: "SIMULINK® SLX File I/O Library"
 ---
 
-## Welcome to SLXIO
-
+# Welcome to SLXIO !
 {: .fs-9 }
 
-SIMULINK® SLX File I/O Library
+SIMULINK® File I/O Library
 
 [Get started now](#getting-started){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View it on GitHub][slxio repo]{: .btn .fs-5 .mb-4 .mb-md-0 }
@@ -22,15 +21,15 @@ The project is designed as a lightweight alternative to [MATLAB](https://www.mat
 SLXIO does not aim to support all Simulink® features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive api for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started, and reduce the effort when migrating Matlab based scripts into SLXIO 
 based ones.
 
-## Project Goals
+## Key features
 
-- Access Simulink® models outside MATLAB Read *.slx block‑diagram files into native C++ structures.
+- Access  [Simulink®](https://www.mathworks.com/products/simulink.html) models outside [MATLAB®](https://www.mathworks.com/help/matlab/index.html) Read `.slx` block‑diagram files into native C++ structures.
 - Export models in scientific formats  Support [HDF5](https://www.hdfgroup.org/solutions/hdf5/), [NetCDF](https://www.unidata.ucar.edu/software/netcdf), and similar standards for use in research, simulation, and data analysis pipelines.
-- Export models in visualization formats Provide [JSON](https://www.json.org/json-en.html), [Mermaid](https://mermaid.live/), [Drawio](https://www.drawio.com/), and [Graphviz](https://graphviz.org/) outputs for integration with visualization tools and lightweight sharing.
-- Modify block diagrams without MATLAB licenses or installation  Edit parameters and metadata directly, then save changes back into *.slx files.
+- Export models in visualization formats Provide [Json](https://www.json.org/json-en.html), [Mermaid](https://mermaid.live/), [Drawio](https://www.drawio.com/), and [Graphviz](https://graphviz.org/) outputs for integration with visualization tools and lightweight sharing.
+- Modify block diagrams without [MATLAB®](https://www.mathworks.com/help/matlab/index.html) licenses or installation, by editing parameters and metadata directly, then save changes back into *.slx files.
 - Provide graph‑compatible structures for open source libraries  Load models into graph abstractions compatible with [Boost Graph](https://github.com/boostorg/graph), [Lemon](https://lemon.cs.elte.hu/trac/lemon),  [igraph](https://igraph.org/), or [ogdf](https://github.com/ogdf/ogdf) .
-- Explore models visually  Qt‑based Interactive visualization to navigate model structures.
-
+- Provide [Python](https://docs.python.org/3/)-compatible model representations for integration with modern scientific computing frameworks like [JAX](https://docs.jax.dev/en/latest/), and machine learning framworks such as [PyTorch](https://docs.pytorch.org/docs/main/), and [TensorFlow](https://www.tensorflow.org/).
+- Explore models visually [Qt](https://www.qt.io/)‑based Interactive visualization to navigate model structures.
 
 ## Getting-Started
 

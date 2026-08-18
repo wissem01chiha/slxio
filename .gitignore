@@ -1,61 +1,12 @@
-# Prerequisites
-*.d
+# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
+# SPDX-License-Identifier: Apache-2.0
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Linker files
-*.ilk
-
-# Debugger Files
-*.pdb
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
-# debug information files
-*.dwo
-
-# build folders
 build/
-
-# Visual Studio folders
 out/
 .vs/
-
-# Vcpkg Files
 vcpkg_installed/
-
-# vscode folders
-#.vscode/
-
-# jekyll build folder
+.vscode/
 _site/
 .jekyll-cache/
 Gemfile.lock
-
 Testing/Temporary/
