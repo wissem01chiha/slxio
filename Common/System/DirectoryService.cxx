@@ -104,7 +104,6 @@ std::shared_ptr<Directory>
 DirectoryService::CreateTemporaryDirectory(int* error)
 {
 
-
     return std::make_shared<Directory>();
 }
 

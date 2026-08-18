@@ -53,7 +53,7 @@ public:
     std::string ToString() const override;
 
 private:
-    SId m_id;
+    SId m_id{SId(0)};
     IErrorHandler* handler = nullptr;
     std::string m_type;
     std::string m_name;

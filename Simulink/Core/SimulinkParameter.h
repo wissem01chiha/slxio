@@ -49,7 +49,7 @@ public:
 
 private:
     std::string m_value;
-    SimulinkDataType m_dataType;
+    SimulinkDataType m_dataType{SimulinkDataType::Auto};
     std::unique_ptr<SimulinkParameterInformation> m_information;
 };
 
