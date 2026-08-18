@@ -1,7 +1,7 @@
 ---
 title: Use In Other Projects
+description:
 layout: page
-nav_order: 4
 ---
 
 # Use in Other Projects
