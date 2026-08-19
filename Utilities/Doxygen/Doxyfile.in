@@ -5,9 +5,9 @@
 #---------------------------------------------------------------------------
 
 DOXYFILE_ENCODING       = UTF-8
-PROJECT_NAME            = slxio
+PROJECT_NAME            = SLXIO
 PROJECT_NUMBER          = @SLXIO_VERSION@
-PROJECT_BRIEF           = SIMULINK SLX File I/O Library
+PROJECT_BRIEF           = 
 PROJECT_LOGO            = @PROJECT_LOGO_PATH@
 PROJECT_ICON            =
 OUTPUT_DIRECTORY        = @DOXYGEN_OUTPUT_DIR@
@@ -100,7 +100,7 @@ SHOW_USED_FILES        = NO
 SHOW_FILES             = YES
 SHOW_NAMESPACES        = NO
 FILE_VERSION_FILTER    =
-LAYOUT_FILE            = @DOXYGEN_LAYOUT_FILE@
+LAYOUT_FILE            =  
 CITE_BIB_FILES         =
 EXTERNAL_TOOL_PATH     =
 
@@ -129,8 +129,8 @@ WARN_LOGFILE           = doxygen.log
 INPUT                  = @DOXYGEN_INPUT@
 INPUT_ENCODING         = UTF-8
 INPUT_FILE_ENCODING    =
-FILE_PATTERNS          = *.h *.md
-RECURSIVE              = YES
+FILE_PATTERNS          = *.h 
+RECURSIVE              = NO
 EXCLUDE                =
 EXCLUDE_SYMLINKS       = NO
 EXCLUDE_PATTERNS       =
@@ -172,10 +172,10 @@ CLANG_DATABASE_PATH    =
 GENERATE_HTML          = @GENERATE_HTML@
 HTML_OUTPUT            = @SLXIO_HTML_OUTPUT_DIR@
 HTML_FILE_EXTENSION    = .html
-HTML_HEADER            = @DOXYGEN_HTML_HEADER@
-HTML_FOOTER            = @DOXYGEN_HTML_FOOTER@
+HTML_HEADER            = 
+HTML_FOOTER            = 
 HTML_EXTRA_STYLESHEET  = @DOXYGEN_EXTRA_STYLESHEET@
-HTML_EXTRA_FILES       = @DOXYGEN_EXTRA_FILES@
+HTML_EXTRA_FILES       = 
 HTML_COLORSTYLE        = LIGHT
 HTML_COLORSTYLE_HUE    = 220
 HTML_COLORSTYLE_SAT    = 255
@@ -192,7 +192,7 @@ HTML_INDEX_NUM_ENTRIES = 100
 #---------------------------------------------------------------------------
 
 DISABLE_INDEX          = NO
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 PAGE_OUTLINE_PANEL     = YES
 FULL_SIDEBAR           = NO
 ENUM_VALUES_PER_LINE   = 1
@@ -221,7 +221,7 @@ EXTRA_SEARCH_MAPPINGS  =
 #---------------------------------------------------------------------------
 # configuration options for main page of the documentation
 #---------------------------------------------------------------------------
-#USE_MDFILE_AS_MAINPAGE = 
+USE_MDFILE_AS_MAINPAGE = @DOXYGEN_MAINPAGE_MDFILE@
 HAVE_DOT               = YES
 DOT_NUM_THREADS        = 3
 INTERACTIVE_SVG        = YES

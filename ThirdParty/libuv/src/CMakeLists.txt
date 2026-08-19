@@ -827,7 +827,7 @@ endif()
 add_library(libuv::libuv ALIAS ${LIB_SELECTED})
 
 # clang-tidy support
-option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" ON)
+option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" OFF)
 if(ENABLE_CLANG_TIDY)
   find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
   if(CLANG_TIDY_EXE)

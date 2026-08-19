@@ -5,23 +5,11 @@ add_module(
     Simulink
   LIBRARY_NAME 
     SimulinkCore
-  MODULE_DESCRIPTION 
-    "Simulink Core Support Module"
-  MODULE_MAINTAINER 
-    "Wissem Chiha"
-  MODULE_SPDX_LICENSE_IDENTIFIER 
-    "Apache-2.0"
-  MODULE_SPDX_COPYRIGHT_TEXT 
-    "Copyright (c) 2025-2026 Wissem Chiha"
   MODULE_ENABLE_BUILD 
     TRUE
   MODULE_ENABLE_TESTS 
     TRUE
   MODULE_CONFIG_HEADERS
-  MODULE_INSTALL_HEADERS
-  MODULE_INSTALL_TARGETS
-  MODULE_INSTALL_LICENSES
-  MODULE_INSTALL_DOCS
   MODULE_CLASSES
     ISimulinkElement.cxx
     SimulinkDataType.cxx
@@ -30,6 +18,8 @@ add_module(
     SimulinkParameter.cxx
     SimulinkArray.cxx
     SimulinkObject.cxx
+    SimulinkMutableParameter.cxx
+    SimulinkBlock.cxx
   MODULE_HEADERS
     SimulinkECH.h
     ISimulinkElement.h
@@ -42,6 +32,8 @@ add_module(
     SimulinkPortType.h
     SimulinkModelType.h
     SimulinkBlockType.h
+    SimulinkMutableParameter.h
+    SimulinkBlock.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES

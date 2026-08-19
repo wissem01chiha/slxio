@@ -5,14 +5,6 @@ add_module(
     Common
   LIBRARY_NAME 
     CommonCore
-  MODULE_DESCRIPTION 
-    "Core Utilities Module"
-  MODULE_MAINTAINER 
-    "Wissem Chiha"
-  MODULE_SPDX_LICENSE_IDENTIFIER 
-    "Apache-2.0"
-  MODULE_SPDX_COPYRIGHT_TEXT 
-    "Copyright (c) 2025-2026 Wissem Chiha"
   MODULE_ENABLE_BUILD 
     TRUE
   MODULE_ENABLE_TESTS 
@@ -21,10 +13,6 @@ add_module(
     Options.h.in
     VersionMacro.h.in
     SimulinkVersionMacro.h.in
-  MODULE_INSTALL_HEADERS
-  MODULE_INSTALL_TARGETS
-  MODULE_INSTALL_LICENSES
-  MODULE_INSTALL_DOCS
   MODULE_CLASSES
     Version.cxx
     SimulinkVersion.cxx

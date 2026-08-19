@@ -76,8 +76,8 @@ else()
   endif()
 endif()
 
-include(Dist)
-Dist(${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
+# include(Dist)
+# Dist(${CMAKE_PROJECT_NAME}-${CMAKE_PROJECT_VERSION})
 
 #ADD_CUSTOM_TARGET(uninstall
 #  COMMAND cat ${PROJECT_BINARY_DIR}/install_manifest.txt | xargs rm

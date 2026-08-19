@@ -31,6 +31,8 @@ std::string ToString(SimulinkPortType type)
 
     case SimulinkPortType::IfAction:
         return "IfAction";
+    default:
+        return {};
     }
 
     return {};

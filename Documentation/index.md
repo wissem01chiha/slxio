@@ -4,7 +4,7 @@ layout: home
 description: "SIMULINK® SLX File I/O Library"
 ---
 
-# Welcome to SLXIO !
+# Welcome to Slxio !
 {: .fs-9 }
 
 Simulink® File I/O Library
@@ -14,11 +14,11 @@ Simulink® File I/O Library
 
 ## Overview
 
-SLXIO is an open‑source C++14 library for reading, writing, visualizing, and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+Slxio is an open‑source C++14 library for reading, writing, visualizing, and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) `.slx` model files.
 
 The project is designed as a lightweight alternative to [MATLAB](https://www.mathworks.com/help/matlab/index.html) proprietary libraries and runtime, similar in spirit to the [MATIO](https://github.com/tbeu/matio) library for `.mat` files. Its goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python, Java, and others via C++ bindings. It was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code here   [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava), ported to C++ and refactored into a highly modular architecture.
 
-SLXIO does not aim to support all Simulink® features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive api for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started, and reduce the effort when migrating Matlab based scripts into SLXIO 
+Slxio does not aim to support all Simulink® features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive api for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started, and reduce the effort when migrating Matlab based scripts into Slxio 
 based ones.
 
 ## Key features
@@ -33,13 +33,13 @@ based ones.
 
 ## Getting-Started
 
-- **[Introduction](Documentation/Introduction/index.md)**  
-- **[Examples](Documentation/Examples/index.md)**  
-- **[Integration](Documentation/Integration/index.md)**  
-- **[Platform Support](Documentation/Platform/index.md)**  
-- **[Reference](Documentation/Reference/index.md)**   
-- **[Changelog](Documentation/Changelog/index.md)**  
-- **[Licenses](Documentation/Licenses/index.md)**
+- **[Introduction](./Introduction/index.md)**  
+- **[Examples](./Examples/index.md)**  
+- **[Integration](./Integration/index.md)**  
+- **[Platform Support](./Platform/index.md)**  
+- **[Reference](./Reference/index.md)**   
+- **[Changelog](./Changelog/index.md)**  
+- **[Licenses](./Licenses/index.md)**
 
 
 [slxio repo]: https://github.com/wissem01chiha/slxio

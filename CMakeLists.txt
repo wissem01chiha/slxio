@@ -14,7 +14,12 @@ include(CMakeDependentOption)
 
 # Project metadata
 set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
+
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
+
+# Option to enable/disable LTO note that this might increase 
+# build time but produce more optimized binary 
+option(SLXIO_ENABLE_LTO "" OFF)
 
 # Build slxio static or shared libs
 option(SLXIO_BUILD_SHARED_LIBS  "" OFF)

@@ -5,12 +5,6 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IDataObject::IDataObject() {}
-
-UInt32 IDataObject::GetUpdateTime() const { return (UInt32)0; }
-
-UInt32 IDataObject::GetMemorySize() const { return (UInt32)0; }
-
 HError IDataObject::SetLogger(ILogger* logger)
 {
     if (logger == nullptr)
@@ -21,7 +15,11 @@ HError IDataObject::SetLogger(ILogger* logger)
     return E_OK;
 }
 
-const ILogger* IDataObject::GetLogger() { return m_logger; }
+ILogger* IDataObject::GetLogger() { return m_logger; }
+
+void IDataObject::UpdateTime() { m_updateTime = TimeStamp::Now(); }
+
+TimeStamp IDataObject::GetUpdateTime() const { return m_updateTime; }
 
 SLXIO_ABI_NAMESPACE_END
 

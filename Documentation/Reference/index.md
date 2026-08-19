@@ -1,6 +1,3 @@
----
-title: API Reference Documentation
----
 
 ## API Documentation
 
