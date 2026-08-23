@@ -7,7 +7,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::~SimulinkObject() = default;
 
-ISimulinkElement* SimulinkObject::New() const { return new SimulinkObject(); }
+ISimulinkElement* SimulinkObject::New() const
+{
+    return new SimulinkObject(); // NOSONAR
+}
 
 HError SimulinkObject::AcceptInsert(ISimulinkElement& parent)
 {

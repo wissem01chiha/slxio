@@ -9,38 +9,6 @@ std::string ToString(SimulinkBlockType type)
 
     switch (type)
     {
-    case SimulinkBlockType::DigitalClock:
-        return "DigitalClock";
-    case SimulinkBlockType::Clock:
-        return "Clock";
-    case SimulinkBlockType::FromWorkspace:
-        return "FromWorkspace";
-    case SimulinkBlockType::FromFile:
-        return "FromFile";
-    case SimulinkBlockType::Step:
-        return "Step";
-    case SimulinkBlockType::UniformRandomNumber:
-        return "UniformRandomNumber";
-    case SimulinkBlockType::RandomNumber:
-        return "RandomNumber";
-    case SimulinkBlockType::ToWorkspace:
-        return "ToWorkspace";
-    case SimulinkBlockType::Stop:
-        return "Stop";
-    case SimulinkBlockType::ToFile:
-        return "ToFile";
-    case SimulinkBlockType::From:
-        return "From";
-    case SimulinkBlockType::Goto:
-        return "Goto";
-    case SimulinkBlockType::DataStoreRead:
-        return "DataStoreRead";
-    case SimulinkBlockType::DataStoreWrite:
-        return "DataStoreWrite";
-    case SimulinkBlockType::DataStoreMemory:
-        return "DataStoreMemory";
-    case SimulinkBlockType::GotoTagVisibility:
-        return "GotoTagVisibility";
     case SimulinkBlockType::Assertion:
         return "Assertion";
     case SimulinkBlockType::Terminator:
@@ -51,28 +19,6 @@ std::string ToString(SimulinkBlockType type)
         return "Scope";
     case SimulinkBlockType::Constant:
         return "Constant";
-    case SimulinkBlockType::Inport:
-        return "Inport";
-    case SimulinkBlockType::Outport:
-        return "Outport";
-    case SimulinkBlockType::Switch:
-        return "Switch";
-    case SimulinkBlockType::RelationalOperator:
-        return "RelationalOperator";
-    case SimulinkBlockType::Lookup2D:
-        return "Lookup2D";
-    case SimulinkBlockType::VariableTransportDelay:
-        return "VariableTransportDelay";
-    case SimulinkBlockType::DotProduct:
-        return "DotProduct";
-    case SimulinkBlockType::FunctionCallSplit:
-        return "FunctionCallSplit";
-    case SimulinkBlockType::ManualSwitch:
-        return "ManualSwitch";
-    case SimulinkBlockType::NumInPorts:
-        return "numInPorts";
-    case SimulinkBlockType::NumOutPorts:
-        return "numOutPorts";
     default:
         return "";
     }

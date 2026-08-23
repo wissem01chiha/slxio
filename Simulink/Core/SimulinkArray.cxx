@@ -10,7 +10,10 @@ SimulinkArray::~SimulinkArray() = default;
 
 SimulinkArray::SimulinkArray() = default;
 
-ISimulinkElement* SimulinkArray::New() const { return new SimulinkArray(); }
+ISimulinkElement* SimulinkArray::New() const
+{
+    return new SimulinkArray(); // NOSONAR
+}
 
 std::string SimulinkArray::ToString() const
 {

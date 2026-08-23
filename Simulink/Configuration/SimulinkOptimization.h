@@ -6,6 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ConfigurationPCH.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -15,68 +16,66 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief optimization settings
  */
-class SLXIO_APIEXPORT SimulinkOptimization final
+struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
 {
-public:
-    SimulinkOptimization() = default;
-    ~SimulinkOptimization() = default;
-
-    const char** DisabledProps;
+    std::string DisabledProps;
     UInt16 DisabledPropsCount;
-    const char* Description;
-    const char* Components;
-    const char* BlockReduction;
-    const char* booleanDataType;
-    const char* ConditionallyExecuteInputs;
-    const char* DefaultParameterBehavior;
-    const char* UseDivisionForNetSlopeComputation;
-    const char* GainParamInheritBuiltuint16ype;
-    const char* UseFloatMulNetSlope;
-    const char* DefaultUnderspecifiedDataType;
-    const char* UseSpecifiedMinMax;
-    const char* InlineInvariantSignals;
-    const char* OptimizeBlockIOStorage;
-    const char* BufferReuse;
-    const char* EnhancedBackFolding;
-    const char* CachingGlobalReferences;
-    const char* GlobalBufferReuse;
-    const char* StrengthReduction;
-    const char* AdvancedOptControl;
-    const char* ExpressionFolding;
-    const char* booleansAsBitfields;
-    const char* BitfieldContainerType;
-    const char* EnableMemcpy;
-    const char* MemcpyThreshold;
-    const char* PassReuseOutputArgsAs;
-    const char* PassReuseOutputArgsThreshold;
-    const char* ExpressionDepthLimit;
-    const char* LocalBlockOutputs;
-    const char* RollThreshold;
-    const char* StateBitsets;
-    const char* DataBitsets;
-    const char* ActiveStateOutputEnumStorageType;
-    const char* ZeroExternalMemoryAtStartup;
-    const char* Zerouint16ernalMemoryAtStartup;
-    const char* InitFltsAndDblsToZero;
-    const char* NoFixptDivByZeroProtection;
-    const char* EfficientFloat2uint16Cast;
-    const char* EfficientMapNaN2uint16Zero;
-    const char* LifeSpan;
-    const char* MaxStackSize;
-    const char* BufferReusableBoundary;
-    const char* SimCompilerOptimization;
-    const char* AccelVerboseBuild;
-    const char* OptimizeBlockOrder;
-    const char* OptimizeDataStoreBuffers;
-    const char* BusAssignmentInplaceUpdate;
-    const char* DifferentSizesBufferReuse;
-    const char* OptimizationLevel;
-    const char* OptimizationPriority;
-    const char* OptimizationCustomize;
-    const char* UseRowMajorAlgorithm;
-    const char* LabelGuidedReuse;
-    const char* MultiThreadedLoops;
-    const char* DenormalBehavior;
+    std::string Description;
+    std::string Components;
+    std::string BlockReduction;
+    std::string booleanDataType;
+    std::string ConditionallyExecuteInputs;
+    std::string DefaultParameterBehavior;
+    std::string UseDivisionForNetSlopeComputation;
+    std::string GainParamInheritBuiltuint16ype;
+    std::string UseFloatMulNetSlope;
+    std::string DefaultUnderspecifiedDataType;
+    std::string UseSpecifiedMinMax;
+    std::string InlineInvariantSignals;
+    std::string OptimizeBlockIOStorage;
+    std::string BufferReuse;
+    std::string EnhancedBackFolding;
+    std::string CachingGlobalReferences;
+    std::string GlobalBufferReuse;
+    std::string StrengthReduction;
+    std::string AdvancedOptControl;
+    std::string ExpressionFolding;
+    std::string booleansAsBitfields;
+    std::string BitfieldContainerType;
+    std::string EnableMemcpy;
+    std::string MemcpyThreshold;
+    std::string PassReuseOutputArgsAs;
+    std::string PassReuseOutputArgsThreshold;
+    std::string ExpressionDepthLimit;
+    std::string LocalBlockOutputs;
+    std::string RollThreshold;
+    std::string StateBitsets;
+    std::string DataBitsets;
+    std::string ActiveStateOutputEnumStorageType;
+    std::string ZeroExternalMemoryAtStartup;
+    std::string Zerouint16ernalMemoryAtStartup;
+    std::string InitFltsAndDblsToZero;
+    std::string NoFixptDivByZeroProtection;
+    std::string EfficientFloat2uint16Cast;
+    std::string EfficientMapNaN2uint16Zero;
+    std::string LifeSpan;
+    std::string MaxStackSize;
+    std::string BufferReusableBoundary;
+    std::string SimCompilerOptimization;
+    std::string AccelVerboseBuild;
+    std::string OptimizeBlockOrder;
+    std::string OptimizeDataStoreBuffers;
+    std::string BusAssignmentInplaceUpdate;
+    std::string DifferentSizesBufferReuse;
+    std::string OptimizationLevel;
+    std::string OptimizationPriority;
+    std::string OptimizationCustomize;
+    std::string UseRowMajorAlgorithm;
+    std::string LabelGuidedReuse;
+    std::string MultiThreadedLoops;
+    std::string DenormalBehavior;
+
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

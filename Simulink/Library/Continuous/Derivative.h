@@ -8,6 +8,7 @@
 #include "APIExportMacro.h"
 #include "IBlockParameters.h"
 #include "IBlockProperties.h"
+#include "ISimulinkBlock.h"
 #include "LibraryECH.h"
 #include "PlatformTypes.h"
 
@@ -16,20 +17,30 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT Derivative : public IBlockParameters,
-                                   public IBlockProperties
+                                   public IBlockProperties,
+                                   public ISimulinkBlock
 {
 public:
-    /** Default Constructor */
-    Derivative();
+    Derivative() = default;
 
-    /** Default Destructor */
-    ~Derivative();
+    explicit Derivative(Float64 coefficientintfapproximation);
 
-    const std::string& GetCoefficientintfapproximation() const;
-    void SetCoefficientintfapproximation(const std::string& value);
+    ~Derivative() = default;
+
+    SimulinkBlockType GetBlockType() const override;
+    SimulinkBlockCategory GetBlockCategory() const override;
+
+    void AddParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    void SetParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    std::shared_ptr<IParameterObjectBase>
+    GetParam(const std::string& name) override;
+
+    std::string ToString() const override;
 
 private:
-    std::string m_Coefficientintfapproximation;
+    std::string m_coefficientintfapproximation;
 };
 
 SLXIO_ABI_NAMESPACE_END

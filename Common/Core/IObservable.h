@@ -27,6 +27,8 @@ public:
 
 protected:
     virtual void Update(const IObservationMessage& msg);
+
+private:
     std::vector<IObserver*> m_observers;
 };
 

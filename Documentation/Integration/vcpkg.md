@@ -1,4 +1,0 @@
----
-title: Vcpkg Integration
-description: 
----

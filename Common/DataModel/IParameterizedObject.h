@@ -23,6 +23,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SLXIO_APIEXPORT IParameterizedObject
 {
 public:
+    virtual ~IParameterizedObject() = default;
+
     /**
      * Add a parameter
      * https://www.mathworks.com/help/simulink/slref/add_param.html

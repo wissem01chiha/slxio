@@ -24,7 +24,7 @@ include(CMakePushCheckState)
 include(FindPkgConfig)
 include(GNUInstallDirs)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(LIBXML2_WITH_CATALOG "Add the Catalog support" ON)
 option(LIBXML2_WITH_DEBUG "Add the debugging module" ON)
 option(LIBXML2_WITH_DOCS "Build documentation" OFF)

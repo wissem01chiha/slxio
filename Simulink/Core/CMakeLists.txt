@@ -19,7 +19,9 @@ add_module(
     SimulinkArray.cxx
     SimulinkObject.cxx
     SimulinkMutableParameter.cxx
-    SimulinkBlock.cxx
+    ISimulinkBlock.cxx
+    SimulinkModel.cxx
+    SimulinkBlockCategory.cxx
   MODULE_HEADERS
     SimulinkECH.h
     ISimulinkElement.h
@@ -33,7 +35,9 @@ add_module(
     SimulinkModelType.h
     SimulinkBlockType.h
     SimulinkMutableParameter.h
-    SimulinkBlock.h
+    ISimulinkBlock.h
+    SimulinkModel.h
+    SimulinkBlockCategory.h
   MODULE_PCH_HEADERS
     SimulinkPCH.h
   MODULE_SOURCES

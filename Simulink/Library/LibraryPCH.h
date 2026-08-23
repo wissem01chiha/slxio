@@ -4,4 +4,7 @@
 #ifndef LIBRARYPCH_H
 #define LIBRARYPCH_H
 
+#include <string>
+#include <vector>
+
 #endif // LIBRARYPCH_H

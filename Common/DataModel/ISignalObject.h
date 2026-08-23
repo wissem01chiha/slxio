@@ -42,17 +42,15 @@ public:
         m_logger = logger;
         return E_OK;
     };
-    const ILogger* GetLogger() { return m_logger; };
+    const ILogger* GetLogger() const { return m_logger; };
 
     ISignalObject();
 
     virtual ~ISignalObject() = default;
 
-protected:
+private:
     const ILogger* m_logger = nullptr;
     std::vector<T> m_buffer;
-
-private:
 };
 
 SLXIO_ABI_NAMESPACE_END

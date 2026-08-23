@@ -13,51 +13,50 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Base Class for Simulink Solver Configuration
  * Parameters
  */
-class SimulinkSolver
+struct SLXIO_APIEXPORT SimulinkSolver // NOSONAR
 {
-public:
-    SimulinkSolver() = default;
+    std::string DisabledProps;
+    std::string Description;
+    std::string Components;
+    std::string StartTime;
+    std::string StopTime;
+    std::string AbsTol;
+    std::string AutoScaleAbsTol;
+    std::string FixedStep;
+    std::string InitialStep;
+    std::string MaxOrder;
+    std::string ZcThreshold;
+    std::string ConsecutiveZCsStepRelTol;
+    std::string MaxConsecutiveZCs;
+    std::string ExtrapolationOrder;
+    std::string NumberNewtonIterations;
+    std::string MaxStep;
+    std::string MinStep;
+    std::string MaxConsecutiveMinStep;
+    std::string RelTol;
+    std::string EnableMultiTasking;
+    std::string ConcurrentTasks;
+    std::string Solver;
+    std::string SolverName;
+    std::string SolverJacobianMethodControl;
+    std::string ShapePreserveControl;
+    std::string ZeroCrossControl;
+    std::string ZeroCrossAlgorithm;
+    std::string AlgebraicLoopSolver;
+    std::string SolverInfoToggleStatus;
+    std::string IsAutoAppliedInSIP;
+    std::string SolverResetMethod;
+    std::string PositivePriorityOrder;
+    std::string AutoInsertRateTranBlk;
+    std::string SampleTimeConstrauint16;
+    std::string InsertRTBMode;
+    std::string SampleTimeProperty;
+    std::string DecoupledContinuousuint16egration;
+    std::string MinimalZcImpactuint16egration;
+    std::string SolverOrder;
 
-private:
-    const char* DisabledProps;
-    const char* Description;
-    const char* Components;
-    const char* StartTime;
-    const char* StopTime;
-    const char* AbsTol;
-    const char* AutoScaleAbsTol;
-    const char* FixedStep;
-    const char* InitialStep;
-    const char* MaxOrder;
-    const char* ZcThreshold;
-    const char* ConsecutiveZCsStepRelTol;
-    const char* MaxConsecutiveZCs;
-    const char* ExtrapolationOrder;
-    const char* NumberNewtonIterations;
-    const char* MaxStep;
-    const char* MinStep;
-    const char* MaxConsecutiveMinStep;
-    const char* RelTol;
-    const char* EnableMultiTasking;
-    const char* ConcurrentTasks;
-    const char* Solver;
-    const char* SolverName;
-    const char* SolverJacobianMethodControl;
-    const char* ShapePreserveControl;
-    const char* ZeroCrossControl;
-    const char* ZeroCrossAlgorithm;
-    const char* AlgebraicLoopSolver;
-    const char* SolverInfoToggleStatus;
-    const char* IsAutoAppliedInSIP;
-    const char* SolverResetMethod;
-    const char* PositivePriorityOrder;
-    const char* AutoInsertRateTranBlk;
-    const char* SampleTimeConstrauint16;
-    const char* InsertRTBMode;
-    const char* SampleTimeProperty;
-    const char* DecoupledContinuousuint16egration;
-    const char* MinimalZcImpactuint16egration;
-    const char* SolverOrder;
+    /** Check if the goven Solver configuration is a valid one */
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

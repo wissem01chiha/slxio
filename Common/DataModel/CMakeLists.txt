@@ -5,23 +5,11 @@ add_module(
     Common
   LIBRARY_NAME 
     CommonDataModel
-  MODULE_DESCRIPTION 
-    "Data System Definition Support Module"
-  MODULE_MAINTAINER 
-    "Wissem Chiha"
-  MODULE_SPDX_LICENSE_IDENTIFIER 
-    "Apache-2.0"
-  MODULE_SPDX_COPYRIGHT_TEXT 
-    "Copyright (c) 2025-2026 Wissem Chiha"
   MODULE_ENABLE_BUILD 
     TRUE
   MODULE_ENABLE_TESTS 
     TRUE
   MODULE_CONFIG_HEADERS
-  MODULE_INSTALL_HEADERS
-  MODULE_INSTALL_TARGETS
-  MODULE_INSTALL_LICENSES
-  MODULE_INSTALL_DOCS
   MODULE_CLASSES
     IDataObject.cxx
     JsonDataObject.cxx
@@ -45,6 +33,9 @@ add_module(
     IParameterDataObjectBase.h
     XmlCharDataObject.h
     XmlNodeDataObject.h
+    IConfigurationObject.h
+    IConfigurableObject.h
+    IConfigurationDataObject.h
   MODULE_PCH_HEADERS
     DataModelPCH.h
   MODULE_SOURCES
