@@ -1,10 +1,5 @@
 #include "SimulinkConfigSet.h"
 
-#include "ErrorCode.h"
-#include "Logger.h"
-#include "SimulinkObject.h"
-#include "SimulinkParameter.h"
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
@@ -12,12 +7,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 SimulinkConfigSet::SimulinkConfigSet()
     : status(false), solver(nullptr), optimization(nullptr), sfSim(nullptr),
       debugging(nullptr), hardware(nullptr), modelReference(nullptr),
-      rtw(nullptr), logger(Logger::GetInstance())
-{
-}
-
-SimulinkConfigSet::SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj)
-    : object(obj), logger(Logger::GetInstance())
+      rtw(nullptr)
 {
 }
 

@@ -7,7 +7,10 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkObject::~SimulinkObject() = default;
 
-ISimulinkElement* SimulinkObject::New() const { return new SimulinkObject(); }
+ISimulinkElement* SimulinkObject::New() const
+{
+    return new SimulinkObject(); // NOSONAR
+}
 
 HError SimulinkObject::AcceptInsert(ISimulinkElement& parent)
 {
@@ -30,8 +33,8 @@ HError SimulinkObject::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
         return E_CHILD_NULLPTR_RECEIVED;
     }
-    m_children[element->GetId()] = element;
-    m_childrenOrder.push_back(element);
+    GetChildren()[element->GetId()] = element;
+    GetOrderedChildren().push_back(element);
     // tell the element how is his parent
     element->SetParent(shared_from_this());
     return E_OK;
@@ -110,7 +113,7 @@ std::string SimulinkObject::ToString() const
     oss << "  Class: " << m_className << "\n";
 
     oss << "  Objects:\n";
-    for (const auto& obj : m_childrenOrder)
+    for (const auto& obj : GetOrderedChildren())
     {
         if (obj)
         {

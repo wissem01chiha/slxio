@@ -1,14 +1,16 @@
----
-title: Contributing
----
+# Contributing Guide
 
-## Contact
+Thanks very much for your interest in the Slxio project. The project is under active development, and contributions are highly encouraged. See the following documentation pages for more details about project setup and conventions.
 
-Feel free to  contact the maintainer through email at [mail](mailto:chihawissem08@gmail.com)
+- @subpage CodingStandards
+- @subpage Contact
+- @subpage EnvironmentSetup
+- @subpage RunningTests
+- @subpage RunningStaticChecks
+- @subpage To‑Do 
+- @subpage MakingNewRelease
+- @subpage ExternalDependencySystem
 
-## Contributing
+@page Contact
 
-If you are interested in collaborating, please see the [CONTRIBUTING](CONTRIBUTING.md) guide or contact the maintainer via email (see section [1.2](#12-contact)).
-Due to time constraints, responses and pull request reviews may be delayed. Thank you for your understanding.
-
-The project is under active development, and contributions are highly encouraged. See the [Contributing](.github/CONTRIBUTING.md) guide for basics on Git, CMake, C++, and workflow, and the [Development](/Development/README.md) guide for quick-start instructions and advanced details.
+Currently, there is no official mailing list for the project, as there is only one developer/maintainer. Feel free to contact me directly instead. [mail: chihawissem08 [dot] gmail [dot] com](mailto:chihawissem08@gmail.com)

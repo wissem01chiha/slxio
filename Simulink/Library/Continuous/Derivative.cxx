@@ -4,19 +4,44 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Derivative::Derivative() {}
+Derivative::Derivative(Float64 coefficientintfapproximation) {}
 
-Derivative::~Derivative() {}
-
-const std::string& Derivative::GetCoefficientintfapproximation() const
+SimulinkBlockType Derivative::GetBlockType() const
 {
-    return m_Coefficientintfapproximation;
+    return SimulinkBlockType::Derivative;
 }
 
-void Derivative::SetCoefficientintfapproximation(const std::string& value)
+SimulinkBlockCategory Derivative::GetBlockCategory() const
 {
-    m_Coefficientintfapproximation = value;
+    return SimulinkBlockCategory(
+        SimulinkBlockCategory::DefaultCategory::Continuous);
 }
+
+void Derivative::AddParam(const std::string& name,
+                          const std::shared_ptr<IParameterObjectBase>& p)
+{
+    if (p == nullptr)
+    {
+        return;
+    }
+}
+
+void Derivative::SetParam(const std::string& name,
+                          const std::shared_ptr<IParameterObjectBase>& p)
+{
+    if (p == nullptr)
+    {
+        return;
+    }
+}
+
+std::shared_ptr<IParameterObjectBase>
+Derivative::GetParam(const std::string& name)
+{
+    return nullptr;
+}
+
+std::string Derivative::ToString() const { return std::string(); }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -1,6 +1,4 @@
----
-title: License
----
+# License
 
 
 All material is provided under an Apache License unless otherwise specified.

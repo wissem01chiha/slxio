@@ -1,3 +1,5 @@
+add_subdirectory(Configuration)
 add_subdirectory(Misc)
 add_subdirectory(Data)
 add_subdirectory(Core)
+add_subdirectory(Library)

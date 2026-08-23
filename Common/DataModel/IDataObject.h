@@ -11,6 +11,7 @@
 #include "ILogger.h"
 #include "IObservable.h"
 #include "PlatformTypes.h"
+#include "TimeStamp.h"
 
 namespace slxio
 {
@@ -28,11 +29,11 @@ public:
     /** Reset the data object to its initial state */
     virtual void Initialize(void* implDataObject) = 0;
 
-    /** Get the last update time (in milliseconds since epoch) */
-    virtual UInt32 GetUpdateTime() const;
+    /** Refresh update time to now */
+    void UpdateTime();
 
-    /** Return the memory size used by this object */
-    virtual UInt32 GetMemorySize() const;
+    /** Get the last update time */
+    TimeStamp GetUpdateTime() const;
 
     /** Access the underlying implementation object */
     virtual void* GetImplDataObject() const = 0;
@@ -53,18 +54,16 @@ public:
     HError SetLogger(ILogger* logger);
 
     /** Get the logger sink */
-    const ILogger* GetLogger();
+    ILogger* GetLogger();
 
     /* Default Constructor */
-    IDataObject();
+    IDataObject() : m_updateTime(TimeStamp::Now()) {}
 
     virtual ~IDataObject() = default;
 
-protected:
-    ILogger* m_logger = nullptr;
-    UInt32 m_updateTime;
-
 private:
+    ILogger* m_logger = nullptr;
+    TimeStamp m_updateTime;
     // Disable copy and assignment
     IDataObject(const IDataObject&) = delete;
     void operator=(const IDataObject&) = delete;

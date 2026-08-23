@@ -10,7 +10,10 @@ SimulinkArray::~SimulinkArray() = default;
 
 SimulinkArray::SimulinkArray() = default;
 
-ISimulinkElement* SimulinkArray::New() const { return new SimulinkArray(); }
+ISimulinkElement* SimulinkArray::New() const
+{
+    return new SimulinkArray(); // NOSONAR
+}
 
 std::string SimulinkArray::ToString() const
 {
@@ -29,7 +32,7 @@ std::string SimulinkArray::ToString() const
     }
 
     oss << "  m_arrays:\n";
-    for (const auto& children : m_childrenOrder)
+    for (const auto& children : GetOrderedChildren())
     {
         if (children != nullptr)
         {
@@ -78,8 +81,8 @@ HError SimulinkArray::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
         return E_CHILD_NULLPTR_RECEIVED;
     }
-    m_children[element->GetId()] = element;
-    m_childrenOrder.push_back(element);
+    GetChildren()[element->GetId()] = element;
+    GetOrderedChildren().push_back(element);
     // tell the element how is his parent
     element->SetParent(shared_from_this());
     return E_OK;

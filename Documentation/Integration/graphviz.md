@@ -1,9 +1,4 @@
----
-title: Graphviz Integration
-description: 
----
-
-# Environment Setup
+@page Graphviz Graphviz Integration
 
 ## Graphviz
 

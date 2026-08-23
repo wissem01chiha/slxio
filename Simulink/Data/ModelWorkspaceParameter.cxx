@@ -11,7 +11,7 @@ ModelWorkspaceParameter::ModelWorkspaceParameter(
     const std::string& name, const std::shared_ptr<ModelWorkspace>& data)
     : m_data(data)
 {
-    m_name = name;
+    SetName(name);
 }
 
 IParameterObjectBase* ModelWorkspaceParameter::New()

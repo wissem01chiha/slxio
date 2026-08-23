@@ -6,23 +6,19 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ConfigurationPCH.h"
 #include "PlatformTypes.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief
- */
-class SimulinkRTW final
+struct SLXIO_APIEXPORT SimulinkRTW final
 {
-public:
-    SimulinkRTW();
-
-private:
-    const char** DisabledProps;
+    std::string DisabledProps;
     UInt16 DisabledPropsCount;
+
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

@@ -1,4 +1,1 @@
----
-title: Vcpkg Integration
-description: 
----
+@page Vcpkg Vcpkg Integration

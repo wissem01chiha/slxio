@@ -6,50 +6,46 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ConfigurationPCH.h"
 #include "PlatformTypes.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief
- */
-class SimulinkSFSim final
+struct SLXIO_APIEXPORT SimulinkSFSim // NOSONAR
 {
-public:
-    SimulinkSFSim();
-
-private:
-    const char** DisabledProps;
-    const char* Description;
-    const char** Components;
-    const char* SimCustomSourceCode;
-    const char* SimCustomHeaderCode;
-    const char* SimCustomInitializer;
-    const char* SimCustomTerminator;
-    const char** SimReservedNameArray;
-    const char* SimUserSources;
-    const char* SimUserIncludeDirs;
-    const char* SimUserLibraries;
-    const char* SimUserDefines;
-    const char* SimCustomCompilerFlags;
-    const char* SimCustomLinkerFlags;
-    const char* SFSimEcho;
-    const char* SimCtrlC;
-    const char* Simuint16egrity;
-    const char* SimUseLocalCustomCode;
-    const char* SimParseCustomCode;
-    const char* SimAnalyzeCustomCode;
-    const char* SimBuildMode;
-    const char* SimGenImportedTypeDefs;
-    const char* ModelFunctionsGlobalVisibility;
+    std::string DisabledProps;
+    std::string Description;
+    std::string Components;
+    std::string SimCustomSourceCode;
+    std::string SimCustomHeaderCode;
+    std::string SimCustomInitializer;
+    std::string SimCustomTerminator;
+    std::string SimReservedNameArray;
+    std::string SimUserSources;
+    std::string SimUserIncludeDirs;
+    std::string SimUserLibraries;
+    std::string SimUserDefines;
+    std::string SimCustomCompilerFlags;
+    std::string SimCustomLinkerFlags;
+    std::string SFSimEcho;
+    std::string SimCtrlC;
+    std::string Simuint16egrity;
+    std::string SimUseLocalCustomCode;
+    std::string SimParseCustomCode;
+    std::string SimAnalyzeCustomCode;
+    std::string SimBuildMode;
+    std::string SimGenImportedTypeDefs;
+    std::string ModelFunctionsGlobalVisibility;
     UInt16 CompileTimeRecursionLimit;
-    const char* EnableRuntimeRecursion;
-    const char* MATLABDynamicMemAlloc;
+    std::string EnableRuntimeRecursion;
+    std::string MATLABDynamicMemAlloc;
     UInt16 MATLABDynamicMemAllocThreshold;
-    const char** CustomCodeFunctionArrayLayout;
-    const char* DefaultCustomCodeFunctionArrayLayout;
+    std::string CustomCodeFunctionArrayLayout;
+    std::string DefaultCustomCodeFunctionArrayLayout;
+
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

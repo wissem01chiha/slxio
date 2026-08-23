@@ -13,7 +13,6 @@ void IParameterDataObjectBase::Initialize(void* implDataObject)
 {
     m_param = std::shared_ptr<IParameterObjectBase>(
         static_cast<IParameterObjectBase*>(implDataObject));
-    m_updateTime = 0;
 }
 
 void* IParameterDataObjectBase::GetImplDataObject() const

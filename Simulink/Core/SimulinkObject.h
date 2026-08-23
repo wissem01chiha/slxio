@@ -47,7 +47,7 @@ public:
 
     std::string ToString() const override;
 
-    /** Return an array with the current object if not foudn return nullptr ! */
+    /** Return an array with the current object if not found return nullptr ! */
     std::shared_ptr<ISimulinkElement> GetArray(const SId& id) const;
 
 private:

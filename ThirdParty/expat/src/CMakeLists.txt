@@ -34,7 +34,7 @@
 # Unlike most of Expat,
 # this file is copyrighted under the BSD-license for buildsystem files of KDE.
 
-cmake_minimum_required(VERSION 3.5.0)
+cmake_minimum_required(VERSION 3.10)
 
 project(expat
     VERSION
@@ -128,7 +128,7 @@ macro(expat_shy_set var default cache type desc)
 endmacro()
 
 expat_shy_set(EXPAT_BUILD_TOOLS OFF CACHE BOOL "Build the xmlwf tool for expat library")
-expat_shy_set(EXPAT_BUILD_EXAMPLES ON CACHE BOOL "Build the examples for expat library")
+expat_shy_set(EXPAT_BUILD_EXAMPLES OFF CACHE BOOL "Build the examples for expat library")
 expat_shy_set(EXPAT_BUILD_TESTS OFF CACHE BOOL "Build the tests for expat library")
 expat_shy_set(EXPAT_SHARED_LIBS ${_EXPAT_SHARED_LIBS_DEFAULT} CACHE BOOL "Build a shared expat library")
 expat_shy_set(EXPAT_BUILD_DOCS ${_EXPAT_BUILD_DOCS_DEFAULT} CACHE BOOL "Build man page for xmlwf")

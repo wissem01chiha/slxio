@@ -14,7 +14,14 @@ include(CMakeDependentOption)
 
 # Project metadata
 set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
+
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
+
+# Option to enable/disable Global Link Time Optimisation note that this might increase 
+# build time but produce more optimized binary,this feature required CMake >=v3.9, 
+# since we support min CMake v3.18 we are fine
+option(SLXIO_ENABLE_LTO "" OFF)
+mark_as_advanced(SLXIO_ENABLE_LTO)
 
 # Build slxio static or shared libs
 option(SLXIO_BUILD_SHARED_LIBS  "" OFF)
@@ -54,12 +61,15 @@ option(SLXIO_BUILD_JAVA_BINDINGS "" OFF)
 
 # Option to use only vendored third_party modules
 option(SLXIO_FORCE_LOCAL_MODULES "" ON)
+mark_as_advanced(SLXIO_FORCE_LOCAL_MODULES)
 
 # Use system-wide installed modules when found
 option(SLXIO_USE_SYSTEM_MODULES "" OFF)
+mark_as_advanced(SLXIO_USE_SYSTEM_MODULES)
 
 # Vendored third_parties are built by other targets
 option(SLXIO_DISABLE_VENDORED_MODULES "" OFF)
+mark_as_advanced(SLXIO_DISABLE_VENDORED_MODULES)
 
 # Option to install vendored third_party modules licenses
 option(SLXIO_INTSALL_THIRDPARTY_LISENCES "" ON)
@@ -178,7 +188,7 @@ if(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
 endif()
 
 # Change this variable to add a prefix before each CMake target compiled
-set(CMAKE_BINARY_NAME_PREFIX "SLX")
+set(CMAKE_BINARY_NAME_PREFIX "Slx")
 
 # Set Simulink version
 set(SLXIO_SIMULINK_VERSION "${SLXIO_SIMULINK_DEFAULT_VERSION}")
@@ -201,6 +211,19 @@ if(APPLE)
 endif()
 if(WIN32)
   include(Windows)
+endif()
+
+if(SLXIO_ENABLE_LTO)
+  # Check if IPO is supported by the compiler for LTO
+  include(CheckIPOSupported)
+  check_ipo_supported(
+    RESULT ipo_supported
+    OUTPUT ipo_output
+    LANGUAGES C CXX   
+  )
+  if(ipo_supported)
+    set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON)   
+  endif()
 endif()
 
 if(NOT CMAKE_INSTALL_LICENSEDIR)
@@ -246,4 +269,8 @@ endif()
 
 if(SLXIO_WITH_VISUALIZATION)
   add_subdirectory(Visualization)
+endif()
+
+if(SLXIO_DOXYGEN_DOCUMENTATION)
+    add_subdirectory(Documentation)
 endif()

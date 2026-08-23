@@ -28,7 +28,7 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
-option(LIBUV_BUILD_SHARED "Build shared lib" ON)
+option(LIBUV_BUILD_SHARED "Build shared lib" OFF)
 
 cmake_dependent_option(LIBUV_BUILD_TESTS
   "Build the unit tests when BUILD_TESTING is enabled and we are the root project" ON
@@ -827,7 +827,7 @@ endif()
 add_library(libuv::libuv ALIAS ${LIB_SELECTED})
 
 # clang-tidy support
-option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" ON)
+option(ENABLE_CLANG_TIDY "Enable clang-tidy checks" OFF)
 if(ENABLE_CLANG_TIDY)
   find_program(CLANG_TIDY_EXE NAMES "clang-tidy")
   if(CLANG_TIDY_EXE)

@@ -6,30 +6,34 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "IConfigurableObject.h"
+#include "IErrorHandler.h"
+#include "ILogger.h"
+#include "ISimulinkElement.h"
 #include "ModelWorkspace.h"
 #include "PlatformTypes.h"
-#include "SimulinkBlock.h"
 #include "SimulinkModelType.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
+class ISimulinkBlock;
 class ModelWorkspace;
 class SimulinkObject;
 class SimulinkArray;
 class SImulinkPort;
 class SimulinkLine;
 class SimulinkBlock;
-class SimulinkObject;
 class SimulinkParameter;
 class SimulationSettings;
-class Logger;
 
 /**
  * @class SimulinkModel
+ * @brief This is the main class definition for a SimulinkModel based
  */
-class SLXIO_APIEXPORT SimulinkModel final : public SimulinkElementBase
+class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement,
+                                            public IConfigurableObject
 {
 public:
     /** Default Constructor */
@@ -38,48 +42,43 @@ public:
     SimulinkModel* New() const override;
 
     /** Construct a Model by given an explict model type */
-    SimulinkModel(SimulinkModelType Type);
+    explicit SimulinkModel(SimulinkModelType Type);
 
-    /** Returns the generic type of this element. */
-    SimulinkElementType GetType() const override;
+    HError AcceptInsert(ISimulinkElement& parent) override;
+    HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
 
-    /** Returns the unique identifier of this element. */
     SId GetId() const override;
+    SimulinkModelType GetModelType() const;
+    std::shared_ptr<SimulationSettings> GetSimulationSettings() const;
+    std::shared_ptr<ModelWorkspace> GetModelWorkspace() const;
+    /** Return a Pointer to given Simulink Block by Id*/
+    std::shared_ptr<ISimulinkBlock> GetBlock(SId blockIdx) const;
 
     /** Returns a string representation of this element. */
     std::string ToString() const override;
 
-    /** Return a Pointer to given Simulink Block by Id*/
-    std::shared_ptr<SimulinkBlock> GetBlock(SId blockIdx);
+    HError AddConfig(const std::string& name,
+                     const std::shared_ptr<IConfigurationObject>& p) override;
+    HError SetConfig(const std::string& name,
+                     const std::shared_ptr<IConfigurationObject>& p) override;
+    std::shared_ptr<IConfigurationObject>
+    GetConfig(const std::string& name) override;
 
-    /** Get Model type */
-    SimulinkModelType GetModelType();
-
-    /** Rteuns a pointer to Simulink Settings */
-    std::shared_ptr<SimulationSettings> GetSimulationSettings();
-
-    /** Rteurns Model Version number*/
-    UInt32 GetModelVersion();
-
-    /** Checks if this element or its children contain the given identifier. */
-    bool Contains(const SId& id) const override;
-
-    /** */
-    std::shared_ptr<ModelWorkspace> GetModelWorkspace();
-
-    /** */
-    Logger& GetLogger();
+    void AddParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    void SetParam(const std::string& name,
+                  const std::shared_ptr<IParameterObjectBase>& p) override;
+    std::shared_ptr<IParameterObjectBase>
+    GetParam(const std::string& name) override;
 
 private:
-    Logger& logger;
-    SId id;
-    UInt32 version;
-    SimulinkModelType ModelType;
-    std::shared_ptr<ModelWorkspace> workspace;
-    std::shared_ptr<SimulationSettings> simSet;
-    std::vector<std::shared_ptr<SimulinkBlock>> blocks;
-    std::vector<std::shared_ptr<SimulinkLine>> lines;
-    std::vector<std::shared_ptr<SimulinkParameter>> parameters;
+    SId m_id{SId(0)};
+    SimulinkModelType m_type;
+    std::shared_ptr<ModelWorkspace> m_workspace;
+    std::shared_ptr<SimulationSettings> m_simSet;
+    std::vector<std::shared_ptr<ISimulinkBlock>> m_blocks;
+    std::vector<std::shared_ptr<SimulinkLine>> m_lines;
+    std::vector<std::shared_ptr<SimulinkParameter>> m_parameters;
 };
 
 SLXIO_ABI_NAMESPACE_END

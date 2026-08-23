@@ -107,5 +107,33 @@ void ISimulinkElement::SetParent(
     m_parent = parent;
 }
 
+std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
+ISimulinkElement::GetChildren()
+{
+    return m_children;
+}
+
+const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
+ISimulinkElement::GetChildren() const
+{
+    return m_children;
+}
+
+std::vector<std::shared_ptr<ISimulinkElement>>&
+ISimulinkElement::GetOrderedChildren()
+{
+    return m_childrenOrder;
+}
+
+const std::vector<std::shared_ptr<ISimulinkElement>>&
+ISimulinkElement::GetOrderedChildren() const
+{
+    return m_childrenOrder;
+}
+
+ILogger* ISimulinkElement::Logger() const { return m_logger; }
+
+IErrorHandler* ISimulinkElement::ErrorHandler() const { return m_error; }
+
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

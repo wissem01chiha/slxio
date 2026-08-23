@@ -42,7 +42,7 @@ include(CPack)
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-option(BUILD_SHARED_LIBS  "Default to building shared libraries" ON)
+option(BUILD_SHARED_LIBS  "Default to building shared libraries" OFF)
 option(BUILD_STATIC_LIBS  "Default to building static libraries" ON)
 
 # Enable or disable features. By default, all features are turned off.

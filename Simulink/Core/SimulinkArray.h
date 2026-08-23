@@ -54,7 +54,6 @@ public:
 
 private:
     SId m_id{SId(0)};
-    IErrorHandler* handler = nullptr;
     std::string m_type;
     std::string m_name;
     std::string m_dimension;

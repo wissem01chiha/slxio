@@ -11,6 +11,7 @@ void JsonDataObject::Initialize(void* implDataObject)
 {
     if (implDataObject == nullptr)
     {
+        ILogger* m_logger = GetLogger();
         if (m_logger != nullptr)
         {
             // m_loogger->log(StringMessageWatever msg);

@@ -59,5 +59,4 @@ Slxio is an open source project, and is thus built with your contributions, if y
 
 All material is provided under an Apache License unless otherwise specified. See the [LICENSE](./LICENSE.txt) file for more informations.
 
-
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)

@@ -4,16 +4,11 @@
 #ifndef SIMULINKCONFIGSET_H
 #define SIMULINKCONFIGSET_H
 
+#include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "AbiNamespaceMacro.h"
+#include "ConfigurationPCH.h"
+#include "IConfigurationObject.h"
 #include "PlatformTypes.h"
-#include "SimulinkModel.h"
-#include "SimulinkObject.h"
-#include "SimulinkParameterBase.h"
-
-#include <memory>
-#include <string>
-#include <vector>
 
 namespace slxio
 {
@@ -26,12 +21,11 @@ class SimulinkDebugging;
 class SimulinkHardware;
 class SimulinkModelReference;
 class SimulinkRTW;
-class Logger;
 
 /**
  * @brief SimulinkConfigSet represents a configuration set in a Simulink model
  */
-class SLXIO_APIEXPORT SimulinkConfigSet final
+class SLXIO_APIEXPORT SimulinkConfigSet final : public IConfigurationObject
 {
 public:
     /** Default Constructor */
@@ -43,25 +37,8 @@ public:
      */
     SimulinkConfigSet(const SimulinkConfigSet&) = delete;
 
-    /**
-     * Contructor from SimulinkObject, this is used internally to
-     * fill a SimulinkConfigSet from low level Slx Representation, not
-     * recommended for public use.
-     */
-    SimulinkConfigSet(const std::shared_ptr<SimulinkObject> obj);
-
     /** checks if this configuration set is active */
     bool IsActive() const;
-
-    /** Gets a parameter value by name.*/
-    const char* GetParameter(const char* name);
-
-    /** Retuens the parameter object by name. */
-    std::shared_ptr<SimulinkParameterBase>
-    GetParameterObject(const std::string& name);
-
-    /** Sets a parameter value by name.*/
-    HError SetParameter(const char* name, const char* value);
 
     /** Creates a copy of this configuration set.*/
     HError Copy();

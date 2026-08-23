@@ -1,3 +1,1 @@
----
-title: FAQ
----
+@page Faq FAQ

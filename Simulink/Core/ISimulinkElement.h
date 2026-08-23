@@ -111,6 +111,18 @@ public:
     virtual std::string ToString() const;
 
 protected:
+    std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& GetChildren();
+    const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
+    GetChildren() const;
+
+    std::vector<std::shared_ptr<ISimulinkElement>>& GetOrderedChildren();
+    const std::vector<std::shared_ptr<ISimulinkElement>>&
+    GetOrderedChildren() const;
+
+    ILogger* Logger() const;
+    IErrorHandler* ErrorHandler() const;
+
+private:
     /** a non owning refrence to the parent, childern do not own parent elments,
      * jut hold a link toward them */
     std::weak_ptr<ISimulinkElement> m_parent;

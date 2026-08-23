@@ -1,8 +1,5 @@
----
-title: Use In Other Projects
-description:
-layout: page
----
+@page Usage Use In Other Projects
+
 
 # Use in Other Projects
 

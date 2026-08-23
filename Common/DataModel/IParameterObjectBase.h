@@ -31,7 +31,7 @@ public:
     std::string ToString() const { return std::string(""); };
     virtual ~IParameterObjectBase() = default;
 
-protected:
+private:
     std::string m_name;
 };
 

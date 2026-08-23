@@ -5,14 +5,6 @@ add_module(
     Common
   LIBRARY_NAME 
     CommonSystem
-  MODULE_DESCRIPTION 
-    "File System Support Module"
-  MODULE_MAINTAINER 
-    "Wissem Chiha"
-  MODULE_SPDX_LICENSE_IDENTIFIER 
-    "Apache-2.0"
-  MODULE_SPDX_COPYRIGHT_TEXT 
-    "Copyright (c) 2025-2026 Wissem Chiha"
   MODULE_ENABLE_BUILD 
     TRUE
   MODULE_ENABLE_TESTS 
