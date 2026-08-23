@@ -27,7 +27,7 @@ jobs:
         run: cmake -B ${{github.workspace}}/build -DSLXIO_DOXYGEN_DOCUMENTATION=ON -DSLXIO_BUILD_TESTING=OFF
 
       - name: Build
-        run: cmake --build ${{github.workspace}}/build
+        run: cmake --build ${{github.workspace}}/build --target Documentation 
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
