@@ -59,17 +59,4 @@ Slxio is an open source project, and is thus built with your contributions, if y
 
 All material is provided under an Apache License unless otherwise specified. See the [LICENSE](./LICENSE.txt) file for more informations.
 
-## Citing SLXIO in Research
-
-If you use SLXIO in your academic work, please cite it:
-
-```bibtex
-  @misc{wissem2026slxio,
-    author = "{Wissem Chiha, and slxio constributors}",
-    title = "SLXIO - Simulink® File I/O Library",
-    year = "2025 -- 2026",
-    howpublished = "\url{https://wissem01chiha.github.io/slxio/}",
-  }
-```
-
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)
