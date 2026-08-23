@@ -5,9 +5,9 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ISimulinkBlock::ISimulinkBlock() =default;
+ISimulinkBlock::ISimulinkBlock() = default;
 
-ISimulinkBlock::~ISimulinkBlock() =default;
+ISimulinkBlock::~ISimulinkBlock() = default;
 
 HError ISimulinkBlock::AcceptInsert(ISimulinkElement& parent) { return E_OK; }
 

@@ -8,9 +8,9 @@
 #include "APIExportMacro.h"
 #include "ISimulinkElement.h"
 #include "PlatformTypes.h"
+#include "SimulinkBlockCategory.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkPCH.h"
-#include "SimulinkBlockCategory.h"
 
 namespace slxio
 {
@@ -20,9 +20,9 @@ enum class SimulinkPortType;
 
 /**
  * @class ISimulinkBlock
- * @brief an abstract general reprsentation of an elementary simulink block, all block
- * library inhertit from this interface as well as all SimulinkSubsystem based
- * ones derived from ISimulinkSubsystem
+ * @brief an abstract general reprsentation of an elementary simulink block, all
+ * block library inhertit from this interface as well as all SimulinkSubsystem
+ * based ones derived from ISimulinkSubsystem
  */
 class SLXIO_APIEXPORT ISimulinkBlock : public ISimulinkElement
 {
@@ -38,18 +38,20 @@ public:
     HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
     SId GetId() const override;
 
-    /** Retrun the block coressponding enum type from SimulinkBlockType, each child should override this function
-     * in order to provide 
+    /** Retrun the block coressponding enum type from SimulinkBlockType, each
+     * child should override this function in order to provide
      */
     virtual SimulinkBlockType GetBlockType() const = 0;
 
-    /** Simulink Base libraray is dvided by caegtory, this function designed primally fro them, which each child blcok
-     * implenation return it underlaying coresspodnig categtory, from SimulinkBlockCatgory , for 
-     * user defined blocks( external API usfge ) , this is optionla but recommand to tag the blcok with a ctagtory
-     * newlly creted or choose an extsing one from the dfaul librray, 
+    /** Simulink Base libraray is dvided by caegtory, this function designed
+     * primally fro them, which each child blcok implenation return it
+     * underlaying coresspodnig categtory, from SimulinkBlockCatgory , for user
+     * defined blocks( external API usfge ) , this is optionla but recommand to
+     * tag the blcok with a ctagtory newlly creted or choose an extsing one from
+     * the dfaul librray,
      * @note overriding default simulink librray blcok is not recommnded !
      */
-    virtual SimulinkBlockCategory  GetBlockCategory() const = 0;
+    virtual SimulinkBlockCategory GetBlockCategory() const = 0;
 
 private:
     SId m_id{SId(0)};

@@ -15,14 +15,16 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * @class SimulinkBlockCategory
- * @brief Allow for subdividing Simulink default library blocks into separate categories by domain,
- * as well as provide grouping features for user-added blocks.
+ * @brief Allow for subdividing Simulink default library blocks into separate
+ * categories by domain, as well as provide grouping features for user-added
+ * blocks.
  */
 class SLXIO_APIEXPORT SimulinkBlockCategory final
 {
 public:
-    enum  class DefaultCategory{
-        AdditionalMathDiscrete =0,
+    enum class DefaultCategory
+    {
+        AdditionalMathDiscrete = 0,
         CommonlyUsedBlocks,
         Continuous,
         Discontinuities,
@@ -48,7 +50,7 @@ public:
 
     explicit SimulinkBlockCategory(DefaultCategory category);
 
-    ~SimulinkBlockCategory() =default;
+    ~SimulinkBlockCategory() = default;
 
     /** Add a new user-defined category */
     void AddCategory(const std::string& name);
@@ -60,10 +62,9 @@ public:
     std::vector<std::string> GetAllCategories() const;
 
 private:
- static std::string ToString(DefaultCategory category);
+    static std::string ToString(DefaultCategory category);
 
- std::vector<std::string> m_category;
-   
+    std::vector<std::string> m_category;
 };
 
 SLXIO_ABI_NAMESPACE_END

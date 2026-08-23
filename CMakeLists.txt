@@ -137,7 +137,7 @@ mark_as_advanced(SLXIO_WITH_PKGCONFIG)
 
 # Option to generate API HTML documentation
 # Requires Doxygen installed, else throws a build error
-option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" ON)
+option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
 mark_as_advanced(SLXIO_DOXYGEN_DOCUMENTATION)
 
 # Options to enable/disable sanitizers

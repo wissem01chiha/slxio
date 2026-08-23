@@ -6,8 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "ISimulinkBlock.h"
+#include "PlatformTypes.h"
 #include "SimulinkPort.h"
 
 namespace slxio

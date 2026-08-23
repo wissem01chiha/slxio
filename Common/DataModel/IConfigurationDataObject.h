@@ -15,7 +15,6 @@ class SLXIO_APIEXPORT IConfigurationDataObject
 {
 public:
     ~IConfigurationDataObject();
-
 };
 
 SLXIO_ABI_NAMESPACE_END
