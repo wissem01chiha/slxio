@@ -15,7 +15,6 @@ class SLXIO_APIEXPORT SimulinkOptimizationParameter
 {
 public:
     ~SimulinkOptimizationParameter();
-
 };
 
 SLXIO_ABI_NAMESPACE_END

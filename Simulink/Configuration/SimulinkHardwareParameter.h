@@ -15,7 +15,6 @@ class SLXIO_APIEXPORT SimulinkHardwareParameter
 {
 public:
     ~SimulinkHardwareParameter();
-
 };
 
 SLXIO_ABI_NAMESPACE_END

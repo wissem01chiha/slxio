@@ -15,7 +15,6 @@ class SLXIO_APIEXPORT SimulinkRTWParameter
 {
 public:
     ~SimulinkRTWParameter();
-
 };
 
 SLXIO_ABI_NAMESPACE_END

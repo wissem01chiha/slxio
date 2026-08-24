@@ -14,12 +14,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 struct SimulinkSolver;
 
-class SLXIO_APIEXPORT SimulinkSolverParameter : public IParameterObject<SimulinkSolver>
+class SLXIO_APIEXPORT SimulinkSolverParameter
+    : public IParameterObject<SimulinkSolver>
 {
 public:
     ~SimulinkSolverParameter();
     SimulinkSolver& GetValue() override;
-
 };
 
 SLXIO_ABI_NAMESPACE_END

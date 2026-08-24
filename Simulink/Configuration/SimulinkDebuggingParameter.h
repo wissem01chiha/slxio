@@ -6,8 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "SimulinkDebugging.h"
 #include "IParameterObject.h"
+#include "SimulinkDebugging.h"
 
 namespace slxio
 {
@@ -17,7 +17,6 @@ class SLXIO_APIEXPORT SimulinkDebuggingParameter
 {
 public:
     ~SimulinkDebuggingParameter();
-
 };
 
 SLXIO_ABI_NAMESPACE_END

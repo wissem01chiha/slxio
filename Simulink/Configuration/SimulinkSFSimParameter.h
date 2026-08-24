@@ -13,11 +13,11 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SimulinkSFSimParameter : public IParameterObject<SimulinkSFSim>
+class SLXIO_APIEXPORT SimulinkSFSimParameter
+    : public IParameterObject<SimulinkSFSim>
 {
 public:
     ~SimulinkSFSimParameter();
-
 };
 
 SLXIO_ABI_NAMESPACE_END
