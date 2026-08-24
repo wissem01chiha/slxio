@@ -1,5 +1,6 @@
 #include "SimulinkModel.h"
 #include "ISimulinkBlock.h"
+#include "ModelWorkspace.h"
 #include "SimulationSettings.h"
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"

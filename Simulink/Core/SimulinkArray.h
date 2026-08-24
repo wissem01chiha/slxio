@@ -53,7 +53,7 @@ public:
     std::string ToString() const override;
 
 private:
-    SId m_id{SId(0)};
+    SId m_id;
     std::string m_type;
     std::string m_name;
     std::string m_dimension;

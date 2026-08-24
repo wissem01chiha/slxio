@@ -23,12 +23,21 @@ class SLXIO_APIEXPORT Derivative : public IBlockParameters,
 public:
     Derivative() = default;
 
-    explicit Derivative(Float64 coefficientintfapproximation);
+    explicit Derivative(const std::string& coefficientintfapproximation);
 
     ~Derivative() = default;
 
+    std::shared_ptr<ISignalAttributes> GetSignalAttributes() const override;
+    std::shared_ptr<ILogging> GetLogging() const override;
+    std::shared_ptr<IBlockParametersInformation>
+    GetBlockParametersInformation() const override;
+    std::shared_ptr<ICodeGenration> GetCodeGeneration() const override;
+    std::shared_ptr<IBlockParametersInformation>
+    GetInformation() const override;
+
     SimulinkBlockType GetBlockType() const override;
     SimulinkBlockCategory GetBlockCategory() const override;
+    std::string ToString() const override;
 
     void AddParam(const std::string& name,
                   const std::shared_ptr<IParameterObjectBase>& p) override;
@@ -36,8 +45,6 @@ public:
                   const std::shared_ptr<IParameterObjectBase>& p) override;
     std::shared_ptr<IParameterObjectBase>
     GetParam(const std::string& name) override;
-
-    std::string ToString() const override;
 
 private:
     std::string m_coefficientintfapproximation;

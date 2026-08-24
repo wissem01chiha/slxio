@@ -65,9 +65,9 @@ struct SLXIO_APIEXPORT SimulinkHardware final // NOSONAR
     std::string UseEmbeddedCoderFeatures;
     std::string UseSimulinkCoderFeatures;
     std::string HardwareBoardFeatureSet;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkHardware* hardware);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

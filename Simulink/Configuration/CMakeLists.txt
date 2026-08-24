@@ -20,6 +20,7 @@ add_module(
     SimulinkModelReference.h
     SimulinkHardware.h
     SimulinkDebugging.h
+    SimulinkConfigSet.h
   MODULE_PCH_HEADERS
     ConfigurationPCH.h
   MODULE_SOURCES
@@ -31,6 +32,7 @@ add_module(
     SimulinkModelReference.cxx
     SimulinkHardware.cxx
     SimulinkDebugging.cxx
+    SimulinkConfigSet.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR

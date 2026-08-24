@@ -54,10 +54,9 @@ struct SLXIO_APIEXPORT SimulinkSolver // NOSONAR
     std::string DecoupledContinuousuint16egration;
     std::string MinimalZcImpactuint16egration;
     std::string SolverOrder;
-
-    /** Check if the goven Solver configuration is a valid one */
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkSolver* solver);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

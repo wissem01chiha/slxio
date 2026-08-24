@@ -4,7 +4,10 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkOptimization::IsValid() const { return false; }
+bool IsValid(const SimulinkOptimization* optimization)
+{
+    return optimization == nullptr;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

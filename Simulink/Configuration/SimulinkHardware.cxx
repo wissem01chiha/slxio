@@ -4,7 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkHardware::IsValid() const { return false; }
+bool IsValid(const SimulinkHardware* hardware) { return hardware == nullptr; }
 
 SLXIO_ABI_NAMESPACE_END
 

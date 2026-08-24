@@ -74,9 +74,9 @@ struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
     std::string LabelGuidedReuse;
     std::string MultiThreadedLoops;
     std::string DenormalBehavior;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkOptimization* optimization);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

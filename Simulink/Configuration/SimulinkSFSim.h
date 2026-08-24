@@ -44,9 +44,9 @@ struct SLXIO_APIEXPORT SimulinkSFSim // NOSONAR
     UInt16 MATLABDynamicMemAllocThreshold;
     std::string CustomCodeFunctionArrayLayout;
     std::string DefaultCustomCodeFunctionArrayLayout;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkSFSim* sfsim);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

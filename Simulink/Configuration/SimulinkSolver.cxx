@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkSolver::IsValid() const
+bool IsValid(const SimulinkSolver* solver)
 {
-    return std::stod(StopTime) > std::stod(StartTime);
+    if (solver == nullptr)
+    {
+        return false;
+    }
+    return std::stod(solver->StopTime) > std::stod(solver->StartTime);
 }
 
 SLXIO_ABI_NAMESPACE_END

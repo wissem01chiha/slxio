@@ -10,7 +10,6 @@
 #include "IErrorHandler.h"
 #include "ILogger.h"
 #include "ISimulinkElement.h"
-#include "ModelWorkspace.h"
 #include "PlatformTypes.h"
 #include "SimulinkModelType.h"
 

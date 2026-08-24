@@ -6,8 +6,8 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include <string>
-#include <vector>
+#include "DataPCH.h"
+#include "PlatformTypes.h"
 
 namespace slxio
 {
@@ -22,46 +22,19 @@ class SLXIO_APIEXPORT IBlockAppearance
 public:
     virtual ~IBlockAppearance() = default;
 
-    /// Background color
     virtual std::string GetBackgroundColor() const = 0;
-
-    /// Block mirror
     virtual std::string GetBlockMirror() const = 0;
-
-    /// Rotation angle
-    virtual int GetBlockRotation() const = 0;
-
-    /// Drop shadow
+    virtual UInt32 GetBlockRotation() const = 0;
     virtual std::string GetDropShadow() const = 0;
-
-    /// Font angle
     virtual std::string GetFontAngle() const = 0;
-
-    /// Font name
     virtual std::string GetFontName() const = 0;
-
-    /// Font size
-    virtual int GetFontSize() const = 0;
-
-    /// Font weight
+    virtual UInt32 GetFontSize() const = 0;
     virtual std::string GetFontWeight() const = 0;
-
-    /// Foreground color
     virtual std::string GetForegroundColor() const = 0;
-
-    /// Hide automatic name
     virtual std::string GetHideAutomaticName() const = 0;
-
-    /// Name placement
     virtual std::string GetNamePlacement() const = 0;
-
-    /// Orientation
     virtual std::string GetOrientation() const = 0;
-
-    /// Position vector
-    virtual std::vector<int> GetPosition() const = 0;
-
-    /// Show block name
+    virtual std::vector<UInt32> GetPosition() const = 0;
     virtual std::string GetShowName() const = 0;
 };
 

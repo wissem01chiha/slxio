@@ -33,23 +33,25 @@ public:
     /** Destructor */
     ~ISimulinkBlock() override;
 
-    // blocks can be inserted into other subsystems of type ISimulinkSubsystem
+    /// blocks can be inserted into other subsystems of type ISimulinkSubsystem
     HError AcceptInsert(ISimulinkElement& parent) override;
     HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
     SId GetId() const override;
 
-    /** Retrun the block coressponding enum type from SimulinkBlockType, each
-     * child should override this function in order to provide
+    /** Return the block corresponding enum type from SimulinkBlockType.
+     * Each child should override this function to provide its own
+     * implementation.
      */
     virtual SimulinkBlockType GetBlockType() const = 0;
 
-    /** Simulink Base libraray is dvided by caegtory, this function designed
-     * primally fro them, which each child blcok implenation return it
-     * underlaying coresspodnig categtory, from SimulinkBlockCatgory , for user
-     * defined blocks( external API usfge ) , this is optionla but recommand to
-     * tag the blcok with a ctagtory newlly creted or choose an extsing one from
-     * the dfaul librray,
-     * @note overriding default simulink librray blcok is not recommnded !
+    /** The Simulink base library is divided by category.
+     * This function is primarily designed for that purpose:
+     * each child block implementation should return its underlying
+     * corresponding category from SimulinkBlockCategory.
+     * For user-defined blocks (external API usage), this is optional,
+     * but it is recommended to tag the block with either a newly created
+     * category or choose an existing one from the default library.
+     * @note Overriding default Simulink library blocks is not recommended!
      */
     virtual SimulinkBlockCategory GetBlockCategory() const = 0;
 

@@ -4,7 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkRTW::IsValid() const { return false; }
+bool IsValid(const SimulinkRTW* rtw) { return rtw == nullptr; }
 
 SLXIO_ABI_NAMESPACE_END
 

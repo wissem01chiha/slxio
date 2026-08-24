@@ -129,9 +129,9 @@ struct SLXIO_APIEXPORT SimulinkDebugging final // NOSONAR
     std::string RCSCRenamedMsg;
     std::string RCSCObservableMsg;
     std::string ForceCombineOutputUpdateInSim;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkDebugging* debugging);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

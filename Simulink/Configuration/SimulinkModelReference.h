@@ -34,9 +34,9 @@ struct SLXIO_APIEXPORT SimulinkModelReference final // NOSONAR
     std::string ModelReferenceMinAlgLoopOccurrences;
     std::string PropagateSignalLabelsOutOfModel;
     std::string SupportModelReferenceSimTargetCustomCode;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkModelReference* reference);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

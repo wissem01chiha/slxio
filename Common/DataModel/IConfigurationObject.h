@@ -37,6 +37,9 @@ public:
 
     /** Converts to a string representation. */
     virtual std::string ToString() const = 0;
+
+    /** Each configuration is identified using a unique name */
+    virtual std::string GetName() const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

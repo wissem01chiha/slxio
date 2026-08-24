@@ -6,11 +6,9 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ErrorCode.h"
-#include "Logger.h"
-
-#include <memory>
-#include <vector>
+#include "ConfigurationPCH.h"
+#include "IConfigurableObject.h"
+#include "ILogger.h"
 
 namespace slxio
 {
@@ -25,22 +23,22 @@ class SimulinkConfigSet;
  * to manage multiple configuration sets
  */
 class SLXIO_APIEXPORT SimulinkConfigSetManager final
+    : public IConfigurableObject
 {
 public:
     SimulinkConfigSetManager();
-    ~SimulinkConfigSetManager() = default;
 
-    /// @brief Copy constructor
+    /** Copy constructor */
     SimulinkConfigSetManager(const SimulinkConfigSetManager&) = delete;
 
-    /// @brief Assignment operator
+    /** Assignment operator*/
     SimulinkConfigSetManager&
     operator=(const SimulinkConfigSetManager&) = delete;
 
-    /// @brief Adds a configuration set to the manager.
+    /** Adds a configuration set to the manager.*/
     HError AddElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
-    /// @brief Removes a configuration set from the manager.
+    /** Removes a configuration set from the manager.*/
     HError RemoveElement(std::shared_ptr<SimulinkConfigSet> cfg);
 
     /// @brief Retrieves the active configuration set.
@@ -51,15 +49,15 @@ public:
     /// that only one configuration set is active at a time.
     /// @return nullptr if no active configuration set is found, otherwise a
     /// pointer to the active configuration set.
-    std::shared_ptr<SimulinkConfigSet> getActiveConfiguration();
+    std::shared_ptr<SimulinkConfigSet> GetActiveConfiguration();
 
     /// @brief Checks if a configuration set exists in the manager.
-    bool
-    hasConfigurationSet(const std::shared_ptr<SimulinkConfigSet>& cfg) const;
+    bool HasConfiguration(const std::shared_ptr<SimulinkConfigSet>& cfg) const;
+
+    ~SimulinkConfigSetManager() = default;
 
 private:
-    Logger& l;
-    std::vector<std::shared_ptr<SimulinkConfigSet>> cfgs;
+    std::vector<std::shared_ptr<SimulinkConfigSet>> m_configSet;
 };
 
 SLXIO_ABI_NAMESPACE_END

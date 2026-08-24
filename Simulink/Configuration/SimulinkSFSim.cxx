@@ -4,7 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool SimulinkSFSim::IsValid() const { return false; }
+bool IsValid(const SimulinkSFSim* sfsim) { return sfsim == nullptr; }
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

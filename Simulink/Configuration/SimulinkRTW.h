@@ -17,9 +17,9 @@ struct SLXIO_APIEXPORT SimulinkRTW final
 {
     std::string DisabledProps;
     UInt16 DisabledPropsCount;
-
-    bool IsValid() const;
 };
+
+bool IsValid(const SimulinkRTW* rtw);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
