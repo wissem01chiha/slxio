@@ -1,1 +1,1 @@
-@page Faq FAQ
+@page Faq Frequently Asked Questions

@@ -6,22 +6,22 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ConfigurationPCH.h"
 #include "PlatformTypes.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/// @brief Base Conainer for Simulink Hardware Configuration
-class SLXIO_APIEXPORT SimulinkHardware final
+/**
+ * @struct SimulinkHardware
+ * @brief Base Conainer for Simulink Hardware Configuration
+ */
+struct SLXIO_APIEXPORT SimulinkHardware final // NOSONAR
 {
-public:
-    SimulinkHardware() = default;
-    ~SimulinkHardware() = default;
-
-    const char* DisabledProps;
-    const char* Description;
-    const char* Components;
+    std::string DisabledProps;
+    std::string Description;
+    std::string Components;
     UInt16 ProdBitPerChar;
     UInt16 ProdBitPerShort;
     UInt16 ProdBitPeruint16;
@@ -32,14 +32,14 @@ public:
     UInt16 ProdBitPerPouint16er;
     UInt16 ProdBitPerSizeT;
     UInt16 ProdBitPerPtrDiffT;
-    const char* ProdLargestAtomicuint16eger;
-    const char* ProdLargestAtomicFloat;
-    const char* Produint16DivRoundTo;
-    const char* ProdEndianess;
+    std::string ProdLargestAtomicuint16eger;
+    std::string ProdLargestAtomicFloat;
+    std::string Produint16DivRoundTo;
+    std::string ProdEndianess;
     UInt16 ProdWordSize;
-    const char* ProdShiftRightuint16Arith;
-    const char* ProdLongLongMode;
-    const char* ProdHWDeviceType;
+    std::string ProdShiftRightuint16Arith;
+    std::string ProdLongLongMode;
+    std::string ProdHWDeviceType;
     UInt16 TargetBitPerChar;
     UInt16 TargetBitPerShort;
     UInt16 TargetBitPeruint16;
@@ -50,21 +50,23 @@ public:
     UInt16 TargetBitPerPouint16er;
     UInt16 TargetBitPerSizeT;
     UInt16 TargetBitPerPtrDiffT;
-    const char* TargetLargestAtomicuint16eger;
-    const char* TargetLargestAtomicFloat;
-    const char* TargetShiftRightuint16Arith;
-    const char* TargetLongLongMode;
-    const char* Targetuint16DivRoundTo;
-    const char* TargetEndianess;
+    std::string TargetLargestAtomicuint16eger;
+    std::string TargetLargestAtomicFloat;
+    std::string TargetShiftRightuint16Arith;
+    std::string TargetLongLongMode;
+    std::string Targetuint16DivRoundTo;
+    std::string TargetEndianess;
     UInt16 TargetWordSize;
     UInt16 TargetPreprocMaxBitsSuint16;
     UInt16 TargetPreprocMaxBitsUuint16;
-    const char* TargetHWDeviceType;
-    const char* TargetUnknown;
-    const char* ProdEqTarget;
-    const char* UseEmbeddedCoderFeatures;
-    const char* UseSimulinkCoderFeatures;
-    const char* HardwareBoardFeatureSet;
+    std::string TargetHWDeviceType;
+    std::string TargetUnknown;
+    std::string ProdEqTarget;
+    std::string UseEmbeddedCoderFeatures;
+    std::string UseSimulinkCoderFeatures;
+    std::string HardwareBoardFeatureSet;
+
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

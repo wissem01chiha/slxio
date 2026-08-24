@@ -593,7 +593,7 @@ LAYOUT_FILE            =
 # feature you need bibtex and perl available in the search path. Do not use
 # file names with spaces, bibtex cannot handle them.
 
-CITE_BIB_FILES         = "${PROJECT_SOURCE_DIR}/Docs/src/bibliography.bib"
+CITE_BIB_FILES         = 
 
 # The LATEX_BIB_STYLE tag can be used to specify the style to use for the
 # bibliography, e.g. plainnat, or ieeetr. The default style is "plain". See
@@ -741,8 +741,7 @@ EXAMPLE_RECURSIVE      = NO
 # directories that contain image that are included in the documentation (see
 # the \image command).
 
-IMAGE_PATH             = "${PROJECT_SOURCE_DIR}/Docs/src/tutorials/" \
-                         "${PROJECT_SOURCE_DIR}/Docs/src/images/"
+IMAGE_PATH             = 
 
 # The INPUT_FILTER tag can be used to specify a program that doxygen should
 # invoke to filter for each input file. Doxygen will invoke the filter program
@@ -934,7 +933,7 @@ HTML_STYLESHEET        =
 # robust against future updates. Doxygen will copy the style sheet file to
 # the output directory.
 
-HTML_EXTRA_STYLESHEET  = "${PROJECT_SOURCE_DIR}/Documentation/doxygen-awesome.css" "${PROJECT_SOURCE_DIR}/Documentation/slxio_style.css"
+HTML_EXTRA_STYLESHEET  = @CMAKE_DOXYGEN_STYLESHEET_LIST@
 
 # The HTML_EXTRA_FILES tag can be used to specify one or more extra images or
 # other source files which should be copied to the HTML output directory. Note

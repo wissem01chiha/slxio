@@ -10,10 +10,17 @@ file(GLOB EXAMPLES ${PROJECT_SOURCE_DIR}/Documentation/Examples/*.md)
 file(GLOB REFERENCE ${PROJECT_SOURCE_DIR}/Documentation/Reference/*.md)
 file(GLOB INTRODUCTION ${PROJECT_SOURCE_DIR}/Documentation/Introduction/*.md)
 file(GLOB INTEGRATION ${PROJECT_SOURCE_DIR}/Documentation/Integration/*.md)
+file(GLOB BINDING ${PROJECT_SOURCE_DIR}/Documentation/Integration/Binding/*.md)
 file(GLOB PLATFORM ${PROJECT_SOURCE_DIR}/Documentation/Platform/*.md)
 file(GLOB CONTRIBUTING ${PROJECT_SOURCE_DIR}/Documentation/Contributing/*.md)
 file(GLOB CHANGELOG ${PROJECT_SOURCE_DIR}/Documentation/Changelog/*.md)
 file(GLOB LICENSES ${PROJECT_SOURCE_DIR}/Documentation/Licenses/*.md)
+file(GLOB RELEASES ${PROJECT_SOURCE_DIR}/Documentation/Releases/*.md)
+
+set(CMAKE_DOXYGEN_STYLESHEET_LIST
+  ${PROJECT_SOURCE_DIR}/Documentation/doxygen-awesome.css
+  ${PROJECT_SOURCE_DIR}/Documentation/slxio_style.css
+)
 
 set(CMAKE_DOXYGEN_INPUT_LIST
   ${PROJECT_SOURCE_DIR}/Common/Core
@@ -44,8 +51,15 @@ set(CMAKE_DOXYGEN_INPUT_LIST
   ${CONTRIBUTING}
   ${CHANGELOG}
   ${LICENSES}
+  ${BINDING}
+  ${RELEASES}
+  ${PROJECT_SOURCE_DIR}/AUTHORS.md
+  ${PROJECT_SOURCE_DIR}/SECURITY.md
+  ${PROJECT_SOURCE_DIR}/COPYRIGHTS.md
+  ${PROJECT_SOURCE_DIR}/CODE_OF_CONDUCT.md
 )
 string(REPLACE ";" " \\\n" CMAKE_DOXYGEN_INPUT_LIST "${CMAKE_DOXYGEN_INPUT_LIST}")
+string(REPLACE ";" " \\\n" CMAKE_DOXYGEN_STYLESHEET_LIST "${CMAKE_DOXYGEN_STYLESHEET_LIST}")
 configure_file(${PROJECT_SOURCE_DIR}/CMake/Templates/Doxyfile.in
               ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
 

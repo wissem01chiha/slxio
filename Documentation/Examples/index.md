@@ -5,7 +5,7 @@ The following examples demonstrate basic programmatic editing of Simulink® mode
 Where possible, we intentionally preserve the concepts and workflows of the original Simulink APIs to make it easier for MATLAB® and Simulink® users to get started with slxio.
 
 > [!WARNING]  
-> SXLIO is a static model manipulation library and does not support model compilation, simulation, or features that require a compiled model state. Operations that depend on signal resolution, data type propagation, compiled port information, or other compile-time metadata are therefore not available.
+> Slxio is a static model manipulation library and does not support model compilation, simulation, or features that require a compiled model state. Operations that depend on signal resolution, data type propagation, compiled port information, or other compile-time metadata are therefore not available.
 
 
 - @subpage Models

@@ -17,6 +17,9 @@ add_module(
     SimulinkSFSim.h
     SimulinkRTW.h
     SimulinkOptimization.h
+    SimulinkModelReference.h
+    SimulinkHardware.h
+    SimulinkDebugging.h
   MODULE_PCH_HEADERS
     ConfigurationPCH.h
   MODULE_SOURCES
@@ -25,6 +28,9 @@ add_module(
     SimulinkSFSim.cxx
     SimulinkRTW.cxx
     SimulinkOptimization.cxx
+    SimulinkModelReference.cxx
+    SimulinkHardware.cxx
+    SimulinkDebugging.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR

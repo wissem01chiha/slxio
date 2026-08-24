@@ -6,6 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "ConfigurationPCH.h"
 #include "PlatformTypes.h"
 
 namespace slxio
@@ -15,28 +16,26 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkModelReference represents the model reference settings
  */
-class SLXIO_APIEXPORT SimulinkModelReference final
+struct SLXIO_APIEXPORT SimulinkModelReference final // NOSONAR
 {
-public:
-    SimulinkModelReference() = default;
-    ~SimulinkModelReference() = default;
+    std::string DisabledProps;
+    std::string Description;
+    std::string Components;
+    std::string UpdateModelReferenceTargets;
+    std::string EnableRefExpFcnMdlSchedulingChecks;
+    std::string CheckModelReferenceTargetMessage;
+    std::string EnableParallelModelReferenceBuilds;
+    std::string ParallelModelReferenceErrorOnInvalidPool;
+    std::string ParallelModelReferenceMATLABWorkerInit;
+    std::string ModelReferenceNumInstancesAllowed;
+    std::string PropagateVarSize;
+    std::string ModelDependencies;
+    std::string ModelReferencePassRootInputsByReference;
+    std::string ModelReferenceMinAlgLoopOccurrences;
+    std::string PropagateSignalLabelsOutOfModel;
+    std::string SupportModelReferenceSimTargetCustomCode;
 
-    const char** DisabledProps;
-    const char* Description;
-    const char** Components;
-    const char* UpdateModelReferenceTargets;
-    const char* EnableRefExpFcnMdlSchedulingChecks;
-    const char* CheckModelReferenceTargetMessage;
-    const char* EnableParallelModelReferenceBuilds;
-    const char* ParallelModelReferenceErrorOnInvalidPool;
-    const char* ParallelModelReferenceMATLABWorkerInit;
-    const char* ModelReferenceNumInstancesAllowed;
-    const char* PropagateVarSize;
-    const char* ModelDependencies;
-    const char* ModelReferencePassRootInputsByReference;
-    const char* ModelReferenceMinAlgLoopOccurrences;
-    const char* PropagateSignalLabelsOutOfModel;
-    const char* SupportModelReferenceSimTargetCustomCode;
+    bool IsValid() const;
 };
 
 SLXIO_ABI_NAMESPACE_END

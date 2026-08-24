@@ -1,10 +1,10 @@
 html {
-	--primary-color: #5f42d0;
+	--primary-color: #08609D;
 }
 
 @media (prefers-color-scheme: dark) {
     html:not(.light-mode) {
-		--primary-color: #5f42d0;
+		--primary-color: #08609D;
     }
     img.inline {
       background-color: #d2dbde;
