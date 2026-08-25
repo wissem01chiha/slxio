@@ -9,12 +9,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("Test default constructor")
 {
-    std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
+    auto array = std::make_shared<SimulinkArray>();
     CHECK(array != nullptr);
 
     ISimulinkElement* newArray = array->New();
     CHECK(newArray != nullptr);
-    delete newArray;
+    delete newArray; // NOSONAR
 }
 
 TEST_CASE("Test AcceptInsert Into other array")
@@ -23,7 +23,7 @@ TEST_CASE("Test AcceptInsert Into other array")
     auto array = std::make_shared<SimulinkArray>();
 
     array->SetName("ParentArray");
-    std::shared_ptr<SimulinkArray> subArray = std::make_shared<SimulinkArray>();
+    auto subArray = std::make_shared<SimulinkArray>();
     CHECK(array != nullptr);
     CHECK(subArray != nullptr);
 
@@ -45,8 +45,8 @@ TEST_CASE("Test AcceptInsert Into other array")
 
 TEST_CASE("Test AcceptInsert Into other object")
 {
-    std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>();
-    std::shared_ptr<SimulinkArray> array = std::make_shared<SimulinkArray>();
+    auto object = std::make_shared<SimulinkObject>();
+    auto array = std::make_shared<SimulinkArray>();
 
     CHECK(object != nullptr);
     CHECK(array != nullptr);
@@ -63,24 +63,20 @@ TEST_CASE("Test AcceptInsert Into other object")
 
 TEST_CASE("Test Insert a nullptr ")
 {
-    SimulinkArray* array = new SimulinkArray();
+    auto array = std::make_shared<SimulinkArray>();
     CHECK(array != nullptr);
 
     HError status = array->Insert(nullptr);
     CHECK(status == E_CHILD_NULLPTR_RECEIVED);
-
-    delete array;
 }
 
 TEST_CASE("Test Array Set Parameter Name ")
 {
-    SimulinkArray* array = new SimulinkArray();
+    auto array = std::make_shared<SimulinkArray>();
 
     array->SetName("TestArray");
 
     CHECK(array->GetName() == "TestArray");
-
-    delete array;
 }
 
 TEST_CASE("Test Array Immutable Set/Get Parameter ")

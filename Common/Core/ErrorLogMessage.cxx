@@ -33,19 +33,19 @@ DataType ErrorLogMessage::GetDataType() const
 
 bool ErrorLogMessage::Empty() const { return m_data.empty(); }
 
-std::unique_ptr<ILogMessage>
-ErrorLogMessage::operator+(const ILogMessage& rhs) const
+std::unique_ptr<ILogMessage> operator+(const ErrorLogMessage& lhs, // NOSONAR
+                                       const ILogMessage& rhs)
 {
     if (rhs.GetDataType() != DataType::SLXIO_TYPE_ERROR_LOG_MESSAGE)
     {
-        return std::make_unique<ErrorLogMessage>(*this);
+        return std::make_unique<ErrorLogMessage>(lhs);
     }
-    const ErrorLogMessage& other =
-        SLXIO_STATIC_CAST(const ErrorLogMessage&, rhs);
 
-    auto result = std::make_unique<ErrorLogMessage>(*this);
-    result->m_data.insert(result->m_data.end(), other.m_data.begin(),
-                          other.m_data.end());
+    const auto& rhsErr = dynamic_cast<const ErrorLogMessage&>(rhs);
+
+    auto result = std::make_unique<ErrorLogMessage>(lhs);
+    result->m_data.insert(result->m_data.end(), rhsErr.m_data.begin(),
+                          rhsErr.m_data.end());
     return result;
 }
 

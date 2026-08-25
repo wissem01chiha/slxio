@@ -19,7 +19,17 @@ class SLXIO_APIEXPORT SimulinkSolverParameter
 {
 public:
     ~SimulinkSolverParameter();
+    IParameterObjectBase* New() override;
+
+    std::string GetName() const override { return "Solver"; };
+    DataType GetDataType() const override;
+    UInt16 Size() const override { return (UInt16)1; }
+    std::string ToString() const override { return std::string(""); };
+
     SimulinkSolver& GetValue() override;
+
+private:
+    SimulinkSolver m_data;
 };
 
 SLXIO_ABI_NAMESPACE_END

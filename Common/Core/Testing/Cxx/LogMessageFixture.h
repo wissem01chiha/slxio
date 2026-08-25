@@ -20,7 +20,7 @@ public:
     bool Empty() const override { return m_text.empty(); }
 
     std::unique_ptr<ILogMessage>
-    operator+(const ILogMessage& rhs) const override
+    operator+(const ILogMessage& rhs) const // NOSONAR
     {
         return std::make_unique<LogMessage>(m_text + " " + rhs.ToString());
     }

@@ -35,9 +35,9 @@ public:
     ~BackgroundLogger();
 
 private:
-    LogLevelType m_level;
-    UInt32 m_queueSize;
-    UInt32 m_nthreads;
+    LogLevelType m_level = LogLevelType::LOG_INFO;
+    UInt32 m_queueSize = 8192;
+    UInt32 m_nthreads = 1;
 };
 
 SLXIO_ABI_NAMESPACE_END

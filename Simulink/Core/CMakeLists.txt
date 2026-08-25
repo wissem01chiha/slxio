@@ -54,12 +54,14 @@ add_module(
     TestSimulinkParameter.cxx
     TestSimulinkDataType.cxx
     TestSimulinkObject.cxx
+    TestSimulinkBlockCategory.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore
     CommonDataModel
     SimulinkMisc
     SimulinkData
+    SimulinkConfiguration
   MODULE_TEST_DEPENDS
   MODULE_TEST_INCLUDE_DIRS
     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest

@@ -5,10 +5,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BackgroundLogger::BackgroundLogger()
-    : m_level(LogLevelType::LOG_INFO), m_queueSize(8192), m_nthreads(1)
-{
-}
+BackgroundLogger::BackgroundLogger() = default;
 
 void BackgroundLogger::Init()
 {

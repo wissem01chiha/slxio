@@ -27,6 +27,7 @@ public:
     bool IsActive() const override;
     HError Activate() override;
     HError Deactivate() override;
+
     std::string ToString() const override;
 
     void AddParam(const std::string& name,

@@ -21,6 +21,8 @@ add_module(
     SimulinkHardware.h
     SimulinkDebugging.h
     SimulinkConfigSet.h
+    SimulinkConfigSetManager.h
+    SimulinkSolverParameter.h
   MODULE_PCH_HEADERS
     ConfigurationPCH.h
   MODULE_SOURCES
@@ -33,12 +35,15 @@ add_module(
     SimulinkHardware.cxx
     SimulinkDebugging.cxx
     SimulinkConfigSet.cxx
+    SimulinkConfigSetManager.cxx
+    SimulinkSolverParameter.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR
     Testing/Data
   MODULE_TEST_DATA_SOURCES
   MODULE_TEST_SOURCES
+    TestSimulinkConfigSet.cxx
   MODULE_INCLUDE_DIRS
   MODULE_PUBLIC_DEPENDS
     CommonCore

@@ -40,11 +40,6 @@ public:
     should override this, to provide safe type casting and checks */
     virtual DataType GetDataType() const = 0;
 
-    /* Concatenate ILogMessage based object to form a new ILogMessage, Combine
-     * *this with rhs */
-    virtual std::unique_ptr<ILogMessage>
-    operator+(const ILogMessage& rhs) const = 0;
-
     /* Polymorphic copy */
     virtual std::unique_ptr<ILogMessage> Clone() const = 0;
 };

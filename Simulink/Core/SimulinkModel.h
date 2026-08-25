@@ -7,6 +7,7 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "IConfigurableObject.h"
+#include "IConfigurationObject.h"
 #include "IErrorHandler.h"
 #include "ILogger.h"
 #include "ISimulinkElement.h"
@@ -78,6 +79,7 @@ private:
     std::vector<std::shared_ptr<ISimulinkBlock>> m_blocks;
     std::vector<std::shared_ptr<SimulinkLine>> m_lines;
     std::vector<std::shared_ptr<SimulinkParameter>> m_parameters;
+    std::vector<std::shared_ptr<IConfigurationObject>> m_configurations;
 };
 
 SLXIO_ABI_NAMESPACE_END

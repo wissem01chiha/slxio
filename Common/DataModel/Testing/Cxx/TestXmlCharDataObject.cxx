@@ -16,9 +16,8 @@ TEST_CASE("XmlCharDataObject Test")
 
     SUBCASE("Initialize test ")
     {
-        const char* testStr = "Hello XML";
-        xmlChar* xmlStr =
-            reinterpret_cast<xmlChar*>(const_cast<char*>(testStr));
+        char testStr[] = "Hello XML"; // NOSONAR
+        auto xmlStr = reinterpret_cast<xmlChar*>(testStr);
 
         obj.Initialize(xmlStr);
 
@@ -28,17 +27,17 @@ TEST_CASE("XmlCharDataObject Test")
 
     SUBCASE("Equality operator test")
     {
-        const char* str1 = "Data1";
-        const char* str2 = "Data1";
-        const char* str3 = "Different";
+        char str1[] = "Data1";     // NOSONAR
+        char str2[] = "Data1";     // NOSONAR
+        char str3[] = "Different"; // NOSONAR
 
         XmlCharDataObject obj1;
         XmlCharDataObject obj2;
         XmlCharDataObject obj3;
 
-        obj1.Initialize(reinterpret_cast<xmlChar*>(const_cast<char*>(str1)));
-        obj2.Initialize(reinterpret_cast<xmlChar*>(const_cast<char*>(str2)));
-        obj3.Initialize(reinterpret_cast<xmlChar*>(const_cast<char*>(str3)));
+        obj1.Initialize(reinterpret_cast<xmlChar*>(str1));
+        obj2.Initialize(reinterpret_cast<xmlChar*>(str2));
+        obj3.Initialize(reinterpret_cast<xmlChar*>(str3));
 
         CHECK(obj1 == obj2);
         CHECK_FALSE(obj1 == obj3);

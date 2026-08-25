@@ -13,7 +13,28 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSet::SimulinkConfigSet() : m_name(""), m_status(false) {}
 
-std::string SimulinkConfigSet::ToString() const { return {}; }
+std::string SimulinkConfigSet::ToString() const
+{
+    std::ostringstream oss;
+    oss << "SimulinkConfigSet: " << m_name
+        << " [status=" << (m_status ? "active" : "inactive") << "]\n";
+
+    for (const auto& kv : m_parameters)
+    {
+        oss << "  " << kv.first << " = ";
+        if (kv.second)
+        {
+            oss << kv.second->ToString();
+        }
+        else
+        {
+            oss << "\n";
+        }
+        oss << "\n";
+    }
+
+    return oss.str();
+}
 
 void SimulinkConfigSet::AddParam(const std::string& name,
                                  const std::shared_ptr<IParameterObjectBase>& p)

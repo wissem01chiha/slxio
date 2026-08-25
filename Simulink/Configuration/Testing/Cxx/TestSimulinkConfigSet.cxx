@@ -1,77 +1,23 @@
 #include "Doctest.h"
 #include "SimulinkConfigSet.h"
 
-namespace slxio
-{
+using namespace slxio;
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("ConstructorTest")
+TEST_CASE("SimulinkConfigSet Constructor Test")
 {
-    std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
-        42, "1.0", "MyObject", "SimulinkConfigSet");
-    SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-    CHECK(strcmp(configCst->GetName().c_str(), "MyObject") == 0);
-    CHECK(configCst->GetId() == 42);
-    delete configCst;
+    auto config = SimulinkConfigSet();
+    std::string name = config.GetName();
+    CHECK(name == "");
+    CHECK(!config.IsActive());
 }
 
-TEST_CASE("IsActiveTest")
+TEST_CASE("SimulinkConfigSet Activate/Desactivate Test")
 {
-    std::shared_ptr<SimulinkObject> object = std::make_shared<SimulinkObject>(
-        42, "1.0", "MyObject", "SimulinkConfigSet");
-    SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-    CHECK(configCst->IsActive() == false);
-    delete configCst;
+    auto config = SimulinkConfigSet();
+    CHECK(config.Activate() == E_OK);
+    CHECK(config.IsActive());
+    CHECK(config.Deactivate() == E_OK);
 }
-
-// TEST_CASE("SetParameterTest")
-// {
-//   // initialize SimulinkObject with a parameter, as SimulinkConfigSet do not
-//   // support adding new parameters, only modify existing ones !!!
-//   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
-//   auto param = std::make_shared<SimulinkParameter>();
-//   param->SetName("Solver");
-//   param->SetValue("Discrete");
-//   HError ec = object.Insert(param);
-//   CHECK(ec == E_OK);
-
-//   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-//   HError status = configCst->SetParameter("Solver", "ode45");
-//   CHECK(status == E_OK);
-//   std::cout << configCst->ToString() << std::endl;
-//   CHECK(strcmp(configCst->getParameter("Solver"), "ode45") == 0);
-//   delete configCst;
-// }
-
-// TEST_CASE("AddAndGetParameterTest")
-// {
-//   auto param = std::make_shared<SimulinkParameter>();
-//   param->setName("Solver");
-//   param->setValue("Discrete");
-
-//   SimulinkObject object(42, "1.0", "MyObject", "SimulinkConfigSet");
-
-//   HError ec = object.AddElement(param);
-//   CHECK(ec == E_OK);
-//   std::cout << object.ToString() << std::endl;
-
-//   SimulinkConfigSet* configCst = new SimulinkConfigSet(object);
-//   HError status = configCst->SetParameter("Solver", "Discrete");
-//   CHECK(status == E_OK);
-//   CHECK(strcmp(configCst->GetParameter("Solver"), "Discrete") == 0);
-//   delete configCst;
-// }
-
-// TEST_CASE("GetParameterReturnsEmptyIfNotFound")
-// {
-//   std::shared_ptr<SimulinkObject> object =
-//   std::make_shared<SimulinkObject>(42, "1.0", "MyObject",
-//   "SimulinkConfigSet"); SimulinkConfigSet* configCst = new
-//   SimulinkConfigSet(object);
-//   CHECK(strcmp(configCst->GetParameter("NonExistent"),
-//   "")
-//   == 0); delete configCst;
-// }
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio

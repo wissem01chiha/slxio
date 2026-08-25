@@ -5,7 +5,10 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-JsonDataObject* JsonDataObject::New() { return new JsonDataObject(); }
+JsonDataObject* JsonDataObject::New()
+{
+    return new JsonDataObject(); // NOSONAR
+}
 
 void JsonDataObject::Initialize(void* implDataObject)
 {

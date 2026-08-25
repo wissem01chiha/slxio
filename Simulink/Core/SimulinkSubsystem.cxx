@@ -1,12 +1,12 @@
 #include "SimulinkSubsystem.h"
-
-#include "Logger.h"
+#include "ISimulinkBlock.h"
+#include "SimulinkPort.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkSubsystem::SimulinkSubsystem() {}
+SimulinkSubsystem::SimulinkSubsystem() = default;
 
 std::vector<std::shared_ptr<SimulinkBlock>> SimulinkSubsystem::getBlocks()
 {

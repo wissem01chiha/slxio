@@ -42,8 +42,8 @@ public:
      * ErrorLogMessage containing the errors from both operands in
      * insertion order.
      */
-    std::unique_ptr<ILogMessage>
-    operator+(const ILogMessage& rhs) const override;
+    friend std::unique_ptr<ILogMessage> operator+(const ErrorLogMessage& lhs,
+                                                  const ILogMessage& rhs);
 
     std::unique_ptr<ILogMessage> Clone() const override;
 
