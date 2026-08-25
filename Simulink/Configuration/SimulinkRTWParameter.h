@@ -6,15 +6,29 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
+#include "IParameterObject.h"
+#include "SimulinkRTW.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 class SLXIO_APIEXPORT SimulinkRTWParameter
+    : public IParameterObject<SimulinkRTW>
 {
 public:
-    ~SimulinkRTWParameter();
+    IParameterObjectBase* New() override;
+
+    std::string GetName() const override;
+    DataType GetDataType() const override;
+    UInt16 Size() const override;
+    std::string ToString() const override;
+    SimulinkRTW& GetValue() override;
+
+    ~SimulinkRTWParameter() = default;
+
+private:
+    SimulinkRTW m_data;
 };
 
 SLXIO_ABI_NAMESPACE_END

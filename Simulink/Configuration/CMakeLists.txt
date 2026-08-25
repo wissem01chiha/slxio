@@ -23,6 +23,8 @@ add_module(
     SimulinkConfigSet.h
     SimulinkConfigSetManager.h
     SimulinkSolverParameter.h
+    SimulinkSFSimParameter.h
+    SimulinkSFSimParameter.h
   MODULE_PCH_HEADERS
     ConfigurationPCH.h
   MODULE_SOURCES
@@ -37,6 +39,8 @@ add_module(
     SimulinkConfigSet.cxx
     SimulinkConfigSetManager.cxx
     SimulinkSolverParameter.cxx
+    SimulinkSFSimParameter.cxx
+    SimulinkSFSimParameter.cxx
   MODULE_TEST_SOURCE_DIR
     Testing/Cxx
   MODULE_TEST_DATA_SOURCE_DIR

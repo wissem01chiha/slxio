@@ -14,8 +14,6 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class Logger;
-
 /**
  * @class SimulinkAtomicSubsystem
  * @brief Represents a Simulink Atomic Subsystem element in a Simulink model.

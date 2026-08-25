@@ -7,26 +7,25 @@
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "IParameterObject.h"
+#include "SimulinkSolver.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-struct SimulinkSolver;
-
 class SLXIO_APIEXPORT SimulinkSolverParameter
     : public IParameterObject<SimulinkSolver>
 {
 public:
-    ~SimulinkSolverParameter();
     IParameterObjectBase* New() override;
 
-    std::string GetName() const override { return "Solver"; };
+    std::string GetName() const override;
     DataType GetDataType() const override;
-    UInt16 Size() const override { return (UInt16)1; }
-    std::string ToString() const override { return std::string(""); };
-
+    UInt16 Size() const override;
+    std::string ToString() const override;
     SimulinkSolver& GetValue() override;
+
+    ~SimulinkSolverParameter() = default;
 
 private:
     SimulinkSolver m_data;

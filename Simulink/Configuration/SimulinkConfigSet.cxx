@@ -1,11 +1,11 @@
 #include "SimulinkConfigSet.h"
 #include "ConfigurationECH.h"
-#include "SimulinkHardware.h"
-#include "SimulinkModelReference.h"
-#include "SimulinkOptimization.h"
-#include "SimulinkRTW.h"
-#include "SimulinkSFSim.h"
-#include "SimulinkSolver.h"
+#include "SimulinkHardwareParameter.h"
+#include "SimulinkModelReferenceParameter.h"
+#include "SimulinkOptimizationParameter.h"
+#include "SimulinkRTWParameter.h"
+#include "SimulinkSFSimParameter.h"
+#include "SimulinkSolverParameter.h"
 
 namespace slxio
 {
@@ -39,9 +39,13 @@ std::string SimulinkConfigSet::ToString() const
 void SimulinkConfigSet::AddParam(const std::string& name,
                                  const std::shared_ptr<IParameterObjectBase>& p)
 {
-    if (p == nullptr)
+    if (p == nullptr || name.empty())
     {
         return;
+    }
+    if (name == "Solver")
+    {
+        m_parameters[name] = p;
     }
 }
 

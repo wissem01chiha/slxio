@@ -17,7 +17,18 @@ class SLXIO_APIEXPORT SimulinkSFSimParameter
     : public IParameterObject<SimulinkSFSim>
 {
 public:
-    ~SimulinkSFSimParameter();
+    IParameterObjectBase* New() override;
+
+    std::string GetName() const override;
+    DataType GetDataType() const override;
+    UInt16 Size() const override;
+    std::string ToString() const override;
+    SimulinkSFSim& GetValue() override;
+
+    ~SimulinkSFSimParameter() = default;
+
+private:
+    SimulinkSFSim m_data;
 };
 
 SLXIO_ABI_NAMESPACE_END

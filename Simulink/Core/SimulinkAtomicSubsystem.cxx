@@ -1,14 +1,12 @@
 #include "SimulinkAtomicSubsystem.h"
 
-#include "ErrorCode.h"
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkAtomicSubsystem* SimulinkAtomicSubsystem::New() const
 {
-    return new SimulinkAtomicSubsystem();
+    return new SimulinkAtomicSubsystem(); // NOSONAR
 }
 
 SimulinkElementType SimulinkAtomicSubsystem::GetType() const

@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
 // SPDX-License-Identifier: Apache-2.0
 
+#ifndef SIMULINKSOLVER_H
+#define SIMULINKSOLVER_H
+
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
@@ -60,3 +63,5 @@ bool IsValid(const SimulinkSolver* solver);
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
+
+#endif // SIMULINKSOLVER_H
