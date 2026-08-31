@@ -208,7 +208,6 @@ enum class SimulinkBlockType
     CastToDouble,
     CastToSingle,
     CCCodeBlock
-
 };
 
 SLXIO_APIEXPORT std::string ToString(SimulinkBlockType type);
