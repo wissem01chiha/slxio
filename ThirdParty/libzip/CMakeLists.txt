@@ -1,1 +1,1 @@
-add_third_party(zip)
+add_subdirectory(src)

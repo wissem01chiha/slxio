@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
 if(SLXIO_ASAN)
     if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         # Works only with LLVM/Clang toolset in MSVC

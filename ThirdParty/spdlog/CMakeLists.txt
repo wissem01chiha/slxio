@@ -1,3 +1,3 @@
-set(SPDLOG_BUILD_TESTS ${SLXIO_BUILD_THIRDPARTY_TESTING})
+set(SPDLOG_BUILD_TESTS ${SLXIO_BUILD_THIRDPARTY_TESTS})
 
-add_third_party(spdlog)
+add_subdirectory(src)

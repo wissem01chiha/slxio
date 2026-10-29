@@ -1,1 +1,1 @@
-add_third_party(uv_a)
+add_subdirectory(src)

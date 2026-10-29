@@ -18,4 +18,3 @@ macro(advanced_configure_option option_name description value)
     mark_as_advanced(${option_name})
     set(${option_name} ${${option_name}})
 endmacro()
-

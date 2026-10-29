@@ -1,5 +1,4 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
+include(Macro)
 
 message(STATUS "")
 message(STATUS "====================================================================")
@@ -19,7 +18,6 @@ message(STATUS "  PkgConfig                  : ${SLXIO_WITH_PKGCONFIG}")
 message(STATUS "  Shared Libraries           : ${SLXIO_BUILD_SHARED_LIBS}")
 message(STATUS "  64-bit Identifiers         : ${SLXIO_64BIT_IDENTIFIERS}")
 message(STATUS "  Interaction                : ${SLXIO_WITH_INTERACTION}")
-message(STATUS "  Visualization              : ${SLXIO_WITH_VISUALIZATION}")
 message(STATUS "  OpenMP                     : ${SLXIO_WITH_OPENMP}")
 message(STATUS "  PIC                        : ${SLXIO_PIC}")
 message(STATUS "  Python                     : ${SLXIO_BUILD_PYTHON_BINDINGS}")

@@ -1,4 +1,4 @@
-include(Macros)
+include(Macro)
 
 # Option to enable/disable Global Link Time Optimisation note that this 
 # might increase build time but produce more optimized binary,this feature
@@ -25,6 +25,9 @@ advanced_option(SLXIO_BUILD_SHARED_LIBS "Build shared libraries" OFF)
 # for building only static libraries, when BUILD_SHARED_AND_STATIC_LIBS 
 # is disabled
 advanced_option(SLXIO_BUILD_STATIC_LIBS "Build static libraries" OFF)
+
+# enable/diable precompled haeders 
+advanced_option(SLXIO_PCH_HEADERS "enable precompiled haeders" ON)
 
 # Enable unit and integration testing globally
 option(SLXIO_BUILD_TESTS "Enable unit and integration testing" OFF)
@@ -125,7 +128,14 @@ advanced_option(SLXIO_AUTO_DETECT_SIMULINK
 # SLXIO_AUTO_DETECT_SIMULINK is OFF, note that only one simulink version
 # can be is supported at a time
 advanced_dependent_option(SLXIO_SIMULINK_DEFAULT_VERSION 
-"simulink version to use" R2018b SLXIO_AUTO_DETECT_SIMULINK)
+"simulink version to use" ON SLXIO_AUTO_DETECT_SIMULINK OFF)
+
+# only relevent when SLXIO_SIMULINK_DEFAULT_VERSION is ON, set default 
+# version numbering
+set(SLXIO_SIMULINK_VERSION_YEAR "2018")
+
+# note when autodetect is on, these options are automaticlly ignored
+set(SLXIO_SIMULINK_VERSION_RELEASE "a")
 
 # Option to enable installation rules on target machine
 advanced_option(SLXIO_INSTALL "installation after build" ON)
@@ -133,7 +143,7 @@ advanced_option(SLXIO_INSTALL "installation after build" ON)
 # Choose whatever to install vendored lisenses when SLXIO_INSTALL is ON
 # this option will install project license along with third-party ones
 advanced_dependent_option(SLXIO_INSTALL_LICENSES "install third-party licenses" 
-ON SLXIO_INSTALL)
+ON "SLXIO_INSTALL" ON)
 
 # Option to install software licenses, requires SLXIO_INSTALL enabled
 advanced_option(CMAKE_INSTALL_LICENSEDIR "install license directory" OFF)
@@ -157,7 +167,7 @@ advanced_option(SLXIO_ENABLE_PKGCONFIG "generate pkg-config files" ON)
 advanced_option(SLXIO_BUILD_SUMMARY "display build summary" ON)
 
 # When this is on custom targets mainly for tooling will be build
-advanced_option(SLXIO_CUSTOM_TARGETS)
+advanced_option(SLXIO_CUSTOM_TARGETS "custom build targets" ON)
 
 # Override default build type
 option(SLXIO_DEFAULT_BUILD_TYPE "default build type" Release)
@@ -218,20 +228,9 @@ advanced_option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation genera
 
 
 # Option to use OpenMP acceleration when available
-advanced_option(SLXIO_ENABLE_OPENMP "openmp support" ON)
+advanced_configure_option(SLXIO_ENABLE_OPENMP "openmp support" ON)
 
 
-
-
-
-
-
-
-
-
-# Option to enable using std::uint64_t types
-# If the platform/compiler does not support 64-bit this throws an error
-configure_option(SLXIO_64BIT_IDENTIFIERS "Enable 64-bit identifiers" ON)
 
 
 
@@ -282,7 +281,7 @@ advanced_option(SLXIO_INSTALL_THIRDPARTY_LISENCES "Install vendored third_party 
 
 # Option to enable building third party module tests for regression
 # Requires SLXIO_BUILD_TESTING enabled
-advanced_option(SLXIO_BUILD_THIRDPARTY_TESTING "Enable building third party module tests for regression" OFF)
+advanced_option(SLXIO_BUILD_THIRDPARTY_TESTS "Enable building third party module tests for regression" ON)
 
 # Option to enable building third party module extra tools or scripts
 advanced_option(SLXIO_BUILD_THIRDPARTY_TOOLS "Enable building third party module extra tools or scripts" OFF)

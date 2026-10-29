@@ -1,1 +1,1 @@
-add_third_party(loguru)
+add_subdirectory(src)

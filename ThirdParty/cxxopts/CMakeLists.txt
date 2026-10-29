@@ -1,1 +1,1 @@
-add_third_party(cxxopts)
+add_subdirectory(src)
