@@ -1,6 +1,0 @@
-if(SLXIO_BUILD_PYTHON_BINDINGS)
-    add_subdirectory(Python)
-endif()
-if(SLXIO_BUILD_JAVA_BINDINGS)
-    add_subdirectory(Java)
-endif()

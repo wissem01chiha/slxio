@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
 function(add_third_party target)
   add_subdirectory(src)
   get_target_property(target_type ${target} TYPE)

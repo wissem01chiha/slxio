@@ -1,6 +1,0 @@
-title: npio
-description: NUMPY NPY/NPZ File I/O Library
-remote_theme: just-the-docs/just-the-docs
-plugins:
-  - jekyll-default-layout
-favicon: "/favicon.ico"

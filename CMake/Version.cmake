@@ -1,6 +1,3 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
-
 # Used to read version string from the VERSION.txt file
 # On success sets following variables in caller's scope:
 #   SLXIO_VERSION

@@ -1,165 +1,290 @@
+include(Macros)
 
-# Option to enable/disable Global Link Time Optimisation note that this might increase 
-# build time but produce more optimized binary,this feature required CMake >=v3.9, 
-# since we support min CMake v3.18 we are fine
-option(SLXIO_ENABLE_LTO "" OFF)
-mark_as_advanced(SLXIO_ENABLE_LTO)
+# Option to enable/disable Global Link Time Optimisation note that this 
+# might increase build time but produce more optimized binary,this feature
+# required CMake >=v3.9, since we support min CMake v3.18 we are fine
+advanced_option(SLXIO_ENABLE_LTO "Enable Link Time Optimization" OFF)
 
-# Build slxio static or shared libs
-option(SLXIO_BUILD_SHARED_LIBS  "" OFF)
+# Option to enable position-independent code globally, usful only when building 
+# shared libraries or when a static library may later be linked into one.
+advanced_option(SLXIO_ENABLE_PIC "Enable position-independent code" ON)
 
-# Option to enable using std::uint64_t types
-# If the platform/compiler does not support 64-bit this throws an error
-option(SLXIO_64BIT_IDENTIFIERS "" ON)
-set(SLXIO_64BIT_IDENTIFIERS ${SLXIO_64BIT_IDENTIFIERS})
+# Option to enable position-independent code for specific targets
+# that require it, not globally.
+advanced_option(SLXIO_ENABLE_TARGET_PIC "Enable pic for specific targets" OFF)
 
-# Enable unit and integration testing
-option(SLXIO_BUILD_TESTING "" ON)
+# Build  static and shared library as well, this is disabled by default, 
+advanced_option(SLXIO_BUILD_SHARED_AND_STATIC_LIBS "Build both shared and 
+static libraries" OFF)
 
-# Enable coverage reports when testing is ON
-option(SLXIO_ENABLE_TESTING_COVERAGE "" OFF)
+# for fine grained control when building only shared or static libraries, 
+# this can be enabled for shared builds
+# note this option is relevant when BUILD_SHARED_AND_STATIC_LIBS is disabled
+advanced_option(SLXIO_BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
-# Enable build fuzzy tests
-option(SLXIO_BUILD_FUZZ_TESTING "" OFF)
+# for building only static libraries, when BUILD_SHARED_AND_STATIC_LIBS 
+# is disabled
+advanced_option(SLXIO_BUILD_STATIC_LIBS "Build static libraries" OFF)
 
-# Option to enable compiling example scripts
-option(SLXIO_BUILD_EXAMPLES "" OFF)
+# Enable unit and integration testing globally
+option(SLXIO_BUILD_TESTS "Enable unit and integration testing" OFF)
 
-# By default it will look for any installed Simulink instances
-# If found, will set the target Simulink version automatically to match
-# Else can be forced to one of the supported releases
-# For more information refer to https://wissem01chiha.github.io/slxio/matlab-support.html
-set(SLXIO_SIMULINK_DEFAULT_VERSION R2018b)
+# When global testing option is disbaled, this gives fine grained 
+# control to build only unit tests separately
+advanced_option(SLXIO_BUILD_UNIT_TESTS "Enable building unit tests" OFF)
 
-# Option to enable building utilities like console application 
-# and others
-option(SLXIO_WITH_INTERACTION "" ON)
+# same as SLXIO_BUILD_UNIT_TESTS but for integration tests
+advanced_option(SLXIO_BUILD_INTEGRATION_TESTS "Enable building integration
+ tests" OFF)
 
-# Option to enable Python bindings
-option(SLXIO_BUILD_PYTHON_BINDINGS "" OFF)
+# Enable coverage reports when SLXIO_BUILD_TESTS or SLXIO_BUILD_UNIT_TESTS or 
+# SLXIO_BUILD_INTEGRATION_TESTS is enabled
+cmake_dependent_option(SLXIO_ENABLE_COVERAGE "Enable code coverage for Libraries
+ and Programs" OFF "SLXIO_BUILD_TESTS" OFF)
+
+# Option to control building of fuzzy tests module sources, this is sperate 
+# from SLXIO_BUILD_TESTS option, so fuzzy pipiles can be built independently
+# and save build time.
+advanced_option(SLXIO_BUILD_FUZZER "Enable build fuzzy tests" OFF)
+
+# Option to enable building example scripts
+option(SLXIO_BUILD_EXAMPLES "Enable building examples scripts" OFF)
+
+# Option to control installation of example scripts, 
+# this will only be relevant if example scripts are being built and global installtion 
+# option is enabled
+cmake_dependent_option(SLXIO_INSTALL_EXAMPLES "Install example scripts"
+ OFF "SLXIO_BUILD_EXAMPLES" OFF)
+
+# Option to enable building Auxiliary modules 
+advanced_option(SLXIO_BUILD_AUXILIARY "Enable building Auxiliary modules" ON)
+
+# Option to enable Python bindings interface, only when SLXIO_BUILD_AUXILIARY is 
+# set to ON
+advanced_dependent_option(SLXIO_BUILD_PYTHON "Build Python interface" OFF
+ "SLXIO_BUILD_AUXILIARY" OFF)
 
 # Option to enable Java bindings
-option(SLXIO_BUILD_JAVA_BINDINGS "" OFF)
+advanced_dependent_option(SLXIO_BUILD_JAVA "Build Java interface" OFF
+ "SLXIO_BUILD_AUXILIARY" OFF)
 
-# Option to use only vendored third_party modules
-option(SLXIO_FORCE_LOCAL_MODULES "" ON)
-mark_as_advanced(SLXIO_FORCE_LOCAL_MODULES)
+advanced_dependent_option(SLXIO_ENABLE_JNI 
+"Force JNI implementation instead of FFM for Java bindings when Java 25+ is 
+available" ON "SLXIO_BUILD_JAVA" OFF)
 
-# Use system-wide installed modules when found
-option(SLXIO_USE_SYSTEM_MODULES "" OFF)
-mark_as_advanced(SLXIO_USE_SYSTEM_MODULES)
+advanced_dependent_option(SLXIO_BUILD_CONSOLE "Enable building command line
+ interface" OFF "SLXIO_BUILD_AUXILIARY" OFF)
 
-# Vendored third_parties are built by other targets
-option(SLXIO_DISABLE_VENDORED_MODULES "" OFF)
-mark_as_advanced(SLXIO_DISABLE_VENDORED_MODULES)
+# enable all sanitizers globally when available when compiler and platform 
+# support them
+advanced_option(SLXIO_ENABLE_SANITIZERS "Enable all available sanitizers" OFF)
 
-# Option to install vendored third_party modules licenses
-option(SLXIO_INTSALL_THIRDPARTY_LISENCES "" ON)
+# Asan
+advanced_dependent_option(SLXIO_ENABLE_ASAN "Enable AddressSanitizer" OFF
+ SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable building third party module tests for regression
-# Requires SLXIO_BUILD_TESTING enabled
-option(SLXIO_BUILD_THIRDPARTY_TESTING "" OFF)
+# MSan 
+advanced_dependent_option(SLXIO_ENABLE_MSAN "Enable MemorySanitizer" OFF
+ SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable building third party module extra tools or scripts 
-option(SLXIO_BUILD_THIRDPARTY_TOOLS "" OFF)
+# TSan
+advanced_dependent_option(SLXIO_ENABLE_TSAN "Enable ThreadSanitizer" OFF
+ SLXIO_ENABLE_SANITIZERS ON)
+
+# Ubsan
+advanced_dependent_option(SLXIO_ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF
+ SLXIO_ENABLE_SANITIZERS ON)
+
+# Option to enable/disable IO modules support  globally
+advanced_option(SLXIO_ENABLE_IO "build IO modules" OFF)
 
 # Option to enable *.sldd file support
-option(SLXIO_SLDD "Enable Simulink Data Dictionary support" ON)
-set(SLDD ${SLXIO_SLDD})
+advanced_dependent_option(SLXIO_ENABLE_SLDD "simulink data dictionary support" ON
+ "SLXIO_ENABLE_IO" OFF)
 
 # Option to enable *.mat file support
-option(SLXIO_MAT "Enable MATLAB MAT file support" OFF)
-
-# Option to enable Numpy *.npy file support
-option(SLXIO_NPY "Enable NUMPY NPY file support" OFF)
-
-# Option to enable Numpy *.npz file support
-option(SLXIO_NPZ "Enable NUMPY NPZ file support" OFF)
-
-# Option to enable export feature to *.xlsx files 
-option(SLXIO_XLSX "Enable Microsoft Excel file support" OFF)
-
-# Build with HDF5 library support
-# Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
-option(SLXIO_WITH_HDF5 "Check for hdf5 library" ON)
-
-# Option to enable latex *.tex file support
-option(SLXIO_TEX "Enable Latex TeX file support" OFF)
-
-# Option to enable position-independent code (PIC)
-option(SLXIO_PIC "Enable position-independent code (PIC)" ON)
-
-# Option to enable visualization modules support
-# Note enabling this may require additional third-parties not managed by project build
-option(SLXIO_WITH_VISUALIZATION "" ON)
+advanced_dependent_option(SLXIO_ENABLE_MAT "MATLAB MAT file support" OFF
+ "SLXIO_ENABLE_IO" OFF)
 
 # Option to enable support for *.mdl files
 # Note that *.mdl files are experimental and may be unstable
-option(SLXIO_MDL "Enable legacy simulink model files support" OFF)
-set(MDL ${SLXIO_MDL})
+advanced_dependent_option(SLXIO_ENABLE_LEGACY_MDL "legacy simulink model files
+ support" OFF "SLXIO_ENABLE_IO" OFF)
+
+# Build with HDF5 library support
+# Enables internal HDF5 exporter and MAT files with HDF5 via MATIO_WITH_HDF5
+advanced_option(SLXIO_ENABLE_HDF5 "Check for hdf5 library" ON)
+
+# By default it will look for any installed simulink instances
+# If found, will set the target simulink version automatically to match
+# Else can be forced to one of the supported releases
+advanced_option(SLXIO_AUTO_DETECT_SIMULINK 
+"Automatically detect installed simulink versions" ON)
+
+# Option so the user specifies a specific simulink version to use when 
+# SLXIO_AUTO_DETECT_SIMULINK is OFF, note that only one simulink version
+# can be is supported at a time
+advanced_dependent_option(SLXIO_SIMULINK_DEFAULT_VERSION 
+"simulink version to use" R2018b SLXIO_AUTO_DETECT_SIMULINK)
 
 # Option to enable installation rules on target machine
-option(SLXIO_INSTALL "Enable installation after build" ON)
+advanced_option(SLXIO_INSTALL "installation after build" ON)
+
+# Choose whatever to install vendored lisenses when SLXIO_INSTALL is ON
+# this option will install project license along with third-party ones
+advanced_dependent_option(SLXIO_INSTALL_LICENSES "install third-party licenses" 
+ON SLXIO_INSTALL)
 
 # Option to install software licenses, requires SLXIO_INSTALL enabled
-option(CMAKE_INSTALL_LICENSEDIR "")
-mark_as_advanced(CMAKE_INSTALL_LICENSEDIR)
+advanced_option(CMAKE_INSTALL_LICENSEDIR "install license directory" OFF)
 
 # Default license installation directory
-option(CMAKE_DEFAULT_LICENSEDIR ${CMAKE_INSTALL_DATAROOTDIR}/licenses/${CMAKE_PROJECT_NAME})
-mark_as_advanced(CMAKE_DEFAULT_LICENSEDIR)
+advanced_option(CMAKE_DEFAULT_LICENSEDIR "default license installation
+ directory" ${CMAKE_INSTALL_DATAROOTDIR}/Licenses/${CMAKE_PROJECT_NAME} OFF)
 
-# Override default build type
-option(SLXIO_DEFAULT_BUILD_TYPE "" Release)
+# if CMAKE_INSTALL_LICENSEDIR not set fallback to this default
+if(NOT CMAKE_INSTALL_LICENSEDIR)
+ set(CMAKE_INSTALL_LICENSEDIR "${CMAKE_DEFAULT_LICENSEDIR}")
+endif ()
 
-# Option to use pkg-config tooling
+# Generate .pc file from template during build if pkgconfig was found on
+# host machine
 # Requires Pkg-Config installed, see https://people.freedesktop.org/~dbn/pkg-config-guide.html
-option(SLXIO_WITH_PKGCONFIG "Generate pkg-config file during build" ON)
-mark_as_advanced(SLXIO_WITH_PKGCONFIG)
-
-# Option to generate API HTML documentation
-# Requires Doxygen installed, else throws a build error
-option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
-mark_as_advanced(SLXIO_DOXYGEN_DOCUMENTATION)
-
-# Options to enable/disable sanitizers
-option(SLXIO_ASAN "Enable AddressSanitizer (ASan)" OFF)
-mark_as_advanced(SLXIO_ASAN)
-
-# MSan 
-option(SLXIO_MSAN "Enable MemorySanitizer (MSan)" OFF)
-mark_as_advanced(SLXIO_MSAN)
-
-option(SLXIO_TSAN "Enable ThreadSanitizer (TSan)" OFF)
-mark_as_advanced(SLXIO_TSAN)
-
-option(SLXIO_UBSAN "Enable UndefinedBehaviorSanitizer (UBSan)" OFF)
-mark_as_advanced(SLXIO_UBSAN)
-
-# Option to enable/disable third party memory sanitizers
-option(SLXIO_THIRDPARTY_MSAN "" OFF)
-mark_as_advanced(SLXIO_THIRDPARTY_MSAN)
-
-# Option to enable/disable third party address sanitizers
-option(SLXIO_THIRDPARTY_ASAN "" OFF)
-mark_as_advanced(SLXIO_THIRDPARTY_ASAN)
-
-# Option to enable/disable third party undefined behavior sanitizers
-option(SLXIO_THIRDPARTY_UBSAN "" OFF)
-mark_as_advanced(SLXIO_THIRDPARTY_UBSAN)
-
-# Option to use OpenMP acceleration when available
-option(SLXIO_WITH_OPENMP "Enable OpenMP support" ON)
-mark_as_advanced(SLXIO_WITH_OPENMP)
-
-# Compiler/build options
-option(SLXIO_ENABLE_WERROR "Enable treating warnings as errors" OFF)
-mark_as_advanced(SLXIO_ENABLE_WERROR)
+advanced_option(SLXIO_ENABLE_PKGCONFIG "generate pkg-config files" ON)
 
 # Option to enable/disable build summary logging during 
 # cmake configuration step
-option(SLXIO_ENABLE_BUILD_SUMMARY "" ON)
-mark_as_advanced(SLXIO_ENABLE_BUILD_SUMMARY)
+advanced_option(SLXIO_BUILD_SUMMARY "display build summary" ON)
 
-option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
-mark_as_advanced(SLXIO_ENABLE_WALL)
+# When this is on custom targets mainly for tooling will be build
+advanced_option(SLXIO_CUSTOM_TARGETS)
+
+# Override default build type
+option(SLXIO_DEFAULT_BUILD_TYPE "default build type" Release)
+
+# Option to set build type when user didn't specify for single generators
+if(NOT DEFINED CMAKE_BUILD_TYPE AND NOT IS_MULTI)
+  set(CMAKE_BUILD_TYPE ${SLXIO_DEFAULT_BUILD_TYPE})
+endif()
+
+# Change this variable to add a prefix before each cmake target compiled
+set(CMAKE_BINARY_NAME_PREFIX "Slx")
+
+# strict warning to error option
+advanced_option(SLXIO_ENABLE_WERROR "treat warnings as errors" OFF)
+
+# display all compiler warning for debugging
+advanced_option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Option to generate API HTML documentation
+# Requires Doxygen installed, else throws a build error
+advanced_option(SLXIO_DOXYGEN_DOCUMENTATION "Enable Doxygen documentation generation" OFF)
+
+
+
+# Option to use OpenMP acceleration when available
+advanced_option(SLXIO_ENABLE_OPENMP "openmp support" ON)
+
+
+
+
+
+
+
+
+
+
+# Option to enable using std::uint64_t types
+# If the platform/compiler does not support 64-bit this throws an error
+configure_option(SLXIO_64BIT_IDENTIFIERS "Enable 64-bit identifiers" ON)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# by daulfault we vendor all third party of the project, and are by default used othersie a configuration specified
+# Option to use only vendored third_party modules
+advanced_option(SLXIO_USE_SYSTEM_MODULES "Use system-wide installed modules" OFF)
+
+# Use system-wide installed modules when found
+advanced_option(SLXIO_USE_SYSTEM_MODULES "Use system-wide installed modules" OFF)
+
+# Vendored third_parties are built by other targets
+advanced_option(SLXIO_DISABLE_VENDORED_MODULES "Disable vendored third_party modules" OFF)
+
+# Option to install vendored third_party modules licenses
+advanced_option(SLXIO_INSTALL_THIRDPARTY_LISENCES "Install vendored third_party modules licenses" ON)
+
+# Option to enable building third party module tests for regression
+# Requires SLXIO_BUILD_TESTING enabled
+advanced_option(SLXIO_BUILD_THIRDPARTY_TESTING "Enable building third party module tests for regression" OFF)
+
+# Option to enable building third party module extra tools or scripts
+advanced_option(SLXIO_BUILD_THIRDPARTY_TOOLS "Enable building third party module extra tools or scripts" OFF)
+
+

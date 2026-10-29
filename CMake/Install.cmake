@@ -1,5 +1,16 @@
-# SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-# SPDX-License-Identifier: Apache-2.0
+
+find_package(PkgConfig)
+    if(PKG_CONFIG_FOUND)
+    set(SLXIO_PKG_CFG "${CMAKE_CURRENT_BINARY_DIR}/${SLXIO_PKG_CONFIG_FILE}")
+    configure_file(
+        ${CMAKE_CURRENT_SOURCE_DIR}/${SLXIO_PKG_CONFIG_FILE}.in
+        ${SLXIO_PKG_CFG}
+        @ONLY
+    )
+endif()
+
+# Do not change this without changing filename on disk !
+set(SLXIO_PKG_CONFIG_FILE "slxio.pc")
 
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
 set(PROJECT_DESCRIPTION  "SLXIO – SIMULINK SLX File I/O Library")

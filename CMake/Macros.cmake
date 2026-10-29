@@ -1,0 +1,21 @@
+macro(advanced_option option_name description value)
+    option(${option_name} "${description}" ${value})
+    mark_as_advanced(${option_name})
+endmacro()
+
+macro(configure_option option_name description value)
+    option(${option_name} "${description}" ${value})
+    set(${option_name} ${${option_name}})
+endmacro()
+
+macro(advanced_dependent_option option_name description value dependent_option dependent_value)
+    cmake_dependent_option(${option_name} "${description}" ${value} "${dependent_option}" ${dependent_value})
+    mark_as_advanced(${option_name})
+endmacro()
+
+macro(advanced_configure_option option_name description value)
+    option(${option_name} "${description}" ${value})
+    mark_as_advanced(${option_name})
+    set(${option_name} ${${option_name}})
+endmacro()
+
