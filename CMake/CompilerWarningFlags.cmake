@@ -1,6 +1,6 @@
-set (CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1)
-if (MSVC)
-  add_compile_options (
+set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1)
+if(MSVC)
+  add_compile_options(
     /wd4244
     /wd4267
     /wd4245
@@ -10,6 +10,6 @@ if (MSVC)
     /wd4701
     /wd4005
     /wd4152)
-else ()
-  add_compile_options (-Wno-return-type)
-endif ()
+else()
+  add_compile_options(-Wno-return-type)
+endif()

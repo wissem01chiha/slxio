@@ -1,5 +1,5 @@
 #include "HErrorHelper.h"
-#include "CorePCH.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {

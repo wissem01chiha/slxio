@@ -6,7 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "CorePCH.h"
+#include "CommonPCH.h"
 #include "DataType.h"
 #include "ILogMessage.h"
 #include "PlatformTypes.h"

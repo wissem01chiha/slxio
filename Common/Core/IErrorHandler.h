@@ -6,9 +6,10 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "CorePCH.h"
+#include "CommonPCH.h"
 #include "ILogger.h"
 #include "PlatformTypes.h"
+#include "Compiler.h"
 
 namespace slxio
 {
@@ -27,13 +28,13 @@ public:
     virtual void SetResult(HError status) = 0;
 
     /// Retrieve the last recorded error
-    virtual HError GetLastResult() const = 0;
+    SLXIO_NODISCARD virtual HError GetLastResult() const = 0;
 
     /// Retrieve the full buffer/log of errors
-    virtual std::vector<HError> GetBuffer() const = 0;
+    SLXIO_NODISCARD virtual std::vector<HError> GetBuffer() const = 0;
 
     /// Attach a logger sink (ILogger interface)
-    virtual HError SetLogger(ILogger* logger) = 0;
+    SLXIO_NODISCARD virtual HError SetLogger(ILogger* logger) = 0;
 
     /// Get the current logger sink
     virtual const ILogger* GetLogger() const = 0;

@@ -9,7 +9,7 @@
 #include "Directory.h"
 #include "File.h"
 #include "PlatformTypes.h"
-#include "SystemPCH.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {

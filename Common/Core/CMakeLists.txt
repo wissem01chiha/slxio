@@ -1,79 +1,28 @@
-# add_module(
-#   MODULE_NAME 
-#     Core
-#   MODULE_GROUP 
-#     Common
-#   LIBRARY_NAME 
-#     CommonCore
-#   MODULE_ENABLE_BUILD 
-#     TRUE
-#   MODULE_ENABLE_TESTS 
-#     TRUE
-#   MODULE_CONFIG_HEADERS
-#     Options.h.in
-#     VersionMacro.h.in
-#     SimulinkVersionMacro.h.in
-#   MODULE_CLASSES
-#     Version.cxx
-#     SimulinkVersion.cxx
-#     TimeStamp.cxx
-#     Timer.cxx
-#     Logger.cxx
-#     ErrorLogMessage.cxx
-#     FileLogger.cxx
-#     BackgroundLogger.cxx
-#     BufferedLogger.cxx
-#     BufferedErrorHandler.cxx
-#     BufferedLogger.cxx
-#     IObservable.cxx
-#   MODULE_HEADERS
-#     ABINamespaceMacro.h
-#     APIExportMacro.h
-#     Compiler.h
-#     Version.h
-#     TimeStamp.h
-#     Timer.h
-#     SimulinkVersion.h 
-#     SimulinkVersionRelease.h
-#     DataType.h
-#     ILogger.h
-#     Logger.h
-#     BackgroundLogger.h
-#     BufferedLogger.h
-#     ErrorMacro.h
-#     HErrorHelper.h
-#     CommonECH.h
-#     ILogMessage.h
-#     FileLogger.h
-#     BufferedLogger.h
-#     BufferedErrorHandler.h
-#     IObserver.h
-#     IObservable.h
-#     IObservationMessage.h
-#   MODULE_PCH_HEADERS
-#     CorePCH.h
-#   MODULE_SOURCES
-#     HErrorHelper.cxx
-#   MODULE_TEST_SOURCE_DIR
-#     Testing/Cxx
-#   MODULE_TEST_DATA_SOURCE_DIR
-#     Testing/Data
-#   MODULE_TEST_DATA_SOURCES
-#   MODULE_TEST_SOURCES
-#     TestVersion.cxx
-#     TestLogger.cxx
-#     TestSimulinkVersion.cxx
-#     TestHErrorHelper.cxx
-#     TestErrorLogger.cxx
-#     TestFileLogger.cxx
-#     TestBackgroundLogger.cxx
-#     TestBufferedLogger.cxx
-#     TestBufferedErrorHandler.cxx
-#   MODULE_INCLUDE_DIRS
-#   MODULE_PUBLIC_DEPENDS
-#     loguru
-#     spdlog
-#   MODULE_TEST_DEPENDS
-#   MODULE_TEST_INCLUDE_DIRS
-#     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
-# )
+add_module(
+  Core
+  Version.cxx
+  SimulinkVersion.cxx
+  TimeStamp.cxx
+  Timer.cxx
+  Logger.cxx
+  ErrorLogMessage.cxx
+  FileLogger.cxx
+  BackgroundLogger.cxx
+  BufferedLogger.cxx
+  BufferedErrorHandler.cxx
+  IObservable.cxx
+  HErrorHelper.cxx)
+
+configure_file(Options.h.in ${CMAKE_CURRENT_BINARY_DIR}/Options.h @ONLY)
+configure_file(VersionMacro.h.in ${CMAKE_CURRENT_BINARY_DIR}/VersionMacro.h
+               @ONLY)
+configure_file(SimulinkVersionMacro.h.in
+               ${CMAKE_CURRENT_BINARY_DIR}/SimulinkVersionMacro.h @ONLY)
+module_link_libraries(Core loguru spdlog)
+set_target_properties(Core PROPERTIES OUTPUT_NAME "CommonCore")
+target_precompile_headers(Core PRIVATE CommonPCH.h)
+module_include_directories(
+  Core ${PROJECT_THIRDPARTY_SOURCE_DIR}/doctest
+  ${PROJECT_THIRDPARTY_SOURCE_DIR}/loguru
+  ${PROJECT_THIRDPARTY_SOURCE_DIR}/spdlog)
+add_subdirectory(Testing)

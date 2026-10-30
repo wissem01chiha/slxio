@@ -13,20 +13,27 @@ list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/CMake")
 find_package(Git)
 include(DetermineVersion)
 include(Version)
-include(CMakeDependentOption)
 
 set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
 set(CMAKE_PROJECT_SPDX_LICENSE "Apache-2.0")
 
+include(Macro)
 include(Options)
 include(CompilerFlags)
 include(CompilerPlatformFlags)
 include(CompilerWarningFlags)
 include(LTO)
+include(CTest)
+
+enable_testing()
 
 if(APPLE)
   include(Apple)
+endif()
+
+if(MINGW)
+  include(MinGW)
 endif()
 
 if(SLXIO_ENABLE_COVERAGE)
@@ -35,11 +42,6 @@ endif()
 
 if(SLXIO_ENABLE_SANITIZERS)
   include(Sanitize)
-endif()
-
-if(SLXIO_BUILD_TESTS)
-  include(CTest)
-  enable_testing()
 endif()
 
 if(SLXIO_BUILD_SUMMARY)

@@ -1,0 +1,12 @@
+module_add_tests(
+  Core
+  Cxx/TestBackgroundLogger.cxx
+  Cxx/TestBufferedLogger.cxx
+  Cxx/TestErrorLogger.cxx
+  Cxx/TestLogger.cxx
+  Cxx/TestTimer.cxx
+  Cxx/TestFileLogger.cxx
+  Cxx/TestHErrorHelper.cxx
+  Cxx/TestVersion.cxx
+  Cxx/TestSimulinkVersion.cxx
+)

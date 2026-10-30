@@ -4,7 +4,7 @@
 #ifndef PLATFORMTYPES_H
 #define PLATFORMTYPES_H
 
-#include "CorePCH.h"
+#include "CommonPCH.h"
 #include "Options.h"
 
 using UInt8 = std::uint8_t;

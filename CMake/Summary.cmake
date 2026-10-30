@@ -1,9 +1,11 @@
 include(Macro)
 
 message(STATUS "")
-message(STATUS "====================================================================")
+message(
+  STATUS "====================================================================")
 message(STATUS "SLXIO Build Configuration")
-message(STATUS "====================================================================")
+message(
+  STATUS "====================================================================")
 message(STATUS "  Version                    : ${PROJECT_VERSION}")
 message(STATUS "  Simulink Version           : ${SLXIO_SIMULINK_VERSION}")
 message(STATUS "  Platform                   : ${CMAKE_SYSTEM_NAME}")
@@ -23,8 +25,10 @@ message(STATUS "  PIC                        : ${SLXIO_PIC}")
 message(STATUS "  Python                     : ${SLXIO_BUILD_PYTHON_BINDINGS}")
 message(STATUS "  Java                       : ${SLXIO_BUILD_JAVA_BINDINGS}")
 message(STATUS "  Testing                    : ${SLXIO_BUILD_TESTING}")
-message(STATUS "  Coverage                   : ${SLXIO_ENABLE_TESTING_COVERAGE}")
+message(
+  STATUS "  Coverage                   : ${SLXIO_ENABLE_TESTING_COVERAGE}")
 message(STATUS "  All Warnings               : ${SLXIO_ENABLE_WALL}")
 message(STATUS "  Warnings as Errors         : ${SLXIO_ENABLE_WERROR}")
-message(STATUS "====================================================================")
+message(
+  STATUS "====================================================================")
 message(STATUS "")

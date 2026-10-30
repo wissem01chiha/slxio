@@ -6,7 +6,7 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "ConfigurationPCH.h"
+#include "CommonPCH.h"
 #include "IConfigurationObject.h"
 #include "ILogger.h"
 #include "PlatformTypes.h"
