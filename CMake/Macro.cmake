@@ -49,7 +49,7 @@ macro(add_module module_name)
       ${module_name} PROPERTIES OUTPUT_NAME "${module_name}"
                                 PREFIX "${CMAKE_STATIC_LIBRARY_PREFIX}")
   endif()
-   target_include_directories(${module_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+  target_include_directories(${module_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
                                                    ${CMAKE_CURRENT_BINARY_DIR})
 endmacro()
 

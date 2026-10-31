@@ -253,3 +253,7 @@ advanced_dependent_option(
   SLXIO_BUILD_THIRDPARTY_CUSTOM_TARGETS
   "Building third-party module extra tools or scripts" OFF SLXIO_CUSTOM_TARGETS
   ON)
+
+# Display all compiler warnings for debugging third-party code
+advanced_option(SLXIO_ENABLE_THIRDPARTY_WALL
+                "Enable all compiler warnings from third-party" OFF)
