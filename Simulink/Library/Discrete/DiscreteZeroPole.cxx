@@ -4,21 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteZeroPole::DiscreteZeroPole() {}
+DiscreteZeroPole::DiscreteZeroPole()
+{
+}
 
-DiscreteZeroPole::~DiscreteZeroPole() {}
+DiscreteZeroPole::~DiscreteZeroPole()
+{
+}
 
-const std::string& DiscreteZeroPole::GetZeros() const { return m_Zeros; }
+const std::string& DiscreteZeroPole::GetZeros() const
+{
+    return m_Zeros;
+}
 
-void DiscreteZeroPole::SetZeros(const std::string& value) { m_Zeros = value; }
+void DiscreteZeroPole::SetZeros(const std::string& value)
+{
+    m_Zeros = value;
+}
 
-const std::string& DiscreteZeroPole::GetPoles() const { return m_Poles; }
+const std::string& DiscreteZeroPole::GetPoles() const
+{
+    return m_Poles;
+}
 
-void DiscreteZeroPole::SetPoles(const std::string& value) { m_Poles = value; }
+void DiscreteZeroPole::SetPoles(const std::string& value)
+{
+    m_Poles = value;
+}
 
-const std::string& DiscreteZeroPole::GetGain() const { return m_Gain; }
+const std::string& DiscreteZeroPole::GetGain() const
+{
+    return m_Gain;
+}
 
-void DiscreteZeroPole::SetGain(const std::string& value) { m_Gain = value; }
+void DiscreteZeroPole::SetGain(const std::string& value)
+{
+    m_Gain = value;
+}
 
 const std::string& DiscreteZeroPole::GetSampletime() const
 {
@@ -45,8 +67,7 @@ const std::string& DiscreteZeroPole::GetStatemustresolvetosignalobject() const
     return m_Statemustresolvetosignalobject;
 }
 
-void DiscreteZeroPole::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DiscreteZeroPole::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }

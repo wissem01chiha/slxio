@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BitToIntegerConverter::BitToIntegerConverter() {}
+BitToIntegerConverter::BitToIntegerConverter()
+{
+}
 
-BitToIntegerConverter::~BitToIntegerConverter() {}
+BitToIntegerConverter::~BitToIntegerConverter()
+{
+}
 
-const std::string& BitToIntegerConverter::GetNbits() const { return m_Nbits; }
+const std::string& BitToIntegerConverter::GetNbits() const
+{
+    return m_Nbits;
+}
 
 void BitToIntegerConverter::SetNbits(const std::string& value)
 {

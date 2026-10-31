@@ -4,21 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BusElementIn::BusElementIn() {}
+BusElementIn::BusElementIn()
+{
+}
 
-BusElementIn::~BusElementIn() {}
+BusElementIn::~BusElementIn()
+{
+}
 
-const std::string& BusElementIn::GetPort() const { return m_Port; }
+const std::string& BusElementIn::GetPort() const
+{
+    return m_Port;
+}
 
-void BusElementIn::SetPort(const std::string& value) { m_Port = value; }
+void BusElementIn::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
-const std::string& BusElementIn::GetPortname() const { return m_Portname; }
+const std::string& BusElementIn::GetPortname() const
+{
+    return m_Portname;
+}
 
-void BusElementIn::SetPortname(const std::string& value) { m_Portname = value; }
+void BusElementIn::SetPortname(const std::string& value)
+{
+    m_Portname = value;
+}
 
-const std::string& BusElementIn::GetElement() const { return m_Element; }
+const std::string& BusElementIn::GetElement() const
+{
+    return m_Element;
+}
 
-void BusElementIn::SetElement(const std::string& value) { m_Element = value; }
+void BusElementIn::SetElement(const std::string& value)
+{
+    m_Element = value;
+}
 
 const std::string& BusElementIn::GetIsbuselementport() const
 {
@@ -50,13 +72,25 @@ void BusElementIn::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& BusElementIn::GetOutmin() const { return m_Outmin; }
+const std::string& BusElementIn::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void BusElementIn::SetOutmin(const std::string& value) { m_Outmin = value; }
+void BusElementIn::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& BusElementIn::GetOutmax() const { return m_Outmax; }
+const std::string& BusElementIn::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void BusElementIn::SetOutmax(const std::string& value) { m_Outmax = value; }
+void BusElementIn::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& BusElementIn::GetOutdatatypestr() const
 {
@@ -68,7 +102,10 @@ void BusElementIn::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& BusElementIn::GetLockscale() const { return m_Lockscale; }
+const std::string& BusElementIn::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void BusElementIn::SetLockscale(const std::string& value)
 {
@@ -95,9 +132,15 @@ void BusElementIn::SetBusvirtuality(const std::string& value)
     m_Busvirtuality = value;
 }
 
-const std::string& BusElementIn::GetUnit() const { return m_Unit; }
+const std::string& BusElementIn::GetUnit() const
+{
+    return m_Unit;
+}
 
-void BusElementIn::SetUnit(const std::string& value) { m_Unit = value; }
+void BusElementIn::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& BusElementIn::GetPortdimensions() const
 {
@@ -109,21 +152,30 @@ void BusElementIn::SetPortdimensions(const std::string& value)
     m_Portdimensions = value;
 }
 
-const std::string& BusElementIn::GetVarsizesig() const { return m_Varsizesig; }
+const std::string& BusElementIn::GetVarsizesig() const
+{
+    return m_Varsizesig;
+}
 
 void BusElementIn::SetVarsizesig(const std::string& value)
 {
     m_Varsizesig = value;
 }
 
-const std::string& BusElementIn::GetSampletime() const { return m_Sampletime; }
+const std::string& BusElementIn::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void BusElementIn::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& BusElementIn::GetSignaltype() const { return m_Signaltype; }
+const std::string& BusElementIn::GetSignaltype() const
+{
+    return m_Signaltype;
+}
 
 void BusElementIn::SetSignaltype(const std::string& value)
 {
@@ -170,9 +222,15 @@ void BusElementIn::SetInputconnect(const std::string& value)
     m_Inputconnect = value;
 }
 
-const std::string& BusElementIn::GetDatamode() const { return m_Datamode; }
+const std::string& BusElementIn::GetDatamode() const
+{
+    return m_Datamode;
+}
 
-void BusElementIn::SetDatamode(const std::string& value) { m_Datamode = value; }
+void BusElementIn::SetDatamode(const std::string& value)
+{
+    m_Datamode = value;
+}
 
 const std::string& BusElementIn::GetMessagequeueusedefaultattributes() const
 {

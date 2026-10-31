@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ReciprocalSquareRoot::ReciprocalSquareRoot() {}
+ReciprocalSquareRoot::ReciprocalSquareRoot()
+{
+}
 
-ReciprocalSquareRoot::~ReciprocalSquareRoot() {}
+ReciprocalSquareRoot::~ReciprocalSquareRoot()
+{
+}
 
 const std::string& ReciprocalSquareRoot::GetOperator() const
 {
@@ -38,14 +42,20 @@ void ReciprocalSquareRoot::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& ReciprocalSquareRoot::GetOutmin() const { return m_Outmin; }
+const std::string& ReciprocalSquareRoot::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void ReciprocalSquareRoot::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& ReciprocalSquareRoot::GetOutmax() const { return m_Outmax; }
+const std::string& ReciprocalSquareRoot::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void ReciprocalSquareRoot::SetOutmax(const std::string& value)
 {
@@ -87,20 +97,17 @@ const std::string& ReciprocalSquareRoot::GetSaturateonintegeroverflow() const
     return m_Saturateonintegeroverflow;
 }
 
-void ReciprocalSquareRoot::SetSaturateonintegeroverflow(
-    const std::string& value)
+void ReciprocalSquareRoot::SetSaturateonintegeroverflow(const std::string& value)
 {
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string&
-ReciprocalSquareRoot::GetIntermediateresultsdatatypestr() const
+const std::string& ReciprocalSquareRoot::GetIntermediateresultsdatatypestr() const
 {
     return m_Intermediateresultsdatatypestr;
 }
 
-void ReciprocalSquareRoot::SetIntermediateresultsdatatypestr(
-    const std::string& value)
+void ReciprocalSquareRoot::SetIntermediateresultsdatatypestr(const std::string& value)
 {
     m_Intermediateresultsdatatypestr = value;
 }

@@ -49,9 +49,7 @@ Directory DirectoryService::GetWorkingDirectory(int* error)
     return Directory(buffer);
 }
 
-std::shared_ptr<Directory>
-DirectoryService::CreateDirectoryStructure(const std::string& structure,
-                                           int* error)
+std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(const std::string& structure, int* error)
 {
     if (structure.empty())
     {
@@ -82,8 +80,7 @@ DirectoryService::CreateDirectoryStructure(const std::string& structure,
         if (path[i] == PATH_SEP)
         {
             temp = path.substr(0, i);
-            int r = uv_fs_mkdir(uv_default_loop(), &req, temp.c_str(), 0755,
-                                nullptr);
+            int r = uv_fs_mkdir(uv_default_loop(), &req, temp.c_str(), 0755, nullptr);
             if (r < 0 && r != UV_EEXIST)
             {
                 *error = r;
@@ -100,16 +97,12 @@ DirectoryService::CreateDirectoryStructure(const std::string& structure,
     return std::make_shared<Directory>(path);
 }
 
-std::shared_ptr<Directory>
-DirectoryService::CreateTemporaryDirectory(int* error)
+std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(int* error)
 {
-
     return std::make_shared<Directory>();
 }
 
-std::shared_ptr<Directory>
-DirectoryService::CreatePrefixedTemporaryDirectory(const std::string& prefix,
-                                                   int* error)
+std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error)
 {
     uv_fs_t req;
 
@@ -119,8 +112,7 @@ DirectoryService::CreatePrefixedTemporaryDirectory(const std::string& prefix,
         tempDirName = prefix + "_XXXXXX";
     }
 
-    int r =
-        uv_fs_mkdtemp(uv_default_loop(), &req, tempDirName.c_str(), nullptr);
+    int r = uv_fs_mkdtemp(uv_default_loop(), &req, tempDirName.c_str(), nullptr);
 
     if (r < 0)
     {

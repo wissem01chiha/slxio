@@ -58,8 +58,7 @@ int previousCmd(wchar_t** commandLine, unsigned int* cursorLocation)
             /* Allocation by a multiple of 1024 */
             newSizeToAlloc = wcslen(wideHistory) / 1024 + 1;
             FREE(*commandLine);
-            *commandLine =
-                MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
+            *commandLine = MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
             if (*commandLine != NULL)
             {
                 wcscpy(*commandLine, wideHistory);
@@ -114,8 +113,7 @@ int nextCmd(wchar_t** commandLine, unsigned int* cursorLocation)
             /* Allocation by a multiple of 1024 */
             newSizeToAlloc = wcslen(wideHistory) / 1024 + 1;
             FREE(*commandLine);
-            *commandLine =
-                MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
+            *commandLine = MALLOC(sizeof(**commandLine) * (newSizeToAlloc * 1024));
             if (*commandLine != NULL)
             {
                 wcscpy(*commandLine, wideHistory);

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Sources::Sources() {}
+Sources::Sources()
+{
+}
 
-Sources::~Sources() {}
+Sources::~Sources()
+{
+}
 
 const std::string& Sources::GetShowportlabels() const
 {
@@ -18,37 +22,55 @@ void Sources::SetShowportlabels(const std::string& value)
     m_Showportlabels = value;
 }
 
-const std::string& Sources::GetBlockchoice() const { return m_Blockchoice; }
+const std::string& Sources::GetBlockchoice() const
+{
+    return m_Blockchoice;
+}
 
 void Sources::SetBlockchoice(const std::string& value)
 {
     m_Blockchoice = value;
 }
 
-const std::string& Sources::GetTemplateblock() const { return m_Templateblock; }
+const std::string& Sources::GetTemplateblock() const
+{
+    return m_Templateblock;
+}
 
 void Sources::SetTemplateblock(const std::string& value)
 {
     m_Templateblock = value;
 }
 
-const std::string& Sources::GetMemberblocks() const { return m_Memberblocks; }
+const std::string& Sources::GetMemberblocks() const
+{
+    return m_Memberblocks;
+}
 
 void Sources::SetMemberblocks(const std::string& value)
 {
     m_Memberblocks = value;
 }
 
-const std::string& Sources::GetPermissions() const { return m_Permissions; }
+const std::string& Sources::GetPermissions() const
+{
+    return m_Permissions;
+}
 
 void Sources::SetPermissions(const std::string& value)
 {
     m_Permissions = value;
 }
 
-const std::string& Sources::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& Sources::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
-void Sources::SetErrorfcn(const std::string& value) { m_Errorfcn = value; }
+void Sources::SetErrorfcn(const std::string& value)
+{
+    m_Errorfcn = value;
+}
 
 const std::string& Sources::GetPermithierarchicalresolution() const
 {
@@ -90,11 +112,20 @@ void Sources::SetMinalgloopoccurrences(const std::string& value)
     m_Minalgloopoccurrences = value;
 }
 
-const std::string& Sources::GetScheduleas() const { return m_Scheduleas; }
+const std::string& Sources::GetScheduleas() const
+{
+    return m_Scheduleas;
+}
 
-void Sources::SetScheduleas(const std::string& value) { m_Scheduleas = value; }
+void Sources::SetScheduleas(const std::string& value)
+{
+    m_Scheduleas = value;
+}
 
-const std::string& Sources::GetPartitionname() const { return m_Partitionname; }
+const std::string& Sources::GetPartitionname() const
+{
+    return m_Partitionname;
+}
 
 void Sources::SetPartitionname(const std::string& value)
 {
@@ -131,7 +162,10 @@ void Sources::SetExecutiondomaintype(const std::string& value)
     m_Executiondomaintype = value;
 }
 
-const std::string& Sources::GetRtwsystemcode() const { return m_Rtwsystemcode; }
+const std::string& Sources::GetRtwsystemcode() const
+{
+    return m_Rtwsystemcode;
+}
 
 void Sources::SetRtwsystemcode(const std::string& value)
 {
@@ -148,9 +182,15 @@ void Sources::SetRtwfcnnameopts(const std::string& value)
     m_Rtwfcnnameopts = value;
 }
 
-const std::string& Sources::GetRtwfcnname() const { return m_Rtwfcnname; }
+const std::string& Sources::GetRtwfcnname() const
+{
+    return m_Rtwfcnname;
+}
 
-void Sources::SetRtwfcnname(const std::string& value) { m_Rtwfcnname = value; }
+void Sources::SetRtwfcnname(const std::string& value)
+{
+    m_Rtwfcnname = value;
+}
 
 const std::string& Sources::GetRtwfilenameopts() const
 {
@@ -162,7 +202,10 @@ void Sources::SetRtwfilenameopts(const std::string& value)
     m_Rtwfilenameopts = value;
 }
 
-const std::string& Sources::GetRtwfilename() const { return m_Rtwfilename; }
+const std::string& Sources::GetRtwfilename() const
+{
+    return m_Rtwfilename;
+}
 
 void Sources::SetRtwfilename(const std::string& value)
 {
@@ -249,9 +292,15 @@ void Sources::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& Sources::GetVariant() const { return m_Variant; }
+const std::string& Sources::GetVariant() const
+{
+    return m_Variant;
+}
 
-void Sources::SetVariant(const std::string& value) { m_Variant = value; }
+void Sources::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& Sources::GetVariantchoicesspecifier() const
 {
@@ -363,14 +412,12 @@ void Sources::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-Sources::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& Sources::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void Sources::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void Sources::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -385,9 +432,15 @@ void Sources::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& Sources::GetLatency() const { return m_Latency; }
+const std::string& Sources::GetLatency() const
+{
+    return m_Latency;
+}
 
-void Sources::SetLatency(const std::string& value) { m_Latency = value; }
+void Sources::SetLatency(const std::string& value)
+{
+    m_Latency = value;
+}
 
 const std::string& Sources::GetAutoframesizecalculation() const
 {

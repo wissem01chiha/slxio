@@ -4,17 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MatrixSquare::MatrixSquare() {}
+MatrixSquare::MatrixSquare()
+{
+}
 
-MatrixSquare::~MatrixSquare() {}
+MatrixSquare::~MatrixSquare()
+{
+}
 
-const std::string& MatrixSquare::GetOutmin() const { return m_Outmin; }
+const std::string& MatrixSquare::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void MatrixSquare::SetOutmin(const std::string& value) { m_Outmin = value; }
+void MatrixSquare::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& MatrixSquare::GetOutmax() const { return m_Outmax; }
+const std::string& MatrixSquare::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void MatrixSquare::SetOutmax(const std::string& value) { m_Outmax = value; }
+void MatrixSquare::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& MatrixSquare::GetOutdatatypestr() const
 {
@@ -26,16 +42,25 @@ void MatrixSquare::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& MatrixSquare::GetLockscale() const { return m_Lockscale; }
+const std::string& MatrixSquare::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void MatrixSquare::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& MatrixSquare::GetRndmeth() const { return m_Rndmeth; }
+const std::string& MatrixSquare::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void MatrixSquare::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void MatrixSquare::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& MatrixSquare::GetSaturateonintegeroverflow() const
 {

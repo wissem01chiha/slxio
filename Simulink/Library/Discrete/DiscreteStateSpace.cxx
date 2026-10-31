@@ -4,25 +4,53 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteStateSpace::DiscreteStateSpace() {}
+DiscreteStateSpace::DiscreteStateSpace()
+{
+}
 
-DiscreteStateSpace::~DiscreteStateSpace() {}
+DiscreteStateSpace::~DiscreteStateSpace()
+{
+}
 
-const std::string& DiscreteStateSpace::GetA() const { return m_A; }
+const std::string& DiscreteStateSpace::GetA() const
+{
+    return m_A;
+}
 
-void DiscreteStateSpace::SetA(const std::string& value) { m_A = value; }
+void DiscreteStateSpace::SetA(const std::string& value)
+{
+    m_A = value;
+}
 
-const std::string& DiscreteStateSpace::GetB() const { return m_B; }
+const std::string& DiscreteStateSpace::GetB() const
+{
+    return m_B;
+}
 
-void DiscreteStateSpace::SetB(const std::string& value) { m_B = value; }
+void DiscreteStateSpace::SetB(const std::string& value)
+{
+    m_B = value;
+}
 
-const std::string& DiscreteStateSpace::GetC() const { return m_C; }
+const std::string& DiscreteStateSpace::GetC() const
+{
+    return m_C;
+}
 
-void DiscreteStateSpace::SetC(const std::string& value) { m_C = value; }
+void DiscreteStateSpace::SetC(const std::string& value)
+{
+    m_C = value;
+}
 
-const std::string& DiscreteStateSpace::GetD() const { return m_D; }
+const std::string& DiscreteStateSpace::GetD() const
+{
+    return m_D;
+}
 
-void DiscreteStateSpace::SetD(const std::string& value) { m_D = value; }
+void DiscreteStateSpace::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
 const std::string& DiscreteStateSpace::GetInitialcondition() const
 {
@@ -59,8 +87,7 @@ const std::string& DiscreteStateSpace::GetStatemustresolvetosignalobject() const
     return m_Statemustresolvetosignalobject;
 }
 
-void DiscreteStateSpace::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DiscreteStateSpace::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -90,8 +117,7 @@ const std::string& DiscreteStateSpace::GetRtwstatestoragetypequalifier() const
     return m_Rtwstatestoragetypequalifier;
 }
 
-void DiscreteStateSpace::SetRtwstatestoragetypequalifier(
-    const std::string& value)
+void DiscreteStateSpace::SetRtwstatestoragetypequalifier(const std::string& value)
 {
     m_Rtwstatestoragetypequalifier = value;
 }

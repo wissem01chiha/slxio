@@ -31,10 +31,9 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * that rely on string-based identifiers or alternative indexing
  * mechanisms should not inherit from this class.
  */
-class SLXIO_APIEXPORT ISimulinkElement
-    : public IParameterizedObject,
-      public IObservable,
-      public std::enable_shared_from_this<ISimulinkElement>
+class SLXIO_APIEXPORT ISimulinkElement : public IParameterizedObject,
+                                         public IObservable,
+                                         public std::enable_shared_from_this<ISimulinkElement>
 {
 public:
     /** Default destructor. */
@@ -66,8 +65,7 @@ public:
 
     /** Finds a child bu identifer in all the tree, return nullptr if not found
      */
-    virtual std::shared_ptr<ISimulinkElement>
-    FindRecursive(const SId& id) const;
+    virtual std::shared_ptr<ISimulinkElement> FindRecursive(const SId& id) const;
 
     /** Removes a child element by identifier. */
     virtual HError Erase(const SId& id);
@@ -91,7 +89,10 @@ public:
 
     /** If the Object id is mutable override this function to let setting
      * manully the Id */
-    virtual void SetId(const SId& id) { return; };
+    virtual void SetId(const SId& id)
+    {
+        return;
+    };
 
     /** Set a logger object for this data object, this automaticlly propagte
      *  the logger to all implemented childers unless overriden by themself for
@@ -112,12 +113,10 @@ public:
 
 protected:
     std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& GetChildren();
-    const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
-    GetChildren() const;
+    const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& GetChildren() const;
 
     std::vector<std::shared_ptr<ISimulinkElement>>& GetOrderedChildren();
-    const std::vector<std::shared_ptr<ISimulinkElement>>&
-    GetOrderedChildren() const;
+    const std::vector<std::shared_ptr<ISimulinkElement>>& GetOrderedChildren() const;
 
     ILogger* Logger() const;
     IErrorHandler* ErrorHandler() const;

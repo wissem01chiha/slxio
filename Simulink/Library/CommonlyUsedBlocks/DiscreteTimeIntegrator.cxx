@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteTimeIntegrator::DiscreteTimeIntegrator() {}
+DiscreteTimeIntegrator::DiscreteTimeIntegrator()
+{
+}
 
-DiscreteTimeIntegrator::~DiscreteTimeIntegrator() {}
+DiscreteTimeIntegrator::~DiscreteTimeIntegrator()
+{
+}
 
 const std::string& DiscreteTimeIntegrator::GetIntegratormethod() const
 {
@@ -63,8 +67,7 @@ const std::string& DiscreteTimeIntegrator::GetInitialconditionsetting() const
     return m_Initialconditionsetting;
 }
 
-void DiscreteTimeIntegrator::SetInitialconditionsetting(
-    const std::string& value)
+void DiscreteTimeIntegrator::SetInitialconditionsetting(const std::string& value)
 {
     m_Initialconditionsetting = value;
 }
@@ -134,8 +137,7 @@ const std::string& DiscreteTimeIntegrator::GetSaturateonintegeroverflow() const
     return m_Saturateonintegeroverflow;
 }
 
-void DiscreteTimeIntegrator::SetSaturateonintegeroverflow(
-    const std::string& value)
+void DiscreteTimeIntegrator::SetSaturateonintegeroverflow(const std::string& value)
 {
     m_Saturateonintegeroverflow = value;
 }
@@ -210,14 +212,12 @@ void DiscreteTimeIntegrator::SetStatename(const std::string& value)
     m_Statename = value;
 }
 
-const std::string&
-DiscreteTimeIntegrator::GetStatemustresolvetosignalobject() const
+const std::string& DiscreteTimeIntegrator::GetStatemustresolvetosignalobject() const
 {
     return m_Statemustresolvetosignalobject;
 }
 
-void DiscreteTimeIntegrator::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DiscreteTimeIntegrator::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -232,14 +232,12 @@ void DiscreteTimeIntegrator::SetStatestorageclass(const std::string& value)
     m_Statestorageclass = value;
 }
 
-const std::string&
-DiscreteTimeIntegrator::GetRtwstatestoragetypequalifier() const
+const std::string& DiscreteTimeIntegrator::GetRtwstatestoragetypequalifier() const
 {
     return m_Rtwstatestoragetypequalifier;
 }
 
-void DiscreteTimeIntegrator::SetRtwstatestoragetypequalifier(
-    const std::string& value)
+void DiscreteTimeIntegrator::SetRtwstatestoragetypequalifier(const std::string& value)
 {
     m_Rtwstatestoragetypequalifier = value;
 }

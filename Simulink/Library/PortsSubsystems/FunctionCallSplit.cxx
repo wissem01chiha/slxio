@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FunctionCallSplit::FunctionCallSplit() {}
+FunctionCallSplit::FunctionCallSplit()
+{
+}
 
-FunctionCallSplit::~FunctionCallSplit() {}
+FunctionCallSplit::~FunctionCallSplit()
+{
+}
 
 const std::string& FunctionCallSplit::GetIconshape() const
 {

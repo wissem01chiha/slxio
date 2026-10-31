@@ -5,7 +5,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 float32 getDirection(Orientation Orientation)
 {
-
     switch (Orientation)
     {
     case Orientation::RIGHT:
@@ -38,7 +37,6 @@ bool isLeftOrDown(Orientation Orientation)
 
 Orientation getOpposite(Orientation Orientation)
 {
-
     switch (Orientation)
     {
     case Orientation::RIGHT:

@@ -32,9 +32,8 @@ void clrscrPart_nw(int nblines)
 
     TermSetPosition(0, coord.Y - 1);
 
-    FillConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE), ' ',
-                               info.dwSize.X * (info.dwSize.Y - coord.Y - 1),
-                               coord, &written);
+    FillConsoleOutputCharacter(
+        GetStdHandle(STD_OUTPUT_HANDLE), ' ', info.dwSize.X * (info.dwSize.Y - coord.Y - 1), coord, &written);
 
     TermSetPosition(0, coord.Y - 1);
 }

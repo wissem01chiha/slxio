@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ProbeDimension::ProbeDimension() {}
+ProbeDimension::ProbeDimension()
+{
+}
 
-ProbeDimension::~ProbeDimension() {}
+ProbeDimension::~ProbeDimension()
+{
+}
 
 const std::string& ProbeDimension::GetProbewidth() const
 {

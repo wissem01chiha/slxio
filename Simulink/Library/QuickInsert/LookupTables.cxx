@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-LookupTables::LookupTables() {}
+LookupTables::LookupTables()
+{
+}
 
-LookupTables::~LookupTables() {}
+LookupTables::~LookupTables()
+{
+}
 
 const std::string& LookupTables::GetShowportlabels() const
 {
@@ -58,9 +62,15 @@ void LookupTables::SetPermissions(const std::string& value)
     m_Permissions = value;
 }
 
-const std::string& LookupTables::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& LookupTables::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
-void LookupTables::SetErrorfcn(const std::string& value) { m_Errorfcn = value; }
+void LookupTables::SetErrorfcn(const std::string& value)
+{
+    m_Errorfcn = value;
+}
 
 const std::string& LookupTables::GetPermithierarchicalresolution() const
 {
@@ -102,7 +112,10 @@ void LookupTables::SetMinalgloopoccurrences(const std::string& value)
     m_Minalgloopoccurrences = value;
 }
 
-const std::string& LookupTables::GetScheduleas() const { return m_Scheduleas; }
+const std::string& LookupTables::GetScheduleas() const
+{
+    return m_Scheduleas;
+}
 
 void LookupTables::SetScheduleas(const std::string& value)
 {
@@ -169,7 +182,10 @@ void LookupTables::SetRtwfcnnameopts(const std::string& value)
     m_Rtwfcnnameopts = value;
 }
 
-const std::string& LookupTables::GetRtwfcnname() const { return m_Rtwfcnname; }
+const std::string& LookupTables::GetRtwfcnname() const
+{
+    return m_Rtwfcnname;
+}
 
 void LookupTables::SetRtwfcnname(const std::string& value)
 {
@@ -276,9 +292,15 @@ void LookupTables::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& LookupTables::GetVariant() const { return m_Variant; }
+const std::string& LookupTables::GetVariant() const
+{
+    return m_Variant;
+}
 
-void LookupTables::SetVariant(const std::string& value) { m_Variant = value; }
+void LookupTables::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& LookupTables::GetVariantchoicesspecifier() const
 {
@@ -390,14 +412,12 @@ void LookupTables::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-LookupTables::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& LookupTables::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void LookupTables::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void LookupTables::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -412,9 +432,15 @@ void LookupTables::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& LookupTables::GetLatency() const { return m_Latency; }
+const std::string& LookupTables::GetLatency() const
+{
+    return m_Latency;
+}
 
-void LookupTables::SetLatency(const std::string& value) { m_Latency = value; }
+void LookupTables::SetLatency(const std::string& value)
+{
+    m_Latency = value;
+}
 
 const std::string& LookupTables::GetAutoframesizecalculation() const
 {

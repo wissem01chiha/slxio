@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SawtoothGenerator::SawtoothGenerator() {}
+SawtoothGenerator::SawtoothGenerator()
+{
+}
 
-SawtoothGenerator::~SawtoothGenerator() {}
+SawtoothGenerator::~SawtoothGenerator()
+{
+}
 
-const std::string& SawtoothGenerator::GetWaveform() const { return m_Waveform; }
+const std::string& SawtoothGenerator::GetWaveform() const
+{
+    return m_Waveform;
+}
 
 void SawtoothGenerator::SetWaveform(const std::string& value)
 {
@@ -45,9 +52,15 @@ void SawtoothGenerator::SetFrequency(const std::string& value)
     m_Frequency = value;
 }
 
-const std::string& SawtoothGenerator::GetUnits() const { return m_Units; }
+const std::string& SawtoothGenerator::GetUnits() const
+{
+    return m_Units;
+}
 
-void SawtoothGenerator::SetUnits(const std::string& value) { m_Units = value; }
+void SawtoothGenerator::SetUnits(const std::string& value)
+{
+    m_Units = value;
+}
 
 const std::string& SawtoothGenerator::GetVectorparams1d() const
 {

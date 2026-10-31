@@ -30,8 +30,7 @@ public:
     SimulinkLine* New() const override;
 
     /** Construct a SimulinkLine given the Inport and OutPort blocks */
-    SimulinkLine(std::shared_ptr<SimulinkPort> pOut,
-                 std::shared_ptr<SimulinkPort> pIn);
+    SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
 
     SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
 
@@ -85,17 +84,13 @@ public:
 
     /** Return a pointer to a given parameter by name, if not
      * found a or the blcok has not paramters an empty parameter returned. */
-    std::shared_ptr<SimulinkParameterBase>
-    GetParameter(std::string name) override;
+    std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
     /** Sets the element specifc parameter to given one  */
-    HError
-    SetParameter(std::string name,
-                 std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
     /* Adds a Parameter to the array */
-    HError
-    AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
     /**
      * Check if the line is connected to both source and

@@ -15,8 +15,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT DelayOneStep : public IBlockParameters,
-                                     public IBlockProperties
+class SLXIO_APIEXPORT DelayOneStep : public IBlockParameters, public IBlockProperties
 {
 public:
     /** Default Constructor */

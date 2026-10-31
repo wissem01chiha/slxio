@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Substring::Substring() {}
+Substring::Substring()
+{
+}
 
-Substring::~Substring() {}
+Substring::~Substring()
+{
+}
 
 const std::string& Substring::GetInheritmaximumlength() const
 {

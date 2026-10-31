@@ -111,5 +111,8 @@ int C2F(scilines)(int* nblines, int* nbcolumns)
     return scilines(*nblines, *nbcolumns);
 }
 /*--------------------------------------------------------------------------*/
-int C2F(scilinesdefault)(void) { return scilinesdefault(); }
+int C2F(scilinesdefault)(void)
+{
+    return scilinesdefault();
+}
 /*--------------------------------------------------------------------------*/

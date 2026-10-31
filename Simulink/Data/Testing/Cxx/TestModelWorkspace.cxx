@@ -9,12 +9,18 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class MockParameterObject : public IParameterObjectBase
 {
 public:
-    explicit MockParameterObject(const std::string& name) { SetName(name); }
+    explicit MockParameterObject(const std::string& name)
+    {
+        SetName(name);
+    }
     IParameterObjectBase* New() override
     {
         return new MockParameterObject(GetName());
     }
-    DataType GetDataType() const override { return DataType::SLXIO_TYPE_ARRAY; }
+    DataType GetDataType() const override
+    {
+        return DataType::SLXIO_TYPE_ARRAY;
+    }
 };
 
 TEST_CASE("Assign and Get Variable")

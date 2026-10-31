@@ -5,15 +5,30 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-UInt32 GetProjectIdentifier(HError result) { return (result >> 30U) & 0x3U; }
+UInt32 GetProjectIdentifier(HError result)
+{
+    return (result >> 30U) & 0x3U;
+}
 
-UInt32 GetGroupIdentifier(HError result) { return (result >> 25U) & 0x1FU; }
+UInt32 GetGroupIdentifier(HError result)
+{
+    return (result >> 25U) & 0x1FU;
+}
 
-UInt32 GetComponentIdentifier(HError result) { return (result >> 17U) & 0xFFU; }
+UInt32 GetComponentIdentifier(HError result)
+{
+    return (result >> 17U) & 0xFFU;
+}
 
-UInt32 GetLevelIdentifier(HError result) { return (result >> 15U) & 0x3U; }
+UInt32 GetLevelIdentifier(HError result)
+{
+    return (result >> 15U) & 0x3U;
+}
 
-UInt32 GetErrorIdentifier(HError result) { return (result >> 5U) & 0x3FFU; }
+UInt32 GetErrorIdentifier(HError result)
+{
+    return (result >> 5U) & 0x3FFU;
+}
 
 bool IsSuccess(HError result)
 {
@@ -30,7 +45,10 @@ bool IsFatal(HError result)
     return GetLevelIdentifier(result) == SLXIO_FATAL;
 }
 
-bool IsInfo(HError result) { return GetLevelIdentifier(result) == SLXIO_INFO; }
+bool IsInfo(HError result)
+{
+    return GetLevelIdentifier(result) == SLXIO_INFO;
+}
 
 bool IsSameLevel(HError result1, HError result2)
 {

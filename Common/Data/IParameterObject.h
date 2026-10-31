@@ -23,8 +23,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * by typename T which can be a range based type eg std::vector,std::array..
  * or numeric, or other custom user type
  */
-template <typename T>
-class SLXIO_APIEXPORT IParameterObject : public IParameterObjectBase
+template <typename T> class SLXIO_APIEXPORT IParameterObject : public IParameterObjectBase
 {
 public:
     virtual T& GetValue() = 0;

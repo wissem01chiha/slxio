@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ComplexToRealImag::ComplexToRealImag() {}
+ComplexToRealImag::ComplexToRealImag()
+{
+}
 
-ComplexToRealImag::~ComplexToRealImag() {}
+ComplexToRealImag::~ComplexToRealImag()
+{
+}
 
-const std::string& ComplexToRealImag::GetOutput() const { return m_Output; }
+const std::string& ComplexToRealImag::GetOutput() const
+{
+    return m_Output;
+}
 
 void ComplexToRealImag::SetOutput(const std::string& value)
 {

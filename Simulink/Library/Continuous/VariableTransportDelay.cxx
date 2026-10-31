@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariableTransportDelay::VariableTransportDelay() {}
+VariableTransportDelay::VariableTransportDelay()
+{
+}
 
-VariableTransportDelay::~VariableTransportDelay() {}
+VariableTransportDelay::~VariableTransportDelay()
+{
+}
 
 const std::string& VariableTransportDelay::GetVariabledelaytype() const
 {
@@ -103,8 +107,7 @@ const std::string& VariableTransportDelay::GetContinuousstateattributes() const
     return m_Continuousstateattributes;
 }
 
-void VariableTransportDelay::SetContinuousstateattributes(
-    const std::string& value)
+void VariableTransportDelay::SetContinuousstateattributes(const std::string& value)
 {
     m_Continuousstateattributes = value;
 }

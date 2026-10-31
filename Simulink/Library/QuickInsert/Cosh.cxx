@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Cosh::Cosh() {}
+Cosh::Cosh()
+{
+}
 
-Cosh::~Cosh() {}
+Cosh::~Cosh()
+{
+}
 
-const std::string& Cosh::GetOperator() const { return m_Operator; }
+const std::string& Cosh::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Cosh::SetOperator(const std::string& value) { m_Operator = value; }
+void Cosh::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Cosh::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Cosh::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Cosh::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Cosh::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Cosh::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Cosh::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Cosh::GetAngleunit() const { return m_Angleunit; }
+const std::string& Cosh::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Cosh::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Cosh::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Cosh::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Cosh::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Cosh::GetSampletime() const { return m_Sampletime; }
+const std::string& Cosh::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Cosh::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Cosh::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

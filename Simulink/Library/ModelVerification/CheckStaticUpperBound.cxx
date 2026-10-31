@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckStaticUpperBound::CheckStaticUpperBound() {}
+CheckStaticUpperBound::CheckStaticUpperBound()
+{
+}
 
-CheckStaticUpperBound::~CheckStaticUpperBound() {}
+CheckStaticUpperBound::~CheckStaticUpperBound()
+{
+}
 
-const std::string& CheckStaticUpperBound::GetMax() const { return m_Max; }
+const std::string& CheckStaticUpperBound::GetMax() const
+{
+    return m_Max;
+}
 
-void CheckStaticUpperBound::SetMax(const std::string& value) { m_Max = value; }
+void CheckStaticUpperBound::SetMax(const std::string& value)
+{
+    m_Max = value;
+}
 
 const std::string& CheckStaticUpperBound::GetMaxIncluded() const
 {
@@ -52,14 +62,20 @@ void CheckStaticUpperBound::SetStopwhenassertionfail(const std::string& value)
     m_Stopwhenassertionfail = value;
 }
 
-const std::string& CheckStaticUpperBound::GetExport() const { return m_Export; }
+const std::string& CheckStaticUpperBound::GetExport() const
+{
+    return m_Export;
+}
 
 void CheckStaticUpperBound::SetExport(const std::string& value)
 {
     m_Export = value;
 }
 
-const std::string& CheckStaticUpperBound::GetIcon() const { return m_Icon; }
+const std::string& CheckStaticUpperBound::GetIcon() const
+{
+    return m_Icon;
+}
 
 void CheckStaticUpperBound::SetIcon(const std::string& value)
 {

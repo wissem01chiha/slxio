@@ -31,7 +31,10 @@ void Timer::Reset()
     NotifyState("Timer reset");
 }
 
-bool Timer::IsRunning() const { return m_running; }
+bool Timer::IsRunning() const
+{
+    return m_running;
+}
 
 Float32 Timer::Precision() const
 {
@@ -48,9 +51,13 @@ Float32 Timer::Time()
     return std::chrono::duration<Float32>(elapsed).count();
 }
 
-void Timer::NotifyState(const std::string& state) {}
+void Timer::NotifyState(const std::string& state)
+{
+}
 
-void Timer::NotifyTimeout() {}
+void Timer::NotifyTimeout()
+{
+}
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

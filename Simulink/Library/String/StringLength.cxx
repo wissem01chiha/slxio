@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringLength::StringLength() {}
+StringLength::StringLength()
+{
+}
 
-StringLength::~StringLength() {}
+StringLength::~StringLength()
+{
+}
 
 const std::string& StringLength::GetOutdatatypestr() const
 {

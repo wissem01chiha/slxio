@@ -22,8 +22,7 @@ BOOL ConsoleIsWaitingForInput(void)
 {
     if (getScilabJavaVM())
     {
-        return booltoBOOL(
-            CallScilabBridge::isWaitingForInput(getScilabJavaVM()));
+        return booltoBOOL(CallScilabBridge::isWaitingForInput(getScilabJavaVM()));
     }
     return FALSE;
 }

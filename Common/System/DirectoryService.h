@@ -42,15 +42,13 @@ public:
      * This function ensures that the directory structure is created up
      * to the specified root folder (`dir`)
      */
-    static std::shared_ptr<Directory>
-    CreateDirectoryStructure(const std::string& structure, int* error);
+    static std::shared_ptr<Directory> CreateDirectoryStructure(const std::string& structure, int* error);
 
     /** Create a system temporary directory and retrun a pointer to it*/
     static std::shared_ptr<Directory> CreateTemporaryDirectory(int* error);
 
     /** same as CreateTemporaryDirectory using a prefix for directory name */
-    static std::shared_ptr<Directory>
-    CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error);
+    static std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error);
 };
 
 SLXIO_ABI_NAMESPACE_END

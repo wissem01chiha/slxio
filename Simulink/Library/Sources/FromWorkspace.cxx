@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FromWorkspace::FromWorkspace() {}
+FromWorkspace::FromWorkspace()
+{
+}
 
-FromWorkspace::~FromWorkspace() {}
+FromWorkspace::~FromWorkspace()
+{
+}
 
 const std::string& FromWorkspace::GetVariablename() const
 {
@@ -28,7 +32,10 @@ void FromWorkspace::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& FromWorkspace::GetSampletime() const { return m_Sampletime; }
+const std::string& FromWorkspace::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void FromWorkspace::SetSampletime(const std::string& value)
 {
@@ -45,7 +52,10 @@ void FromWorkspace::SetInterpolate(const std::string& value)
     m_Interpolate = value;
 }
 
-const std::string& FromWorkspace::GetZerocross() const { return m_Zerocross; }
+const std::string& FromWorkspace::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void FromWorkspace::SetZerocross(const std::string& value)
 {

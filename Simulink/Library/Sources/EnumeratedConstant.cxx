@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-EnumeratedConstant::EnumeratedConstant() {}
+EnumeratedConstant::EnumeratedConstant()
+{
+}
 
-EnumeratedConstant::~EnumeratedConstant() {}
+EnumeratedConstant::~EnumeratedConstant()
+{
+}
 
 const std::string& EnumeratedConstant::GetOutdatatypestr() const
 {
@@ -18,9 +22,15 @@ void EnumeratedConstant::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& EnumeratedConstant::GetValue() const { return m_Value; }
+const std::string& EnumeratedConstant::GetValue() const
+{
+    return m_Value;
+}
 
-void EnumeratedConstant::SetValue(const std::string& value) { m_Value = value; }
+void EnumeratedConstant::SetValue(const std::string& value)
+{
+    m_Value = value;
+}
 
 const std::string& EnumeratedConstant::GetSampletime() const
 {

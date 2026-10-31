@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-PulseGenerator::PulseGenerator() {}
+PulseGenerator::PulseGenerator()
+{
+}
 
-PulseGenerator::~PulseGenerator() {}
+PulseGenerator::~PulseGenerator()
+{
+}
 
-const std::string& PulseGenerator::GetPulsetype() const { return m_Pulsetype; }
+const std::string& PulseGenerator::GetPulsetype() const
+{
+    return m_Pulsetype;
+}
 
 void PulseGenerator::SetPulsetype(const std::string& value)
 {
@@ -25,16 +32,25 @@ void PulseGenerator::SetTimesource(const std::string& value)
     m_Timesource = value;
 }
 
-const std::string& PulseGenerator::GetAmplitude() const { return m_Amplitude; }
+const std::string& PulseGenerator::GetAmplitude() const
+{
+    return m_Amplitude;
+}
 
 void PulseGenerator::SetAmplitude(const std::string& value)
 {
     m_Amplitude = value;
 }
 
-const std::string& PulseGenerator::GetPeriod() const { return m_Period; }
+const std::string& PulseGenerator::GetPeriod() const
+{
+    return m_Period;
+}
 
-void PulseGenerator::SetPeriod(const std::string& value) { m_Period = value; }
+void PulseGenerator::SetPeriod(const std::string& value)
+{
+    m_Period = value;
+}
 
 const std::string& PulseGenerator::GetPulsewidth() const
 {

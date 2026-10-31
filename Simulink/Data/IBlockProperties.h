@@ -32,8 +32,7 @@ public:
     virtual std::shared_ptr<IBlockBehavior> GetBehavior() const = 0;
     virtual std::shared_ptr<IBlockLibraries> GetLibraries() const = 0;
     virtual std::shared_ptr<IBlockPorts> GetPorts() const = 0;
-    virtual std::shared_ptr<IBlockPropertiesInformation>
-    GetMetadata() const = 0;
+    virtual std::shared_ptr<IBlockPropertiesInformation> GetMetadata() const = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

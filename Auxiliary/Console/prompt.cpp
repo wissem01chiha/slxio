@@ -67,7 +67,8 @@ void setPreviousLevel(int pause)
             {
                 sciprint(_("Type '%s' or '%s' to return to standard level "
                            "prompt.\n\n"),
-                         "resume", "abort");
+                         "resume",
+                         "abort");
                 dispWarningLevelPrompt = FALSE;
             }
         }
@@ -88,14 +89,23 @@ void setPreviousLevel(int pause)
     }
 }
 /*------------------------------------------------------------------------*/
-const char* GetCurrentPrompt() { return Sci_Prompt.data(); }
+const char* GetCurrentPrompt()
+{
+    return Sci_Prompt.data();
+}
 /*------------------------------------------------------------------------*/
 void SetTemporaryPrompt(const char* tempPrompt)
 {
     temporaryPrompt = tempPrompt;
 }
 /*------------------------------------------------------------------------*/
-const char* GetTemporaryPrompt(void) { return temporaryPrompt.data(); }
+const char* GetTemporaryPrompt(void)
+{
+    return temporaryPrompt.data();
+}
 /*------------------------------------------------------------------------*/
-void ClearTemporaryPrompt(void) { temporaryPrompt = ""; }
+void ClearTemporaryPrompt(void)
+{
+    temporaryPrompt = "";
+}
 /*------------------------------------------------------------------------*/

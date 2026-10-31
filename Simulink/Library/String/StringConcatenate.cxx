@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringConcatenate::StringConcatenate() {}
+StringConcatenate::StringConcatenate()
+{
+}
 
-StringConcatenate::~StringConcatenate() {}
+StringConcatenate::~StringConcatenate()
+{
+}
 
-const std::string& StringConcatenate::GetInputs() const { return m_Inputs; }
+const std::string& StringConcatenate::GetInputs() const
+{
+    return m_Inputs;
+}
 
 void StringConcatenate::SetInputs(const std::string& value)
 {

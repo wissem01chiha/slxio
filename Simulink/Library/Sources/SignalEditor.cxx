@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SignalEditor::SignalEditor() {}
+SignalEditor::SignalEditor()
+{
+}
 
-SignalEditor::~SignalEditor() {}
+SignalEditor::~SignalEditor()
+{
+}
 
-const std::string& SignalEditor::GetFilename() const { return m_Filename; }
+const std::string& SignalEditor::GetFilename() const
+{
+    return m_Filename;
+}
 
-void SignalEditor::SetFilename(const std::string& value) { m_Filename = value; }
+void SignalEditor::SetFilename(const std::string& value)
+{
+    m_Filename = value;
+}
 
 const std::string& SignalEditor::GetActivescenario() const
 {
@@ -32,9 +42,15 @@ void SignalEditor::SetActivesignal(const std::string& value)
     m_Activesignal = value;
 }
 
-const std::string& SignalEditor::GetIsbus() const { return m_Isbus; }
+const std::string& SignalEditor::GetIsbus() const
+{
+    return m_Isbus;
+}
 
-void SignalEditor::SetIsbus(const std::string& value) { m_Isbus = value; }
+void SignalEditor::SetIsbus(const std::string& value)
+{
+    m_Isbus = value;
+}
 
 const std::string& SignalEditor::GetOutputbusobjectstr() const
 {
@@ -46,7 +62,10 @@ void SignalEditor::SetOutputbusobjectstr(const std::string& value)
     m_Outputbusobjectstr = value;
 }
 
-const std::string& SignalEditor::GetSampletime() const { return m_Sampletime; }
+const std::string& SignalEditor::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void SignalEditor::SetSampletime(const std::string& value)
 {
@@ -63,7 +82,10 @@ void SignalEditor::SetInterpolate(const std::string& value)
     m_Interpolate = value;
 }
 
-const std::string& SignalEditor::GetZerocross() const { return m_Zerocross; }
+const std::string& SignalEditor::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void SignalEditor::SetZerocross(const std::string& value)
 {
@@ -80,9 +102,15 @@ void SignalEditor::SetOutputafterfinalvalue(const std::string& value)
     m_Outputafterfinalvalue = value;
 }
 
-const std::string& SignalEditor::GetUnit() const { return m_Unit; }
+const std::string& SignalEditor::GetUnit() const
+{
+    return m_Unit;
+}
 
-void SignalEditor::SetUnit(const std::string& value) { m_Unit = value; }
+void SignalEditor::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& SignalEditor::GetNumberofscenarios() const
 {

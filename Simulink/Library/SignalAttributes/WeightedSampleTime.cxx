@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-WeightedSampleTime::WeightedSampleTime() {}
+WeightedSampleTime::WeightedSampleTime()
+{
+}
 
-WeightedSampleTime::~WeightedSampleTime() {}
+WeightedSampleTime::~WeightedSampleTime()
+{
+}
 
 const std::string& WeightedSampleTime::GetTsampmathop() const
 {
@@ -48,7 +52,10 @@ void WeightedSampleTime::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& WeightedSampleTime::GetRndmeth() const { return m_Rndmeth; }
+const std::string& WeightedSampleTime::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void WeightedSampleTime::SetRndmeth(const std::string& value)
 {

@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-PortLayoutData::PortLayoutData() : l(Logger::GetInstance()) {}
-
-PortLayoutData::PortLayoutData(Point point, Color color)
-    : position(point), color(color), l(Logger::GetInstance())
+PortLayoutData::PortLayoutData() : l(Logger::GetInstance())
 {
 }
 
-Point PortLayoutData::GetPosition() { return position; }
+PortLayoutData::PortLayoutData(Point point, Color color) : position(point), color(color), l(Logger::GetInstance())
+{
+}
 
-Float32 PortLayoutData::GetDirection() { return 0.0; }
+Point PortLayoutData::GetPosition()
+{
+    return position;
+}
 
-Color PortLayoutData::GetColor() { return color; }
+Float32 PortLayoutData::GetDirection()
+{
+    return 0.0;
+}
+
+Color PortLayoutData::GetColor()
+{
+    return color;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

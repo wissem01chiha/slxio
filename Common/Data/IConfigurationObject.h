@@ -20,8 +20,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * IParameterizedObject, as configurations have attributes of type drived from
  * IParameterObjectBase
  */
-class SLXIO_APIEXPORT IConfigurationObject : public IParameterizedObject,
-                                             public IObservable
+class SLXIO_APIEXPORT IConfigurationObject : public IParameterizedObject, public IObservable
 {
 public:
     ~IConfigurationObject() = default;

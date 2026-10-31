@@ -15,11 +15,20 @@ HError IDataObject::SetLogger(ILogger* logger)
     return E_OK;
 }
 
-ILogger* IDataObject::GetLogger() { return m_logger; }
+ILogger* IDataObject::GetLogger()
+{
+    return m_logger;
+}
 
-void IDataObject::UpdateTime() { m_updateTime = TimeStamp::Now(); }
+void IDataObject::UpdateTime()
+{
+    m_updateTime = TimeStamp::Now();
+}
 
-TimeStamp IDataObject::GetUpdateTime() const { return m_updateTime; }
+TimeStamp IDataObject::GetUpdateTime() const
+{
+    return m_updateTime;
+}
 
 SLXIO_ABI_NAMESPACE_END
 

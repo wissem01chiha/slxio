@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-InterpretedMatlabFunction::InterpretedMatlabFunction() {}
+InterpretedMatlabFunction::InterpretedMatlabFunction()
+{
+}
 
-InterpretedMatlabFunction::~InterpretedMatlabFunction() {}
+InterpretedMatlabFunction::~InterpretedMatlabFunction()
+{
+}
 
 const std::string& InterpretedMatlabFunction::GetMatlabfcn() const
 {

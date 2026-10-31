@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CombinatorialLogic::CombinatorialLogic() {}
+CombinatorialLogic::CombinatorialLogic()
+{
+}
 
-CombinatorialLogic::~CombinatorialLogic() {}
+CombinatorialLogic::~CombinatorialLogic()
+{
+}
 
 const std::string& CombinatorialLogic::GetTruthtable() const
 {

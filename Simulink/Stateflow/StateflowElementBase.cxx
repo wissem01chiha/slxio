@@ -11,8 +11,7 @@ StateflowElementBase::StateflowElementBase(const StateflowElementBase& orig)
     this->parent = orig.parent;
 }
 
-void StateflowElementBase::setParent(
-    std::shared_ptr<SimulinkElementBase> parent)
+void StateflowElementBase::setParent(std::shared_ptr<SimulinkElementBase> parent)
 {
     this->parent = parent;
 }

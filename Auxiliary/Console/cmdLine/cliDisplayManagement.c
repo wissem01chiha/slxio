@@ -73,6 +73,12 @@ void setBackgroundColor(int color)
     setCharDisplay(charColor);
 }
 
-BOOL getCLIColor() { return cliColor; }
+BOOL getCLIColor()
+{
+    return cliColor;
+}
 
-void setCLIColor(BOOL CLIColor) { cliColor = CLIColor; }
+void setCLIColor(BOOL CLIColor)
+{
+    cliColor = CLIColor;
+}

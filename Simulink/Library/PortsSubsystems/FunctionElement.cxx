@@ -4,22 +4,38 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FunctionElement::FunctionElement() {}
+FunctionElement::FunctionElement()
+{
+}
 
-FunctionElement::~FunctionElement() {}
+FunctionElement::~FunctionElement()
+{
+}
 
-const std::string& FunctionElement::GetPort() const { return m_Port; }
+const std::string& FunctionElement::GetPort() const
+{
+    return m_Port;
+}
 
-void FunctionElement::SetPort(const std::string& value) { m_Port = value; }
+void FunctionElement::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
-const std::string& FunctionElement::GetPortname() const { return m_Portname; }
+const std::string& FunctionElement::GetPortname() const
+{
+    return m_Portname;
+}
 
 void FunctionElement::SetPortname(const std::string& value)
 {
     m_Portname = value;
 }
 
-const std::string& FunctionElement::GetElement() const { return m_Element; }
+const std::string& FunctionElement::GetElement() const
+{
+    return m_Element;
+}
 
 void FunctionElement::SetElement(const std::string& value)
 {
@@ -86,13 +102,25 @@ void FunctionElement::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& FunctionElement::GetOutmin() const { return m_Outmin; }
+const std::string& FunctionElement::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void FunctionElement::SetOutmin(const std::string& value) { m_Outmin = value; }
+void FunctionElement::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& FunctionElement::GetOutmax() const { return m_Outmax; }
+const std::string& FunctionElement::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void FunctionElement::SetOutmax(const std::string& value) { m_Outmax = value; }
+void FunctionElement::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& FunctionElement::GetOutdatatypestr() const
 {
@@ -104,7 +132,10 @@ void FunctionElement::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& FunctionElement::GetLockscale() const { return m_Lockscale; }
+const std::string& FunctionElement::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void FunctionElement::SetLockscale(const std::string& value)
 {
@@ -131,16 +162,25 @@ void FunctionElement::SetBusvirtuality(const std::string& value)
     m_Busvirtuality = value;
 }
 
-const std::string& FunctionElement::GetDatamode() const { return m_Datamode; }
+const std::string& FunctionElement::GetDatamode() const
+{
+    return m_Datamode;
+}
 
 void FunctionElement::SetDatamode(const std::string& value)
 {
     m_Datamode = value;
 }
 
-const std::string& FunctionElement::GetUnit() const { return m_Unit; }
+const std::string& FunctionElement::GetUnit() const
+{
+    return m_Unit;
+}
 
-void FunctionElement::SetUnit(const std::string& value) { m_Unit = value; }
+void FunctionElement::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& FunctionElement::GetPortdimensions() const
 {
@@ -242,14 +282,12 @@ void FunctionElement::SetOutputwhenunconnectedvalue(const std::string& value)
     m_Outputwhenunconnectedvalue = value;
 }
 
-const std::string&
-FunctionElement::GetVectorparamsas1dforoutwhenunconnected() const
+const std::string& FunctionElement::GetVectorparamsas1dforoutwhenunconnected() const
 {
     return m_Vectorparamsas1dforoutwhenunconnected;
 }
 
-void FunctionElement::SetVectorparamsas1dforoutwhenunconnected(
-    const std::string& value)
+void FunctionElement::SetVectorparamsas1dforoutwhenunconnected(const std::string& value)
 {
     m_Vectorparamsas1dforoutwhenunconnected = value;
 }

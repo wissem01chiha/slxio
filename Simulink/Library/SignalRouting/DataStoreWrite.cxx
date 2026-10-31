@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataStoreWrite::DataStoreWrite() {}
+DataStoreWrite::DataStoreWrite()
+{
+}
 
-DataStoreWrite::~DataStoreWrite() {}
+DataStoreWrite::~DataStoreWrite()
+{
+}
 
 const std::string& DataStoreWrite::GetDatastorename() const
 {
@@ -58,7 +62,10 @@ void DataStoreWrite::SetNumberofdimensions(const std::string& value)
     m_Numberofdimensions = value;
 }
 
-const std::string& DataStoreWrite::GetIndexmode() const { return m_Indexmode; }
+const std::string& DataStoreWrite::GetIndexmode() const
+{
+    return m_Indexmode;
+}
 
 void DataStoreWrite::SetIndexmode(const std::string& value)
 {
@@ -105,9 +112,15 @@ void DataStoreWrite::SetIndexoptions(const std::string& value)
     m_Indexoptions = value;
 }
 
-const std::string& DataStoreWrite::GetIndices() const { return m_Indices; }
+const std::string& DataStoreWrite::GetIndices() const
+{
+    return m_Indices;
+}
 
-void DataStoreWrite::SetIndices(const std::string& value) { m_Indices = value; }
+void DataStoreWrite::SetIndices(const std::string& value)
+{
+    m_Indices = value;
+}
 
 const std::string& DataStoreWrite::GetOutputsizes() const
 {

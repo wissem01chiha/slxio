@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ProductOfElements::ProductOfElements() {}
+ProductOfElements::ProductOfElements()
+{
+}
 
-ProductOfElements::~ProductOfElements() {}
+ProductOfElements::~ProductOfElements()
+{
+}
 
-const std::string& ProductOfElements::GetInputs() const { return m_Inputs; }
+const std::string& ProductOfElements::GetInputs() const
+{
+    return m_Inputs;
+}
 
 void ProductOfElements::SetInputs(const std::string& value)
 {
@@ -55,14 +62,20 @@ void ProductOfElements::SetInputsamedt(const std::string& value)
     m_Inputsamedt = value;
 }
 
-const std::string& ProductOfElements::GetOutmin() const { return m_Outmin; }
+const std::string& ProductOfElements::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void ProductOfElements::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& ProductOfElements::GetOutmax() const { return m_Outmax; }
+const std::string& ProductOfElements::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void ProductOfElements::SetOutmax(const std::string& value)
 {
@@ -89,7 +102,10 @@ void ProductOfElements::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& ProductOfElements::GetRndmeth() const { return m_Rndmeth; }
+const std::string& ProductOfElements::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void ProductOfElements::SetRndmeth(const std::string& value)
 {

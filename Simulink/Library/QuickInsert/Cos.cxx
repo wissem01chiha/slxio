@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Cos::Cos() {}
+Cos::Cos()
+{
+}
 
-Cos::~Cos() {}
+Cos::~Cos()
+{
+}
 
-const std::string& Cos::GetOperator() const { return m_Operator; }
+const std::string& Cos::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Cos::SetOperator(const std::string& value) { m_Operator = value; }
+void Cos::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Cos::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Cos::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Cos::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Cos::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Cos::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Cos::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Cos::GetAngleunit() const { return m_Angleunit; }
+const std::string& Cos::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Cos::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Cos::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Cos::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Cos::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Cos::GetSampletime() const { return m_Sampletime; }
+const std::string& Cos::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Cos::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Cos::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

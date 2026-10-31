@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SineLookup::SineLookup() {}
+SineLookup::SineLookup()
+{
+}
 
-SineLookup::~SineLookup() {}
+SineLookup::~SineLookup()
+{
+}
 
-const std::string& SineLookup::GetFormula() const { return m_Formula; }
+const std::string& SineLookup::GetFormula() const
+{
+    return m_Formula;
+}
 
-void SineLookup::SetFormula(const std::string& value) { m_Formula = value; }
+void SineLookup::SetFormula(const std::string& value)
+{
+    m_Formula = value;
+}
 
 const std::string& SineLookup::GetNumdatapoints() const
 {

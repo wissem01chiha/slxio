@@ -34,8 +34,7 @@
  * This function return the number of column used. It may not correspond to the
  * number of characters.
  */
-static int sizeOfOneLineInTerm(wchar_t* CommandLine,
-                               unsigned int cursorLocation)
+static int sizeOfOneLineInTerm(wchar_t* CommandLine, unsigned int cursorLocation)
 {
     unsigned int beginningOfLine = cursorLocation;
 
@@ -99,10 +98,8 @@ int gotoRight(wchar_t* CommandLine, unsigned int* cursorLocation)
         while (sizeOfWChar)
         {
             if ((widthOfStringInTerm && !(widthOfStringInTerm % nbrCol) &&
-                 sizeOfWChar <=
-                     1) // if last column of the terminal is reached...
-                || CommandLine[*cursorLocation] ==
-                       L'\n') // ... or if the cursor will go to the next line.
+                 sizeOfWChar <= 1)                        // if last column of the terminal is reached...
+                || CommandLine[*cursorLocation] == L'\n') // ... or if the cursor will go to the next line.
             {
                 /* move the cursor down. */
                 setStringCapacities("do");
@@ -157,8 +154,7 @@ int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation)
         if (CommandLine[*cursorLocation - 1] == L'\n')
         {
             /* Manage two consecutive L'\n' */
-            if ((*cursorLocation >= 2 &&
-                 CommandLine[*cursorLocation - 2] == L'\n'))
+            if ((*cursorLocation >= 2 && CommandLine[*cursorLocation - 2] == L'\n'))
             {
                 setStringCapacities("up");
                 i--;
@@ -168,10 +164,7 @@ int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation)
             /* If the cursor will move to a previous line separated by L'\n' */
             if (*cursorLocation > 1)
             {
-                nbrCol =
-                    (sizeOfOneLineInTerm(CommandLine, *cursorLocation - 2) +
-                     1) %
-                    tgetnum("co");
+                nbrCol = (sizeOfOneLineInTerm(CommandLine, *cursorLocation - 2) + 1) % tgetnum("co");
             }
             else
             {
@@ -187,12 +180,8 @@ int gotoLeft(wchar_t* CommandLine, unsigned int* cursorLocation)
         while (sizeOfWChar) /* While we are not at the beginning of the
                                character... */
         {
-            if ((nbrCol && !(widthOfStringInTerm % nbrCol) &&
-                 sizeOfWChar <=
-                     1) // if last column of the terminal is reached...
-                ||
-                CommandLine[*cursorLocation - 1] ==
-                    L'\n') // ... or if the cursor will go to the previous line.
+            if ((nbrCol && !(widthOfStringInTerm % nbrCol) && sizeOfWChar <= 1) // if last column of the terminal is reached...
+                || CommandLine[*cursorLocation - 1] == L'\n') // ... or if the cursor will go to the previous line.
             {
                 setStringCapacities("up");
                 while (nbrCol)
@@ -267,14 +256,12 @@ static BOOL isAWideCharToJump(wchar_t wideCharToTest)
 int nextWord(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
     /* Passing current word... */
-    while (CommandLine[*cursorLocation] &&
-           !isAWideCharToJump(CommandLine[*cursorLocation]))
+    while (CommandLine[*cursorLocation] && !isAWideCharToJump(CommandLine[*cursorLocation]))
     {
         gotoRight(CommandLine, cursorLocation);
     }
     /* ... then passing through characters to jump */
-    while (CommandLine[*cursorLocation] &&
-           isAWideCharToJump(CommandLine[*cursorLocation]))
+    while (CommandLine[*cursorLocation] && isAWideCharToJump(CommandLine[*cursorLocation]))
     {
         gotoRight(CommandLine, cursorLocation);
     }
@@ -285,14 +272,12 @@ int nextWord(wchar_t* CommandLine, unsigned int* cursorLocation)
 int previousWord(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
     /* Passing through characters to jump... */
-    while (*cursorLocation &&
-           isAWideCharToJump(CommandLine[*cursorLocation - 1]))
+    while (*cursorLocation && isAWideCharToJump(CommandLine[*cursorLocation - 1]))
     {
         gotoLeft(CommandLine, cursorLocation);
     }
     /* ... then going to the beginning of the word */
-    while (*cursorLocation &&
-           !isAWideCharToJump(CommandLine[*cursorLocation - 1]))
+    while (*cursorLocation && !isAWideCharToJump(CommandLine[*cursorLocation - 1]))
     {
         gotoLeft(CommandLine, cursorLocation);
     }

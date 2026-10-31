@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IntegratorLimited::IntegratorLimited() {}
+IntegratorLimited::IntegratorLimited()
+{
+}
 
-IntegratorLimited::~IntegratorLimited() {}
+IntegratorLimited::~IntegratorLimited()
+{
+}
 
 const std::string& IntegratorLimited::GetExternalreset() const
 {

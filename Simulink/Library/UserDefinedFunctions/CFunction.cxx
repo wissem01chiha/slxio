@@ -4,20 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CFunction::CFunction() {}
+CFunction::CFunction()
+{
+}
 
-CFunction::~CFunction() {}
+CFunction::~CFunction()
+{
+}
 
-const std::string& CFunction::GetOutputcode() const { return m_Outputcode; }
+const std::string& CFunction::GetOutputcode() const
+{
+    return m_Outputcode;
+}
 
 void CFunction::SetOutputcode(const std::string& value)
 {
     m_Outputcode = value;
 }
 
-const std::string& CFunction::GetStartcode() const { return m_Startcode; }
+const std::string& CFunction::GetStartcode() const
+{
+    return m_Startcode;
+}
 
-void CFunction::SetStartcode(const std::string& value) { m_Startcode = value; }
+void CFunction::SetStartcode(const std::string& value)
+{
+    m_Startcode = value;
+}
 
 const std::string& CFunction::GetInitializeconditionscode() const
 {
@@ -109,7 +122,10 @@ void CFunction::SetPortspecwidgetparam(const std::string& value)
     m_Portspecwidgetparam = value;
 }
 
-const std::string& CFunction::GetSymbolspec() const { return m_Symbolspec; }
+const std::string& CFunction::GetSymbolspec() const
+{
+    return m_Symbolspec;
+}
 
 void CFunction::SetSymbolspec(const std::string& value)
 {
@@ -126,7 +142,10 @@ void CFunction::SetAdditionaltypes(const std::string& value)
     m_Additionaltypes = value;
 }
 
-const std::string& CFunction::GetSampletime() const { return m_Sampletime; }
+const std::string& CFunction::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void CFunction::SetSampletime(const std::string& value)
 {

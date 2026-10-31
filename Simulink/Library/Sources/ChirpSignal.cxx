@@ -4,21 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ChirpSignal::ChirpSignal() {}
+ChirpSignal::ChirpSignal()
+{
+}
 
-ChirpSignal::~ChirpSignal() {}
+ChirpSignal::~ChirpSignal()
+{
+}
 
-const std::string& ChirpSignal::GetF1() const { return m_F1; }
+const std::string& ChirpSignal::GetF1() const
+{
+    return m_F1;
+}
 
-void ChirpSignal::SetF1(const std::string& value) { m_F1 = value; }
+void ChirpSignal::SetF1(const std::string& value)
+{
+    m_F1 = value;
+}
 
-const std::string& ChirpSignal::GetT() const { return m_T; }
+const std::string& ChirpSignal::GetT() const
+{
+    return m_T;
+}
 
-void ChirpSignal::SetT(const std::string& value) { m_T = value; }
+void ChirpSignal::SetT(const std::string& value)
+{
+    m_T = value;
+}
 
-const std::string& ChirpSignal::GetF2() const { return m_F2; }
+const std::string& ChirpSignal::GetF2() const
+{
+    return m_F2;
+}
 
-void ChirpSignal::SetF2(const std::string& value) { m_F2 = value; }
+void ChirpSignal::SetF2(const std::string& value)
+{
+    m_F2 = value;
+}
 
 const std::string& ChirpSignal::GetVectorparams1d() const
 {

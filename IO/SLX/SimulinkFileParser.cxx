@@ -39,8 +39,7 @@ HError SimulinkFileParser::parse()
       return propertieStatus;
     }
 
-    for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr;
-         cur = cur->next)
+    for (xmlNodePtr cur = propertiesNodePtr->children; cur != nullptr; cur = cur->next)
     {
         std::string nodeName = (const char*)cur->name;
         xmlChar* content = xmlNodeGetContent(cur);

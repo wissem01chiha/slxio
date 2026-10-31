@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteTransferFcn::DiscreteTransferFcn() {}
+DiscreteTransferFcn::DiscreteTransferFcn()
+{
+}
 
-DiscreteTransferFcn::~DiscreteTransferFcn() {}
+DiscreteTransferFcn::~DiscreteTransferFcn()
+{
+}
 
 const std::string& DiscreteTransferFcn::GetNumeratorsource() const
 {
@@ -168,14 +172,20 @@ void DiscreteTransferFcn::SetDencoefmax(const std::string& value)
     m_Dencoefmax = value;
 }
 
-const std::string& DiscreteTransferFcn::GetOutmin() const { return m_Outmin; }
+const std::string& DiscreteTransferFcn::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void DiscreteTransferFcn::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& DiscreteTransferFcn::GetOutmax() const { return m_Outmax; }
+const std::string& DiscreteTransferFcn::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void DiscreteTransferFcn::SetOutmax(const std::string& value)
 {
@@ -282,7 +292,10 @@ void DiscreteTransferFcn::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& DiscreteTransferFcn::GetRndmeth() const { return m_Rndmeth; }
+const std::string& DiscreteTransferFcn::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void DiscreteTransferFcn::SetRndmeth(const std::string& value)
 {
@@ -309,14 +322,12 @@ void DiscreteTransferFcn::SetStatename(const std::string& value)
     m_Statename = value;
 }
 
-const std::string&
-DiscreteTransferFcn::GetStatemustresolvetosignalobject() const
+const std::string& DiscreteTransferFcn::GetStatemustresolvetosignalobject() const
 {
     return m_Statemustresolvetosignalobject;
 }
 
-void DiscreteTransferFcn::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DiscreteTransferFcn::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -346,8 +357,7 @@ const std::string& DiscreteTransferFcn::GetRtwstatestoragetypequalifier() const
     return m_Rtwstatestoragetypequalifier;
 }
 
-void DiscreteTransferFcn::SetRtwstatestoragetypequalifier(
-    const std::string& value)
+void DiscreteTransferFcn::SetRtwstatestoragetypequalifier(const std::string& value)
 {
     m_Rtwstatestoragetypequalifier = value;
 }

@@ -12,7 +12,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class Errc : int
 {
-    Ok = 0,            // never reorder or reuse released values
+    Ok = 0, // never reorder or reuse released values
     InvalidArgument = 1,
     OutOfMemory = 2,
     NotInitialized = 3,
@@ -30,7 +30,8 @@ SLXIO_APIEXPORT const std::error_category& ErrorCategory() noexcept;
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio::core
 
-template <>
-struct std::is_error_code_enum<slxio::core::Errc> : std::true_type {};
+template <> struct std::is_error_code_enum<slxio::core::Errc> : std::true_type
+{
+};
 
 #endif // SLXIO_COMMON_CORE_COREERRORS_H_

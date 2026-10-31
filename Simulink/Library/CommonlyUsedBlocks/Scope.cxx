@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Scope::Scope() {}
+Scope::Scope()
+{
+}
 
-Scope::~Scope() {}
+Scope::~Scope()
+{
+}
 
 const std::string& Scope::GetOpenatsimulationstart() const
 {
@@ -28,7 +32,10 @@ void Scope::SetDisplayfullpath(const std::string& value)
     m_Displayfullpath = value;
 }
 
-const std::string& Scope::GetNuminputports() const { return m_Numinputports; }
+const std::string& Scope::GetNuminputports() const
+{
+    return m_Numinputports;
+}
 
 void Scope::SetNuminputports(const std::string& value)
 {
@@ -45,9 +52,15 @@ void Scope::SetLayoutdimensionsstring(const std::string& value)
     m_Layoutdimensionsstring = value;
 }
 
-const std::string& Scope::GetSampletime() const { return m_Sampletime; }
+const std::string& Scope::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Scope::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Scope::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 const std::string& Scope::GetFramebasedprocessingstring() const
 {
@@ -59,16 +72,25 @@ void Scope::SetFramebasedprocessingstring(const std::string& value)
     m_Framebasedprocessingstring = value;
 }
 
-const std::string& Scope::GetMaximizeaxes() const { return m_Maximizeaxes; }
+const std::string& Scope::GetMaximizeaxes() const
+{
+    return m_Maximizeaxes;
+}
 
 void Scope::SetMaximizeaxes(const std::string& value)
 {
     m_Maximizeaxes = value;
 }
 
-const std::string& Scope::GetAxesscaling() const { return m_Axesscaling; }
+const std::string& Scope::GetAxesscaling() const
+{
+    return m_Axesscaling;
+}
 
-void Scope::SetAxesscaling(const std::string& value) { m_Axesscaling = value; }
+void Scope::SetAxesscaling(const std::string& value)
+{
+    m_Axesscaling = value;
+}
 
 const std::string& Scope::GetAxesscalingnumupdates() const
 {
@@ -80,9 +102,15 @@ void Scope::SetAxesscalingnumupdates(const std::string& value)
     m_Axesscalingnumupdates = value;
 }
 
-const std::string& Scope::GetTimespan() const { return m_Timespan; }
+const std::string& Scope::GetTimespan() const
+{
+    return m_Timespan;
+}
 
-void Scope::SetTimespan(const std::string& value) { m_Timespan = value; }
+void Scope::SetTimespan(const std::string& value)
+{
+    m_Timespan = value;
+}
 
 const std::string& Scope::GetTimespanoverrunaction() const
 {
@@ -94,9 +122,15 @@ void Scope::SetTimespanoverrunaction(const std::string& value)
     m_Timespanoverrunaction = value;
 }
 
-const std::string& Scope::GetTimeunits() const { return m_Timeunits; }
+const std::string& Scope::GetTimeunits() const
+{
+    return m_Timeunits;
+}
 
-void Scope::SetTimeunits(const std::string& value) { m_Timeunits = value; }
+void Scope::SetTimeunits(const std::string& value)
+{
+    m_Timeunits = value;
+}
 
 const std::string& Scope::GetTimedisplayoffset() const
 {
@@ -108,7 +142,10 @@ void Scope::SetTimedisplayoffset(const std::string& value)
     m_Timedisplayoffset = value;
 }
 
-const std::string& Scope::GetTimeaxislabels() const { return m_Timeaxislabels; }
+const std::string& Scope::GetTimeaxislabels() const
+{
+    return m_Timeaxislabels;
+}
 
 void Scope::SetTimeaxislabels(const std::string& value)
 {
@@ -135,17 +172,35 @@ void Scope::SetActivedisplaystring(const std::string& value)
     m_Activedisplaystring = value;
 }
 
-const std::string& Scope::GetTitle() const { return m_Title; }
+const std::string& Scope::GetTitle() const
+{
+    return m_Title;
+}
 
-void Scope::SetTitle(const std::string& value) { m_Title = value; }
+void Scope::SetTitle(const std::string& value)
+{
+    m_Title = value;
+}
 
-const std::string& Scope::GetShowlegend() const { return m_Showlegend; }
+const std::string& Scope::GetShowlegend() const
+{
+    return m_Showlegend;
+}
 
-void Scope::SetShowlegend(const std::string& value) { m_Showlegend = value; }
+void Scope::SetShowlegend(const std::string& value)
+{
+    m_Showlegend = value;
+}
 
-const std::string& Scope::GetShowgrid() const { return m_Showgrid; }
+const std::string& Scope::GetShowgrid() const
+{
+    return m_Showgrid;
+}
 
-void Scope::SetShowgrid(const std::string& value) { m_Showgrid = value; }
+void Scope::SetShowgrid(const std::string& value)
+{
+    m_Showgrid = value;
+}
 
 const std::string& Scope::GetPlotasmagnitudephase() const
 {
@@ -177,9 +232,15 @@ void Scope::SetActivedisplayymaximum(const std::string& value)
     m_Activedisplayymaximum = value;
 }
 
-const std::string& Scope::GetYlabel() const { return m_Ylabel; }
+const std::string& Scope::GetYlabel() const
+{
+    return m_Ylabel;
+}
 
-void Scope::SetYlabel(const std::string& value) { m_Ylabel = value; }
+void Scope::SetYlabel(const std::string& value)
+{
+    m_Ylabel = value;
+}
 
 const std::string& Scope::GetDatalogginglimitdatapoints() const
 {
@@ -221,9 +282,15 @@ void Scope::SetDataloggingdecimation(const std::string& value)
     m_Dataloggingdecimation = value;
 }
 
-const std::string& Scope::GetDatalogging() const { return m_Datalogging; }
+const std::string& Scope::GetDatalogging() const
+{
+    return m_Datalogging;
+}
 
-void Scope::SetDatalogging(const std::string& value) { m_Datalogging = value; }
+void Scope::SetDatalogging(const std::string& value)
+{
+    m_Datalogging = value;
+}
 
 const std::string& Scope::GetDataloggingvariablename() const
 {

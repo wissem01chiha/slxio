@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Bias::Bias() {}
+Bias::Bias()
+{
+}
 
-Bias::~Bias() {}
+Bias::~Bias()
+{
+}
 
-const std::string& Bias::GetBias() const { return m_Bias; }
+const std::string& Bias::GetBias() const
+{
+    return m_Bias;
+}
 
-void Bias::SetBias(const std::string& value) { m_Bias = value; }
+void Bias::SetBias(const std::string& value)
+{
+    m_Bias = value;
+}
 
 const std::string& Bias::GetSaturateonintegeroverflow() const
 {

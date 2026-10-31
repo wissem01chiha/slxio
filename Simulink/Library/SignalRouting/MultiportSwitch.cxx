@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MultiportSwitch::MultiportSwitch() {}
+MultiportSwitch::MultiportSwitch()
+{
+}
 
-MultiportSwitch::~MultiportSwitch() {}
+MultiportSwitch::~MultiportSwitch()
+{
+}
 
 const std::string& MultiportSwitch::GetDataportorder() const
 {
@@ -18,9 +22,15 @@ void MultiportSwitch::SetDataportorder(const std::string& value)
     m_Dataportorder = value;
 }
 
-const std::string& MultiportSwitch::GetInputs() const { return m_Inputs; }
+const std::string& MultiportSwitch::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void MultiportSwitch::SetInputs(const std::string& value) { m_Inputs = value; }
+void MultiportSwitch::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
 const std::string& MultiportSwitch::GetDataportindices() const
 {
@@ -62,13 +72,25 @@ void MultiportSwitch::SetInputsamedt(const std::string& value)
     m_Inputsamedt = value;
 }
 
-const std::string& MultiportSwitch::GetOutmin() const { return m_Outmin; }
+const std::string& MultiportSwitch::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void MultiportSwitch::SetOutmin(const std::string& value) { m_Outmin = value; }
+void MultiportSwitch::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& MultiportSwitch::GetOutmax() const { return m_Outmax; }
+const std::string& MultiportSwitch::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void MultiportSwitch::SetOutmax(const std::string& value) { m_Outmax = value; }
+void MultiportSwitch::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& MultiportSwitch::GetOutdatatypestr() const
 {
@@ -80,14 +102,20 @@ void MultiportSwitch::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& MultiportSwitch::GetLockscale() const { return m_Lockscale; }
+const std::string& MultiportSwitch::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void MultiportSwitch::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& MultiportSwitch::GetRndmeth() const { return m_Rndmeth; }
+const std::string& MultiportSwitch::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void MultiportSwitch::SetRndmeth(const std::string& value)
 {

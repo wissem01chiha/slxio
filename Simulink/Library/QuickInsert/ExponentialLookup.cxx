@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ExponentialLookup::ExponentialLookup() {}
+ExponentialLookup::ExponentialLookup()
+{
+}
 
-ExponentialLookup::~ExponentialLookup() {}
+ExponentialLookup::~ExponentialLookup()
+{
+}
 
-const std::string& ExponentialLookup::GetFormula() const { return m_Formula; }
+const std::string& ExponentialLookup::GetFormula() const
+{
+    return m_Formula;
+}
 
 void ExponentialLookup::SetFormula(const std::string& value)
 {

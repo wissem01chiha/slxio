@@ -4,17 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Pwm::Pwm() {}
+Pwm::Pwm()
+{
+}
 
-Pwm::~Pwm() {}
+Pwm::~Pwm()
+{
+}
 
-const std::string& Pwm::GetPeriod() const { return m_Period; }
+const std::string& Pwm::GetPeriod() const
+{
+    return m_Period;
+}
 
-void Pwm::SetPeriod(const std::string& value) { m_Period = value; }
+void Pwm::SetPeriod(const std::string& value)
+{
+    m_Period = value;
+}
 
-const std::string& Pwm::GetInitialdelay() const { return m_Initialdelay; }
+const std::string& Pwm::GetInitialdelay() const
+{
+    return m_Initialdelay;
+}
 
-void Pwm::SetInitialdelay(const std::string& value) { m_Initialdelay = value; }
+void Pwm::SetInitialdelay(const std::string& value)
+{
+    m_Initialdelay = value;
+}
 
 const std::string& Pwm::GetDisallowzerodutycycle() const
 {
@@ -36,9 +52,15 @@ void Pwm::SetRunatfixedtimeintervals(const std::string& value)
     m_Runatfixedtimeintervals = value;
 }
 
-const std::string& Pwm::GetSampletime() const { return m_Sampletime; }
+const std::string& Pwm::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Pwm::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Pwm::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

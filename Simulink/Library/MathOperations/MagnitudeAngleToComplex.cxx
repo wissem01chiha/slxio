@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MagnitudeAngleToComplex::MagnitudeAngleToComplex() {}
+MagnitudeAngleToComplex::MagnitudeAngleToComplex()
+{
+}
 
-MagnitudeAngleToComplex::~MagnitudeAngleToComplex() {}
+MagnitudeAngleToComplex::~MagnitudeAngleToComplex()
+{
+}
 
-const std::string& MagnitudeAngleToComplex::GetInput() const { return m_Input; }
+const std::string& MagnitudeAngleToComplex::GetInput() const
+{
+    return m_Input;
+}
 
 void MagnitudeAngleToComplex::SetInput(const std::string& value)
 {
@@ -50,8 +57,7 @@ const std::string& MagnitudeAngleToComplex::GetScalereciprocalgainfactor() const
     return m_Scalereciprocalgainfactor;
 }
 
-void MagnitudeAngleToComplex::SetScalereciprocalgainfactor(
-    const std::string& value)
+void MagnitudeAngleToComplex::SetScalereciprocalgainfactor(const std::string& value)
 {
     m_Scalereciprocalgainfactor = value;
 }

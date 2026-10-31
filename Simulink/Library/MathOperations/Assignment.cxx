@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Assignment::Assignment() {}
+Assignment::Assignment()
+{
+}
 
-Assignment::~Assignment() {}
+Assignment::~Assignment()
+{
+}
 
 const std::string& Assignment::GetNumberofdimensions() const
 {
@@ -18,9 +22,15 @@ void Assignment::SetNumberofdimensions(const std::string& value)
     m_Numberofdimensions = value;
 }
 
-const std::string& Assignment::GetIndexmode() const { return m_Indexmode; }
+const std::string& Assignment::GetIndexmode() const
+{
+    return m_Indexmode;
+}
 
-void Assignment::SetIndexmode(const std::string& value) { m_Indexmode = value; }
+void Assignment::SetIndexmode(const std::string& value)
+{
+    m_Indexmode = value;
+}
 
 const std::string& Assignment::GetOutputinitialize() const
 {
@@ -72,7 +82,10 @@ void Assignment::SetDiagnosticfordimensions(const std::string& value)
     m_Diagnosticfordimensions = value;
 }
 
-const std::string& Assignment::GetSampletime() const { return m_Sampletime; }
+const std::string& Assignment::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void Assignment::SetSampletime(const std::string& value)
 {
@@ -89,11 +102,20 @@ void Assignment::SetIndexoptions(const std::string& value)
     m_Indexoptions = value;
 }
 
-const std::string& Assignment::GetIndices() const { return m_Indices; }
+const std::string& Assignment::GetIndices() const
+{
+    return m_Indices;
+}
 
-void Assignment::SetIndices(const std::string& value) { m_Indices = value; }
+void Assignment::SetIndices(const std::string& value)
+{
+    m_Indices = value;
+}
 
-const std::string& Assignment::GetOutputsizes() const { return m_Outputsizes; }
+const std::string& Assignment::GetOutputsizes() const
+{
+    return m_Outputsizes;
+}
 
 void Assignment::SetOutputsizes(const std::string& value)
 {

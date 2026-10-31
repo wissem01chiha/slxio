@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringToAscii::StringToAscii() {}
+StringToAscii::StringToAscii()
+{
+}
 
-StringToAscii::~StringToAscii() {}
+StringToAscii::~StringToAscii()
+{
+}
 
 const std::string& StringToAscii::GetOutputvectorsize() const
 {

@@ -52,8 +52,7 @@ static void updateTokenInScilabHistory(wchar_t** commandLine)
  * If last key was '1'
  * it means this could be arrow key plus control key
  */
-static void caseCtrlAndArrowKey(wchar_t* commandLine,
-                                unsigned int* cursorLocation)
+static void caseCtrlAndArrowKey(wchar_t* commandLine, unsigned int* cursorLocation)
 {
     if (getwchar() == L';' && getwchar() == L'5')
     {
@@ -95,8 +94,7 @@ static void caseHomeOrEndKey(wchar_t* commandLine, unsigned int* cursorLocation)
  * If second key was L'['
  * It means this could be an arrow key, a delete key or home/end key.
  */
-static void caseDelOrArrowKey(wchar_t** commandLine,
-                              unsigned int* cursorLocation)
+static void caseDelOrArrowKey(wchar_t** commandLine, unsigned int* cursorLocation)
 {
     int* cmd = *commandLine;
     switch (getwchar())
@@ -199,8 +197,7 @@ static void endCopyPast(wchar_t* commandLine)
 }
 
 /* Reset command line if CTRL-C is pressed */
-static void resetCommandLine(wchar_t** commandLine,
-                             unsigned int* cursorLocation)
+static void resetCommandLine(wchar_t** commandLine, unsigned int* cursorLocation)
 {
     char* multiByteString = NULL;
 
@@ -327,8 +324,7 @@ char* getCmdLine(void)
     setCharDisplay(DISP_BRIGHT);
     setTokenInteruptExecution(RESET_TOKEN);
 
-    if (commandLine == NULL ||
-        commandLine[nextLineLocationInWideString] == L'\0')
+    if (commandLine == NULL || commandLine[nextLineLocationInWideString] == L'\0')
     {
         commandLine = MALLOC(1024 * sizeof(*commandLine));
         *commandLine = L'\0';
@@ -346,8 +342,7 @@ char* getCmdLine(void)
     }
 
     cursorLocation = nextLineLocationInWideString;
-    while (commandLine[cursorLocation] != L'\n' &&
-           commandLine[cursorLocation] != L'\0')
+    while (commandLine[cursorLocation] != L'\n' && commandLine[cursorLocation] != L'\0')
     {
         cursorLocation++;
     }
@@ -359,8 +354,7 @@ char* getCmdLine(void)
         printf("%ls\n", &commandLine[nextLineLocationInWideString]);
     }
 
-    multiByteString =
-        wide_string_to_UTF8(&commandLine[nextLineLocationInWideString]);
+    multiByteString = wide_string_to_UTF8(&commandLine[nextLineLocationInWideString]);
 
     nextLineLocationInWideString = cursorLocation + 1;
 
@@ -372,10 +366,9 @@ char* getCmdLine(void)
 
     if (multiByteString && strlen(multiByteString) > 4096)
     {
-        printf(
-            _("Command is too long (more than %d characters long): could not "
-              "send it to Scilab\n"),
-            4096);
+        printf(_("Command is too long (more than %d characters long): could not "
+                 "send it to Scilab\n"),
+               4096);
         FREE(multiByteString);
         return NULL;
     }

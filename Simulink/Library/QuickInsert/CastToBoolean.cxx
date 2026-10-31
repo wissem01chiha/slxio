@@ -4,17 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CastToBoolean::CastToBoolean() {}
+CastToBoolean::CastToBoolean()
+{
+}
 
-CastToBoolean::~CastToBoolean() {}
+CastToBoolean::~CastToBoolean()
+{
+}
 
-const std::string& CastToBoolean::GetOutmin() const { return m_Outmin; }
+const std::string& CastToBoolean::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void CastToBoolean::SetOutmin(const std::string& value) { m_Outmin = value; }
+void CastToBoolean::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& CastToBoolean::GetOutmax() const { return m_Outmax; }
+const std::string& CastToBoolean::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void CastToBoolean::SetOutmax(const std::string& value) { m_Outmax = value; }
+void CastToBoolean::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& CastToBoolean::GetOutdatatypestr() const
 {
@@ -26,7 +42,10 @@ void CastToBoolean::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& CastToBoolean::GetLockscale() const { return m_Lockscale; }
+const std::string& CastToBoolean::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void CastToBoolean::SetLockscale(const std::string& value)
 {
@@ -43,9 +62,15 @@ void CastToBoolean::SetConvertrealworld(const std::string& value)
     m_Convertrealworld = value;
 }
 
-const std::string& CastToBoolean::GetRndmeth() const { return m_Rndmeth; }
+const std::string& CastToBoolean::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void CastToBoolean::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void CastToBoolean::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& CastToBoolean::GetSaturateonintegeroverflow() const
 {
@@ -57,7 +82,10 @@ void CastToBoolean::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& CastToBoolean::GetSampletime() const { return m_Sampletime; }
+const std::string& CastToBoolean::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void CastToBoolean::SetSampletime(const std::string& value)
 {

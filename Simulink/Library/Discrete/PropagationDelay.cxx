@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-PropagationDelay::PropagationDelay() {}
+PropagationDelay::PropagationDelay()
+{
+}
 
-PropagationDelay::~PropagationDelay() {}
+PropagationDelay::~PropagationDelay()
+{
+}
 
 const std::string& PropagationDelay::GetInitialoutput() const
 {

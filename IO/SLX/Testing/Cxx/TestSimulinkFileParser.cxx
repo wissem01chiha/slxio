@@ -10,15 +10,16 @@ class SimulinkFileTestFixture
 protected:
     SimulinkFileParser* parserPtr;
 
-    SimulinkFileTestFixture() { parserPtr = new SimulinkFileParser(); }
+    SimulinkFileTestFixture()
+    {
+        parserPtr = new SimulinkFileParser();
+    }
 
     File getTestFileAsset(const char* assetName)
     {
-
         char path_slx[512];
 
-        snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s",
-                 PROJECT_ROOT_DIR, assetName);
+        snprintf(path_slx, sizeof(path_slx), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, assetName);
 
         return File(path_slx);
     }
@@ -35,16 +36,13 @@ protected:
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "SetInputDataValid")
 {
-
     HError status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
     CHECK(status == E_OK);
 }
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 {
-
-    HError in_status =
-        parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
+    HError in_status = parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
     CHECK(in_status == E_OK);
     HError parseStatus = parserPtr->parse();
     CHECK(parseStatus == E_OK);
@@ -52,7 +50,6 @@ TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ParseValidSimulinkFile")
 
 TEST_CASE_FIXTURE(SimulinkFileTestFixture, "ValidateParsedSimulinkFile")
 {
-
     parserPtr->setInputData(getTestFileAsset("TestAsset1.slx"));
     parserPtr->parse();
     auto file = parserPtr->getOutputData();

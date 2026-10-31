@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-UnaryMinus::UnaryMinus() {}
+UnaryMinus::UnaryMinus()
+{
+}
 
-UnaryMinus::~UnaryMinus() {}
+UnaryMinus::~UnaryMinus()
+{
+}
 
-const std::string& UnaryMinus::GetSampletime() const { return m_Sampletime; }
+const std::string& UnaryMinus::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void UnaryMinus::SetSampletime(const std::string& value)
 {

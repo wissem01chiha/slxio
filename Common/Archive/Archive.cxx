@@ -9,11 +9,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Archive* Archive::New() { return new Archive(); }
+Archive* Archive::New()
+{
+    return new Archive();
+}
 
-Archive::Archive() : file(File("")), directory(Directory("")) {}
+Archive::Archive() : file(File("")), directory(Directory(""))
+{
+}
 
-Archive::Archive(const File& _file) : file(_file), directory(Directory("")) {}
+Archive::Archive(const File& _file) : file(_file), directory(Directory(""))
+{
+}
 
 void Archive::SetArchiveExtension(const char* ext)
 {
@@ -24,8 +31,7 @@ void Archive::SetArchiveExtension(const char* ext)
 
     size_t pos = file.GetFilePath().find_last_of('.');
     std::string base;
-    base = (pos == std::string::npos) ? file.GetFilePath()
-                                      : file.GetFilePath().substr(0, pos);
+    base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
     std::string dest = base + "." + ext;
     file.Rename(dest);
 }
@@ -35,7 +41,10 @@ void Archive::SetArchiveDirectory(const Directory& _directory)
     directory = _directory;
 }
 
-Directory Archive::GetArchiveDirectory() const { return directory; }
+Directory Archive::GetArchiveDirectory() const
+{
+    return directory;
+}
 
 HError Archive::Extract()
 {
@@ -58,8 +67,7 @@ HError Archive::Extract()
             continue;
         }
         char entrydirpath[1024];
-        snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s",
-                 directory.GetDirectoryPath().c_str(), name);
+        snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", directory.GetDirectoryPath().c_str(), name);
 
         int ec = 0;
         DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);
@@ -83,8 +91,7 @@ HError Archive::Extract()
 
         char InternalBuffer[4096];
         zip_int64_t bytes;
-        while ((bytes = zip_fread(zf, InternalBuffer, sizeof(InternalBuffer))) >
-               0)
+        while ((bytes = zip_fread(zf, InternalBuffer, sizeof(InternalBuffer))) > 0)
         {
             fwrite(InternalBuffer, 1, bytes, out);
         }
@@ -106,8 +113,7 @@ HError Archive::Add(const File& file_)
 
     zip_int64_t idx = zip_name_locate(za, file.GetFileName().c_str(), 0);
 
-    zip_source_t* source =
-        zip_source_file(za, file.GetFilePath().c_str(), 0, -1);
+    zip_source_t* source = zip_source_file(za, file.GetFilePath().c_str(), 0, -1);
     if (!source)
     {
         zip_close(za);
@@ -125,8 +131,7 @@ HError Archive::Add(const File& file_)
     }
     else
     {
-        if (zip_file_add(za, file_.GetFileName().c_str(), source,
-                         ZIP_FL_ENC_UTF_8) < 0)
+        if (zip_file_add(za, file_.GetFileName().c_str(), source, ZIP_FL_ENC_UTF_8) < 0)
         {
             zip_source_free(source);
             zip_close(za);

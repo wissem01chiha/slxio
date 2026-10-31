@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-LogicAndBitOperations::LogicAndBitOperations() {}
+LogicAndBitOperations::LogicAndBitOperations()
+{
+}
 
-LogicAndBitOperations::~LogicAndBitOperations() {}
+LogicAndBitOperations::~LogicAndBitOperations()
+{
+}
 
 const std::string& LogicAndBitOperations::GetShowportlabels() const
 {
@@ -68,14 +72,12 @@ void LogicAndBitOperations::SetErrorfcn(const std::string& value)
     m_Errorfcn = value;
 }
 
-const std::string&
-LogicAndBitOperations::GetPermithierarchicalresolution() const
+const std::string& LogicAndBitOperations::GetPermithierarchicalresolution() const
 {
     return m_Permithierarchicalresolution;
 }
 
-void LogicAndBitOperations::SetPermithierarchicalresolution(
-    const std::string& value)
+void LogicAndBitOperations::SetPermithierarchicalresolution(const std::string& value)
 {
     m_Permithierarchicalresolution = value;
 }
@@ -90,14 +92,12 @@ void LogicAndBitOperations::SetTreatasatomicunit(const std::string& value)
     m_Treatasatomicunit = value;
 }
 
-const std::string&
-LogicAndBitOperations::GetShowsubsystemreinitializeports() const
+const std::string& LogicAndBitOperations::GetShowsubsystemreinitializeports() const
 {
     return m_Showsubsystemreinitializeports;
 }
 
-void LogicAndBitOperations::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void LogicAndBitOperations::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -227,8 +227,7 @@ const std::string& LogicAndBitOperations::GetFunctionwithseparatedata() const
     return m_Functionwithseparatedata;
 }
 
-void LogicAndBitOperations::SetFunctionwithseparatedata(
-    const std::string& value)
+void LogicAndBitOperations::SetFunctionwithseparatedata(const std::string& value)
 {
     m_Functionwithseparatedata = value;
 }
@@ -318,8 +317,7 @@ const std::string& LogicAndBitOperations::GetVariantchoicesenumeration() const
     return m_Variantchoicesenumeration;
 }
 
-void LogicAndBitOperations::SetVariantchoicesenumeration(
-    const std::string& value)
+void LogicAndBitOperations::SetVariantchoicesenumeration(const std::string& value)
 {
     m_Variantchoicesenumeration = value;
 }
@@ -389,8 +387,7 @@ const std::string& LogicAndBitOperations::GetAllowzerovariantcontrols() const
     return m_Allowzerovariantcontrols;
 }
 
-void LogicAndBitOperations::SetAllowzerovariantcontrols(
-    const std::string& value)
+void LogicAndBitOperations::SetAllowzerovariantcontrols(const std::string& value)
 {
     m_Allowzerovariantcontrols = value;
 }
@@ -400,8 +397,7 @@ const std::string& LogicAndBitOperations::GetPropagatevariantconditions() const
     return m_Propagatevariantconditions;
 }
 
-void LogicAndBitOperations::SetPropagatevariantconditions(
-    const std::string& value)
+void LogicAndBitOperations::SetPropagatevariantconditions(const std::string& value)
 {
     m_Propagatevariantconditions = value;
 }
@@ -416,14 +412,12 @@ void LogicAndBitOperations::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-LogicAndBitOperations::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& LogicAndBitOperations::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void LogicAndBitOperations::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void LogicAndBitOperations::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -453,8 +447,7 @@ const std::string& LogicAndBitOperations::GetAutoframesizecalculation() const
     return m_Autoframesizecalculation;
 }
 
-void LogicAndBitOperations::SetAutoframesizecalculation(
-    const std::string& value)
+void LogicAndBitOperations::SetAutoframesizecalculation(const std::string& value)
 {
     m_Autoframesizecalculation = value;
 }

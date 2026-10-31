@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FunctionElementCall::FunctionElementCall() {}
+FunctionElementCall::FunctionElementCall()
+{
+}
 
-FunctionElementCall::~FunctionElementCall() {}
+FunctionElementCall::~FunctionElementCall()
+{
+}
 
-const std::string& FunctionElementCall::GetPort() const { return m_Port; }
+const std::string& FunctionElementCall::GetPort() const
+{
+    return m_Port;
+}
 
-void FunctionElementCall::SetPort(const std::string& value) { m_Port = value; }
+void FunctionElementCall::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
 const std::string& FunctionElementCall::GetPortname() const
 {
@@ -22,7 +32,10 @@ void FunctionElementCall::SetPortname(const std::string& value)
     m_Portname = value;
 }
 
-const std::string& FunctionElementCall::GetElement() const { return m_Element; }
+const std::string& FunctionElementCall::GetElement() const
+{
+    return m_Element;
+}
 
 void FunctionElementCall::SetElement(const std::string& value)
 {
@@ -59,14 +72,20 @@ void FunctionElementCall::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& FunctionElementCall::GetOutmin() const { return m_Outmin; }
+const std::string& FunctionElementCall::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void FunctionElementCall::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& FunctionElementCall::GetOutmax() const { return m_Outmax; }
+const std::string& FunctionElementCall::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void FunctionElementCall::SetOutmax(const std::string& value)
 {
@@ -113,9 +132,15 @@ void FunctionElementCall::SetBusvirtuality(const std::string& value)
     m_Busvirtuality = value;
 }
 
-const std::string& FunctionElementCall::GetUnit() const { return m_Unit; }
+const std::string& FunctionElementCall::GetUnit() const
+{
+    return m_Unit;
+}
 
-void FunctionElementCall::SetUnit(const std::string& value) { m_Unit = value; }
+void FunctionElementCall::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& FunctionElementCall::GetPortdimensions() const
 {
@@ -162,8 +187,7 @@ const std::string& FunctionElementCall::GetLatchbydelayingoutsidesignal() const
     return m_Latchbydelayingoutsidesignal;
 }
 
-void FunctionElementCall::SetLatchbydelayingoutsidesignal(
-    const std::string& value)
+void FunctionElementCall::SetLatchbydelayingoutsidesignal(const std::string& value)
 {
     m_Latchbydelayingoutsidesignal = value;
 }
@@ -173,8 +197,7 @@ const std::string& FunctionElementCall::GetLatchinputforfeedbacksignals() const
     return m_Latchinputforfeedbacksignals;
 }
 
-void FunctionElementCall::SetLatchinputforfeedbacksignals(
-    const std::string& value)
+void FunctionElementCall::SetLatchinputforfeedbacksignals(const std::string& value)
 {
     m_Latchinputforfeedbacksignals = value;
 }
@@ -209,14 +232,12 @@ void FunctionElementCall::SetDatamode(const std::string& value)
     m_Datamode = value;
 }
 
-const std::string&
-FunctionElementCall::GetMessagequeueusedefaultattributes() const
+const std::string& FunctionElementCall::GetMessagequeueusedefaultattributes() const
 {
     return m_Messagequeueusedefaultattributes;
 }
 
-void FunctionElementCall::SetMessagequeueusedefaultattributes(
-    const std::string& value)
+void FunctionElementCall::SetMessagequeueusedefaultattributes(const std::string& value)
 {
     m_Messagequeueusedefaultattributes = value;
 }

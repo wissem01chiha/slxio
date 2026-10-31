@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransferFcnRealZero::TransferFcnRealZero() {}
+TransferFcnRealZero::TransferFcnRealZero()
+{
+}
 
-TransferFcnRealZero::~TransferFcnRealZero() {}
+TransferFcnRealZero::~TransferFcnRealZero()
+{
+}
 
-const std::string& TransferFcnRealZero::GetZeroz() const { return m_Zeroz; }
+const std::string& TransferFcnRealZero::GetZeroz() const
+{
+    return m_Zeroz;
+}
 
 void TransferFcnRealZero::SetZeroz(const std::string& value)
 {
@@ -35,14 +42,20 @@ void TransferFcnRealZero::SetInputprocessing(const std::string& value)
     m_Inputprocessing = value;
 }
 
-const std::string& TransferFcnRealZero::GetRndmeth() const { return m_Rndmeth; }
+const std::string& TransferFcnRealZero::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void TransferFcnRealZero::SetRndmeth(const std::string& value)
 {
     m_Rndmeth = value;
 }
 
-const std::string& TransferFcnRealZero::GetDosatur() const { return m_Dosatur; }
+const std::string& TransferFcnRealZero::GetDosatur() const
+{
+    return m_Dosatur;
+}
 
 void TransferFcnRealZero::SetDosatur(const std::string& value)
 {

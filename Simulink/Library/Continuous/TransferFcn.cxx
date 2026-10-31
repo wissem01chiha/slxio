@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransferFcn::TransferFcn() {}
+TransferFcn::TransferFcn()
+{
+}
 
-TransferFcn::~TransferFcn() {}
+TransferFcn::~TransferFcn()
+{
+}
 
-const std::string& TransferFcn::GetNumerator() const { return m_Numerator; }
+const std::string& TransferFcn::GetNumerator() const
+{
+    return m_Numerator;
+}
 
 void TransferFcn::SetNumerator(const std::string& value)
 {
     m_Numerator = value;
 }
 
-const std::string& TransferFcn::GetDenominator() const { return m_Denominator; }
+const std::string& TransferFcn::GetDenominator() const
+{
+    return m_Denominator;
+}
 
 void TransferFcn::SetDenominator(const std::string& value)
 {

@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DetectRisePositive::DetectRisePositive() {}
+DetectRisePositive::DetectRisePositive()
+{
+}
 
-DetectRisePositive::~DetectRisePositive() {}
+DetectRisePositive::~DetectRisePositive()
+{
+}
 
-const std::string& DetectRisePositive::GetVinit() const { return m_Vinit; }
+const std::string& DetectRisePositive::GetVinit() const
+{
+    return m_Vinit;
+}
 
-void DetectRisePositive::SetVinit(const std::string& value) { m_Vinit = value; }
+void DetectRisePositive::SetVinit(const std::string& value)
+{
+    m_Vinit = value;
+}
 
 const std::string& DetectRisePositive::GetInputprocessing() const
 {

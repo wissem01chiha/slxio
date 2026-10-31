@@ -18,10 +18,8 @@ class ArchiveTestFixture
 public:
     ArchiveTestFixture()
     {
-
         auto d = DirectoryService::GetWorkingDirectory(&lastError);
-        tempDirPath =
-            d.GetDirectoryPath() + PATH_SEP + "ArchiveTestTmp" + PATH_SEP;
+        tempDirPath = d.GetDirectoryPath() + PATH_SEP + "ArchiveTestTmp" + PATH_SEP;
 
         DirectoryService::CreateDirectoryStructure(tempDirPath, &lastError);
     }
@@ -29,14 +27,22 @@ public:
     std::string GetAssetFilePath(const char* filename)
     {
         static char FilePath[512];
-        snprintf(FilePath, sizeof(FilePath), "%s/Common/System/Testing/Data/%s",
-                 SLXIO_ROOT_DIR, filename);
+        snprintf(FilePath, sizeof(FilePath), "%s/Common/System/Testing/Data/%s", SLXIO_ROOT_DIR, filename);
         return std::string(FilePath);
     }
 
-    int GetLastError() { return lastError; }
-    std::string GetArchiveTestDirTmp() { return tempDirPath; }
-    ~ArchiveTestFixture() { Directory::Delete(tempDirPath); }
+    int GetLastError()
+    {
+        return lastError;
+    }
+    std::string GetArchiveTestDirTmp()
+    {
+        return tempDirPath;
+    }
+    ~ArchiveTestFixture()
+    {
+        Directory::Delete(tempDirPath);
+    }
 
 private:
     int lastError = 0;
@@ -48,8 +54,7 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling")
     File f(GetAssetFilePath("TestAsset1.zip"));
     Archive archive(f);
     archive.SetArchiveExtension("zip");
-    std::cout << "this is the archive extesion"
-              << std::string(archive.GetArchiveExtension()) << std::endl;
+    std::cout << "this is the archive extesion" << std::string(archive.GetArchiveExtension()) << std::endl;
     CHECK(std::string(archive.GetArchiveExtension()) == "zip");
 }
 

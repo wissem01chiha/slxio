@@ -22,8 +22,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * </Array>
  * @endcode
  */
-class SLXIO_APIEXPORT SimulinkArrayParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkArray>
+class SLXIO_APIEXPORT SimulinkArrayParser final : public SimulinkParserBase<xmlNodePtr, SimulinkArray>
 {
 public:
     SimulinkArrayParser() = default;

@@ -57,7 +57,9 @@ public:
     ILogger* GetLogger();
 
     /* Default Constructor */
-    IDataObject() : m_updateTime(TimeStamp::Now()) {}
+    IDataObject() : m_updateTime(TimeStamp::Now())
+    {
+    }
 
     virtual ~IDataObject() = default;
 

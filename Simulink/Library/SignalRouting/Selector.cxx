@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Selector::Selector() {}
+Selector::Selector()
+{
+}
 
-Selector::~Selector() {}
+Selector::~Selector()
+{
+}
 
 const std::string& Selector::GetNumberofdimensions() const
 {
@@ -18,9 +22,15 @@ void Selector::SetNumberofdimensions(const std::string& value)
     m_Numberofdimensions = value;
 }
 
-const std::string& Selector::GetIndexmode() const { return m_Indexmode; }
+const std::string& Selector::GetIndexmode() const
+{
+    return m_Indexmode;
+}
 
-void Selector::SetIndexmode(const std::string& value) { m_Indexmode = value; }
+void Selector::SetIndexmode(const std::string& value)
+{
+    m_Indexmode = value;
+}
 
 const std::string& Selector::GetIndexoptionarray() const
 {
@@ -62,22 +72,40 @@ void Selector::SetInputportwidth(const std::string& value)
     m_Inputportwidth = value;
 }
 
-const std::string& Selector::GetSampletime() const { return m_Sampletime; }
+const std::string& Selector::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Selector::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Selector::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
-const std::string& Selector::GetIndexoptions() const { return m_Indexoptions; }
+const std::string& Selector::GetIndexoptions() const
+{
+    return m_Indexoptions;
+}
 
 void Selector::SetIndexoptions(const std::string& value)
 {
     m_Indexoptions = value;
 }
 
-const std::string& Selector::GetIndices() const { return m_Indices; }
+const std::string& Selector::GetIndices() const
+{
+    return m_Indices;
+}
 
-void Selector::SetIndices(const std::string& value) { m_Indices = value; }
+void Selector::SetIndices(const std::string& value)
+{
+    m_Indices = value;
+}
 
-const std::string& Selector::GetOutputsizes() const { return m_Outputsizes; }
+const std::string& Selector::GetOutputsizes() const
+{
+    return m_Outputsizes;
+}
 
 void Selector::SetOutputsizes(const std::string& value)
 {

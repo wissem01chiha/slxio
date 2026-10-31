@@ -21,7 +21,10 @@ Point::Point(const std::vector<UInt32>& vec) : l(Logger::GetInstance())
     }
 }
 
-std::vector<UInt32> Point::toVector() const { return {x, y, width, height}; }
+std::vector<UInt32> Point::toVector() const
+{
+    return {x, y, width, height};
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

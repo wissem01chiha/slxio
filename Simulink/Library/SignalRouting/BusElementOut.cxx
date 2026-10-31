@@ -4,24 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BusElementOut::BusElementOut() {}
+BusElementOut::BusElementOut()
+{
+}
 
-BusElementOut::~BusElementOut() {}
+BusElementOut::~BusElementOut()
+{
+}
 
-const std::string& BusElementOut::GetPort() const { return m_Port; }
+const std::string& BusElementOut::GetPort() const
+{
+    return m_Port;
+}
 
-void BusElementOut::SetPort(const std::string& value) { m_Port = value; }
+void BusElementOut::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
-const std::string& BusElementOut::GetPortname() const { return m_Portname; }
+const std::string& BusElementOut::GetPortname() const
+{
+    return m_Portname;
+}
 
 void BusElementOut::SetPortname(const std::string& value)
 {
     m_Portname = value;
 }
 
-const std::string& BusElementOut::GetElement() const { return m_Element; }
+const std::string& BusElementOut::GetElement() const
+{
+    return m_Element;
+}
 
-void BusElementOut::SetElement(const std::string& value) { m_Element = value; }
+void BusElementOut::SetElement(const std::string& value)
+{
+    m_Element = value;
+}
 
 const std::string& BusElementOut::GetIsbuselementport() const
 {
@@ -33,7 +52,10 @@ void BusElementOut::SetIsbuselementport(const std::string& value)
     m_Isbuselementport = value;
 }
 
-const std::string& BusElementOut::GetSignalname() const { return m_Signalname; }
+const std::string& BusElementOut::GetSignalname() const
+{
+    return m_Signalname;
+}
 
 void BusElementOut::SetSignalname(const std::string& value)
 {
@@ -80,13 +102,25 @@ void BusElementOut::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& BusElementOut::GetOutmin() const { return m_Outmin; }
+const std::string& BusElementOut::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void BusElementOut::SetOutmin(const std::string& value) { m_Outmin = value; }
+void BusElementOut::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& BusElementOut::GetOutmax() const { return m_Outmax; }
+const std::string& BusElementOut::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void BusElementOut::SetOutmax(const std::string& value) { m_Outmax = value; }
+void BusElementOut::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& BusElementOut::GetOutdatatypestr() const
 {
@@ -98,7 +132,10 @@ void BusElementOut::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& BusElementOut::GetLockscale() const { return m_Lockscale; }
+const std::string& BusElementOut::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void BusElementOut::SetLockscale(const std::string& value)
 {
@@ -125,16 +162,25 @@ void BusElementOut::SetBusvirtuality(const std::string& value)
     m_Busvirtuality = value;
 }
 
-const std::string& BusElementOut::GetDatamode() const { return m_Datamode; }
+const std::string& BusElementOut::GetDatamode() const
+{
+    return m_Datamode;
+}
 
 void BusElementOut::SetDatamode(const std::string& value)
 {
     m_Datamode = value;
 }
 
-const std::string& BusElementOut::GetUnit() const { return m_Unit; }
+const std::string& BusElementOut::GetUnit() const
+{
+    return m_Unit;
+}
 
-void BusElementOut::SetUnit(const std::string& value) { m_Unit = value; }
+void BusElementOut::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& BusElementOut::GetPortdimensions() const
 {
@@ -146,21 +192,30 @@ void BusElementOut::SetPortdimensions(const std::string& value)
     m_Portdimensions = value;
 }
 
-const std::string& BusElementOut::GetVarsizesig() const { return m_Varsizesig; }
+const std::string& BusElementOut::GetVarsizesig() const
+{
+    return m_Varsizesig;
+}
 
 void BusElementOut::SetVarsizesig(const std::string& value)
 {
     m_Varsizesig = value;
 }
 
-const std::string& BusElementOut::GetSampletime() const { return m_Sampletime; }
+const std::string& BusElementOut::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void BusElementOut::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& BusElementOut::GetSignaltype() const { return m_Signaltype; }
+const std::string& BusElementOut::GetSignaltype() const
+{
+    return m_Signaltype;
+}
 
 void BusElementOut::SetSignaltype(const std::string& value)
 {
@@ -227,14 +282,12 @@ void BusElementOut::SetOutputwhenunconnectedvalue(const std::string& value)
     m_Outputwhenunconnectedvalue = value;
 }
 
-const std::string&
-BusElementOut::GetVectorparamsas1dforoutwhenunconnected() const
+const std::string& BusElementOut::GetVectorparamsas1dforoutwhenunconnected() const
 {
     return m_Vectorparamsas1dforoutwhenunconnected;
 }
 
-void BusElementOut::SetVectorparamsas1dforoutwhenunconnected(
-    const std::string& value)
+void BusElementOut::SetVectorparamsas1dforoutwhenunconnected(const std::string& value)
 {
     m_Vectorparamsas1dforoutwhenunconnected = value;
 }

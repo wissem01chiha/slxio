@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HitCrossing::HitCrossing() {}
+HitCrossing::HitCrossing()
+{
+}
 
-HitCrossing::~HitCrossing() {}
+HitCrossing::~HitCrossing()
+{
+}
 
 const std::string& HitCrossing::GetHitcrossingoffset() const
 {
@@ -48,14 +52,20 @@ void HitCrossing::SetHitcrossingoutputtype(const std::string& value)
     m_Hitcrossingoutputtype = value;
 }
 
-const std::string& HitCrossing::GetZerocross() const { return m_Zerocross; }
+const std::string& HitCrossing::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void HitCrossing::SetZerocross(const std::string& value)
 {
     m_Zerocross = value;
 }
 
-const std::string& HitCrossing::GetSampletime() const { return m_Sampletime; }
+const std::string& HitCrossing::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void HitCrossing::SetSampletime(const std::string& value)
 {

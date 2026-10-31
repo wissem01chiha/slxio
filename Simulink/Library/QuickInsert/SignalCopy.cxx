@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SignalCopy::SignalCopy() {}
+SignalCopy::SignalCopy()
+{
+}
 
-SignalCopy::~SignalCopy() {}
+SignalCopy::~SignalCopy()
+{
+}
 
 const std::string& SignalCopy::GetConversionoutput() const
 {
@@ -28,7 +32,10 @@ void SignalCopy::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& SignalCopy::GetOverrideopt() const { return m_Overrideopt; }
+const std::string& SignalCopy::GetOverrideopt() const
+{
+    return m_Overrideopt;
+}
 
 void SignalCopy::SetOverrideopt(const std::string& value)
 {

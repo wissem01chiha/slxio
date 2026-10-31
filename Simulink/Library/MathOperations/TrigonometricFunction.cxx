@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TrigonometricFunction::TrigonometricFunction() {}
+TrigonometricFunction::TrigonometricFunction()
+{
+}
 
-TrigonometricFunction::~TrigonometricFunction() {}
+TrigonometricFunction::~TrigonometricFunction()
+{
+}
 
 const std::string& TrigonometricFunction::GetOperator() const
 {
@@ -88,14 +92,12 @@ void TrigonometricFunction::SetTabledatatypestr(const std::string& value)
     m_Tabledatatypestr = value;
 }
 
-const std::string&
-TrigonometricFunction::GetRemoveprotectionagainstoutofrangeinput() const
+const std::string& TrigonometricFunction::GetRemoveprotectionagainstoutofrangeinput() const
 {
     return m_Removeprotectionagainstoutofrangeinput;
 }
 
-void TrigonometricFunction::SetRemoveprotectionagainstoutofrangeinput(
-    const std::string& value)
+void TrigonometricFunction::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
 {
     m_Removeprotectionagainstoutofrangeinput = value;
 }

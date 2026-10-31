@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteFilter::DiscreteFilter() {}
+DiscreteFilter::DiscreteFilter()
+{
+}
 
-DiscreteFilter::~DiscreteFilter() {}
+DiscreteFilter::~DiscreteFilter()
+{
+}
 
 const std::string& DiscreteFilter::GetNumeratorsource() const
 {
@@ -18,7 +22,10 @@ void DiscreteFilter::SetNumeratorsource(const std::string& value)
     m_Numeratorsource = value;
 }
 
-const std::string& DiscreteFilter::GetNumerator() const { return m_Numerator; }
+const std::string& DiscreteFilter::GetNumerator() const
+{
+    return m_Numerator;
+}
 
 void DiscreteFilter::SetNumerator(const std::string& value)
 {
@@ -165,13 +172,25 @@ void DiscreteFilter::SetDencoefmax(const std::string& value)
     m_Dencoefmax = value;
 }
 
-const std::string& DiscreteFilter::GetOutmin() const { return m_Outmin; }
+const std::string& DiscreteFilter::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void DiscreteFilter::SetOutmin(const std::string& value) { m_Outmin = value; }
+void DiscreteFilter::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& DiscreteFilter::GetOutmax() const { return m_Outmax; }
+const std::string& DiscreteFilter::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void DiscreteFilter::SetOutmax(const std::string& value) { m_Outmax = value; }
+void DiscreteFilter::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& DiscreteFilter::GetStatedatatypestr() const
 {
@@ -263,16 +282,25 @@ void DiscreteFilter::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& DiscreteFilter::GetLockscale() const { return m_Lockscale; }
+const std::string& DiscreteFilter::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void DiscreteFilter::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& DiscreteFilter::GetRndmeth() const { return m_Rndmeth; }
+const std::string& DiscreteFilter::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void DiscreteFilter::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void DiscreteFilter::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& DiscreteFilter::GetSaturateonintegeroverflow() const
 {
@@ -284,7 +312,10 @@ void DiscreteFilter::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& DiscreteFilter::GetStatename() const { return m_Statename; }
+const std::string& DiscreteFilter::GetStatename() const
+{
+    return m_Statename;
+}
 
 void DiscreteFilter::SetStatename(const std::string& value)
 {

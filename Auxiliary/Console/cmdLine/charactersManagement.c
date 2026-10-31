@@ -48,15 +48,13 @@ int addChar(wchar_t** CommandLine, int key, unsigned int* cursorLocation)
          */
         if (sizeOfCmd && !((sizeOfCmd + 1) % 1024))
         {
-            *CommandLine =
-                realloc(*CommandLine, sizeof(wchar_t) * (sizeOfCmd + 1 + 1024));
+            *CommandLine = realloc(*CommandLine, sizeof(wchar_t) * (sizeOfCmd + 1 + 1024));
         }
         indexToMoveChar = sizeOfCmd;
         /* move each character to the next place */
         while (indexToMoveChar > *cursorLocation)
         {
-            (*CommandLine)[indexToMoveChar] =
-                (*CommandLine)[indexToMoveChar - 1];
+            (*CommandLine)[indexToMoveChar] = (*CommandLine)[indexToMoveChar - 1];
             indexToMoveChar--;
         }
         /* Add the new character to the command line. */
@@ -70,8 +68,7 @@ int addChar(wchar_t** CommandLine, int key, unsigned int* cursorLocation)
         setStringCapacities("ei");
         /* To prevent a lost cursor (if cursor reach the last column of the
          * term) */
-        if ((*CommandLine)[*cursorLocation] &&
-            (*CommandLine)[*cursorLocation] != L'\n')
+        if ((*CommandLine)[*cursorLocation] && (*CommandLine)[*cursorLocation] != L'\n')
         {
             /* Write the next character in the string then move the cursor left
              */
@@ -99,8 +96,7 @@ int rmChar(wchar_t* CommandLine, int key, unsigned int* cursorLocation)
      * command line Case Delete is pressed -> cursor must not be at the end of
      * line
      */
-    if ((*cursorLocation && key == SCI_BACKSPACE) ||
-        ((sizeOfCmd != *cursorLocation) && key == SCI_DELETE))
+    if ((*cursorLocation && key == SCI_BACKSPACE) || ((sizeOfCmd != *cursorLocation) && key == SCI_DELETE))
     {
         if (key == SCI_BACKSPACE)
         {
@@ -139,8 +135,7 @@ int deleteFromCursToEndLine(wchar_t* CommandLine, unsigned int* cursorLocation)
     return 0;
 }
 
-int deleteFromCursToBeginningLine(wchar_t* CommandLine,
-                                  unsigned int* cursorLocation)
+int deleteFromCursToBeginningLine(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
     while (*cursorLocation)
     {
@@ -149,18 +144,15 @@ int deleteFromCursToBeginningLine(wchar_t* CommandLine,
     return 0;
 }
 
-int deletePreviousWordFromCurs(wchar_t* CommandLine,
-                               unsigned int* cursorLocation)
+int deletePreviousWordFromCurs(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
     /* Delete void character before cursor */
-    while (*cursorLocation && (CommandLine[*cursorLocation - 1] == ' ' ||
-                               CommandLine[*cursorLocation - 1] == '\t'))
+    while (*cursorLocation && (CommandLine[*cursorLocation - 1] == ' ' || CommandLine[*cursorLocation - 1] == '\t'))
     {
         rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
     }
     /* Then delete word before cursor */
-    while (*cursorLocation && CommandLine[*cursorLocation - 1] != ' ' &&
-           CommandLine[*cursorLocation - 1] != '\t')
+    while (*cursorLocation && CommandLine[*cursorLocation - 1] != ' ' && CommandLine[*cursorLocation - 1] != '\t')
     {
         rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
     }

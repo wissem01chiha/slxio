@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Atan::Atan() {}
+Atan::Atan()
+{
+}
 
-Atan::~Atan() {}
+Atan::~Atan()
+{
+}
 
-const std::string& Atan::GetOperator() const { return m_Operator; }
+const std::string& Atan::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Atan::SetOperator(const std::string& value) { m_Operator = value; }
+void Atan::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Atan::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Atan::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Atan::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Atan::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Atan::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Atan::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Atan::GetAngleunit() const { return m_Angleunit; }
+const std::string& Atan::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Atan::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Atan::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Atan::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Atan::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Atan::GetSampletime() const { return m_Sampletime; }
+const std::string& Atan::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Atan::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Atan::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

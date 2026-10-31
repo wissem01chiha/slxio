@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TimedBasedLinearization::TimedBasedLinearization() {}
+TimedBasedLinearization::TimedBasedLinearization()
+{
+}
 
-TimedBasedLinearization::~TimedBasedLinearization() {}
+TimedBasedLinearization::~TimedBasedLinearization()
+{
+}
 
 const std::string& TimedBasedLinearization::GetLinearizationtime() const
 {

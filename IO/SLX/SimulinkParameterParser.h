@@ -28,8 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * <P Name="OverrideMode" Class="uint32">0U</P>
  * @endcode
  */
-class SLXIO_APIEXPORT SimulinkParameterParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
+class SLXIO_APIEXPORT SimulinkParameterParser final : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
 {
 public:
     SimulinkParameterParser() = default;

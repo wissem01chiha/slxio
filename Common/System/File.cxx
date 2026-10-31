@@ -9,14 +9,11 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-File::File(const std::string& path, Mode mode)
-    : InternalFileMode(mode), FileDescriptor(-1), FilePath(path), CachedSize(0)
+File::File(const std::string& path, Mode mode) : InternalFileMode(mode), FileDescriptor(-1), FilePath(path), CachedSize(0)
 {
 }
 
-File::File(const std::string& path)
-    : FileDescriptor(-1), InternalFileMode(Mode::Append), FilePath(path),
-      CachedSize(0)
+File::File(const std::string& path) : FileDescriptor(-1), InternalFileMode(Mode::Append), FilePath(path), CachedSize(0)
 {
 }
 
@@ -35,7 +32,10 @@ bool File::Exist(const std::string& path)
     return result;
 }
 
-bool File::Empty() const { return Size() == 0; }
+bool File::Empty() const
+{
+    return Size() == 0;
+}
 
 HError File::Write(std::vector<std::string>& message)
 {
@@ -54,8 +54,7 @@ HError File::Write(std::vector<std::string>& message)
 HError File::Open()
 {
     uv_fs_t req;
-    int err = uv_fs_open(uv_default_loop(), &req, FilePath.c_str(),
-                         GetFileMode(), 0, nullptr);
+    int err = uv_fs_open(uv_default_loop(), &req, FilePath.c_str(), GetFileMode(), 0, nullptr);
     uv_fs_req_cleanup(&req);
 
     if (err < 0)
@@ -64,8 +63,7 @@ HError File::Open()
     FileDescriptor = err;
 
     uv_fs_t statReq;
-    int statErr =
-        uv_fs_fstat(uv_default_loop(), &statReq, FileDescriptor, nullptr);
+    int statErr = uv_fs_fstat(uv_default_loop(), &statReq, FileDescriptor, nullptr);
     if (statErr >= 0)
     {
         uv_stat_t* statbuf = static_cast<uv_stat_t*>(statReq.ptr);
@@ -82,12 +80,9 @@ HError File::Read()
 
     InternalBuffer.resize(4096);
     uv_fs_t req;
-    uv_buf_t iov =
-        uv_buf_init(InternalBuffer.data(),
-                    static_cast<unsigned int>(InternalBuffer.size()));
+    uv_buf_t iov = uv_buf_init(InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
 
-    int err = uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1,
-                         nullptr);
+    int err = uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
     uv_fs_req_cleanup(&req);
 
     if (err < 0)
@@ -97,7 +92,10 @@ HError File::Read()
     return E_OK;
 }
 
-std::string File::GetFilePath() const { return FilePath; }
+std::string File::GetFilePath() const
+{
+    return FilePath;
+}
 
 HError File::Write(const std::string& message)
 {
@@ -105,11 +103,9 @@ HError File::Write(const std::string& message)
         return E_INVALID_FILE_MODE;
 
     uv_fs_t req;
-    uv_buf_t iov = uv_buf_init(const_cast<char*>(message.data()),
-                               static_cast<unsigned int>(message.size()));
+    uv_buf_t iov = uv_buf_init(const_cast<char*>(message.data()), static_cast<unsigned int>(message.size()));
 
-    int err = uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1,
-                          nullptr);
+    int err = uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
     uv_fs_req_cleanup(&req);
 
     if (err < 0)
@@ -148,7 +144,6 @@ Directory File::GetFileDirectory() const
 
 HError File::Move(const Directory& directory)
 {
-
     if (!directory.Exist())
         return E_DIRECTORY_NOT_EXSIT;
 
@@ -159,8 +154,7 @@ HError File::Move(const Directory& directory)
     path += GetFileName();
 
     uv_fs_t req;
-    int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(),
-                           path.c_str(), nullptr);
+    int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), path.c_str(), nullptr);
     uv_fs_req_cleanup(&req);
 
     if (err < 0)
@@ -228,8 +222,7 @@ HError File::Rename(const std::string& filename)
         return E_INVALID_ARGUMENT;
 
     uv_fs_t req;
-    int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(),
-                           filename.c_str(), nullptr);
+    int err = uv_fs_rename(uv_default_loop(), &req, FilePath.c_str(), filename.c_str(), nullptr);
     uv_fs_req_cleanup(&req);
 
     if (err < 0)
@@ -239,7 +232,10 @@ HError File::Rename(const std::string& filename)
     return E_OK;
 }
 
-void File::SetFileMode(const File::Mode mode) { InternalFileMode = mode; }
+void File::SetFileMode(const File::Mode mode)
+{
+    InternalFileMode = mode;
+}
 
 const std::string File::GetFileName() const
 {
@@ -247,7 +243,10 @@ const std::string File::GetFileName() const
     return (pos == std::string::npos) ? FilePath : FilePath.substr(pos + 1);
 }
 
-bool File::Exist() const { return Exist(FilePath); }
+bool File::Exist() const
+{
+    return Exist(FilePath);
+}
 
 const int File::GetFileMode()
 {
@@ -265,11 +264,20 @@ const int File::GetFileMode()
     return O_RDONLY;
 }
 
-std::vector<char> File::GetInternalBuffer() const { return InternalBuffer; }
+std::vector<char> File::GetInternalBuffer() const
+{
+    return InternalBuffer;
+}
 
-bool File::IsOpened() const { return FileDescriptor == -1; }
+bool File::IsOpened() const
+{
+    return FileDescriptor == -1;
+}
 
-UInt32 File::Size() const { return CachedSize; }
+UInt32 File::Size() const
+{
+    return CachedSize;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

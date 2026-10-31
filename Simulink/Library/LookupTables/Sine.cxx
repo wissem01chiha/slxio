@@ -4,15 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Sine::Sine() {}
+Sine::Sine()
+{
+}
 
-Sine::~Sine() {}
+Sine::~Sine()
+{
+}
 
-const std::string& Sine::GetFormula() const { return m_Formula; }
+const std::string& Sine::GetFormula() const
+{
+    return m_Formula;
+}
 
-void Sine::SetFormula(const std::string& value) { m_Formula = value; }
+void Sine::SetFormula(const std::string& value)
+{
+    m_Formula = value;
+}
 
-const std::string& Sine::GetNumdatapoints() const { return m_Numdatapoints; }
+const std::string& Sine::GetNumdatapoints() const
+{
+    return m_Numdatapoints;
+}
 
 void Sine::SetNumdatapoints(const std::string& value)
 {

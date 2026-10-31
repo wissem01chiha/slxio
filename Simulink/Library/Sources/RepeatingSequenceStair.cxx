@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RepeatingSequenceStair::RepeatingSequenceStair() {}
+RepeatingSequenceStair::RepeatingSequenceStair()
+{
+}
 
-RepeatingSequenceStair::~RepeatingSequenceStair() {}
+RepeatingSequenceStair::~RepeatingSequenceStair()
+{
+}
 
 const std::string& RepeatingSequenceStair::GetOutvalues() const
 {
@@ -18,7 +22,10 @@ void RepeatingSequenceStair::SetOutvalues(const std::string& value)
     m_Outvalues = value;
 }
 
-const std::string& RepeatingSequenceStair::GetTsamp() const { return m_Tsamp; }
+const std::string& RepeatingSequenceStair::GetTsamp() const
+{
+    return m_Tsamp;
+}
 
 void RepeatingSequenceStair::SetTsamp(const std::string& value)
 {

@@ -6,7 +6,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkBlockCategory::SimulinkBlockCategory()
 {
-
     for (auto cat : {DefaultCategory::AdditionalMathDiscrete,
                      DefaultCategory::CommonlyUsedBlocks,
                      DefaultCategory::Continuous,
@@ -47,8 +46,7 @@ void SimulinkBlockCategory::AddCategory(const std::string& name)
 
 bool SimulinkBlockCategory::HasCategory(const std::string& name) const
 {
-    return std::find(m_category.begin(), m_category.end(), name) !=
-           m_category.end();
+    return std::find(m_category.begin(), m_category.end(), name) != m_category.end();
 }
 
 std::vector<std::string> SimulinkBlockCategory::GetAllCategories() const

@@ -6,7 +6,6 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 std::string ToString(SimulinkBlockType type)
 {
-
     switch (type)
     {
     case SimulinkBlockType::Assertion:

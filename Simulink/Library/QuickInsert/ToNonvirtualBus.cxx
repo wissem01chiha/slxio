@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ToNonvirtualBus::ToNonvirtualBus() {}
+ToNonvirtualBus::ToNonvirtualBus()
+{
+}
 
-ToNonvirtualBus::~ToNonvirtualBus() {}
+ToNonvirtualBus::~ToNonvirtualBus()
+{
+}
 
 const std::string& ToNonvirtualBus::GetConversionoutput() const
 {

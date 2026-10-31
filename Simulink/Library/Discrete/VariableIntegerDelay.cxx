@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariableIntegerDelay::VariableIntegerDelay() {}
+VariableIntegerDelay::VariableIntegerDelay()
+{
+}
 
-VariableIntegerDelay::~VariableIntegerDelay() {}
+VariableIntegerDelay::~VariableIntegerDelay()
+{
+}
 
 const std::string& VariableIntegerDelay::GetDelaylengthsource() const
 {
@@ -98,14 +102,12 @@ void VariableIntegerDelay::SetDiagnosticfordelaylength(const std::string& value)
     m_Diagnosticfordelaylength = value;
 }
 
-const std::string&
-VariableIntegerDelay::GetRemovedelaylengthcheckingeneratedcode() const
+const std::string& VariableIntegerDelay::GetRemovedelaylengthcheckingeneratedcode() const
 {
     return m_Removedelaylengthcheckingeneratedcode;
 }
 
-void VariableIntegerDelay::SetRemovedelaylengthcheckingeneratedcode(
-    const std::string& value)
+void VariableIntegerDelay::SetRemovedelaylengthcheckingeneratedcode(const std::string& value)
 {
     m_Removedelaylengthcheckingeneratedcode = value;
 }
@@ -150,14 +152,12 @@ void VariableIntegerDelay::SetStatename(const std::string& value)
     m_Statename = value;
 }
 
-const std::string&
-VariableIntegerDelay::GetStatemustresolvetosignalobject() const
+const std::string& VariableIntegerDelay::GetStatemustresolvetosignalobject() const
 {
     return m_Statemustresolvetosignalobject;
 }
 
-void VariableIntegerDelay::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void VariableIntegerDelay::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -182,14 +182,12 @@ void VariableIntegerDelay::SetStatestorageclass(const std::string& value)
     m_Statestorageclass = value;
 }
 
-const std::string&
-VariableIntegerDelay::GetCodegenstatestoragetypequalifier() const
+const std::string& VariableIntegerDelay::GetCodegenstatestoragetypequalifier() const
 {
     return m_Codegenstatestoragetypequalifier;
 }
 
-void VariableIntegerDelay::SetCodegenstatestoragetypequalifier(
-    const std::string& value)
+void VariableIntegerDelay::SetCodegenstatestoragetypequalifier(const std::string& value)
 {
     m_Codegenstatestoragetypequalifier = value;
 }

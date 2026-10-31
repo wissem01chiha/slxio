@@ -7,8 +7,6 @@
 #include "SimulinkBlock.h"
 #include "SimulinkElementType.h"
 
-#include <memory>
-
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MathOperations::MathOperations() {}
+MathOperations::MathOperations()
+{
+}
 
-MathOperations::~MathOperations() {}
+MathOperations::~MathOperations()
+{
+}
 
 const std::string& MathOperations::GetShowportlabels() const
 {
@@ -58,7 +62,10 @@ void MathOperations::SetPermissions(const std::string& value)
     m_Permissions = value;
 }
 
-const std::string& MathOperations::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& MathOperations::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
 void MathOperations::SetErrorfcn(const std::string& value)
 {
@@ -285,9 +292,15 @@ void MathOperations::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& MathOperations::GetVariant() const { return m_Variant; }
+const std::string& MathOperations::GetVariant() const
+{
+    return m_Variant;
+}
 
-void MathOperations::SetVariant(const std::string& value) { m_Variant = value; }
+void MathOperations::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& MathOperations::GetVariantchoicesspecifier() const
 {
@@ -399,14 +412,12 @@ void MathOperations::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-MathOperations::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& MathOperations::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void MathOperations::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void MathOperations::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -421,9 +432,15 @@ void MathOperations::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& MathOperations::GetLatency() const { return m_Latency; }
+const std::string& MathOperations::GetLatency() const
+{
+    return m_Latency;
+}
 
-void MathOperations::SetLatency(const std::string& value) { m_Latency = value; }
+void MathOperations::SetLatency(const std::string& value)
+{
+    m_Latency = value;
+}
 
 const std::string& MathOperations::GetAutoframesizecalculation() const
 {

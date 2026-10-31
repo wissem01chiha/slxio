@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Atan2Cordic::Atan2Cordic() {}
+Atan2Cordic::Atan2Cordic()
+{
+}
 
-Atan2Cordic::~Atan2Cordic() {}
+Atan2Cordic::~Atan2Cordic()
+{
+}
 
-const std::string& Atan2Cordic::GetOperator() const { return m_Operator; }
+const std::string& Atan2Cordic::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Atan2Cordic::SetOperator(const std::string& value) { m_Operator = value; }
+void Atan2Cordic::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Atan2Cordic::GetApproximationmethod() const
 {
@@ -52,7 +62,10 @@ void Atan2Cordic::SetInterpmethod(const std::string& value)
     m_Interpmethod = value;
 }
 
-const std::string& Atan2Cordic::GetAngleunit() const { return m_Angleunit; }
+const std::string& Atan2Cordic::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
 void Atan2Cordic::SetAngleunit(const std::string& value)
 {
@@ -79,19 +92,20 @@ void Atan2Cordic::SetTabledatatypestr(const std::string& value)
     m_Tabledatatypestr = value;
 }
 
-const std::string&
-Atan2Cordic::GetRemoveprotectionagainstoutofrangeinput() const
+const std::string& Atan2Cordic::GetRemoveprotectionagainstoutofrangeinput() const
 {
     return m_Removeprotectionagainstoutofrangeinput;
 }
 
-void Atan2Cordic::SetRemoveprotectionagainstoutofrangeinput(
-    const std::string& value)
+void Atan2Cordic::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
 {
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Atan2Cordic::GetSampletime() const { return m_Sampletime; }
+const std::string& Atan2Cordic::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void Atan2Cordic::SetSampletime(const std::string& value)
 {

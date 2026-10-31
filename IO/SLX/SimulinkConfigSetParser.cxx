@@ -30,12 +30,9 @@ HError SimulinkConfigSetParser::setInputData(const xmlNodePtr data)
 
 HError SimulinkConfigSetParser::parse()
 {
-    for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr;
-         nodePtr_ = nodePtr_->next)
+    for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
     {
-
-        std::unique_ptr<SimulinkObjectParser> objParserPtr =
-            std::make_unique<SimulinkObjectParser>();
+        std::unique_ptr<SimulinkObjectParser> objParserPtr = std::make_unique<SimulinkObjectParser>();
         HError objInputStatus = objParserPtr->setInputData(nodePtr_);
         if (objInputStatus != E_OK)
         {
@@ -45,8 +42,7 @@ HError SimulinkConfigSetParser::parse()
         return objInputStatus;
         }
 
-        auto cfgPtr = std::dynamic_pointer_cast<SimulinkConfigSet>(
-            objParserPtr->getOutputData());
+        auto cfgPtr = std::dynamic_pointer_cast<SimulinkConfigSet>(objParserPtr->getOutputData());
         if (!cfgPtr)
         {
             // l.log(Logger::V_ERROR,

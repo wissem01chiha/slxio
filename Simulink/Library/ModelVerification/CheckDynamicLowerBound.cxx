@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckDynamicLowerBound::CheckDynamicLowerBound() {}
+CheckDynamicLowerBound::CheckDynamicLowerBound()
+{
+}
 
-CheckDynamicLowerBound::~CheckDynamicLowerBound() {}
+CheckDynamicLowerBound::~CheckDynamicLowerBound()
+{
+}
 
 const std::string& CheckDynamicLowerBound::GetEnabled() const
 {
@@ -48,7 +52,10 @@ void CheckDynamicLowerBound::SetExport(const std::string& value)
     m_Export = value;
 }
 
-const std::string& CheckDynamicLowerBound::GetIcon() const { return m_Icon; }
+const std::string& CheckDynamicLowerBound::GetIcon() const
+{
+    return m_Icon;
+}
 
 void CheckDynamicLowerBound::SetIcon(const std::string& value)
 {

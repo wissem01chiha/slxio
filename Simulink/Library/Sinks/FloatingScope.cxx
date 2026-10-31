@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FloatingScope::FloatingScope() {}
+FloatingScope::FloatingScope()
+{
+}
 
-FloatingScope::~FloatingScope() {}
+FloatingScope::~FloatingScope()
+{
+}
 
 const std::string& FloatingScope::GetOpenatsimulationstart() const
 {
@@ -48,7 +52,10 @@ void FloatingScope::SetLayoutdimensionsstring(const std::string& value)
     m_Layoutdimensionsstring = value;
 }
 
-const std::string& FloatingScope::GetSampletime() const { return m_Sampletime; }
+const std::string& FloatingScope::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void FloatingScope::SetSampletime(const std::string& value)
 {
@@ -95,7 +102,10 @@ void FloatingScope::SetAxesscalingnumupdates(const std::string& value)
     m_Axesscalingnumupdates = value;
 }
 
-const std::string& FloatingScope::GetTimespan() const { return m_Timespan; }
+const std::string& FloatingScope::GetTimespan() const
+{
+    return m_Timespan;
+}
 
 void FloatingScope::SetTimespan(const std::string& value)
 {
@@ -112,7 +122,10 @@ void FloatingScope::SetTimespanoverrunaction(const std::string& value)
     m_Timespanoverrunaction = value;
 }
 
-const std::string& FloatingScope::GetTimeunits() const { return m_Timeunits; }
+const std::string& FloatingScope::GetTimeunits() const
+{
+    return m_Timeunits;
+}
 
 void FloatingScope::SetTimeunits(const std::string& value)
 {
@@ -159,18 +172,30 @@ void FloatingScope::SetActivedisplaystring(const std::string& value)
     m_Activedisplaystring = value;
 }
 
-const std::string& FloatingScope::GetTitle() const { return m_Title; }
+const std::string& FloatingScope::GetTitle() const
+{
+    return m_Title;
+}
 
-void FloatingScope::SetTitle(const std::string& value) { m_Title = value; }
+void FloatingScope::SetTitle(const std::string& value)
+{
+    m_Title = value;
+}
 
-const std::string& FloatingScope::GetShowlegend() const { return m_Showlegend; }
+const std::string& FloatingScope::GetShowlegend() const
+{
+    return m_Showlegend;
+}
 
 void FloatingScope::SetShowlegend(const std::string& value)
 {
     m_Showlegend = value;
 }
 
-const std::string& FloatingScope::GetShowgrid() const { return m_Showgrid; }
+const std::string& FloatingScope::GetShowgrid() const
+{
+    return m_Showgrid;
+}
 
 void FloatingScope::SetShowgrid(const std::string& value)
 {
@@ -207,9 +232,15 @@ void FloatingScope::SetActivedisplayymaximum(const std::string& value)
     m_Activedisplayymaximum = value;
 }
 
-const std::string& FloatingScope::GetYlabel() const { return m_Ylabel; }
+const std::string& FloatingScope::GetYlabel() const
+{
+    return m_Ylabel;
+}
 
-void FloatingScope::SetYlabel(const std::string& value) { m_Ylabel = value; }
+void FloatingScope::SetYlabel(const std::string& value)
+{
+    m_Ylabel = value;
+}
 
 const std::string& FloatingScope::GetDatalogginglimitdatapoints() const
 {

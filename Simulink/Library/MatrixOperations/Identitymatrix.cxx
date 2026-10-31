@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Identitymatrix::Identitymatrix() {}
+Identitymatrix::Identitymatrix()
+{
+}
 
-Identitymatrix::~Identitymatrix() {}
+Identitymatrix::~Identitymatrix()
+{
+}
 
 const std::string& Identitymatrix::GetInheritoutputportattributes() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ExpandScalar::ExpandScalar() {}
+ExpandScalar::ExpandScalar()
+{
+}
 
-ExpandScalar::~ExpandScalar() {}
+ExpandScalar::~ExpandScalar()
+{
+}
 
 const std::string& ExpandScalar::GetElementvalue() const
 {
@@ -38,7 +42,10 @@ void ExpandScalar::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& ExpandScalar::GetSampletime() const { return m_Sampletime; }
+const std::string& ExpandScalar::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void ExpandScalar::SetSampletime(const std::string& value)
 {

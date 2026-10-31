@@ -55,8 +55,7 @@ static void saveAndResetShellAttr(struct termios* shellAttr)
     {
         if (tcsetattr(0, TCSAFLUSH, savedAttr) == -1)
         {
-            fprintf(stderr, "Cannot reset the shell attributes: %s\n",
-                    strerror(errno));
+            fprintf(stderr, "Cannot reset the shell attributes: %s\n", strerror(errno));
         }
         FREE(savedAttr);
         savedAttr = NULL;
@@ -68,7 +67,10 @@ static void saveShellAttr(struct termios* shellAttr)
     saveAndResetShellAttr(shellAttr);
 }
 
-static void resetShellAttr(void) { saveAndResetShellAttr(NULL); }
+static void resetShellAttr(void)
+{
+    saveAndResetShellAttr(NULL);
+}
 
 /* Set Raw mode or Canonic Mode */
 int setAttr(int bin)
@@ -87,8 +89,7 @@ int setAttr(int bin)
     }
     if (tcgetattr(0, &shellAttr) == -1)
     {
-        fprintf(stderr, "Cannot access to the term attributes: %s\n",
-                strerror(errno));
+        fprintf(stderr, "Cannot access to the term attributes: %s\n", strerror(errno));
         return -1;
     }
     saveShellAttr(&shellAttr);
@@ -102,8 +103,7 @@ int setAttr(int bin)
     }
     if (tcsetattr(0, TCSAFLUSH, &shellAttr) == -1)
     {
-        fprintf(stderr, "Cannot change the term attributes: %s\n",
-                strerror(errno));
+        fprintf(stderr, "Cannot change the term attributes: %s\n", strerror(errno));
         return -1;
     }
     return 0;
@@ -115,9 +115,10 @@ int initConsoleMode(int bin)
     /* TODO: Check more term */
     if (tgetent(NULL, getenv("TERM")) == ERR && tgetent(NULL, "xterm") == ERR)
     {
-        fprintf(stderr, "Cannot initialise termcaps.\nPlease check your "
-                        "variable TERM in your "
-                        "environment.\n");
+        fprintf(stderr,
+                "Cannot initialise termcaps.\nPlease check your "
+                "variable TERM in your "
+                "environment.\n");
         return -1;
     }
 

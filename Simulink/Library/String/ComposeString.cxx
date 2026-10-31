@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ComposeString::ComposeString() {}
+ComposeString::ComposeString()
+{
+}
 
-ComposeString::~ComposeString() {}
+ComposeString::~ComposeString()
+{
+}
 
-const std::string& ComposeString::GetFormat() const { return m_Format; }
+const std::string& ComposeString::GetFormat() const
+{
+    return m_Format;
+}
 
-void ComposeString::SetFormat(const std::string& value) { m_Format = value; }
+void ComposeString::SetFormat(const std::string& value)
+{
+    m_Format = value;
+}
 
 const std::string& ComposeString::GetOutdatatypestr() const
 {

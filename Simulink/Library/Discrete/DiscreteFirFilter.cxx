@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteFirFilter::DiscreteFirFilter() {}
+DiscreteFirFilter::DiscreteFirFilter()
+{
+}
 
-DiscreteFirFilter::~DiscreteFirFilter() {}
+DiscreteFirFilter::~DiscreteFirFilter()
+{
+}
 
 const std::string& DiscreteFirFilter::GetCoefsource() const
 {
@@ -88,28 +92,40 @@ void DiscreteFirFilter::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& DiscreteFirFilter::GetCoefmin() const { return m_Coefmin; }
+const std::string& DiscreteFirFilter::GetCoefmin() const
+{
+    return m_Coefmin;
+}
 
 void DiscreteFirFilter::SetCoefmin(const std::string& value)
 {
     m_Coefmin = value;
 }
 
-const std::string& DiscreteFirFilter::GetCoefmax() const { return m_Coefmax; }
+const std::string& DiscreteFirFilter::GetCoefmax() const
+{
+    return m_Coefmax;
+}
 
 void DiscreteFirFilter::SetCoefmax(const std::string& value)
 {
     m_Coefmax = value;
 }
 
-const std::string& DiscreteFirFilter::GetOutmin() const { return m_Outmin; }
+const std::string& DiscreteFirFilter::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void DiscreteFirFilter::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& DiscreteFirFilter::GetOutmax() const { return m_Outmax; }
+const std::string& DiscreteFirFilter::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void DiscreteFirFilter::SetOutmax(const std::string& value)
 {
@@ -186,7 +202,10 @@ void DiscreteFirFilter::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& DiscreteFirFilter::GetRndmeth() const { return m_Rndmeth; }
+const std::string& DiscreteFirFilter::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void DiscreteFirFilter::SetRndmeth(const std::string& value)
 {
@@ -218,8 +237,7 @@ const std::string& DiscreteFirFilter::GetStatemustresolvetosignalobject() const
     return m_Statemustresolvetosignalobject;
 }
 
-void DiscreteFirFilter::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DiscreteFirFilter::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -249,8 +267,7 @@ const std::string& DiscreteFirFilter::GetRtwstatestoragetypequalifier() const
     return m_Rtwstatestoragetypequalifier;
 }
 
-void DiscreteFirFilter::SetRtwstatestoragetypequalifier(
-    const std::string& value)
+void DiscreteFirFilter::SetRtwstatestoragetypequalifier(const std::string& value)
 {
     m_Rtwstatestoragetypequalifier = value;
 }

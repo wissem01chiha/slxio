@@ -19,7 +19,6 @@ TEST_CASE("Test default constructor")
 
 TEST_CASE("Test AcceptInsert Into other array")
 {
-
     auto array = std::make_shared<SimulinkArray>();
 
     array->SetName("ParentArray");
@@ -81,7 +80,6 @@ TEST_CASE("Test Array Set Parameter Name ")
 
 TEST_CASE("Test Array Immutable Set/Get Parameter ")
 {
-
     auto array = std::make_shared<SimulinkArray>();
 
     // create aSimulinkParameter object

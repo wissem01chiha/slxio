@@ -14,8 +14,7 @@ void IObservable::Attach(IObserver* obs)
 
 void IObservable::Detach(IObserver* obs)
 {
-    m_observers.erase(std::remove(m_observers.begin(), m_observers.end(), obs),
-                      m_observers.end());
+    m_observers.erase(std::remove(m_observers.begin(), m_observers.end(), obs), m_observers.end());
 }
 
 void IObservable::Update(const IObservationMessage& msg)

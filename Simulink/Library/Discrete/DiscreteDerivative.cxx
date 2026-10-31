@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscreteDerivative::DiscreteDerivative() {}
+DiscreteDerivative::DiscreteDerivative()
+{
+}
 
-DiscreteDerivative::~DiscreteDerivative() {}
+DiscreteDerivative::~DiscreteDerivative()
+{
+}
 
-const std::string& DiscreteDerivative::GetGainval() const { return m_Gainval; }
+const std::string& DiscreteDerivative::GetGainval() const
+{
+    return m_Gainval;
+}
 
 void DiscreteDerivative::SetGainval(const std::string& value)
 {
@@ -35,14 +42,20 @@ void DiscreteDerivative::SetInputprocessing(const std::string& value)
     m_Inputprocessing = value;
 }
 
-const std::string& DiscreteDerivative::GetOutmin() const { return m_Outmin; }
+const std::string& DiscreteDerivative::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void DiscreteDerivative::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& DiscreteDerivative::GetOutmax() const { return m_Outmax; }
+const std::string& DiscreteDerivative::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void DiscreteDerivative::SetOutmax(const std::string& value)
 {
@@ -69,14 +82,20 @@ void DiscreteDerivative::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& DiscreteDerivative::GetRndmeth() const { return m_Rndmeth; }
+const std::string& DiscreteDerivative::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void DiscreteDerivative::SetRndmeth(const std::string& value)
 {
     m_Rndmeth = value;
 }
 
-const std::string& DiscreteDerivative::GetDosatur() const { return m_Dosatur; }
+const std::string& DiscreteDerivative::GetDosatur() const
+{
+    return m_Dosatur;
+}
 
 void DiscreteDerivative::SetDosatur(const std::string& value)
 {

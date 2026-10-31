@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataTypeConversionInherited::DataTypeConversionInherited() {}
+DataTypeConversionInherited::DataTypeConversionInherited()
+{
+}
 
-DataTypeConversionInherited::~DataTypeConversionInherited() {}
+DataTypeConversionInherited::~DataTypeConversionInherited()
+{
+}
 
 const std::string& DataTypeConversionInherited::GetConvertrealworld() const
 {

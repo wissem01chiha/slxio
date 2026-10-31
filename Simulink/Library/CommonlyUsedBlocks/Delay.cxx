@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Delay::Delay() {}
+Delay::Delay()
+{
+}
 
-Delay::~Delay() {}
+Delay::~Delay()
+{
+}
 
 const std::string& Delay::GetDelaylengthsource() const
 {
@@ -18,9 +22,15 @@ void Delay::SetDelaylengthsource(const std::string& value)
     m_Delaylengthsource = value;
 }
 
-const std::string& Delay::GetDelaylength() const { return m_Delaylength; }
+const std::string& Delay::GetDelaylength() const
+{
+    return m_Delaylength;
+}
 
-void Delay::SetDelaylength(const std::string& value) { m_Delaylength = value; }
+void Delay::SetDelaylength(const std::string& value)
+{
+    m_Delaylength = value;
+}
 
 const std::string& Delay::GetDelaylengthupperlimit() const
 {
@@ -52,14 +62,20 @@ void Delay::SetInitialcondition(const std::string& value)
     m_Initialcondition = value;
 }
 
-const std::string& Delay::GetExternalreset() const { return m_Externalreset; }
+const std::string& Delay::GetExternalreset() const
+{
+    return m_Externalreset;
+}
 
 void Delay::SetExternalreset(const std::string& value)
 {
     m_Externalreset = value;
 }
 
-const std::string& Delay::GetShowenableport() const { return m_Showenableport; }
+const std::string& Delay::GetShowenableport() const
+{
+    return m_Showenableport;
+}
 
 void Delay::SetShowenableport(const std::string& value)
 {
@@ -116,13 +132,25 @@ void Delay::SetUsecircularbuffer(const std::string& value)
     m_Usecircularbuffer = value;
 }
 
-const std::string& Delay::GetSampletime() const { return m_Sampletime; }
+const std::string& Delay::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Delay::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Delay::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
-const std::string& Delay::GetStatename() const { return m_Statename; }
+const std::string& Delay::GetStatename() const
+{
+    return m_Statename;
+}
 
-void Delay::SetStatename(const std::string& value) { m_Statename = value; }
+void Delay::SetStatename(const std::string& value)
+{
+    m_Statename = value;
+}
 
 const std::string& Delay::GetStatemustresolvetosignalobject() const
 {

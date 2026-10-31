@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HitCrossingProbe::HitCrossingProbe() {}
+HitCrossingProbe::HitCrossingProbe()
+{
+}
 
-HitCrossingProbe::~HitCrossingProbe() {}
+HitCrossingProbe::~HitCrossingProbe()
+{
+}
 
 const std::string& HitCrossingProbe::GetHitcrossingoffset() const
 {

@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataTypeConversion::DataTypeConversion() {}
+DataTypeConversion::DataTypeConversion()
+{
+}
 
-DataTypeConversion::~DataTypeConversion() {}
+DataTypeConversion::~DataTypeConversion()
+{
+}
 
-const std::string& DataTypeConversion::GetOutmin() const { return m_Outmin; }
+const std::string& DataTypeConversion::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void DataTypeConversion::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& DataTypeConversion::GetOutmax() const { return m_Outmax; }
+const std::string& DataTypeConversion::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void DataTypeConversion::SetOutmax(const std::string& value)
 {
@@ -52,7 +62,10 @@ void DataTypeConversion::SetConvertrealworld(const std::string& value)
     m_Convertrealworld = value;
 }
 
-const std::string& DataTypeConversion::GetRndmeth() const { return m_Rndmeth; }
+const std::string& DataTypeConversion::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void DataTypeConversion::SetRndmeth(const std::string& value)
 {

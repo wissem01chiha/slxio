@@ -4,17 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CompareToConstant::CompareToConstant() {}
+CompareToConstant::CompareToConstant()
+{
+}
 
-CompareToConstant::~CompareToConstant() {}
+CompareToConstant::~CompareToConstant()
+{
+}
 
-const std::string& CompareToConstant::GetRelop() const { return m_Relop; }
+const std::string& CompareToConstant::GetRelop() const
+{
+    return m_Relop;
+}
 
-void CompareToConstant::SetRelop(const std::string& value) { m_Relop = value; }
+void CompareToConstant::SetRelop(const std::string& value)
+{
+    m_Relop = value;
+}
 
-const std::string& CompareToConstant::GetConst() const { return m_Const; }
+const std::string& CompareToConstant::GetConst() const
+{
+    return m_Const;
+}
 
-void CompareToConstant::SetConst(const std::string& value) { m_Const = value; }
+void CompareToConstant::SetConst(const std::string& value)
+{
+    m_Const = value;
+}
 
 const std::string& CompareToConstant::GetOutdatatypestr() const
 {

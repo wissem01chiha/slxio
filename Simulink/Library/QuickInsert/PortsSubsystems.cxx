@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-PortsSubsystems::PortsSubsystems() {}
+PortsSubsystems::PortsSubsystems()
+{
+}
 
-PortsSubsystems::~PortsSubsystems() {}
+PortsSubsystems::~PortsSubsystems()
+{
+}
 
 const std::string& PortsSubsystems::GetShowportlabels() const
 {
@@ -58,7 +62,10 @@ void PortsSubsystems::SetPermissions(const std::string& value)
     m_Permissions = value;
 }
 
-const std::string& PortsSubsystems::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& PortsSubsystems::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
 void PortsSubsystems::SetErrorfcn(const std::string& value)
 {
@@ -90,8 +97,7 @@ const std::string& PortsSubsystems::GetShowsubsystemreinitializeports() const
     return m_Showsubsystemreinitializeports;
 }
 
-void PortsSubsystems::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void PortsSubsystems::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -286,7 +292,10 @@ void PortsSubsystems::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& PortsSubsystems::GetVariant() const { return m_Variant; }
+const std::string& PortsSubsystems::GetVariant() const
+{
+    return m_Variant;
+}
 
 void PortsSubsystems::SetVariant(const std::string& value)
 {
@@ -403,14 +412,12 @@ void PortsSubsystems::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-PortsSubsystems::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& PortsSubsystems::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void PortsSubsystems::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void PortsSubsystems::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -425,7 +432,10 @@ void PortsSubsystems::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& PortsSubsystems::GetLatency() const { return m_Latency; }
+const std::string& PortsSubsystems::GetLatency() const
+{
+    return m_Latency;
+}
 
 void PortsSubsystems::SetLatency(const std::string& value)
 {

@@ -4,15 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BitwiseNot::BitwiseNot() {}
+BitwiseNot::BitwiseNot()
+{
+}
 
-BitwiseNot::~BitwiseNot() {}
+BitwiseNot::~BitwiseNot()
+{
+}
 
-const std::string& BitwiseNot::GetLogicop() const { return m_Logicop; }
+const std::string& BitwiseNot::GetLogicop() const
+{
+    return m_Logicop;
+}
 
-void BitwiseNot::SetLogicop(const std::string& value) { m_Logicop = value; }
+void BitwiseNot::SetLogicop(const std::string& value)
+{
+    m_Logicop = value;
+}
 
-const std::string& BitwiseNot::GetUsebitmask() const { return m_Usebitmask; }
+const std::string& BitwiseNot::GetUsebitmask() const
+{
+    return m_Usebitmask;
+}
 
 void BitwiseNot::SetUsebitmask(const std::string& value)
 {
@@ -29,9 +42,15 @@ void BitwiseNot::SetNuminputports(const std::string& value)
     m_Numinputports = value;
 }
 
-const std::string& BitwiseNot::GetBitmask() const { return m_Bitmask; }
+const std::string& BitwiseNot::GetBitmask() const
+{
+    return m_Bitmask;
+}
 
-void BitwiseNot::SetBitmask(const std::string& value) { m_Bitmask = value; }
+void BitwiseNot::SetBitmask(const std::string& value)
+{
+    m_Bitmask = value;
+}
 
 const std::string& BitwiseNot::GetBitmaskrealworld() const
 {

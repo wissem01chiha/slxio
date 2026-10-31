@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Reshape::Reshape() {}
+Reshape::Reshape()
+{
+}
 
-Reshape::~Reshape() {}
+Reshape::~Reshape()
+{
+}
 
 const std::string& Reshape::GetOutputdimensionality() const
 {

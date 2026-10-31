@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataStoreMemory::DataStoreMemory() {}
+DataStoreMemory::DataStoreMemory()
+{
+}
 
-DataStoreMemory::~DataStoreMemory() {}
+DataStoreMemory::~DataStoreMemory()
+{
+}
 
 const std::string& DataStoreMemory::GetDatastorename() const
 {
@@ -73,8 +77,7 @@ const std::string& DataStoreMemory::GetStatemustresolvetosignalobject() const
     return m_Statemustresolvetosignalobject;
 }
 
-void DataStoreMemory::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void DataStoreMemory::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -139,13 +142,25 @@ void DataStoreMemory::SetShowadditionalparam(const std::string& value)
     m_Showadditionalparam = value;
 }
 
-const std::string& DataStoreMemory::GetOutmin() const { return m_Outmin; }
+const std::string& DataStoreMemory::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void DataStoreMemory::SetOutmin(const std::string& value) { m_Outmin = value; }
+void DataStoreMemory::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& DataStoreMemory::GetOutmax() const { return m_Outmax; }
+const std::string& DataStoreMemory::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void DataStoreMemory::SetOutmax(const std::string& value) { m_Outmax = value; }
+void DataStoreMemory::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& DataStoreMemory::GetOutdatatypestr() const
 {
@@ -157,7 +172,10 @@ void DataStoreMemory::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& DataStoreMemory::GetLockscale() const { return m_Lockscale; }
+const std::string& DataStoreMemory::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void DataStoreMemory::SetLockscale(const std::string& value)
 {

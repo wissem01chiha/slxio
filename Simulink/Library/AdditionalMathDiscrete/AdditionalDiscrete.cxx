@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-AdditionalDiscrete::AdditionalDiscrete() {}
+AdditionalDiscrete::AdditionalDiscrete()
+{
+}
 
-AdditionalDiscrete::~AdditionalDiscrete() {}
+AdditionalDiscrete::~AdditionalDiscrete()
+{
+}
 
 const std::string& AdditionalDiscrete::GetShowportlabels() const
 {
@@ -73,8 +77,7 @@ const std::string& AdditionalDiscrete::GetPermithierarchicalresolution() const
     return m_Permithierarchicalresolution;
 }
 
-void AdditionalDiscrete::SetPermithierarchicalresolution(
-    const std::string& value)
+void AdditionalDiscrete::SetPermithierarchicalresolution(const std::string& value)
 {
     m_Permithierarchicalresolution = value;
 }
@@ -94,8 +97,7 @@ const std::string& AdditionalDiscrete::GetShowsubsystemreinitializeports() const
     return m_Showsubsystemreinitializeports;
 }
 
-void AdditionalDiscrete::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void AdditionalDiscrete::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -290,7 +292,10 @@ void AdditionalDiscrete::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& AdditionalDiscrete::GetVariant() const { return m_Variant; }
+const std::string& AdditionalDiscrete::GetVariant() const
+{
+    return m_Variant;
+}
 
 void AdditionalDiscrete::SetVariant(const std::string& value)
 {
@@ -407,14 +412,12 @@ void AdditionalDiscrete::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-AdditionalDiscrete::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& AdditionalDiscrete::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void AdditionalDiscrete::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void AdditionalDiscrete::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -429,7 +432,10 @@ void AdditionalDiscrete::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& AdditionalDiscrete::GetLatency() const { return m_Latency; }
+const std::string& AdditionalDiscrete::GetLatency() const
+{
+    return m_Latency;
+}
 
 void AdditionalDiscrete::SetLatency(const std::string& value)
 {

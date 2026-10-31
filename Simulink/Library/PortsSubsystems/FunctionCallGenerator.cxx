@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FunctionCallGenerator::FunctionCallGenerator() {}
+FunctionCallGenerator::FunctionCallGenerator()
+{
+}
 
-FunctionCallGenerator::~FunctionCallGenerator() {}
+FunctionCallGenerator::~FunctionCallGenerator()
+{
+}
 
 const std::string& FunctionCallGenerator::GetSampleTime() const
 {

@@ -17,9 +17,15 @@ StateflowBlock::StateflowBlock(StateflowChart& chart)
     this->chart = std::make_shared<StateflowChart>();
 }
 
-std::shared_ptr<StateflowChart> StateflowBlock::getChart() { return chart; }
+std::shared_ptr<StateflowChart> StateflowBlock::getChart()
+{
+    return chart;
+}
 
-HError StateflowBlock::RemoveElement() { return E_OK; }
+HError StateflowBlock::RemoveElement()
+{
+    return E_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

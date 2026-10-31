@@ -8,8 +8,12 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class ArchiveManagerTestFixture
 {
 public:
-    ArchiveManagerTestFixture() {}
-    ~ArchiveManagerTestFixture() {}
+    ArchiveManagerTestFixture()
+    {
+    }
+    ~ArchiveManagerTestFixture()
+    {
+    }
 
 private:
 };

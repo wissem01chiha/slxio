@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BusSelector::BusSelector() {}
+BusSelector::BusSelector()
+{
+}
 
-BusSelector::~BusSelector() {}
+BusSelector::~BusSelector()
+{
+}
 
 const std::string& BusSelector::GetOutputsignals() const
 {
@@ -18,7 +22,10 @@ void BusSelector::SetOutputsignals(const std::string& value)
     m_Outputsignals = value;
 }
 
-const std::string& BusSelector::GetOutputasbus() const { return m_Outputasbus; }
+const std::string& BusSelector::GetOutputasbus() const
+{
+    return m_Outputasbus;
+}
 
 void BusSelector::SetOutputasbus(const std::string& value)
 {

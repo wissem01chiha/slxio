@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HitScheduler::HitScheduler() {}
+HitScheduler::HitScheduler()
+{
+}
 
-HitScheduler::~HitScheduler() {}
+HitScheduler::~HitScheduler()
+{
+}
 
 const std::string& HitScheduler::GetHitscheduleroutputtype() const
 {

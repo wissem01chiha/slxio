@@ -4,8 +4,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FileLogger::FileLogger(const std::string& fileName)
-    : m_fileName(fileName), m_logLevel(LogLevelType::LOG_INFO)
+FileLogger::FileLogger(const std::string& fileName) : m_fileName(fileName), m_logLevel(LogLevelType::LOG_INFO)
 {
 }
 
@@ -31,9 +30,15 @@ void FileLogger::Log(const ILogMessage& msg)
     m_file << msg.ToString() << std::endl;
 }
 
-void FileLogger::SetLogLevel(LogLevelType level) { m_logLevel = level; }
+void FileLogger::SetLogLevel(LogLevelType level)
+{
+    m_logLevel = level;
+}
 
-LogLevelType FileLogger::GetLogLevel() const { return m_logLevel; }
+LogLevelType FileLogger::GetLogLevel() const
+{
+    return m_logLevel;
+}
 
 FileLogger::~FileLogger() noexcept = default;
 

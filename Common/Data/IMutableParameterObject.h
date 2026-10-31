@@ -17,8 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Specialization for mutable parameters.
  * Adds setter methods for parameters that can be changed.
  */
-template <typename T>
-class SLXIO_APIEXPORT IMutableParameterObject : public IParameterObject<T>
+template <typename T> class SLXIO_APIEXPORT IMutableParameterObject : public IParameterObject<T>
 {
 public:
     /** Set a new value */

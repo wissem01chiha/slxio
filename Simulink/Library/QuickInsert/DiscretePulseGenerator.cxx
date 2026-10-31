@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscretePulseGenerator::DiscretePulseGenerator() {}
+DiscretePulseGenerator::DiscretePulseGenerator()
+{
+}
 
-DiscretePulseGenerator::~DiscretePulseGenerator() {}
+DiscretePulseGenerator::~DiscretePulseGenerator()
+{
+}
 
 const std::string& DiscretePulseGenerator::GetPulsetype() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariantStart::VariantStart() {}
+VariantStart::VariantStart()
+{
+}
 
-VariantStart::~VariantStart() {}
+VariantStart::~VariantStart()
+{
+}
 
 const std::string& VariantStart::GetVariantcontrols() const
 {

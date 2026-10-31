@@ -44,8 +44,7 @@ int deleteFromCursToEndLine(wchar_t* CommandLine, unsigned int* cursorLocation);
  * @param cursor position in the string.
  * @return user input.
  */
-int deleteFromCursToBeginningLine(wchar_t* CommandLine,
-                                  unsigned int* cursorLocation);
+int deleteFromCursToBeginningLine(wchar_t* CommandLine, unsigned int* cursorLocation);
 
 /**
  * Delete previous word from cursor.
@@ -53,6 +52,5 @@ int deleteFromCursToBeginningLine(wchar_t* CommandLine,
  * @param cursor location.
  * @return user input.
  */
-int deletePreviousWordFromCurs(wchar_t* CommandLine,
-                               unsigned int* cursorLocation);
+int deletePreviousWordFromCurs(wchar_t* CommandLine, unsigned int* cursorLocation);
 #endif /* !CHAR_CTL_H_ */

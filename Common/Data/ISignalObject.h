@@ -42,7 +42,10 @@ public:
         m_logger = logger;
         return E_OK;
     };
-    const ILogger* GetLogger() const { return m_logger; };
+    const ILogger* GetLogger() const
+    {
+        return m_logger;
+    };
 
     ISignalObject();
 

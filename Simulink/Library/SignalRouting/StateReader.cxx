@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StateReader::StateReader() {}
+StateReader::StateReader()
+{
+}
 
-StateReader::~StateReader() {}
+StateReader::~StateReader()
+{
+}
 
 const std::string& StateReader::GetStateownerblock() const
 {
@@ -18,7 +22,10 @@ void StateReader::SetStateownerblock(const std::string& value)
     m_Stateownerblock = value;
 }
 
-const std::string& StateReader::GetStatename() const { return m_Statename; }
+const std::string& StateReader::GetStatename() const
+{
+    return m_Statename;
+}
 
 void StateReader::SetStatename(const std::string& value)
 {

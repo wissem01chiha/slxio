@@ -105,8 +105,7 @@ public:
     static inline const char* SECTION_machine = "machine";
 
     /** @brief  Block parameter defaults section. */
-    static inline const char* SECTION_BlockParameterDefaults =
-        "BlockParameterDefaults";
+    static inline const char* SECTION_BlockParameterDefaults = "BlockParameterDefaults";
 
     /** @brief  Block defaults section. */
     static inline const char* SECTION_BlockDefaults = "BlockDefaults";
@@ -284,15 +283,13 @@ public:
     static inline const char* PARAM_Value = "Value";
 
     /** @brief  "Simulink mask parameter" parameter used in objects. */
-    static inline const char* PARAM_Simulink_MaskParameter =
-        "Simulink.MaskParameter";
+    static inline const char* PARAM_Simulink_MaskParameter = "Simulink.MaskParameter";
 
     /** @brief  Simulink mask parameter. */
     static inline const char* PARAM_Simulink_Mask = "Simulink.Mask";
 
     /** @brief  Parameter storing the computed model version. */
-    static inline const char* PARAM_ComputedModelVersion =
-        "ComputedModelVersion";
+    static inline const char* PARAM_ComputedModelVersion = "ComputedModelVersion";
 
     /** @brief  Parameter storing the model's version. */
     static inline const char* PARAM_Version = "Version";
@@ -364,8 +361,7 @@ public:
     static inline const char* TYPE_CombinatorialLogic = "CombinatorialLogic";
 
     /** @brief  Simulink block type 'ComplexToMagnitudeAngle'. */
-    static inline const char* TYPE_ComplexToMagnitudeAngle =
-        "ComplexToMagnitudeAngle";
+    static inline const char* TYPE_ComplexToMagnitudeAngle = "ComplexToMagnitudeAngle";
 
     /** @brief  Simulink block type 'ComplexToRealImag'. */
     static inline const char* TYPE_ComplexToRealImag = "ComplexToRealImag";
@@ -404,8 +400,7 @@ public:
     static inline const char* TYPE_DiscreteIntegrator = "DiscreteIntegrator";
 
     /** @brief  Simulink block type 'DiscretePulseGenerator'. */
-    static inline const char* TYPE_DiscretePulseGenerator =
-        "DiscretePulseGenerator";
+    static inline const char* TYPE_DiscretePulseGenerator = "DiscretePulseGenerator";
 
     /** @brief  Simulink block type 'DiscreteStateSpace'. */
     static inline const char* TYPE_DiscreteStateSpace = "DiscreteStateSpace";
@@ -477,8 +472,7 @@ public:
     static inline const char* TYPE_MATLABFcn = "MATLABFcn";
 
     /** @brief  Simulink block type 'MagnitudeAngleToComplex'. */
-    static inline const char* TYPE_MagnitudeAngleToComplex =
-        "MagnitudeAngleToComplex";
+    static inline const char* TYPE_MagnitudeAngleToComplex = "MagnitudeAngleToComplex";
 
     /** @brief  Simulink block type 'Math'. */
     static inline const char* TYPE_Math = "Math";
@@ -625,8 +619,7 @@ public:
     static inline const char* TYPE_numOutPorts = "numOutPorts";
 
     /** @brief  Simulink block type 'VariableTransportDelay'. */
-    static inline const char* TYPE_VariableTransportDelay =
-        "VariableTransportDelay";
+    static inline const char* TYPE_VariableTransportDelay = "VariableTransportDelay";
 
     /** @brief  Simulink block type 'Width'. */
     static inline const char* TYPE_Width = "Width";

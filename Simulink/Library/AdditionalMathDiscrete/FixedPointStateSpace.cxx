@@ -4,25 +4,53 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FixedPointStateSpace::FixedPointStateSpace() {}
+FixedPointStateSpace::FixedPointStateSpace()
+{
+}
 
-FixedPointStateSpace::~FixedPointStateSpace() {}
+FixedPointStateSpace::~FixedPointStateSpace()
+{
+}
 
-const std::string& FixedPointStateSpace::GetA() const { return m_A; }
+const std::string& FixedPointStateSpace::GetA() const
+{
+    return m_A;
+}
 
-void FixedPointStateSpace::SetA(const std::string& value) { m_A = value; }
+void FixedPointStateSpace::SetA(const std::string& value)
+{
+    m_A = value;
+}
 
-const std::string& FixedPointStateSpace::GetB() const { return m_B; }
+const std::string& FixedPointStateSpace::GetB() const
+{
+    return m_B;
+}
 
-void FixedPointStateSpace::SetB(const std::string& value) { m_B = value; }
+void FixedPointStateSpace::SetB(const std::string& value)
+{
+    m_B = value;
+}
 
-const std::string& FixedPointStateSpace::GetC() const { return m_C; }
+const std::string& FixedPointStateSpace::GetC() const
+{
+    return m_C;
+}
 
-void FixedPointStateSpace::SetC(const std::string& value) { m_C = value; }
+void FixedPointStateSpace::SetC(const std::string& value)
+{
+    m_C = value;
+}
 
-const std::string& FixedPointStateSpace::GetD() const { return m_D; }
+const std::string& FixedPointStateSpace::GetD() const
+{
+    return m_D;
+}
 
-void FixedPointStateSpace::SetD(const std::string& value) { m_D = value; }
+void FixedPointStateSpace::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
 const std::string& FixedPointStateSpace::GetInitialcondition() const
 {

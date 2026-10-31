@@ -23,8 +23,7 @@ class SLXIO_APIEXPORT StateflowTransition final
 {
 public:
     StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);
-    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src,
-                        const std::shared_ptr<StateflowNodeBase>& dst);
+    StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src, const std::shared_ptr<StateflowNodeBase>& dst);
 
     std::shared_ptr<StateflowNodeBase> getSrc() const;
     std::shared_ptr<StateflowNodeBase> getDst() const;

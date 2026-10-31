@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-EnabledDelay::EnabledDelay() {}
+EnabledDelay::EnabledDelay()
+{
+}
 
-EnabledDelay::~EnabledDelay() {}
+EnabledDelay::~EnabledDelay()
+{
+}
 
 const std::string& EnabledDelay::GetDelaylengthsource() const
 {
@@ -98,14 +102,12 @@ void EnabledDelay::SetDiagnosticfordelaylength(const std::string& value)
     m_Diagnosticfordelaylength = value;
 }
 
-const std::string&
-EnabledDelay::GetRemovedelaylengthcheckingeneratedcode() const
+const std::string& EnabledDelay::GetRemovedelaylengthcheckingeneratedcode() const
 {
     return m_Removedelaylengthcheckingeneratedcode;
 }
 
-void EnabledDelay::SetRemovedelaylengthcheckingeneratedcode(
-    const std::string& value)
+void EnabledDelay::SetRemovedelaylengthcheckingeneratedcode(const std::string& value)
 {
     m_Removedelaylengthcheckingeneratedcode = value;
 }
@@ -130,14 +132,20 @@ void EnabledDelay::SetUsecircularbuffer(const std::string& value)
     m_Usecircularbuffer = value;
 }
 
-const std::string& EnabledDelay::GetSampletime() const { return m_Sampletime; }
+const std::string& EnabledDelay::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void EnabledDelay::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& EnabledDelay::GetStatename() const { return m_Statename; }
+const std::string& EnabledDelay::GetStatename() const
+{
+    return m_Statename;
+}
 
 void EnabledDelay::SetStatename(const std::string& value)
 {

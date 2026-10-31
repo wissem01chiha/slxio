@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckDynamicUpperBound::CheckDynamicUpperBound() {}
+CheckDynamicUpperBound::CheckDynamicUpperBound()
+{
+}
 
-CheckDynamicUpperBound::~CheckDynamicUpperBound() {}
+CheckDynamicUpperBound::~CheckDynamicUpperBound()
+{
+}
 
 const std::string& CheckDynamicUpperBound::GetEnabled() const
 {
@@ -48,7 +52,10 @@ void CheckDynamicUpperBound::SetExport(const std::string& value)
     m_Export = value;
 }
 
-const std::string& CheckDynamicUpperBound::GetIcon() const { return m_Icon; }
+const std::string& CheckDynamicUpperBound::GetIcon() const
+{
+    return m_Icon;
+}
 
 void CheckDynamicUpperBound::SetIcon(const std::string& value)
 {

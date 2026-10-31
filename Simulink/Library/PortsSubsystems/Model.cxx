@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Model::Model() {}
+Model::Model()
+{
+}
 
-Model::~Model() {}
+Model::~Model()
+{
+}
 
 const std::string& Model::GetModelnamedialog() const
 {
@@ -18,13 +22,25 @@ void Model::SetModelnamedialog(const std::string& value)
     m_Modelnamedialog = value;
 }
 
-const std::string& Model::GetModelfile() const { return m_Modelfile; }
+const std::string& Model::GetModelfile() const
+{
+    return m_Modelfile;
+}
 
-void Model::SetModelfile(const std::string& value) { m_Modelfile = value; }
+void Model::SetModelfile(const std::string& value)
+{
+    m_Modelfile = value;
+}
 
-const std::string& Model::GetModelname() const { return m_Modelname; }
+const std::string& Model::GetModelname() const
+{
+    return m_Modelname;
+}
 
-void Model::SetModelname(const std::string& value) { m_Modelname = value; }
+void Model::SetModelname(const std::string& value)
+{
+    m_Modelname = value;
+}
 
 const std::string& Model::GetParameterargumentnames() const
 {
@@ -46,7 +62,10 @@ void Model::SetParameterargumentvalues(const std::string& value)
     m_Parameterargumentvalues = value;
 }
 
-const std::string& Model::GetSimulationmode() const { return m_Simulationmode; }
+const std::string& Model::GetSimulationmode() const
+{
+    return m_Simulationmode;
+}
 
 void Model::SetSimulationmode(const std::string& value)
 {
@@ -93,7 +112,10 @@ void Model::SetShowmodelterminateport(const std::string& value)
     m_Showmodelterminateport = value;
 }
 
-const std::string& Model::GetSchedulerates() const { return m_Schedulerates; }
+const std::string& Model::GetSchedulerates() const
+{
+    return m_Schedulerates;
+}
 
 void Model::SetSchedulerates(const std::string& value)
 {
@@ -130,18 +152,30 @@ void Model::SetAutofillportdiscreterates(const std::string& value)
     m_Autofillportdiscreterates = value;
 }
 
-const std::string& Model::GetCodeinterface() const { return m_Codeinterface; }
+const std::string& Model::GetCodeinterface() const
+{
+    return m_Codeinterface;
+}
 
 void Model::SetCodeinterface(const std::string& value)
 {
     m_Codeinterface = value;
 }
 
-const std::string& Model::GetVariant() const { return m_Variant; }
+const std::string& Model::GetVariant() const
+{
+    return m_Variant;
+}
 
-void Model::SetVariant(const std::string& value) { m_Variant = value; }
+void Model::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
-const std::string& Model::GetVariantcontrol() const { return m_Variantcontrol; }
+const std::string& Model::GetVariantcontrol() const
+{
+    return m_Variantcontrol;
+}
 
 void Model::SetVariantcontrol(const std::string& value)
 {

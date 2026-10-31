@@ -25,8 +25,7 @@ TEST_CASE("Version comparison methods")
 
 TEST_CASE("Version string format")
 {
-    std::string expected = std::to_string(Version::GetMajorVersion()) + "." +
-                           std::to_string(Version::GetMinorVersion()) + "." +
+    std::string expected = std::to_string(Version::GetMajorVersion()) + "." + std::to_string(Version::GetMinorVersion()) + "." +
                            std::to_string(Version::GetPatchVersion());
 
     CHECK(Version::GetVersionString() == expected);

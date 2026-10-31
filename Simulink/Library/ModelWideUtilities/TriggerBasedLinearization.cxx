@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TriggerBasedLinearization::TriggerBasedLinearization() {}
+TriggerBasedLinearization::TriggerBasedLinearization()
+{
+}
 
-TriggerBasedLinearization::~TriggerBasedLinearization() {}
+TriggerBasedLinearization::~TriggerBasedLinearization()
+{
+}
 
 const std::string& TriggerBasedLinearization::GetTriggertype() const
 {

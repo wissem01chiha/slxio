@@ -4,20 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SumOfElements::SumOfElements() {}
+SumOfElements::SumOfElements()
+{
+}
 
-SumOfElements::~SumOfElements() {}
+SumOfElements::~SumOfElements()
+{
+}
 
-const std::string& SumOfElements::GetIconshape() const { return m_Iconshape; }
+const std::string& SumOfElements::GetIconshape() const
+{
+    return m_Iconshape;
+}
 
 void SumOfElements::SetIconshape(const std::string& value)
 {
     m_Iconshape = value;
 }
 
-const std::string& SumOfElements::GetInputs() const { return m_Inputs; }
+const std::string& SumOfElements::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void SumOfElements::SetInputs(const std::string& value) { m_Inputs = value; }
+void SumOfElements::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
 const std::string& SumOfElements::GetCollapsemode() const
 {
@@ -39,13 +52,25 @@ void SumOfElements::SetCollapsedim(const std::string& value)
     m_Collapsedim = value;
 }
 
-const std::string& SumOfElements::GetOutmin() const { return m_Outmin; }
+const std::string& SumOfElements::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void SumOfElements::SetOutmin(const std::string& value) { m_Outmin = value; }
+void SumOfElements::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& SumOfElements::GetOutmax() const { return m_Outmax; }
+const std::string& SumOfElements::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void SumOfElements::SetOutmax(const std::string& value) { m_Outmax = value; }
+void SumOfElements::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& SumOfElements::GetOutdatatypestr() const
 {
@@ -77,16 +102,25 @@ void SumOfElements::SetInputsamedt(const std::string& value)
     m_Inputsamedt = value;
 }
 
-const std::string& SumOfElements::GetLockscale() const { return m_Lockscale; }
+const std::string& SumOfElements::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void SumOfElements::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& SumOfElements::GetRndmeth() const { return m_Rndmeth; }
+const std::string& SumOfElements::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void SumOfElements::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void SumOfElements::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& SumOfElements::GetSaturateonintegeroverflow() const
 {
@@ -98,7 +132,10 @@ void SumOfElements::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& SumOfElements::GetSampletime() const { return m_Sampletime; }
+const std::string& SumOfElements::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void SumOfElements::SetSampletime(const std::string& value)
 {

@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MagnitudeSquared::MagnitudeSquared() {}
+MagnitudeSquared::MagnitudeSquared()
+{
+}
 
-MagnitudeSquared::~MagnitudeSquared() {}
+MagnitudeSquared::~MagnitudeSquared()
+{
+}
 
-const std::string& MagnitudeSquared::GetOperator() const { return m_Operator; }
+const std::string& MagnitudeSquared::GetOperator() const
+{
+    return m_Operator;
+}
 
 void MagnitudeSquared::SetOperator(const std::string& value)
 {
@@ -55,13 +62,25 @@ void MagnitudeSquared::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& MagnitudeSquared::GetOutmin() const { return m_Outmin; }
+const std::string& MagnitudeSquared::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void MagnitudeSquared::SetOutmin(const std::string& value) { m_Outmin = value; }
+void MagnitudeSquared::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& MagnitudeSquared::GetOutmax() const { return m_Outmax; }
+const std::string& MagnitudeSquared::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void MagnitudeSquared::SetOutmax(const std::string& value) { m_Outmax = value; }
+void MagnitudeSquared::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& MagnitudeSquared::GetOutdatatypestr() const
 {
@@ -83,7 +102,10 @@ void MagnitudeSquared::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& MagnitudeSquared::GetRndmeth() const { return m_Rndmeth; }
+const std::string& MagnitudeSquared::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void MagnitudeSquared::SetRndmeth(const std::string& value)
 {
@@ -105,8 +127,7 @@ const std::string& MagnitudeSquared::GetIntermediateresultsdatatypestr() const
     return m_Intermediateresultsdatatypestr;
 }
 
-void MagnitudeSquared::SetIntermediateresultsdatatypestr(
-    const std::string& value)
+void MagnitudeSquared::SetIntermediateresultsdatatypestr(const std::string& value)
 {
     m_Intermediateresultsdatatypestr = value;
 }

@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Assertion::Assertion() {}
+Assertion::Assertion()
+{
+}
 
-Assertion::~Assertion() {}
+Assertion::~Assertion()
+{
+}
 
-const std::string& Assertion::GetEnabled() const { return m_Enabled; }
+const std::string& Assertion::GetEnabled() const
+{
+    return m_Enabled;
+}
 
-void Assertion::SetEnabled(const std::string& value) { m_Enabled = value; }
+void Assertion::SetEnabled(const std::string& value)
+{
+    m_Enabled = value;
+}
 
 const std::string& Assertion::GetAssertionfailfcn() const
 {
@@ -32,7 +42,10 @@ void Assertion::SetStopwhenassertionfail(const std::string& value)
     m_Stopwhenassertionfail = value;
 }
 
-const std::string& Assertion::GetSampletime() const { return m_Sampletime; }
+const std::string& Assertion::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void Assertion::SetSampletime(const std::string& value)
 {

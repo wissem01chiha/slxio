@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DiscretePidController2dof::DiscretePidController2dof() {}
+DiscretePidController2dof::DiscretePidController2dof()
+{
+}
 
-DiscretePidController2dof::~DiscretePidController2dof() {}
+DiscretePidController2dof::~DiscretePidController2dof()
+{
+}
 
 const std::string& DiscretePidController2dof::GetController() const
 {
@@ -18,7 +22,10 @@ void DiscretePidController2dof::SetController(const std::string& value)
     m_Controller = value;
 }
 
-const std::string& DiscretePidController2dof::GetForm() const { return m_Form; }
+const std::string& DiscretePidController2dof::GetForm() const
+{
+    return m_Form;
+}
 
 void DiscretePidController2dof::SetForm(const std::string& value)
 {
@@ -75,25 +82,35 @@ void DiscretePidController2dof::SetFiltermethod(const std::string& value)
     m_Filtermethod = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetControllerparameterssource() const
+const std::string& DiscretePidController2dof::GetControllerparameterssource() const
 {
     return m_Controllerparameterssource;
 }
 
-void DiscretePidController2dof::SetControllerparameterssource(
-    const std::string& value)
+void DiscretePidController2dof::SetControllerparameterssource(const std::string& value)
 {
     m_Controllerparameterssource = value;
 }
 
-const std::string& DiscretePidController2dof::GetP() const { return m_P; }
+const std::string& DiscretePidController2dof::GetP() const
+{
+    return m_P;
+}
 
-void DiscretePidController2dof::SetP(const std::string& value) { m_P = value; }
+void DiscretePidController2dof::SetP(const std::string& value)
+{
+    m_P = value;
+}
 
-const std::string& DiscretePidController2dof::GetI() const { return m_I; }
+const std::string& DiscretePidController2dof::GetI() const
+{
+    return m_I;
+}
 
-void DiscretePidController2dof::SetI(const std::string& value) { m_I = value; }
+void DiscretePidController2dof::SetI(const std::string& value)
+{
+    m_I = value;
+}
 
 const std::string& DiscretePidController2dof::GetUsekits() const
 {
@@ -105,25 +122,35 @@ void DiscretePidController2dof::SetUsekits(const std::string& value)
     m_Usekits = value;
 }
 
-const std::string& DiscretePidController2dof::GetD() const { return m_D; }
+const std::string& DiscretePidController2dof::GetD() const
+{
+    return m_D;
+}
 
-void DiscretePidController2dof::SetD(const std::string& value) { m_D = value; }
+void DiscretePidController2dof::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
-const std::string&
-DiscretePidController2dof::GetUseexternalderivativesource() const
+const std::string& DiscretePidController2dof::GetUseexternalderivativesource() const
 {
     return m_Useexternalderivativesource;
 }
 
-void DiscretePidController2dof::SetUseexternalderivativesource(
-    const std::string& value)
+void DiscretePidController2dof::SetUseexternalderivativesource(const std::string& value)
 {
     m_Useexternalderivativesource = value;
 }
 
-const std::string& DiscretePidController2dof::GetN() const { return m_N; }
+const std::string& DiscretePidController2dof::GetN() const
+{
+    return m_N;
+}
 
-void DiscretePidController2dof::SetN(const std::string& value) { m_N = value; }
+void DiscretePidController2dof::SetN(const std::string& value)
+{
+    m_N = value;
+}
 
 const std::string& DiscretePidController2dof::GetUsefilter() const
 {
@@ -135,13 +162,25 @@ void DiscretePidController2dof::SetUsefilter(const std::string& value)
     m_Usefilter = value;
 }
 
-const std::string& DiscretePidController2dof::GetB() const { return m_B; }
+const std::string& DiscretePidController2dof::GetB() const
+{
+    return m_B;
+}
 
-void DiscretePidController2dof::SetB(const std::string& value) { m_B = value; }
+void DiscretePidController2dof::SetB(const std::string& value)
+{
+    m_B = value;
+}
 
-const std::string& DiscretePidController2dof::GetC() const { return m_C; }
+const std::string& DiscretePidController2dof::GetC() const
+{
+    return m_C;
+}
 
-void DiscretePidController2dof::SetC(const std::string& value) { m_C = value; }
+void DiscretePidController2dof::SetC(const std::string& value)
+{
+    m_C = value;
+}
 
 const std::string& DiscretePidController2dof::GetTunerselectoption() const
 {
@@ -168,44 +207,37 @@ const std::string& DiscretePidController2dof::GetInitialconditionsource() const
     return m_Initialconditionsource;
 }
 
-void DiscretePidController2dof::SetInitialconditionsource(
-    const std::string& value)
+void DiscretePidController2dof::SetInitialconditionsource(const std::string& value)
 {
     m_Initialconditionsource = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetInitialconditionforintegrator() const
+const std::string& DiscretePidController2dof::GetInitialconditionforintegrator() const
 {
     return m_Initialconditionforintegrator;
 }
 
-void DiscretePidController2dof::SetInitialconditionforintegrator(
-    const std::string& value)
+void DiscretePidController2dof::SetInitialconditionforintegrator(const std::string& value)
 {
     m_Initialconditionforintegrator = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetInitialconditionforfilter() const
+const std::string& DiscretePidController2dof::GetInitialconditionforfilter() const
 {
     return m_Initialconditionforfilter;
 }
 
-void DiscretePidController2dof::SetInitialconditionforfilter(
-    const std::string& value)
+void DiscretePidController2dof::SetInitialconditionforfilter(const std::string& value)
 {
     m_Initialconditionforfilter = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetDifferentiatoricprevscaledinput() const
+const std::string& DiscretePidController2dof::GetDifferentiatoricprevscaledinput() const
 {
     return m_Differentiatoricprevscaledinput;
 }
 
-void DiscretePidController2dof::SetDifferentiatoricprevscaledinput(
-    const std::string& value)
+void DiscretePidController2dof::SetDifferentiatoricprevscaledinput(const std::string& value)
 {
     m_Differentiatoricprevscaledinput = value;
 }
@@ -240,7 +272,10 @@ void DiscretePidController2dof::SetTrackingmode(const std::string& value)
     m_Trackingmode = value;
 }
 
-const std::string& DiscretePidController2dof::GetKt() const { return m_Kt; }
+const std::string& DiscretePidController2dof::GetKt() const
+{
+    return m_Kt;
+}
 
 void DiscretePidController2dof::SetKt(const std::string& value)
 {
@@ -272,8 +307,7 @@ const std::string& DiscretePidController2dof::GetUppersaturationlimit() const
     return m_Uppersaturationlimit;
 }
 
-void DiscretePidController2dof::SetUppersaturationlimit(
-    const std::string& value)
+void DiscretePidController2dof::SetUppersaturationlimit(const std::string& value)
 {
     m_Uppersaturationlimit = value;
 }
@@ -283,8 +317,7 @@ const std::string& DiscretePidController2dof::GetLowersaturationlimit() const
     return m_Lowersaturationlimit;
 }
 
-void DiscretePidController2dof::SetLowersaturationlimit(
-    const std::string& value)
+void DiscretePidController2dof::SetLowersaturationlimit(const std::string& value)
 {
     m_Lowersaturationlimit = value;
 }
@@ -309,7 +342,10 @@ void DiscretePidController2dof::SetAntiwindupmode(const std::string& value)
     m_Antiwindupmode = value;
 }
 
-const std::string& DiscretePidController2dof::GetKb() const { return m_Kb; }
+const std::string& DiscretePidController2dof::GetKb() const
+{
+    return m_Kb;
+}
 
 void DiscretePidController2dof::SetKb(const std::string& value)
 {
@@ -326,26 +362,22 @@ void DiscretePidController2dof::SetLimitintegrator(const std::string& value)
     m_Limitintegrator = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetUpperintegratorsaturationlimit() const
+const std::string& DiscretePidController2dof::GetUpperintegratorsaturationlimit() const
 {
     return m_Upperintegratorsaturationlimit;
 }
 
-void DiscretePidController2dof::SetUpperintegratorsaturationlimit(
-    const std::string& value)
+void DiscretePidController2dof::SetUpperintegratorsaturationlimit(const std::string& value)
 {
     m_Upperintegratorsaturationlimit = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetLowerintegratorsaturationlimit() const
+const std::string& DiscretePidController2dof::GetLowerintegratorsaturationlimit() const
 {
     return m_Lowerintegratorsaturationlimit;
 }
 
-void DiscretePidController2dof::SetLowerintegratorsaturationlimit(
-    const std::string& value)
+void DiscretePidController2dof::SetLowerintegratorsaturationlimit(const std::string& value)
 {
     m_Lowerintegratorsaturationlimit = value;
 }
@@ -360,14 +392,12 @@ void DiscretePidController2dof::SetRndmeth(const std::string& value)
     m_Rndmeth = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetSaturateonintegeroverflow() const
+const std::string& DiscretePidController2dof::GetSaturateonintegeroverflow() const
 {
     return m_Saturateonintegeroverflow;
 }
 
-void DiscretePidController2dof::SetSaturateonintegeroverflow(
-    const std::string& value)
+void DiscretePidController2dof::SetSaturateonintegeroverflow(const std::string& value)
 {
     m_Saturateonintegeroverflow = value;
 }
@@ -652,14 +682,12 @@ void DiscretePidController2dof::SetSumoutmax(const std::string& value)
     m_Sumoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetSaturationoutdatatypestr() const
+const std::string& DiscretePidController2dof::GetSaturationoutdatatypestr() const
 {
     return m_Saturationoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetSaturationoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSaturationoutdatatypestr(const std::string& value)
 {
     m_Saturationoutdatatypestr = value;
 }
@@ -984,14 +1012,12 @@ void DiscretePidController2dof::SetKtoutmax(const std::string& value)
     m_Ktoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetIntegratoroutdatatypestr() const
+const std::string& DiscretePidController2dof::GetIntegratoroutdatatypestr() const
 {
     return m_Integratoroutdatatypestr;
 }
 
-void DiscretePidController2dof::SetIntegratoroutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetIntegratoroutdatatypestr(const std::string& value)
 {
     m_Integratoroutdatatypestr = value;
 }
@@ -1021,8 +1047,7 @@ const std::string& DiscretePidController2dof::GetFilteroutdatatypestr() const
     return m_Filteroutdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilteroutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilteroutdatatypestr(const std::string& value)
 {
     m_Filteroutdatatypestr = value;
 }
@@ -1302,8 +1327,7 @@ const std::string& DiscretePidController2dof::GetSumi1accumdatatypestr() const
     return m_Sumi1accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumi1accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumi1accumdatatypestr(const std::string& value)
 {
     m_Sumi1accumdatatypestr = value;
 }
@@ -1313,8 +1337,7 @@ const std::string& DiscretePidController2dof::GetSumi2accumdatatypestr() const
     return m_Sumi2accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumi2accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumi2accumdatatypestr(const std::string& value)
 {
     m_Sumi2accumdatatypestr = value;
 }
@@ -1324,8 +1347,7 @@ const std::string& DiscretePidController2dof::GetSumi3accumdatatypestr() const
     return m_Sumi3accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumi3accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumi3accumdatatypestr(const std::string& value)
 {
     m_Sumi3accumdatatypestr = value;
 }
@@ -1335,8 +1357,7 @@ const std::string& DiscretePidController2dof::GetSumi4accumdatatypestr() const
     return m_Sumi4accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumi4accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumi4accumdatatypestr(const std::string& value)
 {
     m_Sumi4accumdatatypestr = value;
 }
@@ -1346,8 +1367,7 @@ const std::string& DiscretePidController2dof::GetSumdaccumdatatypestr() const
     return m_Sumdaccumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumdaccumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumdaccumdatatypestr(const std::string& value)
 {
     m_Sumdaccumdatatypestr = value;
 }
@@ -1357,8 +1377,7 @@ const std::string& DiscretePidController2dof::GetSum1accumdatatypestr() const
     return m_Sum1accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSum1accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSum1accumdatatypestr(const std::string& value)
 {
     m_Sum1accumdatatypestr = value;
 }
@@ -1368,8 +1387,7 @@ const std::string& DiscretePidController2dof::GetSum2accumdatatypestr() const
     return m_Sum2accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSum2accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSum2accumdatatypestr(const std::string& value)
 {
     m_Sum2accumdatatypestr = value;
 }
@@ -1379,20 +1397,17 @@ const std::string& DiscretePidController2dof::GetSum3accumdatatypestr() const
     return m_Sum3accumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSum3accumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSum3accumdatatypestr(const std::string& value)
 {
     m_Sum3accumdatatypestr = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetDifferentiatoroutdatatypestr() const
+const std::string& DiscretePidController2dof::GetDifferentiatoroutdatatypestr() const
 {
     return m_Differentiatoroutdatatypestr;
 }
 
-void DiscretePidController2dof::SetDifferentiatoroutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetDifferentiatoroutdatatypestr(const std::string& value)
 {
     m_Differentiatoroutdatatypestr = value;
 }
@@ -1402,8 +1417,7 @@ const std::string& DiscretePidController2dof::GetDifferentiatoroutmin() const
     return m_Differentiatoroutmin;
 }
 
-void DiscretePidController2dof::SetDifferentiatoroutmin(
-    const std::string& value)
+void DiscretePidController2dof::SetDifferentiatoroutmin(const std::string& value)
 {
     m_Differentiatoroutmin = value;
 }
@@ -1413,68 +1427,57 @@ const std::string& DiscretePidController2dof::GetDifferentiatoroutmax() const
     return m_Differentiatoroutmax;
 }
 
-void DiscretePidController2dof::SetDifferentiatoroutmax(
-    const std::string& value)
+void DiscretePidController2dof::SetDifferentiatoroutmax(const std::string& value)
 {
     m_Differentiatoroutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdiffnumproductoutputdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdiffnumproductoutputdatatypestr() const
 {
     return m_Filterdiffnumproductoutputdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdiffnumproductoutputdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffnumproductoutputdatatypestr(const std::string& value)
 {
     m_Filterdiffnumproductoutputdatatypestr = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdiffdenproductoutputdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdiffdenproductoutputdatatypestr() const
 {
     return m_Filterdiffdenproductoutputdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdiffdenproductoutputdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffdenproductoutputdatatypestr(const std::string& value)
 {
     m_Filterdiffdenproductoutputdatatypestr = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdiffnumaccumdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdiffnumaccumdatatypestr() const
 {
     return m_Filterdiffnumaccumdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdiffnumaccumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffnumaccumdatatypestr(const std::string& value)
 {
     m_Filterdiffnumaccumdatatypestr = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdiffdenaccumdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdiffdenaccumdatatypestr() const
 {
     return m_Filterdiffdenaccumdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdiffdenaccumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffdenaccumdatatypestr(const std::string& value)
 {
     m_Filterdiffdenaccumdatatypestr = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdiffoutcoefdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdiffoutcoefdatatypestr() const
 {
     return m_Filterdiffoutcoefdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdiffoutcoefdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffoutcoefdatatypestr(const std::string& value)
 {
     m_Filterdiffoutcoefdatatypestr = value;
 }
@@ -1484,8 +1487,7 @@ const std::string& DiscretePidController2dof::GetFilterdiffoutcoefmin() const
     return m_Filterdiffoutcoefmin;
 }
 
-void DiscretePidController2dof::SetFilterdiffoutcoefmin(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffoutcoefmin(const std::string& value)
 {
     m_Filterdiffoutcoefmin = value;
 }
@@ -1495,20 +1497,17 @@ const std::string& DiscretePidController2dof::GetFilterdiffoutcoefmax() const
     return m_Filterdiffoutcoefmax;
 }
 
-void DiscretePidController2dof::SetFilterdiffoutcoefmax(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdiffoutcoefmax(const std::string& value)
 {
     m_Filterdiffoutcoefmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetReciprocaloutdatatypestr() const
+const std::string& DiscretePidController2dof::GetReciprocaloutdatatypestr() const
 {
     return m_Reciprocaloutdatatypestr;
 }
 
-void DiscretePidController2dof::SetReciprocaloutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetReciprocaloutdatatypestr(const std::string& value)
 {
     m_Reciprocaloutdatatypestr = value;
 }
@@ -1538,8 +1537,7 @@ const std::string& DiscretePidController2dof::GetSumdenoutdatatypestr() const
     return m_Sumdenoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumdenoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumdenoutdatatypestr(const std::string& value)
 {
     m_Sumdenoutdatatypestr = value;
 }
@@ -1569,8 +1567,7 @@ const std::string& DiscretePidController2dof::GetSumnumoutdatatypestr() const
     return m_Sumnumoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumnumoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumnumoutdatatypestr(const std::string& value)
 {
     m_Sumnumoutdatatypestr = value;
 }
@@ -1600,8 +1597,7 @@ const std::string& DiscretePidController2dof::GetSumdenaccumdatatypestr() const
     return m_Sumdenaccumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumdenaccumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumdenaccumdatatypestr(const std::string& value)
 {
     m_Sumdenaccumdatatypestr = value;
 }
@@ -1611,8 +1607,7 @@ const std::string& DiscretePidController2dof::GetSumnumaccumdatatypestr() const
     return m_Sumnumaccumdatatypestr;
 }
 
-void DiscretePidController2dof::SetSumnumaccumdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetSumnumaccumdatatypestr(const std::string& value)
 {
     m_Sumnumaccumdatatypestr = value;
 }
@@ -1622,8 +1617,7 @@ const std::string& DiscretePidController2dof::GetDivideoutdatatypestr() const
     return m_Divideoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetDivideoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetDivideoutdatatypestr(const std::string& value)
 {
     m_Divideoutdatatypestr = value;
 }
@@ -1648,14 +1642,12 @@ void DiscretePidController2dof::SetDivideoutmax(const std::string& value)
     m_Divideoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetUdifftsprodoutdatatypestr() const
+const std::string& DiscretePidController2dof::GetUdifftsprodoutdatatypestr() const
 {
     return m_Udifftsprodoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetUdifftsprodoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetUdifftsprodoutdatatypestr(const std::string& value)
 {
     m_Udifftsprodoutdatatypestr = value;
 }
@@ -1685,8 +1677,7 @@ const std::string& DiscretePidController2dof::GetNtsprodoutdatatypestr() const
     return m_Ntsprodoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetNtsprodoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetNtsprodoutdatatypestr(const std::string& value)
 {
     m_Ntsprodoutdatatypestr = value;
 }
@@ -1711,14 +1702,12 @@ void DiscretePidController2dof::SetNtsprodoutmax(const std::string& value)
     m_Ntsprodoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetUintegraltsprodoutdatatypestr() const
+const std::string& DiscretePidController2dof::GetUintegraltsprodoutdatatypestr() const
 {
     return m_Uintegraltsprodoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetUintegraltsprodoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetUintegraltsprodoutdatatypestr(const std::string& value)
 {
     m_Uintegraltsprodoutdatatypestr = value;
 }
@@ -1728,8 +1717,7 @@ const std::string& DiscretePidController2dof::GetUintegraltsprodoutmin() const
     return m_Uintegraltsprodoutmin;
 }
 
-void DiscretePidController2dof::SetUintegraltsprodoutmin(
-    const std::string& value)
+void DiscretePidController2dof::SetUintegraltsprodoutmin(const std::string& value)
 {
     m_Uintegraltsprodoutmin = value;
 }
@@ -1739,20 +1727,17 @@ const std::string& DiscretePidController2dof::GetUintegraltsprodoutmax() const
     return m_Uintegraltsprodoutmax;
 }
 
-void DiscretePidController2dof::SetUintegraltsprodoutmax(
-    const std::string& value)
+void DiscretePidController2dof::SetUintegraltsprodoutmax(const std::string& value)
 {
     m_Uintegraltsprodoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetUngaintsprodoutdatatypestr() const
+const std::string& DiscretePidController2dof::GetUngaintsprodoutdatatypestr() const
 {
     return m_Ungaintsprodoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetUngaintsprodoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetUngaintsprodoutdatatypestr(const std::string& value)
 {
     m_Ungaintsprodoutdatatypestr = value;
 }
@@ -1777,14 +1762,12 @@ void DiscretePidController2dof::SetUngaintsprodoutmax(const std::string& value)
     m_Ungaintsprodoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetClampingzerooutdatatypestr() const
+const std::string& DiscretePidController2dof::GetClampingzerooutdatatypestr() const
 {
     return m_Clampingzerooutdatatypestr;
 }
 
-void DiscretePidController2dof::SetClampingzerooutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetClampingzerooutdatatypestr(const std::string& value)
 {
     m_Clampingzerooutdatatypestr = value;
 }
@@ -1809,14 +1792,12 @@ void DiscretePidController2dof::SetClampingzerooutmax(const std::string& value)
     m_Clampingzerooutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterdenconstantoutdatatypestr() const
+const std::string& DiscretePidController2dof::GetFilterdenconstantoutdatatypestr() const
 {
     return m_Filterdenconstantoutdatatypestr;
 }
 
-void DiscretePidController2dof::SetFilterdenconstantoutdatatypestr(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdenconstantoutdatatypestr(const std::string& value)
 {
     m_Filterdenconstantoutdatatypestr = value;
 }
@@ -1826,8 +1807,7 @@ const std::string& DiscretePidController2dof::GetFilterdenconstantoutmin() const
     return m_Filterdenconstantoutmin;
 }
 
-void DiscretePidController2dof::SetFilterdenconstantoutmin(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdenconstantoutmin(const std::string& value)
 {
     m_Filterdenconstantoutmin = value;
 }
@@ -1837,8 +1817,7 @@ const std::string& DiscretePidController2dof::GetFilterdenconstantoutmax() const
     return m_Filterdenconstantoutmax;
 }
 
-void DiscretePidController2dof::SetFilterdenconstantoutmax(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterdenconstantoutmax(const std::string& value)
 {
     m_Filterdenconstantoutmax = value;
 }
@@ -1903,50 +1882,42 @@ void DiscretePidController2dof::SetNcopyoutmax(const std::string& value)
     m_Ncopyoutmax = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetIntegratorcontinuousstateattributes() const
+const std::string& DiscretePidController2dof::GetIntegratorcontinuousstateattributes() const
 {
     return m_Integratorcontinuousstateattributes;
 }
 
-void DiscretePidController2dof::SetIntegratorcontinuousstateattributes(
-    const std::string& value)
+void DiscretePidController2dof::SetIntegratorcontinuousstateattributes(const std::string& value)
 {
     m_Integratorcontinuousstateattributes = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetIntegratorstateidentifier() const
+const std::string& DiscretePidController2dof::GetIntegratorstateidentifier() const
 {
     return m_Integratorstateidentifier;
 }
 
-void DiscretePidController2dof::SetIntegratorstateidentifier(
-    const std::string& value)
+void DiscretePidController2dof::SetIntegratorstateidentifier(const std::string& value)
 {
     m_Integratorstateidentifier = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetIntegratorstatemustresolvetosignalobject() const
+const std::string& DiscretePidController2dof::GetIntegratorstatemustresolvetosignalobject() const
 {
     return m_Integratorstatemustresolvetosignalobject;
 }
 
-void DiscretePidController2dof::SetIntegratorstatemustresolvetosignalobject(
-    const std::string& value)
+void DiscretePidController2dof::SetIntegratorstatemustresolvetosignalobject(const std::string& value)
 {
     m_Integratorstatemustresolvetosignalobject = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFiltercontinuousstateattributes() const
+const std::string& DiscretePidController2dof::GetFiltercontinuousstateattributes() const
 {
     return m_Filtercontinuousstateattributes;
 }
 
-void DiscretePidController2dof::SetFiltercontinuousstateattributes(
-    const std::string& value)
+void DiscretePidController2dof::SetFiltercontinuousstateattributes(const std::string& value)
 {
     m_Filtercontinuousstateattributes = value;
 }
@@ -1956,20 +1927,17 @@ const std::string& DiscretePidController2dof::GetFilterstateidentifier() const
     return m_Filterstateidentifier;
 }
 
-void DiscretePidController2dof::SetFilterstateidentifier(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterstateidentifier(const std::string& value)
 {
     m_Filterstateidentifier = value;
 }
 
-const std::string&
-DiscretePidController2dof::GetFilterstatemustresolvetosignalobject() const
+const std::string& DiscretePidController2dof::GetFilterstatemustresolvetosignalobject() const
 {
     return m_Filterstatemustresolvetosignalobject;
 }
 
-void DiscretePidController2dof::SetFilterstatemustresolvetosignalobject(
-    const std::string& value)
+void DiscretePidController2dof::SetFilterstatemustresolvetosignalobject(const std::string& value)
 {
     m_Filterstatemustresolvetosignalobject = value;
 }

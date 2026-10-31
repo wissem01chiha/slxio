@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-EntityTransportDelay::EntityTransportDelay() {}
+EntityTransportDelay::EntityTransportDelay()
+{
+}
 
-EntityTransportDelay::~EntityTransportDelay() {}
+EntityTransportDelay::~EntityTransportDelay()
+{
+}
 
 const std::string& EntityTransportDelay::GetCapacity() const
 {
@@ -23,8 +27,7 @@ const std::string& EntityTransportDelay::GetShownumberentitiesinblock() const
     return m_Shownumberentitiesinblock;
 }
 
-void EntityTransportDelay::SetShownumberentitiesinblock(
-    const std::string& value)
+void EntityTransportDelay::SetShownumberentitiesinblock(const std::string& value)
 {
     m_Shownumberentitiesinblock = value;
 }

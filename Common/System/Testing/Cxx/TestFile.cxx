@@ -29,7 +29,10 @@ public:
         }
     }
 
-    ~FileTestFixture() { std::remove(TestFile.c_str()); }
+    ~FileTestFixture()
+    {
+        std::remove(TestFile.c_str());
+    }
 
     std::string GetTestFilePath() const
     {
@@ -50,8 +53,7 @@ public:
         uv_fs_t req;
         uv_loop_t* loop = uv_default_loop();
 
-        *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(),
-                           nullptr);
+        *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
         uv_fs_req_cleanup(&req);
     }
 };
@@ -96,7 +98,6 @@ TEST_CASE_FIXTURE(FileTestFixture, "Read File Contents")
 
 TEST_CASE_FIXTURE(FileTestFixture, "Write to File Test")
 {
-
     File f(TestFile, File::Mode::Write);
     REQUIRE(f.Open() == E_OK);
     CHECK(f.Write("New content") == E_OK);

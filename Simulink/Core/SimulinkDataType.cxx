@@ -98,14 +98,12 @@ bool IsNumeric(SimulinkDataType type)
 
 bool IsFloatingPoint(SimulinkDataType type)
 {
-    return type == SimulinkDataType::Double ||
-           type == SimulinkDataType::Single || type == SimulinkDataType::Half;
+    return type == SimulinkDataType::Double || type == SimulinkDataType::Single || type == SimulinkDataType::Half;
 }
 
 bool IsSigned(SimulinkDataType type)
 {
-    return type == SimulinkDataType::Int8 || type == SimulinkDataType::Int16 ||
-           type == SimulinkDataType::Int32;
+    return type == SimulinkDataType::Int8 || type == SimulinkDataType::Int16 || type == SimulinkDataType::Int32;
 }
 
 SLXIO_ABI_NAMESPACE_END

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ManualVariantSource::ManualVariantSource() {}
+ManualVariantSource::ManualVariantSource()
+{
+}
 
-ManualVariantSource::~ManualVariantSource() {}
+ManualVariantSource::~ManualVariantSource()
+{
+}
 
 const std::string& ManualVariantSource::GetNumchoices() const
 {

@@ -4,8 +4,7 @@
 
 std::string GetDataFilePath(const std::string& filename)
 {
-    return std::string(PROJECT_SOURCE_DIR) + "/Common/DataModel/Testing/Data/" +
-           filename;
+    return std::string(PROJECT_SOURCE_DIR) + "/Common/DataModel/Testing/Data/" + filename;
 }
 
 using namespace slxio;

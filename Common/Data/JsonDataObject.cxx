@@ -24,7 +24,10 @@ void JsonDataObject::Initialize(void* implDataObject)
     m_implDataObject = SLXIO_STATIC_CAST(json_object*, implDataObject);
 }
 
-bool JsonDataObject::Empty() const { return m_implDataObject == nullptr; }
+bool JsonDataObject::Empty() const
+{
+    return m_implDataObject == nullptr;
+}
 
 bool JsonDataObject::operator==(const IDataObject& other) const
 {
@@ -34,15 +37,16 @@ bool JsonDataObject::operator==(const IDataObject& other) const
     }
     if (GetDataType() == other.GetDataType())
     {
-        return json_object_equal(
-            m_implDataObject,
-            SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
+        return json_object_equal(m_implDataObject, SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
     }
 
     return false;
 }
 
-void* JsonDataObject::GetImplDataObject() const { return m_implDataObject; }
+void* JsonDataObject::GetImplDataObject() const
+{
+    return m_implDataObject;
+}
 
 std::string JsonDataObject::ToString() const
 {
@@ -59,7 +63,9 @@ DataType JsonDataObject::GetDataType() const
     return DataType::SLXIO_TYPE_CJSON_OBJECT;
 }
 
-JsonDataObject::JsonDataObject() : m_implDataObject(nullptr) {}
+JsonDataObject::JsonDataObject() : m_implDataObject(nullptr)
+{
+}
 
 JsonDataObject::~JsonDataObject()
 {

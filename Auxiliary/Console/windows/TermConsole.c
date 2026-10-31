@@ -107,7 +107,10 @@ void InitializeTerminal(void)
     SetConsoleCtrlHandler((PHANDLER_ROUTINE)CtrlHandler, TRUE);
 }
 /*--------------------------------------------------------------------------*/
-void TerminalBeep(void) { MessageBeep(MB_OK); }
+void TerminalBeep(void)
+{
+    MessageBeep(MB_OK);
+}
 /*--------------------------------------------------------------------------*/
 int TerminalPrintf(const char* buffer)
 {
@@ -133,7 +136,10 @@ int TerminalPrintf(const char* buffer)
     return -1;
 }
 /*--------------------------------------------------------------------------*/
-int TerminalPutc(char ch) { return putc(ch, stdout); }
+int TerminalPutc(char ch)
+{
+    return putc(ch, stdout);
+}
 /*--------------------------------------------------------------------------*/
 static unsigned char TerminalGetchar(void)
 {
@@ -159,22 +165,19 @@ static unsigned char TerminalGetchar(void)
             {
                 if (irBuffer.Event.KeyEvent.dwControlKeyState)
                 {
-                    if (isCTRLPressed(
-                            irBuffer.Event.KeyEvent.dwControlKeyState))
+                    if (isCTRLPressed(irBuffer.Event.KeyEvent.dwControlKeyState))
                     {
                         char c = actionControlKey();
                         if (c)
                         {
-                            ReadConsoleInputW(Win32InputStream, &irBuffer, 1,
-                                              &n);
+                            ReadConsoleInputW(Win32InputStream, &irBuffer, 1, &n);
                             return c;
                         }
                         else
                         {
                             if (irBuffer.Event.KeyEvent.uChar.AsciiChar != '\0')
                             {
-                                ReadConsoleInputW(Win32InputStream, &irBuffer,
-                                                  1, &n);
+                                ReadConsoleInputW(Win32InputStream, &irBuffer, 1, &n);
                                 c = irBuffer.Event.KeyEvent.uChar.AsciiChar;
                                 if ((c > 0) && !iscntrl(c))
                                 {
@@ -183,8 +186,7 @@ static unsigned char TerminalGetchar(void)
                             }
                             else
                             {
-                                ReadConsoleInput(Win32InputStream, &irBuffer, 1,
-                                                 &n);
+                                ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
                             }
                         }
                         break;
@@ -202,11 +204,9 @@ static unsigned char TerminalGetchar(void)
                             DWORD stateKey = 0;
                             WORD vk = 0;
 
-                            ReadConsoleInput(Win32InputStream, &irBuffer, 1,
-                                             &n);
+                            ReadConsoleInput(Win32InputStream, &irBuffer, 1, &n);
 
-                            stateKey =
-                                irBuffer.Event.KeyEvent.dwControlKeyState;
+                            stateKey = irBuffer.Event.KeyEvent.dwControlKeyState;
                             vk = irBuffer.Event.KeyEvent.wVirtualKeyCode;
 
                             switch (vk)
@@ -358,8 +358,7 @@ static char actionControlKey(void)
     {
         deletePreviousChar();
     }
-    else if (isCTRL_VKEY(
-                 'K')) /* kills from current position to the end of line */
+    else if (isCTRL_VKEY('K')) /* kills from current position to the end of line */
     {
         killCurrentPositionToEndLine();
     }
@@ -371,8 +370,7 @@ static char actionControlKey(void)
     {
         moveBackHistory();
     }
-    else if (isCTRL_VKEY('R') ||
-             isCTRL_VKEY('L')) /* redraw line in case it gets trashed */
+    else if (isCTRL_VKEY('R') || isCTRL_VKEY('L')) /* redraw line in case it gets trashed */
     {
         redrawLine();
     }
@@ -475,5 +473,8 @@ static BOOL isExtendedPressed(DWORD StateKey)
     return ((StateKey & (ENHANCED_KEY)) != 0);
 }
 /*--------------------------------------------------------------------------*/
-static BOOL isCTRL_VKEY(int VKEY) { return (GetKeyState(VKEY) & 0x80); }
+static BOOL isCTRL_VKEY(int VKEY)
+{
+    return (GetKeyState(VKEY) & 0x80);
+}
 /*--------------------------------------------------------------------------*/

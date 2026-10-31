@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Prelookup::Prelookup() {}
+Prelookup::Prelookup()
+{
+}
 
-Prelookup::~Prelookup() {}
+Prelookup::~Prelookup()
+{
+}
 
 const std::string& Prelookup::GetBreakpointsdatasource() const
 {
@@ -98,19 +102,20 @@ void Prelookup::SetIndexsearchmethod(const std::string& value)
     m_Indexsearchmethod = value;
 }
 
-const std::string&
-Prelookup::GetBeginindexsearchusingpreviousindexresult() const
+const std::string& Prelookup::GetBeginindexsearchusingpreviousindexresult() const
 {
     return m_Beginindexsearchusingpreviousindexresult;
 }
 
-void Prelookup::SetBeginindexsearchusingpreviousindexresult(
-    const std::string& value)
+void Prelookup::SetBeginindexsearchusingpreviousindexresult(const std::string& value)
 {
     m_Beginindexsearchusingpreviousindexresult = value;
 }
 
-const std::string& Prelookup::GetExtrapmethod() const { return m_Extrapmethod; }
+const std::string& Prelookup::GetExtrapmethod() const
+{
+    return m_Extrapmethod;
+}
 
 void Prelookup::SetExtrapmethod(const std::string& value)
 {
@@ -197,15 +202,30 @@ void Prelookup::SetFractiondatatypestr(const std::string& value)
     m_Fractiondatatypestr = value;
 }
 
-const std::string& Prelookup::GetLockscale() const { return m_Lockscale; }
+const std::string& Prelookup::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
-void Prelookup::SetLockscale(const std::string& value) { m_Lockscale = value; }
+void Prelookup::SetLockscale(const std::string& value)
+{
+    m_Lockscale = value;
+}
 
-const std::string& Prelookup::GetRndmeth() const { return m_Rndmeth; }
+const std::string& Prelookup::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void Prelookup::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void Prelookup::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
-const std::string& Prelookup::GetSampletime() const { return m_Sampletime; }
+const std::string& Prelookup::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void Prelookup::SetSampletime(const std::string& value)
 {

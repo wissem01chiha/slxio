@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BusCreator::BusCreator() {}
+BusCreator::BusCreator()
+{
+}
 
-BusCreator::~BusCreator() {}
+BusCreator::~BusCreator()
+{
+}
 
-const std::string& BusCreator::GetInputs() const { return m_Inputs; }
+const std::string& BusCreator::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void BusCreator::SetInputs(const std::string& value) { m_Inputs = value; }
+void BusCreator::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
 const std::string& BusCreator::GetDisplayoption() const
 {

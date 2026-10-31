@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransferFcnDirectFormIiTimeVarying::TransferFcnDirectFormIiTimeVarying() {}
+TransferFcnDirectFormIiTimeVarying::TransferFcnDirectFormIiTimeVarying()
+{
+}
 
-TransferFcnDirectFormIiTimeVarying::~TransferFcnDirectFormIiTimeVarying() {}
+TransferFcnDirectFormIiTimeVarying::~TransferFcnDirectFormIiTimeVarying()
+{
+}
 
 const std::string& TransferFcnDirectFormIiTimeVarying::GetVinit() const
 {

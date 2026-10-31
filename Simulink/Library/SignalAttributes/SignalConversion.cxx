@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SignalConversion::SignalConversion() {}
+SignalConversion::SignalConversion()
+{
+}
 
-SignalConversion::~SignalConversion() {}
+SignalConversion::~SignalConversion()
+{
+}
 
 const std::string& SignalConversion::GetConversionoutput() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ParameterWriter::ParameterWriter() {}
+ParameterWriter::ParameterWriter()
+{
+}
 
-ParameterWriter::~ParameterWriter() {}
+ParameterWriter::~ParameterWriter()
+{
+}
 
 const std::string& ParameterWriter::GetParameterownerblock() const
 {

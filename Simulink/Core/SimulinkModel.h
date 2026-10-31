@@ -32,8 +32,7 @@ class SimulationSettings;
  * @class SimulinkModel
  * @brief This is the main class definition for a SimulinkModel based
  */
-class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement,
-                                            public IConfigurableObject
+class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement, public IConfigurableObject
 {
 public:
     /** Default Constructor */
@@ -57,19 +56,13 @@ public:
     /** Returns a string representation of this element. */
     std::string ToString() const override;
 
-    HError AddConfig(const std::string& name,
-                     const std::shared_ptr<IConfigurationObject>& p) override;
-    HError SetConfig(const std::string& name,
-                     const std::shared_ptr<IConfigurationObject>& p) override;
-    std::shared_ptr<IConfigurationObject>
-    GetConfig(const std::string& name) override;
+    HError AddConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) override;
+    HError SetConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) override;
+    std::shared_ptr<IConfigurationObject> GetConfig(const std::string& name) override;
 
-    void AddParam(const std::string& name,
-                  const std::shared_ptr<IParameterObjectBase>& p) override;
-    void SetParam(const std::string& name,
-                  const std::shared_ptr<IParameterObjectBase>& p) override;
-    std::shared_ptr<IParameterObjectBase>
-    GetParam(const std::string& name) override;
+    void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
+    void SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
+    std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
 
 private:
     SId m_id{SId(0)};

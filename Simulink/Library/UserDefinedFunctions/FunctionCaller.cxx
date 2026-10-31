@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FunctionCaller::FunctionCaller() {}
+FunctionCaller::FunctionCaller()
+{
+}
 
-FunctionCaller::~FunctionCaller() {}
+FunctionCaller::~FunctionCaller()
+{
+}
 
 const std::string& FunctionCaller::GetFunctionprototype() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-UserDefinedFunctions::UserDefinedFunctions() {}
+UserDefinedFunctions::UserDefinedFunctions()
+{
+}
 
-UserDefinedFunctions::~UserDefinedFunctions() {}
+UserDefinedFunctions::~UserDefinedFunctions()
+{
+}
 
 const std::string& UserDefinedFunctions::GetShowportlabels() const
 {
@@ -73,8 +77,7 @@ const std::string& UserDefinedFunctions::GetPermithierarchicalresolution() const
     return m_Permithierarchicalresolution;
 }
 
-void UserDefinedFunctions::SetPermithierarchicalresolution(
-    const std::string& value)
+void UserDefinedFunctions::SetPermithierarchicalresolution(const std::string& value)
 {
     m_Permithierarchicalresolution = value;
 }
@@ -89,14 +92,12 @@ void UserDefinedFunctions::SetTreatasatomicunit(const std::string& value)
     m_Treatasatomicunit = value;
 }
 
-const std::string&
-UserDefinedFunctions::GetShowsubsystemreinitializeports() const
+const std::string& UserDefinedFunctions::GetShowsubsystemreinitializeports() const
 {
     return m_Showsubsystemreinitializeports;
 }
 
-void UserDefinedFunctions::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void UserDefinedFunctions::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -316,8 +317,7 @@ const std::string& UserDefinedFunctions::GetVariantchoicesenumeration() const
     return m_Variantchoicesenumeration;
 }
 
-void UserDefinedFunctions::SetVariantchoicesenumeration(
-    const std::string& value)
+void UserDefinedFunctions::SetVariantchoicesenumeration(const std::string& value)
 {
     m_Variantchoicesenumeration = value;
 }
@@ -397,8 +397,7 @@ const std::string& UserDefinedFunctions::GetPropagatevariantconditions() const
     return m_Propagatevariantconditions;
 }
 
-void UserDefinedFunctions::SetPropagatevariantconditions(
-    const std::string& value)
+void UserDefinedFunctions::SetPropagatevariantconditions(const std::string& value)
 {
     m_Propagatevariantconditions = value;
 }
@@ -413,14 +412,12 @@ void UserDefinedFunctions::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-UserDefinedFunctions::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& UserDefinedFunctions::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void UserDefinedFunctions::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void UserDefinedFunctions::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }

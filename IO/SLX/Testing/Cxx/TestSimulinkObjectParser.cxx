@@ -8,17 +8,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkObjectParserTestFixture
 {
 protected:
-    SimulinkObjectParserTestFixture()
-        : parserPtr(new SimulinkObjectParser()), doc(nullptr)
+    SimulinkObjectParserTestFixture() : parserPtr(new SimulinkObjectParser()), doc(nullptr)
     {
     }
 
     xmlNodePtr getXmlNodePtr(const char* xmlfilename)
     {
-
         char xmlfilepath[512];
-        snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-                 PROJECT_ROOT_DIR, xmlfilename);
+        snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, xmlfilename);
         doc = xmlReadFile(xmlfilepath, nullptr, 0);
         if (!doc)
         {
@@ -30,7 +27,6 @@ protected:
 
     ~SimulinkObjectParserTestFixture()
     {
-
         if (parserPtr)
         {
             delete parserPtr;
@@ -47,7 +43,6 @@ protected:
 
 TEST_CASE_FIXTURE(SimulinkObjectParserTestFixture, "ParserSetInputDataTest")
 {
-
     xmlNodePtr nodePtr = getXmlNodePtr("object.xml");
     HError status = parserPtr->setInputData(nodePtr);
     CHECK(status == E_OK);

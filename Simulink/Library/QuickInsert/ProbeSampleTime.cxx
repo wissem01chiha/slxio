@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ProbeSampleTime::ProbeSampleTime() {}
+ProbeSampleTime::ProbeSampleTime()
+{
+}
 
-ProbeSampleTime::~ProbeSampleTime() {}
+ProbeSampleTime::~ProbeSampleTime()
+{
+}
 
 const std::string& ProbeSampleTime::GetProbewidth() const
 {

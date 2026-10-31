@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ResettableDelay::ResettableDelay() {}
+ResettableDelay::ResettableDelay()
+{
+}
 
-ResettableDelay::~ResettableDelay() {}
+ResettableDelay::~ResettableDelay()
+{
+}
 
 const std::string& ResettableDelay::GetDelaylengthsource() const
 {
@@ -98,14 +102,12 @@ void ResettableDelay::SetDiagnosticfordelaylength(const std::string& value)
     m_Diagnosticfordelaylength = value;
 }
 
-const std::string&
-ResettableDelay::GetRemovedelaylengthcheckingeneratedcode() const
+const std::string& ResettableDelay::GetRemovedelaylengthcheckingeneratedcode() const
 {
     return m_Removedelaylengthcheckingeneratedcode;
 }
 
-void ResettableDelay::SetRemovedelaylengthcheckingeneratedcode(
-    const std::string& value)
+void ResettableDelay::SetRemovedelaylengthcheckingeneratedcode(const std::string& value)
 {
     m_Removedelaylengthcheckingeneratedcode = value;
 }
@@ -140,7 +142,10 @@ void ResettableDelay::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& ResettableDelay::GetStatename() const { return m_Statename; }
+const std::string& ResettableDelay::GetStatename() const
+{
+    return m_Statename;
+}
 
 void ResettableDelay::SetStatename(const std::string& value)
 {
@@ -152,8 +157,7 @@ const std::string& ResettableDelay::GetStatemustresolvetosignalobject() const
     return m_Statemustresolvetosignalobject;
 }
 
-void ResettableDelay::SetStatemustresolvetosignalobject(
-    const std::string& value)
+void ResettableDelay::SetStatemustresolvetosignalobject(const std::string& value)
 {
     m_Statemustresolvetosignalobject = value;
 }
@@ -183,8 +187,7 @@ const std::string& ResettableDelay::GetCodegenstatestoragetypequalifier() const
     return m_Codegenstatestoragetypequalifier;
 }
 
-void ResettableDelay::SetCodegenstatestoragetypequalifier(
-    const std::string& value)
+void ResettableDelay::SetCodegenstatestoragetypequalifier(const std::string& value)
 {
     m_Codegenstatestoragetypequalifier = value;
 }

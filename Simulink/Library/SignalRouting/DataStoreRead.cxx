@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataStoreRead::DataStoreRead() {}
+DataStoreRead::DataStoreRead()
+{
+}
 
-DataStoreRead::~DataStoreRead() {}
+DataStoreRead::~DataStoreRead()
+{
+}
 
 const std::string& DataStoreRead::GetDatastorename() const
 {
@@ -18,7 +22,10 @@ void DataStoreRead::SetDatastorename(const std::string& value)
     m_Datastorename = value;
 }
 
-const std::string& DataStoreRead::GetSampletime() const { return m_Sampletime; }
+const std::string& DataStoreRead::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void DataStoreRead::SetSampletime(const std::string& value)
 {
@@ -55,7 +62,10 @@ void DataStoreRead::SetNumberofdimensions(const std::string& value)
     m_Numberofdimensions = value;
 }
 
-const std::string& DataStoreRead::GetIndexmode() const { return m_Indexmode; }
+const std::string& DataStoreRead::GetIndexmode() const
+{
+    return m_Indexmode;
+}
 
 void DataStoreRead::SetIndexmode(const std::string& value)
 {
@@ -102,9 +112,15 @@ void DataStoreRead::SetIndexoptions(const std::string& value)
     m_Indexoptions = value;
 }
 
-const std::string& DataStoreRead::GetIndices() const { return m_Indices; }
+const std::string& DataStoreRead::GetIndices() const
+{
+    return m_Indices;
+}
 
-void DataStoreRead::SetIndices(const std::string& value) { m_Indices = value; }
+void DataStoreRead::SetIndices(const std::string& value)
+{
+    m_Indices = value;
+}
 
 const std::string& DataStoreRead::GetOutputsizes() const
 {

@@ -16,9 +16,7 @@ class RectangleLayoutDataBase
 {
 public:
     RectangleLayoutDataBase();
-    RectangleLayoutDataBase(const RectangleType& position,
-                            const Color& foregroundColor,
-                            const Color& backgroundColor);
+    RectangleLayoutDataBase(const RectangleType& position, const Color& foregroundColor, const Color& backgroundColor);
     virtual ~RectangleLayoutDataBase() = default;
 
 protected:

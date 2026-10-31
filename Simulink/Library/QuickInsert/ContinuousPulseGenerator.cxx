@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ContinuousPulseGenerator::ContinuousPulseGenerator() {}
+ContinuousPulseGenerator::ContinuousPulseGenerator()
+{
+}
 
-ContinuousPulseGenerator::~ContinuousPulseGenerator() {}
+ContinuousPulseGenerator::~ContinuousPulseGenerator()
+{
+}
 
 const std::string& ContinuousPulseGenerator::GetPulsetype() const
 {

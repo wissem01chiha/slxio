@@ -14,40 +14,56 @@ SimulinkElementType SimulinkAtomicSubsystem::GetType() const
     return SimulinkElementType(SimulinkElementType::Type::Subsystem);
 }
 
-SId SimulinkAtomicSubsystem::GetId() const { return 0; }
+SId SimulinkAtomicSubsystem::GetId() const
+{
+    return 0;
+}
 
-std::string SimulinkAtomicSubsystem::ToString() const { return std::string(); }
+std::string SimulinkAtomicSubsystem::ToString() const
+{
+    return std::string();
+}
 
-std::string SimulinkAtomicSubsystem::GetName() { return std::string(); }
+std::string SimulinkAtomicSubsystem::GetName()
+{
+    return std::string();
+}
 
-std::string SimulinkAtomicSubsystem::GetDimension() { return std::string(); }
+std::string SimulinkAtomicSubsystem::GetDimension()
+{
+    return std::string();
+}
 
-HError SimulinkAtomicSubsystem::SetParameter(
-    std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkAtomicSubsystem::SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return E_OK;
 }
 
-HError SimulinkAtomicSubsystem::AddParameter(
-    std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkAtomicSubsystem::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return E_OK;
 }
 
-bool SimulinkAtomicSubsystem::Contains(const SId& id) const { return false; }
+bool SimulinkAtomicSubsystem::Contains(const SId& id) const
+{
+    return false;
+}
 
-void SimulinkAtomicSubsystem::Clear() {}
+void SimulinkAtomicSubsystem::Clear()
+{
+}
 
-HError SimulinkAtomicSubsystem::Insert(
-    const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkAtomicSubsystem::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
     return E_OK;
 }
 
-HError SimulinkAtomicSubsystem::Erase(const SId& id) { return HError(); }
+HError SimulinkAtomicSubsystem::Erase(const SId& id)
+{
+    return HError();
+}
 
-HError SimulinkAtomicSubsystem::Erase(
-    const std::shared_ptr<SimulinkElementBase>& element)
+HError SimulinkAtomicSubsystem::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
     return HError();
 }

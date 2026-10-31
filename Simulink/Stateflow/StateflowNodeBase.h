@@ -26,21 +26,15 @@ class SLXIO_APIEXPORT StateflowNodeBase : public StateflowElementBase
 public:
     virtual ~StateflowNodeBase() = default;
 
-    void
-    addInTransition(const std::shared_ptr<StateflowTransition>& transition);
-    void
-    addOutTransition(const std::shared_ptr<StateflowTransition>& transition);
+    void addInTransition(const std::shared_ptr<StateflowTransition>& transition);
+    void addOutTransition(const std::shared_ptr<StateflowTransition>& transition);
 
-    const std::vector<std::shared_ptr<StateflowTransition>>&
-    getInTransitions() const;
-    const std::vector<std::shared_ptr<StateflowTransition>>&
-    getOutTransitions() const;
+    const std::vector<std::shared_ptr<StateflowTransition>>& getInTransitions() const;
+    const std::vector<std::shared_ptr<StateflowTransition>>& getOutTransitions() const;
 
     void RemoveElement();
-    void
-    removeInTransition(const std::shared_ptr<StateflowTransition>& transition);
-    void
-    removeOutTransition(const std::shared_ptr<StateflowTransition>& transition);
+    void removeInTransition(const std::shared_ptr<StateflowTransition>& transition);
+    void removeOutTransition(const std::shared_ptr<StateflowTransition>& transition);
 
 protected:
     StateflowNodeBase() = default;

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-NDLookupTable::NDLookupTable() {}
+NDLookupTable::NDLookupTable()
+{
+}
 
-NDLookupTable::~NDLookupTable() {}
+NDLookupTable::~NDLookupTable()
+{
+}
 
 const std::string& NDLookupTable::GetNumberoftabledimensions() const
 {
@@ -383,8 +387,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension1firstpoint() const
     return m_Breakpointsfordimension1firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension1firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension1firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension1firstpoint = value;
 }
@@ -394,8 +397,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension2firstpoint() const
     return m_Breakpointsfordimension2firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension2firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension2firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension2firstpoint = value;
 }
@@ -405,8 +407,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension3firstpoint() const
     return m_Breakpointsfordimension3firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension3firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension3firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension3firstpoint = value;
 }
@@ -416,8 +417,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension4firstpoint() const
     return m_Breakpointsfordimension4firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension4firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension4firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension4firstpoint = value;
 }
@@ -427,8 +427,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension5firstpoint() const
     return m_Breakpointsfordimension5firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension5firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension5firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension5firstpoint = value;
 }
@@ -438,8 +437,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension6firstpoint() const
     return m_Breakpointsfordimension6firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension6firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension6firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension6firstpoint = value;
 }
@@ -449,8 +447,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension7firstpoint() const
     return m_Breakpointsfordimension7firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension7firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension7firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension7firstpoint = value;
 }
@@ -460,8 +457,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension8firstpoint() const
     return m_Breakpointsfordimension8firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension8firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension8firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension8firstpoint = value;
 }
@@ -471,8 +467,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension9firstpoint() const
     return m_Breakpointsfordimension9firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension9firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension9firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension9firstpoint = value;
 }
@@ -482,8 +477,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension10firstpoint() const
     return m_Breakpointsfordimension10firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension10firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension10firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension10firstpoint = value;
 }
@@ -493,8 +487,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension11firstpoint() const
     return m_Breakpointsfordimension11firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension11firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension11firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension11firstpoint = value;
 }
@@ -504,8 +497,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension12firstpoint() const
     return m_Breakpointsfordimension12firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension12firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension12firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension12firstpoint = value;
 }
@@ -515,8 +507,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension13firstpoint() const
     return m_Breakpointsfordimension13firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension13firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension13firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension13firstpoint = value;
 }
@@ -526,8 +517,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension14firstpoint() const
     return m_Breakpointsfordimension14firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension14firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension14firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension14firstpoint = value;
 }
@@ -537,8 +527,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension15firstpoint() const
     return m_Breakpointsfordimension15firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension15firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension15firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension15firstpoint = value;
 }
@@ -548,8 +537,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension16firstpoint() const
     return m_Breakpointsfordimension16firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension16firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension16firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension16firstpoint = value;
 }
@@ -559,8 +547,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension17firstpoint() const
     return m_Breakpointsfordimension17firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension17firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension17firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension17firstpoint = value;
 }
@@ -570,8 +557,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension18firstpoint() const
     return m_Breakpointsfordimension18firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension18firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension18firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension18firstpoint = value;
 }
@@ -581,8 +567,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension19firstpoint() const
     return m_Breakpointsfordimension19firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension19firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension19firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension19firstpoint = value;
 }
@@ -592,8 +577,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension20firstpoint() const
     return m_Breakpointsfordimension20firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension20firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension20firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension20firstpoint = value;
 }
@@ -603,8 +587,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension21firstpoint() const
     return m_Breakpointsfordimension21firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension21firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension21firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension21firstpoint = value;
 }
@@ -614,8 +597,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension22firstpoint() const
     return m_Breakpointsfordimension22firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension22firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension22firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension22firstpoint = value;
 }
@@ -625,8 +607,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension23firstpoint() const
     return m_Breakpointsfordimension23firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension23firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension23firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension23firstpoint = value;
 }
@@ -636,8 +617,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension24firstpoint() const
     return m_Breakpointsfordimension24firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension24firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension24firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension24firstpoint = value;
 }
@@ -647,8 +627,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension25firstpoint() const
     return m_Breakpointsfordimension25firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension25firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension25firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension25firstpoint = value;
 }
@@ -658,8 +637,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension26firstpoint() const
     return m_Breakpointsfordimension26firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension26firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension26firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension26firstpoint = value;
 }
@@ -669,8 +647,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension27firstpoint() const
     return m_Breakpointsfordimension27firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension27firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension27firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension27firstpoint = value;
 }
@@ -680,8 +657,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension28firstpoint() const
     return m_Breakpointsfordimension28firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension28firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension28firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension28firstpoint = value;
 }
@@ -691,8 +667,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension29firstpoint() const
     return m_Breakpointsfordimension29firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension29firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension29firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension29firstpoint = value;
 }
@@ -702,8 +677,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension30firstpoint() const
     return m_Breakpointsfordimension30firstpoint;
 }
 
-void NDLookupTable::SetBreakpointsfordimension30firstpoint(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension30firstpoint(const std::string& value)
 {
     m_Breakpointsfordimension30firstpoint = value;
 }
@@ -803,8 +777,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension10spacing() const
     return m_Breakpointsfordimension10spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension10spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension10spacing(const std::string& value)
 {
     m_Breakpointsfordimension10spacing = value;
 }
@@ -814,8 +787,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension11spacing() const
     return m_Breakpointsfordimension11spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension11spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension11spacing(const std::string& value)
 {
     m_Breakpointsfordimension11spacing = value;
 }
@@ -825,8 +797,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension12spacing() const
     return m_Breakpointsfordimension12spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension12spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension12spacing(const std::string& value)
 {
     m_Breakpointsfordimension12spacing = value;
 }
@@ -836,8 +807,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension13spacing() const
     return m_Breakpointsfordimension13spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension13spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension13spacing(const std::string& value)
 {
     m_Breakpointsfordimension13spacing = value;
 }
@@ -847,8 +817,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension14spacing() const
     return m_Breakpointsfordimension14spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension14spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension14spacing(const std::string& value)
 {
     m_Breakpointsfordimension14spacing = value;
 }
@@ -858,8 +827,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension15spacing() const
     return m_Breakpointsfordimension15spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension15spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension15spacing(const std::string& value)
 {
     m_Breakpointsfordimension15spacing = value;
 }
@@ -869,8 +837,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension16spacing() const
     return m_Breakpointsfordimension16spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension16spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension16spacing(const std::string& value)
 {
     m_Breakpointsfordimension16spacing = value;
 }
@@ -880,8 +847,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension17spacing() const
     return m_Breakpointsfordimension17spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension17spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension17spacing(const std::string& value)
 {
     m_Breakpointsfordimension17spacing = value;
 }
@@ -891,8 +857,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension18spacing() const
     return m_Breakpointsfordimension18spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension18spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension18spacing(const std::string& value)
 {
     m_Breakpointsfordimension18spacing = value;
 }
@@ -902,8 +867,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension19spacing() const
     return m_Breakpointsfordimension19spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension19spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension19spacing(const std::string& value)
 {
     m_Breakpointsfordimension19spacing = value;
 }
@@ -913,8 +877,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension20spacing() const
     return m_Breakpointsfordimension20spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension20spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension20spacing(const std::string& value)
 {
     m_Breakpointsfordimension20spacing = value;
 }
@@ -924,8 +887,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension21spacing() const
     return m_Breakpointsfordimension21spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension21spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension21spacing(const std::string& value)
 {
     m_Breakpointsfordimension21spacing = value;
 }
@@ -935,8 +897,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension22spacing() const
     return m_Breakpointsfordimension22spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension22spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension22spacing(const std::string& value)
 {
     m_Breakpointsfordimension22spacing = value;
 }
@@ -946,8 +907,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension23spacing() const
     return m_Breakpointsfordimension23spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension23spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension23spacing(const std::string& value)
 {
     m_Breakpointsfordimension23spacing = value;
 }
@@ -957,8 +917,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension24spacing() const
     return m_Breakpointsfordimension24spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension24spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension24spacing(const std::string& value)
 {
     m_Breakpointsfordimension24spacing = value;
 }
@@ -968,8 +927,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension25spacing() const
     return m_Breakpointsfordimension25spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension25spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension25spacing(const std::string& value)
 {
     m_Breakpointsfordimension25spacing = value;
 }
@@ -979,8 +937,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension26spacing() const
     return m_Breakpointsfordimension26spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension26spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension26spacing(const std::string& value)
 {
     m_Breakpointsfordimension26spacing = value;
 }
@@ -990,8 +947,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension27spacing() const
     return m_Breakpointsfordimension27spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension27spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension27spacing(const std::string& value)
 {
     m_Breakpointsfordimension27spacing = value;
 }
@@ -1001,8 +957,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension28spacing() const
     return m_Breakpointsfordimension28spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension28spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension28spacing(const std::string& value)
 {
     m_Breakpointsfordimension28spacing = value;
 }
@@ -1012,8 +967,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension29spacing() const
     return m_Breakpointsfordimension29spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension29spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension29spacing(const std::string& value)
 {
     m_Breakpointsfordimension29spacing = value;
 }
@@ -1023,131 +977,310 @@ const std::string& NDLookupTable::GetBreakpointsfordimension30spacing() const
     return m_Breakpointsfordimension30spacing;
 }
 
-void NDLookupTable::SetBreakpointsfordimension30spacing(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension30spacing(const std::string& value)
 {
     m_Breakpointsfordimension30spacing = value;
 }
 
-const std::string& NDLookupTable::GetN1() const { return m_N1; }
+const std::string& NDLookupTable::GetN1() const
+{
+    return m_N1;
+}
 
-void NDLookupTable::SetN1(const std::string& value) { m_N1 = value; }
+void NDLookupTable::SetN1(const std::string& value)
+{
+    m_N1 = value;
+}
 
-const std::string& NDLookupTable::GetN2() const { return m_N2; }
+const std::string& NDLookupTable::GetN2() const
+{
+    return m_N2;
+}
 
-void NDLookupTable::SetN2(const std::string& value) { m_N2 = value; }
+void NDLookupTable::SetN2(const std::string& value)
+{
+    m_N2 = value;
+}
 
-const std::string& NDLookupTable::GetN3() const { return m_N3; }
+const std::string& NDLookupTable::GetN3() const
+{
+    return m_N3;
+}
 
-void NDLookupTable::SetN3(const std::string& value) { m_N3 = value; }
+void NDLookupTable::SetN3(const std::string& value)
+{
+    m_N3 = value;
+}
 
-const std::string& NDLookupTable::GetN4() const { return m_N4; }
+const std::string& NDLookupTable::GetN4() const
+{
+    return m_N4;
+}
 
-void NDLookupTable::SetN4(const std::string& value) { m_N4 = value; }
+void NDLookupTable::SetN4(const std::string& value)
+{
+    m_N4 = value;
+}
 
-const std::string& NDLookupTable::GetN5() const { return m_N5; }
+const std::string& NDLookupTable::GetN5() const
+{
+    return m_N5;
+}
 
-void NDLookupTable::SetN5(const std::string& value) { m_N5 = value; }
+void NDLookupTable::SetN5(const std::string& value)
+{
+    m_N5 = value;
+}
 
-const std::string& NDLookupTable::GetN6() const { return m_N6; }
+const std::string& NDLookupTable::GetN6() const
+{
+    return m_N6;
+}
 
-void NDLookupTable::SetN6(const std::string& value) { m_N6 = value; }
+void NDLookupTable::SetN6(const std::string& value)
+{
+    m_N6 = value;
+}
 
-const std::string& NDLookupTable::GetN7() const { return m_N7; }
+const std::string& NDLookupTable::GetN7() const
+{
+    return m_N7;
+}
 
-void NDLookupTable::SetN7(const std::string& value) { m_N7 = value; }
+void NDLookupTable::SetN7(const std::string& value)
+{
+    m_N7 = value;
+}
 
-const std::string& NDLookupTable::GetN8() const { return m_N8; }
+const std::string& NDLookupTable::GetN8() const
+{
+    return m_N8;
+}
 
-void NDLookupTable::SetN8(const std::string& value) { m_N8 = value; }
+void NDLookupTable::SetN8(const std::string& value)
+{
+    m_N8 = value;
+}
 
-const std::string& NDLookupTable::GetN9() const { return m_N9; }
+const std::string& NDLookupTable::GetN9() const
+{
+    return m_N9;
+}
 
-void NDLookupTable::SetN9(const std::string& value) { m_N9 = value; }
+void NDLookupTable::SetN9(const std::string& value)
+{
+    m_N9 = value;
+}
 
-const std::string& NDLookupTable::GetN10() const { return m_N10; }
+const std::string& NDLookupTable::GetN10() const
+{
+    return m_N10;
+}
 
-void NDLookupTable::SetN10(const std::string& value) { m_N10 = value; }
+void NDLookupTable::SetN10(const std::string& value)
+{
+    m_N10 = value;
+}
 
-const std::string& NDLookupTable::GetN11() const { return m_N11; }
+const std::string& NDLookupTable::GetN11() const
+{
+    return m_N11;
+}
 
-void NDLookupTable::SetN11(const std::string& value) { m_N11 = value; }
+void NDLookupTable::SetN11(const std::string& value)
+{
+    m_N11 = value;
+}
 
-const std::string& NDLookupTable::GetN12() const { return m_N12; }
+const std::string& NDLookupTable::GetN12() const
+{
+    return m_N12;
+}
 
-void NDLookupTable::SetN12(const std::string& value) { m_N12 = value; }
+void NDLookupTable::SetN12(const std::string& value)
+{
+    m_N12 = value;
+}
 
-const std::string& NDLookupTable::GetN13() const { return m_N13; }
+const std::string& NDLookupTable::GetN13() const
+{
+    return m_N13;
+}
 
-void NDLookupTable::SetN13(const std::string& value) { m_N13 = value; }
+void NDLookupTable::SetN13(const std::string& value)
+{
+    m_N13 = value;
+}
 
-const std::string& NDLookupTable::GetN14() const { return m_N14; }
+const std::string& NDLookupTable::GetN14() const
+{
+    return m_N14;
+}
 
-void NDLookupTable::SetN14(const std::string& value) { m_N14 = value; }
+void NDLookupTable::SetN14(const std::string& value)
+{
+    m_N14 = value;
+}
 
-const std::string& NDLookupTable::GetN15() const { return m_N15; }
+const std::string& NDLookupTable::GetN15() const
+{
+    return m_N15;
+}
 
-void NDLookupTable::SetN15(const std::string& value) { m_N15 = value; }
+void NDLookupTable::SetN15(const std::string& value)
+{
+    m_N15 = value;
+}
 
-const std::string& NDLookupTable::GetN16() const { return m_N16; }
+const std::string& NDLookupTable::GetN16() const
+{
+    return m_N16;
+}
 
-void NDLookupTable::SetN16(const std::string& value) { m_N16 = value; }
+void NDLookupTable::SetN16(const std::string& value)
+{
+    m_N16 = value;
+}
 
-const std::string& NDLookupTable::GetN17() const { return m_N17; }
+const std::string& NDLookupTable::GetN17() const
+{
+    return m_N17;
+}
 
-void NDLookupTable::SetN17(const std::string& value) { m_N17 = value; }
+void NDLookupTable::SetN17(const std::string& value)
+{
+    m_N17 = value;
+}
 
-const std::string& NDLookupTable::GetN18() const { return m_N18; }
+const std::string& NDLookupTable::GetN18() const
+{
+    return m_N18;
+}
 
-void NDLookupTable::SetN18(const std::string& value) { m_N18 = value; }
+void NDLookupTable::SetN18(const std::string& value)
+{
+    m_N18 = value;
+}
 
-const std::string& NDLookupTable::GetN19() const { return m_N19; }
+const std::string& NDLookupTable::GetN19() const
+{
+    return m_N19;
+}
 
-void NDLookupTable::SetN19(const std::string& value) { m_N19 = value; }
+void NDLookupTable::SetN19(const std::string& value)
+{
+    m_N19 = value;
+}
 
-const std::string& NDLookupTable::GetN20() const { return m_N20; }
+const std::string& NDLookupTable::GetN20() const
+{
+    return m_N20;
+}
 
-void NDLookupTable::SetN20(const std::string& value) { m_N20 = value; }
+void NDLookupTable::SetN20(const std::string& value)
+{
+    m_N20 = value;
+}
 
-const std::string& NDLookupTable::GetN21() const { return m_N21; }
+const std::string& NDLookupTable::GetN21() const
+{
+    return m_N21;
+}
 
-void NDLookupTable::SetN21(const std::string& value) { m_N21 = value; }
+void NDLookupTable::SetN21(const std::string& value)
+{
+    m_N21 = value;
+}
 
-const std::string& NDLookupTable::GetN22() const { return m_N22; }
+const std::string& NDLookupTable::GetN22() const
+{
+    return m_N22;
+}
 
-void NDLookupTable::SetN22(const std::string& value) { m_N22 = value; }
+void NDLookupTable::SetN22(const std::string& value)
+{
+    m_N22 = value;
+}
 
-const std::string& NDLookupTable::GetN23() const { return m_N23; }
+const std::string& NDLookupTable::GetN23() const
+{
+    return m_N23;
+}
 
-void NDLookupTable::SetN23(const std::string& value) { m_N23 = value; }
+void NDLookupTable::SetN23(const std::string& value)
+{
+    m_N23 = value;
+}
 
-const std::string& NDLookupTable::GetN24() const { return m_N24; }
+const std::string& NDLookupTable::GetN24() const
+{
+    return m_N24;
+}
 
-void NDLookupTable::SetN24(const std::string& value) { m_N24 = value; }
+void NDLookupTable::SetN24(const std::string& value)
+{
+    m_N24 = value;
+}
 
-const std::string& NDLookupTable::GetN25() const { return m_N25; }
+const std::string& NDLookupTable::GetN25() const
+{
+    return m_N25;
+}
 
-void NDLookupTable::SetN25(const std::string& value) { m_N25 = value; }
+void NDLookupTable::SetN25(const std::string& value)
+{
+    m_N25 = value;
+}
 
-const std::string& NDLookupTable::GetN26() const { return m_N26; }
+const std::string& NDLookupTable::GetN26() const
+{
+    return m_N26;
+}
 
-void NDLookupTable::SetN26(const std::string& value) { m_N26 = value; }
+void NDLookupTable::SetN26(const std::string& value)
+{
+    m_N26 = value;
+}
 
-const std::string& NDLookupTable::GetN27() const { return m_N27; }
+const std::string& NDLookupTable::GetN27() const
+{
+    return m_N27;
+}
 
-void NDLookupTable::SetN27(const std::string& value) { m_N27 = value; }
+void NDLookupTable::SetN27(const std::string& value)
+{
+    m_N27 = value;
+}
 
-const std::string& NDLookupTable::GetN28() const { return m_N28; }
+const std::string& NDLookupTable::GetN28() const
+{
+    return m_N28;
+}
 
-void NDLookupTable::SetN28(const std::string& value) { m_N28 = value; }
+void NDLookupTable::SetN28(const std::string& value)
+{
+    m_N28 = value;
+}
 
-const std::string& NDLookupTable::GetN29() const { return m_N29; }
+const std::string& NDLookupTable::GetN29() const
+{
+    return m_N29;
+}
 
-void NDLookupTable::SetN29(const std::string& value) { m_N29 = value; }
+void NDLookupTable::SetN29(const std::string& value)
+{
+    m_N29 = value;
+}
 
-const std::string& NDLookupTable::GetN30() const { return m_N30; }
+const std::string& NDLookupTable::GetN30() const
+{
+    return m_N30;
+}
 
-void NDLookupTable::SetN30(const std::string& value) { m_N30 = value; }
+void NDLookupTable::SetN30(const std::string& value)
+{
+    m_N30 = value;
+}
 
 const std::string& NDLookupTable::GetBreakpointsfordimension1min() const
 {
@@ -1754,8 +1887,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension1datatypestr() const
     return m_Breakpointsfordimension1datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension1datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension1datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension1datatypestr = value;
 }
@@ -1765,8 +1897,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension2datatypestr() const
     return m_Breakpointsfordimension2datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension2datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension2datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension2datatypestr = value;
 }
@@ -1776,8 +1907,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension3datatypestr() const
     return m_Breakpointsfordimension3datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension3datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension3datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension3datatypestr = value;
 }
@@ -1787,8 +1917,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension4datatypestr() const
     return m_Breakpointsfordimension4datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension4datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension4datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension4datatypestr = value;
 }
@@ -1798,8 +1927,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension5datatypestr() const
     return m_Breakpointsfordimension5datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension5datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension5datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension5datatypestr = value;
 }
@@ -1809,8 +1937,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension6datatypestr() const
     return m_Breakpointsfordimension6datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension6datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension6datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension6datatypestr = value;
 }
@@ -1820,8 +1947,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension7datatypestr() const
     return m_Breakpointsfordimension7datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension7datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension7datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension7datatypestr = value;
 }
@@ -1831,8 +1957,7 @@ const std::string& NDLookupTable::GetBreakpointsfordimension8datatypestr() const
     return m_Breakpointsfordimension8datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension8datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension8datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension8datatypestr = value;
 }
@@ -1842,260 +1967,217 @@ const std::string& NDLookupTable::GetBreakpointsfordimension9datatypestr() const
     return m_Breakpointsfordimension9datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension9datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension9datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension9datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension10datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension10datatypestr() const
 {
     return m_Breakpointsfordimension10datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension10datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension10datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension10datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension11datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension11datatypestr() const
 {
     return m_Breakpointsfordimension11datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension11datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension11datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension11datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension12datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension12datatypestr() const
 {
     return m_Breakpointsfordimension12datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension12datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension12datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension12datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension13datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension13datatypestr() const
 {
     return m_Breakpointsfordimension13datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension13datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension13datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension13datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension14datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension14datatypestr() const
 {
     return m_Breakpointsfordimension14datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension14datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension14datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension14datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension15datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension15datatypestr() const
 {
     return m_Breakpointsfordimension15datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension15datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension15datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension15datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension16datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension16datatypestr() const
 {
     return m_Breakpointsfordimension16datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension16datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension16datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension16datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension17datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension17datatypestr() const
 {
     return m_Breakpointsfordimension17datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension17datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension17datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension17datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension18datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension18datatypestr() const
 {
     return m_Breakpointsfordimension18datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension18datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension18datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension18datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension19datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension19datatypestr() const
 {
     return m_Breakpointsfordimension19datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension19datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension19datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension19datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension20datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension20datatypestr() const
 {
     return m_Breakpointsfordimension20datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension20datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension20datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension20datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension21datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension21datatypestr() const
 {
     return m_Breakpointsfordimension21datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension21datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension21datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension21datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension22datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension22datatypestr() const
 {
     return m_Breakpointsfordimension22datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension22datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension22datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension22datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension23datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension23datatypestr() const
 {
     return m_Breakpointsfordimension23datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension23datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension23datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension23datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension24datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension24datatypestr() const
 {
     return m_Breakpointsfordimension24datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension24datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension24datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension24datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension25datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension25datatypestr() const
 {
     return m_Breakpointsfordimension25datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension25datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension25datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension25datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension26datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension26datatypestr() const
 {
     return m_Breakpointsfordimension26datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension26datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension26datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension26datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension27datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension27datatypestr() const
 {
     return m_Breakpointsfordimension27datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension27datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension27datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension27datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension28datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension28datatypestr() const
 {
     return m_Breakpointsfordimension28datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension28datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension28datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension28datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension29datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension29datatypestr() const
 {
     return m_Breakpointsfordimension29datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension29datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension29datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension29datatypestr = value;
 }
 
-const std::string&
-NDLookupTable::GetBreakpointsfordimension30datatypestr() const
+const std::string& NDLookupTable::GetBreakpointsfordimension30datatypestr() const
 {
     return m_Breakpointsfordimension30datatypestr;
 }
 
-void NDLookupTable::SetBreakpointsfordimension30datatypestr(
-    const std::string& value)
+void NDLookupTable::SetBreakpointsfordimension30datatypestr(const std::string& value)
 {
     m_Breakpointsfordimension30datatypestr = value;
 }
@@ -2110,14 +2192,12 @@ void NDLookupTable::SetIndexsearchmethod(const std::string& value)
     m_Indexsearchmethod = value;
 }
 
-const std::string&
-NDLookupTable::GetBeginindexsearchusingpreviousindexresult() const
+const std::string& NDLookupTable::GetBeginindexsearchusingpreviousindexresult() const
 {
     return m_Beginindexsearchusingpreviousindexresult;
 }
 
-void NDLookupTable::SetBeginindexsearchusingpreviousindexresult(
-    const std::string& value)
+void NDLookupTable::SetBeginindexsearchusingpreviousindexresult(const std::string& value)
 {
     m_Beginindexsearchusingpreviousindexresult = value;
 }
@@ -2142,18 +2222,30 @@ void NDLookupTable::SetTablesource(const std::string& value)
     m_Tablesource = value;
 }
 
-const std::string& NDLookupTable::GetTable() const { return m_Table; }
+const std::string& NDLookupTable::GetTable() const
+{
+    return m_Table;
+}
 
-void NDLookupTable::SetTable(const std::string& value) { m_Table = value; }
+void NDLookupTable::SetTable(const std::string& value)
+{
+    m_Table = value;
+}
 
-const std::string& NDLookupTable::GetTablemin() const { return m_Tablemin; }
+const std::string& NDLookupTable::GetTablemin() const
+{
+    return m_Tablemin;
+}
 
 void NDLookupTable::SetTablemin(const std::string& value)
 {
     m_Tablemin = value;
 }
 
-const std::string& NDLookupTable::GetTablemax() const { return m_Tablemax; }
+const std::string& NDLookupTable::GetTablemax() const
+{
+    return m_Tablemax;
+}
 
 void NDLookupTable::SetTablemax(const std::string& value)
 {
@@ -2230,14 +2322,12 @@ void NDLookupTable::SetUselasttablevalue(const std::string& value)
     m_Uselasttablevalue = value;
 }
 
-const std::string&
-NDLookupTable::GetApplyfullprecisionforlinearinterpolation() const
+const std::string& NDLookupTable::GetApplyfullprecisionforlinearinterpolation() const
 {
     return m_Applyfullprecisionforlinearinterpolation;
 }
 
-void NDLookupTable::SetApplyfullprecisionforlinearinterpolation(
-    const std::string& value)
+void NDLookupTable::SetApplyfullprecisionforlinearinterpolation(const std::string& value)
 {
     m_Applyfullprecisionforlinearinterpolation = value;
 }
@@ -2252,7 +2342,10 @@ void NDLookupTable::SetApplyaccurateefficientrounding(const std::string& value)
     m_Applyaccurateefficientrounding = value;
 }
 
-const std::string& NDLookupTable::GetSampletime() const { return m_Sampletime; }
+const std::string& NDLookupTable::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void NDLookupTable::SetSampletime(const std::string& value)
 {
@@ -2279,13 +2372,25 @@ void NDLookupTable::SetInputsamedt(const std::string& value)
     m_Inputsamedt = value;
 }
 
-const std::string& NDLookupTable::GetOutmin() const { return m_Outmin; }
+const std::string& NDLookupTable::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void NDLookupTable::SetOutmin(const std::string& value) { m_Outmin = value; }
+void NDLookupTable::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& NDLookupTable::GetOutmax() const { return m_Outmax; }
+const std::string& NDLookupTable::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void NDLookupTable::SetOutmax(const std::string& value) { m_Outmax = value; }
+void NDLookupTable::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& NDLookupTable::GetOutdatatypestr() const
 {
@@ -2297,16 +2402,25 @@ void NDLookupTable::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& NDLookupTable::GetLockscale() const { return m_Lockscale; }
+const std::string& NDLookupTable::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void NDLookupTable::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& NDLookupTable::GetRndmeth() const { return m_Rndmeth; }
+const std::string& NDLookupTable::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void NDLookupTable::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void NDLookupTable::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& NDLookupTable::GetSaturateonintegeroverflow() const
 {

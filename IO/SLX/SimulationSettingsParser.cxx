@@ -26,7 +26,10 @@ HError SimulationSettingsParser::setInputData(const xmlNodePtr data)
     return E_OK;
 }
 
-HError SimulationSettingsParser::parse() { return E_OK; }
+HError SimulationSettingsParser::parse()
+{
+    return E_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

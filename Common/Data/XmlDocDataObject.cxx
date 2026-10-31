@@ -4,7 +4,10 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-XmlDocDataObject* XmlDocDataObject::New() { return new XmlDocDataObject(); }
+XmlDocDataObject* XmlDocDataObject::New()
+{
+    return new XmlDocDataObject();
+}
 
 void XmlDocDataObject::Initialize(void* implDataObject)
 {
@@ -14,7 +17,10 @@ void XmlDocDataObject::Initialize(void* implDataObject)
     }
 }
 
-bool XmlDocDataObject::Empty() const { return m_implDataObject == nullptr; }
+bool XmlDocDataObject::Empty() const
+{
+    return m_implDataObject == nullptr;
+}
 
 bool XmlDocDataObject::operator==(const IDataObject& other) const
 {
@@ -49,7 +55,10 @@ bool XmlDocDataObject::operator==(const IDataObject& other) const
     return equal;
 }
 
-void* XmlDocDataObject::GetImplDataObject() const { return m_implDataObject; }
+void* XmlDocDataObject::GetImplDataObject() const
+{
+    return m_implDataObject;
+}
 
 std::string XmlDocDataObject::ToString() const
 {
@@ -75,7 +84,9 @@ DataType XmlDocDataObject::GetDataType() const
     return DataType::SLXIO_TYPE_LIBXML_DOCPTR;
 }
 
-XmlDocDataObject::XmlDocDataObject() : m_implDataObject(nullptr) {}
+XmlDocDataObject::XmlDocDataObject() : m_implDataObject(nullptr)
+{
+}
 
 XmlDocDataObject::~XmlDocDataObject()
 {

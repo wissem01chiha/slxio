@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IndexSearch::IndexSearch() {}
+IndexSearch::IndexSearch()
+{
+}
 
-IndexSearch::~IndexSearch() {}
+IndexSearch::~IndexSearch()
+{
+}
 
 const std::string& IndexSearch::GetBreakpointsdatasource() const
 {
@@ -98,14 +102,12 @@ void IndexSearch::SetIndexsearchmethod(const std::string& value)
     m_Indexsearchmethod = value;
 }
 
-const std::string&
-IndexSearch::GetBeginindexsearchusingpreviousindexresult() const
+const std::string& IndexSearch::GetBeginindexsearchusingpreviousindexresult() const
 {
     return m_Beginindexsearchusingpreviousindexresult;
 }
 
-void IndexSearch::SetBeginindexsearchusingpreviousindexresult(
-    const std::string& value)
+void IndexSearch::SetBeginindexsearchusingpreviousindexresult(const std::string& value)
 {
     m_Beginindexsearchusingpreviousindexresult = value;
 }
@@ -200,18 +202,30 @@ void IndexSearch::SetFractiondatatypestr(const std::string& value)
     m_Fractiondatatypestr = value;
 }
 
-const std::string& IndexSearch::GetLockscale() const { return m_Lockscale; }
+const std::string& IndexSearch::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void IndexSearch::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& IndexSearch::GetRndmeth() const { return m_Rndmeth; }
+const std::string& IndexSearch::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void IndexSearch::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void IndexSearch::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
-const std::string& IndexSearch::GetSampletime() const { return m_Sampletime; }
+const std::string& IndexSearch::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void IndexSearch::SetSampletime(const std::string& value)
 {

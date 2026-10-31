@@ -10,16 +10,23 @@ SimulinkFileObject* SimulinkFileObject::New()
     return new SimulinkFileObject();
 }
 
-void SimulinkFileObject::Initialize() {}
+void SimulinkFileObject::Initialize()
+{
+}
 
-UInt32 SimulinkFileObject::GetUpdateTime() const { return UInt32(); }
+UInt32 SimulinkFileObject::GetUpdateTime() const
+{
+    return UInt32();
+}
 
-void* SimulinkFileObject::GetImplDataObject() const { return ImplDataObject; }
+void* SimulinkFileObject::GetImplDataObject() const
+{
+    return ImplDataObject;
+}
 
 bool SimulinkFileObject::operator==(const DataObject& other)
 {
-    return ImplDataObject->Name ==
-           static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
+    return ImplDataObject->Name == static_cast<SimulinkFile*>(other.GetImplDataObject())->Name;
 }
 
 std::string SimulinkFileObject::ToString() const
@@ -34,17 +41,21 @@ std::string SimulinkFileObject::ToString() const
         << "revision=\"" << ImplDataObject->Revision << "\", "
         << "version=\"" << ImplDataObject->Version << "\", "
         << "contentType=\"" << ImplDataObject->ContentType << "\", "
-        << "contentTypeFriendlyName=\""
-        << ImplDataObject->ContentTypeFriendlyName << "\", "
+        << "contentTypeFriendlyName=\"" << ImplDataObject->ContentTypeFriendlyName << "\", "
         << "matlabRelease=\"" << ImplDataObject->MatlabRelease << "\", "
         << "matlabVersion=\"" << ImplDataObject->MatlabVersion << "\""
         << " }";
     return oss.str();
 }
 
-bool SimulinkFileObject::Empty() { return ImplDataObject == nullptr; }
+bool SimulinkFileObject::Empty()
+{
+    return ImplDataObject == nullptr;
+}
 
-SimulinkFileObject::SimulinkFileObject() {}
+SimulinkFileObject::SimulinkFileObject()
+{
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

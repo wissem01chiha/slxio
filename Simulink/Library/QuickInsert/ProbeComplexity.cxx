@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ProbeComplexity::ProbeComplexity() {}
+ProbeComplexity::ProbeComplexity()
+{
+}
 
-ProbeComplexity::~ProbeComplexity() {}
+ProbeComplexity::~ProbeComplexity()
+{
+}
 
 const std::string& ProbeComplexity::GetProbewidth() const
 {

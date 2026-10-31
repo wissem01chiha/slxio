@@ -37,7 +37,6 @@ public:
      */
     StateflowMachine(StateflowMachine orig, SimulinkModel model)
     {
-
         // model = model;
         // model.setStateflowMachine(this);
 
@@ -80,10 +79,16 @@ public:
     }
 
     /** @brief Get the Simulink model this machine belongs to. */
-    SimulinkModel getModel() { return model; }
+    SimulinkModel getModel()
+    {
+        return model;
+    }
 
     /** @brief Get targets of this machine. */
-    std::vector<StateflowTarget> GetTargets() { return m_targets; }
+    std::vector<StateflowTarget> GetTargets()
+    {
+        return m_targets;
+    }
 
     /**
      * @brief Removes the machine from the model. The Machine can be

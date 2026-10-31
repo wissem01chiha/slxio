@@ -4,15 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Cosine::Cosine() {}
+Cosine::Cosine()
+{
+}
 
-Cosine::~Cosine() {}
+Cosine::~Cosine()
+{
+}
 
-const std::string& Cosine::GetFormula() const { return m_Formula; }
+const std::string& Cosine::GetFormula() const
+{
+    return m_Formula;
+}
 
-void Cosine::SetFormula(const std::string& value) { m_Formula = value; }
+void Cosine::SetFormula(const std::string& value)
+{
+    m_Formula = value;
+}
 
-const std::string& Cosine::GetNumdatapoints() const { return m_Numdatapoints; }
+const std::string& Cosine::GetNumdatapoints() const
+{
+    return m_Numdatapoints;
+}
 
 void Cosine::SetNumdatapoints(const std::string& value)
 {

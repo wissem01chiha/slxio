@@ -8,17 +8,14 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class SimulinkParameterParserTestFixture
 {
 protected:
-    SimulinkParameterParserTestFixture()
-        : parserPtr(new SimulinkParameterParser()), doc(nullptr)
+    SimulinkParameterParserTestFixture() : parserPtr(new SimulinkParameterParser()), doc(nullptr)
     {
     }
 
     xmlNodePtr getXmlNodePtr(const char* xmlfilename)
     {
-
         char xmlfilepath[512];
-        snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s",
-                 PROJECT_ROOT_DIR, xmlfilename);
+        snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/IO/Slx/Testing/Data/%s", PROJECT_ROOT_DIR, xmlfilename);
         doc = xmlReadFile(xmlfilepath, nullptr, 0);
         if (!doc)
         {
@@ -30,7 +27,6 @@ protected:
 
     ~SimulinkParameterParserTestFixture()
     {
-
         if (parserPtr)
         {
             delete parserPtr;
@@ -48,16 +44,13 @@ protected:
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParserSetInputDataTest")
 {
-
     xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
     HError status = parserPtr->setInputData(nodePtr);
     CHECK(status == E_OK);
 }
 
-TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
-                  "GetParameterNotNullPtrTest")
+TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "GetParameterNotNullPtrTest")
 {
-
     xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
     HError status = parserPtr->setInputData(nodePtr);
     std::shared_ptr<SimulinkParameter> dataObj = parserPtr->getOutputData();
@@ -67,7 +60,6 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture,
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest")
 {
-
     xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
     parserPtr->setInputData(nodePtr);
     HError status = parserPtr->parse();
@@ -76,7 +68,6 @@ TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterParserTest")
 
 TEST_CASE_FIXTURE(SimulinkParameterParserTestFixture, "ParameterValidDataTest")
 {
-
     xmlNodePtr nodePtr = getXmlNodePtr("parameter.xml");
     parserPtr->setInputData(nodePtr);
     parserPtr->parse();

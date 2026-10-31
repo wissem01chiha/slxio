@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Tanh::Tanh() {}
+Tanh::Tanh()
+{
+}
 
-Tanh::~Tanh() {}
+Tanh::~Tanh()
+{
+}
 
-const std::string& Tanh::GetOperator() const { return m_Operator; }
+const std::string& Tanh::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Tanh::SetOperator(const std::string& value) { m_Operator = value; }
+void Tanh::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Tanh::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Tanh::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Tanh::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Tanh::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Tanh::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Tanh::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Tanh::GetAngleunit() const { return m_Angleunit; }
+const std::string& Tanh::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Tanh::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Tanh::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Tanh::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Tanh::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Tanh::GetSampletime() const { return m_Sampletime; }
+const std::string& Tanh::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Tanh::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Tanh::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

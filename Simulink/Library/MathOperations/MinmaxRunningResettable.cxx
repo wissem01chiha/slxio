@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MinmaxRunningResettable::MinmaxRunningResettable() {}
+MinmaxRunningResettable::MinmaxRunningResettable()
+{
+}
 
-MinmaxRunningResettable::~MinmaxRunningResettable() {}
+MinmaxRunningResettable::~MinmaxRunningResettable()
+{
+}
 
 const std::string& MinmaxRunningResettable::GetFunction() const
 {
@@ -18,7 +22,10 @@ void MinmaxRunningResettable::SetFunction(const std::string& value)
     m_Function = value;
 }
 
-const std::string& MinmaxRunningResettable::GetVinit() const { return m_Vinit; }
+const std::string& MinmaxRunningResettable::GetVinit() const
+{
+    return m_Vinit;
+}
 
 void MinmaxRunningResettable::SetVinit(const std::string& value)
 {

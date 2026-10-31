@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariantSink::VariantSink() {}
+VariantSink::VariantSink()
+{
+}
 
-VariantSink::~VariantSink() {}
+VariantSink::~VariantSink()
+{
+}
 
 const std::string& VariantSink::GetVariantcontrols() const
 {

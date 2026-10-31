@@ -34,32 +34,41 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * dataObj.Initialize(floatSignal);
  * @endcode
  */
-template <typename T>
-class SLXIO_APIEXPORT ISignalDataObject : public IDataObject
+template <typename T> class SLXIO_APIEXPORT ISignalDataObject : public IDataObject
 {
 public:
-    ISignalDataObject() : m_signal(nullptr) {}
+    ISignalDataObject() : m_signal(nullptr)
+    {
+    }
     virtual ~ISignalDataObject() = default;
 
-    IDataObject* New() override { return new ISignalDataObject<T>(); }
+    IDataObject* New() override
+    {
+        return new ISignalDataObject<T>();
+    }
 
     bool operator==(const IDataObject& other) override
     {
-        const auto* otherObj =
-            dynamic_cast<const ISignalDataObject<T>*>(&other);
+        const auto* otherObj = dynamic_cast<const ISignalDataObject<T>*>(&other);
         if (!otherObj || !m_signal || !otherObj->m_signal)
             return false;
         return m_signal->GetData() == otherObj->m_signal->GetData();
     }
 
-    void* GetImplDataObject() const override { return m_signal; }
+    void* GetImplDataObject() const override
+    {
+        return m_signal;
+    }
 
     std::string ToString() const override
     {
         return "ISignalDataObject <" + ">";
     }
 
-    bool Empty() const override { return m_signal ? m_signal->Empty() : true; }
+    bool Empty() const override
+    {
+        return m_signal ? m_signal->Empty() : true;
+    }
 
 private:
     ISignalObject<T>* m_signal;

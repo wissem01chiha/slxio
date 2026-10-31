@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SinCordic::SinCordic() {}
+SinCordic::SinCordic()
+{
+}
 
-SinCordic::~SinCordic() {}
+SinCordic::~SinCordic()
+{
+}
 
-const std::string& SinCordic::GetOperator() const { return m_Operator; }
+const std::string& SinCordic::GetOperator() const
+{
+    return m_Operator;
+}
 
-void SinCordic::SetOperator(const std::string& value) { m_Operator = value; }
+void SinCordic::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& SinCordic::GetApproximationmethod() const
 {
@@ -42,16 +52,25 @@ void SinCordic::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& SinCordic::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& SinCordic::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
 void SinCordic::SetInterpmethod(const std::string& value)
 {
     m_Interpmethod = value;
 }
 
-const std::string& SinCordic::GetAngleunit() const { return m_Angleunit; }
+const std::string& SinCordic::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void SinCordic::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void SinCordic::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& SinCordic::GetNumberofdatapoints() const
 {
@@ -78,13 +97,15 @@ const std::string& SinCordic::GetRemoveprotectionagainstoutofrangeinput() const
     return m_Removeprotectionagainstoutofrangeinput;
 }
 
-void SinCordic::SetRemoveprotectionagainstoutofrangeinput(
-    const std::string& value)
+void SinCordic::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
 {
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& SinCordic::GetSampletime() const { return m_Sampletime; }
+const std::string& SinCordic::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void SinCordic::SetSampletime(const std::string& value)
 {

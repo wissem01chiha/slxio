@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DelayOneStep::DelayOneStep() {}
+DelayOneStep::DelayOneStep()
+{
+}
 
-DelayOneStep::~DelayOneStep() {}
+DelayOneStep::~DelayOneStep()
+{
+}
 
 const std::string& DelayOneStep::GetDelaylengthsource() const
 {
@@ -98,14 +102,12 @@ void DelayOneStep::SetDiagnosticfordelaylength(const std::string& value)
     m_Diagnosticfordelaylength = value;
 }
 
-const std::string&
-DelayOneStep::GetRemovedelaylengthcheckingeneratedcode() const
+const std::string& DelayOneStep::GetRemovedelaylengthcheckingeneratedcode() const
 {
     return m_Removedelaylengthcheckingeneratedcode;
 }
 
-void DelayOneStep::SetRemovedelaylengthcheckingeneratedcode(
-    const std::string& value)
+void DelayOneStep::SetRemovedelaylengthcheckingeneratedcode(const std::string& value)
 {
     m_Removedelaylengthcheckingeneratedcode = value;
 }
@@ -130,14 +132,20 @@ void DelayOneStep::SetUsecircularbuffer(const std::string& value)
     m_Usecircularbuffer = value;
 }
 
-const std::string& DelayOneStep::GetSampletime() const { return m_Sampletime; }
+const std::string& DelayOneStep::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void DelayOneStep::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& DelayOneStep::GetStatename() const { return m_Statename; }
+const std::string& DelayOneStep::GetStatename() const
+{
+    return m_Statename;
+}
 
 void DelayOneStep::SetStatename(const std::string& value)
 {

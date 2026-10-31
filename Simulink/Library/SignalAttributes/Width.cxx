@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Width::Width() {}
+Width::Width()
+{
+}
 
-Width::~Width() {}
+Width::~Width()
+{
+}
 
 const std::string& Width::GetOutdatatypemode() const
 {
@@ -18,9 +22,15 @@ void Width::SetOutdatatypemode(const std::string& value)
     m_Outdatatypemode = value;
 }
 
-const std::string& Width::GetDatatype() const { return m_Datatype; }
+const std::string& Width::GetDatatype() const
+{
+    return m_Datatype;
+}
 
-void Width::SetDatatype(const std::string& value) { m_Datatype = value; }
+void Width::SetDatatype(const std::string& value)
+{
+    m_Datatype = value;
+}
 
 const std::string& Width::GetAlwaysuseconstantsampletime() const
 {

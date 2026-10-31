@@ -4,18 +4,20 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-InterpolationUsingPrelookup::InterpolationUsingPrelookup() {}
+InterpolationUsingPrelookup::InterpolationUsingPrelookup()
+{
+}
 
-InterpolationUsingPrelookup::~InterpolationUsingPrelookup() {}
+InterpolationUsingPrelookup::~InterpolationUsingPrelookup()
+{
+}
 
-const std::string&
-InterpolationUsingPrelookup::GetNumberoftabledimensions() const
+const std::string& InterpolationUsingPrelookup::GetNumberoftabledimensions() const
 {
     return m_Numberoftabledimensions;
 }
 
-void InterpolationUsingPrelookup::SetNumberoftabledimensions(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetNumberoftabledimensions(const std::string& value)
 {
     m_Numberoftabledimensions = value;
 }
@@ -45,8 +47,7 @@ const std::string& InterpolationUsingPrelookup::GetTablespecification() const
     return m_Tablespecification;
 }
 
-void InterpolationUsingPrelookup::SetTablespecification(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetTablespecification(const std::string& value)
 {
     m_Tablespecification = value;
 }
@@ -81,26 +82,22 @@ void InterpolationUsingPrelookup::SetExtrapmethod(const std::string& value)
     m_Extrapmethod = value;
 }
 
-const std::string&
-InterpolationUsingPrelookup::GetDiagnosticforoutofrangeinput() const
+const std::string& InterpolationUsingPrelookup::GetDiagnosticforoutofrangeinput() const
 {
     return m_Diagnosticforoutofrangeinput;
 }
 
-void InterpolationUsingPrelookup::SetDiagnosticforoutofrangeinput(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetDiagnosticforoutofrangeinput(const std::string& value)
 {
     m_Diagnosticforoutofrangeinput = value;
 }
 
-const std::string&
-InterpolationUsingPrelookup::GetRequireindexfractionasbus() const
+const std::string& InterpolationUsingPrelookup::GetRequireindexfractionasbus() const
 {
     return m_Requireindexfractionasbus;
 }
 
-void InterpolationUsingPrelookup::SetRequireindexfractionasbus(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetRequireindexfractionasbus(const std::string& value)
 {
     m_Requireindexfractionasbus = value;
 }
@@ -110,20 +107,17 @@ const std::string& InterpolationUsingPrelookup::GetRemoveprotectionindex() const
     return m_Removeprotectionindex;
 }
 
-void InterpolationUsingPrelookup::SetRemoveprotectionindex(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetRemoveprotectionindex(const std::string& value)
 {
     m_Removeprotectionindex = value;
 }
 
-const std::string&
-InterpolationUsingPrelookup::GetValidindexmayreachlast() const
+const std::string& InterpolationUsingPrelookup::GetValidindexmayreachlast() const
 {
     return m_Validindexmayreachlast;
 }
 
-void InterpolationUsingPrelookup::SetValidindexmayreachlast(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetValidindexmayreachlast(const std::string& value)
 {
     m_Validindexmayreachlast = value;
 }
@@ -183,8 +177,7 @@ const std::string& InterpolationUsingPrelookup::GetInternalrulepriority() const
     return m_Internalrulepriority;
 }
 
-void InterpolationUsingPrelookup::SetInternalrulepriority(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetInternalrulepriority(const std::string& value)
 {
     m_Internalrulepriority = value;
 }
@@ -209,14 +202,12 @@ void InterpolationUsingPrelookup::SetRndmeth(const std::string& value)
     m_Rndmeth = value;
 }
 
-const std::string&
-InterpolationUsingPrelookup::GetSaturateonintegeroverflow() const
+const std::string& InterpolationUsingPrelookup::GetSaturateonintegeroverflow() const
 {
     return m_Saturateonintegeroverflow;
 }
 
-void InterpolationUsingPrelookup::SetSaturateonintegeroverflow(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetSaturateonintegeroverflow(const std::string& value)
 {
     m_Saturateonintegeroverflow = value;
 }
@@ -251,14 +242,12 @@ void InterpolationUsingPrelookup::SetTabledatatypestr(const std::string& value)
     m_Tabledatatypestr = value;
 }
 
-const std::string&
-InterpolationUsingPrelookup::GetIntermediateresultsdatatypestr() const
+const std::string& InterpolationUsingPrelookup::GetIntermediateresultsdatatypestr() const
 {
     return m_Intermediateresultsdatatypestr;
 }
 
-void InterpolationUsingPrelookup::SetIntermediateresultsdatatypestr(
-    const std::string& value)
+void InterpolationUsingPrelookup::SetIntermediateresultsdatatypestr(const std::string& value)
 {
     m_Intermediateresultsdatatypestr = value;
 }

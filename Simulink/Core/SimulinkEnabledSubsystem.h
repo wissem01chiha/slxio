@@ -17,8 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkEnabledSubsystem
  * @brief Represents a Simulink Enabled Subsystem element in a Simulink model.
  */
-class SLXIO_APIEXPORT SimulinkEnabledSubsystem : public SimulinkElementBase,
-                                                 SimulinkSubsystem
+class SLXIO_APIEXPORT SimulinkEnabledSubsystem : public SimulinkElementBase, SimulinkSubsystem
 {
 public:
     /** Default constructor.*/
@@ -79,17 +78,13 @@ public:
 
     /** Return a pointer to a given parameter by name, if not
      * found a or the blcok has not paramters an empty parameter returned. */
-    std::shared_ptr<SimulinkParameterBase>
-    GetParameter(std::string name) override;
+    std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
     /** Sets the element specifc parameter to given one  */
-    HError
-    SetParameter(std::string name,
-                 std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
     /* Adds a Parameter to the array */
-    HError
-    AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
 private:
 };

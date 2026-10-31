@@ -27,7 +27,6 @@ void Logger::Init()
 
 void Logger::Log(const ILogMessage& msg)
 {
-
     switch (m_level)
     {
     case LogLevelType::LOG_FATAL:
@@ -60,9 +59,15 @@ void Logger::Log(const ILogMessage& msg)
     }
 }
 
-void Logger::SetLogLevel(LogLevelType level) { m_level = level; }
+void Logger::SetLogLevel(LogLevelType level)
+{
+    m_level = level;
+}
 
-LogLevelType Logger::GetLogLevel() const { return m_level; }
+LogLevelType Logger::GetLogLevel() const
+{
+    return m_level;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

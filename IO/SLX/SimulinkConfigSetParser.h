@@ -17,8 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @brief SimulinkConfigurationSet Parser class.
  */
-class SLXIO_APIEXPORT SimulinkConfigSetParser final
-    : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet>
+class SLXIO_APIEXPORT SimulinkConfigSetParser final : public SimulinkParserBase<xmlNodePtr, SimulinkConfigSet>
 {
 public:
     SimulinkConfigSetParser() = default;

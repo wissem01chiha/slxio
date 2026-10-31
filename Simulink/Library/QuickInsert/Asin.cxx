@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Asin::Asin() {}
+Asin::Asin()
+{
+}
 
-Asin::~Asin() {}
+Asin::~Asin()
+{
+}
 
-const std::string& Asin::GetOperator() const { return m_Operator; }
+const std::string& Asin::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Asin::SetOperator(const std::string& value) { m_Operator = value; }
+void Asin::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Asin::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Asin::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Asin::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Asin::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Asin::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Asin::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Asin::GetAngleunit() const { return m_Angleunit; }
+const std::string& Asin::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Asin::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Asin::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Asin::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Asin::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Asin::GetSampletime() const { return m_Sampletime; }
+const std::string& Asin::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Asin::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Asin::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

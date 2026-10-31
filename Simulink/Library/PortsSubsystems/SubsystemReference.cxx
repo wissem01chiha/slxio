@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SubsystemReference::SubsystemReference() {}
+SubsystemReference::SubsystemReference()
+{
+}
 
-SubsystemReference::~SubsystemReference() {}
+SubsystemReference::~SubsystemReference()
+{
+}
 
 const std::string& SubsystemReference::GetShowportlabels() const
 {
@@ -73,8 +77,7 @@ const std::string& SubsystemReference::GetPermithierarchicalresolution() const
     return m_Permithierarchicalresolution;
 }
 
-void SubsystemReference::SetPermithierarchicalresolution(
-    const std::string& value)
+void SubsystemReference::SetPermithierarchicalresolution(const std::string& value)
 {
     m_Permithierarchicalresolution = value;
 }
@@ -94,8 +97,7 @@ const std::string& SubsystemReference::GetShowsubsystemreinitializeports() const
     return m_Showsubsystemreinitializeports;
 }
 
-void SubsystemReference::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void SubsystemReference::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -290,7 +292,10 @@ void SubsystemReference::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& SubsystemReference::GetVariant() const { return m_Variant; }
+const std::string& SubsystemReference::GetVariant() const
+{
+    return m_Variant;
+}
 
 void SubsystemReference::SetVariant(const std::string& value)
 {
@@ -407,14 +412,12 @@ void SubsystemReference::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-SubsystemReference::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& SubsystemReference::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void SubsystemReference::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void SubsystemReference::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -429,7 +432,10 @@ void SubsystemReference::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& SubsystemReference::GetLatency() const { return m_Latency; }
+const std::string& SubsystemReference::GetLatency() const
+{
+    return m_Latency;
+}
 
 void SubsystemReference::SetLatency(const std::string& value)
 {

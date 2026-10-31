@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RealImagToComplex::RealImagToComplex() {}
+RealImagToComplex::RealImagToComplex()
+{
+}
 
-RealImagToComplex::~RealImagToComplex() {}
+RealImagToComplex::~RealImagToComplex()
+{
+}
 
-const std::string& RealImagToComplex::GetInput() const { return m_Input; }
+const std::string& RealImagToComplex::GetInput() const
+{
+    return m_Input;
+}
 
-void RealImagToComplex::SetInput(const std::string& value) { m_Input = value; }
+void RealImagToComplex::SetInput(const std::string& value)
+{
+    m_Input = value;
+}
 
 const std::string& RealImagToComplex::GetConstantpart() const
 {

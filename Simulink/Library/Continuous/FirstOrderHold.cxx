@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FirstOrderHold::FirstOrderHold() {}
+FirstOrderHold::FirstOrderHold()
+{
+}
 
-FirstOrderHold::~FirstOrderHold() {}
+FirstOrderHold::~FirstOrderHold()
+{
+}
 
 const std::string& FirstOrderHold::GetInitialoutput() const
 {

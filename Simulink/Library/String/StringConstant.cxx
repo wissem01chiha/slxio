@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringConstant::StringConstant() {}
+StringConstant::StringConstant()
+{
+}
 
-StringConstant::~StringConstant() {}
+StringConstant::~StringConstant()
+{
+}
 
-const std::string& StringConstant::GetString() const { return m_String; }
+const std::string& StringConstant::GetString() const
+{
+    return m_String;
+}
 
-void StringConstant::SetString(const std::string& value) { m_String = value; }
+void StringConstant::SetString(const std::string& value)
+{
+    m_String = value;
+}
 
 const std::string& StringConstant::GetOutdatatypestr() const
 {

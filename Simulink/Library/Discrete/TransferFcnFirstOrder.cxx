@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransferFcnFirstOrder::TransferFcnFirstOrder() {}
+TransferFcnFirstOrder::TransferFcnFirstOrder()
+{
+}
 
-TransferFcnFirstOrder::~TransferFcnFirstOrder() {}
+TransferFcnFirstOrder::~TransferFcnFirstOrder()
+{
+}
 
-const std::string& TransferFcnFirstOrder::GetPolez() const { return m_Polez; }
+const std::string& TransferFcnFirstOrder::GetPolez() const
+{
+    return m_Polez;
+}
 
 void TransferFcnFirstOrder::SetPolez(const std::string& value)
 {

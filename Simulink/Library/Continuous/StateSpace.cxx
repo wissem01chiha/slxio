@@ -4,25 +4,53 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StateSpace::StateSpace() {}
+StateSpace::StateSpace()
+{
+}
 
-StateSpace::~StateSpace() {}
+StateSpace::~StateSpace()
+{
+}
 
-const std::string& StateSpace::GetA() const { return m_A; }
+const std::string& StateSpace::GetA() const
+{
+    return m_A;
+}
 
-void StateSpace::SetA(const std::string& value) { m_A = value; }
+void StateSpace::SetA(const std::string& value)
+{
+    m_A = value;
+}
 
-const std::string& StateSpace::GetB() const { return m_B; }
+const std::string& StateSpace::GetB() const
+{
+    return m_B;
+}
 
-void StateSpace::SetB(const std::string& value) { m_B = value; }
+void StateSpace::SetB(const std::string& value)
+{
+    m_B = value;
+}
 
-const std::string& StateSpace::GetC() const { return m_C; }
+const std::string& StateSpace::GetC() const
+{
+    return m_C;
+}
 
-void StateSpace::SetC(const std::string& value) { m_C = value; }
+void StateSpace::SetC(const std::string& value)
+{
+    m_C = value;
+}
 
-const std::string& StateSpace::GetD() const { return m_D; }
+const std::string& StateSpace::GetD() const
+{
+    return m_D;
+}
 
-void StateSpace::SetD(const std::string& value) { m_D = value; }
+void StateSpace::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
 const std::string& StateSpace::GetInitialcondition() const
 {

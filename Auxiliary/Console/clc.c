@@ -39,8 +39,7 @@ BOOL clc(int nblines)
         {
 #ifdef _MSC_VER
             clrscrPart_nw(nblines);
-            if (getPromptMode() !=
-                2) /* Add extra newline for other modes besides mode 2 */
+            if (getPromptMode() != 2) /* Add extra newline for other modes besides mode 2 */
             {
                 printf("\n");
             }

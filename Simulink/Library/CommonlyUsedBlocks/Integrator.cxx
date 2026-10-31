@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Integrator::Integrator() {}
+Integrator::Integrator()
+{
+}
 
-Integrator::~Integrator() {}
+Integrator::~Integrator()
+{
+}
 
 const std::string& Integrator::GetExternalreset() const
 {
@@ -38,7 +42,10 @@ void Integrator::SetInitialcondition(const std::string& value)
     m_Initialcondition = value;
 }
 
-const std::string& Integrator::GetLimitoutput() const { return m_Limitoutput; }
+const std::string& Integrator::GetLimitoutput() const
+{
+    return m_Limitoutput;
+}
 
 void Integrator::SetLimitoutput(const std::string& value)
 {
@@ -65,9 +72,15 @@ void Integrator::SetLowersaturationlimit(const std::string& value)
     m_Lowersaturationlimit = value;
 }
 
-const std::string& Integrator::GetWrapstate() const { return m_Wrapstate; }
+const std::string& Integrator::GetWrapstate() const
+{
+    return m_Wrapstate;
+}
 
-void Integrator::SetWrapstate(const std::string& value) { m_Wrapstate = value; }
+void Integrator::SetWrapstate(const std::string& value)
+{
+    m_Wrapstate = value;
+}
 
 const std::string& Integrator::GetWrappedstateuppervalue() const
 {
@@ -119,16 +132,25 @@ void Integrator::SetAbsolutetolerance(const std::string& value)
     m_Absolutetolerance = value;
 }
 
-const std::string& Integrator::GetIgnorelimit() const { return m_Ignorelimit; }
+const std::string& Integrator::GetIgnorelimit() const
+{
+    return m_Ignorelimit;
+}
 
 void Integrator::SetIgnorelimit(const std::string& value)
 {
     m_Ignorelimit = value;
 }
 
-const std::string& Integrator::GetZerocross() const { return m_Zerocross; }
+const std::string& Integrator::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
-void Integrator::SetZerocross(const std::string& value) { m_Zerocross = value; }
+void Integrator::SetZerocross(const std::string& value)
+{
+    m_Zerocross = value;
+}
 
 const std::string& Integrator::GetContinuousstateattributes() const
 {

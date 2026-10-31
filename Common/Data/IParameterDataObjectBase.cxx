@@ -11,8 +11,7 @@ IParameterDataObjectBase* IParameterDataObjectBase::New()
 
 void IParameterDataObjectBase::Initialize(void* implDataObject)
 {
-    m_param = std::shared_ptr<IParameterObjectBase>(
-        static_cast<IParameterObjectBase*>(implDataObject));
+    m_param = std::shared_ptr<IParameterObjectBase>(static_cast<IParameterObjectBase*>(implDataObject));
 }
 
 void* IParameterDataObjectBase::GetImplDataObject() const
@@ -22,8 +21,7 @@ void* IParameterDataObjectBase::GetImplDataObject() const
 
 std::string IParameterDataObjectBase::ToString() const
 {
-    return "IParameterDataObjectBase(" +
-           (m_param ? m_param->GetName() : "null") + ")";
+    return "IParameterDataObjectBase(" + (m_param ? m_param->GetName() : "null") + ")";
 }
 
 bool IParameterDataObjectBase::Empty() const
@@ -36,14 +34,12 @@ bool IParameterDataObjectBase::operator==(const IDataObject& other) const
     const auto* rhs = dynamic_cast<const IParameterDataObjectBase*>(&other);
     if (!rhs)
         return false;
-    return m_param->GetName() == rhs->m_param->GetName() &&
-           m_param->GetDataType() == rhs->m_param->GetDataType();
+    return m_param->GetName() == rhs->m_param->GetName() && m_param->GetDataType() == rhs->m_param->GetDataType();
 }
 
 DataType IParameterDataObjectBase::GetDataType() const
 {
-    return m_param ? m_param->GetDataType()
-                   : DataType::SLXIO_TYPE_GENERIC_PARAMETER_DATA_OBJECT;
+    return m_param ? m_param->GetDataType() : DataType::SLXIO_TYPE_GENERIC_PARAMETER_DATA_OBJECT;
 }
 
 SLXIO_ABI_NAMESPACE_END

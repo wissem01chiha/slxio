@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SincosLookup::SincosLookup() {}
+SincosLookup::SincosLookup()
+{
+}
 
-SincosLookup::~SincosLookup() {}
+SincosLookup::~SincosLookup()
+{
+}
 
-const std::string& SincosLookup::GetFormula() const { return m_Formula; }
+const std::string& SincosLookup::GetFormula() const
+{
+    return m_Formula;
+}
 
-void SincosLookup::SetFormula(const std::string& value) { m_Formula = value; }
+void SincosLookup::SetFormula(const std::string& value)
+{
+    m_Formula = value;
+}
 
 const std::string& SincosLookup::GetNumdatapoints() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Accumulator::Accumulator() {}
+Accumulator::Accumulator()
+{
+}
 
-Accumulator::~Accumulator() {}
+Accumulator::~Accumulator()
+{
+}
 
 const std::string& Accumulator::GetIntegratormethod() const
 {
@@ -18,9 +22,15 @@ void Accumulator::SetIntegratormethod(const std::string& value)
     m_Integratormethod = value;
 }
 
-const std::string& Accumulator::GetGainval() const { return m_Gainval; }
+const std::string& Accumulator::GetGainval() const
+{
+    return m_Gainval;
+}
 
-void Accumulator::SetGainval(const std::string& value) { m_Gainval = value; }
+void Accumulator::SetGainval(const std::string& value)
+{
+    m_Gainval = value;
+}
 
 const std::string& Accumulator::GetExternalreset() const
 {
@@ -62,20 +72,35 @@ void Accumulator::SetInitialconditionsetting(const std::string& value)
     m_Initialconditionsetting = value;
 }
 
-const std::string& Accumulator::GetSampletime() const { return m_Sampletime; }
+const std::string& Accumulator::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void Accumulator::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& Accumulator::GetOutmin() const { return m_Outmin; }
+const std::string& Accumulator::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void Accumulator::SetOutmin(const std::string& value) { m_Outmin = value; }
+void Accumulator::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& Accumulator::GetOutmax() const { return m_Outmax; }
+const std::string& Accumulator::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void Accumulator::SetOutmax(const std::string& value) { m_Outmax = value; }
+void Accumulator::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& Accumulator::GetOutdatatypestr() const
 {
@@ -87,16 +112,25 @@ void Accumulator::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& Accumulator::GetLockscale() const { return m_Lockscale; }
+const std::string& Accumulator::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void Accumulator::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& Accumulator::GetRndmeth() const { return m_Rndmeth; }
+const std::string& Accumulator::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void Accumulator::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void Accumulator::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& Accumulator::GetSaturateonintegeroverflow() const
 {
@@ -108,7 +142,10 @@ void Accumulator::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& Accumulator::GetLimitoutput() const { return m_Limitoutput; }
+const std::string& Accumulator::GetLimitoutput() const
+{
+    return m_Limitoutput;
+}
 
 void Accumulator::SetLimitoutput(const std::string& value)
 {
@@ -155,14 +192,20 @@ void Accumulator::SetShowstateport(const std::string& value)
     m_Showstateport = value;
 }
 
-const std::string& Accumulator::GetIgnorelimit() const { return m_Ignorelimit; }
+const std::string& Accumulator::GetIgnorelimit() const
+{
+    return m_Ignorelimit;
+}
 
 void Accumulator::SetIgnorelimit(const std::string& value)
 {
     m_Ignorelimit = value;
 }
 
-const std::string& Accumulator::GetStatename() const { return m_Statename; }
+const std::string& Accumulator::GetStatename() const
+{
+    return m_Statename;
+}
 
 void Accumulator::SetStatename(const std::string& value)
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DirectLookupTableND::DirectLookupTableND() {}
+DirectLookupTableND::DirectLookupTableND()
+{
+}
 
-DirectLookupTableND::~DirectLookupTableND() {}
+DirectLookupTableND::~DirectLookupTableND()
+{
+}
 
 const std::string& DirectLookupTableND::GetNumberoftabledimensions() const
 {
@@ -18,14 +22,12 @@ void DirectLookupTableND::SetNumberoftabledimensions(const std::string& value)
     m_Numberoftabledimensions = value;
 }
 
-const std::string&
-DirectLookupTableND::GetInputsselectthisobjectfromtable() const
+const std::string& DirectLookupTableND::GetInputsselectthisobjectfromtable() const
 {
     return m_Inputsselectthisobjectfromtable;
 }
 
-void DirectLookupTableND::SetInputsselectthisobjectfromtable(
-    const std::string& value)
+void DirectLookupTableND::SetInputsselectthisobjectfromtable(const std::string& value)
 {
     m_Inputsselectthisobjectfromtable = value;
 }
@@ -40,7 +42,10 @@ void DirectLookupTableND::SetTableisinput(const std::string& value)
     m_Tableisinput = value;
 }
 
-const std::string& DirectLookupTableND::GetTable() const { return m_Table; }
+const std::string& DirectLookupTableND::GetTable() const
+{
+    return m_Table;
+}
 
 void DirectLookupTableND::SetTable(const std::string& value)
 {
@@ -52,8 +57,7 @@ const std::string& DirectLookupTableND::GetDiagnosticforoutofrangeinput() const
     return m_Diagnosticforoutofrangeinput;
 }
 
-void DirectLookupTableND::SetDiagnosticforoutofrangeinput(
-    const std::string& value)
+void DirectLookupTableND::SetDiagnosticforoutofrangeinput(const std::string& value)
 {
     m_Diagnosticforoutofrangeinput = value;
 }

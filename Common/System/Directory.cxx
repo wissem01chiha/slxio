@@ -19,8 +19,7 @@ HError Directory::Initialize()
         return E_PATH_EMPTY;
 
     uv_fs_t req;
-    int err =
-        uv_fs_opendir(uv_default_loop(), &req, DirectoryPath.c_str(), nullptr);
+    int err = uv_fs_opendir(uv_default_loop(), &req, DirectoryPath.c_str(), nullptr);
     if (err < 0)
     {
         uv_fs_req_cleanup(&req);
@@ -87,9 +86,14 @@ HError Directory::Initialize()
     return E_OK;
 }
 
-void Directory::Add(const File& file) { DirectoryFileList.push_back(file); }
+void Directory::Add(const File& file)
+{
+    DirectoryFileList.push_back(file);
+}
 
-void Directory::Remove(const File& file) {}
+void Directory::Remove(const File& file)
+{
+}
 
 bool Directory::Contains(std::string& entryname) const
 {
@@ -112,7 +116,10 @@ bool Directory::Contains(std::string& entryname) const
     return false;
 }
 
-UInt32 Directory::GetNumberOfFiles() const { return DirectoryFileList.size(); }
+UInt32 Directory::GetNumberOfFiles() const
+{
+    return DirectoryFileList.size();
+}
 
 const std::shared_ptr<File> Directory::GetFile(const SId& index) const
 {
@@ -123,8 +130,7 @@ const std::shared_ptr<File> Directory::GetFile(const SId& index) const
     return std::make_shared<File>(DirectoryFileList[index]);
 }
 
-const std::shared_ptr<File>
-Directory::GetFile(const std::string& filename) const
+const std::shared_ptr<File> Directory::GetFile(const std::string& filename) const
 {
     for (size_t i = 0; i < DirectoryFileList.size(); i++)
     {
@@ -166,26 +172,39 @@ std::string Directory::GetDirectoryName() const
         return "";
 
     size_t pos = DirectoryPath.find_last_of("/\\");
-    return (pos == std::string::npos) ? DirectoryPath
-                                      : DirectoryPath.substr(pos + 1);
+    return (pos == std::string::npos) ? DirectoryPath : DirectoryPath.substr(pos + 1);
 }
 
-const std::string Directory::GetDirectoryPath() const { return DirectoryPath; }
+const std::string Directory::GetDirectoryPath() const
+{
+    return DirectoryPath;
+}
 
-bool Directory::Empty() const { return DirectoryFileList.empty(); }
+bool Directory::Empty() const
+{
+    return DirectoryFileList.empty();
+}
 
-bool Directory::Exist() const { return Exist(DirectoryPath); }
+bool Directory::Exist() const
+{
+    return Exist(DirectoryPath);
+}
 
-HError Directory::Clear() { return E_NOT_IMPLEMENTED; }
+HError Directory::Clear()
+{
+    return E_NOT_IMPLEMENTED;
+}
 
-HError Directory::Move(const Directory& directory) { return E_NOT_IMPLEMENTED; }
+HError Directory::Move(const Directory& directory)
+{
+    return E_NOT_IMPLEMENTED;
+}
 
 HError Directory::Delete(const std::string& path)
 {
     uv_fs_t scandir_req;
     uv_dirent_t ent;
-    int r = uv_fs_scandir(uv_default_loop(), &scandir_req, path.c_str(), 0,
-                          nullptr);
+    int r = uv_fs_scandir(uv_default_loop(), &scandir_req, path.c_str(), 0, nullptr);
     if (r < 0)
     {
         return r;
@@ -201,8 +220,7 @@ HError Directory::Delete(const std::string& path)
             if (sub < 0)
                 return sub;
             uv_fs_t rmdir_req;
-            int rr = uv_fs_rmdir(uv_default_loop(), &rmdir_req,
-                                 fullPath.c_str(), nullptr);
+            int rr = uv_fs_rmdir(uv_default_loop(), &rmdir_req, fullPath.c_str(), nullptr);
             uv_fs_req_cleanup(&rmdir_req);
             if (rr < 0 && rr != UV_ENOENT)
                 return rr;
@@ -210,8 +228,7 @@ HError Directory::Delete(const std::string& path)
         else
         {
             uv_fs_t unlink_req;
-            int ur = uv_fs_unlink(uv_default_loop(), &unlink_req,
-                                  fullPath.c_str(), nullptr);
+            int ur = uv_fs_unlink(uv_default_loop(), &unlink_req, fullPath.c_str(), nullptr);
             uv_fs_req_cleanup(&unlink_req);
             if (ur < 0 && ur != UV_ENOENT)
                 return ur;
@@ -226,7 +243,10 @@ HError Directory::Delete(const std::string& path)
     return rr;
 }
 
-HError Directory::Delete() { return Delete(DirectoryPath); }
+HError Directory::Delete()
+{
+    return Delete(DirectoryPath);
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

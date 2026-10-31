@@ -13,8 +13,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @brief Base class for Stateflow declarations StateflowData and
  * StateflowEvent.
  */
-class StateflowDeclBase : public StateflowElementBase,
-                          StateflowDeclContainerBase
+class StateflowDeclBase : public StateflowElementBase, StateflowDeclContainerBase
 {
 public:
     StateflowDeclBase();

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataTypePropagation::DataTypePropagation() {}
+DataTypePropagation::DataTypePropagation()
+{
+}
 
-DataTypePropagation::~DataTypePropagation() {}
+DataTypePropagation::~DataTypePropagation()
+{
+}
 
 const std::string& DataTypePropagation::GetPropdatatypemode() const
 {
@@ -178,7 +182,10 @@ void DataTypePropagation::SetBiasmult(const std::string& value)
     m_Biasmult = value;
 }
 
-const std::string& DataTypePropagation::GetBiasadd() const { return m_Biasadd; }
+const std::string& DataTypePropagation::GetBiasadd() const
+{
+    return m_Biasadd;
+}
 
 void DataTypePropagation::SetBiasadd(const std::string& value)
 {

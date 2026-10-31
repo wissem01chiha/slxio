@@ -6,8 +6,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-std::shared_ptr<IParameterObjectBase>
-ModelWorkspace::GetVariable(const std::string& name) const
+std::shared_ptr<IParameterObjectBase> ModelWorkspace::GetVariable(const std::string& name) const
 {
     if (name.empty())
     {
@@ -22,9 +21,7 @@ ModelWorkspace::GetVariable(const std::string& name) const
     return nullptr;
 }
 
-HError
-ModelWorkspace::AssignVariable(const std::string& name,
-                               const std::shared_ptr<IParameterObjectBase>& p)
+HError ModelWorkspace::AssignVariable(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (!p)
     {
@@ -65,9 +62,15 @@ std::shared_ptr<DataSourceType> ModelWorkspace::GetDataSourceType()
     return m_dataSource;
 }
 
-const std::string ModelWorkspace::GetFileName() { return m_fileName; }
+const std::string ModelWorkspace::GetFileName()
+{
+    return m_fileName;
+}
 
-std::string ModelWorkspace::GetMatlabCode() { return m_matlabCode; }
+std::string ModelWorkspace::GetMatlabCode()
+{
+    return m_matlabCode;
+}
 
 UInt16 ModelWorkspace::GetVariableCount() const
 {
@@ -85,7 +88,10 @@ HError ModelWorkspace::SetLogger(ILogger* logger)
     return E_OK;
 }
 
-const ILogger* ModelWorkspace::GetLogger() { return m_logger; }
+const ILogger* ModelWorkspace::GetLogger()
+{
+    return m_logger;
+}
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

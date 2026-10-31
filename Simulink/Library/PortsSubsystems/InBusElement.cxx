@@ -4,21 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-InBusElement::InBusElement() {}
+InBusElement::InBusElement()
+{
+}
 
-InBusElement::~InBusElement() {}
+InBusElement::~InBusElement()
+{
+}
 
-const std::string& InBusElement::GetPort() const { return m_Port; }
+const std::string& InBusElement::GetPort() const
+{
+    return m_Port;
+}
 
-void InBusElement::SetPort(const std::string& value) { m_Port = value; }
+void InBusElement::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
-const std::string& InBusElement::GetPortname() const { return m_Portname; }
+const std::string& InBusElement::GetPortname() const
+{
+    return m_Portname;
+}
 
-void InBusElement::SetPortname(const std::string& value) { m_Portname = value; }
+void InBusElement::SetPortname(const std::string& value)
+{
+    m_Portname = value;
+}
 
-const std::string& InBusElement::GetElement() const { return m_Element; }
+const std::string& InBusElement::GetElement() const
+{
+    return m_Element;
+}
 
-void InBusElement::SetElement(const std::string& value) { m_Element = value; }
+void InBusElement::SetElement(const std::string& value)
+{
+    m_Element = value;
+}
 
 const std::string& InBusElement::GetIsbuselementport() const
 {
@@ -50,13 +72,25 @@ void InBusElement::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& InBusElement::GetOutmin() const { return m_Outmin; }
+const std::string& InBusElement::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void InBusElement::SetOutmin(const std::string& value) { m_Outmin = value; }
+void InBusElement::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& InBusElement::GetOutmax() const { return m_Outmax; }
+const std::string& InBusElement::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void InBusElement::SetOutmax(const std::string& value) { m_Outmax = value; }
+void InBusElement::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& InBusElement::GetOutdatatypestr() const
 {
@@ -68,7 +102,10 @@ void InBusElement::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& InBusElement::GetLockscale() const { return m_Lockscale; }
+const std::string& InBusElement::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void InBusElement::SetLockscale(const std::string& value)
 {
@@ -95,9 +132,15 @@ void InBusElement::SetBusvirtuality(const std::string& value)
     m_Busvirtuality = value;
 }
 
-const std::string& InBusElement::GetUnit() const { return m_Unit; }
+const std::string& InBusElement::GetUnit() const
+{
+    return m_Unit;
+}
 
-void InBusElement::SetUnit(const std::string& value) { m_Unit = value; }
+void InBusElement::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& InBusElement::GetPortdimensions() const
 {
@@ -109,21 +152,30 @@ void InBusElement::SetPortdimensions(const std::string& value)
     m_Portdimensions = value;
 }
 
-const std::string& InBusElement::GetVarsizesig() const { return m_Varsizesig; }
+const std::string& InBusElement::GetVarsizesig() const
+{
+    return m_Varsizesig;
+}
 
 void InBusElement::SetVarsizesig(const std::string& value)
 {
     m_Varsizesig = value;
 }
 
-const std::string& InBusElement::GetSampletime() const { return m_Sampletime; }
+const std::string& InBusElement::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void InBusElement::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& InBusElement::GetSignaltype() const { return m_Signaltype; }
+const std::string& InBusElement::GetSignaltype() const
+{
+    return m_Signaltype;
+}
 
 void InBusElement::SetSignaltype(const std::string& value)
 {
@@ -170,9 +222,15 @@ void InBusElement::SetInputconnect(const std::string& value)
     m_Inputconnect = value;
 }
 
-const std::string& InBusElement::GetDatamode() const { return m_Datamode; }
+const std::string& InBusElement::GetDatamode() const
+{
+    return m_Datamode;
+}
 
-void InBusElement::SetDatamode(const std::string& value) { m_Datamode = value; }
+void InBusElement::SetDatamode(const std::string& value)
+{
+    m_Datamode = value;
+}
 
 const std::string& InBusElement::GetMessagequeueusedefaultattributes() const
 {

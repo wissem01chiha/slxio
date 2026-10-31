@@ -7,7 +7,9 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataSourceType::DataSourceType(DataSourceType::Type type) : m_type(type) {}
+DataSourceType::DataSourceType(DataSourceType::Type type) : m_type(type)
+{
+}
 
 DataSourceType::Type DataSourceType::FromString(const std::string& sldt)
 {
@@ -49,7 +51,10 @@ std::string DataSourceType::ToString(Type type)
     }
 }
 
-DataSourceType::Type DataSourceType::GetType() const { return m_type; }
+DataSourceType::Type DataSourceType::GetType() const
+{
+    return m_type;
+}
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

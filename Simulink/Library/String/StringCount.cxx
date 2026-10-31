@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringCount::StringCount() {}
+StringCount::StringCount()
+{
+}
 
-StringCount::~StringCount() {}
+StringCount::~StringCount()
+{
+}
 
 const std::string& StringCount::GetCasesensitive() const
 {

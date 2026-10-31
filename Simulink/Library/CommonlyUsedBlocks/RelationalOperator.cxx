@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RelationalOperator::RelationalOperator() {}
+RelationalOperator::RelationalOperator()
+{
+}
 
-RelationalOperator::~RelationalOperator() {}
+RelationalOperator::~RelationalOperator()
+{
+}
 
 const std::string& RelationalOperator::GetOperator() const
 {
@@ -58,7 +62,10 @@ void RelationalOperator::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& RelationalOperator::GetRndmeth() const { return m_Rndmeth; }
+const std::string& RelationalOperator::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void RelationalOperator::SetRndmeth(const std::string& value)
 {

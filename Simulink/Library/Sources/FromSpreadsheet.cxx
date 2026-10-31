@@ -4,27 +4,43 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FromSpreadsheet::FromSpreadsheet() {}
+FromSpreadsheet::FromSpreadsheet()
+{
+}
 
-FromSpreadsheet::~FromSpreadsheet() {}
+FromSpreadsheet::~FromSpreadsheet()
+{
+}
 
-const std::string& FromSpreadsheet::GetFilename() const { return m_Filename; }
+const std::string& FromSpreadsheet::GetFilename() const
+{
+    return m_Filename;
+}
 
 void FromSpreadsheet::SetFilename(const std::string& value)
 {
     m_Filename = value;
 }
 
-const std::string& FromSpreadsheet::GetSheetname() const { return m_Sheetname; }
+const std::string& FromSpreadsheet::GetSheetname() const
+{
+    return m_Sheetname;
+}
 
 void FromSpreadsheet::SetSheetname(const std::string& value)
 {
     m_Sheetname = value;
 }
 
-const std::string& FromSpreadsheet::GetRange() const { return m_Range; }
+const std::string& FromSpreadsheet::GetRange() const
+{
+    return m_Range;
+}
 
-void FromSpreadsheet::SetRange(const std::string& value) { m_Range = value; }
+void FromSpreadsheet::SetRange(const std::string& value)
+{
+    m_Range = value;
+}
 
 const std::string& FromSpreadsheet::GetOutdatatypestr() const
 {
@@ -61,8 +77,7 @@ const std::string& FromSpreadsheet::GetExtrapolationbeforefirstdatapoint() const
     return m_Extrapolationbeforefirstdatapoint;
 }
 
-void FromSpreadsheet::SetExtrapolationbeforefirstdatapoint(
-    const std::string& value)
+void FromSpreadsheet::SetExtrapolationbeforefirstdatapoint(const std::string& value)
 {
     m_Extrapolationbeforefirstdatapoint = value;
 }
@@ -82,8 +97,7 @@ const std::string& FromSpreadsheet::GetExtrapolationafterlastdatapoint() const
     return m_Extrapolationafterlastdatapoint;
 }
 
-void FromSpreadsheet::SetExtrapolationafterlastdatapoint(
-    const std::string& value)
+void FromSpreadsheet::SetExtrapolationafterlastdatapoint(const std::string& value)
 {
     m_Extrapolationafterlastdatapoint = value;
 }
@@ -98,7 +112,10 @@ void FromSpreadsheet::SetOutputafterlastpoint(const std::string& value)
     m_Outputafterlastpoint = value;
 }
 
-const std::string& FromSpreadsheet::GetZerocross() const { return m_Zerocross; }
+const std::string& FromSpreadsheet::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void FromSpreadsheet::SetZerocross(const std::string& value)
 {

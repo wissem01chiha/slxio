@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Discrete::Discrete() {}
+Discrete::Discrete()
+{
+}
 
-Discrete::~Discrete() {}
+Discrete::~Discrete()
+{
+}
 
 const std::string& Discrete::GetShowportlabels() const
 {
@@ -18,7 +22,10 @@ void Discrete::SetShowportlabels(const std::string& value)
     m_Showportlabels = value;
 }
 
-const std::string& Discrete::GetBlockchoice() const { return m_Blockchoice; }
+const std::string& Discrete::GetBlockchoice() const
+{
+    return m_Blockchoice;
+}
 
 void Discrete::SetBlockchoice(const std::string& value)
 {
@@ -35,23 +42,35 @@ void Discrete::SetTemplateblock(const std::string& value)
     m_Templateblock = value;
 }
 
-const std::string& Discrete::GetMemberblocks() const { return m_Memberblocks; }
+const std::string& Discrete::GetMemberblocks() const
+{
+    return m_Memberblocks;
+}
 
 void Discrete::SetMemberblocks(const std::string& value)
 {
     m_Memberblocks = value;
 }
 
-const std::string& Discrete::GetPermissions() const { return m_Permissions; }
+const std::string& Discrete::GetPermissions() const
+{
+    return m_Permissions;
+}
 
 void Discrete::SetPermissions(const std::string& value)
 {
     m_Permissions = value;
 }
 
-const std::string& Discrete::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& Discrete::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
-void Discrete::SetErrorfcn(const std::string& value) { m_Errorfcn = value; }
+void Discrete::SetErrorfcn(const std::string& value)
+{
+    m_Errorfcn = value;
+}
 
 const std::string& Discrete::GetPermithierarchicalresolution() const
 {
@@ -93,9 +112,15 @@ void Discrete::SetMinalgloopoccurrences(const std::string& value)
     m_Minalgloopoccurrences = value;
 }
 
-const std::string& Discrete::GetScheduleas() const { return m_Scheduleas; }
+const std::string& Discrete::GetScheduleas() const
+{
+    return m_Scheduleas;
+}
 
-void Discrete::SetScheduleas(const std::string& value) { m_Scheduleas = value; }
+void Discrete::SetScheduleas(const std::string& value)
+{
+    m_Scheduleas = value;
+}
 
 const std::string& Discrete::GetPartitionname() const
 {
@@ -157,9 +182,15 @@ void Discrete::SetRtwfcnnameopts(const std::string& value)
     m_Rtwfcnnameopts = value;
 }
 
-const std::string& Discrete::GetRtwfcnname() const { return m_Rtwfcnname; }
+const std::string& Discrete::GetRtwfcnname() const
+{
+    return m_Rtwfcnname;
+}
 
-void Discrete::SetRtwfcnname(const std::string& value) { m_Rtwfcnname = value; }
+void Discrete::SetRtwfcnname(const std::string& value)
+{
+    m_Rtwfcnname = value;
+}
 
 const std::string& Discrete::GetRtwfilenameopts() const
 {
@@ -171,7 +202,10 @@ void Discrete::SetRtwfilenameopts(const std::string& value)
     m_Rtwfilenameopts = value;
 }
 
-const std::string& Discrete::GetRtwfilename() const { return m_Rtwfilename; }
+const std::string& Discrete::GetRtwfilename() const
+{
+    return m_Rtwfilename;
+}
 
 void Discrete::SetRtwfilename(const std::string& value)
 {
@@ -258,9 +292,15 @@ void Discrete::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& Discrete::GetVariant() const { return m_Variant; }
+const std::string& Discrete::GetVariant() const
+{
+    return m_Variant;
+}
 
-void Discrete::SetVariant(const std::string& value) { m_Variant = value; }
+void Discrete::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& Discrete::GetVariantchoicesspecifier() const
 {
@@ -372,14 +412,12 @@ void Discrete::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-Discrete::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& Discrete::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void Discrete::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void Discrete::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -394,9 +432,15 @@ void Discrete::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& Discrete::GetLatency() const { return m_Latency; }
+const std::string& Discrete::GetLatency() const
+{
+    return m_Latency;
+}
 
-void Discrete::SetLatency(const std::string& value) { m_Latency = value; }
+void Discrete::SetLatency(const std::string& value)
+{
+    m_Latency = value;
+}
 
 const std::string& Discrete::GetAutoframesizecalculation() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringCompare::StringCompare() {}
+StringCompare::StringCompare()
+{
+}
 
-StringCompare::~StringCompare() {}
+StringCompare::~StringCompare()
+{
+}
 
 const std::string& StringCompare::GetCasesensitive() const
 {

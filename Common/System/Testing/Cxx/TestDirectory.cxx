@@ -29,8 +29,7 @@ public:
         std::uniform_int_distribution<int> dist(1000, 9999);
         int uniqueId = dist(rng);
 
-        std::string tempDir =
-            prefix + "_" + std::to_string(uniqueId) + PATH_SEP;
+        std::string tempDir = prefix + "_" + std::to_string(uniqueId) + PATH_SEP;
         DirectoryService::CreateDirectoryStructure(tempDir, &lastError);
         return tempDir;
     }
@@ -44,7 +43,9 @@ public:
         return dir;
     }
 
-    ~DirectoryTestFixture() {}
+    ~DirectoryTestFixture()
+    {
+    }
 
 protected:
     Directory cwd;

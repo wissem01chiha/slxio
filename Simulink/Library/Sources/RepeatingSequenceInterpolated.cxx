@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RepeatingSequenceInterpolated::RepeatingSequenceInterpolated() {}
+RepeatingSequenceInterpolated::RepeatingSequenceInterpolated()
+{
+}
 
-RepeatingSequenceInterpolated::~RepeatingSequenceInterpolated() {}
+RepeatingSequenceInterpolated::~RepeatingSequenceInterpolated()
+{
+}
 
 const std::string& RepeatingSequenceInterpolated::GetOutvalues() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariantEnd::VariantEnd() {}
+VariantEnd::VariantEnd()
+{
+}
 
-VariantEnd::~VariantEnd() {}
+VariantEnd::~VariantEnd()
+{
+}
 
 const std::string& VariantEnd::GetVariantstartendtag() const
 {

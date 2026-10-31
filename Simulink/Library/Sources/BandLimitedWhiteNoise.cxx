@@ -4,19 +4,38 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BandLimitedWhiteNoise::BandLimitedWhiteNoise() {}
+BandLimitedWhiteNoise::BandLimitedWhiteNoise()
+{
+}
 
-BandLimitedWhiteNoise::~BandLimitedWhiteNoise() {}
+BandLimitedWhiteNoise::~BandLimitedWhiteNoise()
+{
+}
 
-const std::string& BandLimitedWhiteNoise::GetCov() const { return m_Cov; }
+const std::string& BandLimitedWhiteNoise::GetCov() const
+{
+    return m_Cov;
+}
 
-void BandLimitedWhiteNoise::SetCov(const std::string& value) { m_Cov = value; }
+void BandLimitedWhiteNoise::SetCov(const std::string& value)
+{
+    m_Cov = value;
+}
 
-const std::string& BandLimitedWhiteNoise::GetTs() const { return m_Ts; }
+const std::string& BandLimitedWhiteNoise::GetTs() const
+{
+    return m_Ts;
+}
 
-void BandLimitedWhiteNoise::SetTs(const std::string& value) { m_Ts = value; }
+void BandLimitedWhiteNoise::SetTs(const std::string& value)
+{
+    m_Ts = value;
+}
 
-const std::string& BandLimitedWhiteNoise::GetSeed() const { return m_Seed; }
+const std::string& BandLimitedWhiteNoise::GetSeed() const
+{
+    return m_Seed;
+}
 
 void BandLimitedWhiteNoise::SetSeed(const std::string& value)
 {

@@ -7,10 +7,12 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FileManager::FileManager() { FileBuffer.clear(); }
+FileManager::FileManager()
+{
+    FileBuffer.clear();
+}
 
-FileManager::FileManager(const std::vector<std::shared_ptr<File>>& files)
-    : FileBuffer(files)
+FileManager::FileManager(const std::vector<std::shared_ptr<File>>& files) : FileBuffer(files)
 {
 }
 
@@ -18,8 +20,7 @@ SId FileManager::GetFileId(const std::string& filename) const
 {
     for (UInt32 i = 0; i <= GetFileMaxId(); i++)
     {
-        if (FileBuffer[i] != nullptr &&
-            FileBuffer[i]->GetFileName() == filename)
+        if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename)
         {
             return i;
         }
@@ -36,8 +37,7 @@ bool FileManager::IsOpened(const std::string& filename)
 {
     for (UInt32 i = 0; i <= GetFileMaxId(); i++)
     {
-        if (FileBuffer[i] != nullptr &&
-            FileBuffer[i]->GetFileName() == filename)
+        if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename)
         {
             return true;
         }
@@ -45,7 +45,10 @@ bool FileManager::IsOpened(const std::string& filename)
     return false;
 }
 
-HError FileManager::Add(std::shared_ptr<File> file) { return E_OK; }
+HError FileManager::Add(std::shared_ptr<File> file)
+{
+    return E_OK;
+}
 
 std::shared_ptr<File> FileManager::GetFile(SId id) const
 {

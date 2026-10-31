@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MessageMerge::MessageMerge() {}
+MessageMerge::MessageMerge()
+{
+}
 
-MessageMerge::~MessageMerge() {}
+MessageMerge::~MessageMerge()
+{
+}
 
 const std::string& MessageMerge::GetNumberinputports() const
 {

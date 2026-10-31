@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FloatExtractBits::FloatExtractBits() {}
+FloatExtractBits::FloatExtractBits()
+{
+}
 
-FloatExtractBits::~FloatExtractBits() {}
+FloatExtractBits::~FloatExtractBits()
+{
+}
 
 const std::string& FloatExtractBits::GetOutputmode() const
 {
@@ -18,7 +22,10 @@ void FloatExtractBits::SetOutputmode(const std::string& value)
     m_Outputmode = value;
 }
 
-const std::string& FloatExtractBits::GetBitrange() const { return m_Bitrange; }
+const std::string& FloatExtractBits::GetBitrange() const
+{
+    return m_Bitrange;
+}
 
 void FloatExtractBits::SetBitrange(const std::string& value)
 {

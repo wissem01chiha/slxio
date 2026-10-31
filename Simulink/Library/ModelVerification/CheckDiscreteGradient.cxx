@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckDiscreteGradient::CheckDiscreteGradient() {}
+CheckDiscreteGradient::CheckDiscreteGradient()
+{
+}
 
-CheckDiscreteGradient::~CheckDiscreteGradient() {}
+CheckDiscreteGradient::~CheckDiscreteGradient()
+{
+}
 
 const std::string& CheckDiscreteGradient::GetGradient() const
 {
@@ -48,14 +52,20 @@ void CheckDiscreteGradient::SetStopwhenassertionfail(const std::string& value)
     m_Stopwhenassertionfail = value;
 }
 
-const std::string& CheckDiscreteGradient::GetExport() const { return m_Export; }
+const std::string& CheckDiscreteGradient::GetExport() const
+{
+    return m_Export;
+}
 
 void CheckDiscreteGradient::SetExport(const std::string& value)
 {
     m_Export = value;
 }
 
-const std::string& CheckDiscreteGradient::GetIcon() const { return m_Icon; }
+const std::string& CheckDiscreteGradient::GetIcon() const
+{
+    return m_Icon;
+}
 
 void CheckDiscreteGradient::SetIcon(const std::string& value)
 {

@@ -72,8 +72,7 @@ static void reallocLineBuffer(void)
         {
             char* ptrBackup = cur_line;
             int newCURRENT_MAX_LINE_SIZE = CURRENT_MAX_LINE_SIZE * 2;
-            cur_line = (char*)REALLOC(cur_line, sizeof(char) *
-                                                    (newCURRENT_MAX_LINE_SIZE));
+            cur_line = (char*)REALLOC(cur_line, sizeof(char) * (newCURRENT_MAX_LINE_SIZE));
             if (cur_line == NULL)
             {
                 cur_line = ptrBackup;
@@ -393,9 +392,15 @@ static void backSpace(void)
     }
 }
 /*--------------------------------------------------------------------------*/
-static const char* getCurrentPrompt(void) { return currentPrompt; }
+static const char* getCurrentPrompt(void)
+{
+    return currentPrompt;
+}
 /*--------------------------------------------------------------------------*/
-void setCurrentPrompt(const char* prompt) { currentPrompt = prompt; }
+void setCurrentPrompt(const char* prompt)
+{
+    currentPrompt = prompt;
+}
 /*--------------------------------------------------------------------------*/
 void displayPrompt(void)
 {
@@ -476,7 +481,10 @@ void addCharacterCurrentLine(unsigned char ch)
     }
 }
 /*--------------------------------------------------------------------------*/
-BOOL isHistorySearch(void) { return (cur_line[0] == '!'); }
+BOOL isHistorySearch(void)
+{
+    return (cur_line[0] == '!');
+}
 /*--------------------------------------------------------------------------*/
 void putLineSearchedHistory(void)
 {
@@ -516,14 +524,12 @@ void pasteClipBoard(void)
     hGMem = GetClipboardData(typeClipboard);
     if (hGMem)
     {
-
         char* CurrentLine = getCurrentLine();
 
         lpMem = (LPSTR)GlobalLock(hGMem);
         if (lpMem)
         {
-            char* newline = (char*)MALLOC(
-                sizeof(char) * (strlen(CurrentLine) + strlen(lpMem) + 1));
+            char* newline = (char*)MALLOC(sizeof(char) * (strlen(CurrentLine) + strlen(lpMem) + 1));
             memset(newline, 0x00, strlen(CurrentLine) + strlen(lpMem) + 1);
             strncpy(newline, CurrentLine, cur_pos);
             strcat(newline, lpMem);

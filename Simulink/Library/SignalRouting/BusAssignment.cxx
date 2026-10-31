@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BusAssignment::BusAssignment() {}
+BusAssignment::BusAssignment()
+{
+}
 
-BusAssignment::~BusAssignment() {}
+BusAssignment::~BusAssignment()
+{
+}
 
 const std::string& BusAssignment::GetAssignedsignals() const
 {

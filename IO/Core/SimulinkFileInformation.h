@@ -24,21 +24,54 @@ class SimulinkFileInformation
 public:
     SimulinkFileInformation();
 
-    const std::string& GetExtension() const { return extension; }
-    const std::string& GetName() const { return name; }
-    UInt16 GetSize() const { return size; }
-    const std::string& GetCategory() const { return category; }
-    const std::string& GetCreator() const { return creator; }
-    const std::string& GetLastModifiedBy() const { return lastModifiedBy; }
-    const std::string& GetRevision() const { return revision; }
-    const std::string& GetVersion() const { return version; }
-    const std::string& GetContentType() const { return contentType; }
+    const std::string& GetExtension() const
+    {
+        return extension;
+    }
+    const std::string& GetName() const
+    {
+        return name;
+    }
+    UInt16 GetSize() const
+    {
+        return size;
+    }
+    const std::string& GetCategory() const
+    {
+        return category;
+    }
+    const std::string& GetCreator() const
+    {
+        return creator;
+    }
+    const std::string& GetLastModifiedBy() const
+    {
+        return lastModifiedBy;
+    }
+    const std::string& GetRevision() const
+    {
+        return revision;
+    }
+    const std::string& GetVersion() const
+    {
+        return version;
+    }
+    const std::string& GetContentType() const
+    {
+        return contentType;
+    }
     const std::string& GetContentTypeFriendlyName() const
     {
         return contentTypeFriendlyName;
     }
-    const std::string& GetMatlabRelease() const { return matlabRelease; }
-    const std::string& GetMatlabVersion() const { return matlabVersion; }
+    const std::string& GetMatlabRelease() const
+    {
+        return matlabRelease;
+    }
+    const std::string& GetMatlabVersion() const
+    {
+        return matlabVersion;
+    }
 
 private:
     const std::string extension;

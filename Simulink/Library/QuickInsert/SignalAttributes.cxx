@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SignalAttributes::SignalAttributes() {}
+SignalAttributes::SignalAttributes()
+{
+}
 
-SignalAttributes::~SignalAttributes() {}
+SignalAttributes::~SignalAttributes()
+{
+}
 
 const std::string& SignalAttributes::GetShowportlabels() const
 {
@@ -58,7 +62,10 @@ void SignalAttributes::SetPermissions(const std::string& value)
     m_Permissions = value;
 }
 
-const std::string& SignalAttributes::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& SignalAttributes::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
 void SignalAttributes::SetErrorfcn(const std::string& value)
 {
@@ -90,8 +97,7 @@ const std::string& SignalAttributes::GetShowsubsystemreinitializeports() const
     return m_Showsubsystemreinitializeports;
 }
 
-void SignalAttributes::SetShowsubsystemreinitializeports(
-    const std::string& value)
+void SignalAttributes::SetShowsubsystemreinitializeports(const std::string& value)
 {
     m_Showsubsystemreinitializeports = value;
 }
@@ -286,7 +292,10 @@ void SignalAttributes::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& SignalAttributes::GetVariant() const { return m_Variant; }
+const std::string& SignalAttributes::GetVariant() const
+{
+    return m_Variant;
+}
 
 void SignalAttributes::SetVariant(const std::string& value)
 {
@@ -403,14 +412,12 @@ void SignalAttributes::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-SignalAttributes::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& SignalAttributes::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void SignalAttributes::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void SignalAttributes::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -425,7 +432,10 @@ void SignalAttributes::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& SignalAttributes::GetLatency() const { return m_Latency; }
+const std::string& SignalAttributes::GetLatency() const
+{
+    return m_Latency;
+}
 
 void SignalAttributes::SetLatency(const std::string& value)
 {

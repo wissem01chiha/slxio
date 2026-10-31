@@ -17,8 +17,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class IRangeParameterObject
  * @brief Specialization for range-based types
  */
-template <typename T>
-class SLXIO_APIEXPORT IRangeParameterObject : public IParameterObject<T>
+template <typename T> class SLXIO_APIEXPORT IRangeParameterObject : public IParameterObject<T>
 {
 public:
     virtual T& GetMin() = 0;

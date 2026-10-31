@@ -4,17 +4,33 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-In1::In1() {}
+In1::In1()
+{
+}
 
-In1::~In1() {}
+In1::~In1()
+{
+}
 
-const std::string& In1::GetPort() const { return m_Port; }
+const std::string& In1::GetPort() const
+{
+    return m_Port;
+}
 
-void In1::SetPort(const std::string& value) { m_Port = value; }
+void In1::SetPort(const std::string& value)
+{
+    m_Port = value;
+}
 
-const std::string& In1::GetIcondisplay() const { return m_Icondisplay; }
+const std::string& In1::GetIcondisplay() const
+{
+    return m_Icondisplay;
+}
 
-void In1::SetIcondisplay(const std::string& value) { m_Icondisplay = value; }
+void In1::SetIcondisplay(const std::string& value)
+{
+    m_Icondisplay = value;
+}
 
 const std::string& In1::GetOutputfunctioncall() const
 {
@@ -26,24 +42,45 @@ void In1::SetOutputfunctioncall(const std::string& value)
     m_Outputfunctioncall = value;
 }
 
-const std::string& In1::GetOutmin() const { return m_Outmin; }
+const std::string& In1::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void In1::SetOutmin(const std::string& value) { m_Outmin = value; }
+void In1::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& In1::GetOutmax() const { return m_Outmax; }
+const std::string& In1::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void In1::SetOutmax(const std::string& value) { m_Outmax = value; }
+void In1::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
-const std::string& In1::GetOutdatatypestr() const { return m_Outdatatypestr; }
+const std::string& In1::GetOutdatatypestr() const
+{
+    return m_Outdatatypestr;
+}
 
 void In1::SetOutdatatypestr(const std::string& value)
 {
     m_Outdatatypestr = value;
 }
 
-const std::string& In1::GetLockscale() const { return m_Lockscale; }
+const std::string& In1::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
-void In1::SetLockscale(const std::string& value) { m_Lockscale = value; }
+void In1::SetLockscale(const std::string& value)
+{
+    m_Lockscale = value;
+}
 
 const std::string& In1::GetBusoutputasstruct() const
 {
@@ -55,35 +92,65 @@ void In1::SetBusoutputasstruct(const std::string& value)
     m_Busoutputasstruct = value;
 }
 
-const std::string& In1::GetBusvirtuality() const { return m_Busvirtuality; }
+const std::string& In1::GetBusvirtuality() const
+{
+    return m_Busvirtuality;
+}
 
 void In1::SetBusvirtuality(const std::string& value)
 {
     m_Busvirtuality = value;
 }
 
-const std::string& In1::GetUnit() const { return m_Unit; }
+const std::string& In1::GetUnit() const
+{
+    return m_Unit;
+}
 
-void In1::SetUnit(const std::string& value) { m_Unit = value; }
+void In1::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
-const std::string& In1::GetPortdimensions() const { return m_Portdimensions; }
+const std::string& In1::GetPortdimensions() const
+{
+    return m_Portdimensions;
+}
 
 void In1::SetPortdimensions(const std::string& value)
 {
     m_Portdimensions = value;
 }
 
-const std::string& In1::GetVarsizesig() const { return m_Varsizesig; }
+const std::string& In1::GetVarsizesig() const
+{
+    return m_Varsizesig;
+}
 
-void In1::SetVarsizesig(const std::string& value) { m_Varsizesig = value; }
+void In1::SetVarsizesig(const std::string& value)
+{
+    m_Varsizesig = value;
+}
 
-const std::string& In1::GetSampletime() const { return m_Sampletime; }
+const std::string& In1::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void In1::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void In1::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
-const std::string& In1::GetSignaltype() const { return m_Signaltype; }
+const std::string& In1::GetSignaltype() const
+{
+    return m_Signaltype;
+}
 
-void In1::SetSignaltype(const std::string& value) { m_Signaltype = value; }
+void In1::SetSignaltype(const std::string& value)
+{
+    m_Signaltype = value;
+}
 
 const std::string& In1::GetLatchbydelayingoutsidesignal() const
 {
@@ -105,17 +172,35 @@ void In1::SetLatchinputforfeedbacksignals(const std::string& value)
     m_Latchinputforfeedbacksignals = value;
 }
 
-const std::string& In1::GetInterpolate() const { return m_Interpolate; }
+const std::string& In1::GetInterpolate() const
+{
+    return m_Interpolate;
+}
 
-void In1::SetInterpolate(const std::string& value) { m_Interpolate = value; }
+void In1::SetInterpolate(const std::string& value)
+{
+    m_Interpolate = value;
+}
 
-const std::string& In1::GetInputconnect() const { return m_Inputconnect; }
+const std::string& In1::GetInputconnect() const
+{
+    return m_Inputconnect;
+}
 
-void In1::SetInputconnect(const std::string& value) { m_Inputconnect = value; }
+void In1::SetInputconnect(const std::string& value)
+{
+    m_Inputconnect = value;
+}
 
-const std::string& In1::GetDatamode() const { return m_Datamode; }
+const std::string& In1::GetDatamode() const
+{
+    return m_Datamode;
+}
 
-void In1::SetDatamode(const std::string& value) { m_Datamode = value; }
+void In1::SetDatamode(const std::string& value)
+{
+    m_Datamode = value;
+}
 
 const std::string& In1::GetMessagequeueusedefaultattributes() const
 {
@@ -157,7 +242,10 @@ void In1::SetMessagequeueoverwriting(const std::string& value)
     m_Messagequeueoverwriting = value;
 }
 
-const std::string& In1::GetEventtriggers() const { return m_Eventtriggers; }
+const std::string& In1::GetEventtriggers() const
+{
+    return m_Eventtriggers;
+}
 
 void In1::SetEventtriggers(const std::string& value)
 {

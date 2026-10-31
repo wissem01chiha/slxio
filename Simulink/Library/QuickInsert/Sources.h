@@ -144,10 +144,8 @@ public:
     const std::string& GetAllowflexibleinterface() const;
     void SetAllowflexibleinterface(const std::string& value);
 
-    const std::string&
-    GetTreatasgroupedwhenpropagatingvariantconditions() const;
-    void
-    SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value);
+    const std::string& GetTreatasgroupedwhenpropagatingvariantconditions() const;
+    void SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value);
 
     const std::string& GetReferencedsubsystem() const;
     void SetReferencedsubsystem(const std::string& value);

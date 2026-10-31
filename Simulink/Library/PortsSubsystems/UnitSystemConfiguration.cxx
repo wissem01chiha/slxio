@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-UnitSystemConfiguration::UnitSystemConfiguration() {}
+UnitSystemConfiguration::UnitSystemConfiguration()
+{
+}
 
-UnitSystemConfiguration::~UnitSystemConfiguration() {}
+UnitSystemConfiguration::~UnitSystemConfiguration()
+{
+}
 
 const std::string& UnitSystemConfiguration::GetUnitsystems() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ExtractBits::ExtractBits() {}
+ExtractBits::ExtractBits()
+{
+}
 
-ExtractBits::~ExtractBits() {}
+ExtractBits::~ExtractBits()
+{
+}
 
 const std::string& ExtractBits::GetBitstoextract() const
 {
@@ -18,11 +22,20 @@ void ExtractBits::SetBitstoextract(const std::string& value)
     m_Bitstoextract = value;
 }
 
-const std::string& ExtractBits::GetNumbits() const { return m_Numbits; }
+const std::string& ExtractBits::GetNumbits() const
+{
+    return m_Numbits;
+}
 
-void ExtractBits::SetNumbits(const std::string& value) { m_Numbits = value; }
+void ExtractBits::SetNumbits(const std::string& value)
+{
+    m_Numbits = value;
+}
 
-const std::string& ExtractBits::GetBitidxrange() const { return m_Bitidxrange; }
+const std::string& ExtractBits::GetBitidxrange() const
+{
+    return m_Bitidxrange;
+}
 
 void ExtractBits::SetBitidxrange(const std::string& value)
 {

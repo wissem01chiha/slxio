@@ -4,29 +4,63 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DescriptorStateSpace::DescriptorStateSpace() {}
+DescriptorStateSpace::DescriptorStateSpace()
+{
+}
 
-DescriptorStateSpace::~DescriptorStateSpace() {}
+DescriptorStateSpace::~DescriptorStateSpace()
+{
+}
 
-const std::string& DescriptorStateSpace::GetE() const { return m_E; }
+const std::string& DescriptorStateSpace::GetE() const
+{
+    return m_E;
+}
 
-void DescriptorStateSpace::SetE(const std::string& value) { m_E = value; }
+void DescriptorStateSpace::SetE(const std::string& value)
+{
+    m_E = value;
+}
 
-const std::string& DescriptorStateSpace::GetA() const { return m_A; }
+const std::string& DescriptorStateSpace::GetA() const
+{
+    return m_A;
+}
 
-void DescriptorStateSpace::SetA(const std::string& value) { m_A = value; }
+void DescriptorStateSpace::SetA(const std::string& value)
+{
+    m_A = value;
+}
 
-const std::string& DescriptorStateSpace::GetB() const { return m_B; }
+const std::string& DescriptorStateSpace::GetB() const
+{
+    return m_B;
+}
 
-void DescriptorStateSpace::SetB(const std::string& value) { m_B = value; }
+void DescriptorStateSpace::SetB(const std::string& value)
+{
+    m_B = value;
+}
 
-const std::string& DescriptorStateSpace::GetC() const { return m_C; }
+const std::string& DescriptorStateSpace::GetC() const
+{
+    return m_C;
+}
 
-void DescriptorStateSpace::SetC(const std::string& value) { m_C = value; }
+void DescriptorStateSpace::SetC(const std::string& value)
+{
+    m_C = value;
+}
 
-const std::string& DescriptorStateSpace::GetD() const { return m_D; }
+const std::string& DescriptorStateSpace::GetD() const
+{
+    return m_D;
+}
 
-void DescriptorStateSpace::SetD(const std::string& value) { m_D = value; }
+void DescriptorStateSpace::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
 const std::string& DescriptorStateSpace::GetInitialcondition() const
 {
@@ -73,8 +107,7 @@ const std::string& DescriptorStateSpace::GetContinuousstateattributes() const
     return m_Continuousstateattributes;
 }
 
-void DescriptorStateSpace::SetContinuousstateattributes(
-    const std::string& value)
+void DescriptorStateSpace::SetContinuousstateattributes(const std::string& value)
 {
     m_Continuousstateattributes = value;
 }

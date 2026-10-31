@@ -39,7 +39,6 @@ HError SimulinkParameterParser::setInputData(const xmlNodePtr data)
 
 HError SimulinkParameterParser::parse()
 {
-
     Logger& l = Logger::GetInstance();
 
     const char* paramClassStr = nullptr;
@@ -82,8 +81,7 @@ HError SimulinkParameterParser::parse()
         xmlFree(nodeContent);
     }
 
-    std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
-        std::make_unique<SimulinkDataTypeParser>();
+    std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr = std::make_unique<SimulinkDataTypeParser>();
 
     HError dataTypeInputStatus = dataTypeParserPtr->setInputData(paramClassStr);
 
@@ -100,8 +98,7 @@ HError SimulinkParameterParser::parse()
         // l.log(Logger::V_ERROR,
       "SimulinkParameterParser:: failed to parse data type string");
     }
-    std::shared_ptr<SimulinkDataType> dataTypePtr =
-        dataTypeParserPtr->getOutputData();
+    std::shared_ptr<SimulinkDataType> dataTypePtr = dataTypeParserPtr->getOutputData();
     if (dataTypePtr != nullptr)
     {
         ptr->setDataType(*dataTypePtr);

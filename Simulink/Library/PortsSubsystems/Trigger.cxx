@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Trigger::Trigger() {}
+Trigger::Trigger()
+{
+}
 
-Trigger::~Trigger() {}
+Trigger::~Trigger()
+{
+}
 
-const std::string& Trigger::GetTriggertype() const { return m_Triggertype; }
+const std::string& Trigger::GetTriggertype() const
+{
+    return m_Triggertype;
+}
 
 void Trigger::SetTriggertype(const std::string& value)
 {
     m_Triggertype = value;
 }
 
-const std::string& Trigger::GetTriggertime() const { return m_Triggertime; }
+const std::string& Trigger::GetTriggertime() const
+{
+    return m_Triggertime;
+}
 
 void Trigger::SetTriggertime(const std::string& value)
 {
@@ -52,7 +62,10 @@ void Trigger::SetAsynchronousfunction(const std::string& value)
     m_Asynchronousfunction = value;
 }
 
-const std::string& Trigger::GetFunctionname() const { return m_Functionname; }
+const std::string& Trigger::GetFunctionname() const
+{
+    return m_Functionname;
+}
 
 void Trigger::SetFunctionname(const std::string& value)
 {
@@ -69,13 +82,25 @@ void Trigger::SetFunctionvisibility(const std::string& value)
     m_Functionvisibility = value;
 }
 
-const std::string& Trigger::GetScopename() const { return m_Scopename; }
+const std::string& Trigger::GetScopename() const
+{
+    return m_Scopename;
+}
 
-void Trigger::SetScopename(const std::string& value) { m_Scopename = value; }
+void Trigger::SetScopename(const std::string& value)
+{
+    m_Scopename = value;
+}
 
-const std::string& Trigger::GetVariant() const { return m_Variant; }
+const std::string& Trigger::GetVariant() const
+{
+    return m_Variant;
+}
 
-void Trigger::SetVariant(const std::string& value) { m_Variant = value; }
+void Trigger::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& Trigger::GetVariantcontrol() const
 {
@@ -147,13 +172,25 @@ void Trigger::SetSampletimetype(const std::string& value)
     m_Sampletimetype = value;
 }
 
-const std::string& Trigger::GetSampletime() const { return m_Sampletime; }
+const std::string& Trigger::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Trigger::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Trigger::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
-const std::string& Trigger::GetZerocross() const { return m_Zerocross; }
+const std::string& Trigger::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
-void Trigger::SetZerocross(const std::string& value) { m_Zerocross = value; }
+void Trigger::SetZerocross(const std::string& value)
+{
+    m_Zerocross = value;
+}
 
 const std::string& Trigger::GetInitialtriggersignalstate() const
 {
@@ -185,13 +222,25 @@ void Trigger::SetTriggersignalsampletime(const std::string& value)
     m_Triggersignalsampletime = value;
 }
 
-const std::string& Trigger::GetOutmin() const { return m_Outmin; }
+const std::string& Trigger::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void Trigger::SetOutmin(const std::string& value) { m_Outmin = value; }
+void Trigger::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& Trigger::GetOutmax() const { return m_Outmax; }
+const std::string& Trigger::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void Trigger::SetOutmax(const std::string& value) { m_Outmax = value; }
+void Trigger::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& Trigger::GetOutdatatypestr() const
 {
@@ -203,7 +252,10 @@ void Trigger::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& Trigger::GetInterpolate() const { return m_Interpolate; }
+const std::string& Trigger::GetInterpolate() const
+{
+    return m_Interpolate;
+}
 
 void Trigger::SetInterpolate(const std::string& value)
 {

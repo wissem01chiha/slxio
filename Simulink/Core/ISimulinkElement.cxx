@@ -5,10 +5,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-HError
-ISimulinkElement::Insert(const std::shared_ptr<ISimulinkElement>& element)
+HError ISimulinkElement::Insert(const std::shared_ptr<ISimulinkElement>& element)
 {
-
     return E_OPERATION_NOT_SUPPORTED;
 }
 
@@ -22,8 +20,7 @@ std::shared_ptr<ISimulinkElement> ISimulinkElement::Find(const SId& id) const
     return nullptr;
 }
 
-std::shared_ptr<ISimulinkElement>
-ISimulinkElement::FindRecursive(const SId& id) const
+std::shared_ptr<ISimulinkElement> ISimulinkElement::FindRecursive(const SId& id) const
 {
     auto direct = Find(id);
     if (direct)
@@ -47,16 +44,18 @@ HError ISimulinkElement::Erase(const SId& id)
 
     m_children.erase(it);
 
-    m_childrenOrder.erase(
-        std::remove_if(m_childrenOrder.begin(), m_childrenOrder.end(),
-                       [&](const std::shared_ptr<ISimulinkElement>& child)
-                       { return child->GetId() == id; }),
-        m_childrenOrder.end());
+    m_childrenOrder.erase(std::remove_if(m_childrenOrder.begin(),
+                                         m_childrenOrder.end(),
+                                         [&](const std::shared_ptr<ISimulinkElement>& child) { return child->GetId() == id; }),
+                          m_childrenOrder.end());
 
     return E_OK;
 }
 
-void ISimulinkElement::Clear() { m_children.clear(); }
+void ISimulinkElement::Clear()
+{
+    m_children.clear();
+}
 
 bool ISimulinkElement::Contains(const SId& id) const
 {
@@ -82,7 +81,10 @@ HError ISimulinkElement::SetLogger(ILogger* logger)
     return E_OK;
 }
 
-const ILogger* ISimulinkElement::GetLogger() const { return m_logger; }
+const ILogger* ISimulinkElement::GetLogger() const
+{
+    return m_logger;
+}
 
 HError ISimulinkElement::SetErrorHandler(IErrorHandler* handler)
 {
@@ -99,41 +101,45 @@ const IErrorHandler* ISimulinkElement::GetErrorHandler() const
     return m_error;
 }
 
-std::string ISimulinkElement::ToString() const { return std::string(""); }
+std::string ISimulinkElement::ToString() const
+{
+    return std::string("");
+}
 
-void ISimulinkElement::SetParent(
-    const std::shared_ptr<ISimulinkElement>& parent)
+void ISimulinkElement::SetParent(const std::shared_ptr<ISimulinkElement>& parent)
 {
     m_parent = parent;
 }
 
-std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
-ISimulinkElement::GetChildren()
+std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& ISimulinkElement::GetChildren()
 {
     return m_children;
 }
 
-const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
-ISimulinkElement::GetChildren() const
+const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& ISimulinkElement::GetChildren() const
 {
     return m_children;
 }
 
-std::vector<std::shared_ptr<ISimulinkElement>>&
-ISimulinkElement::GetOrderedChildren()
+std::vector<std::shared_ptr<ISimulinkElement>>& ISimulinkElement::GetOrderedChildren()
 {
     return m_childrenOrder;
 }
 
-const std::vector<std::shared_ptr<ISimulinkElement>>&
-ISimulinkElement::GetOrderedChildren() const
+const std::vector<std::shared_ptr<ISimulinkElement>>& ISimulinkElement::GetOrderedChildren() const
 {
     return m_childrenOrder;
 }
 
-ILogger* ISimulinkElement::Logger() const { return m_logger; }
+ILogger* ISimulinkElement::Logger() const
+{
+    return m_logger;
+}
 
-IErrorHandler* ISimulinkElement::ErrorHandler() const { return m_error; }
+IErrorHandler* ISimulinkElement::ErrorHandler() const
+{
+    return m_error;
+}
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

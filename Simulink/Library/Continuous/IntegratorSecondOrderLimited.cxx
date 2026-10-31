@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IntegratorSecondOrderLimited::IntegratorSecondOrderLimited() {}
+IntegratorSecondOrderLimited::IntegratorSecondOrderLimited()
+{
+}
 
-IntegratorSecondOrderLimited::~IntegratorSecondOrderLimited() {}
+IntegratorSecondOrderLimited::~IntegratorSecondOrderLimited()
+{
+}
 
 const std::string& IntegratorSecondOrderLimited::GetIcsourcex() const
 {
@@ -73,8 +77,7 @@ const std::string& IntegratorSecondOrderLimited::GetWrappeduppervaluex() const
     return m_Wrappeduppervaluex;
 }
 
-void IntegratorSecondOrderLimited::SetWrappeduppervaluex(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetWrappeduppervaluex(const std::string& value)
 {
     m_Wrappeduppervaluex = value;
 }
@@ -84,8 +87,7 @@ const std::string& IntegratorSecondOrderLimited::GetWrappedlowervaluex() const
     return m_Wrappedlowervaluex;
 }
 
-void IntegratorSecondOrderLimited::SetWrappedlowervaluex(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetWrappedlowervaluex(const std::string& value)
 {
     m_Wrappedlowervaluex = value;
 }
@@ -95,8 +97,7 @@ const std::string& IntegratorSecondOrderLimited::GetAbsolutetolerancex() const
     return m_Absolutetolerancex;
 }
 
-void IntegratorSecondOrderLimited::SetAbsolutetolerancex(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetAbsolutetolerancex(const std::string& value)
 {
     m_Absolutetolerancex = value;
 }
@@ -161,14 +162,12 @@ void IntegratorSecondOrderLimited::SetLowerlimitdxdt(const std::string& value)
     m_Lowerlimitdxdt = value;
 }
 
-const std::string&
-IntegratorSecondOrderLimited::GetAbsolutetolerancedxdt() const
+const std::string& IntegratorSecondOrderLimited::GetAbsolutetolerancedxdt() const
 {
     return m_Absolutetolerancedxdt;
 }
 
-void IntegratorSecondOrderLimited::SetAbsolutetolerancedxdt(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetAbsolutetolerancedxdt(const std::string& value)
 {
     m_Absolutetolerancedxdt = value;
 }
@@ -203,27 +202,22 @@ void IntegratorSecondOrderLimited::SetZerocross(const std::string& value)
     m_Zerocross = value;
 }
 
-const std::string&
-IntegratorSecondOrderLimited::GetReinitdxdtwhenxreachessaturation() const
+const std::string& IntegratorSecondOrderLimited::GetReinitdxdtwhenxreachessaturation() const
 {
     return m_Reinitdxdtwhenxreachessaturation;
 }
 
-void IntegratorSecondOrderLimited::SetReinitdxdtwhenxreachessaturation(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetReinitdxdtwhenxreachessaturation(const std::string& value)
 {
     m_Reinitdxdtwhenxreachessaturation = value;
 }
 
-const std::string&
-IntegratorSecondOrderLimited::GetIgnorestatelimitsandresetforlinearization()
-    const
+const std::string& IntegratorSecondOrderLimited::GetIgnorestatelimitsandresetforlinearization() const
 {
     return m_Ignorestatelimitsandresetforlinearization;
 }
 
-void IntegratorSecondOrderLimited::SetIgnorestatelimitsandresetforlinearization(
-    const std::string& value)
+void IntegratorSecondOrderLimited::SetIgnorestatelimitsandresetforlinearization(const std::string& value)
 {
     m_Ignorestatelimitsandresetforlinearization = value;
 }

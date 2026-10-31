@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CosCordic::CosCordic() {}
+CosCordic::CosCordic()
+{
+}
 
-CosCordic::~CosCordic() {}
+CosCordic::~CosCordic()
+{
+}
 
-const std::string& CosCordic::GetOperator() const { return m_Operator; }
+const std::string& CosCordic::GetOperator() const
+{
+    return m_Operator;
+}
 
-void CosCordic::SetOperator(const std::string& value) { m_Operator = value; }
+void CosCordic::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& CosCordic::GetApproximationmethod() const
 {
@@ -42,16 +52,25 @@ void CosCordic::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& CosCordic::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& CosCordic::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
 void CosCordic::SetInterpmethod(const std::string& value)
 {
     m_Interpmethod = value;
 }
 
-const std::string& CosCordic::GetAngleunit() const { return m_Angleunit; }
+const std::string& CosCordic::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void CosCordic::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void CosCordic::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& CosCordic::GetNumberofdatapoints() const
 {
@@ -78,13 +97,15 @@ const std::string& CosCordic::GetRemoveprotectionagainstoutofrangeinput() const
     return m_Removeprotectionagainstoutofrangeinput;
 }
 
-void CosCordic::SetRemoveprotectionagainstoutofrangeinput(
-    const std::string& value)
+void CosCordic::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
 {
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& CosCordic::GetSampletime() const { return m_Sampletime; }
+const std::string& CosCordic::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void CosCordic::SetSampletime(const std::string& value)
 {

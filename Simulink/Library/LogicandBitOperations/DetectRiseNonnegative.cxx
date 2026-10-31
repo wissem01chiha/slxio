@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DetectRiseNonnegative::DetectRiseNonnegative() {}
+DetectRiseNonnegative::DetectRiseNonnegative()
+{
+}
 
-DetectRiseNonnegative::~DetectRiseNonnegative() {}
+DetectRiseNonnegative::~DetectRiseNonnegative()
+{
+}
 
-const std::string& DetectRiseNonnegative::GetVinit() const { return m_Vinit; }
+const std::string& DetectRiseNonnegative::GetVinit() const
+{
+    return m_Vinit;
+}
 
 void DetectRiseNonnegative::SetVinit(const std::string& value)
 {

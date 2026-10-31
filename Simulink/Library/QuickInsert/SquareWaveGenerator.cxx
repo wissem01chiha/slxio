@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SquareWaveGenerator::SquareWaveGenerator() {}
+SquareWaveGenerator::SquareWaveGenerator()
+{
+}
 
-SquareWaveGenerator::~SquareWaveGenerator() {}
+SquareWaveGenerator::~SquareWaveGenerator()
+{
+}
 
 const std::string& SquareWaveGenerator::GetWaveform() const
 {
@@ -48,7 +52,10 @@ void SquareWaveGenerator::SetFrequency(const std::string& value)
     m_Frequency = value;
 }
 
-const std::string& SquareWaveGenerator::GetUnits() const { return m_Units; }
+const std::string& SquareWaveGenerator::GetUnits() const
+{
+    return m_Units;
+}
 
 void SquareWaveGenerator::SetUnits(const std::string& value)
 {

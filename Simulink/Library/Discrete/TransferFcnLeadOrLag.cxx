@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransferFcnLeadOrLag::TransferFcnLeadOrLag() {}
+TransferFcnLeadOrLag::TransferFcnLeadOrLag()
+{
+}
 
-TransferFcnLeadOrLag::~TransferFcnLeadOrLag() {}
+TransferFcnLeadOrLag::~TransferFcnLeadOrLag()
+{
+}
 
-const std::string& TransferFcnLeadOrLag::GetPolez() const { return m_Polez; }
+const std::string& TransferFcnLeadOrLag::GetPolez() const
+{
+    return m_Polez;
+}
 
 void TransferFcnLeadOrLag::SetPolez(const std::string& value)
 {
     m_Polez = value;
 }
 
-const std::string& TransferFcnLeadOrLag::GetZeroz() const { return m_Zeroz; }
+const std::string& TransferFcnLeadOrLag::GetZeroz() const
+{
+    return m_Zeroz;
+}
 
 void TransferFcnLeadOrLag::SetZeroz(const std::string& value)
 {

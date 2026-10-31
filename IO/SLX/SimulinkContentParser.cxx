@@ -77,9 +77,7 @@ HError SimulinkContentParser::initTempDirectory()
       return SLX_EIOERR;
     }
 
-    std::string tempDirectoryPath =
-        std::string(Directory::getCurrentDirectory()) + PATH_SEP +
-        std::string(tmpdir);
+    std::string tempDirectoryPath = std::string(Directory::getCurrentDirectory()) + PATH_SEP + std::string(tmpdir);
 
     if (Directory::isDirectory(tempDirectoryPath))
     {
@@ -113,8 +111,7 @@ HError SimulinkContentParser::unzip()
     // Build the full path to the temporary copy of the SLX file.
     // Create a new File object using this path as the working baseline,
     // ensuring the original user file remains untouched.
-    std::string tempfilefullpath =
-        tempdirfullpath + PATH_SEP + dataObject.getFilename();
+    std::string tempfilefullpath = tempdirfullpath + PATH_SEP + dataObject.getFilename();
 
     File fileDataObject(tempfilefullpath, File::Read);
     if (!fileDataObject.isFile())
@@ -144,17 +141,14 @@ HError SimulinkContentParser::unzip()
 
 HError SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath)
 {
-
-    XmlTarget targets[] = {
-        {"/simulink/blockdiagram.xml", &ptr->blockdiagram},
-        {"/simulink/modelDictionary.xml", &ptr->modelDictionary},
-        {"/simulink/configSetInfo.xml", &ptr->configSetInfo},
-        {"/simulink/bddefaults.xml", &ptr->bddefaults},
-        {"/simulink/graphicalInterface.xml", &ptr->graphicalInterface},
-        {"/metadata/coreProperties.xml", &ptr->coreProperties},
-        {"/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties},
-        {"/metadata/mwcorePropertiesExtension.xml",
-         &ptr->mwcorePropertiesExtension}};
+    XmlTarget targets[] = {{"/simulink/blockdiagram.xml", &ptr->blockdiagram},
+                           {"/simulink/modelDictionary.xml", &ptr->modelDictionary},
+                           {"/simulink/configSetInfo.xml", &ptr->configSetInfo},
+                           {"/simulink/bddefaults.xml", &ptr->bddefaults},
+                           {"/simulink/graphicalInterface.xml", &ptr->graphicalInterface},
+                           {"/metadata/coreProperties.xml", &ptr->coreProperties},
+                           {"/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties},
+                           {"/metadata/mwcorePropertiesExtension.xml", &ptr->mwcorePropertiesExtension}};
 
     for (auto& t : targets)
     {

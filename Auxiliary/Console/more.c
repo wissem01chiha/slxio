@@ -26,8 +26,7 @@
 
 #include <stdio.h>
 /*--------------------------------------------------------------------------*/
-#define MSG_MORE                                                               \
-    _("[Continue display? n (no) to stop, any other key to continue]")
+#define MSG_MORE _("[Continue display? n (no) to stop, any other key to continue]")
 /*--------------------------------------------------------------------------*/
 int linesmore(void)
 {

@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Acos::Acos() {}
+Acos::Acos()
+{
+}
 
-Acos::~Acos() {}
+Acos::~Acos()
+{
+}
 
-const std::string& Acos::GetOperator() const { return m_Operator; }
+const std::string& Acos::GetOperator() const
+{
+    return m_Operator;
+}
 
-void Acos::SetOperator(const std::string& value) { m_Operator = value; }
+void Acos::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& Acos::GetApproximationmethod() const
 {
@@ -42,13 +52,25 @@ void Acos::SetOutputsignaltype(const std::string& value)
     m_Outputsignaltype = value;
 }
 
-const std::string& Acos::GetInterpmethod() const { return m_Interpmethod; }
+const std::string& Acos::GetInterpmethod() const
+{
+    return m_Interpmethod;
+}
 
-void Acos::SetInterpmethod(const std::string& value) { m_Interpmethod = value; }
+void Acos::SetInterpmethod(const std::string& value)
+{
+    m_Interpmethod = value;
+}
 
-const std::string& Acos::GetAngleunit() const { return m_Angleunit; }
+const std::string& Acos::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
-void Acos::SetAngleunit(const std::string& value) { m_Angleunit = value; }
+void Acos::SetAngleunit(const std::string& value)
+{
+    m_Angleunit = value;
+}
 
 const std::string& Acos::GetNumberofdatapoints() const
 {
@@ -80,9 +102,15 @@ void Acos::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& Acos::GetSampletime() const { return m_Sampletime; }
+const std::string& Acos::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Acos::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Acos::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

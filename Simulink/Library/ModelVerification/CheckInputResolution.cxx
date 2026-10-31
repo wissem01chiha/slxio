@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckInputResolution::CheckInputResolution() {}
+CheckInputResolution::CheckInputResolution()
+{
+}
 
-CheckInputResolution::~CheckInputResolution() {}
+CheckInputResolution::~CheckInputResolution()
+{
+}
 
 const std::string& CheckInputResolution::GetResolution() const
 {
@@ -48,7 +52,10 @@ void CheckInputResolution::SetStopwhenassertionfail(const std::string& value)
     m_Stopwhenassertionfail = value;
 }
 
-const std::string& CheckInputResolution::GetExport() const { return m_Export; }
+const std::string& CheckInputResolution::GetExport() const
+{
+    return m_Export;
+}
 
 void CheckInputResolution::SetExport(const std::string& value)
 {

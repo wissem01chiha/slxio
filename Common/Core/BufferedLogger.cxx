@@ -33,8 +33,7 @@ LogLevelType BufferedLogger::GetLogLevel() const
     return m_level;
 }
 
-const std::vector<std::unique_ptr<ILogMessage>>&
-BufferedLogger::GetBuffer() const
+const std::vector<std::unique_ptr<ILogMessage>>& BufferedLogger::GetBuffer() const
 {
     std::lock_guard<std::mutex> lock(m_mutex);
     return m_buffer;

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Level2MatlabSFunction::Level2MatlabSFunction() {}
+Level2MatlabSFunction::Level2MatlabSFunction()
+{
+}
 
-Level2MatlabSFunction::~Level2MatlabSFunction() {}
+Level2MatlabSFunction::~Level2MatlabSFunction()
+{
+}
 
 const std::string& Level2MatlabSFunction::GetFunctionname() const
 {

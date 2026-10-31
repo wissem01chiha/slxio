@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IntervalTestDynamic::IntervalTestDynamic() {}
+IntervalTestDynamic::IntervalTestDynamic()
+{
+}
 
-IntervalTestDynamic::~IntervalTestDynamic() {}
+IntervalTestDynamic::~IntervalTestDynamic()
+{
+}
 
 const std::string& IntervalTestDynamic::GetIntervalclosedright() const
 {

@@ -19,7 +19,6 @@ HError SimulinkDataTypeParser::setInputData(const std::string data)
 
 HError SimulinkDataTypeParser::setInputData(const std::string& data)
 {
-
     if (data.length() == 0)
     {
         // l.log(Logger::V_ERROR,
@@ -32,7 +31,6 @@ HError SimulinkDataTypeParser::setInputData(const std::string& data)
 
 HError SimulinkDataTypeParser::parse()
 {
-
     static const std::unordered_map<std::string, SimulinkDataType> sldtMap = {
 #define XX(enumVal, str) {str, enumVal},
         SIMULINKDATATYPE_MAP(XX)

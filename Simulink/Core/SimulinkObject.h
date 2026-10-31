@@ -33,12 +33,9 @@ public:
     SId GetId() const override;
     void SetId(const SId& id) override;
 
-    void AddParam(const std::string& name,
-                  const std::shared_ptr<IParameterObjectBase>& p) override;
-    void SetParam(const std::string& name,
-                  const std::shared_ptr<IParameterObjectBase>& p) override;
-    std::shared_ptr<IParameterObjectBase>
-    GetParam(const std::string& name) override;
+    void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
+    void SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
+    std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
 
     std::string GetName() const;
     void SetName(const std::string& name);

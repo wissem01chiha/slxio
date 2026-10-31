@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ComplexToMagnitudeAngle::ComplexToMagnitudeAngle() {}
+ComplexToMagnitudeAngle::ComplexToMagnitudeAngle()
+{
+}
 
-ComplexToMagnitudeAngle::~ComplexToMagnitudeAngle() {}
+ComplexToMagnitudeAngle::~ComplexToMagnitudeAngle()
+{
+}
 
 const std::string& ComplexToMagnitudeAngle::GetOutput() const
 {

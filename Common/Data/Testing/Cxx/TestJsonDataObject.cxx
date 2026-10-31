@@ -14,7 +14,6 @@ TEST_CASE("JsonDataObject constructor")
 
 TEST_CASE("JsonDataObject init with json_object")
 {
-
     json_object* j = json_object_new_string("hello");
     JsonDataObject obj;
     obj.Initialize(j);

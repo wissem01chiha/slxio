@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariablePulseGenerator::VariablePulseGenerator() {}
+VariablePulseGenerator::VariablePulseGenerator()
+{
+}
 
-VariablePulseGenerator::~VariablePulseGenerator() {}
+VariablePulseGenerator::~VariablePulseGenerator()
+{
+}
 
 const std::string& VariablePulseGenerator::GetAllowzeropulsewidth() const
 {
@@ -23,8 +27,7 @@ const std::string& VariablePulseGenerator::GetRunatfixedtimeintervals() const
     return m_Runatfixedtimeintervals;
 }
 
-void VariablePulseGenerator::SetRunatfixedtimeintervals(
-    const std::string& value)
+void VariablePulseGenerator::SetRunatfixedtimeintervals(const std::string& value)
 {
     m_Runatfixedtimeintervals = value;
 }

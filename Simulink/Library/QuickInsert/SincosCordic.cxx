@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SincosCordic::SincosCordic() {}
+SincosCordic::SincosCordic()
+{
+}
 
-SincosCordic::~SincosCordic() {}
+SincosCordic::~SincosCordic()
+{
+}
 
-const std::string& SincosCordic::GetOperator() const { return m_Operator; }
+const std::string& SincosCordic::GetOperator() const
+{
+    return m_Operator;
+}
 
-void SincosCordic::SetOperator(const std::string& value) { m_Operator = value; }
+void SincosCordic::SetOperator(const std::string& value)
+{
+    m_Operator = value;
+}
 
 const std::string& SincosCordic::GetApproximationmethod() const
 {
@@ -52,7 +62,10 @@ void SincosCordic::SetInterpmethod(const std::string& value)
     m_Interpmethod = value;
 }
 
-const std::string& SincosCordic::GetAngleunit() const { return m_Angleunit; }
+const std::string& SincosCordic::GetAngleunit() const
+{
+    return m_Angleunit;
+}
 
 void SincosCordic::SetAngleunit(const std::string& value)
 {
@@ -79,19 +92,20 @@ void SincosCordic::SetTabledatatypestr(const std::string& value)
     m_Tabledatatypestr = value;
 }
 
-const std::string&
-SincosCordic::GetRemoveprotectionagainstoutofrangeinput() const
+const std::string& SincosCordic::GetRemoveprotectionagainstoutofrangeinput() const
 {
     return m_Removeprotectionagainstoutofrangeinput;
 }
 
-void SincosCordic::SetRemoveprotectionagainstoutofrangeinput(
-    const std::string& value)
+void SincosCordic::SetRemoveprotectionagainstoutofrangeinput(const std::string& value)
 {
     m_Removeprotectionagainstoutofrangeinput = value;
 }
 
-const std::string& SincosCordic::GetSampletime() const { return m_Sampletime; }
+const std::string& SincosCordic::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void SincosCordic::SetSampletime(const std::string& value)
 {

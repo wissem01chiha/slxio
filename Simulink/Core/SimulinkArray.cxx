@@ -88,10 +88,12 @@ HError SimulinkArray::Insert(const std::shared_ptr<ISimulinkElement>& element)
     return E_OK;
 }
 
-SId SimulinkArray::GetId() const { return m_id; }
+SId SimulinkArray::GetId() const
+{
+    return m_id;
+}
 
-void SimulinkArray::AddParam(const std::string& name,
-                             const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkArray::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -100,8 +102,7 @@ void SimulinkArray::AddParam(const std::string& name,
     m_parameters.push_back(p);
 }
 
-void SimulinkArray::SetParam(const std::string& name,
-                             const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkArray::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -119,21 +120,22 @@ void SimulinkArray::SetParam(const std::string& name,
     AddParam(name, p);
 }
 
-std::shared_ptr<IParameterObjectBase>
-SimulinkArray::GetParam(const std::string& name)
+std::shared_ptr<IParameterObjectBase> SimulinkArray::GetParam(const std::string& name)
 {
     for (const auto& param : m_parameters)
     {
         if (param->GetName() == name)
         {
-
             return param;
         }
     }
     return nullptr;
 }
 
-std::string SimulinkArray::GetName() const { return m_name; }
+std::string SimulinkArray::GetName() const
+{
+    return m_name;
+}
 
 void SimulinkArray::SetName(const std::string& name)
 {
@@ -148,7 +150,10 @@ void SimulinkArray::SetName(const std::string& name)
     m_name = name;
 }
 
-std::string SimulinkArray::GetDimension() const { return m_dimension; }
+std::string SimulinkArray::GetDimension() const
+{
+    return m_dimension;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

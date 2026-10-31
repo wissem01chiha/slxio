@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MatlabFunction::MatlabFunction() {}
+MatlabFunction::MatlabFunction()
+{
+}
 
-MatlabFunction::~MatlabFunction() {}
+MatlabFunction::~MatlabFunction()
+{
+}
 
 const std::string& MatlabFunction::GetShowportlabels() const
 {
@@ -58,7 +62,10 @@ void MatlabFunction::SetPermissions(const std::string& value)
     m_Permissions = value;
 }
 
-const std::string& MatlabFunction::GetErrorfcn() const { return m_Errorfcn; }
+const std::string& MatlabFunction::GetErrorfcn() const
+{
+    return m_Errorfcn;
+}
 
 void MatlabFunction::SetErrorfcn(const std::string& value)
 {
@@ -285,9 +292,15 @@ void MatlabFunction::SetIssubsystemvirtual(const std::string& value)
     m_Issubsystemvirtual = value;
 }
 
-const std::string& MatlabFunction::GetVariant() const { return m_Variant; }
+const std::string& MatlabFunction::GetVariant() const
+{
+    return m_Variant;
+}
 
-void MatlabFunction::SetVariant(const std::string& value) { m_Variant = value; }
+void MatlabFunction::SetVariant(const std::string& value)
+{
+    m_Variant = value;
+}
 
 const std::string& MatlabFunction::GetVariantchoicesspecifier() const
 {
@@ -399,14 +412,12 @@ void MatlabFunction::SetAllowflexibleinterface(const std::string& value)
     m_Allowflexibleinterface = value;
 }
 
-const std::string&
-MatlabFunction::GetTreatasgroupedwhenpropagatingvariantconditions() const
+const std::string& MatlabFunction::GetTreatasgroupedwhenpropagatingvariantconditions() const
 {
     return m_Treatasgroupedwhenpropagatingvariantconditions;
 }
 
-void MatlabFunction::SetTreatasgroupedwhenpropagatingvariantconditions(
-    const std::string& value)
+void MatlabFunction::SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value)
 {
     m_Treatasgroupedwhenpropagatingvariantconditions = value;
 }
@@ -421,9 +432,15 @@ void MatlabFunction::SetReferencedsubsystem(const std::string& value)
     m_Referencedsubsystem = value;
 }
 
-const std::string& MatlabFunction::GetLatency() const { return m_Latency; }
+const std::string& MatlabFunction::GetLatency() const
+{
+    return m_Latency;
+}
 
-void MatlabFunction::SetLatency(const std::string& value) { m_Latency = value; }
+void MatlabFunction::SetLatency(const std::string& value)
+{
+    m_Latency = value;
+}
 
 const std::string& MatlabFunction::GetAutoframesizecalculation() const
 {

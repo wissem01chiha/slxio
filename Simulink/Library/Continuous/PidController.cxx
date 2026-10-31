@@ -4,22 +4,38 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-PidController::PidController() {}
+PidController::PidController()
+{
+}
 
-PidController::~PidController() {}
+PidController::~PidController()
+{
+}
 
-const std::string& PidController::GetController() const { return m_Controller; }
+const std::string& PidController::GetController() const
+{
+    return m_Controller;
+}
 
 void PidController::SetController(const std::string& value)
 {
     m_Controller = value;
 }
 
-const std::string& PidController::GetForm() const { return m_Form; }
+const std::string& PidController::GetForm() const
+{
+    return m_Form;
+}
 
-void PidController::SetForm(const std::string& value) { m_Form = value; }
+void PidController::SetForm(const std::string& value)
+{
+    m_Form = value;
+}
 
-const std::string& PidController::GetTimedomain() const { return m_Timedomain; }
+const std::string& PidController::GetTimedomain() const
+{
+    return m_Timedomain;
+}
 
 void PidController::SetTimedomain(const std::string& value)
 {
@@ -36,7 +52,10 @@ void PidController::SetUseexternalts(const std::string& value)
     m_Useexternalts = value;
 }
 
-const std::string& PidController::GetSampletime() const { return m_Sampletime; }
+const std::string& PidController::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void PidController::SetSampletime(const std::string& value)
 {
@@ -73,21 +92,45 @@ void PidController::SetControllerparameterssource(const std::string& value)
     m_Controllerparameterssource = value;
 }
 
-const std::string& PidController::GetP() const { return m_P; }
+const std::string& PidController::GetP() const
+{
+    return m_P;
+}
 
-void PidController::SetP(const std::string& value) { m_P = value; }
+void PidController::SetP(const std::string& value)
+{
+    m_P = value;
+}
 
-const std::string& PidController::GetI() const { return m_I; }
+const std::string& PidController::GetI() const
+{
+    return m_I;
+}
 
-void PidController::SetI(const std::string& value) { m_I = value; }
+void PidController::SetI(const std::string& value)
+{
+    m_I = value;
+}
 
-const std::string& PidController::GetUsekits() const { return m_Usekits; }
+const std::string& PidController::GetUsekits() const
+{
+    return m_Usekits;
+}
 
-void PidController::SetUsekits(const std::string& value) { m_Usekits = value; }
+void PidController::SetUsekits(const std::string& value)
+{
+    m_Usekits = value;
+}
 
-const std::string& PidController::GetD() const { return m_D; }
+const std::string& PidController::GetD() const
+{
+    return m_D;
+}
 
-void PidController::SetD(const std::string& value) { m_D = value; }
+void PidController::SetD(const std::string& value)
+{
+    m_D = value;
+}
 
 const std::string& PidController::GetUseexternalderivativesource() const
 {
@@ -99,11 +142,20 @@ void PidController::SetUseexternalderivativesource(const std::string& value)
     m_Useexternalderivativesource = value;
 }
 
-const std::string& PidController::GetN() const { return m_N; }
+const std::string& PidController::GetN() const
+{
+    return m_N;
+}
 
-void PidController::SetN(const std::string& value) { m_N = value; }
+void PidController::SetN(const std::string& value)
+{
+    m_N = value;
+}
 
-const std::string& PidController::GetUsefilter() const { return m_Usefilter; }
+const std::string& PidController::GetUsefilter() const
+{
+    return m_Usefilter;
+}
 
 void PidController::SetUsefilter(const std::string& value)
 {
@@ -120,7 +172,10 @@ void PidController::SetTunerselectoption(const std::string& value)
     m_Tunerselectoption = value;
 }
 
-const std::string& PidController::GetZerocross() const { return m_Zerocross; }
+const std::string& PidController::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void PidController::SetZerocross(const std::string& value)
 {
@@ -197,9 +252,15 @@ void PidController::SetTrackingmode(const std::string& value)
     m_Trackingmode = value;
 }
 
-const std::string& PidController::GetKt() const { return m_Kt; }
+const std::string& PidController::GetKt() const
+{
+    return m_Kt;
+}
 
-void PidController::SetKt(const std::string& value) { m_Kt = value; }
+void PidController::SetKt(const std::string& value)
+{
+    m_Kt = value;
+}
 
 const std::string& PidController::GetLimitoutput() const
 {
@@ -261,9 +322,15 @@ void PidController::SetAntiwindupmode(const std::string& value)
     m_Antiwindupmode = value;
 }
 
-const std::string& PidController::GetKb() const { return m_Kb; }
+const std::string& PidController::GetKb() const
+{
+    return m_Kb;
+}
 
-void PidController::SetKb(const std::string& value) { m_Kb = value; }
+void PidController::SetKb(const std::string& value)
+{
+    m_Kb = value;
+}
 
 const std::string& PidController::GetLimitintegrator() const
 {
@@ -295,9 +362,15 @@ void PidController::SetLowerintegratorsaturationlimit(const std::string& value)
     m_Lowerintegratorsaturationlimit = value;
 }
 
-const std::string& PidController::GetRndmeth() const { return m_Rndmeth; }
+const std::string& PidController::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void PidController::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void PidController::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& PidController::GetSaturateonintegeroverflow() const
 {
@@ -309,7 +382,10 @@ void PidController::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& PidController::GetLockscale() const { return m_Lockscale; }
+const std::string& PidController::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void PidController::SetLockscale(const std::string& value)
 {
@@ -336,13 +412,25 @@ void PidController::SetPprodoutdatatypestr(const std::string& value)
     m_Pprodoutdatatypestr = value;
 }
 
-const std::string& PidController::GetPoutmin() const { return m_Poutmin; }
+const std::string& PidController::GetPoutmin() const
+{
+    return m_Poutmin;
+}
 
-void PidController::SetPoutmin(const std::string& value) { m_Poutmin = value; }
+void PidController::SetPoutmin(const std::string& value)
+{
+    m_Poutmin = value;
+}
 
-const std::string& PidController::GetPoutmax() const { return m_Poutmax; }
+const std::string& PidController::GetPoutmax() const
+{
+    return m_Poutmax;
+}
 
-void PidController::SetPoutmax(const std::string& value) { m_Poutmax = value; }
+void PidController::SetPoutmax(const std::string& value)
+{
+    m_Poutmax = value;
+}
 
 const std::string& PidController::GetIgainoutdatatypestr() const
 {
@@ -364,13 +452,25 @@ void PidController::SetIprodoutdatatypestr(const std::string& value)
     m_Iprodoutdatatypestr = value;
 }
 
-const std::string& PidController::GetIoutmin() const { return m_Ioutmin; }
+const std::string& PidController::GetIoutmin() const
+{
+    return m_Ioutmin;
+}
 
-void PidController::SetIoutmin(const std::string& value) { m_Ioutmin = value; }
+void PidController::SetIoutmin(const std::string& value)
+{
+    m_Ioutmin = value;
+}
 
-const std::string& PidController::GetIoutmax() const { return m_Ioutmax; }
+const std::string& PidController::GetIoutmax() const
+{
+    return m_Ioutmax;
+}
 
-void PidController::SetIoutmax(const std::string& value) { m_Ioutmax = value; }
+void PidController::SetIoutmax(const std::string& value)
+{
+    m_Ioutmax = value;
+}
 
 const std::string& PidController::GetDgainoutdatatypestr() const
 {
@@ -392,13 +492,25 @@ void PidController::SetDprodoutdatatypestr(const std::string& value)
     m_Dprodoutdatatypestr = value;
 }
 
-const std::string& PidController::GetDoutmin() const { return m_Doutmin; }
+const std::string& PidController::GetDoutmin() const
+{
+    return m_Doutmin;
+}
 
-void PidController::SetDoutmin(const std::string& value) { m_Doutmin = value; }
+void PidController::SetDoutmin(const std::string& value)
+{
+    m_Doutmin = value;
+}
 
-const std::string& PidController::GetDoutmax() const { return m_Doutmax; }
+const std::string& PidController::GetDoutmax() const
+{
+    return m_Doutmax;
+}
 
-void PidController::SetDoutmax(const std::string& value) { m_Doutmax = value; }
+void PidController::SetDoutmax(const std::string& value)
+{
+    m_Doutmax = value;
+}
 
 const std::string& PidController::GetNgainoutdatatypestr() const
 {
@@ -420,13 +532,25 @@ void PidController::SetNprodoutdatatypestr(const std::string& value)
     m_Nprodoutdatatypestr = value;
 }
 
-const std::string& PidController::GetNoutmin() const { return m_Noutmin; }
+const std::string& PidController::GetNoutmin() const
+{
+    return m_Noutmin;
+}
 
-void PidController::SetNoutmin(const std::string& value) { m_Noutmin = value; }
+void PidController::SetNoutmin(const std::string& value)
+{
+    m_Noutmin = value;
+}
 
-const std::string& PidController::GetNoutmax() const { return m_Noutmax; }
+const std::string& PidController::GetNoutmax() const
+{
+    return m_Noutmax;
+}
 
-void PidController::SetNoutmax(const std::string& value) { m_Noutmax = value; }
+void PidController::SetNoutmax(const std::string& value)
+{
+    m_Noutmax = value;
+}
 
 const std::string& PidController::GetSumoutdatatypestr() const
 {
@@ -438,14 +562,20 @@ void PidController::SetSumoutdatatypestr(const std::string& value)
     m_Sumoutdatatypestr = value;
 }
 
-const std::string& PidController::GetSumoutmin() const { return m_Sumoutmin; }
+const std::string& PidController::GetSumoutmin() const
+{
+    return m_Sumoutmin;
+}
 
 void PidController::SetSumoutmin(const std::string& value)
 {
     m_Sumoutmin = value;
 }
 
-const std::string& PidController::GetSumoutmax() const { return m_Sumoutmax; }
+const std::string& PidController::GetSumoutmax() const
+{
+    return m_Sumoutmax;
+}
 
 void PidController::SetSumoutmax(const std::string& value)
 {
@@ -492,14 +622,20 @@ void PidController::SetPparamdatatypestr(const std::string& value)
     m_Pparamdatatypestr = value;
 }
 
-const std::string& PidController::GetPparammin() const { return m_Pparammin; }
+const std::string& PidController::GetPparammin() const
+{
+    return m_Pparammin;
+}
 
 void PidController::SetPparammin(const std::string& value)
 {
     m_Pparammin = value;
 }
 
-const std::string& PidController::GetPparammax() const { return m_Pparammax; }
+const std::string& PidController::GetPparammax() const
+{
+    return m_Pparammax;
+}
 
 void PidController::SetPparammax(const std::string& value)
 {
@@ -516,14 +652,20 @@ void PidController::SetIparamdatatypestr(const std::string& value)
     m_Iparamdatatypestr = value;
 }
 
-const std::string& PidController::GetIparammin() const { return m_Iparammin; }
+const std::string& PidController::GetIparammin() const
+{
+    return m_Iparammin;
+}
 
 void PidController::SetIparammin(const std::string& value)
 {
     m_Iparammin = value;
 }
 
-const std::string& PidController::GetIparammax() const { return m_Iparammax; }
+const std::string& PidController::GetIparammax() const
+{
+    return m_Iparammax;
+}
 
 void PidController::SetIparammax(const std::string& value)
 {
@@ -540,14 +682,20 @@ void PidController::SetDparamdatatypestr(const std::string& value)
     m_Dparamdatatypestr = value;
 }
 
-const std::string& PidController::GetDparammin() const { return m_Dparammin; }
+const std::string& PidController::GetDparammin() const
+{
+    return m_Dparammin;
+}
 
 void PidController::SetDparammin(const std::string& value)
 {
     m_Dparammin = value;
 }
 
-const std::string& PidController::GetDparammax() const { return m_Dparammax; }
+const std::string& PidController::GetDparammax() const
+{
+    return m_Dparammax;
+}
 
 void PidController::SetDparammax(const std::string& value)
 {
@@ -564,14 +712,20 @@ void PidController::SetNparamdatatypestr(const std::string& value)
     m_Nparamdatatypestr = value;
 }
 
-const std::string& PidController::GetNparammin() const { return m_Nparammin; }
+const std::string& PidController::GetNparammin() const
+{
+    return m_Nparammin;
+}
 
 void PidController::SetNparammin(const std::string& value)
 {
     m_Nparammin = value;
 }
 
-const std::string& PidController::GetNparammax() const { return m_Nparammax; }
+const std::string& PidController::GetNparammax() const
+{
+    return m_Nparammax;
+}
 
 void PidController::SetNparammax(const std::string& value)
 {
@@ -588,14 +742,20 @@ void PidController::SetKbparamdatatypestr(const std::string& value)
     m_Kbparamdatatypestr = value;
 }
 
-const std::string& PidController::GetKbparammin() const { return m_Kbparammin; }
+const std::string& PidController::GetKbparammin() const
+{
+    return m_Kbparammin;
+}
 
 void PidController::SetKbparammin(const std::string& value)
 {
     m_Kbparammin = value;
 }
 
-const std::string& PidController::GetKbparammax() const { return m_Kbparammax; }
+const std::string& PidController::GetKbparammax() const
+{
+    return m_Kbparammax;
+}
 
 void PidController::SetKbparammax(const std::string& value)
 {
@@ -612,14 +772,20 @@ void PidController::SetKtparamdatatypestr(const std::string& value)
     m_Ktparamdatatypestr = value;
 }
 
-const std::string& PidController::GetKtparammin() const { return m_Ktparammin; }
+const std::string& PidController::GetKtparammin() const
+{
+    return m_Ktparammin;
+}
 
 void PidController::SetKtparammin(const std::string& value)
 {
     m_Ktparammin = value;
 }
 
-const std::string& PidController::GetKtparammax() const { return m_Ktparammax; }
+const std::string& PidController::GetKtparammax() const
+{
+    return m_Ktparammax;
+}
 
 void PidController::SetKtparammax(const std::string& value)
 {
@@ -636,14 +802,20 @@ void PidController::SetKboutdatatypestr(const std::string& value)
     m_Kboutdatatypestr = value;
 }
 
-const std::string& PidController::GetKboutmin() const { return m_Kboutmin; }
+const std::string& PidController::GetKboutmin() const
+{
+    return m_Kboutmin;
+}
 
 void PidController::SetKboutmin(const std::string& value)
 {
     m_Kboutmin = value;
 }
 
-const std::string& PidController::GetKboutmax() const { return m_Kboutmax; }
+const std::string& PidController::GetKboutmax() const
+{
+    return m_Kboutmax;
+}
 
 void PidController::SetKboutmax(const std::string& value)
 {
@@ -660,14 +832,20 @@ void PidController::SetKtoutdatatypestr(const std::string& value)
     m_Ktoutdatatypestr = value;
 }
 
-const std::string& PidController::GetKtoutmin() const { return m_Ktoutmin; }
+const std::string& PidController::GetKtoutmin() const
+{
+    return m_Ktoutmin;
+}
 
 void PidController::SetKtoutmin(const std::string& value)
 {
     m_Ktoutmin = value;
 }
 
-const std::string& PidController::GetKtoutmax() const { return m_Ktoutmax; }
+const std::string& PidController::GetKtoutmax() const
+{
+    return m_Ktoutmax;
+}
 
 void PidController::SetKtoutmax(const std::string& value)
 {
@@ -864,14 +1042,20 @@ void PidController::SetSumdoutdatatypestr(const std::string& value)
     m_Sumdoutdatatypestr = value;
 }
 
-const std::string& PidController::GetSumdoutmin() const { return m_Sumdoutmin; }
+const std::string& PidController::GetSumdoutmin() const
+{
+    return m_Sumdoutmin;
+}
 
 void PidController::SetSumdoutmin(const std::string& value)
 {
     m_Sumdoutmin = value;
 }
 
-const std::string& PidController::GetSumdoutmax() const { return m_Sumdoutmax; }
+const std::string& PidController::GetSumdoutmax() const
+{
+    return m_Sumdoutmax;
+}
 
 void PidController::SetSumdoutmax(const std::string& value)
 {
@@ -968,26 +1152,22 @@ void PidController::SetDifferentiatoroutmax(const std::string& value)
     m_Differentiatoroutmax = value;
 }
 
-const std::string&
-PidController::GetFilterdiffnumproductoutputdatatypestr() const
+const std::string& PidController::GetFilterdiffnumproductoutputdatatypestr() const
 {
     return m_Filterdiffnumproductoutputdatatypestr;
 }
 
-void PidController::SetFilterdiffnumproductoutputdatatypestr(
-    const std::string& value)
+void PidController::SetFilterdiffnumproductoutputdatatypestr(const std::string& value)
 {
     m_Filterdiffnumproductoutputdatatypestr = value;
 }
 
-const std::string&
-PidController::GetFilterdiffdenproductoutputdatatypestr() const
+const std::string& PidController::GetFilterdiffdenproductoutputdatatypestr() const
 {
     return m_Filterdiffdenproductoutputdatatypestr;
 }
 
-void PidController::SetFilterdiffdenproductoutputdatatypestr(
-    const std::string& value)
+void PidController::SetFilterdiffdenproductoutputdatatypestr(const std::string& value)
 {
     m_Filterdiffdenproductoutputdatatypestr = value;
 }
@@ -1427,8 +1607,7 @@ const std::string& PidController::GetIntegratorcontinuousstateattributes() const
     return m_Integratorcontinuousstateattributes;
 }
 
-void PidController::SetIntegratorcontinuousstateattributes(
-    const std::string& value)
+void PidController::SetIntegratorcontinuousstateattributes(const std::string& value)
 {
     m_Integratorcontinuousstateattributes = value;
 }
@@ -1443,14 +1622,12 @@ void PidController::SetIntegratorstateidentifier(const std::string& value)
     m_Integratorstateidentifier = value;
 }
 
-const std::string&
-PidController::GetIntegratorstatemustresolvetosignalobject() const
+const std::string& PidController::GetIntegratorstatemustresolvetosignalobject() const
 {
     return m_Integratorstatemustresolvetosignalobject;
 }
 
-void PidController::SetIntegratorstatemustresolvetosignalobject(
-    const std::string& value)
+void PidController::SetIntegratorstatemustresolvetosignalobject(const std::string& value)
 {
     m_Integratorstatemustresolvetosignalobject = value;
 }
@@ -1475,14 +1652,12 @@ void PidController::SetFilterstateidentifier(const std::string& value)
     m_Filterstateidentifier = value;
 }
 
-const std::string&
-PidController::GetFilterstatemustresolvetosignalobject() const
+const std::string& PidController::GetFilterstatemustresolvetosignalobject() const
 {
     return m_Filterstatemustresolvetosignalobject;
 }
 
-void PidController::SetFilterstatemustresolvetosignalobject(
-    const std::string& value)
+void PidController::SetFilterstatemustresolvetosignalobject(const std::string& value)
 {
     m_Filterstatemustresolvetosignalobject = value;
 }

@@ -14,10 +14,12 @@ std::shared_ptr<ISignalAttributes> Derivative::GetSignalAttributes() const
     return nullptr;
 }
 
-std::shared_ptr<ILogging> Derivative::GetLogging() const { return nullptr; }
+std::shared_ptr<ILogging> Derivative::GetLogging() const
+{
+    return nullptr;
+}
 
-std::shared_ptr<IBlockParametersInformation>
-Derivative::GetBlockParametersInformation() const
+std::shared_ptr<IBlockParametersInformation> Derivative::GetBlockParametersInformation() const
 {
     return nullptr;
 }
@@ -39,12 +41,10 @@ SimulinkBlockType Derivative::GetBlockType() const
 
 SimulinkBlockCategory Derivative::GetBlockCategory() const
 {
-    return SimulinkBlockCategory(
-        SimulinkBlockCategory::DefaultCategory::Continuous);
+    return SimulinkBlockCategory(SimulinkBlockCategory::DefaultCategory::Continuous);
 }
 
-void Derivative::AddParam(const std::string& name,
-                          const std::shared_ptr<IParameterObjectBase>& p)
+void Derivative::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -52,8 +52,7 @@ void Derivative::AddParam(const std::string& name,
     }
 }
 
-void Derivative::SetParam(const std::string& name,
-                          const std::shared_ptr<IParameterObjectBase>& p)
+void Derivative::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -61,13 +60,15 @@ void Derivative::SetParam(const std::string& name,
     }
 }
 
-std::shared_ptr<IParameterObjectBase>
-Derivative::GetParam(const std::string& name)
+std::shared_ptr<IParameterObjectBase> Derivative::GetParam(const std::string& name)
 {
     return nullptr;
 }
 
-std::string Derivative::ToString() const { return std::string(); }
+std::string Derivative::ToString() const
+{
+    return std::string();
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -4,22 +4,38 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-LogicalOperator::LogicalOperator() {}
+LogicalOperator::LogicalOperator()
+{
+}
 
-LogicalOperator::~LogicalOperator() {}
+LogicalOperator::~LogicalOperator()
+{
+}
 
-const std::string& LogicalOperator::GetOperator() const { return m_Operator; }
+const std::string& LogicalOperator::GetOperator() const
+{
+    return m_Operator;
+}
 
 void LogicalOperator::SetOperator(const std::string& value)
 {
     m_Operator = value;
 }
 
-const std::string& LogicalOperator::GetInputs() const { return m_Inputs; }
+const std::string& LogicalOperator::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void LogicalOperator::SetInputs(const std::string& value) { m_Inputs = value; }
+void LogicalOperator::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
-const std::string& LogicalOperator::GetIconshape() const { return m_Iconshape; }
+const std::string& LogicalOperator::GetIconshape() const
+{
+    return m_Iconshape;
+}
 
 void LogicalOperator::SetIconshape(const std::string& value)
 {

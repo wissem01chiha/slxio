@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-StringFind::StringFind() {}
+StringFind::StringFind()
+{
+}
 
-StringFind::~StringFind() {}
+StringFind::~StringFind()
+{
+}
 
 const std::string& StringFind::GetOutdatatypestr() const
 {

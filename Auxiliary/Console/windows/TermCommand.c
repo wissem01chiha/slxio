@@ -22,11 +22,20 @@
 #include "machine.h"      /* C2F */
 #include "storeCommand.h" /* StoreCommand */
 /*--------------------------------------------------------------------------*/
-void ControlC_Command(void) { setExecutionBreak(); }
+void ControlC_Command(void)
+{
+    setExecutionBreak();
+}
 /*--------------------------------------------------------------------------*/
-void ControlX_Command(void) { ControlC_Command(); }
+void ControlX_Command(void)
+{
+    ControlC_Command();
+}
 /*--------------------------------------------------------------------------*/
-void F1_Command(void) { StoreCommand("help"); }
+void F1_Command(void)
+{
+    StoreCommand("help");
+}
 /*--------------------------------------------------------------------------*/
 void F2_Command(void)
 {
@@ -34,5 +43,8 @@ void F2_Command(void)
     displayPrompt();
 }
 /*--------------------------------------------------------------------------*/
-void ALTF4_Command(void) { StoreCommand("quit"); }
+void ALTF4_Command(void)
+{
+    StoreCommand("quit");
+}
 /*--------------------------------------------------------------------------*/

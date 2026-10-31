@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CheckStaticLowerBound::CheckStaticLowerBound() {}
+CheckStaticLowerBound::CheckStaticLowerBound()
+{
+}
 
-CheckStaticLowerBound::~CheckStaticLowerBound() {}
+CheckStaticLowerBound::~CheckStaticLowerBound()
+{
+}
 
-const std::string& CheckStaticLowerBound::GetMin() const { return m_Min; }
+const std::string& CheckStaticLowerBound::GetMin() const
+{
+    return m_Min;
+}
 
-void CheckStaticLowerBound::SetMin(const std::string& value) { m_Min = value; }
+void CheckStaticLowerBound::SetMin(const std::string& value)
+{
+    m_Min = value;
+}
 
 const std::string& CheckStaticLowerBound::GetMinIncluded() const
 {
@@ -52,14 +62,20 @@ void CheckStaticLowerBound::SetStopwhenassertionfail(const std::string& value)
     m_Stopwhenassertionfail = value;
 }
 
-const std::string& CheckStaticLowerBound::GetExport() const { return m_Export; }
+const std::string& CheckStaticLowerBound::GetExport() const
+{
+    return m_Export;
+}
 
 void CheckStaticLowerBound::SetExport(const std::string& value)
 {
     m_Export = value;
 }
 
-const std::string& CheckStaticLowerBound::GetIcon() const { return m_Icon; }
+const std::string& CheckStaticLowerBound::GetIcon() const
+{
+    return m_Icon;
+}
 
 void CheckStaticLowerBound::SetIcon(const std::string& value)
 {

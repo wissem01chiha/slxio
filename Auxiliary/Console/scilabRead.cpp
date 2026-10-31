@@ -33,7 +33,10 @@ extern "C"
 
 static SCILAB_INPUT_METHOD _reader;
 
-void setScilabInputMethod(SCILAB_INPUT_METHOD reader) { _reader = reader; }
+void setScilabInputMethod(SCILAB_INPUT_METHOD reader)
+{
+    _reader = reader;
+}
 
 void C2F(scilabread)(char* strRead, int len)
 {

@@ -7,14 +7,20 @@ SLXIO_ABI_NAMESPACE_BEGIN
 XmlNodeDataObject::XmlNodeDataObject() = default;
 ;
 
-XmlNodeDataObject* XmlNodeDataObject::New() { return new XmlNodeDataObject(); }
+XmlNodeDataObject* XmlNodeDataObject::New()
+{
+    return new XmlNodeDataObject();
+}
 
 void XmlNodeDataObject::Initialize(void* implDataObject)
 {
     m_implDataObject = static_cast<xmlNodePtr>(implDataObject);
 }
 
-bool XmlNodeDataObject::Empty() const { return m_implDataObject == nullptr; }
+bool XmlNodeDataObject::Empty() const
+{
+    return m_implDataObject == nullptr;
+}
 
 bool XmlNodeDataObject::operator==(const IDataObject& other) const
 {
@@ -24,7 +30,10 @@ bool XmlNodeDataObject::operator==(const IDataObject& other) const
     return m_implDataObject == otherNode->m_implDataObject;
 }
 
-void* XmlNodeDataObject::GetImplDataObject() const { return m_implDataObject; }
+void* XmlNodeDataObject::GetImplDataObject() const
+{
+    return m_implDataObject;
+}
 
 std::string XmlNodeDataObject::ToString() const
 {

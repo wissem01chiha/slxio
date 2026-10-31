@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-BitwiseOperator::BitwiseOperator() {}
+BitwiseOperator::BitwiseOperator()
+{
+}
 
-BitwiseOperator::~BitwiseOperator() {}
+BitwiseOperator::~BitwiseOperator()
+{
+}
 
-const std::string& BitwiseOperator::GetLogicop() const { return m_Logicop; }
+const std::string& BitwiseOperator::GetLogicop() const
+{
+    return m_Logicop;
+}
 
 void BitwiseOperator::SetLogicop(const std::string& value)
 {
@@ -35,7 +42,10 @@ void BitwiseOperator::SetNuminputports(const std::string& value)
     m_Numinputports = value;
 }
 
-const std::string& BitwiseOperator::GetBitmask() const { return m_Bitmask; }
+const std::string& BitwiseOperator::GetBitmask() const
+{
+    return m_Bitmask;
+}
 
 void BitwiseOperator::SetBitmask(const std::string& value)
 {

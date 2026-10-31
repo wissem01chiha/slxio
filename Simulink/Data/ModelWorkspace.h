@@ -29,12 +29,10 @@ public:
     ModelWorkspace() = default;
 
     /** Get the value of a variable in the model workspace. */
-    std::shared_ptr<IParameterObjectBase>
-    GetVariable(const std::string& name) const;
+    std::shared_ptr<IParameterObjectBase> GetVariable(const std::string& name) const;
 
     /** Assign a value to a variable in the model workspace.*/
-    HError AssignVariable(const std::string& name,
-                          const std::shared_ptr<IParameterObjectBase>& p);
+    HError AssignVariable(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p);
 
     /** Clear a variable from the model workspace.*/
     HError ClearVariable(const std::string& name);
@@ -67,8 +65,7 @@ private:
     std::string m_fileName;
     std::string m_matlabCode;
     std::shared_ptr<DataSourceType> m_dataSource = nullptr;
-    std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>>
-        m_variables;
+    std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>> m_variables;
 };
 
 SLXIO_ABI_NAMESPACE_END

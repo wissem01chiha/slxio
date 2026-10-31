@@ -15,8 +15,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SubsystemReference : public IBlockParameters,
-                                           public IBlockProperties
+class SLXIO_APIEXPORT SubsystemReference : public IBlockParameters, public IBlockProperties
 {
 public:
     /** Default Constructor */
@@ -145,10 +144,8 @@ public:
     const std::string& GetAllowflexibleinterface() const;
     void SetAllowflexibleinterface(const std::string& value);
 
-    const std::string&
-    GetTreatasgroupedwhenpropagatingvariantconditions() const;
-    void
-    SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value);
+    const std::string& GetTreatasgroupedwhenpropagatingvariantconditions() const;
+    void SetTreatasgroupedwhenpropagatingvariantconditions(const std::string& value);
 
     const std::string& GetReferencedsubsystem() const;
     void SetReferencedsubsystem(const std::string& value);

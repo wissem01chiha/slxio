@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DataTypeDuplicate::DataTypeDuplicate() {}
+DataTypeDuplicate::DataTypeDuplicate()
+{
+}
 
-DataTypeDuplicate::~DataTypeDuplicate() {}
+DataTypeDuplicate::~DataTypeDuplicate()
+{
+}
 
 const std::string& DataTypeDuplicate::GetNuminputports() const
 {

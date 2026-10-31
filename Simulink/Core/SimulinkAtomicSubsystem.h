@@ -18,8 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkAtomicSubsystem
  * @brief Represents a Simulink Atomic Subsystem element in a Simulink model.
  */
-class SLXIO_APIEXPORT SimulinkAtomicSubsystem : public SimulinkElementBase,
-                                                SimulinkSubsystem
+class SLXIO_APIEXPORT SimulinkAtomicSubsystem : public SimulinkElementBase, SimulinkSubsystem
 {
 public:
     SimulinkAtomicSubsystem() = default;
@@ -73,17 +72,13 @@ public:
     std::string GetDimension() override;
 
     /** Access the element specifc parameter interface */
-    std::shared_ptr<SimulinkParameterBase>
-    GetParameter(std::string name) override;
+    std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
     /** Sets the element specifc parameter to given one  */
-    HError
-    SetParameter(std::string name,
-                 std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter) override;
 
     /** Adds the element specifc parameter  */
-    HError
-    AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+    HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
 private:
 };

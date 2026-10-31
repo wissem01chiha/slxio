@@ -113,17 +113,13 @@ static char* getCommandByFileExtension(char* File, char* FileExtension)
 
     if (FileExtension)
     {
-        if (stricmp(FileExtension, BIN_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SAV_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SOD_EXTENSION_FILE) == 0 ||
-            stricmp(FileExtension, SCG_EXTENSION_FILE) == 0)
+        if (stricmp(FileExtension, BIN_EXTENSION_FILE) == 0 || stricmp(FileExtension, SAV_EXTENSION_FILE) == 0 ||
+            stricmp(FileExtension, SOD_EXTENSION_FILE) == 0 || stricmp(FileExtension, SCG_EXTENSION_FILE) == 0)
         {
             command = buildCommand(FORMAT_LOAD_FILES, File);
         }
-        else if (stricmp(FileExtension, COS_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, COSF_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, ZCOS_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, XCOS_EXTENSION_FILE) == 0 ||
+        else if (stricmp(FileExtension, COS_EXTENSION_FILE) == 0 || stricmp(FileExtension, COSF_EXTENSION_FILE) == 0 ||
+                 stricmp(FileExtension, ZCOS_EXTENSION_FILE) == 0 || stricmp(FileExtension, XCOS_EXTENSION_FILE) == 0 ||
                  stricmp(FileExtension, XMI_EXTENSION_FILE) == 0)
         {
             if (with_module(L"xcos"))
@@ -135,10 +131,8 @@ static char* getCommandByFileExtension(char* File, char* FileExtension)
                 command = os_strdup(XCOS_NOT_INSTALLED);
             }
         }
-        else if (stricmp(FileExtension, SCI_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, SCE_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, TST_EXTENSION_FILE) == 0 ||
-                 stricmp(FileExtension, DEM_EXTENSION_FILE) == 0)
+        else if (stricmp(FileExtension, SCI_EXTENSION_FILE) == 0 || stricmp(FileExtension, SCE_EXTENSION_FILE) == 0 ||
+                 stricmp(FileExtension, TST_EXTENSION_FILE) == 0 || stricmp(FileExtension, DEM_EXTENSION_FILE) == 0)
         {
             command = buildCommand(FORMAT_EXEC_FILES, File);
         }
@@ -156,8 +150,7 @@ static char* buildCommand(char* format, char* filename)
 
     if (format && filename)
     {
-        command = (char*)MALLOC((strlen(filename) + strlen(format) + 1) *
-                                sizeof(char));
+        command = (char*)MALLOC((strlen(filename) + strlen(format) + 1) * sizeof(char));
         if (command)
         {
             sprintf(command, format, filename);

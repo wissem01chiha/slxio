@@ -4,15 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Merge::Merge() {}
+Merge::Merge()
+{
+}
 
-Merge::~Merge() {}
+Merge::~Merge()
+{
+}
 
-const std::string& Merge::GetInputs() const { return m_Inputs; }
+const std::string& Merge::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void Merge::SetInputs(const std::string& value) { m_Inputs = value; }
+void Merge::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
-const std::string& Merge::GetInitialoutput() const { return m_Initialoutput; }
+const std::string& Merge::GetInitialoutput() const
+{
+    return m_Initialoutput;
+}
 
 void Merge::SetInitialoutput(const std::string& value)
 {

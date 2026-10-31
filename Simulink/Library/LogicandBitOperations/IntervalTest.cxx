@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IntervalTest::IntervalTest() {}
+IntervalTest::IntervalTest()
+{
+}
 
-IntervalTest::~IntervalTest() {}
+IntervalTest::~IntervalTest()
+{
+}
 
 const std::string& IntervalTest::GetIntervalclosedright() const
 {
@@ -18,9 +22,15 @@ void IntervalTest::SetIntervalclosedright(const std::string& value)
     m_Intervalclosedright = value;
 }
 
-const std::string& IntervalTest::GetUplimit() const { return m_Uplimit; }
+const std::string& IntervalTest::GetUplimit() const
+{
+    return m_Uplimit;
+}
 
-void IntervalTest::SetUplimit(const std::string& value) { m_Uplimit = value; }
+void IntervalTest::SetUplimit(const std::string& value)
+{
+    m_Uplimit = value;
+}
 
 const std::string& IntervalTest::GetIntervalclosedleft() const
 {
@@ -32,9 +42,15 @@ void IntervalTest::SetIntervalclosedleft(const std::string& value)
     m_Intervalclosedleft = value;
 }
 
-const std::string& IntervalTest::GetLowlimit() const { return m_Lowlimit; }
+const std::string& IntervalTest::GetLowlimit() const
+{
+    return m_Lowlimit;
+}
 
-void IntervalTest::SetLowlimit(const std::string& value) { m_Lowlimit = value; }
+void IntervalTest::SetLowlimit(const std::string& value)
+{
+    m_Lowlimit = value;
+}
 
 const std::string& IntervalTest::GetOutdatatypestr() const
 {

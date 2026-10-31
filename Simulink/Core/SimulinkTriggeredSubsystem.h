@@ -18,8 +18,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * @class SimulinkTriggeredSubsystem
  * @brief Represents a Simulink Triggered Subsystem element in a Simulink model.
  */
-class SLXIO_APIEXPORT SimulinkTriggeredSubsystem : public SimulinkElementBase,
-                                                   SimulinkSubsystem
+class SLXIO_APIEXPORT SimulinkTriggeredSubsystem : public SimulinkElementBase, SimulinkSubsystem
 {
 public:
     SimulinkTriggeredSubsystem() = default;

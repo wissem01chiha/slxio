@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-UnitDelay::UnitDelay() {}
+UnitDelay::UnitDelay()
+{
+}
 
-UnitDelay::~UnitDelay() {}
+UnitDelay::~UnitDelay()
+{
+}
 
 const std::string& UnitDelay::GetInitialcondition() const
 {
@@ -28,16 +32,25 @@ void UnitDelay::SetInputprocessing(const std::string& value)
     m_Inputprocessing = value;
 }
 
-const std::string& UnitDelay::GetSampletime() const { return m_Sampletime; }
+const std::string& UnitDelay::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void UnitDelay::SetSampletime(const std::string& value)
 {
     m_Sampletime = value;
 }
 
-const std::string& UnitDelay::GetStatename() const { return m_Statename; }
+const std::string& UnitDelay::GetStatename() const
+{
+    return m_Statename;
+}
 
-void UnitDelay::SetStatename(const std::string& value) { m_Statename = value; }
+void UnitDelay::SetStatename(const std::string& value)
+{
+    m_Statename = value;
+}
 
 const std::string& UnitDelay::GetStatemustresolvetosignalobject() const
 {

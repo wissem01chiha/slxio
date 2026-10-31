@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ShiftArithmetic::ShiftArithmetic() {}
+ShiftArithmetic::ShiftArithmetic()
+{
+}
 
-ShiftArithmetic::~ShiftArithmetic() {}
+ShiftArithmetic::~ShiftArithmetic()
+{
+}
 
 const std::string& ShiftArithmetic::GetBitshiftnumbersource() const
 {

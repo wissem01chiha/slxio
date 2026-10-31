@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-MatrixDivide::MatrixDivide() {}
+MatrixDivide::MatrixDivide()
+{
+}
 
-MatrixDivide::~MatrixDivide() {}
+MatrixDivide::~MatrixDivide()
+{
+}
 
-const std::string& MatrixDivide::GetInputs() const { return m_Inputs; }
+const std::string& MatrixDivide::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void MatrixDivide::SetInputs(const std::string& value) { m_Inputs = value; }
+void MatrixDivide::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
 const std::string& MatrixDivide::GetMultiplication() const
 {
@@ -52,13 +62,25 @@ void MatrixDivide::SetInputsamedt(const std::string& value)
     m_Inputsamedt = value;
 }
 
-const std::string& MatrixDivide::GetOutmin() const { return m_Outmin; }
+const std::string& MatrixDivide::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void MatrixDivide::SetOutmin(const std::string& value) { m_Outmin = value; }
+void MatrixDivide::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& MatrixDivide::GetOutmax() const { return m_Outmax; }
+const std::string& MatrixDivide::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void MatrixDivide::SetOutmax(const std::string& value) { m_Outmax = value; }
+void MatrixDivide::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& MatrixDivide::GetOutdatatypestr() const
 {
@@ -70,16 +92,25 @@ void MatrixDivide::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& MatrixDivide::GetLockscale() const { return m_Lockscale; }
+const std::string& MatrixDivide::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void MatrixDivide::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& MatrixDivide::GetRndmeth() const { return m_Rndmeth; }
+const std::string& MatrixDivide::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void MatrixDivide::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void MatrixDivide::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& MatrixDivide::GetSaturateonintegeroverflow() const
 {
@@ -91,7 +122,10 @@ void MatrixDivide::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& MatrixDivide::GetSampletime() const { return m_Sampletime; }
+const std::string& MatrixDivide::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void MatrixDivide::SetSampletime(const std::string& value)
 {

@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-WaveformGenerator::WaveformGenerator() {}
+WaveformGenerator::WaveformGenerator()
+{
+}
 
-WaveformGenerator::~WaveformGenerator() {}
+WaveformGenerator::~WaveformGenerator()
+{
+}
 
-const std::string& WaveformGenerator::GetOutmin() const { return m_Outmin; }
+const std::string& WaveformGenerator::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void WaveformGenerator::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& WaveformGenerator::GetOutmax() const { return m_Outmax; }
+const std::string& WaveformGenerator::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void WaveformGenerator::SetOutmax(const std::string& value)
 {
@@ -42,7 +52,10 @@ void WaveformGenerator::SetLockscale(const std::string& value)
     m_Lockscale = value;
 }
 
-const std::string& WaveformGenerator::GetRndmeth() const { return m_Rndmeth; }
+const std::string& WaveformGenerator::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void WaveformGenerator::SetRndmeth(const std::string& value)
 {

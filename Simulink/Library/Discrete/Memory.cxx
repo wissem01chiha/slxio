@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Memory::Memory() {}
+Memory::Memory()
+{
+}
 
-Memory::~Memory() {}
+Memory::~Memory()
+{
+}
 
 const std::string& Memory::GetInitialcondition() const
 {
@@ -48,9 +52,15 @@ void Memory::SetLinearizeasdelay(const std::string& value)
     m_Linearizeasdelay = value;
 }
 
-const std::string& Memory::GetStatename() const { return m_Statename; }
+const std::string& Memory::GetStatename() const
+{
+    return m_Statename;
+}
 
-void Memory::SetStatename(const std::string& value) { m_Statename = value; }
+void Memory::SetStatename(const std::string& value)
+{
+    m_Statename = value;
+}
 
 const std::string& Memory::GetStatemustresolvetosignalobject() const
 {

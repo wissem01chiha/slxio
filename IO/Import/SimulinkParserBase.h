@@ -55,18 +55,23 @@ public:
     };
 
     /// @brief Retrieve the parsed SimulinkElementBase object.
-    std::shared_ptr<P> getOutputData() { return ptr; };
+    std::shared_ptr<P> getOutputData()
+    {
+        return ptr;
+    };
 
     /// @brief Retrieve the input data object.
-    T& getDataObject() { return dataObject; };
+    T& getDataObject()
+    {
+        return dataObject;
+    };
 
     /// @brief Parsing Callback
     virtual HError parse() = 0;
 
 protected:
     /// @brief Default constructor
-    SimulinkParserBase()
-        : ptr(std::make_shared<P>()), dataObject(), l(Logger::GetInstance()) {};
+    SimulinkParserBase() : ptr(std::make_shared<P>()), dataObject(), l(Logger::GetInstance()) {};
     std::shared_ptr<P> ptr;
     T dataObject;
     Logger& l;

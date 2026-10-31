@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RateLimiter::RateLimiter() {}
+RateLimiter::RateLimiter()
+{
+}
 
-RateLimiter::~RateLimiter() {}
+RateLimiter::~RateLimiter()
+{
+}
 
 const std::string& RateLimiter::GetRisingslewlimit() const
 {

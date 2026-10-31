@@ -20,9 +20,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 /**
  * @class SimulinkMutableParameter
  */
-class SLXIO_APIEXPORT SimulinkMutableParameter
-    : public IMutableParameterObject<std::string>,
-      public IObservable
+class SLXIO_APIEXPORT SimulinkMutableParameter : public IMutableParameterObject<std::string>, public IObservable
 {
 public:
     SimulinkMutableParameter();

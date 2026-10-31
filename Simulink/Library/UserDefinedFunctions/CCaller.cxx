@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CCaller::CCaller() {}
+CCaller::CCaller()
+{
+}
 
-CCaller::~CCaller() {}
+CCaller::~CCaller()
+{
+}
 
-const std::string& CCaller::GetFunctionname() const { return m_Functionname; }
+const std::string& CCaller::GetFunctionname() const
+{
+    return m_Functionname;
+}
 
 void CCaller::SetFunctionname(const std::string& value)
 {
@@ -35,9 +42,15 @@ void CCaller::SetAvailablefunctions(const std::string& value)
     m_Availablefunctions = value;
 }
 
-const std::string& CCaller::GetSampletime() const { return m_Sampletime; }
+const std::string& CCaller::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void CCaller::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void CCaller::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

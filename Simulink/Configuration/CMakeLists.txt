@@ -1,60 +1,18 @@
-
-
-# add_module(
-#   MODULE_NAME 
-#     Configuration
-#   MODULE_GROUP 
-#     Simulink
-#   LIBRARY_NAME 
-#     SimulinkConfiguration
-#   MODULE_ENABLE_BUILD 
-#     TRUE
-#   MODULE_ENABLE_TESTS 
-#     TRUE
-#   MODULE_CONFIG_HEADERS
-#   MODULE_CLASSES
-#   MODULE_HEADERS
-#     ConfigurationECH.h
-#     SimulinkSolver.h
-#     SimulinkSFSim.h
-#     SimulinkRTW.h
-#     SimulinkOptimization.h
-#     SimulinkModelReference.h
-#     SimulinkHardware.h
-#     SimulinkDebugging.h
-#     SimulinkConfigSet.h
-#     SimulinkConfigSetManager.h
-#     SimulinkSolverParameter.h
-#     SimulinkSFSimParameter.h
-#     SimulinkSFSimParameter.h
-#   MODULE_PCH_HEADERS
-#     ConfigurationPCH.h
-#   MODULE_SOURCES
-#     SimulinkSolver.cxx
-#     SimulinkSFSim.cxx
-#     SimulinkSFSim.cxx
-#     SimulinkRTW.cxx
-#     SimulinkOptimization.cxx
-#     SimulinkModelReference.cxx
-#     SimulinkHardware.cxx
-#     SimulinkDebugging.cxx
-#     SimulinkConfigSet.cxx
-#     SimulinkConfigSetManager.cxx
-#     SimulinkSolverParameter.cxx
-#     SimulinkSFSimParameter.cxx
-#     SimulinkSFSimParameter.cxx
-#   MODULE_TEST_SOURCE_DIR
-#     Testing/Cxx
-#   MODULE_TEST_DATA_SOURCE_DIR
-#     Testing/Data
-#   MODULE_TEST_DATA_SOURCES
-#   MODULE_TEST_SOURCES
-#     TestSimulinkConfigSet.cxx
-#   MODULE_INCLUDE_DIRS
-#   MODULE_PUBLIC_DEPENDS
-#     CommonCore
-#     CommonDataModel
-#   MODULE_TEST_DEPENDS
-#   MODULE_TEST_INCLUDE_DIRS
-#     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
-# )
+add_module(
+  Configuration
+  SimulinkCodeGeneration.cxx
+  SimulinkConfigurationRegistry.cxx
+  SimulinkSolver.cxx
+  SimulinkSFSim.cxx
+  SimulinkSFSim.cxx
+  SimulinkRTW.cxx
+  SimulinkOptimization.cxx
+  SimulinkModelReference.cxx
+  SimulinkHardware.cxx
+  SimulinkDebugging.cxx
+  SimulinkConfigSet.cxx
+  SimulinkConfigSetManager.cxx)
+module_link_libraries(Configuration Core Data)
+set_target_properties(Core PROPERTIES OUTPUT_NAME "SimulinkConfiguration")
+module_include_directories(Configuration)
+add_subdirectory(Testing)

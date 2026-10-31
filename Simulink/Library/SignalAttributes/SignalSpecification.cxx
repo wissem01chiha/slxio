@@ -4,18 +4,28 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SignalSpecification::SignalSpecification() {}
+SignalSpecification::SignalSpecification()
+{
+}
 
-SignalSpecification::~SignalSpecification() {}
+SignalSpecification::~SignalSpecification()
+{
+}
 
-const std::string& SignalSpecification::GetOutmin() const { return m_Outmin; }
+const std::string& SignalSpecification::GetOutmin() const
+{
+    return m_Outmin;
+}
 
 void SignalSpecification::SetOutmin(const std::string& value)
 {
     m_Outmin = value;
 }
 
-const std::string& SignalSpecification::GetOutmax() const { return m_Outmax; }
+const std::string& SignalSpecification::GetOutmax() const
+{
+    return m_Outmax;
+}
 
 void SignalSpecification::SetOutmax(const std::string& value)
 {
@@ -52,9 +62,15 @@ void SignalSpecification::SetBusoutputasstruct(const std::string& value)
     m_Busoutputasstruct = value;
 }
 
-const std::string& SignalSpecification::GetUnit() const { return m_Unit; }
+const std::string& SignalSpecification::GetUnit() const
+{
+    return m_Unit;
+}
 
-void SignalSpecification::SetUnit(const std::string& value) { m_Unit = value; }
+void SignalSpecification::SetUnit(const std::string& value)
+{
+    m_Unit = value;
+}
 
 const std::string& SignalSpecification::GetDimensions() const
 {

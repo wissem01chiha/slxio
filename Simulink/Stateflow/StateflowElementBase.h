@@ -22,7 +22,9 @@ public:
     StateflowElementBase& operator=(const StateflowElementBase&) = delete;
 
 protected:
-    StateflowElementBase() {}
+    StateflowElementBase()
+    {
+    }
     StateflowElementBase(const StateflowElementBase& orig);
 
     void setParent(std::shared_ptr<SimulinkElementBase> parent);

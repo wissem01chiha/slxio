@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IndexVector::IndexVector() {}
+IndexVector::IndexVector()
+{
+}
 
-IndexVector::~IndexVector() {}
+IndexVector::~IndexVector()
+{
+}
 
 const std::string& IndexVector::GetDataportorder() const
 {
@@ -18,9 +22,15 @@ void IndexVector::SetDataportorder(const std::string& value)
     m_Dataportorder = value;
 }
 
-const std::string& IndexVector::GetInputs() const { return m_Inputs; }
+const std::string& IndexVector::GetInputs() const
+{
+    return m_Inputs;
+}
 
-void IndexVector::SetInputs(const std::string& value) { m_Inputs = value; }
+void IndexVector::SetInputs(const std::string& value)
+{
+    m_Inputs = value;
+}
 
 const std::string& IndexVector::GetDataportindices() const
 {
@@ -52,20 +62,35 @@ void IndexVector::SetDiagnosticfordefault(const std::string& value)
     m_Diagnosticfordefault = value;
 }
 
-const std::string& IndexVector::GetInputsamedt() const { return m_Inputsamedt; }
+const std::string& IndexVector::GetInputsamedt() const
+{
+    return m_Inputsamedt;
+}
 
 void IndexVector::SetInputsamedt(const std::string& value)
 {
     m_Inputsamedt = value;
 }
 
-const std::string& IndexVector::GetOutmin() const { return m_Outmin; }
+const std::string& IndexVector::GetOutmin() const
+{
+    return m_Outmin;
+}
 
-void IndexVector::SetOutmin(const std::string& value) { m_Outmin = value; }
+void IndexVector::SetOutmin(const std::string& value)
+{
+    m_Outmin = value;
+}
 
-const std::string& IndexVector::GetOutmax() const { return m_Outmax; }
+const std::string& IndexVector::GetOutmax() const
+{
+    return m_Outmax;
+}
 
-void IndexVector::SetOutmax(const std::string& value) { m_Outmax = value; }
+void IndexVector::SetOutmax(const std::string& value)
+{
+    m_Outmax = value;
+}
 
 const std::string& IndexVector::GetOutdatatypestr() const
 {
@@ -77,16 +102,25 @@ void IndexVector::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& IndexVector::GetLockscale() const { return m_Lockscale; }
+const std::string& IndexVector::GetLockscale() const
+{
+    return m_Lockscale;
+}
 
 void IndexVector::SetLockscale(const std::string& value)
 {
     m_Lockscale = value;
 }
 
-const std::string& IndexVector::GetRndmeth() const { return m_Rndmeth; }
+const std::string& IndexVector::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
-void IndexVector::SetRndmeth(const std::string& value) { m_Rndmeth = value; }
+void IndexVector::SetRndmeth(const std::string& value)
+{
+    m_Rndmeth = value;
+}
 
 const std::string& IndexVector::GetSaturateonintegeroverflow() const
 {
@@ -98,7 +132,10 @@ void IndexVector::SetSaturateonintegeroverflow(const std::string& value)
     m_Saturateonintegeroverflow = value;
 }
 
-const std::string& IndexVector::GetSampletime() const { return m_Sampletime; }
+const std::string& IndexVector::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void IndexVector::SetSampletime(const std::string& value)
 {

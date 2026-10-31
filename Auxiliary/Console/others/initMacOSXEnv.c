@@ -92,7 +92,6 @@ static void setAppName(const char* name)
  */
 static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
 {
-
 #undef JVM_DETECTION
 #ifdef JVM_DETECTION
     int ret = -1;
@@ -118,8 +117,7 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
         /* End of the workaround */
 
         // Look for the JavaVM bundle using its identifier
-        JavaVMBundle =
-            CFBundleGetBundleWithIdentifier(CFSTR("com.apple.JavaVM"));
+        JavaVMBundle = CFBundleGetBundleWithIdentifier(CFSTR("com.apple.JavaVM"));
 
         if (JavaVMBundle != NULL)
         {
@@ -131,22 +129,18 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
             {
                 // Append to the path the Versions Component
                 JavaVMBundlerVersionsDirURL =
-                    CFURLCreateCopyAppendingPathComponent(
-                        kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"),
-                        true);
+                    CFURLCreateCopyAppendingPathComponent(kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"), true);
                 CFRelease(JavaVMBundleURL);
 
                 if (JavaVMBundlerVersionsDirURL != NULL)
                 {
                     // Append to the path the target JVM's Version
-                    TargetJavaVM = CFURLCreateCopyAppendingPathComponent(
-                        kCFAllocatorDefault, JavaVMBundlerVersionsDirURL,
-                        targetJVM, true);
+                    TargetJavaVM =
+                        CFURLCreateCopyAppendingPathComponent(kCFAllocatorDefault, JavaVMBundlerVersionsDirURL, targetJVM, true);
                     CFRelease(JavaVMBundlerVersionsDirURL);
                     if (TargetJavaVM != NULL)
                     {
-                        if (CFURLGetFileSystemRepresentation(
-                                TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
+                        if (CFURLGetFileSystemRepresentation(TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
                         {
                             // Check to see if the directory, or a sym link for
                             // the target JVM directory exists, and if so set
@@ -159,43 +153,43 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
                                 // the CFSTR targetJVM We can reuse the
                                 // pathToTargetJVM buffer to set the
                                 // environement var.
-                                if (CFStringGetCString(
-                                        targetJVM, (char*)pathToTargetJVM,
-                                        PATH_MAX, kCFStringEncodingUTF8))
+                                if (CFStringGetCString(targetJVM, (char*)pathToTargetJVM, PATH_MAX, kCFStringEncodingUTF8))
                                 {
-                                    setenv("JAVA_JVM_VERSION",
-                                           (char*)pathToTargetJVM, 1);
+                                    setenv("JAVA_JVM_VERSION", (char*)pathToTargetJVM, 1);
                                     ret = 0;
                                 }
                                 else
                                 {
-                                    fprintf(stderr, "Could not get the path to "
-                                                    "the target JVM.\n");
+                                    fprintf(stderr,
+                                            "Could not get the path to "
+                                            "the target JVM.\n");
                                 }
                             }
                             else
                             {
-                                fprintf(stderr, "Error checking symlink for "
-                                                "the target jvm.\n");
+                                fprintf(stderr,
+                                        "Error checking symlink for "
+                                        "the target jvm.\n");
                             }
                         }
                         else
                         {
-                            fprintf(stderr, "Error getting file system "
-                                            "representation for bundle url.\n");
+                            fprintf(stderr,
+                                    "Error getting file system "
+                                    "representation for bundle url.\n");
                             CFRelease(TargetJavaVM);
                         }
                     }
                     else
                     {
-                        fprintf(stderr, "Error appending version component to "
-                                        "bundle url.\n");
+                        fprintf(stderr,
+                                "Error appending version component to "
+                                "bundle url.\n");
                     }
                 }
                 else
                 {
-                    fprintf(stderr,
-                            "Error appending path component to bundle url.\n");
+                    fprintf(stderr, "Error appending path component to bundle url.\n");
                 }
             }
             else
@@ -237,7 +231,9 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
 /* call back for dummy source used to make sure the CFRunLoop doesn't exit right
  * away */
 /* This callback is called when the source has fired. */
-static void sourceCallBack(void* info) {}
+static void sourceCallBack(void* info)
+{
+}
 
 /* Specific wrapper for mac os X which is going to call realmin in a specific
  * thread. Takes the same args as realmain
@@ -287,8 +283,7 @@ int initMacOSXEnv(ScilabEngineInfo* _pSEI)
     sourceContext.perform = &sourceCallBack;
 
     /* Create the Source from the sourceContext */
-    CFRunLoopSourceRef sourceRef =
-        CFRunLoopSourceCreate(NULL, 0, &sourceContext);
+    CFRunLoopSourceRef sourceRef = CFRunLoopSourceCreate(NULL, 0, &sourceContext);
 
     /* Use the constant kCFRunLoopCommonModes to add the source to the set of
      * objects */

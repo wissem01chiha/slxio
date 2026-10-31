@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-CosineLookup::CosineLookup() {}
+CosineLookup::CosineLookup()
+{
+}
 
-CosineLookup::~CosineLookup() {}
+CosineLookup::~CosineLookup()
+{
+}
 
-const std::string& CosineLookup::GetFormula() const { return m_Formula; }
+const std::string& CosineLookup::GetFormula() const
+{
+    return m_Formula;
+}
 
-void CosineLookup::SetFormula(const std::string& value) { m_Formula = value; }
+void CosineLookup::SetFormula(const std::string& value)
+{
+    m_Formula = value;
+}
 
 const std::string& CosineLookup::GetNumdatapoints() const
 {

@@ -26,16 +26,11 @@ class SLXIO_APIEXPORT IConfigurableObject : public IObservable
 public:
     ~IConfigurableObject() = default;
 
-    virtual HError
-    AddConfig(const std::string& name,
-              const std::shared_ptr<IConfigurationObject>& p) = 0;
+    virtual HError AddConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) = 0;
 
-    virtual HError
-    SetConfig(const std::string& name,
-              const std::shared_ptr<IConfigurationObject>& p) = 0;
+    virtual HError SetConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) = 0;
 
-    virtual std::shared_ptr<IConfigurationObject>
-    GetConfig(const std::string& name) = 0;
+    virtual std::shared_ptr<IConfigurationObject> GetConfig(const std::string& name) = 0;
 };
 
 SLXIO_ABI_NAMESPACE_END

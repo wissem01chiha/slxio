@@ -8,7 +8,10 @@ using namespace slxio;
 
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("SimulinkVersion Year") { CHECK(SimulinkVersion::Year() > 2000); }
+TEST_CASE("SimulinkVersion Year")
+{
+    CHECK(SimulinkVersion::Year() > 2000);
+}
 
 TEST_CASE("SimulinkVersion Release")
 {

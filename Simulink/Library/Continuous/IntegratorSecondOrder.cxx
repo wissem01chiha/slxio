@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-IntegratorSecondOrder::IntegratorSecondOrder() {}
+IntegratorSecondOrder::IntegratorSecondOrder()
+{
+}
 
-IntegratorSecondOrder::~IntegratorSecondOrder() {}
+IntegratorSecondOrder::~IntegratorSecondOrder()
+{
+}
 
 const std::string& IntegratorSecondOrder::GetIcsourcex() const
 {
@@ -18,11 +22,20 @@ void IntegratorSecondOrder::SetIcsourcex(const std::string& value)
     m_Icsourcex = value;
 }
 
-const std::string& IntegratorSecondOrder::GetIcx() const { return m_Icx; }
+const std::string& IntegratorSecondOrder::GetIcx() const
+{
+    return m_Icx;
+}
 
-void IntegratorSecondOrder::SetIcx(const std::string& value) { m_Icx = value; }
+void IntegratorSecondOrder::SetIcx(const std::string& value)
+{
+    m_Icx = value;
+}
 
-const std::string& IntegratorSecondOrder::GetLimitx() const { return m_Limitx; }
+const std::string& IntegratorSecondOrder::GetLimitx() const
+{
+    return m_Limitx;
+}
 
 void IntegratorSecondOrder::SetLimitx(const std::string& value)
 {
@@ -49,7 +62,10 @@ void IntegratorSecondOrder::SetLowerlimitx(const std::string& value)
     m_Lowerlimitx = value;
 }
 
-const std::string& IntegratorSecondOrder::GetWrapx() const { return m_Wrapx; }
+const std::string& IntegratorSecondOrder::GetWrapx() const
+{
+    return m_Wrapx;
+}
 
 void IntegratorSecondOrder::SetWrapx(const std::string& value)
 {
@@ -106,7 +122,10 @@ void IntegratorSecondOrder::SetIcsourcedxdt(const std::string& value)
     m_Icsourcedxdt = value;
 }
 
-const std::string& IntegratorSecondOrder::GetIcdxdt() const { return m_Icdxdt; }
+const std::string& IntegratorSecondOrder::GetIcdxdt() const
+{
+    return m_Icdxdt;
+}
 
 void IntegratorSecondOrder::SetIcdxdt(const std::string& value)
 {
@@ -183,26 +202,22 @@ void IntegratorSecondOrder::SetZerocross(const std::string& value)
     m_Zerocross = value;
 }
 
-const std::string&
-IntegratorSecondOrder::GetReinitdxdtwhenxreachessaturation() const
+const std::string& IntegratorSecondOrder::GetReinitdxdtwhenxreachessaturation() const
 {
     return m_Reinitdxdtwhenxreachessaturation;
 }
 
-void IntegratorSecondOrder::SetReinitdxdtwhenxreachessaturation(
-    const std::string& value)
+void IntegratorSecondOrder::SetReinitdxdtwhenxreachessaturation(const std::string& value)
 {
     m_Reinitdxdtwhenxreachessaturation = value;
 }
 
-const std::string&
-IntegratorSecondOrder::GetIgnorestatelimitsandresetforlinearization() const
+const std::string& IntegratorSecondOrder::GetIgnorestatelimitsandresetforlinearization() const
 {
     return m_Ignorestatelimitsandresetforlinearization;
 }
 
-void IntegratorSecondOrder::SetIgnorestatelimitsandresetforlinearization(
-    const std::string& value)
+void IntegratorSecondOrder::SetIgnorestatelimitsandresetforlinearization(const std::string& value)
 {
     m_Ignorestatelimitsandresetforlinearization = value;
 }

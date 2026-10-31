@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VectorConcatenate::VectorConcatenate() {}
+VectorConcatenate::VectorConcatenate()
+{
+}
 
-VectorConcatenate::~VectorConcatenate() {}
+VectorConcatenate::~VectorConcatenate()
+{
+}
 
 const std::string& VectorConcatenate::GetNuminputs() const
 {
@@ -18,9 +22,15 @@ void VectorConcatenate::SetNuminputs(const std::string& value)
     m_Numinputs = value;
 }
 
-const std::string& VectorConcatenate::GetMode() const { return m_Mode; }
+const std::string& VectorConcatenate::GetMode() const
+{
+    return m_Mode;
+}
 
-void VectorConcatenate::SetMode(const std::string& value) { m_Mode = value; }
+void VectorConcatenate::SetMode(const std::string& value)
+{
+    m_Mode = value;
+}
 
 const std::string& VectorConcatenate::GetConcatenatedimension() const
 {

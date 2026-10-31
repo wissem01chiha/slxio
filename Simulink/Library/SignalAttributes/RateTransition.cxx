@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-RateTransition::RateTransition() {}
+RateTransition::RateTransition()
+{
+}
 
-RateTransition::~RateTransition() {}
+RateTransition::~RateTransition()
+{
+}
 
-const std::string& RateTransition::GetIntegrity() const { return m_Integrity; }
+const std::string& RateTransition::GetIntegrity() const
+{
+    return m_Integrity;
+}
 
 void RateTransition::SetIntegrity(const std::string& value)
 {

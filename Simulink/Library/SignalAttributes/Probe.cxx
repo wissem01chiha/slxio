@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Probe::Probe() {}
+Probe::Probe()
+{
+}
 
-Probe::~Probe() {}
+Probe::~Probe()
+{
+}
 
-const std::string& Probe::GetProbewidth() const { return m_Probewidth; }
+const std::string& Probe::GetProbewidth() const
+{
+    return m_Probewidth;
+}
 
-void Probe::SetProbewidth(const std::string& value) { m_Probewidth = value; }
+void Probe::SetProbewidth(const std::string& value)
+{
+    m_Probewidth = value;
+}
 
 const std::string& Probe::GetProbesampletime() const
 {

@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SwitchCase::SwitchCase() {}
+SwitchCase::SwitchCase()
+{
+}
 
-SwitchCase::~SwitchCase() {}
+SwitchCase::~SwitchCase()
+{
+}
 
 const std::string& SwitchCase::GetCaseconditions() const
 {
@@ -28,11 +32,20 @@ void SwitchCase::SetShowdefaultcase(const std::string& value)
     m_Showdefaultcase = value;
 }
 
-const std::string& SwitchCase::GetZerocross() const { return m_Zerocross; }
+const std::string& SwitchCase::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
-void SwitchCase::SetZerocross(const std::string& value) { m_Zerocross = value; }
+void SwitchCase::SetZerocross(const std::string& value)
+{
+    m_Zerocross = value;
+}
 
-const std::string& SwitchCase::GetSampletime() const { return m_Sampletime; }
+const std::string& SwitchCase::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
 void SwitchCase::SetSampletime(const std::string& value)
 {

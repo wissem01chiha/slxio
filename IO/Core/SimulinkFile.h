@@ -28,17 +28,38 @@ public:
     const SimulinkFileInformation& GetInformation() const;
 
     std::unique_ptr<xmlDocDataObject> GetBlockdiagram() const;
-    xmlDocDataObject& GetModelDictionary() const { return modelDictionary; }
-    xmlDocDataObject& GetConfigSetInfo() const { return configSetInfo; }
-    xmlDocDataObject& GetBddefaults() const { return bddefaults; }
-    xmlDocDataObject& GetScheduleEditor() const { return scheduleEditor; }
-    xmlDocDataObject& GetScheduleCore() const { return scheduleCore; }
+    xmlDocDataObject& GetModelDictionary() const
+    {
+        return modelDictionary;
+    }
+    xmlDocDataObject& GetConfigSetInfo() const
+    {
+        return configSetInfo;
+    }
+    xmlDocDataObject& GetBddefaults() const
+    {
+        return bddefaults;
+    }
+    xmlDocDataObject& GetScheduleEditor() const
+    {
+        return scheduleEditor;
+    }
+    xmlDocDataObject& GetScheduleCore() const
+    {
+        return scheduleCore;
+    }
     xmlDocDataObject& GetGraphicalInterface() const
     {
         return graphicalInterface;
     }
-    xmlDocDataObject& GetCoreProperties() const { return coreProperties; }
-    xmlDocDataObject& GetMwcoreProperties() const { return mwcoreProperties; }
+    xmlDocDataObject& GetCoreProperties() const
+    {
+        return coreProperties;
+    }
+    xmlDocDataObject& GetMwcoreProperties() const
+    {
+        return mwcoreProperties;
+    }
     xmlDocDataObject& GetMwcorePropertiesExtension() const
     {
         return mwcorePropertiesExtension;

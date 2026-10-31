@@ -24,10 +24,14 @@ enum class Severity : std::uint8_t
 {
     switch (s)
     {
-    case Severity::Success: return "Success";
-    case Severity::Info:    return "Info";
-    case Severity::Warning: return "Warning";
-    case Severity::Fatal:   return "Fatal";
+    case Severity::Success:
+        return "Success";
+    case Severity::Info:
+        return "Info";
+    case Severity::Warning:
+        return "Warning";
+    case Severity::Fatal:
+        return "Fatal";
     }
     return "Unknown";
 }
@@ -39,17 +43,31 @@ class Error final
 public:
     Error() noexcept = default;
 
-    Error(std::error_code ec, Severity s) noexcept
-        : m_code(ec), m_severity(ec ? s : Severity::Success) {}
+    Error(std::error_code ec, Severity s) noexcept : m_code(ec), m_severity(ec ? s : Severity::Success)
+    {
+    }
 
     template <class E, std::enable_if_t<std::is_error_code_enum_v<E>, int> = 0>
-    Error(E e, Severity s = Severity::Fatal) noexcept
-        : Error(std::error_code(e), s) {}
+    Error(E e, Severity s = Severity::Fatal) noexcept : Error(std::error_code(e), s)
+    {
+    }
 
-    [[nodiscard]] std::error_code Code() const noexcept { return m_code; }
-    [[nodiscard]] Severity GetSeverity() const noexcept { return m_severity; }
-    [[nodiscard]] bool IsSuccess() const noexcept { return !m_code; }
-    [[nodiscard]] bool IsFatal() const noexcept { return m_severity == Severity::Fatal; }
+    [[nodiscard]] std::error_code Code() const noexcept
+    {
+        return m_code;
+    }
+    [[nodiscard]] Severity GetSeverity() const noexcept
+    {
+        return m_severity;
+    }
+    [[nodiscard]] bool IsSuccess() const noexcept
+    {
+        return !m_code;
+    }
+    [[nodiscard]] bool IsFatal() const noexcept
+    {
+        return m_severity == Severity::Fatal;
+    }
     [[nodiscard]] std::string Message() const;
 
     [[nodiscard]] bool SameModule(const Error& o) const noexcept

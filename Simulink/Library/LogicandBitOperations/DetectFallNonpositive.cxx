@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DetectFallNonpositive::DetectFallNonpositive() {}
+DetectFallNonpositive::DetectFallNonpositive()
+{
+}
 
-DetectFallNonpositive::~DetectFallNonpositive() {}
+DetectFallNonpositive::~DetectFallNonpositive()
+{
+}
 
-const std::string& DetectFallNonpositive::GetVinit() const { return m_Vinit; }
+const std::string& DetectFallNonpositive::GetVinit() const
+{
+    return m_Vinit;
+}
 
 void DetectFallNonpositive::SetVinit(const std::string& value)
 {

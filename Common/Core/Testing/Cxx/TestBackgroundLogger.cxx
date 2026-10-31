@@ -34,7 +34,6 @@ TEST_CASE("BackgroundLogger basic init and level get/set")
 
 TEST_CASE("BackgroundLogger logging call")
 {
-
     BackgroundLogger logger;
     logger.Init();
 

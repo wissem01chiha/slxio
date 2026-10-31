@@ -7,8 +7,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 ISimulinkSubsystem::ISimulinkSubsystem() = default;
 
-std::vector<std::shared_ptr<ISimulinkBlock>>
-ISimulinkSubsystem::GetBlocks() const
+std::vector<std::shared_ptr<ISimulinkBlock>> ISimulinkSubsystem::GetBlocks() const
 {
     return m_subsystemBlocks;
 }

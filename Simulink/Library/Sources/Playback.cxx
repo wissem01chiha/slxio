@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Playback::Playback() {}
+Playback::Playback()
+{
+}
 
-Playback::~Playback() {}
+Playback::~Playback()
+{
+}
 
-const std::string& Playback::GetNumports() const { return m_Numports; }
+const std::string& Playback::GetNumports() const
+{
+    return m_Numports;
+}
 
-void Playback::SetNumports(const std::string& value) { m_Numports = value; }
+void Playback::SetNumports(const std::string& value)
+{
+    m_Numports = value;
+}
 
 const std::string& Playback::GetOutdatatypestr() const
 {
@@ -22,9 +32,15 @@ void Playback::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& Playback::GetPortunits() const { return m_Portunits; }
+const std::string& Playback::GetPortunits() const
+{
+    return m_Portunits;
+}
 
-void Playback::SetPortunits(const std::string& value) { m_Portunits = value; }
+void Playback::SetPortunits(const std::string& value)
+{
+    m_Portunits = value;
+}
 
 const std::string& Playback::GetPortdimensions() const
 {
@@ -66,9 +82,15 @@ void Playback::SetPortsampletimes(const std::string& value)
     m_Portsampletimes = value;
 }
 
-const std::string& Playback::GetGroupby() const { return m_Groupby; }
+const std::string& Playback::GetGroupby() const
+{
+    return m_Groupby;
+}
 
-void Playback::SetGroupby(const std::string& value) { m_Groupby = value; }
+void Playback::SetGroupby(const std::string& value)
+{
+    m_Groupby = value;
+}
 
 const std::string& Playback::GetExtrapolationbeforefirstdatapoint() const
 {
@@ -90,13 +112,25 @@ void Playback::SetExtrapolationafterlastdatapoint(const std::string& value)
     m_Extrapolationafterlastdatapoint = value;
 }
 
-const std::string& Playback::GetZerocross() const { return m_Zerocross; }
+const std::string& Playback::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
-void Playback::SetZerocross(const std::string& value) { m_Zerocross = value; }
+void Playback::SetZerocross(const std::string& value)
+{
+    m_Zerocross = value;
+}
 
-const std::string& Playback::GetSignals() const { return m_Signals; }
+const std::string& Playback::GetSignals() const
+{
+    return m_Signals;
+}
 
-void Playback::SetSignals(const std::string& value) { m_Signals = value; }
+void Playback::SetSignals(const std::string& value)
+{
+    m_Signals = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

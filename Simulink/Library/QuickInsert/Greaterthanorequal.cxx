@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Greaterthanorequal::Greaterthanorequal() {}
+Greaterthanorequal::Greaterthanorequal()
+{
+}
 
-Greaterthanorequal::~Greaterthanorequal() {}
+Greaterthanorequal::~Greaterthanorequal()
+{
+}
 
 const std::string& Greaterthanorequal::GetOperator() const
 {
@@ -58,7 +62,10 @@ void Greaterthanorequal::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& Greaterthanorequal::GetRndmeth() const { return m_Rndmeth; }
+const std::string& Greaterthanorequal::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void Greaterthanorequal::SetRndmeth(const std::string& value)
 {

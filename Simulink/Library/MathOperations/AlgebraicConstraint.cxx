@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-AlgebraicConstraint::AlgebraicConstraint() {}
+AlgebraicConstraint::AlgebraicConstraint()
+{
+}
 
-AlgebraicConstraint::~AlgebraicConstraint() {}
+AlgebraicConstraint::~AlgebraicConstraint()
+{
+}
 
 const std::string& AlgebraicConstraint::GetConstraint() const
 {
@@ -18,7 +22,10 @@ void AlgebraicConstraint::SetConstraint(const std::string& value)
     m_Constraint = value;
 }
 
-const std::string& AlgebraicConstraint::GetSolver() const { return m_Solver; }
+const std::string& AlgebraicConstraint::GetSolver() const
+{
+    return m_Solver;
+}
 
 void AlgebraicConstraint::SetSolver(const std::string& value)
 {

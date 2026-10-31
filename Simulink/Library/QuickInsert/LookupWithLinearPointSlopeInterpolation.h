@@ -15,9 +15,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT LookupWithLinearPointSlopeInterpolation
-    : public IBlockParameters,
-      public IBlockProperties
+class SLXIO_APIEXPORT LookupWithLinearPointSlopeInterpolation : public IBlockParameters, public IBlockProperties
 {
 public:
     /** Default Constructor */

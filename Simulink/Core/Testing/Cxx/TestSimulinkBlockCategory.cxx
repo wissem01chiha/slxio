@@ -13,8 +13,7 @@ TEST_CASE("SimulinkBlockCategory default constructor")
 
 TEST_CASE("SimulinkBlockCategory constructor DefaultCategory")
 {
-    SimulinkBlockCategory cat(
-        SimulinkBlockCategory::DefaultCategory::MathOperations);
+    SimulinkBlockCategory cat(SimulinkBlockCategory::DefaultCategory::MathOperations);
     auto categories = cat.GetAllCategories();
     CHECK_FALSE(categories.empty());
     CHECK(categories[0] == "MathOperations");

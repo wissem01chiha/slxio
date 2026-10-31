@@ -4,5 +4,4 @@
 #ifndef JAVAPCH_H
 #define JAVAPCH_H
 
-
 #endif // JAVAPCH_H

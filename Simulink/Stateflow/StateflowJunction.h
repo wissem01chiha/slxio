@@ -22,7 +22,6 @@ public:
 private:
     StateflowJunction(StateflowJunction& orig)
     {
-
         // duplicate all default transitions to this one
         // for (StateflowTransition transition : orig.getInTransitions())
         // { if (transition.getSrc() == null) {

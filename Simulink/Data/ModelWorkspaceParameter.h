@@ -19,14 +19,12 @@ class ModelWorkspace;
  * @class ModelWorkspaceParameter
  * @brief Generic parameter stored in a ModelWorkspace.
  */
-class SLXIO_APIEXPORT ModelWorkspaceParameter final
-    : public IParameterObjectBase
+class SLXIO_APIEXPORT ModelWorkspaceParameter final : public IParameterObjectBase
 {
 public:
     ModelWorkspaceParameter();
 
-    ModelWorkspaceParameter(const std::string& name,
-                            const std::shared_ptr<ModelWorkspace>& data);
+    ModelWorkspaceParameter(const std::string& name, const std::shared_ptr<ModelWorkspace>& data);
     IParameterObjectBase* New() override;
     DataType GetDataType() const override;
     UInt16 Size() const override;

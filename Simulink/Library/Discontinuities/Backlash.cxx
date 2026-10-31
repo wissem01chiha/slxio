@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Backlash::Backlash() {}
+Backlash::Backlash()
+{
+}
 
-Backlash::~Backlash() {}
+Backlash::~Backlash()
+{
+}
 
 const std::string& Backlash::GetBacklashwidth() const
 {
@@ -38,13 +42,25 @@ void Backlash::SetInputprocessing(const std::string& value)
     m_Inputprocessing = value;
 }
 
-const std::string& Backlash::GetZerocross() const { return m_Zerocross; }
+const std::string& Backlash::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
-void Backlash::SetZerocross(const std::string& value) { m_Zerocross = value; }
+void Backlash::SetZerocross(const std::string& value)
+{
+    m_Zerocross = value;
+}
 
-const std::string& Backlash::GetSampletime() const { return m_Sampletime; }
+const std::string& Backlash::GetSampletime() const
+{
+    return m_Sampletime;
+}
 
-void Backlash::SetSampletime(const std::string& value) { m_Sampletime = value; }
+void Backlash::SetSampletime(const std::string& value)
+{
+    m_Sampletime = value;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

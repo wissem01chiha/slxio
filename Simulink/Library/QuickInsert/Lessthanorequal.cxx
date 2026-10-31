@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-Lessthanorequal::Lessthanorequal() {}
+Lessthanorequal::Lessthanorequal()
+{
+}
 
-Lessthanorequal::~Lessthanorequal() {}
+Lessthanorequal::~Lessthanorequal()
+{
+}
 
-const std::string& Lessthanorequal::GetOperator() const { return m_Operator; }
+const std::string& Lessthanorequal::GetOperator() const
+{
+    return m_Operator;
+}
 
 void Lessthanorequal::SetOperator(const std::string& value)
 {
@@ -35,7 +42,10 @@ void Lessthanorequal::SetOutdatatypestr(const std::string& value)
     m_Outdatatypestr = value;
 }
 
-const std::string& Lessthanorequal::GetZerocross() const { return m_Zerocross; }
+const std::string& Lessthanorequal::GetZerocross() const
+{
+    return m_Zerocross;
+}
 
 void Lessthanorequal::SetZerocross(const std::string& value)
 {
@@ -52,7 +62,10 @@ void Lessthanorequal::SetSampletime(const std::string& value)
     m_Sampletime = value;
 }
 
-const std::string& Lessthanorequal::GetRndmeth() const { return m_Rndmeth; }
+const std::string& Lessthanorequal::GetRndmeth() const
+{
+    return m_Rndmeth;
+}
 
 void Lessthanorequal::SetRndmeth(const std::string& value)
 {

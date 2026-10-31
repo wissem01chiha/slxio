@@ -14,7 +14,6 @@ ISimulinkElement* SimulinkObject::New() const
 
 HError SimulinkObject::AcceptInsert(ISimulinkElement& parent)
 {
-
     auto* object = dynamic_cast<SimulinkObject*>(&parent);
     if (object != nullptr)
     {
@@ -40,12 +39,17 @@ HError SimulinkObject::Insert(const std::shared_ptr<ISimulinkElement>& element)
     return E_OK;
 }
 
-SId SimulinkObject::GetId() const { return m_id; }
+SId SimulinkObject::GetId() const
+{
+    return m_id;
+}
 
-void SimulinkObject::SetId(const SId& id) { m_id = id; }
+void SimulinkObject::SetId(const SId& id)
+{
+    m_id = id;
+}
 
-void SimulinkObject::AddParam(const std::string& name,
-                              const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkObject::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -54,8 +58,7 @@ void SimulinkObject::AddParam(const std::string& name,
     m_parameters.push_back(p);
 }
 
-void SimulinkObject::SetParam(const std::string& name,
-                              const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkObject::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -73,21 +76,22 @@ void SimulinkObject::SetParam(const std::string& name,
     AddParam(name, p);
 }
 
-std::shared_ptr<IParameterObjectBase>
-SimulinkObject::GetParam(const std::string& name)
+std::shared_ptr<IParameterObjectBase> SimulinkObject::GetParam(const std::string& name)
 {
     for (const auto& param : m_parameters)
     {
         if (param->GetName() == name)
         {
-
             return param;
         }
     }
     return nullptr;
 }
 
-std::string SimulinkObject::GetName() const { return m_propName; }
+std::string SimulinkObject::GetName() const
+{
+    return m_propName;
+}
 
 void SimulinkObject::SetName(const std::string& name)
 {
@@ -97,13 +101,18 @@ void SimulinkObject::SetName(const std::string& name)
     }
 }
 
-std::string SimulinkObject::GetClassName() const { return m_className; }
+std::string SimulinkObject::GetClassName() const
+{
+    return m_className;
+}
 
-std::string SimulinkObject::GetVersion() const { return m_version; }
+std::string SimulinkObject::GetVersion() const
+{
+    return m_version;
+}
 
 std::string SimulinkObject::ToString() const
 {
-
     std::ostringstream oss;
 
     oss << "SimulinkObject {\n";
@@ -150,7 +159,6 @@ std::shared_ptr<ISimulinkElement> SimulinkObject::GetArray(const SId& id) const
     {
         if (arr->GetId() == id)
         {
-
             return arr;
         }
     }

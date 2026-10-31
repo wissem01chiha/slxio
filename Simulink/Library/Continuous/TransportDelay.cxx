@@ -4,11 +4,18 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TransportDelay::TransportDelay() {}
+TransportDelay::TransportDelay()
+{
+}
 
-TransportDelay::~TransportDelay() {}
+TransportDelay::~TransportDelay()
+{
+}
 
-const std::string& TransportDelay::GetDelaytime() const { return m_Delaytime; }
+const std::string& TransportDelay::GetDelaytime() const
+{
+    return m_Delaytime;
+}
 
 void TransportDelay::SetDelaytime(const std::string& value)
 {
@@ -55,7 +62,10 @@ void TransportDelay::SetTransdelayfeedthrough(const std::string& value)
     m_Transdelayfeedthrough = value;
 }
 
-const std::string& TransportDelay::GetPadeorder() const { return m_Padeorder; }
+const std::string& TransportDelay::GetPadeorder() const
+{
+    return m_Padeorder;
+}
 
 void TransportDelay::SetPadeorder(const std::string& value)
 {

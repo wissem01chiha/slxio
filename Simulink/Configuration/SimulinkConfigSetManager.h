@@ -1,5 +1,18 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #ifndef SIMULINKCONFIGSETMANAGER_H
 #define SIMULINKCONFIGSETMANAGER_H
@@ -22,8 +35,7 @@ class SimulinkConfigSet;
  * @note This is not a part of Simulink API, but a utility added to slxio
  * to manage multiple configuration sets
  */
-class SLXIO_APIEXPORT SimulinkConfigSetManager final
-    : public IConfigurableObject
+class SLXIO_APIEXPORT SimulinkConfigSetManager final : public IConfigurableObject
 {
 public:
     SimulinkConfigSetManager();
@@ -32,8 +44,7 @@ public:
     SimulinkConfigSetManager(const SimulinkConfigSetManager&) = delete;
 
     /** Assignment operator*/
-    SimulinkConfigSetManager&
-    operator=(const SimulinkConfigSetManager&) = delete;
+    SimulinkConfigSetManager& operator=(const SimulinkConfigSetManager&) = delete;
 
     /**
      * @brief Retrieves the active configuration set.

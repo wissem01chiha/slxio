@@ -25,8 +25,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT SimulinkArrayWriter
-    : public SimulinkWriterBase<SimulinkArray, json_object*>
+class SLXIO_APIEXPORT SimulinkArrayWriter : public SimulinkWriterBase<SimulinkArray, json_object*>
 {
 public:
     SimulinkArrayWriter() = default;

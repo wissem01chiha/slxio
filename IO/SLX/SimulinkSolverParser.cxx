@@ -26,7 +26,10 @@ HError SimulinkSolverParser::setInputData(const xmlNodePtr data)
     return E_OK;
 }
 
-HError SimulinkSolverParser::parse() { return E_OK; }
+HError SimulinkSolverParser::parse()
+{
+    return E_OK;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

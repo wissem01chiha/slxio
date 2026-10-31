@@ -12,8 +12,7 @@ StateflowEvent::StateflowEvent() : StateflowElementBase()
     // l.log(Logger::V_INFO, "StateflowEvent created.");
 }
 
-HError
-StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+HError StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
 {
     Logger& l = Logger::GetInstance();
     if (getParent() == nullptr)

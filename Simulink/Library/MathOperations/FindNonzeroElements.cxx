@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-FindNonzeroElements::FindNonzeroElements() {}
+FindNonzeroElements::FindNonzeroElements()
+{
+}
 
-FindNonzeroElements::~FindNonzeroElements() {}
+FindNonzeroElements::~FindNonzeroElements()
+{
+}
 
 const std::string& FindNonzeroElements::GetIndexoutputformat() const
 {
@@ -38,14 +42,12 @@ void FindNonzeroElements::SetIndexmode(const std::string& value)
     m_Indexmode = value;
 }
 
-const std::string&
-FindNonzeroElements::GetShowoutputfornonzeroinputvalues() const
+const std::string& FindNonzeroElements::GetShowoutputfornonzeroinputvalues() const
 {
     return m_Showoutputfornonzeroinputvalues;
 }
 
-void FindNonzeroElements::SetShowoutputfornonzeroinputvalues(
-    const std::string& value)
+void FindNonzeroElements::SetShowoutputfornonzeroinputvalues(const std::string& value)
 {
     m_Showoutputfornonzeroinputvalues = value;
 }

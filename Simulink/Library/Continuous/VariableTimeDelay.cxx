@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-VariableTimeDelay::VariableTimeDelay() {}
+VariableTimeDelay::VariableTimeDelay()
+{
+}
 
-VariableTimeDelay::~VariableTimeDelay() {}
+VariableTimeDelay::~VariableTimeDelay()
+{
+}
 
 const std::string& VariableTimeDelay::GetVariabledelaytype() const
 {

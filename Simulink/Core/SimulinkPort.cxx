@@ -10,17 +10,24 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> PortBlock,
-                           SimulinkPortType pType)
+SimulinkPort::SimulinkPort(std::shared_ptr<SimulinkBlock> PortBlock, SimulinkPortType pType)
     : PortType(pType), PortBlock(PortBlock), logger(Logger::GetInstance())
 {
 }
 
-SimulinkPort::SimulinkPort() : logger(Logger::GetInstance()) {}
+SimulinkPort::SimulinkPort() : logger(Logger::GetInstance())
+{
+}
 
-SimulinkPort* SimulinkPort::New() const { return new SimulinkPort(); }
+SimulinkPort* SimulinkPort::New() const
+{
+    return new SimulinkPort();
+}
 
-SimulinkPortType SimulinkPort::GetPortType() { return PortType; }
+SimulinkPortType SimulinkPort::GetPortType()
+{
+    return PortType;
+}
 
 SimulinkElementType SimulinkPort::GetType() const
 {
@@ -40,7 +47,10 @@ std::string SimulinkPort::ToString() const
     return oss.str();
 }
 
-SimulinkBlockType SimulinkPort::GetBlockType() { return SimulinkBlockType(); }
+SimulinkBlockType SimulinkPort::GetBlockType()
+{
+    return SimulinkBlockType();
+}
 
 // HError SimulinkPort::RemoveElement(std::shared_ptr<SimulinkElementBase>
 // element)
@@ -101,62 +111,84 @@ SimulinkBlockType SimulinkPort::GetBlockType() { return SimulinkBlockType(); }
 //   return E_OK;
 // }
 
-SId SimulinkPort::GetId() const { return BlockId; }
+SId SimulinkPort::GetId() const
+{
+    return BlockId;
+}
 
 std::shared_ptr<SimulinkElementBase> SimulinkPort::operator[](SId index)
 {
     return std::shared_ptr<SimulinkElementBase>();
 }
 
-UInt32 SimulinkPort::Size() const { return UInt32(); }
+UInt32 SimulinkPort::Size() const
+{
+    return UInt32();
+}
 
-bool SimulinkPort::Empty() const { return false; }
+bool SimulinkPort::Empty() const
+{
+    return false;
+}
 
-void SimulinkPort::Clear() {}
+void SimulinkPort::Clear()
+{
+}
 
 HError SimulinkPort::Insert(const std::shared_ptr<SimulinkElementBase>& element)
 {
     return HError();
 }
 
-HError SimulinkPort::Erase(const SId& id) { return HError(); }
+HError SimulinkPort::Erase(const SId& id)
+{
+    return HError();
+}
 
 HError SimulinkPort::Erase(const std::shared_ptr<SimulinkElementBase>& element)
 {
     return HError();
 }
 
-bool SimulinkPort::Contains(const SId& id) const { return BlockId == id; }
+bool SimulinkPort::Contains(const SId& id) const
+{
+    return BlockId == id;
+}
 
-std::string SimulinkPort::GetName() { return std::string(); }
+std::string SimulinkPort::GetName()
+{
+    return std::string();
+}
 
-std::string SimulinkPort::GetDimension() { return std::string(); }
+std::string SimulinkPort::GetDimension()
+{
+    return std::string();
+}
 
 std::shared_ptr<SimulinkBlock> SimulinkPort::GetBlockParent()
 {
     return std::shared_ptr<SimulinkBlock>();
 }
 
-std::shared_ptr<SimulinkParameterBase>
-SimulinkPort::GetParameter(std::string name)
+std::shared_ptr<SimulinkParameterBase> SimulinkPort::GetParameter(std::string name)
 {
     return std::shared_ptr<SimulinkParameterBase>();
 }
 
-HError
-SimulinkPort::SetParameter(std::string name,
-                           std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkPort::SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return HError();
 }
 
-HError
-SimulinkPort::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkPort::AddParameter(std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return HError();
 }
 
-std::shared_ptr<SimulinkBlock> SimulinkPort::GetBlock() { return PortBlock; }
+std::shared_ptr<SimulinkBlock> SimulinkPort::GetBlock()
+{
+    return PortBlock;
+}
 
 std::vector<std::shared_ptr<SimulinkLine>> SimulinkPort::GetLines()
 {
@@ -175,7 +207,10 @@ std::shared_ptr<SimulinkLine> SimulinkPort::GetLine(const SId& lineId)
     return std::shared_ptr<SimulinkLine>();
 }
 
-Logger& SimulinkPort::GetLogger() { return logger; }
+Logger& SimulinkPort::GetLogger()
+{
+    return logger;
+}
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

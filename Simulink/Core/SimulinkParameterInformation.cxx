@@ -6,8 +6,7 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkParameterInformation::SimulinkParameterInformation()
-    : m_min(0.0f), m_max(0.0f), m_description(""), m_unit(""),
-      m_complexity("real")
+    : m_min(0.0f), m_max(0.0f), m_description(""), m_unit(""), m_complexity("real")
 {
 }
 
@@ -40,24 +39,34 @@ void SimulinkParameterInformation::SetComplexity(const std::string& comp)
     m_complexity = comp;
 }
 
-Float32 SimulinkParameterInformation::GetMin() const { return m_min; }
-void SimulinkParameterInformation::SetMin(Float32 min) { m_min = min; }
+Float32 SimulinkParameterInformation::GetMin() const
+{
+    return m_min;
+}
+void SimulinkParameterInformation::SetMin(Float32 min)
+{
+    m_min = min;
+}
 
-Float32 SimulinkParameterInformation::GetMax() const { return m_max; }
-void SimulinkParameterInformation::SetMax(Float32 max) { m_max = max; }
+Float32 SimulinkParameterInformation::GetMax() const
+{
+    return m_max;
+}
+void SimulinkParameterInformation::SetMax(Float32 max)
+{
+    m_max = max;
+}
 
 const std::vector<UInt16>& SimulinkParameterInformation::GetDimensions() const
 {
     return m_dimensions;
 }
-void SimulinkParameterInformation::SetDimensions(
-    const std::vector<UInt16>& dims)
+void SimulinkParameterInformation::SetDimensions(const std::vector<UInt16>& dims)
 {
     m_dimensions = dims;
 }
 
-void SimulinkParameterInformation::SetCoderInfo(
-    const std::shared_ptr<CoderInfo>& coder)
+void SimulinkParameterInformation::SetCoderInfo(const std::shared_ptr<CoderInfo>& coder)
 {
     if (coder != nullptr)
     {

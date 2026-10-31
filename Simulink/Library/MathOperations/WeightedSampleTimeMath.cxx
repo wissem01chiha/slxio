@@ -4,9 +4,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-WeightedSampleTimeMath::WeightedSampleTimeMath() {}
+WeightedSampleTimeMath::WeightedSampleTimeMath()
+{
+}
 
-WeightedSampleTimeMath::~WeightedSampleTimeMath() {}
+WeightedSampleTimeMath::~WeightedSampleTimeMath()
+{
+}
 
 const std::string& WeightedSampleTimeMath::GetTsampmathop() const
 {
@@ -63,8 +67,7 @@ const std::string& WeightedSampleTimeMath::GetSaturateonintegeroverflow() const
     return m_Saturateonintegeroverflow;
 }
 
-void WeightedSampleTimeMath::SetSaturateonintegeroverflow(
-    const std::string& value)
+void WeightedSampleTimeMath::SetSaturateonintegeroverflow(const std::string& value)
 {
     m_Saturateonintegeroverflow = value;
 }

@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-DetectIncrease::DetectIncrease() {}
+DetectIncrease::DetectIncrease()
+{
+}
 
-DetectIncrease::~DetectIncrease() {}
+DetectIncrease::~DetectIncrease()
+{
+}
 
-const std::string& DetectIncrease::GetVinit() const { return m_Vinit; }
+const std::string& DetectIncrease::GetVinit() const
+{
+    return m_Vinit;
+}
 
-void DetectIncrease::SetVinit(const std::string& value) { m_Vinit = value; }
+void DetectIncrease::SetVinit(const std::string& value)
+{
+    m_Vinit = value;
+}
 
 const std::string& DetectIncrease::GetInputprocessing() const
 {

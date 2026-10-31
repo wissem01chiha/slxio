@@ -4,13 +4,23 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ModelInfo::ModelInfo() {}
+ModelInfo::ModelInfo()
+{
+}
 
-ModelInfo::~ModelInfo() {}
+ModelInfo::~ModelInfo()
+{
+}
 
-const std::string& ModelInfo::GetFrame() const { return m_Frame; }
+const std::string& ModelInfo::GetFrame() const
+{
+    return m_Frame;
+}
 
-void ModelInfo::SetFrame(const std::string& value) { m_Frame = value; }
+void ModelInfo::SetFrame(const std::string& value)
+{
+    m_Frame = value;
+}
 
 const std::string& ModelInfo::GetDisplaystringwithtags() const
 {
