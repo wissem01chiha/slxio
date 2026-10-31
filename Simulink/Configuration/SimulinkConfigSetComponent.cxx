@@ -22,8 +22,7 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSetComponent::SimulinkConfigSetComponent(std::string className)
-    : m_className(std::move(className))
+SimulinkConfigSetComponent::SimulinkConfigSetComponent(std::string className) : m_className(std::move(className))
 {
 }
 

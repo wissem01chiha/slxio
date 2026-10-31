@@ -33,10 +33,8 @@ public:
     virtual ~ConfigSetComponentValidator() = default;
 
     virtual const std::string& GetComponentClassName() const noexcept = 0;
-    virtual ValidationReport Validate(
-        const SimulinkConfigSetComponent& component) const = 0;
+    virtual ValidationReport Validate(const SimulinkConfigSetComponent& component) const = 0;
 };
-
 
 SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

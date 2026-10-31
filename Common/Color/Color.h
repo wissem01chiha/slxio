@@ -49,4 +49,3 @@ private:
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-

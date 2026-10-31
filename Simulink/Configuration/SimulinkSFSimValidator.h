@@ -27,13 +27,11 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 class ValidationReport;
 
-class SLXIO_APIEXPORT SimulinkSFSimValidator final
-    : public ConfigSetComponentValidator
+class SLXIO_APIEXPORT SimulinkSFSimValidator final : public ConfigSetComponentValidator
 {
 public:
     const std::string& GetComponentClassName() const noexcept override;
-    ValidationReport Validate(
-        const SimulinkConfigSetComponent& component) const override;
+    ValidationReport Validate(const SimulinkConfigSetComponent& component) const override;
 };
 
 SLXIO_ABI_NAMESPACE_END

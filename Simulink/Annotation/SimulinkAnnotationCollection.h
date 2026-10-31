@@ -21,7 +21,7 @@
 class SimulinkAnnotation;
 
 /**
- * A collection should own annotations 
+ * A collection should own annotations
  * and expose normal model operations
  */
 class AnnotationCollection

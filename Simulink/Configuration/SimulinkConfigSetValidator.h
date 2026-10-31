@@ -31,14 +31,12 @@ class SimulinkConfigSet;
 class SimulinkConfigSetValidator final
 {
 public:
-    bool AddValidator(
-        std::shared_ptr<const ConfigSetComponentValidator> validator);
+    bool AddValidator(std::shared_ptr<const ConfigSetComponentValidator> validator);
 
     ValidationReport Validate(const SimulinkConfigSet& configSet) const;
 
 private:
-    std::map<std::string,
-             std::shared_ptr<const ConfigSetComponentValidator>> m_validators;
+    std::map<std::string, std::shared_ptr<const ConfigSetComponentValidator>> m_validators;
 };
 
 SLXIO_ABI_NAMESPACE_END
