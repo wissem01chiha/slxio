@@ -14,25 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKDEBUGGING_H
-#define SIMULINKDEBUGGING_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @struct SimulinkDebugging
- * @brief SimulinkDebugging represents the debugging settings in a Simulink
- */
 struct SLXIO_APIEXPORT SimulinkDebugging final // NOSONAR
 {
-    std::string* DisabledProps;
-    UInt16 DisabledPropsCount;
+    std::string DisabledProps;
+    uint16_t DisabledPropsCount;
     std::string Description;
     std::string Components;
     std::string RTPrefix;
@@ -143,9 +138,5 @@ struct SLXIO_APIEXPORT SimulinkDebugging final // NOSONAR
     std::string ForceCombineOutputUpdateInSim;
 };
 
-bool IsValid(const SimulinkDebugging* debugging);
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKDEBUGGING_H

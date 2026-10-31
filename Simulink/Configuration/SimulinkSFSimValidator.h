@@ -13,33 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "SimulinkConfigSetManager.h"
-#include "SimulinkConfigSet.h"
+
+#pragma once
+
+#include "ABINamespaceMacro.h"
+#include "APIExportMacro.h"
+#include "ConfigSetComponentValidator.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkConfigSetManager::SimulinkConfigSetManager() : m_configSet(std::vector<std::shared_ptr<SimulinkConfigSet>>())
-{
-}
+class ValidationReport;
 
-std::shared_ptr<SimulinkConfigSet> SimulinkConfigSetManager::GetActiveConfiguration() const
+class SLXIO_APIEXPORT SimulinkSFSimValidator final
+    : public ConfigSetComponentValidator
 {
-    for (const auto& cfg : m_configSet)
-    {
-        if (cfg->IsActive())
-        {
-            return cfg;
-        }
-    }
-    return nullptr;
-}
-
-bool SimulinkConfigSetManager::HasConfiguration(const std::shared_ptr<SimulinkConfigSet>& cfg) const
-{
-    return std::find(m_configSet.begin(), m_configSet.end(), cfg) != m_configSet.end();
-}
+public:
+    const std::string& GetComponentClassName() const noexcept override;
+    ValidationReport Validate(
+        const SimulinkConfigSetComponent& component) const override;
+};
 
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

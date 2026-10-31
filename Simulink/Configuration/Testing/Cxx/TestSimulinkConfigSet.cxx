@@ -1,23 +1,26 @@
 #include "Doctest.h"
 #include "SimulinkConfigSet.h"
 
-using namespace slxio;
+namespace slxio
+{
 SLXIO_ABI_NAMESPACE_BEGIN
 
-TEST_CASE("SimulinkConfigSet Constructor Test")
+TEST_CASE("SimulinkConfigSetStoresNamedComponentsAndParameters")
 {
-    auto config = SimulinkConfigSet();
-    std::string name = config.GetName();
-    CHECK(name == "");
-    CHECK(!config.IsActive());
-}
+    SimulinkConfigSet config("Simulation");
+    CHECK(config.GetName() == "Simulation");
+    CHECK(config.FindParam("Description") == nullptr);
 
-TEST_CASE("SimulinkConfigSet Activate/Desactivate Test")
-{
-    auto config = SimulinkConfigSet();
-    CHECK(config.Activate() == E_OK);
-    CHECK(config.IsActive());
-    CHECK(config.Deactivate() == E_OK);
+    config.SetParam("Description", "baseline configuration");
+    config.GetOrCreateComponent("Solver", "Simulink.SolverCC").SetParam("Solver", "ode45");
+
+    REQUIRE(config.FindParam("Description") != nullptr);
+    CHECK(*config.FindParam("Description") == "baseline configuration");
+    REQUIRE(config.FindComponent("Solver") != nullptr);
+    CHECK(config.FindComponent("Solver")->GetComponentClassName() == "Simulink.SolverCC");
+    CHECK(*config.FindComponent("Solver")->FindParam("Solver") == "ode45");
+    CHECK(config.ToString().find("SimulinkConfigSet: Simulation") != std::string::npos);
 }
 
 SLXIO_ABI_NAMESPACE_END
+} // namespace slxio

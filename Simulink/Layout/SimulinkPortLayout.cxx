@@ -13,17 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "SimulinkHardware.h"
+
+#include "SimulinkPortLayout.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-bool IsValid(const SimulinkHardware* hardware)
+PortLayoutData::PortLayoutData() : l(Logger::GetInstance())
 {
-    return hardware == nullptr;
+}
+
+PortLayoutData::PortLayoutData(Point point, Color color) : position(point), color(color), l(Logger::GetInstance())
+{
+}
+
+Point PortLayoutData::GetPosition()
+{
+    return position;
+}
+
+Float32 PortLayoutData::GetDirection()
+{
+    return 0.0;
+}
+
+Color PortLayoutData::GetColor()
+{
+    return color;
 }
 
 SLXIO_ABI_NAMESPACE_END
-
 }; // namespace slxio

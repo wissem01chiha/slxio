@@ -14,47 +14,55 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKCONFIGSET_H
-#define SIMULINKCONFIGSET_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "IConfigurationObject.h"
-#include "PlatformTypes.h"
+#include "SimulinkConfigSetComponent.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
- * A configuration set in a Simulink model
+ * A named, copyable collection of a Simulink model configuration settings.
+ * Active-set state belongs to SimulinkConfigSetCollection.
+ * Component/property values remain strings to preserve MATLAB expressions and
+ * settings introduced by Simulink versions this library does not yet support.
  */
-class SLXIO_APIEXPORT SimulinkConfigSet final : public IConfigurationObject
+class SLXIO_APIEXPORT SimulinkConfigSet final
 {
 public:
-    SimulinkConfigSet();
+    using ParameterMap = std::map<std::string, std::string>;
+    using ComponentMap = std::map<std::string, SimulinkConfigSetComponent>;
 
-    bool IsActive() const override;
-    HError Activate() override;
-    HError Deactivate() override;
+    explicit SimulinkConfigSet(std::string name = std::string());
 
-    std::string ToString() const override;
+    const std::string& GetName() const noexcept;
 
-    void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
-    void SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;
-    std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
+    void SetParam(const std::string& name, std::string value);
+    bool RemoveParam(const std::string& name);
+    const std::string* FindParam(const std::string& name) const noexcept;
+    const ParameterMap& GetParams() const noexcept;
 
-    std::string GetName() const override;
+    SimulinkConfigSetComponent& GetOrCreateComponent(const std::string& name, const std::string& className = std::string());
+    SimulinkConfigSetComponent* FindComponent(const std::string& name) noexcept;
+    const SimulinkConfigSetComponent* FindComponent(const std::string& name) const noexcept;
+    bool RemoveComponent(const std::string& name);
+    const ComponentMap& GetComponents() const noexcept;
 
-    ~SimulinkConfigSet() = default;
+    std::string ToString() const;
 
 private:
+    friend class SimulinkConfigSetCollection;
+
+    void SetName(std::string name);
+
     std::string m_name;
-    bool m_status = false;
-    std::unordered_map<std::string, std::shared_ptr<IParameterObjectBase>> m_parameters;
+    ParameterMap m_parameters;
+    ComponentMap m_components;
 };
 
 SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
-
-#endif // SIMULINKCONFIGSET_H
+} // namespace slxio

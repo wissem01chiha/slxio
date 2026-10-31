@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKSOLVER_H
-#define SIMULINKSOLVER_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief Base Class for Simulink Solver Configuration
- * Parameters
- */
 struct SLXIO_APIEXPORT SimulinkSolver // NOSONAR
 {
     std::string DisabledProps;
@@ -72,9 +67,5 @@ struct SLXIO_APIEXPORT SimulinkSolver // NOSONAR
     std::string SolverOrder;
 };
 
-bool IsValid(const SimulinkSolver* solver);
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKSOLVER_H

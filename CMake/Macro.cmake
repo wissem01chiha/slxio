@@ -49,6 +49,8 @@ macro(add_module module_name)
       ${module_name} PROPERTIES OUTPUT_NAME "${module_name}"
                                 PREFIX "${CMAKE_STATIC_LIBRARY_PREFIX}")
   endif()
+   target_include_directories(${module_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+                                                   ${CMAKE_CURRENT_BINARY_DIR})
 endmacro()
 
 macro(module_link_libraries module_name)
@@ -67,8 +69,6 @@ endmacro()
 
 macro(module_include_directories module_name)
   target_include_directories(${module_name} PUBLIC ${ARGN})
-  target_include_directories(${module_name} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
-                                                   ${CMAKE_CURRENT_BINARY_DIR})
   if(SLXIO_BUILD_SHARED_AND_STATIC_LIBS)
     target_include_directories(${module_name}_s PUBLIC ${ARGN})
     target_include_directories(${module_name} PUBLIC ${ARGN})

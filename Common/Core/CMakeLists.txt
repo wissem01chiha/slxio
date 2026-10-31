@@ -1,5 +1,6 @@
 add_module(
   Core
+  ValidationReport.cxx
   Version.cxx
   SimulinkVersion.cxx
   TimeStamp.cxx

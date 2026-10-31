@@ -13,3 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#pragma once
+
+#include "CommonPCH.h"
+
+class Color;
+
+struct SimulinkAnnotationStyle
+{
+    Color& foreground;
+    Color& background;
+    std::string fontName;
+    std::string fontSize;
+    std::string fontWeight;
+    std::string fontAngle;
+    std::string interpreter;
+};

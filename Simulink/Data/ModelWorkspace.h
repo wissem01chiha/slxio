@@ -6,7 +6,6 @@
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "DataPCH.h"
 #include "ILogger.h"
 #include "IObservable.h"
 #include "IParameterDataObjectBase.h"

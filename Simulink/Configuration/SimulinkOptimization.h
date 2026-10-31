@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKOPTIMISATION_H
-#define SIMULINKOPTIMISATION_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @brief optimization settings
- */
 struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
 {
     std::string DisabledProps;
-    UInt16 DisabledPropsCount;
+    uint16_t DisabledPropsCount;
     std::string Description;
     std::string Components;
     std::string BlockReduction;
@@ -39,7 +35,7 @@ struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
     std::string ConditionallyExecuteInputs;
     std::string DefaultParameterBehavior;
     std::string UseDivisionForNetSlopeComputation;
-    std::string GainParamInheritBuiltuint16ype;
+    std::string GainParamInheritBuiltuint16_type;
     std::string UseFloatMulNetSlope;
     std::string DefaultUnderspecifiedDataType;
     std::string UseSpecifiedMinMax;
@@ -65,11 +61,11 @@ struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
     std::string DataBitsets;
     std::string ActiveStateOutputEnumStorageType;
     std::string ZeroExternalMemoryAtStartup;
-    std::string Zerouint16ernalMemoryAtStartup;
+    std::string Zerouint16_ternalMemoryAtStartup;
     std::string InitFltsAndDblsToZero;
     std::string NoFixptDivByZeroProtection;
-    std::string EfficientFloat2uint16Cast;
-    std::string EfficientMapNaN2uint16Zero;
+    std::string EfficientFloat2uint16_tCast;
+    std::string EfficientMapNaN2uint16_tZero;
     std::string LifeSpan;
     std::string MaxStackSize;
     std::string BufferReusableBoundary;
@@ -88,9 +84,5 @@ struct SLXIO_APIEXPORT SimulinkOptimization final // NOSONAR
     std::string DenormalBehavior;
 };
 
-bool IsValid(const SimulinkOptimization* optimization);
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKOPTIMISATION_H

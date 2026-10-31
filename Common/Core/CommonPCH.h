@@ -19,5 +19,6 @@
 #include <type_traits>
 #include <vector>
 #include <cstring>
+#include <map>
 
 #endif // COMMONPCH_H

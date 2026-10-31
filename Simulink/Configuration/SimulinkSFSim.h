@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKSFSIM_H
-#define SIMULINKSFSIM_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
 #include "CommonPCH.h"
-#include "PlatformTypes.h"
 
 namespace slxio
 {
@@ -44,24 +42,20 @@ struct SLXIO_APIEXPORT SimulinkSFSim // NOSONAR
     std::string SimCustomLinkerFlags;
     std::string SFSimEcho;
     std::string SimCtrlC;
-    std::string Simuint16egrity;
+    std::string Simuint16_tegrity;
     std::string SimUseLocalCustomCode;
     std::string SimParseCustomCode;
     std::string SimAnalyzeCustomCode;
     std::string SimBuildMode;
     std::string SimGenImportedTypeDefs;
     std::string ModelFunctionsGlobalVisibility;
-    UInt16 CompileTimeRecursionLimit;
+    uint16_t CompileTimeRecursionLimit;
     std::string EnableRuntimeRecursion;
     std::string MATLABDynamicMemAlloc;
-    UInt16 MATLABDynamicMemAllocThreshold;
+    uint16_t MATLABDynamicMemAllocThreshold;
     std::string CustomCodeFunctionArrayLayout;
     std::string DefaultCustomCodeFunctionArrayLayout;
 };
 
-bool IsValid(const SimulinkSFSim* sfsim);
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKSFSIM_H

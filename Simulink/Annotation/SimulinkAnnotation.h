@@ -13,20 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "SimulinkSolver.h"
 
-namespace slxio
+#pragma once
+
+#include "CommonPCH.h"
+
+struct SimulinkAnnotationStyle;
+struct SimulinkAnnotationLayout;
+
+class SimulinkAnnotation
 {
-SLXIO_ABI_NAMESPACE_BEGIN
+public:
+    const std::string& GetText() const;
+    void SetText(std::string text);
 
-bool IsValid(const SimulinkSolver* solver)
-{
-    if (solver == nullptr)
-    {
-        return false;
-    }
-    return std::stod(solver->StopTime) > std::stod(solver->StartTime);
-}
+    const SimulinkAnnotationStyle& GetStyle() const;
+    SimulinkAnnotationStyle& GetStyle();
 
-SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
+    const SimulinkAnnotationLayout& GetLayout() const;
+    SimulinkAnnotationLayout& GetLayout();
+
+private:
+    std::string m_text;
+    SimulinkAnnotationStyle& m_style;
+    SimulinkAnnotationLayout& m_layout;
+};

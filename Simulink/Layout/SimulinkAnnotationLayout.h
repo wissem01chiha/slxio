@@ -13,3 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#pragma once
+
+#include "CommonPCH.h"
+
+struct SimulinkAnnotationLayout
+{
+    Rectangle position;
+    std::string horizontalAlignment;
+    std::string verticalAlignment;
+    bool dropShadow = false;
+};

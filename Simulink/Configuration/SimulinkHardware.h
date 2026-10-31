@@ -14,63 +14,58 @@
  * limitations under the License.
  */
 
-#ifndef SIMULINKHARDWARE_H
-#define SIMULINKHARDWARE_H
+#pragma once
 
 #include "ABINamespaceMacro.h"
 #include "APIExportMacro.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-/**
- * @struct SimulinkHardware
- * @brief Base Conainer for Simulink Hardware Configuration
- */
-struct SLXIO_APIEXPORT SimulinkHardware final // NOSONAR
+struct SLXIO_APIEXPORT SimulinkHardware // NOSONAR
 {
     std::string DisabledProps;
     std::string Description;
     std::string Components;
-    UInt16 ProdBitPerChar;
-    UInt16 ProdBitPerShort;
-    UInt16 ProdBitPeruint16;
-    UInt16 ProdBitPerLong;
-    UInt16 ProdBitPerLongLong;
-    UInt16 ProdBitPerFloat;
-    UInt16 ProdBitPerfloat64;
-    UInt16 ProdBitPerPouint16er;
-    UInt16 ProdBitPerSizeT;
-    UInt16 ProdBitPerPtrDiffT;
-    std::string ProdLargestAtomicuint16eger;
+    uint16_t ProdBitPerChar;
+    uint16_t ProdBitPerShort;
+    uint16_t ProdBitPeruint16_t;
+    uint16_t ProdBitPerLong;
+    uint16_t ProdBitPerLongLong;
+    uint16_t ProdBitPerFloat;
+    uint16_t ProdBitPerfloat64;
+    uint16_t ProdBitPerPouint16_ter;
+    uint16_t ProdBitPerSizeT;
+    uint16_t ProdBitPerPtrDiffT;
+    std::string ProdLargestAtomicuint16_teger;
     std::string ProdLargestAtomicFloat;
-    std::string Produint16DivRoundTo;
+    std::string Produint16_tDivRoundTo;
     std::string ProdEndianess;
-    UInt16 ProdWordSize;
-    std::string ProdShiftRightuint16Arith;
+    uint16_t ProdWordSize;
+    std::string ProdShiftRightuint16_tArith;
     std::string ProdLongLongMode;
     std::string ProdHWDeviceType;
-    UInt16 TargetBitPerChar;
-    UInt16 TargetBitPerShort;
-    UInt16 TargetBitPeruint16;
-    UInt16 TargetBitPerLong;
-    UInt16 TargetBitPerLongLong;
-    UInt16 TargetBitPerFloat;
-    UInt16 TargetBitPerfloat64;
-    UInt16 TargetBitPerPouint16er;
-    UInt16 TargetBitPerSizeT;
-    UInt16 TargetBitPerPtrDiffT;
-    std::string TargetLargestAtomicuint16eger;
+    uint16_t TargetBitPerChar;
+    uint16_t TargetBitPerShort;
+    uint16_t TargetBitPeruint16_t;
+    uint16_t TargetBitPerLong;
+    uint16_t TargetBitPerLongLong;
+    uint16_t TargetBitPerFloat;
+    uint16_t TargetBitPerfloat64;
+    uint16_t TargetBitPerPouint16_ter;
+    uint16_t TargetBitPerSizeT;
+    uint16_t TargetBitPerPtrDiffT;
+    std::string TargetLargestAtomicuint16_teger;
     std::string TargetLargestAtomicFloat;
-    std::string TargetShiftRightuint16Arith;
+    std::string TargetShiftRightuint16_tArith;
     std::string TargetLongLongMode;
-    std::string Targetuint16DivRoundTo;
+    std::string Targetuint16_tDivRoundTo;
     std::string TargetEndianess;
-    UInt16 TargetWordSize;
-    UInt16 TargetPreprocMaxBitsSuint16;
-    UInt16 TargetPreprocMaxBitsUuint16;
+    uint16_t TargetWordSize;
+    uint16_t TargetPreprocMaxBitsSuint16_t;
+    uint16_t TargetPreprocMaxBitsUuint16_t;
     std::string TargetHWDeviceType;
     std::string TargetUnknown;
     std::string ProdEqTarget;
@@ -79,9 +74,5 @@ struct SLXIO_APIEXPORT SimulinkHardware final // NOSONAR
     std::string HardwareBoardFeatureSet;
 };
 
-bool IsValid(const SimulinkHardware* hardware);
-
 SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKHARDWARE_H
