@@ -25,7 +25,7 @@ namespace slxio
 
 enum class Errc : int
 {
-    Ok = 0, 
+    Ok = 0,
     InvalidArgument = 1,
     OutOfMemory = 2,
     NotInitialized = 3,
@@ -39,7 +39,6 @@ NODISCARD inline std::error_code make_error_code(Errc e) noexcept
 {
     return {static_cast<int>(e), ErrorCategory()};
 }
-
 
 template <> struct std::is_error_code_enum<Errc> : std::true_type
 {

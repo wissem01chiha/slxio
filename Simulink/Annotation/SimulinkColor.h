@@ -22,7 +22,7 @@ namespace slxio
 {
 
 // Container for default Simulink Supported Colors
-class  SimulinkColor final
+class SimulinkColor final
 {
 public:
     std::string name;

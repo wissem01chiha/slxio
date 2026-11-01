@@ -22,7 +22,7 @@
 namespace slxio
 {
 
-class SimulinkCoverageValidator final :public ConfigSetComponentValidator
+class SimulinkCoverageValidator final : public ConfigSetComponentValidator
 {
 public:
     SimulinkCoverageValidator();

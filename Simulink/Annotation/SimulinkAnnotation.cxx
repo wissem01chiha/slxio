@@ -19,5 +19,4 @@
 namespace slxio
 {
 
-
 }; // namespace slxio

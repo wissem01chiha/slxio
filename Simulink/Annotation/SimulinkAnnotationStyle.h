@@ -20,7 +20,7 @@
 
 namespace slxio
 {
-    
+
 class Color;
 
 struct SimulinkAnnotationStyle

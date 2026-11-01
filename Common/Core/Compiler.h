@@ -71,4 +71,3 @@
 #else
 #define NODISCARD
 #endif
-

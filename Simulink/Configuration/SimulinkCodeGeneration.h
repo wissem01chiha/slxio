@@ -23,7 +23,6 @@ namespace slxio
 
 struct SimulinkCodeGeneration
 {
-
 };
 
 } // namespace slxio

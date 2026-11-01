@@ -28,6 +28,4 @@ const std::string& SimulinkCoverageValidator::GetComponentClassName() const noex
     // TODO: insert return statement here
 }
 
-
-
 }; // namespace slxio

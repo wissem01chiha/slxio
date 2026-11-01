@@ -36,10 +36,9 @@ QFrame* createTemplateCard(const TemplateInfo& info, int variant)
     auto* card = new QFrame;
     card->setObjectName("templateCard");
     card->setFrameShape(QFrame::StyledPanel);
-    card->setStyleSheet(
-        "QFrame#templateCard { background: white; border: 1px solid #c8c8c8; }"
-        "QLabel#templateTitle { background: #f4f4f4; border-top: 1px solid #c8c8c8;"
-        " padding: 7px 10px; font-weight: normal; }");
+    card->setStyleSheet("QFrame#templateCard { background: white; border: 1px solid #c8c8c8; }"
+                        "QLabel#templateTitle { background: #f4f4f4; border-top: 1px solid #c8c8c8;"
+                        " padding: 7px 10px; font-weight: normal; }");
     card->setAccessibleName(info.title);
 
     auto* layout = new QVBoxLayout(card);
@@ -103,12 +102,11 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     tabBar->addTab(tr("New"));
     tabBar->addTab(tr("Examples"));
     tabBar->addTab(tr("Learn"));
-    tabBar->setStyleSheet(
-        "QTabBar::tab { background: #e3e3e3; color: #444444; min-width: 115px;"
-        " padding: 12px 18px; margin-right: 5px; border-top-left-radius: 7px;"
-        " border-top-right-radius: 7px; }"
-        "QTabBar::tab:selected { background: white; color: #004073; }"
-        "QTabBar::tab:hover:!selected { background: #f2f2f2; }");
+    tabBar->setStyleSheet("QTabBar::tab { background: #e3e3e3; color: #444444; min-width: 115px;"
+                          " padding: 12px 18px; margin-right: 5px; border-top-left-radius: 7px;"
+                          " border-top-right-radius: 7px; }"
+                          "QTabBar::tab:selected { background: white; color: #004073; }"
+                          "QTabBar::tab:hover:!selected { background: #f2f2f2; }");
     headerLayout->addWidget(tabBar, 0, Qt::AlignBottom);
     headerLayout->addStretch();
     rootLayout->addWidget(header);
@@ -130,23 +128,23 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     openButton->setIconSize(QSize(20, 20));
     openButton->setMinimumHeight(42);
     openButton->setCursor(Qt::PointingHandCursor);
-    openButton->setStyleSheet(
-        "QPushButton { text-align: left; padding: 6px 10px; border: 1px solid #c8c8c8;"
-        " border-radius: 3px; background: white; color: #004073; }"
-        "QPushButton:hover { background: #e6eff6; border-color: #004073; }"
-        "QPushButton:pressed { background: #d3e2ef; }");
+    openButton->setStyleSheet("QPushButton { text-align: left; padding: 6px 10px; border: 1px solid #c8c8c8;"
+                              " border-radius: 3px; background: white; color: #004073; }"
+                              "QPushButton:hover { background: #e6eff6; border-color: #004073; }"
+                              "QPushButton:pressed { background: #d3e2ef; }");
     sidebarLayout->addWidget(openButton);
-    connect(openButton, &QPushButton::clicked, this, [this]() {
-        const QString filePath = QFileDialog::getOpenFileName(
+    connect(openButton,
+            &QPushButton::clicked,
             this,
-            tr("Open Simulink Model"),
-            QString(),
-            tr("Simulink Models (*.slx *.mdl);;All Files (*)"));
-        if (!filePath.isEmpty())
-        {
-            ui->statusbar->showMessage(tr("Selected: %1").arg(filePath));
-        }
-    });
+            [this]()
+            {
+                const QString filePath = QFileDialog::getOpenFileName(
+                    this, tr("Open Simulink Model"), QString(), tr("Simulink Models (*.slx *.mdl);;All Files (*)"));
+                if (!filePath.isEmpty())
+                {
+                    ui->statusbar->showMessage(tr("Selected: %1").arg(filePath));
+                }
+            });
 
     auto* recentHeading = new QLabel(tr("Recent"), sidebar);
     recentHeading->setStyleSheet("font-size: 12pt; font-weight: 600; margin-top: 10px;");
@@ -209,20 +207,18 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     cardGrid->setHorizontalSpacing(16);
     cardGrid->setVerticalSpacing(16);
 
-    const QVector<TemplateInfo> templates = {
-        {tr("Blank Model"), tr("Models")},
-        {tr("Blank Subsystem"), tr("Models")},
-        {tr("Blank Library"), tr("Libraries")},
-        {tr("Blank Project"), tr("Projects")},
-        {tr("Import Folder"), tr("Projects")},
-        {tr("Clone Repository"), tr("Projects")},
-        {tr("Browse Examples"), tr("Models")},
-        {tr("Custom Template"), tr("Models")},
-        {tr("Control System"), tr("Models")},
-        {tr("Signal Processing"), tr("Models")},
-        {tr("Reusable Components"), tr("Libraries")},
-        {tr("Workspace Project"), tr("Projects")}
-    };
+    const QVector<TemplateInfo> templates = {{tr("Blank Model"), tr("Models")},
+                                             {tr("Blank Subsystem"), tr("Models")},
+                                             {tr("Blank Library"), tr("Libraries")},
+                                             {tr("Blank Project"), tr("Projects")},
+                                             {tr("Import Folder"), tr("Projects")},
+                                             {tr("Clone Repository"), tr("Projects")},
+                                             {tr("Browse Examples"), tr("Models")},
+                                             {tr("Custom Template"), tr("Models")},
+                                             {tr("Control System"), tr("Models")},
+                                             {tr("Signal Processing"), tr("Models")},
+                                             {tr("Reusable Components"), tr("Libraries")},
+                                             {tr("Workspace Project"), tr("Projects")}};
     QVector<QFrame*> cards;
     for (int i = 0; i < templates.size(); ++i)
     {
@@ -249,7 +245,8 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(tabBar, &QTabBar::currentChanged, pages, &QStackedWidget::setCurrentIndex);
     showMore->setProperty("expanded", false);
-    const auto filterCards = [cards, templates, searchInput, categoryFilter, showMore]() {
+    const auto filterCards = [cards, templates, searchInput, categoryFilter, showMore]()
+    {
         const QString query = searchInput->text().trimmed();
         const QString category = categoryFilter->currentText();
         const bool expanded = showMore->property("expanded").toBool();
@@ -261,15 +258,18 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
             cards.at(i)->setVisible(matchesText && matchesCategory && isInExpandedSection);
         }
     };
-    connect(showMore, &QPushButton::clicked, this, [showMore, filterCards]() {
-        const bool expanded = !showMore->property("expanded").toBool();
-        showMore->setProperty("expanded", expanded);
-        showMore->setText(expanded ? tr("Show less") : tr("Show more"));
-        filterCards();
-    });
+    connect(showMore,
+            &QPushButton::clicked,
+            this,
+            [showMore, filterCards]()
+            {
+                const bool expanded = !showMore->property("expanded").toBool();
+                showMore->setProperty("expanded", expanded);
+                showMore->setText(expanded ? tr("Show less") : tr("Show more"));
+                filterCards();
+            });
     connect(searchInput, &QLineEdit::textChanged, this, [filterCards](const QString&) { filterCards(); });
-    connect(categoryFilter, QOverload<int>::of(&QComboBox::currentIndexChanged), this,
-            [filterCards](int) { filterCards(); });
+    connect(categoryFilter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [filterCards](int) { filterCards(); });
     connect(searchButton, &QPushButton::clicked, this, filterCards);
     filterCards();
 }

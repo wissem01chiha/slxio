@@ -25,7 +25,7 @@ namespace
 {
 Point defaultPosition;
 Color defaultColor;
-}
+} // namespace
 
 PortLayoutData::PortLayoutData() : position(defaultPosition), color(defaultColor)
 {

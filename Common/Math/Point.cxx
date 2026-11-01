@@ -18,7 +18,7 @@
 namespace slxio
 {
 
-Point::Point(const std::vector<uint32_t>& vec) 
+Point::Point(const std::vector<uint32_t>& vec)
 {
     if (vec.size() < 4)
     {

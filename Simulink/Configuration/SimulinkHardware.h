@@ -21,7 +21,7 @@
 namespace slxio
 {
 
-struct  SimulinkHardware // NOSONAR
+struct SimulinkHardware // NOSONAR
 {
     std::string DisabledProps;
     std::string Description;

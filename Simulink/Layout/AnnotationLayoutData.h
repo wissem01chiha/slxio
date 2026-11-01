@@ -20,7 +20,6 @@
 #include "RectangleLayoutDataBase.h"
 #include "RectangleType.h"
 
-
 /**
  * @brief Encapsulates all information required for layouting an
  * annotation (relative to its parent's canvas).
