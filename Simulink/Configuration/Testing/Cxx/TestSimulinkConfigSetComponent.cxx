@@ -3,7 +3,6 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("SimulinkConfigSetComponentStoresClassNameAndParameters")
 {
@@ -17,5 +16,4 @@ TEST_CASE("SimulinkConfigSetComponentStoresClassNameAndParameters")
     CHECK_FALSE(solver.RemoveParam("Solver"));
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

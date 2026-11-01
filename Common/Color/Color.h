@@ -17,35 +17,30 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "PlatformTypes.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-class SLXIO_APIEXPORT Color final
+class Color final
 {
 public:
     Color();
-    Color(UInt32 red, UInt32 green, UInt32 blue, UInt32 alpha = 255);
+    Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha = 255);
     ~Color() = default;
     Color(const Color& other) = default;
     Color& operator=(const Color& other) = default;
     bool operator==(const Color& other) const;
     bool operator!=(const Color& other) const;
 
-    static Color fromVector(const std::vector<UInt32>& vec);
+    static Color fromVector(const std::vector<uint32_t>& vec);
 
-    std::vector<UInt32> toVector() const;
+    std::vector<uint32_t> toVector() const;
 
 private:
-    UInt32 r;
-    UInt32 g;
-    UInt32 b;
-    UInt32 a;
+    uint32_t r;
+    uint32_t g;
+    uint32_t b;
+    uint32_t a;
 };
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

@@ -6,11 +6,9 @@
 #include <string_view>
 #include <system_error>
 #include <type_traits>
-#include "ABINamespaceMacro.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class Severity : std::uint8_t
 {
@@ -80,7 +78,6 @@ private:
     Severity m_severity{Severity::Success};
 };
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio
 
 #endif // ERRORNO_H

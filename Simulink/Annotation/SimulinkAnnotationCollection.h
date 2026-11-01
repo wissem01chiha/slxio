@@ -18,13 +18,16 @@
 
 #include "CommonPCH.h"
 
+namespace slxio
+{
+
 class SimulinkAnnotation;
 
 /**
  * A collection should own annotations
  * and expose normal model operations
  */
-class AnnotationCollection
+class AnnotationCollection final
 {
 public:
     int Add(std::shared_ptr<SimulinkAnnotation> annotation);
@@ -32,3 +35,5 @@ public:
 
     const std::vector<std::shared_ptr<SimulinkAnnotation>>& GetAll() const;
 };
+
+}; // namespace slxio

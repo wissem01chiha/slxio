@@ -18,6 +18,17 @@
 
 #include "CommonPCH.h"
 
+namespace slxio
+{
+
+struct Rectangle
+{
+    double x;
+    double y;
+    double width;
+    double height;
+};
+
 struct SimulinkAnnotationLayout
 {
     Rectangle position;
@@ -25,3 +36,5 @@ struct SimulinkAnnotationLayout
     std::string verticalAlignment;
     bool dropShadow = false;
 };
+
+}; // namespace slxio

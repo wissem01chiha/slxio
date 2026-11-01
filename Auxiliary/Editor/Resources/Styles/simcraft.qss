@@ -1,0 +1,35 @@
+QWidget {
+    color: #333333;
+    font-size: 12pt;
+}
+
+QMainWindow, QStackedWidget, QScrollArea, QScrollArea > QWidget > QWidget {
+    background: #ffffff;
+}
+
+QLineEdit, QComboBox {
+    min-height: 34px;
+    border: 1px solid #bcbcbc;
+    background: #ffffff;
+    padding: 0 9px;
+}
+
+QLineEdit:focus, QComboBox:focus {
+    border: 1px solid #004073;
+}
+
+QPushButton {
+    min-height: 32px;
+    padding: 0 12px;
+    border: 1px solid #bcbcbc;
+    background: #ffffff;
+}
+
+QPushButton:hover {
+    background: #e6eff6;
+    border-color: #004073;
+}
+
+QScrollArea {
+    border: none;
+}

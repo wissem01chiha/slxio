@@ -17,12 +17,9 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 class ValidationReport;
 class ConfigSetComponentValidator;
@@ -32,12 +29,10 @@ class SimulinkConfigSetValidator final
 {
 public:
     bool AddValidator(std::shared_ptr<const ConfigSetComponentValidator> validator);
-
     ValidationReport Validate(const SimulinkConfigSet& configSet) const;
 
 private:
     std::map<std::string, std::shared_ptr<const ConfigSetComponentValidator>> m_validators;
 };
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

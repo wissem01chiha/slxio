@@ -3,7 +3,6 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("SimulinkConfigSetStoresNamedComponentsAndParameters")
 {
@@ -22,5 +21,4 @@ TEST_CASE("SimulinkConfigSetStoresNamedComponentsAndParameters")
     CHECK(config.ToString().find("SimulinkConfigSet: Simulation") != std::string::npos);
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

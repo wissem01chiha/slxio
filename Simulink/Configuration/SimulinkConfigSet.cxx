@@ -15,12 +15,8 @@
  */
 #include "SimulinkConfigSet.h"
 
-#include <sstream>
-#include <utility>
-
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSet::SimulinkConfigSet(std::string name) : m_name(std::move(name))
 {
@@ -113,5 +109,4 @@ std::string SimulinkConfigSet::ToString() const
     return stream.str();
 }
 
-SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

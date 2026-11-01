@@ -18,6 +18,9 @@
 
 #include "CommonPCH.h"
 
+namespace slxio
+{
+    
 class Color;
 
 struct SimulinkAnnotationStyle
@@ -30,3 +33,5 @@ struct SimulinkAnnotationStyle
     std::string fontAngle;
     std::string interpreter;
 };
+
+}; // namespace slxio

@@ -15,34 +15,3 @@
  */
 
 #pragma once
-
-#include "CommonPCH.h"
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "Logger.h"
-#include "PlatformTypes.h"
-
-namespace slxio
-{
-SLXIO_ABI_NAMESPACE_BEGIN
-
-class SLXIO_APIEXPORT Point final
-{
-public:
-    Point();
-    Point(UInt32 x, UInt32 y, UInt32 width, UInt32 height);
-    Point(const std::vector<UInt32>& vec);
-    std::vector<UInt32> toVector() const;
-
-private:
-    Logger& l;
-    UInt32 x;
-    UInt32 y;
-    UInt32 width;
-    UInt32 height;
-};
-
-SLXIO_ABI_NAMESPACE_END
-}; // namespace slxio
-
-#endif // POINT_H

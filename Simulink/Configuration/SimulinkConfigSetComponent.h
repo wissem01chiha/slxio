@@ -16,23 +16,17 @@
 
 #pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-
-#include <map>
-#include <string>
+#include "CommonPCH.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * A configuration component, such as Solver or ModelReference.
- *
- * Component class names and string-valued parameters are retained so SLX data
+ * Component class names and string-valued parameters are retained so file data
  * that this library does not understand can still be round-tripped.
  */
-class SLXIO_APIEXPORT SimulinkConfigSetComponent final
+class SimulinkConfigSetComponent final
 {
 public:
     using ParameterMap = std::map<std::string, std::string>;
@@ -53,5 +47,4 @@ private:
     ParameterMap m_parameters;
 };
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

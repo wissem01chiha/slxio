@@ -17,20 +17,16 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 // Container for default Simulink Supported Colors
-class SLXIO_APIEXPORT SimulinkColor final
+class  SimulinkColor final
 {
 public:
     std::string name;
     std::string hexValue;
 };
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

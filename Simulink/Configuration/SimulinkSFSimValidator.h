@@ -16,23 +16,19 @@
 
 #pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 #include "ConfigSetComponentValidator.h"
 #include "CommonPCH.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 class ValidationReport;
 
-class SLXIO_APIEXPORT SimulinkSFSimValidator final : public ConfigSetComponentValidator
+class SimulinkSFSimValidator final : public ConfigSetComponentValidator
 {
 public:
     const std::string& GetComponentClassName() const noexcept override;
     ValidationReport Validate(const SimulinkConfigSetComponent& component) const override;
 };
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

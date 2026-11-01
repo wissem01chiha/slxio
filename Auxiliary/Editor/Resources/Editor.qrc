@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/styles">
+        <file alias="simcraft.qss">Styles/simcraft.qss</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file alias="SimcraftDisplay.ttf">Fonts/Cycles W00 Thirtysix Rm OS.ttf</file>
+    </qresource>
+    <qresource prefix="/licenses">
+        <file alias="FontLicense.txt">Fonts/License.txt</file>
+    </qresource>
+</RCC>

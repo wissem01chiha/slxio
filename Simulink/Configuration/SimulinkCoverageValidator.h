@@ -15,3 +15,19 @@
  */
 
 #pragma once
+
+#include "CommonPCH.h"
+#include "ConfigSetComponentValidator.h"
+
+namespace slxio
+{
+
+class SimulinkCoverageValidator final :public ConfigSetComponentValidator
+{
+public:
+    SimulinkCoverageValidator();
+    const std::string& GetComponentClassName() const noexcept override;
+    ValidationReport Validate(const SimulinkConfigSetComponent& component) const override;
+};
+
+}; // namespace slxio

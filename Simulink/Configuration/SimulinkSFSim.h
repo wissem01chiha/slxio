@@ -16,15 +16,12 @@
 
 #pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 #include "CommonPCH.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-struct SLXIO_APIEXPORT SimulinkSFSim // NOSONAR
+struct  SimulinkSFSim // NOSONAR
 {
     std::string DisabledProps;
     std::string Description;
@@ -57,5 +54,4 @@ struct SLXIO_APIEXPORT SimulinkSFSim // NOSONAR
     std::string DefaultCustomCodeFunctionArrayLayout;
 };
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

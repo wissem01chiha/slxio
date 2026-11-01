@@ -1,18 +1,31 @@
-#ifndef SLXIO_COMMON_CORE_COREERRORS_H_
-#define SLXIO_COMMON_CORE_COREERRORS_H_
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#pragma once
 
 #include <system_error>
+#include "CommonPCH.h"
+#include "Compiler.h"
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-
-namespace slxio::core
+namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class Errc : int
 {
-    Ok = 0, // never reorder or reuse released values
+    Ok = 0, 
     InvalidArgument = 1,
     OutOfMemory = 2,
     NotInitialized = 3,
@@ -20,18 +33,16 @@ enum class Errc : int
     IoFailure = 5,
 };
 
-SLXIO_APIEXPORT const std::error_category& ErrorCategory() noexcept;
+const std::error_category& ErrorCategory() noexcept;
 
-[[nodiscard]] inline std::error_code make_error_code(Errc e) noexcept
+NODISCARD inline std::error_code make_error_code(Errc e) noexcept
 {
     return {static_cast<int>(e), ErrorCategory()};
 }
 
-SLXIO_ABI_NAMESPACE_END
-} // namespace slxio::core
 
-template <> struct std::is_error_code_enum<slxio::core::Errc> : std::true_type
+template <> struct std::is_error_code_enum<Errc> : std::true_type
 {
 };
 
-#endif // SLXIO_COMMON_CORE_COREERRORS_H_
+} // namespace slxio

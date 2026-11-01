@@ -16,14 +16,11 @@
 
 #pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 #include "SimulinkConfigSetComponent.h"
 #include "CommonPCH.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 /**
  * A named, copyable collection of a Simulink model configuration settings.
@@ -31,7 +28,7 @@ SLXIO_ABI_NAMESPACE_BEGIN
  * Component/property values remain strings to preserve MATLAB expressions and
  * settings introduced by Simulink versions this library does not yet support.
  */
-class SLXIO_APIEXPORT SimulinkConfigSet final
+class SimulinkConfigSet final
 {
 public:
     using ParameterMap = std::map<std::string, std::string>;
@@ -64,5 +61,4 @@ private:
     ComponentMap m_components;
 };
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

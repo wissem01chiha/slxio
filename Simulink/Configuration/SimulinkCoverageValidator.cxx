@@ -13,33 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "Point.h"
+
+#include "SimulinkCoverageValidator.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-Point::Point(const std::vector<UInt32>& vec) : l(Logger::GetInstance())
+SimulinkCoverageValidator::SimulinkCoverageValidator()
 {
-    if (vec.size() < 4)
-    {
-        // l.Log(Logger::V_ERROR,
-        //  "Point constructor: vector too small to initialize Point!");
-        x = y = width = height = 0;
-    }
-    else
-    {
-        x = vec[0];
-        y = vec[1];
-        width = vec[2];
-        height = vec[3];
-    }
 }
 
-std::vector<UInt32> Point::toVector() const
+const std::string& SimulinkCoverageValidator::GetComponentClassName() const noexcept
 {
-    return {x, y, width, height};
+    // TODO: insert return statement here
 }
 
-SLXIO_ABI_NAMESPACE_END
+
+
 }; // namespace slxio

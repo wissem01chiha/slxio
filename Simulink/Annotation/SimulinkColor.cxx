@@ -17,7 +17,6 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 static const SimulinkColor BLACK = {"BLACK", "#000000"};
 static const SimulinkColor WHITE = {"WHITE", "#ffffff"};
@@ -32,5 +31,4 @@ static const SimulinkColor GRAY = {"GRAY", "#808080"};
 static const SimulinkColor LIGHTBLUE = {"LIGHTBLUE", "#63b9ff"};
 static const SimulinkColor DARKGREEN = {"DARKGREEN", "#699640"};
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

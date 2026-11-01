@@ -15,16 +15,23 @@
  */
 
 #include "SimulinkPortLayout.h"
+#include "Color.h"
+#include "Point.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-PortLayoutData::PortLayoutData() : l(Logger::GetInstance())
+namespace
+{
+Point defaultPosition;
+Color defaultColor;
+}
+
+PortLayoutData::PortLayoutData() : position(defaultPosition), color(defaultColor)
 {
 }
 
-PortLayoutData::PortLayoutData(Point point, Color color) : position(point), color(color), l(Logger::GetInstance())
+PortLayoutData::PortLayoutData(Point point, Color color) : position(point), color(color)
 {
 }
 
@@ -33,7 +40,7 @@ Point PortLayoutData::GetPosition()
     return position;
 }
 
-Float32 PortLayoutData::GetDirection()
+double PortLayoutData::GetDirection()
 {
     return 0.0;
 }
@@ -43,5 +50,4 @@ Color PortLayoutData::GetColor()
     return color;
 }
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

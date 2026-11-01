@@ -28,13 +28,13 @@ public:
     virtual void SetResult(HError status) = 0;
 
     /// Retrieve the last recorded error
-    SLXIO_NODISCARD virtual HError GetLastResult() const = 0;
+    NODISCARD virtual HError GetLastResult() const = 0;
 
     /// Retrieve the full buffer/log of errors
-    SLXIO_NODISCARD virtual std::vector<HError> GetBuffer() const = 0;
+    NODISCARD virtual std::vector<HError> GetBuffer() const = 0;
 
     /// Attach a logger sink (ILogger interface)
-    SLXIO_NODISCARD virtual HError SetLogger(ILogger* logger) = 0;
+    NODISCARD virtual HError SetLogger(ILogger* logger) = 0;
 
     /// Get the current logger sink
     virtual const ILogger* GetLogger() const = 0;

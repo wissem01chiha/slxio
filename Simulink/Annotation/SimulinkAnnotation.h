@@ -18,10 +18,13 @@
 
 #include "CommonPCH.h"
 
+namespace slxio
+{
+
 struct SimulinkAnnotationStyle;
 struct SimulinkAnnotationLayout;
 
-class SimulinkAnnotation
+class SimulinkAnnotation final
 {
 public:
     const std::string& GetText() const;
@@ -38,3 +41,5 @@ private:
     SimulinkAnnotationStyle& m_style;
     SimulinkAnnotationLayout& m_layout;
 };
+
+}; // namespace slxio

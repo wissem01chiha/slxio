@@ -16,17 +16,10 @@
 
 #pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 #include "SimulinkConfigSet.h"
-
-#include <cstddef>
-#include <map>
-#include <string>
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class ConfigSetCollectionResult
 {
@@ -41,7 +34,7 @@ enum class ConfigSetCollectionResult
  * The collection maintains the name index when a set is renamed. Removing the
  * active set clears selection.
  */
-class SLXIO_APIEXPORT SimulinkConfigSetCollection final
+class SimulinkConfigSetCollection final
 {
 public:
     using ConfigSetMap = std::map<std::string, SimulinkConfigSet>;
@@ -67,5 +60,4 @@ private:
     std::string m_activeName;
 };
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

@@ -1,6 +1,8 @@
 add_subdirectory(Core)
+add_subdirectory(Color)
 add_subdirectory(Cache)
 add_subdirectory(Data)
+add_subdirectory(Math)
 add_subdirectory(System)
 add_subdirectory(Archive)
 if(SLXIO_BUILD_TESTS)

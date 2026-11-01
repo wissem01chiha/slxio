@@ -15,3 +15,20 @@
  */
 
 #pragma once
+
+#include "CommonPCH.h"
+#include "ConfigSetComponentValidator.h"
+
+namespace slxio
+{
+
+struct SimulinkModelReference;
+
+class SimulinkModelReferenceValidator final : public ConfigSetComponentValidator
+{
+public:
+    const std::string& GetComponentClassName() const noexcept override;
+    ValidationReport Validate(const SimulinkConfigSetComponent& component) const override;
+};
+
+}; // namespace slxio

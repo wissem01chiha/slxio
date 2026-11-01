@@ -16,11 +16,8 @@
 
 #include "SimulinkConfigSetComponent.h"
 
-#include <utility>
-
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkConfigSetComponent::SimulinkConfigSetComponent(std::string className) : m_className(std::move(className))
 {
@@ -63,5 +60,4 @@ const SimulinkConfigSetComponent::ParameterMap& SimulinkConfigSetComponent::GetP
     return m_parameters;
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

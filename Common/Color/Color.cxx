@@ -18,16 +18,15 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-std::vector<UInt32> Color::toVector() const
+std::vector<uint32_t> Color::toVector() const
 {
     return {r, g, b, a};
 }
 Color::Color() : r(0), g(0), b(0), a(255)
 {
 }
-Color::Color(UInt32 red, UInt32 green, UInt32 blue, UInt32 alpha) : r(red), g(green), b(blue), a(alpha)
+Color::Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha) : r(red), g(green), b(blue), a(alpha)
 {
 }
 bool Color::operator==(const Color& other) const
@@ -39,7 +38,7 @@ bool Color::operator!=(const Color& other) const
     return !(*this == other);
 }
 
-Color Color::fromVector(const std::vector<UInt32>& vec)
+Color Color::fromVector(const std::vector<uint32_t>& vec)
 {
     if (vec.size() >= 4)
     {
@@ -48,5 +47,4 @@ Color Color::fromVector(const std::vector<UInt32>& vec)
     return Color(vec.size() > 0 ? vec[0] : 0, vec.size() > 1 ? vec[1] : 0, vec.size() > 2 ? vec[2] : 0, 255);
 }
 
-SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

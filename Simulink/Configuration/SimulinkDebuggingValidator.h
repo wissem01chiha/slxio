@@ -15,3 +15,11 @@
  */
 
 #pragma once
+
+#include "CommonPCH.h"
+
+namespace slxio
+{
+
+
+} // namespace slxio

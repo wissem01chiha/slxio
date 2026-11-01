@@ -3,7 +3,6 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 TEST_CASE("ConfigSetPreservesComponentAndParameterValues")
 {
@@ -65,5 +64,4 @@ TEST_CASE("ConfigSetComponentsCanRemoveParameters")
     CHECK(solver.FindParam("Solver") == nullptr);
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio
