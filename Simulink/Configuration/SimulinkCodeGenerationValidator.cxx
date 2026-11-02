@@ -15,3 +15,8 @@
  */
 
 #include "SimulinkCodeGenerationValidator.h"
+
+namespace slxio
+{
+
+}; // namespace slxio
