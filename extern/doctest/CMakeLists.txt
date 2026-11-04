@@ -15,3 +15,6 @@
 # doctest can be included as header only single file
 # no compiled targets required so we add the current 
 # source directory as a system include
+set(DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF)
+
+add_subdirectory(src)

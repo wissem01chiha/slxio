@@ -45,9 +45,9 @@
 #     SimulinkModelType.cxx
 #     SimulinkBlockType.cxx
 #   MODULE_TEST_SOURCE_DIR
-#     Testing/Cxx
+#     test/cxx
 #   MODULE_TEST_DATA_SOURCE_DIR
-#     Testing/Data
+#     test/data
 #   MODULE_TEST_DATA_SOURCES
 #   MODULE_TEST_SOURCES
 #     TestSimulinkArray.cxx

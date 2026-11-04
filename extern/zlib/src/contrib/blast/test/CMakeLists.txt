@@ -190,3 +190,4 @@ set_tests_properties(zlib_blast_find_package_wrong_components_configure
     PROPERTIES
         FIXTURES_REQUIRED ${inst_setup}
         WILL_FAIL TRUE)
+

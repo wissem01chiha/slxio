@@ -13,4 +13,4 @@ module_include_directories(
   Data ${PROJECT_EXTERN_SOURCE_DIR}/doctest
   ${PROJECT_EXTERN_SOURCE_DIR}/json-c
   ${PROJECT_EXTERN_SOURCE_DIR}/libxml2)
-add_subdirectory(Testing)
+add_subdirectory(test)

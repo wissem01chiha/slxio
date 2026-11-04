@@ -24,4 +24,4 @@ target_precompile_headers(Core PRIVATE CommonPCH.h)
 module_include_directories(
   Core ${PROJECT_EXTERN_SOURCE_DIR}/doctest
   ${PROJECT_EXTERN_SOURCE_DIR}/spdlog)
-add_subdirectory(Testing)
+add_subdirectory(test)

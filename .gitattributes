@@ -1,4 +1,4 @@
-Testing/Data/** linguist-vendored
+**/test/data/** linguist-vendored
 Development/cinclude2dot.pl linguist-vendored
 Development/codeviz.py linguist-vendored
 CMake/FindMatlab.cmake linguist-vendored
@@ -16,4 +16,4 @@ ThirdParty/zlib/src/*.cmake linguist-vendored
 ThirdParty/libzip/src/*** linguist-vendored
 ThirdParty/libzip/src/*.c linguist-vendored
 ThirdParty/libzip/src/*.h linguist-vendored
-IO/Slx/Testing/Data/*** linguist-vendored
+io/slx/test/data/*** linguist-vendored

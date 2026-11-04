@@ -9,4 +9,4 @@ add_module(
 )
 module_link_libraries(System Core libzip::zip)
 set_target_properties(System PROPERTIES OUTPUT_NAME "CommonSystem")
-add_subdirectory(Testing)
+add_subdirectory(test)

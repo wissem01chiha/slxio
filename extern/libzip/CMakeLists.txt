@@ -13,5 +13,7 @@
 # limitations under the License.
 
 set(BUILD_SHARED_LIBS ${SLXIO_EXTERN_BUILD_SHARED_LIBS})
+set(BUILD_TOOLS OFF)
+set(ENABLE_COVERAGE ${SLXIO_EXTERN_ENABLE_COVERAGE})
 
 add_subdirectory(src)

@@ -7,4 +7,4 @@ module_link_libraries(Archive Core System)
 set_target_properties(Archive PROPERTIES OUTPUT_NAME "CommonArchive")
 module_include_directories(
   Archive ${PROJECT_EXTERN_SOURCE_DIR}/libzip)
-add_subdirectory(Testing)
+add_subdirectory(test)

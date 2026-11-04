@@ -61,7 +61,7 @@ find(
 
         return if $path =~ /ThirdParty/;
         return if $path =~ /Documentation/;
-        return if $path =~ /Testing/;
+        return if $path =~ /test/;
         return if $path =~ /Examples/;
         return if $path =~ /build/;
         return if $path =~ /cmake/;
