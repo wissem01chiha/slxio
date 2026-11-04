@@ -1,0 +1,169 @@
+import enum
+from typing import Final, overload
+
+
+class Enum(enum.Enum):
+    """enum-level docstring"""
+
+    A = 0
+    """Value A"""
+
+    B = 1
+    """Value B"""
+
+    BAlias = 1
+    """Value B"""
+
+    C = 4294967295
+    """Value C"""
+
+class Flag(enum.Flag):
+    """enum-level docstring"""
+
+    A = 1
+    """Value A"""
+
+    B = 2
+    """Value B"""
+
+    C = 4
+    """Value C"""
+
+A: Flag = Flag.A
+
+B: Flag = Flag.B
+
+C: Flag = Flag.C
+
+class UnsignedFlag(enum.Flag):
+    A = 1
+    """Value A"""
+
+    B = 2
+    """Value B"""
+
+    All = 18446744073709551615
+    """All values"""
+
+class SEnum(enum.IntEnum):
+    A = 0
+
+    B = 1
+
+    C = -1
+
+class ClassicEnum(enum.Enum):
+    Item1 = 0
+
+    Item2 = 1
+
+    def get_value(self) -> int: ...
+
+    @property
+    def my_value(self) -> int: ...
+
+    def foo(self) -> ClassicEnum: ...
+
+    @staticmethod
+    def bar(arg: ClassicEnum, /) -> ClassicEnum: ...
+
+Item1: ClassicEnum = ClassicEnum.Item1
+
+Item2: ClassicEnum = ClassicEnum.Item2
+
+@overload
+def from_enum(arg: Enum, /) -> int: ...
+
+@overload
+def from_enum(arg: Flag, /) -> int: ...
+
+@overload
+def from_enum(arg: SEnum, /) -> int: ...
+
+@overload
+def from_enum(arg: UnsignedFlag, /) -> int: ...
+
+def to_enum(arg: int, /) -> Enum: ...
+
+def to_flag(arg: int, /) -> Flag: ...
+
+def to_unsigned_flag(arg: int, /) -> UnsignedFlag: ...
+
+@overload
+def from_enum_implicit(arg: Enum, /) -> int: ...
+
+@overload
+def from_enum_implicit(arg: Flag, /) -> int: ...
+
+@overload
+def from_enum_default_0(value: Enum = Enum.A) -> int: ...
+
+@overload
+def from_enum_default_0(value: Flag = Enum.A) -> int: ...
+
+def from_enum_default_1(value: SEnum = SEnum.A) -> int: ...
+
+class EnumProperty:
+    def __init__(self) -> None: ...
+
+    @property
+    def read_enum(self) -> Enum: ...
+
+class OpaqueEnum:
+    @overload
+    def __init__(self) -> None: ...
+
+    @overload
+    def __init__(self, arg: str, /) -> None: ...
+
+    X: Final[OpaqueEnum] = ...
+    """(arg: object, /) -> test_enum_ext.OpaqueEnum"""
+
+    Y: Final[OpaqueEnum] = ...
+    """(arg: object, /) -> test_enum_ext.OpaqueEnum"""
+
+    def __eq__(self, arg: OpaqueEnum, /) -> bool: ...
+
+class Item(enum.Enum):
+    name = 0
+
+    value = 1
+
+    extra = 2
+
+def item_to_int(item: Item = Item.name) -> int: ...
+
+class EnumWrapper:
+    def __init__(self, arg: EnumWrapper.Value, /) -> None: ...
+
+    class Value(enum.Enum):
+        Alpha = 0
+
+        Beta = 1
+
+        Gamma = 2
+
+    Alpha: EnumWrapper.Value = EnumWrapper.Value.Alpha
+
+    Beta: EnumWrapper.Value = EnumWrapper.Value.Beta
+
+    Gamma: EnumWrapper.Value = EnumWrapper.Value.Gamma
+
+    def __eq__(self, arg: EnumWrapper.Value, /) -> bool: ...
+
+    def get_value(self) -> EnumWrapper.Value: ...
+
+class Color(enum.StrEnum):
+    """string-valued enum"""
+
+    Red = 'red'
+
+    Green = 'green'
+
+    Blue = 'blue'
+
+def from_color(arg: Color, /) -> int: ...
+
+def from_color_implicit(arg: Color, /) -> int: ...
+
+def to_color(arg: int, /) -> Color: ...

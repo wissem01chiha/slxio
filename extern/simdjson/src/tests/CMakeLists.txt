@@ -1,0 +1,46 @@
+# Most tests need test data, and many need windows headers.
+link_libraries(simdjson-internal-flags test-data simdjson-windows-headers)
+include(${PROJECT_SOURCE_DIR}/cmake/add_cpp_test.cmake)
+add_subdirectory(dom)
+add_subdirectory(ondemand)
+
+# compilation_failure_tests is added before the global link_libraries(simdjson) so that
+# multiple_include/myexe does not receive a duplicate simdjson entry alongside the one
+# already propagated by mylib PUBLIC simdjson::simdjson.
+add_subdirectory(compilation_failure_tests)
+
+# All remaining tests link with simdjson proper
+link_libraries(simdjson)
+
+add_cpp_test(unicode_tests       LABELS dom acceptance per_implementation)
+add_cpp_test(minify_tests        NEEDS_DATA LABELS other acceptance per_implementation)
+add_cpp_test(padded_string_tests LABELS other acceptance                   )
+add_cpp_test(memory_map_tests    LABELS other acceptance                   )
+add_cpp_test(simd8_tests         LABELS other acceptance                   )
+add_cpp_test(allocation_failure_tests LABELS dom ondemand acceptance)
+add_cpp_test(prettify_tests      NEEDS_DATA LABELS other acceptance per_implementation)
+add_cpp_test(fractured_json_tests LABELS other acceptance per_implementation)
+
+# Checks that the headers and the build system agree on whether static
+# reflection is available, and that the matching API works.
+add_cpp_test(reflection_autodetect_tests LABELS other acceptance)
+if(SIMDJSON_STATIC_REFLECTION_ENABLED)
+  target_compile_definitions(reflection_autodetect_tests PRIVATE SIMDJSON_EXPECT_STATIC_REFLECTION=1)
+else()
+  target_compile_definitions(reflection_autodetect_tests PRIVATE SIMDJSON_EXPECT_STATIC_REFLECTION=0)
+endif()
+
+if(WIN32 AND BUILD_SHARED_LIBS)
+  # Copy the simdjson dll into the tests directory
+  add_custom_command(TARGET unicode_tests POST_BUILD        # Adds a post-build event
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake -E copy_if_different..."
+        "$<TARGET_FILE:simdjson>"      # <--this is in-file
+        "$<TARGET_FILE_DIR:unicode_tests>")                 # <--this is out-file path
+endif()
+
+# This tests validates that the implementation is what we think it is if we get passed
+# SIMDJSON_FORCE_IMPLEMENTATION, so we know we're testing what we think we're testing
+add_cpp_test(checkimplementation LABELS other per_implementation)
+
+add_subdirectory(builder)
+add_subdirectory(compile_time)

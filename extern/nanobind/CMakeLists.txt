@@ -1,0 +1,28 @@
+# Copyright 2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set(NB_CREATE_INSTALL_RULES ${SLXIO_EXTERN_NB_CREATE_INSTALL_RULES})
+set(NB_USE_SUBMODULE_DEPS OFF)
+set(NB_INSTALL_DATADIR "${SLXIO_EXTERN_NB_INSTALL_DATADIR}"
+    CACHE PATH "Installation path for read-only architecture-independent nanobind data files" FORCE)
+set(NB_TEST ${SLXIO_EXTERN_NB_TEST})
+set(NB_TEST_STABLE_ABI ${SLXIO_EXTERN_NB_TEST_STABLE_ABI})
+set(NB_TEST_SHARED_BUILD ${SLXIO_EXTERN_NB_TEST_SHARED_BUILD})
+set(NB_TEST_CUDA ${SLXIO_EXTERN_NB_TEST_CUDA})
+set(NB_TEST_FREE_THREADED ${SLXIO_EXTERN_NB_TEST_FREE_THREADED})
+set(NB_TEST_SANITIZERS_ASAN ${SLXIO_EXTERN_NB_TEST_SANITIZERS_ASAN})
+set(NB_TEST_SANITIZERS_UBSAN ${SLXIO_EXTERN_NB_TEST_SANITIZERS_UBSAN})
+set(NB_TEST_SANITIZERS_TSAN ${SLXIO_EXTERN_NB_TEST_SANITIZERS_TSAN})
+
+add_subdirectory(src)

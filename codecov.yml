@@ -1,6 +1,6 @@
 # https://docs.codecov.com/docs/ignoring-paths
 ignore:
-  - "ThirdParty"
-  - "Testing"
+  - "extern"
+  - "tests"
   - "**/Test*.cxx"  
   - "**/*Fixture.h"

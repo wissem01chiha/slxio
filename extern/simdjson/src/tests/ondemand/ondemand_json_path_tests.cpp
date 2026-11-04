@@ -1,0 +1,638 @@
+#include "simdjson.h"
+#include "test_ondemand.h"
+#include <string>
+
+using namespace simdjson;
+
+namespace json_path_tests {
+    const padded_string TEST_JSON = R"(
+    {
+        "/~01abc": [
+        0,
+        {
+            "\\\" 0": [
+            "value0",
+            "value1"
+            ]
+        }
+        ],
+        "0": "0 ok",
+        "01": "01 ok",
+        "": "empty ok",
+        "arr": []
+    }
+    )"_padded;
+
+    const padded_string TEST_RFC_JSON = R"(
+    {
+        "foo": ["bar", "baz"],
+        "": 0,
+        "a/b": 1,
+        "c%d": 2,
+        "e^f": 3,
+        "g|h": 4,
+        "i\\j": 5,
+        "k\"l": 6,
+        " ": 7,
+        "m~n": 8
+    }
+    )"_padded;
+
+    bool run_success_test(const padded_string & json,std::string_view json_path,std::string expected) {
+        TEST_START();
+        std::cout <<":"<< json_path<<std::endl;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ondemand::value val;
+        std::string_view actual;
+        ASSERT_SUCCESS(parser.iterate(json).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(val));
+        ASSERT_SUCCESS(simdjson::to_json_string(val).get(actual));
+        ASSERT_EQUAL(actual,expected);
+        // We want to see if the value is usable besides to_json_string.
+        ASSERT_SUCCESS(parser.iterate(json).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(val));
+        ondemand::json_type type;
+        ASSERT_SUCCESS(val.type().get(type));
+        switch (type) {
+            case ondemand::json_type::array:
+               ASSERT_SUCCESS(val.get_array().error());
+               break;
+            case ondemand::json_type::object:
+               ASSERT_SUCCESS(val.get_object().error());
+               break;
+            case ondemand::json_type::number:
+               ASSERT_SUCCESS(val.get_double().error());
+               break;
+            case ondemand::json_type::string:
+               ASSERT_SUCCESS(val.get_string().error());
+               break;
+            case ondemand::json_type::boolean:
+               ASSERT_SUCCESS(val.get_bool().error());
+               break;
+            case ondemand::json_type::null:
+               ASSERT_SUCCESS(val.is_null().error());
+               break;
+            default:
+               TEST_FAIL("unexpected type");
+        }
+        TEST_SUCCEED();
+    }
+
+    bool run_failure_test(const padded_string & json,std::string_view json_path,error_code expected) {
+        TEST_START();
+        std::cout << "json_path: " << json_path << std::endl;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ASSERT_SUCCESS(parser.iterate(json).get(doc));
+        ASSERT_EQUAL(doc.at_path(json_path).error(),expected);
+        TEST_SUCCEED();
+    }
+
+    bool demo_test() {
+        TEST_START();
+        auto cars_json = R"( [
+        { "make": "Toyota", "model": "Camry",  "year": 2018, "tire_pressure": [ 40.1, 39.9, 37.7, 40.4 ] },
+        { "make": "Kia",    "model": "Soul",   "year": 2012, "tire_pressure": [ 30.1, 31.0, 28.6, 28.7 ] },
+        { "make": "Toyota", "model": "Tercel", "year": 1999, "tire_pressure": [ 29.8, 30.0, 30.2, 30.5 ] }
+        ] )"_padded;
+
+        ondemand::parser parser;
+        ondemand::document cars;
+        double x;
+        ASSERT_SUCCESS(parser.iterate(cars_json).get(cars));
+        ASSERT_SUCCESS(cars.at_path("[0].tire_pressure[1]").get(x));
+        ASSERT_EQUAL(x,39.9);
+        TEST_SUCCEED();
+    }
+
+    bool demo_relative_path() {
+        TEST_START();
+        auto cars_json = R"( [
+        { "make": "Toyota", "model": "Camry",  "year": 2018, "tire_pressure": [ 40.1, 39.9, 37.7, 40.4 ] },
+        { "make": "Kia",    "model": "Soul",   "year": 2012, "tire_pressure": [ 30.1, 31.0, 28.6, 28.7 ] },
+        { "make": "Toyota", "model": "Tercel", "year": 1999, "tire_pressure": [ 29.8, 30.0, 30.2, 30.5 ] }
+        ] )"_padded;
+
+        ondemand::parser parser;
+        ondemand::document cars;
+        std::vector<double> measured;
+        ASSERT_SUCCESS(parser.iterate(cars_json).get(cars));
+        for (auto car_element : cars) {
+            double x;
+            ASSERT_SUCCESS(car_element.at_path(".tire_pressure[1]").get(x));
+            measured.push_back(x);
+        }
+
+        std::vector<double> expected = {39.9, 31, 30};
+        if (measured != expected) { return false; }
+        TEST_SUCCEED();
+    }
+
+    // A key longer than SIMDJSON_PADDING must not be compared past the quote
+    // that terminates the key in the document.
+    bool long_key() {
+        TEST_START();
+        ondemand::parser parser;
+        ondemand::document doc;
+        ondemand::value val;
+
+        // The key "aaa" ends at offset 5, so a target that keeps matching the
+        // bytes that follow it runs into the padding and then out of the buffer.
+        auto small_json = R"({"aaa":1})"_padded;
+        std::string overrun("aaa\":1}");
+        overrun.append(SIMDJSON_PADDING, '\0');
+        ASSERT_SUCCESS(parser.iterate(small_json).get(doc));
+        ASSERT_ERROR(doc.at_path("." + overrun).get(val), NO_SUCH_FIELD);
+
+        // Matching keys longer than SIMDJSON_PADDING still resolve.
+        const std::string long_name(SIMDJSON_PADDING + 16, 'k');
+        auto long_json = padded_string(R"({")" + long_name + R"(":42})");
+        uint64_t number;
+        ASSERT_SUCCESS(parser.iterate(long_json).get(doc));
+        ASSERT_SUCCESS(doc.at_path("." + long_name).get(val));
+        ASSERT_SUCCESS(val.get_uint64().get(number));
+        ASSERT_EQUAL(number, 42);
+
+        // A target that is a prefix of the key, or an extension of it, does not.
+        ASSERT_SUCCESS(parser.iterate(long_json).get(doc));
+        // Built with append: "." + long_name.substr(1) inserts into a
+        // temporary and trips a bogus -Wrestrict warning with GCC 12.
+        ASSERT_ERROR(doc.at_path(std::string(".").append(long_name, 1)).get(val), NO_SUCH_FIELD);
+        ASSERT_SUCCESS(parser.iterate(long_json).get(doc));
+        ASSERT_ERROR(doc.at_path("." + long_name + "k").get(val), NO_SUCH_FIELD);
+
+        // An escaped quote inside a long key is part of the key, not its end.
+        const std::string escaped_name = long_name + R"(\")";
+        auto escaped_json = padded_string(R"({")" + escaped_name + R"(":7})");
+        ASSERT_SUCCESS(parser.iterate(escaped_json).get(doc));
+        ASSERT_SUCCESS(doc.at_path("." + escaped_name).get(val));
+        ASSERT_SUCCESS(val.get_uint64().get(number));
+        ASSERT_EQUAL(number, 7);
+        TEST_SUCCEED();
+    }
+
+    bool document_as_scalar() {
+        TEST_START();
+        auto number_json = R"( 1 )"_padded;
+        auto null_json = R"( null )"_padded;
+        auto string_json = R"( "a" )"_padded;
+        auto true_json = R"( true )"_padded;
+        auto false_json = R"( false )"_padded;
+        auto object_json = R"( {} )"_padded;
+        auto array_json = R"( {} )"_padded;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ondemand::value val;
+        bool is_scalar;
+        std::cout << "  checking number"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(number_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_TRUE(is_scalar);
+        ASSERT_ERROR(doc.at_path("").get(val), simdjson::SCALAR_DOCUMENT_AS_VALUE);
+        std::cout << "  checking null"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(null_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_TRUE(is_scalar);
+        ASSERT_ERROR(doc.at_path("").get(val), simdjson::SCALAR_DOCUMENT_AS_VALUE);
+        std::cout << "  checking string"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(string_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_TRUE(is_scalar);
+        ASSERT_ERROR(doc.at_path("").get(val), simdjson::SCALAR_DOCUMENT_AS_VALUE);
+        std::cout << "  checking false"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(false_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_TRUE(is_scalar);
+        ASSERT_ERROR(doc.at_path("").get(val), simdjson::SCALAR_DOCUMENT_AS_VALUE);
+        std::cout << "  checking true"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(true_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_TRUE(is_scalar);
+        ASSERT_ERROR(doc.at_path("").get(val), simdjson::SCALAR_DOCUMENT_AS_VALUE);
+        std::cout << "  checking object"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(object_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_FALSE(is_scalar);
+        ASSERT_SUCCESS(doc.at_path("").get(val));
+        std::cout << "  checking array"<< std::endl;
+        ASSERT_SUCCESS(parser.iterate(array_json).get(doc));
+        ASSERT_SUCCESS(doc.is_scalar().get(is_scalar));
+        ASSERT_FALSE(is_scalar);
+        ASSERT_SUCCESS(doc.at_path("").get(val));
+        TEST_SUCCEED();
+    }
+
+
+    bool many_json_paths() {
+        TEST_START();
+        auto cars_json = R"( [
+        { "make": "Toyota", "model": "Camry",  "year": 2018, "tire_pressure": [ 40.1, 39.9, 37.7, 40.4 ] },
+        { "make": "Kia",    "model": "Soul",   "year": 2012, "tire_pressure": [ 30.1, 31.0, 28.6, 28.7 ] },
+        { "make": "Toyota", "model": "Tercel", "year": 1999, "tire_pressure": [ 29.8, 30.0, 30.2, 30.5 ] }
+        ] )"_padded;
+
+        ondemand::parser parser;
+        ondemand::document cars;
+        std::vector<double> measured;
+        ASSERT_SUCCESS(parser.iterate(cars_json).get(cars));
+        for (int i = 0; i < 3; i++) {
+            double x;
+            std::string json_path = std::string("[") + std::to_string(i) + std::string("].tire_pressure[1]");
+            ASSERT_SUCCESS(cars.at_path(json_path).get(x));
+            measured.push_back(x);
+        }
+
+        std::vector<double> expected = {39.9, 31, 30};
+        if (measured != expected) { return false; }
+        TEST_SUCCEED();
+    }
+    bool run_broken_tests() {
+        TEST_START();
+        ondemand::parser parser;
+        ondemand::document doc;
+        ondemand::value v;
+        std::string_view val;
+
+        auto invalid_escape_key = R"( {"hello": [0,1,2,3], "te\est": "foo", "bool": true, "num":1234, "success":"yes"} )"_padded;
+        auto invalid_escape_value = R"( {"hello": [0,1,2,3], "test": "fo\eo", "bool": true, "num":1234, "success":"yes"} )"_padded;
+        auto invalid_escape_value_at_jp = R"( {"hello": [0,1,2,3], "test": "foo", "bool": true, "num":1234, "success":"y\es"} )"_padded;
+        auto unclosed_object = R"( {"test": "foo", "bool": true, "num":1234, "success":"yes" )"_padded;
+        auto missing_bracket_before = R"( {"hello": [0,1,2,3, "test": "foo", "bool": true, "num":1234, "success":"yes"} )"_padded;
+        auto missing_bracket_after = R"( {"test": "foo", "bool": true, "num":1234, "success":"yes", "hello":[0,1,2,3} )"_padded;
+
+        std::string json_path = ".success";
+        std::cout << "\t- invalid_escape_key" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(invalid_escape_key).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(val));
+        std::cout << "\t- invalid_escape_value" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(invalid_escape_value).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(val));
+        std::cout << "\t- invalid_escape_value_at_jp_nomat" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(invalid_escape_value_at_jp).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(v));
+        std::cout << "\t- invalid_escape_value_at_jp" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(invalid_escape_value_at_jp).get(doc));
+        ASSERT_ERROR(doc.at_path(json_path).get(val), simdjson::STRING_ERROR);
+        std::cout << "\t- unclosed_object" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(unclosed_object).get(doc));
+        ASSERT_ERROR(doc.at_path(json_path).get(val), simdjson::INCOMPLETE_ARRAY_OR_OBJECT);
+        std::cout << "\t- missing_bracket_before" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(missing_bracket_before).get(doc));
+        ASSERT_ERROR(doc.at_path(json_path).get(val), simdjson::TAPE_ERROR);
+        std::cout << "\t- missing_bracket_after" << std::endl;
+        ASSERT_SUCCESS(parser.iterate(missing_bracket_after).get(doc));
+        ASSERT_SUCCESS(doc.at_path(json_path).get(val));
+        TEST_SUCCEED();
+    }
+
+#ifdef SIMDJSON_EXPERIMENTAL_ALLOW_INCOMPLETE_JSON
+    bool incomplete_string_value_with_allow_incomplete_json() {
+        TEST_START();
+        ondemand::parser parser;
+        ondemand::document doc;
+        std::string_view val;
+
+        auto incomplete_string_value = R"({"key":")"_padded;
+        auto complete_string_before_incomplete_value = R"({"key":"ok","incomplete":")"_padded;
+
+        ASSERT_SUCCESS(parser.iterate_allow_incomplete_json(incomplete_string_value).get(doc));
+        ASSERT_ERROR(doc.at_path(".key").get_string().get(val), simdjson::STRING_ERROR);
+
+        ASSERT_SUCCESS(parser.iterate_allow_incomplete_json(complete_string_before_incomplete_value).get(doc));
+        ASSERT_SUCCESS(doc.at_path(".key").get_string().get(val));
+        ASSERT_EQUAL(val, "ok");
+
+        ASSERT_SUCCESS(parser.iterate_allow_incomplete_json(complete_string_before_incomplete_value).get(doc));
+        ASSERT_ERROR(doc.at_path(".incomplete").get_string().get(val), simdjson::STRING_ERROR);
+        TEST_SUCCEED();
+    }
+#endif
+
+    bool many_json_paths_object_array() {
+        TEST_START();
+        auto dogcatpotato = R"( { "dog" : [1,2,3], "cat" : [5, 6, 7], "potato" : [1234]})"_padded;
+
+        ondemand::parser parser;
+        ondemand::document doc;
+        ASSERT_SUCCESS(parser.iterate(dogcatpotato).get(doc));
+        ondemand::object obj;
+        ASSERT_SUCCESS(doc.get_object().get(obj));
+        int64_t x;
+        ASSERT_SUCCESS(obj.at_path(".dog[1]").get(x));
+        ASSERT_EQUAL(x, 2);
+        ASSERT_SUCCESS(obj.at_path(".potato[0]").get(x));
+        ASSERT_EQUAL(x, 1234);
+        TEST_SUCCEED();
+    }
+    bool many_json_paths_object() {
+        TEST_START();
+        auto cfoofoo2 = R"( { "c" :{ "foo": { "a": [ 10, 20, 30 ] }}, "d": { "foo2": { "a": [ 10, 20, 30 ] }} , "e": 120 })"_padded;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ASSERT_SUCCESS(parser.iterate(cfoofoo2).get(doc));
+        ondemand::object obj;
+        ASSERT_SUCCESS(doc.get_object().get(obj));
+        int64_t x;
+        ASSERT_SUCCESS(obj.at_path(".c.foo.a[1]").get(x));
+        ASSERT_EQUAL(x, 20);
+        ASSERT_SUCCESS(obj.at_path(".d.foo2.a.2").get(x));
+        ASSERT_EQUAL(x, 30);
+        ASSERT_SUCCESS(obj.at_path(".e").get(x));
+        ASSERT_EQUAL(x, 120);
+        TEST_SUCCEED();
+    }
+    bool many_json_paths_array() {
+        TEST_START();
+        auto cfoofoo2 = R"( [ 111, 2, 3, { "foo": { "a": [ 10, 20, 33 ] }}, { "foo2": { "a": [ 10, 20, 30 ] }}, 1001 ])"_padded;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ASSERT_SUCCESS(parser.iterate(cfoofoo2).get(doc));
+        ondemand::array arr;
+        ASSERT_SUCCESS(doc.get_array().get(arr));
+        int64_t x;
+        ASSERT_SUCCESS(arr.at_path("[3].foo.a[1]").get(x));
+        ASSERT_EQUAL(x, 20);
+        TEST_SUCCEED();
+    }
+    struct car_type {
+        std::string make;
+        std::string model;
+        uint64_t year;
+        std::vector<double> tire_pressure;
+        car_type(std::string_view _make, std::string_view _model, uint64_t _year,
+          std::vector<double>&& _tire_pressure) :
+          make{_make}, model{_model}, year(_year), tire_pressure(_tire_pressure) {}
+    };
+
+    bool json_path_invalidation() {
+        TEST_START();
+        auto cars_json = R"( [
+        { "make": "Toyota", "model": "Camry",  "year": 2018, "tire_pressure": [ 40.1, 39.9, 37.7, 40.4 ] },
+        { "make": "Kia",    "model": "Soul",   "year": 2012, "tire_pressure": [ 30.1, 31.0, 28.6, 28.7 ] },
+        { "make": "Toyota", "model": "Tercel", "year": 1999, "tire_pressure": [ 29.8, 30.0, 30.2, 30.5 ] }
+        ] )"_padded;
+
+        ondemand::parser parser;
+        ondemand::document cars;
+        std::vector<double> measured;
+        ASSERT_SUCCESS(parser.iterate(cars_json).get(cars));
+        std::vector<car_type> content;
+        for (int i = 0; i < 3; i++) {
+            ondemand::object obj;
+            std::string json_path = std::string("[") + std::to_string(i) + std::string("]");
+            // Each successive at_path call invalidates
+            // previously parsed values, strings, objects and array.
+            ASSERT_SUCCESS(cars.at_path(json_path).get(obj));
+            // We materialize the object.
+            std::string_view make;
+            ASSERT_SUCCESS(obj["make"].get(make));
+            std::string_view model;
+            ASSERT_SUCCESS(obj["model"].get(model));
+            uint64_t year;
+            ASSERT_SUCCESS(obj["year"].get(year));
+            // We materialize the array.
+            ondemand::array arr;
+            ASSERT_SUCCESS(obj["tire_pressure"].get(arr));
+            std::vector<double> values;
+            for(auto x : arr) {
+                double value_double;
+                ASSERT_SUCCESS(x.get(value_double));
+                values.push_back(value_double);
+            }
+            content.emplace_back(make, model, year, std::move(values));
+        }
+        std::string expected[] = {"Toyota", "Kia", "Toyota"};
+        int i = 0;
+        for (car_type c : content) {
+            std::cout << c.make << " " << c.model << " " << c.year << "\n";
+            ASSERT_EQUAL(expected[i++], c.make);
+        }
+        TEST_SUCCEED();
+    }
+
+    bool many_json_paths_with_prefix() {
+        TEST_START();
+        // object
+        {
+            auto cfoofoo2 = R"( { "c" :{ "foo": { "a": [ 10, 20, 30 ] }}, "d": { "foo2": { "a": [ 10, 20, 30 ] }} , "e": 120 })"_padded;
+            ondemand::parser parser;
+            ondemand::document doc;
+            ASSERT_SUCCESS(parser.iterate(cfoofoo2).get(doc));
+            ondemand::object obj;
+            ASSERT_SUCCESS(doc.get_object().get(obj));
+            int64_t x;
+            ASSERT_SUCCESS(obj.at_path("$.c.foo.a[1]").get(x));
+            ASSERT_EQUAL(x, 20);
+            ASSERT_SUCCESS(obj.at_path("$.d.foo2.a.2").get(x));
+            ASSERT_EQUAL(x, 30);
+            ASSERT_SUCCESS(obj.at_path("$.e").get(x));
+            ASSERT_EQUAL(x, 120);
+        }
+        // array
+        {
+            auto cfoofoo2 = R"( [ 111, 2, 3, { "foo": { "a": [ 10, 20, 33 ] }}, { "foo2": { "a": [ 10, 20, 30 ] }}, 1001 ])"_padded;
+            ondemand::parser parser;
+            ondemand::document doc;
+            ASSERT_SUCCESS(parser.iterate(cfoofoo2).get(doc));
+            ondemand::array arr;
+            ASSERT_SUCCESS(doc.get_array().get(arr));
+            int64_t x;
+            ASSERT_SUCCESS(arr.at_path("$[3].foo.a[1]").get(x));
+            ASSERT_EQUAL(x, 20);
+        }
+        // onject array
+        {
+            auto dogcatpotato = R"( { "dog" : [1,2,3], "cat" : [5, 6, 7], "potato" : [1234]})"_padded;
+
+            ondemand::parser parser;
+            ondemand::document doc;
+            ASSERT_SUCCESS(parser.iterate(dogcatpotato).get(doc));
+            ondemand::object obj;
+            ASSERT_SUCCESS(doc.get_object().get(obj));
+            int64_t x;
+            ASSERT_SUCCESS(obj.at_path("$.dog[1]").get(x));
+            ASSERT_EQUAL(x, 2);
+            ASSERT_SUCCESS(obj.at_path("$.potato[0]").get(x));
+            ASSERT_EQUAL(x, 1234);
+        }
+        TEST_SUCCEED();
+    }
+
+#if SIMDJSON_EXCEPTIONS
+    bool json_path_invalidation_exceptions() {
+        TEST_START();
+        auto cars_json = R"( [
+        { "make": "Toyota", "model": "Camry",  "year": 2018, "tire_pressure": [ 40.1, 39.9, 37.7, 40.4 ] },
+        { "make": "Kia",    "model": "Soul",   "year": 2012, "tire_pressure": [ 30.1, 31.0, 28.6, 28.7 ] },
+        { "make": "Toyota", "model": "Tercel", "year": 1999, "tire_pressure": [ 29.8, 30.0, 30.2, 30.5 ] }
+        ] )"_padded;
+
+        ondemand::parser parser;
+        std::vector<double> measured;
+        ondemand::document cars = parser.iterate(cars_json);
+        std::vector<car_type> content;
+        for (int i = 0; i < 3; i++) {
+            std::string json_path = std::string("[") + std::to_string(i) + std::string("]");
+            // Each successive at_path call invalidates
+            // previously parsed values, strings, objects and array.
+            ondemand::object obj(cars.at_path(json_path).get_object());
+            // We materialize the object.
+            std::string_view make = obj["make"];
+            std::string_view model = obj["model"];
+            uint64_t year(obj["year"]);
+            // We materialize the array.
+            ondemand::array arr(obj["tire_pressure"].get_array());
+            std::vector<double> values;
+            for(auto x : arr) {
+                double value_double(x.get_double());
+                values.push_back(value_double);
+            }
+            content.emplace_back(make, model, year, std::move(values));
+        }
+        std::string expected[] = {"Toyota", "Kia", "Toyota"};
+        for (car_type c : content) {
+            std::cout << c.make << " " << c.model << " " << c.year << "\n";
+        }
+        TEST_SUCCEED();
+    }
+#endif
+
+    // A structural error abandons the document: is_alive() becomes false and
+    // the iterator lets go of the parser. at_path() and
+    // for_each_at_path_with_wildcard() rewind the document on each call and used
+    // to read the parser through the abandoned iterator. They must report the
+    // error instead.
+    bool at_path_after_fatal_error() {
+        TEST_START();
+        auto json = R"({"a":1 "b":2})"_padded;
+        ondemand::parser parser;
+        ondemand::document doc;
+        ondemand::value val;
+        int64_t x;
+        ASSERT_SUCCESS(parser.iterate(json).get(doc));
+        ASSERT_SUCCESS(doc.at_path("$.a").get_int64().get(x));
+        ASSERT_EQUAL(x, 1);
+        ASSERT_ERROR(doc.at_path("$.b").get(val), TAPE_ERROR);
+        ASSERT_FALSE(doc.is_alive());
+        ASSERT_ERROR(doc.at_path("$.a").get(val), TAPE_ERROR);
+        size_t calls{0};
+        ASSERT_ERROR(doc.for_each_at_path_with_wildcard("$.*", [&](ondemand::value) { calls++; }), TAPE_ERROR);
+        ASSERT_EQUAL(calls, 0);
+        auto doc_result = parser.iterate(json);
+        ASSERT_ERROR(doc_result.at_path("$.b").get(val), TAPE_ERROR);
+        ASSERT_ERROR(doc_result.at_path("$.a").get(val), TAPE_ERROR);
+        TEST_SUCCEED();
+    }
+
+    bool run() {
+        return
+                at_path_after_fatal_error() &&
+#if SIMDJSON_EXCEPTIONS
+                json_path_invalidation_exceptions() &&
+#endif
+                many_json_paths_array() &&
+                many_json_paths_object() &&
+                many_json_paths_object_array() &&
+                many_json_paths_with_prefix() &&
+                run_broken_tests() &&
+#ifdef SIMDJSON_EXPERIMENTAL_ALLOW_INCOMPLETE_JSON
+                incomplete_string_value_with_allow_incomplete_json() &&
+#endif
+                json_path_invalidation() &&
+                demo_test() &&
+                demo_relative_path() &&
+                run_success_test(TEST_RFC_JSON,".foo",R"(["bar", "baz"])") &&
+                run_success_test(TEST_RFC_JSON,".foo[0]",R"("bar")") &&
+                run_success_test(TEST_RFC_JSON,".",R"(0)") &&
+                run_success_test(TEST_RFC_JSON,".a/b",R"(1)") &&
+                run_success_test(TEST_RFC_JSON,".c%d",R"(2)") &&
+                run_success_test(TEST_RFC_JSON,".e^f",R"(3)") &&
+                run_success_test(TEST_RFC_JSON,".g|h",R"(4)") &&
+                run_success_test(TEST_RFC_JSON,R"(.i\\j)",R"(5)") &&
+                run_success_test(TEST_RFC_JSON,R"(.k\"l)",R"(6)") &&
+                run_success_test(TEST_RFC_JSON,". ",R"(7)") &&
+                run_success_test(TEST_RFC_JSON,".m~n",R"(8)") &&
+                run_success_test(TEST_RFC_JSON,"",R"({
+        "foo": ["bar", "baz"],
+        "": 0,
+        "a/b": 1,
+        "c%d": 2,
+        "e^f": 3,
+        "g|h": 4,
+        "i\\j": 5,
+        "k\"l": 6,
+        " ": 7,
+        "m~n": 8
+    })") &&
+                run_success_test(TEST_JSON, "", R"({
+        "/~01abc": [
+        0,
+        {
+            "\\\" 0": [
+            "value0",
+            "value1"
+            ]
+        }
+        ],
+        "0": "0 ok",
+        "01": "01 ok",
+        "": "empty ok",
+        "arr": []
+    })") &&
+                run_success_test(TEST_JSON, R"(./~01abc)", R"([
+        0,
+        {
+            "\\\" 0": [
+            "value0",
+            "value1"
+            ]
+        }
+        ])") &&
+                run_success_test(TEST_JSON, R"(./~01abc[1])", R"({
+            "\\\" 0": [
+            "value0",
+            "value1"
+            ]
+        })") &&
+                run_success_test(TEST_JSON, R"(./~01abc[1].\\\" 0)", R"([
+            "value0",
+            "value1"
+            ])") &&
+                run_success_test(TEST_JSON, R"(./~01abc[1].\\\" 0[0])", "\"value0\"") &&
+                run_success_test(TEST_JSON, R"(./~01abc[1].\\\" 0[1])", "\"value1\"") &&
+                run_success_test(TEST_JSON, ".arr", R"([])") &&
+                run_success_test(TEST_JSON, ".0", "\"0 ok\"") &&
+                run_success_test(TEST_JSON, ".01", "\"01 ok\"") &&
+                run_success_test(TEST_JSON, "", R"({
+        "/~01abc": [
+        0,
+        {
+            "\\\" 0": [
+            "value0",
+            "value1"
+            ]
+        }
+        ],
+        "0": "0 ok",
+        "01": "01 ok",
+        "": "empty ok",
+        "arr": []
+    })") &&
+                run_failure_test(TEST_JSON, R"(./~01abc[1].\\\" 0[2])", INDEX_OUT_OF_BOUNDS) &&
+                run_failure_test(TEST_JSON, ".arr[0]", INDEX_OUT_OF_BOUNDS) &&
+                run_failure_test(TEST_JSON, "/~01abc", INVALID_JSON_POINTER) &&
+                run_failure_test(TEST_JSON, ".~1abc", NO_SUCH_FIELD) &&
+                run_failure_test(TEST_JSON, "./~01abc.01", INVALID_JSON_POINTER) &&
+                run_failure_test(TEST_JSON, "./~01abc.", INVALID_JSON_POINTER) &&
+                run_failure_test(TEST_JSON, "./~01abc.-", INDEX_OUT_OF_BOUNDS) &&
+                many_json_paths() &&
+                document_as_scalar() &&
+                long_key() &&
+                true;
+    }
+}   // json_path_tests
+
+int main(int argc, char *argv[]) {
+  return test_main(argc, argv, json_path_tests::run);
+}

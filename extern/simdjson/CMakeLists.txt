@@ -1,0 +1,33 @@
+# Copyright 2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+set(SIMDJSON_BUILD_STATIC_LIB ${SLXIO_EXTERN_SIMDJSON_BUILD_STATIC_LIB})
+set(SIMDJSON_ENABLE_THREADS ${SLXIO_EXTERN_SIMDJSON_ENABLE_THREADS})
+set(SIMDJSON_DISABLE_DEPRECATED_API ${SLXIO_EXTERN_SIMDJSON_DISABLE_DEPRECATED_API})
+set(SIMDJSON_DEVELOPMENT_CHECKS ${SLXIO_EXTERN_SIMDJSON_DEVELOPMENT_CHECKS})
+set(SIMDJSON_ENABLE_MEMORY_FILE_MAPPING_ON_WINDOWS
+    ${SLXIO_EXTERN_SIMDJSON_ENABLE_MEMORY_FILE_MAPPING_ON_WINDOWS})
+set(SIMDJSON_MINUS_ZERO_AS_FLOAT ${SLXIO_EXTERN_SIMDJSON_MINUS_ZERO_AS_FLOAT})
+set(SIMDJSON_ENABLE_NAN_INF ${SLXIO_EXTERN_SIMDJSON_ENABLE_NAN_INF})
+set(SIMDJSON_EXCEPTIONS ${SLXIO_EXTERN_SIMDJSON_EXCEPTIONS})
+set(SIMDJSON_STATIC_REFLECTION_MODE "${SLXIO_EXTERN_SIMDJSON_STATIC_REFLECTION_MODE}"
+    CACHE STRING "C++26 static reflection: AUTO, ON or OFF" FORCE)
+set(SIMDJSON_INSTALL ${SLXIO_EXTERN_SIMDJSON_INSTALL})
+set(SIMDJSON_SINGLEHEADER ${SLXIO_EXTERN_SIMDJSON_SINGLEHEADER})
+set(SIMDJSON_INSTALL_CMAKEDIR "${SLXIO_EXTERN_SIMDJSON_INSTALL_CMAKEDIR}"
+    CACHE STRING "CMake package config location relative to the install prefix" FORCE)
+set(BUILD_SHARED_LIBS ${SLXIO_EXTERN_BUILD_SHARED_LIBS})
+set(SIMDJSON_DEVELOPER_MODE OFF)
+
+add_subdirectory(src)

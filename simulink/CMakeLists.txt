@@ -1,0 +1,7 @@
+add_subdirectory(configuration)
+add_subdirectory(layout)
+add_subdirectory(annotation)
+add_subdirectory(misc)
+add_subdirectory(data)
+add_subdirectory(core)
+add_subdirectory(library)

@@ -1,3 +1,0 @@
-set(SPDLOG_BUILD_TESTS ${SLXIO_BUILD_THIRDPARTY_TESTS})
-
-add_subdirectory(src)

@@ -1,0 +1,361 @@
+#ifndef SIMDJSON_SERIALIZATION_H
+#define SIMDJSON_SERIALIZATION_H
+
+#include "simdjson/dom/base.h"
+#include "simdjson/dom/element.h"
+#include "simdjson/dom/object.h"
+
+#include <cstring>
+
+namespace simdjson {
+
+/**
+ * The string_builder template and mini_formatter class
+ * are not part of  our public API and are subject to change
+ * at any time!
+ */
+namespace internal {
+
+template <class formatter> class base_formatter {
+public:
+  /** Add a comma **/
+  simdjson_inline void comma();
+  /** Start an array, prints [ **/
+  simdjson_inline void start_array();
+  /** End an array, prints ] **/
+  simdjson_inline void end_array();
+  /** Start an array, prints { **/
+  simdjson_inline void start_object();
+  /** Start an array, prints } **/
+  simdjson_inline void end_object();
+  /** Prints a true **/
+  simdjson_inline void true_atom();
+  /** Prints a false **/
+  simdjson_inline void false_atom();
+  /** Prints a null **/
+  simdjson_inline void null_atom();
+  /** Prints a number **/
+  simdjson_inline void number(int64_t x);
+  /** Prints a number **/
+  simdjson_inline void number(uint64_t x);
+  /** Prints a number **/
+  simdjson_inline void number(double x);
+  /** Prints a key (string + colon) **/
+  simdjson_inline void key(std::string_view unescaped);
+  /** Prints a string. The string is escaped as needed. **/
+  simdjson_inline void string(std::string_view unescaped);
+  /** Clears out the content. **/
+  simdjson_inline void clear();
+  /**
+   * Get access to the buffer, it is owned by the instance, but
+   * the user can make a copy.
+   **/
+  simdjson_inline std::string_view str() const;
+
+  /** Prints one character **/
+  simdjson_inline void one_char(char c);
+
+  /** Prints characters in [begin, end) verbatim. **/
+  simdjson_inline void chars(const char *begin, const char *end);
+
+  simdjson_inline void call_print_newline() {
+    static_cast<formatter *>(this)->print_newline();
+  }
+
+  simdjson_inline void call_print_indents(size_t depth) {
+    static_cast<formatter *>(this)->print_indents(depth);
+  }
+
+  simdjson_inline void call_print_space() {
+    static_cast<formatter *>(this)->print_space();
+  }
+
+protected:
+  // implementation details (subject to change)
+  /** Backing buffer **/
+  struct vector_with_small_buffer {
+    vector_with_small_buffer() {}
+    ~vector_with_small_buffer() { free_buffer(); }
+
+    vector_with_small_buffer(const vector_with_small_buffer &) = delete;
+    vector_with_small_buffer &
+    operator=(const vector_with_small_buffer &) = delete;
+
+    void clear() {
+      size = 0;
+      capacity = StaticCapacity;
+      free_buffer();
+      buffer = array;
+    }
+
+    simdjson_inline void push_back(char c) {
+      if (capacity < size + 1)
+        grow(capacity * 2);
+      buffer[size++] = c;
+    }
+
+    /** Drops the space characters at the end of the buffer, if any. **/
+    simdjson_inline void trim_trailing_spaces() {
+      while (size > 0 && buffer[size - 1] == ' ')
+        size--;
+    }
+
+    simdjson_inline void append(const char *begin, const char *end) {
+      const size_t new_size = size + (end - begin);
+      if (capacity < new_size)
+        // std::max(new_size, capacity * 2); is broken in tests on Windows
+        grow(new_size < capacity * 2 ? capacity * 2 : new_size);
+      std::copy(begin, end, buffer + size);
+      size = new_size;
+    }
+
+    simdjson_inline void append_n(char c, size_t count) {
+      const size_t new_size = size + count;
+      if (capacity < new_size) {
+        grow(new_size < capacity * 2 ? capacity * 2 : new_size);
+      }
+      std::memset(buffer + size, c, count);
+      size = new_size;
+    }
+
+    /** Makes room for n more bytes and returns where they go. **/
+    simdjson_inline char *reserve(size_t n) {
+      if (capacity - size < n) {
+        grow(size + n < capacity * 2 ? capacity * 2 : size + n);
+      }
+      return buffer + size;
+    }
+
+    /** Ends the content at end, which reserve() returned plus at most n. **/
+    simdjson_inline void set_end(const char *end) { size = size_t(end - buffer); }
+
+    std::string_view str() const { return std::string_view(buffer, size); }
+
+  private:
+    void free_buffer() {
+      if (buffer != array)
+        delete[] buffer;
+    }
+    void grow(size_t new_capacity) {
+      auto new_buffer = new char[new_capacity];
+      std::copy(buffer, buffer + size, new_buffer);
+      free_buffer();
+      buffer = new_buffer;
+      capacity = new_capacity;
+    }
+
+    static const size_t StaticCapacity = 64;
+    char array[StaticCapacity];
+    char *buffer = array;
+    size_t size = 0;
+    size_t capacity = StaticCapacity;
+  } buffer{};
+};
+
+/**
+ * @private This is the class that we expect to use with the string_builder
+ * template. It tries to produce a compact version of the JSON element
+ * as quickly as possible.
+ */
+class mini_formatter : public base_formatter<mini_formatter> {
+public:
+  /** User-provided so that value-initialization does not zero the buffer. **/
+  mini_formatter() {}
+  simdjson_inline void print_newline();
+
+  simdjson_inline void print_indents(size_t depth);
+
+  simdjson_inline void print_space();
+};
+
+class pretty_formatter : public base_formatter<pretty_formatter> {
+public:
+  explicit pretty_formatter(int step = 4) : indent_step(step) {}
+
+  simdjson_inline void print_newline();
+
+  simdjson_inline void print_indents(size_t depth);
+
+  simdjson_inline void print_space();
+
+protected:
+  int indent_step = 4;
+};
+
+/**
+ * @private The string_builder template allows us to construct
+ * a string from a document element. It is parametrized
+ * by a "formatter" which handles the details. Thus
+ * the string_builder template could support both minification
+ * and prettification, and various other tradeoffs.
+ *
+ * This is not to be confused with the simdjson::builder::string_builder
+ * which is a different class.
+ */
+template <class formatter = mini_formatter> class string_builder {
+public:
+  /** Construct an initially empty builder, would print the empty string **/
+  string_builder() = default;
+  /** Construct a builder whose formatter uses the given indentation step **/
+  explicit string_builder(int indent_step) : format(indent_step) {}
+
+  /** Append an element to the builder (to be printed) **/
+  inline void append(simdjson::dom::element value);
+  /** Append an array to the builder (to be printed) **/
+  inline void append(simdjson::dom::array value);
+  /** Append an object to the builder (to be printed) **/
+  inline void append(simdjson::dom::object value);
+  /** Reset the builder (so that it would print the empty string) **/
+  simdjson_inline void clear();
+  /**
+   * Get access to the string. The string_view is owned by the builder
+   * and it is invalid to use it after the string_builder has been
+   * destroyed.
+   * However you can make a copy of the string_view on memory that you
+   * own.
+   */
+  simdjson_inline std::string_view str() const;
+  /** Append a key_value_pair to the builder (to be printed) **/
+  simdjson_inline void append(simdjson::dom::key_value_pair value);
+
+private:
+  /**
+   * Append an element nested base_depth levels deep: the caller has already
+   * written the indentation (and key) before it.
+   **/
+  inline void append(simdjson::dom::element value, size_t base_depth);
+  formatter format{};
+};
+
+} // namespace internal
+
+namespace dom {
+
+/**
+ * Print JSON to an output stream.
+ *
+ * @param out The output stream.
+ * @param value The element.
+ * @throw if there is an error with the underlying output stream. simdjson
+ * itself will not throw.
+ */
+inline std::ostream &operator<<(std::ostream &out,
+                                simdjson::dom::element value);
+#if SIMDJSON_EXCEPTIONS
+inline std::ostream &
+operator<<(std::ostream &out,
+           simdjson::simdjson_result<simdjson::dom::element> x);
+#endif
+/**
+ * Print JSON to an output stream.
+ *
+ * @param out The output stream.
+ * @param value The array.
+ * @throw if there is an error with the underlying output stream. simdjson
+ * itself will not throw.
+ */
+inline std::ostream &operator<<(std::ostream &out, simdjson::dom::array value);
+#if SIMDJSON_EXCEPTIONS
+inline std::ostream &
+operator<<(std::ostream &out,
+           simdjson::simdjson_result<simdjson::dom::array> x);
+#endif
+/**
+ * Print JSON to an output stream.
+ *
+ * @param out The output stream.
+ * @param value The object.
+ * @throw if there is an error with the underlying output stream. simdjson
+ * itself will not throw.
+ */
+inline std::ostream &operator<<(std::ostream &out, simdjson::dom::object value);
+#if SIMDJSON_EXCEPTIONS
+inline std::ostream &
+operator<<(std::ostream &out,
+           simdjson::simdjson_result<simdjson::dom::object> x);
+#endif
+} // namespace dom
+
+/**
+ * Converts JSON to a string.
+ *
+ *   dom::parser parser;
+ *   element doc = parser.parse("   [ 1 , 2 , 3 ] "_padded);
+ *   cout << to_string(doc) << endl; // prints [1,2,3]
+ *
+ */
+template <class T> std::string to_string(T x) {
+  // in C++, to_string is standard:
+  // http://www.cplusplus.com/reference/string/to_string/ Currently minify and
+  // to_string are identical but in the future, they may differ.
+  simdjson::internal::string_builder<> sb;
+  sb.append(x);
+  std::string_view answer = sb.str();
+  return std::string(answer.data(), answer.size());
+}
+#if SIMDJSON_EXCEPTIONS
+template <class T> std::string to_string(simdjson_result<T> x) {
+  if (x.error()) {
+    throw simdjson_error(x.error());
+  }
+  return to_string(x.value());
+}
+#endif
+
+/**
+ * Minifies a JSON element or document, printing the smallest possible valid
+ * JSON.
+ *
+ *   dom::parser parser;
+ *   element doc = parser.parse("   [ 1 , 2 , 3 ] "_padded);
+ *   cout << minify(doc) << endl; // prints [1,2,3]
+ *
+ */
+template <class T> std::string minify(T x) { return to_string(x); }
+
+#if SIMDJSON_EXCEPTIONS
+template <class T> std::string minify(simdjson_result<T> x) {
+  if (x.error()) {
+    throw simdjson_error(x.error());
+  }
+  return to_string(x.value());
+}
+#endif
+
+/**
+ * Prettifies a JSON element or document, printing the valid JSON with
+ * indentation.
+ *
+ *   dom::parser parser;
+ *   element doc = parser.parse("   [ 1 , 2 , 3 ] "_padded);
+ *
+ *   // Prints:
+ *   // {
+ *   //     [
+ *   //         1,
+ *   //         2,
+ *   //         3
+ *   //     ]
+ *   // }
+ *   cout << prettify(doc) << endl;
+ *
+ */
+template <class T> std::string prettify(T x, int indent_step = 4) {
+  simdjson::internal::string_builder<simdjson::internal::pretty_formatter> sb(indent_step);
+  sb.append(x);
+  std::string_view answer = sb.str();
+  return std::string(answer.data(), answer.size());
+}
+
+#if SIMDJSON_EXCEPTIONS
+template <class T> std::string prettify(simdjson_result<T> x, int indent_step = 4) {
+  if (x.error()) {
+    throw simdjson_error(x.error());
+  }
+  return prettify(x.value(), indent_step);
+}
+#endif
+
+} // namespace simdjson
+
+#endif

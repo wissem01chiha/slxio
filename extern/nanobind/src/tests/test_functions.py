@@ -1,0 +1,1054 @@
+import test_functions_ext as t
+import pytest
+import enum
+import sys
+import re
+
+
+# Reference counting behavior changed on 3.14a7+
+py_3_14a7_or_newer = sys.version_info >= (3, 14, 0, 'alpha', 7)
+
+def fail_fn():  # used in test_30
+    raise RuntimeError("Foo")
+
+
+def test01_capture():
+    # Functions with and without capture object of different sizes
+    assert t.test_01() is None
+    assert t.test_02(5, 3) == 2
+    assert t.test_03(5, 3) == 44
+    assert t.test_04() == 60
+    assert t.test_simple(0, 1, 2, 3, 4, 5, 6, 7) == 14
+
+
+def test02_default_args():
+    # Default arguments
+    assert t.test_02() == 7
+    assert t.test_02(7) == 6
+
+
+def test03_kwargs():
+    # Basic use of keyword arguments
+    assert t.test_02(3, 5) == -2
+    assert t.test_02(3, down=5) == -2
+    assert t.test_02(down=5, up=3) == -2
+
+    # Make sure non-interned keyword names work also
+    i_cant_believe_its_not_down = "".join("down")
+    assert i_cant_believe_its_not_down is not "down"
+    assert t.test_02(**{i_cant_believe_its_not_down: 5, "up": 3}) == -2
+    assert t.test_02(**{i_cant_believe_its_not_down: 5}) == 3
+    with pytest.raises(TypeError):
+        t.test_02(unexpected=27)
+    with pytest.raises(TypeError):
+        t.test_02(**{i_cant_believe_its_not_down: None})
+
+
+def test04_overloads():
+    assert t.test_05(0) == 1
+    assert t.test_05(0.0) == 2
+
+    # Foreign scalar types: ``__index__`` selects the integer overload,
+    # while a type that only implements ``__float__``/``__int__`` must
+    # reach the floating point overload instead of being truncated
+    class FloatLike:
+        def __float__(self): return 1.5
+        def __int__(self): return 1
+
+    class IntLike:
+        def __index__(self): return 1
+
+    assert t.test_05(FloatLike()) == 2
+    assert t.test_05(IntLike()) == 1
+
+    # Strings must not implicitly convert to an integer argument
+    with pytest.raises(TypeError):
+        t.identity_long("5")
+
+    # Subclasses of 'int' still convert
+    class IntEnum(enum.IntEnum):
+        A = 5
+
+    assert t.identity_long(True) == 1
+    assert t.identity_long(IntEnum.A) == 5
+
+
+def test05_signature():
+    assert t.test_01.__doc__ == "test_01() -> None"
+    assert t.test_02.__doc__ == "test_02(up: int = 8, down: int = 1) -> int"
+    assert t.test_05.__doc__ == (
+        "test_05(arg: int, /) -> int\n"
+        "test_05(arg: float, /) -> int\n"
+        "\n"
+        "Overloaded function.\n"
+        "\n"
+        "1. ``test_05(arg: int, /) -> int``\n"
+        "\n"
+        "doc_1\n"
+        "\n"
+        "2. ``test_05(arg: float, /) -> int``\n"
+        "\n"
+        "doc_2"
+    )
+
+    assert t.test_05b.__doc__ == (
+        "test_05b(arg: int, /) -> int\n"
+        "test_05b(arg: float, /) -> int\n"
+        "\n"
+        "doc_1"
+    )
+
+    assert t.test_05c.__doc__ == (
+        "test_05c(arg: int, /) -> int\n"
+        "test_05c(arg: float, /) -> int\n"
+        "\n"
+        "Overloaded function.\n"
+        "\n"
+        "1. ``test_05c(arg: int, /) -> int``\n"
+        "\n"
+        "doc_1\n"
+        "\n"
+        "2. ``test_05c(arg: float, /) -> int``\n"
+    )
+
+    assert t.test_07.__doc__ == (
+        "test_07(arg0: int, arg1: int, /, *args, **kwargs) -> tuple[int, int]\n"
+        "test_07(a: int, b: int, *myargs, **mykwargs) -> tuple[int, int]"
+    )
+
+
+def test06_signature_error():
+    with pytest.raises(TypeError) as excinfo:
+        t.test_05("x", y=4)
+    assert str(excinfo.value) == (
+        "test_05(): incompatible function arguments. The "
+        "following argument types are supported:\n"
+        "    1. test_05(arg: int, /) -> int\n"
+        "    2. test_05(arg: float, /) -> int\n\n"
+        "Invoked with types: str, kwargs = { y: int }"
+    )
+
+
+def test06_signature_error_unencodable_kwarg():
+    # A keyword name that cannot be encoded to UTF-8 (lone surrogate) must not
+    # crash the error message formatter; it is rendered as a placeholder.
+    with pytest.raises(TypeError) as excinfo:
+        t.test_05("x", **{"\udc80": 4})
+    assert str(excinfo.value) == (
+        "test_05(): incompatible function arguments. The "
+        "following argument types are supported:\n"
+        "    1. test_05(arg: int, /) -> int\n"
+        "    2. test_05(arg: float, /) -> int\n\n"
+        "Invoked with types: str, kwargs = { ?: int }"
+    )
+
+
+def test07_raises():
+    with pytest.raises(RuntimeError) as excinfo:
+        t.test_06()
+    assert str(excinfo.value) == "oops!"
+
+
+def test08_args_kwargs():
+    assert t.test_07(1, 2) == (0, 0)
+    assert t.test_07(a=1, b=2) == (0, 0)
+    assert t.test_07(a=1, b=2, c=3) == (0, 1)
+    assert t.test_07(1, 2, 3, c=4) == (1, 1)
+    assert t.test_07(1, 2, 3, 4, c=5, d=5) == (2, 2)
+
+
+def test09_maketuple():
+    assert t.test_tuple() == ("Hello", 123)
+    with pytest.raises(RuntimeError) as excinfo:
+        assert t.test_bad_tuple()
+    value = str(excinfo.value)
+    assert value == "std::bad_cast" or value == "bad cast"
+
+
+def test09_builder():
+    assert t.test_tuple_builder([1, "a", None]) == (1, "a", None)
+    assert t.test_tuple_builder([]) == ()
+    assert t.test_list_builder((1, "a", None)) == [1, "a", None]
+    assert t.test_list_builder(()) == []
+
+    if t.test_builder_checks():
+        # Precise diagnostics exist in debug builds of the extension only
+        with pytest.raises(RuntimeError, match="not completely filled"):
+            t.test_builder_incomplete()
+        with pytest.raises(RuntimeError, match="not completely filled"):
+            t.test_builder_put_fail()
+        with pytest.raises(RuntimeError, match="already committed"):
+            t.test_builder_reuse()
+    else:
+        with pytest.raises(RuntimeError, match="bad.cast"):
+            t.test_builder_incomplete()
+        with pytest.raises(RuntimeError, match="bad.cast"):
+            t.test_builder_put_fail()
+
+    # An abandoned builder must release the stored references
+    o = object()
+    if hasattr(sys, "getrefcount"):
+        refs_before = sys.getrefcount(o)
+    with pytest.raises(RuntimeError, match="abandoned"):
+        t.test_builder_abandon(o)
+    if hasattr(sys, "getrefcount"):
+        assert sys.getrefcount(o) == refs_before
+
+
+def test10_cpp_call_simple():
+    result = []
+
+    def my_callable(a, b):
+        result.append((a, b))
+
+    t.test_call_2(my_callable)
+    assert result == [(1, 2)]
+
+    with pytest.raises(TypeError) as excinfo:
+        t.test_call_1(my_callable)
+    assert "my_callable() missing 1 required positional argument: 'b'" in str(
+        excinfo.value
+    )
+    assert result == [(1, 2)]
+
+
+def test11_call_complex():
+    result = []
+
+    def my_callable(*args, **kwargs):
+        result.append((args, kwargs))
+
+    t.test_call_extra(my_callable)
+    assert result == [((1, 2), {"extra": 5})]
+
+    result.clear()
+    t.test_call_extra(my_callable, 5, 6, hello="world")
+    assert result == [((1, 2, 5, 6), {"extra": 5, "hello": "world"})]
+
+
+def test11b_call_expansion():
+    import types
+
+    def f(*args, **kwargs):
+        return args, kwargs
+
+    # '*' accepts any iterable, '**' any mapping (as in Python)
+    assert t.test_call_star(f, [1, 2]) == ((1, 2), {})
+    assert t.test_call_star(f, (i for i in range(3))) == ((0, 1, 2), {})
+    assert t.test_call_star(f, {"a": 1}) == (("a",), {})
+    assert t.test_call_star(f, "ab") == (("a", "b"), {})
+    with pytest.raises(TypeError, match="not iterable"):
+        t.test_call_star(f, 1)
+
+    assert t.test_call_dstar(f, {"a": 1}) == ((), {"a": 1})
+    assert t.test_call_dstar(f, types.MappingProxyType({"a": 1})) == ((), {"a": 1})
+    with pytest.raises(TypeError, match="must be a mapping"):
+        t.test_call_dstar(f, 1)
+    with pytest.raises(TypeError, match="keywords must be strings"):
+        t.test_call_dstar(f, {1: 2})
+
+    # A sequence that reports different lengths on each query
+    class Growing:
+        def __init__(self):
+            self.n = 1
+
+        def __len__(self):
+            n, self.n = self.n, 2048
+            return n
+
+        def __getitem__(self, i):
+            if i >= 2048:
+                raise IndexError
+            return i
+
+    args, _ = t.test_call_star(f, Growing())
+    assert args == tuple(range(2048))
+
+    # A '*' operand whose iteration mutates the '**' operand
+    d = {"a": 1}
+
+    class Mutator:
+        def __iter__(self):
+            d["b"] = 2
+            return iter((9,))
+
+    assert t.test_call_star_dstar(f, Mutator(), d) == ((9,), {"a": 1, "b": 2})
+
+    assert t.test_call_kwarg_lvalue(f) == (((), {"x": 42}), ((), {"x": 42}))
+
+    class C:
+        def meth(self, *args, **kwargs):
+            return args, kwargs
+
+    assert t.test_call_method_complex(C(), [2, 3], {"z": 4}) == \
+        ((1, 2, 3), {"k": 2, "z": 4})
+
+    for fn in (t.test_call_null_base, lambda: t.test_call_null_arg(f),
+               lambda: t.test_call_null_kwarg(f)):
+        with pytest.raises(RuntimeError, match="bad.cast"):
+            fn()
+
+
+def test11b2_vectorcall_raw():
+    def f(*args, **kwargs):
+        return args, kwargs
+
+    class C:
+        def meth(self, *args, **kwargs):
+            return args, kwargs
+
+    assert t.test_vectorcall_raw(f, 1, 2) == (((1, 2), {}), ((1,), {"x": 2}), 2)
+
+    # The second element reports that a failed method call returned null with
+    # the error set instead of raising
+    assert t.test_vectorcall_raw_method(C(), 1) == (((1,), {}), True)
+
+
+def test11c_attr_dynamic_names():
+    class C:
+        field_0, field_1, field_2 = 10, 11, 12
+        def collect(self, **kwargs):
+            return kwargs
+
+    assert t.test_attr_dynamic(C()) == \
+        [10, 11, 12, {"kw_0": 0}, {"kw_1": 1}, {"kw_2": 2}]
+
+
+def test12_list_tuple_manipulation():
+    li = [1, 5, 6, 7]
+    t.test_list(li)
+    assert li == [1, 5, 123, 7, 19]
+
+    tu = (1, 5, 6, 7)
+    assert t.test_tuple(tu) == 19
+    assert tu == (1, 5, 6, 7)
+
+
+def test13_call_guard():
+    assert t.call_guard_value() == 0
+    assert t.test_call_guard() == 1
+    assert t.call_guard_value() == 2
+    assert t.test_call_guard_wrapper_rvalue_ref(1) == 1
+    assert not t.test_release_gil()
+    assert t.test_acquire_gil_nested()
+    assert t.test_reacquire_gil()
+    assert t.test_acquire_gil_foreign()
+
+
+def test14_print(capsys):
+    t.test_print()
+    captured = capsys.readouterr()
+    assert captured.out == "Test 1\nTest 2\n"
+
+
+def test15_iter():
+    assert t.test_iter(()) == []
+    assert t.test_iter((1,)) == [1]
+    assert t.test_iter((1, 2)) == [1, 2]
+    assert t.test_iter((1, 2, 3)) == [1, 2, 3]
+
+
+def test16_iter_tuple():
+    assert t.test_iter_tuple(()) == []
+    assert t.test_iter_tuple((1,)) == [1]
+    assert t.test_iter_tuple((1, 2)) == [1, 2]
+    assert t.test_iter_tuple((1, 2, 3)) == [1, 2, 3]
+
+
+def test17_iter_tuple():
+    assert t.test_iter_list([]) == []
+    assert t.test_iter_list([1]) == [1]
+    assert t.test_iter_list([1, 2]) == [1, 2]
+    assert t.test_iter_list([1, 2, 3]) == [1, 2, 3]
+
+
+def test18_raw_doc():
+    assert (
+        t.test_08.__doc__
+        == """test_08(arg: int, /) -> int
+test_08(x: typing.Annotated[float, 'foo']) -> int
+
+Overloaded function.
+
+1. ``test_08(arg: int, /) -> int``
+
+first docstring
+
+2. ``test_08(x: typing.Annotated[float, 'foo']) -> int``
+
+another docstring"""
+    )
+
+
+def test19_type_check_manual():
+    assert t.test_09.__doc__ == "test_09(arg: type, /) -> bool"
+
+    assert t.test_09(bool) is True
+    assert t.test_09(int) is False
+    with pytest.raises(TypeError) as excinfo:
+        assert t.test_09(True)
+    assert "incompatible function arguments" in str(excinfo.value)
+
+
+def test20_dict_iterator():
+    assert t.test_10({}) == {}
+    assert t.test_10({1: 2}) == {1: 2}
+    assert t.test_10({1: 2, 3: 4}) == {1: 2, 3: 4}
+    assert t.test_10({1: 2, 3: 4, "a": "b"}) == {1: 2, 3: 4, "a": "b"}
+
+
+def test21_numpy_overloads():
+    try:
+        import numpy as np
+    except ImportError:
+        pytest.skip("numpy is missing")
+
+    assert t.test_05(np.int32(0)) == 1
+    assert t.test_05(np.float64(0.1)) == 2
+    assert t.test_05(np.float64(0.0)) == 2
+
+    # np.float32/np.float16 are not 'float' subclasses; they must still
+    # reach the floating point overload instead of truncating to integer
+    assert t.test_05(np.float32(0.5)) == 2
+    assert t.test_05(np.float16(0.5)) == 2
+
+    # ... and do not convert to a pure integer argument at all
+    with pytest.raises(TypeError):
+        t.identity_long(np.float32(0.5))
+
+    assert t.identity_long(np.int32(5)) == 5
+    assert t.identity_ulong(np.int32(5)) == 5
+    assert t.identity_llong(np.int32(5)) == 5
+    assert t.identity_ullong(np.int32(5)) == 5
+
+    with pytest.raises(TypeError) as excinfo:
+        t.test_21_dnc(np.float64(21.0))  # Python type is not exactly float
+    assert "incompatible function arguments" in str(excinfo.value)
+    assert t.test_21_dnc(float(np.float64(21.0))) == 22.0
+    assert t.test_21_dnc(float(np.float32(21.0))) == 22.0
+
+    assert t.test_21_fnc(float(np.float32(21.0))) == 22.0
+    with pytest.raises(TypeError) as excinfo:
+        t.test_21_fnc(float(np.float64(21.1)))  # Inexact narrowing to float32
+    assert "incompatible function arguments" in str(excinfo.value)
+    assert t.test_21_fnc(float(np.float32(21.1))) == np.float32(22.1)
+
+
+def test22_string_return():
+    assert t.test_12("hello") == "hello"
+    assert t.test_13() == "test"
+    assert t.test_14("abc") == "abc"
+
+
+def test23_byte_return():
+    assert t.test_15(b"abc") == "abc"
+    assert t.test_15_d(b"abc\x00def\x00ghi") == b"abc\x00def\x00ghi"
+    assert t.test_16("hello") == b"hello"
+    assert t.test_17(b"four") == 4
+    assert t.test_17(b"\x00\x00\x00\x00") == 4
+    assert t.test_18("hello world", 5) == b"hello"
+
+
+def test24_pydoc():
+    import pydoc
+
+    assert "test_05(arg: int, /)" in pydoc.render_doc(t)
+
+
+def test25_int():
+    assert t.test_19(5) == 128
+    assert t.test_20("5") == 128
+    assert t.test_21(5) == 5
+    assert t.test_21_f(5.1) == int(5.1)
+    assert t.test_21_f(1e50) == int(1e50)
+    assert type(t.test_21_f(0.5)) is int
+    assert t.test_21_g() == int(1.5)
+    assert type(t.test_21_g()) is int
+    assert t.test_21_h() == int(1e50)
+    assert type(t.test_21_h()) is int
+    # nb::int_ of character types must yield an integer, not a 1-char string
+    for f in (t.test_21_char, t.test_21_schar, t.test_21_uchar):
+        assert f() == 97
+        assert type(f()) is int
+    assert t.test_21_short() == -5 and type(t.test_21_short()) is int
+    assert t.test_21_bool() is True
+    assert t.test_19.__doc__ == "test_19(arg: int, /) -> object"
+
+
+def test26_capsule():
+    p = t.test_22()
+    assert "capsule" in str(p) and "nb_handle" in str(p)
+    assert t.test_24(p) == 1
+    p = t.test_23()
+    assert p is None
+    assert t.test_24(p) == 0
+
+
+def test26b_capsule_nullptr():
+    p = t.test_capsule_nullptr()
+    assert p is None
+    p = t.test_capsule_nullptr_no_cleanup()
+    assert p is None
+
+
+def test27_slice():
+    s = slice(1, 10, 2)
+    assert t.test_25(s) is s
+    assert t.test_25.__doc__ == "test_25(arg: slice, /) -> slice"
+    assert t.test_26() == slice(4)
+    assert t.test_27() == slice(2, 10)
+    assert t.test_28() == slice(5, -5, -2)
+
+
+def test28_ellipsis():
+    assert t.test_29(...) is ...
+    assert (
+        t.test_29.__doc__ == "test_29(arg: types.EllipsisType, /) -> types.EllipsisType"
+    )
+
+
+def test29_traceback():
+    result = t.test_30(fail_fn)
+    regexp = r'Traceback \(most recent call last\):\n.*\n  File "[^"]*", line [0-9]*, in fail_fn\n.*RuntimeError: Foo'
+    matches = re.findall(regexp, result, re.MULTILINE | re.DOTALL)
+    assert len(matches) == 1
+
+
+def test29_traceback_surrogate_filename():
+    # A traceback frame whose filename/function name contains lone surrogates
+    # (e.g. a script on a path with bytes undecodable in the filesystem
+    # encoding) must not crash python_error::what().
+    code = compile("def g():\n raise RuntimeError('Foo')\ng()",
+                   "bad\udc80name.py", "exec")
+
+    def fn():
+        exec(code, {})
+
+    result = t.test_30(fn)
+    # Default builds substitute a placeholder for the affected frame fields;
+    # stable-ABI/PyPy builds give up on formatting the traceback altogether
+    assert ("RuntimeError: Foo" in result and "unencodable" in result) or \
+           result == "<error while formatting exception>"
+
+
+def test30_noexcept():
+    assert t.test_31(123) == 123
+    assert t.test_32(123) == 123
+
+
+@pytest.mark.parametrize("name", sorted(t.int_limits))
+def test31_range(name):
+    """Check the integer type casters against the range of every C++ type"""
+    func = getattr(t, "identity_" + name)
+    range_min, range_max = t.int_limits[name]
+
+    # Bit positions where a C integer type or a CPython digit boundary lies,
+    # so that the values below span one, two, three and many digits
+    values = [0]
+    for bits in (7, 8, 15, 16, 29, 30, 31, 32, 45, 60, 63, 64, 75, 90, 127, 128, 1000):
+        values += [2**bits - 1, 2**bits, 2**bits + 1]
+    values += [-value for value in values]
+
+    class Indexable:
+        """Conversion of a foreign type goes through __index__"""
+
+        def __init__(self, value):
+            self.value = value
+
+        def __index__(self):
+            return self.value
+
+    for wrapper in (int, Indexable):
+        for value in values:
+            if range_min <= value <= range_max:
+                assert func(wrapper(value)) == value
+            else:
+                with pytest.raises(TypeError):
+                    func(wrapper(value))
+
+
+def test33_method_on_non_nanobind_class():
+    class AClass:
+        def __init__(self):
+            self.x = 42
+
+    AClass.simple_method = t.test_33
+    AClass.complex_method = t.test_34
+    a = AClass()
+    assert a.simple_method(7) == 49
+    assert a.complex_method(y=2) == 84
+
+
+def test34_module_docstring():
+    assert t.__doc__ == "function testcase"
+
+
+def test35_return_capture():
+    x = t.test_35()
+    assert x() == "Test Foo"
+
+
+def test36_test_char():
+    assert t.test_cast_char("c") == "c"
+    assert t.test_cast_char("\x00") == "\x00"
+    # A failing nb::cast<char>() must raise cast_error (a RuntimeError),
+    # not leak the internal 'next_overload' exception as a bogus TypeError.
+    with pytest.raises(RuntimeError):
+        assert t.test_cast_char("abc")
+    with pytest.raises(RuntimeError):
+        assert t.test_cast_char("")
+    with pytest.raises(RuntimeError):
+        assert t.test_cast_char(123)
+
+
+def test36b_test_cast_failure():
+    # A failing nb::cast<>() inside an overloaded function body must surface
+    # as cast_error and must not silently re-dispatch to another overload.
+    assert t.test_cast_redispatch("x") == "x"
+    with pytest.raises(RuntimeError):
+        t.test_cast_redispatch("abc")
+
+
+def test37_test_str():
+    assert t.test_cast_str("c") == "c"
+    assert t.test_cast_str("abc") == "abc"
+    with pytest.raises(RuntimeError):
+        assert t.test_cast_str(123)
+
+
+def test38_set():
+    x = t.test_set()
+    assert isinstance(x, set)
+    assert len(x) == 2
+    assert 123 in x and "123" in x
+    assert t.test_set_contains(x, 123)
+    assert t.test_set_contains(x, "123")
+    assert not t.test_set_contains(x, "1234")
+    assert not t.test_set_contains(x, 1234)
+
+
+def test39_del():
+    l = [0, 1, 2, 3, 4]
+    t.test_del_list(l)
+    assert l == [0, 1, 3, 4]
+
+    l = {"a": 0, "b": 1}
+    t.test_del_dict(l)
+    assert l == {"b": 1}
+
+    with pytest.raises(IndexError):
+        t.test_del_list([])
+
+    with pytest.raises(KeyError):
+        t.test_del_dict({})
+
+
+def test40_nb_signature():
+    assert t.test_01.__nb_signature__ == ((r"def test_01() -> None", None, None),)
+    assert t.test_02.__nb_signature__ == (
+        (r"def test_02(up: int = \0, down: int = \1) -> int", None, (8, 1)),
+    )
+    assert t.test_05.__nb_signature__ == (
+        (r"def test_05(arg: int, /) -> int", "doc_1", None),
+        (r"def test_05(arg: float, /) -> int", "doc_2", None),
+    )
+    # Uniform and partially-repeated docstrings are exposed faithfully here;
+    # deduplication for stubs happens in stubgen (see issue #1357).
+    assert t.test_05b.__nb_signature__ == (
+        (r"def test_05b(arg: int, /) -> int", "doc_1", None),
+        (r"def test_05b(arg: float, /) -> int", "doc_1", None),
+    )
+    assert t.test_05d.__nb_signature__ == (
+        (r"def test_05d(arg: int, /) -> int", "doc_1", None),
+        (r"def test_05d(arg: float, /) -> int", "doc_1", None),
+        (r"def test_05d(arg: str, /) -> int", "doc_2", None),
+    )
+    assert t.test_07.__nb_signature__ == (
+        (
+            r"def test_07(arg0: int, arg1: int, /, *args, **kwargs) -> tuple[int, int]",
+            None,
+            None,
+        ),
+        (
+            r"def test_07(a: int, b: int, *myargs, **mykwargs) -> tuple[int, int]",
+            None,
+            None,
+        ),
+    )
+
+
+def test41_kw_only():
+    # (i, j, *args, z)
+    assert t.test_args_kwonly(2, 2.5, z=22) == (2, 2.5, (), 22)
+    assert t.test_args_kwonly(2, 2.5, "a", "b", z=22) == (2, 2.5, ("a", "b"), 22)
+    assert t.test_args_kwonly(z=22, i=4, j=16) == (4, 16.0, (), 22)
+    assert (
+        t.test_args_kwonly.__doc__
+        == "test_args_kwonly(i: int, j: float, *args, z: int) -> tuple"
+    )
+    with pytest.raises(TypeError):
+        t.test_args_kwonly(2, 2.5, 22)  # missing z= keyword
+
+    # (i, j, *args, z, **kwargs)
+    assert t.test_args_kwonly_kwargs(i=1, k=4, j=10, z=-1, y=9) == (
+        1, 10, (), -1, {"k": 4, "y": 9}
+    )
+    assert t.test_args_kwonly_kwargs(1, 2, 3, 4, z=11, y=12) == (
+        1, 2, (3, 4), 11, {"y": 12}
+    )
+    with pytest.raises(TypeError):
+        t.test_args_kwonly_kwargs(1, 2, 3, 4, 5)
+    assert (
+        t.test_args_kwonly_kwargs.__doc__
+        == "test_args_kwonly_kwargs(i: int, j: float, *args, z: int, **kwargs) -> tuple"
+    )
+
+    # (i, *, j, **kwargs)
+    assert t.test_kwonly_kwargs(j=2, i=1) == (1, 2, {})
+    assert t.test_kwonly_kwargs(j=2, i=1, z=10) == (1, 2, {"z": 10})
+    assert t.test_kwonly_kwargs(1, j=2) == (1, 2, {})
+    assert t.test_kwonly_kwargs(1, j=2, z=10) == (1, 2, {"z": 10})
+    with pytest.raises(TypeError):
+        t.test_kwonly_kwargs(1, 2)
+    with pytest.raises(TypeError):
+        t.test_kwonly_kwargs(1, 2, j=3)
+    with pytest.raises(TypeError):
+        t.test_kwonly_kwargs(1, 2, z=10)
+    assert (
+        t.test_kwonly_kwargs.__doc__
+        == "test_kwonly_kwargs(i: int, *, j: float, **kwargs) -> tuple"
+    )
+
+    # (*, i, j)
+    assert t.test_kw_only_all(i=1, j=2) == (1, 2)
+    assert t.test_kw_only_all(j=1, i=2) == (2, 1)
+    with pytest.raises(TypeError):
+        t.test_kw_only_all(i=1)
+    with pytest.raises(TypeError):
+        t.test_kw_only_all(1, 2)
+    assert (
+        t.test_kw_only_all.__doc__
+        == "test_kw_only_all(*, i: int, j: int) -> tuple"
+    )
+
+    # (__arg0, *, j, k)
+    assert t.test_kw_only_some(1, k=3, j=2) == (1, 2, 3)
+    assert (
+        t.test_kw_only_some.__doc__
+        == "test_kw_only_some(arg0: int, /, *, j: int, k: int) -> tuple"
+    )
+
+    # (__arg0=3, j=4, *, k=5, z)
+    assert t.test_kw_only_with_defaults(z=8) == (3, 4, 5, 8)
+    assert t.test_kw_only_with_defaults(2, z=8) == (2, 4, 5, 8)
+    assert t.test_kw_only_with_defaults(2, j=7, k=8, z=9) == (2, 7, 8, 9)
+    assert t.test_kw_only_with_defaults(2, 7, z=9, k=8) == (2, 7, 8, 9)
+    with pytest.raises(TypeError):
+        t.test_kw_only_with_defaults(2, 7, 8, z=9)
+    assert (
+        t.test_kw_only_with_defaults.__doc__
+        == "test_kw_only_with_defaults(arg0: int = 3, j: int = 4, *, k: int = 5, z: int) -> tuple"
+    )
+
+    # (i, *, j)
+    assert t.test_kw_only_mixed(1, j=2) == (1, 2)
+    assert t.test_kw_only_mixed(j=2, i=3) == (3, 2)
+    assert t.test_kw_only_mixed(i=2, j=3) == (2, 3)
+    with pytest.raises(TypeError):
+        t.test_kw_only_mixed(i=1)
+    with pytest.raises(TypeError):
+        t.test_kw_only_mixed(1, i=2)
+    assert (
+        t.test_kw_only_mixed.__doc__
+        == "test_kw_only_mixed(i: int, *, j: int) -> tuple"
+    )
+
+    with pytest.raises(TypeError):
+        t.kw_only_methods(42)
+
+    val = t.kw_only_methods(v=42)
+    assert val.v == 42
+
+    # The implicit 'self' of a constructor may be passed as a keyword argument
+    val2 = t.kw_only_methods.__new__(t.kw_only_methods)
+    t.kw_only_methods.__init__(self=val2, v=43)
+    assert val2.v == 43
+
+    # (self, *, i, j)
+    assert val.method_2k() == (1, 2)
+    assert val.method_2k(i=3) == (3, 2)
+    assert val.method_2k(j=4) == (1, 4)
+    assert val.method_2k(i=3, j=4) == (3, 4)
+    assert val.method_2k(j=3, i=4) == (4, 3)
+    with pytest.raises(TypeError):
+        val.method_2k(1)
+    with pytest.raises(TypeError):
+        val.method_2k(1, j=2)
+    assert (
+        t.kw_only_methods.method_2k.__doc__
+        == "method_2k(self, *, i: int = 1, j: int = 2) -> tuple"
+    )
+
+    # (self, i, *, j)
+    assert val.method_1p1k() == (1, 2)
+    assert val.method_1p1k(i=3) == (3, 2)
+    assert val.method_1p1k(j=4) == (1, 4)
+    assert val.method_1p1k(i=3, j=4) == (3, 4)
+    assert val.method_1p1k(j=3, i=4) == (4, 3)
+    assert val.method_1p1k(3) == (3, 2)
+    assert val.method_1p1k(3, j=4) == (3, 4)
+    with pytest.raises(TypeError):
+        val.method_2k(1, 2)
+    assert (
+        t.kw_only_methods.method_1p1k.__doc__
+        == "method_1p1k(self, i: int = 1, *, j: int = 2) -> tuple"
+    )
+
+
+def test42_ptr_return():
+    assert t.test_ptr_return() == (10, 100)
+
+def test41_any():
+    s = "hello"
+    assert t.test_any(s) is s
+    assert t.test_any.__doc__ == "test_any(arg: typing.Any, /) -> typing.Any"
+
+def test42_wrappers_list():
+    assert t.test_wrappers_list()
+
+def test43_wrappers_dict():
+    assert t.test_wrappers_dict()
+
+def test43_wrappers_set():
+    assert t.test_wrappers_set()
+
+def test44_hash():
+    value = (1, 2, 3)
+    assert t.hash_it(value) == hash(value);
+
+
+def test45_new():
+    assert t.test_bytearray_new() == bytearray()
+    assert t.test_bytearray_new("\x00\x01\x02\x03", 4) == bytearray(
+        b"\x00\x01\x02\x03"
+    )
+    assert t.test_bytearray_new("", 0) == bytearray()
+
+
+def test46_copy():
+    o = bytearray(b"\x00\x01\x02\x03")
+    c = t.test_bytearray_copy(o)
+    assert c == o
+    o.clear()
+    assert c != o
+
+
+def test47_c_str():
+    o = bytearray(b"Hello, world!")
+    assert t.test_bytearray_c_str(o) == "Hello, world!"
+
+
+def test48_size():
+    o = bytearray(b"Hello, world!")
+    assert t.test_bytearray_size(o) == len(o)
+
+
+def test49_resize():
+    o = bytearray(b"\x00\x01\x02\x03")
+    assert len(o) == 4
+    t.test_bytearray_resize(o, 8)
+    assert len(o) == 8
+
+
+def test50_call_policy():
+    def case(arg1, arg2, expect_ret):  # type: (str, str, str | None) -> str
+        if hasattr(sys, "getrefcount"):
+            refs_before = (sys.getrefcount(arg1), sys.getrefcount(arg2))
+
+        ret = None
+        try:
+            ret = t.test_call_policy(arg1, arg2)
+            assert ret == expect_ret
+            return ret
+        finally:
+            if expect_ret is None:
+                assert t.call_policy_record() == []
+            else:
+                (((arg1r, arg2r), recorded_ret),) = t.call_policy_record()
+                assert recorded_ret == expect_ret
+                assert ret is None or ret is recorded_ret
+                assert recorded_ret is not expect_ret
+
+                if hasattr(sys, "getrefcount"):
+                    # Make sure no reference leak occurred: should be
+                    # one in getrefcount args, one or two in locals,
+                    # zero or one in the pending-return-value slot.
+                    # We have to decompose this to avoid getting confused
+                    # by transient additional references added by pytest's
+                    # assertion rewriting.
+                    ret_refs = sys.getrefcount(recorded_ret)
+                    expected_refs = 2 + 2 * (ret is not None)
+
+                    # On Python 3.14a7, an optimization was introduced where
+                    # stack-based function calling no longer acquires a reference
+                    if py_3_14a7_or_newer:
+                        assert ret_refs == expected_refs - 1 or ret_refs == expected_refs
+                    else:
+                        assert ret_refs == expected_refs
+
+                for (passed, recorded) in ((arg1, arg1r), (arg2, arg2r)):
+                    if passed == "swapfrom":
+                        assert recorded == "swapto"
+                        if hasattr(sys, "getrefcount"):
+                            recorded_refs = sys.getrefcount(recorded)
+
+                            # recorded, arg1r, unnamed tuple, getrefcount arg
+                            if py_3_14a7_or_newer:
+                                assert recorded_refs == 3 or recorded_refs == 4
+                            else:
+                                assert recorded_refs == 4
+                    else:
+                        assert passed is recorded
+
+                del passed, recorded, arg1r, arg2r
+                if hasattr(sys, "getrefcount"):
+                    refs_after = (sys.getrefcount(arg1), sys.getrefcount(arg2))
+
+                    if not py_3_14a7_or_newer or ret is not None:
+                        assert refs_before == refs_after
+
+    # precall throws exception
+    with pytest.raises(RuntimeError, match="expected only strings"):
+        case(12345, "0", None)
+
+    # conversion of args fails
+    with pytest.raises(TypeError):
+        case("string", "xxx", "<unfinished>")
+
+    # function throws exception
+    with pytest.raises(RuntimeError, match="offset too large"):
+        case("abc", "4", "<unfinished>")
+
+    # conversion of return value fails
+    with pytest.raises(UnicodeDecodeError):
+        case("returnfail", "4", "<return conversion failed>")
+
+    # postcall throws exception
+    with pytest.raises(RuntimeError, match="postcall exception"):
+        case("postthrow", "4", "throw")
+
+    # normal call
+    case("example", "1", "xample")
+
+    # precall modifies args
+    case("swapfrom", "0", "swapto")
+    with pytest.raises(TypeError):
+        case("swapfrom", "xxx", "<unfinished>")
+    with pytest.raises(RuntimeError, match="offset too large"):
+        case("swapfrom", "10", "<unfinished>")
+
+def test51_isinstance():
+    assert t.isinstance_(3, int)
+    assert not t.isinstance_(3, bool)
+    with pytest.raises(TypeError):
+        t.isinstance_(3, 7)
+
+
+def test52_frozenset():
+    x = t.test_frozenset()
+    assert isinstance(x, frozenset)
+    assert len(x) == 2
+    assert 123 in x and "123" in x
+    assert t.test_frozenset_contains(x, 123)
+    assert t.test_frozenset_contains(x, "123")
+    assert not t.test_frozenset_contains(x, "1234")
+    assert not t.test_frozenset_contains(x, 1234)
+
+def test53_fallback():
+    assert t.test_fallback_1(3.0) == 0
+    assert t.test_fallback_1(3) == 1
+    assert t.test_fallback_1('3') == 1
+
+    assert t.test_fallback_2(3.0) == 0
+    assert t.test_fallback_2(3) == 0
+    assert t.test_fallback_2('3') == 1
+
+def test54_dict_default():
+    assert t.test_get_dict_default({'key': 100}) == 100
+    assert t.test_get_dict_default({'key2': 100}) == 123
+    assert t.test_get_dict_default_2({'key': 100}, 'key') == 100
+    assert t.test_get_dict_default_2({'key2': 100}, 'key') == 123
+    # An unhashable key must raise TypeError, matching Python's dict.get
+    with pytest.raises(TypeError):
+        t.test_get_dict_default_2({'key': 100}, [1, 2, 3])
+
+def test54_dict_getitem():
+    assert t.test_getitem_dict({'key': 100}, 'key') == 100
+    # A missing key must raise KeyError, matching Python's d[key]
+    with pytest.raises(KeyError):
+        t.test_getitem_dict({'key': 100}, 'missing')
+    # An unhashable key must raise TypeError
+    with pytest.raises(TypeError):
+        t.test_getitem_dict({'key': 100}, [1, 2, 3])
+
+def test_55_memoryview():
+    memview = t.test_memoryview()
+    assert isinstance(memview, memoryview)
+    assert bytes(memview[0:3]) == b'123'
+    with pytest.raises(TypeError):
+        t.test_bad_memview()
+
+
+def test_56_unusual_module_in_overload_error():
+    # Formatting an overload-dispatch error must not crash when an argument's
+    # type has a non-string or raising '__module__' (nb_type_name fallback).
+    class BadNone:
+        __module__ = None
+
+    with pytest.raises(TypeError, match="BadNone"):
+        t.test_05(BadNone())
+
+    class Meta(type):
+        @property
+        def __module__(cls):
+            raise RuntimeError("boom")
+
+    class BadRaise(metaclass=Meta):
+        pass
+
+    with pytest.raises(TypeError):
+        t.test_05(BadRaise())
+
+    class BadSurrogate:
+        __module__ = "\udc80"  # a str that cannot be encoded as UTF-8
+
+    with pytest.raises(TypeError, match="BadSurrogate"):
+        t.test_05(BadSurrogate())
+
+    # ... also as a keyword argument
+    with pytest.raises(TypeError, match="x: .*BadSurrogate"):
+        t.test_05(1, x=BadSurrogate())
+
+
+@pytest.mark.skipif(not hasattr(sys, "getrefcount"),
+                    reason="No reference counting")
+def test_57_accessor_inplace_refleak():
+    class C:
+        pass
+
+    o = C()
+    o.x = []
+    lst = o.x
+    refs_before = sys.getrefcount(lst)
+    for _ in range(5):
+        t.test_accessor_inplace_attr(o, [1])
+    assert sys.getrefcount(lst) == refs_before
+    assert o.x == [1, 1, 1, 1, 1]
+
+    d = {"x": []}
+    lst = d["x"]
+    refs_before = sys.getrefcount(lst)
+    for _ in range(5):
+        t.test_accessor_inplace_item(d, [1])
+    assert sys.getrefcount(lst) == refs_before
+    assert d["x"] == [1, 1, 1, 1, 1]

@@ -1,0 +1,48 @@
+# Copyright 2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+include(Macro)
+
+message(STATUS "")
+message(
+  STATUS "====================================================================")
+message(STATUS "SLXIO Build Configuration")
+message(
+  STATUS "====================================================================")
+message(STATUS "  Version                    : ${PROJECT_VERSION}")
+message(STATUS "  Simulink Version           : ${SLXIO_SIMULINK_VERSION}")
+message(STATUS "  Platform                   : ${CMAKE_SYSTEM_NAME}")
+message(STATUS "  Architecture               : ${CMAKE_SYSTEM_PROCESSOR}")
+message(STATUS "  Compiler                   : ${CMAKE_CXX_COMPILER_ID}")
+message(STATUS "  Compiler Version           : ${CMAKE_CXX_COMPILER_VERSION}")
+message(STATUS "  CMake Version              : ${CMAKE_VERSION}")
+message(STATUS "  Build Type                 : ${CMAKE_BUILD_TYPE}")
+message(STATUS "  Install                    : ${SLXIO_INSTALL}")
+message(STATUS "  Install Prefix             : ${CMAKE_INSTALL_PREFIX}")
+message(STATUS "  PkgConfig                  : ${SLXIO_WITH_PKGCONFIG}")
+message(STATUS "  Shared Libraries           : ${SLXIO_BUILD_SHARED_LIBS}")
+message(STATUS "  64-bit Identifiers         : ${SLXIO_64BIT_IDENTIFIERS}")
+message(STATUS "  Interaction                : ${SLXIO_WITH_INTERACTION}")
+message(STATUS "  OpenMP                     : ${SLXIO_WITH_OPENMP}")
+message(STATUS "  PIC                        : ${SLXIO_PIC}")
+message(STATUS "  Python                     : ${SLXIO_BUILD_PYTHON_BINDINGS}")
+message(STATUS "  Java                       : ${SLXIO_BUILD_JAVA_BINDINGS}")
+message(STATUS "  Testing                    : ${SLXIO_BUILD_TESTING}")
+message(
+  STATUS "  Coverage                   : ${SLXIO_ENABLE_TESTING_COVERAGE}")
+message(STATUS "  All Warnings               : ${SLXIO_ENABLE_WALL}")
+message(STATUS "  Warnings as Errors         : ${SLXIO_ENABLE_WERROR}")
+message(
+  STATUS "====================================================================")
+message(STATUS "")
