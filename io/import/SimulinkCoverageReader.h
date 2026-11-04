@@ -23,8 +23,7 @@
 namespace slxio
 {
 
-template <typename T>
-class SimulinkCoverageReader : public SimulinkReader<T, SimulinkCoverage>
+template <typename T> class SimulinkCoverageReader : public SimulinkReader<T, SimulinkCoverage>
 {
 };
 

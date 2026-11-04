@@ -20,11 +20,11 @@
 
 namespace slxio
 {
-    enum class SimulinkReaderResult
-    {
-        Success = 0,
-        Failure = 1,
-        InvalidInput = 2,
-        NotImplemented = 3
-    };
+enum class SimulinkReaderResult
+{
+    Success = 0,
+    Failure = 1,
+    InvalidInput = 2,
+    NotImplemented = 3
+};
 }; // namespace slxio

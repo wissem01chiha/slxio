@@ -23,8 +23,7 @@
 namespace slxio
 {
 
-template <typename T>
-class SimulinkRTWReader : public SimulinkReader<T, SimulinkRTW>
+template <typename T> class SimulinkRTWReader : public SimulinkReader<T, SimulinkRTW>
 {
 };
 

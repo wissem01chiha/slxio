@@ -33,11 +33,9 @@
 namespace slxio
 {
 
-template <typename T>
-class SimulinkConfigSetReader : public SimulinkReader<T, SimulinkConfigSet>
+template <typename T> class SimulinkConfigSetReader : public SimulinkReader<T, SimulinkConfigSet>
 {
 public:
-
     SimulinkReaderResult Read(T serializedData, SimulinkConfigSet& object) const override
     {
         m_codeGenerationReader.Read(serializedData, object.GetCodeGeneration());

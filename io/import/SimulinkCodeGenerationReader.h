@@ -22,8 +22,7 @@
 namespace slxio
 {
 
-template <typename T>
-class SimulinkCodeGenerationReader : public SimulinkReader<T, SimulinkCodeGeneration>
+template <typename T> class SimulinkCodeGenerationReader : public SimulinkReader<T, SimulinkCodeGeneration>
 {
 };
 

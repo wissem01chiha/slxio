@@ -23,8 +23,7 @@
 namespace slxio
 {
 
-template <typename T>
-class SimulinkModelReferenceReader : public SimulinkReader<T, SimulinkModelReference>
+template <typename T> class SimulinkModelReferenceReader : public SimulinkReader<T, SimulinkModelReference>
 {
 };
 

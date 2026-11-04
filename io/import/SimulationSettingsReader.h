@@ -24,8 +24,7 @@ namespace slxio
 
 class SimulationSettings;
 
-template <typename T>
-class SimulationSettingsReader : public SimulinkReader<T, SimulationSettings>
+template <typename T> class SimulationSettingsReader : public SimulinkReader<T, SimulationSettings>
 {
 };
 

@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #include "SimulinkModelReader.h"
 #include "SLXSection.h"
 
