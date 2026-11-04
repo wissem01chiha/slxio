@@ -1,3 +1,16 @@
+
+The following examples demonstrate basic programmatic editing of Simulink® models using the SLXIO API. Most examples are inspired by and adapted from the official MathWorks documentation for [Programmatic Model Editing](https://www.mathworks.com/help/simulink/programmatic-modeling.html).
+
+Where possible, we intentionally preserve the concepts and workflows of the original Simulink APIs to make it easier for MATLAB® and Simulink® users to get started with slxio.
+
+> [!WARNING]  
+> slxio is a static model manipulation library and does not support model compilation, simulation, or features that require a compiled model state. Operations that depend on signal resolution, data type propagation, compiled port information, or other compile-time metadata are therefore not available.
+
+## libraries
+ 
+description: Create, load, modify, and manage Simulink libraries examples.
+
+## models
 @page Models Model Manipulation
 
 
@@ -104,3 +117,26 @@
 - [Createe-from-template.md]() - Create a model from a template.
 - [FindTemplates]s.md - Search available templates.
 - [./default-model-template.md]() - Get or set the default template.
+
+## Stateflow Handling
+
+description: Stateflow compatibility examples.
+
+@page Export Exporting Capabilities
+
+Export models to scientific, visualization, and interoperability formats.
+
+## Scientific Data Formats
+
+## Visualization Data Formats
+
+
+- [ExportToVersion](./export-to-version.md) - Export a model for another format or version.
+- [CharacterEncoding](./character-encoding) encoding for exported artifacts.
+
+### Print and Render
+
+- [FrameEdit](./frame-edit.md) - Edit model printframes.
+- [Orient](./orient.md) - Configure tation.
+- [./print.md]() - Export or print model diagrams.
+

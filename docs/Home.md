@@ -1,4 +1,3 @@
-# Overview
 
 Slxio is an open‑source C++14 library for reading, writing, visualizing, and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) `.slx` model files. It began as a lightweight alternative to [MATLAB](https://www.mathworks.com/help/matlab/index.html) proprietary libraries and runtime, similar to the [MATIO](https://github.com/tbeu/matio) library for `.mat` files. The goal is to make Simulink models usable outside the MATLAB ecosystem, enabling integration with modern scripting languages such as Python, Java, and others through C++ bindings. The project was originally derived from the Java‑based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project, with the source code available at [SimulinkLibraryForJava](https://github.com/harmanpa/SimulinkLibraryForJava). It was later ported to C++ and refactored into a modular architecture.
 

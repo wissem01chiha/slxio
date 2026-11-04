@@ -1,3 +1,10 @@
+# Platform Support
+
+Supported build environments and MATLAB Version Compatibility.
+
+- @subpage MATLAB
+- @subpage Platform
+
 @page MATLAB Supported MATLAB
 
 # Supported MATLAB
@@ -34,3 +41,4 @@ For more information, see: [Simulink Export to Version](https://www.mathworks.co
 | R2024b  |        |        | [Release Notes](https://www.mathworks.com/matlabcentral/discussions/uploaded_files/35746/Whats_New_In_MATLAB_R2024b%202.pdf)               |
 | R2025a  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
 | R2025b  |        |        | [Release Notes](https://www.mathworks.com/help/matlab/release-notes.html?startrelease=R2025a&endrelease=R2025b&rntext=&groupby=release&sortby=descending&searchHighlight=) |
+
