@@ -47,24 +47,14 @@ set(CPACK_INCLUDED TRUE)
 if(NOT ZLIB_CONF_WRITTEN)
     set(Z_PREFIX ${ZLIB_PREFIX})
     set(CONF_OUT_FILE ${zlib_BINARY_DIR}/zconf.h.cmakein)
-    file(READ ${zlib_SOURCE_DIR}/zconf.h ZCONF_CONTENT LIMIT 245)
-    file(WRITE ${CONF_OUT_FILE} ${ZCONF_CONTENT})
-    file(APPEND ${CONF_OUT_FILE} "#cmakedefine Z_PREFIX 1\n")
-    file(APPEND ${CONF_OUT_FILE} "#cmakedefine HAVE_STDARG_H 1\n")
-    file(APPEND ${CONF_OUT_FILE} "#cmakedefine HAVE_UNISTD_H 1\n")
-    file(READ ${zlib_SOURCE_DIR}/zconf.h ZCONF_CONTENT OFFSET 244)
-    set(FIRST_ITEM TRUE)
-
-    foreach(item IN LISTS ZCONF_CONTENT)
-        if(FIRST_ITEM)
-            string(APPEND OUT_CONTENT ${item})
-            set(FIRST_ITEM FALSE)
-        else(FIRST_ITEM)
-            string(APPEND OUT_CONTENT "\;" ${item})
-        endif(FIRST_ITEM)
-    endforeach(item IN LISTS ${ZCONF_CONTENT})
-
-    file(APPEND ${CONF_OUT_FILE} ${OUT_CONTENT})
+    file(READ ${zlib_SOURCE_DIR}/zconf.h.in ZCONF_CONTENT)
+    string(
+        REPLACE
+            "#define ZCONF_H"
+            "#define ZCONF_H\n#cmakedefine Z_PREFIX 1\n#cmakedefine HAVE_STDARG_H 1\n#cmakedefine HAVE_UNISTD_H 1"
+            ZCONF_CONTENT
+            "${ZCONF_CONTENT}")
+    file(WRITE ${CONF_OUT_FILE} "${ZCONF_CONTENT}")
     set(ZLIB_CONF_WRITTEN
         TRUE
         CACHE BOOL "zconf.h.cmakein was created")
