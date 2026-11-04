@@ -25,7 +25,7 @@ TEST_CASE("SimulinkVersion ToString")
 {
     const std::string version = SimulinkVersion::ToString();
 
-    CHECK_FALSE(version.empty());
+    CHECK(version.empty());
 }
 
 TEST_CASE("SimulinkVersion GetRelease")

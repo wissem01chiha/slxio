@@ -19,19 +19,19 @@ jobs:
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_UBSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_UBSAN=ON
 
           - name: GCC ASan
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_ASAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ASAN=ON
 
           - name: GCC TSan
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_TSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_TSAN=ON
 
     steps:
       - name: Checkout repository

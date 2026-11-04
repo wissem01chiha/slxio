@@ -15,24 +15,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu GNU GCC Default
-            os: ubuntu-latest
-            compiler: gcc
-            cflags: -Wall -Wextra
-            pkgtgt: package package_source
-            cmake-args:
-
-          - name: Ubuntu GNU GCC C++14
+          - name: Ubuntu GNU GCC C++17
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14
+            cmake-args: -DCMAKE_CXX_STANDARD=17
 
-          - name: Ubuntu Clang C++14
+          - name: Ubuntu Clang C++17
             os: ubuntu-latest
             compiler: clang-15
             cxx-compiler: clang++-15
-            cmake-args: -DCMAKE_CXX_STANDARD=14
+            cmake-args: -DCMAKE_CXX_STANDARD=17
             packages: clang-15 llvm-15 llvm-15-tools
 
     steps:
