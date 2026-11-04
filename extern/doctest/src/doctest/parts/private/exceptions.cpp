@@ -5,10 +5,13 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-bool checkIfShouldThrow(assertType::Enum at) {
+bool checkIfShouldThrow(assertType::Enum at)
+{
     if (at & assertType::is_require)
         return true;
 
@@ -20,12 +23,15 @@ bool checkIfShouldThrow(assertType::Enum at) {
 }
 
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
-DOCTEST_NORETURN void throwException() {
+DOCTEST_NORETURN void throwException()
+{
     g_cs->shouldLogCurrentException = false;
     throw TestFailureException(); // NOLINT(hicpp-exception-baseclass)
 }
 #else  // DOCTEST_CONFIG_NO_EXCEPTIONS
-void throwException() {}
+void throwException()
+{
+}
 #endif // DOCTEST_CONFIG_NO_EXCEPTIONS
 
 } // namespace detail

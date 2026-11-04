@@ -33,6 +33,7 @@
 
 #include <zip.h>
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
     printf("libzip version is %s\n", zip_libzip_version());
 }

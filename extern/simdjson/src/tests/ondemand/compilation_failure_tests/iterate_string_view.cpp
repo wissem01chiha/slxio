@@ -3,7 +3,8 @@
 
 using namespace simdjson;
 
-int main() {
+int main()
+{
     ondemand::parser parser;
 #if COMPILATION_TEST_USE_FAILING_CODE
     auto json = std::string_view("1");
@@ -14,6 +15,9 @@ int main() {
 #endif
     int64_t value;
     auto error = doc.get(value);
-    if (error) { exit(1); }
+    if (error)
+    {
+        exit(1);
+    }
     std::cout << value << std::endl;
 }

@@ -1,13 +1,16 @@
 #include "inter_module.h"
 
-Shared create_shared() {
-    return { 123 };
+Shared create_shared()
+{
+    return {123};
 }
 
-bool check_shared(const Shared &shared, int expected) {
+bool check_shared(const Shared& shared, int expected)
+{
     return shared.value == expected;
 }
 
-void increment_shared(Shared &shared) {
+void increment_shared(Shared& shared)
+{
     ++shared.value;
 }

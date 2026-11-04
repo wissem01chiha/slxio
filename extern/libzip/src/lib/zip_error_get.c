@@ -31,23 +31,22 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 /* LCOV_EXCL_START */
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
-
-ZIP_EXTERN void zip_error_get(zip_t *za, int *zep, int *sep) {
+ZIP_EXTERN void zip_error_get(zip_t* za, int* zep, int* sep)
+{
     _zip_error_get(&za->error, zep, sep);
 }
 
-
-ZIP_EXTERN zip_error_t *zip_get_error(zip_t *za) {
+ZIP_EXTERN zip_error_t* zip_get_error(zip_t* za)
+{
     return &za->error;
 }
 
-
-ZIP_EXTERN zip_error_t *zip_file_get_error(zip_file_t *f) {
+ZIP_EXTERN zip_error_t* zip_file_get_error(zip_file_t* f)
+{
     return &f->error;
 }
 /* LCOV_EXCL_STOP */

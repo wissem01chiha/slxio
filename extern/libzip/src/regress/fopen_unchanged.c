@@ -31,30 +31,32 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "zip.h"
 
-const char *teststr = "This is a test.\n";
-const char *file = "teststring.txt";
+const char* teststr = "This is a test.\n";
+const char* file = "teststring.txt";
 
-int main(int argc, char *argv[]) {
-    const char *archive;
-    zip_t *za;
-    zip_source_t *zs;
+int main(int argc, char* argv[])
+{
+    const char* archive;
+    zip_t* za;
+    zip_source_t* zs;
     int err;
 
-    if (argc != 2) {
+    if (argc != 2)
+    {
         fprintf(stderr, "usage: %s archive\n", argv[0]);
         return 1;
     }
 
     archive = argv[1];
 
-    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL) {
+    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL)
+    {
         zip_error_t error;
         zip_error_init_with_code(&error, err);
         fprintf(stderr, "can't open zip archive '%s': %s\n", archive, zip_error_strerror(&error));
@@ -62,25 +64,29 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if ((zs = zip_source_buffer(za, teststr, strlen(teststr), 0)) == NULL) {
+    if ((zs = zip_source_buffer(za, teststr, strlen(teststr), 0)) == NULL)
+    {
         fprintf(stderr, "can't create zip_source from buffer: %s\n", zip_strerror(za));
         exit(1);
     }
 
-    if (zip_file_add(za, file, zs, 0) == -1) {
+    if (zip_file_add(za, file, zs, 0) == -1)
+    {
         fprintf(stderr, "can't add file '%s': %s\n", file, zip_strerror(za));
         (void)zip_source_free(zs);
         (void)zip_close(za);
         return 1;
     }
 
-    if (zip_fopen(za, file, ZIP_FL_UNCHANGED) == NULL) {
+    if (zip_fopen(za, file, ZIP_FL_UNCHANGED) == NULL)
+    {
         fprintf(stderr, "can't zip_fopen file '%s': %s\n", file, zip_strerror(za));
         (void)zip_discard(za);
         return 1;
     }
 
-    if (zip_close(za) == -1) {
+    if (zip_close(za) == -1)
+    {
         fprintf(stderr, "can't close zip archive '%s': %s\n", archive, zip_strerror(za));
         return 1;
     }

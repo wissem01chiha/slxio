@@ -6,10 +6,12 @@
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
-namespace doctest {
-namespace detail {
-template <typename T>
-int instantiationHelper(const T &) noexcept {
+namespace doctest
+{
+namespace detail
+{
+template <typename T> int instantiationHelper(const T&) noexcept
+{
     return 0;
 }
 
@@ -37,258 +39,253 @@ int instantiationHelper(const T &) noexcept {
 #endif
 
 // common code in asserts - for convenience
-#define DOCTEST_ASSERT_LOG_REACT_RETURN(b)                                                                             \
-    if (b.log())                                                                                                       \
-        DOCTEST_BREAK_INTO_DEBUGGER();                                                                                 \
-    b.react();                                                                                                         \
+#define DOCTEST_ASSERT_LOG_REACT_RETURN(b)                                                                                         \
+    if (b.log())                                                                                                                   \
+        DOCTEST_BREAK_INTO_DEBUGGER();                                                                                             \
+    b.react();                                                                                                                     \
     DOCTEST_FUNC_SCOPE_RET(!b.m_failed)
 
 #ifdef DOCTEST_CONFIG_NO_TRY_CATCH_IN_ASSERTS
 #define DOCTEST_WRAP_IN_TRY(x) x;
 #else // DOCTEST_CONFIG_NO_TRY_CATCH_IN_ASSERTS
-#define DOCTEST_WRAP_IN_TRY(x)                                                                                         \
-    try {                                                                                                              \
-        x;                                                                                                             \
-    } catch (...) { DOCTEST_RB.translateException(); }
+#define DOCTEST_WRAP_IN_TRY(x)                                                                                                     \
+    try                                                                                                                            \
+    {                                                                                                                              \
+        x;                                                                                                                         \
+    }                                                                                                                              \
+    catch (...)                                                                                                                    \
+    {                                                                                                                              \
+        DOCTEST_RB.translateException();                                                                                           \
+    }
 #endif // DOCTEST_CONFIG_NO_TRY_CATCH_IN_ASSERTS
 
 #ifdef DOCTEST_CONFIG_VOID_CAST_EXPRESSIONS
-#define DOCTEST_CAST_TO_VOID(...)                                                                                      \
-    DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wuseless-cast")                                                           \
-    static_cast<void>(__VA_ARGS__);                                                                                    \
+#define DOCTEST_CAST_TO_VOID(...)                                                                                                  \
+    DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wuseless-cast")                                                                       \
+    static_cast<void>(__VA_ARGS__);                                                                                                \
     DOCTEST_GCC_SUPPRESS_WARNING_POP
 #else // DOCTEST_CONFIG_VOID_CAST_EXPRESSIONS
 #define DOCTEST_CAST_TO_VOID(...) __VA_ARGS__;
 #endif // DOCTEST_CONFIG_VOID_CAST_EXPRESSIONS
 
 // registers the test by initializing a dummy var with a function
-#define DOCTEST_REGISTER_FUNCTION(global_prefix, f, decorators)                                                        \
-    global_prefix DOCTEST_GLOBAL_NO_WARNINGS(                                                                          \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT */                                                             \
-        doctest::detail::regTest(                                                                                      \
-            doctest::detail::TestCase(f, __FILE__, __LINE__, doctest_detail_test_suite_ns::getCurrentTestSuite()) *    \
-            decorators                                                                                                 \
-        )                                                                                                              \
-    )
+#define DOCTEST_REGISTER_FUNCTION(global_prefix, f, decorators)                                                                    \
+    global_prefix DOCTEST_GLOBAL_NO_WARNINGS(                                                                                      \
+        DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT */                                                                         \
+        doctest::detail::regTest(                                                                                                  \
+            doctest::detail::TestCase(f, __FILE__, __LINE__, doctest_detail_test_suite_ns::getCurrentTestSuite()) * decorators))
 
-#define DOCTEST_IMPLEMENT_FIXTURE(der, base, func, decorators)                                                         \
-    namespace { /* NOLINT */                                                                                           \
-    struct der : public base {                                                                                         \
-        void f();                                                                                                      \
-    };                                                                                                                 \
-    static DOCTEST_INLINE_NOINLINE void func() {                                                                       \
-        der v;                                                                                                         \
-        v.f();                                                                                                         \
-    }                                                                                                                  \
-    DOCTEST_REGISTER_FUNCTION(DOCTEST_EMPTY, func, decorators)                                                         \
-    }                                                                                                                  \
+#define DOCTEST_IMPLEMENT_FIXTURE(der, base, func, decorators)                                                                     \
+    namespace                                                                                                                      \
+    { /* NOLINT */                                                                                                                 \
+    struct der : public base                                                                                                       \
+    {                                                                                                                              \
+        void f();                                                                                                                  \
+    };                                                                                                                             \
+    static DOCTEST_INLINE_NOINLINE void func()                                                                                     \
+    {                                                                                                                              \
+        der v;                                                                                                                     \
+        v.f();                                                                                                                     \
+    }                                                                                                                              \
+    DOCTEST_REGISTER_FUNCTION(DOCTEST_EMPTY, func, decorators)                                                                     \
+    }                                                                                                                              \
     DOCTEST_INLINE_NOINLINE void der::f() // NOLINT(misc-definitions-in-headers)
 
-#define DOCTEST_CREATE_AND_REGISTER_FUNCTION(f, decorators)                                                            \
-    static void f();                                                                                                   \
-    DOCTEST_REGISTER_FUNCTION(DOCTEST_EMPTY, f, decorators)                                                            \
+#define DOCTEST_CREATE_AND_REGISTER_FUNCTION(f, decorators)                                                                        \
+    static void f();                                                                                                               \
+    DOCTEST_REGISTER_FUNCTION(DOCTEST_EMPTY, f, decorators)                                                                        \
     static void f()
 
-#define DOCTEST_CREATE_AND_REGISTER_FUNCTION_IN_CLASS(f, proxy, decorators)                                            \
-    static doctest::detail::funcType proxy() {                                                                         \
-        return f;                                                                                                      \
-    }                                                                                                                  \
-    DOCTEST_REGISTER_FUNCTION(inline, proxy(), decorators)                                                             \
+#define DOCTEST_CREATE_AND_REGISTER_FUNCTION_IN_CLASS(f, proxy, decorators)                                                        \
+    static doctest::detail::funcType proxy()                                                                                       \
+    {                                                                                                                              \
+        return f;                                                                                                                  \
+    }                                                                                                                              \
+    DOCTEST_REGISTER_FUNCTION(inline, proxy(), decorators)                                                                         \
     static void f()
 
 // for registering tests
-#define DOCTEST_TEST_CASE(decorators)                                                                                  \
-    DOCTEST_CREATE_AND_REGISTER_FUNCTION(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), decorators)
+#define DOCTEST_TEST_CASE(decorators) DOCTEST_CREATE_AND_REGISTER_FUNCTION(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), decorators)
 
 // for registering tests in classes - requires C++17 for inline variables!
 #if DOCTEST_CPLUSPLUS >= 201703L
-#define DOCTEST_TEST_CASE_CLASS(decorators)                                                                            \
-    DOCTEST_CREATE_AND_REGISTER_FUNCTION_IN_CLASS(                                                                     \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), DOCTEST_ANONYMOUS(DOCTEST_ANON_PROXY_), decorators                      \
-    )
+#define DOCTEST_TEST_CASE_CLASS(decorators)                                                                                        \
+    DOCTEST_CREATE_AND_REGISTER_FUNCTION_IN_CLASS(                                                                                 \
+        DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), DOCTEST_ANONYMOUS(DOCTEST_ANON_PROXY_), decorators)
 #else // DOCTEST_TEST_CASE_CLASS
 #define DOCTEST_TEST_CASE_CLASS(...) TEST_CASES_CAN_BE_REGISTERED_IN_CLASSES_ONLY_IN_CPP17_MODE_OR_WITH_VS_2017_OR_NEWER
 #endif // DOCTEST_TEST_CASE_CLASS
 
 // for registering tests with a fixture
-#define DOCTEST_TEST_CASE_FIXTURE(c, decorators)                                                                       \
-    DOCTEST_IMPLEMENT_FIXTURE(                                                                                         \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_CLASS_), c, DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), decorators                   \
-    )
+#define DOCTEST_TEST_CASE_FIXTURE(c, decorators)                                                                                   \
+    DOCTEST_IMPLEMENT_FIXTURE(DOCTEST_ANONYMOUS(DOCTEST_ANON_CLASS_), c, DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), decorators)
 
 // for converting types to strings without the <typeinfo> header and demangling
-#define DOCTEST_TYPE_TO_STRING_AS(str, ...)                                                                            \
-    namespace doctest {                                                                                                \
-    template <>                                                                                                        \
-    inline String toString<__VA_ARGS__>() {                                                                            \
-        return str;                                                                                                    \
-    }                                                                                                                  \
-    }                                                                                                                  \
+#define DOCTEST_TYPE_TO_STRING_AS(str, ...)                                                                                        \
+    namespace doctest                                                                                                              \
+    {                                                                                                                              \
+    template <> inline String toString<__VA_ARGS__>()                                                                              \
+    {                                                                                                                              \
+        return str;                                                                                                                \
+    }                                                                                                                              \
+    }                                                                                                                              \
     static_assert(true, "")
 
 #define DOCTEST_TYPE_TO_STRING(...) DOCTEST_TYPE_TO_STRING_AS(#__VA_ARGS__, __VA_ARGS__)
 
-#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE_IMPL(dec, T, iter, func)                                                     \
-    template <typename T>                                                                                              \
-    static void func();                                                                                                \
-    namespace { /* NOLINT */                                                                                           \
-    template <typename Tuple>                                                                                          \
-    struct iter;                                                                                                       \
-    template <typename Type, typename... Rest>                                                                         \
-    struct iter<std::tuple<Type, Rest...>> {                                                                           \
-        iter(const char *file, unsigned line, int index) noexcept {                                                    \
-            doctest::detail::regTest(                                                                                  \
-                doctest::detail::TestCase(                                                                             \
-                    func<Type>,                                                                                        \
-                    file,                                                                                              \
-                    line,                                                                                              \
-                    doctest_detail_test_suite_ns::getCurrentTestSuite(),                                               \
-                    doctest::toString<Type>(),                                                                         \
-                    int(line) * 1000 + index                                                                           \
-                ) *                                                                                                    \
-                dec                                                                                                    \
-            );                                                                                                         \
-            iter<std::tuple<Rest...>>(file, line, index + 1);                                                          \
-        }                                                                                                              \
-    };                                                                                                                 \
-    template <>                                                                                                        \
-    struct iter<std::tuple<>> {                                                                                        \
-        iter(const char *, unsigned, int) {}                                                                           \
-    };                                                                                                                 \
-    }                                                                                                                  \
-    template <typename T>                                                                                              \
-    static void func()
+#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE_IMPL(dec, T, iter, func)                                                                 \
+    template <typename T> static void func();                                                                                      \
+    namespace                                                                                                                      \
+    { /* NOLINT */                                                                                                                 \
+    template <typename Tuple> struct iter;                                                                                         \
+    template <typename Type, typename... Rest> struct iter<std::tuple<Type, Rest...>>                                              \
+    {                                                                                                                              \
+        iter(const char* file, unsigned line, int index) noexcept                                                                  \
+        {                                                                                                                          \
+            doctest::detail::regTest(doctest::detail::TestCase(func<Type>,                                                         \
+                                                               file,                                                               \
+                                                               line,                                                               \
+                                                               doctest_detail_test_suite_ns::getCurrentTestSuite(),                \
+                                                               doctest::toString<Type>(),                                          \
+                                                               int(line) * 1000 + index) *                                         \
+                                     dec);                                                                                         \
+            iter<std::tuple<Rest...>>(file, line, index + 1);                                                                      \
+        }                                                                                                                          \
+    };                                                                                                                             \
+    template <> struct iter<std::tuple<>>                                                                                          \
+    {                                                                                                                              \
+        iter(const char*, unsigned, int)                                                                                           \
+        {                                                                                                                          \
+        }                                                                                                                          \
+    };                                                                                                                             \
+    }                                                                                                                              \
+    template <typename T> static void func()
 
-#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE(dec, T, id)                                                                  \
+#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE(dec, T, id)                                                                              \
     DOCTEST_TEST_CASE_TEMPLATE_DEFINE_IMPL(dec, T, DOCTEST_CAT(id, ITERATOR), DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_))
 
-#define DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, anon, ...)                                                     \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_CAT(anon, DUMMY), /* NOLINT(cert-err58-cpp, fuchsia-statically-constructed-objects) */                 \
-        doctest::detail::instantiationHelper(DOCTEST_CAT(id, ITERATOR) < __VA_ARGS__ > (__FILE__, __LINE__, 0))        \
-    )
+#define DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, anon, ...)                                                                 \
+    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                                    \
+        DOCTEST_CAT(anon, DUMMY), /* NOLINT(cert-err58-cpp, fuchsia-statically-constructed-objects) */                             \
+        doctest::detail::instantiationHelper(DOCTEST_CAT(id, ITERATOR) < __VA_ARGS__ > (__FILE__, __LINE__, 0)))
 
-#define DOCTEST_TEST_CASE_TEMPLATE_INVOKE(id, ...)                                                                     \
-    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_), std::tuple<__VA_ARGS__>)     \
+#define DOCTEST_TEST_CASE_TEMPLATE_INVOKE(id, ...)                                                                                 \
+    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_), std::tuple<__VA_ARGS__>)                 \
     static_assert(true, "")
 
-#define DOCTEST_TEST_CASE_TEMPLATE_APPLY(id, ...)                                                                      \
-    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_), __VA_ARGS__)                 \
+#define DOCTEST_TEST_CASE_TEMPLATE_APPLY(id, ...)                                                                                  \
+    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(id, DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_), __VA_ARGS__)                             \
     static_assert(true, "")
 
-#define DOCTEST_TEST_CASE_TEMPLATE_IMPL(dec, T, anon, ...)                                                             \
-    DOCTEST_TEST_CASE_TEMPLATE_DEFINE_IMPL(dec, T, DOCTEST_CAT(anon, ITERATOR), anon);                                 \
-    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(anon, anon, std::tuple<__VA_ARGS__>)                                   \
-    template <typename T>                                                                                              \
-    static void anon()
+#define DOCTEST_TEST_CASE_TEMPLATE_IMPL(dec, T, anon, ...)                                                                         \
+    DOCTEST_TEST_CASE_TEMPLATE_DEFINE_IMPL(dec, T, DOCTEST_CAT(anon, ITERATOR), anon);                                             \
+    DOCTEST_TEST_CASE_TEMPLATE_INSTANTIATE_IMPL(anon, anon, std::tuple<__VA_ARGS__>)                                               \
+    template <typename T> static void anon()
 
-#define DOCTEST_TEST_CASE_TEMPLATE(dec, T, ...)                                                                        \
+#define DOCTEST_TEST_CASE_TEMPLATE(dec, T, ...)                                                                                    \
     DOCTEST_TEST_CASE_TEMPLATE_IMPL(dec, T, DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_), __VA_ARGS__)
 
 // for subcases
-#define DOCTEST_SUBCASE(name)                                                                                          \
-    if (const doctest::detail::Subcase &DOCTEST_ANONYMOUS(DOCTEST_ANON_SUBCASE_) DOCTEST_UNUSED =                      \
+#define DOCTEST_SUBCASE(name)                                                                                                      \
+    if (const doctest::detail::Subcase& DOCTEST_ANONYMOUS(DOCTEST_ANON_SUBCASE_) DOCTEST_UNUSED =                                  \
             doctest::detail::Subcase(name, __FILE__, __LINE__))
 
 // for generating value-parameterized test inputs
 #define DOCTEST_GENERATE(...) doctest::detail::acquireGeneratorValue(__VA_ARGS__)
 
 // for grouping tests in test suites by using code blocks
-#define DOCTEST_TEST_SUITE_IMPL(decorators, ns_name)                                                                   \
-    namespace ns_name {                                                                                                \
-    namespace doctest_detail_test_suite_ns {                                                                           \
-    static DOCTEST_NOINLINE doctest::detail::TestSuite &getCurrentTestSuite() noexcept {                               \
-        DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4640)                                                                  \
-        DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wexit-time-destructors")                                            \
-        DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wmissing-field-initializers")                                         \
-        static doctest::detail::TestSuite data{};                                                                      \
-        static bool inited = false;                                                                                    \
-        DOCTEST_MSVC_SUPPRESS_WARNING_POP                                                                              \
-        DOCTEST_CLANG_SUPPRESS_WARNING_POP                                                                             \
-        DOCTEST_GCC_SUPPRESS_WARNING_POP                                                                               \
-        if (!inited) {                                                                                                 \
-            data *decorators;                                                                                          \
-            inited = true;                                                                                             \
-        }                                                                                                              \
-        return data;                                                                                                   \
-    }                                                                                                                  \
-    }                                                                                                                  \
-    }                                                                                                                  \
+#define DOCTEST_TEST_SUITE_IMPL(decorators, ns_name)                                                                               \
+    namespace ns_name                                                                                                              \
+    {                                                                                                                              \
+    namespace doctest_detail_test_suite_ns                                                                                         \
+    {                                                                                                                              \
+    static DOCTEST_NOINLINE doctest::detail::TestSuite& getCurrentTestSuite() noexcept                                             \
+    {                                                                                                                              \
+        DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4640)                                                                              \
+        DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wexit-time-destructors")                                                        \
+        DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wmissing-field-initializers")                                                     \
+        static doctest::detail::TestSuite data{};                                                                                  \
+        static bool inited = false;                                                                                                \
+        DOCTEST_MSVC_SUPPRESS_WARNING_POP                                                                                          \
+        DOCTEST_CLANG_SUPPRESS_WARNING_POP                                                                                         \
+        DOCTEST_GCC_SUPPRESS_WARNING_POP                                                                                           \
+        if (!inited)                                                                                                               \
+        {                                                                                                                          \
+            data* decorators;                                                                                                      \
+            inited = true;                                                                                                         \
+        }                                                                                                                          \
+        return data;                                                                                                               \
+    }                                                                                                                              \
+    }                                                                                                                              \
+    }                                                                                                                              \
     namespace ns_name
 
 #define DOCTEST_TEST_SUITE(decorators) DOCTEST_TEST_SUITE_IMPL(decorators, DOCTEST_ANONYMOUS(DOCTEST_ANON_SUITE_))
 
 // for starting a testsuite block
-#define DOCTEST_TEST_SUITE_BEGIN(decorators)                                                                           \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT(cert-err58-cpp) */                                             \
-        doctest::detail::setTestSuite(doctest::detail::TestSuite() * decorators)                                       \
-    )                                                                                                                  \
+#define DOCTEST_TEST_SUITE_BEGIN(decorators)                                                                                       \
+    DOCTEST_GLOBAL_NO_WARNINGS(DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT(cert-err58-cpp) */                                  \
+                               doctest::detail::setTestSuite(doctest::detail::TestSuite() * decorators))                           \
     static_assert(true, "")
 
 // for ending a testsuite block
-#define DOCTEST_TEST_SUITE_END                                                                                         \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT(cert-err58-cpp) */                                             \
-        doctest::detail::setTestSuite(doctest::detail::TestSuite() * "")                                               \
-    )                                                                                                                  \
+#define DOCTEST_TEST_SUITE_END                                                                                                     \
+    DOCTEST_GLOBAL_NO_WARNINGS(DOCTEST_ANONYMOUS(DOCTEST_ANON_VAR_), /* NOLINT(cert-err58-cpp) */                                  \
+                               doctest::detail::setTestSuite(doctest::detail::TestSuite() * ""))                                   \
     using DOCTEST_ANONYMOUS(DOCTEST_ANON_FOR_SEMICOLON_) = int
 
 // for registering exception translators
-#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR_IMPL(translatorName, signature)                                          \
-    inline doctest::String translatorName(signature);                                                                  \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_TRANSLATOR_VAR_), /* NOLINT(cert-err58-cpp) */                                  \
-        doctest::registerExceptionTranslator(translatorName)                                                           \
-    )                                                                                                                  \
+#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR_IMPL(translatorName, signature)                                                      \
+    inline doctest::String translatorName(signature);                                                                              \
+    DOCTEST_GLOBAL_NO_WARNINGS(DOCTEST_ANONYMOUS(DOCTEST_ANON_TRANSLATOR_VAR_), /* NOLINT(cert-err58-cpp) */                       \
+                               doctest::registerExceptionTranslator(translatorName))                                               \
     doctest::String translatorName(signature)
 
-#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR(signature)                                                               \
+#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR(signature)                                                                           \
     DOCTEST_REGISTER_EXCEPTION_TRANSLATOR_IMPL(DOCTEST_ANONYMOUS(DOCTEST_ANON_TRANSLATOR_), signature)
 
 // for registering reporters
-#define DOCTEST_REGISTER_REPORTER(name, priority, reporter)                                                            \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_REPORTER_VAR_), /* NOLINT(cert-err58-cpp) */                                    \
-        doctest::registerReporter<reporter>(name, priority, true)                                                      \
-    )                                                                                                                  \
+#define DOCTEST_REGISTER_REPORTER(name, priority, reporter)                                                                        \
+    DOCTEST_GLOBAL_NO_WARNINGS(DOCTEST_ANONYMOUS(DOCTEST_ANON_REPORTER_VAR_), /* NOLINT(cert-err58-cpp) */                         \
+                               doctest::registerReporter<reporter>(name, priority, true))                                          \
     static_assert(true, "")
 
 // for registering listeners
-#define DOCTEST_REGISTER_LISTENER(name, priority, reporter)                                                            \
-    DOCTEST_GLOBAL_NO_WARNINGS(                                                                                        \
-        DOCTEST_ANONYMOUS(DOCTEST_ANON_REPORTER_VAR_), /* NOLINT(cert-err58-cpp) */                                    \
-        doctest::registerReporter<reporter>(name, priority, false)                                                     \
-    )                                                                                                                  \
+#define DOCTEST_REGISTER_LISTENER(name, priority, reporter)                                                                        \
+    DOCTEST_GLOBAL_NO_WARNINGS(DOCTEST_ANONYMOUS(DOCTEST_ANON_REPORTER_VAR_), /* NOLINT(cert-err58-cpp) */                         \
+                               doctest::registerReporter<reporter>(name, priority, false))                                         \
     static_assert(true, "")
 
-#define DOCTEST_INFO(...)                                                                                              \
+#define DOCTEST_INFO(...)                                                                                                          \
     DOCTEST_INFO_IMPL(DOCTEST_ANONYMOUS(DOCTEST_CAPTURE_MB_), DOCTEST_ANONYMOUS(DOCTEST_CAPTURE_OTHER_), __VA_ARGS__)
 
-#define DOCTEST_INFO_IMPL(mb_name, s_name, ...)                                                                        \
-    auto DOCTEST_ANONYMOUS(DOCTEST_CAPTURE_) = doctest::detail::MakeContextScope([&](std::ostream *s_name) {           \
-        doctest::detail::MessageBuilder mb_name(__FILE__, __LINE__, doctest::assertType::is_warn);                     \
-        mb_name.m_stream = s_name;                                                                                     \
-        mb_name *__VA_ARGS__;                                                                                          \
-    })
+#define DOCTEST_INFO_IMPL(mb_name, s_name, ...)                                                                                    \
+    auto DOCTEST_ANONYMOUS(DOCTEST_CAPTURE_) = doctest::detail::MakeContextScope(                                                  \
+        [&](std::ostream* s_name)                                                                                                  \
+        {                                                                                                                          \
+            doctest::detail::MessageBuilder mb_name(__FILE__, __LINE__, doctest::assertType::is_warn);                             \
+            mb_name.m_stream = s_name;                                                                                             \
+            mb_name* __VA_ARGS__;                                                                                                  \
+        })
 
 #define DOCTEST_CAPTURE(x) DOCTEST_INFO(#x " := ", x)
 
-#define DOCTEST_ADD_AT_IMPL(type, file, line, mb, ...)                                                                 \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        doctest::detail::MessageBuilder mb(file, line, doctest::assertType::type);                                     \
-        mb *__VA_ARGS__;                                                                                               \
-        if (mb.log())                                                                                                  \
-            DOCTEST_BREAK_INTO_DEBUGGER();                                                                             \
-        mb.react();                                                                                                    \
-    }                                                                                                                  \
+#define DOCTEST_ADD_AT_IMPL(type, file, line, mb, ...)                                                                             \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        doctest::detail::MessageBuilder mb(file, line, doctest::assertType::type);                                                 \
+        mb* __VA_ARGS__;                                                                                                           \
+        if (mb.log())                                                                                                              \
+            DOCTEST_BREAK_INTO_DEBUGGER();                                                                                         \
+        mb.react();                                                                                                                \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
-#define DOCTEST_ADD_MESSAGE_AT(file, line, ...)                                                                        \
+#define DOCTEST_ADD_MESSAGE_AT(file, line, ...)                                                                                    \
     DOCTEST_ADD_AT_IMPL(is_warn, file, line, DOCTEST_ANONYMOUS(DOCTEST_MESSAGE_), __VA_ARGS__)
-#define DOCTEST_ADD_FAIL_CHECK_AT(file, line, ...)                                                                     \
+#define DOCTEST_ADD_FAIL_CHECK_AT(file, line, ...)                                                                                 \
     DOCTEST_ADD_AT_IMPL(is_check, file, line, DOCTEST_ANONYMOUS(DOCTEST_MESSAGE_), __VA_ARGS__)
-#define DOCTEST_ADD_FAIL_AT(file, line, ...)                                                                           \
+#define DOCTEST_ADD_FAIL_AT(file, line, ...)                                                                                       \
     DOCTEST_ADD_AT_IMPL(is_require, file, line, DOCTEST_ANONYMOUS(DOCTEST_MESSAGE_), __VA_ARGS__)
 
 #define DOCTEST_MESSAGE(...) DOCTEST_ADD_MESSAGE_AT(__FILE__, __LINE__, __VA_ARGS__)
@@ -299,36 +296,38 @@ int instantiationHelper(const T &) noexcept {
 
 #ifndef DOCTEST_CONFIG_SUPER_FAST_ASSERTS
 
-#define DOCTEST_ASSERT_IMPLEMENT_2(assert_type, ...)                                                                   \
-    DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Woverloaded-shift-op-parentheses")                                      \
-    /* NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks) */                                                      \
-    doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__);     \
-    DOCTEST_WRAP_IN_TRY(                                                                                               \
-        DOCTEST_RB.setResult(doctest::detail::ExpressionDecomposer(doctest::assertType::assert_type) << __VA_ARGS__)   \
-    ) /* NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks) */                                                    \
-    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                                        \
+#define DOCTEST_ASSERT_IMPLEMENT_2(assert_type, ...)                                                                               \
+    DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Woverloaded-shift-op-parentheses")                                                  \
+    /* NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks) */                                                                  \
+    doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__);                 \
+    DOCTEST_WRAP_IN_TRY(DOCTEST_RB.setResult(doctest::detail::ExpressionDecomposer(doctest::assertType::assert_type)               \
+                                             << __VA_ARGS__)) /* NOLINTNEXTLINE(clang-analyzer-cplusplus.NewDeleteLeaks) */        \
+    DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB)                                                                                    \
     DOCTEST_CLANG_SUPPRESS_WARNING_POP
 
-#define DOCTEST_ASSERT_IMPLEMENT_1(assert_type, ...)                                                                   \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                                          \
-    }                                                                                                                  \
+#define DOCTEST_ASSERT_IMPLEMENT_1(assert_type, ...)                                                                               \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        DOCTEST_ASSERT_IMPLEMENT_2(assert_type, __VA_ARGS__);                                                                      \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
 
-#define DOCTEST_BINARY_ASSERT(assert_type, comp, ...)                                                                  \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__); \
-        DOCTEST_WRAP_IN_TRY(DOCTEST_RB.binary_assert<doctest::detail::binaryAssertComparison::comp>(__VA_ARGS__))      \
-        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                   \
-    }                                                                                                                  \
+#define DOCTEST_BINARY_ASSERT(assert_type, comp, ...)                                                                              \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__);             \
+        DOCTEST_WRAP_IN_TRY(DOCTEST_RB.binary_assert<doctest::detail::binaryAssertComparison::comp>(__VA_ARGS__))                  \
+        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                               \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
-#define DOCTEST_UNARY_ASSERT(assert_type, ...)                                                                         \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__); \
-        DOCTEST_WRAP_IN_TRY(DOCTEST_RB.unary_assert(__VA_ARGS__))                                                      \
-        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                   \
-    }                                                                                                                  \
+#define DOCTEST_UNARY_ASSERT(assert_type, ...)                                                                                     \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__);             \
+        DOCTEST_WRAP_IN_TRY(DOCTEST_RB.unary_assert(__VA_ARGS__))                                                                  \
+        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                               \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
 #else // DOCTEST_CONFIG_SUPER_FAST_ASSERTS
@@ -336,22 +335,20 @@ int instantiationHelper(const T &) noexcept {
 // necessary for <ASSERT>_MESSAGE
 #define DOCTEST_ASSERT_IMPLEMENT_2 DOCTEST_ASSERT_IMPLEMENT_1
 
-#define DOCTEST_ASSERT_IMPLEMENT_1(assert_type, ...)                                                                   \
-    DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Woverloaded-shift-op-parentheses")                                      \
-    doctest::detail::decomp_assert(                                                                                    \
-        doctest::assertType::assert_type,                                                                              \
-        __FILE__,                                                                                                      \
-        __LINE__,                                                                                                      \
-        #__VA_ARGS__,                                                                                                  \
-        doctest::detail::ExpressionDecomposer(doctest::assertType::assert_type) << __VA_ARGS__                         \
-    ) DOCTEST_CLANG_SUPPRESS_WARNING_POP
+#define DOCTEST_ASSERT_IMPLEMENT_1(assert_type, ...)                                                                               \
+    DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Woverloaded-shift-op-parentheses")                                                  \
+    doctest::detail::decomp_assert(doctest::assertType::assert_type,                                                               \
+                                   __FILE__,                                                                                       \
+                                   __LINE__,                                                                                       \
+                                   #__VA_ARGS__,                                                                                   \
+                                   doctest::detail::ExpressionDecomposer(doctest::assertType::assert_type) << __VA_ARGS__)         \
+        DOCTEST_CLANG_SUPPRESS_WARNING_POP
 
-#define DOCTEST_BINARY_ASSERT(assert_type, comparison, ...)                                                            \
-    doctest::detail::binary_assert<doctest::detail::binaryAssertComparison::comparison>(                               \
-        doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__, __VA_ARGS__                                \
-    )
+#define DOCTEST_BINARY_ASSERT(assert_type, comparison, ...)                                                                        \
+    doctest::detail::binary_assert<doctest::detail::binaryAssertComparison::comparison>(                                           \
+        doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__, __VA_ARGS__)
 
-#define DOCTEST_UNARY_ASSERT(assert_type, ...)                                                                         \
+#define DOCTEST_UNARY_ASSERT(assert_type, ...)                                                                                     \
     doctest::detail::unary_assert(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__, __VA_ARGS__)
 
 #endif // DOCTEST_CONFIG_SUPER_FAST_ASSERTS
@@ -400,50 +397,74 @@ int instantiationHelper(const T &) noexcept {
 
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
 
-#define DOCTEST_ASSERT_THROWS_AS(expr, assert_type, message, ...)                                                      \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        if (!doctest::getContextOptions()->no_throw) {                                                                 \
-            doctest::detail::ResultBuilder DOCTEST_RB(                                                                 \
-                doctest::assertType::assert_type, __FILE__, __LINE__, #expr, #__VA_ARGS__, message                     \
-            );                                                                                                         \
-            try {                                                                                                      \
-                DOCTEST_CAST_TO_VOID(expr)                                                                             \
-            } catch (const typename doctest::detail::types::remove_const<                                              \
-                     typename doctest::detail::types::remove_reference<__VA_ARGS__>::type>::type &) {                  \
-                DOCTEST_RB.translateException();                                                                       \
-                DOCTEST_RB.m_threw_as = true;                                                                          \
-            } catch (...) { DOCTEST_RB.translateException(); }                                                         \
-            DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                               \
-        } else { /* NOLINT(*-else-after-return) */                                                                     \
-            DOCTEST_FUNC_SCOPE_RET(false);                                                                             \
-        }                                                                                                              \
-    }                                                                                                                  \
+#define DOCTEST_ASSERT_THROWS_AS(expr, assert_type, message, ...)                                                                  \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        if (!doctest::getContextOptions()->no_throw)                                                                               \
+        {                                                                                                                          \
+            doctest::detail::ResultBuilder DOCTEST_RB(                                                                             \
+                doctest::assertType::assert_type, __FILE__, __LINE__, #expr, #__VA_ARGS__, message);                               \
+            try                                                                                                                    \
+            {                                                                                                                      \
+                DOCTEST_CAST_TO_VOID(expr)                                                                                         \
+            }                                                                                                                      \
+            catch (const typename doctest::detail::types::remove_const<                                                            \
+                   typename doctest::detail::types::remove_reference<__VA_ARGS__>::type>::type&)                                   \
+            {                                                                                                                      \
+                DOCTEST_RB.translateException();                                                                                   \
+                DOCTEST_RB.m_threw_as = true;                                                                                      \
+            }                                                                                                                      \
+            catch (...)                                                                                                            \
+            {                                                                                                                      \
+                DOCTEST_RB.translateException();                                                                                   \
+            }                                                                                                                      \
+            DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                           \
+        }                                                                                                                          \
+        else                                                                                                                       \
+        { /* NOLINT(*-else-after-return) */                                                                                        \
+            DOCTEST_FUNC_SCOPE_RET(false);                                                                                         \
+        }                                                                                                                          \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
-#define DOCTEST_ASSERT_THROWS_WITH(expr, expr_str, assert_type, ...)                                                   \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        if (!doctest::getContextOptions()->no_throw) {                                                                 \
-            doctest::detail::ResultBuilder DOCTEST_RB(                                                                 \
-                doctest::assertType::assert_type, __FILE__, __LINE__, expr_str, "", __VA_ARGS__                        \
-            );                                                                                                         \
-            try {                                                                                                      \
-                DOCTEST_CAST_TO_VOID(expr)                                                                             \
-            } catch (...) { DOCTEST_RB.translateException(); }                                                         \
-            DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                               \
-        } else { /* NOLINT(*-else-after-return) */                                                                     \
-            DOCTEST_FUNC_SCOPE_RET(false);                                                                             \
-        }                                                                                                              \
-    }                                                                                                                  \
+#define DOCTEST_ASSERT_THROWS_WITH(expr, expr_str, assert_type, ...)                                                               \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        if (!doctest::getContextOptions()->no_throw)                                                                               \
+        {                                                                                                                          \
+            doctest::detail::ResultBuilder DOCTEST_RB(                                                                             \
+                doctest::assertType::assert_type, __FILE__, __LINE__, expr_str, "", __VA_ARGS__);                                  \
+            try                                                                                                                    \
+            {                                                                                                                      \
+                DOCTEST_CAST_TO_VOID(expr)                                                                                         \
+            }                                                                                                                      \
+            catch (...)                                                                                                            \
+            {                                                                                                                      \
+                DOCTEST_RB.translateException();                                                                                   \
+            }                                                                                                                      \
+            DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                           \
+        }                                                                                                                          \
+        else                                                                                                                       \
+        { /* NOLINT(*-else-after-return) */                                                                                        \
+            DOCTEST_FUNC_SCOPE_RET(false);                                                                                         \
+        }                                                                                                                          \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
-#define DOCTEST_ASSERT_NOTHROW(assert_type, ...)                                                                       \
-    DOCTEST_FUNC_SCOPE_BEGIN {                                                                                         \
-        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__); \
-        try {                                                                                                          \
-            DOCTEST_CAST_TO_VOID(__VA_ARGS__)                                                                          \
-        } catch (...) { DOCTEST_RB.translateException(); }                                                             \
-        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                   \
-    }                                                                                                                  \
+#define DOCTEST_ASSERT_NOTHROW(assert_type, ...)                                                                                   \
+    DOCTEST_FUNC_SCOPE_BEGIN                                                                                                       \
+    {                                                                                                                              \
+        doctest::detail::ResultBuilder DOCTEST_RB(doctest::assertType::assert_type, __FILE__, __LINE__, #__VA_ARGS__);             \
+        try                                                                                                                        \
+        {                                                                                                                          \
+            DOCTEST_CAST_TO_VOID(__VA_ARGS__)                                                                                      \
+        }                                                                                                                          \
+        catch (...)                                                                                                                \
+        {                                                                                                                          \
+            DOCTEST_RB.translateException();                                                                                       \
+        }                                                                                                                          \
+        DOCTEST_ASSERT_LOG_REACT_RETURN(DOCTEST_RB);                                                                               \
+    }                                                                                                                              \
     DOCTEST_FUNC_SCOPE_END
 
 // clang-format off
@@ -492,19 +513,17 @@ int instantiationHelper(const T &) noexcept {
 // =================================================================================================
 #else // DOCTEST_CONFIG_DISABLE
 
-#define DOCTEST_IMPLEMENT_FIXTURE(der, base, func, name)                                                               \
-    namespace /* NOLINT */ {                                                                                           \
-    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE>                                                                   \
-    struct der : public base {                                                                                         \
-        void f();                                                                                                      \
-    };                                                                                                                 \
-    }                                                                                                                  \
-    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE>                                                                   \
-    inline void der<DOCTEST_UNUSED_TEMPLATE_TYPE>::f()
+#define DOCTEST_IMPLEMENT_FIXTURE(der, base, func, name)                                                                           \
+    namespace /* NOLINT */                                                                                                         \
+    {                                                                                                                              \
+    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE> struct der : public base                                                      \
+    {                                                                                                                              \
+        void f();                                                                                                                  \
+    };                                                                                                                             \
+    }                                                                                                                              \
+    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE> inline void der<DOCTEST_UNUSED_TEMPLATE_TYPE>::f()
 
-#define DOCTEST_CREATE_AND_REGISTER_FUNCTION(f, name)                                                                  \
-    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE>                                                                   \
-    static inline void f()
+#define DOCTEST_CREATE_AND_REGISTER_FUNCTION(f, name) template <typename DOCTEST_UNUSED_TEMPLATE_TYPE> static inline void f()
 
 // for registering tests
 #define DOCTEST_TEST_CASE(name) DOCTEST_CREATE_AND_REGISTER_FUNCTION(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), name)
@@ -513,7 +532,7 @@ int instantiationHelper(const T &) noexcept {
 #define DOCTEST_TEST_CASE_CLASS(name) DOCTEST_CREATE_AND_REGISTER_FUNCTION(DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), name)
 
 // for registering tests with a fixture
-#define DOCTEST_TEST_CASE_FIXTURE(x, name)                                                                             \
+#define DOCTEST_TEST_CASE_FIXTURE(x, name)                                                                                         \
     DOCTEST_IMPLEMENT_FIXTURE(DOCTEST_ANONYMOUS(DOCTEST_ANON_CLASS_), x, DOCTEST_ANONYMOUS(DOCTEST_ANON_FUNC_), name)
 
 // for converting types to strings without the <typeinfo> header and demangling
@@ -521,13 +540,10 @@ int instantiationHelper(const T &) noexcept {
 #define DOCTEST_TYPE_TO_STRING(...) static_assert(true, "")
 
 // for typed tests
-#define DOCTEST_TEST_CASE_TEMPLATE(name, type, ...)                                                                    \
-    template <typename type>                                                                                           \
-    inline void DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_)()
+#define DOCTEST_TEST_CASE_TEMPLATE(name, type, ...) template <typename type> inline void DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_)()
 
-#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE(name, type, id)                                                              \
-    template <typename type>                                                                                           \
-    inline void DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_)()
+#define DOCTEST_TEST_CASE_TEMPLATE_DEFINE(name, type, id)                                                                          \
+    template <typename type> inline void DOCTEST_ANONYMOUS(DOCTEST_ANON_TMP_)()
 
 #define DOCTEST_TEST_CASE_TEMPLATE_INVOKE(id, ...) static_assert(true, "")
 #define DOCTEST_TEST_CASE_TEMPLATE_APPLY(id, ...) static_assert(true, "")
@@ -548,8 +564,8 @@ int instantiationHelper(const T &) noexcept {
 // for ending a testsuite block
 #define DOCTEST_TEST_SUITE_END using DOCTEST_ANONYMOUS(DOCTEST_ANON_FOR_SEMICOLON_) = int
 
-#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR(signature)                                                               \
-    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE>                                                                   \
+#define DOCTEST_REGISTER_EXCEPTION_TRANSLATOR(signature)                                                                           \
+    template <typename DOCTEST_UNUSED_TEMPLATE_TYPE>                                                                               \
     static inline doctest::String DOCTEST_ANONYMOUS(DOCTEST_ANON_TRANSLATOR_)(signature)
 
 #define DOCTEST_REGISTER_REPORTER(name, priority, reporter)
@@ -580,12 +596,14 @@ int instantiationHelper(const T &) noexcept {
 #define DOCTEST_CHECK_FALSE_MESSAGE(cond, ...) [&] { return !(cond); }()
 #define DOCTEST_REQUIRE_FALSE_MESSAGE(cond, ...) [&] { return !(cond); }()
 
-namespace doctest {
-namespace detail {
-#define DOCTEST_RELATIONAL_OP(name, op)                                                                                \
-    template <typename L, typename R>                                                                                  \
-    bool name(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs) {                                          \
-        return lhs op rhs;                                                                                             \
+namespace doctest
+{
+namespace detail
+{
+#define DOCTEST_RELATIONAL_OP(name, op)                                                                                            \
+    template <typename L, typename R> bool name(const DOCTEST_REF_WRAP(L) lhs, const DOCTEST_REF_WRAP(R) rhs)                      \
+    {                                                                                                                              \
+        return lhs op rhs;                                                                                                         \
     }
 
 DOCTEST_RELATIONAL_OP(eq, ==)
@@ -624,10 +642,11 @@ DOCTEST_RELATIONAL_OP(ge, >=)
 
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
 
-#define DOCTEST_WARN_THROWS_WITH(expr, with, ...)                                                                      \
-    [] {                                                                                                               \
-        static_assert(false, "Exception translation is not available when doctest is disabled.");                      \
-        return false;                                                                                                  \
+#define DOCTEST_WARN_THROWS_WITH(expr, with, ...)                                                                                  \
+    []                                                                                                                             \
+    {                                                                                                                              \
+        static_assert(false, "Exception translation is not available when doctest is disabled.");                                  \
+        return false;                                                                                                              \
     }()
 #define DOCTEST_CHECK_THROWS_WITH(expr, with, ...) DOCTEST_WARN_THROWS_WITH(, , )
 #define DOCTEST_REQUIRE_THROWS_WITH(expr, with, ...) DOCTEST_WARN_THROWS_WITH(, , )
@@ -753,15 +772,14 @@ DOCTEST_RELATIONAL_OP(ge, >=)
 #ifdef DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
 #define DOCTEST_EXCEPTION_EMPTY_FUNC DOCTEST_FUNC_EMPTY
 #else // DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS
-#define DOCTEST_EXCEPTION_EMPTY_FUNC                                                                                   \
-    [] {                                                                                                               \
-        static_assert(                                                                                                 \
-            false,                                                                                                     \
-            "Exceptions are disabled! "                                                                                \
-            "Use DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS if you want "                                       \
-            "to compile with exceptions disabled."                                                                     \
-        );                                                                                                             \
-        return false;                                                                                                  \
+#define DOCTEST_EXCEPTION_EMPTY_FUNC                                                                                               \
+    []                                                                                                                             \
+    {                                                                                                                              \
+        static_assert(false,                                                                                                       \
+                      "Exceptions are disabled! "                                                                                  \
+                      "Use DOCTEST_CONFIG_NO_EXCEPTIONS_BUT_WITH_ALL_ASSERTS if you want "                                         \
+                      "to compile with exceptions disabled.");                                                                     \
+        return false;                                                                                                              \
     }()
 
 #undef DOCTEST_REQUIRE

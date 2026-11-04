@@ -8,7 +8,8 @@
 
 #include "simdjson.h"
 
-int main() {
+int main()
+{
     std::string input = R"({"hello": "world"} {"hello": "there"})";
     simdjson::ondemand::parser parser;
     simdjson::ondemand::document_stream stream;
@@ -16,15 +17,21 @@ int main() {
     auto error = parser.iterate_many(simdjson::padded_string::load("stream.json")).get(stream);
 #else
     simdjson::padded_string json;
-    if (simdjson::padded_string::load("stream.json").get(json)) { json = simdjson::padded_string(input); }
+    if (simdjson::padded_string::load("stream.json").get(json))
+    {
+        json = simdjson::padded_string(input);
+    }
     auto error = parser.iterate_many(json).get(stream);
 #endif
-    if (error) {
+    if (error)
+    {
         std::cerr << error << std::endl;
         return EXIT_FAILURE;
     }
-    for (auto doc : stream) {
-        if (doc.error()) {
+    for (auto doc : stream)
+    {
+        if (doc.error())
+        {
             std::cerr << doc.error() << std::endl;
             return EXIT_FAILURE;
         }

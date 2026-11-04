@@ -43,25 +43,30 @@
 
 #include <zip.h>
 
-struct ctx {
+struct ctx
+{
     zip_uint64_t uncompressed_size;
     zip_uint32_t crc;
     zip_uint32_t compression_method;
 };
 
-zip_int64_t callback(zip_source_t *src, void *ud, void *data, zip_uint64_t length, zip_source_cmd_t command) {
-    struct ctx *ctx = (struct ctx *)ud;
+zip_int64_t callback(zip_source_t* src, void* ud, void* data, zip_uint64_t length, zip_source_cmd_t command)
+{
+    struct ctx* ctx = (struct ctx*)ud;
 
-    switch (command) {
+    switch (command)
+    {
     case ZIP_SOURCE_FREE:
         /* Free our context. */
         free(ctx);
         return 0;
 
-    case ZIP_SOURCE_STAT: {
-        zip_stat_t *st = (zip_stat_t *)data;
+    case ZIP_SOURCE_STAT:
+    {
+        zip_stat_t* st = (zip_stat_t*)data;
         /* Fix metadata with provided values. */
-        if (st->valid & ZIP_STAT_SIZE) {
+        if (st->valid & ZIP_STAT_SIZE)
+        {
             st->comp_size = st->size;
             st->valid |= ZIP_STAT_COMP_SIZE;
         }
@@ -79,12 +84,15 @@ zip_int64_t callback(zip_source_t *src, void *ud, void *data, zip_uint64_t lengt
     }
 }
 
-zip_source_t *create_layered_compressed_source(zip_source_t *source, zip_uint64_t uncompressed_size, zip_uint32_t crc, zip_uint32_t compression_method, zip_error_t *error) {
-    struct ctx *ctx = (struct ctx *)malloc(sizeof(*ctx));
-    zip_source_t *compressed_source;
+zip_source_t* create_layered_compressed_source(
+    zip_source_t* source, zip_uint64_t uncompressed_size, zip_uint32_t crc, zip_uint32_t compression_method, zip_error_t* error)
+{
+    struct ctx* ctx = (struct ctx*)malloc(sizeof(*ctx));
+    zip_source_t* compressed_source;
 
     /* Allocate context. */
-    if (ctx == NULL) {
+    if (ctx == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
@@ -98,15 +106,16 @@ zip_source_t *create_layered_compressed_source(zip_source_t *source, zip_uint64_
     compressed_source = zip_source_layered_create(source, callback, ctx, error);
 
     /* In case of error, free context. */
-    if (compressed_source == NULL) {
+    if (compressed_source == NULL)
+    {
         free(ctx);
     }
 
     return compressed_source;
 }
 
-
-/* This is the information needed to add pre-compressed data to a zip archive. data must be compressed in a format compatible with Zip (e.g. no gzip header for deflate). */
+/* This is the information needed to add pre-compressed data to a zip archive. data must be compressed in a format compatible with
+ * Zip (e.g. no gzip header for deflate). */
 
 zip_uint16_t compression_method = ZIP_CM_DEFLATE;
 zip_uint64_t uncompressed_size = 60;
@@ -119,20 +128,22 @@ zip_uint8_t data[] = {
 };
 /* clang-format on */
 
-
-int main(int argc, char *argv[]) {
-    const char *archive;
+int main(int argc, char* argv[])
+{
+    const char* archive;
     zip_source_t *src, *src_comp;
-    zip_t *za;
+    zip_t* za;
     int err;
 
-    if (argc != 2) {
+    if (argc != 2)
+    {
         fprintf(stderr, "usage: %s archive\n", argv[0]);
         return 1;
     }
     archive = argv[1];
 
-    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL) {
+    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL)
+    {
         zip_error_t error;
         zip_error_init_with_code(&error, err);
         fprintf(stderr, "%s: cannot open zip archive '%s': %s\n", argv[0], archive, zip_error_strerror(&error));
@@ -141,28 +152,32 @@ int main(int argc, char *argv[]) {
     }
 
     /* The data can come from any source. To keep the example simple, it is provided in a static buffer here. */
-    if ((src = zip_source_buffer(za, data, sizeof(data), 0)) == NULL) {
+    if ((src = zip_source_buffer(za, data, sizeof(data), 0)) == NULL)
+    {
         fprintf(stderr, "%s: cannot create buffer source: %s\n", argv[0], zip_strerror(za));
         zip_discard(za);
         exit(1);
     }
 
     zip_error_t error;
-    if ((src_comp = create_layered_compressed_source(src, uncompressed_size, crc, compression_method, &error)) == NULL) {
+    if ((src_comp = create_layered_compressed_source(src, uncompressed_size, crc, compression_method, &error)) == NULL)
+    {
         fprintf(stderr, "%s: cannot create layered source: %s\n", argv[0], zip_error_strerror(&error));
         zip_source_free(src);
         zip_discard(za);
         exit(1);
     }
 
-    if ((zip_file_add(za, "precompressed", src_comp, 0)) < 0) {
+    if ((zip_file_add(za, "precompressed", src_comp, 0)) < 0)
+    {
         fprintf(stderr, "%s: cannot add precompressed file: %s\n", argv[0], zip_strerror(za));
         zip_source_free(src_comp);
         zip_discard(za);
         exit(1);
     }
 
-    if ((zip_close(za)) < 0) {
+    if ((zip_close(za)) < 0)
+    {
         fprintf(stderr, "%s: cannot close archive '%s': %s\n", argv[0], archive, zip_strerror(za));
         zip_discard(za);
         exit(1);

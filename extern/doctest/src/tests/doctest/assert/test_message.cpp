@@ -1,7 +1,8 @@
 #include <doctest/doctest.h>
 #include <cstdint>
 
-TEST_CASE("Building messages") {
+TEST_CASE("Building messages")
+{
     doctest::detail::MessageBuilder mb("file.c", 123, doctest::assertType::DT_CHECK);
 
     const auto lhs = uint32_t{42};

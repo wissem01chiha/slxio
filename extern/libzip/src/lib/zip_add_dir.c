@@ -35,10 +35,10 @@
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
-
 /* NOTE: Signed due to -1 on error.  See zip_add.c for more details. */
 
-ZIP_EXTERN zip_int64_t zip_add_dir(zip_t *za, const char *name) {
+ZIP_EXTERN zip_int64_t zip_add_dir(zip_t* za, const char* name)
+{
     return zip_dir_add(za, name, 0);
 }
 /* LCOV_EXCL_STOP */

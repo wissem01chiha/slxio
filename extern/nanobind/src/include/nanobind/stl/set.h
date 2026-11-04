@@ -16,8 +16,8 @@ NAMESPACE_BEGIN(NB_NAMESPACE)
 NAMESPACE_BEGIN(detail)
 
 template <typename Key, typename Compare, typename Alloc>
-struct type_caster<std::set<Key, Compare, Alloc>>
-    : set_caster<std::set<Key, Compare, Alloc>, Key> {
+struct type_caster<std::set<Key, Compare, Alloc>> : set_caster<std::set<Key, Compare, Alloc>, Key>
+{
 };
 
 NAMESPACE_END(detail)

@@ -3,22 +3,35 @@
 
 namespace nb = nanobind;
 
-class MyError1 : public std::exception {
+class MyError1 : public std::exception
+{
 public:
-    virtual const char *what() const noexcept { return "MyError1"; }
+    virtual const char* what() const noexcept
+    {
+        return "MyError1";
+    }
 };
 
-class MyError2 : public std::exception {
+class MyError2 : public std::exception
+{
 public:
-    virtual const char *what() const noexcept { return "MyError2"; }
+    virtual const char* what() const noexcept
+    {
+        return "MyError2";
+    }
 };
 
-class MyError3 : public std::exception {
+class MyError3 : public std::exception
+{
 public:
-    virtual const char *what() const noexcept { return "MyError3"; }
+    virtual const char* what() const noexcept
+    {
+        return "MyError3";
+    }
 };
 
-NB_MODULE(test_exception_ext, m) {
+NB_MODULE(test_exception_ext, m)
+{
     m.def("raise_generic", [] { throw std::exception(); });
     m.def("raise_bad_alloc", [] { throw std::bad_alloc(); });
     m.def("raise_runtime_error", [] { throw std::runtime_error("a runtime error"); });
@@ -39,10 +52,14 @@ NB_MODULE(test_exception_ext, m) {
     m.def("raise_my_error_1", [] { throw MyError1(); });
 
     nb::register_exception_translator(
-        [](const std::exception_ptr &p, void * /* unused */) {
-            try {
+        [](const std::exception_ptr& p, void* /* unused */)
+        {
+            try
+            {
                 std::rethrow_exception(p);
-            } catch (const MyError2 &e) {
+            }
+            catch (const MyError2& e)
+            {
                 PyErr_SetString(PyExc_IndexError, e.what());
             }
         });
@@ -51,26 +68,34 @@ NB_MODULE(test_exception_ext, m) {
     nb::exception<MyError3>(m, "MyError3");
     m.def("raise_my_error_3", [] { throw MyError3(); });
 
-    m.def("raise_nested", [](nb::callable c) {
-            int arg = 123;
-            try {
-                c(arg);
-            } catch (nb::python_error &e) {
-                nb::raise_from(e, PyExc_RuntimeError, "Call with value %i failed", arg);
-            }
-        }
-    );
+    m.def("raise_nested",
+          [](nb::callable c)
+          {
+              int arg = 123;
+              try
+              {
+                  c(arg);
+              }
+              catch (nb::python_error& e)
+              {
+                  nb::raise_from(e, PyExc_RuntimeError, "Call with value %i failed", arg);
+              }
+          });
 
     // Invoke a callable that is expected to raise, then return the C++-side
     // 'what()' message of the resulting nb::python_error. Used to exercise
     // python_error::what() (including the case of a buggy __str__).
-    m.def("call_and_report_what", [](nb::callable c) -> std::string {
-            try {
-                c();
-            } catch (nb::python_error &e) {
-                return e.what();
-            }
-            return "(no exception raised)";
-        }
-    );
+    m.def("call_and_report_what",
+          [](nb::callable c) -> std::string
+          {
+              try
+              {
+                  c();
+              }
+              catch (nb::python_error& e)
+              {
+                  return e.what();
+              }
+              return "(no exception raised)";
+          });
 }

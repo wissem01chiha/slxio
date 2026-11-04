@@ -31,34 +31,37 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "zipint.h"
 
-static zip_file_t *_zip_file_new(zip_t *za);
+static zip_file_t* _zip_file_new(zip_t* za);
 
+ZIP_EXTERN zip_file_t* zip_fopen_index_encrypted(zip_t* za, zip_uint64_t index, zip_flags_t flags, const char* password)
+{
+    zip_file_t* zf;
+    zip_source_t* src;
 
-ZIP_EXTERN zip_file_t *zip_fopen_index_encrypted(zip_t *za, zip_uint64_t index, zip_flags_t flags, const char *password) {
-    zip_file_t *zf;
-    zip_source_t *src;
-
-    if (password != NULL && password[0] == '\0') {
+    if (password != NULL && password[0] == '\0')
+    {
         password = NULL;
     }
 
-    if ((src = zip_source_zip_file_create(za, index, flags, 0, -1, password, &za->error)) == NULL) {
+    if ((src = zip_source_zip_file_create(za, index, flags, 0, -1, password, &za->error)) == NULL)
+    {
         return NULL;
     }
 
-    if (zip_source_open(src) < 0) {
+    if (zip_source_open(src) < 0)
+    {
         zip_error_set_from_source(&za->error, src);
         zip_source_free(src);
         return NULL;
     }
 
-    if ((zf = _zip_file_new(za)) == NULL) {
+    if ((zf = _zip_file_new(za)) == NULL)
+    {
         zip_source_free(src);
         return NULL;
     }
@@ -68,11 +71,12 @@ ZIP_EXTERN zip_file_t *zip_fopen_index_encrypted(zip_t *za, zip_uint64_t index, 
     return zf;
 }
 
+static zip_file_t* _zip_file_new(zip_t* za)
+{
+    zip_file_t* zf;
 
-static zip_file_t *_zip_file_new(zip_t *za) {
-    zip_file_t *zf;
-
-    if ((zf = (zip_file_t *)malloc(sizeof(struct zip_file))) == NULL) {
+    if ((zf = (zip_file_t*)malloc(sizeof(struct zip_file))) == NULL)
+    {
         zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
         return NULL;
     }

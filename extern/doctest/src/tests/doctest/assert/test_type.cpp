@@ -1,6 +1,7 @@
 #include <doctest/doctest.h>
 
-TEST_CASE("Assertion stringification") {
+TEST_CASE("Assertion stringification")
+{
     using namespace doctest;
 
     CHECK(assertString(assertType::DT_WARN) == doctest::String("WARN"));
@@ -64,7 +65,8 @@ TEST_CASE("Assertion stringification") {
     CHECK(assertString(assertType::DT_REQUIRE_UNARY_FALSE) == doctest::String("REQUIRE_UNARY_FALSE"));
 }
 
-TEST_CASE("Failure stringification") {
+TEST_CASE("Failure stringification")
+{
     using namespace doctest;
 
     CHECK(failureString(assertType::DT_WARN) == doctest::String("WARNING"));

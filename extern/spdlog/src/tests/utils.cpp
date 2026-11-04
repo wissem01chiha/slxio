@@ -19,7 +19,7 @@ void prepare_logdir() {
 #endif
 }
 
-std::string file_contents(const std::string &filename) {
+std::string file_contents(const std::string& filename) {
     std::ifstream ifs(filename, std::ios_base::binary);
     if (!ifs) {
         throw std::runtime_error("Failed open file ");
@@ -27,7 +27,7 @@ std::string file_contents(const std::string &filename) {
     return std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
 }
 
-std::size_t count_lines(const std::string &filename) {
+std::size_t count_lines(const std::string& filename) {
     std::ifstream ifs(filename);
     if (!ifs) {
         throw std::runtime_error("Failed open file ");
@@ -39,7 +39,7 @@ std::size_t count_lines(const std::string &filename) {
     return counter;
 }
 
-void require_message_count(const std::string &filename, const std::size_t messages) {
+void require_message_count(const std::string& filename, const std::size_t messages) {
     if (strlen(spdlog::details::os::default_eol) == 0) {
         REQUIRE(count_lines(filename) == 1);
     } else {
@@ -47,7 +47,7 @@ void require_message_count(const std::string &filename, const std::size_t messag
     }
 }
 
-std::size_t get_filesize(const std::string &filename) {
+std::size_t get_filesize(const std::string& filename) {
     std::ifstream ifs(filename, std::ifstream::ate | std::ifstream::binary);
     if (!ifs) {
         throw std::runtime_error("Failed open file " + filename);
@@ -56,7 +56,7 @@ std::size_t get_filesize(const std::string &filename) {
 }
 
 // source: https://stackoverflow.com/a/2072890/192001
-bool ends_with(std::string const &value, std::string const &ending) {
+bool ends_with(std::string const& value, std::string const& ending) {
     if (ending.size() > value.size()) {
         return false;
     }
@@ -65,7 +65,7 @@ bool ends_with(std::string const &value, std::string const &ending) {
 
 #ifdef _WIN32
 // Based on: https://stackoverflow.com/a/37416569/192001
-std::size_t count_files(const std::string &folder) {
+std::size_t count_files(const std::string& folder) {
     size_t counter = 0;
     WIN32_FIND_DATAA ffd;
 
@@ -85,14 +85,14 @@ std::size_t count_files(const std::string &folder) {
 }
 #else
 // Based on: https://stackoverflow.com/a/2802255/192001
-std::size_t count_files(const std::string &folder) {
+std::size_t count_files(const std::string& folder) {
     size_t counter = 0;
-    DIR *dp = opendir(folder.c_str());
+    DIR* dp = opendir(folder.c_str());
     if (dp == nullptr) {
         throw std::runtime_error("Failed open folder " + folder);
     }
 
-    struct dirent *ep = nullptr;
+    struct dirent* ep = nullptr;
     while ((ep = readdir(dp)) != nullptr) {
         if (ep->d_name[0] != '.') counter++;
     }

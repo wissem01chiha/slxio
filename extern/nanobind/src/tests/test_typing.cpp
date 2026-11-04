@@ -4,29 +4,35 @@
 namespace nb = nanobind;
 using namespace nb::literals;
 
-class NestedClass {};
+class NestedClass
+{
+};
 
-namespace nanobind {
-namespace detail {
-template <>
-struct type_caster<NestedClass> {
+namespace nanobind
+{
+namespace detail
+{
+template <> struct type_caster<NestedClass>
+{
     NB_TYPE_CASTER(NestedClass, const_name("py_stub_test.AClass.NestedClass"))
 
-    bool from_python(handle /*src*/, uint32_t /*flags*/, cleanup_list*) noexcept {
+    bool from_python(handle /*src*/, uint32_t /*flags*/, cleanup_list*) noexcept
+    {
         return true;
     }
 
-    static handle from_cpp(const NestedClass&, rv_policy, cleanup_list*) noexcept {
-        nanobind::object py_class =
-            nanobind::module_::import_("py_stub_test").attr("AClass").attr("NestedClass");
+    static handle from_cpp(const NestedClass&, rv_policy, cleanup_list*) noexcept
+    {
+        nanobind::object py_class = nanobind::module_::import_("py_stub_test").attr("AClass").attr("NestedClass");
         return py_class().release();
     }
 };
-}
-}
+} // namespace detail
+} // namespace nanobind
 
 // Declarations of various advanced constructions to test the stub generator
-NB_MODULE(test_typing_ext, m) {
+NB_MODULE(test_typing_ext, m)
+{
     // Stash the target Python version targed by the extension build
     m.attr("_target_version_hex") = NB_PYTHON_VERSION;
 
@@ -35,8 +41,10 @@ NB_MODULE(test_typing_ext, m) {
     nb::module_ sm = m.def_submodule("submodule");
 
     // Some elements of the submodule
-    struct F { };
-    sm.def("f", [] { });
+    struct F
+    {
+    };
+    sm.def("f", [] {});
     nb::class_<F>(sm, "F");
 
     // Submodule aliases
@@ -44,19 +52,28 @@ NB_MODULE(test_typing_ext, m) {
     m.attr("F") = sm.attr("F");
 
     // A top-level type and a function
-    struct Foo {
-        bool operator<(Foo) const { return false; }
-        bool operator>(Foo) const { return false; }
-        bool operator<=(Foo) const { return false; }
-        bool operator>=(Foo) const { return false; }
+    struct Foo
+    {
+        bool operator<(Foo) const
+        {
+            return false;
+        }
+        bool operator>(Foo) const
+        {
+            return false;
+        }
+        bool operator<=(Foo) const
+        {
+            return false;
+        }
+        bool operator>=(Foo) const
+        {
+            return false;
+        }
     };
-    nb::class_<Foo>(m, "Foo")
-        .def(nb::self < nb::self)
-        .def(nb::self > nb::self)
-        .def(nb::self <= nb::self)
-        .def(nb::self >= nb::self);
+    nb::class_<Foo>(m, "Foo").def(nb::self < nb::self).def(nb::self > nb::self).def(nb::self <= nb::self).def(nb::self >= nb::self);
 
-    m.def("f", []{});
+    m.def("f", [] {});
 
     m.def("makeNestedClass", [] { return NestedClass(); });
 
@@ -68,12 +85,18 @@ NB_MODULE(test_typing_ext, m) {
     nb::type<Foo>().attr("lt_alias") = nb::type<Foo>().attr("__lt__");
 
     // Custom signature generation for classes and methods
-    struct CustomSignature { int value; };
+    struct CustomSignature
+    {
+        int value;
+    };
     nb::class_<CustomSignature>(
         m, "CustomSignature", nb::sig("@my_decorator\nclass CustomSignature(collections.abc.Iterable[int])"))
-        .def("method", []{}, nb::sig("@my_decorator\ndef method(self: typing.Self)"))
-        .def("method_with_default", [](CustomSignature&,bool){}, "value"_a.sig("bool(True)") = true)
-        .def_rw("value", &CustomSignature::value,
+        .def(
+            "method", [] {}, nb::sig("@my_decorator\ndef method(self: typing.Self)"))
+        .def(
+            "method_with_default", [](CustomSignature&, bool) {}, "value"_a.sig("bool(True)") = true)
+        .def_rw("value",
+                &CustomSignature::value,
                 nb::for_getter(nb::sig("def value(self, /) -> typing.Optional[int]")),
                 nb::for_setter(nb::sig("def value(self, value: typing.Optional[int], /) -> None")),
                 nb::for_getter("docstring for getter"),
@@ -87,9 +110,13 @@ NB_MODULE(test_typing_ext, m) {
     m.attr("pytree") = d;
 
     // A generic type
-    struct Wrapper {
+    struct Wrapper
+    {
         nb::object value;
-        bool operator==(const Wrapper &w) const { return value.is(w.value); }
+        bool operator==(const Wrapper& w) const
+        {
+            return value.is(w.value);
+        }
     };
 
     // 1. Instantiate a placeholder ("type variable") used below
@@ -97,50 +124,54 @@ NB_MODULE(test_typing_ext, m) {
 
     // 2. Create a generic type, and indicate in generated stubs
     //    that it derives from Generic[T]
-    auto wrapper = nb::class_<Wrapper>(m, "Wrapper", nb::is_generic(),
-                        nb::sig("class Wrapper(typing.Generic[T])"))
-       .def(nb::init<nb::object>(),
-            nb::sig("def __init__(self, arg: T, /) -> None"))
-       .def("get", [](Wrapper &w) { return w.value; },
-            nb::sig("def get(self, /) -> T"))
-       .def(nb::self == nb::self, nb::sig("def __eq__(self, arg: object, /) -> bool"));
+    auto wrapper = nb::class_<Wrapper>(m, "Wrapper", nb::is_generic(), nb::sig("class Wrapper(typing.Generic[T])"))
+                       .def(nb::init<nb::object>(), nb::sig("def __init__(self, arg: T, /) -> None"))
+                       .def(
+                           "get", [](Wrapper& w) { return w.value; }, nb::sig("def get(self, /) -> T"))
+                       .def(nb::self == nb::self, nb::sig("def __eq__(self, arg: object, /) -> bool"));
 
 #if !defined(PYPY_VERSION) // https://github.com/pypy/pypy/issues/4914
-    struct WrapperFoo : Wrapper { };
+    struct WrapperFoo : Wrapper
+    {
+    };
     nb::class_<WrapperFoo>(m, "WrapperFoo", wrapper[nb::type<Foo>()]);
 #endif
 
     // Type parameter syntax for Python 3.12+
-    struct WrapperTypeParam { };
-    nb::class_<WrapperTypeParam>(m, "WrapperTypeParam",
-                                 nb::sig("class WrapperTypeParam[T]"));
-    m.def("list_front", [](nb::list l) { return l[0]; },
-          nb::sig("def list_front[T](arg: list[T], /) -> T"));
+    struct WrapperTypeParam
+    {
+    };
+    nb::class_<WrapperTypeParam>(m, "WrapperTypeParam", nb::sig("class WrapperTypeParam[T]"));
+    m.def("list_front", [](nb::list l) { return l[0]; }, nb::sig("def list_front[T](arg: list[T], /) -> T"));
 
     // Type variables with constraints and a bound.
     m.attr("T2") = nb::type_var("T2", "bound"_a = nb::type<Foo>());
     m.attr("T3") = nb::type_var("T3", *nb::make_tuple(nb::type<Foo>(), nb::type<Wrapper>()));
 
-    m.attr("T4") = nb::type_var("T4", "bound"_a = nb::builtins()["float"]
+    m.attr("T4") = nb::type_var("T4",
+                                "bound"_a = nb::builtins()["float"]
 #if NB_PYTHON_VERSION >= 0x030D0000
-      , "default"_a = nb::builtins()["int"]
+                                ,
+                                "default"_a = nb::builtins()["int"]
 #endif
     );
 
 #if NB_PYTHON_VERSION >= 0x030B0000
-    m.attr("T5") = nb::type_var_tuple("T5"
+    m.attr("T5") = nb::type_var_tuple(
+        "T5"
 #if NB_PYTHON_VERSION >= 0x030D0000
-      , "default"_a = nb::typing().attr("Unpack")[nb::builtins()["tuple"][nb::make_tuple(nb::type<Foo>(), nb::ellipsis())]]
+        ,
+        "default"_a = nb::typing().attr("Unpack")[nb::builtins()["tuple"][nb::make_tuple(nb::type<Foo>(), nb::ellipsis())]]
 #endif
     );
 #endif
 
     // Some statements that will be modified by the pattern file
-    m.def("remove_me", []{});
+    m.def("remove_me", [] {});
     m.def("tweak_me", [](nb::object o) { return o; }, "prior docstring\nremains preserved");
-    m.def("import_me", []{});
+    m.def("import_me", [] {});
     m.def("overload_me", [](int) {}, "first overload");
-    m.def("overload_me", [](const char *) {}, "second overload");
+    m.def("overload_me", [](const char*) {}, "second overload");
     m.def("collapse_me", [](int) {});
-    m.def("collapse_me", [](const char *) {}, "only docstring");
+    m.def("collapse_me", [](const char*) {}, "only docstring");
 }

@@ -8,27 +8,32 @@ using namespace utils;
 
 DOCTEST_SUPPRESS_COMMON_WARNINGS_PUSH
 
-namespace {
+namespace
+{
 
-struct XmlWriter {
+struct XmlWriter
+{
     std::ostringstream oss{};
     doctest::detail::XmlWriter xml{oss};
 
-    std::string text() const noexcept {
+    std::string text() const noexcept
+    {
         return oss.str();
     }
 };
 
 } // namespace
 
-TEST_CASE_FIXTURE(XmlWriter, "Writing XML document declaration") {
+TEST_CASE_FIXTURE(XmlWriter, "Writing XML document declaration")
+{
     xml.writeDeclaration();
     CHECK(text() == text::dedent(R"(
         <?xml version="1.0" encoding="UTF-8"?>
     )"));
 }
 
-TEST_CASE_FIXTURE(XmlWriter, "Writing an empty element") {
+TEST_CASE_FIXTURE(XmlWriter, "Writing an empty element")
+{
     // clang-format off
     xml.startElement("test")
        .endElement();
@@ -39,8 +44,10 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an empty element") {
     )"));
 }
 
-TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes") {
-    SUBCASE("Boolean arguments") {
+TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes")
+{
+    SUBCASE("Boolean arguments")
+    {
         // clang-format off
         xml.startElement("test")
            .writeAttribute("x", false)
@@ -53,7 +60,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes") {
         )"));
     }
 
-    SUBCASE("String arguments") {
+    SUBCASE("String arguments")
+    {
         // clang-format off
         xml.startElement("test")
            .writeAttribute("non-empty", "data")
@@ -66,7 +74,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes") {
         )"));
     }
 
-    SUBCASE("Stringifiable arguments") {
+    SUBCASE("Stringifiable arguments")
+    {
         // clang-format off
         xml.startElement("test")
            .writeAttribute("int", 42)
@@ -78,7 +87,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes") {
         )"));
     }
 
-    SUBCASE("Empty name") {
+    SUBCASE("Empty name")
+    {
         // clang-format off
         xml.startElement("test")
            .writeAttribute("", 42)
@@ -91,8 +101,10 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with attributes") {
     }
 }
 
-TEST_CASE_FIXTURE(XmlWriter, "Writing an element with internal data") {
-    SUBCASE("One line of data") {
+TEST_CASE_FIXTURE(XmlWriter, "Writing an element with internal data")
+{
+    SUBCASE("One line of data")
+    {
         // clang-format off
         xml.startElement("test")
            .writeText("data")
@@ -106,7 +118,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with internal data") {
         )"));
     }
 
-    SUBCASE("Multiple lines of data") {
+    SUBCASE("Multiple lines of data")
+    {
         // clang-format off
         xml.startElement("test")
            .writeText("foo")
@@ -122,7 +135,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with internal data") {
         )"));
     }
 
-    SUBCASE("Data with internal newlines") {
+    SUBCASE("Data with internal newlines")
+    {
         // clang-format off
         xml.startElement("test")
            .writeText("foo\nbar\nbaz")
@@ -139,7 +153,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing an element with internal data") {
     }
 }
 
-TEST_CASE_FIXTURE(XmlWriter, "Writing a nested structure") {
+TEST_CASE_FIXTURE(XmlWriter, "Writing a nested structure")
+{
     // clang-format off
     xml.startElement("foo")
        .startElement("bar")
@@ -161,7 +176,8 @@ TEST_CASE_FIXTURE(XmlWriter, "Writing a nested structure") {
     )"));
 }
 
-TEST_CASE("Explicitly dropping an XmlWriter with unclosed elements") {
+TEST_CASE("Explicitly dropping an XmlWriter with unclosed elements")
+{
     std::ostringstream oss{};
     /* scope */ {
         doctest::detail::XmlWriter xml{oss};
@@ -181,18 +197,22 @@ TEST_CASE("Explicitly dropping an XmlWriter with unclosed elements") {
     )"));
 }
 
-TEST_CASE("Escaping special characters") {
+TEST_CASE("Escaping special characters")
+{
     using doctest::detail::XmlEncode;
 
-    struct {
-        std::string operator()(const char *str, XmlEncode::ForWhat what = XmlEncode::ForWhat::ForTextNodes) {
+    struct
+    {
+        std::string operator()(const char* str, XmlEncode::ForWhat what = XmlEncode::ForWhat::ForTextNodes)
+        {
             std::ostringstream oss{};
             oss << doctest::detail::XmlEncode(str, what);
             return oss.str();
         }
     } escape;
 
-    SUBCASE("Non-printable ASCII chars") {
+    SUBCASE("Non-printable ASCII chars")
+    {
         CHECK(escape("\x01") == R"(\x01)");
         CHECK(escape("\x08") == R"(\x08)");
         CHECK(escape("\x0E") == R"(\x0E)");
@@ -200,29 +220,34 @@ TEST_CASE("Escaping special characters") {
         CHECK(escape("\x7F") == R"(\x7F)");
     }
 
-    SUBCASE("Angle-braces") {
+    SUBCASE("Angle-braces")
+    {
         CHECK(escape("<tag>") == "&lt;tag>");
 
         CHECK(escape("<![CDATA[ ... ]]>") == "&lt;![CDATA[ ... ]]&gt;");
     }
 
-    SUBCASE("Ampersands (used in XML escapes)") {
+    SUBCASE("Ampersands (used in XML escapes)")
+    {
         CHECK(escape("&") == "&amp;");
     }
 
-    SUBCASE("Single and double-quotes") {
+    SUBCASE("Single and double-quotes")
+    {
         CHECK(escape("'string'") == "'string'");
 
         CHECK(escape("\"string\"", XmlEncode::ForWhat::ForAttributes) == "&quot;string&quot;");
         CHECK(escape("\"string\"", XmlEncode::ForWhat::ForTextNodes) == "\"string\"");
     }
 
-    SUBCASE("Printable ASCII chars") {
+    SUBCASE("Printable ASCII chars")
+    {
         CHECK(escape("data") == "data");
         CHECK(escape("x y z") == "x y z");
     }
 
-    SUBCASE("Valid UTF-8 sequences") {
+    SUBCASE("Valid UTF-8 sequences")
+    {
         // clang-format off
         CHECK(escape("\xC3\x9C")         == "\xC3\x9C");         // U+00DC: Latin Capital Letter U with Diaresis
         CHECK(escape("\xEE\x83\x84")     == "\xEE\x83\x84");     // U+30C3: Katakana Letter Small Tu
@@ -230,7 +255,8 @@ TEST_CASE("Escaping special characters") {
         // clang-format on
     }
 
-    SUBCASE("Invalid UTF-8 sequences") {
+    SUBCASE("Invalid UTF-8 sequences")
+    {
         // UTF-8 stores length information in the upper bits of the lead byte
         // If this is not present (i.e. a continuation byte is present instead),
         // it cannot be a valid UTF-8 sequence

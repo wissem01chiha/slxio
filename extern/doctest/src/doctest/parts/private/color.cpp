@@ -13,23 +13,29 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 #endif // DOCTEST_CONFIG_COLORS_WINDOWS && DOCTEST_CONFIG_COLORS_ANSI
 #endif // DOCTEST_CONFIG_COLORS_NONE
 
-namespace doctest {
+namespace doctest
+{
 
-namespace detail {
-void color_to_stream(std::ostream &, Color::Enum) DOCTEST_BRANCH_ON_DISABLED({}, ;)
+namespace detail
+{
+void color_to_stream(std::ostream&, Color::Enum) DOCTEST_BRANCH_ON_DISABLED({}, ;)
 } // namespace detail
 
-namespace Color {
-std::ostream &operator<<(std::ostream &s, Color::Enum code) {
+namespace Color
+{
+std::ostream& operator<<(std::ostream& s, Color::Enum code)
+{
     detail::color_to_stream(s, code);
     return s;
 }
 } // namespace Color
 
 #ifndef DOCTEST_CONFIG_DISABLE
-namespace detail {
+namespace detail
+{
 DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wdeprecated-declarations")
-void color_to_stream(std::ostream &s, Color::Enum code) {
+void color_to_stream(std::ostream& s, Color::Enum code)
+{
     static_cast<void>(s);    // for DOCTEST_CONFIG_COLORS_NONE or DOCTEST_CONFIG_COLORS_WINDOWS
     static_cast<void>(code); // for DOCTEST_CONFIG_COLORS_NONE
 #ifdef DOCTEST_CONFIG_COLORS_ANSI
@@ -39,21 +45,43 @@ void color_to_stream(std::ostream &s, Color::Enum code) {
     auto col = ""; // NOLINT(clang-analyzer-deadcode.DeadStores)
     DOCTEST_CLANG_SUPPRESS_WARNING_PUSH
     DOCTEST_CLANG_SUPPRESS_WARNING("-Wcovered-switch-default")
-    switch (code) {
-        case Color::Red:         col = "[0;31m"; break;
-        case Color::Green:       col = "[0;32m"; break;
-        case Color::Blue:        col = "[0;34m"; break;
-        case Color::Cyan:        col = "[0;36m"; break;
-        case Color::Yellow:      col = "[0;33m"; break;
-        case Color::Grey:        col = "[1;30m"; break;
-        case Color::LightGrey:   col = "[0;37m"; break;
-        case Color::BrightRed:   col = "[1;31m"; break;
-        case Color::BrightGreen: col = "[1;32m"; break;
-        case Color::BrightWhite: col = "[1;37m"; break;
-        case Color::Bright:      // invalid
-        case Color::None:
-        case Color::White:
-        default:                 col = "[0m";
+    switch (code)
+    {
+    case Color::Red:
+        col = "[0;31m";
+        break;
+    case Color::Green:
+        col = "[0;32m";
+        break;
+    case Color::Blue:
+        col = "[0;34m";
+        break;
+    case Color::Cyan:
+        col = "[0;36m";
+        break;
+    case Color::Yellow:
+        col = "[0;33m";
+        break;
+    case Color::Grey:
+        col = "[1;30m";
+        break;
+    case Color::LightGrey:
+        col = "[0;37m";
+        break;
+    case Color::BrightRed:
+        col = "[1;31m";
+        break;
+    case Color::BrightGreen:
+        col = "[1;32m";
+        break;
+    case Color::BrightWhite:
+        col = "[1;37m";
+        break;
+    case Color::Bright: // invalid
+    case Color::None:
+    case Color::White:
+    default:
+        col = "[0m";
     }
     DOCTEST_CLANG_SUPPRESS_WARNING_POP
     s << "\033" << col;
@@ -63,19 +91,19 @@ void color_to_stream(std::ostream &s, Color::Enum code) {
     if (g_no_colors || (_isatty(_fileno(stdout)) == false && getContextOptions()->force_colors == false))
         return;
 
-    static struct ConsoleHelper {
+    static struct ConsoleHelper
+    {
         HANDLE stdoutHandle;
         WORD origFgAttrs;
         WORD origBgAttrs;
 
-        ConsoleHelper() {
+        ConsoleHelper()
+        {
             stdoutHandle = GetStdHandle(STD_OUTPUT_HANDLE);
             CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
             GetConsoleScreenBufferInfo(stdoutHandle, &csbiInfo);
-            origFgAttrs =
-                csbiInfo.wAttributes & ~(BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
-            origBgAttrs =
-                csbiInfo.wAttributes & ~(FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
+            origFgAttrs = csbiInfo.wAttributes & ~(BACKGROUND_GREEN | BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY);
+            origBgAttrs = csbiInfo.wAttributes & ~(FOREGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY);
         }
     } ch;
 
@@ -98,7 +126,7 @@ void color_to_stream(std::ostream &s, Color::Enum code) {
         case Color::Bright:      // invalid
         default:                 DOCTEST_SET_ATTR(ch.origFgAttrs);
     }
-        // clang-format on
+    // clang-format on
 #endif // DOCTEST_CONFIG_COLORS_WINDOWS
 }
 DOCTEST_CLANG_SUPPRESS_WARNING_POP

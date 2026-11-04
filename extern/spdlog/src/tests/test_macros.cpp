@@ -47,7 +47,7 @@ TEST_CASE("disable param evaluation", "[macros]") {
 
 TEST_CASE("pass logger pointer", "[macros]") {
     auto logger = spdlog::create<spdlog::sinks::null_sink_mt>("refmacro");
-    auto &ref = *logger;
+    auto& ref = *logger;
     SPDLOG_LOGGER_TRACE(&ref, "Test message 1");
     SPDLOG_LOGGER_DEBUG(&ref, "Test message 2");
 }

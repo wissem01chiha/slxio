@@ -6,16 +6,20 @@
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
 // The constructor may be executed on any host, so we take care not to use SIMDJSON_TARGET_WESTMERE
-namespace simdjson {
+namespace simdjson
+{
 /**
  * Implementation for Westmere (Intel SSE4.2).
  */
-namespace westmere {
+namespace westmere
+{
 
 class implementation;
 
-namespace {
-namespace simd {
+namespace
+{
+namespace simd
+{
 
 template <typename T> struct simd8;
 template <typename T> struct simd8x64;

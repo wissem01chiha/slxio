@@ -31,25 +31,27 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 
 #include "zipint.h"
 
-
-ZIP_EXTERN int zip_fclose(zip_file_t *zf) {
+ZIP_EXTERN int zip_fclose(zip_file_t* zf)
+{
     int ret;
 
-    if (zf == NULL) {
+    if (zf == NULL)
+    {
         return ZIP_ER_INVAL;
     }
 
-    if (zf->src) {
+    if (zf->src)
+    {
         zip_source_free(zf->src);
     }
 
     ret = 0;
-    if (zf->error.zip_err) {
+    if (zf->error.zip_err)
+    {
         ret = zf->error.zip_err;
     }
 

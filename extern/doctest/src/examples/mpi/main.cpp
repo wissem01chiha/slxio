@@ -2,7 +2,8 @@
 
 #include <doctest/extensions/doctest_mpi.h>
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv)
+{
     doctest::mpi_init_thread(argc, argv, MPI_THREAD_MULTIPLE);
 
     doctest::Context ctx;

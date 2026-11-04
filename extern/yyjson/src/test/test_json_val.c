@@ -6,53 +6,52 @@
 #if !YYJSON_DISABLE_READER
 
 /// Validate value type
-static bool validate_val_type(yyjson_val *val,
-                              yyjson_type type,
-                              yyjson_subtype subtype) {
+static bool validate_val_type(yyjson_val* val, yyjson_type type, yyjson_subtype subtype)
+{
+    if (yyjson_is_null(val) != (type == YYJSON_TYPE_NULL && subtype == YYJSON_SUBTYPE_NONE))
+        return false;
+    if (yyjson_is_true(val) != (type == YYJSON_TYPE_BOOL && subtype == YYJSON_SUBTYPE_TRUE))
+        return false;
+    if (yyjson_is_false(val) != (type == YYJSON_TYPE_BOOL && subtype == YYJSON_SUBTYPE_FALSE))
+        return false;
+    if (yyjson_is_bool(val) != (type == YYJSON_TYPE_BOOL && (subtype == YYJSON_SUBTYPE_TRUE || subtype == YYJSON_SUBTYPE_FALSE)))
+        return false;
+    if (yyjson_is_uint(val) != (type == YYJSON_TYPE_NUM && subtype == YYJSON_SUBTYPE_UINT))
+        return false;
+    if (yyjson_is_sint(val) != (type == YYJSON_TYPE_NUM && subtype == YYJSON_SUBTYPE_SINT))
+        return false;
+    if (yyjson_is_int(val) != (type == YYJSON_TYPE_NUM && (subtype == YYJSON_SUBTYPE_UINT || subtype == YYJSON_SUBTYPE_SINT)))
+        return false;
+    if (yyjson_is_real(val) != (type == YYJSON_TYPE_NUM && subtype == YYJSON_SUBTYPE_REAL))
+        return false;
+    if (yyjson_is_num(val) != (type == YYJSON_TYPE_NUM && (subtype == YYJSON_SUBTYPE_UINT || subtype == YYJSON_SUBTYPE_SINT ||
+                                                           subtype == YYJSON_SUBTYPE_REAL)))
+        return false;
+    if (yyjson_is_str(val) != (type == YYJSON_TYPE_STR))
+        return false;
+    if (yyjson_is_arr(val) != (type == YYJSON_TYPE_ARR && subtype == YYJSON_SUBTYPE_NONE))
+        return false;
+    if (yyjson_is_obj(val) != (type == YYJSON_TYPE_OBJ && subtype == YYJSON_SUBTYPE_NONE))
+        return false;
+    if (yyjson_is_ctn(val) != ((type == YYJSON_TYPE_ARR || type == YYJSON_TYPE_OBJ) && subtype == YYJSON_SUBTYPE_NONE))
+        return false;
 
-    if (yyjson_is_null(val) != (type == YYJSON_TYPE_NULL &&
-                                subtype == YYJSON_SUBTYPE_NONE)) return false;
-    if (yyjson_is_true(val) != (type == YYJSON_TYPE_BOOL &&
-                                subtype == YYJSON_SUBTYPE_TRUE)) return false;
-    if (yyjson_is_false(val) != (type == YYJSON_TYPE_BOOL &&
-                                 subtype == YYJSON_SUBTYPE_FALSE)) return false;
-    if (yyjson_is_bool(val) != (type == YYJSON_TYPE_BOOL &&
-                                (subtype == YYJSON_SUBTYPE_TRUE ||
-                                 subtype == YYJSON_SUBTYPE_FALSE))) return false;
-    if (yyjson_is_uint(val) != (type == YYJSON_TYPE_NUM &&
-                                subtype == YYJSON_SUBTYPE_UINT)) return false;
-    if (yyjson_is_sint(val) != (type == YYJSON_TYPE_NUM &&
-                                subtype == YYJSON_SUBTYPE_SINT)) return false;
-    if (yyjson_is_int(val) != (type == YYJSON_TYPE_NUM &&
-                               (subtype == YYJSON_SUBTYPE_UINT ||
-                                subtype == YYJSON_SUBTYPE_SINT))) return false;
-    if (yyjson_is_real(val) != (type == YYJSON_TYPE_NUM &&
-                                subtype == YYJSON_SUBTYPE_REAL)) return false;
-    if (yyjson_is_num(val) != (type == YYJSON_TYPE_NUM &&
-                               (subtype == YYJSON_SUBTYPE_UINT ||
-                                subtype == YYJSON_SUBTYPE_SINT ||
-                                subtype == YYJSON_SUBTYPE_REAL))) return false;
-    if (yyjson_is_str(val) != (type == YYJSON_TYPE_STR)) return false;
-    if (yyjson_is_arr(val) != (type == YYJSON_TYPE_ARR &&
-                               subtype == YYJSON_SUBTYPE_NONE)) return false;
-    if (yyjson_is_obj(val) != (type == YYJSON_TYPE_OBJ &&
-                               subtype == YYJSON_SUBTYPE_NONE)) return false;
-    if (yyjson_is_ctn(val) != ((type == YYJSON_TYPE_ARR ||
-                                type == YYJSON_TYPE_OBJ) &&
-                                subtype == YYJSON_SUBTYPE_NONE)) return false;
-
-    if (yyjson_get_type(val) != type) return false;
-    if (yyjson_get_subtype(val) != subtype) return false;
-    if (yyjson_get_tag(val) != (type | subtype)) return false;
+    if (yyjson_get_type(val) != type)
+        return false;
+    if (yyjson_get_subtype(val) != subtype)
+        return false;
+    if (yyjson_get_tag(val) != (type | subtype))
+        return false;
 
     return true;
 }
 
 /// Test simple json value api
-static void test_json_val_api(void) {
-    yyjson_doc *doc;
-    yyjson_val *val;
-    const char *json;
+static void test_json_val_api(void)
+{
+    yyjson_doc* doc;
+    yyjson_val* val;
+    const char* json;
 
     val = NULL;
     yy_assert(strcmp(yyjson_get_type_desc(val), "unknown") == 0);
@@ -177,10 +176,11 @@ static void test_json_val_api(void) {
 }
 
 /// Test json array api
-static void test_json_arr_api(void) {
-    yyjson_doc *doc;
+static void test_json_arr_api(void)
+{
+    yyjson_doc* doc;
     yyjson_val *arr, *val;
-    const char *json;
+    const char* json;
     yyjson_arr_iter iter;
     size_t idx, max, tmp[16];
 
@@ -204,17 +204,18 @@ static void test_json_arr_api(void) {
     // iter
     iter = yyjson_arr_iter_with(arr);
     yy_assert(yyjson_arr_iter_has_next(&iter) == false);
-    while ((val = yyjson_arr_iter_next(&iter))) {
+    while ((val = yyjson_arr_iter_next(&iter)))
+    {
         yy_assert(false);
     }
 
     // foreach
-    yyjson_arr_foreach(arr, idx, max, val) {
+    yyjson_arr_foreach(arr, idx, max, val)
+    {
         yy_assert(false);
     }
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // array (size 1)
@@ -238,7 +239,8 @@ static void test_json_arr_api(void) {
     idx = 0;
     yyjson_arr_iter_init(arr, &iter);
     yy_assert(yyjson_arr_iter_has_next(&iter) == true);
-    while ((val = yyjson_arr_iter_next(&iter))) {
+    while ((val = yyjson_arr_iter_next(&iter)))
+    {
         idx++;
         yy_assert(yyjson_get_int(val) == (i64)idx);
         yy_assert(yyjson_arr_iter_has_next(&iter) == idx < 1);
@@ -248,7 +250,8 @@ static void test_json_arr_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_arr_foreach(arr, idx, max, val) {
+    yyjson_arr_foreach(arr, idx, max, val)
+    {
         yy_assert(yyjson_get_int(val) == (i64)idx + 1);
         yy_assert(max == 1);
         yy_assert(tmp[idx] == 0);
@@ -258,7 +261,6 @@ static void test_json_arr_api(void) {
     yy_assert(tmp[1] == 0);
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // array (size 2)
@@ -284,7 +286,8 @@ static void test_json_arr_api(void) {
     idx = 0;
     yyjson_arr_iter_init(arr, &iter);
     yy_assert(yyjson_arr_iter_has_next(&iter) == true);
-    while ((val = yyjson_arr_iter_next(&iter))) {
+    while ((val = yyjson_arr_iter_next(&iter)))
+    {
         idx++;
         yy_assert(yyjson_get_int(val) == (i64)idx);
         yy_assert(yyjson_arr_iter_has_next(&iter) == idx < 2);
@@ -294,7 +297,8 @@ static void test_json_arr_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_arr_foreach(arr, idx, max, val) {
+    yyjson_arr_foreach(arr, idx, max, val)
+    {
         yy_assert(yyjson_get_int(val) == (i64)idx + 1);
         yy_assert(max == 2);
         yy_assert(tmp[idx] == 0);
@@ -305,7 +309,6 @@ static void test_json_arr_api(void) {
     yy_assert(tmp[2] == 0);
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // array (size 3)
@@ -333,7 +336,8 @@ static void test_json_arr_api(void) {
     idx = 0;
     yyjson_arr_iter_init(arr, &iter);
     yy_assert(yyjson_arr_iter_has_next(&iter) == true);
-    while ((val = yyjson_arr_iter_next(&iter))) {
+    while ((val = yyjson_arr_iter_next(&iter)))
+    {
         idx++;
         yy_assert(yyjson_get_int(val) == (i64)idx);
         yy_assert(yyjson_arr_iter_has_next(&iter) == idx < 3);
@@ -343,7 +347,8 @@ static void test_json_arr_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_arr_foreach(arr, idx, max, val) {
+    yyjson_arr_foreach(arr, idx, max, val)
+    {
         yy_assert(yyjson_get_int(val) == (i64)idx + 1);
         yy_assert(max == 3);
         yy_assert(tmp[idx] == 0);
@@ -355,7 +360,6 @@ static void test_json_arr_api(void) {
     yy_assert(tmp[3] == 0);
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // array (size 3, non-flat)
@@ -383,18 +387,17 @@ static void test_json_arr_api(void) {
     yy_assert(yyjson_arr_iter_init(NULL, &iter) == false);
     yy_assert(yyjson_arr_iter_init(NULL, NULL) == false);
 
-
     yyjson_doc_free(doc);
 }
 
 /// Test json object api
-static void test_json_obj_api(void) {
-    yyjson_doc *doc;
+static void test_json_obj_api(void)
+{
+    yyjson_doc* doc;
     yyjson_val *obj, *key, *val;
-    const char *json;
+    const char* json;
     yyjson_obj_iter iter;
     size_t idx, max, tmp[16];
-
 
     //---------------------------------------------
     // object (size 0)
@@ -415,7 +418,8 @@ static void test_json_obj_api(void) {
     // iter
     iter = yyjson_obj_iter_with(obj);
     yy_assert(yyjson_obj_iter_has_next(&iter) == false);
-    while ((key = yyjson_obj_iter_next(&iter))) {
+    while ((key = yyjson_obj_iter_next(&iter)))
+    {
         yy_assert(false);
     }
 
@@ -424,15 +428,16 @@ static void test_json_obj_api(void) {
     yy_assert(!yyjson_obj_iter_get(&iter, "x"));
 
     // foreach
-    yyjson_obj_foreach(obj, idx, max, key, val) {
+    yyjson_obj_foreach(obj, idx, max, key, val)
+    {
         yy_assert(false);
     }
-    yyjson_obj_foreach(NULL, idx, max, key, val) {
+    yyjson_obj_foreach(NULL, idx, max, key, val)
+    {
         yy_assert(false);
     }
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // object (size 1)
@@ -456,14 +461,18 @@ static void test_json_obj_api(void) {
     memset(tmp, 0, sizeof(tmp));
     yyjson_obj_iter_init(obj, &iter);
     yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-    while ((key = yyjson_obj_iter_next(&iter))) {
+    while ((key = yyjson_obj_iter_next(&iter)))
+    {
         val = key + 1;
-        if (yyjson_equals_str(key, "a")) {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
             yy_assert(yyjson_obj_iter_has_next(&iter) == false);
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
@@ -485,19 +494,22 @@ static void test_json_obj_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_obj_foreach(obj, idx, max, key, val) {
-        if (yyjson_equals_str(key, "a")) {
+    yyjson_obj_foreach(obj, idx, max, key, val)
+    {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
     yy_assert(tmp[0]);
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // object (size 2)
@@ -523,19 +535,25 @@ static void test_json_obj_api(void) {
     memset(tmp, 0, sizeof(tmp));
     yyjson_obj_iter_init(obj, &iter);
     yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-    while ((key = yyjson_obj_iter_next(&iter))) {
+    while ((key = yyjson_obj_iter_next(&iter)))
+    {
         val = yyjson_obj_iter_get_val(key);
-        if (yyjson_equals_str(key, "a")) {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
             yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-        } else if (yyjson_equals_str(key, "b")) {
+        }
+        else if (yyjson_equals_str(key, "b"))
+        {
             yy_assert(yyjson_get_int(val) == 2);
             yy_assert(tmp[1] == 0);
             tmp[1] = 2;
             yy_assert(yyjson_obj_iter_has_next(&iter) == false);
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
@@ -570,16 +588,22 @@ static void test_json_obj_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_obj_foreach(obj, idx, max, key, val) {
-        if (yyjson_equals_str(key, "a")) {
+    yyjson_obj_foreach(obj, idx, max, key, val)
+    {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
-        } else if (yyjson_equals_str(key, "b")) {
+        }
+        else if (yyjson_equals_str(key, "b"))
+        {
             yy_assert(yyjson_get_int(val) == 2);
             yy_assert(tmp[1] == 0);
             tmp[1] = 2;
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
@@ -587,7 +611,6 @@ static void test_json_obj_api(void) {
     yy_assert(tmp[1]);
 
     yyjson_doc_free(doc);
-
 
     //---------------------------------------------
     // object (size 3)
@@ -615,24 +638,32 @@ static void test_json_obj_api(void) {
     memset(tmp, 0, sizeof(tmp));
     yyjson_obj_iter_init(obj, &iter);
     yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-    while ((key = yyjson_obj_iter_next(&iter))) {
+    while ((key = yyjson_obj_iter_next(&iter)))
+    {
         val = key + 1;
-        if (yyjson_equals_str(key, "a")) {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
             yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-        } else if (yyjson_equals_str(key, "b")) {
+        }
+        else if (yyjson_equals_str(key, "b"))
+        {
             yy_assert(yyjson_get_int(val) == 2);
             yy_assert(tmp[1] == 0);
             tmp[1] = 2;
             yy_assert(yyjson_obj_iter_has_next(&iter) == true);
-        } else if (yyjson_equals_str(key, "c")) {
+        }
+        else if (yyjson_equals_str(key, "c"))
+        {
             yy_assert(yyjson_get_int(val) == 3);
             yy_assert(tmp[2] == 0);
             tmp[2] = 3;
             yy_assert(yyjson_obj_iter_has_next(&iter) == false);
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
@@ -690,20 +721,28 @@ static void test_json_obj_api(void) {
 
     // foreach
     memset(tmp, 0, sizeof(tmp));
-    yyjson_obj_foreach(obj, idx, max, key, val) {
-        if (yyjson_equals_str(key, "a")) {
+    yyjson_obj_foreach(obj, idx, max, key, val)
+    {
+        if (yyjson_equals_str(key, "a"))
+        {
             yy_assert(yyjson_get_int(val) == 1);
             yy_assert(tmp[0] == 0);
             tmp[0] = 1;
-        } else if (yyjson_equals_str(key, "b")) {
+        }
+        else if (yyjson_equals_str(key, "b"))
+        {
             yy_assert(yyjson_get_int(val) == 2);
             yy_assert(tmp[1] == 0);
             tmp[1] = 2;
-        } else if (yyjson_equals_str(key, "c")) {
+        }
+        else if (yyjson_equals_str(key, "c"))
+        {
             yy_assert(yyjson_get_int(val) == 3);
             yy_assert(tmp[2] == 0);
             tmp[2] = 3;
-        } else {
+        }
+        else
+        {
             yy_assert(false);
         }
     }
@@ -720,12 +759,13 @@ static void test_json_obj_api(void) {
     yyjson_doc_free(doc);
 }
 
-static void validate_equals(const char *lhs_json, const char *rhs_json, bool equals) {
-    yyjson_doc *lhs_doc = yyjson_read(lhs_json, strlen(lhs_json), 0);
-    yyjson_doc *rhs_doc = yyjson_read(rhs_json, strlen(rhs_json), 0);
+static void validate_equals(const char* lhs_json, const char* rhs_json, bool equals)
+{
+    yyjson_doc* lhs_doc = yyjson_read(lhs_json, strlen(lhs_json), 0);
+    yyjson_doc* rhs_doc = yyjson_read(rhs_json, strlen(rhs_json), 0);
 
-    yyjson_val *lhs_val = yyjson_doc_get_root(lhs_doc);
-    yyjson_val *rhs_val = yyjson_doc_get_root(rhs_doc);
+    yyjson_val* lhs_val = yyjson_doc_get_root(lhs_doc);
+    yyjson_val* rhs_val = yyjson_doc_get_root(rhs_doc);
 
     yy_assert(yyjson_equals(lhs_val, rhs_val) == equals);
     yy_assert(yyjson_equals(rhs_val, lhs_val) == equals);
@@ -747,7 +787,8 @@ static void validate_equals(const char *lhs_json, const char *rhs_json, bool equ
     yyjson_doc_free(lhs_doc);
 }
 
-static void test_json_equals_api(void) {
+static void test_json_equals_api(void)
+{
     yy_assert(!yyjson_equals(NULL, NULL));
     validate_equals("", "", false);
     validate_equals("", "true", false);
@@ -780,27 +821,13 @@ static void test_json_equals_api(void) {
     validate_equals("{\"a\":0}", "{\"a\":1}", false);
     validate_equals("{\"a\":0}", "{\"b\":0}", false);
     validate_equals("{\"a\":0}", "{\"a\":0,\"b\":0}", false);
-    validate_equals("{\"a\":{\"b\":[1.0, 2.0]}}",
-                    "{\"a\":{\"b\":[1.0, 2.0]}}",
-                    true);
-    validate_equals("{\"a\":{\"b\":[1.0, 2.0]}}",
-                    "{\"a\":{\"b\":[1.0, 2]}}",
-                    false);
-    validate_equals("[1,2,3,4,5,\"test\",123.456,true,false,null]",
-                    "[1,2,3,4,5,\"test\",123.456,true,false,null]",
-                    true);
-    validate_equals("[null,1,2,3,4,5,\"test\",123.456,true,false]",
-                    "[1,2,3,4,5,\"test\",123.456,true,false,null]",
-                    false);
-    validate_equals("{}",
-                    "{\"a\":1,\"b\":2,\"c\":3}",
-                    false);
-    validate_equals("{\"a\":1,\"b\":2,\"c\":3}",
-                    "{\"b\":2,\"a\":1,\"c\":3}",
-                    true);
-    validate_equals("{\"a\":1,\"b\":2,\"c\":3}",
-                    "{\"a\":1,\"b\":2,\"c\":3,\"d\":4}",
-                    false);
+    validate_equals("{\"a\":{\"b\":[1.0, 2.0]}}", "{\"a\":{\"b\":[1.0, 2.0]}}", true);
+    validate_equals("{\"a\":{\"b\":[1.0, 2.0]}}", "{\"a\":{\"b\":[1.0, 2]}}", false);
+    validate_equals("[1,2,3,4,5,\"test\",123.456,true,false,null]", "[1,2,3,4,5,\"test\",123.456,true,false,null]", true);
+    validate_equals("[null,1,2,3,4,5,\"test\",123.456,true,false]", "[1,2,3,4,5,\"test\",123.456,true,false,null]", false);
+    validate_equals("{}", "{\"a\":1,\"b\":2,\"c\":3}", false);
+    validate_equals("{\"a\":1,\"b\":2,\"c\":3}", "{\"b\":2,\"a\":1,\"c\":3}", true);
+    validate_equals("{\"a\":1,\"b\":2,\"c\":3}", "{\"a\":1,\"b\":2,\"c\":3,\"d\":4}", false);
     validate_equals("\
 [{\
   \"array\": [1,2,3,4,5,\"test\",123.456,true,false,null,{\"a\":1,\"b\":2,\"c\":3}],\
@@ -814,7 +841,7 @@ static void test_json_equals_api(void) {
     \"key7\": {\"a\":1,\"b\":2,\"c\":3}\
   }\
 }]",
-"\
+                    "\
 [{\
   \"object\": {\
     \"key5\": null,\
@@ -826,10 +853,12 @@ static void test_json_equals_api(void) {
     \"key4\": false\
   },\
   \"array\": [1,2,3,4,5,\"test\",123.456,true,false,null,{\"a\":1,\"b\":2,\"c\":3}]\
-}]", true);
+}]",
+                    true);
 }
 
-yy_test_case(test_json_val) {
+yy_test_case(test_json_val)
+{
     test_json_val_api();
     test_json_arr_api();
     test_json_obj_api();
@@ -837,5 +866,7 @@ yy_test_case(test_json_val) {
 }
 
 #else
-yy_test_case(test_json_val) {}
+yy_test_case(test_json_val)
+{
+}
 #endif

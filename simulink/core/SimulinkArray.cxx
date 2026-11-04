@@ -150,9 +150,19 @@ void SimulinkArray::SetName(const std::string& name)
     m_name = name;
 }
 
+void SimulinkArray::SetType(const std::string& type)
+{
+    m_type = type;
+}
+
 std::string SimulinkArray::GetDimension() const
 {
     return m_dimension;
+}
+
+void SimulinkArray::SetDimension(const std::string& dimension)
+{
+    m_dimension = dimension;
 }
 
 SLXIO_ABI_NAMESPACE_END

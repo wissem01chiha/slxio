@@ -41,18 +41,18 @@
 #endif
 
 #include "zip.h"
-#define TRYOPEN_USAGE                  \
-    "usage: %s [-cent] file\n\n"       \
-    "\t-c\tcheck consistency\n"        \
-    "\t-e\texclusively open archive\n" \
-    "\t-n\tcreate new file\n"          \
-    "\t-s\tprint error string\n"       \
+#define TRYOPEN_USAGE                                                                                                              \
+    "usage: %s [-cent] file\n\n"                                                                                                   \
+    "\t-c\tcheck consistency\n"                                                                                                    \
+    "\t-e\texclusively open archive\n"                                                                                             \
+    "\t-n\tcreate new file\n"                                                                                                      \
+    "\t-s\tprint error string\n"                                                                                                   \
     "\t-t\ttruncate file to size 0\n"
 
-
-int main(int argc, char *argv[]) {
-    const char *fname;
-    zip_t *z;
+int main(int argc, char* argv[])
+{
+    const char* fname;
+    zip_t* z;
     int c, flags, ze;
     zip_int64_t count;
     int error_count;
@@ -61,8 +61,10 @@ int main(int argc, char *argv[]) {
 
     flags = 0;
 
-    while ((c = getopt(argc, argv, "censt")) != -1) {
-        switch (c) {
+    while ((c = getopt(argc, argv, "censt")) != -1)
+    {
+        switch (c)
+        {
         case 'c':
             flags |= ZIP_CHECKCONS;
             break;
@@ -86,11 +88,13 @@ int main(int argc, char *argv[]) {
     }
 
     error_count = 0;
-    for (; optind < argc; optind++) {
+    for (; optind < argc; optind++)
+    {
         fname = argv[optind];
         errno = 0;
 
-        if ((z = zip_open(fname, flags, &ze)) != NULL) {
+        if ((z = zip_open(fname, flags, &ze)) != NULL)
+        {
             count = zip_get_num_entries(z, 0);
             printf("opening '%s' succeeded, %" PRIu64 " entries\n", fname, count);
             zip_close(z);
@@ -99,12 +103,15 @@ int main(int argc, char *argv[]) {
 
         zip_error_init_with_code(&error, ze);
         printf("opening '%s' returned error ", fname);
-        if (error_strings) {
+        if (error_strings)
+        {
             printf("%s", zip_error_strerror(&error));
         }
-        else {
+        else
+        {
             printf("%d", ze);
-            switch (zip_error_system_type(&error)) {
+            switch (zip_error_system_type(&error))
+            {
             case ZIP_ET_SYS:
             case ZIP_ET_LIBZIP:
                 printf("/%d", zip_error_code_system(&error));
@@ -118,7 +125,8 @@ int main(int argc, char *argv[]) {
         error_count++;
     }
 
-    if (error_count > 0) {
+    if (error_count > 0)
+    {
         fprintf(stderr, "%d errors\n", error_count);
     }
 

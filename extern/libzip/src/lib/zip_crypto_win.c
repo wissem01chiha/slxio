@@ -84,15 +84,24 @@ There is no #ifdef to control that, because this is working for all supported OS
 
 #ifdef HAS_BCRYPTDERIVEKEYPBKDF2
 
-bool _zip_crypto_pbkdf2(const zip_uint8_t *key, zip_uint64_t key_length, const zip_uint8_t *salt, zip_uint16_t salt_length, zip_uint16_t iterations, zip_uint8_t *output, zip_uint16_t output_length) {
+bool _zip_crypto_pbkdf2(const zip_uint8_t* key,
+                        zip_uint64_t key_length,
+                        const zip_uint8_t* salt,
+                        zip_uint16_t salt_length,
+                        zip_uint16_t iterations,
+                        zip_uint8_t* output,
+                        zip_uint16_t output_length)
+{
     BCRYPT_ALG_HANDLE hAlgorithm = NULL;
     bool result;
 
-    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&hAlgorithm, BCRYPT_SHA1_ALGORITHM, NULL, BCRYPT_ALG_HANDLE_HMAC_FLAG))) {
+    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&hAlgorithm, BCRYPT_SHA1_ALGORITHM, NULL, BCRYPT_ALG_HANDLE_HMAC_FLAG)))
+    {
         return false;
     }
 
-    result = BCRYPT_SUCCESS(BCryptDeriveKeyPBKDF2(hAlgorithm, (PUCHAR)key, (ULONG)key_length, (PUCHAR)salt, salt_length, iterations, output, output_length, 0));
+    result = BCRYPT_SUCCESS(BCryptDeriveKeyPBKDF2(
+        hAlgorithm, (PUCHAR)key, (ULONG)key_length, (PUCHAR)salt, salt_length, iterations, output, output_length, 0));
 
     BCryptCloseAlgorithmProvider(hAlgorithm, 0);
 
@@ -106,7 +115,8 @@ bool _zip_crypto_pbkdf2(const zip_uint8_t *key, zip_uint64_t key_length, const z
 #define DIGEST_SIZE 20
 #define BLOCK_SIZE 64
 
-typedef struct {
+typedef struct
+{
     BCRYPT_ALG_HANDLE hAlgorithm;
     BCRYPT_HASH_HANDLE hInnerHash;
     BCRYPT_HASH_HANDLE hOuterHash;
@@ -115,89 +125,125 @@ typedef struct {
     PUCHAR pbOuterHash;
 } PRF_CTX;
 
-static void hmacFree(PRF_CTX *pContext) {
-    if (pContext->hOuterHash) {
+static void hmacFree(PRF_CTX* pContext)
+{
+    if (pContext->hOuterHash)
+    {
         BCryptDestroyHash(pContext->hOuterHash);
     }
-    if (pContext->hInnerHash) {
+    if (pContext->hInnerHash)
+    {
         BCryptDestroyHash(pContext->hInnerHash);
     }
     free(pContext->pbOuterHash);
     free(pContext->pbInnerHash);
-    if (pContext->hAlgorithm) {
+    if (pContext->hAlgorithm)
+    {
         BCryptCloseAlgorithmProvider(pContext->hAlgorithm, 0);
     }
 }
 
-static BOOL hmacPrecomputeDigest(BCRYPT_HASH_HANDLE hHash, PUCHAR pbPassword, DWORD cbPassword, BYTE mask) {
+static BOOL hmacPrecomputeDigest(BCRYPT_HASH_HANDLE hHash, PUCHAR pbPassword, DWORD cbPassword, BYTE mask)
+{
     BYTE buffer[BLOCK_SIZE];
     DWORD i;
 
-    if (cbPassword > BLOCK_SIZE) {
+    if (cbPassword > BLOCK_SIZE)
+    {
         return FALSE;
     }
 
     memset(buffer, mask, sizeof(buffer));
 
-    for (i = 0; i < cbPassword; ++i) {
+    for (i = 0; i < cbPassword; ++i)
+    {
         buffer[i] = (char)(pbPassword[i] ^ mask);
     }
 
     return BCRYPT_SUCCESS(BCryptHashData(hHash, buffer, sizeof(buffer), 0));
 }
 
-static BOOL hmacInit(PRF_CTX *pContext, PUCHAR pbPassword, DWORD cbPassword) {
+static BOOL hmacInit(PRF_CTX* pContext, PUCHAR pbPassword, DWORD cbPassword)
+{
     BOOL bStatus = FALSE;
     ULONG cbResult;
     BYTE key[DIGEST_SIZE];
 
-    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&pContext->hAlgorithm, BCRYPT_SHA1_ALGORITHM, NULL, 0)) || !BCRYPT_SUCCESS(BCryptGetProperty(pContext->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&pContext->cbHashObject, sizeof(pContext->cbHashObject), &cbResult, 0)) || ((pContext->pbInnerHash = malloc(pContext->cbHashObject)) == NULL) || ((pContext->pbOuterHash = malloc(pContext->cbHashObject)) == NULL) || !BCRYPT_SUCCESS(BCryptCreateHash(pContext->hAlgorithm, &pContext->hInnerHash, pContext->pbInnerHash, pContext->cbHashObject, NULL, 0, 0)) || !BCRYPT_SUCCESS(BCryptCreateHash(pContext->hAlgorithm, &pContext->hOuterHash, pContext->pbOuterHash, pContext->cbHashObject, NULL, 0, 0))) {
+    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&pContext->hAlgorithm, BCRYPT_SHA1_ALGORITHM, NULL, 0)) ||
+        !BCRYPT_SUCCESS(BCryptGetProperty(pContext->hAlgorithm,
+                                          BCRYPT_OBJECT_LENGTH,
+                                          (PUCHAR)&pContext->cbHashObject,
+                                          sizeof(pContext->cbHashObject),
+                                          &cbResult,
+                                          0)) ||
+        ((pContext->pbInnerHash = malloc(pContext->cbHashObject)) == NULL) ||
+        ((pContext->pbOuterHash = malloc(pContext->cbHashObject)) == NULL) ||
+        !BCRYPT_SUCCESS(BCryptCreateHash(
+            pContext->hAlgorithm, &pContext->hInnerHash, pContext->pbInnerHash, pContext->cbHashObject, NULL, 0, 0)) ||
+        !BCRYPT_SUCCESS(BCryptCreateHash(
+            pContext->hAlgorithm, &pContext->hOuterHash, pContext->pbOuterHash, pContext->cbHashObject, NULL, 0, 0)))
+    {
         goto hmacInit_end;
     }
 
-    if (cbPassword > BLOCK_SIZE) {
+    if (cbPassword > BLOCK_SIZE)
+    {
         BCRYPT_HASH_HANDLE hHash = NULL;
         PUCHAR pbHashObject = malloc(pContext->cbHashObject);
-        if (pbHashObject == NULL) {
+        if (pbHashObject == NULL)
+        {
             goto hmacInit_end;
         }
 
-        bStatus = BCRYPT_SUCCESS(BCryptCreateHash(pContext->hAlgorithm, &hHash, pbHashObject, pContext->cbHashObject, NULL, 0, 0)) && BCRYPT_SUCCESS(BCryptHashData(hHash, pbPassword, cbPassword, 0)) && BCRYPT_SUCCESS(BCryptGetProperty(hHash, BCRYPT_HASH_LENGTH, (PUCHAR)&cbPassword, sizeof(cbPassword), &cbResult, 0)) && BCRYPT_SUCCESS(BCryptFinishHash(hHash, key, cbPassword, 0));
+        bStatus =
+            BCRYPT_SUCCESS(BCryptCreateHash(pContext->hAlgorithm, &hHash, pbHashObject, pContext->cbHashObject, NULL, 0, 0)) &&
+            BCRYPT_SUCCESS(BCryptHashData(hHash, pbPassword, cbPassword, 0)) &&
+            BCRYPT_SUCCESS(BCryptGetProperty(hHash, BCRYPT_HASH_LENGTH, (PUCHAR)&cbPassword, sizeof(cbPassword), &cbResult, 0)) &&
+            BCRYPT_SUCCESS(BCryptFinishHash(hHash, key, cbPassword, 0));
 
-        if (hHash) {
+        if (hHash)
+        {
             BCryptDestroyHash(hHash);
         }
         free(pbHashObject);
 
-        if (!bStatus) {
+        if (!bStatus)
+        {
             goto hmacInit_end;
         }
 
         pbPassword = key;
     }
 
-    bStatus = hmacPrecomputeDigest(pContext->hInnerHash, pbPassword, cbPassword, 0x36) && hmacPrecomputeDigest(pContext->hOuterHash, pbPassword, cbPassword, 0x5C);
+    bStatus = hmacPrecomputeDigest(pContext->hInnerHash, pbPassword, cbPassword, 0x36) &&
+              hmacPrecomputeDigest(pContext->hOuterHash, pbPassword, cbPassword, 0x5C);
 
 hmacInit_end:
 
-    if (bStatus == FALSE) {
+    if (bStatus == FALSE)
+    {
         hmacFree(pContext);
     }
 
     return bStatus;
 }
 
-static BOOL hmacCalculateInternal(BCRYPT_HASH_HANDLE hHashTemplate, PUCHAR pbData, DWORD cbData, PUCHAR pbOutput, DWORD cbOutput, DWORD cbHashObject) {
+static BOOL hmacCalculateInternal(
+    BCRYPT_HASH_HANDLE hHashTemplate, PUCHAR pbData, DWORD cbData, PUCHAR pbOutput, DWORD cbOutput, DWORD cbHashObject)
+{
     BOOL success = FALSE;
     BCRYPT_HASH_HANDLE hHash = NULL;
     PUCHAR pbHashObject = malloc(cbHashObject);
 
-    if (pbHashObject == NULL) {
+    if (pbHashObject == NULL)
+    {
         return FALSE;
     }
 
-    if (BCRYPT_SUCCESS(BCryptDuplicateHash(hHashTemplate, &hHash, pbHashObject, cbHashObject, 0))) {
-        success = BCRYPT_SUCCESS(BCryptHashData(hHash, pbData, cbData, 0)) && BCRYPT_SUCCESS(BCryptFinishHash(hHash, pbOutput, cbOutput, 0));
+    if (BCRYPT_SUCCESS(BCryptDuplicateHash(hHashTemplate, &hHash, pbHashObject, cbHashObject, 0)))
+    {
+        success = BCRYPT_SUCCESS(BCryptHashData(hHash, pbData, cbData, 0)) &&
+                  BCRYPT_SUCCESS(BCryptFinishHash(hHash, pbOutput, cbOutput, 0));
 
         BCryptDestroyHash(hHash);
     }
@@ -207,20 +253,28 @@ static BOOL hmacCalculateInternal(BCRYPT_HASH_HANDLE hHashTemplate, PUCHAR pbDat
     return success;
 }
 
-static BOOL hmacCalculate(PRF_CTX *pContext, PUCHAR pbData, DWORD cbData, PUCHAR pbDigest) {
+static BOOL hmacCalculate(PRF_CTX* pContext, PUCHAR pbData, DWORD cbData, PUCHAR pbDigest)
+{
     DWORD cbResult;
     DWORD cbHashObject;
 
-    return BCRYPT_SUCCESS(BCryptGetProperty(pContext->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&cbHashObject, sizeof(cbHashObject), &cbResult, 0)) && hmacCalculateInternal(pContext->hInnerHash, pbData, cbData, pbDigest, DIGEST_SIZE, cbHashObject) && hmacCalculateInternal(pContext->hOuterHash, pbDigest, DIGEST_SIZE, pbDigest, DIGEST_SIZE, cbHashObject);
+    return BCRYPT_SUCCESS(BCryptGetProperty(
+               pContext->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&cbHashObject, sizeof(cbHashObject), &cbResult, 0)) &&
+           hmacCalculateInternal(pContext->hInnerHash, pbData, cbData, pbDigest, DIGEST_SIZE, cbHashObject) &&
+           hmacCalculateInternal(pContext->hOuterHash, pbDigest, DIGEST_SIZE, pbDigest, DIGEST_SIZE, cbHashObject);
 }
 
-static void myxor(LPBYTE ptr1, LPBYTE ptr2, DWORD dwLen) {
-    while (dwLen--) {
+static void myxor(LPBYTE ptr1, LPBYTE ptr2, DWORD dwLen)
+{
+    while (dwLen--)
+    {
         *ptr1++ ^= *ptr2++;
     }
 }
 
-BOOL pbkdf2(PUCHAR pbPassword, ULONG cbPassword, PUCHAR pbSalt, ULONG cbSalt, DWORD cIterations, PUCHAR pbDerivedKey, ULONG cbDerivedKey) {
+BOOL pbkdf2(
+    PUCHAR pbPassword, ULONG cbPassword, PUCHAR pbSalt, ULONG cbSalt, DWORD cIterations, PUCHAR pbDerivedKey, ULONG cbDerivedKey)
+{
     BOOL bStatus = FALSE;
     DWORD l, r, dwULen, i, j;
     BYTE Ti[DIGEST_SIZE];
@@ -228,26 +282,33 @@ BOOL pbkdf2(PUCHAR pbPassword, ULONG cbPassword, PUCHAR pbSalt, ULONG cbSalt, DW
     LPBYTE U = malloc(max((cbSalt + 4), DIGEST_SIZE));
     PRF_CTX prfCtx = {0};
 
-    if (U == NULL) {
+    if (U == NULL)
+    {
         return FALSE;
     }
 
-    if (pbPassword == NULL || cbPassword == 0 || pbSalt == NULL || cbSalt == 0 || cIterations == 0 || pbDerivedKey == NULL || cbDerivedKey == 0) {
+    if (pbPassword == NULL || cbPassword == 0 || pbSalt == NULL || cbSalt == 0 || cIterations == 0 || pbDerivedKey == NULL ||
+        cbDerivedKey == 0)
+    {
         free(U);
         return FALSE;
     }
 
-    if (!hmacInit(&prfCtx, pbPassword, cbPassword)) {
+    if (!hmacInit(&prfCtx, pbPassword, cbPassword))
+    {
         goto PBKDF2_end;
     }
 
     l = (DWORD)ceil((double)cbDerivedKey / (double)DIGEST_SIZE);
     r = cbDerivedKey - (l - 1) * DIGEST_SIZE;
 
-    for (i = 1; i <= l; i++) {
+    for (i = 1; i <= l; i++)
+    {
         ZeroMemory(Ti, DIGEST_SIZE);
-        for (j = 0; j < cIterations; j++) {
-            if (j == 0) {
+        for (j = 0; j < cIterations; j++)
+        {
+            if (j == 0)
+            {
                 /* construct first input for PRF */
                 (void)memcpy_s(U, cbSalt, pbSalt, cbSalt);
                 U[cbSalt] = (BYTE)((i & 0xFF000000) >> 24);
@@ -256,22 +317,26 @@ BOOL pbkdf2(PUCHAR pbPassword, ULONG cbPassword, PUCHAR pbSalt, ULONG cbSalt, DW
                 U[cbSalt + 3] = (BYTE)((i & 0x000000FF));
                 dwULen = cbSalt + 4;
             }
-            else {
+            else
+            {
                 (void)memcpy_s(U, DIGEST_SIZE, V, DIGEST_SIZE);
                 dwULen = DIGEST_SIZE;
             }
 
-            if (!hmacCalculate(&prfCtx, U, dwULen, V)) {
+            if (!hmacCalculate(&prfCtx, U, dwULen, V))
+            {
                 goto PBKDF2_end;
             }
 
             myxor(Ti, V, DIGEST_SIZE);
         }
 
-        if (i != l) {
+        if (i != l)
+        {
             (void)memcpy_s(&pbDerivedKey[(i - 1) * DIGEST_SIZE], cbDerivedKey - (i - 1) * DIGEST_SIZE, Ti, DIGEST_SIZE);
         }
-        else {
+        else
+        {
             /* Take only the first r bytes */
             (void)memcpy_s(&pbDerivedKey[(i - 1) * DIGEST_SIZE], cbDerivedKey - (i - 1) * DIGEST_SIZE, Ti, r);
         }
@@ -286,54 +351,72 @@ PBKDF2_end:
     return bStatus;
 }
 
-bool _zip_crypto_pbkdf2(const zip_uint8_t *key, zip_uint64_t key_length, const zip_uint8_t *salt, zip_uint16_t salt_length, zip_uint16_t iterations, zip_uint8_t *output, zip_uint16_t output_length) {
-    return (key_length <= ZIP_UINT32_MAX) && pbkdf2((PUCHAR)key, (ULONG)key_length, (PUCHAR)salt, salt_length, iterations, output, output_length);
+bool _zip_crypto_pbkdf2(const zip_uint8_t* key,
+                        zip_uint64_t key_length,
+                        const zip_uint8_t* salt,
+                        zip_uint16_t salt_length,
+                        zip_uint16_t iterations,
+                        zip_uint8_t* output,
+                        zip_uint16_t output_length)
+{
+    return (key_length <= ZIP_UINT32_MAX) &&
+           pbkdf2((PUCHAR)key, (ULONG)key_length, (PUCHAR)salt, salt_length, iterations, output, output_length);
 }
 
 #endif
 
-
-struct _zip_crypto_aes_s {
+struct _zip_crypto_aes_s
+{
     BCRYPT_ALG_HANDLE hAlgorithm;
     BCRYPT_KEY_HANDLE hKey;
     ULONG cbKeyObject;
     PUCHAR pbKeyObject;
 };
 
-_zip_crypto_aes_t *_zip_crypto_aes_new(const zip_uint8_t *key, zip_uint16_t key_size, zip_error_t *error) {
-    _zip_crypto_aes_t *aes = (_zip_crypto_aes_t *)calloc(1, sizeof(*aes));
+_zip_crypto_aes_t* _zip_crypto_aes_new(const zip_uint8_t* key, zip_uint16_t key_size, zip_error_t* error)
+{
+    _zip_crypto_aes_t* aes = (_zip_crypto_aes_t*)calloc(1, sizeof(*aes));
 
     ULONG cbResult;
     ULONG key_length = key_size / 8;
 
-    if (aes == NULL) {
+    if (aes == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&aes->hAlgorithm, BCRYPT_AES_ALGORITHM, NULL, 0))) {
+    if (!BCRYPT_SUCCESS(BCryptOpenAlgorithmProvider(&aes->hAlgorithm, BCRYPT_AES_ALGORITHM, NULL, 0)))
+    {
         _zip_crypto_aes_free(aes);
         return NULL;
     }
 
-    if (!BCRYPT_SUCCESS(BCryptSetProperty(aes->hAlgorithm, BCRYPT_CHAINING_MODE, (PUCHAR)BCRYPT_CHAIN_MODE_ECB, sizeof(BCRYPT_CHAIN_MODE_ECB), 0))) {
+    if (!BCRYPT_SUCCESS(BCryptSetProperty(
+            aes->hAlgorithm, BCRYPT_CHAINING_MODE, (PUCHAR)BCRYPT_CHAIN_MODE_ECB, sizeof(BCRYPT_CHAIN_MODE_ECB), 0)))
+    {
         _zip_crypto_aes_free(aes);
         return NULL;
     }
 
-    if (!BCRYPT_SUCCESS(BCryptGetProperty(aes->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&aes->cbKeyObject, sizeof(aes->cbKeyObject), &cbResult, 0))) {
+    if (!BCRYPT_SUCCESS(BCryptGetProperty(
+            aes->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&aes->cbKeyObject, sizeof(aes->cbKeyObject), &cbResult, 0)))
+    {
         _zip_crypto_aes_free(aes);
         return NULL;
     }
 
     aes->pbKeyObject = malloc(aes->cbKeyObject);
-    if (aes->pbKeyObject == NULL) {
+    if (aes->pbKeyObject == NULL)
+    {
         _zip_crypto_aes_free(aes);
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    if (!BCRYPT_SUCCESS(BCryptGenerateSymmetricKey(aes->hAlgorithm, &aes->hKey, aes->pbKeyObject, aes->cbKeyObject, (PUCHAR)key, key_length, 0))) {
+    if (!BCRYPT_SUCCESS(BCryptGenerateSymmetricKey(
+            aes->hAlgorithm, &aes->hKey, aes->pbKeyObject, aes->cbKeyObject, (PUCHAR)key, key_length, 0)))
+    {
         _zip_crypto_aes_free(aes);
         return NULL;
     }
@@ -341,33 +424,41 @@ _zip_crypto_aes_t *_zip_crypto_aes_new(const zip_uint8_t *key, zip_uint16_t key_
     return aes;
 }
 
-void _zip_crypto_aes_free(_zip_crypto_aes_t *aes) {
-    if (aes == NULL) {
+void _zip_crypto_aes_free(_zip_crypto_aes_t* aes)
+{
+    if (aes == NULL)
+    {
         return;
     }
 
-    if (aes->hKey != NULL) {
+    if (aes->hKey != NULL)
+    {
         BCryptDestroyKey(aes->hKey);
     }
 
-    if (aes->pbKeyObject != NULL) {
+    if (aes->pbKeyObject != NULL)
+    {
         free(aes->pbKeyObject);
     }
 
-    if (aes->hAlgorithm != NULL) {
+    if (aes->hAlgorithm != NULL)
+    {
         BCryptCloseAlgorithmProvider(aes->hAlgorithm, 0);
     }
 
     free(aes);
 }
 
-bool _zip_crypto_aes_encrypt_block(_zip_crypto_aes_t *aes, const zip_uint8_t *in, zip_uint8_t *out) {
+bool _zip_crypto_aes_encrypt_block(_zip_crypto_aes_t* aes, const zip_uint8_t* in, zip_uint8_t* out)
+{
     ULONG cbResult;
-    NTSTATUS status = BCryptEncrypt(aes->hKey, (PUCHAR)in, ZIP_CRYPTO_AES_BLOCK_LENGTH, NULL, NULL, 0, (PUCHAR)out, ZIP_CRYPTO_AES_BLOCK_LENGTH, &cbResult, 0);
+    NTSTATUS status = BCryptEncrypt(
+        aes->hKey, (PUCHAR)in, ZIP_CRYPTO_AES_BLOCK_LENGTH, NULL, NULL, 0, (PUCHAR)out, ZIP_CRYPTO_AES_BLOCK_LENGTH, &cbResult, 0);
     return BCRYPT_SUCCESS(status);
 }
 
-struct _zip_crypto_hmac_s {
+struct _zip_crypto_hmac_s
+{
     BCRYPT_ALG_HANDLE hAlgorithm;
     BCRYPT_HASH_HANDLE hHash;
     DWORD cbHashObject;
@@ -378,57 +469,68 @@ struct _zip_crypto_hmac_s {
 
 /* https://code.msdn.microsoft.com/windowsdesktop/Hmac-Computation-Sample-11fe8ec1/sourcecode?fileId=42820&pathId=283874677 */
 
-_zip_crypto_hmac_t *_zip_crypto_hmac_new(const zip_uint8_t *secret, zip_uint64_t secret_length, zip_error_t *error) {
+_zip_crypto_hmac_t* _zip_crypto_hmac_new(const zip_uint8_t* secret, zip_uint64_t secret_length, zip_error_t* error)
+{
     NTSTATUS status;
     ULONG cbResult;
-    _zip_crypto_hmac_t *hmac;
+    _zip_crypto_hmac_t* hmac;
 
-    if (secret_length > INT_MAX) {
+    if (secret_length > INT_MAX)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return NULL;
     }
 
-    hmac = (_zip_crypto_hmac_t *)calloc(1, sizeof(*hmac));
+    hmac = (_zip_crypto_hmac_t*)calloc(1, sizeof(*hmac));
 
-    if (hmac == NULL) {
+    if (hmac == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
     status = BCryptOpenAlgorithmProvider(&hmac->hAlgorithm, BCRYPT_SHA1_ALGORITHM, NULL, BCRYPT_ALG_HANDLE_HMAC_FLAG);
-    if (!BCRYPT_SUCCESS(status)) {
+    if (!BCRYPT_SUCCESS(status))
+    {
         _zip_crypto_hmac_free(hmac);
         return NULL;
     }
 
-    status = BCryptGetProperty(hmac->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&hmac->cbHashObject, sizeof(hmac->cbHashObject), &cbResult, 0);
-    if (!BCRYPT_SUCCESS(status)) {
+    status = BCryptGetProperty(
+        hmac->hAlgorithm, BCRYPT_OBJECT_LENGTH, (PUCHAR)&hmac->cbHashObject, sizeof(hmac->cbHashObject), &cbResult, 0);
+    if (!BCRYPT_SUCCESS(status))
+    {
         _zip_crypto_hmac_free(hmac);
         return NULL;
     }
 
     hmac->pbHashObject = malloc(hmac->cbHashObject);
-    if (hmac->pbHashObject == NULL) {
+    if (hmac->pbHashObject == NULL)
+    {
         _zip_crypto_hmac_free(hmac);
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
     status = BCryptGetProperty(hmac->hAlgorithm, BCRYPT_HASH_LENGTH, (PUCHAR)&hmac->cbHash, sizeof(hmac->cbHash), &cbResult, 0);
-    if (!BCRYPT_SUCCESS(status)) {
+    if (!BCRYPT_SUCCESS(status))
+    {
         _zip_crypto_hmac_free(hmac);
         return NULL;
     }
 
     hmac->pbHash = malloc(hmac->cbHash);
-    if (hmac->pbHash == NULL) {
+    if (hmac->pbHash == NULL)
+    {
         _zip_crypto_hmac_free(hmac);
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    status = BCryptCreateHash(hmac->hAlgorithm, &hmac->hHash, hmac->pbHashObject, hmac->cbHashObject, (PUCHAR)secret, (ULONG)secret_length, 0);
-    if (!BCRYPT_SUCCESS(status)) {
+    status = BCryptCreateHash(
+        hmac->hAlgorithm, &hmac->hHash, hmac->pbHashObject, hmac->cbHashObject, (PUCHAR)secret, (ULONG)secret_length, 0);
+    if (!BCRYPT_SUCCESS(status))
+    {
         _zip_crypto_hmac_free(hmac);
         return NULL;
     }
@@ -436,46 +538,57 @@ _zip_crypto_hmac_t *_zip_crypto_hmac_new(const zip_uint8_t *secret, zip_uint64_t
     return hmac;
 }
 
-void _zip_crypto_hmac_free(_zip_crypto_hmac_t *hmac) {
-    if (hmac == NULL) {
+void _zip_crypto_hmac_free(_zip_crypto_hmac_t* hmac)
+{
+    if (hmac == NULL)
+    {
         return;
     }
 
-    if (hmac->hHash != NULL) {
+    if (hmac->hHash != NULL)
+    {
         BCryptDestroyHash(hmac->hHash);
     }
 
-    if (hmac->pbHash != NULL) {
+    if (hmac->pbHash != NULL)
+    {
         free(hmac->pbHash);
     }
 
-    if (hmac->pbHashObject != NULL) {
+    if (hmac->pbHashObject != NULL)
+    {
         free(hmac->pbHashObject);
     }
 
-    if (hmac->hAlgorithm) {
+    if (hmac->hAlgorithm)
+    {
         BCryptCloseAlgorithmProvider(hmac->hAlgorithm, 0);
     }
 
     free(hmac);
 }
 
-bool _zip_crypto_hmac(_zip_crypto_hmac_t *hmac, zip_uint8_t *data, zip_uint64_t length) {
-    if (hmac == NULL || length > ULONG_MAX) {
+bool _zip_crypto_hmac(_zip_crypto_hmac_t* hmac, zip_uint8_t* data, zip_uint64_t length)
+{
+    if (hmac == NULL || length > ULONG_MAX)
+    {
         return false;
     }
 
     return BCRYPT_SUCCESS(BCryptHashData(hmac->hHash, data, (ULONG)length, 0));
 }
 
-bool _zip_crypto_hmac_output(_zip_crypto_hmac_t *hmac, zip_uint8_t *data) {
-    if (hmac == NULL) {
+bool _zip_crypto_hmac_output(_zip_crypto_hmac_t* hmac, zip_uint8_t* data)
+{
+    if (hmac == NULL)
+    {
         return false;
     }
 
     return BCRYPT_SUCCESS(BCryptFinishHash(hmac->hHash, data, hmac->cbHash, 0));
 }
 
-ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
+ZIP_EXTERN bool zip_secure_random(zip_uint8_t* buffer, zip_uint16_t length)
+{
     return BCRYPT_SUCCESS(BCryptGenRandom(NULL, buffer, length, BCRYPT_USE_SYSTEM_PREFERRED_RNG));
 }

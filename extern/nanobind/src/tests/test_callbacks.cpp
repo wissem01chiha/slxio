@@ -15,40 +15,60 @@ namespace nb = nanobind;
 
 // The callback type accepted by the object, which we assume we can't change.
 // It's trivially copyable, so it can't directly keep a Python object alive.
-struct callback {
-    void *context;
-    void (*func)(void *context, int arg);
+struct callback
+{
+    void* context;
+    void (*func)(void* context, int arg);
 
-    void operator()(int arg) const { (*func)(context, arg); }
-    bool operator==(const callback& other) const {
+    void operator()(int arg) const
+    {
+        (*func)(context, arg);
+    }
+    bool operator==(const callback& other) const
+    {
         return context == other.context && func == other.func;
     }
 };
 
 // An object that uses these callbacks, which we want to write bindings for
-class publisher {
-  public:
-    void subscribe(callback cb) { cbs.push_back(cb); }
-    void unsubscribe(callback cb) {
+class publisher
+{
+public:
+    void subscribe(callback cb)
+    {
+        cbs.push_back(cb);
+    }
+    void unsubscribe(callback cb)
+    {
         cbs.erase(std::remove(cbs.begin(), cbs.end(), cb), cbs.end());
     }
-    void emit(int arg) const { for (auto cb : cbs) cb(arg); }
-  private:
+    void emit(int arg) const
+    {
+        for (auto cb : cbs)
+            cb(arg);
+    }
+
+private:
     std::vector<callback> cbs;
 };
 
-template <> struct nanobind::detail::type_caster<callback> {
-    static void wrap_call(void *context, int arg) {
-        borrow<callable>((PyObject *) context)(arg);
+template <> struct nanobind::detail::type_caster<callback>
+{
+    static void wrap_call(void* context, int arg)
+    {
+        borrow<callable>((PyObject*)context)(arg);
     }
-    bool from_python(handle src, uint32_t, cleanup_list*) noexcept {
-        if (!isinstance<callable>(src)) return false;
-        value = {(void *) src.ptr(), &wrap_call};
+    bool from_python(handle src, uint32_t, cleanup_list*) noexcept
+    {
+        if (!isinstance<callable>(src))
+            return false;
+        value = {(void*)src.ptr(), &wrap_call};
         return true;
     }
-    static handle from_cpp(callback cb, rv_policy policy, cleanup_list*) noexcept {
+    static handle from_cpp(callback cb, rv_policy policy, cleanup_list*) noexcept
+    {
         if (cb.func == &wrap_call)
-            return handle((PyObject *) cb.context).inc_ref();
+            return handle((PyObject*)cb.context).inc_ref();
         if (policy == rv_policy::none)
             return handle();
         return cpp_function(cb).release();
@@ -56,27 +76,36 @@ template <> struct nanobind::detail::type_caster<callback> {
     NB_TYPE_CASTER(callback, const_name("Callable[[int], None]"))
 };
 
-nb::dict cb_registry() {
-    return nb::cast<nb::dict>(
-            nb::module_::import_("test_callbacks_ext").attr("registry"));
+nb::dict cb_registry()
+{
+    return nb::cast<nb::dict>(nb::module_::import_("test_callbacks_ext").attr("registry"));
 }
 
-struct callback_data {
-    struct py_hash {
-        size_t operator()(const nb::object& obj) const { return (size_t) nb::hash(obj); }
+struct callback_data
+{
+    struct py_hash
+    {
+        size_t operator()(const nb::object& obj) const
+        {
+            return (size_t)nb::hash(obj);
+        }
     };
-    struct py_eq {
-        bool operator()(const nb::object& a, const nb::object& b) const {
+    struct py_eq
+    {
+        bool operator()(const nb::object& a, const nb::object& b) const
+        {
             return a.equal(b);
         }
     };
     std::unordered_set<nb::object, py_hash, py_eq> subscribers;
 };
 
-callback_data& callbacks_for(nb::handle publisher) {
+callback_data& callbacks_for(nb::handle publisher)
+{
     auto registry = cb_registry();
     nb::weakref key(publisher, registry.attr("__delitem__"));
-    if (nb::handle value = PyDict_GetItem(registry.ptr(), key.ptr())) {
+    if (nb::handle value = PyDict_GetItem(registry.ptr(), key.ptr()))
+    {
         return nb::cast<callback_data&>(value);
     }
     nb::object new_data = nb::cast(callback_data{});
@@ -84,14 +113,16 @@ callback_data& callbacks_for(nb::handle publisher) {
     return nb::cast<callback_data&>(new_data);
 }
 
-struct cb_policy_common {
+struct cb_policy_common
+{
     using TwoArgs = std::integral_constant<size_t, 2>;
-    static void precall(PyObject **args, TwoArgs,
-                        nb::detail::cleanup_list *cleanup) {
+    static void precall(PyObject** args, TwoArgs, nb::detail::cleanup_list* cleanup)
+    {
         nb::handle self = args[0], cb = args[1];
         auto& cbs = callbacks_for(self);
         auto it = cbs.subscribers.find(nb::borrow(cb));
-        if (it != cbs.subscribers.end() && !it->is(cb)) {
+        if (it != cbs.subscribers.end() && !it->is(cb))
+        {
             // A callback is already subscribed that is
             // equal-but-not-identical to the one passed in.
             // Adjust args to refer to that one, to work around
@@ -110,29 +141,31 @@ struct cb_policy_common {
     }
 };
 
-struct subscribe_policy : cb_policy_common {
-    static void postcall(PyObject **args, TwoArgs, nb::handle) {
+struct subscribe_policy : cb_policy_common
+{
+    static void postcall(PyObject** args, TwoArgs, nb::handle)
+    {
         nb::handle self = args[0], cb = args[1];
         callbacks_for(self).subscribers.insert(nb::borrow(cb));
     }
 };
 
-struct unsubscribe_policy : cb_policy_common {
-    static void postcall(PyObject **args, TwoArgs, nb::handle) {
+struct unsubscribe_policy : cb_policy_common
+{
+    static void postcall(PyObject** args, TwoArgs, nb::handle)
+    {
         nb::handle self = args[0], cb = args[1];
         callbacks_for(self).subscribers.erase(nb::borrow(cb));
     }
 };
 
-NB_MODULE(test_callbacks_ext, m) {
+NB_MODULE(test_callbacks_ext, m)
+{
     m.attr("registry") = nb::dict();
-    nb::class_<callback_data>(m, "callback_data")
-        .def_ro("subscribers", &callback_data::subscribers);
+    nb::class_<callback_data>(m, "callback_data").def_ro("subscribers", &callback_data::subscribers);
     nb::class_<publisher>(m, "publisher", nb::is_weak_referenceable())
         .def(nb::init<>())
-        .def("subscribe", &publisher::subscribe,
-             nb::call_policy<subscribe_policy>())
-        .def("unsubscribe", &publisher::unsubscribe,
-             nb::call_policy<unsubscribe_policy>())
+        .def("subscribe", &publisher::subscribe, nb::call_policy<subscribe_policy>())
+        .def("unsubscribe", &publisher::unsubscribe, nb::call_policy<unsubscribe_policy>())
         .def("emit", &publisher::emit);
 }

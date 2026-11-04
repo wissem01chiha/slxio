@@ -5,11 +5,13 @@
 #include "simdjson/base.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
+namespace simdjson
+{
 /**
  * RVV-VLS implementation.
  */
-namespace rvv_vls {
+namespace rvv_vls
+{
 
 class implementation;
 

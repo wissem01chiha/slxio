@@ -36,7 +36,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct context {
+struct context
+{
     zip_error_t error;
 
     bool end_of_input;
@@ -51,15 +52,15 @@ struct context {
     zip_int64_t first_read;
     zip_uint8_t buffer[BUFSIZE];
 
-    zip_compression_algorithm_t *algorithm;
-    void *ud;
+    zip_compression_algorithm_t* algorithm;
+    void* ud;
 };
 
-
-struct implementation {
+struct implementation
+{
     zip_uint16_t method;
-    zip_compression_algorithm_t *compress;
-    zip_compression_algorithm_t *decompress;
+    zip_compression_algorithm_t* compress;
+    zip_compression_algorithm_t* decompress;
 };
 
 static struct implementation implementations[] = {
@@ -84,22 +85,32 @@ static struct implementation implementations[] = {
 
 static size_t implementations_size = sizeof(implementations) / sizeof(implementations[0]);
 
-static zip_source_t *compression_source_new(zip_t *za, zip_source_t *src, zip_int32_t method, bool compress, zip_uint32_t compression_flags);
-static zip_int64_t compress_callback(zip_source_t *, void *, void *, zip_uint64_t, zip_source_cmd_t);
-static void context_free(struct context *ctx);
-static struct context *context_new(zip_int32_t method, bool compress, zip_uint32_t compression_flags, zip_compression_algorithm_t *algorithm, bool check_consistency);
-static zip_int64_t compress_read(zip_source_t *, struct context *, void *, zip_uint64_t);
+static zip_source_t*
+compression_source_new(zip_t* za, zip_source_t* src, zip_int32_t method, bool compress, zip_uint32_t compression_flags);
+static zip_int64_t compress_callback(zip_source_t*, void*, void*, zip_uint64_t, zip_source_cmd_t);
+static void context_free(struct context* ctx);
+static struct context* context_new(zip_int32_t method,
+                                   bool compress,
+                                   zip_uint32_t compression_flags,
+                                   zip_compression_algorithm_t* algorithm,
+                                   bool check_consistency);
+static zip_int64_t compress_read(zip_source_t*, struct context*, void*, zip_uint64_t);
 
-zip_compression_algorithm_t *_zip_get_compression_algorithm(zip_int32_t method, bool compress) {
+zip_compression_algorithm_t* _zip_get_compression_algorithm(zip_int32_t method, bool compress)
+{
     size_t i;
     zip_uint16_t real_method = ZIP_CM_ACTUAL(method);
 
-    for (i = 0; i < implementations_size; i++) {
-        if (implementations[i].method == real_method) {
-            if (compress) {
+    for (i = 0; i < implementations_size; i++)
+    {
+        if (implementations[i].method == real_method)
+        {
+            if (compress)
+            {
                 return implementations[i].compress;
             }
-            else {
+            else
+            {
                 return implementations[i].decompress;
             }
         }
@@ -108,43 +119,52 @@ zip_compression_algorithm_t *_zip_get_compression_algorithm(zip_int32_t method, 
     return NULL;
 }
 
-ZIP_EXTERN int zip_compression_method_supported(zip_int32_t method, int compress) {
-    if (method == ZIP_CM_STORE) {
+ZIP_EXTERN int zip_compression_method_supported(zip_int32_t method, int compress)
+{
+    if (method == ZIP_CM_STORE)
+    {
         return 1;
     }
     return _zip_get_compression_algorithm(method, compress) != NULL;
 }
 
-zip_source_t *zip_source_compress(zip_t *za, zip_source_t *src, zip_int32_t method, zip_uint32_t compression_flags) {
+zip_source_t* zip_source_compress(zip_t* za, zip_source_t* src, zip_int32_t method, zip_uint32_t compression_flags)
+{
     return compression_source_new(za, src, method, true, compression_flags);
 }
 
-zip_source_t *zip_source_decompress(zip_t *za, zip_source_t *src, zip_int32_t method) {
+zip_source_t* zip_source_decompress(zip_t* za, zip_source_t* src, zip_int32_t method)
+{
     return compression_source_new(za, src, method, false, 0);
 }
 
+static zip_source_t*
+compression_source_new(zip_t* za, zip_source_t* src, zip_int32_t method, bool compress, zip_uint32_t compression_flags)
+{
+    struct context* ctx;
+    zip_source_t* s2;
+    zip_compression_algorithm_t* algorithm = NULL;
 
-static zip_source_t *compression_source_new(zip_t *za, zip_source_t *src, zip_int32_t method, bool compress, zip_uint32_t compression_flags) {
-    struct context *ctx;
-    zip_source_t *s2;
-    zip_compression_algorithm_t *algorithm = NULL;
-
-    if (src == NULL) {
+    if (src == NULL)
+    {
         zip_error_set(&za->error, ZIP_ER_INVAL, 0);
         return NULL;
     }
 
-    if ((algorithm = _zip_get_compression_algorithm(method, compress)) == NULL) {
+    if ((algorithm = _zip_get_compression_algorithm(method, compress)) == NULL)
+    {
         zip_error_set(&za->error, ZIP_ER_COMPNOTSUPP, 0);
         return NULL;
     }
 
-    if ((ctx = context_new(method, compress, compression_flags, algorithm, za->open_flags & ZIP_CHECKCONS)) == NULL) {
+    if ((ctx = context_new(method, compress, compression_flags, algorithm, za->open_flags & ZIP_CHECKCONS)) == NULL)
+    {
         zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    if ((s2 = zip_source_layered(za, src, compress_callback, ctx)) == NULL) {
+    if ((s2 = zip_source_layered(za, src, compress_callback, ctx)) == NULL)
+    {
         context_free(ctx);
         return NULL;
     }
@@ -152,11 +172,16 @@ static zip_source_t *compression_source_new(zip_t *za, zip_source_t *src, zip_in
     return s2;
 }
 
+static struct context* context_new(zip_int32_t method,
+                                   bool compress,
+                                   zip_uint32_t compression_flags,
+                                   zip_compression_algorithm_t* algorithm,
+                                   bool check_consistency)
+{
+    struct context* ctx;
 
-static struct context *context_new(zip_int32_t method, bool compress, zip_uint32_t compression_flags, zip_compression_algorithm_t *algorithm, bool check_consistency) {
-    struct context *ctx;
-
-    if ((ctx = (struct context *)malloc(sizeof(*ctx))) == NULL) {
+    if ((ctx = (struct context*)malloc(sizeof(*ctx))) == NULL)
+    {
         return NULL;
     }
     zip_error_init(&ctx->error);
@@ -169,7 +194,8 @@ static struct context *context_new(zip_int32_t method, bool compress, zip_uint32
     ctx->is_stored = false;
     ctx->check_consistency = check_consistency;
 
-    if ((ctx->ud = ctx->algorithm->allocate(ZIP_CM_ACTUAL(method), compression_flags, &ctx->error)) == NULL) {
+    if ((ctx->ud = ctx->algorithm->allocate(ZIP_CM_ACTUAL(method), compression_flags, &ctx->error)) == NULL)
+    {
         zip_error_fini(&ctx->error);
         free(ctx);
         return NULL;
@@ -178,9 +204,10 @@ static struct context *context_new(zip_int32_t method, bool compress, zip_uint32
     return ctx;
 }
 
-
-static void context_free(struct context *ctx) {
-    if (ctx == NULL) {
+static void context_free(struct context* ctx)
+{
+    if (ctx == NULL)
+    {
         return;
     }
 
@@ -190,50 +217,59 @@ static void context_free(struct context *ctx) {
     free(ctx);
 }
 
-
-static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *data, zip_uint64_t len) {
+static zip_int64_t compress_read(zip_source_t* src, struct context* ctx, void* data, zip_uint64_t len)
+{
     zip_compression_status_t ret;
     bool end;
     zip_int64_t n;
     zip_uint64_t out_offset;
     zip_uint64_t out_len;
 
-    if (zip_error_code_zip(&ctx->error) != ZIP_ER_OK) {
+    if (zip_error_code_zip(&ctx->error) != ZIP_ER_OK)
+    {
         return -1;
     }
 
-    if (len == 0 || ctx->end_of_stream) {
+    if (len == 0 || ctx->end_of_stream)
+    {
         return 0;
     }
 
     out_offset = 0;
 
     end = false;
-    while (!end && out_offset < len) {
+    while (!end && out_offset < len)
+    {
         out_len = len - out_offset;
-        ret = ctx->algorithm->process(ctx->ud, (zip_uint8_t *)data + out_offset, &out_len);
+        ret = ctx->algorithm->process(ctx->ud, (zip_uint8_t*)data + out_offset, &out_len);
 
-        if (ret != ZIP_COMPRESSION_ERROR) {
+        if (ret != ZIP_COMPRESSION_ERROR)
+        {
             out_offset += out_len;
         }
 
-        switch (ret) {
+        switch (ret)
+        {
         case ZIP_COMPRESSION_END:
             ctx->end_of_stream = true;
 
-            if (!ctx->end_of_input) {
+            if (!ctx->end_of_input)
+            {
                 n = zip_source_read(src, ctx->buffer, 1);
-                if (n < 0) {
+                if (n < 0)
+                {
                     zip_error_set_from_source(&ctx->error, src);
                     end = true;
                     break;
                 }
-                else if (n == 0) {
+                else if (n == 0)
+                {
                     ctx->end_of_input = true;
                     n = ctx->algorithm->end_of_input(ctx->ud) ? 1 : 0;
                 }
 
-                if (n > 0 && ctx->check_consistency) {
+                if (n > 0 && ctx->check_consistency)
+                {
                     /* garbage after stream, or compression ended before all data read */
                     zip_error_set(&ctx->error, ZIP_ER_INCONS, ZIP_ER_DETAIL_COMPRESSED_DATA_TRAILING_GARBAGE);
                     end = true;
@@ -241,13 +277,15 @@ static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *d
                 }
             }
 
-            if (ctx->first_read < 0) {
+            if (ctx->first_read < 0)
+            {
                 /* we got end of processed stream before reading any input data */
                 zip_error_set(&ctx->error, ZIP_ER_INTERNAL, 0);
                 end = true;
                 break;
             }
-            if (ctx->can_store && (zip_uint64_t)ctx->first_read <= out_offset) {
+            if (ctx->can_store && (zip_uint64_t)ctx->first_read <= out_offset)
+            {
                 ctx->is_stored = true;
                 ctx->size = (zip_uint64_t)ctx->first_read;
                 (void)memcpy_s(data, ctx->size, ctx->buffer, ctx->size);
@@ -260,30 +298,37 @@ static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *d
             break;
 
         case ZIP_COMPRESSION_NEED_DATA:
-            if (ctx->end_of_input) {
+            if (ctx->end_of_input)
+            {
                 /* TODO: error: stream not ended, but no more input */
                 end = true;
                 break;
             }
 
-            if ((n = zip_source_read(src, ctx->buffer, sizeof(ctx->buffer))) < 0) {
+            if ((n = zip_source_read(src, ctx->buffer, sizeof(ctx->buffer))) < 0)
+            {
                 zip_error_set_from_source(&ctx->error, src);
                 end = true;
                 break;
             }
-            else if (n == 0) {
+            else if (n == 0)
+            {
                 ctx->end_of_input = true;
                 ctx->algorithm->end_of_input(ctx->ud);
-                if (ctx->first_read < 0) {
+                if (ctx->first_read < 0)
+                {
                     ctx->first_read = 0;
                 }
             }
-            else {
-                if (ctx->first_read >= 0) {
+            else
+            {
+                if (ctx->first_read >= 0)
+                {
                     /* we overwrote a previously filled ctx->buffer */
                     ctx->can_store = false;
                 }
-                else {
+                else
+                {
                     ctx->first_read = n;
                 }
 
@@ -293,7 +338,8 @@ static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *d
 
         case ZIP_COMPRESSION_ERROR:
             /* error set by algorithm */
-            if (zip_error_code_zip(&ctx->error) == ZIP_ER_OK) {
+            if (zip_error_code_zip(&ctx->error) == ZIP_ER_OK)
+            {
                 zip_error_set(&ctx->error, ZIP_ER_INTERNAL, 0);
             }
             end = true;
@@ -301,7 +347,8 @@ static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *d
         }
     }
 
-    if (out_offset > 0) {
+    if (out_offset > 0)
+    {
         ctx->can_store = false;
         ctx->size += out_offset;
         return (zip_int64_t)out_offset;
@@ -310,14 +357,16 @@ static zip_int64_t compress_read(zip_source_t *src, struct context *ctx, void *d
     return (zip_error_code_zip(&ctx->error) == ZIP_ER_OK) ? 0 : -1;
 }
 
+static zip_int64_t compress_callback(zip_source_t* src, void* ud, void* data, zip_uint64_t len, zip_source_cmd_t cmd)
+{
+    struct context* ctx;
 
-static zip_int64_t compress_callback(zip_source_t *src, void *ud, void *data, zip_uint64_t len, zip_source_cmd_t cmd) {
-    struct context *ctx;
+    ctx = (struct context*)ud;
 
-    ctx = (struct context *)ud;
-
-    switch (cmd) {
-    case ZIP_SOURCE_OPEN: {
+    switch (cmd)
+    {
+    case ZIP_SOURCE_OPEN:
+    {
         zip_stat_t st;
         zip_file_attributes_t attributes;
 
@@ -327,12 +376,14 @@ static zip_int64_t compress_callback(zip_source_t *src, void *ud, void *data, zi
         ctx->is_stored = false;
         ctx->first_read = -1;
 
-        if (zip_source_stat(src, &st) < 0 || zip_source_get_file_attributes(src, &attributes) < 0) {
+        if (zip_source_stat(src, &st) < 0 || zip_source_get_file_attributes(src, &attributes) < 0)
+        {
             zip_error_set_from_source(&ctx->error, src);
             return -1;
         }
 
-        if (!ctx->algorithm->start(ctx->ud, &st, &attributes)) {
+        if (!ctx->algorithm->start(ctx->ud, &st, &attributes))
+        {
             return -1;
         }
 
@@ -343,31 +394,38 @@ static zip_int64_t compress_callback(zip_source_t *src, void *ud, void *data, zi
         return compress_read(src, ctx, data, len);
 
     case ZIP_SOURCE_CLOSE:
-        if (!ctx->algorithm->end(ctx->ud)) {
+        if (!ctx->algorithm->end(ctx->ud))
+        {
             return -1;
         }
         return 0;
 
-    case ZIP_SOURCE_STAT: {
-        zip_stat_t *st;
+    case ZIP_SOURCE_STAT:
+    {
+        zip_stat_t* st;
 
-        st = (zip_stat_t *)data;
+        st = (zip_stat_t*)data;
 
-        if (ctx->compress) {
-            if (ctx->end_of_stream) {
+        if (ctx->compress)
+        {
+            if (ctx->end_of_stream)
+            {
                 st->comp_method = ctx->is_stored ? ZIP_CM_STORE : ZIP_CM_ACTUAL(ctx->method);
                 st->comp_size = ctx->size;
                 st->valid |= ZIP_STAT_COMP_SIZE | ZIP_STAT_COMP_METHOD;
             }
-            else {
+            else
+            {
                 st->valid &= ~(ZIP_STAT_COMP_SIZE | ZIP_STAT_COMP_METHOD);
             }
         }
-        else {
+        else
+        {
             st->comp_method = ZIP_CM_STORE;
             st->valid |= ZIP_STAT_COMP_METHOD;
             st->valid &= ~ZIP_STAT_COMP_SIZE;
-            if (ctx->end_of_stream) {
+            if (ctx->end_of_stream)
+            {
                 st->size = ctx->size;
                 st->valid |= ZIP_STAT_SIZE;
             }
@@ -382,10 +440,12 @@ static zip_int64_t compress_callback(zip_source_t *src, void *ud, void *data, zi
         context_free(ctx);
         return 0;
 
-    case ZIP_SOURCE_GET_FILE_ATTRIBUTES: {
-        zip_file_attributes_t *attributes = (zip_file_attributes_t *)data;
+    case ZIP_SOURCE_GET_FILE_ATTRIBUTES:
+    {
+        zip_file_attributes_t* attributes = (zip_file_attributes_t*)data;
 
-        if (len < sizeof(*attributes)) {
+        if (len < sizeof(*attributes))
+        {
             zip_error_set(&ctx->error, ZIP_ER_INVAL, 0);
             return -1;
         }
@@ -399,7 +459,8 @@ static zip_int64_t compress_callback(zip_source_t *src, void *ud, void *data, zi
     }
 
     case ZIP_SOURCE_SUPPORTS:
-        return ZIP_SOURCE_SUPPORTS_READABLE | zip_source_make_command_bitmap(ZIP_SOURCE_GET_FILE_ATTRIBUTES, ZIP_SOURCE_SUPPORTS_REOPEN, -1);
+        return ZIP_SOURCE_SUPPORTS_READABLE |
+               zip_source_make_command_bitmap(ZIP_SOURCE_GET_FILE_ATTRIBUTES, ZIP_SOURCE_SUPPORTS_REOPEN, -1);
 
     default:
         return zip_source_pass_to_lower_layer(src, data, len, cmd);

@@ -52,16 +52,19 @@
 #include <unistd.h>
 #endif
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
 #ifdef HAVE_CLONEFILE
     struct statfs fs;
     struct attrlist attribute_list;
-    struct {
+    struct
+    {
         uint32_t size;
         vol_capabilities_attr_t capabilities;
     } volume_attributes;
 
-    if (statfs(".", &fs) < 0) {
+    if (statfs(".", &fs) < 0)
+    {
         fprintf(stderr, "%s: can't get mount point of current directory: %s\n", argv[0], strerror(errno));
         exit(1);
     }
@@ -76,12 +79,14 @@ int main(int argc, char *argv[]) {
     attribute_list.volattr = ATTR_VOL_INFO | ATTR_VOL_CAPABILITIES;
     memset(&volume_attributes, 0, sizeof(volume_attributes));
 
-    if (getattrlist(fs.f_mntonname, &attribute_list, &volume_attributes, sizeof(volume_attributes), 0) < 0) {
+    if (getattrlist(fs.f_mntonname, &attribute_list, &volume_attributes, sizeof(volume_attributes), 0) < 0)
+    {
         fprintf(stderr, "%s: can't get volume capabilities of '%s': %s\n", argv[0], fs.f_mntonname, strerror(errno));
         exit(1);
     }
 
-    if (volume_attributes.capabilities.capabilities[VOL_CAPABILITIES_INTERFACES] & VOL_CAP_INT_CLONE) {
+    if (volume_attributes.capabilities.capabilities[VOL_CAPABILITIES_INTERFACES] & VOL_CAP_INT_CLONE)
+    {
         exit(0);
     }
 #elif defined(HAVE_FICLONERANGE)
@@ -90,17 +95,20 @@ int main(int argc, char *argv[]) {
     int fda, fdb, ret;
     struct file_clone_range range;
 
-    if ((fda = mkstemp(namea)) < 0) {
+    if ((fda = mkstemp(namea)) < 0)
+    {
         fprintf(stderr, "can't create temp file a: %s\n", strerror(errno));
         exit(1);
     }
-    if ((fdb = mkstemp(nameb)) < 0) {
+    if ((fdb = mkstemp(nameb)) < 0)
+    {
         fprintf(stderr, "can't create temp file b: %s\n", strerror(errno));
         (void)close(fda);
         (void)remove(namea);
         exit(1);
     }
-    if (write(fda, "test\n", 5) < 0) {
+    if (write(fda, "test\n", 5) < 0)
+    {
         fprintf(stderr, "can't write temp file a: %s\n", strerror(errno));
         (void)close(fda);
         (void)remove(namea);
@@ -117,7 +125,8 @@ int main(int argc, char *argv[]) {
     (void)close(fdb);
     (void)remove(namea);
     (void)remove(nameb);
-    if (ret >= 0) {
+    if (ret >= 0)
+    {
         exit(0);
     }
 #endif

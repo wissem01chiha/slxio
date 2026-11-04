@@ -31,27 +31,30 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 #include <string.h>
 
 #include "zipint.h"
 
-
-ZIP_EXTERN int zip_set_default_password(zip_t *za, const char *passwd) {
-    if (za == NULL) {
+ZIP_EXTERN int zip_set_default_password(zip_t* za, const char* passwd)
+{
+    if (za == NULL)
+    {
         return -1;
     }
 
     free(za->default_password);
 
-    if (passwd && passwd[0] != '\0') {
-        if ((za->default_password = strdup(passwd)) == NULL) {
+    if (passwd && passwd[0] != '\0')
+    {
+        if ((za->default_password = strdup(passwd)) == NULL)
+        {
             zip_error_set(&za->error, ZIP_ER_MEMORY, 0);
             return -1;
         }
     }
-    else {
+    else
+    {
         za->default_password = NULL;
     }
 

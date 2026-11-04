@@ -36,100 +36,112 @@
 #include <stdlib.h>
 #include <string.h>
 
-zip_uint8_t *_zip_buffer_data(zip_buffer_t *buffer) {
+zip_uint8_t* _zip_buffer_data(zip_buffer_t* buffer)
+{
     return buffer->data;
 }
 
-
-void _zip_buffer_free(zip_buffer_t *buffer) {
-    if (buffer == NULL) {
+void _zip_buffer_free(zip_buffer_t* buffer)
+{
+    if (buffer == NULL)
+    {
         return;
     }
 
-    if (buffer->free_data) {
+    if (buffer->free_data)
+    {
         free(buffer->data);
     }
 
     free(buffer);
 }
 
-
-bool _zip_buffer_eof(zip_buffer_t *buffer) {
+bool _zip_buffer_eof(zip_buffer_t* buffer)
+{
     return buffer->ok && buffer->offset == buffer->size;
 }
 
-
-zip_uint8_t *_zip_buffer_get(zip_buffer_t *buffer, zip_uint64_t length) {
-    zip_uint8_t *data;
+zip_uint8_t* _zip_buffer_get(zip_buffer_t* buffer, zip_uint64_t length)
+{
+    zip_uint8_t* data;
 
     data = _zip_buffer_peek(buffer, length);
 
-    if (data != NULL) {
+    if (data != NULL)
+    {
         buffer->offset += length;
     }
 
     return data;
 }
 
+zip_uint16_t _zip_buffer_get_16(zip_buffer_t* buffer)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 2);
 
-zip_uint16_t _zip_buffer_get_16(zip_buffer_t *buffer) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 2);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return 0;
     }
 
     return (zip_uint16_t)(data[0] + (data[1] << 8));
 }
 
+zip_uint32_t _zip_buffer_get_32(zip_buffer_t* buffer)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 4);
 
-zip_uint32_t _zip_buffer_get_32(zip_buffer_t *buffer) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 4);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return 0;
     }
 
     return ((((((zip_uint32_t)data[3] << 8) + data[2]) << 8) + data[1]) << 8) + data[0];
 }
 
+zip_uint64_t _zip_buffer_get_64(zip_buffer_t* buffer)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 8);
 
-zip_uint64_t _zip_buffer_get_64(zip_buffer_t *buffer) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 8);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return 0;
     }
 
-    return ((zip_uint64_t)data[7] << 56) + ((zip_uint64_t)data[6] << 48) + ((zip_uint64_t)data[5] << 40) + ((zip_uint64_t)data[4] << 32) + ((zip_uint64_t)data[3] << 24) + ((zip_uint64_t)data[2] << 16) + ((zip_uint64_t)data[1] << 8) + (zip_uint64_t)data[0];
+    return ((zip_uint64_t)data[7] << 56) + ((zip_uint64_t)data[6] << 48) + ((zip_uint64_t)data[5] << 40) +
+           ((zip_uint64_t)data[4] << 32) + ((zip_uint64_t)data[3] << 24) + ((zip_uint64_t)data[2] << 16) +
+           ((zip_uint64_t)data[1] << 8) + (zip_uint64_t)data[0];
 }
 
+zip_uint8_t _zip_buffer_get_8(zip_buffer_t* buffer)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 1);
 
-zip_uint8_t _zip_buffer_get_8(zip_buffer_t *buffer) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 1);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return 0;
     }
 
     return data[0];
 }
 
-
-zip_uint64_t _zip_buffer_left(zip_buffer_t *buffer) {
+zip_uint64_t _zip_buffer_left(zip_buffer_t* buffer)
+{
     return buffer->ok ? buffer->size - buffer->offset : 0;
 }
 
-
-zip_uint64_t _zip_buffer_read(zip_buffer_t *buffer, zip_uint8_t *data, zip_uint64_t length) {
+zip_uint64_t _zip_buffer_read(zip_buffer_t* buffer, zip_uint8_t* data, zip_uint64_t length)
+{
     zip_uint64_t copied;
 
-    if (_zip_buffer_left(buffer) < length) {
+    if (_zip_buffer_left(buffer) < length)
+    {
         length = _zip_buffer_left(buffer);
     }
 
     copied = 0;
-    while (copied < length) {
+    while (copied < length)
+    {
         size_t n = ZIP_MIN(length - copied, SIZE_MAX);
         (void)memcpy_s(data + copied, n, _zip_buffer_get(buffer, n), n);
         copied += n;
@@ -138,25 +150,30 @@ zip_uint64_t _zip_buffer_read(zip_buffer_t *buffer, zip_uint8_t *data, zip_uint6
     return copied;
 }
 
-
-zip_buffer_t *_zip_buffer_new(zip_uint8_t *data, zip_uint64_t size) {
+zip_buffer_t* _zip_buffer_new(zip_uint8_t* data, zip_uint64_t size)
+{
     bool free_data = (data == NULL);
-    zip_buffer_t *buffer;
+    zip_buffer_t* buffer;
 
 #if ZIP_UINT64_MAX > SIZE_MAX
-    if (size > SIZE_MAX) {
+    if (size > SIZE_MAX)
+    {
         return NULL;
     }
 #endif
 
-    if (data == NULL) {
-        if ((data = (zip_uint8_t *)malloc((size_t)size)) == NULL) {
+    if (data == NULL)
+    {
+        if ((data = (zip_uint8_t*)malloc((size_t)size)) == NULL)
+        {
             return NULL;
         }
     }
 
-    if ((buffer = (zip_buffer_t *)malloc(sizeof(*buffer))) == NULL) {
-        if (free_data) {
+    if ((buffer = (zip_buffer_t*)malloc(sizeof(*buffer))) == NULL)
+    {
+        if (free_data)
+        {
             free(data);
         }
         return NULL;
@@ -171,16 +188,18 @@ zip_buffer_t *_zip_buffer_new(zip_uint8_t *data, zip_uint64_t size) {
     return buffer;
 }
 
+zip_buffer_t* _zip_buffer_new_from_source(zip_source_t* src, zip_uint64_t size, zip_uint8_t* buf, zip_error_t* error)
+{
+    zip_buffer_t* buffer;
 
-zip_buffer_t *_zip_buffer_new_from_source(zip_source_t *src, zip_uint64_t size, zip_uint8_t *buf, zip_error_t *error) {
-    zip_buffer_t *buffer;
-
-    if ((buffer = _zip_buffer_new(buf, size)) == NULL) {
+    if ((buffer = _zip_buffer_new(buf, size)) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    if (_zip_read(src, buffer->data, size, error) < 0) {
+    if (_zip_read(src, buffer->data, size, error) < 0)
+    {
         _zip_buffer_free(buffer);
         return NULL;
     }
@@ -188,21 +207,22 @@ zip_buffer_t *_zip_buffer_new_from_source(zip_source_t *src, zip_uint64_t size, 
     return buffer;
 }
 
-
-zip_uint64_t _zip_buffer_offset(zip_buffer_t *buffer) {
+zip_uint64_t _zip_buffer_offset(zip_buffer_t* buffer)
+{
     return buffer->ok ? buffer->offset : 0;
 }
 
-
-bool _zip_buffer_ok(zip_buffer_t *buffer) {
+bool _zip_buffer_ok(zip_buffer_t* buffer)
+{
     return buffer->ok;
 }
 
+zip_uint8_t* _zip_buffer_peek(zip_buffer_t* buffer, zip_uint64_t length)
+{
+    zip_uint8_t* data;
 
-zip_uint8_t *_zip_buffer_peek(zip_buffer_t *buffer, zip_uint64_t length) {
-    zip_uint8_t *data;
-
-    if (!buffer->ok || buffer->offset + length < length || buffer->offset + length > buffer->size) {
+    if (!buffer->ok || buffer->offset + length < length || buffer->offset + length > buffer->size)
+    {
         buffer->ok = false;
         return NULL;
     }
@@ -211,10 +231,12 @@ zip_uint8_t *_zip_buffer_peek(zip_buffer_t *buffer, zip_uint64_t length) {
     return data;
 }
 
-int _zip_buffer_put(zip_buffer_t *buffer, const void *src, size_t length) {
-    zip_uint8_t *dst = _zip_buffer_get(buffer, length);
+int _zip_buffer_put(zip_buffer_t* buffer, const void* src, size_t length)
+{
+    zip_uint8_t* dst = _zip_buffer_get(buffer, length);
 
-    if (dst == NULL) {
+    if (dst == NULL)
+    {
         return -1;
     }
 
@@ -222,11 +244,12 @@ int _zip_buffer_put(zip_buffer_t *buffer, const void *src, size_t length) {
     return 0;
 }
 
+int _zip_buffer_put_16(zip_buffer_t* buffer, zip_uint16_t i)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 2);
 
-int _zip_buffer_put_16(zip_buffer_t *buffer, zip_uint16_t i) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 2);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return -1;
     }
 
@@ -236,11 +259,12 @@ int _zip_buffer_put_16(zip_buffer_t *buffer, zip_uint16_t i) {
     return 0;
 }
 
+int _zip_buffer_put_32(zip_buffer_t* buffer, zip_uint32_t i)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 4);
 
-int _zip_buffer_put_32(zip_buffer_t *buffer, zip_uint32_t i) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 4);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return -1;
     }
 
@@ -252,11 +276,12 @@ int _zip_buffer_put_32(zip_buffer_t *buffer, zip_uint32_t i) {
     return 0;
 }
 
+int _zip_buffer_put_64(zip_buffer_t* buffer, zip_uint64_t i)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 8);
 
-int _zip_buffer_put_64(zip_buffer_t *buffer, zip_uint64_t i) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 8);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return -1;
     }
 
@@ -272,11 +297,12 @@ int _zip_buffer_put_64(zip_buffer_t *buffer, zip_uint64_t i) {
     return 0;
 }
 
+int _zip_buffer_put_8(zip_buffer_t* buffer, zip_uint8_t i)
+{
+    zip_uint8_t* data = _zip_buffer_get(buffer, 1);
 
-int _zip_buffer_put_8(zip_buffer_t *buffer, zip_uint8_t i) {
-    zip_uint8_t *data = _zip_buffer_get(buffer, 1);
-
-    if (data == NULL) {
+    if (data == NULL)
+    {
         return -1;
     }
 
@@ -285,9 +311,10 @@ int _zip_buffer_put_8(zip_buffer_t *buffer, zip_uint8_t i) {
     return 0;
 }
 
-
-int _zip_buffer_set_offset(zip_buffer_t *buffer, zip_uint64_t offset) {
-    if (offset > buffer->size) {
+int _zip_buffer_set_offset(zip_buffer_t* buffer, zip_uint64_t offset)
+{
+    if (offset > buffer->size)
+    {
         buffer->ok = false;
         return -1;
     }
@@ -298,17 +325,19 @@ int _zip_buffer_set_offset(zip_buffer_t *buffer, zip_uint64_t offset) {
     return 0;
 }
 
-
-int _zip_buffer_skip(zip_buffer_t *buffer, zip_uint64_t length) {
+int _zip_buffer_skip(zip_buffer_t* buffer, zip_uint64_t length)
+{
     zip_uint64_t offset = buffer->offset + length;
 
-    if (offset < buffer->offset) {
+    if (offset < buffer->offset)
+    {
         buffer->ok = false;
         return -1;
     }
     return _zip_buffer_set_offset(buffer, offset);
 }
 
-zip_uint64_t _zip_buffer_size(zip_buffer_t *buffer) {
+zip_uint64_t _zip_buffer_size(zip_buffer_t* buffer)
+{
     return buffer->size;
 }

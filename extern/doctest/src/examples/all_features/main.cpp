@@ -4,9 +4,10 @@
 #include "header.h"
 
 int program();
-void some_program_code(int argc, char **argv);
+void some_program_code(int argc, char** argv);
 
-int main(int argc, char **argv) { // NOLINT(bugprone-exception-escape)
+int main(int argc, char** argv)
+{ // NOLINT(bugprone-exception-escape)
     doctest::Context context;
 
     // !!! THIS IS JUST AN EXAMPLE SHOWING HOW DEFAULTS/OVERRIDES ARE SET !!!
@@ -35,17 +36,20 @@ int main(int argc, char **argv) { // NOLINT(bugprone-exception-escape)
     return res + client_stuff_return_code; // the result from doctest is propagated here as well
 }
 
-TEST_CASE("[string] testing std::string") {
+TEST_CASE("[string] testing std::string")
+{
     const std::string a("omg"); // NOLINT(bugprone-unused-local-non-trivial-variable)
     CHECK(a == "omg");
 }
 
-TEST_CASE("[math] basic stuff") {
+TEST_CASE("[math] basic stuff")
+{
     CHECK(6 > 5);
     CHECK(6 > 7);
 }
 
-int program() {
+int program()
+{
     std::cout << "Program code." << std::endl;
     return EXIT_SUCCESS;
 }

@@ -33,3 +33,6 @@
 #include <cstring>
 #include <map>
 #include <utility>
+#include <functional>
+#include <optional>
+#include <string_view>

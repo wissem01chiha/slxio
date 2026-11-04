@@ -50,4 +50,3 @@
 
 // JSON path accessor (compile-time) - must be after inline definitions
 #include "simdjson/generic/ondemand/compile_time_accessors.h"
-

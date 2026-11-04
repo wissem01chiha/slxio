@@ -83,7 +83,7 @@
 #include "nb_static_property.cpp"
 #include "nb_datetime.cpp"
 #if defined(Py_GIL_DISABLED)
-#  include "nb_ft.cpp"
+#include "nb_ft.cpp"
 #endif
 #include "error.cpp"
 #include "common.cpp"

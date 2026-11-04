@@ -4,20 +4,24 @@
 
 using namespace simdjson;
 
-namespace builder_tests {
+namespace builder_tests
+{
 
-  bool test_enum_serialization() {
+bool test_enum_serialization()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    enum class Color {
-      Red,
-      Green,
-      Blue
+    enum class Color
+    {
+        Red,
+        Green,
+        Blue
     };
 
-    struct EnumStruct {
-      Color color;
-      int value;
+    struct EnumStruct
+    {
+        Color color;
+        int value;
     };
 
     EnumStruct test{Color::Red, 42};
@@ -39,20 +43,23 @@ namespace builder_tests {
     ASSERT_TRUE(json3.find("\"color\":\"Blue\"") != std::string::npos);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_enum_deserialization() {
+bool test_enum_deserialization()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    enum class Status {
-      Active,
-      Inactive,
-      Pending
+    enum class Status
+    {
+        Active,
+        Inactive,
+        Pending
     };
 
-    struct StatusStruct {
-      Status status{};
-      std::string name{};
+    struct StatusStruct
+    {
+        Status status{};
+        std::string name{};
     };
 
     // Test deserialization of different enum values with string representation
@@ -91,22 +98,25 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized3.name, "test3");
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_enum_round_trip() {
+bool test_enum_round_trip()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    enum class Priority {
-      Low,
-      Medium,
-      High,
-      Critical
+    enum class Priority
+    {
+        Low,
+        Medium,
+        High,
+        Critical
     };
 
-    struct Task {
-      Priority priority{};
-      std::string description{};
-      int id{};
+    struct Task
+    {
+        Priority priority{};
+        std::string description{};
+        int id{};
     };
 
     Task original{Priority::High, "Important task", 123};
@@ -132,20 +142,23 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.id, 123);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_enum_with_underlying_type() {
+bool test_enum_with_underlying_type()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    enum class ErrorCode : int {
-      Success = 0,
-      NotFound = 404,
-      ServerError = 500
+    enum class ErrorCode : int
+    {
+        Success = 0,
+        NotFound = 404,
+        ServerError = 500
     };
 
-    struct Response {
-      ErrorCode error{};
-      std::string message{};
+    struct Response
+    {
+        ErrorCode error{};
+        std::string message{};
     };
 
     Response test{ErrorCode::NotFound, "Resource not found"};
@@ -166,48 +179,52 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.message, "Resource not found");
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_multiple_enums() {
+bool test_multiple_enums()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    enum class Day {
-      Monday,
-      Tuesday,
-      Wednesday,
-      Thursday,
-      Friday,
-      Saturday,
-      Sunday
+    enum class Day
+    {
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday
     };
 
-    enum class Month {
-      January,
-      February,
-      March,
-      April,
-      May,
-      June,
-      July,
-      August,
-      September,
-      October,
-      November,
-      December
+    enum class Month
+    {
+        January,
+        February,
+        March,
+        April,
+        May,
+        June,
+        July,
+        August,
+        September,
+        October,
+        November,
+        December
     };
 
-    struct Date {
-      Day day;
-      Month month;
-      int year;
+    struct Date
+    {
+        Day day;
+        Month month;
+        int year;
     };
 
     Date test{Day::Friday, Month::July, 2024};
 
     std::string json;
     ASSERT_SUCCESS(builder::to_json_string(test).get(json));
-    ASSERT_TRUE(json.find("\"day\":\"Friday\"") != std::string::npos);      // Friday as string
-    ASSERT_TRUE(json.find("\"month\":\"July\"") != std::string::npos);    // July as string
+    ASSERT_TRUE(json.find("\"day\":\"Friday\"") != std::string::npos); // Friday as string
+    ASSERT_TRUE(json.find("\"month\":\"July\"") != std::string::npos); // July as string
     ASSERT_TRUE(json.find("\"year\":2024") != std::string::npos);
 
     // Test round-trip
@@ -221,18 +238,17 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.year, 2024);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool run() {
-    return test_enum_serialization() &&
-           test_enum_deserialization() &&
-           test_enum_round_trip() &&
-           test_enum_with_underlying_type() &&
+bool run()
+{
+    return test_enum_serialization() && test_enum_deserialization() && test_enum_round_trip() && test_enum_with_underlying_type() &&
            test_multiple_enums();
-  }
+}
 
 } // namespace builder_tests
 
-int main(int argc, char *argv[]) {
-  return test_main(argc, argv, builder_tests::run);
+int main(int argc, char* argv[])
+{
+    return test_main(argc, argv, builder_tests::run);
 }

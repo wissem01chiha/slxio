@@ -15,7 +15,8 @@ DOCTEST_GCC_SUPPRESS_WARNING("-Wmissing-declarations")
 DOCTEST_CLANG_SUPPRESS_WARNING("-Wmissing-prototypes")
 
 // some function which uses asserts not just for unit testing but also for ensuring contracts in production code
-static void some_func() {
+static void some_func()
+{
     CHECK_EQ(true, false);
     CHECK_UNARY(false);
     CHECK_UNARY_FALSE(true);
@@ -26,7 +27,8 @@ static void some_func() {
 
 // std::mutex g_mut;
 
-static void handler(const doctest::AssertData &ad) {
+static void handler(const doctest::AssertData& ad)
+{
     using namespace doctest;
 
     // uncomment if asserts will be used in a multi-threaded context
@@ -41,27 +43,34 @@ static void handler(const doctest::AssertData &ad) {
     std::cout << Color::Red << failureString(ad.m_at) << ": ";
 
     // handling only normal (comparison and unary) asserts - exceptions-related asserts have been skipped
-    if (ad.m_at & assertType::is_normal) {
+    if (ad.m_at & assertType::is_normal)
+    {
         std::cout << Color::Cyan << assertString(ad.m_at) << "( " << ad.m_expr << " ) ";
         std::cout << Color::None << (ad.m_threw ? "THREW exception: " : "is NOT correct!\n");
         if (ad.m_threw)
             std::cout << ad.m_exception;
         else
             std::cout << "  values: " << assertString(ad.m_at) << "( " << ad.m_decomp << " )";
-    } else {
+    }
+    else
+    {
         std::cout << Color::None << "an assert dealing with exceptions has failed!";
     }
 
     std::cout << std::endl;
 }
 
-void some_program_code(int argc, char **argv) {
+void some_program_code(int argc, char** argv)
+{
     // IGNORE THIS: return if the current test from the doctest CMake tests is not for this file
     // NOLINTBEGIN(clang-diagnostic-unsafe-buffer-usage)
-    if (std::find_if(argv, argv + argc, [](const char *str) {
-            // NOLINTNEXTLINE(clang-diagnostic-unsafe-buffer-usage-in-libc-call)
-            return strcmp(str, "-sf=*asserts_used_outside_of_tests.cpp") == 0;
-        }) == argv + argc)
+    if (std::find_if(argv,
+                     argv + argc,
+                     [](const char* str)
+                     {
+                         // NOLINTNEXTLINE(clang-diagnostic-unsafe-buffer-usage-in-libc-call)
+                         return strcmp(str, "-sf=*asserts_used_outside_of_tests.cpp") == 0;
+                     }) == argv + argc)
         return;
     // NOLINTEND(clang-diagnostic-unsafe-buffer-usage)
 

@@ -38,9 +38,9 @@ void bench_mt(int howmany, std::shared_ptr<spdlog::logger> log, int thread_count
 #pragma warning(disable : 4996)  // disable fopen warning under msvc
 #endif                           // _MSC_VER
 
-int count_lines(const char *filename) {
+int count_lines(const char* filename) {
     int counter = 0;
-    auto *infile = fopen(filename, "r");
+    auto* infile = fopen(filename, "r");
     int ch;
     while (EOF != (ch = getc(infile))) {
         if ('\n' == ch) counter++;
@@ -50,7 +50,7 @@ int count_lines(const char *filename) {
     return counter;
 }
 
-void verify_file(const char *filename, int expected_count) {
+void verify_file(const char* filename, int expected_count) {
     spdlog::info("Verifying {} to contain {} line..", filename, expected_count);
     auto count = count_lines(filename);
     if (count != expected_count) {
@@ -65,7 +65,7 @@ void verify_file(const char *filename, int expected_count) {
 #pragma warning(pop)
 #endif
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     int howmany = 1000000;
     int queue_size = std::min(howmany + 2, 8192);
     int threads = 10;
@@ -100,7 +100,7 @@ int main(int argc, char *argv[]) {
         spdlog::info("Total iters  : {:L}", iters);
         spdlog::info("-------------------------------------------------");
 
-        const char *filename = "logs/basic_async.log";
+        const char* filename = "logs/basic_async.log";
         spdlog::info("");
         spdlog::info("*********************************");
         spdlog::info("Queue Overflow Policy: block");
@@ -129,7 +129,7 @@ int main(int argc, char *argv[]) {
             bench_mt(howmany, std::move(logger), threads);
         }
         spdlog::shutdown();
-    } catch (std::exception &ex) {
+    } catch (std::exception& ex) {
         std::cerr << "Error: " << ex.what() << std::endl;
         perror("Last error");
         return 1;
@@ -158,7 +158,7 @@ void bench_mt(int howmany, std::shared_ptr<spdlog::logger> logger, int thread_co
             threads.push_back(std::thread(thread_fun, logger, msgs_per_thread));
     }
 
-    for (auto &t : threads) {
+    for (auto& t : threads) {
         t.join();
     }
 

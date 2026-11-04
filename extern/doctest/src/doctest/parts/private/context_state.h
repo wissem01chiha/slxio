@@ -10,17 +10,20 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 // this holds both parameters from the command line and runtime data for tests
-struct ContextState : ContextOptions, TestRunStats, CurrentTestCaseStats {
+struct ContextState : ContextOptions, TestRunStats, CurrentTestCaseStats
+{
     MultiLaneAtomic<int> numAssertsCurrentTest_atomic;
     MultiLaneAtomic<int> numAssertsFailedCurrentTest_atomic;
 
     std::vector<std::vector<String>> filters = decltype(filters)(9); // 9 different filters
 
-    std::vector<IReporter *> reporters_currently_used;
+    std::vector<IReporter*> reporters_currently_used;
 
     assert_handler ah = nullptr;
 
@@ -37,7 +40,7 @@ struct ContextState : ContextOptions, TestRunStats, CurrentTestCaseStats {
     void finalizeTestCaseData();
 };
 
-extern ContextState *g_cs;
+extern ContextState* g_cs;
 
 // used to avoid locks for the debug output
 // TODO: figure out if this is indeed necessary/correct - seems like either there still

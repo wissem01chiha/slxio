@@ -18,12 +18,10 @@
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
-const std::vector<ValidationIssue>& slxio::ValidationReport::GetIssues() const
+const std::vector<ValidationIssue>& ValidationReport::GetIssues() const
 {
     // TODO: insert return statement here
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

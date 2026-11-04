@@ -5,17 +5,21 @@
 #include "dll.h"
 #include <stdio.h>
 
-extern "C" {
-void say_hello_dll() {
-    printf("%s", "Hello, World!\n");
-}
+extern "C"
+{
+    void say_hello_dll()
+    {
+        printf("%s", "Hello, World!\n");
+    }
 }
 
-int factorial(int number) {
+int factorial(int number)
+{
     return number < 1 ? 1 : number <= 1 ? number : factorial(number - 1) * number;
 }
 
-TEST_CASE("testing the factorial function") {
+TEST_CASE("testing the factorial function")
+{
     CHECK(factorial(0) == 1);
     CHECK(factorial(1) == 1);
     CHECK(factorial(2) == 2);

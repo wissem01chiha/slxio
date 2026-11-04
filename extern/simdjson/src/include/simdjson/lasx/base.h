@@ -5,16 +5,20 @@
 #include "simdjson/base.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
+namespace simdjson
+{
 /**
  * Implementation for LASX.
  */
-namespace lasx {
+namespace lasx
+{
 
 class implementation;
 
-namespace {
-namespace simd {
+namespace
+{
+namespace simd
+{
 template <typename T> struct simd8;
 template <typename T> struct simd8x64;
 } // namespace simd

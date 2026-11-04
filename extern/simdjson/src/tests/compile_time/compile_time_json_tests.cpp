@@ -12,11 +12,13 @@ using namespace std::string_view_literals;
 using namespace simdjson;
 using namespace simdjson::literals;
 
-namespace compile_time_json_tests {
+namespace compile_time_json_tests
+{
 /**
  * Test 1: Basic object with primitives
  */
-bool test_basic_object() {
+bool test_basic_object()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
@@ -42,7 +44,8 @@ bool test_basic_object() {
 /**
  * Test 2: Nested objects
  */
-bool test_nested_objects() {
+bool test_nested_objects()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
@@ -73,7 +76,8 @@ bool test_nested_objects() {
 /**
  * Test 3: Deeply nested objects (3+ levels)
  */
-bool test_deeply_nested_objects() {
+bool test_deeply_nested_objects()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
@@ -108,11 +112,12 @@ bool test_deeply_nested_objects() {
 /**
  * Test 4: Empty object
  */
-bool test_empty_object() {
+bool test_empty_object()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({})">();
-    (void)config;  // Suppress unused warning
+    (void)config; // Suppress unused warning
 
     TEST_SUCCEED();
 }
@@ -120,7 +125,8 @@ bool test_empty_object() {
 /**
  * Test 5: Negative numbers
  */
-bool test_negative_numbers() {
+bool test_negative_numbers()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -147,7 +153,8 @@ bool test_negative_numbers() {
  * value below has more digits than the fast path can take, and each must come
  * out as the correctly rounded binary64 -- the same value strtod gives.
  */
-bool test_long_mantissa() {
+bool test_long_mantissa()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -185,7 +192,8 @@ bool test_long_mantissa() {
 /**
  * Test 6: Whitespace handling
  */
-bool test_whitespace() {
+bool test_whitespace()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"(
@@ -207,7 +215,8 @@ bool test_whitespace() {
 /**
  * Test 7: Real-time system configuration
  */
-bool test_realtime_config() {
+bool test_realtime_config()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
@@ -236,7 +245,8 @@ bool test_realtime_config() {
 /**
  * Test 8: External JSON file (future #embed support)
  */
-bool test_external_json_embed() {
+bool test_external_json_embed()
+{
     TEST_START();
 
     // Future C++26 with #embed:
@@ -269,12 +279,11 @@ bool test_external_json_embed() {
     TEST_SUCCEED();
 }
 
-
-
 /**
  * Test 10: Null values
  */
-bool test_null_values() {
+bool test_null_values()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -294,7 +303,8 @@ bool test_null_values() {
 /**
  * Test 11: Arrays of primitives
  */
-bool test_arrays_primitives() {
+bool test_arrays_primitives()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -322,7 +332,8 @@ bool test_arrays_primitives() {
 /**
  * Test 12: Arrays of objects
  */
-bool test_arrays_of_objects() {
+bool test_arrays_of_objects()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -350,7 +361,8 @@ bool test_arrays_of_objects() {
 /**
  * Test 13: Nested arrays in objects
  */
-bool test_nested_arrays() {
+bool test_nested_arrays()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -373,7 +385,8 @@ bool test_nested_arrays() {
 /**
  * Test 14: Complex mixed structure with arrays and nested objects
  */
-bool test_complex_mixed() {
+bool test_complex_mixed()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
@@ -407,7 +420,8 @@ bool test_complex_mixed() {
 /**
  * Test 15: Empty arrays
  */
-bool test_empty_arrays() {
+bool test_empty_arrays()
+{
     TEST_START();
 
     constexpr auto data = simdjson::compile_time::parse_json<R"({
@@ -424,17 +438,15 @@ bool test_empty_arrays() {
 /**
  * Test 16: Simple object with string values
  */
-bool test_simple_object_int() {
+bool test_simple_object_int()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
         "app": 1,
         "version": 2
     })">();
-    std::print("App: {}, Version: {}\n",
-        config.app,
-        config.version
-    );
+    std::print("App: {}, Version: {}\n", config.app, config.version);
     static_assert(config.app == 1);
     static_assert(config.version == 2);
 
@@ -444,16 +456,14 @@ bool test_simple_object_int() {
 /**
  * Test 17: Simple object with string values
  */
-bool test_simple_object_str() {
+bool test_simple_object_str()
+{
     TEST_START();
 
     constexpr auto config = simdjson::compile_time::parse_json<R"({
         "app": "ohai", "version": "1.0.0"
     })">();
-    std::print("App: {}, Version: {}\n",
-        config.app,
-    config.version
-    );
+    std::print("App: {}, Version: {}\n", config.app, config.version);
     static_assert(std::string_view(config.app) == "ohai");
     static_assert(std::string_view(config.version) == "1.0.0");
 
@@ -463,16 +473,13 @@ bool test_simple_object_str() {
 /**
  * Test 18: Simple object with string values and nested object
  */
-bool test_simple_object_str_with_obj() {
+bool test_simple_object_str_with_obj()
+{
     TEST_START();
     constexpr auto config = simdjson::compile_time::parse_json<R"({"master": {
         "app": "ohai", "version": "1.0.0", "unicode": "\u00E9\u0074\u00E9\t"
     }})">();
-    std::print("App: {}, Version: {}, Unicode: {}\n",
-        config.master.app,
-       config.master.version,
-         config.master.unicode
-    );
+    std::print("App: {}, Version: {}, Unicode: {}\n", config.master.app, config.master.version, config.master.unicode);
     static_assert(std::string_view(config.master.app) == "ohai");
     static_assert(std::string_view(config.master.version) == "1.0.0");
     static_assert(std::string_view(config.master.unicode) == "\xc3\xa9\x74\xc3\xa9\t");
@@ -483,27 +490,26 @@ bool test_simple_object_str_with_obj() {
 /**
  * Test 19: Simple array
  */
-bool simple_array() {
+bool simple_array()
+{
     TEST_START();
     constexpr auto config = simdjson::compile_time::parse_json<R"(
 
     [ 1, 2, 3, 4, 5, 6 ]
 
     )">();
-    std::print("Array size: {}\n",
-        config.size()
-    );
+    std::print("Array size: {}\n", config.size());
     static_assert(config.size() == 6);
     static_assert(config[0] == 1);
     static_assert(config[5] == 6);
     TEST_SUCCEED();
 }
 
-
 /**
  * Test 20: Array of objects
  */
-bool array_of_objects() {
+bool array_of_objects()
+{
     TEST_START();
     constexpr auto config = simdjson::compile_time::parse_json<R"(
 
@@ -514,9 +520,7 @@ bool array_of_objects() {
     ]
 
     )">();
-    std::print("Array size: {}\n",
-        config.size()
-    );
+    std::print("Array size: {}\n", config.size());
     static_assert(config.size() == 3);
     static_assert(std::string_view(config[0].name) == "Alice");
     static_assert(config[1].age == 25);
@@ -525,10 +529,10 @@ bool array_of_objects() {
     TEST_SUCCEED();
 }
 
-
-bool test_complex_mixed_str() {
+bool test_complex_mixed_str()
+{
     TEST_START();
-    auto f= "fds"_padded;
+    auto f = "fds"_padded;
 
     constexpr auto config = R"(
     {
@@ -564,7 +568,8 @@ bool test_complex_mixed_str() {
 /**
  * Test: User config example - basic object with primitives
  */
-bool test_user_config_example() {
+bool test_user_config_example()
+{
     TEST_START();
 
     constexpr auto cfg = R"(
@@ -591,7 +596,8 @@ bool test_user_config_example() {
 /**
  * Test: Nested objects and arrays example
  */
-bool test_nested_servers_example() {
+bool test_nested_servers_example()
+{
     TEST_START();
 
     constexpr auto data = R"(
@@ -623,7 +629,8 @@ bool test_nested_servers_example() {
 /**
  * Test: Top-level array example
  */
-bool test_top_level_array_example() {
+bool test_top_level_array_example()
+{
     TEST_START();
 
     constexpr auto arr = R"(
@@ -648,9 +655,9 @@ bool test_top_level_array_example() {
  */
 template <typename T>
 concept person = requires(T p) {
-    std::string_view(p.name);  // has name field convertible to string_view
-    p.age;                     // has age field
-    requires std::is_integral_v<decltype(p.age)>;  // age is integral
+    std::string_view(p.name);                     // has name field convertible to string_view
+    p.age;                                        // has age field
+    requires std::is_integral_v<decltype(p.age)>; // age is integral
 };
 
 /**
@@ -658,15 +665,16 @@ concept person = requires(T p) {
  */
 template <typename T>
 concept array_of_person = requires(T arr) {
-    arr.size();                    // has size method
-    arr[0];                        // can access elements with []
-    requires person<decltype(arr[0])>;  // elements satisfy person concept
+    arr.size();                        // has size method
+    arr[0];                            // can access elements with []
+    requires person<decltype(arr[0])>; // elements satisfy person concept
 };
 
 /**
  * Test: Array of objects with concept validation
  */
-bool test_array_of_objects_with_concept() {
+bool test_array_of_objects_with_concept()
+{
     TEST_START();
 
     constexpr auto config = R"(
@@ -685,7 +693,6 @@ bool test_array_of_objects_with_concept() {
 
     // Validate that the array satisfies the array_of_person concept
     static_assert(array_of_person<decltype(config)>);
-
 
     // Test the actual values
     static_assert(std::string_view(config[0].name) == "Alice");
@@ -712,15 +719,15 @@ bool test_array_of_objects_with_concept() {
 /**
  * Test: #embed support for external JSON files (C++26)
  */
-bool test_embed_example_config_json() {
+bool test_embed_example_config_json()
+{
     TEST_START();
 
     // C++26 #embed allows embedding files directly into the binary at compile time
     // This creates a const char array with the file contents plus null terminator
     constexpr const unsigned char example_config_json[] = {
-        #embed "../../jsonexamples/example_config.json"
-        , 0
-    };
+#embed "../../jsonexamples/example_config.json"
+        , 0};
 
     // Parse the embedded JSON at compile time
     constexpr auto parsed_example_config = simdjson::compile_time::parse_json<example_config_json>();
@@ -731,47 +738,31 @@ bool test_embed_example_config_json() {
     // Runtime verification
     ASSERT_TRUE(std::string_view(parsed_example_config.app_name) == "MyApp");
 
-    std::cout << "Successfully parsed embedded example_config.json with "
-              << parsed_example_config.app_name << " as app_name" << std::endl;
+    std::cout << "Successfully parsed embedded example_config.json with " << parsed_example_config.app_name << " as app_name"
+              << std::endl;
 
     TEST_SUCCEED();
 }
 #endif //  defined(__cpp_pp_embed) && __cpp_pp_embed >= 202502L
 
-bool run() {
-    return test_basic_object() &&
-           test_nested_objects() &&
-           test_deeply_nested_objects() &&
-           test_empty_object() &&
-           test_negative_numbers() &&
-           test_long_mantissa() &&
-           test_whitespace() &&
-           test_realtime_config() &&
-           test_external_json_embed() &&
-           test_null_values() &&
-           test_arrays_primitives() &&
-           test_arrays_of_objects() &&
-           test_nested_arrays() &&
-           test_complex_mixed() &&
-           test_simple_object_str() &&
-           test_simple_object_int() &&
-           test_simple_object_str_with_obj() &&
-           test_empty_arrays() &&
-           simple_array() &&
-           test_complex_mixed_str() &&
-           array_of_objects() &&
-           test_user_config_example() &&
-           test_nested_servers_example() &&
-           test_top_level_array_example() &&
+bool run()
+{
+    return test_basic_object() && test_nested_objects() && test_deeply_nested_objects() && test_empty_object() &&
+           test_negative_numbers() && test_long_mantissa() && test_whitespace() && test_realtime_config() &&
+           test_external_json_embed() && test_null_values() && test_arrays_primitives() && test_arrays_of_objects() &&
+           test_nested_arrays() && test_complex_mixed() && test_simple_object_str() && test_simple_object_int() &&
+           test_simple_object_str_with_obj() && test_empty_arrays() && simple_array() && test_complex_mixed_str() &&
+           array_of_objects() && test_user_config_example() && test_nested_servers_example() && test_top_level_array_example() &&
            test_array_of_objects_with_concept()
 #ifdef TEST_EMBED_SUPPORTED
            && test_embed_example_config_json()
 #endif
-;
+        ;
 }
 } // namespace compile_time_json_tests
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
 #if SIMDJSON_STATIC_REFLECTION
     return test_main(argc, argv, compile_time_json_tests::run);
 #else

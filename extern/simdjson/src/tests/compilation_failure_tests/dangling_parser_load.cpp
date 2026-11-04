@@ -4,7 +4,8 @@
 #include <iostream>
 #include "simdjson.h"
 
-int main() {
+int main()
+{
 #if COMPILATION_TEST_USE_FAILING_CODE
     simdjson::dom::element tree = simdjson::dom::parser().load("tree-pretty.json");
 #else

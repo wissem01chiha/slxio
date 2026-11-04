@@ -16,7 +16,7 @@
    a write like -w, so -w is not required). */
 
 #if defined(_WIN32) && !defined(_CRT_NONSTDC_NO_DEPRECATE)
-#  define _CRT_NONSTDC_NO_DEPRECATE
+#define _CRT_NONSTDC_NO_DEPRECATE
 #endif
 
 #include <stdio.h>
@@ -24,11 +24,11 @@
 #include "puff.h"
 
 #if defined(MSDOS) || defined(OS2) || defined(_WIN32) || defined(__CYGWIN__)
-#  include <fcntl.h>
-#  include <io.h>
-#  define SET_BINARY_MODE(file) setmode(fileno(file), O_BINARY)
+#include <fcntl.h>
+#include <io.h>
+#define SET_BINARY_MODE(file) setmode(fileno(file), O_BINARY)
 #else
-#  define SET_BINARY_MODE(file)
+#define SET_BINARY_MODE(file)
 #endif
 
 #define local static
@@ -60,23 +60,27 @@ local size_t bythirds(size_t size)
    failure.  *len is the number of bytes of data read from the input file (even
    if load() returns NULL).  If the input file was empty or could not be opened
    or read, *len is zero. */
-local void *load(const char *name, size_t *len)
+local void* load(const char* name, size_t* len)
 {
     size_t size;
     void *buf, *swap;
-    FILE *in;
+    FILE* in;
 
     *len = 0;
     buf = malloc(size = 4096);
     if (buf == NULL)
         return NULL;
     in = name == NULL ? stdin : fopen(name, "rb");
-    if (in != NULL) {
-        for (;;) {
-            *len += fread((char *)buf + *len, 1, size - *len, in);
-            if (*len < size) break;
+    if (in != NULL)
+    {
+        for (;;)
+        {
+            *len += fread((char*)buf + *len, 1, size - *len, in);
+            if (*len < size)
+                break;
             size = bythirds(size);
-            if (size == *len || (swap = realloc(buf, size)) == NULL) {
+            if (size == *len || (swap = realloc(buf, size)) == NULL)
+            {
                 free(buf);
                 buf = NULL;
                 break;
@@ -88,7 +92,7 @@ local void *load(const char *name, size_t *len)
     return buf;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     int ret, put = 0, fail = 0;
     unsigned skip = 0;
@@ -99,36 +103,41 @@ int main(int argc, char **argv)
 
     /* process arguments */
     while (arg = *++argv, --argc)
-        if (arg[0] == '-') {
+        if (arg[0] == '-')
+        {
             if (arg[1] == 'w' && arg[2] == 0)
                 put = 1;
             else if (arg[1] == 'f' && arg[2] == 0)
                 fail = 1, put = 1;
             else if (arg[1] >= '0' && arg[1] <= '9')
                 skip = (unsigned)atoi(arg + 1);
-            else {
+            else
+            {
                 fprintf(stderr, "invalid option %s\n", arg);
                 return 3;
             }
         }
-        else if (name != NULL) {
+        else if (name != NULL)
+        {
             fprintf(stderr, "only one file name allowed\n");
             return 3;
         }
         else
             name = arg;
     source = load(name, &len);
-    if (source == NULL) {
+    if (source == NULL)
+    {
         fprintf(stderr, "memory allocation failure\n");
         return 4;
     }
-    if (len == 0) {
-        fprintf(stderr, "could not read %s, or it was empty\n",
-                name == NULL ? "<stdin>" : name);
+    if (len == 0)
+    {
+        fprintf(stderr, "could not read %s, or it was empty\n", name == NULL ? "<stdin>" : name);
         free(source);
         return 3;
     }
-    if (skip >= len) {
+    if (skip >= len)
+    {
         fprintf(stderr, "skip request of %d leaves no input\n", skip);
         free(source);
         return 3;
@@ -140,18 +149,21 @@ int main(int argc, char **argv)
     ret = puff(NIL, &destlen, source + skip, &sourcelen);
     if (ret)
         fprintf(stderr, "puff() failed with return code %d\n", ret);
-    else {
+    else
+    {
         fprintf(stderr, "puff() succeeded uncompressing %lu bytes\n", destlen);
-        if (sourcelen < len) fprintf(stderr, "%lu compressed bytes unused\n",
-                                     len - sourcelen);
+        if (sourcelen < len)
+            fprintf(stderr, "%lu compressed bytes unused\n", len - sourcelen);
     }
 
     /* if requested, inflate again and write decompressed data to stdout */
-    if (put && ret == 0) {
+    if (put && ret == 0)
+    {
         if (fail)
             destlen >>= 1;
         dest = malloc(destlen);
-        if (dest == NULL) {
+        if (dest == NULL)
+        {
             fprintf(stderr, "memory allocation failure\n");
             free(source);
             return 4;

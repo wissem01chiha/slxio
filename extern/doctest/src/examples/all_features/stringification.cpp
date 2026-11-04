@@ -2,14 +2,12 @@
 #pragma warning(push)
 #pragma warning(disable : 4643) // Forward declaring 'X' in namespace std is not permitted.
 // NOLINTBEGIN(cert-dcl58-cpp)
-namespace std {
-template <typename>
-struct char_traits;
-template <typename, typename>
-class basic_ostream;
+namespace std
+{
+template <typename> struct char_traits;
+template <typename, typename> class basic_ostream;
 typedef basic_ostream<char, char_traits<char>> ostream; // NOLINT(modernize-use-using)
-template <class TRAITS>
-basic_ostream<char, TRAITS> &operator<<(basic_ostream<char, TRAITS> &, const char *);
+template <class TRAITS> basic_ostream<char, TRAITS>& operator<<(basic_ostream<char, TRAITS>&, const char*);
 } // namespace std
 // NOLINTEND(cert-dcl58-cpp)
 #pragma warning(pop)
@@ -17,20 +15,29 @@ basic_ostream<char, TRAITS> &operator<<(basic_ostream<char, TRAITS> &, const cha
 #include <iostream>
 #endif
 
-namespace N {
-struct A {};
-struct B {
-    friend std::ostream &operator<<(std::ostream &os, const B &) {
+namespace N
+{
+struct A
+{
+};
+struct B
+{
+    friend std::ostream& operator<<(std::ostream& os, const B&)
+    {
         return os << "B";
     }
 };
-struct C {};
-static std::ostream &operator<<(std::ostream &os, const C &) {
+struct C
+{
+};
+static std::ostream& operator<<(std::ostream& os, const C&)
+{
     return os << "C";
 }
 } // namespace N
 
-static std::ostream &operator<<(std::ostream &os, const N::A &) {
+static std::ostream& operator<<(std::ostream& os, const N::A&)
+{
     return os << "A";
 }
 
@@ -38,7 +45,8 @@ static std::ostream &operator<<(std::ostream &os, const N::A &) {
 
 #include <utility>
 
-TEST_CASE("operator<<") {
+TEST_CASE("operator<<")
+{
     MESSAGE(N::A{});
     MESSAGE(N::B{});
     MESSAGE(N::C{});
@@ -53,7 +61,8 @@ TEST_CASE("operator<<") {
 #define MOVE std::move
 #endif
 
-TEST_CASE("no headers") {
+TEST_CASE("no headers")
+{
     const char chs[] = {'1', 'a', 's'}; // NOLINT(*-avoid-c-arrays)
     MESSAGE(chs);
     CHECK(chs == nullptr);
@@ -65,17 +74,18 @@ TEST_CASE("no headers") {
     CHECK(ints == nullptr);
     MESSAGE(MOVE(ints)); // NOLINT(*-move-const-arg)
 
-    char *cptr = reinterpret_cast<char *>(ints + 4); // NOLINT
-    const char *ccptr = cptr;
-    void *vptr = reinterpret_cast<void *>(cptr); // NOLINT
+    char* cptr = reinterpret_cast<char*>(ints + 4); // NOLINT
+    const char* ccptr = cptr;
+    void* vptr = reinterpret_cast<void*>(cptr); // NOLINT
     CHECK(doctest::toString(cptr) == doctest::toString(ccptr));
     CHECK(doctest::toString(ccptr) == doctest::toString(vptr));
 
-    const char *cnptr = nullptr;
+    const char* cnptr = nullptr;
     MESSAGE(cnptr);
     CHECK(cnptr != nullptr);
 
-    enum Test { // NOLINT(cert-int09-c, readability-enum-initial-value)
+    enum Test
+    { // NOLINT(cert-int09-c, readability-enum-initial-value)
         A = 0,
         B,
         C = 100,
@@ -98,12 +108,15 @@ DOCTEST_MSVC_SUPPRESS_WARNING(5045) // Spectre mitigation diagnostics
 
 // the standard forbids writing in the std namespace but it works on all compilers
 // NOLINTBEGIN(cert-dcl58-cpp)
-namespace std {
-template <typename T>
-ostream &operator<<(ostream &stream, const vector<T> &in) { // NOLINT(bugprone-std-namespace-modification)
+namespace std
+{
+template <typename T> ostream& operator<<(ostream& stream, const vector<T>& in)
+{ // NOLINT(bugprone-std-namespace-modification)
     stream << "[";
-    for (size_t i = 0; i < in.size(); ++i) {
-        if (i != 0) {
+    for (size_t i = 0; i < in.size(); ++i)
+    {
+        if (i != 0)
+        {
             stream << ", ";
         }
         stream << in[i];
@@ -115,17 +128,21 @@ ostream &operator<<(ostream &stream, const vector<T> &in) { // NOLINT(bugprone-s
 // NOLINTEND(cert-dcl58-cpp)
 
 // as an alternative you may write a specialization of doctest::StringMaker
-namespace doctest {
-template <typename T>
-struct StringMaker<std::list<T>> {
-    static String convert(const std::list<T> &in) {
+namespace doctest
+{
+template <typename T> struct StringMaker<std::list<T>>
+{
+    static String convert(const std::list<T>& in)
+    {
         std::ostringstream oss;
 
         oss << "[";
         // NOLINTNEXTLINE(*-use-auto)
-        for (typename std::list<T>::const_iterator it = in.begin(); it != in.end();) {
+        for (typename std::list<T>::const_iterator it = in.begin(); it != in.end();)
+        {
             oss << *it;
-            if (++it != in.end()) {
+            if (++it != in.end())
+            {
                 oss << ", ";
             }
         }
@@ -135,48 +152,55 @@ struct StringMaker<std::list<T>> {
 };
 } // namespace doctest
 
-template <typename T, typename K>
-struct MyType {
+template <typename T, typename K> struct MyType
+{
     T one;
     K two;
 };
 
-template <typename T>
-struct MyTypeInherited : MyType<T, unsigned> {};
+template <typename T> struct MyTypeInherited : MyType<T, unsigned>
+{
+};
 
-template <typename T, typename K>
-bool operator==(const MyType<T, K> &lhs, const MyType<T, K> &rhs) {
+template <typename T, typename K> bool operator==(const MyType<T, K>& lhs, const MyType<T, K>& rhs)
+{
     return lhs.one == rhs.one && lhs.two == rhs.two;
 }
 
-template <typename T, typename K>
-std::ostream &operator<<(std::ostream &stream, const MyType<T, K> &in) {
+template <typename T, typename K> std::ostream& operator<<(std::ostream& stream, const MyType<T, K>& in)
+{
     stream << "[" << in.one << ", " << in.two << "]";
     return stream;
 }
 
-namespace Bar {
-struct Foo {
-    friend bool operator==(const Foo &, const Foo &) {
+namespace Bar
+{
+struct Foo
+{
+    friend bool operator==(const Foo&, const Foo&)
+    {
         return false;
     }
 };
 
 // as a third option you may provide an overload of toString()
-inline doctest::String toString(const Foo &) {
+inline doctest::String toString(const Foo&)
+{
     return "Foo{}";
 }
 
-struct MyOtherType {
+struct MyOtherType
+{
     int data;
-    friend bool operator==(const MyOtherType &l, const MyOtherType &r) {
+    friend bool operator==(const MyOtherType& l, const MyOtherType& r)
+    {
         return l.data == r.data;
     }
 };
 
 // you also can use a template operator<< if your code does not use std::ostream
-template <class OStream>
-OStream &operator<<(OStream &stream, const MyOtherType &in) {
+template <class OStream> OStream& operator<<(OStream& stream, const MyOtherType& in)
+{
     stream << "MyOtherType: " << in.data;
     return stream;
 }
@@ -184,14 +208,15 @@ OStream &operator<<(OStream &stream, const MyOtherType &in) {
 } // namespace Bar
 
 // set an exception translator for MyTypeInherited<int>
-REGISTER_EXCEPTION_TRANSLATOR(MyTypeInherited<int> &ex) {
-    return doctest::String("MyTypeInherited<int>(") + doctest::toString(ex.one) + ", " + doctest::toString(ex.two) +
-           ")";
+REGISTER_EXCEPTION_TRANSLATOR(MyTypeInherited<int>& ex)
+{
+    return doctest::String("MyTypeInherited<int>(") + doctest::toString(ex.one) + ", " + doctest::toString(ex.two) + ")";
 }
 
 #define CHECK_NOT_DEFAULT_STR(var) CHECK(toString(var) != "{?}")
 
-TEST_CASE("all asserts should fail and show how the objects get stringified") {
+TEST_CASE("all asserts should fail and show how the objects get stringified")
+{
     MyTypeInherited<int> bla1;
     bla1.one = 5;
     bla1.two = 4u;
@@ -259,11 +284,13 @@ TEST_CASE("all asserts should fail and show how the objects get stringified") {
     throw_if(true, bla1);
 }
 
-static doctest::String intTranslator(int ex) {
+static doctest::String intTranslator(int ex)
+{
     return doctest::String("int: ") + doctest::toString(ex);
 }
 
-TEST_CASE("a test case that registers an exception translator for int and then throws one") {
+TEST_CASE("a test case that registers an exception translator for int and then throws one")
+{
     // set an exception translator for int - note that this shouldn't be done in a test case but
     // in main() or somewhere before executing the tests - but here I'm just lazy...
     doctest::registerExceptionTranslator(intTranslator);
@@ -271,15 +298,19 @@ TEST_CASE("a test case that registers an exception translator for int and then t
     throw_if(true, 5);
 }
 
-static void function() {}
-static int ***function2() {
+static void function()
+{
+}
+static int*** function2()
+{
     return nullptr;
 }
 
-TEST_CASE("pointer comparisons") {
+TEST_CASE("pointer comparisons")
+{
     int i = 42;
-    int *a = &i;
-    int *b = a; // NOLINT(misc-const-correctness)
+    int* a = &i;
+    int* b = a; // NOLINT(misc-const-correctness)
 
     CHECK(a == b);
     CHECK_EQ(a, b);
@@ -290,20 +321,24 @@ TEST_CASE("pointer comparisons") {
 
     // NOLINTBEGIN(misc-const-correctness)
     volatile int i_2 = 30;
-    volatile int *a_2 = &i_2;
-    volatile int *b_2 = a_2;
+    volatile int* a_2 = &i_2;
+    volatile int* b_2 = a_2;
     // NOLINTEND(misc-const-correctness)
 
     CHECK(a_2 == b_2);
     CHECK_EQ(a_2, b_2);
 }
 
-enum class Foo {};
+enum class Foo
+{
+};
 
-static std::ostream &operator<<(std::ostream &os, Foo) {
+static std::ostream& operator<<(std::ostream& os, Foo)
+{
     return os << "Foo";
 }
 
-TEST_CASE("enum with operator<<") {
+TEST_CASE("enum with operator<<")
+{
     CHECK(doctest::toString(Foo()) == "Foo");
 }

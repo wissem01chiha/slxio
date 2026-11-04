@@ -5,24 +5,23 @@
 
 #if !YYJSON_DISABLE_UTILS
 
-static void test_one(const char *orig_json,
-                     const char *patch_json,
-                     const char *expt_json) {
+static void test_one(const char* orig_json, const char* patch_json, const char* expt_json)
+{
 #if !YYJSON_DISABLE_READER
-    yyjson_doc *i_orig_doc = yyjson_read(orig_json, strlen(orig_json), 0);
-    yyjson_doc *i_patch_doc = yyjson_read(patch_json, strlen(patch_json), 0);
-    yyjson_doc *i_expe_doc = yyjson_read(expt_json, strlen(expt_json), 0);
-    yyjson_mut_doc *m_orig_doc = yyjson_doc_mut_copy(i_orig_doc, NULL);
-    yyjson_mut_doc *m_patch_doc = yyjson_doc_mut_copy(i_patch_doc, NULL);
-    yyjson_mut_doc *m_expe_doc = yyjson_doc_mut_copy(i_expe_doc, NULL);
+    yyjson_doc* i_orig_doc = yyjson_read(orig_json, strlen(orig_json), 0);
+    yyjson_doc* i_patch_doc = yyjson_read(patch_json, strlen(patch_json), 0);
+    yyjson_doc* i_expe_doc = yyjson_read(expt_json, strlen(expt_json), 0);
+    yyjson_mut_doc* m_orig_doc = yyjson_doc_mut_copy(i_orig_doc, NULL);
+    yyjson_mut_doc* m_patch_doc = yyjson_doc_mut_copy(i_patch_doc, NULL);
+    yyjson_mut_doc* m_expe_doc = yyjson_doc_mut_copy(i_expe_doc, NULL);
 
-    yyjson_mut_doc *doc = yyjson_mut_doc_new(NULL);
-    yyjson_mut_val *ret1 = yyjson_merge_patch(doc, i_orig_doc->root, i_patch_doc->root);
-    yyjson_mut_val *ret2 = yyjson_mut_merge_patch(doc, m_orig_doc->root, m_patch_doc->root);
+    yyjson_mut_doc* doc = yyjson_mut_doc_new(NULL);
+    yyjson_mut_val* ret1 = yyjson_merge_patch(doc, i_orig_doc->root, i_patch_doc->root);
+    yyjson_mut_val* ret2 = yyjson_mut_merge_patch(doc, m_orig_doc->root, m_patch_doc->root);
 
 #if !YYJSON_DISABLE_WRITER
-    char *str1 = yyjson_mut_val_write(ret1, 0, NULL);
-    char *str2 = yyjson_mut_val_write(ret2, 0, NULL);
+    char* str1 = yyjson_mut_val_write(ret1, 0, NULL);
+    char* str2 = yyjson_mut_val_write(ret2, 0, NULL);
     yy_assert(strcmp(expt_json, str1) == 0);
     yy_assert(strcmp(expt_json, str2) == 0);
     free(str1);
@@ -57,7 +56,8 @@ static void test_one(const char *orig_json,
 #endif
 }
 
-yy_test_case(test_json_merge_patch) {
+yy_test_case(test_json_merge_patch)
+{
     // test cases from spec: https://tools.ietf.org/html/rfc7386
     test_one("{\"a\":\"b\"}", "{\"a\":\"c\"}", "{\"a\":\"c\"}");
     test_one("{\"a\":\"b\"}", "{\"b\":\"c\"}", "{\"a\":\"b\",\"b\":\"c\"}");
@@ -78,5 +78,7 @@ yy_test_case(test_json_merge_patch) {
 }
 
 #else
-yy_test_case(test_json_merge_patch) {}
+yy_test_case(test_json_merge_patch)
+{
+}
 #endif

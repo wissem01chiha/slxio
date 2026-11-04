@@ -4,16 +4,20 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-TestSuite &TestSuite::operator*(const char *in) noexcept {
+TestSuite& TestSuite::operator*(const char* in) noexcept
+{
     m_test_suite = in;
     return *this;
 }
 
 // sets the current test suite
-int setTestSuite(const TestSuite &ts) noexcept {
+int setTestSuite(const TestSuite& ts) noexcept
+{
     doctest_detail_test_suite_ns::getCurrentTestSuite() = ts;
     return 0;
 }
@@ -21,9 +25,11 @@ int setTestSuite(const TestSuite &ts) noexcept {
 } // namespace detail
 } // namespace doctest
 
-namespace doctest_detail_test_suite_ns {
+namespace doctest_detail_test_suite_ns
+{
 // holds the current test suite
-doctest::detail::TestSuite &getCurrentTestSuite() noexcept {
+doctest::detail::TestSuite& getCurrentTestSuite() noexcept
+{
     static doctest::detail::TestSuite data{};
     return data;
 }

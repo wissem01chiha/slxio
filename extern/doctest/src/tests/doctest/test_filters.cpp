@@ -6,18 +6,21 @@ using doctest::String;
 using doctest::detail::matchesAny;
 using doctest::detail::wildcmp;
 
-TEST_SUITE("Comparing a single string to a glob") {
-
+TEST_SUITE("Comparing a single string to a glob")
+{
     using std::placeholders::_1;
 
-    TEST_CASE("Empty glob") {
+    TEST_CASE("Empty glob")
+    {
         const auto glob = std::bind(wildcmp, _1, "", true);
         CHECK(glob("") == 1);
         CHECK(glob("nonempty") == 0);
     }
 
-    TEST_CASE("Exact glob") {
-        SUBCASE("Case-sensitive") {
+    TEST_CASE("Exact glob")
+    {
+        SUBCASE("Case-sensitive")
+        {
             const auto glob = std::bind(wildcmp, _1, "test", true);
             CHECK(glob("") == 0);
             CHECK(glob("tes") == 0);
@@ -30,7 +33,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("retesting") == 0);
         }
 
-        SUBCASE("Case-insensitive") {
+        SUBCASE("Case-insensitive")
+        {
             const auto glob = std::bind(wildcmp, _1, "test", false);
             CHECK(glob("") == 0);
             CHECK(glob("tes") == 0);
@@ -43,8 +47,10 @@ TEST_SUITE("Comparing a single string to a glob") {
         }
     }
 
-    TEST_CASE("Single-char wildcard") {
-        SUBCASE("Leading wildcard") {
+    TEST_CASE("Single-char wildcard")
+    {
+        SUBCASE("Leading wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "?est", true);
             CHECK(glob("") == 0);
             CHECK(glob("tes") == 0);
@@ -54,7 +60,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("this") == 0);
         }
 
-        SUBCASE("Intermediate wildcard") {
+        SUBCASE("Intermediate wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "te?t", true);
             CHECK(glob("") == 0);
             CHECK(glob("tex") == 0);
@@ -64,7 +71,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("text!") == 0);
         }
 
-        SUBCASE("Trailing wildcard") {
+        SUBCASE("Trailing wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "tes?", true);
             CHECK(glob("") == 0);
             CHECK(glob("tes") == 0);
@@ -75,22 +83,26 @@ TEST_SUITE("Comparing a single string to a glob") {
         }
     }
 
-    TEST_CASE("Multi-char wildcard") {
-        SUBCASE("Only wildcard") {
+    TEST_CASE("Multi-char wildcard")
+    {
+        SUBCASE("Only wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "*", true);
             CHECK(glob("") == 1);
             CHECK(glob("test") == 1);
             CHECK(glob("string") == 1);
         }
 
-        SUBCASE("Only multiple wildcards") {
+        SUBCASE("Only multiple wildcards")
+        {
             const auto glob = std::bind(wildcmp, _1, "**", true);
             CHECK(glob("") == 1);
             CHECK(glob("test") == 1);
             CHECK(glob("string") == 1);
         }
 
-        SUBCASE("Leading wildcard") {
+        SUBCASE("Leading wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "*.png", true);
             CHECK(glob("") == 0);
             CHECK(glob(".png") == 1);
@@ -98,7 +110,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("foo.bmp") == 0);
         }
 
-        SUBCASE("Intermediate wildcard") {
+        SUBCASE("Intermediate wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "img-*.png", true);
             CHECK(glob("") == 0);
             CHECK(glob("img-.png") == 1);
@@ -107,7 +120,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("bad-1.png") == 0);
         }
 
-        SUBCASE("Trailing wildcard") {
+        SUBCASE("Trailing wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "file.*", true);
             CHECK(glob("") == 0);
             CHECK(glob("file.") == 1);
@@ -117,7 +131,8 @@ TEST_SUITE("Comparing a single string to a glob") {
             CHECK(glob("file.BMP") == 1);
         }
 
-        SUBCASE("Leading and trailing wildcard") {
+        SUBCASE("Leading and trailing wildcard")
+        {
             const auto glob = std::bind(wildcmp, _1, "* 2 *", true);
             CHECK(glob("1") == 0);
             CHECK(glob("2") == 0);
@@ -129,26 +144,30 @@ TEST_SUITE("Comparing a single string to a glob") {
     }
 }
 
-TEST_SUITE("Comparing a single string to multiple globs") {
-
+TEST_SUITE("Comparing a single string to multiple globs")
+{
     using std::placeholders::_1;
 
-    TEST_CASE("Empty set of filters") {
+    TEST_CASE("Empty set of filters")
+    {
         const auto filters = std::vector<String>{};
         const auto caseSensitive = true;
 
-        SUBCASE("With matchesEmpty disabled") {
+        SUBCASE("With matchesEmpty disabled")
+        {
             const auto matchesEmpty = false;
             CHECK(matchesAny("test", filters, matchesEmpty, caseSensitive) == false);
         }
 
-        SUBCASE("With matchesEmpty enabled") {
+        SUBCASE("With matchesEmpty enabled")
+        {
             const auto matchesEmpty = true;
             CHECK(matchesAny("test", filters, matchesEmpty, caseSensitive) == true);
         }
     }
 
-    TEST_CASE("Non-empty set of filters") {
+    TEST_CASE("Non-empty set of filters")
+    {
         const auto filters = std::vector<String>{"foo", "bar", "baz"};
         const auto matches = std::bind(matchesAny, _1, filters, false, true);
         CHECK(matches("foo") == true);

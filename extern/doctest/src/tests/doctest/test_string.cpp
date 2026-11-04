@@ -14,22 +14,26 @@ DOCTEST_GCC_SUPPRESS_WARNING_WITH_PUSH("-Wstrict-overflow")
 using doctest::String;
 DOCTEST_GCC_SUPPRESS_WARNING_POP
 
-namespace {
+namespace
+{
 
 /** Allows for set-based equality */
-template <typename T>
-struct one_of {
+template <typename T> struct one_of
+{
 private:
     std::vector<T> _items;
 
 public:
-    inline one_of(std::initializer_list<T> items)
-        : _items(items) {}
+    inline one_of(std::initializer_list<T> items) : _items(items)
+    {
+    }
 
-    template <typename S>
-    inline friend bool operator==(const S &lhs, const one_of<T> &rhs) noexcept {
-        for (auto &item: rhs._items) {
-            if (lhs == item) {
+    template <typename S> inline friend bool operator==(const S& lhs, const one_of<T>& rhs) noexcept
+    {
+        for (auto& item : rhs._items)
+        {
+            if (lhs == item)
+            {
                 return true;
             }
         }
@@ -39,20 +43,23 @@ public:
 };
 
 /** Determines the address of the actual string content */
-inline const void *data_address(const String &s) {
-    return reinterpret_cast<const void *>(s.c_str()); // NOLINT
+inline const void* data_address(const String& s)
+{
+    return reinterpret_cast<const void*>(s.c_str()); // NOLINT
 }
 /**
  * Determines if the String object is on the stack,
  * i.e. the private String::isOnStack method would return true
  * This is mostly to check we're hitting small-string optimizations
  */
-inline bool is_on_stack(const String &s) {
-    return reinterpret_cast<const void *>(&s) == data_address(s); // NOLINT
+inline bool is_on_stack(const String& s)
+{
+    return reinterpret_cast<const void*>(&s) == data_address(s); // NOLINT
 }
 
 /** Convenience alias for !is_on_stack */
-inline bool is_on_heap(const String &s) {
+inline bool is_on_heap(const String& s)
+{
     return !is_on_stack(s);
 }
 
@@ -60,14 +67,17 @@ inline bool is_on_heap(const String &s) {
 struct X;
 struct Y;
 struct Z;
-namespace nested {
+namespace nested
+{
 struct Type;
 } // namespace nested
 
 } // namespace
 
-TEST_SUITE("String construction") {
-    TEST_CASE("Default construction") {
+TEST_SUITE("String construction")
+{
+    TEST_CASE("Default construction")
+    {
         auto string = String();
 
         CHECK(string.c_str() == std::string(""));
@@ -76,8 +86,10 @@ TEST_SUITE("String construction") {
         CHECK(is_on_stack(string));
     }
 
-    TEST_CASE("Construction from string-literal") {
-        SUBCASE("Small-string-optimizable string literal") {
+    TEST_CASE("Construction from string-literal")
+    {
+        SUBCASE("Small-string-optimizable string literal")
+        {
             auto string = String("doctest");
 
             CHECK(string.c_str() == std::string("doctest"));
@@ -86,7 +98,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Large string literal") {
+        SUBCASE("Large string literal")
+        {
             auto string = String("a very big string literal");
 
             CHECK(string.c_str() == std::string("a very big string literal"));
@@ -96,8 +109,10 @@ TEST_SUITE("String construction") {
         }
     }
 
-    TEST_CASE("Construction from sized string-literal") {
-        SUBCASE("Small-string-optimizable string literal") {
+    TEST_CASE("Construction from sized string-literal")
+    {
+        SUBCASE("Small-string-optimizable string literal")
+        {
             auto string = String("a particularly long string", 6);
 
             CHECK(string.c_str() == std::string("a part"));
@@ -106,7 +121,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Large string literal, size set to below threshold") {
+        SUBCASE("Large string literal, size set to below threshold")
+        {
             auto string = String("a very big string literal", 23);
 
             CHECK(string.c_str() == std::string("a very big string liter"));
@@ -115,7 +131,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Large string literal, size set to threshold") {
+        SUBCASE("Large string literal, size set to threshold")
+        {
             auto string = String("a very big string literal", 24);
 
             CHECK(string.c_str() == std::string("a very big string litera"));
@@ -125,11 +142,13 @@ TEST_SUITE("String construction") {
         }
     }
 
-    TEST_CASE("Construction from an input-stream") {
+    TEST_CASE("Construction from an input-stream")
+    {
         std::stringstream ss{};
         ss << "a very big string literal";
 
-        SUBCASE("Size set to below threshold") {
+        SUBCASE("Size set to below threshold")
+        {
             auto string = String(ss, 17);
 
             CHECK(string.c_str() == std::string("a very big string"));
@@ -138,7 +157,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Size set to threshold") {
+        SUBCASE("Size set to threshold")
+        {
             auto string = String(ss, 24);
 
             CHECK(string.c_str() == std::string("a very big string litera"));
@@ -148,7 +168,8 @@ TEST_SUITE("String construction") {
         }
     }
 
-    TEST_CASE("Construction from std::string") {
+    TEST_CASE("Construction from std::string")
+    {
         auto in = std::string("doctest");
         auto string = String(in);
 
@@ -158,13 +179,15 @@ TEST_SUITE("String construction") {
         CHECK(is_on_stack(string));
     }
 
-    TEST_CASE("Construction from a substring") {
+    TEST_CASE("Construction from a substring")
+    {
         auto base = String("an extraordinarily large string literal");
         REQUIRE(base.size() == 39u);
         REQUIRE(base.capacity() == 40u);
         REQUIRE(is_on_heap(base));
 
-        SUBCASE("Substring over [0, 0] with const source") {
+        SUBCASE("Substring over [0, 0] with const source")
+        {
             auto string = base.substr(0, 0);
 
             CHECK(string.c_str() == std::string(""));
@@ -173,7 +196,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Substring over [0, 0] with rvalue source") {
+        SUBCASE("Substring over [0, 0] with rvalue source")
+        {
             auto string = std::move(base).substr(0, 0);
 
             CHECK(string.c_str() == std::string(""));
@@ -183,7 +207,8 @@ TEST_SUITE("String construction") {
         }
 
         // NOLINTBEGIN(bugprone-use-after-move, hicpp-invalid-access-moved)
-        SUBCASE("Substring over [3, 24] with const source") {
+        SUBCASE("Substring over [3, 24] with const source")
+        {
             auto string = base.substr(3, 21);
 
             CHECK(string.c_str() == std::string("extraordinarily large"));
@@ -192,7 +217,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Substring over [19, 31] with rvalue source") {
+        SUBCASE("Substring over [19, 31] with rvalue source")
+        {
             auto string = std::move(base).substr(19, 12);
 
             CHECK(string.c_str() == std::string("large string"));
@@ -201,7 +227,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_heap(string));
         }
 
-        SUBCASE("Substring over [0, SIZE_MAX] with const source") {
+        SUBCASE("Substring over [0, SIZE_MAX] with const source")
+        {
             auto string = base.substr(0, std::numeric_limits<String::size_type>::max());
 
             CHECK(string.c_str() == std::string("an extraordinarily large string literal"));
@@ -210,7 +237,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_heap(string));
         }
 
-        SUBCASE("Substring over [0, SIZE_MAX] with rvalue source") {
+        SUBCASE("Substring over [0, SIZE_MAX] with rvalue source")
+        {
             auto string = base.substr(0, std::numeric_limits<String::size_type>::max());
 
             CHECK(string.c_str() == std::string("an extraordinarily large string literal"));
@@ -221,30 +249,35 @@ TEST_SUITE("String construction") {
         // NOLINTEND(bugprone-use-after-move, hicpp-invalid-access-moved)
     }
 
-    TEST_CASE("Copy-construction") {
+    TEST_CASE("Copy-construction")
+    {
         const auto stack_string = String("stack-string");
         const auto heap_string = String("a very long string that will be on heap");
         REQUIRE(is_on_stack(stack_string));
         REQUIRE(is_on_heap(heap_string));
 
-        SUBCASE("Copying stack-string") {
+        SUBCASE("Copying stack-string")
+        {
             auto string = String(stack_string);
             CHECK(string == stack_string);
         }
 
-        SUBCASE("Copying heap-string") {
+        SUBCASE("Copying heap-string")
+        {
             auto string = String(heap_string);
             CHECK(string == heap_string);
         }
     }
 
-    TEST_CASE("Copy-assign construction") {
+    TEST_CASE("Copy-assign construction")
+    {
         const auto stack_string = String("stack-string");
         const auto heap_string = String("a very long string that will be on heap");
         REQUIRE(is_on_stack(stack_string));
         REQUIRE(is_on_heap(heap_string));
 
-        SUBCASE("Copying stack-string to existing stack-string") {
+        SUBCASE("Copying stack-string to existing stack-string")
+        {
             auto string = String("another stack-string");
             REQUIRE(is_on_stack(string));
 
@@ -253,7 +286,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Copying stack-string to existing heap-string") {
+        SUBCASE("Copying stack-string to existing heap-string")
+        {
             auto string = String("another very long string that will be on heap");
             REQUIRE(is_on_heap(string));
 
@@ -262,7 +296,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Copying heap-string to existing stack-string") {
+        SUBCASE("Copying heap-string to existing stack-string")
+        {
             auto string = String("another stack-string");
             REQUIRE(is_on_stack(string));
 
@@ -271,7 +306,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_heap(string));
         }
 
-        SUBCASE("Copying heap-string to existing heap-string") {
+        SUBCASE("Copying heap-string to existing heap-string")
+        {
             auto string = String("another very long string that will be on heap");
             REQUIRE(is_on_heap(string));
 
@@ -281,32 +317,37 @@ TEST_SUITE("String construction") {
         }
     }
 
-    TEST_CASE("Move-construction") {
+    TEST_CASE("Move-construction")
+    {
         const auto stack_string = String("stack-string");
         const auto heap_string = String("a very long string that will be on heap");
         REQUIRE(is_on_stack(stack_string));
         REQUIRE(is_on_heap(heap_string));
 
-        SUBCASE("Moving stack-string") {
+        SUBCASE("Moving stack-string")
+        {
             auto string = std::move(String(stack_string));
             CHECK(string == stack_string);
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Moving heap-string") {
+        SUBCASE("Moving heap-string")
+        {
             auto string = std::move(String(heap_string));
             CHECK(string == heap_string);
             CHECK(is_on_heap(string));
         }
     }
 
-    TEST_CASE("Move-assign construction") {
+    TEST_CASE("Move-assign construction")
+    {
         const auto stack_string = String("stack-string");
         const auto heap_string = String("a very long string that will be on heap");
         REQUIRE(is_on_stack(stack_string));
         REQUIRE(is_on_heap(heap_string));
 
-        SUBCASE("Moving stack-string to existing stack-string") {
+        SUBCASE("Moving stack-string to existing stack-string")
+        {
             auto string = String("another stack-string");
             REQUIRE(is_on_stack(string));
 
@@ -315,7 +356,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Moving stack-string to existing heap-string") {
+        SUBCASE("Moving stack-string to existing heap-string")
+        {
             auto string = String("another very long string that will be on heap");
             REQUIRE(is_on_heap(string));
 
@@ -324,7 +366,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_stack(string));
         }
 
-        SUBCASE("Moving heap-string to existing stack-string") {
+        SUBCASE("Moving heap-string to existing stack-string")
+        {
             auto string = String("another stack-string");
             REQUIRE(is_on_stack(string));
 
@@ -333,7 +376,8 @@ TEST_SUITE("String construction") {
             CHECK(is_on_heap(string));
         }
 
-        SUBCASE("Moving heap-string to existing heap-string") {
+        SUBCASE("Moving heap-string to existing heap-string")
+        {
             auto string = String("another very long string that will be on heap");
             REQUIRE(is_on_heap(string));
 
@@ -344,20 +388,24 @@ TEST_SUITE("String construction") {
     }
 }
 
-TEST_SUITE("String searching") {
+TEST_SUITE("String searching")
+{
     // For some reason, String::npos produces an undefined-reference link error
     // So for these tests, we have to invent our own...
     const auto npos = static_cast<String::size_type>(-1);
 
-    TEST_CASE("Forward-searching") {
-        SUBCASE("Empty source string") {
+    TEST_CASE("Forward-searching")
+    {
+        SUBCASE("Empty source string")
+        {
             auto string = String("");
             CHECK(string.find('x') == npos);
             CHECK(string.find('y') == npos);
             CHECK(string.find('z') == npos);
         }
 
-        SUBCASE("Non-empty source string") {
+        SUBCASE("Non-empty source string")
+        {
             auto string = String("doctest");
 
             CHECK(string.find('x') == npos);
@@ -377,15 +425,18 @@ TEST_SUITE("String searching") {
         }
     }
 
-    TEST_CASE("Reverse-searching") {
-        SUBCASE("Empty source string") {
+    TEST_CASE("Reverse-searching")
+    {
+        SUBCASE("Empty source string")
+        {
             auto string = String("");
             CHECK(string.rfind('x') == npos);
             CHECK(string.rfind('y') == npos);
             CHECK(string.rfind('z') == npos);
         }
 
-        SUBCASE("Non-empty source string") {
+        SUBCASE("Non-empty source string")
+        {
             auto string = String("doctest");
 
             CHECK(string.rfind('x') == npos);
@@ -406,15 +457,18 @@ TEST_SUITE("String searching") {
     }
 }
 
-TEST_CASE("String comparison") {
-    SUBCASE("Case-sensitive C-style comparison") {
+TEST_CASE("String comparison")
+{
+    SUBCASE("Case-sensitive C-style comparison")
+    {
         CHECK(String("").compare("") == 0);
         CHECK(String("").compare("doctest") < 0);
         CHECK(String("doctest").compare("") > 0);
         CHECK(String("doctest").compare("Doctest") > 0);
     }
 
-    SUBCASE("Case-insensitive C-style comparison") {
+    SUBCASE("Case-insensitive C-style comparison")
+    {
         const auto caseless = true;
         CHECK(String("").compare("", caseless) == 0);
         CHECK(String("").compare("doctest", caseless) < 0);
@@ -422,7 +476,8 @@ TEST_CASE("String comparison") {
         CHECK(String("doctest").compare("Doctest", caseless) == 0);
     }
 
-    SUBCASE("operator<") {
+    SUBCASE("operator<")
+    {
         CHECK_FALSE(String("") < String(""));
         CHECK(String("") < String("doctest"));
         CHECK_FALSE(String("doctest") < String(""));
@@ -432,7 +487,8 @@ TEST_CASE("String comparison") {
         CHECK_FALSE(String("y") < String("x"));
     }
 
-    SUBCASE("operator>=") {
+    SUBCASE("operator>=")
+    {
         CHECK(String("") >= String(""));
         CHECK_FALSE(String("") >= String("doctest"));
         CHECK(String("doctest") >= String(""));
@@ -442,7 +498,8 @@ TEST_CASE("String comparison") {
         CHECK(String("y") >= String("x"));
     }
 
-    SUBCASE("operator>") {
+    SUBCASE("operator>")
+    {
         CHECK_FALSE(String("") > String(""));
         CHECK_FALSE(String("") > String("doctest"));
         CHECK(String("doctest") > String(""));
@@ -452,7 +509,8 @@ TEST_CASE("String comparison") {
         CHECK(String("y") > String("x"));
     }
 
-    SUBCASE("operator<=") {
+    SUBCASE("operator<=")
+    {
         CHECK(String("") <= String(""));
         CHECK(String("") <= String("doctest"));
         CHECK_FALSE(String("doctest") <= String(""));
@@ -463,15 +521,18 @@ TEST_CASE("String comparison") {
     }
 }
 
-TEST_SUITE("String manipulation") {
-    TEST_CASE("Appending to a new string") {
+TEST_SUITE("String manipulation")
+{
+    TEST_CASE("Appending to a new string")
+    {
         CHECK(String("") + String("") == String(""));
         CHECK(String("doc") + String("") == String("doc"));
         CHECK(String("") + String("test") == String("test"));
         CHECK(String("doc") + String("test") == String("doctest"));
     }
 
-    TEST_CASE("Appending in-place") {
+    TEST_CASE("Appending in-place")
+    {
         auto result = String("");
 
         result += String("doc");
@@ -488,7 +549,8 @@ TEST_SUITE("String manipulation") {
     }
 }
 
-TEST_SUITE("Type stringification") {
+TEST_SUITE("Type stringification")
+{
     using namespace doctest;
 
     // clang-format off
@@ -533,12 +595,13 @@ TEST_SUITE("Type stringification") {
     // clang-format on
 }
 
-TEST_SUITE("Value stringification") {
+TEST_SUITE("Value stringification")
+{
     using namespace doctest;
 
     // Some types can't be braced-initialized, so...
-    template <typename T>
-    T lit(T value) {
+    template <typename T> T lit(T value)
+    {
         return value;
     }
 
@@ -581,25 +644,29 @@ TEST_SUITE("Value stringification") {
     }
     // clang-format on
 
-    TEST_CASE("Array-like containers") {
+    TEST_CASE("Array-like containers")
+    {
         CHECK(toString(std::array<int, 0u>{}) == "{}");
         CHECK(toString(std::array<int, 1u>{}) == "{0}");
         CHECK(toString(std::array<int, 2u>{}) == "{0, 0}");
     }
 
-    TEST_CASE_TEMPLATE("List-like containers", Container, std::vector<int>, std::list<int>, std::deque<int>) {
+    TEST_CASE_TEMPLATE("List-like containers", Container, std::vector<int>, std::list<int>, std::deque<int>)
+    {
         CHECK(toString(Container{}) == "{}");
         CHECK(toString(Container{1}) == "{1}");
         CHECK(toString(Container{1, 2}) == "{1, 2}");
     }
 
-    TEST_CASE_TEMPLATE("Set-like containers", Container, std::set<int>, std::unordered_set<int>) {
+    TEST_CASE_TEMPLATE("Set-like containers", Container, std::set<int>, std::unordered_set<int>)
+    {
         CHECK(toString(Container{}) == "{}");
         CHECK(toString(Container{1}) == "{1}");
         CHECK(toString(Container{1, 2}) == one_of<String>{"{1, 2}", "{2, 1}"});
     }
 
-    TEST_CASE_TEMPLATE("Map-like containers", Container, std::map<int, int>, std::unordered_map<int, int>) {
+    TEST_CASE_TEMPLATE("Map-like containers", Container, std::map<int, int>, std::unordered_map<int, int>)
+    {
         CHECK(toString(Container{}) == "{}");
         CHECK(toString(Container{{1, 3}}) == "{{1, 3}}");
         CHECK(toString(Container{{1, 3}, {2, 4}}) == one_of<String>{"{{1, 3}, {2, 4}}", "{{2, 4}, {1, 3}}"});

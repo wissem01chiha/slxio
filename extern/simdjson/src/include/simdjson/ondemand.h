@@ -3,35 +3,36 @@
 
 #include "simdjson/builtin/ondemand.h"
 
-namespace simdjson {
-  /**
-   * @copydoc simdjson::builtin::ondemand
-   */
-  namespace ondemand = builtin::ondemand;
-  /**
-   * @copydoc simdjson::builtin::builder
-   */
-  namespace builder = builtin::builder;
+namespace simdjson
+{
+/**
+ * @copydoc simdjson::builtin::ondemand
+ */
+namespace ondemand = builtin::ondemand;
+/**
+ * @copydoc simdjson::builtin::builder
+ */
+namespace builder = builtin::builder;
 
 #if SIMDJSON_STATIC_REFLECTION
-  /**
-   * Create a JSON string from any user-defined type using static reflection.
-   * Only available when SIMDJSON_STATIC_REFLECTION is enabled.
-   */
-  template<typename T>
-    requires(!std::same_as<T, builtin::ondemand::document> &&
-             !std::same_as<T, builtin::ondemand::value> &&
-             !std::same_as<T, builtin::ondemand::object> &&
-             !std::same_as<T, builtin::ondemand::array>)
-  inline std::string to_json_string(const T& obj) {
+/**
+ * Create a JSON string from any user-defined type using static reflection.
+ * Only available when SIMDJSON_STATIC_REFLECTION is enabled.
+ */
+template <typename T>
+    requires(!std::same_as<T, builtin::ondemand::document> && !std::same_as<T, builtin::ondemand::value> &&
+             !std::same_as<T, builtin::ondemand::object> && !std::same_as<T, builtin::ondemand::array>)
+inline std::string to_json_string(const T& obj)
+{
     builder::string_builder str_builder;
     append(str_builder, obj);
     std::string result;
-    if (str_builder.move_to(result) == SUCCESS) {
-      return result;
+    if (str_builder.move_to(result) == SUCCESS)
+    {
+        return result;
     }
     return "";
-  }
+}
 #endif
 
 } // namespace simdjson

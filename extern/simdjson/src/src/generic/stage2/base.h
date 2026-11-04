@@ -5,10 +5,14 @@
 #include <generic/base.h>
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-namespace SIMDJSON_IMPLEMENTATION {
-namespace {
-namespace stage2 {
+namespace simdjson
+{
+namespace SIMDJSON_IMPLEMENTATION
+{
+namespace
+{
+namespace stage2
+{
 
 class json_iterator;
 struct tape_builder;

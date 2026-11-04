@@ -4,13 +4,18 @@
 
 using namespace simdjson;
 
-int main() {
+int main()
+{
     auto json = "[1]"_padded;
     ondemand::parser parser;
-    auto f = [](ondemand::parser& p, simdjson::padded_string& jsons) -> ondemand::document {
+    auto f = [](ondemand::parser& p, simdjson::padded_string& jsons) -> ondemand::document
+    {
         ondemand::document doc;
         auto error = p.iterate(jsons).get(doc);
-        if(error) { std::abort(); }
+        if (error)
+        {
+            std::abort();
+        }
         return doc;
     };
     ondemand::array arrayv;
@@ -21,12 +26,14 @@ int main() {
     ondemand::document doc = f(parser, json);
     auto error = doc.get_array().get(arrayv);
 #endif
-    if(error) {
+    if (error)
+    {
         std::cout << "Failure" << std::endl;
     }
     int64_t a = 0;
     error = arrayv.at(0).get_int64().get(a);
-    if(error) {
+    if (error)
+    {
         std::cout << "failure" << std::endl;
     }
     printf("a = %d\n", (int)a);

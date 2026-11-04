@@ -7,8 +7,8 @@
 
 static const LPCSTR TEST_SOURCE = "spdlog_test";
 
-static void test_single_print(std::function<void(std::string const &)> do_log,
-                              std::string const &expected_contents,
+static void test_single_print(std::function<void(std::string const&)> do_log,
+                              std::string const& expected_contents,
                               WORD expected_ev_type) {
     using namespace std::chrono;
     do_log(expected_contents);
@@ -44,7 +44,7 @@ static void test_single_print(std::function<void(std::string const &)> do_log,
     REQUIRE(record->EventType == expected_ev_type);
     REQUIRE((expected_time_generated - record->TimeGenerated) <= 3u);
 
-    std::string message_in_log(((char *)record + record->StringOffset));
+    std::string message_in_log(((char*)record + record->StringOffset));
     REQUIRE(message_in_log == expected_contents + spdlog::details::os::default_eol);
 }
 
@@ -58,17 +58,17 @@ TEST_CASE("eventlog", "[eventlog]") {
 
     test_sink->set_pattern("%v");
 
-    test_single_print([&test_logger](std::string const &msg) { test_logger.trace(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.trace(msg); },
                       "my trace message", EVENTLOG_SUCCESS);
-    test_single_print([&test_logger](std::string const &msg) { test_logger.debug(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.debug(msg); },
                       "my debug message", EVENTLOG_SUCCESS);
-    test_single_print([&test_logger](std::string const &msg) { test_logger.info(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.info(msg); },
                       "my info message", EVENTLOG_INFORMATION_TYPE);
-    test_single_print([&test_logger](std::string const &msg) { test_logger.warn(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.warn(msg); },
                       "my warn message", EVENTLOG_WARNING_TYPE);
-    test_single_print([&test_logger](std::string const &msg) { test_logger.error(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.error(msg); },
                       "my error message", EVENTLOG_ERROR_TYPE);
-    test_single_print([&test_logger](std::string const &msg) { test_logger.critical(msg); },
+    test_single_print([&test_logger](std::string const& msg) { test_logger.critical(msg); },
                       "my critical message", EVENTLOG_ERROR_TYPE);
 }
 

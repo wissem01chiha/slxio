@@ -25,30 +25,33 @@
 #if SIMDJSON_HAS_PADDED_MEMORY_MAP
 
 #if SIMDJSON_EXCEPTIONS
-bool test_memory_map_exception() {
-  TEST_START();
-  simdjson::padded_memory_map map(TWITTER_JSON);
-  ASSERT_TRUE(map.is_valid());
-  simdjson::padded_string_view view = map.view();
-  simdjson::ondemand::document doc = simdjson::ondemand::parser::get_parser().iterate(view);
-  ASSERT_TRUE(doc["search_metadata"]["count"].get_uint64() == 100);
-  TEST_SUCCEED();
+bool test_memory_map_exception()
+{
+    TEST_START();
+    simdjson::padded_memory_map map(TWITTER_JSON);
+    ASSERT_TRUE(map.is_valid());
+    simdjson::padded_string_view view = map.view();
+    simdjson::ondemand::document doc = simdjson::ondemand::parser::get_parser().iterate(view);
+    ASSERT_TRUE(doc["search_metadata"]["count"].get_uint64() == 100);
+    TEST_SUCCEED();
 }
 #endif
 
-bool test_memory_map_noexception() {
+bool test_memory_map_noexception()
+{
     TEST_START();
     simdjson::padded_memory_map map(TWITTER_JSON);
-    if (!map.is_valid()) {
+    if (!map.is_valid())
+    {
         std::cerr << "Failed to memory-map the file " << TWITTER_JSON << std::endl;
         return false;
     }
     simdjson::padded_string_view view = map.view();
     simdjson::ondemand::parser parser;
     simdjson::ondemand::document doc;
-    ASSERT_SUCCESS( parser.iterate(view).get(doc) );
+    ASSERT_SUCCESS(parser.iterate(view).get(doc));
     uint64_t count;
-    ASSERT_SUCCESS( doc["search_metadata"]["count"].get(count) );
+    ASSERT_SUCCESS(doc["search_metadata"]["count"].get(count));
     ASSERT_EQUAL(count, 100);
     TEST_SUCCEED();
 }
@@ -58,23 +61,27 @@ bool test_memory_map_noexception() {
 // / iterate_many users typically want: no extra copy on POSIX, portable fallback
 // on Windows. The AMAZON_CELLPHONES_NDJSON resource is an NDJSON file so it is
 // a realistic stress-test for streaming from a memory-mapped file.
-bool test_memory_map_iterate_many() {
+bool test_memory_map_iterate_many()
+{
     TEST_START();
     simdjson::padded_memory_map map(AMAZON_CELLPHONES_NDJSON);
-    if (!map.is_valid()) {
+    if (!map.is_valid())
+    {
         std::cerr << "Failed to memory-map the file " << AMAZON_CELLPHONES_NDJSON << std::endl;
         return false;
     }
     simdjson::padded_string_view view = map.view();
     simdjson::ondemand::parser parser;
     simdjson::ondemand::document_stream stream;
-    ASSERT_SUCCESS( parser.iterate_many(view).get(stream) );
+    ASSERT_SUCCESS(parser.iterate_many(view).get(stream));
     size_t count = 0;
-    for (auto doc : stream) {
-        ASSERT_SUCCESS( doc.error() );
+    for (auto doc : stream)
+    {
+        ASSERT_SUCCESS(doc.error());
         count++;
     }
-    if (count == 0) {
+    if (count == 0)
+    {
         std::cerr << "Expected at least one document in " << AMAZON_CELLPHONES_NDJSON << std::endl;
         return false;
     }
@@ -83,23 +90,27 @@ bool test_memory_map_iterate_many() {
 
 // Verifies that padded_memory_map also works with the DOM streaming parser
 // (parse_many). Same rationale as the ondemand variant above.
-bool test_memory_map_parse_many() {
+bool test_memory_map_parse_many()
+{
     TEST_START();
     simdjson::padded_memory_map map(AMAZON_CELLPHONES_NDJSON);
-    if (!map.is_valid()) {
+    if (!map.is_valid())
+    {
         std::cerr << "Failed to memory-map the file " << AMAZON_CELLPHONES_NDJSON << std::endl;
         return false;
     }
     simdjson::padded_string_view view = map.view();
     simdjson::dom::parser parser;
     simdjson::dom::document_stream stream;
-    ASSERT_SUCCESS( parser.parse_many(view).get(stream) );
+    ASSERT_SUCCESS(parser.parse_many(view).get(stream));
     size_t count = 0;
-    for (auto doc : stream) {
-        ASSERT_SUCCESS( doc.error() );
+    for (auto doc : stream)
+    {
+        ASSERT_SUCCESS(doc.error());
         count++;
     }
-    if (count == 0) {
+    if (count == 0)
+    {
         std::cerr << "Expected at least one document in " << AMAZON_CELLPHONES_NDJSON << std::endl;
         return false;
     }
@@ -109,10 +120,12 @@ bool test_memory_map_parse_many() {
 // Ensures that trying to memory-map a file that does not exist leaves the map
 // in the "invalid" state rather than crashing. This is important on Windows
 // where the underlying implementation path differs from POSIX.
-bool test_memory_map_missing_file() {
+bool test_memory_map_missing_file()
+{
     TEST_START();
     simdjson::padded_memory_map map("this_file_definitely_does_not_exist_123456789.json");
-    if (map.is_valid()) {
+    if (map.is_valid())
+    {
         std::cerr << "Expected is_valid() == false for missing file" << std::endl;
         return false;
     }
@@ -121,7 +134,8 @@ bool test_memory_map_missing_file() {
 
 #endif // SIMDJSON_HAS_PADDED_MEMORY_MAP
 
-int main() {
+int main()
+{
 #if SIMDJSON_HAS_PADDED_MEMORY_MAP
     bool ok = true;
 #if SIMDJSON_EXCEPTIONS
@@ -135,7 +149,8 @@ int main() {
 #else
     std::cout << "padded_memory_map is disabled in this configuration; "
                  "set SIMDJSON_ENABLE_MEMORY_FILE_MAPPING_ON_WINDOWS=ON in CMake to "
-                 "enable it on Windows. Test skipped." << std::endl;
+                 "enable it on Windows. Test skipped."
+              << std::endl;
     return EXIT_SUCCESS;
 #endif
 }

@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
@@ -63,5 +64,7 @@ struct SimulinkSolver // NOSONAR
     std::string MinimalZcImpactuint16egration;
     std::string SolverOrder;
 };
+
+ValidationReport Validate(const SimulinkSolver& config);
 
 }; // namespace slxio

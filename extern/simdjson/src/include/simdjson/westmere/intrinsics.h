@@ -10,8 +10,7 @@
 #include <intrin.h> // visual studio or clang
 #else
 #include <x86intrin.h> // elsewhere
-#endif // SIMDJSON_VISUAL_STUDIO
-
+#endif                 // SIMDJSON_VISUAL_STUDIO
 
 #if SIMDJSON_CLANG_VISUAL_STUDIO
 /**
@@ -22,8 +21,8 @@
  * only get included *if* the corresponding features are detected
  * from macros:
  */
-#include <smmintrin.h>  // for _mm_alignr_epi8
-#include <wmmintrin.h>  // for  _mm_clmulepi64_si128
+#include <smmintrin.h> // for _mm_alignr_epi8
+#include <wmmintrin.h> // for  _mm_clmulepi64_si128
 #endif
 
 static_assert(sizeof(__m128i) <= simdjson::SIMDJSON_PADDING, "insufficient padding for westmere");

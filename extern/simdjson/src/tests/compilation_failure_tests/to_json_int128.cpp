@@ -4,17 +4,19 @@
 
 #include "simdjson.h"
 
-struct with_wide_member {
-  int a;
+struct with_wide_member
+{
+    int a;
 #if COMPILATION_TEST_USE_FAILING_CODE
-  __int128_t big;
+    __int128_t big;
 #else
-  int64_t big;
+    int64_t big;
 #endif
 };
 
-int main() {
-  with_wide_member s{1, 5};
-  std::string json;
-  return simdjson::to_json(s).get(json) == simdjson::SUCCESS ? 0 : 1;
+int main()
+{
+    with_wide_member s{1, 5};
+    std::string json;
+    return simdjson::to_json(s).get(json) == simdjson::SUCCESS ? 0 : 1;
 }

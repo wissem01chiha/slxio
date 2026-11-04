@@ -7,11 +7,13 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 // all the registered tests
-std::set<TestCase> &getRegisteredTests();
+std::set<TestCase>& getRegisteredTests();
 
 } // namespace detail
 } // namespace doctest

@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
@@ -80,5 +81,7 @@ struct SimulinkOptimization final // NOSONAR
     std::string MultiThreadedLoops;
     std::string DenormalBehavior;
 };
+
+ValidationReport Validate(const SimulinkOptimization& config);
 
 }; // namespace slxio

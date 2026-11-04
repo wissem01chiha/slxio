@@ -1,4 +1,4 @@
-//example for a compile test
+// example for a compile test
 
 // keep as much code as possible outside of the conditional compilation
 // so the thing that is to proven to not compile fails to compile because
@@ -6,15 +6,14 @@
 
 #include <vector>
 
-int main() {
-
+int main()
+{
 #if COMPILATION_TEST_USE_FAILING_CODE
     // code that is supposed to fail compiling (keep it short!)
     xxx
 #else
-   // equivalent code that is supposed to compile (keep it short!)
+    // equivalent code that is supposed to compile (keep it short!)
 #endif
 
     // common code
-
 }

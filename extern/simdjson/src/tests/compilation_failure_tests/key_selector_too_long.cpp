@@ -24,13 +24,17 @@ using fields = ondemand::key_selector<"key_with_sixty_four_chars_one_over_the_li
 using fields = ondemand::key_selector<"key_with_exactly_sixty_three_charsxxxxxxxxxxxxxxxxxxxxxxxxxxxxx">;
 #endif
 
-int main() {
-  return static_cast<int>(fields::size()) - 1; // 1 key -> returns 0
+int main()
+{
+    return static_cast<int>(fields::size()) - 1; // 1 key -> returns 0
 }
 
 #else
 
 // key_selector requires C++20 concepts; without them there is nothing to check.
-int main() { return 0; }
+int main()
+{
+    return 0;
+}
 
 #endif

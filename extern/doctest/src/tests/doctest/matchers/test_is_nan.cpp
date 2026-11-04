@@ -3,7 +3,8 @@
 #include <random>
 using doctest::IsNaN;
 
-TEST_CASE_TEMPLATE("Stringification", F, float, double, long double) {
+TEST_CASE_TEMPLATE("Stringification", F, float, double, long double)
+{
     constexpr auto inf = std::numeric_limits<F>::infinity();
     constexpr auto qnan = std::numeric_limits<F>::quiet_NaN();
     constexpr auto snan = std::numeric_limits<F>::signaling_NaN();
@@ -26,24 +27,28 @@ TEST_CASE_TEMPLATE("Stringification", F, float, double, long double) {
     // clang-format on
 }
 
-TEST_CASE_TEMPLATE("Matching against floating values", F, float, double, long double) {
+TEST_CASE_TEMPLATE("Matching against floating values", F, float, double, long double)
+{
     const auto flip = true;
 
-    SUBCASE("Finite values") {
+    SUBCASE("Finite values")
+    {
         std::random_device trng; // Cannot use auto as non-movable type
 
         auto csprng = std::mt19937(trng());
         auto min = std::numeric_limits<F>::lowest() / 2;
         auto max = std::numeric_limits<F>::max() / 2;
         auto dist = std::uniform_real_distribution<F>(min, max);
-        for (auto count = 0; count < 100; count++) {
+        for (auto count = 0; count < 100; count++)
+        {
             auto value = dist(csprng);
             CHECK_FALSE(IsNaN<F>(value));
             CHECK(IsNaN<F>(value, flip));
         }
     }
 
-    SUBCASE("Infinite values") {
+    SUBCASE("Infinite values")
+    {
         constexpr auto inf = std::numeric_limits<F>::infinity();
 
         CHECK_FALSE(IsNaN<F>(inf));
@@ -53,7 +58,8 @@ TEST_CASE_TEMPLATE("Matching against floating values", F, float, double, long do
         CHECK(IsNaN<F>(-inf, flip));
     }
 
-    SUBCASE("Quiet NaN value") {
+    SUBCASE("Quiet NaN value")
+    {
         constexpr auto qnan = std::numeric_limits<F>::quiet_NaN();
 
         CHECK(IsNaN<F>(qnan));
@@ -63,7 +69,8 @@ TEST_CASE_TEMPLATE("Matching against floating values", F, float, double, long do
         CHECK_FALSE(IsNaN<F>(-qnan, flip));
     }
 
-    SUBCASE("Signalling NaN value") {
+    SUBCASE("Signalling NaN value")
+    {
         constexpr auto snan = std::numeric_limits<F>::signaling_NaN();
 
         CHECK(IsNaN<F>(snan));

@@ -24,22 +24,24 @@ creating empty vector
 
 using namespace std;
 
-set<pair<const char *, int>> passed_subcases;
+set<pair<const char*, int>> passed_subcases;
 set<int> entered_levels;
 int current_level;
 bool has_skipped;
 
-struct Subcase {
-    Subcase(const char *file, int line)
-        : m_entered(false), m_file(file), m_line(line) {
+struct Subcase
+{
+    Subcase(const char* file, int line) : m_entered(false), m_file(file), m_line(line)
+    {
         m_entered = false;
 
         // if we have already completed it
-        if (passed_subcases.count(pair<const char *, int>(file, line)) != 0)
+        if (passed_subcases.count(pair<const char*, int>(file, line)) != 0)
             return;
 
         // if a Subcase on the same level has already been entered
-        if (entered_levels.count(current_level) != 0) {
+        if (entered_levels.count(current_level) != 0)
+        {
             has_skipped = true;
             return;
         }
@@ -49,21 +51,24 @@ struct Subcase {
         m_entered = true;
     }
 
-    ~Subcase() {
-        if (m_entered) {
+    ~Subcase()
+    {
+        if (m_entered)
+        {
             current_level--;
             // only mark the subcase as passed if no subcases have been skipped
             if (has_skipped == false)
-                passed_subcases.insert(pair<const char *, int>(m_file, m_line));
+                passed_subcases.insert(pair<const char*, int>(m_file, m_line));
         }
     }
 
-    operator bool() const {
+    operator bool() const
+    {
         return m_entered;
     }
 
     bool m_entered;
-    const char *m_file;
+    const char* m_file;
     int m_line;
 };
 
@@ -71,40 +76,47 @@ struct Subcase {
 #define STR_CONCAT(s1, s2) STR_CONCAT_IMPL(s1, s2)
 #define ANON_VAR STR_CONCAT(anon, __LINE__)
 
-#define subcase(title) if (const Subcase &ANON_VAR = Subcase(__FILE__, __LINE__))
+#define subcase(title) if (const Subcase& ANON_VAR = Subcase(__FILE__, __LINE__))
 
-void test() {
+void test()
+{
     cout << endl << "creating empty vector" << endl;
     vector<int> data;
 
-    subcase("size should grow to 2") {
+    subcase("size should grow to 2")
+    {
         cout << "+ 2" << endl;
         data.push_back(42);
         data.push_back(10);
         cout << "== size: " << data.size() << endl;
 
-        subcase("size should grow to 4") {
+        subcase("size should grow to 4")
+        {
             cout << "+ 2" << endl;
             data.push_back(666);
             data.push_back(100);
             cout << "== size: " << data.size() << endl;
         }
-        subcase("size should grow to 3") {
+        subcase("size should grow to 3")
+        {
             cout << "+ 1" << endl;
             data.push_back(666);
             cout << "== size: " << data.size() << endl;
         }
     }
-    subcase("size should grow to 1") {
+    subcase("size should grow to 1")
+    {
         cout << "+ 1" << endl;
         data.push_back(42);
         cout << "== size: " << data.size() << endl;
     }
 }
 
-int main() {
+int main()
+{
     passed_subcases.clear();
-    do {
+    do
+    {
         has_skipped = false;
         current_level = 0;
         entered_levels.clear();

@@ -5,14 +5,17 @@
 #include <generic/base.h>
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-namespace SIMDJSON_IMPLEMENTATION {
-namespace {
-namespace stage1 {
+namespace simdjson
+{
+namespace SIMDJSON_IMPLEMENTATION
+{
+namespace
+{
+namespace stage1
+{
 
 class bit_indexer;
-template<size_t STEP_SIZE>
-struct buf_block_reader;
+template <size_t STEP_SIZE> struct buf_block_reader;
 struct json_block;
 class json_minifier;
 class json_scanner;
@@ -22,7 +25,8 @@ class json_structural_indexer;
 
 } // namespace stage1
 
-namespace utf8_validation {
+namespace utf8_validation
+{
 struct utf8_checker;
 } // namespace utf8_validation
 

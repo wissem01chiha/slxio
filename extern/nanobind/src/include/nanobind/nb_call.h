@@ -10,19 +10,28 @@
 NAMESPACE_BEGIN(NB_NAMESPACE)
 NAMESPACE_BEGIN(detail)
 
-class kwargs_proxy : public handle {
+class kwargs_proxy : public handle
+{
 public:
-    explicit kwargs_proxy(handle h) : handle(h) { }
+    explicit kwargs_proxy(handle h) : handle(h)
+    {
+    }
 };
 
-class args_proxy : public handle {
+class args_proxy : public handle
+{
 public:
-    explicit args_proxy(handle h) : handle(h) { }
-    kwargs_proxy operator*() const { return kwargs_proxy(*this); }
+    explicit args_proxy(handle h) : handle(h)
+    {
+    }
+    kwargs_proxy operator*() const
+    {
+        return kwargs_proxy(*this);
+    }
 };
 
-template <typename Derived>
-args_proxy api<Derived>::operator*() const {
+template <typename Derived> args_proxy api<Derived>::operator*() const
+{
     return args_proxy(derived().ptr());
 }
 
@@ -30,24 +39,24 @@ args_proxy api<Derived>::operator*() const {
    family would merely take a new reference for a 'handle' or an lvalue
    'object', which the caller keeps alive across the call anyway. The call
    path skips that step and passes a borrowed pointer instead. */
-template <typename T> constexpr bool call_borrows() {
+template <typename T> constexpr bool call_borrows()
+{
     using D = std::decay_t<T>;
     return std::is_base_of_v<handle, D> &&
-           (!std::is_base_of_v<object, D> || std::is_lvalue_reference_v<T> ||
-            std::is_const_v<std::remove_reference_t<T>>);
+           (!std::is_base_of_v<object, D> || std::is_lvalue_reference_v<T> || std::is_const_v<std::remove_reference_t<T>>);
 }
 
-template <rv_policy::value policy, typename T>
-NB_INLINE PyObject *call_arg_value(T &&value) {
+template <rv_policy::value policy, typename T> NB_INLINE PyObject* call_arg_value(T&& value)
+{
     if constexpr (call_borrows<T>())
         return value.ptr();
     else
-        return make_caster<T>::from_cpp((forward_t<T>) value, policy, nullptr).ptr();
+        return make_caster<T>::from_cpp((forward_t<T>)value, policy, nullptr).ptr();
 }
 
 /// Fill a 'call_arg' entry of a call with keywords or '*'/'**' expansions
-template <rv_policy::value policy, typename T>
-NB_INLINE void call_arg_init(call_arg &a, T &&value) {
+template <rv_policy::value policy, typename T> NB_INLINE void call_arg_init(call_arg& a, T&& value)
+{
     using D = std::decay_t<T>;
 
     static_assert(!arg_traits<D>::locked,
@@ -56,32 +65,34 @@ NB_INLINE void call_arg_init(call_arg &a, T &&value) {
 
     a.name = nullptr;
 
-    if constexpr (arg_traits<D>::has_default) {
+    if constexpr (arg_traits<D>::has_default)
+    {
         a.kind = call_arg_kind::keyword;
-        a.value = make_caster<object>::from_cpp(((forward_t<T>) value).value,
-                                                policy, nullptr).ptr();
-        if (value.name_) {
+        a.value = make_caster<object>::from_cpp(((forward_t<T>)value).value, policy, nullptr).ptr();
+        if (value.name_)
+        {
             cached_name name(value.name_);
             a.name = name.release(); // the record owns its fields
         }
-    } else {
-        a.kind = std::is_same_v<D, args_proxy>   ? call_arg_kind::args
-               : std::is_same_v<D, kwargs_proxy> ? call_arg_kind::kwargs
-                                                 : call_arg_kind::positional;
-        a.value = make_caster<T>::from_cpp((forward_t<T>) value, policy, nullptr).ptr();
+    }
+    else
+    {
+        a.kind = std::is_same_v<D, args_proxy>     ? call_arg_kind::args
+                 : std::is_same_v<D, kwargs_proxy> ? call_arg_kind::kwargs
+                                                   : call_arg_kind::positional;
+        a.value = make_caster<T>::from_cpp((forward_t<T>)value, policy, nullptr).ptr();
     }
 }
 
 template <typename Derived>
 template <rv_policy::value policy, typename... Args>
-object api<Derived>::operator()(Args &&...args_) const {
-    static constexpr bool method_call =
-        std::is_same_v<Derived, accessor<obj_attr>> ||
-        std::is_same_v<Derived, accessor<obj_attr_own>> ||
-        std::is_same_v<Derived, accessor<str_attr>>;
+object api<Derived>::operator()(Args&&... args_) const
+{
+    static constexpr bool method_call = std::is_same_v<Derived, accessor<obj_attr>> ||
+                                        std::is_same_v<Derived, accessor<obj_attr_own>> ||
+                                        std::is_same_v<Derived, accessor<str_attr>>;
 
-    static_assert(sizeof...(Args) + method_call <= 64,
-                  "nanobind: too many arguments in a call, use '*' expansion");
+    static_assert(sizeof...(Args) + method_call <= 64, "nanobind: too many arguments in a call, use '*' expansion");
 
 #if !defined(NDEBUG)
     if (NB_UNLIKELY(!NB_CALL(gil_check)()))
@@ -89,38 +100,42 @@ object api<Derived>::operator()(Args &&...args_) const {
 #endif
 
     // Callable, or method name (borrowed unless created or fetched by value)
-    PyObject *base;
+    PyObject* base;
     uint32_t flags = 0;
 
-    if constexpr (method_call) {
+    if constexpr (method_call)
+    {
         bool owned;
         base = derived().key(owned);
-        flags = (uint32_t) call_flags::method |
-                (owned ? (uint32_t) call_flags::base_owned : 0);
-    } else {
+        flags = (uint32_t)call_flags::method | (owned ? (uint32_t)call_flags::base_owned : 0);
+    }
+    else
+    {
         base = call_arg_value<policy>(derived());
-        if constexpr (!call_borrows<const Derived &>())
-            flags = (uint32_t) call_flags::base_owned;
+        if constexpr (!call_borrows<const Derived&>())
+            flags = (uint32_t)call_flags::base_owned;
     }
 
-    if constexpr (((arg_traits<std::decay_t<Args>>::has_default ||
-                    std::is_same_v<std::decay_t<Args>, args_proxy> ||
-                    std::is_same_v<std::decay_t<Args>, kwargs_proxy>) || ...)) {
+    if constexpr (((arg_traits<std::decay_t<Args>>::has_default || std::is_same_v<std::decay_t<Args>, args_proxy> ||
+                    std::is_same_v<std::decay_t<Args>, kwargs_proxy>) ||
+                   ...))
+    {
         // Call with keyword arguments and/or '*'/'**' expansions
         call_arg args[sizeof...(Args) + method_call];
         size_t i = 0;
 
         if constexpr (method_call)
             call_arg_init<policy>(args[i++], derived().base());
-        (call_arg_init<policy>(args[i++], (forward_t<Args>) args_), ...);
+        (call_arg_init<policy>(args[i++], (forward_t<Args>)args_), ...);
 
-        return steal(NB_CALL(obj_vectorcall_ex)(NB_CTX, base, args, i,
-                                                NB_ABI_MINOR_TAG | flags));
-    } else {
+        return steal(NB_CALL(obj_vectorcall_ex)(NB_CTX, base, args, i, NB_ABI_MINOR_TAG | flags));
+    }
+    else
+    {
         // Call with only positional arguments. 'args[0]' is the writable slot
         // required by PEP 590, followed by 'self' (for method calls) and the
         // arguments. Bit 'i' of 'owned' marks a new reference in 'args[i + 1]'.
-        PyObject *args[sizeof...(Args) + method_call + 1];
+        PyObject* args[sizeof...(Args) + method_call + 1];
         uint64_t owned = 0;
         size_t i = 1;
 
@@ -128,12 +143,9 @@ object api<Derived>::operator()(Args &&...args_) const {
         if constexpr (method_call)
             args[i++] = derived().base().ptr();
 
-        ((args[i] = call_arg_value<policy>((forward_t<Args>) args_),
-          owned |= (uint64_t) !call_borrows<Args>() << (i - 1), ++i), ...);
+        ((args[i] = call_arg_value<policy>((forward_t<Args>)args_), owned |= (uint64_t)!call_borrows<Args>() << (i - 1), ++i), ...);
 
-        return steal(NB_CALL(obj_vectorcall)(NB_CTX,
-            base, args + 1, (i - 1) | NB_VECTORCALL_ARGUMENTS_OFFSET, owned,
-            flags));
+        return steal(NB_CALL(obj_vectorcall)(NB_CTX, base, args + 1, (i - 1) | NB_VECTORCALL_ARGUMENTS_OFFSET, owned, flags));
     }
 }
 

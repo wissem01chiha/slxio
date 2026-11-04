@@ -5,9 +5,12 @@
 
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
-namespace doctest {
-namespace assertType {
-enum Enum {
+namespace doctest
+{
+namespace assertType
+{
+enum Enum
+{
     // macro traits
 
     is_warn = 1,
@@ -96,8 +99,8 @@ enum Enum {
 };
 } // namespace assertType
 
-DOCTEST_INTERFACE const char *assertString(assertType::Enum at);
-DOCTEST_INTERFACE const char *failureString(assertType::Enum at);
+DOCTEST_INTERFACE const char* assertString(assertType::Enum at);
+DOCTEST_INTERFACE const char* failureString(assertType::Enum at);
 
 } // namespace doctest
 

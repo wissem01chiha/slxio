@@ -3,12 +3,14 @@
 
 #include "simdjson/base.h"
 
-namespace simdjson {
+namespace simdjson
+{
 
 /**
  * @brief A DOM API on top of the simdjson parser.
  */
-namespace dom {
+namespace dom
+{
 
 /** The default batch size for parser.parse_many() and parser.load_many() */
 static constexpr size_t DEFAULT_BATCH_SIZE = 1000000;
@@ -41,10 +43,10 @@ struct stage1_worker;
 
 } // namespace dom
 
-namespace internal {
+namespace internal
+{
 
-template<typename T>
-class string_builder;
+template <typename T> class string_builder;
 class tape_ref;
 
 } // namespace internal

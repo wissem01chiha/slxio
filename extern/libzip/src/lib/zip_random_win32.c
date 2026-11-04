@@ -43,15 +43,19 @@
 
 #include <wincrypt.h>
 
-ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
+ZIP_EXTERN bool zip_secure_random(zip_uint8_t* buffer, zip_uint16_t length)
+{
     HCRYPTPROV hprov;
-    if (!CryptAcquireContext(&hprov, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT | CRYPT_SILENT)) {
+    if (!CryptAcquireContext(&hprov, NULL, NULL, PROV_RSA_AES, CRYPT_VERIFYCONTEXT | CRYPT_SILENT))
+    {
         return false;
     }
-    if (!CryptGenRandom(hprov, length, buffer)) {
+    if (!CryptGenRandom(hprov, length, buffer))
+    {
         return false;
     }
-    if (!CryptReleaseContext(hprov, 0)) {
+    if (!CryptReleaseContext(hprov, 0))
+    {
         return false;
     }
     return true;
@@ -61,16 +65,19 @@ ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
 #ifndef HAVE_RANDOM_UINT32
 #include <stdlib.h>
 
-zip_uint32_t zip_random_uint32(void) {
+zip_uint32_t zip_random_uint32(void)
+{
     static bool seeded = false;
 
     zip_uint32_t value;
 
-    if (zip_secure_random((zip_uint8_t *)&value, sizeof(value))) {
+    if (zip_secure_random((zip_uint8_t*)&value, sizeof(value)))
+    {
         return value;
     }
 
-    if (!seeded) {
+    if (!seeded)
+    {
         srand((unsigned int)time(NULL));
         seeded = true;
     }

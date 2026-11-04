@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
@@ -134,5 +135,7 @@ struct SimulinkDebugging final // NOSONAR
     std::string RCSCObservableMsg;
     std::string ForceCombineOutputUpdateInSim;
 };
+
+ValidationReport Validate(const SimulinkDebugging& config);
 
 }; // namespace slxio

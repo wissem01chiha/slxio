@@ -1,1 +1,4 @@
-["double extra comma",,]
+[
+    "double extra comma",
+    ,
+]

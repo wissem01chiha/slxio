@@ -16,17 +16,22 @@
 constexpr auto doc = simdjson::compile_time::parse_json<R"({"value": 1e400})">();
 #else
 // The largest finite binary64, which must round to exactly DBL_MAX.
-constexpr auto doc =
-    simdjson::compile_time::parse_json<R"({"value": 1.7976931348623157e308})">();
+constexpr auto doc = simdjson::compile_time::parse_json<R"({"value": 1.7976931348623157e308})">();
 #endif
 
-int main() { return doc.value > 0 ? 0 : 1; }
+int main()
+{
+    return doc.value > 0 ? 0 : 1;
+}
 
 #else
 
 // Compile-time JSON parsing needs static reflection; without it there is
 // nothing to check. (CMake only registers this test when reflection is on, so
 // this branch exists only to keep the file compilable on its own.)
-int main() { return 0; }
+int main()
+{
+    return 0;
+}
 
 #endif

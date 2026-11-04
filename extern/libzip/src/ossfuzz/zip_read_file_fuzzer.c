@@ -46,41 +46,46 @@
 **/
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
-    zip_t *za;
-    const char *name = "test.zip";
-    FILE *fp;
-    zip_error_t error;
-    int err = 0;
+    int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size)
+    {
+        zip_t* za;
+        const char* name = "test.zip";
+        FILE* fp;
+        zip_error_t error;
+        int err = 0;
 
-    (void)remove(name);
-    if ((fp = fopen(name, "wb")) == NULL) {
-        fprintf(stderr, "can't create file '%s': %s\n", name, strerror(errno));
-        return 0;
-    }
-    if (fwrite(data, 1, size, fp) != size) {
-        fprintf(stderr, "can't write data to file '%s': %s\n", name, strerror(errno));
-        fclose(fp);
+        (void)remove(name);
+        if ((fp = fopen(name, "wb")) == NULL)
+        {
+            fprintf(stderr, "can't create file '%s': %s\n", name, strerror(errno));
+            return 0;
+        }
+        if (fwrite(data, 1, size, fp) != size)
+        {
+            fprintf(stderr, "can't write data to file '%s': %s\n", name, strerror(errno));
+            fclose(fp);
+            (void)remove(name);
+            return 0;
+        }
+        if (fclose(fp) < 0)
+        {
+            fprintf(stderr, "can't close file '%s': %s\n", name, strerror(errno));
+            (void)remove(name);
+            return 0;
+        }
+
+        za = zip_open(name, 0, &err);
+        zip_error_init_with_code(&error, err);
+
+        fuzzer_read(za, &error, NULL);
+
         (void)remove(name);
         return 0;
     }
-    if (fclose(fp) < 0) {
-        fprintf(stderr, "can't close file '%s': %s\n", name, strerror(errno));
-        (void)remove(name);
-        return 0;
-    }
-
-    za = zip_open(name, 0, &err);
-    zip_error_init_with_code(&error, err);
-
-    fuzzer_read(za, &error, NULL);
-
-    (void)remove(name);
-    return 0;
-}
 
 #ifdef __cplusplus
 }

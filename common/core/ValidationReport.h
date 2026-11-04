@@ -17,12 +17,9 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
 
 namespace slxio
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 
 enum class ValidationSeverity
 {
@@ -38,7 +35,7 @@ struct ValidationIssue
     std::string message;
 };
 
-class SLXIO_APIEXPORT ValidationReport final
+class ValidationReport final
 {
 public:
     void AddError(std::string path, std::string message);
@@ -53,5 +50,4 @@ private:
     std::vector<ValidationIssue> m_issues;
 };
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio

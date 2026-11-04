@@ -129,7 +129,7 @@ advanced_dependent_option(
   SLXIO_ENABLE_SANITIZERS ON)
 
 # Option to enable/disable IO module support globally
-advanced_option(SLXIO_ENABLE_IO "Build io modules" OFF)
+advanced_option(SLXIO_ENABLE_IO "Build I/O modules" ON)
 
 # Option to enable *.sldd file support
 advanced_dependent_option(SLXIO_ENABLE_SLDD "Simulink data dictionary support"

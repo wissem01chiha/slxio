@@ -11,7 +11,8 @@ DOCTEST_GCC_SUPPRESS_WARNING("-Wmissing-declarations")
 #define TEST_LABEL "[default] "
 #endif
 
-inline int bar() {
+inline int bar()
+{
 #ifdef RETURN_42
     return 42;
 #else
@@ -22,7 +23,8 @@ inline int bar() {
 #ifdef DOCTEST_LIBRARY_INCLUDED
 
 #ifdef RETURN_42
-TEST_CASE(TEST_LABEL "bartest") {
+TEST_CASE(TEST_LABEL "bartest")
+{
     INFO("Running " TEST_LABEL "bartest");
     MESSAGE("");
     CHECK_EQ(42, bar());
@@ -30,14 +32,16 @@ TEST_CASE(TEST_LABEL "bartest") {
 #endif
 
 #ifndef RETURN_42
-TEST_CASE(TEST_LABEL "bartest") {
+TEST_CASE(TEST_LABEL "bartest")
+{
     INFO("Running " TEST_LABEL "bartest");
     MESSAGE("");
     CHECK_EQ(11, bar());
 }
 #endif
 
-TEST_CASE(TEST_LABEL "commontest") {
+TEST_CASE(TEST_LABEL "commontest")
+{
     INFO("Running " TEST_LABEL "commontest");
     MESSAGE("");
 }

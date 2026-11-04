@@ -11,15 +11,17 @@
 
 std::string odr_other_describe();
 
-int main() {
+int main()
+{
 #if SIMDJSON_SUPPORTS_CONCEPTS
-  using fields = simdjson::ondemand::key_selector<"name", "city">;
-  std::string here = fields::describe();
-  if (here.empty() || here != odr_other_describe()) {
-    std::cerr << "key_selector::describe() mismatch across translation units" << std::endl;
-    return EXIT_FAILURE;
-  }
+    using fields = simdjson::ondemand::key_selector<"name", "city">;
+    std::string here = fields::describe();
+    if (here.empty() || here != odr_other_describe())
+    {
+        std::cerr << "key_selector::describe() mismatch across translation units" << std::endl;
+        return EXIT_FAILURE;
+    }
 #endif
-  std::cout << "ODR test passed" << std::endl;
-  return EXIT_SUCCESS;
+    std::cout << "ODR test passed" << std::endl;
+    return EXIT_SUCCESS;
 }

@@ -5,23 +5,28 @@
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
+namespace doctest
+{
 
-#define DOCTEST_DEFINE_DECORATOR(name, type, def)                                                                      \
-    struct name {                                                                                                      \
-        type data;                                                                                                     \
-        name(type in = def) noexcept                                                                                   \
-            : data(in) {}                                                                                              \
-        void fill(detail::TestCase &state) const noexcept {                                                            \
-            state.DOCTEST_CAT(m_, name) = data;                                                                        \
-        }                                                                                                              \
-        void fill(detail::TestSuite &state) const noexcept {                                                           \
-            state.DOCTEST_CAT(m_, name) = data;                                                                        \
-        }                                                                                                              \
+#define DOCTEST_DEFINE_DECORATOR(name, type, def)                                                                                  \
+    struct name                                                                                                                    \
+    {                                                                                                                              \
+        type data;                                                                                                                 \
+        name(type in = def) noexcept : data(in)                                                                                    \
+        {                                                                                                                          \
+        }                                                                                                                          \
+        void fill(detail::TestCase& state) const noexcept                                                                          \
+        {                                                                                                                          \
+            state.DOCTEST_CAT(m_, name) = data;                                                                                    \
+        }                                                                                                                          \
+        void fill(detail::TestSuite& state) const noexcept                                                                         \
+        {                                                                                                                          \
+            state.DOCTEST_CAT(m_, name) = data;                                                                                    \
+        }                                                                                                                          \
     }
 
-DOCTEST_DEFINE_DECORATOR(test_suite, const char *, "");
-DOCTEST_DEFINE_DECORATOR(description, const char *, "");
+DOCTEST_DEFINE_DECORATOR(test_suite, const char*, "");
+DOCTEST_DEFINE_DECORATOR(description, const char*, "");
 DOCTEST_DEFINE_DECORATOR(skip, bool, true);
 DOCTEST_DEFINE_DECORATOR(no_breaks, bool, true);
 DOCTEST_DEFINE_DECORATOR(no_output, bool, true);

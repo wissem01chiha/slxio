@@ -8,7 +8,8 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_BEGIN
 #include <cmath>
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 
-TEST_CASE("normal macros") {
+TEST_CASE("normal macros")
+{
     const int a = 5;
     const int b = 5;
 
@@ -24,13 +25,15 @@ TEST_CASE("normal macros") {
     CHECK(doctest::Approx(0.502) == 0.501);
 }
 
-TEST_CASE("expressions should be evaluated only once") {
+TEST_CASE("expressions should be evaluated only once")
+{
     int a = 5; // NOLINT(misc-const-correctness)
     REQUIRE(++a == 6);
     REQUIRE_EQ(++a, 7);
 }
 
-TEST_CASE("exceptions-related macros") {
+TEST_CASE("exceptions-related macros")
+{
     CHECK_THROWS(throw_if(true, 0));
     CHECK_THROWS(throw_if(false, 0)); // fails
     CHECK_THROWS_AS(throw_if(true, 0), int);
@@ -48,10 +51,11 @@ TEST_CASE("exceptions-related macros") {
     CHECK_NOTHROW(throw_if(false, 0));
 }
 
-TEST_CASE("exceptions-related macros for std::exception") {
+TEST_CASE("exceptions-related macros for std::exception")
+{
     CHECK_THROWS(throw_if(false, 0));
     CHECK_THROWS_AS(throw_if(false, std::runtime_error("whops!")), std::exception);
-    CHECK_THROWS_AS(throw_if(true, std::runtime_error("whops!")), const std::exception &);
+    CHECK_THROWS_AS(throw_if(true, std::runtime_error("whops!")), const std::exception&);
     CHECK_THROWS_AS(throw_if(true, std::runtime_error("whops!")), int);
 
     CHECK_THROWS_WITH(throw_if(false, ""), "whops!");
@@ -63,7 +67,8 @@ TEST_CASE("exceptions-related macros for std::exception") {
 // == TESTING (ALMOST) ALL ASSERTS THAT THEY ACT ACCORDINGLY - not interesting examples...
 // =================================================================================================
 
-TEST_CASE("WARN level of asserts don't fail the test case") {
+TEST_CASE("WARN level of asserts don't fail the test case")
+{
     WARN(0);
     WARN_FALSE(1);
     WARN_THROWS(throw_if(false, 0));
@@ -84,7 +89,8 @@ TEST_CASE("WARN level of asserts don't fail the test case") {
     WARN_UNARY_FALSE(1);
 }
 
-TEST_CASE("CHECK level of asserts fail the test case but don't abort it") {
+TEST_CASE("CHECK level of asserts fail the test case but don't abort it")
+{
     CHECK(0);
     CHECK_FALSE(1);
     CHECK_THROWS(throw_if(false, 0));
@@ -105,60 +111,74 @@ TEST_CASE("CHECK level of asserts fail the test case but don't abort it") {
     MESSAGE("reached!");
 }
 
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 1") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 1")
+{
     REQUIRE(0);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 2") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 2")
+{
     REQUIRE_FALSE(1);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 3") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 3")
+{
     REQUIRE_THROWS(throw_if(false, 0));
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 4") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 4")
+{
     REQUIRE_THROWS_AS(throw_if(false, 0), bool);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 5") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 5")
+{
     REQUIRE_THROWS_AS(throw_if(true, 0), bool);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 6") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 6")
+{
     REQUIRE_THROWS_WITH(throw_if(false, ""), "whops!");
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 7") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 7")
+{
     REQUIRE_THROWS_WITH(throw_if(true, ""), "whops!");
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 8") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 8")
+{
     REQUIRE_THROWS_WITH_AS(throw_if(false, ""), "whops!", bool);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 9") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 9")
+{
     REQUIRE_THROWS_WITH_AS(throw_if(true, ""), "whops!", bool);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 10") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 10")
+{
     REQUIRE_NOTHROW(throw_if(true, 0));
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 11") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 11")
+{
     REQUIRE_EQ(1, 0);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 12") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 12")
+{
     REQUIRE_UNARY(0);
     MESSAGE("should not be reached!");
 }
-TEST_CASE("REQUIRE level of asserts fail and abort the test case - 13") {
+TEST_CASE("REQUIRE level of asserts fail and abort the test case - 13")
+{
     REQUIRE_UNARY_FALSE(1);
     MESSAGE("should not be reached!");
 }
 
-TEST_CASE("all binary assertions") {
+TEST_CASE("all binary assertions")
+{
     WARN_EQ(1, 1);
     CHECK_EQ(1, 1);
     REQUIRE_EQ(1, 1);
@@ -185,7 +205,8 @@ TEST_CASE("all binary assertions") {
     REQUIRE_UNARY_FALSE(0);
 }
 
-static void someAssertsInFunction() {
+static void someAssertsInFunction()
+{
     const int a = 5;
     const int b = 5;
     CHECK(a == b);
@@ -201,60 +222,77 @@ static void someAssertsInFunction() {
     CHECK_UNARY_FALSE(a != b);
 }
 
-TEST_CASE("some asserts used in a function called by a test case") {
+TEST_CASE("some asserts used in a function called by a test case")
+{
     someAssertsInFunction();
 }
 
 // TODO: Remove NOLINT (if (false && (__VA_ARGS__));)?
-DOCTEST_INLINE_NOINLINE void comp(int a, int b) { // NOLINT(misc-unused-parameters)
-    if (CHECK(a == b)) {
+DOCTEST_INLINE_NOINLINE void comp(int a, int b)
+{ // NOLINT(misc-unused-parameters)
+    if (CHECK(a == b))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_FALSE(a != b)) {
+    if (CHECK_FALSE(a != b))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_EQ(a, b)) {
+    if (CHECK_EQ(a, b))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_UNARY(a == b)) {
+    if (CHECK_UNARY(a == b))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_UNARY_FALSE(a != b)) {
+    if (CHECK_UNARY_FALSE(a != b))
+    {
         MESSAGE(":D");
     }
 }
 
 DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4702)
-TEST_CASE("check return values") {
+TEST_CASE("check return values")
+{
     comp(0, 0);
 
-    if (CHECK_THROWS(throw_if(true, true))) {
+    if (CHECK_THROWS(throw_if(true, true)))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_THROWS_AS(throw_if(true, 2), int)) {
+    if (CHECK_THROWS_AS(throw_if(true, 2), int))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_NOTHROW(throw_if(false, 2))) {
+    if (CHECK_NOTHROW(throw_if(false, 2)))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_THROWS_WITH(throw_if(true, 2), "2")) {
+    if (CHECK_THROWS_WITH(throw_if(true, 2), "2"))
+    {
         MESSAGE(":D");
     }
 }
 
-TEST_CASE("check return values no print") {
+TEST_CASE("check return values no print")
+{
     comp(4, 2);
 
-    if (CHECK_THROWS(throw_if(false, false))) {
+    if (CHECK_THROWS(throw_if(false, false)))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_THROWS_AS(throw_if(true, 2), doctest::Approx)) {
+    if (CHECK_THROWS_AS(throw_if(true, 2), doctest::Approx))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_NOTHROW(throw_if(true, 2))) {
+    if (CHECK_NOTHROW(throw_if(true, 2)))
+    {
         MESSAGE(":D");
     }
-    if (CHECK_THROWS_WITH(throw_if(true, 2), "1")) {
+    if (CHECK_THROWS_WITH(throw_if(true, 2), "1"))
+    {
         MESSAGE(":D");
     }
 }

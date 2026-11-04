@@ -12,7 +12,7 @@ TEST_CASE("custom_callback_logger", "[custom_callback_logger]") {
     std::vector<std::string> lines;
     spdlog::pattern_formatter formatter;
     auto callback_logger =
-        std::make_shared<spdlog::sinks::callback_sink_st>([&](const spdlog::details::log_msg &msg) {
+        std::make_shared<spdlog::sinks::callback_sink_st>([&](const spdlog::details::log_msg& msg) {
             spdlog::memory_buf_t formatted;
             formatter.format(msg, formatted);
             auto eol_len = strlen(spdlog::details::os::default_eol);

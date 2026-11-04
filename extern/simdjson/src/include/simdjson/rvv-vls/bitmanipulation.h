@@ -5,9 +5,12 @@
 #include "simdjson/rvv-vls/base.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-namespace rvv_vls {
-namespace {
+namespace simdjson
+{
+namespace rvv_vls
+{
+namespace
+{
 
 // We sometimes call trailing_zero on inputs that are zero,
 // but the algorithms do not end up using the returned value.
@@ -17,24 +20,27 @@ SIMDJSON_NO_SANITIZE_UNDEFINED
 // initialized.
 // See issue https://github.com/simdjson/simdjson/issues/1965
 SIMDJSON_NO_SANITIZE_MEMORY
-simdjson_inline int trailing_zeroes(uint64_t input_num) {
-  return __builtin_ctzll(input_num);
+simdjson_inline int trailing_zeroes(uint64_t input_num)
+{
+    return __builtin_ctzll(input_num);
 }
 
 /* result might be undefined when input_num is zero */
-simdjson_inline uint64_t clear_lowest_bit(uint64_t input_num) {
-  return input_num & (input_num-1);
+simdjson_inline uint64_t clear_lowest_bit(uint64_t input_num)
+{
+    return input_num & (input_num - 1);
 }
 
 /* result might be undefined when input_num is zero */
-simdjson_inline int leading_zeroes(uint64_t input_num) {
-  return __builtin_clzll(input_num);
+simdjson_inline int leading_zeroes(uint64_t input_num)
+{
+    return __builtin_clzll(input_num);
 }
 
-simdjson_inline long long int count_ones(uint64_t input_num) {
-  return __builtin_popcountll(input_num);
+simdjson_inline long long int count_ones(uint64_t input_num)
+{
+    return __builtin_popcountll(input_num);
 }
-
 
 } // unnamed namespace
 } // namespace rvv_vls

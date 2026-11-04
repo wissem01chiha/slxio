@@ -1,7 +1,6 @@
-%==============================================================================
-% Copyright 2025-2026 Wissem Chiha
-%
-% Licensed under the Apache License, Version 2.0 (the "License");
+%= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = % Copyright 2025 - 2026 Wissem Chiha % % Licensed under the Apache License,
+    Version 2.0(the "License");
 % you may not use this file except in compliance with the License.
 % You may obtain a copy of the License at
 %
@@ -48,77 +47,56 @@ includeHeaders = { ...
     'PlatformTypes.h', ...
     'IBlockParameters.h', ...
     'IBlockProperties.h'};
-% By default, all generated classes inherit from these interfaces.
-% Note:
-% Each interface listed here must have its corresponding header included
-% in the includeHeaders variable above.
-publicBaseInterfaces = { ...
-    'IBlockParameters', ...
-    'IBlockProperties'};
+% By default,
+    all generated classes inherit from these interfaces.%
+        Note : % Each interface listed here must have its corresponding header included %
+               in the includeHeaders variable above.publicBaseInterfaces = {... 'IBlockParameters', ... 'IBlockProperties'};
 
-%% Generate C++ headers from Simulink library blocks
+% %
+    Generate C++ headers from Simulink library blocks
 
-load_system('simulink');
+        load_system('simulink');
 outRoot = fullfile(pwd, 'Library');
-if ~exist(outRoot, 'dir')
-    mkdir(outRoot);
-end
-blocks = find_system( ...
-    'simulink', ...
-    'FollowLinks', 'on', ...
-    'LookUnderMasks', 'all', ...
-    'Type', 'Block');
+if
+    ~exist(outRoot, 'dir') mkdir(outRoot);
+end blocks = find_system(... 'simulink', ... 'FollowLinks', 'on', ... 'LookUnderMasks', 'all', ... 'Type', 'Block');
 
-for k = 1:numel(blocks)
-    blockPath = blocks{k};
-    try
-        parts = strsplit(blockPath, '/');
-        if numel(parts) < 3
-            continue;
-        end
-        category = sanitizeFolderName(parts{2});
-        blockName = get_param(blockPath, 'Name');
-        className = makeCppIdentifier(blockName);
-        categoryDir = fullfile(outRoot, category);
-        if ~exist(categoryDir, 'dir')
-            mkdir(categoryDir);
-        end
-        outputFile = fullfile(categoryDir, [className '.h']);
-        if exist(outputFile, 'file')
-            continue;
-        end
-        params = get_param(blockPath, 'DialogParameters');
-        if isempty(params)
-            paramNames = {};
-        else
-            paramNames = fieldnames(params);
-        end
-        generateHeaderFile( ...
-            outputFile, ...
-            className, ...
-            paramNames, ...
-            blockPath, ...
-            includeHeaders, ...
-            publicBaseInterfaces);
-        sourceFile = fullfile(categoryDir, [className '.cxx']);
-        generateSourceFile(sourceFile, className,paramNames);
-        fprintf('Generated %s\n', outputFile);
-    catch ME
-        fprintf('Failed: %s\n', blockPath);
-        fprintf('Reason: %s\n', ME.message);
-    end
-end
+for
+    k = 1 : numel(blocks) blockPath = blocks{k};
+try parts = strsplit(blockPath, '/');
+if numel (parts)
+    < 3 continue;
+end category = sanitizeFolderName(parts{2});
+blockName = get_param(blockPath, 'Name');
+className = makeCppIdentifier(blockName);
+categoryDir = fullfile(outRoot, category);
+if
+    ~exist(categoryDir, 'dir') mkdir(categoryDir);
+end outputFile = fullfile(categoryDir, [className '.h']);
+if exist (outputFile, 'file')
+    continue;
+end params = get_param(blockPath, 'DialogParameters');
+if isempty (params)
+    paramNames = {};
+else
+    paramNames = fieldnames(params);
+end generateHeaderFile(... outputFile, ... className, ... paramNames, ... blockPath, ... includeHeaders, ... publicBaseInterfaces);
+sourceFile = fullfile(categoryDir, [className '.cxx']);
+generateSourceFile(sourceFile, className, paramNames);
+fprintf('Generated %s\n', outputFile);
+catch ME fprintf('Failed: %s\n', blockPath);
+fprintf('Reason: %s\n', ME.message);
+end end
 
 generateCMakeListsInput();
 
 fprintf('Generation %d Source Files\n', numel(blocks));
 fprintf('Generation complete.\n');
 
-%==============================================================================
-function generateHeaderFile(fileName, className, paramNames, ~, ...
-    includeHeaders, publicBaseInterfaces)
+%= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function generateHeaderFile(fileName, className, paramNames, ~, ... includeHeaders, publicBaseInterfaces)
 
-guard = upper(regexprep(className, '[^A-Za-z0-9]', '_'));
+        guard = upper(regexprep(className, '[^A-Za-z0-9]', '_'));
 fid = fopen(fileName, 'w');
 
 fprintf(fid, '// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha\n');
@@ -126,213 +104,157 @@ fprintf(fid, '// SPDX-License-Identifier: Apache-2.0\n\n');
 fprintf(fid, '#ifndef %s_H\n', guard);
 fprintf(fid, '#define %s_H\n\n', guard);
 
-for i = 1:numel(includeHeaders)
-    fprintf(fid, '#include "%s"\n', includeHeaders{i});
-end
-fprintf(fid, '\n');
+for
+    i = 1 : numel(includeHeaders) fprintf(fid, '#include "%s"\n', includeHeaders{i});
+end fprintf(fid, '\n');
 
 fprintf(fid, 'namespace slxio {\n');
 fprintf(fid, 'SLXIO_ABI_NAMESPACE_BEGIN\n\n');
 
 inheritance = '';
 isPublicIncluded = false;
-if ~isempty(publicBaseInterfaces)
-    inheritance = ' : public ';
-    for i = 1:numel(publicBaseInterfaces)
-        inheritance = [inheritance publicBaseInterfaces{i}];
-        if i < numel(publicBaseInterfaces)
-            if ~isPublicIncluded
-                inheritance = [inheritance ', public '];
-                isPublicIncluded =true;
-            else
-                inheritance = [inheritance ', '];
-            end
-        end
-    end
-end
+if
+    ~isempty(publicBaseInterfaces) inheritance = ' : public ';
+    for
+        i = 1 : numel(publicBaseInterfaces) inheritance = [inheritance publicBaseInterfaces{i}];
+    if i
+        < numel(publicBaseInterfaces) if ~isPublicIncluded inheritance = [inheritance ', public '];
+    isPublicIncluded = true;
+    else inheritance = [inheritance ', '];
+    end end end end
 
-fprintf(fid, ...
-    'class SLXIO_APIEXPORT %s%s\n', ...
-    className, ...
-    inheritance);
+    fprintf(fid, ... 'class SLXIO_APIEXPORT %s%s\n', ... className, ... inheritance);
 
-fprintf(fid, '{\n');
+    fprintf(fid, '{\n');
 
-fprintf(fid, 'public:\n');
-fprintf(fid, '  /** Default Constructor */\n');
-fprintf(fid, '  %s();\n\n', className);
+    fprintf(fid, 'public:\n');
+    fprintf(fid, '  /** Default Constructor */\n');
+    fprintf(fid, '  %s();\n\n', className);
 
-fprintf(fid, '  /** Default Destructor */\n');
-fprintf(fid, '  ~%s();\n\n', className);
+    fprintf(fid, '  /** Default Destructor */\n');
+    fprintf(fid, '  ~%s();\n\n', className);
 
 % Gettes and Setters
 for i = 1:numel(paramNames)
     paramName = makeCppIdentifier(paramNames{i});
-    fprintf(fid, ...
-        '  const std::string& Get%s() const;\n', ...
-        paramName);
-    fprintf(fid, ...
-        '  void Set%s(const std::string& value);\n\n', ...
-        paramName);
+fprintf(fid, ... '  const std::string& Get%s() const;\n', ... paramName);
+fprintf(fid, ... '  void Set%s(const std::string& value);\n\n', ... paramName);
 end
 
-fprintf(fid, 'private:\n\n');
+    fprintf(fid, 'private:\n\n');
 
-for i = 1:numel(paramNames)
-    paramName = makeCppIdentifier(paramNames{i});
-    fprintf(fid, '  std::string m_%s;\n\n', paramName);
+for
+    i = 1 : numel(paramNames) paramName = makeCppIdentifier(paramNames{i});
+fprintf(fid, '  std::string m_%s;\n\n', paramName);
 end
 
-fprintf(fid, '};\n\n');
+    fprintf(fid, '};\n\n');
 fprintf(fid, 'SLXIO_ABI_NAMESPACE_END\n');
 fprintf(fid, '} // namespace slxio\n\n');
 fprintf(fid, '#endif // %s_H\n', guard);
 fclose(fid);
 end
 
-%==============================================================================
-function out = sanitizeFolderName(name)
-out = regexprep(name, '[^A-Za-z0-9]', '');
-if isempty(out)
+    %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function out = sanitizeFolderName(name) out = regexprep(name, '[^A-Za-z0-9]', '');
+if isempty (out)
     out = 'Unknown';
-end
-end
+end end
 
-%==============================================================================
-function out = makeCppIdentifier(name)
+    %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function out = makeCppIdentifier(name)
 
-name = strtrim(name);
+        name = strtrim(name);
 name = regexprep(name, '[^A-Za-z0-9]+', ' ');
 tokens = strsplit(name);
 out = '';
-for i = 1:numel(tokens)
-    t = tokens{i};
-    if isempty(t)
-        continue;
-    end
-    out = [out upper(t(1)) lower(t(2:end))]; %#ok<AGROW>
-end
-if isempty(out)
-    out = 'UnnamedBlock';
-end
-if isstrprop(out(1), 'digit')
-    out = ['D' out];
-end
-end
+for
+    i = 1 : numel(tokens) t = tokens{i};
+if isempty (t)
+    continue;
+end out = [out upper(t(1)) lower(t(2 : end))];
+% #ok<AGROW> end if isempty (out) out = 'UnnamedBlock';
+end if isstrprop (out(1), 'digit') out = ['D' out];
+end end
 
-%==============================================================================
-function generateSourceFile(fileName, className, paramNames)
+    %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function generateSourceFile(fileName, className, paramNames)
 
-fid = fopen(fileName, 'w');
+        fid = fopen(fileName, 'w');
 fprintf(fid, '#include "%s.h"\n\n', className);
 fprintf(fid, 'namespace slxio {\n');
 fprintf(fid, 'SLXIO_ABI_NAMESPACE_BEGIN\n\n');
-fprintf(fid, '%s::%s() {}\n\n', ...
-    className, className);
-fprintf(fid, '%s::~%s() {}\n\n', ...
-    className, className);
+fprintf(fid, '%s::%s() {}\n\n', ... className, className);
+fprintf(fid, '%s::~%s() {}\n\n', ... className, className);
 
 % Getters and Setters impl
 for i = 1:numel(paramNames)
     paramName = makeCppIdentifier(paramNames{i});
-    fprintf(fid, ...
-        'const std::string& %s::Get%s() const\n', ...
-        className, ...
-        paramName);
-    fprintf(fid, '{\n');
-    fprintf(fid, '    return m_%s;\n', paramName);
-    fprintf(fid, '}\n\n');
-    fprintf(fid, ...
-        'void %s::Set%s(const std::string& value)\n', ...
-        className, ...
-        paramName);
-    fprintf(fid, '{\n');
-    fprintf(fid, '    m_%s = value;\n', paramName);
-    fprintf(fid, '}\n\n');
+fprintf(fid, ... 'const std::string& %s::Get%s() const\n', ... className, ... paramName);
+fprintf(fid, '{\n');
+fprintf(fid, '    return m_%s;\n', paramName);
+fprintf(fid, '}\n\n');
+fprintf(fid, ... 'void %s::Set%s(const std::string& value)\n', ... className, ... paramName);
+fprintf(fid, '{\n');
+fprintf(fid, '    m_%s = value;\n', paramName);
+fprintf(fid, '}\n\n');
 end
 
-fprintf(fid, 'SLXIO_ABI_NAMESPACE_END\n');
+    fprintf(fid, 'SLXIO_ABI_NAMESPACE_END\n');
 fprintf(fid, '}; // namespace slxio\n');
 fclose(fid);
-end
-%==============================================================================
-function generateCMakeListsInput()
+end %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function generateCMakeListsInput()
 
-libraryRoot = fullfile(pwd, 'Library');
+        libraryRoot = fullfile(pwd, 'Library');
 dirs = dir(libraryRoot);
 dirs = dirs([dirs.isdir]);
-dirs = dirs(~ismember({dirs.name}, {'.','..'}));
-rootFile = fullfile(libraryRoot,'CMakeLists.txt');
-fidRoot = fopen(rootFile,'w');
-fprintf(fidRoot,'set(LIB_SRCS)\n');
-fprintf(fidRoot,'set(LIB_HDRS)\n\n');
-for k = 1:numel(dirs)
+dirs = dirs(~ismember({dirs.name}, {'.', '..'}));
+rootFile = fullfile(libraryRoot, 'CMakeLists.txt');
+fidRoot = fopen(rootFile, 'w');
+fprintf(fidRoot, 'set(LIB_SRCS)\n');
+fprintf(fidRoot, 'set(LIB_HDRS)\n\n');
+for
+    k = 1 : numel(dirs)
 
-    folderName = dirs(k).name;
+                folderName = dirs(k).name;
 
-    generateSubFolderCMake( ...
-        fullfile(libraryRoot,folderName), ...
-        folderName);
+generateSubFolderCMake(... fullfile(libraryRoot, folderName), ... folderName);
 
-    fprintf(fidRoot, ...
-        'add_subdirectory(%s)\n', ...
-        folderName);
-end
-fprintf(fidRoot,'\n');
-for k = 1:numel(dirs)
-    folderName = dirs(k).name;
-    fprintf(fidRoot, ...
-        'list(APPEND LIB_SRCS ${%s_SRCS})\n', ...
-        folderName);
-end
-fprintf(fidRoot,'\n');
-for k = 1:numel(dirs)
-    folderName = dirs(k).name;
-    fprintf(fidRoot, ...
-        'list(APPEND LIB_HDRS ${%s_HDRS})\n', ...
-        folderName);
-end
-fclose(fidRoot);
-end
-%==============================================================================
-function relPath = relativePath(fileInfo, rootDir)
-fullName = fullfile(fileInfo.folder, fileInfo.name);
+fprintf(fidRoot, ... 'add_subdirectory(%s)\n', ... folderName);
+end fprintf(fidRoot, '\n');
+for
+    k = 1 : numel(dirs) folderName = dirs(k).name;
+fprintf(fidRoot, ... 'list(APPEND LIB_SRCS ${%s_SRCS})\n', ... folderName);
+end fprintf(fidRoot, '\n');
+for
+    k = 1 : numel(dirs) folderName = dirs(k).name;
+fprintf(fidRoot, ... 'list(APPEND LIB_HDRS ${%s_HDRS})\n', ... folderName);
+end fclose(fidRoot);
+end %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function relPath = relativePath(fileInfo, rootDir) fullName = fullfile(fileInfo.folder, fileInfo.name);
 relPath = erase(fullName, [rootDir filesep]);
 relPath = strrep(relPath, filesep, '/');
-end
-%==============================================================================
-function generateSubFolderCMake(folderPath, folderName)
+end %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == ==
+    = function generateSubFolderCMake(folderPath, folderName)
 
-cmakeFile = fullfile(folderPath, 'CMakeLists.txt');
+        cmakeFile = fullfile(folderPath, 'CMakeLists.txt');
 hdrFiles = dir(fullfile(folderPath, '*.h'));
 srcFiles = dir(fullfile(folderPath, '*.cxx'));
 fid = fopen(cmakeFile, 'w');
 fprintf(fid, 'set(%s_SRCS\n', folderName);
-for k = 1:numel(srcFiles)
-    fprintf(fid, ...
-        '    ${CMAKE_CURRENT_SOURCE_DIR}/%s\n', ...
-        srcFiles(k).name);
-end
-fprintf(fid, ')\n\n');
+for
+    k = 1 : numel(srcFiles) fprintf(fid, ... '    ${CMAKE_CURRENT_SOURCE_DIR}/%s\n', ... srcFiles(k).name);
+end fprintf(fid, ')\n\n');
 fprintf(fid, 'set(%s_HDRS\n', folderName);
 
-for k = 1:numel(hdrFiles)
-    fprintf(fid, ...
-        '    ${CMAKE_CURRENT_SOURCE_DIR}/%s\n', ...
-        hdrFiles(k).name);
-end
-fprintf(fid, ')\n\n');
+for
+    k = 1 : numel(hdrFiles) fprintf(fid, ... '    ${CMAKE_CURRENT_SOURCE_DIR}/%s\n', ... hdrFiles(k).name);
+end fprintf(fid, ')\n\n');
 fprintf(fid, '\n');
 
-fprintf(fid, ...
-    'set(%s_HDRS ${%s_HDRS} PARENT_SCOPE)\n', ...
-    folderName, ...
-    folderName);
-fprintf(fid, ...
-    'set(%s_SRCS ${%s_SRCS} PARENT_SCOPE)\n', ...
-    folderName, ...
-    folderName);
+fprintf(fid, ... 'set(%s_HDRS ${%s_HDRS} PARENT_SCOPE)\n', ... folderName, ... folderName);
+fprintf(fid, ... 'set(%s_SRCS ${%s_SRCS} PARENT_SCOPE)\n', ... folderName, ... folderName);
 
 fclose(fid);
-end
-%==============================================================================
+end %= == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == == =

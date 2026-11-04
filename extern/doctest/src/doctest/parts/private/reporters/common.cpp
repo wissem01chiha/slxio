@@ -5,9 +5,11 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
+namespace doctest
+{
 
-void fulltext_log_assert_to_stream(std::ostream &s, const AssertData &rb) {
+void fulltext_log_assert_to_stream(std::ostream& s, const AssertData& rb)
+{
     // clang-format off
     if ((rb.m_at & (assertType::is_throws_as | assertType::is_throws_with)) == 0)
         s << Color::Cyan << assertString(rb.m_at) << "( " << rb.m_expr << " ) " << Color::None;

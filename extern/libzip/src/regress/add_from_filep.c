@@ -31,27 +31,28 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
 
 #include "zip.h"
 
-static const char *prg;
+static const char* prg;
 
-int main(int argc, char *argv[]) {
-    const char *archive;
-    const char *file;
-    const char *name;
-    zip_t *za;
-    zip_source_t *zs;
+int main(int argc, char* argv[])
+{
+    const char* archive;
+    const char* file;
+    const char* name;
+    zip_t* za;
+    zip_source_t* zs;
     int err;
-    FILE *fp;
+    FILE* fp;
 
     prg = argv[0];
 
-    if (argc != 3) {
+    if (argc != 3)
+    {
         fprintf(stderr, "usage: %s archive file\n", prg);
         return 1;
     }
@@ -59,7 +60,8 @@ int main(int argc, char *argv[]) {
     archive = argv[1];
     file = argv[2];
 
-    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL) {
+    if ((za = zip_open(archive, ZIP_CREATE, &err)) == NULL)
+    {
         zip_error_t error;
         zip_error_init_with_code(&error, err);
         fprintf(stderr, "%s: can't open zip archive '%s': %s\n", prg, archive, zip_error_strerror(&error));
@@ -67,27 +69,32 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    if ((fp = fopen(file, "rb")) == NULL) {
+    if ((fp = fopen(file, "rb")) == NULL)
+    {
         fprintf(stderr, "%s: can't open input file '%s': %s\n", prg, file, strerror(errno));
         return 1;
     }
 
-    if ((zs = zip_source_filep(za, fp, 0, -1)) == NULL) {
+    if ((zs = zip_source_filep(za, fp, 0, -1)) == NULL)
+    {
         fprintf(stderr, "%s: error creating file source for '%s': %s\n", prg, file, zip_strerror(za));
         return 1;
     }
 
-    if ((name = strrchr(file, '/')) == NULL) {
+    if ((name = strrchr(file, '/')) == NULL)
+    {
         name = file;
     }
 
-    if (zip_file_add(za, name, zs, 0) == -1) {
+    if (zip_file_add(za, name, zs, 0) == -1)
+    {
         zip_source_free(zs);
         fprintf(stderr, "%s: can't add file '%s': %s\n", prg, file, zip_strerror(za));
         return 1;
     }
 
-    if (zip_close(za) == -1) {
+    if (zip_close(za) == -1)
+    {
         fprintf(stderr, "%s: can't close zip archive '%s': %s\n", prg, archive, zip_strerror(za));
         return 1;
     }

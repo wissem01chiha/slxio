@@ -33,8 +33,10 @@
 
 #include "zipint.h"
 
-zip_int64_t zip_source_pass_to_lower_layer(zip_source_t *src, void *data, zip_uint64_t length, zip_source_cmd_t command) {
-    switch (command) {
+zip_int64_t zip_source_pass_to_lower_layer(zip_source_t* src, void* data, zip_uint64_t length, zip_source_cmd_t command)
+{
+    switch (command)
+    {
     case ZIP_SOURCE_OPEN:
     case ZIP_SOURCE_CLOSE:
     case ZIP_SOURCE_FREE:
@@ -65,11 +67,12 @@ zip_int64_t zip_source_pass_to_lower_layer(zip_source_t *src, void *data, zip_ui
         return -1;
 
     case ZIP_SOURCE_SUPPORTS:
-        if (length < sizeof(zip_int64_t)) {
+        if (length < sizeof(zip_int64_t))
+        {
             zip_error_set(&src->error, ZIP_ER_INTERNAL, 0);
             return -1;
         }
-        return *(zip_int64_t *)data;
+        return *(zip_int64_t*)data;
 
     default:
         zip_error_set(&src->error, ZIP_ER_OPNOTSUPP, 0);

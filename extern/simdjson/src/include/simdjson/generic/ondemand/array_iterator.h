@@ -8,10 +8,12 @@
 #include "simdjson/generic/ondemand/value_iterator.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-
-namespace simdjson {
-namespace SIMDJSON_IMPLEMENTATION {
-namespace ondemand {
+namespace simdjson
+{
+namespace SIMDJSON_IMPLEMENTATION
+{
+namespace ondemand
+{
 
 /**
  * A forward-only JSON array.
@@ -21,109 +23,115 @@ namespace ondemand {
  * - * must be called at most once per element.
  * - ++ must be called exactly once in between each * (*, ++, *, ++, * ...)
  */
-class array_iterator {
+class array_iterator
+{
 public:
-  using iterator_category = std::input_iterator_tag;
-  using value_type = simdjson_result<value>;
-  using difference_type = std::ptrdiff_t;
-  using pointer = void;
-  using reference = value_type;
+    using iterator_category = std::input_iterator_tag;
+    using value_type = simdjson_result<value>;
+    using difference_type = std::ptrdiff_t;
+    using pointer = void;
+    using reference = value_type;
 
-  /** Create a new, invalid array iterator. */
-  simdjson_inline array_iterator() noexcept {}
+    /** Create a new, invalid array iterator. */
+    simdjson_inline array_iterator() noexcept
+    {
+    }
 
 #if SIMDJSON_DEVELOPMENT_CHECKS
-  simdjson_inline ~array_iterator() noexcept;
+    simdjson_inline ~array_iterator() noexcept;
 
-  simdjson_inline array_iterator(array_iterator&&) noexcept;
-  simdjson_inline array_iterator& operator=(array_iterator&&) noexcept;
-  simdjson_inline array_iterator(const array_iterator&) noexcept;
-  simdjson_inline array_iterator& operator=(const array_iterator&) noexcept;
+    simdjson_inline array_iterator(array_iterator&&) noexcept;
+    simdjson_inline array_iterator& operator=(array_iterator&&) noexcept;
+    simdjson_inline array_iterator(const array_iterator&) noexcept;
+    simdjson_inline array_iterator& operator=(const array_iterator&) noexcept;
 #endif
 
-  //
-  // Iterator interface
-  //
+    //
+    // Iterator interface
+    //
 
-  /**
-   * Get the current element.
-   *
-   * Part of the std::iterator interface.
-   */
-  simdjson_inline simdjson_result<value>
-  operator*() noexcept; // MUST ONLY BE CALLED ONCE PER ITERATION.
-  /**
-   * Check if we are at the end of the JSON.
-   *
-   * Part of the std::iterator interface.
-   *
-   * @return true if there are no more elements in the JSON array.
-   */
-  simdjson_inline bool operator==(const array_iterator &) const noexcept;
-  /**
-   * Check if there are more elements in the JSON array.
-   *
-   * Part of the std::iterator interface.
-   *
-   * @return true if there are more elements in the JSON array.
-   */
-  simdjson_inline bool operator!=(const array_iterator &) const noexcept;
-  /**
-   * Move to the next element.
-   *
-   * Part of the std::iterator interface.
-   */
-  simdjson_inline array_iterator &operator++() noexcept;
+    /**
+     * Get the current element.
+     *
+     * Part of the std::iterator interface.
+     */
+    simdjson_inline simdjson_result<value> operator*() noexcept; // MUST ONLY BE CALLED ONCE PER ITERATION.
+    /**
+     * Check if we are at the end of the JSON.
+     *
+     * Part of the std::iterator interface.
+     *
+     * @return true if there are no more elements in the JSON array.
+     */
+    simdjson_inline bool operator==(const array_iterator&) const noexcept;
+    /**
+     * Check if there are more elements in the JSON array.
+     *
+     * Part of the std::iterator interface.
+     *
+     * @return true if there are more elements in the JSON array.
+     */
+    simdjson_inline bool operator!=(const array_iterator&) const noexcept;
+    /**
+     * Move to the next element.
+     *
+     * Part of the std::iterator interface.
+     */
+    simdjson_inline array_iterator& operator++() noexcept;
 
-  /**
-   * Check if the array is at the end.
-   */
-  simdjson_warn_unused simdjson_inline bool at_end() const noexcept;
+    /**
+     * Check if the array is at the end.
+     */
+    simdjson_warn_unused simdjson_inline bool at_end() const noexcept;
 
 private:
 #if SIMDJSON_DEVELOPMENT_CHECKS
-   bool has_been_referenced{false};
-   array* parent{nullptr};
+    bool has_been_referenced{false};
+    array* parent{nullptr};
 
-   simdjson_inline array_iterator(const value_iterator &_iter, array* _parent) noexcept;
+    simdjson_inline array_iterator(const value_iterator& _iter, array* _parent) noexcept;
 #endif
-  value_iterator iter{};
+    value_iterator iter{};
 
-  simdjson_inline array_iterator(const value_iterator &iter) noexcept;
+    simdjson_inline array_iterator(const value_iterator& iter) noexcept;
 
-  friend class array;
-  friend class value;
-  friend struct simdjson_result<array_iterator>;
+    friend class array;
+    friend class value;
+    friend struct simdjson_result<array_iterator>;
 };
 
 } // namespace ondemand
 } // namespace SIMDJSON_IMPLEMENTATION
 } // namespace simdjson
 
-namespace simdjson {
+namespace simdjson
+{
 
-template<>
-struct simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator> : public SIMDJSON_IMPLEMENTATION::implementation_simdjson_result_base<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator> {
-  using iterator_category = std::input_iterator_tag;
-  using value_type = simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::value>;
-  using difference_type = std::ptrdiff_t;
-  using pointer = void;
-  using reference = value_type;
+template <>
+struct simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator>
+    : public SIMDJSON_IMPLEMENTATION::implementation_simdjson_result_base<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator>
+{
+    using iterator_category = std::input_iterator_tag;
+    using value_type = simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::value>;
+    using difference_type = std::ptrdiff_t;
+    using pointer = void;
+    using reference = value_type;
 
-  simdjson_inline simdjson_result(SIMDJSON_IMPLEMENTATION::ondemand::array_iterator &&value) noexcept; ///< @private
-  simdjson_inline simdjson_result(error_code error) noexcept; ///< @private
-  simdjson_inline simdjson_result() noexcept = default;
+    simdjson_inline simdjson_result(SIMDJSON_IMPLEMENTATION::ondemand::array_iterator&& value) noexcept; ///< @private
+    simdjson_inline simdjson_result(error_code error) noexcept;                                          ///< @private
+    simdjson_inline simdjson_result() noexcept = default;
 
-  //
-  // Iterator interface
-  //
+    //
+    // Iterator interface
+    //
 
-  simdjson_inline simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::value> operator*() noexcept; // MUST ONLY BE CALLED ONCE PER ITERATION.
-  simdjson_inline bool operator==(const simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator> &) const noexcept;
-  simdjson_inline bool operator!=(const simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator> &) const noexcept;
-  simdjson_inline simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator> &operator++() noexcept;
+    simdjson_inline simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::value>
+    operator*() noexcept; // MUST ONLY BE CALLED ONCE PER ITERATION.
+    simdjson_inline bool operator==(const simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator>&) const noexcept;
+    simdjson_inline bool operator!=(const simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator>&) const noexcept;
+    simdjson_inline simdjson_result<SIMDJSON_IMPLEMENTATION::ondemand::array_iterator>& operator++() noexcept;
 
-  simdjson_warn_unused simdjson_inline bool at_end() const noexcept;
+    simdjson_warn_unused simdjson_inline bool at_end() const noexcept;
 };
 
 } // namespace simdjson

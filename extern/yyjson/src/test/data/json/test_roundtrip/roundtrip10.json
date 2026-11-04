@@ -1,1 +1,4 @@
-{"a":null,"foo":"bar"}
+{
+    "a": null,
+    "foo": "bar"
+}

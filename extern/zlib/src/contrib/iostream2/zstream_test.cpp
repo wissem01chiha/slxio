@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <iomanip.h>
 
-void main() {
+void main()
+{
     char h[256] = "Hello";
     char* g = "Goodbye";
     ozstream out("temp.gz");
@@ -21,5 +22,6 @@ void main() {
     out << z << endl << y << endl << x << endl;
     out << 1.1234567890123456789 << endl;
 
-    delete[] x; delete[] y;
+    delete[] x;
+    delete[] y;
 }

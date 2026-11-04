@@ -4,20 +4,25 @@
 
 DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
-namespace doctest {
+namespace doctest
+{
 
 DOCTEST_DEFINE_INTERFACE(IContextScope)
 
 #ifndef DOCTEST_CONFIG_DISABLE
-namespace detail {
-DOCTEST_THREAD_LOCAL std::vector<IContextScope *> g_infoContexts; // for logging with INFO()
+namespace detail
+{
+DOCTEST_THREAD_LOCAL std::vector<IContextScope*> g_infoContexts; // for logging with INFO()
 
-ContextScopeBase::ContextScopeBase() {
+ContextScopeBase::ContextScopeBase()
+{
     g_infoContexts.push_back(this);
 }
 
-ContextScopeBase::ContextScopeBase(ContextScopeBase &&other) noexcept {
-    if (other.need_to_destroy) {
+ContextScopeBase::ContextScopeBase(ContextScopeBase&& other) noexcept
+{
+    if (other.need_to_destroy)
+    {
         other.destroy();
     }
     other.need_to_destroy = false;
@@ -30,12 +35,15 @@ DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wdeprecated-declarations")
 // destroy cannot be inlined into the destructor because that would mean calling stringify after
 // ContextScope has been destroyed (base class destructors run after derived class destructors).
 // Instead, ContextScope calls this method directly from its destructor.
-void ContextScopeBase::destroy() {
-#if defined(__cpp_lib_uncaught_exceptions) && __cpp_lib_uncaught_exceptions >= 201411L &&                              \
+void ContextScopeBase::destroy()
+{
+#if defined(__cpp_lib_uncaught_exceptions) && __cpp_lib_uncaught_exceptions >= 201411L &&                                          \
     (!defined(__MAC_OS_X_VERSION_MIN_REQUIRED) || __MAC_OS_X_VERSION_MIN_REQUIRED >= 101200)
-    if (std::uncaught_exceptions() > 0) {
+    if (std::uncaught_exceptions() > 0)
+    {
 #else
-    if (std::uncaught_exception()) {
+    if (std::uncaught_exception())
+    {
 #endif
         std::ostringstream s;
         this->stringify(&s);

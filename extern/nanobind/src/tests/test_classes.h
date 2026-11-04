@@ -2,8 +2,9 @@
 
 #include <memory>
 
-class NeverDestruct {
-  public:
+class NeverDestruct
+{
+public:
     static NeverDestruct& make();
 
     NeverDestruct(const NeverDestruct&) = delete;
@@ -12,7 +13,7 @@ class NeverDestruct {
     int var() const;
     void set_var(int i);
 
-  private:
+private:
     NeverDestruct();
 
     // incomplete type error if nanobind tries to instantiate the destructor

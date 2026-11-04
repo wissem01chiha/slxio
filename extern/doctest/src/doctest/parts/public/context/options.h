@@ -5,16 +5,19 @@
 
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 struct DOCTEST_INTERFACE TestCase;
 } // namespace detail
 
-struct ContextOptions {
-    std::ostream *cout = nullptr; // stdout stream
+struct ContextOptions
+{
+    std::ostream* cout = nullptr; // stdout stream
     String binary_name;           // the test binary name
 
-    const detail::TestCase *currentTest = nullptr;
+    const detail::TestCase* currentTest = nullptr;
 
     // == parameters from the command line
     String out;         // output filename
@@ -58,7 +61,7 @@ struct ContextOptions {
     bool list_reporters;   // lists all registered reporters
 };
 
-DOCTEST_INTERFACE const ContextOptions *getContextOptions();
+DOCTEST_INTERFACE const ContextOptions* getContextOptions();
 
 } // namespace doctest
 

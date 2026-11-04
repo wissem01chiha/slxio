@@ -3,6 +3,7 @@
 
 #include <nanobind/nanobind.h>
 
-NB_MODULE(test_abi_missing_ext, m) {
+NB_MODULE(test_abi_missing_ext, m)
+{
     m.attr("loaded") = true;
 }

@@ -42,7 +42,7 @@ public:
     }
 
 protected:
-    void sink_it_(const details::log_msg &msg) override {
+    void sink_it_(const details::log_msg& msg) override {
         memory_buf_t formatted;
         base_sink<Mutex>::formatter_->format(msg, formatted);
         // save the line without the eol

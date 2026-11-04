@@ -4,19 +4,25 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 #ifdef DOCTEST_IS_DEBUGGER_ACTIVE
-bool isDebuggerActive() {
+bool isDebuggerActive()
+{
     return DOCTEST_IS_DEBUGGER_ACTIVE();
 }
 #else // DOCTEST_IS_DEBUGGER_ACTIVE
 #ifdef DOCTEST_PLATFORM_LINUX
-class ErrnoGuard {
+class ErrnoGuard
+{
 public:
-    ErrnoGuard()
-        : m_oldErrno(errno) {}
-    ~ErrnoGuard() {
+    ErrnoGuard() : m_oldErrno(errno)
+    {
+    }
+    ~ErrnoGuard()
+    {
         errno = m_oldErrno;
     }
 
@@ -25,12 +31,15 @@ private:
 };
 // See the comments in Catch2 for the reasoning behind this implementation:
 // https://github.com/catchorg/Catch2/blob/v2.13.1/include/internal/catch_debugger.cpp#L79-L102
-bool isDebuggerActive() {
+bool isDebuggerActive()
+{
     const ErrnoGuard guard;
     std::ifstream in("/proc/self/status");
-    for (std::string line; std::getline(in, line);) {
+    for (std::string line; std::getline(in, line);)
+    {
         static const int PREFIX_LEN = 11;
-        if (line.compare(0, PREFIX_LEN, "TracerPid:\t") == 0) {
+        if (line.compare(0, PREFIX_LEN, "TracerPid:\t") == 0)
+        {
             return line.length() > PREFIX_LEN && line[PREFIX_LEN] != '0';
         }
     }
@@ -41,7 +50,8 @@ bool isDebuggerActive() {
 // https://developer.apple.com/library/archive/qa/qa1361/_index.html
 // Returns true if the current process is being debugged (either
 // running under the debugger or has a debugger attached post facto).
-bool isDebuggerActive() {
+bool isDebuggerActive()
+{
     int mib[4];
     kinfo_proc info;
     size_t size;
@@ -56,7 +66,8 @@ bool isDebuggerActive() {
     mib[3] = getpid();
     // Call sysctl.
     size = sizeof(info);
-    if (sysctl(mib, DOCTEST_COUNTOF(mib), &info, &size, nullptr, 0) != 0) {
+    if (sysctl(mib, DOCTEST_COUNTOF(mib), &info, &size, nullptr, 0) != 0)
+    {
         std::cerr << "\nCall to sysctl failed - unable to determine if debugger is active **\n";
         return false;
     }
@@ -64,11 +75,13 @@ bool isDebuggerActive() {
     return ((info.kp_proc.p_flag & P_TRACED) != 0);
 }
 #elif DOCTEST_MSVC || defined(__MINGW32__) || defined(__MINGW64__)
-bool isDebuggerActive() {
+bool isDebuggerActive()
+{
     return ::IsDebuggerPresent() != 0;
 }
 #else
-bool isDebuggerActive() {
+bool isDebuggerActive()
+{
     return false;
 }
 #endif // Platform

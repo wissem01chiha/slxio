@@ -7,7 +7,7 @@
 using spdlog::details::os::create_dir;
 using spdlog::details::os::path_exists;
 
-bool try_create_dir(const spdlog::filename_t &path, const spdlog::filename_t &normalized_path) {
+bool try_create_dir(const spdlog::filename_t& path, const spdlog::filename_t& normalized_path) {
     auto rv = create_dir(path);
     REQUIRE(rv == true);
     return path_exists(normalized_path);
@@ -90,7 +90,7 @@ TEST_CASE("dir_name", "[create_dir]") {
 #include <windows.h>
 #include <fileapi.h>
 
-std::string get_full_path(const std::string &relative_folder_path) {
+std::string get_full_path(const std::string& relative_folder_path) {
     char full_path[MAX_PATH];
 
     DWORD result = ::GetFullPathNameA(relative_folder_path.c_str(), MAX_PATH, full_path, nullptr);
@@ -98,7 +98,7 @@ std::string get_full_path(const std::string &relative_folder_path) {
     return result > 0 && result < MAX_PATH ? std::string(full_path) : std::string();
 }
 
-std::wstring get_full_path(const std::wstring &relative_folder_path) {
+std::wstring get_full_path(const std::wstring& relative_folder_path) {
     wchar_t full_path[MAX_PATH];
     DWORD result = ::GetFullPathNameW(relative_folder_path.c_str(), MAX_PATH, full_path, nullptr);
     return result > 0 && result < MAX_PATH ? std::wstring(full_path) : std::wstring();

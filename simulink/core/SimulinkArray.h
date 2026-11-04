@@ -45,7 +45,9 @@ public:
 
     std::string GetName() const;
     void SetName(const std::string& name);
+    void SetType(const std::string& type);
     std::string GetDimension() const;
+    void SetDimension(const std::string& dimension);
 
     std::string ToString() const override;
 

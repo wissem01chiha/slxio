@@ -2,7 +2,8 @@
 #include <set>
 #include <string>
 
-namespace platform {
+namespace platform
+{
 
 #if defined(DOCTEST_PLATFORM_MAC)
 constexpr auto mac = true;
@@ -37,7 +38,8 @@ constexpr auto linux_ = false;
 
 } // namespace platform
 
-TEST_CASE("Exactly one platform is detected") {
+TEST_CASE("Exactly one platform is detected")
+{
     CAPTURE(platform::mac);
     CAPTURE(platform::iphone);
     CAPTURE(platform::windows);
@@ -55,7 +57,8 @@ TEST_CASE("Exactly one platform is detected") {
     CHECK(detected.count(true) == 1);
 }
 
-TEST_CASE("Detected platform matches what build-system informed us about") {
+TEST_CASE("Detected platform matches what build-system informed us about")
+{
 #if !defined(CMAKE_SYSTEM_NAME)
 #error Build system must define CMAKE_SYSTEM_NAME to run this test!
     const auto cmake_system_name = std::string("<unknown>");

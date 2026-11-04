@@ -32,11 +32,12 @@
 
 #undef SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-  /**
-   * @copydoc simdjson::SIMDJSON_BUILTIN_IMPLEMENTATION::ondemand
-   */
-  namespace ondemand = SIMDJSON_BUILTIN_IMPLEMENTATION::ondemand;
+namespace simdjson
+{
+/**
+ * @copydoc simdjson::SIMDJSON_BUILTIN_IMPLEMENTATION::ondemand
+ */
+namespace ondemand = SIMDJSON_BUILTIN_IMPLEMENTATION::ondemand;
 } // namespace simdjson
 
 #endif // SIMDJSON_BUILTIN_ONDEMAND_H

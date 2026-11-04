@@ -31,7 +31,6 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 /* LCOV_EXCL_START */
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
@@ -39,10 +38,10 @@
 #include <stdio.h>
 #include <string.h>
 
-
-ZIP_EXTERN int zip_error_to_str(char *buf, zip_uint64_t len, int ze, int se) {
+ZIP_EXTERN int zip_error_to_str(char* buf, zip_uint64_t len, int ze, int se)
+{
     zip_error_t error;
-    const char *error_string;
+    const char* error_string;
     int ret;
 
     zip_error_init(&error);

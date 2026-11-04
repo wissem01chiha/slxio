@@ -7,10 +7,12 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-std::vector<const IExceptionTranslator *> &getExceptionTranslators() noexcept;
+std::vector<const IExceptionTranslator*>& getExceptionTranslators() noexcept;
 String translateActiveException() noexcept;
 
 } // namespace detail

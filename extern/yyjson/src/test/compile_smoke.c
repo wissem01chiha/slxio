@@ -7,31 +7,38 @@ static unsigned char smoke_buf[SMOKE_BUF_SIZE];
 static yyjson_alc smoke_alc;
 
 #if YYJSON_FREESTANDING
-#define yy_assert(expr) do { \
-    if (!(expr)) return 1; \
-} while (0)
+#define yy_assert(expr)                                                                                                            \
+    do                                                                                                                             \
+    {                                                                                                                              \
+        if (!(expr))                                                                                                               \
+            return 1;                                                                                                              \
+    } while (0)
 #else
-#define yy_assert(expr) do { \
-    if (!(expr)) { \
-        fprintf(stderr, "Assertion failed: %s (%s:%d)\n", \
-                #expr, __FILE__, __LINE__); \
-        abort(); \
-    } \
-} while (0)
+#define yy_assert(expr)                                                                                                            \
+    do                                                                                                                             \
+    {                                                                                                                              \
+        if (!(expr))                                                                                                               \
+        {                                                                                                                          \
+            fprintf(stderr, "Assertion failed: %s (%s:%d)\n", #expr, __FILE__, __LINE__);                                          \
+            abort();                                                                                                               \
+        }                                                                                                                          \
+    } while (0)
 #endif
 
-static int str_eq(const char *a, const char *b) {
+static int str_eq(const char* a, const char* b)
+{
     size_t la = strlen(a), lb = strlen(b);
     return la == lb && memcmp(a, b, la) == 0;
 }
 
-static int test_read(void) {
-    const char *json = "{\"str\":\"Harry\",\"fp\":0.5,\"arr\":[42,-42,null]}";
-    yyjson_doc *doc;
+static int test_read(void)
+{
+    const char* json = "{\"str\":\"Harry\",\"fp\":0.5,\"arr\":[42,-42,null]}";
+    yyjson_doc* doc;
     yyjson_val *root, *arr;
-    char *out;
+    char* out;
 
-    doc = yyjson_read_opts((char *)(void *)json, strlen(json), 0, &smoke_alc, NULL);
+    doc = yyjson_read_opts((char*)(void*)json, strlen(json), 0, &smoke_alc, NULL);
     yy_assert(doc != NULL);
 
     root = yyjson_doc_get_root(doc);
@@ -55,11 +62,12 @@ static int test_read(void) {
     return 0;
 }
 
-static int test_write(void) {
-    const char *json = "{\"str\":\"Harry\",\"fp\":0.5,\"arr\":[42,-42,null]}";
-    yyjson_mut_doc *doc;
+static int test_write(void)
+{
+    const char* json = "{\"str\":\"Harry\",\"fp\":0.5,\"arr\":[42,-42,null]}";
+    yyjson_mut_doc* doc;
     yyjson_mut_val *root, *arr;
-    char *out;
+    char* out;
 
     doc = yyjson_mut_doc_new(&smoke_alc);
     yy_assert(doc != NULL);
@@ -84,14 +92,17 @@ static int test_write(void) {
     return 0;
 }
 
-int main(void) {
+int main(void)
+{
 #if !YYJSON_FREESTANDING && !YYJSON_DISABLE_FILE
     printf("yyjson %s smoke test...\n", YYJSON_VERSION_STRING);
 #endif
 
     yyjson_alc_pool_init(&smoke_alc, smoke_buf, sizeof(smoke_buf));
-    if (test_read()) return 1;
-    if (test_write()) return 1;
+    if (test_read())
+        return 1;
+    if (test_write())
+        return 1;
 
 #if !YYJSON_FREESTANDING && !YYJSON_DISABLE_FILE
     printf("All smoke tests passed\n");

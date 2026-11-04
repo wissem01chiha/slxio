@@ -7,52 +7,64 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
+namespace doctest
+{
 
 using detail::g_cs;
 
-Whitespace::Whitespace(int nr)
-    : nrSpaces(nr) {}
+Whitespace::Whitespace(int nr) : nrSpaces(nr)
+{
+}
 
-std::ostream &operator<<(std::ostream &out, const Whitespace &ws) {
+std::ostream& operator<<(std::ostream& out, const Whitespace& ws)
+{
     if (ws.nrSpaces != 0)
         out << std::setw(ws.nrSpaces) << ' ';
     return out;
 }
 
-ConsoleReporter::ConsoleReporter(const ContextOptions &co)
-    : s(*co.cout), opt(co) {}
+ConsoleReporter::ConsoleReporter(const ContextOptions& co) : s(*co.cout), opt(co)
+{
+}
 
-ConsoleReporter::ConsoleReporter(const ContextOptions &co, std::ostream &ostr)
-    : s(ostr), opt(co) {}
+ConsoleReporter::ConsoleReporter(const ContextOptions& co, std::ostream& ostr) : s(ostr), opt(co)
+{
+}
 
-void ConsoleReporter::separator_to_stream() {
+void ConsoleReporter::separator_to_stream()
+{
     s << Color::Yellow
       << "==============================================================================="
          "\n";
 }
 
-const char *ConsoleReporter::getSuccessOrFailString(bool success, assertType::Enum at, const char *success_str) {
+const char* ConsoleReporter::getSuccessOrFailString(bool success, assertType::Enum at, const char* success_str)
+{
     if (success)
         return success_str;
     return failureString(at);
 }
 
-Color::Enum ConsoleReporter::getSuccessOrFailColor(bool success, assertType::Enum at) {
+Color::Enum ConsoleReporter::getSuccessOrFailColor(bool success, assertType::Enum at)
+{
     return success ? Color::BrightGreen : (at & assertType::is_warn) ? Color::Yellow : Color::Red;
 }
 
-void ConsoleReporter::successOrFailColoredStringToStream(bool success, assertType::Enum at, const char *success_str) {
+void ConsoleReporter::successOrFailColoredStringToStream(bool success, assertType::Enum at, const char* success_str)
+{
     s << getSuccessOrFailColor(success, at) << getSuccessOrFailString(success, at, success_str) << ": ";
 }
 
-void ConsoleReporter::log_contexts() {
+void ConsoleReporter::log_contexts()
+{
     const int num_contexts = get_num_active_contexts();
-    if (num_contexts) {
+    if (num_contexts)
+    {
         auto contexts = get_active_contexts();
 
         s << Color::None << "  logged: ";
-        for (int i = 0; i < num_contexts; ++i) {
+        for (int i = 0; i < num_contexts; ++i)
+        {
             s << (i == 0 ? "" : "          ");
             contexts[i]->stringify(&s);
             s << "\n";
@@ -63,13 +75,15 @@ void ConsoleReporter::log_contexts() {
 }
 
 // this was requested to be made virtual so users could override it
-void ConsoleReporter::file_line_to_stream(const char *file, int line, const char *tail) {
+void ConsoleReporter::file_line_to_stream(const char* file, int line, const char* tail)
+{
     s << Color::LightGrey << skipPathFromFilename(file) << (opt.gnu_file_line ? ":" : "(")
       << (opt.no_line_numbers ? 0 : line) // 0 or the real num depending on the option
       << (opt.gnu_file_line ? ":" : "):") << tail;
 }
 
-void ConsoleReporter::logTestStart() {
+void ConsoleReporter::logTestStart()
+{
     if (hasLoggedCurrentTestStart)
         return;
 
@@ -83,14 +97,17 @@ void ConsoleReporter::logTestStart() {
         s << Color::Yellow << "TEST CASE:  ";
     s << Color::None << tc->m_name << "\n";
 
-    for (size_t i = 0; i < currentSubcaseLevel; ++i) {
+    for (size_t i = 0; i < currentSubcaseLevel; ++i)
+    {
         if (subcasesStack[i].m_name[0] != '\0')
             s << "  " << subcasesStack[i].m_name << "\n";
     }
 
-    if (currentSubcaseLevel != subcasesStack.size()) {
+    if (currentSubcaseLevel != subcasesStack.size())
+    {
         s << Color::Yellow << "\nDEEPEST SUBCASE STACK REACHED (DIFFERENT FROM THE CURRENT ONE):\n" << Color::None;
-        for (size_t i = 0; i < subcasesStack.size(); ++i) {
+        for (size_t i = 0; i < subcasesStack.size(); ++i)
+        {
             if (subcasesStack[i].m_name[0] != '\0')
                 s << "  " << subcasesStack[i].m_name << "\n";
         }
@@ -101,20 +118,23 @@ void ConsoleReporter::logTestStart() {
     hasLoggedCurrentTestStart = true;
 }
 
-void ConsoleReporter::printVersion() {
+void ConsoleReporter::printVersion()
+{
     if (opt.no_version == false)
         s << Color::Cyan << "[doctest] " << Color::None << "doctest version is \"" << DOCTEST_VERSION_STR << "\"\n";
 }
 
-void ConsoleReporter::printIntro() {
-    if (opt.no_intro == false) {
+void ConsoleReporter::printIntro()
+{
+    if (opt.no_intro == false)
+    {
         printVersion();
-        s << Color::Cyan << "[doctest] " << Color::None
-          << "run with \"--" DOCTEST_OPTIONS_PREFIX_DISPLAY "help\" for options\n";
+        s << Color::Cyan << "[doctest] " << Color::None << "run with \"--" DOCTEST_OPTIONS_PREFIX_DISPLAY "help\" for options\n";
     }
 }
 
-void ConsoleReporter::printHelp() {
+void ConsoleReporter::printHelp()
+{
     const int sizePrefixDisplay = static_cast<int>(strlen(DOCTEST_OPTIONS_PREFIX_DISPLAY));
     printVersion();
     // clang-format off
@@ -233,12 +253,15 @@ void ConsoleReporter::printHelp() {
     s << "for more information visit the project documentation\n\n";
 }
 
-void ConsoleReporter::printRegisteredReporters() {
+void ConsoleReporter::printRegisteredReporters()
+{
     printVersion();
-    auto printReporters = [this](const detail::reporterMap &reporters, const char *type) {
-        if (!reporters.empty()) {
+    auto printReporters = [this](const detail::reporterMap& reporters, const char* type)
+    {
+        if (!reporters.empty())
+        {
             s << Color::Cyan << "[doctest] " << Color::None << "listing all registered " << type << "\n";
-            for (auto &curr: reporters)
+            for (auto& curr : reporters)
                 s << "priority: " << std::setw(5) << curr.first.first << " name: " << curr.first.second << "\n";
         }
     };
@@ -246,15 +269,24 @@ void ConsoleReporter::printRegisteredReporters() {
     printReporters(detail::getReporters(), "reporters");
 }
 
-void ConsoleReporter::report_query(const QueryData &in) {
-    if (opt.version) {
+void ConsoleReporter::report_query(const QueryData& in)
+{
+    if (opt.version)
+    {
         printVersion();
-    } else if (opt.help) {
+    }
+    else if (opt.help)
+    {
         printHelp();
-    } else if (opt.list_reporters) {
+    }
+    else if (opt.list_reporters)
+    {
         printRegisteredReporters();
-    } else if (opt.count || opt.list_test_cases) {
-        if (opt.list_test_cases) {
+    }
+    else if (opt.count || opt.list_test_cases)
+    {
+        if (opt.list_test_cases)
+        {
             s << Color::Cyan << "[doctest] " << Color::None << "listing all test case names\n";
             separator_to_stream();
         }
@@ -266,8 +298,9 @@ void ConsoleReporter::report_query(const QueryData &in) {
 
         s << Color::Cyan << "[doctest] " << Color::None
           << "unskipped test cases passing the current filters: " << g_cs->numTestCasesPassingFilters << "\n";
-
-    } else if (opt.list_test_suites) {
+    }
+    else if (opt.list_test_suites)
+    {
         s << Color::Cyan << "[doctest] " << Color::None << "listing all test suites\n";
         separator_to_stream();
 
@@ -279,44 +312,40 @@ void ConsoleReporter::report_query(const QueryData &in) {
         s << Color::Cyan << "[doctest] " << Color::None
           << "unskipped test cases passing the current filters: " << g_cs->numTestCasesPassingFilters << "\n";
         s << Color::Cyan << "[doctest] " << Color::None
-          << "test suites with unskipped test cases passing the current filters: " << g_cs->numTestSuitesPassingFilters
-          << "\n";
+          << "test suites with unskipped test cases passing the current filters: " << g_cs->numTestSuitesPassingFilters << "\n";
     }
 }
 
-void ConsoleReporter::test_run_start() {
+void ConsoleReporter::test_run_start()
+{
     if (!opt.minimal)
         printIntro();
 }
 
-void ConsoleReporter::test_run_end(const TestRunStats &p) {
+void ConsoleReporter::test_run_end(const TestRunStats& p)
+{
     if (opt.minimal && p.numTestCasesFailed == 0)
         return;
 
     separator_to_stream();
     s << std::dec;
 
-    auto totwidth = static_cast<int>(std::ceil(
-        log10(static_cast<double>(std::max(p.numTestCasesPassingFilters, static_cast<unsigned>(p.numAsserts))) + 1)
-    ));
-    auto passwidth = static_cast<int>(std::ceil(log10(
-        static_cast<double>(std::max(
-            p.numTestCasesPassingFilters - p.numTestCasesFailed,
-            static_cast<unsigned>(p.numAsserts - p.numAssertsFailed)
-        )) +
-        1
-    )));
-    auto failwidth = static_cast<int>(std::ceil(
-        log10(static_cast<double>(std::max(p.numTestCasesFailed, static_cast<unsigned>(p.numAssertsFailed))) + 1)
-    ));
+    auto totwidth = static_cast<int>(
+        std::ceil(log10(static_cast<double>(std::max(p.numTestCasesPassingFilters, static_cast<unsigned>(p.numAsserts))) + 1)));
+    auto passwidth =
+        static_cast<int>(std::ceil(log10(static_cast<double>(std::max(p.numTestCasesPassingFilters - p.numTestCasesFailed,
+                                                                      static_cast<unsigned>(p.numAsserts - p.numAssertsFailed))) +
+                                         1)));
+    auto failwidth = static_cast<int>(
+        std::ceil(log10(static_cast<double>(std::max(p.numTestCasesFailed, static_cast<unsigned>(p.numAssertsFailed))) + 1)));
     const bool anythingFailed = p.numTestCasesFailed > 0 || p.numAssertsFailed > 0;
-    s << Color::Cyan << "[doctest] " << Color::None << "test cases: " << std::setw(totwidth)
-      << p.numTestCasesPassingFilters << " | "
-      << ((p.numTestCasesPassingFilters == 0 || anythingFailed) ? Color::None : Color::Green) << std::setw(passwidth)
+    s << Color::Cyan << "[doctest] " << Color::None << "test cases: " << std::setw(totwidth) << p.numTestCasesPassingFilters
+      << " | " << ((p.numTestCasesPassingFilters == 0 || anythingFailed) ? Color::None : Color::Green) << std::setw(passwidth)
       << p.numTestCasesPassingFilters - p.numTestCasesFailed << " passed" << Color::None << " | "
-      << (p.numTestCasesFailed > 0 ? Color::Red : Color::None) << std::setw(failwidth) << p.numTestCasesFailed
-      << " failed" << Color::None << " |";
-    if (opt.no_skipped_summary == false) {
+      << (p.numTestCasesFailed > 0 ? Color::Red : Color::None) << std::setw(failwidth) << p.numTestCasesFailed << " failed"
+      << Color::None << " |";
+    if (opt.no_skipped_summary == false)
+    {
         const unsigned int numSkipped = p.numTestCases - p.numTestCasesPassingFilters;
         s << " " << (numSkipped == 0 ? Color::None : Color::Yellow) << numSkipped << " skipped" << Color::None;
     }
@@ -326,12 +355,12 @@ void ConsoleReporter::test_run_end(const TestRunStats &p) {
       << (p.numAsserts - p.numAssertsFailed) << " passed" << Color::None << " | "
       << (p.numAssertsFailed > 0 ? Color::Red : Color::None) << std::setw(failwidth) << p.numAssertsFailed << " failed"
       << Color::None << " |\n";
-    s << Color::Cyan << "[doctest] " << Color::None
-      << "Status: " << (p.numTestCasesFailed > 0 ? Color::Red : Color::Green)
+    s << Color::Cyan << "[doctest] " << Color::None << "Status: " << (p.numTestCasesFailed > 0 ? Color::Red : Color::Green)
       << ((p.numTestCasesFailed > 0) ? "FAILURE!" : "SUCCESS!") << Color::None << std::endl;
 }
 
-void ConsoleReporter::test_case_start(const TestCaseData &in) {
+void ConsoleReporter::test_case_start(const TestCaseData& in)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     hasLoggedCurrentTestStart = false;
     tc = &in;
@@ -339,48 +368,58 @@ void ConsoleReporter::test_case_start(const TestCaseData &in) {
     currentSubcaseLevel = 0;
 }
 
-void ConsoleReporter::test_case_reenter(const TestCaseData &) {
+void ConsoleReporter::test_case_reenter(const TestCaseData&)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     subcasesStack.clear();
 }
 
-void ConsoleReporter::test_case_end(const CurrentTestCaseStats &st) {
+void ConsoleReporter::test_case_end(const CurrentTestCaseStats& st)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     if (tc->m_no_output)
         return;
 
     // log the preamble of the test case only if there is something
     // else to print - something other than that an assert has failed
-    if (opt.duration ||
-        (st.failure_flags && st.failure_flags != static_cast<int>(TestCaseFailureReason::AssertFailure)))
+    if (opt.duration || (st.failure_flags && st.failure_flags != static_cast<int>(TestCaseFailureReason::AssertFailure)))
         logTestStart();
 
     if (opt.duration)
         s << Color::None << std::setprecision(6) << std::fixed << st.seconds << " s: " << tc->m_name << "\n";
 
     if (st.failure_flags & TestCaseFailureReason::Timeout)
-        s << Color::Red << "Test case exceeded time limit of " << std::setprecision(6) << std::fixed << tc->m_timeout
-          << "!\n";
+        s << Color::Red << "Test case exceeded time limit of " << std::setprecision(6) << std::fixed << tc->m_timeout << "!\n";
 
-    if (st.failure_flags & TestCaseFailureReason::ShouldHaveFailedButDidnt) {
+    if (st.failure_flags & TestCaseFailureReason::ShouldHaveFailedButDidnt)
+    {
         s << Color::Red << "Should have failed but didn't! Marking it as failed!\n";
-    } else if (st.failure_flags & TestCaseFailureReason::ShouldHaveFailedAndDid) {
-        s << Color::Yellow << "Failed as expected so marking it as not failed\n";
-    } else if (st.failure_flags & TestCaseFailureReason::CouldHaveFailedAndDid) {
-        s << Color::Yellow << "Allowed to fail so marking it as not failed\n";
-    } else if (st.failure_flags & TestCaseFailureReason::DidntFailExactlyNumTimes) {
-        s << Color::Red << "Didn't fail exactly " << tc->m_expected_failures << " times so marking it as failed!\n";
-    } else if (st.failure_flags & TestCaseFailureReason::FailedExactlyNumTimes) {
-        s << Color::Yellow << "Failed exactly " << tc->m_expected_failures
-          << " times as expected so marking it as not failed!\n";
     }
-    if (st.failure_flags & TestCaseFailureReason::TooManyFailedAsserts) {
+    else if (st.failure_flags & TestCaseFailureReason::ShouldHaveFailedAndDid)
+    {
+        s << Color::Yellow << "Failed as expected so marking it as not failed\n";
+    }
+    else if (st.failure_flags & TestCaseFailureReason::CouldHaveFailedAndDid)
+    {
+        s << Color::Yellow << "Allowed to fail so marking it as not failed\n";
+    }
+    else if (st.failure_flags & TestCaseFailureReason::DidntFailExactlyNumTimes)
+    {
+        s << Color::Red << "Didn't fail exactly " << tc->m_expected_failures << " times so marking it as failed!\n";
+    }
+    else if (st.failure_flags & TestCaseFailureReason::FailedExactlyNumTimes)
+    {
+        s << Color::Yellow << "Failed exactly " << tc->m_expected_failures << " times as expected so marking it as not failed!\n";
+    }
+    if (st.failure_flags & TestCaseFailureReason::TooManyFailedAsserts)
+    {
         s << Color::Red << "Aborting - too many failed asserts!\n";
     }
     s << Color::None;
 }
 
-void ConsoleReporter::test_case_exception(const TestCaseException &e) {
+void ConsoleReporter::test_case_exception(const TestCaseException& e)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     if (tc->m_no_output)
         return;
@@ -393,30 +432,35 @@ void ConsoleReporter::test_case_exception(const TestCaseException &e) {
     s << Color::Cyan << e.error_string << "\n";
 
     const int num_stringified_contexts = get_num_stringified_contexts();
-    if (num_stringified_contexts) {
+    if (num_stringified_contexts)
+    {
         auto stringified_contexts = get_stringified_contexts();
         s << Color::None << "  logged: ";
-        for (int i = num_stringified_contexts; i > 0; --i) {
+        for (int i = num_stringified_contexts; i > 0; --i)
+        {
             s << (i == num_stringified_contexts ? "" : "          ") << stringified_contexts[i - 1] << "\n";
         }
     }
     s << "\n" << Color::None;
 }
 
-void ConsoleReporter::subcase_start(const SubcaseSignature &subc) {
+void ConsoleReporter::subcase_start(const SubcaseSignature& subc)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     subcasesStack.push_back(subc);
     ++currentSubcaseLevel;
     hasLoggedCurrentTestStart = false;
 }
 
-void ConsoleReporter::subcase_end() {
+void ConsoleReporter::subcase_end()
+{
     DOCTEST_LOCK_MUTEX(mutex)
     --currentSubcaseLevel;
     hasLoggedCurrentTestStart = false;
 }
 
-void ConsoleReporter::log_assert(const AssertData &rb) {
+void ConsoleReporter::log_assert(const AssertData& rb)
+{
     if ((!rb.m_failed && !opt.success) || tc->m_no_output)
         return;
 
@@ -432,7 +476,8 @@ void ConsoleReporter::log_assert(const AssertData &rb) {
     log_contexts();
 }
 
-void ConsoleReporter::log_message(const MessageData &mb) {
+void ConsoleReporter::log_message(const MessageData& mb)
+{
     if (tc->m_no_output)
         return;
 
@@ -447,7 +492,9 @@ void ConsoleReporter::log_message(const MessageData &mb) {
     log_contexts();
 }
 
-void ConsoleReporter::test_case_skipped(const TestCaseData &) {}
+void ConsoleReporter::test_case_skipped(const TestCaseData&)
+{
+}
 
 } // namespace doctest
 

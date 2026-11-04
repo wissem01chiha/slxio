@@ -7,20 +7,19 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 #ifdef DOCTEST_CONFIG_NO_MULTITHREADING
-template <typename T>
-using Atomic = T;
+template <typename T> using Atomic = T;
 #else  // DOCTEST_CONFIG_NO_MULTITHREADING
-template <typename T>
-using Atomic = std::atomic<T>;
+template <typename T> using Atomic = std::atomic<T>;
 #endif // DOCTEST_CONFIG_NO_MULTITHREADING
 
 #if defined(DOCTEST_CONFIG_NO_MULTI_LANE_ATOMICS) || defined(DOCTEST_CONFIG_NO_MULTITHREADING)
-template <typename T>
-using MultiLaneAtomic = Atomic<T>;
+template <typename T> using MultiLaneAtomic = Atomic<T>;
 #else  // DOCTEST_CONFIG_NO_MULTI_LANE_ATOMICS
 // Provides a multilane implementation of an atomic variable that supports add, sub, load,
 // store. Instead of using a single atomic variable, this splits up into multiple ones,
@@ -32,57 +31,66 @@ using MultiLaneAtomic = Atomic<T>;
 //
 // The disadvantage is that there is a small overhead due to the use of TLS, and load/store
 // is slower because all atomics have to be accessed.
-template <typename T>
-class MultiLaneAtomic {
-    struct CacheLineAlignedAtomic {
+template <typename T> class MultiLaneAtomic
+{
+    struct CacheLineAlignedAtomic
+    {
         Atomic<T> atomic{};
         char padding[DOCTEST_MULTI_LANE_ATOMICS_CACHE_LINE_SIZE - sizeof(Atomic<T>)];
     };
     CacheLineAlignedAtomic m_atomics[DOCTEST_MULTI_LANE_ATOMICS_THREAD_LANES];
 
-    static_assert(
-        sizeof(CacheLineAlignedAtomic) == DOCTEST_MULTI_LANE_ATOMICS_CACHE_LINE_SIZE,
-        "guarantee one atomic takes exactly one cache line"
-    );
+    static_assert(sizeof(CacheLineAlignedAtomic) == DOCTEST_MULTI_LANE_ATOMICS_CACHE_LINE_SIZE,
+                  "guarantee one atomic takes exactly one cache line");
 
 public:
-    T operator++() DOCTEST_NOEXCEPT {
+    T operator++() DOCTEST_NOEXCEPT
+    {
         return fetch_add(1) + 1;
     }
 
-    T operator++(int) DOCTEST_NOEXCEPT { // NOLINT(cert-dcl21-cpp)
+    T operator++(int) DOCTEST_NOEXCEPT
+    { // NOLINT(cert-dcl21-cpp)
         return fetch_add(1);
     }
 
-    T fetch_add(T arg, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT {
+    T fetch_add(T arg, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT
+    {
         return myAtomic().fetch_add(arg, order);
     }
 
-    T fetch_sub(T arg, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT {
+    T fetch_sub(T arg, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT
+    {
         return myAtomic().fetch_sub(arg, order);
     }
 
-    operator T() const DOCTEST_NOEXCEPT {
+    operator T() const DOCTEST_NOEXCEPT
+    {
         return load();
     }
 
-    T load(std::memory_order order = std::memory_order_seq_cst) const DOCTEST_NOEXCEPT {
+    T load(std::memory_order order = std::memory_order_seq_cst) const DOCTEST_NOEXCEPT
+    {
         auto result = T();
-        for (const auto &c: m_atomics) {
+        for (const auto& c : m_atomics)
+        {
             result += c.atomic.load(order);
         }
         return result;
     }
 
     // NOLINTNEXTLINE(cppcoreguidelines-c-copy-assignment-signature, misc-unconventional-assign-operator)
-    T operator=(T desired) DOCTEST_NOEXCEPT {
+    T operator=(T desired) DOCTEST_NOEXCEPT
+    {
         store(desired);
         return desired;
     }
 
-    void store(T desired, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT {
+    void store(T desired, std::memory_order order = std::memory_order_seq_cst) DOCTEST_NOEXCEPT
+    {
         // first value becomes desired", all others become 0.
-        for (auto &c: m_atomics) {
+        for (auto& c : m_atomics)
+        {
             c.atomic.store(desired, order);
             desired = {};
         }
@@ -101,7 +109,8 @@ private:
     //    assigned in a round-robin fashion.
     // 3. This tlsLaneIdx is stored in the thread local data, so it is directly available with
     //    little overhead.
-    Atomic<T> &myAtomic() DOCTEST_NOEXCEPT {
+    Atomic<T>& myAtomic() DOCTEST_NOEXCEPT
+    {
         static Atomic<size_t> laneCounter;
         DOCTEST_THREAD_LOCAL size_t tlsLaneIdx = laneCounter++ % DOCTEST_MULTI_LANE_ATOMICS_THREAD_LANES;
 

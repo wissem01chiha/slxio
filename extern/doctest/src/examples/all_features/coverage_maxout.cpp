@@ -14,7 +14,8 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 // !!! THESE ARE NOT PROPER EXAMPLES OF LIBRARY USAGE !!! THESE ARE MEANT FOR CODE COVERAGE ONLY !!!
 // =================================================================================================
 
-TEST_CASE("exercising tricky code paths of doctest") {
+TEST_CASE("exercising tricky code paths of doctest")
+{
     using namespace doctest;
 
     // trigger code path for comparing the file in "operator<" of SubcaseSignature
@@ -68,17 +69,19 @@ TEST_CASE("exercising tricky code paths of doctest") {
     oss << str;
     // trigger code path for assert string of a non-existent assert type
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
-    try {
+    try
+    {
         // NOLINTNEXTLINE(clang-analyzer-optin.core.EnumCastOutOfRange)
         assertString(static_cast<assertType::Enum>(3));
-    } catch (const std::logic_error &) {} // NOLINT(bugprone-empty-catch)
+    }
+    catch (const std::logic_error&)
+    {
+    } // NOLINT(bugprone-empty-catch)
 #endif
     str += oss.str().c_str();
     str += failureString(assertType::is_normal);
-    CHECK(
-        str == "omgomgomgaaanullptrtrue099991111111"
-               "omgomgomgaaanullptrtrue099991111111"
-    );
+    CHECK(str == "omgomgomgaaanullptrtrue099991111111"
+                 "omgomgomgaaanullptrtrue099991111111");
     // trigger code path for rawMemoryToString
     const bool isThereAnything = str.size() > 0u;
     const String unknown = toString(skip()); // trigger code path for "{?}"
@@ -105,26 +108,30 @@ TEST_CASE("exercising tricky code paths of doctest") {
 
     // trigger another single line of code... lol
     // NOLINTBEGIN(cppcoreguidelines-pro-type-const-cast)
-    auto oldVal = const_cast<ContextOptions *>(getContextOptions())->no_path_in_filenames;
-    const_cast<ContextOptions *>(getContextOptions())->no_path_in_filenames = false;
+    auto oldVal = const_cast<ContextOptions*>(getContextOptions())->no_path_in_filenames;
+    const_cast<ContextOptions*>(getContextOptions())->no_path_in_filenames = false;
     CHECK(String(skipPathFromFilename("")) == "");
-    const_cast<ContextOptions *>(getContextOptions())->no_path_in_filenames = oldVal;
+    const_cast<ContextOptions*>(getContextOptions())->no_path_in_filenames = oldVal;
     // NOLINTEND(cppcoreguidelines-pro-type-const-cast)
 
     // a hack to trigger a bug in doctest: currently a 0 cannot be successfully parsed for an int option!
     Context().setOption("last", 0);
 }
 
-TEST_SUITE("will be overridden by a decorator" * doctest::test_suite("exception related")) {
-    TEST_CASE("will end from a std::string exception") {
+TEST_SUITE("will be overridden by a decorator" * doctest::test_suite("exception related"))
+{
+    TEST_CASE("will end from a std::string exception")
+    {
         throw_if(true, std::string("std::string!"));
     }
 
-    TEST_CASE("will end from a const char* exception") {
+    TEST_CASE("will end from a const char* exception")
+    {
         throw_if(true, "const char*!");
     }
 
-    TEST_CASE("will end from an unknown exception") {
+    TEST_CASE("will end from an unknown exception")
+    {
         throw_if(true, doctest::String("unknown :("));
     }
 }

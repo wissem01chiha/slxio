@@ -46,7 +46,7 @@ public:
     // connect to tcp host/port or throw if failed
     // host can be hostname or ip address
 
-    explicit tcp_sink(const std::string &host,
+    explicit tcp_sink(const std::string& host,
                       int port,
                       int timeout_ms = 0,
                       bool lazy_connect = false)
@@ -68,7 +68,7 @@ public:
     ~tcp_sink() override = default;
 
 protected:
-    void sink_it_(const spdlog::details::log_msg &msg) override {
+    void sink_it_(const spdlog::details::log_msg& msg) override {
         spdlog::memory_buf_t formatted;
         spdlog::sinks::base_sink<Mutex>::formatter_->format(msg, formatted);
         if (!client_.is_connected()) {

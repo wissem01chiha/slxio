@@ -116,7 +116,7 @@ void bench_single_threaded(int iters) {
     bench(iters, empty_logger_tracing);
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     spdlog::set_automatic_registration(false);
     spdlog::default_logger()->set_pattern("[%^%l%$] %v");
     int iters = 250000;
@@ -137,7 +137,7 @@ int main(int argc, char *argv[]) {
         bench_single_threaded(iters);
         bench_threaded_logging(1, iters);
         bench_threaded_logging(threads, iters);
-    } catch (std::exception &ex) {
+    } catch (std::exception& ex) {
         spdlog::error(ex.what());
         return EXIT_FAILURE;
     }
@@ -179,7 +179,7 @@ void bench_mt(int howmany, std::shared_ptr<spdlog::logger> log, size_t thread_co
         });
     }
 
-    for (auto &t : threads) {
+    for (auto& t : threads) {
         t.join();
     }
 

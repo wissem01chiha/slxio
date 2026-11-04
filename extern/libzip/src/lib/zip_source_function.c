@@ -31,25 +31,26 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 
 #include "zipint.h"
 
-
-ZIP_EXTERN zip_source_t *zip_source_function(zip_t *za, zip_source_callback zcb, void *ud) {
-    if (za == NULL) {
+ZIP_EXTERN zip_source_t* zip_source_function(zip_t* za, zip_source_callback zcb, void* ud)
+{
+    if (za == NULL)
+    {
         return NULL;
     }
 
     return zip_source_function_create(zcb, ud, &za->error);
 }
 
+ZIP_EXTERN zip_source_t* zip_source_function_create(zip_source_callback zcb, void* ud, zip_error_t* error)
+{
+    zip_source_t* zs;
 
-ZIP_EXTERN zip_source_t *zip_source_function_create(zip_source_callback zcb, void *ud, zip_error_t *error) {
-    zip_source_t *zs;
-
-    if ((zs = _zip_source_new(error)) == NULL) {
+    if ((zs = _zip_source_new(error)) == NULL)
+    {
         return NULL;
     }
 
@@ -57,7 +58,8 @@ ZIP_EXTERN zip_source_t *zip_source_function_create(zip_source_callback zcb, voi
     zs->ud = ud;
 
     zs->supports = zcb(ud, NULL, 0, ZIP_SOURCE_SUPPORTS);
-    if (zs->supports < 0) {
+    if (zs->supports < 0)
+    {
         zs->supports = ZIP_SOURCE_SUPPORTS_READABLE;
     }
     zs->supports |= zip_source_make_command_bitmap(ZIP_SOURCE_SUPPORTS, -1);
@@ -65,16 +67,17 @@ ZIP_EXTERN zip_source_t *zip_source_function_create(zip_source_callback zcb, voi
     return zs;
 }
 
-
-ZIP_EXTERN void zip_source_keep(zip_source_t *src) {
+ZIP_EXTERN void zip_source_keep(zip_source_t* src)
+{
     src->refcount++;
 }
 
+zip_source_t* _zip_source_new(zip_error_t* error)
+{
+    zip_source_t* src;
 
-zip_source_t *_zip_source_new(zip_error_t *error) {
-    zip_source_t *src;
-
-    if ((src = (zip_source_t *)malloc(sizeof(*src))) == NULL) {
+    if ((src = (zip_source_t*)malloc(sizeof(*src))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }

@@ -35,22 +35,27 @@
 
 #include "zipint.h"
 
-bool zip_realloc(void **memory, zip_uint64_t *alloced_elements, zip_uint64_t element_size, zip_uint64_t additional_elements, zip_error_t *error) {
+bool zip_realloc(
+    void** memory, zip_uint64_t* alloced_elements, zip_uint64_t element_size, zip_uint64_t additional_elements, zip_error_t* error)
+{
     zip_uint64_t new_alloced_elements;
-    void *new_memory;
+    void* new_memory;
 
-    if (additional_elements == 0) {
+    if (additional_elements == 0)
+    {
         return true;
     }
 
     new_alloced_elements = *alloced_elements + additional_elements;
 
-    if (new_alloced_elements < additional_elements || new_alloced_elements > SIZE_MAX / element_size) {
+    if (new_alloced_elements < additional_elements || new_alloced_elements > SIZE_MAX / element_size)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return false;
     }
 
-    if ((new_memory = realloc(*memory, (size_t)(new_alloced_elements * element_size))) == NULL) {
+    if ((new_memory = realloc(*memory, (size_t)(new_alloced_elements * element_size))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return false;
     }

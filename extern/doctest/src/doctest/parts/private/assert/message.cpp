@@ -7,23 +7,29 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-MessageBuilder::MessageBuilder(const char *file, int line, assertType::Enum severity) {
+MessageBuilder::MessageBuilder(const char* file, int line, assertType::Enum severity)
+{
     m_stream = tlssPush();
     m_file = file;
     m_line = line;
     m_severity = severity;
 }
 
-MessageBuilder::~MessageBuilder() noexcept(false) {
+MessageBuilder::~MessageBuilder() noexcept(false)
+{
     if (!logged)
         tlssPop();
 }
 
-bool MessageBuilder::log() {
-    if (!logged) {
+bool MessageBuilder::log()
+{
+    if (!logged)
+    {
         m_string = tlssPop();
         logged = true;
     }
@@ -33,7 +39,8 @@ bool MessageBuilder::log() {
     const bool isWarn = m_severity & assertType::is_warn;
 
     // warn is just a message in this context so we don't treat it as an assert
-    if (!isWarn) {
+    if (!isWarn)
+    {
         addAssert(m_severity);
         addFailedAssert(m_severity);
     }
@@ -42,7 +49,8 @@ bool MessageBuilder::log() {
            (g_cs->currentTest == nullptr || !g_cs->currentTest->m_no_breaks); // break into debugger
 }
 
-void MessageBuilder::react() {
+void MessageBuilder::react()
+{
     if (m_severity & assertType::is_require)
         throwException();
 }

@@ -31,34 +31,43 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "zipint.h"
 
-ZIP_EXTERN int zip_source_open(zip_source_t *src) {
-    if (src->source_closed) {
+ZIP_EXTERN int zip_source_open(zip_source_t* src)
+{
+    if (src->source_closed)
+    {
         return -1;
     }
-    if (src->write_state == ZIP_SOURCE_WRITE_REMOVED) {
+    if (src->write_state == ZIP_SOURCE_WRITE_REMOVED)
+    {
         zip_error_set(&src->error, ZIP_ER_DELETED, 0);
         return -1;
     }
 
-    if (ZIP_SOURCE_IS_OPEN_READING(src)) {
-        if ((zip_source_supports(src) & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_SEEK)) == 0) {
+    if (ZIP_SOURCE_IS_OPEN_READING(src))
+    {
+        if ((zip_source_supports(src) & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_SEEK)) == 0)
+        {
             zip_error_set(&src->error, ZIP_ER_INUSE, 0);
             return -1;
         }
     }
-    else {
-        if (ZIP_SOURCE_IS_LAYERED(src)) {
-            if (zip_source_open(src->src) < 0) {
+    else
+    {
+        if (ZIP_SOURCE_IS_LAYERED(src))
+        {
+            if (zip_source_open(src->src) < 0)
+            {
                 zip_error_set_from_source(&src->error, src->src);
                 return -1;
             }
         }
 
-        if (_zip_source_call(src, NULL, 0, ZIP_SOURCE_OPEN) < 0) {
-            if (ZIP_SOURCE_IS_LAYERED(src)) {
+        if (_zip_source_call(src, NULL, 0, ZIP_SOURCE_OPEN) < 0)
+        {
+            if (ZIP_SOURCE_IS_LAYERED(src))
+            {
                 zip_source_close(src->src);
             }
             return -1;

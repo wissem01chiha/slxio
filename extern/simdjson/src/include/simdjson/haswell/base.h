@@ -6,16 +6,20 @@
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
 // The constructor may be executed on any host, so we take care not to use SIMDJSON_TARGET_HASWELL
-namespace simdjson {
+namespace simdjson
+{
 /**
  * Implementation for Haswell (Intel AVX2).
  */
-namespace haswell {
+namespace haswell
+{
 
 class implementation;
 
-namespace {
-namespace simd {
+namespace
+{
+namespace simd
+{
 template <typename T> struct simd8;
 template <typename T> struct simd8x64;
 } // namespace simd

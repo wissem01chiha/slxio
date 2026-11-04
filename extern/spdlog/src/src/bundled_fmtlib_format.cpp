@@ -19,15 +19,12 @@ template FMT_API auto locale_ref::get<std::locale>() const -> std::locale;
 
 namespace detail {
 
-template FMT_API auto dragonbox::to_decimal(float x) noexcept
-    -> dragonbox::decimal_fp<float>;
-template FMT_API auto dragonbox::to_decimal(double x) noexcept
-    -> dragonbox::decimal_fp<double>;
+template FMT_API auto dragonbox::to_decimal(float x) noexcept -> dragonbox::decimal_fp<float>;
+template FMT_API auto dragonbox::to_decimal(double x) noexcept -> dragonbox::decimal_fp<double>;
 
 // Explicit instantiations for char.
 
-template FMT_API auto thousands_sep_impl(locale_ref)
-    -> thousands_sep_result<char>;
+template FMT_API auto thousands_sep_impl(locale_ref) -> thousands_sep_result<char>;
 template FMT_API auto decimal_point_impl(locale_ref) -> char;
 
 // DEPRECATED!
@@ -35,8 +32,7 @@ template FMT_API void buffer<char>::append(const char*, const char*);
 
 // Explicit instantiations for wchar_t.
 
-template FMT_API auto thousands_sep_impl(locale_ref)
-    -> thousands_sep_result<wchar_t>;
+template FMT_API auto thousands_sep_impl(locale_ref) -> thousands_sep_result<wchar_t>;
 template FMT_API auto decimal_point_impl(locale_ref) -> wchar_t;
 
 // DEPRECATED!

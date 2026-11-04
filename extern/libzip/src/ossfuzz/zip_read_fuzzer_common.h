@@ -33,11 +33,13 @@
 
 #include "zip.h"
 
-void fuzzer_read(zip_t *za, zip_error_t *error, const char *password) {
+void fuzzer_read(zip_t* za, zip_error_t* error, const char* password)
+{
     zip_int64_t i, n, ret;
     char buf[32768];
 
-    if (za == NULL) {
+    if (za == NULL)
+    {
         fprintf(stderr, "Error opening archive: %s\n", zip_error_strerror(error));
         zip_error_fini(error);
         return;
@@ -48,25 +50,31 @@ void fuzzer_read(zip_t *za, zip_error_t *error, const char *password) {
     zip_error_fini(error);
 
     n = zip_get_num_entries(za, 0);
-    for (i = 0; i < n; i++) {
-        zip_file_t *f = zip_fopen_index(za, i, 0);
-        if (f == NULL) {
+    for (i = 0; i < n; i++)
+    {
+        zip_file_t* f = zip_fopen_index(za, i, 0);
+        if (f == NULL)
+        {
             fprintf(stderr, "Error opening file %d: %s\n", (int)i, zip_strerror(za));
             continue;
         }
 
-        while ((ret = zip_fread(f, buf, sizeof(buf))) > 0) {
+        while ((ret = zip_fread(f, buf, sizeof(buf))) > 0)
+        {
             ;
         }
-        if (ret < 0) {
+        if (ret < 0)
+        {
             fprintf(stderr, "Error reading file %d: %s\n", (int)i, zip_strerror(za));
         }
-        if (zip_fclose(f) < 0) {
+        if (zip_fclose(f) < 0)
+        {
             fprintf(stderr, "Error closing file %d: %s\n", (int)i, zip_strerror(za));
             continue;
         }
     }
-    if (zip_close(za) < 0) {
+    if (zip_close(za) < 0)
+    {
         fprintf(stderr, "Error closing archive: %s\n", zip_strerror(za));
         zip_discard(za);
     }

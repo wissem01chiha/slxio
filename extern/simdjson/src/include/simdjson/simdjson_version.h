@@ -6,20 +6,22 @@
 /** The version of simdjson being used (major.minor.revision) */
 #define SIMDJSON_VERSION "5.1.1"
 
-namespace simdjson {
-enum {
-  /**
-   * The major version (MAJOR.minor.revision) of simdjson being used.
-   */
-  SIMDJSON_VERSION_MAJOR = 5,
-  /**
-   * The minor version (major.MINOR.revision) of simdjson being used.
-   */
-  SIMDJSON_VERSION_MINOR = 1,
-  /**
-   * The revision (major.minor.REVISION) of simdjson being used.
-   */
-  SIMDJSON_VERSION_REVISION = 1
+namespace simdjson
+{
+enum
+{
+    /**
+     * The major version (MAJOR.minor.revision) of simdjson being used.
+     */
+    SIMDJSON_VERSION_MAJOR = 5,
+    /**
+     * The minor version (major.MINOR.revision) of simdjson being used.
+     */
+    SIMDJSON_VERSION_MINOR = 1,
+    /**
+     * The revision (major.minor.REVISION) of simdjson being used.
+     */
+    SIMDJSON_VERSION_REVISION = 1
 };
 } // namespace simdjson
 

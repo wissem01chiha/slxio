@@ -41,9 +41,9 @@ public:
     ~tcp_client() { close(); }
 
     int connect_socket_with_timeout(int sockfd,
-                                    const struct sockaddr *addr,
+                                    const struct sockaddr* addr,
                                     socklen_t addrlen,
-                                    const timeval &tv) {
+                                    const timeval& tv) {
         // Blocking connect if timeout is zero
         if (tv.tv_sec == 0 && tv.tv_usec == 0) {
             int rv = ::connect(sockfd, addr, addrlen);
@@ -105,9 +105,9 @@ public:
     }
 
     // try to connect or throw on failure
-    void connect(const std::string &host, int port, int timeout_ms = 0) {
+    void connect(const std::string& host, int port, int timeout_ms = 0) {
         close();
-        struct addrinfo hints {};
+        struct addrinfo hints{};
         memset(&hints, 0, sizeof(struct addrinfo));
         hints.ai_family = AF_UNSPEC;      // To work with IPv4, IPv6, and so on
         hints.ai_socktype = SOCK_STREAM;  // TCP
@@ -119,7 +119,7 @@ public:
         tv.tv_usec = (timeout_ms % 1000) * 1000;
 
         auto port_str = std::to_string(port);
-        struct addrinfo *addrinfo_result;
+        struct addrinfo* addrinfo_result;
         auto rv = ::getaddrinfo(host.c_str(), port_str.c_str(), &hints, &addrinfo_result);
         if (rv != 0) {
             throw_spdlog_ex(fmt_lib::format("::getaddrinfo failed: {}", gai_strerror(rv)));
@@ -127,7 +127,7 @@ public:
 
         // Try each address until we successfully connect(2).
         int last_errno = 0;
-        for (auto *rp = addrinfo_result; rp != nullptr; rp = rp->ai_next) {
+        for (auto* rp = addrinfo_result; rp != nullptr; rp = rp->ai_next) {
 #if defined(SOCK_CLOEXEC)
             const int flags = SOCK_CLOEXEC;
 #else
@@ -154,18 +154,18 @@ public:
 
         if (timeout_ms > 0) {
             // Set timeouts for send and recv
-            ::setsockopt(socket_, SOL_SOCKET, SO_RCVTIMEO, (const char *)&tv, sizeof(tv));
-            ::setsockopt(socket_, SOL_SOCKET, SO_SNDTIMEO, (const char *)&tv, sizeof(tv));
+            ::setsockopt(socket_, SOL_SOCKET, SO_RCVTIMEO, (const char*)&tv, sizeof(tv));
+            ::setsockopt(socket_, SOL_SOCKET, SO_SNDTIMEO, (const char*)&tv, sizeof(tv));
         }
 
         // set TCP_NODELAY
         int enable_flag = 1;
-        ::setsockopt(socket_, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char *>(&enable_flag),
+        ::setsockopt(socket_, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<char*>(&enable_flag),
                      sizeof(enable_flag));
 
         // prevent sigpipe on systems where MSG_NOSIGNAL is not available
 #if defined(SO_NOSIGPIPE) && !defined(MSG_NOSIGNAL)
-        ::setsockopt(socket_, SOL_SOCKET, SO_NOSIGPIPE, reinterpret_cast<char *>(&enable_flag),
+        ::setsockopt(socket_, SOL_SOCKET, SO_NOSIGPIPE, reinterpret_cast<char*>(&enable_flag),
                      sizeof(enable_flag));
 #endif
 
@@ -176,7 +176,7 @@ public:
 
     // Send exactly n_bytes of the given data.
     // On error close the connection and throw.
-    void send(const char *data, size_t n_bytes) {
+    void send(const char* data, size_t n_bytes) {
         size_t bytes_sent = 0;
         while (bytes_sent < n_bytes) {
 #if defined(MSG_NOSIGNAL)

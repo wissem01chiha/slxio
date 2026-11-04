@@ -40,7 +40,9 @@ public:
     std::string GetName() const;
     void SetName(const std::string& name);
     std::string GetClassName() const;
+    void SetClassName(const std::string& className);
     std::string GetVersion() const;
+    void SetVersion(const std::string& version);
 
     std::string ToString() const override;
 

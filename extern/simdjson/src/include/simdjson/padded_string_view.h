@@ -13,81 +13,83 @@
 #include <variant>
 #endif
 
-namespace simdjson {
+namespace simdjson
+{
 
 /**
  * User-provided string that promises it has extra padded bytes at the end for use with parser::parse().
  */
-class padded_string_view : public std::string_view {
+class padded_string_view : public std::string_view
+{
 private:
-  size_t _capacity{0};
+    size_t _capacity{0};
 
 public:
-  /** Create an empty padded_string_view. */
-  inline padded_string_view() noexcept = default;
+    /** Create an empty padded_string_view. */
+    inline padded_string_view() noexcept = default;
 
-  /**
-   * Promise the given buffer has at least SIMDJSON_PADDING extra bytes allocated to it.
-   *
-   * @param s The string.
-   * @param len The length of the string (not including padding).
-   * @param capacity The allocated length of the string, including padding. If the capacity is less
-   *       than the length, the capacity will be set to the length.
-   */
-  explicit inline padded_string_view(const char* s, size_t len, size_t capacity) noexcept;
-  /** overload explicit inline padded_string_view(const char* s, size_t len) noexcept */
-  explicit inline padded_string_view(const uint8_t* s, size_t len, size_t capacity) noexcept;
+    /**
+     * Promise the given buffer has at least SIMDJSON_PADDING extra bytes allocated to it.
+     *
+     * @param s The string.
+     * @param len The length of the string (not including padding).
+     * @param capacity The allocated length of the string, including padding. If the capacity is less
+     *       than the length, the capacity will be set to the length.
+     */
+    explicit inline padded_string_view(const char* s, size_t len, size_t capacity) noexcept;
+    /** overload explicit inline padded_string_view(const char* s, size_t len) noexcept */
+    explicit inline padded_string_view(const uint8_t* s, size_t len, size_t capacity) noexcept;
 #ifdef __cpp_char8_t
-  explicit inline padded_string_view(const char8_t* s, size_t len, size_t capacity) noexcept;
+    explicit inline padded_string_view(const char8_t* s, size_t len, size_t capacity) noexcept;
 #endif
-  /**
-   * Promise the given string has at least SIMDJSON_PADDING extra bytes allocated to it.
-   *
-   * The capacity of the string will be used to determine its padding.
-   *
-   * @param s The string.
-   */
-  explicit inline padded_string_view(const std::string &s) noexcept;
+    /**
+     * Promise the given string has at least SIMDJSON_PADDING extra bytes allocated to it.
+     *
+     * The capacity of the string will be used to determine its padding.
+     *
+     * @param s The string.
+     */
+    explicit inline padded_string_view(const std::string& s) noexcept;
 
-  /**
-   * Promise the given string_view has at least SIMDJSON_PADDING extra bytes allocated to it.
-   *
-   * @param s The string.
-   * @param capacity The allocated length of the string, including padding. If the capacity is less
-   *      than the length, the capacity will be set to the length.
-   */
-  explicit inline padded_string_view(std::string_view s, size_t capacity) noexcept;
+    /**
+     * Promise the given string_view has at least SIMDJSON_PADDING extra bytes allocated to it.
+     *
+     * @param s The string.
+     * @param capacity The allocated length of the string, including padding. If the capacity is less
+     *      than the length, the capacity will be set to the length.
+     */
+    explicit inline padded_string_view(std::string_view s, size_t capacity) noexcept;
 
-  /** The number of allocated bytes. */
-  inline size_t capacity() const noexcept;
+    /** The number of allocated bytes. */
+    inline size_t capacity() const noexcept;
 
-  /**
-   * Check that the view has sufficient padding: either SIMDJSON_PADDING bytes of
-   * capacity past the end of the document, or enough trailing white space in
-   * the document to stand in for the missing bytes.
-   */
-  inline bool has_sufficient_padding() const noexcept;
+    /**
+     * Check that the view has sufficient padding: either SIMDJSON_PADDING bytes of
+     * capacity past the end of the document, or enough trailing white space in
+     * the document to stand in for the missing bytes.
+     */
+    inline bool has_sufficient_padding() const noexcept;
 
-  /**
-   * The parser may read up to SIMDJSON_PADDING bytes past the end of the
-   * document. When the capacity falls short of that but the document ends
-   * with enough white space to make up for it (see has_sufficient_padding()),
-   * this moves that white space out of the document and into the padding, so
-   * that padding() >= SIMDJSON_PADDING. It does nothing otherwise.
-   *
-   * @return whether the document was shortened
-   */
-  inline bool use_trailing_whitespace_as_padding() noexcept;
+    /**
+     * The parser may read up to SIMDJSON_PADDING bytes past the end of the
+     * document. When the capacity falls short of that but the document ends
+     * with enough white space to make up for it (see has_sufficient_padding()),
+     * this moves that white space out of the document and into the padding, so
+     * that padding() >= SIMDJSON_PADDING. It does nothing otherwise.
+     *
+     * @return whether the document was shortened
+     */
+    inline bool use_trailing_whitespace_as_padding() noexcept;
 
-  /**
-   * Remove the UTF-8 Byte Order Mark (BOM) if it exists.
-   *
-   * @return whether a BOM was found and removed
-   */
-  inline bool remove_utf8_bom() noexcept;
+    /**
+     * Remove the UTF-8 Byte Order Mark (BOM) if it exists.
+     *
+     * @return whether a BOM was found and removed
+     */
+    inline bool remove_utf8_bom() noexcept;
 
-  /** The amount of padding on the string (capacity() - length()) */
-  inline size_t padding() const noexcept;
+    /** The amount of padding on the string (capacity() - length()) */
+    inline size_t padding() const noexcept;
 
 }; // padded_string_view
 
@@ -110,40 +112,41 @@ inline uint32_t get_page_size() noexcept;
  * make sense is to be on a system with a page size of at least 4096 (which is
  * universal except on some embedded systems).
  */
-struct padded_input {
+struct padded_input
+{
     /**
      * Construct a padded_input from a string_view. If the string_view does not have sufficient padding,
      * the data will be copied into a padded_string and the padded_string_view will point to the
      * padded_string's data. Otherwise, the padded_string_view will point to the original string_view's data.
      */
-     inline explicit padded_input(std::string_view sv);
+    inline explicit padded_input(std::string_view sv);
     /**
      * Construct a padded_input from a C-style string (length specified). If the string does not have sufficient padding,
      * the data will be copied into a padded_string and the padded_string_view will point to the
      * padded_string's data. Otherwise, the padded_string_view will point to the original string's data.
      */
-     inline explicit padded_input(const char *data, size_t length);
+    inline explicit padded_input(const char* data, size_t length);
     /**
      * Construct a padded_input from a std::string. If the string does not have sufficient padding
      * (considering its capacity), the data will be copied into a padded_string and the padded_string_view
      * will point to the padded_string's data. Otherwise, the padded_string_view will point to the
      * original string's data.
      */
-     inline explicit padded_input(const std::string &s);
+    inline explicit padded_input(const std::string& s);
 
     /**
      * Check if the padded_input is a view.
      *
      * @return true if the padded_input is a view, false otherwise.
      */
-     inline bool is_view() const noexcept;
+    inline bool is_view() const noexcept;
 
     /**
      * Convert the padded_input to a padded_string_view.
      *
      * @return The padded_string_view.
      */
-     inline operator simdjson::padded_string_view() const noexcept;
+    inline operator simdjson::padded_string_view() const noexcept;
 
 private:
     std::variant<simdjson::padded_string_view, simdjson::padded_string> storage;
@@ -163,7 +166,7 @@ private:
  *        underlying output stream, that error will be propagated (simdjson_error will not be
  *        thrown).
  */
-inline std::ostream& operator<<(std::ostream& out, simdjson_result<padded_string_view> &s) noexcept(false);
+inline std::ostream& operator<<(std::ostream& out, simdjson_result<padded_string_view>& s) noexcept(false);
 #endif
 
 /**
@@ -207,8 +210,7 @@ inline padded_string_view pad_with_reserve(std::string& s) noexcept;
  * @param block_size The nominal slice size, before snapping.
  * @param index      Which slice to return, counting from zero.
  */
-inline padded_string_view slice_at(padded_string_view data, char delimiter,
-                                   size_t block_size, size_t index) noexcept;
+inline padded_string_view slice_at(padded_string_view data, char delimiter, size_t block_size, size_t index) noexcept;
 
 } // namespace simdjson
 

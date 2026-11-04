@@ -31,53 +31,61 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "zipint.h"
 
-
-ZIP_EXTERN int zip_file_replace(zip_t *za, zip_uint64_t idx, zip_source_t *source, zip_flags_t flags) {
-    if (idx >= za->nentry || source == NULL) {
+ZIP_EXTERN int zip_file_replace(zip_t* za, zip_uint64_t idx, zip_source_t* source, zip_flags_t flags)
+{
+    if (idx >= za->nentry || source == NULL)
+    {
         zip_error_set(&za->error, ZIP_ER_INVAL, 0);
         return -1;
     }
 
-    if (_zip_file_replace(za, idx, NULL, source, flags) == -1) {
+    if (_zip_file_replace(za, idx, NULL, source, flags) == -1)
+    {
         return -1;
     }
 
     return 0;
 }
 
-
 /* NOTE: Signed due to -1 on error.  See zip_add.c for more details. */
 
-zip_int64_t _zip_file_replace(zip_t *za, zip_uint64_t idx, const char *name, zip_source_t *source, zip_flags_t flags) {
+zip_int64_t _zip_file_replace(zip_t* za, zip_uint64_t idx, const char* name, zip_source_t* source, zip_flags_t flags)
+{
     zip_uint64_t za_nentry_prev;
 
-    if (ZIP_IS_RDONLY(za)) {
+    if (ZIP_IS_RDONLY(za))
+    {
         zip_error_set(&za->error, ZIP_ER_RDONLY, 0);
         return -1;
     }
 
     za_nentry_prev = za->nentry;
-    if (idx == ZIP_UINT64_MAX) {
+    if (idx == ZIP_UINT64_MAX)
+    {
         zip_int64_t i = -1;
 
-        if (flags & ZIP_FL_OVERWRITE) {
+        if (flags & ZIP_FL_OVERWRITE)
+        {
             i = _zip_name_locate(za, name, flags, NULL);
         }
 
-        if (i == -1) {
+        if (i == -1)
+        {
             /* create and use new entry, used by zip_add */
-            if ((i = _zip_add_entry(za)) < 0) {
+            if ((i = _zip_add_entry(za)) < 0)
+            {
                 return -1;
             }
         }
         idx = (zip_uint64_t)i;
     }
 
-    if (name && _zip_set_name(za, idx, name, flags) != 0) {
-        if (za->nentry != za_nentry_prev) {
+    if (name && _zip_set_name(za, idx, name, flags) != 0)
+    {
+        if (za->nentry != za_nentry_prev)
+        {
             _zip_entry_finalize(za->entry + idx);
             za->nentry = za_nentry_prev;
         }
@@ -86,7 +94,8 @@ zip_int64_t _zip_file_replace(zip_t *za, zip_uint64_t idx, const char *name, zip
 
     /* delete all extra fields - these are usually data that are
      * strongly coupled with the original data */
-    if (zip_file_extra_field_delete(za, idx, ZIP_EXTRA_FIELD_ALL, ZIP_FL_CENTRAL | ZIP_FL_LOCAL) < 0) {
+    if (zip_file_extra_field_delete(za, idx, ZIP_EXTRA_FIELD_ALL, ZIP_FL_CENTRAL | ZIP_FL_LOCAL) < 0)
+    {
         return -1;
     }
 

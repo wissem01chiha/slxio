@@ -9,8 +9,7 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 #define TEST_FLIP 0
 #endif
 
-#define TEST_FAIL()                                                                                                    \
-    std::cout << "FAILED ON: " << __LINE__ << "(" << (TEST_FLIP ? "EVALUATED" : "DISABLED") << ")" << std::endl
+#define TEST_FAIL() std::cout << "FAILED ON: " << __LINE__ << "(" << (TEST_FLIP ? "EVALUATED" : "DISABLED") << ")" << std::endl
 
 DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wmissing-noreturn")
 static int test_disabled_var_ = [] { // NOLINT

@@ -6,9 +6,12 @@
 #include "simdjson/arm64/intrinsics.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-namespace arm64 {
-namespace {
+namespace simdjson
+{
+namespace arm64
+{
+namespace
+{
 
 // We sometimes call trailing_zero on inputs that are zero,
 // but the algorithms do not end up using the returned value.
@@ -18,21 +21,23 @@ SIMDJSON_NO_SANITIZE_UNDEFINED
 // initialized.
 // See issue https://github.com/simdjson/simdjson/issues/1965
 SIMDJSON_NO_SANITIZE_MEMORY
-simdjson_inline int trailing_zeroes(uint64_t input_num) {
+simdjson_inline int trailing_zeroes(uint64_t input_num)
+{
 #if SIMDJSON_REGULAR_VISUAL_STUDIO
-  unsigned long ret;
-  // Search the mask data from least significant bit (LSB)
-  // to the most significant bit (MSB) for a set bit (1).
-  _BitScanForward64(&ret, input_num);
-  return (int)ret;
-#else // SIMDJSON_REGULAR_VISUAL_STUDIO
-  return __builtin_ctzll(input_num);
+    unsigned long ret;
+    // Search the mask data from least significant bit (LSB)
+    // to the most significant bit (MSB) for a set bit (1).
+    _BitScanForward64(&ret, input_num);
+    return (int)ret;
+#else  // SIMDJSON_REGULAR_VISUAL_STUDIO
+    return __builtin_ctzll(input_num);
 #endif // SIMDJSON_REGULAR_VISUAL_STUDIO
 }
 
 /* result might be undefined when input_num is zero */
-simdjson_inline uint64_t clear_lowest_bit(uint64_t input_num) {
-  return input_num & (input_num-1);
+simdjson_inline uint64_t clear_lowest_bit(uint64_t input_num)
+{
+    return input_num & (input_num - 1);
 }
 
 // We sometimes call leading_zeroes on inputs that are zero,
@@ -42,32 +47,33 @@ simdjson_inline uint64_t clear_lowest_bit(uint64_t input_num) {
 // (See below.)
 SIMDJSON_NO_SANITIZE_UNDEFINED
 /* result might be undefined when input_num is zero */
-simdjson_inline int leading_zeroes(uint64_t input_num) {
+simdjson_inline int leading_zeroes(uint64_t input_num)
+{
 #if SIMDJSON_REGULAR_VISUAL_STUDIO
-  unsigned long leading_zero = 0;
-  // Search the mask data from most significant bit (MSB)
-  // to least significant bit (LSB) for a set bit (1).
-  if (_BitScanReverse64(&leading_zero, input_num))
-    return (int)(63 - leading_zero);
-  else
-    return 64;
+    unsigned long leading_zero = 0;
+    // Search the mask data from most significant bit (MSB)
+    // to least significant bit (LSB) for a set bit (1).
+    if (_BitScanReverse64(&leading_zero, input_num))
+        return (int)(63 - leading_zero);
+    else
+        return 64;
 #else
-  return __builtin_clzll(input_num);
-#endif// SIMDJSON_REGULAR_VISUAL_STUDIO
+    return __builtin_clzll(input_num);
+#endif // SIMDJSON_REGULAR_VISUAL_STUDIO
 }
 
 /* result might be undefined when input_num is zero */
-simdjson_inline int count_ones(uint64_t input_num) {
+simdjson_inline int count_ones(uint64_t input_num)
+{
 #if SIMDJSON_REGULAR_VISUAL_STUDIO
-   return vaddv_u8(vcnt_u8(vcreate_u8(input_num)));
+    return vaddv_u8(vcnt_u8(vcreate_u8(input_num)));
 #else
-   // if the system supports SVE or CSSC, __builtin_popcountll
-   // might be compiled to fewer single instructions. For CSSC,
-   // __builtin_popcountll is compiled to a single instruction.
-   return __builtin_popcountll(input_num);
-#endif// SIMDJSON_REGULAR_VISUAL_STUDIO
+    // if the system supports SVE or CSSC, __builtin_popcountll
+    // might be compiled to fewer single instructions. For CSSC,
+    // __builtin_popcountll is compiled to a single instruction.
+    return __builtin_popcountll(input_num);
+#endif // SIMDJSON_REGULAR_VISUAL_STUDIO
 }
-
 
 #if defined(__GNUC__) // catches clang and gcc
 /**
@@ -83,10 +89,11 @@ simdjson_inline int count_ones(uint64_t input_num) {
 #define SIMDJSON_PREFER_REVERSE_BITS 1
 
 /* reverse the bits */
-simdjson_inline uint64_t reverse_bits(uint64_t input_num) {
-  uint64_t rev_bits;
-  __asm("rbit %0, %1" : "=r"(rev_bits) : "r"(input_num));
-  return rev_bits;
+simdjson_inline uint64_t reverse_bits(uint64_t input_num)
+{
+    uint64_t rev_bits;
+    __asm("rbit %0, %1" : "=r"(rev_bits) : "r"(input_num));
+    return rev_bits;
 }
 
 /**
@@ -96,12 +103,12 @@ simdjson_inline uint64_t reverse_bits(uint64_t input_num) {
  * of such undefined behavior is never used.
  **/
 SIMDJSON_NO_SANITIZE_UNDEFINED
-simdjson_inline uint64_t zero_leading_bit(uint64_t rev_bits, int leading_zeroes) {
-  return rev_bits ^ (uint64_t(0x8000000000000000) >> leading_zeroes);
+simdjson_inline uint64_t zero_leading_bit(uint64_t rev_bits, int leading_zeroes)
+{
+    return rev_bits ^ (uint64_t(0x8000000000000000) >> leading_zeroes);
 }
 
 #endif
-
 
 } // unnamed namespace
 } // namespace arm64

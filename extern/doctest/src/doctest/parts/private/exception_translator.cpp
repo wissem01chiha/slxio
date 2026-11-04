@@ -5,27 +5,31 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 DOCTEST_DEFINE_INTERFACE(IExceptionTranslator)
 
-void registerExceptionTranslatorImpl(const IExceptionTranslator *et) noexcept {
-    if (std::find(getExceptionTranslators().begin(), getExceptionTranslators().end(), et) ==
-        getExceptionTranslators().end())
+void registerExceptionTranslatorImpl(const IExceptionTranslator* et) noexcept
+{
+    if (std::find(getExceptionTranslators().begin(), getExceptionTranslators().end(), et) == getExceptionTranslators().end())
         getExceptionTranslators().push_back(et);
 }
 
-std::vector<const IExceptionTranslator *> &getExceptionTranslators() noexcept {
-    static std::vector<const IExceptionTranslator *> data;
+std::vector<const IExceptionTranslator*>& getExceptionTranslators() noexcept
+{
+    static std::vector<const IExceptionTranslator*> data;
     return data;
 }
 
-String translateActiveException() noexcept {
+String translateActiveException() noexcept
+{
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
     String res;
-    auto &translators = getExceptionTranslators();
-    for (auto &curr: translators)
+    auto& translators = getExceptionTranslators();
+    for (auto& curr : translators)
         if (curr->translate(res))
             return res;
     // clang-format off

@@ -23,7 +23,8 @@ DOCTEST_MSVC_SUPPRESS_WARNING(4702)
 
 #define FROM_A_SEPARATE_THREAD 1
 
-TEST_CASE("uncomment to test these out") {
+TEST_CASE("uncomment to test these out")
+{
     std::function<void(void)> f;
 
     // for(;;); // infinite loop - to test SIGTERM for CTRL+C ==> doesn't work!

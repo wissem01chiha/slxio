@@ -31,7 +31,6 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <string.h>
 #ifdef HAVE_STRINGS_H
 #include <strings.h>
@@ -39,65 +38,77 @@
 
 #include "zipint.h"
 
-
-ZIP_EXTERN zip_int64_t zip_name_locate(zip_t *za, const char *fname, zip_flags_t flags) {
+ZIP_EXTERN zip_int64_t zip_name_locate(zip_t* za, const char* fname, zip_flags_t flags)
+{
     return _zip_name_locate(za, fname, flags, &za->error);
 }
 
-
-zip_int64_t _zip_name_locate(zip_t *za, const char *fname, zip_flags_t flags, zip_error_t *error) {
-    int (*cmp)(const char *, const char *);
+zip_int64_t _zip_name_locate(zip_t* za, const char* fname, zip_flags_t flags, zip_error_t* error)
+{
+    int (*cmp)(const char*, const char*);
     size_t fname_length;
-    zip_string_t *str = NULL;
+    zip_string_t* str = NULL;
     const char *fn, *p;
     zip_uint64_t i;
 
-    if (za == NULL) {
+    if (za == NULL)
+    {
         return -1;
     }
 
-    if (fname == NULL) {
+    if (fname == NULL)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return -1;
     }
 
     fname_length = strlen(fname);
 
-    if (fname_length > ZIP_UINT16_MAX) {
+    if (fname_length > ZIP_UINT16_MAX)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return -1;
     }
 
-    if ((flags & (ZIP_FL_ENC_UTF_8 | ZIP_FL_ENC_RAW)) == 0 && fname[0] != '\0') {
-        if ((str = _zip_string_new((const zip_uint8_t *)fname, (zip_uint16_t)strlen(fname), flags, error)) == NULL) {
+    if ((flags & (ZIP_FL_ENC_UTF_8 | ZIP_FL_ENC_RAW)) == 0 && fname[0] != '\0')
+    {
+        if ((str = _zip_string_new((const zip_uint8_t*)fname, (zip_uint16_t)strlen(fname), flags, error)) == NULL)
+        {
             return -1;
         }
-        if ((fname = (const char *)_zip_string_get(str, NULL, 0, error)) == NULL) {
+        if ((fname = (const char*)_zip_string_get(str, NULL, 0, error)) == NULL)
+        {
             _zip_string_free(str);
             return -1;
         }
     }
 
-    if (flags & (ZIP_FL_NOCASE | ZIP_FL_NODIR | ZIP_FL_ENC_RAW | ZIP_FL_ENC_STRICT)) {
+    if (flags & (ZIP_FL_NOCASE | ZIP_FL_NODIR | ZIP_FL_ENC_RAW | ZIP_FL_ENC_STRICT))
+    {
         /* can't use hash table */
         cmp = (flags & ZIP_FL_NOCASE) ? strcasecmp : strcmp;
 
-        for (i = 0; i < za->nentry; i++) {
+        for (i = 0; i < za->nentry; i++)
+        {
             fn = _zip_get_name(za, i, flags, error);
 
             /* newly added (partially filled) entry or error */
-            if (fn == NULL) {
+            if (fn == NULL)
+            {
                 continue;
             }
 
-            if (flags & ZIP_FL_NODIR) {
+            if (flags & ZIP_FL_NODIR)
+            {
                 p = strrchr(fn, '/');
-                if (p) {
+                if (p)
+                {
                     fn = p + 1;
                 }
             }
 
-            if (cmp(fname, fn) == 0) {
+            if (cmp(fname, fn) == 0)
+            {
                 _zip_error_clear(error);
                 _zip_string_free(str);
                 return (zip_int64_t)i;
@@ -108,8 +119,9 @@ zip_int64_t _zip_name_locate(zip_t *za, const char *fname, zip_flags_t flags, zi
         _zip_string_free(str);
         return -1;
     }
-    else {
-        zip_int64_t ret = _zip_hash_lookup(za->names, (const zip_uint8_t *)fname, flags, error);
+    else
+    {
+        zip_int64_t ret = _zip_hash_lookup(za->names, (const zip_uint8_t*)fname, flags, error);
         _zip_string_free(str);
         return ret;
     }

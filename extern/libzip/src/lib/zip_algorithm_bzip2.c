@@ -37,38 +37,43 @@
 #include <limits.h>
 #include <stdlib.h>
 
-struct ctx {
-    zip_error_t *error;
+struct ctx
+{
+    zip_error_t* error;
     bool compress;
     int compression_flags;
     bool end_of_input;
     bz_stream zstr;
 };
 
-
-static zip_uint64_t maximum_compressed_size(zip_uint64_t uncompressed_size) {
+static zip_uint64_t maximum_compressed_size(zip_uint64_t uncompressed_size)
+{
     zip_uint64_t compressed_size = (zip_uint64_t)((double)uncompressed_size * 1.006);
 
-    if (compressed_size < uncompressed_size) {
+    if (compressed_size < uncompressed_size)
+    {
         return ZIP_UINT64_MAX;
     }
     return compressed_size;
 }
 
+static void* allocate(bool compress, zip_uint32_t compression_flags, zip_error_t* error)
+{
+    struct ctx* ctx;
 
-static void *allocate(bool compress, zip_uint32_t compression_flags, zip_error_t *error) {
-    struct ctx *ctx;
-
-    if ((ctx = (struct ctx *)malloc(sizeof(*ctx))) == NULL) {
+    if ((ctx = (struct ctx*)malloc(sizeof(*ctx))) == NULL)
+    {
         return NULL;
     }
 
     ctx->error = error;
     ctx->compress = compress;
-    if (compression_flags >= 1 && compression_flags <= 9) {
+    if (compression_flags >= 1 && compression_flags <= 9)
+    {
         ctx->compression_flags = (int)compression_flags;
     }
-    else {
+    else
+    {
         ctx->compression_flags = 9;
     }
     ctx->end_of_input = false;
@@ -80,34 +85,35 @@ static void *allocate(bool compress, zip_uint32_t compression_flags, zip_error_t
     return ctx;
 }
 
-
-static void *compress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+static void* compress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t* error)
+{
     (void)method;
     return allocate(true, compression_flags, error);
 }
 
-
-static void *decompress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t *error) {
+static void* decompress_allocate(zip_uint16_t method, zip_uint32_t compression_flags, zip_error_t* error)
+{
     (void)method;
     return allocate(false, compression_flags, error);
 }
 
-
-static void deallocate(void *ud) {
-    struct ctx *ctx = (struct ctx *)ud;
+static void deallocate(void* ud)
+{
+    struct ctx* ctx = (struct ctx*)ud;
 
     free(ctx);
 }
 
-
-static zip_uint16_t general_purpose_bit_flags(void *ud) {
+static zip_uint16_t general_purpose_bit_flags(void* ud)
+{
     (void)ud;
     return 0;
 }
 
-
-static int map_error(int ret) {
-    switch (ret) {
+static int map_error(int ret)
+{
+    switch (ret)
+    {
     case BZ_FINISH_OK:
     case BZ_FLUSH_OK:
     case BZ_OK:
@@ -135,8 +141,9 @@ static int map_error(int ret) {
     }
 }
 
-static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
-    struct ctx *ctx = (struct ctx *)ud;
+static bool start(void* ud, zip_stat_t* st, zip_file_attributes_t* attributes)
+{
+    struct ctx* ctx = (struct ctx*)ud;
     int ret;
 
     (void)st;
@@ -147,14 +154,17 @@ static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
     ctx->zstr.avail_out = 0;
     ctx->zstr.next_out = NULL;
 
-    if (ctx->compress) {
+    if (ctx->compress)
+    {
         ret = BZ2_bzCompressInit(&ctx->zstr, ctx->compression_flags, 0, 30);
     }
-    else {
+    else
+    {
         ret = BZ2_bzDecompressInit(&ctx->zstr, 0, 0);
     }
 
-    if (ret != BZ_OK) {
+    if (ret != BZ_OK)
+    {
         zip_error_set(ctx->error, map_error(ret), 0);
         return false;
     }
@@ -162,19 +172,22 @@ static bool start(void *ud, zip_stat_t *st, zip_file_attributes_t *attributes) {
     return true;
 }
 
-
-static bool end(void *ud) {
-    struct ctx *ctx = (struct ctx *)ud;
+static bool end(void* ud)
+{
+    struct ctx* ctx = (struct ctx*)ud;
     int err;
 
-    if (ctx->compress) {
+    if (ctx->compress)
+    {
         err = BZ2_bzCompressEnd(&ctx->zstr);
     }
-    else {
+    else
+    {
         err = BZ2_bzDecompressEnd(&ctx->zstr);
     }
 
-    if (err != BZ_OK) {
+    if (err != BZ_OK)
+    {
         zip_error_set(ctx->error, map_error(err), 0);
         return false;
     }
@@ -182,61 +195,67 @@ static bool end(void *ud) {
     return true;
 }
 
+static bool input(void* ud, zip_uint8_t* data, zip_uint64_t length)
+{
+    struct ctx* ctx = (struct ctx*)ud;
 
-static bool input(void *ud, zip_uint8_t *data, zip_uint64_t length) {
-    struct ctx *ctx = (struct ctx *)ud;
-
-    if (length > UINT_MAX || ctx->zstr.avail_in > 0) {
+    if (length > UINT_MAX || ctx->zstr.avail_in > 0)
+    {
         zip_error_set(ctx->error, ZIP_ER_INVAL, 0);
         return false;
     }
 
     ctx->zstr.avail_in = (unsigned int)length;
-    ctx->zstr.next_in = (char *)data;
+    ctx->zstr.next_in = (char*)data;
 
     return true;
 }
 
-
-static bool end_of_input(void *ud) {
-    struct ctx *ctx = (struct ctx *)ud;
+static bool end_of_input(void* ud)
+{
+    struct ctx* ctx = (struct ctx*)ud;
 
     ctx->end_of_input = true;
     return ctx->zstr.avail_in != 0;
 }
 
-
-static zip_compression_status_t process(void *ud, zip_uint8_t *data, zip_uint64_t *length) {
-    struct ctx *ctx = (struct ctx *)ud;
+static zip_compression_status_t process(void* ud, zip_uint8_t* data, zip_uint64_t* length)
+{
+    struct ctx* ctx = (struct ctx*)ud;
     unsigned int avail_out;
 
     int ret;
 
-    if (ctx->zstr.avail_in == 0 && !ctx->end_of_input) {
+    if (ctx->zstr.avail_in == 0 && !ctx->end_of_input)
+    {
         *length = 0;
         return ZIP_COMPRESSION_NEED_DATA;
     }
 
     avail_out = (unsigned int)ZIP_MIN(UINT_MAX, *length);
     ctx->zstr.avail_out = avail_out;
-    ctx->zstr.next_out = (char *)data;
+    ctx->zstr.next_out = (char*)data;
 
-    if (ctx->compress) {
+    if (ctx->compress)
+    {
         ret = BZ2_bzCompress(&ctx->zstr, ctx->end_of_input ? BZ_FINISH : BZ_RUN);
     }
-    else {
+    else
+    {
         ret = BZ2_bzDecompress(&ctx->zstr);
     }
 
     *length = avail_out - ctx->zstr.avail_out;
 
-    switch (ret) {
+    switch (ret)
+    {
     case BZ_FINISH_OK: /* compression */
         return ZIP_COMPRESSION_OK;
 
     case BZ_OK:     /* decompression */
     case BZ_RUN_OK: /* compression */
-        if (ctx->zstr.avail_in == 0) {
+        if (ctx->zstr.avail_in == 0)
+        {
             return ZIP_COMPRESSION_NEED_DATA;
         }
         return ZIP_COMPRESSION_OK;

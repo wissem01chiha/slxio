@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
@@ -26,5 +27,7 @@ struct SimulinkRTW
     std::string DisabledProps;
     uint16_t DisabledPropsCount;
 };
+
+ValidationReport Validate(const SimulinkRTW& config);
 
 }; // namespace slxio

@@ -6,9 +6,12 @@
 
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
-namespace doctest {
-namespace Color {
-enum Enum { // NOLINT(cert-int09-c, readability-enum-initial-value)
+namespace doctest
+{
+namespace Color
+{
+enum Enum
+{ // NOLINT(cert-int09-c, readability-enum-initial-value)
     None = 0,
     White,
     Red,
@@ -26,7 +29,7 @@ enum Enum { // NOLINT(cert-int09-c, readability-enum-initial-value)
     BrightWhite = Bright | White
 };
 
-DOCTEST_INTERFACE std::ostream &operator<<(std::ostream &s, Color::Enum code);
+DOCTEST_INTERFACE std::ostream& operator<<(std::ostream& s, Color::Enum code);
 } // namespace Color
 } // namespace doctest
 

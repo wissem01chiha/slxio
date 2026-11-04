@@ -31,20 +31,21 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "zipint.h"
 
-
-ZIP_EXTERN int zip_unchange_all(zip_t *za) {
+ZIP_EXTERN int zip_unchange_all(zip_t* za)
+{
     int ret;
     zip_uint64_t i;
 
-    if (!_zip_hash_revert(za->names, &za->error)) {
+    if (!_zip_hash_revert(za->names, &za->error))
+    {
         return -1;
     }
 
     ret = 0;
-    for (i = 0; i < za->nentry; i++) {
+    for (i = 0; i < za->nentry; i++)
+    {
         ret |= _zip_unchange(za, i, 1);
     }
 

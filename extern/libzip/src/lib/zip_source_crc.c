@@ -31,14 +31,14 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <limits.h>
 #include <stdlib.h>
 #include <zlib.h>
 
 #include "zipint.h"
 
-struct crc_context {
+struct crc_context
+{
     int validate;     /* whether to check CRC on EOF and return error on mismatch */
     int crc_complete; /* whether CRC was computed for complete file */
     zip_error_t error;
@@ -48,19 +48,21 @@ struct crc_context {
     zip_uint32_t crc;
 };
 
-static zip_int64_t crc_read(zip_source_t *, void *, void *, zip_uint64_t, zip_source_cmd_t);
+static zip_int64_t crc_read(zip_source_t*, void*, void*, zip_uint64_t, zip_source_cmd_t);
 
+zip_source_t* zip_source_crc_create(zip_source_t* src, int validate, zip_error_t* error)
+{
+    struct crc_context* ctx;
+    zip_source_t* new_src;
 
-zip_source_t *zip_source_crc_create(zip_source_t *src, int validate, zip_error_t *error) {
-    struct crc_context *ctx;
-    zip_source_t *new_src;
-
-    if (src == NULL) {
+    if (src == NULL)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return NULL;
     }
 
-    if ((ctx = (struct crc_context *)malloc(sizeof(*ctx))) == NULL) {
+    if ((ctx = (struct crc_context*)malloc(sizeof(*ctx))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
@@ -73,63 +75,76 @@ zip_source_t *zip_source_crc_create(zip_source_t *src, int validate, zip_error_t
     ctx->size = 0;
 
     new_src = zip_source_layered_create(src, crc_read, ctx, error);
-    if (new_src == NULL) {
+    if (new_src == NULL)
+    {
         free(ctx);
         return NULL;
     }
     return new_src;
 }
 
-
-static zip_int64_t crc_read(zip_source_t *src, void *_ctx, void *data, zip_uint64_t len, zip_source_cmd_t cmd) {
-    struct crc_context *ctx;
+static zip_int64_t crc_read(zip_source_t* src, void* _ctx, void* data, zip_uint64_t len, zip_source_cmd_t cmd)
+{
+    struct crc_context* ctx;
     zip_int64_t n;
 
-    ctx = (struct crc_context *)_ctx;
+    ctx = (struct crc_context*)_ctx;
 
-    switch (cmd) {
+    switch (cmd)
+    {
     case ZIP_SOURCE_OPEN:
         ctx->position = 0;
         return 0;
 
     case ZIP_SOURCE_READ:
-        if ((n = zip_source_read(src, data, len)) < 0) {
+        if ((n = zip_source_read(src, data, len)) < 0)
+        {
             zip_error_set_from_source(&ctx->error, src);
             return -1;
         }
 
-        if (n == 0) {
-            if (ctx->crc_position == ctx->position) {
+        if (n == 0)
+        {
+            if (ctx->crc_position == ctx->position)
+            {
                 ctx->crc_complete = 1;
                 ctx->size = ctx->position;
 
-                if (ctx->validate) {
+                if (ctx->validate)
+                {
                     struct zip_stat st;
 
-                    if (zip_source_stat(src, &st) < 0) {
+                    if (zip_source_stat(src, &st) < 0)
+                    {
                         zip_error_set_from_source(&ctx->error, src);
                         return -1;
                     }
 
-                    if ((st.valid & ZIP_STAT_CRC) && st.crc != ctx->crc) {
+                    if ((st.valid & ZIP_STAT_CRC) && st.crc != ctx->crc)
+                    {
                         zip_error_set(&ctx->error, ZIP_ER_CRC, 0);
                         return -1;
                     }
-                    if ((st.valid & ZIP_STAT_SIZE) && st.size != ctx->size) {
+                    if ((st.valid & ZIP_STAT_SIZE) && st.size != ctx->size)
+                    {
                         /* We don't have the index here, but the caller should know which file they are reading from. */
-                        zip_error_set(&ctx->error, ZIP_ER_INCONS, MAKE_DETAIL_WITH_INDEX(ZIP_ER_DETAIL_INVALID_FILE_LENGTH, MAX_DETAIL_INDEX));
+                        zip_error_set(&ctx->error,
+                                      ZIP_ER_INCONS,
+                                      MAKE_DETAIL_WITH_INDEX(ZIP_ER_DETAIL_INVALID_FILE_LENGTH, MAX_DETAIL_INDEX));
                         return -1;
                     }
                 }
             }
         }
-        else if (!ctx->crc_complete && ctx->position <= ctx->crc_position) {
+        else if (!ctx->crc_complete && ctx->position <= ctx->crc_position)
+        {
             zip_uint64_t i, nn;
 
-            for (i = ctx->crc_position - ctx->position; i < (zip_uint64_t)n; i += nn) {
+            for (i = ctx->crc_position - ctx->position; i < (zip_uint64_t)n; i += nn)
+            {
                 nn = ZIP_MIN(UINT_MAX, (zip_uint64_t)n - i);
 
-                ctx->crc = (zip_uint32_t)crc32(ctx->crc, (const Bytef *)data + i, (uInt)nn);
+                ctx->crc = (zip_uint32_t)crc32(ctx->crc, (const Bytef*)data + i, (uInt)nn);
                 ctx->crc_position += nn;
             }
         }
@@ -139,13 +154,16 @@ static zip_int64_t crc_read(zip_source_t *src, void *_ctx, void *data, zip_uint6
     case ZIP_SOURCE_CLOSE:
         return 0;
 
-    case ZIP_SOURCE_STAT: {
-        zip_stat_t *st;
+    case ZIP_SOURCE_STAT:
+    {
+        zip_stat_t* st;
 
-        st = (zip_stat_t *)data;
+        st = (zip_stat_t*)data;
 
-        if (ctx->crc_complete) {
-            if ((st->valid & ZIP_STAT_SIZE) && st->size != ctx->size) {
+        if (ctx->crc_complete)
+        {
+            if ((st->valid & ZIP_STAT_SIZE) && st->size != ctx->size)
+            {
                 zip_error_set(&ctx->error, ZIP_ER_DATA_LENGTH, 0);
                 return -1;
             }
@@ -168,27 +186,39 @@ static zip_int64_t crc_read(zip_source_t *src, void *_ctx, void *data, zip_uint6
         free(ctx);
         return 0;
 
-    case ZIP_SOURCE_SUPPORTS: {
+    case ZIP_SOURCE_SUPPORTS:
+    {
         zip_int64_t mask = zip_source_supports(src);
 
-        if (mask < 0) {
+        if (mask < 0)
+        {
             zip_error_set_from_source(&ctx->error, src);
             return -1;
         }
 
-        mask &= ~zip_source_make_command_bitmap(ZIP_SOURCE_BEGIN_WRITE, ZIP_SOURCE_COMMIT_WRITE, ZIP_SOURCE_ROLLBACK_WRITE, ZIP_SOURCE_SEEK_WRITE, ZIP_SOURCE_TELL_WRITE, ZIP_SOURCE_REMOVE, ZIP_SOURCE_GET_FILE_ATTRIBUTES, -1);
+        mask &= ~zip_source_make_command_bitmap(ZIP_SOURCE_BEGIN_WRITE,
+                                                ZIP_SOURCE_COMMIT_WRITE,
+                                                ZIP_SOURCE_ROLLBACK_WRITE,
+                                                ZIP_SOURCE_SEEK_WRITE,
+                                                ZIP_SOURCE_TELL_WRITE,
+                                                ZIP_SOURCE_REMOVE,
+                                                ZIP_SOURCE_GET_FILE_ATTRIBUTES,
+                                                -1);
         mask |= zip_source_make_command_bitmap(ZIP_SOURCE_FREE, -1);
         return mask;
     }
 
-    case ZIP_SOURCE_SEEK: {
+    case ZIP_SOURCE_SEEK:
+    {
         zip_int64_t new_position;
-        zip_source_args_seek_t *args = ZIP_SOURCE_GET_ARGS(zip_source_args_seek_t, data, len, &ctx->error);
+        zip_source_args_seek_t* args = ZIP_SOURCE_GET_ARGS(zip_source_args_seek_t, data, len, &ctx->error);
 
-        if (args == NULL) {
+        if (args == NULL)
+        {
             return -1;
         }
-        if (zip_source_seek(src, args->offset, args->whence) < 0 || (new_position = zip_source_tell(src)) < 0) {
+        if (zip_source_seek(src, args->offset, args->whence) < 0 || (new_position = zip_source_tell(src)) < 0)
+        {
             zip_error_set_from_source(&ctx->error, src);
             return -1;
         }

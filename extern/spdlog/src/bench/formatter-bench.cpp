@@ -8,11 +8,11 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/pattern_formatter.h"
 
-void bench_formatter(benchmark::State &state, std::string pattern) {
+void bench_formatter(benchmark::State& state, std::string pattern) {
     auto formatter = spdlog::details::make_unique<spdlog::pattern_formatter>(pattern);
     spdlog::memory_buf_t dest;
     std::string logger_name = "logger-name";
-    const char *text =
+    const char* text =
         "Hello. This is some message with length of 80                                   ";
 
     spdlog::source_loc source_loc{"a/b/c/d/myfile.cpp", 123, "some_func()"};
@@ -29,7 +29,7 @@ void bench_formatters() {
     // basic patterns(single flag)
     std::string all_flags = "+vtPnlLaAbBcCYDmdHIMSefFprRTXzEisg@luioO%";
     std::vector<std::string> basic_patterns;
-    for (auto &flag : all_flags) {
+    for (auto& flag : all_flags) {
         auto pattern = std::string("%") + flag;
         benchmark::RegisterBenchmark(pattern.c_str(), &bench_formatter, pattern);
 
@@ -47,13 +47,13 @@ void bench_formatters() {
         "[%Y-%m-%d %H:%M:%S.%e] [%l] [%n] %v",
         "[%Y-%m-%d %H:%M:%S.%e] [%l] [%n] [%t] %v",
     };
-    for (auto &pattern : patterns) {
+    for (auto& pattern : patterns) {
         benchmark::RegisterBenchmark(pattern.c_str(), &bench_formatter, pattern)
             ->Iterations(2500000);
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     spdlog::set_pattern("[%^%l%$] %v");
     if (argc != 2) {
         spdlog::error("Usage: {} <pattern> (or \"all\" to bench all)", argv[0]);

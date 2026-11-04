@@ -6,8 +6,10 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 // =================================================================================================
 // The following code has been taken verbatim from Catch2/include/internal/catch_xmlwriter.cpp

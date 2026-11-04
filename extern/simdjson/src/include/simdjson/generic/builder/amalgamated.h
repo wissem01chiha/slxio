@@ -6,8 +6,5 @@
 #include "simdjson/generic/builder/json_builder.h"
 #include "simdjson/generic/builder/fractured_json_builder.h"
 
-
-
 // JSON builder inline definitions
 #include "simdjson/generic/builder/json_string_builder-inl.h"
-

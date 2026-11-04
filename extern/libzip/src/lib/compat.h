@@ -123,7 +123,6 @@ typedef char bool;
 #endif
 #endif
 
-
 #if defined(HAVE__FSEEKI64) && defined(HAVE__FSTAT64) && defined(HAVE__FTELLI64)
 /* Windows API using int64 */
 typedef zip_int64_t zip_off_t;
@@ -180,7 +179,6 @@ typedef long zip_off_t;
 #define ftello(s) ((long)ftell((s)))
 #endif
 
-
 #ifdef HAVE_LOCALTIME_S
 #ifdef _WIN32
 /* Windows is incompatible to the C11 standard, hurray! */
@@ -222,13 +220,13 @@ typedef long zip_off_t;
 
 #ifndef HAVE_STRERROR_S
 #define strerrorlen_s(errnum) (strlen(strerror(errnum)))
-#define strerror_s(buf, bufsz, errnum) ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)), (buf)[(bufsz) - 1] = '\0', strerrorlen_s(errnum) >= (bufsz))
+#define strerror_s(buf, bufsz, errnum)                                                                                             \
+    ((void)strncpy_s((buf), (bufsz), strerror(errnum), (bufsz)), (buf)[(bufsz) - 1] = '\0', strerrorlen_s(errnum) >= (bufsz))
 #else
 #ifndef HAVE_STRERRORLEN_S
 #define strerrorlen_s(errnum) 8192
 #endif
 #endif
-
 
 #ifndef SIZE_MAX
 #if SIZEOF_SIZE_T == 8

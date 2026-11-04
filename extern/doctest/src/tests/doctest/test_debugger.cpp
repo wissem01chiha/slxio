@@ -14,12 +14,15 @@ DOCTEST_CLANG_SUPPRESS_WARNING_POP
 #endif
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 
-namespace debugger {
+namespace debugger
+{
 bool signal_caught = false;
 
 #if defined(DOCTEST_PLATFORM_WINDOWS)
-extern "C" inline LONG WINAPI veh(PEXCEPTION_POINTERS info) {
-    if (info->ExceptionRecord->ExceptionCode == EXCEPTION_BREAKPOINT) {
+extern "C" inline LONG WINAPI veh(PEXCEPTION_POINTERS info)
+{
+    if (info->ExceptionRecord->ExceptionCode == EXCEPTION_BREAKPOINT)
+    {
         signal_caught = true;
 #if defined(_M_AMD64)
         info->ContextRecord->Rip++;
@@ -34,10 +37,11 @@ extern "C" inline LONG WINAPI veh(PEXCEPTION_POINTERS info) {
 
     return EXCEPTION_CONTINUE_SEARCH;
 }
-void *handle = nullptr;
+void* handle = nullptr;
 #endif
 
-inline void setup() {
+inline void setup()
+{
     signal_caught = false;
 #if defined(DOCTEST_PLATFORM_WINDOWS)
     REQUIRE(handle == nullptr);
@@ -54,17 +58,18 @@ inline void setup() {
 #endif
 }
 
-inline void cleanup() {
+inline void cleanup()
+{
 #if defined(DOCTEST_PLATFORM_WINDOWS)
-    if (handle != nullptr) {
+    if (handle != nullptr)
+    {
         RemoveVectoredExceptionHandler(handle);
         handle = nullptr;
     }
 #elif defined(DOCTEST_PLATFORM_LINUX)
 #if DOCTEST_CLANG >= DOCTEST_COMPILER(5, 0, 0)
     DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH(
-        "-Wzero-as-null-pointer-constant"
-    ) /* SIG_DFL=0, but is the correct way to de-register a handler */
+        "-Wzero-as-null-pointer-constant") /* SIG_DFL=0, but is the correct way to de-register a handler */
 #endif
 
     static_cast<void>(signal(SIGTRAP, SIG_DFL));
@@ -77,7 +82,8 @@ inline void cleanup() {
 
 } // namespace debugger
 
-TEST_CASE("Manually triggering the debugger") {
+TEST_CASE("Manually triggering the debugger")
+{
     // Unfortunately, we cannot test doctest::detail::isDebuggerActive with this strategy
 
     debugger::setup();

@@ -35,14 +35,15 @@
 */
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
-extern char *optarg;
-extern int optind;
-extern int opterr;
+    extern char* optarg;
+    extern int optind;
+    extern int opterr;
 
-extern int getopt(int, char *const *, const char *);
+    extern int getopt(int, char* const*, const char*);
 
 #ifdef __cplusplus
 }

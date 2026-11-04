@@ -31,41 +31,50 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "zipint.h"
 
 /* Returns -1 on error, 0 on no dostime available, 1 for dostime returned */
-int zip_source_get_dos_time(zip_source_t *src, zip_dostime_t *dos_time) {
-    if (src->source_closed) {
+int zip_source_get_dos_time(zip_source_t* src, zip_dostime_t* dos_time)
+{
+    if (src->source_closed)
+    {
         return -1;
     }
-    if (dos_time == NULL) {
+    if (dos_time == NULL)
+    {
         zip_error_set(&src->error, ZIP_ER_INVAL, 0);
         return -1;
     }
 
-    if (src->write_state == ZIP_SOURCE_WRITE_REMOVED) {
+    if (src->write_state == ZIP_SOURCE_WRITE_REMOVED)
+    {
         zip_error_set(&src->error, ZIP_ER_READ, ENOENT);
     }
 
-    if (zip_source_supports(src) & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_GET_DOS_TIME)) {
+    if (zip_source_supports(src) & ZIP_SOURCE_MAKE_COMMAND_BITMASK(ZIP_SOURCE_GET_DOS_TIME))
+    {
         zip_int64_t n = _zip_source_call(src, dos_time, sizeof(*dos_time), ZIP_SOURCE_GET_DOS_TIME);
 
-        if (n < 0) {
+        if (n < 0)
+        {
             return -1;
         }
-        else if (n == 0) {
+        else if (n == 0)
+        {
             return 0;
         }
-        else if (n == sizeof(*dos_time)) {
+        else if (n == sizeof(*dos_time))
+        {
             return 1;
         }
-        else {
+        else
+        {
             zip_error_set(&src->error, ZIP_ER_INTERNAL, 0);
             return -1;
         }
     }
-    else {
+    else
+    {
         return 0;
     }
 }

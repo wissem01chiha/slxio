@@ -1,68 +1,13 @@
-# add_module(
-#   MODULE_NAME 
-#     Core
-#   MODULE_GROUP 
-#     Simulink
-#   LIBRARY_NAME 
-#     SimulinkCore
-#   MODULE_ENABLE_BUILD 
-#     TRUE
-#   MODULE_ENABLE_TESTS 
-#     TRUE
-#   MODULE_CONFIG_HEADERS
-#   MODULE_CLASSES
-#     ISimulinkElement.cxx
-#     SimulinkDataType.cxx
-#     SimulinkBlockType.cxx
-#     SimulinkParameterInformation.cxx
-#     SimulinkParameter.cxx
-#     SimulinkArray.cxx
-#     SimulinkObject.cxx
-#     SimulinkMutableParameter.cxx
-#     ISimulinkBlock.cxx
-#     SimulinkModel.cxx
-#     SimulinkBlockCategory.cxx
-#   MODULE_HEADERS
-#     SimulinkECH.h
-#     ISimulinkElement.h
-#     SimulinkDataType.h
-#     SimulinkBlockType.h
-#     SimulinkParameterInformation.h
-#     SimulinkParameter.h
-#     SimulinkArray.h
-#     SimulinkObject.h
-#     SimulinkPortType.h
-#     SimulinkModelType.h
-#     SimulinkBlockType.h
-#     SimulinkMutableParameter.h
-#     ISimulinkBlock.h
-#     SimulinkModel.h
-#     SimulinkBlockCategory.h
-#   MODULE_PCH_HEADERS
-#     SimulinkPCH.h
-#   MODULE_SOURCES
-#     SimulinkPortType.cxx
-#     SimulinkModelType.cxx
-#     SimulinkBlockType.cxx
-#   MODULE_TEST_SOURCE_DIR
-#     test/cxx
-#   MODULE_TEST_DATA_SOURCE_DIR
-#     test/data
-#   MODULE_TEST_DATA_SOURCES
-#   MODULE_TEST_SOURCES
-#     TestSimulinkArray.cxx
-#     TestSimulinkParameter.cxx
-#     TestSimulinkDataType.cxx
-#     TestSimulinkObject.cxx
-#     TestSimulinkBlockCategory.cxx
-#   MODULE_INCLUDE_DIRS
-#   MODULE_PUBLIC_DEPENDS
-#     CommonCore
-#     CommonDataModel
-#     SimulinkMisc
-#     SimulinkData
-#     SimulinkConfiguration
-#   MODULE_TEST_DEPENDS
-#   MODULE_TEST_INCLUDE_DIRS
-#     ${PROJECT_SOURCE_DIR}/ThirdParty/doctest
-# )
+# Copyright 2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.

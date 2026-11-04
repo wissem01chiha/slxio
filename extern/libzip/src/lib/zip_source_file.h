@@ -34,7 +34,8 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-struct zip_source_file_stat {
+struct zip_source_file_stat
+{
     zip_uint64_t size; /* must be valid for regular files */
     time_t mtime;      /* must always be valid, is initialized to current time */
     bool exists;       /* must always be valid */
@@ -45,13 +46,14 @@ typedef struct zip_source_file_context zip_source_file_context_t;
 typedef struct zip_source_file_operations zip_source_file_operations_t;
 typedef struct zip_source_file_stat zip_source_file_stat_t;
 
-struct zip_source_file_context {
+struct zip_source_file_context
+{
     zip_error_t error; /* last error information */
     zip_int64_t supports;
 
     /* reading */
-    char *fname;                      /* name of file to read from */
-    void *f;                          /* file to read from */
+    char* fname;                      /* name of file to read from */
+    void* f;                          /* file to read from */
     zip_stat_t st;                    /* stat information passed in */
     zip_file_attributes_t attributes; /* additional file attributes */
     zip_error_t stat_error;           /* error returned for stat */
@@ -60,36 +62,44 @@ struct zip_source_file_context {
     zip_uint64_t offset;              /* current offset relative to start (0 is beginning of part we read) */
 
     /* writing */
-    char *tmpname;
-    void *fout;
+    char* tmpname;
+    void* fout;
 
-    zip_source_file_operations_t *ops;
-    void *ops_userdata;
+    zip_source_file_operations_t* ops;
+    void* ops_userdata;
 };
-
 
 /* The following methods must be implemented to support each feature:
    - close, read, seek, and stat must always be implemented.
    - To support specifying the file by name, open, and strdup must be implemented.
-   - For write support, the file must be specified by name and close, commit_write, create_temp_output, remove, rollback_write, and tell must be implemented.
+   - For write support, the file must be specified by name and close, commit_write, create_temp_output, remove, rollback_write, and
+   tell must be implemented.
    - create_temp_output_cloning is always optional. */
 
-struct zip_source_file_operations {
-    void (*close)(zip_source_file_context_t *ctx);
-    zip_int64_t (*commit_write)(zip_source_file_context_t *ctx);
-    zip_int64_t (*create_temp_output)(zip_source_file_context_t *ctx);
-    zip_int64_t (*create_temp_output_cloning)(zip_source_file_context_t *ctx, zip_uint64_t len);
-    bool (*open)(zip_source_file_context_t *ctx);
-    zip_int64_t (*read)(zip_source_file_context_t *ctx, void *buf, zip_uint64_t len);
-    zip_int64_t (*remove)(zip_source_file_context_t *ctx);
-    void (*rollback_write)(zip_source_file_context_t *ctx);
-    bool (*seek)(zip_source_file_context_t *ctx, void *f, zip_int64_t offset, int whence);
-    bool (*stat)(zip_source_file_context_t *ctx, zip_source_file_stat_t *st);
-    char *(*string_duplicate)(zip_source_file_context_t *ctx, const char *);
-    zip_int64_t (*tell)(zip_source_file_context_t *ctx, void *f);
-    zip_int64_t (*write)(zip_source_file_context_t *ctx, const void *data, zip_uint64_t len);
+struct zip_source_file_operations
+{
+    void (*close)(zip_source_file_context_t* ctx);
+    zip_int64_t (*commit_write)(zip_source_file_context_t* ctx);
+    zip_int64_t (*create_temp_output)(zip_source_file_context_t* ctx);
+    zip_int64_t (*create_temp_output_cloning)(zip_source_file_context_t* ctx, zip_uint64_t len);
+    bool (*open)(zip_source_file_context_t* ctx);
+    zip_int64_t (*read)(zip_source_file_context_t* ctx, void* buf, zip_uint64_t len);
+    zip_int64_t (*remove)(zip_source_file_context_t* ctx);
+    void (*rollback_write)(zip_source_file_context_t* ctx);
+    bool (*seek)(zip_source_file_context_t* ctx, void* f, zip_int64_t offset, int whence);
+    bool (*stat)(zip_source_file_context_t* ctx, zip_source_file_stat_t* st);
+    char* (*string_duplicate)(zip_source_file_context_t* ctx, const char*);
+    zip_int64_t (*tell)(zip_source_file_context_t* ctx, void* f);
+    zip_int64_t (*write)(zip_source_file_context_t* ctx, const void* data, zip_uint64_t len);
 };
 
-zip_source_t *zip_source_file_common_new(const char *fname, void *file, zip_uint64_t start, zip_int64_t len, const zip_stat_t *st, zip_source_file_operations_t *ops, void *ops_userdata, zip_error_t *error);
+zip_source_t* zip_source_file_common_new(const char* fname,
+                                         void* file,
+                                         zip_uint64_t start,
+                                         zip_int64_t len,
+                                         const zip_stat_t* st,
+                                         zip_source_file_operations_t* ops,
+                                         void* ops_userdata,
+                                         zip_error_t* error);
 
 #endif /* _HAD_ZIP_SOURCE_FILE_H */

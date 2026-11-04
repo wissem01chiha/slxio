@@ -106,9 +106,19 @@ std::string SimulinkObject::GetClassName() const
     return m_className;
 }
 
+void SimulinkObject::SetClassName(const std::string& className)
+{
+    m_className = className;
+}
+
 std::string SimulinkObject::GetVersion() const
 {
     return m_version;
+}
+
+void SimulinkObject::SetVersion(const std::string& version)
+{
+    m_version = version;
 }
 
 std::string SimulinkObject::ToString() const

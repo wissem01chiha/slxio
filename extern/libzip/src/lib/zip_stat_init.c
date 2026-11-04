@@ -35,8 +35,8 @@
 
 #include "zipint.h"
 
-
-ZIP_EXTERN void zip_stat_init(zip_stat_t *st) {
+ZIP_EXTERN void zip_stat_init(zip_stat_t* st)
+{
     st->valid = 0;
     st->name = NULL;
     st->index = ZIP_UINT64_MAX;
@@ -48,31 +48,39 @@ ZIP_EXTERN void zip_stat_init(zip_stat_t *st) {
     st->encryption_method = ZIP_EM_NONE;
 }
 
-
-int _zip_stat_merge(zip_stat_t *dst, const zip_stat_t *src, zip_error_t *error) {
+int _zip_stat_merge(zip_stat_t* dst, const zip_stat_t* src, zip_error_t* error)
+{
     /* name is not merged, since zip_stat_t doesn't own it, and src may not be valid as long as dst */
-    if (src->valid & ZIP_STAT_INDEX) {
+    if (src->valid & ZIP_STAT_INDEX)
+    {
         dst->index = src->index;
     }
-    if (src->valid & ZIP_STAT_SIZE) {
+    if (src->valid & ZIP_STAT_SIZE)
+    {
         dst->size = src->size;
     }
-    if (src->valid & ZIP_STAT_COMP_SIZE) {
+    if (src->valid & ZIP_STAT_COMP_SIZE)
+    {
         dst->comp_size = src->comp_size;
     }
-    if (src->valid & ZIP_STAT_MTIME) {
+    if (src->valid & ZIP_STAT_MTIME)
+    {
         dst->mtime = src->mtime;
     }
-    if (src->valid & ZIP_STAT_CRC) {
+    if (src->valid & ZIP_STAT_CRC)
+    {
         dst->crc = src->crc;
     }
-    if (src->valid & ZIP_STAT_COMP_METHOD) {
+    if (src->valid & ZIP_STAT_COMP_METHOD)
+    {
         dst->comp_method = src->comp_method;
     }
-    if (src->valid & ZIP_STAT_ENCRYPTION_METHOD) {
+    if (src->valid & ZIP_STAT_ENCRYPTION_METHOD)
+    {
         dst->encryption_method = src->encryption_method;
     }
-    if (src->valid & ZIP_STAT_FLAGS) {
+    if (src->valid & ZIP_STAT_FLAGS)
+    {
         dst->flags = src->flags;
     }
     dst->valid |= src->valid;

@@ -16,8 +16,8 @@
 #include "spdlog/sinks/null_sink.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 
-void bench_c_string(benchmark::State &state, std::shared_ptr<spdlog::logger> logger) {
-    const char *msg =
+void bench_c_string(benchmark::State& state, std::shared_ptr<spdlog::logger> logger) {
+    const char* msg =
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum pharetra metus cursus "
         "lacus placerat congue. Nulla egestas, mauris a tincidunt tempus, enim lectus volutpat mi, "
         "eu consequat sem "
@@ -33,13 +33,13 @@ void bench_c_string(benchmark::State &state, std::shared_ptr<spdlog::logger> log
     }
 }
 
-void bench_logger(benchmark::State &state, std::shared_ptr<spdlog::logger> logger) {
+void bench_logger(benchmark::State& state, std::shared_ptr<spdlog::logger> logger) {
     int i = 0;
     for (auto _ : state) {
         logger->info("Hello logger: msg number {}...............", ++i);
     }
 }
-void bench_global_logger(benchmark::State &state, std::shared_ptr<spdlog::logger> logger) {
+void bench_global_logger(benchmark::State& state, std::shared_ptr<spdlog::logger> logger) {
     spdlog::set_default_logger(std::move(logger));
     int i = 0;
     for (auto _ : state) {
@@ -47,7 +47,7 @@ void bench_global_logger(benchmark::State &state, std::shared_ptr<spdlog::logger
     }
 }
 
-void bench_disabled_macro(benchmark::State &state, std::shared_ptr<spdlog::logger> logger) {
+void bench_disabled_macro(benchmark::State& state, std::shared_ptr<spdlog::logger> logger) {
     int i = 0;
     benchmark::DoNotOptimize(i);       // prevent unused warnings
     benchmark::DoNotOptimize(logger);  // prevent unused warnings
@@ -56,7 +56,7 @@ void bench_disabled_macro(benchmark::State &state, std::shared_ptr<spdlog::logge
     }
 }
 
-void bench_disabled_macro_global_logger(benchmark::State &state,
+void bench_disabled_macro_global_logger(benchmark::State& state,
                                         std::shared_ptr<spdlog::logger> logger) {
     spdlog::set_default_logger(std::move(logger));
     int i = 0;
@@ -81,7 +81,7 @@ void bench_dev_null() {
 }
 #endif  // __linux__
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
     using spdlog::sinks::null_sink_mt;
     using spdlog::sinks::null_sink_st;
 

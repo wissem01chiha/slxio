@@ -19,8 +19,10 @@
 #include <string_view>
 #include <vector>
 
-namespace simdjson {
-namespace compile_time {
+namespace simdjson
+{
+namespace compile_time
+{
 
 /**
  * @brief Compile-time JSON parser. This function parses the provided JSON
@@ -64,11 +66,12 @@ template <constevalutil::fixed_string json_str> consteval auto parse_json();
 
 } // namespace compile_time
 
-inline namespace literals {
+inline namespace literals
+{
 
-template <simdjson::constevalutil::fixed_string str>
-consteval auto operator ""_json() {
-  return simdjson::compile_time::parse_json<str>();
+template <simdjson::constevalutil::fixed_string str> consteval auto operator""_json()
+{
+    return simdjson::compile_time::parse_json<str>();
 }
 
 } // namespace literals

@@ -16,27 +16,29 @@
 NAMESPACE_BEGIN(NB_NAMESPACE)
 NAMESPACE_BEGIN(detail)
 
-template <typename T> struct type_caster<std::complex<T>> {
+template <typename T> struct type_caster<std::complex<T>>
+{
     NB_TYPE_CASTER(std::complex<T>, const_name("complex"))
 
-    bool from_python(handle src, uint32_t flags, cleanup_list *cleanup) noexcept {
+    bool from_python(handle src, uint32_t flags, cleanup_list* cleanup) noexcept
+    {
         // The boundary function writes (real, imaginary) to two doubles;
         // std::complex<double> is layout-compatible
         std::complex<double> cmplx;
-        if (!NB_CALL(load_cmplx)(NB_CTX_C(cleanup), src.ptr(), flags,
-                                 (double *) &cmplx))
+        if (!NB_CALL(load_cmplx)(NB_CTX_C(cleanup), src.ptr(), flags, (double*)&cmplx))
             return false;
-        if constexpr (std::is_same_v<T, double>) {
+        if constexpr (std::is_same_v<T, double>)
+        {
             value = cmplx;
             return true;
-        } else {
-            T re = (T) cmplx.real();
-            T im = (T) cmplx.imag();
-            if ((flags & cast_flags::convert)
-                    ||  (((double) re == cmplx.real()
-                             || (re != re && cmplx.real() != cmplx.real()))
-                      && ((double) im == cmplx.imag()
-                             || (im != im && cmplx.imag() != cmplx.imag())))) {
+        }
+        else
+        {
+            T re = (T)cmplx.real();
+            T im = (T)cmplx.imag();
+            if ((flags & cast_flags::convert) || (((double)re == cmplx.real() || (re != re && cmplx.real() != cmplx.real())) &&
+                                                  ((double)im == cmplx.imag() || (im != im && cmplx.imag() != cmplx.imag()))))
+            {
                 value = std::complex<T>(re, im);
                 return true;
             }
@@ -44,10 +46,9 @@ template <typename T> struct type_caster<std::complex<T>> {
         }
     }
 
-    static handle from_cpp(const std::complex<T>& value, rv_policy,
-                           cleanup_list*) noexcept {
-        return PyComplex_FromDoubles((double) value.real(),
-                                     (double) value.imag());
+    static handle from_cpp(const std::complex<T>& value, rv_policy, cleanup_list*) noexcept
+    {
+        return PyComplex_FromDoubles((double)value.real(), (double)value.imag());
     }
 };
 

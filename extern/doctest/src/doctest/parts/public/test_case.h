@@ -6,14 +6,16 @@
 
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
-namespace doctest {
+namespace doctest
+{
 
-struct DOCTEST_INTERFACE TestCaseData {
+struct DOCTEST_INTERFACE TestCaseData
+{
     String m_file;            // the file in which the test was registered (using String - see #350)
     unsigned m_line;          // the line where the test was registered
-    const char *m_name;       // name of the test case
-    const char *m_test_suite; // the test suite in which the test was added
-    const char *m_description;
+    const char* m_name;       // name of the test case
+    const char* m_test_suite; // the test suite in which the test was added
+    const char* m_description;
     bool m_skip;
     bool m_no_breaks;
     bool m_no_output;
@@ -24,11 +26,13 @@ struct DOCTEST_INTERFACE TestCaseData {
 };
 
 #ifndef DOCTEST_CONFIG_DISABLE
-namespace detail {
+namespace detail
+{
 
 using funcType = void (*)();
 
-struct DOCTEST_INTERFACE TestCase : public TestCaseData {
+struct DOCTEST_INTERFACE TestCase : public TestCaseData
+{
     funcType m_test; // a function pointer to the test case
 
     String m_type;      // for templated test cases - gets appended to the real name
@@ -36,39 +40,37 @@ struct DOCTEST_INTERFACE TestCase : public TestCaseData {
                         // test case
     String m_full_name; // contains the name (only for templated test cases!) + the template type
 
-    TestCase(
-        funcType test,
-        const char *file,
-        unsigned line,
-        const TestSuite &test_suite,
-        const String &type = String(),
-        int template_id = -1
-    ) noexcept;
+    TestCase(funcType test,
+             const char* file,
+             unsigned line,
+             const TestSuite& test_suite,
+             const String& type = String(),
+             int template_id = -1) noexcept;
 
-    TestCase(const TestCase &other) noexcept;
-    TestCase(TestCase &&) = delete;
+    TestCase(const TestCase& other) noexcept;
+    TestCase(TestCase&&) = delete;
 
     DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(26434) // hides a non-virtual function
-    TestCase &operator=(const TestCase &other) noexcept;
+    TestCase& operator=(const TestCase& other) noexcept;
     DOCTEST_MSVC_SUPPRESS_WARNING_POP
 
-    TestCase &operator=(TestCase &&) = delete;
+    TestCase& operator=(TestCase&&) = delete;
 
-    TestCase &operator*(const char *in) noexcept;
+    TestCase& operator*(const char* in) noexcept;
 
-    template <typename T>
-    TestCase &operator*(const T &in) noexcept {
+    template <typename T> TestCase& operator*(const T& in) noexcept
+    {
         in.fill(*this);
         return *this;
     }
 
-    bool operator<(const TestCase &other) const noexcept;
+    bool operator<(const TestCase& other) const noexcept;
 
     ~TestCase() = default;
 };
 
 // forward declarations of functions used by the macros
-DOCTEST_INTERFACE int regTest(const TestCase &tc) noexcept;
+DOCTEST_INTERFACE int regTest(const TestCase& tc) noexcept;
 
 } // namespace detail
 #endif // DOCTEST_CONFIG_DISABLE

@@ -7,22 +7,27 @@
 #include <generic/stage1/utf8_lookup4_algorithm.h>
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-namespace SIMDJSON_IMPLEMENTATION {
-namespace {
-namespace stage1 {
+namespace simdjson
+{
+namespace SIMDJSON_IMPLEMENTATION
+{
+namespace
+{
+namespace stage1
+{
 
 /**
  * Validates that the string is actual UTF-8.
  */
-template<class checker>
-bool generic_validate_utf8(const uint8_t * input, size_t length) {
+template <class checker> bool generic_validate_utf8(const uint8_t* input, size_t length)
+{
     checker c{};
     buf_block_reader<64> reader(input, length);
-    while (reader.has_full_block()) {
-      simd::simd8x64<uint8_t> in(reader.full_block());
-      c.check_next_input(in);
-      reader.advance();
+    while (reader.has_full_block())
+    {
+        simd::simd8x64<uint8_t> in(reader.full_block());
+        c.check_next_input(in);
+        reader.advance();
     }
     uint8_t block[64]{};
     reader.get_remainder(block);
@@ -33,8 +38,9 @@ bool generic_validate_utf8(const uint8_t * input, size_t length) {
     return c.errors() == error_code::SUCCESS;
 }
 
-bool generic_validate_utf8(const char * input, size_t length) {
-    return generic_validate_utf8<utf8_checker>(reinterpret_cast<const uint8_t *>(input),length);
+bool generic_validate_utf8(const char* input, size_t length)
+{
+    return generic_validate_utf8<utf8_checker>(reinterpret_cast<const uint8_t*>(input), length);
 }
 
 } // namespace stage1

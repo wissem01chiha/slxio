@@ -2,7 +2,6 @@
 // Rewritten from C++ to a single C file for easier integration.
 // Original code released under BSD 3-Clause, see full license below.
 
-
 // Copyright 2006-2011 the V8 project authors. All rights reserved.
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,8 +29,6 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
-
 #include "goo_double_conv.h"
 
 #include <stdlib.h>
@@ -41,63 +38,61 @@
 #include <limits.h>
 #include <assert.h>
 
-
-
 /// ============================================================================
 /// Compile Hint Begin
 /// ============================================================================
 
 /* warning suppress begin */
 #if defined(__clang__)
-#   pragma clang diagnostic push
-#   pragma clang diagnostic ignored "-Wunused-function"
-#   pragma clang diagnostic ignored "-Wunused-parameter"
-#   pragma clang diagnostic ignored "-Wunused-label"
-#   pragma clang diagnostic ignored "-Wunused-macros"
-#   pragma clang diagnostic ignored "-Wunused-variable"
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-function"
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wunused-label"
+#pragma clang diagnostic ignored "-Wunused-macros"
+#pragma clang diagnostic ignored "-Wunused-variable"
 #elif defined(__GNUC__)
-#   if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
-#   pragma GCC diagnostic push
-#   endif
-#   pragma GCC diagnostic ignored "-Wunused-function"
-#   pragma GCC diagnostic ignored "-Wunused-parameter"
-#   pragma GCC diagnostic ignored "-Wunused-label"
-#   pragma GCC diagnostic ignored "-Wunused-macros"
-#   pragma GCC diagnostic ignored "-Wunused-variable"
-#elif defined(_MSC_VER)
-#   pragma warning(push)
-#   pragma warning(disable:4100) /* unreferenced formal parameter */
-#   pragma warning(disable:4102) /* unreferenced label */
-#   pragma warning(disable:4127) /* conditional expression is constant */
-#   pragma warning(disable:4706) /* assignment within conditional expression */
+#if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
+#pragma GCC diagnostic push
 #endif
-
-
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-parameter"
+#pragma GCC diagnostic ignored "-Wunused-label"
+#pragma GCC diagnostic ignored "-Wunused-macros"
+#pragma GCC diagnostic ignored "-Wunused-variable"
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 4100) /* unreferenced formal parameter */
+#pragma warning(disable : 4102) /* unreferenced label */
+#pragma warning(disable : 4127) /* conditional expression is constant */
+#pragma warning(disable : 4706) /* assignment within conditional expression */
+#endif
 
 /// ============================================================================
 /// ceil.c
 /// ============================================================================
 
-static void fp_force_eval(double x) {
+static void fp_force_eval(double x)
+{
     volatile double y;
     y = x;
 }
 
-#if FLT_EVAL_METHOD==0 || FLT_EVAL_METHOD==1
+#if FLT_EVAL_METHOD == 0 || FLT_EVAL_METHOD == 1
 #define EPS DBL_EPSILON
-#elif FLT_EVAL_METHOD==2
+#elif FLT_EVAL_METHOD == 2
 #define EPS LDBL_EPSILON
 #endif
-static const double toint = 1/EPS;
+static const double toint = 1 / EPS;
 
-static double fp_ceil(double x) {
+static double fp_ceil(double x)
+{
     uint64_t u;
-    memcpy((void *)&u, (void *)&x, sizeof(uint64_t));
+    memcpy((void*)&u, (void*)&x, sizeof(uint64_t));
 
     int e = u >> 52 & 0x7ff;
     double y;
 
-    if (e >= 0x3ff+52 || x == 0)
+    if (e >= 0x3ff + 52 || x == 0)
         return x;
     /* y = int(x) - x, where int(x) is an integer neighbor of x */
     if (u >> 63)
@@ -105,7 +100,8 @@ static double fp_ceil(double x) {
     else
         y = x + toint - toint - x;
     /* special case because of non-nearest rounding modes */
-    if (e <= 0x3ff-1) {
+    if (e <= 0x3ff - 1)
+    {
         fp_force_eval(y);
         return u >> 63 ? -0.0 : 1;
     }
@@ -113,8 +109,6 @@ static double fp_ceil(double x) {
         return x + y + 1;
     return x + y;
 }
-
-
 
 /// ============================================================================
 /// utils.h
@@ -166,10 +160,13 @@ static double fp_ceil(double x) {
 #ifndef DOUBLE_CONVERSION_UNREACHABLE
 #ifdef _MSC_VER
 void DOUBLE_CONVERSION_NO_RETURN abort_noreturn();
-static void abort_noreturn() { abort(); }
-#define DOUBLE_CONVERSION_UNREACHABLE()   (abort_noreturn())
+static void abort_noreturn()
+{
+    abort();
+}
+#define DOUBLE_CONVERSION_UNREACHABLE() (abort_noreturn())
 #else
-#define DOUBLE_CONVERSION_UNREACHABLE()   (abort())
+#define DOUBLE_CONVERSION_UNREACHABLE() (abort())
 #endif
 #endif
 #if defined(DOUBLE_CONVERSION_NON_PREFIXED_MACROS) && !defined(UNREACHABLE)
@@ -179,9 +176,9 @@ static void abort_noreturn() { abort(); }
 // Not all compilers support __has_attribute and combining a check for both
 // ifdef and __has_attribute on the same preprocessor line isn't portable.
 #ifdef __has_attribute
-#   define DOUBLE_CONVERSION_HAS_ATTRIBUTE(x) __has_attribute(x)
+#define DOUBLE_CONVERSION_HAS_ATTRIBUTE(x) __has_attribute(x)
 #else
-#   define DOUBLE_CONVERSION_HAS_ATTRIBUTE(x) 0
+#define DOUBLE_CONVERSION_HAS_ATTRIBUTE(x) 0
 #endif
 
 #ifndef DOUBLE_CONVERSION_UNUSED
@@ -230,25 +227,15 @@ int main(int argc, char** argv) {
 // Run as follows ./main || echo "correct"
 //
 // If it prints "correct" then the architecture should be here, in the "correct" section.
-#if defined(_M_X64) || defined(__x86_64__) || \
-    defined(__ARMEL__) || defined(__avr32__) || defined(_M_ARM) || defined(_M_ARM64) || \
-    defined(__hppa__) || defined(__ia64__) || \
-    defined(__mips__) || \
-    defined(__loongarch__) || \
-    defined(__nios2__) || defined(__ghs) || \
-    defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || \
-    defined(_POWER) || defined(_ARCH_PPC) || defined(_ARCH_PPC64) || \
-    defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
-    defined(__SH4__) || defined(__alpha__) || \
-    defined(_MIPS_ARCH_MIPS32R2) || defined(__ARMEB__) ||\
-    defined(__AARCH64EL__) || defined(__aarch64__) || defined(__AARCH64EB__) || \
-    defined(__riscv) || defined(__e2k__) || \
-    defined(__or1k__) || defined(__arc__) || defined(__ARC64__) || \
-    defined(__microblaze__) || defined(__XTENSA__) || \
-    defined(__EMSCRIPTEN__) || defined(__wasm32__)
+#if defined(_M_X64) || defined(__x86_64__) || defined(__ARMEL__) || defined(__avr32__) || defined(_M_ARM) || defined(_M_ARM64) ||  \
+    defined(__hppa__) || defined(__ia64__) || defined(__mips__) || defined(__loongarch__) || defined(__nios2__) ||                 \
+    defined(__ghs) || defined(__powerpc__) || defined(__ppc__) || defined(__ppc64__) || defined(_POWER) || defined(_ARCH_PPC) ||   \
+    defined(_ARCH_PPC64) || defined(__sparc__) || defined(__sparc) || defined(__s390__) || defined(__SH4__) ||                     \
+    defined(__alpha__) || defined(_MIPS_ARCH_MIPS32R2) || defined(__ARMEB__) || defined(__AARCH64EL__) || defined(__aarch64__) ||  \
+    defined(__AARCH64EB__) || defined(__riscv) || defined(__e2k__) || defined(__or1k__) || defined(__arc__) ||                     \
+    defined(__ARC64__) || defined(__microblaze__) || defined(__XTENSA__) || defined(__EMSCRIPTEN__) || defined(__wasm32__)
 #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
-#elif defined(__mc68000__) || \
-    defined(__pnacl__) || defined(__native_client__)
+#elif defined(__mc68000__) || defined(__pnacl__) || defined(__native_client__)
 #undef DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS
 #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
 #if defined(_WIN32)
@@ -256,7 +243,7 @@ int main(int argc, char** argv) {
 #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
 #else
 #undef DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS
-#endif  // _WIN32
+#endif // _WIN32
 #else
 #error Target architecture was not detected as supported by Double-Conversion.
 #endif
@@ -264,10 +251,8 @@ int main(int argc, char** argv) {
 #define CORRECT_DOUBLE_OPERATIONS DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS
 #endif
 
-
 typedef uint16_t uc16;
-typedef const char *Iterator;
-
+typedef const char* Iterator;
 
 // The following macro works on both 32 and 64-bit platforms.
 // Usage: instead of writing 0x1234567890123456
@@ -282,35 +267,35 @@ typedef const char *Iterator;
 // array. You should only use DOUBLE_CONVERSION_ARRAY_SIZE on statically allocated
 // arrays.
 #ifndef DOUBLE_CONVERSION_ARRAY_SIZE
-#define DOUBLE_CONVERSION_ARRAY_SIZE(a)                                   \
-  ((sizeof(a) / sizeof(*(a))) /                         \
-  (size_t)(!(sizeof(a) % sizeof(*(a)))))
+#define DOUBLE_CONVERSION_ARRAY_SIZE(a) ((sizeof(a) / sizeof(*(a))) / (size_t)(!(sizeof(a) % sizeof(*(a)))))
 #endif
 #if defined(DOUBLE_CONVERSION_NON_PREFIXED_MACROS) && !defined(ARRAY_SIZE)
 #define ARRAY_SIZE DOUBLE_CONVERSION_ARRAY_SIZE
 #endif
 
-static int StrLength(const char *string) {
+static int StrLength(const char* string)
+{
     size_t length = strlen(string);
     DOUBLE_CONVERSION_ASSERT(length == (size_t)((int)(length)));
     return (int)(length);
 }
 
-
-
 // This is a simplified version of V8's Vector class.
-typedef struct Vector {
-    char *start;
+typedef struct Vector
+{
+    char* start;
     int length;
 } Vector;
 
-static void Vector_init(Vector *vec, char *data, int len) {
+static void Vector_init(Vector* vec, char* data, int len)
+{
     DOUBLE_CONVERSION_ASSERT(len == 0 || (len > 0 && data != DOUBLE_CONVERSION_NULLPTR));
     vec->start = data;
     vec->length = len;
 }
 
-static Vector Vector_make(char *data, int len) {
+static Vector Vector_make(char* data, int len)
+{
     Vector vec;
     Vector_init(&vec, data, len);
     return vec;
@@ -318,7 +303,8 @@ static Vector Vector_make(char *data, int len) {
 
 // Returns a vector using the same backing storage as this one,
 // spanning from and including 'from', to but not including 'to'.
-static Vector Vector_SubVector(Vector *vec, int from, int to) {
+static Vector Vector_SubVector(Vector* vec, int from, int to)
+{
     DOUBLE_CONVERSION_ASSERT(to <= vec->length);
     DOUBLE_CONVERSION_ASSERT(from < to);
     DOUBLE_CONVERSION_ASSERT(0 <= from);
@@ -326,65 +312,75 @@ static Vector Vector_SubVector(Vector *vec, int from, int to) {
 }
 
 // Returns the length of the vector.
-static int Vector_length(Vector *vec) {
+static int Vector_length(Vector* vec)
+{
     return vec->length;
 }
 
 // Returns whether or not the vector is empty.
-static bool Vector_is_empty(Vector *vec) {
+static bool Vector_is_empty(Vector* vec)
+{
     return vec->length == 0;
 }
 
 // Returns the pointer to the start of the data in the vector.
-static char *Vector_start(Vector *vec) {
+static char* Vector_start(Vector* vec)
+{
     return vec->start;
 }
 
 // Access individual vector elements
-static char Vector_at(Vector *vec, int index) {
+static char Vector_at(Vector* vec, int index)
+{
     return vec->start[index];
 }
 
-static char Vector_first(Vector *vec) {
+static char Vector_first(Vector* vec)
+{
     return vec->start[0];
 }
 
-static char Vector_last(Vector *vec) {
+static char Vector_last(Vector* vec)
+{
     return vec->start[vec->length - 1];
 }
 
-static void Vector_pop_back(Vector *vec) {
+static void Vector_pop_back(Vector* vec)
+{
     DOUBLE_CONVERSION_ASSERT(!Vector_is_empty(vec));
     vec->length--;
 }
 
-
-
 // Helper class for building result strings in a character buffer. The
 // purpose of the class is to use safe operations that checks the
 // buffer bounds on all operations in debug mode.
-typedef struct StringBuilder {
+typedef struct StringBuilder
+{
     Vector buffer;
     int position;
 } StringBuilder;
 
-static void StringBuilder_init(StringBuilder *sb, char *buffer, int buffer_size) {
+static void StringBuilder_init(StringBuilder* sb, char* buffer, int buffer_size)
+{
     sb->buffer = Vector_make(buffer, buffer_size);
     sb->position = 0;
 }
 
-static StringBuilder StringBuilder_make(char *buffer, int buffer_size) {
+static StringBuilder StringBuilder_make(char* buffer, int buffer_size)
+{
     StringBuilder sb;
     StringBuilder_init(&sb, buffer, buffer_size);
     return sb;
 }
 
-static bool StringBuilder_is_finalized(StringBuilder *sb) {
+static bool StringBuilder_is_finalized(StringBuilder* sb)
+{
     return sb->position < 0;
 }
 
 // Finalize the string by 0-terminating it and returning the buffer.
-static char *StringBuilder_Finalize(StringBuilder *sb) {
+static char* StringBuilder_Finalize(StringBuilder* sb)
+{
     DOUBLE_CONVERSION_ASSERT(!StringBuilder_is_finalized(sb) && sb->position < sb->buffer.length);
     sb->buffer.start[sb->position] = '\0';
     // Make sure nobody managed to add a 0-character to the
@@ -395,25 +391,29 @@ static char *StringBuilder_Finalize(StringBuilder *sb) {
     return Vector_start(&sb->buffer);
 }
 
-static int StringBuilder_size(StringBuilder *sb) {
+static int StringBuilder_size(StringBuilder* sb)
+{
     return sb->buffer.length;
 }
 
 // Get the current position in the builder.
-static int StringBuilder_position(StringBuilder *sb) {
+static int StringBuilder_position(StringBuilder* sb)
+{
     DOUBLE_CONVERSION_ASSERT(!StringBuilder_is_finalized(sb));
     return sb->position;
 }
 
 // Reset the position.
-static void StringBuilder_Reset(StringBuilder *sb) {
+static void StringBuilder_Reset(StringBuilder* sb)
+{
     sb->position = 0;
 }
 
 // Add a single character to the builder. It is not allowed to add
 // 0-characters; use the Finalize() method to terminate the string
 // instead.
-static void StringBuilder_AddCharacter(StringBuilder *sb, char c) {
+static void StringBuilder_AddCharacter(StringBuilder* sb, char c)
+{
     DOUBLE_CONVERSION_ASSERT(c != '\0');
     DOUBLE_CONVERSION_ASSERT(!StringBuilder_is_finalized(sb) && sb->position < sb->buffer.length);
     sb->buffer.start[sb->position++] = c;
@@ -421,7 +421,8 @@ static void StringBuilder_AddCharacter(StringBuilder *sb, char c) {
 
 // Add the first 'n' characters of the given string 's' to the
 // builder. The input string must have enough characters.
-static void StringBuilder_AddSubstring(StringBuilder *sb, const char* s, int n) {
+static void StringBuilder_AddSubstring(StringBuilder* sb, const char* s, int n)
+{
     DOUBLE_CONVERSION_ASSERT(!StringBuilder_is_finalized(sb) && sb->position + n < sb->buffer.length);
     DOUBLE_CONVERSION_ASSERT((size_t)(n) <= strlen(s));
     memmove(sb->buffer.start + sb->position, s, (size_t)n);
@@ -430,19 +431,20 @@ static void StringBuilder_AddSubstring(StringBuilder *sb, const char* s, int n) 
 
 // Add an entire string to the builder. Uses strlen() internally to
 // compute the length of the input string.
-static void StringBuilder_AddString(StringBuilder *sb, const char* s) {
+static void StringBuilder_AddString(StringBuilder* sb, const char* s)
+{
     StringBuilder_AddSubstring(sb, s, StrLength(s));
 }
 
 // Add character padding to the builder. If count is non-positive,
 // nothing is added to the builder.
-static void StringBuilder_AddPadding(StringBuilder *sb, char c, int count) {
-    for (int i = 0; i < count; i++) {
+static void StringBuilder_AddPadding(StringBuilder* sb, char c, int count)
+{
+    for (int i = 0; i < count; i++)
+    {
         StringBuilder_AddCharacter(sb, c);
     }
 }
-
-
 
 /// ============================================================================
 /// diy-fp.h
@@ -457,17 +459,20 @@ static const int DiyFp_kSignificandSize = 64;
 // Multiplication and Subtraction do not normalize their results.
 // DiyFp store only non-negative numbers and are not designed to contain special
 // doubles (NaN and Infinity).
-typedef struct DiyFp {
+typedef struct DiyFp
+{
     uint64_t f;
     int32_t e;
 } DiyFp;
 
-static void DiyFp_init(DiyFp *fp, uint64_t significand, int32_t exponent) {
+static void DiyFp_init(DiyFp* fp, uint64_t significand, int32_t exponent)
+{
     fp->f = significand;
     fp->e = exponent;
 }
 
-static DiyFp DiyFp_make(uint64_t significand, int32_t exponent) {
+static DiyFp DiyFp_make(uint64_t significand, int32_t exponent)
+{
     DiyFp fp;
     DiyFp_init(&fp, significand, exponent);
     return fp;
@@ -477,7 +482,8 @@ static DiyFp DiyFp_make(uint64_t significand, int32_t exponent) {
 // The exponents of both numbers must be the same and the significand of this
 // must be greater or equal than the significand of other.
 // The result will not be normalized.
-static void DiyFp_Subtract(DiyFp *fp, const DiyFp *other) {
+static void DiyFp_Subtract(DiyFp* fp, const DiyFp* other)
+{
     DOUBLE_CONVERSION_ASSERT(fp->e == other->e);
     DOUBLE_CONVERSION_ASSERT(fp->f >= other->f);
     fp->f -= other->f;
@@ -486,14 +492,16 @@ static void DiyFp_Subtract(DiyFp *fp, const DiyFp *other) {
 // Returns a - b.
 // The exponents of both numbers must be the same and a must be greater
 // or equal than b. The result will not be normalized.
-static DiyFp DiyFp_Minus(const DiyFp *a, const DiyFp *b) {
+static DiyFp DiyFp_Minus(const DiyFp* a, const DiyFp* b)
+{
     DiyFp result = *a;
     DiyFp_Subtract(&result, b);
     return result;
 }
 
 // this *= other.
-static void DiyFp_Multiply(DiyFp *fp, const DiyFp *other) {
+static void DiyFp_Multiply(DiyFp* fp, const DiyFp* other)
+{
     // Simply "emulates" a 128 bit multiplication.
     // However: the resulting number only contains 64 bits. The least
     // significant 64 bits are only used for rounding the most significant 64
@@ -515,13 +523,15 @@ static void DiyFp_Multiply(DiyFp *fp, const DiyFp *other) {
 }
 
 // returns a * b;
-static DiyFp DiyFp_Times(const DiyFp *a, const DiyFp *b) {
+static DiyFp DiyFp_Times(const DiyFp* a, const DiyFp* b)
+{
     DiyFp result = *a;
     DiyFp_Multiply(&result, b);
     return result;
 }
 
-static void DiyFp_Normalize(DiyFp *fp) {
+static void DiyFp_Normalize(DiyFp* fp)
+{
     DOUBLE_CONVERSION_ASSERT(fp->f != 0);
     uint64_t significand = fp->f;
     int32_t exponent = fp->e;
@@ -529,11 +539,13 @@ static void DiyFp_Normalize(DiyFp *fp) {
     // This method is mainly called for normalizing boundaries. In general,
     // boundaries need to be shifted by 10 bits, and we optimize for this case.
     const uint64_t k10MSBits = DOUBLE_CONVERSION_UINT64_2PART_C(0xFFC00000, 00000000);
-    while ((significand & k10MSBits) == 0) {
+    while ((significand & k10MSBits) == 0)
+    {
         significand <<= 10;
         exponent -= 10;
     }
-    while ((significand & DiyFp_kUint64MSB) == 0) {
+    while ((significand & DiyFp_kUint64MSB) == 0)
+    {
         significand <<= 1;
         exponent--;
     }
@@ -541,38 +553,41 @@ static void DiyFp_Normalize(DiyFp *fp) {
     fp->e = exponent;
 }
 
-static DiyFp DiyFp_Normalize_make(const DiyFp *a) {
+static DiyFp DiyFp_Normalize_make(const DiyFp* a)
+{
     DiyFp result = *a;
     DiyFp_Normalize(&result);
     return result;
 }
-
-
 
 /// ============================================================================
 /// ieee.h
 /// ============================================================================
 
 // We assume that doubles and uint64_t have the same endianness.
-static uint64_t double_to_uint64(double d) {
+static uint64_t double_to_uint64(double d)
+{
     uint64_t u;
     memcpy(&u, &d, sizeof(uint64_t));
     return u;
 }
 
-static double uint64_to_double(uint64_t d64) {
+static double uint64_to_double(uint64_t d64)
+{
     double d;
     memcpy(&d, &d64, sizeof(uint64_t));
     return d;
 }
 
-static uint32_t float_to_uint32(float f) {
+static uint32_t float_to_uint32(float f)
+{
     uint32_t u;
     memcpy(&u, &f, sizeof(uint32_t));
     return u;
 }
 
-static float uint32_to_float(uint32_t d32) {
+static float uint32_to_float(uint32_t d32)
+{
     float f;
     memcpy(&f, &d32, sizeof(uint32_t));
     return f;
@@ -583,11 +598,11 @@ static const uint64_t Double_kExponentMask = DOUBLE_CONVERSION_UINT64_2PART_C(0x
 static const uint64_t Double_kSignificandMask = DOUBLE_CONVERSION_UINT64_2PART_C(0x000FFFFF, FFFFFFFF);
 static const uint64_t Double_kHiddenBit = DOUBLE_CONVERSION_UINT64_2PART_C(0x00100000, 00000000);
 static const uint64_t Double_kQuietNanBit = DOUBLE_CONVERSION_UINT64_2PART_C(0x00080000, 00000000);
-#define Double_kPhysicalSignificandSize ((int)52)  // Excludes the hidden bit.
+#define Double_kPhysicalSignificandSize ((int)52) // Excludes the hidden bit.
 #define Double_kSignificandSize ((int)53)
 #define Double_kExponentBias ((int)(0x3FF + Double_kPhysicalSignificandSize))
 #define Double_kMaxExponent ((int)(0x7FF - Double_kExponentBias))
-#define Double_kDenormalExponent  ((int)(-Double_kExponentBias + 1))
+#define Double_kDenormalExponent ((int)(-Double_kExponentBias + 1))
 static const uint64_t Double_kInfinity = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF00000, 00000000);
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
 static const uint64_t Double_kNaN = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF7FFFF, FFFFFFFF);
@@ -595,91 +610,107 @@ static const uint64_t Double_kNaN = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF7FFFF,
 static const uint64_t Double_kNaN = DOUBLE_CONVERSION_UINT64_2PART_C(0x7FF80000, 00000000);
 #endif
 
-static uint64_t DiyFpToUint64(DiyFp *fp) {
+static uint64_t DiyFpToUint64(DiyFp* fp)
+{
     uint64_t significand = fp->f;
     int exponent = fp->e;
-    while (significand > Double_kHiddenBit + Double_kSignificandMask) {
+    while (significand > Double_kHiddenBit + Double_kSignificandMask)
+    {
         significand >>= 1;
         exponent++;
     }
-    if (exponent >= Double_kMaxExponent) {
+    if (exponent >= Double_kMaxExponent)
+    {
         return Double_kInfinity;
     }
-    if (exponent < Double_kDenormalExponent) {
+    if (exponent < Double_kDenormalExponent)
+    {
         return 0;
     }
-    while (exponent > Double_kDenormalExponent && (significand & Double_kHiddenBit) == 0) {
+    while (exponent > Double_kDenormalExponent && (significand & Double_kHiddenBit) == 0)
+    {
         significand <<= 1;
         exponent--;
     }
     uint64_t biased_exponent;
-    if (exponent == Double_kDenormalExponent && (significand & Double_kHiddenBit) == 0) {
+    if (exponent == Double_kDenormalExponent && (significand & Double_kHiddenBit) == 0)
+    {
         biased_exponent = 0;
-    } else {
+    }
+    else
+    {
         biased_exponent = (uint64_t)(exponent + Double_kExponentBias);
     }
-    return (significand & Double_kSignificandMask) |
-        (biased_exponent << Double_kPhysicalSignificandSize);
+    return (significand & Double_kSignificandMask) | (biased_exponent << Double_kPhysicalSignificandSize);
 }
 
-
-
 // Helper functions for doubles.
-typedef struct Double {
+typedef struct Double
+{
     uint64_t d64;
 } Double;
 
-static Double Double_make_u(uint64_t d64) {
+static Double Double_make_u(uint64_t d64)
+{
     Double d;
     d.d64 = d64;
     return d;
 }
 
-static Double Double_make(double d) {
+static Double Double_make(double d)
+{
     return Double_make_u(double_to_uint64(d));
 }
 
-static Double Double_make_diyfp(DiyFp *fp) {
+static Double Double_make_diyfp(DiyFp* fp)
+{
     return Double_make_u(DiyFpToUint64(fp));
 }
 
 // Returns the double's bit as uint64.
-static uint64_t Double_AsUint64(Double *d) {
+static uint64_t Double_AsUint64(Double* d)
+{
     return d->d64;
 }
 
-static double Double_value(Double *d) {
+static double Double_value(Double* d)
+{
     return uint64_to_double(d->d64);
 }
 
-static double Double_Infinity(void) {
+static double Double_Infinity(void)
+{
     return uint64_to_double(Double_make_u(Double_kInfinity).d64);
 }
 
-static double Double_NaN(void) {
+static double Double_NaN(void)
+{
     return uint64_to_double(Double_make_u(Double_kNaN).d64);
 }
 
 // Returns true if the double is a denormal.
-static bool Double_IsDenormal(Double *d) {
+static bool Double_IsDenormal(Double* d)
+{
     uint64_t d64 = d->d64;
     return (d64 & Double_kExponentMask) == 0;
 }
 
 // We consider denormals not to be special.
 // Hence only Infinity and NaN are special.
-static bool Double_IsSpecial(Double *d) {
+static bool Double_IsSpecial(Double* d)
+{
     uint64_t d64 = d->d64;
     return (d64 & Double_kExponentMask) == Double_kExponentMask;
 }
 
-static bool Double_IsNan(Double *d) {
+static bool Double_IsNan(Double* d)
+{
     uint64_t d64 = d->d64;
-    return ((d64 & Double_kExponentMask) == Double_kExponentMask) &&
-        ((d64 & Double_kSignificandMask) != 0);
+    return ((d64 & Double_kExponentMask) == Double_kExponentMask) && ((d64 & Double_kSignificandMask) != 0);
 }
 
-static bool Double_IsQuietNan(Double *d) {
+static bool Double_IsQuietNan(Double* d)
+{
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
     return Double_IsNan(d) && ((d->d64 & Double_kQuietNanBit) == 0);
 #else
@@ -687,7 +718,8 @@ static bool Double_IsQuietNan(Double *d) {
 #endif
 }
 
-static bool Double_IsSignalingNan(Double *d) {
+static bool Double_IsSignalingNan(Double* d)
+{
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
     return Double_IsNan(d) && ((d->d64 & Double_kQuietNanBit) != 0);
 #else
@@ -695,51 +727,61 @@ static bool Double_IsSignalingNan(Double *d) {
 #endif
 }
 
-static bool Double_IsInfinite(Double *d) {
+static bool Double_IsInfinite(Double* d)
+{
     uint64_t d64 = d->d64;
-    return ((d64 & Double_kExponentMask) == Double_kExponentMask) &&
-      ((d64 & Double_kSignificandMask) == 0);
+    return ((d64 & Double_kExponentMask) == Double_kExponentMask) && ((d64 & Double_kSignificandMask) == 0);
 }
 
-static int Double_Sign(Double *d) {
+static int Double_Sign(Double* d)
+{
     uint64_t d64 = d->d64;
-    return (d64 & Double_kSignMask) == 0? 1: -1;
+    return (d64 & Double_kSignMask) == 0 ? 1 : -1;
 }
 
-static int Double_Exponent(Double *d) {
-    if (Double_IsDenormal(d)) return Double_kDenormalExponent;
+static int Double_Exponent(Double* d)
+{
+    if (Double_IsDenormal(d))
+        return Double_kDenormalExponent;
 
     uint64_t d64 = d->d64;
     int biased_e = (int)((d64 & Double_kExponentMask) >> Double_kPhysicalSignificandSize);
     return biased_e - Double_kExponentBias;
 }
 
-static uint64_t Double_Significand(Double *d) {
+static uint64_t Double_Significand(Double* d)
+{
     uint64_t d64 = d->d64;
     uint64_t significand = d64 & Double_kSignificandMask;
-    if (!Double_IsDenormal(d)) {
+    if (!Double_IsDenormal(d))
+    {
         return significand + Double_kHiddenBit;
-    } else {
+    }
+    else
+    {
         return significand;
     }
 }
 
 // The value encoded by this Double must be greater or equal to +0.0.
 // It must not be special (infinity, or NaN).
-static DiyFp Double_AsDiyFp(Double *d) {
+static DiyFp Double_AsDiyFp(Double* d)
+{
     DOUBLE_CONVERSION_ASSERT(Double_Sign(d) > 0);
     DOUBLE_CONVERSION_ASSERT(!Double_IsSpecial(d));
     return DiyFp_make(Double_Significand(d), Double_Exponent(d));
 }
 
 // The value encoded by this Double must be strictly greater than 0.
-static DiyFp Double_AsNormalizedDiyFp(Double *d) {
+static DiyFp Double_AsNormalizedDiyFp(Double* d)
+{
     DOUBLE_CONVERSION_ASSERT(d->d64 > 0.0);
     uint64_t f = Double_Significand(d);
     int e = Double_Exponent(d);
 
     // The current double could be a denormal.
-    while ((f & Double_kHiddenBit) == 0) {
+    while ((f & Double_kHiddenBit) == 0)
+    {
         f <<= 1;
         e--;
     }
@@ -750,37 +792,51 @@ static DiyFp Double_AsNormalizedDiyFp(Double *d) {
 }
 
 // Returns the next greater double. Returns +infinity on input +infinity.
-static double Double_NextDouble(Double *d) {
-    if (d->d64 == Double_kInfinity) return uint64_to_double(Double_make_u(Double_kInfinity).d64);
-    if (Double_Sign(d) < 0 && Double_Significand(d) == 0) {
+static double Double_NextDouble(Double* d)
+{
+    if (d->d64 == Double_kInfinity)
+        return uint64_to_double(Double_make_u(Double_kInfinity).d64);
+    if (Double_Sign(d) < 0 && Double_Significand(d) == 0)
+    {
         // -0.0
         return 0.0;
     }
-    if (Double_Sign(d) < 0) {
+    if (Double_Sign(d) < 0)
+    {
         return uint64_to_double(Double_make_u(d->d64 - 1).d64);
-    } else {
+    }
+    else
+    {
         return uint64_to_double(Double_make_u(d->d64 + 1).d64);
     }
 }
 
-static double Double_PreviousDouble(Double *d) {
-    if (d->d64 == (Double_kInfinity | Double_kSignMask)) return -Double_Infinity();
-    if (Double_Sign(d) < 0) {
+static double Double_PreviousDouble(Double* d)
+{
+    if (d->d64 == (Double_kInfinity | Double_kSignMask))
+        return -Double_Infinity();
+    if (Double_Sign(d) < 0)
+    {
         return uint64_to_double(Double_make_u(d->d64 + 1).d64);
-    } else {
-        if (Double_Significand(d) == 0) return -0.0;
+    }
+    else
+    {
+        if (Double_Significand(d) == 0)
+            return -0.0;
         return uint64_to_double(Double_make_u(d->d64 - 1).d64);
     }
 }
 
 // Precondition: the value encoded by this Double must be greater or equal
 // than +0.0.
-static DiyFp Double_UpperBoundary(Double *d) {
+static DiyFp Double_UpperBoundary(Double* d)
+{
     DOUBLE_CONVERSION_ASSERT(Double_Sign(d) > 0);
     return DiyFp_make(Double_Significand(d) * 2 + 1, Double_Exponent(d) - 1);
 }
 
-static bool Double_LowerBoundaryIsCloser(Double *d) {
+static bool Double_LowerBoundaryIsCloser(Double* d)
+{
     // The boundary is closer if the significand is of the form f == 2^p-1 then
     // the lower boundary is closer.
     // Think of v = 1000e10 and v- = 9999e9.
@@ -797,16 +853,20 @@ static bool Double_LowerBoundaryIsCloser(Double *d) {
 // The bigger boundary (m_plus) is normalized. The lower boundary has the same
 // exponent as m_plus.
 // Precondition: the value encoded by this Double must be greater than 0.
-static void Double_NormalizedBoundaries(Double *d, DiyFp *out_m_minus, DiyFp *out_m_plus) {
+static void Double_NormalizedBoundaries(Double* d, DiyFp* out_m_minus, DiyFp* out_m_plus)
+{
     DOUBLE_CONVERSION_ASSERT(d->d64 > 0.0);
     DiyFp v = Double_AsDiyFp(d);
     DiyFp t = DiyFp_make((v.f << 1) + 1, v.e - 1);
     DiyFp m_plus = DiyFp_Normalize_make(&t);
     DiyFp m_minus;
-    if (Double_LowerBoundaryIsCloser(d)) {
-      m_minus = DiyFp_make((v.f << 2) - 1, v.e - 2);
-    } else {
-      m_minus = DiyFp_make((v.f << 1) - 1, v.e - 1);
+    if (Double_LowerBoundaryIsCloser(d))
+    {
+        m_minus = DiyFp_make((v.f << 2) - 1, v.e - 2);
+    }
+    else
+    {
+        m_minus = DiyFp_make((v.f << 1) - 1, v.e - 1);
     }
     m_minus.f = (m_minus.f << (m_minus.e - m_plus.e));
     m_minus.e = (m_plus.e);
@@ -820,22 +880,23 @@ static void Double_NormalizedBoundaries(Double *d, DiyFp *out_m_minus, DiyFp *ou
 // once it's encoded into a double. In almost all cases this is equal to
 // kSignificandSize. The only exceptions are denormals. They start with
 // leading zeroes and their effective significand-size is hence smaller.
-static int Double_SignificandSizeForOrderOfMagnitude(int order) {
-    if (order >= (Double_kDenormalExponent + Double_kSignificandSize)) {
-      return Double_kSignificandSize;
+static int Double_SignificandSizeForOrderOfMagnitude(int order)
+{
+    if (order >= (Double_kDenormalExponent + Double_kSignificandSize))
+    {
+        return Double_kSignificandSize;
     }
-    if (order <= Double_kDenormalExponent) return 0;
+    if (order <= Double_kDenormalExponent)
+        return 0;
     return order - Double_kDenormalExponent;
 }
-
-
 
 static const uint32_t Single_kSignMask = 0x80000000;
 static const uint32_t Single_kExponentMask = 0x7F800000;
 static const uint32_t Single_kSignificandMask = 0x007FFFFF;
 static const uint32_t Single_kHiddenBit = 0x00800000;
 static const uint32_t Single_kQuietNanBit = 0x00400000;
-#define Single_kPhysicalSignificandSize ((int)23)  // Excludes the hidden bit.
+#define Single_kPhysicalSignificandSize ((int)23) // Excludes the hidden bit.
 #define Single_kSignificandSize ((int)24)
 #define Single_kExponentBias ((int)(0x7F + Single_kPhysicalSignificandSize))
 #define Single_kDenormalExponent ((int)(-Single_kExponentBias + 1))
@@ -847,59 +908,69 @@ static const uint32_t Single_kNaN = 0x7FBFFFFF;
 static const uint32_t Single_kNaN = 0x7FC00000;
 #endif
 
-typedef struct Single {
+typedef struct Single
+{
     uint32_t d32;
 } Single;
 
-static Single Single_make(float f) {
+static Single Single_make(float f)
+{
     Single s;
     s.d32 = float_to_uint32(f);
     return s;
 }
 
-static Single Single_make_u(uint32_t u) {
+static Single Single_make_u(uint32_t u)
+{
     Single s;
     s.d32 = u;
     return s;
 }
 
-static float Single_value(Single *s) {
+static float Single_value(Single* s)
+{
     return uint32_to_float(s->d32);
 }
 
-static float Single_Infinity(void) {
+static float Single_Infinity(void)
+{
     return uint32_to_float(Single_make_u(Single_kInfinity).d32);
 }
 
-static float Single_NaN(void) {
+static float Single_NaN(void)
+{
     return uint32_to_float(Single_make_u(Single_kNaN).d32);
 }
 
 // Returns the single's bit as uint64.
-static uint32_t Single_AsUint32(Single *s) {
+static uint32_t Single_AsUint32(Single* s)
+{
     return s->d32;
 }
 
 // Returns true if the single is a denormal.
-static bool Single_IsDenormal(Single *s) {
+static bool Single_IsDenormal(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
     return (d32 & Single_kExponentMask) == 0;
 }
 
 // We consider denormals not to be special.
 // Hence only Infinity and NaN are special.
-static bool Single_IsSpecial(Single *s) {
+static bool Single_IsSpecial(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
     return (d32 & Single_kExponentMask) == Single_kExponentMask;
 }
 
-static bool Single_IsNan(Single *s) {
+static bool Single_IsNan(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
-    return ((d32 & Single_kExponentMask) == Single_kExponentMask) &&
-        ((d32 & Single_kSignificandMask) != 0);
+    return ((d32 & Single_kExponentMask) == Single_kExponentMask) && ((d32 & Single_kSignificandMask) != 0);
 }
 
-static bool Single_IsQuietNan(Single *s) {
+static bool Single_IsQuietNan(Single* s)
+{
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
     return Single_IsNan(s) && ((Single_AsUint32(s) & Single_kQuietNanBit) == 0);
 #else
@@ -907,7 +978,8 @@ static bool Single_IsQuietNan(Single *s) {
 #endif
 }
 
-static bool Single_IsSignalingNan(Single *s) {
+static bool Single_IsSignalingNan(Single* s)
+{
 #if (defined(__mips__) && !defined(__mips_nan2008)) || defined(__hppa__)
     return Single_IsNan(s) && ((Single_AsUint32(s) & Single_kQuietNanBit) != 0);
 #else
@@ -915,39 +987,46 @@ static bool Single_IsSignalingNan(Single *s) {
 #endif
 }
 
-static int Single_Exponent(Single *s) {
-    if (Single_IsDenormal(s)) return Single_kDenormalExponent;
+static int Single_Exponent(Single* s)
+{
+    if (Single_IsDenormal(s))
+        return Single_kDenormalExponent;
 
     uint32_t d32 = Single_AsUint32(s);
-    int biased_e =
-        (int)((d32 & Single_kExponentMask) >> Single_kPhysicalSignificandSize);
+    int biased_e = (int)((d32 & Single_kExponentMask) >> Single_kPhysicalSignificandSize);
     return biased_e - Single_kExponentBias;
 }
 
-static uint32_t Single_Significand(Single *s) {
+static uint32_t Single_Significand(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
     uint32_t significand = d32 & Single_kSignificandMask;
-    if (!Single_IsDenormal(s)) {
+    if (!Single_IsDenormal(s))
+    {
         return significand + Single_kHiddenBit;
-    } else {
+    }
+    else
+    {
         return significand;
     }
 }
 
-static bool Single_IsInfinite(Single *s) {
+static bool Single_IsInfinite(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
-    return ((d32 & Single_kExponentMask) == Single_kExponentMask) &&
-        ((d32 & Single_kSignificandMask) == 0);
+    return ((d32 & Single_kExponentMask) == Single_kExponentMask) && ((d32 & Single_kSignificandMask) == 0);
 }
 
-static int Single_Sign(Single *s) {
+static int Single_Sign(Single* s)
+{
     uint32_t d32 = Single_AsUint32(s);
-    return (d32 & Single_kSignMask) == 0? 1: -1;
+    return (d32 & Single_kSignMask) == 0 ? 1 : -1;
 }
 
 // The value encoded by this Single must be greater or equal to +0.0.
 // It must not be special (infinity, or NaN).
-static DiyFp Single_AsDiyFp(Single *s)  {
+static DiyFp Single_AsDiyFp(Single* s)
+{
     DOUBLE_CONVERSION_ASSERT(Single_Sign(s) > 0);
     DOUBLE_CONVERSION_ASSERT(!Single_IsSpecial(s));
     return DiyFp_make(Single_Significand(s), Single_Exponent(s));
@@ -955,12 +1034,14 @@ static DiyFp Single_AsDiyFp(Single *s)  {
 
 // Precondition: the value encoded by this Single must be greater or equal
 // than +0.0.
-static DiyFp Single_UpperBoundary(Single *s) {
+static DiyFp Single_UpperBoundary(Single* s)
+{
     DOUBLE_CONVERSION_ASSERT(Single_Sign(s) > 0);
     return DiyFp_make(Single_Significand(s) * 2 + 1, Single_Exponent(s) - 1);
 }
 
-static bool Single_LowerBoundaryIsCloser(Single *s) {
+static bool Single_LowerBoundaryIsCloser(Single* s)
+{
     // The boundary is closer if the significand is of the form f == 2^p-1 then
     // the lower boundary is closer.
     // Think of v = 1000e10 and v- = 9999e9.
@@ -977,15 +1058,19 @@ static bool Single_LowerBoundaryIsCloser(Single *s) {
 // The bigger boundary (m_plus) is normalized. The lower boundary has the same
 // exponent as m_plus.
 // Precondition: the value encoded by this Single must be greater than 0.
-static void Single_NormalizedBoundaries(Single *s, DiyFp *out_m_minus, DiyFp *out_m_plus) {
+static void Single_NormalizedBoundaries(Single* s, DiyFp* out_m_minus, DiyFp* out_m_plus)
+{
     DOUBLE_CONVERSION_ASSERT(Single_value(s) > 0.0);
     DiyFp v = Single_AsDiyFp(s);
     DiyFp t = DiyFp_make((v.f << 1) + 1, v.e - 1);
     DiyFp m_plus = DiyFp_Normalize_make(&t);
     DiyFp m_minus;
-    if (Single_LowerBoundaryIsCloser(s)) {
+    if (Single_LowerBoundaryIsCloser(s))
+    {
         m_minus = DiyFp_make((v.f << 2) - 1, v.e - 2);
-    } else {
+    }
+    else
+    {
         m_minus = DiyFp_make((v.f << 1) - 1, v.e - 1);
     }
     m_minus.f = (m_minus.f << (m_minus.e - m_plus.e));
@@ -993,8 +1078,6 @@ static void Single_NormalizedBoundaries(Single *s, DiyFp *out_m_minus, DiyFp *ou
     *out_m_plus = m_plus;
     *out_m_minus = m_minus;
 }
-
-
 
 /// ============================================================================
 /// bignum.h
@@ -1017,7 +1100,8 @@ static const Bignum_Chunk Bignum_kBigitMask = (1 << Bignum_kBigitSize) - 1;
 // grow. There are no checks if the stack-allocated space is sufficient.
 #define Bignum_kBigitCapacity ((int)(Bignum_kMaxSignificantBits / Bignum_kBigitSize))
 
-typedef struct Bignum {
+typedef struct Bignum
+{
     // The Bignum's value is value(bigits_buffer_) * 2^(exponent_ * kBigitSize),
     // where the value of the buffer consists of the lower kBigitSize bits of
     // the first used_bigits_ Chunks in bigits_buffer_, first chunk has lowest
@@ -1027,34 +1111,39 @@ typedef struct Bignum {
     Bignum_Chunk bigits_buffer[Bignum_kBigitCapacity];
 } Bignum;
 
-
-
 /// ============================================================================
 /// bignum.cc
 /// ============================================================================
 
-static Bignum_Chunk *Bignum_RawBigit(Bignum *b, int index) {
+static Bignum_Chunk* Bignum_RawBigit(Bignum* b, int index)
+{
     return &b->bigits_buffer[index];
 }
 
-static void Bignum_Zero(Bignum *b) {
+static void Bignum_Zero(Bignum* b)
+{
     b->used_bigits = 0;
     b->exponent = 0;
 }
 
 // BigitLength includes the "hidden" bigits encoded in the exponent.
-static int Bignum_BigitLength(Bignum *b) {
+static int Bignum_BigitLength(Bignum* b)
+{
     return b->used_bigits + b->exponent;
 }
 
-static void Bignum_EnsureCapacity(int size) {
-    if (size > Bignum_kBigitCapacity) {
+static void Bignum_EnsureCapacity(int size)
+{
+    if (size > Bignum_kBigitCapacity)
+    {
         DOUBLE_CONVERSION_UNREACHABLE();
     }
 }
 
-static void Bignum_Align(Bignum *b, Bignum *other) {
-    if (b->exponent > other->exponent) {
+static void Bignum_Align(Bignum* b, Bignum* other)
+{
+    if (b->exponent > other->exponent)
+    {
         // If "X" represents a "hidden" bigit (by the exponent) then we are in the
         // following case (a == this, b == other):
         // a:  aaaaaaXXXX   or a:   aaaaaXXX
@@ -1063,10 +1152,12 @@ static void Bignum_Align(Bignum *b, Bignum *other) {
         // a:  aaaaaa000X   or a:   aaaaa0XX
         const int zero_bigits = b->exponent - other->exponent;
         Bignum_EnsureCapacity(b->used_bigits + zero_bigits);
-        for (int i = b->used_bigits - 1; i >= 0; --i) {
+        for (int i = b->used_bigits - 1; i >= 0; --i)
+        {
             *Bignum_RawBigit(b, i + zero_bigits) = *Bignum_RawBigit(b, i);
         }
-        for (int i = 0; i < zero_bigits; ++i) {
+        for (int i = 0; i < zero_bigits; ++i)
+        {
             *Bignum_RawBigit(b, i) = 0;
         }
         b->used_bigits += (int16_t)zero_bigits;
@@ -1077,25 +1168,32 @@ static void Bignum_Align(Bignum *b, Bignum *other) {
     }
 }
 
-static void Bignum_Clamp(Bignum *b) {
-    while (b->used_bigits > 0 && *Bignum_RawBigit(b, b->used_bigits - 1) == 0) {
+static void Bignum_Clamp(Bignum* b)
+{
+    while (b->used_bigits > 0 && *Bignum_RawBigit(b, b->used_bigits - 1) == 0)
+    {
         b->used_bigits--;
     }
-    if (b->used_bigits == 0) {
-      // Zero.
-      b->exponent = 0;
+    if (b->used_bigits == 0)
+    {
+        // Zero.
+        b->exponent = 0;
     }
 }
 
-static bool Bignum_IsClamped(Bignum *b) {
+static bool Bignum_IsClamped(Bignum* b)
+{
     return b->used_bigits == 0 || *Bignum_RawBigit(b, b->used_bigits - 1) != 0;
 }
 
-static Bignum_Chunk Bignum_BigitOrZero(Bignum *b, const int index) {
-    if (index >= Bignum_BigitLength(b)) {
-      return 0;
+static Bignum_Chunk Bignum_BigitOrZero(Bignum* b, const int index)
+{
+    if (index >= Bignum_BigitLength(b))
+    {
+        return 0;
     }
-    if (index < b->exponent) {
+    if (index < b->exponent)
+    {
         return 0;
     }
     return *Bignum_RawBigit(b, index - b->exponent);
@@ -1105,24 +1203,30 @@ static Bignum_Chunk Bignum_BigitOrZero(Bignum *b, const int index) {
 //  -1 if a < b,
 //   0 if a == b, and
 //  +1 if a > b.
-static int Bignum_Compare(Bignum *a, Bignum *b) {
+static int Bignum_Compare(Bignum* a, Bignum* b)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(a));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     const int bigit_length_a = Bignum_BigitLength(a);
     const int bigit_length_b = Bignum_BigitLength(b);
-    if (bigit_length_a < bigit_length_b) {
+    if (bigit_length_a < bigit_length_b)
+    {
         return -1;
     }
-    if (bigit_length_a > bigit_length_b) {
+    if (bigit_length_a > bigit_length_b)
+    {
         return +1;
     }
-    for (int i = bigit_length_a - 1; i >= MIN(a->exponent, b->exponent); --i) {
+    for (int i = bigit_length_a - 1; i >= MIN(a->exponent, b->exponent); --i)
+    {
         const Bignum_Chunk bigit_a = Bignum_BigitOrZero(a, i);
         const Bignum_Chunk bigit_b = Bignum_BigitOrZero(b, i);
-        if (bigit_a < bigit_b) {
+        if (bigit_a < bigit_b)
+        {
             return -1;
         }
-        if (bigit_a > bigit_b) {
+        if (bigit_a > bigit_b)
+        {
             return +1;
         }
         // Otherwise they are equal up to this digit. Try the next digit.
@@ -1130,105 +1234,129 @@ static int Bignum_Compare(Bignum *a, Bignum *b) {
     return 0;
 }
 
-static bool Bignum_Equal(Bignum *a, Bignum *b) {
+static bool Bignum_Equal(Bignum* a, Bignum* b)
+{
     return Bignum_Compare(a, b) == 0;
 }
 
-static bool Bignum_LessEqual(Bignum *a, Bignum *b) {
+static bool Bignum_LessEqual(Bignum* a, Bignum* b)
+{
     return Bignum_Compare(a, b) <= 0;
 }
 
-static bool Bignum_Less(Bignum *a, Bignum *b) {
+static bool Bignum_Less(Bignum* a, Bignum* b)
+{
     return Bignum_Compare(a, b) < 0;
 }
 
 // Returns Compare(a + b, c);
-static int Bignum_PlusCompare(Bignum *a, Bignum *b, Bignum *c) {
+static int Bignum_PlusCompare(Bignum* a, Bignum* b, Bignum* c)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(a));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(c));
-    if (Bignum_BigitLength(a) < Bignum_BigitLength(b)) {
+    if (Bignum_BigitLength(a) < Bignum_BigitLength(b))
+    {
         return Bignum_PlusCompare(b, a, c);
     }
-    if (Bignum_BigitLength(a) + 1 < Bignum_BigitLength(c)) {
+    if (Bignum_BigitLength(a) + 1 < Bignum_BigitLength(c))
+    {
         return -1;
     }
-    if (Bignum_BigitLength(a) > Bignum_BigitLength(c)) {
+    if (Bignum_BigitLength(a) > Bignum_BigitLength(c))
+    {
         return +1;
     }
     // The exponent encodes 0-bigits. So if there are more 0-digits in 'a' than
     // 'b' has digits, then the bigit-length of 'a'+'b' must be equal to the one
     // of 'a'.
-    if (a->exponent >= Bignum_BigitLength(b) && Bignum_BigitLength(a) < Bignum_BigitLength(c)) {
+    if (a->exponent >= Bignum_BigitLength(b) && Bignum_BigitLength(a) < Bignum_BigitLength(c))
+    {
         return -1;
     }
 
     Bignum_Chunk borrow = 0;
     // Starting at min_exponent all digits are == 0. So no need to compare them.
     const int min_exponent = MIN(MIN(a->exponent, b->exponent), c->exponent);
-    for (int i = Bignum_BigitLength(c) - 1; i >= min_exponent; --i) {
-      const Bignum_Chunk chunk_a = Bignum_BigitOrZero(a, i);
-      const Bignum_Chunk chunk_b = Bignum_BigitOrZero(b, i);
-      const Bignum_Chunk chunk_c = Bignum_BigitOrZero(c, i);
-      const Bignum_Chunk sum = chunk_a + chunk_b;
-      if (sum > chunk_c + borrow) {
-          return +1;
-      } else {
-          borrow = chunk_c + borrow - sum;
-          if (borrow > 1) {
-              return -1;
-          }
-          borrow <<= Bignum_kBigitSize;
+    for (int i = Bignum_BigitLength(c) - 1; i >= min_exponent; --i)
+    {
+        const Bignum_Chunk chunk_a = Bignum_BigitOrZero(a, i);
+        const Bignum_Chunk chunk_b = Bignum_BigitOrZero(b, i);
+        const Bignum_Chunk chunk_c = Bignum_BigitOrZero(c, i);
+        const Bignum_Chunk sum = chunk_a + chunk_b;
+        if (sum > chunk_c + borrow)
+        {
+            return +1;
+        }
+        else
+        {
+            borrow = chunk_c + borrow - sum;
+            if (borrow > 1)
+            {
+                return -1;
+            }
+            borrow <<= Bignum_kBigitSize;
         }
     }
-    if (borrow == 0) {
+    if (borrow == 0)
+    {
         return 0;
     }
     return -1;
 }
 
 // Returns a + b == c
-static bool Bignum_PlusEqual(Bignum *a, Bignum *b, Bignum *c) {
+static bool Bignum_PlusEqual(Bignum* a, Bignum* b, Bignum* c)
+{
     return Bignum_PlusCompare(a, b, c) == 0;
 }
 
 // Returns a + b <= c
-static bool Bignum_PlusLessEqual(Bignum *a, Bignum *b, Bignum *c) {
+static bool Bignum_PlusLessEqual(Bignum* a, Bignum* b, Bignum* c)
+{
     return Bignum_PlusCompare(a, b, c) <= 0;
 }
 
 // Returns a + b < c
-static bool Bignum_PlusLess(Bignum *a, Bignum *b, Bignum *c) {
+static bool Bignum_PlusLess(Bignum* a, Bignum* b, Bignum* c)
+{
     return Bignum_PlusCompare(a, b, c) < 0;
 }
 
 // Guaranteed to lie in one Bigit.
-static void Bignum_AssignUInt16(Bignum *b, uint16_t value) {
+static void Bignum_AssignUInt16(Bignum* b, uint16_t value)
+{
     Bignum_Zero(b);
-    if (value > 0) {
+    if (value > 0)
+    {
         *Bignum_RawBigit(b, 0) = value;
         b->used_bigits = 1;
     }
 }
 
-static void Bignum_AssignUInt64(Bignum *b, uint64_t value) {
+static void Bignum_AssignUInt64(Bignum* b, uint64_t value)
+{
     Bignum_Zero(b);
-    for(int i = 0; value > 0; ++i) {
+    for (int i = 0; value > 0; ++i)
+    {
         *Bignum_RawBigit(b, i) = value & Bignum_kBigitMask;
         value >>= Bignum_kBigitSize;
         b->used_bigits++;
     }
 }
 
-static void Bignum_AssignBignum(Bignum *b, Bignum *other) {
+static void Bignum_AssignBignum(Bignum* b, Bignum* other)
+{
     b->exponent = other->exponent;
-    for (int i = 0; i < other->used_bigits; ++i) {
+    for (int i = 0; i < other->used_bigits; ++i)
+    {
         *Bignum_RawBigit(b, i) = *Bignum_RawBigit(other, i);
     }
     b->used_bigits = other->used_bigits;
 }
 
-static void Bignum_AddBignum(Bignum *b, Bignum *other) {
+static void Bignum_AddBignum(Bignum* b, Bignum* other)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(other));
 
@@ -1252,17 +1380,20 @@ static void Bignum_AddBignum(Bignum *b, Bignum *other) {
     Bignum_Chunk carry = 0;
     int bigit_pos = other->exponent - b->exponent;
     DOUBLE_CONVERSION_ASSERT(bigit_pos >= 0);
-    for (int i = b->used_bigits; i < bigit_pos; ++i) {
+    for (int i = b->used_bigits; i < bigit_pos; ++i)
+    {
         *Bignum_RawBigit(b, i) = 0;
     }
-    for (int i = 0; i < other->used_bigits; ++i) {
+    for (int i = 0; i < other->used_bigits; ++i)
+    {
         const Bignum_Chunk my = (bigit_pos < b->used_bigits) ? *Bignum_RawBigit(b, bigit_pos) : 0;
         const Bignum_Chunk sum = my + *Bignum_RawBigit(other, i) + carry;
         *Bignum_RawBigit(b, bigit_pos) = sum & Bignum_kBigitMask;
         carry = sum >> Bignum_kBigitSize;
         ++bigit_pos;
     }
-    while (carry != 0) {
+    while (carry != 0)
+    {
         const Bignum_Chunk my = (bigit_pos < b->used_bigits) ? *Bignum_RawBigit(b, bigit_pos) : 0;
         const Bignum_Chunk sum = my + carry;
         *Bignum_RawBigit(b, bigit_pos) = sum & Bignum_kBigitMask;
@@ -1273,7 +1404,8 @@ static void Bignum_AddBignum(Bignum *b, Bignum *other) {
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
 }
 
-static void Bignum_SubtractBignum(Bignum *b, Bignum *other) {
+static void Bignum_SubtractBignum(Bignum* b, Bignum* other)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(other));
     // We require this to be bigger than other.
@@ -1284,13 +1416,15 @@ static void Bignum_SubtractBignum(Bignum *b, Bignum *other) {
     const int offset = other->exponent - b->exponent;
     Bignum_Chunk borrow = 0;
     int i;
-    for (i = 0; i < other->used_bigits; ++i) {
+    for (i = 0; i < other->used_bigits; ++i)
+    {
         DOUBLE_CONVERSION_ASSERT((borrow == 0) || (borrow == 1));
         const Bignum_Chunk difference = *Bignum_RawBigit(b, i + offset) - *Bignum_RawBigit(other, i) - borrow;
         *Bignum_RawBigit(b, i + offset) = difference & Bignum_kBigitMask;
         borrow = difference >> (Bignum_kChunkSize - 1);
     }
-    while (borrow != 0) {
+    while (borrow != 0)
+    {
         const Bignum_Chunk difference = *Bignum_RawBigit(b, i + offset) - borrow;
         *Bignum_RawBigit(b, i + offset) = difference & Bignum_kBigitMask;
         borrow = difference >> (Bignum_kChunkSize - 1);
@@ -1299,8 +1433,10 @@ static void Bignum_SubtractBignum(Bignum *b, Bignum *other) {
     Bignum_Clamp(b);
 }
 
-static void Bignum_AddUInt64(Bignum *b, uint64_t operand) {
-    if (operand == 0) {
+static void Bignum_AddUInt64(Bignum* b, uint64_t operand)
+{
+    if (operand == 0)
+    {
         return;
     }
     Bignum other;
@@ -1308,11 +1444,11 @@ static void Bignum_AddUInt64(Bignum *b, uint64_t operand) {
     Bignum_AddBignum(b, &other);
 }
 
-static uint64_t Bignum_ReadUInt64(const Vector *buffer,
-                                  int from,
-                                  int digits_to_read) {
+static uint64_t Bignum_ReadUInt64(const Vector* buffer, int from, int digits_to_read)
+{
     uint64_t result = 0;
-    for (int i = from; i < from + digits_to_read; ++i) {
+    for (int i = from; i < from + digits_to_read; ++i)
+    {
         const int digit = buffer->start[i] - '0';
         DOUBLE_CONVERSION_ASSERT(0 <= digit && digit <= 9);
         result = result * 10 + digit;
@@ -1320,23 +1456,28 @@ static uint64_t Bignum_ReadUInt64(const Vector *buffer,
     return result;
 }
 
-static void Bignum_BigitsShiftLeft(Bignum *b, int shift_amount) {
+static void Bignum_BigitsShiftLeft(Bignum* b, int shift_amount)
+{
     DOUBLE_CONVERSION_ASSERT(shift_amount < Bignum_kBigitSize);
     DOUBLE_CONVERSION_ASSERT(shift_amount >= 0);
     Bignum_Chunk carry = 0;
-    for (int i = 0; i < b->used_bigits; ++i) {
+    for (int i = 0; i < b->used_bigits; ++i)
+    {
         const Bignum_Chunk new_carry = *Bignum_RawBigit(b, i) >> (Bignum_kBigitSize - shift_amount);
         *Bignum_RawBigit(b, i) = ((*Bignum_RawBigit(b, i) << shift_amount) + carry) & Bignum_kBigitMask;
         carry = new_carry;
     }
-    if (carry != 0) {
+    if (carry != 0)
+    {
         *Bignum_RawBigit(b, b->used_bigits) = carry;
         b->used_bigits++;
     }
 }
 
-static void Bignum_ShiftLeft(Bignum *b, int shift_amount) {
-    if (b->used_bigits == 0) {
+static void Bignum_ShiftLeft(Bignum* b, int shift_amount)
+{
+    if (b->used_bigits == 0)
+    {
         return;
     }
     b->exponent += (int16_t)(shift_amount / Bignum_kBigitSize);
@@ -1345,27 +1486,33 @@ static void Bignum_ShiftLeft(Bignum *b, int shift_amount) {
     Bignum_BigitsShiftLeft(b, local_shift);
 }
 
-static void Bignum_MultiplyByUInt32(Bignum *b, uint32_t factor) {
-    if (factor == 1) {
+static void Bignum_MultiplyByUInt32(Bignum* b, uint32_t factor)
+{
+    if (factor == 1)
+    {
         return;
     }
-    if (factor == 0) {
+    if (factor == 0)
+    {
         Bignum_Zero(b);
         return;
     }
-    if (b->used_bigits == 0) {
+    if (b->used_bigits == 0)
+    {
         return;
     }
     // The product of a bigit with the factor is of size kBigitSize + 32.
     // Assert that this number + 1 (for the carry) fits into double chunk.
     DOUBLE_CONVERSION_ASSERT(Bignum_kDoubleChunkSize >= Bignum_kBigitSize + 32 + 1);
     Bignum_DoubleChunk carry = 0;
-    for (int i = 0; i < b->used_bigits; ++i) {
+    for (int i = 0; i < b->used_bigits; ++i)
+    {
         const Bignum_DoubleChunk product = (Bignum_DoubleChunk)(factor) * *Bignum_RawBigit(b, i) + carry;
         *Bignum_RawBigit(b, i) = (Bignum_Chunk)(product & Bignum_kBigitMask);
         carry = (product >> Bignum_kBigitSize);
     }
-    while (carry != 0) {
+    while (carry != 0)
+    {
         Bignum_EnsureCapacity(b->used_bigits + 1);
         *Bignum_RawBigit(b, b->used_bigits) = carry & Bignum_kBigitMask;
         b->used_bigits++;
@@ -1373,30 +1520,35 @@ static void Bignum_MultiplyByUInt32(Bignum *b, uint32_t factor) {
     }
 }
 
-static void Bignum_MultiplyByUInt64(Bignum *b, uint64_t factor) {
-    if (factor == 1) {
+static void Bignum_MultiplyByUInt64(Bignum* b, uint64_t factor)
+{
+    if (factor == 1)
+    {
         return;
     }
-    if (factor == 0) {
+    if (factor == 0)
+    {
         Bignum_Zero(b);
         return;
     }
-    if (b->used_bigits == 0) {
+    if (b->used_bigits == 0)
+    {
         return;
     }
     DOUBLE_CONVERSION_ASSERT(Bignum_kBigitSize < 32);
     uint64_t carry = 0;
     const uint64_t low = factor & 0xFFFFFFFF;
     const uint64_t high = factor >> 32;
-    for (int i = 0; i < b->used_bigits; ++i) {
+    for (int i = 0; i < b->used_bigits; ++i)
+    {
         const uint64_t product_low = low * *Bignum_RawBigit(b, i);
         const uint64_t product_high = high * *Bignum_RawBigit(b, i);
         const uint64_t tmp = (carry & Bignum_kBigitMask) + product_low;
         *Bignum_RawBigit(b, i) = tmp & Bignum_kBigitMask;
-        carry = (carry >> Bignum_kBigitSize) + (tmp >> Bignum_kBigitSize) +
-            (product_high << (32 - Bignum_kBigitSize));
+        carry = (carry >> Bignum_kBigitSize) + (tmp >> Bignum_kBigitSize) + (product_high << (32 - Bignum_kBigitSize));
     }
-    while (carry != 0) {
+    while (carry != 0)
+    {
         Bignum_EnsureCapacity(b->used_bigits + 1);
         *Bignum_RawBigit(b, b->used_bigits) = carry & Bignum_kBigitMask;
         b->used_bigits++;
@@ -1404,7 +1556,8 @@ static void Bignum_MultiplyByUInt64(Bignum *b, uint64_t factor) {
     }
 }
 
-static void Bignum_MultiplyByPowerOfTen(Bignum *b, int exponent) {
+static void Bignum_MultiplyByPowerOfTen(Bignum* b, int exponent)
+{
     const uint64_t kFive27 = DOUBLE_CONVERSION_UINT64_2PART_C(0x6765c793, fa10079d);
     const uint16_t kFive1 = 5;
     const uint16_t kFive2 = kFive1 * 5;
@@ -1419,42 +1572,48 @@ static void Bignum_MultiplyByPowerOfTen(Bignum *b, int exponent) {
     const uint32_t kFive11 = kFive10 * 5;
     const uint32_t kFive12 = kFive11 * 5;
     const uint32_t kFive13 = kFive12 * 5;
-    const uint32_t kFive1_to_12[] =
-      { kFive1, kFive2, kFive3, kFive4, kFive5, kFive6,
-        kFive7, kFive8, kFive9, kFive10, kFive11, kFive12 };
+    const uint32_t kFive1_to_12[] = {
+        kFive1, kFive2, kFive3, kFive4, kFive5, kFive6, kFive7, kFive8, kFive9, kFive10, kFive11, kFive12};
 
     DOUBLE_CONVERSION_ASSERT(exponent >= 0);
 
-    if (exponent == 0) {
+    if (exponent == 0)
+    {
         return;
     }
-    if (b->used_bigits == 0) {
+    if (b->used_bigits == 0)
+    {
         return;
     }
     // We shift by exponent at the end just before returning.
     int remaining_exponent = exponent;
-    while (remaining_exponent >= 27) {
+    while (remaining_exponent >= 27)
+    {
         Bignum_MultiplyByUInt64(b, kFive27);
         remaining_exponent -= 27;
     }
-    while (remaining_exponent >= 13) {
+    while (remaining_exponent >= 13)
+    {
         Bignum_MultiplyByUInt32(b, kFive13);
         remaining_exponent -= 13;
     }
-    if (remaining_exponent > 0) {
+    if (remaining_exponent > 0)
+    {
         Bignum_MultiplyByUInt32(b, kFive1_to_12[remaining_exponent - 1]);
     }
     Bignum_ShiftLeft(b, exponent);
 }
 
-static void Bignum_AssignDecimalString(Bignum *b, const Vector *value) {
+static void Bignum_AssignDecimalString(Bignum* b, const Vector* value)
+{
     // 2^64 = 18446744073709551616 > 10^19
     static const int kMaxUint64DecimalDigits = 19;
     Bignum_Zero(b);
     int length = value->length;
     unsigned pos = 0;
     // Let's just say that each digit needs 4 bits.
-    while (length >= kMaxUint64DecimalDigits) {
+    while (length >= kMaxUint64DecimalDigits)
+    {
         const uint64_t digits = Bignum_ReadUInt64(value, pos, kMaxUint64DecimalDigits);
         pos += kMaxUint64DecimalDigits;
         length -= kMaxUint64DecimalDigits;
@@ -1467,11 +1626,14 @@ static void Bignum_AssignDecimalString(Bignum *b, const Vector *value) {
     Bignum_Clamp(b);
 }
 
-static uint64_t Bignum_HexCharValue(int c) {
-    if ('0' <= c && c <= '9') {
+static uint64_t Bignum_HexCharValue(int c)
+{
+    if ('0' <= c && c <= '9')
+    {
         return c - '0';
     }
-    if ('a' <= c && c <= 'f') {
+    if ('a' <= c && c <= 'f')
+    {
         return 10 + c - 'a';
     }
     DOUBLE_CONVERSION_ASSERT('A' <= c && c <= 'F');
@@ -1480,34 +1642,40 @@ static uint64_t Bignum_HexCharValue(int c) {
 
 // Unlike AssignDecimalString(), this function is "only" used
 // for unit-tests and therefore not performance critical.
-static void Bignum_AssignHexString(Bignum *b, Vector *value) {
+static void Bignum_AssignHexString(Bignum* b, Vector* value)
+{
     Bignum_Zero(b);
     // Required capacity could be reduced by ignoring leading zeros.
     Bignum_EnsureCapacity(((value->length * 4) + Bignum_kBigitSize - 1) / Bignum_kBigitSize);
-    DOUBLE_CONVERSION_ASSERT(sizeof(uint64_t) * 8 >= Bignum_kBigitSize + 4);  // TODO: static_assert
+    DOUBLE_CONVERSION_ASSERT(sizeof(uint64_t) * 8 >= Bignum_kBigitSize + 4); // TODO: static_assert
     // Accumulates converted hex digits until at least kBigitSize bits.
     // Works with non-factor-of-four kBigitSizes.
     uint64_t tmp = 0;
-    for (int cnt = 0; !Vector_is_empty(value); Vector_pop_back(value)) {
+    for (int cnt = 0; !Vector_is_empty(value); Vector_pop_back(value))
+    {
         tmp |= (Bignum_HexCharValue(Vector_last(value)) << cnt);
-        if ((cnt += 4) >= Bignum_kBigitSize) {
+        if ((cnt += 4) >= Bignum_kBigitSize)
+        {
             *Bignum_RawBigit(b, b->used_bigits++) = (tmp & Bignum_kBigitMask);
             cnt -= Bignum_kBigitSize;
             tmp >>= Bignum_kBigitSize;
         }
     }
-    if (tmp > 0) {
+    if (tmp > 0)
+    {
         DOUBLE_CONVERSION_ASSERT(tmp <= Bignum_kBigitMask);
         *Bignum_RawBigit(b, b->used_bigits++) = (Bignum_Chunk)(tmp & Bignum_kBigitMask);
     }
     Bignum_Clamp(b);
 }
 
-static void Bignum_Times10(Bignum *b) {
+static void Bignum_Times10(Bignum* b)
+{
     Bignum_MultiplyByUInt32(b, 10);
 }
 
-static void Bignum_Square(Bignum *b) {
+static void Bignum_Square(Bignum* b)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     const int product_length = 2 * b->used_bigits;
     Bignum_EnsureCapacity(product_length);
@@ -1524,48 +1692,54 @@ static void Bignum_Square(Bignum *b) {
     //
     // Assert that the additional number of bits in a DoubleChunk are enough to
     // sum up used_digits of Bigit*Bigit.
-    if ((1 << (2 * (Bignum_kChunkSize - Bignum_kBigitSize))) <= b->used_bigits) {
+    if ((1 << (2 * (Bignum_kChunkSize - Bignum_kBigitSize))) <= b->used_bigits)
+    {
         DOUBLE_CONVERSION_UNIMPLEMENTED();
     }
     Bignum_DoubleChunk accumulator = 0;
     // First shift the digits so we don't overwrite them.
     const int copy_offset = b->used_bigits;
-    for (int i = 0; i < b->used_bigits; ++i) {
+    for (int i = 0; i < b->used_bigits; ++i)
+    {
         *Bignum_RawBigit(b, copy_offset + i) = *Bignum_RawBigit(b, i);
     }
     // We have two loops to avoid some 'if's in the loop.
-    for (int i = 0; i < b->used_bigits; ++i) {
+    for (int i = 0; i < b->used_bigits; ++i)
+    {
         // Process temporary digit i with power i.
         // The sum of the two indices must be equal to i.
         int bigit_index1 = i;
         int bigit_index2 = 0;
         // Sum all of the sub-products.
-        while (bigit_index1 >= 0) {
+        while (bigit_index1 >= 0)
+        {
             const Bignum_Chunk chunk1 = *Bignum_RawBigit(b, copy_offset + bigit_index1);
             const Bignum_Chunk chunk2 = *Bignum_RawBigit(b, copy_offset + bigit_index2);
-            accumulator += (Bignum_DoubleChunk)(chunk1) * chunk2;
+            accumulator += (Bignum_DoubleChunk)(chunk1)*chunk2;
             bigit_index1--;
             bigit_index2++;
         }
-        *Bignum_RawBigit(b, i) = (Bignum_Chunk)(accumulator) & Bignum_kBigitMask;
+        *Bignum_RawBigit(b, i) = (Bignum_Chunk)(accumulator)&Bignum_kBigitMask;
         accumulator >>= Bignum_kBigitSize;
     }
-    for (int i = b->used_bigits; i < product_length; ++i) {
+    for (int i = b->used_bigits; i < product_length; ++i)
+    {
         int bigit_index1 = b->used_bigits - 1;
         int bigit_index2 = i - bigit_index1;
         // Invariant: sum of both indices is again equal to i.
         // Inner loop runs 0 times on last iteration, emptying accumulator.
-        while (bigit_index2 < b->used_bigits) {
+        while (bigit_index2 < b->used_bigits)
+        {
             const Bignum_Chunk chunk1 = *Bignum_RawBigit(b, copy_offset + bigit_index1);
             const Bignum_Chunk chunk2 = *Bignum_RawBigit(b, copy_offset + bigit_index2);
-            accumulator += (Bignum_DoubleChunk)(chunk1) * chunk2;
+            accumulator += (Bignum_DoubleChunk)(chunk1)*chunk2;
             bigit_index1--;
             bigit_index2++;
         }
         // The overwritten RawBigit(i) will never be read in further loop iterations,
         // because bigit_index1 and bigit_index2 are always greater
         // than i - used_bigits_.
-        *Bignum_RawBigit(b, i) = (Bignum_Chunk)(accumulator) & Bignum_kBigitMask;
+        *Bignum_RawBigit(b, i) = (Bignum_Chunk)(accumulator)&Bignum_kBigitMask;
         accumulator >>= Bignum_kBigitSize;
     }
     // Since the result was guaranteed to lie inside the number the
@@ -1578,10 +1752,12 @@ static void Bignum_Square(Bignum *b) {
     Bignum_Clamp(b);
 }
 
-static void Bignum_AssignPowerUInt16(Bignum *b, uint16_t base, int power_exponent) {
+static void Bignum_AssignPowerUInt16(Bignum* b, uint16_t base, int power_exponent)
+{
     DOUBLE_CONVERSION_ASSERT(base != 0);
     DOUBLE_CONVERSION_ASSERT(power_exponent >= 0);
-    if (power_exponent == 0) {
+    if (power_exponent == 0)
+    {
         Bignum_AssignUInt16(b, 1);
         return;
     }
@@ -1590,13 +1766,15 @@ static void Bignum_AssignPowerUInt16(Bignum *b, uint16_t base, int power_exponen
     // We expect base to be in range 2-32, and most often to be 10.
     // It does not make much sense to implement different algorithms for counting
     // the bits.
-    while ((base & 1) == 0) {
+    while ((base & 1) == 0)
+    {
         base >>= 1;
         shifts++;
     }
     int bit_size = 0;
     int tmp_base = base;
-    while (tmp_base != 0) {
+    while (tmp_base != 0)
+    {
         tmp_base >>= 1;
         bit_size++;
     }
@@ -1606,7 +1784,8 @@ static void Bignum_AssignPowerUInt16(Bignum *b, uint16_t base, int power_exponen
 
     // Left to Right exponentiation.
     int mask = 1;
-    while (power_exponent >= mask) mask <<= 1;
+    while (power_exponent >= mask)
+        mask <<= 1;
 
     // The mask is now pointing to the bit above the most significant 1-bit of
     // power_exponent.
@@ -1616,32 +1795,39 @@ static void Bignum_AssignPowerUInt16(Bignum *b, uint16_t base, int power_exponen
 
     bool delayed_multiplication = false;
     const uint64_t max_32bits = 0xFFFFFFFF;
-    while (mask != 0 && this_value <= max_32bits) {
+    while (mask != 0 && this_value <= max_32bits)
+    {
         this_value = this_value * this_value;
         // Verify that there is enough space in this_value to perform the
         // multiplication.  The first bit_size bits must be 0.
-        if ((power_exponent & mask) != 0) {
+        if ((power_exponent & mask) != 0)
+        {
             DOUBLE_CONVERSION_ASSERT(bit_size > 0);
-            const uint64_t base_bits_mask =
-                ~(((uint64_t)(1) << (64 - bit_size)) - 1);
+            const uint64_t base_bits_mask = ~(((uint64_t)(1) << (64 - bit_size)) - 1);
             const bool high_bits_zero = (this_value & base_bits_mask) == 0;
-            if (high_bits_zero) {
+            if (high_bits_zero)
+            {
                 this_value *= base;
-            } else {
+            }
+            else
+            {
                 delayed_multiplication = true;
             }
         }
         mask >>= 1;
     }
     Bignum_AssignUInt64(b, this_value);
-    if (delayed_multiplication) {
+    if (delayed_multiplication)
+    {
         Bignum_MultiplyByUInt32(b, base);
     }
 
     // Now do the same thing as a bignum.
-    while (mask != 0) {
+    while (mask != 0)
+    {
         Bignum_Square(b);
-        if ((power_exponent & mask) != 0) {
+        if ((power_exponent & mask) != 0)
+        {
             Bignum_MultiplyByUInt32(b, base);
         }
         mask >>= 1;
@@ -1651,26 +1837,31 @@ static void Bignum_AssignPowerUInt16(Bignum *b, uint16_t base, int power_exponen
     Bignum_ShiftLeft(b, shifts * power_exponent);
 }
 
-static void Bignum_SubtractTimes(Bignum *b, Bignum *other, int factor) {
+static void Bignum_SubtractTimes(Bignum* b, Bignum* other, int factor)
+{
     DOUBLE_CONVERSION_ASSERT(b->exponent <= other->exponent);
-    if (factor < 3) {
-        for (int i = 0; i < factor; ++i) {
+    if (factor < 3)
+    {
+        for (int i = 0; i < factor; ++i)
+        {
             Bignum_SubtractBignum(b, other);
         }
         return;
     }
     Bignum_Chunk borrow = 0;
     const int exponent_diff = other->exponent - b->exponent;
-    for (int i = 0; i < other->used_bigits; ++i) {
+    for (int i = 0; i < other->used_bigits; ++i)
+    {
         const Bignum_DoubleChunk product = (Bignum_DoubleChunk)(factor) * *Bignum_RawBigit(other, i);
         const Bignum_DoubleChunk remove = borrow + product;
         const Bignum_Chunk difference = *Bignum_RawBigit(b, i + exponent_diff) - (remove & Bignum_kBigitMask);
         *Bignum_RawBigit(b, i + exponent_diff) = difference & Bignum_kBigitMask;
-        borrow = (Bignum_Chunk)((difference >> (Bignum_kChunkSize - 1)) +
-                                (remove >> Bignum_kBigitSize));
+        borrow = (Bignum_Chunk)((difference >> (Bignum_kChunkSize - 1)) + (remove >> Bignum_kBigitSize));
     }
-    for (int i = other->used_bigits + exponent_diff; i < b->used_bigits; ++i) {
-        if (borrow == 0) {
+    for (int i = other->used_bigits + exponent_diff; i < b->used_bigits; ++i)
+    {
+        if (borrow == 0)
+        {
             return;
         }
         const Bignum_Chunk difference = *Bignum_RawBigit(b, i) - borrow;
@@ -1681,14 +1872,16 @@ static void Bignum_SubtractTimes(Bignum *b, Bignum *other, int factor) {
 }
 
 // Precondition: this/other < 16bit.
-static uint16_t Bignum_DivideModuloIntBignum(Bignum *b, Bignum *other) {
+static uint16_t Bignum_DivideModuloIntBignum(Bignum* b, Bignum* other)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(other));
     DOUBLE_CONVERSION_ASSERT(other->used_bigits > 0);
 
     // Easy case: if we have less digits than the divisor than the result is 0.
     // Note: this handles the case where this == 0, too.
-    if (Bignum_BigitLength(b) < Bignum_BigitLength(other)) {
+    if (Bignum_BigitLength(b) < Bignum_BigitLength(other))
+    {
         return 0;
     }
 
@@ -1698,7 +1891,8 @@ static uint16_t Bignum_DivideModuloIntBignum(Bignum *b, Bignum *other) {
 
     // Start by removing multiples of 'other' until both numbers have the same
     // number of digits.
-    while (Bignum_BigitLength(b) > Bignum_BigitLength(other)) {
+    while (Bignum_BigitLength(b) > Bignum_BigitLength(other))
+    {
         // This naive approach is extremely inefficient if `this` divided by other
         // is big. This function is implemented for doubleToString where
         // the result should be small (less than 10).
@@ -1718,7 +1912,8 @@ static uint16_t Bignum_DivideModuloIntBignum(Bignum *b, Bignum *other) {
     const Bignum_Chunk this_bigit = *Bignum_RawBigit(b, b->used_bigits - 1);
     const Bignum_Chunk other_bigit = *Bignum_RawBigit(other, other->used_bigits - 1);
 
-    if (other->used_bigits == 1) {
+    if (other->used_bigits == 1)
+    {
         // Shortcut for easy (and common) case.
         int quotient = this_bigit / other_bigit;
         *Bignum_RawBigit(b, b->used_bigits - 1) = this_bigit - other_bigit * quotient;
@@ -1733,45 +1928,54 @@ static uint16_t Bignum_DivideModuloIntBignum(Bignum *b, Bignum *other) {
     result += (uint16_t)(division_estimate);
     Bignum_SubtractTimes(b, other, division_estimate);
 
-    if (other_bigit * (division_estimate + 1) > this_bigit) {
+    if (other_bigit * (division_estimate + 1) > this_bigit)
+    {
         // No need to even try to subtract. Even if other's remaining digits were 0
         // another subtraction would be too much.
         return result;
     }
 
-    while (Bignum_LessEqual(other, b)) {
+    while (Bignum_LessEqual(other, b))
+    {
         Bignum_SubtractBignum(b, other);
         result++;
     }
     return result;
 }
 
-static int Bignum_ChunkSizeInHexChars(Bignum_Chunk number) {
+static int Bignum_ChunkSizeInHexChars(Bignum_Chunk number)
+{
     DOUBLE_CONVERSION_ASSERT(number > 0);
     int result = 0;
-    while (number != 0) {
+    while (number != 0)
+    {
         number >>= 4;
         result++;
     }
     return result;
 }
 
-static char Bignum_HexCharOfValue(const int value) {
+static char Bignum_HexCharOfValue(const int value)
+{
     DOUBLE_CONVERSION_ASSERT(0 <= value && value <= 16);
-    if (value < 10) {
+    if (value < 10)
+    {
         return (char)(value + '0');
     }
     return (char)(value - 10 + 'A');
 }
 
-static bool Bignum_ToHexString(Bignum *b, char *buffer, int buffer_size) {
+static bool Bignum_ToHexString(Bignum* b, char* buffer, int buffer_size)
+{
     DOUBLE_CONVERSION_ASSERT(Bignum_IsClamped(b));
     // Each bigit must be printable as separate hex-character.
     DOUBLE_CONVERSION_ASSERT(Bignum_kBigitSize % 4 == 0);
     static const int kHexCharsPerBigit = Bignum_kBigitSize / 4;
 
-    if (b->used_bigits == 0) {
-        if (buffer_size < 2) {
+    if (b->used_bigits == 0)
+    {
+        if (buffer_size < 2)
+        {
             return false;
         }
         buffer[0] = '0';
@@ -1779,41 +1983,46 @@ static bool Bignum_ToHexString(Bignum *b, char *buffer, int buffer_size) {
         return true;
     }
     // We add 1 for the terminating '\0' character.
-    const int needed_chars = (Bignum_BigitLength(b) - 1) * kHexCharsPerBigit +
-        Bignum_ChunkSizeInHexChars(*Bignum_RawBigit(b, b->used_bigits - 1)) + 1;
-    if (needed_chars > buffer_size) {
+    const int needed_chars =
+        (Bignum_BigitLength(b) - 1) * kHexCharsPerBigit + Bignum_ChunkSizeInHexChars(*Bignum_RawBigit(b, b->used_bigits - 1)) + 1;
+    if (needed_chars > buffer_size)
+    {
         return false;
     }
     int string_index = needed_chars - 1;
     buffer[string_index--] = '\0';
-    for (int i = 0; i < b->exponent; ++i) {
-        for (int j = 0; j < kHexCharsPerBigit; ++j) {
+    for (int i = 0; i < b->exponent; ++i)
+    {
+        for (int j = 0; j < kHexCharsPerBigit; ++j)
+        {
             buffer[string_index--] = '0';
         }
     }
-    for (int i = 0; i < b->used_bigits - 1; ++i) {
+    for (int i = 0; i < b->used_bigits - 1; ++i)
+    {
         Bignum_Chunk current_bigit = *Bignum_RawBigit(b, i);
-        for (int j = 0; j < kHexCharsPerBigit; ++j) {
+        for (int j = 0; j < kHexCharsPerBigit; ++j)
+        {
             buffer[string_index--] = Bignum_HexCharOfValue(current_bigit & 0xF);
             current_bigit >>= 4;
         }
     }
     // And finally the last bigit.
     Bignum_Chunk most_significant_bigit = *Bignum_RawBigit(b, b->used_bigits - 1);
-    while (most_significant_bigit != 0) {
+    while (most_significant_bigit != 0)
+    {
         buffer[string_index--] = Bignum_HexCharOfValue(most_significant_bigit & 0xF);
         most_significant_bigit >>= 4;
     }
     return true;
 }
 
-
-
 /// ============================================================================
 /// bignum-dtoa.h
 /// ============================================================================
 
-typedef enum BignumDtoaMode {
+typedef enum BignumDtoaMode
+{
     // Return the shortest correct representation.
     // For example the output of 0.299999999999999988897 is (the less accurate but
     // correct) 0.3.
@@ -1857,12 +2066,13 @@ typedef enum BignumDtoaMode {
 //   Halfway cases are again rounded up.
 // 'BignumDtoa' expects the given buffer to be big enough to hold all digits
 // and a terminating null-character.
-static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits,
-                       Vector *buffer, int *length, int *point);
+static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits, Vector* buffer, int* length, int* point);
 
-static int BignumNormalizedExponent(uint64_t significand, int exponent) {
+static int BignumNormalizedExponent(uint64_t significand, int exponent)
+{
     DOUBLE_CONVERSION_ASSERT(significand != 0);
-    while ((significand & Double_kHiddenBit) == 0) {
+    while ((significand & Double_kHiddenBit) == 0)
+    {
         significand = significand << 1;
         exponent = exponent - 1;
     }
@@ -1880,64 +2090,65 @@ static void BignumInitialScaledStartValues(uint64_t significand,
                                            bool lower_boundary_is_closer,
                                            int estimated_power,
                                            bool need_boundary_deltas,
-                                           Bignum *numerator,
-                                           Bignum *denominator,
-                                           Bignum *delta_minus,
-                                           Bignum *delta_plus);
+                                           Bignum* numerator,
+                                           Bignum* denominator,
+                                           Bignum* delta_minus,
+                                           Bignum* delta_plus);
 
 // Multiplies numerator/denominator so that its values lies in the range 1-10.
 // Returns decimal_point s.t.
 //  v = numerator'/denominator' * 10^(decimal_point-1)
 //     where numerator' and denominator' are the values of numerator and
 //     denominator after the call to this function.
-static void BignumFixupMultiply10(int estimated_power, bool is_even,
-                                  int *decimal_point,
-                                  Bignum *numerator, Bignum *denominator,
-                                  Bignum *delta_minus, Bignum *delta_plus);
+static void BignumFixupMultiply10(int estimated_power,
+                                  bool is_even,
+                                  int* decimal_point,
+                                  Bignum* numerator,
+                                  Bignum* denominator,
+                                  Bignum* delta_minus,
+                                  Bignum* delta_plus);
 
 // Generates digits from the left to the right and stops when the generated
 // digits yield the shortest decimal representation of v.
-static void BignumGenerateShortestDigits(Bignum *numerator, Bignum *denominator,
-                                         Bignum *delta_minus, Bignum *delta_plus,
-                                         bool is_even,
-                                         Vector *buffer, int *length);
+static void BignumGenerateShortestDigits(
+    Bignum* numerator, Bignum* denominator, Bignum* delta_minus, Bignum* delta_plus, bool is_even, Vector* buffer, int* length);
 
 // Generates 'requested_digits' after the decimal point.
-static void BignumToFixed(int requested_digits, int *decimal_point,
-                          Bignum *numerator, Bignum *denominator,
-                          Vector *buffer, int *length);
+static void
+BignumToFixed(int requested_digits, int* decimal_point, Bignum* numerator, Bignum* denominator, Vector* buffer, int* length);
 
 // Generates 'count' digits of numerator/denominator.
 // Once 'count' digits have been produced rounds the result depending on the
 // remainder (remainders of exactly .5 round upwards). Might update the
 // decimal_point when rounding up (for example for 0.9999).
-static void BignumGenerateCountedDigits(int count, int *decimal_point,
-                                        Bignum *numerator, Bignum *denominator,
-                                        Vector *buffer, int *length);
+static void
+BignumGenerateCountedDigits(int count, int* decimal_point, Bignum* numerator, Bignum* denominator, Vector* buffer, int* length);
 
-static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits,
-                       Vector *buffer, int *length, int *decimal_point) {
+static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits, Vector* buffer, int* length, int* decimal_point)
+{
     DOUBLE_CONVERSION_ASSERT(v > 0);
     Double t = Double_make(v);
     DOUBLE_CONVERSION_ASSERT(!Double_IsSpecial(&t));
     uint64_t significand;
     int exponent;
     bool lower_boundary_is_closer;
-    if (mode == BIGNUM_DTOA_SHORTEST_SINGLE) {
+    if (mode == BIGNUM_DTOA_SHORTEST_SINGLE)
+    {
         float f = (float)(v);
         DOUBLE_CONVERSION_ASSERT(f == v);
         Single st = Single_make(f);
         significand = Single_Significand(&st);
         exponent = Single_Exponent(&st);
         lower_boundary_is_closer = Single_LowerBoundaryIsCloser(&st);
-    } else {
+    }
+    else
+    {
         Double ft = Double_make(v);
         significand = Double_Significand(&ft);
         exponent = Double_Exponent(&ft);
         lower_boundary_is_closer = Double_LowerBoundaryIsCloser(&ft);
     }
-    bool need_boundary_deltas =
-        (mode == BIGNUM_DTOA_SHORTEST || mode == BIGNUM_DTOA_SHORTEST_SINGLE);
+    bool need_boundary_deltas = (mode == BIGNUM_DTOA_SHORTEST || mode == BIGNUM_DTOA_SHORTEST_SINGLE);
 
     bool is_even = (significand & 1) == 0;
     int normalized_exponent = BignumNormalizedExponent(significand, exponent);
@@ -1948,7 +2159,8 @@ static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits,
     // The requested digits correspond to the digits after the point. If the
     // number is much too small, then there is no need in trying to get any
     // digits.
-    if (mode == BIGNUM_DTOA_FIXED && -estimated_power - 1 > requested_digits) {
+    if (mode == BIGNUM_DTOA_FIXED && -estimated_power - 1 > requested_digits)
+    {
         buffer->start[0] = '\0';
         *length = 0;
         // Set decimal-point to -requested_digits. This is what Gay does.
@@ -1958,44 +2170,42 @@ static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits,
         return;
     }
 
-    Bignum numerator = { 0 };
-    Bignum denominator = { 0 };
-    Bignum delta_minus = { 0 };
-    Bignum delta_plus = { 0 };
+    Bignum numerator = {0};
+    Bignum denominator = {0};
+    Bignum delta_minus = {0};
+    Bignum delta_plus = {0};
     // Make sure the bignum can grow large enough. The smallest double equals
     // 4e-324. In this case the denominator needs fewer than 324*4 binary digits.
     // The maximum double is 1.7976931348623157e308 which needs fewer than
     // 308*4 binary digits.
-    DOUBLE_CONVERSION_ASSERT(Bignum_kMaxSignificantBits >= 324*4);
-    BignumInitialScaledStartValues(significand, exponent, lower_boundary_is_closer,
-                                   estimated_power, need_boundary_deltas,
-                                   &numerator, &denominator,
-                                   &delta_minus, &delta_plus);
+    DOUBLE_CONVERSION_ASSERT(Bignum_kMaxSignificantBits >= 324 * 4);
+    BignumInitialScaledStartValues(significand,
+                                   exponent,
+                                   lower_boundary_is_closer,
+                                   estimated_power,
+                                   need_boundary_deltas,
+                                   &numerator,
+                                   &denominator,
+                                   &delta_minus,
+                                   &delta_plus);
     // We now have v = (numerator / denominator) * 10^estimated_power.
-    BignumFixupMultiply10(estimated_power, is_even, decimal_point,
-                          &numerator, &denominator,
-                          &delta_minus, &delta_plus);
+    BignumFixupMultiply10(estimated_power, is_even, decimal_point, &numerator, &denominator, &delta_minus, &delta_plus);
     // We now have v = (numerator / denominator) * 10^(decimal_point-1), and
     //  1 <= (numerator + delta_plus) / denominator < 10
-    switch (mode) {
-        case BIGNUM_DTOA_SHORTEST:
-        case BIGNUM_DTOA_SHORTEST_SINGLE:
-            BignumGenerateShortestDigits(&numerator, &denominator,
-                                         &delta_minus, &delta_plus,
-                                         is_even, buffer, length);
-            break;
-        case BIGNUM_DTOA_FIXED:
-            BignumToFixed(requested_digits, decimal_point,
-                          &numerator, &denominator,
-                          buffer, length);
-            break;
-        case BIGNUM_DTOA_PRECISION:
-            BignumGenerateCountedDigits(requested_digits, decimal_point,
-                                        &numerator, &denominator,
-                                        buffer, length);
-            break;
-        default:
-            DOUBLE_CONVERSION_UNREACHABLE();
+    switch (mode)
+    {
+    case BIGNUM_DTOA_SHORTEST:
+    case BIGNUM_DTOA_SHORTEST_SINGLE:
+        BignumGenerateShortestDigits(&numerator, &denominator, &delta_minus, &delta_plus, is_even, buffer, length);
+        break;
+    case BIGNUM_DTOA_FIXED:
+        BignumToFixed(requested_digits, decimal_point, &numerator, &denominator, buffer, length);
+        break;
+    case BIGNUM_DTOA_PRECISION:
+        BignumGenerateCountedDigits(requested_digits, decimal_point, &numerator, &denominator, buffer, length);
+        break;
+    default:
+        DOUBLE_CONVERSION_UNREACHABLE();
     }
     buffer->start[*length] = '\0';
 }
@@ -2013,20 +2223,21 @@ static void BignumDtoa(double v, BignumDtoaMode mode, int requested_digits,
 // Precondition: 0 <= (numerator+delta_plus) / denominator < 10.
 //   If 1 <= (numerator+delta_plus) / denominator < 10 then no leading 0 digit
 //   will be produced. This should be the standard precondition.
-static void BignumGenerateShortestDigits(Bignum *numerator, Bignum *denominator,
-                                         Bignum *delta_minus, Bignum *delta_plus,
-                                         bool is_even,
-                                         Vector *buffer, int *length) {
+static void BignumGenerateShortestDigits(
+    Bignum* numerator, Bignum* denominator, Bignum* delta_minus, Bignum* delta_plus, bool is_even, Vector* buffer, int* length)
+{
     // Small optimization: if delta_minus and delta_plus are the same just reuse
     // one of the two bignums.
-    if (Bignum_Equal(delta_minus, delta_plus)) {
+    if (Bignum_Equal(delta_minus, delta_plus))
+    {
         delta_plus = delta_minus;
     }
     *length = 0;
-    for (;;) {
+    for (;;)
+    {
         uint16_t digit;
         digit = Bignum_DivideModuloIntBignum(numerator, denominator);
-        DOUBLE_CONVERSION_ASSERT(digit <= 9);  // digit is a uint16_t and therefore always positive.
+        DOUBLE_CONVERSION_ASSERT(digit <= 9); // digit is a uint16_t and therefore always positive.
         // digit = numerator / denominator (integer division).
         // numerator = numerator % denominator.
         buffer->start[(*length)++] = (char)(digit + '0');
@@ -2038,35 +2249,46 @@ static void BignumGenerateShortestDigits(Bignum *numerator, Bignum *denominator,
         // Similarly we test if we can round up (using the upper boundary).
         bool in_delta_room_minus;
         bool in_delta_room_plus;
-        if (is_even) {
+        if (is_even)
+        {
             in_delta_room_minus = Bignum_LessEqual(numerator, delta_minus);
-        } else {
+        }
+        else
+        {
             in_delta_room_minus = Bignum_Less(numerator, delta_minus);
         }
-        if (is_even) {
-            in_delta_room_plus =
-                Bignum_PlusCompare(numerator, delta_plus, denominator) >= 0;
-        } else {
-            in_delta_room_plus =
-                Bignum_PlusCompare(numerator, delta_plus, denominator) > 0;
+        if (is_even)
+        {
+            in_delta_room_plus = Bignum_PlusCompare(numerator, delta_plus, denominator) >= 0;
         }
-        if (!in_delta_room_minus && !in_delta_room_plus) {
+        else
+        {
+            in_delta_room_plus = Bignum_PlusCompare(numerator, delta_plus, denominator) > 0;
+        }
+        if (!in_delta_room_minus && !in_delta_room_plus)
+        {
             // Prepare for next iteration.
             Bignum_Times10(numerator);
             Bignum_Times10(delta_minus);
             // We optimized delta_plus to be equal to delta_minus (if they share the
             // same value). So don't multiply delta_plus if they point to the same
             // object.
-            if (delta_minus != delta_plus) {
+            if (delta_minus != delta_plus)
+            {
                 Bignum_Times10(delta_plus);
             }
-        } else if (in_delta_room_minus && in_delta_room_plus) {
+        }
+        else if (in_delta_room_minus && in_delta_room_plus)
+        {
             // Let's see if 2*numerator < denominator.
             // If yes, then the next digit would be < 5 and we can round down.
             int compare = Bignum_PlusCompare(numerator, numerator, denominator);
-            if (compare < 0) {
+            if (compare < 0)
+            {
                 // Remaining digits are less than .5. -> Round down (== do nothing).
-            } else if (compare > 0) {
+            }
+            else if (compare > 0)
+            {
                 // Remaining digits are more than .5 of denominator. -> Round up.
                 // Note that the last digit could not be a '9' as otherwise the whole
                 // loop would have stopped earlier.
@@ -2074,30 +2296,39 @@ static void BignumGenerateShortestDigits(Bignum *numerator, Bignum *denominator,
                 // satisfied.
                 DOUBLE_CONVERSION_ASSERT(buffer->start[(*length) - 1] != '9');
                 buffer->start[(*length) - 1]++;
-            } else {
+            }
+            else
+            {
                 // Halfway case.
                 // TODO(floitsch): need a way to solve half-way cases.
                 //   For now let's round towards even (since this is what Gay seems to
                 //   do).
 
-                if ((buffer->start[(*length) - 1] - '0') % 2 == 0) {
+                if ((buffer->start[(*length) - 1] - '0') % 2 == 0)
+                {
                     // Round down => Do nothing.
-                } else {
+                }
+                else
+                {
                     DOUBLE_CONVERSION_ASSERT(buffer->start[(*length) - 1] != '9');
                     buffer->start[(*length) - 1]++;
                 }
             }
             return;
-        } else if (in_delta_room_minus) {
+        }
+        else if (in_delta_room_minus)
+        {
             // Round down (== do nothing).
             return;
-        } else {  // in_delta_room_plus
+        }
+        else
+        { // in_delta_room_plus
             // Round up.
             // Note again that the last digit could not be '9' since this would have
             // stopped the loop earlier.
             // We still have an DOUBLE_CONVERSION_ASSERT here, in case the preconditions were not
             // satisfied.
-            DOUBLE_CONVERSION_ASSERT(buffer->start[(*length) -1] != '9');
+            DOUBLE_CONVERSION_ASSERT(buffer->start[(*length) - 1] != '9');
             buffer->start[(*length) - 1]++;
             return;
         }
@@ -2110,14 +2341,15 @@ static void BignumGenerateShortestDigits(Bignum *numerator, Bignum *denominator,
 // to round up or down. Remainders of exactly .5 round upwards. Numbers such
 // as 9.999999 propagate a carry all the way, and change the
 // exponent (decimal_point), when rounding upwards.
-static void BignumGenerateCountedDigits(int count, int *decimal_point,
-                                        Bignum *numerator, Bignum *denominator,
-                                        Vector *buffer, int *length) {
+static void
+BignumGenerateCountedDigits(int count, int* decimal_point, Bignum* numerator, Bignum* denominator, Vector* buffer, int* length)
+{
     DOUBLE_CONVERSION_ASSERT(count >= 0);
-    for (int i = 0; i < count - 1; ++i) {
+    for (int i = 0; i < count - 1; ++i)
+    {
         uint16_t digit;
         digit = Bignum_DivideModuloIntBignum(numerator, denominator);
-        DOUBLE_CONVERSION_ASSERT(digit <= 9);  // digit is a uint16_t and therefore always  positive.
+        DOUBLE_CONVERSION_ASSERT(digit <= 9); // digit is a uint16_t and therefore always  positive.
         // digit = numerator / denominator (integer division).
         // numerator = numerator % denominator.
         buffer->start[i] = (char)(digit + '0');
@@ -2127,19 +2359,23 @@ static void BignumGenerateCountedDigits(int count, int *decimal_point,
     // Generate the last digit.
     uint16_t digit;
     digit = Bignum_DivideModuloIntBignum(numerator, denominator);
-    if (Bignum_PlusCompare(numerator, numerator, denominator) >= 0) {
+    if (Bignum_PlusCompare(numerator, numerator, denominator) >= 0)
+    {
         digit++;
     }
     DOUBLE_CONVERSION_ASSERT(digit <= 10);
     buffer->start[count - 1] = (char)(digit + '0');
     // Correct bad digits (in case we had a sequence of '9's). Propagate the
     // carry until we hat a non-'9' or til we reach the first digit.
-    for (int i = count - 1; i > 0; --i) {
-        if (buffer->start[i] != '0' + 10) break;
+    for (int i = count - 1; i > 0; --i)
+    {
+        if (buffer->start[i] != '0' + 10)
+            break;
         buffer->start[i] = '0';
         buffer->start[i - 1]++;
     }
-    if (buffer->start[0] == '0' + 10) {
+    if (buffer->start[0] == '0' + 10)
+    {
         // Propagate a carry past the top place.
         buffer->start[0] = '1';
         (*decimal_point)++;
@@ -2152,13 +2388,14 @@ static void BignumGenerateCountedDigits(int count, int *decimal_point,
 // generated (ex.: 2 fixed digits for 0.00001).
 //
 // Input verifies:  1 <= (numerator + delta) / denominator < 10.
-static void BignumToFixed(int requested_digits, int *decimal_point,
-                          Bignum *numerator, Bignum *denominator,
-                          Vector *buffer, int *length) {
+static void
+BignumToFixed(int requested_digits, int* decimal_point, Bignum* numerator, Bignum* denominator, Vector* buffer, int* length)
+{
     // Note that we have to look at more than just the requested_digits, since
     // a number could be rounded up. Example: v=0.5 with requested_digits=0.
     // Even though the power of v equals 0 we can't just stop here.
-    if (-(*decimal_point) > requested_digits) {
+    if (-(*decimal_point) > requested_digits)
+    {
         // The number is definitively too small.
         // Ex: 0.001 with requested_digits == 1.
         // Set decimal-point to -requested_digits. This is what Gay does.
@@ -2167,31 +2404,36 @@ static void BignumToFixed(int requested_digits, int *decimal_point,
         *decimal_point = -requested_digits;
         *length = 0;
         return;
-    } else if (-(*decimal_point) == requested_digits) {
+    }
+    else if (-(*decimal_point) == requested_digits)
+    {
         // We only need to verify if the number rounds down or up.
         // Ex: 0.04 and 0.06 with requested_digits == 1.
         DOUBLE_CONVERSION_ASSERT(*decimal_point == -requested_digits);
         // Initially the fraction lies in range (1, 10]. Multiply the denominator
         // by 10 so that we can compare more easily.
         Bignum_Times10(denominator);
-        if (Bignum_PlusCompare(numerator, numerator, denominator) >= 0) {
+        if (Bignum_PlusCompare(numerator, numerator, denominator) >= 0)
+        {
             // If the fraction is >= 0.5 then we have to include the rounded
             // digit.
             buffer->start[0] = '1';
             *length = 1;
             (*decimal_point)++;
-        } else {
+        }
+        else
+        {
             // Note that we caught most of similar cases earlier.
             *length = 0;
         }
         return;
-    } else {
+    }
+    else
+    {
         // The requested digits correspond to the digits after the point.
         // The variable 'needed_digits' includes the digits before the point.
         int needed_digits = (*decimal_point) + requested_digits;
-        BignumGenerateCountedDigits(needed_digits, decimal_point,
-                              numerator, denominator,
-                              buffer, length);
+        BignumGenerateCountedDigits(needed_digits, decimal_point, numerator, denominator, buffer, length);
     }
 }
 
@@ -2210,7 +2452,8 @@ static void BignumToFixed(int requested_digits, int *decimal_point,
 //  EstimatePower(-52) => 0
 //
 // Note: e >= 0 => EstimatedPower(e) > 0. No similar claim can be made for e<0.
-static int BignumEstimatePower(int exponent) {
+static int BignumEstimatePower(int exponent)
+{
     // This function estimates log10 of v where v = f*2^e (with e == exponent).
     // Note that 10^floor(log10(v)) <= v, but v <= 10^ceil(log10(v)).
     // Note that f is bounded by its container size. Let p = 53 (the double's
@@ -2232,7 +2475,7 @@ static int BignumEstimatePower(int exponent) {
     // the fact that 2^(p-1) <= f < 2^p. Boundaries still satisfy this requirement
     // (even for denormals where the delta can be much more important).
 
-    const double k1Log10 = 0.30102999566398114;  // 1/lg(10)
+    const double k1Log10 = 0.30102999566398114; // 1/lg(10)
 
     // For doubles len(f) == 53 (don't forget the hidden bit).
     const int kSignificandSize = Double_kSignificandSize;
@@ -2241,12 +2484,15 @@ static int BignumEstimatePower(int exponent) {
 }
 
 // See comments for InitialScaledStartValues.
-static void BignumInitialScaledStartValuesPositiveExponent(
-    uint64_t significand, int exponent,
-    int estimated_power, bool need_boundary_deltas,
-    Bignum *numerator, Bignum *denominator,
-    Bignum *delta_minus, Bignum *delta_plus) {
-
+static void BignumInitialScaledStartValuesPositiveExponent(uint64_t significand,
+                                                           int exponent,
+                                                           int estimated_power,
+                                                           bool need_boundary_deltas,
+                                                           Bignum* numerator,
+                                                           Bignum* denominator,
+                                                           Bignum* delta_minus,
+                                                           Bignum* delta_plus)
+{
     // A positive exponent implies a positive power.
     DOUBLE_CONVERSION_ASSERT(estimated_power >= 0);
     // Since the estimated_power is positive we simply multiply the denominator
@@ -2258,7 +2504,8 @@ static void BignumInitialScaledStartValuesPositiveExponent(
     // denominator = 10^estimated_power.
     Bignum_AssignPowerUInt16(denominator, 10, estimated_power);
 
-    if (need_boundary_deltas) {
+    if (need_boundary_deltas)
+    {
         // Introduce a common denominator so that the deltas to the boundaries are
         // integers.
         Bignum_ShiftLeft(denominator, 1);
@@ -2274,12 +2521,15 @@ static void BignumInitialScaledStartValuesPositiveExponent(
 }
 
 // See comments for InitialScaledStartValues
-static void BignumInitialScaledStartValuesNegativeExponentPositivePower(
-    uint64_t significand, int exponent,
-    int estimated_power, bool need_boundary_deltas,
-    Bignum *numerator, Bignum *denominator,
-    Bignum *delta_minus, Bignum *delta_plus) {
-
+static void BignumInitialScaledStartValuesNegativeExponentPositivePower(uint64_t significand,
+                                                                        int exponent,
+                                                                        int estimated_power,
+                                                                        bool need_boundary_deltas,
+                                                                        Bignum* numerator,
+                                                                        Bignum* denominator,
+                                                                        Bignum* delta_minus,
+                                                                        Bignum* delta_plus)
+{
     // v = f * 2^e with e < 0, and with estimated_power >= 0.
     // This means that e is close to 0 (have a look at how estimated_power is
     // computed).
@@ -2292,7 +2542,8 @@ static void BignumInitialScaledStartValuesNegativeExponentPositivePower(
     Bignum_AssignPowerUInt16(denominator, 10, estimated_power);
     Bignum_ShiftLeft(denominator, -exponent);
 
-    if (need_boundary_deltas) {
+    if (need_boundary_deltas)
+    {
         // Introduce a common denominator so that the deltas to the boundaries are
         // integers.
         Bignum_ShiftLeft(denominator, 1);
@@ -2308,20 +2559,24 @@ static void BignumInitialScaledStartValuesNegativeExponentPositivePower(
 }
 
 // See comments for InitialScaledStartValues
-static void BignumInitialScaledStartValuesNegativeExponentNegativePower(
-    uint64_t significand, int exponent,
-    int estimated_power, bool need_boundary_deltas,
-    Bignum *numerator, Bignum *denominator,
-    Bignum *delta_minus, Bignum *delta_plus) {
-
+static void BignumInitialScaledStartValuesNegativeExponentNegativePower(uint64_t significand,
+                                                                        int exponent,
+                                                                        int estimated_power,
+                                                                        bool need_boundary_deltas,
+                                                                        Bignum* numerator,
+                                                                        Bignum* denominator,
+                                                                        Bignum* delta_minus,
+                                                                        Bignum* delta_plus)
+{
     // Instead of multiplying the denominator with 10^estimated_power we
     // multiply all values (numerator and deltas) by 10^-estimated_power.
 
     // Use numerator as temporary container for power_ten.
-    Bignum *power_ten = numerator;
+    Bignum* power_ten = numerator;
     Bignum_AssignPowerUInt16(power_ten, 10, -estimated_power);
 
-    if (need_boundary_deltas) {
+    if (need_boundary_deltas)
+    {
         // Since power_ten == numerator we must make a copy of 10^estimated_power
         // before we complete the computation of the numerator.
         // delta_plus = delta_minus = 10^estimated_power
@@ -2341,7 +2596,8 @@ static void BignumInitialScaledStartValuesNegativeExponentNegativePower(
     Bignum_AssignUInt16(denominator, 1);
     Bignum_ShiftLeft(denominator, -exponent);
 
-    if (need_boundary_deltas) {
+    if (need_boundary_deltas)
+    {
         // Introduce a common denominator so that the deltas to the boundaries are
         // integers.
         Bignum_ShiftLeft(numerator, 1);
@@ -2396,30 +2652,34 @@ static void BignumInitialScaledStartValues(uint64_t significand,
                                            bool lower_boundary_is_closer,
                                            int estimated_power,
                                            bool need_boundary_deltas,
-                                           Bignum *numerator,
-                                           Bignum *denominator,
-                                           Bignum *delta_minus,
-                                           Bignum *delta_plus) {
-    if (exponent >= 0) {
+                                           Bignum* numerator,
+                                           Bignum* denominator,
+                                           Bignum* delta_minus,
+                                           Bignum* delta_plus)
+{
+    if (exponent >= 0)
+    {
         BignumInitialScaledStartValuesPositiveExponent(
-            significand, exponent, estimated_power, need_boundary_deltas,
-            numerator, denominator, delta_minus, delta_plus);
-    } else if (estimated_power >= 0) {
+            significand, exponent, estimated_power, need_boundary_deltas, numerator, denominator, delta_minus, delta_plus);
+    }
+    else if (estimated_power >= 0)
+    {
         BignumInitialScaledStartValuesNegativeExponentPositivePower(
-            significand, exponent, estimated_power, need_boundary_deltas,
-            numerator, denominator, delta_minus, delta_plus);
-    } else {
+            significand, exponent, estimated_power, need_boundary_deltas, numerator, denominator, delta_minus, delta_plus);
+    }
+    else
+    {
         BignumInitialScaledStartValuesNegativeExponentNegativePower(
-            significand, exponent, estimated_power, need_boundary_deltas,
-            numerator, denominator, delta_minus, delta_plus);
+            significand, exponent, estimated_power, need_boundary_deltas, numerator, denominator, delta_minus, delta_plus);
     }
 
-    if (need_boundary_deltas && lower_boundary_is_closer) {
+    if (need_boundary_deltas && lower_boundary_is_closer)
+    {
         // The lower boundary is closer at half the distance of "normal" numbers.
         // Increase the common denominator and adapt all but the delta_minus.
-        Bignum_ShiftLeft(denominator, 1);  // *2
-        Bignum_ShiftLeft(numerator, 1);    // *2
-        Bignum_ShiftLeft(delta_plus, 1);   // *2
+        Bignum_ShiftLeft(denominator, 1); // *2
+        Bignum_ShiftLeft(numerator, 1);   // *2
+        Bignum_ShiftLeft(delta_plus, 1);  // *2
     }
 }
 
@@ -2434,36 +2694,47 @@ static void BignumInitialScaledStartValues(uint64_t significand,
 // then simply adjust the power so that 10^(k-1) <= v < 10^k (with k ==
 // estimated_power) but do not touch the numerator or denominator.
 // Otherwise the routine multiplies the numerator and the deltas by 10.
-static void BignumFixupMultiply10(int estimated_power, bool is_even,
-                                  int *decimal_point,
-                                  Bignum *numerator, Bignum *denominator,
-                                  Bignum *delta_minus, Bignum *delta_plus) {
+static void BignumFixupMultiply10(int estimated_power,
+                                  bool is_even,
+                                  int* decimal_point,
+                                  Bignum* numerator,
+                                  Bignum* denominator,
+                                  Bignum* delta_minus,
+                                  Bignum* delta_plus)
+{
     bool in_range;
-    if (is_even) {
+    if (is_even)
+    {
         // For IEEE doubles half-way cases (in decimal system numbers ending with 5)
         // are rounded to the closest floating-point number with even significand.
         in_range = Bignum_PlusCompare(numerator, delta_plus, denominator) >= 0;
-    } else {
+    }
+    else
+    {
         in_range = Bignum_PlusCompare(numerator, delta_plus, denominator) > 0;
     }
-    if (in_range) {
+    if (in_range)
+    {
         // Since numerator + delta_plus >= denominator we already have
         // 1 <= numerator/denominator < 10. Simply update the estimated_power.
         *decimal_point = estimated_power + 1;
-    } else {
+    }
+    else
+    {
         *decimal_point = estimated_power;
         Bignum_Times10(numerator);
-        if (Bignum_Equal(delta_minus, delta_plus)) {
+        if (Bignum_Equal(delta_minus, delta_plus))
+        {
             Bignum_Times10(delta_minus);
             Bignum_AssignBignum(delta_plus, delta_minus);
-        } else {
+        }
+        else
+        {
             Bignum_Times10(delta_minus);
             Bignum_Times10(delta_plus);
         }
     }
 }
-
-
 
 /// ============================================================================
 /// cached-powers.h
@@ -2477,27 +2748,21 @@ static const int Cache_kMaxDecimalExponent = 340;
 
 // Returns a cached power-of-ten with a binary exponent in the range
 // [min_exponent; max_exponent] (boundaries included).
-static void Cache_GetCachedPowerForBinaryExponentRange(int min_exponent,
-                                                       int max_exponent,
-                                                       DiyFp *power,
-                                                       int *decimal_exponent);
+static void Cache_GetCachedPowerForBinaryExponentRange(int min_exponent, int max_exponent, DiyFp* power, int* decimal_exponent);
 
 // Returns a cached power of ten x ~= 10^k such that
 //   k <= decimal_exponent < k + kCachedPowersDecimalDistance.
 // The given decimal_exponent must satisfy
 //   kMinDecimalExponent <= requested_exponent, and
 //   requested_exponent < kMaxDecimalExponent + kDecimalExponentDistance.
-static void Cache_GetCachedPowerForDecimalExponent(int requested_exponent,
-                                                   DiyFp *power,
-                                                   int *found_exponent);
-
-
+static void Cache_GetCachedPowerForDecimalExponent(int requested_exponent, DiyFp* power, int* found_exponent);
 
 /// ============================================================================
 /// cached-powers.cc
 /// ============================================================================
 
-typedef struct CachedPower {
+typedef struct CachedPower
+{
     uint64_t significand;
     int16_t binary_exponent;
     int16_t decimal_exponent;
@@ -2593,33 +2858,29 @@ static const CachedPower kCachedPowers[] = {
     {DOUBLE_CONVERSION_UINT64_2PART_C(0xaf87023b, 9bf0ee6b), 1066, 340},
 };
 
-static const int Cache_kCachedPowersOffset = 348;  // -1 * the first decimal_exponent.
-static const double Cache_kD_1_LOG2_10 = 0.30102999566398114;  //  1 / lg(10)
+static const int Cache_kCachedPowersOffset = 348;             // -1 * the first decimal_exponent.
+static const double Cache_kD_1_LOG2_10 = 0.30102999566398114; //  1 / lg(10)
 
-static void Cache_GetCachedPowerForBinaryExponentRange(int min_exponent,
-                                                       int max_exponent,
-                                                       DiyFp *power,
-                                                       int *decimal_exponent) {
+static void Cache_GetCachedPowerForBinaryExponentRange(int min_exponent, int max_exponent, DiyFp* power, int* decimal_exponent)
+{
     int kQ = DiyFp_kSignificandSize;
     double k = fp_ceil((min_exponent + kQ - 1) * Cache_kD_1_LOG2_10);
     int foo = Cache_kCachedPowersOffset;
-    int index = (foo + (int)(k) - 1) / Cache_kDecimalExponentDistance + 1;
+    int index = (foo + (int)(k)-1) / Cache_kDecimalExponentDistance + 1;
     DOUBLE_CONVERSION_ASSERT(0 <= index && index < (int)(DOUBLE_CONVERSION_ARRAY_SIZE(kCachedPowers)));
     CachedPower cached_power = kCachedPowers[index];
     DOUBLE_CONVERSION_ASSERT(min_exponent <= cached_power.binary_exponent);
-    (void) max_exponent;  // Mark variable as used.
+    (void)max_exponent; // Mark variable as used.
     DOUBLE_CONVERSION_ASSERT(cached_power.binary_exponent <= max_exponent);
     *decimal_exponent = cached_power.decimal_exponent;
     *power = DiyFp_make(cached_power.significand, cached_power.binary_exponent);
 }
 
-static void Cache_GetCachedPowerForDecimalExponent(int requested_exponent,
-                                                   DiyFp *power,
-                                                   int *found_exponent) {
+static void Cache_GetCachedPowerForDecimalExponent(int requested_exponent, DiyFp* power, int* found_exponent)
+{
     DOUBLE_CONVERSION_ASSERT(Cache_kMinDecimalExponent <= requested_exponent);
     DOUBLE_CONVERSION_ASSERT(requested_exponent < Cache_kMaxDecimalExponent + Cache_kDecimalExponentDistance);
-    int index =
-        (requested_exponent + Cache_kCachedPowersOffset) / Cache_kDecimalExponentDistance;
+    int index = (requested_exponent + Cache_kCachedPowersOffset) / Cache_kDecimalExponentDistance;
     CachedPower cached_power = kCachedPowers[index];
     *power = DiyFp_make(cached_power.significand, cached_power.binary_exponent);
     *found_exponent = cached_power.decimal_exponent;
@@ -2627,13 +2888,12 @@ static void Cache_GetCachedPowerForDecimalExponent(int requested_exponent,
     DOUBLE_CONVERSION_ASSERT(requested_exponent < *found_exponent + Cache_kDecimalExponentDistance);
 }
 
-
-
 /// ============================================================================
 /// fast-dtoa.h
 /// ============================================================================
 
-typedef enum FastDtoaMode {
+typedef enum FastDtoaMode
+{
     // Computes the shortest representation of the given input. The returned
     // result will be the most accurate number of this length. Longer
     // representations might be more accurate.
@@ -2677,14 +2937,7 @@ static const int kFastDtoaMaximalSingleLength = 9;
 //     If there are two values that are equally close, then FastDtoa returns
 //     false.
 // For both modes the buffer must be large enough to hold the result.
-static bool FastDtoa(double d,
-                     FastDtoaMode mode,
-                     int requested_digits,
-                     Vector *buffer,
-                     int *length,
-                     int *decimal_point);
-
-
+static bool FastDtoa(double d, FastDtoaMode mode, int requested_digits, Vector* buffer, int* length, int* decimal_point);
 
 /// ============================================================================
 /// fast-dtoa.cc
@@ -2714,13 +2967,14 @@ static const int FastDtoa_kMaximalTargetExponent = -32;
 // Output: returns true if the buffer is guaranteed to contain the closest
 //    representable number to the input.
 //  Modifies the generated digits in the buffer to approach (round towards) w.
-static bool FastDtoa_RoundWeed(Vector *buffer,
+static bool FastDtoa_RoundWeed(Vector* buffer,
                                int length,
                                uint64_t distance_too_high_w,
                                uint64_t unsafe_interval,
                                uint64_t rest,
                                uint64_t ten_kappa,
-                               uint64_t unit) {
+                               uint64_t unit)
+{
     uint64_t small_distance = distance_too_high_w - unit;
     uint64_t big_distance = distance_too_high_w + unit;
     // Let w_low  = too_high - big_distance, and
@@ -2795,10 +3049,11 @@ static bool FastDtoa_RoundWeed(Vector *buffer,
     // We need to do the following tests in this order to avoid over- and
     // underflows.
     DOUBLE_CONVERSION_ASSERT(rest <= unsafe_interval);
-    while (rest < small_distance &&  // Negated condition 1
-           unsafe_interval - rest >= ten_kappa &&  // Negated condition 2
+    while (rest < small_distance &&               // Negated condition 1
+           unsafe_interval - rest >= ten_kappa && // Negated condition 2
            (rest + ten_kappa < small_distance ||  // buffer{-1} > w_high
-            small_distance - rest >= rest + ten_kappa - small_distance)) {
+            small_distance - rest >= rest + ten_kappa - small_distance))
+    {
         buffer->start[length - 1]--;
         rest += ten_kappa;
     }
@@ -2806,10 +3061,9 @@ static bool FastDtoa_RoundWeed(Vector *buffer,
     // We have approached w+ as much as possible. We now test if approaching w-
     // would require changing the buffer. If yes, then we have two possible
     // representations close to w, but we cannot decide which one is closer.
-    if (rest < big_distance &&
-        unsafe_interval - rest >= ten_kappa &&
-        (rest + ten_kappa < big_distance ||
-         big_distance - rest > rest + ten_kappa - big_distance)) {
+    if (rest < big_distance && unsafe_interval - rest >= ten_kappa &&
+        (rest + ten_kappa < big_distance || big_distance - rest > rest + ten_kappa - big_distance))
+    {
         return false;
     }
 
@@ -2833,12 +3087,8 @@ static bool FastDtoa_RoundWeed(Vector *buffer,
 // unambiguously determined.
 //
 // Precondition: rest < ten_kappa.
-static bool FastDtoa_RoundWeedCounted(Vector *buffer,
-                                      int length,
-                                      uint64_t rest,
-                                      uint64_t ten_kappa,
-                                      uint64_t unit,
-                                      int *kappa) {
+static bool FastDtoa_RoundWeedCounted(Vector* buffer, int length, uint64_t rest, uint64_t ten_kappa, uint64_t unit, int* kappa)
+{
     DOUBLE_CONVERSION_ASSERT(rest < ten_kappa);
     // The following tests are done in a specific order to avoid overflows. They
     // will work correctly with any uint64 values of rest < ten_kappa and unit.
@@ -2846,21 +3096,27 @@ static bool FastDtoa_RoundWeedCounted(Vector *buffer,
     // If the unit is too big, then we don't know which way to round. For example
     // a unit of 50 means that the real number lies within rest +/- 50. If
     // 10^kappa == 40 then there is no way to tell which way to round.
-    if (unit >= ten_kappa) return false;
+    if (unit >= ten_kappa)
+        return false;
     // Even if unit is just half the size of 10^kappa we are already completely
     // lost. (And after the previous test we know that the expression will not
     // over/underflow.)
-    if (ten_kappa - unit <= unit) return false;
+    if (ten_kappa - unit <= unit)
+        return false;
     // If 2 * (rest + unit) <= 10^kappa we can safely round down.
-    if ((ten_kappa - rest > rest) && (ten_kappa - 2 * rest >= 2 * unit)) {
+    if ((ten_kappa - rest > rest) && (ten_kappa - 2 * rest >= 2 * unit))
+    {
         return true;
     }
     // If 2 * (rest - unit) >= 10^kappa, then we can safely round up.
-    if ((rest > unit) && (ten_kappa - (rest - unit) <= (rest - unit))) {
+    if ((rest > unit) && (ten_kappa - (rest - unit) <= (rest - unit)))
+    {
         // Increment the last digit recursively until we find a non '9' digit.
         buffer->start[length - 1]++;
-        for (int i = length - 1; i > 0; --i) {
-            if (buffer->start[i] != '0' + 10) break;
+        for (int i = length - 1; i > 0; --i)
+        {
+            if (buffer->start[i] != '0' + 10)
+                break;
             buffer->start[i] = '0';
             buffer->start[i - 1]++;
         }
@@ -2868,7 +3124,8 @@ static bool FastDtoa_RoundWeedCounted(Vector *buffer,
         // exception of the first digit all digits are now '0'. Simply switch the
         // first digit to '1' and adjust the kappa. Example: "99" becomes "10" and
         // the power (the kappa) is increased.
-        if (buffer->start[0] == '0' + 10) {
+        if (buffer->start[0] == '0' + 10)
+        {
             buffer->start[0] = '1';
             (*kappa) += 1;
         }
@@ -2888,14 +3145,11 @@ static bool FastDtoa_RoundWeedCounted(Vector *buffer,
 
 // Inspired by the method for finding an integer log base 10 from here:
 // http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
-static unsigned int const FastDtoa_kSmallPowersOfTen[] =
-    {0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000,
-     1000000000};
+static unsigned int const FastDtoa_kSmallPowersOfTen[] = {
+    0, 1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000};
 
-static void FastDtoa_BiggestPowerTen(uint32_t number,
-                                     int number_bits,
-                                     uint32_t *power,
-                                     int *exponent_plus_one) {
+static void FastDtoa_BiggestPowerTen(uint32_t number, int number_bits, uint32_t* power, int* exponent_plus_one)
+{
     DOUBLE_CONVERSION_ASSERT(number < (1u << (number_bits + 1)));
     // 1233/4096 is approximately 1/lg(10).
     int exponent_plus_one_guess = ((number_bits + 1) * 1233 >> 12);
@@ -2903,7 +3157,8 @@ static void FastDtoa_BiggestPowerTen(uint32_t number,
     // Note: kPowersOf10[i] == 10^(i-1).
     exponent_plus_one_guess++;
     // We don't have any guarantees that 2^number_bits <= number.
-    if (number < FastDtoa_kSmallPowersOfTen[exponent_plus_one_guess]) {
+    if (number < FastDtoa_kSmallPowersOfTen[exponent_plus_one_guess])
+    {
         exponent_plus_one_guess--;
     }
     *power = FastDtoa_kSmallPowersOfTen[exponent_plus_one_guess];
@@ -2952,12 +3207,8 @@ static void FastDtoa_BiggestPowerTen(uint32_t number,
 // represent 'w' we can stop. Everything inside the interval low - high
 // represents w. However we have to pay attention to low, high and w's
 // imprecision.
-static bool FastDtoa_DigitGen(DiyFp low,
-                              DiyFp w,
-                              DiyFp high,
-                              Vector *buffer,
-                              int *length,
-                              int *kappa) {
+static bool FastDtoa_DigitGen(DiyFp low, DiyFp w, DiyFp high, Vector* buffer, int* length, int* kappa)
+{
     DOUBLE_CONVERSION_ASSERT(low.e == w.e && w.e == high.e);
     DOUBLE_CONVERSION_ASSERT(low.f + 1 <= high.f - 1);
     DOUBLE_CONVERSION_ASSERT(FastDtoa_kMinimalTargetExponent <= w.e && w.e <= FastDtoa_kMaximalTargetExponent);
@@ -2992,15 +3243,15 @@ static bool FastDtoa_DigitGen(DiyFp low,
     uint64_t fractionals = too_high.f & (one.f - 1);
     uint32_t divisor;
     int divisor_exponent_plus_one;
-    FastDtoa_BiggestPowerTen(integrals, DiyFp_kSignificandSize - (-one.e),
-                             &divisor, &divisor_exponent_plus_one);
+    FastDtoa_BiggestPowerTen(integrals, DiyFp_kSignificandSize - (-one.e), &divisor, &divisor_exponent_plus_one);
     *kappa = divisor_exponent_plus_one;
     *length = 0;
     // Loop invariant: buffer = too_high / 10^kappa  (integer division)
     // The invariant holds for the first iteration: kappa has been initialized
     // with the divisor exponent + 1. And the divisor is the biggest power of ten
     // that is smaller than integrals.
-    while (*kappa > 0) {
+    while (*kappa > 0)
+    {
         int digit = integrals / divisor;
         DOUBLE_CONVERSION_ASSERT(digit <= 9);
         buffer->start[*length] = (char)('0' + digit);
@@ -3012,12 +3263,12 @@ static bool FastDtoa_DigitGen(DiyFp low,
         uint64_t rest = ((uint64_t)(integrals) << -one.e) + fractionals;
         // Invariant: too_high = buffer * 10^kappa + DiyFp(rest, one.e())
         // Reminder: unsafe_interval.e() == one.e()
-        if (rest < unsafe_interval.f) {
+        if (rest < unsafe_interval.f)
+        {
             // Rounding down (by not emitting the remaining digits) yields a number
             // that lies within the unsafe interval.
-            return FastDtoa_RoundWeed(buffer, *length, DiyFp_Minus(&too_high, &w).f,
-                                      unsafe_interval.f, rest,
-                                      (uint64_t)(divisor) << -one.e, unit);
+            return FastDtoa_RoundWeed(
+                buffer, *length, DiyFp_Minus(&too_high, &w).f, unsafe_interval.f, rest, (uint64_t)(divisor) << -one.e, unit);
         }
         divisor /= 10;
     }
@@ -3031,7 +3282,8 @@ static bool FastDtoa_DigitGen(DiyFp low,
     DOUBLE_CONVERSION_ASSERT(one.e >= -60);
     DOUBLE_CONVERSION_ASSERT(fractionals < one.f);
     DOUBLE_CONVERSION_ASSERT(DOUBLE_CONVERSION_UINT64_2PART_C(0xFFFFFFFF, FFFFFFFF) / 10 >= one.f);
-    for (;;) {
+    for (;;)
+    {
         fractionals *= 10;
         unit *= 10;
         unsafe_interval.f = (unsafe_interval.f * 10);
@@ -3040,11 +3292,12 @@ static bool FastDtoa_DigitGen(DiyFp low,
         DOUBLE_CONVERSION_ASSERT(digit <= 9);
         buffer->start[*length] = (char)('0' + digit);
         (*length)++;
-        fractionals &= one.f - 1;  // Modulo by one.
+        fractionals &= one.f - 1; // Modulo by one.
         (*kappa)--;
-        if (fractionals < unsafe_interval.f) {
-          return FastDtoa_RoundWeed(buffer, *length, DiyFp_Minus(&too_high, &w).f * unit,
-                           unsafe_interval.f, fractionals, one.f, unit);
+        if (fractionals < unsafe_interval.f)
+        {
+            return FastDtoa_RoundWeed(
+                buffer, *length, DiyFp_Minus(&too_high, &w).f * unit, unsafe_interval.f, fractionals, one.f, unit);
         }
     }
 }
@@ -3077,11 +3330,8 @@ static bool FastDtoa_DigitGen(DiyFp low,
 //   numbers. If the precision is not enough to guarantee all the postconditions
 //   then false is returned. This usually happens rarely, but the failure-rate
 //   increases with higher requested_digits.
-static bool FastDtoa_DigitGenCounted(DiyFp w,
-                                     int requested_digits,
-                                     Vector *buffer,
-                                     int *length,
-                                     int *kappa) {
+static bool FastDtoa_DigitGenCounted(DiyFp w, int requested_digits, Vector* buffer, int* length, int* kappa)
+{
     DOUBLE_CONVERSION_ASSERT(FastDtoa_kMinimalTargetExponent <= w.e && w.e <= FastDtoa_kMaximalTargetExponent);
     DOUBLE_CONVERSION_ASSERT(FastDtoa_kMinimalTargetExponent >= -60);
     DOUBLE_CONVERSION_ASSERT(FastDtoa_kMaximalTargetExponent <= -32);
@@ -3099,8 +3349,7 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
     uint64_t fractionals = w.f & (one.f - 1);
     uint32_t divisor;
     int divisor_exponent_plus_one;
-    FastDtoa_BiggestPowerTen(integrals, DiyFp_kSignificandSize - (-one.e),
-                  &divisor, &divisor_exponent_plus_one);
+    FastDtoa_BiggestPowerTen(integrals, DiyFp_kSignificandSize - (-one.e), &divisor, &divisor_exponent_plus_one);
     *kappa = divisor_exponent_plus_one;
     *length = 0;
 
@@ -3108,7 +3357,8 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
     // The invariant holds for the first iteration: kappa has been initialized
     // with the divisor exponent + 1. And the divisor is the biggest power of ten
     // that is smaller than 'integrals'.
-    while (*kappa > 0) {
+    while (*kappa > 0)
+    {
         int digit = integrals / divisor;
         DOUBLE_CONVERSION_ASSERT(digit <= 9);
         buffer->start[*length] = (char)('0' + digit);
@@ -3118,15 +3368,15 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
         (*kappa)--;
         // Note that kappa now equals the exponent of the divisor and that the
         // invariant thus holds again.
-        if (requested_digits == 0) break;
+        if (requested_digits == 0)
+            break;
         divisor /= 10;
     }
 
-    if (requested_digits == 0) {
+    if (requested_digits == 0)
+    {
         uint64_t rest = ((uint64_t)(integrals) << -one.e) + fractionals;
-        return FastDtoa_RoundWeedCounted(buffer, *length, rest,
-                            (uint64_t)(divisor) << -one.e, w_error,
-                            kappa);
+        return FastDtoa_RoundWeedCounted(buffer, *length, rest, (uint64_t)(divisor) << -one.e, w_error, kappa);
     }
 
     // The integrals have been generated. We are at the point of the decimal
@@ -3138,7 +3388,8 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
     DOUBLE_CONVERSION_ASSERT(one.e >= -60);
     DOUBLE_CONVERSION_ASSERT(fractionals < one.f);
     DOUBLE_CONVERSION_ASSERT(DOUBLE_CONVERSION_UINT64_2PART_C(0xFFFFFFFF, FFFFFFFF) / 10 >= one.f);
-    while (requested_digits > 0 && fractionals > w_error) {
+    while (requested_digits > 0 && fractionals > w_error)
+    {
         fractionals *= 10;
         w_error *= 10;
         // Integer division by one.
@@ -3147,10 +3398,11 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
         buffer->start[*length] = (char)('0' + digit);
         (*length)++;
         requested_digits--;
-        fractionals &= one.f - 1;  // Modulo by one.
+        fractionals &= one.f - 1; // Modulo by one.
         (*kappa)--;
     }
-    if (requested_digits != 0) return false;
+    if (requested_digits != 0)
+        return false;
     return FastDtoa_RoundWeedCounted(buffer, *length, fractionals, one.f, w_error, kappa);
 }
 
@@ -3165,11 +3417,8 @@ static bool FastDtoa_DigitGenCounted(DiyFp w,
 // The last digit will be closest to the actual v. That is, even if several
 // digits might correctly yield 'v' when read again, the closest will be
 // computed.
-static bool FastDtoa_Grisu3(double v,
-                            FastDtoaMode mode,
-                            Vector *buffer,
-                            int *length,
-                            int *decimal_exponent) {
+static bool FastDtoa_Grisu3(double v, FastDtoaMode mode, Vector* buffer, int* length, int* decimal_exponent)
+{
     Double d = Double_make(v);
     DiyFp w = Double_AsNormalizedDiyFp(&d);
     // boundary_minus and boundary_plus are the boundaries between v and its
@@ -3177,29 +3426,25 @@ static bool FastDtoa_Grisu3(double v,
     // boundary_minus and boundary_plus will round to v when convert to a double.
     // Grisu3 will never output representations that lie exactly on a boundary.
     DiyFp boundary_minus, boundary_plus;
-    if (mode == FAST_DTOA_SHORTEST) {
+    if (mode == FAST_DTOA_SHORTEST)
+    {
         Double_NormalizedBoundaries(&d, &boundary_minus, &boundary_plus);
-    } else {
+    }
+    else
+    {
         DOUBLE_CONVERSION_ASSERT(mode == FAST_DTOA_SHORTEST_SINGLE);
         float single_v = (float)(v);
         Single s = Single_make(single_v);
         Single_NormalizedBoundaries(&s, &boundary_minus, &boundary_plus);
     }
     DOUBLE_CONVERSION_ASSERT(boundary_plus.e == w.e);
-    DiyFp ten_mk = { 0 };   // Cached power of ten: 10^-k
-    int mk = 0;             // -k
-    int ten_mk_minimal_binary_exponent =
-        FastDtoa_kMinimalTargetExponent - (w.e + DiyFp_kSignificandSize);
-    int ten_mk_maximal_binary_exponent =
-        FastDtoa_kMaximalTargetExponent - (w.e + DiyFp_kSignificandSize);
-    Cache_GetCachedPowerForBinaryExponentRange(
-        ten_mk_minimal_binary_exponent,
-        ten_mk_maximal_binary_exponent,
-        &ten_mk, &mk);
-    DOUBLE_CONVERSION_ASSERT((FastDtoa_kMinimalTargetExponent <= w.e + ten_mk.e +
-          DiyFp_kSignificandSize) &&
-         (FastDtoa_kMaximalTargetExponent >= w.e + ten_mk.e +
-          DiyFp_kSignificandSize));
+    DiyFp ten_mk = {0}; // Cached power of ten: 10^-k
+    int mk = 0;         // -k
+    int ten_mk_minimal_binary_exponent = FastDtoa_kMinimalTargetExponent - (w.e + DiyFp_kSignificandSize);
+    int ten_mk_maximal_binary_exponent = FastDtoa_kMaximalTargetExponent - (w.e + DiyFp_kSignificandSize);
+    Cache_GetCachedPowerForBinaryExponentRange(ten_mk_minimal_binary_exponent, ten_mk_maximal_binary_exponent, &ten_mk, &mk);
+    DOUBLE_CONVERSION_ASSERT((FastDtoa_kMinimalTargetExponent <= w.e + ten_mk.e + DiyFp_kSignificandSize) &&
+                             (FastDtoa_kMaximalTargetExponent >= w.e + ten_mk.e + DiyFp_kSignificandSize));
     // Note that ten_mk is only an approximation of 10^-k. A DiyFp only contains a
     // 64 bit significand and ten_mk is thus only precise up to 64 bits.
 
@@ -3210,15 +3455,14 @@ static bool FastDtoa_Grisu3(double v,
     // In other words: let f = scaled_w.f() and e = scaled_w.e(), then
     //           (f-1) * 2^e < w*10^k < (f+1) * 2^e
     DiyFp scaled_w = DiyFp_Times(&w, &ten_mk);
-    DOUBLE_CONVERSION_ASSERT(scaled_w.e ==
-         boundary_plus.e + ten_mk.e + DiyFp_kSignificandSize);
+    DOUBLE_CONVERSION_ASSERT(scaled_w.e == boundary_plus.e + ten_mk.e + DiyFp_kSignificandSize);
     // In theory it would be possible to avoid some recomputations by computing
     // the difference between w and boundary_minus/plus (a power of 2) and to
     // compute scaled_boundary_minus/plus by subtracting/adding from
     // scaled_w. However the code becomes much less readable and the speed
     // enhancements are not terrific.
     DiyFp scaled_boundary_minus = DiyFp_Times(&boundary_minus, &ten_mk);
-    DiyFp scaled_boundary_plus  = DiyFp_Times(&boundary_plus,  &ten_mk);
+    DiyFp scaled_boundary_plus = DiyFp_Times(&boundary_plus, &ten_mk);
 
     // DigitGen will generate the digits of scaled_w. Therefore we have
     // v == (double) (scaled_w * 10^-mk).
@@ -3227,8 +3471,7 @@ static bool FastDtoa_Grisu3(double v,
     // the buffer will be filled with "123" and the decimal_exponent will be
     // decreased by 2.
     int kappa = 0;
-    bool result = FastDtoa_DigitGen(scaled_boundary_minus, scaled_w, scaled_boundary_plus,
-                                  buffer, length, &kappa);
+    bool result = FastDtoa_DigitGen(scaled_boundary_minus, scaled_w, scaled_boundary_plus, buffer, length, &kappa);
     *decimal_exponent = -mk + kappa;
     return result;
 }
@@ -3238,27 +3481,17 @@ static bool FastDtoa_Grisu3(double v,
 // and with enough requested digits 0.1 will at some point print as 0.9999999...
 // Grisu3 is too imprecise for real halfway cases (1.5 will not work) and
 // therefore the rounding strategy for halfway cases is irrelevant.
-static bool FastDtoa_Grisu3Counted(double v,
-                                   int requested_digits,
-                                   Vector *buffer,
-                                   int *length,
-                                   int *decimal_exponent) {
+static bool FastDtoa_Grisu3Counted(double v, int requested_digits, Vector* buffer, int* length, int* decimal_exponent)
+{
     Double d = Double_make(v);
     DiyFp w = Double_AsNormalizedDiyFp(&d);
-    DiyFp ten_mk = { 0 };   // Cached power of ten: 10^-k
-    int mk = 0;             // -k
-    int ten_mk_minimal_binary_exponent =
-        FastDtoa_kMinimalTargetExponent - (w.e + DiyFp_kSignificandSize);
-    int ten_mk_maximal_binary_exponent =
-        FastDtoa_kMaximalTargetExponent - (w.e + DiyFp_kSignificandSize);
-    Cache_GetCachedPowerForBinaryExponentRange(
-        ten_mk_minimal_binary_exponent,
-        ten_mk_maximal_binary_exponent,
-        &ten_mk, &mk);
-    DOUBLE_CONVERSION_ASSERT((FastDtoa_kMinimalTargetExponent <= w.e + ten_mk.e +
-          DiyFp_kSignificandSize) &&
-         (FastDtoa_kMaximalTargetExponent >= w.e + ten_mk.e +
-          DiyFp_kSignificandSize));
+    DiyFp ten_mk = {0}; // Cached power of ten: 10^-k
+    int mk = 0;         // -k
+    int ten_mk_minimal_binary_exponent = FastDtoa_kMinimalTargetExponent - (w.e + DiyFp_kSignificandSize);
+    int ten_mk_maximal_binary_exponent = FastDtoa_kMaximalTargetExponent - (w.e + DiyFp_kSignificandSize);
+    Cache_GetCachedPowerForBinaryExponentRange(ten_mk_minimal_binary_exponent, ten_mk_maximal_binary_exponent, &ten_mk, &mk);
+    DOUBLE_CONVERSION_ASSERT((FastDtoa_kMinimalTargetExponent <= w.e + ten_mk.e + DiyFp_kSignificandSize) &&
+                             (FastDtoa_kMaximalTargetExponent >= w.e + ten_mk.e + DiyFp_kSignificandSize));
     // Note that ten_mk is only an approximation of 10^-k. A DiyFp only contains a
     // 64 bit significand and ten_mk is thus only precise up to 64 bits.
 
@@ -3276,44 +3509,38 @@ static bool FastDtoa_Grisu3Counted(double v,
     // will not always be exactly the same since DigitGenCounted only produces a
     // limited number of digits.)
     int kappa = 0;
-    bool result = FastDtoa_DigitGenCounted(scaled_w, requested_digits,
-                                           buffer, length, &kappa);
+    bool result = FastDtoa_DigitGenCounted(scaled_w, requested_digits, buffer, length, &kappa);
     *decimal_exponent = -mk + kappa;
     return result;
 }
 
-static bool FastDtoa(double v,
-                     FastDtoaMode mode,
-                     int requested_digits,
-                     Vector *buffer,
-                     int *length,
-                     int *decimal_point) {
+static bool FastDtoa(double v, FastDtoaMode mode, int requested_digits, Vector* buffer, int* length, int* decimal_point)
+{
     DOUBLE_CONVERSION_ASSERT(v > 0);
     Double d = Double_make(v);
     DOUBLE_CONVERSION_ASSERT(!Double_IsSpecial(&d));
 
     bool result = false;
     int decimal_exponent = 0;
-    switch (mode) {
-        case FAST_DTOA_SHORTEST:
-        case FAST_DTOA_SHORTEST_SINGLE:
-            result = FastDtoa_Grisu3(v, mode, buffer, length, &decimal_exponent);
-            break;
-        case FAST_DTOA_PRECISION:
-            result = FastDtoa_Grisu3Counted(v, requested_digits,
-                                            buffer, length, &decimal_exponent);
-            break;
-        default:
-            DOUBLE_CONVERSION_UNREACHABLE();
+    switch (mode)
+    {
+    case FAST_DTOA_SHORTEST:
+    case FAST_DTOA_SHORTEST_SINGLE:
+        result = FastDtoa_Grisu3(v, mode, buffer, length, &decimal_exponent);
+        break;
+    case FAST_DTOA_PRECISION:
+        result = FastDtoa_Grisu3Counted(v, requested_digits, buffer, length, &decimal_exponent);
+        break;
+    default:
+        DOUBLE_CONVERSION_UNREACHABLE();
     }
-    if (result) {
+    if (result)
+    {
         *decimal_point = *length + decimal_exponent;
         buffer->start[*length] = '\0';
     }
     return result;
 }
-
-
 
 /// ============================================================================
 /// fix-dtoa.h
@@ -3335,10 +3562,7 @@ static bool FastDtoa(double v,
 //
 // This method only works for some parameters. If it can't handle the input it
 // returns false. The output is null-terminated when the function succeeds.
-static bool FastFixedDtoa(double v, int fractional_count,
-                          Vector *buffer, int *length, int *decimal_point);
-
-
+static bool FastFixedDtoa(double v, int fractional_count, Vector* buffer, int* length, int* decimal_point);
 
 /// ============================================================================
 /// fix-dtoa.cc
@@ -3348,20 +3572,23 @@ static const uint64_t UInt128_kMask32 = 0xFFFFFFFF;
 
 // Represents a 128bit type. This class should be replaced by a native type on
 // platforms that support 128bit integers.
-typedef struct UInt128 {
+typedef struct UInt128
+{
     // Value == (high_bits_ << 64) + low_bits_
     uint64_t high_bits;
     uint64_t low_bits;
 } UInt128;
 
-static UInt128 UInt128_make(uint64_t high, uint64_t low) {
+static UInt128 UInt128_make(uint64_t high, uint64_t low)
+{
     UInt128 u;
     u.high_bits = high;
     u.low_bits = low;
     return u;
 }
 
-static void UInt128_Multiply(UInt128 *u, uint32_t multiplicand) {
+static void UInt128_Multiply(UInt128* u, uint32_t multiplicand)
+{
     uint64_t accumulator;
 
     accumulator = (u->low_bits & UInt128_kMask32) * multiplicand;
@@ -3378,35 +3605,49 @@ static void UInt128_Multiply(UInt128 *u, uint32_t multiplicand) {
     DOUBLE_CONVERSION_ASSERT((accumulator >> 32) == 0);
 }
 
-static void UInt128_Shift(UInt128 *u, int shift_amount) {
+static void UInt128_Shift(UInt128* u, int shift_amount)
+{
     DOUBLE_CONVERSION_ASSERT(-64 <= shift_amount && shift_amount <= 64);
-    if (shift_amount == 0) {
+    if (shift_amount == 0)
+    {
         return;
-    } else if (shift_amount == -64) {
+    }
+    else if (shift_amount == -64)
+    {
         u->high_bits = u->low_bits;
         u->low_bits = 0;
-    } else if (shift_amount == 64) {
+    }
+    else if (shift_amount == 64)
+    {
         u->low_bits = u->high_bits;
         u->high_bits = 0;
-    } else if (shift_amount <= 0) {
+    }
+    else if (shift_amount <= 0)
+    {
         u->high_bits <<= -shift_amount;
         u->high_bits += u->low_bits >> (64 + shift_amount);
         u->low_bits <<= -shift_amount;
-    } else {
+    }
+    else
+    {
         u->low_bits >>= shift_amount;
         u->low_bits += u->high_bits << (64 - shift_amount);
         u->high_bits >>= shift_amount;
     }
 }
 
-  // Modifies *this to *this MOD (2^power).
-  // Returns *this DIV (2^power).
-static int UInt128_DivModPowerOf2(UInt128 *u, int power) {
-    if (power >= 64) {
+// Modifies *this to *this MOD (2^power).
+// Returns *this DIV (2^power).
+static int UInt128_DivModPowerOf2(UInt128* u, int power)
+{
+    if (power >= 64)
+    {
         int result = (int)(u->high_bits >> (power - 64));
         u->high_bits -= (uint64_t)(result) << (power - 64);
         return result;
-    } else {
+    }
+    else
+    {
         uint64_t part_low = u->low_bits >> power;
         uint64_t part_high = u->high_bits << (64 - power);
         int result = (int)(part_low + part_high);
@@ -3416,35 +3657,41 @@ static int UInt128_DivModPowerOf2(UInt128 *u, int power) {
     }
 }
 
-static bool UInt128_IsZero(UInt128 *u) {
+static bool UInt128_IsZero(UInt128* u)
+{
     return u->high_bits == 0 && u->low_bits == 0;
 }
 
-static int UInt128_BitAt(UInt128 *u, int position) {
-    if (position >= 64) {
-      return (int)(u->high_bits >> (position - 64)) & 1;
-    } else {
-      return (int)(u->low_bits >> position) & 1;
+static int UInt128_BitAt(UInt128* u, int position)
+{
+    if (position >= 64)
+    {
+        return (int)(u->high_bits >> (position - 64)) & 1;
+    }
+    else
+    {
+        return (int)(u->low_bits >> position) & 1;
     }
 }
 
+static const int Fixed_kDoubleSignificandSize = 53; // Includes the hidden bit.
 
-
-static const int Fixed_kDoubleSignificandSize = 53;  // Includes the hidden bit.
-
-static void Fixed_FillDigits32FixedLength(uint32_t number, int requested_length,
-                                          Vector *buffer, int *length) {
-    for (int i = requested_length - 1; i >= 0; --i) {
+static void Fixed_FillDigits32FixedLength(uint32_t number, int requested_length, Vector* buffer, int* length)
+{
+    for (int i = requested_length - 1; i >= 0; --i)
+    {
         buffer->start[(*length) + i] = '0' + number % 10;
         number /= 10;
     }
     *length += requested_length;
 }
 
-static void Fixed_FillDigits32(uint32_t number, Vector *buffer, int*length) {
+static void Fixed_FillDigits32(uint32_t number, Vector* buffer, int* length)
+{
     int number_length = 0;
     // We fill the digits in reverse order and exchange them afterwards.
-    while (number != 0) {
+    while (number != 0)
+    {
         int digit = number % 10;
         number /= 10;
         buffer->start[(*length) + number_length] = (char)('0' + digit);
@@ -3453,7 +3700,8 @@ static void Fixed_FillDigits32(uint32_t number, Vector *buffer, int*length) {
     // Exchange the digits.
     int i = *length;
     int j = *length + number_length - 1;
-    while (i < j) {
+    while (i < j)
+    {
         char tmp = buffer->start[i];
         buffer->start[i] = buffer->start[j];
         buffer->start[j] = tmp;
@@ -3463,8 +3711,8 @@ static void Fixed_FillDigits32(uint32_t number, Vector *buffer, int*length) {
     *length += number_length;
 }
 
-static void Fixed_FillDigits64FixedLength(uint64_t number,
-                                          Vector *buffer, int *length) {
+static void Fixed_FillDigits64FixedLength(uint64_t number, Vector* buffer, int* length)
+{
     const uint32_t kTen7 = 10000000;
     // For efficiency cut the number into 3 uint32_t parts, and print those.
     uint32_t part2 = (uint32_t)(number % kTen7);
@@ -3477,7 +3725,8 @@ static void Fixed_FillDigits64FixedLength(uint64_t number,
     Fixed_FillDigits32FixedLength(part2, 7, buffer, length);
 }
 
-static void Fixed_FillDigits64(uint64_t number, Vector *buffer, int *length) {
+static void Fixed_FillDigits64(uint64_t number, Vector* buffer, int* length)
+{
     const uint32_t kTen7 = 10000000;
     // For efficiency cut the number into 3 uint32_t parts, and print those.
     uint32_t part2 = (uint32_t)(number % kTen7);
@@ -3485,21 +3734,28 @@ static void Fixed_FillDigits64(uint64_t number, Vector *buffer, int *length) {
     uint32_t part1 = (uint32_t)(number % kTen7);
     uint32_t part0 = (uint32_t)(number / kTen7);
 
-    if (part0 != 0) {
+    if (part0 != 0)
+    {
         Fixed_FillDigits32(part0, buffer, length);
         Fixed_FillDigits32FixedLength(part1, 7, buffer, length);
         Fixed_FillDigits32FixedLength(part2, 7, buffer, length);
-    } else if (part1 != 0) {
+    }
+    else if (part1 != 0)
+    {
         Fixed_FillDigits32(part1, buffer, length);
         Fixed_FillDigits32FixedLength(part2, 7, buffer, length);
-    } else {
+    }
+    else
+    {
         Fixed_FillDigits32(part2, buffer, length);
     }
 }
 
-static void Fixed_RoundUp(Vector *buffer, int *length, int *decimal_point) {
+static void Fixed_RoundUp(Vector* buffer, int* length, int* decimal_point)
+{
     // An empty buffer represents 0.
-    if (*length == 0) {
+    if (*length == 0)
+    {
         buffer->start[0] = '1';
         *decimal_point = 1;
         *length = 1;
@@ -3508,8 +3764,10 @@ static void Fixed_RoundUp(Vector *buffer, int *length, int *decimal_point) {
     // Round the last digit until we either have a digit that was not '9' or until
     // we reached the first digit.
     buffer->start[(*length) - 1]++;
-    for (int i = (*length) - 1; i > 0; --i) {
-        if (buffer->start[i] != '0' + 10) {
+    for (int i = (*length) - 1; i > 0; --i)
+    {
+        if (buffer->start[i] != '0' + 10)
+        {
             return;
         }
         buffer->start[i] = '0';
@@ -3520,7 +3778,8 @@ static void Fixed_RoundUp(Vector *buffer, int *length, int *decimal_point) {
     // digits had been '9' before rounding up. Now all trailing digits are '0' and
     // we simply switch the first digit to '1' and update the decimal-point
     // (indicating that the point is now one digit to the right).
-    if (buffer->start[0] == '0' + 10) {
+    if (buffer->start[0] == '0' + 10)
+    {
         buffer->start[0] = '1';
         (*decimal_point)++;
     }
@@ -3537,19 +3796,22 @@ static void Fixed_RoundUp(Vector *buffer, int *length, int *decimal_point) {
 // might be updated. If this function generates the digits 99 and the buffer
 // already contained "199" (thus yielding a buffer of "19999") then a
 // rounding-up will change the contents of the buffer to "20000".
-static void Fixed_FillFractionals(uint64_t fractionals, int exponent,
-                                  int fractional_count, Vector *buffer,
-                                  int *length, int *decimal_point) {
+static void
+Fixed_FillFractionals(uint64_t fractionals, int exponent, int fractional_count, Vector* buffer, int* length, int* decimal_point)
+{
     DOUBLE_CONVERSION_ASSERT(-128 <= exponent && exponent <= 0);
     // 'fractionals' is a fixed-point number, with binary point at bit
     // (-exponent). Inside the function the non-converted remainder of fractionals
     // is a fixed-point number, with binary point at bit 'point'.
-    if (-exponent <= 64) {
+    if (-exponent <= 64)
+    {
         // One 64 bit number is sufficient.
         DOUBLE_CONVERSION_ASSERT(fractionals >> 56 == 0);
         int point = -exponent;
-        for (int i = 0; i < fractional_count; ++i) {
-            if (fractionals == 0) break;
+        for (int i = 0; i < fractional_count; ++i)
+        {
+            if (fractionals == 0)
+                break;
             // Instead of multiplying by 10 we multiply by 5 and adjust the point
             // location. This way the fractionals variable will not overflow.
             // Invariant at the beginning of the loop: fractionals < 2^point.
@@ -3570,16 +3832,21 @@ static void Fixed_FillFractionals(uint64_t fractionals, int exponent,
         }
         // If the first bit after the point is set we have to round up.
         DOUBLE_CONVERSION_ASSERT(fractionals == 0 || point - 1 >= 0);
-        if ((fractionals != 0) && ((fractionals >> (point - 1)) & 1) == 1) {
+        if ((fractionals != 0) && ((fractionals >> (point - 1)) & 1) == 1)
+        {
             Fixed_RoundUp(buffer, length, decimal_point);
         }
-    } else { // We need 128 bits.
+    }
+    else
+    { // We need 128 bits.
         DOUBLE_CONVERSION_ASSERT(64 < -exponent && -exponent <= 128);
         UInt128 fractionals128 = UInt128_make(fractionals, 0);
         UInt128_Shift(&fractionals128, -exponent - 64);
         int point = 128;
-        for (int i = 0; i < fractional_count; ++i) {
-            if (UInt128_IsZero(&fractionals128)) break;
+        for (int i = 0; i < fractional_count; ++i)
+        {
+            if (UInt128_IsZero(&fractionals128))
+                break;
             // As before: instead of multiplying by 10 we multiply by 5 and adjust the
             // point location.
             // This multiplication will not overflow for the same reasons as before.
@@ -3590,7 +3857,8 @@ static void Fixed_FillFractionals(uint64_t fractionals, int exponent,
             buffer->start[*length] = (char)('0' + digit);
             (*length)++;
         }
-        if (UInt128_BitAt(&fractionals128, point - 1) == 1) {
+        if (UInt128_BitAt(&fractionals128, point - 1) == 1)
+        {
             Fixed_RoundUp(buffer, length, decimal_point);
         }
     }
@@ -3598,16 +3866,21 @@ static void Fixed_FillFractionals(uint64_t fractionals, int exponent,
 
 // Removes leading and trailing zeros.
 // If leading zeros are removed then the decimal point position is adjusted.
-static void Fixed_TrimZeros(Vector *buffer, int *length, int *decimal_point) {
-    while (*length > 0 && buffer->start[(*length) - 1] == '0') {
+static void Fixed_TrimZeros(Vector* buffer, int* length, int* decimal_point)
+{
+    while (*length > 0 && buffer->start[(*length) - 1] == '0')
+    {
         (*length)--;
     }
     int first_non_zero = 0;
-    while (first_non_zero < *length && buffer->start[first_non_zero] == '0') {
+    while (first_non_zero < *length && buffer->start[first_non_zero] == '0')
+    {
         first_non_zero++;
     }
-    if (first_non_zero != 0) {
-        for (int i = first_non_zero; i < *length; ++i) {
+    if (first_non_zero != 0)
+    {
+        for (int i = first_non_zero; i < *length; ++i)
+        {
             buffer->start[i - first_non_zero] = buffer->start[i];
         }
         *length -= first_non_zero;
@@ -3615,11 +3888,8 @@ static void Fixed_TrimZeros(Vector *buffer, int *length, int *decimal_point) {
     }
 }
 
-static bool FastFixedDtoa(double v,
-                          int fractional_count,
-                          Vector *buffer,
-                          int *length,
-                          int *decimal_point) {
+static bool FastFixedDtoa(double v, int fractional_count, Vector* buffer, int* length, int* decimal_point)
+{
     const uint32_t kMaxUInt32 = 0xFFFFFFFF;
     Double d = Double_make(v);
     uint64_t significand = Double_Significand(&d);
@@ -3629,13 +3899,16 @@ static bool FastFixedDtoa(double v,
     // don't know how to compute the representation. 2^73 ~= 9.5*10^21.
     // If necessary this limit could probably be increased, but we don't need
     // more.
-    if (exponent > 20) return false;
-    if (fractional_count > 20) return false;
+    if (exponent > 20)
+        return false;
+    if (fractional_count > 20)
+        return false;
     *length = 0;
     // At most kDoubleSignificandSize bits of the significand are non-zero.
     // Given a 64 bit integer we have 11 0s followed by 53 potentially non-zero
     // bits:  0..11*..0xxx..53*..xx
-    if (exponent + Fixed_kDoubleSignificandSize > 64) {
+    if (exponent + Fixed_kDoubleSignificandSize > 64)
+    {
         // The exponent must be > 11.
         //
         // We know that v = significand * 2^exponent.
@@ -3644,7 +3917,7 @@ static bool FastFixedDtoa(double v,
         // The quotient delivers the first digits, and the remainder fits into a 64
         // bit number.
         // Dividing by 10^17 is equivalent to dividing by 5^17*2^17.
-        const uint64_t kFive17 = DOUBLE_CONVERSION_UINT64_2PART_C(0xB1, A2BC2EC5);  // 5^17
+        const uint64_t kFive17 = DOUBLE_CONVERSION_UINT64_2PART_C(0xB1, A2BC2EC5); // 5^17
         uint64_t divisor = kFive17;
         int divisor_power = 17;
         uint64_t dividend = significand;
@@ -3659,12 +3932,15 @@ static bool FastFixedDtoa(double v,
         //   f * 2^(e-17) = q * 5^17        + r/2^17
         // else
         //   f  = q * 5^17 * 2^(17-e) + r/2^e
-        if (exponent > divisor_power) {
+        if (exponent > divisor_power)
+        {
             // We only allow exponents of up to 20 and therefore (17 - e) <= 3
             dividend <<= exponent - divisor_power;
             quotient = (uint32_t)(dividend / divisor);
             remainder = (dividend % divisor) << divisor_power;
-        } else {
+        }
+        else
+        {
             divisor <<= divisor_power - exponent;
             quotient = (uint32_t)(dividend / divisor);
             remainder = (dividend % divisor) << exponent;
@@ -3672,38 +3948,48 @@ static bool FastFixedDtoa(double v,
         Fixed_FillDigits32(quotient, buffer, length);
         Fixed_FillDigits64FixedLength(remainder, buffer, length);
         *decimal_point = *length;
-    } else if (exponent >= 0) {
+    }
+    else if (exponent >= 0)
+    {
         // 0 <= exponent <= 11
         significand <<= exponent;
-          Fixed_FillDigits64(significand, buffer, length);
+        Fixed_FillDigits64(significand, buffer, length);
         *decimal_point = *length;
-    } else if (exponent > -Fixed_kDoubleSignificandSize) {
+    }
+    else if (exponent > -Fixed_kDoubleSignificandSize)
+    {
         // We have to cut the number.
         uint64_t integrals = significand >> -exponent;
         uint64_t fractionals = significand - (integrals << -exponent);
-        if (integrals > kMaxUInt32) {
+        if (integrals > kMaxUInt32)
+        {
             Fixed_FillDigits64(integrals, buffer, length);
-        } else {
+        }
+        else
+        {
             Fixed_FillDigits32((uint32_t)(integrals), buffer, length);
         }
         *decimal_point = *length;
-        Fixed_FillFractionals(fractionals, exponent, fractional_count,
-                        buffer, length, decimal_point);
-    } else if (exponent < -128) {
+        Fixed_FillFractionals(fractionals, exponent, fractional_count, buffer, length, decimal_point);
+    }
+    else if (exponent < -128)
+    {
         // This configuration (with at most 20 digits) means that all digits must be
         // 0.
         DOUBLE_CONVERSION_ASSERT(fractional_count <= 20);
         buffer->start[0] = '\0';
         *length = 0;
         *decimal_point = -fractional_count;
-    } else {
+    }
+    else
+    {
         *decimal_point = 0;
-        Fixed_FillFractionals(significand, exponent, fractional_count,
-                        buffer, length, decimal_point);
+        Fixed_FillFractionals(significand, exponent, fractional_count, buffer, length, decimal_point);
     }
     Fixed_TrimZeros(buffer, length, decimal_point);
     buffer->start[*length] = '\0';
-    if ((*length) == 0) {
+    if ((*length) == 0)
+    {
         // The string is empty and the decimal_point thus has no importance. Mimic
         // Gay's dtoa and set it to -fractional_count.
         *decimal_point = -fractional_count;
@@ -3711,40 +3997,39 @@ static bool FastFixedDtoa(double v,
     return true;
 }
 
-
-
 /// ============================================================================
 /// strtod.h
 /// ============================================================================
 
 // The buffer must only contain digits in the range [0-9]. It must not
 // contain a dot or a sign. It must not start with '0', and must not be empty.
-static double Strtod(Vector *buffer, int exponent);
+static double Strtod(Vector* buffer, int exponent);
 
 // The buffer must only contain digits in the range [0-9]. It must not
 // contain a dot or a sign. It must not start with '0', and must not be empty.
-static float Strtof(Vector *buffer, int exponent);
+static float Strtof(Vector* buffer, int exponent);
 
 // Same as Strtod, but assumes that 'trimmed' is already trimmed, as if run
 // through TrimAndCut. That is, 'trimmed' must have no leading or trailing
 // zeros, must not be a lone zero, and must not have 'too many' digits.
-static double StrtodTrimmed(Vector *trimmed, int exponent);
+static double StrtodTrimmed(Vector* trimmed, int exponent);
 
 // Same as Strtof, but assumes that 'trimmed' is already trimmed, as if run
 // through TrimAndCut. That is, 'trimmed' must have no leading or trailing
 // zeros, must not be a lone zero, and must not have 'too many' digits.
-static float StrtofTrimmed(Vector *trimmed, int exponent);
+static float StrtofTrimmed(Vector* trimmed, int exponent);
 
-static Vector Strtod_TrimTrailingZeros(Vector *buffer) {
-    for (int i = buffer->length - 1; i >= 0; --i) {
-        if (buffer->start[i] != '0') {
+static Vector Strtod_TrimTrailingZeros(Vector* buffer)
+{
+    for (int i = buffer->length - 1; i >= 0; --i)
+    {
+        if (buffer->start[i] != '0')
+        {
             return Vector_SubVector(buffer, 0, i + 1);
         }
     }
     return Vector_make(buffer->start, 0);
 }
-
-
 
 /// ============================================================================
 /// strtod.cc
@@ -3772,32 +4057,30 @@ static const int Strtod_kMinDecimalPower = -324;
 static const uint64_t Strtod_kMaxUint64 = DOUBLE_CONVERSION_UINT64_2PART_C(0xFFFFFFFF, FFFFFFFF);
 
 #if defined(DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS)
-static const double Strtod_exact_powers_of_ten[] = {
-  1.0,  // 10^0
-  10.0,
-  100.0,
-  1000.0,
-  10000.0,
-  100000.0,
-  1000000.0,
-  10000000.0,
-  100000000.0,
-  1000000000.0,
-  10000000000.0,  // 10^10
-  100000000000.0,
-  1000000000000.0,
-  10000000000000.0,
-  100000000000000.0,
-  1000000000000000.0,
-  10000000000000000.0,
-  100000000000000000.0,
-  1000000000000000000.0,
-  10000000000000000000.0,
-  100000000000000000000.0,  // 10^20
-  1000000000000000000000.0,
-  // 10^22 = 0x21e19e0c9bab2400000 = 0x878678326eac9 * 2^22
-  10000000000000000000000.0
-};
+static const double Strtod_exact_powers_of_ten[] = {1.0, // 10^0
+                                                    10.0,
+                                                    100.0,
+                                                    1000.0,
+                                                    10000.0,
+                                                    100000.0,
+                                                    1000000.0,
+                                                    10000000.0,
+                                                    100000000.0,
+                                                    1000000000.0,
+                                                    10000000000.0, // 10^10
+                                                    100000000000.0,
+                                                    1000000000000.0,
+                                                    10000000000000.0,
+                                                    100000000000000.0,
+                                                    1000000000000000.0,
+                                                    10000000000000000.0,
+                                                    100000000000000000.0,
+                                                    1000000000000000000.0,
+                                                    10000000000000000000.0,
+                                                    100000000000000000000.0, // 10^20
+                                                    1000000000000000000000.0,
+                                                    // 10^22 = 0x21e19e0c9bab2400000 = 0x878678326eac9 * 2^22
+                                                    10000000000000000000000.0};
 static const int Strtod_kExactPowersOfTenSize = DOUBLE_CONVERSION_ARRAY_SIZE(Strtod_exact_powers_of_ten);
 #endif // #if defined(DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS)
 
@@ -3806,20 +4089,22 @@ static const int Strtod_kExactPowersOfTenSize = DOUBLE_CONVERSION_ARRAY_SIZE(Str
 // we round up to 780.
 #define Strtod_kMaxSignificantDecimalDigits ((int)780)
 
-static Vector Strtod_TrimLeadingZeros(Vector *buffer) {
-    for (int i = 0; i < buffer->length; i++) {
-        if (buffer->start[i] != '0') {
+static Vector Strtod_TrimLeadingZeros(Vector* buffer)
+{
+    for (int i = 0; i < buffer->length; i++)
+    {
+        if (buffer->start[i] != '0')
+        {
             return Vector_SubVector(buffer, i, buffer->length);
         }
     }
     return Vector_make(buffer->start, 0);
 }
 
-static void Strtod_CutToMaxSignificantDigits(Vector *buffer,
-                                             int exponent,
-                                             char *significant_buffer,
-                                             int *significant_exponent) {
-    for (int i = 0; i < Strtod_kMaxSignificantDecimalDigits - 1; ++i) {
+static void Strtod_CutToMaxSignificantDigits(Vector* buffer, int exponent, char* significant_buffer, int* significant_exponent)
+{
+    for (int i = 0; i < Strtod_kMaxSignificantDecimalDigits - 1; ++i)
+    {
         significant_buffer[i] = buffer->start[i];
     }
     // The input buffer has been trimmed. Therefore the last digit must be
@@ -3828,28 +4113,28 @@ static void Strtod_CutToMaxSignificantDigits(Vector *buffer,
     // Set the last digit to be non-zero. This is sufficient to guarantee
     // correct rounding.
     significant_buffer[Strtod_kMaxSignificantDecimalDigits - 1] = '1';
-    *significant_exponent =
-        exponent + (buffer->length - Strtod_kMaxSignificantDecimalDigits);
+    *significant_exponent = exponent + (buffer->length - Strtod_kMaxSignificantDecimalDigits);
 }
 
 // Trims the buffer and cuts it to at most kMaxSignificantDecimalDigits.
 // If possible the input-buffer is reused, but if the buffer needs to be
 // modified (due to cutting), then the input needs to be copied into the
 // buffer_copy_space.
-static void Strtod_TrimAndCut(Vector *buffer, int exponent,
-                              char *buffer_copy_space, int space_size,
-                              Vector *trimmed, int *updated_exponent) {
+static void
+Strtod_TrimAndCut(Vector* buffer, int exponent, char* buffer_copy_space, int space_size, Vector* trimmed, int* updated_exponent)
+{
     Vector left_trimmed = Strtod_TrimLeadingZeros(buffer);
     Vector right_trimmed = Strtod_TrimTrailingZeros(&left_trimmed);
     exponent += left_trimmed.length - right_trimmed.length;
-    if (right_trimmed.length > Strtod_kMaxSignificantDecimalDigits) {
-        (void) space_size;  // Mark variable as used.
+    if (right_trimmed.length > Strtod_kMaxSignificantDecimalDigits)
+    {
+        (void)space_size; // Mark variable as used.
         DOUBLE_CONVERSION_ASSERT(space_size >= Strtod_kMaxSignificantDecimalDigits);
-        Strtod_CutToMaxSignificantDigits(&right_trimmed, exponent,
-                                         buffer_copy_space, updated_exponent);
-        *trimmed = Vector_make(buffer_copy_space,
-                               Strtod_kMaxSignificantDecimalDigits);
-    } else {
+        Strtod_CutToMaxSignificantDigits(&right_trimmed, exponent, buffer_copy_space, updated_exponent);
+        *trimmed = Vector_make(buffer_copy_space, Strtod_kMaxSignificantDecimalDigits);
+    }
+    else
+    {
         *trimmed = right_trimmed;
         *updated_exponent = exponent;
     }
@@ -3860,11 +4145,12 @@ static void Strtod_TrimAndCut(Vector *buffer, int exponent,
 // When the string starts with "1844674407370955161" no further digit is read.
 // Since 2^64 = 18446744073709551616 it would still be possible read another
 // digit if it was less or equal than 6, but this would complicate the code.
-static uint64_t Strtod_ReadUint64(Vector *buffer,
-                                  int *number_of_read_digits) {
+static uint64_t Strtod_ReadUint64(Vector* buffer, int* number_of_read_digits)
+{
     uint64_t result = 0;
     int i = 0;
-    while (i < buffer->length && result <= (Strtod_kMaxUint64 / 10 - 1)) {
+    while (i < buffer->length && result <= (Strtod_kMaxUint64 / 10 - 1))
+    {
         int digit = buffer->start[i++] - '0';
         DOUBLE_CONVERSION_ASSERT(0 <= digit && digit <= 9);
         result = 10 * result + digit;
@@ -3877,17 +4163,20 @@ static uint64_t Strtod_ReadUint64(Vector *buffer,
 // The returned DiyFp is not necessarily normalized.
 // If remaining_decimals is zero then the returned DiyFp is accurate.
 // Otherwise it has been rounded and has error of at most 1/2 ulp.
-static void Strtod_ReadDiyFp(Vector *buffer,
-                             DiyFp *result,
-                             int *remaining_decimals) {
+static void Strtod_ReadDiyFp(Vector* buffer, DiyFp* result, int* remaining_decimals)
+{
     int read_digits = 0;
     uint64_t significand = Strtod_ReadUint64(buffer, &read_digits);
-    if (buffer->length == read_digits) {
+    if (buffer->length == read_digits)
+    {
         *result = DiyFp_make(significand, 0);
         *remaining_decimals = 0;
-    } else {
+    }
+    else
+    {
         // Round the significand.
-        if (buffer->start[read_digits] >= '5') {
+        if (buffer->start[read_digits] >= '5')
+        {
             significand++;
         }
         // Compute the binary exponent.
@@ -3897,21 +4186,21 @@ static void Strtod_ReadDiyFp(Vector *buffer,
     }
 }
 
-static bool Strtod_DoubleStrtod(Vector *trimmed,
-                                int exponent,
-                                double* result) {
+static bool Strtod_DoubleStrtod(Vector* trimmed, int exponent, double* result)
+{
 #if !defined(DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS)
     // Avoid "unused parameter" warnings
-    (void) trimmed;
-    (void) exponent;
-    (void) result;
+    (void)trimmed;
+    (void)exponent;
+    (void)result;
     // On x86 the floating-point stack can be 64 or 80 bits wide. If it is
     // 80 bits wide (as is the case on Linux) then double-rounding occurs and the
     // result is not accurate.
     // We know that Windows32 uses 64 bits and is therefore accurate.
     return false;
 #else
-    if (trimmed->length <= Strtod_kMaxExactDoubleIntegerDecimalDigits) {
+    if (trimmed->length <= Strtod_kMaxExactDoubleIntegerDecimalDigits)
+    {
         int read_digits;
         // The trimmed input fits into a double.
         // If the 10^exponent (resp. 10^-exponent) fits into a double too then we
@@ -3919,14 +4208,16 @@ static bool Strtod_DoubleStrtod(Vector *trimmed,
         // two numbers.
         // This is possible because IEEE guarantees that floating-point operations
         // return the best possible approximation.
-        if (exponent < 0 && -exponent < Strtod_kExactPowersOfTenSize) {
+        if (exponent < 0 && -exponent < Strtod_kExactPowersOfTenSize)
+        {
             // 10^-exponent fits into a double.
             *result = (double)(Strtod_ReadUint64(trimmed, &read_digits));
             DOUBLE_CONVERSION_ASSERT(read_digits == trimmed->length);
             *result /= Strtod_exact_powers_of_ten[-exponent];
             return true;
         }
-        if (0 <= exponent && exponent < Strtod_kExactPowersOfTenSize) {
+        if (0 <= exponent && exponent < Strtod_kExactPowersOfTenSize)
+        {
             // 10^exponent fits into a double.
             *result = (double)(Strtod_ReadUint64(trimmed, &read_digits));
             DOUBLE_CONVERSION_ASSERT(read_digits == trimmed->length);
@@ -3934,7 +4225,8 @@ static bool Strtod_DoubleStrtod(Vector *trimmed,
             return true;
         }
         int remaining_digits = Strtod_kMaxExactDoubleIntegerDecimalDigits - trimmed->length;
-        if ((0 <= exponent) && (exponent - remaining_digits < Strtod_kExactPowersOfTenSize)) {
+        if ((0 <= exponent) && (exponent - remaining_digits < Strtod_kExactPowersOfTenSize))
+        {
             // The trimmed string was short and we can multiply it with
             // 10^remaining_digits. As a result the remaining exponent now fits
             // into a double too.
@@ -3951,32 +4243,40 @@ static bool Strtod_DoubleStrtod(Vector *trimmed,
 
 // Returns 10^exponent as an exact DiyFp.
 // The given exponent must be in the range [1; kDecimalExponentDistance[.
-static DiyFp Strtod_AdjustmentPowerOfTen(int exponent) {
+static DiyFp Strtod_AdjustmentPowerOfTen(int exponent)
+{
     DOUBLE_CONVERSION_ASSERT(0 < exponent);
     DOUBLE_CONVERSION_ASSERT(exponent < Cache_kDecimalExponentDistance);
     // Simply hardcode the remaining powers for the given decimal exponent
     // distance.
     DOUBLE_CONVERSION_ASSERT(Cache_kDecimalExponentDistance == 8);
-    switch (exponent) {
-        case 1: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xa0000000, 00000000), -60);
-        case 2: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xc8000000, 00000000), -57);
-        case 3: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xfa000000, 00000000), -54);
-        case 4: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0x9c400000, 00000000), -50);
-        case 5: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xc3500000, 00000000), -47);
-        case 6: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xf4240000, 00000000), -44);
-        case 7: return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0x98968000, 00000000), -40);
-        default:
-          DOUBLE_CONVERSION_UNREACHABLE();
+    switch (exponent)
+    {
+    case 1:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xa0000000, 00000000), -60);
+    case 2:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xc8000000, 00000000), -57);
+    case 3:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xfa000000, 00000000), -54);
+    case 4:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0x9c400000, 00000000), -50);
+    case 5:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xc3500000, 00000000), -47);
+    case 6:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0xf4240000, 00000000), -44);
+    case 7:
+        return DiyFp_make(DOUBLE_CONVERSION_UINT64_2PART_C(0x98968000, 00000000), -40);
+    default:
+        DOUBLE_CONVERSION_UNREACHABLE();
     }
 }
 
 // If the function returns true then the result is the correct double.
 // Otherwise it is either the correct double or the double that is just below
 // the correct double.
-static bool Strtod_DiyFpStrtod(Vector *buffer,
-                               int exponent,
-                               double *result) {
-    DiyFp input = { 0 };
+static bool Strtod_DiyFpStrtod(Vector* buffer, int exponent, double* result)
+{
+    DiyFp input = {0};
     int remaining_decimals;
     Strtod_ReadDiyFp(buffer, &input, &remaining_decimals);
     // Since we may have dropped some digits the input is not accurate.
@@ -3995,25 +4295,28 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
     error <<= old_e - input.e;
 
     DOUBLE_CONVERSION_ASSERT(exponent <= Cache_kMaxDecimalExponent);
-    if (exponent < Cache_kMinDecimalExponent) {
+    if (exponent < Cache_kMinDecimalExponent)
+    {
         *result = 0.0;
         return true;
     }
     DiyFp cached_power;
     int cached_decimal_exponent;
-    Cache_GetCachedPowerForDecimalExponent(exponent,
-                                           &cached_power,
-                                           &cached_decimal_exponent);
+    Cache_GetCachedPowerForDecimalExponent(exponent, &cached_power, &cached_decimal_exponent);
 
-    if (cached_decimal_exponent != exponent) {
+    if (cached_decimal_exponent != exponent)
+    {
         int adjustment_exponent = exponent - cached_decimal_exponent;
         DiyFp adjustment_power = Strtod_AdjustmentPowerOfTen(adjustment_exponent);
         DiyFp_Multiply(&input, &adjustment_power);
-        if (Strtod_kMaxUint64DecimalDigits - buffer->length >= adjustment_exponent) {
+        if (Strtod_kMaxUint64DecimalDigits - buffer->length >= adjustment_exponent)
+        {
             // The product of input with the adjustment power fits into a 64 bit
             // integer.
             DOUBLE_CONVERSION_ASSERT(DiyFp_kSignificandSize == 64);
-        } else {
+        }
+        else
+        {
             // The adjustment power is exact. There is hence only an error of 0.5.
             error += kDenominator / 2;
         }
@@ -4026,7 +4329,7 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
     //   error_b = 0.5  (all cached powers have an error of less than 0.5 ulp),
     //   error_ab = 0 or 1 / kDenominator > error_a*error_b/ 2^64
     int error_b = kDenominator / 2;
-    int error_ab = (error == 0 ? 0 : 1);  // We round up to 1.
+    int error_ab = (error == 0 ? 0 : 1); // We round up to 1.
     int fixed_error = kDenominator / 2;
     error += error_b + error_ab + fixed_error;
 
@@ -4036,17 +4339,15 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
 
     // See if the double's significand changes if we add/subtract the error.
     int order_of_magnitude = DiyFp_kSignificandSize + input.e;
-    int effective_significand_size =
-        Double_SignificandSizeForOrderOfMagnitude(order_of_magnitude);
-    int precision_digits_count =
-        DiyFp_kSignificandSize - effective_significand_size;
-    if (precision_digits_count + kDenominatorLog >= DiyFp_kSignificandSize) {
+    int effective_significand_size = Double_SignificandSizeForOrderOfMagnitude(order_of_magnitude);
+    int precision_digits_count = DiyFp_kSignificandSize - effective_significand_size;
+    if (precision_digits_count + kDenominatorLog >= DiyFp_kSignificandSize)
+    {
         // This can only happen for very small denormals. In this case the
         // half-way multiplied by the denominator exceeds the range of an uint64.
         // Simply shift everything to the right.
-        int shift_amount = (precision_digits_count + kDenominatorLog) -
-            DiyFp_kSignificandSize + 1;
-        input.f =(input.f >> shift_amount);
+        int shift_amount = (precision_digits_count + kDenominatorLog) - DiyFp_kSignificandSize + 1;
+        input.f = (input.f >> shift_amount);
         input.e = (input.e + shift_amount);
         // We add 1 for the lost precision of error, and kDenominator for
         // the lost precision of input.f().
@@ -4062,9 +4363,9 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
     uint64_t half_way = one64 << (precision_digits_count - 1);
     precision_bits *= kDenominator;
     half_way *= kDenominator;
-    DiyFp rounded_input = DiyFp_make(input.f >> precision_digits_count,
-                                     input.e + precision_digits_count);
-    if (precision_bits >= half_way + error) {
+    DiyFp rounded_input = DiyFp_make(input.f >> precision_digits_count, input.e + precision_digits_count);
+    if (precision_bits >= half_way + error)
+    {
         rounded_input.f = (rounded_input.f + 1);
     }
     // If the last_bits are too close to the half-way case than we are too
@@ -4073,12 +4374,15 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
 
     Double d = Double_make_diyfp(&rounded_input);
     *result = Double_value(&d);
-    if (half_way - error < precision_bits && precision_bits < half_way + error) {
+    if (half_way - error < precision_bits && precision_bits < half_way + error)
+    {
         // Too imprecise. The caller will have to fall back to a slower version.
         // However the returned number is guaranteed to be either the correct
         // double, or the next-lower double.
         return false;
-    } else {
+    }
+    else
+    {
         return true;
     }
 }
@@ -4091,9 +4395,8 @@ static bool Strtod_DiyFpStrtod(Vector *buffer,
 //   buffer.length() + exponent <= kMaxDecimalPower + 1
 //   buffer.length() + exponent > kMinDecimalPower
 //   buffer.length() <= kMaxDecimalSignificantDigits
-static int Strtod_CompareBufferWithDiyFp(Vector *buffer,
-                                         int exponent,
-                                         DiyFp *diy_fp) {
+static int Strtod_CompareBufferWithDiyFp(Vector* buffer, int exponent, DiyFp* diy_fp)
+{
     DOUBLE_CONVERSION_ASSERT(buffer->length + exponent <= Strtod_kMaxDecimalPower + 1);
     DOUBLE_CONVERSION_ASSERT(buffer->length + exponent > Strtod_kMinDecimalPower);
     DOUBLE_CONVERSION_ASSERT(buffer->length <= Strtod_kMaxSignificantDecimalDigits);
@@ -4102,18 +4405,24 @@ static int Strtod_CompareBufferWithDiyFp(Vector *buffer,
     // consume at most one bigit (< 64 bits).
     // ln(10) == 3.3219...
     DOUBLE_CONVERSION_ASSERT(((Strtod_kMaxDecimalPower + 1) * 333 / 100) < Bignum_kMaxSignificantBits);
-    Bignum buffer_bignum = { 0 };
-    Bignum diy_fp_bignum = { 0 };
-    Bignum_AssignDecimalString(& buffer_bignum, buffer);
+    Bignum buffer_bignum = {0};
+    Bignum diy_fp_bignum = {0};
+    Bignum_AssignDecimalString(&buffer_bignum, buffer);
     Bignum_AssignUInt64(&diy_fp_bignum, diy_fp->f);
-    if (exponent >= 0) {
+    if (exponent >= 0)
+    {
         Bignum_MultiplyByPowerOfTen(&buffer_bignum, exponent);
-    } else {
+    }
+    else
+    {
         Bignum_MultiplyByPowerOfTen(&diy_fp_bignum, -exponent);
     }
-    if (diy_fp->e > 0) {
+    if (diy_fp->e > 0)
+    {
         Bignum_ShiftLeft(&diy_fp_bignum, diy_fp->e);
-    } else {
+    }
+    else
+    {
         Bignum_ShiftLeft(&buffer_bignum, -diy_fp->e);
     }
     return Bignum_Compare(&buffer_bignum, &diy_fp_bignum);
@@ -4121,81 +4430,101 @@ static int Strtod_CompareBufferWithDiyFp(Vector *buffer,
 
 // Returns true if the guess is the correct double.
 // Returns false, when guess is either correct or the next-lower double.
-static bool Strtod_ComputeGuess(Vector *trimmed, int exponent,
-                                double *guess) {
-    if (trimmed->length == 0) {
+static bool Strtod_ComputeGuess(Vector* trimmed, int exponent, double* guess)
+{
+    if (trimmed->length == 0)
+    {
         *guess = 0.0;
         return true;
     }
-    if (exponent + trimmed->length - 1 >= Strtod_kMaxDecimalPower) {
+    if (exponent + trimmed->length - 1 >= Strtod_kMaxDecimalPower)
+    {
         *guess = Double_Infinity();
         return true;
     }
-    if (exponent + trimmed->length <= Strtod_kMinDecimalPower) {
-    *guess = 0.0;
-    return true;
-    }
-
-    if (Strtod_DoubleStrtod(trimmed, exponent, guess) ||
-        Strtod_DiyFpStrtod(trimmed, exponent, guess)) {
+    if (exponent + trimmed->length <= Strtod_kMinDecimalPower)
+    {
+        *guess = 0.0;
         return true;
     }
-    if (*guess == Double_Infinity()) {
+
+    if (Strtod_DoubleStrtod(trimmed, exponent, guess) || Strtod_DiyFpStrtod(trimmed, exponent, guess))
+    {
+        return true;
+    }
+    if (*guess == Double_Infinity())
+    {
         return true;
     }
     return false;
 }
 
-static bool Strtod_IsDigit(const char d) {
+static bool Strtod_IsDigit(const char d)
+{
     return ('0' <= d) && (d <= '9');
 }
 
-static bool Strtod_IsNonZeroDigit(const char d) {
+static bool Strtod_IsNonZeroDigit(const char d)
+{
     return ('1' <= d) && (d <= '9');
 }
 
-static bool Strtod_AssertTrimmedDigits(Vector *buffer) {
-    for(int i = 0; i < buffer->length; ++i) {
-        if(!Strtod_IsDigit(buffer->start[i])) {
+static bool Strtod_AssertTrimmedDigits(Vector* buffer)
+{
+    for (int i = 0; i < buffer->length; ++i)
+    {
+        if (!Strtod_IsDigit(buffer->start[i]))
+        {
             return false;
         }
     }
-    return (buffer->length == 0) || (Strtod_IsNonZeroDigit(buffer->start[0]) &&     Strtod_IsNonZeroDigit(buffer->start[buffer->length-1]));
+    return (buffer->length == 0) ||
+           (Strtod_IsNonZeroDigit(buffer->start[0]) && Strtod_IsNonZeroDigit(buffer->start[buffer->length - 1]));
 }
 
-static double StrtodTrimmed(Vector *trimmed, int exponent) {
+static double StrtodTrimmed(Vector* trimmed, int exponent)
+{
     DOUBLE_CONVERSION_ASSERT(trimmed->length <= Strtod_kMaxSignificantDecimalDigits);
     DOUBLE_CONVERSION_ASSERT(Strtod_AssertTrimmedDigits(trimmed));
     double guess;
     const bool is_correct = Strtod_ComputeGuess(trimmed, exponent, &guess);
-    if (is_correct) {
+    if (is_correct)
+    {
         return guess;
     }
     Double dguess = Double_make(guess);
     DiyFp upper_boundary = Double_UpperBoundary(&dguess);
     int comparison = Strtod_CompareBufferWithDiyFp(trimmed, exponent, &upper_boundary);
-    if (comparison < 0) {
+    if (comparison < 0)
+    {
         return guess;
-    } else if (comparison > 0) {
+    }
+    else if (comparison > 0)
+    {
         return Double_NextDouble(&dguess);
-    } else if ((Double_Significand(&dguess) & 1) == 0) {
+    }
+    else if ((Double_Significand(&dguess) & 1) == 0)
+    {
         // Round towards even.
         return guess;
-    } else {
+    }
+    else
+    {
         return Double_NextDouble(&dguess);
     }
 }
 
-static double Strtod(Vector *buffer, int exponent) {
+static double Strtod(Vector* buffer, int exponent)
+{
     char copy_buffer[Strtod_kMaxSignificantDecimalDigits];
-    Vector trimmed = { 0 };
+    Vector trimmed = {0};
     int updated_exponent;
-    Strtod_TrimAndCut(buffer, exponent, copy_buffer, Strtod_kMaxSignificantDecimalDigits,
-               &trimmed, &updated_exponent);
+    Strtod_TrimAndCut(buffer, exponent, copy_buffer, Strtod_kMaxSignificantDecimalDigits, &trimmed, &updated_exponent);
     return StrtodTrimmed(&trimmed, updated_exponent);
 }
 
-static float Strtod_SanitizedDoubletof(double d) {
+static float Strtod_SanitizedDoubletof(double d)
+{
     DOUBLE_CONVERSION_ASSERT(d >= 0.0);
     // ASAN has a sanitize check that disallows casting doubles to floats if
     // they are too big.
@@ -4207,28 +4536,35 @@ static float Strtod_SanitizedDoubletof(double d) {
     // Since infinity has an even significand everything equal or greater than
     // this value should become infinity.
     double half_max_finite_infinity = 3.40282356779733661637539395458142568448e+38;
-    if (d >= max_finite) {
-        if (d >= half_max_finite_infinity) {
+    if (d >= max_finite)
+    {
+        if (d >= half_max_finite_infinity)
+        {
             return Single_Infinity();
-        } else {
+        }
+        else
+        {
             return max_finite;
         }
-    } else {
+    }
+    else
+    {
         return (float)(d);
     }
 }
 
-static float Strtof(Vector *buffer, int exponent) {
+static float Strtof(Vector* buffer, int exponent)
+{
     char copy_buffer[Strtod_kMaxSignificantDecimalDigits];
-    Vector trimmed = { 0 };
+    Vector trimmed = {0};
     int updated_exponent;
-    Strtod_TrimAndCut(buffer, exponent, copy_buffer, Strtod_kMaxSignificantDecimalDigits,
-                      &trimmed, &updated_exponent);
+    Strtod_TrimAndCut(buffer, exponent, copy_buffer, Strtod_kMaxSignificantDecimalDigits, &trimmed, &updated_exponent);
     exponent = updated_exponent;
     return StrtofTrimmed(&trimmed, exponent);
 }
 
-static float StrtofTrimmed(Vector *trimmed, int exponent) {
+static float StrtofTrimmed(Vector* trimmed, int exponent)
+{
     DOUBLE_CONVERSION_ASSERT(trimmed->length <= Strtod_kMaxSignificantDecimalDigits);
     DOUBLE_CONVERSION_ASSERT(Strtod_AssertTrimmedDigits(trimmed));
 
@@ -4236,7 +4572,8 @@ static float StrtofTrimmed(Vector *trimmed, int exponent) {
     bool is_correct = Strtod_ComputeGuess(trimmed, exponent, &double_guess);
 
     float float_guess = Strtod_SanitizedDoubletof(double_guess);
-    if (float_guess == double_guess) {
+    if (float_guess == double_guess)
+    {
         // This shortcut triggers for integer values.
         return float_guess;
     }
@@ -4262,25 +4599,28 @@ static float StrtofTrimmed(Vector *trimmed, int exponent) {
     float f2 = float_guess;
     float f3 = Strtod_SanitizedDoubletof(double_next);
     float f4;
-    if (is_correct) {
+    if (is_correct)
+    {
         f4 = f3;
-    } else {
+    }
+    else
+    {
         Double d2 = Double_make(double_next);
         double double_next2 = Double_NextDouble(&d2);
         f4 = Strtod_SanitizedDoubletof(double_next2);
     }
-    (void) f2;  // Mark variable as used.
+    (void)f2; // Mark variable as used.
     DOUBLE_CONVERSION_ASSERT(f1 <= f2 && f2 <= f3 && f3 <= f4);
 
     // If the guess doesn't lie near a single-precision boundary we can simply
     // return its float-value.
-    if (f1 == f4) {
+    if (f1 == f4)
+    {
         return float_guess;
     }
 
-    DOUBLE_CONVERSION_ASSERT((f1 != f2 && f2 == f3 && f3 == f4) ||
-         (f1 == f2 && f2 != f3 && f3 == f4) ||
-         (f1 == f2 && f2 == f3 && f3 != f4));
+    DOUBLE_CONVERSION_ASSERT((f1 != f2 && f2 == f3 && f3 == f4) || (f1 == f2 && f2 != f3 && f3 == f4) ||
+                             (f1 == f2 && f2 == f3 && f3 != f4));
 
     // guess and next are the two possible candidates (in the same way that
     // double_guess was the lower candidate for a double-precision guess).
@@ -4288,27 +4628,35 @@ static float StrtofTrimmed(Vector *trimmed, int exponent) {
     float next = f4;
     DiyFp upper_boundary;
     Single s3 = Single_make(guess);
-    if (guess == 0.0f) {
+    if (guess == 0.0f)
+    {
         float min_float = 1e-45f;
         Double d3 = Double_make((double)(min_float) / 2);
         upper_boundary = Double_AsDiyFp(&d3);
-    } else {
+    }
+    else
+    {
         upper_boundary = Single_UpperBoundary(&s3);
     }
     int comparison = Strtod_CompareBufferWithDiyFp(trimmed, exponent, &upper_boundary);
-    if (comparison < 0) {
+    if (comparison < 0)
+    {
         return guess;
-    } else if (comparison > 0) {
+    }
+    else if (comparison > 0)
+    {
         return next;
-    } else if ((Single_Significand(&s3) & 1) == 0) {
+    }
+    else if ((Single_Significand(&s3) & 1) == 0)
+    {
         // Round towards even.
         return guess;
-    } else {
+    }
+    else
+    {
         return next;
     }
 }
-
-
 
 /// ============================================================================
 /// string-to-double.h
@@ -4316,7 +4664,8 @@ static float StrtofTrimmed(Vector *trimmed, int exponent) {
 
 // Enumeration for allowing octals and ignoring junk when converting
 // strings to numbers.
-enum S2D_Flags {
+enum S2D_Flags
+{
     S2D_NO_FLAGS = 0,
     S2D_ALLOW_HEX = 1,
     S2D_ALLOW_OCTALS = 2,
@@ -4325,16 +4674,17 @@ enum S2D_Flags {
     S2D_ALLOW_TRAILING_SPACES = 16,
     S2D_ALLOW_SPACES_AFTER_SIGN = 32,
     S2D_ALLOW_CASE_INSENSITIVITY = 64,
-    S2D_ALLOW_CASE_INSENSIBILITY = 64,  // Deprecated
+    S2D_ALLOW_CASE_INSENSIBILITY = 64, // Deprecated
     S2D_ALLOW_HEX_FLOATS = 128,
 };
 
-typedef struct StringToDoubleConverter {
+typedef struct StringToDoubleConverter
+{
     int flags;
     double empty_string_value;
     double junk_string_value;
-    const char *infinity_symbol;
-    const char *nan_symbol;
+    const char* infinity_symbol;
+    const char* nan_symbol;
     uc16 separator;
 } StringToDoubleConverter;
 
@@ -4456,9 +4806,10 @@ static const uc16 S2D_kNoSeparator = '\0';
 static StringToDoubleConverter StringToDoubleConverter_make(int flags,
                                                             double empty_string_value,
                                                             double junk_string_value,
-                                                            const char *infinity_symbol,
-                                                            const char *nan_symbol,
-                                                            uc16 separator) {
+                                                            const char* infinity_symbol,
+                                                            const char* nan_symbol,
+                                                            uc16 separator)
+{
     StringToDoubleConverter s;
     s.flags = flags;
     s.empty_string_value = empty_string_value;
@@ -4474,62 +4825,54 @@ static StringToDoubleConverter StringToDoubleConverter_make(int flags,
 // of characters that have been processed to read the number.
 // Spaces than are processed with ALLOW_{LEADING|TRAILING}_SPACES are included
 // in the 'processed_characters_count'. Trailing junk is never included.
-static double StringToDouble(StringToDoubleConverter *conv,
-                             const char *buffer,
-                             int length,
-                             int *processed_characters_count);
+static double StringToDouble(StringToDoubleConverter* conv, const char* buffer, int length, int* processed_characters_count);
 
 // Same as StringToDouble but reads a float.
 // Note that this is not equivalent to static_cast<float>(StringToDouble(...))
 // due to potential double-rounding.
-static float StringToFloat(StringToDoubleConverter *conv,
-                           const char *buffer,
-                           int length,
-                           int *processed_characters_count);
+static float StringToFloat(StringToDoubleConverter* conv, const char* buffer, int length, int* processed_characters_count);
 
-static double StringToIeee(StringToDoubleConverter *conv,
-                           Iterator start_pointer,
-                           int length,
-                           bool read_as_double,
-                           int *processed_characters_count);
-
-
+static double StringToIeee(
+    StringToDoubleConverter* conv, Iterator start_pointer, int length, bool read_as_double, int* processed_characters_count);
 
 /// ============================================================================
 /// string-to-double.cc
 /// ============================================================================
 
 #ifdef _MSC_VER
-#  if _MSC_VER >= 1900
+#if _MSC_VER >= 1900
 // Fix MSVC >= 2015 (_MSC_VER == 1900) warning
 // C4244: 'argument': conversion from 'const uc16' to 'char', possible loss of data
 // against Advance and friends, when instantiated with **it as char, not uc16.
- __pragma(warning(disable: 4244))
-#  endif
-#  if _MSC_VER <= 1700 // VS2012, see IsDecimalDigitForRadix warning fix, below
-#    define VS2012_RADIXWARN
-#  endif
+__pragma(warning(disable : 4244))
+#endif
+#if _MSC_VER <= 1700 // VS2012, see IsDecimalDigitForRadix warning fix, below
+#define VS2012_RADIXWARN
+#endif
 #endif
 
-typedef char (*S2D_Converter)(char);
+    typedef char (*S2D_Converter)(char);
 
-static char S2D_ToLower(char ch) {
-    if ('A' <= ch && ch <= 'Z') return ch + ('a' - 'A');
+static char S2D_ToLower(char ch)
+{
+    if ('A' <= ch && ch <= 'Z')
+        return ch + ('a' - 'A');
     return ch;
 }
 
-static char S2D_Pass(char ch) {
+static char S2D_Pass(char ch)
+{
     return ch;
 }
 
-static bool S2D_ConsumeSubStringImpl(Iterator *current,
-                                     Iterator end,
-                                     const char *substring,
-                                     S2D_Converter converter) {
+static bool S2D_ConsumeSubStringImpl(Iterator* current, Iterator end, const char* substring, S2D_Converter converter)
+{
     DOUBLE_CONVERSION_ASSERT(converter(**current) == *substring);
-    for (substring++; *substring != '\0'; substring++) {
+    for (substring++; *substring != '\0'; substring++)
+    {
         ++*current;
-        if (*current == end || converter(**current) != *substring) {
+        if (*current == end || converter(**current) != *substring)
+        {
             return false;
         }
     }
@@ -4539,21 +4882,21 @@ static bool S2D_ConsumeSubStringImpl(Iterator *current,
 
 // Consumes the given substring from the iterator.
 // Returns false, if the substring does not match.
-static bool S2D_ConsumeSubString(Iterator *current,
-                                 Iterator end,
-                                 const char *substring,
-                                 bool allow_case_insensitivity) {
-    if (allow_case_insensitivity) {
+static bool S2D_ConsumeSubString(Iterator* current, Iterator end, const char* substring, bool allow_case_insensitivity)
+{
+    if (allow_case_insensitivity)
+    {
         return S2D_ConsumeSubStringImpl(current, end, substring, S2D_ToLower);
-    } else {
+    }
+    else
+    {
         return S2D_ConsumeSubStringImpl(current, end, substring, S2D_Pass);
     }
 }
 
 // Consumes first character of the str is equal to ch
-static bool S2D_ConsumeFirstCharacter(char ch,
-                                      const char *str,
-                                      bool case_insensitivity) {
+static bool S2D_ConsumeFirstCharacter(char ch, const char* str, bool case_insensitivity)
+{
     return case_insensitivity ? S2D_ToLower(ch) == str[0] : ch == str[0];
 }
 
@@ -4566,44 +4909,54 @@ static bool S2D_ConsumeFirstCharacter(char ch,
 // we don't need to preserve all the digits.
 #define S2D_kMaxSignificantDigits ((int)772)
 
-static const char S2D_kWhitespaceTable7[] = { 32, 13, 10, 9, 11, 12 };
+static const char S2D_kWhitespaceTable7[] = {32, 13, 10, 9, 11, 12};
 static const int S2D_kWhitespaceTable7Length = DOUBLE_CONVERSION_ARRAY_SIZE(S2D_kWhitespaceTable7);
 
-static const uc16 S2D_kWhitespaceTable16[] = {
-  160, 8232, 8233, 5760, 6158, 8192, 8193, 8194, 8195,
-  8196, 8197, 8198, 8199, 8200, 8201, 8202, 8239, 8287, 12288, 65279
-};
+static const uc16 S2D_kWhitespaceTable16[] = {160,  8232, 8233, 5760, 6158, 8192, 8193, 8194, 8195,  8196,
+                                              8197, 8198, 8199, 8200, 8201, 8202, 8239, 8287, 12288, 65279};
 static const int S2D_kWhitespaceTable16Length = DOUBLE_CONVERSION_ARRAY_SIZE(S2D_kWhitespaceTable16);
 
-static bool S2D_isWhitespace(int x) {
-    if (x < 128) {
-        for (int i = 0; i < S2D_kWhitespaceTable7Length; i++) {
-            if (S2D_kWhitespaceTable7[i] == x) return true;
+static bool S2D_isWhitespace(int x)
+{
+    if (x < 128)
+    {
+        for (int i = 0; i < S2D_kWhitespaceTable7Length; i++)
+        {
+            if (S2D_kWhitespaceTable7[i] == x)
+                return true;
         }
-    } else {
-        for (int i = 0; i < S2D_kWhitespaceTable16Length; i++) {
-            if (S2D_kWhitespaceTable16[i] == x) return true;
+    }
+    else
+    {
+        for (int i = 0; i < S2D_kWhitespaceTable16Length; i++)
+        {
+            if (S2D_kWhitespaceTable16[i] == x)
+                return true;
         }
     }
     return false;
 }
 
 // Returns true if a nonspace found and false if the end has reached.
-static bool S2D_AdvanceToNonspace(Iterator *current, Iterator end) {
-    while (*current != end) {
-        if (!S2D_isWhitespace(**current)) return true;
+static bool S2D_AdvanceToNonspace(Iterator* current, Iterator end)
+{
+    while (*current != end)
+    {
+        if (!S2D_isWhitespace(**current))
+            return true;
         ++*current;
     }
     return false;
 }
 
-static bool S2D_isDigit(int x, int radix) {
-    return (x >= '0' && x <= '9' && x < '0' + radix)
-        || (radix > 10 && x >= 'a' && x < 'a' + radix - 10)
-        || (radix > 10 && x >= 'A' && x < 'A' + radix - 10);
+static bool S2D_isDigit(int x, int radix)
+{
+    return (x >= '0' && x <= '9' && x < '0' + radix) || (radix > 10 && x >= 'a' && x < 'a' + radix - 10) ||
+           (radix > 10 && x >= 'A' && x < 'A' + radix - 10);
 }
 
-static double S2D_SignedZero(bool sign) {
+static double S2D_SignedZero(bool sign)
+{
     return sign ? -0.0 : 0.0;
 }
 
@@ -4614,13 +4967,15 @@ static double S2D_SignedZero(bool sign) {
 // condition was always true. Moving it into a separate function and
 // suppressing optimisation keeps the compiler from warning.
 #ifdef VS2012_RADIXWARN
-#pragma optimize("",off)
-static bool S2D_IsDecimalDigitForRadix(int c, int radix) {
+#pragma optimize("", off)
+static bool S2D_IsDecimalDigitForRadix(int c, int radix)
+{
     return '0' <= c && c <= '9' && (c - '0') < radix;
 }
-#pragma optimize("",on)
+#pragma optimize("", on)
 #else
-static bool inline S2D_IsDecimalDigitForRadix(int c, int radix) {
+static bool inline S2D_IsDecimalDigitForRadix(int c, int radix)
+{
     return '0' <= c && c <= '9' && (c - '0') < radix;
 }
 #endif
@@ -4632,24 +4987,31 @@ static bool inline S2D_IsDecimalDigitForRadix(int c, int radix) {
 // because it constant-propagated the radix and concluded that the first
 // condition was always false. By moving it into a separate function the
 // compiler wouldn't warn anymore.
-static bool S2D_IsCharacterDigitForRadix(int c, int radix, char a_character) {
+static bool S2D_IsCharacterDigitForRadix(int c, int radix, char a_character)
+{
     return radix > 10 && c >= a_character && c < a_character + radix - 10;
 }
 
 // Returns true, when the iterator is equal to end.
-static bool S2D_Advance(Iterator *it, uc16 separator, int base, Iterator end) {
-    if (separator == S2D_kNoSeparator) {
+static bool S2D_Advance(Iterator* it, uc16 separator, int base, Iterator end)
+{
+    if (separator == S2D_kNoSeparator)
+    {
         ++(*it);
         return *it == end;
     }
-    if (!S2D_isDigit(**it, base)) {
+    if (!S2D_isDigit(**it, base))
+    {
         ++(*it);
         return *it == end;
     }
     ++(*it);
-    if (*it == end) return true;
-    if (*it + 1 == end) return false;
-    if (**it == separator && S2D_isDigit(*(*it + 1), base)) {
+    if (*it == end)
+        return true;
+    if (*it + 1 == end)
+        return false;
+    if (**it == separator && S2D_isDigit(*(*it + 1), base))
+    {
         ++(*it);
     }
     return *it == end;
@@ -4662,36 +5024,49 @@ static bool S2D_Advance(Iterator *it, uc16 separator, int base, Iterator end) {
 //   - hex_digits+ 'p' ('+'|'-')? exponent_digits+
 //   - hex_digits* '.' hex_digits+ 'p' ('+'|'-')? exponent_digits+
 //   - hex_digits+ '.' 'p' ('+'|'-')? exponent_digits+
-static bool S2D_IsHexFloatString(Iterator start,
-                                 Iterator end,
-                                 uc16 separator,
-                                 bool allow_trailing_junk) {
+static bool S2D_IsHexFloatString(Iterator start, Iterator end, uc16 separator, bool allow_trailing_junk)
+{
     DOUBLE_CONVERSION_ASSERT(start != end);
 
     Iterator current = start;
 
     bool saw_digit = false;
-    while (S2D_isDigit(*current, 16)) {
+    while (S2D_isDigit(*current, 16))
+    {
         saw_digit = true;
-        if (S2D_Advance(&current, separator, 16, end)) return false;
+        if (S2D_Advance(&current, separator, 16, end))
+            return false;
     }
-    if (*current == '.') {
-        if (S2D_Advance(&current, separator, 16, end)) return false;
-        while (S2D_isDigit(*current, 16)) {
+    if (*current == '.')
+    {
+        if (S2D_Advance(&current, separator, 16, end))
+            return false;
+        while (S2D_isDigit(*current, 16))
+        {
             saw_digit = true;
-            if (S2D_Advance(&current, separator, 16, end)) return false;
+            if (S2D_Advance(&current, separator, 16, end))
+                return false;
         }
     }
-    if (!saw_digit) return false;
-    if (*current != 'p' && *current != 'P') return false;
-    if (S2D_Advance(&current, separator, 16, end)) return false;
-    if (*current == '+' || *current == '-') {
-        if (S2D_Advance(&current, separator, 16, end)) return false;
+    if (!saw_digit)
+        return false;
+    if (*current != 'p' && *current != 'P')
+        return false;
+    if (S2D_Advance(&current, separator, 16, end))
+        return false;
+    if (*current == '+' || *current == '-')
+    {
+        if (S2D_Advance(&current, separator, 16, end))
+            return false;
     }
-    if (!S2D_isDigit(*current, 10)) return false;
-    if (S2D_Advance(&current, separator, 16, end)) return true;
-    while (S2D_isDigit(*current, 10)) {
-        if (S2D_Advance(&current, separator, 16, end)) return true;
+    if (!S2D_isDigit(*current, 10))
+        return false;
+    if (S2D_Advance(&current, separator, 16, end))
+        return true;
+    while (S2D_isDigit(*current, 10))
+    {
+        if (S2D_Advance(&current, separator, 16, end))
+            return true;
     }
     return allow_trailing_junk || !S2D_AdvanceToNonspace(&current, end);
 }
@@ -4701,7 +5076,7 @@ static bool S2D_IsHexFloatString(Iterator start,
 // If parse_as_hex_float is true, then the string must be a valid
 // hex-float.
 static double S2D_RadixStringToIeee(int radix_log_2,
-                                    Iterator *current,
+                                    Iterator* current,
                                     Iterator end,
                                     bool sign,
                                     uc16 separator,
@@ -4709,14 +5084,14 @@ static double S2D_RadixStringToIeee(int radix_log_2,
                                     bool allow_trailing_junk,
                                     double junk_string_value,
                                     bool read_as_double,
-                                    bool *result_is_junk) {
+                                    bool* result_is_junk)
+{
     DOUBLE_CONVERSION_ASSERT(*current != end);
-    DOUBLE_CONVERSION_ASSERT(!parse_as_hex_float ||
-        S2D_IsHexFloatString(*current, end, separator, allow_trailing_junk));
+    DOUBLE_CONVERSION_ASSERT(!parse_as_hex_float || S2D_IsHexFloatString(*current, end, separator, allow_trailing_junk));
 
     const int kDoubleSize = Double_kSignificandSize;
     const int kSingleSize = Single_kSignificandSize;
-    const int kSignificandSize = read_as_double? kDoubleSize: kSingleSize;
+    const int kSignificandSize = read_as_double ? kDoubleSize : kSingleSize;
 
     *result_is_junk = true;
 
@@ -4728,95 +5103,127 @@ static double S2D_RadixStringToIeee(int radix_log_2,
     bool post_decimal = false;
 
     // Skip leading 0s.
-    while (**current == '0') {
-        if (S2D_Advance(current, separator, radix, end)) {
+    while (**current == '0')
+    {
+        if (S2D_Advance(current, separator, radix, end))
+        {
             *result_is_junk = false;
             return S2D_SignedZero(sign);
         }
     }
 
-    while (true) {
+    while (true)
+    {
         int digit;
-        if (S2D_IsDecimalDigitForRadix(**current, radix)) {
+        if (S2D_IsDecimalDigitForRadix(**current, radix))
+        {
             digit = (char)(**current) - '0';
-            if (post_decimal) exponent -= radix_log_2;
-        } else if (S2D_IsCharacterDigitForRadix(**current, radix, 'a')) {
+            if (post_decimal)
+                exponent -= radix_log_2;
+        }
+        else if (S2D_IsCharacterDigitForRadix(**current, radix, 'a'))
+        {
             digit = (char)(**current) - 'a' + 10;
-            if (post_decimal) exponent -= radix_log_2;
-        } else if (S2D_IsCharacterDigitForRadix(**current, radix, 'A')) {
+            if (post_decimal)
+                exponent -= radix_log_2;
+        }
+        else if (S2D_IsCharacterDigitForRadix(**current, radix, 'A'))
+        {
             digit = (char)(**current) - 'A' + 10;
-            if (post_decimal) exponent -= radix_log_2;
-        } else if (parse_as_hex_float && **current == '.') {
+            if (post_decimal)
+                exponent -= radix_log_2;
+        }
+        else if (parse_as_hex_float && **current == '.')
+        {
             post_decimal = true;
             S2D_Advance(current, separator, radix, end);
             DOUBLE_CONVERSION_ASSERT(*current != end);
             continue;
-        } else if (parse_as_hex_float && (**current == 'p' || **current == 'P')) {
+        }
+        else if (parse_as_hex_float && (**current == 'p' || **current == 'P'))
+        {
             break;
-        } else {
-            if (allow_trailing_junk || !S2D_AdvanceToNonspace(current, end)) {
+        }
+        else
+        {
+            if (allow_trailing_junk || !S2D_AdvanceToNonspace(current, end))
+            {
                 break;
-          } else {
-              return junk_string_value;
-          }
+            }
+            else
+            {
+                return junk_string_value;
+            }
         }
 
         number = number * radix + digit;
         int overflow = (int)(number >> kSignificandSize);
-        if (overflow != 0) {
+        if (overflow != 0)
+        {
             // Overflow occurred. Need to determine which direction to round the
             // result.
             int overflow_bits_count = 1;
-            while (overflow > 1) {
+            while (overflow > 1)
+            {
                 overflow_bits_count++;
                 overflow >>= 1;
             }
 
             int dropped_bits_mask = ((1 << overflow_bits_count) - 1);
-            int dropped_bits = (int)(number) & dropped_bits_mask;
+            int dropped_bits = (int)(number)&dropped_bits_mask;
             number >>= overflow_bits_count;
             exponent += overflow_bits_count;
 
             bool zero_tail = true;
-            for (;;) {
-                if (S2D_Advance(current, separator, radix, end)) break;
-                if (parse_as_hex_float && **current == '.') {
+            for (;;)
+            {
+                if (S2D_Advance(current, separator, radix, end))
+                    break;
+                if (parse_as_hex_float && **current == '.')
+                {
                     // Just run over the '.'. We are just trying to see whether there is
                     // a non-zero digit somewhere.
                     S2D_Advance(current, separator, radix, end);
                     DOUBLE_CONVERSION_ASSERT(*current != end);
                     post_decimal = true;
                 }
-                if (!S2D_isDigit(**current, radix)) break;
+                if (!S2D_isDigit(**current, radix))
+                    break;
                 zero_tail = zero_tail && **current == '0';
-                if (!post_decimal) exponent += radix_log_2;
+                if (!post_decimal)
+                    exponent += radix_log_2;
             }
 
-            if (!parse_as_hex_float &&
-                !allow_trailing_junk &&
-                S2D_AdvanceToNonspace(current, end)) {
+            if (!parse_as_hex_float && !allow_trailing_junk && S2D_AdvanceToNonspace(current, end))
+            {
                 return junk_string_value;
             }
 
             int middle_value = (1 << (overflow_bits_count - 1));
-            if (dropped_bits > middle_value) {
-                number++;  // Rounding up.
-            } else if (dropped_bits == middle_value) {
+            if (dropped_bits > middle_value)
+            {
+                number++; // Rounding up.
+            }
+            else if (dropped_bits == middle_value)
+            {
                 // Rounding to even to consistency with decimals: half-way case rounds
                 // up if significant part is odd and down otherwise.
-                if ((number & 1) != 0 || !zero_tail) {
-                    number++;  // Rounding up.
+                if ((number & 1) != 0 || !zero_tail)
+                {
+                    number++; // Rounding up.
                 }
             }
 
             // Rounding up may cause overflow.
-            if ((number & ((int64_t)1 << kSignificandSize)) != 0) {
+            if ((number & ((int64_t)1 << kSignificandSize)) != 0)
+            {
                 exponent++;
                 number >>= 1;
             }
             break;
         }
-        if (S2D_Advance(current, separator, radix, end)) break;
+        if (S2D_Advance(current, separator, radix, end))
+            break;
     }
 
     DOUBLE_CONVERSION_ASSERT(number < ((int64_t)1 << kSignificandSize));
@@ -4824,35 +5231,46 @@ static double S2D_RadixStringToIeee(int radix_log_2,
 
     *result_is_junk = false;
 
-    if (parse_as_hex_float) {
+    if (parse_as_hex_float)
+    {
         DOUBLE_CONVERSION_ASSERT(**current == 'p' || **current == 'P');
         S2D_Advance(current, separator, radix, end);
         DOUBLE_CONVERSION_ASSERT(*current != end);
         bool is_negative = false;
-        if (**current == '+') {
+        if (**current == '+')
+        {
             S2D_Advance(current, separator, radix, end);
             DOUBLE_CONVERSION_ASSERT(*current != end);
-        } else if (**current == '-') {
+        }
+        else if (**current == '-')
+        {
             is_negative = true;
             S2D_Advance(current, separator, radix, end);
             DOUBLE_CONVERSION_ASSERT(*current != end);
         }
         int written_exponent = 0;
-        while (S2D_IsDecimalDigitForRadix(**current, 10)) {
+        while (S2D_IsDecimalDigitForRadix(**current, 10))
+        {
             // No need to read exponents if they are too big. That could potentially overflow
             // the `written_exponent` variable.
-            if (abs(written_exponent) <= 100 * Double_kMaxExponent) {
+            if (abs(written_exponent) <= 100 * Double_kMaxExponent)
+            {
                 written_exponent = 10 * written_exponent + **current - '0';
             }
-            if (S2D_Advance(current, separator, radix, end)) break;
+            if (S2D_Advance(current, separator, radix, end))
+                break;
         }
-        if (is_negative) written_exponent = -written_exponent;
+        if (is_negative)
+            written_exponent = -written_exponent;
         exponent += written_exponent;
     }
 
-    if (exponent == 0 || number == 0) {
-        if (sign) {
-            if (number == 0) return -0.0;
+    if (exponent == 0 || number == 0)
+    {
+        if (sign)
+        {
+            if (number == 0)
+                return -0.0;
             number = -number;
         }
         return (double)(number);
@@ -4865,11 +5283,9 @@ static double S2D_RadixStringToIeee(int radix_log_2,
     return sign ? -result : result;
 }
 
-static double StringToIeee(StringToDoubleConverter *conv,
-                           Iterator input,
-                           int length,
-                           bool read_as_double,
-                           int *processed_characters_count) {
+static double
+StringToIeee(StringToDoubleConverter* conv, Iterator input, int length, bool read_as_double, int* processed_characters_count)
+{
     Iterator current = input;
     Iterator end = input + length;
 
@@ -4889,14 +5305,18 @@ static double StringToIeee(StringToDoubleConverter *conv,
     // 'parsing_done'.
     // 4. 'current' is not dereferenced after the 'parsing_done' label.
     // 5. Code before 'parsing_done' may rely on 'current != end'.
-    if (current == end) return conv->empty_string_value;
+    if (current == end)
+        return conv->empty_string_value;
 
-    if (allow_leading_spaces || allow_trailing_spaces) {
-        if (!S2D_AdvanceToNonspace(&current, end)) {
+    if (allow_leading_spaces || allow_trailing_spaces)
+    {
+        if (!S2D_AdvanceToNonspace(&current, end))
+        {
             *processed_characters_count = (int)(current - input);
             return conv->empty_string_value;
         }
-        if (!allow_leading_spaces && (input != current)) {
+        if (!allow_leading_spaces && (input != current))
+        {
             // No leading spaces allowed, but AdvanceToNonspace moved forward.
             return conv->junk_string_value;
         }
@@ -4911,28 +5331,36 @@ static double StringToIeee(StringToDoubleConverter *conv,
 
     bool sign = false;
 
-    if (*current == '+' || *current == '-') {
+    if (*current == '+' || *current == '-')
+    {
         sign = (*current == '-');
         ++current;
         Iterator next_non_space = current;
         // Skip following spaces (if allowed).
-        if (!S2D_AdvanceToNonspace(&next_non_space, end)) return conv->junk_string_value;
-        if (!allow_spaces_after_sign && (current != next_non_space)) {
+        if (!S2D_AdvanceToNonspace(&next_non_space, end))
+            return conv->junk_string_value;
+        if (!allow_spaces_after_sign && (current != next_non_space))
+        {
             return conv->junk_string_value;
         }
         current = next_non_space;
     }
 
-    if (conv->infinity_symbol != NULL) {
-        if (S2D_ConsumeFirstCharacter(*current, conv->infinity_symbol, allow_case_insensitivity)) {
-            if (!S2D_ConsumeSubString(&current, end, conv->infinity_symbol, allow_case_insensitivity)) {
+    if (conv->infinity_symbol != NULL)
+    {
+        if (S2D_ConsumeFirstCharacter(*current, conv->infinity_symbol, allow_case_insensitivity))
+        {
+            if (!S2D_ConsumeSubString(&current, end, conv->infinity_symbol, allow_case_insensitivity))
+            {
                 return conv->junk_string_value;
             }
 
-            if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end)) {
+            if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end))
+            {
                 return conv->junk_string_value;
             }
-            if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end)) {
+            if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end))
+            {
                 return conv->junk_string_value;
             }
 
@@ -4941,16 +5369,21 @@ static double StringToIeee(StringToDoubleConverter *conv,
         }
     }
 
-    if (conv->nan_symbol != NULL) {
-        if (S2D_ConsumeFirstCharacter(*current, conv->nan_symbol, allow_case_insensitivity)) {
-            if (!S2D_ConsumeSubString(&current, end, conv->nan_symbol, allow_case_insensitivity)) {
+    if (conv->nan_symbol != NULL)
+    {
+        if (S2D_ConsumeFirstCharacter(*current, conv->nan_symbol, allow_case_insensitivity))
+        {
+            if (!S2D_ConsumeSubString(&current, end, conv->nan_symbol, allow_case_insensitivity))
+            {
                 return conv->junk_string_value;
             }
 
-            if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end)) {
+            if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end))
+            {
                 return conv->junk_string_value;
             }
-            if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end)) {
+            if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end))
+            {
                 return conv->junk_string_value;
             }
 
@@ -4960,8 +5393,10 @@ static double StringToIeee(StringToDoubleConverter *conv,
     }
 
     bool leading_zero = false;
-    if (*current == '0') {
-        if (S2D_Advance(&current, conv->separator, 10, end)) {
+    if (*current == '0')
+    {
+        if (S2D_Advance(&current, conv->separator, 10, end))
+        {
             *processed_characters_count = (int)(current - input);
             return S2D_SignedZero(sign);
         }
@@ -4969,17 +5404,18 @@ static double StringToIeee(StringToDoubleConverter *conv,
         leading_zero = true;
 
         // It could be hexadecimal value.
-        if (((conv->flags & S2D_ALLOW_HEX) ||
-             (conv->flags & S2D_ALLOW_HEX_FLOATS)) &&
-            (*current == 'x' || *current == 'X')) {
+        if (((conv->flags & S2D_ALLOW_HEX) || (conv->flags & S2D_ALLOW_HEX_FLOATS)) && (*current == 'x' || *current == 'X'))
+        {
             ++current;
 
-            if (current == end) return conv->junk_string_value;  // "0x"
+            if (current == end)
+                return conv->junk_string_value; // "0x"
 
-            bool parse_as_hex_float = (conv->flags & S2D_ALLOW_HEX_FLOATS) &&
-                    S2D_IsHexFloatString(current, end, conv->separator, allow_trailing_junk);
+            bool parse_as_hex_float =
+                (conv->flags & S2D_ALLOW_HEX_FLOATS) && S2D_IsHexFloatString(current, end, conv->separator, allow_trailing_junk);
 
-            if (!parse_as_hex_float && !S2D_isDigit(*current, 16)) {
+            if (!parse_as_hex_float && !S2D_isDigit(*current, 16))
+            {
                 return conv->junk_string_value;
             }
 
@@ -4994,16 +5430,20 @@ static double StringToIeee(StringToDoubleConverter *conv,
                                                   conv->junk_string_value,
                                                   read_as_double,
                                                   &result_is_junk);
-            if (!result_is_junk) {
-                if (allow_trailing_spaces) S2D_AdvanceToNonspace(&current, end);
+            if (!result_is_junk)
+            {
+                if (allow_trailing_spaces)
+                    S2D_AdvanceToNonspace(&current, end);
                 *processed_characters_count = (int)(current - input);
             }
             return result;
         }
 
         // Ignore leading zeros in the integer part.
-        while (*current == '0') {
-            if (S2D_Advance(&current, conv->separator, 10, end)) {
+        while (*current == '0')
+        {
+            if (S2D_Advance(&current, conv->separator, 10, end))
+            {
                 *processed_characters_count = (int)(current - input);
                 return S2D_SignedZero(sign);
             }
@@ -5014,71 +5454,92 @@ static double StringToIeee(StringToDoubleConverter *conv,
 
     // The longest form of simplified number is: "-<significant digits>.1eXXX\0".
     const int kBufferSize = S2D_kMaxSignificantDigits + 10;
-    DOUBLE_CONVERSION_STACK_UNINITIALIZED char
-        buffer[S2D_kMaxSignificantDigits + 10 /* kBufferSize */];
+    DOUBLE_CONVERSION_STACK_UNINITIALIZED char buffer[S2D_kMaxSignificantDigits + 10 /* kBufferSize */];
     int buffer_pos = 0;
 
     // Copy significant digits of the integer part (if any) to the buffer.
-    while (*current >= '0' && *current <= '9') {
-        if (significant_digits < S2D_kMaxSignificantDigits) {
+    while (*current >= '0' && *current <= '9')
+    {
+        if (significant_digits < S2D_kMaxSignificantDigits)
+        {
             DOUBLE_CONVERSION_ASSERT(buffer_pos < kBufferSize);
             buffer[buffer_pos++] = (char)(*current);
             significant_digits++;
             // Will later check if it's an octal in the buffer.
-        } else {
-            insignificant_digits++;  // Move the digit into the exponential part.
+        }
+        else
+        {
+            insignificant_digits++; // Move the digit into the exponential part.
             nonzero_digit_dropped = nonzero_digit_dropped || *current != '0';
         }
         octal = octal && *current < '8';
-        if (S2D_Advance(&current, conv->separator, 10, end)) goto parsing_done;
+        if (S2D_Advance(&current, conv->separator, 10, end))
+            goto parsing_done;
     }
 
-    if (significant_digits == 0) {
+    if (significant_digits == 0)
+    {
         octal = false;
     }
 
-    if (*current == '.') {
-        if (octal && !allow_trailing_junk) return conv->junk_string_value;
-        if (octal) goto parsing_done;
+    if (*current == '.')
+    {
+        if (octal && !allow_trailing_junk)
+            return conv->junk_string_value;
+        if (octal)
+            goto parsing_done;
 
-        if (S2D_Advance(&current, conv->separator, 10, end)) {
-            if (significant_digits == 0 && !leading_zero) {
+        if (S2D_Advance(&current, conv->separator, 10, end))
+        {
+            if (significant_digits == 0 && !leading_zero)
+            {
                 return conv->junk_string_value;
-            } else {
+            }
+            else
+            {
                 goto parsing_done;
             }
         }
 
-        if (significant_digits == 0) {
+        if (significant_digits == 0)
+        {
             // octal = false;
             // Integer part consists of 0 or is absent. Significant digits start after
             // leading zeros (if any).
-            while (*current == '0') {
-                if (S2D_Advance(&current, conv->separator, 10, end)) {
+            while (*current == '0')
+            {
+                if (S2D_Advance(&current, conv->separator, 10, end))
+                {
                     *processed_characters_count = (int)(current - input);
                     return S2D_SignedZero(sign);
                 }
-                exponent--;  // Move this 0 into the exponent.
+                exponent--; // Move this 0 into the exponent.
             }
         }
 
         // There is a fractional part.
         // We don't emit a '.', but adjust the exponent instead.
-        while (*current >= '0' && *current <= '9') {
-            if (significant_digits < S2D_kMaxSignificantDigits) {
+        while (*current >= '0' && *current <= '9')
+        {
+            if (significant_digits < S2D_kMaxSignificantDigits)
+            {
                 DOUBLE_CONVERSION_ASSERT(buffer_pos < kBufferSize);
                 buffer[buffer_pos++] = (char)(*current);
                 significant_digits++;
                 exponent--;
-            } else {
+            }
+            else
+            {
                 // Ignore insignificant digits in the fractional part.
                 nonzero_digit_dropped = nonzero_digit_dropped || *current != '0';
             }
-            if (S2D_Advance(&current, conv->separator, 10, end)) goto parsing_done;
+            if (S2D_Advance(&current, conv->separator, 10, end))
+                goto parsing_done;
         }
     }
 
-    if (!leading_zero && exponent == 0 && significant_digits == 0) {
+    if (!leading_zero && exponent == 0 && significant_digits == 0)
+    {
         // If leading_zeros is true then the string contains zeros.
         // If exponent < 0 then string was [+-]\.0*...
         // If significant_digits != 0 the string is not equal to 0.
@@ -5087,38 +5548,54 @@ static double StringToIeee(StringToDoubleConverter *conv,
     }
 
     // Parse exponential part.
-    if (*current == 'e' || *current == 'E') {
-        if (octal && !allow_trailing_junk) return conv->junk_string_value;
-        if (octal) goto parsing_done;
+    if (*current == 'e' || *current == 'E')
+    {
+        if (octal && !allow_trailing_junk)
+            return conv->junk_string_value;
+        if (octal)
+            goto parsing_done;
         Iterator junk_begin = current;
         ++current;
-        if (current == end) {
-            if (allow_trailing_junk) {
+        if (current == end)
+        {
+            if (allow_trailing_junk)
+            {
                 current = junk_begin;
                 goto parsing_done;
-            } else {
+            }
+            else
+            {
                 return conv->junk_string_value;
             }
         }
         char exponen_sign = '+';
-        if (*current == '+' || *current == '-') {
+        if (*current == '+' || *current == '-')
+        {
             exponen_sign = (char)(*current);
             ++current;
-            if (current == end) {
-                if (allow_trailing_junk) {
+            if (current == end)
+            {
+                if (allow_trailing_junk)
+                {
                     current = junk_begin;
                     goto parsing_done;
-                } else {
+                }
+                else
+                {
                     return conv->junk_string_value;
                 }
             }
         }
 
-        if (current == end || *current < '0' || *current > '9') {
-            if (allow_trailing_junk) {
+        if (current == end || *current < '0' || *current > '9')
+        {
+            if (allow_trailing_junk)
+            {
                 current = junk_begin;
                 goto parsing_done;
-            } else {
+            }
+            else
+            {
                 return conv->junk_string_value;
             }
         }
@@ -5126,13 +5603,16 @@ static double StringToIeee(StringToDoubleConverter *conv,
         const int max_exponent = INT_MAX / 2;
         DOUBLE_CONVERSION_ASSERT(-max_exponent / 2 <= exponent && exponent <= max_exponent / 2);
         int num = 0;
-        do {
+        do
+        {
             // Check overflow.
             int digit = *current - '0';
-            if (num >= max_exponent / 10
-                && !(num == max_exponent / 10 && digit <= max_exponent % 10)) {
+            if (num >= max_exponent / 10 && !(num == max_exponent / 10 && digit <= max_exponent % 10))
+            {
                 num = max_exponent;
-            } else {
+            }
+            else
+            {
                 num = num * 10 + digit;
             }
             ++current;
@@ -5141,25 +5621,29 @@ static double StringToIeee(StringToDoubleConverter *conv,
         exponent += (exponen_sign == '-' ? -num : num);
     }
 
-    if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end)) {
+    if (!(allow_trailing_spaces || allow_trailing_junk) && (current != end))
+    {
         return conv->junk_string_value;
     }
-    if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end)) {
+    if (!allow_trailing_junk && S2D_AdvanceToNonspace(&current, end))
+    {
         return conv->junk_string_value;
     }
-    if (allow_trailing_spaces) {
+    if (allow_trailing_spaces)
+    {
         S2D_AdvanceToNonspace(&current, end);
     }
 
 parsing_done:
     exponent += insignificant_digits;
 
-    if (octal) {
+    if (octal)
+    {
         double result;
         bool result_is_junk;
-        char *start = buffer;
+        char* start = buffer;
         result = S2D_RadixStringToIeee(3,
-                                       (Iterator *)&start,
+                                       (Iterator*)&start,
                                        buffer + buffer_pos,
                                        sign,
                                        conv->separator,
@@ -5173,7 +5657,8 @@ parsing_done:
         return result;
     }
 
-    if (nonzero_digit_dropped) {
+    if (nonzero_digit_dropped)
+    {
         buffer[buffer_pos++] = '1';
         exponent--;
     }
@@ -5188,39 +5673,37 @@ parsing_done:
     exponent += buffer_pos - chars.length;
 
     double converted;
-    if (read_as_double) {
+    if (read_as_double)
+    {
         converted = StrtodTrimmed(&chars, exponent);
-    } else {
+    }
+    else
+    {
         converted = StrtofTrimmed(&chars, exponent);
     }
     *processed_characters_count = (int)(current - input);
-    return sign? -converted: converted;
+    return sign ? -converted : converted;
 }
 
-static double StringToDouble(StringToDoubleConverter *conv,
-                             const char* buffer,
-                             int length,
-                             int *processed_characters_count) {
+static double StringToDouble(StringToDoubleConverter* conv, const char* buffer, int length, int* processed_characters_count)
+{
     return StringToIeee(conv, buffer, length, true, processed_characters_count);
 }
 
-static float StringToFloat(StringToDoubleConverter *conv,
-                           const char *buffer,
-                           int length,
-                           int *processed_characters_count) {
+static float StringToFloat(StringToDoubleConverter* conv, const char* buffer, int length, int* processed_characters_count)
+{
     return (float)(StringToIeee(conv, buffer, length, false, processed_characters_count));
 }
-
-
 
 /// ============================================================================
 /// double-to-string.h
 /// ============================================================================
 
-typedef struct DoubleToStringConverter {
+typedef struct DoubleToStringConverter
+{
     int flags;
-    const char *infinity_symbol;
-    const char *nan_symbol;
+    const char* infinity_symbol;
+    const char* nan_symbol;
     char exponent_character;
     int decimal_in_shortest_low;
     int decimal_in_shortest_high;
@@ -5242,7 +5725,7 @@ typedef struct DoubleToStringConverter {
 // When calling ToPrecision with a requested_digits
 // parameter < kMinPrecisionDigits or requested_digits > kMaxPrecisionDigits
 // then the function returns false.
-#define D2S_kMinPrecisionDigits  ((int)1)
+#define D2S_kMinPrecisionDigits ((int)1)
 #define D2S_kMaxPrecisionDigits ((int)120)
 
 // The maximal number of digits that are needed to emit a double in base 10.
@@ -5251,7 +5734,7 @@ typedef struct DoubleToStringConverter {
 // kBase10MaximalLength.
 // Note that DoubleToAscii null-terminates its input. So the given buffer
 // should be at least kBase10MaximalLength + 1 characters long.
-#define D2S_kBase10MaximalLength  ((int)17)
+#define D2S_kBase10MaximalLength ((int)17)
 
 // The maximal number of digits that are needed to emit a single in base 10.
 // A higher precision can be achieved by using more digits, but the shortest
@@ -5267,7 +5750,8 @@ typedef struct DoubleToStringConverter {
 // 'decimal_in_shortest_low' limit. For example: "-0.0000033333333333333333"
 #define D2S_kMaxCharsEcmaScriptShortest ((int)25)
 
-typedef enum D2S_Flags {
+typedef enum D2S_Flags
+{
     D2S_NO_FLAGS = 0,
     D2S_EMIT_POSITIVE_EXPONENT_SIGN = 1,
     D2S_EMIT_TRAILING_DECIMAL_POINT = 2,
@@ -5358,14 +5842,15 @@ typedef enum D2S_Flags {
 // The min_exponent_width is clamped to 5.
 // As such, the exponent may never have more than 5 digits in total.
 static DoubleToStringConverter DoubleToStringConverter_make(int flags,
-                                                            const char *infinity_symbol,
-                                                            const char *nan_symbol,
+                                                            const char* infinity_symbol,
+                                                            const char* nan_symbol,
                                                             char exponent_character,
                                                             int decimal_in_shortest_low,
                                                             int decimal_in_shortest_high,
                                                             int max_leading_padding_zeroes_in_precision_mode,
                                                             int max_trailing_padding_zeroes_in_precision_mode,
-                                                            int min_exponent_width) {
+                                                            int min_exponent_width)
+{
     DoubleToStringConverter conv;
     conv.flags = flags;
     conv.infinity_symbol = infinity_symbol;
@@ -5379,7 +5864,7 @@ static DoubleToStringConverter DoubleToStringConverter_make(int flags,
     // When 'trailing zero after the point' is set, then 'trailing point'
     // must be set too.
     DOUBLE_CONVERSION_ASSERT(((flags & D2S_EMIT_TRAILING_DECIMAL_POINT) != 0) ||
-        !((flags & D2S_EMIT_TRAILING_ZERO_AFTER_POINT) != 0));
+                             !((flags & D2S_EMIT_TRAILING_ZERO_AFTER_POINT) != 0));
     return conv;
 }
 
@@ -5393,15 +5878,10 @@ static DoubleToStringConverter DoubleToStringConverter_make(int flags,
 // max_leading_padding_zeroes_in_precision_mode: 6
 // max_trailing_padding_zeroes_in_precision_mode: 0
 static const DoubleToStringConverter D2S_EcmaScriptConverter = {
-    D2S_UNIQUE_ZERO | D2S_EMIT_POSITIVE_EXPONENT_SIGN,
-    "Infinity",
-    "NaN",
-    'e',
-    -6, 21,
-    6, 0
-};
+    D2S_UNIQUE_ZERO | D2S_EMIT_POSITIVE_EXPONENT_SIGN, "Infinity", "NaN", 'e', -6, 21, 6, 0};
 
-typedef enum DtoaMode {
+typedef enum DtoaMode
+{
     // Produce the shortest correct representation.
     // For example the output of 0.299999999999999988897 is (the less accurate
     // but correct) 0.3.
@@ -5451,10 +5931,7 @@ typedef enum DtoaMode {
 //  1 + kMaxFixedDigitsBeforePoint + 1 + kMaxFixedDigitsAfterPoint characters
 // (one additional character for the sign, and one for the decimal point).
 // In addition, the buffer must be able to hold the trailing '\0' character.
-static bool D2S_ToFixed(DoubleToStringConverter *conv,
-                        double value,
-                        int requested_digits,
-                        StringBuilder *result_builder);
+static bool D2S_ToFixed(DoubleToStringConverter* conv, double value, int requested_digits, StringBuilder* result_builder);
 
 // Computes a representation in exponential format with requested_digits
 // after the decimal point. The last emitted digit is rounded.
@@ -5486,10 +5963,7 @@ static bool D2S_ToFixed(DoubleToStringConverter *conv,
 // decimal point, the decimal point, the exponent character, the
 // exponent's sign, and at most 3 exponent digits).
 // In addition, the buffer must be able to hold the trailing '\0' character.
-static bool D2S_ToExponential(DoubleToStringConverter *conv,
-                              double value,
-                              int requested_digits,
-                              StringBuilder *result_builder);
+static bool D2S_ToExponential(DoubleToStringConverter* conv, double value, int requested_digits, StringBuilder* result_builder);
 
 // Computes 'precision' leading digits of the given 'value' and returns them
 // either in exponential or decimal format, depending on
@@ -5527,10 +6001,7 @@ static bool D2S_ToExponential(DoubleToStringConverter *conv,
 // kMaxPrecisionDigits + 7 characters (the sign, the decimal point, the
 // exponent character, the exponent's sign, and at most 3 exponent digits).
 // In addition, the buffer must be able to hold the trailing '\0' character.
-static bool D2S_ToPrecision(DoubleToStringConverter *conv,
-                            double value,
-                            int precision,
-                            StringBuilder *result_builder);
+static bool D2S_ToPrecision(DoubleToStringConverter* conv, double value, int precision, StringBuilder* result_builder);
 
 // Converts the given double 'v' to digit characters. 'v' must not be NaN,
 // +Infinity, or -Infinity. In SHORTEST_SINGLE-mode this restriction also
@@ -5575,43 +6046,30 @@ static bool D2S_ToPrecision(DoubleToStringConverter *conv,
 // terminating null-character when computing the maximal output size.
 // The given length is only used in debug mode to ensure the buffer is big
 // enough.
-static void D2S_DoubleToAscii(double v,
-                              DtoaMode mode,
-                              int requested_digits,
-                              char *buffer,
-                              int buffer_length,
-                              bool *sign,
-                              int *length,
-                              int *point);
+static void D2S_DoubleToAscii(
+    double v, DtoaMode mode, int requested_digits, char* buffer, int buffer_length, bool* sign, int* length, int* point);
 
 // Implementation for ToShortest and ToShortestSingle.
-static bool D2S_ToShortestIeeeNumber(DoubleToStringConverter *conv,
-                                     double value,
-                                     StringBuilder *result_builder,
-                                     DtoaMode mode);
+static bool D2S_ToShortestIeeeNumber(DoubleToStringConverter* conv, double value, StringBuilder* result_builder, DtoaMode mode);
 
 // If the value is a special value (NaN or Infinity) constructs the
 // corresponding string using the configured infinity/nan-symbol.
 // If either of them is NULL or the value is not special then the
 // function returns false.
-static bool D2S_HandleSpecialValues(DoubleToStringConverter *conv,
-                                    double value, StringBuilder *result_builder);
+static bool D2S_HandleSpecialValues(DoubleToStringConverter* conv, double value, StringBuilder* result_builder);
 
 // Constructs an exponential representation (i.e. 1.234e56).
 // The given exponent assumes a decimal point after the first decimal digit.
-static void D2S_CreateExponentialRepresentation(DoubleToStringConverter *conv,
-                                                const char *decimal_digits,
-                                                int length,
-                                                int exponent,
-                                                StringBuilder *result_builder);
+static void D2S_CreateExponentialRepresentation(
+    DoubleToStringConverter* conv, const char* decimal_digits, int length, int exponent, StringBuilder* result_builder);
 
 // Creates a decimal representation (i.e 1234.5678).
-static void D2S_CreateDecimalRepresentation(DoubleToStringConverter *conv,
-                                            const char *decimal_digits,
+static void D2S_CreateDecimalRepresentation(DoubleToStringConverter* conv,
+                                            const char* decimal_digits,
                                             int length,
                                             int decimal_point,
                                             int digits_after_point,
-                                            StringBuilder *result_builder);
+                                            StringBuilder* result_builder);
 
 // Computes the shortest string of digits that correctly represent the input
 // number. Depending on decimal_in_shortest_low and decimal_in_shortest_high
@@ -5651,67 +6109,76 @@ static void D2S_CreateDecimalRepresentation(DoubleToStringConverter *conv,
 //   kBase10MaximalLength significant digits).
 //      "-1.7976931348623157e+308", "-1.7976931348623157E308"
 // In addition, the buffer must be able to hold the trailing '\0' character.
-static bool D2S_ToShortest(DoubleToStringConverter *conv,
-                           double value, StringBuilder *result_builder) {
+static bool D2S_ToShortest(DoubleToStringConverter* conv, double value, StringBuilder* result_builder)
+{
     return D2S_ToShortestIeeeNumber(conv, value, result_builder, DtoaMode_SHORTEST);
 }
 
 // Same as ToShortest, but for single-precision floats.
-static bool D2S_ToShortestSingle(DoubleToStringConverter *conv,
-                                 float value, StringBuilder *result_builder) {
+static bool D2S_ToShortestSingle(DoubleToStringConverter* conv, float value, StringBuilder* result_builder)
+{
     return D2S_ToShortestIeeeNumber(conv, value, result_builder, DtoaMode_SHORTEST_SINGLE);
 }
-
-
 
 /// ============================================================================
 /// double-to-string.cc
 /// ============================================================================
 
-static bool D2S_HandleSpecialValues(DoubleToStringConverter *conv,
-                                    double value,
-                                    StringBuilder *sb) {
+static bool D2S_HandleSpecialValues(DoubleToStringConverter* conv, double value, StringBuilder* sb)
+{
     Double double_inspect = Double_make(value);
-    if (Double_IsInfinite(&double_inspect)) {
-        if (conv->infinity_symbol == DOUBLE_CONVERSION_NULLPTR) return false;
-        if (value < 0) {
+    if (Double_IsInfinite(&double_inspect))
+    {
+        if (conv->infinity_symbol == DOUBLE_CONVERSION_NULLPTR)
+            return false;
+        if (value < 0)
+        {
             StringBuilder_AddCharacter(sb, '-');
         }
         StringBuilder_AddString(sb, conv->infinity_symbol);
         return true;
     }
-    if (Double_IsNan(&double_inspect)) {
-        if (conv->nan_symbol == DOUBLE_CONVERSION_NULLPTR) return false;
+    if (Double_IsNan(&double_inspect))
+    {
+        if (conv->nan_symbol == DOUBLE_CONVERSION_NULLPTR)
+            return false;
         StringBuilder_AddString(sb, conv->nan_symbol);
         return true;
     }
     return false;
 }
 
-static void D2S_CreateExponentialRepresentation(DoubleToStringConverter *conv,
-                                                const char *decimal_digits,
-                                                int length,
-                                                int exponent,
-                                                StringBuilder *sb) {
+static void D2S_CreateExponentialRepresentation(
+    DoubleToStringConverter* conv, const char* decimal_digits, int length, int exponent, StringBuilder* sb)
+{
     DOUBLE_CONVERSION_ASSERT(length != 0);
     StringBuilder_AddCharacter(sb, decimal_digits[0]);
-    if (length == 1) {
-      if ((conv->flags & EMIT_TRAILING_DECIMAL_POINT_IN_EXPONENTIAL) != 0) {
-          StringBuilder_AddCharacter(sb, '.');
-        if ((conv->flags & EMIT_TRAILING_ZERO_AFTER_POINT_IN_EXPONENTIAL) != 0) {
-            StringBuilder_AddCharacter(sb, '0');
+    if (length == 1)
+    {
+        if ((conv->flags & EMIT_TRAILING_DECIMAL_POINT_IN_EXPONENTIAL) != 0)
+        {
+            StringBuilder_AddCharacter(sb, '.');
+            if ((conv->flags & EMIT_TRAILING_ZERO_AFTER_POINT_IN_EXPONENTIAL) != 0)
+            {
+                StringBuilder_AddCharacter(sb, '0');
+            }
         }
-      }
-    } else {
+    }
+    else
+    {
         StringBuilder_AddCharacter(sb, '.');
-        StringBuilder_AddSubstring(sb, &decimal_digits[1], length-1);
+        StringBuilder_AddSubstring(sb, &decimal_digits[1], length - 1);
     }
     StringBuilder_AddCharacter(sb, conv->exponent_character);
-    if (exponent < 0) {
+    if (exponent < 0)
+    {
         StringBuilder_AddCharacter(sb, '-');
         exponent = -exponent;
-    } else {
-        if ((conv->flags & D2S_EMIT_POSITIVE_EXPONENT_SIGN) != 0) {
+    }
+    else
+    {
+        if ((conv->flags & D2S_EMIT_POSITIVE_EXPONENT_SIGN) != 0)
+        {
             StringBuilder_AddCharacter(sb, '+');
         }
     }
@@ -5721,34 +6188,41 @@ static void D2S_CreateExponentialRepresentation(DoubleToStringConverter *conv,
     char buffer[5 /* kMaxExponentLength */ + 1];
     buffer[kMaxExponentLength] = '\0';
     int first_char_pos = kMaxExponentLength;
-    if (exponent == 0) {
+    if (exponent == 0)
+    {
         buffer[--first_char_pos] = '0';
-    } else {
-        while (exponent > 0) {
+    }
+    else
+    {
+        while (exponent > 0)
+        {
             buffer[--first_char_pos] = '0' + (exponent % 10);
             exponent /= 10;
         }
     }
     // Add prefix '0' to make exponent width >= min(min_exponent_with_, kMaxExponentLength)
     // For example: convert 1e+9 -> 1e+09, if min_exponent_with_ is set to 2
-    while(kMaxExponentLength - first_char_pos < MIN(conv->min_exponent_width, kMaxExponentLength)) {
+    while (kMaxExponentLength - first_char_pos < MIN(conv->min_exponent_width, kMaxExponentLength))
+    {
         buffer[--first_char_pos] = '0';
     }
-    StringBuilder_AddSubstring(sb, &buffer[first_char_pos],
-                               kMaxExponentLength - first_char_pos);
+    StringBuilder_AddSubstring(sb, &buffer[first_char_pos], kMaxExponentLength - first_char_pos);
 }
 
-static void D2S_CreateDecimalRepresentation(DoubleToStringConverter *conv,
-                                            const char *decimal_digits,
+static void D2S_CreateDecimalRepresentation(DoubleToStringConverter* conv,
+                                            const char* decimal_digits,
                                             int length,
                                             int decimal_point,
                                             int digits_after_point,
-                                            StringBuilder *sb) {
+                                            StringBuilder* sb)
+{
     // Create a representation that is padded with zeros if needed.
-    if (decimal_point <= 0) {
+    if (decimal_point <= 0)
+    {
         // "0.00000decimal_rep" or "0.000decimal_rep00".
         StringBuilder_AddCharacter(sb, '0');
-        if (digits_after_point > 0) {
+        if (digits_after_point > 0)
+        {
             StringBuilder_AddCharacter(sb, '.');
             StringBuilder_AddPadding(sb, '0', -decimal_point);
             DOUBLE_CONVERSION_ASSERT(length <= digits_after_point - (-decimal_point));
@@ -5756,42 +6230,48 @@ static void D2S_CreateDecimalRepresentation(DoubleToStringConverter *conv,
             int remaining_digits = digits_after_point - (-decimal_point) - length;
             StringBuilder_AddPadding(sb, '0', remaining_digits);
         }
-    } else if (decimal_point >= length) {
+    }
+    else if (decimal_point >= length)
+    {
         // "decimal_rep0000.00000" or "decimal_rep.0000".
         StringBuilder_AddSubstring(sb, decimal_digits, length);
         StringBuilder_AddPadding(sb, '0', decimal_point - length);
-        if (digits_after_point > 0) {
+        if (digits_after_point > 0)
+        {
             StringBuilder_AddCharacter(sb, '.');
             StringBuilder_AddPadding(sb, '0', digits_after_point);
         }
-    } else {
+    }
+    else
+    {
         // "decima.l_rep000".
         DOUBLE_CONVERSION_ASSERT(digits_after_point > 0);
         StringBuilder_AddSubstring(sb, decimal_digits, decimal_point);
         StringBuilder_AddCharacter(sb, '.');
         DOUBLE_CONVERSION_ASSERT(length - decimal_point <= digits_after_point);
-        StringBuilder_AddSubstring(sb, &decimal_digits[decimal_point],
-                                   length - decimal_point);
+        StringBuilder_AddSubstring(sb, &decimal_digits[decimal_point], length - decimal_point);
         int remaining_digits = digits_after_point - (length - decimal_point);
         StringBuilder_AddPadding(sb, '0', remaining_digits);
     }
-    if (digits_after_point == 0) {
-        if ((conv->flags & D2S_EMIT_TRAILING_DECIMAL_POINT) != 0) {
+    if (digits_after_point == 0)
+    {
+        if ((conv->flags & D2S_EMIT_TRAILING_DECIMAL_POINT) != 0)
+        {
             StringBuilder_AddCharacter(sb, '.');
         }
-        if ((conv->flags & D2S_EMIT_TRAILING_ZERO_AFTER_POINT) != 0) {
+        if ((conv->flags & D2S_EMIT_TRAILING_ZERO_AFTER_POINT) != 0)
+        {
             StringBuilder_AddCharacter(sb, '0');
         }
     }
 }
 
-static bool D2S_ToShortestIeeeNumber(DoubleToStringConverter *conv,
-                                     double value,
-                                     StringBuilder *sb,
-                                     DtoaMode mode) {
+static bool D2S_ToShortestIeeeNumber(DoubleToStringConverter* conv, double value, StringBuilder* sb, DtoaMode mode)
+{
     DOUBLE_CONVERSION_ASSERT(mode == DtoaMode_SHORTEST || mode == DtoaMode_SHORTEST_SINGLE);
     Double d = Double_make(value);
-    if (Double_IsSpecial(&d)) {
+    if (Double_IsSpecial(&d))
+    {
         return D2S_HandleSpecialValues(conv, value, sb);
     }
 
@@ -5801,76 +6281,75 @@ static bool D2S_ToShortestIeeeNumber(DoubleToStringConverter *conv,
     char decimal_rep[D2S_kBase10MaximalLength + 1]; // kDecimalRepCapacity
     int decimal_rep_length;
 
-    D2S_DoubleToAscii(value, mode, 0, decimal_rep, kDecimalRepCapacity,
-                      &sign, &decimal_rep_length, &decimal_point);
+    D2S_DoubleToAscii(value, mode, 0, decimal_rep, kDecimalRepCapacity, &sign, &decimal_rep_length, &decimal_point);
 
     bool unique_zero = (conv->flags & D2S_UNIQUE_ZERO) != 0;
-    if (sign && (value != 0.0 || !unique_zero)) {
+    if (sign && (value != 0.0 || !unique_zero))
+    {
         StringBuilder_AddCharacter(sb, '-');
     }
 
     int exponent = decimal_point - 1;
-    if ((conv->decimal_in_shortest_low <= exponent) &&
-        (exponent < conv->decimal_in_shortest_high)) {
-        D2S_CreateDecimalRepresentation(conv, decimal_rep, decimal_rep_length,
-                                        decimal_point,
-                                        MAX(0, decimal_rep_length - decimal_point),
-                                        sb);
-    } else {
-        D2S_CreateExponentialRepresentation(conv, decimal_rep, decimal_rep_length, exponent,
-                                            sb);
+    if ((conv->decimal_in_shortest_low <= exponent) && (exponent < conv->decimal_in_shortest_high))
+    {
+        D2S_CreateDecimalRepresentation(
+            conv, decimal_rep, decimal_rep_length, decimal_point, MAX(0, decimal_rep_length - decimal_point), sb);
+    }
+    else
+    {
+        D2S_CreateExponentialRepresentation(conv, decimal_rep, decimal_rep_length, exponent, sb);
     }
     return true;
 }
 
-static bool D2S_ToFixed(DoubleToStringConverter *conv,
-                        double value,
-                        int requested_digits,
-                        StringBuilder *sb) {
+static bool D2S_ToFixed(DoubleToStringConverter* conv, double value, int requested_digits, StringBuilder* sb)
+{
     DOUBLE_CONVERSION_ASSERT(D2S_kMaxFixedDigitsBeforePoint == 60);
     const double kFirstNonFixed = 1e60;
 
     Double d = Double_make(value);
-    if (Double_IsSpecial(&d)) {
+    if (Double_IsSpecial(&d))
+    {
         return D2S_HandleSpecialValues(conv, value, sb);
     }
 
-    if (requested_digits > D2S_kMaxFixedDigitsAfterPoint) return false;
-    if (value >= kFirstNonFixed || value <= -kFirstNonFixed) return false;
+    if (requested_digits > D2S_kMaxFixedDigitsAfterPoint)
+        return false;
+    if (value >= kFirstNonFixed || value <= -kFirstNonFixed)
+        return false;
 
     // Find a sufficiently precise decimal representation of n.
     int decimal_point;
     bool sign;
     // Add space for the '\0' byte.
-    const int kDecimalRepCapacity =
-        D2S_kMaxFixedDigitsBeforePoint + D2S_kMaxFixedDigitsAfterPoint + 1;
+    const int kDecimalRepCapacity = D2S_kMaxFixedDigitsBeforePoint + D2S_kMaxFixedDigitsAfterPoint + 1;
     char decimal_rep[D2S_kMaxFixedDigitsBeforePoint + D2S_kMaxFixedDigitsAfterPoint + 1]; // kDecimalRepCapacity
     int decimal_rep_length;
-    D2S_DoubleToAscii(value, DtoaMode_FIXED, requested_digits,
-                      decimal_rep, kDecimalRepCapacity,
-                      &sign, &decimal_rep_length, &decimal_point);
+    D2S_DoubleToAscii(
+        value, DtoaMode_FIXED, requested_digits, decimal_rep, kDecimalRepCapacity, &sign, &decimal_rep_length, &decimal_point);
 
     bool unique_zero = ((conv->flags & D2S_UNIQUE_ZERO) != 0);
-    if (sign && (value != 0.0 || !unique_zero)) {
+    if (sign && (value != 0.0 || !unique_zero))
+    {
         StringBuilder_AddCharacter(sb, '-');
     }
 
-    D2S_CreateDecimalRepresentation(conv, decimal_rep, decimal_rep_length, decimal_point,
-                                    requested_digits, sb);
+    D2S_CreateDecimalRepresentation(conv, decimal_rep, decimal_rep_length, decimal_point, requested_digits, sb);
     return true;
 }
 
-static bool D2S_ToExponential(DoubleToStringConverter *conv,
-                              double value,
-                              int requested_digits,
-                              StringBuilder *sb) {
+static bool D2S_ToExponential(DoubleToStringConverter* conv, double value, int requested_digits, StringBuilder* sb)
+{
     Double d = Double_make(value);
-    if (Double_IsSpecial(&d)) {
+    if (Double_IsSpecial(&d))
+    {
         return D2S_HandleSpecialValues(conv, value, sb);
     }
 
-    if (requested_digits < -1) return false;
-    if (requested_digits > D2S_kMaxExponentialDigits) return false;
+    if (requested_digits < -1)
+        return false;
+    if (requested_digits > D2S_kMaxExponentialDigits)
+        return false;
 
     int decimal_point;
     bool sign;
@@ -5886,46 +6365,51 @@ static bool D2S_ToExponential(DoubleToStringConverter *conv,
 #endif
     int decimal_rep_length;
 
-    if (requested_digits == -1) {
-        D2S_DoubleToAscii(value, DtoaMode_SHORTEST, 0,
-                  decimal_rep, kDecimalRepCapacity,
-                  &sign, &decimal_rep_length, &decimal_point);
-    } else {
-        D2S_DoubleToAscii(value, DtoaMode_PRECISION, requested_digits + 1,
-                          decimal_rep, kDecimalRepCapacity,
-                          &sign, &decimal_rep_length, &decimal_point);
+    if (requested_digits == -1)
+    {
+        D2S_DoubleToAscii(
+            value, DtoaMode_SHORTEST, 0, decimal_rep, kDecimalRepCapacity, &sign, &decimal_rep_length, &decimal_point);
+    }
+    else
+    {
+        D2S_DoubleToAscii(value,
+                          DtoaMode_PRECISION,
+                          requested_digits + 1,
+                          decimal_rep,
+                          kDecimalRepCapacity,
+                          &sign,
+                          &decimal_rep_length,
+                          &decimal_point);
         DOUBLE_CONVERSION_ASSERT(decimal_rep_length <= requested_digits + 1);
 
-        for (int i = decimal_rep_length; i < requested_digits + 1; ++i) {
+        for (int i = decimal_rep_length; i < requested_digits + 1; ++i)
+        {
             decimal_rep[i] = '0';
         }
         decimal_rep_length = requested_digits + 1;
     }
 
     bool unique_zero = ((conv->flags & D2S_UNIQUE_ZERO) != 0);
-    if (sign && (value != 0.0 || !unique_zero)) {
+    if (sign && (value != 0.0 || !unique_zero))
+    {
         StringBuilder_AddCharacter(sb, '-');
     }
 
     int exponent = decimal_point - 1;
-    D2S_CreateExponentialRepresentation(conv,
-                                        decimal_rep,
-                                        decimal_rep_length,
-                                        exponent,
-                                        sb);
+    D2S_CreateExponentialRepresentation(conv, decimal_rep, decimal_rep_length, exponent, sb);
     return true;
 }
 
-static bool D2S_ToPrecision(DoubleToStringConverter *conv,
-                            double value,
-                            int precision,
-                            StringBuilder *sb) {
+static bool D2S_ToPrecision(DoubleToStringConverter* conv, double value, int precision, StringBuilder* sb)
+{
     Double d = Double_make(value);
-    if (Double_IsSpecial(&d)) {
+    if (Double_IsSpecial(&d))
+    {
         return D2S_HandleSpecialValues(conv, value, sb);
     }
 
-    if (precision < D2S_kMinPrecisionDigits || precision > D2S_kMaxPrecisionDigits) {
+    if (precision < D2S_kMinPrecisionDigits || precision > D2S_kMaxPrecisionDigits)
+    {
         return false;
     }
 
@@ -5937,13 +6421,13 @@ static bool D2S_ToPrecision(DoubleToStringConverter *conv,
     char decimal_rep[D2S_kMaxPrecisionDigits + 1]; // kDecimalRepCapacity
     int decimal_rep_length;
 
-    D2S_DoubleToAscii(value, DtoaMode_PRECISION, precision,
-                      decimal_rep, kDecimalRepCapacity,
-                      &sign, &decimal_rep_length, &decimal_point);
+    D2S_DoubleToAscii(
+        value, DtoaMode_PRECISION, precision, decimal_rep, kDecimalRepCapacity, &sign, &decimal_rep_length, &decimal_point);
     DOUBLE_CONVERSION_ASSERT(decimal_rep_length <= precision);
 
     bool unique_zero = ((conv->flags & D2S_UNIQUE_ZERO) != 0);
-    if (sign && (value != 0.0 || !unique_zero)) {
+    if (sign && (value != 0.0 || !unique_zero))
+    {
         StringBuilder_AddCharacter(sb, '-');
     }
 
@@ -5952,81 +6436,84 @@ static bool D2S_ToPrecision(DoubleToStringConverter *conv,
     int exponent = decimal_point - 1;
 
     int extra_zero = ((conv->flags & D2S_EMIT_TRAILING_ZERO_AFTER_POINT) != 0) ? 1 : 0;
-    bool as_exponential =
-        (-decimal_point + 1 > conv->max_leading_padding_zeroes_in_precision_mode) ||
-        (decimal_point - precision + extra_zero >
-         conv->max_trailing_padding_zeroes_in_precision_mode);
-    if ((conv->flags & D2S_NO_TRAILING_ZERO) != 0) {
+    bool as_exponential = (-decimal_point + 1 > conv->max_leading_padding_zeroes_in_precision_mode) ||
+                          (decimal_point - precision + extra_zero > conv->max_trailing_padding_zeroes_in_precision_mode);
+    if ((conv->flags & D2S_NO_TRAILING_ZERO) != 0)
+    {
         // Truncate trailing zeros that occur after the decimal point (if exponential,
         // that is everything after the first digit).
         int stop = as_exponential ? 1 : MAX(1, decimal_point);
-        while (decimal_rep_length > stop && decimal_rep[decimal_rep_length - 1] == '0') {
+        while (decimal_rep_length > stop && decimal_rep[decimal_rep_length - 1] == '0')
+        {
             --decimal_rep_length;
         }
         // Clamp precision to avoid the code below re-adding the zeros.
         precision = MIN(precision, decimal_rep_length);
     }
-    if (as_exponential) {
+    if (as_exponential)
+    {
         // Fill buffer to contain 'precision' digits.
         // Usually the buffer is already at the correct length, but 'DoubleToAscii'
         // is allowed to return less characters.
-        for (int i = decimal_rep_length; i < precision; ++i) {
+        for (int i = decimal_rep_length; i < precision; ++i)
+        {
             decimal_rep[i] = '0';
         }
 
-        D2S_CreateExponentialRepresentation(conv,
-                                            decimal_rep,
-                                            precision,
-                                            exponent,
-                                            sb);
-    } else {
-        D2S_CreateDecimalRepresentation(conv,decimal_rep, decimal_rep_length, decimal_point,
-                                        MAX(0, precision - decimal_point),
-                                        sb);
+        D2S_CreateExponentialRepresentation(conv, decimal_rep, precision, exponent, sb);
+    }
+    else
+    {
+        D2S_CreateDecimalRepresentation(
+            conv, decimal_rep, decimal_rep_length, decimal_point, MAX(0, precision - decimal_point), sb);
     }
     return true;
 }
 
-static BignumDtoaMode DtoaToBignumDtoaMode(DtoaMode dtoa_mode) {
-    switch (dtoa_mode) {
-        case DtoaMode_SHORTEST:  return BIGNUM_DTOA_SHORTEST;
-        case DtoaMode_SHORTEST_SINGLE: return BIGNUM_DTOA_SHORTEST_SINGLE;
-        case DtoaMode_FIXED:     return BIGNUM_DTOA_FIXED;
-        case DtoaMode_PRECISION: return BIGNUM_DTOA_PRECISION;
-        default:
-            DOUBLE_CONVERSION_UNREACHABLE();
+static BignumDtoaMode DtoaToBignumDtoaMode(DtoaMode dtoa_mode)
+{
+    switch (dtoa_mode)
+    {
+    case DtoaMode_SHORTEST:
+        return BIGNUM_DTOA_SHORTEST;
+    case DtoaMode_SHORTEST_SINGLE:
+        return BIGNUM_DTOA_SHORTEST_SINGLE;
+    case DtoaMode_FIXED:
+        return BIGNUM_DTOA_FIXED;
+    case DtoaMode_PRECISION:
+        return BIGNUM_DTOA_PRECISION;
+    default:
+        DOUBLE_CONVERSION_UNREACHABLE();
     }
 }
 
-static void D2S_DoubleToAscii(double v,
-                              DtoaMode mode,
-                              int requested_digits,
-                              char *buffer,
-                              int buffer_length,
-                              bool *sign,
-                              int *length,
-                              int *point) {
+static void D2S_DoubleToAscii(
+    double v, DtoaMode mode, int requested_digits, char* buffer, int buffer_length, bool* sign, int* length, int* point)
+{
     Vector vector = Vector_make(buffer, buffer_length);
     Double d = Double_make(v);
     DOUBLE_CONVERSION_ASSERT(!Double_IsSpecial(&d));
-    DOUBLE_CONVERSION_ASSERT(mode == DtoaMode_SHORTEST ||
-                             mode == DtoaMode_SHORTEST_SINGLE ||
-                             requested_digits >= 0);
+    DOUBLE_CONVERSION_ASSERT(mode == DtoaMode_SHORTEST || mode == DtoaMode_SHORTEST_SINGLE || requested_digits >= 0);
 
-    if (Double_Sign(&d) < 0) {
+    if (Double_Sign(&d) < 0)
+    {
         *sign = true;
         v = -v;
-    } else {
+    }
+    else
+    {
         *sign = false;
     }
 
-    if (mode == DtoaMode_PRECISION && requested_digits == 0) {
+    if (mode == DtoaMode_PRECISION && requested_digits == 0)
+    {
         vector.start[0] = '\0';
         *length = 0;
         return;
     }
 
-    if (v == 0) {
+    if (v == 0)
+    {
         vector.start[0] = '0';
         vector.start[1] = '\0';
         *length = 1;
@@ -6035,26 +6522,26 @@ static void D2S_DoubleToAscii(double v,
     }
 
     bool fast_worked;
-    switch (mode) {
-        case DtoaMode_SHORTEST:
-            fast_worked = FastDtoa(v, FAST_DTOA_SHORTEST, 0, &vector, length, point);
-            break;
-        case DtoaMode_SHORTEST_SINGLE:
-            fast_worked = FastDtoa(v, FAST_DTOA_SHORTEST_SINGLE, 0,
-                             &vector, length, point);
-            break;
-        case DtoaMode_FIXED:
-            fast_worked = FastFixedDtoa(v, requested_digits, &vector, length, point);
-            break;
-        case DtoaMode_PRECISION:
-            fast_worked = FastDtoa(v, FAST_DTOA_PRECISION, requested_digits,
-                             &vector, length, point);
-            break;
-        default:
-            fast_worked = false;
-            DOUBLE_CONVERSION_UNREACHABLE();
+    switch (mode)
+    {
+    case DtoaMode_SHORTEST:
+        fast_worked = FastDtoa(v, FAST_DTOA_SHORTEST, 0, &vector, length, point);
+        break;
+    case DtoaMode_SHORTEST_SINGLE:
+        fast_worked = FastDtoa(v, FAST_DTOA_SHORTEST_SINGLE, 0, &vector, length, point);
+        break;
+    case DtoaMode_FIXED:
+        fast_worked = FastFixedDtoa(v, requested_digits, &vector, length, point);
+        break;
+    case DtoaMode_PRECISION:
+        fast_worked = FastDtoa(v, FAST_DTOA_PRECISION, requested_digits, &vector, length, point);
+        break;
+    default:
+        fast_worked = false;
+        DOUBLE_CONVERSION_UNREACHABLE();
     }
-    if (fast_worked) return;
+    if (fast_worked)
+        return;
 
     // If the fast dtoa didn't succeed use the slower bignum version.
     BignumDtoaMode bignum_mode = DtoaToBignumDtoaMode(mode);
@@ -6062,51 +6549,65 @@ static void D2S_DoubleToAscii(double v,
     vector.start[*length] = '\0';
 }
 
-
-
 /// ============================================================================
 /// C wrapper
 /// ============================================================================
 
-static int imp_dtoa(bool is_double, double val, goo_fmt fmt, int prec, char *buf, int len) {
-    if (!buf || len < 1) return 0;
+static int imp_dtoa(bool is_double, double val, goo_fmt fmt, int prec, char* buf, int len)
+{
+    if (!buf || len < 1)
+        return 0;
     StringBuilder sb = StringBuilder_make(buf, len);
 
     DoubleToStringConverter conv = D2S_EcmaScriptConverter;
     conv.flags = D2S_EMIT_TRAILING_DECIMAL_POINT | D2S_EMIT_TRAILING_ZERO_AFTER_POINT;
-    if (fmt == GOO_FMT_SHORTEST) {
-        if (is_double) {
-            if (!D2S_ToShortest(&conv, val, &sb)) return 0;
-        } else {
-            if (!D2S_ToShortestSingle(&conv, (float)val, &sb)) return 0;
+    if (fmt == GOO_FMT_SHORTEST)
+    {
+        if (is_double)
+        {
+            if (!D2S_ToShortest(&conv, val, &sb))
+                return 0;
         }
-    } else if (fmt == GOO_FMT_FIXED) {
-        if (!D2S_ToFixed(&conv, val, prec, &sb)) return 0;
-    } else if (fmt == GOO_FMT_PRECISION) {
-        if (!D2S_ToPrecision(&conv, val, prec, &sb)) return 0;
-    } else if (fmt == GOO_FMT_EXPONENTIAL) {
-        if (!D2S_ToExponential(&conv, val, prec, &sb)) return 0;
+        else
+        {
+            if (!D2S_ToShortestSingle(&conv, (float)val, &sb))
+                return 0;
+        }
+    }
+    else if (fmt == GOO_FMT_FIXED)
+    {
+        if (!D2S_ToFixed(&conv, val, prec, &sb))
+            return 0;
+    }
+    else if (fmt == GOO_FMT_PRECISION)
+    {
+        if (!D2S_ToPrecision(&conv, val, prec, &sb))
+            return 0;
+    }
+    else if (fmt == GOO_FMT_EXPONENTIAL)
+    {
+        if (!D2S_ToExponential(&conv, val, prec, &sb))
+            return 0;
     }
 
     int pos = sb.position;
-    if (pos >= len) return 0;
+    if (pos >= len)
+        return 0;
     buf[pos] = '\0';
     return pos;
 }
 
-double imp_strtod(bool is_double, const char *str, int len, int *proc_out) {
-    if (proc_out) *proc_out = 0;
-    if (!str || !len) return 0.0;
+double imp_strtod(bool is_double, const char* str, int len, int* proc_out)
+{
+    if (proc_out)
+        *proc_out = 0;
+    if (!str || !len)
+        return 0.0;
     int proc = 0;
 
     StringToDoubleConverter conv;
-    conv.flags =
-        S2D_ALLOW_HEX |
-        S2D_ALLOW_TRAILING_JUNK |
-        S2D_ALLOW_LEADING_SPACES |
-        S2D_ALLOW_TRAILING_SPACES |
-        S2D_ALLOW_CASE_INSENSITIVITY |
-        S2D_ALLOW_HEX_FLOATS;
+    conv.flags = S2D_ALLOW_HEX | S2D_ALLOW_TRAILING_JUNK | S2D_ALLOW_LEADING_SPACES | S2D_ALLOW_TRAILING_SPACES |
+                 S2D_ALLOW_CASE_INSENSITIVITY | S2D_ALLOW_HEX_FLOATS;
     conv.empty_string_value = 0.0;
     conv.junk_string_value = 0.0;
     conv.infinity_symbol = "inf";
@@ -6114,72 +6615,88 @@ double imp_strtod(bool is_double, const char *str, int len, int *proc_out) {
     conv.separator = '\0';
 
     double val = StringToIeee(&conv, str, len, is_double, &proc);
-    if (proc == 0) {
-        if (proc_out) *proc_out = proc;
+    if (proc == 0)
+    {
+        if (proc_out)
+            *proc_out = proc;
         return 0.0;
     }
 
     // process "infinity" literal
     Double d = Double_make(val);
-    if (Double_IsInfinite(&d)) {
-        const char *cur = str;
-        while (S2D_isWhitespace(*cur)) cur++;
-        if (*cur == '-' || *cur == '+') cur++;
+    if (Double_IsInfinite(&d))
+    {
+        const char* cur = str;
+        while (S2D_isWhitespace(*cur))
+            cur++;
+        if (*cur == '-' || *cur == '+')
+            cur++;
 
-        const char *full = "infinity";
+        const char* full = "infinity";
         int full_len = (int)strlen(full);
         int full_proc = (int)(cur - str) + full_len;
-        if (full_proc <= len) {
+        if (full_proc <= len)
+        {
             bool full_match = true;
-            for (int i = 0; i < full_len; i++) {
-                if (S2D_ToLower(cur[i]) != full[i]) full_match = false;
+            for (int i = 0; i < full_len; i++)
+            {
+                if (S2D_ToLower(cur[i]) != full[i])
+                    full_match = false;
             }
-            if (full_match) proc = full_proc;
+            if (full_match)
+                proc = full_proc;
         }
     }
 
     // process -0.0
-    if (d.d64 == 0) {
-        for (int i = 0; i < proc; i++) {
-            if (!S2D_isWhitespace(str[i])) {
-                if (str[i] == '-') val = -0.0;
+    if (d.d64 == 0)
+    {
+        for (int i = 0; i < proc; i++)
+        {
+            if (!S2D_isWhitespace(str[i]))
+            {
+                if (str[i] == '-')
+                    val = -0.0;
                 break;
             }
         }
     }
 
-    if (proc_out) *proc_out = proc;
+    if (proc_out)
+        *proc_out = proc;
     return val;
 }
 
-int goo_dtoa(double val, goo_fmt fmt, int prec, char *buf, int len) {
+int goo_dtoa(double val, goo_fmt fmt, int prec, char* buf, int len)
+{
     return imp_dtoa(true, val, fmt, prec, buf, len);
 }
 
-int goo_ftoa(float val, goo_fmt fmt, int prec, char *buf, int len) {
+int goo_ftoa(float val, goo_fmt fmt, int prec, char* buf, int len)
+{
     return imp_dtoa(false, val, fmt, prec, buf, len);
 }
 
-double goo_strtod(const char *str, int len, int *proc) {
+double goo_strtod(const char* str, int len, int* proc)
+{
     return imp_strtod(true, str, len, proc);
 }
 
-float goo_strtof(const char *str, int len, int *proc) {
+float goo_strtof(const char* str, int len, int* proc)
+{
     return (float)imp_strtod(false, str, len, proc);
 }
-
-
 
 /// ============================================================================
 /// Compiler Hint End
 /// ============================================================================
 
 #if defined(__clang__)
-#   pragma clang diagnostic pop
+#pragma clang diagnostic pop
 #elif defined(__GNUC__)
-#   if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
-#   pragma GCC diagnostic pop
-#   endif
+#if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6)
+#pragma GCC diagnostic pop
+#endif
 #elif defined(_MSC_VER)
-#   pragma warning(pop)
+#pragma warning(pop)
 #endif /* warning suppress end */

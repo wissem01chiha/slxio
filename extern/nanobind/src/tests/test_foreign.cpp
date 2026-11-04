@@ -6,11 +6,13 @@
 
 namespace nb = nanobind;
 
-struct Foreign {
+struct Foreign
+{
     int value;
 };
 
-static int exec(PyObject *m) {
+static int exec(PyObject* m)
+{
     if (!nb::register_module(m))
         return -1;
 
@@ -23,9 +25,7 @@ static int exec(PyObject *m) {
     nb::class_<Foreign>(mod, "Foreign")
         .def(nb::init<int>())
         .def_rw("value", &Foreign::value)
-        .def("__repr__", [](const Foreign &f) {
-            return nb::str("Foreign({})").format(f.value);
-        });
+        .def("__repr__", [](const Foreign& f) { return nb::str("Foreign({})").format(f.value); });
 
     mod.def("roundtrip", [](Foreign f) { return f.value; });
 
@@ -38,15 +38,14 @@ static int exec(PyObject *m) {
 
 PyABIInfo_VAR(abi_info);
 
-static PySlot slots[] = {
-    PySlot_PTR(Py_mod_exec, exec),
-    PySlot_PTR(Py_mod_abi, &abi_info),
-    PySlot_PTR(Py_mod_gil, Py_MOD_GIL_NOT_USED),
-    // PySlot_END, spelled out to avoid -Wmissing-field-initializers
-    { Py_slot_end, 0, { 0 }, { nullptr } }
-};
+static PySlot slots[] = {PySlot_PTR(Py_mod_exec, exec),
+                         PySlot_PTR(Py_mod_abi, &abi_info),
+                         PySlot_PTR(Py_mod_gil, Py_MOD_GIL_NOT_USED),
+                         // PySlot_END, spelled out to avoid -Wmissing-field-initializers
+                         {Py_slot_end, 0, {0}, {nullptr}}};
 
-PyMODEXPORT_FUNC PyModExport_test_foreign_ext(void) {
+PyMODEXPORT_FUNC PyModExport_test_foreign_ext(void)
+{
     return slots;
 }
 
@@ -54,28 +53,25 @@ PyMODEXPORT_FUNC PyModExport_test_foreign_ext(void) {
 
 // classic module definition
 
-static PyModuleDef_Slot slots[] = {
-    { Py_mod_exec, (void *) exec },
+static PyModuleDef_Slot slots[] = {{Py_mod_exec, (void*)exec},
 #if defined(NB_FREE_THREADED)
-    { Py_mod_gil, Py_MOD_GIL_NOT_USED },
+                                   {Py_mod_gil, Py_MOD_GIL_NOT_USED},
 #endif
-    { 0, nullptr }
-};
+                                   {0, nullptr}};
 
-static PyModuleDef def = {
-    PyModuleDef_HEAD_INIT,
-    /* m_name = */ "test_foreign_ext",
-    /* m_doc = */ nullptr,
-    /* m_size = */ 0,
-    /* m_methods = */ nullptr,
-    /* m_slots = */ slots,
-    /* m_traverse = */ nullptr,
-    /* m_clear = */ nullptr,
-    /* m_free = */ nullptr
-};
+static PyModuleDef def = {PyModuleDef_HEAD_INIT,
+                          /* m_name = */ "test_foreign_ext",
+                          /* m_doc = */ nullptr,
+                          /* m_size = */ 0,
+                          /* m_methods = */ nullptr,
+                          /* m_slots = */ slots,
+                          /* m_traverse = */ nullptr,
+                          /* m_clear = */ nullptr,
+                          /* m_free = */ nullptr};
 
-extern "C" [[maybe_unused]] NB_EXPORT PyObject *PyInit_test_foreign_ext(void);
-extern "C" PyObject *PyInit_test_foreign_ext(void) {
+extern "C" [[maybe_unused]] NB_EXPORT PyObject* PyInit_test_foreign_ext(void);
+extern "C" PyObject* PyInit_test_foreign_ext(void)
+{
     return PyModuleDef_Init(&def);
 }
 

@@ -6,8 +6,10 @@
 #include "simdjson/portability.h"
 #include <cstddef>
 
-namespace simdjson {
-namespace internal {
+namespace simdjson
+{
+namespace internal
+{
 /**
  * @private
  * Scratch capacity that every caller of to_chars must provide.
@@ -23,7 +25,10 @@ namespace internal {
 // - C++11 targets (readme_examples11, quickstart11, ...) still include this header
 // - a static constexpr in the amalgamated simdjson.cpp TU is unused there
 //   (only callers in headers use it) and trips -Wunused-const-variable -Werror
-enum : size_t { to_chars_buffer_size = 40 };
+enum : size_t
+{
+    to_chars_buffer_size = 40
+};
 /**
  * @private
  * Our own implementation of the C++17 to_chars function.
@@ -34,21 +39,21 @@ enum : size_t { to_chars_buffer_size = 40 };
  * @note The input number must be finite (NaN/Inf are not supported).
  * @note The result is NOT null-terminated.
  */
-char *to_chars(char *first, const char *last, double value);
+char* to_chars(char* first, const char* last, double value);
 /**
  * @private
  * A number parsing routine.
  * Defined in src/from_chars
  */
-double from_chars(const char *first) noexcept;
-double from_chars(const char *first, const char* end) noexcept;
+double from_chars(const char* first) noexcept;
+double from_chars(const char* first, const char* end) noexcept;
 /**
  * @private
  * Same as from_chars, but produces a correctly rounded binary32 (float) value.
  * Defined in src/from_chars
  */
-float from_chars_float(const char *first) noexcept;
-}
+float from_chars_float(const char* first) noexcept;
+} // namespace internal
 
 #ifndef SIMDJSON_EXCEPTIONS
 #if defined(__cpp_exceptions) || defined(_CPPUNWIND)
@@ -66,127 +71,131 @@ float from_chars_float(const char *first) noexcept;
 
 #if defined(__GNUC__)
   // Marks a block with a name so that MCA analysis can see it.
-  #define SIMDJSON_BEGIN_DEBUG_BLOCK(name) __asm volatile("# LLVM-MCA-BEGIN " #name);
-  #define SIMDJSON_END_DEBUG_BLOCK(name) __asm volatile("# LLVM-MCA-END " #name);
-  #define SIMDJSON_DEBUG_BLOCK(name, block) BEGIN_DEBUG_BLOCK(name); block; END_DEBUG_BLOCK(name);
+#define SIMDJSON_BEGIN_DEBUG_BLOCK(name) __asm volatile("# LLVM-MCA-BEGIN " #name);
+#define SIMDJSON_END_DEBUG_BLOCK(name) __asm volatile("# LLVM-MCA-END " #name);
+#define SIMDJSON_DEBUG_BLOCK(name, block)                                                                                          \
+    BEGIN_DEBUG_BLOCK(name);                                                                                                       \
+    block;                                                                                                                         \
+    END_DEBUG_BLOCK(name);
 #else
-  #define SIMDJSON_BEGIN_DEBUG_BLOCK(name)
-  #define SIMDJSON_END_DEBUG_BLOCK(name)
-  #define SIMDJSON_DEBUG_BLOCK(name, block)
+#define SIMDJSON_BEGIN_DEBUG_BLOCK(name)
+#define SIMDJSON_END_DEBUG_BLOCK(name)
+#define SIMDJSON_DEBUG_BLOCK(name, block)
 #endif
 
 // Align to N-byte boundary
-#define SIMDJSON_ROUNDUP_N(a, n) (((a) + ((n)-1)) & ~((n)-1))
+#define SIMDJSON_ROUNDUP_N(a, n) (((a) + ((n) - 1)) & ~((n) - 1))
 
 #if SIMDJSON_REGULAR_VISUAL_STUDIO
   // We could use [[deprecated]] but it requires C++14
-  #define simdjson_deprecated __declspec(deprecated)
+#define simdjson_deprecated __declspec(deprecated)
 
-  #define simdjson_really_inline __forceinline
-  #define simdjson_never_inline inline __declspec(noinline)
-  #define simdjson_really_flatten [[msvc::flatten]]
+#define simdjson_really_inline __forceinline
+#define simdjson_never_inline inline __declspec(noinline)
+#define simdjson_really_flatten [[msvc::flatten]]
 
-  #define simdjson_unused
-  #define simdjson_warn_unused
+#define simdjson_unused
+#define simdjson_warn_unused
 
-  #ifndef simdjson_likely
-  #define simdjson_likely(x) x
-  #endif
-  #ifndef simdjson_unlikely
-  #define simdjson_unlikely(x) x
-  #endif
+#ifndef simdjson_likely
+#define simdjson_likely(x) x
+#endif
+#ifndef simdjson_unlikely
+#define simdjson_unlikely(x) x
+#endif
 
-  #define SIMDJSON_PUSH_DISABLE_WARNINGS __pragma(warning( push ))
-  #define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS __pragma(warning( push, 0 ))
-  #define SIMDJSON_DISABLE_VS_WARNING(WARNING_NUMBER) __pragma(warning( disable : WARNING_NUMBER ))
+#define SIMDJSON_PUSH_DISABLE_WARNINGS __pragma(warning(push))
+#define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS __pragma(warning(push, 0))
+#define SIMDJSON_DISABLE_VS_WARNING(WARNING_NUMBER) __pragma(warning(disable : WARNING_NUMBER))
   // Get rid of Intellisense-only warnings (Code Analysis)
-  // Though __has_include is C++17, it is supported in Visual Studio 2017 or better (_MSC_VER>=1910).
-  #ifdef __has_include
-  #if __has_include(<CppCoreCheck\Warnings.h>)
-  #include <CppCoreCheck\Warnings.h>
-  #define SIMDJSON_DISABLE_UNDESIRED_WARNINGS SIMDJSON_DISABLE_VS_WARNING(ALL_CPPCORECHECK_WARNINGS)
-  #endif
-  #endif
+// Though __has_include is C++17, it is supported in Visual Studio 2017 or better (_MSC_VER>=1910).
+#ifdef __has_include
+#if __has_include(<CppCoreCheck\Warnings.h>)
+#include <CppCoreCheck\Warnings.h>
+#define SIMDJSON_DISABLE_UNDESIRED_WARNINGS SIMDJSON_DISABLE_VS_WARNING(ALL_CPPCORECHECK_WARNINGS)
+#endif
+#endif
 
-  #ifndef SIMDJSON_DISABLE_UNDESIRED_WARNINGS
-  #define SIMDJSON_DISABLE_UNDESIRED_WARNINGS
-  #endif
+#ifndef SIMDJSON_DISABLE_UNDESIRED_WARNINGS
+#define SIMDJSON_DISABLE_UNDESIRED_WARNINGS
+#endif
 
-  #define SIMDJSON_DISABLE_DEPRECATED_WARNING SIMDJSON_DISABLE_VS_WARNING(4996)
-  #define SIMDJSON_DISABLE_STRICT_OVERFLOW_WARNING
-  #define SIMDJSON_POP_DISABLE_WARNINGS __pragma(warning( pop ))
+#define SIMDJSON_DISABLE_DEPRECATED_WARNING SIMDJSON_DISABLE_VS_WARNING(4996)
+#define SIMDJSON_DISABLE_STRICT_OVERFLOW_WARNING
+#define SIMDJSON_POP_DISABLE_WARNINGS __pragma(warning(pop))
 
-  #define SIMDJSON_PUSH_DISABLE_UNUSED_WARNINGS
-  #define SIMDJSON_POP_DISABLE_UNUSED_WARNINGS
+#define SIMDJSON_PUSH_DISABLE_UNUSED_WARNINGS
+#define SIMDJSON_POP_DISABLE_UNUSED_WARNINGS
 
 #else // SIMDJSON_REGULAR_VISUAL_STUDIO
   // We could use [[deprecated]] but it requires C++14
-  #define simdjson_deprecated __attribute__((deprecated))
+#define simdjson_deprecated __attribute__((deprecated))
 
-  #define simdjson_really_inline inline __attribute__((always_inline))
-  #define simdjson_never_inline inline __attribute__((noinline))
-  #define simdjson_really_flatten [[gnu::flatten]]
+#define simdjson_really_inline inline __attribute__((always_inline))
+#define simdjson_never_inline inline __attribute__((noinline))
+#define simdjson_really_flatten [[gnu::flatten]]
 
-  #define simdjson_unused __attribute__((unused))
-  #define simdjson_warn_unused __attribute__((warn_unused_result))
+#define simdjson_unused __attribute__((unused))
+#define simdjson_warn_unused __attribute__((warn_unused_result))
 
-  #ifndef simdjson_likely
-  #define simdjson_likely(x) __builtin_expect(!!(x), 1)
-  #endif
-  #ifndef simdjson_unlikely
-  #define simdjson_unlikely(x) __builtin_expect(!!(x), 0)
-  #endif
+#ifndef simdjson_likely
+#define simdjson_likely(x) __builtin_expect(!!(x), 1)
+#endif
+#ifndef simdjson_unlikely
+#define simdjson_unlikely(x) __builtin_expect(!!(x), 0)
+#endif
 
-  #define SIMDJSON_PUSH_DISABLE_WARNINGS _Pragma("GCC diagnostic push")
+#define SIMDJSON_PUSH_DISABLE_WARNINGS _Pragma("GCC diagnostic push")
   // gcc doesn't seem to disable all warnings with all and extra, add warnings here as necessary
-  // We do it separately for clang since it has different warnings.
-  #ifdef __clang__
+// We do it separately for clang since it has different warnings.
+#ifdef __clang__
   // clang is missing -Wmaybe-uninitialized.
-  #define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS SIMDJSON_PUSH_DISABLE_WARNINGS \
-    SIMDJSON_DISABLE_GCC_WARNING(-Weffc++) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wall) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wconversion) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wextra) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wattributes) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wimplicit-fallthrough) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wnon-virtual-dtor) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wreturn-type) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wshadow) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wunused-parameter) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wunused-variable)
-  #else // __clang__
-  #define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS SIMDJSON_PUSH_DISABLE_WARNINGS \
-    SIMDJSON_DISABLE_GCC_WARNING(-Weffc++) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wall) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wconversion) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wextra) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wattributes) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wimplicit-fallthrough) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wnon-virtual-dtor) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wreturn-type) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wshadow) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wunused-parameter) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wunused-variable) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wmaybe-uninitialized) \
-    SIMDJSON_DISABLE_GCC_WARNING(-Wformat-security)
-  #endif // __clang__
+#define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS                                                                                         \
+    SIMDJSON_PUSH_DISABLE_WARNINGS                                                                                                 \
+    SIMDJSON_DISABLE_GCC_WARNING(-Weffc++)                                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wall)                                                                                            \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wconversion)                                                                                     \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wextra)                                                                                          \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wattributes)                                                                                     \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wimplicit - fallthrough)                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wnon - virtual - dtor)                                                                           \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wreturn - type)                                                                                  \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wshadow)                                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wunused - parameter)                                                                             \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wunused - variable)
+#else // __clang__
+#define SIMDJSON_PUSH_DISABLE_ALL_WARNINGS                                                                                         \
+    SIMDJSON_PUSH_DISABLE_WARNINGS                                                                                                 \
+    SIMDJSON_DISABLE_GCC_WARNING(-Weffc++)                                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wall)                                                                                            \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wconversion)                                                                                     \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wextra)                                                                                          \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wattributes)                                                                                     \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wimplicit - fallthrough)                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wnon - virtual - dtor)                                                                           \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wreturn - type)                                                                                  \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wshadow)                                                                                         \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wunused - parameter)                                                                             \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wunused - variable)                                                                              \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wmaybe - uninitialized)                                                                          \
+    SIMDJSON_DISABLE_GCC_WARNING(-Wformat - security)
+#endif // __clang__
 
-  #define SIMDJSON_PRAGMA(P) _Pragma(#P)
-  #define SIMDJSON_DISABLE_GCC_WARNING(WARNING) SIMDJSON_PRAGMA(GCC diagnostic ignored #WARNING)
-  #if SIMDJSON_CLANG_VISUAL_STUDIO
-  #define SIMDJSON_DISABLE_UNDESIRED_WARNINGS SIMDJSON_DISABLE_GCC_WARNING(-Wmicrosoft-include)
-  #else
-  #define SIMDJSON_DISABLE_UNDESIRED_WARNINGS
-  #endif
-  #define SIMDJSON_DISABLE_DEPRECATED_WARNING SIMDJSON_DISABLE_GCC_WARNING(-Wdeprecated-declarations)
-  #define SIMDJSON_DISABLE_STRICT_OVERFLOW_WARNING SIMDJSON_DISABLE_GCC_WARNING(-Wstrict-overflow)
-  #define SIMDJSON_POP_DISABLE_WARNINGS _Pragma("GCC diagnostic pop")
+#define SIMDJSON_PRAGMA(P) _Pragma(#P)
+#define SIMDJSON_DISABLE_GCC_WARNING(WARNING) SIMDJSON_PRAGMA(GCC diagnostic ignored #WARNING)
+#if SIMDJSON_CLANG_VISUAL_STUDIO
+#define SIMDJSON_DISABLE_UNDESIRED_WARNINGS SIMDJSON_DISABLE_GCC_WARNING(-Wmicrosoft - include)
+#else
+#define SIMDJSON_DISABLE_UNDESIRED_WARNINGS
+#endif
+#define SIMDJSON_DISABLE_DEPRECATED_WARNING SIMDJSON_DISABLE_GCC_WARNING(-Wdeprecated - declarations)
+#define SIMDJSON_DISABLE_STRICT_OVERFLOW_WARNING SIMDJSON_DISABLE_GCC_WARNING(-Wstrict - overflow)
+#define SIMDJSON_POP_DISABLE_WARNINGS _Pragma("GCC diagnostic pop")
 
-  #define SIMDJSON_PUSH_DISABLE_UNUSED_WARNINGS SIMDJSON_PUSH_DISABLE_WARNINGS \
+#define SIMDJSON_PUSH_DISABLE_UNUSED_WARNINGS                                                                                      \
+    SIMDJSON_PUSH_DISABLE_WARNINGS                                                                                                 \
     SIMDJSON_DISABLE_GCC_WARNING(-Wunused)
-  #define SIMDJSON_POP_DISABLE_UNUSED_WARNINGS SIMDJSON_POP_DISABLE_WARNINGS
-
-
+#define SIMDJSON_POP_DISABLE_UNUSED_WARNINGS SIMDJSON_POP_DISABLE_WARNINGS
 
 #endif // MSC_VER
 
@@ -194,53 +203,53 @@ float from_chars_float(const char *first) noexcept;
   // Prefer the user's definition of simdjson_inline; don't define it ourselves.
 #elif defined(__GNUC__) && !defined(__OPTIMIZE__)
   // If optimizations are disabled, forcing inlining can lead to significant
-  // code bloat and high compile times. Don't use simdjson_really_inline for
-  // unoptimized builds.
-  #define simdjson_inline inline
+// code bloat and high compile times. Don't use simdjson_really_inline for
+// unoptimized builds.
+#define simdjson_inline inline
 #else
   // Force inlining for most simdjson functions.
-  #define simdjson_inline simdjson_really_inline
+#define simdjson_inline simdjson_really_inline
 #endif
 
 #if defined(simdjson_flatten)
   // Prefer the user's definition of simdjson_flatten; don't define it ourselves.
-#elif (defined(__GNUC__) && !defined(__OPTIMIZE__)) || (defined(_DEBUG) && _MSC_VER )
+#elif (defined(__GNUC__) && !defined(__OPTIMIZE__)) || (defined(_DEBUG) && _MSC_VER)
   // Flattening can lead to significant code bloat and high compile times. Don't use it for unoptimized builds.
-  #define simdjson_flatten
+#define simdjson_flatten
 #else
-  #define simdjson_flatten simdjson_really_flatten
+#define simdjson_flatten simdjson_really_flatten
 #endif
 
 #if SIMDJSON_VISUAL_STUDIO
-    /**
-     * Windows users need to do some extra work when building
-     * or using a dynamic library (DLL). When building, we need
-     * to set SIMDJSON_DLLIMPORTEXPORT to __declspec(dllexport).
-     * When *using* the DLL, the user needs to set
-     * SIMDJSON_DLLIMPORTEXPORT __declspec(dllimport).
-     *
-     * Static libraries not need require such work.
-     *
-     * It does not matter here whether you are using
-     * the regular visual studio or clang under visual
-     * studio, you still need to handle these issues.
-     *
-     * Non-Windows systems do not have this complexity.
-     */
-    #if SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY
-    // We set SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY when we build a DLL under Windows.
-    // It should never happen that both SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY and
-    // SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY are set.
-    #define SIMDJSON_DLLIMPORTEXPORT __declspec(dllexport)
-    #elif SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY
-    // Windows user who call a dynamic library should set SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY to 1.
-    #define SIMDJSON_DLLIMPORTEXPORT __declspec(dllimport)
-    #else
-    // We assume by default static linkage
-    #define SIMDJSON_DLLIMPORTEXPORT
-    #endif
+/**
+ * Windows users need to do some extra work when building
+ * or using a dynamic library (DLL). When building, we need
+ * to set SIMDJSON_DLLIMPORTEXPORT to __declspec(dllexport).
+ * When *using* the DLL, the user needs to set
+ * SIMDJSON_DLLIMPORTEXPORT __declspec(dllimport).
+ *
+ * Static libraries not need require such work.
+ *
+ * It does not matter here whether you are using
+ * the regular visual studio or clang under visual
+ * studio, you still need to handle these issues.
+ *
+ * Non-Windows systems do not have this complexity.
+ */
+#if SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY
+  // We set SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY when we build a DLL under Windows.
+// It should never happen that both SIMDJSON_BUILDING_WINDOWS_DYNAMIC_LIBRARY and
+// SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY are set.
+#define SIMDJSON_DLLIMPORTEXPORT __declspec(dllexport)
+#elif SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY
+  // Windows user who call a dynamic library should set SIMDJSON_USING_WINDOWS_DYNAMIC_LIBRARY to 1.
+#define SIMDJSON_DLLIMPORTEXPORT __declspec(dllimport)
 #else
-    #define SIMDJSON_DLLIMPORTEXPORT
+  // We assume by default static linkage
+#define SIMDJSON_DLLIMPORTEXPORT
+#endif
+#else
+#define SIMDJSON_DLLIMPORTEXPORT
 #endif
 
 // C++17 requires string_view.
@@ -266,7 +275,7 @@ float from_chars_float(const char *first) noexcept;
 #ifndef SIMDJSON_HAS_STRING_VIEW
 #if defined __has_include
 // do not combine the next #if with the previous one (unsafe)
-#if __has_include (<string_view>)
+#if __has_include(<string_view>)
 // now it is safe to trigger the include
 #include <string_view> // though the file is there, it does not follow that we got the implementation
 #if defined(_LIBCPP_STRING_VIEW)
@@ -292,14 +301,22 @@ SIMDJSON_PUSH_DISABLE_ALL_WARNINGS
 #include "simdjson/nonstd/string_view.hpp"
 SIMDJSON_POP_DISABLE_WARNINGS
 
-namespace std {
-  using string_view = nonstd::string_view;
+namespace std
+{
+using string_view = nonstd::string_view;
 }
-#endif // SIMDJSON_HAS_STRING_VIEW
+#endif                          // SIMDJSON_HAS_STRING_VIEW
 #undef SIMDJSON_HAS_STRING_VIEW // We are not going to need this macro anymore.
 
 /// If EXPR is an error, returns it.
-#define SIMDJSON_TRY(EXPR) { auto _err = (EXPR); if (_err) { return _err; } }
+#define SIMDJSON_TRY(EXPR)                                                                                                         \
+    {                                                                                                                              \
+        auto _err = (EXPR);                                                                                                        \
+        if (_err)                                                                                                                  \
+        {                                                                                                                          \
+            return _err;                                                                                                           \
+        }                                                                                                                          \
+    }
 
 // Unless the programmer has already set SIMDJSON_DEVELOPMENT_CHECKS,
 // we want to set it under debug builds. We detect a debug build
@@ -324,7 +341,7 @@ namespace std {
 #if defined(_DEBUG) && !defined(NDEBUG)
 #define SIMDJSON_DEVELOPMENT_CHECKS 1
 #endif // _DEBUG
-#else // _MSC_VER
+#else  // _MSC_VER
 // All other compilers appear to set __OPTIMIZE__ to a positive integer
 // when the compiler is optimizing.
 // We only set SIMDJSON_DEVELOPMENT_CHECKS if both __OPTIMIZE__
@@ -342,24 +359,34 @@ namespace std {
 
 #if SIMDJSON_CPLUSPLUS17
 // if we have C++, then fallthrough is a default attribute
-# define simdjson_fallthrough [[fallthrough]]
+#define simdjson_fallthrough [[fallthrough]]
 // check if we have __attribute__ support
 #elif defined(__has_attribute)
 // check if we have the __fallthrough__ attribute
 #if __has_attribute(__fallthrough__)
 // we are good to go:
-# define simdjson_fallthrough                    __attribute__((__fallthrough__))
+#define simdjson_fallthrough __attribute__((__fallthrough__))
 #endif // __has_attribute(__fallthrough__)
 #endif // SIMDJSON_CPLUSPLUS17
 // on some systems, we simply do not have support for fallthrough, so use a default:
 #ifndef simdjson_fallthrough
-# define simdjson_fallthrough do {} while (0)  /* fallthrough */
-#endif // simdjson_fallthrough
+#define simdjson_fallthrough                                                                                                       \
+    do                                                                                                                             \
+    {                                                                                                                              \
+    } while (0) /* fallthrough */
+#endif          // simdjson_fallthrough
 
 #if SIMDJSON_DEVELOPMENT_CHECKS
-#define SIMDJSON_DEVELOPMENT_ASSERT(expr) do { assert ((expr)); } while (0)
+#define SIMDJSON_DEVELOPMENT_ASSERT(expr)                                                                                          \
+    do                                                                                                                             \
+    {                                                                                                                              \
+        assert((expr));                                                                                                            \
+    } while (0)
 #else
-#define SIMDJSON_DEVELOPMENT_ASSERT(expr) do { } while (0)
+#define SIMDJSON_DEVELOPMENT_ASSERT(expr)                                                                                          \
+    do                                                                                                                             \
+    {                                                                                                                              \
+    } while (0)
 #endif
 
 #ifndef SIMDJSON_UTF8VALIDATION
@@ -386,7 +413,6 @@ namespace std {
 #ifndef SIMDJSON_AVX512_ALLOWED
 #define SIMDJSON_AVX512_ALLOWED 1
 #endif
-
 
 #ifndef __has_cpp_attribute
 #define simdjson_lifetime_bound

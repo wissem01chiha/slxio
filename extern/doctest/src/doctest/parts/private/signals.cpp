@@ -6,13 +6,21 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 #if !defined(DOCTEST_CONFIG_POSIX_SIGNALS) && !defined(DOCTEST_CONFIG_WINDOWS_SEH)
-void FatalConditionHandler::reset() {}
-void FatalConditionHandler::allocateAltStackMem() {}
-void FatalConditionHandler::freeAltStackMem() {}
+void FatalConditionHandler::reset()
+{
+}
+void FatalConditionHandler::allocateAltStackMem()
+{
+}
+void FatalConditionHandler::freeAltStackMem()
+{
+}
 #else // DOCTEST_CONFIG_POSIX_SIGNALS || DOCTEST_CONFIG_WINDOWS_SEH
 
 #ifdef DOCTEST_PLATFORM_WINDOWS
@@ -27,17 +35,21 @@ SignalDefs signalDefs[] = {
     {static_cast<DWORD>(EXCEPTION_INT_DIVIDE_BY_ZERO), "Divide by zero error"},
 };
 
-LONG CALLBACK FatalConditionHandler::handleException(PEXCEPTION_POINTERS ExceptionInfo) {
+LONG CALLBACK FatalConditionHandler::handleException(PEXCEPTION_POINTERS ExceptionInfo)
+{
     // Multiple threads may enter this filter/handler at once. We want the error message to be
     // printed on the console just once no matter how many threads have crashed.
     DOCTEST_DECLARE_STATIC_MUTEX(mutex)
     static bool execute = true;
     {
         DOCTEST_LOCK_MUTEX(mutex)
-        if (execute) {
+        if (execute)
+        {
             bool reported = false;
-            for (size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i) {
-                if (ExceptionInfo->ExceptionRecord->ExceptionCode == signalDefs[i].id) {
+            for (size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i)
+            {
+                if (ExceptionInfo->ExceptionRecord->ExceptionCode == signalDefs[i].id)
+                {
                     reportFatal(signalDefs[i].name);
                     reported = true;
                     break;
@@ -53,10 +65,15 @@ LONG CALLBACK FatalConditionHandler::handleException(PEXCEPTION_POINTERS Excepti
     std::exit(EXIT_FAILURE);
 }
 
-void FatalConditionHandler::allocateAltStackMem() {}
-void FatalConditionHandler::freeAltStackMem() {}
+void FatalConditionHandler::allocateAltStackMem()
+{
+}
+void FatalConditionHandler::freeAltStackMem()
+{
+}
 
-FatalConditionHandler::FatalConditionHandler() {
+FatalConditionHandler::FatalConditionHandler()
+{
     isSet = true;
     // 32k seems enough for doctest to handle stack overflow,
     // but the value was found experimentally, so there is no strong guarantee
@@ -73,33 +90,37 @@ FatalConditionHandler::FatalConditionHandler() {
     // - std::terminate is called FROM THE TEST RUNNER THREAD
     // - an exception is thrown from a destructor FROM THE TEST RUNNER THREAD
     original_terminate_handler = std::get_terminate();
-    std::set_terminate([]() DOCTEST_NOEXCEPT {
-        reportFatal("Terminate handler called");
-        if (isDebuggerActive() && !g_cs->no_breaks)
-            DOCTEST_BREAK_INTO_DEBUGGER();
-        std::exit(EXIT_FAILURE); // explicitly exit - otherwise the SIGABRT handler may be called as well
-    });
+    std::set_terminate(
+        []() DOCTEST_NOEXCEPT
+        {
+            reportFatal("Terminate handler called");
+            if (isDebuggerActive() && !g_cs->no_breaks)
+                DOCTEST_BREAK_INTO_DEBUGGER();
+            std::exit(EXIT_FAILURE); // explicitly exit - otherwise the SIGABRT handler may be called as well
+        });
 
     // SIGABRT is raised when:
     // - std::terminate is called FROM A DIFFERENT THREAD
     // - an exception is thrown from a destructor FROM A DIFFERENT THREAD
     // - an uncaught exception is thrown FROM A DIFFERENT THREAD
-    prev_sigabrt_handler = std::signal(SIGABRT, [](int signal) DOCTEST_NOEXCEPT {
-        if (signal == SIGABRT) {
-            reportFatal("SIGABRT - Abort (abnormal termination) signal");
-            if (isDebuggerActive() && !g_cs->no_breaks)
-                DOCTEST_BREAK_INTO_DEBUGGER();
-            std::exit(EXIT_FAILURE);
-        }
-    });
+    prev_sigabrt_handler = std::signal(SIGABRT,
+                                       [](int signal) DOCTEST_NOEXCEPT
+                                       {
+                                           if (signal == SIGABRT)
+                                           {
+                                               reportFatal("SIGABRT - Abort (abnormal termination) signal");
+                                               if (isDebuggerActive() && !g_cs->no_breaks)
+                                                   DOCTEST_BREAK_INTO_DEBUGGER();
+                                               std::exit(EXIT_FAILURE);
+                                           }
+                                       });
 
     // The following settings are taken from google test, and more
     // specifically from UnitTest::Run() inside of gtest.cc
 
     // the user does not want to see pop-up dialogs about crashes
-    prev_error_mode_1 = SetErrorMode(
-        SEM_FAILCRITICALERRORS | SEM_NOALIGNMENTFAULTEXCEPT | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX
-    );
+    prev_error_mode_1 =
+        SetErrorMode(SEM_FAILCRITICALERRORS | SEM_NOALIGNMENTFAULTEXCEPT | SEM_NOGPFAULTERRORBOX | SEM_NOOPENFILEERRORBOX);
     // This forces the abort message to go to stderr in all circumstances.
     prev_error_mode_2 = _set_error_mode(_OUT_TO_STDERR);
     // In the debug version, Visual Studio pops up a separate dialog
@@ -113,8 +134,10 @@ FatalConditionHandler::FatalConditionHandler() {
     prev_report_file = _CrtSetReportFile(_CRT_ASSERT, _CRTDBG_FILE_STDERR);
 }
 
-void FatalConditionHandler::reset() {
-    if (isSet) {
+void FatalConditionHandler::reset()
+{
+    if (isSet)
+    {
         // Unregister handler and restore the old guarantee
         SetUnhandledExceptionFilter(previousTop);
         SetThreadStackGuarantee(&guaranteeSize);
@@ -129,7 +152,8 @@ void FatalConditionHandler::reset() {
     }
 }
 
-FatalConditionHandler::~FatalConditionHandler() {
+FatalConditionHandler::~FatalConditionHandler()
+{
     reset();
 }
 
@@ -138,7 +162,7 @@ int FatalConditionHandler::prev_error_mode_2;
 unsigned int FatalConditionHandler::prev_abort_behavior;
 int FatalConditionHandler::prev_report_mode;
 _HFILE FatalConditionHandler::prev_report_file;
-void(DOCTEST_CDECL *FatalConditionHandler::prev_sigabrt_handler)(int);
+void(DOCTEST_CDECL* FatalConditionHandler::prev_sigabrt_handler)(int);
 std::terminate_handler FatalConditionHandler::original_terminate_handler;
 bool FatalConditionHandler::isSet = false;
 ULONG FatalConditionHandler::guaranteeSize = 0;
@@ -146,23 +170,22 @@ LPTOP_LEVEL_EXCEPTION_FILTER FatalConditionHandler::previousTop = nullptr;
 
 #else // DOCTEST_PLATFORM_WINDOWS
 
-SignalDefs signalDefs[] = {
-    {SIGINT, "SIGINT - Terminal interrupt signal"},
-    {SIGILL, "SIGILL - Illegal instruction signal"},
-    {SIGFPE, "SIGFPE - Floating point error signal"},
-    {SIGSEGV, "SIGSEGV - Segmentation violation signal"},
-    {SIGTERM, "SIGTERM - Termination request signal"},
-    {SIGABRT, "SIGABRT - Abort (abnormal termination) signal"}
-};
-static_assert(
-    DOCTEST_COUNTOF(signalDefs) == DOCTEST_COUNTOF(FatalConditionHandler::oldSigActions), "arrays should match in size"
-);
+SignalDefs signalDefs[] = {{SIGINT, "SIGINT - Terminal interrupt signal"},
+                           {SIGILL, "SIGILL - Illegal instruction signal"},
+                           {SIGFPE, "SIGFPE - Floating point error signal"},
+                           {SIGSEGV, "SIGSEGV - Segmentation violation signal"},
+                           {SIGTERM, "SIGTERM - Termination request signal"},
+                           {SIGABRT, "SIGABRT - Abort (abnormal termination) signal"}};
+static_assert(DOCTEST_COUNTOF(signalDefs) == DOCTEST_COUNTOF(FatalConditionHandler::oldSigActions), "arrays should match in size");
 
-void FatalConditionHandler::handleSignal(int sig) {
-    const char *name = "<unknown signal>";
-    for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i) {
-        const SignalDefs &def = signalDefs[i];
-        if (sig == def.id) {
+void FatalConditionHandler::handleSignal(int sig)
+{
+    const char* name = "<unknown signal>";
+    for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i)
+    {
+        const SignalDefs& def = signalDefs[i];
+        if (sig == def.id)
+        {
             name = def.name;
             break;
         }
@@ -172,15 +195,18 @@ void FatalConditionHandler::handleSignal(int sig) {
     static_cast<void>(raise(sig));
 }
 
-void FatalConditionHandler::allocateAltStackMem() {
+void FatalConditionHandler::allocateAltStackMem()
+{
     altStackMem = new char[altStackSize];
 }
 
-void FatalConditionHandler::freeAltStackMem() {
+void FatalConditionHandler::freeAltStackMem()
+{
     delete[] altStackMem;
 }
 
-FatalConditionHandler::FatalConditionHandler() {
+FatalConditionHandler::FatalConditionHandler()
+{
     isSet = true;
     stack_t sigStack;
     sigStack.ss_sp = altStackMem;
@@ -190,19 +216,24 @@ FatalConditionHandler::FatalConditionHandler() {
     struct sigaction sa = {};
     sa.sa_handler = handleSignal;
     sa.sa_flags = SA_ONSTACK;
-    for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i) {
+    for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i)
+    {
         sigaction(signalDefs[i].id, &sa, &oldSigActions[i]);
     }
 }
 
-FatalConditionHandler::~FatalConditionHandler() {
+FatalConditionHandler::~FatalConditionHandler()
+{
     reset();
 }
 
-void FatalConditionHandler::reset() {
-    if (isSet) {
+void FatalConditionHandler::reset()
+{
+    if (isSet)
+    {
         // Set signals back to previous values -- hopefully nobody overwrote them in the meantime
-        for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i) {
+        for (std::size_t i = 0; i < DOCTEST_COUNTOF(signalDefs); ++i)
+        {
             sigaction(signalDefs[i].id, &oldSigActions[i], nullptr);
         }
         // Return the old stack
@@ -215,7 +246,7 @@ bool FatalConditionHandler::isSet = false;
 struct sigaction FatalConditionHandler::oldSigActions[DOCTEST_COUNTOF(signalDefs)] = {};
 stack_t FatalConditionHandler::oldSigStack = {};
 size_t FatalConditionHandler::altStackSize = 4 * SIGSTKSZ;
-char *FatalConditionHandler::altStackMem = nullptr;
+char* FatalConditionHandler::altStackMem = nullptr;
 
 #endif // DOCTEST_PLATFORM_WINDOWS
 #endif // DOCTEST_CONFIG_POSIX_SIGNALS || DOCTEST_CONFIG_WINDOWS_SEH

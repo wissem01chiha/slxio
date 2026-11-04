@@ -4,4 +4,6 @@
 #define RETURN_42
 #include "foo.h"
 
-DOCTEST_SYMBOL_EXPORT void return42_cpp_force_link() {}
+DOCTEST_SYMBOL_EXPORT void return42_cpp_force_link()
+{
+}

@@ -142,7 +142,7 @@ TEST_CASE("multi threads", "[async]") {
             logger->flush();
         }
 
-        for (auto &t : threads) {
+        for (auto& t : threads) {
             t.join();
         }
     }

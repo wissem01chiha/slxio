@@ -47,41 +47,46 @@
 #define HASH_MIN_SIZE 256
 #define HASH_MAX_SIZE 0x80000000ul
 
-struct zip_hash_entry {
-    const zip_uint8_t *name;
+struct zip_hash_entry
+{
+    const zip_uint8_t* name;
     zip_int64_t orig_index;
     zip_int64_t current_index;
-    struct zip_hash_entry *next;
+    struct zip_hash_entry* next;
     zip_uint32_t hash_value;
 };
 typedef struct zip_hash_entry zip_hash_entry_t;
 
-struct zip_hash {
+struct zip_hash
+{
     zip_uint32_t table_size;
     zip_uint64_t nentries;
-    zip_hash_entry_t **table;
+    zip_hash_entry_t** table;
 };
 
-
 /* free list of entries */
-static void free_list(zip_hash_entry_t *entry) {
-    while (entry != NULL) {
-        zip_hash_entry_t *next = entry->next;
+static void free_list(zip_hash_entry_t* entry)
+{
+    while (entry != NULL)
+    {
+        zip_hash_entry_t* next = entry->next;
         free(entry);
         entry = next;
     }
 }
 
-
 /* compute hash of string, full 32 bit value */
-static zip_uint32_t hash_string(const zip_uint8_t *name) {
+static zip_uint32_t hash_string(const zip_uint8_t* name)
+{
     zip_uint64_t value = HASH_START;
 
-    if (name == NULL) {
+    if (name == NULL)
+    {
         return 0;
     }
 
-    while (*name != 0) {
+    while (*name != 0)
+    {
         value = (zip_uint64_t)(((value * HASH_MULTIPLIER) + (zip_uint8_t)*name) % 0x100000000ul);
         name++;
     }
@@ -89,27 +94,32 @@ static zip_uint32_t hash_string(const zip_uint8_t *name) {
     return (zip_uint32_t)value;
 }
 
-
 /* resize hash table; new_size must be a power of 2, can be larger or smaller than current size */
-static bool hash_resize(zip_hash_t *hash, zip_uint32_t new_size, zip_error_t *error) {
-    zip_hash_entry_t **new_table;
+static bool hash_resize(zip_hash_t* hash, zip_uint32_t new_size, zip_error_t* error)
+{
+    zip_hash_entry_t** new_table;
 
-    if (new_size == hash->table_size) {
+    if (new_size == hash->table_size)
+    {
         return true;
     }
 
-    if ((new_table = (zip_hash_entry_t **)calloc(new_size, sizeof(zip_hash_entry_t *))) == NULL) {
+    if ((new_table = (zip_hash_entry_t**)calloc(new_size, sizeof(zip_hash_entry_t*))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return false;
     }
 
-    if (hash->nentries > 0) {
+    if (hash->nentries > 0)
+    {
         zip_uint32_t i;
 
-        for (i = 0; i < hash->table_size; i++) {
-            zip_hash_entry_t *entry = hash->table[i];
-            while (entry) {
-                zip_hash_entry_t *next = entry->next;
+        for (i = 0; i < hash->table_size; i++)
+        {
+            zip_hash_entry_t* entry = hash->table[i];
+            while (entry)
+            {
+                zip_hash_entry_t* next = entry->next;
 
                 zip_uint32_t new_index = entry->hash_value % new_size;
 
@@ -128,19 +138,22 @@ static bool hash_resize(zip_hash_t *hash, zip_uint32_t new_size, zip_error_t *er
     return true;
 }
 
-
-static zip_uint32_t size_for_capacity(zip_uint64_t capacity) {
+static zip_uint32_t size_for_capacity(zip_uint64_t capacity)
+{
     double needed_size = capacity / HASH_MAX_FILL;
     zip_uint32_t v;
 
-    if (needed_size > ZIP_UINT32_MAX) {
+    if (needed_size > ZIP_UINT32_MAX)
+    {
         v = ZIP_UINT32_MAX;
     }
-    else {
+    else
+    {
         v = (zip_uint32_t)needed_size;
     }
 
-    if (v > HASH_MAX_SIZE) {
+    if (v > HASH_MAX_SIZE)
+    {
         return HASH_MAX_SIZE;
     }
 
@@ -158,11 +171,12 @@ static zip_uint32_t size_for_capacity(zip_uint64_t capacity) {
     return v;
 }
 
+zip_hash_t* _zip_hash_new(zip_error_t* error)
+{
+    zip_hash_t* hash;
 
-zip_hash_t *_zip_hash_new(zip_error_t *error) {
-    zip_hash_t *hash;
-
-    if ((hash = (zip_hash_t *)malloc(sizeof(zip_hash_t))) == NULL) {
+    if ((hash = (zip_hash_t*)malloc(sizeof(zip_hash_t))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
@@ -174,17 +188,21 @@ zip_hash_t *_zip_hash_new(zip_error_t *error) {
     return hash;
 }
 
-
-void _zip_hash_free(zip_hash_t *hash) {
+void _zip_hash_free(zip_hash_t* hash)
+{
     zip_uint32_t i;
 
-    if (hash == NULL) {
+    if (hash == NULL)
+    {
         return;
     }
 
-    if (hash->table != NULL) {
-        for (i = 0; i < hash->table_size; i++) {
-            if (hash->table[i] != NULL) {
+    if (hash->table != NULL)
+    {
+        for (i = 0; i < hash->table_size; i++)
+        {
+            if (hash->table[i] != NULL)
+            {
                 free_list(hash->table[i]);
             }
         }
@@ -193,19 +211,22 @@ void _zip_hash_free(zip_hash_t *hash) {
     free(hash);
 }
 
-
 /* insert into hash, return error on existence or memory issues */
-bool _zip_hash_add(zip_hash_t *hash, const zip_uint8_t *name, zip_uint64_t index, zip_flags_t flags, zip_error_t *error) {
+bool _zip_hash_add(zip_hash_t* hash, const zip_uint8_t* name, zip_uint64_t index, zip_flags_t flags, zip_error_t* error)
+{
     zip_uint32_t hash_value, table_index;
-    zip_hash_entry_t *entry;
+    zip_hash_entry_t* entry;
 
-    if (hash == NULL || name == NULL || index > ZIP_INT64_MAX) {
+    if (hash == NULL || name == NULL || index > ZIP_INT64_MAX)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return false;
     }
 
-    if (hash->table_size == 0) {
-        if (!hash_resize(hash, HASH_MIN_SIZE, error)) {
+    if (hash->table_size == 0)
+    {
+        if (!hash_resize(hash, HASH_MIN_SIZE, error))
+        {
             return false;
         }
     }
@@ -213,20 +234,26 @@ bool _zip_hash_add(zip_hash_t *hash, const zip_uint8_t *name, zip_uint64_t index
     hash_value = hash_string(name);
     table_index = hash_value % hash->table_size;
 
-    for (entry = hash->table[table_index]; entry != NULL; entry = entry->next) {
-        if (entry->hash_value == hash_value && strcmp((const char *)name, (const char *)entry->name) == 0) {
-            if (((flags & ZIP_FL_UNCHANGED) && entry->orig_index != -1) || entry->current_index != -1) {
+    for (entry = hash->table[table_index]; entry != NULL; entry = entry->next)
+    {
+        if (entry->hash_value == hash_value && strcmp((const char*)name, (const char*)entry->name) == 0)
+        {
+            if (((flags & ZIP_FL_UNCHANGED) && entry->orig_index != -1) || entry->current_index != -1)
+            {
                 zip_error_set(error, ZIP_ER_EXISTS, 0);
                 return false;
             }
-            else {
+            else
+            {
                 break;
             }
         }
     }
 
-    if (entry == NULL) {
-        if ((entry = (zip_hash_entry_t *)malloc(sizeof(zip_hash_entry_t))) == NULL) {
+    if (entry == NULL)
+    {
+        if ((entry = (zip_hash_entry_t*)malloc(sizeof(zip_hash_entry_t))) == NULL)
+        {
             zip_error_set(error, ZIP_ER_MEMORY, 0);
             return false;
         }
@@ -236,14 +263,17 @@ bool _zip_hash_add(zip_hash_t *hash, const zip_uint8_t *name, zip_uint64_t index
         entry->hash_value = hash_value;
         entry->orig_index = -1;
         hash->nentries++;
-        if (hash->nentries > hash->table_size * HASH_MAX_FILL && hash->table_size < HASH_MAX_SIZE) {
-            if (!hash_resize(hash, hash->table_size * 2, error)) {
+        if (hash->nentries > hash->table_size * HASH_MAX_FILL && hash->table_size < HASH_MAX_SIZE)
+        {
+            if (!hash_resize(hash, hash->table_size * 2, error))
+            {
                 return false;
             }
         }
     }
 
-    if (flags & ZIP_FL_UNCHANGED) {
+    if (flags & ZIP_FL_UNCHANGED)
+    {
         entry->orig_index = (zip_int64_t)index;
     }
     entry->current_index = (zip_int64_t)index;
@@ -251,40 +281,50 @@ bool _zip_hash_add(zip_hash_t *hash, const zip_uint8_t *name, zip_uint64_t index
     return true;
 }
 
-
 /* remove entry from hash, error if not found */
-bool _zip_hash_delete(zip_hash_t *hash, const zip_uint8_t *name, zip_error_t *error) {
+bool _zip_hash_delete(zip_hash_t* hash, const zip_uint8_t* name, zip_error_t* error)
+{
     zip_uint32_t hash_value, index;
     zip_hash_entry_t *entry, *previous;
 
-    if (hash == NULL || name == NULL) {
+    if (hash == NULL || name == NULL)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return false;
     }
 
-    if (hash->nentries > 0) {
+    if (hash->nentries > 0)
+    {
         hash_value = hash_string(name);
         index = hash_value % hash->table_size;
         previous = NULL;
         entry = hash->table[index];
-        while (entry) {
-            if (entry->hash_value == hash_value && strcmp((const char *)name, (const char *)entry->name) == 0) {
-                if (entry->orig_index == -1) {
-                    if (previous) {
+        while (entry)
+        {
+            if (entry->hash_value == hash_value && strcmp((const char*)name, (const char*)entry->name) == 0)
+            {
+                if (entry->orig_index == -1)
+                {
+                    if (previous)
+                    {
                         previous->next = entry->next;
                     }
-                    else {
+                    else
+                    {
                         hash->table[index] = entry->next;
                     }
                     free(entry);
                     hash->nentries--;
-                    if (hash->nentries < hash->table_size * HASH_MIN_FILL && hash->table_size > HASH_MIN_SIZE) {
-                        if (!hash_resize(hash, hash->table_size / 2, error)) {
+                    if (hash->nentries < hash->table_size * HASH_MIN_FILL && hash->table_size > HASH_MIN_SIZE)
+                    {
+                        if (!hash_resize(hash, hash->table_size / 2, error))
+                        {
                             return false;
                         }
                     }
                 }
-                else {
+                else
+                {
                     entry->current_index = -1;
                 }
                 return true;
@@ -298,29 +338,37 @@ bool _zip_hash_delete(zip_hash_t *hash, const zip_uint8_t *name, zip_error_t *er
     return false;
 }
 
-
 /* find value for entry in hash, -1 if not found */
-zip_int64_t _zip_hash_lookup(zip_hash_t *hash, const zip_uint8_t *name, zip_flags_t flags, zip_error_t *error) {
+zip_int64_t _zip_hash_lookup(zip_hash_t* hash, const zip_uint8_t* name, zip_flags_t flags, zip_error_t* error)
+{
     zip_uint32_t hash_value, index;
-    zip_hash_entry_t *entry;
+    zip_hash_entry_t* entry;
 
-    if (hash == NULL || name == NULL) {
+    if (hash == NULL || name == NULL)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return -1;
     }
 
-    if (hash->nentries > 0) {
+    if (hash->nentries > 0)
+    {
         hash_value = hash_string(name);
         index = hash_value % hash->table_size;
-        for (entry = hash->table[index]; entry != NULL; entry = entry->next) {
-            if (strcmp((const char *)name, (const char *)entry->name) == 0) {
-                if (flags & ZIP_FL_UNCHANGED) {
-                    if (entry->orig_index != -1) {
+        for (entry = hash->table[index]; entry != NULL; entry = entry->next)
+        {
+            if (strcmp((const char*)name, (const char*)entry->name) == 0)
+            {
+                if (flags & ZIP_FL_UNCHANGED)
+                {
+                    if (entry->orig_index != -1)
+                    {
                         return entry->orig_index;
                     }
                 }
-                else {
-                    if (entry->current_index != -1) {
+                else
+                {
+                    if (entry->current_index != -1)
+                    {
                         return entry->current_index;
                     }
                 }
@@ -333,42 +381,50 @@ zip_int64_t _zip_hash_lookup(zip_hash_t *hash, const zip_uint8_t *name, zip_flag
     return -1;
 }
 
-
-bool _zip_hash_reserve_capacity(zip_hash_t *hash, zip_uint64_t capacity, zip_error_t *error) {
+bool _zip_hash_reserve_capacity(zip_hash_t* hash, zip_uint64_t capacity, zip_error_t* error)
+{
     zip_uint32_t new_size;
 
-    if (capacity == 0) {
+    if (capacity == 0)
+    {
         return true;
     }
 
     new_size = size_for_capacity(capacity);
 
-    if (new_size <= hash->table_size) {
+    if (new_size <= hash->table_size)
+    {
         return true;
     }
 
-    if (!hash_resize(hash, new_size, error)) {
+    if (!hash_resize(hash, new_size, error))
+    {
         return false;
     }
 
     return true;
 }
 
-
-bool _zip_hash_revert(zip_hash_t *hash, zip_error_t *error) {
+bool _zip_hash_revert(zip_hash_t* hash, zip_error_t* error)
+{
     zip_uint32_t i;
     zip_hash_entry_t *entry, *previous;
 
-    for (i = 0; i < hash->table_size; i++) {
+    for (i = 0; i < hash->table_size; i++)
+    {
         previous = NULL;
         entry = hash->table[i];
-        while (entry) {
-            if (entry->orig_index == -1) {
-                zip_hash_entry_t *p;
-                if (previous) {
+        while (entry)
+        {
+            if (entry->orig_index == -1)
+            {
+                zip_hash_entry_t* p;
+                if (previous)
+                {
                     previous->next = entry->next;
                 }
-                else {
+                else
+                {
                     hash->table[i] = entry->next;
                 }
                 p = entry;
@@ -377,7 +433,8 @@ bool _zip_hash_revert(zip_hash_t *hash, zip_error_t *error) {
                 free(p);
                 hash->nentries--;
             }
-            else {
+            else
+            {
                 entry->current_index = entry->orig_index;
                 previous = entry;
                 entry = entry->next;
@@ -385,12 +442,15 @@ bool _zip_hash_revert(zip_hash_t *hash, zip_error_t *error) {
         }
     }
 
-    if (hash->nentries < hash->table_size * HASH_MIN_FILL && hash->table_size > HASH_MIN_SIZE) {
+    if (hash->nentries < hash->table_size * HASH_MIN_FILL && hash->table_size > HASH_MIN_SIZE)
+    {
         zip_uint32_t new_size = hash->table_size / 2;
-        while (hash->nentries < new_size * HASH_MIN_FILL && new_size > HASH_MIN_SIZE) {
+        while (hash->nentries < new_size * HASH_MIN_FILL && new_size > HASH_MIN_SIZE)
+        {
             new_size /= 2;
         }
-        if (!hash_resize(hash, new_size, error)) {
+        if (!hash_resize(hash, new_size, error))
+        {
             return false;
         }
     }

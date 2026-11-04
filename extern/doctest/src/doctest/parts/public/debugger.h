@@ -25,7 +25,7 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 #define DOCTEST_BREAK_INTO_DEBUGGER() __asm__("int $3\n" ::) // NOLINT(hicpp-no-assembler)
 #elif defined(__ppc__) || defined(__ppc64__)
 // https://www.cocoawithlove.com/2008/03/break-into-debugger.html
-#define DOCTEST_BREAK_INTO_DEBUGGER() /* NOLINTNEXTLINE(hicpp-no-assembler) */                                         \
+#define DOCTEST_BREAK_INTO_DEBUGGER() /* NOLINTNEXTLINE(hicpp-no-assembler) */                                                     \
     __asm__("li r0, 20\nsc\nnop\nli r0, 37\nli r4, 2\nsc\nnop\n" ::: "memory", "r0", "r3", "r4")
 #else
 #define DOCTEST_BREAK_INTO_DEBUGGER() __asm__("brk #0"); // NOLINT(hicpp-no-assembler)
@@ -46,8 +46,10 @@ DOCTEST_GCC_SUPPRESS_WARNING_POP
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 DOCTEST_INTERFACE bool isDebuggerActive();
 } // namespace detail
 } // namespace doctest

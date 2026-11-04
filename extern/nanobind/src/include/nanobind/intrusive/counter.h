@@ -32,25 +32,28 @@
 
 // Override this definition to specify DLL export/import declarations
 #if !defined(NB_INTRUSIVE_EXPORT)
-#  define NB_INTRUSIVE_EXPORT
+#define NB_INTRUSIVE_EXPORT
 #endif
 
 #if !defined(Py_PYTHON_H)
 /* While the implementation below does not directly depend on Python, the
    PyObject type occurs in a few function interfaces (in a fully opaque
    manner). The lines below forward-declare it. */
-extern "C" {
+extern "C"
+{
     struct _object;
     typedef _object PyObject;
 };
 #endif
 
 #if !defined(NAMESPACE_BEGIN)
-#  define NAMESPACE_BEGIN(name) namespace name {
+#define NAMESPACE_BEGIN(name)                                                                                                      \
+    namespace name                                                                                                                 \
+    {
 #endif
 
 #if !defined(NAMESPACE_END)
-#  define NAMESPACE_END(name) }
+#define NAMESPACE_END(name) }
 #endif
 
 NAMESPACE_BEGIN(nanobind)
@@ -172,15 +175,26 @@ NAMESPACE_BEGIN(nanobind)
  * ``nanobind/nanobind.h``, it also exposes a custom type caster to bind
  * functions taking or returning ``ref<T>``-typed values.
  */
-struct NB_INTRUSIVE_EXPORT intrusive_counter {
+struct NB_INTRUSIVE_EXPORT intrusive_counter
+{
 public:
     intrusive_counter() noexcept = default;
 
     // The counter value is not affected by copy/move assignment/construction
-    intrusive_counter(const intrusive_counter &) noexcept { }
-    intrusive_counter(intrusive_counter &&) noexcept { }
-    intrusive_counter &operator=(const intrusive_counter &) noexcept { return *this; }
-    intrusive_counter &operator=(intrusive_counter &&) noexcept { return *this; }
+    intrusive_counter(const intrusive_counter&) noexcept
+    {
+    }
+    intrusive_counter(intrusive_counter&&) noexcept
+    {
+    }
+    intrusive_counter& operator=(const intrusive_counter&) noexcept
+    {
+        return *this;
+    }
+    intrusive_counter& operator=(intrusive_counter&&) noexcept
+    {
+        return *this;
+    }
 
     /// Increase the object's reference count
     void inc_ref() const noexcept;
@@ -189,10 +203,10 @@ public:
     bool dec_ref() const noexcept;
 
     /// Return the Python object associated with this instance (or NULL)
-    PyObject *self_py() const noexcept;
+    PyObject* self_py() const noexcept;
 
     /// Set the Python object associated with this instance
-    void set_self_py(PyObject *self) noexcept;
+    void set_self_py(PyObject* self) noexcept;
 
     /**
      * \brief Return the reference count of the object while owned by C++.
@@ -208,27 +222,42 @@ protected:
     mutable uintptr_t m_state = 1;
 };
 
-static_assert(
-    sizeof(intrusive_counter) == sizeof(void *),
-    "The intrusive_counter class should always have the same size as a pointer.");
+static_assert(sizeof(intrusive_counter) == sizeof(void*),
+              "The intrusive_counter class should always have the same size as a pointer.");
 
 /// Reference-counted base type of an object hierarchy
-class NB_INTRUSIVE_EXPORT intrusive_base {
+class NB_INTRUSIVE_EXPORT intrusive_base
+{
 public:
     /// Increase the object's reference count
-    void inc_ref() const noexcept { m_ref_count.inc_ref(); }
+    void inc_ref() const noexcept
+    {
+        m_ref_count.inc_ref();
+    }
 
     /// Decrease the object's reference count, return ``true`` if it should be deallocated
-    bool dec_ref() const noexcept { return m_ref_count.dec_ref(); }
+    bool dec_ref() const noexcept
+    {
+        return m_ref_count.dec_ref();
+    }
 
     /// Set the Python object associated with this instance
-    void set_self_py(PyObject *self) noexcept { m_ref_count.set_self_py(self); }
+    void set_self_py(PyObject* self) noexcept
+    {
+        m_ref_count.set_self_py(self);
+    }
 
     /// Return the Python object associated with this instance (or NULL)
-    PyObject *self_py() const noexcept { return m_ref_count.self_py(); }
+    PyObject* self_py() const noexcept
+    {
+        return m_ref_count.self_py();
+    }
 
     /// Return the reference count while owned by C++ (0 once ownership has transferred to Python)
-    size_t ref_count() const noexcept { return m_ref_count.ref_count(); }
+    size_t ref_count() const noexcept
+    {
+        return m_ref_count.ref_count();
+    }
 
     /// Virtual destructor
     virtual ~intrusive_base() = default;
@@ -241,7 +270,8 @@ private:
  * \brief Increase the reference count of an intrusively reference-counted
  * object ``o`` if ``o`` is non-NULL.
  */
-inline void inc_ref(const intrusive_base *o) noexcept {
+inline void inc_ref(const intrusive_base* o) noexcept
+{
     if (o)
         o->inc_ref();
 }
@@ -250,7 +280,8 @@ inline void inc_ref(const intrusive_base *o) noexcept {
  * \brief Decrease the reference count and potentially delete an intrusively
  * reference-counted object ``o`` if ``o`` is non-NULL.
  */
-inline void dec_ref(const intrusive_base *o) noexcept {
+inline void dec_ref(const intrusive_base* o) noexcept
+{
     if (o && o->dec_ref())
         delete o;
 }
@@ -266,8 +297,7 @@ inline void dec_ref(const intrusive_base *o) noexcept {
  * functions that increase and decrease the reference count of a Python object,
  * while ensuring that the GIL is held.
  */
-extern NB_INTRUSIVE_EXPORT
-void intrusive_init(void (*intrusive_inc_ref_py)(PyObject *) noexcept,
-                    void (*intrusive_dec_ref_py)(PyObject *) noexcept);
+extern NB_INTRUSIVE_EXPORT void intrusive_init(void (*intrusive_inc_ref_py)(PyObject*) noexcept,
+                                               void (*intrusive_dec_ref_py)(PyObject*) noexcept);
 
 NAMESPACE_END(nanobind)

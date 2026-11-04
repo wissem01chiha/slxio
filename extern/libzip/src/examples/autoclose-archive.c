@@ -36,21 +36,23 @@
   It can be used to add files from various zip archives without having to keep track of them yourself.
 */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include <zip.h>
 
-struct ctx {
-    zip_t *archive;
+struct ctx
+{
+    zip_t* archive;
 };
 
-zip_int64_t callback(zip_source_t *src, void *ud, void *data, zip_uint64_t length, zip_source_cmd_t command) {
-    struct ctx *ctx = (struct ctx *)ud;
+zip_int64_t callback(zip_source_t* src, void* ud, void* data, zip_uint64_t length, zip_source_cmd_t command)
+{
+    struct ctx* ctx = (struct ctx*)ud;
 
-    switch (command) {
+    switch (command)
+    {
     case ZIP_SOURCE_FREE:
         /* Close zip archive we took ownership of */
         zip_discard(ctx->archive);
@@ -64,12 +66,14 @@ zip_int64_t callback(zip_source_t *src, void *ud, void *data, zip_uint64_t lengt
     }
 }
 
-zip_source_t *create_layered_autoclose(zip_source_t *source, zip_t *archive, zip_error_t *error) {
-    struct ctx *ctx = (struct ctx *)malloc(sizeof(*ctx));
-    zip_source_t *autoclose_source;
+zip_source_t* create_layered_autoclose(zip_source_t* source, zip_t* archive, zip_error_t* error)
+{
+    struct ctx* ctx = (struct ctx*)malloc(sizeof(*ctx));
+    zip_source_t* autoclose_source;
 
     /* Allocate context. */
-    if (ctx == NULL) {
+    if (ctx == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
@@ -81,22 +85,24 @@ zip_source_t *create_layered_autoclose(zip_source_t *source, zip_t *archive, zip
     autoclose_source = zip_source_layered_create(source, callback, ctx, error);
 
     /* In case of error, free context. */
-    if (autoclose_source == NULL) {
+    if (autoclose_source == NULL)
+    {
         free(ctx);
     }
 
     return autoclose_source;
 }
 
-
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
     const char *destination_archive, *source_archive, *source_file;
     zip_int64_t index;
     zip_source_t *src, *src_autoclose;
     zip_t *z_source, *z_destination;
     int err;
 
-    if (argc != 4) {
+    if (argc != 4)
+    {
         fprintf(stderr, "usage: %s destination-archive source-archive source-file\n", argv[0]);
         return 1;
     }
@@ -104,8 +110,8 @@ int main(int argc, char *argv[]) {
     source_archive = argv[2];
     source_file = argv[3];
 
-
-    if ((z_source = zip_open(source_archive, 0, &err)) == NULL) {
+    if ((z_source = zip_open(source_archive, 0, &err)) == NULL)
+    {
         zip_error_t error;
         zip_error_init_with_code(&error, err);
         fprintf(stderr, "%s: cannot open zip archive '%s': %s\n", argv[0], source_archive, zip_error_strerror(&error));
@@ -113,26 +119,30 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    if ((index = zip_name_locate(z_source, source_file, 0)) < 0) {
+    if ((index = zip_name_locate(z_source, source_file, 0)) < 0)
+    {
         fprintf(stderr, "%s: cannot find file '%s' in '%s': %s\n", argv[0], source_file, source_archive, zip_strerror(z_source));
         zip_discard(z_source);
         exit(1);
     }
-    if ((src = zip_source_zip_file(z_source, z_source, index, 0, 0, -1, NULL)) == NULL) {
+    if ((src = zip_source_zip_file(z_source, z_source, index, 0, 0, -1, NULL)) == NULL)
+    {
         fprintf(stderr, "%s: cannot open file '%s' in '%s': %s\n", argv[0], source_file, source_archive, zip_strerror(z_source));
         zip_discard(z_source);
         exit(1);
     }
 
     zip_error_t error;
-    if ((src_autoclose = create_layered_autoclose(src, z_source, &error)) == NULL) {
+    if ((src_autoclose = create_layered_autoclose(src, z_source, &error)) == NULL)
+    {
         fprintf(stderr, "%s: cannot create layered source: %s\n", argv[0], zip_error_strerror(&error));
         zip_source_free(src);
         zip_discard(z_source);
         exit(1);
     }
 
-    if ((z_destination = zip_open(destination_archive, ZIP_CREATE, &err)) == NULL) {
+    if ((z_destination = zip_open(destination_archive, ZIP_CREATE, &err)) == NULL)
+    {
         zip_error_init_with_code(&error, err);
         fprintf(stderr, "%s: cannot open zip archive '%s': %s\n", argv[0], destination_archive, zip_error_strerror(&error));
         zip_error_fini(&error);
@@ -140,15 +150,16 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-
-    if ((zip_file_add(z_destination, source_file, src_autoclose, 0)) < 0) {
+    if ((zip_file_add(z_destination, source_file, src_autoclose, 0)) < 0)
+    {
         fprintf(stderr, "%s: cannot add file: %s\n", argv[0], zip_strerror(z_source));
         zip_source_free(src_autoclose);
         zip_discard(z_destination);
         exit(1);
     }
 
-    if ((zip_close(z_destination)) < 0) {
+    if ((zip_close(z_destination)) < 0)
+    {
         fprintf(stderr, "%s: cannot close archive '%s': %s\n", argv[0], destination_archive, zip_strerror(z_source));
         zip_discard(z_destination);
         exit(1);

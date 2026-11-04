@@ -7,13 +7,15 @@
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
 DOCTEST_INTERFACE size_t acquireGeneratorDecisionIndex(size_t count);
 
-template <typename T, typename... Rest>
-T acquireGeneratorValue(T first, Rest... rest) {
+template <typename T, typename... Rest> T acquireGeneratorValue(T first, Rest... rest)
+{
     const T values[] = {first, static_cast<T>(rest)...};
     const size_t idx = acquireGeneratorDecisionIndex(1 + sizeof...(Rest));
     return values[idx];

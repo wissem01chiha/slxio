@@ -4,32 +4,37 @@
 
 using namespace simdjson;
 
-namespace big_integer_tests {
+namespace big_integer_tests
+{
 
-  bool option_off_by_default() {
+bool option_off_by_default()
+{
     TEST_START();
     dom::parser parser;
     ASSERT_EQUAL(parser.number_as_string(), false);
     TEST_SUCCEED();
-  }
+}
 
-  bool default_returns_bigint_error() {
+bool default_returns_bigint_error()
+{
     TEST_START();
     dom::parser parser;
     auto result = parser.parse(R"({"val":123456789012345678901})"_padded);
     ASSERT_EQUAL(result.error(), BIGINT_ERROR);
     TEST_SUCCEED();
-  }
+}
 
-  bool default_returns_bigint_error_20_digits() {
+bool default_returns_bigint_error_20_digits()
+{
     TEST_START();
     dom::parser parser;
     auto result = parser.parse(R"({"val":18446744073709551616})"_padded);
     ASSERT_EQUAL(result.error(), BIGINT_ERROR);
     TEST_SUCCEED();
-  }
+}
 
-  bool opt_in_parses_big_integer() {
+bool opt_in_parses_big_integer()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -47,9 +52,10 @@ namespace big_integer_tests {
     os << val.get_bigint().value_unsafe();
     ASSERT_EQUAL(os.str(), "123456789012345678901");
     TEST_SUCCEED();
-  }
+}
 
-  bool negative_big_integer() {
+bool negative_big_integer()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -62,28 +68,31 @@ namespace big_integer_tests {
     ASSERT_SUCCESS(val.get_bigint().get(digits));
     ASSERT_EQUAL(digits, "-12345678901234567890");
     TEST_SUCCEED();
-  }
+}
 
-  bool positive_20_digit_overflow() {
+bool positive_20_digit_overflow()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
     // Every 20 digit integer in [2^64, 10^20) is too large for uint64_t.
-    for (auto digits : {"18446744073709551616", "99999999999999999999"}) {
-      dom::element doc;
-      std::string json = std::string(R"({"val":)") + digits + "}";
-      ASSERT_SUCCESS(parser.parse(padded_string(json)).get(doc));
-      dom::element val;
-      ASSERT_SUCCESS(doc["val"].get(val));
-      ASSERT_EQUAL(val.type(), dom::element_type::BIGINT);
-      std::string_view parsed;
-      ASSERT_SUCCESS(val.get_bigint().get(parsed));
-      ASSERT_EQUAL(parsed, digits);
+    for (auto digits : {"18446744073709551616", "99999999999999999999"})
+    {
+        dom::element doc;
+        std::string json = std::string(R"({"val":)") + digits + "}";
+        ASSERT_SUCCESS(parser.parse(padded_string(json)).get(doc));
+        dom::element val;
+        ASSERT_SUCCESS(doc["val"].get(val));
+        ASSERT_EQUAL(val.type(), dom::element_type::BIGINT);
+        std::string_view parsed;
+        ASSERT_SUCCESS(val.get_bigint().get(parsed));
+        ASSERT_EQUAL(parsed, digits);
     }
     TEST_SUCCEED();
-  }
+}
 
-  bool big_integer_in_array() {
+bool big_integer_in_array()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -92,12 +101,17 @@ namespace big_integer_tests {
     dom::array arr;
     ASSERT_SUCCESS(doc.get_array().get(arr));
     size_t count = 0;
-    for (auto elem : arr) { (void)elem; count++; }
+    for (auto elem : arr)
+    {
+        (void)elem;
+        count++;
+    }
     ASSERT_EQUAL(count, 3);
     TEST_SUCCEED();
-  }
+}
 
-  bool serialization_preserves_digits() {
+bool serialization_preserves_digits()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -109,9 +123,10 @@ namespace big_integer_tests {
     // Must not be quoted - it's a number, not a string
     ASSERT_EQUAL(output.find("\"123456789012345678901\""), std::string::npos);
     TEST_SUCCEED();
-  }
+}
 
-  bool normal_numbers_unaffected() {
+bool normal_numbers_unaffected()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -124,9 +139,10 @@ namespace big_integer_tests {
     ASSERT_SUCCESS(doc["d"].get_uint64().get(d));
     ASSERT_EQUAL(d, 18446744073709551615ULL);
     TEST_SUCCEED();
-  }
+}
 
-  bool type_checks() {
+bool type_checks()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -149,17 +165,19 @@ namespace big_integer_tests {
     ASSERT_ERROR(val.get_double(), INCORRECT_TYPE);
     ASSERT_ERROR(val.get_string(), INCORRECT_TYPE);
     TEST_SUCCEED();
-  }
+}
 
-  bool element_type_output() {
+bool element_type_output()
+{
     TEST_START();
     std::ostringstream os;
     os << dom::element_type::BIGINT;
     ASSERT_EQUAL(os.str(), "bigint");
     TEST_SUCCEED();
-  }
+}
 
-  bool rejects_trailing_garbage() {
+bool rejects_trailing_garbage()
+{
     TEST_START();
     dom::parser parser;
     parser.number_as_string(true);
@@ -172,25 +190,19 @@ namespace big_integer_tests {
     // A well-formed big integer terminated by a structural character is still accepted.
     ASSERT_SUCCESS(parser.parse(R"({"val":123456789012345678901})"_padded));
     TEST_SUCCEED();
-  }
+}
 
-  bool run() {
-    return option_off_by_default() &&
-           default_returns_bigint_error() &&
-           default_returns_bigint_error_20_digits() &&
-           opt_in_parses_big_integer() &&
-           negative_big_integer() &&
-           positive_20_digit_overflow() &&
-           big_integer_in_array() &&
-           serialization_preserves_digits() &&
-           normal_numbers_unaffected() &&
-           type_checks() &&
-           element_type_output() &&
+bool run()
+{
+    return option_off_by_default() && default_returns_bigint_error() && default_returns_bigint_error_20_digits() &&
+           opt_in_parses_big_integer() && negative_big_integer() && positive_20_digit_overflow() && big_integer_in_array() &&
+           serialization_preserves_digits() && normal_numbers_unaffected() && type_checks() && element_type_output() &&
            rejects_trailing_garbage();
-  }
+}
 
 } // namespace big_integer_tests
 
-int main() {
-  return big_integer_tests::run() ? 0 : 1;
+int main()
+{
+    return big_integer_tests::run() ? 0 : 1;
 }

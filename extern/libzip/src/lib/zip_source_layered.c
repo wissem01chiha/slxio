@@ -31,34 +31,36 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 
 #include "zipint.h"
 
-
-zip_source_t *zip_source_layered(zip_t *za, zip_source_t *src, zip_source_layered_callback cb, void *ud) {
-    if (za == NULL) {
+zip_source_t* zip_source_layered(zip_t* za, zip_source_t* src, zip_source_layered_callback cb, void* ud)
+{
+    if (za == NULL)
+    {
         return NULL;
     }
 
     return zip_source_layered_create(src, cb, ud, &za->error);
 }
 
-
-zip_source_t *zip_source_layered_create(zip_source_t *src, zip_source_layered_callback cb, void *ud, zip_error_t *error) {
-    zip_source_t *zs;
+zip_source_t* zip_source_layered_create(zip_source_t* src, zip_source_layered_callback cb, void* ud, zip_error_t* error)
+{
+    zip_source_t* zs;
     zip_int64_t lower_supports, supports;
 
     lower_supports = zip_source_supports(src);
     supports = cb(src, ud, &lower_supports, sizeof(lower_supports), ZIP_SOURCE_SUPPORTS);
-    if (supports < 0) {
+    if (supports < 0)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0); /* Initialize in case cb doesn't return valid error. */
         cb(src, ud, error, sizeof(*error), ZIP_SOURCE_ERROR);
         return NULL;
     }
 
-    if ((zs = _zip_source_new(error)) == NULL) {
+    if ((zs = _zip_source_new(error)) == NULL)
+    {
         return NULL;
     }
 
@@ -67,7 +69,8 @@ zip_source_t *zip_source_layered_create(zip_source_t *src, zip_source_layered_ca
     zs->ud = ud;
     zs->supports = supports;
 
-    /* Layered sources can't support writing, since we currently have no use case. If we want to revisit this, we have to define how the two sources interact. */
+    /* Layered sources can't support writing, since we currently have no use case. If we want to revisit this, we have to define how
+     * the two sources interact. */
     zs->supports &= ~(ZIP_SOURCE_SUPPORTS_WRITABLE & ~ZIP_SOURCE_SUPPORTS_SEEKABLE);
 
     return zs;

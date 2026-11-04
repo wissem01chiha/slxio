@@ -50,7 +50,7 @@ protected:
     size_t skip_counter_ = 0;
     level::level_enum skipped_msg_log_level_ = spdlog::level::level_enum::off;
 
-    void sink_it_(const details::log_msg &msg) override {
+    void sink_it_(const details::log_msg& msg) override {
         bool filtered = filter_(msg);
         if (!filtered) {
             skip_counter_ += 1;
@@ -78,7 +78,7 @@ protected:
     }
 
     // return whether the log msg should be displayed (true) or skipped (false)
-    bool filter_(const details::log_msg &msg) {
+    bool filter_(const details::log_msg& msg) {
         auto filter_duration = msg.time - last_msg_time_;
         return (filter_duration > max_skip_duration_) || (msg.payload != last_msg_payload_);
     }

@@ -14,14 +14,14 @@
 NAMESPACE_BEGIN(NB_NAMESPACE)
 NAMESPACE_BEGIN(detail)
 
-template <typename Set, typename Key> struct set_caster {
-    NB_TYPE_CASTER(Set, io_name("collections.abc.Set", "set") +
-                            const_name("[") + make_caster<Key>::Name +
-                            const_name("]"))
+template <typename Set, typename Key> struct set_caster
+{
+    NB_TYPE_CASTER(Set, io_name("collections.abc.Set", "set") + const_name("[") + make_caster<Key>::Name + const_name("]"))
 
     using Caster = make_caster<Key>;
 
-    bool from_python(handle src, uint32_t flags, cleanup_list *cleanup) noexcept {
+    bool from_python(handle src, uint32_t flags, cleanup_list* cleanup) noexcept
+    {
         value.clear();
 
         // Cheap pre-check so that a failed PyObject_GetIter on a
@@ -29,23 +29,25 @@ template <typename Set, typename Key> struct set_caster {
         if (!iterable_check(src.ptr()))
             return false;
 
-        PyObject *iter = PyObject_GetIter(src.ptr());
-        if (NB_UNLIKELY(!iter)) {
+        PyObject* iter = PyObject_GetIter(src.ptr());
+        if (NB_UNLIKELY(!iter))
+        {
             PyErr_Clear();
             return false;
         }
 
         bool success = true;
         Caster key_caster;
-        PyObject *key;
+        PyObject* key;
 
         flags = flags_for_local_caster<Key>(flags);
 
-        while ((key = PyIter_Next(iter)) != nullptr) {
-            success &= (key_caster.from_python(key, flags, cleanup) &&
-                        key_caster.template can_cast<Key>());
+        while ((key = PyIter_Next(iter)) != nullptr)
+        {
+            success &= (key_caster.from_python(key, flags, cleanup) && key_caster.template can_cast<Key>());
 
-            if (!success) {
+            if (!success)
+            {
                 Py_DECREF(key);
                 break;
             }
@@ -54,7 +56,8 @@ template <typename Set, typename Key> struct set_caster {
             Py_DECREF(key);
         }
 
-        if (PyErr_Occurred()) {
+        if (PyErr_Occurred())
+        {
             PyErr_Clear();
             success = false;
         }
@@ -64,17 +67,18 @@ template <typename Set, typename Key> struct set_caster {
         return success;
     }
 
-    template <typename T>
-    static handle from_cpp(T &&src, rv_policy policy,
-                           cleanup_list *cleanup) noexcept {
+    template <typename T> static handle from_cpp(T&& src, rv_policy policy, cleanup_list* cleanup) noexcept
+    {
         object ret = steal(PySet_New(nullptr));
 
-        if (ret.is_valid()) {
-            for (auto&& key : src) {
-                object k = steal(
-                    Caster::from_cpp(forward_like_<T>(key), policy, cleanup));
+        if (ret.is_valid())
+        {
+            for (auto&& key : src)
+            {
+                object k = steal(Caster::from_cpp(forward_like_<T>(key), policy, cleanup));
 
-                if (!k.is_valid() || PySet_Add(ret.ptr(), k.ptr()) != 0) {
+                if (!k.is_valid() || PySet_Add(ret.ptr(), k.ptr()) != 0)
+                {
                     ret.reset();
                     break;
                 }

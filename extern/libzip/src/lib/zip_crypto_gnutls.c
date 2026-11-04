@@ -37,17 +37,20 @@
 
 #include "zip_crypto.h"
 
-_zip_crypto_aes_t *_zip_crypto_aes_new(const zip_uint8_t *key, zip_uint16_t key_size, zip_error_t *error) {
-    _zip_crypto_aes_t *aes;
+_zip_crypto_aes_t* _zip_crypto_aes_new(const zip_uint8_t* key, zip_uint16_t key_size, zip_error_t* error)
+{
+    _zip_crypto_aes_t* aes;
 
-    if ((aes = (_zip_crypto_aes_t *)malloc(sizeof(*aes))) == NULL) {
+    if ((aes = (_zip_crypto_aes_t*)malloc(sizeof(*aes))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
     aes->key_size = key_size;
 
-    switch (aes->key_size) {
+    switch (aes->key_size)
+    {
     case 128:
         nettle_aes128_set_encrypt_key(&aes->ctx.ctx_128, key);
         break;
@@ -66,8 +69,10 @@ _zip_crypto_aes_t *_zip_crypto_aes_new(const zip_uint8_t *key, zip_uint16_t key_
     return aes;
 }
 
-bool _zip_crypto_aes_encrypt_block(_zip_crypto_aes_t *aes, const zip_uint8_t *in, zip_uint8_t *out) {
-    switch (aes->key_size) {
+bool _zip_crypto_aes_encrypt_block(_zip_crypto_aes_t* aes, const zip_uint8_t* in, zip_uint8_t* out)
+{
+    switch (aes->key_size)
+    {
     case 128:
         nettle_aes128_encrypt(&aes->ctx.ctx_128, ZIP_CRYPTO_AES_BLOCK_LENGTH, out, in);
         break;
@@ -82,8 +87,10 @@ bool _zip_crypto_aes_encrypt_block(_zip_crypto_aes_t *aes, const zip_uint8_t *in
     return true;
 }
 
-void _zip_crypto_aes_free(_zip_crypto_aes_t *aes) {
-    if (aes == NULL) {
+void _zip_crypto_aes_free(_zip_crypto_aes_t* aes)
+{
+    if (aes == NULL)
+    {
         return;
     }
 
@@ -91,16 +98,18 @@ void _zip_crypto_aes_free(_zip_crypto_aes_t *aes) {
     free(aes);
 }
 
+_zip_crypto_hmac_t* _zip_crypto_hmac_new(const zip_uint8_t* secret, zip_uint64_t secret_length, zip_error_t* error)
+{
+    _zip_crypto_hmac_t* hmac;
 
-_zip_crypto_hmac_t *_zip_crypto_hmac_new(const zip_uint8_t *secret, zip_uint64_t secret_length, zip_error_t *error) {
-    _zip_crypto_hmac_t *hmac;
-
-    if ((hmac = (_zip_crypto_hmac_t *)malloc(sizeof(*hmac))) == NULL) {
+    if ((hmac = (_zip_crypto_hmac_t*)malloc(sizeof(*hmac))) == NULL)
+    {
         zip_error_set(error, ZIP_ER_MEMORY, 0);
         return NULL;
     }
 
-    if (gnutls_hmac_init(hmac, GNUTLS_MAC_SHA1, secret, secret_length) < 0) {
+    if (gnutls_hmac_init(hmac, GNUTLS_MAC_SHA1, secret, secret_length) < 0)
+    {
         zip_error_set(error, ZIP_ER_INTERNAL, 0);
         free(hmac);
         return NULL;
@@ -109,11 +118,12 @@ _zip_crypto_hmac_t *_zip_crypto_hmac_new(const zip_uint8_t *secret, zip_uint64_t
     return hmac;
 }
 
-
-void _zip_crypto_hmac_free(_zip_crypto_hmac_t *hmac) {
+void _zip_crypto_hmac_free(_zip_crypto_hmac_t* hmac)
+{
     zip_uint8_t buf[ZIP_CRYPTO_SHA1_LENGTH];
 
-    if (hmac == NULL) {
+    if (hmac == NULL)
+    {
         return;
     }
 
@@ -122,7 +132,7 @@ void _zip_crypto_hmac_free(_zip_crypto_hmac_t *hmac) {
     free(hmac);
 }
 
-
-ZIP_EXTERN bool zip_secure_random(zip_uint8_t *buffer, zip_uint16_t length) {
+ZIP_EXTERN bool zip_secure_random(zip_uint8_t* buffer, zip_uint16_t length)
+{
     return gnutls_rnd(GNUTLS_RND_KEY, buffer, length) == 0;
 }

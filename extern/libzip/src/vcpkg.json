@@ -1,8 +1,8 @@
 {
-  "dependencies": [
-    "bzip2",
-    "liblzma",
-    "zlib",
-    "zstd"
-  ]
+    "dependencies": [
+        "bzip2",
+        "liblzma",
+        "zlib",
+        "zstd"
+    ]
 }

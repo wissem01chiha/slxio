@@ -46,33 +46,36 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef SIMDJSON_INTERNAL_INSTRUCTION_SET_H
 #define SIMDJSON_INTERNAL_INSTRUCTION_SET_H
 
-namespace simdjson {
-namespace internal {
+namespace simdjson
+{
+namespace internal
+{
 
-enum instruction_set {
-  DEFAULT = 0x0,
-  NEON = 0x1,
-  AVX2 = 0x4,
-  SSE42 = 0x8,
-  PCLMULQDQ = 0x10,
-  BMI1 = 0x20,
-  BMI2 = 0x40,
-  ALTIVEC = 0x80,
-  AVX512F = 0x100,
-  AVX512DQ = 0x200,
-  AVX512IFMA = 0x400,
-  AVX512PF = 0x800,
-  AVX512ER = 0x1000,
-  AVX512CD = 0x2000,
-  AVX512BW = 0x4000,
-  AVX512VL = 0x8000,
-  AVX512VBMI2 = 0x10000,
-  LSX = 0x20000,
-  LASX = 0x40000,
-  //RVV = 0x80000,
-  RVV_VLS = 0x100000,
-  SVE = 0x200000,
-  SVE2 = 0x400000,
+enum instruction_set
+{
+    DEFAULT = 0x0,
+    NEON = 0x1,
+    AVX2 = 0x4,
+    SSE42 = 0x8,
+    PCLMULQDQ = 0x10,
+    BMI1 = 0x20,
+    BMI2 = 0x40,
+    ALTIVEC = 0x80,
+    AVX512F = 0x100,
+    AVX512DQ = 0x200,
+    AVX512IFMA = 0x400,
+    AVX512PF = 0x800,
+    AVX512ER = 0x1000,
+    AVX512CD = 0x2000,
+    AVX512BW = 0x4000,
+    AVX512VL = 0x8000,
+    AVX512VBMI2 = 0x10000,
+    LSX = 0x20000,
+    LASX = 0x40000,
+    // RVV = 0x80000,
+    RVV_VLS = 0x100000,
+    SVE = 0x200000,
+    SVE2 = 0x400000,
 };
 
 } // namespace internal

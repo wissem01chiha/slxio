@@ -8,22 +8,26 @@
 
 DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
-namespace doctest {
+namespace doctest
+{
 #ifndef DOCTEST_CONFIG_STRING_SIZE_TYPE
 #define DOCTEST_CONFIG_STRING_SIZE_TYPE unsigned
 #endif
 
-namespace detail {
+namespace detail
+{
 
-template <typename T, typename Enable = void>
-struct is_std_string : types::false_type {};
+template <typename T, typename Enable = void> struct is_std_string : types::false_type
+{
+};
 
 template <typename T>
-struct is_std_string<
-    T,
-    typename types::enable_if<
-        types::is_same<decltype(declval<const T &>().c_str()), const char *>::value &&
-        types::is_same<decltype(declval<const T &>().size()), size_t>::value>::type> : types::true_type {};
+struct is_std_string<T,
+                     typename types::enable_if<types::is_same<decltype(declval<const T&>().c_str()), const char*>::value &&
+                                               types::is_same<decltype(declval<const T&>().size()), size_t>::value>::type>
+    : types::true_type
+{
+};
 
 } // namespace detail
 
@@ -47,7 +51,8 @@ struct is_std_string<
 // - push_back/pop_back
 // - assign/insert/erase
 // - relational operators as free functions - taking const char* as one of the params
-class DOCTEST_INTERFACE String {
+class DOCTEST_INTERFACE String
+{
 public:
     using size_type = DOCTEST_CONFIG_STRING_SIZE_TYPE;
 
@@ -57,19 +62,21 @@ private:
 
     struct view // len should be more than sizeof(view) - because of the final byte for flags
     {
-        char *ptr;
+        char* ptr;
         size_type size;
         size_type capacity;
     };
 
-    union {
+    union
+    {
         char buf[len]; // NOLINT(*-avoid-c-arrays)
         view data;
     };
 
-    char *allocate(size_type sz);
+    char* allocate(size_type sz);
 
-    bool isOnStack() const noexcept {
+    bool isOnStack() const noexcept
+    {
         // NOLINTNEXTLINE(cppcoreguidelines-pro-type-union-access)
         return (buf[last] & 128) == 0;
     }
@@ -78,7 +85,7 @@ private:
     void setLast(size_type in = last) noexcept;
     void setSize(size_type sz) noexcept;
 
-    void copy(const String &other);
+    void copy(const String& other);
 
 public:
     static DOCTEST_CONSTEXPR size_type npos = static_cast<size_type>(-1);
@@ -86,36 +93,40 @@ public:
     String() noexcept;
     ~String();
 
-    String(const char *in);
-    String(const char *in, size_type in_size);
+    String(const char* in);
+    String(const char* in, size_type in_size);
 
-    String(std::istream &in, size_type in_size);
+    String(std::istream& in, size_type in_size);
 
     template <typename T, typename detail::types::enable_if<detail::is_std_string<T>::value, bool>::type = true>
-    String(const T &in)
-        : String(in.c_str(), static_cast<size_type>(in.size())) {}
+    String(const T& in) : String(in.c_str(), static_cast<size_type>(in.size()))
+    {
+    }
 
-    String(const String &other);
-    String &operator=(const String &other);
+    String(const String& other);
+    String& operator=(const String& other);
 
-    String &operator+=(const String &other);
+    String& operator+=(const String& other);
 
-    String(String &&other) noexcept;
-    String &operator=(String &&other) noexcept;
+    String(String&& other) noexcept;
+    String& operator=(String&& other) noexcept;
 
     char operator[](size_type i) const;
-    char &operator[](size_type i);
+    char& operator[](size_type i);
 
     // the only functions I'm willing to leave in the interface - available for inlining
-    const char *c_str() const {
-        return const_cast<String *>(this)->c_str(); // NOLINT
+    const char* c_str() const
+    {
+        return const_cast<String*>(this)->c_str(); // NOLINT
     }
 
     // NOLINTBEGIN(cppcoreguidelines-pro-type-union-access)
-    char *c_str() {
-        if (isOnStack()) {
+    char* c_str()
+    {
+        if (isOnStack())
+        {
             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            return reinterpret_cast<char *>(buf);
+            return reinterpret_cast<char*>(buf);
         }
         return data.ptr;
     }
@@ -125,107 +136,112 @@ public:
     size_type capacity() const;
 
     String substr(size_type pos, size_type cnt = npos) &&;
-    String substr(size_type pos, size_type cnt = npos) const &;
+    String substr(size_type pos, size_type cnt = npos) const&;
 
     size_type find(char ch, size_type pos = 0) const;
     size_type rfind(char ch, size_type pos = npos) const;
 
-    int compare(const char *other, bool no_case = false) const;
-    int compare(const String &other, bool no_case = false) const;
+    int compare(const char* other, bool no_case = false) const;
+    int compare(const String& other, bool no_case = false) const;
 
-    friend DOCTEST_INTERFACE std::ostream &operator<<(std::ostream &s, const String &in);
+    friend DOCTEST_INTERFACE std::ostream& operator<<(std::ostream& s, const String& in);
 };
 
-DOCTEST_INTERFACE String operator+(const String &lhs, const String &rhs);
+DOCTEST_INTERFACE String operator+(const String& lhs, const String& rhs);
 
-DOCTEST_INTERFACE bool operator==(const String &lhs, const String &rhs);
-DOCTEST_INTERFACE bool operator!=(const String &lhs, const String &rhs);
-DOCTEST_INTERFACE bool operator<(const String &lhs, const String &rhs);
-DOCTEST_INTERFACE bool operator>(const String &lhs, const String &rhs);
-DOCTEST_INTERFACE bool operator<=(const String &lhs, const String &rhs);
-DOCTEST_INTERFACE bool operator>=(const String &lhs, const String &rhs);
+DOCTEST_INTERFACE bool operator==(const String& lhs, const String& rhs);
+DOCTEST_INTERFACE bool operator!=(const String& lhs, const String& rhs);
+DOCTEST_INTERFACE bool operator<(const String& lhs, const String& rhs);
+DOCTEST_INTERFACE bool operator>(const String& lhs, const String& rhs);
+DOCTEST_INTERFACE bool operator<=(const String& lhs, const String& rhs);
+DOCTEST_INTERFACE bool operator>=(const String& lhs, const String& rhs);
 
-namespace detail {
+namespace detail
+{
 
 // MSVS 2015 :(
 #if !DOCTEST_CLANG && defined(_MSC_VER) && _MSC_VER <= 1900
-template <typename T, typename = void>
-struct has_global_insertion_operator : types::false_type {};
+template <typename T, typename = void> struct has_global_insertion_operator : types::false_type
+{
+};
 
 template <typename T>
-struct has_global_insertion_operator<T, decltype(::operator<<(declval<std::ostream &>(), declval<const T &>()), void())>
-    : types::true_type {};
+struct has_global_insertion_operator<T, decltype(::operator<<(declval<std::ostream&>(), declval<const T&>()), void())>
+    : types::true_type
+{
+};
 
-template <typename T, typename = void>
-struct has_insertion_operator {
+template <typename T, typename = void> struct has_insertion_operator
+{
     static DOCTEST_CONSTEXPR bool value = has_global_insertion_operator<T>::value;
 };
 
-template <typename T, bool global>
-struct insert_hack;
+template <typename T, bool global> struct insert_hack;
 
-template <typename T>
-struct insert_hack<T, true> {
-    static void insert(std::ostream &os, const T &t) {
+template <typename T> struct insert_hack<T, true>
+{
+    static void insert(std::ostream& os, const T& t)
+    {
         ::operator<<(os, t);
     }
 };
 
-template <typename T>
-struct insert_hack<T, false> {
-    static void insert(std::ostream &os, const T &t) {
+template <typename T> struct insert_hack<T, false>
+{
+    static void insert(std::ostream& os, const T& t)
+    {
         operator<<(os, t);
     }
 };
 
-template <typename T>
-using insert_hack_t = insert_hack<T, has_global_insertion_operator<T>::value>;
+template <typename T> using insert_hack_t = insert_hack<T, has_global_insertion_operator<T>::value>;
 #else
-template <typename T, typename = void>
-struct has_insertion_operator : types::false_type {};
+template <typename T, typename = void> struct has_insertion_operator : types::false_type
+{
+};
 #endif
 
 template <typename T>
-struct has_insertion_operator<T, decltype(operator<<(declval<std::ostream &>(), declval<const T &>()), void())>
-    : types::true_type {};
-
-template <typename T>
-struct should_stringify_as_underlying_type {
-    static DOCTEST_CONSTEXPR bool value =
-        detail::types::is_enum<T>::value && !doctest::detail::has_insertion_operator<T>::value;
+struct has_insertion_operator<T, decltype(operator<<(declval<std::ostream&>(), declval<const T&>()), void())> : types::true_type
+{
 };
 
-template <typename T, typename = void>
-struct is_pair : types::false_type {};
+template <typename T> struct should_stringify_as_underlying_type
+{
+    static DOCTEST_CONSTEXPR bool value = detail::types::is_enum<T>::value && !doctest::detail::has_insertion_operator<T>::value;
+};
+
+template <typename T, typename = void> struct is_pair : types::false_type
+{
+};
 
 template <typename T>
 struct is_pair<
     T,
-    types::void_t<
-        typename T::first_type,
-        typename T::second_type,
-        decltype(declval<T>().first),
-        decltype(declval<T>().second)>> : types::true_type {};
+    types::void_t<typename T::first_type, typename T::second_type, decltype(declval<T>().first), decltype(declval<T>().second)>>
+    : types::true_type
+{
+};
 
-template <typename T, typename = void>
-struct is_container : types::false_type {};
+template <typename T, typename = void> struct is_container : types::false_type
+{
+};
 
 template <typename T>
 struct is_container<
     T,
-    types::void_t<
-        typename T::value_type,
-        typename T::iterator,
-        decltype(declval<T>().begin()),
-        decltype(declval<T>().end())>> : types::true_type {};
+    types::void_t<typename T::value_type, typename T::iterator, decltype(declval<T>().begin()), decltype(declval<T>().end())>>
+    : types::true_type
+{
+};
 
-DOCTEST_INTERFACE std::ostream *tlssPush();
+DOCTEST_INTERFACE std::ostream* tlssPush();
 DOCTEST_INTERFACE String tlssPop();
 
-template <bool C>
-struct StringMakerBase {
-    template <typename T>
-    static String convert(const DOCTEST_REF_WRAP(T)) {
+template <bool C> struct StringMakerBase
+{
+    template <typename T> static String convert(const DOCTEST_REF_WRAP(T))
+    {
 #ifdef DOCTEST_CONFIG_REQUIRE_STRINGIFICATION_FOR_ALL_USED_TYPES
         static_assert(deferred_false<T>::value, "No stringification detected for type T. See string conversion manual");
 #endif
@@ -233,32 +249,31 @@ struct StringMakerBase {
     }
 };
 
-template <typename T, typename Enable = void>
-struct filldata;
+template <typename T, typename Enable = void> struct filldata;
 
-template <typename T>
-void filloss(std::ostream *stream, const T &in) {
+template <typename T> void filloss(std::ostream* stream, const T& in)
+{
     filldata<T>::fill(stream, in);
 }
 
-template <typename T, size_t N>
-void filloss(std::ostream *stream, const T (&in)[N]) { // NOLINT(*-avoid-c-arrays)
+template <typename T, size_t N> void filloss(std::ostream* stream, const T (&in)[N])
+{ // NOLINT(*-avoid-c-arrays)
     // T[N], T(&)[N], T(&&)[N] have same behaviour.
     // Hence remove reference.
     filloss<typename types::remove_reference<decltype(in)>::type>(stream, in);
 }
 
-template <typename T>
-String toStream(const T &in) {
-    std::ostream *stream = tlssPush();
+template <typename T> String toStream(const T& in)
+{
+    std::ostream* stream = tlssPush();
     filloss(stream, in);
     return tlssPop();
 }
 
-template <>
-struct StringMakerBase<true> {
-    template <typename T>
-    static String convert(const DOCTEST_REF_WRAP(T) in) {
+template <> struct StringMakerBase<true>
+{
+    template <typename T> static String convert(const DOCTEST_REF_WRAP(T) in)
+    {
         return toStream(in);
     }
 };
@@ -266,10 +281,11 @@ struct StringMakerBase<true> {
 } // namespace detail
 
 template <typename T>
-struct StringMaker
-    : public detail::StringMakerBase<
-          detail::has_insertion_operator<T>::value || detail::types::is_pointer<T>::value ||
-          detail::types::is_array<T>::value || detail::is_pair<T>::value || detail::is_container<T>::value> {};
+struct StringMaker : public detail::StringMakerBase<detail::has_insertion_operator<T>::value ||
+                                                    detail::types::is_pointer<T>::value || detail::types::is_array<T>::value ||
+                                                    detail::is_pair<T>::value || detail::is_container<T>::value>
+{
+};
 
 #ifndef DOCTEST_STRINGIFY
 #ifdef DOCTEST_CONFIG_DOUBLE_STRINGIFY
@@ -279,8 +295,8 @@ struct StringMaker
 #endif
 #endif
 
-template <typename T>
-String toString() {
+template <typename T> String toString()
+{
 #if DOCTEST_CLANG == 0 && DOCTEST_GCC == 0 && DOCTEST_ICC == 0
     String ret = __FUNCSIG__; // class doctest::String __cdecl doctest::toString<TYPE>(void)
     String::size_type beginPos = ret.find('<');
@@ -292,28 +308,28 @@ String toString() {
 #endif // Compiler
 }
 
-template <
-    typename T,
-    typename detail::types::enable_if<!detail::should_stringify_as_underlying_type<T>::value, bool>::type = true>
-String toString(const DOCTEST_REF_WRAP(T) value) {
+template <typename T, typename detail::types::enable_if<!detail::should_stringify_as_underlying_type<T>::value, bool>::type = true>
+String toString(const DOCTEST_REF_WRAP(T) value)
+{
     return StringMaker<T>::convert(value);
 }
 
 // NOLINTNEXTLINE(cppcoreguidelines-rvalue-reference-param-not-moved)
-inline String &&toString(String &&in) {
-    return static_cast<String &&>(in);
+inline String&& toString(String&& in)
+{
+    return static_cast<String&&>(in);
 }
 
 #ifdef DOCTEST_CONFIG_TREAT_CHAR_STAR_AS_STRING
-DOCTEST_INTERFACE String toString(const char *in);
+DOCTEST_INTERFACE String toString(const char* in);
 #endif // DOCTEST_CONFIG_TREAT_CHAR_STAR_AS_STRING
 
 #if DOCTEST_MSVC >= DOCTEST_COMPILER(19, 20, 0)
 // see this issue on why this is needed: https://github.com/doctest/doctest/issues/183
-DOCTEST_INTERFACE String toString(const std::string &in);
+DOCTEST_INTERFACE String toString(const std::string& in);
 #endif // VS 2019
 
-DOCTEST_INTERFACE String toString(const String &in);
+DOCTEST_INTERFACE String toString(const String& in);
 
 DOCTEST_INTERFACE String toString(std::nullptr_t);
 
@@ -335,18 +351,19 @@ DOCTEST_INTERFACE String toString(long unsigned in);
 DOCTEST_INTERFACE String toString(long long in);
 DOCTEST_INTERFACE String toString(long long unsigned in);
 
-template <
-    typename T,
-    typename detail::types::enable_if<detail::should_stringify_as_underlying_type<T>::value, bool>::type = true>
-String toString(const DOCTEST_REF_WRAP(T) value) {
+template <typename T, typename detail::types::enable_if<detail::should_stringify_as_underlying_type<T>::value, bool>::type = true>
+String toString(const DOCTEST_REF_WRAP(T) value)
+{
     using UT = typename detail::types::underlying_type<T>::type;
     return (DOCTEST_STRINGIFY(static_cast<UT>(value)));
 }
 
-namespace detail {
-template <typename T, typename Enable>
-struct filldata {
-    static void fill(std::ostream *stream, const T &in) {
+namespace detail
+{
+template <typename T, typename Enable> struct filldata
+{
+    static void fill(std::ostream* stream, const T& in)
+    {
 #if defined(_MSC_VER) && _MSC_VER <= 1900
         insert_hack_t<T>::insert(*stream, in);
 #else
@@ -357,12 +374,15 @@ struct filldata {
 
 DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4866)
 // NOLINTBEGIN(*-avoid-c-arrays)
-template <typename T, size_t N>
-struct filldata<T[N]> {
-    static void fill(std::ostream *stream, const T (&in)[N]) {
+template <typename T, size_t N> struct filldata<T[N]>
+{
+    static void fill(std::ostream* stream, const T (&in)[N])
+    {
         *stream << "[";
-        for (size_t i = 0; i < N; i++) {
-            if (i != 0) {
+        for (size_t i = 0; i < N; i++)
+        {
+            if (i != 0)
+            {
                 *stream << ", ";
             }
             *stream << (DOCTEST_STRINGIFY(in[i]));
@@ -375,38 +395,39 @@ DOCTEST_MSVC_SUPPRESS_WARNING_POP
 
 // Specialized since we don't want the terminating null byte!
 // NOLINTBEGIN(*-avoid-c-arrays)
-template <size_t N>
-struct filldata<const char[N]> {
-    static void fill(std::ostream *stream, const char (&in)[N]) {
+template <size_t N> struct filldata<const char[N]>
+{
+    static void fill(std::ostream* stream, const char (&in)[N])
+    {
         *stream << String(in, in[N - 1] ? N : N - 1);
     } // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
 };
 // NOLINTEND(*-avoid-c-arrays)
 
-template <>
-struct filldata<const void *> {
-    DOCTEST_INTERFACE static void fill(std::ostream *stream, const void *in);
+template <> struct filldata<const void*>
+{
+    DOCTEST_INTERFACE static void fill(std::ostream* stream, const void* in);
 };
 
-template <>
-struct filldata<const volatile void *> {
-    DOCTEST_INTERFACE static void fill(std::ostream *stream, const volatile void *in);
+template <> struct filldata<const volatile void*>
+{
+    DOCTEST_INTERFACE static void fill(std::ostream* stream, const volatile void* in);
 };
 
-template <typename T>
-struct filldata<T *> {
+template <typename T> struct filldata<T*>
+{
     DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4180)
-    static void fill(std::ostream *stream, const T *in) {
+    static void fill(std::ostream* stream, const T* in)
+    {
         DOCTEST_MSVC_SUPPRESS_WARNING_POP
         DOCTEST_CLANG_SUPPRESS_WARNING_WITH_PUSH("-Wmicrosoft-cast")
-        filldata<const volatile void *>::fill(
-            stream,
+        filldata<const volatile void*>::fill(stream,
 #if DOCTEST_GCC == 0 || DOCTEST_GCC >= DOCTEST_COMPILER(4, 9, 0)
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            reinterpret_cast<const volatile void *>(in)
+                                             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                                             reinterpret_cast<const volatile void*>(in)
 #else
-            // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-            *reinterpret_cast<const volatile void *const *>(&in)
+                                             // NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+                                             *reinterpret_cast<const volatile void* const*>(&in)
 #endif // DOCTEST_GCC
         );
         DOCTEST_CLANG_SUPPRESS_WARNING_POP
@@ -414,10 +435,10 @@ struct filldata<T *> {
 };
 
 template <typename T>
-struct filldata<
-    T,
-    typename detail::types::enable_if<!detail::has_insertion_operator<T>::value && detail::is_pair<T>::value>::type> {
-    static void fill(std::ostream *stream, const T &in) {
+struct filldata<T, typename detail::types::enable_if<!detail::has_insertion_operator<T>::value && detail::is_pair<T>::value>::type>
+{
+    static void fill(std::ostream* stream, const T& in)
+    {
         *stream << "{" << DOCTEST_STRINGIFY(in.first) << ", " << DOCTEST_STRINGIFY(in.second) << "}";
     }
 };
@@ -425,12 +446,15 @@ struct filldata<
 template <typename T>
 struct filldata<
     T,
-    typename detail::types::enable_if<
-        !detail::has_insertion_operator<T>::value && detail::is_container<T>::value>::type> {
-    static void fill(std::ostream *stream, const DOCTEST_REF_WRAP(T) in) {
+    typename detail::types::enable_if<!detail::has_insertion_operator<T>::value && detail::is_container<T>::value>::type>
+{
+    static void fill(std::ostream* stream, const DOCTEST_REF_WRAP(T) in)
+    {
         *stream << "{";
-        for (auto it = in.begin(); it != in.end(); ++it) {
-            if (it != in.begin()) {
+        for (auto it = in.begin(); it != in.end(); ++it)
+        {
+            if (it != in.begin())
+            {
                 *stream << ", ";
             }
             *stream << DOCTEST_STRINGIFY(*it);
@@ -441,7 +465,8 @@ struct filldata<
 
 #ifndef DOCTEST_CONFIG_DISABLE
 template <typename L, typename R>
-String stringifyBinaryExpr(const DOCTEST_REF_WRAP(L) lhs, const char *op, const DOCTEST_REF_WRAP(R) rhs) {
+String stringifyBinaryExpr(const DOCTEST_REF_WRAP(L) lhs, const char* op, const DOCTEST_REF_WRAP(R) rhs)
+{
     return (DOCTEST_STRINGIFY(lhs)) + op + (DOCTEST_STRINGIFY(rhs));
 }
 #endif // DOCTEST_CONFIG_DISABLE

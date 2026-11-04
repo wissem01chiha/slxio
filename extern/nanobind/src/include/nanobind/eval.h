@@ -14,7 +14,8 @@
 
 NAMESPACE_BEGIN(NB_NAMESPACE)
 
-enum eval_mode {
+enum eval_mode
+{
     // Evaluate a string containing an isolated expression
     eval_expr = Py_eval_input,
 
@@ -25,10 +26,11 @@ enum eval_mode {
     eval_statements = Py_file_input
 };
 
-template <eval_mode start = eval_expr>
-object eval(const str &expr, handle global = handle(), handle local = handle()) {
+template <eval_mode start = eval_expr> object eval(const str& expr, handle global = handle(), handle local = handle())
+{
     dict global_default;
-    if (!global.is_valid()) {
+    if (!global.is_valid())
+    {
         global_default = globals();
         global = global_default;
     }
@@ -41,28 +43,32 @@ object eval(const str &expr, handle global = handle(), handle local = handle()) 
     if (!codeobj.is_valid())
         detail::raise_python_error();
 
-    PyObject *result = PyEval_EvalCode(codeobj.ptr(), global.ptr(), local.ptr());
+    PyObject* result = PyEval_EvalCode(codeobj.ptr(), global.ptr(), local.ptr());
     if (!result)
         detail::raise_python_error();
 
     return steal(result);
 }
 
-namespace detail { inline import_cache textwrap_dedent { "textwrap", "dedent" }; }
+namespace detail
+{
+inline import_cache textwrap_dedent{"textwrap", "dedent"};
+}
 
-template <eval_mode start = eval_expr, size_t N>
-object eval(const char (&s)[N], handle global = handle(), handle local = handle()) {
+template <eval_mode start = eval_expr, size_t N> object eval(const char (&s)[N], handle global = handle(), handle local = handle())
+{
     // Support raw string literals by removing common leading whitespace
     str expr = (s[0] == '\n') ? str(detail::textwrap_dedent.get()(s)) : str(s);
     return eval<start>(expr, global, local);
 }
 
-inline void exec(const str &expr, handle global = handle(), handle local = handle()) {
+inline void exec(const str& expr, handle global = handle(), handle local = handle())
+{
     eval<eval_statements>(expr, global, local);
 }
 
-template <size_t N>
-void exec(const char (&s)[N], handle global = handle(), handle local = handle()) {
+template <size_t N> void exec(const char (&s)[N], handle global = handle(), handle local = handle())
+{
     eval<eval_statements>(s, global, local);
 }
 

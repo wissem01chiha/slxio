@@ -5,8 +5,10 @@
 
 #include <cstdint>
 
-namespace simdjson { // table modified and copied from
-namespace internal { // http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable
+namespace simdjson
+{ // table modified and copied from
+namespace internal
+{ // http://graphics.stanford.edu/~seander/bithacks.html#CountBitsSetTable
 
 extern SIMDJSON_DLLIMPORTEXPORT const unsigned char BitsSetTable256mul2[256];
 

@@ -7,21 +7,26 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-void addAssert(assertType::Enum at) {
+void addAssert(assertType::Enum at)
+{
     if ((at & assertType::is_warn) == 0)
         g_cs->numAssertsCurrentTest_atomic++;
 }
 
-void addFailedAssert(assertType::Enum at) {
+void addFailedAssert(assertType::Enum at)
+{
     if ((at & assertType::is_warn) == 0)
         g_cs->numAssertsFailedCurrentTest_atomic++;
 }
 
 #if defined(DOCTEST_CONFIG_POSIX_SIGNALS) || defined(DOCTEST_CONFIG_WINDOWS_SEH)
-void reportFatal(const std::string &message) {
+void reportFatal(const std::string& message)
+{
     g_cs->failure_flags |= TestCaseFailureReason::Crash;
 
     DOCTEST_ITERATE_THROUGH_REPORTERS(test_case_exception, {message.c_str(), true});
@@ -36,14 +41,16 @@ void reportFatal(const std::string &message) {
 }
 #endif // DOCTEST_CONFIG_POSIX_SIGNALS || DOCTEST_CONFIG_WINDOWS_SEH
 
-void failed_out_of_a_testing_context(const AssertData &ad) {
+void failed_out_of_a_testing_context(const AssertData& ad)
+{
     if (g_cs->ah)
         g_cs->ah(ad);
     else
         std::abort();
 }
 
-bool decomp_assert(assertType::Enum at, const char *file, int line, const char *expr, const Result &result) {
+bool decomp_assert(assertType::Enum at, const char* file, int line, const char* expr, const Result& result)
+{
     const bool failed = !result.m_passed;
 
     // ###################################################################################

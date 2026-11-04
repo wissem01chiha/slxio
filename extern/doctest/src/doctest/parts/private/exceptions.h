@@ -5,11 +5,13 @@
 
 DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-template <typename Ex>
-DOCTEST_NORETURN void throw_exception(const Ex &e) {
+template <typename Ex> DOCTEST_NORETURN void throw_exception(const Ex& e)
+{
 #ifndef DOCTEST_CONFIG_NO_EXCEPTIONS
     throw e;
 #else // DOCTEST_CONFIG_NO_EXCEPTIONS
@@ -26,7 +28,7 @@ DOCTEST_NORETURN void throw_exception(const Ex &e) {
 }
 
 #ifndef DOCTEST_INTERNAL_ERROR
-#define DOCTEST_INTERNAL_ERROR(msg)                                                                                    \
+#define DOCTEST_INTERNAL_ERROR(msg)                                                                                                \
     detail::throw_exception(std::logic_error(__FILE__ ":" DOCTEST_TOSTR(__LINE__) ": Internal doctest error: " msg))
 #endif // DOCTEST_INTERNAL_ERROR
 } // namespace detail

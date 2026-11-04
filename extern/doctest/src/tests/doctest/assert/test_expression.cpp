@@ -1,7 +1,8 @@
 #include <doctest/doctest.h>
 #include <utility>
 
-namespace {
+namespace
+{
 // clang-format off
 
 /**
@@ -30,8 +31,8 @@ namespace {
 // clang-format on
 } // namespace
 
-TEST_SUITE("Expression decomposition") {
-
+TEST_SUITE("Expression decomposition")
+{
     // Collection of lvalues / basis for xvalues / prvalues
     const auto _false = false;
     const auto _true = true;
@@ -41,102 +42,133 @@ TEST_SUITE("Expression decomposition") {
     const auto _bar = doctest::String("bar");       // NOLINT(bugprone-throwing-static-initialization,cert-err58-cpp)
     const auto _foobar = doctest::String("foobar"); // NOLINT(bugprone-throwing-static-initialization,cert-err58-cpp)
 
-    const int *ptr = &_1;
+    const int* ptr = &_1;
     const int array[2] = {1, 2};
 
-    struct {
+    struct
+    {
         int value : 4;
     } bitfield = {1};
 
-    struct Object {
+    struct Object
+    {
         int var = 1;
-        void method() {}
+        void method()
+        {
+        }
     };
     const auto member_var = &Object::var;
     const auto member_method = &Object::method;
     const auto object = Object();
 
-    enum { X = 1, Y = 2 };
-    enum class C { X = 1, Y = 2 };
+    enum
+    {
+        X = 1,
+        Y = 2
+    };
+    enum class C
+    {
+        X = 1,
+        Y = 2
+    };
 
-    inline void function() {}
-
-    // Generate an xvalue from a prvalue
-    template <typename T>
-    T &&xvalue(T && value) { // NOLINT(cppcoreguidelines-missing-std-forward)
-        return static_cast<T &&>(value);
+    inline void function()
+    {
     }
 
-    TEST_CASE("Unary decomposition") {
-        SUBCASE("boolean [lvalue]") {
+    // Generate an xvalue from a prvalue
+    template <typename T> T&& xvalue(T && value)
+    { // NOLINT(cppcoreguidelines-missing-std-forward)
+        return static_cast<T&&>(value);
+    }
+
+    TEST_CASE("Unary decomposition")
+    {
+        SUBCASE("boolean [lvalue]")
+        {
             CHECK(DECOMPOSE(_true) == "true");
         }
 
-        SUBCASE("boolean [prvalue]") {
+        SUBCASE("boolean [prvalue]")
+        {
             CHECK(DECOMPOSE(true) == "true");
         }
 
-        SUBCASE("boolean [xvalue]") {
+        SUBCASE("boolean [xvalue]")
+        {
             CHECK(DECOMPOSE(xvalue(true)) == "true");
         }
 
-        SUBCASE("Array subscript [lvalue]") {
+        SUBCASE("Array subscript [lvalue]")
+        {
             CHECK(DECOMPOSE(array[0]) == "1");
         }
 
-        SUBCASE("Bitfield member [xvalue]") {
+        SUBCASE("Bitfield member [xvalue]")
+        {
             CHECK(DECOMPOSE(bitfield.value) == "1");
         }
 
-        SUBCASE("Pointer-to-member [lvalue]") {
+        SUBCASE("Pointer-to-member [lvalue]")
+        {
             CHECK(DECOMPOSE(member_var) == "{?}");
             CHECK(DECOMPOSE(member_method) == "{?}");
         }
 
-        SUBCASE("Pointer-to-member [prvalue]") {
+        SUBCASE("Pointer-to-member [prvalue]")
+        {
             CHECK(DECOMPOSE(&Object::var) == "{?}");
             CHECK(DECOMPOSE(&Object::method) == "{?}");
         }
 
-        SUBCASE("Resolved pointer-to-member [lvalue]") {
+        SUBCASE("Resolved pointer-to-member [lvalue]")
+        {
             CHECK(DECOMPOSE(object.*member_var) == "1");
         }
 
-        SUBCASE("Unscoped enumerator [prvalue]") {
+        SUBCASE("Unscoped enumerator [prvalue]")
+        {
             CHECK(DECOMPOSE(X) == "1");
         }
 
-        SUBCASE("Scoped enumerator [prvalue]") {
+        SUBCASE("Scoped enumerator [prvalue]")
+        {
             CHECK(DECOMPOSE(C::X) == "1");
         }
 
-        SUBCASE("Function [lvalue]") {
+        SUBCASE("Function [lvalue]")
+        {
             CHECK(DECOMPOSE(function) == "{?}");
         }
     }
 
-    TEST_CASE("Binary decomposition") {
+    TEST_CASE("Binary decomposition")
+    {
         // For a few of these checks, we don't actually have stringification available
         // As a result, a few checks will resolve to {?} == {?} or similar
         // This is fine, since we really just want to make sure that the decomposition
         // is able to accept these values; the stringification is another module's problem.
 
-        SUBCASE("boolean [lvalue]") {
+        SUBCASE("boolean [lvalue]")
+        {
             CHECK(DECOMPOSE(_true == _true) == "true == true");
             CHECK(DECOMPOSE(_true != _false) == "true != false");
         }
 
-        SUBCASE("boolean [prvalue]") {
+        SUBCASE("boolean [prvalue]")
+        {
             CHECK(DECOMPOSE(true == true) == "true == true");
             CHECK(DECOMPOSE(true != false) == "true != false");
         }
 
-        SUBCASE("boolean [xvalue]") {
+        SUBCASE("boolean [xvalue]")
+        {
             CHECK(DECOMPOSE(xvalue(true) == xvalue(true)) == "true == true");
             CHECK(DECOMPOSE(xvalue(true) != xvalue(false)) == "true != false");
         }
 
-        SUBCASE("integer [lvalue]") {
+        SUBCASE("integer [lvalue]")
+        {
             // clang-format off
             CHECK(DECOMPOSE(_1 == _1) == "1 == 1");
             CHECK(DECOMPOSE(_1 != _2) == "1 != 2");
@@ -147,45 +179,55 @@ TEST_SUITE("Expression decomposition") {
             // clang-format on
         }
 
-        SUBCASE("String [prvalue]") {
+        SUBCASE("String [prvalue]")
+        {
             CHECK(DECOMPOSE(_foo + _bar == _foobar) == "foobar == foobar");
         }
 
-        SUBCASE("Pointer dereference [lvalue]") {
+        SUBCASE("Pointer dereference [lvalue]")
+        {
             CHECK(DECOMPOSE(*ptr == _1) == "1 == 1");
         }
 
-        SUBCASE("Array subscript [lvalue]") {
+        SUBCASE("Array subscript [lvalue]")
+        {
             CHECK(DECOMPOSE(array[0] != array[1]) == "1 != 2");
         }
 
-        SUBCASE("Bitfield member [xvalue]") {
+        SUBCASE("Bitfield member [xvalue]")
+        {
             CHECK(DECOMPOSE(bitfield.value == _1) == "1 == 1");
         }
 
-        SUBCASE("Pointer-to-member [lvalue]") {
+        SUBCASE("Pointer-to-member [lvalue]")
+        {
             CHECK(DECOMPOSE(member_var == member_var) == "{?} == {?}");
             CHECK(DECOMPOSE(member_method == member_method) == "{?} == {?}");
         }
 
-        SUBCASE("Pointer-to-member [prvalue]") {
+        SUBCASE("Pointer-to-member [prvalue]")
+        {
             CHECK(DECOMPOSE(&Object::var == &Object::var) == "{?} == {?}");
             CHECK(DECOMPOSE(&Object::method == &Object::method) == "{?} == {?}");
         }
 
-        SUBCASE("Resolved pointer-to-member [lvalue]") {
+        SUBCASE("Resolved pointer-to-member [lvalue]")
+        {
             CHECK(DECOMPOSE(object.*member_var == _1) == "1 == 1");
         }
 
-        SUBCASE("Unscoped enumerator [prvalue]") {
+        SUBCASE("Unscoped enumerator [prvalue]")
+        {
             CHECK(DECOMPOSE(X != Y) == "1 != 2");
         }
 
-        SUBCASE("Scoped enumerator [prvalue]") {
+        SUBCASE("Scoped enumerator [prvalue]")
+        {
             CHECK(DECOMPOSE(C::X != C::Y) == "1 != 2");
         }
 
-        SUBCASE("Function [lvalue]") {
+        SUBCASE("Function [lvalue]")
+        {
             CHECK(DECOMPOSE(function == function) == "{?} == {?}");
         }
     }

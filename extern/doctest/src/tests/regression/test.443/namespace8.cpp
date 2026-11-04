@@ -5,21 +5,28 @@ DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_BEGIN
 #include <sstream>
 DOCTEST_MAKE_STD_HEADERS_CLEAN_FROM_WARNINGS_ON_WALL_END
 
-namespace user6 {
-struct label {
-    label()
-        : i(0) {}
+namespace user6
+{
+struct label
+{
+    label() : i(0)
+    {
+    }
     int i;
-    friend bool operator==(const user6::label &lhs, const user6::label &rhs) {
+    friend bool operator==(const user6::label& lhs, const user6::label& rhs)
+    {
         return lhs.i == rhs.i;
     }
 };
 } // namespace user6
 
-namespace user8 {
-struct label {
-    label()
-        : i(0) {}
+namespace user8
+{
+struct label
+{
+    label() : i(0)
+    {
+    }
     int i;
 };
 } // namespace user8
@@ -27,11 +34,13 @@ struct label {
 DOCTEST_GCC_SUPPRESS_WARNING("-Wmissing-declarations")
 DOCTEST_CLANG_SUPPRESS_WARNING("-Wmissing-prototypes")
 
-bool operator==(const user8::label &lhs, const user8::label &rhs) {
+bool operator==(const user8::label& lhs, const user8::label& rhs)
+{
     return lhs.i == rhs.i;
 }
 
-TEST_CASE("namespace 8 friend vs global") {
+TEST_CASE("namespace 8 friend vs global")
+{
     const user6::label a6;
     const user6::label b6;
 

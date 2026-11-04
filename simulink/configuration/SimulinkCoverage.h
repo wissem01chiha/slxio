@@ -17,8 +17,18 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
+
+struct SimulinkCoverage
+{
+    std::string coverageFilePath;
+    std::string coverageReportPath;
+    bool enableCoverage = false;
+};
+
+ValidationReport Validate(const SimulinkCoverage& config);
 
 }; // namespace slxio

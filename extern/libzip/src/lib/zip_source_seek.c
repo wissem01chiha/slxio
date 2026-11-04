@@ -31,17 +31,18 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include "zipint.h"
 
-
-ZIP_EXTERN int zip_source_seek(zip_source_t *src, zip_int64_t offset, int whence) {
+ZIP_EXTERN int zip_source_seek(zip_source_t* src, zip_int64_t offset, int whence)
+{
     zip_source_args_seek_t args;
 
-    if (src->source_closed) {
+    if (src->source_closed)
+    {
         return -1;
     }
-    if (!ZIP_SOURCE_IS_OPEN_READING(src) || (whence != SEEK_SET && whence != SEEK_CUR && whence != SEEK_END)) {
+    if (!ZIP_SOURCE_IS_OPEN_READING(src) || (whence != SEEK_SET && whence != SEEK_CUR && whence != SEEK_END))
+    {
         zip_error_set(&src->error, ZIP_ER_INVAL, 0);
         return -1;
     }
@@ -49,7 +50,8 @@ ZIP_EXTERN int zip_source_seek(zip_source_t *src, zip_int64_t offset, int whence
     args.offset = offset;
     args.whence = whence;
 
-    if (_zip_source_call(src, &args, sizeof(args), ZIP_SOURCE_SEEK) < 0) {
+    if (_zip_source_call(src, &args, sizeof(args), ZIP_SOURCE_SEEK) < 0)
+    {
         return -1;
     }
 
@@ -57,16 +59,19 @@ ZIP_EXTERN int zip_source_seek(zip_source_t *src, zip_int64_t offset, int whence
     return 0;
 }
 
-
-zip_int64_t zip_source_seek_compute_offset(zip_uint64_t offset, zip_uint64_t length, void *data, zip_uint64_t data_length, zip_error_t *error) {
+zip_int64_t
+zip_source_seek_compute_offset(zip_uint64_t offset, zip_uint64_t length, void* data, zip_uint64_t data_length, zip_error_t* error)
+{
     zip_int64_t new_offset;
-    zip_source_args_seek_t *args = ZIP_SOURCE_GET_ARGS(zip_source_args_seek_t, data, data_length, error);
+    zip_source_args_seek_t* args = ZIP_SOURCE_GET_ARGS(zip_source_args_seek_t, data, data_length, error);
 
-    if (args == NULL) {
+    if (args == NULL)
+    {
         return -1;
     }
 
-    switch (args->whence) {
+    switch (args->whence)
+    {
     case SEEK_CUR:
         new_offset = (zip_int64_t)offset + args->offset;
         break;
@@ -84,7 +89,8 @@ zip_int64_t zip_source_seek_compute_offset(zip_uint64_t offset, zip_uint64_t len
         return -1;
     }
 
-    if (new_offset < 0 || (zip_uint64_t)new_offset > length) {
+    if (new_offset < 0 || (zip_uint64_t)new_offset > length)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return -1;
     }

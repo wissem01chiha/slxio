@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
@@ -40,5 +41,7 @@ struct SimulinkModelReference final // NOSONAR
     std::string PropagateSignalLabelsOutOfModel;
     std::string SupportModelReferenceSimTargetCustomCode;
 };
+
+ValidationReport Validate(const SimulinkModelReference& config);
 
 }; // namespace slxio

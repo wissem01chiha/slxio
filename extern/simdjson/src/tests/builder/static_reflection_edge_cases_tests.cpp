@@ -9,17 +9,20 @@
 
 using namespace simdjson;
 
-namespace builder_tests {
+namespace builder_tests
+{
 
-  bool test_empty_values() {
+bool test_empty_values()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct EmptyValues {
-      std::string empty_string{};
-      std::vector<int> empty_vector{};
-      std::optional<int> null_optional{};
-      std::unique_ptr<int> null_unique_ptr{};
-      std::shared_ptr<std::string> null_shared_ptr{};
+    struct EmptyValues
+    {
+        std::string empty_string{};
+        std::vector<int> empty_vector{};
+        std::optional<int> null_optional{};
+        std::unique_ptr<int> null_unique_ptr{};
+        std::shared_ptr<std::string> null_shared_ptr{};
     };
 
     EmptyValues test;
@@ -51,17 +54,19 @@ namespace builder_tests {
     ASSERT_TRUE(deserialized.null_shared_ptr == nullptr);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_special_characters() {
+bool test_special_characters()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct SpecialChars {
-      std::string quotes{};
-      std::string backslashes{};
-      std::string newlines{};
-      std::string unicode{};
-      char null_char{};
+    struct SpecialChars
+    {
+        std::string quotes{};
+        std::string backslashes{};
+        std::string newlines{};
+        std::string unicode{};
+        char null_char{};
     };
 
     SpecialChars test;
@@ -82,11 +87,12 @@ namespace builder_tests {
     ASSERT_TRUE(json.find("\\t") != std::string::npos);
 
     // Test round-trip (excluding null char which has special handling)
-    struct SpecialCharsNoNull {
-      std::string quotes{};
-      std::string backslashes{};
-      std::string newlines{};
-      std::string unicode{};
+    struct SpecialCharsNoNull
+    {
+        std::string quotes{};
+        std::string backslashes{};
+        std::string newlines{};
+        std::string unicode{};
     };
 
     SpecialCharsNoNull test_no_null;
@@ -112,18 +118,20 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.unicode, test.unicode);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_numeric_limits() {
+bool test_numeric_limits()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct NumericLimits {
-      int max_int;
-      int min_int;
-      double max_double;
-      double min_double;
-      bool true_val;
-      bool false_val;
+    struct NumericLimits
+    {
+        int max_int;
+        int min_int;
+        double max_double;
+        double min_double;
+        bool true_val;
+        bool false_val;
     };
 
     NumericLimits test;
@@ -152,21 +160,24 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.false_val, false);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool test_nested_structures() {
+bool test_nested_structures()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct Inner {
-      int value{};
-      std::string name{};
+    struct Inner
+    {
+        int value{};
+        std::string name{};
     };
 
-    struct Outer {
-      Inner inner_obj{};
-      std::vector<Inner> inner_vector{};
-      std::optional<Inner> optional_inner{};
-      std::unique_ptr<Inner> unique_inner{};
+    struct Outer
+    {
+        Inner inner_obj{};
+        std::vector<Inner> inner_vector{};
+        std::optional<Inner> optional_inner{};
+        std::unique_ptr<Inner> unique_inner{};
     };
 
     Outer test;
@@ -200,17 +211,18 @@ namespace builder_tests {
     ASSERT_EQUAL(deserialized.unique_inner->value, 123);
 #endif
     TEST_SUCCEED();
-  }
+}
 
-
-  // https://github.com/simdjson/simdjson/issues/2827
-  // Since C++26, std::optional is a range, so it used to match both the
-  // container and the optional serialization overloads.
-  bool test_issue2827_optional() {
+// https://github.com/simdjson/simdjson/issues/2827
+// Since C++26, std::optional is a range, so it used to match both the
+// container and the optional serialization overloads.
+bool test_issue2827_optional()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct Foo {
-      std::optional<std::string> maybe{};
+    struct Foo
+    {
+        std::optional<std::string> maybe{};
     };
 
     Foo foo{"bar"};
@@ -254,30 +266,34 @@ namespace builder_tests {
     ASSERT_EQUAL(*deserialized.maybe, "bar");
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  // Structures are written through an unchecked writer after reserving an
-  // upper bound on their size. Exercise the cases where the output reaches
-  // that bound (every string byte escaped as \u00XX, widest numbers).
-  bool test_size_bound() {
+// Structures are written through an unchecked writer after reserving an
+// upper bound on their size. Exercise the cases where the output reaches
+// that bound (every string byte escaped as \u00XX, widest numbers).
+bool test_size_bound()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
-    struct Worst {
-      std::string controls{};
-      std::map<std::string, int64_t> by_key{};
-      std::vector<uint64_t> big{};
-      std::vector<double> doubles{};
-      std::optional<std::string> maybe{};
+    struct Worst
+    {
+        std::string controls{};
+        std::map<std::string, int64_t> by_key{};
+        std::vector<uint64_t> big{};
+        std::vector<double> doubles{};
+        std::optional<std::string> maybe{};
     };
     std::string controls;
     std::string escaped_controls;
-    for (size_t i = 0; i < 100; i++) {
-      controls += char(1 + i % 7);
-      escaped_controls += "\\u000" + std::to_string(1 + i % 7);
+    for (size_t i = 0; i < 100; i++)
+    {
+        controls += char(1 + i % 7);
+        escaped_controls += "\\u000" + std::to_string(1 + i % 7);
     }
     std::string escaped_quotes;
-    for (size_t i = 0; i < 33; i++) {
-      escaped_quotes += "\\\"";
+    for (size_t i = 0; i < 33; i++)
+    {
+        escaped_quotes += "\\\"";
     }
     Worst worst;
     worst.controls = controls;
@@ -285,10 +301,10 @@ namespace builder_tests {
     worst.big = {(std::numeric_limits<uint64_t>::max)(), 0, 10000000000000000000ULL};
     worst.doubles = {-1.7976931348623157e308, 2.2250738585072014e-308};
     worst.maybe = std::string(33, '"');
-    const std::string expected = "{\"controls\":\"" + escaped_controls + "\",\"by_key\":{\"" +
-        escaped_controls + "\":-9223372036854775808},\"big\":[18446744073709551615,0,10000000000000000000]," +
-        "\"doubles\":[-1.7976931348623157e+308,2.2250738585072014e-308],\"maybe\":\"" +
-        escaped_quotes + "\"}";
+    const std::string expected = "{\"controls\":\"" + escaped_controls + "\",\"by_key\":{\"" + escaped_controls +
+                                 "\":-9223372036854775808},\"big\":[18446744073709551615,0,10000000000000000000]," +
+                                 "\"doubles\":[-1.7976931348623157e+308,2.2250738585072014e-308],\"maybe\":\"" + escaped_quotes +
+                                 "\"}";
 
     std::string json = "previous content that must go away";
     ASSERT_SUCCESS(builder::to_json(worst, json));
@@ -309,57 +325,68 @@ namespace builder_tests {
 
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  // https://github.com/simdjson/simdjson/issues/2935
-  // A structure that contains itself (through a smart pointer or a container)
-  // used to exceed the constexpr evaluation depth.
+// https://github.com/simdjson/simdjson/issues/2935
+// A structure that contains itself (through a smart pointer or a container)
+// used to exceed the constexpr evaluation depth.
 #if SIMDJSON_STATIC_REFLECTION
-  enum class LogicOperation { And, Or };
-  struct Rule {
+enum class LogicOperation
+{
+    And,
+    Or
+};
+struct Rule
+{
     LogicOperation operation{};
     std::vector<std::string> keywords{};
     std::unique_ptr<Rule> subrule{};
-  };
-  struct Tree {
+};
+struct Tree
+{
     int value{};
     std::vector<Tree> children{};
     std::shared_ptr<Tree> parent_copy{};
-  };
-  struct Odd;
-  struct Even {
+};
+struct Odd;
+struct Even
+{
     int n{};
     std::unique_ptr<Odd> next{};
-  };
-  struct Odd {
+};
+struct Odd
+{
     int n{};
     std::unique_ptr<Even> next{};
-  };
+};
 #endif
 
-  bool test_issue2935_recursive_types() {
+bool test_issue2935_recursive_types()
+{
     TEST_START();
 #if SIMDJSON_STATIC_REFLECTION
     Rule rule{.operation = LogicOperation::And, .keywords = {"foo", "bar"}};
     rule.subrule = std::make_unique<Rule>(Rule{.operation = LogicOperation::Or, .keywords = {"x"}});
     std::string json;
     ASSERT_SUCCESS(simdjson::to_json(rule).get(json));
-    ASSERT_EQUAL(json, R"({"operation":"And","keywords":["foo","bar"],"subrule":{"operation":"Or","keywords":["x"],"subrule":null}})");
+    ASSERT_EQUAL(json,
+                 R"({"operation":"And","keywords":["foo","bar"],"subrule":{"operation":"Or","keywords":["x"],"subrule":null}})");
     ASSERT_SUCCESS(builder::to_json_string(rule).get(json));
-    ASSERT_EQUAL(json, R"({"operation":"And","keywords":["foo","bar"],"subrule":{"operation":"Or","keywords":["x"],"subrule":null}})");
+    ASSERT_EQUAL(json,
+                 R"({"operation":"And","keywords":["foo","bar"],"subrule":{"operation":"Or","keywords":["x"],"subrule":null}})");
     {
-      ondemand::parser parser;
-      auto padded = pad(json);
-      auto doc_result = parser.iterate(padded);
-      ASSERT_SUCCESS(doc_result);
-      Rule back;
-      ASSERT_SUCCESS(doc_result.get<Rule>().get(back));
-      ASSERT_TRUE(back.operation == LogicOperation::And);
-      ASSERT_EQUAL(back.keywords.size(), 2);
-      ASSERT_TRUE(back.subrule != nullptr);
-      ASSERT_TRUE(back.subrule->operation == LogicOperation::Or);
-      ASSERT_EQUAL(back.subrule->keywords[0], "x");
-      ASSERT_TRUE(back.subrule->subrule == nullptr);
+        ondemand::parser parser;
+        auto padded = pad(json);
+        auto doc_result = parser.iterate(padded);
+        ASSERT_SUCCESS(doc_result);
+        Rule back;
+        ASSERT_SUCCESS(doc_result.get<Rule>().get(back));
+        ASSERT_TRUE(back.operation == LogicOperation::And);
+        ASSERT_EQUAL(back.keywords.size(), 2);
+        ASSERT_TRUE(back.subrule != nullptr);
+        ASSERT_TRUE(back.subrule->operation == LogicOperation::Or);
+        ASSERT_EQUAL(back.subrule->keywords[0], "x");
+        ASSERT_TRUE(back.subrule->subrule == nullptr);
     }
 
     Tree tree{.value = 1};
@@ -367,19 +394,21 @@ namespace builder_tests {
     tree.children.push_back(Tree{.value = 3, .children = {Tree{.value = 4}}});
     tree.parent_copy = std::make_shared<Tree>(Tree{.value = 5});
     ASSERT_SUCCESS(simdjson::to_json(tree).get(json));
-    ASSERT_EQUAL(json, R"({"value":1,"children":[{"value":2,"children":[],"parent_copy":null},{"value":3,"children":[{"value":4,"children":[],"parent_copy":null}],"parent_copy":null}],"parent_copy":{"value":5,"children":[],"parent_copy":null}})");
+    ASSERT_EQUAL(
+        json,
+        R"({"value":1,"children":[{"value":2,"children":[],"parent_copy":null},{"value":3,"children":[{"value":4,"children":[],"parent_copy":null}],"parent_copy":null}],"parent_copy":{"value":5,"children":[],"parent_copy":null}})");
     {
-      ondemand::parser parser;
-      auto padded = pad(json);
-      auto doc_result = parser.iterate(padded);
-      ASSERT_SUCCESS(doc_result);
-      Tree back;
-      ASSERT_SUCCESS(doc_result.get<Tree>().get(back));
-      ASSERT_EQUAL(back.children.size(), 2);
-      ASSERT_EQUAL(back.children[1].children[0].value, 4);
-      ASSERT_TRUE(back.children[0].parent_copy == nullptr);
-      ASSERT_TRUE(back.parent_copy != nullptr);
-      ASSERT_EQUAL(back.parent_copy->value, 5);
+        ondemand::parser parser;
+        auto padded = pad(json);
+        auto doc_result = parser.iterate(padded);
+        ASSERT_SUCCESS(doc_result);
+        Tree back;
+        ASSERT_SUCCESS(doc_result.get<Tree>().get(back));
+        ASSERT_EQUAL(back.children.size(), 2);
+        ASSERT_EQUAL(back.children[1].children[0].value, 4);
+        ASSERT_TRUE(back.children[0].parent_copy == nullptr);
+        ASSERT_TRUE(back.parent_copy != nullptr);
+        ASSERT_EQUAL(back.parent_copy->value, 5);
     }
 
     Even even{.n = 0};
@@ -388,32 +417,29 @@ namespace builder_tests {
     ASSERT_SUCCESS(simdjson::to_json(even).get(json));
     ASSERT_EQUAL(json, R"({"n":0,"next":{"n":1,"next":{"n":2,"next":null}}})");
     {
-      ondemand::parser parser;
-      auto padded = pad(json);
-      auto doc_result = parser.iterate(padded);
-      ASSERT_SUCCESS(doc_result);
-      Even back;
-      ASSERT_SUCCESS(doc_result.get<Even>().get(back));
-      ASSERT_TRUE(back.next != nullptr && back.next->next != nullptr);
-      ASSERT_EQUAL(back.next->next->n, 2);
-      ASSERT_TRUE(back.next->next->next == nullptr);
+        ondemand::parser parser;
+        auto padded = pad(json);
+        auto doc_result = parser.iterate(padded);
+        ASSERT_SUCCESS(doc_result);
+        Even back;
+        ASSERT_SUCCESS(doc_result.get<Even>().get(back));
+        ASSERT_TRUE(back.next != nullptr && back.next->next != nullptr);
+        ASSERT_EQUAL(back.next->next->n, 2);
+        ASSERT_TRUE(back.next->next->next == nullptr);
     }
 #endif
     TEST_SUCCEED();
-  }
+}
 
-  bool run() {
-    return test_empty_values() &&
-           test_special_characters() &&
-           test_numeric_limits() &&
-           test_nested_structures() &&
-           test_issue2827_optional() &&
-           test_size_bound() &&
-           test_issue2935_recursive_types();
-  }
+bool run()
+{
+    return test_empty_values() && test_special_characters() && test_numeric_limits() && test_nested_structures() &&
+           test_issue2827_optional() && test_size_bound() && test_issue2935_recursive_types();
+}
 
 } // namespace builder_tests
 
-int main(int argc, char *argv[]) {
-  return test_main(argc, argv, builder_tests::run);
+int main(int argc, char* argv[])
+{
+    return test_main(argc, argv, builder_tests::run);
 }

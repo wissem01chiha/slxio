@@ -5,20 +5,26 @@
 #include <string>
 #include <sstream>
 
-namespace {
+namespace
+{
 
 /** @return the text that the color stringizes to */
-inline std::string text(doctest::Color::Enum color) noexcept {
+inline std::string text(doctest::Color::Enum color) noexcept
+{
     std::ostringstream oss{};
     oss << color;
     return oss.str();
 }
 
 /** @return the text with the escape char stripped */
-inline std::string escape(std::string text) noexcept {
-    if (!text.empty() && text.front() == '\033') {
+inline std::string escape(std::string text) noexcept
+{
+    if (!text.empty() && text.front() == '\033')
+    {
         return text.substr(1);
-    } else {
+    }
+    else
+    {
         return text;
     }
 }
@@ -26,7 +32,8 @@ inline std::string escape(std::string text) noexcept {
 } // namespace
 
 DOCTEST_MSVC_SUPPRESS_WARNING_WITH_PUSH(4866)
-TEST_CASE("Colorizing a stream") {
+TEST_CASE("Colorizing a stream")
+{
     using namespace doctest;
 
     doctest::detail::g_cs->force_colors = true; // clang-format off

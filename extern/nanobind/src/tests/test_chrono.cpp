@@ -11,17 +11,13 @@
 
 #include <nanobind/stl/chrono.h>
 
-struct different_resolutions {
-    using time_point_h = std::chrono::time_point<std::chrono::system_clock,
-                                                 std::chrono::hours>;
-    using time_point_m = std::chrono::time_point<std::chrono::system_clock,
-                                                 std::chrono::minutes>;
-    using time_point_s = std::chrono::time_point<std::chrono::system_clock,
-                                                 std::chrono::seconds>;
-    using time_point_ms = std::chrono::time_point<std::chrono::system_clock,
-                                                  std::chrono::milliseconds>;
-    using time_point_us = std::chrono::time_point<std::chrono::system_clock,
-                                                  std::chrono::microseconds>;
+struct different_resolutions
+{
+    using time_point_h = std::chrono::time_point<std::chrono::system_clock, std::chrono::hours>;
+    using time_point_m = std::chrono::time_point<std::chrono::system_clock, std::chrono::minutes>;
+    using time_point_s = std::chrono::time_point<std::chrono::system_clock, std::chrono::seconds>;
+    using time_point_ms = std::chrono::time_point<std::chrono::system_clock, std::chrono::milliseconds>;
+    using time_point_us = std::chrono::time_point<std::chrono::system_clock, std::chrono::microseconds>;
     time_point_h timestamp_h;
     time_point_m timestamp_m;
     time_point_s timestamp_s;
@@ -29,7 +25,8 @@ struct different_resolutions {
     time_point_us timestamp_us;
 };
 
-NB_MODULE(test_chrono_ext, m) {
+NB_MODULE(test_chrono_ext, m)
+{
     using system_time = std::chrono::system_clock::time_point;
     using steady_time = std::chrono::steady_clock::time_point;
 
@@ -64,17 +61,13 @@ NB_MODULE(test_chrono_ext, m) {
     // Roundtrip a duration in microseconds from a float argument
     m.def("test_chrono7", [](std::chrono::microseconds t) { return t; });
     // Float durations (pybind11 issue #719)
-    m.def("test_chrono_float_diff",
-          [](std::chrono::duration<float> a, std::chrono::duration<float> b) { return a - b; });
+    m.def("test_chrono_float_diff", [](std::chrono::duration<float> a, std::chrono::duration<float> b) { return a - b; });
 
-    m.def("test_nano_timepoint",
-          [](timestamp start, timespan delta) -> timestamp { return start + delta; });
+    m.def("test_nano_timepoint", [](timestamp start, timespan delta) -> timestamp { return start + delta; });
 
-    m.def("test_nano_timepoint_roundtrip",
-          [](timestamp start) { return start; });
+    m.def("test_nano_timepoint_roundtrip", [](timestamp start) { return start; });
 
-    m.def("test_nano_timepoint_diff",
-          [](timestamp start, timestamp end) -> timespan { return start - end; });
+    m.def("test_nano_timepoint_diff", [](timestamp start, timestamp end) -> timespan { return start - end; });
 
     // Test different resolutions
     nanobind::class_<different_resolutions>(m, "different_resolutions")
@@ -88,28 +81,27 @@ NB_MODULE(test_chrono_ext, m) {
     // Round trip an object through the 'datetime_unpack'/'datetime_pack'
     // backend slots, including the 'fold' field that the std::chrono
     // caster does not use
-    m.def("test_datetime_fields", [](nanobind::object o) {
-        using nanobind::detail::datetime_kind;
-        constexpr uint32_t accept =
-            (uint32_t) datetime_kind::datetime | (uint32_t) datetime_kind::date |
-            (uint32_t) datetime_kind::time | (uint32_t) datetime_kind::timedelta;
-        int32_t parts[8];
-        int kind = NB_CALL(datetime_unpack)(NB_CTX, o.ptr(), accept, parts);
-        if (kind < 0)
-            throw nanobind::python_error();
-        if (kind == 0)
-            throw nanobind::type_error("expected a datetime type");
-        PyObject *result = NB_CALL(datetime_pack)(NB_CTX, (uint32_t) kind, parts);
-        if (!result)
-            throw nanobind::python_error();
-        return nanobind::steal(result);
-    });
+    m.def("test_datetime_fields",
+          [](nanobind::object o)
+          {
+              using nanobind::detail::datetime_kind;
+              constexpr uint32_t accept = (uint32_t)datetime_kind::datetime | (uint32_t)datetime_kind::date |
+                                          (uint32_t)datetime_kind::time | (uint32_t)datetime_kind::timedelta;
+              int32_t parts[8];
+              int kind = NB_CALL(datetime_unpack)(NB_CTX, o.ptr(), accept, parts);
+              if (kind < 0)
+                  throw nanobind::python_error();
+              if (kind == 0)
+                  throw nanobind::type_error("expected a datetime type");
+              PyObject* result = NB_CALL(datetime_pack)(NB_CTX, (uint32_t)kind, parts);
+              if (!result)
+                  throw nanobind::python_error();
+              return nanobind::steal(result);
+          });
 
     // Reading a float as a number of seconds is an implicit conversion, so a
     // caller that forbids one must not receive a duration
-    m.def("test_duration_noconvert",
-          [](std::chrono::milliseconds d) { return d.count(); },
-          nanobind::arg().noconvert());
+    m.def("test_duration_noconvert", [](std::chrono::milliseconds d) { return d.count(); }, nanobind::arg().noconvert());
 
     // The duration overload comes first, but a float matches 'double' without
     // a conversion, so the second overload must win

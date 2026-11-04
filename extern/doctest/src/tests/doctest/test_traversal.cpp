@@ -5,9 +5,11 @@
 using doctest::SubcaseSignature;
 using doctest::detail::TraversalState;
 
-namespace {
+namespace
+{
 
-TEST_CASE("TraversalState advances through discovered subcase paths") {
+TEST_CASE("TraversalState advances through discovered subcase paths")
+{
     const SubcaseSignature outer_a = SubcaseSignature{"outer_a", "test_traversal.cpp", 10};
     const SubcaseSignature inner_a = SubcaseSignature{"inner_a", "test_traversal.cpp", 11};
     const SubcaseSignature inner_b = SubcaseSignature{"inner_b", "test_traversal.cpp", 12};
@@ -24,19 +26,23 @@ TEST_CASE("TraversalState advances through discovered subcase paths") {
 
     std::vector<std::vector<std::string>> visited_paths;
 
-    do { /* NOLINT(cppcoreguidelines-avoid-do-while) */
+    do
+    { /* NOLINT(cppcoreguidelines-avoid-do-while) */
         traversal.resetForRun();
         std::vector<std::string> visited_path;
 
-        if (traversal.tryEnterSubcase(outer_a)) {
+        if (traversal.tryEnterSubcase(outer_a))
+        {
             visited_path.emplace_back(outer_a.m_name.c_str());
 
-            if (traversal.tryEnterSubcase(inner_a)) {
+            if (traversal.tryEnterSubcase(inner_a))
+            {
                 visited_path.emplace_back(inner_a.m_name.c_str());
                 traversal.leaveSubcase();
             }
 
-            if (traversal.tryEnterSubcase(inner_b)) {
+            if (traversal.tryEnterSubcase(inner_b))
+            {
                 visited_path.emplace_back(inner_b.m_name.c_str());
                 traversal.leaveSubcase();
             }
@@ -44,7 +50,8 @@ TEST_CASE("TraversalState advances through discovered subcase paths") {
             traversal.leaveSubcase();
         }
 
-        if (traversal.tryEnterSubcase(outer_b)) {
+        if (traversal.tryEnterSubcase(outer_b))
+        {
             visited_path.emplace_back(outer_b.m_name.c_str());
             traversal.leaveSubcase();
         }
@@ -55,7 +62,8 @@ TEST_CASE("TraversalState advances through discovered subcase paths") {
     CHECK(visited_paths == expected_paths);
 }
 
-TEST_CASE("TraversalState can unwind active subcases after an abrupt exit") {
+TEST_CASE("TraversalState can unwind active subcases after an abrupt exit")
+{
     const SubcaseSignature outer = SubcaseSignature{"outer", "test_traversal.cpp", 20};
     const SubcaseSignature inner = SubcaseSignature{"inner", "test_traversal.cpp", 21};
 
@@ -71,7 +79,8 @@ TEST_CASE("TraversalState can unwind active subcases after an abrupt exit") {
     CHECK(traversal.activeSubcaseDepth() == 0);
 }
 
-TEST_CASE("TraversalState advance handles runs with no discovered decision points") {
+TEST_CASE("TraversalState advance handles runs with no discovered decision points")
+{
     const SubcaseSignature first = SubcaseSignature{"first", "test_traversal.cpp", 30};
     const SubcaseSignature second = SubcaseSignature{"second", "test_traversal.cpp", 31};
 
@@ -90,7 +99,8 @@ TEST_CASE("TraversalState advance handles runs with no discovered decision point
     CHECK_FALSE(traversal.advance());
 }
 
-TEST_CASE("TraversalState advance ignores deeper stale decisions when rerun exits early") {
+TEST_CASE("TraversalState advance ignores deeper stale decisions when rerun exits early")
+{
     const SubcaseSignature outer = SubcaseSignature{"outer", "test_traversal.cpp", 40};
 
     TraversalState traversal;

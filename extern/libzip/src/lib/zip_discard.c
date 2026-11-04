@@ -31,24 +31,25 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 
 #include "zipint.h"
-
 
 /* zip_discard:
    frees the space allocated to a zipfile struct, and closes the
    corresponding file. */
 
-void zip_discard(zip_t *za) {
+void zip_discard(zip_t* za)
+{
     zip_uint64_t i;
 
-    if (za == NULL) {
+    if (za == NULL)
+    {
         return;
     }
 
-    if (za->src) {
+    if (za->src)
+    {
         zip_source_close(za->src);
         zip_source_free(za->src);
     }
@@ -59,14 +60,17 @@ void zip_discard(zip_t *za) {
 
     _zip_hash_free(za->names);
 
-    if (za->entry) {
-        for (i = 0; i < za->nentry; i++) {
+    if (za->entry)
+    {
+        for (i = 0; i < za->nentry; i++)
+        {
             _zip_entry_finalize(za->entry + i);
         }
         free(za->entry);
     }
 
-    for (i = 0; i < za->nopen_source; i++) {
+    for (i = 0; i < za->nopen_source; i++)
+    {
         _zip_source_invalidate(za->open_source[i]);
     }
     free(za->open_source);

@@ -65,8 +65,6 @@
 #endif
 #endif
 
-
-
 #ifdef __has_include
 #if __has_include(<version>)
 #include <version>
@@ -101,12 +99,9 @@
 // Note that C++26 mode alone is not enough: GCC 16 requires -freflection,
 // and only then does it define __cpp_impl_reflection.
 #ifndef SIMDJSON_STATIC_REFLECTION
-#if defined(SIMDJSON_CPLUSPLUS26) &&                                           \
-    defined(__cpp_impl_reflection) && __cpp_impl_reflection >= 202506L &&      \
-    defined(__cpp_lib_reflection) && __cpp_lib_reflection >= 202506L &&        \
-    defined(__cpp_expansion_statements) &&                                     \
-        __cpp_expansion_statements >= 202506L &&                               \
-    defined(__cpp_lib_define_static) && __cpp_lib_define_static >= 202506L
+#if defined(SIMDJSON_CPLUSPLUS26) && defined(__cpp_impl_reflection) && __cpp_impl_reflection >= 202506L &&                         \
+    defined(__cpp_lib_reflection) && __cpp_lib_reflection >= 202506L && defined(__cpp_expansion_statements) &&                     \
+    __cpp_expansion_statements >= 202506L && defined(__cpp_lib_define_static) && __cpp_lib_define_static >= 202506L
 // __cpp_lib_reflection is the feature-test macro for <meta>, so there is no
 // need for a separate __has_include check (which would have to be guarded for
 // compilers that lack __has_include).
@@ -188,13 +183,14 @@
 #include <stdfloat>
 #endif
 
-
 #if !defined(SIMDJSON_CONSTEVAL)
-#if defined(__cpp_consteval) && __cpp_consteval >= 201811L && defined(__cpp_lib_constexpr_string) && __cpp_lib_constexpr_string >= 201907L
+#if defined(__cpp_consteval) && __cpp_consteval >= 201811L && defined(__cpp_lib_constexpr_string) &&                               \
+    __cpp_lib_constexpr_string >= 201907L
 #define SIMDJSON_CONSTEVAL 1
 #else
 #define SIMDJSON_CONSTEVAL 0
-#endif // defined(__cpp_consteval) && __cpp_consteval >= 201811L && defined(__cpp_lib_constexpr_string) && __cpp_lib_constexpr_string >= 201907L
+#endif // defined(__cpp_consteval) && __cpp_consteval >= 201811L && defined(__cpp_lib_constexpr_string) &&
+       // __cpp_lib_constexpr_string >= 201907L
 #endif // !defined(SIMDJSON_CONSTEVAL)
 
 // SIMDJSON_CONSTEXPR_STRING is 'constexpr' when the standard library supports

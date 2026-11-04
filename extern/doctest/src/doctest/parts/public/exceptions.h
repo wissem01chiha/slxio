@@ -8,10 +8,14 @@ DOCTEST_SUPPRESS_PUBLIC_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
-namespace detail {
+namespace doctest
+{
+namespace detail
+{
 
-struct DOCTEST_INTERFACE TestFailureException {};
+struct DOCTEST_INTERFACE TestFailureException
+{
+};
 
 DOCTEST_INTERFACE bool checkIfShouldThrow(assertType::Enum at);
 

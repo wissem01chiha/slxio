@@ -5,17 +5,22 @@ DOCTEST_SUPPRESS_PRIVATE_WARNINGS_PUSH
 
 #ifndef DOCTEST_CONFIG_DISABLE
 
-namespace doctest {
+namespace doctest
+{
 
-XmlReporter::XmlReporter(const ContextOptions &co)
-    : xml(*co.cout), opt(co) {}
+XmlReporter::XmlReporter(const ContextOptions& co) : xml(*co.cout), opt(co)
+{
+}
 
-void XmlReporter::log_contexts() {
+void XmlReporter::log_contexts()
+{
     const int num_contexts = get_num_active_contexts();
-    if (num_contexts) {
+    if (num_contexts)
+    {
         auto contexts = get_active_contexts();
         std::stringstream ss;
-        for (int i = 0; i < num_contexts; ++i) {
+        for (int i = 0; i < num_contexts; ++i)
+        {
             contexts[i]->stringify(&ss);
             xml.scopedElement("Info").writeText(ss.str());
             ss.str("");
@@ -23,22 +28,29 @@ void XmlReporter::log_contexts() {
     }
 }
 
-unsigned XmlReporter::line(unsigned l) const {
+unsigned XmlReporter::line(unsigned l) const
+{
     return opt.no_line_numbers ? 0 : l;
 }
 
-void XmlReporter::test_case_start_impl(const TestCaseData &in) {
+void XmlReporter::test_case_start_impl(const TestCaseData& in)
+{
     bool open_ts_tag = false;
-    if (tc != nullptr) { // we have already opened a test suite
-        if (std::strcmp(tc->m_test_suite, in.m_test_suite) != 0) {
+    if (tc != nullptr)
+    { // we have already opened a test suite
+        if (std::strcmp(tc->m_test_suite, in.m_test_suite) != 0)
+        {
             xml.endElement();
             open_ts_tag = true;
         }
-    } else {
+    }
+    else
+    {
         open_ts_tag = true; // first test case ==> first test suite
     }
 
-    if (open_ts_tag) {
+    if (open_ts_tag)
+    {
         xml.startElement("TestSuite");
         xml.writeAttribute("name", in.m_test_suite);
     }
@@ -58,19 +70,20 @@ void XmlReporter::test_case_start_impl(const TestCaseData &in) {
         xml.writeAttribute("should_fail", true);
 }
 
-void XmlReporter::report_query(const QueryData &in) {
+void XmlReporter::report_query(const QueryData& in)
+{
     test_run_start();
-    if (opt.list_reporters) {
-        for (auto &curr: detail::getListeners())
-            xml.scopedElement("Listener")
-                .writeAttribute("priority", curr.first.first)
-                .writeAttribute("name", curr.first.second);
-        for (auto &curr: detail::getReporters())
-            xml.scopedElement("Reporter")
-                .writeAttribute("priority", curr.first.first)
-                .writeAttribute("name", curr.first.second);
-    } else if (opt.count || opt.list_test_cases) {
-        for (unsigned i = 0; i < in.num_data; ++i) {
+    if (opt.list_reporters)
+    {
+        for (auto& curr : detail::getListeners())
+            xml.scopedElement("Listener").writeAttribute("priority", curr.first.first).writeAttribute("name", curr.first.second);
+        for (auto& curr : detail::getReporters())
+            xml.scopedElement("Reporter").writeAttribute("priority", curr.first.first).writeAttribute("name", curr.first.second);
+    }
+    else if (opt.count || opt.list_test_cases)
+    {
+        for (unsigned i = 0; i < in.num_data; ++i)
+        {
             xml.scopedElement("TestCase")
                 .writeAttribute("name", in.data[i]->m_name)
                 .writeAttribute("testsuite", in.data[i]->m_test_suite)
@@ -78,20 +91,20 @@ void XmlReporter::report_query(const QueryData &in) {
                 .writeAttribute("line", line(in.data[i]->m_line))
                 .writeAttribute("skipped", in.data[i]->m_skip);
         }
-        xml.scopedElement("OverallResultsTestCases")
-            .writeAttribute("unskipped", in.run_stats->numTestCasesPassingFilters);
-    } else if (opt.list_test_suites) {
+        xml.scopedElement("OverallResultsTestCases").writeAttribute("unskipped", in.run_stats->numTestCasesPassingFilters);
+    }
+    else if (opt.list_test_suites)
+    {
         for (unsigned i = 0; i < in.num_data; ++i)
             xml.scopedElement("TestSuite").writeAttribute("name", in.data[i]->m_test_suite);
-        xml.scopedElement("OverallResultsTestCases")
-            .writeAttribute("unskipped", in.run_stats->numTestCasesPassingFilters);
-        xml.scopedElement("OverallResultsTestSuites")
-            .writeAttribute("unskipped", in.run_stats->numTestSuitesPassingFilters);
+        xml.scopedElement("OverallResultsTestCases").writeAttribute("unskipped", in.run_stats->numTestCasesPassingFilters);
+        xml.scopedElement("OverallResultsTestSuites").writeAttribute("unskipped", in.run_stats->numTestSuitesPassingFilters);
     }
     xml.endElement();
 }
 
-void XmlReporter::test_run_start() {
+void XmlReporter::test_run_start()
+{
     xml.writeDeclaration();
 
     // remove .exe extension - mainly to have the same output on UNIX and Windows
@@ -119,7 +132,8 @@ void XmlReporter::test_run_start() {
         .writeAttribute("no_skip", opt.no_skip);
 }
 
-void XmlReporter::test_run_end(const TestRunStats &p) {
+void XmlReporter::test_run_end(const TestRunStats& p)
+{
     if (tc) // the TestSuite tag - only if there has been at least 1 test case
         xml.endElement();
 
@@ -137,15 +151,19 @@ void XmlReporter::test_run_end(const TestRunStats &p) {
     xml.endElement();
 }
 
-void XmlReporter::test_case_start(const TestCaseData &in) {
+void XmlReporter::test_case_start(const TestCaseData& in)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     test_case_start_impl(in);
     xml.ensureTagClosed();
 }
 
-void XmlReporter::test_case_reenter(const TestCaseData &) {}
+void XmlReporter::test_case_reenter(const TestCaseData&)
+{
+}
 
-void XmlReporter::test_case_end(const CurrentTestCaseStats &st) {
+void XmlReporter::test_case_end(const CurrentTestCaseStats& st)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     xml.startElement("OverallResultsAsserts")
         .writeAttribute("successes", st.numAssertsCurrentTest - st.numAssertsFailedCurrentTest)
@@ -160,13 +178,15 @@ void XmlReporter::test_case_end(const CurrentTestCaseStats &st) {
     xml.endElement();
 }
 
-void XmlReporter::test_case_exception(const TestCaseException &e) {
+void XmlReporter::test_case_exception(const TestCaseException& e)
+{
     DOCTEST_LOCK_MUTEX(mutex)
 
     xml.scopedElement("Exception").writeAttribute("crash", e.is_crash).writeText(e.error_string.c_str());
 }
 
-void XmlReporter::subcase_start(const SubcaseSignature &in) {
+void XmlReporter::subcase_start(const SubcaseSignature& in)
+{
     DOCTEST_LOCK_MUTEX(mutex)
     xml.startElement("SubCase")
         .writeAttribute("name", in.m_name)
@@ -175,12 +195,14 @@ void XmlReporter::subcase_start(const SubcaseSignature &in) {
     xml.ensureTagClosed();
 }
 
-void XmlReporter::subcase_end() {
+void XmlReporter::subcase_end()
+{
     DOCTEST_LOCK_MUTEX(mutex)
     xml.endElement();
 }
 
-void XmlReporter::log_assert(const AssertData &rb) {
+void XmlReporter::log_assert(const AssertData& rb)
+{
     if (!rb.m_failed && !opt.success)
         return;
 
@@ -209,7 +231,8 @@ void XmlReporter::log_assert(const AssertData &rb) {
     xml.endElement();
 }
 
-void XmlReporter::log_message(const MessageData &mb) {
+void XmlReporter::log_message(const MessageData& mb)
+{
     DOCTEST_LOCK_MUTEX(mutex)
 
     xml.startElement("Message")
@@ -224,8 +247,10 @@ void XmlReporter::log_message(const MessageData &mb) {
     xml.endElement();
 }
 
-void XmlReporter::test_case_skipped(const TestCaseData &in) {
-    if (opt.no_skipped_summary == false) {
+void XmlReporter::test_case_skipped(const TestCaseData& in)
+{
+    if (opt.no_skipped_summary == false)
+    {
         DOCTEST_LOCK_MUTEX(mutex)
         test_case_start_impl(in);
         xml.writeAttribute("skipped", "true");

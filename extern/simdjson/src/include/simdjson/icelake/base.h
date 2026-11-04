@@ -6,11 +6,13 @@
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
 // The constructor may be executed on any host, so we take care not to use SIMDJSON_TARGET_ICELAKE
-namespace simdjson {
+namespace simdjson
+{
 /**
  * Implementation for Icelake (Intel AVX512).
  */
-namespace icelake {
+namespace icelake
+{
 
 class implementation;
 

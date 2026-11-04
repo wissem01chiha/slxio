@@ -31,35 +31,41 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 /* LCOV_EXCL_START */
 #include <stdlib.h>
 
 #define _ZIP_COMPILING_DEPRECATED
 #include "zipint.h"
 
-ZIP_EXTERN zip_source_t *zip_source_zip_create(zip_t *srcza, zip_uint64_t srcidx, zip_flags_t flags, zip_uint64_t start, zip_int64_t len, zip_error_t *error) {
-    if (len < -1) {
+ZIP_EXTERN zip_source_t*
+zip_source_zip_create(zip_t* srcza, zip_uint64_t srcidx, zip_flags_t flags, zip_uint64_t start, zip_int64_t len, zip_error_t* error)
+{
+    if (len < -1)
+    {
         zip_error_set(error, ZIP_ER_INVAL, 0);
         return NULL;
     }
 
-    if (len == 0) {
+    if (len == 0)
+    {
         len = -1;
     }
 
-    if (start == 0 && len == -1) {
+    if (start == 0 && len == -1)
+    {
         flags |= ZIP_FL_COMPRESSED;
     }
-    else {
+    else
+    {
         flags &= ~ZIP_FL_COMPRESSED;
     }
 
     return zip_source_zip_file_create(srcza, srcidx, flags, start, len, NULL, error);
 }
 
-
-ZIP_EXTERN zip_source_t *zip_source_zip(zip_t *za, zip_t *srcza, zip_uint64_t srcidx, zip_flags_t flags, zip_uint64_t start, zip_int64_t len) {
+ZIP_EXTERN zip_source_t*
+zip_source_zip(zip_t* za, zip_t* srcza, zip_uint64_t srcidx, zip_flags_t flags, zip_uint64_t start, zip_int64_t len)
+{
     return zip_source_zip_create(srcza, srcidx, flags, start, len, &za->error);
 }
 /* LCOV_EXCL_STOP */

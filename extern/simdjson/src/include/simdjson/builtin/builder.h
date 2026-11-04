@@ -32,11 +32,12 @@
 
 #undef SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
-  /**
-   * @copydoc simdjson::SIMDJSON_BUILTIN_IMPLEMENTATION::builder
-   */
-  namespace builder = SIMDJSON_BUILTIN_IMPLEMENTATION::builder;
+namespace simdjson
+{
+/**
+ * @copydoc simdjson::SIMDJSON_BUILTIN_IMPLEMENTATION::builder
+ */
+namespace builder = SIMDJSON_BUILTIN_IMPLEMENTATION::builder;
 } // namespace simdjson
 
 #endif // SIMDJSON_BUILTIN_BUILDER_H

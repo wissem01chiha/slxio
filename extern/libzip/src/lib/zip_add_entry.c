@@ -31,28 +31,31 @@
   IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-
 #include <stdlib.h>
 
 #include "zipint.h"
 
-
 /* NOTE: Signed due to -1 on error.  See zip_add.c for more details. */
 
-zip_int64_t _zip_add_entry(zip_t *za) {
+zip_int64_t _zip_add_entry(zip_t* za)
+{
     zip_uint64_t idx;
 
-    if (za->nentry + 1 >= za->nentry_alloc) {
+    if (za->nentry + 1 >= za->nentry_alloc)
+    {
         zip_uint64_t additional_entries = 2 * za->nentry_alloc;
 
-        if (additional_entries < 16) {
+        if (additional_entries < 16)
+        {
             additional_entries = 16;
         }
-        else if (additional_entries > 1024) {
+        else if (additional_entries > 1024)
+        {
             additional_entries = 1024;
         }
 
-        if (!ZIP_REALLOC(za->entry, za->nentry_alloc, additional_entries, &za->error)) {
+        if (!ZIP_REALLOC(za->entry, za->nentry_alloc, additional_entries, &za->error))
+        {
             return -1;
         }
     }

@@ -11,13 +11,13 @@ using filename_memory_buf_t = fmt::basic_memory_buffer<spdlog::filename_t::value
 #endif
 
 #ifdef SPDLOG_WCHAR_FILENAMES
-std::string filename_buf_to_utf8string(const filename_memory_buf_t &w) {
+std::string filename_buf_to_utf8string(const filename_memory_buf_t& w) {
     spdlog::memory_buf_t buf;
     spdlog::details::os::wstr_to_utf8buf(spdlog::wstring_view_t(w.data(), w.size()), buf);
     return SPDLOG_BUF_TO_STRING(buf);
 }
 #else
-std::string filename_buf_to_utf8string(const filename_memory_buf_t &w) {
+std::string filename_buf_to_utf8string(const filename_memory_buf_t& w) {
     return SPDLOG_BUF_TO_STRING(w);
 }
 #endif
@@ -45,7 +45,7 @@ TEST_CASE("daily_logger with dateonly calculator", "[daily_logger]") {
 }
 
 struct custom_daily_file_name_calculator {
-    static spdlog::filename_t calc_filename(const spdlog::filename_t &basename, const tm &now_tm) {
+    static spdlog::filename_t calc_filename(const spdlog::filename_t& basename, const tm& now_tm) {
         return spdlog::fmt_lib::format(SPDLOG_FILENAME_T("{}{:04d}{:02d}{:02d}"), basename,
                                        now_tm.tm_year + 1900, now_tm.tm_mon + 1, now_tm.tm_mday);
     }

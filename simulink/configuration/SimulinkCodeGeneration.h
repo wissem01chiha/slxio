@@ -17,12 +17,18 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ValidationReport.h"
 
 namespace slxio
 {
 
 struct SimulinkCodeGeneration
 {
+    std::string codeGenFolder;
+    std::string codeGenLanguage;
+    bool enableCodeGeneration = false;
 };
+
+ValidationReport Validate(const SimulinkCodeGeneration& config);
 
 } // namespace slxio

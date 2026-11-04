@@ -5,11 +5,13 @@
 #include "simdjson/base.h"
 #endif // SIMDJSON_CONDITIONAL_INCLUDE
 
-namespace simdjson {
+namespace simdjson
+{
 /**
  * Fallback implementation (runs on any machine).
  */
-namespace fallback {
+namespace fallback
+{
 
 class implementation;
 

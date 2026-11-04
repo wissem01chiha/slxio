@@ -7,7 +7,8 @@
 
 #include "simdjson.h"
 
-int main() {
+int main()
+{
     std::string input = R"({"hello": "world"} {"hello": "there"})";
     simdjson::ondemand::parser parser;
     simdjson::ondemand::document_stream stream;
@@ -16,12 +17,15 @@ int main() {
 #else
     auto error = parser.iterate_many(input).get(stream);
 #endif
-    if (error) {
+    if (error)
+    {
         std::cerr << error << std::endl;
         return EXIT_FAILURE;
     }
-    for (auto doc : stream) {
-        if (doc.error()) {
+    for (auto doc : stream)
+    {
+        if (doc.error())
+        {
             std::cerr << doc.error() << std::endl;
             return EXIT_FAILURE;
         }
