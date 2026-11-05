@@ -23,10 +23,9 @@ namespace slxio
 TEST_CASE("VersionManager reports a consistent version")
 {
     VersionManager version;
-    const std::string expectedVersion =
-        std::to_string(VersionManager::GetMajorVersion()) + "." +
-        std::to_string(VersionManager::GetMinorVersion()) + "." +
-        std::to_string(VersionManager::GetPatchVersion());
+    const std::string expectedVersion = std::to_string(VersionManager::GetMajorVersion()) + "." +
+                                        std::to_string(VersionManager::GetMinorVersion()) + "." +
+                                        std::to_string(VersionManager::GetPatchVersion());
 
     CHECK(VersionManager::GetVersionString() == expectedVersion);
     CHECK(version.IsMajorVersionLessThan(VersionManager::GetMajorVersion() + 1));

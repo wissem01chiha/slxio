@@ -14,43 +14,44 @@
  * limitations under the License.
  */
 
- #include "SimulinkReleaseHandler.h"
+#include "SimulinkReleaseHandler.h"
 
- namespace slxio
- {
- SimulinkReleaseHandler::SimulinkReleaseHandler(uint16_t year, char letter):  year_(year), letter_(letter)
- {
- }
- std::optional<SimulinkReleaseHandler> SimulinkReleaseHandler::Parse(std::string_view s)
- {
-        if (s.size() != 6 || s[0] != 'R' || s[5] < 'a' || s[5] > 'b')
+namespace slxio
+{
+SimulinkReleaseHandler::SimulinkReleaseHandler(uint16_t year, char letter)
+    : year_(year), letter_(letter)
+{
+}
+std::optional<SimulinkReleaseHandler> SimulinkReleaseHandler::Parse(std::string_view s)
+{
+    if (s.size() != 6 || s[0] != 'R' || s[5] < 'a' || s[5] > 'b')
+        return std::nullopt;
+
+    uint16_t year = 0;
+    for (size_t i = 1; i <= 4; ++i)
+    {
+        if (s[i] < '0' || s[i] > '9')
             return std::nullopt;
-    
-        uint16_t year = 0;
-        for (size_t i = 1; i <= 4; ++i)
-        {
-            if (s[i] < '0' || s[i] > '9')
-                return std::nullopt;
-            year = year * 10 + (s[i] - '0');
-        }
-    
-        char letter = s[5];
-        return SimulinkReleaseHandler(year, letter);
- }
- uint16_t SimulinkReleaseHandler::Year() const
- {
-     return year_;
- }
-    char SimulinkReleaseHandler::Letter() const
-    {
-        return letter_;
+        year = year * 10 + (s[i] - '0');
     }
-    std::string SimulinkReleaseHandler::ToString() const
-    {
-        return "R" + std::to_string(year_) + letter_;
-    }
-    bool SimulinkReleaseHandler::operator==(const SimulinkReleaseHandler& other) const
-    {
-        return year_ == other.year_ && letter_ == other.letter_;
-    }
-    }; // namespace slxio
+
+    char letter = s[5];
+    return SimulinkReleaseHandler(year, letter);
+}
+uint16_t SimulinkReleaseHandler::Year() const
+{
+    return year_;
+}
+char SimulinkReleaseHandler::Letter() const
+{
+    return letter_;
+}
+std::string SimulinkReleaseHandler::ToString() const
+{
+    return "R" + std::to_string(year_) + letter_;
+}
+bool SimulinkReleaseHandler::operator==(const SimulinkReleaseHandler& other) const
+{
+    return year_ == other.year_ && letter_ == other.letter_;
+}
+}; // namespace slxio

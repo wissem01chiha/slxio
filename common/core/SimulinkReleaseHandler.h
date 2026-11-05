@@ -23,11 +23,11 @@ namespace slxio
 
 enum class SimulinkRelease;
 
-class  SimulinkReleaseHandler final
+class SimulinkReleaseHandler final
 {
 public:
     SimulinkReleaseHandler(uint16_t year, char letter);
-    static std::optional<SimulinkReleaseHandler> Parse(std::string_view s); 
+    static std::optional<SimulinkReleaseHandler> Parse(std::string_view s);
 
     uint16_t Year() const;
     char Letter() const;
@@ -36,15 +36,15 @@ public:
         return year_ * 2u + (letter_ == 'b');
     }
     /// "R2023b"
-    std::string ToString() const; 
+    std::string ToString() const;
 
-    /// only if the compiler support c++20 
-    #if __cplusplus >= 202002L
+/// only if the compiler support c++20
+#if __cplusplus >= 202002L
     constexpr auto operator<=>(const SimulinkReleaseHandler& o) const
     {
         return Ordinal() <=> o.Ordinal();
     }
-    #endif
+#endif
     bool operator==(const SimulinkReleaseHandler&) const;
 
 private:

@@ -43,5 +43,4 @@ TEST_CASE("stores reported diagnostics")
     CHECK(engine.GetDiagnostics().front().GetDiagnosticMessage() == "invalid configuration");
 }
 
-
 } // namespace slxio

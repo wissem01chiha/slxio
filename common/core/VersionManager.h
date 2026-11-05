@@ -21,8 +21,8 @@
 namespace slxio
 {
 
- /// Provides access to the library version information.
-class  VersionManager final
+/// Provides access to the library version information.
+class VersionManager final
 {
 public:
     VersionManager() = default;

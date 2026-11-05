@@ -21,7 +21,7 @@
 namespace slxio
 {
 
-enum class SimulinkRelease 
+enum class SimulinkRelease
 {
     R2018a,
     R2018b,
