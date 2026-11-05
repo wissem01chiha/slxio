@@ -67,7 +67,11 @@ HError Archive::Extract()
             continue;
         }
         char entrydirpath[1024];
-        snprintf(entrydirpath, sizeof(entrydirpath), "%s/%s", directory.GetDirectoryPath().c_str(), name);
+        snprintf(entrydirpath,
+                 sizeof(entrydirpath),
+                 "%s/%s",
+                 directory.GetDirectoryPath().c_str(),
+                 name);
 
         int ec = 0;
         DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);

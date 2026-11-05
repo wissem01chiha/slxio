@@ -34,7 +34,8 @@ std::string SimulinkAtomicSubsystem::GetDimension()
     return std::string();
 }
 
-HError SimulinkAtomicSubsystem::SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkAtomicSubsystem::SetParameter(std::string name,
+                                             std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return E_OK;
 }

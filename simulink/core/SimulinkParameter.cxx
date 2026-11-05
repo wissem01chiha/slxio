@@ -4,7 +4,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkParameter::SimulinkParameter() : m_information(std::make_unique<SimulinkParameterInformation>())
+SimulinkParameter::SimulinkParameter()
+    : m_information(std::make_unique<SimulinkParameterInformation>())
 {
 }
 

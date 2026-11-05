@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -136,6 +136,6 @@ struct SimulinkDebugging final // NOSONAR
     std::string ForceCombineOutputUpdateInSim;
 };
 
-ValidationReport Validate(const SimulinkDebugging& config);
+std::vector<Diagnostic> Validate(const SimulinkDebugging& config);
 
 }; // namespace slxio

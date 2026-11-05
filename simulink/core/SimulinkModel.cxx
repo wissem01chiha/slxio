@@ -10,7 +10,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-SimulinkModel::SimulinkModel() : m_type(SimulinkModelType::Model), m_workspace(nullptr), m_simSet(nullptr)
+SimulinkModel::SimulinkModel()
+    : m_type(SimulinkModelType::Model), m_workspace(nullptr), m_simSet(nullptr)
 {
 }
 
@@ -33,12 +34,14 @@ std::string SimulinkModel::ToString() const
     return std::string();
 }
 
-HError SimulinkModel::AddConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p)
+HError SimulinkModel::AddConfig(const std::string& name,
+                                const std::shared_ptr<IConfigurationObject>& p)
 {
     return E_OK;
 }
 
-HError SimulinkModel::SetConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p)
+HError SimulinkModel::SetConfig(const std::string& name,
+                                const std::shared_ptr<IConfigurationObject>& p)
 {
     return E_OK;
 }
@@ -48,7 +51,8 @@ std::shared_ptr<IConfigurationObject> SimulinkModel::GetConfig(const std::string
     return nullptr;
 }
 
-void SimulinkModel::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkModel::AddParam(const std::string& name,
+                             const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -56,7 +60,8 @@ void SimulinkModel::AddParam(const std::string& name, const std::shared_ptr<IPar
     }
 }
 
-void SimulinkModel::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkModel::SetParam(const std::string& name,
+                             const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {

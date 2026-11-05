@@ -25,7 +25,8 @@ namespace slxio
 class SimulinkCodeGenerationSlxReader final : public SimulinkCodeGenerationReader<SLXSection>
 {
 public:
-    SimulinkReaderResult Read(SLXSection serializedData, SimulinkCodeGeneration& object) const override;
+    SimulinkReaderResult Read(SLXSection serializedData,
+                              SimulinkCodeGeneration& object) const override;
 };
 
 } // namespace slxio

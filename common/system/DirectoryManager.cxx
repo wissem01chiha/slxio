@@ -12,7 +12,8 @@ DirectoryManager::DirectoryManager()
     DirectoryBuffer.clear();
 }
 
-DirectoryManager::DirectoryManager(const std::vector<std::shared_ptr<Directory>>& directories) : DirectoryBuffer(directories)
+DirectoryManager::DirectoryManager(const std::vector<std::shared_ptr<Directory>>& directories)
+    : DirectoryBuffer(directories)
 {
 }
 

@@ -19,9 +19,19 @@
 namespace slxio
 {
 
-ValidationReport Validate(const SimulinkHardware&)
+std::vector<Diagnostic> Validate(const SimulinkHardware& config)
 {
-    return {};
+    std::vector<Diagnostic> diagnostics;
+
+    if (config.Description.empty())
+    {
+        Diagnostic diag;
+        diag.SetSeverity(DiagnosticSeverity::Error);
+        diag.SetMessage("SimulinkHardware Description is empty");
+        diagnostics.push_back(std::move(diag));
+        return diagnostics;
+    }
+    return diagnostics;
 }
 
 } // namespace slxio

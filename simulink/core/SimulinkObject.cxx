@@ -49,7 +49,8 @@ void SimulinkObject::SetId(const SId& id)
     m_id = id;
 }
 
-void SimulinkObject::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkObject::AddParam(const std::string& name,
+                              const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -58,7 +59,8 @@ void SimulinkObject::AddParam(const std::string& name, const std::shared_ptr<IPa
     m_parameters.push_back(p);
 }
 
-void SimulinkObject::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkObject::SetParam(const std::string& name,
+                              const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {

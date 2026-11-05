@@ -56,8 +56,10 @@ public:
     /** Returns a string representation of this element. */
     std::string ToString() const override;
 
-    HError AddConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) override;
-    HError SetConfig(const std::string& name, const std::shared_ptr<IConfigurationObject>& p) override;
+    HError AddConfig(const std::string& name,
+                     const std::shared_ptr<IConfigurationObject>& p) override;
+    HError SetConfig(const std::string& name,
+                     const std::shared_ptr<IConfigurationObject>& p) override;
     std::shared_ptr<IConfigurationObject> GetConfig(const std::string& name) override;
 
     void AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p) override;

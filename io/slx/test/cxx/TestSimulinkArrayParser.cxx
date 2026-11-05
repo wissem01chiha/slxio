@@ -17,7 +17,11 @@ protected:
     xmlNodePtr getXmlNodePtr(const char* xmlfilename)
     {
         char xmlfilepath[512];
-        snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR, xmlfilename);
+        snprintf(xmlfilepath,
+                 sizeof(xmlfilepath),
+                 "%s/io/slx/test/data/%s",
+                 PROJECT_ROOT_DIR,
+                 xmlfilename);
         doc = xmlReadFile(xmlfilepath, nullptr, 0);
         if (!doc)
         {

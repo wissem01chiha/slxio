@@ -19,7 +19,7 @@
 namespace slxio
 {
 
-ValidationReport Validate(const SimulinkCodeGeneration&)
+std::vector<Diagnostic> Validate(const SimulinkCodeGeneration&)
 {
     return {};
 }

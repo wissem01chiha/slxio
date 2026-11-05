@@ -54,7 +54,8 @@ HError SimulinkBlockParser::parse()
 
     for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
     {
-        if (nodePtr_->type == XML_ELEMENT_NODE && xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) == 0)
+        if (nodePtr_->type == XML_ELEMENT_NODE &&
+            xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) == 0)
         {
             std::unique_ptr<SimulinkParameterParser> parser(new SimulinkParameterParser());
             HError status = parser->setInputData(nodePtr_);

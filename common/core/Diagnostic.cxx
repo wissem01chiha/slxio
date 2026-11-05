@@ -19,7 +19,7 @@
 
 namespace slxio
 {
-    DiagnosticSeverity Diagnostic::GetSeverity() const
+DiagnosticSeverity Diagnostic::GetSeverity() const
 {
     return severity;
 }
@@ -31,27 +31,28 @@ void Diagnostic::SetMessage(const std::string& msg)
 {
     message = msg;
 }
-std::string Diagnostic::GetMessage() const
+std::string Diagnostic::GetDiagnosticMessage() const
 {
     return message;
 }
 void Diagnostic::Print(std::ostream& os) const
 {
-    switch (severity) {
-        case DiagnosticSeverity::Note:
-            os << "Note";
-            break;
-        case DiagnosticSeverity::Warning:
-            os << "Warning";
-            break;
-        case DiagnosticSeverity::Error:
-            os << "Error";
-            break;
-        case DiagnosticSeverity::Remark:
-            os << "Remark";
-            break;
+    switch (severity)
+    {
+    case DiagnosticSeverity::Note:
+        os << "Note";
+        break;
+    case DiagnosticSeverity::Warning:
+        os << "Warning";
+        break;
+    case DiagnosticSeverity::Error:
+        os << "Error";
+        break;
+    case DiagnosticSeverity::Remark:
+        os << "Remark";
+        break;
     }
-    os << " " << GetMessage() << "\n";
+    os << " " << GetDiagnosticMessage() << "\n";
 }
 DiagnosticLocation Diagnostic::GetLocation() const
 {

@@ -17,7 +17,8 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 /// @brief base parser for encoded data type strings
-class SLXIO_APIEXPORT SimulinkDataTypeParser final : public SimulinkParserBase<std::string, SimulinkDataType>
+class SLXIO_APIEXPORT SimulinkDataTypeParser final
+    : public SimulinkParserBase<std::string, SimulinkDataType>
 {
 public:
     SimulinkDataTypeParser() = default;

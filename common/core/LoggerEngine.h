@@ -23,18 +23,19 @@ namespace slxio
 class LoggerEngineOptions;
 class Diagnostic;
 
-class LoggerEngine final {
-  public:
+class LoggerEngine final
+{
+public:
     LoggerEngine() = default;
-    explicit LoggerEngine(const LoggerEngineOptions &options);
-    LoggerEngine(const LoggerEngine &) = delete;
-    LoggerEngine &operator=(const LoggerEngine &) = delete;
+    explicit LoggerEngine(const LoggerEngineOptions& options);
+    LoggerEngine(const LoggerEngine&) = delete;
+    LoggerEngine& operator=(const LoggerEngine&) = delete;
     void Init();
-     void Log(const Diagnostic& diagnostic);
+    void Log(const Diagnostic& diagnostic);
 
-    const LoggerEngineOptions &GetOptions() const;
+    const LoggerEngineOptions& GetOptions() const;
 
-  private:
+private:
     std::unique_ptr<LoggerEngineOptions> m_options;
 };
 

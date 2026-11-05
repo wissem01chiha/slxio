@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -82,6 +82,6 @@ struct SimulinkOptimization final // NOSONAR
     std::string DenormalBehavior;
 };
 
-ValidationReport Validate(const SimulinkOptimization& config);
+std::vector<Diagnostic> Validate(const SimulinkOptimization& config);
 
 }; // namespace slxio

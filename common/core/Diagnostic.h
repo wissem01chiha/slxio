@@ -17,45 +17,50 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "DiagnosticLocation.h"
 
 namespace slxio
 {
-class DiagnosticLocation;
 
 // Defines the different supported severity of a diagnostic.
-enum class DiagnosticSeverity {
-  Note,
-  Warning,
-  Error,
-  Remark,
+enum class DiagnosticSeverity
+{
+    Note,
+    Warning,
+    Error,
+    Remark,
 };
 
 // This class contains all of the information necessary to report a diagnostic
 // to the DiagnosticEngine.
-class Diagnostic final {
-  public:
-    Diagnostic(Diagnostic &&) = default;
-  Diagnostic &operator=(Diagnostic &&) = default;
-    Diagnostic(const Diagnostic &) = delete;
-    Diagnostic &operator=(const Diagnostic &) = delete;
+class Diagnostic final
+{
+public:
+    Diagnostic(Diagnostic&&) = default;
+    Diagnostic& operator=(Diagnostic&&) = default;
+    Diagnostic(const Diagnostic&) = delete;
+    Diagnostic& operator=(const Diagnostic&) = delete;
     Diagnostic() = default;
 
-      /// Returns the severity of this diagnostic.
-  DiagnosticSeverity GetSeverity() const ;
+    /// Returns the severity of this diagnostic.
+    DiagnosticSeverity GetSeverity() const;
 
     /// Sets the severity of this diagnostic.
-  void SetSeverity(DiagnosticSeverity s);
+    void SetSeverity(DiagnosticSeverity s);
 
-  /// set the message for this diagnostic.
-  void SetMessage(const std::string &msg);
+    /// set the message for this diagnostic.
+    void SetMessage(const std::string& msg);
 
-  std::string GetMessage() const ;
+    std::string GetDiagnosticMessage() const;
 
-  /// Outputs this diagnostic to a stream. 
-  void Print(std::ostream &os) const;
+    /// Outputs this diagnostic to a stream.
+    void Print(std::ostream& os) const;
 
-  DiagnosticLocation GetLocation() const ;
-  private:
+    DiagnosticLocation GetLocation() const;
+
+    ~Diagnostic() = default;
+
+private:
     DiagnosticSeverity severity{DiagnosticSeverity::Note};
     std::string message;
     std::unique_ptr<DiagnosticLocation> loc;

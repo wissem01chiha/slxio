@@ -56,7 +56,8 @@
         {
             "name": "GCC-15.3.0-x86_64-w64-mingw32",
             "displayName": "GCC-15.3.0-x86_64-w64-mingw32",
-            "description": "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
+            "description":
+                "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
             "generator": "MinGW Makefiles",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
@@ -81,7 +82,8 @@
         {
             "name": "GCC-15.2.0-x86_64-w64-mingw32",
             "displayName": "GCC-15.2.0-x86_64-w64-mingw32",
-            "description": "Using compilers: C = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\gcc.exe, CXX = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\g++.exe",
+            "description":
+                "Using compilers: C = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\gcc.exe, CXX = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\g++.exe",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
@@ -93,7 +95,8 @@
         {
             "name": "GCC-13.2.0-x86_64-w64-mingw32",
             "displayName": "GCC-13.2.0-x86_64-w64-mingw32",
-            "description": "Using compilers: C = C:\\Tools\\c\\bin\\gcc.exe, CXX = C:\\Tools\\c\\bin\\g++.exe",
+            "description":
+                "Using compilers: C = C:\\Tools\\c\\bin\\gcc.exe, CXX = C:\\Tools\\c\\bin\\g++.exe",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
@@ -105,7 +108,8 @@
         {
             "name": "clang-windows-llvm",
             "displayName": "Clang 20.1.0 x86_64-pc-windows-msvc",
-            "description": "Using compilers: C = C:\\Program Files\\LLVM\\bin\\clang.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang++.exe",
+            "description":
+                "Using compilers: C = C:\\Program Files\\LLVM\\bin\\clang.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang++.exe",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/out/build/${presetName}",
             "cacheVariables": {
@@ -118,7 +122,8 @@
         {
             "name": "GCC 10.3.0 x86_64-w64-mingw32",
             "displayName": "GCC 10.3.0 x86_64-w64-mingw32",
-            "description": "Using compilers: C = C:\\TDM-GCC-64\\bin\\gcc.exe, CXX = C:\\TDM-GCC-64\\bin\\g++.exe",
+            "description":
+                "Using compilers: C = C:\\TDM-GCC-64\\bin\\gcc.exe, CXX = C:\\TDM-GCC-64\\bin\\g++.exe",
             "generator": "MinGW Makefiles",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {

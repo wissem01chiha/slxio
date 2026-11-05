@@ -1,3 +1,19 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "Doctest.h"
 #include "SimulinkConfigSetCollection.h"
 
@@ -11,7 +27,8 @@ TEST_CASE("ConfigSetPreservesComponentAndParameterValues")
     configSet.GetOrCreateComponent("Solver").SetParam("StartTime", "0");
     configSet.GetOrCreateComponent("ModelReference", "Simulink.ModelReferenceCC")
         .SetParam("EnableParallelModelReferenceBuilds", "on");
-    configSet.GetOrCreateComponent("FutureComponent", "Simulink.FutureCC").SetParam("FutureOption", "expression");
+    configSet.GetOrCreateComponent("FutureComponent", "Simulink.FutureCC")
+        .SetParam("FutureOption", "expression");
 
     const auto* solver = configSet.FindComponent("Solver");
     REQUIRE(solver != nullptr);
@@ -37,7 +54,8 @@ TEST_CASE("ConfigSetCollectionOwnsSetsAndTracksOneActiveSet")
     CHECK(collection.Add(first) == ConfigSetCollectionResult::Success);
     CHECK(collection.Add(first) == ConfigSetCollectionResult::AlreadyExists);
 
-    CHECK(collection.Add(SimulinkConfigSet("CodeGeneration")) == ConfigSetCollectionResult::Success);
+    CHECK(collection.Add(SimulinkConfigSet("CodeGeneration")) ==
+          ConfigSetCollectionResult::Success);
     CHECK(collection.Size() == 2);
     CHECK(collection.SetActive("Simulation") == ConfigSetCollectionResult::Success);
     REQUIRE(collection.GetActive() != nullptr);
@@ -46,7 +64,8 @@ TEST_CASE("ConfigSetCollectionOwnsSetsAndTracksOneActiveSet")
     CHECK(collection.Rename("Simulation", "Baseline") == ConfigSetCollectionResult::Success);
     CHECK(collection.Find("Baseline") != nullptr);
     CHECK(collection.GetActiveName() == "Baseline");
-    CHECK(collection.Rename("Baseline", "CodeGeneration") == ConfigSetCollectionResult::AlreadyExists);
+    CHECK(collection.Rename("Baseline", "CodeGeneration") ==
+          ConfigSetCollectionResult::AlreadyExists);
     CHECK(collection.SetActive("CodeGeneration") == ConfigSetCollectionResult::Success);
     CHECK(collection.GetActiveName() == "CodeGeneration");
     CHECK(collection.Remove("CodeGeneration") == ConfigSetCollectionResult::Success);

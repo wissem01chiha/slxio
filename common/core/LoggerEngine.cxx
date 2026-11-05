@@ -22,7 +22,7 @@
 
 namespace slxio
 {
-LoggerEngine::LoggerEngine(const LoggerEngineOptions &options)
+LoggerEngine::LoggerEngine(const LoggerEngineOptions& options)
     : m_options(std::make_unique<LoggerEngineOptions>(options))
 {
 }
@@ -31,15 +31,17 @@ void LoggerEngine::Init()
 {
     // queue with 8k items and 1 backing thread.
     spdlog::init_thread_pool(m_options->m_queueSize, m_options->m_nthreads);
-    auto async_file = spdlog::basic_logger_mt<spdlog::async_factory>("background_logger", m_options->logFilePath);
+    auto async_file =
+        spdlog::basic_logger_mt<spdlog::async_factory>("logger", m_options->logFilePath);
     spdlog::set_default_logger(async_file);
     spdlog::set_level(spdlog::level::info);
 }
 
 void LoggerEngine::Log(const Diagnostic& diagnostic)
 {
-    if (m_options->enableLogging) {
-        spdlog::info("{}", diagnostic.GetMessage());
+    if (m_options->enableLogging)
+    {
+        spdlog::info("{}", diagnostic.GetDiagnosticMessage());
     }
 }
 

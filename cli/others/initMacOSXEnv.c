@@ -128,19 +128,20 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
             if (JavaVMBundleURL != NULL)
             {
                 // Append to the path the Versions Component
-                JavaVMBundlerVersionsDirURL =
-                    CFURLCreateCopyAppendingPathComponent(kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"), true);
+                JavaVMBundlerVersionsDirURL = CFURLCreateCopyAppendingPathComponent(
+                    kCFAllocatorDefault, JavaVMBundleURL, CFSTR("Versions"), true);
                 CFRelease(JavaVMBundleURL);
 
                 if (JavaVMBundlerVersionsDirURL != NULL)
                 {
                     // Append to the path the target JVM's Version
-                    TargetJavaVM =
-                        CFURLCreateCopyAppendingPathComponent(kCFAllocatorDefault, JavaVMBundlerVersionsDirURL, targetJVM, true);
+                    TargetJavaVM = CFURLCreateCopyAppendingPathComponent(
+                        kCFAllocatorDefault, JavaVMBundlerVersionsDirURL, targetJVM, true);
                     CFRelease(JavaVMBundlerVersionsDirURL);
                     if (TargetJavaVM != NULL)
                     {
-                        if (CFURLGetFileSystemRepresentation(TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
+                        if (CFURLGetFileSystemRepresentation(
+                                TargetJavaVM, true, pathToTargetJVM, PATH_MAX))
                         {
                             // Check to see if the directory, or a sym link for
                             // the target JVM directory exists, and if so set
@@ -153,7 +154,10 @@ static int launchMacOSXEnv(ScilabEngineInfo* _pSEI)
                                 // the CFSTR targetJVM We can reuse the
                                 // pathToTargetJVM buffer to set the
                                 // environement var.
-                                if (CFStringGetCString(targetJVM, (char*)pathToTargetJVM, PATH_MAX, kCFStringEncodingUTF8))
+                                if (CFStringGetCString(targetJVM,
+                                                       (char*)pathToTargetJVM,
+                                                       PATH_MAX,
+                                                       kCFStringEncodingUTF8))
                                 {
                                     setenv("JAVA_JVM_VERSION", (char*)pathToTargetJVM, 1);
                                     ret = 0;

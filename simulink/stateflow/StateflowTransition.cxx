@@ -43,12 +43,14 @@ void StateflowTransition::RemoveElement()
 {
     if (src)
     {
-        src->removeOutTransition(std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
+        src->removeOutTransition(
+            std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
         src.reset();
     }
     if (dst)
     {
-        dst->removeInTransition(std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
+        dst->removeInTransition(
+            std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
         dst.reset();
     }
 }

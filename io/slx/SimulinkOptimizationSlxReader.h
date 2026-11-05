@@ -23,7 +23,8 @@ namespace slxio
 class SimulinkOptimizationSlxReader final : public SimulinkOptimizationReader<SLXSection>
 {
 public:
-    SimulinkReaderResult Read(SLXSection serializedData, SimulinkOptimization& object) const override;
+    SimulinkReaderResult Read(SLXSection serializedData,
+                              SimulinkOptimization& object) const override;
 };
 
 } // namespace slxio

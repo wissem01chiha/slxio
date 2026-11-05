@@ -49,7 +49,8 @@ TEST_CASE_FIXTURE(DirectoryServiceTestFixture, "Test CreateDirectoryStructure Va
 {
     int err = 0;
     auto d = DirectoryService::GetWorkingDirectory(&err);
-    std::string subdirpath = d.GetDirectoryPath() + PATH_SEP + "simulink" + PATH_SEP + "plugin" + PATH_SEP + "rels" + PATH_SEP;
+    std::string subdirpath = d.GetDirectoryPath() + PATH_SEP + "simulink" + PATH_SEP + "plugin" +
+                             PATH_SEP + "rels" + PATH_SEP;
 
     int error = 0;
     auto dir = DirectoryService::CreateDirectoryStructure(subdirpath, &error);

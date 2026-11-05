@@ -25,8 +25,8 @@ struct LoggerEngineOptions
 {
     bool enableLogging = true;
     bool logToFile = false;
-    std::string logFilePath = "log.txt";
-    std::size_t maxLogFileSize = 1048576; 
+    std::string logFilePath = "slxio.log";
+    std::size_t maxLogFileSize = 1048576;
     std::size_t m_nthreads = 1;
     std::size_t m_queueSize = 8192;
 };

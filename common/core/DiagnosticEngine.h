@@ -23,18 +23,20 @@ namespace slxio
 class Diagnostic;
 struct DiagnosticEngineOptions;
 
-class DiagnosticEngine final {
-  public:
+class DiagnosticEngine final
+{
+public:
     DiagnosticEngine() = default;
-    explicit DiagnosticEngine(const DiagnosticEngineOptions &options);
-    DiagnosticEngine(const DiagnosticEngine &) = delete;
-    DiagnosticEngine &operator=(const DiagnosticEngine &) = delete;
+    explicit DiagnosticEngine(const DiagnosticEngineOptions& options);
+    DiagnosticEngine(const DiagnosticEngine&) = delete;
+    DiagnosticEngine& operator=(const DiagnosticEngine&) = delete;
 
-    void Report(Diagnostic &&diag);
+    void Report(Diagnostic&& diag);
 
-    const DiagnosticEngineOptions &GetOptions() const ;
+    const DiagnosticEngineOptions& GetOptions() const;
 
-    const std::vector<Diagnostic> &GetDiagnostics() const;
+    const std::vector<Diagnostic>& GetDiagnostics() const;
+
 private:
     std::vector<Diagnostic> m_diagnostics;
     std::unique_ptr<DiagnosticEngineOptions> m_options;

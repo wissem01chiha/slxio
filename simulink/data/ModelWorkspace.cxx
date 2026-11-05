@@ -21,7 +21,8 @@ std::shared_ptr<IParameterObjectBase> ModelWorkspace::GetVariable(const std::str
     return nullptr;
 }
 
-HError ModelWorkspace::AssignVariable(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+HError ModelWorkspace::AssignVariable(const std::string& name,
+                                      const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (!p)
     {

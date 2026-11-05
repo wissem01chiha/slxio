@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -29,6 +29,6 @@ struct SimulinkCodeGeneration
     bool enableCodeGeneration = false;
 };
 
-ValidationReport Validate(const SimulinkCodeGeneration& config);
+std::vector<Diagnostic> Validate(const SimulinkCodeGeneration& config);
 
 } // namespace slxio

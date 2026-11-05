@@ -77,7 +77,8 @@ HError SimulinkContentParser::initTempDirectory()
       return SLX_EIOERR;
     }
 
-    std::string tempDirectoryPath = std::string(Directory::getCurrentDirectory()) + PATH_SEP + std::string(tmpdir);
+    std::string tempDirectoryPath =
+        std::string(Directory::getCurrentDirectory()) + PATH_SEP + std::string(tmpdir);
 
     if (Directory::isDirectory(tempDirectoryPath))
     {
@@ -141,14 +142,15 @@ HError SimulinkContentParser::unzip()
 
 HError SimulinkContentParser::loadXmlTargets(const std::string& tempdirfullpath)
 {
-    XmlTarget targets[] = {{"/simulink/blockdiagram.xml", &ptr->blockdiagram},
-                           {"/simulink/modelDictionary.xml", &ptr->modelDictionary},
-                           {"/simulink/configSetInfo.xml", &ptr->configSetInfo},
-                           {"/simulink/bddefaults.xml", &ptr->bddefaults},
-                           {"/simulink/graphicalInterface.xml", &ptr->graphicalInterface},
-                           {"/metadata/coreProperties.xml", &ptr->coreProperties},
-                           {"/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties},
-                           {"/metadata/mwcorePropertiesExtension.xml", &ptr->mwcorePropertiesExtension}};
+    XmlTarget targets[] = {
+        {"/simulink/blockdiagram.xml", &ptr->blockdiagram},
+        {"/simulink/modelDictionary.xml", &ptr->modelDictionary},
+        {"/simulink/configSetInfo.xml", &ptr->configSetInfo},
+        {"/simulink/bddefaults.xml", &ptr->bddefaults},
+        {"/simulink/graphicalInterface.xml", &ptr->graphicalInterface},
+        {"/metadata/coreProperties.xml", &ptr->coreProperties},
+        {"/metadata/mwcoreProperties.xml", &ptr->mwcoreProperties},
+        {"/metadata/mwcorePropertiesExtension.xml", &ptr->mwcorePropertiesExtension}};
 
     for (auto& t : targets)
     {

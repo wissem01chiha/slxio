@@ -14,25 +14,27 @@
  * limitations under the License.
  */
 
- #include "DiagnosticLocation.h"
+#include "DiagnosticLocation.h"
 
- namespace slxio
- {
-     DiagnosticLocation::DiagnosticLocation(const std::string &file, int line, int column)
-         : file(file), line(line), column(column) {}
+namespace slxio
+{
+DiagnosticLocation::DiagnosticLocation(const std::string& file, int line, int column)
+    : file(file), line(line), column(column)
+{
+}
 
-     std::string DiagnosticLocation::getFile() const
-     {
-         return file;
-     }
+std::string DiagnosticLocation::getFile() const
+{
+    return file;
+}
 
-     int DiagnosticLocation::getLine() const
-     {
-         return line;
-     }
+int DiagnosticLocation::getLine() const
+{
+    return line;
+}
 
-     int DiagnosticLocation::getColumn() const
-     {
-         return column;
-     }
- } // namespace slxio
+int DiagnosticLocation::getColumn() const
+{
+    return column;
+}
+} // namespace slxio

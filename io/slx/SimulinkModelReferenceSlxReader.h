@@ -25,7 +25,8 @@ namespace slxio
 class SimulinkModelReferenceSlxReader final : public SimulinkModelReferenceReader<SLXSection>
 {
 public:
-    SimulinkReaderResult Read(SLXSection serializedData, SimulinkModelReference& object) const override;
+    SimulinkReaderResult Read(SLXSection serializedData,
+                              SimulinkModelReference& object) const override;
 };
 
 } // namespace slxio

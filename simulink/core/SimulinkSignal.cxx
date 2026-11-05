@@ -5,7 +5,8 @@ namespace slxio
 SLXIO_ABI_NAMESPACE_BEGIN
 
 SimulinkSignal::SimulinkSignal()
-    : Description(""), Complexity("auto"), DataType(SimulinkDataType::Auto), Min(SLXIO_FLOAT_MIN), Max(SLXIO_FLOAT_MAX)
+    : Description(""), Complexity("auto"), DataType(SimulinkDataType::Auto), Min(SLXIO_FLOAT_MIN),
+      Max(SLXIO_FLOAT_MAX)
 {
 }
 

@@ -124,14 +124,16 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     sidebarLayout->setContentsMargins(20, 22, 18, 18);
     sidebarLayout->setSpacing(12);
 
-    auto* openButton = new QPushButton(style()->standardIcon(QStyle::SP_DialogOpenButton), tr("Open a model..."), sidebar);
+    auto* openButton = new QPushButton(
+        style()->standardIcon(QStyle::SP_DialogOpenButton), tr("Open a model..."), sidebar);
     openButton->setIconSize(QSize(20, 20));
     openButton->setMinimumHeight(42);
     openButton->setCursor(Qt::PointingHandCursor);
-    openButton->setStyleSheet("QPushButton { text-align: left; padding: 6px 10px; border: 1px solid #c8c8c8;"
-                              " border-radius: 3px; background: white; color: #004073; }"
-                              "QPushButton:hover { background: #e6eff6; border-color: #004073; }"
-                              "QPushButton:pressed { background: #d3e2ef; }");
+    openButton->setStyleSheet(
+        "QPushButton { text-align: left; padding: 6px 10px; border: 1px solid #c8c8c8;"
+        " border-radius: 3px; background: white; color: #004073; }"
+        "QPushButton:hover { background: #e6eff6; border-color: #004073; }"
+        "QPushButton:pressed { background: #d3e2ef; }");
     sidebarLayout->addWidget(openButton);
     connect(openButton,
             &QPushButton::clicked,
@@ -139,7 +141,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
             [this]()
             {
                 const QString filePath = QFileDialog::getOpenFileName(
-                    this, tr("Open Simulink Model"), QString(), tr("Simulink Models (*.slx *.mdl);;All Files (*)"));
+                    this,
+                    tr("Open Simulink Model"),
+                    QString(),
+                    tr("Simulink Models (*.slx *.mdl);;All Files (*)"));
                 if (!filePath.isEmpty())
                 {
                     ui->statusbar->showMessage(tr("Selected: %1").arg(filePath));
@@ -234,11 +239,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
     newPageLayout->addWidget(scrollArea, 1);
 
     auto* showMore = new QPushButton(tr("Show more"), newPage);
-    showMore->setStyleSheet("QPushButton { border: none; color: #004073; text-align: left; padding: 0; }");
+    showMore->setStyleSheet(
+        "QPushButton { border: none; color: #004073; text-align: left; padding: 0; }");
     newPageLayout->addWidget(showMore, 0, Qt::AlignLeft);
     pages->addWidget(newPage);
-    pages->addWidget(createMessagePage(tr("Examples"), tr("Example projects will be available here.")));
-    pages->addWidget(createMessagePage(tr("Learn"), tr("Guides and learning resources will be available here.")));
+    pages->addWidget(
+        createMessagePage(tr("Examples"), tr("Example projects will be available here.")));
+    pages->addWidget(createMessagePage(
+        tr("Learn"), tr("Guides and learning resources will be available here.")));
     mainLayout->addWidget(pages, 1);
     bodyLayout->addWidget(mainArea, 1);
     rootLayout->addWidget(body, 1);
@@ -252,8 +260,10 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
         const bool expanded = showMore->property("expanded").toBool();
         for (int i = 0; i < cards.size(); ++i)
         {
-            const bool matchesText = query.isEmpty() || templates.at(i).title.contains(query, Qt::CaseInsensitive);
-            const bool matchesCategory = categoryFilter->currentIndex() == 0 || templates.at(i).category == category;
+            const bool matchesText =
+                query.isEmpty() || templates.at(i).title.contains(query, Qt::CaseInsensitive);
+            const bool matchesCategory =
+                categoryFilter->currentIndex() == 0 || templates.at(i).category == category;
             const bool isInExpandedSection = i < 8 || expanded;
             cards.at(i)->setVisible(matchesText && matchesCategory && isInExpandedSection);
         }
@@ -268,8 +278,14 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent), ui(new Ui::MainWi
                 showMore->setText(expanded ? tr("Show less") : tr("Show more"));
                 filterCards();
             });
-    connect(searchInput, &QLineEdit::textChanged, this, [filterCards](const QString&) { filterCards(); });
-    connect(categoryFilter, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [filterCards](int) { filterCards(); });
+    connect(searchInput,
+            &QLineEdit::textChanged,
+            this,
+            [filterCards](const QString&) { filterCards(); });
+    connect(categoryFilter,
+            QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this,
+            [filterCards](int) { filterCards(); });
     connect(searchButton, &QPushButton::clicked, this, filterCards);
     filterCards();
 }

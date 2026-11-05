@@ -47,7 +47,8 @@ HError SimulinkObjectParser::parse()
 
     for (xmlNodePtr nodePtr_ = dataObject->children; nodePtr_ != nullptr; nodePtr_ = nodePtr_->next)
     {
-        if (nodePtr_->type == XML_ELEMENT_NODE && xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) == 0)
+        if (nodePtr_->type == XML_ELEMENT_NODE &&
+            xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Parameter) == 0)
         {
             SimulinkParameterParser* paramParserPtr = new SimulinkParameterParser();
             HError subInputStatus = paramParserPtr->setInputData(nodePtr_);
@@ -67,7 +68,8 @@ HError SimulinkObjectParser::parse()
             delete paramParserPtr;
         }
 
-        if (nodePtr_->type == XML_ELEMENT_NODE && xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0)
+        if (nodePtr_->type == XML_ELEMENT_NODE &&
+            xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Object) == 0)
         {
             SimulinkObjectParser* subObjParserPtr = new SimulinkObjectParser();
             HError subObjInputStatus = subObjParserPtr->setInputData(nodePtr_);
@@ -86,7 +88,8 @@ HError SimulinkObjectParser::parse()
             ptr->AddElement(subObjParserPtr->getOutputData());
         }
 
-        if (nodePtr_->type == XML_ELEMENT_NODE && xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
+        if (nodePtr_->type == XML_ELEMENT_NODE &&
+            xmlStrcmp(nodePtr_->name, BAD_CAST SlxParameter::SECTION_Array) == 0)
         {
             SimulinkArrayParser* subArrParserPtr = new SimulinkArrayParser();
             HError subArrInputStatus = subArrParserPtr->setInputData(nodePtr_);

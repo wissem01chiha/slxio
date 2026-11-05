@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
-
 set(ZLIB_BUILD_TESTING OFF)
 set(ZLIB_BUILD_SHARED ${SLXIO_BUILD_SHARED_LIBS})
 set(ZLIB_BUILD_STATIC ${SLXIO_BUILD_STATIC_LIBS})

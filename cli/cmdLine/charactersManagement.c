@@ -96,7 +96,8 @@ int rmChar(wchar_t* CommandLine, int key, unsigned int* cursorLocation)
      * command line Case Delete is pressed -> cursor must not be at the end of
      * line
      */
-    if ((*cursorLocation && key == SCI_BACKSPACE) || ((sizeOfCmd != *cursorLocation) && key == SCI_DELETE))
+    if ((*cursorLocation && key == SCI_BACKSPACE) ||
+        ((sizeOfCmd != *cursorLocation) && key == SCI_DELETE))
     {
         if (key == SCI_BACKSPACE)
         {
@@ -147,12 +148,14 @@ int deleteFromCursToBeginningLine(wchar_t* CommandLine, unsigned int* cursorLoca
 int deletePreviousWordFromCurs(wchar_t* CommandLine, unsigned int* cursorLocation)
 {
     /* Delete void character before cursor */
-    while (*cursorLocation && (CommandLine[*cursorLocation - 1] == ' ' || CommandLine[*cursorLocation - 1] == '\t'))
+    while (*cursorLocation &&
+           (CommandLine[*cursorLocation - 1] == ' ' || CommandLine[*cursorLocation - 1] == '\t'))
     {
         rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
     }
     /* Then delete word before cursor */
-    while (*cursorLocation && CommandLine[*cursorLocation - 1] != ' ' && CommandLine[*cursorLocation - 1] != '\t')
+    while (*cursorLocation && CommandLine[*cursorLocation - 1] != ' ' &&
+           CommandLine[*cursorLocation - 1] != '\t')
     {
         rmChar(CommandLine, SCI_BACKSPACE, cursorLocation);
     }

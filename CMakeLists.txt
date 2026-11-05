@@ -24,8 +24,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 list(PREPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
-find_package(Git)
-include(DetermineVersion)
 include(Version)
 
 set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
@@ -68,6 +66,10 @@ add_subdirectory(simulink)
 
 if(SLXIO_ENABLE_IO)
   add_subdirectory(io)
+endif()
+
+if(SLXIO_BUILD_CONSOLE)
+  add_subdirectory(cli)
 endif()
 
 if(SLXIO_BUILD_PYTHON)

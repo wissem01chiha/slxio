@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -55,6 +55,6 @@ struct SimulinkSFSim // NOSONAR
     std::string DefaultCustomCodeFunctionArrayLayout;
 };
 
-ValidationReport Validate(const SimulinkSFSim& config);
+std::vector<Diagnostic> Validate(const SimulinkSFSim& config);
 
 }; // namespace slxio

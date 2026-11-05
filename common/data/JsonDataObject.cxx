@@ -37,7 +37,8 @@ bool JsonDataObject::operator==(const IDataObject& other) const
     }
     if (GetDataType() == other.GetDataType())
     {
-        return json_object_equal(m_implDataObject, SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
+        return json_object_equal(m_implDataObject,
+                                 SLXIO_STATIC_CAST(json_object*, other.GetImplDataObject()));
     }
 
     return false;

@@ -19,7 +19,8 @@
 namespace slxio
 {
 
-SimulinkConfigSetComponent::SimulinkConfigSetComponent(std::string className) : m_className(std::move(className))
+SimulinkConfigSetComponent::SimulinkConfigSetComponent(std::string className)
+    : m_className(std::move(className))
 {
 }
 
@@ -55,7 +56,8 @@ std::string* SimulinkConfigSetComponent::FindParam(const std::string& name) noex
     return parameter == m_parameters.end() ? nullptr : &parameter->second;
 }
 
-const SimulinkConfigSetComponent::ParameterMap& SimulinkConfigSetComponent::GetParams() const noexcept
+const SimulinkConfigSetComponent::ParameterMap&
+SimulinkConfigSetComponent::GetParams() const noexcept
 {
     return m_parameters;
 }

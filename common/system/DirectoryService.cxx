@@ -49,7 +49,8 @@ Directory DirectoryService::GetWorkingDirectory(int* error)
     return Directory(buffer);
 }
 
-std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(const std::string& structure, int* error)
+std::shared_ptr<Directory> DirectoryService::CreateDirectoryStructure(const std::string& structure,
+                                                                      int* error)
 {
     if (structure.empty())
     {
@@ -102,7 +103,8 @@ std::shared_ptr<Directory> DirectoryService::CreateTemporaryDirectory(int* error
     return std::make_shared<Directory>();
 }
 
-std::shared_ptr<Directory> DirectoryService::CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error)
+std::shared_ptr<Directory>
+DirectoryService::CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error)
 {
     uv_fs_t req;
 

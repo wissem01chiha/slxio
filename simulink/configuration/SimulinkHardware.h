@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -72,6 +72,6 @@ struct SimulinkHardware // NOSONAR
     std::string HardwareBoardFeatureSet;
 };
 
-ValidationReport Validate(const SimulinkHardware& config);
+std::vector<Diagnostic> Validate(const SimulinkHardware& config);
 
 }; // namespace slxio

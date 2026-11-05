@@ -20,7 +20,8 @@ SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<S
 {
 }
 
-SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort) : logger(Logger::GetInstance())
+SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort)
+    : logger(Logger::GetInstance())
 {
 }
 

@@ -38,7 +38,8 @@
 class DiagramPreview final : public QWidget
 {
 public:
-    explicit DiagramPreview(int variant, QWidget* parent = nullptr) : QWidget(parent), m_variant(variant)
+    explicit DiagramPreview(int variant, QWidget* parent = nullptr)
+        : QWidget(parent), m_variant(variant)
     {
         setMinimumHeight(98);
         setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);

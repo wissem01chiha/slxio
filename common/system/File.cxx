@@ -9,11 +9,13 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-File::File(const std::string& path, Mode mode) : InternalFileMode(mode), FileDescriptor(-1), FilePath(path), CachedSize(0)
+File::File(const std::string& path, Mode mode)
+    : InternalFileMode(mode), FileDescriptor(-1), FilePath(path), CachedSize(0)
 {
 }
 
-File::File(const std::string& path) : FileDescriptor(-1), InternalFileMode(Mode::Append), FilePath(path), CachedSize(0)
+File::File(const std::string& path)
+    : FileDescriptor(-1), InternalFileMode(Mode::Append), FilePath(path), CachedSize(0)
 {
 }
 
@@ -80,7 +82,8 @@ HError File::Read()
 
     InternalBuffer.resize(4096);
     uv_fs_t req;
-    uv_buf_t iov = uv_buf_init(InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
+    uv_buf_t iov =
+        uv_buf_init(InternalBuffer.data(), static_cast<unsigned int>(InternalBuffer.size()));
 
     int err = uv_fs_read(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
     uv_fs_req_cleanup(&req);
@@ -103,7 +106,8 @@ HError File::Write(const std::string& message)
         return E_INVALID_FILE_MODE;
 
     uv_fs_t req;
-    uv_buf_t iov = uv_buf_init(const_cast<char*>(message.data()), static_cast<unsigned int>(message.size()));
+    uv_buf_t iov =
+        uv_buf_init(const_cast<char*>(message.data()), static_cast<unsigned int>(message.size()));
 
     int err = uv_fs_write(uv_default_loop(), &req, FileDescriptor, &iov, 1, -1, nullptr);
     uv_fs_req_cleanup(&req);

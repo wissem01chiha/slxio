@@ -14,15 +14,17 @@
  * limitations under the License.
  */
 
- #pragma once
- 
+#pragma once
+
 #include "CommonPCH.h"
 
 namespace slxio
 {
 
-/// A configuration system for the diagnostic engine, allowing customization of its behavior and settings.
-struct DiagnosticEngineOptions {
+/// A configuration system for the diagnostic engine, allowing customization of its behavior and
+/// settings.
+struct DiagnosticEngineOptions
+{
     bool warningsAsErrors = false;
     bool suppressWarnings = false;
     bool treatAllWarningsAsErrors = false;

@@ -45,7 +45,8 @@ SimulinkReaderResult ReadObjectNode(pugi::xml_node node, SimulinkObject& object)
     {
         const std::string_view idText(idAttribute.value());
         unsigned long long parsedId = 0;
-        const auto parseResult = std::from_chars(idText.data(), idText.data() + idText.size(), parsedId);
+        const auto parseResult =
+            std::from_chars(idText.data(), idText.data() + idText.size(), parsedId);
         if (parseResult.ec != std::errc() || parseResult.ptr != idText.data() + idText.size() ||
             parsedId > std::numeric_limits<SId>::max())
         {
@@ -120,7 +121,8 @@ SimulinkReaderResult ReadObjectNode(pugi::xml_node node, SimulinkObject& object)
 
 SimulinkReaderResult ReadArrayNode(pugi::xml_node node, SimulinkArray& array)
 {
-    if (!node || node.type() != pugi::node_element || node.name() != std::string_view(SLXParameter::SECTION_Array))
+    if (!node || node.type() != pugi::node_element ||
+        node.name() != std::string_view(SLXParameter::SECTION_Array))
     {
         return SimulinkReaderResult::InvalidInput;
     }
@@ -169,7 +171,8 @@ SimulinkReaderResult ReadArrayNode(pugi::xml_node node, SimulinkArray& array)
 
 } // namespace
 
-SimulinkReaderResult SimulinkArraySlxReader::Read(SLXSection serializedData, SimulinkArray& object) const
+SimulinkReaderResult SimulinkArraySlxReader::Read(SLXSection serializedData,
+                                                  SimulinkArray& object) const
 {
     return ReadArrayNode(serializedData.GetNode(), object);
 }

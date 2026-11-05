@@ -27,7 +27,8 @@ public:
     std::string GetAssetFilePath(const char* filename)
     {
         static char FilePath[512];
-        snprintf(FilePath, sizeof(FilePath), "%s/common/system/test/data/%s", SLXIO_ROOT_DIR, filename);
+        snprintf(
+            FilePath, sizeof(FilePath), "%s/common/system/test/data/%s", SLXIO_ROOT_DIR, filename);
         return std::string(FilePath);
     }
 
@@ -54,7 +55,8 @@ TEST_CASE_FIXTURE(ArchiveTestFixture, "Archive Extension Handling")
     File f(GetAssetFilePath("TestAsset1.zip"));
     Archive archive(f);
     archive.SetArchiveExtension("zip");
-    std::cout << "this is the archive extesion" << std::string(archive.GetArchiveExtension()) << std::endl;
+    std::cout << "this is the archive extesion" << std::string(archive.GetArchiveExtension())
+              << std::endl;
     CHECK(std::string(archive.GetArchiveExtension()) == "zip");
 }
 

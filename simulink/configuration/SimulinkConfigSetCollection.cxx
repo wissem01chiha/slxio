@@ -28,7 +28,8 @@ ConfigSetCollectionResult SimulinkConfigSetCollection::Add(SimulinkConfigSet con
 
     const std::string name = configSet.GetName();
     const auto inserted = m_configSets.emplace(name, std::move(configSet));
-    return inserted.second ? ConfigSetCollectionResult::Success : ConfigSetCollectionResult::AlreadyExists;
+    return inserted.second ? ConfigSetCollectionResult::Success
+                           : ConfigSetCollectionResult::AlreadyExists;
 }
 
 ConfigSetCollectionResult SimulinkConfigSetCollection::Remove(const std::string& name)
@@ -47,7 +48,8 @@ ConfigSetCollectionResult SimulinkConfigSetCollection::Remove(const std::string&
     return ConfigSetCollectionResult::Success;
 }
 
-ConfigSetCollectionResult SimulinkConfigSetCollection::Rename(const std::string& name, std::string newName)
+ConfigSetCollectionResult SimulinkConfigSetCollection::Rename(const std::string& name,
+                                                              std::string newName)
 {
     if (newName.empty())
     {
@@ -133,7 +135,8 @@ const std::string& SimulinkConfigSetCollection::GetActiveName() const noexcept
     return m_activeName;
 }
 
-const SimulinkConfigSetCollection::ConfigSetMap& SimulinkConfigSetCollection::GetConfigSets() const noexcept
+const SimulinkConfigSetCollection::ConfigSetMap&
+SimulinkConfigSetCollection::GetConfigSets() const noexcept
 {
     return m_configSets;
 }

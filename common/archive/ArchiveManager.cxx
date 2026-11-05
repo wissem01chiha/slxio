@@ -6,7 +6,8 @@ namespace slxio
 {
 SLXIO_ABI_NAMESPACE_BEGIN
 
-ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives) : ArchiveBuffer(std::move(archives))
+ArchiveManager::ArchiveManager(std::vector<std::shared_ptr<Archive>> archives)
+    : ArchiveBuffer(std::move(archives))
 {
 }
 
@@ -14,7 +15,8 @@ SId ArchiveManager::GetArchiveId(const std::string& archivename) const
 {
     for (size_t i = 0; i < ArchiveBuffer.size(); ++i)
     {
-        if (ArchiveBuffer[i] && ArchiveBuffer[i]->GetArchiveDirectory().GetDirectoryName() == archivename)
+        if (ArchiveBuffer[i] &&
+            ArchiveBuffer[i]->GetArchiveDirectory().GetDirectoryName() == archivename)
         {
             return SLXIO_STATIC_CAST(SId, i);
         }

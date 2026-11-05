@@ -75,11 +75,6 @@ advanced_option(SLXIO_BUILD_PYTHON "Build Python interface" ON)
 # Option to enable Java bindings
 advanced_option(SLXIO_BUILD_JAVA "Build Java interface" OFF)
 
-advanced_dependent_option(
-  SLXIO_ENABLE_JNI
-  "Force JNI implementation instead of FFM for Java bindings when Java 25+ is
-available" ON "SLXIO_BUILD_JAVA" OFF)
-
 advanced_option(SLXIO_BUILD_CONSOLE "Enable building command-line
  interface" OFF)
 

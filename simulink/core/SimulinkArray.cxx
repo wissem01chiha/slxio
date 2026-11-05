@@ -93,7 +93,8 @@ SId SimulinkArray::GetId() const
     return m_id;
 }
 
-void SimulinkArray::AddParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkArray::AddParam(const std::string& name,
+                             const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {
@@ -102,7 +103,8 @@ void SimulinkArray::AddParam(const std::string& name, const std::shared_ptr<IPar
     m_parameters.push_back(p);
 }
 
-void SimulinkArray::SetParam(const std::string& name, const std::shared_ptr<IParameterObjectBase>& p)
+void SimulinkArray::SetParam(const std::string& name,
+                             const std::shared_ptr<IParameterObjectBase>& p)
 {
     if (p == nullptr)
     {

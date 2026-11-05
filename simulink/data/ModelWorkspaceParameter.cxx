@@ -7,7 +7,8 @@ SLXIO_ABI_NAMESPACE_BEGIN
 
 ModelWorkspaceParameter::ModelWorkspaceParameter() = default;
 
-ModelWorkspaceParameter::ModelWorkspaceParameter(const std::string& name, const std::shared_ptr<ModelWorkspace>& data)
+ModelWorkspaceParameter::ModelWorkspaceParameter(const std::string& name,
+                                                 const std::shared_ptr<ModelWorkspace>& data)
     : m_data(data)
 {
     SetName(name);

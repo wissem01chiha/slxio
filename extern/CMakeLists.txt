@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_directories("${PROJECT_EXTERN_SOURCE_DIR}/zlib/src")
+
+add_subdirectory(cwalk)
 add_subdirectory(zlib)
 add_subdirectory(libzip)
 add_subdirectory(cxxopts)

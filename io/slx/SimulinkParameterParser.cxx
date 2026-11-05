@@ -81,7 +81,8 @@ HError SimulinkParameterParser::parse()
         xmlFree(nodeContent);
     }
 
-    std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr = std::make_unique<SimulinkDataTypeParser>();
+    std::unique_ptr<SimulinkDataTypeParser> dataTypeParserPtr =
+        std::make_unique<SimulinkDataTypeParser>();
 
     HError dataTypeInputStatus = dataTypeParserPtr->setInputData(paramClassStr);
 

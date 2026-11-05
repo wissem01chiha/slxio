@@ -53,7 +53,8 @@ const SimulinkConfigSet::ParameterMap& SimulinkConfigSet::GetParams() const noex
     return m_parameters;
 }
 
-SimulinkConfigSetComponent& SimulinkConfigSet::GetOrCreateComponent(const std::string& name, const std::string& className)
+SimulinkConfigSetComponent& SimulinkConfigSet::GetOrCreateComponent(const std::string& name,
+                                                                    const std::string& className)
 {
     auto& component = m_components[name];
     if (!className.empty())
@@ -69,7 +70,8 @@ SimulinkConfigSetComponent* SimulinkConfigSet::FindComponent(const std::string& 
     return component == m_components.end() ? nullptr : &component->second;
 }
 
-const SimulinkConfigSetComponent* SimulinkConfigSet::FindComponent(const std::string& name) const noexcept
+const SimulinkConfigSetComponent*
+SimulinkConfigSet::FindComponent(const std::string& name) const noexcept
 {
     const auto component = m_components.find(name);
     return component == m_components.end() ? nullptr : &component->second;
@@ -83,96 +85,6 @@ bool SimulinkConfigSet::RemoveComponent(const std::string& name)
 const SimulinkConfigSet::ComponentMap& SimulinkConfigSet::GetComponents() const noexcept
 {
     return m_components;
-}
-
-std::optional<SimulinkCodeGeneration>& SimulinkConfigSet::GetCodeGeneration() noexcept
-{
-    return m_codeGeneration;
-}
-
-const std::optional<SimulinkCodeGeneration>& SimulinkConfigSet::GetCodeGeneration() const noexcept
-{
-    return m_codeGeneration;
-}
-
-std::optional<SimulinkCoverage>& SimulinkConfigSet::GetCoverage() noexcept
-{
-    return m_coverage;
-}
-
-const std::optional<SimulinkCoverage>& SimulinkConfigSet::GetCoverage() const noexcept
-{
-    return m_coverage;
-}
-
-std::optional<SimulinkDebugging>& SimulinkConfigSet::GetDebugging() noexcept
-{
-    return m_debugging;
-}
-
-const std::optional<SimulinkDebugging>& SimulinkConfigSet::GetDebugging() const noexcept
-{
-    return m_debugging;
-}
-
-std::optional<SimulinkHardware>& SimulinkConfigSet::GetHardware() noexcept
-{
-    return m_hardware;
-}
-
-const std::optional<SimulinkHardware>& SimulinkConfigSet::GetHardware() const noexcept
-{
-    return m_hardware;
-}
-
-std::optional<SimulinkModelReference>& SimulinkConfigSet::GetModelReference() noexcept
-{
-    return m_modelReference;
-}
-
-const std::optional<SimulinkModelReference>& SimulinkConfigSet::GetModelReference() const noexcept
-{
-    return m_modelReference;
-}
-
-std::optional<SimulinkOptimization>& SimulinkConfigSet::GetOptimization() noexcept
-{
-    return m_optimization;
-}
-
-const std::optional<SimulinkOptimization>& SimulinkConfigSet::GetOptimization() const noexcept
-{
-    return m_optimization;
-}
-
-std::optional<SimulinkRTW>& SimulinkConfigSet::GetRTW() noexcept
-{
-    return m_rtw;
-}
-
-const std::optional<SimulinkRTW>& SimulinkConfigSet::GetRTW() const noexcept
-{
-    return m_rtw;
-}
-
-std::optional<SimulinkSFSim>& SimulinkConfigSet::GetSFSim() noexcept
-{
-    return m_sfSim;
-}
-
-const std::optional<SimulinkSFSim>& SimulinkConfigSet::GetSFSim() const noexcept
-{
-    return m_sfSim;
-}
-
-std::optional<SimulinkSolver>& SimulinkConfigSet::GetSolver() noexcept
-{
-    return m_solver;
-}
-
-const std::optional<SimulinkSolver>& SimulinkConfigSet::GetSolver() const noexcept
-{
-    return m_solver;
 }
 
 std::string SimulinkConfigSet::ToString() const

@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -65,6 +65,6 @@ struct SimulinkSolver // NOSONAR
     std::string SolverOrder;
 };
 
-ValidationReport Validate(const SimulinkSolver& config);
+std::vector<Diagnostic> Validate(const SimulinkSolver& config);
 
 }; // namespace slxio

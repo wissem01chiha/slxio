@@ -11,7 +11,8 @@ IParameterDataObjectBase* IParameterDataObjectBase::New()
 
 void IParameterDataObjectBase::Initialize(void* implDataObject)
 {
-    m_param = std::shared_ptr<IParameterObjectBase>(static_cast<IParameterObjectBase*>(implDataObject));
+    m_param =
+        std::shared_ptr<IParameterObjectBase>(static_cast<IParameterObjectBase*>(implDataObject));
 }
 
 void* IParameterDataObjectBase::GetImplDataObject() const
@@ -34,7 +35,8 @@ bool IParameterDataObjectBase::operator==(const IDataObject& other) const
     const auto* rhs = dynamic_cast<const IParameterDataObjectBase*>(&other);
     if (!rhs)
         return false;
-    return m_param->GetName() == rhs->m_param->GetName() && m_param->GetDataType() == rhs->m_param->GetDataType();
+    return m_param->GetName() == rhs->m_param->GetName() &&
+           m_param->GetDataType() == rhs->m_param->GetDataType();
 }
 
 DataType IParameterDataObjectBase::GetDataType() const

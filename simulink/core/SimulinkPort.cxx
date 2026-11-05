@@ -175,7 +175,8 @@ std::shared_ptr<SimulinkParameterBase> SimulinkPort::GetParameter(std::string na
     return std::shared_ptr<SimulinkParameterBase>();
 }
 
-HError SimulinkPort::SetParameter(std::string name, std::shared_ptr<SimulinkParameterBase> parameter)
+HError SimulinkPort::SetParameter(std::string name,
+                                  std::shared_ptr<SimulinkParameterBase> parameter)
 {
     return HError();
 }

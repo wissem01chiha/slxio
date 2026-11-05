@@ -1,7 +1,8 @@
 module_add_tests(
   Core
-  cxx/TestBackgroundLogger.cxx
-  cxx/TestHErrorHelper.cxx
-  cxx/TestVersion.cxx
-  cxx/TestSimulinkVersion.cxx
-)
+  cxx/TestDiagnostic.cxx
+  cxx/TestDiagnosticEngine.cxx
+  cxx/TestErrorCategory.cxx
+  cxx/TestLoggerEngine.cxx
+  cxx/TestSimulinkReleaseHandler.cxx
+  cxx/TestVersionManager.cxx)

@@ -15,7 +15,9 @@
  */
 
 #include "DiagnosticEngine.h"
+#include "DiagnosticEngineOptions.h"
 #include "Diagnostic.h"
+#include "DiagnosticLocation.h"
 
 namespace slxio
 {
@@ -24,7 +26,7 @@ DiagnosticEngine::DiagnosticEngine(const DiagnosticEngineOptions& options)
     m_options = std::make_unique<DiagnosticEngineOptions>(options);
 }
 
-void DiagnosticEngine::Report(Diagnostic &&diag)
+void DiagnosticEngine::Report(Diagnostic&& diag)
 {
     m_diagnostics.push_back(std::move(diag));
 }
@@ -34,6 +36,6 @@ const DiagnosticEngineOptions& DiagnosticEngine::GetOptions() const
 }
 const std::vector<Diagnostic>& DiagnosticEngine::GetDiagnostics() const
 {
-     return m_diagnostics; 
+    return m_diagnostics;
 }
 } // namespace slxio

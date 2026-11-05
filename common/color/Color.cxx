@@ -26,7 +26,8 @@ std::vector<uint32_t> Color::toVector() const
 Color::Color() : r(0), g(0), b(0), a(255)
 {
 }
-Color::Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha) : r(red), g(green), b(blue), a(alpha)
+Color::Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha)
+    : r(red), g(green), b(blue), a(alpha)
 {
 }
 bool Color::operator==(const Color& other) const
@@ -44,7 +45,8 @@ Color Color::fromVector(const std::vector<uint32_t>& vec)
     {
         return Color(vec[0], vec[1], vec[2], vec[3]);
     }
-    return Color(vec.size() > 0 ? vec[0] : 0, vec.size() > 1 ? vec[1] : 0, vec.size() > 2 ? vec[2] : 0, 255);
+    return Color(
+        vec.size() > 0 ? vec[0] : 0, vec.size() > 1 ? vec[1] : 0, vec.size() > 2 ? vec[2] : 0, 255);
 }
 
 }; // namespace slxio

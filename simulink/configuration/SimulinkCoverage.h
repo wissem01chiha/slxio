@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ValidationReport.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
@@ -59,6 +59,6 @@ struct SimulinkCoverage
     std::string CovMcdcMode = "Masking";
 };
 
-ValidationReport Validate(const SimulinkCoverage& config);
+std::vector<Diagnostic> Validate(const SimulinkCoverage& config);
 
 }; // namespace slxio

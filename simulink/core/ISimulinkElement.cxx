@@ -46,7 +46,8 @@ HError ISimulinkElement::Erase(const SId& id)
 
     m_childrenOrder.erase(std::remove_if(m_childrenOrder.begin(),
                                          m_childrenOrder.end(),
-                                         [&](const std::shared_ptr<ISimulinkElement>& child) { return child->GetId() == id; }),
+                                         [&](const std::shared_ptr<ISimulinkElement>& child)
+                                         { return child->GetId() == id; }),
                           m_childrenOrder.end());
 
     return E_OK;
@@ -116,7 +117,8 @@ std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& ISimulinkElement::Ge
     return m_children;
 }
 
-const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>& ISimulinkElement::GetChildren() const
+const std::unordered_map<SId, std::shared_ptr<ISimulinkElement>>&
+ISimulinkElement::GetChildren() const
 {
     return m_children;
 }

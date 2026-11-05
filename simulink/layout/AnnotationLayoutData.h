@@ -28,8 +28,12 @@
 class LayoutData : public RectangleTypeLayoutDataBase
 {
 public:
-    LayoutData(const RectangleType& position, const Color& foregroundColor, const Color& backgroundColor, bool borderVisible)
-        : RectangleTypeLayoutDataBase(position, foregroundColor, backgroundColor), borderVisible_(borderVisible)
+    LayoutData(const RectangleType& position,
+               const Color& foregroundColor,
+               const Color& backgroundColor,
+               bool borderVisible)
+        : RectangleTypeLayoutDataBase(position, foregroundColor, backgroundColor),
+          borderVisible_(borderVisible)
     {
     }
 

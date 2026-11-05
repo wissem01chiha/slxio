@@ -19,20 +19,22 @@
 #include "CommonPCH.h"
 
 namespace slxio
-{ 
+{
 
-    class DiagnosticLocation final {
-    public:
-        DiagnosticLocation() = default;
-        DiagnosticLocation(const std::string &file, int line, int column);
+class DiagnosticLocation final
+{
+public:
+    DiagnosticLocation() = default;
+    DiagnosticLocation(const std::string& file, int line, int column);
 
-        std::string getFile() const ;
-        int getLine() const ;
-        int getColumn() const ;
+    std::string getFile() const;
+    int getLine() const;
+    int getColumn() const;
+    ~DiagnosticLocation() = default;
 
-    private:
-        std::string file;
-        int line{0};
-        int column{0};
-    };
+private:
+    std::string file;
+    int line{0};
+    int column{0};
+};
 } // namespace slxio

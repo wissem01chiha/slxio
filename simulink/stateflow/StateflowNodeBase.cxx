@@ -32,7 +32,8 @@ const std::vector<std::shared_ptr<StateflowTransition>>& StateflowNodeBase::getI
     return inTransitions;
 }
 
-const std::vector<std::shared_ptr<StateflowTransition>>& StateflowNodeBase::getOutTransitions() const
+const std::vector<std::shared_ptr<StateflowTransition>>&
+StateflowNodeBase::getOutTransitions() const
 {
     return outTransitions;
 }
