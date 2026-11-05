@@ -1,10 +1,7 @@
 #include "CoreErrors.h"
 
-#include <string>
-
 namespace slxio::core
 {
-SLXIO_ABI_NAMESPACE_BEGIN
 namespace
 {
 class Category final : public std::error_category
@@ -43,5 +40,4 @@ const std::error_category& ErrorCategory() noexcept
     return instance;
 }
 
-SLXIO_ABI_NAMESPACE_END
 } // namespace slxio::core

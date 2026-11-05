@@ -58,10 +58,6 @@ if(SLXIO_ENABLE_COVERAGE)
   include(Coverage)
 endif()
 
-if(SLXIO_ENABLE_SANITIZERS)
-  include(Sanitize)
-endif()
-
 if(SLXIO_BUILD_SUMMARY)
   include(Summary)
 endif()

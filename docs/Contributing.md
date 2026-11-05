@@ -1,10 +1,10 @@
-@page CodingStandards Coding Standards
 
 # SLXIO Coding Standards
 
 This document describes the coding standards all developers are expected to adhere to when writing code for the SLXIO project.
+- Avoid usage of old C style macros and prefer constexpr
+- Use [[nodiscard]] on getters and error-returning functions. SLXIO_NODISCARD exists but is unused.
 
-# Top-level organisation issues
 
 # Portablity
 
@@ -21,16 +21,15 @@ Thanks very much for your interest in the Slxio project. The project is under ac
 - @subpage MakingNewRelease
 - @subpage ExternalDependencySystem
 
-@page Contact
 
 Currently, there is no official mailing list for the project, as there is only one developer/maintainer. Feel free to contact me directly instead. [mail: chihawissem08 [dot] gmail [dot] com](mailto:chihawissem08@gmail.com)
 
-@page MakingNewRelease  Making a New Release
+## MakingNewRelease  Making a New Release
 
 # Checking ABI Compatibility
 @page RunningTests Running Tests
 
-# Running SLXIO Tests
+# Running Tests
 
 Slxio has moved from [GoogleTest](https://github.com/google/googletest) to the [doctest](https://github.com/doctest/doctest) framework for lightweight and efficient testing since version 0.1.0.
 Testing is enabled via the CMake option `SLXIO_ENABLE_TESTING`.

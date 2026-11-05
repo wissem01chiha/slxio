@@ -12,4 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
+set(CXXOPTS_BUILD_EXAMPLES OFF)
+set(CXXOPTS_BUILD_TESTS OFF)
+set(CXXOPTS_ENABLE_INSTALL OFF)
+set(CXXOPTS_ENABLE_WARNINGS OFF)
+set(CXXOPTS_USE_UNICODE_HELP OFF)
+
 add_subdirectory(src)

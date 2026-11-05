@@ -12,9 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# doctest can be included as header only single file
-# no compiled targets required so we add the current 
-# source directory as a system include
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
+set(DOCTEST_WITH_TESTS OFF)
 set(DOCTEST_WITH_MAIN_IN_STATIC_LIB OFF)
+set(DOCTEST_NO_INSTALL OFF)
+set(DOCTEST_USE_STD_HEADERS OFF)
+set(DOCTEST_INTERNAL_WERROR OFF)
+set(DOCTEST_INTERNAL_COVERAGE OFF)
 
 add_subdirectory(src)

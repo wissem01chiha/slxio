@@ -14,34 +14,25 @@
  * limitations under the License.
  */
 
-#pragma once
+ #include "DiagnosticLocation.h"
 
-#include <system_error>
-#include "CommonPCH.h"
-#include "Compiler.h"
+ namespace slxio
+ {
+     DiagnosticLocation::DiagnosticLocation(const std::string &file, int line, int column)
+         : file(file), line(line), column(column) {}
 
-namespace slxio
-{
+     std::string DiagnosticLocation::getFile() const
+     {
+         return file;
+     }
 
-enum class Errc : int
-{
-    Ok = 0,
-    InvalidArgument = 1,
-    OutOfMemory = 2,
-    NotInitialized = 3,
-    LoggerInitFailed = 4,
-    IoFailure = 5,
-};
+     int DiagnosticLocation::getLine() const
+     {
+         return line;
+     }
 
-const std::error_category& ErrorCategory() noexcept;
-
-NODISCARD inline std::error_code make_error_code(Errc e) noexcept
-{
-    return {static_cast<int>(e), ErrorCategory()};
-}
-
-template <> struct std::is_error_code_enum<Errc> : std::true_type
-{
-};
-
-} // namespace slxio
+     int DiagnosticLocation::getColumn() const
+     {
+         return column;
+     }
+ } // namespace slxio

@@ -24,9 +24,39 @@ namespace slxio
 
 struct SimulinkCoverage
 {
-    std::string coverageFilePath;
-    std::string coverageReportPath;
-    bool enableCoverage = false;
+    std::vector<double> DisabledProps{};
+    std::vector<double> Components{};
+    bool CovEnable = false;
+    std::string CovScope = "EntireSystem";
+    bool CovIncludeTopModel = true;
+    bool RecordCoverage = false;
+    std::string CovPath = "/";
+    std::string CovSaveName = "covdata";
+    std::string CovCompData{};
+    std::string CovMetricSettings = "dwe";
+    std::string CovFilter{};
+    std::string CovHTMLOptions{};
+    bool CovNameIncrementing = false;
+    bool CovForceBlockReductionOff = true;
+    bool CovEnableCumulative = true;
+    bool CovSaveCumulativeToWorkspaceVar = false;
+    bool CovSaveSingleToWorkspaceVar = false;
+    std::string CovCumulativeVarName = "covCumulativeData";
+    bool CovCumulativeReport = false;
+    bool CovSaveOutputData = true;
+    std::string CovOutputDir = "slcov_output/$ModelName$";
+    std::string CovDataFileName = "$ModelName$_cvdata";
+    bool CovReportOnPause = true;
+    bool CovModelRefEnable = false;
+    std::string CovModelRefExcluded{};
+    bool CovExternalEMLEnable = true;
+    bool CovSFcnEnable = true;
+    double CovBoundaryAbsTol = 1e-05;
+    double CovBoundaryRelTol = 0.01;
+    bool CovUseTimeInterval = false;
+    double CovStartTime = 0.0;
+    double CovStopTime = 0.0;
+    std::string CovMcdcMode = "Masking";
 };
 
 ValidationReport Validate(const SimulinkCoverage& config);

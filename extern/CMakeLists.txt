@@ -14,7 +14,6 @@
 
 add_subdirectory(zlib)
 add_subdirectory(libzip)
-add_subdirectory(cwalk)
 add_subdirectory(cxxopts)
 add_subdirectory(pugixml)
 add_subdirectory(spdlog)
