@@ -22,7 +22,7 @@ jobs:
             cmake-args: -DCMAKE_CXX_STANDARD=17
 
           - name: Ubuntu Clang C++17
-            os: ubuntu-latest
+            os: ubuntu-24.04
             compiler: clang-15
             cxx-compiler: clang++-15
             cmake-args: -DCMAKE_CXX_STANDARD=17
