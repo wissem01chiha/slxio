@@ -52,10 +52,6 @@ if(MINGW)
   include(MinGW)
 endif()
 
-if(SLXIO_ENABLE_COVERAGE)
-  include(Coverage)
-endif()
-
 if(SLXIO_BUILD_SUMMARY)
   include(Summary)
 endif()

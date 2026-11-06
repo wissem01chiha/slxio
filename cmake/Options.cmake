@@ -1,16 +1,16 @@
 # Copyright 2026 Wissem Chiha
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
 include(Macro)
 
@@ -79,44 +79,32 @@ advanced_option(SLXIO_BUILD_CONSOLE "Enable building command-line
 # Enable all sanitizers globally when the compiler and platform support them
 advanced_option(SLXIO_ENABLE_SANITIZERS "Enable all available sanitizers" OFF)
 
-# Option to enable AddressSanitizer (ASan) on supported platforms and
-# compilers. ASan is supported on the following configurations:
-#   - Clang / LLVM >= 3.1
-#   - GCC >= 4.8
-#   - Apple Clang (Xcode) >= 7
-#   - MSVC: Visual Studio 2019 >= 16.9 (x64 and x86)
-#   - clang-cl (Windows) >= 4.0
-# ASan cannot be combined with TSan or MSan.
+# Option to enable AddressSanitizer (ASan) on supported platforms and compilers.
+# ASan is supported on the following configurations: - Clang / LLVM >= 3.1 - GCC
+# >= 4.8 - Apple Clang (Xcode) >= 7 - MSVC: Visual Studio 2019 >= 16.9 (x64 and
+# x86) - clang-cl (Windows) >= 4.0 ASan cannot be combined with TSan or MSan.
 advanced_dependent_option(SLXIO_ENABLE_ASAN "Enable AddressSanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable MemorySanitizer (MSan) on supported platforms and
-# compilers. MSan is supported on the following configurations:
-#   - Clang / LLVM >= 3.3 (Linux, FreeBSD and NetBSD only)
-# Not supported by GCC, MSVC or Apple Clang (macOS).
-# MSan cannot be combined with ASan or TSan. It also requires all code,
+# Option to enable MemorySanitizer (MSan) on supported platforms and compilers.
+# MSan is supported on the following configurations: - Clang / LLVM >= 3.3
+# (Linux, FreeBSD and NetBSD only) Not supported by GCC, MSVC or Apple Clang
+# (macOS). MSan cannot be combined with ASan or TSan. It also requires all code,
 # including third-party libraries, to be instrumented to avoid false positives.
 advanced_dependent_option(SLXIO_ENABLE_MSAN "Enable MemorySanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable ThreadSanitizer (TSan) on supported platforms and
-# compilers. TSan is supported on 64-bit targets only, with the following
-# configurations:
-#   - Clang / LLVM >= 3.2
-#   - GCC >= 4.8
-#   - Apple Clang (Xcode) >= 8
-# Not supported by MSVC or clang-cl (windows).
-# TSan cannot be combined with ASan or MSan.
+# Option to enable ThreadSanitizer (TSan) on supported platforms and compilers.
+# TSan is supported on 64-bit targets only, with the following configurations: -
+# Clang / LLVM >= 3.2 - GCC >= 4.8 - Apple Clang (Xcode) >= 8 Not supported by
+# MSVC or clang-cl (windows). TSan cannot be combined with ASan or MSan.
 advanced_dependent_option(SLXIO_ENABLE_TSAN "Enable ThreadSanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable UndefinedBehaviorSanitizer (UBSan) on supported platforms
-# and compilers. UBSan is supported on the following configurations:
-#   - Clang / LLVM >= 3.3
-#   - GCC >= 4.9
-#   - Apple Clang (Xcode) >= 9
-#   - clang-cl (Windows), partial support
-# Not supported by MSVC.
+# Option to enable UndefinedBehaviorSanitizer (UBSan) on supported platforms and
+# compilers. UBSan is supported on the following configurations: - Clang / LLVM
+# >= 3.3 - GCC >= 4.9 - Apple Clang (Xcode) >= 9 - clang-cl (Windows), partial
+# support Not supported by MSVC.
 advanced_dependent_option(
   SLXIO_ENABLE_UBSAN "Enable UndefinedBehaviorSanitizer" OFF
   SLXIO_ENABLE_SANITIZERS ON)

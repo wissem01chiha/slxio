@@ -13,6 +13,7 @@
 # limitations under the License.
 
 include_directories("${PROJECT_EXTERN_SOURCE_DIR}/zlib/src")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/zlib/src")
 
 add_subdirectory(cwalk)
 add_subdirectory(zlib)

@@ -1,16 +1,16 @@
 # Copyright 2026 Wissem Chiha
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
 include(CMakeDependentOption)
 
@@ -112,4 +112,63 @@ function(module_add_tests module_name)
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endforeach()
   endif()
+endfunction()
+
+function(status text)
+  set(_values)
+  set(_condition)
+  set(_then)
+  set(_else)
+  set(_mode values)
+  set(_has_condition FALSE)
+
+  foreach(_arg IN LISTS ARGN)
+    if(_arg STREQUAL "THEN")
+      set(_mode then)
+      set(_has_condition TRUE)
+    elseif(_arg STREQUAL "ELSE")
+      set(_mode else)
+    elseif(_mode STREQUAL "values")
+      list(APPEND _values "${_arg}")
+    elseif(_mode STREQUAL "then")
+      list(APPEND _then "${_arg}")
+    else()
+      list(APPEND _else "${_arg}")
+    endif()
+  endforeach()
+
+  if(_has_condition)
+    set(_condition "${_values}")
+    string(REPLACE ";" " " _condition "${_condition}")
+    set(_values)
+    if(NOT _condition STREQUAL "")
+      if(${_condition})
+        set(_values "${_then}")
+      else()
+        set(_values "${_else}")
+      endif()
+    endif()
+  endif()
+
+  if(NOT _values)
+    if(ARGC GREATER 1)
+      set(_values "<not set>")
+    else()
+      message(STATUS "${text}")
+      return()
+    endif()
+  endif()
+
+  string(REPLACE ";" " " _value "${_values}")
+  string(REGEX REPLACE "^[ \t]+" "" _value "${_value}")
+  set(_column_width 34)
+  string(LENGTH "${text}" _text_length)
+  if(_text_length LESS _column_width)
+    math(EXPR _padding_length "${_column_width} - ${_text_length}")
+    string(REPEAT " " ${_padding_length} _padding)
+    set(_text "${text}${_padding}")
+  else()
+    set(_text "${text}\n")
+  endif()
+  message(STATUS "${_text} ${_value}")
 endfunction()

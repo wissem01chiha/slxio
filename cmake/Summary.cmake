@@ -1,48 +1,164 @@
 # Copyright 2026 Wissem Chiha
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not
+# use this file except in compliance with the License. You may obtain a copy of
+# the License at
 #
-#   http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations under
+# the License.
 
 include(Macro)
 
+get_property(_is_multi_config GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+
 message(STATUS "")
-message(
-  STATUS "====================================================================")
-message(STATUS "SLXIO Build Configuration")
-message(
-  STATUS "====================================================================")
-message(STATUS "  Version                    : ${PROJECT_VERSION}")
-message(STATUS "  Simulink Version           : ${SLXIO_SIMULINK_VERSION}")
-message(STATUS "  Platform                   : ${CMAKE_SYSTEM_NAME}")
-message(STATUS "  Architecture               : ${CMAKE_SYSTEM_PROCESSOR}")
-message(STATUS "  Compiler                   : ${CMAKE_CXX_COMPILER_ID}")
-message(STATUS "  Compiler Version           : ${CMAKE_CXX_COMPILER_VERSION}")
-message(STATUS "  CMake Version              : ${CMAKE_VERSION}")
-message(STATUS "  Build Type                 : ${CMAKE_BUILD_TYPE}")
-message(STATUS "  Install                    : ${SLXIO_INSTALL}")
-message(STATUS "  Install Prefix             : ${CMAKE_INSTALL_PREFIX}")
-message(STATUS "  PkgConfig                  : ${SLXIO_WITH_PKGCONFIG}")
-message(STATUS "  Shared Libraries           : ${SLXIO_BUILD_SHARED_LIBS}")
-message(STATUS "  64-bit Identifiers         : ${SLXIO_64BIT_IDENTIFIERS}")
-message(STATUS "  Interaction                : ${SLXIO_WITH_INTERACTION}")
-message(STATUS "  OpenMP                     : ${SLXIO_WITH_OPENMP}")
-message(STATUS "  PIC                        : ${SLXIO_PIC}")
-message(STATUS "  Python                     : ${SLXIO_BUILD_PYTHON_BINDINGS}")
-message(STATUS "  Java                       : ${SLXIO_BUILD_JAVA_BINDINGS}")
-message(STATUS "  Testing                    : ${SLXIO_BUILD_TESTING}")
-message(
-  STATUS "  Coverage                   : ${SLXIO_ENABLE_TESTING_COVERAGE}")
-message(STATUS "  All Warnings               : ${SLXIO_ENABLE_WALL}")
-message(STATUS "  Warnings as Errors         : ${SLXIO_ENABLE_WERROR}")
-message(
-  STATUS "====================================================================")
+status("******************* Slxio Configuration Summary *******************")
+status(" ")
+status("General:")
+status("  Build Version:" "${PROJECT_VERSION}")
+status("  Source directory:" "${PROJECT_SOURCE_DIR}")
+status("  Binary directory:" "${PROJECT_BINARY_DIR}")
+status("  CMake version:" "${CMAKE_VERSION}")
+status("  Generator:" "${CMAKE_GENERATOR}")
+status("  Generator platform:" "${CMAKE_GENERATOR_PLATFORM}")
+status("  Generator toolset:" "${CMAKE_GENERATOR_TOOLSET}")
+status("  Generator instance:" "${CMAKE_GENERATOR_INSTANCE}")
+
+status("")
+status("  Host system:" "${CMAKE_HOST_SYSTEM_NAME}")
+status("  Host version:" "${CMAKE_HOST_SYSTEM_VERSION}")
+status("  Host processor:" "${CMAKE_HOST_SYSTEM_PROCESSOR}")
+status("  Target system:" "${CMAKE_SYSTEM_NAME}")
+status("  Target version:" "${CMAKE_SYSTEM_VERSION}")
+status("  Target processor:" "${CMAKE_SYSTEM_PROCESSOR}")
+
+status("")
+status("Compiler:")
+status("  C compiler:" "${CMAKE_C_COMPILER}")
+status("  C compiler ID:" "${CMAKE_C_COMPILER_ID}")
+status("  C compiler version:" "${CMAKE_C_COMPILER_VERSION}")
+status("  C compiler target:" "${CMAKE_C_COMPILER_TARGET}")
+status("  C++ compiler:" "${CMAKE_CXX_COMPILER}")
+status("  C++ compiler ID:" "${CMAKE_CXX_COMPILER_ID}")
+status("  C++ compiler version:" "${CMAKE_CXX_COMPILER_VERSION}")
+status("  C++ standard:" "${CMAKE_CXX_STANDARD}")
+
+status("")
+status("Configuration:")
+if(_is_multi_config)
+  status("  Configuration :" "Multi-config")
+  status("  Configurations:" "${CMAKE_CONFIGURATION_TYPES}")
+else()
+  status("  Configuration :" "Single-config")
+  status("  Build         :" "${CMAKE_BUILD_TYPE}")
+endif()
+status("  Shared libraries:" "${SLXIO_BUILD_SHARED_LIBS}")
+status("  Static libraries:" "${SLXIO_BUILD_STATIC_LIBS}")
+status("  Shared and static libraries:" "${SLXIO_BUILD_SHARED_AND_STATIC_LIBS}")
+status("  Default build type:" "${SLXIO_DEFAULT_BUILD_TYPE}")
+status("  LTO:" "${SLXIO_ENABLE_LTO}")
+status("  Global PIC:" "${SLXIO_ENABLE_PIC}")
+status("  Target-specific PIC:" "${SLXIO_ENABLE_TARGET_PIC}")
+
+status("")
+status("Flags:")
+status("  C flags:" "${CMAKE_C_FLAGS}")
+status("  C++ flags:" "${CMAKE_CXX_FLAGS}")
+status("  Executable linker flags:" "${CMAKE_EXE_LINKER_FLAGS}")
+status("  Shared-library linker flags:" "${CMAKE_SHARED_LINKER_FLAGS}")
+if(CMAKE_CONFIGURATION_TYPES)
+  set(_summary_configs "${CMAKE_CONFIGURATION_TYPES}")
+else()
+  set(_summary_configs DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
+endif()
+foreach(_config IN LISTS _summary_configs)
+  string(TOUPPER "${_config}" _config_upper)
+  status("  C flags (${_config}):"
+               "${CMAKE_C_FLAGS_${_config_upper}}")
+  status("  C++ flags (${_config}):"
+               "${CMAKE_CXX_FLAGS_${_config_upper}}")
+  status("  Linker flags (${_config}):"
+               "${CMAKE_EXE_LINKER_FLAGS_${_config_upper}}")
+endforeach()
+
+status("")
+status("Features:")
+status("  I/O modules:" "${SLXIO_ENABLE_IO}")
+status("  Simulink data dictionaries:" "${SLXIO_ENABLE_SLDD}")
+status("  MAT-file support:" "${SLXIO_ENABLE_MAT}")
+status("  Legacy MDL support:" "${SLXIO_ENABLE_MDL}")
+status("  HDF5 support check:" "${SLXIO_ENABLE_HDF5}")
+status("  OpenMP:" "${SLXIO_ENABLE_OPENMP}")
+status("  Python bindings:" "${SLXIO_BUILD_PYTHON}")
+status("  Command-line interface:" "${SLXIO_BUILD_CONSOLE}")
+status("  Examples:" "${SLXIO_BUILD_EXAMPLES}")
+status("  Install examples:" "${SLXIO_INSTALL_EXAMPLES}")
+status("  Pkg-config :" "${SLXIO_ENABLE_PKGCONFIG}")
+status("  Custom targets:" "${SLXIO_CUSTOM_TARGETS}")
+
+status("")
+status("Simulink:")
+status("  Automatic version detection:" "${SLXIO_AUTO_DETECT_SIMULINK}")
+status("  Default version:" "${SLXIO_SIMULINK_DEFAULT_VERSION}")
+status("  Default release:" "${SLXIO_SIMULINK_VERSION_YEAR}")
+status("  Default release suffix:" "${SLXIO_SIMULINK_VERSION_RELEASE}")
+status("  Selected release:" "${SLXIO_SIMULINK_VERSION}")
+
+status("")
+status("Testing:")
+status("  Unit and integration tests:" "${SLXIO_BUILD_TESTS}")
+status("  Unit tests:" "${SLXIO_BUILD_UNIT_TESTS}")
+status("  Integration tests:" "${SLXIO_BUILD_INTEGRATION_TESTS}")
+status("  Fuzz tests:" "${SLXIO_BUILD_FUZZER}")
+status("  Third-party tests:" "${SLXIO_BUILD_EXTERN_TESTS}")
+status("  Coverage instrumentation:" "${SLXIO_ENABLE_COVERAGE}")
+status("  Sanitizers enabled:" "${SLXIO_ENABLE_SANITIZERS}")
+if(SLXIO_ENABLE_SANITIZERS)
+  status("  AddressSanitizer:" "${SLXIO_ENABLE_ASAN}")
+  status("  MemorySanitizer:" "${SLXIO_ENABLE_MSAN}")
+  status("  ThreadSanitizer:" "${SLXIO_ENABLE_TSAN}")
+  status("  UndefinedBehaviorSanitizer:" "${SLXIO_ENABLE_UBSAN}")
+else()
+  status("  AddressSanitizer:" "Disabled")
+  status("  MemorySanitizer:" "Disabled")
+  status("  ThreadSanitizer:" "Disabled")
+  status("  UndefinedBehaviorSanitizer:" "Disabled")
+endif()
+status("  All project warnings:" "${SLXIO_ENABLE_WALL}")
+status("  Warnings as errors:" "${SLXIO_ENABLE_WERROR}")
+status("  Third-party warnings:" "${SLXIO_ENABLE_EXTERN_WALL}")
+status("  Third-party custom targets:" "${SLXIO_BUILD_EXTERN_CUSTOM_TARGETS}")
+
+status("")
+status("Documentation:")
+status("  Documentation targets:" "${SLXIO_ENABLE_DOCUMENTATION}")
+status("  Doxygen:" "${SLXIO_DOXYGEN_DOCUMENTATION}")
+status("  Sphinx:" "${SLXIO_SPHINX_DOCUMENTATION}")
+
+status("")
+status("Dependencies:")
+status("  Prefer system packages:" "${SLXIO_ENABLE_LOCAL_PACKAGES}")
+status("  Require system packages:" "${SLXIO_FORCE_LOCAL_PACKAGES}")
+status("  Extern packages:" "${SLXIO_FORCE_EXTERNAL_PACKAGES}")
+status("  HDF5:" HDF5_FOUND THEN "Found" ELSE "Not found")
+status("  MATIO:" MATIO_FOUND THEN "Found" ELSE "Not found")
+status("  OpenMP C++:" OpenMP_CXX_FOUND THEN "Found" ELSE "Not found")
+
+status("")
+status("Installation:")
+status("  Install rules:" "${SLXIO_INSTALL}")
+status("  Install third-party licenses:" "${SLXIO_INSTALL_LICENSES}")
+status("  Install vendored licenses:" "${SLXIO_INSTALL_EXTERN_LICENSES}")
+status("  Install prefix:" "${CMAKE_INSTALL_PREFIX}")
+status("  Runtime directory:" "${CMAKE_INSTALL_BINDIR}")
+status("  Library directory:" "${CMAKE_INSTALL_LIBDIR}")
+status("  Include directory:" "${CMAKE_INSTALL_INCLUDEDIR}")
+status("  License directory:" "${CMAKE_INSTALL_LICENSEDIR}")
+
+message(STATUS "======================================================================")
 message(STATUS "")
