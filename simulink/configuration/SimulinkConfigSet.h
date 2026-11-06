@@ -16,19 +16,8 @@
 
 #pragma once
 
-#include "SimulinkCodeGeneration.h"
 #include "SimulinkConfigSetComponent.h"
-#include "SimulinkCoverage.h"
-#include "SimulinkDebugging.h"
-#include "SimulinkHardware.h"
-#include "SimulinkModelReference.h"
-#include "SimulinkOptimization.h"
-#include "SimulinkRTW.h"
-#include "SimulinkSFSim.h"
-#include "SimulinkSolver.h"
 #include "CommonPCH.h"
-
-#include <optional>
 
 namespace slxio
 {

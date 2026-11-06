@@ -20,10 +20,10 @@
 namespace slxio
 {
 
-SimulinkReaderResult SimulinkCodeGenerationSlxReader::Read(SLXSection,
-                                                           SimulinkCodeGeneration&) const
+SimulinkReaderResult SimulinkCodeGenerationSlxReader::Read(SLXSection serializedData,
+                                                           SimulinkCodeGeneration& object) const
 {
     return SimulinkReaderResult::NotImplemented;
 }
 
-} // namespace slxio
+}; // namespace slxio

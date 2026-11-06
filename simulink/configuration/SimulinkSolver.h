@@ -66,5 +66,6 @@ struct SimulinkSolver // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkSolver& config);
+std::string ToString(const SimulinkSolver& config);
 
 }; // namespace slxio

@@ -56,5 +56,6 @@ struct SimulinkSFSim // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkSFSim& config);
+std::string ToString(const SimulinkSFSim& config);
 
 }; // namespace slxio

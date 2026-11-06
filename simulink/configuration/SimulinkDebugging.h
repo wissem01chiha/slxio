@@ -137,5 +137,6 @@ struct SimulinkDebugging final // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkDebugging& config);
+std::string ToString(const SimulinkDebugging& config);
 
 }; // namespace slxio

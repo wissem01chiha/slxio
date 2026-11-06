@@ -29,4 +29,4 @@ public:
                               SimulinkCodeGeneration& object) const override;
 };
 
-} // namespace slxio
+}; // namespace slxio

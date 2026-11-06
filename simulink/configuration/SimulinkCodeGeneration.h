@@ -30,5 +30,6 @@ struct SimulinkCodeGeneration
 };
 
 std::vector<Diagnostic> Validate(const SimulinkCodeGeneration& config);
+std::string ToString(const SimulinkCodeGeneration& config);
 
 } // namespace slxio

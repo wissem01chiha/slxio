@@ -20,7 +20,7 @@
 namespace slxio
 {
 
-TEST_CASE("SimulinkConfigSetStoresNamedComponentsAndParameters")
+TEST_CASE("SimulinkConfigSet store named components and parameters")
 {
     SimulinkConfigSet config("Simulation");
     CHECK(config.GetName() == "Simulation");

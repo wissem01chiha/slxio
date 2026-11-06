@@ -24,4 +24,39 @@ std::vector<Diagnostic> Validate(const SimulinkModelReference&)
     return {};
 }
 
-} // namespace slxio
+std::string ToString(const SimulinkModelReference& config)
+{
+    std::ostringstream oss;
+    oss << "SimulinkModelReference {" << std::endl;
+    oss << "  DisabledProps: " << config.DisabledProps << std::endl;
+    oss << "  Description: " << config.Description << std::endl;
+    oss << "  Components: " << config.Components << std::endl;
+    oss << "  UpdateModelReferenceTargets: " << config.UpdateModelReferenceTargets << std::endl;
+    oss << "  EnableRefExpFcnMdlSchedulingChecks: " << config.EnableRefExpFcnMdlSchedulingChecks
+        << std::endl;
+    oss << "  CheckModelReferenceTargetMessage: " << config.CheckModelReferenceTargetMessage
+        << std::endl;
+    oss << "  EnableParallelModelReferenceBuilds: " << config.EnableParallelModelReferenceBuilds
+        << std::endl;
+    oss << "  ParallelModelReferenceErrorOnInvalidPool: "
+        << config.ParallelModelReferenceErrorOnInvalidPool << std::endl;
+    oss << "  ParallelModelReferenceMATLABWorkerInit: "
+        << config.ParallelModelReferenceMATLABWorkerInit << std::endl;
+    oss << "  ModelReferenceNumInstancesAllowed: " << config.ModelReferenceNumInstancesAllowed
+        << std::endl;
+    oss << "  PropagateVarSize: " << config.PropagateVarSize << std::endl;
+    oss << "  ModelDependencies: " << config.ModelDependencies << std::endl;
+    oss << "  ModelReferencePassRootInputsByReference: "
+        << config.ModelReferencePassRootInputsByReference << std::endl;
+    oss << "  ModelReferenceMinAlgLoopOccurrences: " << config.ModelReferenceMinAlgLoopOccurrences
+        << std::endl;
+    oss << "  PropagateSignalLabelsOutOfModel: " << config.PropagateSignalLabelsOutOfModel
+        << std::endl;
+    oss << "  SupportModelReferenceSimTargetCustomCode: "
+        << config.SupportModelReferenceSimTargetCustomCode << std::endl;
+    oss << "}";
+
+    return oss.str();
+}
+
+}; // namespace slxio

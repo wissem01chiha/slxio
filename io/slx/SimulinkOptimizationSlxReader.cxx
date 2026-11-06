@@ -20,7 +20,8 @@
 namespace slxio
 {
 
-SimulinkReaderResult SimulinkOptimizationSlxReader::Read(SLXSection, SimulinkOptimization&) const
+SimulinkReaderResult SimulinkOptimizationSlxReader::Read(SLXSection serializedData,
+                                                         SimulinkOptimization& object) const
 {
     return SimulinkReaderResult::NotImplemented;
 }

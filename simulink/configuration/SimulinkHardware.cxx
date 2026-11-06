@@ -34,4 +34,19 @@ std::vector<Diagnostic> Validate(const SimulinkHardware& config)
     return diagnostics;
 }
 
+std::string ToString(const SimulinkHardware& config)
+{
+    std::string result = "SimulinkHardware:\n";
+    result += "  Description: " + config.Description + "\n";
+    result += "  Components: " + config.Components + "\n";
+    result += "  ProdBitPerChar: " + std::to_string(config.ProdBitPerChar) + "\n";
+    result += "  ProdBitPerShort: " + std::to_string(config.ProdBitPerShort) + "\n";
+    result += "  ProdBitPeruint16_t: " + std::to_string(config.ProdBitPeruint16_t) + "\n";
+    result += "  ProdBitPerLong: " + std::to_string(config.ProdBitPerLong) + "\n";
+    result += "  ProdBitPerLongLong: " + std::to_string(config.ProdBitPerLongLong) + "\n";
+    result += "  ProdBitPerFloat: " + std::to_string(config.ProdBitPerFloat) + "\n";
+    result += "  ProdBitPerfloat64: " + std::to_string(config.ProdBitPerfloat64) + "\n";
+    return result;
+}
+
 } // namespace slxio

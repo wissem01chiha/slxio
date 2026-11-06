@@ -72,9 +72,7 @@ cmake_dependent_option(SLXIO_INSTALL_EXAMPLES "Install example scripts" OFF
 # Option to enable the Python bindings interface.
 advanced_option(SLXIO_BUILD_PYTHON "Build Python interface" ON)
 
-# Option to enable Java bindings
-advanced_option(SLXIO_BUILD_JAVA "Build Java interface" OFF)
-
+# Option to enable/disable building the command-line interface.
 advanced_option(SLXIO_BUILD_CONSOLE "Enable building command-line
  interface" OFF)
 

@@ -60,5 +60,6 @@ struct SimulinkCoverage
 };
 
 std::vector<Diagnostic> Validate(const SimulinkCoverage& config);
+std::string ToString(const SimulinkCoverage& config);
 
 }; // namespace slxio

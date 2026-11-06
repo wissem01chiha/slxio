@@ -25,4 +25,4 @@ SimulinkReaderResult SimulinkConfigSetSlxReader::Read(SLXSection, SimulinkConfig
     return SimulinkReaderResult::NotImplemented;
 }
 
-} // namespace slxio
+}; // namespace slxio

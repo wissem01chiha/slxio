@@ -73,5 +73,6 @@ struct SimulinkHardware // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkHardware& config);
+std::string ToString(const SimulinkHardware& config);
 
 }; // namespace slxio

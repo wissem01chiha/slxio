@@ -83,5 +83,6 @@ struct SimulinkOptimization final // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkOptimization& config);
+std::string ToString(const SimulinkOptimization& config);
 
 }; // namespace slxio

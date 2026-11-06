@@ -22,6 +22,7 @@
 namespace slxio
 {
 
+/// Result of an operation on a SimulinkConfigSetCollection
 enum class ConfigSetCollectionResult
 {
     Success,

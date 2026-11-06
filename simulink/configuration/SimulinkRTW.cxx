@@ -24,4 +24,15 @@ std::vector<Diagnostic> Validate(const SimulinkRTW&)
     return {};
 }
 
-} // namespace slxio
+std::string ToString(const SimulinkRTW& config)
+{
+    std::ostringstream oss;
+    oss << "SimulinkRTW {" << std::endl;
+    oss << "  DisabledProps: " << config.DisabledProps << std::endl;
+    oss << "  DisabledPropsCount: " << config.DisabledPropsCount << std::endl;
+    oss << "}";
+
+    return oss.str();
+}
+
+}; // namespace slxio

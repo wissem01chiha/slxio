@@ -24,4 +24,20 @@ std::vector<Diagnostic> Validate(const SimulinkSolver&)
     return {};
 }
 
-} // namespace slxio
+std::string ToString(const SimulinkSolver& config)
+{
+    std::ostringstream oss;
+    oss << "SimulinkSolver {" << std::endl;
+    oss << "  DisabledProps: " << config.DisabledProps << std::endl;
+    oss << "  Description: " << config.Description << std::endl;
+    oss << "  Components: " << config.Components << std::endl;
+    oss << "  StartTime: " << config.StartTime << std::endl;
+    oss << "  StopTime: " << config.StopTime << std::endl;
+    oss << "  AbsTol: " << config.AbsTol << std::endl;
+    oss << "  AutoScaleAbsTol: " << config.AutoScaleAbsTol << std::endl;
+    oss << "}";
+
+    return oss.str();
+}
+
+}; // namespace slxio

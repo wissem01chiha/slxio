@@ -24,4 +24,25 @@ std::vector<Diagnostic> Validate(const SimulinkSFSim&)
     return {};
 }
 
-} // namespace slxio
+std::string ToString(const SimulinkSFSim& config)
+{
+    std::ostringstream oss;
+    oss << "SimulinkSFSim {" << std::endl;
+    oss << "  DisabledProps: " << config.DisabledProps << std::endl;
+    oss << "  Description: " << config.Description << std::endl;
+    oss << "  Components: " << config.Components << std::endl;
+    oss << "  SimCustomSourceCode: " << config.SimCustomSourceCode << std::endl;
+    oss << "  SimCustomHeaderCode: " << config.SimCustomHeaderCode << std::endl;
+    oss << "  SimCustomInitializer: " << config.SimCustomInitializer << std::endl;
+    oss << "  SimCustomTerminator: " << config.SimCustomTerminator << std::endl;
+    oss << "  SimReservedNameArray: " << config.SimReservedNameArray << std::endl;
+    oss << "  SimUserSources: " << config.SimUserSources << std::endl;
+    oss << "  SimUserIncludeDirs: " << config.SimUserIncludeDirs << std::endl;
+    oss << "  SimUserLibraries: " << config.SimUserLibraries << std::endl;
+    oss << "  SimUserDefines: " << config.SimUserDefines << std::endl;
+    oss << "}";
+
+    return oss.str();
+}
+
+}; // namespace slxio

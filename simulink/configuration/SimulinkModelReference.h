@@ -43,5 +43,6 @@ struct SimulinkModelReference final // NOSONAR
 };
 
 std::vector<Diagnostic> Validate(const SimulinkModelReference& config);
+std::string ToString(const SimulinkModelReference& config);
 
 }; // namespace slxio

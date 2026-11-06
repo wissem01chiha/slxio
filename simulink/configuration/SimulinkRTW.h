@@ -29,5 +29,6 @@ struct SimulinkRTW
 };
 
 std::vector<Diagnostic> Validate(const SimulinkRTW& config);
+std::string ToString(const SimulinkRTW& config);
 
 }; // namespace slxio

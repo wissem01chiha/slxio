@@ -24,4 +24,28 @@ std::vector<Diagnostic> Validate(const SimulinkOptimization&)
     return {};
 }
 
-} // namespace slxio
+std::string ToString(const SimulinkOptimization& config)
+{
+    std::ostringstream oss;
+    oss << "SimulinkOptimization {" << std::endl;
+    oss << "  DisabledProps: " << config.DisabledProps << std::endl;
+    oss << "  DisabledPropsCount: " << config.DisabledPropsCount << std::endl;
+    oss << "  Description: " << config.Description << std::endl;
+    oss << "  Components: " << config.Components << std::endl;
+    oss << "  BlockReduction: " << config.BlockReduction << std::endl;
+    oss << "  booleanDataType: " << config.booleanDataType << std::endl;
+    oss << "  ConditionallyExecuteInputs: " << config.ConditionallyExecuteInputs << std::endl;
+    oss << "  DefaultParameterBehavior: " << config.DefaultParameterBehavior << std::endl;
+    oss << "  UseDivisionForNetSlopeComputation: " << config.UseDivisionForNetSlopeComputation
+        << std::endl;
+    oss << "  GainParamInheritBuiltuint16_type: " << config.GainParamInheritBuiltuint16_type
+        << std::endl;
+    oss << "  UseFloatMulNetSlope: " << config.UseFloatMulNetSlope << std::endl;
+    oss << "  DefaultUnderspecifiedDataType: " << config.DefaultUnderspecifiedDataType << std::endl;
+    oss << "  UseSpecifiedMinMax: " << config.UseSpecifiedMinMax << std::endl;
+    oss << "}";
+
+    return oss.str();
+}
+
+}; // namespace slxio

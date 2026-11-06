@@ -20,9 +20,10 @@
 namespace slxio
 {
 
-SimulinkReaderResult SimulinkCoverageSlxReader::Read(SLXSection, SimulinkCoverage&) const
+SimulinkReaderResult SimulinkCoverageSlxReader::Read(SLXSection serializedData,
+                                                     SimulinkCoverage& config) const
 {
     return SimulinkReaderResult::NotImplemented;
 }
 
-} // namespace slxio
+}; // namespace slxio

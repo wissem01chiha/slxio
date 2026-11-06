@@ -21,7 +21,8 @@
 namespace slxio
 {
 
-SimulinkReaderResult SimulationSettingsSlxReader::Read(SLXSection, SimulationSettings&) const
+SimulinkReaderResult SimulationSettingsSlxReader::Read(SLXSection serializedData,
+                                                       SimulationSettings& object) const
 {
     return SimulinkReaderResult::NotImplemented;
 }

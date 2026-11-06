@@ -24,4 +24,20 @@ std::vector<Diagnostic> Validate(const SimulinkDebugging&)
     return {};
 }
 
+std::string ToString(const SimulinkDebugging& config)
+{
+    std::string result = "SimulinkDebugging:\n";
+    result += "  DisabledProps: " + config.DisabledProps + "\n";
+    result += "  DisabledPropsCount: " + std::to_string(config.DisabledPropsCount) + "\n";
+    result += "  Description: " + config.Description + "\n";
+    result += "  Components: " + config.Components + "\n";
+    result += "  RTPrefix: " + config.RTPrefix + "\n";
+    result += "  ConsistencyChecking: " + config.ConsistencyChecking + "\n";
+    result += "  ArrayBoundsChecking: " + config.ArrayBoundsChecking + "\n";
+    result += "  SignalInfNanChecking: " + config.SignalInfNanChecking + "\n";
+    result += "  StringTruncationChecking: " + config.StringTruncationChecking + "\n";
+    result += "  SignalRangeChecking: " + config.SignalRangeChecking + "\n";
+    return result;
+}
+
 } // namespace slxio

@@ -29,4 +29,4 @@ public:
                               SimulinkModelReference& object) const override;
 };
 
-} // namespace slxio
+}; // namespace slxio

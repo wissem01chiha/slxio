@@ -24,4 +24,15 @@ std::vector<Diagnostic> Validate(const SimulinkCodeGeneration&)
     return {};
 }
 
+std::string ToString(const SimulinkCodeGeneration& config)
+{
+    std::string result = "SimulinkCodeGeneration:\n";
+    result += "  codeGenFolder: " + config.codeGenFolder + "\n";
+    result += "  codeGenLanguage: " + config.codeGenLanguage + "\n";
+    result +=
+        "  enableCodeGeneration: " + std::string(config.enableCodeGeneration ? "true" : "false") +
+        "\n";
+    return result;
+}
+
 }; // namespace slxio

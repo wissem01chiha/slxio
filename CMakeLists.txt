@@ -76,12 +76,6 @@ if(SLXIO_BUILD_PYTHON)
   add_subdirectory(python)
 endif()
 
-if(SLXIO_BUILD_JAVA)
-  add_subdirectory(java)
-endif()
-
-add_subdirectory(utils)
-
 if(SLXIO_BUILD_INTEGRATION_TESTS)
   add_subdirectory(tests)
 endif()
