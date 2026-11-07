@@ -29,7 +29,7 @@ based ones.
 
 ## Installing
 
-If you're new, try our [Getting-Started](https://github.com/wissem01chiha/slxio/wiki/Getting-Started) guide
+If you're new, try our [Getting-Started](https://github.com/wissem01chiha/slxio/wiki/Introduction/index.md) guide
 
 You can install a [prebuilt package](https://github.com/wissem01chiha/slxio/wiki/Prebuilt-Packages) or [compile from source](https://github.com/wissem01chiha/slxio/wiki/Compile-from-Source).
 
@@ -49,7 +49,7 @@ See [Changelog](CHANGELOG.md) file for project API changes.
 
 For bugs, please [report an issue](https://github.com/wissem01chiha/slxio/issues), submit a [pull request](https://github.com/wissem01chiha/slxio/pulls) or catch me on [email](mailto:chihawissem08@gmail.com)
 
-Any contributions are greatly appreciated, see [Contributing](.github/CONTRIBUTING.md) for some contribution guidelines.
+Any contributions are greatly appreciated, see [Contributing](./CONTRIBUTING.md) for some contribution guidelines.
 
 ## Acknowledgments
 
@@ -58,10 +58,6 @@ Many thanks to everyone who has contributed to this project, whether by reportin
 ## Security
 
 For information on reporting security vulnerabilities in slxio, see [SECURITY](SECURITY.md).
-
-## Contributing
-
-Slxio is an open source project, and is thus built with your contributions, if you are interested in collaborating, please see our [contributing](Documentation/Contributing/index.md) guide or contact the maintainers via email at [mail](mailto:chihawissem08@gmail.com). 
 
 ##  License
 
