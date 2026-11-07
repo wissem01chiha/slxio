@@ -27,25 +27,37 @@ The project is designed as a lightweight alternative to [MATLAB®](https://www.m
 Slxio does not aim to support all Simulink® features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive api for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started, and reduce the effort when migrating Matlab based scripts into Slxio
 based ones.
 
-## Key features
+## Installing
 
-- Access  [Simulink®](https://www.mathworks.com/products/simulink.html) models outside [MATLAB®](https://www.mathworks.com/help/matlab/index.html) Read `.slx` block‑diagram files into native C++ structures.
-- Export models in scientific formats  Support [HDF5](https://www.hdfgroup.org/solutions/hdf5/), [NetCDF](https://www.unidata.ucar.edu/software/netcdf), and similar standards for use in research, simulation, and data analysis pipelines.
-- Export models in visualization formats Provide [Json](https://www.json.org/json-en.html), [Mermaid](https://mermaid.live/), [Drawio](https://www.drawio.com/), and [Graphviz](https://graphviz.org/) outputs for integration with visualization tools and lightweight sharing.
-- Modify block diagrams without [MATLAB®](https://www.mathworks.com/help/matlab/index.html) licenses or installation, by editing parameters and metadata directly, then save changes back into *.slx files.
-- Provide graph‑compatible structures for open source libraries  Load models into graph abstractions compatible with [Boost Graph](https://github.com/boostorg/graph), [Lemon](https://lemon.cs.elte.hu/trac/lemon),  [igraph](https://igraph.org/), or [ogdf](https://github.com/ogdf/ogdf) .
-- Provide [Python](https://docs.python.org/3/)-compatible model representations for integration with modern scientific computing frameworks like [JAX](https://docs.jax.dev/en/latest/), and machine learning framworks such as [PyTorch](https://docs.pytorch.org/docs/main/), and [TensorFlow](https://www.tensorflow.org/).
-- Explore models visually [Qt](https://www.qt.io/)‑based Interactive visualization to navigate model structures.
+If you're new, try our [Getting-Started](https://github.com/wissem01chiha/slxio/wiki/Getting-Started) guide
 
-## Getting-Started
+You can install a [prebuilt package](https://github.com/wissem01chiha/slxio/wiki/Prebuilt-Packages) or [compile from source](https://github.com/wissem01chiha/slxio/wiki/Compile-from-Source).
 
-- **[Introduction](Documentation/Introduction/index.md)**  
-- **[Examples](Documentation/Examples/index.md)**  
-- **[Integration](Documentation/Integration/index.md)**  
-- **[Platform Support](Documentation/Platform/index.md)**  
-- **[Reference](Documentation/Reference/index.md)**   
-- **[Changelog](Documentation/Changelog/index.md)**  
-- **[Licenses](Documentation/Licenses/index.md)**
+## API Documentation Reference
+
+Check our [Wiki](https://github.com/wissem01chiha/slxio/wiki) for detailed documentation and examples.
+
+## FAQ
+
+Have a question? Want some tips? Feel free to join the [discussions](https://github.com/wissem01chiha/slxio/discussions) or open an issue on our [issue tracker](https://github.com/wissem01chiha/slxio/issues).
+
+## Changelog
+
+See [Changelog](CHANGELOG.md) file for project API changes.
+
+## Support
+
+For bugs, please [report an issue](https://github.com/wissem01chiha/slxio/issues), submit a [pull request](https://github.com/wissem01chiha/slxio/pulls) or catch me on [email](mailto:chihawissem08@gmail.com)
+
+Any contributions are greatly appreciated, see [Contributing](.github/CONTRIBUTING.md) for some contribution guidelines.
+
+## Acknowledgments
+
+Many thanks to everyone who has contributed to this project, whether by reporting issues, submitting pull requests, or providing other forms of support. 
+
+## Security
+
+For information on reporting security vulnerabilities in slxio, see [SECURITY](SECURITY.md).
 
 ## Contributing
 
@@ -54,5 +66,3 @@ Slxio is an open source project, and is thus built with your contributions, if y
 ##  License
 
 All material is provided under an Apache License unless otherwise specified. See the [LICENSE](./LICENSE.txt) file for more informations.
-
-[![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-light.svg)](https://sonarcloud.io/summary/new_code?id=wissem01chiha_slxio)

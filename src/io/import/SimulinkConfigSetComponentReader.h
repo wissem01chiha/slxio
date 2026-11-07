@@ -18,6 +18,7 @@
 
 #include "SimulinkConfigSetComponent.h"
 #include "SimulinkReader.h"
+#include "SimulinkReaderResult.h"
 
 namespace slxio
 {
