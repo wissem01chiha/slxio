@@ -23,8 +23,7 @@ namespace slxio
         CHECK(configSet.FindParam("CurrentDlgPage") != nullptr);
         CHECK(configSet.GetComponents().size() == 9);
 
-        const SimulinkConfigSetComponent *solver =
-            configSet.FindComponent("Simulink.SolverCC");
+        const SimulinkConfigSetComponent *solver = configSet.FindComponent("Simulink.SolverCC");
         REQUIRE(solver != nullptr);
         CHECK(solver->GetComponentClassName() == "Simulink.SolverCC");
         CHECK(solver->GetParams().size() == 39);
