@@ -13,6 +13,7 @@
 # the License.
 
 include(Macro)
+include(GNUInstallDirs)
 
 # Option to enable/disable global Link Time Optimization. Note that this might
 # increase build time but produce a more optimized binary. This feature requires
@@ -22,10 +23,6 @@ advanced_option(SLXIO_ENABLE_LTO "Enable Link Time Optimization" OFF)
 # Option to enable position-independent code globally. Useful only when building
 # shared libraries or when a static library may later be linked into one.
 advanced_option(SLXIO_ENABLE_PIC "Enable position-independent code" ON)
-
-# Option to enable position-independent code only for specific targets that
-# require it, not globally.
-advanced_option(SLXIO_ENABLE_TARGET_PIC "Enable PIC for specific targets" OFF)
 
 # Build both static and shared libraries. This is disabled by default.
 advanced_option(SLXIO_BUILD_SHARED_AND_STATIC_LIBS "Build both shared and
@@ -72,10 +69,6 @@ cmake_dependent_option(SLXIO_INSTALL_EXAMPLES "Install example scripts" OFF
 # Option to enable the Python bindings interface.
 advanced_option(SLXIO_BUILD_PYTHON "Build Python interface" ON)
 
-# Option to enable/disable building the command-line interface.
-advanced_option(SLXIO_BUILD_CONSOLE "Enable building command-line
- interface" OFF)
-
 # Enable all sanitizers globally when the compiler and platform support them
 advanced_option(SLXIO_ENABLE_SANITIZERS "Enable all available sanitizers" OFF)
 
@@ -111,10 +104,6 @@ advanced_dependent_option(
 
 # Option to enable/disable IO module support globally
 advanced_option(SLXIO_ENABLE_IO "Build I/O modules" ON)
-
-# Option to enable *.sldd file support
-advanced_dependent_option(SLXIO_ENABLE_SLDD "Simulink data dictionary support"
-                          ON "SLXIO_ENABLE_IO" OFF)
 
 # Option to enable *.mat file support
 advanced_dependent_option(SLXIO_ENABLE_MAT "MATLAB MAT file support" OFF
@@ -158,15 +147,18 @@ advanced_dependent_option(SLXIO_INSTALL_LICENSES "Install third-party licenses"
                           ON "SLXIO_INSTALL" ON)
 
 # Option to install software licenses; requires SLXIO_INSTALL enabled
-advanced_option(CMAKE_INSTALL_LICENSEDIR "Install license directory" OFF)
+advanced_option(CMAKE_INSTALL_LICENSEDIR "Install license directory" ON)
 
 # Default license installation directory
-advanced_option(CMAKE_DEFAULT_LICENSEDIR "Default license installation
- directory" ${CMAKE_INSTALL_DATAROOTDIR}/Licenses/${CMAKE_PROJECT_NAME} OFF)
-
-# If CMAKE_INSTALL_LICENSEDIR is not set, fall back to this default
-if(NOT CMAKE_INSTALL_LICENSEDIR)
-  set(CMAKE_INSTALL_LICENSEDIR "${CMAKE_DEFAULT_LICENSEDIR}")
+string(TOLOWER "${PROJECT_NAME}" _project_license_dir)
+set(_default_license_dir
+    "${CMAKE_INSTALL_DATAROOTDIR}/licenses/${_project_license_dir}")
+if(NOT CMAKE_DEFAULT_LICENSEDIR OR CMAKE_DEFAULT_LICENSEDIR STREQUAL "ON")
+  set(CMAKE_DEFAULT_LICENSEDIR "${_default_license_dir}" CACHE STRING
+      "Default license installation directory" FORCE)
+else()
+  set(CMAKE_DEFAULT_LICENSEDIR "${CMAKE_DEFAULT_LICENSEDIR}" CACHE STRING
+      "Default license installation directory")
 endif()
 
 # Generate a .pc file from a template during the build if pkg-config was found
@@ -209,46 +201,11 @@ advanced_option(SLXIO_ENABLE_WALL "Enable all compiler warnings" ON)
 advanced_option(SLXIO_ENABLE_DOCUMENTATION "Enable documentation generation"
                 OFF)
 
-# Option to generate API HTML documentation. Requires Doxygen installed,
-# otherwise throws a build error, require SLXIO_ENABLE_DOCUMENTATION to be ON.
-advanced_dependent_option(
-  SLXIO_DOXYGEN_DOCUMENTATION "Doxygen documentation generation" OFF
-  SLXIO_ENABLE_DOCUMENTATION ON)
-
-# Same as above but for Sphinx documentation generation
-# https://www.sphinx-doc.org/en/master/index.html
-advanced_dependent_option(
-  SLXIO_SPHINX_DOCUMENTATION "Sphinx documentation generation" OFF
-  SLXIO_ENABLE_DOCUMENTATION ON)
-
 # Option to use OpenMP acceleration when available
 advanced_configure_option(SLXIO_ENABLE_OPENMP "OpenMP support" ON)
 
 # Specify the directory where third-party dependencies
 set(PROJECT_EXTERN_SOURCE_DIR ${PROJECT_SOURCE_DIR}/extern)
-
-# This Option specify to the build system to force use system-wide installed
-# modules instead of vendored ones, it will trigger a build error if
-# find_package fails, this is for all vendored packages
-advanced_option(SLXIO_FORCE_LOCAL_PACKAGES
-                "Force system-wide installed packages" OFF)
-
-# the build system will look for system wise installations and prioritize them
-# over vendored packages, this may reduce build time by avoiding rebuilding
-# vendored libraries, note that this option is ignored if
-# SLXIO_FORCE_LOCAL_PACKAGES is ON
-advanced_option(SLXIO_ENABLE_LOCAL_PACKAGES
-                "Enable system-wide installed packages" ON)
-
-# This option is for consumers of SLXIO inside an other CMake based projects
-# where some third-party dependencies are already built, for other targets, this
-# will avoid rebuilding them and generating their local rules for the project
-# itself, no invocation of find_package macro
-advanced_option(SLXIO_FORCE_EXTERNAL_PACKAGES "Force external packages" OFF)
-
-# Option to install vendored third-party module licenses
-advanced_option(SLXIO_INSTALL_EXTERN_LICENSES
-                "Install vendored third_party module licenses" ON)
 
 # Option to enable building third-party module tests for regression. Requires
 # SLXIO_BUILD_TESTS enabled.

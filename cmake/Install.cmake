@@ -12,31 +12,19 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+include(CMakePackageConfigHelpers)
+
+set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
+
 if(SLXIO_ENABLE_PKGCONFIG)
-find_package(PkgConfig)
-if(PKG_CONFIG_FOUND)
-  set(SLXIO_PKG_CFG "${CMAKE_CURRENT_BINARY_DIR}/${SLXIO_PKG_CONFIG_FILE}")
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/${SLXIO_PKG_CONFIG_FILE}.in
-                 ${SLXIO_PKG_CFG} @ONLY)
-endif()
-endif()
-
-# Do not change this without changing filename on disk !
-set(SLXIO_PKG_CONFIG_FILE "slxio.pc")
-
-set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
-set(PROJECT_DESCRIPTION "SLXIO – SIMULINK SLX File I/O Library")
-
-if(ENABLE_PKGCONFIG)
-  set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
-
+  find_package(PkgConfig REQUIRED)
+  configure_file(${PROJECT_SOURCE_DIR}/slxio.pc.in 
+    ${PROJECT_BINARY_DIR}/slxio.pc @ONLY)
   install(
     DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/
     DESTINATION ${PKGCONFIG_INSTALL_DIR}
     FILES_MATCHING
     PATTERN "slxio.pc")
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/slxio.pc.in
-                 ${CMAKE_CURRENT_BINARY_DIR}/slxio.pc @ONLY)
 endif()
 
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
@@ -45,42 +33,22 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
       CACHE PATH "Default install path" FORCE)
 endif()
 
-# if(TOP_LEVEL_BUILD)
+if(SLXIO_INSTALL AND SLXIO_INSTALL_LICENSES AND CMAKE_INSTALL_LICENSEDIR)
+  install(DIRECTORY "${PROJECT_SOURCE_DIR}/licenses/"
+          DESTINATION "${CMAKE_DEFAULT_LICENSEDIR}")
+endif()
 
-# install(DIRECTORY ${CMAKE_SOURCE_DIR}/include/slxio DESTINATION include
-# FILES_MATCHING PATTERN "*.h" )
+configure_package_config_file(
+  "${PROJECT_SOURCE_DIR}/cmake/slxio-config.cmake.in"
+  "${PROJECT_BINARY_DIR}/slxio-config.cmake"
+  INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/slxio")
 
-# install(FILES ${CMAKE_BINARY_DIR}/Conf.h DESTINATION include/slxio)
-# install(FILES ${CMAKE_BINARY_DIR}/version.h DESTINATION include/slxio)
+configure_file(
+  "${PROJECT_SOURCE_DIR}/cmake/slxio-config-version.cmake.in"
+  "${PROJECT_BINARY_DIR}/slxio-config-version.cmake" @ONLY)
 
-# install(TARGETS zlib zip EXPORT slxioTargets ARCHIVE DESTINATION lib LIBRARY
-# DESTINATION lib RUNTIME DESTINATION bin)
+install(
+  FILES "${PROJECT_BINARY_DIR}/slxio-config.cmake"
+        "${PROJECT_BINARY_DIR}/slxio-config-version.cmake"
+  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/slxio")
 
-# install(EXPORT slxioTargets FILE slxioTargets.cmake NAMESPACE slxio::
-# DESTINATION share/slxio)
-
-# include(CMakePackageConfigHelpers)
-
-# configure_package_config_file(
-# "${CMAKE_SOURCE_DIR}/cmake/SlxioConfig.cmake.in"
-# "${CMAKE_BINARY_DIR}/SlxioConfig.cmake" INSTALL_DESTINATION share/slxio )
-
-# write_basic_package_version_file(
-# "${CMAKE_BINARY_DIR}/SlxioConfigVersion.cmake" VERSION ${PROJECT_VERSION}
-# COMPATIBILITY SameMajorVersion )
-
-# install(FILES "${CMAKE_BINARY_DIR}/SlxioConfig.cmake"
-# "${CMAKE_BINARY_DIR}/SlxioConfigVersion.cmake" DESTINATION share/slxio)
-
-# install(FILES ${CMAKE_SOURCE_DIR}/LICENSE DESTINATION share/slxio)
-
-# install(FILES ${CMAKE_CURRENT_BINARY_DIR}/slxio.pc DESTINATION lib/pkgconfig)
-
-# # ---[ CPack set(CPACK_PACKAGE_NAME "slxio") set(CPACK_PACKAGE_VERSION
-# "0.1.0") set(CPACK_PACKAGE_CONTACT "chihawissem08@gmail.com")
-# set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Wissem Chiha")
-# set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SIMULINK® SLX File I/O Library")
-# set(CPACK_PACKAGE_VENDOR "Wissem Chiha") set(CPACK_PACKAGE_INSTALL_DIRECTORY
-# "slxio") set(CPACK_DEBIAN_PACKAGE_DEPENDS "") set(CPACK_GENERATOR "DEB")
-
-# include(CPack) endif()

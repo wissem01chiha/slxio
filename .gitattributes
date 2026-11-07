@@ -1,19 +1,30 @@
+# Copyright 2026 Wissem Chiha
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 **/test/data/** linguist-vendored
-Development/cinclude2dot.pl linguist-vendored
-Development/codeviz.py linguist-vendored
-CMake/FindMatlab.cmake linguist-vendored
-CMake/FindHDF5.cmake linguist-vendored
-CMake/Findcppcheck.cmake linguist-vendored
-CMake/FindLibXml2.cmake linguist-vendored
-CMake/FindJsonC.cmake linguist-vendored
-ThirdParty/json-c/src/** linguist-vendored
-ThirdParty/libxml2/src/** linguist-vendored
-ThirdParty/slog/src/*** linguist-vendored
-ThirdParty/zlib/src/*** linguist-vendored
-ThirdParty/zlib/src/*.c linguist-vendored
-ThirdParty/zlib/src/*.h linguist-vendored
-ThirdParty/zlib/src/*.cmake linguist-vendored
-ThirdParty/libzip/src/*** linguist-vendored
-ThirdParty/libzip/src/*.c linguist-vendored
-ThirdParty/libzip/src/*.h linguist-vendored
-io/slx/test/data/*** linguist-vendored
+extern/zlib/src/*** linguist-vendored
+extern/zlib/src/*.c linguist-vendored
+extern/zlib/src/*.h linguist-vendored
+extern/zlib/src/*.cmake linguist-vendored
+extern/libzip/src/*** linguist-vendored
+extern/libzip/src/*.c linguist-vendored
+extern/libzip/src/*.h linguist-vendored
+extern/cwalk/src/*** linguist-vendored
+extern/cxxopts/src/*** linguist-vendored
+extern/nanobind/src/*** linguist-vendored
+extern/pugixml/src/*** linguist-vendored
+extern/yyjson/src/*** linguist-vendored
+extern/zlib/src/*** linguist-vendored
+extern/spdlog/src/*** linguist-vendored
+extern/doctest/src/*** linguist-vendored

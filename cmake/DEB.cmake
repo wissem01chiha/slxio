@@ -11,3 +11,13 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations under
 # the License.
+
+set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME "slxio")
+set(CPACK_PACKAGE_VERSION "${CMAKE_PROJECT_VERSION}")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Wissem Chiha")
+set(CPACK_PACKAGE_CONTACT "chihawissem08@gmail.com")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SIMULINK® SLX File I/O Library")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "slxio") 
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "")
+include(CPack)

@@ -38,6 +38,8 @@ include(CompilerWarningFlags)
 include(LTO)
 include(CTest)
 
+find_package(OpenMP)
+
 enable_testing()
 
 if(SLXIO_ENABLE_PIC)
@@ -57,25 +59,18 @@ if(SLXIO_BUILD_SUMMARY)
 endif()
 
 add_subdirectory(extern)
-add_subdirectory(common)
-add_subdirectory(simulink)
-
-if(SLXIO_ENABLE_IO)
-  add_subdirectory(io)
-endif()
-
-if(SLXIO_BUILD_CONSOLE)
-  add_subdirectory(cli)
-endif()
+add_subdirectory(src)
 
 if(SLXIO_BUILD_PYTHON)
   add_subdirectory(python)
 endif()
 
 if(SLXIO_BUILD_INTEGRATION_TESTS)
-  add_subdirectory(tests)
+  add_subdirectory(test)
 endif()
 
 if(SLXIO_BUILD_EXAMPLES)
   add_subdirectory(examples)
 endif()
+
+include(Install)

@@ -1,3 +1,0 @@
-# vcpkg
-
-# conan

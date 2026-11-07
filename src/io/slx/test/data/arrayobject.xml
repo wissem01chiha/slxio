@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*1">
+    <Object ObjectID="6">
+    <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
+    <P Name="ID" Class="char">Property Inspector</P>
+    <P Name="Visible" Class="logical">0</P>
+    <P Name="CreateCallback" Class="char"/>
+    <P Name="UserData" Class="char"/>
+    <P Name="Floating" Class="logical">0</P>
+    <P Name="DockPosition" Class="char">Right</P>
+    <P Name="Width" Class="int32">640</P>
+    <P Name="Height" Class="int32">480</P>
+    <P Name="Minimized" Class="char">Unset</P>
+    </Object>
+</Array>
