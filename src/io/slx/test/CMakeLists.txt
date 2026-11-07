@@ -14,4 +14,5 @@
 
 module_add_tests(
   Slx
-  cxx/TestSimulinkConfigSetComponentSlxReader.cxx)
+  cxx/TestSimulinkConfigSetComponentSlxReader.cxx
+  cxx/TestSimulinkConfigSetSlxReader.cxx)

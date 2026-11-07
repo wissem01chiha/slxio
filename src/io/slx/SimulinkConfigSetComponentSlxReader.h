@@ -30,4 +30,4 @@ namespace slxio
                                   SimulinkConfigSetComponent &object) const override;
     };
 
-}  // namespace slxio
+};  // namespace slxio

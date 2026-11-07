@@ -118,12 +118,6 @@ advanced_dependent_option(SLXIO_ENABLE_MDL "Legacy Simulink model files
 # files with HDF5 via MATIO_WITH_HDF5.
 advanced_option(SLXIO_ENABLE_HDF5 "Check for HDF5 library" ON)
 
-# By default, it will look for any installed Simulink instances. If found, the
-# target Simulink version is set automatically to match; otherwise it can be
-# forced to one of the supported releases.
-advanced_option(SLXIO_AUTO_DETECT_SIMULINK
-                "Automatically detect installed Simulink versions" ON)
-
 # Option for the user to specify a Simulink version to use when
 # SLXIO_AUTO_DETECT_SIMULINK is OFF. Note that only one Simulink version is
 # supported at a time.
@@ -164,7 +158,7 @@ endif()
 # Generate a .pc file from a template during the build if pkg-config was found
 # on the host machine. Requires pkg-config installed, see
 # https://people.freedesktop.org/~dbn/pkg-config-guide.html
-advanced_option(SLXIO_ENABLE_PKGCONFIG "Generate pkg-config files" ON)
+advanced_option(SLXIO_ENABLE_PKGCONFIG "Generate pkg-config files" OFF)
 
 # Option to enable/disable build summary logging during the CMake configuration
 # step

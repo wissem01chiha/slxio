@@ -15,7 +15,8 @@
 add_module(
   Slx
   SLXSection.cxx
-  SimulinkConfigSetComponentSlxReader.cxx)
+  SimulinkConfigSetComponentSlxReader.cxx
+  SimulinkConfigSetSlxReader.cxx)
 
 module_link_libraries(Slx Import Configuration Core Annotation Layout pugixml)
 set_target_properties(Slx PROPERTIES OUTPUT_NAME "IOSlx")

@@ -10,7 +10,7 @@ namespace slxio
     TEST_CASE("SimulinkConfigSetComponentSlxReaderSolver")
     {
         pugi::xml_document document;
-        const std::string xmlFilePath ="data/configSet.xml";
+        const std::string xmlFilePath = "data/configSet.xml";
         REQUIRE(document.load_file(xmlFilePath.c_str()));
 
         const pugi::xml_node componentNode =
@@ -20,7 +20,7 @@ namespace slxio
 
         SimulinkConfigSetComponent component;
         const SimulinkConfigSetComponentSlxReader reader;
-        
+
         CHECK(reader.Read(SLXSection(componentNode), component) == SimulinkReaderResult::Success);
         CHECK(component.GetComponentClassName() == "Simulink.SolverCC");
         CHECK(component.GetParams().size() == 39);
