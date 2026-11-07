@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkSFSim  
+    struct SimulinkSFSim
     {
         std::string DisabledProps;
         std::string Description;
@@ -56,6 +56,7 @@ namespace slxio
         std::string DefaultCustomCodeFunctionArrayLayout;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source, SimulinkSFSim &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
+                                          SimulinkSFSim &destination);
 
 };  // namespace slxio

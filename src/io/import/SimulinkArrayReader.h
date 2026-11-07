@@ -30,5 +30,5 @@ namespace slxio
         virtual ~SimulinkArrayReader() = default;
         SimulinkArrayReader() = default;
     };
-    
+
 };  // namespace slxio

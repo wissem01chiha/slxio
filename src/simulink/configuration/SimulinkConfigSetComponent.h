@@ -26,7 +26,7 @@ namespace slxio
      * A configuration component, such as Solver or ModelReference.
      * Component class names and string-valued parameters are retained.
      */
-    class SimulinkConfigSetComponent 
+    class SimulinkConfigSetComponent
     {
     public:
         using ParameterMap = std::map<std::string, std::string>;

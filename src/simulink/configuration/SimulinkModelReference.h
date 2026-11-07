@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkModelReference 
+    struct SimulinkModelReference
     {
         std::string DisabledProps;
         std::string Description;
@@ -43,7 +43,7 @@ namespace slxio
         std::string SupportModelReferenceSimTargetCustomCode;
     };
 
-     std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                       SimulinkModelReference &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
+                                          SimulinkModelReference &destination);
 
 };  // namespace slxio

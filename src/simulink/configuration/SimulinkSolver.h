@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkSolver  
+    struct SimulinkSolver
     {
         std::string DisabledProps;
         std::string Description;
@@ -66,6 +66,7 @@ namespace slxio
         std::string SolverOrder;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source, SimulinkSolver &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
+                                          SimulinkSolver &destination);
 
 };  // namespace slxio

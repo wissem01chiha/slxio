@@ -111,6 +111,7 @@ function(module_add_tests module_name)
         COMMAND ${test_source_name}
         WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endforeach()
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/data" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
   endif()
 endfunction()
 

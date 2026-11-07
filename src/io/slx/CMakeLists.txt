@@ -17,7 +17,7 @@ add_module(
   SLXSection.cxx
   SimulinkConfigSetComponentSlxReader.cxx)
 
-module_link_libraries(Slx Configuration Core Annotation Layout)
+module_link_libraries(Slx Import Configuration Core Annotation Layout pugixml)
 set_target_properties(Slx PROPERTIES OUTPUT_NAME "IOSlx")
 module_include_directories(Slx ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)
 add_subdirectory(test)

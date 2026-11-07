@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkOptimization 
+    struct SimulinkOptimization
     {
         std::string DisabledProps;
         uint16_t DisabledPropsCount;
@@ -84,6 +84,6 @@ namespace slxio
     };
 
     std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                       SimulinkOptimization &destination);
+                                          SimulinkOptimization &destination);
 
 };  // namespace slxio

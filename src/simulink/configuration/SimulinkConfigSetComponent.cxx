@@ -78,13 +78,13 @@ namespace slxio
     SimulinkConfigSetComponent::Check() const
     {
         std::vector<Diagnostic> diagnostics;
-        if(m_className.empty()){
+        if ( m_className.empty() ) {
             Diagnostic diag;
             diag.SetMessage("SimulinkConfigSetCompoant : classname is empty");
             diag.SetSeverity(DiagnosticSeverity::Error);
-            diagnostics.push_back(diag);
+            diagnostics.push_back(std::move(diag));
         }
         return diagnostics;
     }
 
-}; // namespace slxio
+};  // namespace slxio

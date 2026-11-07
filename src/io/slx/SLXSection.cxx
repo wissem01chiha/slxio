@@ -33,4 +33,10 @@ namespace slxio
         return m_node;
     }
 
+    bool
+    SLXSection::Empty() const
+    {
+        return m_node.empty();
+    }
+
 }  // namespace slxio

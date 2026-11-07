@@ -15,7 +15,7 @@ namespace slxio
  * @class Archive
  * @brief A singleton class for managing archived file format
  */
-    class  Archive final
+    class Archive final
     {
     public:
         /** Default Constructor */

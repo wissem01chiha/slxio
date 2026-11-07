@@ -18,15 +18,12 @@
 #include "SLXParameter.h"
 #include "SimulinkReaderResult.h"
 
-#include <string_view>
-#include <utility>
-
 namespace slxio
 {
 
     SimulinkReaderResult
-    SimulinkConfigSetComponentSlxReader::Read(
-        SLXSection serializedData, SimulinkConfigSetComponent &object) const
+    SimulinkConfigSetComponentSlxReader::Read(SLXSection serializedData,
+                                              SimulinkConfigSetComponent &object) const
     {
         const pugi::xml_node node = serializedData.GetNode();
         if ( !node || node.type() != pugi::node_element ||

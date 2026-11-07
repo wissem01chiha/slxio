@@ -20,7 +20,6 @@
 #include "SimulinkReader.h"
 #include "SimulinkReaderResult.h"
 #include "SimulinkConfigSet.h"
-#include "SimulinkConfigSetComponentReader.h"
 
 namespace slxio
 {
@@ -32,10 +31,8 @@ namespace slxio
         SimulinkReaderResult
         Read(T serializedData, SimulinkConfigSet &object) const override
         {
-
-            return SimulinkReaderResult::Success;
+            return SimulinkReaderResult::NotImplemented;
         }
-
     };
 
 };  // namespace slxio

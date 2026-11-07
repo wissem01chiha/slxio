@@ -24,18 +24,18 @@ namespace slxio
 
     enum class ErrorCode : int
     {
-        Ok = 0,                     /// Success status code.
-        InvalidArgument = 1,        /// An invalid argument was passed to a function.
-        InvalidHandle = 2,          /// A required object handle is invalid.
-        InvalidState = 3,           /// The object is in an invalid state.
-        DefaultValueUsed = 4,       /// A default value was used because none was provided.
-        OperationNotSupported = 5,  /// Unsupported callback or function invocation.
-        NullptrReceived = 6,        /// A nullptr object was passed to a function.
-        ChildNullptrReceived = 7,   /// Child object is nullptr.
-        ChildTypeNotSupported = 8,  /// Child type is not supported.
-        ChildDuplicateId = 9,       /// Child with the same ID already exists.
-        ChildNotFound = 10,         /// Child object was not found.
-        ParentTypeNotSupported = 11 /// Parent type is not supported.
+        Ok = 0,                      /// Success status code.
+        InvalidArgument = 1,         /// An invalid argument was passed to a function.
+        InvalidHandle = 2,           /// A required object handle is invalid.
+        InvalidState = 3,            /// The object is in an invalid state.
+        DefaultValueUsed = 4,        /// A default value was used because none was provided.
+        OperationNotSupported = 5,   /// Unsupported callback or function invocation.
+        NullptrReceived = 6,         /// A nullptr object was passed to a function.
+        ChildNullptrReceived = 7,    /// Child object is nullptr.
+        ChildTypeNotSupported = 8,   /// Child type is not supported.
+        ChildDuplicateId = 9,        /// Child with the same ID already exists.
+        ChildNotFound = 10,          /// Child object was not found.
+        ParentTypeNotSupported = 11  /// Parent type is not supported.
     };
 
     /// Convert an ErrorCode to std::error_code.

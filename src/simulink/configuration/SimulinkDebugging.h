@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkDebugging  
+    struct SimulinkDebugging
     {
         std::string DisabledProps;
         uint16_t DisabledPropsCount;
@@ -137,6 +137,7 @@ namespace slxio
         std::string ForceCombineOutputUpdateInSim;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source, SimulinkDebugging &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
+                                          SimulinkDebugging &destination);
 
 };  // namespace slxio

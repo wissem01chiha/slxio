@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkConfigSetComponent;
 
-    struct SimulinkHardware  
+    struct SimulinkHardware
     {
         std::string DisabledProps;
         std::string Description;
@@ -73,6 +73,7 @@ namespace slxio
         std::string HardwareBoardFeatureSet;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source, SimulinkHardware &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
+                                          SimulinkHardware &destination);
 
 };  // namespace slxio

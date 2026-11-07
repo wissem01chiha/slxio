@@ -31,6 +31,6 @@ namespace slxio
     };
 
     std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                       SimulinkCodeGeneration &destination);
+                                          SimulinkCodeGeneration &destination);
 
 };  // namespace slxio

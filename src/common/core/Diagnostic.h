@@ -31,7 +31,7 @@ namespace slxio
         Remark,
     };
 
-    // This class contains all of the information necessary to 
+    // This class contains all of the information necessary to
     // report a diagnostic to the DiagnosticEngine.
     class Diagnostic final
     {

@@ -18,14 +18,36 @@
 
 #include "SimulinkConfigSetComponent.h"
 #include "SimulinkReader.h"
+#include "SimulinkObjectReader.h"
 
 namespace slxio
 {
 
     template <typename T>
-    class SimulinkConfigSetComponentReader
-        : public SimulinkReader<T, SimulinkConfigSetComponent>
+    class SimulinkConfigSetComponentReader : public SimulinkReader<T, SimulinkConfigSetComponent>
     {
+        SimulinkReaderResult
+        Read(T serializedData, SimulinkConfigSetComponent &object) const override
+        {
+            //SimulinkObject parsed;
+            //SimulinkObjectReader<T> objectReader;
+            //const auto result = reader.Read(std::move(serializedData), parsed);
+            //if ( result != SimulinkReaderResult::Success ) {
+            //    return result;
+            //}
+            //             SimulinkConfigSetComponent converted(parsed.GetClassName());
+            // for (const auto &parameter : parsed.GetParams()) {
+            //     const auto stringParameter =
+            //         std::dynamic_pointer_cast<IParameterObject<std::string>>(parameter);
+            //     if (!stringParameter) {
+            //         return SimulinkReaderResult::InvalidInput;
+            //     }
+
+            //     converted.SetParam(parameter->GetName(), stringParameter->GetValue());
+            // }
+            // object = std::move(converted);
+            return SimulinkReaderResult::NotImplemented;
+        }
     };
 
 }  // namespace slxio

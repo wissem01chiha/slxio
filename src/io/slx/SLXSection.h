@@ -31,6 +31,8 @@ namespace slxio
 
         pugi::xml_node GetNode() const;
 
+        bool Empty() const;
+
     protected:
         pugi::xml_node m_node;
     };

@@ -4,4 +4,4 @@ repos:
     hooks:
       - id: clang-format
         args: [--style=file]   
-        exclude: ^extern/.*|^build/.*|^docs/.*|^utils/.*
+        exclude: ^extern/.*|^build/.*|^documentation/.*|^scripts/.*
