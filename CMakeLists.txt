@@ -40,7 +40,7 @@ include(CompilerPlatformFlags)
 include(CompilerWarningFlags)
 
 if(SLXIO_ENABLE_OPENMP)
-  find_package(OpenMP REQUIRED)
+  find_package(OpenMP REQUIRED COMPONENTS CXX)
 endif()
 
 enable_testing()
