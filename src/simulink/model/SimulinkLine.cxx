@@ -10,8 +10,7 @@ namespace slxio
 {
     SLXIO_ABI_NAMESPACE_BEGIN
 
-    SimulinkLine *
-    SimulinkLine::New() const
+    SimulinkLine* SimulinkLine::New() const
     {
         return new SimulinkLine();
     }
@@ -27,55 +26,46 @@ namespace slxio
     {
     }
 
-    std::shared_ptr<SimulinkElementBase>
-    SimulinkLine::at(SId index)
+    std::shared_ptr<SimulinkElementBase> SimulinkLine::at(SId index)
     {
         return std::shared_ptr<SimulinkElementBase>();
     }
 
-    std::shared_ptr<SimulinkElementBase>
-    SimulinkLine::operator[](SId index)
+    std::shared_ptr<SimulinkElementBase> SimulinkLine::operator[](SId index)
     {
         return std::shared_ptr<SimulinkElementBase>();
     }
 
-    UInt32
-    SimulinkLine::Size() const
+    UInt32 SimulinkLine::Size() const
     {
         return UInt32();
     }
 
-    bool
-    SimulinkLine::Empty() const
+    bool SimulinkLine::Empty() const
     {
         return false;
     }
 
-    void
-    SimulinkLine::Clear()
+    void SimulinkLine::Clear()
     {
     }
 
-    HError
-    SimulinkLine::Insert(const std::shared_ptr<SimulinkElementBase> &element)
+    HError SimulinkLine::Insert(const std::shared_ptr<SimulinkElementBase>& element)
     {
         return HError();
     }
 
-    HError
-    SimulinkLine::Erase(const SId &id)
+    HError SimulinkLine::Erase(const SId& id)
     {
         return HError();
     }
 
-    HError
-    SimulinkLine::Erase(const std::shared_ptr<SimulinkElementBase> &element)
+    HError SimulinkLine::Erase(const std::shared_ptr<SimulinkElementBase>& element)
     {
         return HError();
     }
 
-    SimulinkElementType
-    SimulinkLine::GetType() const
+    SimulinkElementType SimulinkLine::GetType() const
     {
         return SimulinkElementType(SimulinkElementType::Type::Line);
     }
@@ -127,32 +117,27 @@ namespace slxio
     //   return E_OK;
     // }
 
-    SId
-    SimulinkLine::GetId() const
+    SId SimulinkLine::GetId() const
     {
         return LineId;
     }
 
-    bool
-    SimulinkLine::Contains(const SId &Id) const
+    bool SimulinkLine::Contains(const SId& Id) const
     {
         return LineId == Id;
     }
 
-    bool
-    SimulinkLine::IsConnected()
+    bool SimulinkLine::IsConnected()
     {
         return (SourcePort != nullptr && DestPort != nullptr);
     }
 
-    Logger &
-    SimulinkLine::GetLogger()
+    Logger& SimulinkLine::GetLogger()
     {
         return logger;
     }
 
-    std::string
-    SimulinkLine::ToString() const
+    std::string SimulinkLine::ToString() const
     {
         std::ostringstream oss;
         oss << "SimulinkLine[ID=" << LineId;
@@ -162,11 +147,10 @@ namespace slxio
         return oss.str();
     }
 
-    std::string
-    SimulinkLine::GetName()
+    std::string SimulinkLine::GetName()
     {
         return std::string();
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

@@ -19,16 +19,16 @@ namespace slxio
     class SimulinkBlock;
 
     /**
- * @class SimulinkPort
- * @brief Base class for Simulink ports.
- */
+     * @class SimulinkPort
+     * @brief Base class for Simulink ports.
+     */
     class SLXIO_APIEXPORT SimulinkPort : public SimulinkElementBase
     {
     public:
         /** Default constructor.*/
         SimulinkPort();
 
-        SimulinkPort *New() const override;
+        SimulinkPort* New() const override;
 
         SimulinkPort(std::shared_ptr<SimulinkBlock> block, SimulinkPortType pType);
 
@@ -50,19 +50,19 @@ namespace slxio
         void Clear() override;
 
         /** Inserts a new child element. */
-        HError Insert(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Erases a child element by identifier. */
-        HError Erase(const SId &id) override;
+        HError Erase(const SId& id) override;
 
         /** Erases a child element by reference. */
-        HError Erase(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Finds a child element by identifier. */
-        std::shared_ptr<SimulinkElementBase> Find(const SId &id) override;
+        std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
 
         /** Checks if this element or its children contain the given identifier. */
-        bool Contains(const SId &id) const override;
+        bool Contains(const SId& id) const override;
 
         /** Returns the generic type of this element. */
         SimulinkElementType GetType() const override;
@@ -86,7 +86,7 @@ namespace slxio
         std::shared_ptr<SimulinkBlock> GetBlockParent();
 
         /** Return a pointer to a given parameter by name, if not
-     * found a or the blcok has not paramters an empty parameter returned. */
+         * found a or the blcok has not paramters an empty parameter returned. */
         std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
         /** Sets the element specifc parameter to given one  */
@@ -103,13 +103,13 @@ namespace slxio
         std::vector<std::shared_ptr<SimulinkLine>> GetLines();
 
         /** Get a specific line by its Id */
-        std::shared_ptr<SimulinkLine> GetLine(const SId &lineId);
+        std::shared_ptr<SimulinkLine> GetLine(const SId& lineId);
 
         /** Return the class internal logger object*/
-        Logger &GetLogger();
+        Logger& GetLogger();
 
     private:
-        Logger &logger;
+        Logger& logger;
         SId BlockId;
         SimulinkPortType PortType;
         std::shared_ptr<SimulinkBlock> PortBlock;
@@ -117,6 +117,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKPORT_H
+#endif // SIMULINKPORT_H

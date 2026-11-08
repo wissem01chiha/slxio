@@ -27,4 +27,4 @@ namespace slxio
         InvalidInput = 2,
         NotImplemented = 3
     };
-};  // namespace slxio
+}; // namespace slxio

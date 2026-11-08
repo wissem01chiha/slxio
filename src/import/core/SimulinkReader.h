@@ -22,13 +22,12 @@ namespace slxio
 {
     enum class SimulinkReaderResult;
 
-    template <typename T, typename P>
-    class SimulinkReader
+    template <typename T, typename P> class SimulinkReader
     {
     public:
         virtual ~SimulinkReader() = default;
 
-        virtual SimulinkReaderResult Read(T serializedData, P &object) const = 0;
+        virtual SimulinkReaderResult Read(T serializedData, P& object) const = 0;
     };
 
-}  // namespace slxio
+} // namespace slxio

@@ -8,27 +8,27 @@ namespace slxio
     class SimulinkFileTestFixture
     {
     protected:
-        SimulinkFileParser *parserPtr;
+        SimulinkFileParser* parserPtr;
 
         SimulinkFileTestFixture()
         {
             parserPtr = new SimulinkFileParser();
         }
 
-        File
-        getTestFileAsset(const char *assetName)
+        File getTestFileAsset(const char* assetName)
         {
             char path_slx[512];
 
-            snprintf(path_slx, sizeof(path_slx), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR,
-                     assetName);
+            snprintf(
+                path_slx, sizeof(path_slx), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR, assetName);
 
             return File(path_slx);
         }
 
         ~SimulinkFileTestFixture()
         {
-            if ( parserPtr ) {
+            if (parserPtr)
+            {
                 delete parserPtr;
                 parserPtr = nullptr;
             }
@@ -60,4 +60,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

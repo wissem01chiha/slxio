@@ -13,8 +13,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Represents the type of a Simulink model.
- */
+     * @brief Represents the type of a Simulink model.
+     */
     enum class SimulinkModelType
     {
         Library,
@@ -24,6 +24,6 @@ namespace slxio
     SLXIO_APIEXPORT std::string ToString(SimulinkModelType type);
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKMODELTYPE_H
+#endif // SIMULINKMODELTYPE_H

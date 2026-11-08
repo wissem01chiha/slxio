@@ -26,7 +26,7 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     class SLXIO_APIEXPORT SimulinkBlockWriter
-        : public SimulinkWriterBase<SimulinkBlock, json_object *>
+        : public SimulinkWriterBase<SimulinkBlock, json_object*>
     {
     public:
         SimulinkBlockWriter() = default;
@@ -34,6 +34,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKBLOCKWRITER_H
+#endif // SIMULINKBLOCKWRITER_H

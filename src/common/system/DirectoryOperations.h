@@ -21,40 +21,44 @@
 
 namespace slxio
 {
-namespace system {
+    namespace system
+    {
 
+        /** Get files list in the subdiretcory  */
+        std::vector<std::filesystem::path>
+        GetDirectoryFiles(const std::filesystem::path& directory);
 
-/** Get files list in the subdiretcory  */
-std::vector<std::filesystem::path> GetDirectoryFiles(const std::filesystem::path& directory);
+        /** Get a String Serialisation of the directory tree */
+        std::string ToString(const std::filesystem::path& directory);
 
-/** Get a String Serialisation of the directory tree */
-std::string ToString(const std::filesystem::path& directory);
+        /** Get the directory path. */
+        std::string GetDirectoryPath(const std::filesystem::path& directory);
 
-/** Get the directory path. */
-std::string GetDirectoryPath(const std::filesystem::path& directory);
+        /** Get the current working directory. */
+        Directory GetWorkingDirectory(int* error);
 
-   /** Get the current working directory. */
-    Directory GetWorkingDirectory(int* error);
+        /**
+         * Creates the directory structure for a given entry name.
+         * The entry name can be in one of the following formats:
+         * - "simulink/plugin/rels/" (a directory path)
+         * - "simulink/blockdiagram.xml" (a file path)
+         * This function ensures that the directory structure is created up
+         * to the specified root folder (`dir`)
+         */
+        std::shared_ptr<Directory> CreateDirectoryStructure(const std::string& structure,
+                                                            int* error);
 
-    /**
-     * Creates the directory structure for a given entry name.
-     * The entry name can be in one of the following formats:
-     * - "simulink/plugin/rels/" (a directory path)
-     * - "simulink/blockdiagram.xml" (a file path)
-     * This function ensures that the directory structure is created up
-     * to the specified root folder (`dir`)
-     */
-    std::shared_ptr<Directory> CreateDirectoryStructure(const std::string& structure, int* error);
+        /** Create a system temporary directory and retrun a pointer to it*/
+        error_code CreateTemporaryDirectory(int* error);
 
-    /** Create a system temporary directory and retrun a pointer to it*/
-    error_code CreateTemporaryDirectory(int* error);
+        /** same as CreateTemporaryDirectory using a prefix for directory name */
+        std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(const std::string& prefix,
+                                                                    int* error);
 
-    /** same as CreateTemporaryDirectory using a prefix for directory name */
-    std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(const std::string& prefix, int* error);
-    
-    /** Get the number of files in the directory.*/
-    uint32_t GetNumberOfFiles();
-};
+        /** Get the number of files in the directory.*/
+        uint32_t GetNumberOfFiles();
+    };
 
 }; // namespace system
-}; // namespace slxio
+}
+; // namespace slxio

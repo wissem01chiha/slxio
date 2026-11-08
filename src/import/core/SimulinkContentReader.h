@@ -34,8 +34,8 @@ namespace slxio
         /// implementation file.
         struct XmlTarget
         {
-            const char *path;
-            xmlDocPtr *target;
+            const char* path;
+            xmlDocPtr* target;
         };
 
         /// @brief Initialize the temporary directory, creates unique paths
@@ -48,7 +48,7 @@ namespace slxio
 
         /// @brief Load XML documents from the extracted slx files into the
         /// SimulinkContent object.
-        HError loadXmlTargets(const std::string &tempdirfullpath);
+        HError loadXmlTargets(const std::string& tempdirfullpath);
 
         /// @brief delete the temporary directory and its contents,
         /// this is called at the end of the parsing process if successful
@@ -56,6 +56,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKCONTENTPARSER_H
+#endif // SIMULINKCONTENTPARSER_H

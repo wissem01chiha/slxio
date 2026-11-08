@@ -16,22 +16,22 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkArrayWriter
- * @brief Abstract Serliser of SimulinkArray object to a file or stream
- */
+     * @class SimulinkArrayWriter
+     * @brief Abstract Serliser of SimulinkArray object to a file or stream
+     */
     class SLXIO_APIEXPORT SimulinkArrayWriter : public SimulinkWriter
     {
     public:
-        SimulinkArrayWriter *New() override;
+        SimulinkArrayWriter* New() override;
         HError Write() override;
-        HError SetInputData(const DataObject &data) override;
-        HError SetInputData(SId idx, const DataObject &data) override;
+        HError SetInputData(const DataObject& data) override;
+        HError SetInputData(SId idx, const DataObject& data) override;
 
     private:
-        DataObject &InputDataObject;
+        DataObject& InputDataObject;
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKARRAYWRITER_H
+#endif // SIMULINKARRAYWRITER_H

@@ -18,23 +18,23 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkMutableParameter
- */
+     * @class SimulinkMutableParameter
+     */
     class SLXIO_APIEXPORT SimulinkMutableParameter : public IMutableParameterObject<std::string>,
                                                      public IObservable
     {
     public:
         SimulinkMutableParameter();
 
-        explicit SimulinkMutableParameter(const std::string &value);
+        explicit SimulinkMutableParameter(const std::string& value);
 
-        IParameterObjectBase *New() override;
+        IParameterObjectBase* New() override;
 
         ~SimulinkMutableParameter();
 
-        void SetValue(const std::string &value) override;
+        void SetValue(const std::string& value) override;
 
-        std::string &GetValue() override;
+        std::string& GetValue() override;
 
         UInt64 GetValueAsInt() const;
         Float32 GetValueAsFloat() const;
@@ -44,7 +44,7 @@ namespace slxio
         SimulinkDataType GetSimulinkDataType() const;
         void SetSimulinkDataType(SimulinkDataType type);
 
-        SimulinkParameterInformation &GetSimulinkParameterInformation() const;
+        SimulinkParameterInformation& GetSimulinkParameterInformation() const;
 
     private:
         std::string m_value;
@@ -53,6 +53,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKMUTABLEPARAMETER_H
+#endif // SIMULINKMUTABLEPARAMETER_H

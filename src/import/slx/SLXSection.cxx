@@ -27,16 +27,14 @@ namespace slxio
 
     SLXSection::~SLXSection() = default;
 
-    pugi::xml_node
-    SLXSection::GetNode() const
+    pugi::xml_node SLXSection::GetNode() const
     {
         return m_node;
     }
 
-    bool
-    SLXSection::Empty() const
+    bool SLXSection::Empty() const
     {
         return m_node.empty();
     }
 
-}  // namespace slxio
+} // namespace slxio

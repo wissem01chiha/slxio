@@ -19,43 +19,43 @@
 namespace slxio
 {
 
-NODISCARD std::error_code make_error_code(error_code error) noexcept
-{
-    return std::error_code(static_cast<int>(error), make_error_category());
-}
-
-const char* error_category::name() const noexcept
-{
-    return "slxio";
-}
-
-std::string error_category::message(int ev) const
-{
-    switch (static_cast<error_code>(ev))
+    NODISCARD std::error_code make_error_code(error_code error) noexcept
     {
-    case error_code::Ok:
-        return "Success";
-    case error_code::InvalidArgument:
-        return "Invalid argument";
-    case error_code::InvalidHandle:
-        return "Invalid handle";
-    case error_code::InvalidState:
-        return "Invalid state";
-    case error_code::DefaultValueUsed:
-        return "Default value used";
-    case error_code::OperationNotSupported:
-        return "Operation not supported";
-    case error_code::NullptrReceived:
-        return "Nullptr received";
-    default:
-        return "Unknown error";
+        return std::error_code(static_cast<int>(error), make_error_category());
     }
-}
 
-NODISCARD const std::error_category& make_error_category() noexcept
-{
-    static const error_category instance;
-    return instance;
-}
+    const char* error_category::name() const noexcept
+    {
+        return "slxio";
+    }
+
+    std::string error_category::message(int ev) const
+    {
+        switch (static_cast<error_code>(ev))
+        {
+        case error_code::Ok:
+            return "Success";
+        case error_code::InvalidArgument:
+            return "Invalid argument";
+        case error_code::InvalidHandle:
+            return "Invalid handle";
+        case error_code::InvalidState:
+            return "Invalid state";
+        case error_code::DefaultValueUsed:
+            return "Default value used";
+        case error_code::OperationNotSupported:
+            return "Operation not supported";
+        case error_code::NullptrReceived:
+            return "Nullptr received";
+        default:
+            return "Unknown error";
+        }
+    }
+
+    NODISCARD const std::error_category& make_error_category() noexcept
+    {
+        static const error_category instance;
+        return instance;
+    }
 
 }; // namespace slxio

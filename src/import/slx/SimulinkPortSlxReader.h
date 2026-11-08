@@ -15,12 +15,12 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief This class is responsible for building the ports of Simulink
- * blocks as defined in the SLX file, i.e. add the ports to a
- * partially constructed model. This class does not maintain state but
- * is implemented in a non-static way to match the implementation of
- * SimulinkLineParser.
- */
+     * @brief This class is responsible for building the ports of Simulink
+     * blocks as defined in the SLX file, i.e. add the ports to a
+     * partially constructed model. This class does not maintain state but
+     * is implemented in a non-static way to match the implementation of
+     * SimulinkLineParser.
+     */
     class SLXIO_APIEXPORT SimulinkPortParser final
         : public SimulinkParserBase<xmlNodePtr, SimulinkPort>
     {
@@ -32,6 +32,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKPORTPARSER_H
+#endif // SIMULINKPORTPARSER_H

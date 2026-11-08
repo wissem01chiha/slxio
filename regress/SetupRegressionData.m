@@ -48,16 +48,16 @@ warning off;
             If it 's a Simulink model if endsWith (srcFile, '
                 .slx') % Export to target release format[~, modelName, ext] = fileparts(srcFile); load_system(
                     srcFile);
-        % Export to target release format Simulink.exportToVersion(modelName, destFile,
-                                                                   releases{r});
+        % Export
+                to target release format Simulink.exportToVersion(modelName, destFile, releases{r});
 
         % Close the model close_system(modelName, 0);
 
         fprintf('Migrated %s -> %s (format %s)\n', srcFile, destFile, releases{r});
 
         % If it 's a data dictionary elseif endsWith(srcFile, '
-                .sldd') dictObj = Simulink.data.dictionary.open(srcFile); saveAs(dictObj, destFile); % saves in current release format
-                    fprintf('Migrated dictionary %s -> %s\n', srcFile, destFile);
+                .sldd') dictObj = Simulink.data.dictionary.open(srcFile); saveAs(dictObj, destFile); % saves in current release format fprintf(
+                    'Migrated dictionary %s -> %s\n', srcFile, destFile);
         close(dictObj);
         end catch ME error('Failed to migrate %s to %s: %s', srcFile, releases{r}, ME.message);
         end end end

@@ -23,12 +23,11 @@ namespace slxio
 {
     class SimulinkArray;
 
-    template <typename T>
-    class SimulinkArrayReader : public SimulinkReader<T, SimulinkArray>
+    template <typename T> class SimulinkArrayReader : public SimulinkReader<T, SimulinkArray>
     {
     public:
         virtual ~SimulinkArrayReader() = default;
         SimulinkArrayReader() = default;
     };
 
-};  // namespace slxio
+}; // namespace slxio

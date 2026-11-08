@@ -21,14 +21,14 @@
 namespace slxio
 {
 
-struct LoggerOptions
-{
-    bool m_enableLogging = true;
-    bool m_logToFile = false;
-    std::string m_logFilePath = "slxio.log";
-    std::size_t m_maxLogFileSize = 1048576;
-    std::size_t m_nthreads = 1;
-    std::size_t m_queueSize = 8192;
-};
+    struct LoggerOptions
+    {
+        bool m_enableLogging = true;
+        bool m_logToFile = false;
+        std::string m_logFilePath = "slxio.log";
+        std::size_t m_maxLogFileSize = 1048576;
+        std::size_t m_nthreads = 1;
+        std::size_t m_queueSize = 8192;
+    };
 
 }; // namespace slxio

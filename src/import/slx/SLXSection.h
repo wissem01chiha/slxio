@@ -16,7 +16,7 @@
 
 #pragma once
 
-#include <Pugixml.h>
+#include <pugixml.h>
 
 namespace slxio
 {
@@ -37,4 +37,4 @@ namespace slxio
         pugi::xml_node m_node;
     };
 
-};  // namespace slxio
+}; // namespace slxio

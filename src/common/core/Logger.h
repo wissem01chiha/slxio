@@ -20,24 +20,24 @@
 
 namespace slxio
 {
-class LoggerOptions;
-class Diagnostic;
+    class LoggerOptions;
+    class Diagnostic;
 
-class Logger final
-{
-public:
-    Logger() = default;
-    explicit Logger(const LoggerOptions& options);
-    Logger(const Logger&) = delete;
-    Logger& operator=(const Logger&) = delete;
-    void Init();
-    void Log(const Diagnostic& diagnostic);
-    void Flush() const;
+    class Logger final
+    {
+    public:
+        Logger() = default;
+        explicit Logger(const LoggerOptions& options);
+        Logger(const Logger&) = delete;
+        Logger& operator=(const Logger&) = delete;
+        void Init();
+        void Log(const Diagnostic& diagnostic);
+        void Flush() const;
 
-    const LoggerOptions& GetOptions() const;
+        const LoggerOptions& GetOptions() const;
 
-private:
-    std::unique_ptr<LoggerOptions> m_options;
-};
+    private:
+        std::unique_ptr<LoggerOptions> m_options;
+    };
 
 }; // namespace slxio

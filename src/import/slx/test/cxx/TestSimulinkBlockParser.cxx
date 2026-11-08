@@ -14,14 +14,17 @@ namespace slxio
         {
         }
 
-        xmlNodePtr
-        getXmlNodePtr(const char *xmlfilename)
+        xmlNodePtr getXmlNodePtr(const char* xmlfilename)
         {
             char xmlfilepath[512];
-            snprintf(xmlfilepath, sizeof(xmlfilepath), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR,
+            snprintf(xmlfilepath,
+                     sizeof(xmlfilepath),
+                     "%s/io/slx/test/data/%s",
+                     PROJECT_ROOT_DIR,
                      xmlfilename);
             doc = xmlReadFile(xmlfilepath, nullptr, 0);
-            if ( !doc ) {
+            if (!doc)
+            {
                 throw std::runtime_error("failed to read XML file");
             }
             xmlNodePtr root = xmlDocGetRootElement(doc);
@@ -30,16 +33,18 @@ namespace slxio
 
         ~SimulinkBlockParserTestFixture()
         {
-            if ( parserPtr ) {
+            if (parserPtr)
+            {
                 delete parserPtr;
                 parserPtr = nullptr;
             }
-            if ( doc ) {
+            if (doc)
+            {
                 xmlFreeDoc(doc);
             }
         }
 
-        SimulinkBlockParser *parserPtr;
+        SimulinkBlockParser* parserPtr;
         xmlDocPtr doc;
     };
 
@@ -98,4 +103,4 @@ namespace slxio
         CHECK(strcmp(parameter->getValue(), "[365, 262, 455, 408]") == 0);
     }
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

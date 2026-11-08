@@ -23,11 +23,11 @@ namespace slxio
     public:
         SimulinkPortTypeParser() = default;
         HError setInputData(const std::string data) override;
-        HError setInputData(const char *data);
+        HError setInputData(const char* data);
         HError parse() override;
         ~SimulinkPortTypeParser() = default;
     };
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKPORTTYPEPARSER_H
+#endif // SIMULINKPORTTYPEPARSER_H

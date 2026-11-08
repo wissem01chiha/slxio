@@ -17,17 +17,17 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Parser for SimulinkParameter class
- * @example Definition of multiple parameter in slx file
- *  @code{.xml}
- * <P Name="LibraryLinkDisplay">disabled</P>
- * <P Name="ExtModeTrigLevel">0</P>
- * <P Name="Components" Class="double">[]</P>
- * <P Name="Extents" Class="double">[887.0, 452.0]</P>
- * <P Name="Visible" Class="logical">1</P>
- * <P Name="OverrideMode" Class="uint32">0U</P>
- * @endcode
- */
+     * @brief Parser for SimulinkParameter class
+     * @example Definition of multiple parameter in slx file
+     *  @code{.xml}
+     * <P Name="LibraryLinkDisplay">disabled</P>
+     * <P Name="ExtModeTrigLevel">0</P>
+     * <P Name="Components" Class="double">[]</P>
+     * <P Name="Extents" Class="double">[887.0, 452.0]</P>
+     * <P Name="Visible" Class="logical">1</P>
+     * <P Name="OverrideMode" Class="uint32">0U</P>
+     * @endcode
+     */
     class SLXIO_APIEXPORT SimulinkParameterParser final
         : public SimulinkParserBase<xmlNodePtr, SimulinkParameter>
     {
@@ -42,6 +42,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKPARAMETERPARSER_H
+#endif // SIMULINKPARAMETERPARSER_H

@@ -8,27 +8,27 @@ namespace slxio
     class SimulinkContentParserTestFixture
     {
     protected:
-        SimulinkContentParser *parserPtr;
+        SimulinkContentParser* parserPtr;
 
         SimulinkContentParserTestFixture()
         {
             parserPtr = new SimulinkContentParser();
         }
 
-        File
-        getTestFileAsset(const char *assetName)
+        File getTestFileAsset(const char* assetName)
         {
             char path_slx[512];
 
-            snprintf(path_slx, sizeof(path_slx), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR,
-                     assetName);
+            snprintf(
+                path_slx, sizeof(path_slx), "%s/io/slx/test/data/%s", PROJECT_ROOT_DIR, assetName);
 
             return File(path_slx);
         }
 
         ~SimulinkContentParserTestFixture()
         {
-            if ( parserPtr ) {
+            if (parserPtr)
+            {
                 delete parserPtr;
                 parserPtr = nullptr;
             }
@@ -84,17 +84,17 @@ namespace slxio
         CHECK(status == E_OK);
         CHECK(nodePtr != nullptr);
 
-        const xmlChar *name = nodePtr->name;
+        const xmlChar* name = nodePtr->name;
         CHECK(name != nullptr);
         printf("Blockdiagram root node name: %s\n", name);
 
-        const xmlChar *content = nodePtr->content;
+        const xmlChar* content = nodePtr->content;
         CHECK(content == nullptr);
 
-        const xmlAttr *properties = nodePtr->properties;
-        printf("Blockdiagram root node properties: %s\n", (const char *)properties->name);
+        const xmlAttr* properties = nodePtr->properties;
+        printf("Blockdiagram root node properties: %s\n", (const char*)properties->name);
         CHECK(properties != nullptr);
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

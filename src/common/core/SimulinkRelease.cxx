@@ -18,60 +18,61 @@
 
 namespace slxio
 {
-SimulinkReleaseHelper::SimulinkReleaseHelper(uint16_t year, char letter) : year_(year), letter_(letter)
-{
-}
-
-std::optional<SimulinkReleaseHelper> SimulinkReleaseHelper::Parse(std::string_view s)
-{
-    if (s.size() != 6 || s[0] != 'R' || s[5] < 'a' || s[5] > 'b')
+    SimulinkReleaseHelper::SimulinkReleaseHelper(uint16_t year, char letter)
+        : year_(year), letter_(letter)
     {
-        return std::nullopt;
     }
 
-    uint16_t year = 0;
-    for (size_t i = 1; i <= 4; ++i)
+    std::optional<SimulinkReleaseHelper> SimulinkReleaseHelper::Parse(std::string_view s)
     {
-        if (s[i] < '0' || s[i] > '9')
+        if (s.size() != 6 || s[0] != 'R' || s[5] < 'a' || s[5] > 'b')
         {
             return std::nullopt;
         }
-        year = year * 10 + (s[i] - '0');
+
+        uint16_t year = 0;
+        for (size_t i = 1; i <= 4; ++i)
+        {
+            if (s[i] < '0' || s[i] > '9')
+            {
+                return std::nullopt;
+            }
+            year = year * 10 + (s[i] - '0');
+        }
+
+        if (year < 2018 || year > 2025)
+        {
+            return std::nullopt;
+        }
+
+        char letter = s[5];
+        return SimulinkReleaseHelper(year, letter);
     }
 
-    if (year < 2018 || year > 2025)
+    uint16_t SimulinkReleaseHelper::Year() const
     {
-        return std::nullopt;
+        return year_;
     }
 
-    char letter = s[5];
-    return SimulinkReleaseHelper(year, letter);
-}
+    char SimulinkReleaseHelper::Letter() const
+    {
+        return letter_;
+    }
 
-uint16_t SimulinkReleaseHelper::Year() const
-{
-    return year_;
-}
+    SimulinkRelease SimulinkReleaseHelper::ToRelease() const
+    {
+        const auto releaseIndex = (year_ - 2018) * 2 + (letter_ == 'b' ? 1 : 0);
+        return static_cast<SimulinkRelease>(releaseIndex);
+    }
 
-char SimulinkReleaseHelper::Letter() const
-{
-    return letter_;
-}
+    std::string SimulinkReleaseHelper::ToString() const
+    {
+        return "R" + std::to_string(year_) + letter_;
+    }
 
-SimulinkRelease SimulinkReleaseHelper::ToRelease() const
-{
-    const auto releaseIndex = (year_ - 2018) * 2 + (letter_ == 'b' ? 1 : 0);
-    return static_cast<SimulinkRelease>(releaseIndex);
-}
-
-std::string SimulinkReleaseHelper::ToString() const
-{
-    return "R" + std::to_string(year_) + letter_;
-}
-
-bool SimulinkReleaseHelper::operator==(const SimulinkReleaseHelper& other) const
-{
-    return year_ == other.year_ && letter_ == other.letter_;
-}
+    bool SimulinkReleaseHelper::operator==(const SimulinkReleaseHelper& other) const
+    {
+        return year_ == other.year_ && letter_ == other.letter_;
+    }
 
 }; // namespace slxio

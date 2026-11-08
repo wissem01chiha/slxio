@@ -8,27 +8,23 @@ namespace slxio
 {
     SLXIO_ABI_NAMESPACE_BEGIN
 
-    SimulinkArrayWriter *
-    SimulinkArrayWriter::New()
+    SimulinkArrayWriter* SimulinkArrayWriter::New()
     {
         return nullptr;
     }
 
-    HError
-    SimulinkArrayWriter::Write()
+    HError SimulinkArrayWriter::Write()
     {
         return E_OK;
     }
 
-    HError
-    SimulinkArrayWriter::SetInputData(const DataObject &data)
+    HError SimulinkArrayWriter::SetInputData(const DataObject& data)
     {
         return E_OK;
     }
-    HError
-    SimulinkArrayWriter::SetInputData(SId idx, const DataObject &data)
+    HError SimulinkArrayWriter::SetInputData(SId idx, const DataObject& data)
     {
         return E_OK;
     }
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

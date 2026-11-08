@@ -12,17 +12,15 @@ namespace slxio
     {
     }
 
-    SimulinkArray *
-    SimulinkRoot::GetSubsystems()
+    SimulinkArray* SimulinkRoot::GetSubsystems()
     {
         return Subsystems;
     }
 
-    SimulinkArray *
-    SimulinkRoot::GetConfigSets()
+    SimulinkArray* SimulinkRoot::GetConfigSets()
     {
         return ConfigSets;
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

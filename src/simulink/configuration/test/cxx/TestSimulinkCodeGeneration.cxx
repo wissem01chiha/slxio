@@ -25,4 +25,4 @@ namespace slxio
         CHECK_FALSE(codeGeneration.m_enableCodeGeneration);
     }
 
-}; 
+}; // namespace slxio

@@ -40,6 +40,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKLINEPARSER_H
+#endif // SIMULINKLINEPARSER_H

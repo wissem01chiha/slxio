@@ -17,11 +17,11 @@ namespace slxio
     class SimulinkObject;
 
     /**
- * @class SimulinkRoot
- * @brief A Mimic for SimulinkRoot Object given by sfroot function
- * @see
- * https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
- */
+     * @class SimulinkRoot
+     * @brief A Mimic for SimulinkRoot Object given by sfroot function
+     * @see
+     * https://www.mathworks.com/help/stateflow/ref/sfroot.html?s_tid=srchtitle_support_results_10_Simulink.Root+object
+     */
     class SLXIO_APIEXPORT SimulinkRoot final
     {
     public:
@@ -32,27 +32,27 @@ namespace slxio
         ~SimulinkRoot() = default;
 
         /* Deleted copy constructor */
-        SimulinkRoot(const SimulinkRoot &) = delete;
+        SimulinkRoot(const SimulinkRoot&) = delete;
 
         /* Deleted copy assignment operator */
-        SimulinkRoot &operator=(const SimulinkRoot &) = delete;
+        SimulinkRoot& operator=(const SimulinkRoot&) = delete;
 
         /* Deleted move constructor */
-        SimulinkRoot(SimulinkRoot &&other) = delete;
+        SimulinkRoot(SimulinkRoot&& other) = delete;
 
         /* Deleted move assignment operator */
-        SimulinkRoot &operator=(SimulinkRoot &&other) = delete;
+        SimulinkRoot& operator=(SimulinkRoot&& other) = delete;
 
-        SimulinkArray *GetSubsystems();
-        SimulinkArray *GetConfigSets();
+        SimulinkArray* GetSubsystems();
+        SimulinkArray* GetConfigSets();
 
         /* Find the state named A.*/
     private:
-        SimulinkArray *Subsystems;
-        SimulinkArray *ConfigSets;
+        SimulinkArray* Subsystems;
+        SimulinkArray* ConfigSets;
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKROOT_H
+#endif // SIMULINKROOT_H

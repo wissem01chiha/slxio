@@ -34,6 +34,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKOBJECTPARSER_H
+#endif // SIMULINKOBJECTPARSER_H

@@ -26,11 +26,11 @@ namespace slxio
     template <typename T>
     class SimulinkConfigSetComponentReader : public SimulinkReader<T, SimulinkConfigSetComponent>
     {
-        SimulinkReaderResult
-        Read(T serializedData, SimulinkConfigSetComponent &object) const override
+        SimulinkReaderResult Read(T serializedData,
+                                  SimulinkConfigSetComponent& object) const override
         {
             return SimulinkReaderResult::NotImplemented;
         }
     };
 
-}  // namespace slxio
+} // namespace slxio

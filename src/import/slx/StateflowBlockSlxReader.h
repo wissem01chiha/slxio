@@ -23,8 +23,8 @@ namespace slxio
 {
 
     /**
- * @brief SimulinkStateflowBlock Parser class.
- */
+     * @brief SimulinkStateflowBlock Parser class.
+     */
     class StateflowBlockParser final : public SimulinkParserBase<xmlNodePtr, StateflowBlock>
     {
     public:
@@ -34,4 +34,4 @@ namespace slxio
         ~StateflowBlockParser() = default;
     };
 
-};  // namespace slxio
+}; // namespace slxio

@@ -14,11 +14,11 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkBlockCategory
- * @brief Allow for subdividing Simulink default library blocks into separate
- * categories by domain, as well as provide grouping features for user-added
- * blocks.
- */
+     * @class SimulinkBlockCategory
+     * @brief Allow for subdividing Simulink default library blocks into separate
+     * categories by domain, as well as provide grouping features for user-added
+     * blocks.
+     */
     class SLXIO_APIEXPORT SimulinkBlockCategory final
     {
     public:
@@ -53,10 +53,10 @@ namespace slxio
         ~SimulinkBlockCategory() = default;
 
         /** Add a new user-defined category */
-        void AddCategory(const std::string &name);
+        void AddCategory(const std::string& name);
 
         /** Check if a category exists */
-        bool HasCategory(const std::string &name) const;
+        bool HasCategory(const std::string& name) const;
 
         /**  List all categories */
         std::vector<std::string> GetAllCategories() const;
@@ -68,6 +68,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKBLOCKCATEGORY_H
+#endif // SIMULINKBLOCKCATEGORY_H

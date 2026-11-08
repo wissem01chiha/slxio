@@ -22,34 +22,34 @@
 namespace slxio
 {
 
-enum class error_code : int
-{
-    Ok = 0,                     /// Success status code.
-    InvalidArgument = 1,        /// An invalid argument was passed to a function.
-    InvalidHandle = 2,          /// A required object handle is invalid.
-    InvalidState = 3,           /// The object is in an invalid state.
-    DefaultValueUsed = 4,       /// A default value was used because none was provided.
-    OperationNotSupported = 5,  /// Unsupported callback or function invocation.
-    NullptrReceived = 6,        /// A nullptr object was passed to a function.
-    ChildNullptrReceived = 7,   /// Child object is nullptr.
-    ChildTypeNotSupported = 8,  /// Child type is not supported.
-    ChildDuplicateId = 9,       /// Child with the same ID already exists.
-    ChildNotFound = 10,         /// Child object was not found.
-    ParentTypeNotSupported = 11 /// Parent type is not supported.
-};
+    enum class error_code : int
+    {
+        Ok = 0,                     /// Success status code.
+        InvalidArgument = 1,        /// An invalid argument was passed to a function.
+        InvalidHandle = 2,          /// A required object handle is invalid.
+        InvalidState = 3,           /// The object is in an invalid state.
+        DefaultValueUsed = 4,       /// A default value was used because none was provided.
+        OperationNotSupported = 5,  /// Unsupported callback or function invocation.
+        NullptrReceived = 6,        /// A nullptr object was passed to a function.
+        ChildNullptrReceived = 7,   /// Child object is nullptr.
+        ChildTypeNotSupported = 8,  /// Child type is not supported.
+        ChildDuplicateId = 9,       /// Child with the same ID already exists.
+        ChildNotFound = 10,         /// Child object was not found.
+        ParentTypeNotSupported = 11 /// Parent type is not supported.
+    };
 
-/// Define a custom error category for  error codes
-class error_category final : public std::error_category
-{
-public:
-    const char* name() const noexcept override;
-    std::string message(int ev) const override;
-};
+    /// Define a custom error category for  error codes
+    class error_category final : public std::error_category
+    {
+    public:
+        const char* name() const noexcept override;
+        std::string message(int ev) const override;
+    };
 
-/// Convert an slxio:: error_code to std::error_code.
-NODISCARD std::error_code make_error_code(error_code error) noexcept;
+    /// Convert an slxio:: error_code to std::error_code.
+    NODISCARD std::error_code make_error_code(error_code error) noexcept;
 
-/// Return a reference to an std::error_category for custom error codes
-NODISCARD const std::error_category& make_error_category() noexcept;
+    /// Return a reference to an std::error_category for custom error codes
+    NODISCARD const std::error_category& make_error_category() noexcept;
 
 }; // namespace slxio

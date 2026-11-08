@@ -13,74 +13,62 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkFileInformation
- * @brief Immutable metadata about a Simulink model file.
- * This class provides read-only access to basic file information
- * such as name, extension, size, version, and creator details.
- * It is constructed by the parser and cannot be modified by users.
- */
+     * @class SimulinkFileInformation
+     * @brief Immutable metadata about a Simulink model file.
+     * This class provides read-only access to basic file information
+     * such as name, extension, size, version, and creator details.
+     * It is constructed by the parser and cannot be modified by users.
+     */
     class SimulinkFileInformation
     {
     public:
         SimulinkFileInformation();
 
-        const std::string &
-        GetExtension() const
+        const std::string& GetExtension() const
         {
             return extension;
         }
-        const std::string &
-        GetName() const
+        const std::string& GetName() const
         {
             return name;
         }
-        UInt16
-        GetSize() const
+        UInt16 GetSize() const
         {
             return size;
         }
-        const std::string &
-        GetCategory() const
+        const std::string& GetCategory() const
         {
             return category;
         }
-        const std::string &
-        GetCreator() const
+        const std::string& GetCreator() const
         {
             return creator;
         }
-        const std::string &
-        GetLastModifiedBy() const
+        const std::string& GetLastModifiedBy() const
         {
             return lastModifiedBy;
         }
-        const std::string &
-        GetRevision() const
+        const std::string& GetRevision() const
         {
             return revision;
         }
-        const std::string &
-        GetVersion() const
+        const std::string& GetVersion() const
         {
             return version;
         }
-        const std::string &
-        GetContentType() const
+        const std::string& GetContentType() const
         {
             return contentType;
         }
-        const std::string &
-        GetContentTypeFriendlyName() const
+        const std::string& GetContentTypeFriendlyName() const
         {
             return contentTypeFriendlyName;
         }
-        const std::string &
-        GetMatlabRelease() const
+        const std::string& GetMatlabRelease() const
         {
             return matlabRelease;
         }
-        const std::string &
-        GetMatlabVersion() const
+        const std::string& GetMatlabVersion() const
         {
             return matlabVersion;
         }
@@ -102,6 +90,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKFILEINFORMATION_H
+#endif // SIMULINKFILEINFORMATION_H

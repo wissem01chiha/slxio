@@ -14,8 +14,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Enumeration of Simulink port types.
- */
+     * @brief Enumeration of Simulink port types.
+     */
     enum class SimulinkPortType
     {
         Inport = 0,
@@ -31,6 +31,6 @@ namespace slxio
     SLXIO_APIEXPORT std::string ToString(SimulinkPortType type);
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKPORTTYPE_H
+#endif // SIMULINKPORTTYPE_H

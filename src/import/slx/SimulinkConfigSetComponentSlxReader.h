@@ -27,7 +27,7 @@ namespace slxio
     {
     public:
         SimulinkReaderResult Read(SLXSection serializedData,
-                                  SimulinkConfigSetComponent &object) const override;
+                                  SimulinkConfigSetComponent& object) const override;
     };
 
-};  // namespace slxio
+}; // namespace slxio

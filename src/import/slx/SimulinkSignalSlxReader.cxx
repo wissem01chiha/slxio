@@ -4,10 +4,10 @@ namespace slxio
 {
     SLXIO_ABI_NAMESPACE_BEGIN
 
-    HError
-    SimulinkSignalParser::setInputData(const xmlNodePtr data)
+    HError SimulinkSignalParser::setInputData(const xmlNodePtr data)
     {
-        if ( data == nullptr ) {
+        if (data == nullptr)
+        {
             // l.log(Logger::V_ERROR, "SimulinkSignalParser:: null node pointer
             // received");
             return E_PARAMETER_NULL_PTR;
@@ -16,11 +16,10 @@ namespace slxio
         return E_OK;
     }
 
-    HError
-    SimulinkSignalParser::parse()
+    HError SimulinkSignalParser::parse()
     {
         return E_OK;
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

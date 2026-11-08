@@ -21,20 +21,20 @@
 namespace slxio
 {
 
-class Version final
-{
-public:
-    Version() = default;
-    static uint32_t GetMajorVersion();
-    static uint32_t GetMinorVersion();
-    static uint32_t GetPatchVersion();
+    class Version final
+    {
+    public:
+        Version() = default;
+        static uint32_t GetMajorVersion();
+        static uint32_t GetMinorVersion();
+        static uint32_t GetPatchVersion();
 
-    bool IsMajorVersionLessThan(uint32_t version);
-    bool IsMinorVersionLessThan(uint32_t version);
+        bool IsMajorVersionLessThan(uint32_t version);
+        bool IsMinorVersionLessThan(uint32_t version);
 
-    static std::string GetVersionString();
+        static std::string GetVersionString();
 
-    ~Version() = default;
-};
+        ~Version() = default;
+    };
 
 }; // namespace slxio

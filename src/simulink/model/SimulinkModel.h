@@ -29,22 +29,22 @@ namespace slxio
     class SimulationSettings;
 
     /**
- * @class SimulinkModel
- * @brief This is the main class definition for a SimulinkModel based
- */
+     * @class SimulinkModel
+     * @brief This is the main class definition for a SimulinkModel based
+     */
     class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement, public IConfigurableObject
     {
     public:
         /** Default Constructor */
         SimulinkModel();
 
-        SimulinkModel *New() const override;
+        SimulinkModel* New() const override;
 
         /** Construct a Model by given an explict model type */
         explicit SimulinkModel(SimulinkModelType Type);
 
-        HError AcceptInsert(ISimulinkElement &parent) override;
-        HError Insert(const std::shared_ptr<ISimulinkElement> &element) override;
+        HError AcceptInsert(ISimulinkElement& parent) override;
+        HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
 
         SId GetId() const override;
         SimulinkModelType GetModelType() const;
@@ -56,17 +56,17 @@ namespace slxio
         /** Returns a string representation of this element. */
         std::string ToString() const override;
 
-        HError AddConfig(const std::string &name,
-                         const std::shared_ptr<IConfigurationObject> &p) override;
-        HError SetConfig(const std::string &name,
-                         const std::shared_ptr<IConfigurationObject> &p) override;
-        std::shared_ptr<IConfigurationObject> GetConfig(const std::string &name) override;
+        HError AddConfig(const std::string& name,
+                         const std::shared_ptr<IConfigurationObject>& p) override;
+        HError SetConfig(const std::string& name,
+                         const std::shared_ptr<IConfigurationObject>& p) override;
+        std::shared_ptr<IConfigurationObject> GetConfig(const std::string& name) override;
 
-        void AddParam(const std::string &name,
-                      const std::shared_ptr<IParameterObjectBase> &p) override;
-        void SetParam(const std::string &name,
-                      const std::shared_ptr<IParameterObjectBase> &p) override;
-        std::shared_ptr<IParameterObjectBase> GetParam(const std::string &name) override;
+        void AddParam(const std::string& name,
+                      const std::shared_ptr<IParameterObjectBase>& p) override;
+        void SetParam(const std::string& name,
+                      const std::shared_ptr<IParameterObjectBase>& p) override;
+        std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
 
     private:
         SId m_id{SId(0)};
@@ -80,6 +80,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKMODEL_H
+#endif // SIMULINKMODEL_H

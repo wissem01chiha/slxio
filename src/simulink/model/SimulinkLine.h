@@ -18,16 +18,16 @@ namespace slxio
     class Logger;
 
     /**
- * @class SimulinkLine
- * @brief A Simulink line.
- */
+     * @class SimulinkLine
+     * @brief A Simulink line.
+     */
     class SLXIO_APIEXPORT SimulinkLine final : public SimulinkElementBase
     {
     public:
         /** Default constructor.*/
         SimulinkLine();
 
-        SimulinkLine *New() const override;
+        SimulinkLine* New() const override;
 
         /** Construct a SimulinkLine given the Inport and OutPort blocks */
         SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
@@ -47,19 +47,19 @@ namespace slxio
         void Clear() override;
 
         /** Inserts a new child element. */
-        HError Insert(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Erases a child element by identifier. */
-        HError Erase(const SId &id) override;
+        HError Erase(const SId& id) override;
 
         /** Erases a child element by reference. */
-        HError Erase(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Finds a child element by identifier. */
-        std::shared_ptr<SimulinkElementBase> Find(const SId &id) override;
+        std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
 
         /** Checks if this element or its children contain the given identifier. */
-        bool Contains(const SId &id) const override;
+        bool Contains(const SId& id) const override;
 
         /** Returns the generic type of this element. */
         SimulinkElementType GetType() const override;
@@ -83,7 +83,7 @@ namespace slxio
         std::shared_ptr<SimulinkBlock> GetBlockParent();
 
         /** Return a pointer to a given parameter by name, if not
-     * found a or the blcok has not paramters an empty parameter returned. */
+         * found a or the blcok has not paramters an empty parameter returned. */
         std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
 
         /** Sets the element specifc parameter to given one  */
@@ -94,10 +94,10 @@ namespace slxio
         HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
 
         /**
-     * Check if the line is connected to both source and
-     * destination ports. A line is considered connected if both the source and
-     * destination ports are non-null (set during creation).
-     */
+         * Check if the line is connected to both source and
+         * destination ports. A line is considered connected if both the source and
+         * destination ports are non-null (set during creation).
+         */
         bool IsConnected();
 
         /** Returns the Line Source Port */
@@ -107,16 +107,16 @@ namespace slxio
         std::shared_ptr<SimulinkPort> GetDestPort();
 
         /** Return the class internal logger object*/
-        Logger &GetLogger();
+        Logger& GetLogger();
 
     private:
         SId LineId;
-        Logger &logger;
+        Logger& logger;
         std::shared_ptr<SimulinkPort> SourcePort;
         std::shared_ptr<SimulinkPort> DestPort;
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKLINE_H
+#endif // SIMULINKLINE_H

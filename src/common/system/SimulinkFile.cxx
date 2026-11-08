@@ -6,16 +6,14 @@ namespace slxio
 {
     SLXIO_ABI_NAMESPACE_BEGIN
 
-    const SimulinkFileInformation &
-    SimulinkFile::GetInformation() const
+    const SimulinkFileInformation& SimulinkFile::GetInformation() const
     {
         return fileInfo;
     }
 
-    std::unique_ptr<xmlDocDataObject>
-    SimulinkFile::GetBlockdiagram() const
+    std::unique_ptr<xmlDocDataObject> SimulinkFile::GetBlockdiagram() const
     {
         return blockdiagram;
     }
 
-};  // namespace slxio
+}; // namespace slxio

@@ -23,29 +23,34 @@ namespace slxio
 
     SimulinkReaderResult
     SimulinkConfigSetComponentSlxReader::Read(SLXSection serializedData,
-                                              SimulinkConfigSetComponent &object) const
+                                              SimulinkConfigSetComponent& object) const
     {
         const pugi::xml_node node = serializedData.GetNode();
-        if ( !node || node.type() != pugi::node_element ||
-             node.name() != std::string_view(SLXParameter::SECTION_Object) ) {
+        if (!node || node.type() != pugi::node_element ||
+            node.name() != std::string_view(SLXParameter::SECTION_Object))
+        {
             return SimulinkReaderResult::InvalidInput;
         }
 
         const pugi::xml_attribute classNameAttribute =
             node.attribute(SLXParameter::PARAM_ClassName);
-        if ( !classNameAttribute || classNameAttribute.value()[0] == '\0' ) {
+        if (!classNameAttribute || classNameAttribute.value()[0] == '\0')
+        {
             return SimulinkReaderResult::InvalidInput;
         }
 
         SimulinkConfigSetComponent parsed(classNameAttribute.value());
-        for ( pugi::xml_node child = node.first_child(); child; child = child.next_sibling() ) {
-            if ( child.type() != pugi::node_element ||
-                 child.name() != std::string_view(SLXParameter::SECTION_Parameter) ) {
+        for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
+        {
+            if (child.type() != pugi::node_element ||
+                child.name() != std::string_view(SLXParameter::SECTION_Parameter))
+            {
                 continue;
             }
 
             const pugi::xml_attribute nameAttribute = child.attribute(SLXParameter::PARAM_Name);
-            if ( !nameAttribute || nameAttribute.value()[0] == '\0' ) {
+            if (!nameAttribute || nameAttribute.value()[0] == '\0')
+            {
                 return SimulinkReaderResult::InvalidInput;
             }
             parsed.SetParam(nameAttribute.value(), child.child_value());
@@ -55,4 +60,4 @@ namespace slxio
         return SimulinkReaderResult::Success;
     }
 
-}  // namespace slxio
+} // namespace slxio

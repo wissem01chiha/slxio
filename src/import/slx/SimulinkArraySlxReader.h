@@ -25,17 +25,17 @@ namespace slxio
     class SimulinkArray;
 
     /**
- * @brief SLX reader for Simulink Array
- * @code{.xml}
- * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell"
- * Dimension="1*1"> <Cell Class="double">[]</Cell>
- * </Array>
- * @endcode
- */
+     * @brief SLX reader for Simulink Array
+     * @code{.xml}
+     * <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell"
+     * Dimension="1*1"> <Cell Class="double">[]</Cell>
+     * </Array>
+     * @endcode
+     */
     class SimulinkArraySlxReader final : public SimulinkArrayReader<SLXSection>
     {
     public:
-        SimulinkReaderResult Read(SLXSection serializedData, SimulinkArray &object) const override;
+        SimulinkReaderResult Read(SLXSection serializedData, SimulinkArray& object) const override;
     };
 
-};  // namespace slxio
+}; // namespace slxio

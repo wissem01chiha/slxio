@@ -15,16 +15,16 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkAtomicSubsystem
- * @brief Represents a Simulink Atomic Subsystem element in a Simulink model.
- */
+     * @class SimulinkAtomicSubsystem
+     * @brief Represents a Simulink Atomic Subsystem element in a Simulink model.
+     */
     class SLXIO_APIEXPORT SimulinkAtomicSubsystem : public SimulinkElementBase, SimulinkSubsystem
     {
     public:
         SimulinkAtomicSubsystem() = default;
 
         /** Creates a new instance of this element. */
-        SimulinkAtomicSubsystem *New() const override;
+        SimulinkAtomicSubsystem* New() const override;
 
         /** Accesses a child element by index with bound checking */
         std::shared_ptr<SimulinkElementBase> at(SId index) override;
@@ -42,19 +42,19 @@ namespace slxio
         void Clear() override;
 
         /** Inserts a new child element. */
-        HError Insert(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Erases a child element by identifier. */
-        HError Erase(const SId &id) override;
+        HError Erase(const SId& id) override;
 
         /** Erases a child element by reference. */
-        HError Erase(const std::shared_ptr<SimulinkElementBase> &element) override;
+        HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
 
         /** Finds a child element by identifier. */
-        std::shared_ptr<SimulinkElementBase> Find(const SId &id) override;
+        std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
 
         /** Checks if this element or its children contain the given identifier. */
-        bool Contains(const SId &id) const override;
+        bool Contains(const SId& id) const override;
 
         /** Returns the generic type of this element. */
         SimulinkElementType GetType() const override;
@@ -85,6 +85,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKATOMICSUBSYSTEM_H
+#endif // SIMULINKATOMICSUBSYSTEM_H

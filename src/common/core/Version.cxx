@@ -20,33 +20,34 @@
 namespace slxio
 {
 
-uint32_t Version::GetMajorVersion()
-{
-    return (uint32_t)SLXIO_VERSION_MAJOR;
-}
+    uint32_t Version::GetMajorVersion()
+    {
+        return (uint32_t)SLXIO_VERSION_MAJOR;
+    }
 
-uint32_t Version::GetMinorVersion()
-{
-    return (uint32_t)SLXIO_VERSION_MINOR;
-}
+    uint32_t Version::GetMinorVersion()
+    {
+        return (uint32_t)SLXIO_VERSION_MINOR;
+    }
 
-uint32_t Version::GetPatchVersion()
-{
-    return (uint32_t)SLXIO_VERSION_PATCH;
-}
-bool Version::IsMajorVersionLessThan(uint32_t version)
-{
-    return SLXIO_VERSION_MAJOR < version;
-}
+    uint32_t Version::GetPatchVersion()
+    {
+        return (uint32_t)SLXIO_VERSION_PATCH;
+    }
+    bool Version::IsMajorVersionLessThan(uint32_t version)
+    {
+        return SLXIO_VERSION_MAJOR < version;
+    }
 
-bool Version::IsMinorVersionLessThan(uint32_t version)
-{
-    return SLXIO_VERSION_MINOR < version;
-}
+    bool Version::IsMinorVersionLessThan(uint32_t version)
+    {
+        return SLXIO_VERSION_MINOR < version;
+    }
 
-std::string Version::GetVersionString()
-{
-    return std::to_string(GetMajorVersion()) + "." + std::to_string(GetMinorVersion()) + "." + std::to_string(GetPatchVersion());
-}
+    std::string Version::GetVersionString()
+    {
+        return std::to_string(GetMajorVersion()) + "." + std::to_string(GetMinorVersion()) + "." +
+               std::to_string(GetPatchVersion());
+    }
 
 }; // namespace slxio

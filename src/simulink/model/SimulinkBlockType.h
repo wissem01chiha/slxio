@@ -14,8 +14,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Enumeration of Simulink block types.
- */
+     * @brief Enumeration of Simulink block types.
+     */
     enum class SimulinkBlockType
     {
 
@@ -214,6 +214,6 @@ namespace slxio
     SLXIO_APIEXPORT std::string ToString(SimulinkBlockType type);
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKBLOCKTYPE_H
+#endif // SIMULINKBLOCKTYPE_H

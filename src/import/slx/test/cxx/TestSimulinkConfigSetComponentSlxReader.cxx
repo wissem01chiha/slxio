@@ -32,4 +32,4 @@ namespace slxio
         CHECK(component.FindParam("Description")->empty());
     }
 
-};  // namespace slxio
+}; // namespace slxio

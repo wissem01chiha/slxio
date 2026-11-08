@@ -25,14 +25,12 @@ namespace slxio
 
     class SimulinkObject;
 
-    template <typename T>
-    class SimulinkObjectReader : public SimulinkReader<T, SimulinkObject>
+    template <typename T> class SimulinkObjectReader : public SimulinkReader<T, SimulinkObject>
     {
-        SimulinkReaderResult
-        Read(T serializedData, SimulinkObject &object) const override
+        SimulinkReaderResult Read(T serializedData, SimulinkObject& object) const override
         {
             return SimulinkReaderResult::NotImplemented;
         }
     };
 
-};  // namespace slxio
+}; // namespace slxio

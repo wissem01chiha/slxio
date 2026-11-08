@@ -14,43 +14,43 @@
  * limitations under the License.
  */
 
- #include "DirectoryOperations.h"
+#include "DirectoryOperations.h"
 
- namespace slxio
+namespace slxio
 {
-namespace system {
-
-std::string ToString(const std::filesystem::path& directory)
-{
-    std::ostringstream oss;
-
-    oss << directory.GetDirectoryName() << "\n";
-
-    std::vector<File> files = directory.GetDirectoryFiles();
-    for (const auto& file : files)
+    namespace system
     {
-        oss << "  - " << file.GetFileName() << "\n";
-    }
-    std::vector<Directory> subdirs = directory.GetSubDirectories();
-    for (const auto& subdir : subdirs)
-    {
-        oss << subdir.GetDirectoryName() << "\n";
 
-        std::vector<File> subFiles = subdir.GetDirectoryFiles();
-        for (const auto& f : subFiles)
+        std::string ToString(const std::filesystem::path& directory)
         {
-            oss << "    - " << f.GetFileName() << "\n";
-        }
-        std::vector<Directory> subSubDirs = subdir.GetSubDirectories();
-        for (const auto& s : subSubDirs)
-        {
-            oss << s.GetDirectoryName() << "\n";
-        }
-    }
+            std::ostringstream oss;
 
-    return oss.str();
-}
+            oss << directory.GetDirectoryName() << "\n";
 
+            std::vector<File> files = directory.GetDirectoryFiles();
+            for (const auto& file : files)
+            {
+                oss << "  - " << file.GetFileName() << "\n";
+            }
+            std::vector<Directory> subdirs = directory.GetSubDirectories();
+            for (const auto& subdir : subdirs)
+            {
+                oss << subdir.GetDirectoryName() << "\n";
+
+                std::vector<File> subFiles = subdir.GetDirectoryFiles();
+                for (const auto& f : subFiles)
+                {
+                    oss << "    - " << f.GetFileName() << "\n";
+                }
+                std::vector<Directory> subSubDirs = subdir.GetSubDirectories();
+                for (const auto& s : subSubDirs)
+                {
+                    oss << s.GetDirectoryName() << "\n";
+                }
+            }
+
+            return oss.str();
+        }
 
     }; // namespace system
 }; // namespace slxio
