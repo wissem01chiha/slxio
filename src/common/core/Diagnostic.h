@@ -17,12 +17,10 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "DiagnosticLocation.h"
 
 namespace slxio
 {
 
-    // Defines the different supported severity of a diagnostic.
     enum class DiagnosticSeverity
     {
         Note,
@@ -31,39 +29,39 @@ namespace slxio
         Remark,
     };
 
-    // This class contains all of the information necessary to
-    // report a diagnostic to the DiagnosticEngine.
     class Diagnostic final
     {
     public:
-        Diagnostic(Diagnostic &&) = default;
-        Diagnostic &operator=(Diagnostic &&) = default;
-        Diagnostic(const Diagnostic &) = delete;
-        Diagnostic &operator=(const Diagnostic &) = delete;
+        Diagnostic(Diagnostic&&) = default;
+        Diagnostic& operator=(Diagnostic&&) = default;
+        Diagnostic(const Diagnostic&) = delete;
+        Diagnostic& operator=(const Diagnostic&) = delete;
         Diagnostic() = default;
 
-        /// Returns the severity of this diagnostic.
         DiagnosticSeverity GetSeverity() const;
-
-        /// Sets the severity of this diagnostic.
         void SetSeverity(DiagnosticSeverity s);
-
-        /// Set the message for this diagnostic.
-        void SetMessage(const std::string &msg);
-
+        void SetMessage(const std::string& msg);
         std::string GetDiagnosticMessage() const;
+        void SetErrorCode(std::error_code error);
+        std::optional<std::error_code> GetErrorCode() const;
 
-        /// Outputs this diagnostic to a stream.
-        void Print(std::ostream &os) const;
-
-        DiagnosticLocation GetLocation() const;
+        void Print(std::ostream& os) const;
 
         ~Diagnostic() = default;
 
     private:
-        DiagnosticSeverity severity{DiagnosticSeverity::Note};
-        std::string message;
-        std::unique_ptr<DiagnosticLocation> loc;
+        DiagnosticSeverity m_severity{DiagnosticSeverity::Note};
+        std::string m_message;
+        std::optional<std::error_code> m_errorCode;
     };
 
-}  // namespace slxio
+#define DIAGNOSTIC(vector, severity, message)                                                      \
+    do                                                                                             \
+    {                                                                                              \
+        Diagnostic diagnostic;                                                                     \
+        diagnostic.SetMessage(message);                                                            \
+        diagnostic.SetSeverity(severity);                                                          \
+        vector.push_back(std::move(diagnostic));                                                   \
+    } while (false)
+
+}; // namespace slxio

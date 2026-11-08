@@ -1,30 +1,23 @@
+# Contribution Guide
 
-# SLXIO Coding Standards
+Thanks very much for your interest in our project. The project is under active development, and contributions are highly encouraged.
+
+## Coding Standards
 
 This document describes the coding standards all developers are expected to adhere to when writing code for the SLXIO project.
 - Avoid usage of old C style macros and prefer constexpr
 - Use [[nodiscard]] on getters and error-returning functions. SLXIO_NODISCARD exists but is unused.
 
-
 # Portablity
 
 # Contributing Guide
 
-Thanks very much for your interest in the Slxio project. The project is under active development, and contributions are highly encouraged. See the following documentation pages for more details about project setup and conventions.
-
-- @subpage CodingStandards
-- @subpage Contact
-- @subpage EnvironmentSetup
-- @subpage RunningTests
-- @subpage RunningStaticChecks
-- @subpage To‑Do 
-- @subpage MakingNewRelease
-- @subpage ExternalDependencySystem
+ See the following documentation pages for more details about project setup and conventions.
 
 
 Currently, there is no official mailing list for the project, as there is only one developer/maintainer. Feel free to contact me directly instead. [mail: chihawissem08 [dot] gmail [dot] com](mailto:chihawissem08@gmail.com)
 
-## MakingNewRelease  Making a New Release
+## Making a New Release
 
 # Checking ABI Compatibility
 @page RunningTests Running Tests

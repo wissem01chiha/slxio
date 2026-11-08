@@ -16,14 +16,12 @@ add_module(
   Core
   Diagnostic.cxx
   DiagnosticEngine.cxx
-  DiagnosticLocation.cxx
-  ErrorCode.cxx
-  ErrorCategory.cxx
-  LoggerEngine.cxx
-  SimulinkReleaseHandler.cxx
-  VersionManager.cxx)
+  Error.cxx
+  Logger.cxx
+  SimulinkRelease.cxx
+  Version.cxx)
 
-configure_file(VersionMacro.h.in ${CMAKE_CURRENT_BINARY_DIR}/VersionMacro.h
+configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h
                @ONLY)
 module_link_libraries(Core spdlog)
 set_target_properties(Core PROPERTIES OUTPUT_NAME "CommonCore")

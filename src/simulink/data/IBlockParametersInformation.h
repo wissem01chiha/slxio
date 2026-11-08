@@ -10,8 +10,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockParametersInformation
- */
+     * @class IBlockParametersInformation
+     */
     class SLXIO_APIEXPORT IBlockParametersInformation
     {
     public:
@@ -20,4 +20,4 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

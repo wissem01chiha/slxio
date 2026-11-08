@@ -14,12 +14,12 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class ISignalAttributes
- * @brief Signal metadata of a block in Simulink, often displayed in
- *        the Signal Attributes tab of the block Parameters dialog box. Typical
- * attributes include min/max values, data type, dimensions, complexity, and
- * sample time.
- */
+     * @class ISignalAttributes
+     * @brief Signal metadata of a block in Simulink, often displayed in
+     *        the Signal Attributes tab of the block Parameters dialog box. Typical
+     * attributes include min/max values, data type, dimensions, complexity, and
+     * sample time.
+     */
     class SLXIO_APIEXPORT ISignalAttributes
     {
     public:
@@ -31,13 +31,13 @@ namespace slxio
         virtual Float64 GetOutputMinimum() const = 0;
         virtual Float64 GetOutputMaximum() const = 0;
 
-        virtual void SetOutputDataType(const std::string &dtype) = 0;
+        virtual void SetOutputDataType(const std::string& dtype) = 0;
         virtual std::string GetOutputDataType() const = 0;
 
         virtual void SetComplexity(bool isComplex) = 0;
         virtual bool IsComplex() const = 0;
 
-        virtual void SetDimensions(const std::string &dims) = 0;
+        virtual void SetDimensions(const std::string& dims) = 0;
         virtual std::string GetDimensions() const = 0;
 
         virtual void SetSampleTime(Float64 ts) = 0;
@@ -48,6 +48,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // ISIGNALATTRIBUTES_H
+#endif // ISIGNALATTRIBUTES_H

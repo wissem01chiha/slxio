@@ -17,11 +17,11 @@ namespace slxio
     class SimulinkPort;
 
     /**
- * @brief A SimulinkSubsystem Object
- * @note this struct do not map to a concrete Simulink object in
- * MATLAB API rather then an extension for hiracical blcoks or models
- * manipulatoation added as a feature in the librray
- */
+     * @brief A SimulinkSubsystem Object
+     * @note this struct do not map to a concrete Simulink object in
+     * MATLAB API rather then an extension for hiracical blcoks or models
+     * manipulatoation added as a feature in the librray
+     */
     class SLXIO_APIEXPORT ISimulinkSubsystem : public ISimulinkElement
     {
     public:
@@ -38,6 +38,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // ISIMULINKSUBSYSTEM_H
+#endif // ISIMULINKSUBSYSTEM_H

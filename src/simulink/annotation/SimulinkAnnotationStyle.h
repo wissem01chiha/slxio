@@ -25,8 +25,8 @@ namespace slxio
 
     struct SimulinkAnnotationStyle
     {
-        Color &foreground;
-        Color &background;
+        Color& foreground;
+        Color& background;
         std::string fontName;
         std::string fontSize;
         std::string fontWeight;
@@ -34,4 +34,4 @@ namespace slxio
         std::string interpreter;
     };
 
-};  // namespace slxio
+}; // namespace slxio

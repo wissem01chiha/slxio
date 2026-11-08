@@ -83,7 +83,7 @@ namespace slxio
         std::string DenormalBehavior;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkOptimization &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkOptimization& destination);
 
-};  // namespace slxio
+}; // namespace slxio

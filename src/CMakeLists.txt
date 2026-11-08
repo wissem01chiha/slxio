@@ -14,8 +14,5 @@
 
 add_subdirectory(common)
 add_subdirectory(simulink)
-if(SLXIO_ENABLE_IO)
-  add_subdirectory(io)
-endif()
-add_subdirectory(filter)
-add_subdirectory(analyzer)
+add_subdirectory(export)
+add_subdirectory(import)

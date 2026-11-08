@@ -13,8 +13,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class DataSourceType
- */
+     * @class DataSourceType
+     */
     class SLXIO_APIEXPORT DataSourceType final
     {
     public:
@@ -27,7 +27,7 @@ namespace slxio
         };
 
         explicit DataSourceType(DataSourceType::Type type);
-        static Type FromString(const std::string &sldt);
+        static Type FromString(const std::string& sldt);
         static std::string ToString(Type type);
         Type GetType() const;
         ~DataSourceType() = default;
@@ -37,6 +37,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // DATASOURCETYPE_H
+#endif // DATASOURCETYPE_H

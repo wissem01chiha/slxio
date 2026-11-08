@@ -29,4 +29,4 @@ namespace slxio
         std::string hexValue;
     };
 
-};  // namespace slxio
+}; // namespace slxio

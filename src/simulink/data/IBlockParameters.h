@@ -18,9 +18,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockParameters
- * @brief Abstract interface representing block parameters.
- */
+     * @class IBlockParameters
+     * @brief Abstract interface representing block parameters.
+     */
     class SLXIO_APIEXPORT IBlockParameters
     {
     public:
@@ -29,13 +29,13 @@ namespace slxio
 
         virtual std::shared_ptr<ISignalAttributes> GetSignalAttributes() const = 0;
         virtual std::shared_ptr<ILogging> GetLogging() const = 0;
-        virtual std::shared_ptr<IBlockParametersInformation> GetBlockParametersInformation()
-            const = 0;
+        virtual std::shared_ptr<IBlockParametersInformation>
+        GetBlockParametersInformation() const = 0;
         virtual std::shared_ptr<ICodeGenration> GetCodeGeneration() const = 0;
         virtual std::shared_ptr<IBlockParametersInformation> GetInformation() const = 0;
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // IBLOCKPARAMETERS_H
+#endif // IBLOCKPARAMETERS_H

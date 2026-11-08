@@ -24,22 +24,22 @@ namespace slxio
             DirectoryService::CreateDirectoryStructure(tempDirPath, &lastError);
         }
 
-        std::string
-        GetAssetFilePath(const char *filename)
+        std::string GetAssetFilePath(const char* filename)
         {
             static char FilePath[512];
-            snprintf(FilePath, sizeof(FilePath), "%s/common/system/test/data/%s", SLXIO_ROOT_DIR,
+            snprintf(FilePath,
+                     sizeof(FilePath),
+                     "%s/common/system/test/data/%s",
+                     SLXIO_ROOT_DIR,
                      filename);
             return std::string(FilePath);
         }
 
-        int
-        GetLastError()
+        int GetLastError()
         {
             return lastError;
         }
-        std::string
-        GetArchiveTestDirTmp()
+        std::string GetArchiveTestDirTmp()
         {
             return tempDirPath;
         }
@@ -103,4 +103,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

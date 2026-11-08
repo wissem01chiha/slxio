@@ -1,24 +1,24 @@
-#include "Doctest.h"
-#include "LoggerEngine.h"
-#include "LoggerEngineOptions.h"
+#include "doctest.h"
+#include "Logger.h"
+#include "LoggerOptions.h"
 
 namespace slxio
 {
 
-    TEST_CASE("LoggerEngine stores its options")
+    TEST_CASE("Store Logger options test")
     {
-        LoggerEngineOptions options;
-        options.enableLogging = false;
-        options.logFilePath = "test.log";
-        options.maxLogFileSize = 4096;
+        LoggerOptions options;
+        options.m_enableLogging = false;
+        options.m_logFilePath = "test.log";
+        options.m_maxLogFileSize = 4096;
 
-        LoggerEngine engine(options);
+        Logger engine(options);
 
-        CHECK_FALSE(engine.GetOptions().enableLogging);
-        CHECK(engine.GetOptions().logFilePath == "test.log");
-        CHECK(engine.GetOptions().maxLogFileSize == 4096);
+        CHECK_FALSE(engine.GetOptions().m_enableLogging);
+        CHECK(engine.GetOptions().m_logFilePath == "test.log");
+        CHECK(engine.GetOptions().m_maxLogFileSize == 4096);
         CHECK(engine.GetOptions().m_nthreads == 1);
         CHECK(engine.GetOptions().m_queueSize == 8192);
     }
 
-}  // namespace slxio
+} // namespace slxio

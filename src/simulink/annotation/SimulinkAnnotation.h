@@ -27,19 +27,19 @@ namespace slxio
     class SimulinkAnnotation final
     {
     public:
-        const std::string &GetText() const;
+        const std::string& GetText() const;
         void SetText(std::string text);
 
-        const SimulinkAnnotationStyle &GetStyle() const;
-        SimulinkAnnotationStyle &GetStyle();
+        const SimulinkAnnotationStyle& GetStyle() const;
+        SimulinkAnnotationStyle& GetStyle();
 
-        const SimulinkAnnotationLayout &GetLayout() const;
-        SimulinkAnnotationLayout &GetLayout();
+        const SimulinkAnnotationLayout& GetLayout() const;
+        SimulinkAnnotationLayout& GetLayout();
 
     private:
         std::string m_text;
-        SimulinkAnnotationStyle &m_style;
-        SimulinkAnnotationLayout &m_layout;
+        SimulinkAnnotationStyle& m_style;
+        SimulinkAnnotationLayout& m_layout;
     };
 
-};  // namespace slxio
+}; // namespace slxio

@@ -18,13 +18,16 @@
 namespace slxio
 {
 
-    Point::Point(const std::vector<uint32_t> &vec)
+    Point::Point(const std::vector<uint32_t>& vec)
     {
-        if ( vec.size() < 4 ) {
+        if (vec.size() < 4)
+        {
             // l.Log(Logger::V_ERROR,
             //  "Point constructor: vector too small to initialize Point!");
             x = y = width = height = 0;
-        } else {
+        }
+        else
+        {
             x = vec[0];
             y = vec[1];
             width = vec[2];
@@ -32,10 +35,9 @@ namespace slxio
         }
     }
 
-    std::vector<uint32_t>
-    Point::toVector() const
+    std::vector<uint32_t> Point::toVector() const
     {
         return {x, y, width, height};
     }
 
-};  // namespace slxio
+}; // namespace slxio

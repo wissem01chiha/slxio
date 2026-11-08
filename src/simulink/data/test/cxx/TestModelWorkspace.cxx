@@ -9,17 +9,15 @@ SLXIO_ABI_NAMESPACE_BEGIN
 class MockParameterObject : public IParameterObjectBase
 {
 public:
-    explicit MockParameterObject(const std::string &name)
+    explicit MockParameterObject(const std::string& name)
     {
         SetName(name);
     }
-    IParameterObjectBase *
-    New() override
+    IParameterObjectBase* New() override
     {
         return new MockParameterObject(GetName());
     }
-    DataType
-    GetDataType() const override
+    DataType GetDataType() const override
     {
         return DataType::SLXIO_TYPE_ARRAY;
     }
@@ -84,7 +82,7 @@ TEST_CASE("GetDataSource default not nullptr")
 TEST_CASE("ModelWorkspace Logging interface test")
 {
     ModelWorkspace ws;
-    Logger *log = new Logger();
+    Logger* log = new Logger();
     CHECK(ws.SetLogger(log) == E_OK);
     CHECK(ws.GetLogger() != nullptr);
     delete log;

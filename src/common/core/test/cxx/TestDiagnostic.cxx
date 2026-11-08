@@ -1,10 +1,10 @@
-#include "Doctest.h"
+#include "doctest.h"
 #include "Diagnostic.h"
 
 namespace slxio
 {
 
-    TEST_CASE("stores and prints severity and message")
+    TEST_CASE("Stores diagnostic messages test")
     {
         Diagnostic diagnostic;
         CHECK(diagnostic.GetSeverity() == DiagnosticSeverity::Note);
@@ -15,15 +15,17 @@ namespace slxio
 
         CHECK(diagnostic.GetSeverity() == DiagnosticSeverity::Warning);
         CHECK(diagnostic.GetDiagnosticMessage() == "missing optional setting");
+    }
+
+    TEST_CASE("Print diagnostic messages test")
+    {
+        Diagnostic diagnostic;
+
+        diagnostic.SetSeverity(DiagnosticSeverity::Warning);
+        diagnostic.SetMessage("missing optional setting");
 
         std::ostringstream output;
         diagnostic.Print(output);
         CHECK(output.str() == "Warning missing optional setting\n");
-
-        const DiagnosticLocation location = diagnostic.GetLocation();
-        CHECK(location.getFile().empty());
-        CHECK(location.getLine() == 0);
-        CHECK(location.getColumn() == 0);
     }
-
-}  // namespace slxio
+}; // namespace slxio

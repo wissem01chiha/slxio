@@ -12,9 +12,9 @@ TEST_CASE("Test default constructor")
     auto array = std::make_shared<SimulinkArray>();
     CHECK(array != nullptr);
 
-    ISimulinkElement *newArray = array->New();
+    ISimulinkElement* newArray = array->New();
     CHECK(newArray != nullptr);
-    delete newArray;  // NOSONAR
+    delete newArray; // NOSONAR
 }
 
 TEST_CASE("Test AcceptInsert Into other array")

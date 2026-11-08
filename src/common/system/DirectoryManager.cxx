@@ -12,17 +12,18 @@ namespace slxio
         DirectoryBuffer.clear();
     }
 
-    DirectoryManager::DirectoryManager(const std::vector<std::shared_ptr<Directory>> &directories)
+    DirectoryManager::DirectoryManager(const std::vector<std::shared_ptr<Directory>>& directories)
         : DirectoryBuffer(directories)
     {
     }
 
-    std::vector<std::string>
-    DirectoryManager::GetDirectoryNames()
+    std::vector<std::string> DirectoryManager::GetDirectoryNames()
     {
         std::vector<std::string> names;
-        for ( const auto &dir : DirectoryBuffer ) {
-            if ( dir ) {
+        for (const auto& dir : DirectoryBuffer)
+        {
+            if (dir)
+            {
                 names.push_back(dir->GetDirectoryName());
             }
         }
@@ -30,4 +31,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

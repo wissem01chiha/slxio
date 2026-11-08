@@ -22,28 +22,24 @@ namespace slxio
     {
     }
 
-    std::string
-    CoderInfo::GetStorageClass() const
+    std::string CoderInfo::GetStorageClass() const
     {
         return m_storageClass;
     }
 
-    bool
-    CoderInfo::IsTunable() const
+    bool CoderInfo::IsTunable() const
     {
         return m_tunable;
     }
 
-    std::string
-    CoderInfo::GetIdentifier() const
+    std::string CoderInfo::GetIdentifier() const
     {
         return m_identifier;
     }
 
-    uint32_t
-    CoderInfo::GetAlignment() const
+    uint32_t CoderInfo::GetAlignment() const
     {
         return m_alignment;
     }
 
-};  // namespace slxio
+}; // namespace slxio

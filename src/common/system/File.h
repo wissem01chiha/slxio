@@ -16,9 +16,9 @@ namespace slxio
     class Directory;
 
     /**
- * @class File
- * @brief Cross‑platform file system abstraction.
- */
+     * @class File
+     * @brief Cross‑platform file system abstraction.
+     */
     class SLXIO_APIEXPORT File final
     {
     public:
@@ -32,10 +32,10 @@ namespace slxio
         };
 
         /** Construct a File with path and mode. */
-        File(const std::string &path, Mode mode);
+        File(const std::string& path, Mode mode);
 
         /** Construct a File with path only. */
-        explicit File(const std::string &path);
+        explicit File(const std::string& path);
 
         /** Open the file. */
         HError Open();
@@ -47,7 +47,7 @@ namespace slxio
         HError Read();
 
         /** Check if a path exists as a file. */
-        static bool Exist(const std::string &path);
+        static bool Exist(const std::string& path);
 
         /** Check if file is empty. */
         bool Empty() const;
@@ -62,16 +62,16 @@ namespace slxio
         bool Exist() const;
 
         /** Write string data to file. */
-        HError Write(const std::string &message);
+        HError Write(const std::string& message);
 
         /** Write vector of strings to file. */
-        HError Write(std::vector<std::string> &message);
+        HError Write(std::vector<std::string>& message);
 
         /** Copy file to a directory. */
-        HError Copy(const Directory &directory);
+        HError Copy(const Directory& directory);
 
         /** Rename the file. if not opened */
-        HError Rename(const std::string &filename);
+        HError Rename(const std::string& filename);
 
         /** Get file mode flags. */
         const int GetFileMode();
@@ -80,7 +80,7 @@ namespace slxio
         void SetFileMode(const File::Mode mode);
 
         /** Move file to a directory. */
-        HError Move(const Directory &directory);
+        HError Move(const Directory& directory);
 
         /** Delete the file from disk */
         HError Delete();
@@ -113,6 +113,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // FILE_H
+#endif // FILE_H

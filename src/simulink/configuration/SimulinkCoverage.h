@@ -60,7 +60,7 @@ namespace slxio
         std::string CovMcdcMode = "Masking";
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkCoverage &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkCoverage& destination);
 
-};  // namespace slxio
+}; // namespace slxio

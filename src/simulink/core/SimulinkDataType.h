@@ -14,9 +14,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkDataType
- * @brief Simulink Supported Data Types.
- */
+     * @class SimulinkDataType
+     * @brief Simulink Supported Data Types.
+     */
     enum class SimulinkDataType
     {
         Auto,
@@ -36,12 +36,12 @@ namespace slxio
     };
 
     SLXIO_APIEXPORT std::string ToString(SimulinkDataType type);
-    SLXIO_APIEXPORT SimulinkDataType FromString(const std::string &str);
+    SLXIO_APIEXPORT SimulinkDataType FromString(const std::string& str);
     SLXIO_APIEXPORT bool IsNumeric(SimulinkDataType type);
     SLXIO_APIEXPORT bool IsFloatingPoint(SimulinkDataType type);
     SLXIO_APIEXPORT bool IsSigned(SimulinkDataType type);
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKDATATYPE_H
+#endif // SIMULINKDATATYPE_H

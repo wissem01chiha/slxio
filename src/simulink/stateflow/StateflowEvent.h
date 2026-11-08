@@ -14,19 +14,19 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief A Stateflow event object.
- */
+     * @brief A Stateflow event object.
+     */
     class SLXIO_APIEXPORT StateflowEvent : public StateflowElementBase
     {
     public:
         StateflowEvent();
-        StateflowEvent(StateflowEvent &orig);
+        StateflowEvent(StateflowEvent& orig);
         HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
 
     private:
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // STATEFLOWEVENT_H
+#endif // STATEFLOWEVENT_H

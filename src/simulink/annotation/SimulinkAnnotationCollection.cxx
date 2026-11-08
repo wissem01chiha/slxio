@@ -17,16 +17,14 @@
 
 namespace slxio
 {
-    int
-    AnnotationCollection::Add(std::shared_ptr<SimulinkAnnotation> annotation)
+    int AnnotationCollection::Add(std::shared_ptr<SimulinkAnnotation> annotation)
     {
         return 0;
     }
 
-    int
-    AnnotationCollection::Remove()
+    int AnnotationCollection::Remove()
     {
         return 0;
     }
 
-};  // namespace slxio
+}; // namespace slxio

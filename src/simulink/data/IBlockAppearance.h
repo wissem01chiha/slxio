@@ -14,9 +14,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockAppearance
- * @brief Interface for Simulink block appearance properties
- */
+     * @class IBlockAppearance
+     * @brief Interface for Simulink block appearance properties
+     */
     class SLXIO_APIEXPORT IBlockAppearance
     {
     public:
@@ -39,6 +39,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // IBLOCKAPPEARANCE_H
+#endif // IBLOCKAPPEARANCE_H

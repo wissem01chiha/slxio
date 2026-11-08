@@ -17,28 +17,63 @@
 #include "DiagnosticEngine.h"
 #include "DiagnosticEngineOptions.h"
 #include "Diagnostic.h"
-#include "DiagnosticLocation.h"
+#include "Error.h"
 
 namespace slxio
 {
-    DiagnosticEngine::DiagnosticEngine(const DiagnosticEngineOptions &options)
+
+    DiagnosticEngine::DiagnosticEngine(const DiagnosticEngineOptions& options)
     {
         m_options = std::make_unique<DiagnosticEngineOptions>(options);
     }
 
-    void
-    DiagnosticEngine::Report(Diagnostic &&diag)
+    void DiagnosticEngine::Report(Diagnostic&& diag)
     {
         m_diagnostics.push_back(std::move(diag));
     }
-    const DiagnosticEngineOptions &
-    DiagnosticEngine::GetOptions() const
+
+    void DiagnosticEngine::Report(std::vector<Diagnostic>& diag)
+    {
+        if (diag.empty())
+        {
+            return;
+        }
+        for (auto& diagnostic : diag)
+        {
+            m_diagnostics.push_back(std::move(diagnostic));
+        }
+    }
+
+    bool DiagnosticEngine::ReportError(std::error_code error, std::string_view context)
+    {
+        if (!error)
+        {
+            return false;
+        }
+
+        Diagnostic diagnostic;
+        diagnostic.SetSeverity(DiagnosticSeverity::Error);
+        diagnostic.SetErrorCode(error);
+
+        std::string message(context);
+        if (!message.empty())
+        {
+            message += ": ";
+        }
+        message += error.message();
+        diagnostic.SetMessage(message);
+        Report(std::move(diagnostic));
+        return true;
+    }
+
+    const DiagnosticEngineOptions& DiagnosticEngine::GetOptions() const
     {
         return *m_options;
     }
-    const std::vector<Diagnostic> &
-    DiagnosticEngine::GetDiagnostics() const
+
+    const std::vector<Diagnostic>& DiagnosticEngine::GetDiagnostics() const
     {
         return m_diagnostics;
     }
-}  // namespace slxio
+
+}; // namespace slxio

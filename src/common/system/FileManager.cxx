@@ -12,52 +12,53 @@ namespace slxio
         FileBuffer.clear();
     }
 
-    FileManager::FileManager(const std::vector<std::shared_ptr<File>> &files) : FileBuffer(files)
+    FileManager::FileManager(const std::vector<std::shared_ptr<File>>& files) : FileBuffer(files)
     {
     }
 
-    SId
-    FileManager::GetFileId(const std::string &filename) const
+    SId FileManager::GetFileId(const std::string& filename) const
     {
-        for ( UInt32 i = 0; i <= GetFileMaxId(); i++ ) {
-            if ( FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename ) {
+        for (UInt32 i = 0; i <= GetFileMaxId(); i++)
+        {
+            if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename)
+            {
                 return i;
             }
         }
         return (SId)-1;
     }
 
-    SId
-    FileManager::GetFileMaxId() const
+    SId FileManager::GetFileMaxId() const
     {
         return SLXIO_STATIC_CAST(SId, FileBuffer.size());
     }
 
-    bool
-    FileManager::IsOpened(const std::string &filename)
+    bool FileManager::IsOpened(const std::string& filename)
     {
-        for ( UInt32 i = 0; i <= GetFileMaxId(); i++ ) {
-            if ( FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename ) {
+        for (UInt32 i = 0; i <= GetFileMaxId(); i++)
+        {
+            if (FileBuffer[i] != nullptr && FileBuffer[i]->GetFileName() == filename)
+            {
                 return true;
             }
         }
         return false;
     }
 
-    HError
-    FileManager::Add(std::shared_ptr<File> file)
+    HError FileManager::Add(std::shared_ptr<File> file)
     {
         return E_OK;
     }
 
-    std::shared_ptr<File>
-    FileManager::GetFile(SId id) const
+    std::shared_ptr<File> FileManager::GetFile(SId id) const
     {
-        if ( id < 0 ) {
+        if (id < 0)
+        {
             return nullptr;
         }
 
-        if ( id < static_cast<SId>(FileBuffer.size()) ) {
+        if (id < static_cast<SId>(FileBuffer.size()))
+        {
             return FileBuffer[id];
         }
 
@@ -92,12 +93,13 @@ namespace slxio
     //   return iNewId;
     // }
 
-    SId
-    FileManager::GetFirstFreeFileId()
+    SId FileManager::GetFirstFreeFileId()
     {
         // find first free space
-        for ( size_t i = 0; i < FileBuffer.size(); i++ ) {
-            if ( FileBuffer[i] == nullptr ) {
+        for (size_t i = 0; i < FileBuffer.size(); i++)
+        {
+            if (FileBuffer[i] == nullptr)
+            {
                 return i;
             }
             return (SId)-1;
@@ -108,10 +110,10 @@ namespace slxio
         return NewId;
     }
 
-    HError
-    FileManager::Remove(SId id)
+    HError FileManager::Remove(SId id)
     {
-        if ( 0 < id && id < static_cast<SId>(FileBuffer.size()) ) {
+        if (0 < id && id < static_cast<SId>(FileBuffer.size()))
+        {
             //     delete fileList[_iID];
             //     fileList[_iID] = nullptr;
             //     if (file == _iID)
@@ -121,18 +123,20 @@ namespace slxio
         }
 
         // to clean end of list and remove empty spaces
-        while ( FileBuffer.size() != 0 && FileBuffer.back() == nullptr ) {
+        while (FileBuffer.size() != 0 && FileBuffer.back() == nullptr)
+        {
             FileBuffer.pop_back();
         }
         return E_OK;
     }
 
-    std::vector<SId>
-    FileManager::GetFileIds() const
+    std::vector<SId> FileManager::GetFileIds() const
     {
         std::vector<SId> piIds;
-        for ( UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++ ) {
-            if ( FileBuffer[i] != nullptr ) {
+        for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++)
+        {
+            if (FileBuffer[i] != nullptr)
+            {
                 piIds.push_back(i);
             }
         }
@@ -140,37 +144,37 @@ namespace slxio
         return piIds;
     }
 
-    std::vector<Directory>
-    FileManager::GetFileDirectories() const
+    std::vector<Directory> FileManager::GetFileDirectories() const
     {
         return std::vector<Directory>();
     }
 
-    UInt32
-    FileManager::GetOpenedCount()
+    UInt32 FileManager::GetOpenedCount()
     {
         UInt32 iCount = 0;
-        for ( UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++ ) {
-            if ( FileBuffer[i] != nullptr ) {
+        for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++)
+        {
+            if (FileBuffer[i] != nullptr)
+            {
                 iCount++;
             }
         }
         return iCount;
     }
 
-    std::vector<std::string>
-    FileManager::GetFileNames()
+    std::vector<std::string> FileManager::GetFileNames()
     {
         return std::vector<std::string>();
     }
 
-    std::vector<int>
-    FileManager::GetFileModes() const
+    std::vector<int> FileManager::GetFileModes() const
     {
         std::vector<int> pdblModes;
 
-        for ( UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++ ) {
-            if ( FileBuffer[i] != nullptr ) {
+        for (UInt32 i = 0; i < static_cast<UInt32>(FileBuffer.size()); i++)
+        {
+            if (FileBuffer[i] != nullptr)
+            {
                 pdblModes.push_back(FileBuffer[i]->GetFileMode());
             }
         }
@@ -178,12 +182,11 @@ namespace slxio
         return pdblModes;
     }
 
-    HError
-    FileManager::Clear()
+    HError FileManager::Clear()
     {
         FileBuffer.clear();
         return E_OK;
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

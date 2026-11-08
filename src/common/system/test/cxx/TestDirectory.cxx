@@ -22,8 +22,7 @@ namespace slxio
         }
 
         /** Create a unique temporary directory under the cwd */
-        std::string
-        MakeTempDir(const std::string &prefix = "TestDir")
+        std::string MakeTempDir(const std::string& prefix = "TestDir")
         {
             auto now = std::chrono::system_clock::now().time_since_epoch().count();
             std::mt19937 rng(static_cast<unsigned>(now));
@@ -36,8 +35,7 @@ namespace slxio
         }
 
         /**  Create a temp directory with dummy files */
-        std::string
-        MakeTempDirWithFiles()
+        std::string MakeTempDirWithFiles()
         {
             std::string dir = MakeTempDir("TestDirFiles");
             std::ofstream(dir + "/file1.txt").put('a');
@@ -97,4 +95,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

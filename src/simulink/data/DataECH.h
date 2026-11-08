@@ -15,4 +15,4 @@
 /// A variable already exists and was overwritten.
 #define E_PARAM_VAR_EXISTS SLXIO_HERROR(SLXIO_PROJECT, SIMULINK, DATA, SLXIO_WARN, 3U)
 
-#endif  // DATAECH_H
+#endif // DATAECH_H

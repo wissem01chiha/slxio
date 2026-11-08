@@ -1,20 +1,21 @@
-#include "Doctest.h"
+#include "doctest.h"
 #include "Diagnostic.h"
 #include "DiagnosticEngine.h"
 #include "DiagnosticEngineOptions.h"
+#include "Error.h"
 
 namespace slxio
 {
 
-    TEST_CASE("stores reported diagnostics")
+    TEST_CASE("Store diagnostics test")
     {
         DiagnosticEngineOptions options;
-        options.warningsAsErrors = true;
-        options.maxErrors = 5;
+        options.m_warningsAsErrors = true;
+        options.m_maxErrors = 5;
 
         DiagnosticEngine engine(options);
-        CHECK(engine.GetOptions().warningsAsErrors);
-        CHECK(engine.GetOptions().maxErrors == 5);
+        CHECK(engine.GetOptions().m_warningsAsErrors);
+        CHECK(engine.GetOptions().m_maxErrors == 5);
         CHECK(engine.GetDiagnostics().empty());
 
         Diagnostic diagnostic;
@@ -27,4 +28,27 @@ namespace slxio
         CHECK(engine.GetDiagnostics().front().GetDiagnosticMessage() == "invalid configuration");
     }
 
-}  // namespace slxio
+    TEST_CASE("Report error codes test")
+    {
+        DiagnosticEngine engine;
+        const auto error = make_error_code(error_code::InvalidArgument);
+
+        CHECK(engine.ReportError(error, "Failed to read model"));
+        REQUIRE(engine.GetDiagnostics().size() == 1);
+
+        const auto& diagnostic = engine.GetDiagnostics().front();
+        CHECK(diagnostic.GetSeverity() == DiagnosticSeverity::Error);
+        CHECK(diagnostic.GetDiagnosticMessage() == "Failed to read model: Invalid argument");
+        REQUIRE(diagnostic.GetErrorCode().has_value());
+        CHECK(*diagnostic.GetErrorCode() == error);
+    }
+
+    TEST_CASE("Report success test")
+    {
+        DiagnosticEngine engine;
+
+        CHECK_FALSE(engine.ReportError(make_error_code(error_code::Ok)));
+        CHECK(engine.GetDiagnostics().empty());
+    }
+
+}; // namespace slxio

@@ -19,8 +19,7 @@
 namespace slxio
 {
 
-    std::vector<uint32_t>
-    Color::toVector() const
+    std::vector<uint32_t> Color::toVector() const
     {
         return {r, g, b, a};
     }
@@ -31,25 +30,25 @@ namespace slxio
         : r(red), g(green), b(blue), a(alpha)
     {
     }
-    bool
-    Color::operator==(const Color &other) const
+    bool Color::operator==(const Color& other) const
     {
         return (r == other.r) && (g == other.g) && (b == other.b) && (a == other.a);
     }
-    bool
-    Color::operator!=(const Color &other) const
+    bool Color::operator!=(const Color& other) const
     {
         return !(*this == other);
     }
 
-    Color
-    Color::fromVector(const std::vector<uint32_t> &vec)
+    Color Color::fromVector(const std::vector<uint32_t>& vec)
     {
-        if ( vec.size() >= 4 ) {
+        if (vec.size() >= 4)
+        {
             return Color(vec[0], vec[1], vec[2], vec[3]);
         }
-        return Color(vec.size() > 0 ? vec[0] : 0, vec.size() > 1 ? vec[1] : 0,
-                     vec.size() > 2 ? vec[2] : 0, 255);
+        return Color(vec.size() > 0 ? vec[0] : 0,
+                     vec.size() > 1 ? vec[1] : 0,
+                     vec.size() > 2 ? vec[2] : 0,
+                     255);
     }
 
-};  // namespace slxio
+}; // namespace slxio

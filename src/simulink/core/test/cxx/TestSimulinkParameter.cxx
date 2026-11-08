@@ -44,7 +44,7 @@ TEST_CASE("SimulinkParameter New creates valid instance")
 {
     SimulinkParameter param("test");
 
-    auto *newParam = param.New();
+    auto* newParam = param.New();
 
     CHECK(newParam != nullptr);
 

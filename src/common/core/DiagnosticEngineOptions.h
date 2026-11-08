@@ -21,14 +21,12 @@
 namespace slxio
 {
 
-    /// A configuration system for the diagnostic engine, allowing customization of its behavior and
-    /// settings.
     struct DiagnosticEngineOptions
     {
-        bool warningsAsErrors = false;
-        bool suppressWarnings = false;
-        bool treatAllWarningsAsErrors = false;
-        std::size_t maxErrors = 100;
+        bool m_warningsAsErrors = false;
+        bool m_suppressWarnings = false;
+        bool m_treatAllWarningsAsErrors = false;
+        std::size_t m_maxErrors = 100;
     };
 
-};  // namespace slxio
+}; // namespace slxio

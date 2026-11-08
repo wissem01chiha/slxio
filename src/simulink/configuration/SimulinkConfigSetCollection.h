@@ -32,28 +32,28 @@ namespace slxio
     };
 
     /**
- * Owns model configuration sets and the model active-set selection.
- * The collection maintains the name index when a set is renamed. Removing the
- * active set clears selection.
- */
+     * Owns model configuration sets and the model active-set selection.
+     * The collection maintains the name index when a set is renamed. Removing the
+     * active set clears selection.
+     */
     class SimulinkConfigSetCollection final
     {
     public:
         using ConfigSetMap = std::map<std::string, SimulinkConfigSet>;
 
         ConfigSetCollectionResult Add(SimulinkConfigSet configSet);
-        ConfigSetCollectionResult Remove(const std::string &name);
-        ConfigSetCollectionResult Rename(const std::string &name, std::string newName);
-        ConfigSetCollectionResult SetActive(const std::string &name);
+        ConfigSetCollectionResult Remove(const std::string& name);
+        ConfigSetCollectionResult Rename(const std::string& name, std::string newName);
+        ConfigSetCollectionResult SetActive(const std::string& name);
         void ClearActive() noexcept;
 
-        SimulinkConfigSet *Find(const std::string &name) noexcept;
-        const SimulinkConfigSet *Find(const std::string &name) const noexcept;
-        SimulinkConfigSet *GetActive() noexcept;
-        const SimulinkConfigSet *GetActive() const noexcept;
+        SimulinkConfigSet* Find(const std::string& name) noexcept;
+        const SimulinkConfigSet* Find(const std::string& name) const noexcept;
+        SimulinkConfigSet* GetActive() noexcept;
+        const SimulinkConfigSet* GetActive() const noexcept;
 
-        const std::string &GetActiveName() const noexcept;
-        const ConfigSetMap &GetConfigSets() const noexcept;
+        const std::string& GetActiveName() const noexcept;
+        const ConfigSetMap& GetConfigSets() const noexcept;
         bool Empty() const noexcept;
         std::size_t Size() const noexcept;
 
@@ -62,4 +62,4 @@ namespace slxio
         std::string m_activeName;
     };
 
-}  // namespace slxio
+} // namespace slxio

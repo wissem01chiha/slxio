@@ -27,19 +27,18 @@ namespace slxio
     {
     public:
         DiagnosticEngine() = default;
-        explicit DiagnosticEngine(const DiagnosticEngineOptions &options);
-        DiagnosticEngine(const DiagnosticEngine &) = delete;
-        DiagnosticEngine &operator=(const DiagnosticEngine &) = delete;
-
-        void Report(Diagnostic &&diag);
-
-        const DiagnosticEngineOptions &GetOptions() const;
-
-        const std::vector<Diagnostic> &GetDiagnostics() const;
+        explicit DiagnosticEngine(const DiagnosticEngineOptions& options);
+        DiagnosticEngine(const DiagnosticEngine&) = delete;
+        DiagnosticEngine& operator=(const DiagnosticEngine&) = delete;
+        void Report(Diagnostic&& diag);
+        void Report(std::vector<Diagnostic>& diags);
+        bool ReportError(std::error_code error, std::string_view context = {});
+        const DiagnosticEngineOptions& GetOptions() const;
+        const std::vector<Diagnostic>& GetDiagnostics() const;
 
     private:
         std::vector<Diagnostic> m_diagnostics;
         std::unique_ptr<DiagnosticEngineOptions> m_options;
     };
 
-}  // namespace slxio
+} // namespace slxio

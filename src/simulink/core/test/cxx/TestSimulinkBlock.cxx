@@ -13,23 +13,23 @@ namespace slxio
 
     TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest")
     {
-        SimulinkBlock *block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
+        SimulinkBlock* block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
         CHECK(block->GetBlockType().isA(SimulinkBlockType::Type::Constant));
         CHECK(block->GetType().isA(SimulinkElementType::Type::Block));
     }
 
     TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest")
     {
-        SimulinkBlock *pblockPtr =
+        SimulinkBlock* pblockPtr =
             new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
-        SimulinkBlock *block = new SimulinkBlock(*pblockPtr);
+        SimulinkBlock* block = new SimulinkBlock(*pblockPtr);
 
         CHECK(block->GetId() == 10);
     }
 
     TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
     {
-        SimulinkBlock *parentblockPtr =
+        SimulinkBlock* parentblockPtr =
             new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
         std::shared_ptr<SimulinkBlock> childblockPtr =
@@ -41,7 +41,7 @@ namespace slxio
 
     TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
     {
-        SimulinkBlock *parentblockPtr =
+        SimulinkBlock* parentblockPtr =
             new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
 
         std::shared_ptr<SimulinkBlock> childblockPtr =
@@ -55,4 +55,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

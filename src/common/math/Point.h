@@ -26,7 +26,7 @@ namespace slxio
     public:
         Point();
         Point(uint32_t x, uint32_t y, uint32_t width, uint32_t height);
-        Point(const std::vector<uint32_t> &vec);
+        Point(const std::vector<uint32_t>& vec);
         std::vector<uint32_t> toVector() const;
 
     private:
@@ -36,4 +36,4 @@ namespace slxio
         uint32_t height;
     };
 
-};  // namespace slxio
+}; // namespace slxio

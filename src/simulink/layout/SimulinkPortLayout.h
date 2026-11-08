@@ -24,9 +24,9 @@ namespace slxio
     class Point;
 
     /**
- * @brief Encapsulates all information required for layouting a port
- * (relative to its parent's canvas).
- */
+     * @brief Encapsulates all information required for layouting a port
+     * (relative to its parent's canvas).
+     */
     class PortLayoutData final
     {
     public:
@@ -37,15 +37,15 @@ namespace slxio
         Color GetColor();
 
     private:
-        Point &position;
-        Color &color;
+        Point& position;
+        Color& color;
         /**
-     * @brief The direction in degree (0 to 360). A value of 0 indicates
-     * the normal position for a non-rotated block, i.e. an input port
-     * that comes from the left resp. an output port that points to the
-     * right. Other values are counter-clockwise rotations.
-     */
+         * @brief The direction in degree (0 to 360). A value of 0 indicates
+         * the normal position for a non-rotated block, i.e. an input port
+         * that comes from the left resp. an output port that points to the
+         * right. Other values are counter-clockwise rotations.
+         */
         double direction;
     };
 
-};  // namespace slxio
+}; // namespace slxio

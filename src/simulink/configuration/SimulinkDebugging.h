@@ -137,7 +137,7 @@ namespace slxio
         std::string ForceCombineOutputUpdateInSim;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkDebugging &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkDebugging& destination);
 
-};  // namespace slxio
+}; // namespace slxio

@@ -9,23 +9,20 @@ namespace slxio
 
     ISimulinkBlock::~ISimulinkBlock() = default;
 
-    HError
-    ISimulinkBlock::AcceptInsert(ISimulinkElement &parent)
+    HError ISimulinkBlock::AcceptInsert(ISimulinkElement& parent)
     {
         return E_OK;
     }
 
-    HError
-    ISimulinkBlock::Insert(const std::shared_ptr<ISimulinkElement> &element)
+    HError ISimulinkBlock::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
         return E_OK;
     }
 
-    SId
-    ISimulinkBlock::GetId() const
+    SId ISimulinkBlock::GetId() const
     {
         return m_id;
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

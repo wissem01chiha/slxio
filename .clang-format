@@ -1,34 +1,22 @@
-BasedOnStyle: Google
+BasedOnStyle: LLVM
+IndentWidth: 4
 TabWidth: 4
 UseTab: Never
 ColumnLimit: 100
-NamespaceIndentation: All
-
-AccessModifierOffset: -4
-ContinuationIndentWidth: 4
-IndentWidth: 4
-DerivePointerAlignment: false
-PointerAlignment: Right
-AllowAllArgumentsOnNextLine: false
-
-AlwaysBreakAfterDefinitionReturnType: All
-
-BreakBeforeBraces: Custom
-BraceWrapping:
-    AfterStruct: true
-    AfterClass: true
-    AfterFunction: true
-    AfterControlStatement: false
-    AfterEnum: true
-    AfterNamespace: true
-
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortFunctionsOnASingleLine: None
-AllowShortBlocksOnASingleLine: false
-AllowShortIfStatementsOnASingleLine: false
-AllowShortLoopsOnASingleLine: false
-
-AlignTrailingComments: true
-ReflowComments: false
+AllowShortBlocksOnASingleLine: Never
+PointerAlignment: Left
+NamespaceIndentation: All
+AlignAfterOpenBracket: Align
+AlignOperands: true
+AlignConsecutiveAssignments: false
+BinPackArguments: false
+BinPackParameters: false
+SpaceBeforeParens: ControlStatements
 SortIncludes: false
-SpaceBeforeParens: ControlStatements 
-SpacesInConditionalStatement: true
+AccessModifierOffset: -4
+Cpp11BracedListStyle: true
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1

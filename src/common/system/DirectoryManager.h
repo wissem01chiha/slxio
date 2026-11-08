@@ -17,9 +17,9 @@ namespace slxio
     class Directory;
 
     /**
- * @class DirectoryManager
- * @brief A singleton class for managing multiple directories.
- */
+     * @class DirectoryManager
+     * @brief A singleton class for managing multiple directories.
+     */
     class SLXIO_APIEXPORT DirectoryManager final
     {
     public:
@@ -30,19 +30,19 @@ namespace slxio
         ~DirectoryManager() = default;
 
         /** Deleted copy constructor. */
-        DirectoryManager(const DirectoryManager &) = delete;
+        DirectoryManager(const DirectoryManager&) = delete;
 
         /** Deleted copy assignment operator. */
-        DirectoryManager &operator=(const DirectoryManager &) = delete;
+        DirectoryManager& operator=(const DirectoryManager&) = delete;
 
         /** Deleted move constructor. */
-        DirectoryManager(DirectoryManager &&other) = delete;
+        DirectoryManager(DirectoryManager&& other) = delete;
 
         /** Deleted move assignment operator. */
-        DirectoryManager &operator=(DirectoryManager &&other) = delete;
+        DirectoryManager& operator=(DirectoryManager&& other) = delete;
 
         /** Construct a DirectoryManager with an initial set of directories. */
-        DirectoryManager(const std::vector<std::shared_ptr<Directory>> &directories);
+        DirectoryManager(const std::vector<std::shared_ptr<Directory>>& directories);
 
         /** Get the names of all managed directories. */
         std::vector<std::string> GetDirectoryNames();
@@ -51,6 +51,6 @@ namespace slxio
         std::vector<std::shared_ptr<Directory>> DirectoryBuffer;
     };
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // DIRECTORYMANAGER_H
+#endif // DIRECTORYMANAGER_H

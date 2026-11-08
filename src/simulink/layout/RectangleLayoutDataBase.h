@@ -16,8 +16,9 @@ class RectangleLayoutDataBase
 {
 public:
     RectangleLayoutDataBase();
-    RectangleLayoutDataBase(const RectangleType &position, const Color &foregroundColor,
-                            const Color &backgroundColor);
+    RectangleLayoutDataBase(const RectangleType& position,
+                            const Color& foregroundColor,
+                            const Color& backgroundColor);
     virtual ~RectangleLayoutDataBase() = default;
 
 protected:
@@ -26,4 +27,4 @@ protected:
     std::shared_ptr<Color> backgroundColor_;
 };
 
-#endif  // RectangleTypeLAYOUTDATABASE_H
+#endif // RectangleTypeLAYOUTDATABASE_H

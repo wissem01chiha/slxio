@@ -29,7 +29,7 @@ namespace slxio
         uint16_t DisabledPropsCount;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkRTW &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkRTW& destination);
 
-};  // namespace slxio
+}; // namespace slxio

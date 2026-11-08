@@ -23,7 +23,8 @@ namespace slxio
 
             char buffer[1024];
             size_t size = sizeof(buffer);
-            if ( uv_cwd(buffer, &size) == 0 ) {
+            if (uv_cwd(buffer, &size) == 0)
+            {
                 CurrentDir.assign(buffer, size);
             }
         }
@@ -33,27 +34,24 @@ namespace slxio
             std::remove(TestFile.c_str());
         }
 
-        std::string
-        GetTestFilePath() const
+        std::string GetTestFilePath() const
         {
             return CurrentDir + PATH_SEP + TestFile;
         }
 
-        Directory
-        CreateTempDirectory(const char *name, int *err) const
+        Directory CreateTempDirectory(const char* name, int* err) const
         {
             uv_fs_t req;
-            uv_loop_t *loop = uv_default_loop();
+            uv_loop_t* loop = uv_default_loop();
             *err = uv_fs_mkdir(loop, &req, name, 0755, nullptr);
             uv_fs_req_cleanup(&req);
             return Directory(CurrentDir + PATH_SEP + name);
         }
 
-        void
-        ClearTempDirectory(const char *name, int *err) const
+        void ClearTempDirectory(const char* name, int* err) const
         {
             uv_fs_t req;
-            uv_loop_t *loop = uv_default_loop();
+            uv_loop_t* loop = uv_default_loop();
 
             *err = uv_fs_rmdir(loop, &req, (CurrentDir + PATH_SEP + name).c_str(), nullptr);
             uv_fs_req_cleanup(&req);
@@ -111,7 +109,7 @@ namespace slxio
         REQUIRE(f.Open() == E_OK);
         REQUIRE(f.Exist() == true);
 
-        const char *newName = "renamed.txt";
+        const char* newName = "renamed.txt";
         CHECK(f.Rename(newName) == E_OK);
         CHECK(f.GetFileName() == "renamed.txt");
         std::remove(newName);
@@ -135,4 +133,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

@@ -12,9 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-if(SLXIO_BUILD_TESTS)
-  add_subdirectory(test)
-endif()
 add_subdirectory(core)
 add_subdirectory(color)
 add_subdirectory(math)

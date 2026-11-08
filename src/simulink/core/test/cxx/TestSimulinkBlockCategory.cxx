@@ -1,7 +1,7 @@
 #include "Doctest.h"
 #include "SimulinkBlockCategory.h"
 
-using namespace slxio;  // NOSONAR
+using namespace slxio; // NOSONAR
 
 SLXIO_ABI_NAMESPACE_BEGIN
 

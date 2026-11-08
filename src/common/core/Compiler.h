@@ -29,14 +29,14 @@
 #ifndef S_ISREG
 #define S_ISREG(mode) (((mode) & S_IFMT) == S_IFREG)
 #endif
-#endif  // _MSC_VER
+#endif // _MSC_VER
 
 #ifdef __cplusplus
 #include <cmath>
 #ifndef finite
 #define finite(x) std::isfinite(x)
 #endif
-#endif  // __cplusplus
+#endif // __cplusplus
 
 #ifdef _MSC_VER
 #define ISNAN(x) _isnan(x)

@@ -10,26 +10,25 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Base class for Stateflow declarations StateflowData and
- * StateflowEvent.
- */
+     * @brief Base class for Stateflow declarations StateflowData and
+     * StateflowEvent.
+     */
     class StateflowDeclBase : public StateflowElementBase, StateflowDeclContainerBase
     {
     public:
         StateflowDeclBase();
 
     protected:
-        StateflowDeclBase(StateflowDeclBase &orig);
+        StateflowDeclBase(StateflowDeclBase& orig);
 
         // std::string getName() { return
         // std::string(SimulinkConstant::PARAM_name); }
 
-        std::string
-        ToString() const override
+        std::string ToString() const override
         {
             // return getName() + " [" + getStateflowId() + "]";
         }
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

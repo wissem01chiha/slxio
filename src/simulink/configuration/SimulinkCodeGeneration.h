@@ -25,12 +25,12 @@ namespace slxio
 
     struct SimulinkCodeGeneration
     {
-        std::string codeGenFolder;
-        std::string codeGenLanguage;
-        bool enableCodeGeneration = false;
+        std::string m_codeGenFolder;
+        std::string m_codeGenLanguage;
+        bool m_enableCodeGeneration = false;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkCodeGeneration &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkCodeGeneration& destination);
 
-};  // namespace slxio
+}; // namespace slxio

@@ -26,6 +26,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // IBLOCKPORTS_H
+#endif // IBLOCKPORTS_H

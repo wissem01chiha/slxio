@@ -15,14 +15,51 @@
  */
 
 #include "SimulinkCodeGeneration.h"
+#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
 
-    std::vector<Diagnostic>
-    FromComponent(const SimulinkConfigSetComponent &source, SimulinkCodeGeneration &destination)
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkCodeGeneration& destination)
     {
-        return std::vector<Diagnostic>();
+        std::vector<Diagnostic> diagnostics;
+        if (const auto* folder = source.FindParam("CodeGenFolder"))
+        {
+            destination.m_codeGenFolder = *folder;
+        }
+        else
+        {
+            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter CodeGenFolder not found");
+        }
+
+        if (const auto* language = source.FindParam("TargetLang"))
+        {
+            destination.m_codeGenLanguage = *language;
+        }
+        else
+        {
+            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter TargetLang not found");
+        }
+
+        if (const auto* enabled = source.FindParam("EnableCodeGeneration"))
+        {
+            if (*enabled == "on")
+            {
+                destination.m_enableCodeGeneration = true;
+            }
+            else if (*enabled == "off")
+            {
+                destination.m_enableCodeGeneration = false;
+            }
+            else
+            {
+                DIAGNOSTIC(diagnostics,
+                           DiagnosticSeverity::Error,
+                           "Invalid value for parameter EnableCodeGeneration");
+            }
+        }
+        return diagnostics;
     }
 
-};  // namespace slxio
+}; // namespace slxio

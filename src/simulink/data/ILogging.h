@@ -10,9 +10,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class ILogging
- * @brief
- */
+     * @class ILogging
+     * @brief
+     */
     class SLXIO_APIEXPORT ILogging
     {
     public:
@@ -21,4 +21,4 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

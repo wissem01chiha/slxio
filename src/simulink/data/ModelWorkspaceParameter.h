@@ -16,20 +16,20 @@ namespace slxio
     class ModelWorkspace;
 
     /**
- * @class ModelWorkspaceParameter
- * @brief Generic parameter stored in a ModelWorkspace.
- */
+     * @class ModelWorkspaceParameter
+     * @brief Generic parameter stored in a ModelWorkspace.
+     */
     class SLXIO_APIEXPORT ModelWorkspaceParameter final : public IParameterObjectBase
     {
     public:
         ModelWorkspaceParameter();
 
-        ModelWorkspaceParameter(const std::string &name,
-                                const std::shared_ptr<ModelWorkspace> &data);
-        IParameterObjectBase *New() override;
+        ModelWorkspaceParameter(const std::string& name,
+                                const std::shared_ptr<ModelWorkspace>& data);
+        IParameterObjectBase* New() override;
         DataType GetDataType() const override;
         UInt16 Size() const override;
-        void SetData(const std::shared_ptr<ModelWorkspace> &data);
+        void SetData(const std::shared_ptr<ModelWorkspace>& data);
         std::shared_ptr<ModelWorkspace> GetData() const;
 
         ~ModelWorkspaceParameter() override = default;
@@ -39,6 +39,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // MODELWORKSPACEPARAMETER_H
+#endif // MODELWORKSPACEPARAMETER_H

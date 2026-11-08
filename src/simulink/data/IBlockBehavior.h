@@ -14,9 +14,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockBehavior
- * @brief Interface for Simulink block behavior properties
- */
+     * @class IBlockBehavior
+     * @brief Interface for Simulink block behavior properties
+     */
     class SLXIO_APIEXPORT IBlockBehavior
     {
     public:
@@ -54,6 +54,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // IBLOCKBEHAVIOR_H
+#endif // IBLOCKBEHAVIOR_H

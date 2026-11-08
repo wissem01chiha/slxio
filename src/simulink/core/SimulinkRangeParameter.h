@@ -12,8 +12,8 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class SimulinkRangeParameter
- */
+     * @class SimulinkRangeParameter
+     */
     class SLXIO_APIEXPORT SimulinkRangeParameter
     {
     public:
@@ -23,6 +23,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKRANGEPARAMETER_H
+#endif // SIMULINKRANGEPARAMETER_H

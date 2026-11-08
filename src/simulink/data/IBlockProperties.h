@@ -18,10 +18,10 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockProperties
- * @brief Implement Simulink Common Block Properties
- * https://www.mathworks.com/help/simulink/slref/block-parameters-and-properties.html#f23-7517
- */
+     * @class IBlockProperties
+     * @brief Implement Simulink Common Block Properties
+     * https://www.mathworks.com/help/simulink/slref/block-parameters-and-properties.html#f23-7517
+     */
     class SLXIO_APIEXPORT IBlockProperties
     {
     public:
@@ -36,6 +36,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // IBLOCKPROPERITIES_H
+#endif // IBLOCKPROPERITIES_H

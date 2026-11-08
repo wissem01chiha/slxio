@@ -7,28 +7,29 @@ namespace slxio
 
     SimulinkObject::~SimulinkObject() = default;
 
-    ISimulinkElement *
-    SimulinkObject::New() const
+    ISimulinkElement* SimulinkObject::New() const
     {
-        return new SimulinkObject();  // NOSONAR
+        return new SimulinkObject(); // NOSONAR
     }
 
-    HError
-    SimulinkObject::AcceptInsert(ISimulinkElement &parent)
+    HError SimulinkObject::AcceptInsert(ISimulinkElement& parent)
     {
-        auto *object = dynamic_cast<SimulinkObject *>(&parent);
-        if ( object != nullptr ) {
+        auto* object = dynamic_cast<SimulinkObject*>(&parent);
+        if (object != nullptr)
+        {
             object->Insert(shared_from_this());
-        } else {
+        }
+        else
+        {
             return E_OPERATION_NOT_SUPPORTED;
         }
         return E_OK;
     }
 
-    HError
-    SimulinkObject::Insert(const std::shared_ptr<ISimulinkElement> &element)
+    HError SimulinkObject::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
-        if ( element == nullptr ) {
+        if (element == nullptr)
+        {
             return E_CHILD_NULLPTR_RECEIVED;
         }
         GetChildren()[element->GetId()] = element;
@@ -38,38 +39,38 @@ namespace slxio
         return E_OK;
     }
 
-    SId
-    SimulinkObject::GetId() const
+    SId SimulinkObject::GetId() const
     {
         return m_id;
     }
 
-    void
-    SimulinkObject::SetId(const SId &id)
+    void SimulinkObject::SetId(const SId& id)
     {
         m_id = id;
     }
 
-    void
-    SimulinkObject::AddParam(const std::string &name,
-                             const std::shared_ptr<IParameterObjectBase> &p)
+    void SimulinkObject::AddParam(const std::string& name,
+                                  const std::shared_ptr<IParameterObjectBase>& p)
     {
-        if ( p == nullptr ) {
+        if (p == nullptr)
+        {
             return;
         }
         m_parameters.push_back(p);
     }
 
-    void
-    SimulinkObject::SetParam(const std::string &name,
-                             const std::shared_ptr<IParameterObjectBase> &p)
+    void SimulinkObject::SetParam(const std::string& name,
+                                  const std::shared_ptr<IParameterObjectBase>& p)
     {
-        if ( p == nullptr ) {
+        if (p == nullptr)
+        {
             return;
         }
 
-        for ( auto &param : m_parameters ) {
-            if ( param->GetName() == name ) {
+        for (auto& param : m_parameters)
+        {
+            if (param->GetName() == name)
+            {
                 param = p;
                 return;
             }
@@ -77,57 +78,52 @@ namespace slxio
         AddParam(name, p);
     }
 
-    std::shared_ptr<IParameterObjectBase>
-    SimulinkObject::GetParam(const std::string &name)
+    std::shared_ptr<IParameterObjectBase> SimulinkObject::GetParam(const std::string& name)
     {
-        for ( const auto &param : m_parameters ) {
-            if ( param->GetName() == name ) {
+        for (const auto& param : m_parameters)
+        {
+            if (param->GetName() == name)
+            {
                 return param;
             }
         }
         return nullptr;
     }
 
-    std::string
-    SimulinkObject::GetName() const
+    std::string SimulinkObject::GetName() const
     {
         return m_propName;
     }
 
-    void
-    SimulinkObject::SetName(const std::string &name)
+    void SimulinkObject::SetName(const std::string& name)
     {
-        if ( !name.empty() ) {
+        if (!name.empty())
+        {
             m_propName = name;
         }
     }
 
-    std::string
-    SimulinkObject::GetClassName() const
+    std::string SimulinkObject::GetClassName() const
     {
         return m_className;
     }
 
-    void
-    SimulinkObject::SetClassName(const std::string &className)
+    void SimulinkObject::SetClassName(const std::string& className)
     {
         m_className = className;
     }
 
-    std::string
-    SimulinkObject::GetVersion() const
+    std::string SimulinkObject::GetVersion() const
     {
         return m_version;
     }
 
-    void
-    SimulinkObject::SetVersion(const std::string &version)
+    void SimulinkObject::SetVersion(const std::string& version)
     {
         m_version = version;
     }
 
-    std::string
-    SimulinkObject::ToString() const
+    std::string SimulinkObject::ToString() const
     {
         std::ostringstream oss;
 
@@ -138,22 +134,28 @@ namespace slxio
         oss << "  Class: " << m_className << "\n";
 
         oss << "  Objects:\n";
-        for ( const auto &obj : GetOrderedChildren() ) {
-            if ( obj ) {
+        for (const auto& obj : GetOrderedChildren())
+        {
+            if (obj)
+            {
                 oss << "    - " << obj->ToString() << "\n";
             }
         }
 
         oss << "  Arrays:\n";
-        for ( const auto &arr : m_arrays ) {
-            if ( arr ) {
+        for (const auto& arr : m_arrays)
+        {
+            if (arr)
+            {
                 oss << "    - " << arr->ToString() << "\n";
             }
         }
 
         oss << "  Parameters:\n";
-        for ( const auto &param : m_parameters ) {
-            if ( param ) {
+        for (const auto& param : m_parameters)
+        {
+            if (param)
+            {
                 oss << "    - " << param->ToString() << "\n";
             }
         }
@@ -163,11 +165,12 @@ namespace slxio
         return oss.str();
     }
 
-    std::shared_ptr<ISimulinkElement>
-    SimulinkObject::GetArray(const SId &id) const
+    std::shared_ptr<ISimulinkElement> SimulinkObject::GetArray(const SId& id) const
     {
-        for ( const auto &arr : m_arrays ) {
-            if ( arr->GetId() == id ) {
+        for (const auto& arr : m_arrays)
+        {
+            if (arr->GetId() == id)
+            {
                 return arr;
             }
         }
@@ -175,4 +178,4 @@ namespace slxio
     }
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

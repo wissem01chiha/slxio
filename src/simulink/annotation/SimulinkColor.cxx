@@ -31,4 +31,4 @@ namespace slxio
     static const SimulinkColor LIGHTBLUE = {"LIGHTBLUE", "#63b9ff"};
     static const SimulinkColor DARKGREEN = {"DARKGREEN", "#699640"};
 
-};  // namespace slxio
+}; // namespace slxio

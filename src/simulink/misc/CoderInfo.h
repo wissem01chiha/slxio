@@ -22,12 +22,12 @@ namespace slxio
 {
 
     /**
- * @class CoderInfo
- * @brief This class holds information about code generation for a
- * specific variable or signal.
- * @note StorageClass= 'Custom' not supported along with the
- * CustomAttribute
- */
+     * @class CoderInfo
+     * @brief This class holds information about code generation for a
+     * specific variable or signal.
+     * @note StorageClass= 'Custom' not supported along with the
+     * CustomAttribute
+     */
     class CoderInfo final
     {
     public:
@@ -46,4 +46,4 @@ namespace slxio
         bool m_exportedGlobal = false;
     };
 
-};  // namespace slxio
+}; // namespace slxio

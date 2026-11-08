@@ -33,14 +33,14 @@ namespace slxio
 
         explicit SimulinkConfigSetComponent(std::string className = std::string());
 
-        const std::string &GetComponentClassName() const noexcept;
+        const std::string& GetComponentClassName() const noexcept;
         void SetClassName(std::string className);
 
-        void SetParam(const std::string &name, std::string value);
-        bool RemoveParam(const std::string &name);
-        const std::string *FindParam(const std::string &name) const noexcept;
-        std::string *FindParam(const std::string &name) noexcept;
-        const ParameterMap &GetParams() const noexcept;
+        void SetParam(const std::string& name, std::string value);
+        bool RemoveParam(const std::string& name);
+        const std::string* FindParam(const std::string& name) const noexcept;
+        std::string* FindParam(const std::string& name) noexcept;
+        const ParameterMap& GetParams() const noexcept;
 
         std::string ToString() const;
         std::vector<Diagnostic> Check() const;
@@ -51,4 +51,4 @@ namespace slxio
         ParameterMap m_parameters;
     };
 
-}  // namespace slxio
+} // namespace slxio

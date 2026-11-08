@@ -37,4 +37,4 @@ namespace slxio
         bool dropShadow = false;
     };
 
-};  // namespace slxio
+}; // namespace slxio

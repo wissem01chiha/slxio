@@ -66,7 +66,7 @@ namespace slxio
         std::string SolverOrder;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkSolver &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkSolver& destination);
 
-};  // namespace slxio
+}; // namespace slxio

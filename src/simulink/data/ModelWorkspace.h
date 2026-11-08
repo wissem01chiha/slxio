@@ -18,24 +18,24 @@ namespace slxio
     class DataSourceType;
 
     /**
- * @class ModelWorkspace
- * @brief Object to interact with a model workspace
- * https://www.mathworks.com/help/simulink/slref/simulink.modelworkspace.html
- */
+     * @class ModelWorkspace
+     * @brief Object to interact with a model workspace
+     * https://www.mathworks.com/help/simulink/slref/simulink.modelworkspace.html
+     */
     class SLXIO_APIEXPORT ModelWorkspace final
     {
     public:
         ModelWorkspace() = default;
 
         /** Get the value of a variable in the model workspace. */
-        std::shared_ptr<IParameterObjectBase> GetVariable(const std::string &name) const;
+        std::shared_ptr<IParameterObjectBase> GetVariable(const std::string& name) const;
 
         /** Assign a value to a variable in the model workspace.*/
-        HError AssignVariable(const std::string &name,
-                              const std::shared_ptr<IParameterObjectBase> &p);
+        HError AssignVariable(const std::string& name,
+                              const std::shared_ptr<IParameterObjectBase>& p);
 
         /** Clear a variable from the model workspace.*/
-        HError ClearVariable(const std::string &name);
+        HError ClearVariable(const std::string& name);
 
         /** Clear all variables from the model workspace.*/
         HError ClearAll();
@@ -53,15 +53,15 @@ namespace slxio
         UInt16 GetVariableCount() const;
 
         /** Set a logger object for this data object */
-        HError SetLogger(ILogger *logger);
+        HError SetLogger(ILogger* logger);
 
         /** Get the logger sink */
-        const ILogger *GetLogger();
+        const ILogger* GetLogger();
 
         ~ModelWorkspace() = default;
 
     private:
-        ILogger *m_logger = nullptr;
+        ILogger* m_logger = nullptr;
         std::string m_fileName;
         std::string m_matlabCode;
         std::shared_ptr<DataSourceType> m_dataSource = nullptr;
@@ -69,6 +69,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
 #endif /* MODELWORKSPACE_H */

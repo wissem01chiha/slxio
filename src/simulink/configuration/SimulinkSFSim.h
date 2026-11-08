@@ -56,7 +56,7 @@ namespace slxio
         std::string DefaultCustomCodeFunctionArrayLayout;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkSFSim &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkSFSim& destination);
 
-};  // namespace slxio
+}; // namespace slxio

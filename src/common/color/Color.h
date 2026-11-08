@@ -27,12 +27,12 @@ namespace slxio
         Color();
         Color(uint32_t red, uint32_t green, uint32_t blue, uint32_t alpha = 255);
         ~Color() = default;
-        Color(const Color &other) = default;
-        Color &operator=(const Color &other) = default;
-        bool operator==(const Color &other) const;
-        bool operator!=(const Color &other) const;
+        Color(const Color& other) = default;
+        Color& operator=(const Color& other) = default;
+        bool operator==(const Color& other) const;
+        bool operator!=(const Color& other) const;
 
-        static Color fromVector(const std::vector<uint32_t> &vec);
+        static Color fromVector(const std::vector<uint32_t>& vec);
 
         std::vector<uint32_t> toVector() const;
 
@@ -43,4 +43,4 @@ namespace slxio
         uint32_t a;
     };
 
-};  // namespace slxio
+}; // namespace slxio

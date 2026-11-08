@@ -24,16 +24,16 @@ namespace slxio
     class SimulinkAnnotation;
 
     /**
- * A collection should own annotations
- * and expose normal model operations
- */
+     * A collection should own annotations
+     * and expose normal model operations
+     */
     class AnnotationCollection final
     {
     public:
         int Add(std::shared_ptr<SimulinkAnnotation> annotation);
         int Remove(/* stable annotation identifier */);
 
-        const std::vector<std::shared_ptr<SimulinkAnnotation>> &GetAll() const;
+        const std::vector<std::shared_ptr<SimulinkAnnotation>>& GetAll() const;
     };
 
-};  // namespace slxio
+}; // namespace slxio

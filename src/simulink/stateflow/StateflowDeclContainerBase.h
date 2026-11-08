@@ -30,19 +30,20 @@ private
       {
           super(orig);
 
-          for ( StateflowData data : orig.dates ) {
+          for (StateflowData data : orig.dates)
+          {
               addData(data.deepClone());
           }
 
-          for ( StateflowEvent event : orig.events ) {
+          for (StateflowEvent event : orig.events)
+          {
               addEvent(event.deepClone());
           }
       }
 
       /** Add Stateflow data. */
   public
-      void
-      addData(StateflowData data)
+      void addData(StateflowData data)
       {
           dates.AddElement(data);
           data.setParent(this);
@@ -50,8 +51,7 @@ private
 
       /** Add Stateflow event. */
   public
-      void
-      addEvent(StateflowEvent event)
+      void addEvent(StateflowEvent event)
       {
           events.AddElement(event);
           event.setParent(this);
@@ -59,23 +59,20 @@ private
 
       /** Get Stateflow data objects. */
   public
-      UnmodifiableSet<StateflowData>
-      getData()
+      UnmodifiableSet<StateflowData> getData()
       {
           return CollectionUtils.asUnmodifiable(dates);
       }
 
       /** Get Stateflow events objects. */
   public
-      UnmodifiableSet<StateflowEvent>
-      getEvents()
+      UnmodifiableSet<StateflowEvent> getEvents()
       {
           return CollectionUtils.asUnmodifiable(events);
       }
 
       /** Remove Stateflow data object. */
-      /* package */ void
-      removeData(StateflowData data)
+      /* package */ void removeData(StateflowData data)
       {
           CCSMPre.isTrue(data.getParent() == this,
                          "Data object must belong to container to be removed.");
@@ -83,8 +80,7 @@ private
           data.setParent(null);
       }
 
-      void
-      removeEvent(StateflowEvent event)
+      void removeEvent(StateflowEvent event)
       {
           CCSMPre.isTrue(event.getParent() == this,
                          "Event must belong to container to be removed.");

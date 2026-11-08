@@ -15,52 +15,51 @@
  */
 
 #include "Diagnostic.h"
-#include "DiagnosticLocation.h"
 
 namespace slxio
 {
-    DiagnosticSeverity
-    Diagnostic::GetSeverity() const
+    DiagnosticSeverity Diagnostic::GetSeverity() const
     {
-        return severity;
+        return m_severity;
     }
-    void
-    Diagnostic::SetSeverity(DiagnosticSeverity s)
+    void Diagnostic::SetSeverity(DiagnosticSeverity s)
     {
-        severity = s;
+        m_severity = s;
     }
-    void
-    Diagnostic::SetMessage(const std::string &msg)
+    void Diagnostic::SetMessage(const std::string& msg)
     {
-        message = msg;
+        m_message = msg;
     }
-    std::string
-    Diagnostic::GetDiagnosticMessage() const
+    std::string Diagnostic::GetDiagnosticMessage() const
     {
-        return message;
+        return m_message;
     }
-    void
-    Diagnostic::Print(std::ostream &os) const
+    void Diagnostic::SetErrorCode(std::error_code error)
     {
-        switch ( severity ) {
-            case DiagnosticSeverity::Note:
-                os << "Note";
-                break;
-            case DiagnosticSeverity::Warning:
-                os << "Warning";
-                break;
-            case DiagnosticSeverity::Error:
-                os << "Error";
-                break;
-            case DiagnosticSeverity::Remark:
-                os << "Remark";
-                break;
+        m_errorCode = error;
+    }
+    std::optional<std::error_code> Diagnostic::GetErrorCode() const
+    {
+        return m_errorCode;
+    }
+    void Diagnostic::Print(std::ostream& os) const
+    {
+        switch (m_severity)
+        {
+        case DiagnosticSeverity::Note:
+            os << "Note";
+            break;
+        case DiagnosticSeverity::Warning:
+            os << "Warning";
+            break;
+        case DiagnosticSeverity::Error:
+            os << "Error";
+            break;
+        case DiagnosticSeverity::Remark:
+            os << "Remark";
+            break;
         }
         os << " " << GetDiagnosticMessage() << "\n";
     }
-    DiagnosticLocation
-    Diagnostic::GetLocation() const
-    {
-        return loc ? *loc : DiagnosticLocation();
-    }
-}  // namespace slxio
+
+} // namespace slxio

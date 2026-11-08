@@ -13,9 +13,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IBlockPropertiesInformation
- * @brief
- */
+     * @class IBlockPropertiesInformation
+     * @brief
+     */
     class SLXIO_APIEXPORT IBlockPropertiesInformation
     {
     public:
@@ -24,6 +24,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // IBLOCKPROPERTIESINFORMATION_H
+#endif // IBLOCKPROPERTIESINFORMATION_H

@@ -14,9 +14,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class IDiagnoctics
- * @brief
- */
+     * @class IDiagnoctics
+     * @brief
+     */
     class SLXIO_APIEXPORT IDiagnoctics
     {
     public:
@@ -36,6 +36,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // IDIAGNOCTICS_H
+#endif // IDIAGNOCTICS_H

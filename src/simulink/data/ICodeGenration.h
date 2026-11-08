@@ -10,9 +10,9 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @class ICodeGenration
- * @brief
- */
+     * @class ICodeGenration
+     * @brief
+     */
     class SLXIO_APIEXPORT ICodeGenration
     {
     public:
@@ -21,4 +21,4 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio

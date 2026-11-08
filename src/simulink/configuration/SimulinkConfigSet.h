@@ -36,19 +36,19 @@ namespace slxio
 
         explicit SimulinkConfigSet(std::string name = std::string());
 
-        const std::string &GetName() const noexcept;
+        const std::string& GetName() const noexcept;
 
-        void SetParam(const std::string &name, std::string value);
-        bool RemoveParam(const std::string &name);
-        const std::string *FindParam(const std::string &name) const noexcept;
-        const ParameterMap &GetParams() const noexcept;
+        void SetParam(const std::string& name, std::string value);
+        bool RemoveParam(const std::string& name);
+        const std::string* FindParam(const std::string& name) const noexcept;
+        const ParameterMap& GetParams() const noexcept;
 
-        SimulinkConfigSetComponent &GetOrCreateComponent(
-            const std::string &name, const std::string &className = std::string());
-        SimulinkConfigSetComponent *FindComponent(const std::string &name) noexcept;
-        const SimulinkConfigSetComponent *FindComponent(const std::string &name) const noexcept;
-        bool RemoveComponent(const std::string &name);
-        const ComponentMap &GetComponents() const noexcept;
+        SimulinkConfigSetComponent&
+        GetOrCreateComponent(const std::string& name, const std::string& className = std::string());
+        SimulinkConfigSetComponent* FindComponent(const std::string& name) noexcept;
+        const SimulinkConfigSetComponent* FindComponent(const std::string& name) const noexcept;
+        bool RemoveComponent(const std::string& name);
+        const ComponentMap& GetComponents() const noexcept;
 
         std::string ToString() const;
 
@@ -62,4 +62,4 @@ namespace slxio
         ComponentMap m_components;
     };
 
-}  // namespace slxio
+} // namespace slxio

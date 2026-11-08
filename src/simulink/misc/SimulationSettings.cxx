@@ -23,22 +23,19 @@ namespace slxio
     {
     }
 
-    char *
-    SimulationSettings::GetSolverName()
+    char* SimulationSettings::GetSolverName()
     {
         return SolverName;
     }
 
-    char *
-    SimulationSettings::GetSolverType()
+    char* SimulationSettings::GetSolverType()
     {
         return SolverType;
     }
 
-    double
-    SimulationSettings::GetFixedStepSize()
+    double SimulationSettings::GetFixedStepSize()
     {
         return FixedStepSize;
     }
 
-};  // namespace slxio
+}; // namespace slxio

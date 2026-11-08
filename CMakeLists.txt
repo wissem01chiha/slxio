@@ -30,15 +30,18 @@ set(PROJECT_DESCRIPTION "SIMULINK SLX File I/O Library")
 set(PROJECT_HOMEPAGE_URL "https://github.com/wissem01chiha/slxio")
 set(CMAKE_PROJECT_SPDX_LICENSE "Apache-2.0")
 
+include(CTest)
+
 include(Macro)
+include(LTO)
 include(Options)
 include(CompilerFlags)
 include(CompilerPlatformFlags)
 include(CompilerWarningFlags)
-include(LTO)
-include(CTest)
 
-find_package(OpenMP)
+if(SLXIO_ENABLE_OPENMP)
+  find_package(OpenMP REQUIRED)
+endif()
 
 enable_testing()
 
@@ -54,11 +57,7 @@ if(MINGW)
   include(MinGW)
 endif()
 
-if(SLXIO_BUILD_SUMMARY)
-  include(Summary)
-endif()
-
-add_subdirectory(extern)
+add_subdirectory(vendor)
 add_subdirectory(src)
 
 if(SLXIO_BUILD_PYTHON)
@@ -67,6 +66,10 @@ endif()
 
 if(SLXIO_BUILD_INTEGRATION_TESTS)
   add_subdirectory(test)
+endif()
+
+if(SLXIO_BUILD_REGRESSION_TESTS)
+  add_subdirectory(regress)
 endif()
 
 if(SLXIO_BUILD_EXAMPLES)

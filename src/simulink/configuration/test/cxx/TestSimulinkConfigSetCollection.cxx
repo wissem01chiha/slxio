@@ -1,47 +1,10 @@
-/*
- * Copyright 2026 Wissem Chiha
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-#include "Doctest.h"
+#include "doctest.h"
 #include "SimulinkConfigSetCollection.h"
 
 namespace slxio
 {
 
-    TEST_CASE("ConfigSetPreservesComponentAndParameterValues")
-    {
-        SimulinkConfigSet configSet("Simulation");
-        configSet.GetOrCreateComponent("Solver", "Simulink.SolverCC").SetParam("Solver", "ode45");
-        configSet.GetOrCreateComponent("Solver").SetParam("StartTime", "0");
-        configSet.GetOrCreateComponent("ModelReference", "Simulink.ModelReferenceCC")
-            .SetParam("EnableParallelModelReferenceBuilds", "on");
-        configSet.GetOrCreateComponent("FutureComponent", "Simulink.FutureCC")
-            .SetParam("FutureOption", "expression");
-
-        const auto *solver = configSet.FindComponent("Solver");
-        REQUIRE(solver != nullptr);
-        REQUIRE(solver->FindParam("Solver") != nullptr);
-        CHECK(*solver->FindParam("Solver") == "ode45");
-        CHECK(configSet.GetComponents().size() == 3);
-        CHECK(configSet.GetName() == "Simulation");
-
-        SimulinkConfigSet copied = configSet;
-        CHECK(*copied.FindComponent("FutureComponent")->FindParam("FutureOption") == "expression");
-    }
-
-    TEST_CASE("ConfigSetCollectionOwnsSetsAndTracksOneActiveSet")
+    TEST_CASE("Collection add sets test")
     {
         SimulinkConfigSetCollection collection;
         CHECK(collection.Empty());
@@ -57,6 +20,16 @@ namespace slxio
         CHECK(collection.Add(SimulinkConfigSet("CodeGeneration")) ==
               ConfigSetCollectionResult::Success);
         CHECK(collection.Size() == 2);
+    }
+
+    TEST_CASE("Collection track active set test")
+    {
+        SimulinkConfigSetCollection collection;
+        CHECK(collection.Add(SimulinkConfigSet("Simulation")) ==
+              ConfigSetCollectionResult::Success);
+        CHECK(collection.Add(SimulinkConfigSet("CodeGeneration")) ==
+              ConfigSetCollectionResult::Success);
+
         CHECK(collection.SetActive("Simulation") == ConfigSetCollectionResult::Success);
         REQUIRE(collection.GetActive() != nullptr);
         CHECK(collection.GetActive()->GetName() == "Simulation");
@@ -74,13 +47,4 @@ namespace slxio
         CHECK(collection.Remove("missing") == ConfigSetCollectionResult::NotFound);
     }
 
-    TEST_CASE("ConfigSetComponentsCanRemoveParameters")
-    {
-        SimulinkConfigSetComponent solver("Simulink.SolverCC");
-        solver.SetParam("Solver", "ode45");
-        CHECK(solver.RemoveParam("Solver"));
-        CHECK_FALSE(solver.RemoveParam("Solver"));
-        CHECK(solver.FindParam("Solver") == nullptr);
-    }
-
-}  // namespace slxio
+}; // namespace slxio

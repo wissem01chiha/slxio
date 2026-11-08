@@ -14,21 +14,19 @@ public:
     StateflowData()
     {
     }
-    StateflowData(StateflowData &stateflowData)
+    StateflowData(StateflowData& stateflowData)
     {
     }
 
     /** Remove this data object from the model. */
-    void
-    RemoveElement()
+    void RemoveElement()
     {
         CCSMPre.isFalse(getParent() == null, "Data object has no parent to be removed from.");
         getParent().removeData(this);
     }
 
     /** Deep clone this data object. */
-    StateflowData
-    deepClone()
+    StateflowData deepClone()
     {
         return new StateflowData(this);
     }

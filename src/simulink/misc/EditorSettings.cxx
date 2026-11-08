@@ -19,130 +19,109 @@
 namespace slxio
 {
 
-    bool
-    EditorSettings::GetShowPortDataTypes()
+    bool EditorSettings::GetShowPortDataTypes()
     {
         return m_showPortDataTypes;
     }
 
-    bool
-    EditorSettings::GetSampleTimeColors()
+    bool EditorSettings::GetSampleTimeColors()
     {
         return m_sampleTimeColors;
     }
 
-    bool
-    EditorSettings::GetShowLineDimensions()
+    bool EditorSettings::GetShowLineDimensions()
     {
         return m_showLineDimensions;
     }
 
-    bool
-    EditorSettings::GetShowPortUnits()
+    bool EditorSettings::GetShowPortUnits()
     {
         return m_showPortUnits;
     }
 
-    bool
-    EditorSettings::GetShowLoopsOnError()
+    bool EditorSettings::GetShowLoopsOnError()
     {
         return m_showLoopsOnError;
     }
 
-    bool
-    EditorSettings::GetShowStorageClass()
+    bool EditorSettings::GetShowStorageClass()
     {
         return m_showStorageClass;
     }
 
-    bool
-    EditorSettings::GetShowTestPointIcons()
+    bool EditorSettings::GetShowTestPointIcons()
     {
         return m_showTestPointIcons;
     }
 
-    bool
-    EditorSettings::GetShowSignalResolutionIcons()
+    bool EditorSettings::GetShowSignalResolutionIcons()
     {
         return m_showSignalResolutionIcons;
     }
 
-    bool
-    EditorSettings::GetShowViewerIcons()
+    bool EditorSettings::GetShowViewerIcons()
     {
         return m_showViewerIcons;
     }
 
-    bool
-    EditorSettings::GetShowVisualizeInsertedRTB()
+    bool EditorSettings::GetShowVisualizeInsertedRTB()
     {
         return m_showVisualizeInsertedRTB;
     }
 
-    bool
-    EditorSettings::GetShowMarkup()
+    bool EditorSettings::GetShowMarkup()
     {
         return m_showMarkup;
     }
 
-    bool
-    EditorSettings::GetBlockNameDataTip()
+    bool EditorSettings::GetBlockNameDataTip()
     {
         return m_blockNameDataTip;
     }
 
-    bool
-    EditorSettings::GetBlockParametersDataTip()
+    bool EditorSettings::GetBlockParametersDataTip()
     {
         return m_blockParametersDataTip;
     }
 
-    bool
-    EditorSettings::GetBlockDescriptionStringDataTip()
+    bool EditorSettings::GetBlockDescriptionStringDataTip()
     {
         return m_blockDescriptionStringDataTip;
     }
 
-    bool
-    EditorSettings::GetBlockVariantConditionDataTip()
+    bool EditorSettings::GetBlockVariantConditionDataTip()
     {
         return m_blockVariantConditionDataTip;
     }
 
-    bool
-    EditorSettings::GetToolBar()
+    bool EditorSettings::GetToolBar()
     {
         return m_toolBar;
     }
 
-    bool
-    EditorSettings::GetStatusBar()
+    bool EditorSettings::GetStatusBar()
     {
         return m_statusBar;
     }
 
-    bool
-    EditorSettings::GetBrowserShowLibraryLinks()
+    bool EditorSettings::GetBrowserShowLibraryLinks()
     {
         return m_browserShowLibraryLinks;
     }
 
-    bool
-    EditorSettings::GetFunctionConnectors()
+    bool EditorSettings::GetFunctionConnectors()
     {
         return m_functionConnectors;
     }
 
-    bool
-    EditorSettings::GetBrowserLookUnderMasks()
+    bool EditorSettings::GetBrowserLookUnderMasks()
     {
         return m_browserLookUnderMasks;
     }
 
-    bool
-    EditorSettings::GetMultiThreadCoSim()
+    bool EditorSettings::GetMultiThreadCoSim()
     {
         return m_multiThreadCoSim;
     }
 
-};  // namespace slxio
+}; // namespace slxio

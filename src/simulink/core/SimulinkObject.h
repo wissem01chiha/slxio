@@ -16,40 +16,40 @@ namespace slxio
     SLXIO_ABI_NAMESPACE_BEGIN
 
     /**
- * @brief Class for Simulink objects, which are a construct for
- * structured storage of meta-data in the model.
- */
+     * @brief Class for Simulink objects, which are a construct for
+     * structured storage of meta-data in the model.
+     */
     class SLXIO_APIEXPORT SimulinkObject final : public ISimulinkElement
     {
     public:
         SimulinkObject() = default;
         ~SimulinkObject() override;
 
-        ISimulinkElement *New() const override;
+        ISimulinkElement* New() const override;
         // objects can only be inserted into other objects, so the parent must be an
         // object
-        HError AcceptInsert(ISimulinkElement &parent) override;
-        HError Insert(const std::shared_ptr<ISimulinkElement> &element) override;
+        HError AcceptInsert(ISimulinkElement& parent) override;
+        HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
         SId GetId() const override;
-        void SetId(const SId &id) override;
+        void SetId(const SId& id) override;
 
-        void AddParam(const std::string &name,
-                      const std::shared_ptr<IParameterObjectBase> &p) override;
-        void SetParam(const std::string &name,
-                      const std::shared_ptr<IParameterObjectBase> &p) override;
-        std::shared_ptr<IParameterObjectBase> GetParam(const std::string &name) override;
+        void AddParam(const std::string& name,
+                      const std::shared_ptr<IParameterObjectBase>& p) override;
+        void SetParam(const std::string& name,
+                      const std::shared_ptr<IParameterObjectBase>& p) override;
+        std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
 
         std::string GetName() const;
-        void SetName(const std::string &name);
+        void SetName(const std::string& name);
         std::string GetClassName() const;
-        void SetClassName(const std::string &className);
+        void SetClassName(const std::string& className);
         std::string GetVersion() const;
-        void SetVersion(const std::string &version);
+        void SetVersion(const std::string& version);
 
         std::string ToString() const override;
 
         /** Return an array with the current object if not found return nullptr ! */
-        std::shared_ptr<ISimulinkElement> GetArray(const SId &id) const;
+        std::shared_ptr<ISimulinkElement> GetArray(const SId& id) const;
 
     private:
         SId m_id;
@@ -61,6 +61,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // SIMULINKOBJECT_H
+#endif // SIMULINKOBJECT_H

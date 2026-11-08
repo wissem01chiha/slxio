@@ -24,61 +24,54 @@ namespace slxio
     {
     }
 
-    const std::string &
-    SimulinkConfigSetComponent::GetComponentClassName() const noexcept
+    const std::string& SimulinkConfigSetComponent::GetComponentClassName() const noexcept
     {
         return m_className;
     }
 
-    void
-    SimulinkConfigSetComponent::SetClassName(std::string className)
+    void SimulinkConfigSetComponent::SetClassName(std::string className)
     {
         m_className = std::move(className);
     }
 
-    void
-    SimulinkConfigSetComponent::SetParam(const std::string &name, std::string value)
+    void SimulinkConfigSetComponent::SetParam(const std::string& name, std::string value)
     {
         m_parameters[name] = std::move(value);
     }
 
-    bool
-    SimulinkConfigSetComponent::RemoveParam(const std::string &name)
+    bool SimulinkConfigSetComponent::RemoveParam(const std::string& name)
     {
         return m_parameters.erase(name) != 0;
     }
 
-    const std::string *
-    SimulinkConfigSetComponent::FindParam(const std::string &name) const noexcept
+    const std::string* SimulinkConfigSetComponent::FindParam(const std::string& name) const noexcept
     {
         const auto parameter = m_parameters.find(name);
         return parameter == m_parameters.end() ? nullptr : &parameter->second;
     }
 
-    std::string *
-    SimulinkConfigSetComponent::FindParam(const std::string &name) noexcept
+    std::string* SimulinkConfigSetComponent::FindParam(const std::string& name) noexcept
     {
         const auto parameter = m_parameters.find(name);
         return parameter == m_parameters.end() ? nullptr : &parameter->second;
     }
 
-    const SimulinkConfigSetComponent::ParameterMap &
+    const SimulinkConfigSetComponent::ParameterMap&
     SimulinkConfigSetComponent::GetParams() const noexcept
     {
         return m_parameters;
     }
 
-    std::string
-    SimulinkConfigSetComponent::ToString() const
+    std::string SimulinkConfigSetComponent::ToString() const
     {
         return std::string();
     }
 
-    std::vector<Diagnostic>
-    SimulinkConfigSetComponent::Check() const
+    std::vector<Diagnostic> SimulinkConfigSetComponent::Check() const
     {
         std::vector<Diagnostic> diagnostics;
-        if ( m_className.empty() ) {
+        if (m_className.empty())
+        {
             Diagnostic diag;
             diag.SetMessage("SimulinkConfigSetCompoant : classname is empty");
             diag.SetSeverity(DiagnosticSeverity::Error);
@@ -87,4 +80,4 @@ namespace slxio
         return diagnostics;
     }
 
-};  // namespace slxio
+}; // namespace slxio

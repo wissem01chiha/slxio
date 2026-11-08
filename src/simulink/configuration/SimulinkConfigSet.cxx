@@ -22,98 +22,93 @@ namespace slxio
     {
     }
 
-    const std::string &
-    SimulinkConfigSet::GetName() const noexcept
+    const std::string& SimulinkConfigSet::GetName() const noexcept
     {
         return m_name;
     }
 
-    void
-    SimulinkConfigSet::SetName(std::string name)
+    void SimulinkConfigSet::SetName(std::string name)
     {
         m_name = std::move(name);
     }
 
-    void
-    SimulinkConfigSet::SetParam(const std::string &name, std::string value)
+    void SimulinkConfigSet::SetParam(const std::string& name, std::string value)
     {
         m_parameters[name] = std::move(value);
     }
 
-    bool
-    SimulinkConfigSet::RemoveParam(const std::string &name)
+    bool SimulinkConfigSet::RemoveParam(const std::string& name)
     {
         return m_parameters.erase(name) != 0;
     }
 
-    const std::string *
-    SimulinkConfigSet::FindParam(const std::string &name) const noexcept
+    const std::string* SimulinkConfigSet::FindParam(const std::string& name) const noexcept
     {
         const auto parameter = m_parameters.find(name);
         return parameter == m_parameters.end() ? nullptr : &parameter->second;
     }
 
-    const SimulinkConfigSet::ParameterMap &
-    SimulinkConfigSet::GetParams() const noexcept
+    const SimulinkConfigSet::ParameterMap& SimulinkConfigSet::GetParams() const noexcept
     {
         return m_parameters;
     }
 
-    SimulinkConfigSetComponent &
-    SimulinkConfigSet::GetOrCreateComponent(const std::string &name, const std::string &className)
+    SimulinkConfigSetComponent&
+    SimulinkConfigSet::GetOrCreateComponent(const std::string& name, const std::string& className)
     {
-        auto &component = m_components[name];
-        if ( !className.empty() ) {
+        auto& component = m_components[name];
+        if (!className.empty())
+        {
             component.SetClassName(className);
         }
         return component;
     }
 
-    SimulinkConfigSetComponent *
-    SimulinkConfigSet::FindComponent(const std::string &name) noexcept
+    SimulinkConfigSetComponent* SimulinkConfigSet::FindComponent(const std::string& name) noexcept
     {
         const auto component = m_components.find(name);
         return component == m_components.end() ? nullptr : &component->second;
     }
 
-    const SimulinkConfigSetComponent *
-    SimulinkConfigSet::FindComponent(const std::string &name) const noexcept
+    const SimulinkConfigSetComponent*
+    SimulinkConfigSet::FindComponent(const std::string& name) const noexcept
     {
         const auto component = m_components.find(name);
         return component == m_components.end() ? nullptr : &component->second;
     }
 
-    bool
-    SimulinkConfigSet::RemoveComponent(const std::string &name)
+    bool SimulinkConfigSet::RemoveComponent(const std::string& name)
     {
         return m_components.erase(name) != 0;
     }
 
-    const SimulinkConfigSet::ComponentMap &
-    SimulinkConfigSet::GetComponents() const noexcept
+    const SimulinkConfigSet::ComponentMap& SimulinkConfigSet::GetComponents() const noexcept
     {
         return m_components;
     }
 
-    std::string
-    SimulinkConfigSet::ToString() const
+    std::string SimulinkConfigSet::ToString() const
     {
         std::ostringstream stream;
         stream << "SimulinkConfigSet: " << m_name << '\n';
-        for ( const auto &parameter : m_parameters ) {
+        for (const auto& parameter : m_parameters)
+        {
             stream << "  " << parameter.first << " = " << parameter.second << '\n';
         }
-        for ( const auto &component : m_components ) {
+        for (const auto& component : m_components)
+        {
             stream << "  [" << component.first;
-            if ( !component.second.GetComponentClassName().empty() ) {
+            if (!component.second.GetComponentClassName().empty())
+            {
                 stream << " (" << component.second.GetComponentClassName() << ')';
             }
             stream << "]\n";
-            for ( const auto &parameter : component.second.GetParams() ) {
+            for (const auto& parameter : component.second.GetParams())
+            {
                 stream << "    " << parameter.first << " = " << parameter.second << '\n';
             }
         }
         return stream.str();
     }
 
-};  // namespace slxio
+}; // namespace slxio

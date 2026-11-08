@@ -27,8 +27,8 @@ namespace slxio
         SimulationSettings() = default;
         ~SimulationSettings();
 
-        char *GetSolverName();
-        char *GetSolverType();
+        char* GetSolverName();
+        char* GetSolverType();
         double GetFixedStepSize();
 
     private:
@@ -72,4 +72,4 @@ namespace slxio
         char TryForcingSFcnDF[8];
     };
 
-};  // namespace slxio
+}; // namespace slxio

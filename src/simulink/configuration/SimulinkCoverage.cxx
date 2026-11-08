@@ -15,14 +15,15 @@
  */
 
 #include "SimulinkCoverage.h"
+#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
 
-    std::vector<Diagnostic>
-    FromComponent(const SimulinkConfigSetComponent &source, SimulinkCoverage &destination)
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkCoverage& destination)
     {
         return std::vector<Diagnostic>();
     }
 
-};  // namespace slxio
+}; // namespace slxio

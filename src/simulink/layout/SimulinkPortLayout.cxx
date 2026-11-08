@@ -25,7 +25,7 @@ namespace slxio
     {
         Point defaultPosition;
         Color defaultColor;
-    }  // namespace
+    } // namespace
 
     PortLayoutData::PortLayoutData() : position(defaultPosition), color(defaultColor)
     {
@@ -35,22 +35,19 @@ namespace slxio
     {
     }
 
-    Point
-    PortLayoutData::GetPosition()
+    Point PortLayoutData::GetPosition()
     {
         return position;
     }
 
-    double
-    PortLayoutData::GetDirection()
+    double PortLayoutData::GetDirection()
     {
         return 0.0;
     }
 
-    Color
-    PortLayoutData::GetColor()
+    Color PortLayoutData::GetColor()
     {
         return color;
     }
 
-};  // namespace slxio
+}; // namespace slxio

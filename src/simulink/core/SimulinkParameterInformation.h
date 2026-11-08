@@ -15,23 +15,23 @@ namespace slxio
     class CoderInfo;
 
     /**
- * @class SimulinkParameterInformation
- * @brief Metadata describing a Simulink parameter.
- */
+     * @class SimulinkParameterInformation
+     * @brief Metadata describing a Simulink parameter.
+     */
     class SLXIO_APIEXPORT SimulinkParameterInformation
     {
     public:
         SimulinkParameterInformation();
         ~SimulinkParameterInformation();
 
-        const std::string &GetUnit() const;
-        void SetUnit(const std::string &unit);
+        const std::string& GetUnit() const;
+        void SetUnit(const std::string& unit);
 
-        const std::string &GetDescription() const;
-        void SetDescription(const std::string &desc);
+        const std::string& GetDescription() const;
+        void SetDescription(const std::string& desc);
 
-        const std::string &GetComplexity() const;
-        void SetComplexity(const std::string &comp);
+        const std::string& GetComplexity() const;
+        void SetComplexity(const std::string& comp);
 
         Float32 GetMin() const;
         void SetMin(Float32 min);
@@ -39,10 +39,10 @@ namespace slxio
         Float32 GetMax() const;
         void SetMax(Float32 max);
 
-        const std::vector<UInt16> &GetDimensions() const;
-        void SetDimensions(const std::vector<UInt16> &dims);
+        const std::vector<UInt16>& GetDimensions() const;
+        void SetDimensions(const std::vector<UInt16>& dims);
 
-        void SetCoderInfo(const std::shared_ptr<CoderInfo> &coder);
+        void SetCoderInfo(const std::shared_ptr<CoderInfo>& coder);
         std::shared_ptr<CoderInfo> GetCoderInfo() const;
 
     private:
@@ -56,6 +56,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-}  // namespace slxio
+} // namespace slxio
 
-#endif  // SIMULINKPARAMETERINFORMATION_H
+#endif // SIMULINKPARAMETERINFORMATION_H

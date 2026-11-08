@@ -43,7 +43,7 @@ namespace slxio
         std::string SupportModelReferenceSimTargetCustomCode;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent &source,
-                                          SimulinkModelReference &destination);
+    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
+                                          SimulinkModelReference& destination);
 
-};  // namespace slxio
+}; // namespace slxio

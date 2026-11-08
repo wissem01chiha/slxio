@@ -18,27 +18,27 @@ namespace slxio
     class StateflowTransition;
 
     /**
- * @brief Base class for Stateflow nodes (elements that can be
- * connected by transitions).
- */
+     * @brief Base class for Stateflow nodes (elements that can be
+     * connected by transitions).
+     */
     class SLXIO_APIEXPORT StateflowNodeBase : public StateflowElementBase
     {
     public:
         virtual ~StateflowNodeBase() = default;
 
-        void addInTransition(const std::shared_ptr<StateflowTransition> &transition);
-        void addOutTransition(const std::shared_ptr<StateflowTransition> &transition);
+        void addInTransition(const std::shared_ptr<StateflowTransition>& transition);
+        void addOutTransition(const std::shared_ptr<StateflowTransition>& transition);
 
-        const std::vector<std::shared_ptr<StateflowTransition>> &getInTransitions() const;
-        const std::vector<std::shared_ptr<StateflowTransition>> &getOutTransitions() const;
+        const std::vector<std::shared_ptr<StateflowTransition>>& getInTransitions() const;
+        const std::vector<std::shared_ptr<StateflowTransition>>& getOutTransitions() const;
 
         void RemoveElement();
-        void removeInTransition(const std::shared_ptr<StateflowTransition> &transition);
-        void removeOutTransition(const std::shared_ptr<StateflowTransition> &transition);
+        void removeInTransition(const std::shared_ptr<StateflowTransition>& transition);
+        void removeOutTransition(const std::shared_ptr<StateflowTransition>& transition);
 
     protected:
         StateflowNodeBase() = default;
-        StateflowNodeBase(const StateflowNodeBase &origNode) = default;
+        StateflowNodeBase(const StateflowNodeBase& origNode) = default;
 
     private:
         std::vector<std::shared_ptr<StateflowTransition>> inTransitions;
@@ -46,6 +46,6 @@ namespace slxio
     };
 
     SLXIO_ABI_NAMESPACE_END
-};  // namespace slxio
+}; // namespace slxio
 
-#endif  // STATEFLOWNODEBASE_H
+#endif // STATEFLOWNODEBASE_H

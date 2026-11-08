@@ -21,18 +21,17 @@
 namespace slxio
 {
 
-/* Define casting macro */
+/* Casting macro */
 #define STATIC_CAST(T, V) static_cast<T>(V)
 
 /* Define type compare macro */
 #define ASSERT_TYPE_EQUAL(T1, T2) static_assert(std::is_same_v<T1, T2>)
 
-/* Cross platform path separator, for legacy usage,
-recommended to relay on cwalk  api */
+/* Cross platform path separator*/
 #if defined(_WIN32)
 #define PATH_SEP '\\'
 #else
 #define PATH_SEP '/'
 #endif
 
-};  // namespace slxio
+}; // namespace slxio

@@ -89,4 +89,4 @@ namespace slxio
         bool m_multiThreadCoSim;
     };
 
-};  // namespace slxio
+}; // namespace slxio
