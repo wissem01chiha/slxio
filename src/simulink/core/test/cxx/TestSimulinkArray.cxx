@@ -1,4 +1,4 @@
-#include "Doctest.h"
+#include "doctest.h"
 #include "SimulinkArray.h"
 #include "SimulinkECH.h"
 #include "SimulinkObject.h"

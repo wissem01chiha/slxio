@@ -1,6 +1,6 @@
 #include "Directory.h"
 #include "DirectoryService.h"
-#include "Doctest.h"
+#include "doctest.h"
 #include "ErrorCode.h"
 #include "HErrorHelper.h"
 

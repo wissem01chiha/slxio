@@ -1,5 +1,5 @@
 #include "DirectoryManager.h"
-#include "Doctest.h"
+#include "doctest.h"
 
 namespace slxio
 {

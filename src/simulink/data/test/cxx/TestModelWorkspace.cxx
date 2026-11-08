@@ -1,5 +1,5 @@
 #include "DataECH.h"
-#include "Doctest.h"
+#include "doctest.h"
 #include "Logger.h"
 #include "ModelWorkspace.h"
 

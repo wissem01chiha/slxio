@@ -1,4 +1,4 @@
-#include "Doctest.h"
+#include "doctest.h"
 #include "SimulinkPortTypeParser.h"
 
 namespace slxio

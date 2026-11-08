@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-#include "Doctest.h"
+#include "doctest.h"
 #include "SimulinkAnnotation.h"

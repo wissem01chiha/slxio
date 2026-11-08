@@ -1,5 +1,5 @@
 #include "DataSourceType.h"
-#include "Doctest.h"
+#include "doctest.h"
 
 using namespace slxio;
 SLXIO_ABI_NAMESPACE_BEGIN

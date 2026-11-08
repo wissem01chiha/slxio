@@ -1,4 +1,4 @@
-#include "Doctest.h"
+#include "doctest.h"
 #include "SimulinkConfigSetComponentSlxReader.h"
 #include "SimulinkConfigSetComponent.h"
 #include "SimulinkReaderResult.h"
