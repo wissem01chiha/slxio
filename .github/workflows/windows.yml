@@ -3,8 +3,6 @@ name: Windows
 on:
   push:
   pull_request:
-  workflow_call:
-  workflow_dispatch:
 
 defaults:
   run:
@@ -19,44 +17,44 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - compiler: msvc
+          - name: Windows MSVC Win32 Debug
+            compiler: msvc
             cxx-compiler: cl
             platform: Win32
             configuration: Debug
             os: windows-latest
             python-version: 3.12
             python-arch: x86
-            name: Windows MSVC Win32 Debug
             cmake-args: -A Win32 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
 
-          - compiler: msvc
+          - name: Windows MSVC x64 Release
+            compiler: msvc
             cxx-compiler: cl
             platform: x64
             configuration: Release
             os: windows-latest
             python-version: 3.12
             python-arch: x64
-            name: Windows MSVC x64 Release
             cmake-args: -A x64 -G "Visual Studio 17 2022" -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release
 
-          - compiler: clang
+          - name: Windows Clang Win32 Debug
+            compiler: clang
             cxx-compiler: clang++
             platform: Win32
             configuration: Debug
             os: windows-latest
             python-version: 3.12
             python-arch: x86
-            name: Windows Clang Win32 Debug
             cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
 
-          - compiler: clang
+          - name: Windows Clang x64 Release
+            compiler: clang
             cxx-compiler: clang++
             platform: x64
             configuration: Release
             os: windows-latest
             python-version: 3.12
             python-arch: x64
-            name: Windows Clang x64 Release
             cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release
 
 
@@ -78,7 +76,8 @@ jobs:
           run: >
             cmake -S . -B build
             ${{ matrix.cmake-args }}
-            -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }}
+            -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} \
+            -DSLXIO_BUILD_TESTS=ON
           env:
             CC: ${{ matrix.compiler }}
             CXX: ${{ matrix.cxx-compiler }}

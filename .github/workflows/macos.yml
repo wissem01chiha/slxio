@@ -3,8 +3,6 @@ name: MacOS
 on:
   push:
   pull_request:
-  workflow_call:
-  workflow_dispatch:
   
 jobs:
   cmake:
@@ -37,7 +35,7 @@ jobs:
         run: brew install ${{ matrix.packages }}
 
       - name: Configure
-        run: cmake -S . -B build ${{ matrix.cmake-args }}
+        run: cmake -S . -B build ${{ matrix.cmake-args }} -DSLXIO_BUILD_TESTS=ON
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}

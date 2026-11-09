@@ -3,36 +3,39 @@ name: Sanitizer
 on:
   push:
   pull_request:
-  workflow_call:
-  workflow_dispatch:
 
 jobs:
   cmake:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 80
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: GCC UBSan
+          - name: GCC UndefinedBehaviorSanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_UBSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON -DSLXIO_ENABLE_UBSAN=ON
 
-          - name: GCC ASan
+          - name: GCC AddressSanitizer 
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ASAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON -DSLXIO_ENABLE_ASAN=ON
 
-          - name: GCC TSan
+          - name: GCC ThreadSanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_TSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON  -DSLXIO_ENABLE_TSAN=ON
 
+          - name: GCC MemorySanitizer
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON  -DSLXIO_ENABLE_MSAN=ON
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6

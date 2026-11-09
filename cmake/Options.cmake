@@ -76,14 +76,14 @@ advanced_option(SLXIO_BUILD_PYTHON "Build Python interface" ON)
 # Enable all sanitizers globally when the compiler and platform support them
 advanced_option(SLXIO_ENABLE_SANITIZERS "Enable all available sanitizers" OFF)
 
-# Option to enable AddressSanitizer (ASan) on supported platforms and compilers.
+# Option to enable AddressSanitizer on supported platforms and compilers.
 # ASan is supported on the following configurations: - Clang / LLVM >= 3.1 - GCC
 # >= 4.8 - Apple Clang (Xcode) >= 7 - MSVC: Visual Studio 2019 >= 16.9 (x64 and
 # x86) - clang-cl (Windows) >= 4.0 ASan cannot be combined with TSan or MSan.
 advanced_dependent_option(SLXIO_ENABLE_ASAN "Enable AddressSanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable MemorySanitizer (MSan) on supported platforms and compilers.
+# Option to enable MemorySanitizer  on supported platforms and compilers.
 # MSan is supported on the following configurations: - Clang / LLVM >= 3.3
 # (Linux, FreeBSD and NetBSD only) Not supported by GCC, MSVC or Apple Clang
 # (macOS). MSan cannot be combined with ASan or TSan. It also requires all code,
@@ -91,14 +91,14 @@ advanced_dependent_option(SLXIO_ENABLE_ASAN "Enable AddressSanitizer" OFF
 advanced_dependent_option(SLXIO_ENABLE_MSAN "Enable MemorySanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable ThreadSanitizer (TSan) on supported platforms and compilers.
+# Option to enable ThreadSanitizer  on supported platforms and compilers.
 # TSan is supported on 64-bit targets only, with the following configurations: -
 # Clang / LLVM >= 3.2 - GCC >= 4.8 - Apple Clang (Xcode) >= 8 Not supported by
 # MSVC or clang-cl (windows). TSan cannot be combined with ASan or MSan.
 advanced_dependent_option(SLXIO_ENABLE_TSAN "Enable ThreadSanitizer" OFF
                           SLXIO_ENABLE_SANITIZERS ON)
 
-# Option to enable UndefinedBehaviorSanitizer (UBSan) on supported platforms and
+# Option to enable UndefinedBehaviorSanitizer on supported platforms and
 # compilers. UBSan is supported on the following configurations: - Clang / LLVM
 # >= 3.3 - GCC >= 4.9 - Apple Clang (Xcode) >= 9 - clang-cl (Windows), partial
 # support Not supported by MSVC.
@@ -124,13 +124,6 @@ advanced_option(SLXIO_ENABLE_HDF5 "Check for HDF5 library" ON)
 advanced_dependent_option(
   SLXIO_SIMULINK_DEFAULT_VERSION "Simulink version to use" ON
   SLXIO_AUTO_DETECT_SIMULINK OFF)
-
-# Only relevant when SLXIO_SIMULINK_DEFAULT_VERSION is ON; sets the default
-# version numbering.
-set(SLXIO_SIMULINK_VERSION_YEAR "2018")
-
-# Note: when auto-detect is on, these options are automatically ignored.
-set(SLXIO_SIMULINK_VERSION_RELEASE "a")
 
 # Option to enable installation rules on the target machine
 advanced_option(SLXIO_INSTALL "Installation after build" ON)
@@ -192,7 +185,7 @@ advanced_option(SLXIO_ENABLE_DOCUMENTATION "Enable documentation generation"
                 OFF)
 
 # Option to use OpenMP acceleration when available
-advanced_configure_option(SLXIO_ENABLE_OPENMP "OpenMP support" ON)
+advanced_configure_option(SLXIO_ENABLE_OPENMP "OpenMP support" OFF)
 
 # Specify the directory where third-party dependencies
 set(PROJECT_EXTERN_SOURCE_DIR ${PROJECT_SOURCE_DIR}/vendor)
