@@ -12,13 +12,17 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(
-  Slx
-  SLXSection.cxx
-  SimulinkConfigSetComponentSlxReader.cxx
-  SimulinkConfigSetSlxReader.cxx)
+add_module(Slx SLXSection.cxx SimulinkConfigSetComponentSlxReader.cxx
+           SimulinkConfigSetSlxReader.cxx)
 
-module_link_libraries(Slx Import Configuration Core Annotation Layout pugixml)
+module_link_libraries(
+  Slx
+  Import
+  Configuration
+  Core
+  Annotation
+  Layout
+  pugixml)
 set_target_properties(Slx PROPERTIES OUTPUT_NAME "IOSlx")
 module_include_directories(Slx ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)
 add_subdirectory(test)

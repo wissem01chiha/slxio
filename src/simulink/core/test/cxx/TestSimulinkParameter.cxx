@@ -1,63 +1,51 @@
 #include "doctest.h"
 #include "SimulinkParameter.h"
 
-using namespace slxio;
-
-SLXIO_ABI_NAMESPACE_BEGIN
-
-TEST_CASE("SimulinkParameter default construction")
+namespace slxio
 {
-    SimulinkParameter param;
 
-    CHECK(param.GetDataType() == DataType::SLXIO_TYPE_SIMULINK_PARAM);
-}
+    TEST_CASE("SimulinkParameter default construction")
+    {
+        SimulinkParameter param;
 
-TEST_CASE("SimulinkParameter construction with value")
-{
-    SimulinkParameter param("123");
+        CHECK(param.GetSimulinkDataType() == SimulinkDataType::Auto);
+    }
 
-    CHECK(param.GetValue() == "123");
-}
+    TEST_CASE("SimulinkParameter construction with value")
+    {
+        SimulinkParameter param("123");
 
-TEST_CASE("SimulinkParameter integer conversion")
-{
-    SimulinkParameter param("123");
+        CHECK(param.GetValue() == "123");
+    }
 
-    CHECK(param.GetValueAsInt() == 123);
-}
+    TEST_CASE("SimulinkParameter integer conversion")
+    {
+        SimulinkParameter param("123");
 
-TEST_CASE("SimulinkParameter float conversion")
-{
-    SimulinkParameter param("3.14");
+        CHECK(param.GetValueAsInt() == 123);
+    }
 
-    CHECK(param.GetValueAsFloat() == doctest::Approx(3.14f));
-}
+    TEST_CASE("SimulinkParameter float conversion")
+    {
+        SimulinkParameter param("3.14");
 
-TEST_CASE("SimulinkParameter double conversion")
-{
-    SimulinkParameter param("3.14159265");
+        CHECK(param.GetValueAsFloat() == doctest::Approx(3.14f));
+    }
 
-    CHECK(param.GetValueAsDouble() == doctest::Approx(3.14159265));
-}
+    TEST_CASE("SimulinkParameter double conversion")
+    {
+        SimulinkParameter param("3.14159265");
 
-TEST_CASE("SimulinkParameter New creates valid instance")
-{
-    SimulinkParameter param("test");
+        CHECK(param.GetValueAsDouble() == doctest::Approx(3.14159265));
+    }
 
-    auto* newParam = param.New();
+    TEST_CASE("SimulinkParameter data type setter/getter")
+    {
+        SimulinkParameter param;
 
-    CHECK(newParam != nullptr);
+        param.SetSimulinkDataType(SimulinkDataType::Double);
 
-    delete newParam;
-}
+        CHECK(param.GetSimulinkDataType() == SimulinkDataType::Double);
+    }
 
-TEST_CASE("SimulinkParameter SimulinkDataType setter/getter")
-{
-    SimulinkParameter param;
-
-    param.SetSimulinkDataType(SimulinkDataType::Double);
-
-    CHECK(param.GetSimulinkDataType() == SimulinkDataType::Double);
-}
-
-SLXIO_ABI_NAMESPACE_END
+}; // namespace slxio

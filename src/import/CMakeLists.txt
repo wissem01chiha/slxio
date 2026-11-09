@@ -13,7 +13,6 @@
 # the License.
 
 add_subdirectory(core)
-add_subdirectory(slx)
 if(SLXIO_ENABLE_MDL)
   add_subdirectory(mdl)
 endif()

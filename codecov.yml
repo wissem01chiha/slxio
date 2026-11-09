@@ -1,6 +1,4 @@
-# https://docs.codecov.com/docs/ignoring-paths
 ignore:
-  - "extern"
-  - "tests"
-  - "**/Test*.cxx"  
-  - "**/*Fixture.h"
+  - "vendor"
+  - "test"
+  - "**/Test*.cxx"

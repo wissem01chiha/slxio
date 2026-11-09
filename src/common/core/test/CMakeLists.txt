@@ -13,7 +13,7 @@
 # the License.
 
 module_add_tests(
-  Core
+  CommonCore
   cxx/TestDiagnostic.cxx
   cxx/TestDiagnosticEngine.cxx
   cxx/TestError.cxx

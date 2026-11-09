@@ -12,9 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(
-  Import
-  Dummy.cxx)
-module_link_libraries(Import Configuration Core Annotation Layout)
-set_target_properties(Import PROPERTIES OUTPUT_NAME "IOImport")
+add_module(ImportCore Dummy.cxx)
+module_link_libraries(ImportCore SimulinkConfiguration SimulinkCore
+                      SimulinkAnnotation SimulinkLayout)
 add_subdirectory(test)

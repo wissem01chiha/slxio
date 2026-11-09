@@ -1,51 +1,44 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef SIMULINKPARAMETER_H
-#define SIMULINKPARAMETER_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "IMutableParameterObject.h"
-#include "IObservable.h"
-#include "IParameterObject.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 #include "SimulinkDataType.h"
-#include "SimulinkParameterInformation.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    /**
-     * @class SimulinkParameter
-     * @brief A Simulink Parameter object.
-     * by default this is immutable for a mutable simulink parameter value
-     * see SimulinkMutableParameter
-     */
-    class SLXIO_APIEXPORT SimulinkParameter : public IParameterObject<std::string>,
-                                              public IObservable
+    class SimulinkParameterInformation;
+
+    class SimulinkParameter final
     {
     public:
         SimulinkParameter();
-
         explicit SimulinkParameter(const std::string& value);
 
-        IParameterObjectBase* New() override;
-
-        ~SimulinkParameter();
-
-        std::string& GetValue() override;
-
-        UInt64 GetValueAsInt() const;
-        Float32 GetValueAsFloat() const;
-        Float64 GetValueAsDouble() const;
-
-        DataType GetDataType() const override;
+        std::string& GetValue();
+        uint16_t GetValueAsInt() const;
+        float GetValueAsFloat() const;
+        double GetValueAsDouble() const;
         SimulinkDataType GetSimulinkDataType() const;
         void SetSimulinkDataType(SimulinkDataType type);
-
         SimulinkParameterInformation& GetSimulinkParameterInformation() const;
+
+        ~SimulinkParameter();
 
     private:
         std::string m_value;
@@ -53,7 +46,4 @@ namespace slxio
         std::unique_ptr<SimulinkParameterInformation> m_information;
     };
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
-
-#endif // SIMULINKPARAMETER_H
+}; // namespace slxio

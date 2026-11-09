@@ -13,7 +13,7 @@
 # the License.
 
 add_module(
-  Core
+  CommonCore
   Diagnostic.cxx
   DiagnosticEngine.cxx
   Error.cxx
@@ -21,11 +21,9 @@ add_module(
   SimulinkRelease.cxx
   Version.cxx)
 
-configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h
-               @ONLY)
-module_link_libraries(Core spdlog)
-set_target_properties(Core PROPERTIES OUTPUT_NAME "CommonCore")
-target_precompile_headers(Core PRIVATE CommonPCH.h)
-module_include_directories(Core ${PROJECT_EXTERN_SOURCE_DIR}/doctest
+configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
+module_link_libraries(CommonCore spdlog)
+target_precompile_headers(CommonCore PRIVATE CommonPCH.h)
+module_include_directories(CommonCore ${PROJECT_EXTERN_SOURCE_DIR}/doctest
                            ${PROJECT_EXTERN_SOURCE_DIR}/spdlog)
 add_subdirectory(test)

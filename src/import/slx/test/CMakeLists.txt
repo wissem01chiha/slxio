@@ -12,7 +12,5 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-module_add_tests(
-  Slx
-  cxx/TestSimulinkConfigSetComponentSlxReader.cxx
-  cxx/TestSimulinkConfigSetSlxReader.cxx)
+module_add_tests(Slx cxx/TestSimulinkConfigSetComponentSlxReader.cxx
+                 cxx/TestSimulinkConfigSetSlxReader.cxx)

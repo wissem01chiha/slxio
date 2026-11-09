@@ -12,8 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(Math Point.cxx)
-module_link_libraries(Math Core)
-set_target_properties(Math PROPERTIES OUTPUT_NAME "CommonMath")
-module_include_directories(Math ${PROJECT_EXTERN_SOURCE_DIR}/doctest)
+add_module(CommonMath Point.cxx)
+module_link_libraries(CommonMath CommonCore)
 add_subdirectory(test)

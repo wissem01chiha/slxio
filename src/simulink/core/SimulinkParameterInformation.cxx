@@ -1,10 +1,24 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkParameterInformation.h"
 #include "CoderInfo.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     SimulinkParameterInformation::SimulinkParameterInformation()
         : m_min(0.0f), m_max(0.0f), m_description(""), m_unit(""), m_complexity("real")
     {
@@ -39,29 +53,29 @@ namespace slxio
         m_complexity = comp;
     }
 
-    Float32 SimulinkParameterInformation::GetMin() const
+    double SimulinkParameterInformation::GetMin() const
     {
         return m_min;
     }
-    void SimulinkParameterInformation::SetMin(Float32 min)
+    void SimulinkParameterInformation::SetMin(double min)
     {
         m_min = min;
     }
 
-    Float32 SimulinkParameterInformation::GetMax() const
+    double SimulinkParameterInformation::GetMax() const
     {
         return m_max;
     }
-    void SimulinkParameterInformation::SetMax(Float32 max)
+    void SimulinkParameterInformation::SetMax(double max)
     {
         m_max = max;
     }
 
-    const std::vector<UInt16>& SimulinkParameterInformation::GetDimensions() const
+    const std::vector<uint16_t>& SimulinkParameterInformation::GetDimensions() const
     {
         return m_dimensions;
     }
-    void SimulinkParameterInformation::SetDimensions(const std::vector<UInt16>& dims)
+    void SimulinkParameterInformation::SetDimensions(const std::vector<uint16_t>& dims)
     {
         m_dimensions = dims;
     }
@@ -79,5 +93,4 @@ namespace slxio
         return m_coder;
     }
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

@@ -5,7 +5,7 @@
 namespace slxio
 {
 
-    TEST_CASE("CodeGeneration read component test")
+    TEST_CASE("Read code generation component test")
     {
         SimulinkConfigSetComponent component("Simulink.RTWCC");
         component.SetParam("CodeGenFolder", "code");

@@ -4,7 +4,7 @@
 namespace slxio
 {
 
-    TEST_CASE("ConfigSet store component test")
+    TEST_CASE("Config set store component test")
     {
         SimulinkConfigSet config("Simulation");
         CHECK(config.GetName() == "Simulation");
@@ -17,7 +17,7 @@ namespace slxio
         CHECK(config.ToString().find("SimulinkConfigSet: Simulation") != std::string::npos);
     }
 
-    TEST_CASE("ConfigSet store parameter test")
+    TEST_CASE("Config set store parameter test")
     {
         SimulinkConfigSet config("Simulation");
         CHECK(config.FindParam("Description") == nullptr);
@@ -30,7 +30,7 @@ namespace slxio
         CHECK(config.ToString().find("SimulinkConfigSet: Simulation") != std::string::npos);
     }
 
-    TEST_CASE("ConfigSet preserve values test")
+    TEST_CASE("Config set preserve values test")
     {
         SimulinkConfigSet configSet("Simulation");
         configSet.GetOrCreateComponent("Solver", "Simulink.SolverCC").SetParam("Solver", "ode45");

@@ -1,24 +1,29 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef SIMULINKPARAMETERINFORMATION_H
-#define SIMULINKPARAMETERINFORMATION_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     class CoderInfo;
 
-    /**
-     * @class SimulinkParameterInformation
-     * @brief Metadata describing a Simulink parameter.
-     */
-    class SLXIO_APIEXPORT SimulinkParameterInformation
+    /// Metadata describing a Simulink parameter.
+    class SimulinkParameterInformation final
     {
     public:
         SimulinkParameterInformation();
@@ -33,14 +38,14 @@ namespace slxio
         const std::string& GetComplexity() const;
         void SetComplexity(const std::string& comp);
 
-        Float32 GetMin() const;
-        void SetMin(Float32 min);
+        double GetMin() const;
+        void SetMin(double min);
 
-        Float32 GetMax() const;
-        void SetMax(Float32 max);
+        double GetMax() const;
+        void SetMax(double max);
 
-        const std::vector<UInt16>& GetDimensions() const;
-        void SetDimensions(const std::vector<UInt16>& dims);
+        const std::vector<uint16_t>& GetDimensions() const;
+        void SetDimensions(const std::vector<uint16_t>& dims);
 
         void SetCoderInfo(const std::shared_ptr<CoderInfo>& coder);
         std::shared_ptr<CoderInfo> GetCoderInfo() const;
@@ -49,13 +54,10 @@ namespace slxio
         std::string m_unit;
         std::string m_description;
         std::string m_complexity;
-        Float32 m_min;
-        Float32 m_max;
-        std::vector<UInt16> m_dimensions;
+        double m_min;
+        double m_max;
+        std::vector<uint16_t> m_dimensions;
         std::shared_ptr<CoderInfo> m_coder;
     };
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
-
-#endif // SIMULINKPARAMETERINFORMATION_H
+}; // namespace slxio

@@ -1,150 +1,108 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkSignal.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     SimulinkSignal::SimulinkSignal()
-        : Description(""), Complexity("auto"), DataType(SimulinkDataType::Auto),
-          Min(SLXIO_FLOAT_MIN), Max(SLXIO_FLOAT_MAX)
+        : m_description(""), m_complexity("auto"), m_dataType(SimulinkDataType::Auto),
+          m_min(std::numeric_limits<double>::min()), m_max(std::numeric_limits<double>::max())
     {
     }
 
-    HError SimulinkSignal::setDataType(SimulinkDataType dt)
+    void SimulinkSignal::SetDataType(SimulinkDataType dt)
     {
-        DataType = dt;
-        return E_OK;
+        m_dataType = dt;
     }
 
-    SimulinkDataType SimulinkSignal::getDataType()
+    SimulinkDataType SimulinkSignal::GetDataType()
     {
-        return DataType;
+        return m_dataType;
     }
 
-    HError SimulinkSignal::setDataType(const char* dt)
+    void SimulinkSignal::SetDataType(const char* type)
     {
-        if (strcmp(dt, "auto") == 0)
+        m_dataType = FromString(std::string(type));
+    }
+    void SimulinkSignal::SetComplexityType(const char* type)
+    {
+        if (strcmp(type, "auto") == 0)
         {
-            DataType = SimulinkDataType::Auto;
+            m_complexity = "auto";
         }
-        else if (strcmp(dt, "double") == 0)
+        else if (strcmp(type, "real") == 0)
         {
-            DataType = SimulinkDataType::Double;
+            m_complexity = "real";
         }
-        else if (strcmp(dt, "single") == 0)
+        else if (strcmp(type, "complex") == 0)
         {
-            DataType = SimulinkDataType::Single;
-        }
-        else if (strcmp(dt, "int8") == 0)
-        {
-            DataType = SimulinkDataType::Int8;
-        }
-        else if (strcmp(dt, "uint8") == 0)
-        {
-            DataType = SimulinkDataType::UInt8;
-        }
-        else if (strcmp(dt, "int16") == 0)
-        {
-            DataType = SimulinkDataType::Int16;
-        }
-        else if (strcmp(dt, "UInt16") == 0)
-        {
-            DataType = SimulinkDataType::UInt16;
-        }
-        else if (strcmp(dt, "int32") == 0)
-        {
-            DataType = SimulinkDataType::Int32;
-        }
-        else if (strcmp(dt, "uint32") == 0)
-        {
-            DataType = SimulinkDataType::UInt32;
-        }
-        else if (strcmp(dt, "boolean") == 0)
-        {
-            DataType = SimulinkDataType::Boolean;
-        }
-        else if (strcmp(dt, "half") == 0)
-        {
-            DataType = SimulinkDataType::Half;
-        }
-        else if (strcmp(dt, "string") == 0)
-        {
-            DataType = SimulinkDataType::String;
+            m_complexity = "complex";
         }
         else
         {
-            return E_INVALID_ARGUMENT;
+            throw std::invalid_argument("invalid argument: " + std::string(type));
         }
-
-        return E_OK;
     }
-    HError SimulinkSignal::setComplexityType(const char* ct)
+
+    const char* SimulinkSignal::GetComplexity()
     {
-        if (strcmp(ct, "auto") == 0)
-        {
-            Complexity = "auto";
-        }
-        else if (strcmp(ct, "real") == 0)
-        {
-            Complexity = "real";
-        }
-        else if (strcmp(ct, "complex") == 0)
-        {
-            Complexity = "complex";
-        }
-        else
-        {
-            return E_INVALID_ARGUMENT;
-        }
-        return E_OK;
+        return m_complexity;
     }
 
-    const char* SimulinkSignal::getComplexity()
+    std::vector<uint16_t> SimulinkSignal::GetDimensions()
     {
-        return Complexity;
+        return m_dimensions;
     }
 
-    std::vector<UInt16> SimulinkSignal::getDimensions()
+    CoderInfo SimulinkSignal::GetCoderInfo()
     {
-        return Dimensions;
+        return m_coder;
     }
 
-    CoderInfo SimulinkSignal::getCoderInfo()
+    const char* SimulinkSignal::GetInitialValue()
     {
-        return coder;
+        return m_initialValue;
     }
 
-    const char* SimulinkSignal::getInitialValue()
+    const char* SimulinkSignal::GetDescription()
     {
-        return InitialValue;
+        return m_description;
     }
 
-    const char* SimulinkSignal::getDescription()
+    const char* SimulinkSignal::GetDimensionsMode()
     {
-        return Description;
+        return m_dimensionsMode;
     }
 
-    const char* SimulinkSignal::getDimensionsMode()
+    const char* SimulinkSignal::GetUnit()
     {
-        return DimensionsMode;
+        return m_unit;
     }
 
-    const char* SimulinkSignal::getUnit()
+    std::vector<double> SimulinkSignal::GetSampleTime()
     {
-        return Unit;
+        return m_sampleTime;
     }
 
-    std::vector<Float32> SimulinkSignal::getSampleTime()
+    void SimulinkSignal::SetRange(double min, double max)
     {
-        return SampleTime;
+        m_min = min;
+        m_max = max;
     }
 
-    HError SimulinkSignal::setRange(Float32 min, Float32 max)
-    {
-        Min = min;
-        Max = max;
-        return E_OK;
-    }
-
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

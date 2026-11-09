@@ -3,13 +3,11 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    class SimulinkSignalTestFixture
+    TEST_CASE("Set signal data type test")
     {
-    protected:
-    private:
-    };
-
-    SLXIO_ABI_NAMESPACE_END
+        SimulinkSignal signal;
+        signal.SetDataType(SimulinkDataType::Int32);
+        CHECK(signal.GetDataType() == SimulinkDataType::Int32);
+    }
 }; // namespace slxio

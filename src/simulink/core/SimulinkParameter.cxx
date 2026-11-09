@@ -1,9 +1,24 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkParameter.h"
+#include "SimulinkParameterInformation.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     SimulinkParameter::SimulinkParameter()
         : m_information(std::make_unique<SimulinkParameterInformation>())
     {
@@ -14,11 +29,6 @@ namespace slxio
     {
     }
 
-    IParameterObjectBase* SimulinkParameter::New()
-    {
-        return new SimulinkParameter();
-    }
-
     SimulinkParameter::~SimulinkParameter() = default;
 
     std::string& SimulinkParameter::GetValue()
@@ -26,24 +36,19 @@ namespace slxio
         return m_value;
     }
 
-    UInt64 SimulinkParameter::GetValueAsInt() const
+    uint16_t SimulinkParameter::GetValueAsInt() const
     {
-        return static_cast<UInt64>(std::stoll(m_value));
+        return static_cast<uint16_t>(std::stoll(m_value));
     }
 
-    Float32 SimulinkParameter::GetValueAsFloat() const
+    float SimulinkParameter::GetValueAsFloat() const
     {
         return std::stof(m_value);
     }
 
-    Float64 SimulinkParameter::GetValueAsDouble() const
+    double SimulinkParameter::GetValueAsDouble() const
     {
         return std::stod(m_value);
-    }
-
-    DataType SimulinkParameter::GetDataType() const
-    {
-        return DataType::SLXIO_TYPE_SIMULINK_PARAM;
     }
 
     SimulinkDataType SimulinkParameter::GetSimulinkDataType() const
@@ -61,5 +66,4 @@ namespace slxio
         return *m_information;
     }
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

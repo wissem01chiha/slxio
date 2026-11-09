@@ -4,7 +4,7 @@
 namespace slxio
 {
 
-    TEST_CASE("ConfigSetComponent store parameters test")
+    TEST_CASE("Component store parameters test")
     {
         SimulinkConfigSetComponent solver("Simulink.SolverCC");
         solver.SetParam("Solver", "ode45");
@@ -16,7 +16,7 @@ namespace slxio
         CHECK_FALSE(solver.RemoveParam("Solver"));
     }
 
-    TEST_CASE("ConfigSetComponent remove parameter test")
+    TEST_CASE("Component remove parameter test")
     {
         SimulinkConfigSetComponent solver("Simulink.SolverCC");
         solver.SetParam("Solver", "ode45");
