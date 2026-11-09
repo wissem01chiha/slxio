@@ -24,18 +24,21 @@ namespace slxio
 
     enum class error_code : int
     {
-        Ok = 0,                     /// Success status code.
-        InvalidArgument = 1,        /// An invalid argument was passed to a function.
-        InvalidHandle = 2,          /// A required object handle is invalid.
-        InvalidState = 3,           /// The object is in an invalid state.
-        DefaultValueUsed = 4,       /// A default value was used because none was provided.
-        OperationNotSupported = 5,  /// Unsupported callback or function invocation.
-        NullptrReceived = 6,        /// A nullptr object was passed to a function.
-        ChildNullptrReceived = 7,   /// Child object is nullptr.
-        ChildTypeNotSupported = 8,  /// Child type is not supported.
-        ChildDuplicateId = 9,       /// Child with the same ID already exists.
-        ChildNotFound = 10,         /// Child object was not found.
-        ParentTypeNotSupported = 11 /// Parent type is not supported.
+        Ok = 0,
+        NullptrReceived = 6,
+        InvalidArgument = 1,
+        InvalidHandle = 2,
+        InvalidState = 3,
+        DefaultValueUsed = 4,
+        OperationNotSupported = 5,
+        ParameterVaribleExtis = 12,
+        ChildNullptrReceived = 7,
+        ChildTypeNotSupported = 8,
+        ChildDuplicateId = 9,
+        ChildNotFound = 10,
+        ParentTypeNotSupported = 11,
+        ParameterVaribleNameEmpty = 13,
+        ParameterVaribleNotFound = 14,
     };
 
     /// Define a custom error category for  error codes
@@ -46,7 +49,7 @@ namespace slxio
         std::string message(int ev) const override;
     };
 
-    /// Convert an slxio:: error_code to std::error_code.
+    /// Convert an slxio::error_code to std::error_code.
     NODISCARD std::error_code make_error_code(error_code error) noexcept;
 
     /// Return a reference to an std::error_category for custom error codes

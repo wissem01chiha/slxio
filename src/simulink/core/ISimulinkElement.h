@@ -22,6 +22,8 @@
 
 namespace slxio
 {
+    class SimulinkModel;
+
     /**
      * @class SimulinkElement
      * @brief Base class for Simulink elements.
@@ -36,11 +38,11 @@ namespace slxio
      * that rely on string-based identifiers or alternative indexing
      * mechanisms should not inherit from this class.
      */
-    class SimulinkElement : public std::enable_shared_from_this<SimulinkElement>
+    class ISimulinkElement : public std::enable_shared_from_this<ISimulinkElement>
     {
     public:
         virtual ~ISimulinkElement() = default;
-        virtual SimulinkElement* New() const = 0;
+        virtual ISimulinkElement* New() const = 0;
 
         /**
          * The default behvaior is that the element do not support nested childern,

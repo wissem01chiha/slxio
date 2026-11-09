@@ -13,6 +13,10 @@
 # the License.
 
 module_add_tests(
-  SimulinkCore cxx/TestSimulinkDataType.cxx cxx/TestSimulinkSignal.cxx
-  cxx/TestSimulinkParameter.cxx cxx/TestSimulinkBlockType.cxx
-  cxx/TestSimulinkModelType.cxx)
+  SimulinkCore
+  cxx/TestSimulinkDataType.cxx
+  cxx/TestSimulinkSignal.cxx
+  cxx/TestSimulinkParameter.cxx
+  cxx/TestSimulinkBlockType.cxx
+  cxx/TestSimulinkModelType.cxx
+  cxx/TestSimulinkBlockCategory.cxx)

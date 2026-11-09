@@ -1,60 +1,60 @@
-#include "DataSourceType.h"
-#include "Logger.h"
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include "DataSourceType.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    DataSourceType::DataSourceType(DataSourceType::Type type) : m_type(type)
+    DataSourceType FromString(const std::string& type)
     {
+        if (type == "ModelFile")
+        {
+            return DataSourceType::ModelFile;
+        }
+        else if (type == "MatFile")
+        {
+            return DataSourceType::MatFile;
+        }
+        else if (type == "MatlabCode")
+        {
+            return DataSourceType::MatlabCode;
+        }
+        else if (type == "MatlabFile")
+        {
+            return DataSourceType::MatlabFile;
+        }
+        return DataSourceType::ModelFile;
     }
 
-    DataSourceType::Type DataSourceType::FromString(const std::string& sldt)
-    {
-        const char* cstr = sldt.c_str();
-
-        if (std::strcmp(cstr, "ModelFile") == 0)
-        {
-            return Type::ModelFile;
-        }
-        else if (std::strcmp(cstr, "MatFile") == 0)
-        {
-            return Type::MatFile;
-        }
-        else if (std::strcmp(cstr, "MatlabCode") == 0)
-        {
-            return Type::MatlabCode;
-        }
-        else if (std::strcmp(cstr, "MatlabFile") == 0)
-        {
-            return Type::MatlabFile;
-        }
-        return Type::ModelFile;
-    }
-
-    std::string DataSourceType::ToString(Type type)
+    std::string ToString(DataSourceType type)
     {
         switch (type)
         {
-        case Type::ModelFile:
+        case DataSourceType::ModelFile:
             return "ModelFile";
-        case Type::MatFile:
+        case DataSourceType::MatFile:
             return "MatFile";
-        case Type::MatlabCode:
+        case DataSourceType::MatlabCode:
             return "MatlabCode";
-        case Type::MatlabFile:
+        case DataSourceType::MatlabFile:
             return "MatlabFile";
         default:
             return "";
         }
     }
 
-    DataSourceType::Type DataSourceType::GetType() const
-    {
-        return m_type;
-    }
-
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

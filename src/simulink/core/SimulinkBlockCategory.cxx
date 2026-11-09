@@ -1,109 +1,71 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkBlockCategory.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    SimulinkBlockCategory::SimulinkBlockCategory()
-    {
-        for (auto cat : {DefaultCategory::AdditionalMathDiscrete,
-                         DefaultCategory::CommonlyUsedBlocks,
-                         DefaultCategory::Continuous,
-                         DefaultCategory::Discontinuities,
-                         DefaultCategory::Discrete,
-                         DefaultCategory::LogicAndBitOperations,
-                         DefaultCategory::LookupTables,
-                         DefaultCategory::MathOperations,
-                         DefaultCategory::MatrixOperations,
-                         DefaultCategory::MessagesEvents,
-                         DefaultCategory::ModelVerification,
-                         DefaultCategory::ModelWideUtilities,
-                         DefaultCategory::PortsSubsystems,
-                         DefaultCategory::QuickInsert,
-                         DefaultCategory::SignalAttributes,
-                         DefaultCategory::SignalRouting,
-                         DefaultCategory::Sinks,
-                         DefaultCategory::Sources,
-                         DefaultCategory::String,
-                         DefaultCategory::UserDefinedFunctions})
-        {
-            m_category.push_back(ToString(cat));
-        }
-    }
-
-    SimulinkBlockCategory::SimulinkBlockCategory(DefaultCategory category)
-    {
-        m_category.push_back(ToString(category));
-    }
-
-    void SimulinkBlockCategory::AddCategory(const std::string& name)
-    {
-        if (!HasCategory(name))
-        {
-            m_category.push_back(name);
-        }
-    }
-
-    bool SimulinkBlockCategory::HasCategory(const std::string& name) const
-    {
-        return std::find(m_category.begin(), m_category.end(), name) != m_category.end();
-    }
-
-    std::vector<std::string> SimulinkBlockCategory::GetAllCategories() const
-    {
-        return m_category;
-    }
-
-    std::string SimulinkBlockCategory::ToString(DefaultCategory category)
+    std::string ToString(SimulinkBlockCategory category)
     {
         switch (category)
         {
-        case DefaultCategory::AdditionalMathDiscrete:
+        case SimulinkBlockCategory::AdditionalMathDiscrete:
             return "AdditionalMathDiscrete";
-        case DefaultCategory::CommonlyUsedBlocks:
+        case SimulinkBlockCategory::CommonlyUsedBlocks:
             return "CommonlyUsedBlocks";
-        case DefaultCategory::Continuous:
+        case SimulinkBlockCategory::Continuous:
             return "Continuous";
-        case DefaultCategory::Discontinuities:
+        case SimulinkBlockCategory::Discontinuities:
             return "Discontinuities";
-        case DefaultCategory::Discrete:
+        case SimulinkBlockCategory::Discrete:
             return "Discrete";
-        case DefaultCategory::LogicAndBitOperations:
+        case SimulinkBlockCategory::LogicAndBitOperations:
             return "LogicAndBitOperations";
-        case DefaultCategory::LookupTables:
+        case SimulinkBlockCategory::LookupTables:
             return "LookupTables";
-        case DefaultCategory::MathOperations:
+        case SimulinkBlockCategory::MathOperations:
             return "MathOperations";
-        case DefaultCategory::MatrixOperations:
+        case SimulinkBlockCategory::MatrixOperations:
             return "MatrixOperations";
-        case DefaultCategory::MessagesEvents:
+        case SimulinkBlockCategory::MessagesEvents:
             return "MessagesAndEvents";
-        case DefaultCategory::ModelVerification:
+        case SimulinkBlockCategory::ModelVerification:
             return "ModelVerification";
-        case DefaultCategory::ModelWideUtilities:
+        case SimulinkBlockCategory::ModelWideUtilities:
             return "ModelWideUtilities";
-        case DefaultCategory::PortsSubsystems:
+        case SimulinkBlockCategory::PortsSubsystems:
             return "PortsSubsystems";
-        case DefaultCategory::QuickInsert:
+        case SimulinkBlockCategory::QuickInsert:
             return "QuickInsert";
-        case DefaultCategory::SignalAttributes:
+        case SimulinkBlockCategory::SignalAttributes:
             return "SignalAttributes";
-        case DefaultCategory::SignalRouting:
+        case SimulinkBlockCategory::SignalRouting:
             return "SignalRouting";
-        case DefaultCategory::Sinks:
+        case SimulinkBlockCategory::Sinks:
             return "Sinks";
-        case DefaultCategory::Sources:
+        case SimulinkBlockCategory::Sources:
             return "Sources";
-        case DefaultCategory::String:
+        case SimulinkBlockCategory::String:
             return "String";
-        case DefaultCategory::UserDefinedFunctions:
+        case SimulinkBlockCategory::UserDefinedFunctions:
             return "UserDefinedFunctions";
         default:
             return {};
         }
-        return {};
     }
 
-    SLXIO_ABI_NAMESPACE_END
-
-} // namespace slxio
+}; // namespace slxio

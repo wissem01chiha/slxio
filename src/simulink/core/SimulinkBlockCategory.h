@@ -1,73 +1,50 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef SIMULINKBLOCKCATEGORY_H
-#define SIMULINKBLOCKCATEGORY_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "PlatformTypes.h"
-#include "SimulinkPCH.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
-    /**
-     * @class SimulinkBlockCategory
-     * @brief Allow for subdividing Simulink default library blocks into separate
-     * categories by domain, as well as provide grouping features for user-added
-     * blocks.
-     */
-    class SLXIO_APIEXPORT SimulinkBlockCategory final
+    enum class SimulinkBlockCategory
     {
-    public:
-        enum class DefaultCategory
-        {
-            AdditionalMathDiscrete = 0,
-            CommonlyUsedBlocks,
-            Continuous,
-            Discontinuities,
-            Discrete,
-            LogicAndBitOperations,
-            LookupTables,
-            MathOperations,
-            MatrixOperations,
-            MessagesEvents,
-            ModelVerification,
-            ModelWideUtilities,
-            PortsSubsystems,
-            QuickInsert,
-            SignalAttributes,
-            SignalRouting,
-            Sinks,
-            Sources,
-            String,
-            UserDefinedFunctions
-        };
-
-        SimulinkBlockCategory();
-
-        explicit SimulinkBlockCategory(DefaultCategory category);
-
-        ~SimulinkBlockCategory() = default;
-
-        /** Add a new user-defined category */
-        void AddCategory(const std::string& name);
-
-        /** Check if a category exists */
-        bool HasCategory(const std::string& name) const;
-
-        /**  List all categories */
-        std::vector<std::string> GetAllCategories() const;
-
-    private:
-        static std::string ToString(DefaultCategory category);
-
-        std::vector<std::string> m_category;
+        AdditionalMathDiscrete = 0,
+        CommonlyUsedBlocks,
+        Continuous,
+        Discontinuities,
+        Discrete,
+        LogicAndBitOperations,
+        LookupTables,
+        MathOperations,
+        MatrixOperations,
+        MessagesEvents,
+        ModelVerification,
+        ModelWideUtilities,
+        PortsSubsystems,
+        QuickInsert,
+        SignalAttributes,
+        SignalRouting,
+        Sinks,
+        Sources,
+        String,
+        UserDefinedFunctions
     };
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+    std::string ToString(SimulinkBlockCategory category);
+    SimulinkBlockCategory FromString(const std::string& category);
 
-#endif // SIMULINKBLOCKCATEGORY_H
+}; // namespace slxio
