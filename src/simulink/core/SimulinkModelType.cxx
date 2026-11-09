@@ -30,5 +30,5 @@ namespace slxio
             return std::string("");
         }
     }
-    
+
 }; // namespace slxio

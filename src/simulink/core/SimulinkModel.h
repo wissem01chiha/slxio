@@ -48,7 +48,6 @@ namespace slxio
         std::shared_ptr<SimulationSettings> GetSimulationSettings() const;
         std::shared_ptr<ModelWorkspace> GetModelWorkspace() const;
 
-  
         std::shared_ptr<ISimulinkBlock> GetBlock(SId blockIdx) const;
         std::string ToString() const override;
 
