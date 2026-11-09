@@ -12,7 +12,15 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(SimulinkCore SimulinkDataType.cxx SimulinkSignal.cxx
-           SimulinkParameterInformation.cxx SimulinkParameter.cxx)
-module_link_libraries(SimulinkCore CommonCore SimulinkMisc)
+add_module(
+  SimulinkCore
+  SimulinkDataType.cxx
+  SimulinkSignal.cxx
+  SimulinkParameterInformation.cxx
+  SimulinkParameter.cxx
+  SimulinkBlockType.cxx
+  SimulinkModelType.cxx)
+module_link_libraries(SimulinkCore CommonCore SimulinkMisc SimulinkConfiguration)
+module_include_directories(SimulinkCore
+                           ${PROJECT_EXTERN_SOURCE_DIR}/unordered_dense)
 add_subdirectory(test)

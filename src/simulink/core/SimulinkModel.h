@@ -1,46 +1,43 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef SIMULINKMODEL_H
-#define SIMULINKMODEL_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "IConfigurableObject.h"
-#include "IConfigurationObject.h"
-#include "IErrorHandler.h"
-#include "ILogger.h"
-#include "ISimulinkElement.h"
-#include "PlatformTypes.h"
+#include "CommonPCH.h"
 #include "SimulinkModelType.h"
+#include "Error.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     class ISimulinkBlock;
     class ModelWorkspace;
     class SimulinkObject;
     class SimulinkArray;
-    class SImulinkPort;
+    class SimulinkPort;
     class SimulinkLine;
     class SimulinkBlock;
     class SimulinkParameter;
     class SimulationSettings;
 
-    /**
-     * @class SimulinkModel
-     * @brief This is the main class definition for a SimulinkModel based
-     */
-    class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement, public IConfigurableObject
+    class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement
     {
     public:
-        /** Default Constructor */
         SimulinkModel();
 
         SimulinkModel* New() const override;
-
-        /** Construct a Model by given an explict model type */
         explicit SimulinkModel(SimulinkModelType Type);
 
         HError AcceptInsert(ISimulinkElement& parent) override;
@@ -50,10 +47,9 @@ namespace slxio
         SimulinkModelType GetModelType() const;
         std::shared_ptr<SimulationSettings> GetSimulationSettings() const;
         std::shared_ptr<ModelWorkspace> GetModelWorkspace() const;
-        /** Return a Pointer to given Simulink Block by Id*/
-        std::shared_ptr<ISimulinkBlock> GetBlock(SId blockIdx) const;
 
-        /** Returns a string representation of this element. */
+  
+        std::shared_ptr<ISimulinkBlock> GetBlock(SId blockIdx) const;
         std::string ToString() const override;
 
         HError AddConfig(const std::string& name,

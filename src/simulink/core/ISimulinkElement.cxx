@@ -1,9 +1,23 @@
-#include "ISimulinkElement.h"
-#include "SimulinkECH.h"
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#include "SimulinkElement.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     HError ISimulinkElement::Insert(const std::shared_ptr<ISimulinkElement>& element)
     {
@@ -68,40 +82,6 @@ namespace slxio
         return m_parent;
     }
 
-    HError ISimulinkElement::SetLogger(ILogger* logger)
-    {
-        if (logger == nullptr)
-        {
-            return E_ILOGGER_NULLPTR_RECEIVED;
-        }
-        m_logger = logger;
-        for (const auto& child : m_childrenOrder)
-        {
-            child->SetLogger(logger);
-        }
-        return E_OK;
-    }
-
-    const ILogger* ISimulinkElement::GetLogger() const
-    {
-        return m_logger;
-    }
-
-    HError ISimulinkElement::SetErrorHandler(IErrorHandler* handler)
-    {
-        if (handler == nullptr)
-        {
-            return E_IERRORHANDLER_NULLPTR_RECEIVED;
-        }
-        m_error = handler;
-        return E_OK;
-    }
-
-    const IErrorHandler* ISimulinkElement::GetErrorHandler() const
-    {
-        return m_error;
-    }
-
     std::string ISimulinkElement::ToString() const
     {
         return std::string("");
@@ -134,15 +114,4 @@ namespace slxio
         return m_childrenOrder;
     }
 
-    ILogger* ISimulinkElement::Logger() const
-    {
-        return m_logger;
-    }
-
-    IErrorHandler* ISimulinkElement::ErrorHandler() const
-    {
-        return m_error;
-    }
-
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

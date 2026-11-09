@@ -25,9 +25,9 @@ namespace slxio
     {
     }
 
-    void SimulinkSignal::SetDataType(SimulinkDataType dt)
+    void SimulinkSignal::SetDataType(SimulinkDataType dataType)
     {
-        m_dataType = dt;
+        m_dataType = dataType;
     }
 
     SimulinkDataType SimulinkSignal::GetDataType()
@@ -39,62 +39,67 @@ namespace slxio
     {
         m_dataType = FromString(std::string(type));
     }
-    void SimulinkSignal::SetComplexityType(const char* type)
+    void SimulinkSignal::SetComplexityType(const char* complexityType)
     {
-        if (strcmp(type, "auto") == 0)
+        SetComplexityType(std::string(complexityType));
+    }
+
+    void SimulinkSignal::SetComplexityType(const std::string& complexityType)
+    {
+        if (complexityType == "auto")
         {
             m_complexity = "auto";
         }
-        else if (strcmp(type, "real") == 0)
+        else if (complexityType == "real")
         {
             m_complexity = "real";
         }
-        else if (strcmp(type, "complex") == 0)
+        else if (complexityType == "complex")
         {
             m_complexity = "complex";
         }
         else
         {
-            throw std::invalid_argument("invalid argument: " + std::string(type));
+            throw std::invalid_argument("invalid argument: " + std::string(complexityType));
         }
     }
 
-    const char* SimulinkSignal::GetComplexity()
+    std::string SimulinkSignal::GetComplexity() const
     {
         return m_complexity;
     }
 
-    std::vector<uint16_t> SimulinkSignal::GetDimensions()
+    std::vector<uint16_t> SimulinkSignal::GetDimensions() const
     {
         return m_dimensions;
     }
 
-    CoderInfo SimulinkSignal::GetCoderInfo()
+    CoderInfo SimulinkSignal::GetCoderInfo() const
     {
         return m_coder;
     }
 
-    const char* SimulinkSignal::GetInitialValue()
+    std::string SimulinkSignal::GetInitialValue() const
     {
         return m_initialValue;
     }
 
-    const char* SimulinkSignal::GetDescription()
+    std::string SimulinkSignal::GetDescription() const
     {
         return m_description;
     }
 
-    const char* SimulinkSignal::GetDimensionsMode()
+    std::string SimulinkSignal::GetDimensionsMode() const
     {
         return m_dimensionsMode;
     }
 
-    const char* SimulinkSignal::GetUnit()
+    std::string SimulinkSignal::GetUnit() const
     {
         return m_unit;
     }
 
-    std::vector<double> SimulinkSignal::GetSampleTime()
+    std::vector<double> SimulinkSignal::GetSampleTime() const
     {
         return m_sampleTime;
     }

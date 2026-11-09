@@ -22,7 +22,6 @@
 
 namespace slxio
 {
-    /// A SimulinkSignal Object
     class SimulinkSignal final
     {
     public:
@@ -30,26 +29,27 @@ namespace slxio
         ~SimulinkSignal() = default;
 
         SimulinkDataType GetDataType();
-        void SetDataType(SimulinkDataType dt);
-        void SetDataType(const char* type);
-        void SetComplexityType(const char* ct);
-        const char* GetComplexity();
-        std::vector<uint16_t> GetDimensions();
-        CoderInfo GetCoderInfo();
-        const char* GetInitialValue();
-        const char* GetDescription();
-        const char* GetDimensionsMode();
-        const char* GetUnit();
-        std::vector<double> GetSampleTime();
+        void SetDataType(SimulinkDataType dataType);
+        void SetDataType(const char* dataType);
+        void SetComplexityType(const char* complexityType);
+        void SetComplexityType(const std::string& complexityType);
+        std::string GetComplexity() const;
+        std::vector<uint16_t> GetDimensions() const;
+        CoderInfo GetCoderInfo() const;
+        std::string GetInitialValue() const;
+        std::string GetDescription() const;
+        std::string GetDimensionsMode() const;
+        std::string GetUnit() const;
+        std::vector<double> GetSampleTime() const;
         void SetRange(double min, double max);
 
     private:
         const char* m_initialValue;
         SimulinkDataType m_dataType;
-        const char* m_description;
-        const char* m_unit;
-        const char* m_complexity = "real";
-        const char* m_dimensionsMode;
+        std::string m_description;
+        std::string m_unit;
+        std::string m_complexity = "real";
+        std::string m_dimensionsMode;
         std::vector<uint16_t> m_dimensions;
         std::vector<double> m_sampleTime;
         double m_min;

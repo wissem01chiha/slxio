@@ -21,7 +21,6 @@
 namespace slxio
 {
 
-    /// Simulink Supported Data Types.
     enum class SimulinkDataType
     {
         Auto,

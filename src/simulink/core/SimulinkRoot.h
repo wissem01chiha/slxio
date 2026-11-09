@@ -10,9 +10,7 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    class Logger;
     class SimulinkArray;
     class SimulinkObject;
 

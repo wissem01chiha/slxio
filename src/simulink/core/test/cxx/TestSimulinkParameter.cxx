@@ -4,42 +4,42 @@
 namespace slxio
 {
 
-    TEST_CASE("SimulinkParameter default construction")
+    TEST_CASE("Simulink parameter default construction")
     {
         SimulinkParameter param;
 
         CHECK(param.GetSimulinkDataType() == SimulinkDataType::Auto);
     }
 
-    TEST_CASE("SimulinkParameter construction with value")
+    TEST_CASE("Simulink parameter construction with value")
     {
         SimulinkParameter param("123");
 
         CHECK(param.GetValue() == "123");
     }
 
-    TEST_CASE("SimulinkParameter integer conversion")
+    TEST_CASE("Simulink parameter integer conversion")
     {
         SimulinkParameter param("123");
 
         CHECK(param.GetValueAsInt() == 123);
     }
 
-    TEST_CASE("SimulinkParameter float conversion")
+    TEST_CASE("Simulink parameter float conversion")
     {
         SimulinkParameter param("3.14");
 
         CHECK(param.GetValueAsFloat() == doctest::Approx(3.14f));
     }
 
-    TEST_CASE("SimulinkParameter double conversion")
+    TEST_CASE("Simulink parameter double conversion")
     {
         SimulinkParameter param("3.14159265");
 
         CHECK(param.GetValueAsDouble() == doctest::Approx(3.14159265));
     }
 
-    TEST_CASE("SimulinkParameter data type setter/getter")
+    TEST_CASE("Simulink parameter data type setter/getter")
     {
         SimulinkParameter param;
 

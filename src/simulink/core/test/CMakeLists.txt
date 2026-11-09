@@ -12,5 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-module_add_tests(SimulinkCore cxx/TestSimulinkDataType.cxx
-                 cxx/TestSimulinkSignal.cxx cxx/TestSimulinkParameter.cxx)
+module_add_tests(
+  SimulinkCore cxx/TestSimulinkDataType.cxx cxx/TestSimulinkSignal.cxx
+  cxx/TestSimulinkParameter.cxx cxx/TestSimulinkBlockType.cxx
+  cxx/TestSimulinkModelType.cxx)

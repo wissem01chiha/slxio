@@ -10,4 +10,12 @@ namespace slxio
         signal.SetDataType(SimulinkDataType::Int32);
         CHECK(signal.GetDataType() == SimulinkDataType::Int32);
     }
+
+    TEST_CASE("Set signal complexity type test")
+    {
+        SimulinkSignal signal;
+        CHECK_THROWS(signal.SetComplexityType("invalid"));
+        signal.SetComplexityType("auto");
+        CHECK(signal.GetComplexity() == "auto");
+    }
 }; // namespace slxio

@@ -1,24 +1,29 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef ISIMULINKELEMENT_H
-#define ISIMULINKELEMENT_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "IErrorHandler.h"
-#include "ILogger.h"
-#include "IObservable.h"
-#include "IParameterizedObject.h"
-#include "PlatformTypes.h"
-#include "SimulinkPCH.h"
+#include "CommonPCH.h"
+#include "Error.h"
+#include "unordered_dense.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     /**
-     * @class ISimulinkElement
+     * @class SimulinkElement
      * @brief Base class for Simulink elements.
      * @note Visual Simulink elements may differ from their actual XML
      * file representation. For example, a SimulinkArray is not a direct
@@ -27,22 +32,18 @@ namespace slxio
      * purposes. This class serves as a common base for both
      * visual and structural elements. The key characteristic for
      * inheriting from this class is that the child element must have a
-     * unique integer-based ID across the entire model XML file. Elements
+     * unique integer-based Id across the entire model XML file. Elements
      * that rely on string-based identifiers or alternative indexing
      * mechanisms should not inherit from this class.
      */
-    class SLXIO_APIEXPORT ISimulinkElement : public IParameterizedObject,
-                                             public IObservable,
-                                             public std::enable_shared_from_this<ISimulinkElement>
+    class SimulinkElement : public std::enable_shared_from_this<SimulinkElement>
     {
     public:
-        /** Default destructor. */
         virtual ~ISimulinkElement() = default;
+        virtual SimulinkElement* New() const = 0;
 
-        /** Creates a new instance of this element. */
-        virtual ISimulinkElement* New() const = 0;
-
-        /** The defula behvaior is that the element do not support nested childern,
+        /**
+         * The default behvaior is that the element do not support nested childern,
          * but for most element they override this to add functionlay for hircacal
          * modeling
          */
@@ -56,7 +57,8 @@ namespace slxio
          */
         virtual HError AcceptInsert(ISimulinkElement& parent) = 0;
 
-        /** Finds a child element by identifier.
+        /**
+         * Finds a child element by identifier.
          * Default implementation: lookup in m_children.
          * Returns nullptr if not found or if element does not support children,
          * for recursive lookup use  fucntion
@@ -94,21 +96,7 @@ namespace slxio
             return;
         };
 
-        /** Set a logger object for this data object, this automaticlly propagte
-         *  the logger to all implemented childers unless overriden by themself for
-         * specif use cases */
-        HError SetLogger(ILogger* logger);
-
-        /** Get the logger sink */
-        const ILogger* GetLogger() const;
-
-        /** Set a error handler object for this element */
-        HError SetErrorHandler(IErrorHandler* handler);
-
-        /** Get the error handler object */
-        const IErrorHandler* GetErrorHandler() const;
-
-        /** children can oveload for convience, default is empty string */
+        /** children can overload for convience, default is empty string */
         virtual std::string ToString() const;
 
     protected:
@@ -118,26 +106,18 @@ namespace slxio
         std::vector<std::shared_ptr<ISimulinkElement>>& GetOrderedChildren();
         const std::vector<std::shared_ptr<ISimulinkElement>>& GetOrderedChildren() const;
 
-        ILogger* Logger() const;
-        IErrorHandler* ErrorHandler() const;
-
     private:
-        /** a non owning refrence to the parent, childern do not own parent elments,
-         * jut hold a link toward them */
-        std::weak_ptr<ISimulinkElement> m_parent;
+        /**
+         * a non owning refrence to the parent, childern do not own parent elments,
+         * jut hold a link toward them
+         */
+        std::weak_ptr<SimulinkElement> m_parent;
 
-        ILogger* m_logger = nullptr;
-
-        IErrorHandler* m_error = nullptr;
-
-        /** Flat hashMap for fast lookup and less memory fragmentation */
-        std::unordered_map<SId, std::shared_ptr<ISimulinkElement>> m_children;
+        /** flat hashMap for fast lookup and less memory fragmentation */
+        std::unordered_dense<SId, std::shared_ptr<ISimulinkElement>> m_children;
 
         /** list for preserves insertion order and allows indexed access.  */
         std::vector<std::shared_ptr<ISimulinkElement>> m_childrenOrder;
     };
 
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
-
-#endif // ISIMULINKELEMENT_H
+}; // namespace slxio
