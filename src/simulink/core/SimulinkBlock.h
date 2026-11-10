@@ -29,52 +29,52 @@ namespace slxio
     class SimulinkOutPort;
     class SimulinkAnnotation;
 
-class SimulinkBlock : public SimulinkElement
-{
-public:
-    SimulinkBlock();
-    SimulinkBlock(SimulinkBlock& origBlock);
+    class SimulinkBlock : public SimulinkElement
+    {
+    public:
+        SimulinkBlock();
+        SimulinkBlock(SimulinkBlock& origBlock);
 
-    void AddSubBlock(const SimulinkBlock& subBlock);
-    virtual void SetParent(SimulinkBlock parent)=0;
-    /**
-	 * If this block is of type 'Reference' this returns
-	 * Reference;source type of the reference. Otherwise
-	 * this just returns the type of the block.
-	 */
-    std::string GetResolvedType(); 
-    /**
-	 * Get named sub block or nullptr if no sub block with the given
-	 * name is present.
-	 */
-    std::shared_ptr<SimulinkBlock> GetSubBlock(std::string name);
+        void AddSubBlock(const SimulinkBlock& subBlock);
+        virtual void SetParent(SimulinkBlock parent) = 0;
+        /**
+         * If this block is of type 'Reference' this returns
+         * Reference;source type of the reference. Otherwise
+         * this just returns the type of the block.
+         */
+        std::string GetResolvedType();
+        /**
+         * Get named sub block or nullptr if no sub block with the given
+         * name is present.
+         */
+        std::shared_ptr<SimulinkBlock> GetSubBlock(std::string name);
 
-    std::set<SimulinkBlock> GetSubBlocks() const;
-    
-    std::string GetType() const ;
+        std::set<SimulinkBlock> GetSubBlocks() const;
 
-    	/** Returns whether this block has subBlocks. */
-	bool HasSubBlocks();
+        std::string GetType() const;
 
-    
-	/**
-	 * Unlinks this object from the simulink tree. Also removes all sub-blocks,
-	 * ports and annotations
-	 */
-	void Remove(); 
+        /** Returns whether this block has subBlocks. */
+        bool HasSubBlocks();
 
-    	/**
-	 * Unlinks this object from the simulink tree. Unlike remove() does
-	 * not unlink sub-blocks, ports and annotations.
-	 */
-	void Detach();
+        /**
+         * Unlinks this object from the simulink tree. Also removes all sub-blocks,
+         * ports and annotations
+         */
+        void Remove();
 
-    ~SimulinkBlock();
-private:
-    ankerl::unordered_dense::map<std::string,SimulinkBlock> m_subBlocks;
-    ankerl::unordered_dense::map<std::string,SimulinkInPort> m_inPorts;
-    ankerl::unordered_dense::map<std::string,SimulinkOutPort> m_outPorts;
-    std::vector<SimulinkAnnotation> m_annotations;
-};
+        /**
+         * Unlinks this object from the simulink tree. Unlike remove() does
+         * not unlink sub-blocks, ports and annotations.
+         */
+        void Detach();
+
+        ~SimulinkBlock();
+
+    private:
+        ankerl::unordered_dense::map<std::string, SimulinkBlock> m_subBlocks;
+        ankerl::unordered_dense::map<std::string, SimulinkInPort> m_inPorts;
+        ankerl::unordered_dense::map<std::string, SimulinkOutPort> m_outPorts;
+        std::vector<SimulinkAnnotation> m_annotations;
+    };
 
 }; // namespace slxio
