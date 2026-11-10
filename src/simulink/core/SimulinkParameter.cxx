@@ -15,17 +15,17 @@
  */
 
 #include "SimulinkParameter.h"
-#include "SimulinkParameterInformation.h"
+#include "SimulinkParameterInfo.h"
 
 namespace slxio
 {
     SimulinkParameter::SimulinkParameter()
-        : m_information(std::make_unique<SimulinkParameterInformation>())
+        : m_information(std::make_unique<SimulinkParameterInfo>())
     {
     }
 
     SimulinkParameter::SimulinkParameter(const std::string& value)
-        : m_value(value), m_information(std::make_unique<SimulinkParameterInformation>())
+        : m_value(value), m_information(std::make_unique<SimulinkParameterInfo>())
     {
     }
 
@@ -61,7 +61,7 @@ namespace slxio
         m_dataType = type;
     }
 
-    SimulinkParameterInformation& SimulinkParameter::GetSimulinkParameterInformation() const
+    SimulinkParameterInfo& SimulinkParameter::GetSimulinkParameterInfo() const
     {
         return *m_information;
     }

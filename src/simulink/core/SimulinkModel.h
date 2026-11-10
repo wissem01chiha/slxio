@@ -18,63 +18,111 @@
 
 #include "CommonPCH.h"
 #include "SimulinkModelType.h"
-#include "Error.h"
+#include "SimulinkBlock.h"
+#include "unordered_dense.h"
+#include "SimulinkBlockType.h"
 
 namespace slxio
 {
-    class ISimulinkBlock;
-    class ModelWorkspace;
-    class SimulinkObject;
-    class SimulinkArray;
     class SimulinkPort;
     class SimulinkLine;
-    class SimulinkBlock;
     class SimulinkParameter;
-    class SimulationSettings;
+    class SimulinkConfigSet;
+    class StateflowMachine;
 
-    class SLXIO_APIEXPORT SimulinkModel final : public ISimulinkElement
+    class SimulinkModel final : public SimulinkBlock
     {
     public:
         SimulinkModel();
+        explicit SimulinkModel(SimulinkModel& model);
+        SimulinkModel(SimulinkModelType type, std::string originId);
+        SimulinkModel(SimulinkModel& origModel);
 
-        SimulinkModel* New() const override;
-        explicit SimulinkModel(SimulinkModelType Type);
+        std::shared_ptr<SimulinkModel> GetModel() const override;
+        std::vector<ISimulinkElement> GetChildren() const override;
 
-        HError AcceptInsert(ISimulinkElement& parent) override;
-        HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
+        //  Set a default parameter for all model blocks.
+        void SetBlockDefaultParameter(std::string name, SimulinkParameter& value);
 
-        SId GetId() const override;
+        // Set & default parameter for all blocks of a specified type.
+        void SetBlockTypeDefaultParameter(SimulinkBlockType type,
+                                          std::string name,
+                                          SimulinkParameter& value);
+
+        // Set default parameter for lines.
+        void SetLineDefaultParameter(std::string name, SimulinkParameter& value);
+
+        // Get default annotation parameter.
+        std::shared_ptr<SimulinkParameter> GetAnnotationDefaultParameter(std::string name) const;
+
+        // Get names of annotation default parameters.
+        std::set<std::string> GetAnnotationDefaultParameterNames() const;
+
+        /**
+         * Get a block specified by its full qualified name. The name must start
+         * with the models name. This returns nullptr if the block was not
+         * found.
+         */
+        std::shared_ptr<SimulinkBlock> GetBlock(std::string blockId) const;
+
+        // Get block default parameter.
+        std::shared_ptr<SimulinkParameter> GetBlockDefaultParameter(std::string name) const;
+
+        /**
+         * Get named default parameter for a given type. If a type-specific
+         * parameter is defined, it is returned. Otherwise the block default (
+         *  is returned.
+         */
+        std::shared_ptr<SimulinkParameter> GetTypeBlockDefaultParameter(SimulinkBlockType type,
+                                                                        std::string name) const;
+
+        // Get names of block default parameters.
+        std::set<std::string> GetBlockDefaultParameterNames() const;
+
+        // Get all default parameter names for a given type.
+        std::set<std::string> GetBlockDefaultParameterNames(SimulinkBlockType type) const;
+
+        // This throws an exception as models cannot have parents.
+        void SetParent(SimulinkBlock parent) override;
+
+        // Get a configuration default parameter.
+        std::shared_ptr<SimulinkParameter> GetConfigSetDefaultParameter(std::string name) const;
+
+        // Get a configuration by it's name
+        std::shared_ptr<SimulinkConfigSet> GetConfigSet(std::string name) const;
+
+        // Add a new configuration to the model
+        void AddConfigSet(const std::string& name,
+                          const std::shared_ptr<SimulinkConfigSet>& config);
+
+        // Set the value of a given parameter in a given configuration
+        void SetConfigSetParameter(std::string config,
+                                   std::string name,
+                                   std::shared_ptr<SimulinkParameter> value);
+
+        // Get the value of a given parameter in a given configuration
+        std::shared_ptr<SimulinkParameter> GetConfigSetParameter(std::string config,
+                                                                 std::string name);
+
+        // Get Stateflow machine of this model (may be nullptr).
+        std::shared_ptr<StateflowMachine> GetStateflowMachine() const;
+
         SimulinkModelType GetModelType() const;
-        std::shared_ptr<SimulationSettings> GetSimulationSettings() const;
-        std::shared_ptr<ModelWorkspace> GetModelWorkspace() const;
 
-        std::shared_ptr<ISimulinkBlock> GetBlock(SId blockIdx) const;
-        std::string ToString() const override;
+        std::string GetOriginId() const;
 
-        HError AddConfig(const std::string& name,
-                         const std::shared_ptr<IConfigurationObject>& p) override;
-        HError SetConfig(const std::string& name,
-                         const std::shared_ptr<IConfigurationObject>& p) override;
-        std::shared_ptr<IConfigurationObject> GetConfig(const std::string& name) override;
+        std::string GetModelName() const;
 
-        void AddParam(const std::string& name,
-                      const std::shared_ptr<IParameterObjectBase>& p) override;
-        void SetParam(const std::string& name,
-                      const std::shared_ptr<IParameterObjectBase>& p) override;
-        std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
+        std::string ToString() const;
 
     private:
-        SId m_id{SId(0)};
+        std::string m_name;
+        std::string m_originId;
         SimulinkModelType m_type;
-        std::shared_ptr<ModelWorkspace> m_workspace;
-        std::shared_ptr<SimulationSettings> m_simSet;
-        std::vector<std::shared_ptr<ISimulinkBlock>> m_blocks;
+        std::vector<std::shared_ptr<SimulinkBlock>> m_blocks;
         std::vector<std::shared_ptr<SimulinkLine>> m_lines;
-        std::vector<std::shared_ptr<SimulinkParameter>> m_parameters;
-        std::vector<std::shared_ptr<IConfigurationObject>> m_configurations;
+        ankerl::unordered_dense::map<std::string, std::shared_ptr<SimulinkParameter>> m_parameters;
+        std::vector<std::shared_ptr<SimulinkConfigSet>> m_configurations;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKMODEL_H

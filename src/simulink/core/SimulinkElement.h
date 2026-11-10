@@ -21,5 +21,21 @@
 
 namespace slxio
 {
+    class SimulinkModel;
 
-};
+    class SimulinkElement : public ISimulinkElement
+    {
+    public:
+        SimulinkElement();
+        explicit SimulinkElement(const std::shared_ptr<SimulinkModel>& model);
+        SimulinkElement(SimulinkElement& element);
+
+        std::vector<ISimulinkElement> GetChildren() const override;
+        std::shared_ptr<SimulinkModel> GetModel() const override;
+
+        ~SimulinkElement();
+
+    private:
+        std::shared_ptr<SimulinkModel> m_model;
+    };
+}; // namespace slxio

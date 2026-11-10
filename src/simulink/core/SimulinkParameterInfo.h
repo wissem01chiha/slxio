@@ -23,11 +23,11 @@ namespace slxio
     class CoderInfo;
 
     /// Metadata describing a Simulink parameter.
-    class SimulinkParameterInformation final
+    class SimulinkParameterInfo final
     {
     public:
-        SimulinkParameterInformation();
-        ~SimulinkParameterInformation();
+        SimulinkParameterInfo();
+        ~SimulinkParameterInfo();
 
         const std::string& GetUnit() const;
         void SetUnit(const std::string& unit);

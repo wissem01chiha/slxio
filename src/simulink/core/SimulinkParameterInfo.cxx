@@ -14,73 +14,73 @@
  * limitations under the License.
  */
 
-#include "SimulinkParameterInformation.h"
+#include "SimulinkParameterInfo.h"
 #include "CoderInfo.h"
 
 namespace slxio
 {
-    SimulinkParameterInformation::SimulinkParameterInformation()
+    SimulinkParameterInfo::SimulinkParameterInfo()
         : m_min(0.0f), m_max(0.0f), m_description(""), m_unit(""), m_complexity("real")
     {
     }
 
-    SimulinkParameterInformation::~SimulinkParameterInformation() = default;
+    SimulinkParameterInfo::~SimulinkParameterInfo() = default;
 
-    const std::string& SimulinkParameterInformation::GetUnit() const
+    const std::string& SimulinkParameterInfo::GetUnit() const
     {
         return m_unit;
     }
-    void SimulinkParameterInformation::SetUnit(const std::string& unit)
+    void SimulinkParameterInfo::SetUnit(const std::string& unit)
     {
         m_unit = unit;
     }
 
-    const std::string& SimulinkParameterInformation::GetDescription() const
+    const std::string& SimulinkParameterInfo::GetDescription() const
     {
         return m_description;
     }
-    void SimulinkParameterInformation::SetDescription(const std::string& desc)
+    void SimulinkParameterInfo::SetDescription(const std::string& desc)
     {
         m_description = desc;
     }
 
-    const std::string& SimulinkParameterInformation::GetComplexity() const
+    const std::string& SimulinkParameterInfo::GetComplexity() const
     {
         return m_complexity;
     }
-    void SimulinkParameterInformation::SetComplexity(const std::string& comp)
+    void SimulinkParameterInfo::SetComplexity(const std::string& comp)
     {
         m_complexity = comp;
     }
 
-    double SimulinkParameterInformation::GetMin() const
+    double SimulinkParameterInfo::GetMin() const
     {
         return m_min;
     }
-    void SimulinkParameterInformation::SetMin(double min)
+    void SimulinkParameterInfo::SetMin(double min)
     {
         m_min = min;
     }
 
-    double SimulinkParameterInformation::GetMax() const
+    double SimulinkParameterInfo::GetMax() const
     {
         return m_max;
     }
-    void SimulinkParameterInformation::SetMax(double max)
+    void SimulinkParameterInfo::SetMax(double max)
     {
         m_max = max;
     }
 
-    const std::vector<uint16_t>& SimulinkParameterInformation::GetDimensions() const
+    const std::vector<uint16_t>& SimulinkParameterInfo::GetDimensions() const
     {
         return m_dimensions;
     }
-    void SimulinkParameterInformation::SetDimensions(const std::vector<uint16_t>& dims)
+    void SimulinkParameterInfo::SetDimensions(const std::vector<uint16_t>& dims)
     {
         m_dimensions = dims;
     }
 
-    void SimulinkParameterInformation::SetCoderInfo(const std::shared_ptr<CoderInfo>& coder)
+    void SimulinkParameterInfo::SetCoderInfo(const std::shared_ptr<CoderInfo>& coder)
     {
         if (coder != nullptr)
         {
@@ -88,7 +88,7 @@ namespace slxio
         }
     }
 
-    std::shared_ptr<CoderInfo> SimulinkParameterInformation::GetCoderInfo() const
+    std::shared_ptr<CoderInfo> SimulinkParameterInfo::GetCoderInfo() const
     {
         return m_coder;
     }

@@ -16,7 +16,7 @@ add_module(
   SimulinkCore
   SimulinkDataType.cxx
   SimulinkSignal.cxx
-  SimulinkParameterInformation.cxx
+  SimulinkParameterInfo.cxx
   SimulinkParameter.cxx
   SimulinkBlockType.cxx
   SimulinkModelType.cxx

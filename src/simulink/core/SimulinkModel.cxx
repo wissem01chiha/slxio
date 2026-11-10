@@ -1,32 +1,35 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkModel.h"
-#include "ISimulinkBlock.h"
-#include "ModelWorkspace.h"
-#include "SimulationSettings.h"
-#include "SimulinkArray.h"
-#include "SimulinkObject.h"
 #include "SimulinkParameter.h"
+#include "SimulinkConfigSet.h"
+#include "SimulinkLine.h"
+#include "SimulinkPort.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     SimulinkModel::SimulinkModel()
         : m_type(SimulinkModelType::Model), m_workspace(nullptr), m_simSet(nullptr)
     {
     }
 
-    SimulinkModel* SimulinkModel::New() const
-    {
-        return new SimulinkModel(); // NOSONAR
-    }
-
     SimulinkModel::SimulinkModel(SimulinkModelType Type) : m_type(Type)
     {
-    }
-
-    SId SimulinkModel::GetId() const
-    {
-        return m_id;
     }
 
     std::string SimulinkModel::ToString() const

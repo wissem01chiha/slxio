@@ -214,6 +214,6 @@ namespace slxio
 
     };
 
-    std::string ToString(SimulinkBlockType type);
+    std::string_view ToString(SimulinkBlockType type);
 
 }; // namespace slxio

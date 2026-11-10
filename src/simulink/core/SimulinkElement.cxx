@@ -15,8 +15,35 @@
  */
 
 #include "SimulinkElement.h"
+#include "SimulinkModel.h"
 
 namespace slxio
 {
 
-};
+    SimulinkElement::SimulinkElement() : m_model(std::make_shared<SimulinkModel>())
+    {
+    }
+
+    SimulinkElement::SimulinkElement(const std::shared_ptr<SimulinkModel>& model) : m_model(model)
+    {
+    }
+
+    SimulinkElement::SimulinkElement(SimulinkElement& element)
+    {
+        m_model = element.GetModel();
+    }
+
+    std::vector<ISimulinkElement> SimulinkElement::GetChildren() const
+    {
+        return std::vector<ISimulinkElement>();
+    }
+
+    std::shared_ptr<SimulinkModel> SimulinkElement::GetModel() const
+    {
+        return nullptr;
+    }
+
+    SimulinkElement::~SimulinkElement()
+    {
+    }
+}; // namespace slxio

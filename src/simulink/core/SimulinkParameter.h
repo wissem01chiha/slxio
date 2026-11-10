@@ -22,7 +22,7 @@
 namespace slxio
 {
 
-    class SimulinkParameterInformation;
+    class SimulinkParameterInfo;
 
     class SimulinkParameter final
     {
@@ -36,14 +36,14 @@ namespace slxio
         double GetValueAsDouble() const;
         SimulinkDataType GetSimulinkDataType() const;
         void SetSimulinkDataType(SimulinkDataType type);
-        SimulinkParameterInformation& GetSimulinkParameterInformation() const;
+        SimulinkParameterInfo& GetSimulinkParameterInfo() const;
 
         ~SimulinkParameter();
 
     private:
         std::string m_value;
         SimulinkDataType m_dataType{SimulinkDataType::Auto};
-        std::unique_ptr<SimulinkParameterInformation> m_information;
+        std::unique_ptr<SimulinkParameterInfo> m_information;
     };
 
 }; // namespace slxio
