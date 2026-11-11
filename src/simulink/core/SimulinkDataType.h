@@ -40,7 +40,7 @@ namespace slxio
     };
 
     std::string ToString(SimulinkDataType type);
-    SimulinkDataType FromString(const std::string& str);
+    SimulinkDataType ParseSimulinkDataType(const std::string& type);
     bool IsNumeric(SimulinkDataType type);
     bool IsFloatingPoint(SimulinkDataType type);
     bool IsSigned(SimulinkDataType type);

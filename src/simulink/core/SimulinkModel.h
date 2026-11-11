@@ -24,8 +24,6 @@
 
 namespace slxio
 {
-    class SimulinkPort;
-    class SimulinkLine;
     class SimulinkParameter;
     class SimulinkConfigSet;
     class StateflowMachine;
@@ -34,9 +32,8 @@ namespace slxio
     {
     public:
         SimulinkModel();
-        explicit SimulinkModel(SimulinkModel& model);
+        SimulinkModel(const SimulinkModel&) = default;
         SimulinkModel(SimulinkModelType type, std::string originId);
-        SimulinkModel(SimulinkModel& origModel);
 
         std::shared_ptr<SimulinkModel> GetModel() const override;
         std::vector<ISimulinkElement> GetChildren() const override;
@@ -83,7 +80,7 @@ namespace slxio
         std::set<std::string> GetBlockDefaultParameterNames(SimulinkBlockType type) const;
 
         // This throws an exception as models cannot have parents.
-        void SetParent(SimulinkBlock parent) override;
+        void SetParent(const std::shared_ptr<SimulinkBlock> parent) override;
 
         // Get a configuration default parameter.
         std::shared_ptr<SimulinkParameter> GetConfigSetDefaultParameter(std::string name) const;
@@ -120,7 +117,6 @@ namespace slxio
         std::string m_originId;
         SimulinkModelType m_type;
         std::vector<std::shared_ptr<SimulinkBlock>> m_blocks;
-        std::vector<std::shared_ptr<SimulinkLine>> m_lines;
         ankerl::unordered_dense::map<std::string, std::shared_ptr<SimulinkParameter>> m_parameters;
         std::vector<std::shared_ptr<SimulinkConfigSet>> m_configurations;
     };

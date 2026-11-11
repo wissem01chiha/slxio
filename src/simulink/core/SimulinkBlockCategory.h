@@ -45,6 +45,6 @@ namespace slxio
     };
 
     std::string ToString(SimulinkBlockCategory category);
-    SimulinkBlockCategory FromString(const std::string& category);
+    SimulinkBlockCategory ParseSimulinkBlockCategory(const std::string& category);
 
 }; // namespace slxio

@@ -12,4 +12,10 @@ namespace slxio
         CHECK(ToString(SimulinkBlockCategory::LookupTables) == "LookupTables");
     }
 
+    TEST_CASE("Parse block category test")
+    {
+        CHECK(ParseSimulinkBlockCategory("AdditionalMathDiscrete") ==
+              SimulinkBlockCategory::AdditionalMathDiscrete);
+        CHECK(ParseSimulinkBlockCategory("Continuous") == SimulinkBlockCategory::Continuous);
+    }
 }; // namespace slxio

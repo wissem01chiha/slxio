@@ -27,6 +27,7 @@ namespace slxio
     {
     public:
         SimulinkElement();
+
         explicit SimulinkElement(const std::shared_ptr<SimulinkModel>& model);
         SimulinkElement(SimulinkElement& element);
 

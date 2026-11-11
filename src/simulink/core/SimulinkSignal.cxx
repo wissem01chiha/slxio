@@ -37,7 +37,7 @@ namespace slxio
 
     void SimulinkSignal::SetDataType(const char* type)
     {
-        m_dataType = FromString(std::string(type));
+        m_dataType = ParseSimulinkDataType(std::string(type));
     }
     void SimulinkSignal::SetComplexityType(const char* complexityType)
     {

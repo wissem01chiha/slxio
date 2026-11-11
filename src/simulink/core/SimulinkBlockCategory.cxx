@@ -68,4 +68,17 @@ namespace slxio
         }
     }
 
+    SimulinkBlockCategory ParseSimulinkBlockCategory(const std::string& category)
+    {
+        if (category == "AdditionalMathDiscrete")
+        {
+            return SimulinkBlockCategory::AdditionalMathDiscrete;
+        }
+        else if (category == "Continuous")
+        {
+            return SimulinkBlockCategory::Continuous;
+        }
+        return SimulinkBlockCategory::UserDefinedFunctions;
+    }
+
 }; // namespace slxio

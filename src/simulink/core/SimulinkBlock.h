@@ -24,7 +24,6 @@
 
 namespace slxio
 {
-
     class SimulinkInPort;
     class SimulinkOutPort;
     class SimulinkAnnotation;
@@ -33,16 +32,19 @@ namespace slxio
     {
     public:
         SimulinkBlock();
-        SimulinkBlock(SimulinkBlock& origBlock);
+        SimulinkBlock(const SimulinkBlock& origBlock);
 
         void AddSubBlock(const SimulinkBlock& subBlock);
-        virtual void SetParent(SimulinkBlock parent) = 0;
+
+        virtual void SetParent(const std::shared_ptr<SimulinkBlock> parent);
+
         /**
          * If this block is of type 'Reference' this returns
          * Reference;source type of the reference. Otherwise
          * this just returns the type of the block.
          */
         std::string GetResolvedType();
+
         /**
          * Get named sub block or nullptr if no sub block with the given
          * name is present.
@@ -53,8 +55,10 @@ namespace slxio
 
         std::string GetType() const;
 
+        SimulinkBlockCategory GetBlockCategory() const;
+
         /** Returns whether this block has subBlocks. */
-        bool HasSubBlocks();
+        bool HasSubBlocks() const;
 
         /**
          * Unlinks this object from the simulink tree. Also removes all sub-blocks,
@@ -67,6 +71,8 @@ namespace slxio
          * not unlink sub-blocks, ports and annotations.
          */
         void Detach();
+
+        std::string ToString() const;
 
         ~SimulinkBlock();
 

@@ -56,38 +56,38 @@ namespace slxio
         return {};
     }
 
-    SimulinkDataType FromString(const std::string& str)
+    SimulinkDataType ParseSimulinkDataType(const std::string& type)
     {
-        if (str == "double")
+        if (type == "double")
             return SimulinkDataType::Double;
-        if (str == "single")
+        if (type == "single")
             return SimulinkDataType::Single;
-        if (str == "half")
+        if (type == "half")
             return SimulinkDataType::Half;
-        if (str == "int8")
+        if (type == "int8")
             return SimulinkDataType::Int8;
-        if (str == "uint8")
+        if (type == "uint8")
             return SimulinkDataType::UInt8;
-        if (str == "int16")
+        if (type == "int16")
             return SimulinkDataType::Int16;
-        if (str == "uint16")
+        if (type == "uint16")
             return SimulinkDataType::UInt16;
-        if (str == "int32")
+        if (type == "int32")
             return SimulinkDataType::Int32;
-        if (str == "uint32")
+        if (type == "uint32")
             return SimulinkDataType::UInt32;
-        if (str == "uint64")
+        if (type == "uint64")
             return SimulinkDataType::UInt64;
-        if (str == "boolean" || str == "logical")
+        if (type == "boolean" || type == "logical")
             return SimulinkDataType::Boolean;
-        if (str == "string")
+        if (type == "string")
             return SimulinkDataType::String;
-        if (str == "char")
+        if (type == "char")
             return SimulinkDataType::Char;
-        if (str == "auto")
+        if (type == "auto")
             return SimulinkDataType::Auto;
 
-        throw std::invalid_argument("unknown string: " + str);
+        throw std::invalid_argument("unknown string: " + type);
     }
 
     bool IsNumeric(SimulinkDataType type)

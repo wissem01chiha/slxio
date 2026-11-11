@@ -62,7 +62,4 @@ namespace slxio
         std::vector<std::shared_ptr<IParameterObjectBase>> m_parameters;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKARRAY_H

@@ -15,3 +15,19 @@
  */
 
 #include "SimulinkBlock.h"
+#include "SimulinkInPort.h"
+#include "SimulinkOutPort.h"
+#include "SimulinkAnnotation.h"
+
+namespace slxio
+{
+    SimulinkBlock::SimulinkBlock() {};
+    SimulinkBlock::SimulinkBlock(const SimulinkBlock& origBlock)
+    {
+    }
+    bool SimulinkBlock::HasSubBlocks() const
+    {
+        return m_subBlocks.empty();
+    }
+
+}; // namespace slxio

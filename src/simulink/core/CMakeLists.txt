@@ -20,9 +20,17 @@ add_module(
   SimulinkParameter.cxx
   SimulinkBlockType.cxx
   SimulinkModelType.cxx
-  SimulinkBlockCategory.cxx)
+  SimulinkInPort.cxx
+  SimulinkPortType.cxx
+  SimulinkBlockCategory.cxx
+  SimulinkPortBase.cxx
+  SimulinkOutPort.cxx
+  SimulinkInPort.cxx
+  SimulinkBlock.cxx
+  SimulinkElement.cxx
+  SimulinkModel.cxx)
 module_link_libraries(SimulinkCore CommonCore SimulinkMisc
-                      SimulinkConfiguration)
+                      SimulinkConfiguration SimulinkAnnotation)
 module_include_directories(SimulinkCore
                            ${PROJECT_EXTERN_SOURCE_DIR}/unordered_dense)
 add_subdirectory(test)
