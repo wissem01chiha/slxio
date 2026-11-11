@@ -23,7 +23,7 @@ namespace slxio
 {
     class SimulinkBlock;
 
-    class SimulinkPortBase 
+    class SimulinkPortBase
     {
     public:
         SimulinkPortBase();
@@ -36,8 +36,8 @@ namespace slxio
 
         std::string GetIndex() const;
 
-        std::shared_ptr<SimulinkBlock> GetBlock() const ;
- 
+        std::shared_ptr<SimulinkBlock> GetBlock() const;
+
         /**
          * This only sets the block to nullptr. Acutal remove
          * implementation is done in the sub classes.
@@ -45,6 +45,7 @@ namespace slxio
         virtual void Remove();
 
         ~SimulinkPortBase();
+
     private:
         std::string m_index;
         std::shared_ptr<SimulinkBlock> m_block;
