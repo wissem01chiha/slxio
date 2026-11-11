@@ -26,7 +26,7 @@ namespace slxio
 {
     class SimulinkParameter;
     class SimulinkConfigSet;
-    //class StateflowMachine;
+    // class StateflowMachine;
 
     class SimulinkModel final : public SimulinkBlock
     {
@@ -102,7 +102,7 @@ namespace slxio
                                                                  std::string name);
 
         // Get Stateflow machine of this model (may be nullptr).
-        //std::shared_ptr<StateflowMachine> GetStateflowMachine() const;
+        // std::shared_ptr<StateflowMachine> GetStateflowMachine() const;
 
         SimulinkModelType GetModelType() const;
 
@@ -111,8 +111,9 @@ namespace slxio
         std::string GetModelName() const;
 
         std::string ToString() const;
-        
-        ~SimulinkModel() =default;
+
+        ~SimulinkModel() = default;
+
     private:
         std::string m_name;
         std::string m_originId;

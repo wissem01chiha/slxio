@@ -21,51 +21,51 @@
 namespace slxio
 {
 
-class SimulinkParameter;
+    class SimulinkParameter;
 
-using SimulinkParameterPtr = std::shared_ptr<SimulinkParameter>;
+    using SimulinkParameterPtr = std::shared_ptr<SimulinkParameter>;
 
-class ParameterizedElement
-{
-protected:
-    ParameterizedElement();
+    class ParameterizedElement
+    {
+    protected:
+        ParameterizedElement();
 
-    ParameterizedElement(const ParameterizedElement& Other);
+        ParameterizedElement(const ParameterizedElement& Other);
 
-public:
-    virtual ~ParameterizedElement() = default;
+    public:
+        virtual ~ParameterizedElement() = default;
 
-    /**
-     * Get parameter specified by name. This takes default parameters into
-     * account.
-     */
-    SimulinkParameterPtr GetDeclaredParameter(const std::string& Name) const;
+        /**
+         * Get parameter specified by name. This takes default parameters into
+         * account.
+         */
+        SimulinkParameterPtr GetDeclaredParameter(const std::string& Name) const;
 
-    std::unordered_set<std::string> GetDeclaredParameterNames() const;
+        std::unordered_set<std::string> GetDeclaredParameterNames() const;
 
-    /**
-     * Get parameter specified by name. This takes default parameters into
-     * account.
-     */
-    SimulinkParameterPtr GetParameter(const std::string& Name) const;
+        /**
+         * Get parameter specified by name. This takes default parameters into
+         * account.
+         */
+        SimulinkParameterPtr GetParameter(const std::string& Name) const;
 
-    /**
-     * Get parameter names. This does not take default parameters
-     * into account.
-     */
-    std::unordered_set<std::string> GetParameterNames() const;
+        /**
+         * Get parameter names. This does not take default parameters
+         * into account.
+         */
+        std::unordered_set<std::string> GetParameterNames() const;
 
-    void SetParameter(const std::string& Name,SimulinkParameterPtr Value);
+        void SetParameter(const std::string& Name, SimulinkParameterPtr Value);
 
-    std::string String() const;
+        std::string String() const;
 
-protected:
-    SimulinkParameterPtr GetDefaultParameter(const std::string& Name) const;
+    protected:
+        SimulinkParameterPtr GetDefaultParameter(const std::string& Name) const;
 
-    virtual std::unordered_set<std::string> GetDefaultParameterNames() const;
+        virtual std::unordered_set<std::string> GetDefaultParameterNames() const;
 
-private:
-    ankerl::unordered_dense::map<std::string,SimulinkParameterPtr> m_parameters;
-};
+    private:
+        ankerl::unordered_dense::map<std::string, SimulinkParameterPtr> m_parameters;
+    };
 
 } // namespace slxio
