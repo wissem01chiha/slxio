@@ -29,8 +29,9 @@ namespace slxio
     {
     public:
         virtual ~ISimulinkElement() = default;
-        virtual std::vector<ISimulinkElement> GetChildren() const = 0;
+        virtual std::vector<std::shared_ptr<ISimulinkElement>> GetChildren() const = 0;
         virtual std::shared_ptr<SimulinkModel> GetModel() const = 0;
+        virtual std::string ToString() const = 0;
     };
 
 }; // namespace slxio

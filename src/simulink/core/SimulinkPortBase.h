@@ -26,7 +26,7 @@ namespace slxio
     class SimulinkPortBase
     {
     public:
-        SimulinkPortBase();
+        SimulinkPortBase() = default;
 
         SimulinkPortBase(std::shared_ptr<SimulinkBlock> block, std::string index);
 

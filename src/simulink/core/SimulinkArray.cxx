@@ -1,26 +1,36 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkArray.h"
-#include "SimulinkECH.h"
+#include "SimulinkParameter.h"
 #include "SimulinkObject.h"
+#include "SimulinkModel.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    SimulinkArray::~SimulinkArray() = default;
-
-    SimulinkArray::SimulinkArray() : m_id((SId)0) {};
-
-    ISimulinkElement* SimulinkArray::New() const
-    {
-        return new SimulinkArray(); // NOSONAR
-    }
+    SimulinkArray::SimulinkArray()
+        : m_index(""), m_type(""), m_name(""), m_dimension(""), m_model(nullptr) {};
 
     std::string SimulinkArray::ToString() const
     {
         std::ostringstream oss;
 
         oss << "SimulinkArray {\n";
-        oss << "  Id: " << m_id << "\n";
+        oss << "  Id: " << m_index << "\n";
         oss << "  Type: " << m_type << "\n";
         oss << "  Name: " << m_name << "\n";
         oss << "  Dimension: " << m_dimension << "\n";
@@ -31,107 +41,16 @@ namespace slxio
             oss << "    - " << object << "\n";
         }
 
-        oss << "  m_arrays:\n";
-        for (const auto& children : GetOrderedChildren())
+        oss << "  Arrays:\n";
+        for (const auto& children : GetChildren())
         {
-            if (children != nullptr)
-            {
-                oss << "    - " << children->ToString() << "\n";
-            }
+            oss << "    - " << children->ToString() << "\n";
         }
 
-        oss << "  Parameters:\n";
-        for (const auto& param : m_parameters)
-        {
-            if (param)
-            {
-                oss << "    - " << param->ToString() << "\n";
-            }
-        }
-
+        oss << String() << "\n";
         oss << "}";
 
         return oss.str();
-    }
-
-    HError SimulinkArray::AcceptInsert(ISimulinkElement& parent)
-    {
-        auto* array = dynamic_cast<SimulinkArray*>(&parent);
-
-        if (array != nullptr)
-        {
-            // needs valid copy constructor
-            array->Insert(std::make_shared<SimulinkArray>(*this));
-            return E_OK;
-        }
-
-        auto* object = dynamic_cast<SimulinkObject*>(&parent);
-        if (object != nullptr)
-        { // needs copy constructor valid
-            object->Insert(std::make_shared<SimulinkArray>(*this));
-            return E_OK;
-        }
-
-        return E_OPERATION_NOT_SUPPORTED;
-    }
-
-    HError SimulinkArray::Insert(const std::shared_ptr<ISimulinkElement>& element)
-    {
-        if (element == nullptr)
-        {
-            return E_CHILD_NULLPTR_RECEIVED;
-        }
-        GetChildren()[element->GetId()] = element;
-        GetOrderedChildren().push_back(element);
-        // tell the element how is his parent
-        element->SetParent(shared_from_this());
-        return E_OK;
-    }
-
-    SId SimulinkArray::GetId() const
-    {
-        return m_id;
-    }
-
-    void SimulinkArray::AddParam(const std::string& name,
-                                 const std::shared_ptr<IParameterObjectBase>& p)
-    {
-        if (p == nullptr)
-        {
-            return;
-        }
-        m_parameters.push_back(p);
-    }
-
-    void SimulinkArray::SetParam(const std::string& name,
-                                 const std::shared_ptr<IParameterObjectBase>& p)
-    {
-        if (p == nullptr)
-        {
-            return;
-        }
-
-        for (auto& param : m_parameters)
-        {
-            if (param->GetName() == name)
-            {
-                param = p;
-                return;
-            }
-        }
-        AddParam(name, p);
-    }
-
-    std::shared_ptr<IParameterObjectBase> SimulinkArray::GetParam(const std::string& name)
-    {
-        for (const auto& param : m_parameters)
-        {
-            if (param->GetName() == name)
-            {
-                return param;
-            }
-        }
-        return nullptr;
     }
 
     std::string SimulinkArray::GetName() const
@@ -167,5 +86,14 @@ namespace slxio
         m_dimension = dimension;
     }
 
-    SLXIO_ABI_NAMESPACE_END
+    std::vector<std::shared_ptr<ISimulinkElement>> SimulinkArray::GetChildren() const
+    {
+        return m_children;
+    }
+
+    std::shared_ptr<SimulinkModel> SimulinkArray::GetModel() const
+    {
+        return m_model;
+    }
+
 }; // namespace slxio

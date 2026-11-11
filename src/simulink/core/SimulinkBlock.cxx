@@ -22,12 +22,34 @@
 namespace slxio
 {
     SimulinkBlock::SimulinkBlock() {};
+
     SimulinkBlock::SimulinkBlock(const SimulinkBlock& origBlock)
     {
     }
     bool SimulinkBlock::HasSubBlocks() const
     {
         return m_subBlocks.empty();
+    }
+
+    std::vector<std::shared_ptr<ISimulinkElement>> SimulinkBlock::GetChildren() const
+    {
+        return {};
+    }
+
+    std::shared_ptr<SimulinkModel> SimulinkBlock::GetModel() const
+    {
+        return m_model;
+    }
+
+    void SimulinkBlock::SetParent(const std::shared_ptr<SimulinkBlock> parent)
+    {
+    }
+    std::string SimulinkBlock::ToString() const
+    {
+        return "";
+    }
+    SimulinkBlock::~SimulinkBlock()
+    {
     }
 
 }; // namespace slxio

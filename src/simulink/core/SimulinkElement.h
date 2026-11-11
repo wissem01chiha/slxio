@@ -29,10 +29,12 @@ namespace slxio
         SimulinkElement();
 
         explicit SimulinkElement(const std::shared_ptr<SimulinkModel>& model);
-        SimulinkElement(SimulinkElement& element);
+        SimulinkElement(const SimulinkElement& element);
 
-        std::vector<ISimulinkElement> GetChildren() const override;
+        std::vector<std::shared_ptr<ISimulinkElement>> GetChildren() const override;
         std::shared_ptr<SimulinkModel> GetModel() const override;
+
+        std::string ToString() const override;
 
         ~SimulinkElement();
 

@@ -35,10 +35,11 @@ namespace slxio
         return std::make_shared<SimulinkModel>(*this);
     }
 
-    std::vector<ISimulinkElement> SimulinkModel::GetChildren() const
+    std::vector<std::shared_ptr<ISimulinkElement>> SimulinkModel::GetChildren() const
     {
-        return std::vector<ISimulinkElement>();
+        return m_children;
     }
+
     void SimulinkModel::SetParent(const std::shared_ptr<SimulinkBlock> parent)
     {
         return;

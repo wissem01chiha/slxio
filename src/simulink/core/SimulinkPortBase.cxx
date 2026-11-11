@@ -47,4 +47,7 @@ namespace slxio
         return m_block;
     }
 
+    void SimulinkPortBase::Remove()
+    {
+    }
 }; // namespace slxio

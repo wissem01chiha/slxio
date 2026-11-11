@@ -17,60 +17,40 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Error.h"
+#include "SimulinkElement.h"
+#include "ParameterizedElement.h"
 
 namespace slxio
 {
     class SimulinkParameter;
-    class SimulinkElement;
-    class SimulinkArray;
 
-    /**
-     * Class for Simulink objects, which are a construct for
-     * structured storage of meta-data in the model.
-     */
-    class SimulinkObject final
+    class SimulinkObject final : public SimulinkElement, ParameterizedElement
     {
     public:
-        SimulinkObject() = default;
-        ~SimulinkObject() override;
-
-        ISimulinkElement* New() const override;
-        // objects can only be inserted into other objects, so the parent must be an
-        // object
-        HError AcceptInsert(ISimulinkElement& parent) override;
-        HError Insert(const std::shared_ptr<ISimulinkElement>& element) override;
-        SId GetId() const override;
-        void SetId(const SId& id) override;
-
-        void AddParam(const std::string& name,
-                      const std::shared_ptr<IParameterObjectBase>& p) override;
-        void SetParam(const std::string& name,
-                      const std::shared_ptr<IParameterObjectBase>& p) override;
-        std::shared_ptr<IParameterObjectBase> GetParam(const std::string& name) override;
+        SimulinkObject();
 
         std::string GetName() const;
         void SetName(const std::string& name);
-        std::string GetClassName() const;
-        void SetClassName(const std::string& className);
         std::string GetVersion() const;
         void SetVersion(const std::string& version);
+        std::string GetClassName() const;
+        void SetClassName(const std::string& className);
+        std::string GetIndex() const;
 
+        std::vector<std::shared_ptr<ISimulinkElement>> GetChildren() const override;
+        std::shared_ptr<SimulinkModel> GetModel() const override;
         std::string ToString() const override;
 
-        /** Return an array with the current object if not found return nullptr ! */
-        std::shared_ptr<ISimulinkElement> GetArray(const SId& id) const;
+        ~SimulinkObject() = default;
 
     private:
-        SId m_id;
+        friend class SimulinkArray;
+
+        std::string m_index;
         std::string m_version;
         std::string m_propName;
         std::string m_className;
-        std::vector<std::shared_ptr<ISimulinkElement>> m_arrays;
-        std::vector<std::shared_ptr<IParameterObjectBase>> m_parameters;
+        std::vector<std::shared_ptr<ISimulinkElement>> m_children;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKOBJECT_H

@@ -66,4 +66,9 @@ namespace slxio
         return *m_information;
     }
 
+    std::string SimulinkParameter::ToString() const
+    {
+        return std::string("");
+    }
+
 }; // namespace slxio

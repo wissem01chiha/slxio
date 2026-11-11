@@ -3,12 +3,11 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    class SimulinkModelTestFixture
+        TEST_CASE("Simulink  model default constructor test")
     {
-    protected:
-    };
+        auto mdl = std::make_shared<SimulinkModel>();
+        CHECK(mdl != nullptr);
+    }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

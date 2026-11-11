@@ -27,12 +27,17 @@ namespace slxio
     class SimulinkInPort;
     class SimulinkOutPort;
     class SimulinkAnnotation;
+    class SimulinkModel;
 
     class SimulinkBlock : public SimulinkElement
     {
     public:
         SimulinkBlock();
         SimulinkBlock(const SimulinkBlock& origBlock);
+
+        std::vector<std::shared_ptr<ISimulinkElement>> GetChildren() const override;
+
+        std::shared_ptr<SimulinkModel> GetModel() const override;
 
         void AddSubBlock(const SimulinkBlock& subBlock);
 
@@ -72,7 +77,7 @@ namespace slxio
          */
         void Detach();
 
-        std::string ToString() const;
+        std::string ToString() const override;
 
         ~SimulinkBlock();
 
@@ -81,6 +86,7 @@ namespace slxio
         ankerl::unordered_dense::map<std::string, SimulinkInPort> m_inPorts;
         ankerl::unordered_dense::map<std::string, SimulinkOutPort> m_outPorts;
         std::vector<SimulinkAnnotation> m_annotations;
+        std::shared_ptr<SimulinkModel> m_model;
     };
 
 }; // namespace slxio

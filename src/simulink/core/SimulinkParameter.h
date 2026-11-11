@@ -38,6 +38,8 @@ namespace slxio
         void SetSimulinkDataType(SimulinkDataType type);
         SimulinkParameterInfo& GetSimulinkParameterInfo() const;
 
+        std::string ToString() const;
+
         ~SimulinkParameter();
 
     private:
