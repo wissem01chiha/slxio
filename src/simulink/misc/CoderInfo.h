@@ -20,14 +20,11 @@
 
 namespace slxio
 {
-
-    /**
-     * @class CoderInfo
-     * @brief This class holds information about code generation for a
-     * specific variable or signal.
-     * @note StorageClass= 'Custom' not supported along with the
-     * CustomAttribute
-     */
+    // CoderInfo
+    // This class holds information about code generation for a
+    // specific variable or signal.
+    // StorageClass= 'Custom' not supported along with the
+    // CustomAttribute
     class CoderInfo final
     {
     public:

@@ -1,12 +1,10 @@
-#include "StateflowChart.h"
 
-#include "Logger.h"
+
+#include "StateflowChart.h"
 #include "StateflowBlock.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     HError StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
     {
         // nodes.AddElement(node);
@@ -14,7 +12,7 @@ namespace slxio
         return E_OK;
     }
 
-    HError StateflowChart::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+    HError StateflowChart::Remove(std::shared_ptr<SimulinkElementBase> element)
     {
         // nodes.AddElement(node);
         // node.setParent(this);
@@ -26,12 +24,7 @@ namespace slxio
         return std::shared_ptr<StateflowElementBase>();
     }
 
-    SimulinkElementType StateflowChart::GetType() const
-    {
-        return SimulinkElementType(SimulinkElementType::Chart);
-    }
-
-    std::string StateflowChart::getName()
+    std::string StateflowChart::GetName()
     {
         return std::string("");
     }

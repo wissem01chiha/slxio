@@ -52,6 +52,8 @@ namespace slxio
 
         std::string ToString() const;
 
+        ~SimulinkConfigSet() = default;
+
     private:
         friend class SimulinkConfigSetCollection;
 

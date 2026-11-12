@@ -35,16 +35,10 @@ namespace slxio
         oss << "  Name: " << m_name << "\n";
         oss << "  Dimension: " << m_dimension << "\n";
 
-        oss << "  Object Ids:\n";
-        for (const auto& object : m_objects)
-        {
-            oss << "    - " << object << "\n";
-        }
-
-        oss << "  Arrays:\n";
+        oss << "  Elements:\n";
         for (const auto& children : GetChildren())
         {
-            oss << "    - " << children->ToString() << "\n";
+            oss << "  - " << children->ToString() << "\n";
         }
 
         oss << String() << "\n";

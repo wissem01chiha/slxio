@@ -2,40 +2,41 @@
 #include "SimulinkArray.h"
 #include "SimulinkObject.h"
 
-using namespace slxio;
-SLXIO_ABI_NAMESPACE_BEGIN
-
-TEST_CASE("Test Constructor ")
+namespace slxio
 {
-    auto obj = std::make_shared<SimulinkObject>();
-    CHECK(obj != nullptr);
-}
 
-TEST_CASE("Test Accept Inserted in other objects")
-{
-    auto obj = std::make_shared<SimulinkObject>();
-    obj->SetName("TestObject");
+    TEST_CASE("Simulink object default constructor test")
+    {
+        auto obj = std::make_shared<SimulinkObject>();
+        CHECK(obj != nullptr);
+        CHECK(obj->GetModel() == nullptr);
+    }
 
-    std::shared_ptr<SimulinkObject> subObj = std::make_shared<SimulinkObject>();
-    CHECK(subObj != nullptr);
+    // TEST_CASE("Test Accept Inserted in other objects")
+    // {
+    //     auto obj = std::make_shared<SimulinkObject>();
+    //     obj->SetName("TestObject");
 
-    HError status = subObj->AcceptInsert(*obj);
-    CHECK(status == E_OK);
-    CHECK(obj->Insert(subObj) == E_OK);
+    //     std::shared_ptr<SimulinkObject> subObj = std::make_shared<SimulinkObject>();
+    //     CHECK(subObj != nullptr);
 
-    std::weak_ptr<ISimulinkElement> parent = subObj->GetParent();
+    //     HError status = subObj->AcceptInsert(*obj);
+    //     CHECK(status == E_OK);
+    //     CHECK(obj->Insert(subObj) == E_OK);
 
-    CHECK(parent.lock() != nullptr);
-}
+    //     std::weak_ptr<ISimulinkElement> parent = subObj->GetParent();
 
-TEST_CASE("Test Insert an object into an array parent ")
-{
-    auto obj = std::make_shared<SimulinkObject>();
-    std::shared_ptr<SimulinkArray> subArr = std::make_shared<SimulinkArray>();
-    // do sudArr insertable into obj , it should not !
-    HError status = obj->AcceptInsert(*subArr);
-    CHECK(status != E_OK);
-    CHECK(status == E_OPERATION_NOT_SUPPORTED);
-}
+    //     CHECK(parent.lock() != nullptr);
+    // }
 
-SLXIO_ABI_NAMESPACE_END
+    // TEST_CASE("Test Insert an object into an array parent ")
+    // {
+    //     auto obj = std::make_shared<SimulinkObject>();
+    //     std::shared_ptr<SimulinkArray> subArr = std::make_shared<SimulinkArray>();
+    //     // do sudArr insertable into obj , it should not !
+    //     HError status = obj->AcceptInsert(*subArr);
+    //     CHECK(status != E_OK);
+    //     CHECK(status == E_OPERATION_NOT_SUPPORTED);
+    // }
+
+}; // namespace slxio

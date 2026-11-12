@@ -21,4 +21,7 @@ module_add_tests(
   cxx/TestSimulinkModelType.cxx
   cxx/TestSimulinkBlockCategory.cxx
   cxx/TestSimulinkArray.cxx
-  cxx/TestSimulinkModel.cxx)
+  cxx/TestSimulinkModel.cxx
+  cxx/TestParameterizedElement.cxx
+  cxx/TestSimulinkObject.cxx
+  cxx/TestSimulinkInPort.cxx)

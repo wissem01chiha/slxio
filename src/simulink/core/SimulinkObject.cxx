@@ -20,7 +20,7 @@
 namespace slxio
 {
 
-    SimulinkObject::SimulinkObject()
+    SimulinkObject::SimulinkObject() : m_model(nullptr)
     {
     }
 
@@ -87,5 +87,10 @@ namespace slxio
     std::vector<std::shared_ptr<ISimulinkElement>> SimulinkObject::GetChildren() const
     {
         return m_children;
+    }
+
+    std::shared_ptr<SimulinkModel> SimulinkObject::GetModel() const
+    {
+        return m_model;
     }
 }; // namespace slxio

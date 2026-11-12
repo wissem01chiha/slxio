@@ -27,12 +27,11 @@ namespace slxio
 
     class ParameterizedElement
     {
-    protected:
+    public:
         ParameterizedElement();
 
         ParameterizedElement(const ParameterizedElement& Other);
 
-    public:
         virtual ~ParameterizedElement() = default;
 
         /**

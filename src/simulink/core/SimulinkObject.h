@@ -51,6 +51,7 @@ namespace slxio
         std::string m_propName;
         std::string m_className;
         std::vector<std::shared_ptr<ISimulinkElement>> m_children;
+        std::shared_ptr<SimulinkModel> m_model;
     };
 
 }; // namespace slxio

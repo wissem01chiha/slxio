@@ -4,6 +4,12 @@
 namespace slxio
 {
 
+    TEST_CASE("Config set default constructor test")
+    {
+        std::shared_ptr<SimulinkConfigSet> config = std::make_shared<SimulinkConfigSet>();
+        CHECK(config != nullptr);
+    }
+
     TEST_CASE("Config set store component test")
     {
         SimulinkConfigSet config("Simulation");
@@ -51,4 +57,4 @@ namespace slxio
         CHECK(*copied.FindComponent("FutureComponent")->FindParam("FutureOption") == "expression");
     }
 
-} // namespace slxio
+}; // namespace slxio

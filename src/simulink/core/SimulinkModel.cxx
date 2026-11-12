@@ -50,4 +50,69 @@ namespace slxio
         return m_type;
     }
 
+    std::string SimulinkModel::GetOriginId() const
+    {
+        return m_originId;
+    }
+
+    std::shared_ptr<SimulinkConfigSet> SimulinkModel::GetConfigSet(std::string name) const
+    {
+        for (auto config : m_configurations)
+        {
+            if (config->GetName() == name)
+            {
+                return config;
+            }
+        }
+        return nullptr;
+    }
+
+    error_code SimulinkModel::AddConfigSet(const std::string& name,
+                                           const std::shared_ptr<SimulinkConfigSet>& config)
+    {
+        if (name.empty())
+        {
+            return error_code::ConfigSetNameEmpty;
+        }
+        if (config == nullptr)
+        {
+            return error_code::ConfigSetInvalid;
+        }
+
+        m_configurations.push_back(config);
+        return error_code::Ok;
+    }
+
+    std::shared_ptr<SimulinkParameter> SimulinkModel::GetConfigSetParameter(std::string config,
+                                                                            std::string name)
+    {
+        if (config.empty())
+        {
+            return nullptr;
+        }
+        auto it = m_parameters.find(name);
+        if (it != m_parameters.end())
+        {
+            std::shared_ptr<SimulinkParameter> param = it->second;
+            return param;
+        }
+        return nullptr;
+    }
+
+    error_code SimulinkModel::SetConfigSetParameter(std::string config,
+                                                    std::string name,
+                                                    std::shared_ptr<SimulinkParameter> value)
+    {
+        if (config.empty())
+        {
+            return error_code::ConfigSetNameEmpty;
+        }
+        auto it = m_parameters.find(name);
+        if (it == m_parameters.end())
+        {
+            return error_code::ConfigSetParameterNotFound;
+        }
+        it->second = value;
+        return error_code::Ok;
+    }
 }; // namespace slxio

@@ -38,7 +38,7 @@ namespace slxio
 
         const auto& diagnostic = engine.GetDiagnostics().front();
         CHECK(diagnostic.GetSeverity() == DiagnosticSeverity::Error);
-        CHECK(diagnostic.GetDiagnosticMessage() == "Failed to read model: Invalid argument");
+        CHECK(diagnostic.GetDiagnosticMessage() == "Failed to read model: invalid argument");
         REQUIRE(diagnostic.GetErrorCode().has_value());
         CHECK(*diagnostic.GetErrorCode() == error);
     }

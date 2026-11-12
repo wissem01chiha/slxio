@@ -26,7 +26,7 @@ namespace slxio
     class SimulinkParameter;
     class SimulinkModel;
 
-    class SimulinkArray final : public SimulinkElement, ParameterizedElement
+    class SimulinkArray final : public SimulinkElement, public ParameterizedElement
     {
     public:
         SimulinkArray();
@@ -52,7 +52,6 @@ namespace slxio
         std::string m_name;
         std::string m_dimension;
         std::shared_ptr<SimulinkModel> m_model;
-        std::vector<std::string> m_objects;
         std::vector<std::shared_ptr<ISimulinkElement>> m_children;
     };
 

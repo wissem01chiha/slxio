@@ -20,18 +20,8 @@
 
 namespace slxio
 {
-
-    class SimulationSettings
+    struct SimulationSettings
     {
-    public:
-        SimulationSettings() = default;
-        ~SimulationSettings();
-
-        char* GetSolverName();
-        char* GetSolverType();
-        double GetFixedStepSize();
-
-    private:
         char SolverType[32];
         char SolverName[64];
         double FixedStepSize;
@@ -45,7 +35,6 @@ namespace slxio
         char SaveFinalState[8];
         char SaveFormat[16];
         char Decimation[16];
-
         char SimulationMode[32];
         char SILPILModeSetting[32];
         char SILPILSystemUnderTest[64];
@@ -53,16 +42,13 @@ namespace slxio
         char SILPILSimulationModeModelRef[32];
         char SimTabSimulationMode[32];
         char CodeVerificationMode[64];
-
         uint32_t PauseTimes;
         uint32_t NumberOfSteps;
         uint32_t SnapshotBufferSize;
         uint32_t SnapshotInterval;
         uint32_t NumberOfLastSnapshots;
-
         char EnablePacing[8];
         uint32_t PacingRate;
-
         char LinearizationMsg[32];
         char Profile[8];
         char ParamWorkspaceSource[64];
@@ -71,5 +57,7 @@ namespace slxio
         char AccelMakeCommand[32];
         char TryForcingSFcnDF[8];
     };
+
+    std::string ToString(const SimulationSettings& settings);
 
 }; // namespace slxio

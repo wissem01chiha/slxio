@@ -25,20 +25,10 @@ namespace slxio
     enum class error_code : int
     {
         Ok = 0,
-        NullptrReceived = 6,
         InvalidArgument = 1,
-        InvalidHandle = 2,
-        InvalidState = 3,
-        DefaultValueUsed = 4,
-        OperationNotSupported = 5,
-        ParameterVaribleExtis = 12,
-        ChildNullptrReceived = 7,
-        ChildTypeNotSupported = 8,
-        ChildDuplicateId = 9,
-        ChildNotFound = 10,
-        ParentTypeNotSupported = 11,
-        ParameterVaribleNameEmpty = 13,
-        ParameterVaribleNotFound = 14,
+        ConfigSetParameterNotFound = 2,
+        ConfigSetNameEmpty = 3,
+        ConfigSetInvalid = 4,
     };
 
     /// Define a custom error category for  error codes

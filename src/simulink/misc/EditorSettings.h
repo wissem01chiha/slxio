@@ -20,36 +20,8 @@
 
 namespace slxio
 {
-
-    class EditorSettings final
+    struct EditorSettings
     {
-    public:
-        EditorSettings() = default;
-        ~EditorSettings() = default;
-
-        bool GetShowPortDataTypes();
-        bool GetSampleTimeColors();
-        bool GetShowLineDimensions();
-        bool GetShowPortUnits();
-        bool GetShowLoopsOnError();
-        bool GetShowStorageClass();
-        bool GetShowTestPointIcons();
-        bool GetShowSignalResolutionIcons();
-        bool GetShowViewerIcons();
-        bool GetShowVisualizeInsertedRTB();
-        bool GetShowMarkup();
-        bool GetBlockNameDataTip();
-        bool GetBlockParametersDataTip();
-        bool GetBlockDescriptionStringDataTip();
-        bool GetBlockVariantConditionDataTip();
-        bool GetToolBar();
-        bool GetStatusBar();
-        bool GetBrowserShowLibraryLinks();
-        bool GetFunctionConnectors();
-        bool GetBrowserLookUnderMasks();
-        bool GetMultiThreadCoSim();
-
-    private:
         std::string m_libraryLinkDisplay;
         std::string m_portDataTypeDisplayFormat;
 
@@ -88,5 +60,7 @@ namespace slxio
         bool m_browserLookUnderMasks;
         bool m_multiThreadCoSim;
     };
+
+    std::string ToString(const EditorSettings& settings);
 
 }; // namespace slxio

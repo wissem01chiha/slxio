@@ -18,110 +18,53 @@
 
 namespace slxio
 {
-
-    bool EditorSettings::GetShowPortDataTypes()
+    std::string ToString(const EditorSettings& settings)
     {
-        return m_showPortDataTypes;
-    }
+        std::ostringstream oss;
 
-    bool EditorSettings::GetSampleTimeColors()
-    {
-        return m_sampleTimeColors;
-    }
+        oss << "EditorSettings {\n"
+            << "  LibraryLinkDisplay: \"" << settings.m_libraryLinkDisplay << "\"\n"
+            << "  PortDataTypeDisplayFormat: \"" << settings.m_portDataTypeDisplayFormat << "\"\n"
 
-    bool EditorSettings::GetShowLineDimensions()
-    {
-        return m_showLineDimensions;
-    }
+            << "  SampleTimeColors: " << std::boolalpha << settings.m_sampleTimeColors << "\n"
+            << "  SampleTimeAnnotations: " << settings.m_sampleTimeAnnotations << "\n"
+            << "  WideLines: " << settings.m_wideLines << "\n"
+            << "  ShowLineDimensions: " << settings.m_showLineDimensions << "\n"
+            << "  ShowPortDataTypes: " << settings.m_showPortDataTypes << "\n"
+            << "  ShowAllPropagatedSignalLabels: " << settings.m_showAllPropagatedSignalLabels
+            << "\n"
+            << "  ShowEditTimeErrors: " << settings.m_showEditTimeErrors << "\n"
+            << "  ShowEditTimeWarnings: " << settings.m_showEditTimeWarnings << "\n"
+            << "  ShowEditTimeAdvisorChecks: " << settings.m_showEditTimeAdvisorChecks << "\n"
+            << "  ShowPortUnits: " << settings.m_showPortUnits << "\n"
+            << "  ShowDesignRanges: " << settings.m_showDesignRanges << "\n"
+            << "  ShowLoopsOnError: " << settings.m_showLoopsOnError << "\n"
+            << "  IgnoreBidirectionalLines: " << settings.m_ignoreBidirectionalLines << "\n"
+            << "  ShowStorageClass: " << settings.m_showStorageClass << "\n"
+            << "  ShowTestPointIcons: " << settings.m_showTestPointIcons << "\n"
+            << "  ShowSignalResolutionIcons: " << settings.m_showSignalResolutionIcons << "\n"
+            << "  ShowViewerIcons: " << settings.m_showViewerIcons << "\n"
+            << "  SortedOrder: " << settings.m_sortedOrder << "\n"
+            << "  VariantCondition: " << settings.m_variantCondition << "\n"
+            << "  ShowSubsystemDomainSpec: " << settings.m_showSubsystemDomainSpec << "\n"
+            << "  ExecutionContextIcon: " << settings.m_executionContextIcon << "\n"
+            << "  ShowLinearizationAnnotations: " << settings.m_showLinearizationAnnotations << "\n"
+            << "  ShowVisualizeInsertedRTB: " << settings.m_showVisualizeInsertedRTB << "\n"
+            << "  ShowMarkup: " << settings.m_showMarkup << "\n"
+            << "  BlockNameDataTip: " << settings.m_blockNameDataTip << "\n"
+            << "  BlockParametersDataTip: " << settings.m_blockParametersDataTip << "\n"
+            << "  BlockDescriptionStringDataTip: " << settings.m_blockDescriptionStringDataTip
+            << "\n"
+            << "  BlockVariantConditionDataTip: " << settings.m_blockVariantConditionDataTip << "\n"
+            << "  ToolBar: " << settings.m_toolBar << "\n"
+            << "  StatusBar: " << settings.m_statusBar << "\n"
+            << "  BrowserShowLibraryLinks: " << settings.m_browserShowLibraryLinks << "\n"
+            << "  FunctionConnectors: " << settings.m_functionConnectors << "\n"
+            << "  BrowserLookUnderMasks: " << settings.m_browserLookUnderMasks << "\n"
+            << "  MultiThreadCoSim: " << settings.m_multiThreadCoSim << "\n"
+            << "}";
 
-    bool EditorSettings::GetShowPortUnits()
-    {
-        return m_showPortUnits;
-    }
-
-    bool EditorSettings::GetShowLoopsOnError()
-    {
-        return m_showLoopsOnError;
-    }
-
-    bool EditorSettings::GetShowStorageClass()
-    {
-        return m_showStorageClass;
-    }
-
-    bool EditorSettings::GetShowTestPointIcons()
-    {
-        return m_showTestPointIcons;
-    }
-
-    bool EditorSettings::GetShowSignalResolutionIcons()
-    {
-        return m_showSignalResolutionIcons;
-    }
-
-    bool EditorSettings::GetShowViewerIcons()
-    {
-        return m_showViewerIcons;
-    }
-
-    bool EditorSettings::GetShowVisualizeInsertedRTB()
-    {
-        return m_showVisualizeInsertedRTB;
-    }
-
-    bool EditorSettings::GetShowMarkup()
-    {
-        return m_showMarkup;
-    }
-
-    bool EditorSettings::GetBlockNameDataTip()
-    {
-        return m_blockNameDataTip;
-    }
-
-    bool EditorSettings::GetBlockParametersDataTip()
-    {
-        return m_blockParametersDataTip;
-    }
-
-    bool EditorSettings::GetBlockDescriptionStringDataTip()
-    {
-        return m_blockDescriptionStringDataTip;
-    }
-
-    bool EditorSettings::GetBlockVariantConditionDataTip()
-    {
-        return m_blockVariantConditionDataTip;
-    }
-
-    bool EditorSettings::GetToolBar()
-    {
-        return m_toolBar;
-    }
-
-    bool EditorSettings::GetStatusBar()
-    {
-        return m_statusBar;
-    }
-
-    bool EditorSettings::GetBrowserShowLibraryLinks()
-    {
-        return m_browserShowLibraryLinks;
-    }
-
-    bool EditorSettings::GetFunctionConnectors()
-    {
-        return m_functionConnectors;
-    }
-
-    bool EditorSettings::GetBrowserLookUnderMasks()
-    {
-        return m_browserLookUnderMasks;
-    }
-
-    bool EditorSettings::GetMultiThreadCoSim()
-    {
-        return m_multiThreadCoSim;
+        return oss.str();
     }
 
 }; // namespace slxio

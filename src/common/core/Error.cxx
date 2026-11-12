@@ -34,21 +34,17 @@ namespace slxio
         switch (static_cast<error_code>(ev))
         {
         case error_code::Ok:
-            return "Success";
+            return "success";
+        case error_code::ConfigSetParameterNotFound:
+            return "simulink config set parameter not found";
+        case error_code::ConfigSetNameEmpty:
+            return "simulink config set name is empty";
         case error_code::InvalidArgument:
-            return "Invalid argument";
-        case error_code::InvalidHandle:
-            return "Invalid handle";
-        case error_code::InvalidState:
-            return "Invalid state";
-        case error_code::DefaultValueUsed:
-            return "Default value used";
-        case error_code::OperationNotSupported:
-            return "Operation not supported";
-        case error_code::NullptrReceived:
-            return "Nullptr received";
+            return "invalid argument";
+        case error_code::ConfigSetInvalid:
+            return "invalid simulink config set";
         default:
-            return "Unknown error";
+            return "unknown error";
         }
     }
 
