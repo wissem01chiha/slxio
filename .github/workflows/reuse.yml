@@ -1,4 +1,4 @@
-name: "REUSE compliance"
+name: REUSE
 
 on:
   push:

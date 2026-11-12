@@ -1,0 +1,45 @@
+name: Coverage
+
+on:
+  push:
+  pull_request:
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential clang gcovr 
+
+    - name: Configure CMake
+      run: |
+        export CC=gcc
+        export CXX=g++
+        cmake -B ${{ github.workspace }}/build  -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}               -DSLXIO_ENABLE_COVERAGE=ON               -DSLXIO_BUILD_TESTS=ON
+
+    - name: Build
+      run: cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
+
+    - name: Test
+      working-directory: ${{ github.workspace }}/build
+      run: ctest -C ${{ env.BUILD_TYPE }} --output-on-failure
+
+    - name: Generate coverage report
+      run: |
+        gcovr -r .  --exclude '.*extern/.*'  --cobertura-pretty --output coverage.xml
+
+    - name: Upload coverage reports to Coveralls
+      uses: coverallsapp/github-action@v2
+      with:
+        github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        file: coverage.xml
+        format: cobertura

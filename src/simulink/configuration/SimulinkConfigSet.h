@@ -56,6 +56,7 @@ namespace slxio
 
     private:
         friend class SimulinkConfigSetCollection;
+        friend class SimulinkModel;
 
         void SetName(std::string name);
 

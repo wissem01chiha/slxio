@@ -32,7 +32,7 @@ namespace slxio
 
     std::shared_ptr<SimulinkModel> SimulinkModel::GetModel() const
     {
-        return std::make_shared<SimulinkModel>(*this);
+        return nullptr;
     }
 
     std::vector<std::shared_ptr<ISimulinkElement>> SimulinkModel::GetChildren() const
@@ -57,9 +57,9 @@ namespace slxio
 
     std::shared_ptr<SimulinkConfigSet> SimulinkModel::GetConfigSet(std::string name) const
     {
-        for (auto config : m_configurations)
+        for (const auto& config : m_configurations)
         {
-            if (config->GetName() == name)
+            if (config != nullptr && config->GetName() == name)
             {
                 return config;
             }
@@ -79,6 +79,7 @@ namespace slxio
             return error_code::ConfigSetInvalid;
         }
 
+        config->SetName(name);
         m_configurations.push_back(config);
         return error_code::Ok;
     }
@@ -86,15 +87,16 @@ namespace slxio
     std::shared_ptr<SimulinkParameter> SimulinkModel::GetConfigSetParameter(std::string config,
                                                                             std::string name)
     {
-        if (config.empty())
+        if (config.empty() || name.empty())
         {
             return nullptr;
         }
-        auto it = m_parameters.find(name);
+
+        const std::string qualifiedKey = config + "::" + name;
+        const auto it = m_parameters.find(qualifiedKey);
         if (it != m_parameters.end())
         {
-            std::shared_ptr<SimulinkParameter> param = it->second;
-            return param;
+            return it->second;
         }
         return nullptr;
     }
@@ -107,12 +109,19 @@ namespace slxio
         {
             return error_code::ConfigSetNameEmpty;
         }
-        auto it = m_parameters.find(name);
-        if (it == m_parameters.end())
+        if (name.empty() || value == nullptr)
         {
             return error_code::ConfigSetParameterNotFound;
         }
-        it->second = value;
+
+        const auto configSet = GetConfigSet(config);
+        if (configSet == nullptr)
+        {
+            return error_code::ConfigSetParameterNotFound;
+        }
+
+        const std::string qualifiedKey = config + "::" + name;
+        m_parameters[qualifiedKey] = value;
         return error_code::Ok;
     }
 }; // namespace slxio
