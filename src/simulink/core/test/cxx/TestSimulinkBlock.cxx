@@ -3,56 +3,46 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
-    class SimulinkBlockTestFixture
+    TEST_CASE("Simulink block default constructor test")
     {
-    public:
-    protected:
-    };
-
-    TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "ConstructorTest")
-    {
-        SimulinkBlock* block = new SimulinkBlock(SimulinkBlockType::Type::Constant);
-        CHECK(block->GetBlockType().isA(SimulinkBlockType::Type::Constant));
-        CHECK(block->GetType().isA(SimulinkElementType::Type::Block));
+        SimulinkBlock* block = new SimulinkBlock();
+        CHECK(block != nullptr);
+        CHECK(block->GetType() == SimulinkBlockType::NotSupported);
+        delete block;
     }
 
-    TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "CopyConstructorTest")
+    TEST_CASE("Simulink block copy constructor test")
     {
-        SimulinkBlock* pblockPtr =
-            new SimulinkBlock(SimulinkBlockType::Type::Constant, "ConstantBlock", 10);
+        SimulinkBlock* pblockPtr = new SimulinkBlock();
         SimulinkBlock* block = new SimulinkBlock(*pblockPtr);
-
-        CHECK(block->GetId() == 10);
+        CHECK(block != nullptr);
+        delete block;
+        delete pblockPtr;
     }
 
-    TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "AddSubBlockTest")
+    TEST_CASE("Add subblock to block test")
     {
-        SimulinkBlock* parentblockPtr =
-            new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
+        SimulinkBlock* parentblockPtr = new SimulinkBlock(SimulinkBlockType::Accumulator);
+        SimulinkBlock childblockPtr = SimulinkBlock(SimulinkBlockType::Acos);
 
-        std::shared_ptr<SimulinkBlock> childblockPtr =
-            std::make_shared<SimulinkBlock>(SimulinkBlockType::Type::Clock, "ClockBlock", 20);
-
-        HError status = parentblockPtr->AddElement(childblockPtr);
-        CHECK(status == E_OK);
+        error_code status = parentblockPtr->AddSubBlock(childblockPtr);
+        CHECK(status == error_code::Ok);
+        CHECK(parentblockPtr->HasSubBlocks());
+        delete parentblockPtr;
     }
 
-    TEST_CASE_FIXTURE(SimulinkBlockTestFixture, "RemoveSubBlockTest")
-    {
-        SimulinkBlock* parentblockPtr =
-            new SimulinkBlock(SimulinkBlockType::Constant, "ConstantBlock", 10);
+    // TEST_CASE("RemoveSubBlockTest")
+    // {
+    //     SimulinkBlock* parentblockPtr = new SimulinkBlock(SimulinkBlockType::Constant);
 
-        std::shared_ptr<SimulinkBlock> childblockPtr =
-            std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
+    //     std::shared_ptr<SimulinkBlock> childblockPtr =
+    //         std::make_shared<SimulinkBlock>(SimulinkBlockType::Clock, "ClockBlock", 20);
 
-        HError addStatus = parentblockPtr->AddElement(childblockPtr);
-        CHECK(addStatus == E_OK);
+    //     HError addStatus = parentblockPtr->AddElement(childblockPtr);
+    //     CHECK(addStatus == E_OK);
 
-        HError RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
-        CHECK(RemoveStatus == E_OK);
-    }
+    //     HError RemoveStatus = parentblockPtr->RemoveElement(childblockPtr);
+    //     CHECK(RemoveStatus == E_OK);
+    // }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

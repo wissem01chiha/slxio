@@ -43,6 +43,8 @@ namespace slxio
             return "invalid argument";
         case error_code::ConfigSetInvalid:
             return "invalid simulink config set";
+        case error_code::SubBlockAlreadyExist:
+            return "a subblock witn same name already exist";
         default:
             return "unknown error";
         }

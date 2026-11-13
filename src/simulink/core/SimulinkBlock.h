@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "Error.h"
 #include "SimulinkElement.h"
 #include "unordered_dense.h"
 #include "SimulinkBlockType.h"
@@ -33,13 +34,14 @@ namespace slxio
     {
     public:
         SimulinkBlock();
+        explicit SimulinkBlock(const SimulinkBlockType& type);
         SimulinkBlock(const SimulinkBlock& origBlock);
 
         std::vector<std::shared_ptr<ISimulinkElement>> GetChildren() const override;
 
         std::shared_ptr<SimulinkModel> GetModel() const override;
 
-        void AddSubBlock(const SimulinkBlock& subBlock);
+        error_code AddSubBlock(const SimulinkBlock& subBlock);
 
         virtual void SetParent(const std::shared_ptr<SimulinkBlock> parent);
 
@@ -58,7 +60,9 @@ namespace slxio
 
         std::set<SimulinkBlock> GetSubBlocks() const;
 
-        std::string GetType() const;
+        SimulinkBlockType GetType() const;
+
+        std::string GetIndex() const;
 
         SimulinkBlockCategory GetBlockCategory() const;
 
@@ -82,11 +86,14 @@ namespace slxio
         ~SimulinkBlock();
 
     private:
+        std::string m_index;
+        SimulinkBlockType m_type;
+        SimulinkBlockCategory m_category;
+        std::shared_ptr<SimulinkModel> m_model;
+        std::vector<SimulinkAnnotation> m_annotations;
         ankerl::unordered_dense::map<std::string, SimulinkBlock> m_subBlocks;
         ankerl::unordered_dense::map<std::string, SimulinkInPort> m_inPorts;
         ankerl::unordered_dense::map<std::string, SimulinkOutPort> m_outPorts;
-        std::vector<SimulinkAnnotation> m_annotations;
-        std::shared_ptr<SimulinkModel> m_model;
     };
 
 }; // namespace slxio

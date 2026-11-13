@@ -27,6 +27,9 @@ namespace slxio
     class SimulinkAnnotation final
     {
     public:
+        SimulinkAnnotation();
+        SimulinkAnnotation(const SimulinkAnnotation& other);
+
         const std::string& GetText() const;
         void SetText(std::string text);
 
@@ -38,8 +41,8 @@ namespace slxio
 
     private:
         std::string m_text;
-        SimulinkAnnotationStyle& m_style;
-        SimulinkAnnotationLayout& m_layout;
+        std::shared_ptr<SimulinkAnnotationStyle> m_style;
+        std::shared_ptr<SimulinkAnnotationLayout> m_layout;
     };
 
 }; // namespace slxio

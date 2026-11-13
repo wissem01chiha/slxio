@@ -22,7 +22,8 @@ namespace slxio
 {
     enum class SimulinkBlockCategory
     {
-        AdditionalMathDiscrete = 0,
+        NotSupported = 0,
+        AdditionalMathDiscrete,
         CommonlyUsedBlocks,
         Continuous,
         Discontinuities,

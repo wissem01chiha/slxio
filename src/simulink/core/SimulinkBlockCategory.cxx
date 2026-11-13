@@ -23,6 +23,8 @@ namespace slxio
     {
         switch (category)
         {
+        case SimulinkBlockCategory::NotSupported:
+            return "NotSupported";
         case SimulinkBlockCategory::AdditionalMathDiscrete:
             return "AdditionalMathDiscrete";
         case SimulinkBlockCategory::CommonlyUsedBlocks:

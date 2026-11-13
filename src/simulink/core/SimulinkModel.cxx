@@ -124,4 +124,8 @@ namespace slxio
         m_parameters[qualifiedKey] = value;
         return error_code::Ok;
     }
+    std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(std::string blockId) const
+    {
+        return std::shared_ptr<SimulinkBlock>();
+    }
 }; // namespace slxio

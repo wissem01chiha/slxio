@@ -23,6 +23,8 @@ namespace slxio
     {
         switch (type)
         {
+        case SimulinkBlockType::NotSupported:
+            return "NotSupported";
         case SimulinkBlockType::BusCreator:
             return "BusCreator";
         case SimulinkBlockType::BusSelector:
@@ -404,6 +406,11 @@ namespace slxio
         default:
             return "";
         }
+    }
+
+    SimulinkBlockType ParseSimulinkBlockType(const std::string& type)
+    {
+        return SimulinkBlockType();
     }
 
 }; // namespace slxio

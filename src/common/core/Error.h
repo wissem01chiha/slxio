@@ -29,6 +29,7 @@ namespace slxio
         ConfigSetParameterNotFound = 2,
         ConfigSetNameEmpty = 3,
         ConfigSetInvalid = 4,
+        SubBlockAlreadyExist = 5,
     };
 
     /// Define a custom error category for  error codes

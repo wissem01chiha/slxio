@@ -15,8 +15,27 @@
  */
 
 #include "SimulinkAnnotation.h"
+#include "SimulinkAnnotationLayout.h"
+#include "SimulinkAnnotationStyle.h"
 
 namespace slxio
 {
+    SimulinkAnnotation::SimulinkAnnotation() : m_layout(nullptr), m_style(nullptr)
+    {
+    }
+
+    SimulinkAnnotation::SimulinkAnnotation(const SimulinkAnnotation& other)
+    {
+    }
+
+    const std::string& SimulinkAnnotation::GetText() const
+    {
+        return "";
+    }
+
+    void SimulinkAnnotation::SetText(std::string text)
+    {
+        return;
+    }
 
 }; // namespace slxio

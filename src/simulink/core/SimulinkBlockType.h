@@ -22,7 +22,8 @@ namespace slxio
 {
     enum class SimulinkBlockType
     {
-        BusCreator = 0,
+        NotSupported = 0,
+        BusCreator,
         BusSelector,
         Constant,
         Delay,
@@ -215,5 +216,6 @@ namespace slxio
     };
 
     std::string_view ToString(SimulinkBlockType type);
+    SimulinkBlockType ParseSimulinkBlockType(const std::string& type);
 
 }; // namespace slxio
