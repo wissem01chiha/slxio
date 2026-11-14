@@ -15,6 +15,10 @@ SLXIO – SIMULINK SLX File I/O Library
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 [![Coverage Status](https://coveralls.io/repos/github/wissem01chiha/slxio/badge.svg?branch=develop)](https://coveralls.io/github/wissem01chiha/slxio?branch=develop)
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/overview/master)
+<a href="https://scan.coverity.com/projects/wissem01chiha-slxio">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/33387/badge.svg"/>
+</a>
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e91d3a5f2f39464bb6dcf2d6b582541b)](https://app.codacy.com/gh/wissem01chiha/slxio/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
 [![REUSE compliance](https://github.com/wissem01chiha/slxio/actions/workflows/reuse.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/reuse.yml)
