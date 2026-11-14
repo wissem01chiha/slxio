@@ -160,7 +160,7 @@ advanced_option(SLXIO_WERROR "Treat warnings as errors" OFF)
 advanced_option(SLXIO_WALL "Enable all compiler warnings" ON)
 
 # Option to enable building documentation cmake targets.
-advanced_option(SLXIO_DOXYGEN "Enable documentation generation" ON)
+advanced_option(SLXIO_DOXYGEN "Enable documentation generation" OFF)
 
 # Option to use OpenMP acceleration when available
 advanced_configure_option(SLXIO_OPENMP "OpenMP support" OFF)
