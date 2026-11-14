@@ -12,8 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(
-  SimulinkData
-  DataSourceType.cxx)
+add_module(SimulinkData DataSourceType.cxx)
 module_link_libraries(SimulinkData CommonCore)
 add_subdirectory(test)

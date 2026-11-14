@@ -12,7 +12,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(SimulinkAnnotation SimulinkAnnotation.cxx SimulinkAnnotationCollection.cxx
-           SimulinkAnnotationStyle.cxx SimulinkColor.cxx)
+add_module(
+  SimulinkAnnotation SimulinkAnnotation.cxx SimulinkAnnotationCollection.cxx
+  SimulinkAnnotationStyle.cxx SimulinkColor.cxx)
 module_link_libraries(SimulinkAnnotation CommonCore SimulinkLayout)
 add_subdirectory(test)

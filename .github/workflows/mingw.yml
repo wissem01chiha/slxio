@@ -62,7 +62,7 @@ jobs:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}
 
-      - name: Build
+      - name: Compile
         run: cmake --build build
         
       - name: Upload Build Folder

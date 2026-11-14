@@ -17,25 +17,25 @@ jobs:
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON -DSLXIO_ENABLE_UBSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON -DSLXIO_UBSAN=ON
 
           - name: GCC AddressSanitizer 
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON -DSLXIO_ENABLE_ASAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON -DSLXIO_ASAN=ON
 
           - name: GCC ThreadSanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON  -DSLXIO_ENABLE_TSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON  -DSLXIO_TSAN=ON
 
           - name: GCC MemorySanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_ENABLE_SANITIZERS=ON  -DSLXIO_ENABLE_MSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON  -DSLXIO_MSAN=ON
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -51,7 +51,7 @@ jobs:
           CXX: ${{ matrix.cxx-compiler }}
           CFLAGS: ${{ matrix.cflags }}
 
-      - name: Build
+      - name: Compile
         run: cmake --build build
 
       - name: Upload Build Folder

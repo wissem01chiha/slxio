@@ -39,13 +39,13 @@ include(CompilerFlags)
 include(CompilerPlatformFlags)
 include(CompilerWarningFlags)
 
-if(SLXIO_ENABLE_OPENMP)
+if(SLXIO_OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS CXX)
 endif()
 
 enable_testing()
 
-if(SLXIO_ENABLE_PIC)
+if(SLXIO_PIC)
   set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 endif()
 
@@ -60,20 +60,24 @@ endif()
 add_subdirectory(vendor)
 add_subdirectory(src)
 
-if(SLXIO_BUILD_PYTHON)
+if(SLXIO_PYTHON)
   add_subdirectory(python)
 endif()
 
-if(SLXIO_BUILD_INTEGRATION_TESTS)
+if(SLXIO_INTEGRATION_TESTS)
   add_subdirectory(test)
 endif()
 
-if(SLXIO_BUILD_REGRESSION_TESTS)
+if(SLXIO_REGRESSION_TESTS)
   add_subdirectory(regress)
 endif()
 
-if(SLXIO_BUILD_EXAMPLES)
+if(SLXIO_EXAMPLES)
   add_subdirectory(examples)
+endif()
+
+if(SLXIO_DOXYGEN)
+  add_subdirectory(documentation)
 endif()
 
 include(Install)

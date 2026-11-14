@@ -24,7 +24,8 @@ add_module(
 configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
 module_link_libraries(CommonCore spdlog)
 target_precompile_headers(CommonCore PRIVATE CommonPCH.h)
-module_include_directories(CommonCore ${PROJECT_EXTERN_SOURCE_DIR}/doctest
-                           ${PROJECT_EXTERN_SOURCE_DIR}/spdlog  
-                           ${PROJECT_EXTERN_SOURCE_DIR}/unordered_dense)
+module_include_directories(
+  CommonCore ${PROJECT_EXTERN_SOURCE_DIR}/doctest
+  ${PROJECT_EXTERN_SOURCE_DIR}/spdlog
+  ${PROJECT_EXTERN_SOURCE_DIR}/unordered_dense)
 add_subdirectory(test)

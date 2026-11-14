@@ -14,6 +14,6 @@
 
 add_subdirectory(core)
 add_subdirectory(json)
-if(SLXIO_ENABLE_MAT)
+if(SLXIO_MAT)
   add_subdirectory(mat)
 endif()

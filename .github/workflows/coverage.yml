@@ -24,14 +24,20 @@ jobs:
       run: |
         export CC=gcc
         export CXX=g++
-        cmake -B ${{ github.workspace }}/build  -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}               -DSLXIO_ENABLE_COVERAGE=ON               -DSLXIO_BUILD_TESTS=ON
+        cmake -B ${{github.workspace}}/build  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
+        -DSLXIO_COVERAGE=ON \
+        -DSLXIO_TESTS=ON
 
-    - name: Build
-      run: cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
+    - name: Compile
+      run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}
 
     - name: Test
-      working-directory: ${{ github.workspace }}/build
-      run: ctest -C ${{ env.BUILD_TYPE }} --output-on-failure
+      working-directory: ${{github.workspace}}/build
+      run: ctest -C ${{env.BUILD_TYPE}} --output-on-failure
+
+    - name: Upload test results to CDash 
+      working-directory: ${{github.workspace}}/build
+      run: ctest -D Experimental -V
 
     - name: Generate coverage report
       run: |
@@ -40,6 +46,6 @@ jobs:
     - name: Upload coverage reports to Coveralls
       uses: coverallsapp/github-action@v2
       with:
-        github-token: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        github-token: ${{secrets.COVERALLS_REPO_TOKEN}}
         file: coverage.xml
         format: cobertura

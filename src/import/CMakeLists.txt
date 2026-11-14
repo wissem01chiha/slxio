@@ -13,9 +13,9 @@
 # the License.
 
 add_subdirectory(core)
-if(SLXIO_ENABLE_MDL)
+if(SLXIO_MDL)
   add_subdirectory(mdl)
 endif()
-if(SLXIO_ENABLE_MAT)
+if(SLXIO_MAT)
   add_subdirectory(mat)
 endif()

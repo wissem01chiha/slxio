@@ -17,6 +17,7 @@ SLXIO – SIMULINK SLX File I/O Library
 [![CodeFactor](https://www.codefactor.io/repository/github/wissem01chiha/slxio/badge/master)](https://www.codefactor.io/repository/github/wissem01chiha/SLXIO/overview/master)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e91d3a5f2f39464bb6dcf2d6b582541b)](https://app.codacy.com/gh/wissem01chiha/slxio/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/wissem01chiha/slxio/master.svg)](https://results.pre-commit.ci/latest/github/wissem01chiha/slxio/master)
+[![REUSE compliance](https://github.com/wissem01chiha/slxio/actions/workflows/reuse.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/reuse.yml)
 
 ## Overview
 
@@ -51,13 +52,15 @@ For bugs, please [report an issue](https://github.com/wissem01chiha/slxio/issues
 
 Any contributions are greatly appreciated, see [Contributing](./CONTRIBUTING.md) for some contribution guidelines.
 
+Currently, there is no official mailing list for the project, as there is only one developer/maintainer, feel free to contact me directly instead. [mail: chihawissem08 [dot] gmail [dot] com](mailto:chihawissem08@gmail.com)
+
 ## Acknowledgments
 
 Many thanks to everyone who has contributed to this project, whether by reporting issues, submitting pull requests, or providing other forms of support. 
 
 ## Security
 
-For information on reporting security vulnerabilities in slxio, see [SECURITY](SECURITY.md).
+For information on reporting security vulnerabilities, see [SECURITY](SECURITY.md).
 
 ##  License
 

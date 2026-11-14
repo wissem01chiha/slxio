@@ -77,12 +77,12 @@ jobs:
             cmake -S . -B build
             ${{ matrix.cmake-args }}
             -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} \
-            -DSLXIO_BUILD_TESTS=ON
+            -DSLXIO_TESTS=ON
           env:
             CC: ${{ matrix.compiler }}
             CXX: ${{ matrix.cxx-compiler }}
 
-        - name: Build
+        - name: Compile
           run: cmake --build build --config ${{ matrix.configuration }}
         
         - name: Upload Build Folder

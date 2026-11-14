@@ -18,8 +18,8 @@ set(PKGCONFIG_INSTALL_DIR lib/pkgconfig)
 
 if(SLXIO_ENABLE_PKGCONFIG)
   find_package(PkgConfig REQUIRED)
-  configure_file(${PROJECT_SOURCE_DIR}/slxio.pc.in 
-    ${PROJECT_BINARY_DIR}/slxio.pc @ONLY)
+  configure_file(${PROJECT_SOURCE_DIR}/slxio.pc.in
+                 ${PROJECT_BINARY_DIR}/slxio.pc @ONLY)
   install(
     DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/
     DESTINATION ${PKGCONFIG_INSTALL_DIR}
@@ -33,7 +33,9 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
       CACHE PATH "Default install path" FORCE)
 endif()
 
-if(SLXIO_INSTALL AND SLXIO_INSTALL_LICENSES AND CMAKE_INSTALL_LICENSEDIR)
+if(SLXIO_INSTALL
+   AND SLXIO_INSTALL_LICENSES
+   AND CMAKE_INSTALL_LICENSEDIR)
   install(DIRECTORY "${PROJECT_SOURCE_DIR}/LICENSES/"
           DESTINATION "${CMAKE_DEFAULT_LICENSEDIR}")
 endif()
@@ -43,12 +45,9 @@ configure_package_config_file(
   "${PROJECT_BINARY_DIR}/slxio-config.cmake"
   INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/slxio")
 
-configure_file(
-  "${PROJECT_SOURCE_DIR}/cmake/slxio-config-version.cmake.in"
-  "${PROJECT_BINARY_DIR}/slxio-config-version.cmake" @ONLY)
+configure_file("${PROJECT_SOURCE_DIR}/cmake/slxio-config-version.cmake.in"
+               "${PROJECT_BINARY_DIR}/slxio-config-version.cmake" @ONLY)
 
-install(
-  FILES "${PROJECT_BINARY_DIR}/slxio-config.cmake"
-        "${PROJECT_BINARY_DIR}/slxio-config-version.cmake"
-  DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/slxio")
-
+install(FILES "${PROJECT_BINARY_DIR}/slxio-config.cmake"
+              "${PROJECT_BINARY_DIR}/slxio-config-version.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/slxio")
