@@ -1,156 +1,64 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "SimulinkLine.h"
-
-#include "ErrorCode.h"
-#include "Logger.h"
 #include "SimulinkParameter.h"
-
-#include <sstream>
+#include "SimulinkOutPort.h"
+#include "SimulinkInPort.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
-    SimulinkLine* SimulinkLine::New() const
-    {
-        return new SimulinkLine();
-    }
-
-    SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkPort> pOut,
-                               std::shared_ptr<SimulinkPort> pIn)
-        : DestPort(pIn), SourcePort(pOut), logger(Logger::GetInstance())
+    SimulinkLine::SimulinkLine() : m_index(""), m_destPort(nullptr), m_sourcePort(nullptr)
     {
     }
 
-    SimulinkLine::SimulinkLine(SimulinkPort sourcePort, SimulinkPort destPort)
-        : logger(Logger::GetInstance())
+    SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkInPort> pOut,
+                               std::shared_ptr<SimulinkOutPort> pIn)
+        : m_destPort(pIn), m_sourcePort(pOut)
     {
     }
 
-    std::shared_ptr<SimulinkElementBase> SimulinkLine::at(SId index)
+    std::string SimulinkLine::GetIndex() const
     {
-        return std::shared_ptr<SimulinkElementBase>();
-    }
-
-    std::shared_ptr<SimulinkElementBase> SimulinkLine::operator[](SId index)
-    {
-        return std::shared_ptr<SimulinkElementBase>();
-    }
-
-    UInt32 SimulinkLine::Size() const
-    {
-        return UInt32();
-    }
-
-    bool SimulinkLine::Empty() const
-    {
-        return false;
-    }
-
-    void SimulinkLine::Clear()
-    {
-    }
-
-    HError SimulinkLine::Insert(const std::shared_ptr<SimulinkElementBase>& element)
-    {
-        return HError();
-    }
-
-    HError SimulinkLine::Erase(const SId& id)
-    {
-        return HError();
-    }
-
-    HError SimulinkLine::Erase(const std::shared_ptr<SimulinkElementBase>& element)
-    {
-        return HError();
-    }
-
-    SimulinkElementType SimulinkLine::GetType() const
-    {
-        return SimulinkElementType(SimulinkElementType::Type::Line);
-    }
-
-    // HError SimulinkLine::RemoveElement(std::shared_ptr<SimulinkElementBase>
-    // element)
-    // {
-
-    //   if (element == nullptr)
-    //   {
-    //     // l.log(Logger::V_WARNING, "Cannot remove a null Simulink element.");
-    //     return E_PARAMETER_NULL_PTR;
-    //   }
-
-    //   if (SourcePort != nullptr)
-    //   {
-    //     SourcePort->RemoveElement(std::make_shared<SimulinkLine>(*this));
-    //     SourcePort = nullptr;
-    //   }
-
-    //   if (DestPort != nullptr)
-    //   {
-    //     DestPort->RemoveElement(std::make_shared<SimulinkLine>(*this));
-    //     DestPort = nullptr;
-    //   }
-    //   return E_OK;
-    // }
-
-    // HError SimulinkLine::AddElement(std::shared_ptr<SimulinkElementBase> element)
-    // {
-
-    //   if (element == nullptr)
-    //   {
-    //     // l.log(Logger::V_WARNING, "Cannot add a null Simulink element.");
-    //     return E_PARAMETER_NULL_PTR;
-    //   }
-
-    //   if (SourcePort != nullptr)
-    //   {
-    //     SourcePort->AddElement(std::make_shared<SimulinkLine>(*this));
-    //     SourcePort = nullptr;
-    //   }
-
-    //   if (DestPort != nullptr)
-    //   {
-    //     DestPort->AddElement(std::make_shared<SimulinkLine>(*this));
-    //     DestPort = nullptr;
-    //   }
-    //   return E_OK;
-    // }
-
-    SId SimulinkLine::GetId() const
-    {
-        return LineId;
-    }
-
-    bool SimulinkLine::Contains(const SId& Id) const
-    {
-        return LineId == Id;
+        return std::string();
     }
 
     bool SimulinkLine::IsConnected()
     {
-        return (SourcePort != nullptr && DestPort != nullptr);
+        return m_destPort != nullptr && m_sourcePort != nullptr;
     }
 
-    Logger& SimulinkLine::GetLogger()
+    std::shared_ptr<SimulinkInPort> SimulinkLine::GetSourcePort()
     {
-        return logger;
+        return std::shared_ptr<SimulinkInPort>();
+    }
+
+    std::shared_ptr<SimulinkOutPort> SimulinkLine::GetDestPort()
+    {
+        return std::shared_ptr<SimulinkOutPort>();
     }
 
     std::string SimulinkLine::ToString() const
     {
         std::ostringstream oss;
-        oss << "SimulinkLine[ID=" << LineId;
-        oss << ", Source=  " << SourcePort->ToString();
-        oss << ", Destination=  " << DestPort->ToString();
+        oss << "SimulinkLine[ID=" << m_index;
+        oss << ", Source=  " << m_sourcePort->ToString();
+        oss << ", Destination=  " << m_destPort->ToString();
         oss << "]";
         return oss.str();
     }
 
-    std::string SimulinkLine::GetName()
-    {
-        return std::string();
-    }
-
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

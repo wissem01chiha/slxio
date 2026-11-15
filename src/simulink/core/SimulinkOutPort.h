@@ -27,6 +27,7 @@ namespace slxio
     public:
         SimulinkOutPort();
         SimulinkPortType GetPortType() const override;
+        std::string ToString() const;
 
     private:
         SimulinkPortType m_type;

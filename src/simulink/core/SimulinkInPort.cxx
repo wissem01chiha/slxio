@@ -18,12 +18,17 @@
 
 namespace slxio
 {
-    SimulinkInPort::SimulinkInPort()
+    SimulinkInPort::SimulinkInPort() : m_type(SimulinkPortType::Inport)
     {
     }
     SimulinkPortType SimulinkInPort::GetPortType() const
     {
         return SimulinkPortType::Inport;
+    }
+
+    std::string SimulinkInPort::ToString() const
+    {
+        return std::string();
     }
 
 }; // namespace slxio

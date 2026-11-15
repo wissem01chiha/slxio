@@ -15,3 +15,29 @@
  */
 
 #pragma once
+
+#pragma once
+
+#include "CommonPCH.h"
+
+namespace slxio
+{
+    struct Rectangle;
+    class Color;
+
+    // Encapsulates all information required for layouting
+    // a rectangular element.
+    class RectangleLayoutBase
+    {
+    public:
+        RectangleLayoutBase();
+        RectangleLayoutBase(Rectangle& position, Color& foregroundColor, Color& backgroundColor);
+        virtual ~RectangleLayoutBase() = default;
+
+    protected:
+        Rectangle& m_position;
+        Color& m_foregroundColor;
+        Color& m_backgroundColor;
+    };
+
+}; // namespace slxio

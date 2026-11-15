@@ -1,9 +1,26 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "Orientation.h"
-#include <cstring>
 
-SLXIO_ABI_NAMESPACE_BEGIN
 
-float32 getDirection(Orientation Orientation)
+namespace slxio
+{
+
+float GetDirection(Orientation Orientation)
 {
     switch (Orientation)
     {
@@ -16,26 +33,26 @@ float32 getDirection(Orientation Orientation)
     case Orientation::UP:
         return 90;
     default:
-        throw std::logic_error("Unknown Orientation value");
+        throw std::logic_error("unknown orientation value");
     }
 }
 
-bool isRotated(Orientation Orientation)
+bool IsRotated(Orientation Orientation)
 {
     return Orientation == Orientation::DOWN || Orientation == Orientation::UP;
 }
 
-bool isLeftOrUp(Orientation Orientation)
+bool IsLeftOrUp(Orientation Orientation)
 {
     return Orientation == Orientation::LEFT || Orientation == Orientation::UP;
 }
 
-bool isLeftOrDown(Orientation Orientation)
+bool IsLeftOrDown(Orientation Orientation)
 {
     return Orientation == Orientation::LEFT || Orientation == Orientation::DOWN;
 }
 
-Orientation getOpposite(Orientation Orientation)
+Orientation GetOpposite(Orientation Orientation)
 {
     switch (Orientation)
     {
@@ -52,7 +69,7 @@ Orientation getOpposite(Orientation Orientation)
     }
 }
 
-Orientation fromRotationValue(const char* str)
+Orientation FromRotationValue(const char* str)
 {
     if (std::strcmp(str, "0") == 0)
         return Orientation::RIGHT;
@@ -66,4 +83,4 @@ Orientation fromRotationValue(const char* str)
     return Orientation::RIGHT;
 }
 
-SLXIO_ABI_NAMESPACE_END
+};// namespace slxio

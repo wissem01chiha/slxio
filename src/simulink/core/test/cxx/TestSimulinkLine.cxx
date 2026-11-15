@@ -3,17 +3,12 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    class SimulinkLineTestFixture
+    TEST_CASE("Simulink line constructor test")
     {
-    protected:
-    };
-
-    TEST_CASE_FIXTURE(SimulinkLineTestFixture, "SimulinkLine Constructor Test")
-    {
-        SimulinkLine line;
+        auto line = std::make_shared<SimulinkLine>();
+        CHECK(line != nullptr);
+        CHECK(!line->IsConnected());
     }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

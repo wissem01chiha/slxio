@@ -22,15 +22,43 @@
 namespace slxio
 {
 
-    enum class ErrorCode : int
+    enum class ErrorCode : uint32_t
     {
         Ok = 0,
-        InvalidArgument = 1,
-        ConfigSetParameterNotFound = 2,
-        ConfigSetNameEmpty = 3,
-        ConfigSetInvalid = 4,
-        SubBlockAlreadyExist = 5,
-        WorkspaceParameterNameEmpty = 6,
+
+        InvalidFunction = 1,
+        FileNotFound = 2,
+        PathNotFound = 3,
+        PathTooLong = 4,
+        MessageTooLarge = 5,
+        PathEmpty = 6,
+        TooManyOpenFiles = 7,
+        FileOpenFailed = 8,
+        InvalidFileMode = 10,
+        StreamWriteFailed = 11,
+        StreamEmptyOutput = 12,
+        NotImplemented = 13,
+        NullParameter = 15,
+        InvalidDataType = 16,
+        DirectoryNotFound = 17,
+        FileRemoveFailed = 18,
+        ArchiveDirectoryNotFound = 19,
+        ArchiveOpenFailed = 20,
+        ArchiveSourceFailed = 21,
+        ArchiveReplaceFailed = 22,
+        ArchiveAddFailed = 23,
+        ArchiveCloseFailed = 24,
+        ArchiveRemoveFailed = 25,
+        ArchiveEntryNotFound = 26,
+        InvalidArchiveId = 27,
+        ConfigSetParameterNotFound = 100,
+        ConfigSetNameEmpty = 101,
+        ConfigSetInvalid = 102,
+        SubBlockAlreadyExists = 103,
+        WorkspaceParameterNameEmpty = 104,
+        SimulinkBlockNull = 105,
+        InvalidArgument =106,
+        SubBlockAlreadyExist=107,
     };
 
     /// Define a custom error category for  error codes

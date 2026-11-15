@@ -17,24 +17,28 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "RectangleLayoutBase.h"
 
 namespace slxio
 {
+    struct Rectangle;
+    class Color;
 
-    struct Rectangle
+    // Encapsulates all information required for layouting an
+    // annotation (relative to its parent's canvas).
+    class SimulinkAnnotationLayout final : public RectangleLayoutBase
     {
-        double x;
-        double y;
-        double width;
-        double height;
-    };
+    public:
+        SimulinkAnnotationLayout(Rectangle& position,
+                                 Color& foregroundColor,
+                                 Color& backgroundColor,
+                                 bool borderVisible);
 
-    struct SimulinkAnnotationLayout
-    {
-        Rectangle position;
-        std::string horizontalAlignment;
-        std::string verticalAlignment;
-        bool dropShadow = false;
+    private:
+        std::string m_horizontalAlignment;
+        std::string m_verticalAlignment;
+        bool m_dropShadow = false;
+        bool m_borderVisible = false;
     };
 
 }; // namespace slxio

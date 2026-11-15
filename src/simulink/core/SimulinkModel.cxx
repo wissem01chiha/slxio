@@ -40,9 +40,9 @@ namespace slxio
         return m_children;
     }
 
-    void SimulinkModel::SetParent(const std::shared_ptr<SimulinkBlock> parent)
+    ErrorCode SimulinkModel::SetParent(const std::shared_ptr<SimulinkBlock> parent)
     {
-        return;
+        return ErrorCode::Ok;
     }
 
     SimulinkModelType SimulinkModel::GetModelType() const
@@ -121,9 +121,10 @@ namespace slxio
         }
 
         const std::string qualifiedKey = config + "::" + name;
-        m_parameters[qualifiedKey] = value;
+        m_parameters[qualifiedKey] = std::move(value);
         return ErrorCode::Ok;
     }
+
     std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(std::string blockId) const
     {
         return std::shared_ptr<SimulinkBlock>();

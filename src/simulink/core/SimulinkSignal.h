@@ -42,9 +42,10 @@ namespace slxio
         std::string GetUnit() const;
         std::vector<double> GetSampleTime() const;
         void SetRange(double min, double max);
+        void SetInitialValue(const std::string& value);
 
     private:
-        const char* m_initialValue;
+        std::string m_initialValue;
         SimulinkDataType m_dataType;
         std::string m_description;
         std::string m_unit;

@@ -8,10 +8,6 @@
 #include "APIExportMacro.h"
 #include "PlatformTypes.h"
 
-#include <memory>
-#include <string>
-#include <vector>
-
 namespace slxio
 {
     SLXIO_ABI_NAMESPACE_BEGIN

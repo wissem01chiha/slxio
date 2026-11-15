@@ -12,6 +12,6 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(CommonMath Point.cxx)
+add_module(CommonMath Point.cxx Rectangle.cxx Orientation.cxx)
 module_link_libraries(CommonMath CommonCore)
 add_subdirectory(test)

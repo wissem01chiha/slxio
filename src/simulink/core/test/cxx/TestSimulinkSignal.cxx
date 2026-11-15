@@ -18,4 +18,18 @@ namespace slxio
         signal.SetComplexityType("auto");
         CHECK(signal.GetComplexity() == "auto");
     }
+
+    TEST_CASE("Simulink signal init value test")
+    {
+        SimulinkSignal signal;
+        SUBCASE("Get default init value test")
+        {
+            CHECK(signal.GetInitialValue() == "");
+        }
+        SUBCASE("Set and get a new init value test")
+        {
+            signal.SetInitialValue("0.25");
+            CHECK(signal.GetInitialValue() == "0.25");
+        }
+    }
 }; // namespace slxio

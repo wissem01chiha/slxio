@@ -21,7 +21,8 @@ namespace slxio
 
     SimulinkSignal::SimulinkSignal()
         : m_description(""), m_complexity("auto"), m_dataType(SimulinkDataType::Auto),
-          m_min(std::numeric_limits<double>::min()), m_max(std::numeric_limits<double>::max())
+          m_min(std::numeric_limits<double>::min()), m_max(std::numeric_limits<double>::max()),
+          m_initialValue("")
     {
     }
 
@@ -108,6 +109,11 @@ namespace slxio
     {
         m_min = min;
         m_max = max;
+    }
+
+    void SimulinkSignal::SetInitialValue(const std::string& value)
+    {
+        m_initialValue = value;
     }
 
 }; // namespace slxio

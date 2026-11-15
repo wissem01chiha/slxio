@@ -27,25 +27,25 @@ namespace slxio
         Color defaultColor;
     } // namespace
 
-    PortLayoutData::PortLayoutData() : position(defaultPosition), color(defaultColor)
+    SimulinkPortLayout::SimulinkPortLayout() : position(defaultPosition), color(defaultColor)
     {
     }
 
-    PortLayoutData::PortLayoutData(Point point, Color color) : position(point), color(color)
+    SimulinkPortLayout::SimulinkPortLayout(Point point, Color color) : position(point), color(color)
     {
     }
 
-    Point PortLayoutData::GetPosition()
+    Point SimulinkPortLayout::GetPosition()
     {
         return position;
     }
 
-    double PortLayoutData::GetDirection()
+    double SimulinkPortLayout::GetDirection()
     {
-        return 0.0;
+        return direction;
     }
 
-    Color PortLayoutData::GetColor()
+    Color SimulinkPortLayout::GetColor()
     {
         return color;
     }

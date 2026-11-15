@@ -81,7 +81,7 @@ namespace slxio
         std::set<std::string> GetBlockDefaultParameterNames(SimulinkBlockType type) const;
 
         // This throws an exception as models cannot have parents.
-        void SetParent(const std::shared_ptr<SimulinkBlock> parent) override;
+        ErrorCode SetParent(const std::shared_ptr<SimulinkBlock> parent) override;
 
         // Get a configuration default parameter.
         std::shared_ptr<SimulinkParameter> GetConfigSetDefaultParameter(std::string name) const;

@@ -19,7 +19,7 @@
 namespace slxio
 {
 
-    CoderInfo::CoderInfo() : m_identifier(""), m_storageClass("auto")
+    CoderInfo::CoderInfo() : m_identifier(""), m_storageClass("auto"), m_alignment((uint32_t)0)
     {
     }
 

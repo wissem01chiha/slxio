@@ -21,7 +21,7 @@ namespace slxio
 {
 
     SimulinkPortBase::SimulinkPortBase(std::shared_ptr<SimulinkBlock> block, std::string index)
-        : m_index(index), m_block(block)
+        : m_index(index), m_block(std::move(block))
     {
     }
 
@@ -40,6 +40,11 @@ namespace slxio
         }
         oss << "]";
         return oss.str();
+    }
+
+    std::string SimulinkPortBase::GetIndex() const
+    {
+        return m_index;
     }
 
     std::shared_ptr<SimulinkBlock> SimulinkPortBase::GetBlock() const

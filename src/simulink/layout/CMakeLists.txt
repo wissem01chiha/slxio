@@ -12,6 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(SimulinkLayout SimulinkPortLayout.cxx)
+add_module(SimulinkLayout SimulinkPortLayout.cxx SimulinkAnnotationLayout.cxx
+           RectangleLayoutBase.cxx)
 module_link_libraries(SimulinkLayout CommonCore CommonColor CommonMath)
 add_subdirectory(test)

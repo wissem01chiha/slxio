@@ -42,10 +42,10 @@ namespace slxio
         std::string ToString() const;
 
     protected:
-        void SetParent(SimulinkBlock parent);
+        void SetParent(SimulinkBlock& parent);
 
     private:
-        SimulinkBlock& parent;
+        SimulinkBlock* parent = nullptr;
     };
 
 }; // namespace slxio

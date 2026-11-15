@@ -25,7 +25,7 @@ namespace slxio
 
     void StateflowElementBase::SetParent(std::shared_ptr<StateflowElementBase> parent)
     {
-        m_parent = parent;
+        m_parent = std::move(parent);
     }
 
 }; // namespace slxio

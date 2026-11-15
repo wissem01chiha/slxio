@@ -16,75 +16,22 @@
 
 #pragma once
 
+#include "CommonPCH.h"
+#include "SimulinkElementBase.h"
+
 namespace slxio
 {
+
+    class SimulinkInPort;
+    class SimulinkOutPort;
 
     class SimulinkLine final : public SimulinkElementBase
     {
     public:
         SimulinkLine();
-        SimulinkLine(std::shared_ptr<SimulinkPort> pOut, std::shared_ptr<SimulinkPort> pIn);
+        SimulinkLine(std::shared_ptr<SimulinkInPort> pOut, std::shared_ptr<SimulinkOutPort> pIn);
 
-        SimulinkLine(SimulinkPort sourcePort_, SimulinkPort destPort);
-
-        /** Access specified element */
-        std::shared_ptr<SimulinkElementBase> operator[](SId index) override;
-
-        /** Returns the number of child elements. */
-        UInt32 Size() const override;
-
-        /** Returns true if no child elements exist. */
-        bool Empty() const override;
-
-        /** Removes all child elements. */
-        void Clear() override;
-
-        /** Inserts a new child element. */
-        HError Insert(const std::shared_ptr<SimulinkElementBase>& element) override;
-
-        /** Erases a child element by identifier. */
-        HError Erase(const SId& id) override;
-
-        /** Erases a child element by reference. */
-        HError Erase(const std::shared_ptr<SimulinkElementBase>& element) override;
-
-        /** Finds a child element by identifier. */
-        std::shared_ptr<SimulinkElementBase> Find(const SId& id) override;
-
-        /** Checks if this element or its children contain the given identifier. */
-        bool Contains(const SId& id) const override;
-
-        /** Returns the generic type of this element. */
-        SimulinkElementType GetType() const override;
-
-        /** Returns the unique identifier of this element. */
-        SId GetId() const override;
-
-        /** Returns a string representation of this element. */
-        std::string ToString() const override;
-
-        /** Retrieve the block type of the Simulink block.*/
-        SimulinkBlockType GetBlockType();
-
-        /** Get the block name.*/
-        std::string GetName() override;
-
-        /** Dim of a Simulink Block ????? */
-        std::string GetDimension() override;
-
-        /** Get the Parent block at the hiraciy .*/
-        std::shared_ptr<SimulinkBlock> GetBlockParent();
-
-        /** Return a pointer to a given parameter by name, if not
-         * found a or the blcok has not paramters an empty parameter returned. */
-        std::shared_ptr<SimulinkParameterBase> GetParameter(std::string name) override;
-
-        /** Sets the element specifc parameter to given one  */
-        HError SetParameter(std::string name,
-                            std::shared_ptr<SimulinkParameterBase> parameter) override;
-
-        /* Adds a Parameter to the array */
-        HError AddParameter(std::shared_ptr<SimulinkParameterBase> parameter) override;
+        std::string GetIndex() const;
 
         /**
          * Check if the line is connected to both source and
@@ -93,23 +40,17 @@ namespace slxio
          */
         bool IsConnected();
 
-        /** Returns the Line Source Port */
-        std::shared_ptr<SimulinkPort> GetSourcePort();
+        std::shared_ptr<SimulinkInPort> GetSourcePort();
+        std::shared_ptr<SimulinkOutPort> GetDestPort();
 
-        /** Returns the Line Destination Port */
-        std::shared_ptr<SimulinkPort> GetDestPort();
+        std::string ToString() const;
 
-        /** Return the class internal logger object*/
-        Logger& GetLogger();
+        ~SimulinkLine() = default;
 
     private:
-        SId LineId;
-        Logger& logger;
-        std::shared_ptr<SimulinkPort> SourcePort;
-        std::shared_ptr<SimulinkPort> DestPort;
+        std::string m_index;
+        std::shared_ptr<SimulinkInPort> m_sourcePort;
+        std::shared_ptr<SimulinkOutPort> m_destPort;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // SIMULINKLINE_H

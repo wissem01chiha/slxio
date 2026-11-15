@@ -47,6 +47,10 @@ namespace slxio
             return "a subblock witn same name already exist";
         case ErrorCode::WorkspaceParameterNameEmpty:
             return "model workspace parameter name empty";
+        case ErrorCode::SimulinkBlockNull:
+            return "a nullptr simulink block object passed";
+        case ErrorCode::InvalidArchiveId:
+            return "";
         default:
             return "unknown error";
         }

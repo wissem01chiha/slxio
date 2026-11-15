@@ -25,4 +25,5 @@ module_add_tests(
   cxx/TestParameterizedElement.cxx
   cxx/TestSimulinkObject.cxx
   cxx/TestSimulinkInPort.cxx
-  cxx/TestSimulinkBlock.cxx)
+  cxx/TestSimulinkBlock.cxx
+  cxx/TestSimulinkLine.cxx)

@@ -1,39 +1,36 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef DIRECTORY_H
-#define DIRECTORY_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "File.h"
-#include "PlatformTypes.h"
 #include "CommonPCH.h"
+#include "Error.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    /**
-     * @class Directory
-     * @brief Cross-platform Directory abstraction.
-     */
-    class SLXIO_APIEXPORT Directory final
+    class Directory final
     {
     public:
-        /** Default constructor. */
         Directory() = default;
-
-        /** Construct a Directory object from a UTF‑8 path string. */
         explicit Directory(const std::string& path);
 
-        /** Open the directory and initialize member variables. */
         HError Initialize();
 
-        /* Add a file to this directory, it will copy the file into it on disk */
         void Add(const File& file);
-
-        /** Remove a file from this directory. */
         void Remove(const File& file);
 
         /** Check if the directory contains a given file/directory, by name */
@@ -51,13 +48,8 @@ namespace slxio
         /** Get a specific file by name.*/
         const std::shared_ptr<File> GetFile(const std::string& filename) const;
 
-        /** Get the number of files in the directory.*/
-        UInt32 GetNumberOfFiles() const;
-
-        /** Get the directory name from the full path. */
+        uint32_t GetNumberOfFiles() const;
         std::string GetDirectoryName() const;
-
-        /** Get the directory path. */
         const std::string GetDirectoryPath() const;
 
         /** Check if the given path is a directory. */

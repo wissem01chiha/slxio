@@ -19,9 +19,14 @@
 namespace slxio
 {
 
-    SimulinkOutPort::SimulinkOutPort() {};
+    SimulinkOutPort::SimulinkOutPort() : m_type(SimulinkPortType::Outport) {};
+
     SimulinkPortType SimulinkOutPort::GetPortType() const
     {
         return SimulinkPortType::Outport;
+    }
+    std::string SimulinkOutPort::ToString() const
+    {
+        return std::string();
     }
 }; //  namespace slxio

@@ -21,10 +21,14 @@
 
 namespace slxio
 {
-    SimulinkBlock::SimulinkBlock() : m_type(SimulinkBlockType::NotSupported), m_index("")
+    SimulinkBlock::SimulinkBlock()
+        : m_type(SimulinkBlockType::NotSupported), m_index(""),
+          m_category(SimulinkBlockCategory::NotSupported), m_model(nullptr)
     {
     }
-    SimulinkBlock::SimulinkBlock(const SimulinkBlockType& type) : m_type(type) {};
+    SimulinkBlock::SimulinkBlock(const SimulinkBlockType& type)
+        : m_type(type), m_index(""), m_model(nullptr),
+          m_category(SimulinkBlockCategory::NotSupported) {};
 
     SimulinkBlock::SimulinkBlock(const SimulinkBlock& origBlock)
     {
@@ -33,10 +37,22 @@ namespace slxio
         m_annotations = origBlock.m_annotations;
         m_model = origBlock.m_model;
     }
+
+    std::string SimulinkBlock::GetResolvedType()
+    {
+        return std::string();
+    }
+
     std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(std::string name)
     {
         return std::shared_ptr<SimulinkBlock>();
     }
+
+    std::set<SimulinkBlock> SimulinkBlock::GetSubBlocks() const
+    {
+        return std::set<SimulinkBlock>();
+    }
+
     SimulinkBlockType SimulinkBlock::GetType() const
     {
         return m_type;
@@ -80,14 +96,15 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    void SimulinkBlock::SetParent(const std::shared_ptr<SimulinkBlock> parent)
+    ErrorCode SimulinkBlock::SetParent(const std::shared_ptr<SimulinkBlock> parent)
     {
         if (parent == nullptr)
         {
-            return;
+            return ErrorCode::SimulinkBlockNull;
         }
-        return;
+        return parent->AddSubBlock(*this);
     }
+
     void SimulinkBlock::Detach()
     {
         return;

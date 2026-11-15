@@ -1,28 +1,32 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef FILE_H
-#define FILE_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-#include "PlatformTypes.h"
 #include "CommonPCH.h"
+#include "Error.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
-    class Directory;
+    class FileInfo;
 
-    /**
-     * @class File
-     * @brief Cross‑platform file system abstraction.
-     */
-    class SLXIO_APIEXPORT File final
+    class File final
     {
     public:
-        /** File access modes. */
         enum class Mode
         {
             Read,
@@ -30,89 +34,36 @@ namespace slxio
             Append,
             Truncate
         };
-
-        /** Construct a File with path and mode. */
+        File() = default;
         File(const std::string& path, Mode mode);
-
-        /** Construct a File with path only. */
         explicit File(const std::string& path);
 
-        /** Open the file. */
-        HError Open();
+        ErrorCode Open();
+        ErrorCode Close();
+        ErrorCode Read();
 
-        /** Close the file. */
-        HError Close();
-
-        /** Read data from the file. */
-        HError Read();
-
-        /** Check if a path exists as a file. */
-        static bool Exist(const std::string& path);
-
-        /** Check if file is empty. */
         bool Empty() const;
-
-        /** Get full file path. */
-        std::string GetFilePath() const;
-
-        /** Get filename from path. */
-        const std::string GetFileName() const;
-
-        /** Check if current file exists. */
         bool Exist() const;
 
-        /** Write string data to file. */
-        HError Write(const std::string& message);
+        ErrorCode Write(const std::string& message);
+        ErrorCode Write(std::vector<std::string>& message);
+        ErrorCode Copy(const Directory& directory);
+        ErrorCode Rename(const std::string& filename);
+        ErrorCode Move(const Directory& directory);
+        ErrorCode Delete();
 
-        /** Write vector of strings to file. */
-        HError Write(std::vector<std::string>& message);
-
-        /** Copy file to a directory. */
-        HError Copy(const Directory& directory);
-
-        /** Rename the file. if not opened */
-        HError Rename(const std::string& filename);
-
-        /** Get file mode flags. */
-        const int GetFileMode();
-
-        /** Set file mode. */
         void SetFileMode(const File::Mode mode);
+        FileInfo& GetFileInfo();
 
-        /** Move file to a directory. */
-        HError Move(const Directory& directory);
-
-        /** Delete the file from disk */
-        HError Delete();
-
-        /** Get parent directory object. */
-        Directory GetFileDirectory() const;
-
-        /** Get the file internal buffer, after reading the file */
-        std::vector<char> GetInternalBuffer() const;
-
-        /** Check Whatever the file is still open or not */
-        bool IsOpened() const;
-
-        /** Get file size on disk. */
-        UInt32 Size() const;
-
-        /** Destructor. */
         ~File() = default;
 
-        /** Default Constructor */
-        File() = default;
-
-    private:
-        std::string FilePath;
-        Mode InternalFileMode;
-        int FileDescriptor = -1;
-        std::vector<char> InternalBuffer;
-        UInt32 NumberOfBytes = 0;
-        UInt32 CachedSize;
+    protected:
+        FileInfo& m_info;
+        std::string m_filePath;
+        File::Mode m_mode;
+        std::vector<char> m_buffer;
+        uint32_t m_bytes = 0;
+        uint32_t m_cachedSize;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // FILE_H

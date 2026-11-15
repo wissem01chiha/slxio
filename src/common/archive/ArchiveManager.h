@@ -11,11 +11,7 @@ namespace slxio
 
     class Archive;
 
-    /**
-     * @class ArchiveManager
-     * @brief Manages a collection of Archive objects.
-     */
-    class SLXIO_APIEXPORT ArchiveManager final
+    class ArchiveManager final
     {
     public:
         /** Default Constructor */
@@ -64,7 +60,4 @@ namespace slxio
         std::vector<std::shared_ptr<Archive>> ArchiveBuffer;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // ARCHIVEMANAGER_H

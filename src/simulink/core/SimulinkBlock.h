@@ -43,7 +43,7 @@ namespace slxio
 
         ErrorCode AddSubBlock(const SimulinkBlock& subBlock);
 
-        virtual void SetParent(const std::shared_ptr<SimulinkBlock> parent);
+        virtual ErrorCode SetParent(const std::shared_ptr<SimulinkBlock> parent);
 
         /**
          * If this block is of type 'Reference' this returns

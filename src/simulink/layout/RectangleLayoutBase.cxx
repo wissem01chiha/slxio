@@ -13,3 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#include "RectangleLayoutBase.h"
+#include "Color.h"
+#include "Rectangle.h"
+
+namespace slxio
+{
+    namespace
+    {
+        Color defaultColor;
+        Rectangle defaultPosition;
+    } // namespace
+
+    RectangleLayoutBase::RectangleLayoutBase()
+        : m_foregroundColor(defaultColor), m_backgroundColor(defaultColor),
+          m_position(defaultPosition)
+    {
+    }
+
+    RectangleLayoutBase::RectangleLayoutBase(Rectangle& position,
+                                             Color& foregroundColor,
+                                             Color& backgroundColor)
+        : m_position(position), m_foregroundColor(foregroundColor),
+          m_backgroundColor(backgroundColor)
+    {
+    }
+
+}; // namespace slxio

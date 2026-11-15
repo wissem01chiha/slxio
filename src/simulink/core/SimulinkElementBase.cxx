@@ -19,5 +19,8 @@
 
 namespace slxio
 {
+    SimulinkElementBase::SimulinkElementBase() : parent(nullptr)
+    {
+    }
 
 }; // namespace slxio
