@@ -14,23 +14,21 @@
  * limitations under the License.
  */
 
+std::string GetFilePath() const;
 
-        std::string GetFilePath() const;
+/** Get filename from path. */
+const std::string GetFileName() const;
 
-        /** Get filename from path. */
-        const std::string GetFileName() const;
+/** Get file mode flags. */
+const int GetFileMode();
 
-                /** Get file mode flags. */
-        const int GetFileMode();
+/** Get parent directory object. */
+Directory GetFileDirectory() const;
 
-                /** Get parent directory object. */
-        Directory GetFileDirectory() const;
+/** Check Whatever the file is still open or not */
+bool IsOpened() const;
 
-                /** Check Whatever the file is still open or not */
-        bool IsOpened() const;
+/** Get file size on disk. */
+UInt32 Size() const;
 
-        
-        /** Get file size on disk. */
-        UInt32 Size() const;
-
-        std::vector<char> GetInternalBuffer() const;
+std::vector<char> GetInternalBuffer() const;

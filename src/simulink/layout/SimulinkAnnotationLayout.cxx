@@ -23,10 +23,10 @@ namespace slxio
     SimulinkAnnotationLayout::SimulinkAnnotationLayout(Rectangle& position,
                                                        Color& foregroundColor,
                                                        Color& backgroundColor,
-                                                       bool borderVisible) :m_borderVisible(borderVisible),
-                                                      RectangleLayoutBase(position, foregroundColor, backgroundColor)
+                                                       bool borderVisible)
+        : m_borderVisible(borderVisible),
+          RectangleLayoutBase(position, foregroundColor, backgroundColor)
     {
-      
     }
 
 }; // namespace slxio

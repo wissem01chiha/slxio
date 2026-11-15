@@ -57,8 +57,8 @@ namespace slxio
         SubBlockAlreadyExists = 103,
         WorkspaceParameterNameEmpty = 104,
         SimulinkBlockNull = 105,
-        InvalidArgument =106,
-        SubBlockAlreadyExist=107,
+        InvalidArgument = 106,
+        SubBlockAlreadyExist = 107,
     };
 
     /// Define a custom error category for  error codes

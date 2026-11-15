@@ -23,18 +23,18 @@ namespace slxio
 
     enum class Orientation
     {
-        RIGHT=0,
-        DOWN=1,
-        LEFT=2,
-        UP=3,
+        RIGHT = 0,
+        DOWN = 1,
+        LEFT = 2,
+        UP = 3,
 
     };
-    
+
     float GetDirection(Orientation Orientation);
     bool IsRotated(Orientation Orientation);
     bool IsLeftOrUp(Orientation Orientation);
     bool IsLeftOrDown(Orientation Orientation);
     Orientation GetOpposite(Orientation Orientation);
     Orientation FromRotationValue(const char* str);
-    
-};// namespace slxio
+
+}; // namespace slxio
