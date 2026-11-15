@@ -25,8 +25,8 @@ namespace slxio
         SimulinkBlock* parentblockPtr = new SimulinkBlock(SimulinkBlockType::Accumulator);
         SimulinkBlock childblockPtr = SimulinkBlock(SimulinkBlockType::Acos);
 
-        error_code status = parentblockPtr->AddSubBlock(childblockPtr);
-        CHECK(status == error_code::Ok);
+        ErrorCode status = parentblockPtr->AddSubBlock(childblockPtr);
+        CHECK(status == ErrorCode::Ok);
         CHECK(parentblockPtr->HasSubBlocks());
         delete parentblockPtr;
     }

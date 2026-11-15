@@ -50,7 +50,7 @@ If a test fails, check `Testing/Temporary/LastTest.log`,
 
 ### Submit Results to CDash
 
-We use [cdash](https://cmake.org/cmake/help/book/mastering-cmake/chapter/CDash.html) for test results tracking and analytics. Although it is not necessary for newcomers, and this is done by default on Coverage CI, it may be helpful to deploy test reports after adding a new feature/test.
+We use [cdash](https://cmake.org/cmake/help/book/mastering-cmake/chapter/CDash.html) for test results tracking and analytics. Although it is not necessary for newcomers, and this is done by default on Coverage CI, it may be helpful to deploy test reports after adding a new feature or a new test.
 
 Assuming a test-enabled build run:
 

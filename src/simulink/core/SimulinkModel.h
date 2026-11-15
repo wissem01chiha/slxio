@@ -90,13 +90,13 @@ namespace slxio
         std::shared_ptr<SimulinkConfigSet> GetConfigSet(std::string name) const;
 
         // Add a new configuration to the model
-        error_code AddConfigSet(const std::string& name,
-                                const std::shared_ptr<SimulinkConfigSet>& config);
+        ErrorCode AddConfigSet(const std::string& name,
+                               const std::shared_ptr<SimulinkConfigSet>& config);
 
         // Set the value of a given parameter in a given configuration
-        error_code SetConfigSetParameter(std::string config,
-                                         std::string name,
-                                         std::shared_ptr<SimulinkParameter> value);
+        ErrorCode SetConfigSetParameter(std::string config,
+                                        std::string name,
+                                        std::shared_ptr<SimulinkParameter> value);
 
         // Get the value of a given parameter in a given configuration
         std::shared_ptr<SimulinkParameter> GetConfigSetParameter(std::string config,

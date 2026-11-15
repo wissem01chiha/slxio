@@ -1,12 +1,28 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "ModelWorkspace.h"
-#include "DataECH.h"
+#include "SimulinkParameter.h"
+#include "SimulinkModel.h"
+#include "CommonMacro.h"
 #include "DataSourceType.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
-    std::shared_ptr<IParameterObjectBase> ModelWorkspace::GetVariable(const std::string& name) const
+    std::shared_ptr<SimulinkParameter> ModelWorkspace::GetVariable(const std::string& name) const
     {
         if (name.empty())
         {
@@ -21,27 +37,27 @@ namespace slxio
         return nullptr;
     }
 
-    HError ModelWorkspace::AssignVariable(const std::string& name,
-                                          const std::shared_ptr<IParameterObjectBase>& p)
+    ErrorCode ModelWorkspace::AssignVariable(const std::string& name,
+                                             const std::shared_ptr<SimulinkParameter>& p)
     {
         if (!p)
         {
-            return E_INVALID_ARGUMENT;
+            return ErrorCode::InvalidArgument;
         }
         if (name.empty())
         {
-            return E_PARAM_VAR_NAME_EMPTY;
+            return ErrorCode::WorkspaceParameterNameEmpty;
         }
 
         m_variables[name] = p;
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    HError ModelWorkspace::ClearVariable(const std::string& name)
+    ErrorCode ModelWorkspace::ClearVariable(const std::string& name)
     {
         if (name.empty())
         {
-            return E_PARAM_VAR_NAME_EMPTY;
+            return ErrorCode::InvalidArgument;
         }
         auto it = m_variables.find(name);
         if (it != m_variables.end())
@@ -49,16 +65,16 @@ namespace slxio
             m_variables.erase(it);
         }
 
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    HError ModelWorkspace::ClearAll()
+    ErrorCode ModelWorkspace::ClearAll()
     {
         m_variables.clear();
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    std::shared_ptr<DataSourceType> ModelWorkspace::GetDataSourceType()
+    std::shared_ptr<DataSourceType> ModelWorkspace::GetDataSourceType() const
     {
         return m_dataSource;
     }
@@ -73,26 +89,9 @@ namespace slxio
         return m_matlabCode;
     }
 
-    UInt16 ModelWorkspace::GetVariableCount() const
+    uint16_t ModelWorkspace::GetVariableCount() const
     {
-        return SLXIO_STATIC_CAST(UInt16, m_variables.size());
+        return STATIC_CAST(uint16_t, m_variables.size());
     }
 
-    HError ModelWorkspace::SetLogger(ILogger* logger)
-    {
-        if (logger == nullptr)
-        {
-            return E_LOGGER_NULLPTR_RECEIVED;
-        }
-
-        m_logger = logger;
-        return E_OK;
-    }
-
-    const ILogger* ModelWorkspace::GetLogger()
-    {
-        return m_logger;
-    }
-
-    SLXIO_ABI_NAMESPACE_END
-} // namespace slxio
+}; // namespace slxio

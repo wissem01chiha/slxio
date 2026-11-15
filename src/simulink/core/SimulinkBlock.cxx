@@ -69,15 +69,15 @@ namespace slxio
         return m_model;
     }
 
-    error_code SimulinkBlock::AddSubBlock(const SimulinkBlock& subBlock)
+    ErrorCode SimulinkBlock::AddSubBlock(const SimulinkBlock& subBlock)
     {
         auto it = m_subBlocks.find(subBlock.GetIndex());
         if (it != m_subBlocks.end())
         {
-            return error_code::SubBlockAlreadyExist;
+            return ErrorCode::SubBlockAlreadyExist;
         }
         m_subBlocks[subBlock.GetIndex()] = subBlock;
-        return error_code::Ok;
+        return ErrorCode::Ok;
     }
 
     void SimulinkBlock::SetParent(const std::shared_ptr<SimulinkBlock> parent)

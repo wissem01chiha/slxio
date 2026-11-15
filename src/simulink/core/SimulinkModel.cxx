@@ -67,21 +67,21 @@ namespace slxio
         return nullptr;
     }
 
-    error_code SimulinkModel::AddConfigSet(const std::string& name,
-                                           const std::shared_ptr<SimulinkConfigSet>& config)
+    ErrorCode SimulinkModel::AddConfigSet(const std::string& name,
+                                          const std::shared_ptr<SimulinkConfigSet>& config)
     {
         if (name.empty())
         {
-            return error_code::ConfigSetNameEmpty;
+            return ErrorCode::ConfigSetNameEmpty;
         }
         if (config == nullptr)
         {
-            return error_code::ConfigSetInvalid;
+            return ErrorCode::ConfigSetInvalid;
         }
 
         config->SetName(name);
         m_configurations.push_back(config);
-        return error_code::Ok;
+        return ErrorCode::Ok;
     }
 
     std::shared_ptr<SimulinkParameter> SimulinkModel::GetConfigSetParameter(std::string config,
@@ -101,28 +101,28 @@ namespace slxio
         return nullptr;
     }
 
-    error_code SimulinkModel::SetConfigSetParameter(std::string config,
-                                                    std::string name,
-                                                    std::shared_ptr<SimulinkParameter> value)
+    ErrorCode SimulinkModel::SetConfigSetParameter(std::string config,
+                                                   std::string name,
+                                                   std::shared_ptr<SimulinkParameter> value)
     {
         if (config.empty())
         {
-            return error_code::ConfigSetNameEmpty;
+            return ErrorCode::ConfigSetNameEmpty;
         }
         if (name.empty() || value == nullptr)
         {
-            return error_code::ConfigSetParameterNotFound;
+            return ErrorCode::ConfigSetParameterNotFound;
         }
 
         const auto configSet = GetConfigSet(config);
         if (configSet == nullptr)
         {
-            return error_code::ConfigSetParameterNotFound;
+            return ErrorCode::ConfigSetParameterNotFound;
         }
 
         const std::string qualifiedKey = config + "::" + name;
         m_parameters[qualifiedKey] = value;
-        return error_code::Ok;
+        return ErrorCode::Ok;
     }
     std::shared_ptr<SimulinkBlock> SimulinkModel::GetBlock(std::string blockId) const
     {

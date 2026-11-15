@@ -1,91 +1,65 @@
-#include "DataECH.h"
 #include "doctest.h"
-#include "Logger.h"
 #include "ModelWorkspace.h"
+#include "SimulinkParameter.h"
 
-using namespace slxio;
-SLXIO_ABI_NAMESPACE_BEGIN
-
-class MockParameterObject : public IParameterObjectBase
+namespace slxio
 {
-public:
-    explicit MockParameterObject(const std::string& name)
+
+    TEST_CASE("Workspace assign and get variable test")
     {
-        SetName(name);
+        ModelWorkspace ws;
+        auto param = std::make_shared<SimulinkParameter>("x");
+
+        ErrorCode err = ws.AssignVariable("x", param);
+        CHECK(err == ErrorCode::Ok);
+
+        auto retrieved = ws.GetVariable("x");
+        REQUIRE(retrieved != nullptr);
+        CHECK(retrieved->GetValue() == "x");
+
+        CHECK(ws.AssignVariable("x", nullptr) != ErrorCode::Ok);
+        CHECK(ws.AssignVariable("", param) == ErrorCode::WorkspaceParameterNameEmpty);
     }
-    IParameterObjectBase* New() override
+
+    TEST_CASE("Workspace clear variable test")
     {
-        return new MockParameterObject(GetName());
+        ModelWorkspace ws;
+        auto param = std::make_shared<SimulinkParameter>("y");
+        ws.AssignVariable("y", param);
+
+        CHECK(ws.GetVariableCount() == 1);
+
+        ErrorCode err = ws.ClearVariable("y");
+        CHECK(err == ErrorCode::Ok);
+        CHECK(ws.GetVariableCount() == 0);
+        CHECK(ws.GetVariable("y") == nullptr);
     }
-    DataType GetDataType() const override
+
+    TEST_CASE("Workspace clear all variables test")
     {
-        return DataType::SLXIO_TYPE_ARRAY;
+        ModelWorkspace ws;
+
+        ws.AssignVariable("a", std::make_shared<SimulinkParameter>("a"));
+        ws.AssignVariable("b", std::make_shared<SimulinkParameter>("b"));
+
+        CHECK(ws.GetVariableCount() == 2);
+
+        ErrorCode err = ws.ClearAll();
+        CHECK(err == ErrorCode::Ok);
+        CHECK(ws.GetVariableCount() == 0);
     }
-};
 
-TEST_CASE("Assign and Get Variable")
-{
-    ModelWorkspace ws;
-    auto param = std::make_shared<MockParameterObject>("x");
+    TEST_CASE("Workspace fileName and matlab code defaults test")
+    {
+        ModelWorkspace ws;
+        CHECK(ws.GetFileName().empty());
+        CHECK(ws.GetMatlabCode().empty());
+    }
 
-    HError err = ws.AssignVariable("x", param);
-    CHECK(err == E_OK);
+    TEST_CASE("Workspace get data source default not nullptr")
+    {
+        ModelWorkspace ws;
+        CHECK(ws.GetDataSourceType() == nullptr);
+    }
 
-    auto retrieved = ws.GetVariable("x");
-    REQUIRE(retrieved != nullptr);
-    CHECK(retrieved->GetName() == "x");
-
-    CHECK(ws.AssignVariable("x", nullptr) != E_OK);
-    CHECK(ws.AssignVariable("", param) == E_PARAM_VAR_NAME_EMPTY);
-}
-
-TEST_CASE("Clear Variable")
-{
-    ModelWorkspace ws;
-    auto param = std::make_shared<MockParameterObject>("y");
-    ws.AssignVariable("y", param);
-
-    CHECK(ws.GetVariableCount() == 1);
-
-    HError err = ws.ClearVariable("y");
-    CHECK(err == E_OK);
-    CHECK(ws.GetVariableCount() == 0);
-    CHECK(ws.GetVariable("y") == nullptr);
-}
-
-TEST_CASE("Clear All Variables")
-{
-    ModelWorkspace ws;
-    ws.AssignVariable("a", std::make_shared<MockParameterObject>("a"));
-    ws.AssignVariable("b", std::make_shared<MockParameterObject>("b"));
-
-    CHECK(ws.GetVariableCount() == 2);
-
-    HError err = ws.ClearAll();
-    CHECK(err == E_OK);
-    CHECK(ws.GetVariableCount() == 0);
-}
-
-TEST_CASE("FileName and MatlabCode defaults")
-{
-    ModelWorkspace ws;
-    CHECK(ws.GetFileName().empty());
-    CHECK(ws.GetMatlabCode().empty());
-}
-
-TEST_CASE("GetDataSource default not nullptr")
-{
-    ModelWorkspace ws;
-    CHECK(ws.GetDataSourceType() == nullptr);
-}
-
-TEST_CASE("ModelWorkspace Logging interface test")
-{
-    ModelWorkspace ws;
-    Logger* log = new Logger();
-    CHECK(ws.SetLogger(log) == E_OK);
-    CHECK(ws.GetLogger() != nullptr);
-    delete log;
-}
-
-SLXIO_ABI_NAMESPACE_END
+}; // namespace slxio

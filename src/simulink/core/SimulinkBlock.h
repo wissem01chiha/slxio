@@ -41,7 +41,7 @@ namespace slxio
 
         std::shared_ptr<SimulinkModel> GetModel() const override;
 
-        error_code AddSubBlock(const SimulinkBlock& subBlock);
+        ErrorCode AddSubBlock(const SimulinkBlock& subBlock);
 
         virtual void SetParent(const std::shared_ptr<SimulinkBlock> parent);
 

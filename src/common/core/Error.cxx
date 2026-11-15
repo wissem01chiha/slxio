@@ -19,32 +19,34 @@
 namespace slxio
 {
 
-    NODISCARD std::error_code make_error_code(error_code error) noexcept
+    NODISCARD std::error_code make_error_code(ErrorCode error) noexcept
     {
         return std::error_code(static_cast<int>(error), make_error_category());
     }
 
-    const char* error_category::name() const noexcept
+    const char* ErrorCategory::name() const noexcept
     {
         return "slxio";
     }
 
-    std::string error_category::message(int ev) const
+    std::string ErrorCategory::message(int ev) const
     {
-        switch (static_cast<error_code>(ev))
+        switch (static_cast<ErrorCode>(ev))
         {
-        case error_code::Ok:
+        case ErrorCode::Ok:
             return "success";
-        case error_code::ConfigSetParameterNotFound:
+        case ErrorCode::ConfigSetParameterNotFound:
             return "simulink config set parameter not found";
-        case error_code::ConfigSetNameEmpty:
+        case ErrorCode::ConfigSetNameEmpty:
             return "simulink config set name is empty";
-        case error_code::InvalidArgument:
+        case ErrorCode::InvalidArgument:
             return "invalid argument";
-        case error_code::ConfigSetInvalid:
+        case ErrorCode::ConfigSetInvalid:
             return "invalid simulink config set";
-        case error_code::SubBlockAlreadyExist:
+        case ErrorCode::SubBlockAlreadyExist:
             return "a subblock witn same name already exist";
+        case ErrorCode::WorkspaceParameterNameEmpty:
+            return "model workspace parameter name empty";
         default:
             return "unknown error";
         }
@@ -52,7 +54,7 @@ namespace slxio
 
     NODISCARD const std::error_category& make_error_category() noexcept
     {
-        static const error_category instance;
+        static const ErrorCategory instance;
         return instance;
     }
 

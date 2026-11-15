@@ -31,7 +31,7 @@ namespace slxio
     TEST_CASE("Report error codes test")
     {
         DiagnosticEngine engine;
-        const auto error = make_error_code(error_code::InvalidArgument);
+        const auto error = make_error_code(ErrorCode::InvalidArgument);
 
         CHECK(engine.ReportError(error, "Failed to read model"));
         REQUIRE(engine.GetDiagnostics().size() == 1);
@@ -47,7 +47,7 @@ namespace slxio
     {
         DiagnosticEngine engine;
 
-        CHECK_FALSE(engine.ReportError(make_error_code(error_code::Ok)));
+        CHECK_FALSE(engine.ReportError(make_error_code(ErrorCode::Ok)));
         CHECK(engine.GetDiagnostics().empty());
     }
 

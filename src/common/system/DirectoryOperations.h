@@ -49,7 +49,7 @@ namespace slxio
                                                             int* error);
 
         /** Create a system temporary directory and retrun a pointer to it*/
-        error_code CreateTemporaryDirectory(int* error);
+        ErrorCode CreateTemporaryDirectory(int* error);
 
         /** same as CreateTemporaryDirectory using a prefix for directory name */
         std::shared_ptr<Directory> CreatePrefixedTemporaryDirectory(const std::string& prefix,

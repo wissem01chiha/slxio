@@ -18,7 +18,7 @@ namespace slxio
     {
         auto mdl = std::make_shared<SimulinkModel>();
         auto config = std::make_shared<SimulinkConfigSet>();
-        CHECK(mdl->AddConfigSet("ConfigurationPROD", config) == error_code::Ok);
+        CHECK(mdl->AddConfigSet("ConfigurationPROD", config) == ErrorCode::Ok);
         std::shared_ptr<SimulinkConfigSet> newConfig = mdl->GetConfigSet("ConfigurationPROD");
         CHECK(newConfig != nullptr);
         CHECK(newConfig->GetName() == config->GetName());
@@ -32,12 +32,12 @@ namespace slxio
 
         std::shared_ptr<SimulinkConfigSet> config = std::make_shared<SimulinkConfigSet>();
         config->SetParam("Solver", "ode");
-        CHECK(mdl->AddConfigSet("ConfigurationPROD", config) == error_code::Ok);
+        CHECK(mdl->AddConfigSet("ConfigurationPROD", config) == ErrorCode::Ok);
 
         auto ec = mdl->SetConfigSetParameter("ConfigurationPROD", "Solver", solver);
         auto ecc = make_error_code(ec);
         INFO(ecc.message());
-        CHECK(ec == error_code::Ok);
+        CHECK(ec == ErrorCode::Ok);
 
         auto ssolver = mdl->GetConfigSetParameter("ConfigurationPROD", "Solver");
         CHECK(ssolver != nullptr);

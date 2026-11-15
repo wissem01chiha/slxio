@@ -22,7 +22,7 @@
 namespace slxio
 {
 
-    enum class error_code : int
+    enum class ErrorCode : int
     {
         Ok = 0,
         InvalidArgument = 1,
@@ -30,20 +30,21 @@ namespace slxio
         ConfigSetNameEmpty = 3,
         ConfigSetInvalid = 4,
         SubBlockAlreadyExist = 5,
+        WorkspaceParameterNameEmpty = 6,
     };
 
     /// Define a custom error category for  error codes
-    class error_category final : public std::error_category
+    class ErrorCategory final : public std::error_category
     {
     public:
         const char* name() const noexcept override;
         std::string message(int ev) const override;
     };
 
-    /// Convert an slxio::error_code to std::error_code.
-    NODISCARD std::error_code make_error_code(error_code error) noexcept;
+    /// Convert an slxio::ErrorCode to std::error_code.
+    NODISCARD std::error_code make_error_code(ErrorCode error) noexcept;
 
-    /// Return a reference to an std::error_category for custom error codes
+    /// Return a reference to an error_category for custom error codes
     NODISCARD const std::error_category& make_error_category() noexcept;
 
 }; // namespace slxio
