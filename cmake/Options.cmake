@@ -98,8 +98,7 @@ advanced_option(SLXIO_MAT "MATLAB MAT file support" OFF)
 
 # Option to enable support for *.mdl files. Note that *.mdl support is
 # experimental and may be unstable.
-advanced_option(SLXIO_MDL "Legacy Simulink model files
- support" OFF)
+advanced_option(SLXIO_MDL "Legacy Simulink format support" OFF)
 
 # Build with HDF5 library support. Enables the internal HDF5 exporter and MAT
 # files with HDF5 via MATIO_WITH_HDF5.

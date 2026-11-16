@@ -1,27 +1,26 @@
-
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 #include "StateflowChart.h"
 #include "StateflowBlock.h"
 
 namespace slxio
 {
-    HError StateflowChart::AddElement(std::shared_ptr<SimulinkElementBase> element)
+    StateflowChart::StateflowChart(StateflowChart& origChart)
     {
-        // nodes.AddElement(node);
-        // node.setParent(this);
-        return E_OK;
-    }
-
-    HError StateflowChart::Remove(std::shared_ptr<SimulinkElementBase> element)
-    {
-        // nodes.AddElement(node);
-        // node.setParent(this);
-        return E_OK;
-    }
-
-    std::shared_ptr<StateflowElementBase> StateflowChart::getParent() const
-    {
-        return std::shared_ptr<StateflowElementBase>();
     }
 
     std::string StateflowChart::GetName()
@@ -29,14 +28,19 @@ namespace slxio
         return std::string("");
     }
 
-    std::vector<StateflowNodeBase> StateflowChart::getNodes()
+    std::shared_ptr<StateflowElementBase> StateflowChart::GetParent() const
     {
-        return std::vector<StateflowNodeBase>();
+        return std::shared_ptr<StateflowElementBase>();
     }
 
-    std::shared_ptr<StateflowBlock> StateflowChart::getStateflowBlock()
+    std::vector<std::shared_ptr<StateflowNodeBase>> StateflowChart::GetNodes()
     {
-        return stateflowBlock;
+        return std::vector<std::shared_ptr<StateflowNodeBase>>();
+    }
+
+    std::shared_ptr<StateflowBlock> StateflowChart::GetStateflowBlock()
+    {
+        return m_block;
     };
 
     std::string StateflowChart::ToString() const
@@ -44,25 +48,19 @@ namespace slxio
         return std::string("");
     }
 
-    HError StateflowChart::setStateflowBlock(StateflowBlock stateflowBlock)
+    void StateflowChart::SetStateflowBlock(StateflowBlock stateflowBlock)
     {
         // if (stateflowBlock != null) {
         //   CCSMPre.isTrue(this.stateflowBlock == null,
         //                  "Cannot set new Stateflow block.");
         // }
         // this.stateflowBlock = stateflowBlock;
-        return E_OK;
+        return;
     }
 
-    SId StateflowChart::GetId() const
+    std::shared_ptr<StateflowMachine> StateflowChart::GetMachine()
     {
-        return (SId)0;
+        return std::shared_ptr<StateflowMachine>();
     }
 
-    bool StateflowChart::Contains(const SId& id) const
-    {
-        return false;
-    }
-
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

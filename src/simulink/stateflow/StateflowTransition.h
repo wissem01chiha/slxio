@@ -1,36 +1,41 @@
-// SPDX-FileCopyrightText: 2025-2026 Wissem Chiha
-// SPDX-License-Identifier: Apache-2.0
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#ifndef STATEFLOWTRANSITION_H
-#define STATEFLOWTRANSITION_H
+#pragma once
 
-#include "ABINamespaceMacro.h"
-#include "APIExportMacro.h"
-
-#include <memory>
-#include <string>
+#include "CommonPCH.h"
+#include "StateflowElementBase.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     class StateflowNodeBase;
 
-    /**
-     * @brief A Stateflow transition.
-     */
-    class SLXIO_APIEXPORT StateflowTransition final
+    // A Stateflow transition.
+    class StateflowTransition final
     {
     public:
         StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst);
         StateflowTransition(const std::shared_ptr<StateflowNodeBase>& src,
                             const std::shared_ptr<StateflowNodeBase>& dst);
 
-        std::shared_ptr<StateflowNodeBase> getSrc() const;
-        std::shared_ptr<StateflowNodeBase> getDst() const;
+        std::shared_ptr<StateflowNodeBase> GetSrc() const;
+        std::shared_ptr<StateflowNodeBase> GetDst() const;
+        std::string GetLabel() const;
 
-        std::string getLabel() const;
-        void RemoveElement();
+        void Remove();
 
         std::string ToString() const;
 
@@ -39,7 +44,4 @@ namespace slxio
         std::shared_ptr<StateflowNodeBase> dst;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // STATEFLOWTRANSITION_H

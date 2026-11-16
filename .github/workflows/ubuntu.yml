@@ -31,6 +31,12 @@ jobs:
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_OPENMP=ON -DSLXIO_TESTS=ON
+
+          - name: Ubuntu GNU GCC C++17 (SLXIO_OPENMP=ON, SLXIO_MDL=ON)
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_OPENMP=ON -DSLXIO_MDL=ON -DSLXIO_TESTS=ON
     steps:
     - name: Checkout repository
       uses: actions/checkout@v6

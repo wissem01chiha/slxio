@@ -17,29 +17,25 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "StateflowElementBase.h"
 
 namespace slxio
 {
     /**
-     * @brief A Stateflow target object. Stateflow uses targets for
+     * A Stateflow target object. Stateflow uses targets for
      * generating C-Code which is used for simulation.
      */
-    class SLXIO_APIEXPORT StateflowTarget final : public StateflowElementBase
+    class StateflowTarget final : public StateflowElementBase
     {
     public:
         StateflowTarget();
         StateflowTarget(StateflowTarget& orig);
 
-        HError RemoveElement(std::shared_ptr<SimulinkElementBase> element) override;
-        HError AddElement(std::shared_ptr<SimulinkElementBase> element) override;
+        void Remove(std::shared_ptr<StateflowElementBase> element);
 
-        std::string toString() const override;
-        SId GetId() const override;
+        std::string ToString() const override;
 
     private:
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
-
-#endif // STATEFLOWTARGET_H

@@ -34,27 +34,31 @@ namespace slxio
     {
     public:
         StateflowChart() = default;
-        StateflowChart(StateflowChart& origChart) = delete;
+        StateflowChart(StateflowChart& origChart);
 
-        /** returns the name of the chart. */
+        // Returns the name of the chart.
         std::string GetName();
 
-        /** @brief Returns the nodes of this chart. */
-        std::vector<StateflowNodeBase> GetNodes();
+        std::shared_ptr<StateflowElementBase> GetParent() const override;
 
-        /** @brief Get Stateflow block this chart belongs to. */
+        // Returns the nodes of this chart.
+        std::vector<std::shared_ptr<StateflowNodeBase>> GetNodes();
+
+        // Get Stateflow block this chart belongs to.
         std::shared_ptr<StateflowBlock> GetStateflowBlock();
 
         std::string ToString() const override;
 
-        /** @brief Set Stateflow block this chart belongs to. */
+        // Set Stateflow block this chart belongs to.
         void SetStateflowBlock(StateflowBlock stateflowBlock);
 
         std::shared_ptr<StateflowMachine> GetMachine();
 
+        ~StateflowChart() = default;
+
     private:
         std::shared_ptr<StateflowBlock> m_block;
-        std::vector<StateflowNodeBase> m_nodes;
+        std::vector<std::shared_ptr<StateflowNodeBase>> m_nodes;
     };
 
 }; // namespace slxio

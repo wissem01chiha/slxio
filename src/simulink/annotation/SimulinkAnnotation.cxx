@@ -24,18 +24,21 @@ namespace slxio
     {
     }
 
-    SimulinkAnnotation::SimulinkAnnotation(const SimulinkAnnotation& other)
-    {
+    SimulinkAnnotation::SimulinkAnnotation(const SimulinkAnnotation& other) 
+    { 
+        m_layout = other.m_layout;
+        m_style = other.m_style;
+        m_text = other.m_text;
     }
 
     const std::string& SimulinkAnnotation::GetText() const
     {
-        return "";
+        return m_text;
     }
 
     void SimulinkAnnotation::SetText(std::string text)
     {
-        return;
+        m_text =text;
     }
 
 }; // namespace slxio

@@ -17,6 +17,10 @@
 
 namespace slxio
 {
+    AnnotationCollection::AnnotationCollection()
+    {
+    }
+
     int AnnotationCollection::Add(std::shared_ptr<SimulinkAnnotation> annotation)
     {
         return 0;

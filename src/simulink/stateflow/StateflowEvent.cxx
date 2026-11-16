@@ -1,28 +1,41 @@
-#include "StateflowEvent.h"
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
-#include "Logger.h"
+#include "StateflowEvent.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     StateflowEvent::StateflowEvent() : StateflowElementBase()
     {
-        Logger& l = Logger::GetInstance();
         // l.log(Logger::V_INFO, "StateflowEvent created.");
     }
 
-    HError StateflowEvent::RemoveElement(std::shared_ptr<SimulinkElementBase> element)
+    StateflowEvent::StateflowEvent(StateflowEvent& orig)
     {
-        Logger& l = Logger::GetInstance();
-        if (getParent() == nullptr)
-        {
-            // l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
-            return E_PARAMETER_NULL_PTR;
-        }
-        // getParent().removeEvent(this);
-        return E_OK;
     }
 
-    SLXIO_ABI_NAMESPACE_END
+    void StateflowEvent::Remove(std::shared_ptr<StateflowElementBase> element)
+    {
+        if (GetParent() == nullptr)
+        {
+            // l.log(Logger::V_WARNING, "Event has no parent to be removed from.");
+            return;
+        }
+        // getParent().removeEvent(this);
+        return;
+    }
+
 }; // namespace slxio

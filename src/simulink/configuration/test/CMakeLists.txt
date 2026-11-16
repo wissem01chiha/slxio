@@ -13,6 +13,9 @@
 # the License.
 
 module_add_tests(
-  SimulinkConfiguration cxx/TestSimulinkConfigSet.cxx
+  SimulinkConfiguration
+  cxx/TestSimulinkConfigSet.cxx
   cxx/TestSimulinkConfigSetCollection.cxx
-  cxx/TestSimulinkConfigSetComponent.cxx cxx/TestSimulinkCodeGeneration.cxx)
+  cxx/TestSimulinkConfigSetComponent.cxx
+  cxx/TestSimulinkCodeGeneration.cxx
+  cxx/TestSimulinkCoverage.cxx)

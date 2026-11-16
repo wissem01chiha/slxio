@@ -23,7 +23,16 @@ namespace slxio
     std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
                                           SimulinkCoverage& destination)
     {
-        return std::vector<Diagnostic>();
+        std::vector<Diagnostic> diagnostics;
+        if (const auto covEnable = source.FindParam("CovEnable"))
+        {
+            destination.CovEnable = covEnable;
+        }
+        else
+        {
+            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter CovEnable not found");
+        }
+        return diagnostics;
     }
 
 }; // namespace slxio

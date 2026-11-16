@@ -17,6 +17,10 @@
 
 namespace slxio
 {
+    Point::Point(uint32_t x, uint32_t y, uint32_t width, uint32_t height)
+        : x(x), y(y), width(width), height(height)
+    {
+    }
 
     Point::Point(const std::vector<uint32_t>& vec)
     {

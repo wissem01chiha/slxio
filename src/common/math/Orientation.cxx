@@ -64,7 +64,7 @@ namespace slxio
         case Orientation::DOWN:
             return Orientation::UP;
         default:
-            throw std::logic_error("Unknown Orientation value");
+            throw std::logic_error("unknown Orientation value");
         }
     }
 

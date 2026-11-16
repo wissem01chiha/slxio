@@ -30,8 +30,10 @@ namespace slxio
     class AnnotationCollection final
     {
     public:
+        AnnotationCollection();
+        
         int Add(std::shared_ptr<SimulinkAnnotation> annotation);
-        int Remove(/* stable annotation identifier */);
+        int Remove();
 
         const std::vector<std::shared_ptr<SimulinkAnnotation>>& GetAll() const;
     };

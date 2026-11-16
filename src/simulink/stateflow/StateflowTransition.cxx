@@ -1,19 +1,30 @@
+/*
+ * Copyright 2026 Wissem Chiha
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include "StateflowTransition.h"
-
-#include "Logger.h"
 #include "StateflowNodeBase.h"
-
-#include <cassert>
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     StateflowTransition::StateflowTransition(const std::shared_ptr<StateflowNodeBase>& dst)
         : dst(dst)
     {
         assert(dst && "Destination may not be null");
-        dst->addInTransition(
+        dst->AddInTransition(
             std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
     }
 
@@ -22,38 +33,38 @@ namespace slxio
         : src(src), dst(dst)
     {
         assert(src && dst && "Neither src nor dst may be null");
-        src->addOutTransition(
+        src->AddOutTransition(
             std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
-        dst->addInTransition(
+        dst->AddInTransition(
             std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
     }
 
-    std::shared_ptr<StateflowNodeBase> StateflowTransition::getSrc() const
+    std::shared_ptr<StateflowNodeBase> StateflowTransition::GetSrc() const
     {
         return src;
     }
-    std::shared_ptr<StateflowNodeBase> StateflowTransition::getDst() const
+    std::shared_ptr<StateflowNodeBase> StateflowTransition::GetDst() const
     {
         return dst;
     }
 
-    std::string StateflowTransition::getLabel() const
+    std::string StateflowTransition::GetLabel() const
     {
         // Placeholder: integrate with parameter system
         return "labelString";
     }
 
-    void StateflowTransition::RemoveElement()
+    void StateflowTransition::Remove()
     {
         if (src)
         {
-            src->removeOutTransition(
+            src->RemoveOutTransition(
                 std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
             src.reset();
         }
         if (dst)
         {
-            dst->removeInTransition(
+            dst->RemoveInTransition(
                 std::shared_ptr<StateflowTransition>(this, [](StateflowTransition*) {}));
             dst.reset();
         }
@@ -68,5 +79,4 @@ namespace slxio
         return "[Node] -> [Node]";
     }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
