@@ -20,7 +20,7 @@
 
 namespace slxio
 {
-    class ISection 
+    class ISection
     {
     public:
         using SectionPtr = std::shared_ptr<ISection>;
@@ -28,6 +28,6 @@ namespace slxio
         virtual ~ISection() = default;
         virtual SectionPtr GetParentSection() const = 0;
         virtual std::string GetParameter(const std::string& name) const = 0;
-        virtual std::vector<std::string> GetParameterNames() const =0;
-    }; 
+        virtual std::vector<std::string> GetParameterNames() const = 0;
+    };
 }; // namespace slxio

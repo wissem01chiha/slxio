@@ -18,49 +18,55 @@
 
 #include "CommonPCH.h"
 
-namespace slxio {
+namespace slxio
+{
 
-class MDLSection  final {
-public:
-    using SectionPtr = std::shared_ptr<MDLSection>;
+    class MDLSection final
+    {
+    public:
+        using SectionPtr = std::shared_ptr<MDLSection>;
 
-    MDLSection() = default;
-    MDLSection(std::string name, int lineNumber);
-    MDLSection(std::string name, const std::vector<SectionPtr>& sections, const std::unordered_map<std::string, std::string>& parameters,int lineNumber);
+        MDLSection() = default;
+        MDLSection(std::string name, int lineNumber);
+        MDLSection(std::string name,
+                   const std::vector<SectionPtr>& sections,
+                   const std::unordered_map<std::string, std::string>& parameters,
+                   int lineNumber);
 
-    MDLSection* GetParentSection() const;
-    MDLSection* GetFirstSubSection(const std::string& name) const;
+        MDLSection* GetParentSection() const;
+        MDLSection* GetFirstSubSection(const std::string& name) const;
 
-    std::vector<MDLSection*> GetLeafSections() const;
-    std::vector<MDLSection*> GetLeafSections(const std::string& name) const;
+        std::vector<MDLSection*> GetLeafSections() const;
+        std::vector<MDLSection*> GetLeafSections(const std::string& name) const;
 
-    int GetLineNumber() const;
+        int GetLineNumber() const;
 
-    const std::string& GetName() const;
-    std::string GetParameter(const std::string& name) const;
-    std::string GetParameter(const std::string& name, const std::string& defaultValue) const;
+        const std::string& GetName() const;
+        std::string GetParameter(const std::string& name) const;
+        std::string GetParameter(const std::string& name, const std::string& defaultValue) const;
 
-    std::unordered_map<std::string, std::string> GetParameterMapRecursively() const;
-    std::vector<std::string> GetParameterNames() const;
-    std::vector<SectionPtr> GetSubSections() const;
-    std::vector<SectionPtr> GetSubSections(const std::string& name) const;
+        std::unordered_map<std::string, std::string> GetParameterMapRecursively() const;
+        std::vector<std::string> GetParameterNames() const;
+        std::vector<SectionPtr> GetSubSections() const;
+        std::vector<SectionPtr> GetSubSections(const std::string& name) const;
 
-    bool HasParameter(const std::string& name) const;
-    bool HasSubSection(const std::string& name) const;
-    bool HasSubSections() const;
+        bool HasParameter(const std::string& name) const;
+        bool HasSubSection(const std::string& name) const;
+        bool HasSubSections() const;
 
-    std::string ToString() const;
+        std::string ToString() const;
 
-private:
-    void AddSubSection(const SectionPtr& section);
-    void BuildParameterMapRecursively(std::unordered_map<std::string, std::string>& map,const std::string& prefix) const;
-    void CollectLeafSections(const MDLSection* section, std::vector<MDLSection*>& result) const;
+    private:
+        void AddSubSection(const SectionPtr& section);
+        void BuildParameterMapRecursively(std::unordered_map<std::string, std::string>& map,
+                                          const std::string& prefix) const;
+        void CollectLeafSections(const MDLSection* section, std::vector<MDLSection*>& result) const;
 
-    std::string name_; 
-    int lineNumber_;
-    MDLSection* parentSection_ = nullptr;
-    std::unordered_map<std::string, std::string> parameters_;
-    std::unordered_map<std::string,std::vector<SectionPtr>> subSections_;
-};
+        std::string name_;
+        int lineNumber_;
+        MDLSection* parentSection_ = nullptr;
+        std::unordered_map<std::string, std::string> parameters_;
+        std::unordered_map<std::string, std::vector<SectionPtr>> subSections_;
+    };
 
 }; // namespace slxio

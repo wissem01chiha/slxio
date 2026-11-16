@@ -32,9 +32,10 @@ namespace slxio
 
         SectionPtr GetParentSection() const override;
         std::string GetParameter(const std::string& name) const override;
-        std::vector<std::string> GetParameterNames() const  override;
-        
+        std::vector<std::string> GetParameterNames() const override;
+
         virtual ~SLXSection();
+
     protected:
         pugi::xml_node m_node;
     };

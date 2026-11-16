@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 #include "SimulinkDataTypeBuilder.h"
 
 namespace slxio

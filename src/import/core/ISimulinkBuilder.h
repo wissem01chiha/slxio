@@ -27,8 +27,8 @@ namespace slxio
     {
     public:
         ISimulinkBuilder();
-        virtual ~ISimulinkBuilder() =default;
-        virtual ErrorCode Build() =0 ;
+        virtual ~ISimulinkBuilder() = default;
+        virtual ErrorCode Build() = 0;
     };
-    
-};// namespace slxio
+
+}; // namespace slxio
