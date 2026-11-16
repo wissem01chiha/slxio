@@ -18,7 +18,8 @@
 
 #include "CommonPCH.h"
 
-struct MdlNode {
+struct MdlNode
+{
     std::string m_type; // "Model", "System", "Block", ...
     std::unordered_map<std::string, std::string> m_properties;
     std::vector<MdlNode> m_children;

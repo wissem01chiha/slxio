@@ -25,7 +25,7 @@ namespace slxio
      * A Stateflow target object. Stateflow uses targets for
      * generating C-Code which is used for simulation.
      */
-    class StateflowTarget final : public StateflowElementBase
+    class StateflowTarget : public StateflowElementBase
     {
     public:
         StateflowTarget();

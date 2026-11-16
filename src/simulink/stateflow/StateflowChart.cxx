@@ -19,9 +19,6 @@
 
 namespace slxio
 {
-    StateflowChart::StateflowChart(StateflowChart& origChart)
-    {
-    }
 
     std::string StateflowChart::GetName()
     {

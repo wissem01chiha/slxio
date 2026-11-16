@@ -34,7 +34,7 @@ namespace slxio
     {
     public:
         StateflowChart() = default;
-        StateflowChart(StateflowChart& origChart);
+        StateflowChart(const StateflowChart&) = default;
 
         // Returns the name of the chart.
         std::string GetName();

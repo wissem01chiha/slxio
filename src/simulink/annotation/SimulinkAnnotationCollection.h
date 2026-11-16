@@ -31,7 +31,7 @@ namespace slxio
     {
     public:
         AnnotationCollection();
-        
+
         int Add(std::shared_ptr<SimulinkAnnotation> annotation);
         int Remove();
 
