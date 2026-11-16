@@ -19,3 +19,17 @@ add_subdirectory(import)
 
 add_library(SLXIO INTERFACE)
 add_library(SLXIO::SLXIO ALIAS SLXIO)
+
+target_link_libraries(
+  SLXIO
+  INTERFACE SimulinkCore
+            SimulinkConfiguration
+            SimulinkMisc
+            SimulinkSateflow
+            SimulinkData
+            ImportCore
+            SimulinkAnnotation
+            SimulinkLayout)
+if(SLXIO_MDL)
+  target_link_libraries(SLXIO INTERFACE ImportMdl)
+endif()
