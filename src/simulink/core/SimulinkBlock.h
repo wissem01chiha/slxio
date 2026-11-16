@@ -19,7 +19,6 @@
 #include "CommonPCH.h"
 #include "Error.h"
 #include "SimulinkElement.h"
-#include "unordered_dense.h"
 #include "SimulinkBlockType.h"
 #include "SimulinkBlockCategory.h"
 

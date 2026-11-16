@@ -13,3 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#pragma once
+
+#include "CommonPCH.h"
+
+namespace slxio
+{
+    class ISection 
+    {
+    public:
+        using SectionPtr = std::shared_ptr<ISection>;
+
+        virtual ~ISection() = default;
+        virtual SectionPtr GetParentSection() const = 0;
+        virtual std::string GetParameter(const std::string& name) const = 0;
+        virtual std::vector<std::string> GetParameterNames() const =0;
+    }; 
+}; // namespace slxio

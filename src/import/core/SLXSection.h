@@ -16,11 +16,27 @@
 
 #pragma once
 
+#include <pugixml.h>
 #include "CommonPCH.h"
+#include "ISection.h"
 
-struct MdlNode
+namespace slxio
 {
-    std::string m_type; // "Model", "System", "Block", ...
-    std::unordered_map<std::string, std::string> m_properties;
-    std::vector<MdlNode> m_children;
-};
+    class SLXSection final : public ISection
+    {
+    public:
+        using SectionPtr = std::shared_ptr<ISection>;
+
+        SLXSection();
+        explicit SLXSection(pugi::xml_node node);
+
+        SectionPtr GetParentSection() const override;
+        std::string GetParameter(const std::string& name) const override;
+        std::vector<std::string> GetParameterNames() const  override;
+        
+        virtual ~SLXSection();
+    protected:
+        pugi::xml_node m_node;
+    };
+
+}; // namespace slxio

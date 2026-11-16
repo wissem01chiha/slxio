@@ -14,27 +14,21 @@
  * limitations under the License.
  */
 
-#include "SLXSection.h"
+#pragma once
+
+#include "CommonPCH.h"
+#include "ISection.h"
+#include "Error.h"
 
 namespace slxio
 {
 
-    SLXSection::SLXSection() = default;
-
-    SLXSection::SLXSection(pugi::xml_node node) : m_node(node)
+    class ISimulinkBuilder
     {
-    }
-
-    SLXSection::~SLXSection() = default;
-
-    pugi::xml_node SLXSection::GetNode() const
-    {
-        return m_node;
-    }
-
-    bool SLXSection::Empty() const
-    {
-        return m_node.empty();
-    }
-
-} // namespace slxio
+    public:
+        ISimulinkBuilder();
+        virtual ~ISimulinkBuilder() =default;
+        virtual ErrorCode Build() =0 ;
+    };
+    
+};// namespace slxio

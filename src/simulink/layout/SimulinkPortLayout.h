@@ -23,10 +23,8 @@ namespace slxio
     class Color;
     class Point;
 
-    /**
-     * @brief Encapsulates all information required for layouting a port
-     * (relative to its parent's canvas).
-     */
+    // Encapsulates all information required for layouting a port
+    // (relative to its parent's canvas).
     class SimulinkPortLayout final
     {
     public:

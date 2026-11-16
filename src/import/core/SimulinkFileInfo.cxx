@@ -15,3 +15,10 @@
  */
 
 #pragma once
+
+#include "SimulinkFileInfo.h"
+
+namespace slxio
+{
+
+}; // namespace slxio

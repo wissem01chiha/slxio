@@ -14,4 +14,31 @@
  * limitations under the License.
  */
 
-#include "MdlNode.h"
+#include "SLXSection.h"
+
+namespace slxio
+{
+    SLXSection::SLXSection() = default;
+
+    SLXSection::SLXSection(pugi::xml_node node) : m_node(node)
+    {
+    }
+
+    SLXSection::SectionPtr SLXSection::GetParentSection() const
+    {
+        return SectionPtr();
+    }
+
+    std::string SLXSection::GetParameter(const std::string& name) const
+    {
+        return std::string();
+    }
+
+    std::vector<std::string> SLXSection::GetParameterNames() const
+    {
+        return std::vector<std::string>();
+    }
+
+    SLXSection::~SLXSection() = default;
+
+} // namespace slxio

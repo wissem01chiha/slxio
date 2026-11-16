@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -43,7 +43,7 @@ namespace slxio
         std::string SupportModelReferenceSimTargetCustomCode;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkModelReference& destination);
+    ErrorCode ParseModelReferenceComponent(const SimulinkConfigSetComponent& source,
+                                           SimulinkModelReference& destination);
 
 }; // namespace slxio

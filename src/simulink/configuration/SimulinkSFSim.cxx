@@ -15,15 +15,13 @@
  */
 
 #include "SimulinkSFSim.h"
-#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkSFSim& destination)
+    ErrorCode ParseSFSimComponent(const SimulinkConfigSetComponent&, SimulinkSFSim&)
     {
-        return std::vector<Diagnostic>();
+        return ErrorCode::NotImplemented;
     }
 
 }; // namespace slxio

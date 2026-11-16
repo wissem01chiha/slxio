@@ -12,23 +12,20 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     /**
- * @brief  Parser for Simulink blocks
- * @code{.xml}
- *<Block BlockType="Scope" Name="Scope" SID="2">
-    <P Name="Ports">[1]</P>
-    <P Name="Position">[360, 139, 390, 171]</P>
-    <P Name="ZOrder">2</P>
-    <P Name="ScopeSpecificationString">Simulink.scopes</P>
-    <P Name="NumInputPorts">1</P>
-    <P Name="Floating">off</P>
-  </Block>
- * @endcode
- */
-    class SLXIO_APIEXPORT SimulinkBlockParser final
-        : public SimulinkParserBase<xmlNodePtr, SimulinkBlock>
+     * @brief  Parser for Simulink blocks
+     * @code{.xml}
+     *<Block BlockType="Scope" Name="Scope" SID="2">
+        <P Name="Ports">[1]</P>
+        <P Name="Position">[360, 139, 390, 171]</P>
+        <P Name="ZOrder">2</P>
+        <P Name="ScopeSpecificationString">Simulink.scopes</P>
+        <P Name="NumInputPorts">1</P>
+        <P Name="Floating">off</P>
+    </Block>
+    * @endcode
+    */
+    class SimulinkBlockParser final : public SimulinkParserBase<xmlNodePtr, SimulinkBlock>
     {
     public:
         SimulinkBlockParser() = default;
@@ -37,7 +34,6 @@ namespace slxio
         ~SimulinkBlockParser() = default;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 
 #endif // SIMULINKBLOCKPARSER_H

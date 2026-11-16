@@ -37,7 +37,7 @@ jobs:
           sudo apt-get install -y -qq build-essential cmake curl file
 
       - name: Configure CMake
-        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DSLXIO_TESTS=OFF
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DSLXIO_TESTS=OFF -DSLXIO_MDL=ON
 
       - name: URL encode Coverity project name
         id: coverity-project

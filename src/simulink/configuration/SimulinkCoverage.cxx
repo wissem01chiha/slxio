@@ -20,19 +20,31 @@
 namespace slxio
 {
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkCoverage& destination)
+    ErrorCode ParseCoverageComponent(const SimulinkConfigSetComponent& source,
+                                     SimulinkCoverage& destination)
     {
-        std::vector<Diagnostic> diagnostics;
-        if (const auto covEnable = source.FindParam("CovEnable"))
+        auto parsed = destination;
+        if (const auto* covEnable = source.FindParam("CovEnable"))
         {
-            destination.CovEnable = covEnable;
+            if (*covEnable == "on")
+            {
+                parsed.CovEnable = true;
+            }
+            else if (*covEnable == "off")
+            {
+                parsed.CovEnable = false;
+            }
+            else
+            {
+                return ErrorCode::ConfigSetParameterInvalid;
+            }
         }
         else
         {
-            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter CovEnable not found");
+            return ErrorCode::ConfigSetParameterNotFound;
         }
-        return diagnostics;
+        destination = std::move(parsed);
+        return ErrorCode::Ok;
     }
 
 }; // namespace slxio

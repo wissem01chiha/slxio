@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -66,7 +66,7 @@ namespace slxio
         std::string SolverOrder;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkSolver& destination);
+    ErrorCode ParseSolverComponent(const SimulinkConfigSetComponent& source,
+                                   SimulinkSolver& destination);
 
 }; // namespace slxio

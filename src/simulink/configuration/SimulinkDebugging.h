@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -137,7 +137,7 @@ namespace slxio
         std::string ForceCombineOutputUpdateInSim;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkDebugging& destination);
+    ErrorCode ParseDebuggingComponent(const SimulinkConfigSetComponent& source,
+                                      SimulinkDebugging& destination);
 
 }; // namespace slxio

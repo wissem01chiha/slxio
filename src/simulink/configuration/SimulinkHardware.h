@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -73,7 +73,7 @@ namespace slxio
         std::string HardwareBoardFeatureSet;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkHardware& destination);
+    ErrorCode ParseHardwareComponent(const SimulinkConfigSetComponent& source,
+                                     SimulinkHardware& destination);
 
 }; // namespace slxio

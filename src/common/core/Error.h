@@ -25,7 +25,6 @@ namespace slxio
     enum class ErrorCode : uint32_t
     {
         Ok = 0,
-
         InvalidFunction = 1,
         FileNotFound = 2,
         PathNotFound = 3,
@@ -51,9 +50,12 @@ namespace slxio
         ArchiveRemoveFailed = 25,
         ArchiveEntryNotFound = 26,
         InvalidArchiveId = 27,
+
+        // Configuration-set parsing and validation.
         ConfigSetParameterNotFound = 100,
         ConfigSetNameEmpty = 101,
         ConfigSetInvalid = 102,
+        ConfigSetParameterInvalid = 108,
         SubBlockAlreadyExists = 103,
         WorkspaceParameterNameEmpty = 104,
         SimulinkBlockNull = 105,

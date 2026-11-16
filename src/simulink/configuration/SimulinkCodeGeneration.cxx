@@ -20,46 +20,45 @@
 namespace slxio
 {
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkCodeGeneration& destination)
+    ErrorCode ParseCodeGenerationComponent(const SimulinkConfigSetComponent& source,
+                                           SimulinkCodeGeneration& destination)
     {
-        std::vector<Diagnostic> diagnostics;
+        auto parsed = destination;
         if (const auto* folder = source.FindParam("CodeGenFolder"))
         {
-            destination.m_codeGenFolder = *folder;
+            parsed.m_codeGenFolder = *folder;
         }
         else
         {
-            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter CodeGenFolder not found");
+            return ErrorCode::ConfigSetParameterNotFound;
         }
 
         if (const auto* language = source.FindParam("TargetLang"))
         {
-            destination.m_codeGenLanguage = *language;
+            parsed.m_codeGenLanguage = *language;
         }
         else
         {
-            DIAGNOSTIC(diagnostics, DiagnosticSeverity::Error, "Parameter TargetLang not found");
+            return ErrorCode::ConfigSetParameterNotFound;
         }
 
         if (const auto* enabled = source.FindParam("EnableCodeGeneration"))
         {
             if (*enabled == "on")
             {
-                destination.m_enableCodeGeneration = true;
+                parsed.m_enableCodeGeneration = true;
             }
             else if (*enabled == "off")
             {
-                destination.m_enableCodeGeneration = false;
+                parsed.m_enableCodeGeneration = false;
             }
             else
             {
-                DIAGNOSTIC(diagnostics,
-                           DiagnosticSeverity::Error,
-                           "Invalid value for parameter EnableCodeGeneration");
+                return ErrorCode::ConfigSetParameterInvalid;
             }
         }
-        return diagnostics;
+        destination = std::move(parsed);
+        return ErrorCode::Ok;
     }
 
 }; // namespace slxio

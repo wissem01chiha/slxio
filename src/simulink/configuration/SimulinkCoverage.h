@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -60,7 +60,7 @@ namespace slxio
         std::string CovMcdcMode = "Masking";
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkCoverage& destination);
+    ErrorCode ParseCoverageComponent(const SimulinkConfigSetComponent& source,
+                                     SimulinkCoverage& destination);
 
 }; // namespace slxio

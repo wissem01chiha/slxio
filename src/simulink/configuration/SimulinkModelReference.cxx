@@ -15,15 +15,14 @@
  */
 
 #include "SimulinkModelReference.h"
-#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkModelReference& destination)
+    ErrorCode ParseModelReferenceComponent(const SimulinkConfigSetComponent&,
+                                           SimulinkModelReference&)
     {
-        return std::vector<Diagnostic>();
+        return ErrorCode::NotImplemented;
     }
 
 }; // namespace slxio

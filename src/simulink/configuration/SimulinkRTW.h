@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -29,7 +29,6 @@ namespace slxio
         uint16_t DisabledPropsCount;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkRTW& destination);
+    ErrorCode ParseRTWComponent(const SimulinkConfigSetComponent& source, SimulinkRTW& destination);
 
 }; // namespace slxio

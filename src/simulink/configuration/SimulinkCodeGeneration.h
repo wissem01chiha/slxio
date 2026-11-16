@@ -17,7 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "Diagnostic.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -25,12 +25,12 @@ namespace slxio
 
     struct SimulinkCodeGeneration
     {
-        std::string m_codeGenFolder;
-        std::string m_codeGenLanguage;
+        std::string m_codeGenFolder = "";
+        std::string m_codeGenLanguage = "";
         bool m_enableCodeGeneration = false;
     };
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkCodeGeneration& destination);
+    ErrorCode ParseCodeGenerationComponent(const SimulinkConfigSetComponent& source,
+                                           SimulinkCodeGeneration& destination);
 
 }; // namespace slxio

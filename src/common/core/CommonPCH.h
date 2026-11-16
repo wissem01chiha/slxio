@@ -42,3 +42,4 @@
 #include "unordered_dense.h"
 #include <unordered_set>
 #include <assert.h>
+#include <stdexcept>

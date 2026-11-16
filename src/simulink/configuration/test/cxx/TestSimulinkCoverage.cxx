@@ -7,10 +7,22 @@ namespace slxio
     TEST_CASE("Read coverage component test")
     {
         SimulinkConfigSetComponent component("Simulink.Coverage");
-        component.SetParam("CovEnable", "true");
+        component.SetParam("CovEnable", "on");
 
         SimulinkCoverage coverage;
-        const auto diagnostics = FromComponent(component, coverage);
-        CHECK(diagnostics.empty());
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::Ok);
+        CHECK(coverage.CovEnable);
+
+        component.SetParam("CovEnable", "off");
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::Ok);
+        CHECK_FALSE(coverage.CovEnable);
+
+        component.SetParam("CovEnable", "invalid");
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::ConfigSetParameterInvalid);
+        CHECK_FALSE(coverage.CovEnable);
+
+        component.RemoveParam("CovEnable");
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::ConfigSetParameterNotFound);
+        CHECK_FALSE(coverage.CovEnable);
     }
 } // namespace slxio

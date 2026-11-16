@@ -15,15 +15,14 @@
  */
 
 #include "SimulinkHardware.h"
-#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
 
-    std::vector<Diagnostic> FromComponent(const SimulinkConfigSetComponent& source,
-                                          SimulinkHardware& destination)
+    ErrorCode ParseHardwareComponent(const SimulinkConfigSetComponent& source,
+                                     SimulinkHardware& destination)
     {
-        return std::vector<Diagnostic>();
+        return ErrorCode::NotImplemented;
     }
 
 } // namespace slxio

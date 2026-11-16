@@ -16,25 +16,32 @@
 
 #pragma once
 
-#include <pugixml.h>
+#include "CommonPCH.h"
+#include "SimulinkFileInfo.h"
 
 namespace slxio
 {
+    class DataObject;
 
-    class SLXSection final
+    /**
+     * A Simulink model file, combining metadata and XML
+     * sections.
+     */
+    struct SimulinkFile
     {
-    public:
-        SLXSection();
-        explicit SLXSection(pugi::xml_node node);
+        SimulinkFileInfo m_info;
 
-        virtual ~SLXSection();
-
-        pugi::xml_node GetNode() const;
-
-        bool Empty() const;
-
-    protected:
-        pugi::xml_node m_node;
+        std::unique_ptr<DataObject> m_blockdiagram;
+        DataObject& m_modelDictionary;
+        DataObject& m_configSetInfo;
+        DataObject& m_bddefaults;
+        DataObject& m_scheduleEditor;
+        DataObject& m_scheduleCore;
+        DataObject& m_graphicalInterface;
+        DataObject& m_coreProperties;
+        DataObject& m_mwcoreProperties;
+        std::vector<DataObject> m_configSets;
     };
 
 }; // namespace slxio
+

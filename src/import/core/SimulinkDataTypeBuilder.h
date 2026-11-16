@@ -15,3 +15,21 @@
  */
 
 #pragma once
+
+#include "CommonPCH.h"
+#include "ISimulinkBuilder.h"
+#include "SimulinkDataType.h"
+
+namespace slxio
+{
+    class  SimulinkDataTypeBuilder final : public ISimulinkBuilder
+    {
+    public:
+        SimulinkDataTypeBuilder() = default;
+        void SetInputData(const std::string data);
+        ErrorCode Build() override;
+        SimulinkDataType GetOuputData() const; 
+        ~SimulinkDataTypeBuilder() = default;
+    };
+
+}; // namespace slxio

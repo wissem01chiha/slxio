@@ -37,6 +37,8 @@ namespace slxio
             return "success";
         case ErrorCode::ConfigSetParameterNotFound:
             return "simulink config set parameter not found";
+        case ErrorCode::ConfigSetParameterInvalid:
+            return "simulink config set parameter has an invalid value";
         case ErrorCode::ConfigSetNameEmpty:
             return "simulink config set name is empty";
         case ErrorCode::InvalidArgument:
@@ -51,6 +53,8 @@ namespace slxio
             return "a nullptr simulink block object passed";
         case ErrorCode::InvalidArchiveId:
             return "";
+        case ErrorCode::NotImplemented:
+            return "operation is not implemented";
         default:
             return "unknown error";
         }
