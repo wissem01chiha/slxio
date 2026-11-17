@@ -31,7 +31,7 @@ namespace slxio
         std::string GetParameter(const std::string& name) const override;
         std::vector<std::string> GetParameterNames() const override;
         pugi::xml_node GetNode() const;
-        
+
         bool Empty() const;
 
         virtual ~SLXSection();

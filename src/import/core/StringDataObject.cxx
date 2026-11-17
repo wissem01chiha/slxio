@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
- #include "StringDataObject.h"
+#include "StringDataObject.h"
 
 namespace slxio
 {
-    StringDataObject::StringDataObject(std::string value)
-            : m_value(std::move(value)){}
+    StringDataObject::StringDataObject(std::string value) : m_value(std::move(value))
+    {
+    }
 
     const std::string& StringDataObject::GetValue() const noexcept
     {

@@ -21,20 +21,18 @@
 
 namespace slxio
 {
-    class SimulinkConfigSetComponentObject : public IDataObject{
+    class SimulinkConfigSetComponentObject : public IDataObject
+    {
     public:
-        SimulinkConfigSetComponentObject() =default;
-    
+        SimulinkConfigSetComponentObject() = default;
     };
-
 
     class SimulinkConfigSetComponentBuilder : public ISimulinkBuilder
     {
     public:
-        SimulinkConfigSetComponentBuilder() =default;
+        SimulinkConfigSetComponentBuilder() = default;
         BuildResult Build(const IDataObject& input) override;
-        ~SimulinkConfigSetComponentBuilder() =default;
+        ~SimulinkConfigSetComponentBuilder() = default;
     };
-    
 
 } // namespace slxio

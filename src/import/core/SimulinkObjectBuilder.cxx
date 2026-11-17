@@ -25,7 +25,8 @@ namespace slxio
 {
     namespace
     {
-        ErrorCode ReadObjectNode(pugi::xml_node node, SimulinkObject& object,
+        ErrorCode ReadObjectNode(pugi::xml_node node,
+                                 SimulinkObject& object,
                                  SimulinkParameterBuilder& parameterBuilder,
                                  SimulinkArrayBuilder& arrayBuilder)
         {
@@ -69,8 +70,8 @@ namespace slxio
                         return parameterResult.m_error;
                     }
 
-                    const auto* parameterObject =
-                        dynamic_cast<const SimulinkParameterObject*>(parameterResult.m_output.get());
+                    const auto* parameterObject = dynamic_cast<const SimulinkParameterObject*>(
+                        parameterResult.m_output.get());
                     if (parameterObject == nullptr || parameterObject->GetValue() == nullptr)
                     {
                         return ErrorCode::InvalidArgument;
@@ -133,7 +134,8 @@ namespace slxio
         auto object = std::make_shared<SimulinkObject>();
         SimulinkParameterBuilder parameterBuilder;
         SimulinkArrayBuilder arrayBuilder;
-        const ErrorCode result = ReadObjectNode(sectionInput->GetNode(), *object, parameterBuilder, arrayBuilder);
+        const ErrorCode result =
+            ReadObjectNode(sectionInput->GetNode(), *object, parameterBuilder, arrayBuilder);
         if (result != ErrorCode::Ok)
         {
             return {result, nullptr};

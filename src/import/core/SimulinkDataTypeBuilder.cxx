@@ -24,15 +24,14 @@ namespace slxio
     {
     }
 
-    SimulinkDataTypeObject::SimulinkDataTypeObject(SimulinkDataType value)
-            : m_value(value)
-        {
-        }
+    SimulinkDataTypeObject::SimulinkDataTypeObject(SimulinkDataType value) : m_value(value)
+    {
+    }
 
     SimulinkDataType SimulinkDataTypeObject::GetValue() const noexcept
-        {
-            return m_value;
-        }
+    {
+        return m_value;
+    }
 
     BuildResult SimulinkDataTypeBuilder::Build(const IDataObject& input)
     {

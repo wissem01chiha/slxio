@@ -24,10 +24,12 @@ namespace slxio
 {
     namespace
     {
-        ErrorCode ReadArrayNode(pugi::xml_node node, SimulinkArray& array,
+        ErrorCode ReadArrayNode(pugi::xml_node node,
+                                SimulinkArray& array,
                                 SimulinkParameterBuilder& parameterBuilder);
 
-        ErrorCode ReadObjectNode(pugi::xml_node node, SimulinkObject& object,
+        ErrorCode ReadObjectNode(pugi::xml_node node,
+                                 SimulinkObject& object,
                                  SimulinkParameterBuilder& parameterBuilder)
         {
             if (!node || node.type() != pugi::node_element ||
@@ -70,8 +72,8 @@ namespace slxio
                         return parameterResult.m_error;
                     }
 
-                    const auto* parameterObject =
-                        dynamic_cast<const SimulinkParameterObject*>(parameterResult.m_output.get());
+                    const auto* parameterObject = dynamic_cast<const SimulinkParameterObject*>(
+                        parameterResult.m_output.get());
                     if (parameterObject == nullptr || parameterObject->GetValue() == nullptr)
                     {
                         return ErrorCode::InvalidArgument;
@@ -83,8 +85,7 @@ namespace slxio
                 if (child.name() == std::string_view(SLXParameter::SECTION_Object))
                 {
                     auto nestedObject = std::make_shared<SimulinkObject>();
-                    const ErrorCode result =
-                        ReadObjectNode(child, *nestedObject, parameterBuilder);
+                    const ErrorCode result = ReadObjectNode(child, *nestedObject, parameterBuilder);
                     if (result != ErrorCode::Ok)
                     {
                         return result;
@@ -94,8 +95,7 @@ namespace slxio
                 else if (child.name() == std::string_view(SLXParameter::SECTION_Array))
                 {
                     auto nestedArray = std::make_shared<SimulinkArray>();
-                    const ErrorCode result =
-                        ReadArrayNode(child, *nestedArray, parameterBuilder);
+                    const ErrorCode result = ReadArrayNode(child, *nestedArray, parameterBuilder);
                     if (result != ErrorCode::Ok)
                     {
                         return result;
@@ -107,7 +107,8 @@ namespace slxio
             return ErrorCode::Ok;
         }
 
-        ErrorCode ReadArrayNode(pugi::xml_node node, SimulinkArray& array,
+        ErrorCode ReadArrayNode(pugi::xml_node node,
+                                SimulinkArray& array,
                                 SimulinkParameterBuilder& parameterBuilder)
         {
             if (!node || node.type() != pugi::node_element ||
@@ -130,8 +131,7 @@ namespace slxio
                 if (child.name() == std::string_view(SLXParameter::SECTION_Object))
                 {
                     auto nestedObject = std::make_shared<SimulinkObject>();
-                    const ErrorCode result =
-                        ReadObjectNode(child, *nestedObject, parameterBuilder);
+                    const ErrorCode result = ReadObjectNode(child, *nestedObject, parameterBuilder);
                     if (result != ErrorCode::Ok)
                     {
                         return result;
@@ -141,8 +141,7 @@ namespace slxio
                 else if (child.name() == std::string_view(SLXParameter::SECTION_Array))
                 {
                     auto nestedArray = std::make_shared<SimulinkArray>();
-                    const ErrorCode result =
-                        ReadArrayNode(child, *nestedArray, parameterBuilder);
+                    const ErrorCode result = ReadArrayNode(child, *nestedArray, parameterBuilder);
                     if (result != ErrorCode::Ok)
                     {
                         return result;
@@ -175,8 +174,7 @@ namespace slxio
 
         auto array = std::make_shared<SimulinkArray>();
         SimulinkParameterBuilder parameterBuilder;
-        const ErrorCode result =
-            ReadArrayNode(sectionInput->GetNode(), *array, parameterBuilder);
+        const ErrorCode result = ReadArrayNode(sectionInput->GetNode(), *array, parameterBuilder);
         if (result != ErrorCode::Ok)
         {
             return {result, nullptr};

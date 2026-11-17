@@ -17,15 +17,15 @@ namespace slxio
     TEST_CASE("Array builder parses metadata and nested elements")
     {
         pugi::xml_document document;
-        REQUIRE(document.load_string(
-            "<Array PropName=\"items\" Type=\"Cell\" Dimension=\"1*1\">"
-            "<Object ObjectID=\"6\" PropName=\"item\" ClassName=\"Example\">"
-            "<P Name=\"Visible\" Class=\"logical\">0</P>"
-            "<Array PropName=\"children\" Type=\"Cell\" Dimension=\"1*1\">"
-            "<Object ObjectID=\"7\"/>"
-            "</Array>"
-            "</Object>"
-            "</Array>"));
+        REQUIRE(
+            document.load_string("<Array PropName=\"items\" Type=\"Cell\" Dimension=\"1*1\">"
+                                 "<Object ObjectID=\"6\" PropName=\"item\" ClassName=\"Example\">"
+                                 "<P Name=\"Visible\" Class=\"logical\">0</P>"
+                                 "<Array PropName=\"children\" Type=\"Cell\" Dimension=\"1*1\">"
+                                 "<Object ObjectID=\"7\"/>"
+                                 "</Array>"
+                                 "</Object>"
+                                 "</Array>"));
 
         SimulinkArrayBuilder builder;
         SLXSection input(document.child("Array"));
@@ -106,8 +106,7 @@ namespace slxio
     TEST_CASE("Array builder rejects malformed nested object identifiers")
     {
         pugi::xml_document document;
-        REQUIRE(document.load_string(
-            "<Array><Object ObjectID=\"not-a-number\"/></Array>"));
+        REQUIRE(document.load_string("<Array><Object ObjectID=\"not-a-number\"/></Array>"));
 
         SimulinkArrayBuilder builder;
         SLXSection input(document.child("Array"));

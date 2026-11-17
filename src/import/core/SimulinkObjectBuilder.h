@@ -35,8 +35,8 @@ namespace slxio
     class SimulinkObjectBuilder final : public ISimulinkBuilder
     {
     public:
-        SimulinkObjectBuilder()=default;
+        SimulinkObjectBuilder() = default;
         BuildResult Build(const IDataObject& input) override;
-        ~SimulinkObjectBuilder()=default;
+        ~SimulinkObjectBuilder() = default;
     };
 } // namespace slxio

@@ -59,4 +59,4 @@ namespace slxio
         }
         return {ErrorCode::Ok, nullptr};
     }
-}; 
+}; // namespace slxio

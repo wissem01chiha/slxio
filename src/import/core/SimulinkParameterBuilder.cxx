@@ -23,8 +23,8 @@
 namespace slxio
 {
 
-    SimulinkParameterObject::SimulinkParameterObject(
-        std::string name, std::shared_ptr<SimulinkParameter> value)
+    SimulinkParameterObject::SimulinkParameterObject(std::string name,
+                                                     std::shared_ptr<SimulinkParameter> value)
         : m_name(std::move(name)), m_value(std::move(value))
     {
     }
