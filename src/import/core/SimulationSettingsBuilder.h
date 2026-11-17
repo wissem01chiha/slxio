@@ -18,8 +18,26 @@
 
 #include "ISimulinkBuilder.h"
 #include "IDataObject.h"
+#include "SimulationSettings.h"
 
 namespace slxio
 {
 
+    class SimulationSettingsObject final : public IDataObject
+    {
+    public:
+        explicit SimulationSettingsObject(std::shared_ptr<SimulationSettings> value);
+        const std::shared_ptr<SimulationSettings>& GetValue() const noexcept;
+
+    private:
+        std::shared_ptr<SimulationSettings> m_value;
+    };
+
+    class SimulationSettingsBuilder final : public ISimulinkBuilder
+    {
+    public:
+        SimulationSettingsBuilder() = default;
+        BuildResult Build(const IDataObject& input) override;
+        ~SimulationSettingsBuilder() = default;
+    };
 } // namespace slxio

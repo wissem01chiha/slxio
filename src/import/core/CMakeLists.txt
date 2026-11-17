@@ -22,7 +22,9 @@ add_module(
   SimulinkArrayBuilder.cxx
   SimulinkObjectBuilder.cxx
   SimulinkConfigSetBuilder.cxx
-  SimulinkParameterBuilder.cxx)
+  SimulinkParameterBuilder.cxx
+  SimulationSettingsBuilder.cxx
+  SimulinkConfigSetComponentBuilder.cxx)
 module_link_libraries(ImportCore pugixml SimulinkConfiguration SimulinkCore
                       SimulinkAnnotation SimulinkLayout)
 module_include_directories(ImportCore ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)

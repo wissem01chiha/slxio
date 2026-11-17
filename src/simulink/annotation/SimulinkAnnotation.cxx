@@ -38,7 +38,7 @@ namespace slxio
 
     void SimulinkAnnotation::SetText(std::string text)
     {
-        m_text = text;
+        m_text = std::move(text);
     }
 
 }; // namespace slxio

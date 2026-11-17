@@ -15,49 +15,70 @@
  */
 
 #include "SimulinkConfigSetComponentBuilder.h"
+#include "SimulinkObjectBuilder.h"
+#include "SimulinkParameter.h"
 #include "SLXParameter.h"
 #include "SLXSection.h"
 
 namespace slxio
 {
-
-    SimulinkReaderResult
-    SimulinkConfigSetComponentSlxReader::Read(SLXSection serializedData,
-                                              SimulinkConfigSetComponent& object) const
+    SimulinkConfigSetComponentObject::SimulinkConfigSetComponentObject()
     {
-        const pugi::xml_node node = serializedData.GetNode();
+    }
+
+    SimulinkConfigSetComponentObject::SimulinkConfigSetComponentObject(
+        SimulinkConfigSetComponent value)
+        : m_value(std::move(value))
+    {
+    }
+
+    SimulinkConfigSetComponent SimulinkConfigSetComponentObject::GetValue() const noexcept
+    {
+        return m_value;
+    }
+
+    BuildResult SimulinkConfigSetComponentBuilder::Build(const IDataObject& input)
+    {
+        const auto* sectionInput = dynamic_cast<const SLXSection*>(&input);
+        if (sectionInput == nullptr)
+        {
+            return {ErrorCode::InvalidArgument, nullptr};
+        }
+        SimulinkConfigSetComponent component;
+        const pugi::xml_node node = sectionInput->GetNode();
         if (!node || node.type() != pugi::node_element ||
             node.name() != std::string_view(SLXParameter::SECTION_Object))
         {
-            return SimulinkReaderResult::InvalidInput;
+            return {ErrorCode::InvalidArgument, nullptr};
         }
-
-        const pugi::xml_attribute classNameAttribute =
-            node.attribute(SLXParameter::PARAM_ClassName);
-        if (!classNameAttribute || classNameAttribute.value()[0] == '\0')
+        SimulinkObjectBuilder objBuilder;
+        const auto objBuildResult = objBuilder.Build(input);
+        if (objBuildResult.m_error != ErrorCode::Ok)
         {
-            return SimulinkReaderResult::InvalidInput;
+            return {objBuildResult.m_error, nullptr};
         }
-
-        SimulinkConfigSetComponent parsed(classNameAttribute.value());
-        for (pugi::xml_node child = node.first_child(); child; child = child.next_sibling())
+        const auto* output =
+            dynamic_cast<const SimulinkObjectObject*>(objBuildResult.m_output.get());
+        if (output == nullptr || output->GetValue() == nullptr)
         {
-            if (child.type() != pugi::node_element ||
-                child.name() != std::string_view(SLXParameter::SECTION_Parameter))
-            {
-                continue;
-            }
-
-            const pugi::xml_attribute nameAttribute = child.attribute(SLXParameter::PARAM_Name);
-            if (!nameAttribute || nameAttribute.value()[0] == '\0')
-            {
-                return SimulinkReaderResult::InvalidInput;
-            }
-            parsed.SetParam(nameAttribute.value(), child.child_value());
+            return {ErrorCode::InvalidArgument, nullptr};
         }
 
-        object = std::move(parsed);
-        return SimulinkReaderResult::Success;
+        const SimulinkObject& object = *output->GetValue();
+        component.SetClassName(object.GetClassName());
+
+        for (const std::string& name : object.GetDeclaredParameterNames())
+        {
+            const auto parameter = object.GetDeclaredParameter(name);
+            if (parameter == nullptr)
+            {
+                return {ErrorCode::InvalidArgument, nullptr};
+            }
+            component.SetParam(name, parameter->GetValue());
+        }
+
+        return {ErrorCode::Ok,
+                std::make_unique<SimulinkConfigSetComponentObject>(std::move(component))};
     }
 
 } // namespace slxio

@@ -29,6 +29,7 @@ namespace slxio
 
     SimulinkPortLayout::SimulinkPortLayout() : position(defaultPosition), color(defaultColor)
     {
+        return;
     }
 
     SimulinkPortLayout::SimulinkPortLayout(Point point, Color color) : position(point), color(color)

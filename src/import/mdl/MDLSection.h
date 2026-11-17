@@ -64,7 +64,7 @@ namespace slxio
         void CollectLeafSections(const MDLSection* section, std::vector<MDLSection*>& result) const;
 
         std::string name_;
-        int lineNumber_;
+        int m_lineNumber = 0;
         MDLSection* parentSection_ = nullptr;
         std::unordered_map<std::string, std::string> parameters_;
         std::unordered_map<std::string, std::vector<SectionPtr>> subSections_;

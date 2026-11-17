@@ -20,7 +20,7 @@ namespace slxio
 {
 
     MDLSection::MDLSection(std::string name, int lineNumber)
-        : name_(std::move(name)), lineNumber_(lineNumber)
+        : name_(std::move(name)), m_lineNumber(lineNumber)
     {
     }
 
@@ -93,7 +93,7 @@ namespace slxio
 
     int MDLSection::GetLineNumber() const
     {
-        return lineNumber_;
+        return m_lineNumber;
     }
 
     const std::string& MDLSection::GetName() const
@@ -201,7 +201,7 @@ namespace slxio
     std::string MDLSection::ToString() const
     {
         std::ostringstream ss;
-        ss << name_ << " [l:" << lineNumber_ << "]";
+        ss << name_ << " [l:" << m_lineNumber << "]";
         return ss.str();
     }
 

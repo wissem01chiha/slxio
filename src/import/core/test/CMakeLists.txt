@@ -16,4 +16,5 @@
 module_add_tests(ImportCore cxx/TestSimulinkDataTypeBuilder.cxx
                  cxx/TestSimulinkParameterBuilder.cxx
                  cxx/TestSimulinkArrayBuilder.cxx
-                 cxx/TestSimulinkObjectBuilder.cxx)
+                 cxx/TestSimulinkObjectBuilder.cxx
+                 cxx/TestSimulinkConfigSetComponentBuilder.cxx)

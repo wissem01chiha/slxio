@@ -27,7 +27,7 @@ namespace slxio
 
     SimulinkLine::SimulinkLine(std::shared_ptr<SimulinkInPort> pOut,
                                std::shared_ptr<SimulinkOutPort> pIn)
-        : m_destPort(pIn), m_sourcePort(pOut)
+        : m_destPort(std::move(pIn)), m_sourcePort(std::move(pOut))
     {
     }
 

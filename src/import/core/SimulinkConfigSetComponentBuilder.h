@@ -18,16 +18,22 @@
 
 #include "CommonPCH.h"
 #include "ISimulinkBuilder.h"
+#include "SimulinkConfigSetComponent.h"
 
 namespace slxio
 {
-    class SimulinkConfigSetComponentObject : public IDataObject
+    class SimulinkConfigSetComponentObject final : public IDataObject
     {
     public:
-        SimulinkConfigSetComponentObject() = default;
+        SimulinkConfigSetComponentObject();
+        explicit SimulinkConfigSetComponentObject(SimulinkConfigSetComponent value);
+        SimulinkConfigSetComponent GetValue() const noexcept;
+
+    private:
+        SimulinkConfigSetComponent m_value;
     };
 
-    class SimulinkConfigSetComponentBuilder : public ISimulinkBuilder
+    class SimulinkConfigSetComponentBuilder final : public ISimulinkBuilder
     {
     public:
         SimulinkConfigSetComponentBuilder() = default;

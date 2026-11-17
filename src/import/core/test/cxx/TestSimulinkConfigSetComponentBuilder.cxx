@@ -1,35 +1,48 @@
 #include "doctest.h"
-#include "SimulinkConfigSetComponentSlxBuilder.h"
-#include "SimulinkConfigSetComponent.h"
-#include "SimulinkReaderResult.h"
+#include "SimulinkConfigSetComponentBuilder.h"
 #include "SLXSection.h"
 
 namespace slxio
 {
-
-    TEST_CASE("SimulinkConfigSetComponentSlxReaderSolver")
+    TEST_CASE("Config-set component builder class name and parameters test")
     {
         pugi::xml_document document;
-        const std::string xmlFilePath = "data/configSet.xml";
-        REQUIRE(document.load_file(xmlFilePath.c_str()));
+        REQUIRE(document.load_string("<Object ObjectID=\"6\" ClassName=\"Simulink.HardwareCC\">"
+                                     "<P Name=\"DisabledProps\">[]</P>"
+                                     "<P Name=\"Description\"/>"
+                                     "<P Name=\"ProdBitPerChar\">8</P>"
+                                     "</Object>"));
 
-        const pugi::xml_node componentNode =
-            document.child("ConfigSet").child("Object").child("Array").child("Object");
+        SimulinkConfigSetComponentBuilder builder;
+        SLXSection input(document.child("Object"));
+        BuildResult result = builder.Build(input);
 
-        REQUIRE(componentNode);
+        REQUIRE(result.m_error == ErrorCode::Ok);
+        const auto* output =
+            dynamic_cast<const SimulinkConfigSetComponentObject*>(result.m_output.get());
+        REQUIRE(output != nullptr);
 
-        SimulinkConfigSetComponent component;
-        const SimulinkConfigSetComponentSlxReader reader;
-
-        CHECK(reader.Read(SLXSection(componentNode), component) == SimulinkReaderResult::Success);
-        CHECK(component.GetComponentClassName() == "Simulink.SolverCC");
-        CHECK(component.GetParams().size() == 39);
-        REQUIRE(component.FindParam("StartTime") != nullptr);
-        CHECK(*component.FindParam("StartTime") == "0.0");
-        REQUIRE(component.FindParam("Solver") != nullptr);
-        CHECK(*component.FindParam("Solver") == "VariableStepAuto");
+        const SimulinkConfigSetComponent component = output->GetValue();
+        CHECK(component.GetComponentClassName() == "Simulink.HardwareCC");
+        CHECK(component.GetParams().size() == 3);
+        REQUIRE(component.FindParam("DisabledProps") != nullptr);
+        CHECK(*component.FindParam("DisabledProps") == "[]");
         REQUIRE(component.FindParam("Description") != nullptr);
         CHECK(component.FindParam("Description")->empty());
+        REQUIRE(component.FindParam("ProdBitPerChar") != nullptr);
+        CHECK(*component.FindParam("ProdBitPerChar") == "8");
     }
 
-}; // namespace slxio
+    TEST_CASE("Config set component builder non-object input test")
+    {
+        pugi::xml_document document;
+        REQUIRE(document.load_string("<Array/>"));
+
+        SimulinkConfigSetComponentBuilder builder;
+        SLXSection input(document.child("Array"));
+        BuildResult result = builder.Build(input);
+
+        CHECK(result.m_error == ErrorCode::InvalidArgument);
+        CHECK(result.m_output == nullptr);
+    }
+} // namespace slxio

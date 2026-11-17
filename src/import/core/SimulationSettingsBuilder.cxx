@@ -18,5 +18,19 @@
 
 namespace slxio
 {
+    SimulationSettingsObject::SimulationSettingsObject(std::shared_ptr<SimulationSettings> value)
+        : m_value(std::move(value))
+    {
+    }
+
+    const std::shared_ptr<SimulationSettings>& SimulationSettingsObject::GetValue() const noexcept
+    {
+        return m_value;
+    }
+
+    BuildResult SimulationSettingsBuilder::Build(const IDataObject& input)
+    {
+        return {ErrorCode::Ok, nullptr};
+    }
 
 } // namespace slxio
