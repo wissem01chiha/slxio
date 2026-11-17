@@ -1,5 +1,5 @@
 #include "doctest.h"
-#include "SimulinkConfigSetComponentSlxReader.h"
+#include "SimulinkConfigSetComponentSlxBuilder.h"
 #include "SimulinkConfigSetComponent.h"
 #include "SimulinkReaderResult.h"
 #include "SLXSection.h"

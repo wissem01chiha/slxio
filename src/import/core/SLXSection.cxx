@@ -24,11 +24,6 @@ namespace slxio
     {
     }
 
-    SLXSection::SectionPtr SLXSection::GetParentSection() const
-    {
-        return SectionPtr();
-    }
-
     std::string SLXSection::GetParameter(const std::string& name) const
     {
         return std::string();
@@ -37,6 +32,16 @@ namespace slxio
     std::vector<std::string> SLXSection::GetParameterNames() const
     {
         return std::vector<std::string>();
+    }
+
+    pugi::xml_node SLXSection::GetNode() const
+    {
+        return m_node;
+    }
+
+    bool SLXSection::Empty() const
+    {
+        return m_node.empty();
     }
 
     SLXSection::~SLXSection() = default;

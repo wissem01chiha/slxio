@@ -42,6 +42,19 @@ namespace slxio
         }
     }
 
+    void SimulinkObject::SetIndex(const std::string& index)
+    {
+        m_index = index;
+    }
+
+    void SimulinkObject::AddChild(const std::shared_ptr<ISimulinkElement>& child)
+    {
+        if (child)
+        {
+            m_children.push_back(child);
+        }
+    }
+
     std::string SimulinkObject::GetClassName() const
     {
         return m_className;

@@ -12,7 +12,17 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(ImportCore SimulinkFileInfo.cxx SimulinkFile.cxx SLXSection.cxx)
+add_module(
+  ImportCore
+  SimulinkFileInfo.cxx
+  SimulinkFile.cxx
+  SLXSection.cxx
+  StringDataObject.cxx
+  SimulinkDataTypeBuilder.cxx
+  SimulinkArrayBuilder.cxx
+  SimulinkObjectBuilder.cxx
+  SimulinkConfigSetBuilder.cxx
+  SimulinkParameterBuilder.cxx)
 module_link_libraries(ImportCore pugixml SimulinkConfiguration SimulinkCore
                       SimulinkAnnotation SimulinkLayout)
 module_include_directories(ImportCore ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)

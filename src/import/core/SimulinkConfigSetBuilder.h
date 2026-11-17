@@ -17,21 +17,30 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "SimulinkReader.h"
-#include "SimulinkReaderResult.h"
+#include "ISimulinkBuilder.h"
 #include "SimulinkConfigSet.h"
 
 namespace slxio
 {
 
-    template <typename T>
-    class SimulinkConfigSetReader : public SimulinkReader<T, SimulinkConfigSet>
+    class SimulinkConfigSetObject final : public IDataObject
     {
     public:
-        SimulinkReaderResult Read(T serializedData, SimulinkConfigSet& object) const override
-        {
-            return SimulinkReaderResult::NotImplemented;
-        }
+        SimulinkConfigSetObject();
+        explicit SimulinkConfigSetObject(SimulinkConfigSet value);
+        SimulinkConfigSet GetValue() const noexcept;
+
+    private:
+        SimulinkConfigSet m_value;
     };
+
+    class SimulinkConfigSetBuilder : public ISimulinkBuilder
+    {
+    public:
+        SimulinkConfigSetBuilder() =default;
+        BuildResult Build(const IDataObject& input) override; 
+        ~SimulinkConfigSetBuilder() =default;
+    };
+
 
 }; // namespace slxio

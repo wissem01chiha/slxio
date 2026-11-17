@@ -17,17 +17,27 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "SimulinkReader.h"
+#include "ISimulinkBuilder.h"
+#include "SimulinkArray.h"
 
 namespace slxio
 {
-    class SimulinkArray;
-
-    template <typename T> class SimulinkArrayReader : public SimulinkReader<T, SimulinkArray>
+    class SimulinkArrayObject final : public IDataObject
     {
     public:
-        virtual ~SimulinkArrayReader() = default;
-        SimulinkArrayReader() = default;
+        explicit SimulinkArrayObject(std::shared_ptr<SimulinkArray> value);
+        const std::shared_ptr<SimulinkArray>& GetValue() const noexcept;
+
+    private:
+        std::shared_ptr<SimulinkArray> m_value;
+    };
+
+    class SimulinkArrayBuilder final : public ISimulinkBuilder
+    {
+    public:
+        SimulinkArrayBuilder() =default;
+        BuildResult Build(const IDataObject& input) override;
+        ~SimulinkArrayBuilder() =default;
     };
 
 }; // namespace slxio

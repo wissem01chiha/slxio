@@ -17,11 +17,12 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ISection.h"
 
 namespace slxio
 {
 
-    class MDLSection final
+    class MDLSection final : public ISection
     {
     public:
         using SectionPtr = std::shared_ptr<MDLSection>;
@@ -42,11 +43,11 @@ namespace slxio
         int GetLineNumber() const;
 
         const std::string& GetName() const;
-        std::string GetParameter(const std::string& name) const;
+        std::string GetParameter(const std::string& name) const override;
         std::string GetParameter(const std::string& name, const std::string& defaultValue) const;
 
         std::unordered_map<std::string, std::string> GetParameterMapRecursively() const;
-        std::vector<std::string> GetParameterNames() const;
+        std::vector<std::string> GetParameterNames() const override;
         std::vector<SectionPtr> GetSubSections() const;
         std::vector<SectionPtr> GetSubSections(const std::string& name) const;
 

@@ -22,13 +22,22 @@
 
 namespace slxio
 {
+    class SimulinkDataTypeObject final : public IDataObject
+    {
+    public:
+        SimulinkDataTypeObject();
+        explicit SimulinkDataTypeObject(SimulinkDataType value);
+        SimulinkDataType GetValue() const noexcept;
+
+    private:
+        SimulinkDataType m_value;
+    };
+
     class SimulinkDataTypeBuilder final : public ISimulinkBuilder
     {
     public:
         SimulinkDataTypeBuilder() = default;
-        void SetInputData(const std::string data);
-        ErrorCode Build() override;
-        SimulinkDataType GetOuputData() const;
+        BuildResult Build(const IDataObject& input) override;
         ~SimulinkDataTypeBuilder() = default;
     };
 

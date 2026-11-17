@@ -16,18 +16,10 @@
 
 #pragma once
 
-#include "SimulinkConfigSetComponentReader.h"
-#include "SLXSection.h"
+#include "CommonPCH.h"
 
 namespace slxio
 {
-
-    class SimulinkConfigSetComponentSlxReader final
-        : public SimulinkConfigSetComponentReader<SLXSection>
-    {
-    public:
-        SimulinkReaderResult Read(SLXSection serializedData,
-                                  SimulinkConfigSetComponent& object) const override;
-    };
+  
 
 }; // namespace slxio

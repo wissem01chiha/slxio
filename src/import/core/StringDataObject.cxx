@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-#include "SimulinkModelSlxReader.h"
-#include "SimulinkReaderResult.h"
+ #include "StringDataObject.h"
 
 namespace slxio
 {
+    StringDataObject::StringDataObject(std::string value)
+            : m_value(std::move(value)){}
 
-    SimulinkReaderResult SimulinkModelSlxReader::Read(SLXSection serializedData,
-                                                      SimulinkModel& object) const
+    const std::string& StringDataObject::GetValue() const noexcept
     {
-        return SimulinkReaderResult::NotImplemented;
+        return m_value;
     }
 
-} // namespace slxio
+}; // namespace slxio

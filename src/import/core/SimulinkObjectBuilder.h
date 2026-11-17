@@ -16,17 +16,27 @@
 
 #pragma once
 
-#include "SimulationSettingsReader.h"
-#include "SLXSection.h"
+#include "CommonPCH.h"
+#include "ISimulinkBuilder.h"
+#include "SimulinkObject.h"
 
 namespace slxio
 {
-
-    class SimulationSettingsSlxReader final : public SimulationSettingsReader<SLXSection>
+    class SimulinkObjectObject final : public IDataObject
     {
     public:
-        SimulinkReaderResult Read(SLXSection serializedData,
-                                  SimulationSettings& object) const override;
+        explicit SimulinkObjectObject(std::shared_ptr<SimulinkObject> value);
+        const std::shared_ptr<SimulinkObject>& GetValue() const noexcept;
+
+    private:
+        std::shared_ptr<SimulinkObject> m_value;
     };
 
+    class SimulinkObjectBuilder final : public ISimulinkBuilder
+    {
+    public:
+        SimulinkObjectBuilder()=default;
+        BuildResult Build(const IDataObject& input) override;
+        ~SimulinkObjectBuilder()=default;
+    };
 } // namespace slxio

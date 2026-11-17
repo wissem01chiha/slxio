@@ -25,14 +25,14 @@ namespace slxio
     class SLXSection final : public ISection
     {
     public:
-        using SectionPtr = std::shared_ptr<ISection>;
-
         SLXSection();
         explicit SLXSection(pugi::xml_node node);
 
-        SectionPtr GetParentSection() const override;
         std::string GetParameter(const std::string& name) const override;
         std::vector<std::string> GetParameterNames() const override;
+        pugi::xml_node GetNode() const;
+        
+        bool Empty() const;
 
         virtual ~SLXSection();
 

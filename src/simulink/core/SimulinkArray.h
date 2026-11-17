@@ -33,6 +33,7 @@ namespace slxio
 
         std::string GetName() const;
         void SetName(const std::string& name);
+        void AddChild(const std::shared_ptr<ISimulinkElement>& child);
         void SetType(const std::string& type);
         std::string GetDimension() const;
         void SetDimension(const std::string& dimension);

@@ -16,17 +16,12 @@
 
 #pragma once
 
-#include "CommonPCH.h"
-#include "SimulinkReader.h"
+#include "ISimulinkBuilder.h"
+#include "IDataObject.h"
 
 namespace slxio
 {
 
-    class SimulationSettings;
 
-    template <typename T>
-    class SimulationSettingsReader : public SimulinkReader<T, SimulationSettings>
-    {
-    };
 
-}; // namespace slxio
+} // namespace slxio

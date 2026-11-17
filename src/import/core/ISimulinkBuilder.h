@@ -17,18 +17,22 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "ISection.h"
+#include "IDataObject.h"
 #include "Error.h"
 
 namespace slxio
 {
+    struct BuildResult
+    {
+        ErrorCode m_error;
+        std::unique_ptr<IDataObject> m_output;
+    };
 
     class ISimulinkBuilder
     {
     public:
-        ISimulinkBuilder();
         virtual ~ISimulinkBuilder() = default;
-        virtual ErrorCode Build() = 0;
+        virtual BuildResult Build(const IDataObject& input) = 0;
     };
 
 }; // namespace slxio

@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-#include "SimulationSettingsSlxReader.h"
-#include "SimulationSettings.h"
-#include "SimulinkReaderResult.h"
+#pragma once
+
+#include "CommonPCH.h"
+#include "IDataObject.h"
 
 namespace slxio
 {
-
-    SimulinkReaderResult SimulationSettingsSlxReader::Read(SLXSection serializedData,
-                                                           SimulationSettings& object) const
+    class StringDataObject final : public IDataObject
     {
-        return SimulinkReaderResult::NotImplemented;
-    }
+    public:
+        explicit StringDataObject(std::string value);
+        const std::string& GetValue() const noexcept;
 
-} // namespace slxio
+    private:
+        std::string m_value;
+    };
+}; // namespace slxio

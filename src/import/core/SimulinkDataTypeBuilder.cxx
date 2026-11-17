@@ -15,50 +15,41 @@
  */
 
 #include "SimulinkDataTypeBuilder.h"
+#include "SimulinkDataType.h"
+#include "StringDataObject.h"
 
 namespace slxio
 {
-    HError SimulinkDataTypeParser::setInputData(const std::string data)
+    SimulinkDataTypeObject::SimulinkDataTypeObject() : m_value(SimulinkDataType::Auto)
     {
-        if (data.empty())
-        {
-            // l.log(Logger::V_ERROR, "SimulinkDataTypeParser:: empty data string");
-            return E_INVALID_ARGUMENT;
-        }
-        dataObject = data;
-        return E_OK;
     }
 
-    HError SimulinkDataTypeParser::setInputData(const std::string& data)
-    {
-        if (data.length() == 0)
+    SimulinkDataTypeObject::SimulinkDataTypeObject(SimulinkDataType value)
+            : m_value(value)
         {
-            // l.log(Logger::V_ERROR,
-      "SimulinkDataTypeParser:: null or empty input data received");
-      return E_INVALID_ARGUMENT;
         }
-        dataObject = std::string(data);
-        return E_OK;
-    }
 
-    HError SimulinkDataTypeParser::parse()
-    {
-        static const std::unordered_map<std::string, SimulinkDataType> sldtMap = {
-#define XX(enumVal, str) {str, enumVal},
-            SIMULINKDATATYPE_MAP(XX)
-#undef XX
-        };
-
-        auto it = sldtMap.find(dataObject);
-        if (it != sldtMap.end())
+    SimulinkDataType SimulinkDataTypeObject::GetValue() const noexcept
         {
-            ptr = std::make_shared<SimulinkDataType>(it->second);
-            return E_OK;
+            return m_value;
         }
-        // l.log(Logger::V_ERROR,
-    "SimulinkDataTypeParser:: unrecognized data type string: " + dataObject);
-    ptr = std::make_shared<SimulinkDataType>(SimulinkDataType::Auto);
-    return E_INVALID_ARGUMENT;
+
+    BuildResult SimulinkDataTypeBuilder::Build(const IDataObject& input)
+    {
+        const auto* stringInput = dynamic_cast<const StringDataObject*>(&input);
+        if (stringInput == nullptr)
+        {
+            return {ErrorCode::InvalidArgument, nullptr};
+        }
+        try
+        {
+            auto dataType = ParseSimulinkDataType(stringInput->GetValue());
+            return {ErrorCode::Ok, std::make_unique<SimulinkDataTypeObject>(dataType)};
+        }
+        catch (const std::invalid_argument&)
+        {
+            return {ErrorCode::InvalidDataType, nullptr};
+        }
     }
 
 }; // namespace slxio

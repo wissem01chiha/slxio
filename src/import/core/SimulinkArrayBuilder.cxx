@@ -14,32 +14,28 @@
  * limitations under the License.
  */
 
-#include "SimulinkArraySlxReader.h"
-#include "SimulinkArray.h"
-#include "SimulinkDataType.h"
+#include "SimulinkArrayBuilder.h"
 #include "SimulinkObject.h"
-#include "SimulinkParameter.h"
-#include "SimulinkReaderResult.h"
+#include "SimulinkParameterBuilder.h"
 #include "SLXParameter.h"
-
-#include <charconv>
-#include <limits>
-#include <memory>
-#include <stdexcept>
-#include <string_view>
-#include <system_error>
+#include "SLXSection.h"
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
-
     namespace
     {
+        ErrorCode ReadArrayNode(pugi::xml_node node, SimulinkArray& array,
+                                SimulinkParameterBuilder& parameterBuilder);
 
-        SimulinkReaderResult ReadArrayNode(pugi::xml_node node, SimulinkArray& array);
-
-        SimulinkReaderResult ReadObjectNode(pugi::xml_node node, SimulinkObject& object)
+        ErrorCode ReadObjectNode(pugi::xml_node node, SimulinkObject& object,
+                                 SimulinkParameterBuilder& parameterBuilder)
         {
+            if (!node || node.type() != pugi::node_element ||
+                node.name() != std::string_view(SLXParameter::SECTION_Object))
+            {
+                return ErrorCode::InvalidArgument;
+            }
+
             const pugi::xml_attribute idAttribute = node.attribute(SLXParameter::PARAM_ObjectID);
             if (idAttribute)
             {
@@ -48,12 +44,11 @@ namespace slxio
                 const auto parseResult =
                     std::from_chars(idText.data(), idText.data() + idText.size(), parsedId);
                 if (parseResult.ec != std::errc() ||
-                    parseResult.ptr != idText.data() + idText.size() ||
-                    parsedId > std::numeric_limits<SId>::max())
+                    parseResult.ptr != idText.data() + idText.size())
                 {
-                    return SimulinkReaderResult::InvalidInput;
+                    return ErrorCode::InvalidArgument;
                 }
-                object.SetId(static_cast<SId>(parsedId));
+                object.SetIndex(std::to_string(parsedId));
             }
 
             object.SetName(node.attribute(SLXParameter::PARAM_PropName).as_string());
@@ -69,63 +64,56 @@ namespace slxio
 
                 if (child.name() == std::string_view(SLXParameter::SECTION_Parameter))
                 {
-                    auto parameter = std::make_shared<SimulinkParameter>(child.child_value());
-                    const char* name = child.attribute(SLXParameter::PARAM_Name).as_string();
-                    parameter->SetName(name);
-
-                    const char* dataType = child.attribute(SLXParameter::PARAM_Class).as_string();
-                    if (*dataType != '\0')
+                    BuildResult parameterResult = parameterBuilder.Build(SLXSection(child));
+                    if (parameterResult.m_error != ErrorCode::Ok)
                     {
-                        try
-                        {
-                            parameter->SetSimulinkDataType(FromString(dataType));
-                        }
-                        catch (const std::invalid_argument&)
-                        {
-                            // Unknown Simulink types remain represented as Auto.
-                        }
+                        return parameterResult.m_error;
                     }
-                    object.AddParam(name, parameter);
+
+                    const auto* parameterObject =
+                        dynamic_cast<const SimulinkParameterObject*>(parameterResult.m_output.get());
+                    if (parameterObject == nullptr || parameterObject->GetValue() == nullptr)
+                    {
+                        return ErrorCode::InvalidArgument;
+                    }
+                    object.SetParameter(parameterObject->GetName(), parameterObject->GetValue());
                     continue;
                 }
 
-                std::shared_ptr<ISimulinkElement> element;
                 if (child.name() == std::string_view(SLXParameter::SECTION_Object))
                 {
                     auto nestedObject = std::make_shared<SimulinkObject>();
-                    const SimulinkReaderResult result = ReadObjectNode(child, *nestedObject);
-                    if (result != SimulinkReaderResult::Success)
+                    const ErrorCode result =
+                        ReadObjectNode(child, *nestedObject, parameterBuilder);
+                    if (result != ErrorCode::Ok)
                     {
                         return result;
                     }
-                    element = std::move(nestedObject);
+                    object.AddChild(nestedObject);
                 }
                 else if (child.name() == std::string_view(SLXParameter::SECTION_Array))
                 {
                     auto nestedArray = std::make_shared<SimulinkArray>();
-                    const SimulinkReaderResult result = ReadArrayNode(child, *nestedArray);
-                    if (result != SimulinkReaderResult::Success)
+                    const ErrorCode result =
+                        ReadArrayNode(child, *nestedArray, parameterBuilder);
+                    if (result != ErrorCode::Ok)
                     {
                         return result;
                     }
-                    element = std::move(nestedArray);
-                }
-
-                if (element && object.Insert(element) != E_OK)
-                {
-                    return SimulinkReaderResult::Failure;
+                    object.AddChild(nestedArray);
                 }
             }
 
-            return SimulinkReaderResult::Success;
+            return ErrorCode::Ok;
         }
 
-        SimulinkReaderResult ReadArrayNode(pugi::xml_node node, SimulinkArray& array)
+        ErrorCode ReadArrayNode(pugi::xml_node node, SimulinkArray& array,
+                                SimulinkParameterBuilder& parameterBuilder)
         {
             if (!node || node.type() != pugi::node_element ||
                 node.name() != std::string_view(SLXParameter::SECTION_Array))
             {
-                return SimulinkReaderResult::InvalidInput;
+                return ErrorCode::InvalidArgument;
             }
 
             array.SetType(node.attribute(SLXParameter::PARAM_Type).as_string());
@@ -139,44 +127,61 @@ namespace slxio
                     continue;
                 }
 
-                std::shared_ptr<ISimulinkElement> element;
                 if (child.name() == std::string_view(SLXParameter::SECTION_Object))
                 {
                     auto nestedObject = std::make_shared<SimulinkObject>();
-                    const SimulinkReaderResult result = ReadObjectNode(child, *nestedObject);
-                    if (result != SimulinkReaderResult::Success)
+                    const ErrorCode result =
+                        ReadObjectNode(child, *nestedObject, parameterBuilder);
+                    if (result != ErrorCode::Ok)
                     {
                         return result;
                     }
-                    element = std::move(nestedObject);
+                    array.AddChild(nestedObject);
                 }
                 else if (child.name() == std::string_view(SLXParameter::SECTION_Array))
                 {
                     auto nestedArray = std::make_shared<SimulinkArray>();
-                    const SimulinkReaderResult result = ReadArrayNode(child, *nestedArray);
-                    if (result != SimulinkReaderResult::Success)
+                    const ErrorCode result =
+                        ReadArrayNode(child, *nestedArray, parameterBuilder);
+                    if (result != ErrorCode::Ok)
                     {
                         return result;
                     }
-                    element = std::move(nestedArray);
-                }
-
-                if (element && array.Insert(element) != E_OK)
-                {
-                    return SimulinkReaderResult::Failure;
+                    array.AddChild(nestedArray);
                 }
             }
 
-            return SimulinkReaderResult::Success;
+            return ErrorCode::Ok;
         }
-
     } // namespace
 
-    SimulinkReaderResult SimulinkArraySlxReader::Read(SLXSection serializedData,
-                                                      SimulinkArray& object) const
+    SimulinkArrayObject::SimulinkArrayObject(std::shared_ptr<SimulinkArray> value)
+        : m_value(std::move(value))
     {
-        return ReadArrayNode(serializedData.GetNode(), object);
     }
 
-    SLXIO_ABI_NAMESPACE_END
+    const std::shared_ptr<SimulinkArray>& SimulinkArrayObject::GetValue() const noexcept
+    {
+        return m_value;
+    }
+
+    BuildResult SimulinkArrayBuilder::Build(const IDataObject& input)
+    {
+        const auto* sectionInput = dynamic_cast<const SLXSection*>(&input);
+        if (sectionInput == nullptr)
+        {
+            return {ErrorCode::InvalidArgument, nullptr};
+        }
+
+        auto array = std::make_shared<SimulinkArray>();
+        SimulinkParameterBuilder parameterBuilder;
+        const ErrorCode result =
+            ReadArrayNode(sectionInput->GetNode(), *array, parameterBuilder);
+        if (result != ErrorCode::Ok)
+        {
+            return {result, nullptr};
+        }
+
+        return {ErrorCode::Ok, std::make_unique<SimulinkArrayObject>(std::move(array))};
+    }
 } // namespace slxio

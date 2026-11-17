@@ -14,16 +14,11 @@
  * limitations under the License.
  */
 
-#include "SimulinkModelReader.h"
-#include "SLXSection.h"
+#include "SimulationSettingsBuilder.h"
 
 namespace slxio
 {
 
-    class SimulinkModelSlxReader final : public SimulinkModelReader<SLXSection>
-    {
-    public:
-        SimulinkReaderResult Read(SLXSection serializedData, SimulinkModel& object) const override;
-    };
+ 
 
-}; // namespace slxio
+} // namespace slxio

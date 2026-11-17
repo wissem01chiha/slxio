@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-#include "SimulinkConfigSetComponentSlxReader.h"
+#include "SimulinkConfigSetComponentBuilder.h"
 #include "SLXParameter.h"
-#include "SimulinkReaderResult.h"
+#include "SLXSection.h"
 
 namespace slxio
 {

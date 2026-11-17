@@ -65,6 +65,14 @@ namespace slxio
         m_name = name;
     }
 
+    void SimulinkArray::AddChild(const std::shared_ptr<ISimulinkElement>& child)
+    {
+        if (child)
+        {
+            m_children.push_back(child);
+        }
+    }
+
     void SimulinkArray::SetType(const std::string& type)
     {
         m_type = type;

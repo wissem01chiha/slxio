@@ -24,13 +24,15 @@ namespace slxio
 {
     class SimulinkParameter;
 
-    class SimulinkObject final : public SimulinkElement, ParameterizedElement
+    class SimulinkObject final : public SimulinkElement, public ParameterizedElement
     {
     public:
         SimulinkObject();
 
         std::string GetName() const;
         void SetName(const std::string& name);
+        void SetIndex(const std::string& index);
+        void AddChild(const std::shared_ptr<ISimulinkElement>& child);
         std::string GetVersion() const;
         void SetVersion(const std::string& version);
         std::string GetClassName() const;
