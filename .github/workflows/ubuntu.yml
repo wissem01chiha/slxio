@@ -45,8 +45,11 @@ jobs:
       if: ${{matrix.packages}}
       run: sudo apt-get update && sudo apt-get install -y ${{ join(matrix.packages, ' ') }}
 
+    - name: Install ninja-build
+      run: sudo apt install ninja-build
+
     - name: Configure
-      run: cmake -S . -B build ${{ matrix.cmake-args }}
+      run: cmake -G  Ninja -S . -B build ${{ matrix.cmake-args }}
       env:
           CC: ${{matrix.compiler}}
           CXX: ${{matrix.cxx-compiler}}
