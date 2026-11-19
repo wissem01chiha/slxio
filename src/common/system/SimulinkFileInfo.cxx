@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-#pragma once
-
-#include "CommonPCH.h"
+#include "SimulinkFileInfo.h"
 
 namespace slxio
 {
-
-    struct DiagnosticEngineOptions
+    std::string ToString(const SimulinkFileInfo& info)
     {
-        bool m_warningsAsErrors = false;
-        bool m_suppressWarnings = false;
-        bool m_treatAllWarningsAsErrors = false;
-        std::size_t m_maxErrors = 100;
-    };
+        
+        
+        return std::string();
+    }
 
 }; // namespace slxio

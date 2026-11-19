@@ -14,10 +14,30 @@
  * limitations under the License.
  */
 
-std::string GetFilePath() const;
+#pragma once
 
-/** Get filename from path. */
-const std::string GetFileName() const;
+#include "CommonPCH.h"
+
+namespace slxio
+{
+    class IFileInfo
+    {
+    public:
+        virtual ~IFileInfo() = default;
+        virtual bool Empty() const = 0;
+        virtual  fs::path GetPath() const = 0;
+        /** Get filename from path. */
+        const std::string GetName() const;
+    };  
+}; // namespace slxio
+
+
+
+
+
+
+
+
 
 /** Get file mode flags. */
 const int GetFileMode();

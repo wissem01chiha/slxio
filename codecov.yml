@@ -1,4 +1,0 @@
-ignore:
-  - "vendor"
-  - "test"
-  - "**/Test*.cxx"

@@ -21,12 +21,10 @@
 
 namespace slxio
 {
-    namespace system
-    {
 
-        /** Get files list in the subdiretcory  */
-        std::vector<std::filesystem::path>
-        GetDirectoryFiles(const std::filesystem::path& directory);
+
+    // Get files list in the subdiretcory  
+    std::vector<fs::path> GetDirectoryFiles(const fs::path& directory);
 
         /** Get a String Serialisation of the directory tree */
         std::string ToString(const std::filesystem::path& directory);

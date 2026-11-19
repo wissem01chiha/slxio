@@ -55,13 +55,5 @@ namespace slxio
         std::optional<std::error_code> m_errorCode;
     };
 
-#define DIAGNOSTIC(vector, severity, message)                                                      \
-    do                                                                                             \
-    {                                                                                              \
-        Diagnostic diagnostic;                                                                     \
-        diagnostic.SetMessage(message);                                                            \
-        diagnostic.SetSeverity(severity);                                                          \
-        vector.push_back(std::move(diagnostic));                                                   \
-    } while (false)
 
 }; // namespace slxio

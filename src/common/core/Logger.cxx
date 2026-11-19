@@ -37,18 +37,31 @@ namespace slxio
         spdlog::set_level(spdlog::level::info);
     }
 
-    void Logger::Log(const Diagnostic& diagnostic)
+    void Logger::Log(const Diagnostic& diagnostic) noexcept
     {
-        if (m_options->m_enableLogging)
+        if (!m_options || !m_options->m_enableLogging)
+        {
+            return;
+        }
+
+        if (m_options->m_logToFile)
         {
             spdlog::info("{}", diagnostic.GetDiagnosticMessage());
+        }
+        else
+        {
+            std::cout << diagnostic.GetDiagnosticMessage();
         }
     }
 
     void Logger::Flush() const
     {
-        if (m_options->m_logToFile)
+        if (m_options && m_options->m_logToFile)
         {
+            if (auto logger = spdlog::default_logger())
+            {
+                logger->flush();
+            }
         }
     }
 

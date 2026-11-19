@@ -37,6 +37,7 @@
 #include <functional>
 #include <optional>
 #include <filesystem>
+#include <iostream>
 #include <string_view>
 #include <system_error>
 #include "unordered_dense.h"
@@ -44,3 +45,6 @@
 #include <assert.h>
 #include <stdexcept>
 #include <charconv>
+
+
+using fs = std::filesystem::path;

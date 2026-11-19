@@ -16,12 +16,12 @@
 
 #pragma once
 
+#include <pugixml.h>
 #include "CommonPCH.h"
-#include "SimulinkFileInfo.h"
 
 namespace slxio
 {
-    class DataObject;
+    struct SimulinkFileInfo;
 
     /**
      * A Simulink model file, combining metadata and XML
@@ -29,18 +29,22 @@ namespace slxio
      */
     struct SimulinkFile
     {
-        SimulinkFileInfo m_info;
-
-        std::unique_ptr<DataObject> m_blockdiagram;
-        DataObject& m_modelDictionary;
-        DataObject& m_configSetInfo;
-        DataObject& m_bddefaults;
-        DataObject& m_scheduleEditor;
-        DataObject& m_scheduleCore;
-        DataObject& m_graphicalInterface;
-        DataObject& m_coreProperties;
-        DataObject& m_mwcoreProperties;
-        std::vector<DataObject> m_configSets;
+        std::unique_ptr<pugi::xml_document> m_blockdiagram;
+        pugi::xml_document m_modelDictionary;
+        pugi::xml_document m_configSetInfo;
+        pugi::xml_document m_bddefaults;
+        pugi::xml_document m_scheduleEditor;
+        pugi::xml_document m_scheduleCore;
+        pugi::xml_document m_graphicalInterface;
+        pugi::xml_document m_coreProperties;
+        pugi::xml_document m_mwcoreProperties;
+        std::vector<pugi::xml_document> m_configSets;
     };
+
+    SimulinkFileInfo GetInfo(const SimulinkFile& file);
+    void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info);
+
+    SimulinkFile Import(const fs& file);
+    fs Flush(const SimulinkFile& file);
 
 }; // namespace slxio

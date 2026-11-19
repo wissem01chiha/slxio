@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "SimulinkRelease.h"
+#include "SimulinkReleaseHelper.h"
 
 namespace slxio
 {

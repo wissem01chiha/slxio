@@ -69,20 +69,15 @@ namespace slxio
 
         /** Delete a directory and contenant from disk */
         static HError Delete(const std::string& path);
+        ErrorCode Delete();
 
-        /** Member function of Delete */
-        HError Delete();
-
-        /** Destructor. */
         ~Directory() = default;
 
     private:
-        std::string DirectoryPath;
-        std::vector<File> DirectoryFileList;
-        std::vector<Directory> SubDirList;
+        std::string m_fullPath;
+        std::vector<File> m_files;
+        std::vector<Directory> m_subDirs;
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
 
-#endif // DIRECTORY_H

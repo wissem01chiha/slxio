@@ -28,9 +28,8 @@ namespace slxio
      */
     struct SimulinkFileInfo
     {
-        const std::string m_extension;
         const std::string m_name;
-        const uint16_t m_size;
+        const std::string m_extension;
         const std::string m_category;
         const std::string m_creator;
         const std::string m_lastModifiedBy;
@@ -42,4 +41,6 @@ namespace slxio
         const std::string m_matlabVersion;
     };
 
+    std::string ToString(const SimulinkFileInfo& info);
+    
 }; // namespace slxio

@@ -17,47 +17,40 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "IFile.h"
 #include "Error.h"
 
 namespace slxio
 {
-
     class FileInfo;
 
-    class File final
+    class File final : public IFile 
     {
     public:
-        enum class Mode
-        {
-            Read,
-            Write,
-            Append,
-            Truncate
-        };
         File() = default;
-        File(const std::string& path, Mode mode);
+        File(const std::string& path);
         explicit File(const std::string& path);
 
-        ErrorCode Open();
-        ErrorCode Close();
-        ErrorCode Read();
+        ErrorCode Open(IFile::Mode mode) override;
+        ErrorCode Close() override;
+        ErrorCode Read() override;
 
-        bool Empty() const;
-        bool Exist() const;
+        bool Empty() const override;
 
         ErrorCode Write(const std::string& message);
         ErrorCode Write(std::vector<std::string>& message);
-        ErrorCode Copy(const Directory& directory);
+        ErrorCode Copy(const std::string& directory);
         ErrorCode Rename(const std::string& filename);
-        ErrorCode Move(const Directory& directory);
+        ErrorCode Move(const std::string& directory);
         ErrorCode Delete();
 
-        void SetFileMode(const File::Mode mode);
         FileInfo& GetFileInfo();
 
         ~File() = default;
 
     protected:
+        friend class FileInfo;
+        
         FileInfo& m_info;
         std::string m_filePath;
         File::Mode m_mode;

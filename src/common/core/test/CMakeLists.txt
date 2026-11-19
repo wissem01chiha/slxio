@@ -15,8 +15,7 @@
 module_add_tests(
   CommonCore
   cxx/TestDiagnostic.cxx
-  cxx/TestDiagnosticEngine.cxx
   cxx/TestError.cxx
-  cxx/TestLoggerEngine.cxx
-  cxx/TestSimulinkRelease.cxx
+  cxx/TestLogger.cxx
+  cxx/TestSimulinkReleaseHelper.cxx
   cxx/TestVersion.cxx)

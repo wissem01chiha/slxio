@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -31,7 +32,7 @@ namespace slxio
         Logger(const Logger&) = delete;
         Logger& operator=(const Logger&) = delete;
         void Init();
-        void Log(const Diagnostic& diagnostic);
+        void Log(const Diagnostic& diagnostic) noexcept;
         void Flush() const;
 
         const LoggerOptions& GetOptions() const;

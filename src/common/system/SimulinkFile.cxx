@@ -14,9 +14,40 @@
  * limitations under the License.
  */
 
+#include "SimulinkFile.h"
 #include "SimulinkFileInfo.h"
 
 namespace slxio
 {
+
+    namespace 
+    {
+        SimulinkFile Load(const fs& directory){
+
+            return SimulinkFile();
+        };
+
+    } // namespace 
+    
+
+    SimulinkFileInfo GetInfo(const SimulinkFile& file)
+    {
+        return SimulinkFileInfo();
+    }
+
+    void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info)
+    {
+        return;
+    }
+
+    SimulinkFile Import(const fs& file)
+    {
+        return SimulinkFile();
+    }
+
+    fs Flush(const SimulinkFile& file)
+    {
+        return fs();
+    }
 
 }; // namespace slxio

@@ -13,3 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+#pragma once
+
+#include "CommonPCH.h"
+#include "Error.h"
+
+namespace slxio
+{
+    class IFile
+    {
+    public:
+        enum class Mode
+        {
+            Read,
+            Write,
+            Append,
+            Truncate
+        };
+        virtual ~IFile() = default;
+        virtual ErrorCode Open(Mode mode) = 0;
+        virtual ErrorCode Close() = 0;
+        virtual ErrorCode Read() = 0;
+    };  
+}; // namespace slxio

@@ -25,12 +25,15 @@ SLXIO – SIMULINK SLX File I/O Library
 
 ## Overview
 
-Slxio is an open‑source C++17 library for reading, and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) `.slx` model files.
+SLXIO is an open-source C++17 library for reading and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) model files.
 
-The project is designed as a lightweight alternative to [MATLAB®](https://www.mathworks.com/help/matlab/index.html) proprietary libraries and runtime, similar in spirit to the [MATIO](https://github.com/tbeu/matio) library for `.mat` files. Its goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python, Java, and others via C++ bindings. It was originally derived from the Java-based Simulink parser of the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) Project. Find the original source code  [here](https://github.com/harmanpa/SimulinkLibraryForJava), ported to C++ and refactored into a highly modular architecture.
+The project is designed as a lightweight alternative to proprietary [MATLAB®](https://www.mathworks.com/help/matlab/index.html) libraries and runtimes. Its primary goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python and Java through C++ bindings.
 
-Slxio does not aim to support all Simulink® features, but rather focuses on the most commonly used ones. The library provides a simple and intuitive api for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, via a mimic of the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started, and reduce the effort when migrating Matlab based scripts into Slxio
-based ones.
+The project grew out of years of struggling with vendor-locked Simulink files and the lack of open-source alternatives offering comparable capabilities. Its main goal is to integrate Simulink with the Python ecosystem and bridge the gap in software tooling.
+
+It was originally derived from the Java-based Simulink parser in the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) project. The original source code is available [here](https://github.com/harmanpa/SimulinkLibraryForJava). It was ported to C++ and refactored into a highly modular architecture.
+
+We do not aim to support every Simulink® feature. Instead, the library focuses on the most commonly used ones. It provides a simple and intuitive API for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, modeled after the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started.
 
 ## Installing
 
@@ -54,9 +57,18 @@ See [Changelog](CHANGELOG.md) file for project API changes.
 
 For bugs, please [report an issue](https://github.com/wissem01chiha/slxio/issues), submit a [pull request](https://github.com/wissem01chiha/slxio/pulls) or catch me on [email](mailto:chihawissem08@gmail.com)
 
-Any contributions are greatly appreciated, see [Contributing](./CONTRIBUTING.md) for some contribution guidelines.
-
 Currently, there is no official mailing list for the project, as there is only one developer/maintainer, feel free to contact me directly instead. [mail: chihawissem08 [dot] gmail [dot] com](mailto:chihawissem08@gmail.com)
+
+## Contributing
+
+> [!WARNING]
+> The project is still on early developpment phase, and no release is yet published, 
+
+Any contributions are greatly appreciated, see our [Contributing](./CONTRIBUTING.md) for some contribution guidelines.
+
+## Compatibility
+
+The long-term vision is to support all Simulink releases starting with R2018a. However, this is a substantial amount of work, and the current focus is primarily on R2018a compatibility. Support for newer Simulink releases or patches, if available, will be documented according to the slxio [semantic versioning](https://semver.org/) scheme.
 
 ## Acknowledgments
 

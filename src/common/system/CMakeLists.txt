@@ -13,14 +13,10 @@
 # the License.
 
 add_module(
-  System
-  File.cxx
-  Directory.cxx
-  FileManager.cxx
-  DirectoryManager.cxx
-  ExecutableManager.cxx
-  DirectoryService.cxx)
-module_link_libraries(System Core libzip::zip)
-set_target_properties(System PROPERTIES OUTPUT_NAME "CommonSystem")
-module_include_directories(System ${PROJECT_EXTERN_SOURCE_DIR}/doctest)
+  CommonSystem
+  SimulinkFile.cxx
+  SimulinkFileInfo.cxx)
+module_link_libraries(CommonSystem CommonCore pugixml)
+module_include_directories(CommonSystem ${PROJECT_EXTERN_SOURCE_DIR}/doctest
+                           ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)
 add_subdirectory(test)

@@ -13,5 +13,6 @@
 # the License.
 
 add_subdirectory(core)
+add_subdirectory(system)
 add_subdirectory(color)
 add_subdirectory(math)

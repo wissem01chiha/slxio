@@ -14,12 +14,11 @@
 
 add_module(
   CommonCore
-  Diagnostic.cxx
-  DiagnosticEngine.cxx
   Error.cxx
   Logger.cxx
-  SimulinkRelease.cxx
-  Version.cxx)
+  Diagnostic.cxx
+  Version.cxx
+  SimulinkReleaseHelper.cxx)
 
 configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
 module_link_libraries(CommonCore spdlog)

@@ -14,8 +14,6 @@
 
 add_module(
   ImportCore
-  SimulinkFileInfo.cxx
-  SimulinkFile.cxx
   SLXSection.cxx
   StringDataObject.cxx
   SimulinkDataTypeBuilder.cxx

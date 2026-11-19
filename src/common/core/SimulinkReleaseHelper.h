@@ -14,9 +14,28 @@
  * limitations under the License.
  */
 
-#include "SimulinkFile.h"
+#pragma once
+
+#include "CommonPCH.h"
+#include "SimulinkRelease.h"
 
 namespace slxio
 {
+
+    class SimulinkReleaseHelper final
+    {
+    public:
+        SimulinkReleaseHelper(uint16_t year, char letter);
+        static std::optional<SimulinkReleaseHelper> Parse(std::string_view s);
+        uint16_t Year() const;
+        char Letter() const;
+        SimulinkRelease ToRelease() const;
+        std::string ToString() const;
+        bool operator==(const SimulinkReleaseHelper&) const;
+
+    private:
+        uint16_t year_;
+        char letter_;
+    };
 
 }; // namespace slxio
