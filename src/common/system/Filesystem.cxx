@@ -19,69 +19,93 @@
 namespace slxio
 {
 
-    std::string GetBasename(const fs::path& path){
+    std::string GetBasename(const fs::path& path)
+    {
         return path.filename().string();
     }
 
-    fs::path ChangeBaseName(const fs::path& path, const std::string& new_basename){
+    fs::path ChangeBaseName(const fs::path& path, const std::string& new_basename)
+    {
         fs::path new_path = path;
         new_path.replace_filename(new_basename);
         return new_path;
     }
 
-    std::string GetDirname(const fs::path& path){
+    std::string GetDirname(const fs::path& path)
+    {
         return path.parent_path().string();
     }
 
-    fs::path PathJoin(const fs::path& base, const std::vector<fs::path>& components){
+    fs::path PathJoin(const fs::path& base, const std::vector<fs::path>& components)
+    {
         fs::path result = base;
-        for(const auto& comp : components){
+        for (const auto& comp : components)
+        {
             result /= comp;
         }
         return result;
     }
 
-    std::vector<fs::path> GetFileList(const fs::path& directory){
+    std::vector<fs::path> GetFileList(const fs::path& directory)
+    {
         std::vector<fs::path> files;
-        for(const auto& entry : fs::directory_iterator(directory)){
-            if(entry.is_regular_file()){
+        for (const auto& entry : fs::directory_iterator(directory))
+        {
+            if (entry.is_regular_file())
+            {
                 files.push_back(entry.path());
             }
         }
         return files;
     }
 
-    uint32_t GetFileNumber(const fs::path& directory, ErrorCode* error){
+    uint32_t GetFileNumber(const fs::path& directory, ErrorCode* error)
+    {
         uint32_t count = 0;
-        try {
-            for(const auto& entry : fs::directory_iterator(directory)){
-                if(entry.is_regular_file()){
+        try
+        {
+            for (const auto& entry : fs::directory_iterator(directory))
+            {
+                if (entry.is_regular_file())
+                {
                     ++count;
                 }
             }
-        } catch(const fs::filesystem_error& e){
-            if(error) *error = ErrorCode::FileSystemError;
+        }
+        catch (const fs::filesystem_error& e)
+        {
+            if (error)
+                *error = ErrorCode::FileSystemError;
             return 0;
         }
-        if(error) *error = ErrorCode::Ok;
+        if (error)
+            *error = ErrorCode::Ok;
         return count;
     }
 
-    std::string ToString(const fs::path& directory){
+    std::string ToString(const fs::path& directory)
+    {
         std::string result;
-        for(const auto& entry : fs::recursive_directory_iterator(directory)){
+        for (const auto& entry : fs::recursive_directory_iterator(directory))
+        {
             result += entry.path().string() + "\n";
         }
         return result;
     }
 
-    fs::path GetWorkingPath(ErrorCode* error ){
-        try {
+    fs::path GetWorkingPath(ErrorCode* error)
+    {
+        try
+        {
             fs::path cwd = fs::current_path();
-            if(error) *error = ErrorCode::Ok;
+            if (error)
+                *error = ErrorCode::Ok;
             return cwd;
-        } catch(const fs::filesystem_error& e){
-            if(error) *error = ErrorCode::FileSystemError;
+        }
+        catch (const fs::filesystem_error& e)
+        {
+            if (error)
+                *error = ErrorCode::FileSystemError;
             return fs::path();
         }
     }

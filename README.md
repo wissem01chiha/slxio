@@ -25,9 +25,7 @@ SLXIO – SIMULINK SLX File I/O Library
 
 ## Overview
 
-SLXIO is an open-source C++17 library for reading and exporting [Simulink®](https://www.mathworks.com/products/simulink.html) model files.
-
-The project is designed as a lightweight alternative to proprietary [MATLAB®](https://www.mathworks.com/help/matlab/index.html) libraries and runtimes. Its primary goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python and Java through C++ bindings.
+SLXIO is an open-source C++17 library for reading and exporting [Simulink](https://www.mathworks.com/products/simulink.html) model files. The project is designed as a lightweight alternative to proprietary [MATLAB](https://www.mathworks.com/help/matlab/index.html) libraries and runtimes. Its primary goal is to make Simulink models accessible outside the MATLAB ecosystem, enabling manipulation and integration through modern scripting languages such as Python and Java through C++ bindings.
 
 The project grew out of years of struggling with vendor-locked Simulink files and the lack of open-source alternatives offering comparable capabilities. Its main goal is to integrate Simulink with the Python ecosystem and bridge the gap in software tooling.
 
@@ -68,7 +66,7 @@ Any contributions are greatly appreciated, see our [Contributing](./CONTRIBUTING
 
 ## Compatibility
 
-The long-term vision is to support all Simulink releases starting with R2018a. However, this is a substantial amount of work, and the current focus is primarily on R2018a compatibility. Support for newer Simulink releases or patches, if available, will be documented according to the slxio [semantic versioning](https://semver.org/) scheme.
+The long-term vision is to support all Simulink releases starting with R2019a. However, this is a substantial amount of work, and the current focus is primarily on R2019a compatibility. Support for newer Simulink releases or patches, if available, will be documented according to the slxio [semantic versioning](https://semver.org/) scheme.
 
 ## Acknowledgments
 

@@ -1,7 +1,8 @@
 #include "Tempdir.h"
 #include "doctest.h"
 
-namespace slxio{
+namespace slxio
+{
     TEST_CASE("Tempdir generates unique directory names")
     {
         ConfigOption config;

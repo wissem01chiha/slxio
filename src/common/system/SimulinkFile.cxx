@@ -27,30 +27,141 @@ namespace slxio
             return SimulinkFile();
         };
 
+        std::string GetContentType(const SimulinkFile& file)
+        {
+            if (file.m_mwcoreProperties)
+            {
+                auto mwcore = file.m_mwcoreProperties.child("mwcoreProperties");
+                if (mwcore)
+                {
+                    return mwcore.child("contentType").text().as_string();
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetContentTypeFriendlyName(const SimulinkFile& file)
+        {
+            if (file.m_mwcoreProperties)
+            {
+                auto mwcore = file.m_mwcoreProperties.child("mwcoreProperties");
+                if (mwcore)
+                {
+                    return mwcore.child("contentTypeFriendlyName").text().as_string();
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetMatlabRelease(const SimulinkFile& file)
+        {
+            if (file.m_mwcoreProperties)
+            {
+                auto mwcore = file.m_mwcoreProperties.child("mwcoreProperties");
+                if (mwcore)
+                {
+                    return mwcore.child("matlabRelease").text().as_string();
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetCategory(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto core = file.m_coreProperties.child("cp:coreProperties");
+                if (core)
+                {
+                    return core.child("cp:category").text().as_string();
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetCreator(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto root = file.m_coreProperties.child("cp:coreProperties");
+                if (root)
+                {
+                    const auto creator = root.child("dc:creator");
+                    if (creator)
+                    {
+                        return creator.text().as_string();
+                    }
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetVersion(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto root = file.m_coreProperties.child("cp:coreProperties");
+                if (root)
+                {
+                    const auto version = root.child("cp:version");
+                    if (version)
+                    {
+                        return version.text().as_string();
+                    }
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetRevision(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto root = file.m_coreProperties.child("cp:coreProperties");
+                if (root)
+                {
+                    const auto version = root.child("cp:revision");
+                    if (version)
+                    {
+                        return version.text().as_string();
+                    }
+                }
+            }
+            return std::string();
+        }
+
+        std::string GetModified(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto root = file.m_coreProperties.child("cp:coreProperties");
+                if (root)
+                {
+                    const auto version = root.child("dcterms:modified");
+                    if (version)
+                    {
+                        return version.text().as_string();
+                    }
+                }
+            }
+            return std::string();
+        }
     } // namespace
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file)
     {
-        std::string contentType;
-        std::string contentTypeFriendlyName;
-        std::string matlabRelease;
-        if (file.m_mwcoreProperties)
-        {
-            auto mwcore = file.m_mwcoreProperties.child("mwcoreProperties");
-            if (mwcore)
-            {
-                contentType = mwcore.child("contentType").text().as_string();
-                contentTypeFriendlyName =
-                    mwcore.child("contentTypeFriendlyName").text().as_string();
-                matlabRelease = mwcore.child("matlabRelease").text().as_string();
-            }
-        }
-        if (file.m_coreProperties)
-        {
-            auto core = file.m_coreProperties.child("cp:coreProperties");
-        }
-        return SimulinkFileInfo{
-            "", "", "", "", "", "", "", contentType, contentTypeFriendlyName, matlabRelease, ""};
+        SimulinkFileInfo info;
+        info.m_extension = "slx";
+        info.m_contentType = GetContentType(file);
+        info.m_contentTypeFriendlyName = GetContentTypeFriendlyName(file);
+        info.m_matlabRelease = GetMatlabRelease(file);
+        info.m_category = GetCategory(file);
+        info.m_creator = GetCreator(file);
+        info.m_version = GetVersion(file);
+        info.m_revision = GetRevision(file);
+        info.m_modified = GetModified(file);
+
+        return info;
     }
 
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info)

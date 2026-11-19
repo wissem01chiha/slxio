@@ -59,7 +59,7 @@ namespace slxio
         std::mt19937 gen(rd());
         std::uniform_int_distribution<> dist(10000, 99999);
         int random_number = dist(gen);
- 
+
         auto now = system_clock::now();
         auto timestamp = duration_cast<milliseconds>(now.time_since_epoch()).count();
 
@@ -75,7 +75,7 @@ namespace slxio
 
     void Tempdir::Cleanup()
     {
-         if (!fs::exists(m_root_path))
+        if (!fs::exists(m_root_path))
             return;
 
         bool always_cleanup = m_config.m_cleanup == CleanupOption::Always;
@@ -93,13 +93,14 @@ namespace slxio
         }
         catch (const std::exception& ex)
         {
-            throw std::runtime_error("failed to remove temporary directory: " + m_root_path.string() + ". Error: " + ex.what());
+            throw std::runtime_error("failed to remove temporary directory: " +
+                                     m_root_path.string() + ". Error: " + ex.what());
         }
     }
 
     Tempdir::~Tempdir()
     {
-         try
+        try
         {
             Cleanup();
         }

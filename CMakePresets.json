@@ -72,6 +72,7 @@
             "name": "GCC-13.3.0-x86_64-linux-gnu",
             "displayName": "GCC-13.3.0-x86_64-linux-gnu",
             "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",

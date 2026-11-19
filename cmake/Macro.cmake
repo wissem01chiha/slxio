@@ -22,7 +22,11 @@ endmacro()
 
 macro(configure_option option_name description value)
   option(${option_name} "${description}" ${value})
-  set(${option_name} ${${option_name}})
+  if(${option_name})
+      set(${option_name} 1)
+  else()
+      set(${option_name} 0)
+  endif()
 endmacro()
 
 macro(advanced_dependent_option option_name description value dependent_option
@@ -35,9 +39,13 @@ endmacro()
 macro(advanced_configure_option option_name description value)
   option(${option_name} "${description}" ${value})
   mark_as_advanced(${option_name})
-  set(${option_name} ${${option_name}})
+  if(${option_name})
+      set(${option_name} 1)
+  else()
+      set(${option_name} 0)
+  endif()
 endmacro()
-
+ 
 # SLXIO_SHARED_AND_STATIC_LIBS : ${module_name} shared, ${module_name}_s static
 # SLXIO_SHARED_LIBS : ${module_name} shared SLXIO_STATIC_LIBS : ${module_name}
 # static

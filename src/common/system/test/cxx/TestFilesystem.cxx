@@ -4,23 +4,27 @@
 
 namespace slxio
 {
-    TEST_CASE("Get basename filesystem test"){
+    TEST_CASE("Get basename filesystem test")
+    {
         fs::path path("/some/directory/file.txt");
         CHECK(GetBasename(path) == "file.txt");
     }
 
-    TEST_CASE("Change base name filesystem test"){
+    TEST_CASE("Change base name filesystem test")
+    {
         fs::path path("/some/directory/file.txt");
         fs::path new_path = ChangeBaseName(path, "newfile.txt");
         CHECK(new_path.filename() == "newfile.txt");
     }
 
-    TEST_CASE("Get directory name filesystem test"){
+    TEST_CASE("Get directory name filesystem test")
+    {
         fs::path path("/some/directory/file.txt");
         CHECK(GetDirname(path) == "/some/directory");
     }
 
-    TEST_CASE("Create tempory directory and get file list test"){
+    TEST_CASE("Create tempory directory and get file list test")
+    {
         Tempdir tempdir;
         fs::path dir = tempdir.GetDirPath();
 

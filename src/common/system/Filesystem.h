@@ -24,26 +24,26 @@ namespace slxio
 
     // Get the basename of the given path
     std::string GetBasename(const fs::path& path);
-    
+
     // Change the basename of the given path
     fs::path ChangeBaseName(const fs::path& path, const std::string& new_basename);
 
     // Get the directory name of the given path
     std::string GetDirname(const fs::path& path);
-    
+
     // Join multiple path components into a single path
     fs::path PathJoin(const fs::path& base, const std::vector<fs::path>& components);
-    
+
     // Get files path list in the given directory path
     std::vector<fs::path> GetFileList(const fs::path& directory);
 
     // Get the number of files in the directory.
     uint32_t GetFileNumber(const fs::path& directory, ErrorCode* error = nullptr);
 
-    // Get a String Serialisation of the directory tree 
+    // Get a String Serialisation of the directory tree
     std::string ToString(const fs::path& directory);
 
-    // Get the current working directory. 
+    // Get the current working directory.
     fs::path GetWorkingPath(ErrorCode* error = nullptr);
 
     /**
@@ -54,7 +54,7 @@ namespace slxio
      * This function ensures that the directory structure is created up
      * to the specified root folder (`dir`)
      */
-    std::shared_ptr<fs::path> CreateDirectoryStructure(const std::string& structure, ErrorCode* error = nullptr);
-                  
+    std::shared_ptr<fs::path> CreateDirectoryStructure(const std::string& structure,
+                                                       ErrorCode* error = nullptr);
 
-} ; // namespace slxio
+}; // namespace slxio

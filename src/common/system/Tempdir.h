@@ -23,9 +23,9 @@ namespace slxio
 
     enum class CleanupOption
     {
-        Always,      
-        OnSuccess,        
-        Never       
+        Always,
+        OnSuccess,
+        Never
     };
 
     struct ConfigOption
@@ -60,9 +60,10 @@ namespace slxio
         void Cleanup();
 
         ~Tempdir();
+
     private:
         fs::path m_root_path;
         ConfigOption m_config;
     };
 
-} ; // namespace slxio
+}; // namespace slxio

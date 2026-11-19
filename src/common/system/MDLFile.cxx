@@ -30,7 +30,9 @@ namespace slxio
 
     SimulinkFileInfo GetInfo(const MDLFile& file)
     {
-        // Implementation goes here
+        SimulinkFileInfo info;
+        info.m_extension = "mdl";
+        return info;
     }
 
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info)

@@ -7,9 +7,7 @@ namespace slxio
     TEST_CASE("MDL file basic test")
     {
         MDLFile file;
-        SimulinkFileInfo info;
-        SetInfo(file, info);
-        SimulinkFileInfo retrievedInfo = GetInfo(file);
-        //CHECK(retrievedInfo == info);
+        SimulinkFileInfo info = GetInfo(file);
+        CHECK(info.m_extension == "mdl");
     }
 } // namespace slxio
