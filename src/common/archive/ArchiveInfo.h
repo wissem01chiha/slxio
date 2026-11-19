@@ -1,7 +1,6 @@
 
 
+std::string GetArchiveExtension() const;
 
-     std::string GetArchiveExtension() const;
-
-          /** Get the archive directory object */
-        Directory GetArchiveDirectory() const;
+/** Get the archive directory object */
+Directory GetArchiveDirectory() const;

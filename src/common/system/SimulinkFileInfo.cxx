@@ -20,8 +20,6 @@ namespace slxio
 {
     std::string ToString(const SimulinkFileInfo& info)
     {
-        
-        
         return std::string();
     }
 

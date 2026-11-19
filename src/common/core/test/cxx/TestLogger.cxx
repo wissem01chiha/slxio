@@ -22,8 +22,8 @@ namespace slxio
         CHECK(engine.GetOptions().m_queueSize == 8192);
     }
 
-    TEST_CASE("Log diagnostic message to stdio test"){
-
+    TEST_CASE("Log diagnostic message to stdio test")
+    {
         Diagnostic diagnostic;
 
         diagnostic.SetSeverity(DiagnosticSeverity::Warning);
@@ -44,11 +44,11 @@ namespace slxio
         std::cout.rdbuf(p_cout_streambuf);
         CHECK(oss);
         CHECK(oss.str() == "missing optional setting");
-    
     }
 
-    TEST_CASE("Flush logs to file test"){
-           Diagnostic diagnostic;
+    TEST_CASE("Flush logs to file test")
+    {
+        Diagnostic diagnostic;
 
         diagnostic.SetSeverity(DiagnosticSeverity::Warning);
         diagnostic.SetMessage("missing optional setting");

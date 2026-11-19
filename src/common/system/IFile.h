@@ -35,5 +35,5 @@ namespace slxio
         virtual ErrorCode Open(Mode mode) = 0;
         virtual ErrorCode Close() = 0;
         virtual ErrorCode Read() = 0;
-    };  
+    };
 }; // namespace slxio

@@ -20,15 +20,14 @@
 namespace slxio
 {
 
-    namespace 
+    namespace
     {
-        SimulinkFile Load(const fs& directory){
-
+        SimulinkFile Load(const fs& directory)
+        {
             return SimulinkFile();
         };
 
-    } // namespace 
-    
+    } // namespace
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file)
     {

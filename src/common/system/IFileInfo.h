@@ -25,19 +25,11 @@ namespace slxio
     public:
         virtual ~IFileInfo() = default;
         virtual bool Empty() const = 0;
-        virtual  fs::path GetPath() const = 0;
+        virtual fs::path GetPath() const = 0;
         /** Get filename from path. */
         const std::string GetName() const;
-    };  
+    };
 }; // namespace slxio
-
-
-
-
-
-
-
-
 
 /** Get file mode flags. */
 const int GetFileMode();

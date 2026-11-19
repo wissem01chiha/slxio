@@ -24,7 +24,7 @@ namespace slxio
 {
     class FileInfo;
 
-    class File final : public IFile 
+    class File final : public IFile
     {
     public:
         File() = default;
@@ -50,7 +50,7 @@ namespace slxio
 
     protected:
         friend class FileInfo;
-        
+
         FileInfo& m_info;
         std::string m_filePath;
         File::Mode m_mode;

@@ -42,5 +42,5 @@ namespace slxio
     };
 
     std::string ToString(const SimulinkFileInfo& info);
-    
+
 }; // namespace slxio

@@ -46,5 +46,4 @@
 #include <stdexcept>
 #include <charconv>
 
-
 using fs = std::filesystem::path;

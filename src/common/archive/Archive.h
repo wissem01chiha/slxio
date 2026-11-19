@@ -26,14 +26,13 @@ namespace slxio
         Archive();
         Archive(const File& file);
         Archive* New();
-   
+
         void SetArchiveExtension(const char* ext);
 
         /* Set the archive directory folder is not given a temporary one will be
          * used as default */
         void SetArchiveDirectory(const Directory& directory);
 
-   
         /** Extract the archive if it is a ZIP archive. */
         HError Extract();
 

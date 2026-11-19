@@ -55,5 +55,4 @@ namespace slxio
         std::optional<std::error_code> m_errorCode;
     };
 
-
 }; // namespace slxio
