@@ -58,12 +58,13 @@
             "displayName": "GCC-15.3.0-x86_64-w64-mingw32",
             "description":
                 "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
-            "generator": "MinGW Makefiles",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
+                "CMAKE_MAKE_PROGRAM": "C:\\Users\\wissemc\\ninja\\ninja.exe",
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
-                "CMAKE_C_COMPILER": "C:/mingw64/bin/gcc.exe",
-                "CMAKE_CXX_COMPILER": "C:/mingw64/bin/g++.exe",
+                "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
@@ -125,7 +126,7 @@
             "displayName": "GCC 10.3.0 x86_64-w64-mingw32",
             "description":
                 "Using compilers: C = C:\\TDM-GCC-64\\bin\\gcc.exe, CXX = C:\\TDM-GCC-64\\bin\\g++.exe",
-            "generator": "MinGW Makefiles",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",

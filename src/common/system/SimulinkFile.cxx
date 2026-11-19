@@ -22,7 +22,7 @@ namespace slxio
 
     namespace
     {
-        SimulinkFile Load(const fs& directory)
+        SimulinkFile Load(const fs::path& directory)
         {
             return SimulinkFile();
         };
@@ -31,7 +31,26 @@ namespace slxio
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file)
     {
-        return SimulinkFileInfo();
+        std::string contentType;
+        std::string contentTypeFriendlyName;
+        std::string matlabRelease;
+        if (file.m_mwcoreProperties)
+        {
+            auto mwcore = file.m_mwcoreProperties.child("mwcoreProperties");
+            if (mwcore)
+            {
+                contentType = mwcore.child("contentType").text().as_string();
+                contentTypeFriendlyName =
+                    mwcore.child("contentTypeFriendlyName").text().as_string();
+                matlabRelease = mwcore.child("matlabRelease").text().as_string();
+            }
+        }
+        if (file.m_coreProperties)
+        {
+            auto core = file.m_coreProperties.child("cp:coreProperties");
+        }
+        return SimulinkFileInfo{
+            "", "", "", "", "", "", "", contentType, contentTypeFriendlyName, matlabRelease, ""};
     }
 
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info)
@@ -39,14 +58,14 @@ namespace slxio
         return;
     }
 
-    SimulinkFile Import(const fs& file)
+    SimulinkFile Import(const fs::path& file)
     {
         return SimulinkFile();
     }
 
-    fs Flush(const SimulinkFile& file)
+    fs::path Flush(const SimulinkFile& file)
     {
-        return fs();
+        return fs::path();
     }
 
 }; // namespace slxio

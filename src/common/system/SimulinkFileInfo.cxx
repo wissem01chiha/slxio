@@ -20,7 +20,21 @@ namespace slxio
 {
     std::string ToString(const SimulinkFileInfo& info)
     {
-        return std::string();
+        std::ostringstream oss;
+        oss << "SimulinkFileInfo { ";
+        oss << "fileName: " << info.m_name << ", ";
+        oss << "file extension: " << info.m_extension << ", ";
+        oss << "lastModified: " << info.m_lastModifiedBy << ", ";
+        oss << "revision: " << info.m_revision << ", ";
+        oss << "matlab version: " << info.m_matlabVersion << ", ";
+        oss << "Matlab Release: " << info.m_matlabRelease << ", ";
+        oss << "Matlab Revision: " << info.m_revision << ", ";
+        oss << "Category: " << info.m_category << ", ";
+        oss << "Creator: " << info.m_creator << ", ";
+        oss << "Content Friendly Name : " << info.m_contentTypeFriendlyName << ", ";
+        oss << " }";
+
+        return oss.str();
     }
 
 }; // namespace slxio

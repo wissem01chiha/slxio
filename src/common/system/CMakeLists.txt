@@ -14,8 +14,16 @@
 
 add_module(
   CommonSystem
+  Tempdir.cxx
+  Filesystem.cxx
   SimulinkFile.cxx
   SimulinkFileInfo.cxx)
+if(SLXIO_MDL)
+  target_sources(
+    CommonSystem
+    PRIVATE
+    MDLFile.cxx)
+endif()
 module_link_libraries(CommonSystem CommonCore pugixml)
 module_include_directories(CommonSystem ${PROJECT_EXTERN_SOURCE_DIR}/doctest
                            ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)

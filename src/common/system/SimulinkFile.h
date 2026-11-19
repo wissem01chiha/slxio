@@ -44,7 +44,7 @@ namespace slxio
     SimulinkFileInfo GetInfo(const SimulinkFile& file);
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info);
 
-    SimulinkFile Import(const fs& file);
-    fs Flush(const SimulinkFile& file);
+    SimulinkFile Import(const fs::path& file);
+    fs::path Flush(const SimulinkFile& file);
 
 }; // namespace slxio
