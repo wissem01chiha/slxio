@@ -22,6 +22,9 @@
 namespace slxio
 {
 
+    // Source: https://stackoverflow.com/a/116220
+    std::string ReadFile(const fs::path& path);
+
     // Get the basename of the given path
     std::string GetBasename(const fs::path& path);
 

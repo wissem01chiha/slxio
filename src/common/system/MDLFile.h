@@ -24,9 +24,12 @@ namespace slxio
 
     struct MDLFile
     {
+        std::string m_content;
     };
 
     SimulinkFileInfo GetInfo(const MDLFile& file);
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path);
+
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info);
 
     MDLFile Import(const fs::path& file);

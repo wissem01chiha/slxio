@@ -20,13 +20,13 @@ namespace slxio
 {
 
     MDLSection::MDLSection(std::string name, int lineNumber)
-        : name_(std::move(name)), m_lineNumber(lineNumber)
+        : m_name(std::move(name)), m_lineNumber(lineNumber)
     {
     }
 
     MDLSection::MDLSection(std::string name,
                            const std::vector<SectionPtr>& sections,
-                           const std::unordered_map<std::string, std::string>& parameters,
+                           const MDLSection::ParameterMap& parameters,
                            int lineNumber)
         : MDLSection(std::move(name), lineNumber)
     {
@@ -35,25 +35,25 @@ namespace slxio
             AddSubSection(section);
         }
 
-        parameters_ = parameters;
+        m_parameters = parameters;
     }
 
     void MDLSection::AddSubSection(const SectionPtr& section)
     {
-        section->parentSection_ = this;
-        subSections_[section->GetName()].push_back(section);
+        section->m_parentSection = this;
+        m_subSections[section->GetName()].push_back(section);
     }
 
     MDLSection* MDLSection::GetParentSection() const
     {
-        return parentSection_;
+        return m_parentSection;
     }
 
     MDLSection* MDLSection::GetFirstSubSection(const std::string& name) const
     {
-        auto it = subSections_.find(name);
+        auto it = m_subSections.find(name);
 
-        if (it == subSections_.end() || it->second.empty())
+        if (it == m_subSections.end() || it->second.empty())
         {
             return nullptr;
         }
@@ -65,7 +65,7 @@ namespace slxio
     {
         std::vector<MDLSection*> result;
 
-        for (const auto& pair : subSections_)
+        for (const auto& pair : m_subSections)
         {
             for (const auto& section : pair.second)
             {
@@ -98,14 +98,14 @@ namespace slxio
 
     const std::string& MDLSection::GetName() const
     {
-        return name_;
+        return m_name;
     }
 
     std::string MDLSection::GetParameter(const std::string& name) const
     {
-        auto it = parameters_.find(name);
+        auto it = m_parameters.find(name);
 
-        if (it == parameters_.end())
+        if (it == m_parameters.end())
         {
             return {};
         }
@@ -116,9 +116,9 @@ namespace slxio
     std::string MDLSection::GetParameter(const std::string& name,
                                          const std::string& defaultValue) const
     {
-        auto it = parameters_.find(name);
+        auto it = m_parameters.find(name);
 
-        if (it == parameters_.end())
+        if (it == m_parameters.end())
         {
             return defaultValue;
         }
@@ -126,9 +126,9 @@ namespace slxio
         return it->second;
     }
 
-    std::unordered_map<std::string, std::string> MDLSection::GetParameterMapRecursively() const
+    MDLSection::ParameterMap MDLSection::GetParameterMapRecursively() const
     {
-        std::unordered_map<std::string, std::string> result;
+        ParameterMap result;
 
         BuildParameterMapRecursively(result, "");
 
@@ -139,9 +139,9 @@ namespace slxio
     {
         std::vector<std::string> names;
 
-        names.reserve(parameters_.size());
+        names.reserve(m_parameters.size());
 
-        for (const auto& p : parameters_)
+        for (const auto& p : m_parameters)
         {
             names.push_back(p.first);
         }
@@ -153,7 +153,7 @@ namespace slxio
     {
         std::vector<SectionPtr> result;
 
-        for (const auto& pair : subSections_)
+        for (const auto& pair : m_subSections)
         {
             result.insert(result.end(), pair.second.begin(), pair.second.end());
         }
@@ -163,9 +163,9 @@ namespace slxio
 
     std::vector<MDLSection::SectionPtr> MDLSection::GetSubSections(const std::string& name) const
     {
-        auto it = subSections_.find(name);
+        auto it = m_subSections.find(name);
 
-        if (it == subSections_.end())
+        if (it == m_subSections.end())
         {
             return {};
         }
@@ -175,19 +175,19 @@ namespace slxio
 
     bool MDLSection::HasParameter(const std::string& name) const
     {
-        return parameters_.find(name) != parameters_.end();
+        return m_parameters.find(name) != m_parameters.end();
     }
 
     bool MDLSection::HasSubSection(const std::string& name) const
     {
-        auto it = subSections_.find(name);
+        auto it = m_subSections.find(name);
 
-        return it != subSections_.end() && !it->second.empty();
+        return it != m_subSections.end() && !it->second.empty();
     }
 
     bool MDLSection::HasSubSections() const
     {
-        for (const auto& pair : subSections_)
+        for (const auto& pair : m_subSections)
         {
             if (!pair.second.empty())
             {
@@ -201,11 +201,11 @@ namespace slxio
     std::string MDLSection::ToString() const
     {
         std::ostringstream ss;
-        ss << name_ << " [l:" << m_lineNumber << "]";
+        ss << m_name << " [l:" << m_lineNumber << "]";
         return ss.str();
     }
 
-    void MDLSection::BuildParameterMapRecursively(std::unordered_map<std::string, std::string>& map,
+    void MDLSection::BuildParameterMapRecursively(ParameterMap& map,
                                                   const std::string& prefix) const
     {
         std::string currentPrefix = prefix;
@@ -215,14 +215,14 @@ namespace slxio
             currentPrefix += ".";
         }
 
-        for (const auto& p : parameters_)
+        for (const auto& p : m_parameters)
         {
             map[currentPrefix + p.first] = p.second;
         }
 
         for (const auto& section : GetSubSections())
         {
-            section->BuildParameterMapRecursively(map, currentPrefix + section->name_);
+            section->BuildParameterMapRecursively(map, currentPrefix + section->m_name);
         }
     }
 

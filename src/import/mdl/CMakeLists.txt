@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(ImportMdl MDLSection.cxx)
+add_module(ImportMdl SimulinkModelMdlBuilder.cxx MDLSection.cxx)
 module_link_libraries(ImportMdl ImportCore SimulinkConfiguration SimulinkCore
                       SimulinkAnnotation SimulinkLayout)
 add_subdirectory(test)

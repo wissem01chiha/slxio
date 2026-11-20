@@ -17,8 +17,16 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "ISimulinkBuilder.h"
 
 namespace slxio
 {
+    class SimulinkModelBuilder : public ISimulinkBuilder
+    {
+    public:
+        SimulinkModelBuilder() = default;
+        ~SimulinkModelBuilder() override = default;
 
+        BuildResult Build(const IDataObject& input) override;
+    };
 }; // namespace slxio

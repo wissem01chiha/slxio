@@ -24,7 +24,29 @@ namespace slxio
     {
         SimulinkFile Load(const fs::path& directory)
         {
-            return SimulinkFile();
+            SimulinkFile file;
+            file.m_coreProperties.load_file(
+                (directory / "metadata/coreProperties.xml").string().c_str());
+            file.m_mwcoreProperties.load_file(
+                (directory / "metadata/mwcoreProperties.xml").string().c_str());
+
+            file.m_graphicalInterface.load_file(
+                (directory / "simulink/graphicalInterface.xml").string().c_str());
+
+            file.m_mwcorePropertiesExtension.load_file(
+                (directory / "metadata/mwcorePropertiesExtension.xml").string().c_str());
+            file.m_configSetInfo.load_file(
+                (directory / "simulink/configSetInfo.xml").string().c_str());
+            file.m_blockdiagram.load_file(
+                (directory / "simulink/blockdiagram.xml").string().c_str());
+            file.m_modelDictionary.load_file(
+                (directory / "simulink/modelDictionary.xml").string().c_str());
+            file.m_bddefaults.load_file((directory / "simulink/bddefaults.xml").string().c_str());
+            file.m_scheduleEditor.load_file(
+                (directory / "simulink/scheduleEditor.xml").string().c_str());
+            file.m_scheduleCore.load_file(
+                (directory / "simulink/scheduleCore.xml").string().c_str());
+            return file;
         };
 
         std::string GetContentType(const SimulinkFile& file)
@@ -146,6 +168,21 @@ namespace slxio
             }
             return std::string();
         }
+
+        GraphicalInterfaceInfo GetGraphicalInterfaceInfo(const SimulinkFile& file)
+        {
+            if (file.m_coreProperties)
+            {
+                auto root = file.m_coreProperties.child("GraphicalInterface");
+                if (root)
+                {
+                    GraphicalInterfaceInfo info;
+
+                    return info;
+                }
+            }
+            return GraphicalInterfaceInfo();
+        }
     } // namespace
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file)
@@ -160,8 +197,15 @@ namespace slxio
         info.m_version = GetVersion(file);
         info.m_revision = GetRevision(file);
         info.m_modified = GetModified(file);
+        info.m_graphicalInterfaceInfo = GetGraphicalInterfaceInfo(file);
 
         return info;
+    }
+
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path)
+    {
+        SimulinkFile file = Import(path);
+        return GetInfo(file);
     }
 
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info)
@@ -169,9 +213,14 @@ namespace slxio
         return;
     }
 
-    SimulinkFile Import(const fs::path& file)
+    SimulinkFile Import(const fs::path& path)
     {
-        return SimulinkFile();
+        if (fs::is_directory(path))
+        {
+            return Load(path);
+        }
+        SimulinkFile file;
+        return file;
     }
 
     fs::path Flush(const SimulinkFile& file)

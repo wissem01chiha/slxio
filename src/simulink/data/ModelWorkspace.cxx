@@ -22,7 +22,7 @@
 
 namespace slxio
 {
-    std::shared_ptr<SimulinkParameter> ModelWorkspace::GetVariable(const std::string& name) const
+    ModelWorkspace::SimulinkParameterPtr ModelWorkspace::GetVariable(const std::string& name) const
     {
         if (name.empty())
         {
@@ -38,7 +38,7 @@ namespace slxio
     }
 
     ErrorCode ModelWorkspace::AssignVariable(const std::string& name,
-                                             const std::shared_ptr<SimulinkParameter>& p)
+                                             const ModelWorkspace::SimulinkParameterPtr& p)
     {
         if (!p)
         {

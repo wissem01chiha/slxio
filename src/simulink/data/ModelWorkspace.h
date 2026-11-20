@@ -17,7 +17,6 @@
 #pragma once
 
 #include "CommonPCH.h"
-#include "unordered_dense.h"
 #include "Error.h"
 
 namespace slxio
@@ -26,20 +25,18 @@ namespace slxio
     class SimulinkParameter;
     class SimulinkModel;
 
-    // Object to interact with a model workspace
-    // https://www.mathworks.com/help/simulink/slref/simulink.modelworkspace.html
     class ModelWorkspace final
     {
     public:
+        using SimulinkParameterPtr = std::shared_ptr<SimulinkParameter>;
+
         ModelWorkspace() = default;
 
-        ErrorCode AssignVariable(const std::string& name,
-                                 const std::shared_ptr<SimulinkParameter>& p);
-
+        ErrorCode AssignVariable(const std::string& name, const SimulinkParameterPtr& p);
         ErrorCode ClearVariable(const std::string& name);
         ErrorCode ClearAll();
 
-        std::shared_ptr<SimulinkParameter> GetVariable(const std::string& name) const;
+        SimulinkParameterPtr GetVariable(const std::string& name) const;
         std::shared_ptr<DataSourceType> GetDataSourceType() const;
         const std::string GetFileName();
         std::string GetMatlabCode();
@@ -51,7 +48,7 @@ namespace slxio
         std::string m_fileName;
         std::string m_matlabCode;
         std::shared_ptr<DataSourceType> m_dataSource = nullptr;
-        ankerl::unordered_dense::map<std::string, std::shared_ptr<SimulinkParameter>> m_variables;
+        ankerl::unordered_dense::map<std::string, SimulinkParameterPtr> m_variables;
     };
 
 }; // namespace slxio

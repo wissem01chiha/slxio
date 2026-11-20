@@ -100,6 +100,15 @@ advanced_configure_option(SLXIO_MAT "MATLAB MAT file support" OFF)
 # experimental and may be unstable.
 advanced_configure_option(SLXIO_MDL "Legacy Simulink format support" OFF)
 
+# Simulink Compatibilty related options for supported versions 
+advanced_configure_option(SIMULINK_COMPATIBILTY_2019 " " ON)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2020 " " OFF) 
+advanced_configure_option(SIMULINK_COMPATIBILTY_2021 " " OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2022 " " OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2023 " " OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2024 " " OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2025 " " OFF)
+
 # Build with HDF5 library support. Enables the internal HDF5 exporter and MAT
 # files with HDF5 via MATIO_WITH_HDF5.
 advanced_configure_option(SLXIO_HDF5 "Check for HDF5 library" OFF)

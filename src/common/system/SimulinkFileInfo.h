@@ -20,6 +20,26 @@
 
 namespace slxio
 {
+    struct GraphicalInterfaceInfo
+    {
+        std::string m_numRootInports;
+        std::string m_numRootOutports;
+        std::string m_parameterArgumentNames;
+        std::string m_numModelReferences;
+        std::string m_numTestPointedSignals;
+        std::string m_numProvidedFunctions;
+        std::string m_numRequiredFunctions;
+        std::string m_numResetEvents;
+        std::string m_hasInitializeEvent;
+        std::string m_hasTerminateEvent;
+        std::string m_preCompExecutionDomainType;
+        std::string m_isExportFunctionModel;
+        std::string m_isArchitectureModel;
+        std::string m_numParameterArguments;
+        std::string m_numExternalFileReferences;
+        std::string m_orderedModelArguments;
+    };
+
     /**
      * Metadata about a Simulink model file.
      * This struct provides access to basic file information
@@ -40,8 +60,11 @@ namespace slxio
         std::string m_contentTypeFriendlyName;
         std::string m_matlabRelease;
         std::string m_matlabVersion;
+
+        GraphicalInterfaceInfo m_graphicalInterfaceInfo;
     };
 
+    std::string ToString(const GraphicalInterfaceInfo& info);
     std::string ToString(const SimulinkFileInfo& info);
 
 }; // namespace slxio

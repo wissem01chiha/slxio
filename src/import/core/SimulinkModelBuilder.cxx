@@ -15,3 +15,13 @@
  */
 
 #include "SimulinkModelBuilder.h"
+
+namespace slxio
+{
+
+    BuildResult SimulinkModelBuilder::Build(const IDataObject& input)
+    {
+        // Implement the build logic here
+        return BuildResult{};
+    }
+} // namespace slxio

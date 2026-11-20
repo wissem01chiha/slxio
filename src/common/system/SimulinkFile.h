@@ -29,7 +29,7 @@ namespace slxio
      */
     struct SimulinkFile
     {
-        std::unique_ptr<pugi::xml_document> m_blockdiagram;
+        pugi::xml_document m_blockdiagram;
         pugi::xml_document m_modelDictionary;
         pugi::xml_document m_configSetInfo;
         pugi::xml_document m_bddefaults;
@@ -38,13 +38,16 @@ namespace slxio
         pugi::xml_document m_graphicalInterface;
         pugi::xml_document m_coreProperties;
         pugi::xml_document m_mwcoreProperties;
+        pugi::xml_document m_mwcorePropertiesExtension;
         std::vector<pugi::xml_document> m_configSets;
     };
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file);
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path);
+
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info);
 
-    SimulinkFile Import(const fs::path& file);
+    SimulinkFile Import(const fs::path& path);
     fs::path Flush(const SimulinkFile& file);
 
 }; // namespace slxio

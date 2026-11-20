@@ -26,12 +26,13 @@ namespace slxio
     {
     public:
         using SectionPtr = std::shared_ptr<MDLSection>;
+        using ParameterMap = ankerl::unordered_dense::map<std::string, std::string>;
 
         MDLSection() = default;
         MDLSection(std::string name, int lineNumber);
         MDLSection(std::string name,
                    const std::vector<SectionPtr>& sections,
-                   const std::unordered_map<std::string, std::string>& parameters,
+                   const ParameterMap& parameters,
                    int lineNumber);
 
         MDLSection* GetParentSection() const;
@@ -41,12 +42,12 @@ namespace slxio
         std::vector<MDLSection*> GetLeafSections(const std::string& name) const;
 
         int GetLineNumber() const;
-
         const std::string& GetName() const;
+
         std::string GetParameter(const std::string& name) const override;
         std::string GetParameter(const std::string& name, const std::string& defaultValue) const;
 
-        std::unordered_map<std::string, std::string> GetParameterMapRecursively() const;
+        ParameterMap GetParameterMapRecursively() const;
         std::vector<std::string> GetParameterNames() const override;
         std::vector<SectionPtr> GetSubSections() const;
         std::vector<SectionPtr> GetSubSections(const std::string& name) const;
@@ -57,17 +58,18 @@ namespace slxio
 
         std::string ToString() const;
 
-    private:
-        void AddSubSection(const SectionPtr& section);
-        void BuildParameterMapRecursively(std::unordered_map<std::string, std::string>& map,
-                                          const std::string& prefix) const;
-        void CollectLeafSections(const MDLSection* section, std::vector<MDLSection*>& result) const;
+        ~MDLSection() override = default;
 
-        std::string name_;
+    private:
+        std::string m_name;
         int m_lineNumber = 0;
-        MDLSection* parentSection_ = nullptr;
-        std::unordered_map<std::string, std::string> parameters_;
-        std::unordered_map<std::string, std::vector<SectionPtr>> subSections_;
+        MDLSection* m_parentSection = nullptr;
+        ParameterMap m_parameters;
+        ankerl::unordered_dense::map<std::string, std::vector<SectionPtr>> m_subSections;
+
+        void AddSubSection(const SectionPtr& section);
+        void BuildParameterMapRecursively(ParameterMap& map, const std::string& prefix) const;
+        void CollectLeafSections(const MDLSection* section, std::vector<MDLSection*>& result) const;
     };
 
 }; // namespace slxio

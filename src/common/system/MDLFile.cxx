@@ -21,18 +21,88 @@ namespace slxio
 {
     namespace
     {
-        MDLFile Load(const fs::path& directory)
-        {
-            return MDLFile();
-        };
 
+        std::string GetName(const MDLFile& file)
+        {
+            std::string content = file.m_content;
+            auto res = content.find("Name");
+            if (res != std::string::npos)
+            {
+                auto start = res + 4;
+                auto end = content.find_first_of("\r\n", start);
+                if (end != std::string::npos)
+                {
+                    std::string value = content.substr(start, end - start);
+                    auto first = value.find_first_not_of(" \t\"");
+                    auto last = value.find_last_not_of(" \t\"");
+                    if (first != std::string::npos)
+                    {
+                        return value.substr(first, last - first + 1);
+                    }
+                }
+            }
+            return std::string("");
+        }
+
+        std::string GetRevision(const MDLFile& file)
+        {
+            std::string content = file.m_content;
+            auto res = content.find("ComputedModelVersion");
+            if (res != std::string::npos)
+            {
+                auto start = res + std::string("ComputedModelVersion").length();
+                auto end = content.find_first_of("\r\n", start);
+                if (end != std::string::npos)
+                {
+                    std::string value = content.substr(start, end - start);
+                    auto first = value.find_first_not_of(" \t\"");
+                    auto last = value.find_last_not_of(" \t\"");
+                    if (first != std::string::npos)
+                    {
+                        return value.substr(first, last - first + 1);
+                    }
+                }
+            }
+            return std::string("");
+        }
+
+        std::string GetCreator(const MDLFile& file)
+        {
+            std::string content = file.m_content;
+            auto res = content.find("Creator");
+            if (res != std::string::npos)
+            {
+                auto start = res + std::string("Creator").length();
+                auto end = content.find_first_of("\r\n", start);
+                if (end != std::string::npos)
+                {
+                    std::string value = content.substr(start, end - start);
+                    auto first = value.find_first_not_of(" \t\"");
+                    auto last = value.find_last_not_of(" \t\"");
+                    if (first != std::string::npos)
+                    {
+                        return value.substr(first, last - first + 1);
+                    }
+                }
+            }
+            return std::string("");
+        }
     } // namespace
 
     SimulinkFileInfo GetInfo(const MDLFile& file)
     {
         SimulinkFileInfo info;
         info.m_extension = "mdl";
+        info.m_name = GetName(file);
+        info.m_revision = GetRevision(file);
+        info.m_creator = GetCreator(file);
         return info;
+    }
+
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path)
+    {
+        MDLFile file = Import(path);
+        return GetInfo(file);
     }
 
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info)
@@ -42,7 +112,7 @@ namespace slxio
 
     MDLFile Import(const fs::path& file)
     {
-        return Load(file);
+        return MDLFile();
     }
 
     fs::path Flush(const MDLFile& file)

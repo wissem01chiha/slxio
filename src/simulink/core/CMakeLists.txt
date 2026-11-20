@@ -32,7 +32,8 @@ add_module(
   ParameterizedElement.cxx
   SimulinkObject.cxx
   SimulinkArray.cxx
-  SimulinkLine.cxx)
+  SimulinkLine.cxx
+  SimulinkModelInfo.cxx)
 module_link_libraries(SimulinkCore CommonCore SimulinkMisc
                       SimulinkConfiguration SimulinkAnnotation)
 add_subdirectory(test)
