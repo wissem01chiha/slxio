@@ -2,20 +2,18 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Only the latest release receives security updates. Users of older releases
+should upgrade to the latest release to receive security fixes.
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+Please report vulnerabilities through
+[GitHub's private vulnerability reporting](https://github.com/wissem01chiha/slxio/security/advisories/new).
+This sends the report privately to the repository maintainers, including me.
+Please do not report security vulnerabilities in public issues.
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+I will acknowledge reports as soon as practical and keep the reporter informed
+as the issue is investigated. If the vulnerability is confirmed, I will work on
+a fix and coordinate disclosure after a security update is available. If it is
+not considered a vulnerability in slxio, I will explain the reasoning to the
+reporter.

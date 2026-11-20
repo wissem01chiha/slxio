@@ -4,15 +4,13 @@
         {
             "name": "Visual-Studio-Community-2022-Release-amd64",
             "displayName": "Visual-Studio-Community-2022-Release-amd64",
-            "description":
-                "Using compilers for Visual Studio 17 2022 (x64 architecture)",
+            "description": "Using compilers for Visual Studio 17 2022 (x64 architecture)",
             "generator": "Visual Studio 17 2022",
             "toolset": "host=x64",
             "architecture": "x64",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/build/install/${presetName}",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
                 "CMAKE_C_COMPILER": "cl.exe",
                 "CMAKE_CXX_COMPILER": "cl.exe"
             }
@@ -20,12 +18,10 @@
         {
             "name": "GCC-11.4.0-x86_64-linux-gnu",
             "displayName": "GCC-11.4.0-x86_64-linux-gnu",
-            "description":
-                "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/build/install/${presetName}",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
                 "CMAKE_C_COMPILER": "/usr/bin/gcc",
                 "CMAKE_CXX_COMPILER": "/usr/bin/g++",
                 "CMAKE_BUILD_TYPE": "Debug"
@@ -34,8 +30,7 @@
         {
             "name": "Clang-14.0.0-x86_64-pc-linux-gnu",
             "displayName": "Clang-14.0.0-x86_64-pc-linux-gnu",
-            "description":
-                "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
+            "description": "Using compilers: C = /usr/bin/clang, CXX = /usr/bin/clang++",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
@@ -47,15 +42,13 @@
         {
             "name": "Visual-Studio-Community-2022-Release-amd64_x86",
             "displayName": "Visual-Studio-Community-2022-Release-amd64_x86",
-            "description":
-                "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
+            "description": "Using compilers for Visual Studio 17 2022 (x64_x86 architecture)",
             "generator": "Visual Studio 17 2022",
             "toolset": "host=x64",
             "architecture": "x64",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/buil/install/${presetName}",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/buil/install/${presetName}",
                 "CMAKE_C_COMPILER": "cl.exe",
                 "CMAKE_CXX_COMPILER": "cl.exe"
             }
@@ -65,21 +58,21 @@
             "displayName": "GCC-15.3.0-x86_64-w64-mingw32",
             "description":
                 "Using compilers: C = C:\\mingw64\\bin\\gcc.exe, CXX = C:\\mingw64\\bin\\g++.exe",
-            "generator": "MinGW Makefiles",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/build/install/${presetName}",
-                "CMAKE_C_COMPILER": "C:/mingw64/bin/gcc.exe",
-                "CMAKE_CXX_COMPILER": "C:/mingw64/bin/g++.exe",
+                "CMAKE_MAKE_PROGRAM": "C:\\Users\\wissemc\\ninja\\ninja.exe",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
         {
             "name": "GCC-13.3.0-x86_64-linux-gnu",
             "displayName": "GCC-13.3.0-x86_64-linux-gnu",
-            "description":
-                "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "generator": "Ninja",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
                 "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
@@ -95,12 +88,9 @@
                 "Using compilers: C = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\gcc.exe, CXX = C:\\Users\\chiha.000\\Downloads\\gcc-15.2.0\\bin\\g++.exe",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/build/install/${presetName}",
-                "CMAKE_C_COMPILER":
-                    "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/gcc.exe",
-                "CMAKE_CXX_COMPILER":
-                    "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/g++.exe",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/Users/chiha.000/Downloads/gcc-15.2.0/bin/g++.exe",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         },
@@ -111,10 +101,50 @@
                 "Using compilers: C = C:\\Tools\\c\\bin\\gcc.exe, CXX = C:\\Tools\\c\\bin\\g++.exe",
             "binaryDir": "${sourceDir}/build/${presetName}",
             "cacheVariables": {
-                "CMAKE_INSTALL_PREFIX":
-                    "${sourceDir}/build/install/${presetName}",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
                 "CMAKE_C_COMPILER": "C:/Tools/c/bin/gcc.exe",
                 "CMAKE_CXX_COMPILER": "C:/Tools/c/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "clang-windows-llvm",
+            "displayName": "Clang 20.1.0 x86_64-pc-windows-msvc",
+            "description":
+                "Using compilers: C = C:\\Program Files\\LLVM\\bin\\clang.exe, CXX = C:\\Program Files\\LLVM\\bin\\clang++.exe",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/Program Files/LLVM/bin/clang.exe",
+                "CMAKE_CXX_COMPILER": "C:/Program Files/LLVM/bin/clang++.exe",
+                "CMAKE_RC_COMPILER": "C:/Program Files/LLVM/bin/llvm-rc.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "GCC 10.3.0 x86_64-w64-mingw32",
+            "displayName": "GCC 10.3.0 x86_64-w64-mingw32",
+            "description":
+                "Using compilers: C = C:\\TDM-GCC-64\\bin\\gcc.exe, CXX = C:\\TDM-GCC-64\\bin\\g++.exe",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/build/install/${presetName}",
+                "CMAKE_C_COMPILER": "C:/TDM-GCC-64/bin/gcc.exe",
+                "CMAKE_CXX_COMPILER": "C:/TDM-GCC-64/bin/g++.exe",
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "GCC 15.2.0 x86_64-alpine-linux-musl",
+            "displayName": "GCC 15.2.0 x86_64-alpine-linux-musl",
+            "description": "Using compilers: C = /usr/bin/gcc, CXX = /usr/bin/g++",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "CMAKE_C_COMPILER": "/usr/bin/gcc",
+                "CMAKE_CXX_COMPILER": "/usr/bin/g++",
                 "CMAKE_BUILD_TYPE": "Debug"
             }
         }
@@ -134,15 +164,13 @@
         },
         {
             "name": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
-            "displayName":
-                "Visual-Studio-Community-2022-Release-amd64_x86-debug",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64_x86-debug",
             "configurePreset": "Visual-Studio-Community-2022-Release-amd64_x86",
             "configuration": "Debug"
         },
         {
             "name": "Visual-Studio-Community-2022-Release-amd64_x86-release",
-            "displayName":
-                "Visual-Studio-Community-2022-Release-amd64_x86-release",
+            "displayName": "Visual-Studio-Community-2022-Release-amd64_x86-release",
             "configurePreset": "Visual-Studio-Community-2022-Release-amd64_x86",
             "configuration": "Release"
         }

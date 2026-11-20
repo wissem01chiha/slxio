@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sltp_editor version="1.1" packageUris="http://schema.mathworks.com/mf0/DiagramEditor/R2019a_20181107 http://schema.mathworks.com/mf0/SltpSyntax/R2019b_201903011129">
+  <diagram.editor.model.Diagram type="diagram.editor.model.Diagram" uuid="4794d675-027c-44ed-97d1-ab66dda7fa89">
+    <syntaxElement type="sltp.mm.syntax.Graph" uuid="4c12dc7d-68c4-4bdf-b4fc-2118c264d551"/>
+    <title>Default</title>
+    <type>graph.Graph</type>
+  </diagram.editor.model.Diagram>
+  <sltp.mm.syntax.Context type="sltp.mm.syntax.Context" uuid="db6de2b1-d9db-4569-8f3a-43a55977e8bc">
+    <rootGraph type="sltp.mm.syntax.Graph" uuid="4c12dc7d-68c4-4bdf-b4fc-2118c264d551">
+      <priorityDirection>HighNumberFirst</priorityDirection>
+      <title>Default</title>
+      <diagramElement type="diagram.editor.model.Diagram" uuid="4794d675-027c-44ed-97d1-ab66dda7fa89"/>
+    </rootGraph>
+  </sltp.mm.syntax.Context>
+</sltp_editor>

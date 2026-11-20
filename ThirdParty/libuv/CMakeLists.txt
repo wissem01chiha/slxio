@@ -1,1 +1,0 @@
-add_third_party(uv_a)

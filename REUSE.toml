@@ -1,0 +1,119 @@
+version = 1
+
+[[annotations]]
+path = [
+  ".github/**",
+  ".gitattributes",
+  ".gitignore",
+  ".clang-format",
+  ".codacy.yml",
+  ".gitmodules",
+  ".pre-commit-config.yaml",
+  "*.md",
+  "*.txt",
+  "*.yml",
+  "*.yaml",
+  "*.json",
+  "*.toml",
+  "*.in",
+  "cmake/**",
+  "conan/**",
+  "documentation/**",
+  "examples/**",
+  "python/**",
+  "regress/**",
+  "test/**",
+  "tools/**",
+  "CTestConfig.cmake",
+  "vendor/CMakeLists.txt",
+  "vendor/*/CMakeLists.txt",
+  "vendor/*/*.h",
+  "vendor/*/update.sh",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2026 wissem01chiha"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2026 wissem01chiha"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = "vendor/cxxopts/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2014-2022 Jarryd Beck"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/cxxopts/src/test/catch.hpp"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2024 Two Blue Cubes Ltd."
+SPDX-License-Identifier = "BSL-1.0"
+
+[[annotations]]
+path = "vendor/doctest/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2016-2023 Viktor Kirilov"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/libzip/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (C) 1999-2020 Dieter Baron and Thomas Klausner"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
+path = "vendor/nanobind/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2022 Wenzel Jakob"
+SPDX-License-Identifier = "BSD-3-Clause"
+
+[[annotations]]
+path = "vendor/pugixml/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2006-2026 Arseny Kapoulkine"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/spdlog/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2016-present Gabi Melman and spdlog contributors"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/unordered_dense/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2022 Martin Leitner-Ankerl"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/yyjson/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2020 YaoYuan"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = "vendor/zlib/src/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 1995-2026 Jean-loup Gailly and Mark Adler"
+SPDX-License-Identifier = "Zlib"
+
+[[annotations]]
+path = "vendor/zlib/src/contrib/dotzlib/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2004 Henrik Ravn"
+SPDX-License-Identifier = "BSL-1.0"
+
+[[annotations]]
+path = "vendor/zlib/src/contrib/dotzlib/LICENSE_1_0.txt"
+precedence = "closest"
+SPDX-FileCopyrightText = "NONE"
+SPDX-License-Identifier = "BSL-1.0"
+
+[[annotations]]
+path = "vendor/zlib/src/contrib/minizip/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 1990-2009 Info-ZIP"
+SPDX-License-Identifier = "Info-ZIP"

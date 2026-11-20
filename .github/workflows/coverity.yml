@@ -1,0 +1,114 @@
+name: Coverity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, develop]
+    paths:
+      - "src/**"
+      - "vendor/**"
+      - "cmake/**"
+      - CMakeLists.txt
+      - VERSION.txt
+      - .github/workflows/coverity.yml
+
+permissions: 
+  contents: read
+
+env:
+  COVERITY_PROJECT: "wissem01chiha/slxio"
+
+jobs:
+  coverity-cpp-code-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2.21.1
+        with:
+          egress-policy: audit 
+
+      - name: Checkout Github code
+        uses: actions/checkout@v6
+
+      - name: Install scan tooling
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq build-essential cmake curl file
+
+      - name: Configure CMake
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DSLXIO_TESTS=OFF -DSLXIO_MDL=ON
+
+      - name: URL encode Coverity project name
+        id: coverity-project
+        shell: bash
+        run: |
+          project="${COVERITY_PROJECT//\//%2F}"
+          project="${project// /%20}"
+          echo "project=${project}" >> "$GITHUB_OUTPUT"
+
+      - name: Lookup Coverity Build Tool hash
+        id: coverity-cache-lookup
+        shell: bash
+        env:
+          TOKEN: ${{secrets.COVERITY_SCAN_TOKEN}}
+        run: |
+          response_file="$(mktemp)"
+          http_code=$(curl --silent --show-error --location \
+            --output "$response_file" \
+            --write-out "%{http_code}" \
+            https://scan.coverity.com/download/cxx/linux64 \
+            --data "token=${TOKEN}&project=${{ steps.coverity-project.outputs.project }}&md5=1")
+          hash="$(tr -d '\r\n' < "$response_file")"
+
+          if [[ "$http_code" != "200" || ! "$hash" =~ ^[0-9a-fA-F]{32}$ ]]; then
+            echo "::error::Coverity build tool hash lookup failed (HTTP ${http_code}). Check COVERITY_SCAN_TOKEN and the Coverity project registration for ${COVERITY_PROJECT}."
+            head -c 1000 "$response_file" | sed 's/^/Coverity response: /'
+            exit 1
+          fi
+
+          echo "hash=${hash}" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Coverity Build Tool
+        id: cov-build-cache
+        uses: actions/cache@v6.1.0
+        with:
+          path: build/cov-analysis
+          key: cov-build-cxx-linux64-${{steps.coverity-cache-lookup.outputs.hash}}
+
+      - name: Download Coverity Build Tool
+        if: steps.cov-build-cache.outputs.cache-hit != 'true'
+        working-directory: build
+        env:
+          TOKEN: ${{ secrets.COVERITY_SCAN_TOKEN }}
+        run: |
+          curl --fail --silent --show-error --location \
+            --output cov-analysis.tar.gz \
+            https://scan.coverity.com/download/cxx/linux64 \
+            --data "token=${TOKEN}&project=${{steps.coverity-project.outputs.project}}"
+          mkdir cov-analysis
+          tar -xzf cov-analysis.tar.gz --strip 1 -C cov-analysis
+          test -x cov-analysis/bin/cov-build
+
+      - name: Build with cov-build
+        working-directory: build
+        run: |
+          export PATH="${PWD}/cov-analysis/bin:${PATH}"
+          cov-build --dir cov-int cmake --build . --parallel 2
+
+      - name: Archive Coverity results
+        working-directory: build
+        run: tar -czf cov-int.tgz cov-int
+
+      - name: Submit Coverity results
+        working-directory: build
+        env:
+          TOKEN: ${{secrets.COVERITY_SCAN_TOKEN}}
+        run: |
+          curl --fail --silent --show-error \
+            --form token="${TOKEN}" \
+            --form email="${{secrets.COVERITY_SCAN_EMAIL}}" \
+            --form file=@cov-int.tgz \
+            --form version="$(tr -d '\r\n' < ../VERSION.txt)" \
+            --form description="coverity-scan-action ${{github.repository}} / ${{github.ref}}" \
+            "https://scan.coverity.com/builds?project=${{steps.coverity-project.outputs.project}}"

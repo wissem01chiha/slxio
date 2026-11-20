@@ -1,3 +1,0 @@
-set(SPDLOG_BUILD_TESTS ${SLXIO_BUILD_THIRDPARTY_TESTING})
-
-add_third_party(spdlog)

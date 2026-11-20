@@ -1,5 +1,4 @@
 ---
 exclude_paths:
-  - "ThirdParty/**"
-  - "Testing/**"
-  - "Interaction/**"
+  - "extern/**"
+  - "**/test/**"

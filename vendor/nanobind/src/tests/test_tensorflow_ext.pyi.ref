@@ -1,0 +1,8 @@
+from typing import Annotated
+
+import tensorflow
+
+
+def destruct_count() -> int: ...
+
+def ret_tensorflow() -> Annotated[tensorflow.Tensor, dict(dtype='float32', shape=(2, 4))]: ...

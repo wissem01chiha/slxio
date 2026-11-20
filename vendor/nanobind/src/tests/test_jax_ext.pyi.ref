@@ -1,0 +1,8 @@
+from typing import Annotated
+
+import jax
+
+
+def destruct_count() -> int: ...
+
+def ret_jax() -> Annotated[jax.Array, dict(dtype='float32', shape=(2, 4))]: ...

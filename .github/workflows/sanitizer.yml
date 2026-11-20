@@ -3,36 +3,39 @@ name: Sanitizer
 on:
   push:
   pull_request:
-  workflow_call:
-  workflow_dispatch:
 
 jobs:
   cmake:
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 80
+    timeout-minutes: 90
     strategy:
       fail-fast: false
       matrix:
         include:
-          - name: GCC UBSan
+          - name: GCC UndefinedBehaviorSanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_UBSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON -DSLXIO_UBSAN=ON
 
-          - name: GCC ASan
+          - name: GCC AddressSanitizer 
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_ASAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON -DSLXIO_ASAN=ON
 
-          - name: GCC TSan
+          - name: GCC ThreadSanitizer
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
-            cmake-args: -DCMAKE_CXX_STANDARD=14 -DSLXIO_TSAN=ON
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON  -DSLXIO_TSAN=ON
 
+          - name: GCC MemorySanitizer
+            os: ubuntu-latest
+            compiler: gcc
+            cxx-compiler: g++
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_SANITIZERS=ON  -DSLXIO_MSAN=ON
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -41,22 +44,19 @@ jobs:
         if: ${{ matrix.packages }}
         run: sudo apt-get update && sudo apt-get install -y ${{ join(matrix.packages, ' ') }}
 
+      - name: Install ninja-build
+        run: sudo apt install ninja-build
+
       - name: Configure
-        run: cmake -S . -B build ${{ matrix.cmake-args }}
+        run: cmake -G  Ninja -S . -B build ${{ matrix.cmake-args }}
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}
           CFLAGS: ${{ matrix.cflags }}
 
-      - name: Build
+      - name: Compile
         run: cmake --build build
 
-      - name: Upload Build Folder
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-${{ matrix.name }}
-          path: build/
-
       - name: Test
-        run: ctest --output-on-failure --max-width 150
+        run: ctest -j "$(nproc)" --output-on-failure --max-width 150
         working-directory: build

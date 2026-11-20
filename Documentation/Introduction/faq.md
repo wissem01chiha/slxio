@@ -1,1 +1,0 @@
-@page Faq Frequently Asked Questions
