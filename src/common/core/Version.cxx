@@ -22,26 +22,26 @@ namespace slxio
 
     uint32_t Version::GetMajorVersion()
     {
-        return (uint32_t)SLXIO_VERSION_MAJOR;
+        return (uint32_t)VERSION_MAJOR;
     }
 
     uint32_t Version::GetMinorVersion()
     {
-        return (uint32_t)SLXIO_VERSION_MINOR;
+        return (uint32_t)VERSION_MINOR;
     }
 
     uint32_t Version::GetPatchVersion()
     {
-        return (uint32_t)SLXIO_VERSION_PATCH;
+        return (uint32_t)VERSION_PATCH;
     }
     bool Version::IsMajorVersionLessThan(uint32_t version)
     {
-        return SLXIO_VERSION_MAJOR < version;
+        return VERSION_MAJOR < version;
     }
 
     bool Version::IsMinorVersionLessThan(uint32_t version)
     {
-        return SLXIO_VERSION_MINOR < version;
+        return VERSION_MINOR < version;
     }
 
     std::string Version::GetVersionString()

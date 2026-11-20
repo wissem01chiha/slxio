@@ -18,6 +18,7 @@
 
 #include <pugixml.h>
 #include "CommonPCH.h"
+#include "Config.h"
 
 namespace slxio
 {
@@ -35,7 +36,10 @@ namespace slxio
         pugi::xml_document m_bddefaults;
         pugi::xml_document m_scheduleEditor;
         pugi::xml_document m_scheduleCore;
+#if SIMULINK_COMPATIBILTY_2024
+#else
         pugi::xml_document m_graphicalInterface;
+#endif
         pugi::xml_document m_coreProperties;
         pugi::xml_document m_mwcoreProperties;
         pugi::xml_document m_mwcorePropertiesExtension;

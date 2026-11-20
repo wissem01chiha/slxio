@@ -29,9 +29,12 @@ namespace slxio
                 (directory / "metadata/coreProperties.xml").string().c_str());
             file.m_mwcoreProperties.load_file(
                 (directory / "metadata/mwcoreProperties.xml").string().c_str());
-
+#if SIMULINK_COMPATIBILTY_2024
+#else
             file.m_graphicalInterface.load_file(
                 (directory / "simulink/graphicalInterface.xml").string().c_str());
+
+#endif
 
             file.m_mwcorePropertiesExtension.load_file(
                 (directory / "metadata/mwcorePropertiesExtension.xml").string().c_str());

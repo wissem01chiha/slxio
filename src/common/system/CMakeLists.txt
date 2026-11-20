@@ -15,7 +15,7 @@
 add_module(
   CommonSystem
   Tempdir.cxx
-  Filesystem.cxx
+  FileUtils.cxx
   SimulinkFile.cxx
   SimulinkFileInfo.cxx)
 if(SLXIO_MDL)
@@ -25,6 +25,9 @@ if(SLXIO_MDL)
     MDLFile.cxx)
 endif()
 module_link_libraries(CommonSystem CommonCore pugixml)
+if(SIMULINK_COMPATIBILTY_2024)
+  module_link_libraries(CommonSystem yyjson)
+endif()
 module_include_directories(CommonSystem ${PROJECT_EXTERN_SOURCE_DIR}/doctest
                            ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)
 add_subdirectory(test)
