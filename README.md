@@ -11,6 +11,7 @@ SLXIO – SIMULINK SLX File I/O Library
 [![CodeQL](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/codeql.yml)
 [![Build status](https://ci.appveyor.com/api/projects/status/40jlbucsjjxehn76?svg=true)](https://ci.appveyor.com/project/wissem01chiha/SLXIO)
 [![Sanitizer](https://github.com/wissem01chiha/slxio/actions/workflows/sanitizer.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/sanitizer.yml)
+[![Regress](https://github.com/wissem01chiha/slxio/actions/workflows/regress.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/regress.yml)
 ![GitHub License](https://img.shields.io/github/license/wissem01chiha/slxio)
 [![Release](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml/badge.svg)](https://github.com/wissem01chiha/slxio/actions/workflows/release.yml)
 [![Coverage Status](https://coveralls.io/repos/github/wissem01chiha/slxio/badge.svg?branch=develop)](https://coveralls.io/github/wissem01chiha/slxio?branch=develop)
