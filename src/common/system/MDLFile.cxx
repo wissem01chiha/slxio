@@ -99,12 +99,6 @@ namespace slxio
         return info;
     }
 
-    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec)
-    {
-        MDLFile file = Import(path, ec);
-        return GetInfo(file);
-    }
-
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info)
     {
         return;

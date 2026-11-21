@@ -50,13 +50,29 @@ namespace slxio
         case ErrorCode::InvalidSimulinkBlock:
             return "a nullptr simulink block object passed";
         case ErrorCode::LoadGraphicalInterfaceFail:
-            return "failed to load graphicalInterface data file";
+            return "failed to load graphicalInterface file";
         case ErrorCode::LoadCorePropertiesFail:
             return "failed to load core properties";
         case ErrorCode::FileSystemError:
             return "file system error";
         case ErrorCode::InvalidDataType:
             return "invalid data type";
+        case ErrorCode::LoadMwCorePropertiesFail:
+            return "failed to load mwcoreProperties.xml";
+        case ErrorCode::LoadMwCorePropertiesExtensionFail:
+            return "failed to load mwcorePropertiesExtension.xml";
+        case ErrorCode::LoadConfigSetInfoFail:
+            return "failed to load configSetInfo.xml";
+        case ErrorCode::LoadBlockDiagramFail:
+            return "failed to load blockdiagram.xml";
+        case ErrorCode::LoadModelDictionaryFail:
+            return "failed to load modelDictionary.xml";
+        case ErrorCode::LoadBdDefaultsFail:
+            return "failed to load bddefaults.xml";
+        case ErrorCode::LoadScheduleEditorFail:
+            return "failed to load scheduleEditor.xml";
+        case ErrorCode::LoadScheduleCoreFail:
+            return "failed to load scheduleCore.xml";
         case ErrorCode::NotImplemented:
             return "operation is not implemented";
         default:

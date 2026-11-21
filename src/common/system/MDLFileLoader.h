@@ -23,11 +23,12 @@ namespace slxio
 {
     struct MDLFile;
 
-    /// Load a Simulink model from an extracted directory.
+    /// Load a Simulink mdl model from a file path.
     class MDLFileLoader
     {
     public:
-        static MDLFile Load(const fs::path& directory, ErrorCode& ec);
+        static MDLFile Load(const fs::path& path, ErrorCode& ec);
+        static SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     private:
         static ErrorCode LoadGraphicalInterface(MDLFile& file, const fs::path& directory);

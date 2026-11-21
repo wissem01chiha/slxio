@@ -13,6 +13,7 @@ namespace slxio
         ErrorCode ec = ErrorCode::Ok;
         const SimulinkFile file = SimulinkFileLoader::Load("data/2019b/CAP", ec);
         CHECK(ec == ErrorCode::Ok);
+        INFO(make_error_code(ec).message());
         REQUIRE(file.m_coreProperties);
         REQUIRE(file.m_mwcoreProperties);
         REQUIRE(file.m_graphicalInterface);

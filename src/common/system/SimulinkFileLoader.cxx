@@ -157,7 +157,7 @@ namespace slxio
 
     ErrorCode SimulinkFileLoader::LoadScheduleEditor(SimulinkFile& file, const fs::path& directory)
     {
-        const auto path = directory / "simulink/scheduleEditor.xml";
+        const auto path = directory / "simulink/ScheduleEditor.xml";
 
         if (!fs::exists(path))
         {
@@ -170,7 +170,7 @@ namespace slxio
 
     ErrorCode SimulinkFileLoader::LoadScheduleCore(SimulinkFile& file, const fs::path& directory)
     {
-        const auto path = directory / "simulink/scheduleCore.xml";
+        const auto path = directory / "simulink/ScheduleCore.xml";
 
         if (!fs::exists(path))
         {

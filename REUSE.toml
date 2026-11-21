@@ -41,6 +41,12 @@ SPDX-FileCopyrightText = "Copyright (c) 2026 wissem01chiha"
 SPDX-License-Identifier = "Apache-2.0"
 
 [[annotations]]
+path = "include/**"
+precedence = "closest"
+SPDX-FileCopyrightText = "Copyright (c) 2026 wissem01chiha"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
 path = "vendor/cxxopts/src/**"
 precedence = "closest"
 SPDX-FileCopyrightText = "Copyright (c) 2014-2022 Jarryd Beck"

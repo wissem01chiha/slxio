@@ -25,13 +25,10 @@ namespace slxio
     enum class ErrorCode : uint32_t
     {
         Ok = 0,
-
         FileSystemError,
-
         InvalidArgument,
         InvalidDataType,
         NotImplemented,
-
         InvalidSimulinkBlock,
         InvalidConfigSet,
         LoadGraphicalInterfaceFail,
@@ -44,11 +41,9 @@ namespace slxio
         LoadBdDefaultsFail,
         LoadScheduleEditorFail,
         LoadScheduleCoreFail,
-
         ParameterNotFound,
         InvalidParameterName,
         InvalidParameter,
-
         BlockAlreadyExists,
     };
 

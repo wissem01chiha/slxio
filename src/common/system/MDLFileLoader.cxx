@@ -20,7 +20,7 @@
 
 namespace slxio
 {
-    MDLFile MDLFileLoader::Load(const fs::path& directory, ErrorCode& ec)
+    MDLFile MDLFileLoader::Load(const fs::path& path, ErrorCode& ec)
     {
         return MDLFile();
     }

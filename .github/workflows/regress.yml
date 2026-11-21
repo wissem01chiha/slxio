@@ -13,43 +13,43 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2019=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2019=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=ON -DSIMULINK_COMPATIBILTY_2020=OFF -DSIMULINK_COMPATIBILTY_2021=OFF -DSIMULINK_COMPATIBILTY_2022=OFF -DSIMULINK_COMPATIBILTY_2023=OFF -DSIMULINK_COMPATIBILTY_2024=OFF -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2020=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2020=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=OFF -DSIMULINK_COMPATIBILTY_2020=ON -DSIMULINK_COMPATIBILTY_2021=OFF -DSIMULINK_COMPATIBILTY_2022=OFF -DSIMULINK_COMPATIBILTY_2023=OFF -DSIMULINK_COMPATIBILTY_2024=OFF -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2021=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2021=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=OFF -DSIMULINK_COMPATIBILTY_2020=OFF -DSIMULINK_COMPATIBILTY_2021=ON -DSIMULINK_COMPATIBILTY_2022=OFF -DSIMULINK_COMPATIBILTY_2023=OFF -DSIMULINK_COMPATIBILTY_2024=OFF -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2022=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2022=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=OFF -DSIMULINK_COMPATIBILTY_2020=OFF -DSIMULINK_COMPATIBILTY_2021=OFF -DSIMULINK_COMPATIBILTY_2022=ON -DSIMULINK_COMPATIBILTY_2023=OFF -DSIMULINK_COMPATIBILTY_2024=OFF -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2023=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2023=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=OFF -DSIMULINK_COMPATIBILTY_2020=OFF -DSIMULINK_COMPATIBILTY_2021=OFF -DSIMULINK_COMPATIBILTY_2022=OFF -DSIMULINK_COMPATIBILTY_2023=ON -DSIMULINK_COMPATIBILTY_2024=OFF -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2024=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2024=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
             cmake-args: -DCMAKE_CXX_STANDARD=17 -DSIMULINK_COMPATIBILTY_2019=OFF -DSIMULINK_COMPATIBILTY_2020=OFF -DSIMULINK_COMPATIBILTY_2021=OFF -DSIMULINK_COMPATIBILTY_2022=OFF -DSIMULINK_COMPATIBILTY_2023=OFF -DSIMULINK_COMPATIBILTY_2024=ON -DSIMULINK_COMPATIBILTY_2025=OFF
 
-          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2025=ON)
+          - name: Ubuntu GNU GCC (SIMULINK_COMPATIBILTY_2025=ON,SLXIO_MDL=ON)
             os: ubuntu-latest
             compiler: gcc
             cxx-compiler: g++
@@ -67,7 +67,7 @@ jobs:
         run: sudo apt install ninja-build
 
       - name: Configure
-        run: cmake -G Ninja -S . -B build ${{ matrix.cmake-args }} -DSLXIO_TESTS=ON
+        run: cmake -G Ninja -S . -B build ${{ matrix.cmake-args }} -DSLXIO_TESTS=ON -DSLXIO_MDL=ON
         env:
           CC: ${{ matrix.compiler }}
           CXX: ${{ matrix.cxx-compiler }}
