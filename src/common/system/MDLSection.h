@@ -21,7 +21,7 @@
 namespace slxio
 {
 
-    class MDLSection final 
+    class MDLSection final
     {
     public:
         using SectionPtr = std::shared_ptr<MDLSection>;
@@ -57,7 +57,7 @@ namespace slxio
 
         std::string ToString() const;
 
-        ~MDLSection()  = default;
+        ~MDLSection() = default;
 
     private:
         std::string m_name;

@@ -18,165 +18,170 @@
 #include "SimulinkFile.h"
 #include "Config.h"
 
-#define RETURN_IF_FAILED(expr) \
-    if ((ec = (expr)) != ErrorCode::Ok) return file
+#define RETURN_IF_FAILED(expr)                                                                     \
+    if ((ec = (expr)) != ErrorCode::Ok)                                                            \
+    return file
 
 namespace slxio
 {
 
 #if SIMULINK_COMPATIBILTY_2024
 
-        ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file, const fs::path& directory)
+    ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
+                                                         const fs::path& directory)
+    {
+        const std::string path = (directory / "simulink/graphicalInterface.json").string();
+        if (!fs::exists(path))
         {
-            const std::string path = (directory / "simulink/graphicalInterface.json").string();
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadGraphicalInterfaceFail;
-            }
-            yyjson_read_err err{};
-            yyjson_read_flag flg = YYJSON_READ_ALLOW_COMMENTS | YYJSON_READ_ALLOW_TRAILING_COMMAS;
-            file.m_graphicalInterface = yyjson_read_file(path.c_str(), flg, nullptr, &err);
-            if (!file.m_graphicalInterface)
-            {
-                return ErrorCode::LoadGraphicalInterfaceFail;
-            }
-             return ErrorCode::Ok;
+            return ErrorCode::LoadGraphicalInterfaceFail;
         }
+        yyjson_read_err err{};
+        yyjson_read_flag flg = YYJSON_READ_ALLOW_COMMENTS | YYJSON_READ_ALLOW_TRAILING_COMMAS;
+        file.m_graphicalInterface = yyjson_read_file(path.c_str(), flg, nullptr, &err);
+        if (!file.m_graphicalInterface)
+        {
+            return ErrorCode::LoadGraphicalInterfaceFail;
+        }
+        return ErrorCode::Ok;
+    }
 #else
-        ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file, const fs::path& directory)
+    ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
+                                                         const fs::path& directory)
+    {
+        const std::string path = (directory / "simulink/graphicalInterface.xml").string();
+        if (!fs::exists(path))
         {
-            const std::string path = (directory / "simulink/graphicalInterface.xml").string();
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadGraphicalInterfaceFail;
-            }
-            auto result = file.m_graphicalInterface.load_file(path.c_str());
-             if (!result)
-            {
-                return ErrorCode::LoadGraphicalInterfaceFail;
-            }
-            return ErrorCode::Ok;
+            return ErrorCode::LoadGraphicalInterfaceFail;
         }
-#endif 
-
-        ErrorCode SimulinkFileLoader::LoadCoreProperties(SimulinkFile& file, const fs::path& directory)
+        auto result = file.m_graphicalInterface.load_file(path.c_str());
+        if (!result)
         {
-            const auto path = directory / "metadata/coreProperties.xml";
+            return ErrorCode::LoadGraphicalInterfaceFail;
+        }
+        return ErrorCode::Ok;
+    }
+#endif
 
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadCorePropertiesFail;
-            }
+    ErrorCode SimulinkFileLoader::LoadCoreProperties(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "metadata/coreProperties.xml";
 
-            file.m_coreProperties.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+        if (!fs::exists(path))
+        {
+            return ErrorCode::LoadCorePropertiesFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadMwCoreProperties(SimulinkFile& file, const fs::path& directory)
+        file.m_coreProperties.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadMwCoreProperties(SimulinkFile& file,
+                                                       const fs::path& directory)
+    {
+        const auto path = directory / "metadata/mwcoreProperties.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "metadata/mwcoreProperties.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadMwCorePropertiesFail;
-            }
-
-            file.m_mwcoreProperties.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadMwCorePropertiesFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadMwCorePropertiesExtension(SimulinkFile& file, const fs::path& directory)
+        file.m_mwcoreProperties.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadMwCorePropertiesExtension(SimulinkFile& file,
+                                                                const fs::path& directory)
+    {
+        const auto path = directory / "metadata/mwcorePropertiesExtension.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "metadata/mwcorePropertiesExtension.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadMwCorePropertiesExtensionFail;
-            }
-
-            file.m_mwcorePropertiesExtension.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadMwCorePropertiesExtensionFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadConfigSetInfo(SimulinkFile& file, const fs::path& directory)
+        file.m_mwcorePropertiesExtension.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadConfigSetInfo(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/configSetInfo.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/configSetInfo.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadConfigSetInfoFail;
-            }
-
-            file.m_configSetInfo.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadConfigSetInfoFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadBlockDiagram(SimulinkFile& file, const fs::path& directory)
+        file.m_configSetInfo.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadBlockDiagram(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/blockdiagram.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/blockdiagram.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadBlockDiagramFail;
-            }
-
-            file.m_blockdiagram.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadBlockDiagramFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadModelDictionary(SimulinkFile& file, const fs::path& directory)
+        file.m_blockdiagram.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadModelDictionary(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/modelDictionary.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/modelDictionary.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadModelDictionaryFail;
-            }
-
-            file.m_modelDictionary.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadModelDictionaryFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadBdDefaults(SimulinkFile& file, const fs::path& directory)
+        file.m_modelDictionary.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadBdDefaults(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/bddefaults.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/bddefaults.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadBdDefaultsFail;
-            }
-
-            file.m_bddefaults.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadBdDefaultsFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadScheduleEditor(SimulinkFile& file, const fs::path& directory)
+        file.m_bddefaults.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadScheduleEditor(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/scheduleEditor.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/scheduleEditor.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadScheduleEditorFail;
-            }
-
-            file.m_scheduleEditor.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadScheduleEditorFail;
         }
 
-        ErrorCode SimulinkFileLoader::LoadScheduleCore(SimulinkFile& file, const fs::path& directory)
+        file.m_scheduleEditor.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileLoader::LoadScheduleCore(SimulinkFile& file, const fs::path& directory)
+    {
+        const auto path = directory / "simulink/scheduleCore.xml";
+
+        if (!fs::exists(path))
         {
-            const auto path = directory / "simulink/scheduleCore.xml";
-
-            if (!fs::exists(path))
-            {
-                return ErrorCode::LoadScheduleCoreFail;
-            }
-
-            file.m_scheduleCore.load_file(path.string().c_str());
-            return ErrorCode::Ok;
+            return ErrorCode::LoadScheduleCoreFail;
         }
 
-   SimulinkFile SimulinkFileLoader::Load(const fs::path& directory, ErrorCode& ec)
+        file.m_scheduleCore.load_file(path.string().c_str());
+        return ErrorCode::Ok;
+    }
+
+    SimulinkFile SimulinkFileLoader::Load(const fs::path& directory, ErrorCode& ec)
     {
         SimulinkFile file;
 

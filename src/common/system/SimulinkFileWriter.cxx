@@ -25,57 +25,61 @@ namespace slxio
     }
 
     ErrorCode SimulinkFileWriter::SaveGraphicalInterface(const SimulinkFile& file,
-                                                     const fs::path& directory)
+                                                         const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
     ErrorCode SimulinkFileWriter::SaveCoreProperties(const SimulinkFile& file,
-                                                 const fs::path& directory)
+                                                     const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
     ErrorCode SimulinkFileWriter::SaveMwCoreProperties(const SimulinkFile& file,
-                                                   const fs::path& directory)
+                                                       const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
     ErrorCode SimulinkFileWriter::SaveMwCorePropertiesExtension(const SimulinkFile& file,
-                                                            const fs::path& directory)
+                                                                const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveConfigSetInfo(const SimulinkFile& file, const fs::path& directory)
+    ErrorCode SimulinkFileWriter::SaveConfigSetInfo(const SimulinkFile& file,
+                                                    const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveBlockDiagram(const SimulinkFile& file, const fs::path& directory)
+    ErrorCode SimulinkFileWriter::SaveBlockDiagram(const SimulinkFile& file,
+                                                   const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
     ErrorCode SimulinkFileWriter::SaveModelDictionary(const SimulinkFile& file,
-                                                  const fs::path& directory)
+                                                      const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveBdDefaults(const SimulinkFile& file, const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveScheduleEditor(const SimulinkFile& file,
+    ErrorCode SimulinkFileWriter::SaveBdDefaults(const SimulinkFile& file,
                                                  const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveScheduleCore(const SimulinkFile& file, const fs::path& directory)
+    ErrorCode SimulinkFileWriter::SaveScheduleEditor(const SimulinkFile& file,
+                                                     const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    ErrorCode SimulinkFileWriter::SaveScheduleCore(const SimulinkFile& file,
+                                                   const fs::path& directory)
     {
         return ErrorCode::Ok;
     }

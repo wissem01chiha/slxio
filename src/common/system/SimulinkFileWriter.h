@@ -21,7 +21,7 @@
 #include "Error.h"
 
 namespace slxio
-{   
+{
     struct SimulinkFile;
 
     class SimulinkFileWriter
@@ -30,18 +30,18 @@ namespace slxio
         static ErrorCode Save(const SimulinkFile& file, const fs::path& directory);
 
     private:
-        static ErrorCode SaveGraphicalInterface(const SimulinkFile& file,const fs::path& directory);
+        static ErrorCode SaveGraphicalInterface(const SimulinkFile& file,
+                                                const fs::path& directory);
         static ErrorCode SaveCoreProperties(const SimulinkFile& file, const fs::path& directory);
-        static ErrorCode SaveMwCoreProperties(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveMwCorePropertiesExtension(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveConfigSetInfo(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveBlockDiagram(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveModelDictionary(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveBdDefaults(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveScheduleEditor(const SimulinkFile& file,const fs::path& directory);
-        static ErrorCode SaveScheduleCore(const SimulinkFile& file,const fs::path& directory);
-};
+        static ErrorCode SaveMwCoreProperties(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveMwCorePropertiesExtension(const SimulinkFile& file,
+                                                       const fs::path& directory);
+        static ErrorCode SaveConfigSetInfo(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveBlockDiagram(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveModelDictionary(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveBdDefaults(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveScheduleEditor(const SimulinkFile& file, const fs::path& directory);
+        static ErrorCode SaveScheduleCore(const SimulinkFile& file, const fs::path& directory);
+    };
 
 }; // namespace slxio
-
-

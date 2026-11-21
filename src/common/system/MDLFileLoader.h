@@ -20,7 +20,7 @@
 #include "Error.h"
 
 namespace slxio
-{  
+{
     struct MDLFile;
 
     /// Load a Simulink model from an extracted directory.
@@ -30,16 +30,16 @@ namespace slxio
         static MDLFile Load(const fs::path& directory, ErrorCode& ec);
 
     private:
-        static ErrorCode LoadGraphicalInterface(MDLFile& file,const fs::path& directory);
-        static ErrorCode LoadCoreProperties(MDLFile& file,const fs::path& directory);
-        static ErrorCode LoadMwCoreProperties(MDLFile& file,const fs::path& directory);
+        static ErrorCode LoadGraphicalInterface(MDLFile& file, const fs::path& directory);
+        static ErrorCode LoadCoreProperties(MDLFile& file, const fs::path& directory);
+        static ErrorCode LoadMwCoreProperties(MDLFile& file, const fs::path& directory);
         static ErrorCode LoadMwCorePropertiesExtension(MDLFile& file, const fs::path& directory);
         static ErrorCode LoadConfigSetInfo(MDLFile& file, const fs::path& directory);
         static ErrorCode LoadBlockDiagram(MDLFile& file, const fs::path& directory);
         static ErrorCode LoadModelDictionary(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadBdDefaults(MDLFile& file,const fs::path& directory);
-        static ErrorCode LoadScheduleEditor(MDLFile& file,const fs::path& directory);
-        static ErrorCode LoadScheduleCore(MDLFile& file,const fs::path& directory);
+        static ErrorCode LoadBdDefaults(MDLFile& file, const fs::path& directory);
+        static ErrorCode LoadScheduleEditor(MDLFile& file, const fs::path& directory);
+        static ErrorCode LoadScheduleCore(MDLFile& file, const fs::path& directory);
     };
 
 }; // namespace slxio

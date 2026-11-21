@@ -22,5 +22,5 @@ namespace slxio
         REQUIRE(parent->GetSubSections("child").size() == 1);
         CHECK(parent->GetSubSections("child").front() == child);
     }
-    
+
 }; // namespace slxio

@@ -49,7 +49,6 @@ namespace slxio
         CHECK_EQ(info.m_category, "model");
         CHECK_EQ(info.m_contentTypeFriendlyName, "Simulink Model");
         CHECK_EQ(info.m_contentType, "application/vnd.mathworks.simulink.model");
-
     }
 #endif
 
@@ -62,7 +61,7 @@ namespace slxio
         INFO(make_error_code(ec24).message());
         CHECK(file_24.m_graphicalInterface != nullptr);
     }
-    
+
     TEST_CASE("Get Simulink file info from extracted directory")
     {
         ErrorCode ec = ErrorCode::Ok;
@@ -77,6 +76,6 @@ namespace slxio
         CHECK_EQ(info.m_contentType, "application/vnd.mathworks.simulink.model");
         CHECK(ec == ErrorCode::Ok);
     }
-#endif 
+#endif
 
-} 
+} // namespace slxio
