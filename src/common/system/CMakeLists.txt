@@ -21,8 +21,8 @@ add_module(
   SimulinkFile.cxx
   SimulinkFileInfo.cxx)
 if(SLXIO_MDL)
-  target_sources(CommonSystem PRIVATE MDLFile.cxx MDLFileLoader.cxx
-                                      MDLSection.cxx)
+  target_sources(CommonSystem PRIVATE MDLFile.cxx MDLFileWriter.cxx
+                                      MDLFileLoader.cxx MDLSection.cxx)
 endif()
 module_link_libraries(CommonSystem CommonCore pugixml)
 if(SIMULINK_COMPATIBILTY_2024)

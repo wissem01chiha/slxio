@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "SimulinkRelease.h"
 
 namespace slxio
 {
@@ -66,5 +67,7 @@ namespace slxio
 
     std::string ToString(const GraphicalInterfaceInfo& info);
     std::string ToString(const SimulinkFileInfo& info);
+
+    SimulinkRelease GetSimulinkRelease(const SimulinkFileInfo& info);
 
 }; // namespace slxio

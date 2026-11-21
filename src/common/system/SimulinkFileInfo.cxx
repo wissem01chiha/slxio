@@ -15,6 +15,7 @@
  */
 
 #include "SimulinkFileInfo.h"
+#include "SimulinkReleaseHelper.h"
 
 namespace slxio
 {
@@ -60,6 +61,12 @@ namespace slxio
         oss << " }";
 
         return oss.str();
+    }
+
+    SimulinkRelease GetSimulinkRelease(const SimulinkFileInfo& info)
+    {
+        auto p = SimulinkReleaseHelper::Parse(info.m_matlabRelease);
+        return p.value().ToRelease();
     }
 
 }; // namespace slxio

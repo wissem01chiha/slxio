@@ -30,4 +30,9 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
+    ErrorCode MDLFileLoader::LoadCoreProperties(MDLFile& file, const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
 } // namespace slxio

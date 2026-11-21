@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "SimulinkFileInfo.h"
 #include "Error.h"
 
 namespace slxio

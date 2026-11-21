@@ -12,4 +12,4 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-#module_add_tests(ImportMdl cxx/TestMDLSection.cxx)
+# module_add_tests(ImportMdl cxx/TestMDLSection.cxx)
