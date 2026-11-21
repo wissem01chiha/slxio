@@ -104,18 +104,22 @@ namespace slxio
         CHECK_EQ(info.m_revision, "1.72");
         CHECK_EQ(info.m_matlabRelease, "R2019b");
         CHECK_EQ(info.m_modified, "2026-11-20T10:13:18Z");
+        CHECK_EQ(info.m_creator, "chiha");
+        CHECK_EQ(info.m_category, "model");
+        CHECK_EQ(info.m_contentTypeFriendlyName, "Simulink Model");
+        CHECK_EQ(info.m_contentType, "application/vnd.mathworks.simulink.model");
 #elif SIMULINK_COMPATIBILTY_2024
         const SimulinkFileInfo info = GetSimulinkFileInfo("data/2024b/CAP", ec);
         CHECK_EQ(info.m_version, "R2024b");
         CHECK_EQ(info.m_revision, "11.0");
         CHECK_EQ(info.m_matlabRelease, "R2024b");
         CHECK_EQ(info.m_modified, "2026-11-20T10:33:14Z");
-#endif
-        CHECK(ec == ErrorCode::Ok);
         CHECK_EQ(info.m_creator, "chiha");
         CHECK_EQ(info.m_category, "model");
         CHECK_EQ(info.m_contentTypeFriendlyName, "Simulink Model");
         CHECK_EQ(info.m_contentType, "application/vnd.mathworks.simulink.model");
+#endif
+        CHECK(ec == ErrorCode::Ok);
     }
 
 } // namespace slxio
