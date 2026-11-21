@@ -11,10 +11,9 @@ namespace slxio
         CHECK(error.value() == static_cast<int>(ErrorCode::InvalidArgument));
         CHECK(error.category().name() == std::string("slxio"));
         CHECK(error.message() == "invalid argument");
-        CHECK(make_error_code(ErrorCode::ConfigSetParameterNotFound).message() ==
-              "simulink config set parameter not found");
-        CHECK(make_error_code(ErrorCode::ConfigSetParameterInvalid).message() ==
-              "simulink config set parameter has an invalid value");
+        CHECK(make_error_code(ErrorCode::ParameterNotFound).message() == "parameter not found");
+        CHECK(make_error_code(ErrorCode::InvalidParameter).message() ==
+              "parameter has an invalid value");
         CHECK(make_error_code(ErrorCode::NotImplemented).message() ==
               "operation is not implemented");
         CHECK(make_error_code(ErrorCode::Ok).message() == "success");

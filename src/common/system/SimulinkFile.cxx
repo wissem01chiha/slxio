@@ -16,25 +16,59 @@
 
 #include "SimulinkFile.h"
 #include "SimulinkFileInfo.h"
+#include "Error.h"
 
 namespace slxio
 {
 
     namespace
     {
-        SimulinkFile Load(const fs::path& directory)
+
+        std::string GraphicalInterfacePath(const fs::path& directory)
+        {
+#if SIMULINK_COMPATIBILTY_2024
+            return (directory / "simulink/graphicalInterface.json").string();
+#else
+            return (directory / "simulink/graphicalInterface.xml").string();
+#endif
+        }
+
+        ErrorCode LoadGraphicalInterface(SimulinkFile& file, const fs::path& directory)
+        {
+            const std::string path = GraphicalInterfacePath(directory);
+            if (!fs::exists(path))
+            {
+                return ErrorCode::LoadGraphicalInterfaceFail;
+            }
+
+#if SIMULINK_COMPATIBILTY_2024
+
+            yyjson_read_err err{};
+            yyjson_read_flag flg = YYJSON_READ_ALLOW_COMMENTS | YYJSON_READ_ALLOW_TRAILING_COMMAS;
+            file.m_graphicalInterface = yyjson_read_file(path.c_str(), flg, nullptr, &err);
+            if (!file.m_graphicalInterface)
+            {
+                return ErrorCode::LoadGraphicalInterfaceFail;
+            }
+
+#else
+            auto result = file.m_graphicalInterface.load_file(path.c_str());
+            if (!result)
+            {
+                return ErrorCode::LoadGraphicalInterfaceFail;
+            }
+#endif
+            return ErrorCode::Ok;
+        }
+
+        SimulinkFile Load(const fs::path& directory, ErrorCode& ec)
         {
             SimulinkFile file;
             file.m_coreProperties.load_file(
                 (directory / "metadata/coreProperties.xml").string().c_str());
             file.m_mwcoreProperties.load_file(
                 (directory / "metadata/mwcoreProperties.xml").string().c_str());
-#if SIMULINK_COMPATIBILTY_2024
-#else
-            file.m_graphicalInterface.load_file(
-                (directory / "simulink/graphicalInterface.xml").string().c_str());
-
-#endif
+            ec = LoadGraphicalInterface(file, directory);
 
             file.m_mwcorePropertiesExtension.load_file(
                 (directory / "metadata/mwcorePropertiesExtension.xml").string().c_str());
@@ -205,9 +239,9 @@ namespace slxio
         return info;
     }
 
-    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path)
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec)
     {
-        SimulinkFile file = Import(path);
+        SimulinkFile file = Import(path, ec);
         return GetInfo(file);
     }
 
@@ -216,11 +250,11 @@ namespace slxio
         return;
     }
 
-    SimulinkFile Import(const fs::path& path)
+    SimulinkFile Import(const fs::path& path, ErrorCode& ec)
     {
         if (fs::is_directory(path))
         {
-            return Load(path);
+            return Load(path, ec);
         }
         SimulinkFile file;
         return file;

@@ -36,12 +36,12 @@ namespace slxio
             }
             else
             {
-                return ErrorCode::ConfigSetParameterInvalid;
+                return ErrorCode::InvalidParameter;
             }
         }
         else
         {
-            return ErrorCode::ConfigSetParameterNotFound;
+            return ErrorCode::ParameterNotFound;
         }
         destination = std::move(parsed);
         return ErrorCode::Ok;

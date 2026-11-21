@@ -99,9 +99,9 @@ namespace slxio
         return info;
     }
 
-    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path)
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec)
     {
-        MDLFile file = Import(path);
+        MDLFile file = Import(path, ec);
         return GetInfo(file);
     }
 
@@ -110,7 +110,7 @@ namespace slxio
         return;
     }
 
-    MDLFile Import(const fs::path& file)
+    MDLFile Import(const fs::path& file, ErrorCode& ec)
     {
         return MDLFile();
     }

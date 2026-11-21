@@ -12,13 +12,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(
-  CommonCore
-  Error.cxx
-  Logger.cxx
-  Diagnostic.cxx
-  Version.cxx
-  SimulinkReleaseHelper.cxx)
+add_module(CommonCore Error.cxx Logger.cxx Diagnostic.cxx Version.cxx
+           SimulinkReleaseHelper.cxx)
 
 configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
 module_link_libraries(CommonCore spdlog)

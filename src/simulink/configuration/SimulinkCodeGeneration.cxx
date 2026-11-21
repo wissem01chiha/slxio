@@ -30,7 +30,7 @@ namespace slxio
         }
         else
         {
-            return ErrorCode::ConfigSetParameterNotFound;
+            return ErrorCode::ParameterNotFound;
         }
 
         if (const auto* language = source.FindParam("TargetLang"))
@@ -39,7 +39,7 @@ namespace slxio
         }
         else
         {
-            return ErrorCode::ConfigSetParameterNotFound;
+            return ErrorCode::ParameterNotFound;
         }
 
         if (const auto* enabled = source.FindParam("EnableCodeGeneration"))
@@ -54,7 +54,7 @@ namespace slxio
             }
             else
             {
-                return ErrorCode::ConfigSetParameterInvalid;
+                return ErrorCode::InvalidParameter;
             }
         }
         destination = std::move(parsed);

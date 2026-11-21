@@ -43,7 +43,7 @@ namespace slxio
         return std::string();
     }
 
-    std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(std::string name)
+    std::shared_ptr<SimulinkBlock> SimulinkBlock::GetSubBlock(const std::string& name)
     {
         return std::shared_ptr<SimulinkBlock>();
     }
@@ -90,7 +90,7 @@ namespace slxio
         auto it = m_subBlocks.find(subBlock.GetIndex());
         if (it != m_subBlocks.end())
         {
-            return ErrorCode::SubBlockAlreadyExist;
+            return ErrorCode::BlockAlreadyExists;
         }
         m_subBlocks[subBlock.GetIndex()] = subBlock;
         return ErrorCode::Ok;
@@ -100,7 +100,7 @@ namespace slxio
     {
         if (parent == nullptr)
         {
-            return ErrorCode::SimulinkBlockNull;
+            return ErrorCode::InvalidSimulinkBlock;
         }
         return parent->AddSubBlock(*this);
     }

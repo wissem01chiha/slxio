@@ -17,6 +17,7 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "Error.h"
 
 namespace slxio
 {
@@ -28,11 +29,11 @@ namespace slxio
     };
 
     SimulinkFileInfo GetInfo(const MDLFile& file);
-    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path);
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info);
 
-    MDLFile Import(const fs::path& file);
+    MDLFile Import(const fs::path& file, ErrorCode& ec);
     fs::path Flush(const MDLFile& file);
 
 }; // namespace slxio

@@ -18,7 +18,7 @@ namespace slxio
         CHECK(retrieved->GetValue() == "x");
 
         CHECK(ws.AssignVariable("x", nullptr) != ErrorCode::Ok);
-        CHECK(ws.AssignVariable("", param) == ErrorCode::WorkspaceParameterNameEmpty);
+        CHECK(ws.AssignVariable("", param) == ErrorCode::InvalidParameterName);
     }
 
     TEST_CASE("Workspace clear variable test")

@@ -55,7 +55,7 @@ namespace slxio
          * Get named sub block or nullptr if no sub block with the given
          * name is present.
          */
-        std::shared_ptr<SimulinkBlock> GetSubBlock(std::string name);
+        std::shared_ptr<SimulinkBlock> GetSubBlock(const std::string& name);
 
         std::set<SimulinkBlock> GetSubBlocks() const;
 

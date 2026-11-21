@@ -13,9 +13,5 @@
 # the License.
 
 module_add_tests(
-  CommonCore
-  cxx/TestDiagnostic.cxx
-  cxx/TestError.cxx
-  cxx/TestLogger.cxx
-  cxx/TestSimulinkReleaseHelper.cxx
-  cxx/TestVersion.cxx)
+  CommonCore cxx/TestDiagnostic.cxx cxx/TestError.cxx cxx/TestLogger.cxx
+  cxx/TestSimulinkReleaseHelper.cxx cxx/TestVersion.cxx)

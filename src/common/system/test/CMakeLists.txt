@@ -12,14 +12,9 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-module_add_tests(CommonSystem
-    cxx/TestSimulinkFileInfo.cxx
-    cxx/TestSimulinkFile.cxx
-    cxx/TestTempdir.cxx
-    cxx/TestFilesystem.cxx
-)
+module_add_tests(
+  CommonSystem cxx/TestSimulinkFileInfo.cxx cxx/TestSimulinkFile.cxx
+  cxx/TestTempdir.cxx cxx/TestFilesystem.cxx)
 if(SLXIO_MDL)
-    module_add_tests(CommonSystem
-        cxx/TestMDLFile.cxx
-    )
+  module_add_tests(CommonSystem cxx/TestMDLFile.cxx)
 endif()

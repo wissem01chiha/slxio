@@ -73,11 +73,11 @@ jobs:
           uses: actions/checkout@v4
 
         - name: Configure
-          run: >
-            cmake -S . -B build
-            ${{ matrix.cmake-args }}
-            -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} \
-            -DSLXIO_TESTS=ON
+          run: |
+            cmake -S . -B build \
+              ${{ matrix.cmake-args }} \
+              -DPython_EXECUTABLE="${{ steps.setup-python.outputs.python-path }}" \
+              -DSLXIO_TESTS=ON
           env:
             CC: ${{ matrix.compiler }}
             CXX: ${{ matrix.cxx-compiler }}

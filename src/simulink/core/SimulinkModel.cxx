@@ -55,7 +55,7 @@ namespace slxio
         return m_originId;
     }
 
-    std::shared_ptr<SimulinkConfigSet> SimulinkModel::GetConfigSet(std::string name) const
+    std::shared_ptr<SimulinkConfigSet> SimulinkModel::GetConfigSet(const std::string& name) const
     {
         for (const auto& config : m_configurations)
         {
@@ -72,11 +72,11 @@ namespace slxio
     {
         if (name.empty())
         {
-            return ErrorCode::ConfigSetNameEmpty;
+            return ErrorCode::InvalidParameterName;
         }
         if (config == nullptr)
         {
-            return ErrorCode::ConfigSetInvalid;
+            return ErrorCode::InvalidConfigSet;
         }
 
         config->SetName(name);
@@ -107,17 +107,17 @@ namespace slxio
     {
         if (config.empty())
         {
-            return ErrorCode::ConfigSetNameEmpty;
+            return ErrorCode::InvalidParameterName;
         }
         if (name.empty() || value == nullptr)
         {
-            return ErrorCode::ConfigSetParameterNotFound;
+            return ErrorCode::ParameterNotFound;
         }
 
         const auto configSet = GetConfigSet(config);
         if (configSet == nullptr)
         {
-            return ErrorCode::ConfigSetParameterNotFound;
+            return ErrorCode::ParameterNotFound;
         }
 
         const std::string qualifiedKey = config + "::" + name;

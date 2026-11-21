@@ -24,9 +24,8 @@ namespace slxio
         fs::create_directories(m_root_path);
     }
 
-    Tempdir::Tempdir(const ConfigOption& config)
+    Tempdir::Tempdir(const ConfigOption& config) : m_config(config)
     {
-        m_config = config;
         m_root_path = m_config.m_path / GenerateDirName();
         fs::create_directories(m_root_path);
     }

@@ -35,24 +35,26 @@ namespace slxio
         {
         case ErrorCode::Ok:
             return "success";
-        case ErrorCode::ConfigSetParameterNotFound:
-            return "simulink config set parameter not found";
-        case ErrorCode::ConfigSetParameterInvalid:
-            return "simulink config set parameter has an invalid value";
-        case ErrorCode::ConfigSetNameEmpty:
-            return "simulink config set name is empty";
+        case ErrorCode::ParameterNotFound:
+            return "parameter not found";
+        case ErrorCode::InvalidParameter:
+            return "parameter has an invalid value";
+        case ErrorCode::InvalidParameterName:
+            return "parameter name is empty or invalid";
         case ErrorCode::InvalidArgument:
             return "invalid argument";
-        case ErrorCode::ConfigSetInvalid:
+        case ErrorCode::InvalidConfigSet:
             return "invalid simulink config set";
-        case ErrorCode::SubBlockAlreadyExist:
-            return "a subblock witn same name already exist";
-        case ErrorCode::WorkspaceParameterNameEmpty:
-            return "model workspace parameter name empty";
-        case ErrorCode::SimulinkBlockNull:
+        case ErrorCode::BlockAlreadyExists:
+            return "a block or subblock with same name already exist";
+        case ErrorCode::InvalidSimulinkBlock:
             return "a nullptr simulink block object passed";
-        case ErrorCode::InvalidArchiveId:
-            return "";
+        case ErrorCode::LoadGraphicalInterfaceFail:
+            return "failed to load graphicalInterface data file";
+        case ErrorCode::FileSystemError:
+            return "file system error";
+        case ErrorCode::InvalidDataType:
+            return "invalid data type";
         case ErrorCode::NotImplemented:
             return "operation is not implemented";
         default:

@@ -1,4 +1,3 @@
-
 # Copyright 2026 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -13,8 +12,10 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-module_add_tests(ImportCore cxx/TestSimulinkDataTypeBuilder.cxx
-                 cxx/TestSimulinkParameterBuilder.cxx
-                 cxx/TestSimulinkArrayBuilder.cxx
-                 cxx/TestSimulinkObjectBuilder.cxx
-                 cxx/TestSimulinkConfigSetComponentBuilder.cxx)
+module_add_tests(
+  ImportCore
+  cxx/TestSimulinkDataTypeBuilder.cxx
+  cxx/TestSimulinkParameterBuilder.cxx
+  cxx/TestSimulinkArrayBuilder.cxx
+  cxx/TestSimulinkObjectBuilder.cxx
+  cxx/TestSimulinkConfigSetComponentBuilder.cxx)

@@ -25,31 +25,22 @@ namespace slxio
     enum class ErrorCode : uint32_t
     {
         Ok = 0,
-        InvalidFunction = 1,
-        FileSystemError = 9,
-        NotImplemented = 13,
-        NullParameter = 15,
-        InvalidDataType = 16,
-        FileRemoveFailed = 18,
-        ArchiveDirectoryNotFound = 19,
-        ArchiveOpenFailed = 20,
-        ArchiveSourceFailed = 21,
-        ArchiveReplaceFailed = 22,
-        ArchiveAddFailed = 23,
-        ArchiveCloseFailed = 24,
-        ArchiveRemoveFailed = 25,
-        ArchiveEntryNotFound = 26,
-        InvalidArchiveId = 27,
 
-        ConfigSetParameterNotFound = 100,
-        ConfigSetNameEmpty = 101,
-        ConfigSetInvalid = 102,
-        ConfigSetParameterInvalid = 108,
-        SubBlockAlreadyExists = 103,
-        WorkspaceParameterNameEmpty = 104,
-        SimulinkBlockNull = 105,
-        InvalidArgument = 106,
-        SubBlockAlreadyExist = 107,
+        FileSystemError,
+
+        InvalidArgument,
+        InvalidDataType,
+        NotImplemented,
+
+        InvalidSimulinkBlock,
+        InvalidConfigSet,
+        LoadGraphicalInterfaceFail,
+
+        ParameterNotFound,
+        InvalidParameterName,
+        InvalidParameter,
+
+        BlockAlreadyExists,
     };
 
     /// Define a custom error category for  error codes

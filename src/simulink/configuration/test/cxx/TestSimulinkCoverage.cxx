@@ -18,11 +18,11 @@ namespace slxio
         CHECK_FALSE(coverage.CovEnable);
 
         component.SetParam("CovEnable", "invalid");
-        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::ConfigSetParameterInvalid);
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::InvalidParameter);
         CHECK_FALSE(coverage.CovEnable);
 
         component.RemoveParam("CovEnable");
-        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::ConfigSetParameterNotFound);
+        CHECK(ParseCoverageComponent(component, coverage) == ErrorCode::ParameterNotFound);
         CHECK_FALSE(coverage.CovEnable);
     }
 } // namespace slxio

@@ -46,7 +46,7 @@ namespace slxio
         }
         if (name.empty())
         {
-            return ErrorCode::WorkspaceParameterNameEmpty;
+            return ErrorCode::InvalidParameterName;
         }
 
         m_variables[name] = p;

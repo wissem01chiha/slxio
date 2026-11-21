@@ -12,22 +12,16 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(
-  CommonSystem
-  Tempdir.cxx
-  Filesystem.cxx
-  SimulinkFile.cxx
-  SimulinkFileInfo.cxx)
+add_module(CommonSystem Tempdir.cxx Filesystem.cxx SimulinkFile.cxx
+           SimulinkFileInfo.cxx)
 if(SLXIO_MDL)
-  target_sources(
-    CommonSystem
-    PRIVATE
-    MDLFile.cxx)
+  target_sources(CommonSystem PRIVATE MDLFile.cxx)
 endif()
 module_link_libraries(CommonSystem CommonCore pugixml)
 if(SIMULINK_COMPATIBILTY_2024)
   module_link_libraries(CommonSystem yyjson)
 endif()
-module_include_directories(CommonSystem ${PROJECT_EXTERN_SOURCE_DIR}/doctest
-                           ${PROJECT_EXTERN_SOURCE_DIR}/pugixml)
+module_include_directories(
+  CommonSystem ${PROJECT_EXTERN_SOURCE_DIR}/doctest
+  ${PROJECT_EXTERN_SOURCE_DIR}/pugixml ${PROJECT_EXTERN_SOURCE_DIR}/yyjson)
 add_subdirectory(test)

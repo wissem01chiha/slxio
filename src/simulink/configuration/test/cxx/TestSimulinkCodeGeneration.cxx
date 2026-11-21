@@ -38,7 +38,7 @@ namespace slxio
         codeGeneration.m_enableCodeGeneration = true;
 
         CHECK(ParseCodeGenerationComponent(component, codeGeneration) ==
-              ErrorCode::ConfigSetParameterInvalid);
+              ErrorCode::InvalidParameter);
         CHECK(codeGeneration.m_codeGenFolder == "old-code");
         CHECK(codeGeneration.m_codeGenLanguage == "C++");
         CHECK(codeGeneration.m_enableCodeGeneration);
@@ -46,7 +46,7 @@ namespace slxio
         component.SetParam("EnableCodeGeneration", "on");
         component.RemoveParam("TargetLang");
         CHECK(ParseCodeGenerationComponent(component, codeGeneration) ==
-              ErrorCode::ConfigSetParameterNotFound);
+              ErrorCode::ParameterNotFound);
         CHECK(codeGeneration.m_codeGenFolder == "old-code");
         CHECK(codeGeneration.m_codeGenLanguage == "C++");
     }

@@ -20,8 +20,8 @@
 namespace slxio
 {
     StateflowBlock::StateflowBlock(StateflowChart& chart)
+        : m_chart(std::make_shared<StateflowChart>(chart))
     {
-        m_chart = std::make_shared<StateflowChart>(chart);
     }
 
     std::shared_ptr<StateflowChart> StateflowBlock::GetChart()

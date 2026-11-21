@@ -19,6 +19,10 @@
 #include <pugixml.h>
 #include "CommonPCH.h"
 #include "Config.h"
+#include "Error.h"
+#if SIMULINK_COMPATIBILTY_2024
+#include "yyjson.h"
+#endif
 
 namespace slxio
 {
@@ -37,6 +41,7 @@ namespace slxio
         pugi::xml_document m_scheduleEditor;
         pugi::xml_document m_scheduleCore;
 #if SIMULINK_COMPATIBILTY_2024
+        yyjson_doc* m_graphicalInterface = nullptr;
 #else
         pugi::xml_document m_graphicalInterface;
 #endif
@@ -47,11 +52,11 @@ namespace slxio
     };
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file);
-    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path);
+    SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     void SetInfo(SimulinkFile& file, const SimulinkFileInfo& info);
 
-    SimulinkFile Import(const fs::path& path);
+    SimulinkFile Import(const fs::path& path, ErrorCode& ec);
     fs::path Flush(const SimulinkFile& file);
 
 }; // namespace slxio
