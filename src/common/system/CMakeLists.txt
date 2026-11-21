@@ -1,4 +1,4 @@
-# Copyright 2026 Wissem Chiha
+# Copyright 2025-2026 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -12,10 +12,17 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(CommonSystem Tempdir.cxx Filesystem.cxx SimulinkFile.cxx
-           SimulinkFileInfo.cxx)
+add_module(
+  CommonSystem
+  Tempdir.cxx
+  SimulinkFileLoader.cxx
+  SimulinkFileWriter.cxx
+  Filesystem.cxx
+  SimulinkFile.cxx
+  SimulinkFileInfo.cxx)
 if(SLXIO_MDL)
-  target_sources(CommonSystem PRIVATE MDLFile.cxx)
+  target_sources(CommonSystem PRIVATE MDLFile.cxx MDLFileLoader.cxx
+                                      MDLSection.cxx)
 endif()
 module_link_libraries(CommonSystem CommonCore pugixml)
 if(SIMULINK_COMPATIBILTY_2024)

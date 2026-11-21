@@ -1,5 +1,5 @@
 /*
- * Copyright 2026 Wissem Chiha
+ * Copyright 2025-2026 Wissem Chiha
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,8 @@ namespace slxio
             return "a nullptr simulink block object passed";
         case ErrorCode::LoadGraphicalInterfaceFail:
             return "failed to load graphicalInterface data file";
+        case ErrorCode::LoadCorePropertiesFail:
+            return "failed to load core properties";
         case ErrorCode::FileSystemError:
             return "file system error";
         case ErrorCode::InvalidDataType:
