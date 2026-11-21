@@ -1,6 +1,7 @@
 #include "doctest.h"
 #include "SimulinkFile.h"
 #include "SimulinkFileInfo.h"
+#include "Config.h"
 
 namespace slxio
 {
@@ -50,7 +51,10 @@ namespace slxio
         const SimulinkFile file = Import("data/2019b/CAP");
         REQUIRE(file.m_coreProperties);
         REQUIRE(file.m_mwcoreProperties);
+#if SIMULINK_COMPATIBILTY_2024
+#else
         REQUIRE(file.m_graphicalInterface);
+#endif 
         REQUIRE(file.m_mwcorePropertiesExtension);
         REQUIRE(file.m_configSetInfo);
         REQUIRE(file.m_blockdiagram);

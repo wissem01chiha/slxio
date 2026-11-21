@@ -15,7 +15,7 @@
 add_module(
   CommonSystem
   Tempdir.cxx
-  FileUtils.cxx
+  Filesystem.cxx
   SimulinkFile.cxx
   SimulinkFileInfo.cxx)
 if(SLXIO_MDL)

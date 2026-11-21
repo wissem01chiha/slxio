@@ -16,7 +16,7 @@ module_add_tests(CommonSystem
     cxx/TestSimulinkFileInfo.cxx
     cxx/TestSimulinkFile.cxx
     cxx/TestTempdir.cxx
-    cxx/TestFileUtils.cxx
+    cxx/TestFilesystem.cxx
 )
 if(SLXIO_MDL)
     module_add_tests(CommonSystem

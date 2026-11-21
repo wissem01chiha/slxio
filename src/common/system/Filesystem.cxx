@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "FileUtils.h"
+#include "Filesystem.h"
 
 namespace slxio
 {
@@ -25,7 +25,7 @@ namespace slxio
         auto stream = std::ifstream(path);
         stream.exceptions(std::ios_base::badbit);
 
-        if (not stream)
+        if (!stream)
         {
             throw std::ios_base::failure("file does not exist");
         }
