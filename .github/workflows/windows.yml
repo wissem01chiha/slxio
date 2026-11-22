@@ -45,7 +45,7 @@ jobs:
             os: windows-latest
             python-version: 3.12
             python-arch: x86
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 
           - name: Windows Clang x64 Release
             compiler: clang
@@ -55,7 +55,7 @@ jobs:
             os: windows-latest
             python-version: 3.12
             python-arch: x64
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 
 
     steps:
@@ -65,9 +65,7 @@ jobs:
             python-version: ${{ matrix.python-version }}
             architecture: ${{ matrix.python-arch }}
 
-        # Source - https://stackoverflow.com/a/80018104
-        # Posted by 张三疯的风
-        # Retrieved 2026-11-22, License - CC BY-SA 4.0
+        # https://stackoverflow.com/a/80018104
         - name: Upgrade LLVM
           if: ${{ matrix.compiler == 'clang' }}
           run: choco install llvm --upgrade --no-progress
