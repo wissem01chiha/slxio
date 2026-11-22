@@ -20,6 +20,7 @@
 #include "SimulinkFileLoader.h"
 #include "SimulinkFileWriter.h"
 #include "SimulinkModelBuilder.h"
+#include "SimulinkModel.h"
 #include "Config.h"
 #if MDL
 #include "MDLFile.h"

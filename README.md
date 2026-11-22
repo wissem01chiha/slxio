@@ -32,7 +32,7 @@ The project grew out of years of struggling with vendor-locked Simulink files an
 
 It was originally derived from the Java-based Simulink parser in the [ConQAT](https://en.wikipedia.org/wiki/ConQAT) project. The original source code is available [here](https://github.com/harmanpa/SimulinkLibraryForJava). It was ported to C++ and refactored into a highly modular architecture.
 
-We do not aim to support every Simulink® feature. Instead, the library focuses on the most commonly used ones. It provides a simple and intuitive API for accessing and modifying Simulink® model components such as blocks, lines, parameters, and Stateflow charts, modeled after the MATLAB Simulink® API. This makes it easy for users familiar with MATLAB to get started.
+We do not aim to support every Simulink feature. Instead, the library focuses on the most commonly used ones. It provides a simple and intuitive API for accessing and modifying Simulink model components such as blocks, lines, parameters, and Stateflow charts, modeled after the MATLAB Simulink API. This makes it easy for users familiar with MATLAB to get started.
 
 ## Installing
 
@@ -68,6 +68,12 @@ Any contributions are greatly appreciated, see our [Contributing](./CONTRIBUTING
 ## Compatibility
 
 The long-term vision is to support all Simulink releases starting with R2019a. However, this is a substantial amount of work, and the current focus is primarily on R2019a compatibility. Support for newer Simulink releases or patches, if available, will be documented according to the slxio [semantic versioning](https://semver.org/) scheme.
+
+## Limitations
+
+- Exporting mdl files from models that were originally stored as slx files is currently not supported. because slx files are opc (open packaging convention)-based archives, converting them back to the legacy flat mdl format can produce schema inconsistencies that do not always match the traditional mdl hierarchical structure.
+
+- Internal changes introduced by mathworks in newer slx formats (for example, the migration of graphical interface metadata from xml to json in r2024b and later) may cause some metadata fields to be unavailable or parsed differently. as a result, metadata extraction may not be fully consistent across all supported releases. support for these format variations will be improved incrementally, and affected fields may be reported through library warnings in future versions.
 
 ## Acknowledgments
 

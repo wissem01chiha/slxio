@@ -31,7 +31,4 @@ namespace slxio
     SimulinkFileInfo GetInfo(const MDLFile& file);
     void SetInfo(MDLFile& file, const SimulinkFileInfo& info);
 
-    MDLFile Import(const fs::path& file, ErrorCode& ec);
-    fs::path Flush(const MDLFile& file);
-
 }; // namespace slxio

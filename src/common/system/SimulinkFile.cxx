@@ -144,20 +144,95 @@ namespace slxio
             return std::string();
         }
 
+#if SIMULINK_COMPATIBILTY_2024
         GraphicalInterfaceInfo GetGraphicalInterfaceInfo(const SimulinkFile& file)
         {
-            if (file.m_coreProperties)
+            GraphicalInterfaceInfo info;
+
+            if (!file.m_graphicalInterface)
             {
-                auto root = file.m_coreProperties.child("GraphicalInterface");
+                return info;
+            }
+
+            yyjson_val* root = yyjson_obj_get(yyjson_doc_get_root(file.m_graphicalInterface),
+                                              "GraphicalInterface");
+            if (!root)
+            {
+                return info;
+            }
+
+            if (auto* v = yyjson_obj_get(root, "PreCompExecutionDomainType"))
+            {
+                info.m_preCompExecutionDomainType = yyjson_get_str(v);
+            }
+
+            if (auto* v = yyjson_obj_get(root, "ExternalFileReferences"))
+            {
+                if (yyjson_is_arr(v))
+                {
+                    info.m_numExternalFileReferences = std::to_string(yyjson_arr_size(v));
+                }
+            }
+
+            return info;
+        }
+#else
+
+        GraphicalInterfaceInfo GetGraphicalInterfaceInfo(const SimulinkFile& file)
+        {
+            if (file.m_graphicalInterface)
+            {
+                auto root = file.m_graphicalInterface.child("GraphicalInterface");
                 if (root)
                 {
                     GraphicalInterfaceInfo info;
 
+                    for (auto p : root.children("P"))
+                    {
+                        const std::string name = p.attribute("Name").as_string();
+                        const std::string value = p.text().as_string();
+
+                        if (name == "NumRootInports")
+                            info.m_numRootInports = value;
+                        else if (name == "NumRootOutports")
+                            info.m_numRootOutports = value;
+                        else if (name == "ParameterArgumentNames")
+                            info.m_parameterArgumentNames = value;
+                        else if (name == "NumModelReferences")
+                            info.m_numModelReferences = value;
+                        else if (name == "NumTestPointedSignals")
+                            info.m_numTestPointedSignals = value;
+                        else if (name == "NumProvidedFunctions")
+                            info.m_numProvidedFunctions = value;
+                        else if (name == "NumRequiredFunctions")
+                            info.m_numRequiredFunctions = value;
+                        else if (name == "NumResetEvents")
+                            info.m_numResetEvents = value;
+                        else if (name == "HasInitializeEvent")
+                            info.m_hasInitializeEvent = value;
+                        else if (name == "HasTerminateEvent")
+                            info.m_hasTerminateEvent = value;
+                        else if (name == "PreCompExecutionDomainType")
+                            info.m_preCompExecutionDomainType = value;
+                        else if (name == "IsExportFunctionModel")
+                            info.m_isExportFunctionModel = value;
+                        else if (name == "IsArchitectureModel")
+                            info.m_isArchitectureModel = value;
+                        else if (name == "NumParameterArguments")
+                            info.m_numParameterArguments = value;
+                        else if (name == "NumExternalFileReferences")
+                            info.m_numExternalFileReferences = value;
+                        else if (name == "OrderedModelArguments")
+                            info.m_orderedModelArguments = value;
+                    }
+
                     return info;
                 }
             }
-            return GraphicalInterfaceInfo();
+
+            return GraphicalInterfaceInfo{};
         }
+#endif
     } // namespace
 
     SimulinkFileInfo GetInfo(const SimulinkFile& file)

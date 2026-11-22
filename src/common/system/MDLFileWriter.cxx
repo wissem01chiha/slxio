@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
- #include "MDLFileWriter.h"
+#include "MDLFileWriter.h"
 #include "MDLFile.h"
 
- namespace slxio
- {
+namespace slxio
+{
     MDLFile MDLFileWriter::Save(const fs::path& path, ErrorCode& ec)
     {
         return MDLFile();
     }
 
- } // namespace slxio
- 
+} // namespace slxio

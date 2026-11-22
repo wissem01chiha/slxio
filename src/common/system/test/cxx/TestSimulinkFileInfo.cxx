@@ -13,10 +13,10 @@ namespace slxio
         CHECK(!graphicalStr.empty());
     }
 
-    TEST_CASE("Get simulink release from simulink info test"){
-
+    TEST_CASE("Get simulink release from simulink info test")
+    {
         SimulinkFileInfo info;
         info.m_matlabRelease = std::string("R2024b");
-        CHECK(GetSimulinkRelease(info)==SimulinkRelease::R2024b);
+        CHECK(GetSimulinkRelease(info) == SimulinkRelease::R2024b);
     }
 } // namespace slxio

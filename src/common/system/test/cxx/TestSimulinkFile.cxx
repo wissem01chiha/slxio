@@ -51,6 +51,11 @@ namespace slxio
         yyjson_doc* result = yyjson_read_file(path.c_str(), flg, nullptr, &err);
         INFO("json error code: " << static_cast<int>(err.code));
         CHECK(result != nullptr);
+
+        file.m_graphicalInterface = result;
+        const SimulinkFileInfo info = GetInfo(file);
+        const GraphicalInterfaceInfo& graphicalInfo = info.m_graphicalInterfaceInfo;
+        CHECK(graphicalInfo.m_preCompExecutionDomainType == "Unset");
         yyjson_doc_free(result);
     }
 #else
@@ -58,8 +63,29 @@ namespace slxio
     {
         SimulinkFile file;
         const pugi::xml_parse_result result =
-            file.m_coreProperties.load_file("data/graphicalInterface.xml");
+            file.m_graphicalInterface.load_file("data/graphicalInterface.xml");
         REQUIRE(result);
+
+        const SimulinkFileInfo info = GetInfo(file);
+
+        const GraphicalInterfaceInfo& graphicalInfo = info.m_graphicalInterfaceInfo;
+
+        CHECK(graphicalInfo.m_numRootInports == "0");
+        CHECK(graphicalInfo.m_numRootOutports == "0");
+        CHECK(graphicalInfo.m_parameterArgumentNames.empty());
+        CHECK(graphicalInfo.m_numModelReferences == "0");
+        CHECK(graphicalInfo.m_numTestPointedSignals == "0");
+        CHECK(graphicalInfo.m_numProvidedFunctions == "0");
+        CHECK(graphicalInfo.m_numRequiredFunctions == "0");
+        CHECK(graphicalInfo.m_numResetEvents == "0");
+        CHECK(graphicalInfo.m_hasInitializeEvent == "0");
+        CHECK(graphicalInfo.m_hasTerminateEvent == "0");
+        CHECK(graphicalInfo.m_preCompExecutionDomainType == "Unset");
+        CHECK(graphicalInfo.m_isExportFunctionModel == "0");
+        CHECK(graphicalInfo.m_isArchitectureModel == "0");
+        CHECK(graphicalInfo.m_numParameterArguments == "0");
+        CHECK(graphicalInfo.m_numExternalFileReferences == "0");
+        CHECK(graphicalInfo.m_orderedModelArguments == "1");
     }
 #endif
 

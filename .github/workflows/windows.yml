@@ -65,6 +65,13 @@ jobs:
             python-version: ${{ matrix.python-version }}
             architecture: ${{ matrix.python-arch }}
 
+        # Source - https://stackoverflow.com/a/80018104
+        # Posted by 张三疯的风
+        # Retrieved 2026-11-22, License - CC BY-SA 4.0
+        - name: Upgrade LLVM
+          if: ${{ matrix.compiler == 'clang' }}
+          run: choco install llvm --upgrade --no-progress
+
         - name: Install MSVC Build Tools
           if: ${{ matrix.compiler == 'msvc' }}
           run: choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive --locale en-US"

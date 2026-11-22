@@ -104,14 +104,4 @@ namespace slxio
         return;
     }
 
-    MDLFile Import(const fs::path& file, ErrorCode& ec)
-    {
-        return MDLFile();
-    }
-
-    fs::path Flush(const MDLFile& file)
-    {
-        // Implementation goes here
-        return fs::path();
-    }
 } // namespace slxio

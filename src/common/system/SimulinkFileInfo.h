@@ -18,6 +18,7 @@
 
 #include "CommonPCH.h"
 #include "SimulinkRelease.h"
+#include "Config.h"
 
 namespace slxio
 {
