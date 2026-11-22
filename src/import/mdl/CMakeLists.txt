@@ -13,6 +13,12 @@
 # the License.
 
 add_module(ImportMdl SimulinkModelMdlBuilder.cxx)
-module_link_libraries(ImportMdl ImportCore SimulinkConfiguration SimulinkCore
-                      SimulinkAnnotation SimulinkLayout)
+module_link_libraries(
+  ImportMdl
+  CommonSystem
+  ImportCore
+  SimulinkConfiguration
+  SimulinkCore
+  SimulinkAnnotation
+  SimulinkLayout)
 add_subdirectory(test)
