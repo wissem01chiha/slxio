@@ -21,8 +21,33 @@
 #include "SimulinkFileWriter.h"
 #include "SimulinkModelBuilder.h"
 #include "SimulinkModel.h"
+#include "SimulinkModelInfo.h"
 #include "Config.h"
 #if MDL
 #include "MDLFile.h"
 #include "MDLFileLoader.h"
 #endif
+
+namespace slxio
+{
+    // new elment in memory.
+    SimulinkModel NewSystem();
+
+    // Load a model from disk.
+    void LoadSystem(const fs::path& path);
+
+    // modelead model metadata without loading a model.
+    SimulinkModelInfo ModelInfo(const fs::path& path);
+    void GetDescriptionon();
+    void GetMetadata();
+
+    // Close one or more open models.
+    void BdClose(const fs::path& path);
+
+    // Open atem, or block.
+    void OpenSystem();
+    void SaveSystem();
+
+    void AddBlock(SimulinkModel& model, const SimulinkBlock& block);
+
+} // namespace slxio

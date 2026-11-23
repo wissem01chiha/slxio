@@ -51,7 +51,7 @@ namespace slxio
         CHECK(err == ErrorCode::Ok);
         CHECK(fs::exists(*dir));
         CHECK(fs::is_directory(*dir));
-        
+
         fs::remove_all("simulink");
         CHECK_FALSE(fs::exists("simulink"));
     }

@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(CommonArchive Archive.cxx ArchiveManager.cxx)
-module_link_libraries(CommonArchive CommonCore)
+add_module(CommonArchive ArchiveInfo.cxx)
+module_link_libraries(CommonArchive CommonCore libzip::zip)
 module_include_directories(CommonArchive ${PROJECT_EXTERN_SOURCE_DIR}/libzip)
 add_subdirectory(test)

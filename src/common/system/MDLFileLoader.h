@@ -19,6 +19,7 @@
 #include "CommonPCH.h"
 #include "SimulinkFileInfo.h"
 #include "Error.h"
+#include "Compiler.h"
 
 namespace slxio
 {
@@ -29,19 +30,20 @@ namespace slxio
     {
     public:
         static MDLFile Load(const fs::path& path, ErrorCode& ec);
-        static SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
+        NODISCARD static SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     private:
-        static ErrorCode LoadGraphicalInterface(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadCoreProperties(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadMwCoreProperties(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadMwCorePropertiesExtension(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadConfigSetInfo(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadBlockDiagram(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadModelDictionary(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadBdDefaults(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadScheduleEditor(MDLFile& file, const fs::path& directory);
-        static ErrorCode LoadScheduleCore(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadGraphicalInterface(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadCoreProperties(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadMwCoreProperties(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadMwCorePropertiesExtension(MDLFile& file,
+                                                                 const fs::path& directory);
+        NODISCARD static ErrorCode LoadConfigSetInfo(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadBlockDiagram(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadModelDictionary(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadBdDefaults(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadScheduleEditor(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadScheduleCore(MDLFile& file, const fs::path& directory);
     };
 
 }; // namespace slxio

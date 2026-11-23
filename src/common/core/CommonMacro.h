@@ -27,5 +27,4 @@ namespace slxio
 /* Define type compare macro */
 #define ASSERT_TYPE_EQUAL(T1, T2) static_assert(std::is_same_v<T1, T2>)
 
-
 }; // namespace slxio

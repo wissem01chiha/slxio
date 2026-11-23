@@ -45,6 +45,13 @@ namespace slxio
         InvalidParameterName,
         InvalidParameter,
         BlockAlreadyExists,
+        ArchiveOpenFailed,
+        ArchiveEntryNotFound,
+        ArchiveSourceFailed,
+        ArchiveReplaceFailed,
+        ArchiveAddFailed,
+        ArchiveRemoveFailed,
+        ArchiveCloseFailed
     };
 
     /// Define a custom error category for  error codes

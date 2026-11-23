@@ -23,17 +23,17 @@
 
 namespace slxio
 {
+    struct ArchiveInfo;
+
     class Archive final
     {
     public:
         Archive() = default;
         explicit Archive(const fs::path& file);
 
-        void SetArchiveExtension(const std::string& ext);
+        void SetArchiveExtractDirectory(const fs::path& directory);
 
-        // Set the archive directory folder is not given a temporary one will be
-        // used as default
-        void SetArchiveDirectory(const fs::path& directory);
+        ArchiveInfo& GetArchiveInfo() const;
 
         // Extract the archive if it is a ZIP archive.
         NODISCARD ErrorCode Extract();
@@ -47,8 +47,11 @@ namespace slxio
         ~Archive() = default;
 
     private:
+        void SetArchiveExtension(const std::string& ext);
+
+        ArchiveInfo& m_info;
+        
         fs::path m_directory;
-        fs::path m_file;
     };
 
 }; // namespace slxio

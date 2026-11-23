@@ -34,6 +34,7 @@ add_module(
   SimulinkArray.cxx
   SimulinkLine.cxx
   SimulinkModelInfo.cxx)
-module_link_libraries(SimulinkCore CommonCore SimulinkMisc
-                      SimulinkConfiguration SimulinkAnnotation SimulinkStateflow)
+module_link_libraries(
+  SimulinkCore CommonCore SimulinkMisc SimulinkConfiguration SimulinkAnnotation
+  SimulinkStateflow)
 add_subdirectory(test)

@@ -20,33 +20,18 @@
 
 namespace slxio
 {
-
-    Archive::Archive(const File& _file) : file(_file), directory(Directory(""))
+    Archive::Archive(const fs::path& file)
     {
     }
 
-    void Archive::SetArchiveExtension(const char* ext)
+    void Archive::SetArchiveExtractDirectory(const fs::path& directory)
     {
-        if (!ext || *ext == '\0')
-        {
-            return;
-        }
-
-        size_t pos = file.GetFilePath().find_last_of('.');
-        std::string base;
-        base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
-        std::string dest = base + "." + ext;
-        file.Rename(dest);
+        m_directory = directory;
     }
 
-    void Archive::SetArchiveDirectory(const Directory& _directory)
+    ArchiveInfo& Archive::GetArchiveInfo() const
     {
-        directory = _directory;
-    }
-
-    Directory Archive::GetArchiveDirectory() const
-    {
-        return directory;
+        return m_info;
     }
 
     NODISCARD ErrorCode Archive::Extract()
@@ -73,12 +58,12 @@ namespace slxio
             snprintf(entrydirpath,
                      sizeof(entrydirpath),
                      "%s/%s",
-                     directory.GetDirectoryPath().c_str(),
+                     m_directory.GetDirectoryPath().c_str(),
                      name);
 
-            int ec = 0;
+            ErrorCode ec = ErrorCode::Ok;
             CreateDirectories(entrydirpath, &ec);
-            if (ec != 0)
+            if (ec != ErrorCode::Ok)
             {
                 return ec;
             }
@@ -109,7 +94,7 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode Archive::Add(const File& file_)
+    NODISCARD ErrorCode Archive::Add(const fs::path& file)
     {
         int err = 0;
         zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
@@ -124,7 +109,7 @@ namespace slxio
         if (!source)
         {
             zip_close(za);
-            return E_ARCHIVE_SOURCE_FAILED;
+            return ErrorCode::ArchiveSourceFailed;
         }
 
         if (idx >= 0)
@@ -133,7 +118,7 @@ namespace slxio
             {
                 zip_source_free(source);
                 zip_close(za);
-                return E_ARCHIVE_REPLACE_FAILED;
+                return ErrorCode::ArchiveReplaceFailed;
             }
         }
         else
@@ -142,55 +127,58 @@ namespace slxio
             {
                 zip_source_free(source);
                 zip_close(za);
-                return E_ARCHIVE_ADD_FAILED;
+                return ErrorCode::ArchiveAddFailed;
             }
         }
         if (zip_close(za) < 0)
         {
-            return E_ARCHIVE_CLOSE_FAILED;
+            return ErrorCode::ArchiveCloseFailed;
         }
 
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    HError Archive::Remove(const File& file_)
+    NODISCARD ErrorCode Archive::Remove(const fs::path& file)
     {
         int err = 0;
         zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
         if (!za)
         {
-            return E_ARCHIVE_OPEN_FAILED;
+            return ErrorCode::ArchiveOpenFailed;
         }
 
         zip_int64_t idx = zip_name_locate(za, file_.GetFileName().c_str(), 0);
         if (idx < 0)
         {
             zip_close(za);
-            return E_ARCHIVE_ENTRY_NOT_FOUND;
+            return ErrorCode::ArchiveEntryNotFound;
         }
 
         if (zip_delete(za, idx) < 0)
         {
             zip_close(za);
-            return E_ARCHIVE_REMOVE_FAILED;
+            return ErrorCode::ArchiveRemoveFailed;
         }
 
         if (zip_close(za) < 0)
         {
-            return E_ARCHIVE_CLOSE_FAILED;
+            return ErrorCode::ArchiveCloseFailed;
         }
 
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    std::string Archive::GetArchiveExtension() const
+    void Archive::SetArchiveExtension(const std::string& ext)
     {
-        if (file.GetFilePath().empty())
-            return {};
-        auto pos = file.GetFilePath().find_last_of('.');
-        if (pos == std::string::npos)
-            return {};
-        return file.GetFilePath().substr(pos + 1);
+        if (ext.empty())
+        {
+            return;
+        }
+        size_t pos = m_file.find_last_of('.');
+        std::string base;
+        base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
+        std::string dest = base + "." + ext;
+        file.Rename(dest);
     }
 
 }; // namespace slxio

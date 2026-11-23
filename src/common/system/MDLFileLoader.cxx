@@ -25,12 +25,13 @@ namespace slxio
         return MDLFile();
     }
 
-    ErrorCode MDLFileLoader::LoadGraphicalInterface(MDLFile& file, const fs::path& directory)
+    NODISCARD ErrorCode MDLFileLoader::LoadGraphicalInterface(MDLFile& file,
+                                                              const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode MDLFileLoader::LoadCoreProperties(MDLFile& file, const fs::path& directory)
+    NODISCARD ErrorCode MDLFileLoader::LoadCoreProperties(MDLFile& file, const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
