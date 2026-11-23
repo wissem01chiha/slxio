@@ -27,7 +27,6 @@ namespace slxio
         DOWN = 1,
         LEFT = 2,
         UP = 3,
-
     };
 
     float GetDirection(Orientation Orientation);

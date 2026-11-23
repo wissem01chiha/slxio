@@ -212,7 +212,6 @@ namespace slxio
         CastToDouble,
         CastToSingle,
         CCCodeBlock
-
     };
 
     std::string_view ToString(SimulinkBlockType type);
