@@ -16,6 +16,7 @@
 
 #include "Archive.h"
 #include "libzip.h"
+#include "Filesystem.h"
 
 namespace slxio
 {
@@ -76,7 +77,7 @@ namespace slxio
                      name);
 
             int ec = 0;
-            DirectoryService::CreateDirectoryStructure(entrydirpath, &ec);
+            CreateDirectories(entrydirpath, &ec);
             if (ec != 0)
             {
                 return ec;

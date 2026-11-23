@@ -1,17 +1,8 @@
 #include "Archive.h"
-#include "Directory.h"
-#include "DirectoryService.h"
 #include "doctest.h"
-#include "ErrorCode.h"
-#include "File.h"
-#include "HErrorHelper.h"
-
-#include <fstream>
-#include <string>
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     class ArchiveTestFixture
     {
@@ -102,5 +93,4 @@ namespace slxio
         CHECK(rc == E_OK);
     }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

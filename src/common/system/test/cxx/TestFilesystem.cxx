@@ -39,4 +39,20 @@ namespace slxio
         CHECK(std::find(files.begin(), files.end(), file2) != files.end());
         tempdir.Cleanup();
     }
+
+    TEST_CASE("Create directories create valid entries test")
+    {
+        ErrorCode err = ErrorCode::Ok;
+        auto d = GetWorkingPath(&err);
+        std::string subdirpath = "simulink/plugin/rels/";
+        auto dir = CreateDirectories(subdirpath, &err);
+
+        CHECK(dir != nullptr);
+        CHECK(err == ErrorCode::Ok);
+        CHECK(fs::exists(*dir));
+        CHECK(fs::is_directory(*dir));
+        
+        fs::remove_all("simulink");
+        CHECK_FALSE(fs::exists("simulink"));
+    }
 } // namespace slxio

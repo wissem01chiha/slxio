@@ -130,4 +130,40 @@ namespace slxio
             return fs::path();
         }
     }
+
+    std::shared_ptr<fs::path> CreateDirectories(const std::string& structure, ErrorCode* error)
+    {
+        if (structure.empty())
+        {
+            if (error)
+                *error = ErrorCode::InvalidArgument;
+
+            return nullptr;
+        }
+
+        fs::path path{structure};
+
+        if (!structure.empty() && structure.back() != '/' && structure.back() != '\\')
+        {
+            path = path.parent_path();
+        }
+
+        if (path.empty())
+        {
+            return std::make_shared<fs::path>(path);
+        }
+
+        std::error_code ec;
+        fs::create_directories(path, ec);
+
+        if (ec)
+        {
+            if (error)
+                *error = ErrorCode::FileSystemError;
+
+            return nullptr;
+        }
+
+        return std::make_shared<fs::path>(path);
+    }
 } // namespace slxio

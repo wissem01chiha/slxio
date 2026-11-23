@@ -55,8 +55,10 @@ namespace slxio
      * - "simulink/blockdiagram.xml" (a file path)
      * This function ensures that the directory structure is created up
      * to the specified root folder (`dir`)
+     * Note : If it encounter  at the end a file, it create only the
+     * parent directories.
      */
-    std::shared_ptr<fs::path> CreateDirectoryStructure(const std::string& structure,
-                                                       ErrorCode* error = nullptr);
+    std::shared_ptr<fs::path> CreateDirectories(const std::string& structure,
+                                                ErrorCode* error = nullptr);
 
 }; // namespace slxio

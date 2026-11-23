@@ -3,7 +3,6 @@
 
 namespace slxio
 {
-    SLXIO_ABI_NAMESPACE_BEGIN
 
     class ArchiveManagerTestFixture
     {
@@ -18,5 +17,4 @@ namespace slxio
     private:
     };
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio
