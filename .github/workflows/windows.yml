@@ -68,7 +68,7 @@ jobs:
         # https://stackoverflow.com/a/80018104
         - name: Upgrade LLVM
           if: ${{ matrix.compiler == 'clang' }}
-          run: choco install llvm --upgrade --no-progress
+          run: choco install llvm --version=22.1.0 -y
 
         - name: Install MSVC Build Tools
           if: ${{ matrix.compiler == 'msvc' }}
