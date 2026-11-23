@@ -17,6 +17,7 @@
 #include "SimulinkModel.h"
 #include "SimulinkParameter.h"
 #include "SimulinkConfigSet.h"
+#include "StateflowMachine.h"
 
 namespace slxio
 {
@@ -40,7 +41,7 @@ namespace slxio
         return m_children;
     }
 
-    ErrorCode SimulinkModel::SetParent(const std::shared_ptr<SimulinkBlock> parent)
+    NODISCARD ErrorCode SimulinkModel::SetParent(const std::shared_ptr<SimulinkBlock> parent)
     {
         return ErrorCode::Ok;
     }
@@ -67,8 +68,8 @@ namespace slxio
         return nullptr;
     }
 
-    ErrorCode SimulinkModel::AddConfigSet(const std::string& name,
-                                          const std::shared_ptr<SimulinkConfigSet>& config)
+    NODISCARD ErrorCode SimulinkModel::AddConfigSet(
+        const std::string& name, const std::shared_ptr<SimulinkConfigSet>& config)
     {
         if (name.empty())
         {
@@ -101,9 +102,8 @@ namespace slxio
         return nullptr;
     }
 
-    ErrorCode SimulinkModel::SetConfigSetParameter(std::string config,
-                                                   std::string name,
-                                                   std::shared_ptr<SimulinkParameter> value)
+    NODISCARD ErrorCode SimulinkModel::SetConfigSetParameter(
+        std::string config, std::string name, std::shared_ptr<SimulinkParameter> value)
     {
         if (config.empty())
         {

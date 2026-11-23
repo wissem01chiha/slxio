@@ -27,8 +27,8 @@ namespace slxio
 
 #if SIMULINK_COMPATIBILTY_2024
 
-    ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
-                                                         const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
+                                                                   const fs::path& directory)
     {
         const std::string path = (directory / "simulink/graphicalInterface.json").string();
         if (!fs::exists(path))
@@ -45,8 +45,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 #else
-    ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
-                                                         const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadGraphicalInterface(SimulinkFile& file,
+                                                                   const fs::path& directory)
     {
         const std::string path = (directory / "simulink/graphicalInterface.xml").string();
         if (!fs::exists(path))
@@ -62,7 +62,8 @@ namespace slxio
     }
 #endif
 
-    ErrorCode SimulinkFileLoader::LoadCoreProperties(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadCoreProperties(SimulinkFile& file,
+                                                               const fs::path& directory)
     {
         const auto path = directory / "metadata/coreProperties.xml";
 
@@ -75,8 +76,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadMwCoreProperties(SimulinkFile& file,
-                                                       const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadMwCoreProperties(SimulinkFile& file,
+                                                                 const fs::path& directory)
     {
         const auto path = directory / "metadata/mwcoreProperties.xml";
 
@@ -89,8 +90,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadMwCorePropertiesExtension(SimulinkFile& file,
-                                                                const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadMwCorePropertiesExtension(SimulinkFile& file,
+                                                                          const fs::path& directory)
     {
         const auto path = directory / "metadata/mwcorePropertiesExtension.xml";
 
@@ -103,7 +104,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadConfigSetInfo(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadConfigSetInfo(SimulinkFile& file,
+                                                              const fs::path& directory)
     {
         const auto path = directory / "simulink/configSetInfo.xml";
 
@@ -116,7 +118,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadBlockDiagram(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadBlockDiagram(SimulinkFile& file,
+                                                             const fs::path& directory)
     {
         const auto path = directory / "simulink/blockdiagram.xml";
 
@@ -129,7 +132,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadModelDictionary(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadModelDictionary(SimulinkFile& file,
+                                                                const fs::path& directory)
     {
         const auto path = directory / "simulink/modelDictionary.xml";
 
@@ -142,7 +146,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadBdDefaults(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadBdDefaults(SimulinkFile& file,
+                                                           const fs::path& directory)
     {
         const auto path = directory / "simulink/bddefaults.xml";
 
@@ -155,7 +160,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadScheduleEditor(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadScheduleEditor(SimulinkFile& file,
+                                                               const fs::path& directory)
     {
         const auto path = directory / "simulink/ScheduleEditor.xml";
 
@@ -168,7 +174,8 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileLoader::LoadScheduleCore(SimulinkFile& file, const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileLoader::LoadScheduleCore(SimulinkFile& file,
+                                                             const fs::path& directory)
     {
         const auto path = directory / "simulink/ScheduleCore.xml";
 
@@ -181,7 +188,7 @@ namespace slxio
         return ErrorCode::Ok;
     }
 
-    SimulinkFile SimulinkFileLoader::Load(const fs::path& directory, ErrorCode& ec)
+    NODISCARD SimulinkFile SimulinkFileLoader::Load(const fs::path& directory, ErrorCode& ec)
     {
         SimulinkFile file;
 

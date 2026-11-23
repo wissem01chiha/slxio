@@ -20,14 +20,14 @@
 #include "Error.h"
 #include "SimulinkModelType.h"
 #include "SimulinkBlock.h"
-#include "unordered_dense.h"
+#include "Compiler.h"
 #include "SimulinkBlockType.h"
 
 namespace slxio
 {
     class SimulinkParameter;
     class SimulinkConfigSet;
-    // class StateflowMachine;
+    class StateflowMachine;
 
     class SimulinkModel final : public SimulinkBlock
     {
@@ -81,7 +81,7 @@ namespace slxio
         std::set<std::string> GetBlockDefaultParameterNames(SimulinkBlockType type) const;
 
         // This throws an exception as models cannot have parents.
-        ErrorCode SetParent(const std::shared_ptr<SimulinkBlock> parent) override;
+        NODISCARD ErrorCode SetParent(const std::shared_ptr<SimulinkBlock> parent) override;
 
         // Get a configuration default parameter.
         std::shared_ptr<SimulinkParameter> GetConfigSetDefaultParameter(std::string name) const;
@@ -90,20 +90,20 @@ namespace slxio
         std::shared_ptr<SimulinkConfigSet> GetConfigSet(const std::string& name) const;
 
         // Add a new configuration to the model
-        ErrorCode AddConfigSet(const std::string& name,
-                               const std::shared_ptr<SimulinkConfigSet>& config);
+        NODISCARD ErrorCode AddConfigSet(const std::string& name,
+                                         const std::shared_ptr<SimulinkConfigSet>& config);
 
         // Set the value of a given parameter in a given configuration
-        ErrorCode SetConfigSetParameter(std::string config,
-                                        std::string name,
-                                        std::shared_ptr<SimulinkParameter> value);
+        NODISCARD ErrorCode SetConfigSetParameter(std::string config,
+                                                  std::string name,
+                                                  std::shared_ptr<SimulinkParameter> value);
 
         // Get the value of a given parameter in a given configuration
         std::shared_ptr<SimulinkParameter> GetConfigSetParameter(std::string config,
                                                                  std::string name);
 
         // Get Stateflow machine of this model (may be nullptr).
-        // std::shared_ptr<StateflowMachine> GetStateflowMachine() const;
+        std::shared_ptr<StateflowMachine> GetStateflowMachine() const;
 
         SimulinkModelType GetModelType() const;
 

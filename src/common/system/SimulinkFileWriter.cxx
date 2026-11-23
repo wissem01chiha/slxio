@@ -19,67 +19,68 @@
 
 namespace slxio
 {
-    ErrorCode SimulinkFileWriter::Save(const SimulinkFile& file, const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveGraphicalInterface(const SimulinkFile& file,
-                                                         const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveCoreProperties(const SimulinkFile& file,
-                                                     const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveMwCoreProperties(const SimulinkFile& file,
-                                                       const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveMwCorePropertiesExtension(const SimulinkFile& file,
-                                                                const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveConfigSetInfo(const SimulinkFile& file,
-                                                    const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveBlockDiagram(const SimulinkFile& file,
-                                                   const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveModelDictionary(const SimulinkFile& file,
-                                                      const fs::path& directory)
-    {
-        return ErrorCode::Ok;
-    }
-
-    ErrorCode SimulinkFileWriter::SaveBdDefaults(const SimulinkFile& file,
+    NODISCARD ErrorCode SimulinkFileWriter::Save(const SimulinkFile& file,
                                                  const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveScheduleEditor(const SimulinkFile& file,
-                                                     const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileWriter::SaveGraphicalInterface(const SimulinkFile& file,
+                                                                   const fs::path& directory)
     {
         return ErrorCode::Ok;
     }
 
-    ErrorCode SimulinkFileWriter::SaveScheduleCore(const SimulinkFile& file,
-                                                   const fs::path& directory)
+    NODISCARD ErrorCode SimulinkFileWriter::SaveCoreProperties(const SimulinkFile& file,
+                                                               const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveMwCoreProperties(const SimulinkFile& file,
+                                                                 const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveMwCorePropertiesExtension(const SimulinkFile& file,
+                                                                          const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveConfigSetInfo(const SimulinkFile& file,
+                                                              const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveBlockDiagram(const SimulinkFile& file,
+                                                             const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveModelDictionary(const SimulinkFile& file,
+                                                                const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveBdDefaults(const SimulinkFile& file,
+                                                           const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveScheduleEditor(const SimulinkFile& file,
+                                                               const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode SimulinkFileWriter::SaveScheduleCore(const SimulinkFile& file,
+                                                             const fs::path& directory)
     {
         return ErrorCode::Ok;
     }

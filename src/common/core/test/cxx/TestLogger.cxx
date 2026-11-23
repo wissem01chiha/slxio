@@ -26,8 +26,8 @@ namespace slxio
     {
         Diagnostic diagnostic;
 
-        diagnostic.SetSeverity(DiagnosticSeverity::Warning);
-        diagnostic.SetMessage("missing optional setting");
+        diagnostic.level = DiagnosticLevel::Warning;
+        diagnostic.message = "missing optional setting";
 
         LoggerOptions options;
         options.m_enableLogging = true;
@@ -50,8 +50,8 @@ namespace slxio
     {
         Diagnostic diagnostic;
 
-        diagnostic.SetSeverity(DiagnosticSeverity::Warning);
-        diagnostic.SetMessage("missing optional setting");
+        diagnostic.level = DiagnosticLevel::Warning;
+        diagnostic.message = "missing optional setting";
 
         LoggerOptions options;
         options.m_enableLogging = true;

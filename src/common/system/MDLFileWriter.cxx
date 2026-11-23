@@ -24,4 +24,15 @@ namespace slxio
         return MDLFile();
     }
 
+    NODISCARD ErrorCode MDLFileWriter::SaveGraphicalInterface(MDLFile& file,
+                                                              const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
+    NODISCARD ErrorCode MDLFileWriter::SaveCoreProperties(MDLFile& file, const fs::path& directory)
+    {
+        return ErrorCode::Ok;
+    }
+
 } // namespace slxio

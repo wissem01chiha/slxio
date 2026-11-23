@@ -19,6 +19,7 @@
 #include "CommonPCH.h"
 #include "SimulinkFileInfo.h"
 #include "Error.h"
+#include "Compiler.h"
 
 namespace slxio
 {
@@ -28,21 +29,26 @@ namespace slxio
     class SimulinkFileLoader
     {
     public:
-        static SimulinkFile Load(const fs::path& directory, ErrorCode& ec);
+        NODISCARD static SimulinkFile Load(const fs::path& directory, ErrorCode& ec);
         static SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     private:
-        static ErrorCode LoadGraphicalInterface(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadCoreProperties(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadMwCoreProperties(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadMwCorePropertiesExtension(SimulinkFile& file,
+        NODISCARD static ErrorCode LoadGraphicalInterface(SimulinkFile& file,
+                                                          const fs::path& directory);
+        NODISCARD static ErrorCode LoadCoreProperties(SimulinkFile& file,
+                                                      const fs::path& directory);
+        NODISCARD static ErrorCode LoadMwCoreProperties(SimulinkFile& file,
+                                                        const fs::path& directory);
+        NODISCARD static ErrorCode LoadMwCorePropertiesExtension(SimulinkFile& file,
+                                                                 const fs::path& directory);
+        NODISCARD static ErrorCode LoadConfigSetInfo(SimulinkFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadBlockDiagram(SimulinkFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadModelDictionary(SimulinkFile& file,
                                                        const fs::path& directory);
-        static ErrorCode LoadConfigSetInfo(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadBlockDiagram(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadModelDictionary(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadBdDefaults(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadScheduleEditor(SimulinkFile& file, const fs::path& directory);
-        static ErrorCode LoadScheduleCore(SimulinkFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadBdDefaults(SimulinkFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode LoadScheduleEditor(SimulinkFile& file,
+                                                      const fs::path& directory);
+        NODISCARD static ErrorCode LoadScheduleCore(SimulinkFile& file, const fs::path& directory);
     };
 
 }; // namespace slxio

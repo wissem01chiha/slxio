@@ -73,8 +73,8 @@ namespace slxio
         if (m_className.empty())
         {
             Diagnostic diag;
-            diag.SetMessage("SimulinkConfigSetCompoant : classname is empty");
-            diag.SetSeverity(DiagnosticSeverity::Error);
+            diag.message = "SimulinkConfigSetCompoant : classname is empty";
+            diag.level = DiagnosticLevel::Error;
             diagnostics.push_back(std::move(diag));
         }
         return diagnostics;

@@ -46,11 +46,11 @@ namespace slxio
 
         if (m_options->m_logToFile)
         {
-            spdlog::info("{}", diagnostic.GetDiagnosticMessage());
+            spdlog::info("{}", diagnostic.message);
         }
         else
         {
-            std::cout << diagnostic.GetDiagnosticMessage();
+            std::cout << diagnostic.message;
         }
     }
 

@@ -15,18 +15,10 @@
  */
 
 #include "Archive.h"
-#include "Libzip.h"
+#include "libzip.h"
 
 namespace slxio
 {
-    Archive* Archive::New()
-    {
-        return new Archive();
-    }
-
-    Archive::Archive() : file(File("")), directory(Directory(""))
-    {
-    }
 
     Archive::Archive(const File& _file) : file(_file), directory(Directory(""))
     {
@@ -56,7 +48,7 @@ namespace slxio
         return directory;
     }
 
-    HError Archive::Extract()
+    NODISCARD ErrorCode Archive::Extract()
     {
         int err = 0;
         uv_fs_t req;
@@ -113,10 +105,10 @@ namespace slxio
             zip_fclose(zf);
         }
 
-        return E_OK;
+        return ErrorCode::Ok;
     }
 
-    HError Archive::Add(const File& file_)
+    ErrorCode Archive::Add(const File& file_)
     {
         int err = 0;
         zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
@@ -200,5 +192,4 @@ namespace slxio
         return file.GetFilePath().substr(pos + 1);
     }
 
-    SLXIO_ABI_NAMESPACE_END
 }; // namespace slxio

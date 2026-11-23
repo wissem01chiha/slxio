@@ -21,38 +21,26 @@
 namespace slxio
 {
 
-    enum class DiagnosticSeverity
+    enum class DiagnosticLevel
     {
-        Note,
-        Warning,
+        Fatal,
+        Critical,
         Error,
-        Remark,
+        Warning,
+        Notice,
+        Information,
+        Debug,
+        Trace,
+        Test
     };
 
-    class Diagnostic final
+    struct Diagnostic
     {
-    public:
-        Diagnostic(Diagnostic&&) = default;
-        Diagnostic& operator=(Diagnostic&&) = default;
-        Diagnostic(const Diagnostic&) = delete;
-        Diagnostic& operator=(const Diagnostic&) = delete;
-        Diagnostic() = default;
-
-        DiagnosticSeverity GetSeverity() const;
-        void SetSeverity(DiagnosticSeverity s);
-        void SetMessage(const std::string& msg);
-        std::string GetDiagnosticMessage() const;
-        void SetErrorCode(std::error_code error);
-        std::optional<std::error_code> GetErrorCode() const;
+        DiagnosticLevel level = DiagnosticLevel::Notice;
+        std::string message;
+        std::vector<Diagnostic> diagnostics;
 
         void Print(std::ostream& os) const;
-
-        ~Diagnostic() = default;
-
-    private:
-        DiagnosticSeverity m_severity{DiagnosticSeverity::Note};
-        std::string m_message;
-        std::optional<std::error_code> m_errorCode;
     };
 
 }; // namespace slxio

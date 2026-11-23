@@ -71,9 +71,9 @@ The long-term vision is to support all Simulink releases starting with R2019a. H
 
 ## Limitations
 
-- Exporting mdl files from models that were originally stored as slx files is currently not supported. because slx files are opc (open packaging convention)-based archives, converting them back to the legacy flat mdl format can produce schema inconsistencies that do not always match the traditional mdl hierarchical structure.
+- Exporting mdl files from models that were originally stored as slx files is currently not supported. because slx files are [opc](https://en.wikipedia.org/wiki/Open_Packaging_Conventions)-based archives, converting them back to the legacy flat mdl format can produce schema inconsistencies that do not always match the traditional mdl hierarchical structure.
 
-- Internal changes introduced by mathworks in newer slx formats (for example, the migration of graphical interface metadata from xml to json in r2024b and later) may cause some metadata fields to be unavailable or parsed differently. as a result, metadata extraction may not be fully consistent across all supported releases. support for these format variations will be improved incrementally, and affected fields may be reported through library warnings in future versions.
+- Internal changes introduced by mathworks in newer file formats may cause some metadata fields to be unavailable or parsed differently. as a result, metadata extraction may not be fully consistent across all supported releases. support for these format variations will be improved incrementally, and affected fields may be reported through library warnings in future versions.
 
 ## Acknowledgments
 

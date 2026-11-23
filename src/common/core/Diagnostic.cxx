@@ -18,48 +18,52 @@
 
 namespace slxio
 {
-    DiagnosticSeverity Diagnostic::GetSeverity() const
+
+    namespace
     {
-        return m_severity;
-    }
-    void Diagnostic::SetSeverity(DiagnosticSeverity s)
-    {
-        m_severity = s;
-    }
-    void Diagnostic::SetMessage(const std::string& msg)
-    {
-        m_message = msg;
-    }
-    std::string Diagnostic::GetDiagnosticMessage() const
-    {
-        return m_message;
-    }
-    void Diagnostic::SetErrorCode(std::error_code error)
-    {
-        m_errorCode = error;
-    }
-    std::optional<std::error_code> Diagnostic::GetErrorCode() const
-    {
-        return m_errorCode;
-    }
+        const char* ToString(DiagnosticLevel level)
+        {
+            switch (level)
+            {
+            case DiagnosticLevel::Fatal:
+                return "Fatal";
+            case DiagnosticLevel::Critical:
+                return "Critical";
+            case DiagnosticLevel::Error:
+                return "Error";
+            case DiagnosticLevel::Warning:
+                return "Warning";
+            case DiagnosticLevel::Notice:
+                return "Notice";
+            case DiagnosticLevel::Information:
+                return "Information";
+            case DiagnosticLevel::Debug:
+                return "Debug";
+            case DiagnosticLevel::Trace:
+                return "Trace";
+            case DiagnosticLevel::Test:
+                return "Test";
+            }
+
+            return "Unknown";
+        }
+
+        void
+        PrintDiagnostic(const slxio::Diagnostic& diagnostic, std::ostream& os, std::size_t depth)
+        {
+            os << std::string(depth * 2, ' ') << '[' << ToString(diagnostic.level) << "] "
+               << diagnostic.message << '\n';
+
+            for (const auto& child : diagnostic.diagnostics)
+            {
+                PrintDiagnostic(child, os, depth + 1);
+            }
+        }
+    } // namespace
+
     void Diagnostic::Print(std::ostream& os) const
     {
-        switch (m_severity)
-        {
-        case DiagnosticSeverity::Note:
-            os << "Note";
-            break;
-        case DiagnosticSeverity::Warning:
-            os << "Warning";
-            break;
-        case DiagnosticSeverity::Error:
-            os << "Error";
-            break;
-        case DiagnosticSeverity::Remark:
-            os << "Remark";
-            break;
-        }
-        os << " " << GetDiagnosticMessage() << "\n";
+        PrintDiagnostic(*this, os, 0);
     }
 
 } // namespace slxio

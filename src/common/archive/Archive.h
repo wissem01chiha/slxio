@@ -17,38 +17,38 @@
 #pragma once
 
 #include "CommonPCH.h"
+#include "Compiler.h"
+#include "Error.h"
+#include "Diagnostic.h"
 
 namespace slxio
 {
     class Archive final
     {
     public:
-        Archive();
-        Archive(const File& file);
-        Archive* New();
+        Archive() = default;
+        explicit Archive(const fs::path& file);
 
-        void SetArchiveExtension(const char* ext);
+        void SetArchiveExtension(const std::string& ext);
 
-        /* Set the archive directory folder is not given a temporary one will be
-         * used as default */
-        void SetArchiveDirectory(const Directory& directory);
+        // Set the archive directory folder is not given a temporary one will be
+        // used as default
+        void SetArchiveDirectory(const fs::path& directory);
 
-        /** Extract the archive if it is a ZIP archive. */
-        HError Extract();
+        // Extract the archive if it is a ZIP archive.
+        NODISCARD ErrorCode Extract();
 
-        /** Add a file to the Archive, if the file already there */
-        HError Add(const File& file);
+        // Add a file to the Archive, if the file already there
+        NODISCARD ErrorCode Add(const fs::path& file);
 
-        /** Remove a file from teh archive, if the file exist else return and error
-         */
-        HError Remove(const File& file);
+        // Remove a file from teh archive, if the file exist else return and error
+        NODISCARD ErrorCode Remove(const fs::path& file);
 
-        /** Default Destructor */
         ~Archive() = default;
 
     private:
-        Directory directory;
-        File file;
+        fs::path m_directory;
+        fs::path m_file;
     };
 
 }; // namespace slxio

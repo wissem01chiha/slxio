@@ -19,6 +19,7 @@
 #include "CommonPCH.h"
 #include "SimulinkFileInfo.h"
 #include "Error.h"
+#include "Compiler.h"
 
 namespace slxio
 {
@@ -31,16 +32,17 @@ namespace slxio
         static SimulinkFileInfo GetSimulinkFileInfo(const fs::path& path, ErrorCode& ec);
 
     private:
-        static ErrorCode SaveGraphicalInterface(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveCoreProperties(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveMwCoreProperties(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveMwCorePropertiesExtension(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveConfigSetInfo(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveBlockDiagram(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveModelDictionary(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveBdDefaults(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveScheduleEditor(MDLFile& file, const fs::path& directory);
-        static ErrorCode SaveScheduleCore(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveGraphicalInterface(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveCoreProperties(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveMwCoreProperties(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveMwCorePropertiesExtension(MDLFile& file,
+                                                                 const fs::path& directory);
+        NODISCARD static ErrorCode SaveConfigSetInfo(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveBlockDiagram(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveModelDictionary(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveBdDefaults(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveScheduleEditor(MDLFile& file, const fs::path& directory);
+        NODISCARD static ErrorCode SaveScheduleCore(MDLFile& file, const fs::path& directory);
     };
 
 }; // namespace slxio
