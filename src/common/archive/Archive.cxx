@@ -15,12 +15,14 @@
  */
 
 #include "Archive.h"
-#include "libzip.h"
-#include "Filesystem.h"
+#include "zip.h"
 
 namespace slxio
 {
+    Archive::Archive() = default;
+
     Archive::Archive(const fs::path& file)
+        : m_file(file)
     {
     }
 
@@ -29,66 +31,76 @@ namespace slxio
         m_directory = directory;
     }
 
-    ArchiveInfo& Archive::GetArchiveInfo() const
+    ArchiveInfo Archive::GetArchiveInfo() const
     {
-        return m_info;
+        return slxio::GetArchiveInfo(m_file);
     }
 
     NODISCARD ErrorCode Archive::Extract()
     {
         int err = 0;
-        uv_fs_t req;
-
-        zip_t* archive = zip_open(file.GetFilePath().c_str(), ZIP_RDONLY, &err);
+        std::unique_ptr<zip_t, decltype(&zip_close)> archive(zip_open(m_file.string().c_str(), ZIP_RDONLY, &err), &zip_close);
         if (!archive)
         {
-            return SLXIO_LIBZIP_ERROR(err);
+            return ErrorCode::ArchiveOpenFailed;
         }
 
-        zip_int64_t num_entries = zip_get_num_entries(archive, 0);
-
-        for (zip_uint64_t i = 0; i < num_entries; ++i)
+        const zip_int64_t count = zip_get_num_entries(archive.get(), 0);
+        if (count < 0)
         {
-            const char* name = zip_get_name(archive, i, 0);
+            return ErrorCode::ArchiveOpenFailed;
+        }
+
+        for (zip_int64_t i = 0; i < count; ++i)
+        {
+            const char* name = zip_get_name(archive.get(), i, 0);
             if (!name)
             {
                 continue;
             }
-            char entrydirpath[1024];
-            snprintf(entrydirpath,
-                     sizeof(entrydirpath),
-                     "%s/%s",
-                     m_directory.GetDirectoryPath().c_str(),
-                     name);
 
-            ErrorCode ec = ErrorCode::Ok;
-            CreateDirectories(entrydirpath, &ec);
-            if (ec != ErrorCode::Ok)
+            const std::string_view entryName(name);
+            const fs::path target = m_directory / entryName;
+            std::error_code ec;
+
+            if (!entryName.empty() && entryName.back() == '/')
             {
-                return ec;
+                fs::create_directories(target, ec);
+                if (ec)
+                {
+                    return ErrorCode::FileSystemError;
+                }
+                continue;
             }
 
-            zip_file_t* zf = zip_fopen_index(archive, i, 0);
-            if (!zf)
+            fs::create_directories(target.parent_path(), ec);
+            if (ec)
+            {
+                return ErrorCode::FileSystemError;
+            }
+
+            std::unique_ptr<zip_file_t, decltype(&zip_fclose)> entry(zip_fopen_index(archive.get(), i, 0), &zip_fclose);
+            if (!entry)
             {
                 continue;
             }
 
-            FILE* out = fopen(entrydirpath, "wb");
+            std::ofstream out(target, std::ios::binary);
             if (!out)
             {
-                zip_fclose(zf);
-                continue;
+                return ErrorCode::FileSystemError;
             }
 
-            char InternalBuffer[4096];
-            zip_int64_t bytes;
-            while ((bytes = zip_fread(zf, InternalBuffer, sizeof(InternalBuffer))) > 0)
+            std::array<char, 4096> buffer{};
+            zip_int64_t bytes = 0;
+            while ((bytes = zip_fread(entry.get(), buffer.data(), buffer.size())) > 0)
             {
-                fwrite(InternalBuffer, 1, bytes, out);
+                out.write(buffer.data(), static_cast<std::streamsize>(bytes));
             }
-            fclose(out);
-            zip_fclose(zf);
+            if (bytes < 0 || !out)
+            {
+                return ErrorCode::ArchiveSourceFailed;
+            }
         }
 
         return ErrorCode::Ok;
@@ -97,75 +109,60 @@ namespace slxio
     NODISCARD ErrorCode Archive::Add(const fs::path& file)
     {
         int err = 0;
-        zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
-        if (!za)
+        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(zip_open(m_file.string().c_str(), ZIP_CREATE, &err), &zip_discard);
+        if (!archive)
         {
-            return SLXIO_LIBZIP_ERROR(err);
+            return ErrorCode::ArchiveOpenFailed;
         }
 
-        zip_int64_t idx = zip_name_locate(za, file.GetFileName().c_str(), 0);
+        const std::string entryName = file.filename().string();
+        const zip_int64_t idx = zip_name_locate(archive.get(), entryName.c_str(), 0);
 
-        zip_source_t* source = zip_source_file(za, file.GetFilePath().c_str(), 0, -1);
+        zip_source_t* source = zip_source_file(archive.get(), file.string().c_str(), 0, -1);
         if (!source)
         {
-            zip_close(za);
             return ErrorCode::ArchiveSourceFailed;
         }
 
         if (idx >= 0)
         {
-            if (zip_file_replace(za, idx, source, ZIP_FL_ENC_UTF_8) < 0)
+            if (zip_file_replace(archive.get(), idx, source, ZIP_FL_ENC_UTF_8) < 0)
             {
                 zip_source_free(source);
-                zip_close(za);
                 return ErrorCode::ArchiveReplaceFailed;
             }
         }
-        else
+        else if (zip_file_add(archive.get(), entryName.c_str(), source, ZIP_FL_ENC_UTF_8) < 0)
         {
-            if (zip_file_add(za, file_.GetFileName().c_str(), source, ZIP_FL_ENC_UTF_8) < 0)
-            {
-                zip_source_free(source);
-                zip_close(za);
-                return ErrorCode::ArchiveAddFailed;
-            }
-        }
-        if (zip_close(za) < 0)
-        {
-            return ErrorCode::ArchiveCloseFailed;
+            zip_source_free(source);
+            return ErrorCode::ArchiveAddFailed;
         }
 
-        return ErrorCode::Ok;
+        return zip_close(archive.release()) < 0 ? ErrorCode::ArchiveCloseFailed : ErrorCode::Ok;
     }
 
     NODISCARD ErrorCode Archive::Remove(const fs::path& file)
     {
         int err = 0;
-        zip_t* za = zip_open(file.GetFilePath().c_str(), ZIP_CREATE, &err);
-        if (!za)
+        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(zip_open(m_file.string().c_str(), 0, &err), &zip_discard);
+        if (!archive)
         {
             return ErrorCode::ArchiveOpenFailed;
         }
 
-        zip_int64_t idx = zip_name_locate(za, file_.GetFileName().c_str(), 0);
+        const std::string entryName = file.filename().string();
+        const zip_int64_t idx = zip_name_locate(archive.get(), entryName.c_str(), 0);
         if (idx < 0)
         {
-            zip_close(za);
             return ErrorCode::ArchiveEntryNotFound;
         }
 
-        if (zip_delete(za, idx) < 0)
+        if (zip_delete(archive.get(), idx) < 0)
         {
-            zip_close(za);
             return ErrorCode::ArchiveRemoveFailed;
         }
 
-        if (zip_close(za) < 0)
-        {
-            return ErrorCode::ArchiveCloseFailed;
-        }
-
-        return ErrorCode::Ok;
+        return zip_close(archive.release()) < 0 ? ErrorCode::ArchiveCloseFailed : ErrorCode::Ok;
     }
 
     void Archive::SetArchiveExtension(const std::string& ext)
@@ -174,11 +171,7 @@ namespace slxio
         {
             return;
         }
-        size_t pos = m_file.find_last_of('.');
-        std::string base;
-        base = (pos == std::string::npos) ? file.GetFilePath() : file.GetFilePath().substr(0, pos);
-        std::string dest = base + "." + ext;
-        file.Rename(dest);
+        m_file.replace_extension(ext);
     }
 
 }; // namespace slxio

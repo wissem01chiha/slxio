@@ -30,21 +30,14 @@ namespace slxio
                 return {};
             return file.string().substr(pos + 1);
         }
-
-        size_t GetFileSizeOnDisk(const fs::path file)
-        {
-            if (file.empty())
-                return 0;
-                
-        }
     } // namespace
 
-    ArchiveInfo& GetArchiveInfo(const fs::path& file)
+    ArchiveInfo GetArchiveInfo(const fs::path& file)
     {
         ArchiveInfo info;
         info.m_file = file;
         info.m_extension = GetFileExtension(file);
-        info.m_size = GetFileSizeOnDisk(file);
+        info.m_size = fs::file_size(file);
         info.m_empty = info.m_size == 0;
         return info;
     }

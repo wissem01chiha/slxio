@@ -12,7 +12,12 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(CommonArchive ArchiveInfo.cxx)
-module_link_libraries(CommonArchive CommonCore libzip::zip)
+add_module(CommonArchive ArchiveInfo.cxx Archive.cxx)
+if(SLXIO_STATIC_LIBS)
+  set(SLXIO_ARCHIVE_ZLIB ZLIB::ZLIBSTATIC)
+else()
+  set(SLXIO_ARCHIVE_ZLIB ZLIB::ZLIB)
+endif()
+module_link_libraries(CommonArchive CommonCore libzip::zip ${SLXIO_ARCHIVE_ZLIB})
 module_include_directories(CommonArchive ${PROJECT_EXTERN_SOURCE_DIR}/libzip)
 add_subdirectory(test)

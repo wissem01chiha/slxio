@@ -24,7 +24,7 @@ if(SLXIO_MDL)
   target_sources(CommonSystem PRIVATE MDLFile.cxx MDLFileWriter.cxx
                                       MDLFileLoader.cxx MDLSection.cxx)
 endif()
-module_link_libraries(CommonSystem CommonCore pugixml)
+module_link_libraries(CommonSystem CommonCore CommonArchive pugixml)
 if(SIMULINK_COMPATIBILTY_2024)
   module_link_libraries(CommonSystem yyjson)
 endif()

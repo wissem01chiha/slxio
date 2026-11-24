@@ -30,21 +30,13 @@
 
 namespace slxio
 {
-    // new elment in memory.
-    SimulinkModel NewSystem();
+    SimulinkModel* NewSystem();
+    SimulinkModel* LoadSystem(const fs::path& path);
 
-    // Load a model from disk.
-    void LoadSystem(const fs::path& path);
-
-    // modelead model metadata without loading a model.
     SimulinkModelInfo ModelInfo(const fs::path& path);
-    void GetDescriptionon();
-    void GetMetadata();
+    void GetDescription(const fs::path& path);
+    void GetMetadata(const fs::path& path);
 
-    // Close one or more open models.
-    void BdClose(const fs::path& path);
-
-    // Open atem, or block.
     void OpenSystem();
     void SaveSystem();
 

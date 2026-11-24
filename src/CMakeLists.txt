@@ -16,6 +16,7 @@ add_subdirectory(common)
 add_subdirectory(simulink)
 add_subdirectory(export)
 add_subdirectory(import)
+add_subdirectory(public)
 
 add_library(SLXIO INTERFACE)
 add_library(SLXIO::SLXIO ALIAS SLXIO)

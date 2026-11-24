@@ -30,6 +30,6 @@ namespace slxio
         fs::path m_file;
     };
 
-    ArchiveInfo& GetArchiveInfo(const fs::path& file);
+    ArchiveInfo GetArchiveInfo(const fs::path& file);
 
 }; // namespace slxio

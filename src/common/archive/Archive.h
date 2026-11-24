@@ -20,20 +20,19 @@
 #include "Compiler.h"
 #include "Error.h"
 #include "Diagnostic.h"
+#include "ArchiveInfo.h"
 
 namespace slxio
 {
-    struct ArchiveInfo;
-
     class Archive final
     {
     public:
-        Archive() = default;
+        Archive();
         explicit Archive(const fs::path& file);
 
         void SetArchiveExtractDirectory(const fs::path& directory);
 
-        ArchiveInfo& GetArchiveInfo() const;
+        NODISCARD ArchiveInfo GetArchiveInfo() const;
 
         // Extract the archive if it is a ZIP archive.
         NODISCARD ErrorCode Extract();
@@ -47,11 +46,12 @@ namespace slxio
         ~Archive() = default;
 
     private:
+        // Set the extension of the archive path
         void SetArchiveExtension(const std::string& ext);
 
-        ArchiveInfo& m_info;
-        
+        fs::path m_file;
         fs::path m_directory;
+        ArchiveInfo info;
     };
 
 }; // namespace slxio

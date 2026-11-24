@@ -71,7 +71,7 @@ cmake_dependent_option(SLXIO_INSTALL_EXAMPLES "Install example scripts" OFF
                        "SLXIO_EXAMPLES" OFF)
 
 # Option to enable the Python bindings interface.
-advanced_option(SLXIO_PYTHON "Build Python interface" ON)
+advanced_option(SLXIO_PYTHON "Build Python interface" OFF)
 
 # Enable all sanitizers globally when the compiler and platform support them
 advanced_option(SLXIO_SANITIZERS "Enable all available sanitizers" OFF)
