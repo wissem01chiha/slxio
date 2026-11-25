@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
- #include "slxio.h"
+#include "slxio.h"
+#include "SimulinkModelInfo.h"
 
 namespace slxio
 {
@@ -22,7 +23,6 @@ namespace slxio
     SimulinkModelInfo ModelInfo(const fs::path& path)
     {
         return SimulinkModelInfo();
-    } 
+    }
 
 } // namespace slxio
- 

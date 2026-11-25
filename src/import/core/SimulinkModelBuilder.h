@@ -18,9 +18,21 @@
 
 #include "CommonPCH.h"
 #include "ISimulinkBuilder.h"
+#include "SimulinkModel.h"
 
 namespace slxio
 {
+    class SimulinkModelObject final : public IDataObject
+    {
+    public:
+        SimulinkModelObject();
+        explicit SimulinkModelObject(SimulinkModel value);
+        SimulinkModel GetValue() const noexcept;
+
+    private:
+        SimulinkModel m_value;
+    };
+
     class SimulinkModelBuilder : public ISimulinkBuilder
     {
     public:

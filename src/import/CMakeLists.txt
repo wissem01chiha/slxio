@@ -12,10 +12,10 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_subdirectory(core)
+add_subdirectory(Core)
 if(SLXIO_MDL)
-  add_subdirectory(mdl)
+  add_subdirectory(Mdl)
 endif()
 if(SLXIO_MAT)
-  add_subdirectory(mat)
+  add_subdirectory(Mat)
 endif()

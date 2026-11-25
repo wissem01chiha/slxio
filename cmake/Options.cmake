@@ -101,13 +101,13 @@ advanced_configure_option(SLXIO_MAT "MATLAB MAT file support" OFF)
 advanced_configure_option(SLXIO_MDL "Legacy Simulink format support" OFF)
 
 # Simulink Compatibilty related options for supported versions 
-advanced_configure_option(SIMULINK_COMPATIBILTY_2019 " " ON)
-advanced_configure_option(SIMULINK_COMPATIBILTY_2020 " " OFF) 
-advanced_configure_option(SIMULINK_COMPATIBILTY_2021 " " OFF)
-advanced_configure_option(SIMULINK_COMPATIBILTY_2022 " " OFF)
-advanced_configure_option(SIMULINK_COMPATIBILTY_2023 " " OFF)
-advanced_configure_option(SIMULINK_COMPATIBILTY_2024 " " OFF)
-advanced_configure_option(SIMULINK_COMPATIBILTY_2025 " " OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2019 "Enable compatibility with Simulink 2019" ON)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2020 "Enable compatibility with Simulink 2020" OFF) 
+advanced_configure_option(SIMULINK_COMPATIBILTY_2021 "Enable compatibility with Simulink 2021" OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2022 "Enable compatibility with Simulink 2022" OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2023 "Enable compatibility with Simulink 2023" OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2024 "Enable compatibility with Simulink 2024" OFF)
+advanced_configure_option(SIMULINK_COMPATIBILTY_2025 "Enable compatibility with Simulink 2025" OFF)
 
 # Build with HDF5 library support. Enables the internal HDF5 exporter and MAT
 # files with HDF5 via MATIO_WITH_HDF5.
@@ -142,9 +142,6 @@ endif()
 # on the host machine. Requires pkg-config installed, see
 # https://people.freedesktop.org/~dbn/pkg-config-guide.html
 advanced_option(SLXIO_ENABLE_PKGCONFIG "Generate pkg-config files" OFF)
-
-# When this is on, custom targets (mainly for tooling) will be built
-advanced_option(SLXIO_CUSTOM_TARGETS "Custom build targets" ON)
 
 # Override default build type
 option(SLXIO_DEFAULT_BUILD_TYPE "Default build type" Release)
@@ -181,12 +178,6 @@ set(PROJECT_EXTERN_SOURCE_DIR ${PROJECT_SOURCE_DIR}/vendor)
 advanced_dependent_option(
   SLXIO_BUILD_EXTERN_TESTS "building third-party module tests" OFF
   "SLXIO_TESTS" OFF)
-
-# Option to enable building third-party module extra tools or scripts.
-advanced_dependent_option(
-  SLXIO_EXTERN_CUSTOM_TARGETS
-  "Building third-party module extra tools or scripts" OFF SLXIO_CUSTOM_TARGETS
-  ON)
 
 # Display all compiler warnings for debugging third-party code
 advanced_option(SLXIO_EXTERN_WALL

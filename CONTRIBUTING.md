@@ -8,6 +8,15 @@
 - Use [NODISCARD](./src/common/core/Compiler.h) on getters and error-returning functions.
 - Class names and public/private method names use PascalCase.
 - Class field names use camelCase prefixed by `m_`
+- For the constants in an enum, use CamelCase with a capital letter ALL_CAPS is not acceptable. 
+  
+```cpp
+  enum class Error
+  {
+    Ok = 0,
+    Fail = 1,
+  };
+```
 
 ### File Naming Conventions
 
@@ -15,23 +24,10 @@
 - Files and folder names should follow lowercase naming with no spaces or special characters or numeric values
 - These rules apply to subfolders and files with no exception outside the `src`
 
-### Commit message formatting
+### Third-Party Libraries
 
-- Although it is not enforced at the moment, we encourage using [conventionalcommits](https://www.conventionalcommits.org/en/v1.0.0/) for commit message writing and formatting. This helps a lot when generating a changelog summary at releases.
+#### Adding and maintaining third-party libraries
 
-## Developer Tools Support
-
-Project helpful tooling/debugging scripts are hosted among many others in the shared repository [tools](https://github.com/wissem01chiha/tools),
-
-```bash
-  git clone https://github.com/wissem01chiha/slxio --recursive
-```
-
-or if you already have a local clone, only updating your git submodules is enough
-
-```bash
-  git submodule update --remote --recursive
-```
 
 ## Testing
 

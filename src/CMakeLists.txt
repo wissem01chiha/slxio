@@ -12,11 +12,11 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_subdirectory(common)
-add_subdirectory(simulink)
-add_subdirectory(export)
-add_subdirectory(import)
-add_subdirectory(public)
+add_subdirectory(Common)
+add_subdirectory(Simulink)
+add_subdirectory(Export)
+add_subdirectory(Import)
+add_subdirectory(Public)
 
 add_library(SLXIO INTERFACE)
 add_library(SLXIO::SLXIO ALIAS SLXIO)

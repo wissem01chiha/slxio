@@ -14,7 +14,6 @@
 
 add_module(CommonCore Error.cxx Logger.cxx Diagnostic.cxx Version.cxx
            SimulinkReleaseHelper.cxx)
-
 configure_file(Config.h.in ${CMAKE_CURRENT_BINARY_DIR}/Config.h @ONLY)
 module_link_libraries(CommonCore spdlog)
 target_precompile_headers(CommonCore PRIVATE CommonPCH.h)

@@ -21,7 +21,16 @@ namespace slxio
 
     BuildResult SimulinkModelBuilder::Build(const IDataObject& input)
     {
-        // Implement the build logic here
         return BuildResult{};
+    }
+    SimulinkModelObject::SimulinkModelObject()
+    {
+    }
+    SimulinkModelObject::SimulinkModelObject(SimulinkModel value) : m_value(value)
+    {
+    }
+    SimulinkModel SimulinkModelObject::GetValue() const noexcept
+    {
+        return m_value;
     }
 } // namespace slxio

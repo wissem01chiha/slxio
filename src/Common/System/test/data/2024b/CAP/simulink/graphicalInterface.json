@@ -1,0 +1,33 @@
+{
+    "GraphicalInterface": {
+        "ExternalFileReferences": [
+            {
+                "Path": "$bdroot\/AWGN Channel",
+                "Reference": "commchan2\/AWGN\nChannel",
+                "SID": "1",
+                "Type": "LIBRARY_BLOCK"
+            },
+            {
+                "Path": "$bdroot\/Random Integer Generator",
+                "Reference": "commrandsrc2\/Random Integer\nGenerator",
+                "SID": "23",
+                "Type": "LIBRARY_BLOCK"
+            },
+            {
+                "Path": "$bdroot\/Rectangular QAM Demodulator Baseband",
+                "Reference": "commdigbbndam2\/Rectangular QAM\nDemodulator\nBaseband",
+                "SID": "25",
+                "Type": "LIBRARY_BLOCK"
+            },
+            {
+                "Path": "$bdroot\/Rectangular QAM Modulator Baseband",
+                "Reference": "commdigbbndam2\/Rectangular QAM\nModulator\nBaseband",
+                "SID": "26",
+                "Type": "LIBRARY_BLOCK"
+            }
+        ],
+        "PreCompExecutionDomainType": "Unset",
+        "SimulinkSubDomainType": "Simulink",
+        "SolverName": "ode45"
+    }
+}

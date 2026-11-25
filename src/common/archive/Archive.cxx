@@ -21,8 +21,7 @@ namespace slxio
 {
     Archive::Archive() = default;
 
-    Archive::Archive(const fs::path& file)
-        : m_file(file)
+    Archive::Archive(const fs::path& file) : m_file(file)
     {
     }
 
@@ -39,7 +38,8 @@ namespace slxio
     NODISCARD ErrorCode Archive::Extract()
     {
         int err = 0;
-        std::unique_ptr<zip_t, decltype(&zip_close)> archive(zip_open(m_file.string().c_str(), ZIP_RDONLY, &err), &zip_close);
+        std::unique_ptr<zip_t, decltype(&zip_close)> archive(
+            zip_open(m_file.string().c_str(), ZIP_RDONLY, &err), &zip_close);
         if (!archive)
         {
             return ErrorCode::ArchiveOpenFailed;
@@ -79,7 +79,8 @@ namespace slxio
                 return ErrorCode::FileSystemError;
             }
 
-            std::unique_ptr<zip_file_t, decltype(&zip_fclose)> entry(zip_fopen_index(archive.get(), i, 0), &zip_fclose);
+            std::unique_ptr<zip_file_t, decltype(&zip_fclose)> entry(
+                zip_fopen_index(archive.get(), i, 0), &zip_fclose);
             if (!entry)
             {
                 continue;
@@ -109,7 +110,8 @@ namespace slxio
     NODISCARD ErrorCode Archive::Add(const fs::path& file)
     {
         int err = 0;
-        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(zip_open(m_file.string().c_str(), ZIP_CREATE, &err), &zip_discard);
+        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(
+            zip_open(m_file.string().c_str(), ZIP_CREATE, &err), &zip_discard);
         if (!archive)
         {
             return ErrorCode::ArchiveOpenFailed;
@@ -144,7 +146,8 @@ namespace slxio
     NODISCARD ErrorCode Archive::Remove(const fs::path& file)
     {
         int err = 0;
-        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(zip_open(m_file.string().c_str(), 0, &err), &zip_discard);
+        std::unique_ptr<zip_t, decltype(&zip_discard)> archive(
+            zip_open(m_file.string().c_str(), 0, &err), &zip_discard);
         if (!archive)
         {
             return ErrorCode::ArchiveOpenFailed;

@@ -11,3 +11,15 @@
 # WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 # License for the specific language governing permissions and limitations under
 # the License.
+
+add_module(SimulinkPublic AddAnnotation.cxx)
+module_link_libraries(
+  SimulinkPublic
+  SimulinkCore
+  CommonCore
+  SimulinkMisc
+  SimulinkConfiguration
+  SimulinkAnnotation
+  SimulinkStateflow)
+module_include_directories(SimulinkPublic ${PROJECT_SOURCE_DIR}/include)
+add_subdirectory(test)

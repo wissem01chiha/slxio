@@ -26,8 +26,8 @@ namespace slxio
         Archive archive(file);
         ArchiveInfo info = archive.GetArchiveInfo();
         CHECK(!info.m_empty);
-        CHECK(info.m_extension=="zip");
-        CHECK(info.m_size==63574);
+        CHECK(info.m_extension == "zip");
+        CHECK(info.m_size == 63574);
     }
 
     TEST_CASE("Set archive extract directory test")
@@ -35,7 +35,6 @@ namespace slxio
         Archive archive;
         fs::path directory = fs::current_path();
         CHECK_NOTHROW(archive.SetArchiveExtractDirectory(directory));
-        
     }
 
     TEST_CASE("Add a file to archive test")

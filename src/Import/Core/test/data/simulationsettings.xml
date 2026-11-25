@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SimulationSettings>
+    <P Name="SimulationMode">normal</P>
+    <P Name="PauseTimes">5</P>
+    <P Name="NumberOfSteps">1</P>
+    <P Name="SnapshotBufferSize">10</P>
+    <P Name="SnapshotInterval">10</P>
+    <P Name="NumberOfLastSnapshots">0</P>
+    <P Name="EnablePacing">off</P>
+    <P Name="PacingRate">1</P>
+    <P Name="LinearizationMsg">none</P>
+    <P Name="Profile">off</P>
+    <P Name="ParamWorkspaceSource">MATLABWorkspace</P>
+    <P Name="AccelSystemTargetFile">accel.tlc</P>
+    <P Name="AccelTemplateMakefile">accel_default_tmf</P>
+    <P Name="AccelMakeCommand">make_rtw</P>
+    <P Name="TryForcingSFcnDF">off</P>
+    <Object PropName="DataLoggingOverride" ObjectID="8" ClassName="Simulink.SimulationData.ModelLoggingInfo">
+    <P Name="model_" Class="char">$bdroot</P>
+    <P Name="overrideMode_" Class="uint32">0U</P>
+    <Array PropName="logAsSpecifiedByModels_" Type="Cell" Dimension="1*1">
+        <Cell Class="char">$bdroot</Cell>
+    </Array>
+    <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
+        <Cell Class="double">[]</Cell>
+    </Array>
+    </Object>
+</SimulationSettings>

@@ -12,11 +12,12 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_subdirectory(configuration)
-add_subdirectory(layout)
-add_subdirectory(annotation)
-add_subdirectory(misc)
-add_subdirectory(stateflow)
-add_subdirectory(core)
-add_subdirectory(data)
-add_subdirectory(library)
+add_subdirectory(Common)
+add_subdirectory(Configuration)
+add_subdirectory(Layout)
+add_subdirectory(Annotation)
+add_subdirectory(Misc)
+add_subdirectory(Stateflow)
+add_subdirectory(Core)
+add_subdirectory(Data)
+add_subdirectory(Library)

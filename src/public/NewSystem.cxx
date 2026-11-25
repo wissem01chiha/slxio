@@ -34,4 +34,4 @@ namespace slxio
     {
         return new SimulinkModel();
     }
-}
+} // namespace slxio

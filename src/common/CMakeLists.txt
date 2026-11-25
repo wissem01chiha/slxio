@@ -12,8 +12,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_subdirectory(core)
-add_subdirectory(archive)
-add_subdirectory(system)
-add_subdirectory(color)
-add_subdirectory(math)
+add_subdirectory(Core)
+add_subdirectory(Archive)
+add_subdirectory(System)
+add_subdirectory(Color)
+add_subdirectory(Math)

@@ -17,13 +17,14 @@
 #pragma once
 
 #include "slxio.h"
+#include "SimulinkModel.h"
 
 namespace slxio
 {
 
     SimulinkModel* LoadSystem(const fs::path& path)
     {
-        return SimulinkModel();
+        return new SimulinkModel();
     }
 
 }; // namespace slxio
