@@ -23,4 +23,4 @@ namespace slxio
         return nullptr;
     };
 
-}; //
+}; // namespace slxio
