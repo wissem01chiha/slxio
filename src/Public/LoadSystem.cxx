@@ -18,12 +18,19 @@
 
 #include "slxio.h"
 #include "SimulinkModel.h"
+#include "Archive.h"
+#include "Tempdir.h"
 
 namespace slxio
 {
 
     SimulinkModel* LoadSystem(const fs::path& path)
     {
+        if (path.empty())
+        {
+            return nullptr;
+        }
+
         return new SimulinkModel();
     }
 

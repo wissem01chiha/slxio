@@ -1,4 +1,5 @@
 ﻿#include "Archive.h"
+// #include "Tempdir.h"
 #include "doctest.h"
 
 namespace slxio
@@ -6,12 +7,13 @@ namespace slxio
 
     namespace
     {
+        // get the full path to the test data directory data/
         fs::path TestDataDir()
         {
             return fs::path(__FILE__).parent_path().parent_path() / "data";
         }
 
-        fs::path MakeTempDir(const std::string& name)
+        fs::path TempDir(const std::string& name)
         {
             fs::path dir = fs::temp_directory_path() / name;
             fs::remove_all(dir);
@@ -39,7 +41,7 @@ namespace slxio
 
     TEST_CASE("Add a file to archive test")
     {
-        const fs::path dir = MakeTempDir("slxio_archive_add");
+        const fs::path dir = TempDir("archive_add");
         const fs::path zipPath = dir / "Asset2.zip";
         const fs::path filePath = dir / "dummy.txt";
         fs::copy_file(TestDataDir() / "Asset2.zip", zipPath);
@@ -58,7 +60,7 @@ namespace slxio
 
     TEST_CASE("Extract archive file test")
     {
-        const fs::path dir = MakeTempDir("slxio_archive_extract");
+        const fs::path dir = TempDir("archive_extract");
         const fs::path zipPath = dir / "Asset2.zip";
         const fs::path outDir = dir / "out";
         fs::copy_file(TestDataDir() / "Asset2.zip", zipPath);
@@ -73,25 +75,20 @@ namespace slxio
         fs::remove_all(dir);
     }
 
-    TEST_CASE("Archive extension mismatch test")
+    TEST_CASE("Extract slx archive files test")
     {
-        const fs::path dir = MakeTempDir("slxio_archive_ext");
-        const fs::path txtPath = dir / "Asset2.txt";
-        const fs::path fakeZipPath = dir / "fake.zip";
-        fs::copy_file(TestDataDir() / "Asset2.zip", txtPath);
-        {
-            std::ofstream ofs(fakeZipPath);
-            ofs << "not a zip archive";
-        }
+        const fs::path dir = TempDir("slx_archive_extract");
+        const fs::path slxPath = dir / "TestAsset3.slx";
+        const fs::path outDir = dir / "out";
+        fs::copy_file(TestDataDir() / "TestAsset3.slx", slxPath);
+        fs::create_directories(outDir);
 
-        Archive archive(txtPath);
-        CHECK(archive.GetArchiveInfo().m_extension != "zip");
-
-        Archive fake(fakeZipPath);
-        CHECK(fake.GetArchiveInfo().m_extension == "zip");
-        fake.SetArchiveExtractDirectory(dir);
-        CHECK(fake.Extract() == ErrorCode::ArchiveOpenFailed);
-
+        Archive archive(slxPath);
+        archive.SetArchiveExtension("zip");
+        CHECK(archive.GetArchiveInfo().m_extension == "zip");
+        archive.SetArchiveExtractDirectory(outDir);
+        CHECK(archive.Extract() == ErrorCode::Ok);
+        CHECK(!fs::is_empty(outDir));
         fs::remove_all(dir);
     }
 

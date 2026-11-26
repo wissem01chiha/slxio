@@ -12,11 +12,24 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_module(SimulinkPublic AddAnnotation.cxx)
+add_module(
+  SimulinkPublic
+  AddAnnotation.cxx
+  Gcbh.cxx
+  GetSimulinkBlockHandle.cxx
+  LoadSystem.cxx
+  ModelInfo.cxx
+  NewSystem.cxx
+  OpenSystem.cxx
+  GetDescription.cxx
+  GetCallbackAnnotation.cxx
+  GetCurrentAnnotation.cxx)
 module_link_libraries(
   SimulinkPublic
-  SimulinkCore
   CommonCore
+  CommonArchive
+  CommonSystem
+  SimulinkCore
   SimulinkMisc
   SimulinkConfiguration
   SimulinkAnnotation

@@ -19,7 +19,6 @@
 
 namespace slxio
 {
-
     SimulinkModelInfo ModelInfo(const fs::path& path)
     {
         return SimulinkModelInfo();

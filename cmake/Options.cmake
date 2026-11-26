@@ -46,7 +46,7 @@ advanced_option(SLXIO_UNIT_TESTS "Enable building unit tests" ON)
 
 # Same as SLXIO_UNIT_TESTS but for integration tests
 advanced_option(SLXIO_INTEGRATION_TESTS "Enable building integration
- tests" OFF)
+ tests" ON)
 
 # Same as SLXIO_UNIT_TESTS but for regression tests
 advanced_option(SLXIO_REGRESSION_TESTS "Enable building regression

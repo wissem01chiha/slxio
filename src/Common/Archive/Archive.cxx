@@ -139,8 +139,11 @@ namespace slxio
             zip_source_free(source);
             return ErrorCode::ArchiveAddFailed;
         }
-
-        return zip_close(archive.release()) < 0 ? ErrorCode::ArchiveCloseFailed : ErrorCode::Ok;
+        if (zip_close(archive.release()) < 0)
+        {
+            return ErrorCode::ArchiveCloseFailed;
+        }
+        return ErrorCode::Ok;
     }
 
     NODISCARD ErrorCode Archive::Remove(const fs::path& file)
@@ -174,7 +177,11 @@ namespace slxio
         {
             return;
         }
-        m_file.replace_extension(ext);
+        fs::path newPath = m_file;
+        newPath.replace_extension(ext);
+        fs::rename(m_file, newPath);
+        m_file = std::move(newPath);
+        m_info.m_extension = ext;
     }
 
 }; // namespace slxio

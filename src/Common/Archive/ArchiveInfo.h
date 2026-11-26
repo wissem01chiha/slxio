@@ -28,6 +28,7 @@ namespace slxio
         size_t m_size;
         bool m_empty = false;
         fs::path m_file;
+        bool m_temp = false;
     };
 
     ArchiveInfo GetArchiveInfo(const fs::path& file);

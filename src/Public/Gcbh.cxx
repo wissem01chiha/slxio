@@ -19,7 +19,6 @@
 
 namespace slxio
 {
-
     Handle Gcbh()
     {
         return Handle();

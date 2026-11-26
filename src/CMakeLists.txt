@@ -26,11 +26,12 @@ target_link_libraries(
   INTERFACE SimulinkCore
             SimulinkConfiguration
             SimulinkMisc
-            SimulinkSateflow
+            SimulinkStateflow
             SimulinkData
             ImportCore
             SimulinkAnnotation
-            SimulinkLayout)
+            SimulinkLayout
+            SimulinkPublic)
 if(SLXIO_MDL)
   target_link_libraries(SLXIO INTERFACE ImportMdl)
 endif()

@@ -13,7 +13,7 @@
 # the License.
 
 add_subdirectory(Core)
-add_subdirectory(Archive)
 add_subdirectory(System)
+add_subdirectory(Archive)
 add_subdirectory(Color)
 add_subdirectory(Math)

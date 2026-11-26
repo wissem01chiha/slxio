@@ -16,17 +16,8 @@
 
 #pragma once
 
-#include "SimulinkFile.h"
-#include "SimulinkFileLoader.h"
-#include "SimulinkFileWriter.h"
-#include "SimulinkModelBuilder.h"
+#include "slxio.h"
 #include "SimulinkModel.h"
-#include "SimulinkModelInfo.h"
-#include "Config.h"
-#if MDL
-#include "MDLFile.h"
-#include "MDLFileLoader.h"
-#endif
 
 namespace slxio
 {

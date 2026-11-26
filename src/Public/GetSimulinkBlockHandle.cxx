@@ -15,3 +15,12 @@
  */
 
 #include "slxio.h"
+
+namespace slxio
+{
+    Handle GetSimulinkBlockHandle(const std::string& path)
+    {
+        return Handle();
+    }
+
+}; // namespace slxio

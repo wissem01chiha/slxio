@@ -30,7 +30,12 @@ namespace slxio
         Archive();
         explicit Archive(const fs::path& file);
 
+        // if info.m_temp is true it uses default system temp directory
+        // else an explict tempory directory need to be set via this call
         void SetArchiveExtractDirectory(const fs::path& directory);
+
+        // Set the extension of the archive path
+        void SetArchiveExtension(const std::string& ext);
 
         NODISCARD ArchiveInfo GetArchiveInfo() const;
 
@@ -46,12 +51,9 @@ namespace slxio
         ~Archive() = default;
 
     private:
-        // Set the extension of the archive path
-        void SetArchiveExtension(const std::string& ext);
-
         fs::path m_file;
         fs::path m_directory;
-        ArchiveInfo info;
+        ArchiveInfo m_info;
     };
 
 }; // namespace slxio
