@@ -26,7 +26,7 @@ jobs:
         export CXX=g++
         cmake -B ${{github.workspace}}/build  -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} \
         -DSLXIO_COVERAGE=ON \
-        -DSLXIO_TESTS=ON
+        -DSLXIO_TESTS=ON -DSLXIO_MDL=ON 
 
     - name: Compile
       run: cmake --build ${{github.workspace}}/build --config ${{env.BUILD_TYPE}}

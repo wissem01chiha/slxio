@@ -25,6 +25,12 @@ jobs:
             cxx-compiler: g++-13
             cmake-args: -DCMAKE_CXX_STANDARD=17
             packages: gcc@13
+        
+          - name: MacOS AppleClang C++17 (SLXIO_MDL=ON)
+            os: macos-latest
+            compiler: clang
+            cxx-compiler: clang++
+            cmake-args: -DCMAKE_CXX_STANDARD=17 -DSLXIO_MDL=ON
 
     steps:
       - name: Checkout repository

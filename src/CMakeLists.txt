@@ -1,4 +1,4 @@
-# Copyright 2026 Wissem Chiha
+# Copyright 2025-2026 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -12,10 +12,11 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-add_subdirectory(common)
-add_subdirectory(simulink)
-add_subdirectory(export)
-add_subdirectory(import)
+add_subdirectory(Common)
+add_subdirectory(Simulink)
+add_subdirectory(Export)
+add_subdirectory(Import)
+add_subdirectory(Public)
 
 add_library(SLXIO INTERFACE)
 add_library(SLXIO::SLXIO ALIAS SLXIO)
@@ -25,11 +26,12 @@ target_link_libraries(
   INTERFACE SimulinkCore
             SimulinkConfiguration
             SimulinkMisc
-            SimulinkSateflow
+            SimulinkStateflow
             SimulinkData
             ImportCore
             SimulinkAnnotation
-            SimulinkLayout)
+            SimulinkLayout
+            SimulinkPublic)
 if(SLXIO_MDL)
   target_link_libraries(SLXIO INTERFACE ImportMdl)
 endif()

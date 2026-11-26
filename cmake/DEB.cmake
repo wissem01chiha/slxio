@@ -1,4 +1,4 @@
-# Copyright 2026 Wissem Chiha
+# Copyright 2025-2026 Wissem Chiha
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -17,7 +17,7 @@ set(CPACK_PACKAGE_NAME "slxio")
 set(CPACK_PACKAGE_VERSION "${CMAKE_PROJECT_VERSION}")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Wissem Chiha")
 set(CPACK_PACKAGE_CONTACT "chihawissem08@gmail.com")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SIMULINK® SLX File I/O Library")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SIMULINK File I/O Library")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "slxio")
 set(CPACK_DEBIAN_PACKAGE_DEPENDS "")
 include(CPack)

@@ -45,7 +45,7 @@ jobs:
             os: windows-latest
             python-version: 3.12
             python-arch: x86
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Debug -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 
           - name: Windows Clang x64 Release
             compiler: clang
@@ -55,7 +55,7 @@ jobs:
             os: windows-latest
             python-version: 3.12
             python-arch: x64
-            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release
+            cmake-args: -G Ninja -DCMAKE_CXX_STANDARD=17 -DCMAKE_BUILD_TYPE=Release -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH=1
 
 
     steps:
@@ -65,6 +65,11 @@ jobs:
             python-version: ${{ matrix.python-version }}
             architecture: ${{ matrix.python-arch }}
 
+        # https://stackoverflow.com/a/80018104
+        - name: Upgrade LLVM
+          if: ${{ matrix.compiler == 'clang' }}
+          run: choco install llvm --version=22.1.0 -y
+
         - name: Install MSVC Build Tools
           if: ${{ matrix.compiler == 'msvc' }}
           run: choco install visualstudio2022buildtools --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --includeOptional --passive --locale en-US"
@@ -73,11 +78,11 @@ jobs:
           uses: actions/checkout@v4
 
         - name: Configure
-          run: >
-            cmake -S . -B build
-            ${{ matrix.cmake-args }}
-            -DPython_EXECUTABLE=${{ steps.setup-python.outputs.python-path }} \
-            -DSLXIO_TESTS=ON
+          run: |
+            cmake -S . -B build \
+              ${{ matrix.cmake-args }} \
+              -DPython_EXECUTABLE="${{ steps.setup-python.outputs.python-path }}" \
+              -DSLXIO_TESTS=ON
           env:
             CC: ${{ matrix.compiler }}
             CXX: ${{ matrix.cxx-compiler }}

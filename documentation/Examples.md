@@ -1,17 +1,16 @@
 
-The following examples demonstrate basic programmatic editing of Simulink® models using the SLXIO API. Most examples are inspired by and adapted from the official MathWorks documentation for [Programmatic Model Editing](https://www.mathworks.com/help/simulink/programmatic-modeling.html).
+The following examples demonstrate basic programmatic editing of Simulink models using the public API. Most examples are inspired by and adapted from the official MathWorks documentation for [Programmatic Model Editing](https://www.mathworks.com/help/simulink/programmatic-modeling.html).
 
 Where possible, we intentionally preserve the concepts and workflows of the original Simulink APIs to make it easier for MATLAB® and Simulink® users to get started with slxio.
 
 > [!WARNING]  
 > slxio is a static model manipulation library and does not support model compilation, simulation, or features that require a compiled model state. Operations that depend on signal resolution, data type propagation, compiled port information, or other compile-time metadata are therefore not available.
 
-## libraries
+## Libraries
  
 description: Create, load, modify, and manage Simulink libraries examples.
 
-## models
-@page Models Model Manipulation
+## Models
 
 
 ## Get Handles and Paths
@@ -105,38 +104,9 @@ description: Create, load, modify, and manage Simulink libraries examples.
 - [is-dirty.md]() - Determine whether a model contains unsaved changes.
 - [IsFileChangedOnDisk](./k.md) - Detect changes since the model was loaded.
 - [IsLibrary](./is-libraryine) whether a model is a library.
-- [./is-subsystem.md]() - Determine whether a model is a subsystem.
+- [IsSubsystem]() - Determine whether a model is a subsystem.
 - [GetDisplayIssues](./get-display-issues.md) -gn warnings and errors.
 - [SetDisplayIssues](./set-display-issuesable) design issue reporting.
 
-## Share Models
-
-### Templates
-
-- [ExportToTemplate](./export-to-template) able model template.
-- [Createe-from-template.md]() - Create a model from a template.
-- [FindTemplates]s.md - Search available templates.
-- [./default-model-template.md]() - Get or set the default template.
 
 ## Stateflow Handling
-
-description: Stateflow compatibility examples.
-
-@page Export Exporting Capabilities
-
-Export models to scientific, visualization, and interoperability formats.
-
-## Scientific Data Formats
-
-## Visualization Data Formats
-
-
-- [ExportToVersion](./export-to-version.md) - Export a model for another format or version.
-- [CharacterEncoding](./character-encoding) encoding for exported artifacts.
-
-### Print and Render
-
-- [FrameEdit](./frame-edit.md) - Edit model printframes.
-- [Orient](./orient.md) - Configure tation.
-- [./print.md]() - Export or print model diagrams.
-
