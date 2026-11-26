@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Object PropName="DataTransfer" ObjectID="8" ClassName="Simulink.GlobalDataTransfer">
-    <P Name="DefaultTransitionBetweenSyncTasks" Class="char">Ensure deterministic transfer (maximum delay)</P>
-    <P Name="DefaultTransitionBetweenAsyncTasks" Class="char">Ensure data integrity only</P>
-    <P Name="DefaultTransitionBetweenContTasks" Class="char">Ensure deterministic transfer (minimum delay)</P>
-    <P Name="DefaultExtrapolationMethodBetweenContTasks" Class="char">None</P>
-</Object>
